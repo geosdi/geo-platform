@@ -1,0 +1,132 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+		<groupId>org.geosdi</groupId>
+		<artifactId>geoplatform-widget</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+  <groupId>org.geosdi</groupId>
+  <artifactId>map-widget</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>Geo-Platform :: == Map Module</name>
+
+  <developers>
+        <developer>
+            <name>Francesco Izzi</name>
+            <id>francesco.izzi</id>
+            <email>francesco.izzi@geosdi.org</email>
+            <organization>geoSDI</organization>
+            <roles>
+                <role>Java Developer</role>
+                <role>Project Management Committee (PMC) Member</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Giuseppe La Scaleia</name>
+            <id>glascaleia</id>
+            <email>giuseppe.lascaleia@geosdi.org</email>
+            <organization>geoSDI</organization>
+            <roles>
+                <role>Java Developer</role>
+                <role>Project Management Committee (PMC) Member</role>
+            </roles>
+        </developer>
+    </developers>
+
+  <dependencies>
+  <dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- GXT -->
+		<dependency>
+			<groupId>com.extjs</groupId>
+			<artifactId>gxt</artifactId>
+		</dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+   <build>
+
+		<plugins>
+			<!-- ... or ask the plugin to detect them based on gwt modules files and 
+				copy the required java sources -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<!-- GWT version detected from dependencyManagement -->
+					<execution>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- tell the compiler we can use 1.5 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+		</plugins>
+
+		<!-- TODO: the resources stuff hardcodes paths to source + test directories, 
+			we should be able to use some properties here -->
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/java</directory>
+				<includes>
+					<include>**/*.txt</include>
+					<include>**/*.sql</include>
+					<include>**/*.html</include>
+					<include>**/*.xml</include>
+					<include>**/*.utf</include>
+					<include>**/*.properties</include>
+					<include>**/*.serialized</include>
+					<include>**/*.xsd</include>
+					<include>META-INF/*.jai</include>
+					<include>META-INF/mailcap</include>
+					<include>META-INF/services/**</include>
+					<include>applicationContext.xml</include>
+					<include>**/*.ftl</include>
+					<include>**/*.css</include>
+					<include>**/*.js</include>
+					<include>**/*.png</include>
+					<include>**/*.gif</include>
+					<include>**/*.sld</include>
+					<include>**/*.ico</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+		</resources>
+
+	</build>
+
+</project>

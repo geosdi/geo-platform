@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+   <parent>
+		<groupId>org.geosdi</groupId>
+		<artifactId>geo-platform</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+  <groupId>org.geosdi</groupId>
+  <artifactId>core</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+ <name>Geo-Platform :: == Core Module</name>
+
+   <developers>
+        <developer>
+            <name>Francesco Izzi</name>
+            <id>francesco.izzi</id>
+            <email>francesco.izzi@geosdi.org</email>
+            <organization>geoSDI</organization>
+            <roles>
+                <role>Java Developer</role>
+                <role>Project Management Committee (PMC) Member</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Giuseppe La Scaleia</name>
+            <id>glascaleia</id>
+            <email>giuseppe.lascaleia@geosdi.org</email>
+            <organization>geoSDI</organization>
+            <roles>
+                <role>Java Developer</role>
+                <role>Project Management Committee (PMC) Member</role>
+            </roles>
+        </developer>
+    </developers>
+    
+    <pluginRepositories>
+		<pluginRepository>
+			<id>gwt-maven</id>
+			<url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<repositories>
+		<repository>
+			<id>gwt-maven</id>
+			<url>
+            http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/
+          </url>
+		</repository>
+	</repositories>
+    
+    <build>
+        <pluginManagement>
+			<plugins>
+				
+                <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<encoding>utf8</encoding>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+                            <attach>true</attach>
+							<includePom>true</includePom>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.4.2</version>
+				</plugin>
+                
+                <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<downloadSources>true</downloadSources>
+				</configuration>
+			</plugin>
+				
+			</plugins>
+		</pluginManagement>
+    </build>
+    
+    <modules>
+		<module>geoplatform-api</module>
+		<module>geoplatform-configuration</module>
+        <module>geoplatform-widget</module>
+	</modules>
+
+
+</project>

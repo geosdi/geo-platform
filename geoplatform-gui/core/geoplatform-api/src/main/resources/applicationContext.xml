@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName">
+	
+	<context:annotation-config />
+
+	<bean name="geoPlatformInfo" class="org.geosdi.geoplatform.gui.global.GeoPlatformInfo">
+		<property name="version">
+			<bean name="geoPlatformVersionInfo" class="org.geosdi.geoplatform.gui.global.GeoPlatformVersionInfo">
+				<property name="name" value="GWT face" />
+				<property name="version" value="1.0-SNAPSHOT" />
+			</bean>
+		</property>
+		<property name="copyrightInfo">
+			<list>
+				<bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
+					<property name="key" value="GeoSDI - Team" />
+					<property name="copyright" value="(c) 2008-2010 GeoSDI" />
+					<property name="licenseName"
+						value="GNU General Public License, Version 3 + CPE" />
+					<property name="licenseUrl" value="http://www.gnu.org/software/classpath/license.html" />
+				</bean>
+				<bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
+					<property name="key" value="GWT" />
+					<property name="copyright" value="" />
+					<property name="licenseName" value="Apache License, Version 2.0" />
+					<property name="licenseUrl"
+						value="http://www.apache.org/licenses/LICENSE-2.0.html" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+
+</beans>

@@ -33,44 +33,40 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu;
+package org.geosdi.geoplatform.gui;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 
 /**
  * @author giuseppe
  * 
  */
-public final class MenuActionRegistry {
+public class GeoPlatformUtils {
 
-	private static final Map<String, MenuActionCreator> REGISTRY;
+	private static GeoPlatformUtils INSTANCE;
 
-	static {
-		REGISTRY = new HashMap<String, MenuActionCreator>();
+	private IGeoPlatformGlobal globalConfiguration;
+
+	public static GeoPlatformUtils getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new GeoPlatformUtils();
+		}
+		return INSTANCE;
 	}
 
 	/**
-	 * 
-	 * @param key
-	 * @param menuActionCreator
+	 * @return the globalConfiguration
 	 */
-	public static void put(String key, MenuActionCreator menuActionCreator) {
-		if (key != null && menuActionCreator != null)
-			REGISTRY.put(key, menuActionCreator);
+	public IGeoPlatformGlobal getGlobalConfiguration() {
+		return globalConfiguration;
 	}
 
 	/**
-	 * Return Menu Action
-	 * 
-	 * @param key
-	 *            key with the action is registered
+	 * @param globalConfiguration
+	 *            the globalConfiguration to set
 	 */
-	public static MenuAction get(String key) {
-		MenuActionCreator menuActionCreator = REGISTRY.get(key);
-		if (menuActionCreator == null)
-			return null;
-		return menuActionCreator.createAction();
+	public void setGlobalConfiguration(IGeoPlatformGlobal globalConfiguration) {
+		this.globalConfiguration = globalConfiguration;
 	}
 
 }

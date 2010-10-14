@@ -33,16 +33,47 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action;
+package org.geosdi.geoplatform.gui.impl;
 
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
+import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * @author giuseppe
  * 
  */
-public interface ToolActionCreator {
+@Component("geoPlatformGlobal")
+public class GeoPlatformGlobal implements IGeoPlatformGlobal {
 
-	public ToolbarAction createActionTool(MapWidget mapWidget);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8229961575424418806L;
+
+	@Autowired
+	private IToolbarClientTool toolbarClientTool;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal#getToolbarClientTool
+	 * ()
+	 */
+	@Override
+	public IToolbarClientTool getToolbarClientTool() {
+		// TODO Auto-generated method stub
+		return toolbarClientTool;
+	}
+
+	/**
+	 * @param toolbarClientTool
+	 *            the toolbarClientTool to set
+	 */
+	public void setToolbarClientTool(IToolbarClientTool toolbarClientTool) {
+		this.toolbarClientTool = toolbarClientTool;
+	}
 
 }

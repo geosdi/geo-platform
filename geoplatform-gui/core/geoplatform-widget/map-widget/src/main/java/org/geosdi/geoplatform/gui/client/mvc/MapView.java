@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.mvc;
 
-import org.geosdi.geoplatform.gui.client.GeoPlatformUtils;
+import org.geosdi.geoplatform.gui.GeoPlatformUtils;
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;

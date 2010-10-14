@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
+import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 import org.geosdi.geoplatform.gui.client.Resources;
-import org.geosdi.geoplatform.gui.client.action.ToolbarMapAction;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;

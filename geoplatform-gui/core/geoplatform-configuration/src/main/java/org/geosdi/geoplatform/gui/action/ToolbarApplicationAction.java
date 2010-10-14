@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.gui.client.action;
+package org.geosdi.geoplatform.gui.action;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 

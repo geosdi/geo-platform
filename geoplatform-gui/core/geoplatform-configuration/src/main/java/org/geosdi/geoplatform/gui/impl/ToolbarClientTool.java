@@ -33,40 +33,40 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.impl;
 
-import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
+import java.util.List;
+
+import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
+import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
 
 /**
  * @author giuseppe
- * 
+ *
  */
-public class GeoPlatformUtils {
-
-	private static GeoPlatformUtils INSTANCE;
-
-	private IGeoPlatformGlobal globalConfiguration;
-
-	public static GeoPlatformUtils getInstance() {
-		if (INSTANCE == null) {
-			INSTANCE = new GeoPlatformUtils();
-		}
-		return INSTANCE;
-	}
+public class ToolbarClientTool implements IToolbarClientTool {
 
 	/**
-	 * @return the globalConfiguration
+	 * 
 	 */
-	public IGeoPlatformGlobal getGlobalConfiguration() {
-		return globalConfiguration;
+	private static final long serialVersionUID = 3032280115406824191L;
+	
+	private List<GenericClientTool> clientTools;
+
+	/* (non-Javadoc)
+	 * @see org.geosdi.geoplatform.gui.configuration.IToolbarClientTool#getClientTools()
+	 */
+	@Override
+	public List<GenericClientTool> getClientTools() {
+		return clientTools;
 	}
 
-	/**
-	 * @param globalConfiguration
-	 *            the globalConfiguration to set
+	/* (non-Javadoc)
+	 * @see org.geosdi.geoplatform.gui.configuration.IToolbarClientTool#setClientTools(java.util.List)
 	 */
-	public void setGlobalConfiguration(IGeoPlatformGlobal globalConfiguration) {
-		this.globalConfiguration = globalConfiguration;
+	@Override
+	public void setClientTools(List<GenericClientTool> clientTools) {
+		this.clientTools = clientTools;
 	}
 
 }

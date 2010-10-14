@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.action.application;
 
-import org.geosdi.geoplatform.gui.client.action.ToolbarApplicationAction;
+import org.geosdi.geoplatform.gui.action.ToolbarApplicationAction;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 

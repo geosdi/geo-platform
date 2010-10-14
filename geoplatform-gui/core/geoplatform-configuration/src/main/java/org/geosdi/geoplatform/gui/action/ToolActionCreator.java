@@ -33,35 +33,16 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action;
+package org.geosdi.geoplatform.gui.action;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  * @author giuseppe
  * 
  */
-public abstract class ToolbarMapAction extends ToolbarAction {
+public interface ToolActionCreator {
 
-	private String tooltip;
+	public ToolbarAction createActionTool(MapWidget mapWidget);
 
-	public ToolbarMapAction(String tooltip, AbstractImagePrototype image) {
-		super(image);
-		this.tooltip = tooltip;
-	}
-
-	/**
-	 * @return the tooltip
-	 */
-	public String getTooltip() {
-		return tooltip;
-	}
-
-	/**
-	 * @param tooltip
-	 *            the tooltip to set
-	 */
-	public void setTooltip(String tooltip) {
-		this.tooltip = tooltip;
-	}
 }

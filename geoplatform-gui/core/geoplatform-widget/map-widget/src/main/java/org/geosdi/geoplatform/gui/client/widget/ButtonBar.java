@@ -37,12 +37,12 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 import java.util.List;
 
-import org.geosdi.geoplatform.gui.client.action.ToolbarAction;
-import org.geosdi.geoplatform.gui.client.action.ToolbarActionRegistry;
-import org.geosdi.geoplatform.gui.client.action.ToolbarApplicationAction;
-import org.geosdi.geoplatform.gui.client.action.ToolbarMapAction;
-import org.geosdi.geoplatform.gui.client.action.menu.MenuAction;
-import org.geosdi.geoplatform.gui.client.action.menu.MenuActionRegistry;
+import org.geosdi.geoplatform.gui.action.ToolbarAction;
+import org.geosdi.geoplatform.gui.action.ToolbarActionRegistry;
+import org.geosdi.geoplatform.gui.action.ToolbarApplicationAction;
+import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistry;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;

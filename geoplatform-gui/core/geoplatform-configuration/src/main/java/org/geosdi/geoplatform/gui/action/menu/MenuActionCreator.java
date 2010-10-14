@@ -33,86 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu;
-
-import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
+package org.geosdi.geoplatform.gui.action.menu;
 
 /**
  * @author giuseppe
  * 
  */
-public abstract class MenuAction extends SelectionListener<MenuEvent> {
+public interface MenuActionCreator {
 
-	private AbstractImagePrototype image;
-	private String title;
-	private String id;
-	private boolean enabled;
-
-	public MenuAction(String title, AbstractImagePrototype image) {
-		this.title = title;
-		this.image = image;
-	}
-
-	/**
-	 * @return the image
-	 */
-	public AbstractImagePrototype getImage() {
-		return image;
-	}
-
-	/**
-	 * @param image
-	 *            the image to set
-	 */
-	public void setImage(AbstractImagePrototype image) {
-		this.image = image;
-	}
-
-	/**
-	 * @return the title
-	 */
-	public String getTitle() {
-		return title;
-	}
-
-	/**
-	 * @param title
-	 *            the title to set
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the enabled
-	 */
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	/**
-	 * @param enabled
-	 *            the enabled to set
-	 */
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+	public MenuAction createAction();
 
 }

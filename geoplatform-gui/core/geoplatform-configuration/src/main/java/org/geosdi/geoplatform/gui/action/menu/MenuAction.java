@@ -33,9 +33,9 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action;
+package org.geosdi.geoplatform.gui.action.menu;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -43,13 +43,15 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * @author giuseppe
  * 
  */
-public abstract class ToolbarAction extends SelectionListener<ButtonEvent> {
+public abstract class MenuAction extends SelectionListener<MenuEvent> {
 
 	private AbstractImagePrototype image;
+	private String title;
 	private String id;
 	private boolean enabled;
 
-	public ToolbarAction(AbstractImagePrototype image) {
+	public MenuAction(String title, AbstractImagePrototype image) {
+		this.title = title;
 		this.image = image;
 	}
 
@@ -66,6 +68,21 @@ public abstract class ToolbarAction extends SelectionListener<ButtonEvent> {
 	 */
 	public void setImage(AbstractImagePrototype image) {
 		this.image = image;
+	}
+
+	/**
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * @param title
+	 *            the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	/**

@@ -33,47 +33,69 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.impl;
+package org.geosdi.geoplatform.gui.action;
 
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
-import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
  * @author giuseppe
  * 
  */
-@Component("geoPlatformGlobal")
-public class GeoPlatformGlobal implements IGeoPlatformGlobal {
+public abstract class ToolbarAction extends SelectionListener<ButtonEvent> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8229961575424418806L;
+	private AbstractImagePrototype image;
+	private String id;
+	private boolean enabled;
 
-	@Autowired
-	private IToolbarClientTool toolbarClientTool;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal#getToolbarClientTool
-	 * ()
-	 */
-	@Override
-	public IToolbarClientTool getToolbarClientTool() {
-		// TODO Auto-generated method stub
-		return toolbarClientTool;
+	public ToolbarAction(AbstractImagePrototype image) {
+		this.image = image;
 	}
 
 	/**
-	 * @param toolbarClientTool
-	 *            the toolbarClientTool to set
+	 * @return the image
 	 */
-	public void setToolbarClientTool(IToolbarClientTool toolbarClientTool) {
-		this.toolbarClientTool = toolbarClientTool;
+	public AbstractImagePrototype getImage() {
+		return image;
+	}
+
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(AbstractImagePrototype image) {
+		this.image = image;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the enabled
+	 */
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	/**
+	 * @param enabled
+	 *            the enabled to set
+	 */
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 }

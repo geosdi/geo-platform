@@ -33,40 +33,49 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.impl;
+package org.geosdi.geoplatform.gui.action;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  * @author giuseppe
- *
+ * 
  */
-public class ToolbarClientTool implements IToolbarClientTool {
+public final class ToolbarActionRegistry {
+
+	private static final Map<String, ToolActionCreator> REGISTRY;
+
+	static {
+		REGISTRY = new HashMap<String, ToolActionCreator>();
+	}
 
 	/**
 	 * 
+	 * @param key
+	 * @param toolActionCreator
 	 */
-	private static final long serialVersionUID = 3032280115406824191L;
-	
-	private List<GenericClientTool> clientTools;
-
-	/* (non-Javadoc)
-	 * @see org.geosdi.geoplatform.gui.configuration.IToolbarClientTool#getClientTools()
-	 */
-	@Override
-	public List<GenericClientTool> getClientTools() {
-		return clientTools;
+	public static void put(String key, ToolActionCreator toolActionCreator) {
+		if (key != null && toolActionCreator != null)
+			REGISTRY.put(key, toolActionCreator);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.geosdi.geoplatform.gui.configuration.IToolbarClientTool#setClientTools(java.util.List)
+	/**
+	 * Return the Toolbar Action
+	 * 
+	 * @param key
+	 *            key with the action is registered
+	 * @param mapWidget
+	 *            map which will contains the toolAction
+	 * @return null or the toolAction registered
 	 */
-	@Override
-	public void setClientTools(List<GenericClientTool> clientTools) {
-		this.clientTools = clientTools;
+	public static ToolbarAction get(String key, MapWidget mapWidget) {
+		ToolActionCreator toolActionCreator = REGISTRY.get(key);
+		if (toolActionCreator == null)
+			return null;
+		return toolActionCreator.createActionTool(mapWidget);
 	}
 
 }

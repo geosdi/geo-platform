@@ -33,49 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action;
+package org.geosdi.geoplatform.gui.action;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
  * @author giuseppe
  * 
  */
-public final class ToolbarActionRegistry {
+public abstract class ToolbarMapAction extends ToolbarAction {
 
-	private static final Map<String, ToolActionCreator> REGISTRY;
+	private String tooltip;
 
-	static {
-		REGISTRY = new HashMap<String, ToolActionCreator>();
+	public ToolbarMapAction(String tooltip, AbstractImagePrototype image) {
+		super(image);
+		this.tooltip = tooltip;
 	}
 
 	/**
-	 * 
-	 * @param key
-	 * @param toolActionCreator
+	 * @return the tooltip
 	 */
-	public static void put(String key, ToolActionCreator toolActionCreator) {
-		if (key != null && toolActionCreator != null)
-			REGISTRY.put(key, toolActionCreator);
+	public String getTooltip() {
+		return tooltip;
 	}
 
 	/**
-	 * Return the Toolbar Action
-	 * 
-	 * @param key
-	 *            key with the action is registered
-	 * @param mapWidget
-	 *            map which will contains the toolAction
-	 * @return null or the toolAction registered
+	 * @param tooltip
+	 *            the tooltip to set
 	 */
-	public static ToolbarAction get(String key, MapWidget mapWidget) {
-		ToolActionCreator toolActionCreator = REGISTRY.get(key);
-		if (toolActionCreator == null)
-			return null;
-		return toolActionCreator.createActionTool(mapWidget);
+	public void setTooltip(String tooltip) {
+		this.tooltip = tooltip;
 	}
-
 }

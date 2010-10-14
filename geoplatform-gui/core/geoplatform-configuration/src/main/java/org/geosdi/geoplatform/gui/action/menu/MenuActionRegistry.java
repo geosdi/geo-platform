@@ -33,14 +33,44 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu;
+package org.geosdi.geoplatform.gui.action.menu;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author giuseppe
  * 
  */
-public interface MenuActionCreator {
+public final class MenuActionRegistry {
 
-	public MenuAction createAction();
+	private static final Map<String, MenuActionCreator> REGISTRY;
+
+	static {
+		REGISTRY = new HashMap<String, MenuActionCreator>();
+	}
+
+	/**
+	 * 
+	 * @param key
+	 * @param menuActionCreator
+	 */
+	public static void put(String key, MenuActionCreator menuActionCreator) {
+		if (key != null && menuActionCreator != null)
+			REGISTRY.put(key, menuActionCreator);
+	}
+
+	/**
+	 * Return Menu Action
+	 * 
+	 * @param key
+	 *            key with the action is registered
+	 */
+	public static MenuAction get(String key) {
+		MenuActionCreator menuActionCreator = REGISTRY.get(key);
+		if (menuActionCreator == null)
+			return null;
+		return menuActionCreator.createAction();
+	}
 
 }

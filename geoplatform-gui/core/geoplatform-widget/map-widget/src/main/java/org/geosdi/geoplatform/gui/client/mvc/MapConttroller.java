@@ -35,22 +35,40 @@
  */
 package org.geosdi.geoplatform.gui.client.mvc;
 
+import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
+
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 
 /**
  * @author giuseppe
- *
+ * 
  */
 public class MapConttroller extends Controller {
 
-	/* (non-Javadoc)
-	 * @see com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
+	private MapView mapView;
+
+	public MapConttroller() {
+		registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
+				MapWidgetEvents.ATTACH_MAP_WIDGET,
+				MapWidgetEvents.ATTACH_TOOLBAR);
+	}
+
+	@Override
+	public void initialize() {
+		this.mapView = new MapView(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client
+	 * .mvc.AppEvent)
 	 */
 	@Override
 	public void handleEvent(AppEvent event) {
-		// TODO Auto-generated method stub
-
+		forwardToView(mapView, event);
 	}
 
 }

@@ -35,12 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client.mvc;
 
+import org.geosdi.geoplatform.gui.client.GeoPlatformUtils;
+import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.View;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
 
 /**
  * @author giuseppe
@@ -54,7 +57,7 @@ public class MapView extends View {
 
 	public MapView(Controller controller) {
 		super(controller);
-		
+
 		this.mapLayout = new MapLayoutWidget();
 	}
 
@@ -67,8 +70,30 @@ public class MapView extends View {
 	 */
 	@Override
 	protected void handleEvent(AppEvent event) {
-		// TODO Auto-generated method stub
+		if (event.getType() == MapWidgetEvents.ATTACH_MAP_WIDGET)
+			this.mapLayout.onAddToCenterPanel((ContentPanel) event.getData());
 
+		if (event.getType() == MapWidgetEvents.ATTACH_TOOLBAR)
+			onAttachToolbar(event);
+
+	}
+
+	/**
+	 * Attach GeoPlatform Toolbar to a ContentPanel inject with Dispatcher
+	 * 
+	 * @param event
+	 */
+	private void onAttachToolbar(AppEvent event) {
+		mapLayout.setTools(GeoPlatformUtils.getInstance()
+				.getGlobalConfiguration().getToolbarClientTool()
+				.getClientTools());
+
+		this.buttonBar = new ButtonBar(mapLayout);
+
+		ContentPanel north = (ContentPanel) event.getData();
+		north.add(buttonBar.getToolBar());
+
+		north.layout();
 	}
 
 }

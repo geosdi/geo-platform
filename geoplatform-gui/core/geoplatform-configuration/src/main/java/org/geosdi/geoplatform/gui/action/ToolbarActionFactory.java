@@ -35,67 +35,62 @@
  */
 package org.geosdi.geoplatform.gui.action;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  * @author giuseppe
  * 
  */
-public abstract class ToolbarAction extends SelectionListener<ButtonEvent> {
+public class ToolbarActionFactory {
 
-	private AbstractImagePrototype image;
-	private String id;
-	private boolean enabled;
+	private static ToolbarActionFactory INSTANCE;
+	private Map<String, GeoPlatformActionCreator> registry;
 
-	public ToolbarAction(AbstractImagePrototype image) {
-		this.image = image;
+	private ToolbarActionFactory() {
+		this.registry = new HashMap<String, GeoPlatformActionCreator>();
+	}
+
+	public static ToolbarActionFactory createFactory() {
+		if (INSTANCE == null)
+			INSTANCE = new ToolbarActionFactory();
+		return INSTANCE;
 	}
 
 	/**
-	 * @return the image
+	 * 
+	 * @param key
+	 * @param toolActionCreator
 	 */
-	public AbstractImagePrototype getImage() {
-		return image;
+	public static void put(String key, GeoPlatformActionCreator toolActionCreator) {
+		if (key != null && toolActionCreator != null)
+			createFactory().getRegistry().put(key, toolActionCreator);
 	}
 
 	/**
-	 * @param image
-	 *            the image to set
+	 * Return the Toolbar Action
+	 * 
+	 * @param key
+	 *            key with the action is registered
+	 * @param mapWidget
+	 *            map which will contains the toolAction
+	 * @return null or the toolAction registered
 	 */
-	public void setImage(AbstractImagePrototype image) {
-		this.image = image;
+	public static GeoPlatformToolbarAction get(String key, MapWidget mapWidget) {
+		GeoPlatformActionCreator toolActionCreator = createFactory().getRegistry()
+				.get(key);
+		if (toolActionCreator == null)
+			return null;
+		return toolActionCreator.createActionTool(mapWidget);
 	}
 
 	/**
-	 * @return the id
+	 * @return the registry
 	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the enabled
-	 */
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	/**
-	 * @param enabled
-	 *            the enabled to set
-	 */
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public Map<String, GeoPlatformActionCreator> getRegistry() {
+		return registry;
 	}
 
 }

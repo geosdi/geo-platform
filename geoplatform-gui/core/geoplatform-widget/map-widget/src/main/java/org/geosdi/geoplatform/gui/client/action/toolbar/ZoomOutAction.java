@@ -47,24 +47,25 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
  * 
  */
 public class ZoomOutAction extends ToolbarMapAction {
-	
+
 	private MapWidget mapWidget;
 
 	private int zoomFactor = 1;
 
-	public ZoomOutAction() {
+	public ZoomOutAction(MapWidget mapWidget) {
 		super("ZoomOut", Resources.ICONS.ZoomOut());
-		// TODO Auto-generated constructor stub
+
+		this.mapWidget = mapWidget;
 	}
 
 	@Override
 	public void componentSelected(ButtonEvent ce) {
 		// TODO Auto-generated method stub
 		LonLat center = this.mapWidget.getMap().getCenter();
-        int oldZoom = this.mapWidget.getMap().getZoom();
-        if ((oldZoom - this.zoomFactor) > 0)
-                this.mapWidget.getMap()
-                                .setCenter(center, oldZoom - this.zoomFactor);
+		int oldZoom = this.mapWidget.getMap().getZoom();
+		if ((oldZoom - this.zoomFactor) > 0)
+			this.mapWidget.getMap()
+					.setCenter(center, oldZoom - this.zoomFactor);
 	}
 
 }

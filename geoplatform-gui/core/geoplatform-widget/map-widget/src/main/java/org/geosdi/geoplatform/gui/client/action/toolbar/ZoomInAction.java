@@ -52,9 +52,10 @@ public class ZoomInAction extends ToolbarMapAction {
 
 	private int zoomFactor = 1;
 
-	public ZoomInAction() {
+	public ZoomInAction(MapWidget mapWidget) {
 		super("ZoomIn", Resources.ICONS.ZoomIn());
-		// TODO Auto-generated constructor stub
+		
+		this.mapWidget = mapWidget;
 	}
 
 	@Override

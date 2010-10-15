@@ -35,47 +35,67 @@
  */
 package org.geosdi.geoplatform.gui.action;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
  * @author giuseppe
  * 
  */
-public final class ToolbarActionRegistry {
+public abstract class GeoPlatformToolbarAction extends SelectionListener<ButtonEvent> {
 
-	private static final Map<String, ToolActionCreator> REGISTRY;
+	private AbstractImagePrototype image;
+	private String id;
+	private boolean enabled;
 
-	static {
-		REGISTRY = new HashMap<String, ToolActionCreator>();
+	public GeoPlatformToolbarAction(AbstractImagePrototype image) {
+		this.image = image;
 	}
 
 	/**
-	 * 
-	 * @param key
-	 * @param toolActionCreator
+	 * @return the image
 	 */
-	public static void put(String key, ToolActionCreator toolActionCreator) {
-		if (key != null && toolActionCreator != null)
-			REGISTRY.put(key, toolActionCreator);
+	public AbstractImagePrototype getImage() {
+		return image;
 	}
 
 	/**
-	 * Return the Toolbar Action
-	 * 
-	 * @param key
-	 *            key with the action is registered
-	 * @param mapWidget
-	 *            map which will contains the toolAction
-	 * @return null or the toolAction registered
+	 * @param image
+	 *            the image to set
 	 */
-	public static ToolbarAction get(String key, MapWidget mapWidget) {
-		ToolActionCreator toolActionCreator = REGISTRY.get(key);
-		if (toolActionCreator == null)
-			return null;
-		return toolActionCreator.createActionTool(mapWidget);
+	public void setImage(AbstractImagePrototype image) {
+		this.image = image;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the enabled
+	 */
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	/**
+	 * @param enabled
+	 *            the enabled to set
+	 */
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 }

@@ -2,7 +2,7 @@ package org.geosdi.geoplatform.gui.action;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
-public abstract class ToolbarApplicationAction extends ToolbarAction {
+public abstract class ToolbarApplicationAction extends GeoPlatformToolbarAction {
 
 	private String buttonName;
 

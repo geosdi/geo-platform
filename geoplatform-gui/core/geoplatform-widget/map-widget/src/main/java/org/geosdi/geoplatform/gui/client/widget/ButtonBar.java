@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 import java.util.List;
 
-import org.geosdi.geoplatform.gui.action.ToolbarAction;
-import org.geosdi.geoplatform.gui.action.ToolbarActionRegistry;
+import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
+import org.geosdi.geoplatform.gui.action.ToolbarActionFactory;
 import org.geosdi.geoplatform.gui.action.ToolbarApplicationAction;
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
@@ -93,10 +93,10 @@ public class ButtonBar extends LayoutContainer {
 				addSeparator();
 			} else if (tool instanceof MenuClientTool) {
 				addMenuButton((MenuClientTool) tool,
-						(ToolbarApplicationAction) ToolbarActionRegistry.get(
+						(ToolbarApplicationAction) ToolbarActionFactory.get(
 								id, mapLayoutWidget.getMapWidget()));
 			} else {
-				ToolbarAction action = ToolbarActionRegistry.get(id,
+				GeoPlatformToolbarAction action = ToolbarActionFactory.get(id,
 						mapLayoutWidget.getMapWidget());
 
 				action.setEnabled(((ActionClientTool) tool).isEnabled());

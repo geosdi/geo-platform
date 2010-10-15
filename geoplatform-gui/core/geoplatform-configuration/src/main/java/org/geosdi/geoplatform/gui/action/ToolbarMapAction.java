@@ -41,7 +41,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * @author giuseppe
  * 
  */
-public abstract class ToolbarMapAction extends ToolbarAction {
+public abstract class ToolbarMapAction extends GeoPlatformToolbarAction {
 
 	private String tooltip;
 

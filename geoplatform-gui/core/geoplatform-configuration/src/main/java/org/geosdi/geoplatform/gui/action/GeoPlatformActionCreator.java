@@ -41,8 +41,8 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
  * @author giuseppe
  * 
  */
-public interface ToolActionCreator {
+public interface GeoPlatformActionCreator {
 
-	public ToolbarAction createActionTool(MapWidget mapWidget);
+	public GeoPlatformToolbarAction createActionTool(MapWidget mapWidget);
 
 }

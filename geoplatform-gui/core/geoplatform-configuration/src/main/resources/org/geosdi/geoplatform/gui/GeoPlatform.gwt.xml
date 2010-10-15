@@ -1,0 +1,12 @@
+<module>
+	<inherits name='com.google.gwt.user.User' />
+	<inherits name='com.extjs.gxt.ui.GXT' />
+	
+	<source path="configuration" />
+	<source path="global" />
+	<source path="model" />
+	<source path="action" />
+	<source path="impl" />
+	<source path="utility" />
+
+</module>

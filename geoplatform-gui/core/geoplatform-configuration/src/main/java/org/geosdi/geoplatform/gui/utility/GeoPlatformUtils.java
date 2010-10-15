@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui;
+package org.geosdi.geoplatform.gui.utility;
 
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 

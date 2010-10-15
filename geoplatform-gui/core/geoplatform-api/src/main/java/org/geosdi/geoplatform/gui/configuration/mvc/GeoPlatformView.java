@@ -33,42 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.mvc;
-
-import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
+package org.geosdi.geoplatform.gui.configuration.mvc;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.mvc.Controller;
+import com.extjs.gxt.ui.client.mvc.View;
 
 /**
  * @author giuseppe
- * 
+ *
  */
-public class MapConttroller extends GeoPlatformController {
+public abstract class GeoPlatformView extends View {
 
-	private MapView mapView;
-
-	public MapConttroller() {
-		registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_TOOLBAR);
+	public GeoPlatformView(Controller controller) {
+		super(controller);
+		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public void initialize() {
-		this.mapView = new MapView(this);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client
-	 * .mvc.AppEvent)
+	/* (non-Javadoc)
+	 * @see com.extjs.gxt.ui.client.mvc.View#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
 	 */
 	@Override
-	public void handleEvent(AppEvent event) {
-		forwardToView(mapView, event);
+	protected void handleEvent(AppEvent event) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

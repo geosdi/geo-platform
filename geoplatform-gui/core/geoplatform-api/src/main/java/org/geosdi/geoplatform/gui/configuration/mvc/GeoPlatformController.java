@@ -33,31 +33,16 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.mvc;
-
-import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
+package org.geosdi.geoplatform.gui.configuration.mvc;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.mvc.Controller;
 
 /**
  * @author giuseppe
  * 
  */
-public class MapConttroller extends GeoPlatformController {
-
-	private MapView mapView;
-
-	public MapConttroller() {
-		registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_TOOLBAR);
-	}
-
-	@Override
-	public void initialize() {
-		this.mapView = new MapView(this);
-	}
+public abstract class GeoPlatformController extends Controller {
 
 	/*
 	 * (non-Javadoc)
@@ -68,7 +53,8 @@ public class MapConttroller extends GeoPlatformController {
 	 */
 	@Override
 	public void handleEvent(AppEvent event) {
-		forwardToView(mapView, event);
+		// TODO Auto-generated method stub
+
 	}
 
 }

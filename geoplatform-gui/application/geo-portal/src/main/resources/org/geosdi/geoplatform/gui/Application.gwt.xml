@@ -3,6 +3,7 @@
 	<!-- Inherit the core Web Toolkit stuff. -->
 	<inherits name='com.google.gwt.user.User' />
 	<inherits name='com.extjs.gxt.ui.GXT' />
+    <inherits name='org.geosdi.geoplatform.gui.GeoPlatform' />
     <inherits name='org.geosdi.geoplatform.gui.MapWidgetUI' />
 
 	<entry-point class='org.geosdi.geoplatform.gui.client.Application' />

@@ -1,45 +1,45 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-   <parent>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
 		<groupId>org.geosdi</groupId>
 		<artifactId>geoplatform-widget</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-  <groupId>org.geosdi</groupId>
-  <artifactId>security-widget</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+	<groupId>org.geosdi</groupId>
+	<artifactId>security-widget</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
-  <name>Geo-Platform :: == Security Module</name>
+	<name>Geo-Platform :: == Security Module</name>
 
-     <developers>
-        <developer>
-            <name>Francesco Izzi</name>
-            <id>francesco.izzi</id>
-            <email>francesco.izzi@geosdi.org</email>
-            <organization>geoSDI</organization>
-            <roles>
-                <role>Java Developer</role>
-                <role>Project Management Committee (PMC) Member</role>
-            </roles>
-        </developer>
-        <developer>
-            <name>Giuseppe La Scaleia</name>
-            <id>glascaleia</id>
-            <email>giuseppe.lascaleia@geosdi.org</email>
-            <organization>geoSDI</organization>
-            <roles>
-                <role>Java Developer</role>
-                <role>Project Management Committee (PMC) Member</role>
-            </roles>
-        </developer>
-    </developers>
+	<developers>
+		<developer>
+			<name>Francesco Izzi</name>
+			<id>francesco.izzi</id>
+			<email>francesco.izzi@geosdi.org</email>
+			<organization>geoSDI</organization>
+			<roles>
+				<role>Java Developer</role>
+				<role>Project Management Committee (PMC) Member</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Giuseppe La Scaleia</name>
+			<id>glascaleia</id>
+			<email>giuseppe.lascaleia@geosdi.org</email>
+			<organization>geoSDI</organization>
+			<roles>
+				<role>Java Developer</role>
+				<role>Project Management Committee (PMC) Member</role>
+			</roles>
+		</developer>
+	</developers>
 
-  <dependencies>
-    <dependency>
+	<dependencies>
+		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
 			<scope>provided</scope>
@@ -51,15 +51,15 @@
 			<artifactId>gxt</artifactId>
 		</dependency>
 
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-  
-   <build>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
 
 		<plugins>
 			<!-- ... or ask the plugin to detect them based on gwt modules files and 
@@ -78,7 +78,24 @@
 				</executions>
 			</plugin>
 
-			<!-- tell the compiler we can use 1.5 -->
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<configuration>
+					<attach>true</attach>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- tell the compiler we can use 1.6 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

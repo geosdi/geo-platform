@@ -1,6 +1,5 @@
   <!-- Inherit the core Web Toolkit stuff. -->
 <module>
-	<inherits name='org.geosdi.geoplatform.gui.GeoPlatform' />
 	<inherits name='org.gwtopenmaps.openlayers.OpenLayers' />
 	
 	<source path="client" />

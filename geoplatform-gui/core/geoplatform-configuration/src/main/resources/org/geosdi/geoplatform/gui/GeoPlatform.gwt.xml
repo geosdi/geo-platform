@@ -7,8 +7,9 @@
 	<source path="configuration/action" />
 	<source path="global" />
 	<source path="model" />
+	<source path="service" />
 	<source path="action" />
 	<source path="impl" />
 	<source path="utility" />
-
+	
 </module>

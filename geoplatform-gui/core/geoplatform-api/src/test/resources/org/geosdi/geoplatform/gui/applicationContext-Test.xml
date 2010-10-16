@@ -9,6 +9,10 @@
 
 	<context:annotation-config />
 
+	<!-- general definitions -->
+	<context:property-placeholder
+		location="classpath:application-TEST.properties" />
+
 	<bean name="geoPlatformInfo" class="org.geosdi.geoplatform.gui.global.GeoPlatformInfo">
 		<property name="version">
 			<bean name="geoPlatformVersionInfo"

@@ -8,9 +8,6 @@
 	default-autowire="byName">
 
 	<context:annotation-config />
-
-	<!-- general definitions -->
-	<context:property-placeholder location="classpath:toolbar.properties" />
 	
 	<bean name="infoApp"
 		class="org.geosdi.geoplatform.gui.configuration.ActionClientTool">

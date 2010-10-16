@@ -35,35 +35,36 @@
  */
 package org.geosdi.geoplatform.gui;
 
+import static org.junit.Assert.assertNotNull;
+
+import org.geosdi.geoplatform.gui.global.GeoPlatformInfo;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.geosdi.geoplatform.gui.global.GeoPlatformInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @author giuseppe
  * 
  */
-@SuppressWarnings("deprecation")
-public class GeoPlatformInfoTest extends
-		AbstractDependencyInjectionSpringContextTests {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "applicationContext-Test.xml" })
+public class GeoPlatformInfoTest {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private GeoPlatformInfo geoPlatformInfo;
 
+	@Test
 	public void test() {
 		assertNotNull(geoPlatformInfo);
 
 		logger.info("GeoPlatformInfo ********************************* "
 				+ this.geoPlatformInfo.toString());
-	}
-
-	@Override
-	protected String[] getConfigLocations() {
-		return new String[] { "classpath:applicationContext.xml" };
 	}
 
 }

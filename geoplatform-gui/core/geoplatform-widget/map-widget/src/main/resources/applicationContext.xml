@@ -42,12 +42,4 @@
 		<property name="order" value="${zoomOut.order}" />
 	</bean>
 
-	<bean name="drawFeature"
-		class="org.geosdi.geoplatform.gui.configuration.ActionClientTool">
-		<property name="id" value="${drawFeature.id}" />
-		<property name="type" value="${drawFeature.type}" />
-		<property name="enabled" value="${drawFeature.enabled}" />
-		<property name="order" value="${drawFeature.order}" />
-	</bean>
-
 </beans>

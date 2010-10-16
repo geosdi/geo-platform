@@ -33,57 +33,38 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.action.menu;
 
-import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
-import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
-import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
-import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomInAction;
-import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomOutAction;
-import org.geosdi.geoplatform.gui.client.mvc.MapConttroller;
-import org.gwtopenmaps.openlayers.client.MapWidget;
-
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionRegistar;
 
 /**
  * @author giuseppe
  * 
  */
-public class MapWidgetUI implements EntryPoint {
+public class MenuActionRegistar extends GeoPlatformActionRegistar {
 
-	private Dispatcher dispatcher;
-
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
-	 * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+	 * @param key
+	 * @param menuActionCreator
 	 */
-	@Override
-	public void onModuleLoad() {
-		// TODO Auto-generated method stub
-		dispatcher = Dispatcher.get();
+	public static void put(String key, MenuActionCreator menuActionCreator) {
+		if (key != null && menuActionCreator != null)
+			createFactory().getRegistry().put(key, menuActionCreator);
+	}
 
-		dispatcher.addController(new MapConttroller());
-		
-		ToolbarActionRegistar.put("zoomIn", new ToolbarActionCreator() {
-
-			public GeoPlatformToolbarAction createActionTool(MapWidget mapWidget) {
-				// TODO Auto-generated method stub
-				return new ZoomInAction(mapWidget);
-			}
-		});
-
-		ToolbarActionRegistar.put("zoomOut", new ToolbarActionCreator() {
-
-			public GeoPlatformToolbarAction createActionTool(MapWidget mapWidget) {
-				// TODO Auto-generated method stub
-				return new ZoomOutAction(mapWidget);
-			}
-		});
-
-		dispatcher.dispatch(MapWidgetEvents.INIT_MAP_WIDGET);
-
+	/**
+	 * Return Menu Action
+	 * 
+	 * @param key
+	 *            key with the action is registered
+	 */
+	public static MenuAction get(String key) {
+		MenuActionCreator menuActionCreator = (MenuActionCreator) createFactory()
+				.getRegistry().get(key);
+		if (menuActionCreator == null)
+			return null;
+		return menuActionCreator.createAction();
 	}
 
 }

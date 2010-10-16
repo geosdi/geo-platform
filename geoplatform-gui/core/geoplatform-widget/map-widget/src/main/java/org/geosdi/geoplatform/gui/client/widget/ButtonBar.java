@@ -38,11 +38,11 @@ package org.geosdi.geoplatform.gui.client.widget;
 import java.util.List;
 
 import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
-import org.geosdi.geoplatform.gui.action.ToolbarActionFactory;
+import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.action.ToolbarApplicationAction;
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistry;
+import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
@@ -93,10 +93,10 @@ public class ButtonBar extends LayoutContainer {
 				addSeparator();
 			} else if (tool instanceof MenuClientTool) {
 				addMenuButton((MenuClientTool) tool,
-						(ToolbarApplicationAction) ToolbarActionFactory.get(
+						(ToolbarApplicationAction) ToolbarActionRegistar.get(
 								id, mapLayoutWidget.getMapWidget()));
 			} else {
-				GeoPlatformToolbarAction action = ToolbarActionFactory.get(id,
+				GeoPlatformToolbarAction action = ToolbarActionRegistar.get(id,
 						mapLayoutWidget.getMapWidget());
 
 				action.setEnabled(((ActionClientTool) tool).isEnabled());
@@ -140,7 +140,7 @@ public class ButtonBar extends LayoutContainer {
 	private Menu createMenu(List<ActionClientTool> actionTools) {
 		Menu menu = new Menu();
 		for (ActionClientTool actionTool : actionTools) {
-			MenuAction action = MenuActionRegistry.get(actionTool.getId());
+			MenuAction action = MenuActionRegistar.get(actionTool.getId());
 			MenuItem item = new MenuItem(action.getTitle());
 			item.addSelectionListener(action);
 			item.setIcon(action.getImage());

@@ -35,36 +35,21 @@
  */
 package org.geosdi.geoplatform.gui.action;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionRegistar;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  * @author giuseppe
  * 
  */
-public class ToolbarActionFactory {
-
-	private static ToolbarActionFactory INSTANCE;
-	private Map<String, GeoPlatformActionCreator> registry;
-
-	private ToolbarActionFactory() {
-		this.registry = new HashMap<String, GeoPlatformActionCreator>();
-	}
-
-	public static ToolbarActionFactory createFactory() {
-		if (INSTANCE == null)
-			INSTANCE = new ToolbarActionFactory();
-		return INSTANCE;
-	}
+public class ToolbarActionRegistar extends GeoPlatformActionRegistar {
 
 	/**
 	 * 
 	 * @param key
 	 * @param toolActionCreator
 	 */
-	public static void put(String key, GeoPlatformActionCreator toolActionCreator) {
+	public static void put(String key, ToolbarActionCreator toolActionCreator) {
 		if (key != null && toolActionCreator != null)
 			createFactory().getRegistry().put(key, toolActionCreator);
 	}
@@ -79,18 +64,10 @@ public class ToolbarActionFactory {
 	 * @return null or the toolAction registered
 	 */
 	public static GeoPlatformToolbarAction get(String key, MapWidget mapWidget) {
-		GeoPlatformActionCreator toolActionCreator = createFactory().getRegistry()
-				.get(key);
+		ToolbarActionCreator toolActionCreator = (ToolbarActionCreator) createFactory()
+				.getRegistry().get(key);
 		if (toolActionCreator == null)
 			return null;
 		return toolActionCreator.createActionTool(mapWidget);
 	}
-
-	/**
-	 * @return the registry
-	 */
-	public Map<String, GeoPlatformActionCreator> getRegistry() {
-		return registry;
-	}
-
 }

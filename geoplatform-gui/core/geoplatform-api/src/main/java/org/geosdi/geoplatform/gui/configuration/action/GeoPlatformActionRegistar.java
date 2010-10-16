@@ -33,57 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.configuration.action;
 
-import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
-import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
-import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
-import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomInAction;
-import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomOutAction;
-import org.geosdi.geoplatform.gui.client.mvc.MapConttroller;
-import org.gwtopenmaps.openlayers.client.MapWidget;
-
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.google.gwt.core.client.EntryPoint;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author giuseppe
  * 
  */
-public class MapWidgetUI implements EntryPoint {
+public class GeoPlatformActionRegistar {
 
-	private Dispatcher dispatcher;
+	private static GeoPlatformActionRegistar INSTANCE;
+	private Map<String, GeoPlatformActionCreator> registry;
+	
+	protected GeoPlatformActionRegistar() {
+		this.registry = new HashMap<String, GeoPlatformActionCreator>();
+	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+	public static GeoPlatformActionRegistar createFactory() {
+		if (INSTANCE == null)
+			INSTANCE = new GeoPlatformActionRegistar();
+		return INSTANCE;
+	}
+
+	/**
+	 * @return the registry
 	 */
-	@Override
-	public void onModuleLoad() {
-		// TODO Auto-generated method stub
-		dispatcher = Dispatcher.get();
-
-		dispatcher.addController(new MapConttroller());
-		
-		ToolbarActionRegistar.put("zoomIn", new ToolbarActionCreator() {
-
-			public GeoPlatformToolbarAction createActionTool(MapWidget mapWidget) {
-				// TODO Auto-generated method stub
-				return new ZoomInAction(mapWidget);
-			}
-		});
-
-		ToolbarActionRegistar.put("zoomOut", new ToolbarActionCreator() {
-
-			public GeoPlatformToolbarAction createActionTool(MapWidget mapWidget) {
-				// TODO Auto-generated method stub
-				return new ZoomOutAction(mapWidget);
-			}
-		});
-
-		dispatcher.dispatch(MapWidgetEvents.INIT_MAP_WIDGET);
-
+	public Map<String, GeoPlatformActionCreator> getRegistry() {
+		return registry;
 	}
 
 }

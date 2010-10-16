@@ -35,11 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.action.menu;
 
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionCreator;
+
 /**
  * @author giuseppe
  * 
  */
-public interface MenuActionCreator {
+public interface MenuActionCreator extends GeoPlatformActionCreator {
 
 	public MenuAction createAction();
 

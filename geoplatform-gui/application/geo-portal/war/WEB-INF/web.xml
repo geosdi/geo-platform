@@ -5,6 +5,28 @@
 
 <web-app>
 
+	<!-- pick up all spring application contexts -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:applicationContext.xml</param-value>
+	</context-param>
+
+	<!-- spring context loader -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>GeoPlatformConfiguration</servlet-name>
+		<servlet-class>org.geosdi.geoplatform.gui.server.gwt.GeoPlatformConfigurationImpl</servlet-class>
+		<load-on-startup>1</load-on-startup>
+
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GeoPlatformConfiguration</servlet-name>
+		<url-pattern>/geoportal/GeoPlatformConfiguration</url-pattern>
+	</servlet-mapping>
+
 	<!-- Default page to serve -->
 	<welcome-file-list>
 		<welcome-file>Application.html</welcome-file>

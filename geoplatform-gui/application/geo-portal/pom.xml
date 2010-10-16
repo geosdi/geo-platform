@@ -1,45 +1,45 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <parent>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
 		<groupId>org.geosdi</groupId>
 		<artifactId>application</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-  <groupId>org.geosdi</groupId>
-  <artifactId>geo-portal</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
+	<groupId>org.geosdi</groupId>
+	<artifactId>geo-portal</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>war</packaging>
 
-  <name>Geo-Platform :: == Geo Portal</name>
-  
-   <developers>
-        <developer>
-            <name>Francesco Izzi</name>
-            <id>francesco.izzi</id>
-            <email>francesco.izzi@geosdi.org</email>
-            <organization>geoSDI</organization>
-            <roles>
-                <role>Java Developer</role>
-                <role>Project Management Committee (PMC) Member</role>
-            </roles>
-        </developer>
-        <developer>
-            <name>Giuseppe La Scaleia</name>
-            <id>glascaleia</id>
-            <email>giuseppe.lascaleia@geosdi.org</email>
-            <organization>geoSDI</organization>
-            <roles>
-                <role>Java Developer</role>
-                <role>Project Management Committee (PMC) Member</role>
-            </roles>
-        </developer>
-    </developers>
-  
-  <dependencies>
-    <dependency>
+	<name>Geo-Platform :: == Geo Portal</name>
+
+	<developers>
+		<developer>
+			<name>Francesco Izzi</name>
+			<id>francesco.izzi</id>
+			<email>francesco.izzi@geosdi.org</email>
+			<organization>geoSDI</organization>
+			<roles>
+				<role>Java Developer</role>
+				<role>Project Management Committee (PMC) Member</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Giuseppe La Scaleia</name>
+			<id>glascaleia</id>
+			<email>giuseppe.lascaleia@geosdi.org</email>
+			<organization>geoSDI</organization>
+			<roles>
+				<role>Java Developer</role>
+				<role>Project Management Committee (PMC) Member</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<dependencies>
+		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
 			<scope>provided</scope>
@@ -56,8 +56,8 @@
 			<groupId>com.extjs</groupId>
 			<artifactId>gxt</artifactId>
 		</dependency>
-        
-        <!-- GWT-OL Resources -->
+
+		<!-- GWT-OL Resources -->
 		<dependency>
 			<groupId>org.gwtopenmaps.openlayers</groupId>
 			<artifactId>openlayers_gwt</artifactId>
@@ -69,20 +69,20 @@
 			<artifactId>geoplatform-api</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.geosdi</groupId>
 			<artifactId>geoplatform-configuration</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-        
-        <dependency>
+
+		<dependency>
 			<groupId>org.geosdi</groupId>
 			<artifactId>map-widget</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-        
-        <!-- SPRING -->
+
+		<!-- SPRING -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
@@ -115,6 +115,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
 
 		<!-- SCOPE TEST -->
 		<dependency>
@@ -132,8 +137,8 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-        
-        <!-- logging dependencies, delegate all to slf4j and use logback -->
+
+		<!-- logging dependencies, delegate all to slf4j and use logback -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -162,9 +167,9 @@
 			<scope>test</scope>
 		</dependency>
 
-  </dependencies>
-  
-  <build>
+	</dependencies>
+
+	<build>
 		<outputDirectory>war/WEB-INF/classes</outputDirectory>
 		<plugins>
 			<plugin>

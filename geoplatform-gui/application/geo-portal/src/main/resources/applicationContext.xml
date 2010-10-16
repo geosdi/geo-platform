@@ -11,28 +11,6 @@
 	
 	<context:component-scan base-package="org.geosdi.geoplatform.gui" />
 
-	<!-- general definitions -->
-	<context:property-placeholder
-		location="classpath*:application.properties, classpath*:toolbar.properties" />
-
-	<bean name="toolbarClientTool" class="org.geosdi.geoplatform.gui.impl.ToolbarClientTool">
-		<property name="clientTools">
-			<list>
-				<ref bean="toolbarSeparator" />
-				<ref bean="zoomIn" />
-				<ref bean="zoomOut" />
-				<ref bean="drawFeature" />
-				<ref bean="infoApp" />
-			</list>
-		</property>
-	</bean>
-
-	<bean name="drawFeature"
-		class="org.geosdi.geoplatform.gui.configuration.ActionClientTool">
-		<property name="id" value="${drawFeature.id}" />
-		<property name="type" value="${drawFeature.type}" />
-		<property name="enabled" value="${drawFeature.enabled}" />
-		<property name="order" value="${drawFeature.order}" />
-	</bean>
+	<import resource="applicationContext-Toolbar.xml" />
 
 </beans>

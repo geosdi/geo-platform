@@ -189,7 +189,7 @@ public class ButtonBar extends LayoutContainer {
 		button.setId(action.getId());
 		button.setWidth(70);
 		button.setText(action.getButtonName());
-		button.setIcon(action.getImage());
+//		button.setIcon(action.getImage());
 		button.addSelectionListener(action);
 		button.setEnabled(action.isEnabled());
 		this.toolBar.add(button);

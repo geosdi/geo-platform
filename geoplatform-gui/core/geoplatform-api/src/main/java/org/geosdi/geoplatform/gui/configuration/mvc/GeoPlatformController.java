@@ -44,6 +44,8 @@ import com.extjs.gxt.ui.client.mvc.Controller;
  */
 public abstract class GeoPlatformController extends Controller {
 
+	protected GeoPlatformView view;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -54,7 +56,7 @@ public abstract class GeoPlatformController extends Controller {
 	@Override
 	public void handleEvent(AppEvent event) {
 		// TODO Auto-generated method stub
-
+		forwardToView(view, event);
 	}
 
 }

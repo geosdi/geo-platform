@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
-import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
 import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
+import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomInAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomOutAction;
@@ -65,8 +65,16 @@ public class MapWidgetUI implements EntryPoint {
 		dispatcher = Dispatcher.get();
 
 		dispatcher.addController(new MapConttroller());
-		
-		ToolbarActionRegistar.put("zoomIn", new ToolbarActionCreator() {
+
+		addMapToolbarAction();
+
+		dispatcher.dispatch(MapWidgetEvents.INIT_MAP_WIDGET);
+
+	}
+
+	private void addMapToolbarAction() {
+		// TODO Auto-generated method stub
+		ToolbarActionRegistar.put("ZoomIn", new ToolbarActionCreator() {
 
 			public GeoPlatformToolbarAction createActionTool(MapWidget mapWidget) {
 				// TODO Auto-generated method stub
@@ -74,16 +82,13 @@ public class MapWidgetUI implements EntryPoint {
 			}
 		});
 
-		ToolbarActionRegistar.put("zoomOut", new ToolbarActionCreator() {
+		ToolbarActionRegistar.put("ZoomOut", new ToolbarActionCreator() {
 
 			public GeoPlatformToolbarAction createActionTool(MapWidget mapWidget) {
 				// TODO Auto-generated method stub
 				return new ZoomOutAction(mapWidget);
 			}
 		});
-
-		dispatcher.dispatch(MapWidgetEvents.INIT_MAP_WIDGET);
-
 	}
 
 }

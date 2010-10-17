@@ -9,7 +9,7 @@
 
 	<!-- general definitions -->
 	<context:property-placeholder
-		location="classpath*:application.properties, classpath*:toolbar.properties" />
+		location="classpath*:application.properties, classpath*:toolbar.properties, classpath:geo-portal.properties" />
 
 	<bean name="toolbarClientTool" class="org.geosdi.geoplatform.gui.impl.ToolbarClientTool">
 		<property name="clientTools">
@@ -21,6 +21,20 @@
 				<ref bean="infoApp" />
 			</list>
 		</property>
+	</bean>
+
+	<bean name="infoApp"
+		class="org.geosdi.geoplatform.gui.configuration.ActionClientTool">
+		<property name="id" value="${gpInfoApp.id}" />
+		<property name="type" value="${gpInfoApp.type}" />
+		<property name="enabled" value="${gpInfoApp.enabled}" />
+		<property name="order" value="${gpInfoApp.order}" />
+	</bean>
+
+	<bean name="toolbarSeparator"
+		class="org.geosdi.geoplatform.gui.configuration.GenericClientTool">
+		<property name="id" value="${toolbarSeparator.id}" />
+		<property name="order" value="${toolbarSeparator.order}" />
 	</bean>
 
 	<bean name="drawFeature"

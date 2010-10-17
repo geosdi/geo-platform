@@ -35,9 +35,22 @@
  */
 package org.geosdi.geoplatform.gui.client.mvc;
 
+import org.geosdi.geoplatform.gui.client.GeoPortalEvents;
+import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 
+import com.extjs.gxt.ui.client.Style.LayoutRegion;
+import com.extjs.gxt.ui.client.event.EventType;
+import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.util.Margins;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Viewport;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * @author giuseppe
@@ -45,9 +58,58 @@ import com.extjs.gxt.ui.client.mvc.Controller;
  */
 public class GeoPortalView extends GeoPlatformView {
 
+	private Viewport viewport;
+	private ContentPanel center;
+	private ContentPanel north;
+
 	public GeoPortalView(Controller controller) {
 		super(controller);
 		// TODO Auto-generated constructor stub
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent
+	 * (com.extjs.gxt.ui.client.mvc.AppEvent)
+	 */
+	@Override
+	protected void handleEvent(AppEvent event) {
+		// TODO Auto-generated method stub
+		if (event.getType() == GeoPortalEvents.INIT_GEO_PORTAL)
+			initUI();
+	}
+
+	private void initUI() {
+		viewport = new Viewport();
+		viewport.setLayout(new BorderLayout());
+
+		createNorth();
+		createCenter();
+
+		RootPanel.get().add(viewport);
+	}
+
+	private void createNorth() {
+		north = new ContentPanel();
+		north.setHeaderVisible(false);
+
+		BorderLayoutData data = new BorderLayoutData(LayoutRegion.NORTH, 30);
+		data.setMargins(new Margins(0, 5, 0, 5));
+		viewport.add(north, data);
+	}
+
+	private void createCenter() {
+		center = new ContentPanel();
+		center.setLayout(new FitLayout());
+		center.setHeaderVisible(false);
+		BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
+		data.setMargins(new Margins(5, 5, 5, 5));
+
+		viewport.add(center, data);
+
+		Dispatcher.forwardEvent(MapWidgetEvents.ATTACH_MAP_WIDGET, this.center);
+		Dispatcher.forwardEvent(MapWidgetEvents.ATTACH_TOOLBAR, this.north);
+	}
 }

@@ -33,37 +33,16 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.mvc;
+package org.geosdi.geoplatform.gui.client;
 
-import org.geosdi.geoplatform.gui.client.GeoPortalEvents;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
-
-import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.event.EventType;
 
 /**
  * @author giuseppe
- * 
+ *
  */
-public class GeoPortalController extends GeoPlatformController {
-
-	public GeoPortalController() {
-		registerEventTypes(GeoPortalEvents.INIT_GEO_PORTAL);
-	}
-
-	public void initialize() {
-		view = new GeoPortalView(this);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#
-	 * handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
-	 */
-	@Override
-	public void handleEvent(AppEvent event) {
-		// TODO Auto-generated method stub
-		super.handleEvent(event);
-	}
+public class GeoPortalEvents {
+	
+	public static final EventType INIT_GEO_PORTAL = new EventType();
 
 }

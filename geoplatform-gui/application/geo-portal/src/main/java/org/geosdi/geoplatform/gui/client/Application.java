@@ -39,7 +39,7 @@ import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.action.ToolbarApplicationAction;
-import org.geosdi.geoplatform.gui.client.action.application.GeoPlatformInfoApp;
+import org.geosdi.geoplatform.gui.client.action.GeoPortalInfoApp;
 import org.geosdi.geoplatform.gui.client.action.toolbar.DrawFeatureAction;
 import org.geosdi.geoplatform.gui.client.mvc.GeoPortalController;
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
@@ -47,7 +47,6 @@ import org.geosdi.geoplatform.gui.service.GeoPlatformConfiguration;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
-import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.google.gwt.core.client.EntryPoint;
@@ -100,12 +99,14 @@ public class Application implements EntryPoint {
 			}
 		});
 
-		ToolbarActionRegistar.put("GeoPlatformInfoApp", new ToolbarActionCreator() {
+		ToolbarActionRegistar.put("GeoPlatformInfoApp",
+				new ToolbarActionCreator() {
 
-			public ToolbarApplicationAction createActionTool(MapWidget mapWidget) {
-				// TODO Auto-generated method stub
-				return new GeoPlatformInfoApp();
-			}
-		});
+					public ToolbarApplicationAction createActionTool(
+							MapWidget mapWidget) {
+						// TODO Auto-generated method stub
+						return new GeoPortalInfoApp();
+					}
+				});
 	}
 }

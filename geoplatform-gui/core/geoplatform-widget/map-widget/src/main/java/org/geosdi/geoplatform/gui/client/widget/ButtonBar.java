@@ -165,17 +165,12 @@ public class ButtonBar extends LayoutContainer {
 	public void addMapButton(ToolbarMapAction action) {
 		Button button = new Button();
 		button.setId(action.getId());
-		button.setWidth(24);
+		// button.setWidth(24);
 		button.setToolTip(action.getTooltip());
 		button.setIcon(action.getImage());
 		button.addSelectionListener(action);
 		button.setEnabled(action.isEnabled());
-
-		if (action.getId().equalsIgnoreCase("cleanDGWMenu")) {
-			this.toolBar.add(new FillToolItem());
-			this.toolBar.add(button);
-		} else
-			this.toolBar.add(button);
+		this.toolBar.add(button);
 	}
 
 	/**
@@ -187,9 +182,9 @@ public class ButtonBar extends LayoutContainer {
 	public void addApplicationButton(ToolbarApplicationAction action) {
 		Button button = new Button();
 		button.setId(action.getId());
-		button.setWidth(70);
+		// button.setWidth(70);
 		button.setText(action.getButtonName());
-//		button.setIcon(action.getImage());
+		button.setIcon(action.getImage());
 		button.addSelectionListener(action);
 		button.setEnabled(action.isEnabled());
 		this.toolBar.add(button);
@@ -204,7 +199,7 @@ public class ButtonBar extends LayoutContainer {
 	public void addMapToogleButton(ToolbarMapAction action) {
 		Button button = new ToggleButton();
 		button.setId(action.getId());
-		button.setWidth(24);
+		// button.setWidth(24);
 		button.setToolTip(action.getTooltip());
 		button.setIcon(action.getImage());
 		button.addSelectionListener(action);

@@ -40,6 +40,7 @@ import java.util.List;
 
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 import org.gwtopenmaps.openlayers.client.Bounds;
+import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.MapOptions;
 import org.gwtopenmaps.openlayers.client.MapUnits;
@@ -183,7 +184,17 @@ public class MapLayoutWidget extends LayoutContainer {
 		center.add(mapWidget);
 		center.layout();
 
-		this.map.zoomToMaxExtent();
+		setMapCenter();
+	}
+
+	/**
+	 * Set center of the Map on Italy
+	 */
+	public void setMapCenter() {
+		// TODO Auto-generated method stub
+		LonLat center = new LonLat(13.375, 42.329);
+		center.transform("EPSG:4326", "EPSG:900913");
+		this.map.setCenter(center, 5);
 	}
 
 	/**

@@ -44,14 +44,17 @@ import com.google.gwt.user.client.ui.ImageBundle;
  */
 @SuppressWarnings("deprecation")
 public interface GeoPlatformIcons extends ImageBundle {
-	
-	@Resource("zoom-in.png")
-    AbstractImagePrototype ZoomIn();
 
-    @Resource("zoom-out.png")
-    AbstractImagePrototype ZoomOut();
-    
-    @Resource("draw-feature.png")
-    AbstractImagePrototype DrawFeature();
+	@Resource("zoom-in.png")
+	AbstractImagePrototype ZoomIn();
+
+	@Resource("zoom-out.png")
+	AbstractImagePrototype ZoomOut();
+
+	@Resource("draw-feature.png")
+	AbstractImagePrototype DrawFeature();
+
+	@Resource("gp-icon-16x16.png")
+	AbstractImagePrototype geoPortalInfo();
 
 }

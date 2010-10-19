@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName">
+
+	<context:annotation-config />
+
+	<bean name="menuBarContainerTool" class="org.geosdi.geoplatform.gui.impl.MenuBarContainerTool">
+		<property name="categories">
+			<list>
+				<ref bean="search" />
+				<ref bean="file" />
+				<ref bean="edit" />
+			</list>
+		</property>
+	</bean>
+
+	<bean name="file"
+		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory">
+		<property name="text" value="File" />
+		<property name="enabled" value="true" />
+		<property name="order" value="10" />
+		<property name="tools">
+			<list>
+				<bean name="new"
+					class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+					<property name="id" value="new" />
+					<property name="text" value="New" />
+					<property name="enabled" value="true" />
+					<property name="order" value="10" />
+				</bean>
+				<bean name="openFile"
+					class="org.geosdi.geoplatform.gui.configuration.menubar.GroupMenuClientTool">
+					<property name="id" value="openFile" />
+					<property name="text" value="Open File" />
+					<property name="enabled" value="true" />
+					<property name="order" value="20" />
+					<property name="tools">
+						<list>
+							<bean name="read"
+								class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+								<property name="id" value="read" />
+								<property name="text" value="readme.txt" />
+								<property name="enabled" value="true" />
+								<property name="order" value="10" />
+							</bean>
+							<bean name="hello"
+								class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+								<property name="id" value="hello" />
+								<property name="text" value="helloword.txt" />
+								<property name="enabled" value="true" />
+								<property name="order" value="20" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean name="edit"
+		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory">
+		<property name="text" value="Edit" />
+		<property name="enabled" value="true" />
+		<property name="order" value="20" />
+		<property name="tools">
+			<list>
+				<bean name="cut"
+					class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+					<property name="id" value="cut" />
+					<property name="text" value="Cut" />
+					<property name="enabled" value="true" />
+					<property name="order" value="10" />
+				</bean>
+				<bean name="copy"
+					class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+					<property name="id" value="copy" />
+					<property name="text" value="Copy" />
+					<property name="enabled" value="true" />
+					<property name="order" value="20" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean name="search"
+		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory">
+		<property name="text" value="Search" />
+		<property name="enabled" value="true" />
+		<property name="order" value="30" />
+		<property name="tools">
+			<list>
+				<bean name="searchItem"
+					class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+					<property name="id" value="searchItem" />
+					<property name="text" value="Search" />
+					<property name="enabled" value="true" />
+					<property name="order" value="10" />
+				</bean>
+				<bean name="fileItem"
+					class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+					<property name="id" value="fileItem" />
+					<property name="text" value="File" />
+					<property name="enabled" value="true" />
+					<property name="order" value="20" />
+				</bean>
+				<bean name="java"
+					class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+					<property name="id" value="java" />
+					<property name="text" value="Java" />
+					<property name="enabled" value="true" />
+					<property name="order" value="30" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+</beans>

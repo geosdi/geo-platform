@@ -33,46 +33,39 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.menubar;
+package org.geosdi.geoplatform.gui;
+
+import static org.junit.Assert.assertNotNull;
+
+import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
+import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @author giuseppe
  * 
  */
-public class CheckMenuClientTool extends MenuBarClientTool {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "applicationContext-Test.xml" })
+public class MenuBarTest {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6257517250152965702L;
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private boolean checked;
+	@Autowired
+	private IMenuBarContainerTool menuBarContainerTool;
 
-	/**
-	 * @return the checked
-	 */
-	public boolean isChecked() {
-		return checked;
+	@Test
+	public void test() {
+		assertNotNull(menuBarContainerTool);
+
+		for (MenuBarCategory category : menuBarContainerTool.getCategories()) {
+			logger.info("MENU ******************** " + category.toString());
+		}
 	}
-
-	/**
-	 * @param checked
-	 *            the checked to set
-	 */
-	public void setChecked(boolean checked) {
-		this.checked = checked;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "CheckMenuClientTool [checked=" + checked + ", getText()="
-				+ getText() + ", isEnabled()=" + isEnabled() + ", getId()="
-				+ getId() + ", getOrder()=" + getOrder() + "]";
-	}
-
 }

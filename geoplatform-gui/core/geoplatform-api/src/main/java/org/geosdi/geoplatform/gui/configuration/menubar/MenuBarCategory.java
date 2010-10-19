@@ -124,4 +124,15 @@ public class MenuBarCategory implements Serializable,
 		return getOrder() - o.getOrder();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "MenuBarCategory [text=" + text + ", enabled=" + enabled
+				+ ", order=" + order + ", tools=" + tools + "]";
+	}
+
 }

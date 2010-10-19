@@ -1,0 +1,8 @@
+  <!-- Inherit the core Web Toolkit stuff. -->
+<module>
+
+	<source path="client" />
+
+	<entry-point class='org.geosdi.geoplatform.gui.client.BasicWidget' />
+
+</module>

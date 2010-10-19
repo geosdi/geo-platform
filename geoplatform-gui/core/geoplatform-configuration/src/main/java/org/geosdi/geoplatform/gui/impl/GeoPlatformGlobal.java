@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.impl;
 
+import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
 import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,8 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
 
 	@Autowired
 	private IToolbarClientTool toolbarClientTool;
+
+	private IMenuBarContainerTool menuBarContainerTool;
 
 	/*
 	 * (non-Javadoc)
@@ -75,5 +78,20 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
 	public void setToolbarClientTool(IToolbarClientTool toolbarClientTool) {
 		this.toolbarClientTool = toolbarClientTool;
 	}
+
+	@Override
+	public IMenuBarContainerTool getMenuBarContainerTool() {
+		// TODO Auto-generated method stub
+		return menuBarContainerTool;
+	}
+
+	/**
+	 * @param menuBarContainerTool the menuBarContainerTool to set
+	 */
+	public void setMenuBarContainerTool(IMenuBarContainerTool menuBarContainerTool) {
+		this.menuBarContainerTool = menuBarContainerTool;
+	}
+
+	
 
 }

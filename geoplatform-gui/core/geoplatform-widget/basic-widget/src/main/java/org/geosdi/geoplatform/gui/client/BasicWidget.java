@@ -33,46 +33,23 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.menubar;
+package org.geosdi.geoplatform.gui.client;
+
+import com.google.gwt.core.client.EntryPoint;
 
 /**
  * @author giuseppe
- * 
+ *
  */
-public class CheckMenuClientTool extends MenuBarClientTool {
+public class BasicWidget implements EntryPoint {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6257517250152965702L;
-
-	private boolean checked;
-
-	/**
-	 * @return the checked
-	 */
-	public boolean isChecked() {
-		return checked;
-	}
-
-	/**
-	 * @param checked
-	 *            the checked to set
-	 */
-	public void setChecked(boolean checked) {
-		this.checked = checked;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
+	/* (non-Javadoc)
+	 * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
 	 */
 	@Override
-	public String toString() {
-		return "CheckMenuClientTool [checked=" + checked + ", getText()="
-				+ getText() + ", isEnabled()=" + isEnabled() + ", getId()="
-				+ getId() + ", getOrder()=" + getOrder() + "]";
+	public void onModuleLoad() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -33,46 +33,40 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.menubar;
+package org.geosdi.geoplatform.gui.impl;
+
+import java.util.Collections;
+import java.util.List;
+
+import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
+import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory;
 
 /**
  * @author giuseppe
  * 
  */
-public class CheckMenuClientTool extends MenuBarClientTool {
+public class MenuBarContainerTool implements IMenuBarContainerTool {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6257517250152965702L;
+	private static final long serialVersionUID = 1169366314963180162L;
 
-	private boolean checked;
+	private List<MenuBarCategory> categories;
 
-	/**
-	 * @return the checked
-	 */
-	public boolean isChecked() {
-		return checked;
-	}
-
-	/**
-	 * @param checked
-	 *            the checked to set
-	 */
-	public void setChecked(boolean checked) {
-		this.checked = checked;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
-	public String toString() {
-		return "CheckMenuClientTool [checked=" + checked + ", getText()="
-				+ getText() + ", isEnabled()=" + isEnabled() + ", getId()="
-				+ getId() + ", getOrder()=" + getOrder() + "]";
+	public List<MenuBarCategory> getCategories() {
+		// TODO Auto-generated method stub
+		return categories;
+	}
+
+	/**
+	 * @param categories
+	 *            the categories to set
+	 */
+	public void setCategories(List<MenuBarCategory> categories) {
+		Collections.sort(categories);
+		this.categories = categories;
 	}
 
 }

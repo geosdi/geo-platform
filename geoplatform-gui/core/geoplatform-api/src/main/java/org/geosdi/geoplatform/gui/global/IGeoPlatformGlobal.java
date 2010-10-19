@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.global;
 
 import java.io.Serializable;
 
+import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
 import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
 
 /**
@@ -46,5 +47,7 @@ import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
 public interface IGeoPlatformGlobal extends Serializable {
 
 	public IToolbarClientTool getToolbarClientTool();
+	
+	public IMenuBarContainerTool getMenuBarContainerTool();
 
 }

@@ -86,6 +86,7 @@
     </build>
     
     <modules>
+        <module>basic-widget</module>
         <module>security-widget</module>
 		<module>geocoding-widget</module>
 		<module>routing-widget</module>

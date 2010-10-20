@@ -50,7 +50,7 @@ import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuBar;
 import com.extjs.gxt.ui.client.widget.menu.MenuBarItem;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
-import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
+import com.extjs.gxt.ui.client.widget.menu.SeparatorMenuItem;
 
 /**
  * @author giuseppe
@@ -184,7 +184,7 @@ public class MenuBarWidget {
 	 */
 	public void addMenuSeparator(Menu menu) {
 		// TODO Auto-generated method stub
-		menu.add(new SeparatorToolItem());
+		menu.add(new SeparatorMenuItem());
 	}
 
 	/**

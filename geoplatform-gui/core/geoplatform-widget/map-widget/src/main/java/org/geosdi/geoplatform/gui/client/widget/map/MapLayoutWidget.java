@@ -146,11 +146,13 @@ public class MapLayoutWidget extends LayoutContainer {
 	private void initDrawFeatures() {
 		FeatureAddedListener listener = new FeatureAddedListener() {
 			public void onFeatureAdded(VectorFeature vf) {
-				org.gwtopenmaps.openlayers.client.geometry.Polygon aoi = org.gwtopenmaps.openlayers.client.geometry.Polygon
+				org.gwtopenmaps.openlayers.client.geometry.Polygon aoe = org.gwtopenmaps.openlayers.client.geometry.Polygon
 						.narrowToPolygon(vf.getGeometry().getJSObject());
 
-				aoi.transform(new Projection("EPSG:900913"), new Projection(
+				aoe.transform(new Projection("EPSG:900913"), new Projection(
 						"EPSG:4326"));
+
+				System.out.println("GEOMETRY ************ " + aoe.toString());
 
 				// Dispatcher.forwardEvent(DGWATCHEvents.INJECT_WKT,
 				// aoi.toString());

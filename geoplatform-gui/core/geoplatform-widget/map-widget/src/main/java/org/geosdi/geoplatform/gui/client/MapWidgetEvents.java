@@ -39,14 +39,18 @@ import com.extjs.gxt.ui.client.event.EventType;
 
 /**
  * @author giuseppe
- *
+ * 
  */
 public class MapWidgetEvents {
-	
+
 	public static final EventType INIT_MAP_WIDGET = new EventType();
-	
+
 	public static final EventType ATTACH_MAP_WIDGET = new EventType();
-	
+
 	public static final EventType ATTACH_TOOLBAR = new EventType();
+
+	public static final EventType ACTIVATE_DRAW_CONTROL = new EventType();
+
+	public static final EventType DEACTIVATE_DRAW_CONTROL = new EventType();
 
 }

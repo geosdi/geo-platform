@@ -33,36 +33,66 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.client.mvc;
 
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
-import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
+import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import com.extjs.gxt.ui.client.mvc.AppEvent;
 
 /**
  * @author giuseppe
  * 
  */
-public class DrawFeatureAction extends ToolbarMapAction {
+public class MapController extends GeoPlatformController {
 
-	public DrawFeatureAction() {
-		super("DrawFeature", Resources.ICONS.DrawFeature());
-		// TODO Auto-generated constructor stub
+	private MapView mapView;
+
+	public MapController() {
+		registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
+				MapWidgetEvents.ATTACH_MAP_WIDGET,
+				MapWidgetEvents.ATTACH_TOOLBAR,
+				MapWidgetEvents.ACTIVATE_DRAW_CONTROL,
+				MapWidgetEvents.DEACTIVATE_DRAW_CONTROL);
 	}
 
 	@Override
-	public void componentSelected(ButtonEvent ce) {
+	public void initialize() {
+		this.mapView = new MapView(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client
+	 * .mvc.AppEvent)
+	 */
+	@Override
+	public void handleEvent(AppEvent event) {
+		if (event.getType() == MapWidgetEvents.ACTIVATE_DRAW_CONTROL)
+			onActivateDrawControl();
+
+		if (event.getType() == MapWidgetEvents.DEACTIVATE_DRAW_CONTROL)
+			onDeactivateDrawControl();
+
+		forwardToView(mapView, event);
+	}
+
+	/**
+	 * 
+	 */
+	private void onDeactivateDrawControl() {
 		// TODO Auto-generated method stub
-		ToggleButton button = (ToggleButton) ce.getSource();
+		this.mapView.deactivateDrawControl();
+	}
 
-		/** ADD CODE TO ACTIVATE CONTROL ON THE MAP **/
-
-		// if (button.isPressed()) {
-		// Dispatcher.forwardEvent(DGWATCHEvents.ACTIVATE_DRAW_FEATURES);
-		// } else
-		// Dispatcher.forwardEvent(DGWATCHEvents.DEACTIVATE_DRAW_FEATURES);
+	/**
+	 * 
+	 */
+	private void onActivateDrawControl() {
+		// TODO Auto-generated method stub
+		this.mapView.activateDrawControl();
 	}
 
 }

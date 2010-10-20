@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomInAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomOutAction;
-import org.geosdi.geoplatform.gui.client.mvc.MapConttroller;
+import org.geosdi.geoplatform.gui.client.mvc.MapController;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
@@ -64,7 +64,7 @@ public class MapWidgetUI implements EntryPoint {
 		// TODO Auto-generated method stub
 		dispatcher = Dispatcher.get();
 
-		dispatcher.addController(new MapConttroller());
+		dispatcher.addController(new MapController());
 
 		addMapToolbarAction();
 

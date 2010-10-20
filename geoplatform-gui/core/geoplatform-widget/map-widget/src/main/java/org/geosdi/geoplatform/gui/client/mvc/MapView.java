@@ -75,7 +75,22 @@ public class MapView extends GeoPlatformView {
 
 		if (event.getType() == MapWidgetEvents.ATTACH_TOOLBAR)
 			onAttachToolbar(event);
+	}
 
+	/**
+	 * Activate Draw Control on Map
+	 */
+	public void deactivateDrawControl() {
+		// TODO Auto-generated method stub
+		this.mapLayout.activateDrawFeature();
+	}
+
+	/**
+	 * Deactivate Draw Control on Map
+	 */
+	public void activateDrawControl() {
+		// TODO Auto-generated method stub
+		this.mapLayout.deactivateDrawFeature();
 	}
 
 	/**

@@ -82,7 +82,7 @@ public class MapView extends GeoPlatformView {
 	 */
 	public void deactivateDrawControl() {
 		// TODO Auto-generated method stub
-		this.mapLayout.activateDrawFeature();
+		this.mapLayout.deactivateDrawFeature();
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class MapView extends GeoPlatformView {
 	 */
 	public void activateDrawControl() {
 		// TODO Auto-generated method stub
-		this.mapLayout.deactivateDrawFeature();
+		this.mapLayout.activateDrawFeature();
 	}
 
 	/**

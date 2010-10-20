@@ -52,7 +52,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "applicationContext-Test.xml" })
+@ContextConfiguration(locations = { "applicationContext-TEST.xml" })
 public class MenuBarTest {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());

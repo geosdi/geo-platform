@@ -76,7 +76,7 @@ public class ButtonBar extends LayoutContainer {
 		super();
 		this.vp = new VerticalPanel();
 		this.toolBar = new ToolBar();
-		this.toolBar.setHeight(40);
+//		this.toolBar.setHeight(40);
 		this.mapLayoutWidget = mapLayoutWidget;
 		initialize();
 	}

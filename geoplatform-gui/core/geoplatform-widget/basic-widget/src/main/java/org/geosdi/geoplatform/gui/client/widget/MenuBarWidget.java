@@ -48,6 +48,7 @@ import com.extjs.gxt.ui.client.widget.menu.CheckMenuItem;
 import com.extjs.gxt.ui.client.widget.menu.DateMenu;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuBar;
+import com.extjs.gxt.ui.client.widget.menu.MenuBarItem;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 
@@ -76,8 +77,11 @@ public class MenuBarWidget {
 	private void initialize() {
 		for (MenuBarCategory category : this.menuBarContainerTool
 				.getCategories()) {
-			addCategory(category);
+			Menu menu = new Menu();
+			this.bar.add(new MenuBarItem(category.getText(), menu));
+			addCategory(category, menu);
 		}
+
 	}
 
 	/**
@@ -85,10 +89,9 @@ public class MenuBarWidget {
 	 * 
 	 * @param category
 	 */
-	public void addCategory(MenuBarCategory category) {
+	public void addCategory(MenuBarCategory category, Menu menu) {
 		// TODO Auto-generated method stub
-		Menu menu = new Menu();
-		buildTools(category.getTools(), menu);
+		buildTools(menu, category.getTools());
 	}
 
 	/**
@@ -96,7 +99,7 @@ public class MenuBarWidget {
 	 * @param tools
 	 * @param menu
 	 */
-	public void buildTools(List<MenuBarClientTool> tools, Menu menu) {
+	public void buildTools(Menu menu, List<MenuBarClientTool> tools) {
 		for (MenuBarClientTool tool : tools) {
 			if (tool.getId().equals(MENU_BAR_SEPARATOR)) {
 				addMenuSeparator(menu);
@@ -119,7 +122,21 @@ public class MenuBarWidget {
 			addDateMenu(menu);
 		} else if (tool instanceof GroupMenuClientTool) {
 			addGroupMenuItem((GroupMenuClientTool) tool, menu);
+		} else {
+			addMenuItem(tool, menu);
 		}
+	}
+
+	/**
+	 * Add Simple MenuItem to Menu
+	 * 
+	 * @param tool
+	 * @param menu
+	 */
+	public void addMenuItem(MenuBarClientTool tool, Menu menu) {
+		// TODO Auto-generated method stub
+		MenuItem item = new MenuItem(tool.getText());
+		menu.add(item);
 	}
 
 	/**
@@ -132,7 +149,7 @@ public class MenuBarWidget {
 		MenuItem item = new MenuItem(tool.getText());
 		menu.add(item);
 		Menu subMenu = new Menu();
-		buildTools(tool.getTools(), subMenu);
+		buildTools(subMenu, tool.getTools());
 		item.setSubMenu(subMenu);
 	}
 

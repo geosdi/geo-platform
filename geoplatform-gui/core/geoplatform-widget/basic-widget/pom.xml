@@ -8,7 +8,7 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.geosdi.geoplatform.gui</groupId>
+	<groupId>org.geosdi</groupId>
 	<artifactId>basic-widget</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>

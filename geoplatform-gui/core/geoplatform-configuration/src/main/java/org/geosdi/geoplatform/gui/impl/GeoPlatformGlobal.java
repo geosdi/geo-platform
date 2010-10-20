@@ -56,6 +56,7 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
 	@Autowired
 	private IToolbarClientTool toolbarClientTool;
 
+	@Autowired
 	private IMenuBarContainerTool menuBarContainerTool;
 
 	/*
@@ -86,12 +87,12 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
 	}
 
 	/**
-	 * @param menuBarContainerTool the menuBarContainerTool to set
+	 * @param menuBarContainerTool
+	 *            the menuBarContainerTool to set
 	 */
-	public void setMenuBarContainerTool(IMenuBarContainerTool menuBarContainerTool) {
+	public void setMenuBarContainerTool(
+			IMenuBarContainerTool menuBarContainerTool) {
 		this.menuBarContainerTool = menuBarContainerTool;
 	}
-
-	
 
 }

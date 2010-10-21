@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
@@ -75,6 +76,7 @@ public class MapView extends GeoPlatformView {
 
 		if (event.getType() == MapWidgetEvents.ATTACH_TOOLBAR)
 			onAttachToolbar(event);
+		
 	}
 
 	/**
@@ -109,6 +111,15 @@ public class MapView extends GeoPlatformView {
 		north.add(buttonBar.getToolBar());
 
 		north.layout();
+	}
+
+	/**
+	 * Erase single Feature in MapLayout Vector Layer
+	 * 
+	 * @param event
+	 */
+	public void eraseFeature(VectorFeature vf) {
+		this.mapLayout.eraseFeature(vf);
 	}
 
 }

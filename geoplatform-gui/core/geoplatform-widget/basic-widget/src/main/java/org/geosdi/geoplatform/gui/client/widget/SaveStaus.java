@@ -33,80 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.mvc;
-
-import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-
-import com.extjs.gxt.ui.client.mvc.AppEvent;
+package org.geosdi.geoplatform.gui.client.widget;
 
 /**
  * @author giuseppe
  * 
  */
-public class MapController extends GeoPlatformController {
+public class SaveStaus extends StatusWidget {
 
-	private MapView mapView;
+	public enum EnumSaveStatus {
+		STATUS_SAVE("x-status-ok"), STATUS_NO_SAVE("x-status-not-ok"), STATUS_SAVE_ERROR(
+				"x-status-error"), STATUS_MESSAGE_SAVE("Operation Ok"), STATUS_MESSAGE_NOT_SAVE(
+				"Operation Failed"), STATUS_MESSAGE_SAVE_ERROR("Service Error");
 
-	public MapController() {
-		registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_TOOLBAR,
-				MapWidgetEvents.ACTIVATE_DRAW_CONTROL,
-				MapWidgetEvents.DEACTIVATE_DRAW_CONTROL,
-				MapWidgetEvents.ERASE_FEATURE);
-	}
+		private String value;
 
-	@Override
-	public void initialize() {
-		this.mapView = new MapView(this);
-	}
+		EnumSaveStatus(String value) {
+			this.value = value;
+		}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client
-	 * .mvc.AppEvent)
-	 */
-	@Override
-	public void handleEvent(AppEvent event) {
-		if (event.getType() == MapWidgetEvents.ACTIVATE_DRAW_CONTROL)
-			onActivateDrawControl();
-
-		if (event.getType() == MapWidgetEvents.DEACTIVATE_DRAW_CONTROL)
-			onDeactivateDrawControl();
-
-		if (event.getType() == MapWidgetEvents.ERASE_FEATURE)
-			onEraseFeature(event);
-
-		forwardToView(mapView, event);
-	}
-
-	/**
-	 * 
-	 * @param event
-	 */
-	private void onEraseFeature(AppEvent event) {
-		// TODO Auto-generated method stub
-		this.mapView.eraseFeature((VectorFeature) event.getData());
-	}
-
-	/**
-	 * 
-	 */
-	private void onDeactivateDrawControl() {
-		// TODO Auto-generated method stub
-		this.mapView.deactivateDrawControl();
-	}
-
-	/**
-	 * 
-	 */
-	private void onActivateDrawControl() {
-		// TODO Auto-generated method stub
-		this.mapView.activateDrawControl();
+		/**
+		 * @return the value
+		 */
+		public String getValue() {
+			return value;
+		}
 	}
 
 }

@@ -33,80 +33,91 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.mvc;
+package org.geosdi.geoplatform.gui.client.widget.form;
 
-import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.geosdi.geoplatform.gui.client.widget.SaveStaus;
+import org.geosdi.geoplatform.gui.client.widget.SaveStaus.EnumSaveStatus;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
-import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.event.WindowEvent;
+import com.extjs.gxt.ui.client.event.WindowListener;
+import com.extjs.gxt.ui.client.widget.Window;
+import com.extjs.gxt.ui.client.widget.form.FieldSet;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 
 /**
  * @author giuseppe
  * 
  */
-public class MapController extends GeoPlatformController {
+public abstract class GeoPlatformFormWidget<T extends GeoPlatformBeanModel>
+		extends Window implements IGeoPlatformForm {
 
-	private MapView mapView;
+	protected FormPanel formPanel = new FormPanel();
+	protected FieldSet fieldSet;
+	protected T entity;
 
-	public MapController() {
-		registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_TOOLBAR,
-				MapWidgetEvents.ACTIVATE_DRAW_CONTROL,
-				MapWidgetEvents.DEACTIVATE_DRAW_CONTROL,
-				MapWidgetEvents.ERASE_FEATURE);
-	}
+	protected SaveStaus saveStatus;
 
-	@Override
-	public void initialize() {
-		this.mapView = new MapView(this);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client
-	 * .mvc.AppEvent)
+	/**
+	 * Construnctor
 	 */
-	@Override
-	public void handleEvent(AppEvent event) {
-		if (event.getType() == MapWidgetEvents.ACTIVATE_DRAW_CONTROL)
-			onActivateDrawControl();
+	public GeoPlatformFormWidget() {
+		this.initializeWindow();
+		this.initializeFormPanel();
+		this.add(this.formPanel);
+	}
 
-		if (event.getType() == MapWidgetEvents.DEACTIVATE_DRAW_CONTROL)
-			onDeactivateDrawControl();
+	private void initializeWindow() {
+		initSize();
+		setResizable(false);
 
-		if (event.getType() == MapWidgetEvents.ERASE_FEATURE)
-			onEraseFeature(event);
+		addWindowListener(new WindowListener() {
 
-		forwardToView(mapView, event);
+			@Override
+			public void windowHide(WindowEvent we) {
+				reset();
+			}
+
+		});
+
+		setLayout(new FitLayout());
+		setModal(true);
+		setPlain(true);
+	}
+
+	private void initializeFormPanel() {
+		this.formPanel.setFrame(true);
+		this.formPanel.setLayout(new FlowLayout());
+
+		initSizeFormPanel();
+		addComponentToForm();
 	}
 
 	/**
-	 * 
-	 * @param event
+	 * Set the correct Status Iconn Style
 	 */
-	private void onEraseFeature(AppEvent event) {
-		// TODO Auto-generated method stub
-		this.mapView.eraseFeature((VectorFeature) event.getData());
+	public void setSaveStatus(EnumSaveStatus status, EnumSaveStatus message) {
+		this.saveStatus.setIconStyle(status.getValue());
+		this.saveStatus.setText(message.getValue());
 	}
 
-	/**
-	 * 
-	 */
-	private void onDeactivateDrawControl() {
-		// TODO Auto-generated method stub
-		this.mapView.deactivateDrawControl();
+	public void reset() {
+
 	}
 
+	public abstract void addComponentToForm();
+
+	public abstract void initSize();
+
+	public abstract void initSizeFormPanel();
+
 	/**
-	 * 
+	 * @return the entity
 	 */
-	private void onActivateDrawControl() {
-		// TODO Auto-generated method stub
-		this.mapView.activateDrawControl();
+	public T getEntity() {
+		return entity;
 	}
 
 }

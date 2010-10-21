@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.map;
 import java.util.Collections;
 import java.util.List;
 
+import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.LonLat;
@@ -52,6 +53,8 @@ import org.gwtopenmaps.openlayers.client.control.DrawFeature.FeatureAddedListene
 import org.gwtopenmaps.openlayers.client.control.DrawFeatureOptions;
 import org.gwtopenmaps.openlayers.client.control.LayerSwitcher;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.geometry.Geometry;
+import org.gwtopenmaps.openlayers.client.geometry.MultiPolygon;
 import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
 import org.gwtopenmaps.openlayers.client.layer.GMapType;
 import org.gwtopenmaps.openlayers.client.layer.Google;
@@ -62,6 +65,7 @@ import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
 
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 
@@ -146,18 +150,9 @@ public class MapLayoutWidget extends LayoutContainer {
 	private void initDrawFeatures() {
 		FeatureAddedListener listener = new FeatureAddedListener() {
 			public void onFeatureAdded(VectorFeature vf) {
-				org.gwtopenmaps.openlayers.client.geometry.Polygon aoe = org.gwtopenmaps.openlayers.client.geometry.Polygon
-						.narrowToPolygon(vf.getGeometry().getJSObject());
-
-				aoe.transform(new Projection("EPSG:900913"), new Projection(
-						"EPSG:4326"));
-
-				System.out.println("GEOMETRY ************ " + aoe.toString());
-
-				// Dispatcher.forwardEvent(DGWATCHEvents.INJECT_WKT,
-				// aoi.toString());
-				//
-				// Dispatcher.forwardEvent(DGWATCHEvents.DISABLE_DRAW_BUTTON);
+				
+				Dispatcher.forwardEvent(MapWidgetEvents.INJECT_WKT, vf);
+				
 			}
 		};
 
@@ -197,6 +192,38 @@ public class MapLayoutWidget extends LayoutContainer {
 		LonLat center = new LonLat(13.375, 42.329);
 		center.transform("EPSG:4326", "EPSG:900913");
 		this.map.setCenter(center, 5);
+	}
+
+	/**
+	 * Draw AOE on the Map
+	 * 
+	 * @param wkt
+	 */
+	public void drawAoeOnMap(String wkt) {
+		this.eraseFeatures();
+		MultiPolygon geom = MultiPolygon.narrowToMultiPolygon(Geometry.fromWKT(
+				wkt).getJSObject());
+		geom.transform(new Projection("EPSG:4326"), new Projection(
+				"EPSG:900913"));
+		VectorFeature vectorFeature = new VectorFeature(geom);
+		this.vector.addFeature(vectorFeature);
+		this.map.zoomToExtent(geom.getBounds());
+	}
+
+	/**
+	 * Erase all Features added to Vector Layer
+	 */
+	public void eraseFeatures() {
+		this.vector.destroyFeatures();
+	}
+
+	/**
+	 * Erase Single Feature from the Map
+	 * 
+	 * @param vf
+	 */
+	public void eraseFeature(VectorFeature vf) {
+		this.vector.removeFeature(vf);
 	}
 
 	/**

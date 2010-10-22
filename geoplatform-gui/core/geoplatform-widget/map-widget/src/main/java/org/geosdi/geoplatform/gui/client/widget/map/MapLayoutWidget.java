@@ -150,9 +150,9 @@ public class MapLayoutWidget extends LayoutContainer {
 	private void initDrawFeatures() {
 		FeatureAddedListener listener = new FeatureAddedListener() {
 			public void onFeatureAdded(VectorFeature vf) {
-				
+
 				Dispatcher.forwardEvent(MapWidgetEvents.INJECT_WKT, vf);
-				
+
 			}
 		};
 
@@ -165,6 +165,10 @@ public class MapLayoutWidget extends LayoutContainer {
 		this.map.addControl(this.drawPolygon);
 	}
 
+	/**
+	 * 
+	 * @return Style
+	 */
 	private Style createStyle() {
 		Style style = new Style();
 		style.setStrokeColor("#000000");
@@ -176,6 +180,11 @@ public class MapLayoutWidget extends LayoutContainer {
 		return style;
 	}
 
+	/**
+	 * Add Map to the ContentPanel passed from Dispatcher
+	 * 
+	 * @param center
+	 */
 	public void onAddToCenterPanel(ContentPanel center) {
 		this.center = center;
 		center.add(mapWidget);

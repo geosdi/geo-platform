@@ -59,14 +59,30 @@ public abstract class GeoPlatformFormWidget<T extends GeoPlatformBeanModel>
 	protected T entity;
 
 	protected SaveStaus saveStatus;
+	private boolean initialized;
 
 	/**
-	 * Construnctor
+	 * Param lazy specifies whether the component should be initialized
+	 * at creation
+	 * 
+	 * @param initialized
 	 */
-	public GeoPlatformFormWidget() {
-		this.initializeWindow();
-		this.initializeFormPanel();
-		this.add(this.formPanel);
+	public GeoPlatformFormWidget(boolean lazy) {
+		if (!lazy){
+			init();
+		}	
+	}
+
+	/**
+	 * Init the Widget
+	 */
+	public void init() {
+		if (!isInitialized()) {
+			this.initializeWindow();
+			this.initializeFormPanel();
+			this.add(this.formPanel);
+			this.initialized = true;
+		}
 	}
 
 	private void initializeWindow() {
@@ -118,6 +134,15 @@ public abstract class GeoPlatformFormWidget<T extends GeoPlatformBeanModel>
 	 */
 	public T getEntity() {
 		return entity;
+	}
+
+	/**
+	 * Specifies the state of the component initialization
+	 * 
+	 * @return the initialized
+	 */
+	public boolean isInitialized() {
+		return initialized;
 	}
 
 }

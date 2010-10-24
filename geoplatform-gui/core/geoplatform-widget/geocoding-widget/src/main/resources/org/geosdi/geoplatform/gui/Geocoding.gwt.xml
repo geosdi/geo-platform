@@ -4,7 +4,7 @@
 
 	<entry-point class='org.geosdi.geoplatform.gui.client.Geocoding' />
 
-	<!-- servlet path="/GeocodingRemote" class="org.geosdi.selex.ramp.server.GeocodingRemoteImpl" 
-		/ -->
+	<servlet path="/GeocodingRemote"
+		class="org.geosdi.geoplatform.gui.server.gwt.GeocodingRemoteImpl" />
 
 </module>

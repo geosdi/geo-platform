@@ -8,23 +8,13 @@
 	default-autowire="byName">
 
 	<context:annotation-config />
-	
-	<bean name="geoPlatform"
-		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory">
-		<property name="text" value="GEO-Platforn" />
+
+	<bean name="geocoding"
+		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+		<property name="id" value="geocoding" />
+		<property name="text" value="Geocoding" />
 		<property name="enabled" value="true" />
 		<property name="order" value="10" />
-		<property name="tools">
-			<list>
-				<bean name="aboutGeoPlatform"
-					class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
-					<property name="id" value="aboutGeoPlatform" />
-					<property name="text" value="About" />
-					<property name="enabled" value="true" />
-					<property name="order" value="10" />
-				</bean>
-			</list>
-		</property>
 	</bean>
 
 </beans>

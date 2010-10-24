@@ -1,0 +1,10 @@
+<module>
+
+	<source path="client" />
+
+	<entry-point class='org.geosdi.geoplatform.gui.client.Geocoding' />
+
+	<!-- servlet path="/GeocodingRemote" class="org.geosdi.selex.ramp.server.GeocodingRemoteImpl" 
+		/ -->
+
+</module>

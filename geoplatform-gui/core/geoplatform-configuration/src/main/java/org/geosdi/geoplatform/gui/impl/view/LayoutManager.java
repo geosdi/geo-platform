@@ -33,90 +33,84 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.mvc;
+package org.geosdi.geoplatform.gui.impl.view;
 
-import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
-import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
-import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.geosdi.geoplatform.gui.view.GeoPlatformLayoutManager;
 
-import com.extjs.gxt.ui.client.mvc.AppEvent;
-import com.extjs.gxt.ui.client.mvc.Controller;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author giuseppe
  * 
  */
-public class MapView extends GeoPlatformView {
+public class LayoutManager extends GeoPlatformLayoutManager {
 
-	private MapLayoutWidget mapLayout;
+	private static LayoutManager INSTANCE;
 
-	private ButtonBar buttonBar;
-
-	public MapView(Controller controller) {
-		super(controller);
-
-		this.mapLayout = new MapLayoutWidget();
-	}
-
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Build Singleton Instace
 	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.mvc.View#handleEvent(com.extjs.gxt.ui.client.
-	 * mvc.AppEvent)
+	 * @return Instance Reference
 	 */
-	@Override
-	protected void handleEvent(AppEvent event) {
-		if (event.getType() == MapWidgetEvents.ATTACH_MAP_WIDGET)
-			this.mapLayout.onAddToCenterPanel();
-
-		if (event.getType() == MapWidgetEvents.ATTACH_TOOLBAR)
-			onAttachToolbar(event);
-
+	public static LayoutManager get() {
+		if (INSTANCE == null)
+			INSTANCE = new LayoutManager();
+		return INSTANCE;
 	}
 
 	/**
-	 * Activate Draw Control on Map
-	 */
-	public void deactivateDrawControl() {
-		// TODO Auto-generated method stub
-		this.mapLayout.deactivateDrawFeature();
-	}
-
-	/**
-	 * Deactivate Draw Control on Map
-	 */
-	public void activateDrawControl() {
-		// TODO Auto-generated method stub
-		this.mapLayout.activateDrawFeature();
-	}
-
-	/**
-	 * Attach GeoPlatform Toolbar to a ContentPanel inject with Dispatcher
+	 * Add a generic Widget to Center
 	 * 
-	 * @param event
+	 * @param Widget
+	 *            w
 	 */
-	private void onAttachToolbar(AppEvent event) {
-		mapLayout.setTools(GeoPlatformUtils.getInstance()
-				.getGlobalConfiguration().getToolbarClientTool()
-				.getClientTools());
-
-		this.buttonBar = new ButtonBar(mapLayout);
-
-		LayoutManager.addComponentToNorth(buttonBar.getToolBar());
+	public static void addComponentToCenter(Widget w) {
+		get().center.add(w);
+		get().center.layout();
 	}
 
 	/**
-	 * Erase single Feature in MapLayout Vector Layer
+	 * Add a generic Widget to West
 	 * 
-	 * @param event
+	 * @param Widget
+	 *            w
 	 */
-	public void eraseFeature(VectorFeature vf) {
-		this.mapLayout.eraseFeature(vf);
+	public static void addComponentToWest(Widget w) {
+		get().west.add(w);
+		get().west.layout();
+	}
+
+	/**
+	 * Add a generic Widget to East
+	 * 
+	 * @param Widget
+	 *            w
+	 */
+	public static void addComponentToEast(Widget w) {
+		get().east.add(w);
+		get().east.layout();
+	}
+
+	/**
+	 * Add a generic Widget to North
+	 * 
+	 * @param Widget
+	 *            w
+	 */
+	public static void addComponentToNorth(Widget w) {
+		get().north.add(w);
+		get().north.layout();
+	}
+
+	/**
+	 * Add a generic Widget to South
+	 * 
+	 * @param Widget
+	 *            w
+	 */
+	public static void addComponentToSouth(Widget w) {
+		get().south.add(w);
+		get().south.layout();
 	}
 
 }

@@ -40,6 +40,7 @@ import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.Map;
@@ -80,7 +81,6 @@ public class MapLayoutWidget extends LayoutContainer {
 	private Map map;
 	private Layer layer;
 	private Layer osm;
-	private ContentPanel center;
 
 	private List<GenericClientTool> tools;
 
@@ -185,10 +185,8 @@ public class MapLayoutWidget extends LayoutContainer {
 	 * 
 	 * @param center
 	 */
-	public void onAddToCenterPanel(ContentPanel center) {
-		this.center = center;
-		center.add(mapWidget);
-		center.layout();
+	public void onAddToCenterPanel() {
+		LayoutManager.addComponentToCenter(mapWidget);
 
 		setMapCenter();
 	}
@@ -251,7 +249,7 @@ public class MapLayoutWidget extends LayoutContainer {
 
 	public void updateMapSize() {
 		this.map.updateSize();
-		this.center.layout();
+		LayoutManager.get().getCenter().layout();
 	}
 
 	/**

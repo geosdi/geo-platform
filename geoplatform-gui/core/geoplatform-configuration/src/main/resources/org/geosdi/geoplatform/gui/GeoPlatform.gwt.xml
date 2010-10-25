@@ -8,6 +8,7 @@
 	<source path="global" />
 	<source path="model" />
 	<source path="service" />
+	<source path="view" />
 	<source path="action" />
 	<source path="impl" />
 	<source path="utility" />

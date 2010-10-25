@@ -224,6 +224,11 @@
 		    <!-- =========================================================== -->
             <dependency>
                 <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
                 <artifactId>spring</artifactId>
                 <version>${spring-version}</version>
             </dependency>
@@ -236,6 +241,12 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-beans</artifactId>
+                <version>${spring-version}</version>
+<!--                <scope>provided</scope>-->
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-asm</artifactId>
                 <version>${spring-version}</version>
 <!--                <scope>provided</scope>-->
             </dependency>
@@ -258,31 +269,20 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-web</artifactId>
-                <version>${spring-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-expression</artifactId>
-                <version>${spring-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
                 <artifactId>spring-context-support</artifactId>
                 <version>${spring-version}</version>
             </dependency>
-            <dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-asm</artifactId>
-				<version>${spring-version}</version>
-			</dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-jdbc</artifactId>
                 <version>${spring-version}</version>
 <!--                <scope>provided</scope>-->
             </dependency>
-
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-orm</artifactId>

@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 import java.util.List;
 
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.DateMenuClientTool;
@@ -135,7 +137,10 @@ public class MenuBarWidget {
 	 */
 	public void addMenuItem(MenuBarClientTool tool, Menu menu) {
 		// TODO Auto-generated method stub
+		MenuAction action = MenuActionRegistar.get(tool.getId());
 		MenuItem item = new MenuItem(tool.getText());
+		if (action != null)
+			item.addSelectionListener(action);
 		menu.add(item);
 	}
 

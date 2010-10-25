@@ -92,7 +92,7 @@ public abstract class GeoPlatformLayoutManager {
 	 * Create West Panel in Main UI
 	 */
 	private void createWest() {
-		BorderLayoutData data = new BorderLayoutData(LayoutRegion.WEST, 150);
+		BorderLayoutData data = new BorderLayoutData(LayoutRegion.WEST, 300);
 		data.setMargins(new Margins(5, 0, 5, 5));
 
 		west = new ContentPanel();
@@ -110,7 +110,7 @@ public abstract class GeoPlatformLayoutManager {
 	 * Create East Panel in Main UI
 	 */
 	private void createEast() {
-		BorderLayoutData data = new BorderLayoutData(LayoutRegion.EAST, 150);
+		BorderLayoutData data = new BorderLayoutData(LayoutRegion.EAST, 300);
 		data.setMargins(new Margins(5, 0, 5, 5));
 
 		east = new ContentPanel();

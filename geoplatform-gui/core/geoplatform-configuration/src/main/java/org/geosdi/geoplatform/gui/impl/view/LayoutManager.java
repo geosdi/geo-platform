@@ -113,4 +113,16 @@ public class LayoutManager extends GeoPlatformLayoutManager {
 		get().south.layout();
 	}
 
+	/**
+	 * Show or Hide West panel
+	 * 
+	 * @param visible
+	 */
+	public static void manageWest(boolean visible) {
+		if (visible)
+			get().west.show();
+		else
+			get().west.hide();
+	}
+
 }

@@ -33,78 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.mvc;
+package org.geosdi.geoplatform.gui.client.action;
 
-import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.client.GeocodingEvents;
 
-import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 
 /**
  * @author giuseppe
  * 
  */
-public class MapController extends GeoPlatformController {
+public class GeocodingMenuAction extends MenuAction {
 
-	public MapController() {
-		registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_TOOLBAR,
-				MapWidgetEvents.ACTIVATE_DRAW_CONTROL,
-				MapWidgetEvents.DEACTIVATE_DRAW_CONTROL,
-				MapWidgetEvents.ERASE_FEATURE);
-	}
-
-	@Override
-	public void initialize() {
-		this.view = new MapView(this);
+	public GeocodingMenuAction() {
+		super("Geocoding", null);
+		// TODO Auto-generated constructor stub
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client
-	 * .mvc.AppEvent)
+	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+	 * .extjs.gxt.ui.client.event.ComponentEvent)
 	 */
 	@Override
-	public void handleEvent(AppEvent event) {
-		if (event.getType() == MapWidgetEvents.ACTIVATE_DRAW_CONTROL)
-			onActivateDrawControl();
-
-		if (event.getType() == MapWidgetEvents.DEACTIVATE_DRAW_CONTROL)
-			onDeactivateDrawControl();
-
-		if (event.getType() == MapWidgetEvents.ERASE_FEATURE)
-			onEraseFeature(event);
-
-		forwardToView(view, event);
-	}
-
-	/**
-	 * 
-	 * @param event
-	 */
-	private void onEraseFeature(AppEvent event) {
+	public void componentSelected(MenuEvent ce) {
 		// TODO Auto-generated method stub
-		((MapView) this.view).eraseFeature((VectorFeature) event.getData());
-	}
-
-	/**
-	 * 
-	 */
-	private void onDeactivateDrawControl() {
-		// TODO Auto-generated method stub
-		((MapView) this.view).deactivateDrawControl();
-	}
-
-	/**
-	 * 
-	 */
-	private void onActivateDrawControl() {
-		// TODO Auto-generated method stub
-		((MapView) this.view).activateDrawControl();
+		Dispatcher.forwardEvent(GeocodingEvents.SHOW_GEOCODING_WIDGET);
 	}
 
 }

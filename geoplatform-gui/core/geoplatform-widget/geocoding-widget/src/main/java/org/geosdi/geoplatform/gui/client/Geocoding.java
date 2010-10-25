@@ -35,21 +35,49 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
+import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
+import org.geosdi.geoplatform.gui.client.action.GeocodingMenuAction;
+import org.geosdi.geoplatform.gui.client.mvc.GeocodingController;
+
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
 
 /**
  * @author giuseppe
- *
+ * 
  */
 public class Geocoding implements EntryPoint {
 
-	/* (non-Javadoc)
+	private Dispatcher dispatcher;
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
 	 */
 	@Override
 	public void onModuleLoad() {
 		// TODO Auto-generated method stub
+		dispatcher = Dispatcher.get();
 
+		dispatcher.addController(new GeocodingController());
+
+		addGeocodingMenuAction();
+
+		dispatcher.dispatch(GeocodingEvents.INIT_GEOCODING_WIDGET);
 	}
 
+	private void addGeocodingMenuAction() {
+		// TODO Auto-generated method stub
+		MenuActionRegistar.put("geocoding", new MenuActionCreator() {
+
+			@Override
+			public MenuAction createAction() {
+				// TODO Auto-generated method stub
+				return new GeocodingMenuAction();
+			}
+		});
+	}
 }

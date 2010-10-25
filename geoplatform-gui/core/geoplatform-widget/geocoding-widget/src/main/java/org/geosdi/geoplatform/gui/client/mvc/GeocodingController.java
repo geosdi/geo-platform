@@ -35,7 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.mvc;
 
+import org.geosdi.geoplatform.gui.client.GeocodingEvents;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
+
+import com.extjs.gxt.ui.client.mvc.AppEvent;
 
 /**
  * @author giuseppe
@@ -43,4 +46,31 @@ import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
  */
 public class GeocodingController extends GeoPlatformController {
 
+	public GeocodingController() {
+		registerEventTypes(GeocodingEvents.INIT_GEOCODING_WIDGET,
+				GeocodingEvents.SHOW_GEOCODING_WIDGET);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.extjs.gxt.ui.client.mvc.Controller#initialize()
+	 */
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+		this.view = new GeocodingView(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#
+	 * handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
+	 */
+	@Override
+	public void handleEvent(AppEvent event) {
+		// TODO Auto-generated method stub
+		super.handleEvent(event);
+	}
 }

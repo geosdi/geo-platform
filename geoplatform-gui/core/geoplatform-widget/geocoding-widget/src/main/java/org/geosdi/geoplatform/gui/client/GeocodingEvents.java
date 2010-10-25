@@ -33,78 +33,18 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.mvc;
+package org.geosdi.geoplatform.gui.client;
 
-import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-
-import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.event.EventType;
 
 /**
  * @author giuseppe
  * 
  */
-public class MapController extends GeoPlatformController {
+public class GeocodingEvents {
 
-	public MapController() {
-		registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_TOOLBAR,
-				MapWidgetEvents.ACTIVATE_DRAW_CONTROL,
-				MapWidgetEvents.DEACTIVATE_DRAW_CONTROL,
-				MapWidgetEvents.ERASE_FEATURE);
-	}
+	public static final EventType INIT_GEOCODING_WIDGET = new EventType();
 
-	@Override
-	public void initialize() {
-		this.view = new MapView(this);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client
-	 * .mvc.AppEvent)
-	 */
-	@Override
-	public void handleEvent(AppEvent event) {
-		if (event.getType() == MapWidgetEvents.ACTIVATE_DRAW_CONTROL)
-			onActivateDrawControl();
-
-		if (event.getType() == MapWidgetEvents.DEACTIVATE_DRAW_CONTROL)
-			onDeactivateDrawControl();
-
-		if (event.getType() == MapWidgetEvents.ERASE_FEATURE)
-			onEraseFeature(event);
-
-		forwardToView(view, event);
-	}
-
-	/**
-	 * 
-	 * @param event
-	 */
-	private void onEraseFeature(AppEvent event) {
-		// TODO Auto-generated method stub
-		((MapView) this.view).eraseFeature((VectorFeature) event.getData());
-	}
-
-	/**
-	 * 
-	 */
-	private void onDeactivateDrawControl() {
-		// TODO Auto-generated method stub
-		((MapView) this.view).deactivateDrawControl();
-	}
-
-	/**
-	 * 
-	 */
-	private void onActivateDrawControl() {
-		// TODO Auto-generated method stub
-		((MapView) this.view).activateDrawControl();
-	}
+	public static final EventType SHOW_GEOCODING_WIDGET = new EventType();
 
 }

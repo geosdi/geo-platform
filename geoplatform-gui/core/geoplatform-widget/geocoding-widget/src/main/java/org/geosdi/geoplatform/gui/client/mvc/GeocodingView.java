@@ -35,19 +35,41 @@
  */
 package org.geosdi.geoplatform.gui.client.mvc;
 
+import org.geosdi.geoplatform.gui.client.GeocodingEvents;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
+import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 
 /**
  * @author giuseppe
- *
+ * 
  */
 public class GeocodingView extends GeoPlatformView {
 
 	public GeocodingView(Controller controller) {
 		super(controller);
 		// TODO Auto-generated constructor stub
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent
+	 * (com.extjs.gxt.ui.client.mvc.AppEvent)
+	 */
+	@Override
+	protected void handleEvent(AppEvent event) {
+		// TODO Auto-generated method stub
+		if (event.getType() == GeocodingEvents.SHOW_GEOCODING_WIDGET)
+			onShowGeocodingWidget();
+	}
+
+	private void onShowGeocodingWidget() {
+		// TODO Auto-generated method stub
+		LayoutManager.manageWest(true);
 	}
 
 }

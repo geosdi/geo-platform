@@ -10,5 +10,7 @@
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 
     <!-- MAPPING MODEL RESOURCES -->
+    	<mapping  class="org.geosdi.geoplatform.core.model.GPUser"/>
+    
     </session-factory>
 </hibernate-configuration>

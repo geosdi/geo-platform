@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.mvc;
 
 import org.geosdi.geoplatform.gui.client.GeocodingEvents;
+import org.geosdi.geoplatform.gui.client.widget.GeocodingManagementWidget;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
@@ -48,9 +49,14 @@ import com.extjs.gxt.ui.client.mvc.Controller;
  */
 public class GeocodingView extends GeoPlatformView {
 
+	private GeocodingManagementWidget geocodingManagement;
+
 	public GeocodingView(Controller controller) {
 		super(controller);
 		// TODO Auto-generated constructor stub
+		this.geocodingManagement = new GeocodingManagementWidget();
+		
+		LayoutManager.addComponentToWest(geocodingManagement);
 	}
 
 	/*
@@ -69,7 +75,8 @@ public class GeocodingView extends GeoPlatformView {
 
 	private void onShowGeocodingWidget() {
 		// TODO Auto-generated method stub
-		LayoutManager.manageWest(true);
+		if (!LayoutManager.isWestVisible())
+			LayoutManager.manageWest(true);
 	}
 
 }

@@ -91,6 +91,11 @@
 			<classifier>sources</classifier>
 		</dependency>
 
+		<dependency>
+			<groupId>org.geosdi</groupId>
+			<artifactId>basic-widget</artifactId>
+		</dependency>
+
 		<!-- SPRING -->
 		<dependency>
 			<groupId>org.springframework</groupId>

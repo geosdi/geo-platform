@@ -33,105 +33,73 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.view;
+package org.geosdi.geoplatform.gui.client.widget.grid;
 
-import org.geosdi.geoplatform.gui.view.GeoPlatformLayoutManager;
+import java.util.List;
 
-import com.google.gwt.user.client.ui.Widget;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+
+import com.extjs.gxt.ui.client.Style.SelectionMode;
+import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
+import com.extjs.gxt.ui.client.widget.grid.Grid;
 
 /**
  * @author giuseppe
  * 
  */
-public class LayoutManager extends GeoPlatformLayoutManager {
+public abstract class GeoPlatformGridWidget<T extends GeoPlatformBeanModel> {
 
-	private static LayoutManager INSTANCE;
+	protected ListStore<T> store;
+	protected Grid<T> grid;
 
 	/**
-	 * Build Singleton Instace
-	 * 
-	 * @return Instance Reference
+	 * Default Constructor
 	 */
-	public static LayoutManager get() {
-		if (INSTANCE == null)
-			INSTANCE = new LayoutManager();
-		return INSTANCE;
+	public GeoPlatformGridWidget() {
+		createStore();
+		initGrid();
 	}
 
 	/**
-	 * Add a generic Widget to Center
 	 * 
-	 * @param Widget
-	 *            w
+	 * @param models
+	 *            Beans Model to fill the Store
 	 */
-	public static void addComponentToCenter(Widget w) {
-		get().center.add(w);
-		get().center.layout();
+	public GeoPlatformGridWidget(List<T> models) {
+		createStore();
+		this.store.add(models);
+		initGrid();
+	}
+
+	private void initGrid() {
+		ColumnModel cm = prepareColumnModel();
+
+		grid = new Grid<T>(store, cm);
+		grid.setBorders(true);
+
+		grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+		setGridProperties();
+	}
+
+	public abstract void setGridProperties();
+
+	public abstract ColumnModel prepareColumnModel();
+
+	public abstract void createStore();
+
+	/**
+	 * @return the store
+	 */
+	public ListStore<T> getStore() {
+		return store;
 	}
 
 	/**
-	 * Add a generic Widget to West
-	 * 
-	 * @param Widget
-	 *            w
+	 * @return the grid
 	 */
-	public static void addComponentToWest(Widget w) {
-		get().west.add(w);
-		get().west.layout();
+	public Grid<T> getGrid() {
+		return grid;
 	}
-
-	/**
-	 * Add a generic Widget to East
-	 * 
-	 * @param Widget
-	 *            w
-	 */
-	public static void addComponentToEast(Widget w) {
-		get().east.add(w);
-		get().east.layout();
-	}
-
-	/**
-	 * Add a generic Widget to North
-	 * 
-	 * @param Widget
-	 *            w
-	 */
-	public static void addComponentToNorth(Widget w) {
-		get().north.add(w);
-		get().north.layout();
-	}
-
-	/**
-	 * Add a generic Widget to South
-	 * 
-	 * @param Widget
-	 *            w
-	 */
-	public static void addComponentToSouth(Widget w) {
-		get().south.add(w);
-		get().south.layout();
-	}
-
-	/**
-	 * Show or Hide West panel
-	 * 
-	 * @param visible
-	 */
-	public static void manageWest(boolean visible) {
-		if (visible)
-			get().west.show();
-		else
-			get().west.hide();
-	}
-
-	/**
-	 * Check the Visibility of West Panel
-	 * 
-	 * @return boolean
-	 */
-	public static boolean isWestVisible() {
-		return get().west.isVisible();
-	}
-
 }

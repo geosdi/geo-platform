@@ -33,105 +33,38 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.view;
+package org.geosdi.geoplatform.gui.client.widget;
 
-import org.geosdi.geoplatform.gui.view.GeoPlatformLayoutManager;
-
-import com.google.gwt.user.client.ui.Widget;
+import com.extjs.gxt.ui.client.Style.Scroll;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 
 /**
  * @author giuseppe
  * 
  */
-public class LayoutManager extends GeoPlatformLayoutManager {
+public class GeocodingManagementWidget extends ContentPanel {
 
-	private static LayoutManager INSTANCE;
+	private GeocodingGridWidget geocodingGridWidget;
 
-	/**
-	 * Build Singleton Instace
-	 * 
-	 * @return Instance Reference
-	 */
-	public static LayoutManager get() {
-		if (INSTANCE == null)
-			INSTANCE = new LayoutManager();
-		return INSTANCE;
+	public GeocodingManagementWidget() {
+		setHeading("Geocoding Widget");
+		setLayout(new FitLayout());
+
+		setLayoutOnChange(true);
+
+		this.geocodingGridWidget = new GeocodingGridWidget();
+
+		add(this.geocodingGridWidget.getFormPanel());
+
+		setScrollMode(Scroll.AUTOY);
 	}
 
 	/**
-	 * Add a generic Widget to Center
-	 * 
-	 * @param Widget
-	 *            w
+	 * @return the geocodingGridWidget
 	 */
-	public static void addComponentToCenter(Widget w) {
-		get().center.add(w);
-		get().center.layout();
-	}
-
-	/**
-	 * Add a generic Widget to West
-	 * 
-	 * @param Widget
-	 *            w
-	 */
-	public static void addComponentToWest(Widget w) {
-		get().west.add(w);
-		get().west.layout();
-	}
-
-	/**
-	 * Add a generic Widget to East
-	 * 
-	 * @param Widget
-	 *            w
-	 */
-	public static void addComponentToEast(Widget w) {
-		get().east.add(w);
-		get().east.layout();
-	}
-
-	/**
-	 * Add a generic Widget to North
-	 * 
-	 * @param Widget
-	 *            w
-	 */
-	public static void addComponentToNorth(Widget w) {
-		get().north.add(w);
-		get().north.layout();
-	}
-
-	/**
-	 * Add a generic Widget to South
-	 * 
-	 * @param Widget
-	 *            w
-	 */
-	public static void addComponentToSouth(Widget w) {
-		get().south.add(w);
-		get().south.layout();
-	}
-
-	/**
-	 * Show or Hide West panel
-	 * 
-	 * @param visible
-	 */
-	public static void manageWest(boolean visible) {
-		if (visible)
-			get().west.show();
-		else
-			get().west.hide();
-	}
-
-	/**
-	 * Check the Visibility of West Panel
-	 * 
-	 * @return boolean
-	 */
-	public static boolean isWestVisible() {
-		return get().west.isVisible();
+	public GeocodingGridWidget getGeocodingGridWidget() {
+		return geocodingGridWidget;
 	}
 
 }

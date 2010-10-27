@@ -84,7 +84,7 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
 		searchFieldSet.setHeading("Search");
 
 		FormLayout layout = new FormLayout();
-		layout.setLabelWidth(60);
+		layout.setLabelWidth(40);
 		searchFieldSet.setLayout(layout);
 
 		search = new TextField<String>();
@@ -119,8 +119,6 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
 		FieldSet locations = new FieldSet();
 		locations.setHeading("Locations");
 		locations.setCollapsible(true);
-//		locations.setWidth(300);
-//		locations.setHeight(300);
 
 		locations.add(this.grid);
 
@@ -205,5 +203,4 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
 	public FormPanel getFormPanel() {
 		return formPanel;
 	}
-
 }

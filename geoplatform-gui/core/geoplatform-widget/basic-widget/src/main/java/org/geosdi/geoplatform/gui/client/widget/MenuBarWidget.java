@@ -178,9 +178,13 @@ public class MenuBarWidget {
 	 */
 	public void addCheckMenuItem(CheckMenuClientTool tool, Menu menu) {
 		// TODO Auto-generated method stub
-		/** HERE THE CODE FOR ACTION REGISTERED IN MenuActionRegistar **/
+		MenuAction action = MenuActionRegistar.get(tool.getId());
+		action.setId(tool.getId());
 		CheckMenuItem item = new CheckMenuItem(tool.getText());
+		item.setItemId(action.getId());
 		item.setChecked(tool.isChecked());
+		if (action != null)
+			item.addSelectionListener(action);
 		menu.add(item);
 	}
 

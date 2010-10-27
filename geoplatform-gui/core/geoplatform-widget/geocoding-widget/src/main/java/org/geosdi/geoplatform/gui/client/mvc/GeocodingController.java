@@ -48,7 +48,8 @@ public class GeocodingController extends GeoPlatformController {
 
 	public GeocodingController() {
 		registerEventTypes(GeocodingEvents.INIT_GEOCODING_WIDGET,
-				GeocodingEvents.SHOW_GEOCODING_WIDGET);
+				GeocodingEvents.SHOW_GEOCODING_WIDGET,
+				GeocodingEvents.HIDE_GEOCODING_WIDGET);
 	}
 
 	/*

@@ -46,5 +46,7 @@ public class GeocodingEvents {
 	public static final EventType INIT_GEOCODING_WIDGET = new EventType();
 
 	public static final EventType SHOW_GEOCODING_WIDGET = new EventType();
+	
+	public static final EventType HIDE_GEOCODING_WIDGET = new EventType();
 
 }

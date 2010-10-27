@@ -92,14 +92,14 @@ public abstract class GeoPlatformLayoutManager {
 	 * Create West Panel in Main UI
 	 */
 	private void createWest() {
-		BorderLayoutData data = new BorderLayoutData(LayoutRegion.WEST, 400);
+		BorderLayoutData data = new BorderLayoutData(LayoutRegion.WEST, 300);
 		data.setMargins(new Margins(5, 0, 5, 5));
 
 		west = new ContentPanel();
 		west.setHeaderVisible(false);
 		west.setBodyBorder(false);
 		west.setLayout(new AccordionLayout());
-		west.setScrollMode(Scroll.AUTO);
+		west.setScrollMode(Scroll.NONE);
 		
 		west.hide();
 
@@ -117,7 +117,7 @@ public abstract class GeoPlatformLayoutManager {
 		east.setHeaderVisible(false);
 		east.setBodyBorder(false);
 		east.setLayout(new AccordionLayout());
-		east.setScrollMode(Scroll.AUTO);
+		east.setScrollMode(Scroll.NONE);
 		
 		east.hide();
 

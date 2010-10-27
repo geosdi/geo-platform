@@ -55,8 +55,8 @@ public class GeocodingView extends GeoPlatformView {
 		super(controller);
 		// TODO Auto-generated constructor stub
 		this.geocodingManagement = new GeocodingManagementWidget();
-		
-		LayoutManager.addComponentToWest(geocodingManagement);
+
+		addComponentToWest();
 	}
 
 	/*
@@ -71,12 +71,35 @@ public class GeocodingView extends GeoPlatformView {
 		// TODO Auto-generated method stub
 		if (event.getType() == GeocodingEvents.SHOW_GEOCODING_WIDGET)
 			onShowGeocodingWidget();
+
+		if (event.getType() == GeocodingEvents.HIDE_GEOCODING_WIDGET)
+			onHideGeocodingWidget();
 	}
 
+	/**
+	 * Hide Geocoding Widget
+	 */
+	private void onHideGeocodingWidget() {
+		// TODO Auto-generated method stub
+		this.geocodingManagement.hide();
+	}
+
+	/**
+	 * Show Geocoding Widget
+	 */
 	private void onShowGeocodingWidget() {
 		// TODO Auto-generated method stub
 		if (!LayoutManager.isWestVisible())
 			LayoutManager.manageWest(true);
+		this.geocodingManagement.show();
+	}
+
+	/**
+	 * Attach Geocoding Widget to the West ContentPanel
+	 */
+	private void addComponentToWest() {
+		// TODO Auto-generated method stub
+		LayoutManager.addComponentToWest(geocodingManagement);
 	}
 
 }

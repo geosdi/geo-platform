@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style.Scroll;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.WidgetListener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 
@@ -56,6 +58,15 @@ public class GeocodingManagementWidget extends ContentPanel {
 		this.geocodingGridWidget = new GeocodingGridWidget();
 
 		add(this.geocodingGridWidget.getFormPanel());
+
+		addWidgetListener(new WidgetListener() {
+			@Override
+			public void widgetResized(ComponentEvent ce) {
+				if (getHeight() > 0)
+					geocodingGridWidget.getGrid().setHeight(getHeight() - 165);
+
+			}
+		});
 
 		setScrollMode(Scroll.AUTOY);
 	}

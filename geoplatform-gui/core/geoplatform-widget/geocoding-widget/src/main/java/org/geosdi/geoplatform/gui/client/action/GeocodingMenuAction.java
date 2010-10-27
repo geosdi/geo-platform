@@ -40,6 +40,8 @@ import org.geosdi.geoplatform.gui.client.GeocodingEvents;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.widget.menu.CheckMenuItem;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
 
 /**
  * @author giuseppe
@@ -62,7 +64,13 @@ public class GeocodingMenuAction extends MenuAction {
 	@Override
 	public void componentSelected(MenuEvent ce) {
 		// TODO Auto-generated method stub
-		Dispatcher.forwardEvent(GeocodingEvents.SHOW_GEOCODING_WIDGET);
+		CheckMenuItem item = (CheckMenuItem) ((Menu) ce.getSource())
+				.getItemByItemId(super.getId());
+
+		if (item.isChecked())
+			Dispatcher.forwardEvent(GeocodingEvents.SHOW_GEOCODING_WIDGET);
+		else
+			Dispatcher.forwardEvent(GeocodingEvents.HIDE_GEOCODING_WIDGET);
 	}
 
 }

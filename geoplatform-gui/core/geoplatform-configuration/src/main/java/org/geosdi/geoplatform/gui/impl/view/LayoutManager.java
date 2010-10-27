@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.impl.view;
 
 import org.geosdi.geoplatform.gui.view.GeoPlatformLayoutManager;
 
+import com.extjs.gxt.ui.client.widget.Component;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -132,6 +133,19 @@ public class LayoutManager extends GeoPlatformLayoutManager {
 	 */
 	public static boolean isWestVisible() {
 		return get().west.isVisible();
+	}
+
+	/**
+	 * Check If always one Widget is visible on West
+	 * 
+	 * @return boolean
+	 */
+	public static boolean isOneWidgetVisibleAtWest() {
+		for (Component c : get().west.getItems()) {
+			if (c.isVisible())
+				return true;
+		}
+		return false;
 	}
 
 }

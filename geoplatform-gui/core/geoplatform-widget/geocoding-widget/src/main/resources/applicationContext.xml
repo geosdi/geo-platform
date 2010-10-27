@@ -10,9 +10,10 @@
 	<context:annotation-config />
 
 	<bean name="geocoding"
-		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+		class="org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool">
 		<property name="id" value="geocoding" />
 		<property name="text" value="Geocoding" />
+		<property name="checked" value="false" />
 		<property name="enabled" value="true" />
 		<property name="order" value="10" />
 	</bean>

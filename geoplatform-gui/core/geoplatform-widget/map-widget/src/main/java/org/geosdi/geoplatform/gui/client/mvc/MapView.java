@@ -119,4 +119,11 @@ public class MapView extends GeoPlatformView {
 		this.mapLayout.eraseFeature(vf);
 	}
 
+	/**
+	 * Update Map Size
+	 */
+	public void updateMapSize() {
+		this.mapLayout.updateMapSize();
+	}
+
 }

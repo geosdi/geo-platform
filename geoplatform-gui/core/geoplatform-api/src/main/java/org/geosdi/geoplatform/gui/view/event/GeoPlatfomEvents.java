@@ -33,75 +33,16 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.mvc;
+package org.geosdi.geoplatform.gui.view.event;
 
-import org.geosdi.geoplatform.gui.client.GeocodingEvents;
-import org.geosdi.geoplatform.gui.client.widget.GeocodingManagementWidget;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-
-import com.extjs.gxt.ui.client.mvc.AppEvent;
-import com.extjs.gxt.ui.client.mvc.Controller;
+import com.extjs.gxt.ui.client.event.EventType;
 
 /**
  * @author giuseppe
  * 
  */
-public class GeocodingView extends GeoPlatformView {
+public class GeoPlatfomEvents {
 
-	private GeocodingManagementWidget geocodingManagement;
-
-	public GeocodingView(Controller controller) {
-		super(controller);
-		// TODO Auto-generated constructor stub
-		this.geocodingManagement = new GeocodingManagementWidget();
-
-		addComponentToWest();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent
-	 * (com.extjs.gxt.ui.client.mvc.AppEvent)
-	 */
-	@Override
-	protected void handleEvent(AppEvent event) {
-		// TODO Auto-generated method stub
-		if (event.getType() == GeocodingEvents.SHOW_GEOCODING_WIDGET)
-			onShowGeocodingWidget();
-
-		if (event.getType() == GeocodingEvents.HIDE_GEOCODING_WIDGET)
-			onHideGeocodingWidget();
-	}
-
-	/**
-	 * Hide Geocoding Widget
-	 */
-	private void onHideGeocodingWidget() {
-		// TODO Auto-generated method stub
-		this.geocodingManagement.hide();
-		if (!LayoutManager.isOneWidgetVisibleAtWest())
-			LayoutManager.manageWest(false);
-	}
-
-	/**
-	 * Show Geocoding Widget
-	 */
-	private void onShowGeocodingWidget() {
-		// TODO Auto-generated method stub
-		if (!LayoutManager.isWestVisible())
-			LayoutManager.manageWest(true);
-		this.geocodingManagement.show();
-	}
-
-	/**
-	 * Attach Geocoding Widget to the West ContentPanel
-	 */
-	private void addComponentToWest() {
-		// TODO Auto-generated method stub
-		LayoutManager.addComponentToWest(geocodingManagement);
-	}
+	public static final EventType UPDATE_CENTER = new EventType();
 
 }

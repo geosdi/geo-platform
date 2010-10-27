@@ -247,6 +247,9 @@ public class MapLayoutWidget extends LayoutContainer {
 		return mapWidget;
 	}
 
+	/**
+	 * Update Map Size
+	 */
 	public void updateMapSize() {
 		this.map.updateSize();
 		LayoutManager.get().getCenter().layout();

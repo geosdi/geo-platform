@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.mvc;
 
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatfomEvents;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
@@ -53,7 +54,7 @@ public class MapController extends GeoPlatformController {
 				MapWidgetEvents.ATTACH_TOOLBAR,
 				MapWidgetEvents.ACTIVATE_DRAW_CONTROL,
 				MapWidgetEvents.DEACTIVATE_DRAW_CONTROL,
-				MapWidgetEvents.ERASE_FEATURE);
+				MapWidgetEvents.ERASE_FEATURE, GeoPlatfomEvents.UPDATE_CENTER);
 	}
 
 	@Override
@@ -79,6 +80,9 @@ public class MapController extends GeoPlatformController {
 		if (event.getType() == MapWidgetEvents.ERASE_FEATURE)
 			onEraseFeature(event);
 
+		if (event.getType() == GeoPlatfomEvents.UPDATE_CENTER)
+			onUpdateCenter();
+
 		forwardToView(view, event);
 	}
 
@@ -92,7 +96,7 @@ public class MapController extends GeoPlatformController {
 	}
 
 	/**
-	 * 
+	 * Deactivate Draw Control
 	 */
 	private void onDeactivateDrawControl() {
 		// TODO Auto-generated method stub
@@ -100,11 +104,18 @@ public class MapController extends GeoPlatformController {
 	}
 
 	/**
-	 * 
+	 * Activate Draw Control
 	 */
 	private void onActivateDrawControl() {
 		// TODO Auto-generated method stub
 		((MapView) this.view).activateDrawControl();
+	}
+
+	/**
+	 * Update Center Widget
+	 */
+	private void onUpdateCenter() {
+		((MapView) this.view).updateMapSize();
 	}
 
 }

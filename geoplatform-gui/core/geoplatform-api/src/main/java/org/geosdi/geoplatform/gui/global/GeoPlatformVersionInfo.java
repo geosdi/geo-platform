@@ -47,7 +47,7 @@ public class GeoPlatformVersionInfo implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -7280821322784906035L;
-	
+
 	private String name;
 	private String version;
 
@@ -81,4 +81,14 @@ public class GeoPlatformVersionInfo implements Serializable {
 		this.version = version;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "GeoPlatformVersionInfo [name=" + name + ", version=" + version
+				+ "]";
+	}
 }

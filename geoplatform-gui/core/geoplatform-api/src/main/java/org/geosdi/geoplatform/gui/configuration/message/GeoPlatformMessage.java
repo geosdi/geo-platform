@@ -35,10 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.configuration.message;
 
+import org.geosdi.geoplatform.gui.configuration.grid.IGeoPlatformGrid;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.google.gwt.user.client.Timer;
 
 /**
  * @author giuseppe
@@ -89,4 +93,42 @@ public class GeoPlatformMessage {
 		Info.display(title, message);
 	}
 
+	/**
+	 * Check GeoPlatformGridWidget Status
+	 * 
+	 * @param widget
+	 * @param title
+	 * @param message
+	 */
+	public static void checkGridWidgetStatus(
+			final IGeoPlatformGrid<GeoPlatformBeanModel> widget,
+			final String title, final String message) {
+
+		Timer timer = new Timer() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if (widget.getGrid().getView().getBody().isMasked()) {
+					MessageBox.confirm(title, message,
+							new Listener<MessageBoxEvent>() {
+
+								public void handleEvent(MessageBoxEvent be) {
+									if (be.getButtonClicked().getText()
+											.equalsIgnoreCase("yes")
+											|| be.getButtonClicked().getText()
+													.equalsIgnoreCase("si")) {
+										widget.getGrid().getView().getBody()
+												.unmask();
+										widget.getGrid().getView()
+												.refresh(false);
+									} else
+										schedule(15000);
+								}
+							});
+				}
+			}
+		};
+		timer.schedule(15000);
+	}
 }

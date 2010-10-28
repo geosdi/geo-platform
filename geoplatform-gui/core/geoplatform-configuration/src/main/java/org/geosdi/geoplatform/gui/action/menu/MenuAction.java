@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
  * @author giuseppe
@@ -45,29 +44,12 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  */
 public abstract class MenuAction extends SelectionListener<MenuEvent> {
 
-	private AbstractImagePrototype image;
 	private String title;
 	private String id;
 	private boolean enabled;
 
-	public MenuAction(String title, AbstractImagePrototype image) {
+	public MenuAction(String title) {
 		this.title = title;
-		this.image = image;
-	}
-
-	/**
-	 * @return the image
-	 */
-	public AbstractImagePrototype getImage() {
-		return image;
-	}
-
-	/**
-	 * @param image
-	 *            the image to set
-	 */
-	public void setImage(AbstractImagePrototype image) {
-		this.image = image;
 	}
 
 	/**

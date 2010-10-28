@@ -33,95 +33,72 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.global;
+package org.geosdi.geoplatform.gui.client.widget.map;
 
-import java.io.Serializable;
+import org.gwtopenmaps.openlayers.client.Icon;
+import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.Map;
+import org.gwtopenmaps.openlayers.client.Marker;
+import org.gwtopenmaps.openlayers.client.Pixel;
+import org.gwtopenmaps.openlayers.client.Size;
+import org.gwtopenmaps.openlayers.client.layer.Markers;
+import org.gwtopenmaps.openlayers.client.layer.MarkersOptions;
 
 /**
  * @author giuseppe
  * 
  */
-public class CopyrightInfo implements Serializable {
+public class MapUtility {
+
+	private Markers markerLayer;
+	private Marker marker;
+	private Icon iconMarker;
+
+	public MapUtility() {
+		buildMarkerLayer();
+		buildIconMarker();
+	}
+
+	private void buildMarkerLayer() {
+		MarkersOptions options = new MarkersOptions();
+		options.setNumZoomLevels(18);
+		options.setMaxZoomLevel(18);
+		options.setDisplayInLayerSwitcher(false);
+
+		this.markerLayer = new Markers("Map-Markers-Layer", options);
+	}
+
+	private void buildIconMarker() {
+		Size size = new Size(21, 25);
+		Pixel offset = new Pixel(-(size.getWidth() / 2), -size.getHeight());
+		this.iconMarker = new Icon("map-images/geocodmarker.png", size, offset);
+	}
 
 	/**
 	 * 
+	 * @param lonlat
+	 *            LonLat to build the marker and add to the markerLayer
 	 */
-	private static final long serialVersionUID = 3539309129736218989L;
-
-	private String key;
-	private String copyright;
-	private String licenseName;
-	private String licenseUrl;
-
-	/**
-	 * @return the key
-	 */
-	public String getKey() {
-		return key;
+	public void addMarker(LonLat lonlat, Map map) {
+		this.markerLayer.clearMarkers();
+		map.setCenter(lonlat, 16);
+		this.marker = new Marker(lonlat, this.iconMarker);
+		this.markerLayer.addMarker(this.marker);
 	}
 
 	/**
-	 * @param key
-	 *            the key to set
+	 * Remove Marker from Marker Layer
 	 */
-	public void setKey(String key) {
-		this.key = key;
+	public void removeMarker() {
+		if (this.marker != null)
+			this.markerLayer.removeMarker(this.marker);
 	}
 
 	/**
-	 * @return the copyright
+	 * @return the markerLayer
 	 */
-	public String getCopyright() {
-		return copyright;
+	public Markers getMarkerLayer() {
+		return markerLayer;
 	}
 
-	/**
-	 * @param copyright
-	 *            the copyright to set
-	 */
-	public void setCopyright(String copyright) {
-		this.copyright = copyright;
-	}
-
-	/**
-	 * @return the licenseName
-	 */
-	public String getLicenseName() {
-		return licenseName;
-	}
-
-	/**
-	 * @param licenseName
-	 *            the licenseName to set
-	 */
-	public void setLicenseName(String licenseName) {
-		this.licenseName = licenseName;
-	}
-
-	/**
-	 * @return the licenseUrl
-	 */
-	public String getLicenseUrl() {
-		return licenseUrl;
-	}
-
-	/**
-	 * @param licenseUrl
-	 *            the licenseUrl to set
-	 */
-	public void setLicenseUrl(String licenseUrl) {
-		this.licenseUrl = licenseUrl;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "CopyrightInfo [key=" + key + ", copyright=" + copyright
-				+ ", licenseName=" + licenseName + ", licenseUrl=" + licenseUrl
-				+ "]";
-	}
 }

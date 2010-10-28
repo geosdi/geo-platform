@@ -41,8 +41,8 @@ import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.action.ToolbarApplicationAction;
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
@@ -76,7 +76,7 @@ public class ButtonBar extends LayoutContainer {
 		super();
 		this.vp = new VerticalPanel();
 		this.toolBar = new ToolBar();
-//		this.toolBar.setHeight(40);
+		// this.toolBar.setHeight(40);
 		this.mapLayoutWidget = mapLayoutWidget;
 		initialize();
 	}
@@ -139,7 +139,8 @@ public class ButtonBar extends LayoutContainer {
 	private Menu createMenu(List<ActionClientTool> actionTools) {
 		Menu menu = new Menu();
 		for (ActionClientTool actionTool : actionTools) {
-			MenuAction action = MenuActionRegistar.get(actionTool.getId());
+			MenuBaseAction action = (MenuBaseAction) MenuActionRegistar
+					.get(actionTool.getId());
 			MenuItem item = new MenuItem(action.getTitle());
 			item.addSelectionListener(action);
 			item.setIcon(action.getImage());

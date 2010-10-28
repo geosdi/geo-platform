@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.geosdi.geoplatform.gui.client.GeocodingEvents;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
@@ -49,6 +50,7 @@ import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
@@ -102,8 +104,9 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
 			public void componentKeyPress(ComponentEvent event) {
 				if ((event.getKeyCode() == 13)
 						&& (!search.getValue().equals(""))) {
-					// Dispatcher.forwardEvent(AppEvents.BeginSearch, search
-					// .getValue());
+					Dispatcher.forwardEvent(
+							GeocodingEvents.BEGIN_GEOCODING_SEARCH,
+							search.getValue());
 				}
 			}
 

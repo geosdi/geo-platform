@@ -50,7 +50,7 @@ import com.extjs.gxt.ui.client.widget.menu.Menu;
 public class GeocodingMenuAction extends MenuAction {
 
 	public GeocodingMenuAction() {
-		super("Geocoding", null);
+		super("Geocoding");
 		// TODO Auto-generated constructor stub
 	}
 

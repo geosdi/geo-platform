@@ -183,6 +183,7 @@ public class MenuBarWidget {
 		CheckMenuItem item = new CheckMenuItem(tool.getText());
 		item.setItemId(action.getId());
 		item.setChecked(tool.isChecked());
+
 		if (action != null)
 			item.addSelectionListener(action);
 		menu.add(item);

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.grid;
 
 import java.util.List;
 
+import org.geosdi.geoplatform.gui.configuration.grid.IGeoPlatformGrid;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 import com.extjs.gxt.ui.client.Style.SelectionMode;
@@ -48,7 +49,8 @@ import com.extjs.gxt.ui.client.widget.grid.Grid;
  * @author giuseppe
  * 
  */
-public abstract class GeoPlatformGridWidget<T extends GeoPlatformBeanModel> {
+public abstract class GeoPlatformGridWidget<T extends GeoPlatformBeanModel>
+		implements IGeoPlatformGrid<T> {
 
 	protected ListStore<T> store;
 	protected Grid<T> grid;

@@ -38,10 +38,12 @@ package org.geosdi.geoplatform.gui.client.mvc;
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
+import org.geosdi.geoplatform.gui.client.widget.map.MapUtility;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
@@ -53,6 +55,7 @@ import com.extjs.gxt.ui.client.mvc.Controller;
 public class MapView extends GeoPlatformView {
 
 	private MapLayoutWidget mapLayout;
+	private MapUtility mapUtility;
 
 	private ButtonBar buttonBar;
 
@@ -60,6 +63,10 @@ public class MapView extends GeoPlatformView {
 		super(controller);
 
 		this.mapLayout = new MapLayoutWidget();
+	}
+
+	public void initialize() {
+		this.mapUtility = new MapUtility();
 	}
 
 	/*
@@ -71,12 +78,23 @@ public class MapView extends GeoPlatformView {
 	 */
 	@Override
 	protected void handleEvent(AppEvent event) {
+		if (event.getType() == MapWidgetEvents.INIT_MAP_WIDGET)
+			onInitMapWidget();
+
 		if (event.getType() == MapWidgetEvents.ATTACH_MAP_WIDGET)
 			this.mapLayout.onAddToCenterPanel();
 
 		if (event.getType() == MapWidgetEvents.ATTACH_TOOLBAR)
 			onAttachToolbar(event);
 
+	}
+
+	/**
+	 * Init Map Widget
+	 */
+	private void onInitMapWidget() {
+		// TODO Auto-generated method stub
+		this.addLayer(this.mapUtility.getMarkerLayer());
 	}
 
 	/**
@@ -124,6 +142,15 @@ public class MapView extends GeoPlatformView {
 	 */
 	public void updateMapSize() {
 		this.mapLayout.updateMapSize();
+	}
+
+	/**
+	 * Add Layer to the Map
+	 * 
+	 * @param layer
+	 */
+	public void addLayer(Layer layer) {
+		this.mapLayout.getMap().addLayer(layer);
 	}
 
 }

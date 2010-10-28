@@ -33,122 +33,59 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.menubar;
+package org.geosdi.geoplatform.gui.configuration.menubar.icon;
 
-import java.io.Serializable;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
  * @author giuseppe
  * 
  */
-public class MenuBarCategory implements Serializable,
-		Comparable<MenuBarCategory> {
+public class MenuIconRegistar {
+
+	private static MenuIconRegistar INSTANCE;
+	private Map<String, MenuIconCreator> registry;
+
+	public MenuIconRegistar() {
+		this.registry = new HashMap<String, MenuIconCreator>();
+	}
+
+	public static MenuIconRegistar get() {
+		if (INSTANCE == null)
+			INSTANCE = new MenuIconRegistar();
+		return INSTANCE;
+	}
 
 	/**
 	 * 
+	 * @param key
+	 * @param menuIconCreator
 	 */
-	private static final long serialVersionUID = -6392463898405375954L;
-
-	private String id;
-	private String text;
-	private boolean enabled;
-	private int order;
-
-	private List<MenuBarClientTool> tools;
-
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
+	public static void put(String key, MenuIconCreator menuIconCreator) {
+		if (key != null && menuIconCreator != null)
+			get().getRegistry().put(key, menuIconCreator);
 	}
 
 	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the text
-	 */
-	public String getText() {
-		return text;
-	}
-
-	/**
-	 * @param text
-	 *            the text to set
-	 */
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	/**
-	 * @return the enable
-	 */
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	/**
-	 * @param enable
-	 *            the enable to set
-	 */
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	/**
-	 * @return the order
-	 */
-	public int getOrder() {
-		return order;
-	}
-
-	/**
-	 * @param order
-	 *            the order to set
-	 */
-	public void setOrder(int order) {
-		this.order = order;
-	}
-
-	/**
-	 * @return the tools
-	 */
-	public List<MenuBarClientTool> getTools() {
-		return tools;
-	}
-
-	/**
-	 * @param tools
-	 *            the tools to set
-	 */
-	public void setTools(List<MenuBarClientTool> tools) {
-		Collections.sort(tools);
-		this.tools = tools;
-	}
-
-	@Override
-	public int compareTo(MenuBarCategory o) {
-		// TODO Auto-generated method stub
-		return getOrder() - o.getOrder();
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * 
-	 * @see java.lang.Object#toString()
+	 * @param key
+	 * @return Image associated to the Menu
 	 */
-	@Override
-	public String toString() {
-		return "MenuBarCategory [id=" + id + ", text=" + text + ", enabled="
-				+ enabled + ", order=" + order + ", tools=" + tools + "]";
+	public static AbstractImagePrototype get(String key) {
+		MenuIconCreator menuIconCreator = (MenuIconCreator) get().getRegistry()
+				.get(key);
+		if (menuIconCreator == null)
+			return null;
+		return menuIconCreator.createIcon();
 	}
 
+	/**
+	 * @return the registry
+	 */
+	public Map<String, MenuIconCreator> getRegistry() {
+		return registry;
+	}
 }

@@ -51,27 +51,11 @@ public class MenuBarCategory implements Serializable,
 	 */
 	private static final long serialVersionUID = -6392463898405375954L;
 
-	private String id;
 	private String text;
 	private boolean enabled;
 	private int order;
 
 	private List<MenuBarClientTool> tools;
-
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	/**
 	 * @return the text
@@ -147,8 +131,7 @@ public class MenuBarCategory implements Serializable,
 	 */
 	@Override
 	public String toString() {
-		return "MenuBarCategory [id=" + id + ", text=" + text + ", enabled="
-				+ enabled + ", order=" + order + ", tools=" + tools + "]";
+		return "MenuBarCategory [text=" + text + ", enabled=" + enabled
+				+ ", order=" + order + ", tools=" + tools + "]";
 	}
-
 }

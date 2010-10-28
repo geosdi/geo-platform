@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
- /*
+/*
  *  geo-platform
  *  Rich webgis framework
  *  http://geo-plartform.org
@@ -35,17 +33,87 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
- -->
-<persistence version="1.0" 
-    xmlns="http://java.sun.com/xml/ns/persistence"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd ">
+package org.geosdi.geoplatform.core.model;
 
-    <persistence-unit name="geoplatform" transaction-type="RESOURCE_LOCAL">
-    <!-- when adding/removing classes, please also keep aligned the src/test/resource/hibernate.cfg.xml file -->
-        <class>org.geosdi.geoplatform.core.model.GPUser</class>
-        <class>org.geosdi.geoplatform.core.model.GPFolder</class>
-        <class>org.geosdi.geoplatform.core.model.GPLayer</class>
-        <class>org.geosdi.geoplatform.core.model.GPStyle</class>
-    </persistence-unit>
-</persistence>
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+
+/**
+ * @author Francesco Izzi - geoSDI
+ * 
+ */
+@Embeddable
+public class GPBBox implements Serializable {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 2795112852068645206L;
+
+	private double minX;
+	private double minY;
+	private double maxX;
+	private double maxY;
+
+	/**
+	 * @return the minX
+	 */
+	public double getMinX() {
+		return minX;
+	}
+
+	/**
+	 * @param minX
+	 *            the minX to set
+	 */
+	public void setMinX(double minX) {
+		this.minX = minX;
+	}
+
+	/**
+	 * @return the minY
+	 */
+	public double getMinY() {
+		return minY;
+	}
+
+	/**
+	 * @param minY
+	 *            the minY to set
+	 */
+	public void setMinY(double minY) {
+		this.minY = minY;
+	}
+
+	/**
+	 * @return the maxX
+	 */
+	public double getMaxX() {
+		return maxX;
+	}
+
+	/**
+	 * @param maxX
+	 *            the maxX to set
+	 */
+	public void setMaxX(double maxX) {
+		this.maxX = maxX;
+	}
+
+	/**
+	 * @return the maxY
+	 */
+	public double getMaxY() {
+		return maxY;
+	}
+
+	/**
+	 * @param maxY
+	 *            the maxY to set
+	 */
+	public void setMaxY(double maxY) {
+		this.maxY = maxY;
+	}
+
+}

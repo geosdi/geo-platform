@@ -41,7 +41,13 @@ import java.util.List;
 import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
+import org.geosdi.geoplatform.core.dao.GPFolderDAO;
+import org.geosdi.geoplatform.core.dao.GPLayerDAO;
+import org.geosdi.geoplatform.core.dao.GPStyleDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
+import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPStyle;
 import org.geosdi.geoplatform.core.model.GPTimerName;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.junit.Test;
@@ -55,6 +61,9 @@ public abstract class BaseDAOTest extends TestCase {
 
 	protected final Logger LOGGER;
 	protected static GPUserDAO userDAO;
+	protected static GPFolderDAO folderDAO;
+	protected static GPLayerDAO layerDAO;
+	protected static GPStyleDAO styleDAO;
 
 	protected static ClassPathXmlApplicationContext ctx = null;
 
@@ -66,6 +75,9 @@ public abstract class BaseDAOTest extends TestCase {
 				String[] paths = { "applicationContext.xml" };
 				ctx = new ClassPathXmlApplicationContext(paths);
 				userDAO = (GPUserDAO) ctx.getBean("userDAO");
+				folderDAO = (GPFolderDAO) ctx.getBean("folderDAO");
+				layerDAO = (GPLayerDAO) ctx.getBean("layerDAO");
+				styleDAO = (GPStyleDAO) ctx.getBean("styleDAO");
 			}
 		}
 	}
@@ -80,11 +92,46 @@ public abstract class BaseDAOTest extends TestCase {
 	@Test
 	public void testCheckDAOs() {
 		assertNotNull(userDAO);
+		assertNotNull(folderDAO);
+		assertNotNull(layerDAO);
+		assertNotNull(styleDAO);
 	}
 
 	protected void removeAll() {
+		removeAllStyle();
+		removeAllLayer();
+		removeAllFolder();
 		removeAllUser();
 
+	}
+
+	private void removeAllFolder() {
+		List<GPFolder> folders = folderDAO.findAll();
+		for (GPFolder folder : folders) {
+			LOGGER.info("Removing " + folder);
+			boolean ret = folderDAO.remove(folder);
+			assertTrue("Old Folder not removed", ret);
+		}
+		
+	}
+
+	private void removeAllLayer() {
+		List<GPLayer> layers = layerDAO.findAll();
+		for (GPLayer layer : layers) {
+			LOGGER.info("Removing " + layer);
+			boolean ret = layerDAO.remove(layer);
+			assertTrue("Old Layer not removed", ret);
+		}
+		
+	}
+
+	private void removeAllStyle() {
+		List<GPStyle> styles = styleDAO.findAll();
+		for (GPStyle style : styles) {
+			LOGGER.info("Removing " + style);
+			boolean ret = styleDAO.remove(style);
+			assertTrue("Old Style not removed", ret);
+		}
 	}
 
 	private void removeAllUser() {

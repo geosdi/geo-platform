@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
- /*
+/*
  *  geo-platform
  *  Rich webgis framework
  *  http://geo-plartform.org
@@ -35,17 +33,46 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
- -->
-<persistence version="1.0" 
-    xmlns="http://java.sun.com/xml/ns/persistence"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd ">
+package org.geosdi.geoplatform.core.dao.impl;
 
-    <persistence-unit name="geoplatform" transaction-type="RESOURCE_LOCAL">
-    <!-- when adding/removing classes, please also keep aligned the src/test/resource/hibernate.cfg.xml file -->
-        <class>org.geosdi.geoplatform.core.model.GPUser</class>
-        <class>org.geosdi.geoplatform.core.model.GPFolder</class>
-        <class>org.geosdi.geoplatform.core.model.GPLayer</class>
-        <class>org.geosdi.geoplatform.core.model.GPStyle</class>
-    </persistence-unit>
-</persistence>
+import java.util.List;
+
+import org.geosdi.geoplatform.core.dao.GPFolderDAO;
+import org.geosdi.geoplatform.core.model.GPFolder;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.trg.search.ISearch;
+import com.trg.search.Search;
+
+/**
+ * @author Francesco Izzi - geoSDI
+ * 
+ */
+@Transactional
+public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
+		GPFolderDAO {
+	
+	@Override
+    public void persist(GPFolder... folder) {
+        super.persist(folder);
+    }
+	
+	@SuppressWarnings("unchecked")
+	@Override
+    public List<GPFolder> search(ISearch search) {
+        return super.search(search);
+    }
+	
+	@Override
+	public boolean remove(GPFolder entity) {
+		return super.remove(entity);
+	}
+
+	@Override
+	public GPFolder findByFolderName(String name) {
+		Search search = new Search();
+		search.addFilterEqual("name", name);
+		return searchUnique(search);
+	}
+
+}

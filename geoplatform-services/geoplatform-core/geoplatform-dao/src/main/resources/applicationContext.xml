@@ -42,5 +42,8 @@
     <!--=====================================================================-->
 
 	<bean id="userDAO" class="org.geosdi.geoplatform.core.dao.impl.GPUserDAOImpl" />
+	<bean id="folderDAO" class="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" />
+	<bean id="layerDAO" class="org.geosdi.geoplatform.core.dao.impl.GPLayerDAOImpl" />
+	<bean id="styleDAO" class="org.geosdi.geoplatform.core.dao.impl.GPStyleDAOImpl" />
 	
 </beans>

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
- /*
+/*
  *  geo-platform
  *  Rich webgis framework
  *  http://geo-plartform.org
@@ -35,17 +33,46 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
- -->
-<persistence version="1.0" 
-    xmlns="http://java.sun.com/xml/ns/persistence"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd ">
+package org.geosdi.geoplatform.core.model;
 
-    <persistence-unit name="geoplatform" transaction-type="RESOURCE_LOCAL">
-    <!-- when adding/removing classes, please also keep aligned the src/test/resource/hibernate.cfg.xml file -->
-        <class>org.geosdi.geoplatform.core.model.GPUser</class>
-        <class>org.geosdi.geoplatform.core.model.GPFolder</class>
-        <class>org.geosdi.geoplatform.core.model.GPLayer</class>
-        <class>org.geosdi.geoplatform.core.model.GPStyle</class>
-    </persistence-unit>
-</persistence>
+import java.io.Serializable;
+
+/**
+ * @author Francesco Izzi - geoSDI
+ * 
+ */
+public enum GPLayerType implements Serializable {
+
+	RASTER(1),
+	POINT(2),
+	LINESTRING(3),
+	POLYGON(4),
+	MULTIPOINT(5),
+	MULTILINESTRING(6),
+	MULTIPOLYGON(7),
+	WMS(8);
+
+	private int code;
+
+	/**
+	 * Create layer type.
+	 *
+	 * @param code code to apply
+	 */
+	private GPLayerType(int code) {
+		this.code = code;
+	}
+	
+	public int getCode(){
+		return this.code;
+	}
+
+	/**
+	 * Convert to string.
+	 *
+	 * @return string representation of layer type
+	 */
+	public String toString() {
+		return Integer.toString(code);
+	}
+}

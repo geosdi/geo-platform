@@ -11,6 +11,9 @@
 
     <!-- MAPPING MODEL RESOURCES -->
     	<mapping  class="org.geosdi.geoplatform.core.model.GPUser"/>
-    
+    	<mapping  class="org.geosdi.geoplatform.core.model.GPFolder"/>
+    	<mapping  class="org.geosdi.geoplatform.core.model.GPLayer"/>
+    	<mapping  class="org.geosdi.geoplatform.core.model.GPStyle"/>
+    	
     </session-factory>
 </hibernate-configuration>

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
- /*
+/*
  *  geo-platform
  *  Rich webgis framework
  *  http://geo-plartform.org
@@ -35,17 +33,71 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
- -->
-<persistence version="1.0" 
-    xmlns="http://java.sun.com/xml/ns/persistence"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd ">
+package org.geosdi.geoplatform.core.model;
 
-    <persistence-unit name="geoplatform" transaction-type="RESOURCE_LOCAL">
-    <!-- when adding/removing classes, please also keep aligned the src/test/resource/hibernate.cfg.xml file -->
-        <class>org.geosdi.geoplatform.core.model.GPUser</class>
-        <class>org.geosdi.geoplatform.core.model.GPFolder</class>
-        <class>org.geosdi.geoplatform.core.model.GPLayer</class>
-        <class>org.geosdi.geoplatform.core.model.GPStyle</class>
-    </persistence-unit>
-</persistence>
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+
+/**
+ * @author Francesco Izzi - geoSDI
+ * 
+ */
+@Embeddable
+public class GPLayerInfo implements Serializable {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = -7418444235711934950L;
+	
+	private boolean queryable = false;
+	private String keywords;
+	private String abstractText;
+
+	/**
+	 * @return the queryable
+	 */
+	public boolean isQueryable() {
+		return queryable;
+	}
+
+	/**
+	 * @param queryable
+	 *            the queryable to set
+	 */
+	public void setQueryable(boolean queryable) {
+		this.queryable = queryable;
+	}
+
+	/**
+	 * @return the keywords
+	 */
+	public String getKeywords() {
+		return keywords;
+	}
+
+	/**
+	 * @param keywords
+	 *            the keywords to set
+	 */
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
+	}
+
+	/**
+	 * @return the abstractText
+	 */
+	public String getAbstractText() {
+		return abstractText;
+	}
+
+	/**
+	 * @param abstractText
+	 *            the abstractText to set
+	 */
+	public void setAbstractText(String abstractText) {
+		this.abstractText = abstractText;
+	}
+
+}

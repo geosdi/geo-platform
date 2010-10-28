@@ -46,12 +46,13 @@ import org.junit.Test;
 public class UserDAOTest extends BaseDAOTest {
 	
 	@Test
-    public void testInsert() throws ParseException {
+    public void testRemoveAll() throws ParseException {
 		removeAll();
-		
-		insertAll();
 
-		assertEquals(50, userDAO.findAll().size());
+		assertEquals(0, userDAO.findAll().size());
+		assertEquals(0, styleDAO.findAll().size());
+		assertEquals(0, folderDAO.findAll().size());
+		assertEquals(0, layerDAO.findAll().size());
 	}
 
 }

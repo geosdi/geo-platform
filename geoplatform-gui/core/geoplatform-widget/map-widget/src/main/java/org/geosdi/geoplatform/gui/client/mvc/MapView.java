@@ -40,8 +40,12 @@ import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.MapUtility;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
+import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
@@ -87,6 +91,32 @@ public class MapView extends GeoPlatformView {
 		if (event.getType() == MapWidgetEvents.ATTACH_TOOLBAR)
 			onAttachToolbar(event);
 
+		if (event.getType() == GeoPlatformEvents.REGISTER_GEOCODING_LOCATION)
+			onRegisterGeocodingLocation((IGeoPlatformLocation) event.getData());
+
+		if (event.getType() == GeoPlatformEvents.RemoveMarker)
+			onRemoveMarker();
+
+	}
+
+	/**
+	 * Remove Marker from Map
+	 */
+	private void onRemoveMarker() {
+		// TODO Auto-generated method stub
+		this.mapUtility.removeMarker();
+	}
+
+	/**
+	 * Add a Marker on the Map with the coordinate of Location Found
+	 * 
+	 * @param event
+	 */
+	private void onRegisterGeocodingLocation(IGeoPlatformLocation bean) {
+		// TODO Auto-generated method stub
+		LonLat center = new LonLat(bean.getLon(), bean.getLat());
+		center.transform("EPSG:4326", "EPSG:900913");
+		this.mapUtility.addMarker(center, this.mapLayout.getMap());
 	}
 
 	/**

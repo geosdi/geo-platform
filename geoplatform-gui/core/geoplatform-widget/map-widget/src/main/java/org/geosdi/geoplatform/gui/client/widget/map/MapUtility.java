@@ -71,7 +71,7 @@ public class MapUtility {
 	private void buildIconMarker() {
 		Size size = new Size(21, 25);
 		Pixel offset = new Pixel(-(size.getWidth() / 2), -size.getHeight());
-		this.iconMarker = new Icon("map-images/geocodmarker.png", size, offset);
+		this.iconMarker = new Icon("geoportal/map-images/geocodmarker.png", size, offset);
 	}
 
 	/**

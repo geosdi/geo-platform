@@ -33,82 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model;
-
-import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
-import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
+package org.geosdi.geoplatform.gui.model;
 
 /**
  * @author giuseppe
  * 
  */
-public class GeocodingBean extends GeoPlatformBeanModel implements
-		IGeoPlatformLocation {
+public interface IGeoPlatformLocation {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3598344038115853656L;
+	public double getLon();
 
-	private String description;
-	private double lon;
-	private double lat;
+	public void setLon(double lon);
 
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
+	public double getLat();
 
-	/**
-	 * @param description
-	 *            the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-		set(GeocodingKeyValue.DESCRIPTION.getValue(), this.description);
-	}
-
-	/**
-	 * @return the lon
-	 */
-	public double getLon() {
-		return lon;
-	}
-
-	/**
-	 * @param lon
-	 *            the lon to set
-	 */
-	public void setLon(double lon) {
-		this.lon = lon;
-	}
-
-	/**
-	 * @return the lat
-	 */
-	public double getLat() {
-		return lat;
-	}
-
-	/**
-	 * @param lat
-	 *            the lat to set
-	 */
-	public void setLat(double lat) {
-		this.lat = lat;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "GeocodingBean [description=" + description + ", lon=" + lon
-				+ ", lat=" + lat + "]";
-	}
+	public void setLat(double lat);
 
 }

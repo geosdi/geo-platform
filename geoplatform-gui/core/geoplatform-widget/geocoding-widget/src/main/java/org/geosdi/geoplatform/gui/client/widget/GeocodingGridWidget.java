@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.gui.client.GeocodingEvents;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
@@ -86,7 +87,7 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
 		searchFieldSet.setHeading("Search");
 
 		FormLayout layout = new FormLayout();
-		layout.setLabelWidth(40);
+		layout.setLabelWidth(60);
 		searchFieldSet.setLayout(layout);
 
 		search = new TextField<String>();
@@ -96,8 +97,8 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
 
 			public void componentKeyUp(ComponentEvent event) {
 				if ((event.getKeyCode() == 8) && (search.getValue() == null)) {
-					// removeMarkersOnMap();
-					// cleanUpTheStore();
+					removeMarkersOnMap();
+					cleanUpTheStore();
 				}
 			}
 
@@ -139,11 +140,12 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
 
 		grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-		grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
+		grid.addListener(Events.CellDoubleClick, new Listener<BaseEvent>() {
 
 			public void handleEvent(BaseEvent be) {
-				// Dispatcher.forwardEvent(AppEvents.RegisterGeocodingDestination,
-				// grid.getSelectionModel().getSelectedItem());
+				Dispatcher.forwardEvent(
+						GeoPlatformEvents.REGISTER_GEOCODING_LOCATION, grid
+								.getSelectionModel().getSelectedItem());
 			}
 		});
 	}
@@ -205,5 +207,9 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
 	 */
 	public FormPanel getFormPanel() {
 		return formPanel;
+	}
+
+	private void removeMarkersOnMap() {
+		Dispatcher.forwardEvent(GeoPlatformEvents.RemoveMarker);
 	}
 }

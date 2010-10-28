@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.impl.view;
 
 import org.geosdi.geoplatform.gui.view.GeoPlatformLayoutManager;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatfomEvents;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Component;
@@ -126,7 +126,7 @@ public class LayoutManager extends GeoPlatformLayoutManager {
 			get().west.show();
 		else
 			get().west.hide();
-		Dispatcher.forwardEvent(GeoPlatfomEvents.UPDATE_CENTER);
+		Dispatcher.forwardEvent(GeoPlatformEvents.UPDATE_CENTER);
 	}
 
 	/**

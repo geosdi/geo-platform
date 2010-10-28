@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.gui.client.mvc;
 
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatfomEvents;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
@@ -54,7 +55,9 @@ public class MapController extends GeoPlatformController {
 				MapWidgetEvents.ATTACH_TOOLBAR,
 				MapWidgetEvents.ACTIVATE_DRAW_CONTROL,
 				MapWidgetEvents.DEACTIVATE_DRAW_CONTROL,
-				MapWidgetEvents.ERASE_FEATURE, GeoPlatfomEvents.UPDATE_CENTER);
+				MapWidgetEvents.ERASE_FEATURE, GeoPlatformEvents.UPDATE_CENTER,
+				GeoPlatformEvents.REGISTER_GEOCODING_LOCATION,
+				GeoPlatformEvents.RemoveMarker);
 	}
 
 	@Override
@@ -80,7 +83,7 @@ public class MapController extends GeoPlatformController {
 		if (event.getType() == MapWidgetEvents.ERASE_FEATURE)
 			onEraseFeature(event);
 
-		if (event.getType() == GeoPlatfomEvents.UPDATE_CENTER)
+		if (event.getType() == GeoPlatformEvents.UPDATE_CENTER)
 			onUpdateCenter();
 
 		forwardToView(view, event);

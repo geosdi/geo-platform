@@ -41,8 +41,11 @@ import com.extjs.gxt.ui.client.event.EventType;
  * @author giuseppe
  * 
  */
-public class GeoPlatfomEvents {
+public class GeoPlatformEvents {
 
 	public static final EventType UPDATE_CENTER = new EventType();
 
+	public static final EventType REGISTER_GEOCODING_LOCATION = new EventType();
+
+	public static final EventType RemoveMarker = new EventType();
 }

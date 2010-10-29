@@ -905,7 +905,7 @@
         <geoapi-version>2.3-M1</geoapi-version>
         <gt-version>2.7-SNAPSHOT</gt-version>
         
-         <gwtVersion>2.0.4</gwtVersion>
+        <gwtVersion>2.1.0</gwtVersion>
         <gxtVersion>2.2.0</gxtVersion>
 
     </properties>

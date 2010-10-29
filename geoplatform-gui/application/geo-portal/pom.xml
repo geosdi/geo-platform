@@ -194,14 +194,16 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
-				<version>1.2</version>
+				<version>1.3.2.google</version>
 				<configuration>
 					<inplace>true</inplace>
+                    <gwtVersion>${gwtVersion}</gwtVersion>
 					<module>org.geosdi.geoplatform.gui.Application</module>
 					<runTarget>Application.html</runTarget>
 					<warSourceDirectory>war</warSourceDirectory>
 					<disableCastChecking>true</disableCastChecking>
 					<disableClassMetadata>true</disableClassMetadata>
+                    <hostedWebapp>${basedir}/war</hostedWebapp>
 					<extraJvmArgs>-Xmx512M -Xss1024k -Dgwt.nowarn.legacy.tools</extraJvmArgs>
 				</configuration>
 				<executions>

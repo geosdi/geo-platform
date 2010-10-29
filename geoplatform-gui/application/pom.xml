@@ -39,12 +39,12 @@
     </developers>
     
     <profiles>
-       <profile>
+       <!--profile>
 			<id>geo-portal</id>
 			<modules>
-			   <module>geo-portal</module>
+			   <module>profile module</module>
 			</modules>
-		</profile>
+		</profile-->
     </profiles>
 
 

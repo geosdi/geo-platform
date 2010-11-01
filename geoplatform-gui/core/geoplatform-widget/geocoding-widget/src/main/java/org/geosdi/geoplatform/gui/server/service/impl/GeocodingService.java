@@ -41,6 +41,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import javax.annotation.PostConstruct;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
@@ -50,7 +51,7 @@ import javax.xml.xpath.XPathFactory;
 
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.server.service.IGeocodingService;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -61,7 +62,7 @@ import org.xml.sax.SAXException;
  * @author giuseppe
  * 
  */
-@Component("geocodingService")
+@Service("geocodingService")
 public class GeocodingService implements IGeocodingService {
 
 	// URL prefix to the geocoder
@@ -71,6 +72,12 @@ public class GeocodingService implements IGeocodingService {
 	private HttpURLConnection conn;
 	private XPath xpath;
 	private ArrayList<GeocodingBean> beans;
+
+	@PostConstruct
+	public void init() {
+		// prepare XPath
+		xpath = XPathFactory.newInstance().newXPath();
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -104,9 +111,6 @@ public class GeocodingService implements IGeocodingService {
 		} finally {
 			conn.disconnect();
 		}
-
-		// prepare XPath
-		xpath = XPathFactory.newInstance().newXPath();
 
 		// extract the result
 		NodeList resultNodeList = null;

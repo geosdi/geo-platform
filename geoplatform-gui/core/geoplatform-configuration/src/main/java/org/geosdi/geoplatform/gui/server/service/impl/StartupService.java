@@ -35,23 +35,43 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 import org.geosdi.geoplatform.gui.server.service.IStartupService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * @author giuseppe
- *
+ * 
  */
-@Component("startupService")
+@Service("startupService")
 public class StartupService implements IStartupService {
-	
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	private IGeoPlatformGlobal geoPlatformGlobal;
 
-	/* (non-Javadoc)
-	 * @see org.geosdi.geoplatform.gui.server.service.IStartupService#initGeoPlatformConfiguration()
+	@PostConstruct
+	public void init() {
+		logger.info("-----------------------------------> INIT STARTUP-GEO-PLATFORM SERVICE");
+	}
+
+	@PreDestroy
+	public void destroy() {
+		logger.info("-----------------------------------> DESTROY STARTUP-GEO-PLATFORM SERVICE");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.server.service.IStartupService#
+	 * initGeoPlatformConfiguration()
 	 */
 	@Override
 	public IGeoPlatformGlobal initGeoPlatformConfiguration() {

@@ -45,6 +45,8 @@ import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
  * 
  */
 public interface IGeoPlatformGlobal extends Serializable {
+	
+	public GeoPlatformInfo getGeoPlatformInfo();
 
 	public IToolbarClientTool getToolbarClientTool();
 	

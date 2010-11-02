@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import org.geosdi.geoplatform.gui.global.CopyrightInfo;
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 import org.geosdi.geoplatform.gui.server.service.IStartupService;
 import org.slf4j.Logger;
@@ -60,6 +61,16 @@ public class StartupService implements IStartupService {
 	@PostConstruct
 	public void init() {
 		logger.info("-----------------------------------> INIT STARTUP-GEO-PLATFORM SERVICE");
+		logger.info(this.geoPlatformGlobal.getGeoPlatformInfo().getVersion()
+				.getName()
+				+ " - Version : "
+				+ this.geoPlatformGlobal.getGeoPlatformInfo().getVersion()
+						.getVersion());
+
+		for (CopyrightInfo info : this.geoPlatformGlobal.getGeoPlatformInfo()
+				.getCopyrightInfo()) {
+			logger.info(info.toString());
+		}
 	}
 
 	@PreDestroy

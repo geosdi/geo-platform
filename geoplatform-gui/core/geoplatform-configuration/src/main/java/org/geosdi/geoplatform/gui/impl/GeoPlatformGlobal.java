@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.impl;
 
 import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
 import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
+import org.geosdi.geoplatform.gui.global.GeoPlatformInfo;
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -54,10 +55,28 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
 	private static final long serialVersionUID = -8229961575424418806L;
 
 	@Autowired
+	private GeoPlatformInfo geoPlatformInfo;
+
+	@Autowired
 	private IToolbarClientTool toolbarClientTool;
 
 	@Autowired
 	private IMenuBarContainerTool menuBarContainerTool;
+
+	/**
+	 * @return the geoPlatformInfo
+	 */
+	public GeoPlatformInfo getGeoPlatformInfo() {
+		return geoPlatformInfo;
+	}
+
+	/**
+	 * @param geoPlatformInfo
+	 *            the geoPlatformInfo to set
+	 */
+	public void setGeoPlatformInfo(GeoPlatformInfo geoPlatformInfo) {
+		this.geoPlatformInfo = geoPlatformInfo;
+	}
 
 	/*
 	 * (non-Javadoc)

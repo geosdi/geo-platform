@@ -74,10 +74,7 @@ public class GeoPlatformConfigurationImpl extends RemoteServiceServlet
 
 		GeoPlatformContextUtil.getInstance().setSpringContext(context);
 
-		this.startupService = (IStartupService) GeoPlatformContextUtil
-				.getInstance().getBean("startupService");
-
-		logger.info("SPRING CONTEXT INITIALIZED" + this.startupService);
+		this.injectValues();
 	}
 
 	/*
@@ -90,6 +87,16 @@ public class GeoPlatformConfigurationImpl extends RemoteServiceServlet
 	public IGeoPlatformGlobal initGeoPlatformConfiguration() {
 		// TODO Auto-generated method stub
 		return startupService.initGeoPlatformConfiguration();
+	}
+
+	/**
+	 * Init Spring Context
+	 */
+	private void injectValues() {
+		this.startupService = (IStartupService) GeoPlatformContextUtil
+				.getInstance().getBean("startupService");
+
+		logger.info("SPRING CONTEXT INITIALIZED" + this.startupService);
 	}
 
 }

@@ -65,7 +65,7 @@ public abstract class GeoPlatformFormWidget<T extends GeoPlatformBeanModel>
 	 * Param lazy specifies whether the component should be initialized
 	 * at creation
 	 * 
-	 * @param initialized
+	 * @param lazy
 	 */
 	public GeoPlatformFormWidget(boolean lazy) {
 		if (!lazy){

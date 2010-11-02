@@ -73,6 +73,7 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
 	private TextField<String> search;
 
 	public GeocodingGridWidget() {
+		super(false);
 		initFormPanel();
 	}
 

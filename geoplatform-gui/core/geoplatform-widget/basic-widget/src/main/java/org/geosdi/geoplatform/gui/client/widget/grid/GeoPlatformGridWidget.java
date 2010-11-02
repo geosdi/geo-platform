@@ -55,12 +55,23 @@ public abstract class GeoPlatformGridWidget<T extends GeoPlatformBeanModel>
 	protected ListStore<T> store;
 	protected Grid<T> grid;
 
+	private boolean initialized;
+
 	/**
-	 * Default Constructor
+	 * 
+	 * @param lazy
 	 */
-	public GeoPlatformGridWidget() {
-		createStore();
-		initGrid();
+	public GeoPlatformGridWidget(boolean lazy) {
+		if (!lazy)
+			init();
+	}
+
+	public void init() {
+		if (!isInitialized()) {
+			createStore();
+			initGrid();
+			this.initialized = true;
+		}
 	}
 
 	/**
@@ -103,5 +114,12 @@ public abstract class GeoPlatformGridWidget<T extends GeoPlatformBeanModel>
 	 */
 	public Grid<T> getGrid() {
 		return grid;
+	}
+
+	/**
+	 * @return the initialized
+	 */
+	public boolean isInitialized() {
+		return initialized;
 	}
 }

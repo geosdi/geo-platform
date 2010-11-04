@@ -33,91 +33,66 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.mvc;
+package org.geosdi.geoplatform.gui.client.widget.map.control;
 
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
+import org.gwtopenmaps.openlayers.client.control.DrawFeature;
+import org.gwtopenmaps.openlayers.client.control.DrawFeature.FeatureAddedListener;
+import org.gwtopenmaps.openlayers.client.control.DrawFeatureOptions;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
-import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 
 /**
  * @author giuseppe
  * 
  */
-public class MapController extends GeoPlatformController {
+public class DrawFeatureControl extends MapControl {
 
-	public MapController() {
-		registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_TOOLBAR,
-				MapWidgetEvents.ACTIVATE_DRAW_CONTROL,
-				MapWidgetEvents.DEACTIVATE_DRAW_CONTROL,
-				MapWidgetEvents.ERASE_FEATURE, GeoPlatformEvents.UPDATE_CENTER,
-				GeoPlatformEvents.REGISTER_GEOCODING_LOCATION,
-				GeoPlatformEvents.RemoveMarker);
-	}
-
-	@Override
-	public void initialize() {
-		this.view = new MapView(this);
+	public DrawFeatureControl(Vector vector) {
+		super(vector);
+		// TODO Auto-generated constructor stub
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client
-	 * .mvc.AppEvent)
+	 * org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#createControl
+	 * ()
 	 */
 	@Override
-	public void handleEvent(AppEvent event) {
-		if (event.getType() == MapWidgetEvents.ACTIVATE_DRAW_CONTROL)
-			onActivateDrawControl();
-
-		if (event.getType() == MapWidgetEvents.DEACTIVATE_DRAW_CONTROL)
-			onDeactivateDrawControl();
-
-		if (event.getType() == MapWidgetEvents.ERASE_FEATURE)
-			onEraseFeature(event);
-
-		if (event.getType() == GeoPlatformEvents.UPDATE_CENTER)
-			onUpdateCenter();
-
-		forwardToView(view, event);
-	}
-
-	/**
-	 * 
-	 * @param event
-	 */
-	private void onEraseFeature(AppEvent event) {
+	public void createControl() {
 		// TODO Auto-generated method stub
-		((MapView) this.view).eraseFeature((VectorFeature) event.getData());
+		FeatureAddedListener listener = new FeatureAddedListener() {
+			public void onFeatureAdded(VectorFeature vf) {
+
+				Dispatcher.forwardEvent(MapWidgetEvents.INJECT_WKT, vf);
+
+			}
+		};
+
+		DrawFeatureOptions drawPolygonFeatureOptions = new DrawFeatureOptions();
+		drawPolygonFeatureOptions.onFeatureAdded(listener);
+
+		this.control = new DrawFeature(this.vector, new PolygonHandler(),
+				drawPolygonFeatureOptions);
 	}
 
 	/**
-	 * Deactivate Draw Control
+	 * activate draw feature control on the map
 	 */
-	private void onDeactivateDrawControl() {
-		// TODO Auto-generated method stub
-		((MapView) this.view).deactivateDrawControl();
+	public void activateControl() {
+		this.control.activate();
 	}
 
 	/**
-	 * Activate Draw Control
+	 * deactivate draw feature control on the map
 	 */
-	private void onActivateDrawControl() {
-		// TODO Auto-generated method stub
-		((MapView) this.view).activateDrawControl();
-	}
-
-	/**
-	 * Update Center Widget
-	 */
-	private void onUpdateCenter() {
-		((MapView) this.view).updateMapSize();
+	public void deactivateControl() {
+		this.control.deactivate();
 	}
 
 }

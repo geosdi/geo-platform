@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.widget.map;
 import java.util.Collections;
 import java.util.List;
 
-import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.gwtopenmaps.openlayers.client.Bounds;
@@ -48,25 +47,15 @@ import org.gwtopenmaps.openlayers.client.MapOptions;
 import org.gwtopenmaps.openlayers.client.MapUnits;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Projection;
-import org.gwtopenmaps.openlayers.client.Style;
-import org.gwtopenmaps.openlayers.client.control.DrawFeature;
-import org.gwtopenmaps.openlayers.client.control.DrawFeature.FeatureAddedListener;
-import org.gwtopenmaps.openlayers.client.control.DrawFeatureOptions;
 import org.gwtopenmaps.openlayers.client.control.LayerSwitcher;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.geometry.Geometry;
-import org.gwtopenmaps.openlayers.client.geometry.MultiPolygon;
-import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
 import org.gwtopenmaps.openlayers.client.layer.GMapType;
 import org.gwtopenmaps.openlayers.client.layer.Google;
 import org.gwtopenmaps.openlayers.client.layer.GoogleOptions;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.OSM;
 import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
-import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
 
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 
 /**
@@ -77,14 +66,12 @@ public class MapLayoutWidget extends LayoutContainer {
 
 	private MapWidget mapWidget;
 	private MapOptions defaultMapOptions;
+	private MapControlManager mapControl;
 	private Map map;
 	private Layer layer;
 	private Layer osm;
 
 	private List<GenericClientTool> tools;
-
-	private DrawFeature drawPolygon;
-	private Vector vector;
 
 	public MapLayoutWidget() {
 		super();
@@ -115,7 +102,7 @@ public class MapLayoutWidget extends LayoutContainer {
 		this.createOSM();
 		this.createBaseGoogleLayer();
 
-		this.initVectorLayer();
+		this.mapControl = new MapControlManager(this.map);
 	}
 
 	private void createOSM() {
@@ -134,49 +121,6 @@ public class MapLayoutWidget extends LayoutContainer {
 
 		layer = new Google("Google Normal", option);
 		this.map.addLayer(layer);
-	}
-
-	private void initVectorLayer() {
-		VectorOptions vectorOption = new VectorOptions();
-		vectorOption.setStyle(this.createStyle());
-		vectorOption.setDisplayInLayerSwitcher(false);
-		this.vector = new Vector("GeoPlatform Vector Layer", vectorOption);
-		this.map.addLayer(vector);
-
-		this.initDrawFeatures();
-	}
-
-	private void initDrawFeatures() {
-		FeatureAddedListener listener = new FeatureAddedListener() {
-			public void onFeatureAdded(VectorFeature vf) {
-
-				Dispatcher.forwardEvent(MapWidgetEvents.INJECT_WKT, vf);
-
-			}
-		};
-
-		DrawFeatureOptions drawPolygonFeatureOptions = new DrawFeatureOptions();
-		drawPolygonFeatureOptions.onFeatureAdded(listener);
-
-		this.drawPolygon = new DrawFeature(vector, new PolygonHandler(),
-				drawPolygonFeatureOptions);
-
-		this.map.addControl(this.drawPolygon);
-	}
-
-	/**
-	 * 
-	 * @return Style
-	 */
-	private Style createStyle() {
-		Style style = new Style();
-		style.setStrokeColor("#000000");
-		style.setStrokeWidth(1);
-		style.setFillColor("#FF0000");
-		style.setFillOpacity(0.5);
-		style.setPointRadius(5);
-		style.setStrokeOpacity(1.0);
-		return style;
 	}
 
 	/**
@@ -206,21 +150,14 @@ public class MapLayoutWidget extends LayoutContainer {
 	 * @param wkt
 	 */
 	public void drawAoeOnMap(String wkt) {
-		this.eraseFeatures();
-		MultiPolygon geom = MultiPolygon.narrowToMultiPolygon(Geometry.fromWKT(
-				wkt).getJSObject());
-		geom.transform(new Projection("EPSG:4326"), new Projection(
-				"EPSG:900913"));
-		VectorFeature vectorFeature = new VectorFeature(geom);
-		this.vector.addFeature(vectorFeature);
-		this.map.zoomToExtent(geom.getBounds());
+		this.mapControl.drawAoeOnMap(wkt);
 	}
 
 	/**
 	 * Erase all Features added to Vector Layer
 	 */
 	public void eraseFeatures() {
-		this.vector.destroyFeatures();
+		this.mapControl.eraseFeatures();
 	}
 
 	/**
@@ -229,7 +166,7 @@ public class MapLayoutWidget extends LayoutContainer {
 	 * @param vf
 	 */
 	public void eraseFeature(VectorFeature vf) {
-		this.vector.removeFeature(vf);
+		this.mapControl.eraseFeature(vf);
 	}
 
 	/**
@@ -274,14 +211,14 @@ public class MapLayoutWidget extends LayoutContainer {
 	 * activate draw feature control on the map
 	 */
 	public void activateDrawFeature() {
-		this.drawPolygon.activate();
+		this.mapControl.activateDrawFeature();
 	}
 
 	/**
 	 * deactivate draw feature control on the map
 	 */
 	public void deactivateDrawFeature() {
-		this.drawPolygon.deactivate();
+		this.mapControl.deactivateDrawFeature();
 	}
 
 }

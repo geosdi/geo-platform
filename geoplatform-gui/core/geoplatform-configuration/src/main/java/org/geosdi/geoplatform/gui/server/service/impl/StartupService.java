@@ -60,7 +60,7 @@ public class StartupService implements IStartupService {
 
 	@PostConstruct
 	public void init() {
-		logger.info("-----------------------------------> INIT STARTUP-GEO-PLATFORM SERVICE");
+		logger.info("------------------------------> INIT STARTUP-GEO-PLATFORM SERVICE");
 		logger.info(this.geoPlatformGlobal.getGeoPlatformInfo().getVersion()
 				.getName()
 				+ " - Version : "
@@ -75,7 +75,7 @@ public class StartupService implements IStartupService {
 
 	@PreDestroy
 	public void destroy() {
-		logger.info("-----------------------------------> DESTROY STARTUP-GEO-PLATFORM SERVICE");
+		logger.info("------------------------------> DESTROY STARTUP-GEO-PLATFORM SERVICE");
 	}
 
 	/*

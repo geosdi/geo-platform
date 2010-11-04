@@ -33,40 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.client.widget.map.control;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import org.gwtopenmaps.openlayers.client.control.Control;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  * @author giuseppe
  * 
  */
-@SuppressWarnings("deprecation")
-public interface GeoPlatformIcons extends ImageBundle {
+public abstract class MapControl {
 
-	@Resource("zoom-in.png")
-	AbstractImagePrototype ZoomIn();
-
-	@Resource("zoom-out.png")
-	AbstractImagePrototype ZoomOut();
-
-	@Resource("draw-feature.png")
-	AbstractImagePrototype DrawFeature();
-
-	@Resource("rotate.png")
-	AbstractImagePrototype Rotate();
+	protected Control control;
+	protected Vector vector;
 	
-	@Resource("drag.png")
-	AbstractImagePrototype Drag();
-	
-	@Resource("resize.png")
-	AbstractImagePrototype Resize();
-	
-	@Resource("shape.png")
-	AbstractImagePrototype Shape();
+	public MapControl(Vector vector){
+		this.vector = vector;
+		this.createControl();
+	}
 
-	@Resource("gp-icon-16x16.png")
-	AbstractImagePrototype geoPortalInfo();
+	public abstract void createControl();
+
+	public abstract void activateControl();
+
+	public abstract void deactivateControl();
+
+	/**
+	 * @return the control
+	 */
+	public Control getControl() {
+		return control;
+	}
 
 }

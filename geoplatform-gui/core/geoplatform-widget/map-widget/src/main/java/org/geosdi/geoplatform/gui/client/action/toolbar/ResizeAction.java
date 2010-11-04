@@ -33,91 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.mvc;
+package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.client.Resources;
 
-import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
 
 /**
  * @author giuseppe
  * 
  */
-public class MapController extends GeoPlatformController {
+public class ResizeAction extends ToolbarMapAction {
 
-	public MapController() {
-		registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_TOOLBAR,
-				MapWidgetEvents.ACTIVATE_DRAW_CONTROL,
-				MapWidgetEvents.DEACTIVATE_DRAW_CONTROL,
-				MapWidgetEvents.ERASE_FEATURE, GeoPlatformEvents.UPDATE_CENTER,
-				GeoPlatformEvents.REGISTER_GEOCODING_LOCATION,
-				GeoPlatformEvents.RemoveMarker);
-	}
-
-	@Override
-	public void initialize() {
-		this.view = new MapView(this);
+	public ResizeAction() {
+		super("Resize", Resources.ICONS.Resize());
+		// TODO Auto-generated constructor stub
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client
-	 * .mvc.AppEvent)
+	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+	 * .extjs.gxt.ui.client.event.ComponentEvent)
 	 */
 	@Override
-	public void handleEvent(AppEvent event) {
-		if (event.getType() == MapWidgetEvents.ACTIVATE_DRAW_CONTROL)
-			onActivateDrawControl();
-
-		if (event.getType() == MapWidgetEvents.DEACTIVATE_DRAW_CONTROL)
-			onDeactivateDrawControl();
-
-		if (event.getType() == MapWidgetEvents.ERASE_FEATURE)
-			onEraseFeature(event);
-
-		if (event.getType() == GeoPlatformEvents.UPDATE_CENTER)
-			onUpdateCenter();
-
-		forwardToView(view, event);
-	}
-
-	/**
-	 * 
-	 * @param event
-	 */
-	private void onEraseFeature(AppEvent event) {
+	public void componentSelected(ButtonEvent ce) {
 		// TODO Auto-generated method stub
-		((MapView) this.view).eraseFeature((VectorFeature) event.getData());
-	}
 
-	/**
-	 * Deactivate Draw Control
-	 */
-	private void onDeactivateDrawControl() {
-		// TODO Auto-generated method stub
-		((MapView) this.view).deactivateDrawControl();
-	}
-
-	/**
-	 * Activate Draw Control
-	 */
-	private void onActivateDrawControl() {
-		// TODO Auto-generated method stub
-		((MapView) this.view).activateDrawControl();
-	}
-
-	/**
-	 * Update Center Widget
-	 */
-	private void onUpdateCenter() {
-		((MapView) this.view).updateMapSize();
 	}
 
 }

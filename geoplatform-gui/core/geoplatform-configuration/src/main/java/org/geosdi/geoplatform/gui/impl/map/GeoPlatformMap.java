@@ -33,67 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.mvc;
+package org.geosdi.geoplatform.gui.impl.map;
 
-import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-
-import com.extjs.gxt.ui.client.mvc.AppEvent;
+import org.gwtopenmaps.openlayers.client.Map;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  * @author giuseppe
  * 
  */
-public class MapController extends GeoPlatformController {
+public interface GeoPlatformMap {
 
-	public MapController() {
-		registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_TOOLBAR, MapWidgetEvents.ERASE_FEATURE,
-				GeoPlatformEvents.UPDATE_CENTER,
-				GeoPlatformEvents.REGISTER_GEOCODING_LOCATION,
-				GeoPlatformEvents.RemoveMarker);
-	}
+	public MapWidget getMapWidget();
 
-	@Override
-	public void initialize() {
-		this.view = new MapView(this);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client
-	 * .mvc.AppEvent)
-	 */
-	@Override
-	public void handleEvent(AppEvent event) {
-		if (event.getType() == MapWidgetEvents.ERASE_FEATURE)
-			onEraseFeature(event);
-
-		if (event.getType() == GeoPlatformEvents.UPDATE_CENTER)
-			onUpdateCenter();
-
-		forwardToView(view, event);
-	}
-
-	/**
-	 * 
-	 * @param event
-	 */
-	private void onEraseFeature(AppEvent event) {
-		// TODO Auto-generated method stub
-		((MapView) this.view).eraseFeature((VectorFeature) event.getData());
-	}
-
-	/**
-	 * Update Center Widget
-	 */
-	private void onUpdateCenter() {
-		((MapView) this.view).updateMapSize();
-	}
+	public Map getMap();
 
 }

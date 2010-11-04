@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.action;
 
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionCreator;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
  * @author giuseppe
@@ -44,6 +44,6 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
  */
 public interface ToolbarActionCreator extends GeoPlatformActionCreator {
 
-	public GeoPlatformToolbarAction createActionTool(MapWidget mapWidget);
+	public GeoPlatformToolbarAction createActionTool(GeoPlatformMap map);
 
 }

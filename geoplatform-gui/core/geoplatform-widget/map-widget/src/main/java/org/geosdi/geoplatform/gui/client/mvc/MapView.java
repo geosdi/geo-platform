@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.MapUtility;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
@@ -89,7 +88,7 @@ public class MapView extends GeoPlatformView {
 			this.mapLayout.onAddToCenterPanel();
 
 		if (event.getType() == MapWidgetEvents.ATTACH_TOOLBAR)
-			onAttachToolbar(event);
+			onAttachToolbar();
 
 		if (event.getType() == GeoPlatformEvents.REGISTER_GEOCODING_LOCATION)
 			onRegisterGeocodingLocation((IGeoPlatformLocation) event.getData());
@@ -144,11 +143,11 @@ public class MapView extends GeoPlatformView {
 	}
 
 	/**
-	 * Attach GeoPlatform Toolbar to a ContentPanel inject with Dispatcher
+	 * Attach GeoPlatform Toolbar to a LayoutManager
 	 * 
 	 * @param event
 	 */
-	private void onAttachToolbar(AppEvent event) {
+	private void onAttachToolbar() {
 		mapLayout.setTools(GeoPlatformUtils.getInstance()
 				.getGlobalConfiguration().getToolbarClientTool()
 				.getClientTools());

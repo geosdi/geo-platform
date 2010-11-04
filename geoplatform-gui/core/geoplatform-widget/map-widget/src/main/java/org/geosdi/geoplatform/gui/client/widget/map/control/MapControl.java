@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.control;
 
-import org.gwtopenmaps.openlayers.client.control.Control;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -44,7 +43,6 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  */
 public abstract class MapControl {
 
-	protected Control control;
 	protected Vector vector;
 	
 	public MapControl(Vector vector){
@@ -57,12 +55,5 @@ public abstract class MapControl {
 	public abstract void activateControl();
 
 	public abstract void deactivateControl();
-
-	/**
-	 * @return the control
-	 */
-	public Control getControl() {
-		return control;
-	}
 
 }

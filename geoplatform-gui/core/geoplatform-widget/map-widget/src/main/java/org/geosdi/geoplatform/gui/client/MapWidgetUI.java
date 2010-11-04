@@ -41,7 +41,7 @@ import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomInAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomOutAction;
 import org.geosdi.geoplatform.gui.client.mvc.MapController;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
@@ -76,7 +76,7 @@ public class MapWidgetUI implements EntryPoint {
 		// TODO Auto-generated method stub
 		ToolbarActionRegistar.put("ZoomIn", new ToolbarActionCreator() {
 
-			public GeoPlatformToolbarAction createActionTool(MapWidget mapWidget) {
+			public GeoPlatformToolbarAction createActionTool(GeoPlatformMap mapWidget) {
 				// TODO Auto-generated method stub
 				return new ZoomInAction(mapWidget);
 			}
@@ -84,7 +84,7 @@ public class MapWidgetUI implements EntryPoint {
 
 		ToolbarActionRegistar.put("ZoomOut", new ToolbarActionCreator() {
 
-			public GeoPlatformToolbarAction createActionTool(MapWidget mapWidget) {
+			public GeoPlatformToolbarAction createActionTool(GeoPlatformMap mapWidget) {
 				// TODO Auto-generated method stub
 				return new ZoomOutAction(mapWidget);
 			}

@@ -36,9 +36,12 @@
 package org.geosdi.geoplatform.gui.client.widget.map;
 
 import org.geosdi.geoplatform.gui.client.widget.map.control.DrawFeatureControl;
+import org.geosdi.geoplatform.gui.client.widget.map.control.ModifyFeatureControl;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.Style;
+import org.gwtopenmaps.openlayers.client.control.DrawFeature;
+import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
 import org.gwtopenmaps.openlayers.client.geometry.MultiPolygon;
@@ -55,6 +58,7 @@ public class MapControlManager {
 	private Vector vector;
 
 	private DrawFeatureControl drawFeature;
+	private ModifyFeatureControl modifyFeature;
 
 	public MapControlManager(Map map) {
 		this.map = map;
@@ -83,6 +87,7 @@ public class MapControlManager {
 	 */
 	private void initControl() {
 		this.drawFeature = new DrawFeatureControl(vector);
+		this.modifyFeature = new ModifyFeatureControl(vector);
 	}
 
 	/**
@@ -91,6 +96,8 @@ public class MapControlManager {
 	 */
 	private void addMapControl() {
 		this.map.addControl(this.drawFeature.getControl());
+		this.map.addControl(this.modifyFeature.getControl());
+		this.modifyFeature.activateControl();
 	}
 
 	/**
@@ -152,5 +159,21 @@ public class MapControlManager {
 	 */
 	public void deactivateDrawFeature() {
 		this.drawFeature.deactivateControl();
+	}
+
+	/**
+	 * 
+	 * @return DrawFeature
+	 */
+	public DrawFeature getDrawFeatureControl() {
+		return this.drawFeature.getControl();
+	}
+
+	/**
+	 * 
+	 * @return ModifyFeature
+	 */
+	public ModifyFeature getModifyFeatureControl() {
+		return this.modifyFeature.getControl();
 	}
 }

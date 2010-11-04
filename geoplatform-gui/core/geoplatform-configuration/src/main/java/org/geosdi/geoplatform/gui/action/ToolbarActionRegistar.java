@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.action;
 
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionRegistar;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
  * @author giuseppe
@@ -63,7 +63,7 @@ public class ToolbarActionRegistar extends GeoPlatformActionRegistar {
 	 *            map which will contains the toolAction
 	 * @return null or the toolAction registered
 	 */
-	public static GeoPlatformToolbarAction get(String key, MapWidget mapWidget) {
+	public static GeoPlatformToolbarAction get(String key, GeoPlatformMap mapWidget) {
 		ToolbarActionCreator toolActionCreator = (ToolbarActionCreator) createFactory()
 				.getRegistry().get(key);
 		if (toolActionCreator == null)

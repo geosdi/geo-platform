@@ -37,6 +37,9 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 
@@ -46,9 +49,17 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
  */
 public class ReshapeAction extends ToolbarMapAction {
 
-	public ReshapeAction() {
+	private GeoPlatformMap mapWidget;
+	private ModifyFeature control;
+
+	public ReshapeAction(GeoPlatformMap mapWidget) {
 		super("Reshape", Resources.ICONS.Shape());
 		// TODO Auto-generated constructor stub
+
+		this.mapWidget = mapWidget;
+
+		this.control = ((MapLayoutWidget) this.mapWidget).getMapControl()
+				.getModifyFeatureControl();
 	}
 
 	/*
@@ -61,7 +72,7 @@ public class ReshapeAction extends ToolbarMapAction {
 	@Override
 	public void componentSelected(ButtonEvent ce) {
 		// TODO Auto-generated method stub
-
+		this.control.setMode(ModifyFeature.RESHAPE);
 	}
 
 }

@@ -50,6 +50,8 @@ import com.extjs.gxt.ui.client.mvc.Dispatcher;
  * 
  */
 public class DrawFeatureControl extends MapControl {
+	
+	private DrawFeature control;
 
 	public DrawFeatureControl(Vector vector) {
 		super(vector);
@@ -93,6 +95,10 @@ public class DrawFeatureControl extends MapControl {
 	 */
 	public void deactivateControl() {
 		this.control.deactivate();
+	}
+	
+	public DrawFeature getControl() {
+		return  this.control;
 	}
 
 }

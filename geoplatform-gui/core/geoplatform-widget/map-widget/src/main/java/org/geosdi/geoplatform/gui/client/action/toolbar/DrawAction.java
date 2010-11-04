@@ -36,12 +36,11 @@
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
-import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.client.Resources;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 
 /**
@@ -50,9 +49,9 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
  */
 public class DrawAction extends ToolbarMapAction {
 
-	private MapWidget mapWidget;
+	private GeoPlatformMap mapWidget;
 
-	public DrawAction(MapWidget mapWidget) {
+	public DrawAction(GeoPlatformMap mapWidget) {
 		super("DrawFeature", Resources.ICONS.DrawFeature());
 
 		this.mapWidget = mapWidget;
@@ -73,9 +72,9 @@ public class DrawAction extends ToolbarMapAction {
 		/** ADD CODE TO ACTIVATE CONTROL ON THE MAP **/
 
 		if (button.isPressed()) {
-			Dispatcher.forwardEvent(MapWidgetEvents.ACTIVATE_DRAW_CONTROL);
+			((MapLayoutWidget) this.mapWidget).activateDrawFeature();
 		} else
-			Dispatcher.forwardEvent(MapWidgetEvents.DEACTIVATE_DRAW_CONTROL);
+			((MapLayoutWidget) this.mapWidget).deactivateDrawFeature();
 
 	}
 

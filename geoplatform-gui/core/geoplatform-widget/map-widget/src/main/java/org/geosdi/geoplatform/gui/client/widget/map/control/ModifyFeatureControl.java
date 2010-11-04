@@ -33,67 +33,80 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.mvc;
+package org.geosdi.geoplatform.gui.client.widget.map.control;
 
-import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
+import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
+import org.gwtopenmaps.openlayers.client.event.VectorAfterFeatureModifiedListener;
+import org.gwtopenmaps.openlayers.client.event.VectorAfterFeatureModifiedListener.AfterFeatureModifiedEvent;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-
-import com.extjs.gxt.ui.client.mvc.AppEvent;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  * @author giuseppe
  * 
  */
-public class MapController extends GeoPlatformController {
+public class ModifyFeatureControl extends MapControl {
 
-	public MapController() {
-		registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_TOOLBAR, MapWidgetEvents.ERASE_FEATURE,
-				GeoPlatformEvents.UPDATE_CENTER,
-				GeoPlatformEvents.REGISTER_GEOCODING_LOCATION,
-				GeoPlatformEvents.RemoveMarker);
-	}
+	private ModifyFeature control;
 
-	@Override
-	public void initialize() {
-		this.view = new MapView(this);
+	public ModifyFeatureControl(Vector vector) {
+		super(vector);
+		// TODO Auto-generated constructor stub
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client
-	 * .mvc.AppEvent)
+	 * org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#createControl
+	 * ()
 	 */
 	@Override
-	public void handleEvent(AppEvent event) {
-		if (event.getType() == MapWidgetEvents.ERASE_FEATURE)
-			onEraseFeature(event);
-
-		if (event.getType() == GeoPlatformEvents.UPDATE_CENTER)
-			onUpdateCenter();
-
-		forwardToView(view, event);
-	}
-
-	/**
-	 * 
-	 * @param event
-	 */
-	private void onEraseFeature(AppEvent event) {
+	public void createControl() {
 		// TODO Auto-generated method stub
-		((MapView) this.view).eraseFeature((VectorFeature) event.getData());
+		this.control = new ModifyFeature(vector);
+
+		vector.addVectorAfterFeatureModifiedListener(new VectorAfterFeatureModifiedListener() {
+
+			public void onAfterFeatureModified(
+					AfterFeatureModifiedEvent eventObject) {
+
+				VectorFeature feature = eventObject.getVectorFeature();
+
+				System.out
+						.println("TEST addVectorAfterFeatureModifiedListener********************* "
+								+ feature.getFeatureId());
+			}
+
+		});
 	}
 
-	/**
-	 * Update Center Widget
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#
+	 * activateControl()
 	 */
-	private void onUpdateCenter() {
-		((MapView) this.view).updateMapSize();
+	@Override
+	public void activateControl() {
+		// TODO Auto-generated method stub
+		this.control.activate();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#
+	 * deactivateControl()
+	 */
+	@Override
+	public void deactivateControl() {
+		// TODO Auto-generated method stub
+		this.control.deactivate();
+	}
+
+	public ModifyFeature getControl() {
+		return this.control;
 	}
 
 }

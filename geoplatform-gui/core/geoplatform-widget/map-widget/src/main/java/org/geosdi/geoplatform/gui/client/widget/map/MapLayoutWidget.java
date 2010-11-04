@@ -39,6 +39,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.LonLat;
@@ -56,13 +57,11 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.OSM;
 import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
 
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
-
 /**
  * @author giuseppe
  * 
  */
-public class MapLayoutWidget extends LayoutContainer {
+public class MapLayoutWidget implements GeoPlatformMap {
 
 	private MapWidget mapWidget;
 	private MapOptions defaultMapOptions;
@@ -181,6 +180,13 @@ public class MapLayoutWidget extends LayoutContainer {
 	 */
 	public MapWidget getMapWidget() {
 		return mapWidget;
+	}
+
+	/**
+	 * @return the mapControl
+	 */
+	public MapControlManager getMapControl() {
+		return mapControl;
 	}
 
 	/**

@@ -93,10 +93,10 @@ public class ButtonBar extends LayoutContainer {
 			} else if (tool instanceof MenuClientTool) {
 				addMenuButton((MenuClientTool) tool,
 						(ToolbarApplicationAction) ToolbarActionRegistar.get(
-								id, mapLayoutWidget.getMapWidget()));
+								id, mapLayoutWidget));
 			} else {
 				GeoPlatformToolbarAction action = ToolbarActionRegistar.get(id,
-						mapLayoutWidget.getMapWidget());
+						mapLayoutWidget);
 
 				action.setEnabled(((ActionClientTool) tool).isEnabled());
 				action.setId(id);

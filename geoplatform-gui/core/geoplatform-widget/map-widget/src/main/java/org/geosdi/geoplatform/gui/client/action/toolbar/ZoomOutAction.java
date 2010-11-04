@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.MapWidget;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 
@@ -48,11 +48,11 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
  */
 public class ZoomOutAction extends ToolbarMapAction {
 
-	private MapWidget mapWidget;
+	private GeoPlatformMap mapWidget;
 
 	private int zoomFactor = 1;
 
-	public ZoomOutAction(MapWidget mapWidget) {
+	public ZoomOutAction(GeoPlatformMap mapWidget) {
 		super("ZoomOut", Resources.ICONS.ZoomOut());
 
 		this.mapWidget = mapWidget;

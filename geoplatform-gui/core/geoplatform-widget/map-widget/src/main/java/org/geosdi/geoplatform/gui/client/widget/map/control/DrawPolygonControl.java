@@ -33,71 +33,52 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.mvc;
+package org.geosdi.geoplatform.gui.client.widget.map.control;
 
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
+import org.gwtopenmaps.openlayers.client.control.DrawFeature;
+import org.gwtopenmaps.openlayers.client.control.DrawFeature.FeatureAddedListener;
+import org.gwtopenmaps.openlayers.client.control.DrawFeatureOptions;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
-import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 
 /**
  * @author giuseppe
  * 
  */
-public class MapController extends GeoPlatformController {
+public class DrawPolygonControl extends DrawGenericFeatureControl {
 
-	public MapController() {
-		registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_TOOLBAR, MapWidgetEvents.ERASE_FEATURE,
-				GeoPlatformEvents.UPDATE_CENTER,
-				GeoPlatformEvents.REGISTER_GEOCODING_LOCATION,
-				GeoPlatformEvents.RemoveMarker);
-	}
-
-	@Override
-	public void initialize() {
-		this.view = new MapView(this);
+	public DrawPolygonControl(Vector vector) {
+		super(vector);
+		// TODO Auto-generated constructor stub
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client
-	 * .mvc.AppEvent)
+	 * org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#createControl
+	 * ()
 	 */
 	@Override
-	public void handleEvent(AppEvent event) {
-		if (event.getType() == MapWidgetEvents.ERASE_FEATURE)
-			onEraseFeature(event);
-
-		if (event.getType() == GeoPlatformEvents.UPDATE_CENTER)
-			onUpdateCenter();
-
-		forwardToView(view, event);
-	}
-
-	public void onRedrawVectorLayer() {
-		((MapView) this.view).redrawVectorLayer();
-	}
-
-	/**
-	 * 
-	 * @param event
-	 */
-	private void onEraseFeature(AppEvent event) {
+	public void createControl() {
 		// TODO Auto-generated method stub
-		((MapView) this.view).eraseFeature((VectorFeature) event.getData());
-	}
+		FeatureAddedListener listener = new FeatureAddedListener() {
+			public void onFeatureAdded(VectorFeature vf) {
 
-	/**
-	 * Update Center Widget
-	 */
-	private void onUpdateCenter() {
-		((MapView) this.view).updateMapSize();
+				Dispatcher.forwardEvent(MapWidgetEvents.INJECT_WKT, vf);
+
+			}
+		};
+
+		DrawFeatureOptions drawPolygonFeatureOptions = new DrawFeatureOptions();
+		drawPolygonFeatureOptions.onFeatureAdded(listener);
+
+		this.control = new DrawFeature(this.vector, new PolygonHandler(),
+				drawPolygonFeatureOptions);
 	}
 
 }

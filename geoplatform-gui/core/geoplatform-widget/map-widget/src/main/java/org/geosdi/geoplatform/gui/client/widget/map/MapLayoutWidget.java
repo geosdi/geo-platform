@@ -227,4 +227,8 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		this.mapControl.deactivateDrawFeature();
 	}
 
+	public void redrawVectorLayer() {
+		this.mapControl.redrawVectorLayer();
+	}
+
 }

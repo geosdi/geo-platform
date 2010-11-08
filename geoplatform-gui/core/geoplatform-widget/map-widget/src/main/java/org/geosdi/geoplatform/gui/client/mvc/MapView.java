@@ -182,4 +182,11 @@ public class MapView extends GeoPlatformView {
 		this.mapLayout.getMap().addLayer(layer);
 	}
 
+	/**
+	 * Redraw Vector Layer
+	 */
+	public void redrawVectorLayer() {
+		this.mapLayout.redrawVectorLayer();
+	}
+
 }

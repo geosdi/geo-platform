@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map;
 
-import org.geosdi.geoplatform.gui.client.widget.map.control.DrawFeatureControl;
+import org.geosdi.geoplatform.gui.client.widget.map.control.DrawPolygonControl;
 import org.geosdi.geoplatform.gui.client.widget.map.control.ModifyFeatureControl;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.Projection;
@@ -57,7 +57,7 @@ public class MapControlManager {
 	private Map map;
 	private Vector vector;
 
-	private DrawFeatureControl drawFeature;
+	private DrawPolygonControl drawFeature;
 	private ModifyFeatureControl modifyFeature;
 
 	public MapControlManager(Map map) {
@@ -86,7 +86,7 @@ public class MapControlManager {
 	 * 
 	 */
 	private void initControl() {
-		this.drawFeature = new DrawFeatureControl(vector);
+		this.drawFeature = new DrawPolygonControl(vector);
 		this.modifyFeature = new ModifyFeatureControl(vector);
 	}
 
@@ -175,5 +175,12 @@ public class MapControlManager {
 	 */
 	public ModifyFeature getModifyFeatureControl() {
 		return this.modifyFeature.getControl();
+	}
+
+	/**
+	 * Redraw the Vector Layer
+	 */
+	public void redrawVectorLayer() {
+		this.vector.redraw();
 	}
 }

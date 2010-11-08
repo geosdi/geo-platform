@@ -75,7 +75,7 @@ public class StartupService implements IStartupService {
 
 	@PreDestroy
 	public void destroy() {
-		logger.info("------------------------------> DESTROY STARTUP-GEO-PLATFORM SERVICE");
+		logger.info("-------------------> DESTROY STARTUP-GEO-PLATFORM SERVICE");
 	}
 
 	/*

@@ -35,11 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.control;
 
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 import org.gwtopenmaps.openlayers.client.event.VectorAfterFeatureModifiedListener;
-import org.gwtopenmaps.openlayers.client.event.VectorAfterFeatureModifiedListener.AfterFeatureModifiedEvent;
+import org.gwtopenmaps.openlayers.client.event.VectorBeforeFeatureModifiedListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.geometry.Polygon;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
+
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 
 /**
  * @author giuseppe
@@ -48,6 +53,7 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 public class ModifyFeatureControl extends MapControl {
 
 	private ModifyFeature control;
+	private VectorFeature oldFeature;
 
 	public ModifyFeatureControl(Vector vector) {
 		super(vector);
@@ -66,6 +72,16 @@ public class ModifyFeatureControl extends MapControl {
 		// TODO Auto-generated method stub
 		this.control = new ModifyFeature(vector);
 
+		vector.addVectorBeforeFeatureModifiedListener(new VectorBeforeFeatureModifiedListener() {
+
+			@Override
+			public void onBeforeFeatureModified(
+					BeforeFeatureModifiedEvent eventObject) {
+				// TODO Auto-generated method stub
+				oldFeature = eventObject.getVectorFeature().clone();
+			}
+		});
+
 		vector.addVectorAfterFeatureModifiedListener(new VectorAfterFeatureModifiedListener() {
 
 			public void onAfterFeatureModified(
@@ -73,12 +89,51 @@ public class ModifyFeatureControl extends MapControl {
 
 				VectorFeature feature = eventObject.getVectorFeature();
 
-				System.out
-						.println("TEST addVectorAfterFeatureModifiedListener********************* "
-								+ feature.getFeatureId());
+				if (!checkModifications(feature))
+					showConfirmMessage(feature);
+
 			}
 
 		});
+	}
+
+	private void showConfirmMessage(final VectorFeature feature) {
+		// TODO Auto-generated method stub
+		Listener<MessageBoxEvent> callback = new Listener<MessageBoxEvent>() {
+
+			@Override
+			public void handleEvent(MessageBoxEvent be) {
+				// TODO Auto-generated method stub
+				if (be.getButtonClicked().getText().equalsIgnoreCase("yes")
+						|| be.getButtonClicked().getText()
+								.equalsIgnoreCase("si")) {
+					/**
+					 * HERE THE CODE TO DISPATCH THAT THE GEOMETRY FEATURE MUST
+					 * BE UPDATE IN DB ON THE SERVICES
+					 **/
+					System.out.println("YES **********");
+				} else {
+					vector.removeFeature(feature);
+					vector.addFeature(oldFeature);
+				}
+			}
+		};
+
+		GeoPlatformMessage
+				.confirmMessage(
+						"AOE Status",
+						"The AOE Geometry is changed. Do you want to apply the changes?",
+						callback);
+	}
+
+	private boolean checkModifications(VectorFeature feature) {
+		Polygon oldPolygon = Polygon.narrowToPolygon(this.oldFeature
+				.getGeometry().getJSObject());
+
+		Polygon pol = Polygon.narrowToPolygon(feature.getGeometry()
+				.getJSObject());
+
+		return pol.equals(oldPolygon);
 	}
 
 	/*

@@ -131,4 +131,15 @@ public class GeoPlatformMessage {
 		};
 		timer.schedule(15000);
 	}
+
+	/**
+	 * 
+	 * @param title
+	 * @param message
+	 * @param callback
+	 */
+	public static void confirmMessage(String title, String message,
+			Listener<MessageBoxEvent> callback) {
+		MessageBox.confirm(title, message, callback);
+	}
 }

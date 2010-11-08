@@ -35,25 +35,18 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.control;
 
-import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature;
-import org.gwtopenmaps.openlayers.client.control.DrawFeature.FeatureAddedListener;
-import org.gwtopenmaps.openlayers.client.control.DrawFeatureOptions;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
-
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
 
 /**
  * @author giuseppe
  * 
  */
-public class DrawFeatureControl extends MapControl {
-	
-	private DrawFeature control;
+public abstract class DrawGenericFeatureControl extends MapControl {
 
-	public DrawFeatureControl(Vector vector) {
+	protected DrawFeature control;
+
+	public DrawGenericFeatureControl(Vector vector) {
 		super(vector);
 		// TODO Auto-generated constructor stub
 	}
@@ -61,44 +54,29 @@ public class DrawFeatureControl extends MapControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#createControl
-	 * ()
+	 * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#
+	 * activateControl()
 	 */
 	@Override
-	public void createControl() {
-		// TODO Auto-generated method stub
-		FeatureAddedListener listener = new FeatureAddedListener() {
-			public void onFeatureAdded(VectorFeature vf) {
-
-				Dispatcher.forwardEvent(MapWidgetEvents.INJECT_WKT, vf);
-
-			}
-		};
-
-		DrawFeatureOptions drawPolygonFeatureOptions = new DrawFeatureOptions();
-		drawPolygonFeatureOptions.onFeatureAdded(listener);
-
-		this.control = new DrawFeature(this.vector, new PolygonHandler(),
-				drawPolygonFeatureOptions);
-	}
-
-	/**
-	 * activate draw feature control on the map
-	 */
 	public void activateControl() {
+		// TODO Auto-generated method stub
 		this.control.activate();
 	}
 
-	/**
-	 * deactivate draw feature control on the map
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#
+	 * deactivateControl()
 	 */
+	@Override
 	public void deactivateControl() {
+		// TODO Auto-generated method stub
 		this.control.deactivate();
 	}
-	
+
 	public DrawFeature getControl() {
-		return  this.control;
+		return this.control;
 	}
 
 }

@@ -99,31 +99,31 @@ public class ModifyFeatureControl extends MapControl {
 
 	private void showConfirmMessage(final VectorFeature feature) {
 		// TODO Auto-generated method stub
-		Listener<MessageBoxEvent> callback = new Listener<MessageBoxEvent>() {
-
-			@Override
-			public void handleEvent(MessageBoxEvent be) {
-				// TODO Auto-generated method stub
-				if (be.getButtonClicked().getText().equalsIgnoreCase("yes")
-						|| be.getButtonClicked().getText()
-								.equalsIgnoreCase("si")) {
-					/**
-					 * HERE THE CODE TO DISPATCH THAT THE GEOMETRY FEATURE MUST
-					 * BE UPDATE IN DB ON THE SERVICES
-					 **/
-					System.out.println("YES **********");
-				} else {
-					vector.removeFeature(feature);
-					vector.addFeature(oldFeature);
-				}
-			}
-		};
-
 		GeoPlatformMessage
 				.confirmMessage(
-						"AOE Status",
-						"The AOE Geometry is changed. Do you want to apply the changes?",
-						callback);
+						"Feature Status",
+						"The Feature Geometry is changed. Do you want to apply the changes?",
+						new Listener<MessageBoxEvent>() {
+
+							@Override
+							public void handleEvent(MessageBoxEvent be) {
+								// TODO Auto-generated method stub
+								if (be.getButtonClicked().getText()
+										.equalsIgnoreCase("yes")
+										|| be.getButtonClicked().getText()
+												.equalsIgnoreCase("si")) {
+									/**
+									 * HERE THE CODE TO DISPATCH THAT THE
+									 * GEOMETRY FEATURE MUST BE UPDATE IN DB ON
+									 * THE SERVICES
+									 **/
+									System.out.println("YES **********");
+								} else {
+									vector.removeFeature(feature);
+									vector.addFeature(oldFeature);
+								}
+							}
+						});
 	}
 
 	private boolean checkModifications(VectorFeature feature) {

@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 
@@ -44,10 +45,10 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
  * @author giuseppe
  * 
  */
-public class ResizeAction extends ToolbarMapAction {
+public class ResizeAction extends ModifyFeatureAction {
 
-	public ResizeAction() {
-		super("Resize", Resources.ICONS.Resize());
+	public ResizeAction(GeoPlatformMap mapWidget) {
+		super("Resize", Resources.ICONS.Resize(), mapWidget);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -61,7 +62,7 @@ public class ResizeAction extends ToolbarMapAction {
 	@Override
 	public void componentSelected(ButtonEvent ce) {
 		// TODO Auto-generated method stub
-
+		this.control.setMode(ModifyFeature.RESIZE);
 	}
 
 }

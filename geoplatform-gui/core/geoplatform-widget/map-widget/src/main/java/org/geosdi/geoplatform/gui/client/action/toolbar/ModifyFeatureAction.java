@@ -35,34 +35,31 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
  * @author giuseppe
  * 
  */
-public class ReshapeAction extends ModifyFeatureAction {
+public abstract class ModifyFeatureAction extends ToolbarMapAction {
 
-	public ReshapeAction(GeoPlatformMap mapWidget) {
-		super("Reshape", Resources.ICONS.Shape(), mapWidget);
+	protected GeoPlatformMap mapWidget;
+	protected ModifyFeature control;
+
+	public ModifyFeatureAction(String tooltip, AbstractImagePrototype image,
+			GeoPlatformMap mapWidget) {
+		super(tooltip, image);
 		// TODO Auto-generated constructor stub
-	}
+		
+		this.mapWidget = mapWidget;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		this.control.setMode(ModifyFeature.RESHAPE);
+		this.control = ((MapLayoutWidget) this.mapWidget).getMapControl()
+				.getModifyFeatureControl();
 	}
 
 }

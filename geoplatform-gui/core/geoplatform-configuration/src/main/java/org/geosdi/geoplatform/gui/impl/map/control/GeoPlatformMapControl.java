@@ -33,36 +33,23 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.impl.map.control;
 
-import org.geosdi.geoplatform.gui.client.Resources;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
-
-import com.extjs.gxt.ui.client.event.ButtonEvent;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  * @author giuseppe
  * 
  */
-public class ReshapeAction extends ModifyFeatureAction {
+public abstract class GeoPlatformMapControl {
 
-	public ReshapeAction(GeoPlatformMap mapWidget) {
-		super("Reshape", Resources.ICONS.Shape(), mapWidget);
-		// TODO Auto-generated constructor stub
+	protected Vector vector;
+
+	public GeoPlatformMapControl(Vector vector) {
+		this.vector = vector;
+		this.createControl();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		this.control.setMode(ModifyFeature.RESHAPE);
-	}
+	public abstract void createControl();
 
 }

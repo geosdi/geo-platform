@@ -35,22 +35,19 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.control;
 
+import org.geosdi.geoplatform.gui.impl.map.control.GeoPlatformMapControl;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  * @author giuseppe
  * 
  */
-public abstract class MapControl {
+public abstract class MapControl extends GeoPlatformMapControl {
 
-	protected Vector vector;
-	
-	public MapControl(Vector vector){
-		this.vector = vector;
-		this.createControl();
+	public MapControl(Vector vector) {
+		super(vector);
+		// TODO Auto-generated constructor stub
 	}
-
-	public abstract void createControl();
 
 	public abstract void activateControl();
 

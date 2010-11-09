@@ -33,51 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.configuration.action.annotation;
 
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
-import org.geosdi.geoplatform.gui.client.Resources;
-import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
-import org.geosdi.geoplatform.gui.configuration.action.annotation.PersistButton;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author giuseppe
  * 
  */
-@PersistButton(persist = true)
-public class DrawAction extends ToolbarMapAction {
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface PersistButton {
 
-	private GeoPlatformMap mapWidget;
-
-	public DrawAction(GeoPlatformMap mapWidget) {
-		super("Draw Polygon", Resources.ICONS.DrawFeature());
-
-		this.mapWidget = mapWidget;
-	}
-
-	/*
-	 * (non-Javadoc)
+	/**
+	 * General Annotation to be used for ToolbarMapAction to indicate that the
+	 * Button must be registered in GeoPlatformButtonRegistar to manage its
+	 * State
 	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
+	 * @return the flag to check if Button must be persisted
 	 */
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		ToggleButton button = (ToggleButton) ce.getSource();
 
-		/** ADD CODE TO ACTIVATE CONTROL ON THE MAP **/
-
-		if (button.isPressed()) {
-			((MapLayoutWidget) this.mapWidget).activateDrawFeature();
-		} else
-			((MapLayoutWidget) this.mapWidget).deactivateDrawFeature();
-
-	}
-
+	boolean persist() default false;
 }

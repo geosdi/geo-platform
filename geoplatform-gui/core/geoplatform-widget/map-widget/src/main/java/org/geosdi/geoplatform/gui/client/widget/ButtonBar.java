@@ -68,15 +68,16 @@ public class ButtonBar extends LayoutContainer {
 	private VerticalPanel vp;
 	private ToolBar toolBar;
 	private MapLayoutWidget mapLayoutWidget;
-
-	// private Map<String, Button> REGISTRY_BUTTONS = new HashMap<String,
-	// Button>();
-
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param mapLayoutWidget
+	 */
 	public ButtonBar(MapLayoutWidget mapLayoutWidget) {
 		super();
 		this.vp = new VerticalPanel();
 		this.toolBar = new ToolBar();
-		// this.toolBar.setHeight(40);
 		this.mapLayoutWidget = mapLayoutWidget;
 		initialize();
 	}
@@ -136,6 +137,11 @@ public class ButtonBar extends LayoutContainer {
 		toolBar.add(button);
 	}
 
+	/**
+	 * 
+	 * @param actionTools
+	 * @return Menu
+	 */
 	private Menu createMenu(List<ActionClientTool> actionTools) {
 		Menu menu = new Menu();
 		for (ActionClientTool actionTool : actionTools) {
@@ -165,7 +171,6 @@ public class ButtonBar extends LayoutContainer {
 	public void addMapButton(ToolbarMapAction action) {
 		Button button = new Button();
 		button.setId(action.getId());
-		// button.setWidth(24);
 		button.setToolTip(action.getTooltip());
 		button.setIcon(action.getImage());
 		button.addSelectionListener(action);
@@ -182,7 +187,6 @@ public class ButtonBar extends LayoutContainer {
 	public void addApplicationButton(ToolbarApplicationAction action) {
 		Button button = new Button();
 		button.setId(action.getId());
-		// button.setWidth(70);
 		button.setText(action.getButtonName());
 		button.setIcon(action.getImage());
 		button.addSelectionListener(action);
@@ -197,15 +201,13 @@ public class ButtonBar extends LayoutContainer {
 	 * @param action
 	 */
 	public void addMapToogleButton(ToolbarMapAction action) {
-		Button button = new ToggleButton();
+		ToggleButton button = new ToggleButton();
 		button.setId(action.getId());
-		// button.setWidth(24);
 		button.setToolTip(action.getTooltip());
 		button.setIcon(action.getImage());
 		button.addSelectionListener(action);
 		button.setEnabled(action.isEnabled());
 		this.toolBar.add(button);
-		// REGISTRY_BUTTONS.put(button.getId(), button);
 	}
 
 	/**

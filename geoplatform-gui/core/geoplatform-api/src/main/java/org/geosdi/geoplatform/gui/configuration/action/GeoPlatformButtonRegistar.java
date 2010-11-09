@@ -33,51 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.configuration.action;
 
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
-import org.geosdi.geoplatform.gui.client.Resources;
-import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
-import org.geosdi.geoplatform.gui.configuration.action.annotation.PersistButton;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import com.extjs.gxt.ui.client.widget.button.Button;
 
 /**
  * @author giuseppe
  * 
  */
-@PersistButton(persist = true)
-public class DrawAction extends ToolbarMapAction {
+public class GeoPlatformButtonRegistar {
 
-	private GeoPlatformMap mapWidget;
+	private static GeoPlatformButtonRegistar INSTANCE;
+	private Map<String, Button> registry;
 
-	public DrawAction(GeoPlatformMap mapWidget) {
-		super("Draw Polygon", Resources.ICONS.DrawFeature());
-
-		this.mapWidget = mapWidget;
+	public GeoPlatformButtonRegistar() {
+		this.registry = new HashMap<String, Button>();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		ToggleButton button = (ToggleButton) ce.getSource();
-
-		/** ADD CODE TO ACTIVATE CONTROL ON THE MAP **/
-
-		if (button.isPressed()) {
-			((MapLayoutWidget) this.mapWidget).activateDrawFeature();
-		} else
-			((MapLayoutWidget) this.mapWidget).deactivateDrawFeature();
-
+	public static GeoPlatformButtonRegistar get() {
+		if (INSTANCE == null)
+			INSTANCE = new GeoPlatformButtonRegistar();
+		return INSTANCE;
 	}
 
 }

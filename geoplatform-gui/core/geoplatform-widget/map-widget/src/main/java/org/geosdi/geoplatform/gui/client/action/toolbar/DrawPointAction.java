@@ -33,46 +33,64 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.gwtopenmaps.openlayers.client.control.Control;
+
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 
 /**
  * @author giuseppe
  * 
  */
-@SuppressWarnings("deprecation")
-public interface GeoPlatformIcons extends ImageBundle {
+public class DrawPointAction extends ToolbarMapAction {
 
-	@Resource("zoom-in.png")
-	AbstractImagePrototype ZoomIn();
+	private GeoPlatformMap mapWidget;
 
-	@Resource("zoom-out.png")
-	AbstractImagePrototype ZoomOut();
+	public DrawPointAction(GeoPlatformMap mapWidget) {
+		super("Draw Point", Resources.ICONS.DrawPointFeature());
+		// TODO Auto-generated constructor stub
+		this.mapWidget = mapWidget;
+	}
 
-	@Resource("draw-feature.png")
-	AbstractImagePrototype DrawFeature();
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+	 * .extjs.gxt.ui.client.event.ComponentEvent)
+	 */
+	@Override
+	public void componentSelected(ButtonEvent ce) {
+		// TODO Auto-generated method stub
+		ToggleButton button = (ToggleButton) ce.getSource();
 
-	@Resource("rotate.png")
-	AbstractImagePrototype Rotate();
-	
-	@Resource("drag.png")
-	AbstractImagePrototype Drag();
-	
-	@Resource("resize.png")
-	AbstractImagePrototype Resize();
-	
-	@Resource("shape.png")
-	AbstractImagePrototype Shape();
+		if ((((MapLayoutWidget) mapWidget).getButtonBar().isTogglePressed())
+				&& (!((MapLayoutWidget) mapWidget).getButtonBar()
+						.getPressedButton().getId().equals(button.getId())))
+			((MapLayoutWidget) mapWidget).getButtonBar().changeButtonState();
 
-	@Resource("gp-icon-16x16.png")
-	AbstractImagePrototype geoPortalInfo();
-	
-	@Resource("draw-point.png")
-	AbstractImagePrototype DrawPointFeature();
-	
-	@Resource("draw-line.png")
-	AbstractImagePrototype DrawLineFeature();
+		if (button.isPressed()) {
+			((MapLayoutWidget) mapWidget).getButtonBar().setPressedButton(
+					button);
+			((MapLayoutWidget) this.mapWidget).activateDrawPointFeature();
+		} else
+			((MapLayoutWidget) this.mapWidget).deactivateDrawPointFeature();
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#getMapControl()
+	 */
+	@Override
+	public Control getMapControl() {
+		// TODO Auto-generated method stub
+		return ((MapLayoutWidget) mapWidget).getDrawPointFeature();
+	}
 }

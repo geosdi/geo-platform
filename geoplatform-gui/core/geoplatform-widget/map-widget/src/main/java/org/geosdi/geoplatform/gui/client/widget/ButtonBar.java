@@ -37,10 +37,12 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 import java.util.List;
 
+import org.geosdi.geoplatform.gui.action.GeoPlatformButtonObserver;
 import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.action.ToolbarApplicationAction;
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.action.button.GeoPlatformToggleButton;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
@@ -68,7 +70,9 @@ public class ButtonBar extends LayoutContainer {
 	private VerticalPanel vp;
 	private ToolBar toolBar;
 	private MapLayoutWidget mapLayoutWidget;
-	
+
+	private GeoPlatformButtonObserver buttonObserver;
+
 	/**
 	 * Constructor
 	 * 
@@ -79,6 +83,8 @@ public class ButtonBar extends LayoutContainer {
 		this.vp = new VerticalPanel();
 		this.toolBar = new ToolBar();
 		this.mapLayoutWidget = mapLayoutWidget;
+		this.mapLayoutWidget.setButtonBar(this);
+		this.buttonObserver = new GeoPlatformButtonObserver();
 		initialize();
 	}
 
@@ -201,12 +207,14 @@ public class ButtonBar extends LayoutContainer {
 	 * @param action
 	 */
 	public void addMapToogleButton(ToolbarMapAction action) {
-		ToggleButton button = new ToggleButton();
+		GeoPlatformToggleButton button = new GeoPlatformToggleButton();
+		button.setAction(action);
 		button.setId(action.getId());
 		button.setToolTip(action.getTooltip());
 		button.setIcon(action.getImage());
 		button.addSelectionListener(action);
 		button.setEnabled(action.isEnabled());
+
 		this.toolBar.add(button);
 	}
 
@@ -217,4 +225,28 @@ public class ButtonBar extends LayoutContainer {
 		return toolBar;
 	}
 
+	/**
+	 * Checks for a Togglr Button pressed
+	 * 
+	 * @return boolean
+	 */
+	public boolean isTogglePressed() {
+		return this.buttonObserver.isButtonPressed();
+	}
+
+	/**
+	 * 
+	 * @param button
+	 */
+	public void setPressedButton(ToggleButton button) {
+		this.buttonObserver.setButtonPressed(button);
+	}
+
+	public Button getPressedButton() {
+		return this.buttonObserver.getButtonPressed();
+	}
+
+	public void changeButtonState() {
+		this.buttonObserver.changeButtonState();
+	}
 }

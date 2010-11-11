@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.action;
 
+import org.gwtopenmaps.openlayers.client.control.Control;
+
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
@@ -63,5 +65,9 @@ public abstract class ToolbarMapAction extends GeoPlatformToolbarAction {
 	 */
 	public void setTooltip(String tooltip) {
 		this.tooltip = tooltip;
+	}
+
+	public Control getMapControl() {
+		return null;
 	}
 }

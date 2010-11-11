@@ -33,51 +33,54 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.action;
 
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
-import org.geosdi.geoplatform.gui.client.Resources;
-import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
-import org.geosdi.geoplatform.gui.configuration.action.annotation.PersistButton;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.geosdi.geoplatform.gui.action.button.GeoPlatformToggleButton;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 
 /**
  * @author giuseppe
  * 
  */
-@PersistButton(persist = true)
-public class DrawAction extends ToolbarMapAction {
+public class GeoPlatformButtonObserver {
 
-	private GeoPlatformMap mapWidget;
+	private Button buttonPressed;
 
-	public DrawAction(GeoPlatformMap mapWidget) {
-		super("Draw Polygon", Resources.ICONS.DrawFeature());
-
-		this.mapWidget = mapWidget;
+	/**
+	 * @return the buttonPressed
+	 */
+	public Button getButtonPressed() {
+		return buttonPressed;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
+	/**
+	 * @param buttonPressed
+	 *            the buttonPressed to set
 	 */
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		ToggleButton button = (ToggleButton) ce.getSource();
+	public void setButtonPressed(Button buttonPressed) {
+		this.buttonPressed = buttonPressed;
+	}
 
-		/** ADD CODE TO ACTIVATE CONTROL ON THE MAP **/
+	/**
+	 * This method permit to understand if a Button is already Pressed
+	 * 
+	 * @return
+	 */
+	public boolean isButtonPressed() {
+		return this.buttonPressed != null;
+	}
 
-		if (button.isPressed()) {
-			((MapLayoutWidget) this.mapWidget).activateDrawFeature();
-		} else
-			((MapLayoutWidget) this.mapWidget).deactivateDrawFeature();
+	public void changeButtonState() {
+		if (this.buttonPressed instanceof GeoPlatformToggleButton) {
+			((GeoPlatformToggleButton) buttonPressed).disableControl();
+		}
+	}
 
+	public boolean isSameButton(String buttonId) {
+		return this.buttonPressed != null ? this.buttonPressed.getId()
+				.equalsIgnoreCase(buttonId) : false;
 	}
 
 }

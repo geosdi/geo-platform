@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.map;
 import java.util.Collections;
 import java.util.List;
 
+import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -48,6 +49,7 @@ import org.gwtopenmaps.openlayers.client.MapOptions;
 import org.gwtopenmaps.openlayers.client.MapUnits;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Projection;
+import org.gwtopenmaps.openlayers.client.control.DrawFeature;
 import org.gwtopenmaps.openlayers.client.control.LayerSwitcher;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.GMapType;
@@ -69,6 +71,8 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	private Map map;
 	private Layer layer;
 	private Layer osm;
+
+	private ButtonBar buttonBar;
 
 	private List<GenericClientTool> tools;
 
@@ -227,8 +231,39 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		this.mapControl.deactivateDrawFeature();
 	}
 
+	public void activateDrawPointFeature() {
+		this.mapControl.activateDrawPointFeature();
+	}
+
+	public void deactivateDrawPointFeature() {
+		this.mapControl.deactivateDrawPointFeature();
+	}
+
 	public void redrawVectorLayer() {
 		this.mapControl.redrawVectorLayer();
+	}
+
+	/**
+	 * @return the buttonBar
+	 */
+	public ButtonBar getButtonBar() {
+		return buttonBar;
+	}
+
+	/**
+	 * @param buttonBar
+	 *            the buttonBar to set
+	 */
+	public void setButtonBar(ButtonBar buttonBar) {
+		this.buttonBar = buttonBar;
+	}
+
+	public DrawFeature getDrawPolygonFeature() {
+		return this.mapControl.getDrawFeatureControl();
+	}
+	
+	public DrawFeature getDrawPointFeature() {
+		return this.mapControl.getDrawPointFeaureControl();
 	}
 
 }

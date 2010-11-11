@@ -33,46 +33,27 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.client.widget.map.responsibility;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  * @author giuseppe
  * 
  */
-@SuppressWarnings("deprecation")
-public interface GeoPlatformIcons extends ImageBundle {
+public class GeometryRequestManager {
 
-	@Resource("zoom-in.png")
-	AbstractImagePrototype ZoomIn();
+	private Vector vector;
 
-	@Resource("zoom-out.png")
-	AbstractImagePrototype ZoomOut();
+	public GeometryRequestManager(Vector vector) {
+		this.vector = vector;
+	}
 
-	@Resource("draw-feature.png")
-	AbstractImagePrototype DrawFeature();
+	public void forwardRequest(GeometryRequestHandler handler,
+			VectorFeature feature) {
 
-	@Resource("rotate.png")
-	AbstractImagePrototype Rotate();
-	
-	@Resource("drag.png")
-	AbstractImagePrototype Drag();
-	
-	@Resource("resize.png")
-	AbstractImagePrototype Resize();
-	
-	@Resource("shape.png")
-	AbstractImagePrototype Shape();
-
-	@Resource("gp-icon-16x16.png")
-	AbstractImagePrototype geoPortalInfo();
-	
-	@Resource("draw-point.png")
-	AbstractImagePrototype DrawPointFeature();
-	
-	@Resource("draw-line.png")
-	AbstractImagePrototype DrawLineFeature();
+		handler.geometryRequest(feature, vector);
+	}
 
 }

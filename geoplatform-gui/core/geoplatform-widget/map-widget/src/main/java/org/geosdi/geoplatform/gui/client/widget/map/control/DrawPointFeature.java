@@ -33,30 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.action;
+package org.geosdi.geoplatform.gui.client.widget.map.control;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.extjs.gxt.ui.client.widget.button.Button;
+import org.gwtopenmaps.openlayers.client.control.DrawFeature;
+import org.gwtopenmaps.openlayers.client.control.DrawFeature.FeatureAddedListener;
+import org.gwtopenmaps.openlayers.client.control.DrawFeatureOptions;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.handler.PointHandler;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  * @author giuseppe
- * 
+ *
  */
-public class GeoPlatformButtonRegistar {
+public class DrawPointFeature extends DrawGenericFeatureControl {
 
-	private static GeoPlatformButtonRegistar INSTANCE;
-	private Map<String, Button> registry;
-
-	public GeoPlatformButtonRegistar() {
-		this.registry = new HashMap<String, Button>();
+	public DrawPointFeature(Vector vector) {
+		super(vector);
+		// TODO Auto-generated constructor stub
 	}
 
-	public static GeoPlatformButtonRegistar get() {
-		if (INSTANCE == null)
-			INSTANCE = new GeoPlatformButtonRegistar();
-		return INSTANCE;
+	/* (non-Javadoc)
+	 * @see org.geosdi.geoplatform.gui.impl.map.control.GeoPlatformMapControl#createControl()
+	 */
+	@Override
+	public void createControl() {
+		// TODO Auto-generated method stub
+		FeatureAddedListener listener = new FeatureAddedListener() {
+			public void onFeatureAdded(VectorFeature vf) {
+
+				/** HERE THE CODE FOR INJECT THE FEATURE **/
+
+			}
+		};
+
+		DrawFeatureOptions drawPolygonFeatureOptions = new DrawFeatureOptions();
+		drawPolygonFeatureOptions.onFeatureAdded(listener);
+
+		this.control = new DrawFeature(this.vector, new PointHandler(),
+				drawPolygonFeatureOptions);
 	}
 
 }

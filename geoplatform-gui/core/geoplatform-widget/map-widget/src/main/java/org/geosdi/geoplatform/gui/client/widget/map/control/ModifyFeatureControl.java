@@ -35,16 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.control;
 
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.client.widget.map.responsibility.GeometryRequestHandler;
+import org.geosdi.geoplatform.gui.client.widget.map.responsibility.GeometryRequestManager;
+import org.geosdi.geoplatform.gui.client.widget.map.responsibility.LineRequestHandler;
+import org.geosdi.geoplatform.gui.client.widget.map.responsibility.PointRequestHandler;
+import org.geosdi.geoplatform.gui.client.widget.map.responsibility.PolygonRequestHandler;
 import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 import org.gwtopenmaps.openlayers.client.event.VectorAfterFeatureModifiedListener;
 import org.gwtopenmaps.openlayers.client.event.VectorBeforeFeatureModifiedListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.geometry.Polygon;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
-
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 
 /**
  * @author giuseppe
@@ -53,11 +53,27 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 public class ModifyFeatureControl extends MapControl {
 
 	private ModifyFeature control;
-	private VectorFeature oldFeature;
+	private VectorFeature selectedFeature;
+
+	private GeometryRequestManager requestManager;
+	private GeometryRequestHandler pointHandler;
+	private GeometryRequestHandler lineHandler;
+	private GeometryRequestHandler polygonHandler;
 
 	public ModifyFeatureControl(Vector vector) {
 		super(vector);
 		// TODO Auto-generated constructor stub
+		this.createResponsibilityComponent();
+	}
+
+	private void createResponsibilityComponent() {
+		// TODO Auto-generated method stub
+		this.requestManager = new GeometryRequestManager(vector);
+		this.pointHandler = new PointRequestHandler(this);
+		this.lineHandler = new LineRequestHandler(this);
+		this.polygonHandler = new PolygonRequestHandler(this);
+		this.pointHandler.setSuperiorRequestHandler(lineHandler);
+		this.lineHandler.setSuperiorRequestHandler(polygonHandler);
 	}
 
 	/*
@@ -78,7 +94,7 @@ public class ModifyFeatureControl extends MapControl {
 			public void onBeforeFeatureModified(
 					BeforeFeatureModifiedEvent eventObject) {
 				// TODO Auto-generated method stub
-				oldFeature = eventObject.getVectorFeature().clone();
+				selectedFeature = eventObject.getVectorFeature().clone();
 			}
 		});
 
@@ -89,51 +105,11 @@ public class ModifyFeatureControl extends MapControl {
 
 				VectorFeature feature = eventObject.getVectorFeature();
 
-				if (!checkModifications(feature))
-					showConfirmMessage(feature);
+				requestManager.forwardRequest(pointHandler, feature);
 
 			}
 
 		});
-	}
-
-	private void showConfirmMessage(final VectorFeature feature) {
-		// TODO Auto-generated method stub
-		GeoPlatformMessage
-				.confirmMessage(
-						"Feature Status",
-						"The Feature Geometry is changed. Do you want to apply the changes?",
-						new Listener<MessageBoxEvent>() {
-
-							@Override
-							public void handleEvent(MessageBoxEvent be) {
-								// TODO Auto-generated method stub
-								if (be.getButtonClicked().getText()
-										.equalsIgnoreCase("yes")
-										|| be.getButtonClicked().getText()
-												.equalsIgnoreCase("si")) {
-									/**
-									 * HERE THE CODE TO DISPATCH THAT THE
-									 * GEOMETRY FEATURE MUST BE UPDATE IN DB ON
-									 * THE SERVICES
-									 **/
-									System.out.println("YES **********");
-								} else {
-									vector.removeFeature(feature);
-									vector.addFeature(oldFeature);
-								}
-							}
-						});
-	}
-
-	private boolean checkModifications(VectorFeature feature) {
-		Polygon oldPolygon = Polygon.narrowToPolygon(this.oldFeature
-				.getGeometry().getJSObject());
-
-		Polygon pol = Polygon.narrowToPolygon(feature.getGeometry()
-				.getJSObject());
-
-		return pol.equals(oldPolygon);
 	}
 
 	/*
@@ -164,4 +140,18 @@ public class ModifyFeatureControl extends MapControl {
 		return this.control;
 	}
 
+	/**
+	 * @return the oldFeature
+	 */
+	public VectorFeature getSelectedFeature() {
+		return selectedFeature;
+	}
+
+	/**
+	 * Refresh the Control
+	 */
+	public void refreshControl() {
+		deactivateControl();
+		activateControl();
+	}
 }

@@ -33,46 +33,46 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.action.button;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 
 /**
  * @author giuseppe
  * 
  */
-@SuppressWarnings("deprecation")
-public interface GeoPlatformIcons extends ImageBundle {
+public class GeoPlatformToggleButton extends ToggleButton {
 
-	@Resource("zoom-in.png")
-	AbstractImagePrototype ZoomIn();
+	private ToolbarMapAction action;
 
-	@Resource("zoom-out.png")
-	AbstractImagePrototype ZoomOut();
+	public GeoPlatformToggleButton() {
+		super();
+	}
 
-	@Resource("draw-feature.png")
-	AbstractImagePrototype DrawFeature();
+	/**
+	 * Toggle the Button and Deactivate the Map Control Associated with this
+	 * Button
+	 */
+	public void disableControl() {
+		super.toggle(false);
+		action.getMapControl().deactivate();
+	}
 
-	@Resource("rotate.png")
-	AbstractImagePrototype Rotate();
-	
-	@Resource("drag.png")
-	AbstractImagePrototype Drag();
-	
-	@Resource("resize.png")
-	AbstractImagePrototype Resize();
-	
-	@Resource("shape.png")
-	AbstractImagePrototype Shape();
+	/**
+	 * @return the action
+	 */
+	public ToolbarMapAction getAction() {
+		return action;
+	}
 
-	@Resource("gp-icon-16x16.png")
-	AbstractImagePrototype geoPortalInfo();
-	
-	@Resource("draw-point.png")
-	AbstractImagePrototype DrawPointFeature();
-	
-	@Resource("draw-line.png")
-	AbstractImagePrototype DrawLineFeature();
+	/**
+	 * @param action
+	 *            the action to set
+	 */
+	public void setAction(ToolbarMapAction action) {
+		this.action = action;
+	}
 
 }

@@ -33,46 +33,46 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.client.widget.map.responsibility;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import org.geosdi.geoplatform.gui.client.widget.map.control.ModifyFeatureControl;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  * @author giuseppe
  * 
  */
-@SuppressWarnings("deprecation")
-public interface GeoPlatformIcons extends ImageBundle {
+public abstract class GeometryRequestHandler {
 
-	@Resource("zoom-in.png")
-	AbstractImagePrototype ZoomIn();
+	protected ModifyFeatureControl control;
+	private GeometryRequestHandler successor;
 
-	@Resource("zoom-out.png")
-	AbstractImagePrototype ZoomOut();
+	public GeometryRequestHandler(ModifyFeatureControl theControl) {
+		this.control = theControl;
+	}
 
-	@Resource("draw-feature.png")
-	AbstractImagePrototype DrawFeature();
+	public void setSuperiorRequestHandler(GeometryRequestHandler theSuperior) {
+		this.successor = theSuperior;
+	}
 
-	@Resource("rotate.png")
-	AbstractImagePrototype Rotate();
-	
-	@Resource("drag.png")
-	AbstractImagePrototype Drag();
-	
-	@Resource("resize.png")
-	AbstractImagePrototype Resize();
-	
-	@Resource("shape.png")
-	AbstractImagePrototype Shape();
+	public void geometryRequest(VectorFeature feature, Vector vector) {
+		forwardGeometryRequest(feature, vector);
+	}
 
-	@Resource("gp-icon-16x16.png")
-	AbstractImagePrototype geoPortalInfo();
-	
-	@Resource("draw-point.png")
-	AbstractImagePrototype DrawPointFeature();
-	
-	@Resource("draw-line.png")
-	AbstractImagePrototype DrawLineFeature();
+	protected void forwardGeometryRequest(VectorFeature feature, Vector vector) {
+		if (successor != null)
+			successor.geometryRequest(feature, vector);
+	}
+
+	public VectorFeature getSelectedFeaure() {
+		return VectorFeature.narrowToVectorFeature(control.getSelectedFeature()
+				.getJSObject());
+	}
+
+	public abstract boolean checkModifications(VectorFeature feature);
+
+	public abstract void showConfirmMessage(final VectorFeature feature,
+			final Vector vector);
 
 }

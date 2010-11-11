@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map;
 
+import org.geosdi.geoplatform.gui.client.widget.map.control.DrawPointFeature;
 import org.geosdi.geoplatform.gui.client.widget.map.control.DrawPolygonControl;
 import org.geosdi.geoplatform.gui.client.widget.map.control.ModifyFeatureControl;
 import org.gwtopenmaps.openlayers.client.Map;
@@ -58,6 +59,7 @@ public class MapControlManager {
 	private Vector vector;
 
 	private DrawPolygonControl drawFeature;
+	private DrawPointFeature drawPointFeature;
 	private ModifyFeatureControl modifyFeature;
 
 	public MapControlManager(Map map) {
@@ -87,6 +89,7 @@ public class MapControlManager {
 	 */
 	private void initControl() {
 		this.drawFeature = new DrawPolygonControl(vector);
+		this.drawPointFeature = new DrawPointFeature(vector);
 		this.modifyFeature = new ModifyFeatureControl(vector);
 	}
 
@@ -96,6 +99,7 @@ public class MapControlManager {
 	 */
 	private void addMapControl() {
 		this.map.addControl(this.drawFeature.getControl());
+		this.map.addControl(this.drawPointFeature.getControl());
 		this.map.addControl(this.modifyFeature.getControl());
 		this.modifyFeature.activateControl();
 	}
@@ -169,6 +173,10 @@ public class MapControlManager {
 		return this.drawFeature.getControl();
 	}
 
+	public DrawFeature getDrawPointFeaureControl() {
+		return this.drawPointFeature.getControl();
+	}
+
 	/**
 	 * 
 	 * @return ModifyFeature
@@ -182,5 +190,13 @@ public class MapControlManager {
 	 */
 	public void redrawVectorLayer() {
 		this.vector.redraw();
+	}
+
+	public void activateDrawPointFeature() {
+		this.drawPointFeature.activateControl();
+	}
+
+	public void deactivateDrawPointFeature() {
+		this.drawPointFeature.deactivateControl();
 	}
 }

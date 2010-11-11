@@ -906,7 +906,7 @@
         <gt-version>2.7-SNAPSHOT</gt-version>
         
         <gwtVersion>2.1.0</gwtVersion>
-        <gxtVersion>2.2.0</gxtVersion>
+        <gxtVersion>2.2.1</gxtVersion>
 
     </properties>
 	

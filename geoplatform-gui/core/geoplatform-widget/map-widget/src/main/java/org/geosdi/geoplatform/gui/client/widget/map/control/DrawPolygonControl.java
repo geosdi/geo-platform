@@ -66,16 +66,10 @@ public class DrawPolygonControl extends DrawGenericFeatureControl {
 	@Override
 	public void createControl() {
 		// TODO Auto-generated method stub
-		FeatureAddedListener listener = new FeatureAddedListener() {
-			public void onFeatureAdded(VectorFeature vf) {
-
-				Dispatcher.forwardEvent(MapWidgetEvents.INJECT_WKT, vf);
-
-			}
-		};
 
 		DrawFeatureOptions drawPolygonFeatureOptions = new DrawFeatureOptions();
-		drawPolygonFeatureOptions.onFeatureAdded(listener);
+		drawPolygonFeatureOptions.onFeatureAdded(super
+				.createFeatureAddedListener());
 
 		this.control = new DrawFeature(this.vector, new PolygonHandler(),
 				drawPolygonFeatureOptions);

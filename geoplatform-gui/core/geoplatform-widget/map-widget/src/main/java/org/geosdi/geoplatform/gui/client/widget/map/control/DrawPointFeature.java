@@ -36,15 +36,13 @@
 package org.geosdi.geoplatform.gui.client.widget.map.control;
 
 import org.gwtopenmaps.openlayers.client.control.DrawFeature;
-import org.gwtopenmaps.openlayers.client.control.DrawFeature.FeatureAddedListener;
 import org.gwtopenmaps.openlayers.client.control.DrawFeatureOptions;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.handler.PointHandler;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  * @author giuseppe
- *
+ * 
  */
 public class DrawPointFeature extends DrawGenericFeatureControl {
 
@@ -53,22 +51,19 @@ public class DrawPointFeature extends DrawGenericFeatureControl {
 		// TODO Auto-generated constructor stub
 	}
 
-	/* (non-Javadoc)
-	 * @see org.geosdi.geoplatform.gui.impl.map.control.GeoPlatformMapControl#createControl()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.impl.map.control.GeoPlatformMapControl#
+	 * createControl()
 	 */
 	@Override
 	public void createControl() {
 		// TODO Auto-generated method stub
-		FeatureAddedListener listener = new FeatureAddedListener() {
-			public void onFeatureAdded(VectorFeature vf) {
-
-				/** HERE THE CODE FOR INJECT THE FEATURE **/
-
-			}
-		};
 
 		DrawFeatureOptions drawPolygonFeatureOptions = new DrawFeatureOptions();
-		drawPolygonFeatureOptions.onFeatureAdded(listener);
+		drawPolygonFeatureOptions.onFeatureAdded(super
+				.createFeatureAddedListener());
 
 		this.control = new DrawFeature(this.vector, new PointHandler(),
 				drawPolygonFeatureOptions);

@@ -35,8 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.control;
 
+import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature;
+import org.gwtopenmaps.openlayers.client.control.DrawFeature.FeatureAddedListener;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
+
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 
 /**
  * @author giuseppe
@@ -61,6 +66,20 @@ public abstract class DrawGenericFeatureControl extends MapControl {
 	public void activateControl() {
 		// TODO Auto-generated method stub
 		this.control.activate();
+	}
+
+	/**
+	 * 
+	 * @return FeatureAddedListener
+	 */
+	public FeatureAddedListener createFeatureAddedListener() {
+		return new FeatureAddedListener() {
+			public void onFeatureAdded(VectorFeature vf) {
+
+				Dispatcher.forwardEvent(MapWidgetEvents.INJECT_WKT, vf);
+
+			}
+		};
 	}
 
 	/*

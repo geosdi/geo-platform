@@ -60,6 +60,7 @@ public class ModifyFeatureControl extends MapControl {
 	private GeometryRequestHandler lineHandler;
 	private GeometryRequestHandler polygonHandler;
 
+
 	public ModifyFeatureControl(Vector vector) {
 		super(vector);
 		// TODO Auto-generated constructor stub
@@ -147,11 +148,4 @@ public class ModifyFeatureControl extends MapControl {
 		return selectedFeature;
 	}
 
-	/**
-	 * Refresh the Control
-	 */
-	public void refreshControl() {
-		deactivateControl();
-		activateControl();
-	}
 }

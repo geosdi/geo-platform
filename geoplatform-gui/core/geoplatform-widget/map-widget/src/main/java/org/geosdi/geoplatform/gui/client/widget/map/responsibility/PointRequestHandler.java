@@ -85,7 +85,7 @@ public class PointRequestHandler extends GeometryRequestHandler {
 			final Vector vector) {
 		// TODO Auto-generated method stub
 		final VectorFeature selectedFeature = getSelectedFeaure();
-		
+
 		GeoPlatformMessage
 				.confirmMessage(
 						"Point Feature Status",
@@ -94,7 +94,7 @@ public class PointRequestHandler extends GeometryRequestHandler {
 
 							@Override
 							public void handleEvent(MessageBoxEvent be) {
-								// TODO Auto-generated method stub								
+								// TODO Auto-generated method stub
 								if (be.getButtonClicked().getText()
 										.equalsIgnoreCase("yes")
 										|| be.getButtonClicked().getText()

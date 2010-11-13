@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.responsibility;
 
+import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.client.widget.map.control.ModifyFeatureControl;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
@@ -44,6 +45,7 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 
 /**
  * @author giuseppe
@@ -98,14 +100,12 @@ public class PointRequestHandler extends GeometryRequestHandler {
 								if (be.getButtonClicked().getText()
 										.equalsIgnoreCase("yes")
 										|| be.getButtonClicked().getText()
-												.equalsIgnoreCase("si")) {
-									/**
-									 * HERE THE CODE TO DISPATCH THAT THE
-									 * GEOMETRY FEATURE MUST BE UPDATE IN DB ON
-									 * THE SERVICES
-									 **/
-									System.out.println("YES **********");
-								} else {
+												.equalsIgnoreCase("si"))
+									Dispatcher
+											.forwardEvent(
+													MapWidgetEvents.UPDATE_POINT_GEOMETRY,
+													feature);
+								else {
 									vector.removeFeature(feature);
 									vector.addFeature(selectedFeature);
 								}

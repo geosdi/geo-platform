@@ -33,30 +33,55 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.client.widget.map.utility;
 
-import com.extjs.gxt.ui.client.event.EventType;
+import org.gwtopenmaps.openlayers.client.Projection;
+import org.gwtopenmaps.openlayers.client.geometry.Geometry;
+import org.gwtopenmaps.openlayers.client.geometry.Point;
+import org.gwtopenmaps.openlayers.client.geometry.Polygon;
 
 /**
  * @author giuseppe
  * 
  */
-public class MapWidgetEvents {
+public class GeoPlatformSRSConverter {
 
-	public static final EventType INIT_MAP_WIDGET = new EventType();
+	/**
+	 * Convert Geometry Polygon SRS from Projection Source to Dest This
+	 * Operation is possible but remember to add PROJ4 in your project to have
+	 * support for conversion that you want to do.
+	 * 
+	 * @param geom
+	 * @param source
+	 * @param dest
+	 * @return
+	 */
+	public static String polygonWKTConverter(Geometry geom, Projection source,
+			Projection dest) {
 
-	public static final EventType ATTACH_MAP_WIDGET = new EventType();
+		Polygon pol = Polygon.narrowToPolygon(geom.getJSObject());
+		pol.transform(source, dest);
 
-	public static final EventType ATTACH_TOOLBAR = new EventType();
-	
-	public static final EventType INJECT_WKT = new EventType();
-	
-	public static final EventType ERASE_FEATURE = new EventType();
-	
-	public static final EventType UPDATE_POLYGON_GEOMETRY = new EventType();
-	
-	public static final EventType UPDATE_POINT_GEOMETRY = new EventType();
-	
-	public static final EventType UPDATE_LINE_GEOMETRY = new EventType();
+		return pol.toString();
+	}
+
+	/**
+	 * Convert Geometry Point SRS from Projection Source to Dest Operation is
+	 * possible but remember to add PROJ4 in your project to have support for
+	 * conversion that you want to do.
+	 * 
+	 * @param geom
+	 * @param source
+	 * @param dest
+	 * @return
+	 */
+	public static String pointWKTConverter(Geometry geom, Projection source,
+			Projection dest) {
+
+		Point point = Point.narrowToPoint(geom.getJSObject());
+		point.transform(source, dest);
+
+		return point.toString();
+	}
 
 }

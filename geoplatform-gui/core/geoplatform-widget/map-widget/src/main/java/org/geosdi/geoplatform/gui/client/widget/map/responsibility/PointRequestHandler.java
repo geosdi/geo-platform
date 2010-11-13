@@ -79,7 +79,9 @@ public class PointRequestHandler extends GeometryRequestHandler {
 
 		Point po = Point.narrowToPoint(feature.getGeometry().getJSObject());
 
-		return po.equals(oldPoint);
+		return ((po.getX() == oldPoint.getX()) && (po.getY() == oldPoint.getY()));
+
+		// return po.equals(oldPoint);
 	}
 
 	@Override

@@ -261,9 +261,37 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	public DrawFeature getDrawPolygonFeature() {
 		return this.mapControl.getDrawFeatureControl();
 	}
-	
+
 	public DrawFeature getDrawPointFeature() {
 		return this.mapControl.getDrawPointFeaureControl();
+	}
+
+	public void activateModifyFeature() {
+		this.mapControl.activateModifyFeature();
+	}
+
+	public void deactivateModifyFeature() {
+		this.mapControl.deactivateModifyFeature();
+	}
+
+	public void activateFeatureOperation() {
+		this.mapControl.activateFeatureOperation();
+	}
+
+	public void deactivateFeatureOperation() {
+		this.mapControl.deactivateFeatureOperation();
+	}
+
+	public boolean isFeatureOperationEnable() {
+		return this.mapControl.isFeatureOperationEnable();
+	}
+
+	public boolean isModifyFeatureEnable() {
+		return this.mapControl.isModifyFeatureEnable();
+	}
+
+	public int getFeaturesNumber() {
+		return this.mapControl.getFeaturesNumber();
 	}
 
 }

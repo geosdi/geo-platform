@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 
@@ -62,6 +63,15 @@ public class RotateAction extends ModifyFeatureAction {
 	@Override
 	public void componentSelected(ButtonEvent ce) {
 		// TODO Auto-generated method stub
+		if (((MapLayoutWidget) this.mapWidget).getButtonBar().isTogglePressed())
+			((MapLayoutWidget) mapWidget).getButtonBar().changeButtonState();
+		
+		if (((MapLayoutWidget) mapWidget).isFeatureOperationEnable())
+			((MapLayoutWidget) mapWidget).deactivateFeatureOperation();
+
+		if (!((MapLayoutWidget) mapWidget).isModifyFeatureEnable())
+			((MapLayoutWidget) mapWidget).activateModifyFeature();
+		
 		this.control.setMode(ModifyFeature.ROTATE);
 	}
 

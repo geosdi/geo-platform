@@ -37,8 +37,9 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import org.geosdi.geoplatform.gui.client.Resources;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
+import org.geosdi.geoplatform.gui.client.widget.map.control.crud.OperationType;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 
@@ -46,33 +47,30 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
  * @author giuseppe
  * 
  */
-public class DragAction extends ModifyFeatureAction {
+public class DeleteFeatureAction extends GenericFeatureAction {
 
-	public DragAction(GeoPlatformMap mapWidget) {
-		super("Drag", Resources.ICONS.Drag(), mapWidget);
+	public DeleteFeatureAction(GeoPlatformMap theMapWidget) {
+		super("Delete Feature", Resources.ICONS.DeleteFeature(), theMapWidget);
 		// TODO Auto-generated constructor stub
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
 	@Override
 	public void componentSelected(ButtonEvent ce) {
 		// TODO Auto-generated method stub
+		if (((MapLayoutWidget) this.mapWidget).getFeaturesNumber() == 0) {
+			GeoPlatformMessage.alertMessage("Feaures Service",
+					"There are no Features to erase.");
+			return;
+		}
+
 		if (((MapLayoutWidget) this.mapWidget).getButtonBar().isTogglePressed())
 			((MapLayoutWidget) mapWidget).getButtonBar().changeButtonState();
-		
-		if (((MapLayoutWidget) mapWidget).isFeatureOperationEnable())
-			((MapLayoutWidget) mapWidget).deactivateFeatureOperation();
 
-		if (!((MapLayoutWidget) mapWidget).isModifyFeatureEnable())
-			((MapLayoutWidget) mapWidget).activateModifyFeature();
+		((MapLayoutWidget) mapWidget).deactivateModifyFeature();
 
-		this.control.setMode(ModifyFeature.DRAG);
+		if (!((MapLayoutWidget) mapWidget).isFeatureOperationEnable())
+			((MapLayoutWidget) mapWidget).activateFeatureOperation();
+
+		this.featureOperation.setOperation(OperationType.DELETE);
 	}
-
 }

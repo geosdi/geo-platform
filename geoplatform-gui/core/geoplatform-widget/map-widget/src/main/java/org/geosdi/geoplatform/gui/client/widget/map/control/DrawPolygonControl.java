@@ -35,15 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.control;
 
-import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature;
-import org.gwtopenmaps.openlayers.client.control.DrawFeature.FeatureAddedListener;
 import org.gwtopenmaps.openlayers.client.control.DrawFeatureOptions;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
-
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
 
 /**
  * @author giuseppe

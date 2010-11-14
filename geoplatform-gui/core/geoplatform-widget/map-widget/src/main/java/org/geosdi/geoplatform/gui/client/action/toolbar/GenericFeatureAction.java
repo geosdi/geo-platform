@@ -35,44 +35,35 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
+import org.geosdi.geoplatform.gui.client.widget.map.control.crud.GenericFeatureOperation;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
+import org.gwtopenmaps.openlayers.client.control.SelectFeature;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
  * @author giuseppe
  * 
  */
-public class DragAction extends ModifyFeatureAction {
+public abstract class GenericFeatureAction extends ToolbarMapAction {
 
-	public DragAction(GeoPlatformMap mapWidget) {
-		super("Drag", Resources.ICONS.Drag(), mapWidget);
+	protected GeoPlatformMap mapWidget;
+	protected GenericFeatureOperation featureOperation;
+
+	public GenericFeatureAction(String tooltip, AbstractImagePrototype image,
+			GeoPlatformMap theMapWidget) {
+		super(tooltip, image);
 		// TODO Auto-generated constructor stub
+		this.mapWidget = theMapWidget;
+
+		this.featureOperation = ((MapLayoutWidget) this.mapWidget)
+				.getMapControl().getFeatureOperation();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		if (((MapLayoutWidget) this.mapWidget).getButtonBar().isTogglePressed())
-			((MapLayoutWidget) mapWidget).getButtonBar().changeButtonState();
-		
-		if (((MapLayoutWidget) mapWidget).isFeatureOperationEnable())
-			((MapLayoutWidget) mapWidget).deactivateFeatureOperation();
-
-		if (!((MapLayoutWidget) mapWidget).isModifyFeatureEnable())
-			((MapLayoutWidget) mapWidget).activateModifyFeature();
-
-		this.control.setMode(ModifyFeature.DRAG);
+	public SelectFeature getMapControl() {
+		return this.featureOperation.getControl();
 	}
 
 }

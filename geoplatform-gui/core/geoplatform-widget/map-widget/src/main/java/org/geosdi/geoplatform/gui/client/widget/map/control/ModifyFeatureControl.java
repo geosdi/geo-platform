@@ -122,6 +122,7 @@ public class ModifyFeatureControl extends MapControl {
 	public void activateControl() {
 		// TODO Auto-generated method stub
 		this.control.activate();
+		this.enabled = true;
 	}
 
 	/*
@@ -134,6 +135,7 @@ public class ModifyFeatureControl extends MapControl {
 	public void deactivateControl() {
 		// TODO Auto-generated method stub
 		this.control.deactivate();
+		this.enabled = false;
 	}
 
 	public ModifyFeature getControl() {

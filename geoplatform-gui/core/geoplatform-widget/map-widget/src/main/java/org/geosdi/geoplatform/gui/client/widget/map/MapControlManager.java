@@ -38,11 +38,13 @@ package org.geosdi.geoplatform.gui.client.widget.map;
 import org.geosdi.geoplatform.gui.client.widget.map.control.DrawPointFeature;
 import org.geosdi.geoplatform.gui.client.widget.map.control.DrawPolygonControl;
 import org.geosdi.geoplatform.gui.client.widget.map.control.ModifyFeatureControl;
+import org.geosdi.geoplatform.gui.client.widget.map.control.crud.GenericFeatureOperation;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.Style;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature;
 import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
+import org.gwtopenmaps.openlayers.client.control.SelectFeature;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
 import org.gwtopenmaps.openlayers.client.geometry.MultiPolygon;
@@ -61,6 +63,7 @@ public class MapControlManager {
 	private DrawPolygonControl drawFeature;
 	private DrawPointFeature drawPointFeature;
 	private ModifyFeatureControl modifyFeature;
+	private GenericFeatureOperation featureOperation;
 
 	public MapControlManager(Map map) {
 		this.map = map;
@@ -91,6 +94,7 @@ public class MapControlManager {
 		this.drawFeature = new DrawPolygonControl(vector);
 		this.drawPointFeature = new DrawPointFeature(vector);
 		this.modifyFeature = new ModifyFeatureControl(vector);
+		this.featureOperation = new GenericFeatureOperation(vector);
 	}
 
 	/**
@@ -101,6 +105,7 @@ public class MapControlManager {
 		this.map.addControl(this.drawFeature.getControl());
 		this.map.addControl(this.drawPointFeature.getControl());
 		this.map.addControl(this.modifyFeature.getControl());
+		this.map.addControl(this.featureOperation.getControl());
 		this.modifyFeature.activateControl();
 	}
 
@@ -186,6 +191,21 @@ public class MapControlManager {
 	}
 
 	/**
+	 * 
+	 * @return SelectFeature
+	 */
+	public SelectFeature getSelectFeatureControl() {
+		return this.featureOperation.getControl();
+	}
+
+	/**
+	 * @return the featureOperation
+	 */
+	public GenericFeatureOperation getFeatureOperation() {
+		return featureOperation;
+	}
+
+	/**
 	 * Redraw the Vector Layer
 	 */
 	public void redrawVectorLayer() {
@@ -198,5 +218,33 @@ public class MapControlManager {
 
 	public void deactivateDrawPointFeature() {
 		this.drawPointFeature.deactivateControl();
+	}
+
+	public void activateFeatureOperation() {
+		this.featureOperation.activateControl();
+	}
+
+	public void deactivateFeatureOperation() {
+		this.featureOperation.deactivateControl();
+	}
+
+	public boolean isFeatureOperationEnable() {
+		return this.featureOperation.isEnabled();
+	}
+
+	public void activateModifyFeature() {
+		this.modifyFeature.activateControl();
+	}
+
+	public void deactivateModifyFeature() {
+		this.modifyFeature.deactivateControl();
+	}
+
+	public boolean isModifyFeatureEnable() {
+		return this.modifyFeature.isEnabled();
+	}
+	
+	public int getFeaturesNumber() {
+		return this.vector.getNumberOfFeatures();
 	}
 }

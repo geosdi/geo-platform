@@ -33,46 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
-
-import org.geosdi.geoplatform.gui.client.Resources;
-import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
-
-import com.extjs.gxt.ui.client.event.ButtonEvent;
+package org.geosdi.geoplatform.gui.client.widget.map.control.crud;
 
 /**
  * @author giuseppe
- * 
+ *
  */
-public class DragAction extends ModifyFeatureAction {
-
-	public DragAction(GeoPlatformMap mapWidget) {
-		super("Drag", Resources.ICONS.Drag(), mapWidget);
-		// TODO Auto-generated constructor stub
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		if (((MapLayoutWidget) this.mapWidget).getButtonBar().isTogglePressed())
-			((MapLayoutWidget) mapWidget).getButtonBar().changeButtonState();
-		
-		if (((MapLayoutWidget) mapWidget).isFeatureOperationEnable())
-			((MapLayoutWidget) mapWidget).deactivateFeatureOperation();
-
-		if (!((MapLayoutWidget) mapWidget).isModifyFeatureEnable())
-			((MapLayoutWidget) mapWidget).activateModifyFeature();
-
-		this.control.setMode(ModifyFeature.DRAG);
-	}
+public enum OperationType {
+	
+	DELETE, EDIT;
 
 }

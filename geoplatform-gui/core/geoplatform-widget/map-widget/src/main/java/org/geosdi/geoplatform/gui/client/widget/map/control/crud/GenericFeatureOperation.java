@@ -33,25 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.control;
+package org.geosdi.geoplatform.gui.client.widget.map.control.crud;
 
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
-import org.gwtopenmaps.openlayers.client.control.DrawFeature;
-import org.gwtopenmaps.openlayers.client.control.DrawFeature.FeatureAddedListener;
+import org.geosdi.geoplatform.gui.client.widget.map.control.MapControl;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.gwtopenmaps.openlayers.client.control.SelectFeature;
+import org.gwtopenmaps.openlayers.client.control.SelectFeature.ClickFeatureListener;
+import org.gwtopenmaps.openlayers.client.control.SelectFeatureOptions;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 
 /**
  * @author giuseppe
  * 
  */
-public abstract class DrawGenericFeatureControl extends MapControl {
+public class GenericFeatureOperation extends MapControl {
 
-	protected DrawFeature control;
+	private SelectFeature control;
+	private OperationType operation;
 
-	public DrawGenericFeatureControl(Vector vector) {
+	public GenericFeatureOperation(Vector vector) {
 		super(vector);
 		// TODO Auto-generated constructor stub
 	}
@@ -59,9 +65,45 @@ public abstract class DrawGenericFeatureControl extends MapControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#
-	 * activateControl()
+	 * @see org.geosdi.geoplatform.gui.impl.map.control.GeoPlatformMapControl#
+	 * createControl()
 	 */
+	@Override
+	public void createControl() {
+		// TODO Auto-generated method stub
+		SelectFeatureOptions selectFeatureOptions = new SelectFeatureOptions();
+
+		selectFeatureOptions.clickFeature(new ClickFeatureListener() {
+
+			@Override
+			public void onFeatureClicked(final VectorFeature vectorFeature) {
+				// TODO Auto-generated method stub
+				GeoPlatformMessage
+						.confirmMessage(
+								"Delete Feature",
+								"Are you sure you want to delete the selected feature ?",
+								new Listener<MessageBoxEvent>() {
+
+									@Override
+									public void handleEvent(MessageBoxEvent be) {
+										// TODO Auto-generated method stub
+										if (be.getButtonClicked().getText()
+												.equalsIgnoreCase("yes")
+												|| be.getButtonClicked()
+														.getText()
+														.equalsIgnoreCase("si"))
+											Dispatcher
+													.forwardEvent(
+															MapWidgetEvents.DELETE_FEATURE,
+															vectorFeature);
+									}
+								});
+			}
+		});
+
+		control = new SelectFeature(vector, selectFeatureOptions);
+	}
+
 	@Override
 	public void activateControl() {
 		// TODO Auto-generated method stub
@@ -69,26 +111,6 @@ public abstract class DrawGenericFeatureControl extends MapControl {
 		this.enabled = true;
 	}
 
-	/**
-	 * 
-	 * @return FeatureAddedListener
-	 */
-	public FeatureAddedListener createFeatureAddedListener() {
-		return new FeatureAddedListener() {
-			public void onFeatureAdded(VectorFeature vf) {
-
-				Dispatcher.forwardEvent(MapWidgetEvents.INJECT_WKT, vf);
-
-			}
-		};
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#
-	 * deactivateControl()
-	 */
 	@Override
 	public void deactivateControl() {
 		// TODO Auto-generated method stub
@@ -96,8 +118,26 @@ public abstract class DrawGenericFeatureControl extends MapControl {
 		this.enabled = false;
 	}
 
-	public DrawFeature getControl() {
-		return this.control;
+	/**
+	 * @return the control
+	 */
+	public SelectFeature getControl() {
+		return control;
+	}
+
+	/**
+	 * @param operation
+	 *            the operation to set
+	 */
+	public void setOperation(OperationType operation) {
+		this.operation = operation;
+	}
+
+	/**
+	 * @return the operation
+	 */
+	public OperationType getOperation() {
+		return operation;
 	}
 
 }

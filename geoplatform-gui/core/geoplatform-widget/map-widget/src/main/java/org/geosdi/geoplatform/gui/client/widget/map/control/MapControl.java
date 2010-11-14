@@ -43,6 +43,8 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * 
  */
 public abstract class MapControl extends GeoPlatformMapControl {
+	
+	protected boolean enabled;
 
 	public MapControl(Vector vector) {
 		super(vector);
@@ -52,5 +54,12 @@ public abstract class MapControl extends GeoPlatformMapControl {
 	public abstract void activateControl();
 
 	public abstract void deactivateControl();
+
+	/**
+	 * @return the enabled
+	 */
+	public boolean isEnabled() {
+		return enabled;
+	}
 
 }

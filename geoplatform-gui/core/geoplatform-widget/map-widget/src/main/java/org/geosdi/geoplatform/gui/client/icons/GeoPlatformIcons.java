@@ -74,5 +74,8 @@ public interface GeoPlatformIcons extends ImageBundle {
 	
 	@Resource("draw-line.png")
 	AbstractImagePrototype DrawLineFeature();
+	
+	@Resource("eraser_minus.png")
+	AbstractImagePrototype DeleteFeature();
 
 }

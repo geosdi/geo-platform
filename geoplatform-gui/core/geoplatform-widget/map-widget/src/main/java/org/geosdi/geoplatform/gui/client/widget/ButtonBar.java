@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.action.ToolbarApplicationAction;
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.action.button.GeoPlatformButton;
 import org.geosdi.geoplatform.gui.action.button.GeoPlatformToggleButton;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
@@ -175,7 +176,8 @@ public class ButtonBar extends LayoutContainer {
 	 * @param action
 	 */
 	public void addMapButton(ToolbarMapAction action) {
-		Button button = new Button();
+		GeoPlatformButton button = new GeoPlatformButton();
+		button.setAction(action);
 		button.setId(action.getId());
 		button.setToolTip(action.getTooltip());
 		button.setIcon(action.getImage());

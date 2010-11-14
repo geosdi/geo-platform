@@ -33,46 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.action.button;
 
-import org.geosdi.geoplatform.gui.client.Resources;
-import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
+import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.button.Button;
 
 /**
  * @author giuseppe
  * 
  */
-public class DragAction extends ModifyFeatureAction {
+public class GeoPlatformButton extends Button {
 
-	public DragAction(GeoPlatformMap mapWidget) {
-		super("Drag", Resources.ICONS.Drag(), mapWidget);
-		// TODO Auto-generated constructor stub
+	private ToolbarMapAction action;
+
+	public GeoPlatformButton() {
+		super();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
+	public void disableControl() {
+		this.action.getMapControl().deactivate();
+	}
+
+	public void enableControl() {
+		this.action.getMapControl().activate();
+	}
+
+	/**
+	 * @return the action
 	 */
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		if (((MapLayoutWidget) this.mapWidget).getButtonBar().isTogglePressed())
-			((MapLayoutWidget) mapWidget).getButtonBar().changeButtonState();
-		
-		if (((MapLayoutWidget) mapWidget).isFeatureOperationEnable())
-			((MapLayoutWidget) mapWidget).deactivateFeatureOperation();
+	public ToolbarMapAction getAction() {
+		return action;
+	}
 
-		if (!((MapLayoutWidget) mapWidget).isModifyFeatureEnable())
-			((MapLayoutWidget) mapWidget).activateModifyFeature();
-
-		this.control.setMode(ModifyFeature.DRAG);
+	/**
+	 * @param action
+	 *            the action to set
+	 */
+	public void setAction(ToolbarMapAction action) {
+		this.action = action;
 	}
 
 }

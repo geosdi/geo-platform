@@ -58,5 +58,7 @@ public class MapWidgetEvents {
 	public static final EventType UPDATE_POINT_GEOMETRY = new EventType();
 	
 	public static final EventType UPDATE_LINE_GEOMETRY = new EventType();
+	
+	public static final EventType DELETE_FEATURE = new EventType();
 
 }

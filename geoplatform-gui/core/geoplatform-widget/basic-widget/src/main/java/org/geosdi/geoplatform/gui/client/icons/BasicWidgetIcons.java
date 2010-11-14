@@ -56,5 +56,8 @@ public interface BasicWidgetIcons extends ImageBundle{
 
 	@Resource("select.png")
 	AbstractImagePrototype select();
+	
+	@Resource("search.png")
+	AbstractImagePrototype search();
 
 }

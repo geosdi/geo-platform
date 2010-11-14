@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.form;
 
-import org.geosdi.geoplatform.gui.client.widget.SaveStaus;
-import org.geosdi.geoplatform.gui.client.widget.SaveStaus.EnumSaveStatus;
+import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
+import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 import com.extjs.gxt.ui.client.event.WindowEvent;
@@ -58,7 +58,7 @@ public abstract class GeoPlatformFormWidget<T extends GeoPlatformBeanModel>
 	protected FieldSet fieldSet;
 	protected T entity;
 
-	protected SaveStaus saveStatus;
+	protected SaveStatus saveStatus;
 	private boolean initialized;
 
 	/**

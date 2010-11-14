@@ -39,16 +39,17 @@ package org.geosdi.geoplatform.gui.client.widget;
  * @author giuseppe
  * 
  */
-public class SaveStaus extends StatusWidget {
+public class SearchStatus extends StatusWidget {
 
-	public enum EnumSaveStatus {
-		STATUS_SAVE("x-status-ok"), STATUS_NO_SAVE("x-status-not-ok"), STATUS_SAVE_ERROR(
-				"x-status-error"), STATUS_MESSAGE_SAVE("Operation Ok"), STATUS_MESSAGE_NOT_SAVE(
-				"Operation Failed"), STATUS_MESSAGE_SAVE_ERROR("Service Error");
+	public enum EnumSearchStatus {
+		STATUS_SEARCH("x-status-ok"), STATUS_NO_SEARCH("x-status-not-ok"), STATUS_SEARCH_ERROR(
+				"x-status-error"), STATUS_MESSAGE_SEARCH("Search OK"), STATUS_MESSAGE_NOT_SEARCH(
+				"No Results Found"), STATUS_MESSAGE_SEARCH_ERROR(
+				"Search Service Error");
 
 		private String value;
 
-		EnumSaveStatus(String value) {
+		EnumSearchStatus(String value) {
 			this.value = value;
 		}
 

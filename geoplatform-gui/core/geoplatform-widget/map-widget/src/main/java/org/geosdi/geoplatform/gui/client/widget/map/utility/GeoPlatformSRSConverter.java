@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.map.utility;
 
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
+import org.gwtopenmaps.openlayers.client.geometry.MultiPolygon;
 import org.gwtopenmaps.openlayers.client.geometry.Point;
 import org.gwtopenmaps.openlayers.client.geometry.Polygon;
 
@@ -82,6 +83,22 @@ public class GeoPlatformSRSConverter {
 		point.transform(source, dest);
 
 		return point.toString();
+	}
+	
+	/**
+	 * 
+	 * @param geom
+	 * @param source
+	 * @param dest
+	 * @return
+	 */
+	public static String multiPolygonWKTConverter(Geometry geom, Projection source,
+			Projection dest) {
+
+		MultiPolygon multiPol = MultiPolygon.narrowToMultiPolygon(geom.getJSObject());
+		multiPol.transform(source, dest);
+
+		return multiPol.toString();
 	}
 
 }

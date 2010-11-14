@@ -60,8 +60,10 @@ public class PolygonRequestHandler extends GeometryRequestHandler {
 
 	public void geometryRequest(VectorFeature feature, Vector vector) {
 		// TODO Auto-generated method stub
-		if (feature.getGeometry().getClassName()
-				.equals(Geometry.POLYGON_CLASS_NAME)) {
+		if ((feature.getGeometry().getClassName()
+				.equals(Geometry.POLYGON_CLASS_NAME))
+				|| (feature.getGeometry().getClassName()
+						.equals(Geometry.MULTI_POLYGON_CLASS_NAME))) {
 
 			if (!checkModifications(feature))
 				showConfirmMessage(feature, vector);

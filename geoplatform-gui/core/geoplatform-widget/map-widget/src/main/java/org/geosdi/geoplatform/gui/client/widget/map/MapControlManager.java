@@ -130,7 +130,6 @@ public class MapControlManager {
 	 * @param wkt
 	 */
 	public void drawAoeOnMap(String wkt) {
-		this.eraseFeatures();
 		MultiPolygon geom = MultiPolygon.narrowToMultiPolygon(Geometry.fromWKT(
 				wkt).getJSObject());
 		geom.transform(new Projection("EPSG:4326"), new Projection(
@@ -138,6 +137,15 @@ public class MapControlManager {
 		VectorFeature vectorFeature = new VectorFeature(geom);
 		this.vector.addFeature(vectorFeature);
 		this.map.zoomToExtent(geom.getBounds());
+	}
+
+	/**
+	 * 
+	 * @param feature
+	 */
+	public void drawAOE(VectorFeature feature) {
+		this.vector.addFeature(feature);
+		this.map.zoomToExtent(feature.getGeometry().getBounds());
 	}
 
 	/**
@@ -243,7 +251,7 @@ public class MapControlManager {
 	public boolean isModifyFeatureEnable() {
 		return this.modifyFeature.isEnabled();
 	}
-	
+
 	public int getFeaturesNumber() {
 		return this.vector.getNumberOfFeatures();
 	}

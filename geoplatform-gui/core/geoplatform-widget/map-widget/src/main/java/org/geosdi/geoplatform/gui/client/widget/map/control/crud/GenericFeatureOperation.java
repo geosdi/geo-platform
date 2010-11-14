@@ -92,10 +92,12 @@ public class GenericFeatureOperation extends MapControl {
 												|| be.getButtonClicked()
 														.getText()
 														.equalsIgnoreCase("si"))
+
 											Dispatcher
 													.forwardEvent(
 															MapWidgetEvents.DELETE_FEATURE,
 															vectorFeature);
+
 									}
 								});
 			}

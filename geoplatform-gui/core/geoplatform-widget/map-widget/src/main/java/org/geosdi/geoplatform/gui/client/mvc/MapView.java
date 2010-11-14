@@ -188,5 +188,14 @@ public class MapView extends GeoPlatformView {
 	public void redrawVectorLayer() {
 		this.mapLayout.redrawVectorLayer();
 	}
+	
+	/**
+	 * Draw AOE on the Map
+	 * 
+	 * @param feature
+	 */
+	public void drawAOE(VectorFeature feature) {
+		this.mapLayout.drawAOE(feature);
+	}
 
 }

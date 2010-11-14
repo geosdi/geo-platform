@@ -293,5 +293,9 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	public int getFeaturesNumber() {
 		return this.mapControl.getFeaturesNumber();
 	}
+	
+	public void drawAOE(VectorFeature feature) {
+		this.mapControl.drawAOE(feature);
+	}
 
 }

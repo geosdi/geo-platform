@@ -33,52 +33,40 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+
+import com.extjs.gxt.ui.client.event.ButtonEvent;
 
 /**
  * @author giuseppe
  * 
  */
-@SuppressWarnings("deprecation")
-public interface GeoPlatformIcons extends ImageBundle {
+public class ClearMapAction extends ToolbarMapAction {
 
-	@Resource("zoom-in.png")
-	AbstractImagePrototype ZoomIn();
+	private GeoPlatformMap mapWidget;
 
-	@Resource("zoom-out.png")
-	AbstractImagePrototype ZoomOut();
+	public ClearMapAction(GeoPlatformMap theMapWidget) {
+		super("Clear Map", Resources.ICONS.ClearMap());
+		// TODO Auto-generated constructor stub
+		this.mapWidget = theMapWidget;
+	}
 
-	@Resource("draw-feature.png")
-	AbstractImagePrototype DrawFeature();
-
-	@Resource("rotate.png")
-	AbstractImagePrototype Rotate();
-	
-	@Resource("drag.png")
-	AbstractImagePrototype Drag();
-	
-	@Resource("resize.png")
-	AbstractImagePrototype Resize();
-	
-	@Resource("shape.png")
-	AbstractImagePrototype Shape();
-
-	@Resource("gp-icon-16x16.png")
-	AbstractImagePrototype geoPortalInfo();
-	
-	@Resource("draw-point.png")
-	AbstractImagePrototype DrawPointFeature();
-	
-	@Resource("draw-line.png")
-	AbstractImagePrototype DrawLineFeature();
-	
-	@Resource("eraser_minus.png")
-	AbstractImagePrototype DeleteFeature();
-	
-	@Resource("clear-map.png")
-	AbstractImagePrototype ClearMap();
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+	 * .extjs.gxt.ui.client.event.ComponentEvent)
+	 */
+	@Override
+	public void componentSelected(ButtonEvent ce) {
+		// TODO Auto-generated method stub
+		((MapLayoutWidget) mapWidget).clearMap();
+	}
 
 }

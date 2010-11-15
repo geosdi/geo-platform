@@ -293,9 +293,16 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	public int getFeaturesNumber() {
 		return this.mapControl.getFeaturesNumber();
 	}
-	
+
 	public void drawAOE(VectorFeature feature) {
 		this.mapControl.drawAOE(feature);
+	}
+
+	/**
+	 * Clear Map and Remove All Features
+	 */
+	public void clearMap() {
+		this.mapControl.eraseFeatures();
 	}
 
 }

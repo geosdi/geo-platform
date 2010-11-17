@@ -852,7 +852,7 @@
     <properties>
         <geoplatform-version>1.0-SNAPSHOT</geoplatform-version>
         <cxf-version>2.2.7</cxf-version>
-        <spring-version>3.0.4.RELEASE</spring-version>
+        <spring-version>3.0.5.RELEASE</spring-version>
         <velocity-version>1.6.2</velocity-version>
         <javax-mail-version>1.4</javax-mail-version>
         <jaxws-version>2.1</jaxws-version>

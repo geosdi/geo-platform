@@ -39,9 +39,9 @@ import org.geosdi.geoplatform.gui.client.widget.map.control.DrawPointFeature;
 import org.geosdi.geoplatform.gui.client.widget.map.control.DrawPolygonControl;
 import org.geosdi.geoplatform.gui.client.widget.map.control.ModifyFeatureControl;
 import org.geosdi.geoplatform.gui.client.widget.map.control.crud.GenericFeatureOperation;
+import org.geosdi.geoplatform.gui.client.widget.map.style.VectorFeatureStyle;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.Projection;
-import org.gwtopenmaps.openlayers.client.Style;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature;
 import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 import org.gwtopenmaps.openlayers.client.control.SelectFeature;
@@ -59,6 +59,7 @@ public class MapControlManager {
 
 	private Map map;
 	private Vector vector;
+	private VectorFeatureStyle style;
 
 	private DrawPolygonControl drawFeature;
 	private DrawPointFeature drawPointFeature;
@@ -67,6 +68,7 @@ public class MapControlManager {
 
 	public MapControlManager(Map map) {
 		this.map = map;
+		this.style = new VectorFeatureStyle();
 		this.initVectorLayer();
 	}
 
@@ -76,7 +78,7 @@ public class MapControlManager {
 	 */
 	private void initVectorLayer() {
 		VectorOptions vectorOption = new VectorOptions();
-		vectorOption.setStyle(this.createStyle());
+		vectorOption.setStyle(this.style.getVectorStyle());
 		vectorOption.setDisplayInLayerSwitcher(false);
 		this.vector = new Vector("GeoPlatform Vector Layer", vectorOption);
 		this.map.addLayer(vector);
@@ -107,21 +109,6 @@ public class MapControlManager {
 		this.map.addControl(this.modifyFeature.getControl());
 		this.map.addControl(this.featureOperation.getControl());
 		this.modifyFeature.activateControl();
-	}
-
-	/**
-	 * 
-	 * @return Style
-	 */
-	private Style createStyle() {
-		Style style = new Style();
-		style.setStrokeColor("#000000");
-		style.setStrokeWidth(1);
-		style.setFillColor("#FF0000");
-		style.setFillOpacity(0.5);
-		style.setPointRadius(5);
-		style.setStrokeOpacity(1.0);
-		return style;
 	}
 
 	/**

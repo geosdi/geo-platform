@@ -9,11 +9,11 @@
 	</parent>
 
   <groupId>org.geosdi</groupId>
-  <artifactId>geoplatform-gui</artifactId>
+  <artifactId>plugin</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
- <name>Geo-Platform :: == GUI Module</name>
+ <name>Geo-Platform :: == Plugin Module</name>
 
    <developers>
         <developer>
@@ -38,10 +38,55 @@
         </developer>
     </developers>
     
+    <build>
+        <pluginManagement>
+			<plugins>
+				
+                <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<encoding>utf8</encoding>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+                            <attach>true</attach>
+							<includePom>true</includePom>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.4.2</version>
+				</plugin>
+                
+                <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<downloadSources>true</downloadSources>
+				</configuration>
+			</plugin>
+				
+			</plugins>
+		</pluginManagement>
+    </build>
+    
     <modules>
-		<module>core</module>
-        <module>plugin</module>
-        <module>application</module>
+		<module>geoplatform-print</module>
+		<module>geoplatform-xmpp</module>
 	</modules>
 
 

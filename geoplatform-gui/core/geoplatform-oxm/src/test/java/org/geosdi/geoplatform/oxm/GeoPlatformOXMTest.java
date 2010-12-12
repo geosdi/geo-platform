@@ -71,21 +71,21 @@ public class GeoPlatformOXMTest extends
 
 	@Test
 	public void testCastor() throws Exception {
-		String castorFile = "castor.xml";
+		String castorFile = "target/castor.xml";
 		castor.saveXML(message, castorFile);
 		assertNotNull(castor.loadXML(castorFile));
 	}
 
 	@Test
 	public void testJaxB() throws Exception {
-		String jaxbFile = "jaxb.xml";
+		String jaxbFile = "target/jaxb.xml";
 		jax.saveXML(message, jaxbFile);
 		assertNotNull(jax.loadXML(jaxbFile));
 	}
 
 	@Test
 	public void testXStream() throws Exception {
-		String xtreamFile = "xtream.xml";
+		String xtreamFile = "target/xtream.xml";
 		xtream.saveXML(message, xtreamFile);
 		assertNotNull(xtream.loadXML(xtreamFile));
 	}

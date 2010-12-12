@@ -148,6 +148,7 @@
     <modules>
 		<module>geoplatform-api</module>
 		<module>geoplatform-configuration</module>
+        <module>geoplatform-oxm</module>
         <module>geoplatform-widget</module>
 	</modules>
 

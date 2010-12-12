@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+	<class name="org.geosdi.geoplatform.mock.ClassToXMLMap">
+		<map-to xml="message" />
+		<field name="data" type="string">
+			<bind-xml name="data" node="element" />
+		</field>
+		<field name="history" type="string">
+			<bind-xml name="history" node="element" />
+		</field>
+	</class>
+</mapping>

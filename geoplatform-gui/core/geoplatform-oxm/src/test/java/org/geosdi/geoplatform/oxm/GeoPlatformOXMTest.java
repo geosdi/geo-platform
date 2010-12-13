@@ -72,21 +72,34 @@ public class GeoPlatformOXMTest extends
 	public void testCastor() throws Exception {
 		String castorFile = "target/castor.xml";
 		castor.saveXML(message, castorFile);
-		assertNotNull(castor.loadXML(castorFile));
+
+		ClassToXMLMap castorMap = castor.loadXML(castorFile);
+		assertNotNull(castorMap);
+
+		logger.info("CASTOR BEAN  ******************** " + castorMap);
+
 	}
 
 	@Test
 	public void testJaxB() throws Exception {
 		String jaxbFile = "target/jaxb.xml";
 		jax.saveXML(message, jaxbFile);
-		assertNotNull(jax.loadXML(jaxbFile));
+
+		ClassToXMLMap jaxbMap = jax.loadXML(jaxbFile);
+		assertNotNull(jaxbMap);
+
+		logger.info("JAX BEAN ***************** " + jaxbMap);
 	}
 
 	@Test
 	public void testXStream() throws Exception {
 		String xtreamFile = "target/xtream.xml";
 		xtream.saveXML(message, xtreamFile);
+
+		ClassToXMLMap xstreamMap = xtream.loadXML(xtreamFile);
 		assertNotNull(xtream.loadXML(xtreamFile));
+
+		logger.info("XSTREAM BEAN *************** " + xstreamMap);
 	}
 
 	protected String[] getConfigLocations() {

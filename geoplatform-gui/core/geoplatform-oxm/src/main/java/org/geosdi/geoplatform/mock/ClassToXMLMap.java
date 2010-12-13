@@ -80,4 +80,14 @@ public class ClassToXMLMap {
 		this.history = history;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ClassToXMLMap [data=" + data + ", history=" + history + "]";
+	}
+
 }

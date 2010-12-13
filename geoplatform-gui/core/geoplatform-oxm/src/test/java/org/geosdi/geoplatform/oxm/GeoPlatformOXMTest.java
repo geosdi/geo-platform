@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.oxm;
 
 import org.geosdi.geoplatform.mock.ClassToXMLMap;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;

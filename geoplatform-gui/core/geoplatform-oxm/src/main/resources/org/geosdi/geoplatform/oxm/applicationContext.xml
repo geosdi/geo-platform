@@ -16,10 +16,12 @@
 		<property name="marshaller" ref="castorMarshaller" />
 		<property name="unmarshaller" ref="castorMarshaller" />
 	</bean>
+	
 	<bean id="jax" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">
 		<property name="marshaller" ref="jaxb" />
 		<property name="unmarshaller" ref="jaxb" />
 	</bean>
+	
 	<bean id="xtream" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">
 		<property name="marshaller" ref="xStreamMarshaller" />
 		<property name="unmarshaller" ref="xStreamMarshaller" />

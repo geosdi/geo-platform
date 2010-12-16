@@ -67,7 +67,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
 	private MapWidget mapWidget;
 	private MapOptions defaultMapOptions;
-	private MapControlManager mapControl;
+	private MapControlDrawManager mapControl;
 	private Map map;
 	private Layer layer;
 	private Layer osm;
@@ -105,7 +105,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		this.createOSM();
 		this.createBaseGoogleLayer();
 
-		this.mapControl = new MapControlManager(this.map);
+		this.mapControl = new MapControlDrawManager(this.map);
 	}
 
 	private void createOSM() {
@@ -189,7 +189,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	/**
 	 * @return the mapControl
 	 */
-	public MapControlManager getMapControl() {
+	public MapControlDrawManager getMapControl() {
 		return mapControl;
 	}
 

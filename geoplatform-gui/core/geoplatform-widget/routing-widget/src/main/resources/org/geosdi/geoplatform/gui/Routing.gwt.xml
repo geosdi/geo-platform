@@ -1,0 +1,7 @@
+<module>
+
+	<source path="client" />
+
+	<entry-point class='org.geosdi.geoplatform.gui.client.Routing' />
+
+</module>

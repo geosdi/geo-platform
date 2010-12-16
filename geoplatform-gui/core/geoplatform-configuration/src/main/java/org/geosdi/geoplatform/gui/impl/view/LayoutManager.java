@@ -84,6 +84,17 @@ public class LayoutManager extends GeoPlatformLayoutManager {
 	}
 
 	/**
+	 * Remove a generic widget from West
+	 * 
+	 * @param WWidget
+	 *            w
+	 */
+	public static void removeComponentFromWest(Widget w) {
+		get().west.remove(w);
+		get().west.layout();
+	}
+
+	/**
 	 * Add a generic Widget to East
 	 * 
 	 * @param Widget
@@ -127,6 +138,13 @@ public class LayoutManager extends GeoPlatformLayoutManager {
 		else
 			get().west.hide();
 		Dispatcher.forwardEvent(GeoPlatformEvents.UPDATE_CENTER);
+	}
+
+	/**
+	 * Layout West Panel
+	 */
+	public static void layoutWest() {
+		get().west.layout();
 	}
 
 	/**

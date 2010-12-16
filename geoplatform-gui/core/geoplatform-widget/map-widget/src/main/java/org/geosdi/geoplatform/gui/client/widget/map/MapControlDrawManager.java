@@ -55,7 +55,7 @@ import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
  * @author giuseppe
  * 
  */
-public class MapControlManager {
+public class MapControlDrawManager {
 
 	private Map map;
 	private Vector vector;
@@ -66,7 +66,7 @@ public class MapControlManager {
 	private ModifyFeatureControl modifyFeature;
 	private GenericFeatureOperation featureOperation;
 
-	public MapControlManager(Map map) {
+	public MapControlDrawManager(Map map) {
 		this.map = map;
 		this.style = new VectorFeatureStyle();
 		this.initVectorLayer();

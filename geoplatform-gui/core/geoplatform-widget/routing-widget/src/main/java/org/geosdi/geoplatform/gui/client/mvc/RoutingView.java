@@ -37,9 +37,9 @@ package org.geosdi.geoplatform.gui.client.mvc;
 
 import java.util.ArrayList;
 
-import org.geosdi.geoplatform.gui.client.GeocodingEvents;
-import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
-import org.geosdi.geoplatform.gui.client.widget.GeocodingManagementWidget;
+import org.geosdi.geoplatform.gui.client.RoutingEvents;
+import org.geosdi.geoplatform.gui.client.model.Directions;
+import org.geosdi.geoplatform.gui.client.widget.RoutingManagementWidget;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
@@ -51,14 +51,14 @@ import com.extjs.gxt.ui.client.widget.grid.Grid;
  * @author giuseppe
  * 
  */
-public class GeocodingView extends GeoPlatformView {
+public class RoutingView extends GeoPlatformView {
 
-	private GeocodingManagementWidget geocodingManagement;
+	private RoutingManagementWidget routingManagement;
 
-	public GeocodingView(Controller controller) {
+	public RoutingView(Controller controller) {
 		super(controller);
 		// TODO Auto-generated constructor stub
-		this.geocodingManagement = new GeocodingManagementWidget();
+		this.routingManagement = new RoutingManagementWidget();
 	}
 
 	/*
@@ -71,73 +71,72 @@ public class GeocodingView extends GeoPlatformView {
 	@Override
 	protected void handleEvent(AppEvent event) {
 		// TODO Auto-generated method stub
-		if (event.getType() == GeocodingEvents.SHOW_GEOCODING_WIDGET)
-			onShowGeocodingWidget();
+		if (event.getType() == RoutingEvents.SHOW_ROUTING_WIDGET)
+			onShowRoutingWidget();
 
-		if (event.getType() == GeocodingEvents.HIDE_GEOCODING_WIDGET)
-			onHideGeocodingWidget();
+		if (event.getType() == RoutingEvents.HIDE_ROUTING_WIDGET)
+			onHideRoutingWidget();
 	}
 
 	/**
-	 * Hide Geocoding Widget
+	 * Show Routing Widget
 	 */
-	private void onHideGeocodingWidget() {
+	private void onShowRoutingWidget() {
 		// TODO Auto-generated method stub
-		LayoutManager.removeComponentFromWest(geocodingManagement);
+		if (!LayoutManager.isWestVisible())
+			LayoutManager.manageWest(true);
+		LayoutManager.addComponentToWest(routingManagement);
+	}
+
+	/**
+	 * Hide Routing Widget
+	 */
+	private void onHideRoutingWidget() {
+		// TODO Auto-generated method stub
+		LayoutManager.removeComponentFromWest(routingManagement);
 		if (!LayoutManager.isOneWidgetVisibleAtWest())
 			LayoutManager.manageWest(false);
 	}
 
 	/**
-	 * Show Geocoding Widget
+	 * @return the routingManagement
 	 */
-	private void onShowGeocodingWidget() {
-		// TODO Auto-generated method stub
-		if (!LayoutManager.isWestVisible())
-			LayoutManager.manageWest(true);
-		LayoutManager.addComponentToWest(geocodingManagement);
+	public RoutingManagementWidget getRoutingManagement() {
+		return routingManagement;
 	}
 
 	/**
-	 * @return the geocodingManagement
+	 * Mask RoutingGridWidget
 	 */
-	public GeocodingManagementWidget getGeocodingManagement() {
-		return geocodingManagement;
+	public void maskRoutingGrid() {
+		this.routingManagement.getRoutingGridWidget().maskGrid();
 	}
 
 	/**
-	 * Mask GeocodingGridWidget
-	 */
-	public void maskGeocodingGrid() {
-		this.geocodingManagement.getGeocodingGridWidget().maskGrid();
-	}
-
-	/**
-	 * Un Mask GeocodingGridWidget
+	 * Un Mask RoutingGridWidget
 	 */
 	public void unMaskGeocodingGrid() {
-		this.geocodingManagement.getGeocodingGridWidget().unMaskGrid();
+		this.routingManagement.getRoutingGridWidget().unMaskGrid();
 	}
 
 	/**
 	 * Clean the Store
 	 */
 	public void cleanStore() {
-		this.geocodingManagement.getGeocodingGridWidget().getStore()
-				.removeAll();
+		this.routingManagement.getRoutingGridWidget().getStore().removeAll();
 	}
 
 	/**
-	 * Fill GeocodingGridWidget Store
+	 * Fill RoutingGridWidget Store
 	 * 
 	 * @param beans
 	 */
-	public void fillStore(ArrayList<GeocodingBean> beans) {
-		this.geocodingManagement.getGeocodingGridWidget().fillStore(beans);
+	public void fillStore(ArrayList<Directions> beans) {
+		this.routingManagement.getRoutingGridWidget().fillStore(beans);
 	}
 
-	public Grid<GeocodingBean> getGrid() {
-		return this.geocodingManagement.getGeocodingGridWidget().getGrid();
+	public Grid<Directions> getGrid() {
+		return this.routingManagement.getRoutingGridWidget().getGrid();
 	}
 
 }

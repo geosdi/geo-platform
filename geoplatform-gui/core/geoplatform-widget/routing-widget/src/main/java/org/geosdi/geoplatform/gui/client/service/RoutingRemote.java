@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.service;
 
 import org.geosdi.geoplatform.gui.client.model.RoutingBean;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.omg.CORBA.portable.ApplicationException;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;

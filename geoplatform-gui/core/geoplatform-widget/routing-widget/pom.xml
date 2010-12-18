@@ -38,10 +38,6 @@
 		</developer>
 	</developers>
 
-	<properties>
-		<gwt-version>2.1.1</gwt-version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
@@ -52,7 +48,6 @@
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-servlet</artifactId>
-			<version>${gwt-version}</version>
 			<scope>runtime</scope>
 		</dependency>
 

@@ -1,5 +1,7 @@
 <module>
 
+	<inherits name='org.geosdi.geoplatform.gui.Geocoding' />
+
 	<source path="client" />
 
 	<entry-point class='org.geosdi.geoplatform.gui.client.Routing' />

@@ -38,13 +38,6 @@
         </developer>
     </developers>
     
-    <pluginRepositories>
-		<pluginRepository>
-			<id>gwt-plugin-repo</id>
-			<url>http://google-web-toolkit.googlecode.com/svn/2.1.0.M3/gwt/maven</url>
-			<name>Google Web Toolkit Plugin Repository</name>
-		</pluginRepository>
-	</pluginRepositories>
 	<repositories>
 		<repository>
 			<id>gwt-maven</id>

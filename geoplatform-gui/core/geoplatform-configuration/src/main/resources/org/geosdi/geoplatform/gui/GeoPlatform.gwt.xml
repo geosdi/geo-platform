@@ -7,6 +7,7 @@
 	<source path="configuration/action" />
 	<source path="global" />
 	<source path="model" />
+	<source path="puregwt" />
 	<source path="service" />
 	<source path="view" />
 	<source path="action" />

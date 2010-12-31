@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.gui.puregwt;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  * @author giuseppe
@@ -46,11 +46,11 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public interface GPEventBus {
 
-	<H extends EventHandler> HandlerRegistration addHandler(Type<H> type,
-			H handler);
+	<T extends EventHandler> HandlerRegistration addHandler(Type<T> type,
+			T handler);
 
-	<H extends EventHandler> HandlerRegistration addHandlerToSource(
-			Type<H> type, Object source, H handler);
+	<T extends EventHandler> HandlerRegistration addHandlerToSource(
+			Type<T> type, Object source, T handler);
 
 	void fireEvent(GwtEvent<?> event);
 

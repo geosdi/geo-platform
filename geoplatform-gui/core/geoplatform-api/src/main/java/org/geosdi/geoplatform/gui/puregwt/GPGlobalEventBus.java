@@ -35,73 +35,32 @@
  */
 package org.geosdi.geoplatform.gui.puregwt;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.event.shared.SimpleEventBus;
 
 /**
  * @author giuseppe
  * 
  */
-public class GPEventBusImpl implements GPEventBus {
+public class GPGlobalEventBus {
 
-	private SimpleEventBus eventBus = new SimpleEventBus();
+	private static GPGlobalEventBus INSTANCE;
+	private SimpleEventBus eventBus;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.puregwt.GPEventBus#addHandler(com.google.gwt
-	 * .event.shared.GwtEvent.Type, com.google.gwt.event.shared.EventHandler)
-	 */
-	@Override
-	public <T extends EventHandler> HandlerRegistration addHandler(
-			Type<T> type, T handler) {
-		// TODO Auto-generated method stub
-		return eventBus.addHandler(type, handler);
+	public GPGlobalEventBus() {
+		this.eventBus = new SimpleEventBus();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.puregwt.GPEventBus#addHandlerToSource(com.
-	 * google.gwt.event.shared.GwtEvent.Type, java.lang.Object,
-	 * com.google.gwt.event.shared.EventHandler)
-	 */
-	@Override
-	public <T extends EventHandler> HandlerRegistration addHandlerToSource(
-			Type<T> type, Object source, T handler) {
-		// TODO Auto-generated method stub
-		return eventBus.addHandlerToSource(type, source, handler);
+	public static GPGlobalEventBus get() {
+		if (INSTANCE == null)
+			INSTANCE = new GPGlobalEventBus();
+		return INSTANCE;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.puregwt.GPEventBus#fireEvent(com.google.gwt
-	 * .event.shared.GwtEvent)
+	/**
+	 * @return the eventBus
 	 */
-	@Override
-	public void fireEvent(GwtEvent<?> event) {
-		// TODO Auto-generated method stub
-		this.eventBus.fireEvent(event);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.puregwt.GPEventBus#fireEventFromSource(com
-	 * .google.gwt.event.shared.GwtEvent, java.lang.Object)
-	 */
-	@Override
-	public void fireEventFromSource(GwtEvent<?> event, Object source) {
-		// TODO Auto-generated method stub
-		this.eventBus.fireEventFromSource(event, source);
+	public SimpleEventBus getEventBus() {
+		return eventBus;
 	}
 
 }

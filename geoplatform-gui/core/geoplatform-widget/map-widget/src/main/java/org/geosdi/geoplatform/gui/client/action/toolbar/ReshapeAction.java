@@ -65,7 +65,7 @@ public class ReshapeAction extends ModifyFeatureAction {
 		// TODO Auto-generated method stub
 		if (((MapLayoutWidget) this.mapWidget).getButtonBar().isTogglePressed())
 			((MapLayoutWidget) mapWidget).getButtonBar().changeButtonState();
-		
+
 		if (((MapLayoutWidget) mapWidget).isFeatureOperationEnable())
 			((MapLayoutWidget) mapWidget).deactivateFeatureOperation();
 
@@ -74,5 +74,4 @@ public class ReshapeAction extends ModifyFeatureAction {
 
 		this.control.setMode(ModifyFeature.RESHAPE);
 	}
-
 }

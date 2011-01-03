@@ -33,46 +33,70 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action.button;
+package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.event.ZoomNextEvent;
+import org.geosdi.geoplatform.gui.client.event.ZoomNextEventHandler;
+import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformEventHandler;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
-import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  * @author giuseppe
  * 
  */
-public class GeoPlatformButton extends Button {
+public class ZoomNextAction extends ToolbarMapAction implements
+		GeoPlatformEventHandler {
 
-	private ToolbarMapAction action;
+	private GeoPlatformMap mapWidget;
+	private HandlerRegistration handlerRegistration;
 
-	public GeoPlatformButton() {
-		super();
+	public ZoomNextAction(GeoPlatformMap theMapWidget) {
+		super("Zoom Next", Resources.ICONS.ZoomNext());
+		// TODO Auto-generated constructor stub
+		this.mapWidget = theMapWidget;
+		this.addHandler();
 	}
 
-	public void disableControl() {
-		this.action.getMapControl().deactivate();
-	}
-
-	public void enableControl() {
-		this.action.getMapControl().activate();
-	}
-
-	/**
-	 * @return the action
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+	 * .extjs.gxt.ui.client.event.ComponentEvent)
 	 */
-	public ToolbarMapAction getAction() {
-		return action;
+	@Override
+	public void componentSelected(ButtonEvent ce) {
+		// TODO Auto-generated method stub
+		((MapLayoutWidget) this.mapWidget).getNavigationHistory().nextTrigger();
 	}
 
-	/**
-	 * @param action
-	 *            the action to set
-	 */
-	public void setAction(ToolbarMapAction action) {
-		this.action = action;
-		this.action.setButton(this);
+	@Override
+	public void addHandler() {
+		// TODO Auto-generated method stub
+		this.handlerRegistration = GPHandlerManager.addHandler(
+				ZoomNextEvent.TYPE, new ZoomNextEventHandler() {
+
+					@Override
+					public void onActivation(boolean activate) {
+						// TODO Auto-generated method stub
+						if (activate)
+							enable();
+						else
+							disable();
+					}
+				});
 	}
 
+	@Override
+	public void removeHandler() {
+		// TODO Auto-generated method stub
+		this.handlerRegistration.removeHandler();
+	}
 }

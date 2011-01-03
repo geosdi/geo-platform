@@ -73,6 +73,7 @@ public class GeoPlatformToggleButton extends ToggleButton {
 	 */
 	public void setAction(ToolbarMapAction action) {
 		this.action = action;
+		this.action.setButton(this);
 	}
 
 }

@@ -9,6 +9,22 @@
 
 	<context:annotation-config />
 
+	<bean name="zoomNext"
+		class="org.geosdi.geoplatform.gui.configuration.ActionClientTool">
+		<property name="id" value="${zoomNext.id}" />
+		<property name="type" value="${zoomNext.type}" />
+		<property name="enabled" value="${zoomNext.enabled}" />
+		<property name="order" value="${zoomNext.order}" />
+	</bean>
+
+	<bean name="zoomPrevious"
+		class="org.geosdi.geoplatform.gui.configuration.ActionClientTool">
+		<property name="id" value="${zoomPrevious.id}" />
+		<property name="type" value="${zoomPrevious.type}" />
+		<property name="enabled" value="${zoomPrevious.enabled}" />
+		<property name="order" value="${zoomPrevious.order}" />
+	</bean>
+
 	<bean name="zoomIn"
 		class="org.geosdi.geoplatform.gui.configuration.ActionClientTool">
 		<property name="id" value="${zoomIn.id}" />

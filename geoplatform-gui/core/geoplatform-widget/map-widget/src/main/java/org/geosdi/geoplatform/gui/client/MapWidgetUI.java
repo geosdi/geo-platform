@@ -39,7 +39,9 @@ import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomInAction;
+import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomNextAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomOutAction;
+import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomPreviousAction;
 import org.geosdi.geoplatform.gui.client.mvc.MapController;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
@@ -76,7 +78,8 @@ public class MapWidgetUI implements EntryPoint {
 		// TODO Auto-generated method stub
 		ToolbarActionRegistar.put("ZoomIn", new ToolbarActionCreator() {
 
-			public GeoPlatformToolbarAction createActionTool(GeoPlatformMap mapWidget) {
+			public GeoPlatformToolbarAction createActionTool(
+					GeoPlatformMap mapWidget) {
 				// TODO Auto-generated method stub
 				return new ZoomInAction(mapWidget);
 			}
@@ -84,9 +87,28 @@ public class MapWidgetUI implements EntryPoint {
 
 		ToolbarActionRegistar.put("ZoomOut", new ToolbarActionCreator() {
 
-			public GeoPlatformToolbarAction createActionTool(GeoPlatformMap mapWidget) {
+			public GeoPlatformToolbarAction createActionTool(
+					GeoPlatformMap mapWidget) {
 				// TODO Auto-generated method stub
 				return new ZoomOutAction(mapWidget);
+			}
+		});
+
+		ToolbarActionRegistar.put("ZoomPrevious", new ToolbarActionCreator() {
+
+			public GeoPlatformToolbarAction createActionTool(
+					GeoPlatformMap mapWidget) {
+				// TODO Auto-generated method stub
+				return new ZoomPreviousAction(mapWidget);
+			}
+		});
+
+		ToolbarActionRegistar.put("ZoomNext", new ToolbarActionCreator() {
+
+			public GeoPlatformToolbarAction createActionTool(
+					GeoPlatformMap mapWidget) {
+				// TODO Auto-generated method stub
+				return new ZoomNextAction(mapWidget);
 			}
 		});
 	}

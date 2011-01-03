@@ -67,5 +67,4 @@ public class ZoomOutAction extends ToolbarMapAction {
 			this.mapWidget.getMap()
 					.setCenter(center, oldZoom - this.zoomFactor);
 	}
-
 }

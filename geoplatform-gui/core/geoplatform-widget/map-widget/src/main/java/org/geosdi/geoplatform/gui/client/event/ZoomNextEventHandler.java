@@ -33,46 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action.button;
+package org.geosdi.geoplatform.gui.client.event;
 
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
-
-import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.event.shared.EventHandler;
 
 /**
  * @author giuseppe
  * 
  */
-public class GeoPlatformButton extends Button {
+public interface ZoomNextEventHandler extends EventHandler {
 
-	private ToolbarMapAction action;
-
-	public GeoPlatformButton() {
-		super();
-	}
-
-	public void disableControl() {
-		this.action.getMapControl().deactivate();
-	}
-
-	public void enableControl() {
-		this.action.getMapControl().activate();
-	}
-
-	/**
-	 * @return the action
-	 */
-	public ToolbarMapAction getAction() {
-		return action;
-	}
-
-	/**
-	 * @param action
-	 *            the action to set
-	 */
-	public void setAction(ToolbarMapAction action) {
-		this.action = action;
-		this.action.setButton(this);
-	}
-
+	void onActivation(boolean activate);
 }

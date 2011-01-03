@@ -47,14 +47,14 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
  * 
  */
 public class ZoomInAction extends ToolbarMapAction {
-	
+
 	private GeoPlatformMap mapWidget;
 
 	private int zoomFactor = 1;
 
 	public ZoomInAction(GeoPlatformMap mapWidget) {
 		super("ZoomIn", Resources.ICONS.ZoomIn());
-		
+
 		this.mapWidget = mapWidget;
 	}
 
@@ -65,5 +65,4 @@ public class ZoomInAction extends ToolbarMapAction {
 		int oldZoom = this.mapWidget.getMap().getZoom();
 		this.mapWidget.getMap().setCenter(center, oldZoom + this.zoomFactor);
 	}
-
 }

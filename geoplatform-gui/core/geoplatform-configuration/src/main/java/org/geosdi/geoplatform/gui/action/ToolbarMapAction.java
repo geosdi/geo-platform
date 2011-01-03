@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.action;
 
 import org.gwtopenmaps.openlayers.client.control.Control;
 
+import com.extjs.gxt.ui.client.widget.button.Button;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
@@ -45,6 +46,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  */
 public abstract class ToolbarMapAction extends GeoPlatformToolbarAction {
 
+	private Button button;
 	private String tooltip;
 
 	public ToolbarMapAction(String tooltip, AbstractImagePrototype image) {
@@ -67,7 +69,37 @@ public abstract class ToolbarMapAction extends GeoPlatformToolbarAction {
 		this.tooltip = tooltip;
 	}
 
+	/**
+	 * @return the button
+	 */
+	public Button getButton() {
+		return button;
+	}
+
+	/**
+	 * @param button
+	 *            the button to set
+	 */
+	public void setButton(Button button) {
+		this.button = button;
+	}
+
 	public Control getMapControl() {
 		return null;
+	}
+
+	/**
+	 * 
+	 * Enable Button associated with this action
+	 */
+	public void enable() {
+		this.button.enable();
+	}
+
+	/**
+	 * Disable Button associated with this action
+	 */
+	public void disable() {
+		this.button.disable();
 	}
 }

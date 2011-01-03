@@ -33,46 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action.button;
-
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
-
-import com.extjs.gxt.ui.client.widget.button.Button;
+package org.geosdi.geoplatform.gui.configuration.map.control;
 
 /**
  * @author giuseppe
- * 
+ *
  */
-public class GeoPlatformButton extends Button {
+public interface GeoPlatformMapControl {
 
-	private ToolbarMapAction action;
-
-	public GeoPlatformButton() {
-		super();
-	}
-
-	public void disableControl() {
-		this.action.getMapControl().deactivate();
-	}
-
-	public void enableControl() {
-		this.action.getMapControl().activate();
-	}
-
-	/**
-	 * @return the action
-	 */
-	public ToolbarMapAction getAction() {
-		return action;
-	}
-
-	/**
-	 * @param action
-	 *            the action to set
-	 */
-	public void setAction(ToolbarMapAction action) {
-		this.action = action;
-		this.action.setButton(this);
-	}
-
+	void createControl();
+	
+	void activateControl();
+	
+	 void deactivateControl();
 }

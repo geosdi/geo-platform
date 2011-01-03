@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.gui.client.widget.map.control.DrawPointFeature;
 import org.geosdi.geoplatform.gui.client.widget.map.control.DrawPolygonControl;
 import org.geosdi.geoplatform.gui.client.widget.map.control.ModifyFeatureControl;
 import org.geosdi.geoplatform.gui.client.widget.map.control.crud.GenericFeatureOperation;
+import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
 import org.geosdi.geoplatform.gui.client.widget.map.style.VectorFeatureStyle;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.Projection;
@@ -55,7 +56,7 @@ import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
  * @author giuseppe
  * 
  */
-public class MapControlDrawManager {
+public class MapControlManager {
 
 	private Map map;
 	private Vector vector;
@@ -66,7 +67,9 @@ public class MapControlDrawManager {
 	private ModifyFeatureControl modifyFeature;
 	private GenericFeatureOperation featureOperation;
 
-	public MapControlDrawManager(Map map) {
+	private NavigationHistoryControl navigationHistory;
+
+	public MapControlManager(Map map) {
 		this.map = map;
 		this.style = new VectorFeatureStyle();
 		this.initVectorLayer();
@@ -97,6 +100,7 @@ public class MapControlDrawManager {
 		this.drawPointFeature = new DrawPointFeature(vector);
 		this.modifyFeature = new ModifyFeatureControl(vector);
 		this.featureOperation = new GenericFeatureOperation(vector);
+		this.navigationHistory = new NavigationHistoryControl();
 	}
 
 	/**
@@ -108,6 +112,7 @@ public class MapControlDrawManager {
 		this.map.addControl(this.drawPointFeature.getControl());
 		this.map.addControl(this.modifyFeature.getControl());
 		this.map.addControl(this.featureOperation.getControl());
+		this.map.addControl(this.navigationHistory.getControl());
 		this.modifyFeature.activateControl();
 	}
 
@@ -201,6 +206,13 @@ public class MapControlDrawManager {
 	}
 
 	/**
+	 * @return the navigationHistory
+	 */
+	public NavigationHistoryControl getNavigationHistory() {
+		return navigationHistory;
+	}
+
+	/**
 	 * Redraw the Vector Layer
 	 */
 	public void redrawVectorLayer() {
@@ -241,5 +253,17 @@ public class MapControlDrawManager {
 
 	public int getFeaturesNumber() {
 		return this.vector.getNumberOfFeatures();
+	}
+	
+	public void clearNavigationHistory() {
+		this.navigationHistory.clearHistory();
+	}
+	
+	public void activateNavigationHistory() {
+		this.navigationHistory.activateControl();
+	}
+	
+	public void deactivateNavigationHistory() {
+		this.navigationHistory.deactivateControl();
 	}
 }

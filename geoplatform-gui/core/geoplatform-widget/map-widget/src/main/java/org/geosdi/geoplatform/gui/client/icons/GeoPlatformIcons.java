@@ -80,5 +80,11 @@ public interface GeoPlatformIcons extends ImageBundle {
 	
 	@Resource("clear-map.png")
 	AbstractImagePrototype ClearMap();
+	
+	@Resource("zoom-last.png")
+	AbstractImagePrototype ZoomPrevious();
+	
+	@Resource("zoom-next.png")
+	AbstractImagePrototype ZoomNext();
 
 }

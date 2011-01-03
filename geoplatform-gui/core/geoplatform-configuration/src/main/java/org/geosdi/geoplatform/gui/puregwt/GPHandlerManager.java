@@ -37,35 +37,44 @@ package org.geosdi.geoplatform.gui.puregwt;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  * @author giuseppe
  * 
  */
-public class GPGlobalEventBusImpl extends GPGlobalEventBus {
+public class GPHandlerManager {
+
+	private GPEventBus eventBus;
+
+	private static GPHandlerManager INSTANCE;
+
+	public GPHandlerManager() {
+		this.eventBus = new GPEventBusImpl();
+	}
+
+	public static GPHandlerManager get() {
+		if (INSTANCE == null)
+			INSTANCE = new GPHandlerManager();
+		return INSTANCE;
+	}
 
 	public static <T extends EventHandler> HandlerRegistration addHandler(
 			Type<T> type, T handler) {
-		// TODO Auto-generated method stub
-		return get().getEventBus().addHandler(type, handler);
+		return get().eventBus.addHandler(type, handler);
 	}
 
-	public <T extends EventHandler> HandlerRegistration addHandlerToSource(
+	public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
 			Type<T> type, Object source, T handler) {
-		// TODO Auto-generated method stub
-		return get().getEventBus().addHandlerToSource(type, source, handler);
+		return get().eventBus.addHandlerToSource(type, source, handler);
 	}
 
 	public static void fireEvent(GwtEvent<?> event) {
-		// TODO Auto-generated method stub
-		get().getEventBus().fireEvent(event);
+		get().eventBus.fireEvent(event);
 	}
 
-	public static void fireEventFromSource(GwtEvent<?> event, Object source) {
-		// TODO Auto-generated method stub
-		get().getEventBus().fireEventFromSource(event, source);
+	public void fireEventFromSource(GwtEvent<?> event, Object source) {
+		get().eventBus.fireEventFromSource(event, source);
 	}
-
 }

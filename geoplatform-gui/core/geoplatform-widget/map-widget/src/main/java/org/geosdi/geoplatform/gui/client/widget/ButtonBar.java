@@ -134,7 +134,6 @@ public class ButtonBar extends LayoutContainer {
 			ToolbarApplicationAction action) {
 		Button button = new Button();
 		button.setId(tool.getId());
-		button.setWidth(60);
 		button.setText(action.getButtonName());
 		button.setIcon(action.getImage());
 		button.setEnabled(tool.isEnabled());
@@ -228,7 +227,7 @@ public class ButtonBar extends LayoutContainer {
 	}
 
 	/**
-	 * Checks for a Togglr Button pressed
+	 * Checks for a Toggle Button pressed
 	 * 
 	 * @return boolean
 	 */

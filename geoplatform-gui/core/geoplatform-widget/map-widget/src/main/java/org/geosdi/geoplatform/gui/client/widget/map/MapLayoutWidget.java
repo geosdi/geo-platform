@@ -39,6 +39,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
+import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -67,7 +68,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
 	private MapWidget mapWidget;
 	private MapOptions defaultMapOptions;
-	private MapControlDrawManager mapControl;
+	private MapControlManager mapControl;
 	private Map map;
 	private Layer layer;
 	private Layer osm;
@@ -83,6 +84,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
 	private void createMapOption() {
 		this.defaultMapOptions = new MapOptions();
+
 		this.defaultMapOptions.setNumZoomLevels(18);
 
 		this.defaultMapOptions.setProjection("EPSG:900913");
@@ -105,7 +107,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		this.createOSM();
 		this.createBaseGoogleLayer();
 
-		this.mapControl = new MapControlDrawManager(this.map);
+		this.mapControl = new MapControlManager(this.map);
 	}
 
 	private void createOSM() {
@@ -145,6 +147,8 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		LonLat center = new LonLat(13.375, 42.329);
 		center.transform("EPSG:4326", "EPSG:900913");
 		this.map.setCenter(center, 5);
+
+		this.mapControl.clearNavigationHistory();
 	}
 
 	/**
@@ -189,7 +193,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	/**
 	 * @return the mapControl
 	 */
-	public MapControlDrawManager getMapControl() {
+	public MapControlManager getMapControl() {
 		return mapControl;
 	}
 
@@ -296,6 +300,13 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
 	public void drawAOE(VectorFeature feature) {
 		this.mapControl.drawAOE(feature);
+	}
+
+	/**
+	 * @return the Navigation History Control
+	 */
+	public NavigationHistoryControl getNavigationHistory() {
+		return this.mapControl.getNavigationHistory();
 	}
 
 	/**

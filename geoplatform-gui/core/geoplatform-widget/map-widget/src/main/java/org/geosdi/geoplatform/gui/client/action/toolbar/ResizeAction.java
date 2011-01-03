@@ -65,14 +65,13 @@ public class ResizeAction extends ModifyFeatureAction {
 		// TODO Auto-generated method stub
 		if (((MapLayoutWidget) this.mapWidget).getButtonBar().isTogglePressed())
 			((MapLayoutWidget) mapWidget).getButtonBar().changeButtonState();
-		
+
 		if (((MapLayoutWidget) mapWidget).isFeatureOperationEnable())
 			((MapLayoutWidget) mapWidget).deactivateFeatureOperation();
 
 		if (!((MapLayoutWidget) mapWidget).isModifyFeatureEnable())
 			((MapLayoutWidget) mapWidget).activateModifyFeature();
-		
+
 		this.control.setMode(ModifyFeature.RESIZE);
 	}
-
 }

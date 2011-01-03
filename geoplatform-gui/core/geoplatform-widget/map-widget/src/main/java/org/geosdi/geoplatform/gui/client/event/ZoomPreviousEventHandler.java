@@ -33,34 +33,16 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.puregwt;
+package org.geosdi.geoplatform.gui.client.event;
 
-import com.google.gwt.event.shared.SimpleEventBus;
+import com.google.gwt.event.shared.EventHandler;
 
 /**
  * @author giuseppe
  * 
  */
-public class GPGlobalEventBus {
+public interface ZoomPreviousEventHandler extends EventHandler {
 
-	private static GPGlobalEventBus INSTANCE;
-	private SimpleEventBus eventBus;
-
-	public GPGlobalEventBus() {
-		this.eventBus = new SimpleEventBus();
-	}
-
-	public static GPGlobalEventBus get() {
-		if (INSTANCE == null)
-			INSTANCE = new GPGlobalEventBus();
-		return INSTANCE;
-	}
-
-	/**
-	 * @return the eventBus
-	 */
-	public SimpleEventBus getEventBus() {
-		return eventBus;
-	}
+	void onActivation(boolean activate);
 
 }

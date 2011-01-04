@@ -74,4 +74,15 @@ public interface GeocodingRemote extends RemoteService {
 	public ArrayList<GeocodingBean> findLocations(String search)
 			throws GeoPlatformException;
 
+	/**
+	 * 
+	 * @param Coordinates
+	 *            of the Point
+	 * 
+	 * @return GeocodingBean
+	 * @throws GeoPlatformException
+	 */
+	public GeocodingBean findLocation(double lat, double lon)
+			throws GeoPlatformException;
+
 }

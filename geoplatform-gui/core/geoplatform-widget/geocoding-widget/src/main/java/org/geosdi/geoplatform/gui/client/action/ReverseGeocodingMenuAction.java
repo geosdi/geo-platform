@@ -33,28 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model;
+package org.geosdi.geoplatform.gui.client.action;
+
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+
+import com.extjs.gxt.ui.client.event.MenuEvent;
 
 /**
  * @author giuseppe
  * 
  */
-public enum GeocodingKeyValue {
+public class ReverseGeocodingMenuAction extends MenuAction {
 
-	ID("id"), VISIBLE("visible"), DESCRIPTION("description"), ZERO_RESULTS(
-			"ZERO_RESULTS");
-
-	private String value;
-
-	GeocodingKeyValue(String value) {
-		this.value = value;
+	public ReverseGeocodingMenuAction() {
+		super("Reverse Geocoding");
+		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @return the value
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+	 * .extjs.gxt.ui.client.event.ComponentEvent)
 	 */
-	public String getValue() {
-		return value;
+	@Override
+	public void componentSelected(MenuEvent ce) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

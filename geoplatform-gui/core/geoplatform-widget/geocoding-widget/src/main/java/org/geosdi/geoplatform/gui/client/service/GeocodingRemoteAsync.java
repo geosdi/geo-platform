@@ -50,4 +50,7 @@ public interface GeocodingRemoteAsync {
 	public void findLocations(String text,
 			AsyncCallback<ArrayList<GeocodingBean>> callback);
 
+	public void findLocation(double lat, double lon,
+			AsyncCallback<GeocodingBean> callback);
+
 }

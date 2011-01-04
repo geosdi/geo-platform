@@ -33,28 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model;
+package org.geosdi.geoplatform.gui.server.service.impl;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import javax.annotation.PostConstruct;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
 
 /**
  * @author giuseppe
  * 
  */
-public enum GeocodingKeyValue {
+public abstract class GPGeocodingService {
 
-	ID("id"), VISIBLE("visible"), DESCRIPTION("description"), ZERO_RESULTS(
-			"ZERO_RESULTS");
+	protected URL url;
+	protected HttpURLConnection conn;
+	protected XPath xpath;
 
-	private String value;
-
-	GeocodingKeyValue(String value) {
-		this.value = value;
-	}
-
-	/**
-	 * @return the value
-	 */
-	public String getValue() {
-		return value;
+	@PostConstruct
+	public void init() {
+		// prepare XPath
+		xpath = XPathFactory.newInstance().newXPath();
 	}
 
 }

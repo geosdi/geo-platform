@@ -39,20 +39,17 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
-import org.geosdi.geoplatform.gui.server.service.IGeocodingService;
+import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
+import org.geosdi.geoplatform.gui.server.service.IReverseGeocoding;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -61,35 +58,36 @@ import org.xml.sax.SAXException;
  * @author giuseppe
  * 
  */
-@Service("geocodingService")
-public class GeocodingService extends GPGeocodingService implements
-		IGeocodingService {
+@Service("reverseGeocoding")
+public class ReverseGeocoding extends GPGeocodingService implements
+		IReverseGeocoding {
 
-	// URL prefix to the geocoder
-	private static final String GEOCODER_REQUEST_PREFIX_FOR_XML = "http://maps.google.com/maps/api/geocode/xml";
+	// URL prefix to the reverse geocoder
+	private static final String REVERSE_GEOCODER_PREFIX_FOR_XML = "http://maps.googleapis.com/maps/api/geocode/xml";
 
-	private ArrayList<GeocodingBean> beans;
+	private GeocodingBean bean;
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.geosdi.geoplatform.gui.server.service.IGeocodingService#findLocations
-	 * (java.lang.String)
+	 * org.geosdi.geoplatform.gui.server.service.IReverseGeocoding#findLocations
+	 * (double, double)
 	 */
 	@Override
-	public ArrayList<GeocodingBean> findLocations(String address)
+	public GeocodingBean findLocation(double lat, double lon)
 			throws IOException, SAXException, ParserConfigurationException,
 			XPathExpressionException {
 		// TODO Auto-generated method stub
-		this.beans = new ArrayList<GeocodingBean>();
+		this.bean = new GeocodingBean();
 
-		url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?address="
-				+ URLEncoder.encode(address, "UTF-8") + "&sensor=false");
+		url = new URL(REVERSE_GEOCODER_PREFIX_FOR_XML + "?latlng="
+				+ URLEncoder.encode(lat + "," + lon, "UTF-8") + "&sensor=true");
 
 		conn = (HttpURLConnection) url.openConnection();
 
 		Document geocoderResultDocument = null;
+
 		try {
 			// open the connection and get results as InputSource.
 			conn.connect();
@@ -111,49 +109,12 @@ public class GeocodingService extends GPGeocodingService implements
 				"/GeocodeResponse/result/formatted_address",
 				geocoderResultDocument, XPathConstants.NODESET);
 
-		for (int i = 0; i < resultNodeList.getLength(); ++i) {
-			GeocodingBean bean = new GeocodingBean();
-			bean.setDescription(resultNodeList.item(i).getTextContent());
-			int resultID = i + 1;
-			getGeometryLocation(geocoderResultDocument,
-					"/GeocodeResponse/result[" + resultID
-							+ "]/geometry/location/*", bean);
-			beans.add(bean);
-		}
+		if (resultNodeList.getLength() > 0)
+			bean.setDescription(resultNodeList.item(0).getTextContent());
+		else
+			bean.setDescription(GeocodingKeyValue.ZERO_RESULTS.toString());
 
-		return beans;
-	}
-
-	/**
-	 * 
-	 * @param geocoderResultDocument
-	 * @param xpathQuery
-	 * @param bean
-	 */
-	private void getGeometryLocation(Document geocoderResultDocument,
-			String xpathQuery, GeocodingBean bean) {
-		XPath xpath = XPathFactory.newInstance().newXPath();
-		NodeList resultNodeListLocation = null;
-		try {
-			resultNodeListLocation = (NodeList) xpath.evaluate(xpathQuery,
-					geocoderResultDocument, XPathConstants.NODESET);
-
-			float lat = Float.NaN;
-			float lng = Float.NaN;
-			for (int i = 0; i < resultNodeListLocation.getLength(); ++i) {
-				Node node = resultNodeListLocation.item(i);
-				if ("lat".equals(node.getNodeName()))
-					lat = Float.parseFloat(node.getTextContent());
-				if ("lng".equals(node.getNodeName()))
-					lng = Float.parseFloat(node.getTextContent());
-			}
-			bean.setLat(lat);
-			bean.setLon(lng);
-
-		} catch (XPathExpressionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		return bean;
 	}
 
 }

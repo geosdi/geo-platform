@@ -33,28 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model;
+package org.geosdi.geoplatform.gui.server.service;
+
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+
+import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
+import org.xml.sax.SAXException;
 
 /**
  * @author giuseppe
  * 
  */
-public enum GeocodingKeyValue {
-
-	ID("id"), VISIBLE("visible"), DESCRIPTION("description"), ZERO_RESULTS(
-			"ZERO_RESULTS");
-
-	private String value;
-
-	GeocodingKeyValue(String value) {
-		this.value = value;
-	}
+public interface IReverseGeocoding {
 
 	/**
-	 * @return the value
+	 * 
+	 * @param lat
+	 * @param lon
+	 * @return
+	 * 		   GeocodingBean			
+	 * 
+	 * @throws IOException
+	 * @throws SAXException
+	 * @throws ParserConfigurationException
+	 * @throws XPathExpressionException
 	 */
-	public String getValue() {
-		return value;
-	}
+	public GeocodingBean findLocation(double lat, double lon)
+			throws IOException, SAXException, ParserConfigurationException,
+			XPathExpressionException;
 
 }

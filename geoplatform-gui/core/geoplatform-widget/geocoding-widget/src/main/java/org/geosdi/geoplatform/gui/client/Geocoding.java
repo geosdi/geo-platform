@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.GeocodingMenuAction;
+import org.geosdi.geoplatform.gui.client.action.ReverseGeocodingMenuAction;
 import org.geosdi.geoplatform.gui.client.mvc.GeocodingController;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
@@ -77,6 +78,15 @@ public class Geocoding implements EntryPoint {
 			public MenuAction createAction() {
 				// TODO Auto-generated method stub
 				return new GeocodingMenuAction();
+			}
+		});
+
+		MenuActionRegistar.put("reverseGeocoding", new MenuActionCreator() {
+
+			@Override
+			public MenuAction createAction() {
+				// TODO Auto-generated method stub
+				return new ReverseGeocodingMenuAction();
 			}
 		});
 	}

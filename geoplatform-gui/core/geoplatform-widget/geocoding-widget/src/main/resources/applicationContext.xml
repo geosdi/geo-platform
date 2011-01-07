@@ -18,7 +18,7 @@
 		<property name="order" value="10" />
 	</bean>
 	
-	<bean name="reverseGeocoding"
+	<bean name="reverseGeocodingMenu"
 		class="org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool">
 		<property name="id" value="reverseGeocoding" />
 		<property name="text" value="Reverse Geocoding" />

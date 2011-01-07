@@ -44,6 +44,8 @@ import org.gwtopenmaps.openlayers.client.Size;
 import org.gwtopenmaps.openlayers.client.layer.Markers;
 import org.gwtopenmaps.openlayers.client.layer.MarkersOptions;
 
+import com.google.gwt.core.client.GWT;
+
 /**
  * @author giuseppe
  * 
@@ -71,7 +73,8 @@ public class MapUtility {
 	private void buildIconMarker() {
 		Size size = new Size(21, 25);
 		Pixel offset = new Pixel(-(size.getWidth() / 2), -size.getHeight());
-		this.iconMarker = new Icon("geoportal/map-images/geocodmarker.png", size, offset);
+		this.iconMarker = new Icon(GWT.getModuleName()
+				+ "/map-images/geocodmarker.png", size, offset);
 	}
 
 	/**

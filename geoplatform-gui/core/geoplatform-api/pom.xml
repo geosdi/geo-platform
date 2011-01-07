@@ -129,39 +129,23 @@
 	<build>
 
 		<plugins>
-			<!-- ... or ask the plugin to detect them based on gwt modules files and 
-				copy the required java sources -->
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>gwt-maven-plugin</artifactId>
-				<version>1.3.2.google</version>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<configuration>
+					<attach>true</attach>
+				</configuration>
 				<executions>
-					<!-- GWT version detected from dependencyManagement -->
 					<execution>
+						<id>attach-sources</id>
 						<goals>
-							<goal>resources</goal>
+							<goal>jar</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
-            
-            <plugin>
-                <inherited>true</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-                <configuration>
-                    <attach>true</attach>
-                </configuration>
-				<executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-			</plugin>
-            
+
 			<!-- tell the compiler we can use 1.6 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

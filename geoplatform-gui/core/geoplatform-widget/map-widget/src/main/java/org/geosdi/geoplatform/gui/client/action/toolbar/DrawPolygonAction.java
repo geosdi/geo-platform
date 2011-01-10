@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.action.MapToggleAction;
 import org.geosdi.geoplatform.gui.client.Resources;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.action.annotation.PersistButton;
@@ -50,14 +50,10 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
  * 
  */
 @PersistButton(persist = true)
-public class DrawPolygonAction extends ToolbarMapAction {
-
-	private GeoPlatformMap mapWidget;
+public class DrawPolygonAction extends MapToggleAction {
 
 	public DrawPolygonAction(GeoPlatformMap mapWidget) {
-		super("Draw Polygon", Resources.ICONS.DrawFeature());
-
-		this.mapWidget = mapWidget;
+		super("Draw Polygon", Resources.ICONS.DrawFeature(), mapWidget);
 	}
 
 	/*
@@ -72,17 +68,13 @@ public class DrawPolygonAction extends ToolbarMapAction {
 		// TODO Auto-generated method stub
 		ToggleButton button = (ToggleButton) ce.getSource();
 
-		if ((((MapLayoutWidget) mapWidget).getButtonBar().isTogglePressed())
-				&& (!((MapLayoutWidget) mapWidget).getButtonBar()
-						.getPressedButton().getId().equals(button.getId())))
-			((MapLayoutWidget) mapWidget).getButtonBar().changeButtonState();
+		super.changeButtonState();
 
 		if (button.isPressed()) {
-			((MapLayoutWidget) mapWidget).getButtonBar().setPressedButton(
-					button);
-			((MapLayoutWidget) this.mapWidget).activateDrawFeature();
+			mapWidget.getButtonBar().setPressedButton(button);
+			this.mapWidget.activateDrawFeature();
 		} else
-			((MapLayoutWidget) this.mapWidget).deactivateDrawFeature();
+			this.mapWidget.deactivateDrawFeature();
 
 	}
 
@@ -95,5 +87,16 @@ public class DrawPolygonAction extends ToolbarMapAction {
 	public Control getMapControl() {
 		// TODO Auto-generated method stub
 		return ((MapLayoutWidget) mapWidget).getDrawPolygonFeature();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
+	 */
+	@Override
+	public void disableControl() {
+		// TODO Auto-generated method stub
+		getMapControl().deactivate();
 	}
 }

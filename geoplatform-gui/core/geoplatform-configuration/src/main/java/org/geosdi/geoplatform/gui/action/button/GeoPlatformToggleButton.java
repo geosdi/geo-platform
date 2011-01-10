@@ -57,7 +57,7 @@ public class GeoPlatformToggleButton extends ToggleButton {
 	 */
 	public void disableControl() {
 		super.toggle(false);
-		action.getMapControl().deactivate();
+		action.disableControl();
 	}
 
 	/**

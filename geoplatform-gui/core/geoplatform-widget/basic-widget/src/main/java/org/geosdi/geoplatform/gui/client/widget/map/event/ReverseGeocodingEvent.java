@@ -33,77 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action;
+package org.geosdi.geoplatform.gui.client.widget.map.event;
 
-import org.gwtopenmaps.openlayers.client.control.Control;
-
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class ToolbarMapAction extends GeoPlatformToolbarAction {
+public class ReverseGeocodingEvent extends
+		GwtEvent<ReverseGeocodingEventHandler> {
 
-	private Button button;
-	private String tooltip;
+	public static Type<ReverseGeocodingEventHandler> TYPE = new Type<ReverseGeocodingEventHandler>();
 
-	public ToolbarMapAction(String tooltip, AbstractImagePrototype image) {
-		super(image);
-		this.tooltip = tooltip;
+	private boolean activate;
+
+	public ReverseGeocodingEvent(boolean activate) {
+		this.activate = activate;
 	}
 
-	/**
-	 * @return the tooltip
-	 */
-	public String getTooltip() {
-		return tooltip;
+	@Override
+	public Type<ReverseGeocodingEventHandler> getAssociatedType() {
+		// TODO Auto-generated method stub
+		return TYPE;
 	}
 
-	/**
-	 * @param tooltip
-	 *            the tooltip to set
-	 */
-	public void setTooltip(String tooltip) {
-		this.tooltip = tooltip;
+	@Override
+	protected void dispatch(ReverseGeocodingEventHandler handler) {
+		// TODO Auto-generated method stub
+		handler.onActivation(activate);
 	}
 
-	/**
-	 * @return the button
-	 */
-	public Button getButton() {
-		return button;
-	}
-
-	/**
-	 * @param button
-	 *            the button to set
-	 */
-	public void setButton(Button button) {
-		this.button = button;
-	}
-
-	public Control getMapControl() {
-		return null;
-	}
-	
-	public void disableControl() {
-		
-	}
-
-	/**
-	 * 
-	 * Enable Button associated with this action
-	 */
-	public void enable() {
-		this.button.enable();
-	}
-
-	/**
-	 * Disable Button associated with this action
-	 */
-	public void disable() {
-		this.button.disable();
-	}
 }

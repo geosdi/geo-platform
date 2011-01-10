@@ -33,34 +33,33 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action;
+package org.geosdi.geoplatform.gui.action;
 
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
-import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class ReverseGeocodingMenuAction extends MenuAction {
+public abstract class MapToggleAction extends ToolbarMapAction {
 
-	public ReverseGeocodingMenuAction() {
-		super("Reverse Geocoding");
+	protected GeoPlatformMap mapWidget;
+
+	public MapToggleAction(String tooltip, AbstractImagePrototype image,
+			GeoPlatformMap theMapWidget) {
+		super(tooltip, image);
 		// TODO Auto-generated constructor stub
+		this.mapWidget = theMapWidget;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
-	@Override
-	public void componentSelected(MenuEvent ce) {
-		// TODO Auto-generated method stub
-
+	protected void changeButtonState() {
+		if ((mapWidget.getButtonBar().isTogglePressed())
+				&& (!mapWidget.getButtonBar().getPressedButton().getId()
+						.equals(getButton().getId())))
+			mapWidget.getButtonBar().changeButtonState();
 	}
 
 }

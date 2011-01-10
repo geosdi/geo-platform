@@ -2,6 +2,8 @@
 	<inherits name='com.google.gwt.user.User' />
 	<inherits name='com.extjs.gxt.ui.GXT' />
 	
+	<inherits name='org.geosdi.geoplatform.gui.BasicWidget' />
+	
 	<source path="configuration" />
 	<source path="configuration/mvc" />
 	<source path="configuration/action" />

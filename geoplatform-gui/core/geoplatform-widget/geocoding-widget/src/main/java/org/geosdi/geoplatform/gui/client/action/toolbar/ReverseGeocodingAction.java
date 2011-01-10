@@ -33,77 +33,49 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action;
+package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.gwtopenmaps.openlayers.client.control.Control;
+import org.geosdi.geoplatform.gui.action.MapToggleAction;
+import org.geosdi.geoplatform.gui.client.GeocodingResources;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class ToolbarMapAction extends GeoPlatformToolbarAction {
+public class ReverseGeocodingAction extends MapToggleAction {
 
-	private Button button;
-	private String tooltip;
-
-	public ToolbarMapAction(String tooltip, AbstractImagePrototype image) {
-		super(image);
-		this.tooltip = tooltip;
+	public ReverseGeocodingAction(GeoPlatformMap theMapWidget) {
+		super("Reverse Geocoding", GeocodingResources.ICONS.reverseGeocoding(), theMapWidget);
+		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @return the tooltip
-	 */
-	public String getTooltip() {
-		return tooltip;
-	}
-
-	/**
-	 * @param tooltip
-	 *            the tooltip to set
-	 */
-	public void setTooltip(String tooltip) {
-		this.tooltip = tooltip;
-	}
-
-	/**
-	 * @return the button
-	 */
-	public Button getButton() {
-		return button;
-	}
-
-	/**
-	 * @param button
-	 *            the button to set
-	 */
-	public void setButton(Button button) {
-		this.button = button;
-	}
-
-	public Control getMapControl() {
-		return null;
-	}
-	
-	public void disableControl() {
-		
-	}
-
-	/**
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * Enable Button associated with this action
+	 * @see
+	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+	 * .extjs.gxt.ui.client.event.ComponentEvent)
 	 */
-	public void enable() {
-		this.button.enable();
+	@Override
+	public void componentSelected(ButtonEvent ce) {
+		// TODO Auto-generated method stub
+		ToggleButton button = (ToggleButton) ce.getSource();
+
+		super.changeButtonState();
+		
+		if (mapWidget.isFeatureOperationEnable())
+			mapWidget.deactivateFeatureOperation();
+
+		if (mapWidget.isModifyFeatureEnable())
+			mapWidget.deactivateModifyFeature();
+		
+		
+
 	}
 
-	/**
-	 * Disable Button associated with this action
-	 */
-	public void disable() {
-		this.button.disable();
-	}
 }

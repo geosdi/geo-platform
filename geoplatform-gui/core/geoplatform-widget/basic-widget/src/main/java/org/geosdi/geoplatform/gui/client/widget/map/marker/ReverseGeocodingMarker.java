@@ -33,77 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action;
+package org.geosdi.geoplatform.gui.client.widget.map.marker;
 
-import org.gwtopenmaps.openlayers.client.control.Control;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.gwtopenmaps.openlayers.client.Icon;
+import org.gwtopenmaps.openlayers.client.Pixel;
+import org.gwtopenmaps.openlayers.client.Size;
+import org.gwtopenmaps.openlayers.client.layer.Markers;
+import org.gwtopenmaps.openlayers.client.layer.MarkersOptions;
 
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.google.gwt.core.client.GWT;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class ToolbarMapAction extends GeoPlatformToolbarAction {
+public class ReverseGeocodingMarker extends GeoPlatformMarker {
 
-	private Button button;
-	private String tooltip;
+	private GeoPlatformMap mapWidget;
 
-	public ToolbarMapAction(String tooltip, AbstractImagePrototype image) {
-		super(image);
-		this.tooltip = tooltip;
+	public ReverseGeocodingMarker(GeoPlatformMap theMapWidget) {
+		super();
+		this.mapWidget = theMapWidget;
 	}
 
-	/**
-	 * @return the tooltip
-	 */
-	public String getTooltip() {
-		return tooltip;
+	@Override
+	public void buildMarkerLayer() {
+		// TODO Auto-generated method stub
+		MarkersOptions options = new MarkersOptions();
+		options.setNumZoomLevels(18);
+		options.setMaxZoomLevel(18);
+		options.setDisplayInLayerSwitcher(false);
+
+		this.markerLayer = new Markers("GPReverseGeocoding-Marker-Layer",
+				options);
 	}
 
-	/**
-	 * @param tooltip
-	 *            the tooltip to set
-	 */
-	public void setTooltip(String tooltip) {
-		this.tooltip = tooltip;
+	@Override
+	public void buildIconMarker() {
+		// TODO Auto-generated method stub
+		Size size = new Size(21, 25);
+		Pixel offset = new Pixel(-(size.getWidth() / 2), -size.getHeight());
+		this.iconMarker = new Icon(GWT.getModuleName() + "/map-images/POI.png",
+				size, offset);
 	}
 
-	/**
-	 * @return the button
-	 */
-	public Button getButton() {
-		return button;
-	}
-
-	/**
-	 * @param button
-	 *            the button to set
-	 */
-	public void setButton(Button button) {
-		this.button = button;
-	}
-
-	public Control getMapControl() {
-		return null;
-	}
-	
-	public void disableControl() {
-		
-	}
-
-	/**
-	 * 
-	 * Enable Button associated with this action
-	 */
-	public void enable() {
-		this.button.enable();
-	}
-
-	/**
-	 * Disable Button associated with this action
-	 */
-	public void disable() {
-		this.button.disable();
-	}
 }

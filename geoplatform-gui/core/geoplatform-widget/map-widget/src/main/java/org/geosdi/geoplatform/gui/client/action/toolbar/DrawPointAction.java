@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.action.MapToggleAction;
 import org.geosdi.geoplatform.gui.client.Resources;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
@@ -48,14 +48,11 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
  * @author giuseppe
  * 
  */
-public class DrawPointAction extends ToolbarMapAction {
-
-	private GeoPlatformMap mapWidget;
+public class DrawPointAction extends MapToggleAction {
 
 	public DrawPointAction(GeoPlatformMap mapWidget) {
-		super("Draw Point", Resources.ICONS.DrawPointFeature());
+		super("Draw Point", Resources.ICONS.DrawPointFeature(), mapWidget);
 		// TODO Auto-generated constructor stub
-		this.mapWidget = mapWidget;
 	}
 
 	/*
@@ -70,17 +67,13 @@ public class DrawPointAction extends ToolbarMapAction {
 		// TODO Auto-generated method stub
 		ToggleButton button = (ToggleButton) ce.getSource();
 
-		if ((((MapLayoutWidget) mapWidget).getButtonBar().isTogglePressed())
-				&& (!((MapLayoutWidget) mapWidget).getButtonBar()
-						.getPressedButton().getId().equals(button.getId())))
-			((MapLayoutWidget) mapWidget).getButtonBar().changeButtonState();
+		super.changeButtonState();
 
 		if (button.isPressed()) {
-			((MapLayoutWidget) mapWidget).getButtonBar().setPressedButton(
-					button);
-			((MapLayoutWidget) this.mapWidget).activateDrawPointFeature();
+			mapWidget.getButtonBar().setPressedButton(button);
+			this.mapWidget.activateDrawPointFeature();
 		} else
-			((MapLayoutWidget) this.mapWidget).deactivateDrawPointFeature();
+			this.mapWidget.deactivateDrawPointFeature();
 	}
 
 	/*
@@ -92,5 +85,10 @@ public class DrawPointAction extends ToolbarMapAction {
 	public Control getMapControl() {
 		// TODO Auto-generated method stub
 		return ((MapLayoutWidget) mapWidget).getDrawPointFeature();
+	}
+
+	@Override
+	public void disableControl() {
+		getMapControl().deactivate();
 	}
 }

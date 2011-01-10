@@ -33,75 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map;
+package org.geosdi.geoplatform.gui.client.widget.map.event;
 
-import org.gwtopenmaps.openlayers.client.Icon;
-import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.Marker;
-import org.gwtopenmaps.openlayers.client.Pixel;
-import org.gwtopenmaps.openlayers.client.Size;
-import org.gwtopenmaps.openlayers.client.layer.Markers;
-import org.gwtopenmaps.openlayers.client.layer.MarkersOptions;
-
-import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.EventHandler;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class MapUtility {
+public interface ReverseGeocodingEventHandler extends EventHandler {
 
-	private Markers markerLayer;
-	private Marker marker;
-	private Icon iconMarker;
+	public void onActivation(boolean activate);
+	
+	public void register();
 
-	public MapUtility() {
-		buildMarkerLayer();
-		buildIconMarker();
-	}
-
-	private void buildMarkerLayer() {
-		MarkersOptions options = new MarkersOptions();
-		options.setNumZoomLevels(18);
-		options.setMaxZoomLevel(18);
-		options.setDisplayInLayerSwitcher(false);
-
-		this.markerLayer = new Markers("Map-Markers-Layer", options);
-	}
-
-	private void buildIconMarker() {
-		Size size = new Size(21, 25);
-		Pixel offset = new Pixel(-(size.getWidth() / 2), -size.getHeight());
-		this.iconMarker = new Icon(GWT.getModuleName()
-				+ "/map-images/geocodmarker.png", size, offset);
-	}
-
-	/**
-	 * 
-	 * @param lonlat
-	 *            LonLat to build the marker and add to the markerLayer
-	 */
-	public void addMarker(LonLat lonlat, Map map) {
-		this.markerLayer.clearMarkers();
-		map.setCenter(lonlat, 16);
-		this.marker = new Marker(lonlat, this.iconMarker);
-		this.markerLayer.addMarker(this.marker);
-	}
-
-	/**
-	 * Remove Marker from Marker Layer
-	 */
-	public void removeMarker() {
-		if (this.marker != null)
-			this.markerLayer.removeMarker(this.marker);
-	}
-
-	/**
-	 * @return the markerLayer
-	 */
-	public Markers getMarkerLayer() {
-		return markerLayer;
-	}
+	public void unregister();
 
 }

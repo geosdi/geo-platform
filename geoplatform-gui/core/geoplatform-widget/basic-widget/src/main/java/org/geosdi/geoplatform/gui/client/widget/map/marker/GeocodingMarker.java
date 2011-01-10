@@ -33,77 +33,59 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action;
+package org.geosdi.geoplatform.gui.client.widget.map.marker;
 
-import org.gwtopenmaps.openlayers.client.control.Control;
+import org.gwtopenmaps.openlayers.client.Icon;
+import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.Map;
+import org.gwtopenmaps.openlayers.client.Marker;
+import org.gwtopenmaps.openlayers.client.Pixel;
+import org.gwtopenmaps.openlayers.client.Size;
+import org.gwtopenmaps.openlayers.client.layer.Markers;
+import org.gwtopenmaps.openlayers.client.layer.MarkersOptions;
 
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.google.gwt.core.client.GWT;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class ToolbarMapAction extends GeoPlatformToolbarAction {
+public class GeocodingMarker extends GeoPlatformMarker {
 
-	private Button button;
-	private String tooltip;
+	public void buildMarkerLayer() {
+		MarkersOptions options = new MarkersOptions();
+		options.setNumZoomLevels(18);
+		options.setMaxZoomLevel(18);
+		options.setDisplayInLayerSwitcher(false);
 
-	public ToolbarMapAction(String tooltip, AbstractImagePrototype image) {
-		super(image);
-		this.tooltip = tooltip;
+		this.markerLayer = new Markers("GP-Geocoding-Markers-Layer", options);
 	}
 
-	/**
-	 * @return the tooltip
-	 */
-	public String getTooltip() {
-		return tooltip;
-	}
-
-	/**
-	 * @param tooltip
-	 *            the tooltip to set
-	 */
-	public void setTooltip(String tooltip) {
-		this.tooltip = tooltip;
-	}
-
-	/**
-	 * @return the button
-	 */
-	public Button getButton() {
-		return button;
-	}
-
-	/**
-	 * @param button
-	 *            the button to set
-	 */
-	public void setButton(Button button) {
-		this.button = button;
-	}
-
-	public Control getMapControl() {
-		return null;
-	}
-	
-	public void disableControl() {
-		
+	public void buildIconMarker() {
+		Size size = new Size(21, 25);
+		Pixel offset = new Pixel(-(size.getWidth() / 2), -size.getHeight());
+		this.iconMarker = new Icon(GWT.getModuleName()
+				+ "/map-images/geocodmarker.png", size, offset);
 	}
 
 	/**
 	 * 
-	 * Enable Button associated with this action
+	 * @param lonlat
+	 *            LonLat to build the marker and add to the markerLayer
 	 */
-	public void enable() {
-		this.button.enable();
+	public void addMarker(LonLat lonlat, Map map) {
+		this.markerLayer.clearMarkers();
+		map.setCenter(lonlat, 16);
+		this.marker = new Marker(lonlat, this.iconMarker);
+		this.markerLayer.addMarker(this.marker);
 	}
 
 	/**
-	 * Disable Button associated with this action
+	 * Remove Marker from Marker Layer
 	 */
-	public void disable() {
-		this.button.disable();
+	public void removeMarker() {
+		if (this.marker != null)
+			this.markerLayer.removeMarker(this.marker);
 	}
 }

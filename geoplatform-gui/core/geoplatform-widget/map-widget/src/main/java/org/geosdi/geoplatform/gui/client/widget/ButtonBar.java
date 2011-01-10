@@ -50,6 +50,7 @@ import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformButtonBar;
 
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
@@ -64,7 +65,7 @@ import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
  * @author giuseppe
  * 
  */
-public class ButtonBar extends LayoutContainer {
+public class ButtonBar extends LayoutContainer implements GeoPlatformButtonBar {
 
 	public static final String TOOLBAR_SEPARATOR = "ToolbarSeparator";
 
@@ -114,7 +115,7 @@ public class ButtonBar extends LayoutContainer {
 
 				if (action instanceof ToolbarMapAction) {
 					if (((ActionClientTool) tool).getType().equals("toggle")) {
-						addMapToogleButton((ToolbarMapAction) action);
+						addMapToggleButton((ToolbarMapAction) action);
 					} else {
 						addMapButton((ToolbarMapAction) action);
 					}
@@ -207,7 +208,7 @@ public class ButtonBar extends LayoutContainer {
 	 * 
 	 * @param action
 	 */
-	public void addMapToogleButton(ToolbarMapAction action) {
+	public void addMapToggleButton(ToolbarMapAction action) {
 		GeoPlatformToggleButton button = new GeoPlatformToggleButton();
 		button.setAction(action);
 		button.setId(action.getId());

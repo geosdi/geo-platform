@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.mvc;
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
-import org.geosdi.geoplatform.gui.client.widget.map.MapUtility;
+import org.geosdi.geoplatform.gui.client.widget.map.marker.GeocodingMarker;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
@@ -58,7 +58,7 @@ import com.extjs.gxt.ui.client.mvc.Controller;
 public class MapView extends GeoPlatformView {
 
 	private MapLayoutWidget mapLayout;
-	private MapUtility mapUtility;
+	private GeocodingMarker geocoderMarker;
 
 	private ButtonBar buttonBar;
 
@@ -69,7 +69,7 @@ public class MapView extends GeoPlatformView {
 	}
 
 	public void initialize() {
-		this.mapUtility = new MapUtility();
+		this.geocoderMarker = new GeocodingMarker();
 	}
 
 	/*
@@ -103,7 +103,7 @@ public class MapView extends GeoPlatformView {
 	 */
 	private void onRemoveMarker() {
 		// TODO Auto-generated method stub
-		this.mapUtility.removeMarker();
+		this.geocoderMarker.removeMarker();
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class MapView extends GeoPlatformView {
 		// TODO Auto-generated method stub
 		LonLat center = new LonLat(bean.getLon(), bean.getLat());
 		center.transform("EPSG:4326", "EPSG:900913");
-		this.mapUtility.addMarker(center, this.mapLayout.getMap());
+		this.geocoderMarker.addMarker(center, this.mapLayout.getMap());
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class MapView extends GeoPlatformView {
 	 */
 	private void onInitMapWidget() {
 		// TODO Auto-generated method stub
-		this.addLayer(this.mapUtility.getMarkerLayer());
+		this.addLayer(this.geocoderMarker.getMarkerLayer());
 	}
 
 	/**

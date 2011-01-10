@@ -33,77 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action;
+package org.geosdi.geoplatform.gui.client.widget.map.marker;
 
-import org.gwtopenmaps.openlayers.client.control.Control;
-
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.gwtopenmaps.openlayers.client.Icon;
+import org.gwtopenmaps.openlayers.client.Marker;
+import org.gwtopenmaps.openlayers.client.layer.Markers;
 
 /**
- * @author giuseppe
- * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
+ *
  */
-public abstract class ToolbarMapAction extends GeoPlatformToolbarAction {
-
-	private Button button;
-	private String tooltip;
-
-	public ToolbarMapAction(String tooltip, AbstractImagePrototype image) {
-		super(image);
-		this.tooltip = tooltip;
-	}
-
-	/**
-	 * @return the tooltip
-	 */
-	public String getTooltip() {
-		return tooltip;
-	}
-
-	/**
-	 * @param tooltip
-	 *            the tooltip to set
-	 */
-	public void setTooltip(String tooltip) {
-		this.tooltip = tooltip;
-	}
-
-	/**
-	 * @return the button
-	 */
-	public Button getButton() {
-		return button;
-	}
-
-	/**
-	 * @param button
-	 *            the button to set
-	 */
-	public void setButton(Button button) {
-		this.button = button;
-	}
-
-	public Control getMapControl() {
-		return null;
+public abstract class GeoPlatformMarker {
+	
+	protected Markers markerLayer;
+	protected Marker marker;
+	protected Icon iconMarker;
+	
+	public GeoPlatformMarker() {
+		buildMarkerLayer();
+		buildIconMarker();
 	}
 	
-	public void disableControl() {
-		
+	public abstract void buildMarkerLayer();
+	
+	public abstract void buildIconMarker();
+	
+	/**
+	 * @return the markerLayer
+	 */
+	public Markers getMarkerLayer() {
+		return markerLayer;
 	}
 
-	/**
-	 * 
-	 * Enable Button associated with this action
-	 */
-	public void enable() {
-		this.button.enable();
-	}
-
-	/**
-	 * Disable Button associated with this action
-	 */
-	public void disable() {
-		this.button.disable();
-	}
 }

@@ -17,14 +17,5 @@
 		<property name="enabled" value="true" />
 		<property name="order" value="10" />
 	</bean>
-	
-	<bean name="reverseGeocodingMenu"
-		class="org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool">
-		<property name="id" value="reverseGeocoding" />
-		<property name="text" value="Reverse Geocoding" />
-		<property name="checked" value="false" />
-		<property name="enabled" value="true" />
-		<property name="order" value="11" />
-	</bean>
 
 </beans>

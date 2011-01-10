@@ -33,77 +33,44 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action;
+package org.geosdi.geoplatform.gui.client.action.menu;
 
-import org.gwtopenmaps.openlayers.client.control.Control;
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.client.GeocodingEvents;
 
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.widget.menu.CheckMenuItem;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
 
 /**
  * @author giuseppe
  * 
  */
-public abstract class ToolbarMapAction extends GeoPlatformToolbarAction {
+public class GeocodingMenuAction extends MenuAction {
 
-	private Button button;
-	private String tooltip;
-
-	public ToolbarMapAction(String tooltip, AbstractImagePrototype image) {
-		super(image);
-		this.tooltip = tooltip;
+	public GeocodingMenuAction() {
+		super("Geocoding");
+		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @return the tooltip
-	 */
-	public String getTooltip() {
-		return tooltip;
-	}
-
-	/**
-	 * @param tooltip
-	 *            the tooltip to set
-	 */
-	public void setTooltip(String tooltip) {
-		this.tooltip = tooltip;
-	}
-
-	/**
-	 * @return the button
-	 */
-	public Button getButton() {
-		return button;
-	}
-
-	/**
-	 * @param button
-	 *            the button to set
-	 */
-	public void setButton(Button button) {
-		this.button = button;
-	}
-
-	public Control getMapControl() {
-		return null;
-	}
-	
-	public void disableControl() {
-		
-	}
-
-	/**
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * Enable Button associated with this action
+	 * @see
+	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+	 * .extjs.gxt.ui.client.event.ComponentEvent)
 	 */
-	public void enable() {
-		this.button.enable();
+	@Override
+	public void componentSelected(MenuEvent ce) {
+		// TODO Auto-generated method stub
+		CheckMenuItem item = (CheckMenuItem) ((Menu) ce.getSource())
+				.getItemByItemId(super.getId());
+
+		if (item.isChecked())
+			Dispatcher.forwardEvent(GeocodingEvents.SHOW_GEOCODING_WIDGET);
+		else
+			Dispatcher.forwardEvent(GeocodingEvents.HIDE_GEOCODING_WIDGET);
 	}
 
-	/**
-	 * Disable Button associated with this action
-	 */
-	public void disable() {
-		this.button.disable();
-	}
 }

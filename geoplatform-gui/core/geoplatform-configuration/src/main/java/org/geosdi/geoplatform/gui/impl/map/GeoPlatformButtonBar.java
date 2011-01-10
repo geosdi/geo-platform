@@ -33,44 +33,23 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action;
+package org.geosdi.geoplatform.gui.impl.map;
 
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
-import org.geosdi.geoplatform.gui.client.GeocodingEvents;
-
-import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.extjs.gxt.ui.client.widget.menu.CheckMenuItem;
-import com.extjs.gxt.ui.client.widget.menu.Menu;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GeocodingMenuAction extends MenuAction {
+public interface GeoPlatformButtonBar {
 
-	public GeocodingMenuAction() {
-		super("Geocoding");
-		// TODO Auto-generated constructor stub
-	}
+	boolean isTogglePressed();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
-	@Override
-	public void componentSelected(MenuEvent ce) {
-		// TODO Auto-generated method stub
-		CheckMenuItem item = (CheckMenuItem) ((Menu) ce.getSource())
-				.getItemByItemId(super.getId());
+	void changeButtonState();
 
-		if (item.isChecked())
-			Dispatcher.forwardEvent(GeocodingEvents.SHOW_GEOCODING_WIDGET);
-		else
-			Dispatcher.forwardEvent(GeocodingEvents.HIDE_GEOCODING_WIDGET);
-	}
+	Button getPressedButton();
 
+	void setPressedButton(ToggleButton button);
 }

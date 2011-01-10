@@ -33,77 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action;
+package org.geosdi.geoplatform.gui.client.widget.map.marker;
 
-import org.gwtopenmaps.openlayers.client.control.Control;
-
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingEventHandler;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.gwtopenmaps.openlayers.client.event.MapClickListener;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class ToolbarMapAction extends GeoPlatformToolbarAction {
+public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
-	private Button button;
-	private String tooltip;
+	private GeoPlatformMap mapWidget;
+	private ReverseGeocodingMarker rGMarker;
+	private MapClickListener listener;
 
-	public ToolbarMapAction(String tooltip, AbstractImagePrototype image) {
-		super(image);
-		this.tooltip = tooltip;
+	public ReverseGeocodingWidget(GeoPlatformMap theMapWidget) {
+		this.mapWidget = theMapWidget;
+		this.rGMarker = new ReverseGeocodingMarker(mapWidget);
+		this.createListener();
 	}
 
-	/**
-	 * @return the tooltip
-	 */
-	public String getTooltip() {
-		return tooltip;
+	@Override
+	public void onActivation(boolean activate) {
+		// TODO Auto-generated method stub
+
 	}
 
-	/**
-	 * @param tooltip
-	 *            the tooltip to set
-	 */
-	public void setTooltip(String tooltip) {
-		this.tooltip = tooltip;
+	@Override
+	public void register() {
+		// TODO Auto-generated method stub
+
 	}
 
-	/**
-	 * @return the button
-	 */
-	public Button getButton() {
-		return button;
+	@Override
+	public void unregister() {
+		// TODO Auto-generated method stub
+
 	}
 
-	/**
-	 * @param button
-	 *            the button to set
-	 */
-	public void setButton(Button button) {
-		this.button = button;
-	}
+	private void createListener() {
+		// TODO Auto-generated method stub
+		this.listener = new MapClickListener() {
 
-	public Control getMapControl() {
-		return null;
-	}
-	
-	public void disableControl() {
-		
-	}
-
-	/**
-	 * 
-	 * Enable Button associated with this action
-	 */
-	public void enable() {
-		this.button.enable();
-	}
-
-	/**
-	 * Disable Button associated with this action
-	 */
-	public void disable() {
-		this.button.disable();
+			@Override
+			public void onClick(MapClickEvent mapClickEvent) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
 	}
 }

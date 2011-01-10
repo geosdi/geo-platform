@@ -35,12 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
+import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
+import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
+import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
-import org.geosdi.geoplatform.gui.client.action.GeocodingMenuAction;
-import org.geosdi.geoplatform.gui.client.action.ReverseGeocodingMenuAction;
+import org.geosdi.geoplatform.gui.client.action.menu.GeocodingMenuAction;
+import org.geosdi.geoplatform.gui.client.action.toolbar.ReverseGeocodingAction;
 import org.geosdi.geoplatform.gui.client.mvc.GeocodingController;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
@@ -65,12 +69,12 @@ public class Geocoding implements EntryPoint {
 
 		dispatcher.addController(new GeocodingController());
 
-		addGeocodingMenuAction();
+		addGeocodingAction();
 
 		dispatcher.dispatch(GeocodingEvents.INIT_GEOCODING_WIDGET);
 	}
 
-	private void addGeocodingMenuAction() {
+	private void addGeocodingAction() {
 		// TODO Auto-generated method stub
 		MenuActionRegistar.put("geocoding", new MenuActionCreator() {
 
@@ -81,13 +85,14 @@ public class Geocoding implements EntryPoint {
 			}
 		});
 
-		MenuActionRegistar.put("reverseGeocoding", new MenuActionCreator() {
+		ToolbarActionRegistar.put("reverseGeocoding",
+				new ToolbarActionCreator() {
 
-			@Override
-			public MenuAction createAction() {
-				// TODO Auto-generated method stub
-				return new ReverseGeocodingMenuAction();
-			}
-		});
+					public GeoPlatformToolbarAction createActionTool(
+							GeoPlatformMap mapWidget) {
+						// TODO Auto-generated method stub
+						return new ReverseGeocodingAction(mapWidget);
+					}
+				});
 	}
 }

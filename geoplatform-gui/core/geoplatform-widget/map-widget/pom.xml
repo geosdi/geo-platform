@@ -50,7 +50,7 @@
 			<groupId>com.extjs</groupId>
 			<artifactId>gxt</artifactId>
 		</dependency>
-		
+
 		<!-- GWT-OL Resources -->
 		<dependency>
 			<groupId>org.gwtopenmaps.openlayers</groupId>
@@ -62,22 +62,27 @@
 			<groupId>org.geosdi</groupId>
 			<artifactId>geoplatform-api</artifactId>
 		</dependency>
-        
-        <dependency>
+
+		<dependency>
 			<groupId>org.geosdi</groupId>
 			<artifactId>geoplatform-api</artifactId>
-            <classifier>sources</classifier>
+			<classifier>sources</classifier>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.geosdi</groupId>
 			<artifactId>geoplatform-configuration</artifactId>
 		</dependency>
-        
-        <dependency>
+
+		<dependency>
 			<groupId>org.geosdi</groupId>
 			<artifactId>geoplatform-configuration</artifactId>
-            <classifier>sources</classifier>
+			<classifier>sources</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>org.geosdi</groupId>
+			<artifactId>basic-widget</artifactId>
 		</dependency>
 
 		<!-- SPRING -->
@@ -171,22 +176,22 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
-                <inherited>true</inherited>
+				<inherited>true</inherited>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-                <configuration>
-                    <attach>true</attach>
-                </configuration>
+				<configuration>
+					<attach>true</attach>
+				</configuration>
 				<executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 			<!-- tell the compiler we can use 1.5 -->

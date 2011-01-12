@@ -35,8 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.marker;
 
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.gwtopenmaps.openlayers.client.Icon;
+import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.Map;
+import org.gwtopenmaps.openlayers.client.Marker;
 import org.gwtopenmaps.openlayers.client.Pixel;
 import org.gwtopenmaps.openlayers.client.Size;
 import org.gwtopenmaps.openlayers.client.layer.Markers;
@@ -51,11 +53,8 @@ import com.google.gwt.core.client.GWT;
  */
 public class ReverseGeocodingMarker extends GeoPlatformMarker {
 
-	private GeoPlatformMap mapWidget;
-
-	public ReverseGeocodingMarker(GeoPlatformMap theMapWidget) {
+	public ReverseGeocodingMarker() {
 		super();
-		this.mapWidget = theMapWidget;
 	}
 
 	@Override
@@ -79,4 +78,16 @@ public class ReverseGeocodingMarker extends GeoPlatformMarker {
 				size, offset);
 	}
 
+	/**
+	 * Add a Marker to the Marker Layer
+	 * 
+	 * @param lonlat
+	 */
+	public void addMarker(LonLat lonlat, Map map) {
+		this.markerLayer.clearMarkers();
+		this.marker = new Marker(lonlat, this.iconMarker);
+		this.markerLayer.addMarker(this.marker);
+//		if (map.getZoom() < 14)
+//			map.zoomTo(14);
+	}
 }

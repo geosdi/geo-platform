@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.mvc;
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
+import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.GeocodingMarker;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -59,6 +60,7 @@ public class MapView extends GeoPlatformView {
 
 	private MapLayoutWidget mapLayout;
 	private GeocodingMarker geocoderMarker;
+	private ReverseGeocodingWidget revGeoWidget;
 
 	private ButtonBar buttonBar;
 
@@ -66,6 +68,7 @@ public class MapView extends GeoPlatformView {
 		super(controller);
 
 		this.mapLayout = new MapLayoutWidget();
+		this.revGeoWidget = new ReverseGeocodingWidget(this.mapLayout);
 	}
 
 	public void initialize() {
@@ -188,7 +191,7 @@ public class MapView extends GeoPlatformView {
 	public void redrawVectorLayer() {
 		this.mapLayout.redrawVectorLayer();
 	}
-	
+
 	/**
 	 * Draw AOE on the Map
 	 * 
@@ -196,6 +199,13 @@ public class MapView extends GeoPlatformView {
 	 */
 	public void drawAOE(VectorFeature feature) {
 		this.mapLayout.drawAOE(feature);
+	}
+
+	/**
+	 * @return the revGeoWidget
+	 */
+	public ReverseGeocodingWidget getRevGeoWidget() {
+		return revGeoWidget;
 	}
 
 }

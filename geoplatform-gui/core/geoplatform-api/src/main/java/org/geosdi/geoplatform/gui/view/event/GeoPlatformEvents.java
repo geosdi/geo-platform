@@ -48,4 +48,6 @@ public class GeoPlatformEvents {
 	public static final EventType REGISTER_GEOCODING_LOCATION = new EventType();
 
 	public static final EventType RemoveMarker = new EventType();
+	
+	public static final EventType REVERSE_GEOCODING_REQUEST = new EventType();
 }

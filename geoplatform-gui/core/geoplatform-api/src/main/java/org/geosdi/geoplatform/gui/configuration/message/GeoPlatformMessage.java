@@ -51,7 +51,7 @@ import com.google.gwt.user.client.Timer;
 public class GeoPlatformMessage {
 
 	/**
-	 * Display an Alert Message in the Applicatio
+	 * Display an Alert Message in the Application
 	 * 
 	 * @param title
 	 * @param message
@@ -68,7 +68,7 @@ public class GeoPlatformMessage {
 	}
 
 	/**
-	 * Display an Error Message in the Applicatio
+	 * Display an Error Message in the Application
 	 * 
 	 * @param title
 	 * @param message
@@ -83,7 +83,7 @@ public class GeoPlatformMessage {
 	}
 
 	/**
-	 * Display an Info Message in the Applicatio
+	 * Display an Info Message in the Application
 	 * 
 	 * @param title
 	 * @param message

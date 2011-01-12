@@ -80,12 +80,4 @@ public class GeocodingMarker extends GeoPlatformMarker {
 		this.marker = new Marker(lonlat, this.iconMarker);
 		this.markerLayer.addMarker(this.marker);
 	}
-
-	/**
-	 * Remove Marker from Marker Layer
-	 */
-	public void removeMarker() {
-		if (this.marker != null)
-			this.markerLayer.removeMarker(this.marker);
-	}
 }

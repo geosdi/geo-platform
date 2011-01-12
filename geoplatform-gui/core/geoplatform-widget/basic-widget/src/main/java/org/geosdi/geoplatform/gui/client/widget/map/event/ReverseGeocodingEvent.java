@@ -62,7 +62,10 @@ public class ReverseGeocodingEvent extends
 	@Override
 	protected void dispatch(ReverseGeocodingEventHandler handler) {
 		// TODO Auto-generated method stub
-		handler.onActivation(activate);
+		if (activate)
+			handler.register();
+		else
+			handler.unregister();
 	}
 
 }

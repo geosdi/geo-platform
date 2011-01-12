@@ -33,63 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.marker;
+package org.geosdi.geoplatform.gui.client.widget.map.popup.template;
 
-import org.gwtopenmaps.openlayers.client.Icon;
-import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.Marker;
-import org.gwtopenmaps.openlayers.client.layer.Markers;
+import com.google.gwt.core.client.GWT;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GeoPlatformMarker {
+public enum PopupTemplate {
 
-	protected Markers markerLayer;
-	protected Marker marker;
-	protected Icon iconMarker;
+	IMAGE_LOADING("<img src=" + GWT.getModuleName() + "/map-images/loading.gif"
+			+ " />"), MESSAGE_LOADING("<br />Loading Location....."), IMAGE_RESULT_FOUND(
+			"<img src=" + GWT.getModuleName() + "/map-images/ok.png" + " />"), IMAGE_RESULT_NOT_FOUND(
+			"<img src=" + GWT.getModuleName() + "/map-images/not_found.png"
+					+ " />"), ZERO_RESULTS("ZERO_RESULTS"), IMAGE_SERVICE_ERROR(
+			"<img src=" + GWT.getModuleName() + "/map-images/error.png" + " />");
 
-	public GeoPlatformMarker() {
-		buildMarkerLayer();
-		buildIconMarker();
-	}
+	private String value;
 
-	public abstract void buildMarkerLayer();
-
-	public abstract void buildIconMarker();
-
-	public abstract void addMarker(LonLat lonlat, Map map);
-
-	/**
-	 * Remove Marker from Marker Layer
-	 */
-	public void removeMarker() {
-		if (this.marker != null)
-			this.markerLayer.removeMarker(this.marker);
+	PopupTemplate(String theValue) {
+		// TODO Auto-generated constructor stub
+		this.value = theValue;
 	}
 
 	/**
-	 * @return the markerLayer
+	 * @return the value
 	 */
-	public Markers getMarkerLayer() {
-		return markerLayer;
-	}
-
-	/**
-	 * @return the marker
-	 */
-	public Marker getMarker() {
-		return marker;
-	}
-
-	/**
-	 * @return the iconMarker
-	 */
-	public Icon getIconMarker() {
-		return iconMarker;
+	public String getValue() {
+		return value;
 	}
 
 }

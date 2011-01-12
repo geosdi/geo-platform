@@ -37,7 +37,9 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import org.geosdi.geoplatform.gui.action.MapToggleAction;
 import org.geosdi.geoplatform.gui.client.GeocodingResources;
+import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingEvent;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
@@ -50,15 +52,15 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 public class ReverseGeocodingAction extends MapToggleAction {
 
 	public ReverseGeocodingAction(GeoPlatformMap theMapWidget) {
-		super("Reverse Geocoding", GeocodingResources.ICONS.reverseGeocoding(), theMapWidget);
+		super("Reverse Geocoding", GeocodingResources.ICONS.reverseGeocoding(),
+				theMapWidget);
 		// TODO Auto-generated constructor stub
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+	 * @see com.extjs.gxt.ui.client.event.SelectionListenercomponentSelected(com
 	 * .extjs.gxt.ui.client.event.ComponentEvent)
 	 */
 	@Override
@@ -67,15 +69,34 @@ public class ReverseGeocodingAction extends MapToggleAction {
 		ToggleButton button = (ToggleButton) ce.getSource();
 
 		super.changeButtonState();
-		
+
+		this.deactivateAllMapControl();
+
+		if (button.isPressed()) {
+			mapWidget.getButtonBar().setPressedButton(button);
+		}
+
+		GPHandlerManager
+				.fireEvent(new ReverseGeocodingEvent(button.isPressed()));
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
+	 */
+	@Override
+	public void disableControl() {
+		// TODO Auto-generated method stub
+		GPHandlerManager.fireEvent(new ReverseGeocodingEvent(false));
+	}
+
+	private void deactivateAllMapControl() {
 		if (mapWidget.isFeatureOperationEnable())
 			mapWidget.deactivateFeatureOperation();
 
 		if (mapWidget.isModifyFeatureEnable())
 			mapWidget.deactivateModifyFeature();
-		
-		
-
 	}
-
 }

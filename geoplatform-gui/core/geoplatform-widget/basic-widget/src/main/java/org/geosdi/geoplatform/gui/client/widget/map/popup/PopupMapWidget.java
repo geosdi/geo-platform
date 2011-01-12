@@ -33,56 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.marker;
+package org.geosdi.geoplatform.gui.client.widget.map.popup;
 
-import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingEventHandler;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.gwtopenmaps.openlayers.client.event.MapClickListener;
+import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.Size;
+import org.gwtopenmaps.openlayers.client.popup.Popup;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
+public class PopupMapWidget {
 
-	private GeoPlatformMap mapWidget;
-	private ReverseGeocodingMarker rGMarker;
-	private MapClickListener listener;
+	private Popup popup;
 
-	public ReverseGeocodingWidget(GeoPlatformMap theMapWidget) {
-		this.mapWidget = theMapWidget;
-		this.rGMarker = new ReverseGeocodingMarker(mapWidget);
-		this.createListener();
+	public PopupMapWidget() {
+		this.popup = new Popup("GP-Map-Popup", null, new Size(150, 50),
+				"", false);
+		this.popup.setAutoSize(true);
 	}
 
-	@Override
-	public void onActivation(boolean activate) {
-		// TODO Auto-generated method stub
-
+	/**
+	 * Set HTML Content in the Popup
+	 * 
+	 * @param contentHTML
+	 */
+	public void setContentHTML(String contentHTML) {
+		this.popup.setContentHTML(contentHTML);
 	}
 
-	@Override
-	public void register() {
-		// TODO Auto-generated method stub
-
+	/**
+	 * Set LonLat Popup Property
+	 * 
+	 * @param lonlat
+	 */
+	public void setLonLat(LonLat lonlat) {
+		this.popup.setLonLat(lonlat);
 	}
 
-	@Override
-	public void unregister() {
-		// TODO Auto-generated method stub
-
+	/**
+	 * @return the popup
+	 */
+	public Popup getPopup() {
+		return popup;
 	}
 
-	private void createListener() {
-		// TODO Auto-generated method stub
-		this.listener = new MapClickListener() {
-
-			@Override
-			public void onClick(MapClickEvent mapClickEvent) {
-				// TODO Auto-generated method stub
-				
-			}
-		};
-	}
 }

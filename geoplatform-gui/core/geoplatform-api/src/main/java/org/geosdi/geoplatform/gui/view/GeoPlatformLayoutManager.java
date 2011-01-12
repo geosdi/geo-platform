@@ -61,7 +61,6 @@ public abstract class GeoPlatformLayoutManager {
 		intiLayoutManager();
 	}
 
-
 	/**
 	 * Build The Main GeoPlatform UI
 	 */
@@ -100,7 +99,7 @@ public abstract class GeoPlatformLayoutManager {
 		west.setBodyBorder(false);
 		west.setLayout(new AccordionLayout());
 		west.setScrollMode(Scroll.NONE);
-		
+
 		west.hide();
 
 		viewport.add(west, data);
@@ -118,7 +117,7 @@ public abstract class GeoPlatformLayoutManager {
 		east.setBodyBorder(false);
 		east.setLayout(new AccordionLayout());
 		east.setScrollMode(Scroll.NONE);
-		
+
 		east.hide();
 
 		viewport.add(east, data);

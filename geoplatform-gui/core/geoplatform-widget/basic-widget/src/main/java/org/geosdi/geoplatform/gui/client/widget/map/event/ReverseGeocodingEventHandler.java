@@ -43,8 +43,6 @@ import com.google.gwt.event.shared.EventHandler;
  * 
  */
 public interface ReverseGeocodingEventHandler extends EventHandler {
-
-	public void onActivation(boolean activate);
 	
 	public void register();
 

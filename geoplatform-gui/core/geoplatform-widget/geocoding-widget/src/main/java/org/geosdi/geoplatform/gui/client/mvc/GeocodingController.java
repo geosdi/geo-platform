@@ -41,9 +41,12 @@ import org.geosdi.geoplatform.gui.client.GeocodingEvents;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.service.GeocodingRemote;
 import org.geosdi.geoplatform.gui.client.service.GeocodingRemoteAsync;
+import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
 import org.geosdi.geoplatform.gui.configuration.grid.IGeoPlatformGrid;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
+import org.gwtopenmaps.openlayers.client.LonLat;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -61,7 +64,8 @@ public class GeocodingController extends GeoPlatformController {
 		registerEventTypes(GeocodingEvents.INIT_GEOCODING_WIDGET,
 				GeocodingEvents.SHOW_GEOCODING_WIDGET,
 				GeocodingEvents.BEGIN_GEOCODING_SEARCH,
-				GeocodingEvents.HIDE_GEOCODING_WIDGET);
+				GeocodingEvents.HIDE_GEOCODING_WIDGET,
+				GeoPlatformEvents.REVERSE_GEOCODING_REQUEST);
 	}
 
 	/*
@@ -87,7 +91,38 @@ public class GeocodingController extends GeoPlatformController {
 		if (event.getType() == GeocodingEvents.BEGIN_GEOCODING_SEARCH)
 			onBeginGeocodingSearch(event);
 
+		if (event.getType() == GeoPlatformEvents.REVERSE_GEOCODING_REQUEST)
+			onProcessRequest(event);
+
 		super.handleEvent(event);
+	}
+
+	/**
+	 * Process Reverse Geocoding Request
+	 * 
+	 * @param event
+	 */
+	private void onProcessRequest(AppEvent event) {
+		// TODO Auto-generated method stub
+		final ReverseGeocodingWidget widget = (ReverseGeocodingWidget) event
+				.getData();
+		LonLat lonlat = widget.getLonlat();
+
+		this.geocodingService.findLocation(lonlat.lat(), lonlat.lon(),
+				new AsyncCallback<GeocodingBean>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						widget.onRequestFailure("An error occurred in processing the request");
+					}
+
+					@Override
+					public void onSuccess(GeocodingBean result) {
+						// TODO Auto-generated method stub
+						widget.onRequestSuccess(result.getDescription());
+					}
+				});
 	}
 
 	/**

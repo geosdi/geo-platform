@@ -59,7 +59,7 @@
 				<executions>
 					<execution>
 						<goals>
-							<goal>jar</goal>
+							<goal>jar-no-fork</goal>
 						</goals>
 						<configuration>
                             <attach>true</attach>

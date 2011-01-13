@@ -131,8 +131,8 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 	private void sendRequest() {
 		this.rGMarker.addMarker(this.lonlat, this.mapWidget.getMap());
 		popupWidget.setLonLat(this.lonlat);
-		this.popupWidget.setContentHTML(PopupTemplate.IMAGE_LOADING.getValue()
-				+ PopupTemplate.MESSAGE_LOADING.getValue());
+		this.popupWidget.setContentHTML(PopupTemplate.IMAGE_LOADING.toString()
+				+ PopupTemplate.MESSAGE_LOADING.toString());
 		this.mapWidget.getMap().addPopup(popupWidget.getPopup());
 
 		Dispatcher.forwardEvent(GeoPlatformEvents.REVERSE_GEOCODING_REQUEST,
@@ -145,15 +145,15 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 	 */
 	public void onRequestSuccess(String location) {
 		this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
-		if (!location.equalsIgnoreCase(PopupTemplate.ZERO_RESULTS.getValue()))
+		if (!location.equalsIgnoreCase(PopupTemplate.ZERO_RESULTS.toString()))
 			this.popupWidget.setContentHTML(PopupTemplate.IMAGE_RESULT_FOUND
-					.getValue() + "<br />" + location);
+					.toString() + "<br />" + location);
 		else
 			this.popupWidget
 					.setContentHTML(PopupTemplate.IMAGE_RESULT_NOT_FOUND
-							.getValue()
+							.toString()
 							+ "<br /> "
-							+ PopupTemplate.ZERO_RESULTS.getValue());
+							+ PopupTemplate.ZERO_RESULTS.toString());
 
 		this.mapWidget.getMap().addPopup(this.popupWidget.getPopup());
 		this.busy = false;
@@ -165,7 +165,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 	 */
 	public void onRequestFailure(String message) {
 		this.popupWidget.setContentHTML(PopupTemplate.IMAGE_SERVICE_ERROR
-				.getValue() + "<br />" + message);
+				.toString() + "<br />" + message);
 		this.mapWidget.getMap().addPopupExclusive(this.popupWidget.getPopup());
 		this.busy = false;
 	}

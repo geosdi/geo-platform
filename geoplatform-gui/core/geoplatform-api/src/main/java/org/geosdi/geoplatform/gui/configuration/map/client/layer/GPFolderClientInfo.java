@@ -33,26 +33,89 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.global;
+package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 
 import java.io.Serializable;
-
-import org.geosdi.geoplatform.gui.configuration.FolderStore;
-import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface IGeoPlatformGlobal extends Serializable {
-	
-	public GeoPlatformInfo getGeoPlatformInfo();
+public class GPFolderClientInfo implements Serializable,
+		Comparable<GPFolderClientInfo> {
 
-	public IToolbarClientTool getToolbarClientTool();
-	
-	public IMenuBarContainerTool getMenuBarContainerTool();
-	
-	public FolderStore getFolderStore();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8769227953810545929L;
+
+	private String label;
+	private int order;
+	private List<GPLayerClientInfo> layers = new ArrayList<GPLayerClientInfo>();
+
+	/**
+	 * @return the label
+	 */
+	public String getLabel() {
+		return label;
+	}
+
+	/**
+	 * @param label
+	 *            the label to set
+	 */
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	/**
+	 * @return the order
+	 */
+	public int getOrder() {
+		return order;
+	}
+
+	/**
+	 * @param order
+	 *            the order to set
+	 */
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
+	/**
+	 * @return the layers
+	 */
+	public List<GPLayerClientInfo> getLayers() {
+		return layers;
+	}
+
+	/**
+	 * @param layers
+	 *            the layers to set
+	 */
+	public void setLayers(List<GPLayerClientInfo> layers) {
+		this.layers = layers;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "GPFolderClientInfo [label=" + label + ", order=" + order
+				+ ", layers=" + layers + "]";
+	}
+
+	@Override
+	public int compareTo(GPFolderClientInfo o) {
+		// TODO Auto-generated method stub
+		return getOrder() - o.getOrder();
+	}
 
 }

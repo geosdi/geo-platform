@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.impl;
 
+import org.geosdi.geoplatform.gui.configuration.FolderStore;
 import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
 import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
 import org.geosdi.geoplatform.gui.global.GeoPlatformInfo;
@@ -62,6 +63,9 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
 
 	@Autowired
 	private IMenuBarContainerTool menuBarContainerTool;
+	
+	@Autowired
+	private FolderStore folderStore;
 
 	/**
 	 * @return the geoPlatformInfo
@@ -112,6 +116,16 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
 	public void setMenuBarContainerTool(
 			IMenuBarContainerTool menuBarContainerTool) {
 		this.menuBarContainerTool = menuBarContainerTool;
+	}
+
+	@Override
+	public FolderStore getFolderStore() {
+		// TODO Auto-generated method stub
+		return this.folderStore;
+	}
+
+	public void setFolderStore(FolderStore folserStore) {
+		this.folderStore = folserStore;
 	}
 
 }

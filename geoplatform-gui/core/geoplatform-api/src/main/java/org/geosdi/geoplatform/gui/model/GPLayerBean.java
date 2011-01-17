@@ -33,26 +33,40 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.global;
+package org.geosdi.geoplatform.gui.model;
 
-import java.io.Serializable;
-
-import org.geosdi.geoplatform.gui.configuration.FolderStore;
-import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface IGeoPlatformGlobal extends Serializable {
+public interface GPLayerBean {
 	
-	public GeoPlatformInfo getGeoPlatformInfo();
+	public String getLabel();
+	
+	public void setLabel(String label);
 
-	public IToolbarClientTool getToolbarClientTool();
+	public String getDataSource();
+
+	public void setDataSource(String dataSource);
+
+	public String getCrs();
+
+	public void setCrs(String crs);
+
+	public BboxClientInfo getBbox();
+
+	public void setBbox(BboxClientInfo bbox);
+
+	public GPLayerType getLayerType();
+
+	public void setLayerType(GPLayerType layerType);
 	
-	public IMenuBarContainerTool getMenuBarContainerTool();
+	public int getzIndex();
 	
-	public FolderStore getFolderStore();
+	public void setzIndex(int zIndex);
 
 }

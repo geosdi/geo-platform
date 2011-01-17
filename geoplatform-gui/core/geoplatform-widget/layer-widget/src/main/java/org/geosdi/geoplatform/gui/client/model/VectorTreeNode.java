@@ -33,26 +33,66 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.global;
+package org.geosdi.geoplatform.gui.client.model;
 
-import java.io.Serializable;
+import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
-import org.geosdi.geoplatform.gui.configuration.FolderStore;
-import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface IGeoPlatformGlobal extends Serializable {
-	
-	public GeoPlatformInfo getGeoPlatformInfo();
+public class VectorTreeNode extends GPBeanTreeModel implements GPVectorBean {
 
-	public IToolbarClientTool getToolbarClientTool();
-	
-	public IMenuBarContainerTool getMenuBarContainerTool();
-	
-	public FolderStore getFolderStore();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2445765797861311204L;
+
+	private String featureNameSpace;
+
+	/**
+	 * @Constructor
+	 * 
+	 * @param label
+	 */
+	public VectorTreeNode(String label) {
+		super.setLabel(label);
+	}
+
+	@Override
+	public String getFeatureNameSpace() {
+		// TODO Auto-generated method stub
+		return featureNameSpace;
+	}
+
+	@Override
+	public void setFeatureNameSpace(String featureNameSpace) {
+		// TODO Auto-generated method stub
+		this.featureNameSpace = featureNameSpace;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
+	 */
+	@Override
+	public AbstractImagePrototype getIcon() {
+		// TODO Auto-generated method stub
+		switch (getLayerType()) {
+		case POINT:
+			return LayerResources.ICONS.point();
+		case LINESTRING:
+			return LayerResources.ICONS.line();
+		case POLYGON:
+			return LayerResources.ICONS.shape();
+		}
+		return null;
+	}
 
 }

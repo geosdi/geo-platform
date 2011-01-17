@@ -33,26 +33,66 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.global;
+package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 
-import java.io.Serializable;
-
-import org.geosdi.geoplatform.gui.configuration.FolderStore;
-import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
+import java.util.List;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface IGeoPlatformGlobal extends Serializable {
-	
-	public GeoPlatformInfo getGeoPlatformInfo();
+public class ClientRasterInfo extends GPLayerClientInfo {
 
-	public IToolbarClientTool getToolbarClientTool();
-	
-	public IMenuBarContainerTool getMenuBarContainerTool();
-	
-	public FolderStore getFolderStore();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3956898488739664952L;
 
+	private String layerName;
+	private List<String> styles;
+
+	/**
+	 * @return the layerName
+	 */
+	public String getLayerName() {
+		return layerName;
+	}
+
+	/**
+	 * @param layerName
+	 *            the layerName to set
+	 */
+	public void setLayerName(String layerName) {
+		this.layerName = layerName;
+	}
+
+	/**
+	 * @return the styles
+	 */
+	public List<String> getStyles() {
+		return styles;
+	}
+
+	/**
+	 * @param styles
+	 *            the styles to set
+	 */
+	public void setStyles(List<String> styles) {
+		this.styles = styles;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ClientRasterInfo [layerName=" + layerName + ", styles="
+				+ styles + ", getDataSource()=" + getDataSource()
+				+ ", getCrs()=" + getCrs() + ", getBbox()=" + getBbox()
+				+ ", getLayerType()=" + getLayerType() + ", getzIndex()="
+				+ getzIndex() + "]";
+	}
 }

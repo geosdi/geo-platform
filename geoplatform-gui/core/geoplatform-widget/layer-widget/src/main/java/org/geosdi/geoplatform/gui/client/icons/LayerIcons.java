@@ -33,26 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.global;
+package org.geosdi.geoplatform.gui.client.icons;
 
-import java.io.Serializable;
-
-import org.geosdi.geoplatform.gui.configuration.FolderStore;
-import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.google.gwt.user.client.ui.ImageBundle;
 
 /**
- * @author giuseppe
- * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
+ *
  */
-public interface IGeoPlatformGlobal extends Serializable {
+@SuppressWarnings("deprecation")
+public interface LayerIcons extends ImageBundle {
 	
-	public GeoPlatformInfo getGeoPlatformInfo();
-
-	public IToolbarClientTool getToolbarClientTool();
+	@Resource("layer_folder.png")
+	AbstractImagePrototype LayerFolder();
 	
-	public IMenuBarContainerTool getMenuBarContainerTool();
+	@Resource("line.png")
+	AbstractImagePrototype line();
 	
-	public FolderStore getFolderStore();
+	@Resource("point.png")
+	AbstractImagePrototype point();
+	
+	@Resource("raster.png")
+	AbstractImagePrototype raster();
+	
+	@Resource("shape.png")
+	AbstractImagePrototype shape();
 
 }

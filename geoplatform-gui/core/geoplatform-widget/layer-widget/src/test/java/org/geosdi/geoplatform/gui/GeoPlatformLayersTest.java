@@ -33,26 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.global;
-
-import java.io.Serializable;
+package org.geosdi.geoplatform.gui;
 
 import org.geosdi.geoplatform.gui.configuration.FolderStore;
-import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface IGeoPlatformGlobal extends Serializable {
-	
-	public GeoPlatformInfo getGeoPlatformInfo();
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "applicationContext-Test.xml" })
+public class GeoPlatformLayersTest {
 
-	public IToolbarClientTool getToolbarClientTool();
-	
-	public IMenuBarContainerTool getMenuBarContainerTool();
-	
-	public FolderStore getFolderStore();
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	@Autowired
+	private FolderStore folderStore;
+
+	@Test
+	public void test() {
+		for (GPFolderClientInfo folder : folderStore.getFolders()) {
+			logger.info("FOLDER  ***************** " + folder);
+		}
+	}
 }

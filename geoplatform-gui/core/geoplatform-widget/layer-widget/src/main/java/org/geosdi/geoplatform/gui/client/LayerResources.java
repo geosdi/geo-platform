@@ -33,26 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.global;
+package org.geosdi.geoplatform.gui.client;
 
-import java.io.Serializable;
+import org.geosdi.geoplatform.gui.client.icons.LayerIcons;
 
-import org.geosdi.geoplatform.gui.configuration.FolderStore;
-import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
+import com.google.gwt.core.client.GWT;
 
 /**
- * @author giuseppe
- * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
+ *
  */
-public interface IGeoPlatformGlobal extends Serializable {
+public class LayerResources {
 	
-	public GeoPlatformInfo getGeoPlatformInfo();
-
-	public IToolbarClientTool getToolbarClientTool();
-	
-	public IMenuBarContainerTool getMenuBarContainerTool();
-	
-	public FolderStore getFolderStore();
+	public static final LayerIcons ICONS = GWT.create(LayerIcons.class);
 
 }

@@ -33,26 +33,39 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.global;
+package org.geosdi.geoplatform.gui.impl;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
 
 import org.geosdi.geoplatform.gui.configuration.FolderStore;
-import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface IGeoPlatformGlobal extends Serializable {
-	
-	public GeoPlatformInfo getGeoPlatformInfo();
+public class GeoPlatformFolderStore implements FolderStore, Serializable {
 
-	public IToolbarClientTool getToolbarClientTool();
-	
-	public IMenuBarContainerTool getMenuBarContainerTool();
-	
-	public FolderStore getFolderStore();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 261396367429146177L;
 
+	private List<GPFolderClientInfo> folders;
+
+	@Override
+	public List<GPFolderClientInfo> getFolders() {
+		// TODO Auto-generated method stub
+		return this.folders;
+	}
+
+	@Override
+	public void setFolders(List<GPFolderClientInfo> folders) {
+		// TODO Auto-generated method stub
+		Collections.sort(folders);
+		this.folders = folders;
+	}
 }

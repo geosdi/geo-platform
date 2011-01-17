@@ -33,26 +33,24 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.global;
+package org.geosdi.geoplatform.gui.model.tree;
 
-import java.io.Serializable;
+import java.util.List;
 
-import org.geosdi.geoplatform.gui.configuration.FolderStore;
-import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface IGeoPlatformGlobal extends Serializable {
-	
-	public GeoPlatformInfo getGeoPlatformInfo();
+public abstract class GPFolderTreeModel extends GPBeanTreeModel {
 
-	public IToolbarClientTool getToolbarClientTool();
-	
-	public IMenuBarContainerTool getMenuBarContainerTool();
-	
-	public FolderStore getFolderStore();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1162364819165727715L;
+
+	public abstract void modelConverter(List<GPLayerClientInfo> layersClientInfo);
 
 }

@@ -1,149 +1,163 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-   <parent>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
 		<groupId>org.geosdi</groupId>
 		<artifactId>geoplatform-core</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-  <groupId>org.geosdi</groupId>
-  <artifactId>geoplatform-model</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+	<groupId>org.geosdi</groupId>
+	<artifactId>geoplatform-model</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
-  <name>Geo-Platform :: == CORE Model</name>
-  
-  <developers>
-        <developer>
-            <name>Francesco Izzi</name>
-            <id>francesco.izzi</id>
-            <email>francesco.izzi@geosdi.org</email>
-            <organization>geoSDI</organization>
-            <roles>
-                <role>Java Developer</role>
-                <role>Project Management Committee (PMC) Member</role>
-            </roles>
-        </developer>
-        <developer>
-            <name>Giuseppe La Scaleia</name>
-            <id>glascaleia</id>
-            <email>giuseppe.lascaleia@geosdi.org</email>
-            <organization>geoSDI</organization>
-            <roles>
-                <role>Java Developer</role>
-                <role>Project Management Committee (PMC) Member</role>
-            </roles>
-        </developer>
-    </developers>
+	<name>Geo-Platform :: == CORE Model</name>
 
-  <dependencies>
-  
-  	<!-- JAXB -->
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-        </dependency>
-  	
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-annotations</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>asm</groupId>
-                    <artifactId>asm</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>asm</groupId>
-                    <artifactId>asm-attrs</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-commons-annotations</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>asm</groupId>
-                    <artifactId>asm</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>asm</groupId>
-                    <artifactId>asm-attrs</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+	<developers>
+		<developer>
+			<name>Francesco Izzi</name>
+			<id>francesco.izzi</id>
+			<email>francesco.izzi@geosdi.org</email>
+			<organization>geoSDI</organization>
+			<roles>
+				<role>Java Developer</role>
+				<role>Project Management Committee (PMC) Member</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Giuseppe La Scaleia</name>
+			<id>glascaleia</id>
+			<email>giuseppe.lascaleia@geosdi.org</email>
+			<organization>geoSDI</organization>
+			<roles>
+				<role>Java Developer</role>
+				<role>Project Management Committee (PMC) Member</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<dependencies>
+
+		<!-- JAXB -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-annotations</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>asm</groupId>
+					<artifactId>asm</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>asm</groupId>
+					<artifactId>asm-attrs</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>cglib</groupId>
+					<artifactId>cglib</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-commons-annotations</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>asm</groupId>
+					<artifactId>asm</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>asm</groupId>
+					<artifactId>asm-attrs</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>cglib</groupId>
+					<artifactId>cglib</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
 		<!-- HIBERNATE-SPATIAL -->
-        <dependency>
-        	<groupId>org.hibernatespatial</groupId>
-            <artifactId>hibernate-spatial-postgis</artifactId>
-            <exclusions>
-            	<exclusion>
-            		<groupId>org.slf4j</groupId>
-            		<artifactId>slf4j-api</artifactId>
-            	</exclusion>
-            </exclusions>
-        </dependency>
-	  	
-		  	<!-- CGLIB -->
-        <dependency>
-            <groupId>asm</groupId>
-            <artifactId>asm</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib-nodep</artifactId>
-        </dependency>
-   		
-   	<!-- Apache Commons -->
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.hibernatespatial</groupId>
+			<artifactId>hibernate-spatial-postgis</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
-        
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+		<!-- CGLIB -->
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+		</dependency>
 
-    <build>
-        <plugins>
-            <!-- Attach sources ============================================ -->
-            <plugin>
-                <inherited>true</inherited>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <configuration>
-                    <attach>true</attach>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+		<!-- Apache Commons -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
 
-        </plugins>
-    </build>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- Attach sources ============================================ -->
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<configuration>
+					<attach>true</attach>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- tell the compiler we can use 1.6 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+
+		</plugins>
+	</build>
 
 </project>

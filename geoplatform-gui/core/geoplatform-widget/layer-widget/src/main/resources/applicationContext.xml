@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName">
+
+	<context:annotation-config />
+
+	<bean name="it_toponimi_igm_25k"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+		<property name="featureType" value="esercitazione:it_toponimi_igm_25k" />
+		<property name="featureNameSpace" value="http://terex2010.geosdi.org/esercitazione" />
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="9.696" />
+				<property name="lowerLeftY" value="43.027" />
+				<property name="upperRightX" value="11.243" />
+				<property name="upperRightY" value="44.521" />
+			</bean>
+		</property>
+		<property name="layerType" value="POINT" />
+		<property name="zIndex" value="10" />
+	</bean>
+	
+	<bean name="osm_line"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+		<property name="featureType" value="esercitazione:osm_line" />
+		<property name="featureNameSpace" value="http://terex2010.geosdi.org/esercitazione" />
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="9.696" />
+				<property name="lowerLeftY" value="43.027" />
+				<property name="upperRightX" value="11.243" />
+				<property name="upperRightY" value="44.522" />
+			</bean>
+		</property>
+		<property name="layerType" value="MULTILINESTRING" />
+		<property name="zIndex" value="11" />
+	</bean>
+
+</beans>

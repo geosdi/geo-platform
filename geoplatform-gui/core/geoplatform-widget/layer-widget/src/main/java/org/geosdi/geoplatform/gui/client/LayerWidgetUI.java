@@ -33,26 +33,24 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.global;
+package org.geosdi.geoplatform.gui.client;
 
-import java.io.Serializable;
-
-import org.geosdi.geoplatform.gui.configuration.FolderStore;
-import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
+import com.google.gwt.core.client.EntryPoint;
 
 /**
- * @author giuseppe
- * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
+ *
  */
-public interface IGeoPlatformGlobal extends Serializable {
-	
-	public GeoPlatformInfo getGeoPlatformInfo();
+public class LayerWidgetUI implements EntryPoint {
 
-	public IToolbarClientTool getToolbarClientTool();
-	
-	public IMenuBarContainerTool getMenuBarContainerTool();
-	
-	public FolderStore getFolderStore();
+	/* (non-Javadoc)
+	 * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+	 */
+	@Override
+	public void onModuleLoad() {
+		// TODO Auto-generated method stub
+
+	}
 
 }

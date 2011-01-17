@@ -68,6 +68,7 @@ public class LayoutManager extends GeoPlatformLayoutManager {
 	 *            w
 	 */
 	public static void addComponentToCenter(Widget w) {
+		get().center.removeAll();
 		get().center.add(w);
 		get().center.layout();
 	}

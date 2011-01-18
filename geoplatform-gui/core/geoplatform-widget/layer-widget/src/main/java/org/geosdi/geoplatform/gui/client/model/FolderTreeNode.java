@@ -38,8 +38,11 @@ package org.geosdi.geoplatform.gui.client.model;
 import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
-import org.geosdi.geoplatform.gui.model.tree.GPFolderTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -48,28 +51,31 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class FolderTreeNode extends GPFolderTreeModel {
+public class FolderTreeNode extends GPBeanTreeModel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3687415822526940729L;
 
-	public FolderTreeNode(String label) {
-		super.setLabel(label);
+	public FolderTreeNode(GPFolderClientInfo folder) {
+		super.setLabel(folder.getLabel());
+		this.modelConverter(folder.getLayers());
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.model.tree.GPFolderTreeModel#modelConverter
-	 * (java.util.List)
+	 * @param layersClientInfo
 	 */
-	@Override
 	public void modelConverter(List<GPLayerClientInfo> layersClientInfo) {
 		// TODO Auto-generated method stub
+		for (GPLayerClientInfo layer : layersClientInfo) {
+			if (layer instanceof ClientRasterInfo)
+				super.add(new RasterTreeNode((ClientRasterInfo) layer));
+			else if (layer instanceof ClientVectorInfo)
+				super.add(new VectorTreeNode((ClientVectorInfo) layer));
 
+		}
 	}
 
 	/*

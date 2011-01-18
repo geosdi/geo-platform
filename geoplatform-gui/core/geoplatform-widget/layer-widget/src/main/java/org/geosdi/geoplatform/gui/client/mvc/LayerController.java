@@ -33,79 +33,49 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model;
+package org.geosdi.geoplatform.gui.client.mvc;
 
-import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.extjs.gxt.ui.client.mvc.AppEvent;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2445765797861311204L;
-
-	private String featureNameSpace;
+public class LayerController extends GeoPlatformController {
 
 	/**
 	 * @Constructor
-	 * 
-	 * @param label
 	 */
-	public VectorTreeNode(ClientVectorInfo layer) {
-		super.setLabel(layer.getFeatureType());
-		super.setDataSource(layer.getDataSource());
-		super.setCrs(layer.getCrs());
-		super.setBbox(layer.getBbox());
-		super.setzIndex(layer.getzIndex());
-		super.setLayerType(layer.getLayerType());
-		this.setFeatureNameSpace(layer.getFeatureNameSpace());
-	}
-
-	@Override
-	public String getFeatureNameSpace() {
-		// TODO Auto-generated method stub
-		return featureNameSpace;
-	}
-
-	@Override
-	public void setFeatureNameSpace(String featureNameSpace) {
-		// TODO Auto-generated method stub
-		this.featureNameSpace = featureNameSpace;
+	public LayerController() {
+		registerEventTypes(LayerEvents.INIT_LAYER_WIDGET,
+				LayerEvents.SHOW_LAYER_WIDGET, LayerEvents.HIDE_LAYER_WIDGET);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
+	 * @see com.extjs.gxt.ui.client.mvc.Controller#initialize()
 	 */
 	@Override
-	public AbstractImagePrototype getIcon() {
+	protected void initialize() {
 		// TODO Auto-generated method stub
-		switch (getLayerType()) {
-		case POINT:
-			return LayerResources.ICONS.point();
-		case MULTIPOINT:
-			return LayerResources.ICONS.point();
-		case LINESTRING:
-			return LayerResources.ICONS.line();
-		case MULTILINESTRING:
-			return LayerResources.ICONS.line();
-		case POLYGON:
-			return LayerResources.ICONS.shape();
-		case MULTIPOLYGON:
-			return LayerResources.ICONS.shape();
-		}
-		return null;
+		this.view = new LayerView(this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#
+	 * handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
+	 */
+	@Override
+	public void handleEvent(AppEvent event) {
+		// TODO Auto-generated method stub
+		super.handleEvent(event);
 	}
 
 }

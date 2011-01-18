@@ -33,79 +33,74 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model;
+package org.geosdi.geoplatform.gui.client.mvc;
 
-import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.client.widget.LayerManagementWidget;
+import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.mvc.Controller;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
+public class LayerView extends GeoPlatformView {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2445765797861311204L;
-
-	private String featureNameSpace;
+	private LayerManagementWidget layerManagement;
 
 	/**
 	 * @Constructor
 	 * 
-	 * @param label
+	 * @param controller
 	 */
-	public VectorTreeNode(ClientVectorInfo layer) {
-		super.setLabel(layer.getFeatureType());
-		super.setDataSource(layer.getDataSource());
-		super.setCrs(layer.getCrs());
-		super.setBbox(layer.getBbox());
-		super.setzIndex(layer.getzIndex());
-		super.setLayerType(layer.getLayerType());
-		this.setFeatureNameSpace(layer.getFeatureNameSpace());
-	}
-
-	@Override
-	public String getFeatureNameSpace() {
-		// TODO Auto-generated method stub
-		return featureNameSpace;
-	}
-
-	@Override
-	public void setFeatureNameSpace(String featureNameSpace) {
-		// TODO Auto-generated method stub
-		this.featureNameSpace = featureNameSpace;
+	public LayerView(Controller controller) {
+		super(controller);
+		// TODO Auto-generated constructor stub
+		this.layerManagement = new LayerManagementWidget();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
+	 * @see
+	 * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent
+	 * (com.extjs.gxt.ui.client.mvc.AppEvent)
 	 */
 	@Override
-	public AbstractImagePrototype getIcon() {
+	protected void handleEvent(AppEvent event) {
 		// TODO Auto-generated method stub
-		switch (getLayerType()) {
-		case POINT:
-			return LayerResources.ICONS.point();
-		case MULTIPOINT:
-			return LayerResources.ICONS.point();
-		case LINESTRING:
-			return LayerResources.ICONS.line();
-		case MULTILINESTRING:
-			return LayerResources.ICONS.line();
-		case POLYGON:
-			return LayerResources.ICONS.shape();
-		case MULTIPOLYGON:
-			return LayerResources.ICONS.shape();
-		}
-		return null;
+		if (event.getType() == LayerEvents.SHOW_LAYER_WIDGET)
+			onShowLayerWidget();
+
+		if (event.getType() == LayerEvents.HIDE_LAYER_WIDGET)
+			onHideLayerWidget();
+	}
+
+	/**
+	 * Hide Layer Widget
+	 * 
+	 */
+	private void onHideLayerWidget() {
+		// TODO Auto-generated method stub
+		LayoutManager.removeComponentFromWest(layerManagement);
+		if (!LayoutManager.isOneWidgetVisibleAtWest())
+			LayoutManager.manageWest(false);
+	}
+
+	/**
+	 * Show Layer Widget
+	 * 
+	 */
+	private void onShowLayerWidget() {
+		// TODO Auto-generated method stub
+		this.layerManagement.buildTree();
+		if (!LayoutManager.isWestVisible())
+			LayoutManager.manageWest(true);
+		LayoutManager.addComponentToWest(layerManagement);
 	}
 
 }

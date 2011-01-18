@@ -33,79 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model;
+package org.geosdi.geoplatform.gui.client.widget;
 
-import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.extjs.gxt.ui.client.Style.Scroll;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
+public class LayerManagementWidget extends ContentPanel {
+
+	private LayerTreeWidget layerTree;
+
+	public LayerManagementWidget() {
+		setHeading("Layer Widget");
+		setLayout(new FitLayout());
+
+		this.layerTree = new LayerTreeWidget();
+
+		add(this.layerTree.getTree());
+
+		setScrollMode(Scroll.ALWAYS);
+	}
 
 	/**
+	 * Build Layer Widget with Spring Configuration
 	 * 
 	 */
-	private static final long serialVersionUID = -2445765797861311204L;
-
-	private String featureNameSpace;
+	public void buildTree() {
+		this.layerTree.buildTree();
+	}
 
 	/**
-	 * @Constructor
-	 * 
-	 * @param label
+	 * @return the layerTree
 	 */
-	public VectorTreeNode(ClientVectorInfo layer) {
-		super.setLabel(layer.getFeatureType());
-		super.setDataSource(layer.getDataSource());
-		super.setCrs(layer.getCrs());
-		super.setBbox(layer.getBbox());
-		super.setzIndex(layer.getzIndex());
-		super.setLayerType(layer.getLayerType());
-		this.setFeatureNameSpace(layer.getFeatureNameSpace());
-	}
-
-	@Override
-	public String getFeatureNameSpace() {
-		// TODO Auto-generated method stub
-		return featureNameSpace;
-	}
-
-	@Override
-	public void setFeatureNameSpace(String featureNameSpace) {
-		// TODO Auto-generated method stub
-		this.featureNameSpace = featureNameSpace;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
-	 */
-	@Override
-	public AbstractImagePrototype getIcon() {
-		// TODO Auto-generated method stub
-		switch (getLayerType()) {
-		case POINT:
-			return LayerResources.ICONS.point();
-		case MULTIPOINT:
-			return LayerResources.ICONS.point();
-		case LINESTRING:
-			return LayerResources.ICONS.line();
-		case MULTILINESTRING:
-			return LayerResources.ICONS.line();
-		case POLYGON:
-			return LayerResources.ICONS.shape();
-		case MULTIPOLYGON:
-			return LayerResources.ICONS.shape();
-		}
-		return null;
+	public LayerTreeWidget getLayerTree() {
+		return layerTree;
 	}
 
 }

@@ -37,8 +37,9 @@ package org.geosdi.geoplatform.gui.client.model;
 
 import java.util.List;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
-import org.geosdi.geoplatform.gui.model.tree.GPFolderTreeModel;
+import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -47,7 +48,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GPRootTreeNode extends GPFolderTreeModel {
+public class GPRootTreeNode extends GPBeanTreeModel {
 
 	/**
 	 * 
@@ -58,17 +59,14 @@ public class GPRootTreeNode extends GPFolderTreeModel {
 		super.setLabel("Geo-Platform Tree");
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.model.tree.GPFolderTreeModel#modelConverter
-	 * (java.util.List)
+	 * @param clientFolders
 	 */
-	@Override
-	public void modelConverter(List<GPLayerClientInfo> layersClientInfo) {
-		// TODO Auto-generated method stub
-
+	public void modelConverter(List<GPFolderClientInfo> clientFolders) {
+		for (GPFolderClientInfo folder : clientFolders) {
+			super.add(new FolderTreeNode(folder));
+		}
 	}
 
 	/*
@@ -79,7 +77,7 @@ public class GPRootTreeNode extends GPFolderTreeModel {
 	@Override
 	public AbstractImagePrototype getIcon() {
 		// TODO Auto-generated method stub
-		return null;
+		return LayerResources.ICONS.geoPlatform();
 	}
 
 }

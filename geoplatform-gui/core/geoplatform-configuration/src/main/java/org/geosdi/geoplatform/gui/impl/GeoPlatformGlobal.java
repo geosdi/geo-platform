@@ -64,7 +64,7 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
 	@Autowired
 	private IMenuBarContainerTool menuBarContainerTool;
 	
-//	@Autowired
+	@Autowired
 	private FolderStore folderStore;
 
 	/**

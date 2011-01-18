@@ -33,13 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model;
+package org.geosdi.geoplatform.gui.client.widget;
 
-import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
+import org.geosdi.geoplatform.gui.client.widget.tree.GeoPlatformTreeWidget;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 
+import com.extjs.gxt.ui.client.data.ModelIconProvider;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
@@ -47,65 +48,51 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
+public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2445765797861311204L;
-
-	private String featureNameSpace;
+	private GPRootTreeNode root;
+	private boolean initialized;
 
 	/**
 	 * @Constructor
-	 * 
-	 * @param label
 	 */
-	public VectorTreeNode(ClientVectorInfo layer) {
-		super.setLabel(layer.getFeatureType());
-		super.setDataSource(layer.getDataSource());
-		super.setCrs(layer.getCrs());
-		super.setBbox(layer.getBbox());
-		super.setzIndex(layer.getzIndex());
-		super.setLayerType(layer.getLayerType());
-		this.setFeatureNameSpace(layer.getFeatureNameSpace());
+	public LayerTreeWidget() {
+		super();
+		this.buildRoot();
 	}
 
-	@Override
-	public String getFeatureNameSpace() {
+	private void buildRoot() {
 		// TODO Auto-generated method stub
-		return featureNameSpace;
+		this.root = new GPRootTreeNode();
 	}
 
-	@Override
-	public void setFeatureNameSpace(String featureNameSpace) {
-		// TODO Auto-generated method stub
-		this.featureNameSpace = featureNameSpace;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
+	/**
+	 * Build Tree
 	 */
-	@Override
-	public AbstractImagePrototype getIcon() {
-		// TODO Auto-generated method stub
-		switch (getLayerType()) {
-		case POINT:
-			return LayerResources.ICONS.point();
-		case MULTIPOINT:
-			return LayerResources.ICONS.point();
-		case LINESTRING:
-			return LayerResources.ICONS.line();
-		case MULTILINESTRING:
-			return LayerResources.ICONS.line();
-		case POLYGON:
-			return LayerResources.ICONS.shape();
-		case MULTIPOLYGON:
-			return LayerResources.ICONS.shape();
+	public void buildTree() {
+		if (!initialized) {
+			this.initialized = true;
+			this.root.modelConverter(GeoPlatformUtils.getInstance()
+					.getGlobalConfiguration().getFolderStore().getFolders());
+			this.store.add(this.root, true);
 		}
-		return null;
+	}
+
+	/**
+	 * Set Tree Properties 
+	 */
+	public void setTreeProperties() {
+		// TODO Auto-generated method stub
+		this.tree.setIconProvider(new ModelIconProvider<GPBeanTreeModel>() {
+
+			@Override
+			public AbstractImagePrototype getIcon(GPBeanTreeModel model) {
+				// TODO Auto-generated method stub
+				return model.getIcon();
+			}
+		});
+
+		this.tree.setCheckable(true);
 	}
 
 }

@@ -33,79 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model;
+package org.geosdi.geoplatform.gui.client.action.menu;
 
-import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.client.LayerEvents;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.widget.menu.CheckMenuItem;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
+public class LayerMenuAction extends MenuAction {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2445765797861311204L;
-
-	private String featureNameSpace;
-
-	/**
-	 * @Constructor
-	 * 
-	 * @param label
-	 */
-	public VectorTreeNode(ClientVectorInfo layer) {
-		super.setLabel(layer.getFeatureType());
-		super.setDataSource(layer.getDataSource());
-		super.setCrs(layer.getCrs());
-		super.setBbox(layer.getBbox());
-		super.setzIndex(layer.getzIndex());
-		super.setLayerType(layer.getLayerType());
-		this.setFeatureNameSpace(layer.getFeatureNameSpace());
-	}
-
-	@Override
-	public String getFeatureNameSpace() {
-		// TODO Auto-generated method stub
-		return featureNameSpace;
-	}
-
-	@Override
-	public void setFeatureNameSpace(String featureNameSpace) {
-		// TODO Auto-generated method stub
-		this.featureNameSpace = featureNameSpace;
+	public LayerMenuAction() {
+		super("Layers");
+		// TODO Auto-generated constructor stub
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
+	 * @see
+	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+	 * .extjs.gxt.ui.client.event.ComponentEvent)
 	 */
 	@Override
-	public AbstractImagePrototype getIcon() {
+	public void componentSelected(MenuEvent ce) {
 		// TODO Auto-generated method stub
-		switch (getLayerType()) {
-		case POINT:
-			return LayerResources.ICONS.point();
-		case MULTIPOINT:
-			return LayerResources.ICONS.point();
-		case LINESTRING:
-			return LayerResources.ICONS.line();
-		case MULTILINESTRING:
-			return LayerResources.ICONS.line();
-		case POLYGON:
-			return LayerResources.ICONS.shape();
-		case MULTIPOLYGON:
-			return LayerResources.ICONS.shape();
-		}
-		return null;
+		CheckMenuItem item = (CheckMenuItem) ((Menu) ce.getSource())
+				.getItemByItemId(super.getId());
+
+		if (item.isChecked())
+			Dispatcher.forwardEvent(LayerEvents.SHOW_LAYER_WIDGET);
+		else
+			Dispatcher.forwardEvent(LayerEvents.HIDE_LAYER_WIDGET);
 	}
 
 }

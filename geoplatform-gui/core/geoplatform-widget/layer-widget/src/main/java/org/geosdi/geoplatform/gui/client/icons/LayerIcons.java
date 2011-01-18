@@ -60,5 +60,8 @@ public interface LayerIcons extends ImageBundle {
 	
 	@Resource("shape.png")
 	AbstractImagePrototype shape();
+	
+	@Resource("gp.png")
+	AbstractImagePrototype geoPlatform();
 
 }

@@ -35,22 +35,51 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
+import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
+import org.geosdi.geoplatform.gui.client.action.menu.LayerMenuAction;
+import org.geosdi.geoplatform.gui.client.mvc.LayerController;
+
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
- *
+ * @email giuseppe.lascaleia@geosdi.org
+ * 
  */
 public class LayerWidgetUI implements EntryPoint {
 
-	/* (non-Javadoc)
+	private Dispatcher dispatcher;
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
 	 */
 	@Override
 	public void onModuleLoad() {
 		// TODO Auto-generated method stub
+		dispatcher = Dispatcher.get();
 
+		dispatcher.addController(new LayerController());
+
+		addLayerWidgetAction();
+
+		dispatcher.fireEvent(LayerEvents.INIT_LAYER_WIDGET);
+	}
+
+	private void addLayerWidgetAction() {
+		// TODO Auto-generated method stub
+		MenuActionRegistar.put("layerMenu", new MenuActionCreator() {
+
+			@Override
+			public MenuAction createAction() {
+				// TODO Auto-generated method stub
+				return new LayerMenuAction();
+			}
+		});
 	}
 
 }

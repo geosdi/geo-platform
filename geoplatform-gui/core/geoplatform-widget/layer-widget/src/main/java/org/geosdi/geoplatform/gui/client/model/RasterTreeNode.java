@@ -38,8 +38,9 @@ package org.geosdi.geoplatform.gui.client.model;
 import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -48,7 +49,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class RasterTreeNode extends GPBeanTreeModel implements GPRasterBean {
+public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
 
 	/**
 	 * 
@@ -62,8 +63,14 @@ public class RasterTreeNode extends GPBeanTreeModel implements GPRasterBean {
 	 * 
 	 * @param label
 	 */
-	public RasterTreeNode(String label) {
-		super.setLabel(label);
+	public RasterTreeNode(ClientRasterInfo layer) {
+		super.setLabel(layer.getLayerName());
+		super.setDataSource(layer.getDataSource());
+		super.setCrs(layer.getCrs());
+		super.setBbox(layer.getBbox());
+		super.setzIndex(layer.getzIndex());
+		super.setLayerType(layer.getLayerType());
+		this.setStyles(layer.getStyles());
 	}
 
 	@Override

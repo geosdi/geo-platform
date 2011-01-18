@@ -33,24 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.model.tree;
+package org.geosdi.geoplatform.gui.client;
 
-import java.util.List;
-
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
+import com.extjs.gxt.ui.client.event.EventType;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GPFolderTreeModel extends GPBeanTreeModel {
+public class LayerEvents {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1162364819165727715L;
+	public static final EventType INIT_LAYER_WIDGET = new EventType();
 
-	public abstract void modelConverter(List<GPLayerClientInfo> layersClientInfo);
+	public static final EventType SHOW_LAYER_WIDGET = new EventType();
+
+	public static final EventType HIDE_LAYER_WIDGET = new EventType();
 
 }

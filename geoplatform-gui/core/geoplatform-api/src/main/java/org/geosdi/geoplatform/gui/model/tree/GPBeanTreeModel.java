@@ -35,10 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.model.tree;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-
 import com.extjs.gxt.ui.client.data.BaseTreeModel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -47,8 +43,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GPBeanTreeModel extends BaseTreeModel implements
-		GPLayerBean {
+public abstract class GPBeanTreeModel extends BaseTreeModel {
 
 	public enum GPKeyTreeModel {
 
@@ -71,11 +66,7 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements
 	private static final long serialVersionUID = 2095233644130779285L;
 
 	private String label;
-	private String dataSource;
-	private String crs;
-	private BboxClientInfo bbox;
-	private GPLayerType layerType;
-	private int zIndex;
+	
 
 	/**
 	 * @return the label
@@ -91,81 +82,6 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements
 	public void setLabel(String label) {
 		this.label = label;
 		set(GPKeyTreeModel.LABEL_VALUE.toString(), this.label);
-	}
-
-	/**
-	 * @return the dataSource
-	 */
-	public String getDataSource() {
-		return dataSource;
-	}
-
-	/**
-	 * @param dataSource
-	 *            the dataSource to set
-	 */
-	public void setDataSource(String dataSource) {
-		this.dataSource = dataSource;
-	}
-
-	/**
-	 * @return the crs
-	 */
-	public String getCrs() {
-		return crs;
-	}
-
-	/**
-	 * @param crs
-	 *            the crs to set
-	 */
-	public void setCrs(String crs) {
-		this.crs = crs;
-	}
-
-	/**
-	 * @return the bbox
-	 */
-	public BboxClientInfo getBbox() {
-		return bbox;
-	}
-
-	/**
-	 * @param bbox
-	 *            the bbox to set
-	 */
-	public void setBbox(BboxClientInfo bbox) {
-		this.bbox = bbox;
-	}
-
-	/**
-	 * @return the layerType
-	 */
-	public GPLayerType getLayerType() {
-		return layerType;
-	}
-
-	/**
-	 * @param layerType
-	 *            the layerType to set
-	 */
-	public void setLayerType(GPLayerType layerType) {
-		this.layerType = layerType;
-	}
-
-	/**
-	 * @return the zIndex
-	 */
-	public int getzIndex() {
-		return zIndex;
-	}
-
-	/**
-	 * @param zIndex
-	 *            the zIndex to set
-	 */
-	public void setzIndex(int zIndex) {
-		this.zIndex = zIndex;
 	}
 
 	public abstract AbstractImagePrototype getIcon();

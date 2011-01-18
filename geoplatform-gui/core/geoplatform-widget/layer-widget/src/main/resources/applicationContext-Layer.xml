@@ -7,8 +7,6 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 	default-autowire="byName">
 
-	<context:annotation-config />
-
 	<bean name="folderStore"
 		class="org.geosdi.geoplatform.gui.impl.GeoPlatformFolderStore">
 		<property name="folders">
@@ -46,7 +44,7 @@
 			</bean>
 		</property>
 		<property name="layerType" value="POINT" />
-		<property name="zIndex" value="10" />
+		<property name="zIndex" value="20" />
 	</bean>
 
 	<bean name="osm_line"
@@ -65,7 +63,7 @@
 			</bean>
 		</property>
 		<property name="layerType" value="MULTILINESTRING" />
-		<property name="zIndex" value="11" />
+		<property name="zIndex" value="21" />
 	</bean>
 
 </beans>

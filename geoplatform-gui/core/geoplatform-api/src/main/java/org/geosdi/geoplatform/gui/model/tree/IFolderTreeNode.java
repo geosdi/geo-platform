@@ -44,4 +44,6 @@ public interface IFolderTreeNode {
 
 	public boolean isChecked();
 
+	public boolean isChildChecked(GPLayerTreeModel child);
+
 }

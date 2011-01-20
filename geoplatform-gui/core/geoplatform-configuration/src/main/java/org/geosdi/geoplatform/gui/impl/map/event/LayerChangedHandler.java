@@ -49,10 +49,10 @@ public interface LayerChangedHandler extends EventHandler {
 
 	Type<LayerChangedHandler> TYPE = new Type<LayerChangedHandler>();
 
-	public void onDisplayLayer(DisplayLayerEvent<GPLayerBean> event);
+	public void onDisplayLayer(GPLayerBean layerBean);
 
-	public void onHideLayer(HideLayerEvent<GPLayerBean> event);
+	public void onHideLayer(GPLayerBean layerBean);
 
-	public void onRemoveLayer(RemoveLayerEvent<GPLayerBean> event);
+	public void onRemoveLayer(GPLayerBean layerBean);
 
 }

@@ -44,19 +44,18 @@ import com.google.gwt.event.shared.GwtEvent;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class RemoveLayerEvent<T extends GPLayerBean> extends
-		GwtEvent<LayerChangedHandler> {
-	
-	private T layerBean;
-	
-	public RemoveLayerEvent(T theLayerBean) {
+public class RemoveLayerEvent extends GwtEvent<LayerChangedHandler> {
+
+	private GPLayerBean layerBean;
+
+	public RemoveLayerEvent(GPLayerBean theLayerBean) {
 		this.layerBean = theLayerBean;
 	}
 
 	/**
 	 * @return the layerBean
 	 */
-	public T getLayerBean() {
+	public GPLayerBean getLayerBean() {
 		return layerBean;
 	}
 
@@ -69,7 +68,7 @@ public class RemoveLayerEvent<T extends GPLayerBean> extends
 	@Override
 	protected void dispatch(LayerChangedHandler handler) {
 		// TODO Auto-generated method stub
-
+		handler.onRemoveLayer(this.layerBean);
 	}
 
 }

@@ -36,9 +36,6 @@
 package org.geosdi.geoplatform.gui.client.widget.map.store;
 
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.event.DisplayLayerEvent;
-import org.geosdi.geoplatform.gui.impl.map.event.HideLayerEvent;
-import org.geosdi.geoplatform.gui.impl.map.event.RemoveLayerEvent;
 import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
 import org.geosdi.geoplatform.gui.impl.map.store.ILayersStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -72,20 +69,19 @@ public class LayersStore extends GPLayersStore<GPRasterBean, Layer> implements
 	}
 
 	@Override
-	public void onDisplayLayer(DisplayLayerEvent<GPLayerBean> event) {
+	public void onDisplayLayer(GPLayerBean layerBean) {
 		// TODO Auto-generated method stub
-		System.out.println("TEST ********************** "
-				+ event.getLayerBean().toString());
+		System.out.println("onDisplayLayer ********************** " + layerBean);
 	}
 
 	@Override
-	public void onHideLayer(HideLayerEvent<GPLayerBean> event) {
+	public void onHideLayer(GPLayerBean layerBean) {
 		// TODO Auto-generated method stub
-
+		System.out.println("onHideLayer ********************** " + layerBean);
 	}
 
 	@Override
-	public void onRemoveLayer(RemoveLayerEvent<GPLayerBean> event) {
+	public void onRemoveLayer(GPLayerBean layerBean) {
 		// TODO Auto-generated method stub
 
 	}

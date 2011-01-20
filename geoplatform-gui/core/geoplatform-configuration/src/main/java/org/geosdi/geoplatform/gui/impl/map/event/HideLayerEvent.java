@@ -44,19 +44,18 @@ import com.google.gwt.event.shared.GwtEvent;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class HideLayerEvent<T extends GPLayerBean> extends
-		GwtEvent<LayerChangedHandler> {
-	
-	private T layerBean;
-	
-	public HideLayerEvent(T theLayerBean) {
+public class HideLayerEvent extends GwtEvent<LayerChangedHandler> {
+
+	private GPLayerBean layerBean;
+
+	public HideLayerEvent(GPLayerBean theLayerBean) {
 		this.layerBean = theLayerBean;
 	}
 
 	/**
 	 * @return the layerBean
 	 */
-	public T getLayerBean() {
+	public GPLayerBean getLayerBean() {
 		return layerBean;
 	}
 
@@ -69,7 +68,7 @@ public class HideLayerEvent<T extends GPLayerBean> extends
 	@Override
 	protected void dispatch(LayerChangedHandler handler) {
 		// TODO Auto-generated method stub
-
+		handler.onHideLayer(this.layerBean);
 	}
 
 }

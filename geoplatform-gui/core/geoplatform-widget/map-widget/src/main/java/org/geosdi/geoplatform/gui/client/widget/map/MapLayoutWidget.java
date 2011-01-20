@@ -83,6 +83,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		super();
 		this.createMapOption();
 		this.mapModel = new MapModel(this);
+		this.mapModel.addLayerChangedHandler();
 	}
 
 	private void createMapOption() {

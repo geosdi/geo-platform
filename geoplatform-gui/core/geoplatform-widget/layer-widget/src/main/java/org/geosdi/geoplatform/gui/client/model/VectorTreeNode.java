@@ -37,8 +37,11 @@ package org.geosdi.geoplatform.gui.client.model;
 
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
+import org.geosdi.geoplatform.gui.impl.map.event.DisplayLayerEvent;
+import org.geosdi.geoplatform.gui.impl.map.event.HideLayerEvent;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -118,6 +121,27 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
 	@Override
 	public void notifyCheckEvent(boolean isChecked) {
 		// TODO Auto-generated method stub
+		if (isParentChecked()) {
+			if (isChecked)
+				GPHandlerManager.fireEvent(new DisplayLayerEvent(this));
+			else
+				GPHandlerManager.fireEvent(new HideLayerEvent(this));
+		}
 
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "VectorTreeNode [featureNameSpace=" + featureNameSpace
+				+ ", getDataSource()=" + getDataSource() + ", getCrs()="
+				+ getCrs() + ", getBbox()=" + getBbox() + ", getLayerType()="
+				+ getLayerType() + ", getzIndex()=" + getzIndex()
+				+ ", getLabel()=" + getLabel() + "]";
+	}
+
 }

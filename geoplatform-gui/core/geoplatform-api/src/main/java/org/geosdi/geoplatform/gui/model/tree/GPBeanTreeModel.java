@@ -66,7 +66,6 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
 	private static final long serialVersionUID = 2095233644130779285L;
 
 	private String label;
-	
 
 	/**
 	 * @return the label
@@ -84,6 +83,15 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
 		set(GPKeyTreeModel.LABEL_VALUE.toString(), this.label);
 	}
 
-	public abstract AbstractImagePrototype getIcon();
+	/**
+	 * Notify Check Changed Event on the Map
+	 * 
+	 * @param isChecked
+	 */
+	public void notifyCheckEvent(boolean isChecked) {
+		// TODO Auto-generated method stub
 
+	}
+
+	public abstract AbstractImagePrototype getIcon();
 }

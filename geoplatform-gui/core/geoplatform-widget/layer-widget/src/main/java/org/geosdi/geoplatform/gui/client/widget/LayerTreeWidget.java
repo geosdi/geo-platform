@@ -41,6 +41,10 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 
 import com.extjs.gxt.ui.client.data.ModelIconProvider;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.TreePanelEvent;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
@@ -63,7 +67,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
 	private void buildRoot() {
 		// TODO Auto-generated method stub
-		this.root = new GPRootTreeNode();
+		this.root = new GPRootTreeNode(this.tree);
 	}
 
 	/**
@@ -79,7 +83,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 	}
 
 	/**
-	 * Set Tree Properties 
+	 * Set Tree Properties
 	 */
 	public void setTreeProperties() {
 		// TODO Auto-generated method stub
@@ -92,7 +96,19 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 			}
 		});
 
-		this.tree.setCheckable(true);
+		this.setCheckable(true);
+
+		this.setCheckStyle(CheckCascade.NONE);
+
+		this.tree.addListener(Events.CheckChange,
+				new Listener<TreePanelEvent<GPBeanTreeModel>>() {
+
+					@Override
+					public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
+						// TODO Auto-generated method stub
+						be.getItem().notifyCheckEvent(be.isChecked());
+					}
+				});
 	}
 
 }

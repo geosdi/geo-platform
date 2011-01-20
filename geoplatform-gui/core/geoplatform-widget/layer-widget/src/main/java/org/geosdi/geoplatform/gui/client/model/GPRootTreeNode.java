@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
@@ -55,8 +56,11 @@ public class GPRootTreeNode extends GPBeanTreeModel {
 	 */
 	private static final long serialVersionUID = 1765450539495169525L;
 
-	public GPRootTreeNode() {
+	private TreePanel<GPBeanTreeModel> tree;
+
+	public GPRootTreeNode(TreePanel<GPBeanTreeModel> theTree) {
 		super.setLabel("Geo-Platform Tree");
+		this.tree = theTree;
 	}
 
 	/**
@@ -80,4 +84,19 @@ public class GPRootTreeNode extends GPBeanTreeModel {
 		return LayerResources.ICONS.geoPlatform();
 	}
 
+	/**
+	 * 
+	 * @param model
+	 * @return boolean
+	 */
+	public boolean isNodeChecked(GPBeanTreeModel model) {
+		return this.tree.isChecked(model);
+	}
+
+	/**
+	 * @return the tree
+	 */
+	public TreePanel<GPBeanTreeModel> getTree() {
+		return tree;
+	}
 }

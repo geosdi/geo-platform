@@ -33,107 +33,43 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.model.tree;
+package org.geosdi.geoplatform.gui.impl.map.event;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
-		GPLayerBean {
-
+public class DisplayLayerEvent<T extends GPLayerBean> extends
+		GwtEvent<LayerChangedHandler> {
+	
+	private T layerBean;
+	
+	public DisplayLayerEvent(T theLayerBean) {
+		this.layerBean = theLayerBean;
+	}
+	
 	/**
-	 * 
+	 * @return the layerBean
 	 */
-	private static final long serialVersionUID = -6964624685883651246L;
-
-	private String dataSource;
-	private String crs;
-	private BboxClientInfo bbox;
-	private GPLayerType layerType;
-	private int zIndex;
-
-	/**
-	 * @return the dataSource
-	 */
-	public String getDataSource() {
-		return dataSource;
+	public T getLayerBean() {
+		return layerBean;
 	}
 
-	/**
-	 * @param dataSource
-	 *            the dataSource to set
-	 */
-	public void setDataSource(String dataSource) {
-		this.dataSource = dataSource;
+	@Override
+	public Type<LayerChangedHandler> getAssociatedType() {
+		// TODO Auto-generated method stub
+		return LayerChangedHandler.TYPE;
 	}
 
-	/**
-	 * @return the crs
-	 */
-	public String getCrs() {
-		return crs;
+	@Override
+	protected void dispatch(LayerChangedHandler handler) {
+		// TODO Auto-generated method stub
+
 	}
 
-	/**
-	 * @param crs
-	 *            the crs to set
-	 */
-	public void setCrs(String crs) {
-		this.crs = crs;
-	}
-
-	/**
-	 * @return the bbox
-	 */
-	public BboxClientInfo getBbox() {
-		return bbox;
-	}
-
-	/**
-	 * @param bbox
-	 *            the bbox to set
-	 */
-	public void setBbox(BboxClientInfo bbox) {
-		this.bbox = bbox;
-	}
-
-	/**
-	 * @return the layerType
-	 */
-	public GPLayerType getLayerType() {
-		return layerType;
-	}
-
-	/**
-	 * @param layerType
-	 *            the layerType to set
-	 */
-	public void setLayerType(GPLayerType layerType) {
-		this.layerType = layerType;
-	}
-
-	/**
-	 * @return the zIndex
-	 */
-	public int getzIndex() {
-		return zIndex;
-	}
-
-	/**
-	 * @param zIndex
-	 *            the zIndex to set
-	 */
-	public void setzIndex(int zIndex) {
-		this.zIndex = zIndex;
-	}
-
-	public boolean isParentChecked() {
-		return ((IFolderTreeNode) super.getParent()).isChecked();
-	}
 }

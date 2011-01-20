@@ -95,4 +95,17 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
 		// TODO Auto-generated method stub
 		return LayerResources.ICONS.raster();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#notifyCheckEvent
+	 * (boolean)
+	 */
+	@Override
+	public void notifyCheckEvent(boolean isChecked) {
+		// TODO Auto-generated method stub
+
+	}
 }

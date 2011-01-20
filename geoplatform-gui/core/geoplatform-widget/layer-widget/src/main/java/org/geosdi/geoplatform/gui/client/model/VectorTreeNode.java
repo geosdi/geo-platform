@@ -108,4 +108,16 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
 		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#notifyCheckEvent
+	 * (boolean)
+	 */
+	@Override
+	public void notifyCheckEvent(boolean isChecked) {
+		// TODO Auto-generated method stub
+
+	}
 }

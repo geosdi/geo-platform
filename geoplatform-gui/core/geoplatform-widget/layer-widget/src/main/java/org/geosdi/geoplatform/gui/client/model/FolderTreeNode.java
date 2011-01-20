@@ -42,8 +42,11 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInf
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.IFolderTreeNode;
 
+import com.extjs.gxt.ui.client.data.ModelData;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
@@ -51,7 +54,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class FolderTreeNode extends GPBeanTreeModel {
+public class FolderTreeNode extends GPBeanTreeModel implements IFolderTreeNode {
 
 	/**
 	 * 
@@ -89,4 +92,30 @@ public class FolderTreeNode extends GPBeanTreeModel {
 		return LayerResources.ICONS.LayerFolder();
 	}
 
+	@Override
+	public void notifyCheckEvent(boolean isChecked) {
+		// TODO Auto-generated method stub
+		if (isChecked) {
+			for (ModelData model : super.getChildren()) {
+				if (model instanceof GPVectorBean) {
+					System.out.println("TEST *********************"
+							+ ((GPVectorBean) model).getLabel());
+				}
+			}
+		}
+	}
+
+	@Override
+	public boolean isChecked() {
+		return getRootNode().isNodeChecked(this);
+	}
+
+	/**
+	 * Return Root Node
+	 * 
+	 * @return GPRootTreeNode
+	 */
+	public GPRootTreeNode getRootNode() {
+		return (GPRootTreeNode) super.getParent();
+	}
 }

@@ -4,7 +4,7 @@
  *  http://geo-plartform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2010 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,107 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.model.tree;
+package org.geosdi.geoplatform.gui.impl.map.store;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
-		GPLayerBean {
+public interface ILayersStore<T extends Layer> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6964624685883651246L;
+	boolean containsLayer(GPLayerBean layerBean);
 
-	private String dataSource;
-	private String crs;
-	private BboxClientInfo bbox;
-	private GPLayerType layerType;
-	private int zIndex;
+	T getLayer(GPLayerBean key);
 
-	/**
-	 * @return the dataSource
-	 */
-	public String getDataSource() {
-		return dataSource;
-	}
-
-	/**
-	 * @param dataSource
-	 *            the dataSource to set
-	 */
-	public void setDataSource(String dataSource) {
-		this.dataSource = dataSource;
-	}
-
-	/**
-	 * @return the crs
-	 */
-	public String getCrs() {
-		return crs;
-	}
-
-	/**
-	 * @param crs
-	 *            the crs to set
-	 */
-	public void setCrs(String crs) {
-		this.crs = crs;
-	}
-
-	/**
-	 * @return the bbox
-	 */
-	public BboxClientInfo getBbox() {
-		return bbox;
-	}
-
-	/**
-	 * @param bbox
-	 *            the bbox to set
-	 */
-	public void setBbox(BboxClientInfo bbox) {
-		this.bbox = bbox;
-	}
-
-	/**
-	 * @return the layerType
-	 */
-	public GPLayerType getLayerType() {
-		return layerType;
-	}
-
-	/**
-	 * @param layerType
-	 *            the layerType to set
-	 */
-	public void setLayerType(GPLayerType layerType) {
-		this.layerType = layerType;
-	}
-
-	/**
-	 * @return the zIndex
-	 */
-	public int getzIndex() {
-		return zIndex;
-	}
-
-	/**
-	 * @param zIndex
-	 *            the zIndex to set
-	 */
-	public void setzIndex(int zIndex) {
-		this.zIndex = zIndex;
-	}
-
-	public boolean isParentChecked() {
-		return ((IFolderTreeNode) super.getParent()).isChecked();
-	}
 }

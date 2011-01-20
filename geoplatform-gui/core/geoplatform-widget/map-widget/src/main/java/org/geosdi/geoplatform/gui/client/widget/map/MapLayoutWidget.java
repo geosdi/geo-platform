@@ -72,6 +72,8 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	private Map map;
 	private Layer layer;
 	private Layer osm;
+	
+	private MapModel mapModel;
 
 	private ButtonBar buttonBar;
 
@@ -80,6 +82,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	public MapLayoutWidget() {
 		super();
 		this.createMapOption();
+		this.mapModel = new MapModel(this);
 	}
 
 	private void createMapOption() {

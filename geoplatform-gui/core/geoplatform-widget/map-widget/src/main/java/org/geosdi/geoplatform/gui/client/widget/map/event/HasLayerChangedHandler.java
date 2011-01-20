@@ -33,59 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.store;
+package org.geosdi.geoplatform.gui.client.widget.map.event;
 
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.event.DisplayLayerEvent;
-import org.geosdi.geoplatform.gui.impl.map.event.HideLayerEvent;
-import org.geosdi.geoplatform.gui.impl.map.event.RemoveLayerEvent;
-import org.geosdi.geoplatform.gui.impl.map.store.ILayersStore;
-import org.geosdi.geoplatform.gui.impl.map.store.LayersStore;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
-import org.gwtopenmaps.openlayers.client.layer.WMS;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
- *
+ * @email giuseppe.lascaleia@geosdi.org
+ * 
  */
-public class RasterLayersStore extends LayersStore<GPRasterBean, WMS> implements
-		ILayersStore<WMS> {
+public interface HasLayerChangedHandler {
 
-	public RasterLayersStore(GeoPlatformMap theMapWidget) {
-		super(theMapWidget);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public boolean containsLayer(GPLayerBean layerBean) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public WMS getLayer(GPLayerBean key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void onDisplayLayer(DisplayLayerEvent<GPLayerBean> event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onHideLayer(HideLayerEvent<GPLayerBean> event) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onRemoveLayer(RemoveLayerEvent<GPLayerBean> event) {
-		// TODO Auto-generated method stub
-		
-	}
+	HandlerRegistration addLayerChangedHandler();
 
 }

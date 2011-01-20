@@ -50,7 +50,7 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class LayersStore<K extends GPLayerBean, T extends Layer>
+public abstract class GPLayersStore<K extends GPLayerBean, T extends Layer>
 		implements ILayersStore<T>, LayerChangedHandler {
 
 	protected GeoPlatformMap mapWidget;
@@ -61,7 +61,7 @@ public abstract class LayersStore<K extends GPLayerBean, T extends Layer>
 	 * 
 	 * @param theMapWidget
 	 */
-	public LayersStore(GeoPlatformMap theMapWidget) {
+	public GPLayersStore(GeoPlatformMap theMapWidget) {
 		this.mapWidget = theMapWidget;
 	}
 

@@ -33,59 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.store;
+package org.geosdi.geoplatform.gui.client.widget.map;
 
+import org.geosdi.geoplatform.gui.client.widget.map.event.HasLayerChangedHandler;
+import org.geosdi.geoplatform.gui.client.widget.map.store.LayersStore;
+import org.geosdi.geoplatform.gui.impl.map.GPMapModel;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.event.DisplayLayerEvent;
-import org.geosdi.geoplatform.gui.impl.map.event.HideLayerEvent;
-import org.geosdi.geoplatform.gui.impl.map.event.RemoveLayerEvent;
-import org.geosdi.geoplatform.gui.impl.map.store.ILayersStore;
-import org.geosdi.geoplatform.gui.impl.map.store.LayersStore;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.geosdi.geoplatform.gui.impl.map.event.LayerChangedHandler;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+
+import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class VectorLayersStore extends LayersStore<GPVectorBean, Vector>
-		implements ILayersStore<Vector> {
+public class MapModel extends GPMapModel implements HasLayerChangedHandler {
 
-	public VectorLayersStore(GeoPlatformMap theMapWidget) {
+	private LayersStore layersStore;
+
+	public MapModel(GeoPlatformMap theMapWidget) {
 		super(theMapWidget);
 		// TODO Auto-generated constructor stub
+		createStores();
 	}
 
-	@Override
-	public void onDisplayLayer(DisplayLayerEvent<GPLayerBean> event) {
+	private void createStores() {
 		// TODO Auto-generated method stub
-		
+		this.layersStore = new LayersStore(this.mapWidget);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.client.widget.map.event.HasLayerChangedHandler
+	 * #addLayerChangedHandler(org.geosdi.geoplatform.gui.impl.map.event.
+	 * LayerChangedHandler)
+	 */
 	@Override
-	public void onHideLayer(HideLayerEvent<GPLayerBean> event) {
+	public HandlerRegistration addLayerChangedHandler() {
 		// TODO Auto-generated method stub
-		
+		return GPHandlerManager.addHandler(LayerChangedHandler.TYPE,
+				this.layersStore);
 	}
 
-	@Override
-	public void onRemoveLayer(RemoveLayerEvent<GPLayerBean> event) {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * @return the layersStore
+	 */
+	public LayersStore getLayersStore() {
+		return layersStore;
 	}
-
-	@Override
-	public boolean containsLayer(GPLayerBean layerBean) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Vector getLayer(GPLayerBean key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

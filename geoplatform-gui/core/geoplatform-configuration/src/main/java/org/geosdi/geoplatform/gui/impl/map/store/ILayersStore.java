@@ -46,7 +46,7 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
  */
 public interface ILayersStore<T extends Layer> extends Visitor {
 
-	boolean containsLayer(GPLayerBean layerBean);
+	boolean containsLayer(GPLayerBean key);
 
 	T getLayer(GPLayerBean key);
 

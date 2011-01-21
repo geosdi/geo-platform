@@ -57,15 +57,15 @@ public class LayersStore extends GPLayersStore<GPRasterBean, Layer> implements
 	}
 
 	@Override
-	public boolean containsLayer(GPLayerBean layerBean) {
+	public boolean containsLayer(GPLayerBean key) {
 		// TODO Auto-generated method stub
-		return false;
+		return this.layers.containsKey(key);
 	}
 
 	@Override
 	public Layer getLayer(GPLayerBean key) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.layers.get(key);
 	}
 
 	@Override
@@ -99,21 +99,21 @@ public class LayersStore extends GPLayersStore<GPRasterBean, Layer> implements
 	}
 
 	@Override
-	public void visitForRemove(GPVectorBean rasterBean) {
+	public void visitForRemove(GPVectorBean vectorBean) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void visitForDisplay(GPRasterBean vectorBean) {
+	public void visitForDisplay(GPRasterBean rasterBean) {
 		// TODO Auto-generated method stub
-
+		System.out.println("visitForDisplay ***************** " + rasterBean);
 	}
 
 	@Override
-	public void visitForHide(GPRasterBean vectorBean) {
+	public void visitForHide(GPRasterBean rasterBean) {
 		// TODO Auto-generated method stub
-
+		System.out.println("visitForHide ***************** " + rasterBean);
 	}
 
 	@Override

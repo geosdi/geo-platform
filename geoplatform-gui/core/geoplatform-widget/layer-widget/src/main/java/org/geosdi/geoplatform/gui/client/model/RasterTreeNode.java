@@ -39,9 +39,12 @@ import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
+import org.geosdi.geoplatform.gui.impl.map.event.DisplayLayerEvent;
+import org.geosdi.geoplatform.gui.impl.map.event.HideLayerEvent;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.visitor.Visitor;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -107,24 +110,44 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
 	@Override
 	public void notifyCheckEvent(boolean isChecked) {
 		// TODO Auto-generated method stub
-
+		if (isParentChecked()) {
+			if (isChecked)
+				GPHandlerManager.fireEvent(new DisplayLayerEvent(this));
+			else
+				GPHandlerManager.fireEvent(new HideLayerEvent(this));
+		}
 	}
 
 	@Override
 	public void acceptForDisplay(Visitor visitor) {
 		// TODO Auto-generated method stub
-		
+		visitor.visitForDisplay(this);
 	}
 
 	@Override
 	public void acceptForHide(Visitor visitor) {
 		// TODO Auto-generated method stub
-		
+		visitor.visitForHide(this);
 	}
 
 	@Override
 	public void acceptForRemove(Visitor visitor) {
 		// TODO Auto-generated method stub
-		
+		visitor.visitForRemove(this);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "RasterTreeNode [getLabel()=" + getLabel() + ", styles="
+				+ styles + ", getDataSource()=" + getDataSource()
+				+ ", getCrs()=" + getCrs() + ", getBbox()=" + getBbox()
+				+ ", getLayerType()=" + getLayerType() + ", getzIndex()="
+				+ getzIndex() + "]";
+	}
+
 }

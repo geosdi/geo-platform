@@ -14,6 +14,7 @@
 		<property name="folders">
 			<list>
 				<ref bean="vectorFolder" />
+				<ref bean="rasterFolder" />
 			</list>
 		</property>
 	</bean>
@@ -28,6 +29,64 @@
 				<ref bean="osm_line" />
 			</list>
 		</property>
+	</bean>
+
+	<bean name="rasterFolder"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo">
+		<property name="label" value="Vector Folder" />
+		<property name="order" value="2" />
+		<property name="layers">
+			<list>
+				<ref bean="deAgostini100000" />
+				<ref bean="ctp_Trento" />
+			</list>
+		</property>
+	</bean>
+
+	<bean name="deAgostini100000"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+		<property name="layerName" value="StratiDiBase:DeAgostini100000" />
+		<property name="styles">
+			<list>
+				<value>raster</value>
+			</list>
+		</property>
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="6.351" />
+				<property name="lowerLeftY" value="34.886" />
+				<property name="upperRightX" value="19.404" />
+				<property name="upperRightY" value="47.403" />
+			</bean>
+		</property>
+		<property name="layerType" value="RASTER" />
+		<property name="zIndex" value="9" />
+	</bean>
+	
+	<bean name="ctp_Trento"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+		<property name="layerName" value="StratiDiBase:ctp Trento" />
+		<property name="styles">
+			<list>
+				<value>raster</value>
+			</list>
+		</property>
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="10.406" />
+				<property name="lowerLeftY" value="45.64" />
+				<property name="upperRightX" value="11.973" />
+				<property name="upperRightY" value="46.568" />
+			</bean>
+		</property>
+		<property name="layerType" value="RASTER" />
+		<property name="zIndex" value="8" />
 	</bean>
 
 	<bean name="it_toponimi_igm_25k"

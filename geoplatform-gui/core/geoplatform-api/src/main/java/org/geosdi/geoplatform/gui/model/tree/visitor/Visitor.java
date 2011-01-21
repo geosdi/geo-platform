@@ -49,11 +49,11 @@ public interface Visitor {
 
 	void visitForHide(GPVectorBean vectorBean);
 
-	void visitForRemove(GPVectorBean rasterBean);
+	void visitForRemove(GPVectorBean vectorBean);
 	
-	void visitForDisplay(GPRasterBean vectorBean);
+	void visitForDisplay(GPRasterBean rasterBean);
 
-	void visitForHide(GPRasterBean vectorBean);
+	void visitForHide(GPRasterBean rasterBean);
 
 	void visitForRemove(GPRasterBean rasterBean);
 

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -98,6 +99,7 @@ public class GPFolderClientInfo implements Serializable,
 	 *            the layers to set
 	 */
 	public void setLayers(List<GPLayerClientInfo> layers) {
+		Collections.sort(layers);
 		this.layers = layers;
 	}
 

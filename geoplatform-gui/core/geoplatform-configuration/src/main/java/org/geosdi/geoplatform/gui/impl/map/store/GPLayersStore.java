@@ -54,7 +54,7 @@ public abstract class GPLayersStore<K extends GPLayerBean, T extends Layer>
 		implements ILayersStore<T>, LayerChangedHandler {
 
 	protected GeoPlatformMap mapWidget;
-	private Map<K, T> layers = new HashMap<K, T>();
+	protected Map<K, T> layers = new HashMap<K, T>();
 
 	/**
 	 * @Constructor

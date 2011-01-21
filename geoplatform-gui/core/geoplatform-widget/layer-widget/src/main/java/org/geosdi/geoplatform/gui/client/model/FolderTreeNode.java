@@ -103,8 +103,8 @@ public class FolderTreeNode extends GPBeanTreeModel implements IFolderTreeNode {
 		// TODO Auto-generated method stub
 		if (isChecked)
 			for (ModelData child : super.getChildren()) {
-				((GPBeanTreeModel) child)
-						.notifyCheckEvent(isChildChecked((GPLayerTreeModel) child));
+				if (isChildChecked((GPLayerTreeModel) child))
+					((GPBeanTreeModel) child).notifyCheckEvent(true);
 			}
 		else
 			for (ModelData child : super.getChildren()) {

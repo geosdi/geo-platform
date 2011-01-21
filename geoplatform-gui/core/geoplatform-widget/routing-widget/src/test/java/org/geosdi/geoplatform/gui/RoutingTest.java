@@ -59,9 +59,18 @@ public class RoutingTest {
 
 	@Test
 	public void test() {
+		long startTime = System.currentTimeMillis();
+
 		logger.info("Tracking Service Result "
 				+ this.routingService.findDirections(12.50450, 41.87701,
 						12.50990, 41.88571));
+
+		long endTime = System.currentTimeMillis();
+
+		logger.info("---------------------------------------");
+		logger.info("Total time to evaluate request is :"
+				+ (endTime - startTime) + "ms");
+		logger.info("---------------------------------------");
 	}
 
 }

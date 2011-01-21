@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.visitor.Visitor;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -107,5 +108,23 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
 	public void notifyCheckEvent(boolean isChecked) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void acceptForDisplay(Visitor visitor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void acceptForHide(Visitor visitor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void acceptForRemove(Visitor visitor) {
+		// TODO Auto-generated method stub
+		
 	}
 }

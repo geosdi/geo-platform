@@ -4,7 +4,7 @@
  *  http://geo-plartform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2010 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,21 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.store;
-
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.tree.visitor.Visitor;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
+package org.geosdi.geoplatform.gui.model.tree.visitor;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @email  giuseppe.lascaleia@geosdi.org
+ *
  */
-public interface ILayersStore<T extends Layer> extends Visitor {
-
-	boolean containsLayer(GPLayerBean layerBean);
-
-	T getLayer(GPLayerBean key);
+public interface Visitable {
+	
+	void acceptForDisplay(Visitor visitor);
+	
+	void acceptForHide(Visitor visitor);
+	
+	void acceptForRemove(Visitor visitor);
 
 }

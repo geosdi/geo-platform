@@ -37,16 +37,17 @@ package org.geosdi.geoplatform.gui.model;
 
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
+import org.geosdi.geoplatform.gui.model.tree.visitor.Visitable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface GPLayerBean {
-	
+public interface GPLayerBean extends Visitable {
+
 	public String getLabel();
-	
+
 	public void setLabel(String label);
 
 	public String getDataSource();
@@ -64,9 +65,9 @@ public interface GPLayerBean {
 	public GPLayerType getLayerType();
 
 	public void setLayerType(GPLayerType layerType);
-	
+
 	public int getzIndex();
-	
+
 	public void setzIndex(int zIndex);
 
 }

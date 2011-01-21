@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.gui.impl.map.event.DisplayLayerEvent;
 import org.geosdi.geoplatform.gui.impl.map.event.HideLayerEvent;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.visitor.Visitor;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -130,6 +131,24 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
 
 	}
 
+	@Override
+	public void acceptForDisplay(Visitor visitor) {
+		// TODO Auto-generated method stub
+		visitor.visitForDisplay(this);
+	}
+
+	@Override
+	public void acceptForHide(Visitor visitor) {
+		// TODO Auto-generated method stub
+		visitor.visitForHide(this);
+	}
+
+	@Override
+	public void acceptForRemove(Visitor visitor) {
+		// TODO Auto-generated method stub
+		visitor.visitForRemove(this);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -143,5 +162,4 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
 				+ getLayerType() + ", getzIndex()=" + getzIndex()
 				+ ", getLabel()=" + getLabel() + "]";
 	}
-
 }

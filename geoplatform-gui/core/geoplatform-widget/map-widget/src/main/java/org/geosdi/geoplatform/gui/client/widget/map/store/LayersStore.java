@@ -40,8 +40,8 @@ import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
 import org.geosdi.geoplatform.gui.impl.map.store.ILayersStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
-import org.gwtopenmaps.openlayers.client.layer.WMS;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -63,7 +63,7 @@ public class LayersStore extends GPLayersStore<GPRasterBean, Layer> implements
 	}
 
 	@Override
-	public WMS getLayer(GPLayerBean key) {
+	public Layer getLayer(GPLayerBean key) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -71,19 +71,54 @@ public class LayersStore extends GPLayersStore<GPRasterBean, Layer> implements
 	@Override
 	public void onDisplayLayer(GPLayerBean layerBean) {
 		// TODO Auto-generated method stub
-		System.out.println("onDisplayLayer ********************** " + layerBean);
+		layerBean.acceptForDisplay(this);
 	}
 
 	@Override
 	public void onHideLayer(GPLayerBean layerBean) {
 		// TODO Auto-generated method stub
-		System.out.println("onHideLayer ********************** " + layerBean);
+		layerBean.acceptForHide(this);
 	}
 
 	@Override
 	public void onRemoveLayer(GPLayerBean layerBean) {
 		// TODO Auto-generated method stub
+		layerBean.acceptForRemove(this);
+	}
+
+	@Override
+	public void visitForDisplay(GPVectorBean vectorBean) {
+		// TODO Auto-generated method stub
+		System.out.println("visitForDisplay ***************** " + vectorBean);
+	}
+
+	@Override
+	public void visitForHide(GPVectorBean vectorBean) {
+		// TODO Auto-generated method stub
+		System.out.println("visitForHide ***************** " + vectorBean);
+	}
+
+	@Override
+	public void visitForRemove(GPVectorBean rasterBean) {
+		// TODO Auto-generated method stub
 
 	}
 
+	@Override
+	public void visitForDisplay(GPRasterBean vectorBean) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void visitForHide(GPRasterBean vectorBean) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void visitForRemove(GPRasterBean rasterBean) {
+		// TODO Auto-generated method stub
+
+	}
 }

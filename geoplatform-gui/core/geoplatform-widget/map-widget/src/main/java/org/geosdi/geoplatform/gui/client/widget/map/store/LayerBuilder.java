@@ -36,107 +36,76 @@
 package org.geosdi.geoplatform.gui.client.widget.map.store;
 
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
-import org.geosdi.geoplatform.gui.impl.map.store.ILayersStore;
+import org.geosdi.geoplatform.gui.impl.map.store.AbstractLayerBuilder;
+import org.geosdi.geoplatform.gui.impl.map.store.GPLayerBuilder;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
+import org.gwtopenmaps.openlayers.client.Bounds;
+import org.gwtopenmaps.openlayers.client.Projection;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
+import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
+import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author giuseppe
  * 
  */
-public class LayersStore extends GPLayersStore<GPLayerBean, Layer> implements
-		ILayersStore<Layer> {
+public class LayerBuilder extends AbstractLayerBuilder<GPLayerBean> implements
+		GPLayerBuilder {
 
-	private LayerBuilder layerBuilder;
-
-	public LayersStore(GeoPlatformMap theMapWidget) {
+	public LayerBuilder(GeoPlatformMap theMapWidget) {
 		super(theMapWidget);
 		// TODO Auto-generated constructor stub
-		this.layerBuilder = new LayerBuilder(theMapWidget);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.impl.map.store.GPLayerBuilder#buildRaster(
+	 * org.geosdi.geoplatform.gui.model.GPRasterBean)
+	 */
 	@Override
-	public boolean containsLayer(GPLayerBean key) {
+	public WMS buildRaster(GPRasterBean rasterBean) {
 		// TODO Auto-generated method stub
-		return this.layers.containsKey(key);
+		WMSParams wmsParams = new WMSParams();
+		wmsParams.setFormat("image/png");
+		wmsParams.setLayers(rasterBean.getLabel());
+		wmsParams.setStyles("");
+		wmsParams.setIsTransparent(true);
+
+		Bounds bbox = new Bounds(rasterBean.getBbox().getLowerLeftX(),
+				rasterBean.getBbox().getLowerLeftY(), rasterBean.getBbox()
+						.getUpperRightX(), rasterBean.getBbox()
+						.getUpperRightY());
+
+		bbox.transform(new Projection(rasterBean.getCrs()), new Projection(
+				mapWidget.getMap().getProjection()));
+
+		wmsParams.setMaxExtent(bbox);
+
+		WMSOptions wmsOption = new WMSOptions();
+		wmsOption.setIsBaseLayer(false);
+		wmsOption.setDisplayInLayerSwitcher(false);
+		wmsOption.setMaxExtent(bbox);
+
+		return new WMS(rasterBean.getLabel(), rasterBean.getDataSource(),
+				wmsParams, wmsOption);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.impl.map.store.GPLayerBuilder#buildVector(
+	 * org.geosdi.geoplatform.gui.model.GPVectorBean)
+	 */
 	@Override
-	public Layer getLayer(GPLayerBean key) {
+	public Vector buildVector(GPVectorBean vectorBean) {
 		// TODO Auto-generated method stub
-		return this.layers.get(key);
+		return null;
 	}
 
-	@Override
-	public void onDisplayLayer(GPLayerBean layerBean) {
-		// TODO Auto-generated method stub
-		layerBean.acceptForDisplay(this);
-	}
-
-	@Override
-	public void onHideLayer(GPLayerBean layerBean) {
-		// TODO Auto-generated method stub
-		layerBean.acceptForHide(this);
-	}
-
-	@Override
-	public void onRemoveLayer(GPLayerBean layerBean) {
-		// TODO Auto-generated method stub
-		layerBean.acceptForRemove(this);
-	}
-
-	@Override
-	public void visitForDisplay(GPVectorBean vectorBean) {
-		// TODO Auto-generated method stub
-		System.out.println("visitForDisplay ***************** " + vectorBean);
-	}
-
-	@Override
-	public void visitForHide(GPVectorBean vectorBean) {
-		// TODO Auto-generated method stub
-		System.out.println("visitForHide ***************** " + vectorBean);
-	}
-
-	@Override
-	public void visitForRemove(GPVectorBean vectorBean) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void visitForDisplay(GPRasterBean rasterBean) {
-		// TODO Auto-generated method stub
-		if (containsLayer(rasterBean)) {
-			WMS layer = (WMS) this.layers.get(rasterBean);
-			layer.setIsVisible(true);
-			layer.redraw();
-		} else {
-			WMS layer = (WMS) this.layerBuilder.buildLayer(rasterBean);
-
-			this.layers.put(rasterBean, layer);
-
-			this.mapWidget.getMap().addLayer(layer);
-			this.mapWidget.getMap()
-					.setLayerIndex(layer, rasterBean.getzIndex());
-		}
-	}
-
-	@Override
-	public void visitForHide(GPRasterBean rasterBean) {
-		// TODO Auto-generated method stub
-		WMS layer = (WMS) getLayer(rasterBean);
-		if (layer != null)
-			layer.setIsVisible(false);
-	}
-
-	@Override
-	public void visitForRemove(GPRasterBean rasterBean) {
-		// TODO Auto-generated method stub
-
-	}
 }

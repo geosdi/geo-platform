@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.store;
 
+import org.geosdi.geoplatform.gui.client.widget.legend.GPLegendWidget;
+import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
 import org.geosdi.geoplatform.gui.impl.map.store.ILayersStore;
@@ -53,11 +55,14 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> implements
 		ILayersStore<Layer> {
 
 	private LayerBuilder layerBuilder;
+	private GPLegendWidget legendWidget;
 
 	public LayersStore(GeoPlatformMap theMapWidget) {
 		super(theMapWidget);
 		// TODO Auto-generated constructor stub
 		this.layerBuilder = new LayerBuilder(theMapWidget);
+		this.legendWidget = new GPLegendWidget();
+		GPScaleWidget.display("Scale");
 	}
 
 	@Override
@@ -124,6 +129,9 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> implements
 			this.mapWidget.getMap()
 					.setLayerIndex(layer, rasterBean.getzIndex());
 		}
+		
+		this.legendWidget.addLegend(rasterBean);
+		this.legendWidget.show();
 	}
 
 	@Override
@@ -132,6 +140,7 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> implements
 		WMS layer = (WMS) getLayer(rasterBean);
 		if (layer != null)
 			layer.setIsVisible(false);
+		this.legendWidget.hideLegenItem(rasterBean);
 	}
 
 	@Override

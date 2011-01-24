@@ -4,7 +4,7 @@
  *  http://geo-plartform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2010 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -37,9 +37,7 @@ package org.geosdi.geoplatform.core.dao.impl;
 
 import java.util.List;
 
-import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
-import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.springframework.transaction.annotation.Transactional;
 

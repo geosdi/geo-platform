@@ -4,7 +4,7 @@
  *  http://geo-plartform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2010 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.action;
 import org.geosdi.geoplatform.gui.action.button.GeoPlatformToggleButton;
 
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 
 /**
  * @author giuseppe

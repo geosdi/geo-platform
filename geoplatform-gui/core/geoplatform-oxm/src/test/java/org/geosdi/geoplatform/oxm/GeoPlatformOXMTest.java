@@ -4,7 +4,7 @@
  *  http://geo-plartform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2010 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -44,6 +44,7 @@ import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
  * @author giuseppe
  * 
  */
+@SuppressWarnings("deprecation")
 public class GeoPlatformOXMTest extends
 		AbstractDependencyInjectionSpringContextTests {
 
@@ -58,7 +59,6 @@ public class GeoPlatformOXMTest extends
 
 	private ClassToXMLMap message;
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void onSetUp() throws Exception {
 		// TODO Auto-generated method stub

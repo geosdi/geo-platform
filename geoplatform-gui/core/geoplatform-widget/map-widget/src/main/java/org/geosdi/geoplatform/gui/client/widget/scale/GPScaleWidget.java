@@ -121,33 +121,30 @@ public class GPScaleWidget extends ContentPanel {
 
 		setTitle();
 		setText();
-		List<String> scale = new ArrayList<String>();
+
+		List<Scale> scales = new ArrayList<Scale>();
 		
-		scale.add("1:1000");
-		scale.add("1:10000");
-		scale.add("1:100000");
-		scale.add("1:1000000");
-		scale.add("1:10000000");
-		scale.add("1:100000000");
-		
-		Scale scale1 = new Scale();
-		scale1.setScaleValue(scale);
-		
+		scales.add(new Scale("1:1000"));
+		scales.add(new Scale("1:10000"));
+		scales.add(new Scale("1:100000"));
+		scales.add(new Scale("1:1000000"));
+		scales.add(new Scale("1:10000000"));
+		scales.add(new Scale("1:100000000"));
+		scales.add(new Scale("1:1000000000"));
+
 		ListStore<Scale> scaleStore = new ListStore<Scale>();
-		scaleStore.add(scale1);
-		
-		
+		scaleStore.add(scales);
 		
 		ComboBox<Scale> comboScale = new ComboBox<Scale>();
-		comboScale.setEmptyText("Select a scale...");  
-		comboScale.setDisplayField("scaleValue");  
-		comboScale.setWidth(150);  
-		comboScale.setStore(scaleStore);  
-		comboScale.setTypeAhead(true);  
+		comboScale.setEmptyText("Select a scale...");
+		comboScale.setDisplayField("scale");
+		comboScale.setWidth(150);
+		comboScale.setStore(scaleStore);
+		comboScale.setTypeAhead(true);
 		comboScale.setTriggerAction(TriggerAction.ALL);
-		
+
 		add(comboScale);
-		
+
 		level = firstAvail();
 		slots.add(level, this);
 

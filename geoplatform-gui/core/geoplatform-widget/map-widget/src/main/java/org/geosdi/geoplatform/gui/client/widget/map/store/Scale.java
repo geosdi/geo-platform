@@ -35,35 +35,40 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.store;
 
-import java.util.List;
-
-import com.extjs.gxt.ui.client.data.BeanModel;
+import com.extjs.gxt.ui.client.data.BaseModelData;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
  *
  */
-public class Scale extends BeanModel {
-	
+public class Scale extends BaseModelData {
+
 	/**
 	 * serialVersionUID
 	 */
-	private static final long serialVersionUID = 746949145562386020L;
+	private static final long serialVersionUID = -1544804885955575360L;
+
+	/**
+	 * Default Constructor
+	 */
+	public Scale() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param scale
+	 */
+	public Scale(String scale) {
+		setScale(scale);
+	}
+
+	private void setScale(String scale) {
+		set("scale", scale);
+		
+	}
+
 	
-	private List<String> scaleValue;
-
-	/**
-	 * @return the scaleValue
-	 */
-	public List<String> getScaleValue() {
-		return scaleValue;
-	}
-
-	/**
-	 * @param scaleValue the scaleValue to set
-	 */
-	public void setScaleValue(List<String> scaleValue) {
-		this.scaleValue = scaleValue;
-	}
+	
 
 }

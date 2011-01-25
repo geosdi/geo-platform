@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.GeocodingMarker;
+import org.geosdi.geoplatform.gui.client.widget.map.store.Scale;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
@@ -99,6 +100,21 @@ public class MapView extends GeoPlatformView {
 		if (event.getType() == GeoPlatformEvents.RemoveMarker)
 			onRemoveMarker();
 
+		if (event.getType() == GeoPlatformEvents.SCALE_REQUEST_CHANGE)
+			onScaleRequestChange(event);
+
+	}
+
+	/**
+	 * Change Scale on the map
+	 */
+	private void onScaleRequestChange(AppEvent event) {
+		Scale scale = (Scale) event.getData();
+		String scaleString = scale.get("scale");
+		String scaleEffective = scaleString
+				.substring(scaleString.indexOf(":") + 1);
+		Float floatScale = Float.parseFloat(scaleEffective);
+		this.mapLayout.getMap().zoomToScale(floatScale.floatValue(), false);
 	}
 
 	/**

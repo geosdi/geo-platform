@@ -64,8 +64,7 @@ public class Scale extends BaseModelData {
 	}
 
 	private void setScale(String scale) {
-		set("scale", scale);
-		
+		set("scale", scale);	
 	}
 
 	

@@ -50,4 +50,6 @@ public class GeoPlatformEvents {
 	public static final EventType RemoveMarker = new EventType();
 	
 	public static final EventType REVERSE_GEOCODING_REQUEST = new EventType();
+	
+	public static final EventType SCALE_REQUEST_CHANGE = new EventType();
 }

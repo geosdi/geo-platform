@@ -40,9 +40,14 @@ import java.util.List;
 import java.util.Stack;
 
 import org.geosdi.geoplatform.gui.client.widget.map.store.Scale;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 import com.extjs.gxt.ui.client.GXT;
 import com.extjs.gxt.ui.client.core.XDOM;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.FieldEvent;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.util.Format;
 import com.extjs.gxt.ui.client.util.Point;
@@ -151,6 +156,14 @@ public class GPScaleWidget extends ContentPanel {
 		Point p = position();
 		el().setLeftTop(p.x, p.y);
 		setSize(config.width, config.height);
+		
+		comboScale.addListener(Events.Select, new Listener<FieldEvent>() {
+            public void handleEvent(FieldEvent fe) {
+                ComboBox cb = (ComboBox) fe.getComponent();
+                Scale s = (Scale) cb.getValue();
+                Dispatcher.forwardEvent(GeoPlatformEvents.SCALE_REQUEST_CHANGE, s);
+            }
+        });
 
 	}
 

@@ -65,12 +65,12 @@ public class GPScaleConfig {
 	public Params params;
 
 	/**
-	 * The info width (defaults to 225).
+	 * The info width (defaults to 180).
 	 */
 	public int width = 180;
 
 	/**
-	 * The info height (defaults to 75).
+	 * The info height (defaults to 55).
 	 */
 	public int height = 55;
 

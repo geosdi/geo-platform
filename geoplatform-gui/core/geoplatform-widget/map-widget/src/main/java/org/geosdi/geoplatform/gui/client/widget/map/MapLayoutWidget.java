@@ -52,6 +52,7 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature;
 import org.gwtopenmaps.openlayers.client.control.LayerSwitcher;
+import org.gwtopenmaps.openlayers.client.control.ScaleLine;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.GMapType;
 import org.gwtopenmaps.openlayers.client.layer.Google;
@@ -107,6 +108,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		mapWidget = new MapWidget("100%", "100%", defaultMapOptions);
 		this.map = mapWidget.getMap();
 		this.map.addControl(new LayerSwitcher());
+		this.map.addControl(new ScaleLine());
 
 		this.createOSM();
 		this.createBaseGoogleLayer();

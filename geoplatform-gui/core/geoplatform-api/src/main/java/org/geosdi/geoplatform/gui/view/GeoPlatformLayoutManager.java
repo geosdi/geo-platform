@@ -35,8 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.view;
 
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ScaleChangeEvent;
+
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.Style.Scroll;
+import com.extjs.gxt.ui.client.core.XDOM;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.WidgetListener;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Viewport;
@@ -132,6 +138,17 @@ public abstract class GeoPlatformLayoutManager {
 		center.setHeaderVisible(false);
 		BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
 		data.setMargins(new Margins(5, 5, 5, 5));
+
+		center.setLayoutOnChange(true);
+
+		center.addWidgetListener(new WidgetListener() {
+
+			public void widgetResized(ComponentEvent ce) {
+				MapHandlerManager.fireEvent(new ScaleChangeEvent(XDOM
+						.getViewportSize()));
+			}
+
+		});
 
 		viewport.add(center, data);
 	}

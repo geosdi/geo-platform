@@ -40,6 +40,8 @@ import java.util.List;
 import java.util.Stack;
 
 import org.geosdi.geoplatform.gui.client.widget.map.store.Scale;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ScaleChangeHandler;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 import com.extjs.gxt.ui.client.GXT;
@@ -63,12 +65,14 @@ import com.google.gwt.user.client.ui.RootPanel;
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
  * 
  */
-public class GPScaleWidget extends ContentPanel {
+public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
 
 	private static Stack<GPScaleWidget> infoStack = new Stack<GPScaleWidget>();
 	private static ArrayList<GPScaleWidget> slots = new ArrayList<GPScaleWidget>();
 	protected GPScaleConfig config;
 	protected int level;
+
+	private Size size;
 
 	/**
 	 * Creates a new GPScaleWidget instance.
@@ -78,6 +82,8 @@ public class GPScaleWidget extends ContentPanel {
 		frame = true;
 		setShadow(true);
 		setLayoutOnChange(true);
+
+		MapHandlerManager.addHandler(ScaleChangeHandler.TYPE, this);
 	}
 
 	@Override
@@ -128,7 +134,7 @@ public class GPScaleWidget extends ContentPanel {
 		setText();
 
 		List<Scale> scales = new ArrayList<Scale>();
-		
+
 		scales.add(new Scale("1:1000"));
 		scales.add(new Scale("1:10000"));
 		scales.add(new Scale("1:100000"));
@@ -139,7 +145,7 @@ public class GPScaleWidget extends ContentPanel {
 
 		ListStore<Scale> scaleStore = new ListStore<Scale>();
 		scaleStore.add(scales);
-		
+
 		ComboBox<Scale> comboScale = new ComboBox<Scale>();
 		comboScale.setEmptyText("Select a scale...");
 		comboScale.setDisplayField("scale");
@@ -156,21 +162,23 @@ public class GPScaleWidget extends ContentPanel {
 		Point p = position();
 		el().setLeftTop(p.x, p.y);
 		setSize(config.width, config.height);
-		
+
 		comboScale.addListener(Events.Select, new Listener<FieldEvent>() {
-            public void handleEvent(FieldEvent fe) {
-                ComboBox cb = (ComboBox) fe.getComponent();
-                Scale s = (Scale) cb.getValue();
-                Dispatcher.forwardEvent(GeoPlatformEvents.SCALE_REQUEST_CHANGE, s);
-            }
-        });
+			public void handleEvent(FieldEvent fe) {
+				ComboBox cb = (ComboBox) fe.getComponent();
+				Scale s = (Scale) cb.getValue();
+				Dispatcher.forwardEvent(GeoPlatformEvents.SCALE_REQUEST_CHANGE,
+						s);
+			}
+		});
 
 	}
 
 	protected Point position() {
-		Size s = XDOM.getViewportSize();
-		int left = s.width - config.width - 10 + XDOM.getBodyScrollLeft();
-		int top = s.height - config.height - 10
+		this.size = XDOM.getViewportSize();
+		int left = this.size.width - config.width - 10
+				+ XDOM.getBodyScrollLeft();
+		int top = this.size.height - config.height - 10
 				- (level * (config.height + 10)) + XDOM.getBodyScrollTop();
 		return new Point(left, top);
 	}
@@ -205,6 +213,28 @@ public class GPScaleWidget extends ContentPanel {
 			removeAll();
 			addText(config.text);
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.client.widget.scale.event.ScaleChangeHandler
+	 * #onPositionChange(com.extjs.gxt.ui.client.util.Size)
+	 */
+	@Override
+	public void onPositionChange(Size s) {
+		// TODO Auto-generated method stub
+		if (this.size != s) {
+			this.size = s;
+			int left = this.size.width - config.width - 10
+					+ XDOM.getBodyScrollLeft();
+			int top = this.size.height - config.height - 10
+					- (level * (config.height + 10)) + XDOM.getBodyScrollTop();
+			Point p = new Point(left, top);
+			el().setLeftTop(p.x, p.y);
+		}
+
 	}
 
 }

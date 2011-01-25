@@ -29,9 +29,9 @@
 		</property>
 	</bean>
 
-	<bean name="deAgostini100000"
+    <bean name="BlueMarble"
 		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
-		<property name="layerName" value="StratiDiBase:DeAgostini100000" />
+		<property name="layerName" value="StratiDiBase:BlueMarble" />
 		<property name="styles">
 			<list>
 				<value>raster</value>
@@ -42,19 +42,42 @@
 		<property name="bbox">
 			<bean
 				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
-				<property name="lowerLeftX" value="6.351" />
-				<property name="lowerLeftY" value="34.886" />
-				<property name="upperRightX" value="19.404" />
-				<property name="upperRightY" value="47.403" />
+				<property name="lowerLeftX" value="-180" />
+				<property name="lowerLeftY" value="-90" />
+				<property name="upperRightX" value="180" />
+				<property name="upperRightY" value="90" />
+			</bean>
+		</property>
+		<property name="layerType" value="RASTER" />
+		<property name="zIndex" value="12" />
+	</bean>
+	
+	<bean name="LandsatItalia"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+		<property name="layerName" value="StratiDiBase:LandsatItalia" />
+		<property name="styles">
+			<list>
+				<value>raster</value>
+			</list>
+		</property>
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="6.104" />
+				<property name="lowerLeftY" value="35.546" />
+				<property name="upperRightX" value="18.846" />
+				<property name="upperRightY" value="47.186" />
 			</bean>
 		</property>
 		<property name="layerType" value="RASTER" />
 		<property name="zIndex" value="11" />
 	</bean>
 	
-	<bean name="ctp_Trento"
+	<bean name="ctr_lazio_o"
 		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
-		<property name="layerName" value="StratiDiBase:ctp Trento" />
+		<property name="layerName" value="StratiDiBase:ctr_lazio_o" />
 		<property name="styles">
 			<list>
 				<value>raster</value>
@@ -65,10 +88,10 @@
 		<property name="bbox">
 			<bean
 				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
-				<property name="lowerLeftX" value="10.406" />
-				<property name="lowerLeftY" value="45.64" />
-				<property name="upperRightX" value="11.973" />
-				<property name="upperRightY" value="46.568" />
+				<property name="lowerLeftX" value="11.413" />
+				<property name="lowerLeftY" value="40.766" />
+				<property name="upperRightX" value="14.083" />
+				<property name="upperRightY" value="42.851" />
 			</bean>
 		</property>
 		<property name="layerType" value="RASTER" />

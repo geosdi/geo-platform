@@ -50,47 +50,48 @@ public class GPLegendWidget extends Window {
 
 	private static final String GET_LEGEND_REQUEST = "?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=";
 
+	private ContentPanel legendsStore;
+
 	/**
 	 * 
 	 */
 	public GPLegendWidget() {
-
-		setMaximizable(true);
+		setMaximizable(false);
+		setCollapsible(true);
 		setHeading("Legend Window");
 		setHeight(300);
 		setWidth(200);
 		setScrollMode(Scroll.AUTOY);
+
+		this.legendsStore = new ContentPanel();
+		this.legendsStore.setHeaderVisible(false);
+
+		super.add(this.legendsStore);
 	}
 
 	public void addLegend(GPLayerBean layerBean) {
-		if (getItemByItemId(layerBean.getLabel()) == null) {
-			ContentPanel cp = new ContentPanel();
-			cp.setHeading(layerBean.getLabel());
-			cp.setId(layerBean.getLabel());
-			Image image = new Image(layerBean.getDataSource()
-					+ GET_LEGEND_REQUEST + layerBean.getLabel());
-			System.out.println(image.getUrl().toString());
-			cp.add(image);
-			add(cp);
-			repaint();
-		} else {
-			System.out.println("getItemByItemId(layerBean.getLabel()) != null");
-			ContentPanel cpImage  = (ContentPanel) getItemByItemId(layerBean.getLabel());
-			cpImage.setVisible(true);
-			repaint();
+		ContentPanel cp = new ContentPanel();
+		cp.setHeading(layerBean.getLabel());
+		cp.setId(layerBean.getLabel());
+		Image image = new Image(layerBean.getDataSource() + GET_LEGEND_REQUEST
+				+ layerBean.getLabel());
+		cp.add(image);
+		this.legendsStore.add(cp);
+
+		if (!isVisible()) {
+			super.show();
 		}
-		repaint();
-	}
-	
-	public void hideLegenItem(GPLayerBean layerBean){
-		if(getItemByItemId(layerBean.getLabel()) != null){
-			System.out.println("layerBean.getLabel()) != null");
-			ContentPanel cp  = (ContentPanel) getItemByItemId(layerBean.getLabel());
-			cp.setVisible(false);
-			repaint();
-		} 
-		repaint();
-		
+		this.legendsStore.layout();
 	}
 
+	public void hideLegenItem(GPLayerBean layerBean) {
+		if (this.legendsStore.getItemByItemId(layerBean.getLabel()) != null) {
+			this.legendsStore.remove(this.legendsStore
+					.getItemByItemId(layerBean.getLabel()));
+			this.legendsStore.layout();
+		}
+
+		if (this.legendsStore.getItemCount() == 0)
+			super.hide();
+	}
 }

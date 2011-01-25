@@ -129,9 +129,8 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> implements
 			this.mapWidget.getMap()
 					.setLayerIndex(layer, rasterBean.getzIndex());
 		}
-		
+
 		this.legendWidget.addLegend(rasterBean);
-		this.legendWidget.show();
 	}
 
 	@Override

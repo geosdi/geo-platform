@@ -90,7 +90,6 @@ public class LayerBuilder extends AbstractLayerBuilder<GPLayerBean> implements
 		WMSOptions wmsOption = new WMSOptions();
 		wmsOption.setIsBaseLayer(false);
 		wmsOption.setDisplayInLayerSwitcher(false);
-		wmsOption.setMaxExtent(bbox);
 
 		return new WMS(rasterBean.getLabel(), rasterBean.getDataSource(),
 				wmsParams, wmsOption);

@@ -23,8 +23,16 @@
 		<property name="order" value="2" />
 		<property name="layers">
 			<list>
-				<ref bean="deAgostini100000" />
+				<ref bean="BlueMarble" />
+				<ref bean="LandsatItalia" />
+				<ref bean="ASTER_DEM_Italia" />
+				<ref bean="deagostini_ita_1milione" />
+				<ref bean="deagostini_ita_750mila" />
+				<ref bean="deagostini_ita_250mila" />
+				<ref bean="ctr_liguria" />
+				<ref bean="ctr_molise" />
 				<ref bean="ctp_Trento" />
+				<ref bean="ctr_lazio_o" />
 			</list>
 		</property>
 	</bean>
@@ -49,7 +57,7 @@
 			</bean>
 		</property>
 		<property name="layerType" value="RASTER" />
-		<property name="zIndex" value="12" />
+		<property name="zIndex" value="19" />
 	</bean>
 	
 	<bean name="LandsatItalia"
@@ -69,6 +77,167 @@
 				<property name="lowerLeftY" value="35.546" />
 				<property name="upperRightX" value="18.846" />
 				<property name="upperRightY" value="47.186" />
+			</bean>
+		</property>
+		<property name="layerType" value="RASTER" />
+		<property name="zIndex" value="18" />
+	</bean>
+	
+	<bean name="ASTER_DEM_Italia"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+		<property name="layerName" value="StratiDiBase:ASTER DEM Italia" />
+		<property name="styles">
+			<list>
+				<value>SrtmItalia</value>
+			</list>
+		</property>
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="6" />
+				<property name="lowerLeftY" value="35" />
+				<property name="upperRightX" value="19" />
+				<property name="upperRightY" value="48" />
+			</bean>
+		</property>
+		<property name="layerType" value="RASTER" />
+		<property name="zIndex" value="17" />
+	</bean>
+	
+	<bean name="deagostini_ita_1milione"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+		<property name="layerName" value="StratiDiBase:deagostini_ita_1milione" />
+		<property name="styles">
+			<list>
+				<value>raster</value>
+			</list>
+		</property>
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="5.267" />
+				<property name="lowerLeftY" value="33.02" />
+				<property name="upperRightX" value="22.921" />
+				<property name="upperRightY" value="48.021" />
+			</bean>
+		</property>
+		<property name="layerType" value="RASTER" />
+		<property name="zIndex" value="16" />
+	</bean>
+	
+	<bean name="deagostini_ita_750mila"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+		<property name="layerName" value="StratiDiBase:deagostini_ita_750mila" />
+		<property name="styles">
+			<list>
+				<value>raster</value>
+			</list>
+		</property>
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="6.256" />
+				<property name="lowerLeftY" value="34.893" />
+				<property name="upperRightX" value="20.193" />
+				<property name="upperRightY" value="47.291" />
+			</bean>
+		</property>
+		<property name="layerType" value="RASTER" />
+		<property name="zIndex" value="15" />
+	</bean>
+	
+	<bean name="deagostini_ita_250mila"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+		<property name="layerName" value="StratiDiBase:deagostini_ita_250mila" />
+		<property name="styles">
+			<list>
+				<value>raster</value>
+			</list>
+		</property>
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="6.342" />
+				<property name="lowerLeftY" value="35.095" />
+				<property name="upperRightX" value="19.003" />
+				<property name="upperRightY" value="47.316" />
+			</bean>
+		</property>
+		<property name="layerType" value="RASTER" />
+		<property name="zIndex" value="14" />
+	</bean>
+	
+	<bean name="ctr_liguria"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+		<property name="layerName" value="StratiDiBase:ctr_liguria" />
+		<property name="styles">
+			<list>
+				<value>raster</value>
+			</list>
+		</property>
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="7.488" />
+				<property name="lowerLeftY" value="43.748" />
+				<property name="upperRightX" value="10.083" />
+				<property name="upperRightY" value="44.699" />
+			</bean>
+		</property>
+		<property name="layerType" value="RASTER" />
+		<property name="zIndex" value="13" />
+	</bean>
+	
+	<bean name="ctr_molise"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+		<property name="layerName" value="StratiDiBase:ctr_molise" />
+		<property name="styles">
+			<list>
+				<value>raster</value>
+			</list>
+		</property>
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="13.915" />
+				<property name="lowerLeftY" value="41.349" />
+				<property name="upperRightX" value="15.167" />
+				<property name="upperRightY" value="42.074" />
+			</bean>
+		</property>
+		<property name="layerType" value="RASTER" />
+		<property name="zIndex" value="12" />
+	</bean>
+	
+	<bean name="ctp_Trento"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+		<property name="layerName" value="StratiDiBase:ctp Trento" />
+		<property name="styles">
+			<list>
+				<value>raster</value>
+			</list>
+		</property>
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="10.406" />
+				<property name="lowerLeftY" value="45.64" />
+				<property name="upperRightX" value="11.973" />
+				<property name="upperRightY" value="46.568" />
 			</bean>
 		</property>
 		<property name="layerType" value="RASTER" />
@@ -106,6 +275,14 @@
 			<list>
 				<ref bean="it_toponimi_igm_25k" />
 				<ref bean="osm_line" />
+				<ref bean="it_aeropo" />
+				<ref bean="it_isoipse" />
+				<ref bean="it_ferrovie" />
+				<ref bean="it_bacini" />
+				<ref bean="it_litologia" />
+				<ref bean="it_geologia" />
+				<ref bean="it_limiti_provinciali" />
+				<ref bean="it_limiti_regionali" />
 			</list>
 		</property>
 	</bean>
@@ -148,4 +325,175 @@
 		<property name="zIndex" value="21" />
 	</bean>
 
+	<bean name="it_aeropo"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+		<property name="featureType" value="StratiDiBase:it_aeropo" />
+		<property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="7.362" />
+				<property name="lowerLeftY" value="35.503" />
+				<property name="upperRightX" value="18.29" />
+				<property name="upperRightY" value="46.729" />
+			</bean>
+		</property>
+		<property name="layerType" value="POINT" />
+		<property name="zIndex" value="22" />
+	</bean>
+
+	<bean name="it_isoipse"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+		<property name="featureType" value="esercitazione:it_isoipse" />
+		<property name="featureNameSpace" value="http://terex2010.geosdi.org/esercitazione" />
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="9.696" />
+				<property name="lowerLeftY" value="43.027" />
+				<property name="upperRightX" value="11.243" />
+				<property name="upperRightY" value="44.522" />
+			</bean>
+		</property>
+		<property name="layerType" value="MULTILINESTRING" />
+		<property name="zIndex" value="23" />
+	</bean>
+	
+	<bean name="it_ferrovie"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+		<property name="featureType" value="StratiDiBase:it_ferrovie" />
+		<property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="6.682" />
+				<property name="lowerLeftY" value="36.708" />
+				<property name="upperRightX" value="18.481" />
+				<property name="upperRightY" value="47.007" />
+			</bean>
+		</property>
+		<property name="layerType" value="LINESTRING" />
+		<property name="zIndex" value="24" />
+	</bean>
+	
+	<bean name="it_bacini"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+		<property name="featureType" value="StratiDiBase:it_bacini" />
+		<property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="6.634" />
+				<property name="lowerLeftY" value="36.649" />
+				<property name="upperRightX" value="18.521" />
+				<property name="upperRightY" value="47.09" />
+			</bean>
+		</property>
+		<property name="layerType" value="MULTIPOLYGON" />
+		<property name="zIndex" value="25" />
+	</bean>
+	
+	<bean name="it_litologia"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+		<property name="featureType" value="StratiDiBase:it_litologia" />
+		<property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="6.628" />
+				<property name="lowerLeftY" value="36.64" />
+				<property name="upperRightX" value="18.523" />
+				<property name="upperRightY" value="47.096" />
+			</bean>
+		</property>
+		<property name="layerType" value="MULTIPOLYGON" />
+		<property name="zIndex" value="26" />
+	</bean>
+	
+	<bean name="it_geologia"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+		<property name="featureType" value="StratiDiBase:it_geologia" />
+		<property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="6.626" />
+				<property name="lowerLeftY" value="35.86" />
+				<property name="upperRightX" value="18.52" />
+				<property name="upperRightY" value="47.091" />
+			</bean>
+		</property>
+		<property name="layerType" value="MULTIPOLYGON" />
+		<property name="zIndex" value="27" />
+	</bean>
+	
+	
+	<bean name="it_limiti_provinciali"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+		<property name="featureType" value="StratiDiBase:it_limiti_provinciali" />
+		<property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="6.627" />
+				<property name="lowerLeftY" value="35.492" />
+				<property name="upperRightX" value="18.521" />
+				<property name="upperRightY" value="47.092" />
+			</bean>
+		</property>
+		<property name="layerType" value="POLYGON" />
+		<property name="zIndex" value="28" />
+	</bean>
+	
+	<bean name="it_limiti_regionali"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+		<property name="featureType" value="StratiDiBase:it_limiti_regionali" />
+		<property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="6.627" />
+				<property name="lowerLeftY" value="35.492" />
+				<property name="upperRightX" value="18.521" />
+				<property name="upperRightY" value="47.092" />
+			</bean>
+		</property>
+		<property name="layerType" value="POLYGON" />
+		<property name="zIndex" value="28" />
+	</bean>
+	
+	<bean name="eu_eur_limiti_amministrativi_1_areas"
+		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+		<property name="featureType" value="StratiDiBase:eu_eur_limiti_amministrativi_1_areas" />
+		<property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
+		<property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
+		<property name="crs" value="EPSG:4326" />
+		<property name="bbox">
+			<bean
+				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+				<property name="lowerLeftX" value="-33.762" />
+				<property name="lowerLeftY" value="27.804" />
+				<property name="upperRightX" value="44.885" />
+				<property name="upperRightY" value="71.183" />
+			</bean>
+		</property>
+		<property name="layerType" value="POLYGON" />
+		<property name="zIndex" value="29" />
+	</bean>
 </beans>

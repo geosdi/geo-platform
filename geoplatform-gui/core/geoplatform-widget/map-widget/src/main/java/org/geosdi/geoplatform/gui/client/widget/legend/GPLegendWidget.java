@@ -69,6 +69,11 @@ public class GPLegendWidget extends Window {
 		super.add(this.legendsStore);
 	}
 
+	/**
+	 * Add Legend Item in the Legend Store
+	 * 
+	 * @param layerBean
+	 */
 	public void addLegend(GPLayerBean layerBean) {
 		ContentPanel cp = new ContentPanel();
 		cp.setHeading(layerBean.getLabel());
@@ -84,6 +89,11 @@ public class GPLegendWidget extends Window {
 		this.legendsStore.layout();
 	}
 
+	/**
+	 * Remove Legend Item from Legend Store
+	 * 
+	 * @param layerBean
+	 */
 	public void hideLegenItem(GPLayerBean layerBean) {
 		if (this.legendsStore.getItemByItemId(layerBean.getLabel()) != null) {
 			this.legendsStore.remove(this.legendsStore

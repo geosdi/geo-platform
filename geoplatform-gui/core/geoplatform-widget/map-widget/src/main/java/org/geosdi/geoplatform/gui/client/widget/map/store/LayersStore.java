@@ -116,6 +116,8 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> implements
 	@Override
 	public void visitForDisplay(GPRasterBean rasterBean) {
 		// TODO Auto-generated method stub
+		this.legendWidget.addLegend(rasterBean);
+		
 		if (containsLayer(rasterBean)) {
 			WMS layer = (WMS) this.layers.get(rasterBean);
 			layer.setIsVisible(true);
@@ -129,8 +131,6 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> implements
 			this.mapWidget.getMap()
 					.setLayerIndex(layer, rasterBean.getzIndex());
 		}
-
-		this.legendWidget.addLegend(rasterBean);
 	}
 
 	@Override

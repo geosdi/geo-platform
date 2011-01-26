@@ -98,13 +98,30 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> implements
 	@Override
 	public void visitForDisplay(GPVectorBean vectorBean) {
 		// TODO Auto-generated method stub
-		System.out.println("visitForDisplay ***************** " + vectorBean);
+		this.legendWidget.addLegend(vectorBean);
+
+		if (containsLayer(vectorBean)) {
+			WMS layer = (WMS) this.layers.get(vectorBean);
+			layer.setIsVisible(true);
+			layer.redraw();
+		} else {
+			WMS layer = (WMS) this.layerBuilder.buildLayer(vectorBean);
+
+			this.layers.put(vectorBean, layer);
+
+			this.mapWidget.getMap().addLayer(layer);
+			this.mapWidget.getMap().setLayerZIndex(layer,
+					vectorBean.getzIndex());
+		}
 	}
 
 	@Override
 	public void visitForHide(GPVectorBean vectorBean) {
 		// TODO Auto-generated method stub
-		System.out.println("visitForHide ***************** " + vectorBean);
+		WMS layer = (WMS) getLayer(vectorBean);
+		if (layer != null)
+			layer.setIsVisible(false);
+		this.legendWidget.hideLegenItem(vectorBean);
 	}
 
 	@Override
@@ -117,7 +134,7 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> implements
 	public void visitForDisplay(GPRasterBean rasterBean) {
 		// TODO Auto-generated method stub
 		this.legendWidget.addLegend(rasterBean);
-		
+
 		if (containsLayer(rasterBean)) {
 			WMS layer = (WMS) this.layers.get(rasterBean);
 			layer.setIsVisible(true);
@@ -128,8 +145,8 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> implements
 			this.layers.put(rasterBean, layer);
 
 			this.mapWidget.getMap().addLayer(layer);
-			this.mapWidget.getMap()
-					.setLayerIndex(layer, rasterBean.getzIndex());
+			this.mapWidget.getMap().setLayerZIndex(layer,
+					rasterBean.getzIndex());
 		}
 	}
 

@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.impl.map.store;
 
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 
 /**
@@ -48,6 +47,6 @@ public interface GPLayerBuilder {
 	
 	public WMS buildRaster(GPRasterBean rasterBean);
 	
-	public Vector buildVector(GPVectorBean vectorBean);
+	public WMS buildVector(GPVectorBean vectorBean);
 
 }

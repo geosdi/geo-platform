@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.Projection;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
 import org.gwtopenmaps.openlayers.client.layer.WMSParams;
@@ -103,9 +102,32 @@ public class LayerBuilder extends AbstractLayerBuilder<GPLayerBean> implements
 	 * org.geosdi.geoplatform.gui.model.GPVectorBean)
 	 */
 	@Override
-	public Vector buildVector(GPVectorBean vectorBean) {
+	public WMS buildVector(GPVectorBean vectorBean) {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		WMSParams wmsParams = new WMSParams();
+		wmsParams.setFormat("image/png");
+		wmsParams.setLayers(vectorBean.getLabel());
+		wmsParams.setStyles("");
+		wmsParams.setIsTransparent(true);
 
+		Bounds bbox = new Bounds(vectorBean.getBbox().getLowerLeftX(),
+				vectorBean.getBbox().getLowerLeftY(), vectorBean.getBbox()
+						.getUpperRightX(), vectorBean.getBbox()
+						.getUpperRightY());
+
+		bbox.transform(new Projection(vectorBean.getCrs()), new Projection(
+				mapWidget.getMap().getProjection()));
+
+		wmsParams.setMaxExtent(bbox);
+
+		WMSOptions wmsOption = new WMSOptions();
+		wmsOption.setIsBaseLayer(false);
+		wmsOption.setDisplayInLayerSwitcher(false);
+
+		String dataSource = vectorBean.getDataSource();
+
+		dataSource = dataSource.replaceAll("wfs", "wms");
+
+		return new WMS(vectorBean.getLabel(), dataSource, wmsParams, wmsOption);
+	}
 }

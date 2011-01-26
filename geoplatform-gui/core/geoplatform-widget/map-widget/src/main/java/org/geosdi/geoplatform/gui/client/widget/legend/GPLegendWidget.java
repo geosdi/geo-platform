@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.legend;
 
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
@@ -78,8 +79,13 @@ public class GPLegendWidget extends Window {
 		ContentPanel cp = new ContentPanel();
 		cp.setHeading(layerBean.getLabel());
 		cp.setId(layerBean.getLabel());
-		Image image = new Image(layerBean.getDataSource() + GET_LEGEND_REQUEST
-				+ layerBean.getLabel());
+
+		Image image = new Image(
+				layerBean instanceof GPRasterBean ? layerBean.getDataSource()
+						+ GET_LEGEND_REQUEST + layerBean.getLabel() : layerBean
+						.getDataSource().replaceAll("wfs", "wms")
+						+ GET_LEGEND_REQUEST + layerBean.getLabel());
+
 		cp.add(image);
 		this.legendsStore.add(cp);
 

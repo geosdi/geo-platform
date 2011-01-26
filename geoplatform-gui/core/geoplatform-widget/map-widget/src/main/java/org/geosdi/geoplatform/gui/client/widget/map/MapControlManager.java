@@ -85,6 +85,8 @@ public class MapControlManager {
 		vectorOption.setDisplayInLayerSwitcher(false);
 		this.vector = new Vector("GeoPlatform Vector Layer", vectorOption);
 		this.map.addLayer(vector);
+		
+		this.map.setLayerZIndex(vector, 300);
 
 		this.initControl();
 

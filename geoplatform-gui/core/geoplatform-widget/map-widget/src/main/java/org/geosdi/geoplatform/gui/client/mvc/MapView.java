@@ -143,6 +143,7 @@ public class MapView extends GeoPlatformView {
 	private void onInitMapWidget() {
 		// TODO Auto-generated method stub
 		this.addLayer(this.geocoderMarker.getMarkerLayer());
+		this.mapLayout.getMap().setLayerZIndex(this.geocoderMarker.getMarkerLayer(), 200);
 	}
 
 	/**

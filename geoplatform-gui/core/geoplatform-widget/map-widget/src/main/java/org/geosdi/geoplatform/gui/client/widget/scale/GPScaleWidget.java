@@ -101,6 +101,10 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
 	public static void display(GPScaleConfig config) {
 		pop().show(config);
 	}
+	
+	public static void remove() {
+		pop().hide();
+	}
 
 	private static GPScaleWidget pop() {
 		GPScaleWidget info = infoStack.size() > 0 ? (GPScaleWidget) infoStack

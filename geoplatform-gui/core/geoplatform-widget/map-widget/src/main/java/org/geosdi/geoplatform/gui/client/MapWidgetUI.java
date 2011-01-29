@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client;
 import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
+import org.geosdi.geoplatform.gui.client.action.toolbar.GetFeatureInfoAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomInAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomNextAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomOutAction;
@@ -109,6 +110,15 @@ public class MapWidgetUI implements EntryPoint {
 					GeoPlatformMap mapWidget) {
 				// TODO Auto-generated method stub
 				return new ZoomNextAction(mapWidget);
+			}
+		});
+		
+		ToolbarActionRegistar.put("GetFeatureInfo", new ToolbarActionCreator() {
+
+			public GeoPlatformToolbarAction createActionTool(
+					GeoPlatformMap mapWidget) {
+				// TODO Auto-generated method stub
+				return new GetFeatureInfoAction(mapWidget);
 			}
 		});
 	}

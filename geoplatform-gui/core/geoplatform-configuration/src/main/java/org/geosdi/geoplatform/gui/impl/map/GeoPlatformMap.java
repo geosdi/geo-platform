@@ -67,5 +67,9 @@ public interface GeoPlatformMap {
 	public void deactivateModifyFeature();
 	
 	public boolean isModifyFeatureEnable();
+	
+	public void activateInfo();
+	
+	public void deactivateInfo();
 
 }

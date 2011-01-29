@@ -40,5 +40,13 @@
 		<property name="enabled" value="${zoomOut.enabled}" />
 		<property name="order" value="${zoomOut.order}" />
 	</bean>
+	
+	<bean name="GetFeatureInfo"
+		class="org.geosdi.geoplatform.gui.configuration.ActionClientTool">
+		<property name="id" value="${getInfo.id}" />
+		<property name="type" value="${getInfo.type}" />
+		<property name="enabled" value="${getInfo.enabled}" />
+		<property name="order" value="${getInfo.order}" />
+	</bean>
 
 </beans>

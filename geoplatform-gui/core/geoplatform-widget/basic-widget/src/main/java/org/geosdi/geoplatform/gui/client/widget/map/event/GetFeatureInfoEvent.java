@@ -33,61 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.client.widget.map.event;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
- * @author giuseppe
+ * @author Francesco Izzi - CNR IMAA - geoSDI Group
  * 
  */
-@SuppressWarnings("deprecation")
-public interface GeoPlatformIcons extends ImageBundle {
+public class GetFeatureInfoEvent extends GwtEvent<GetFeatureInfoEventHandler> {
 
-	@Resource("zoom-in.png")
-	AbstractImagePrototype ZoomIn();
+	private boolean activate;
 
-	@Resource("zoom-out.png")
-	AbstractImagePrototype ZoomOut();
+	public GetFeatureInfoEvent(boolean activate) {
+		this.activate = activate;
+	}
 
-	@Resource("draw-feature.png")
-	AbstractImagePrototype DrawFeature();
+	public static Type<GetFeatureInfoEventHandler> TYPE = new Type<GetFeatureInfoEventHandler>();
 
-	@Resource("rotate.png")
-	AbstractImagePrototype Rotate();
-	
-	@Resource("drag.png")
-	AbstractImagePrototype Drag();
-	
-	@Resource("resize.png")
-	AbstractImagePrototype Resize();
-	
-	@Resource("shape.png")
-	AbstractImagePrototype Shape();
+	@Override
+	public Type<GetFeatureInfoEventHandler> getAssociatedType() {
+		return TYPE;
+	}
 
-	@Resource("gp-icon-16x16.png")
-	AbstractImagePrototype geoPortalInfo();
-	
-	@Resource("draw-point.png")
-	AbstractImagePrototype DrawPointFeature();
-	
-	@Resource("draw-line.png")
-	AbstractImagePrototype DrawLineFeature();
-	
-	@Resource("eraser_minus.png")
-	AbstractImagePrototype DeleteFeature();
-	
-	@Resource("clear-map.png")
-	AbstractImagePrototype ClearMap();
-	
-	@Resource("zoom-last.png")
-	AbstractImagePrototype ZoomPrevious();
-	
-	@Resource("zoom-next.png")
-	AbstractImagePrototype ZoomNext();
-	
-	@Resource("information.png")
-	AbstractImagePrototype GetFeatureInfo();
+	@Override
+	protected void dispatch(GetFeatureInfoEventHandler handler) {
+		if (activate)
+			handler.register();
+		else
+			handler.unregister();
+
+	}
 
 }

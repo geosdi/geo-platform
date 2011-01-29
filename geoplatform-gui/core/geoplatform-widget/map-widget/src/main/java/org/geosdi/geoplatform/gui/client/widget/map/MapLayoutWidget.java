@@ -53,6 +53,9 @@ import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature;
 import org.gwtopenmaps.openlayers.client.control.LayerSwitcher;
 import org.gwtopenmaps.openlayers.client.control.ScaleLine;
+import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfo;
+import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfoOptions;
+import org.gwtopenmaps.openlayers.client.event.GetFeatureInfoListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.GMapType;
 import org.gwtopenmaps.openlayers.client.layer.Google;
@@ -60,6 +63,10 @@ import org.gwtopenmaps.openlayers.client.layer.GoogleOptions;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.OSM;
 import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
+
+import com.extjs.gxt.ui.client.Style.Scroll;
+import com.extjs.gxt.ui.client.widget.Window;
+import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 
 /**
  * @author giuseppe
@@ -73,7 +80,8 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	private Map map;
 	private Layer layer;
 	private Layer osm;
-	
+	private WMSGetFeatureInfo info;
+
 	private MapModel mapModel;
 
 	private ButtonBar buttonBar;
@@ -88,6 +96,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	}
 
 	private void createMapOption() {
+
 		this.defaultMapOptions = new MapOptions();
 
 		this.defaultMapOptions.setNumZoomLevels(18);
@@ -109,11 +118,52 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		this.map = mapWidget.getMap();
 		this.map.addControl(new LayerSwitcher());
 		this.map.addControl(new ScaleLine());
+		this.addFeatureInfoControl();
 
 		this.createOSM();
 		this.createBaseGoogleLayer();
 
 		this.mapControl = new MapControlManager(this.map);
+	}
+
+	private WMSGetFeatureInfo addFeatureInfoControl() {
+
+		WMSGetFeatureInfoOptions options = new WMSGetFeatureInfoOptions();
+		options.setURL("http://dpc.geosdi.org/geoserver/wms");
+		options.setTitle("Query visible layers");
+		options.setQueryVisible(true);
+
+		info = new WMSGetFeatureInfo(options);
+		info.addGetFeatureListener(new GetFeatureInfoListener() {
+
+			public void onGetFeatureInfo(GetFeatureInfoEvent eo) {
+				final Window wi = new Window();
+				wi.setClosable(true);
+				wi.setScrollMode(Scroll.AUTO);
+				wi.setHeight(200);
+				wi.setWidth(400);
+				wi.setResizable(true);
+				wi.setLayout(new FlowLayout());
+				wi.setPlain(true);
+				wi.setMaximizable(false);
+				wi.setHeading("Get Feature Info");
+				wi.addText(eo.getText());
+				wi.show();
+			}
+
+		});
+		this.map.addControl(info);
+		
+		return info;
+
+	}
+
+	public void activateInfo() {
+		info.activate();
+	}
+	
+	public void deactivateInfo() {
+		info.deactivate();
 	}
 
 	private void createOSM() {

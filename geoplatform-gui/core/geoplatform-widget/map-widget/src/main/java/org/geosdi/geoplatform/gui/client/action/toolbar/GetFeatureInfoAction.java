@@ -33,61 +33,38 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 
 /**
  * @author giuseppe
  * 
  */
-@SuppressWarnings("deprecation")
-public interface GeoPlatformIcons extends ImageBundle {
+public class GetFeatureInfoAction extends ToolbarMapAction {
 
-	@Resource("zoom-in.png")
-	AbstractImagePrototype ZoomIn();
+	private GeoPlatformMap mapWidget;
 
-	@Resource("zoom-out.png")
-	AbstractImagePrototype ZoomOut();
 
-	@Resource("draw-feature.png")
-	AbstractImagePrototype DrawFeature();
+	public GetFeatureInfoAction(GeoPlatformMap mapWidget) {
+		super("GetFeatureInfo", Resources.ICONS.GetFeatureInfo());
 
-	@Resource("rotate.png")
-	AbstractImagePrototype Rotate();
-	
-	@Resource("drag.png")
-	AbstractImagePrototype Drag();
-	
-	@Resource("resize.png")
-	AbstractImagePrototype Resize();
-	
-	@Resource("shape.png")
-	AbstractImagePrototype Shape();
+		this.mapWidget = mapWidget;
+	}
 
-	@Resource("gp-icon-16x16.png")
-	AbstractImagePrototype geoPortalInfo();
-	
-	@Resource("draw-point.png")
-	AbstractImagePrototype DrawPointFeature();
-	
-	@Resource("draw-line.png")
-	AbstractImagePrototype DrawLineFeature();
-	
-	@Resource("eraser_minus.png")
-	AbstractImagePrototype DeleteFeature();
-	
-	@Resource("clear-map.png")
-	AbstractImagePrototype ClearMap();
-	
-	@Resource("zoom-last.png")
-	AbstractImagePrototype ZoomPrevious();
-	
-	@Resource("zoom-next.png")
-	AbstractImagePrototype ZoomNext();
-	
-	@Resource("information.png")
-	AbstractImagePrototype GetFeatureInfo();
-
+	@Override
+	public void componentSelected(ButtonEvent ce) {
+		ToggleButton button = (ToggleButton) ce.getSource();
+		
+		if (button.isPressed()) {
+			mapWidget.getButtonBar().setPressedButton(button);
+			this.mapWidget.activateInfo();
+		} else
+			this.mapWidget.deactivateInfo();
+	}
 }

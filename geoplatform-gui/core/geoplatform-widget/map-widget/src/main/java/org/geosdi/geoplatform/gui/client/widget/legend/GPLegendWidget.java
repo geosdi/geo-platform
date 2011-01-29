@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 import com.extjs.gxt.ui.client.Style.Scroll;
+import com.extjs.gxt.ui.client.core.XDOM;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.google.gwt.user.client.ui.Image;
@@ -63,6 +64,7 @@ public class GPLegendWidget extends Window {
 		setHeight(300);
 		setWidth(200);
 		setScrollMode(Scroll.AUTOY);
+		setPosition(20, 450);
 
 		this.legendsStore = new ContentPanel();
 		this.legendsStore.setHeaderVisible(false);

@@ -35,21 +35,43 @@
  */
 package org.geosdi.geoplatform.gui.configuration.map.puregwt.event;
 
-import com.extjs.gxt.ui.client.util.Size;
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface ScaleChangeHandler extends EventHandler {
+public class ScaleVisibleEvent extends GwtEvent<ScaleChangeHandler> {
 
-	Type<ScaleChangeHandler> TYPE = new Type<ScaleChangeHandler>();
+	private boolean activate;
 
-	public void onPositionChange(Size s);
-	
-	public void activationScaleBar(boolean activate);
+	public ScaleVisibleEvent(boolean activate) {
+		this.activate = activate;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+	 */
+	@Override
+	public Type<ScaleChangeHandler> getAssociatedType() {
+		// TODO Auto-generated method stub
+		return ScaleChangeHandler.TYPE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+	 * .EventHandler)
+	 */
+	@Override
+	protected void dispatch(ScaleChangeHandler handler) {
+		// TODO Auto-generated method stub
+		handler.activationScaleBar(activate);
+	}
 
 }

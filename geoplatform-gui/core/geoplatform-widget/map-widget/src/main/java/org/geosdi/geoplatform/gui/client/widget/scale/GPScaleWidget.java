@@ -80,7 +80,7 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
 	public GPScaleWidget() {
 		baseStyle = "x-info";
 		frame = true;
-		setShadow(true);
+		setShadow(false);
 		setLayoutOnChange(true);
 
 		MapHandlerManager.addHandler(ScaleChangeHandler.TYPE, this);
@@ -101,8 +101,10 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
 	public static void display(GPScaleConfig config) {
 		pop().show(config);
 	}
-	
+
 	public static void remove() {
+		System.out.println("Hide GPScaleBar");
+
 		pop().hide();
 	}
 
@@ -237,6 +239,17 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
 					- (level * (config.height + 10)) + XDOM.getBodyScrollTop();
 			Point p = new Point(left, top);
 			el().setLeftTop(p.x, p.y);
+		}
+
+	}
+
+	@Override
+	public void activationScaleBar(boolean activate) {
+		System.out.println("ACTIVATE:" + activate);
+		if (activate) {
+			show();
+		} else {
+			hide();
 		}
 
 	}

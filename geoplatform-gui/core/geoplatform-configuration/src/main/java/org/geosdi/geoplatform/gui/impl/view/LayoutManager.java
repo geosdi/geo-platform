@@ -35,8 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.impl.view;
 
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ScaleVisibleEvent;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.view.GeoPlatformLayoutManager;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Component;
@@ -71,6 +75,9 @@ public class LayoutManager extends GeoPlatformLayoutManager {
 		get().center.removeAll();
 		get().center.add(w);
 		get().center.layout();
+		MapHandlerManager.fireEvent(new ScaleVisibleEvent(
+				w instanceof MapWidget ? true : false));
+
 	}
 
 	/**

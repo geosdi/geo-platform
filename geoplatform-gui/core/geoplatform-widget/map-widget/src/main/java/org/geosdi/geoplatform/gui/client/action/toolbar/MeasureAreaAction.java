@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.action.MapToggleAction;
 import org.geosdi.geoplatform.gui.client.Resources;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
@@ -46,25 +46,45 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
  * 
  */
-public class MeasureAreaAction extends ToolbarMapAction {
-
-	private GeoPlatformMap mapWidget;
+public class MeasureAreaAction extends MapToggleAction {
 
 	public MeasureAreaAction(GeoPlatformMap mapWidget) {
-		super("MeasureArea", Resources.ICONS.MeasureArea());
-
-		this.mapWidget = mapWidget;
+		super("MeasureArea", Resources.ICONS.MeasureArea(), mapWidget);
 	}
 
 	@Override
 	public void componentSelected(ButtonEvent ce) {
 		ToggleButton button = (ToggleButton) ce.getSource();
+
+		super.changeButtonState();
+		
+		this.deactivateAllMapControl();
+
 		if (button.isPressed()) {
 			mapWidget.getButtonBar().setPressedButton(button);
 			this.mapWidget.activateMeasureArea();
 		} else
 			this.mapWidget.deactivateMeasureArea();
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
+	 */
+	@Override
+	public void disableControl() {
+		// TODO Auto-generated method stub
+		this.mapWidget.deactivateMeasureArea();
+	}
+	
+	private void deactivateAllMapControl() {
+		if (mapWidget.isFeatureOperationEnable())
+			mapWidget.deactivateFeatureOperation();
+
+		if (mapWidget.isModifyFeatureEnable())
+			mapWidget.deactivateModifyFeature();
 	}
 
 }

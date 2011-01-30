@@ -79,4 +79,10 @@ public interface GeoPlatformMap {
 	public void activateMeasureArea();
 
 	public void deactivateMeasureArea();
+
+	public boolean isInfoActive();
+	
+	public boolean isMeasureActive();
+	
+	public boolean isMeasureAreaActive();
 }

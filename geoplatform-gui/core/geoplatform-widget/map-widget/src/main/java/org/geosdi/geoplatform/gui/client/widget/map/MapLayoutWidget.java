@@ -40,7 +40,6 @@ import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
-import org.geosdi.geoplatform.gui.client.widget.measure.GPMeasureWidget;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -63,6 +62,7 @@ import org.gwtopenmaps.openlayers.client.event.MeasureEvent;
 import org.gwtopenmaps.openlayers.client.event.MeasureListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.handler.PathHandler;
+import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
 import org.gwtopenmaps.openlayers.client.layer.GMapType;
 import org.gwtopenmaps.openlayers.client.layer.Google;
 import org.gwtopenmaps.openlayers.client.layer.GoogleOptions;
@@ -98,6 +98,10 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
 	private Measure measure;
 	private Measure measureArea;
+	
+	private boolean infoActive;
+	private boolean measureActive;
+	private boolean measureAreaActive;
 
 	public MapLayoutWidget() {
 		super();
@@ -143,6 +147,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
 		MeasureOptions measOpts = new MeasureOptions();
 		measOpts.setPersist(true);
+		measOpts.setGeodesic(true);
 
 		this.measure = new Measure(new PathHandler(), measOpts);
 
@@ -162,8 +167,9 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
 		MeasureOptions measOpts = new MeasureOptions();
 		measOpts.setPersist(true);
+		measOpts.setGeodesic(true);
 
-		this.measureArea = new Measure(new PathHandler(), measOpts);
+		this.measureArea = new Measure(new PolygonHandler(), measOpts);
 
 		this.map.addControl(measureArea);
 
@@ -211,26 +217,32 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
 	public void activateInfo() {
 		info.activate();
+		this.infoActive = true;
 	}
 
 	public void deactivateInfo() {
 		info.deactivate();
+		this.infoActive = false;
 	}
 	
 	public void activateMeasure() {
 		measure.activate();
+		this.measureActive = true;
 	}
 
 	public void deactivateMeasure() {
 		measure.deactivate();
+		this.measureActive = false;
 	}
 	
 	public void activateMeasureArea() {
 		measureArea.activate();
+		this.measureAreaActive = true;
 	}
 
 	public void deactivateMeasureArea() {
 		measureArea.deactivate();
+		this.measureAreaActive = false;
 	}
 	
 
@@ -444,6 +456,48 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	 */
 	public void clearMap() {
 		this.mapControl.eraseFeatures();
+	}
+
+	/**
+	 * @return the measure
+	 */
+	public Measure getMeasure() {
+		return measure;
+	}
+
+	/**
+	 * @return the measureArea
+	 */
+	public Measure getMeasureArea() {
+		return measureArea;
+	}
+
+	/**
+	 * @return the infoActive
+	 */
+	public boolean isInfoActive() {
+		return infoActive;
+	}
+
+	/**
+	 * @return the measureActive
+	 */
+	public boolean isMeasureActive() {
+		return measureActive;
+	}
+
+	/**
+	 * @return the measureAreaActive
+	 */
+	public boolean isMeasureAreaActive() {
+		return measureAreaActive;
+	}
+
+	/**
+	 * @return the info
+	 */
+	public WMSGetFeatureInfo getInfo() {
+		return info;
 	}
 
 }

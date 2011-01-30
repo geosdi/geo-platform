@@ -98,5 +98,14 @@ public class ReverseGeocodingAction extends MapToggleAction {
 
 		if (mapWidget.isModifyFeatureEnable())
 			mapWidget.deactivateModifyFeature();
+		
+		if(mapWidget.isInfoActive())
+			mapWidget.deactivateInfo();
+		
+		if(mapWidget.isMeasureActive())
+			mapWidget.deactivateMeasure();
+		
+		if(mapWidget.isMeasureAreaActive())
+			mapWidget.deactivateMeasureArea();
 	}
 }

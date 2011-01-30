@@ -33,67 +33,55 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.client.widget.measure;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.util.Params;
 
 /**
- * @author giuseppe
+ * @author Francesco Izzi - CNR IMAA - geoSDI Group
  * 
  */
-@SuppressWarnings("deprecation")
-public interface GeoPlatformIcons extends ImageBundle {
+public class GPMeasureConfig {
 
-	@Resource("zoom-in.png")
-	AbstractImagePrototype ZoomIn();
+	/**
+	 * The info title (defaults to null).
+	 */
+	public String title;
 
-	@Resource("zoom-out.png")
-	AbstractImagePrototype ZoomOut();
+	/**
+	 * The info text (defaults to null).
+	 */
+	public String text;
 
-	@Resource("draw-feature.png")
-	AbstractImagePrototype DrawFeature();
+	/**
+	 * The index or key based substitution values.
+	 */
+	public Params params;
 
-	@Resource("rotate.png")
-	AbstractImagePrototype Rotate();
-	
-	@Resource("drag.png")
-	AbstractImagePrototype Drag();
-	
-	@Resource("resize.png")
-	AbstractImagePrototype Resize();
-	
-	@Resource("shape.png")
-	AbstractImagePrototype Shape();
+	/**
+	 * The info width (defaults to 180).
+	 */
+	public int width = 180;
 
-	@Resource("gp-icon-16x16.png")
-	AbstractImagePrototype geoPortalInfo();
-	
-	@Resource("draw-point.png")
-	AbstractImagePrototype DrawPointFeature();
-	
-	@Resource("draw-line.png")
-	AbstractImagePrototype DrawLineFeature();
-	
-	@Resource("eraser_minus.png")
-	AbstractImagePrototype DeleteFeature();
-	
-	@Resource("clear-map.png")
-	AbstractImagePrototype ClearMap();
-	
-	@Resource("zoom-last.png")
-	AbstractImagePrototype ZoomPrevious();
-	
-	@Resource("zoom-next.png")
-	AbstractImagePrototype ZoomNext();
-	
-	@Resource("information.png")
-	AbstractImagePrototype GetFeatureInfo();
-	
-	@Resource("ruler.png")
-	AbstractImagePrototype Measure();
-	
-	@Resource("ruler_square.png")
-	AbstractImagePrototype MeasureArea();
+	/**
+	 * The info height (defaults to 55).
+	 */
+	public int height = 55;
+
+	/**
+	 * Listener to be notified when the info is displayed (defaults to null).
+	 */
+	public Listener<ComponentEvent> listener;
+
+	public GPMeasureConfig(String title) {
+		this.title = title;
+	}
+
+	public GPMeasureConfig(String title, String text) {
+		this.title = title;
+		this.text = text;
+	}
 
 }

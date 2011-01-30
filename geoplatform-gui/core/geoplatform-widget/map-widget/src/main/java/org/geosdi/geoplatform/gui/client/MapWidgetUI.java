@@ -39,6 +39,8 @@ import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.toolbar.GetFeatureInfoAction;
+import org.geosdi.geoplatform.gui.client.action.toolbar.MeasureAction;
+import org.geosdi.geoplatform.gui.client.action.toolbar.MeasureAreaAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomInAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomNextAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomOutAction;
@@ -119,6 +121,23 @@ public class MapWidgetUI implements EntryPoint {
 					GeoPlatformMap mapWidget) {
 				// TODO Auto-generated method stub
 				return new GetFeatureInfoAction(mapWidget);
+			}
+		});
+		
+		ToolbarActionRegistar.put("Measure", new ToolbarActionCreator() {
+
+			public GeoPlatformToolbarAction createActionTool(
+					GeoPlatformMap mapWidget) {
+				// TODO Auto-generated method stub
+				return new MeasureAction(mapWidget);
+			}
+		});
+		
+		ToolbarActionRegistar.put("MeasureArea", new ToolbarActionCreator() {
+
+			public GeoPlatformToolbarAction createActionTool(
+					GeoPlatformMap mapWidget) {
+				return new MeasureAreaAction(mapWidget);
 			}
 		});
 	}

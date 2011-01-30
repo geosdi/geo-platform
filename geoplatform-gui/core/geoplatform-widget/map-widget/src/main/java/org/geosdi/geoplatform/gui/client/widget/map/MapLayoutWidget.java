@@ -40,6 +40,7 @@ import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
+import org.geosdi.geoplatform.gui.client.widget.measure.GPMeasureWidget;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -52,11 +53,16 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature;
 import org.gwtopenmaps.openlayers.client.control.LayerSwitcher;
+import org.gwtopenmaps.openlayers.client.control.Measure;
+import org.gwtopenmaps.openlayers.client.control.MeasureOptions;
 import org.gwtopenmaps.openlayers.client.control.ScaleLine;
 import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfo;
 import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfoOptions;
 import org.gwtopenmaps.openlayers.client.event.GetFeatureInfoListener;
+import org.gwtopenmaps.openlayers.client.event.MeasureEvent;
+import org.gwtopenmaps.openlayers.client.event.MeasureListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.handler.PathHandler;
 import org.gwtopenmaps.openlayers.client.layer.GMapType;
 import org.gwtopenmaps.openlayers.client.layer.Google;
 import org.gwtopenmaps.openlayers.client.layer.GoogleOptions;
@@ -65,6 +71,7 @@ import org.gwtopenmaps.openlayers.client.layer.OSM;
 import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
 
 import com.extjs.gxt.ui.client.Style.Scroll;
+import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 
@@ -88,6 +95,9 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	private ButtonBar buttonBar;
 
 	private List<GenericClientTool> tools;
+
+	private Measure measure;
+	private Measure measureArea;
 
 	public MapLayoutWidget() {
 		super();
@@ -120,11 +130,51 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		this.map.addControl(new LayerSwitcher());
 		this.map.addControl(new ScaleLine());
 		this.addFeatureInfoControl();
+		this.addMeasureControl();
+		this.addMeasureAreaControl();
 
 		this.createOSM();
 		this.createBaseGoogleLayer();
 
 		this.mapControl = new MapControlManager(this.map);
+	}
+
+	public void addMeasureControl() {
+
+		MeasureOptions measOpts = new MeasureOptions();
+		measOpts.setPersist(true);
+
+		this.measure = new Measure(new PathHandler(), measOpts);
+
+		this.map.addControl(measure);
+
+		this.measure.addMeasureListener(new MeasureListener() {
+
+			public void onMeasure(MeasureEvent eventObject) {
+				Info.display("Distance is: ", eventObject.getMeasure()
+						+ " " + eventObject.getUnits());
+			}
+		});
+
+	}
+
+	public void addMeasureAreaControl() {
+
+		MeasureOptions measOpts = new MeasureOptions();
+		measOpts.setPersist(true);
+
+		this.measureArea = new Measure(new PathHandler(), measOpts);
+
+		this.map.addControl(measureArea);
+
+		this.measureArea.addMeasureListener(new MeasureListener() {
+
+			public void onMeasure(MeasureEvent eventObject) {
+				Info.display("Area is: ", eventObject.getMeasure()
+						+ " " + eventObject.getUnits());
+			}
+		});
+
 	}
 
 	private WMSGetFeatureInfo addFeatureInfoControl() {
@@ -154,7 +204,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
 		});
 		this.map.addControl(info);
-		
+
 		return info;
 
 	}
@@ -162,10 +212,27 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	public void activateInfo() {
 		info.activate();
 	}
-	
+
 	public void deactivateInfo() {
 		info.deactivate();
 	}
+	
+	public void activateMeasure() {
+		measure.activate();
+	}
+
+	public void deactivateMeasure() {
+		measure.deactivate();
+	}
+	
+	public void activateMeasureArea() {
+		measureArea.activate();
+	}
+
+	public void deactivateMeasureArea() {
+		measureArea.deactivate();
+	}
+	
 
 	private void createOSM() {
 		OSMOptions osmOption = new OSMOptions();
@@ -175,7 +242,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		this.osm = OSM.Mapnik("OpenStreetMap", osmOption);
 		this.osm.setIsBaseLayer(true);
 		this.map.addLayer(osm);
-		
+
 		this.osm.setZIndex(1);
 	}
 
@@ -187,7 +254,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		layer = new Google("Google Normal", option);
 		layer.setIsBaseLayer(true);
 		this.map.addLayer(layer);
-		
+
 		this.layer.setZIndex(2);
 	}
 

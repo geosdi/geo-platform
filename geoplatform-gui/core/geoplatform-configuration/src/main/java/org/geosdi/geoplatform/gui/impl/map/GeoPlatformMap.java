@@ -47,29 +47,36 @@ public interface GeoPlatformMap {
 	public MapWidget getMapWidget();
 
 	public Map getMap();
-	
+
 	public GeoPlatformButtonBar getButtonBar();
-	
+
 	public void activateDrawPointFeature();
-	
+
 	public void deactivateDrawPointFeature();
-	
+
 	public void activateDrawFeature();
-	
+
 	public void deactivateDrawFeature();
-	
+
 	public boolean isFeatureOperationEnable();
-	
+
 	public void deactivateFeatureOperation();
-	
+
 	public void activateModifyFeature();
-	
+
 	public void deactivateModifyFeature();
-	
+
 	public boolean isModifyFeatureEnable();
-	
+
 	public void activateInfo();
-	
+
 	public void deactivateInfo();
 
+	public void activateMeasure();
+
+	public void deactivateMeasure();
+	
+	public void activateMeasureArea();
+
+	public void deactivateMeasureArea();
 }

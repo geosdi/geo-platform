@@ -33,67 +33,24 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.configuration.map.puregwt.event;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import com.extjs.gxt.ui.client.util.Size;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
- * @author giuseppe
- * 
+ * @author Francesco Izzi - CNR IMAA - geoSDI Group
+ *
  */
-@SuppressWarnings("deprecation")
-public interface GeoPlatformIcons extends ImageBundle {
-
-	@Resource("zoom-in.png")
-	AbstractImagePrototype ZoomIn();
-
-	@Resource("zoom-out.png")
-	AbstractImagePrototype ZoomOut();
-
-	@Resource("draw-feature.png")
-	AbstractImagePrototype DrawFeature();
-
-	@Resource("rotate.png")
-	AbstractImagePrototype Rotate();
+public interface  MeasureChangeHeandler extends EventHandler{
 	
-	@Resource("drag.png")
-	AbstractImagePrototype Drag();
+	Type<MeasureChangeHeandler> TYPE = new Type<MeasureChangeHeandler>();
 	
-	@Resource("resize.png")
-	AbstractImagePrototype Resize();
+	public void onPositionChange(Size s);
 	
-	@Resource("shape.png")
-	AbstractImagePrototype Shape();
-
-	@Resource("gp-icon-16x16.png")
-	AbstractImagePrototype geoPortalInfo();
+	public void activationMeasure(boolean activate);
 	
-	@Resource("draw-point.png")
-	AbstractImagePrototype DrawPointFeature();
 	
-	@Resource("draw-line.png")
-	AbstractImagePrototype DrawLineFeature();
-	
-	@Resource("eraser_minus.png")
-	AbstractImagePrototype DeleteFeature();
-	
-	@Resource("clear-map.png")
-	AbstractImagePrototype ClearMap();
-	
-	@Resource("zoom-last.png")
-	AbstractImagePrototype ZoomPrevious();
-	
-	@Resource("zoom-next.png")
-	AbstractImagePrototype ZoomNext();
-	
-	@Resource("information.png")
-	AbstractImagePrototype GetFeatureInfo();
-	
-	@Resource("ruler.png")
-	AbstractImagePrototype Measure();
-	
-	@Resource("ruler_square.png")
-	AbstractImagePrototype MeasureArea();
 
 }

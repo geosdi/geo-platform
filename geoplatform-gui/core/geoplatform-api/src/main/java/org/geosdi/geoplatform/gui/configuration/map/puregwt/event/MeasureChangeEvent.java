@@ -33,67 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.configuration.map.puregwt.event;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
- * @author giuseppe
+ * @author Francesco Izzi - CNR IMAA - geoSDI Group
  * 
  */
-@SuppressWarnings("deprecation")
-public interface GeoPlatformIcons extends ImageBundle {
+public class MeasureChangeEvent extends GwtEvent<MeasureChangeHeandler> {
 
-	@Resource("zoom-in.png")
-	AbstractImagePrototype ZoomIn();
+	private boolean activate;
 
-	@Resource("zoom-out.png")
-	AbstractImagePrototype ZoomOut();
+	public MeasureChangeEvent(boolean activate) {
+		this.activate = activate;
+	}
 
-	@Resource("draw-feature.png")
-	AbstractImagePrototype DrawFeature();
+	@Override
+	public Type<MeasureChangeHeandler> getAssociatedType() {
+		return MeasureChangeHeandler.TYPE;
+	}
 
-	@Resource("rotate.png")
-	AbstractImagePrototype Rotate();
-	
-	@Resource("drag.png")
-	AbstractImagePrototype Drag();
-	
-	@Resource("resize.png")
-	AbstractImagePrototype Resize();
-	
-	@Resource("shape.png")
-	AbstractImagePrototype Shape();
+	@Override
+	protected void dispatch(MeasureChangeHeandler handler) {
+		handler.activationMeasure(activate);
 
-	@Resource("gp-icon-16x16.png")
-	AbstractImagePrototype geoPortalInfo();
-	
-	@Resource("draw-point.png")
-	AbstractImagePrototype DrawPointFeature();
-	
-	@Resource("draw-line.png")
-	AbstractImagePrototype DrawLineFeature();
-	
-	@Resource("eraser_minus.png")
-	AbstractImagePrototype DeleteFeature();
-	
-	@Resource("clear-map.png")
-	AbstractImagePrototype ClearMap();
-	
-	@Resource("zoom-last.png")
-	AbstractImagePrototype ZoomPrevious();
-	
-	@Resource("zoom-next.png")
-	AbstractImagePrototype ZoomNext();
-	
-	@Resource("information.png")
-	AbstractImagePrototype GetFeatureInfo();
-	
-	@Resource("ruler.png")
-	AbstractImagePrototype Measure();
-	
-	@Resource("ruler_square.png")
-	AbstractImagePrototype MeasureArea();
+	}
 
 }

@@ -48,5 +48,21 @@
 		<property name="enabled" value="${getInfo.enabled}" />
 		<property name="order" value="${getInfo.order}" />
 	</bean>
+	
+	<bean name="Measure"
+		class="org.geosdi.geoplatform.gui.configuration.ActionClientTool">
+		<property name="id" value="${measure.id}" />
+		<property name="type" value="${measure.type}" />
+		<property name="enabled" value="${measure.enabled}" />
+		<property name="order" value="${measure.order}" />
+	</bean>
+	
+	<bean name="MeasureArea"
+		class="org.geosdi.geoplatform.gui.configuration.ActionClientTool">
+		<property name="id" value="${measureArea.id}" />
+		<property name="type" value="${measureArea.type}" />
+		<property name="enabled" value="${measureArea.enabled}" />
+		<property name="order" value="${measureArea.order}" />
+	</bean>
 
 </beans>

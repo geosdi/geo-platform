@@ -33,67 +33,38 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 
 /**
- * @author giuseppe
+ * @author Francesco Izzi - CNR IMAA - geoSDI Group
  * 
  */
-@SuppressWarnings("deprecation")
-public interface GeoPlatformIcons extends ImageBundle {
+public class MeasureAreaAction extends ToolbarMapAction {
 
-	@Resource("zoom-in.png")
-	AbstractImagePrototype ZoomIn();
+	private GeoPlatformMap mapWidget;
 
-	@Resource("zoom-out.png")
-	AbstractImagePrototype ZoomOut();
+	public MeasureAreaAction(GeoPlatformMap mapWidget) {
+		super("MeasureArea", Resources.ICONS.MeasureArea());
 
-	@Resource("draw-feature.png")
-	AbstractImagePrototype DrawFeature();
+		this.mapWidget = mapWidget;
+	}
 
-	@Resource("rotate.png")
-	AbstractImagePrototype Rotate();
-	
-	@Resource("drag.png")
-	AbstractImagePrototype Drag();
-	
-	@Resource("resize.png")
-	AbstractImagePrototype Resize();
-	
-	@Resource("shape.png")
-	AbstractImagePrototype Shape();
+	@Override
+	public void componentSelected(ButtonEvent ce) {
+		ToggleButton button = (ToggleButton) ce.getSource();
+		if (button.isPressed()) {
+			mapWidget.getButtonBar().setPressedButton(button);
+			this.mapWidget.activateMeasureArea();
+		} else
+			this.mapWidget.deactivateMeasureArea();
 
-	@Resource("gp-icon-16x16.png")
-	AbstractImagePrototype geoPortalInfo();
-	
-	@Resource("draw-point.png")
-	AbstractImagePrototype DrawPointFeature();
-	
-	@Resource("draw-line.png")
-	AbstractImagePrototype DrawLineFeature();
-	
-	@Resource("eraser_minus.png")
-	AbstractImagePrototype DeleteFeature();
-	
-	@Resource("clear-map.png")
-	AbstractImagePrototype ClearMap();
-	
-	@Resource("zoom-last.png")
-	AbstractImagePrototype ZoomPrevious();
-	
-	@Resource("zoom-next.png")
-	AbstractImagePrototype ZoomNext();
-	
-	@Resource("information.png")
-	AbstractImagePrototype GetFeatureInfo();
-	
-	@Resource("ruler.png")
-	AbstractImagePrototype Measure();
-	
-	@Resource("ruler_square.png")
-	AbstractImagePrototype MeasureArea();
+	}
 
 }

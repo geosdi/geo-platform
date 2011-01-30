@@ -67,6 +67,8 @@ public class GeocodingMarker extends GeoPlatformMarker {
 		Pixel offset = new Pixel(-(size.getWidth() / 2), -size.getHeight());
 		this.iconMarker = new Icon(GWT.getModuleName()
 				+ "/map-images/geocodmarker.png", size, offset);
+
+		this.iconMarker.setZIndex(950);
 	}
 
 	/**

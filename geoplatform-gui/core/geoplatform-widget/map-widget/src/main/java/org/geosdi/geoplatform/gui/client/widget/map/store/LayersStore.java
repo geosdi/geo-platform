@@ -110,8 +110,8 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> implements
 			this.layers.put(vectorBean, layer);
 
 			this.mapWidget.getMap().addLayer(layer);
-			this.mapWidget.getMap().setLayerZIndex(layer,
-					vectorBean.getzIndex());
+			
+			layer.setZIndex(vectorBean.getzIndex());
 		}
 	}
 
@@ -147,11 +147,8 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> implements
 			this.layers.put(rasterBean, layer);
 
 			this.mapWidget.getMap().addLayer(layer);
-//			this.mapWidget.getMap().setLayerZIndex(layer,
-//					rasterBean.getzIndex());
-
-			System.out.println("TEST *********** " + layer.getName() + " - "
-					+ layer.getZIndex());
+			
+			layer.setZIndex(rasterBean.getzIndex());
 		}
 	}
 

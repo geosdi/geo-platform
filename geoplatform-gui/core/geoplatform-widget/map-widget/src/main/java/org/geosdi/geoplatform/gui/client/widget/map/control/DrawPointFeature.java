@@ -69,4 +69,14 @@ public class DrawPointFeature extends DrawGenericFeatureControl {
 				drawPolygonFeatureOptions);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.geosdi.geoplatform.gui.client.widget.map.control.DrawGenericFeatureControl#activateControl()
+	 */
+	@Override
+	public void activateControl() {
+		// TODO Auto-generated method stub
+		super.activateControl();
+		this.control.getLayer().setZIndex(9000);
+	}
+
 }

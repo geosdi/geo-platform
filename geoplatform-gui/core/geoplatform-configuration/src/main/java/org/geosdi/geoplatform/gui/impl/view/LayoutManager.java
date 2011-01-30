@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.impl.view;
 
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ScaleVisibleEvent;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.view.GeoPlatformLayoutManager;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 import org.gwtopenmaps.openlayers.client.MapWidget;

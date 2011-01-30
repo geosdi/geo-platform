@@ -94,7 +94,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 	 */
 	public void clearWidgetStatus() {
 		// TODO Auto-generated method stub
-		this.mapWidget.getMap().removeLayer(this.rGMarker.getMarkerLayer());
+		this.mapWidget.getMap().removeLayer(this.rGMarker.getMarkerLayer(), false);
 		this.mapWidget.getMap().removeMapClickListener(listener);
 		this.removeMapElements();
 	}

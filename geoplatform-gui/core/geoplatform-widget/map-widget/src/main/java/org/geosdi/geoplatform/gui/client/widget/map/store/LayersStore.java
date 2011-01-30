@@ -139,14 +139,19 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> implements
 			WMS layer = (WMS) this.layers.get(rasterBean);
 			layer.setIsVisible(true);
 			layer.redraw();
+			System.out.println("TEST *********** " + layer.getName() + " - "
+					+ layer.getZIndex());
 		} else {
 			WMS layer = (WMS) this.layerBuilder.buildLayer(rasterBean);
 
 			this.layers.put(rasterBean, layer);
 
 			this.mapWidget.getMap().addLayer(layer);
-			this.mapWidget.getMap().setLayerZIndex(layer,
-					rasterBean.getzIndex());
+//			this.mapWidget.getMap().setLayerZIndex(layer,
+//					rasterBean.getzIndex());
+
+			System.out.println("TEST *********** " + layer.getName() + " - "
+					+ layer.getZIndex());
 		}
 	}
 

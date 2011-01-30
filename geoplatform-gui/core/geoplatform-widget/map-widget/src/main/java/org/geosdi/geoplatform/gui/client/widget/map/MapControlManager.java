@@ -85,9 +85,7 @@ public class MapControlManager {
 		vectorOption.setDisplayInLayerSwitcher(false);
 		this.vector = new Vector("GeoPlatform Vector Layer", vectorOption);
 		this.map.addLayer(vector);
-		
-		this.map.setLayerZIndex(vector, 300);
-
+	
 		this.initControl();
 
 		this.addMapControl();
@@ -115,6 +113,7 @@ public class MapControlManager {
 		this.map.addControl(this.modifyFeature.getControl());
 		this.map.addControl(this.featureOperation.getControl());
 		this.map.addControl(this.navigationHistory.getControl());
+		
 		this.modifyFeature.activateControl();
 	}
 
@@ -256,15 +255,15 @@ public class MapControlManager {
 	public int getFeaturesNumber() {
 		return this.vector.getNumberOfFeatures();
 	}
-	
+
 	public void clearNavigationHistory() {
 		this.navigationHistory.clearHistory();
 	}
-	
+
 	public void activateNavigationHistory() {
 		this.navigationHistory.activateControl();
 	}
-	
+
 	public void deactivateNavigationHistory() {
 		this.navigationHistory.deactivateControl();
 	}

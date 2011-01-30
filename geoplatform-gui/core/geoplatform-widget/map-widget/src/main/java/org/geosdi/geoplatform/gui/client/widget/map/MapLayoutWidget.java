@@ -80,6 +80,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	private Map map;
 	private Layer layer;
 	private Layer osm;
+
 	private WMSGetFeatureInfo info;
 
 	private MapModel mapModel;
@@ -172,7 +173,10 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		// osmOption.setWrapDateLine(true);
 
 		this.osm = OSM.Mapnik("OpenStreetMap", osmOption);
+		this.osm.setIsBaseLayer(true);
 		this.map.addLayer(osm);
+		
+		this.osm.setZIndex(1);
 	}
 
 	private void createBaseGoogleLayer() {
@@ -181,7 +185,10 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		option.setSphericalMercator(true);
 
 		layer = new Google("Google Normal", option);
+		layer.setIsBaseLayer(true);
 		this.map.addLayer(layer);
+		
+		this.layer.setZIndex(2);
 	}
 
 	/**

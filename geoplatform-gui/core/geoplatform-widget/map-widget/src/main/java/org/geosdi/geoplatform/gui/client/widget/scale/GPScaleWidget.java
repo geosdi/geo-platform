@@ -103,8 +103,6 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
 	}
 
 	public static void remove() {
-		System.out.println("Hide GPScaleBar");
-
 		pop().hide();
 	}
 
@@ -245,7 +243,6 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
 
 	@Override
 	public void activationScaleBar(boolean activate) {
-		System.out.println("ACTIVATE:" + activate);
 		if (activate) {
 			show();
 		} else {

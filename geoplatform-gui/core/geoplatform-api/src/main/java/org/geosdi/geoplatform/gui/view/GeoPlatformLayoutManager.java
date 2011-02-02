@@ -75,7 +75,6 @@ public abstract class GeoPlatformLayoutManager {
 		viewport = new Viewport();
 		viewport.setLayout(new BorderLayout());
 
-		createNorth();
 		createEast();
 		createWest();
 		createCenter();
@@ -84,10 +83,10 @@ public abstract class GeoPlatformLayoutManager {
 	/**
 	 * Create North Panel in Main UI
 	 */
-	private void createNorth() {
+	public void createNorth(float size) {
 		north = new ContentPanel();
 		north.setHeaderVisible(false);
-		BorderLayoutData data = new BorderLayoutData(LayoutRegion.NORTH, 50);
+		BorderLayoutData data = new BorderLayoutData(LayoutRegion.NORTH, size);
 		data.setMargins(new Margins(0, 5, 0, 5));
 
 		viewport.add(north, data);
@@ -183,8 +182,12 @@ public abstract class GeoPlatformLayoutManager {
 
 	/**
 	 * @return the north
+	 * 			If North is null GeoPlatform set North Size to 50 for default
+	 * 			
 	 */
 	public ContentPanel getNorth() {
+		if(north == null)
+			createNorth(50);
 		return north;
 	}
 

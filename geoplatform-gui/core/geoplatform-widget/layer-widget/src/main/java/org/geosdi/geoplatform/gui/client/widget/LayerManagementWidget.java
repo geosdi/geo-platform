@@ -56,7 +56,7 @@ public class LayerManagementWidget extends ContentPanel {
 
 		add(this.layerTree.getTree());
 
-		setScrollMode(Scroll.ALWAYS);
+		setScrollMode(Scroll.AUTOY);
 	}
 
 	/**

@@ -41,13 +41,12 @@ import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
 import org.geosdi.geoplatform.gui.global.GeoPlatformInfo;
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * @author giuseppe
  * 
  */
-@Component("geoPlatformGlobal")
+//@Component("geoPlatformGlobal")
 public class GeoPlatformGlobal implements IGeoPlatformGlobal {
 
 	/**
@@ -58,13 +57,13 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
 	@Autowired
 	private GeoPlatformInfo geoPlatformInfo;
 
-	@Autowired
+//	@Autowired
 	private IToolbarClientTool toolbarClientTool;
 
-	@Autowired
+//	@Autowired
 	private IMenuBarContainerTool menuBarContainerTool;
 	
-	@Autowired
+//	@Autowired
 	private FolderStore folderStore;
 
 	/**

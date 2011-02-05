@@ -33,72 +33,76 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.gwt;
+package org.geosdi.geoplatform.gui.factory.layer;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-
-import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
-import org.geosdi.geoplatform.gui.server.service.IStartupService;
-import org.geosdi.geoplatform.gui.service.GeoPlatformConfiguration;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
+import org.gwtopenmaps.openlayers.client.layer.WMS;
+import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
+import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-@WebServlet(name = "GeoPlatformConfiguration", urlPatterns = { "/geoportal/GeoPlatformConfiguration" }, loadOnStartup = 1)
-public class GeoPlatformConfigurationImpl extends RemoteServiceServlet
-		implements GeoPlatformConfiguration {
+public class DefaultLayerFactory implements GeoPlatformLayerFactory {
 
-	/**
+	/*
+	 * (non-Javadoc)
 	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.factory.layer.GeoPlatformLayerFactory#createWMS
+	 * (java.lang.String, java.lang.String,
+	 * org.gwtopenmaps.openlayers.client.layer.WMSParams)
 	 */
-	private static final long serialVersionUID = 4416552134318747534L;
-
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-	private IStartupService startupService;
-
 	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-
-		ApplicationContext context = WebApplicationContextUtils
-				.getWebApplicationContext(getServletContext());
-
-		GeoPlatformContextUtil.getInstance().setSpringContext(context);
-
-		this.injectValues();
+	public Layer createWMS(String name, String url, WMSParams params) {
+		// TODO Auto-generated method stub
+		return new WMS(name, url, params);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.geosdi.geoplatform.gui.service.GeoPlatformConfiguration#
-	 * initGeoPlatformConfiguration()
+	 * @see
+	 * org.geosdi.geoplatform.gui.factory.layer.GeoPlatformLayerFactory#createWMS
+	 * (java.lang.String, java.lang.String,
+	 * org.gwtopenmaps.openlayers.client.layer.WMSParams,
+	 * org.gwtopenmaps.openlayers.client.layer.WMSOptions)
 	 */
 	@Override
-	public IGeoPlatformGlobal initGeoPlatformConfiguration() {
+	public Layer createWMS(String name, String url, WMSParams params,
+			WMSOptions layerParams) {
 		// TODO Auto-generated method stub
-		return startupService.initGeoPlatformConfiguration();
+		return new WMS(name, url, params, layerParams);
 	}
 
-	/**
-	 * Init Spring Context
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.factory.layer.GeoPlatformLayerFactory#createVector
+	 * (java.lang.String, org.gwtopenmaps.openlayers.client.layer.VectorOptions)
 	 */
-	private void injectValues() {
-		this.startupService = (IStartupService) GeoPlatformContextUtil
-				.getInstance().getBean("startupService");
+	@Override
+	public Layer createVector(String name, VectorOptions options) {
+		// TODO Auto-generated method stub
+		return new Vector(name, options);
+	}
 
-		logger.info("SPRING CONTEXT INITIALIZED" + this.startupService);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.factory.layer.GeoPlatformLayerFactory#createVector
+	 * (java.lang.String)
+	 */
+	@Override
+	public Layer createVector(String name) {
+		// TODO Auto-generated method stub
+		return new Vector(name);
 	}
 
 }

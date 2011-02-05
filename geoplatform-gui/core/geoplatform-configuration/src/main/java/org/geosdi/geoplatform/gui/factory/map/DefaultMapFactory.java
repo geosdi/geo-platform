@@ -33,57 +33,43 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.service;
+package org.geosdi.geoplatform.gui.factory.map;
 
-import java.util.ArrayList;
-
-import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import org.gwtopenmaps.openlayers.client.MapOptions;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-@RemoteServiceRelativePath("GeocodingRemote")
-public interface GeocodingRemote extends RemoteService {
+public class DefaultMapFactory implements GeoPlatformMapFactory {
 
-	public static class Util {
-		private static GeocodingRemoteAsync instance;
-
-		public static GeocodingRemoteAsync getInstance() {
-			if (instance == null) {
-				instance = (GeocodingRemoteAsync) GWT
-						.create(GeocodingRemote.class);
-				// ServiceDefTarget target = (ServiceDefTarget) instance;
-				// target.setServiceEntryPoint(GWT.getModuleBaseURL()
-				// + "GeocodingRemote");
-			}
-			return instance;
-		}
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.factory.GeoPlatformMapFactory#createMap(java
+	 * .lang.String, java.lang.String)
+	 */
+	@Override
+	public MapWidget createMap(String width, String height) {
+		// TODO Auto-generated method stub
+		return new MapWidget(width, height);
 	}
 
-	/**
-	 * @param search
-	 *            String to search
-	 * @return ArrayList<GeocodingBean>
-	 * @throws GeoPlatformException
-	 */
-	public ArrayList<GeocodingBean> findLocations(String search)
-			throws GeoPlatformException;
-
-	/**
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param Coordinates
-	 *            of the Point
-	 * 
-	 * @return GeocodingBean
-	 * @throws GeoPlatformException
+	 * @see
+	 * org.geosdi.geoplatform.gui.factory.GeoPlatformMapFactory#createMap(java
+	 * .lang.String, java.lang.String,
+	 * org.gwtopenmaps.openlayers.client.MapOptions)
 	 */
-	public GeocodingBean findLocation(double lat, double lon)
-			throws GeoPlatformException;
+	@Override
+	public MapWidget createMap(String width, String height, MapOptions options) {
+		// TODO Auto-generated method stub
+		return new MapWidget(width, height, options);
+	}
 
 }

@@ -15,5 +15,6 @@
 	<source path="action" />
 	<source path="impl" />
 	<source path="utility" />
+	<source path="factory" />
 	
 </module>

@@ -33,57 +33,27 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.service;
+package org.geosdi.geoplatform.gui.factory.layer;
 
-import java.util.ArrayList;
-
-import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
+import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
+import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
+import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-@RemoteServiceRelativePath("GeocodingRemote")
-public interface GeocodingRemote extends RemoteService {
+public interface GeoPlatformLayerFactory {
 
-	public static class Util {
-		private static GeocodingRemoteAsync instance;
+	public Layer createWMS(String name, String url, WMSParams params);
 
-		public static GeocodingRemoteAsync getInstance() {
-			if (instance == null) {
-				instance = (GeocodingRemoteAsync) GWT
-						.create(GeocodingRemote.class);
-				// ServiceDefTarget target = (ServiceDefTarget) instance;
-				// target.setServiceEntryPoint(GWT.getModuleBaseURL()
-				// + "GeocodingRemote");
-			}
-			return instance;
-		}
-	}
+	public Layer createWMS(String name, String url, WMSParams params,
+			WMSOptions layerParams);
 
-	/**
-	 * @param search
-	 *            String to search
-	 * @return ArrayList<GeocodingBean>
-	 * @throws GeoPlatformException
-	 */
-	public ArrayList<GeocodingBean> findLocations(String search)
-			throws GeoPlatformException;
+	public Layer createVector(String name, VectorOptions options);
 
-	/**
-	 * 
-	 * @param Coordinates
-	 *            of the Point
-	 * 
-	 * @return GeocodingBean
-	 * @throws GeoPlatformException
-	 */
-	public GeocodingBean findLocation(double lat, double lon)
-			throws GeoPlatformException;
+	public Layer createVector(String name);
 
 }

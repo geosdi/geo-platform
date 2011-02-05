@@ -39,12 +39,13 @@ import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.ServiceDefTarget;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 /**
  * @author giuseppe
  * 
  */
+@RemoteServiceRelativePath("GeoPlatformConfiguration")
 public interface GeoPlatformConfiguration extends RemoteService {
 
 	public static class Util {
@@ -54,9 +55,9 @@ public interface GeoPlatformConfiguration extends RemoteService {
 			if (instance == null) {
 				instance = (GeoPlatformConfigurationAsync) GWT
 						.create(GeoPlatformConfiguration.class);
-				ServiceDefTarget target = (ServiceDefTarget) instance;
-				target.setServiceEntryPoint(GWT.getModuleBaseURL()
-						+ "GeoPlatformConfiguration");
+//				ServiceDefTarget target = (ServiceDefTarget) instance;
+//				target.setServiceEntryPoint(GWT.getModuleBaseURL()
+//						+ "GeoPlatformConfiguration");
 			}
 			return instance;
 		}

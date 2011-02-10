@@ -33,34 +33,71 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.popup.template;
+package org.geosdi.geoplatform.gui.client.widget;
 
+import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
+
+import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.widget.HorizontalPanel;
+import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.Image;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public enum PopupTemplate {
+public class RoutingPointsWidget {
 
-	IMAGE_LOADING("<img src=" + GWT.getModuleName() + "/gp-images/loading.gif"
-			+ " />"), MESSAGE_LOADING("<br />Loading Location....."), IMAGE_RESULT_FOUND(
-			"<img src=" + GWT.getModuleName() + "/gp-images/ok.png" + " />"), IMAGE_RESULT_NOT_FOUND(
-			"<img src=" + GWT.getModuleName() + "/gp-images/not_found.png"
-					+ " />"), ZERO_RESULTS("ZERO_RESULTS"), IMAGE_SERVICE_ERROR(
-			"<img src=" + GWT.getModuleName() + "/gp-images/error.png" + " />");
+	private FieldSet fieldSet;
 
-	private String value;
+	private StartPointSearchRouting startPoint;
+	private FinalPointSearchWidget finalPoint;
 
-	PopupTemplate(String theValue) {
-		// TODO Auto-generated constructor stub
-		this.value = theValue;
+	public RoutingPointsWidget(RoutingController controller) {
+		this.fieldSet = new FieldSet();
+		this.fieldSet.setCollapsible(false);
+		initWidgets(controller);
 	}
 
-	@Override
-	public String toString() {
-		return value;
+	/**
+	 * @param controller
+	 */
+	private void initWidgets(RoutingController controller) {
+		// TODO Auto-generated method stub
+		this.startPoint = new StartPointSearchRouting(controller);
+		this.finalPoint = new FinalPointSearchWidget(controller);
+
+		HorizontalPanel panel = new HorizontalPanel();
+		panel.setHorizontalAlign(HorizontalAlignment.CENTER);
+
+		Image img = new Image();
+		img.setUrl(GWT.getModuleBaseURL() + "/gp-images/start.png");
+		img.setPixelSize(20, 30);
+
+		panel.add(img);
+		panel.add(this.startPoint.getTableWidget());
+
+		fieldSet.add(panel);
+
+		HorizontalPanel panel1 = new HorizontalPanel();
+		panel1.setHorizontalAlign(HorizontalAlignment.CENTER);
+
+		Image img1 = new Image();
+		img1.setUrl(GWT.getModuleBaseURL() + "/gp-images/end.png");
+		img1.setPixelSize(20, 30);
+
+		panel1.add(img1);
+		panel1.add(this.finalPoint.getTableWidget());
+
+		fieldSet.add(panel1);
 	}
 
+	/**
+	 * @return the fieldSet
+	 */
+	public FieldSet getFieldSet() {
+		return fieldSet;
+	}
 }

@@ -35,40 +35,64 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
+
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.WidgetListener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 
 /**
- * @author giuseppe
+ * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class RoutingManagementWidget extends ContentPanel {
 
+	private FormPanel formPanel;
+
+	private RoutingPointsWidget pointsWidget;
 	private RoutingGridWidget routingGridWidget;
 
-	public RoutingManagementWidget() {
+	public RoutingManagementWidget(RoutingController controller) {
 		setHeading("Routing Widget");
 		setLayout(new FitLayout());
 
-		setLayoutOnChange(true);
-
-		this.routingGridWidget = new RoutingGridWidget();
-
-		add(this.routingGridWidget.getFormPanel());
+		this.initWidget(controller);
 
 		addWidgetListener(new WidgetListener() {
 			@Override
 			public void widgetResized(ComponentEvent ce) {
 				if (getHeight() > 0)
-					routingGridWidget.getGrid().setHeight(getHeight() - 95);
+					routingGridWidget.getGrid().setHeight(getHeight() - 215);
 
 			}
 		});
 
+		add(this.formPanel);
+
 		setScrollMode(Scroll.AUTOY);
+	}
+
+	private void initWidget(RoutingController controller) {
+		formPanel = new FormPanel();
+		formPanel.setHeaderVisible(false);
+		formPanel.setFrame(true);
+		formPanel.setLayout(new FlowLayout());
+
+		setLayoutOnChange(true);
+
+		this.pointsWidget = new RoutingPointsWidget(controller);
+
+		this.formPanel.add(this.pointsWidget.getFieldSet());
+
+		this.routingGridWidget = new RoutingGridWidget();
+
+		this.formPanel.add(this.routingGridWidget.getDirectionsField());
 	}
 
 	/**

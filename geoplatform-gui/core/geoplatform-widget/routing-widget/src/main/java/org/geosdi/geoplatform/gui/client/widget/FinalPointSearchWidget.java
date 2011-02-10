@@ -33,34 +33,59 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.popup.template;
+package org.geosdi.geoplatform.gui.client.widget;
 
-import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
+
+import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public enum PopupTemplate {
+public class FinalPointSearchWidget extends StartPointSearchRouting {
 
-	IMAGE_LOADING("<img src=" + GWT.getModuleName() + "/gp-images/loading.gif"
-			+ " />"), MESSAGE_LOADING("<br />Loading Location....."), IMAGE_RESULT_FOUND(
-			"<img src=" + GWT.getModuleName() + "/gp-images/ok.png" + " />"), IMAGE_RESULT_NOT_FOUND(
-			"<img src=" + GWT.getModuleName() + "/gp-images/not_found.png"
-					+ " />"), ZERO_RESULTS("ZERO_RESULTS"), IMAGE_SERVICE_ERROR(
-			"<img src=" + GWT.getModuleName() + "/gp-images/error.png" + " />");
-
-	private String value;
-
-	PopupTemplate(String theValue) {
+	/**
+	 * @param controller
+	 */
+	public FinalPointSearchWidget(RoutingController controller) {
+		super(controller);
 		// TODO Auto-generated constructor stub
-		this.value = theValue;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#
+	 * setComboToolTip()
+	 */
 	@Override
-	public String toString() {
-		return value;
+	public void setComboToolTip() {
+		// TODO Auto-generated method stub
+		ToolTipConfig config = new ToolTipConfig();
+		config.setTitle("Usage");
+		config.setText("Enter Address - click INVIO to set Final Point.");
+		config.setTrackMouse(true);
+		this.combo.setToolTip(config);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#clearStatus
+	 * ()
+	 */
+	@Override
+	public void clearStatus() {
+		// TODO Auto-generated method stub
+		super.clearWidget();
+		/********************************************************************/
+		/********************************************************************/
+		/************ HERE THE CHECK TO REMOVE ALL ON THE MAP ***************/
+		/********************************************************************/
+		/********************************************************************/
 	}
 
 }

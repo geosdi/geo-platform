@@ -44,10 +44,8 @@ import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
 
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
-import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 
 /**
  * @author giuseppe
@@ -55,27 +53,20 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
  */
 public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {
 	
-	private FormPanel formPanel;
+	private FieldSet directionsField;
 
 	public RoutingGridWidget() {
 		super(false);
 		// TODO Auto-generated constructor stub
-		initFormPanel();
+		initWidget();
 	}
-	
-	private void initFormPanel() {
-		formPanel = new FormPanel();
-		formPanel.setHeaderVisible(false);
-		formPanel.setFrame(true);
-		formPanel.setLayout(new FlowLayout());
-		
-		FieldSet directions = new FieldSet();
-		directions.setHeading("Directions");
-		directions.setCollapsible(false);
 
-		directions.add(this.grid);
-		
-		formPanel.add(directions);
+	private void initWidget() {
+		directionsField = new FieldSet();
+		directionsField.setHeading("Directions");
+		directionsField.setCollapsible(false);
+
+		directionsField.add(this.grid);
 	}
 
 	@Override
@@ -86,7 +77,6 @@ public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {
 		grid.getView().setForceFit(true);
 		grid.setLoadMask(true);
 
-		grid.getView().setEmptyText("Draw two points on the Map.");
 		grid.setAutoExpandColumn(DirectionsKeyValue.ROUTE.getValue());
 	}
 
@@ -96,8 +86,7 @@ public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {
 		List<ColumnConfig> columns = new ArrayList<ColumnConfig>();
 
 		ColumnConfig dirColumn = new ColumnConfig(
-				DirectionsKeyValue.ROUTE.getValue(), "Directions",
-				100);
+				DirectionsKeyValue.ROUTE.getValue(), "Directions", 100);
 		dirColumn.setMenuDisabled(true);
 		dirColumn.setSortable(false);
 
@@ -145,10 +134,9 @@ public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {
 	}
 
 	/**
-	 * @return the formPanel
+	 * @return the directionsField
 	 */
-	public FormPanel getFormPanel() {
-		return formPanel;
+	public FieldSet getDirectionsField() {
+		return directionsField;
 	}
-
 }

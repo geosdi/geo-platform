@@ -40,11 +40,11 @@ import com.google.gwt.user.client.ui.ImageBundle;
 
 /**
  * @author giuseppe
- *
+ * 
  */
 @SuppressWarnings("deprecation")
-public interface BasicWidgetIcons extends ImageBundle{
-	
+public interface BasicWidgetIcons extends ImageBundle {
+
 	@Resource("cancel.png")
 	AbstractImagePrototype cancel();
 
@@ -56,8 +56,11 @@ public interface BasicWidgetIcons extends ImageBundle{
 
 	@Resource("select.png")
 	AbstractImagePrototype select();
-	
+
 	@Resource("search.png")
 	AbstractImagePrototype search();
+	
+	@Resource("routing.png")
+	AbstractImagePrototype routing();
 
 }

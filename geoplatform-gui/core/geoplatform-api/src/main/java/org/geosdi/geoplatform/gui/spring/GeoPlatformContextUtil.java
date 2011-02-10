@@ -56,6 +56,11 @@ public class GeoPlatformContextUtil {
 		return springContext.getBean(beanName);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Object getBean(Class type) {
+		return springContext.getBean(type);
+	}
+
 	/**
 	 * @return the springContext
 	 */

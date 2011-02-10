@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.gui.client.model.RoutingBean;
 import org.geosdi.geoplatform.gui.client.service.RoutingRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.service.IRoutingService;
+import org.geosdi.geoplatform.gui.server.service.impl.RoutingService;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -59,7 +60,7 @@ public class RoutingRemoteImpl extends RemoteServiceServlet implements
 
 	public RoutingRemoteImpl() {
 		this.routingService = (IRoutingService) GeoPlatformContextUtil
-				.getInstance().getBean("routingService");
+				.getInstance().getBean(RoutingService.class);
 	}
 
 	@Override

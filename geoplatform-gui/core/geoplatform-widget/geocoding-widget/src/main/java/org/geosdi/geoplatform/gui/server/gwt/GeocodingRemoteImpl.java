@@ -46,6 +46,8 @@ import org.geosdi.geoplatform.gui.client.service.GeocodingRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.service.IGeocodingService;
 import org.geosdi.geoplatform.gui.server.service.IReverseGeocoding;
+import org.geosdi.geoplatform.gui.server.service.impl.GeocodingService;
+import org.geosdi.geoplatform.gui.server.service.impl.ReverseGeocoding;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,9 +74,9 @@ public class GeocodingRemoteImpl extends RemoteServiceServlet implements
 
 	public GeocodingRemoteImpl() {
 		this.geocodingService = (IGeocodingService) GeoPlatformContextUtil
-				.getInstance().getBean("geocodingService");
+				.getInstance().getBean(GeocodingService.class);
 		this.reverseGeocoding = (IReverseGeocoding) GeoPlatformContextUtil
-				.getInstance().getBean("reverseGeocoding");
+				.getInstance().getBean(ReverseGeocoding.class);
 	}
 
 	@Override

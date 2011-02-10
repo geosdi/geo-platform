@@ -7,6 +7,16 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 	default-autowire="byName">
 
+	<context:annotation-config />
+
+	<bean name="serviceParameter"
+		class="org.geosdi.geoplatform.gui.server.service.RoutingServiceParameters">
+		<property name="serviceDataSource" value="http://routing.geosdi.org/php/service.php" />
+		<property name="firstRegex" value="?startpoint=" />
+		<property name="finalRegex" value="&amp;finalpoint=" />
+		<property name="method" value="&amp;method=SPS" />
+	</bean>
+
 	<bean id="routingService"
 		class="org.geosdi.geoplatform.gui.server.service.impl.RoutingService">
 	</bean>

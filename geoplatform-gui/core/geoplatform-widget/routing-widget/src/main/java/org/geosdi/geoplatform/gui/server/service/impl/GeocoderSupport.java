@@ -33,34 +33,24 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.popup.template;
+package org.geosdi.geoplatform.gui.server.service.impl;
 
-import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.server.service.IGeocoderSupport;
+import org.geosdi.geoplatform.gui.server.service.IGeocodingService;
+import org.geosdi.geoplatform.gui.server.service.IReverseGeocoding;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public enum PopupTemplate {
+public class GeocoderSupport implements IGeocoderSupport {
 
-	IMAGE_LOADING("<img src=" + GWT.getModuleName() + "/gp-images/loading.gif"
-			+ " />"), MESSAGE_LOADING("<br />Loading Location....."), IMAGE_RESULT_FOUND(
-			"<img src=" + GWT.getModuleName() + "/gp-images/ok.png" + " />"), IMAGE_RESULT_NOT_FOUND(
-			"<img src=" + GWT.getModuleName() + "/gp-images/not_found.png"
-					+ " />"), ZERO_RESULTS("ZERO_RESULTS"), IMAGE_SERVICE_ERROR(
-			"<img src=" + GWT.getModuleName() + "/gp-images/error.png" + " />");
+	@Autowired
+	private IGeocodingService geocodingService;
 
-	private String value;
-
-	PopupTemplate(String theValue) {
-		// TODO Auto-generated constructor stub
-		this.value = theValue;
-	}
-
-	@Override
-	public String toString() {
-		return value;
-	}
+	@Autowired
+	private IReverseGeocoding reverseGeocoding;
 
 }

@@ -33,34 +33,90 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.popup.template;
-
-import com.google.gwt.core.client.GWT;
+package org.geosdi.geoplatform.gui.server.service;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public enum PopupTemplate {
+public class RoutingServiceParameters {
 
-	IMAGE_LOADING("<img src=" + GWT.getModuleName() + "/gp-images/loading.gif"
-			+ " />"), MESSAGE_LOADING("<br />Loading Location....."), IMAGE_RESULT_FOUND(
-			"<img src=" + GWT.getModuleName() + "/gp-images/ok.png" + " />"), IMAGE_RESULT_NOT_FOUND(
-			"<img src=" + GWT.getModuleName() + "/gp-images/not_found.png"
-					+ " />"), ZERO_RESULTS("ZERO_RESULTS"), IMAGE_SERVICE_ERROR(
-			"<img src=" + GWT.getModuleName() + "/gp-images/error.png" + " />");
+	private String serviceDataSource;
+	private String firstRegex;
+	private String finalRegex;
+	private String method;
 
-	private String value;
-
-	PopupTemplate(String theValue) {
-		// TODO Auto-generated constructor stub
-		this.value = theValue;
+	/**
+	 * @return the serviceDataSource
+	 */
+	public String getServiceDataSource() {
+		return serviceDataSource;
 	}
 
+	/**
+	 * @param serviceDataSource
+	 *            the serviceDataSource to set
+	 */
+	public void setServiceDataSource(String serviceDataSource) {
+		this.serviceDataSource = serviceDataSource;
+	}
+
+	/**
+	 * @return the firstRegex
+	 */
+	public String getFirstRegex() {
+		return firstRegex;
+	}
+
+	/**
+	 * @param firstRegex
+	 *            the firstRegex to set
+	 */
+	public void setFirstRegex(String firstRegex) {
+		this.firstRegex = firstRegex;
+	}
+
+	/**
+	 * @return the finalRegex
+	 */
+	public String getFinalRegex() {
+		return finalRegex;
+	}
+
+	/**
+	 * @param finalRegex
+	 *            the finalRegex to set
+	 */
+	public void setFinalRegex(String finalRegex) {
+		this.finalRegex = finalRegex;
+	}
+
+	/**
+	 * @return the method
+	 */
+	public String getMethod() {
+		return method;
+	}
+
+	/**
+	 * @param method
+	 *            the method to set
+	 */
+	public void setMethod(String method) {
+		this.method = method;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return value;
+		return "RoutingServiceParameters [serviceDataSource="
+				+ serviceDataSource + ", firstRegex=" + firstRegex
+				+ ", finalRegex=" + finalRegex + ", method=" + method + "]";
 	}
 
 }

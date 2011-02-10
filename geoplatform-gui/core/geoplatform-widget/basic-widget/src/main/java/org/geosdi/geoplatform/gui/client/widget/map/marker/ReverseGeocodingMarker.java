@@ -74,7 +74,7 @@ public class ReverseGeocodingMarker extends GeoPlatformMarker {
 		// TODO Auto-generated method stub
 		Size size = new Size(21, 25);
 		Pixel offset = new Pixel(-(size.getWidth() / 2), -size.getHeight());
-		this.iconMarker = new Icon(GWT.getModuleName() + "/map-images/POI.png",
+		this.iconMarker = new Icon(GWT.getModuleName() + "/gp-images/POI.png",
 				size, offset);
 	}
 

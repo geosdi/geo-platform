@@ -51,8 +51,10 @@ import org.geosdi.geoplatform.gui.client.model.Directions;
 import org.geosdi.geoplatform.gui.client.model.RoutingBean;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.service.IRoutingService;
+import org.geosdi.geoplatform.gui.server.service.RoutingServiceParameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -60,7 +62,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 @Service("routingService")
@@ -68,8 +71,8 @@ public class RoutingService implements IRoutingService {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	// URL prefix to the routing
-	private static final String ROUTING_REQUEST_PREFIX_FOR_XML = "http://routing.geosdi.org/php/service.php";
+	@Autowired
+	private RoutingServiceParameters serviceParameter;
 
 	private URL url;
 	private HttpURLConnection conn;
@@ -89,9 +92,10 @@ public class RoutingService implements IRoutingService {
 		RoutingBean tracking = new RoutingBean();
 
 		try {
-			url = new URL(ROUTING_REQUEST_PREFIX_FOR_XML + "?startpoint="
-					+ xStart + "," + yStart + "&finalpoint=" + xStop + ","
-					+ yStop + "&method=SPS");
+			url = new URL(serviceParameter.getServiceDataSource()
+					+ serviceParameter.getFirstRegex() + xStart + "," + yStart
+					+ serviceParameter.getFinalRegex() + xStop + "," + yStop
+					+ serviceParameter.getMethod());
 
 			conn = (HttpURLConnection) url.openConnection();
 

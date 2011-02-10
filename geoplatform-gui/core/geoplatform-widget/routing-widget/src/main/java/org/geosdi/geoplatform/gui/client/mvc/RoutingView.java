@@ -58,7 +58,8 @@ public class RoutingView extends GeoPlatformView {
 	public RoutingView(Controller controller) {
 		super(controller);
 		// TODO Auto-generated constructor stub
-		this.routingManagement = new RoutingManagementWidget();
+		this.routingManagement = new RoutingManagementWidget(
+				(RoutingController) controller);
 	}
 
 	/*

@@ -41,6 +41,7 @@ import javax.servlet.annotation.WebServlet;
 
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 import org.geosdi.geoplatform.gui.server.service.IStartupService;
+import org.geosdi.geoplatform.gui.server.service.impl.StartupService;
 import org.geosdi.geoplatform.gui.service.GeoPlatformConfiguration;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.slf4j.Logger;
@@ -96,7 +97,7 @@ public class GeoPlatformConfigurationImpl extends RemoteServiceServlet
 	 */
 	private void injectValues() {
 		this.startupService = (IStartupService) GeoPlatformContextUtil
-				.getInstance().getBean("startupService");
+				.getInstance().getBean(StartupService.class);
 
 		logger.info("SPRING CONTEXT INITIALIZED" + this.startupService);
 	}

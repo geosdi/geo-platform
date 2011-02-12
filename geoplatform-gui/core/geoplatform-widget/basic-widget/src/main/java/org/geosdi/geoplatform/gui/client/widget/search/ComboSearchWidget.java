@@ -135,7 +135,7 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
 
 		tableWidget.setCellSpacing(8);
 		tableWidget.setCellPadding(4);
-		
+
 		tableWidget.getCellFormatter().setHorizontalAlignment(1, 1,
 				HasHorizontalAlignment.ALIGN_CENTER);
 
@@ -171,7 +171,6 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
 	/**
 	 * 
 	 * @param type
-	 * @param visible
 	 */
 	public void loadImage(TypeImage type, boolean visible) {
 		this.loadImage.setUrl(type.toString());

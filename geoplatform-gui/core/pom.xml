@@ -47,6 +47,12 @@
 	</pluginRepositories>
     
 	<repositories>
+        <!-- geoSDI -->
+        <repository>
+            <id>geosdi</id>
+            <name>geoSDI Repository</name>
+            <url>http://repo.geosdi.org</url>
+        </repository>
 		<repository>
 			<id>gwt-maven</id>
 			<url>

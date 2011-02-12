@@ -52,6 +52,11 @@ import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
 public class StartPointSearchRouting extends
 		ComboSearchWidget<GeocodingBean, RoutingController> {
 
+	/**
+	 * 
+	 * @param controller
+	 * 
+	 */
 	public StartPointSearchRouting(RoutingController controller) {
 		super(controller);
 	}
@@ -66,9 +71,7 @@ public class StartPointSearchRouting extends
 	public void setWidgetProperties() {
 		// TODO Auto-generated method stub
 		this.combo.setDisplayField(GeocodingKeyValue.DESCRIPTION.getValue());
-
 		this.combo.setHideTrigger(true);
-
 		this.combo.setWidth(200);
 
 		this.combo.addKeyListener(new KeyListener() {
@@ -88,6 +91,7 @@ public class StartPointSearchRouting extends
 						&& (combo.getRawValue().length() >= 4)) {
 					/*******************************************/
 					/*********** Here the rpc Call *************/
+					loadImage(TypeImage.IMAGE_LOADING, true);
 				}
 			}
 

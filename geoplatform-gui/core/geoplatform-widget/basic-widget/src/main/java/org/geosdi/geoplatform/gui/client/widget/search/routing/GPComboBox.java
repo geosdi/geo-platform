@@ -33,118 +33,24 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model;
+package org.geosdi.geoplatform.gui.client.widget.search.routing;
 
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
-import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
+
+import com.extjs.gxt.ui.client.event.FieldEvent;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GeocodingBean extends GeoPlatformBeanModel implements
-		IGeoPlatformLocation {
+public class GPComboBox<T extends GeoPlatformBeanModel> extends ComboBox<T> {
 
 	/**
+	 * This Method must be override to prevente any errors on Widget
 	 * 
 	 */
-	private static final long serialVersionUID = -3598344038115853656L;
-
-	private String description;
-	private double lon;
-	private double lat;
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
+	protected void onKeyUp(FieldEvent fe) {
 	}
-
-	/**
-	 * @param description
-	 *            the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-		set(GeocodingKeyValue.DESCRIPTION.getValue(), this.description);
-	}
-
-	/**
-	 * @return the lon
-	 */
-	public double getLon() {
-		return lon;
-	}
-
-	/**
-	 * @param lon
-	 *            the lon to set
-	 */
-	public void setLon(double lon) {
-		this.lon = lon;
-	}
-
-	/**
-	 * @return the lat
-	 */
-	public double getLat() {
-		return lat;
-	}
-
-	/**
-	 * @param lat
-	 *            the lat to set
-	 */
-	public void setLat(double lat) {
-		this.lat = lat;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		GeocodingBean other = (GeocodingBean) obj;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "GeocodingBean [description=" + description + ", lon=" + lon
-				+ ", lat=" + lat + "]";
-	}
-
 }

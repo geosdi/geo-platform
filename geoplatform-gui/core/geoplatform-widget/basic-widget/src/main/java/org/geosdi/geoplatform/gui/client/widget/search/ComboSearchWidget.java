@@ -37,12 +37,13 @@ package org.geosdi.geoplatform.gui.client.widget.search;
 
 import java.util.List;
 
+import org.geosdi.geoplatform.gui.client.widget.search.routing.GPComboBox;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.form.ComboBox;
-import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -85,7 +86,7 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
 	protected C controller;
 	protected FlexTable tableWidget;
 	protected ListStore<T> store;
-	protected ComboBox<T> combo;
+	protected GPComboBox<T> combo;
 	protected Image loadImage;
 	protected Image display;
 
@@ -119,11 +120,14 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
 	private void createCombo() {
 		// TODO Auto-generated method stub
 		this.store = new ListStore<T>();
-		this.combo = new ComboBox<T>();
+		this.combo = new GPComboBox<T>();
 		this.combo.setStore(store);
-		this.combo.setTriggerAction(TriggerAction.ALL);
+
 		setWidgetProperties();
 		setComboToolTip();
+
+		setComboSelectionChangedListener();
+
 	}
 
 	/**
@@ -160,12 +164,30 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				if ((!combo.isExpanded()) && (store.getModels().size() != 0))
+				if (store.getModels().size() > 0) {
+					combo.focus();
 					combo.expand();
+				}
 			}
 		});
 
 		tableWidget.setWidget(1, 3, this.display);
+	}
+
+	/**
+	 * 
+	 */
+	private void setComboSelectionChangedListener() {
+		// TODO Auto-generated method stub
+		this.combo
+				.addSelectionChangedListener(new SelectionChangedListener<T>() {
+
+					@Override
+					public void selectionChanged(SelectionChangedEvent<T> se) {
+						// TODO Auto-generated method stub
+						selectionChanged(se);
+					}
+				});
 	}
 
 	/**
@@ -182,7 +204,6 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
 	 * @param models
 	 */
 	public void fillStore(List<T> models) {
-		clearStore();
 		this.store.add(models);
 	}
 
@@ -214,6 +235,13 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
 	public abstract void setWidgetProperties();
 
 	public abstract void setComboToolTip();
+
+	public abstract void selectionChanged(SelectionChangedEvent<T> se);
+
+	public void expand() {
+		combo.focus();
+		combo.expand();
+	}
 
 	/**
 	 * @return the tableWidget

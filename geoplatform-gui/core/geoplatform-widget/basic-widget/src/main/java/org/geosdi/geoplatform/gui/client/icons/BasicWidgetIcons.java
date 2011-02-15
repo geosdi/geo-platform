@@ -59,8 +59,11 @@ public interface BasicWidgetIcons extends ImageBundle {
 
 	@Resource("search.png")
 	AbstractImagePrototype search();
-	
+
 	@Resource("routing.png")
 	AbstractImagePrototype routing();
+
+	@Resource("eraser_minus.png")
+	AbstractImagePrototype erase();
 
 }

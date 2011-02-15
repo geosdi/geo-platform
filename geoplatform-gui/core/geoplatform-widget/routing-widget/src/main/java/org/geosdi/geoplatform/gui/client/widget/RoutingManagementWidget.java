@@ -55,9 +55,13 @@ public class RoutingManagementWidget extends ContentPanel {
 
 	private FormPanel formPanel;
 
-	private RoutingPointsWidget pointsWidget;
+	private RoutingSearchWidget pointsWidget;
 	private RoutingGridWidget routingGridWidget;
 
+	/**
+	 * 
+	 * @param controller
+	 */
 	public RoutingManagementWidget(RoutingController controller) {
 		setHeading("Routing Widget");
 		setLayout(new FitLayout());
@@ -68,7 +72,7 @@ public class RoutingManagementWidget extends ContentPanel {
 			@Override
 			public void widgetResized(ComponentEvent ce) {
 				if (getHeight() > 0)
-					routingGridWidget.getGrid().setHeight(getHeight() - 215);
+					routingGridWidget.getGrid().setHeight(getHeight() - 260);
 
 			}
 		});
@@ -86,7 +90,7 @@ public class RoutingManagementWidget extends ContentPanel {
 
 		setLayoutOnChange(true);
 
-		this.pointsWidget = new RoutingPointsWidget(controller);
+		this.pointsWidget = new RoutingSearchWidget(controller);
 
 		this.formPanel.add(this.pointsWidget.getFieldSet());
 

@@ -35,14 +35,19 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import java.util.ArrayList;
+
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
 import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
 import org.geosdi.geoplatform.gui.client.widget.search.ComboSearchWidget;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.KeyListener;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -72,6 +77,9 @@ public class StartPointSearchRouting extends
 		// TODO Auto-generated method stub
 		this.combo.setDisplayField(GeocodingKeyValue.DESCRIPTION.getValue());
 		this.combo.setHideTrigger(true);
+
+		this.combo.setUseQueryCache(false);
+
 		this.combo.setWidth(200);
 
 		this.combo.addKeyListener(new KeyListener() {
@@ -88,11 +96,9 @@ public class StartPointSearchRouting extends
 			public void componentKeyPress(ComponentEvent event) {
 				// TODO Auto-generated method stub
 				if ((event.getKeyCode() == 13)
-						&& (combo.getRawValue().length() >= 4)) {
-					/*******************************************/
-					/*********** Here the rpc Call *************/
-					loadImage(TypeImage.IMAGE_LOADING, true);
-				}
+						&& (combo.getRawValue().length() >= 4)
+						&& (combo.getSelection().size() == 0))
+					dispatchRequest();
 			}
 
 		});
@@ -129,5 +135,55 @@ public class StartPointSearchRouting extends
 		/************ HERE THE CHECK TO REMOVE ALL ON THE MAP ***************/
 		/********************************************************************/
 		/********************************************************************/
+	}
+
+	/**
+	 * Send Request to Geocoding Module to fill the Combo with Results
+	 * 
+	 */
+	public void dispatchRequest() {
+		loadImage(TypeImage.IMAGE_LOADING, true);
+		this.clearStore();
+
+		controller.getGeocodingService().findLocations(combo.getRawValue(),
+				new AsyncCallback<ArrayList<GeocodingBean>>() {
+
+					@Override
+					public void onSuccess(ArrayList<GeocodingBean> result) {
+						// TODO Auto-generated method stub
+
+						if (result.size() > 0) {
+							GeoPlatformMessage.infoMessage("Geocoding Service",
+									"Results loaded with success.");
+							loadImage(TypeImage.IMAGE_RESULT_FOUND, true);
+							fillStore(result);
+							expand();
+						} else {
+							GeoPlatformMessage.alertMessage(
+									"Geocoding Service", "No Results found!");
+							loadImage(TypeImage.IMAGE_RESULT_NOT_FOUND, true);
+							clearStore();
+						}
+
+					}
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						GeoPlatformMessage.errorMessage("Geocoding Service",
+								"An Error occurred while dispatching request.");
+						loadImage(TypeImage.IMAGE_SERVICE_ERROR, true);
+						clearStore();
+					}
+				});
+	}
+
+	/* (non-Javadoc)
+	 * @see org.geosdi.geoplatform.gui.client.widget.search.ComboSearchWidget#selectionChanged(com.extjs.gxt.ui.client.event.SelectionChangedEvent)
+	 */
+	@Override
+	public void selectionChanged(SelectionChangedEvent<GeocodingBean> se) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -35,11 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
+import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
+import com.extjs.gxt.ui.client.widget.layout.MarginData;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Image;
 
@@ -48,14 +53,21 @@ import com.google.gwt.user.client.ui.Image;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class RoutingPointsWidget {
+public class RoutingSearchWidget {
 
 	private FieldSet fieldSet;
 
 	private StartPointSearchRouting startPoint;
 	private FinalPointSearchWidget finalPoint;
 
-	public RoutingPointsWidget(RoutingController controller) {
+	private Button traceRoute;
+	private Button clear;
+
+	/**
+	 * 
+	 * @param controller
+	 */
+	public RoutingSearchWidget(RoutingController controller) {
 		this.fieldSet = new FieldSet();
 		this.fieldSet.setCollapsible(false);
 		initWidgets(controller);
@@ -92,6 +104,36 @@ public class RoutingPointsWidget {
 		panel1.add(this.finalPoint.getTableWidget());
 
 		fieldSet.add(panel1);
+
+		HorizontalPanel buttonPanel = new HorizontalPanel();
+		buttonPanel.setSpacing(5);
+
+		this.traceRoute = new Button("Search",
+				BasicWidgetResources.ICONS.routing(),
+				new SelectionListener<ButtonEvent>() {
+
+					@Override
+					public void componentSelected(ButtonEvent ce) {
+						// TODO Auto-generated method stub
+
+					}
+				});
+
+		buttonPanel.add(this.traceRoute);
+
+		this.clear = new Button("Clear", BasicWidgetResources.ICONS.erase(),
+				new SelectionListener<ButtonEvent>() {
+
+					@Override
+					public void componentSelected(ButtonEvent ce) {
+						// TODO Auto-generated method stub
+
+					}
+				});
+
+		buttonPanel.add(this.clear);
+
+		fieldSet.add(buttonPanel, new MarginData(5, 5, 5, 145));
 	}
 
 	/**

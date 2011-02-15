@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.control.crud.OperationType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -50,7 +50,8 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 public class DeleteFeatureAction extends GenericFeatureAction {
 
 	public DeleteFeatureAction(GeoPlatformMap theMapWidget) {
-		super("Delete Feature", Resources.ICONS.DeleteFeature(), theMapWidget);
+		super("Delete Feature", BasicWidgetResources.ICONS.erase(),
+				theMapWidget);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -48,8 +48,10 @@ import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 
 /**
- * @author giuseppe
  * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  */
 public class RoutingView extends GeoPlatformView {
 
@@ -116,7 +118,7 @@ public class RoutingView extends GeoPlatformView {
 	/**
 	 * Un Mask RoutingGridWidget
 	 */
-	public void unMaskGeocodingGrid() {
+	public void unMaskRoutingGrid() {
 		this.routingManagement.getRoutingGridWidget().unMaskGrid();
 	}
 

@@ -35,8 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
 
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
 
 /**
@@ -86,6 +88,18 @@ public class FinalPointSearchWidget extends StartPointSearchRouting {
 		/************ HERE THE CHECK TO REMOVE ALL ON THE MAP ***************/
 		/********************************************************************/
 		/********************************************************************/
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#
+	 * selectionChanged(com.extjs.gxt.ui.client.event.SelectionChangedEvent)
+	 */
+	@Override
+	public void selectionChanged(SelectionChangedEvent<GeocodingBean> se) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

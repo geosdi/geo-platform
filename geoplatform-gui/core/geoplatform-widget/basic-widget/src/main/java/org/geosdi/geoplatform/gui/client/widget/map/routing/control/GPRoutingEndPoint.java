@@ -33,17 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.map.control;
+package org.geosdi.geoplatform.gui.client.widget.map.routing.control;
+
+import org.gwtopenmaps.openlayers.client.layer.Vector;
+
+import com.google.gwt.core.client.GWT;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface GeoPlatformMapControl {
+public class GPRoutingEndPoint extends GPRoutingStartPoint {
 
-	void createControl();
+	/**
+	 * @param theLayer
+	 */
+	public GPRoutingEndPoint(Vector theLayer) {
+		super(theLayer);
+		// TODO Auto-generated constructor stub
+	}
 
-	void activateControl();
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.client.widget.map.routing.control.
+	 * GPRoutingStartPoint#setIconStyle()
+	 */
+	@Override
+	public void setIconStyle() {
+		// TODO Auto-generated method stub
+		style.setExternalGraphic(GWT.getModuleBaseURL() + "/gp-images/end.png");
+	}
 
-	void deactivateControl();
 }

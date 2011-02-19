@@ -118,7 +118,7 @@ public class RoutingSearchWidget {
 
 					}
 				});
-
+		
 		buttonPanel.add(this.traceRoute);
 
 		this.clear = new Button("Clear", BasicWidgetResources.ICONS.erase(),
@@ -127,7 +127,8 @@ public class RoutingSearchWidget {
 					@Override
 					public void componentSelected(ButtonEvent ce) {
 						// TODO Auto-generated method stub
-
+						startPoint.clearStatus();
+						finalPoint.clearStatus();
 					}
 				});
 

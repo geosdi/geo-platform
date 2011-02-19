@@ -33,17 +33,41 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.map.control;
+package org.geosdi.geoplatform.gui.client.widget.map.routing.control;
+
+import org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface GeoPlatformMapControl {
+public class GPRoutingLine extends GPRoutingControl {
 
-	void createControl();
+	/**
+	 * @param theLayer
+	 */
+	public GPRoutingLine(Vector theLayer) {
+		super(theLayer);
+		// TODO Auto-generated constructor stub
+	}
 
-	void activateControl();
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle
+	 * ()
+	 */
+	@Override
+	public void createStyle() {
+		// TODO Auto-generated method stub
+		style.setStrokeColor("#2c2d99");
+		style.setStrokeWidth(3);
+		style.setFillColor("#6b5696");
+		style.setFillOpacity(0.8);
+		style.setStrokeOpacity(1.0);
+	}
 
-	void deactivateControl();
 }

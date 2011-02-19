@@ -33,17 +33,39 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.map.control;
+package org.geosdi.geoplatform.gui.impl.map.control;
+
+import org.gwtopenmaps.openlayers.client.Style;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.geometry.Geometry;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
+
+
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface GeoPlatformMapControl {
+public abstract class GPRoutingControl {
 
-	void createControl();
+	protected Vector layer;
+	protected VectorFeature feature;
+	protected Style style;
+	protected Geometry theGeom;
 
-	void activateControl();
+	/**
+	 * @Constructor
+	 * 
+	 * @param theLayer
+	 */
+	public GPRoutingControl(Vector theLayer) {
+		this.layer = theLayer;
+	}
 
-	void deactivateControl();
+	/**
+	 * Create Style for VectorFeature
+	 */
+	public abstract void createStyle();
+
 }

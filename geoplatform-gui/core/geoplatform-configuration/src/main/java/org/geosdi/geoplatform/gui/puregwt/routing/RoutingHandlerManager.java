@@ -33,17 +33,55 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.map.control;
+package org.geosdi.geoplatform.gui.puregwt.routing;
+
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
+
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ * 
+ *        Handler Manager to manage all Events for Routing Module
  * 
  */
-public interface GeoPlatformMapControl {
+public class RoutingHandlerManager {
 
-	void createControl();
+	private GPEventBus eventBus;
 
-	void activateControl();
+	private static RoutingHandlerManager INSTANCE;
 
-	void deactivateControl();
+	public RoutingHandlerManager() {
+		this.eventBus = new GPEventBusImpl();
+	}
+
+	public static RoutingHandlerManager get() {
+		if (INSTANCE == null)
+			INSTANCE = new RoutingHandlerManager();
+		return INSTANCE;
+	}
+
+	public static <T extends EventHandler> HandlerRegistration addHandler(
+			Type<T> type, T handler) {
+		return get().eventBus.addHandler(type, handler);
+	}
+
+	public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
+			Type<T> type, Object source, T handler) {
+		return get().eventBus.addHandlerToSource(type, source, handler);
+	}
+
+	public static void fireEvent(GwtEvent<?> event) {
+		get().eventBus.fireEvent(event);
+	}
+
+	public void fireEventFromSource(GwtEvent<?> event, Object source) {
+		get().eventBus.fireEventFromSource(event, source);
+	}
+
 }

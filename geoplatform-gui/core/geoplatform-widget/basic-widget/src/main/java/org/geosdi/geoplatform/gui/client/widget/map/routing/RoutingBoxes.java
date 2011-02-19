@@ -33,17 +33,65 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.map.control;
+package org.geosdi.geoplatform.gui.client.widget.map.routing;
+
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.gwtopenmaps.openlayers.client.Bounds;
+import org.gwtopenmaps.openlayers.client.Projection;
+import org.gwtopenmaps.openlayers.client.layer.Boxes;
+import org.gwtopenmaps.openlayers.client.marker.Box;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface GeoPlatformMapControl {
+public class RoutingBoxes {
 
-	void createControl();
+	private GeoPlatformMap geoPlatformMap;
 
-	void activateControl();
+	private Boxes layer;
+	private Box marker;
+	private Bounds bounds = new Bounds(6.627, 35.492, 18.521, 47.092);
 
-	void deactivateControl();
+	/**
+	 * @Constructor
+	 */
+	public RoutingBoxes(GeoPlatformMap theGeoPlatformMap) {
+		this.geoPlatformMap = theGeoPlatformMap;
+		init();
+	}
+
+	/**
+	 * Init Component
+	 */
+	private void init() {
+		// TODO Auto-generated method stub
+		this.layer = new Boxes("Geo-Platform Routing Boxes Layer");
+
+		this.marker = new Box(this.bounds.transform(
+				new Projection("EPSG:4326"), new Projection(geoPlatformMap
+						.getMap().getProjection())));
+
+		this.marker.setZIndex(949);
+
+		this.layer.addMarker(marker);
+	}
+
+	/**
+	 * Add the layer to the Map
+	 * 
+	 */
+	public void activate() {
+		this.geoPlatformMap.getMap().addLayer(this.layer);
+	}
+
+	/**
+	 * Remove Layer from Map
+	 * 
+	 */
+	public void deactivate() {
+		this.geoPlatformMap.getMap().removeLayer(this.layer);
+	}
+
 }

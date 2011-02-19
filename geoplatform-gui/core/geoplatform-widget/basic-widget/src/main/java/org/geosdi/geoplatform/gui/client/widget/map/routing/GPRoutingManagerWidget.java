@@ -33,17 +33,78 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.map.control;
+package org.geosdi.geoplatform.gui.client.widget.map.routing;
+
+import org.geosdi.geoplatform.gui.client.widget.map.routing.control.GPRoutingEndPoint;
+import org.geosdi.geoplatform.gui.client.widget.map.routing.control.GPRoutingLine;
+import org.geosdi.geoplatform.gui.client.widget.map.routing.control.GPRoutingStartPoint;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface GeoPlatformMapControl {
+public class GPRoutingManagerWidget {
 
-	void createControl();
+	private GeoPlatformMap geoPlatformMap;
+	private Vector pointsVector;
+	private Vector routeVector;
+	private RoutingBoxes box;
+	private GPRoutingControl start;
+	private GPRoutingControl end;
+	private GPRoutingControl line;
 
-	void activateControl();
+	/**
+	 * @Constructor
+	 * 
+	 * @param theGeoPlatformMap
+	 */
+	public GPRoutingManagerWidget(GeoPlatformMap theGeoPlatformMap) {
+		this.geoPlatformMap = theGeoPlatformMap;
+		initWidget();
+	}
 
-	void deactivateControl();
+	/**
+	 * 
+	 */
+	private void initWidget() {
+		// TODO Auto-generated method stub
+		initBox();
+		initPointsControl();
+		initLineControl();
+	}
+
+	/**
+	 * 
+	 * Create Box to Limitare Search AREA
+	 */
+	private void initBox() {
+		// TODO Auto-generated method stub
+		this.box = new RoutingBoxes(geoPlatformMap);
+	}
+
+	/**
+	 * 
+	 */
+	private void initPointsControl() {
+		// TODO Auto-generated method stub
+		this.pointsVector = new Vector("GeoPlatform-Points-Vector");
+		this.pointsVector.setZIndex(955);
+		this.start = new GPRoutingStartPoint(this.pointsVector);
+		this.end = new GPRoutingEndPoint(this.pointsVector);
+	}
+
+	/**
+	 * 
+	 */
+	private void initLineControl() {
+		// TODO Auto-generated method stub
+		this.routeVector = new Vector("GeoPlatform-Route-Vector");
+		this.routeVector.setZIndex(956);
+		this.line = new GPRoutingLine(routeVector);
+	}
+
 }

@@ -33,17 +33,54 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.map.control;
+package org.geosdi.geoplatform.gui.client.widget.map.routing.control;
+
+import org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
+
+import com.google.gwt.core.client.GWT;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface GeoPlatformMapControl {
+public class GPRoutingStartPoint extends GPRoutingControl {
 
-	void createControl();
+	/**
+	 * @param theLayer
+	 */
+	public GPRoutingStartPoint(Vector theLayer) {
+		super(theLayer);
+		// TODO Auto-generated constructor stub
+	}
 
-	void activateControl();
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle
+	 * ()
+	 */
+	@Override
+	public void createStyle() {
+		// TODO Auto-generated method stub
+		style.setFillOpacity(1);
+		setIconStyle();
+		style.setFontColor("blue");
+		style.setFontSize("13px");
+		style.setFontWeight("bold");
+		style.setLabelAlign("cb");
+		style.setGraphicSize(20, 34);
+		style.setGraphicOffset(0, -17);
+	}
 
-	void deactivateControl();
+	/**
+	 * 
+	 */
+	public void setIconStyle() {
+		style.setExternalGraphic(GWT.getModuleBaseURL()
+				+ "/gp-images/start.png");
+	}
+
 }

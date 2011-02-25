@@ -33,54 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
-
-import com.extjs.gxt.ui.client.Style.Scroll;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+package org.geosdi.geoplatform.gui.global.notifier;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class LayerManagementWidget extends ContentPanel {
+public enum GeoPlatformModule {
 
-	private boolean initialized;
-	private LayerTreeWidget layerTree;
-
-	/**
-	 * Method to Build The Widget
-	 * 
-	 */
-	private void buildWidget() {
-		if (!initialized) {
-			this.initialized = true;
-			setHeading("Layer Widget");
-			setLayout(new FitLayout());
-
-			this.layerTree = new LayerTreeWidget();
-
-			add(this.layerTree.getTree());
-
-			setScrollMode(Scroll.AUTOY);
-		}
-	}
-
-	/**
-	 * Build Layer Widget with Spring Configuration
-	 * 
-	 */
-	public void buildTree() {
-		this.buildWidget();
-		this.layerTree.buildTree();
-	}
-
-	/**
-	 * @return the layerTree
-	 */
-	public LayerTreeWidget getLayerTree() {
-		return layerTree;
-	}
+	/** HERE ALL MODULES **/
+	
+	MAP_WIDGET,
+	GEOCODING_WIDGET,
+	ROUTING_WIDGET,
+	LAYERS_WIDGET
 
 }

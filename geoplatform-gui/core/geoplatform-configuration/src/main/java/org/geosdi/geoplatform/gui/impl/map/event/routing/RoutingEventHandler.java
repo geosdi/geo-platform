@@ -33,54 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.impl.map.event.routing;
 
-import com.extjs.gxt.ui.client.Style.Scroll;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class LayerManagementWidget extends ContentPanel {
+public interface RoutingEventHandler extends EventHandler {
 
-	private boolean initialized;
-	private LayerTreeWidget layerTree;
+	Type<RoutingEventHandler> TYPE = new Type<RoutingEventHandler>();
 
-	/**
-	 * Method to Build The Widget
-	 * 
-	 */
-	private void buildWidget() {
-		if (!initialized) {
-			this.initialized = true;
-			setHeading("Layer Widget");
-			setLayout(new FitLayout());
+	public void register();
 
-			this.layerTree = new LayerTreeWidget();
-
-			add(this.layerTree.getTree());
-
-			setScrollMode(Scroll.AUTOY);
-		}
-	}
-
-	/**
-	 * Build Layer Widget with Spring Configuration
-	 * 
-	 */
-	public void buildTree() {
-		this.buildWidget();
-		this.layerTree.buildTree();
-	}
-
-	/**
-	 * @return the layerTree
-	 */
-	public LayerTreeWidget getLayerTree() {
-		return layerTree;
-	}
+	public void unregister();
 
 }

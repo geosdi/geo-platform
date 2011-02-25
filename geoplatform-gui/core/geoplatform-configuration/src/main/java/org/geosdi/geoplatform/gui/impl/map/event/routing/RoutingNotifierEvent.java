@@ -33,100 +33,53 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl;
+package org.geosdi.geoplatform.gui.impl.map.event.routing;
 
-import org.geosdi.geoplatform.gui.configuration.FolderStore;
-import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
-import org.geosdi.geoplatform.gui.global.GeoPlatformInfo;
-import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
- * 
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
+ * 
  */
-//@Component("geoPlatformGlobal")
-public class GeoPlatformGlobal implements IGeoPlatformGlobal {
+public class RoutingNotifierEvent extends GwtEvent<RoutingEventHandler> {
+
+	private boolean activate;
 
 	/**
+	 * @Constructor
 	 * 
+	 * @param activate
 	 */
-	private static final long serialVersionUID = -8229961575424418806L;
-
-	@Autowired
-	private GeoPlatformInfo geoPlatformInfo;
-
-//	@Autowired
-	private IToolbarClientTool toolbarClientTool;
-
-//	@Autowired
-	private IMenuBarContainerTool menuBarContainerTool;
-	
-//	@Autowired
-	private FolderStore folderStore;
-
-	/**
-	 * @return the geoPlatformInfo
-	 */
-	public GeoPlatformInfo getGeoPlatformInfo() {
-		return geoPlatformInfo;
+	public RoutingNotifierEvent(boolean activate) {
+		this.activate = activate;
 	}
 
-	/**
-	 * @param geoPlatformInfo
-	 *            the geoPlatformInfo to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
 	 */
-	public void setGeoPlatformInfo(GeoPlatformInfo geoPlatformInfo) {
-		this.geoPlatformInfo = geoPlatformInfo;
+	@Override
+	public Type<RoutingEventHandler> getAssociatedType() {
+		// TODO Auto-generated method stub
+		return RoutingEventHandler.TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal#getToolbarClientTool
-	 * ()
+	 * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+	 * .EventHandler)
 	 */
 	@Override
-	public IToolbarClientTool getToolbarClientTool() {
+	protected void dispatch(RoutingEventHandler handler) {
 		// TODO Auto-generated method stub
-		return toolbarClientTool;
-	}
-
-	/**
-	 * @param toolbarClientTool
-	 *            the toolbarClientTool to set
-	 */
-	public void setToolbarClientTool(IToolbarClientTool toolbarClientTool) {
-		this.toolbarClientTool = toolbarClientTool;
-	}
-
-	@Override
-	public IMenuBarContainerTool getMenuBarContainerTool() {
-		// TODO Auto-generated method stub
-		return menuBarContainerTool;
-	}
-
-	/**
-	 * @param menuBarContainerTool
-	 *            the menuBarContainerTool to set
-	 */
-	public void setMenuBarContainerTool(
-			IMenuBarContainerTool menuBarContainerTool) {
-		this.menuBarContainerTool = menuBarContainerTool;
-	}
-
-	@Override
-	public FolderStore getFolderStore() {
-		// TODO Auto-generated method stub
-		return this.folderStore;
-	}
-
-	public void setFolderStore(FolderStore folserStore) {
-		this.folderStore = folserStore;
+		if (activate)
+			handler.register();
+		else
+			handler.unregister();
 	}
 
 }

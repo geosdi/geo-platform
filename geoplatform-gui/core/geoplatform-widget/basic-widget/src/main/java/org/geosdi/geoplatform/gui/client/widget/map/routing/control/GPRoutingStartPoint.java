@@ -35,7 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.routing.control;
 
-import org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformBoxesWidget;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
+import org.geosdi.geoplatform.gui.puregwt.routing.RoutingHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.routing.event.RemoveStartRoutingPointEventHandler;
+import org.geosdi.geoplatform.gui.puregwt.routing.event.StartRoutingPointEventHandler;
+import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.geometry.Point;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 import com.google.gwt.core.client.GWT;
@@ -45,34 +54,20 @@ import com.google.gwt.core.client.GWT;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GPRoutingStartPoint extends GPRoutingControl {
+public class GPRoutingStartPoint extends GenericRoutingPoint implements
+		StartRoutingPointEventHandler, RemoveStartRoutingPointEventHandler {
 
 	/**
 	 * @param theLayer
 	 */
-	public GPRoutingStartPoint(Vector theLayer) {
-		super(theLayer);
+	public GPRoutingStartPoint(Vector theLayer,
+			GeoPlatformBoxesWidget boxesWidget, GeoPlatformMap geoPlatformMap) {
+		super(theLayer, boxesWidget, geoPlatformMap);
 		// TODO Auto-generated constructor stub
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle
-	 * ()
-	 */
-	@Override
-	public void createStyle() {
-		// TODO Auto-generated method stub
-		style.setFillOpacity(1);
-		setIconStyle();
-		style.setFontColor("blue");
-		style.setFontSize("13px");
-		style.setFontWeight("bold");
-		style.setLabelAlign("cb");
-		style.setGraphicSize(20, 34);
-		style.setGraphicOffset(0, -17);
+		RoutingHandlerManager.addHandler(StartRoutingPointEventHandler.TYPE,
+				this);
+		RoutingHandlerManager.addHandler(
+				RemoveStartRoutingPointEventHandler.TYPE, this);
 	}
 
 	/**
@@ -81,6 +76,46 @@ public class GPRoutingStartPoint extends GPRoutingControl {
 	public void setIconStyle() {
 		style.setExternalGraphic(GWT.getModuleBaseURL()
 				+ "/gp-images/start.png");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.puregwt.routing.event.
+	 * StartRoutingPointEventHandler
+	 * #drawFeature(org.geosdi.geoplatform.gui.model.IGeoPlatformLocation)
+	 */
+	@Override
+	public void drawFeature(IGeoPlatformLocation location) {
+		// TODO Auto-generated method stub
+		LonLat ll = new LonLat(location.getLon(), location.getLat());
+		ll.transform("EPSG:4326", geoPlatformMap.getMap().getProjection());
+		if (!this.boxesWidget.containsLonLat(ll)) {
+			GeoPlatformMessage.errorMessage("GeoPlatform Routing",
+					"The chosen location is out of Range.");
+			return;
+		}
+
+		if (feature != null)
+			layer.removeFeature(feature);
+
+		Point p = new Point(ll.lon(), ll.lat());
+		feature = new VectorFeature(p);
+		feature.setStyle(style);
+		layer.addFeature(feature);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.puregwt.routing.event.
+	 * RemoveStartRoutingPointEventHandler#removePoint()
+	 */
+	@Override
+	public void removePoint() {
+		// TODO Auto-generated method stub
+		layer.removeFeature(feature);
+		feature = null;
 	}
 
 }

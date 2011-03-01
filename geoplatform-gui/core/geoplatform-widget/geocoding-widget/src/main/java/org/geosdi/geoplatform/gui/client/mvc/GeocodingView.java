@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.GeocodingEvents;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.widget.GeocodingManagementWidget;
+import org.geosdi.geoplatform.gui.client.widget.ReverseGeocodingDispatcher;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
@@ -54,11 +55,23 @@ import com.extjs.gxt.ui.client.widget.grid.Grid;
 public class GeocodingView extends GeoPlatformView {
 
 	private GeocodingManagementWidget geocodingManagement;
+	private ReverseGeocodingDispatcher reverseDispatcher;
 
 	public GeocodingView(Controller controller) {
 		super(controller);
 		// TODO Auto-generated constructor stub
 		this.geocodingManagement = new GeocodingManagementWidget();
+	}
+	
+	
+
+	/* (non-Javadoc)
+	 * @see com.extjs.gxt.ui.client.mvc.View#initialize()
+	 */
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+		this.reverseDispatcher = new ReverseGeocodingDispatcher();
 	}
 
 	/*

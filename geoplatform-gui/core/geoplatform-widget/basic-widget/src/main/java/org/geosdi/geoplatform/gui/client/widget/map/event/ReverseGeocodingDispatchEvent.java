@@ -33,42 +33,53 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.routing.control;
+package org.geosdi.geoplatform.gui.client.widget.map.event;
 
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
+
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GPRoutingLine extends GPRoutingControl {
+public class ReverseGeocodingDispatchEvent extends
+		GwtEvent<ReverseGeocodingDispatchHandler> {
+
+	private ReverseGeocodingWidget widget;
 
 	/**
-	 * @param theLayer
+	 * @Construct
+	 * 
+	 * @param theWidget
 	 */
-	public GPRoutingLine(Vector theLayer, GeoPlatformMap geoPlatformMap) {
-		super(theLayer, geoPlatformMap);
-		// TODO Auto-generated constructor stub
+	public ReverseGeocodingDispatchEvent(ReverseGeocodingWidget theWidget) {
+		this.widget = theWidget;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+	 */
+	@Override
+	public Type<ReverseGeocodingDispatchHandler> getAssociatedType() {
+		// TODO Auto-generated method stub
+		return ReverseGeocodingDispatchHandler.TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle
-	 * ()
+	 * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+	 * .EventHandler)
 	 */
 	@Override
-	public void createStyle() {
+	protected void dispatch(ReverseGeocodingDispatchHandler handler) {
 		// TODO Auto-generated method stub
-		style.setStrokeColor("#2c2d99");
-		style.setStrokeWidth(3);
-		style.setFillColor("#6b5696");
-		style.setFillOpacity(0.8);
-		style.setStrokeOpacity(1.0);
+		handler.processRequest(widget);
 	}
 
 }

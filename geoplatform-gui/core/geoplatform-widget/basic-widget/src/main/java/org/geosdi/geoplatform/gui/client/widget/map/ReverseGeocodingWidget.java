@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map;
 
+import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingDispatchEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingEventHandler;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.ReverseGeocodingMarker;
@@ -43,11 +44,8 @@ import org.geosdi.geoplatform.gui.client.widget.map.popup.template.PopupTemplate
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.event.MapClickListener;
-
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -61,6 +59,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 	private PopupMapWidget popupWidget = new PopupMapWidget();
 	private MapClickListener listener;
 	private LonLat lonlat;
+	private ReverseGeocodingDispatchEvent event;
 
 	private boolean busy;
 
@@ -68,6 +67,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 		this.mapWidget = theMapWidget;
 		GPHandlerManager.addHandler(ReverseGeocodingEvent.TYPE, this);
 		this.createListener();
+		this.event = new ReverseGeocodingDispatchEvent(this);
 	}
 
 	@Override
@@ -94,7 +94,8 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 	 */
 	public void clearWidgetStatus() {
 		// TODO Auto-generated method stub
-		this.mapWidget.getMap().removeLayer(this.rGMarker.getMarkerLayer(), false);
+		this.mapWidget.getMap().removeLayer(this.rGMarker.getMarkerLayer(),
+				false);
 		this.mapWidget.getMap().removeMapClickListener(listener);
 		this.removeMapElements();
 	}
@@ -135,8 +136,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 				+ PopupTemplate.MESSAGE_LOADING.toString());
 		this.mapWidget.getMap().addPopup(popupWidget.getPopup());
 
-		Dispatcher.forwardEvent(GeoPlatformEvents.REVERSE_GEOCODING_REQUEST,
-				this);
+		GPHandlerManager.fireEvent(event);
 	}
 
 	/**

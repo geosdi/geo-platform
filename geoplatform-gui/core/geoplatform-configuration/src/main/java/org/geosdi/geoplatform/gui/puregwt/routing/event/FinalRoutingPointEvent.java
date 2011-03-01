@@ -33,42 +33,52 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.routing.control;
+package org.geosdi.geoplatform.gui.puregwt.routing.event;
 
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
+
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GPRoutingLine extends GPRoutingControl {
+public class FinalRoutingPointEvent extends
+		GwtEvent<FinalRoutingPointEventHandler> {
+
+	private IGeoPlatformLocation location;
 
 	/**
-	 * @param theLayer
+	 * @param location
+	 *            the location to set
 	 */
-	public GPRoutingLine(Vector theLayer, GeoPlatformMap geoPlatformMap) {
-		super(theLayer, geoPlatformMap);
-		// TODO Auto-generated constructor stub
+	public void setLocation(IGeoPlatformLocation location) {
+		this.location = location;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+	 */
+	@Override
+	public Type<FinalRoutingPointEventHandler> getAssociatedType() {
+		// TODO Auto-generated method stub
+		return FinalRoutingPointEventHandler.TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle
-	 * ()
+	 * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+	 * .EventHandler)
 	 */
 	@Override
-	public void createStyle() {
+	protected void dispatch(FinalRoutingPointEventHandler handler) {
 		// TODO Auto-generated method stub
-		style.setStrokeColor("#2c2d99");
-		style.setStrokeWidth(3);
-		style.setFillColor("#6b5696");
-		style.setFillOpacity(0.8);
-		style.setStrokeOpacity(1.0);
+		handler.drawFeature(location);
 	}
 
 }

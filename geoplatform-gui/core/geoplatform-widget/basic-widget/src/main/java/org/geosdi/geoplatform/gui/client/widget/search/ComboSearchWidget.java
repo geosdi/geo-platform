@@ -185,7 +185,7 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
 					@Override
 					public void selectionChanged(SelectionChangedEvent<T> se) {
 						// TODO Auto-generated method stub
-						selectionChanged(se);
+						changeSelection(se);
 					}
 				});
 	}
@@ -236,7 +236,7 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
 
 	public abstract void setComboToolTip();
 
-	public abstract void selectionChanged(SelectionChangedEvent<T> se);
+	public abstract void changeSelection(SelectionChangedEvent<T> se);
 
 	public void expand() {
 		combo.focus();

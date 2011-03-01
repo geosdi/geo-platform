@@ -33,42 +33,65 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.routing.control;
+package org.geosdi.geoplatform.gui.client.widget;
 
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
+import org.geosdi.geoplatform.gui.client.service.GeocodingRemote;
+import org.geosdi.geoplatform.gui.client.service.GeocodingRemoteAsync;
+import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
+import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingDispatchHandler;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.gwtopenmaps.openlayers.client.LonLat;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GPRoutingLine extends GPRoutingControl {
+public class ReverseGeocodingDispatcher implements
+		ReverseGeocodingDispatchHandler {
+
+	private GeocodingRemoteAsync geocodingService = GeocodingRemote.Util
+			.getInstance();
 
 	/**
-	 * @param theLayer
+	 * @Construct
+	 * 
 	 */
-	public GPRoutingLine(Vector theLayer, GeoPlatformMap geoPlatformMap) {
-		super(theLayer, geoPlatformMap);
-		// TODO Auto-generated constructor stub
+	public ReverseGeocodingDispatcher() {
+		GPHandlerManager.addHandler(ReverseGeocodingDispatchHandler.TYPE, this);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle
-	 * ()
+	 * @see org.geosdi.geoplatform.gui.client.widget.map.event.
+	 * ReverseGeocodingDispatchHandler
+	 * #processRequest(org.geosdi.geoplatform.gui.
+	 * client.widget.map.ReverseGeocodingWidget)
 	 */
 	@Override
-	public void createStyle() {
+	public void processRequest(final ReverseGeocodingWidget widget) {
 		// TODO Auto-generated method stub
-		style.setStrokeColor("#2c2d99");
-		style.setStrokeWidth(3);
-		style.setFillColor("#6b5696");
-		style.setFillOpacity(0.8);
-		style.setStrokeOpacity(1.0);
+		LonLat lonlat = widget.getLonlat();
+
+		this.geocodingService.findLocation(lonlat.lat(), lonlat.lon(),
+				new AsyncCallback<GeocodingBean>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						widget.onRequestFailure("An error occurred processing the request");
+					}
+
+					@Override
+					public void onSuccess(GeocodingBean result) {
+						// TODO Auto-generated method stub
+						widget.onRequestSuccess(result.getDescription());
+					}
+				});
 	}
 
 }

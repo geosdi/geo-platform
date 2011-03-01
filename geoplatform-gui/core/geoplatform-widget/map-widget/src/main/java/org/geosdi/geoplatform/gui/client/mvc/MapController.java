@@ -43,7 +43,8 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class MapController extends GeoPlatformController {

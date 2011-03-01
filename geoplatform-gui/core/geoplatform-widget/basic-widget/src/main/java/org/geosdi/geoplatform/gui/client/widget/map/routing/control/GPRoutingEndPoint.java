@@ -35,6 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.routing.control;
 
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformBoxesWidget;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
+import org.geosdi.geoplatform.gui.puregwt.routing.RoutingHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.routing.event.FinalRoutingPointEventHandler;
+import org.geosdi.geoplatform.gui.puregwt.routing.event.RemoveFinalRoutingPointEventHandler;
+import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.geometry.Point;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 import com.google.gwt.core.client.GWT;
@@ -44,14 +54,20 @@ import com.google.gwt.core.client.GWT;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GPRoutingEndPoint extends GPRoutingStartPoint {
+public class GPRoutingEndPoint extends GenericRoutingPoint implements
+		FinalRoutingPointEventHandler, RemoveFinalRoutingPointEventHandler {
 
 	/**
 	 * @param theLayer
 	 */
-	public GPRoutingEndPoint(Vector theLayer) {
-		super(theLayer);
+	public GPRoutingEndPoint(Vector theLayer,
+			GeoPlatformBoxesWidget boxesWidget, GeoPlatformMap geoPlatformMap) {
+		super(theLayer, boxesWidget, geoPlatformMap);
 		// TODO Auto-generated constructor stub
+		RoutingHandlerManager.addHandler(FinalRoutingPointEventHandler.TYPE,
+				this);
+		RoutingHandlerManager.addHandler(
+				RemoveFinalRoutingPointEventHandler.TYPE, this);
 	}
 
 	/*
@@ -64,6 +80,46 @@ public class GPRoutingEndPoint extends GPRoutingStartPoint {
 	public void setIconStyle() {
 		// TODO Auto-generated method stub
 		style.setExternalGraphic(GWT.getModuleBaseURL() + "/gp-images/end.png");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.puregwt.routing.event.
+	 * FinalRoutingPointEventHandler
+	 * #drawFeature(org.geosdi.geoplatform.gui.model.IGeoPlatformLocation)
+	 */
+	@Override
+	public void drawFeature(IGeoPlatformLocation location) {
+		// TODO Auto-generated method stub
+		LonLat ll = new LonLat(location.getLon(), location.getLat());
+		ll.transform("EPSG:4326", geoPlatformMap.getMap().getProjection());
+		if (!this.boxesWidget.containsLonLat(ll)) {
+			GeoPlatformMessage.errorMessage("GeoPlatform Routing",
+					"The chosen location is out of Range.");
+			return;
+		}
+
+		if (feature != null)
+			layer.removeFeature(feature);
+
+		Point p = new Point(ll.lon(), ll.lat());
+		feature = new VectorFeature(p);
+		feature.setStyle(style);
+		layer.addFeature(feature);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.puregwt.routing.event.
+	 * RemoveFinalRoutingPointEventHandler#removePoint()
+	 */
+	@Override
+	public void removePoint() {
+		// TODO Auto-generated method stub
+		layer.removeFeature(feature);
+		feature = null;
 	}
 
 }

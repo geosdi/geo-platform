@@ -33,42 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.routing.control;
+package org.geosdi.geoplatform.gui.impl.map;
 
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.gwtopenmaps.openlayers.client.Bounds;
+import org.gwtopenmaps.openlayers.client.LonLat;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GPRoutingLine extends GPRoutingControl {
+public abstract class GeoPlatformBoxesWidget {
+
+	protected GeoPlatformMap geoPlatformMap;
+	protected Bounds bounds;
 
 	/**
-	 * @param theLayer
+	 * @Constructor
+	 * 
+	 * @param geoPlatformMap
 	 */
-	public GPRoutingLine(Vector theLayer, GeoPlatformMap geoPlatformMap) {
-		super(theLayer, geoPlatformMap);
-		// TODO Auto-generated constructor stub
+	public GeoPlatformBoxesWidget(GeoPlatformMap geoPlatformMap) {
+		this.geoPlatformMap = geoPlatformMap;
+		init();
 	}
 
-	/*
-	 * (non-Javadoc)
+	public abstract void init();
+
+	public abstract void activate();
+
+	public abstract void deactivate();
+
+	/**
 	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle
-	 * ()
+	 * @param ll
+	 * @return
 	 */
-	@Override
-	public void createStyle() {
-		// TODO Auto-generated method stub
-		style.setStrokeColor("#2c2d99");
-		style.setStrokeWidth(3);
-		style.setFillColor("#6b5696");
-		style.setFillOpacity(0.8);
-		style.setStrokeOpacity(1.0);
+	public boolean containsLonLat(LonLat ll) {
+		return this.bounds.containsLonLat(ll, true);
 	}
 
 }

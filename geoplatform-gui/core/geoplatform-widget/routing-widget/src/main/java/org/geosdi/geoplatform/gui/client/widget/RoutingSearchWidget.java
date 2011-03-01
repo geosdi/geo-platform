@@ -37,6 +37,9 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
+import org.geosdi.geoplatform.gui.puregwt.routing.HasCleanEvent;
+import org.geosdi.geoplatform.gui.puregwt.routing.RoutingHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.routing.event.CleanComboEventHandler;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
@@ -53,7 +56,7 @@ import com.google.gwt.user.client.ui.Image;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class RoutingSearchWidget {
+public class RoutingSearchWidget implements HasCleanEvent {
 
 	private FieldSet fieldSet;
 
@@ -80,6 +83,9 @@ public class RoutingSearchWidget {
 		// TODO Auto-generated method stub
 		this.startPoint = new StartPointSearchRouting(controller);
 		this.finalPoint = new FinalPointSearchWidget(controller);
+
+		addCleanEventHandler(this.startPoint, this.startPoint.getComboBox());
+		addCleanEventHandler(this.finalPoint, this.finalPoint.getComboBox());
 
 		HorizontalPanel panel = new HorizontalPanel();
 		panel.setHorizontalAlign(HorizontalAlignment.CENTER);
@@ -118,7 +124,7 @@ public class RoutingSearchWidget {
 
 					}
 				});
-		
+
 		buttonPanel.add(this.traceRoute);
 
 		this.clear = new Button("Clear", BasicWidgetResources.ICONS.erase(),
@@ -142,5 +148,18 @@ public class RoutingSearchWidget {
 	 */
 	public FieldSet getFieldSet() {
 		return fieldSet;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.puregwt.routing.HasCleanEvent#addCleanEventHandler
+	 * ()
+	 */
+	@Override
+	public void addCleanEventHandler(CleanComboEventHandler handler, Object source) {
+		// TODO Auto-generated method stub
+		RoutingHandlerManager.addHandlerToSource(CleanComboEventHandler.TYPE, source, handler);
 	}
 }

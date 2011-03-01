@@ -40,6 +40,7 @@ import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
+import org.geosdi.geoplatform.gui.client.widget.map.routing.GPRoutingManagerWidget;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -87,6 +88,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	private Map map;
 	private Layer layer;
 	private Layer osm;
+	private GPRoutingManagerWidget routingWidget;
 
 	private WMSGetFeatureInfo info;
 
@@ -98,7 +100,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
 	private Measure measure;
 	private Measure measureArea;
-	
+
 	private boolean infoActive;
 	private boolean measureActive;
 	private boolean measureAreaActive;
@@ -107,6 +109,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		super();
 		this.createMapOption();
 		this.mapModel = new MapModel(this);
+		this.routingWidget = new GPRoutingManagerWidget(this);
 		this.mapModel.addLayerChangedHandler();
 	}
 
@@ -156,8 +159,8 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		this.measure.addMeasureListener(new MeasureListener() {
 
 			public void onMeasure(MeasureEvent eventObject) {
-				Info.display("Distance is: ", eventObject.getMeasure()
-						+ " " + eventObject.getUnits());
+				Info.display("Distance is: ", eventObject.getMeasure() + " "
+						+ eventObject.getUnits());
 			}
 		});
 
@@ -176,8 +179,8 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		this.measureArea.addMeasureListener(new MeasureListener() {
 
 			public void onMeasure(MeasureEvent eventObject) {
-				Info.display("Area is: ", eventObject.getMeasure()
-						+ " " + eventObject.getUnits());
+				Info.display("Area is: ", eventObject.getMeasure() + " "
+						+ eventObject.getUnits());
 			}
 		});
 
@@ -224,7 +227,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		info.deactivate();
 		this.infoActive = false;
 	}
-	
+
 	public void activateMeasure() {
 		measure.activate();
 		this.measureActive = true;
@@ -234,7 +237,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		measure.deactivate();
 		this.measureActive = false;
 	}
-	
+
 	public void activateMeasureArea() {
 		measureArea.activate();
 		this.measureAreaActive = true;
@@ -244,7 +247,6 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		measureArea.deactivate();
 		this.measureAreaActive = false;
 	}
-	
 
 	private void createOSM() {
 		OSMOptions osmOption = new OSMOptions();

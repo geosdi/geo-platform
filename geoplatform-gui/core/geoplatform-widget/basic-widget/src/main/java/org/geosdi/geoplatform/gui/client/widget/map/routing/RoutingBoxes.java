@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.map.routing;
 
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformBoxesWidget;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.Boxes;
@@ -46,36 +47,33 @@ import org.gwtopenmaps.openlayers.client.marker.Box;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class RoutingBoxes {
-
-	private GeoPlatformMap geoPlatformMap;
+public class RoutingBoxes extends GeoPlatformBoxesWidget {
 
 	private Boxes layer;
 	private Box marker;
-	private Bounds bounds = new Bounds(6.627, 35.492, 18.521, 47.092);
 
 	/**
 	 * @Constructor
 	 */
 	public RoutingBoxes(GeoPlatformMap theGeoPlatformMap) {
-		this.geoPlatformMap = theGeoPlatformMap;
-		init();
+		super(theGeoPlatformMap);
 	}
 
 	/**
 	 * Init Component
 	 */
-	private void init() {
+	public void init() {
 		// TODO Auto-generated method stub
+		this.bounds = new Bounds(6.627, 35.492, 18.521, 47.092);
 		this.layer = new Boxes("Geo-Platform Routing Boxes Layer");
 
 		this.marker = new Box(this.bounds.transform(
 				new Projection("EPSG:4326"), new Projection(geoPlatformMap
 						.getMap().getProjection())));
 
-		this.marker.setZIndex(949);
-
 		this.layer.addMarker(marker);
+
+		this.marker.setZIndex(949);
 	}
 
 	/**
@@ -84,6 +82,7 @@ public class RoutingBoxes {
 	 */
 	public void activate() {
 		this.geoPlatformMap.getMap().addLayer(this.layer);
+		this.geoPlatformMap.getMap().zoomToExtent(this.marker.getBounds());
 	}
 
 	/**

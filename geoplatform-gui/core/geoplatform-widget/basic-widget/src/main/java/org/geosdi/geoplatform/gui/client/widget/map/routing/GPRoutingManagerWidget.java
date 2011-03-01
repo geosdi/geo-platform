@@ -38,8 +38,12 @@ package org.geosdi.geoplatform.gui.client.widget.map.routing;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.control.GPRoutingEndPoint;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.control.GPRoutingLine;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.control.GPRoutingStartPoint;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformBoxesWidget;
 import org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl;
+import org.geosdi.geoplatform.gui.puregwt.routing.RoutingHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.routing.event.RoutingActivationEventHandler;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -47,12 +51,12 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GPRoutingManagerWidget {
+public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
 
 	private GeoPlatformMap geoPlatformMap;
 	private Vector pointsVector;
 	private Vector routeVector;
-	private RoutingBoxes box;
+	private GeoPlatformBoxesWidget box;
 	private GPRoutingControl start;
 	private GPRoutingControl end;
 	private GPRoutingControl line;
@@ -65,6 +69,8 @@ public class GPRoutingManagerWidget {
 	public GPRoutingManagerWidget(GeoPlatformMap theGeoPlatformMap) {
 		this.geoPlatformMap = theGeoPlatformMap;
 		initWidget();
+		RoutingHandlerManager.addHandler(RoutingActivationEventHandler.TYPE,
+				this);
 	}
 
 	/**
@@ -91,10 +97,10 @@ public class GPRoutingManagerWidget {
 	 */
 	private void initPointsControl() {
 		// TODO Auto-generated method stub
-		this.pointsVector = new Vector("GeoPlatform-Points-Vector");
+		this.pointsVector = new Vector("GP-Routing-Points-Vector");
 		this.pointsVector.setZIndex(955);
-		this.start = new GPRoutingStartPoint(this.pointsVector);
-		this.end = new GPRoutingEndPoint(this.pointsVector);
+		this.start = new GPRoutingStartPoint(this.pointsVector, this.box, this.geoPlatformMap);
+		this.end = new GPRoutingEndPoint(this.pointsVector, this.box, this.geoPlatformMap);
 	}
 
 	/**
@@ -102,9 +108,41 @@ public class GPRoutingManagerWidget {
 	 */
 	private void initLineControl() {
 		// TODO Auto-generated method stub
-		this.routeVector = new Vector("GeoPlatform-Route-Vector");
+		this.routeVector = new Vector("GP-Route-Vector");
 		this.routeVector.setZIndex(956);
-		this.line = new GPRoutingLine(routeVector);
+		this.line = new GPRoutingLine(routeVector, this.geoPlatformMap);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.puregwt.routing.event.
+	 * RoutingActivationEventHandler#activate()
+	 */
+	@Override
+	public void activate() {
+		// TODO Auto-generated method stub
+		GeoPlatformMessage.infoMessage("GeoPlatform Routing Module",
+				"Red square represents possible Routing Requests Area.");
+		this.geoPlatformMap.getMap().addLayer(this.pointsVector);
+		this.geoPlatformMap.getMap().addLayer(this.routeVector);
+		this.box.activate();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.puregwt.routing.event.
+	 * RoutingActivationEventHandler#deactivate()
+	 */
+	@Override
+	public void deactivate() {
+		// TODO Auto-generated method stub
+		GeoPlatformMessage.infoMessage("GeoPlatform Routing Module",
+				"Routing Module Deactivated.");
+		this.geoPlatformMap.getMap().removeLayer(this.pointsVector);
+		this.geoPlatformMap.getMap().removeLayer(this.routeVector);
+		this.box.deactivate();
 	}
 
 }

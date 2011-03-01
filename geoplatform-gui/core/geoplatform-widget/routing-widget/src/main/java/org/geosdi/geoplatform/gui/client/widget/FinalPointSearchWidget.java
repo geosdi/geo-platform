@@ -37,6 +37,9 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
+import org.geosdi.geoplatform.gui.puregwt.routing.RoutingHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.routing.event.FinalRoutingPointEvent;
+import org.geosdi.geoplatform.gui.puregwt.routing.event.RemoveFinalRoutingPointEvent;
 
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
@@ -48,12 +51,15 @@ import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
  */
 public class FinalPointSearchWidget extends StartPointSearchRouting {
 
+	private FinalRoutingPointEvent event;
+
 	/**
 	 * @param controller
 	 */
 	public FinalPointSearchWidget(RoutingController controller) {
 		super(controller);
 		// TODO Auto-generated constructor stub
+		this.event = new FinalRoutingPointEvent();
 	}
 
 	/*
@@ -75,31 +81,26 @@ public class FinalPointSearchWidget extends StartPointSearchRouting {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#clearStatus
-	 * ()
+	 * @see org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#
+	 * selectionChanged(com.extjs.gxt.ui.client.event.SelectionChangedEvent)
 	 */
 	@Override
-	public void clearStatus() {
+	public void changeSelection(SelectionChangedEvent<GeocodingBean> se) {
 		// TODO Auto-generated method stub
-		super.clearWidget();
-		/********************************************************************/
-		/********************************************************************/
-		/************ HERE THE CHECK TO REMOVE ALL ON THE MAP ***************/
-		/********************************************************************/
-		/********************************************************************/
+		event.setLocation(se.getSelectedItem());
+		RoutingHandlerManager.fireEvent(event);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#
-	 * selectionChanged(com.extjs.gxt.ui.client.event.SelectionChangedEvent)
+	 * clearGeoPlatformMap()
 	 */
 	@Override
-	public void selectionChanged(SelectionChangedEvent<GeocodingBean> se) {
+	public void cleanGeoPlatformMap() {
 		// TODO Auto-generated method stub
-		
+		RoutingHandlerManager.fireEvent(new RemoveFinalRoutingPointEvent());
 	}
 
 }

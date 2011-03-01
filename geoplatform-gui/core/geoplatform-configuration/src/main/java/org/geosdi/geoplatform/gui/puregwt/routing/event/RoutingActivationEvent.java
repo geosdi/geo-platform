@@ -33,42 +33,53 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.routing.control;
+package org.geosdi.geoplatform.gui.puregwt.routing.event;
 
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GPRoutingLine extends GPRoutingControl {
+public class RoutingActivationEvent extends
+		GwtEvent<RoutingActivationEventHandler> {
+
+	private boolean activate;
 
 	/**
-	 * @param theLayer
+	 * @param activate
+	 *            the activate to set
 	 */
-	public GPRoutingLine(Vector theLayer, GeoPlatformMap geoPlatformMap) {
-		super(theLayer, geoPlatformMap);
-		// TODO Auto-generated constructor stub
+	public void setActivate(boolean activate) {
+		this.activate = activate;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+	 */
+	@Override
+	public Type<RoutingActivationEventHandler> getAssociatedType() {
+		// TODO Auto-generated method stub
+		return RoutingActivationEventHandler.TYPE;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle
-	 * ()
+	 * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+	 * .EventHandler)
 	 */
 	@Override
-	public void createStyle() {
+	protected void dispatch(RoutingActivationEventHandler handler) {
 		// TODO Auto-generated method stub
-		style.setStrokeColor("#2c2d99");
-		style.setStrokeWidth(3);
-		style.setFillColor("#6b5696");
-		style.setFillOpacity(0.8);
-		style.setStrokeOpacity(1.0);
+		if (activate)
+			handler.activate();
+		else
+			handler.deactivate();
 	}
 
 }

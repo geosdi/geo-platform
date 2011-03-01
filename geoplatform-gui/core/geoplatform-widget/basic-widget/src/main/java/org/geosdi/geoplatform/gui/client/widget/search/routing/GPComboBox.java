@@ -36,9 +36,12 @@
 package org.geosdi.geoplatform.gui.client.widget.search.routing;
 
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+import org.geosdi.geoplatform.gui.puregwt.routing.RoutingHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.routing.event.CleanComboEvent;
 
 import com.extjs.gxt.ui.client.event.FieldEvent;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.google.gwt.event.dom.client.KeyCodes;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -50,7 +53,20 @@ public class GPComboBox<T extends GeoPlatformBeanModel> extends ComboBox<T> {
 	/**
 	 * This Method must be override to prevente any errors on Widget
 	 * 
+	 * Clear Component Status for Widget :
+	 * <ul>
+	 * <li>Clear Store</li>
+	 * <li>Collapse ComboBox</li>
+	 * <li>Remove Marker on the Map</li>
+	 * </ul>
+	 * 
 	 */
+	@Override
 	protected void onKeyUp(FieldEvent fe) {
+		if (((fe.getKeyCode() == KeyCodes.KEY_BACKSPACE) || (fe.getKeyCode() == KeyCodes.KEY_DELETE))
+				&& (getRawValue().equals(""))) {
+			RoutingHandlerManager.fireEventFromSource(new CleanComboEvent(),
+					this);
+		}
 	}
 }

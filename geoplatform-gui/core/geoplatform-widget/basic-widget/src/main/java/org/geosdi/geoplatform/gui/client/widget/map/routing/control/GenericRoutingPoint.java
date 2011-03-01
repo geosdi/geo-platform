@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.routing.control;
 
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformBoxesWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl;
+import org.geosdi.geoplatform.gui.impl.map.control.IntersectionRoutingControl;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -44,13 +45,16 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GPRoutingLine extends GPRoutingControl {
+public abstract class GenericRoutingPoint extends IntersectionRoutingControl {
+	
 
 	/**
 	 * @param theLayer
+	 * @param theBoxesWidget
 	 */
-	public GPRoutingLine(Vector theLayer, GeoPlatformMap geoPlatformMap) {
-		super(theLayer, geoPlatformMap);
+	public GenericRoutingPoint(Vector theLayer,
+			GeoPlatformBoxesWidget theBoxesWidget, GeoPlatformMap geoPlatformMap) {
+		super(theLayer, theBoxesWidget, geoPlatformMap);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -64,11 +68,16 @@ public class GPRoutingLine extends GPRoutingControl {
 	@Override
 	public void createStyle() {
 		// TODO Auto-generated method stub
-		style.setStrokeColor("#2c2d99");
-		style.setStrokeWidth(3);
-		style.setFillColor("#6b5696");
-		style.setFillOpacity(0.8);
-		style.setStrokeOpacity(1.0);
+		style.setFillOpacity(1);
+		setIconStyle();
+		style.setFontColor("blue");
+		style.setFontSize("13px");
+		style.setFontWeight("bold");
+		style.setLabelAlign("cb");
+		style.setGraphicSize(20, 34);
+		style.setGraphicOffset(0, -17);
 	}
+	
+	public abstract void setIconStyle();
 
 }

@@ -74,7 +74,7 @@ public class GPHandlerManager {
 		get().eventBus.fireEvent(event);
 	}
 
-	public void fireEventFromSource(GwtEvent<?> event, Object source) {
+	public static void fireEventFromSource(GwtEvent<?> event, Object source) {
 		get().eventBus.fireEventFromSource(event, source);
 	}
 }

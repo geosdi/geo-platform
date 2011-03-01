@@ -33,10 +33,10 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.routing.control;
+package org.geosdi.geoplatform.gui.impl.map.control;
 
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformBoxesWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -44,31 +44,18 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GPRoutingLine extends GPRoutingControl {
+public abstract class IntersectionRoutingControl extends GPRoutingControl {
+
+	protected GeoPlatformBoxesWidget boxesWidget;
 
 	/**
 	 * @param theLayer
 	 */
-	public GPRoutingLine(Vector theLayer, GeoPlatformMap geoPlatformMap) {
+	public IntersectionRoutingControl(Vector theLayer,
+			GeoPlatformBoxesWidget theBoxesWidget, GeoPlatformMap geoPlatformMap) {
 		super(theLayer, geoPlatformMap);
 		// TODO Auto-generated constructor stub
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle
-	 * ()
-	 */
-	@Override
-	public void createStyle() {
-		// TODO Auto-generated method stub
-		style.setStrokeColor("#2c2d99");
-		style.setStrokeWidth(3);
-		style.setFillColor("#6b5696");
-		style.setFillOpacity(0.8);
-		style.setStrokeOpacity(1.0);
+		this.boxesWidget = theBoxesWidget;
 	}
 
 }

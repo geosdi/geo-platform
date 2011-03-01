@@ -62,6 +62,7 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
+import com.google.gwt.event.dom.client.KeyCodes;
 
 /**
  * @author giuseppe
@@ -97,7 +98,9 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
 		search.addKeyListener(new KeyListener() {
 
 			public void componentKeyUp(ComponentEvent event) {
-				if ((event.getKeyCode() == 8) && (search.getValue() == null)) {
+				if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE) || (event
+						.getKeyCode() == KeyCodes.KEY_DELETE))
+						&& (search.getValue() == null)) {
 					removeMarkersOnMap();
 					cleanUpTheStore();
 				}

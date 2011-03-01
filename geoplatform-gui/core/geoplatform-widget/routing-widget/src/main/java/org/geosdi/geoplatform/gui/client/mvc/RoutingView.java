@@ -42,6 +42,8 @@ import org.geosdi.geoplatform.gui.client.model.Directions;
 import org.geosdi.geoplatform.gui.client.widget.RoutingManagementWidget;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.puregwt.routing.RoutingHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.routing.event.RoutingActivationEvent;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
@@ -51,17 +53,29 @@ import com.extjs.gxt.ui.client.widget.grid.Grid;
  * 
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
+ * 
  */
 public class RoutingView extends GeoPlatformView {
 
 	private RoutingManagementWidget routingManagement;
+	private RoutingActivationEvent activationEvent;
 
 	public RoutingView(Controller controller) {
 		super(controller);
 		// TODO Auto-generated constructor stub
 		this.routingManagement = new RoutingManagementWidget(
 				(RoutingController) controller);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.extjs.gxt.ui.client.mvc.View#initialize()
+	 */
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+		this.activationEvent = new RoutingActivationEvent();
 	}
 
 	/*
@@ -89,6 +103,9 @@ public class RoutingView extends GeoPlatformView {
 		if (!LayoutManager.isWestVisible())
 			LayoutManager.manageWest(true);
 		LayoutManager.addComponentToWest(routingManagement);
+		this.activationEvent.setActivate(Boolean.TRUE);
+
+		RoutingHandlerManager.fireEvent(this.activationEvent);
 	}
 
 	/**
@@ -97,8 +114,11 @@ public class RoutingView extends GeoPlatformView {
 	private void onHideRoutingWidget() {
 		// TODO Auto-generated method stub
 		LayoutManager.removeComponentFromWest(routingManagement);
+		this.activationEvent.setActivate(Boolean.FALSE);
 		if (!LayoutManager.isOneWidgetVisibleAtWest())
 			LayoutManager.manageWest(false);
+
+		RoutingHandlerManager.fireEvent(this.activationEvent);
 	}
 
 	/**

@@ -4,7 +4,7 @@
  *  http://geo-plartform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2010 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -33,46 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.service;
+package org.geosdi.geoplatform.gui.puregwt.routing.event;
 
-import org.geosdi.geoplatform.gui.client.model.RoutingBean;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-@RemoteServiceRelativePath("RoutingRemote")
-public interface RoutingRemote extends RemoteService {
+public class TraceRoutingLineEvent extends
+		GwtEvent<TraceRoutingLineEventHandler> {
 
-	public static class Util {
-		private static RoutingRemoteAsync instance;
-
-		public static RoutingRemoteAsync getInstance() {
-			if (instance == null) {
-				instance = (RoutingRemoteAsync) GWT.create(RoutingRemote.class);
-				// ServiceDefTarget target = (ServiceDefTarget) instance;
-				// target.setServiceEntryPoint(GWT.getModuleBaseURL()
-				// + "RoutingRemote");
-			}
-			return instance;
-		}
-	}
+	private String wktLine;
 
 	/**
-	 * 
-	 * @param xStart
-	 * @param yStart
-	 * @param xStop
-	 * @param yStop
-	 * @return
-	 * @throws ApplicationException
+	 * @param wktLine
+	 *            the wktLine to set
 	 */
-	public RoutingBean findDirections(double xStart, double yStart,
-			double xStop, double yStop) throws GeoPlatformException;
+	public void setWktLine(String wktLine) {
+		this.wktLine = wktLine;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+	 */
+	@Override
+	public Type<TraceRoutingLineEventHandler> getAssociatedType() {
+		// TODO Auto-generated method stub
+		return TraceRoutingLineEventHandler.TYPE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+	 * .EventHandler)
+	 */
+	@Override
+	protected void dispatch(TraceRoutingLineEventHandler handler) {
+		// TODO Auto-generated method stub
+		handler.drawLine(wktLine);
+	}
 
 }

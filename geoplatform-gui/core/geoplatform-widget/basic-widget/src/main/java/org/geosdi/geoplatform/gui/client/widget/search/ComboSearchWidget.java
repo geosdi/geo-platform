@@ -220,6 +220,7 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
 	public void clearWidget() {
 		clearStore();
 		this.combo.collapse();
+		this.combo.setRawValue("");
 		this.loadImage.setUrl("");
 		this.loadImage.setVisible(false);
 	}

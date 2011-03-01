@@ -118,8 +118,11 @@ public class GPRoutingEndPoint extends GenericRoutingPoint implements
 	@Override
 	public void removePoint() {
 		// TODO Auto-generated method stub
-		layer.removeFeature(feature);
-		feature = null;
+		if (feature != null) {
+			layer.removeFeature(feature);
+			feature = null;
+		}
+		this.line.removeLine();
 	}
 
 }

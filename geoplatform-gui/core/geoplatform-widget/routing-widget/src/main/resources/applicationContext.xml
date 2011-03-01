@@ -9,14 +9,6 @@
 
 	<context:annotation-config />
 
-	<bean name="serviceParameter"
-		class="org.geosdi.geoplatform.gui.server.service.RoutingServiceParameters">
-		<property name="serviceDataSource" value="http://routing.geosdi.org/php/service.php" />
-		<property name="firstRegex" value="?startpoint=" />
-		<property name="finalRegex" value="&amp;finalpoint=" />
-		<property name="method" value="&amp;method=SPS" />
-	</bean>
-
 	<bean name="routing"
 		class="org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool">
 		<property name="id" value="routing" />

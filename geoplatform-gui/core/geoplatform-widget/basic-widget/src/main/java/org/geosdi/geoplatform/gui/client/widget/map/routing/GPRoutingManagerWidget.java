@@ -38,10 +38,10 @@ package org.geosdi.geoplatform.gui.client.widget.map.routing;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.control.GPRoutingEndPoint;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.control.GPRoutingLine;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.control.GPRoutingStartPoint;
+import org.geosdi.geoplatform.gui.client.widget.map.routing.control.GenericRoutingPoint;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformBoxesWidget;
-import org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.puregwt.routing.RoutingHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.routing.event.RoutingActivationEventHandler;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
@@ -57,9 +57,9 @@ public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
 	private Vector pointsVector;
 	private Vector routeVector;
 	private GeoPlatformBoxesWidget box;
-	private GPRoutingControl start;
-	private GPRoutingControl end;
-	private GPRoutingControl line;
+	private GenericRoutingPoint start;
+	private GenericRoutingPoint end;
+	private GPRoutingLine line;
 
 	/**
 	 * @Constructor
@@ -99,8 +99,10 @@ public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
 		// TODO Auto-generated method stub
 		this.pointsVector = new Vector("GP-Routing-Points-Vector");
 		this.pointsVector.setZIndex(955);
-		this.start = new GPRoutingStartPoint(this.pointsVector, this.box, this.geoPlatformMap);
-		this.end = new GPRoutingEndPoint(this.pointsVector, this.box, this.geoPlatformMap);
+		this.start = new GPRoutingStartPoint(this.pointsVector, this.box,
+				this.geoPlatformMap);
+		this.end = new GPRoutingEndPoint(this.pointsVector, this.box,
+				this.geoPlatformMap);
 	}
 
 	/**
@@ -111,6 +113,8 @@ public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
 		this.routeVector = new Vector("GP-Route-Vector");
 		this.routeVector.setZIndex(956);
 		this.line = new GPRoutingLine(routeVector, this.geoPlatformMap);
+		this.start.setLine(this.line);
+		this.end.setLine(this.line);
 	}
 
 	/*

@@ -46,7 +46,8 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * 
  */
 public abstract class GenericRoutingPoint extends IntersectionRoutingControl {
-	
+
+	protected GPRoutingLine line;
 
 	/**
 	 * @param theLayer
@@ -77,7 +78,14 @@ public abstract class GenericRoutingPoint extends IntersectionRoutingControl {
 		style.setGraphicSize(20, 34);
 		style.setGraphicOffset(0, -17);
 	}
-	
+
 	public abstract void setIconStyle();
+
+	/**
+	 * @param line the line to set
+	 */
+	public void setLine(GPRoutingLine line) {
+		this.line = line;
+	}
 
 }

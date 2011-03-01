@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.impl.map.control;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.gwtopenmaps.openlayers.client.Style;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
-import org.gwtopenmaps.openlayers.client.geometry.Geometry;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
@@ -52,7 +51,6 @@ public abstract class GPRoutingControl {
 	protected Vector layer;
 	protected VectorFeature feature;
 	protected Style style = new Style();
-	protected Geometry theGeom;
 
 	/**
 	 * @Constructor

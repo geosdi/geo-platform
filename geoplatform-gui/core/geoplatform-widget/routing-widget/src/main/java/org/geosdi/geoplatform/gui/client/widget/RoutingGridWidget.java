@@ -129,7 +129,7 @@ public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {
 	 * @param beans
 	 *            {@link ArrayList} of Directions to fill the Store
 	 */
-	public void fillStore(ArrayList<Directions> beans) {
+	public void fillStore(List<Directions> beans) {
 		this.store.add(beans);
 	}
 

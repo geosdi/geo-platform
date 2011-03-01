@@ -97,6 +97,8 @@ public class RoutingManagementWidget extends ContentPanel {
 		this.routingGridWidget = new RoutingGridWidget();
 
 		this.formPanel.add(this.routingGridWidget.getDirectionsField());
+		
+		this.pointsWidget.setGridWidget(routingGridWidget);
 	}
 
 	/**

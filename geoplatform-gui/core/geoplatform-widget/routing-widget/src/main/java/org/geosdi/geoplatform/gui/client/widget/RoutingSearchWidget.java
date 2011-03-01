@@ -36,10 +36,14 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.model.RoutingBean;
 import org.geosdi.geoplatform.gui.client.mvc.RoutingController;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 import org.geosdi.geoplatform.gui.puregwt.routing.HasCleanEvent;
 import org.geosdi.geoplatform.gui.puregwt.routing.RoutingHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.routing.event.CleanComboEventHandler;
+import org.geosdi.geoplatform.gui.puregwt.routing.event.TraceRoutingLineEvent;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
@@ -49,6 +53,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.MarginData;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
 
 /**
@@ -58,28 +63,33 @@ import com.google.gwt.user.client.ui.Image;
  */
 public class RoutingSearchWidget implements HasCleanEvent {
 
+	private RoutingController controller;
+	private RoutingGridWidget gridWidget;
 	private FieldSet fieldSet;
-
 	private StartPointSearchRouting startPoint;
 	private FinalPointSearchWidget finalPoint;
 
 	private Button traceRoute;
 	private Button clear;
 
+	private TraceRoutingLineEvent event;
+
 	/**
 	 * 
 	 * @param controller
 	 */
-	public RoutingSearchWidget(RoutingController controller) {
+	public RoutingSearchWidget(RoutingController theController) {
+		this.controller = theController;
 		this.fieldSet = new FieldSet();
 		this.fieldSet.setCollapsible(false);
-		initWidgets(controller);
+		this.event = new TraceRoutingLineEvent();
+		initWidgets();
 	}
 
 	/**
 	 * @param controller
 	 */
-	private void initWidgets(RoutingController controller) {
+	private void initWidgets() {
 		// TODO Auto-generated method stub
 		this.startPoint = new StartPointSearchRouting(controller);
 		this.finalPoint = new FinalPointSearchWidget(controller);
@@ -114,14 +124,23 @@ public class RoutingSearchWidget implements HasCleanEvent {
 		HorizontalPanel buttonPanel = new HorizontalPanel();
 		buttonPanel.setSpacing(5);
 
-		this.traceRoute = new Button("Search",
+		this.traceRoute = new Button("Route",
 				BasicWidgetResources.ICONS.routing(),
 				new SelectionListener<ButtonEvent>() {
 
 					@Override
 					public void componentSelected(ButtonEvent ce) {
 						// TODO Auto-generated method stub
-
+						if (!(startPoint.getComboBox().getRawValue().equals(""))
+								&& !(finalPoint.getComboBox().getRawValue()
+										.equals("")))
+							findDirections(startPoint.getComboBox()
+									.getSelection().get(0), finalPoint
+									.getComboBox().getSelection().get(0));
+						else
+							GeoPlatformMessage
+									.alertMessage("GeoPlatform Routing",
+											"Please, insert the Start Point and End Point!");
 					}
 				});
 
@@ -135,12 +154,49 @@ public class RoutingSearchWidget implements HasCleanEvent {
 						// TODO Auto-generated method stub
 						startPoint.clearStatus();
 						finalPoint.clearStatus();
+						gridWidget.cleanUpTheStore();
 					}
 				});
 
 		buttonPanel.add(this.clear);
 
 		fieldSet.add(buttonPanel, new MarginData(5, 5, 5, 145));
+	}
+
+	/**
+	 * 
+	 * @param start
+	 * @param end
+	 */
+	public void findDirections(IGeoPlatformLocation start,
+			IGeoPlatformLocation end) {
+		this.gridWidget.cleanUpTheStore();
+		this.gridWidget.maskGrid();
+
+		this.controller.getRoutingService().findDirections(start.getLon(),
+				start.getLat(), end.getLon(), end.getLat(),
+				new AsyncCallback<RoutingBean>() {
+
+					@Override
+					public void onSuccess(RoutingBean result) {
+						// TODO Auto-generated method stub
+						if (result != null) {
+							gridWidget.unMaskGrid();
+							gridWidget.fillStore(result.getDirections());
+							event.setWktLine(result.getCompleteLine());
+							RoutingHandlerManager.fireEvent(event);
+						}
+					}
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						gridWidget.unMaskGrid();
+						GeoPlatformMessage
+								.errorMessage("GeoPlatform Routing",
+										"An Error occured with Routing Service. Please Try Again.");
+					}
+				});
 	}
 
 	/**
@@ -158,8 +214,18 @@ public class RoutingSearchWidget implements HasCleanEvent {
 	 * ()
 	 */
 	@Override
-	public void addCleanEventHandler(CleanComboEventHandler handler, Object source) {
+	public void addCleanEventHandler(CleanComboEventHandler handler,
+			Object source) {
 		// TODO Auto-generated method stub
-		RoutingHandlerManager.addHandlerToSource(CleanComboEventHandler.TYPE, source, handler);
+		RoutingHandlerManager.addHandlerToSource(CleanComboEventHandler.TYPE,
+				source, handler);
+	}
+
+	/**
+	 * @param gridWidget
+	 *            the gridWidget to set
+	 */
+	public void setGridWidget(RoutingGridWidget gridWidget) {
+		this.gridWidget = gridWidget;
 	}
 }

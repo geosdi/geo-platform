@@ -58,6 +58,10 @@ public class RoutingController extends GeoPlatformController {
 	private GeocodingRemoteAsync geocodingService = GeocodingRemote.Util
 			.getInstance();
 
+	/**
+	 * @Construct
+	 * 
+	 */
 	public RoutingController() {
 		registerEventTypes(RoutingEvents.INIT_ROUTING_WIDGET,
 				RoutingEvents.SHOW_ROUTING_WIDGET,

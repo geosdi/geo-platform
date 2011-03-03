@@ -78,6 +78,7 @@ public abstract class GeoPlatformLayoutManager {
 		createEast();
 		createWest();
 		createCenter();
+		createSouth();
 	}
 
 	/**
@@ -153,6 +154,23 @@ public abstract class GeoPlatformLayoutManager {
 	}
 
 	/**
+	 * Create South Panel in Main UI
+	 */
+	private void createSouth() {
+		south = new ContentPanel();
+		BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH,
+				100);
+		southData.setSplit(true);
+		southData.setCollapsible(true);
+		southData.setFloatable(true);
+		southData.setMargins(new Margins(5, 0, 0, 0));
+		
+		south.hide();
+		
+		viewport.add(south, southData);
+	}
+
+	/**
 	 * @return the east
 	 */
 	public ContentPanel getEast() {
@@ -181,12 +199,12 @@ public abstract class GeoPlatformLayoutManager {
 	}
 
 	/**
-	 * @return the north
-	 * 			If North is null GeoPlatform set North Size to 50 for default
-	 * 			
+	 * @return the north If North is null GeoPlatform set North Size to 50 for
+	 *         default
+	 * 
 	 */
 	public ContentPanel getNorth() {
-		if(north == null)
+		if (north == null)
 			createNorth(50);
 		return north;
 	}

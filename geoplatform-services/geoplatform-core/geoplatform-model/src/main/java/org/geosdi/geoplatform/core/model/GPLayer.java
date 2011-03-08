@@ -54,7 +54,7 @@ import javax.persistence.SequenceGenerator;
  */
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class GPLayer implements Serializable {
 
 	/**
@@ -68,8 +68,14 @@ public abstract class GPLayer implements Serializable {
 	@Column
 	private long id;
 
-	@Column(name = "name", unique = true, nullable = false)
+	@Column(name = "url_server")
+	private String urlServer;
+
+	@Column(name = "name", nullable = false)
 	private String name;
+	
+	@Column(name = "abstract")
+	private String abstractText;
 
 	@Column(name = "title")
 	private String title;
@@ -79,9 +85,6 @@ public abstract class GPLayer implements Serializable {
 
 	@Embedded
 	private GPBBox bbox;
-
-	@Embedded
-	private GPLayerInfo layerInfo;
 
 	@ManyToOne(optional = true)
 	private GPFolder folder;
@@ -102,6 +105,21 @@ public abstract class GPLayer implements Serializable {
 	}
 
 	/**
+	 * @return the urlServer
+	 */
+	public String getUrlServer() {
+		return urlServer;
+	}
+
+	/**
+	 * @param urlServer
+	 *            the urlServer to set
+	 */
+	public void setUrlServer(String urlServer) {
+		this.urlServer = urlServer;
+	}
+
+	/**
 	 * @return the name
 	 */
 	public String getName() {
@@ -114,6 +132,20 @@ public abstract class GPLayer implements Serializable {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @return the abstractText
+	 */
+	public String getAbstractText() {
+		return abstractText;
+	}
+
+	/**
+	 * @param abstractText the abstractText to set
+	 */
+	public void setAbstractText(String abstractText) {
+		this.abstractText = abstractText;
 	}
 
 	/**
@@ -162,21 +194,6 @@ public abstract class GPLayer implements Serializable {
 	}
 
 	/**
-	 * @return the layerInfo
-	 */
-	public GPLayerInfo getLayerInfo() {
-		return layerInfo;
-	}
-
-	/**
-	 * @param layerInfo
-	 *            the layerInfo to set
-	 */
-	public void setLayerInfo(GPLayerInfo layerInfo) {
-		this.layerInfo = layerInfo;
-	}
-
-	/**
 	 * @return the folder
 	 */
 	public GPFolder getFolder() {
@@ -189,6 +206,38 @@ public abstract class GPLayer implements Serializable {
 	 */
 	public void setFolder(GPFolder folder) {
 		this.folder = folder;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GPLayer other = (GPLayer) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
 
 }

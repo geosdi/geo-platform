@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -55,31 +55,30 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "gp_raster_layer")
 @XmlRootElement(name = "RasterLayer")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "raster_layer")
-@PrimaryKeyJoinColumn
+@PrimaryKeyJoinColumn(name = "RASTER_ID")
 public class GPRasterLayer extends GPLayer implements Serializable {
 
 	/**
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = -1852288981980627642L;
-	
-	
-	@Column(name = "type")
-	private int type;
+
+	@Embedded
+	private GPLayerInfo layerInfo;
 
 	/**
-	 * @return the type
+	 * @return the layerInfo
 	 */
-	public int getType() {
-		return type;
+	public GPLayerInfo getLayerInfo() {
+		return layerInfo;
 	}
 
 	/**
-	 * @param type
-	 *            the type to set
+	 * @param layerInfo
+	 *            the layerInfo to set
 	 */
-	public void setType(int type) {
-		this.type = type;
+	public void setLayerInfo(GPLayerInfo layerInfo) {
+		this.layerInfo = layerInfo;
 	}
 
 }

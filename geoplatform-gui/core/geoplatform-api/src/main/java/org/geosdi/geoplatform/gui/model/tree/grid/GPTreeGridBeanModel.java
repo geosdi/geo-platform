@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.model.tree.grid;
 
 import com.extjs.gxt.ui.client.data.BaseTreeModel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -94,5 +95,13 @@ public abstract class GPTreeGridBeanModel extends BaseTreeModel {
 	 * @return Widget
 	 */
 	public abstract Widget getWidget();
+	
+	/**
+	 * Create Icon for each Node
+	 * 
+	 * @return AbstractImagePrototype
+	 * 
+	 */
+	public abstract AbstractImagePrototype getIcon();
 
 }

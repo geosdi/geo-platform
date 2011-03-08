@@ -91,6 +91,7 @@ public abstract class GeoPlatformTreeGridWidget<T extends GPTreeGridBeanModel> {
 
 	/**
 	 * Set TreeGrid Properties such as Borders, RowHeight etc
+	 * 
 	 */
 	public abstract void setTreeGridProperties();
 

@@ -50,10 +50,9 @@ public class GPLayerInfo implements Serializable {
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = -7418444235711934950L;
-	
+
 	private boolean queryable = false;
 	private String keywords;
-	private String abstractText;
 
 	/**
 	 * @return the queryable
@@ -83,21 +82,6 @@ public class GPLayerInfo implements Serializable {
 	 */
 	public void setKeywords(String keywords) {
 		this.keywords = keywords;
-	}
-
-	/**
-	 * @return the abstractText
-	 */
-	public String getAbstractText() {
-		return abstractText;
-	}
-
-	/**
-	 * @param abstractText
-	 *            the abstractText to set
-	 */
-	public void setAbstractText(String abstractText) {
-		this.abstractText = abstractText;
 	}
 
 }

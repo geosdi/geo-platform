@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -55,31 +54,12 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "gp_vector_layer")
 @XmlRootElement(name = "VectorLayer")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "vector_layer")
-@PrimaryKeyJoinColumn
-public class GPVectorLayer extends GPLayer implements Serializable{
+@PrimaryKeyJoinColumn(name = "VECTOR_ID")
+public class GPVectorLayer extends GPLayer implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3309979650712821228L;
-	
-	
-	@Column(name = "type")
-	private int type;
-
-	/**
-	 * @return the type
-	 */
-	public int getType() {
-		return type;
-	}
-
-	/**
-	 * @param type
-	 *            the type to set
-	 */
-	public void setType(int type) {
-		this.type = type;
-	}
 
 }

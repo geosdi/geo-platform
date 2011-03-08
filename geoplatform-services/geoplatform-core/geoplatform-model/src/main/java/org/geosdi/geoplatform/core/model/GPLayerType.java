@@ -49,8 +49,7 @@ public enum GPLayerType implements Serializable {
 	POLYGON(4),
 	MULTIPOINT(5),
 	MULTILINESTRING(6),
-	MULTIPOLYGON(7),
-	WMS(8);
+	MULTIPOLYGON(7);
 
 	private int code;
 

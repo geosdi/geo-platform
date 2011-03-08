@@ -43,23 +43,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * @author Francesco Izzi - geoSDI
  * 
  */
-@Entity(name = "Layer")
-@Table(name = "gp_layer")
-@XmlRootElement(name = "Layer")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "layer")
-public class GPLayer implements Serializable {
+
+@Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+public abstract class GPLayer implements Serializable {
 
 	/**
 	 * serialVersionUID
@@ -71,9 +67,6 @@ public class GPLayer implements Serializable {
 	@SequenceGenerator(name = "GP_LAYER_SEQ", sequenceName = "GP_LAYER_SEQ")
 	@Column
 	private long id;
-
-	@Column(name = "type")
-	private int type = GPLayerType.WMS.getCode();
 
 	@Column(name = "name", unique = true, nullable = false)
 	private String name;
@@ -106,21 +99,6 @@ public class GPLayer implements Serializable {
 	 */
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	/**
-	 * @return the type
-	 */
-	public int getType() {
-		return type;
-	}
-
-	/**
-	 * @param type
-	 *            the type to set
-	 */
-	public void setType(int type) {
-		this.type = type;
 	}
 
 	/**

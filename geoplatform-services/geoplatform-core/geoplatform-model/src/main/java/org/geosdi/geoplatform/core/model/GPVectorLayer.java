@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
- /*
+/*
  *  geo-platform
  *  Rich webgis framework
  *  http://geo-plartform.org
  * ====================================================================
  *
- * Copyright (C) 2008-2010 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  * This program is free software: you can redistribute it and/or modify it 
  * under the terms of the GNU General Public License as published by 
@@ -35,19 +33,53 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
- -->
-<persistence version="1.0" 
-    xmlns="http://java.sun.com/xml/ns/persistence"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd ">
+package org.geosdi.geoplatform.core.model;
 
-    <persistence-unit name="geoplatform" transaction-type="RESOURCE_LOCAL">
-    <!-- when adding/removing classes, please also keep aligned the src/test/resource/hibernate.cfg.xml file -->
-        <class>org.geosdi.geoplatform.core.model.GPUser</class>
-        <class>org.geosdi.geoplatform.core.model.GPFolder</class>
-        <class>org.geosdi.geoplatform.core.model.GPLayer</class>
-        <class>org.geosdi.geoplatform.core.model.GPRasterLayer</class>
-        <class>org.geosdi.geoplatform.core.model.GPVectorLayer</class>
-        <class>org.geosdi.geoplatform.core.model.GPStyle</class>
-    </persistence-unit>
-</persistence>
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+/**
+ * @author Francesco Izzi - CNR IMAA - geoSDI
+ * 
+ */
+
+@Entity(name = "VectorLayer")
+@Table(name = "gp_vector_layer")
+@XmlRootElement(name = "VectorLayer")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "vector_layer")
+@PrimaryKeyJoinColumn
+public class GPVectorLayer extends GPLayer implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3309979650712821228L;
+	
+	
+	@Column(name = "type")
+	private int type;
+
+	/**
+	 * @return the type
+	 */
+	public int getType() {
+		return type;
+	}
+
+	/**
+	 * @param type
+	 *            the type to set
+	 */
+	public void setType(int type) {
+		this.type = type;
+	}
+
+}

@@ -162,7 +162,7 @@ public abstract class GeoPlatformLayoutManager {
 				100);
 		southData.setSplit(true);
 		southData.setCollapsible(true);
-		southData.setFloatable(true);
+		southData.setFloatable(false);
 		southData.setMargins(new Margins(5, 0, 0, 0));
 		
 		south.hide();

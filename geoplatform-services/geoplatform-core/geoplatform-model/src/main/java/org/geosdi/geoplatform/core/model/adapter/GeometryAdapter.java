@@ -33,59 +33,64 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.core.model;
+package org.geosdi.geoplatform.core.model.adapter;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.geosdi.geoplatform.core.model.adapter.GeometryAdapter;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.io.ParseException;
+import com.vividsolutions.jts.io.WKTReader;
+import com.vividsolutions.jts.io.WKTWriter;
 
 /**
- * @author Francesco Izzi - CNR IMAA - geoSDI
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
+public class GeometryAdapter<T extends Geometry> extends XmlAdapter<String, T> {
 
-@Entity(name = "VectorLayer")
-@Table(name = "gp_vector_layer")
-@XmlRootElement(name = "VectorLayer")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "vector_layer")
-@PrimaryKeyJoinColumn(name = "VECTOR_ID")
-public class GPVectorLayer extends GPLayer implements Serializable {
-
-	/**
+	/*
+	 * (non-Javadoc)
 	 * 
+	 * @see
+	 * javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
 	 */
-	private static final long serialVersionUID = 3309979650712821228L;
+	@SuppressWarnings("unchecked")
+	@Override
+	public T unmarshal(String v) throws ParseException {
+		// TODO Auto-generated method stub
+		if (v != null) {
+			WKTReader reader = new WKTReader();
 
-	@Type(type = "org.hibernatespatial.GeometryUserType")
-	@Column(name = "geometry", nullable = true)
-	private Geometry geometry;
+			Geometry theGeom = reader.read(v);
+			if (theGeom.getSRID() == 0)
+				theGeom.setSRID(4326);
 
-	/**
-	 * @return the geometry
-	 */
-	@XmlJavaTypeAdapter(value = GeometryAdapter.class)
-	public Geometry getGeometry() {
-		return geometry;
+			try {
+				return (T) theGeom;
+			} catch (ClassCastException e) {
+				throw new ParseException("WKT v is a "
+						+ theGeom.getClass().getName());
+			}
+		}
+		return null;
 	}
 
-	/**
-	 * @param geometry
-	 *            the geometry to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
 	 */
-	public void setGeometry(Geometry geometry) {
-		this.geometry = geometry;
+	@Override
+	public String marshal(T v) throws ParseException {
+		// TODO Auto-generated method stub
+		if (v != null) {
+			WKTWriter writer = new WKTWriter();
+			String wkt = writer.write(v);
+			return wkt;
+		}
+		return null;
 	}
 
 }

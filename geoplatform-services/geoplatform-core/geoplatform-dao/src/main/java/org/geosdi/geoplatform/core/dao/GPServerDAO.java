@@ -37,32 +37,35 @@ package org.geosdi.geoplatform.core.dao;
 
 import java.util.List;
 
-import org.geosdi.geoplatform.core.model.GPStyle;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 
 import com.trg.search.ISearch;
 
 /**
- * @author Francesco Izzi - geoSDI
- *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ * 
  */
-public interface GPStyleDAO {
-	
-	public List<GPStyle> findAll();
+public interface GPServerDAO {
 
-	public GPStyle find(Long id);
+	public List<GeoPlatformServer> findAll();
 
-	public void persist(GPStyle... user);
+	public GeoPlatformServer find(Long id);
 
-	public GPStyle merge(GPStyle user);
+	public void persist(GeoPlatformServer... server);
 
-	public boolean remove(GPStyle user);
+	public GeoPlatformServer merge(GeoPlatformServer server);
 
-	public boolean removeById(Long userId);
+	public boolean remove(GeoPlatformServer server);
 
-	public List<GPStyle> search(ISearch search);
+	public boolean removeById(Long serverId);
+
+	public List<GeoPlatformServer> search(ISearch search);
 
 	public int count(ISearch search);
 
-	public GPStyle findByStyleName(String name);
+	public List<GeoPlatformServer> findByServerName(String serverName);
+
+	public GeoPlatformServer findByServerUrl(String serverUrl);
 
 }

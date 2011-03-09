@@ -16,6 +16,7 @@
     	<mapping  class="org.geosdi.geoplatform.core.model.GPVectorLayer"/>
     	<mapping  class="org.geosdi.geoplatform.core.model.GPRasterLayer"/>
     	<mapping  class="org.geosdi.geoplatform.core.model.GPStyle"/>
+    	<mapping  class="org.geosdi.geoplatform.core.model.GeoPlatformServer"/>
     	
     </session-factory>
 </hibernate-configuration>

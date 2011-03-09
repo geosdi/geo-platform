@@ -33,36 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.core.dao;
-
-import java.util.List;
-
-import org.geosdi.geoplatform.core.model.GPStyle;
-
-import com.trg.search.ISearch;
+package org.geosdi.geoplatform.core.model;
 
 /**
- * @author Francesco Izzi - geoSDI
- *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ * 
  */
-public interface GPStyleDAO {
-	
-	public List<GPStyle> findAll();
+public enum GPCababilityType {
 
-	public GPStyle find(Long id);
-
-	public void persist(GPStyle... user);
-
-	public GPStyle merge(GPStyle user);
-
-	public boolean remove(GPStyle user);
-
-	public boolean removeById(Long userId);
-
-	public List<GPStyle> search(ISearch search);
-
-	public int count(ISearch search);
-
-	public GPStyle findByStyleName(String name);
+	WMS, WFS;
 
 }

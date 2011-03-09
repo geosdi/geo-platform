@@ -33,36 +33,59 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.core.dao;
+package org.geosdi.geoplatform.core.dao.impl;
 
 import java.util.List;
 
-import org.geosdi.geoplatform.core.model.GPStyle;
+import org.geosdi.geoplatform.core.dao.GPServerDAO;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 
 import com.trg.search.ISearch;
+import com.trg.search.Search;
 
 /**
- * @author Francesco Izzi - geoSDI
- *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ * 
  */
-public interface GPStyleDAO {
-	
-	public List<GPStyle> findAll();
+public class GPServerDAOImpl extends BaseDAO<GeoPlatformServer, Long> implements
+		GPServerDAO {
 
-	public GPStyle find(Long id);
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<GeoPlatformServer> search(ISearch search) {
+		// TODO Auto-generated method stub
+		return super.search(search);
+	}
 
-	public void persist(GPStyle... user);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.core.dao.GPServerDAO#findByServerName(java.lang
+	 * .String)
+	 */
+	@Override
+	public List<GeoPlatformServer> findByServerName(String serverName) {
+		// TODO Auto-generated method stub
+		Search search = new Search();
+		search.addFilterEqual("name", serverName);
+		return super.search(search);
+	}
 
-	public GPStyle merge(GPStyle user);
-
-	public boolean remove(GPStyle user);
-
-	public boolean removeById(Long userId);
-
-	public List<GPStyle> search(ISearch search);
-
-	public int count(ISearch search);
-
-	public GPStyle findByStyleName(String name);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.core.dao.GPServerDAO#findByServerUrl(java.lang
+	 * .String)
+	 */
+	@Override
+	public GeoPlatformServer findByServerUrl(String serverUrl) {
+		// TODO Auto-generated method stub
+		Search search = new Search();
+		search.addFilterEqual("serverUrl", serverUrl);
+		return super.searchUnique(search);
+	}
 
 }

@@ -49,5 +49,6 @@
         <class>org.geosdi.geoplatform.core.model.GPRasterLayer</class>
         <class>org.geosdi.geoplatform.core.model.GPVectorLayer</class>
         <class>org.geosdi.geoplatform.core.model.GPStyle</class>
+        <class>org.geosdi.geoplatform.core.model.GeoPlatformServer</class>
     </persistence-unit>
 </persistence>

@@ -35,10 +35,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import javax.jws.WebService;
 
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
@@ -51,9 +47,6 @@ import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.LayerList;
 import org.geosdi.geoplatform.responce.UserList;
-import org.geotools.data.ows.WMSCapabilities;
-import org.geotools.data.wms.WebMapServer;
-import org.geotools.ows.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 

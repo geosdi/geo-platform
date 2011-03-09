@@ -24,6 +24,7 @@
 
     <bean id="geoplatformService" class="org.geosdi.geoplatform.services.GeoPlatformServiceImpl">
         <property name="userDao" ref="userDAO"/>
+         <property name="serverDao" ref="serverDAO"/>
     </bean>
 
     <!--=====================================================================-->

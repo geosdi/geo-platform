@@ -50,6 +50,7 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.LayerList;
 import org.geosdi.geoplatform.responce.UserList;
 
 /**
@@ -102,5 +103,10 @@ public interface GeoPlatformService {
 	@HttpResource(location = "/users/count/{nameLike}")
 	@WebResult(name = "count")
 	long getUsersCount(SearchRequest searchRequest);
+	
+	@Get
+	@HttpResource(location = "/capabilities/{id}")
+	@WebResult(name = "Capabilities")
+	LayerList getCapabilities(RequestById request) throws ResourceNotFoundFault;
 
 }

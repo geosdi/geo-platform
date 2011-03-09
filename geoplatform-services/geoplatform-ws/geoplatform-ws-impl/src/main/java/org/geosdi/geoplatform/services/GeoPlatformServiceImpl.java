@@ -35,8 +35,13 @@
  */
 package org.geosdi.geoplatform.services;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import javax.jws.WebService;
 
+import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -44,74 +49,99 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.LayerList;
 import org.geosdi.geoplatform.responce.UserList;
-import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.geotools.data.ows.WMSCapabilities;
+import org.geotools.data.wms.WebMapServer;
+import org.geotools.ows.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
+ * @author Francesco Izzi - CNR IMAA - geoSDI
  * 
  */
 @Transactional
-@WebService(endpointInterface = "org.geosdi.services.GeoPlatformService")
+@WebService(endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformService")
 public class GeoPlatformServiceImpl implements GeoPlatformService {
-	
+
 	private GPUserDAO userDao;
-	
+	private GPServerDAO serverDao;
+
 	private UserServiceImpl userServiceDelegate;
-	
-	
+	private WMSServiceImpl wmsServiceDelegate;
+
 	public GeoPlatformServiceImpl() {
-        userServiceDelegate 	= new UserServiceImpl();
-    }
-	
-	//==========================================================================
-    //=== Users
-    //==========================================================================
+		userServiceDelegate = new UserServiceImpl();
+		wmsServiceDelegate = new WMSServiceImpl();
+	}
+
+	// ==========================================================================
+	// === Users
+	// ==========================================================================
 
 	@Override
-    public long updateUser(GPUser user) throws ResourceNotFoundFault, IllegalParameterFault {
-        return userServiceDelegate.updateUser(user);
-    }
+	public long updateUser(GPUser user) throws ResourceNotFoundFault,
+			IllegalParameterFault {
+		return userServiceDelegate.updateUser(user);
+	}
 
-    @Override
-    public UserList searchUsers(PaginatedSearchRequest request) {
-        return userServiceDelegate.searchUsers(request);
-    }
+	@Override
+	public UserList searchUsers(PaginatedSearchRequest request) {
+		return userServiceDelegate.searchUsers(request);
+	}
 
-    @Override
-    public long insertUser(GPUser user) {
-       return userServiceDelegate.insertUser(user);
-    }
+	@Override
+	public long insertUser(GPUser user) {
+		return userServiceDelegate.insertUser(user);
+	}
 
-    @Override
-    public long getUsersCount(SearchRequest request) {
-        return userServiceDelegate.getUsersCount(request);
-    }
+	@Override
+	public long getUsersCount(SearchRequest request) {
+		return userServiceDelegate.getUsersCount(request);
+	}
 
-    @Override
-    public UserList getUsers() {
-        return userServiceDelegate.getUsers();
-    }
+	@Override
+	public UserList getUsers() {
+		return userServiceDelegate.getUsers();
+	}
 
-    @Override
-    public GPUser getUser(RequestById request) throws ResourceNotFoundFault {
-        return userServiceDelegate.getUser(request);
-    }
+	@Override
+	public GPUser getUser(RequestById request) throws ResourceNotFoundFault {
+		return userServiceDelegate.getUser(request);
+	}
 
-    @Override
-    public GPUser getUserByName(SearchRequest username) throws ResourceNotFoundFault {
-        return userServiceDelegate.getUserByName(username);
-    }
+	@Override
+	public GPUser getUserByName(SearchRequest username)
+			throws ResourceNotFoundFault {
+		return userServiceDelegate.getUserByName(username);
+	}
 
-    @Override
-    public boolean deleteUser(RequestById request) throws ResourceNotFoundFault, IllegalParameterFault {
-        return userServiceDelegate.deleteUser(request);
-    }
+	@Override
+	public boolean deleteUser(RequestById request)
+			throws ResourceNotFoundFault, IllegalParameterFault {
+		return userServiceDelegate.deleteUser(request);
+	}
+	
+	// ==========================================================================
+	// === OWS
+	// ==========================================================================
+	
+	@Override
+	public LayerList getCapabilities(RequestById request)
+			throws ResourceNotFoundFault {
+		return wmsServiceDelegate.getCapabilities(request);
+	}
+	
+	
+	// ==========================================================================
+	// === DAOs IoC
+	// ==========================================================================
 
 	/**
-	 * @param userDao the userDao to set
+	 * @param userDao
+	 *            the userDao to set
 	 */
 	@Autowired
 	public void setUserDao(GPUserDAO userDao) {
@@ -119,6 +149,16 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 		this.userServiceDelegate.setUserDao(userDao);
 	}
 	
-	
+	/**
+	 * @param serverDao
+	 *            the serverDao to set
+	 */
+	@Autowired
+	public void setServerDao(GPServerDAO serverDao) {
+		this.serverDao = serverDao;
+		this.wmsServiceDelegate.setServerDao(serverDao);
+	}
+
+
 
 }

@@ -17,9 +17,9 @@
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="org.postgresql.Driver" />
-        <property name="url" value="jdbc:postgresql://localhost:5432/gp" />
-        <property name="username" value="postgres" />
-        <property name="password" value="0x,postgres,0x" />
+        <property name="url" value="jdbc:postgresql://192.168.0.10:5432/gp" />
+        <property name="username" value="myuser" />
+        <property name="password" value="mypassword" />
     </bean>
 
     <bean id="entityManagerFactory"

@@ -41,6 +41,7 @@
     <modules>
 		<module>geoplatform-core</module>
         <module>geoplatform-ws</module>
+        <module>geoplatform-ws-test</module>
 	</modules>
 
 

@@ -21,11 +21,14 @@
     <!--=====================================================================-->
 	<!-- Services -->
     <!--=====================================================================-->
+    
+    <bean id="geoPlatformServiceClient" class="org.geosdi.geoplatform.services.GeoPlatformService"
+		factory-bean="geoPlatformProxyFactory" factory-method="create" />
 
-    <bean id="geoplatformService" class="org.geosdi.geoplatform.services.GeoPlatformServiceImpl">
-        <property name="userDao" ref="userDAO"/>
-        <property name="serverDao" ref="serverDAO"/>
-    </bean>
+	<bean id="geoPlatformProxyFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="org.geosdi.geoplatform.services.GeoPlatformService" />
+		<property name="address" value="http://localhost:8080/geoplatform-service/soap" />
+	</bean>
 
     <!--=====================================================================-->
 

@@ -47,6 +47,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  * @author Francesco Izzi - geoSDI
@@ -55,6 +56,7 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "gp_layer")
 public abstract class GPLayer implements Serializable {
 
 	/**

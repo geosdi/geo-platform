@@ -105,7 +105,7 @@ public interface GeoPlatformService {
 	long getUsersCount(SearchRequest searchRequest);
 	
 	@Get
-	@HttpResource(location = "/capabilities/{id}")
+	@HttpResource(location = "/wms/capabilities/{id}")
 	@WebResult(name = "Capabilities")
 	LayerList getCapabilities(RequestById request) throws ResourceNotFoundFault;
 

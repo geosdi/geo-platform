@@ -16,8 +16,6 @@
             http://cxf.apache.org/schemas/jaxws.xsd"
 	default-autowire="byName">
 
-	<import resource="applicationContext-Servcices.xml" />
-
 	<!--===================================================================== -->
 	<!-- Services -->
 	<!--===================================================================== -->
@@ -30,7 +28,6 @@
 			value="org.geosdi.geoplatform.services.GeoPlatformService" />
 		<property name="address"
 			value="http://localhost:8080/geoplatform-service/soap" />
-		<property name="bus" ref="cxf" />
 	</bean>
 
 	<!--===================================================================== -->

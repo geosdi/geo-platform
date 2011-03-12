@@ -54,8 +54,8 @@
     </repositories>
     
     <modules>
-		<module>gp-test-services</module>
-        <module>gp-test-ui</module>
+		<module>geoplatform-services-test</module>
+        <module>geoplatform-ui-test</module>
 	</modules>
 
 

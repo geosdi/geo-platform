@@ -9,7 +9,7 @@
 	</parent>
 
   <groupId>org.geosdi.geoplatform</groupId>
-  <artifactId>gp-test-services</artifactId>
+  <artifactId>geoplatform-services-test</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 

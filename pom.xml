@@ -150,6 +150,7 @@
 	<modules>
 		<module>geoplatform-services</module>
 		<module>geoplatform-gui</module>
+        <module>test</module>
 	</modules>
 
 	<mailingLists>

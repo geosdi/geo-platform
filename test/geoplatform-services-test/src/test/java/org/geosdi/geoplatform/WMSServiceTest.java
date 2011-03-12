@@ -37,37 +37,44 @@ package org.geosdi.geoplatform;
 
 import java.text.ParseException;
 
+import junit.framework.Assert;
+
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.responce.ShortServer;
 import org.junit.Test;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
- *
+ * 
  */
 public class WMSServiceTest extends ServiceTest {
-	
-	@Test
-    public void testGetCapabilities() throws ParseException {
-		RequestById idGeoServer = new RequestById();
-		idGeoServer.setId(0);
-		
-		try {
-			assertEquals(255, geoPlatformServiceClient.getCapabilities(idGeoServer).getList().size());
-		} catch (ResourceNotFoundFault e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		RequestById idMapServer = new RequestById();
-		idMapServer.setId(1);
-		
-		try {
-			assertEquals(8, geoPlatformServiceClient.getCapabilities(idMapServer).getList().size());
-		} catch (ResourceNotFoundFault e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
+	@Test
+	public void testGetCapabilities() throws ParseException,
+			ResourceNotFoundFault {
+
+		ShortServer shortServer = geoPlatformServiceClient
+				.getServer("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
+
+		Assert.assertNotNull(shortServer);
+
+		Assert.assertEquals(
+				255,
+				geoPlatformServiceClient
+						.getCapabilities(new RequestById(shortServer.getId()))
+						.getList().size());
+
+		ShortServer shortServer1 = geoPlatformServiceClient
+				.getServer("http://maps.telespazio.it/dpc/dpc-wms");
+
+		Assert.assertNotNull(shortServer1);
+
+		Assert.assertEquals(
+				8,
+				geoPlatformServiceClient
+						.getCapabilities(new RequestById(shortServer1.getId()))
+						.getList().size());
+
+	}
 }

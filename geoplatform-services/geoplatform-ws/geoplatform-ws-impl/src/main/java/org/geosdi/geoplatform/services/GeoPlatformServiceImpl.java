@@ -40,12 +40,14 @@ import javax.jws.WebService;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.LayerList;
+import org.geosdi.geoplatform.responce.ShortServer;
 import org.geosdi.geoplatform.responce.UserList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -116,18 +118,17 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 			throws ResourceNotFoundFault, IllegalParameterFault {
 		return userServiceDelegate.deleteUser(request);
 	}
-	
+
 	// ==========================================================================
 	// === OWS
 	// ==========================================================================
-	
+
 	@Override
 	public LayerList getCapabilities(RequestById request)
 			throws ResourceNotFoundFault {
 		return wmsServiceDelegate.getCapabilities(request);
 	}
-	
-	
+
 	// ==========================================================================
 	// === DAOs IoC
 	// ==========================================================================
@@ -141,7 +142,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 		this.userDao = userDao;
 		this.userServiceDelegate.setUserDao(userDao);
 	}
-	
+
 	/**
 	 * @param serverDao
 	 *            the serverDao to set
@@ -152,6 +153,27 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 		this.wmsServiceDelegate.setServerDao(serverDao);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.services.GeoPlatformService#getServer(java.lang
+	 * .String)
+	 */
+	@Override
+	public ShortServer getServer(String serverUrl) throws ResourceNotFoundFault {
+		// TODO Auto-generated method stub
 
+		GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
+
+		if (server == null) {
+			throw new ResourceNotFoundFault("Server not found " + serverUrl);
+		}
+
+		ShortServer shortServer = new ShortServer();
+		shortServer.setId(server.getId());
+
+		return shortServer;
+	}
 
 }

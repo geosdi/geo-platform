@@ -16,23 +16,16 @@
             http://cxf.apache.org/schemas/jaxws.xsd"
 	default-autowire="byName">
 
-	<import resource="applicationContext-Servcices.xml" />
+	<!-- ==================================================================== -->
+	<!-- ==================================================================== -->
 
-	<!--===================================================================== -->
-	<!-- Services -->
-	<!--===================================================================== -->
+	<context:annotation-config />
 
-	<bean id="geoPlatformServiceClient" class="org.geosdi.geoplatform.services.GeoPlatformService"
-		factory-bean="geoPlatformProxyFactory" factory-method="create" />
 
-	<bean id="geoPlatformProxyFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
-		<property name="serviceClass"
-			value="org.geosdi.geoplatform.services.GeoPlatformService" />
-		<property name="address"
-			value="http://localhost:8080/geoplatform-service/soap" />
-		<property name="bus" ref="cxf" />
-	</bean>
+	<!-- Load CXF modules from cxf.jar -->
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-http.xml" />
 
-	<!--===================================================================== -->
 
 </beans>

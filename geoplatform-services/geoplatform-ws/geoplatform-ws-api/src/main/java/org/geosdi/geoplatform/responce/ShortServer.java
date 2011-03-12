@@ -33,34 +33,51 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform;
+package org.geosdi.geoplatform.responce;
 
-import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author Francesco Izzi - CNR IMAA - geoSDI
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext.xml" })
-public abstract class ServiceTest {
+@XmlRootElement(name = "ShortServer")
+public class ShortServer {
 
-	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	private long id;
 
-	@Autowired
-	protected GeoPlatformService geoPlatformServiceClient;
+	public ShortServer() {
+		super();
+	}
 
-	@Before
-	public void setUp() {
-		Assert.assertNotNull(geoPlatformServiceClient);
+	public ShortServer(long theId) {
+		this.id = theId;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ShortServer [id=" + id + "]";
 	}
 
 }

@@ -35,14 +35,11 @@
  */
 package org.geosdi.geoplatform;
 
-import java.text.ParseException;
 import java.util.List;
 
-import junit.framework.TestCase;
-
-import org.apache.log4j.Logger;
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
+import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.dao.GPStyleDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPFolder;
@@ -50,51 +47,55 @@ import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPStyle;
 import org.geosdi.geoplatform.core.model.GPTimerName;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.ParseException;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @author giuseppe
  * 
  */
-public abstract class BaseDAOTest extends TestCase {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:applicationContext.xml" })
+public abstract class BaseDAOTest {
 
-	protected final Logger LOGGER;
-	protected static GPUserDAO userDAO;
-	protected static GPFolderDAO folderDAO;
-	protected static GPLayerDAO layerDAO;
-	protected static GPStyleDAO styleDAO;
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	protected static ClassPathXmlApplicationContext ctx = null;
+	@Autowired
+	protected GPUserDAO userDAO;
 
-	public BaseDAOTest() {
-		LOGGER = Logger.getLogger(getClass());
+	@Autowired
+	protected GPFolderDAO folderDAO;
 
-		synchronized (BaseDAOTest.class) {
-			if (ctx == null) {
-				String[] paths = { "applicationContext.xml" };
-				ctx = new ClassPathXmlApplicationContext(paths);
-				userDAO = (GPUserDAO) ctx.getBean("userDAO");
-				folderDAO = (GPFolderDAO) ctx.getBean("folderDAO");
-				layerDAO = (GPLayerDAO) ctx.getBean("layerDAO");
-				styleDAO = (GPStyleDAO) ctx.getBean("styleDAO");
-			}
-		}
-	}
+	@Autowired
+	protected GPLayerDAO layerDAO;
 
-	@Override
-	protected void setUp() throws Exception {
-		LOGGER.info("---------- Running " + getClass().getSimpleName() + "::"
-				+ getName());
-		super.setUp();
+	@Autowired
+	protected GPStyleDAO styleDAO;
+
+	@Autowired
+	protected GPServerDAO serverDAO;
+
+	@Before
+	public void setUp() {
+		logger.info("----------------------- Running "
+				+ getClass().getSimpleName());
 	}
 
 	@Test
 	public void testCheckDAOs() {
-		assertNotNull(userDAO);
-		assertNotNull(folderDAO);
-		assertNotNull(layerDAO);
-		assertNotNull(styleDAO);
+		Assert.assertNotNull(userDAO);
+		Assert.assertNotNull(folderDAO);
+		Assert.assertNotNull(layerDAO);
+		Assert.assertNotNull(styleDAO);
+		Assert.assertNotNull(serverDAO);
 	}
 
 	protected void removeAll() {
@@ -102,44 +103,43 @@ public abstract class BaseDAOTest extends TestCase {
 		removeAllLayer();
 		removeAllFolder();
 		removeAllUser();
-
 	}
 
 	private void removeAllFolder() {
 		List<GPFolder> folders = folderDAO.findAll();
 		for (GPFolder folder : folders) {
-			LOGGER.info("Removing " + folder);
+			logger.info("Removing " + folder);
 			boolean ret = folderDAO.remove(folder);
-			assertTrue("Old Folder not removed", ret);
+			Assert.assertTrue("Old Folder not removed", ret);
 		}
-		
+
 	}
 
 	private void removeAllLayer() {
 		List<GPLayer> layers = layerDAO.findAll();
 		for (GPLayer layer : layers) {
-			LOGGER.info("Removing " + layer);
+			logger.info("Removing " + layer);
 			boolean ret = layerDAO.remove(layer);
-			assertTrue("Old Layer not removed", ret);
+			Assert.assertTrue("Old Layer not removed", ret);
 		}
-		
+
 	}
 
 	private void removeAllStyle() {
 		List<GPStyle> styles = styleDAO.findAll();
 		for (GPStyle style : styles) {
-			LOGGER.info("Removing " + style);
+			logger.info("Removing " + style);
 			boolean ret = styleDAO.remove(style);
-			assertTrue("Old Style not removed", ret);
+			Assert.assertTrue("Old Style not removed", ret);
 		}
 	}
 
 	private void removeAllUser() {
 		List<GPUser> users = userDAO.findAll();
 		for (GPUser user : users) {
-			LOGGER.info("Removing " + user);
+			logger.info("Removing " + user);
 			boolean ret = userDAO.remove(user);
-			assertTrue("Old User not removed", ret);
+			Assert.assertTrue("Old User not removed", ret);
 		}
 
 	}
@@ -152,23 +152,23 @@ public abstract class BaseDAOTest extends TestCase {
 		int USER_NUMBER = 50;
 
 		for (int i = 0; i < USER_NUMBER; i++) {
-			GPUser user = createUser("user_"+i);
+			GPUser user = createUser("user_" + i);
 			userDAO.persist(user);
-			LOGGER.info("Save user: "+user);
+			logger.info("Save user: " + user);
 		}
 
 	}
-	
+
 	protected GPUser createUser(String name) {
-        String username = name;
-        GPUser user = new GPUser();
-        user.setUsername(username);
-        user.setEmailAddress(username + "@test");
-        user.setEnabled(true);
-        user.setPassword("test");
-        user.setSendEmail(true);
-        user.setTimerName(GPTimerName.TIMER_A);
-        return user;
-    }
+		String username = name;
+		GPUser user = new GPUser();
+		user.setUsername(username);
+		user.setEmailAddress(username + "@test");
+		user.setEnabled(true);
+		user.setPassword("test");
+		user.setSendEmail(true);
+		user.setTimerName(GPTimerName.TIMER_A);
+		return user;
+	}
 
 }

@@ -39,6 +39,7 @@ import java.util.List;
 
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.trg.search.ISearch;
 import com.trg.search.Search;
@@ -48,8 +49,19 @@ import com.trg.search.Search;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
+@Transactional
 public class GPServerDAOImpl extends BaseDAO<GeoPlatformServer, Long> implements
 		GPServerDAO {
+	
+	@Override
+	public void persist(GeoPlatformServer... servers) {
+		super.persist(servers);
+	}
+	
+	@Override
+	public boolean remove(GeoPlatformServer server) {
+		return super.remove(server);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override

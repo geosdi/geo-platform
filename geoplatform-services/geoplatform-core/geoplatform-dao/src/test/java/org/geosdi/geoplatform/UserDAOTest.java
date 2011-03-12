@@ -37,6 +37,7 @@ package org.geosdi.geoplatform;
 
 import java.text.ParseException;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -44,15 +45,15 @@ import org.junit.Test;
  * 
  */
 public class UserDAOTest extends BaseDAOTest {
-	
+
 	@Test
-    public void testRemoveAll() throws ParseException {
+	public void testRemoveAll() throws ParseException {
 		removeAll();
 
-		assertEquals(0, userDAO.findAll().size());
-		assertEquals(0, styleDAO.findAll().size());
-		assertEquals(0, folderDAO.findAll().size());
-		assertEquals(0, layerDAO.findAll().size());
+		Assert.assertEquals(0, userDAO.findAll().size());
+		Assert.assertEquals(0, styleDAO.findAll().size());
+		Assert.assertEquals(0, folderDAO.findAll().size());
+		Assert.assertEquals(0, layerDAO.findAll().size());
 	}
 
 }

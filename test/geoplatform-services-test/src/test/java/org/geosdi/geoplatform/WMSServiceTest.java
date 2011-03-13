@@ -42,17 +42,35 @@ import junit.framework.Assert;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.ShortServer;
+import org.junit.Before;
 import org.junit.Test;
+import org.mortbay.jetty.Server;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
  * 
  */
 public class WMSServiceTest extends ServiceTest {
+	
+	@Autowired
+	private Server gpJettyServer;
+	
+	@Before
+	public void setUp() {
+		try {
+			gpJettyServer.start();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.error(e.getMessage());
+		}
+	}
 
 	@Test
 	public void testGetCapabilities() throws ParseException,
 			ResourceNotFoundFault {
+		
+		Assert.assertNotNull(gpJettyServer);
 
 		ShortServer shortServer = geoPlatformServiceClient
 				.getServer("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");

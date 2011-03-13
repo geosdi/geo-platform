@@ -100,6 +100,12 @@
 			</exclusions>
 		</dependency>
 
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jetty</artifactId>
+			<version>6.1.25</version>
+		</dependency>
+
 		<!-- SCOPE TEST -->
 		<dependency>
 			<groupId>org.springframework</groupId>

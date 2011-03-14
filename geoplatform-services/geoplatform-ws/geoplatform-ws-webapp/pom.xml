@@ -387,9 +387,10 @@
 				<version>1.6</version>
 				<executions>
 					<execution>
+						<id>deploy-build</id>
 						<phase>install</phase>
 						<configuration>
-							<tasks>
+							<target>
 							
 								<delete file="../../../test/geoplatform-services-test/deploy/${build.finalName}.war" />
 								<delete dir="../../../test/geoplatform-services-test/deploy/${build.finalName}.war" />
@@ -398,7 +399,22 @@
 								<copy todir="../../../test/geoplatform-services-test/deploy">
 									<fileset dir="${project.build.directory}" includes="${build.finalName}.war" />
 								</copy>
-							</tasks>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>clean-build</id>
+						<phase>clean</phase>
+						<configuration>
+							<target>
+							
+								<delete file="../../../test/geoplatform-services-test/deploy/${build.finalName}.war" />
+								<delete dir="../../../test/geoplatform-services-test/deploy/${build.finalName}.war" />
+
+							</target>
 						</configuration>
 						<goals>
 							<goal>run</goal>

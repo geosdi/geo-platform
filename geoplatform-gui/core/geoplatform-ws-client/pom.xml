@@ -52,7 +52,9 @@
 			<artifactId>cxf-rt-databinding-aegis</artifactId>
 		</dependency>
 
+		<!-- =============================================================== -->
 		<!-- GEOPLATFORM WS -->
+		<!-- =============================================================== -->
 		<dependency>
 			<groupId>org.geosdi</groupId>
 			<artifactId>geoplatform-model</artifactId>
@@ -67,17 +69,6 @@
 		<dependency>
 			<groupId>org.geosdi</groupId>
 			<artifactId>geoplatform-ws-api</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>cglib</groupId>
-					<artifactId>cglib</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.geosdi</groupId>
-			<artifactId>geoplatform-ws-impl</artifactId>
 			<exclusions>
 				<exclusion>
 					<groupId>cglib</groupId>
@@ -137,7 +128,6 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
 

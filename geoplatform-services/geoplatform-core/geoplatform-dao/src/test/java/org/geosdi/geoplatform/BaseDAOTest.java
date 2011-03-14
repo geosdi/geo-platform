@@ -35,13 +35,16 @@
  */
 package org.geosdi.geoplatform;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.dao.GPStyleDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
+import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPStyle;
@@ -84,6 +87,9 @@ public abstract class BaseDAOTest {
 	@Autowired
 	protected GPServerDAO serverDAO;
 
+	@Autowired
+	protected GPAuthorityDAO authorityDAO;
+
 	@Before
 	public void setUp() {
 		logger.info("----------------------- Running "
@@ -97,13 +103,25 @@ public abstract class BaseDAOTest {
 		Assert.assertNotNull(layerDAO);
 		Assert.assertNotNull(styleDAO);
 		Assert.assertNotNull(serverDAO);
+		Assert.assertNotNull(authorityDAO);
 	}
 
 	protected void removeAll() {
 		removeAllStyle();
 		removeAllLayer();
 		removeAllFolder();
+		removeAllAuthority();
 		removeAllUser();
+	}
+
+	private void removeAllAuthority() {
+		List<GPAuthority> autorities = authorityDAO.findAll();
+		for (GPAuthority autority : autorities) {
+			logger.info("Removing " + autority);
+			boolean ret = authorityDAO.remove(autority);
+			Assert.assertTrue("Old Authority not removed", ret);
+		}
+
 	}
 
 	private void removeAllFolder() {
@@ -145,18 +163,26 @@ public abstract class BaseDAOTest {
 
 	}
 
-	protected void insertAll() throws ParseException {
-		intertMassUser();
+	protected void insertData() throws ParseException {
+		insertUser();
 	}
 
-	private void intertMassUser() {
-		int USER_NUMBER = 50;
+	private void insertUser() {
 
-		for (int i = 0; i < USER_NUMBER; i++) {
-			GPUser user = createUser("user_" + i);
-			userDAO.persist(user);
-			logger.info("Save user: " + user);
-		}
+		GPUser user = createUser("user_0");
+		userDAO.persist(user);
+		logger.info("Save user: " + user);
+		
+		
+		List<GPAuthority> authorities = new ArrayList<GPAuthority>();
+		GPAuthority authority = new GPAuthority("user_0", "ROLE_ADMIN");
+		authority.setGpUser(user);
+		authorities.add(authority);
+		user.setGpAuthorities(authorities);
+		authorityDAO.persist(authority);
+		logger.info("Save Authority for: " + authority);
+		
+		
 
 	}
 

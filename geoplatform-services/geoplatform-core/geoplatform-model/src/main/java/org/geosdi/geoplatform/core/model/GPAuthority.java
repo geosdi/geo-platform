@@ -60,7 +60,7 @@ import org.springframework.security.core.GrantedAuthority;
 @Entity(name = "Authority")
 @XmlRootElement(name = "Authority")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "authority")
-@Table(name = "gp_authority", uniqueConstraints = { @UniqueConstraint(columnNames = { "id" }) })
+@Table(name = "gp_authority")
 public class GPAuthority implements GrantedAuthority, Serializable {
 
 	/**
@@ -148,6 +148,17 @@ public class GPAuthority implements GrantedAuthority, Serializable {
 	 */
 	public void setAuthority(String authority) {
 		this.authority = authority;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "GPAuthority [id=" + id + ", username=" + username
+				+ ", authority=" + authority + ", gpUser=" + gpUser + "]";
 	}
 
 }

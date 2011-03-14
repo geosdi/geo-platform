@@ -6,6 +6,7 @@ package org.geosdi.geoplatform.core.model;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -88,7 +89,7 @@ public class GPUser implements Serializable, UserDetails {
 	private Boolean credentialsNonExpired;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "gpUser")
-	private Set<GPAuthority> gpAuthorities;
+	private List<GPAuthority> gpAuthorities;
 
 	/**
 	 * Default constructor
@@ -221,6 +222,20 @@ public class GPUser implements Serializable, UserDetails {
 			auth.add(ga);
 		}
 		return auth;
+	}
+
+	/**
+	 * @return the gpAuthorities
+	 */
+	public List<GPAuthority> getGpAuthorities() {
+		return gpAuthorities;
+	}
+
+	/**
+	 * @param gpAuthorities the gpAuthorities to set
+	 */
+	public void setGpAuthorities(List<GPAuthority> gpAuthorities) {
+		this.gpAuthorities = gpAuthorities;
 	}
 
 	@Override

@@ -33,29 +33,38 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform;
+package org.geosdi.geoplatform.core.dao.impl;
 
-import java.text.ParseException;
+import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.apache.log4j.Logger;
+import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
+import org.geosdi.geoplatform.core.model.GPAuthority;
+
+import com.trg.search.ISearch;
 
 /**
- * @author giuseppe
+ * @author Francesco Izzi - CNR IMAA - geoSDI Group
  * 
  */
-public class UserDAOTest extends BaseDAOTest {
+public class GPAuthorityDAOImpl extends BaseDAO<GPAuthority, Long> implements
+		GPAuthorityDAO {
 
-	@Test
-	public void testRemoveAll() throws ParseException {
-		removeAll();
+	final private static Logger LOGGER = Logger.getLogger(GPAuthorityDAOImpl.class);
 
-		Assert.assertEquals(0, userDAO.findAll().size());
-		Assert.assertEquals(0, styleDAO.findAll().size());
-		Assert.assertEquals(0, folderDAO.findAll().size());
-		Assert.assertEquals(0, layerDAO.findAll().size());
-		
-		insertData();
+	@Override
+	public void persist(GPAuthority... authorities) {
+		super.persist(authorities);
+	}
+
+	@Override
+	public List<GPAuthority> search(ISearch search) {
+		return super.search(search);
+	}
+	
+	@Override
+	public boolean remove(GPAuthority entity) {
+		return super.remove(entity);
 	}
 
 }

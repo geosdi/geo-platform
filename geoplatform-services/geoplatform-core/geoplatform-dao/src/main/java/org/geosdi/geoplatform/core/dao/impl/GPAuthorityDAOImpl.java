@@ -37,9 +37,9 @@ package org.geosdi.geoplatform.core.dao.impl;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.geosdi.geoplatform.core.model.GPAuthority;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.trg.search.ISearch;
 
@@ -47,16 +47,16 @@ import com.trg.search.ISearch;
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
  * 
  */
+@Transactional
 public class GPAuthorityDAOImpl extends BaseDAO<GPAuthority, Long> implements
 		GPAuthorityDAO {
-
-	final private static Logger LOGGER = Logger.getLogger(GPAuthorityDAOImpl.class);
 
 	@Override
 	public void persist(GPAuthority... authorities) {
 		super.persist(authorities);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<GPAuthority> search(ISearch search) {
 		return super.search(search);

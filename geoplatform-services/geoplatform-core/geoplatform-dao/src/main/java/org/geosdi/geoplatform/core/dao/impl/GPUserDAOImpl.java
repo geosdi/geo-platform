@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.core.dao.impl;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,19 +52,17 @@ import com.trg.search.Search;
 @Transactional
 public class GPUserDAOImpl extends BaseDAO<GPUser, Long> implements GPUserDAO {
 
-	final private static Logger LOGGER = Logger.getLogger(GPUserDAOImpl.class);
-	
 	@Override
-    public void persist(GPUser... users) {
-        super.persist(users);
-    }
-	
+	public void persist(GPUser... users) {
+		super.persist(users);
+	}
+
+	@SuppressWarnings("unchecked")
 	@Override
-    public List<GPUser> search(ISearch search) {
-        return super.search(search);
-    }
-	
-	
+	public List<GPUser> search(ISearch search) {
+		return super.search(search);
+	}
+
 	@Override
 	public GPUser findByUsername(String name) {
 		Search search = new Search();

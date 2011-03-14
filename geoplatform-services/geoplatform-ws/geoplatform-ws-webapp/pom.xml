@@ -383,6 +383,31 @@
 			</plugin>
 
 			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<configuration>
+							<tasks>
+							
+								<delete file="../../../test/geoplatform-services-test/deploy/${build.finalName}.war" />
+								<delete dir="../../../test/geoplatform-services-test/deploy/${build.finalName}.war" />
+
+
+								<copy todir="../../../test/geoplatform-services-test/deploy">
+									<fileset dir="${project.build.directory}" includes="${build.finalName}.war" />
+								</copy>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.25</version>

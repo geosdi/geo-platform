@@ -48,7 +48,7 @@
 									<bean class="org.mortbay.jetty.webapp.WebAppContext">
 										<property name="contextPath" value="/geoplatform-service" />
 										<property name="war"
-											value="/Users/giuseppe/codice/eclipse/GEO-PLATFORM/geoplatform-services/geoplatform-ws/geoplatform-ws-webapp/target/geoplatform-service.war" />
+											value="deploy/geoplatform-service.war" />
 									</bean>
 								</list>
 							</property>

@@ -50,5 +50,6 @@
         <class>org.geosdi.geoplatform.core.model.GPVectorLayer</class>
         <class>org.geosdi.geoplatform.core.model.GPStyle</class>
         <class>org.geosdi.geoplatform.core.model.GeoPlatformServer</class>
+        <class>org.geosdi.geoplatform.core.model.GPAuthority</class>
     </persistence-unit>
 </persistence>

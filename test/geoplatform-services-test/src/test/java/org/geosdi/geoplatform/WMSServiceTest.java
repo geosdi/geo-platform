@@ -94,5 +94,6 @@ public class WMSServiceTest extends ServiceTest {
 						.getCapabilities(new RequestById(shortServer1.getId()))
 						.getList().size());
 
+		Assert.assertNotNull(geoPlatformServiceClient.getServer("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities"));
 	}
 }

@@ -17,6 +17,7 @@
     	<mapping  class="org.geosdi.geoplatform.core.model.GPRasterLayer"/>
     	<mapping  class="org.geosdi.geoplatform.core.model.GPStyle"/>
     	<mapping  class="org.geosdi.geoplatform.core.model.GeoPlatformServer"/>
+    	<mapping  class="org.geosdi.geoplatform.core.model.GPAuthority"/>
     	
     </session-factory>
 </hibernate-configuration>

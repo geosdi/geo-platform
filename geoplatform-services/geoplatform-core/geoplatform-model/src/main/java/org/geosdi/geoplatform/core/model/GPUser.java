@@ -4,20 +4,28 @@
 package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author giuseppe
@@ -28,48 +36,59 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "gp_user")
 @XmlRootElement(name = "User")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "user")
-public class GPUser implements Serializable {
+public class GPUser implements Serializable, UserDetails {
 
 	/**
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = -1354980934257649175L;
-	
+
 	@Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="GP_USER_SEQ")
-    @SequenceGenerator(name="GP_USER_SEQ", sequenceName="GP_USER_SEQ")
-    @Column
-    private long id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_USER_SEQ")
+	@SequenceGenerator(name = "GP_USER_SEQ", sequenceName = "GP_USER_SEQ")
+	@Column
+	private long id;
 
-    @Column(name="user_name", unique=true, nullable=false)
-    private String username;
+	@Column(name = "user_name", unique = true, nullable = false)
+	private String username;
 
-    /**
-     * since memberService integration
-     */
-    @Column(name="user_password")
-    private String password;
+	/**
+	 * since memberService integration
+	 */
+	@Column(name = "user_password")
+	private String password;
 
-    @Column(name="email_address", nullable=false)
-    private String emailAddress;
+	@Column(name = "email_address", nullable = false)
+	private String emailAddress;
 
-    /**
-     * since memberService integration
-     */
-    @Column(name="is_enabled", nullable=false)
-    private boolean enabled = false;
+	/**
+	 * since memberService integration
+	 */
+	@Column(name = "is_enabled", nullable = false)
+	private boolean enabled = false;
 
-    @Column(name="send_email", nullable=false)
-    private boolean sendEmail = false;
+	@Column(name = "send_email", nullable = false)
+	private boolean sendEmail = false;
 
-    /**
-     * The name of the timer.
-     * Should be equal to the trigger name in the Quartz service.
-     */
-    @Column(name="gp_timer_name", nullable=false)
-    @Enumerated(EnumType.STRING)
-    private GPTimerName timerName;
+	/**
+	 * The name of the timer. Should be equal to the trigger name in the Quartz
+	 * service.
+	 */
+	@Column(name = "gp_timer_name", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private GPTimerName timerName;
 
+	@Column(name = "accountNonExpired")
+	private Boolean accountNonExpired;
+
+	@Column(name = "accountNonLocked")
+	private Boolean accountNonLocked;
+
+	@Column(name = "credentialsNonExpired")
+	private Boolean credentialsNonExpired;
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "GPUser")
+	private Set<GPAuthority> gpAuthorities;
 
 	/**
 	 * Default constructor
@@ -86,7 +105,8 @@ public class GPUser implements Serializable {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(long id) {
 		this.id = id;
@@ -100,7 +120,8 @@ public class GPUser implements Serializable {
 	}
 
 	/**
-	 * @param username the username to set
+	 * @param username
+	 *            the username to set
 	 */
 	public void setUsername(String username) {
 		this.username = username;
@@ -114,7 +135,8 @@ public class GPUser implements Serializable {
 	}
 
 	/**
-	 * @param password the password to set
+	 * @param password
+	 *            the password to set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -128,7 +150,8 @@ public class GPUser implements Serializable {
 	}
 
 	/**
-	 * @param emailAddress the emailAddress to set
+	 * @param emailAddress
+	 *            the emailAddress to set
 	 */
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
@@ -142,7 +165,8 @@ public class GPUser implements Serializable {
 	}
 
 	/**
-	 * @param enabled the enabled to set
+	 * @param enabled
+	 *            the enabled to set
 	 */
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
@@ -156,7 +180,8 @@ public class GPUser implements Serializable {
 	}
 
 	/**
-	 * @param sendEmail the sendEmail to set
+	 * @param sendEmail
+	 *            the sendEmail to set
 	 */
 	public void setSendEmail(boolean sendEmail) {
 		this.sendEmail = sendEmail;
@@ -170,13 +195,16 @@ public class GPUser implements Serializable {
 	}
 
 	/**
-	 * @param timerName the timerName to set
+	 * @param timerName
+	 *            the timerName to set
 	 */
 	public void setTimerName(GPTimerName timerName) {
 		this.timerName = timerName;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -186,8 +214,31 @@ public class GPUser implements Serializable {
 				+ ", sendEmail=" + sendEmail + ", timerName=" + timerName + "]";
 	}
 
-	
-	
-	
-	
+	@Override
+	public Collection<GrantedAuthority> getAuthorities() {
+		Collection<GrantedAuthority> auth = new HashSet<GrantedAuthority>();
+		for (GrantedAuthority ga : gpAuthorities) {
+			auth.add(ga);
+		}
+		return auth;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return accountNonExpired;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return accountNonLocked;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return credentialsNonExpired;
+	}
+
 }

@@ -63,6 +63,11 @@ import org.springframework.security.core.GrantedAuthority;
 @Table(name = "gp_authority", uniqueConstraints = { @UniqueConstraint(columnNames = { "id" }) })
 public class GPAuthority implements GrantedAuthority, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5005299814060260152L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_AUTHORITY_SEQ")
 	@SequenceGenerator(name = "GP_AUTHORITY_SEQ", sequenceName = "GP_AUTHORITY_SEQ")

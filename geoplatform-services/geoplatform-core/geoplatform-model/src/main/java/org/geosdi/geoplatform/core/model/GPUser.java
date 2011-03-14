@@ -87,7 +87,7 @@ public class GPUser implements Serializable, UserDetails {
 	@Column(name = "credentialsNonExpired")
 	private Boolean credentialsNonExpired;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "GPUser")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "gpUser")
 	private Set<GPAuthority> gpAuthorities;
 
 	/**

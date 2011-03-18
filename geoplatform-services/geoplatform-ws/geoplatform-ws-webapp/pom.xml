@@ -391,13 +391,15 @@
 						<phase>install</phase>
 						<configuration>
 							<target>
-							
-								<delete file="../../../test/geoplatform-services-test/deploy/${build.finalName}.war" />
-								<delete dir="../../../test/geoplatform-services-test/deploy/${build.finalName}.war" />
+
+								<delete
+									file="../../../test/geoplatform-services-test/deploy/${project.build.finalName}.war" />
+								<delete
+									dir="../../../test/geoplatform-services-test/deploy/${project.build.finalName}.war" />
 
 
 								<copy todir="../../../test/geoplatform-services-test/deploy">
-									<fileset dir="${project.build.directory}" includes="${build.finalName}.war" />
+									<fileset dir="${project.build.directory}" includes="${project.build.finalName}.war" />
 								</copy>
 							</target>
 						</configuration>
@@ -410,9 +412,11 @@
 						<phase>clean</phase>
 						<configuration>
 							<target>
-							
-								<delete file="../../../test/geoplatform-services-test/deploy/${build.finalName}.war" />
-								<delete dir="../../../test/geoplatform-services-test/deploy/${build.finalName}.war" />
+
+								<delete
+									file="../../../test/geoplatform-services-test/deploy/${project.build.finalName}.war" />
+								<delete
+									dir="../../../test/geoplatform-services-test/deploy/${project.build.finalName}.war" />
 
 							</target>
 						</configuration>

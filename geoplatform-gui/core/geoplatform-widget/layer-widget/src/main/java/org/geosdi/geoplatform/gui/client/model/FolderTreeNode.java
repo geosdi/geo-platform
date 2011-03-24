@@ -95,7 +95,7 @@ public class FolderTreeNode extends GPBeanTreeModel implements IFolderTreeNode {
 	@Override
 	public AbstractImagePrototype getIcon() {
 		// TODO Auto-generated method stub
-		return LayerResources.ICONS.LayerFolder();
+		return LayerResources.ICONS.layerFolder();
 	}
 
 	@Override

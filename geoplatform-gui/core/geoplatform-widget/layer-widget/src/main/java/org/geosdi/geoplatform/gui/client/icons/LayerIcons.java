@@ -47,7 +47,7 @@ import com.google.gwt.user.client.ui.ImageBundle;
 public interface LayerIcons extends ImageBundle {
 	
 	@Resource("layer_folder.png")
-	AbstractImagePrototype LayerFolder();
+	AbstractImagePrototype layerFolder();
 	
 	@Resource("line.png")
 	AbstractImagePrototype line();

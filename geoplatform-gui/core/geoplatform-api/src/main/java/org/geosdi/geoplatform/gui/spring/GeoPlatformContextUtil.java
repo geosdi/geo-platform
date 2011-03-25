@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.spring;
 
+import java.util.Map;
+
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -59,6 +61,16 @@ public class GeoPlatformContextUtil {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Object getBean(Class type) {
 		return springContext.getBean(type);
+	}
+
+	/**
+	 * Return the bean instances that match the given object type (including
+	 * subclasses).
+	 */
+	public Map<String, ?> getBeansOfType(Class<?> type,
+			boolean includeNonSingletons, boolean allowEagerInit) {
+		return springContext.getBeansOfType(type, includeNonSingletons,
+				allowEagerInit);
 	}
 
 	/**

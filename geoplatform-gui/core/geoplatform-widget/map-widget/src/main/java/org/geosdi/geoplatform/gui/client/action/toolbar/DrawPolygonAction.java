@@ -46,14 +46,15 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 @PersistButton(persist = true)
 public class DrawPolygonAction extends MapToggleAction {
 
 	public DrawPolygonAction(GeoPlatformMap mapWidget) {
-		super("Draw Polygon", Resources.ICONS.DrawFeature(), mapWidget);
+		super("Draw Polygon", Resources.ICONS.drawFeature(), mapWidget);
 	}
 
 	/*

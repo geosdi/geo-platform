@@ -33,38 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
-
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
-import org.geosdi.geoplatform.gui.client.Resources;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.gwtopenmaps.openlayers.client.LonLat;
-
-import com.extjs.gxt.ui.client.event.ButtonEvent;
+package org.geosdi.geoplatform.gui.impl.map;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class ZoomOutAction extends ToolbarMapAction {
+public interface GeoPlatformEditor {
+	
+	public void activateDrawPointFeature();
 
-	private GeoPlatformMap mapWidget;
+	public void deactivateDrawPointFeature();
+	
+	public void activateDrawLineFeature();
 
-	private int zoomFactor = 1;
+	public void deactivateDrawLineFeature();
 
-	public ZoomOutAction(GeoPlatformMap mapWidget) {
-		super("ZoomOut", Resources.ICONS.zoomOut());
+	public void activateDrawFeature();
 
-		this.mapWidget = mapWidget;
-	}
+	public void deactivateDrawFeature();
 
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		LonLat center = this.mapWidget.getMap().getCenter();
-		int oldZoom = this.mapWidget.getMap().getZoom();
-		if ((oldZoom - this.zoomFactor) > 0)
-			this.mapWidget.getMap()
-					.setCenter(center, oldZoom - this.zoomFactor);
-	}
+	public boolean isFeatureOperationEnable();
+
+	public void deactivateFeatureOperation();
+
+	public void activateModifyFeature();
+
+	public void deactivateModifyFeature();
+
+	public boolean isModifyFeatureEnable();
+
 }

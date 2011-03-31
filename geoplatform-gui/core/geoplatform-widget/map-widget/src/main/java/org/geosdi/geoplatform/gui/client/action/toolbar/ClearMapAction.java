@@ -43,7 +43,8 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class ClearMapAction extends ToolbarMapAction {
@@ -51,7 +52,7 @@ public class ClearMapAction extends ToolbarMapAction {
 	private GeoPlatformMap mapWidget;
 
 	public ClearMapAction(GeoPlatformMap theMapWidget) {
-		super("Clear Map", Resources.ICONS.ClearMap());
+		super("Clear Map", Resources.ICONS.clearMap());
 		// TODO Auto-generated constructor stub
 		this.mapWidget = theMapWidget;
 	}

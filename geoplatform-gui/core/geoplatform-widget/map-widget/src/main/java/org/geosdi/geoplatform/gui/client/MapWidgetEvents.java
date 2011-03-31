@@ -53,7 +53,7 @@ public class MapWidgetEvents {
 	
 	public static final EventType ERASE_FEATURE = new EventType();
 	
-	public static final EventType DRAW_AOE = new EventType();
+	public static final EventType DRAW_FEATURE = new EventType();
 	
 	public static final EventType UPDATE_POLYGON_GEOMETRY = new EventType();
 	

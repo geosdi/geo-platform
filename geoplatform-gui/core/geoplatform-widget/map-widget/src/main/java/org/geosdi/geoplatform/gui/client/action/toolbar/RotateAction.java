@@ -48,7 +48,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 public class RotateAction extends ModifyFeatureAction {
 
 	public RotateAction(GeoPlatformMap mapWidget) {
-		super("Rotate", Resources.ICONS.Rotate(), mapWidget);
+		super("Rotate", Resources.ICONS.rotate(), mapWidget);
 		// TODO Auto-generated constructor stub
 	}
 

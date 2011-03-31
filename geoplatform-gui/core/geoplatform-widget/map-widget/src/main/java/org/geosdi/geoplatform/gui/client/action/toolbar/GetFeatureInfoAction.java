@@ -43,13 +43,14 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class GetFeatureInfoAction extends MapToggleAction {
 
 	public GetFeatureInfoAction(GeoPlatformMap mapWidget) {
-		super("GetFeatureInfo", Resources.ICONS.GetFeatureInfo(), mapWidget);
+		super("GetFeatureInfo", Resources.ICONS.getFeatureInfo(), mapWidget);
 	}
 
 	@Override

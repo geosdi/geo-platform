@@ -46,51 +46,51 @@ import com.google.gwt.user.client.ui.ImageBundle;
 public interface GeoPlatformIcons extends ImageBundle {
 
 	@Resource("zoom-in.png")
-	AbstractImagePrototype ZoomIn();
+	AbstractImagePrototype zoomIn();
 
 	@Resource("zoom-out.png")
-	AbstractImagePrototype ZoomOut();
+	AbstractImagePrototype zoomOut();
 
 	@Resource("draw-feature.png")
-	AbstractImagePrototype DrawFeature();
+	AbstractImagePrototype drawFeature();
 
 	@Resource("rotate.png")
-	AbstractImagePrototype Rotate();
+	AbstractImagePrototype rotate();
 	
 	@Resource("drag.png")
-	AbstractImagePrototype Drag();
+	AbstractImagePrototype drag();
 	
 	@Resource("resize.png")
-	AbstractImagePrototype Resize();
+	AbstractImagePrototype resize();
 	
 	@Resource("shape.png")
-	AbstractImagePrototype Shape();
+	AbstractImagePrototype shape();
 
 	@Resource("gp-icon-16x16.png")
 	AbstractImagePrototype geoPortalInfo();
 	
 	@Resource("draw-point.png")
-	AbstractImagePrototype DrawPointFeature();
+	AbstractImagePrototype drawPointFeature();
 	
 	@Resource("draw-line.png")
-	AbstractImagePrototype DrawLineFeature();
+	AbstractImagePrototype drawLineFeature();
 	
 	@Resource("clear-map.png")
-	AbstractImagePrototype ClearMap();
+	AbstractImagePrototype clearMap();
 	
 	@Resource("zoom-last.png")
-	AbstractImagePrototype ZoomPrevious();
+	AbstractImagePrototype zoomPrevious();
 	
 	@Resource("zoom-next.png")
-	AbstractImagePrototype ZoomNext();
+	AbstractImagePrototype zoomNext();
 	
 	@Resource("information.png")
-	AbstractImagePrototype GetFeatureInfo();
+	AbstractImagePrototype getFeatureInfo();
 	
 	@Resource("ruler.png")
-	AbstractImagePrototype Measure();
+	AbstractImagePrototype measure();
 	
 	@Resource("ruler_square.png")
-	AbstractImagePrototype MeasureArea();
+	AbstractImagePrototype measureArea();
 
 }

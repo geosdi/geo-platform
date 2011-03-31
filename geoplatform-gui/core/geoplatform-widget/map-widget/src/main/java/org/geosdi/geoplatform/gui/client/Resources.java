@@ -40,8 +40,9 @@ import org.geosdi.geoplatform.gui.client.icons.GeoPlatformIcons;
 import com.google.gwt.core.client.GWT;
 
 /**
- * @author giuseppe
- *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ * 
  */
 public class Resources {
 	

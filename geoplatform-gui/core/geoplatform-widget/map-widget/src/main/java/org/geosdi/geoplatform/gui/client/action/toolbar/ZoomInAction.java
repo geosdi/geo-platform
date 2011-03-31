@@ -53,7 +53,7 @@ public class ZoomInAction extends ToolbarMapAction {
 	private int zoomFactor = 1;
 
 	public ZoomInAction(GeoPlatformMap mapWidget) {
-		super("ZoomIn", Resources.ICONS.ZoomIn());
+		super("ZoomIn", Resources.ICONS.zoomIn());
 
 		this.mapWidget = mapWidget;
 	}

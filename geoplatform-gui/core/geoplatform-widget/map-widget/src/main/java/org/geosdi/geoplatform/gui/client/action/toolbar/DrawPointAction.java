@@ -45,13 +45,14 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class DrawPointAction extends MapToggleAction {
 
 	public DrawPointAction(GeoPlatformMap mapWidget) {
-		super("Draw Point", Resources.ICONS.DrawPointFeature(), mapWidget);
+		super("Draw Point", Resources.ICONS.drawPointFeature(), mapWidget);
 		// TODO Auto-generated constructor stub
 	}
 

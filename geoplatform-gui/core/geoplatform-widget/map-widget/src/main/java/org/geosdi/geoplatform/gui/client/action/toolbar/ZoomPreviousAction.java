@@ -58,7 +58,7 @@ public class ZoomPreviousAction extends ToolbarMapAction implements
 	private HandlerRegistration handlerRegistration;
 
 	public ZoomPreviousAction(GeoPlatformMap theMapWidget) {
-		super("Zoom Previous", Resources.ICONS.ZoomPrevious());
+		super("Zoom Previous", Resources.ICONS.zoomPrevious());
 		// TODO Auto-generated constructor stub
 		this.mapWidget = theMapWidget;
 		this.addHandler();

@@ -53,7 +53,7 @@ public class MapController extends GeoPlatformController {
 		registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
 				MapWidgetEvents.ATTACH_MAP_WIDGET,
 				MapWidgetEvents.ATTACH_TOOLBAR, MapWidgetEvents.ERASE_FEATURE,
-				MapWidgetEvents.DRAW_AOE, GeoPlatformEvents.UPDATE_CENTER,
+				MapWidgetEvents.DRAW_FEATURE, GeoPlatformEvents.UPDATE_CENTER,
 				GeoPlatformEvents.REGISTER_GEOCODING_LOCATION,
 				GeoPlatformEvents.RemoveMarker, GeoPlatformEvents.SCALE_REQUEST_CHANGE);
 	}
@@ -78,16 +78,16 @@ public class MapController extends GeoPlatformController {
 		if (event.getType() == GeoPlatformEvents.UPDATE_CENTER)
 			onUpdateCenter();
 
-		if (event.getType() == MapWidgetEvents.DRAW_AOE)
-			onDrawAOE(event);
+		if (event.getType() == MapWidgetEvents.DRAW_FEATURE)
+			onDrawFeature(event);
 
 		forwardToView(view, event);
 	}
 
 	
-	private void onDrawAOE(AppEvent event) {
+	private void onDrawFeature(AppEvent event) {
 		// TODO Auto-generated method stub
-		((MapView) this.view).drawAOE((VectorFeature) event.getData());
+		((MapView) this.view).drawFeature((VectorFeature) event.getData());
 	}
 
 	public void onRedrawVectorLayer() {

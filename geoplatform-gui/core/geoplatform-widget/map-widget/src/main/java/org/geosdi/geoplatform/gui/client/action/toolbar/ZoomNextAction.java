@@ -58,7 +58,7 @@ public class ZoomNextAction extends ToolbarMapAction implements
 	private HandlerRegistration handlerRegistration;
 
 	public ZoomNextAction(GeoPlatformMap theMapWidget) {
-		super("Zoom Next", Resources.ICONS.ZoomNext());
+		super("Zoom Next", Resources.ICONS.zoomNext());
 		// TODO Auto-generated constructor stub
 		this.mapWidget = theMapWidget;
 		this.addHandler();

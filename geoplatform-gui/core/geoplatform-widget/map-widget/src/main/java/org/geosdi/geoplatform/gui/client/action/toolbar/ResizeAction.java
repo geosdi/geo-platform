@@ -48,7 +48,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 public class ResizeAction extends ModifyFeatureAction {
 
 	public ResizeAction(GeoPlatformMap mapWidget) {
-		super("Resize", Resources.ICONS.Resize(), mapWidget);
+		super("Resize", Resources.ICONS.resize(), mapWidget);
 		// TODO Auto-generated constructor stub
 	}
 

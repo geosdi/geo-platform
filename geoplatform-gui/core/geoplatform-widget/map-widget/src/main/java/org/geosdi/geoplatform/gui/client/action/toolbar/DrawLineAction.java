@@ -35,36 +35,73 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
+import org.geosdi.geoplatform.gui.action.MapToggleAction;
 import org.geosdi.geoplatform.gui.client.Resources;
+import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.control.Control;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class ZoomOutAction extends ToolbarMapAction {
+public class DrawLineAction extends MapToggleAction {
 
-	private GeoPlatformMap mapWidget;
-
-	private int zoomFactor = 1;
-
-	public ZoomOutAction(GeoPlatformMap mapWidget) {
-		super("ZoomOut", Resources.ICONS.zoomOut());
-
-		this.mapWidget = mapWidget;
+	/**
+	 * @param tooltip
+	 * @param image
+	 * @param theMapWidget
+	 */
+	public DrawLineAction(GeoPlatformMap theMapWidget) {
+		super("Draw Line", Resources.ICONS.drawLineFeature(), theMapWidget);
+		// TODO Auto-generated constructor stub
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+	 * .extjs.gxt.ui.client.event.ComponentEvent)
+	 */
 	@Override
 	public void componentSelected(ButtonEvent ce) {
 		// TODO Auto-generated method stub
-		LonLat center = this.mapWidget.getMap().getCenter();
-		int oldZoom = this.mapWidget.getMap().getZoom();
-		if ((oldZoom - this.zoomFactor) > 0)
-			this.mapWidget.getMap()
-					.setCenter(center, oldZoom - this.zoomFactor);
+		ToggleButton button = (ToggleButton) ce.getSource();
+
+		super.changeButtonState();
+
+		if (button.isPressed()) {
+			mapWidget.getButtonBar().setPressedButton(button);
+			this.mapWidget.activateDrawLineFeature();
+		} else
+			this.mapWidget.deactivateDrawLineFeature();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#getMapControl()
+	 */
+	@Override
+	public Control getMapControl() {
+		// TODO Auto-generated method stub
+		return ((MapLayoutWidget) mapWidget).getDrawLineFeature();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
+	 */
+	@Override
+	public void disableControl() {
+		// TODO Auto-generated method stub
+		getMapControl().disable();
+	}
+
 }

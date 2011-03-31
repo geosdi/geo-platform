@@ -33,38 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.client.widget.map.control;
 
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
-import org.geosdi.geoplatform.gui.client.Resources;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.gwtopenmaps.openlayers.client.LonLat;
-
-import com.extjs.gxt.ui.client.event.ButtonEvent;
+import org.gwtopenmaps.openlayers.client.control.DrawFeature;
+import org.gwtopenmaps.openlayers.client.control.DrawFeatureOptions;
+import org.gwtopenmaps.openlayers.client.handler.PathHandler;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class ZoomOutAction extends ToolbarMapAction {
+public class DrawLineFeature extends DrawGenericFeatureControl {
 
-	private GeoPlatformMap mapWidget;
-
-	private int zoomFactor = 1;
-
-	public ZoomOutAction(GeoPlatformMap mapWidget) {
-		super("ZoomOut", Resources.ICONS.zoomOut());
-
-		this.mapWidget = mapWidget;
+	/**
+	 * @param vector
+	 */
+	public DrawLineFeature(Vector vector) {
+		super(vector);
+		// TODO Auto-generated constructor stub
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.geosdi.geoplatform.gui.configuration.map.control.GeoPlatformMapControl
+	 * #createControl()
+	 */
 	@Override
-	public void componentSelected(ButtonEvent ce) {
+	public void createControl() {
 		// TODO Auto-generated method stub
-		LonLat center = this.mapWidget.getMap().getCenter();
-		int oldZoom = this.mapWidget.getMap().getZoom();
-		if ((oldZoom - this.zoomFactor) > 0)
-			this.mapWidget.getMap()
-					.setCenter(center, oldZoom - this.zoomFactor);
+		DrawFeatureOptions drawLineFeatureOption = new DrawFeatureOptions();
+		drawLineFeatureOption
+				.onFeatureAdded(super.createFeatureAddedListener());
+
+		this.control = new DrawFeature(vector, new PathHandler(),
+				drawLineFeatureOption);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.client.widget.map.control.
+	 * DrawGenericFeatureControl#activateControl()
+	 */
+	@Override
+	public void activateControl() {
+		// TODO Auto-generated method stub
+		super.activateControl();
+		this.control.getLayer().setZIndex(9000);
 	}
 }

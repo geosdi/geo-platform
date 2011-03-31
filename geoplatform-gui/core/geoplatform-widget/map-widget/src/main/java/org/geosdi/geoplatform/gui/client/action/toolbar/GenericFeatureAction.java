@@ -44,7 +44,8 @@ import org.gwtopenmaps.openlayers.client.control.SelectFeature;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public abstract class GenericFeatureAction extends ToolbarMapAction {

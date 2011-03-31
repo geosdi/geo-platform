@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map;
 
+import org.geosdi.geoplatform.gui.client.widget.map.control.DrawLineFeature;
 import org.geosdi.geoplatform.gui.client.widget.map.control.DrawPointFeature;
 import org.geosdi.geoplatform.gui.client.widget.map.control.DrawPolygonControl;
 import org.geosdi.geoplatform.gui.client.widget.map.control.ModifyFeatureControl;
@@ -53,7 +54,8 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class MapControlManager {
@@ -64,6 +66,7 @@ public class MapControlManager {
 
 	private DrawPolygonControl drawFeature;
 	private DrawPointFeature drawPointFeature;
+	private DrawLineFeature drawLineFeature;
 	private ModifyFeatureControl modifyFeature;
 	private GenericFeatureOperation featureOperation;
 
@@ -85,7 +88,7 @@ public class MapControlManager {
 		vectorOption.setDisplayInLayerSwitcher(false);
 		this.vector = new Vector("GeoPlatform Vector Layer", vectorOption);
 		this.map.addLayer(vector);
-	
+
 		this.initControl();
 
 		this.addMapControl();
@@ -98,6 +101,7 @@ public class MapControlManager {
 	private void initControl() {
 		this.drawFeature = new DrawPolygonControl(vector);
 		this.drawPointFeature = new DrawPointFeature(vector);
+		this.drawLineFeature = new DrawLineFeature(vector);
 		this.modifyFeature = new ModifyFeatureControl(vector);
 		this.featureOperation = new GenericFeatureOperation(vector);
 		this.navigationHistory = new NavigationHistoryControl();
@@ -109,20 +113,21 @@ public class MapControlManager {
 	 */
 	private void addMapControl() {
 		this.map.addControl(this.drawFeature.getControl());
+		this.map.addControl(this.drawLineFeature.getControl());
 		this.map.addControl(this.drawPointFeature.getControl());
 		this.map.addControl(this.modifyFeature.getControl());
 		this.map.addControl(this.featureOperation.getControl());
 		this.map.addControl(this.navigationHistory.getControl());
-		
+
 		this.modifyFeature.activateControl();
 	}
 
 	/**
-	 * Draw AOE on the Map
+	 * Draw Feature on the Map
 	 * 
 	 * @param wkt
 	 */
-	public void drawAoeOnMap(String wkt) {
+	public void drawFeatureOnMap(String wkt) {
 		MultiPolygon geom = MultiPolygon.narrowToMultiPolygon(Geometry.fromWKT(
 				wkt).getJSObject());
 		geom.transform(new Projection("EPSG:4326"), new Projection(
@@ -136,8 +141,9 @@ public class MapControlManager {
 	 * 
 	 * @param feature
 	 */
-	public void drawAOE(VectorFeature feature) {
-		this.vector.addFeature(feature);
+	public void drawFeature(VectorFeature feature) {
+		if (vector.getFeatureById(feature.getFeatureId()) == null)
+			this.vector.addFeature(feature);
 		this.map.zoomToExtent(feature.getGeometry().getBounds());
 	}
 
@@ -155,6 +161,7 @@ public class MapControlManager {
 	 */
 	public void eraseFeature(VectorFeature vf) {
 		this.vector.removeFeature(vf);
+		this.vector.redraw();
 	}
 
 	/**
@@ -214,6 +221,13 @@ public class MapControlManager {
 	}
 
 	/**
+	 * @return the drawLineFeature
+	 */
+	public DrawLineFeature getDrawLineFeature() {
+		return drawLineFeature;
+	}
+
+	/**
 	 * Redraw the Vector Layer
 	 */
 	public void redrawVectorLayer() {
@@ -266,5 +280,13 @@ public class MapControlManager {
 
 	public void deactivateNavigationHistory() {
 		this.navigationHistory.deactivateControl();
+	}
+
+	public void activateDrawLineFeature() {
+		this.drawLineFeature.activateControl();
+	}
+
+	public void deactivateDrawLineFeature() {
+		this.drawLineFeature.deactivateControl();
 	}
 }

@@ -48,7 +48,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 public class DragAction extends ModifyFeatureAction {
 
 	public DragAction(GeoPlatformMap mapWidget) {
-		super("Drag", Resources.ICONS.Drag(), mapWidget);
+		super("Drag", Resources.ICONS.drag(), mapWidget);
 		// TODO Auto-generated constructor stub
 	}
 

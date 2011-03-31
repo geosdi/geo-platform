@@ -39,10 +39,12 @@ import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface GeoPlatformMap {
+public interface GeoPlatformMap extends GeoPlatformEditor, GeoPlatformMeasure,
+		GeoPlatformFeatureInfo {
 
 	public MapWidget getMapWidget();
 
@@ -50,39 +52,4 @@ public interface GeoPlatformMap {
 
 	public GeoPlatformButtonBar getButtonBar();
 
-	public void activateDrawPointFeature();
-
-	public void deactivateDrawPointFeature();
-
-	public void activateDrawFeature();
-
-	public void deactivateDrawFeature();
-
-	public boolean isFeatureOperationEnable();
-
-	public void deactivateFeatureOperation();
-
-	public void activateModifyFeature();
-
-	public void deactivateModifyFeature();
-
-	public boolean isModifyFeatureEnable();
-
-	public void activateInfo();
-
-	public void deactivateInfo();
-
-	public void activateMeasure();
-
-	public void deactivateMeasure();
-	
-	public void activateMeasureArea();
-
-	public void deactivateMeasureArea();
-
-	public boolean isInfoActive();
-	
-	public boolean isMeasureActive();
-	
-	public boolean isMeasureAreaActive();
 }

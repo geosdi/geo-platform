@@ -297,12 +297,12 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	}
 
 	/**
-	 * Draw AOE on the Map
+	 * Draw Feature on the Map
 	 * 
 	 * @param wkt
 	 */
-	public void drawAoeOnMap(String wkt) {
-		this.mapControl.drawAoeOnMap(wkt);
+	public void drawFeatureOnMap(String wkt) {
+		this.mapControl.drawFeatureOnMap(wkt);
 	}
 
 	/**
@@ -414,6 +414,10 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	public DrawFeature getDrawPointFeature() {
 		return this.mapControl.getDrawPointFeaureControl();
 	}
+	
+	public DrawFeature getDrawLineFeature() {
+		return this.mapControl.getDrawLineFeature().getControl();
+	}
 
 	public void activateModifyFeature() {
 		this.mapControl.activateModifyFeature();
@@ -443,8 +447,8 @@ public class MapLayoutWidget implements GeoPlatformMap {
 		return this.mapControl.getFeaturesNumber();
 	}
 
-	public void drawAOE(VectorFeature feature) {
-		this.mapControl.drawAOE(feature);
+	public void drawFeature(VectorFeature feature) {
+		this.mapControl.drawFeature(feature);
 	}
 
 	/**
@@ -501,6 +505,24 @@ public class MapLayoutWidget implements GeoPlatformMap {
 	 */
 	public WMSGetFeatureInfo getInfo() {
 		return info;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.geosdi.geoplatform.gui.impl.map.GeoPlatformEditor#activateDrawLineFeature()
+	 */
+	@Override
+	public void activateDrawLineFeature() {
+		// TODO Auto-generated method stub
+		this.mapControl.activateDrawLineFeature();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.geosdi.geoplatform.gui.impl.map.GeoPlatformEditor#deactivateDrawLineFeature()
+	 */
+	@Override
+	public void deactivateDrawLineFeature() {
+		// TODO Auto-generated method stub
+		this.mapControl.deactivateDrawLineFeature();
 	}
 
 }

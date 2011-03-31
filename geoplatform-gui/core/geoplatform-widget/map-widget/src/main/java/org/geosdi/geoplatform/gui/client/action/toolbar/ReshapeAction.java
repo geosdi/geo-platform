@@ -48,7 +48,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 public class ReshapeAction extends ModifyFeatureAction {
 
 	public ReshapeAction(GeoPlatformMap mapWidget) {
-		super("Reshape", Resources.ICONS.Shape(), mapWidget);
+		super("Reshape", Resources.ICONS.shape(), mapWidget);
 		// TODO Auto-generated constructor stub
 	}
 

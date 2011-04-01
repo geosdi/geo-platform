@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.gui.client.widget.legend.GPLegendWidget;
 import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
-import org.geosdi.geoplatform.gui.impl.map.store.ILayersStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
@@ -51,8 +50,7 @@ import org.gwtopenmaps.openlayers.client.layer.WMS;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class LayersStore extends GPLayersStore<GPLayerBean, Layer> implements
-		ILayersStore<Layer> {
+public class LayersStore extends GPLayersStore<GPLayerBean, Layer> {
 
 	private LayerBuilder layerBuilder;
 	private GPLegendWidget legendWidget;

@@ -74,6 +74,12 @@
 			<classifier>sources</classifier>
 		</dependency>
 
+		<!-- GEOPLATFORM_RESOURCES -->
+		<dependency>
+			<groupId>org.geosdi</groupId>
+			<artifactId>geoplatform-resources</artifactId>
+		</dependency>
+
 		<!-- SPRING -->
 		<dependency>
 			<groupId>org.springframework</groupId>

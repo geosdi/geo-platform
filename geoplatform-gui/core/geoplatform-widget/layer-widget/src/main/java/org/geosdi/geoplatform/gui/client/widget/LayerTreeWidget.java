@@ -35,15 +35,24 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import org.geosdi.geoplatform.gui.client.listener.DropAddListener;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GeoPlatformTreeWidget;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 
+import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.ModelIconProvider;
+import com.extjs.gxt.ui.client.dnd.DND.Feedback;
+import com.extjs.gxt.ui.client.dnd.TreePanelDragSource;
+import com.extjs.gxt.ui.client.dnd.TreePanelDropTarget;
+import com.extjs.gxt.ui.client.event.DNDEvent;
+import com.extjs.gxt.ui.client.event.DNDListener;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
+import com.extjs.gxt.ui.client.store.Store;
+import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -86,12 +95,10 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 	 * Set Tree Properties
 	 */
 	public void setTreeProperties() {
-		// TODO Auto-generated method stub
 		this.tree.setIconProvider(new ModelIconProvider<GPBeanTreeModel>() {
 
 			@Override
 			public AbstractImagePrototype getIcon(GPBeanTreeModel model) {
-				// TODO Auto-generated method stub
 				return model.getIcon();
 			}
 		});
@@ -105,10 +112,33 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
 					@Override
 					public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
-						// TODO Auto-generated method stub
 						be.getItem().notifyCheckEvent(be.isChecked());
 					}
 				});
+		
+		//TODO: Check the right position for the following code
+		TreePanelDragSource dragSource = new TreePanelDragSource(super.tree);
+		dragSource.addDNDListener(new DNDListener() {
+			@Override
+			public void dragStart(DNDEvent e) {
+				ModelData sel = tree.getSelectionModel().getSelectedItem();
+				if (sel != null
+						&& sel == tree.getStore().getRootItems().get(0)) {
+					e.setCancelled(true);
+					e.getStatus().setStatus(false);
+					return;
+				}
+				super.dragStart(e);
+			}
+		});
+
+		TreePanelDropTarget dropTarget = new GPTreePanelDropTarget(super.tree);
+		dropTarget.setAllowSelfAsSource(true);
+		dropTarget.setAllowDropOnLeaf(false);
+		dropTarget.setFeedback(Feedback.BOTH);
+		
+		Listener<TreeStoreEvent<GPBeanTreeModel>> listener = new DropAddListener();
+		super.store.addListener(Store.Add, listener);
 	}
 
 }

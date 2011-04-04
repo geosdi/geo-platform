@@ -39,6 +39,7 @@ import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
@@ -49,7 +50,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GPRootTreeNode extends GPBeanTreeModel {
+public class GPRootTreeNode extends AbstractRootTreeNode {
 
 	/**
 	 * 
@@ -99,4 +100,5 @@ public class GPRootTreeNode extends GPBeanTreeModel {
 	public TreePanel<GPBeanTreeModel> getTree() {
 		return tree;
 	}
+	
 }

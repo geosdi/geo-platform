@@ -45,9 +45,9 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
 import org.geosdi.geoplatform.gui.impl.map.event.HideLayerEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.IFolderTreeNode;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 import com.extjs.gxt.ui.client.data.ModelData;
@@ -58,7 +58,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class FolderTreeNode extends GPBeanTreeModel implements IFolderTreeNode {
+public class FolderTreeNode extends AbstractFolderTreeNode {
 
 	/**
 	 * 
@@ -146,4 +146,5 @@ public class FolderTreeNode extends GPBeanTreeModel implements IFolderTreeNode {
 	public GPRootTreeNode getRootNode() {
 		return (GPRootTreeNode) super.getParent();
 	}
+	
 }

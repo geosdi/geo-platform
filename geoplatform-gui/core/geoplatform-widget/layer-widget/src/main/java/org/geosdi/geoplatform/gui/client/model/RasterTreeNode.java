@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.impl.map.event.DisplayLayerEvent;
 import org.geosdi.geoplatform.gui.impl.map.event.HideLayerEvent;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 import org.geosdi.geoplatform.gui.model.tree.visitor.Visitor;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
@@ -148,6 +149,11 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
 				+ ", getCrs()=" + getCrs() + ", getBbox()=" + getBbox()
 				+ ", getLayerType()=" + getLayerType() + ", getzIndex()="
 				+ getzIndex() + "]";
+	}
+	
+	@Override
+	public void accept(IVisitor visitor) {
+		visitor.visitLeaf(this);
 	}
 
 }

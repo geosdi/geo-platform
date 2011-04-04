@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.model.tree;
 
+import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
+
 import com.extjs.gxt.ui.client.data.BaseTreeModel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -66,6 +68,8 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
 	private static final long serialVersionUID = 2095233644130779285L;
 
 	private String label;
+	
+	private int zIndex;
 
 	/**
 	 * @return the label
@@ -94,4 +98,14 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
 	}
 
 	public abstract AbstractImagePrototype getIcon();
+
+	public void setzIndex(int zIndex) {
+		this.zIndex = zIndex;
+	}
+
+	public int getzIndex() {
+		return zIndex;
+	}
+	
+	public abstract void accept(IVisitor visitor);
 }

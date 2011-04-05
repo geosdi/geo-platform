@@ -19,6 +19,7 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
 		super(tree);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected void showFeedback(DNDEvent e) {
 		super.showFeedback(e);

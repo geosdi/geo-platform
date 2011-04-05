@@ -33,56 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.store;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.event.LayerChangedHandler;
-import org.geosdi.geoplatform.gui.impl.tree.DisplayLayersManager;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
+package org.geosdi.geoplatform.gui.model.tree.responsibility;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GPLayersStore<K extends GPLayerBean, T extends Layer>
-		implements ILayersStore<T>, LayerChangedHandler {
-
-	protected GeoPlatformMap mapWidget;
-	protected Map<K, T> layers = new HashMap<K, T>();
-
-	private DisplayLayersManager displayLayers;
-
-	/**
-	 * @Constructor
-	 * 
-	 * @param theMapWidget
-	 */
-	public GPLayersStore(GeoPlatformMap theMapWidget) {
-		this.mapWidget = theMapWidget;
-		this.displayLayers = new DisplayLayersManager(this);
-	}
+public class GPLayerRequestHandlerException extends RuntimeException {
 
 	/**
 	 * 
-	 * @param layer
 	 */
-	protected void displayLayer(GPLayerBean layer) {
-		this.displayLayers.forwardRequest(layer);
-	}
-
-	/**
-	 * 
-	 * @return List<T>
-	 */
-	public List<T> getLayers() {
-		return new ArrayList<T>(this.layers.values());
+	private static final long serialVersionUID = 6035514157416919602L;
+	
+	public GPLayerRequestHandlerException() {
+		super("No handler found to forward the request.");
 	}
 
 }

@@ -78,7 +78,7 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> {
 	@Override
 	public void onDisplayLayer(GPLayerBean layerBean) {
 		// TODO Auto-generated method stub
-		layerBean.acceptForDisplay(this);
+		super.displayLayer(layerBean);
 	}
 
 	@Override

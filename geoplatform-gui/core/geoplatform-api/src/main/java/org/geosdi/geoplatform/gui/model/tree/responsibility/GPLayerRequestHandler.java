@@ -33,56 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.store;
+package org.geosdi.geoplatform.gui.model.tree.responsibility;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.event.LayerChangedHandler;
-import org.geosdi.geoplatform.gui.impl.tree.DisplayLayersManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GPLayersStore<K extends GPLayerBean, T extends Layer>
-		implements ILayersStore<T>, LayerChangedHandler {
+public abstract class GPLayerRequestHandler {
 
-	protected GeoPlatformMap mapWidget;
-	protected Map<K, T> layers = new HashMap<K, T>();
-
-	private DisplayLayersManager displayLayers;
+	private GPLayerRequestHandler successor;
 
 	/**
-	 * @Constructor
-	 * 
-	 * @param theMapWidget
+	 * @param theSuccessor
+	 *            the successor to set
 	 */
-	public GPLayersStore(GeoPlatformMap theMapWidget) {
-		this.mapWidget = theMapWidget;
-		this.displayLayers = new DisplayLayersManager(this);
+	public void setSuccessor(GPLayerRequestHandler theSuccessor) {
+		this.successor = theSuccessor;
 	}
 
-	/**
-	 * 
-	 * @param layer
-	 */
-	protected void displayLayer(GPLayerBean layer) {
-		this.displayLayers.forwardRequest(layer);
+	public void layerRequest(GPLayerBean layer) {
+		forwardLayerRequest(layer);
 	}
 
-	/**
-	 * 
-	 * @return List<T>
-	 */
-	public List<T> getLayers() {
-		return new ArrayList<T>(this.layers.values());
+	protected void forwardLayerRequest(GPLayerBean layer)
+			throws GPLayerRequestHandlerException {
+		if (successor != null)
+			successor.layerRequest(layer);
+		else
+			throw new GPLayerRequestHandlerException();
 	}
 
 }

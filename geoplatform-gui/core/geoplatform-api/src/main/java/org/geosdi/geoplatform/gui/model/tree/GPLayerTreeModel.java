@@ -56,7 +56,6 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
 	private String crs;
 	private BboxClientInfo bbox;
 	private GPLayerType layerType;
-	private int zIndex;
 
 	/**
 	 * @return the dataSource
@@ -116,21 +115,6 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
 	 */
 	public void setLayerType(GPLayerType layerType) {
 		this.layerType = layerType;
-	}
-
-	/**
-	 * @return the zIndex
-	 */
-	public int getzIndex() {
-		return zIndex;
-	}
-
-	/**
-	 * @param zIndex
-	 *            the zIndex to set
-	 */
-	public void setzIndex(int zIndex) {
-		this.zIndex = zIndex;
 	}
 
 	public boolean isParentChecked() {

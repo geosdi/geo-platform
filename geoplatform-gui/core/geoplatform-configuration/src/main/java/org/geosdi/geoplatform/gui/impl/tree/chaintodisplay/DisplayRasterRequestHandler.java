@@ -33,56 +33,42 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.store;
+package org.geosdi.geoplatform.gui.impl.tree.chaintodisplay;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.event.LayerChangedHandler;
-import org.geosdi.geoplatform.gui.impl.tree.DisplayLayersManager;
+import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GPLayersStore<K extends GPLayerBean, T extends Layer>
-		implements ILayersStore<T>, LayerChangedHandler {
-
-	protected GeoPlatformMap mapWidget;
-	protected Map<K, T> layers = new HashMap<K, T>();
-
-	private DisplayLayersManager displayLayers;
+public class DisplayRasterRequestHandler extends DisplayAbstractRequestHandler {
 
 	/**
-	 * @Constructor
-	 * 
-	 * @param theMapWidget
+	 * @param theStore
 	 */
-	public GPLayersStore(GeoPlatformMap theMapWidget) {
-		this.mapWidget = theMapWidget;
-		this.displayLayers = new DisplayLayersManager(this);
+	public DisplayRasterRequestHandler(
+			GPLayersStore<?, ?> theStore) {
+		super(theStore);
+		// TODO Auto-generated constructor stub
 	}
 
-	/**
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param layer
+	 * @see
+	 * org.geosdi.geoplatform.gui.model.tree.responsibility.GPLayerRequestHandler
+	 * #layerRequest(org.geosdi.geoplatform.gui.model.GPLayerBean)
 	 */
-	protected void displayLayer(GPLayerBean layer) {
-		this.displayLayers.forwardRequest(layer);
-	}
+	@Override
+	public void layerRequest(GPLayerBean layer) {
+		// TODO Auto-generated method stub
+		if (layer instanceof GPRasterBean) {
 
-	/**
-	 * 
-	 * @return List<T>
-	 */
-	public List<T> getLayers() {
-		return new ArrayList<T>(this.layers.values());
+		} else
+			forwardLayerRequest(layer);
 	}
 
 }

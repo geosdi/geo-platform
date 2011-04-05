@@ -65,5 +65,7 @@ public interface GPLayerBean extends Visitable {
 	public GPLayerType getLayerType();
 
 	public void setLayerType(GPLayerType layerType);
+	
+	public int getzIndex();
 
 }

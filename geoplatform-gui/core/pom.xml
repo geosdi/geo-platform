@@ -5,12 +5,12 @@
    <parent>
 		<groupId>org.geosdi</groupId>
 		<artifactId>geo-platform</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.2-SNAPSHOT</version>
 	</parent>
 
   <groupId>org.geosdi</groupId>
   <artifactId>core</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
  <name>Geo-Platform :: == Core Module</name>
@@ -74,33 +74,33 @@
         <dependency>
 			<groupId>org.geosdi</groupId>
 			<artifactId>geoplatform-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.2-SNAPSHOT</version>
 		</dependency>
         
         <dependency>
 			<groupId>org.geosdi</groupId>
 			<artifactId>geoplatform-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.2-SNAPSHOT</version>
             <classifier>sources</classifier>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.geosdi</groupId>
 			<artifactId>geoplatform-configuration</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.2-SNAPSHOT</version>
 		</dependency>
         
         <dependency>
 			<groupId>org.geosdi</groupId>
 			<artifactId>geoplatform-configuration</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.2-SNAPSHOT</version>
             <classifier>sources</classifier>
 		</dependency>
         
         <dependency>
 			<groupId>org.geosdi</groupId>
 			<artifactId>basic-widget</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.2-SNAPSHOT</version>
 		</dependency>
         
         <dependency>

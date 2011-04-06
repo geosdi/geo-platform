@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>org.geosdi</groupId>
 		<artifactId>geo-platform</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.2-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.geosdi.geoplatform</groupId>
 	<artifactId>geoplatform-services-test</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Geo-Platform :: == Web Services Module Test</name>

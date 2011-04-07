@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.impl.tree.chaintodisplay;
 import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
 import org.geosdi.geoplatform.gui.impl.tree.AbstractRequestHandler;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 
 /**

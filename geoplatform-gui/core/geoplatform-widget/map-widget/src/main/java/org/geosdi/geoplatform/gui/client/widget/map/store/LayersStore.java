@@ -84,7 +84,7 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> {
 	@Override
 	public void onHideLayer(GPLayerBean layerBean) {
 		// TODO Auto-generated method stub
-		layerBean.acceptForHide(this);
+		super.hideLayer(layerBean);
 	}
 
 	@Override

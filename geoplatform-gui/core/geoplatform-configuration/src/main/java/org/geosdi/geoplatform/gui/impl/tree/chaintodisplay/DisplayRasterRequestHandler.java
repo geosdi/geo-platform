@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.impl.tree.chaintodisplay;
 
 import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
+import org.geosdi.geoplatform.gui.impl.tree.AbstractRequestHandler;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
@@ -44,7 +45,7 @@ import org.geosdi.geoplatform.gui.model.GPRasterBean;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class DisplayRasterRequestHandler extends DisplayAbstractRequestHandler {
+public class DisplayRasterRequestHandler extends AbstractRequestHandler {
 
 	/**
 	 * @param theStore
@@ -64,9 +65,18 @@ public class DisplayRasterRequestHandler extends DisplayAbstractRequestHandler {
 	 */
 	@Override
 	public void layerRequest(GPLayerBean layer) {
-		// TODO Auto-generated method stub
 		if (layer instanceof GPRasterBean) {
-
+			super.layersStore.visitForDisplay((GPRasterBean)layer);	
+//			if(super.layersStore.containsLayer(layer)) {
+//				WMS raster = (WMS) super.layersStore.getLayer(layer);
+//				raster.setIsVisible(true);
+//				raster.redraw();
+//			} else {
+//			    WMS layer = (WMS) this.layerBuilder.buildLayer(vectorBean);
+//				this.layers.put(vectorBean, layer);
+//				this.mapWidget.getMap().addLayer(layer);
+//				layer.setZIndex(vectorBean.getzIndex());
+//			}
 		} else
 			forwardLayerRequest(layer);
 	}

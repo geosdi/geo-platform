@@ -33,67 +33,41 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.store;
+package org.geosdi.geoplatform.gui.impl.tree;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.event.LayerChangedHandler;
-import org.geosdi.geoplatform.gui.impl.tree.DisplayLayersManager;
-import org.geosdi.geoplatform.gui.impl.tree.HideLayersManager;
+import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
+import org.geosdi.geoplatform.gui.impl.tree.chaintohide.HideRasterRequestHandler;
+import org.geosdi.geoplatform.gui.impl.tree.chaintohide.HideVectorRequestHandler;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
+import org.geosdi.geoplatform.gui.model.tree.responsibility.GPLayerRequestHandler;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GPLayersStore<K extends GPLayerBean, T extends Layer>
-		implements ILayersStore<T>, LayerChangedHandler {
+public class HideLayersManager {
 
-	protected GeoPlatformMap mapWidget;
-	protected Map<K, T> layers = new HashMap<K, T>();
-
-	private DisplayLayersManager displayLayers;
-	private HideLayersManager hideLayers;
+	private GPLayerRequestHandler rasterHandler;
+	private GPLayerRequestHandler vectorHandler;
 
 	/**
 	 * @Constructor
 	 * 
-	 * @param theMapWidget
+	 * @param store
 	 */
-	public GPLayersStore(GeoPlatformMap theMapWidget) {
-		this.mapWidget = theMapWidget;
-		this.displayLayers = new DisplayLayersManager(this);
-		this.hideLayers = new HideLayersManager(this);
-	}
-	
-	/**
-	 * 
-	 * @param layer
-	 */
-	protected void hideLayer(GPLayerBean layer) {
-		this.hideLayers.forwardRequest(layer);
+	public HideLayersManager(GPLayersStore<?, ?> store) {
+		this.rasterHandler = new HideRasterRequestHandler(store);
+		this.vectorHandler = new HideVectorRequestHandler(store);
+		this.rasterHandler.setSuccessor(this.vectorHandler);
 	}
 
 	/**
 	 * 
 	 * @param layer
 	 */
-	protected void displayLayer(GPLayerBean layer) {
-		this.displayLayers.forwardRequest(layer);
-	}
-
-	/**
-	 * 
-	 * @return List<T>
-	 */
-	public List<T> getLayers() {
-		return new ArrayList<T>(this.layers.values());
+	public void forwardRequest(GPLayerBean layer) {
+		this.rasterHandler.layerRequest(layer);
 	}
 
 }

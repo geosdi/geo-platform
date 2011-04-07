@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.tree.chaintodisplay;
+package org.geosdi.geoplatform.gui.impl.tree;
 
 import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
 import org.geosdi.geoplatform.gui.model.tree.responsibility.GPLayerRequestHandler;
@@ -43,12 +43,12 @@ import org.geosdi.geoplatform.gui.model.tree.responsibility.GPLayerRequestHandle
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class DisplayAbstractRequestHandler extends
+public abstract class AbstractRequestHandler extends
 		GPLayerRequestHandler {
 
 	protected GPLayersStore<?, ?> layersStore;
 
-	public DisplayAbstractRequestHandler(GPLayersStore<?, ?> theStore) {
+	public AbstractRequestHandler(GPLayersStore<?, ?> theStore) {
 		this.layersStore = theStore;
 	}
 

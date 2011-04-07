@@ -36,7 +36,9 @@
 package org.geosdi.geoplatform.gui.impl.tree.chaintodisplay;
 
 import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
+import org.geosdi.geoplatform.gui.impl.tree.AbstractRequestHandler;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 
 /**
@@ -44,7 +46,7 @@ import org.geosdi.geoplatform.gui.model.GPVectorBean;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class DisplayVectorRequestHandler extends DisplayAbstractRequestHandler {
+public class DisplayVectorRequestHandler extends AbstractRequestHandler {
 
 	/**
 	 * @param theStore
@@ -63,9 +65,8 @@ public class DisplayVectorRequestHandler extends DisplayAbstractRequestHandler {
 	 */
 	@Override
 	public void layerRequest(GPLayerBean layer) {
-		// TODO Auto-generated method stub
 		if (layer instanceof GPVectorBean) {
-
+			super.layersStore.visitForDisplay((GPVectorBean)layer);	
 		} else
 			forwardLayerRequest(layer);
 	}

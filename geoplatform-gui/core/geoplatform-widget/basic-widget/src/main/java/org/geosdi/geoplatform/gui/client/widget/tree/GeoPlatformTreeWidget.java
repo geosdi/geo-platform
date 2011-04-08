@@ -60,7 +60,7 @@ public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
 		this.store = new TreeStore<T>();
 		this.tree = new TreePanel<T>(store);
 		this.tree.setDisplayProperty(GPKeyTreeModel.LABEL_VALUE.toString());
-		setTreeProperties();
+		setTreePanelProperties();
 	}
 
 	/**
@@ -103,7 +103,7 @@ public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
 		this.tree.setCheckStyle(checkStyle);
 	}
 	
-	public abstract void setTreeProperties();
+	public abstract void setTreePanelProperties();
 
 	/**
 	 * @return the store

@@ -94,7 +94,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 	/**
 	 * Set Tree Properties
 	 */
-	public void setTreeProperties() {
+	public void setTreePanelProperties() {
 		this.tree.setIconProvider(new ModelIconProvider<GPBeanTreeModel>() {
 
 			@Override
@@ -106,6 +106,8 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 		this.setCheckable(true);
 
 		this.setCheckStyle(CheckCascade.NONE);
+		
+		this.tree.setAutoHeight(true);
 
 		this.tree.addListener(Events.CheckChange,
 				new Listener<TreePanelEvent<GPBeanTreeModel>>() {

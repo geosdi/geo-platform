@@ -39,8 +39,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.impl.map.event.HideLayerEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -65,8 +63,10 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
      *
      */
     private static final long serialVersionUID = -3687415822526940729L;
+
+    
+    private VisitorModelConverter visitor = new VisitorModelConverter(this);
     private List<GPLayerBean> childChecked = new ArrayList<GPLayerBean>();
-    VisitorModelConverter visitor = new VisitorModelConverter(this);
 
     public FolderTreeNode(GPFolderClientInfo folder) {
         super.setLabel(folder.getLabel());
@@ -80,7 +80,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
      */
     public void modelConverter(List<IGPFolderElements> layersClientInfo) {
         for (IGPFolderElements layer : layersClientInfo) {
-            ((GPBeanTreeModel)layer).accept(this.visitor);
+             layer.accept(this.visitor);
         }
     }
 
@@ -102,19 +102,19 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
             for (ModelData child : super.getChildren()) {
                 if (isChildChecked((GPLayerTreeModel) child)) {
                     ((GPBeanTreeModel) child).notifyCheckEvent(true);
-                    
+
                 }
             }
-            
+
         } else {
             for (ModelData child : super.getChildren()) {
                 if (isChildChecked((GPLayerTreeModel) child)) {
                     GPHandlerManager.fireEvent(new HideLayerEvent(
                             (GPLayerBean) child));
-                    
+
                 }
             }
-            
+
         }
     }
 
@@ -138,7 +138,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
         for (ModelData child : super.getChildren()) {
             if (isChildChecked((GPLayerTreeModel) child)) {
                 this.childChecked.add((GPLayerTreeModel) child);
-                
+
             }
         }
         return this.childChecked;

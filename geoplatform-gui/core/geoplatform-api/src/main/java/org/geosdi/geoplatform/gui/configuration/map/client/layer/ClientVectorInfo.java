@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 
+import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -42,56 +44,59 @@ package org.geosdi.geoplatform.gui.configuration.map.client.layer;
  */
 public class ClientVectorInfo extends GPLayerClientInfo {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4276234033316787251L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -4276234033316787251L;
+    private String featureType;
+    private String featureNameSpace;
 
-	private String featureType;
-	private String featureNameSpace;
+    /**
+     * @return the featureType
+     */
+    public String getFeatureType() {
+        return featureType;
+    }
 
-	/**
-	 * @return the featureType
-	 */
-	public String getFeatureType() {
-		return featureType;
-	}
+    /**
+     * @param featureType
+     *            the featureType to set
+     */
+    public void setFeatureType(String featureType) {
+        this.featureType = featureType;
+    }
 
-	/**
-	 * @param featureType
-	 *            the featureType to set
-	 */
-	public void setFeatureType(String featureType) {
-		this.featureType = featureType;
-	}
+    /**
+     * @return the featureNameSpace
+     */
+    public String getFeatureNameSpace() {
+        return featureNameSpace;
+    }
 
-	/**
-	 * @return the featureNameSpace
-	 */
-	public String getFeatureNameSpace() {
-		return featureNameSpace;
-	}
+    /**
+     * @param featureNameSpace
+     *            the featureNameSpace to set
+     */
+    public void setFeatureNameSpace(String featureNameSpace) {
+        this.featureNameSpace = featureNameSpace;
+    }
 
-	/**
-	 * @param featureNameSpace
-	 *            the featureNameSpace to set
-	 */
-	public void setFeatureNameSpace(String featureNameSpace) {
-		this.featureNameSpace = featureNameSpace;
-	}
+    @Override
+    public void accept(IVisitorClient visitor) {
+        visitor.visitVector(this);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "ClientVectorInfo [featureType=" + featureType
-				+ ", featureNameSpace=" + featureNameSpace
-				+ ", getDataSource()=" + getDataSource() + ", getCrs()="
-				+ getCrs() + ", getBbox()=" + getBbox() + ", getLayerType()="
-				+ getLayerType() + ", getzIndex()=" + getzIndex() + "]";
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "ClientVectorInfo [featureType=" + featureType
+                + ", featureNameSpace=" + featureNameSpace
+                + ", getDataSource()=" + getDataSource() + ", getCrs()="
+                + getCrs() + ", getBbox()=" + getBbox() + ", getLayerType()="
+                + getLayerType() + ", getzIndex()=" + getzIndex() + "]";
+    }
 }

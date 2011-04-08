@@ -47,65 +47,61 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  */
 public abstract class GPBeanTreeModel extends BaseTreeModel {
 
-	public enum GPKeyTreeModel {
+    public enum GPKeyTreeModel {
 
-		LABEL_VALUE("label");
+        LABEL_VALUE("label");
+        private String value;
 
-		private String value;
+        GPKeyTreeModel(String theValue) {
+            this.value = theValue;
+        }
 
-		GPKeyTreeModel(String theValue) {
-			this.value = theValue;
-		}
+        @Override
+        public String toString() {
+            return this.value;
+        }
+    }
+    /**
+     *
+     */
+    private static final long serialVersionUID = 2095233644130779285L;
+    private String label;
+    private int zIndex;
 
-		public String toString() {
-			return this.value;
-		}
-	}
+    /**
+     * @return the label
+     */
+    public String getLabel() {
+        return label;
+    }
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2095233644130779285L;
+    /**
+     * @param label
+     *            the label to set
+     */
+    public void setLabel(String label) {
+        this.label = label;
+        set(GPKeyTreeModel.LABEL_VALUE.toString(), this.label);
+    }
 
-	private String label;
-	
-	private int zIndex;
+    /**
+     * Notify Check Changed Event on the Map
+     *
+     * @param isChecked
+     */
+    public void notifyCheckEvent(boolean isChecked) {
+        // TODO Auto-generated method stub
+    }
 
-	/**
-	 * @return the label
-	 */
-	public String getLabel() {
-		return label;
-	}
+    public abstract AbstractImagePrototype getIcon();
 
-	/**
-	 * @param label
-	 *            the label to set
-	 */
-	public void setLabel(String label) {
-		this.label = label;
-		set(GPKeyTreeModel.LABEL_VALUE.toString(), this.label);
-	}
+    public void setzIndex(int zIndex) {
+        this.zIndex = zIndex;
+    }
 
-	/**
-	 * Notify Check Changed Event on the Map
-	 * 
-	 * @param isChecked
-	 */
-	public void notifyCheckEvent(boolean isChecked) {
-		// TODO Auto-generated method stub
+    public int getzIndex() {
+        return zIndex;
+    }
 
-	}
-
-	public abstract AbstractImagePrototype getIcon();
-
-	public void setzIndex(int zIndex) {
-		this.zIndex = zIndex;
-	}
-
-	public int getzIndex() {
-		return zIndex;
-	}
-	
-	public abstract void accept(IVisitor visitor);
+    public abstract void accept(IVisitor visitor);
 }

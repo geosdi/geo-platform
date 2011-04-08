@@ -39,6 +39,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
+import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -118,6 +120,11 @@ public class GPFolderClientInfo implements Serializable,
      */
     public void setzIndex(int zIndex) {
         this.zIndex = zIndex;
+    }
+
+    @Override
+    public void accept(IVisitorClient visitor) {
+       visitor.visitFolder(this);
     }
 
 }

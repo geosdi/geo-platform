@@ -47,31 +47,33 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
  */
 public class DragAction extends ModifyFeatureAction {
 
-	public DragAction(GeoPlatformMap mapWidget) {
-		super("Drag", Resources.ICONS.drag(), mapWidget);
-		// TODO Auto-generated constructor stub
-	}
+    public DragAction(GeoPlatformMap mapWidget) {
+        super("Drag", Resources.ICONS.drag(), mapWidget);
+        // TODO Auto-generated constructor stub
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		if (this.mapWidget.getButtonBar().isTogglePressed())
-			mapWidget.getButtonBar().changeButtonState();
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+     * .extjs.gxt.ui.client.event.ComponentEvent)
+     */
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        // TODO Auto-generated method stub
+        if (this.mapWidget.getButtonBar().isTogglePressed()) {
+            mapWidget.getButtonBar().changeButtonState();
+        }
 
-		if (mapWidget.isFeatureOperationEnable())
-			mapWidget.deactivateFeatureOperation();
+        if (mapWidget.isFeatureOperationEnable()) {
+            mapWidget.deactivateFeatureOperation();
+        }
 
-		// if (!mapWidget.isModifyFeatureEnable())
-		mapWidget.deactivateModifyFeature();
-		mapWidget.activateModifyFeature();
+        // if (!mapWidget.isModifyFeatureEnable())
+        mapWidget.deactivateModifyFeature();
+        mapWidget.activateModifyFeature();
 
-		this.control.setMode(ModifyFeature.DRAG);
-	}
+        this.control.setMode(ModifyFeature.DRAG);
+    }
 }

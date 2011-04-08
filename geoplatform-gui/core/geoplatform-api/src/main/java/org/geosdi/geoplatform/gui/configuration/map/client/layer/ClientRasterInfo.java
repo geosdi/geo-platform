@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 
 import java.util.List;
+import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -44,55 +45,59 @@ import java.util.List;
  */
 public class ClientRasterInfo extends GPLayerClientInfo {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3956898488739664952L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 3956898488739664952L;
+    private String layerName;
+    private List<String> styles;
 
-	private String layerName;
-	private List<String> styles;
+    /**
+     * @return the layerName
+     */
+    public String getLayerName() {
+        return layerName;
+    }
 
-	/**
-	 * @return the layerName
-	 */
-	public String getLayerName() {
-		return layerName;
-	}
+    /**
+     * @param layerName
+     *            the layerName to set
+     */
+    public void setLayerName(String layerName) {
+        this.layerName = layerName;
+    }
 
-	/**
-	 * @param layerName
-	 *            the layerName to set
-	 */
-	public void setLayerName(String layerName) {
-		this.layerName = layerName;
-	}
+    /**
+     * @return the styles
+     */
+    public List<String> getStyles() {
+        return styles;
+    }
 
-	/**
-	 * @return the styles
-	 */
-	public List<String> getStyles() {
-		return styles;
-	}
+    /**
+     * @param styles
+     *            the styles to set
+     */
+    public void setStyles(List<String> styles) {
+        this.styles = styles;
+    }
 
-	/**
-	 * @param styles
-	 *            the styles to set
-	 */
-	public void setStyles(List<String> styles) {
-		this.styles = styles;
-	}
+    @Override
+    public void accept(IVisitorClient visitor) {
+        visitor.visitRaster(this);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "ClientRasterInfo [layerName=" + layerName + ", styles="
-				+ styles + ", getDataSource()=" + getDataSource()
-				+ ", getCrs()=" + getCrs() + ", getBbox()=" + getBbox()
-				+ ", getLayerType()=" + getLayerType() + ", getzIndex()="
-				+ getzIndex() + "]";
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "ClientRasterInfo [layerName=" + layerName + ", styles="
+                + styles + ", getDataSource()=" + getDataSource()
+                + ", getCrs()=" + getCrs() + ", getBbox()=" + getBbox()
+                + ", getLayerType()=" + getLayerType() + ", getzIndex()="
+                + getzIndex() + "]";
+    }
 }

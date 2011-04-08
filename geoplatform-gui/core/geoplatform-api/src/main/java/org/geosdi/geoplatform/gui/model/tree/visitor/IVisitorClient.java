@@ -33,19 +33,22 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.configuration.map.client.layer;
+package org.geosdi.geoplatform.gui.model.tree.visitor;
 
-import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
  *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface IGPFolderElements extends Comparable<IGPFolderElements> {
+public interface IVisitorClient {
 
-    public int getzIndex();
+    void visitFolder(GPFolderClientInfo clientFolder);
 
-    public void accept(IVisitorClient visitor);
+    void visitVector(ClientVectorInfo clientVector);
 
+    void visitRaster(ClientRasterInfo clientRaster);
 }

@@ -38,116 +38,117 @@ package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 import java.io.Serializable;
 
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GPLayerClientInfo implements Serializable,
-		Comparable<IGPFolderElements>, IGPFolderElements {
+public abstract class GPLayerClientInfo implements Serializable,
+        Comparable<IGPFolderElements>, IGPFolderElements {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2098509654335891064L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 2098509654335891064L;
+    private String dataSource;
+    private String crs;
+    private BboxClientInfo bbox;
+    private GPLayerType layerType;
+    private int zIndex;
 
-	private String dataSource;
-	private String crs;
-	private BboxClientInfo bbox;
-	private GPLayerType layerType;
-	private int zIndex;
+    /**
+     * @return the dataSource
+     */
+    public String getDataSource() {
+        return dataSource;
+    }
 
-	/**
-	 * @return the dataSource
-	 */
-	public String getDataSource() {
-		return dataSource;
-	}
+    /**
+     * @param dataSource
+     *            the dataSource to set
+     */
+    public void setDataSource(String dataSource) {
+        this.dataSource = dataSource;
+    }
 
-	/**
-	 * @param dataSource
-	 *            the dataSource to set
-	 */
-	public void setDataSource(String dataSource) {
-		this.dataSource = dataSource;
-	}
+    /**
+     * @return the crs
+     */
+    public String getCrs() {
+        return crs;
+    }
 
-	/**
-	 * @return the crs
-	 */
-	public String getCrs() {
-		return crs;
-	}
+    /**
+     * @param crs
+     *            the crs to set
+     */
+    public void setCrs(String crs) {
+        this.crs = crs;
+    }
 
-	/**
-	 * @param crs
-	 *            the crs to set
-	 */
-	public void setCrs(String crs) {
-		this.crs = crs;
-	}
+    /**
+     * @return the bbox
+     */
+    public BboxClientInfo getBbox() {
+        return bbox;
+    }
 
-	/**
-	 * @return the bbox
-	 */
-	public BboxClientInfo getBbox() {
-		return bbox;
-	}
+    /**
+     * @param bbox
+     *            the bbox to set
+     */
+    public void setBbox(BboxClientInfo bbox) {
+        this.bbox = bbox;
+    }
 
-	/**
-	 * @param bbox
-	 *            the bbox to set
-	 */
-	public void setBbox(BboxClientInfo bbox) {
-		this.bbox = bbox;
-	}
+    /**
+     * @return the layerType
+     */
+    public GPLayerType getLayerType() {
+        return layerType;
+    }
 
-	/**
-	 * @return the layerType
-	 */
-	public GPLayerType getLayerType() {
-		return layerType;
-	}
+    /**
+     * @param layerType
+     *            the layerType to set
+     */
+    public void setLayerType(GPLayerType layerType) {
+        this.layerType = layerType;
+    }
 
-	/**
-	 * @param layerType
-	 *            the layerType to set
-	 */
-	public void setLayerType(GPLayerType layerType) {
-		this.layerType = layerType;
-	}
+    /**
+     * @return the zIndex
+     */
+    @Override
+    public int getzIndex() {
+        return zIndex;
+    }
 
-	/**
-	 * @return the zIndex
-	 */
-	public int getzIndex() {
-		return zIndex;
-	}
+    /**
+     * @param zIndex
+     *            the zIndex to set
+     */
+    public void setzIndex(int zIndex) {
+        this.zIndex = zIndex;
+    }
 
-	/**
-	 * @param zIndex
-	 *            the zIndex to set
-	 */
-	public void setzIndex(int zIndex) {
-		this.zIndex = zIndex;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "GPLayerClientInfo [dataSource=" + dataSource + ", crs=" + crs
+                + ", bbox=" + bbox + ", layerType=" + layerType + ", zIndex="
+                + zIndex + "]";
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "GPLayerClientInfo [dataSource=" + dataSource + ", crs=" + crs
-				+ ", bbox=" + bbox + ", layerType=" + layerType + ", zIndex="
-				+ zIndex + "]";
-	}
-
-	@Override
-	public int compareTo(IGPFolderElements o) {
-		// TODO Auto-generated method stub
-		return o.getzIndex() - getzIndex();
-	}
+    @Override
+    public int compareTo(IGPFolderElements o) {
+        // TODO Auto-generated method stub
+        return o.getzIndex() - getzIndex();
+    }
 }

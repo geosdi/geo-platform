@@ -36,7 +36,8 @@
 package org.geosdi.geoplatform.gui.impl.map.store;
 
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.tree.visitor.Visitor;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
@@ -44,10 +45,18 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface ILayersStore<T extends Layer> extends Visitor {
+public interface ILayersStore<T extends Layer> {
 
 	boolean containsLayer(GPLayerBean key);
 
 	T getLayer(GPLayerBean key);
+	
+	void displayVector(GPVectorBean vectorBean);
+	
+	void displayRaster(GPRasterBean rasterBean);
+	
+	void hideLayer(GPLayerBean layerBean);
+	
+	void removeLayer(GPLayerBean layerBean);
 
 }

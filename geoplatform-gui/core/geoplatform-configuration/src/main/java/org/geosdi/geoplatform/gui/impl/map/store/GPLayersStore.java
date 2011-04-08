@@ -43,7 +43,6 @@ import java.util.Map;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.event.LayerChangedHandler;
 import org.geosdi.geoplatform.gui.impl.tree.DisplayLayersManager;
-import org.geosdi.geoplatform.gui.impl.tree.HideLayersManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
@@ -59,7 +58,6 @@ public abstract class GPLayersStore<K extends GPLayerBean, T extends Layer>
 	protected Map<K, T> layers = new HashMap<K, T>();
 
 	private DisplayLayersManager displayLayers;
-	private HideLayersManager hideLayers;
 
 	/**
 	 * @Constructor
@@ -69,15 +67,6 @@ public abstract class GPLayersStore<K extends GPLayerBean, T extends Layer>
 	public GPLayersStore(GeoPlatformMap theMapWidget) {
 		this.mapWidget = theMapWidget;
 		this.displayLayers = new DisplayLayersManager(this);
-		this.hideLayers = new HideLayersManager(this);
-	}
-	
-	/**
-	 * 
-	 * @param layer
-	 */
-	protected void hideLayer(GPLayerBean layer) {
-		this.hideLayers.forwardRequest(layer);
 	}
 
 	/**

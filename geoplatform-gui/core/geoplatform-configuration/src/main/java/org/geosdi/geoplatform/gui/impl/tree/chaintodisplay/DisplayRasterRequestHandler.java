@@ -50,8 +50,7 @@ public class DisplayRasterRequestHandler extends AbstractRequestHandler {
 	/**
 	 * @param theStore
 	 */
-	public DisplayRasterRequestHandler(
-			GPLayersStore<?, ?> theStore) {
+	public DisplayRasterRequestHandler(GPLayersStore<?, ?> theStore) {
 		super(theStore);
 		// TODO Auto-generated constructor stub
 	}
@@ -66,17 +65,7 @@ public class DisplayRasterRequestHandler extends AbstractRequestHandler {
 	@Override
 	public void layerRequest(GPLayerBean layer) {
 		if (layer instanceof GPRasterBean) {
-			super.layersStore.visitForDisplay((GPRasterBean)layer);	
-//			if(super.layersStore.containsLayer(layer)) {
-//				WMS raster = (WMS) super.layersStore.getLayer(layer);
-//				raster.setIsVisible(true);
-//				raster.redraw();
-//			} else {
-//			    WMS layer = (WMS) this.layerBuilder.buildLayer(vectorBean);
-//				this.layers.put(vectorBean, layer);
-//				this.mapWidget.getMap().addLayer(layer);
-//				layer.setZIndex(vectorBean.getzIndex());
-//			}
+			super.layersStore.displayRaster((GPRasterBean) layer);
 		} else
 			forwardLayerRequest(layer);
 	}

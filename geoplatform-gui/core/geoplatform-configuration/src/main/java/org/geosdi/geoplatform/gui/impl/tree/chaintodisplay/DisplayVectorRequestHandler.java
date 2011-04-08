@@ -65,7 +65,7 @@ public class DisplayVectorRequestHandler extends AbstractRequestHandler {
 	@Override
 	public void layerRequest(GPLayerBean layer) {
 		if (layer instanceof GPVectorBean) {
-			super.layersStore.visitForDisplay((GPVectorBean)layer);	
+			super.layersStore.displayVector((GPVectorBean) layer);
 		} else
 			forwardLayerRequest(layer);
 	}

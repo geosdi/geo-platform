@@ -48,12 +48,6 @@ public abstract class AbstractFolderTreeNode extends GPBeanTreeModel implements
 	private static final long serialVersionUID = 4886440607031207404L;
 
 	@Override
-	public abstract boolean isChecked();
-
-	@Override
-	public abstract boolean isChildChecked(GPLayerTreeModel child);
-
-	@Override
 	public abstract AbstractImagePrototype getIcon();
 
 	@Override

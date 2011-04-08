@@ -48,54 +48,56 @@ import com.google.gwt.user.client.ui.Image;
  */
 public class GPLegendWidget {
 
-    protected static final String GET_LEGEND_REQUEST = "?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=";
-    protected ContentPanel legendsStore;
+	protected static final String GET_LEGEND_REQUEST = "?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=";
+	protected ContentPanel legendsStore;
 
-    /**
-     * @Constructor
-     *
-     */
-    public GPLegendWidget() {
-        this.legendsStore = new ContentPanel();
-        this.legendsStore.setHeaderVisible(false);
-    }
+	/**
+	 * @Constructor
+	 * 
+	 */
+	public GPLegendWidget() {
+		this.legendsStore = new ContentPanel();
+		this.legendsStore.setHeaderVisible(false);
+	}
 
-    /**
-     * Add Legend Item in the Legend Store
-     *
-     * @param layerBean
-     */
-    public void addLegend(GPLayerBean layerBean) {
-        ContentPanel cp = new ContentPanel();
-        cp.setHeading(layerBean.getLabel());
-        cp.setId(layerBean.getLabel());
+	/**
+	 * Add Legend Item in the Legend Store
+	 * 
+	 * @param layerBean
+	 */
+	public void addLegend(GPLayerBean layerBean) {
+		ContentPanel cp = new ContentPanel();
+		cp.setHeading(layerBean.getLabel());
+		cp.setId(layerBean.getLabel());
 
-        Image image = new Image(
-                layerBean instanceof GPRasterBean ? layerBean.getDataSource()
-                + GET_LEGEND_REQUEST + layerBean.getLabel() : layerBean.getDataSource().replaceAll("wfs", "wms")
-                + GET_LEGEND_REQUEST + layerBean.getLabel());
+		Image image = new Image(
+				layerBean instanceof GPRasterBean ? layerBean.getDataSource()
+						+ GET_LEGEND_REQUEST + layerBean.getLabel() : layerBean
+						.getDataSource().replaceAll("wfs", "wms")
+						+ GET_LEGEND_REQUEST + layerBean.getLabel());
 
-        cp.add(image);
-        this.legendsStore.add(cp);
-        this.legendsStore.layout();
-    }
+		cp.add(image);
+		this.legendsStore.add(cp);
+		this.legendsStore.layout();
+	}
 
-    /**
-     * Remove Legend Item from Legend Store
-     *
-     * @param layerBean
-     */
-    public void hideLegenItem(GPLayerBean layerBean) {
-        if (this.legendsStore.getItemByItemId(layerBean.getLabel()) != null) {
-            this.legendsStore.remove(this.legendsStore.getItemByItemId(layerBean.getLabel()));
-            this.legendsStore.layout();
-        }
-    }
+	/**
+	 * Remove Legend Item from Legend Store
+	 * 
+	 * @param layerBean
+	 */
+	public void hideLegenItem(GPLayerBean layerBean) {
+		if (this.legendsStore.getItemByItemId(layerBean.getLabel()) != null) {
+			this.legendsStore.remove(this.legendsStore
+					.getItemByItemId(layerBean.getLabel()));
+			this.legendsStore.layout();
+		}
+	}
 
-    /**
-     * @return the legendsStore
-     */
-    public ContentPanel getLegendsStore() {
-        return legendsStore;
-    }
+	/**
+	 * @return the legendsStore
+	 */
+	public ContentPanel getLegendsStore() {
+		return legendsStore;
+	}
 }

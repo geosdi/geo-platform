@@ -35,28 +35,24 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.legend;
 
+import org.geosdi.geoplatform.gui.client.widget.map.legend.GPLegendWidget;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 import com.extjs.gxt.ui.client.Style.Scroll;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Window;
-import com.google.gwt.user.client.ui.Image;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
  * 
  */
-public class GPLegendWidget extends Window {
+public class LegendWindow extends Window {
 
-	private static final String GET_LEGEND_REQUEST = "?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=";
-
-	private ContentPanel legendsStore;
+	private GPLegendWidget legendWidget;
 
 	/**
 	 * 
 	 */
-	public GPLegendWidget() {
+	public LegendWindow() {
 		setMaximizable(false);
 		setCollapsible(true);
 		setHeading("Legend Window");
@@ -65,10 +61,9 @@ public class GPLegendWidget extends Window {
 		setScrollMode(Scroll.AUTOY);
 		setPosition(20, 450);
 
-		this.legendsStore = new ContentPanel();
-		this.legendsStore.setHeaderVisible(false);
+		this.legendWidget = new GPLegendWidget();
 
-		super.add(this.legendsStore);
+		super.add(this.legendWidget.getLegendsStore());
 	}
 
 	/**
@@ -77,23 +72,11 @@ public class GPLegendWidget extends Window {
 	 * @param layerBean
 	 */
 	public void addLegend(GPLayerBean layerBean) {
-		ContentPanel cp = new ContentPanel();
-		cp.setHeading(layerBean.getLabel());
-		cp.setId(layerBean.getLabel());
-
-		Image image = new Image(
-				layerBean instanceof GPRasterBean ? layerBean.getDataSource()
-						+ GET_LEGEND_REQUEST + layerBean.getLabel() : layerBean
-						.getDataSource().replaceAll("wfs", "wms")
-						+ GET_LEGEND_REQUEST + layerBean.getLabel());
-
-		cp.add(image);
-		this.legendsStore.add(cp);
+		this.legendWidget.addLegend(layerBean);
 
 		if (!isVisible()) {
 			super.show();
 		}
-		this.legendsStore.layout();
 	}
 
 	/**
@@ -102,13 +85,9 @@ public class GPLegendWidget extends Window {
 	 * @param layerBean
 	 */
 	public void hideLegenItem(GPLayerBean layerBean) {
-		if (this.legendsStore.getItemByItemId(layerBean.getLabel()) != null) {
-			this.legendsStore.remove(this.legendsStore
-					.getItemByItemId(layerBean.getLabel()));
-			this.legendsStore.layout();
-		}
-
-		if (this.legendsStore.getItemCount() == 0)
+		this.legendWidget.hideLegenItem(layerBean);
+		
+		if (this.legendWidget.getLegendsStore().getItemCount() == 0)
 			super.hide();
 	}
 }

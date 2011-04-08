@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.store;
 
-import org.geosdi.geoplatform.gui.client.widget.legend.GPLegendWidget;
+import org.geosdi.geoplatform.gui.client.widget.legend.LegendWindow;
 import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
@@ -53,13 +53,13 @@ import org.gwtopenmaps.openlayers.client.layer.WMS;
 public class LayersStore extends GPLayersStore<GPLayerBean, Layer> {
 
 	private LayerBuilder layerBuilder;
-	private GPLegendWidget legendWidget;
+	private LegendWindow legendWidget;
 
 	public LayersStore(GeoPlatformMap theMapWidget) {
 		super(theMapWidget);
 		// TODO Auto-generated constructor stub
 		this.layerBuilder = new LayerBuilder(theMapWidget);
-		this.legendWidget = new GPLegendWidget();
+		this.legendWidget = new LegendWindow();
 		GPScaleWidget.display("Scale");
 	}
 

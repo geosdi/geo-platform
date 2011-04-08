@@ -14,7 +14,6 @@
 		<property name="folders">
 			<list>
 				<ref bean="vectorFolder" />
-				<ref bean="rasterFolder" />
 			</list>
 		</property>
 	</bean>
@@ -22,10 +21,11 @@
 	<bean name="vectorFolder"
 		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo">
 		<property name="label" value="Vector Folder" />
-		<property name="order" value="1" />
-		<property name="layers">
+		<property name="zIndex" value="1" />
+		<property name="folderElements">
 			<list>
 				<ref bean="it_toponimi_igm_25k" />
+                                <ref bean="rasterFolder" />
 				<ref bean="osm_line" />
 			</list>
 		</property>
@@ -34,8 +34,8 @@
 	<bean name="rasterFolder"
 		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo">
 		<property name="label" value="Vector Folder" />
-		<property name="order" value="2" />
-		<property name="layers">
+		<property name="zIndex" value="2" />
+		<property name="folderElements">
 			<list>
 				<ref bean="deAgostini100000" />
 				<ref bean="ctp_Trento" />

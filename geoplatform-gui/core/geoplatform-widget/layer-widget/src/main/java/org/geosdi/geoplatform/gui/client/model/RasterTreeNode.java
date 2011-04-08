@@ -134,7 +134,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
 
 	@Override
 	public void accept(IVisitor visitor) {
-		visitor.visitLeaf(this);
+		visitor.visitRaster(this);
 	}
 
 }

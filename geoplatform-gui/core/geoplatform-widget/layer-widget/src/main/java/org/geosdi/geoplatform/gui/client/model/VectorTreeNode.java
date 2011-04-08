@@ -147,6 +147,6 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
 
 	@Override
 	public void accept(IVisitor visitor) {
-		visitor.visitLeaf(this);
+		visitor.visitVector(this);
 	}
 }

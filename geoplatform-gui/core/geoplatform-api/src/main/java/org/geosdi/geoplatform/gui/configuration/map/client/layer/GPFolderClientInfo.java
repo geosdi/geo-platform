@@ -46,7 +46,7 @@ import java.util.List;
  * 
  */
 public class GPFolderClientInfo implements Serializable,
-		Comparable<GPFolderClientInfo> {
+		Comparable<IGPFolderElements>, IGPFolderElements {
 
 	/**
 	 * 
@@ -55,7 +55,8 @@ public class GPFolderClientInfo implements Serializable,
 
 	private String label;
 	private int order;
-	private List<GPLayerClientInfo> layers = new ArrayList<GPLayerClientInfo>();
+        private int zIndex;
+	private List<IGPFolderElements> folderElements = new ArrayList<IGPFolderElements>();
 
 	/**
 	 * @return the label
@@ -73,34 +74,19 @@ public class GPFolderClientInfo implements Serializable,
 	}
 
 	/**
-	 * @return the order
+	 * @return the elements
 	 */
-	public int getOrder() {
-		return order;
+	public List<IGPFolderElements> getFolderElements() {
+		return folderElements;
 	}
 
 	/**
-	 * @param order
-	 *            the order to set
+	 * @param elements
+	 *            the elements to set
 	 */
-	public void setOrder(int order) {
-		this.order = order;
-	}
-
-	/**
-	 * @return the layers
-	 */
-	public List<GPLayerClientInfo> getLayers() {
-		return layers;
-	}
-
-	/**
-	 * @param layers
-	 *            the layers to set
-	 */
-	public void setLayers(List<GPLayerClientInfo> layers) {
-		Collections.sort(layers);
-		this.layers = layers;
+	public void setFolderElements(List<IGPFolderElements> folderElements) {
+		Collections.sort(folderElements);
+		this.folderElements = folderElements;
 	}
 
 	/*
@@ -111,13 +97,27 @@ public class GPFolderClientInfo implements Serializable,
 	@Override
 	public String toString() {
 		return "GPFolderClientInfo [label=" + label + ", order=" + order
-				+ ", layers=" + layers + "]";
+				+ ", layers=" + folderElements + "]";
 	}
 
 	@Override
-	public int compareTo(GPFolderClientInfo o) {
-		// TODO Auto-generated method stub
-		return getOrder() - o.getOrder();
+	public int compareTo(IGPFolderElements o) {
+		return o.getzIndex() - getzIndex();
 	}
+
+    /**
+     * @return the zIndex
+     */
+    @Override
+    public int getzIndex() {
+        return zIndex;
+    }
+
+    /**
+     * @param zIndex the zIndex to set
+     */
+    public void setzIndex(int zIndex) {
+        this.zIndex = zIndex;
+    }
 
 }

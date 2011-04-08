@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientIn
  * 
  */
 public class GPLayerClientInfo implements Serializable,
-		Comparable<GPLayerClientInfo> {
+		Comparable<IGPFolderElements>, IGPFolderElements {
 
 	/**
 	 * 
@@ -146,7 +146,7 @@ public class GPLayerClientInfo implements Serializable,
 	}
 
 	@Override
-	public int compareTo(GPLayerClientInfo o) {
+	public int compareTo(IGPFolderElements o) {
 		// TODO Auto-generated method stub
 		return o.getzIndex() - getzIndex();
 	}

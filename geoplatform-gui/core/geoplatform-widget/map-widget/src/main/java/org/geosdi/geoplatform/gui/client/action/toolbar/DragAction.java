@@ -68,8 +68,9 @@ public class DragAction extends ModifyFeatureAction {
 		if (mapWidget.isFeatureOperationEnable())
 			mapWidget.deactivateFeatureOperation();
 
-		if (!mapWidget.isModifyFeatureEnable())
-			mapWidget.activateModifyFeature();
+		// if (!mapWidget.isModifyFeatureEnable())
+		mapWidget.deactivateModifyFeature();
+		mapWidget.activateModifyFeature();
 
 		this.control.setMode(ModifyFeature.DRAG);
 	}

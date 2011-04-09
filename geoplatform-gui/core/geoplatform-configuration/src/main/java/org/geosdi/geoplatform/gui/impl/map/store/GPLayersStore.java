@@ -52,37 +52,35 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
  * 
  */
 public abstract class GPLayersStore<K extends GPLayerBean, T extends Layer>
-		implements ILayersStore<T>, LayerChangedHandler {
+        implements ILayersStore<T>, LayerChangedHandler {
 
-	protected GeoPlatformMap mapWidget;
-	protected Map<K, T> layers = new HashMap<K, T>();
+    protected GeoPlatformMap mapWidget;
+    protected Map<K, T> layers = new HashMap<K, T>();
+    private DisplayLayersManager displayLayers;
 
-	private DisplayLayersManager displayLayers;
+    /**
+     * @Constructor
+     *
+     * @param theMapWidget
+     */
+    public GPLayersStore(GeoPlatformMap theMapWidget) {
+        this.mapWidget = theMapWidget;
+        this.displayLayers = new DisplayLayersManager(this);
+    }
 
-	/**
-	 * @Constructor
-	 * 
-	 * @param theMapWidget
-	 */
-	public GPLayersStore(GeoPlatformMap theMapWidget) {
-		this.mapWidget = theMapWidget;
-		this.displayLayers = new DisplayLayersManager(this);
-	}
+    /**
+     *
+     * @param layer
+     */
+    protected void displayLayer(GPLayerBean layer) {
+        this.displayLayers.forwardRequest(layer);
+    }
 
-	/**
-	 * 
-	 * @param layer
-	 */
-	protected void displayLayer(GPLayerBean layer) {
-		this.displayLayers.forwardRequest(layer);
-	}
-
-	/**
-	 * 
-	 * @return List<T>
-	 */
-	public List<T> getLayers() {
-		return new ArrayList<T>(this.layers.values());
-	}
-
+    /**
+     *
+     * @return List<T>
+     */
+    public List<T> getLayers() {
+        return new ArrayList<T>(this.layers.values());
+    }
 }

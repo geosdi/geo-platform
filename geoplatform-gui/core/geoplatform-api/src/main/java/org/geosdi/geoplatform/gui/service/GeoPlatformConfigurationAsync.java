@@ -45,7 +45,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface GeoPlatformConfigurationAsync {
 
-	public void initGeoPlatformConfiguration(
-			AsyncCallback<IGeoPlatformGlobal> callback);
-
+    public void initGeoPlatformConfiguration(
+            AsyncCallback<IGeoPlatformGlobal> callback);
 }

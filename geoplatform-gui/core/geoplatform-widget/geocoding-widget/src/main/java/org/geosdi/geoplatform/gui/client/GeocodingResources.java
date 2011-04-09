@@ -45,6 +45,5 @@ import com.google.gwt.core.client.GWT;
  */
 public class GeocodingResources {
 
-	public static final GeocodingIcons ICONS = GWT.create(GeocodingIcons.class);
-
+    public static final GeocodingIcons ICONS = GWT.create(GeocodingIcons.class);
 }

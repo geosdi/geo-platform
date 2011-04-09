@@ -43,31 +43,27 @@ import com.extjs.gxt.ui.client.data.BaseModelData;
  */
 public class Scale extends BaseModelData {
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = -1544804885955575360L;
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -1544804885955575360L;
 
-	/**
-	 * Default Constructor
-	 */
-	public Scale() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * Default Constructor
+     */
+    public Scale() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	/**
-	 * @param scale
-	 */
-	public Scale(String scale) {
-		setScale(scale);
-	}
+    /**
+     * @param scale
+     */
+    public Scale(String scale) {
+        setScale(scale);
+    }
 
-	private void setScale(String scale) {
-		set("scale", scale);	
-	}
-
-	
-	
-
+    private void setScale(String scale) {
+        set("scale", scale);
+    }
 }

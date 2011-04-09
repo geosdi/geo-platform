@@ -45,8 +45,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public interface TraceRoutingLineEventHandler extends EventHandler {
 
-	Type<TraceRoutingLineEventHandler> TYPE = new Type<TraceRoutingLineEventHandler>();
-	
-	public void drawLine(String wkt);
+    Type<TraceRoutingLineEventHandler> TYPE = new Type<TraceRoutingLineEventHandler>();
 
+    public void drawLine(String wkt);
 }

@@ -44,28 +44,27 @@ import com.google.gwt.event.shared.GwtEvent;
  */
 public class CleanComboEvent extends GwtEvent<CleanComboEventHandler> {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
-	 */
-	@Override
-	public Type<CleanComboEventHandler> getAssociatedType() {
-		// TODO Auto-generated method stub
-		return CleanComboEventHandler.TYPE;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+     */
+    @Override
+    public Type<CleanComboEventHandler> getAssociatedType() {
+        // TODO Auto-generated method stub
+        return CleanComboEventHandler.TYPE;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
-	 * .EventHandler)
-	 */
-	@Override
-	protected void dispatch(CleanComboEventHandler handler) {
-		// TODO Auto-generated method stub
-		handler.clearStatus();
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+     * .EventHandler)
+     */
+    @Override
+    protected void dispatch(CleanComboEventHandler handler) {
+        // TODO Auto-generated method stub
+        handler.clearStatus();
+    }
 }

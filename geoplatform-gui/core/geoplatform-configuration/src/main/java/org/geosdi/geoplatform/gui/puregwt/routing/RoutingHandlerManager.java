@@ -52,36 +52,35 @@ import com.google.gwt.event.shared.HandlerRegistration;
  */
 public class RoutingHandlerManager {
 
-	private GPEventBus eventBus;
+    private GPEventBus eventBus;
+    private static RoutingHandlerManager INSTANCE;
 
-	private static RoutingHandlerManager INSTANCE;
+    public RoutingHandlerManager() {
+        this.eventBus = new GPEventBusImpl();
+    }
 
-	public RoutingHandlerManager() {
-		this.eventBus = new GPEventBusImpl();
-	}
+    public static RoutingHandlerManager get() {
+        if (INSTANCE == null) {
+            INSTANCE = new RoutingHandlerManager();
+        }
+        return INSTANCE;
+    }
 
-	public static RoutingHandlerManager get() {
-		if (INSTANCE == null)
-			INSTANCE = new RoutingHandlerManager();
-		return INSTANCE;
-	}
+    public static <T extends EventHandler> HandlerRegistration addHandler(
+            Type<T> type, T handler) {
+        return get().eventBus.addHandler(type, handler);
+    }
 
-	public static <T extends EventHandler> HandlerRegistration addHandler(
-			Type<T> type, T handler) {
-		return get().eventBus.addHandler(type, handler);
-	}
+    public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
+            Type<T> type, Object source, T handler) {
+        return get().eventBus.addHandlerToSource(type, source, handler);
+    }
 
-	public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
-			Type<T> type, Object source, T handler) {
-		return get().eventBus.addHandlerToSource(type, source, handler);
-	}
+    public static void fireEvent(GwtEvent<?> event) {
+        get().eventBus.fireEvent(event);
+    }
 
-	public static void fireEvent(GwtEvent<?> event) {
-		get().eventBus.fireEvent(event);
-	}
-
-	public static void fireEventFromSource(GwtEvent<?> event, Object source) {
-		get().eventBus.fireEventFromSource(event, source);
-	}
-
+    public static void fireEventFromSource(GwtEvent<?> event, Object source) {
+        get().eventBus.fireEventFromSource(event, source);
+    }
 }

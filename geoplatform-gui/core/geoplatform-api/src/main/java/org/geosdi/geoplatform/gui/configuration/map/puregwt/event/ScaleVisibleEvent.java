@@ -44,34 +44,33 @@ import com.google.gwt.event.shared.GwtEvent;
  */
 public class ScaleVisibleEvent extends GwtEvent<ScaleChangeHandler> {
 
-	private boolean activate;
+    private boolean activate;
 
-	public ScaleVisibleEvent(boolean activate) {
-		this.activate = activate;
-	}
+    public ScaleVisibleEvent(boolean activate) {
+        this.activate = activate;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
-	 */
-	@Override
-	public Type<ScaleChangeHandler> getAssociatedType() {
-		// TODO Auto-generated method stub
-		return ScaleChangeHandler.TYPE;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+     */
+    @Override
+    public Type<ScaleChangeHandler> getAssociatedType() {
+        // TODO Auto-generated method stub
+        return ScaleChangeHandler.TYPE;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
-	 * .EventHandler)
-	 */
-	@Override
-	protected void dispatch(ScaleChangeHandler handler) {
-		// TODO Auto-generated method stub
-		handler.activationScaleBar(activate);
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+     * .EventHandler)
+     */
+    @Override
+    protected void dispatch(ScaleChangeHandler handler) {
+        // TODO Auto-generated method stub
+        handler.activationScaleBar(activate);
+    }
 }

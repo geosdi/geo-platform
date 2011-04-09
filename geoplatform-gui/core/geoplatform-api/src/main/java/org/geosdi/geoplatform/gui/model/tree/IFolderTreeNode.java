@@ -42,8 +42,7 @@ package org.geosdi.geoplatform.gui.model.tree;
  */
 public interface IFolderTreeNode {
 
-	public boolean isChecked();
+    public boolean isChecked();
 
-	public boolean isChildChecked(GPLayerTreeModel child);
-
+    public boolean isChildChecked(GPLayerTreeModel child);
 }

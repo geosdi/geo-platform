@@ -55,86 +55,85 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  */
 public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8265365333381641340L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 8265365333381641340L;
+    private List<String> styles;
 
-	private List<String> styles;
+    /**
+     * @Constructor
+     *
+     * @param label
+     */
+    public RasterTreeNode(ClientRasterInfo layer) {
+        super.setLabel(layer.getLayerName());
+        super.setDataSource(layer.getDataSource());
+        super.setCrs(layer.getCrs());
+        super.setBbox(layer.getBbox());
+        super.setzIndex(layer.getzIndex());
+        super.setLayerType(layer.getLayerType());
+        this.setStyles(layer.getStyles());
+    }
 
-	/**
-	 * @Constructor
-	 * 
-	 * @param label
-	 */
-	public RasterTreeNode(ClientRasterInfo layer) {
-		super.setLabel(layer.getLayerName());
-		super.setDataSource(layer.getDataSource());
-		super.setCrs(layer.getCrs());
-		super.setBbox(layer.getBbox());
-		super.setzIndex(layer.getzIndex());
-		super.setLayerType(layer.getLayerType());
-		this.setStyles(layer.getStyles());
-	}
+    @Override
+    public List<String> getStyles() {
+        // TODO Auto-generated method stub
+        return this.styles;
+    }
 
-	@Override
-	public List<String> getStyles() {
-		// TODO Auto-generated method stub
-		return this.styles;
-	}
+    @Override
+    public void setStyles(List<String> styles) {
+        // TODO Auto-generated method stub
+        this.styles = styles;
+    }
 
-	@Override
-	public void setStyles(List<String> styles) {
-		// TODO Auto-generated method stub
-		this.styles = styles;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
+     */
+    @Override
+    public AbstractImagePrototype getIcon() {
+        // TODO Auto-generated method stub
+        return LayerResources.ICONS.raster();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
-	 */
-	@Override
-	public AbstractImagePrototype getIcon() {
-		// TODO Auto-generated method stub
-		return LayerResources.ICONS.raster();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#notifyCheckEvent
+     * (boolean)
+     */
+    @Override
+    public void notifyCheckEvent(boolean isChecked) {
+        // TODO Auto-generated method stub
+        if (isParentChecked()) {
+            if (isChecked) {
+                GPHandlerManager.fireEvent(new DisplayLayerEvent(this));
+            } else {
+                GPHandlerManager.fireEvent(new HideLayerEvent(this));
+            }
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#notifyCheckEvent
-	 * (boolean)
-	 */
-	@Override
-	public void notifyCheckEvent(boolean isChecked) {
-		// TODO Auto-generated method stub
-		if (isParentChecked()) {
-			if (isChecked)
-				GPHandlerManager.fireEvent(new DisplayLayerEvent(this));
-			else
-				GPHandlerManager.fireEvent(new HideLayerEvent(this));
-		}
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "RasterTreeNode [getLabel()=" + getLabel() + ", styles="
+                + styles + ", getDataSource()=" + getDataSource()
+                + ", getCrs()=" + getCrs() + ", getBbox()=" + getBbox()
+                + ", getLayerType()=" + getLayerType() + ", getzIndex()="
+                + getzIndex() + "]";
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "RasterTreeNode [getLabel()=" + getLabel() + ", styles="
-				+ styles + ", getDataSource()=" + getDataSource()
-				+ ", getCrs()=" + getCrs() + ", getBbox()=" + getBbox()
-				+ ", getLayerType()=" + getLayerType() + ", getzIndex()="
-				+ getzIndex() + "]";
-	}
-
-	@Override
-	public void accept(IVisitor visitor) {
-		visitor.visitRaster(this);
-	}
-
+    @Override
+    public void accept(IVisitor visitor) {
+        visitor.visitRaster(this);
+    }
 }

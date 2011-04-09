@@ -53,13 +53,12 @@ import java.lang.annotation.Target;
 @PersistButton
 public @interface PersistButton {
 
-	/**
-	 * General Annotation to be used for ToolbarMapAction to indicate that the
-	 * Button must be registered in GeoPlatformButtonRegistar to manage its
-	 * State
-	 * 
-	 * @return the flag to check if Button must be persisted
-	 */
-
-	boolean persist() default false;
+    /**
+     * General Annotation to be used for ToolbarMapAction to indicate that the
+     * Button must be registered in GeoPlatformButtonRegistar to manage its
+     * State
+     *
+     * @return the flag to check if Button must be persisted
+     */
+    boolean persist() default false;
 }

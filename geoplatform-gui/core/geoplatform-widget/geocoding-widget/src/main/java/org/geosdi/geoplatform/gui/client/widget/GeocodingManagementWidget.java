@@ -47,35 +47,36 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
  */
 public class GeocodingManagementWidget extends ContentPanel {
 
-	private GeocodingGridWidget geocodingGridWidget;
+    private GeocodingGridWidget geocodingGridWidget;
 
-	public GeocodingManagementWidget() {
-		setHeading("Geocoding Widget");
-		setLayout(new FitLayout());
+    public GeocodingManagementWidget() {
+        setHeading("Geocoding Widget");
+        setLayout(new FitLayout());
 
-		setLayoutOnChange(true);
+        setLayoutOnChange(true);
 
-		this.geocodingGridWidget = new GeocodingGridWidget();
+        this.geocodingGridWidget = new GeocodingGridWidget();
 
-		add(this.geocodingGridWidget.getFormPanel());
+        add(this.geocodingGridWidget.getFormPanel());
 
-		addWidgetListener(new WidgetListener() {
-			@Override
-			public void widgetResized(ComponentEvent ce) {
-				if (getHeight() > 0)
-					geocodingGridWidget.getGrid().setHeight(getHeight() - 165);
+        addWidgetListener(new WidgetListener() {
 
-			}
-		});
+            @Override
+            public void widgetResized(ComponentEvent ce) {
+                if (getHeight() > 0) {
+                    geocodingGridWidget.getGrid().setHeight(getHeight() - 165);
+                }
 
-		setScrollMode(Scroll.AUTOY);
-	}
+            }
+        });
 
-	/**
-	 * @return the geocodingGridWidget
-	 */
-	public GeocodingGridWidget getGeocodingGridWidget() {
-		return geocodingGridWidget;
-	}
+        setScrollMode(Scroll.AUTOY);
+    }
 
+    /**
+     * @return the geocodingGridWidget
+     */
+    public GeocodingGridWidget getGeocodingGridWidget() {
+        return geocodingGridWidget;
+    }
 }

@@ -41,53 +41,51 @@ package org.geosdi.geoplatform.gui.configuration;
  */
 public class ActionClientTool extends GenericClientTool {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1096150448864737345L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1096150448864737345L;
+    private String type;
+    private boolean enabled;
 
-	private String type;
-	private boolean enabled;
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
 
-	/**
-	 * @return the type
-	 */
-	public String getType() {
-		return type;
-	}
+    /**
+     * @param type
+     *            the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	/**
-	 * @param type
-	 *            the type to set
-	 */
-	public void setType(String type) {
-		this.type = type;
-	}
+    /**
+     * @return the enabled
+     */
+    public boolean isEnabled() {
+        return enabled;
+    }
 
-	/**
-	 * @return the enabled
-	 */
-	public boolean isEnabled() {
-		return enabled;
-	}
+    /**
+     * @param enabled
+     *            the enabled to set
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
-	/**
-	 * @param enabled
-	 *            the enabled to set
-	 */
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "ActionClientTool [type=" + type + ", enabled=" + enabled
-				+ ", getId()=" + getId() + ", getOrder()=" + getOrder() + "]";
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "ActionClientTool [type=" + type + ", enabled=" + enabled
+                + ", getId()=" + getId() + ", getOrder()=" + getOrder() + "]";
+    }
 }

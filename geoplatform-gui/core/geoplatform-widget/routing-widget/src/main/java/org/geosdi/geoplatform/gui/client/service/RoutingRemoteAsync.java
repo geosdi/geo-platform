@@ -45,7 +45,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface RoutingRemoteAsync {
 
-	public void findDirections(double xStart, double yStart, double xStop,
-			double yStop, AsyncCallback<RoutingBean> callback);
-
+    public void findDirections(double xStart, double yStart, double xStop,
+            double yStop, AsyncCallback<RoutingBean> callback);
 }

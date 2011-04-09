@@ -41,8 +41,7 @@ package org.geosdi.geoplatform.gui.configuration.action;
  */
 public interface GeoPlatformEventHandler {
 
-	void addHandler();
-	
-	void removeHandler();
+    void addHandler();
 
+    void removeHandler();
 }

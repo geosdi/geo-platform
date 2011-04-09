@@ -42,44 +42,43 @@ import com.google.gwt.event.shared.GwtEvent;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class RoutingActivationEvent extends
-		GwtEvent<RoutingActivationEventHandler> {
+public class RoutingActivationEvent extends GwtEvent<RoutingActivationEventHandler> {
 
-	private boolean activate;
+    private boolean activate;
 
-	/**
-	 * @param activate
-	 *            the activate to set
-	 */
-	public void setActivate(boolean activate) {
-		this.activate = activate;
-	}
+    /**
+     * @param activate
+     *            the activate to set
+     */
+    public void setActivate(boolean activate) {
+        this.activate = activate;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
-	 */
-	@Override
-	public Type<RoutingActivationEventHandler> getAssociatedType() {
-		// TODO Auto-generated method stub
-		return RoutingActivationEventHandler.TYPE;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+     */
+    @Override
+    public Type<RoutingActivationEventHandler> getAssociatedType() {
+        // TODO Auto-generated method stub
+        return RoutingActivationEventHandler.TYPE;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
-	 * .EventHandler)
-	 */
-	@Override
-	protected void dispatch(RoutingActivationEventHandler handler) {
-		// TODO Auto-generated method stub
-		if (activate)
-			handler.activate();
-		else
-			handler.deactivate();
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+     * .EventHandler)
+     */
+    @Override
+    protected void dispatch(RoutingActivationEventHandler handler) {
+        // TODO Auto-generated method stub
+        if (activate) {
+            handler.activate();
+        } else {
+            handler.deactivate();
+        }
+    }
 }

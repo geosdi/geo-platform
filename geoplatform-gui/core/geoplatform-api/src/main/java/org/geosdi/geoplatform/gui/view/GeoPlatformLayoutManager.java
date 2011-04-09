@@ -56,157 +56,155 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
  */
 public abstract class GeoPlatformLayoutManager {
 
-	protected Viewport viewport;
-	protected ContentPanel east;
-	protected ContentPanel west;
-	protected ContentPanel south;
-	protected ContentPanel center;
-	protected ContentPanel north;
+    protected Viewport viewport;
+    protected ContentPanel east;
+    protected ContentPanel west;
+    protected ContentPanel south;
+    protected ContentPanel center;
+    protected ContentPanel north;
 
-	public GeoPlatformLayoutManager() {
-		intiLayoutManager();
-	}
+    public GeoPlatformLayoutManager() {
+        intiLayoutManager();
+    }
 
-	/**
-	 * Build The Main GeoPlatform UI
-	 */
-	private void intiLayoutManager() {
-		// TODO Auto-generated method stub
-		viewport = new Viewport();
-		viewport.setLayout(new BorderLayout());
+    /**
+     * Build The Main GeoPlatform UI
+     */
+    private void intiLayoutManager() {
+        // TODO Auto-generated method stub
+        viewport = new Viewport();
+        viewport.setLayout(new BorderLayout());
 
-		createEast();
-		createWest();
-		createCenter();
-		createSouth();
-	}
+        createEast();
+        createWest();
+        createCenter();
+        createSouth();
+    }
 
-	/**
-	 * Create North Panel in Main UI
-	 */
-	public void createNorth(float size) {
-		north = new ContentPanel();
-		north.setHeaderVisible(false);
-		BorderLayoutData data = new BorderLayoutData(LayoutRegion.NORTH, size);
-		data.setMargins(new Margins(0, 5, 0, 5));
+    /**
+     * Create North Panel in Main UI
+     */
+    public void createNorth(float size) {
+        north = new ContentPanel();
+        north.setHeaderVisible(false);
+        BorderLayoutData data = new BorderLayoutData(LayoutRegion.NORTH, size);
+        data.setMargins(new Margins(0, 5, 0, 5));
 
-		viewport.add(north, data);
-	}
+        viewport.add(north, data);
+    }
 
-	/**
-	 * Create West Panel in Main UI
-	 */
-	private void createWest() {
-		BorderLayoutData data = new BorderLayoutData(LayoutRegion.WEST, 350);
-		data.setMargins(new Margins(5, 0, 5, 5));
+    /**
+     * Create West Panel in Main UI
+     */
+    private void createWest() {
+        BorderLayoutData data = new BorderLayoutData(LayoutRegion.WEST, 350);
+        data.setMargins(new Margins(5, 0, 5, 5));
 
-		west = new ContentPanel();
-		west.setHeaderVisible(false);
-		west.setBodyBorder(false);
-		west.setLayout(new AccordionLayout());
-		west.setScrollMode(Scroll.NONE);
+        west = new ContentPanel();
+        west.setHeaderVisible(false);
+        west.setBodyBorder(false);
+        west.setLayout(new AccordionLayout());
+        west.setScrollMode(Scroll.NONE);
 
-		west.hide();
+        west.hide();
 
-		viewport.add(west, data);
-	}
+        viewport.add(west, data);
+    }
 
-	/**
-	 * Create East Panel in Main UI
-	 */
-	private void createEast() {
-		BorderLayoutData data = new BorderLayoutData(LayoutRegion.EAST, 350);
-		data.setMargins(new Margins(5, 0, 5, 5));
+    /**
+     * Create East Panel in Main UI
+     */
+    private void createEast() {
+        BorderLayoutData data = new BorderLayoutData(LayoutRegion.EAST, 350);
+        data.setMargins(new Margins(5, 0, 5, 5));
 
-		east = new ContentPanel();
-		east.setHeaderVisible(false);
-		east.setBodyBorder(false);
-		east.setLayout(new AccordionLayout());
-		east.setScrollMode(Scroll.NONE);
+        east = new ContentPanel();
+        east.setHeaderVisible(false);
+        east.setBodyBorder(false);
+        east.setLayout(new AccordionLayout());
+        east.setScrollMode(Scroll.NONE);
 
-		east.hide();
+        east.hide();
 
-		viewport.add(east, data);
-	}
+        viewport.add(east, data);
+    }
 
-	/**
-	 * Create Center Panel in Main UI
-	 */
-	private void createCenter() {
-		center = new ContentPanel();
+    /**
+     * Create Center Panel in Main UI
+     */
+    private void createCenter() {
+        center = new ContentPanel();
 
-		center.setHeaderVisible(false);
-		BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
-		data.setMargins(new Margins(5, 5, 5, 5));
+        center.setHeaderVisible(false);
+        BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
+        data.setMargins(new Margins(5, 5, 5, 5));
 
-		center.setLayoutOnChange(true);
+        center.setLayoutOnChange(true);
 
-		center.addWidgetListener(new WidgetListener() {
+        center.addWidgetListener(new WidgetListener() {
 
-			public void widgetResized(ComponentEvent ce) {
-				MapHandlerManager.fireEvent(new ScaleChangeEvent(XDOM
-						.getViewportSize()));
-			}
+            public void widgetResized(ComponentEvent ce) {
+                MapHandlerManager.fireEvent(new ScaleChangeEvent(XDOM.getViewportSize()));
+            }
+        });
 
-		});
+        viewport.add(center, data);
+    }
 
-		viewport.add(center, data);
-	}
+    /**
+     * Create South Panel in Main UI
+     */
+    private void createSouth() {
+        south = new ContentPanel();
+        BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH,
+                100);
+        southData.setSplit(true);
+        southData.setCollapsible(true);
+        southData.setFloatable(false);
+        southData.setMargins(new Margins(5, 0, 0, 0));
 
-	/**
-	 * Create South Panel in Main UI
-	 */
-	private void createSouth() {
-		south = new ContentPanel();
-		BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH,
-				100);
-		southData.setSplit(true);
-		southData.setCollapsible(true);
-		southData.setFloatable(false);
-		southData.setMargins(new Margins(5, 0, 0, 0));
-		
-		south.hide();
-		
-		viewport.add(south, southData);
-	}
+        south.hide();
 
-	/**
-	 * @return the east
-	 */
-	public ContentPanel getEast() {
-		return east;
-	}
+        viewport.add(south, southData);
+    }
 
-	/**
-	 * @return the viewport
-	 */
-	public Viewport getViewport() {
-		return viewport;
-	}
+    /**
+     * @return the east
+     */
+    public ContentPanel getEast() {
+        return east;
+    }
 
-	/**
-	 * @return the south
-	 */
-	public ContentPanel getSouth() {
-		return south;
-	}
+    /**
+     * @return the viewport
+     */
+    public Viewport getViewport() {
+        return viewport;
+    }
 
-	/**
-	 * @return the center
-	 */
-	public ContentPanel getCenter() {
-		return center;
-	}
+    /**
+     * @return the south
+     */
+    public ContentPanel getSouth() {
+        return south;
+    }
 
-	/**
-	 * @return the north If North is null GeoPlatform set North Size to 50 for
-	 *         default
-	 * 
-	 */
-	public ContentPanel getNorth() {
-		if (north == null)
-			createNorth(50);
-		return north;
-	}
+    /**
+     * @return the center
+     */
+    public ContentPanel getCenter() {
+        return center;
+    }
 
+    /**
+     * @return the north If North is null GeoPlatform set North Size to 50 for
+     *         default
+     *
+     */
+    public ContentPanel getNorth() {
+        if (north == null) {
+            createNorth(50);
+        }
+        return north;
+    }
 }

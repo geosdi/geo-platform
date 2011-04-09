@@ -41,9 +41,9 @@ package org.geosdi.geoplatform.gui.configuration.map.control;
  */
 public interface GeoPlatformMapControl {
 
-	void createControl();
+    void createControl();
 
-	void activateControl();
+    void activateControl();
 
-	void deactivateControl();
+    void deactivateControl();
 }

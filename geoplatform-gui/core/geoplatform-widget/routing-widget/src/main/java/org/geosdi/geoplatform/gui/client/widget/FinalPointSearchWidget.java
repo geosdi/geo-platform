@@ -51,56 +51,55 @@ import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
  */
 public class FinalPointSearchWidget extends StartPointSearchRouting {
 
-	private FinalRoutingPointEvent event;
+    private FinalRoutingPointEvent event;
 
-	/**
-	 * @param controller
-	 */
-	public FinalPointSearchWidget(RoutingController controller) {
-		super(controller);
-		// TODO Auto-generated constructor stub
-		this.event = new FinalRoutingPointEvent();
-	}
+    /**
+     * @param controller
+     */
+    public FinalPointSearchWidget(RoutingController controller) {
+        super(controller);
+        // TODO Auto-generated constructor stub
+        this.event = new FinalRoutingPointEvent();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#
-	 * setComboToolTip()
-	 */
-	@Override
-	public void setComboToolTip() {
-		// TODO Auto-generated method stub
-		ToolTipConfig config = new ToolTipConfig();
-		config.setTitle("Usage");
-		config.setText("Enter Address - click INVIO to set Final Point.");
-		config.setTrackMouse(true);
-		this.combo.setToolTip(config);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#
+     * setComboToolTip()
+     */
+    @Override
+    public void setComboToolTip() {
+        // TODO Auto-generated method stub
+        ToolTipConfig config = new ToolTipConfig();
+        config.setTitle("Usage");
+        config.setText("Enter Address - click INVIO to set Final Point.");
+        config.setTrackMouse(true);
+        this.combo.setToolTip(config);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#
-	 * selectionChanged(com.extjs.gxt.ui.client.event.SelectionChangedEvent)
-	 */
-	@Override
-	public void changeSelection(SelectionChangedEvent<GeocodingBean> se) {
-		// TODO Auto-generated method stub
-		event.setLocation(se.getSelectedItem());
-		RoutingHandlerManager.fireEvent(event);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#
+     * selectionChanged(com.extjs.gxt.ui.client.event.SelectionChangedEvent)
+     */
+    @Override
+    public void changeSelection(SelectionChangedEvent<GeocodingBean> se) {
+        // TODO Auto-generated method stub
+        event.setLocation(se.getSelectedItem());
+        RoutingHandlerManager.fireEvent(event);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#
-	 * clearGeoPlatformMap()
-	 */
-	@Override
-	public void cleanGeoPlatformMap() {
-		// TODO Auto-generated method stub
-		RoutingHandlerManager.fireEvent(new RemoveFinalRoutingPointEvent());
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.client.widget.StartPointSearchRouting#
+     * clearGeoPlatformMap()
+     */
+    @Override
+    public void cleanGeoPlatformMap() {
+        // TODO Auto-generated method stub
+        RoutingHandlerManager.fireEvent(new RemoveFinalRoutingPointEvent());
+    }
 }

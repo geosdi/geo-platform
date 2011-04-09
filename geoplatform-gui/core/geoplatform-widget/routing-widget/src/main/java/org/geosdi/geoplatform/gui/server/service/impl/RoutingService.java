@@ -69,109 +69,104 @@ import org.xml.sax.SAXException;
 @Service("routingService")
 public class RoutingService implements IRoutingService {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private RoutingServiceParameters serviceParameter;
+    private URL url;
+    private HttpURLConnection conn;
+    private XPath xpath;
 
-	@Autowired
-	private RoutingServiceParameters serviceParameter;
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.server.service.IRoutingService#findDirections
+     * (double, double, double, double)
+     */
+    @Override
+    public RoutingBean findDirections(double xStart, double yStart,
+            double xStop, double yStop) throws GeoPlatformException {
+        // TODO Auto-generated method stub
+        RoutingBean tracking = new RoutingBean();
 
-	private URL url;
-	private HttpURLConnection conn;
-	private XPath xpath;
+        try {
+            url = new URL(serviceParameter.getServiceDataSource()
+                    + serviceParameter.getFirstRegex() + xStart + "," + yStart
+                    + serviceParameter.getFinalRegex() + xStop + "," + yStop
+                    + serviceParameter.getMethod());
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.server.service.IRoutingService#findDirections
-	 * (double, double, double, double)
-	 */
-	@Override
-	public RoutingBean findDirections(double xStart, double yStart,
-			double xStop, double yStop) throws GeoPlatformException {
-		// TODO Auto-generated method stub
-		RoutingBean tracking = new RoutingBean();
+            conn = (HttpURLConnection) url.openConnection();
 
-		try {
-			url = new URL(serviceParameter.getServiceDataSource()
-					+ serviceParameter.getFirstRegex() + xStart + "," + yStart
-					+ serviceParameter.getFinalRegex() + xStop + "," + yStop
-					+ serviceParameter.getMethod());
+            Document trackingResultDocument = null;
+            // open the connection and get results as InputSource.
+            conn.connect();
+            InputSource geocoderResultInputSource = new InputSource(
+                    conn.getInputStream());
 
-			conn = (HttpURLConnection) url.openConnection();
+            // read result and parse into XML Document
+            trackingResultDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(geocoderResultInputSource);
 
-			Document trackingResultDocument = null;
-			// open the connection and get results as InputSource.
-			conn.connect();
-			InputSource geocoderResultInputSource = new InputSource(
-					conn.getInputStream());
+            // prepare XPath
+            xpath = XPathFactory.newInstance().newXPath();
 
-			// read result and parse into XML Document
-			trackingResultDocument = DocumentBuilderFactory.newInstance()
-					.newDocumentBuilder().parse(geocoderResultInputSource);
+            // extract the result
+            NodeList resultNodeList = null;
 
-			// prepare XPath
-			xpath = XPathFactory.newInstance().newXPath();
+            resultNodeList = (NodeList) xpath.evaluate(
+                    "/result/route/complete_line", trackingResultDocument,
+                    XPathConstants.NODESET);
 
-			// extract the result
-			NodeList resultNodeList = null;
+            // save first the completeline string
+            tracking.setCompleteLine(resultNodeList.item(0).getTextContent());
 
-			resultNodeList = (NodeList) xpath.evaluate(
-					"/result/route/complete_line", trackingResultDocument,
-					XPathConstants.NODESET);
+            resultNodeList = (NodeList) xpath.evaluate(
+                    "/result/route/total_length", trackingResultDocument,
+                    XPathConstants.NODESET);
 
-			// save first the completeline string
-			tracking.setCompleteLine(resultNodeList.item(0).getTextContent());
+            tracking.setTotalLength(resultNodeList.item(0).getTextContent());
 
-			resultNodeList = (NodeList) xpath.evaluate(
-					"/result/route/total_length", trackingResultDocument,
-					XPathConstants.NODESET);
+            resultNodeList = (NodeList) xpath.evaluate(
+                    "/result/route/total_estimated_time",
+                    trackingResultDocument, XPathConstants.NODESET);
+            tracking.setTotaEstimatedTime(resultNodeList.item(0).getTextContent());
 
-			tracking.setTotalLength(resultNodeList.item(0).getTextContent());
+            resultNodeList = (NodeList) xpath.evaluate(
+                    "/result/route/directions/step", trackingResultDocument,
+                    XPathConstants.NODESET);
 
-			resultNodeList = (NodeList) xpath.evaluate(
-					"/result/route/total_estimated_time",
-					trackingResultDocument, XPathConstants.NODESET);
-			tracking.setTotaEstimatedTime(resultNodeList.item(0)
-					.getTextContent());
+            for (int i = 0; i < resultNodeList.getLength(); ++i) {
+                Directions direction = new Directions();
+                direction.setRoute(resultNodeList.item(i).getChildNodes().item(0).getTextContent());
+                if (resultNodeList.item(i).getChildNodes().getLength() > 1) {
+                    direction.setWkt(resultNodeList.item(i).getChildNodes().item(1).getTextContent());
+                }
+                tracking.addDirection(direction);
+            }
 
-			resultNodeList = (NodeList) xpath.evaluate(
-					"/result/route/directions/step", trackingResultDocument,
-					XPathConstants.NODESET);
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            logger.error("Error :", e);
+            throw new GeoPlatformException(e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            logger.error("Error :", e);
+            throw new GeoPlatformException(e);
+        } catch (SAXException e) {
+            // TODO Auto-generated catch block
+            logger.error("Error :", e);
+            throw new GeoPlatformException(e);
+        } catch (ParserConfigurationException e) {
+            // TODO Auto-generated catch block
+            logger.error("Error :", e);
+            throw new GeoPlatformException(e);
+        } catch (XPathExpressionException e) {
+            // TODO Auto-generated catch block
+            logger.error("Error :", e);
+            throw new GeoPlatformException(e);
+        } finally {
+            conn.disconnect();
+        }
 
-			for (int i = 0; i < resultNodeList.getLength(); ++i) {
-				Directions direction = new Directions();
-				direction.setRoute(resultNodeList.item(i).getChildNodes()
-						.item(0).getTextContent());
-				if (resultNodeList.item(i).getChildNodes().getLength() > 1)
-					direction.setWkt(resultNodeList.item(i).getChildNodes()
-							.item(1).getTextContent());
-				tracking.addDirection(direction);
-			}
-
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			logger.error("Error :", e);
-			throw new GeoPlatformException(e);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			logger.error("Error :", e);
-			throw new GeoPlatformException(e);
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			logger.error("Error :", e);
-			throw new GeoPlatformException(e);
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			logger.error("Error :", e);
-			throw new GeoPlatformException(e);
-		} catch (XPathExpressionException e) {
-			// TODO Auto-generated catch block
-			logger.error("Error :", e);
-			throw new GeoPlatformException(e);
-		} finally {
-			conn.disconnect();
-		}
-
-		return tracking;
-	}
+        return tracking;
+    }
 }

@@ -43,85 +43,84 @@ import java.io.Serializable;
  */
 public class CopyrightInfo implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3539309129736218989L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 3539309129736218989L;
+    private String key;
+    private String copyright;
+    private String licenseName;
+    private String licenseUrl;
 
-	private String key;
-	private String copyright;
-	private String licenseName;
-	private String licenseUrl;
+    /**
+     * @return the key
+     */
+    public String getKey() {
+        return key;
+    }
 
-	/**
-	 * @return the key
-	 */
-	public String getKey() {
-		return key;
-	}
+    /**
+     * @param key
+     *            the key to set
+     */
+    public void setKey(String key) {
+        this.key = key;
+    }
 
-	/**
-	 * @param key
-	 *            the key to set
-	 */
-	public void setKey(String key) {
-		this.key = key;
-	}
+    /**
+     * @return the copyright
+     */
+    public String getCopyright() {
+        return copyright;
+    }
 
-	/**
-	 * @return the copyright
-	 */
-	public String getCopyright() {
-		return copyright;
-	}
+    /**
+     * @param copyright
+     *            the copyright to set
+     */
+    public void setCopyright(String copyright) {
+        this.copyright = copyright;
+    }
 
-	/**
-	 * @param copyright
-	 *            the copyright to set
-	 */
-	public void setCopyright(String copyright) {
-		this.copyright = copyright;
-	}
+    /**
+     * @return the licenseName
+     */
+    public String getLicenseName() {
+        return licenseName;
+    }
 
-	/**
-	 * @return the licenseName
-	 */
-	public String getLicenseName() {
-		return licenseName;
-	}
+    /**
+     * @param licenseName
+     *            the licenseName to set
+     */
+    public void setLicenseName(String licenseName) {
+        this.licenseName = licenseName;
+    }
 
-	/**
-	 * @param licenseName
-	 *            the licenseName to set
-	 */
-	public void setLicenseName(String licenseName) {
-		this.licenseName = licenseName;
-	}
+    /**
+     * @return the licenseUrl
+     */
+    public String getLicenseUrl() {
+        return licenseUrl;
+    }
 
-	/**
-	 * @return the licenseUrl
-	 */
-	public String getLicenseUrl() {
-		return licenseUrl;
-	}
+    /**
+     * @param licenseUrl
+     *            the licenseUrl to set
+     */
+    public void setLicenseUrl(String licenseUrl) {
+        this.licenseUrl = licenseUrl;
+    }
 
-	/**
-	 * @param licenseUrl
-	 *            the licenseUrl to set
-	 */
-	public void setLicenseUrl(String licenseUrl) {
-		this.licenseUrl = licenseUrl;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "CopyrightInfo [key=" + key + ", copyright=" + copyright
-				+ ", licenseName=" + licenseName + ", licenseUrl=" + licenseUrl
-				+ "]";
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "CopyrightInfo [key=" + key + ", copyright=" + copyright
+                + ", licenseName=" + licenseName + ", licenseUrl=" + licenseUrl
+                + "]";
+    }
 }

@@ -47,8 +47,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public interface FinalRoutingPointEventHandler extends EventHandler {
 
-	Type<FinalRoutingPointEventHandler> TYPE = new Type<FinalRoutingPointEventHandler>();
+    Type<FinalRoutingPointEventHandler> TYPE = new Type<FinalRoutingPointEventHandler>();
 
-	public void drawFeature(IGeoPlatformLocation location);
-
+    public void drawFeature(IGeoPlatformLocation location);
 }

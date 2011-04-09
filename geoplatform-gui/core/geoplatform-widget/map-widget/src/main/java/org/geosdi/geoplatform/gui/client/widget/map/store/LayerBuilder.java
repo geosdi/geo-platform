@@ -53,81 +53,77 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  * 
  */
 public class LayerBuilder extends AbstractLayerBuilder<GPLayerBean> implements
-		GPLayerBuilder {
+        GPLayerBuilder {
 
-	public LayerBuilder(GeoPlatformMap theMapWidget) {
-		super(theMapWidget);
-		// TODO Auto-generated constructor stub
-	}
+    public LayerBuilder(GeoPlatformMap theMapWidget) {
+        super(theMapWidget);
+        // TODO Auto-generated constructor stub
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.impl.map.store.GPLayerBuilder#buildRaster(
-	 * org.geosdi.geoplatform.gui.model.GPRasterBean)
-	 */
-	@Override
-	public WMS buildRaster(GPRasterBean rasterBean) {
-		// TODO Auto-generated method stub
-		WMSParams wmsParams = new WMSParams();
-		wmsParams.setFormat("image/png");
-		wmsParams.setLayers(rasterBean.getLabel());
-		wmsParams.setStyles("");
-		wmsParams.setIsTransparent(true);
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.impl.map.store.GPLayerBuilder#buildRaster(
+     * org.geosdi.geoplatform.gui.model.GPRasterBean)
+     */
+    @Override
+    public WMS buildRaster(GPRasterBean rasterBean) {
+        // TODO Auto-generated method stub
+        WMSParams wmsParams = new WMSParams();
+        wmsParams.setFormat("image/png");
+        wmsParams.setLayers(rasterBean.getLabel());
+        wmsParams.setStyles("");
+        wmsParams.setIsTransparent(true);
 
-		Bounds bbox = new Bounds(rasterBean.getBbox().getLowerLeftX(),
-				rasterBean.getBbox().getLowerLeftY(), rasterBean.getBbox()
-						.getUpperRightX(), rasterBean.getBbox()
-						.getUpperRightY());
+        Bounds bbox = new Bounds(rasterBean.getBbox().getLowerLeftX(),
+                rasterBean.getBbox().getLowerLeftY(), rasterBean.getBbox().getUpperRightX(), rasterBean.getBbox().getUpperRightY());
 
-		bbox.transform(new Projection(rasterBean.getCrs()), new Projection(
-				mapWidget.getMap().getProjection()));
+        bbox.transform(new Projection(rasterBean.getCrs()), new Projection(
+                mapWidget.getMap().getProjection()));
 
-		wmsParams.setMaxExtent(bbox);
+        wmsParams.setMaxExtent(bbox);
 
-		WMSOptions wmsOption = new WMSOptions();
-		wmsOption.setIsBaseLayer(false);
-		wmsOption.setDisplayInLayerSwitcher(false);
+        WMSOptions wmsOption = new WMSOptions();
+        wmsOption.setIsBaseLayer(false);
+        wmsOption.setDisplayInLayerSwitcher(false);
 
-		return new WMS(rasterBean.getLabel(), rasterBean.getDataSource(),
-				wmsParams, wmsOption);
-	}
+        return new WMS(rasterBean.getLabel(), rasterBean.getDataSource(),
+                wmsParams, wmsOption);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.impl.map.store.GPLayerBuilder#buildVector(
-	 * org.geosdi.geoplatform.gui.model.GPVectorBean)
-	 */
-	@Override
-	public WMS buildVector(GPVectorBean vectorBean) {
-		// TODO Auto-generated method stub
-		WMSParams wmsParams = new WMSParams();
-		wmsParams.setFormat("image/png");
-		wmsParams.setLayers(vectorBean.getLabel());
-		wmsParams.setStyles("");
-		wmsParams.setIsTransparent(true);
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.impl.map.store.GPLayerBuilder#buildVector(
+     * org.geosdi.geoplatform.gui.model.GPVectorBean)
+     */
+    @Override
+    public WMS buildVector(GPVectorBean vectorBean) {
+        // TODO Auto-generated method stub
+        WMSParams wmsParams = new WMSParams();
+        wmsParams.setFormat("image/png");
+        wmsParams.setLayers(vectorBean.getLabel());
+        wmsParams.setStyles("");
+        wmsParams.setIsTransparent(true);
 
-		Bounds bbox = new Bounds(vectorBean.getBbox().getLowerLeftX(),
-				vectorBean.getBbox().getLowerLeftY(), vectorBean.getBbox()
-						.getUpperRightX(), vectorBean.getBbox()
-						.getUpperRightY());
+        Bounds bbox = new Bounds(vectorBean.getBbox().getLowerLeftX(),
+                vectorBean.getBbox().getLowerLeftY(), vectorBean.getBbox().getUpperRightX(), vectorBean.getBbox().getUpperRightY());
 
-		bbox.transform(new Projection(vectorBean.getCrs()), new Projection(
-				mapWidget.getMap().getProjection()));
+        bbox.transform(new Projection(vectorBean.getCrs()), new Projection(
+                mapWidget.getMap().getProjection()));
 
-		wmsParams.setMaxExtent(bbox);
+        wmsParams.setMaxExtent(bbox);
 
-		WMSOptions wmsOption = new WMSOptions();
-		wmsOption.setIsBaseLayer(false);
-		wmsOption.setDisplayInLayerSwitcher(false);
+        WMSOptions wmsOption = new WMSOptions();
+        wmsOption.setIsBaseLayer(false);
+        wmsOption.setDisplayInLayerSwitcher(false);
 
-		String dataSource = vectorBean.getDataSource();
+        String dataSource = vectorBean.getDataSource();
 
-		dataSource = dataSource.replaceAll("wfs", "wms");
+        dataSource = dataSource.replaceAll("wfs", "wms");
 
-		return new WMS(vectorBean.getLabel(), dataSource, wmsParams, wmsOption);
-	}
+        return new WMS(vectorBean.getLabel(), dataSource, wmsParams, wmsOption);
+    }
 }

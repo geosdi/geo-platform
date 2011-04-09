@@ -50,18 +50,17 @@ import org.xml.sax.SAXException;
  */
 public interface IGeocodingService {
 
-	/**
-	 * 
-	 * @param address
-	 * @return ArrayList<GeocodingBean>
-	 * 
-	 * @throws IOException
-	 * @throws SAXException
-	 * @throws ParserConfigurationException
-	 * @throws XPathExpressionException
-	 */
-	public ArrayList<GeocodingBean> findLocations(String address)
-			throws IOException, SAXException, ParserConfigurationException,
-			XPathExpressionException;
-
+    /**
+     *
+     * @param address
+     * @return ArrayList<GeocodingBean>
+     *
+     * @throws IOException
+     * @throws SAXException
+     * @throws ParserConfigurationException
+     * @throws XPathExpressionException
+     */
+    public ArrayList<GeocodingBean> findLocations(String address)
+            throws IOException, SAXException, ParserConfigurationException,
+            XPathExpressionException;
 }

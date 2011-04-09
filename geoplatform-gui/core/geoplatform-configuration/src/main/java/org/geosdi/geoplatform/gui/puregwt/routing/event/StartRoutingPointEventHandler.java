@@ -47,8 +47,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public interface StartRoutingPointEventHandler extends EventHandler {
 
-	Type<StartRoutingPointEventHandler> TYPE = new Type<StartRoutingPointEventHandler>();
+    Type<StartRoutingPointEventHandler> TYPE = new Type<StartRoutingPointEventHandler>();
 
-	public void drawFeature(IGeoPlatformLocation location);
-
+    public void drawFeature(IGeoPlatformLocation location);
 }

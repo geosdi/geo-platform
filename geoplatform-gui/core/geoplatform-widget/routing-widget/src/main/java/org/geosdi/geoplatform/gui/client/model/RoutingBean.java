@@ -45,98 +45,96 @@ import java.util.List;
  */
 public class RoutingBean implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2280183309581214426L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -2280183309581214426L;
+    private String totalLength;
+    private String totaEstimatedTime;
+    private String completeLine;
+    private List<Directions> directions = new ArrayList<Directions>();
 
-	private String totalLength;
-	private String totaEstimatedTime;
-	private String completeLine;
+    public RoutingBean() {
+    }
 
-	private List<Directions> directions = new ArrayList<Directions>();
+    /**
+     * @return the totalLength
+     */
+    public String getTotalLength() {
+        return totalLength;
+    }
 
-	public RoutingBean() {
-	}
+    /**
+     * @param totalLength
+     *            the totalLength to set
+     */
+    public void setTotalLength(String totalLength) {
+        this.totalLength = totalLength;
+    }
 
-	/**
-	 * @return the totalLength
-	 */
-	public String getTotalLength() {
-		return totalLength;
-	}
+    /**
+     * @return the totaEstimatedTime
+     */
+    public String getTotaEstimatedTime() {
+        return totaEstimatedTime;
+    }
 
-	/**
-	 * @param totalLength
-	 *            the totalLength to set
-	 */
-	public void setTotalLength(String totalLength) {
-		this.totalLength = totalLength;
-	}
+    /**
+     * @param totaEstimatedTime
+     *            the totaEstimatedTime to set
+     */
+    public void setTotaEstimatedTime(String totaEstimatedTime) {
+        this.totaEstimatedTime = totaEstimatedTime;
+    }
 
-	/**
-	 * @return the totaEstimatedTime
-	 */
-	public String getTotaEstimatedTime() {
-		return totaEstimatedTime;
-	}
+    /**
+     * @return the completeLine
+     */
+    public String getCompleteLine() {
+        return completeLine;
+    }
 
-	/**
-	 * @param totaEstimatedTime
-	 *            the totaEstimatedTime to set
-	 */
-	public void setTotaEstimatedTime(String totaEstimatedTime) {
-		this.totaEstimatedTime = totaEstimatedTime;
-	}
+    /**
+     * @param completeLine
+     *            the completeLine to set
+     */
+    public void setCompleteLine(String completeLine) {
+        this.completeLine = completeLine;
+    }
 
-	/**
-	 * @return the completeLine
-	 */
-	public String getCompleteLine() {
-		return completeLine;
-	}
+    /**
+     * @return the directions
+     */
+    public List<Directions> getDirections() {
+        return directions;
+    }
 
-	/**
-	 * @param completeLine
-	 *            the completeLine to set
-	 */
-	public void setCompleteLine(String completeLine) {
-		this.completeLine = completeLine;
-	}
+    /**
+     * @param directions
+     *            the directions to set
+     */
+    public void setDirections(List<Directions> directions) {
+        this.directions = directions;
+    }
 
-	/**
-	 * @return the directions
-	 */
-	public List<Directions> getDirections() {
-		return directions;
-	}
+    /**
+     *
+     * @param direction
+     */
+    public void addDirection(Directions direction) {
+        this.directions.add(direction);
+    }
 
-	/**
-	 * @param directions
-	 *            the directions to set
-	 */
-	public void setDirections(List<Directions> directions) {
-		this.directions = directions;
-	}
-
-	/**
-	 * 
-	 * @param direction
-	 */
-	public void addDirection(Directions direction) {
-		this.directions.add(direction);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "RoutingBean [totalLength=" + totalLength
-				+ ", totaEstimatedTime=" + totaEstimatedTime
-				+ ", completeLine=" + completeLine + ", directions="
-				+ directions + "]";
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "RoutingBean [totalLength=" + totalLength
+                + ", totaEstimatedTime=" + totaEstimatedTime
+                + ", completeLine=" + completeLine + ", directions="
+                + directions + "]";
+    }
 }

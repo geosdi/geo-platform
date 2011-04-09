@@ -1,22 +1,23 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
   
-   <parent>
-		<groupId>org.geosdi</groupId>
-		<artifactId>plugin</artifactId>
-		<version>1.2-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>org.geosdi</groupId>
+        <artifactId>plugin</artifactId>
+        <version>1.2-SNAPSHOT</version>
+    </parent>
 
-  <groupId>org.geosdi</groupId>
-  <artifactId>geoplatform-xmpp</artifactId>
-  <version>1.2-SNAPSHOT</version>
-  <packaging>jar</packaging>
+    <groupId>org.geosdi</groupId>
+    <artifactId>geoplatform-xmpp</artifactId>
+    <version>1.2-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-  <name>Geo-Platform :: == XMPP Module</name>
-  <url>http://maven.apache.org</url>
+    <name>Geo-Platform :: == XMPP Module</name>
+    <url>http://maven.apache.org</url>
   
-  <developers>
+    <developers>
         <developer>
             <name>Francesco Izzi</name>
             <id>francesco.izzi</id>
@@ -39,31 +40,30 @@
         </developer>
     </developers>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
   
-   <build>
+    <build>
 
-		<plugins>
+        <plugins>
             
             <plugin>
                 <inherited>true</inherited>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
                 <configuration>
                     <attach>true</attach>
                 </configuration>
-				<executions>
+                <executions>
                     <execution>
                         <id>attach-sources</id>
                         <goals>
@@ -71,21 +71,21 @@
                         </goals>
                     </execution>
                 </executions>
-			</plugin>
+            </plugin>
             
 			<!-- tell the compiler we can use 1.6 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-			</plugin>
-		</plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+        </plugins>
 
-	</build>
+    </build>
 </project>

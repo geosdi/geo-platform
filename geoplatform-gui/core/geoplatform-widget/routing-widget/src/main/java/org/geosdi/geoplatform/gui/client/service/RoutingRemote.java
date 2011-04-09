@@ -49,30 +49,30 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("RoutingRemote")
 public interface RoutingRemote extends RemoteService {
 
-	public static class Util {
-		private static RoutingRemoteAsync instance;
+    public static class Util {
 
-		public static RoutingRemoteAsync getInstance() {
-			if (instance == null) {
-				instance = (RoutingRemoteAsync) GWT.create(RoutingRemote.class);
-				// ServiceDefTarget target = (ServiceDefTarget) instance;
-				// target.setServiceEntryPoint(GWT.getModuleBaseURL()
-				// + "RoutingRemote");
-			}
-			return instance;
-		}
-	}
+        private static RoutingRemoteAsync instance;
 
-	/**
-	 * 
-	 * @param xStart
-	 * @param yStart
-	 * @param xStop
-	 * @param yStop
-	 * @return
-	 * @throws ApplicationException
-	 */
-	public RoutingBean findDirections(double xStart, double yStart,
-			double xStop, double yStop) throws GeoPlatformException;
+        public static RoutingRemoteAsync getInstance() {
+            if (instance == null) {
+                instance = (RoutingRemoteAsync) GWT.create(RoutingRemote.class);
+                // ServiceDefTarget target = (ServiceDefTarget) instance;
+                // target.setServiceEntryPoint(GWT.getModuleBaseURL()
+                // + "RoutingRemote");
+            }
+            return instance;
+        }
+    }
 
+    /**
+     *
+     * @param xStart
+     * @param yStart
+     * @param xStop
+     * @param yStop
+     * @return
+     * @throws ApplicationException
+     */
+    public RoutingBean findDirections(double xStart, double yStart,
+            double xStop, double yStop) throws GeoPlatformException;
 }

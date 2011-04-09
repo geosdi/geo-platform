@@ -52,7 +52,6 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.extjs.gxt.ui.client.store.Store;
-import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -63,84 +62,81 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  */
 public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
-	private GPRootTreeNode root;
-	private boolean initialized;
+    private GPRootTreeNode root;
+    private boolean initialized;
 
-	/**
-	 * @Constructor
-	 */
-	public LayerTreeWidget() {
-		super();
-		this.buildRoot();
-	}
+    /**
+     * @Constructor
+     */
+    public LayerTreeWidget() {
+        super();
+        this.buildRoot();
+    }
 
-	private void buildRoot() {
-		// TODO Auto-generated method stub
-		this.root = new GPRootTreeNode(this.tree);
-	}
+    private void buildRoot() {
+        // TODO Auto-generated method stub
+        this.root = new GPRootTreeNode(this.tree);
+    }
 
-	/**
-	 * Build Tree
-	 */
-	public void buildTree() {
-		if (!initialized) {
-			this.initialized = true;
-			this.root.modelConverter(GeoPlatformUtils.getInstance()
-					.getGlobalConfiguration().getFolderStore().getFolders());
-			this.store.add(this.root, true);
-		}
-	}
+    /**
+     * Build Tree
+     */
+    public void buildTree() {
+        if (!initialized) {
+            this.initialized = true;
+            this.root.modelConverter(GeoPlatformUtils.getInstance().getGlobalConfiguration().getFolderStore().getFolders());
+            this.store.add(this.root, true);
+        }
+    }
 
-	/**
-	 * Set Tree Properties
-	 */
-	public void setTreePanelProperties() {
-		this.tree.setIconProvider(new ModelIconProvider<GPBeanTreeModel>() {
+    /**
+     * Set Tree Properties
+     */
+    @Override
+    public void setTreePanelProperties() {
+        this.tree.setIconProvider(new ModelIconProvider<GPBeanTreeModel>() {
 
-			@Override
-			public AbstractImagePrototype getIcon(GPBeanTreeModel model) {
-				return model.getIcon();
-			}
-		});
+            @Override
+            public AbstractImagePrototype getIcon(GPBeanTreeModel model) {
+                return model.getIcon();
+            }
+        });
 
-		this.setCheckable(true);
+        this.setCheckable(true);
+        this.setCheckStyle(CheckCascade.NONE);
+        this.tree.setAutoHeight(true);
 
-		this.setCheckStyle(CheckCascade.NONE);
-		
-		this.tree.setAutoHeight(true);
+        this.tree.addListener(Events.CheckChange,
+                new Listener<TreePanelEvent<GPBeanTreeModel>>() {
 
-		this.tree.addListener(Events.CheckChange,
-				new Listener<TreePanelEvent<GPBeanTreeModel>>() {
+                    @Override
+                    public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
+                        be.getItem().notifyCheckEvent(be.isChecked());
+                    }
+                });
 
-					@Override
-					public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
-						be.getItem().notifyCheckEvent(be.isChecked());
-					}
-				});
-		
-		//TODO: Check the right position for the following code
-		TreePanelDragSource dragSource = new TreePanelDragSource(super.tree);
-		dragSource.addDNDListener(new DNDListener() {
-			@Override
-			public void dragStart(DNDEvent e) {
-				ModelData sel = tree.getSelectionModel().getSelectedItem();
-				if (sel != null
-						&& sel == tree.getStore().getRootItems().get(0)) {
-					e.setCancelled(true);
-					e.getStatus().setStatus(false);
-					return;
-				}
-				super.dragStart(e);
-			}
-		});
+        //TODO: Check the right position for the following code
+        TreePanelDragSource dragSource = new TreePanelDragSource(super.tree);
+        dragSource.addDNDListener(new DNDListener() {
 
-		TreePanelDropTarget dropTarget = new GPTreePanelDropTarget(super.tree);
-		dropTarget.setAllowSelfAsSource(true);
-		dropTarget.setAllowDropOnLeaf(false);
-		dropTarget.setFeedback(Feedback.BOTH);
-		
-		Listener<TreeStoreEvent<GPBeanTreeModel>> listener = new DropAddListener();
-		super.store.addListener(Store.Add, listener);
-	}
+            @Override
+            public void dragStart(DNDEvent e) {
+                ModelData sel = tree.getSelectionModel().getSelectedItem();
+                if (sel != null
+                        && sel == tree.getStore().getRootItems().get(0)) {
+                    e.setCancelled(true);
+                    e.getStatus().setStatus(false);
+                    return;
+                }
+                super.dragStart(e);
+            }
+        });
 
+        TreePanelDropTarget dropTarget = new GPTreePanelDropTarget(super.tree);
+        dropTarget.setAllowSelfAsSource(true);
+        dropTarget.setAllowDropOnLeaf(false);
+        dropTarget.setFeedback(Feedback.BOTH);
+
+        super.store.addListener(Store.Add, new DropAddListener());
+    }
 }

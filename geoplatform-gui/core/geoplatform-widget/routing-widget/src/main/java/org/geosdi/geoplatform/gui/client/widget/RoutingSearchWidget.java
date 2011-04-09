@@ -63,169 +63,163 @@ import com.google.gwt.user.client.ui.Image;
  */
 public class RoutingSearchWidget implements HasCleanEvent {
 
-	private RoutingController controller;
-	private RoutingGridWidget gridWidget;
-	private FieldSet fieldSet;
-	private StartPointSearchRouting startPoint;
-	private FinalPointSearchWidget finalPoint;
+    private RoutingController controller;
+    private RoutingGridWidget gridWidget;
+    private FieldSet fieldSet;
+    private StartPointSearchRouting startPoint;
+    private FinalPointSearchWidget finalPoint;
+    private Button traceRoute;
+    private Button clear;
+    private TraceRoutingLineEvent event;
 
-	private Button traceRoute;
-	private Button clear;
+    /**
+     *
+     * @param controller
+     */
+    public RoutingSearchWidget(RoutingController theController) {
+        this.controller = theController;
+        this.fieldSet = new FieldSet();
+        this.fieldSet.setCollapsible(false);
+        this.event = new TraceRoutingLineEvent();
+        initWidgets();
+    }
 
-	private TraceRoutingLineEvent event;
+    /**
+     * @param controller
+     */
+    private void initWidgets() {
+        // TODO Auto-generated method stub
+        this.startPoint = new StartPointSearchRouting(controller);
+        this.finalPoint = new FinalPointSearchWidget(controller);
 
-	/**
-	 * 
-	 * @param controller
-	 */
-	public RoutingSearchWidget(RoutingController theController) {
-		this.controller = theController;
-		this.fieldSet = new FieldSet();
-		this.fieldSet.setCollapsible(false);
-		this.event = new TraceRoutingLineEvent();
-		initWidgets();
-	}
+        addCleanEventHandler(this.startPoint, this.startPoint.getComboBox());
+        addCleanEventHandler(this.finalPoint, this.finalPoint.getComboBox());
 
-	/**
-	 * @param controller
-	 */
-	private void initWidgets() {
-		// TODO Auto-generated method stub
-		this.startPoint = new StartPointSearchRouting(controller);
-		this.finalPoint = new FinalPointSearchWidget(controller);
+        HorizontalPanel panel = new HorizontalPanel();
+        panel.setHorizontalAlign(HorizontalAlignment.CENTER);
 
-		addCleanEventHandler(this.startPoint, this.startPoint.getComboBox());
-		addCleanEventHandler(this.finalPoint, this.finalPoint.getComboBox());
+        Image img = new Image();
+        img.setUrl(GWT.getModuleBaseURL() + "/gp-images/start.png");
+        img.setPixelSize(20, 30);
 
-		HorizontalPanel panel = new HorizontalPanel();
-		panel.setHorizontalAlign(HorizontalAlignment.CENTER);
+        panel.add(img);
+        panel.add(this.startPoint.getTableWidget());
 
-		Image img = new Image();
-		img.setUrl(GWT.getModuleBaseURL() + "/gp-images/start.png");
-		img.setPixelSize(20, 30);
+        fieldSet.add(panel);
 
-		panel.add(img);
-		panel.add(this.startPoint.getTableWidget());
+        HorizontalPanel panel1 = new HorizontalPanel();
+        panel1.setHorizontalAlign(HorizontalAlignment.CENTER);
 
-		fieldSet.add(panel);
+        Image img1 = new Image();
+        img1.setUrl(GWT.getModuleBaseURL() + "/gp-images/end.png");
+        img1.setPixelSize(20, 30);
 
-		HorizontalPanel panel1 = new HorizontalPanel();
-		panel1.setHorizontalAlign(HorizontalAlignment.CENTER);
+        panel1.add(img1);
+        panel1.add(this.finalPoint.getTableWidget());
 
-		Image img1 = new Image();
-		img1.setUrl(GWT.getModuleBaseURL() + "/gp-images/end.png");
-		img1.setPixelSize(20, 30);
+        fieldSet.add(panel1);
 
-		panel1.add(img1);
-		panel1.add(this.finalPoint.getTableWidget());
+        HorizontalPanel buttonPanel = new HorizontalPanel();
+        buttonPanel.setSpacing(5);
 
-		fieldSet.add(panel1);
+        this.traceRoute = new Button("Route",
+                BasicWidgetResources.ICONS.routing(),
+                new SelectionListener<ButtonEvent>() {
 
-		HorizontalPanel buttonPanel = new HorizontalPanel();
-		buttonPanel.setSpacing(5);
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        // TODO Auto-generated method stub
+                        if (!(startPoint.getComboBox().getRawValue().equals(""))
+                                && !(finalPoint.getComboBox().getRawValue().equals(""))) {
+                            findDirections(startPoint.getComboBox().getSelection().get(0), finalPoint.getComboBox().getSelection().get(0));
+                        } else {
+                            GeoPlatformMessage.alertMessage("GeoPlatform Routing",
+                                    "Please, insert the Start Point and End Point!");
+                        }
+                    }
+                });
 
-		this.traceRoute = new Button("Route",
-				BasicWidgetResources.ICONS.routing(),
-				new SelectionListener<ButtonEvent>() {
+        buttonPanel.add(this.traceRoute);
 
-					@Override
-					public void componentSelected(ButtonEvent ce) {
-						// TODO Auto-generated method stub
-						if (!(startPoint.getComboBox().getRawValue().equals(""))
-								&& !(finalPoint.getComboBox().getRawValue()
-										.equals("")))
-							findDirections(startPoint.getComboBox()
-									.getSelection().get(0), finalPoint
-									.getComboBox().getSelection().get(0));
-						else
-							GeoPlatformMessage
-									.alertMessage("GeoPlatform Routing",
-											"Please, insert the Start Point and End Point!");
-					}
-				});
+        this.clear = new Button("Clear", BasicWidgetResources.ICONS.erase(),
+                new SelectionListener<ButtonEvent>() {
 
-		buttonPanel.add(this.traceRoute);
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        // TODO Auto-generated method stub
+                        startPoint.clearStatus();
+                        finalPoint.clearStatus();
+                        gridWidget.cleanUpTheStore();
+                    }
+                });
 
-		this.clear = new Button("Clear", BasicWidgetResources.ICONS.erase(),
-				new SelectionListener<ButtonEvent>() {
+        buttonPanel.add(this.clear);
 
-					@Override
-					public void componentSelected(ButtonEvent ce) {
-						// TODO Auto-generated method stub
-						startPoint.clearStatus();
-						finalPoint.clearStatus();
-						gridWidget.cleanUpTheStore();
-					}
-				});
+        fieldSet.add(buttonPanel, new MarginData(5, 5, 5, 145));
+    }
 
-		buttonPanel.add(this.clear);
+    /**
+     *
+     * @param start
+     * @param end
+     */
+    public void findDirections(IGeoPlatformLocation start,
+            IGeoPlatformLocation end) {
+        this.gridWidget.cleanUpTheStore();
+        this.gridWidget.maskGrid();
 
-		fieldSet.add(buttonPanel, new MarginData(5, 5, 5, 145));
-	}
+        this.controller.getRoutingService().findDirections(start.getLon(),
+                start.getLat(), end.getLon(), end.getLat(),
+                new AsyncCallback<RoutingBean>() {
 
-	/**
-	 * 
-	 * @param start
-	 * @param end
-	 */
-	public void findDirections(IGeoPlatformLocation start,
-			IGeoPlatformLocation end) {
-		this.gridWidget.cleanUpTheStore();
-		this.gridWidget.maskGrid();
+                    @Override
+                    public void onSuccess(RoutingBean result) {
+                        // TODO Auto-generated method stub
+                        if (result != null) {
+                            gridWidget.unMaskGrid();
+                            gridWidget.fillStore(result.getDirections());
+                            event.setWktLine(result.getCompleteLine());
+                            RoutingHandlerManager.fireEvent(event);
+                        }
+                    }
 
-		this.controller.getRoutingService().findDirections(start.getLon(),
-				start.getLat(), end.getLon(), end.getLat(),
-				new AsyncCallback<RoutingBean>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        // TODO Auto-generated method stub
+                        gridWidget.unMaskGrid();
+                        GeoPlatformMessage.errorMessage("GeoPlatform Routing",
+                                "An Error occured with Routing Service. Please Try Again.");
+                    }
+                });
+    }
 
-					@Override
-					public void onSuccess(RoutingBean result) {
-						// TODO Auto-generated method stub
-						if (result != null) {
-							gridWidget.unMaskGrid();
-							gridWidget.fillStore(result.getDirections());
-							event.setWktLine(result.getCompleteLine());
-							RoutingHandlerManager.fireEvent(event);
-						}
-					}
+    /**
+     * @return the fieldSet
+     */
+    public FieldSet getFieldSet() {
+        return fieldSet;
+    }
 
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						gridWidget.unMaskGrid();
-						GeoPlatformMessage
-								.errorMessage("GeoPlatform Routing",
-										"An Error occured with Routing Service. Please Try Again.");
-					}
-				});
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.puregwt.routing.HasCleanEvent#addCleanEventHandler
+     * ()
+     */
+    @Override
+    public void addCleanEventHandler(CleanComboEventHandler handler,
+            Object source) {
+        // TODO Auto-generated method stub
+        RoutingHandlerManager.addHandlerToSource(CleanComboEventHandler.TYPE,
+                source, handler);
+    }
 
-	/**
-	 * @return the fieldSet
-	 */
-	public FieldSet getFieldSet() {
-		return fieldSet;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.puregwt.routing.HasCleanEvent#addCleanEventHandler
-	 * ()
-	 */
-	@Override
-	public void addCleanEventHandler(CleanComboEventHandler handler,
-			Object source) {
-		// TODO Auto-generated method stub
-		RoutingHandlerManager.addHandlerToSource(CleanComboEventHandler.TYPE,
-				source, handler);
-	}
-
-	/**
-	 * @param gridWidget
-	 *            the gridWidget to set
-	 */
-	public void setGridWidget(RoutingGridWidget gridWidget) {
-		this.gridWidget = gridWidget;
-	}
+    /**
+     * @param gridWidget
+     *            the gridWidget to set
+     */
+    public void setGridWidget(RoutingGridWidget gridWidget) {
+        this.gridWidget = gridWidget;
+    }
 }

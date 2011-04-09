@@ -44,8 +44,7 @@ import java.util.List;
  */
 public interface GPRasterBean extends GPLayerBean {
 
-	public List<String> getStyles();
+    public List<String> getStyles();
 
-	public void setStyles(List<String> styles);
-
+    public void setStyles(List<String> styles);
 }

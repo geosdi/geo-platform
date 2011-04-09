@@ -51,61 +51,66 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
  */
 public class ReverseGeocodingAction extends MapToggleAction {
 
-	public ReverseGeocodingAction(GeoPlatformMap theMapWidget) {
-		super("Reverse Geocoding", GeocodingResources.ICONS.reverseGeocoding(),
-				theMapWidget);
-		// TODO Auto-generated constructor stub
-	}
+    public ReverseGeocodingAction(GeoPlatformMap theMapWidget) {
+        super("Reverse Geocoding", GeocodingResources.ICONS.reverseGeocoding(),
+                theMapWidget);
+        // TODO Auto-generated constructor stub
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.extjs.gxt.ui.client.event.SelectionListenercomponentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		ToggleButton button = (ToggleButton) ce.getSource();
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.extjs.gxt.ui.client.event.SelectionListenercomponentSelected(com
+     * .extjs.gxt.ui.client.event.ComponentEvent)
+     */
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        // TODO Auto-generated method stub
+        ToggleButton button = (ToggleButton) ce.getSource();
 
-		super.changeButtonState();
+        super.changeButtonState();
 
-		this.deactivateAllMapControl();
+        this.deactivateAllMapControl();
 
-		if (button.isPressed()) {
-			mapWidget.getButtonBar().setPressedButton(button);
-		} else
-			mapWidget.getButtonBar().setPressedButton(null);
+        if (button.isPressed()) {
+            mapWidget.getButtonBar().setPressedButton(button);
+        } else {
+            mapWidget.getButtonBar().setPressedButton(null);
+        }
 
-		GPHandlerManager
-				.fireEvent(new ReverseGeocodingEvent(button.isPressed()));
-	}
+        GPHandlerManager.fireEvent(new ReverseGeocodingEvent(button.isPressed()));
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
-	 */
-	@Override
-	public void disableControl() {
-		// TODO Auto-generated method stub
-		GPHandlerManager.fireEvent(new ReverseGeocodingEvent(false));
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
+     */
+    @Override
+    public void disableControl() {
+        // TODO Auto-generated method stub
+        GPHandlerManager.fireEvent(new ReverseGeocodingEvent(false));
+    }
 
-	private void deactivateAllMapControl() {
-		if (mapWidget.isFeatureOperationEnable())
-			mapWidget.deactivateFeatureOperation();
+    private void deactivateAllMapControl() {
+        if (mapWidget.isFeatureOperationEnable()) {
+            mapWidget.deactivateFeatureOperation();
+        }
 
-		if (mapWidget.isModifyFeatureEnable())
-			mapWidget.deactivateModifyFeature();
-		
-		if(mapWidget.isInfoActive())
-			mapWidget.deactivateInfo();
-		
-		if(mapWidget.isMeasureActive())
-			mapWidget.deactivateMeasure();
-		
-		if(mapWidget.isMeasureAreaActive())
-			mapWidget.deactivateMeasureArea();
-	}
+        if (mapWidget.isModifyFeatureEnable()) {
+            mapWidget.deactivateModifyFeature();
+        }
+
+        if (mapWidget.isInfoActive()) {
+            mapWidget.deactivateInfo();
+        }
+
+        if (mapWidget.isMeasureActive()) {
+            mapWidget.deactivateMeasure();
+        }
+
+        if (mapWidget.isMeasureAreaActive()) {
+            mapWidget.deactivateMeasureArea();
+        }
+    }
 }

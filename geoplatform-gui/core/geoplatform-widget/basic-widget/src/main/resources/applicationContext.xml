@@ -7,24 +7,24 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 	default-autowire="byName">
 
-	<context:annotation-config />
+    <context:annotation-config />
 	
-	<bean name="geoPlatform"
+    <bean name="geoPlatform"
 		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory">
-		<property name="text" value="GEO-Platforn" />
-		<property name="enabled" value="true" />
-		<property name="order" value="10" />
-		<property name="tools">
-			<list>
-				<bean name="aboutGeoPlatform"
+        <property name="text" value="GEO-Platforn" />
+        <property name="enabled" value="true" />
+        <property name="order" value="10" />
+        <property name="tools">
+            <list>
+                <bean name="aboutGeoPlatform"
 					class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
-					<property name="id" value="aboutGeoPlatform" />
-					<property name="text" value="About" />
-					<property name="enabled" value="true" />
-					<property name="order" value="10" />
-				</bean>
-			</list>
-		</property>
-	</bean>
+                    <property name="id" value="aboutGeoPlatform" />
+                    <property name="text" value="About" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="10" />
+                </bean>
+            </list>
+        </property>
+    </bean>
 
 </beans>

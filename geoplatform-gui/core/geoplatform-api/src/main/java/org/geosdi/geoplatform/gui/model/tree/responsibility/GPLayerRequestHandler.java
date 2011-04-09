@@ -44,26 +44,26 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
  */
 public abstract class GPLayerRequestHandler {
 
-	private GPLayerRequestHandler successor;
+    private GPLayerRequestHandler successor;
 
-	/**
-	 * @param theSuccessor
-	 *            the successor to set
-	 */
-	public void setSuccessor(GPLayerRequestHandler theSuccessor) {
-		this.successor = theSuccessor;
-	}
+    /**
+     * @param theSuccessor
+     *            the successor to set
+     */
+    public void setSuccessor(GPLayerRequestHandler theSuccessor) {
+        this.successor = theSuccessor;
+    }
 
-	public void layerRequest(GPLayerBean layer) {
-		forwardLayerRequest(layer);
-	}
+    public void layerRequest(GPLayerBean layer) {
+        forwardLayerRequest(layer);
+    }
 
-	protected void forwardLayerRequest(GPLayerBean layer)
-			throws GPLayerRequestHandlerException {
-		if (successor != null)
-			successor.layerRequest(layer);
-		else
-			throw new GPLayerRequestHandlerException();
-	}
-
+    protected void forwardLayerRequest(GPLayerBean layer)
+            throws GPLayerRequestHandlerException {
+        if (successor != null) {
+            successor.layerRequest(layer);
+        } else {
+            throw new GPLayerRequestHandlerException();
+        }
+    }
 }

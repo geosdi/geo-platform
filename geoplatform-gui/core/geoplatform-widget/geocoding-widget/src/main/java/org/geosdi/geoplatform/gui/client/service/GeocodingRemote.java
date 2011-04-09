@@ -51,39 +51,38 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("GeocodingRemote")
 public interface GeocodingRemote extends RemoteService {
 
-	public static class Util {
-		private static GeocodingRemoteAsync instance;
+    public static class Util {
 
-		public static GeocodingRemoteAsync getInstance() {
-			if (instance == null) {
-				instance = (GeocodingRemoteAsync) GWT
-						.create(GeocodingRemote.class);
-				// ServiceDefTarget target = (ServiceDefTarget) instance;
-				// target.setServiceEntryPoint(GWT.getModuleBaseURL()
-				// + "GeocodingRemote");
-			}
-			return instance;
-		}
-	}
+        private static GeocodingRemoteAsync instance;
 
-	/**
-	 * @param search
-	 *            String to search
-	 * @return ArrayList<GeocodingBean>
-	 * @throws GeoPlatformException
-	 */
-	public ArrayList<GeocodingBean> findLocations(String search)
-			throws GeoPlatformException;
+        public static GeocodingRemoteAsync getInstance() {
+            if (instance == null) {
+                instance = (GeocodingRemoteAsync) GWT.create(GeocodingRemote.class);
+                // ServiceDefTarget target = (ServiceDefTarget) instance;
+                // target.setServiceEntryPoint(GWT.getModuleBaseURL()
+                // + "GeocodingRemote");
+            }
+            return instance;
+        }
+    }
 
-	/**
-	 * 
-	 * @param Coordinates
-	 *            of the Point
-	 * 
-	 * @return GeocodingBean
-	 * @throws GeoPlatformException
-	 */
-	public GeocodingBean findLocation(double lat, double lon)
-			throws GeoPlatformException;
+    /**
+     * @param search
+     *            String to search
+     * @return ArrayList<GeocodingBean>
+     * @throws GeoPlatformException
+     */
+    public ArrayList<GeocodingBean> findLocations(String search)
+            throws GeoPlatformException;
 
+    /**
+     *
+     * @param Coordinates
+     *            of the Point
+     *
+     * @return GeocodingBean
+     * @throws GeoPlatformException
+     */
+    public GeocodingBean findLocation(double lat, double lon)
+            throws GeoPlatformException;
 }

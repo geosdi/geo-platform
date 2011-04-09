@@ -42,13 +42,12 @@ package org.geosdi.geoplatform.gui.model.tree.responsibility;
  */
 public class GPLayerRequestHandlerException extends RuntimeException {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6035514157416919602L;
-	
-	public GPLayerRequestHandlerException() {
-		super("No handler found to forward the request.");
-	}
+    /**
+     *
+     */
+    private static final long serialVersionUID = 6035514157416919602L;
 
+    public GPLayerRequestHandlerException() {
+        super("No handler found to forward the request.");
+    }
 }

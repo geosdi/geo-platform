@@ -48,7 +48,8 @@ import com.google.gwt.user.client.ui.Image;
  */
 public class GPLegendWidget {
 
-    protected static final String GET_LEGEND_REQUEST = "?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=";
+    protected static final String GET_LEGEND_REQUEST = "?REQUEST=GetLegendGraphic"
+            + "&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=";
     protected ContentPanel legendsStore;
 
     /**
@@ -72,10 +73,12 @@ public class GPLegendWidget {
 
         Image image = new Image(
                 layerBean instanceof GPRasterBean ? layerBean.getDataSource()
-                + GET_LEGEND_REQUEST + layerBean.getLabel() : layerBean.getDataSource().replaceAll("wfs", "wms")
+                + GET_LEGEND_REQUEST + layerBean.getLabel()
+                : layerBean.getDataSource().replaceAll("wfs", "wms")
                 + GET_LEGEND_REQUEST + layerBean.getLabel());
 
         cp.add(image);
+
         this.legendsStore.add(cp);
         this.legendsStore.layout();
     }

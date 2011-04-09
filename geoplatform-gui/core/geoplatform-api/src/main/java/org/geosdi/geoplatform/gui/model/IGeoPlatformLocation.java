@@ -41,12 +41,11 @@ package org.geosdi.geoplatform.gui.model;
  */
 public interface IGeoPlatformLocation {
 
-	public double getLon();
+    public double getLon();
 
-	public void setLon(double lon);
+    public void setLon(double lon);
 
-	public double getLat();
+    public double getLat();
 
-	public void setLat(double lat);
-
+    public void setLat(double lat);
 }

@@ -54,103 +54,100 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public class GeocodingController extends GeoPlatformController {
 
-	private GeocodingRemoteAsync geocodingService = GeocodingRemote.Util
-			.getInstance();
+    private GeocodingRemoteAsync geocodingService = GeocodingRemote.Util.getInstance();
 
-	public GeocodingController() {
-		registerEventTypes(GeocodingEvents.INIT_GEOCODING_WIDGET,
-				GeocodingEvents.SHOW_GEOCODING_WIDGET,
-				GeocodingEvents.BEGIN_GEOCODING_SEARCH,
-				GeocodingEvents.HIDE_GEOCODING_WIDGET);
-	}
+    public GeocodingController() {
+        registerEventTypes(GeocodingEvents.INIT_GEOCODING_WIDGET,
+                GeocodingEvents.SHOW_GEOCODING_WIDGET,
+                GeocodingEvents.BEGIN_GEOCODING_SEARCH,
+                GeocodingEvents.HIDE_GEOCODING_WIDGET);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.extjs.gxt.ui.client.mvc.Controller#initialize()
-	 */
-	@Override
-	protected void initialize() {
-		// TODO Auto-generated method stub
-		this.view = new GeocodingView(this);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.extjs.gxt.ui.client.mvc.Controller#initialize()
+     */
+    @Override
+    protected void initialize() {
+        // TODO Auto-generated method stub
+        this.view = new GeocodingView(this);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#
-	 * handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
-	 */
-	@Override
-	public void handleEvent(AppEvent event) {
-		// TODO Auto-generated method stub
-		if (event.getType() == GeocodingEvents.BEGIN_GEOCODING_SEARCH)
-			onBeginGeocodingSearch(event);
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#
+     * handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
+     */
+    @Override
+    public void handleEvent(AppEvent event) {
+        // TODO Auto-generated method stub
+        if (event.getType() == GeocodingEvents.BEGIN_GEOCODING_SEARCH) {
+            onBeginGeocodingSearch(event);
+        }
 
-		super.handleEvent(event);
-	}
+        super.handleEvent(event);
+    }
 
-	/**
-	 * Invoke Geocoding Servcice for Geo-Location
-	 * 
-	 * @param event
-	 */
-	private void onBeginGeocodingSearch(AppEvent event) {
-		// TODO Auto-generated method stub
-		checkWidgetStatus();
-		findLocations((String) event.getData());
-	}
+    /**
+     * Invoke Geocoding Servcice for Geo-Location
+     *
+     * @param event
+     */
+    private void onBeginGeocodingSearch(AppEvent event) {
+        // TODO Auto-generated method stub
+        checkWidgetStatus();
+        findLocations((String) event.getData());
+    }
 
-	/**
-	 * 
-	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void checkWidgetStatus() {
-		// TODO Auto-generated method stub
-		GeoPlatformMessage
-				.checkGridWidgetStatus(
-						(IGeoPlatformGrid) ((GeocodingView) this.view)
-								.getGeocodingManagement()
-								.getGeocodingGridWidget(),
-						"Geocoding - Service",
-						"Geocoding Service is demanding too much time, probably the connection problem, do you want to stop it?");
-	}
+    /**
+     *
+     */
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private void checkWidgetStatus() {
+        // TODO Auto-generated method stub
+        GeoPlatformMessage.checkGridWidgetStatus(
+                (IGeoPlatformGrid) ((GeocodingView) this.view).getGeocodingManagement().getGeocodingGridWidget(),
+                "Geocoding - Service",
+                "Geocoding Service is demanding too much time, probably the connection problem, do you want to stop it?");
+    }
 
-	/**
-	 * 
-	 * @param location
-	 *            to find
-	 */
-	public void findLocations(String location) {
-		((GeocodingView) view).maskGeocodingGrid();
-		((GeocodingView) view).cleanStore();
-		this.geocodingService.findLocations(location,
-				new AsyncCallback<ArrayList<GeocodingBean>>() {
+    /**
+     *
+     * @param location
+     *            to find
+     */
+    public void findLocations(String location) {
+        ((GeocodingView) view).maskGeocodingGrid();
+        ((GeocodingView) view).cleanStore();
+        this.geocodingService.findLocations(location,
+                new AsyncCallback<ArrayList<GeocodingBean>>() {
 
-					@Override
-					public void onSuccess(ArrayList<GeocodingBean> result) {
-						// TODO Auto-generated method stub
-						ArrayList<GeocodingBean> beans = (ArrayList<GeocodingBean>) result;
-						((GeocodingView) view).unMaskGeocodingGrid();
-						if (result != null && result.size() > 0) {
-							((GeocodingView) view).fillStore(beans);
-						} else
-							GeoPlatformMessage.alertMessage(
-									"Geocoding - Service",
-									"There are no results for your search.");
+                    @Override
+                    public void onSuccess(ArrayList<GeocodingBean> result) {
+                        // TODO Auto-generated method stub
+                        ArrayList<GeocodingBean> beans = (ArrayList<GeocodingBean>) result;
+                        ((GeocodingView) view).unMaskGeocodingGrid();
+                        if (result != null && result.size() > 0) {
+                            ((GeocodingView) view).fillStore(beans);
+                        } else {
+                            GeoPlatformMessage.alertMessage(
+                                    "Geocoding - Service",
+                                    "There are no results for your search.");
+                        }
 
-					}
+                    }
 
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						((GeocodingView) view).unMaskGeocodingGrid();
-						((GeocodingView) view).getGrid().getView()
-								.refresh(false);
-						GeoPlatformMessage.errorMessage("Geocoding - Service",
-								"There is a problem with Geocoding Service");
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        // TODO Auto-generated method stub
+                        ((GeocodingView) view).unMaskGeocodingGrid();
+                        ((GeocodingView) view).getGrid().getView().refresh(false);
+                        GeoPlatformMessage.errorMessage("Geocoding - Service",
+                                "There is a problem with Geocoding Service");
 
-					}
-				});
-	}
+                    }
+                });
+    }
 }

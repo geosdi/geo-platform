@@ -48,14 +48,13 @@ import javax.xml.xpath.XPathFactory;
  */
 public abstract class GPGeocodingService {
 
-	protected URL url;
-	protected HttpURLConnection conn;
-	protected XPath xpath;
+    protected URL url;
+    protected HttpURLConnection conn;
+    protected XPath xpath;
 
-	@PostConstruct
-	public void init() {
-		// prepare XPath
-		xpath = XPathFactory.newInstance().newXPath();
-	}
-
+    @PostConstruct
+    public void init() {
+        // prepare XPath
+        xpath = XPathFactory.newInstance().newXPath();
+    }
 }

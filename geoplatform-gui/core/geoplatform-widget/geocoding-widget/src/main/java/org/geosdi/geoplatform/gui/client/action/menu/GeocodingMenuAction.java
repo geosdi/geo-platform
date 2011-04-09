@@ -49,28 +49,27 @@ import com.extjs.gxt.ui.client.widget.menu.Menu;
  */
 public class GeocodingMenuAction extends MenuAction {
 
-	public GeocodingMenuAction() {
-		super("Geocoding");
-		// TODO Auto-generated constructor stub
-	}
+    public GeocodingMenuAction() {
+        super("Geocoding");
+        // TODO Auto-generated constructor stub
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
-	@Override
-	public void componentSelected(MenuEvent ce) {
-		// TODO Auto-generated method stub
-		CheckMenuItem item = (CheckMenuItem) ((Menu) ce.getSource())
-				.getItemByItemId(super.getId());
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+     * .extjs.gxt.ui.client.event.ComponentEvent)
+     */
+    @Override
+    public void componentSelected(MenuEvent ce) {
+        // TODO Auto-generated method stub
+        CheckMenuItem item = (CheckMenuItem) ((Menu) ce.getSource()).getItemByItemId(super.getId());
 
-		if (item.isChecked())
-			Dispatcher.forwardEvent(GeocodingEvents.SHOW_GEOCODING_WIDGET);
-		else
-			Dispatcher.forwardEvent(GeocodingEvents.HIDE_GEOCODING_WIDGET);
-	}
-
+        if (item.isChecked()) {
+            Dispatcher.forwardEvent(GeocodingEvents.SHOW_GEOCODING_WIDGET);
+        } else {
+            Dispatcher.forwardEvent(GeocodingEvents.HIDE_GEOCODING_WIDGET);
+        }
+    }
 }

@@ -43,5 +43,5 @@ import com.google.gwt.event.shared.EventHandler;
  */
 public interface ZoomNextEventHandler extends EventHandler {
 
-	void onActivation(boolean activate);
+    void onActivation(boolean activate);
 }

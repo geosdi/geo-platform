@@ -42,17 +42,17 @@ import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
 import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
 
 /**
- * @author giuseppe
- * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  */
 public interface IGeoPlatformGlobal extends Serializable {
-	
-	public GeoPlatformInfo getGeoPlatformInfo();
 
-	public IToolbarClientTool getToolbarClientTool();
-	
-	public IMenuBarContainerTool getMenuBarContainerTool();
-	
-	public FolderStore getFolderStore();
+    public GeoPlatformInfo getGeoPlatformInfo();
 
+    public IToolbarClientTool getToolbarClientTool();
+
+    public IMenuBarContainerTool getMenuBarContainerTool();
+
+    public FolderStore getFolderStore();
 }

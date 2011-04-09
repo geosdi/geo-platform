@@ -45,8 +45,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public interface CleanComboEventHandler extends EventHandler {
 
-	Type<CleanComboEventHandler> TYPE = new Type<CleanComboEventHandler>();
+    Type<CleanComboEventHandler> TYPE = new Type<CleanComboEventHandler>();
 
-	public void clearStatus();
-
+    public void clearStatus();
 }

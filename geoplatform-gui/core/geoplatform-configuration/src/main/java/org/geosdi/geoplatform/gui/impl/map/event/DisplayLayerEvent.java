@@ -46,29 +46,28 @@ import com.google.gwt.event.shared.GwtEvent;
  */
 public class DisplayLayerEvent extends GwtEvent<LayerChangedHandler> {
 
-	private GPLayerBean layerBean;
+    private GPLayerBean layerBean;
 
-	public DisplayLayerEvent(GPLayerBean theLayerBean) {
-		this.layerBean = theLayerBean;
-	}
+    public DisplayLayerEvent(GPLayerBean theLayerBean) {
+        this.layerBean = theLayerBean;
+    }
 
-	/**
-	 * @return the layerBean
-	 */
-	public GPLayerBean getLayerBean() {
-		return layerBean;
-	}
+    /**
+     * @return the layerBean
+     */
+    public GPLayerBean getLayerBean() {
+        return layerBean;
+    }
 
-	@Override
-	public Type<LayerChangedHandler> getAssociatedType() {
-		// TODO Auto-generated method stub
-		return LayerChangedHandler.TYPE;
-	}
+    @Override
+    public Type<LayerChangedHandler> getAssociatedType() {
+        // TODO Auto-generated method stub
+        return LayerChangedHandler.TYPE;
+    }
 
-	@Override
-	protected void dispatch(LayerChangedHandler handler) {
-		// TODO Auto-generated method stub
-		handler.onDisplayLayer(this.layerBean);
-	}
-
+    @Override
+    protected void dispatch(LayerChangedHandler handler) {
+        // TODO Auto-generated method stub
+        handler.onDisplayLayer(this.layerBean);
+    }
 }

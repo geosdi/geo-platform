@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 import java.io.Serializable;
 
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
-import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

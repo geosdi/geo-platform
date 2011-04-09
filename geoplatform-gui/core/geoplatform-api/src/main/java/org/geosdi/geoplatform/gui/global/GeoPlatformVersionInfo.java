@@ -43,52 +43,51 @@ import java.io.Serializable;
  */
 public class GeoPlatformVersionInfo implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7280821322784906035L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -7280821322784906035L;
+    private String name;
+    private String version;
 
-	private String name;
-	private String version;
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * @param name
+     *            the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @return the version
+     */
+    public String getVersion() {
+        return version;
+    }
 
-	/**
-	 * @return the version
-	 */
-	public String getVersion() {
-		return version;
-	}
+    /**
+     * @param version
+     *            the version to set
+     */
+    public void setVersion(String version) {
+        this.version = version;
+    }
 
-	/**
-	 * @param version
-	 *            the version to set
-	 */
-	public void setVersion(String version) {
-		this.version = version;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "GeoPlatformVersionInfo [name=" + name + ", version=" + version
-				+ "]";
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "GeoPlatformVersionInfo [name=" + name + ", version=" + version
+                + "]";
+    }
 }

@@ -47,47 +47,48 @@ import com.extjs.gxt.ui.client.widget.Window;
  */
 public class LegendWindow extends Window {
 
-	private GPLegendWidget legendWidget;
+    private GPLegendWidget legendWidget;
 
-	/**
-	 * 
-	 */
-	public LegendWindow() {
-		setMaximizable(false);
-		setCollapsible(true);
-		setHeading("Legend Window");
-		setHeight(300);
-		setWidth(200);
-		setScrollMode(Scroll.AUTOY);
-		setPosition(20, 450);
+    /**
+     *
+     */
+    public LegendWindow() {
+        setMaximizable(false);
+        setCollapsible(true);
+        setHeading("Legend Window");
+        setHeight(300);
+        setWidth(200);
+        setScrollMode(Scroll.AUTOY);
+        setPosition(20, 450);
 
-		this.legendWidget = new GPLegendWidget();
+        this.legendWidget = new GPLegendWidget();
 
-		super.add(this.legendWidget.getLegendsStore());
-	}
+        super.add(this.legendWidget.getLegendsStore());
+    }
 
-	/**
-	 * Add Legend Item in the Legend Store
-	 * 
-	 * @param layerBean
-	 */
-	public void addLegend(GPLayerBean layerBean) {
-		this.legendWidget.addLegend(layerBean);
+    /**
+     * Add Legend Item in the Legend Store
+     *
+     * @param layerBean
+     */
+    public void addLegend(GPLayerBean layerBean) {
+        this.legendWidget.addLegend(layerBean);
 
-		if (!isVisible()) {
-			super.show();
-		}
-	}
+        if (!isVisible()) {
+            super.show();
+        }
+    }
 
-	/**
-	 * Remove Legend Item from Legend Store
-	 * 
-	 * @param layerBean
-	 */
-	public void hideLegenItem(GPLayerBean layerBean) {
-		this.legendWidget.hideLegenItem(layerBean);
-		
-		if (this.legendWidget.getLegendsStore().getItemCount() == 0)
-			super.hide();
-	}
+    /**
+     * Remove Legend Item from Legend Store
+     *
+     * @param layerBean
+     */
+    public void hideLegenItem(GPLayerBean layerBean) {
+        this.legendWidget.hideLegenItem(layerBean);
+
+        if (this.legendWidget.getLegendsStore().getItemCount() == 0) {
+            super.hide();
+        }
+    }
 }

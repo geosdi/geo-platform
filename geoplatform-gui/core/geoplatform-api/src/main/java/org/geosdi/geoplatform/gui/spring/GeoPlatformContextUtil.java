@@ -45,47 +45,47 @@ import org.springframework.context.ApplicationContext;
  */
 public class GeoPlatformContextUtil {
 
-	private static GeoPlatformContextUtil INSTANCE;
-	private ApplicationContext springContext;
+    private static GeoPlatformContextUtil INSTANCE;
+    private ApplicationContext springContext;
 
-	public static synchronized GeoPlatformContextUtil getInstance() {
-		if (INSTANCE == null)
-			INSTANCE = new GeoPlatformContextUtil();
-		return INSTANCE;
-	}
+    public static synchronized GeoPlatformContextUtil getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new GeoPlatformContextUtil();
+        }
+        return INSTANCE;
+    }
 
-	public Object getBean(String beanName) {
-		return springContext.getBean(beanName);
-	}
+    public Object getBean(String beanName) {
+        return springContext.getBean(beanName);
+    }
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public Object getBean(Class type) {
-		return springContext.getBean(type);
-	}
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public Object getBean(Class type) {
+        return springContext.getBean(type);
+    }
 
-	/**
-	 * Return the bean instances that match the given object type (including
-	 * subclasses).
-	 */
-	public Map<String, ?> getBeansOfType(Class<?> type,
-			boolean includeNonSingletons, boolean allowEagerInit) {
-		return springContext.getBeansOfType(type, includeNonSingletons,
-				allowEagerInit);
-	}
+    /**
+     * Return the bean instances that match the given object type (including
+     * subclasses).
+     */
+    public Map<String, ?> getBeansOfType(Class<?> type,
+            boolean includeNonSingletons, boolean allowEagerInit) {
+        return springContext.getBeansOfType(type, includeNonSingletons,
+                allowEagerInit);
+    }
 
-	/**
-	 * @return the springContext
-	 */
-	public ApplicationContext getSpringContext() {
-		return springContext;
-	}
+    /**
+     * @return the springContext
+     */
+    public ApplicationContext getSpringContext() {
+        return springContext;
+    }
 
-	/**
-	 * @param springContext
-	 *            the springContext to set
-	 */
-	public void setSpringContext(ApplicationContext springContext) {
-		this.springContext = springContext;
-	}
-
+    /**
+     * @param springContext
+     *            the springContext to set
+     */
+    public void setSpringContext(ApplicationContext springContext) {
+        this.springContext = springContext;
+    }
 }

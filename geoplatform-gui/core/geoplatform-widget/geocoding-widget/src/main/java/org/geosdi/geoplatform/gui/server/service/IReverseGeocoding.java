@@ -49,20 +49,19 @@ import org.xml.sax.SAXException;
  */
 public interface IReverseGeocoding {
 
-	/**
-	 * 
-	 * @param lat
-	 * @param lon
-	 * @return
-	 * 		   GeocodingBean			
-	 * 
-	 * @throws IOException
-	 * @throws SAXException
-	 * @throws ParserConfigurationException
-	 * @throws XPathExpressionException
-	 */
-	public GeocodingBean findLocation(double lat, double lon)
-			throws IOException, SAXException, ParserConfigurationException,
-			XPathExpressionException;
-
+    /**
+     *
+     * @param lat
+     * @param lon
+     * @return
+     * 		   GeocodingBean
+     *
+     * @throws IOException
+     * @throws SAXException
+     * @throws ParserConfigurationException
+     * @throws XPathExpressionException
+     */
+    public GeocodingBean findLocation(double lat, double lon)
+            throws IOException, SAXException, ParserConfigurationException,
+            XPathExpressionException;
 }

@@ -45,6 +45,5 @@ import com.extjs.gxt.ui.client.widget.grid.Grid;
  */
 public interface IGeoPlatformGrid<T extends GeoPlatformBeanModel> {
 
-	public Grid<T> getGrid();
-
+    public Grid<T> getGrid();
 }

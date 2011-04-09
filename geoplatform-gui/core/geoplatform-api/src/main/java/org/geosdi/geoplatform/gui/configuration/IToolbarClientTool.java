@@ -44,8 +44,7 @@ import java.util.List;
  */
 public interface IToolbarClientTool extends Serializable {
 
-	public List<GenericClientTool> getClientTools();
+    public List<GenericClientTool> getClientTools();
 
-	public void setClientTools(List<GenericClientTool> clientTools);
-
+    public void setClientTools(List<GenericClientTool> clientTools);
 }

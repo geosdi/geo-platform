@@ -44,86 +44,84 @@ import java.io.Serializable;
  */
 public class BboxClientInfo implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6733851739584878237L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -6733851739584878237L;
+    private double lowerLeftX;
+    private double lowerLeftY;
+    private double upperRightX;
+    private double upperRightY;
 
-	private double lowerLeftX;
-	private double lowerLeftY;
-	private double upperRightX;
-	private double upperRightY;
+    /**
+     * @return the lowerLeftX
+     */
+    public double getLowerLeftX() {
+        return lowerLeftX;
+    }
 
-	/**
-	 * @return the lowerLeftX
-	 */
-	public double getLowerLeftX() {
-		return lowerLeftX;
-	}
+    /**
+     * @param lowerLeftX
+     *            the lowerLeftX to set
+     */
+    public void setLowerLeftX(double lowerLeftX) {
+        this.lowerLeftX = lowerLeftX;
+    }
 
-	/**
-	 * @param lowerLeftX
-	 *            the lowerLeftX to set
-	 */
-	public void setLowerLeftX(double lowerLeftX) {
-		this.lowerLeftX = lowerLeftX;
-	}
+    /**
+     * @return the lowerLeftY
+     */
+    public double getLowerLeftY() {
+        return lowerLeftY;
+    }
 
-	/**
-	 * @return the lowerLeftY
-	 */
-	public double getLowerLeftY() {
-		return lowerLeftY;
-	}
+    /**
+     * @param lowerLeftY
+     *            the lowerLeftY to set
+     */
+    public void setLowerLeftY(double lowerLeftY) {
+        this.lowerLeftY = lowerLeftY;
+    }
 
-	/**
-	 * @param lowerLeftY
-	 *            the lowerLeftY to set
-	 */
-	public void setLowerLeftY(double lowerLeftY) {
-		this.lowerLeftY = lowerLeftY;
-	}
+    /**
+     * @return the upperRightX
+     */
+    public double getUpperRightX() {
+        return upperRightX;
+    }
 
-	/**
-	 * @return the upperRightX
-	 */
-	public double getUpperRightX() {
-		return upperRightX;
-	}
+    /**
+     * @param upperRightX
+     *            the upperRightX to set
+     */
+    public void setUpperRightX(double upperRightX) {
+        this.upperRightX = upperRightX;
+    }
 
-	/**
-	 * @param upperRightX
-	 *            the upperRightX to set
-	 */
-	public void setUpperRightX(double upperRightX) {
-		this.upperRightX = upperRightX;
-	}
+    /**
+     * @return the upperRightY
+     */
+    public double getUpperRightY() {
+        return upperRightY;
+    }
 
-	/**
-	 * @return the upperRightY
-	 */
-	public double getUpperRightY() {
-		return upperRightY;
-	}
+    /**
+     * @param upperRightY
+     *            the upperRightY to set
+     */
+    public void setUpperRightY(double upperRightY) {
+        this.upperRightY = upperRightY;
+    }
 
-	/**
-	 * @param upperRightY
-	 *            the upperRightY to set
-	 */
-	public void setUpperRightY(double upperRightY) {
-		this.upperRightY = upperRightY;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "BboxClientInfo [lowerLeftX=" + lowerLeftX + ", lowerLeftY="
-				+ lowerLeftY + ", upperRightX=" + upperRightX
-				+ ", upperRightY=" + upperRightY + "]";
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "BboxClientInfo [lowerLeftX=" + lowerLeftX + ", lowerLeftY="
+                + lowerLeftY + ", upperRightX=" + upperRightX
+                + ", upperRightY=" + upperRightY + "]";
+    }
 }

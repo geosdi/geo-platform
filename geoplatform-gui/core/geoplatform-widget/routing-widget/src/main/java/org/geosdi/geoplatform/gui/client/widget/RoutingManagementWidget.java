@@ -53,59 +53,59 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
  */
 public class RoutingManagementWidget extends ContentPanel {
 
-	private FormPanel formPanel;
+    private FormPanel formPanel;
+    private RoutingSearchWidget pointsWidget;
+    private RoutingGridWidget routingGridWidget;
 
-	private RoutingSearchWidget pointsWidget;
-	private RoutingGridWidget routingGridWidget;
+    /**
+     *
+     * @param controller
+     */
+    public RoutingManagementWidget(RoutingController controller) {
+        setHeading("Routing Widget");
+        setLayout(new FitLayout());
 
-	/**
-	 * 
-	 * @param controller
-	 */
-	public RoutingManagementWidget(RoutingController controller) {
-		setHeading("Routing Widget");
-		setLayout(new FitLayout());
+        this.initWidget(controller);
 
-		this.initWidget(controller);
+        addWidgetListener(new WidgetListener() {
 
-		addWidgetListener(new WidgetListener() {
-			@Override
-			public void widgetResized(ComponentEvent ce) {
-				if (getHeight() > 0)
-					routingGridWidget.getGrid().setHeight(getHeight() - 260);
+            @Override
+            public void widgetResized(ComponentEvent ce) {
+                if (getHeight() > 0) {
+                    routingGridWidget.getGrid().setHeight(getHeight() - 260);
+                }
 
-			}
-		});
+            }
+        });
 
-		add(this.formPanel);
+        add(this.formPanel);
 
-		setScrollMode(Scroll.AUTOY);
-	}
+        setScrollMode(Scroll.AUTOY);
+    }
 
-	private void initWidget(RoutingController controller) {
-		formPanel = new FormPanel();
-		formPanel.setHeaderVisible(false);
-		formPanel.setFrame(true);
-		formPanel.setLayout(new FlowLayout());
+    private void initWidget(RoutingController controller) {
+        formPanel = new FormPanel();
+        formPanel.setHeaderVisible(false);
+        formPanel.setFrame(true);
+        formPanel.setLayout(new FlowLayout());
 
-		setLayoutOnChange(true);
+        setLayoutOnChange(true);
 
-		this.pointsWidget = new RoutingSearchWidget(controller);
+        this.pointsWidget = new RoutingSearchWidget(controller);
 
-		this.formPanel.add(this.pointsWidget.getFieldSet());
+        this.formPanel.add(this.pointsWidget.getFieldSet());
 
-		this.routingGridWidget = new RoutingGridWidget();
+        this.routingGridWidget = new RoutingGridWidget();
 
-		this.formPanel.add(this.routingGridWidget.getDirectionsField());
-		
-		this.pointsWidget.setGridWidget(routingGridWidget);
-	}
+        this.formPanel.add(this.routingGridWidget.getDirectionsField());
 
-	/**
-	 * @return the routingGridWidget
-	 */
-	public RoutingGridWidget getRoutingGridWidget() {
-		return routingGridWidget;
-	}
+        this.pointsWidget.setGridWidget(routingGridWidget);
+    }
 
+    /**
+     * @return the routingGridWidget
+     */
+    public RoutingGridWidget getRoutingGridWidget() {
+        return routingGridWidget;
+    }
 }

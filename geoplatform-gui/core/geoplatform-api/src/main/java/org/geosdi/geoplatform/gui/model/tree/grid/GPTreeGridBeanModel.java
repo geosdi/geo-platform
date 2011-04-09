@@ -46,62 +46,61 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public abstract class GPTreeGridBeanModel extends BaseTreeModel {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4231108213570749653L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 4231108213570749653L;
 
-	public enum GPKeyTreeGridModel {
+    public enum GPKeyTreeGridModel {
 
-		LABEL_NODE_VALUE("labelNode");
+        LABEL_NODE_VALUE("labelNode");
+        private String value;
 
-		private String value;
+        /**
+         *
+         */
+        GPKeyTreeGridModel(String theValue) {
+            // TODO Auto-generated constructor stub
+            this.value = theValue;
+        }
 
-		/**
-		 * 
-		 */
-		GPKeyTreeGridModel(String theValue) {
-			// TODO Auto-generated constructor stub
-			this.value = theValue;
-		}
+        @Override
+        public String toString() {
+            return this.value;
+        }
+    }
 
-		public String toString() {
-			return this.value;
-		}
+    
+    private String labelNode;
 
-	}
+    /**
+     * @return the labelNode
+     */
+    public String getLabelNode() {
+        return labelNode;
+    }
 
-	private String labelNode;
+    /**
+     * @param labelNode
+     *            the labelNode to set
+     */
+    public void setLabelNode(String labelNode) {
+        this.labelNode = labelNode;
+        set(GPKeyTreeGridModel.LABEL_NODE_VALUE.toString(), this.labelNode);
+    }
 
-	/**
-	 * @return the labelNode
-	 */
-	public String getLabelNode() {
-		return labelNode;
-	}
+    /**
+     * Create Generic Widget for
+     *
+     * @return Widget
+     */
+    public abstract Widget getWidget();
 
-	/**
-	 * @param labelNode
-	 *            the labelNode to set
-	 */
-	public void setLabelNode(String labelNode) {
-		this.labelNode = labelNode;
-		set(GPKeyTreeGridModel.LABEL_NODE_VALUE.toString(), this.labelNode);
-	}
-
-	/**
-	 * Create Generic Widget for 
-	 * 
-	 * @return Widget
-	 */
-	public abstract Widget getWidget();
-	
-	/**
-	 * Create Icon for each Node
-	 * 
-	 * @return AbstractImagePrototype
-	 * 
-	 */
-	public abstract AbstractImagePrototype getIcon();
-
+    /**
+     * Create Icon for each Node
+     *
+     * @return AbstractImagePrototype
+     *
+     */
+    public abstract AbstractImagePrototype getIcon();
 }

@@ -49,28 +49,27 @@ import com.extjs.gxt.ui.client.widget.menu.Menu;
  */
 public class RoutingMenuAction extends MenuAction {
 
-	public RoutingMenuAction() {
-		super("Routing");
-		// TODO Auto-generated constructor stub
-	}
+    public RoutingMenuAction() {
+        super("Routing");
+        // TODO Auto-generated constructor stub
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
-	@Override
-	public void componentSelected(MenuEvent ce) {
-		// TODO Auto-generated method stub
-		CheckMenuItem item = (CheckMenuItem) ((Menu) ce.getSource())
-				.getItemByItemId(super.getId());
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+     * .extjs.gxt.ui.client.event.ComponentEvent)
+     */
+    @Override
+    public void componentSelected(MenuEvent ce) {
+        // TODO Auto-generated method stub
+        CheckMenuItem item = (CheckMenuItem) ((Menu) ce.getSource()).getItemByItemId(super.getId());
 
-		if (item.isChecked())
-			Dispatcher.forwardEvent(RoutingEvents.SHOW_ROUTING_WIDGET);
-		else
-			Dispatcher.forwardEvent(RoutingEvents.HIDE_ROUTING_WIDGET);
-	}
-
+        if (item.isChecked()) {
+            Dispatcher.forwardEvent(RoutingEvents.SHOW_ROUTING_WIDGET);
+        } else {
+            Dispatcher.forwardEvent(RoutingEvents.HIDE_ROUTING_WIDGET);
+        }
+    }
 }

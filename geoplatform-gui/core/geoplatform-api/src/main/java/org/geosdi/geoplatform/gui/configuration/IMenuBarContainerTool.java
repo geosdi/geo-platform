@@ -45,7 +45,6 @@ import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory;
  * 
  */
 public interface IMenuBarContainerTool extends Serializable {
-	
-	public List<MenuBarCategory> getCategories();
 
+    public List<MenuBarCategory> getCategories();
 }

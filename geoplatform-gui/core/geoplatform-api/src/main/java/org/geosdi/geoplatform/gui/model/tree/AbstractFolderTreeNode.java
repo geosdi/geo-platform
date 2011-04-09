@@ -40,19 +40,18 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 public abstract class AbstractFolderTreeNode extends GPBeanTreeModel implements
-		IFolderTreeNode {
+        IFolderTreeNode {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4886440607031207404L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 4886440607031207404L;
 
-	@Override
-	public abstract AbstractImagePrototype getIcon();
+    @Override
+    public abstract AbstractImagePrototype getIcon();
 
-	@Override
-	public void accept(IVisitor visitor) {
-		visitor.visitFolder(this);
-	}
-
+    @Override
+    public void accept(IVisitor visitor) {
+        visitor.visitFolder(this);
+    }
 }

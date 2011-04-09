@@ -45,8 +45,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public interface RemoveFinalRoutingPointEventHandler extends EventHandler {
 
-	Type<RemoveFinalRoutingPointEventHandler> TYPE = new Type<RemoveFinalRoutingPointEventHandler>();
+    Type<RemoveFinalRoutingPointEventHandler> TYPE = new Type<RemoveFinalRoutingPointEventHandler>();
 
-	public void removePoint();
-
+    public void removePoint();
 }

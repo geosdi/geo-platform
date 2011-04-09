@@ -35,9 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.Style.Scroll;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.WidgetListener;
+import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -46,41 +51,75 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
  */
 public class LayerManagementWidget extends ContentPanel {
 
-	private boolean initialized;
-	private LayerTreeWidget layerTree;
+    private LayerTreeWidget layerTree;
+    private GPLegendPanel legendPanel;
+    private ContentPanel treePanel;
 
-	/**
-	 * Method to Build The Widget
-	 * 
-	 */
-	private void buildWidget() {
-		if (!initialized) {
-			this.initialized = true;
-			setHeading("Layer Widget");
-			setLayout(new FitLayout());
+    /*
+     * @Constructor
+     * 
+     */
+    public LayerManagementWidget() {
+        setHeading("GeoPlatform - Layer Widget");
+        setLayout(new BorderLayout());
 
-			this.layerTree = new LayerTreeWidget();
+        setLayoutOnChange(true);
 
-			add(this.layerTree.getTree());
+        addComponents();
 
-			setScrollMode(Scroll.AUTOY);
-		}
-	}
+        addWidgetListener(new WidgetListener() {
 
-	/**
-	 * Build Layer Widget with Spring Configuration
-	 * 
-	 */
-	public void buildTree() {
-		this.buildWidget();
-		this.layerTree.buildTree();
-	}
+            @Override
+            public void widgetResized(ComponentEvent ce) {
+                if (getHeight() > 0) 
+                    treePanel.setHeight(getHeight() - 220);
+            }
+        });
 
-	/**
-	 * @return the layerTree
-	 */
-	public LayerTreeWidget getLayerTree() {
-		return layerTree;
-	}
+        setScrollMode(Scroll.AUTO);
+    }
 
+    private void addComponents() {
+        treePanel = new ContentPanel();
+        treePanel.setScrollMode(Scroll.AUTO);
+        treePanel.setHeaderVisible(false);
+
+        this.layerTree = new LayerTreeWidget();
+
+        BorderLayoutData northData = new BorderLayoutData(LayoutRegion.NORTH);
+        northData.setMargins(new Margins(5, 5, 0, 5));
+
+        treePanel.add(this.layerTree.getTree());
+
+        super.add(treePanel, northData);
+
+        this.legendPanel = new GPLegendPanel();
+
+        BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH, 180);
+        southData.setMargins(new Margins(5, 5, 5, 5));
+
+        super.add(this.legendPanel, southData);
+    }
+
+    /**
+     * Build Layer Widget with Spring Configuration
+     *
+     */
+    public void buildTree() {
+        this.layerTree.buildTree();
+    }
+
+    /**
+     * @return the layerTree
+     */
+    public LayerTreeWidget getLayerTree() {
+        return layerTree;
+    }
+
+    /**
+     * @return the legendPanel
+     */
+    public GPLegendPanel getLegendPanel() {
+        return legendPanel;
+    }
 }

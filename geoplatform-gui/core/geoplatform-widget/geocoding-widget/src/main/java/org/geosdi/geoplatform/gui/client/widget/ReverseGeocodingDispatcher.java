@@ -51,47 +51,45 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * 
  */
 public class ReverseGeocodingDispatcher implements
-		ReverseGeocodingDispatchHandler {
+        ReverseGeocodingDispatchHandler {
 
-	private GeocodingRemoteAsync geocodingService = GeocodingRemote.Util
-			.getInstance();
+    private GeocodingRemoteAsync geocodingService = GeocodingRemote.Util.getInstance();
 
-	/**
-	 * @Construct
-	 * 
-	 */
-	public ReverseGeocodingDispatcher() {
-		GPHandlerManager.addHandler(ReverseGeocodingDispatchHandler.TYPE, this);
-	}
+    /**
+     * @Construct
+     *
+     */
+    public ReverseGeocodingDispatcher() {
+        GPHandlerManager.addHandler(ReverseGeocodingDispatchHandler.TYPE, this);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.client.widget.map.event.
-	 * ReverseGeocodingDispatchHandler
-	 * #processRequest(org.geosdi.geoplatform.gui.
-	 * client.widget.map.ReverseGeocodingWidget)
-	 */
-	@Override
-	public void processRequest(final ReverseGeocodingWidget widget) {
-		// TODO Auto-generated method stub
-		LonLat lonlat = widget.getLonlat();
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.client.widget.map.event.
+     * ReverseGeocodingDispatchHandler
+     * #processRequest(org.geosdi.geoplatform.gui.
+     * client.widget.map.ReverseGeocodingWidget)
+     */
+    @Override
+    public void processRequest(final ReverseGeocodingWidget widget) {
+        // TODO Auto-generated method stub
+        LonLat lonlat = widget.getLonlat();
 
-		this.geocodingService.findLocation(lonlat.lat(), lonlat.lon(),
-				new AsyncCallback<GeocodingBean>() {
+        this.geocodingService.findLocation(lonlat.lat(), lonlat.lon(),
+                new AsyncCallback<GeocodingBean>() {
 
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						widget.onRequestFailure("An error occurred processing the request");
-					}
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        // TODO Auto-generated method stub
+                        widget.onRequestFailure("An error occurred processing the request");
+                    }
 
-					@Override
-					public void onSuccess(GeocodingBean result) {
-						// TODO Auto-generated method stub
-						widget.onRequestSuccess(result.getDescription());
-					}
-				});
-	}
-
+                    @Override
+                    public void onSuccess(GeocodingBean result) {
+                        // TODO Auto-generated method stub
+                        widget.onRequestSuccess(result.getDescription());
+                    }
+                });
+    }
 }

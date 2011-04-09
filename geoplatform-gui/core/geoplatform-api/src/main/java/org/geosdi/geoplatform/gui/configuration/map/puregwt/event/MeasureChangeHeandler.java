@@ -43,14 +43,11 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
  *
  */
-public interface  MeasureChangeHeandler extends EventHandler{
-	
-	Type<MeasureChangeHeandler> TYPE = new Type<MeasureChangeHeandler>();
-	
-	public void onPositionChange(Size s);
-	
-	public void activationMeasure(boolean activate);
-	
-	
+public interface MeasureChangeHeandler extends EventHandler {
 
+    Type<MeasureChangeHeandler> TYPE = new Type<MeasureChangeHeandler>();
+
+    public void onPositionChange(Size s);
+
+    public void activationMeasure(boolean activate);
 }

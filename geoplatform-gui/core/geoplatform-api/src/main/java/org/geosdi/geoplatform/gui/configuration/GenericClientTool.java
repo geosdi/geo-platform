@@ -42,60 +42,58 @@ import java.io.Serializable;
  * 
  */
 public class GenericClientTool implements Serializable,
-		Comparable<GenericClientTool> {
+        Comparable<GenericClientTool> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -379951057942018866L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -379951057942018866L;
+    private String id;
+    private int order;
 
-	private String id;
-	private int order;
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
 
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
+    /**
+     * @return the order
+     */
+    public int getOrder() {
+        return order;
+    }
 
-	/**
-	 * @return the order
-	 */
-	public int getOrder() {
-		return order;
-	}
+    /**
+     * @param order
+     *            the order to set
+     */
+    public void setOrder(int order) {
+        this.order = order;
+    }
 
-	/**
-	 * @param order
-	 *            the order to set
-	 */
-	public void setOrder(int order) {
-		this.order = order;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "GenericClientTool [id=" + id + ", order=" + order + "]";
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "GenericClientTool [id=" + id + ", order=" + order + "]";
-	}
-
-	@Override
-	public int compareTo(GenericClientTool o) {
-		// TODO Auto-generated method stub
-		return getOrder() - o.getOrder();
-	}
-
+    @Override
+    public int compareTo(GenericClientTool o) {
+        // TODO Auto-generated method stub
+        return getOrder() - o.getOrder();
+    }
 }

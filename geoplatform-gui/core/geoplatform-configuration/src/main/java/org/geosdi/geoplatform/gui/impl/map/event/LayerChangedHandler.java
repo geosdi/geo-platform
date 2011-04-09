@@ -47,12 +47,11 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public interface LayerChangedHandler extends EventHandler {
 
-	Type<LayerChangedHandler> TYPE = new Type<LayerChangedHandler>();
+    Type<LayerChangedHandler> TYPE = new Type<LayerChangedHandler>();
 
-	public void onDisplayLayer(GPLayerBean layerBean);
+    public void onDisplayLayer(GPLayerBean layerBean);
 
-	public void onHideLayer(GPLayerBean layerBean);
+    public void onHideLayer(GPLayerBean layerBean);
 
-	public void onRemoveLayer(GPLayerBean layerBean);
-
+    public void onRemoveLayer(GPLayerBean layerBean);
 }

@@ -48,21 +48,20 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("GeoPlatformConfiguration")
 public interface GeoPlatformConfiguration extends RemoteService {
 
-	public static class Util {
-		private static GeoPlatformConfigurationAsync instance;
+    public static class Util {
 
-		public static GeoPlatformConfigurationAsync getInstance() {
-			if (instance == null) {
-				instance = (GeoPlatformConfigurationAsync) GWT
-						.create(GeoPlatformConfiguration.class);
+        private static GeoPlatformConfigurationAsync instance;
+
+        public static GeoPlatformConfigurationAsync getInstance() {
+            if (instance == null) {
+                instance = (GeoPlatformConfigurationAsync) GWT.create(GeoPlatformConfiguration.class);
 //				ServiceDefTarget target = (ServiceDefTarget) instance;
 //				target.setServiceEntryPoint(GWT.getModuleBaseURL()
 //						+ "GeoPlatformConfiguration");
-			}
-			return instance;
-		}
-	}
+            }
+            return instance;
+        }
+    }
 
-	public IGeoPlatformGlobal initGeoPlatformConfiguration();
-
+    public IGeoPlatformGlobal initGeoPlatformConfiguration();
 }

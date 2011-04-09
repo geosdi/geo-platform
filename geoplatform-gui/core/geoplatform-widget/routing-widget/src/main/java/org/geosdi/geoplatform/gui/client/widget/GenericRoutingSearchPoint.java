@@ -55,116 +55,114 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GenericRoutingSearchPoint extends
-		ComboSearchWidget<GeocodingBean, RoutingController> implements
-		CleanComboEventHandler {
+public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<GeocodingBean, RoutingController> implements
+        CleanComboEventHandler {
 
-	/**
-	 * @Constructor
-	 * 
-	 * @param controller
-	 * 
-	 */
-	public GenericRoutingSearchPoint(RoutingController controller) {
-		super(controller);
-	}
+    /**
+     * @Constructor
+     *
+     * @param controller
+     *
+     */
+    public GenericRoutingSearchPoint(RoutingController controller) {
+        super(controller);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.client.widget.search.ComboSearchWidget#
-	 * setWidgetProperties()
-	 */
-	@Override
-	public void setWidgetProperties() {
-		// TODO Auto-generated method stub
-		this.combo.setDisplayField(GeocodingKeyValue.DESCRIPTION.getValue());
-		this.combo.setHideTrigger(true);
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.client.widget.search.ComboSearchWidget#
+     * setWidgetProperties()
+     */
+    @Override
+    public void setWidgetProperties() {
+        // TODO Auto-generated method stub
+        this.combo.setDisplayField(GeocodingKeyValue.DESCRIPTION.getValue());
+        this.combo.setHideTrigger(true);
 
-		this.combo.setUseQueryCache(false);
+        this.combo.setUseQueryCache(false);
 
-		this.combo.setWidth(200);
+        this.combo.setWidth(200);
 
-		this.combo.addKeyListener(new KeyListener() {
+        this.combo.addKeyListener(new KeyListener() {
 
-			@Override
-			public void componentKeyPress(ComponentEvent event) {
-				// TODO Auto-generated method stub
-				if ((event.getKeyCode() == KeyCodes.KEY_ENTER)
-						&& (combo.getRawValue().length() >= 4)
-						&& (combo.getSelection().size() == 0))
-					dispatchRequest();
-			}
+            @Override
+            public void componentKeyPress(ComponentEvent event) {
+                // TODO Auto-generated method stub
+                if ((event.getKeyCode() == KeyCodes.KEY_ENTER)
+                        && (combo.getRawValue().length() >= 4)
+                        && (combo.getSelection().size() == 0)) {
+                    dispatchRequest();
+                }
+            }
+        });
+    }
 
-		});
-	}
+    /**
+     * Send Request to Geocoding Module to fill the Combo with Results
+     *
+     */
+    public void dispatchRequest() {
+        loadImage(TypeImage.IMAGE_LOADING, true);
+        this.clearStore();
 
-	/**
-	 * Send Request to Geocoding Module to fill the Combo with Results
-	 * 
-	 */
-	public void dispatchRequest() {
-		loadImage(TypeImage.IMAGE_LOADING, true);
-		this.clearStore();
+        controller.getGeocodingService().findLocations(combo.getRawValue(),
+                new AsyncCallback<ArrayList<GeocodingBean>>() {
 
-		controller.getGeocodingService().findLocations(combo.getRawValue(),
-				new AsyncCallback<ArrayList<GeocodingBean>>() {
+                    @Override
+                    public void onSuccess(ArrayList<GeocodingBean> result) {
+                        // TODO Auto-generated method stub
 
-					@Override
-					public void onSuccess(ArrayList<GeocodingBean> result) {
-						// TODO Auto-generated method stub
+                        if (result.size() > 0) {
+                            GeoPlatformMessage.infoMessage("Geocoding Service",
+                                    "Results loaded with success.");
+                            loadImage(TypeImage.IMAGE_RESULT_FOUND, true);
+                            fillStore(result);
+                            expand();
+                        } else {
+                            GeoPlatformMessage.alertMessage(
+                                    "Geocoding Service", "No Results found!");
+                            loadImage(TypeImage.IMAGE_RESULT_NOT_FOUND, true);
+                            clearStore();
+                        }
 
-						if (result.size() > 0) {
-							GeoPlatformMessage.infoMessage("Geocoding Service",
-									"Results loaded with success.");
-							loadImage(TypeImage.IMAGE_RESULT_FOUND, true);
-							fillStore(result);
-							expand();
-						} else {
-							GeoPlatformMessage.alertMessage(
-									"Geocoding Service", "No Results found!");
-							loadImage(TypeImage.IMAGE_RESULT_NOT_FOUND, true);
-							clearStore();
-						}
+                    }
 
-					}
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        // TODO Auto-generated method stub
+                        GeoPlatformMessage.errorMessage("Geocoding Service",
+                                "An Error occurred while dispatching request.");
+                        loadImage(TypeImage.IMAGE_SERVICE_ERROR, true);
+                        clearStore();
+                    }
+                });
+    }
 
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						GeoPlatformMessage.errorMessage("Geocoding Service",
-								"An Error occurred while dispatching request.");
-						loadImage(TypeImage.IMAGE_SERVICE_ERROR, true);
-						clearStore();
-					}
-				});
-	}
-	
-	/**
-	 * Clear Component Status for Widget :
-	 * <ul>
-	 * <li>Clear Store</li>
-	 * <li>Collapse ComboBox</li>
-	 * <li>Remove Marker on the Map</li>
-	 * </ul>
-	 */
-	public void clearStatus() {
-		super.clearWidget();
-		cleanGeoPlatformMap();
-	}
-	
-	/**
-	 * Remove Marker on the Map
-	 * 
-	 */
-	public abstract void cleanGeoPlatformMap();
+    /**
+     * Clear Component Status for Widget :
+     * <ul>
+     * <li>Clear Store</li>
+     * <li>Collapse ComboBox</li>
+     * <li>Remove Marker on the Map</li>
+     * </ul>
+     */
+    public void clearStatus() {
+        super.clearWidget();
+        cleanGeoPlatformMap();
+    }
 
-	/**
-	 * 
-	 * @return
-	 */
-	public GPComboBox<GeocodingBean> getComboBox() {
-		return combo;
-	}
+    /**
+     * Remove Marker on the Map
+     *
+     */
+    public abstract void cleanGeoPlatformMap();
 
+    /**
+     *
+     * @return
+     */
+    public GPComboBox<GeocodingBean> getComboBox() {
+        return combo;
+    }
 }

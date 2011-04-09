@@ -58,37 +58,35 @@ import org.xml.sax.SAXException;
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "applicationContext-TEST.xml" })
+@ContextConfiguration(locations = {"applicationContext-TEST.xml"})
 public class ReverseGeocoderTest {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private IReverseGeocoding reverseGeoding;
 
-	@Autowired
-	private IReverseGeocoding reverseGeoding;
+    @Test
+    public void test() {
+        GeocodingBean bean = null;
+        try {
+            bean = this.reverseGeoding.findLocation(40.6372425, 15.8022214);
+        } catch (XPathExpressionException e) {
+            // TODO Auto-generated catch block
+            logger.error("XPathExpressionException " + e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            logger.error("IOException " + e);
+        } catch (SAXException e) {
+            // TODO Auto-generated catch block
+            logger.error("SAXException " + e);
+        } catch (ParserConfigurationException e) {
+            // TODO Auto-generated catch block
+            logger.error("ParserConfigurationException " + e);
+        }
 
-	@Test
-	public void test() {
-		GeocodingBean bean = null;
-		try {
-			bean = this.reverseGeoding.findLocation(40.6372425, 15.8022214);
-		} catch (XPathExpressionException e) {
-			// TODO Auto-generated catch block
-			logger.error("XPathExpressionException " + e);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			logger.error("IOException " + e);
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			logger.error("SAXException " + e);
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			logger.error("ParserConfigurationException " + e);
-		}
+        Assert.assertNotNull(bean);
 
-		Assert.assertNotNull(bean);
+        logger.info("Locations ***************** " + bean.getDescription());
 
-		logger.info("Locations ***************** " + bean.getDescription());
-
-	}
-
+    }
 }

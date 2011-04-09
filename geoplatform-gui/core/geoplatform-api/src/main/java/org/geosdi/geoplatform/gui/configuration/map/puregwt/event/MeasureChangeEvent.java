@@ -43,21 +43,20 @@ import com.google.gwt.event.shared.GwtEvent;
  */
 public class MeasureChangeEvent extends GwtEvent<MeasureChangeHeandler> {
 
-	private boolean activate;
+    private boolean activate;
 
-	public MeasureChangeEvent(boolean activate) {
-		this.activate = activate;
-	}
+    public MeasureChangeEvent(boolean activate) {
+        this.activate = activate;
+    }
 
-	@Override
-	public Type<MeasureChangeHeandler> getAssociatedType() {
-		return MeasureChangeHeandler.TYPE;
-	}
+    @Override
+    public Type<MeasureChangeHeandler> getAssociatedType() {
+        return MeasureChangeHeandler.TYPE;
+    }
 
-	@Override
-	protected void dispatch(MeasureChangeHeandler handler) {
-		handler.activationMeasure(activate);
+    @Override
+    protected void dispatch(MeasureChangeHeandler handler) {
+        handler.activationMeasure(activate);
 
-	}
-
+    }
 }

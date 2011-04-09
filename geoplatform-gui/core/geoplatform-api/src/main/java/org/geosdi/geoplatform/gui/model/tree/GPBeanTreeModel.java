@@ -61,10 +61,13 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
             return this.value;
         }
     }
+
     /**
      *
      */
     private static final long serialVersionUID = 2095233644130779285L;
+
+    
     private String label;
     private int zIndex;
 

@@ -42,81 +42,80 @@ package org.geosdi.geoplatform.gui.server.service;
  */
 public class RoutingServiceParameters {
 
-	private String serviceDataSource;
-	private String firstRegex;
-	private String finalRegex;
-	private String method;
+    private String serviceDataSource;
+    private String firstRegex;
+    private String finalRegex;
+    private String method;
 
-	/**
-	 * @return the serviceDataSource
-	 */
-	public String getServiceDataSource() {
-		return serviceDataSource;
-	}
+    /**
+     * @return the serviceDataSource
+     */
+    public String getServiceDataSource() {
+        return serviceDataSource;
+    }
 
-	/**
-	 * @param serviceDataSource
-	 *            the serviceDataSource to set
-	 */
-	public void setServiceDataSource(String serviceDataSource) {
-		this.serviceDataSource = serviceDataSource;
-	}
+    /**
+     * @param serviceDataSource
+     *            the serviceDataSource to set
+     */
+    public void setServiceDataSource(String serviceDataSource) {
+        this.serviceDataSource = serviceDataSource;
+    }
 
-	/**
-	 * @return the firstRegex
-	 */
-	public String getFirstRegex() {
-		return firstRegex;
-	}
+    /**
+     * @return the firstRegex
+     */
+    public String getFirstRegex() {
+        return firstRegex;
+    }
 
-	/**
-	 * @param firstRegex
-	 *            the firstRegex to set
-	 */
-	public void setFirstRegex(String firstRegex) {
-		this.firstRegex = firstRegex;
-	}
+    /**
+     * @param firstRegex
+     *            the firstRegex to set
+     */
+    public void setFirstRegex(String firstRegex) {
+        this.firstRegex = firstRegex;
+    }
 
-	/**
-	 * @return the finalRegex
-	 */
-	public String getFinalRegex() {
-		return finalRegex;
-	}
+    /**
+     * @return the finalRegex
+     */
+    public String getFinalRegex() {
+        return finalRegex;
+    }
 
-	/**
-	 * @param finalRegex
-	 *            the finalRegex to set
-	 */
-	public void setFinalRegex(String finalRegex) {
-		this.finalRegex = finalRegex;
-	}
+    /**
+     * @param finalRegex
+     *            the finalRegex to set
+     */
+    public void setFinalRegex(String finalRegex) {
+        this.finalRegex = finalRegex;
+    }
 
-	/**
-	 * @return the method
-	 */
-	public String getMethod() {
-		return method;
-	}
+    /**
+     * @return the method
+     */
+    public String getMethod() {
+        return method;
+    }
 
-	/**
-	 * @param method
-	 *            the method to set
-	 */
-	public void setMethod(String method) {
-		this.method = method;
-	}
+    /**
+     * @param method
+     *            the method to set
+     */
+    public void setMethod(String method) {
+        this.method = method;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "RoutingServiceParameters [serviceDataSource="
-				+ serviceDataSource + ", firstRegex=" + firstRegex
-				+ ", finalRegex=" + finalRegex + ", method=" + method + "]";
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "RoutingServiceParameters [serviceDataSource="
+                + serviceDataSource + ", firstRegex=" + firstRegex
+                + ", finalRegex=" + finalRegex + ", method=" + method + "]";
+    }
 }

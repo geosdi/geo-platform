@@ -43,53 +43,51 @@ import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
  */
 public class MenuBarClientTool extends GenericClientTool {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3760023225532302795L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -3760023225532302795L;
+    private String text;
+    private boolean enabled;
 
-	private String text;
-	private boolean enabled;
+    /**
+     * @return the text
+     */
+    public String getText() {
+        return text;
+    }
 
-	/**
-	 * @return the text
-	 */
-	public String getText() {
-		return text;
-	}
+    /**
+     * @param text
+     *            the text to set
+     */
+    public void setText(String text) {
+        this.text = text;
+    }
 
-	/**
-	 * @param text
-	 *            the text to set
-	 */
-	public void setText(String text) {
-		this.text = text;
-	}
+    /**
+     * @return the enabled
+     */
+    public boolean isEnabled() {
+        return enabled;
+    }
 
-	/**
-	 * @return the enabled
-	 */
-	public boolean isEnabled() {
-		return enabled;
-	}
+    /**
+     * @param enabled
+     *            the enabled to set
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
-	/**
-	 * @param enabled
-	 *            the enabled to set
-	 */
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "MenuBarClientTool [text=" + text + ", enabled=" + enabled
-				+ ", getId()=" + getId() + ", getOrder()=" + getOrder() + "]";
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "MenuBarClientTool [text=" + text + ", enabled=" + enabled
+                + ", getId()=" + getId() + ", getOrder()=" + getOrder() + "]";
+    }
 }

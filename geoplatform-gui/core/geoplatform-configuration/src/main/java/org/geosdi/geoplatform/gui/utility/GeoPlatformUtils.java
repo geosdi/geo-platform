@@ -38,35 +38,34 @@ package org.geosdi.geoplatform.gui.utility;
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 
 /**
- * @author giuseppe
- * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  */
 public class GeoPlatformUtils {
 
-	private static GeoPlatformUtils INSTANCE;
+    private static GeoPlatformUtils INSTANCE;
+    private IGeoPlatformGlobal globalConfiguration;
 
-	private IGeoPlatformGlobal globalConfiguration;
+    public static GeoPlatformUtils getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new GeoPlatformUtils();
+        }
+        return INSTANCE;
+    }
 
-	public static GeoPlatformUtils getInstance() {
-		if (INSTANCE == null) {
-			INSTANCE = new GeoPlatformUtils();
-		}
-		return INSTANCE;
-	}
+    /**
+     * @return the globalConfiguration
+     */
+    public IGeoPlatformGlobal getGlobalConfiguration() {
+        return globalConfiguration;
+    }
 
-	/**
-	 * @return the globalConfiguration
-	 */
-	public IGeoPlatformGlobal getGlobalConfiguration() {
-		return globalConfiguration;
-	}
-
-	/**
-	 * @param globalConfiguration
-	 *            the globalConfiguration to set
-	 */
-	public void setGlobalConfiguration(IGeoPlatformGlobal globalConfiguration) {
-		this.globalConfiguration = globalConfiguration;
-	}
-
+    /**
+     * @param globalConfiguration
+     *            the globalConfiguration to set
+     */
+    public void setGlobalConfiguration(IGeoPlatformGlobal globalConfiguration) {
+        this.globalConfiguration = globalConfiguration;
+    }
 }

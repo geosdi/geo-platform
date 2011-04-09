@@ -41,38 +41,36 @@ package org.geosdi.geoplatform.gui.configuration.menubar;
  */
 public class CheckMenuClientTool extends MenuBarClientTool {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6257517250152965702L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -6257517250152965702L;
+    private boolean checked;
 
-	private boolean checked;
+    /**
+     * @return the checked
+     */
+    public boolean isChecked() {
+        return checked;
+    }
 
-	/**
-	 * @return the checked
-	 */
-	public boolean isChecked() {
-		return checked;
-	}
+    /**
+     * @param checked
+     *            the checked to set
+     */
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
 
-	/**
-	 * @param checked
-	 *            the checked to set
-	 */
-	public void setChecked(boolean checked) {
-		this.checked = checked;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "CheckMenuClientTool [checked=" + checked + ", getText()="
-				+ getText() + ", isEnabled()=" + isEnabled() + ", getId()="
-				+ getId() + ", getOrder()=" + getOrder() + "]";
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "CheckMenuClientTool [checked=" + checked + ", getText()="
+                + getText() + ", isEnabled()=" + isEnabled() + ", getId()="
+                + getId() + ", getOrder()=" + getOrder() + "]";
+    }
 }

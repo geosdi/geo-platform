@@ -44,6 +44,5 @@ import org.geosdi.geoplatform.gui.puregwt.routing.event.CleanComboEventHandler;
  */
 public interface HasCleanEvent {
 
-	public void addCleanEventHandler(CleanComboEventHandler handler, Object source);
-
+    public void addCleanEventHandler(CleanComboEventHandler handler, Object source);
 }

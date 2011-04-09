@@ -52,91 +52,92 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
  * 
  */
 public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {
-	
-	private FieldSet directionsField;
 
-	public RoutingGridWidget() {
-		super(false);
-		// TODO Auto-generated constructor stub
-		initWidget();
-	}
+    private FieldSet directionsField;
 
-	private void initWidget() {
-		directionsField = new FieldSet();
-		directionsField.setHeading("Directions");
-		directionsField.setCollapsible(false);
+    public RoutingGridWidget() {
+        super(false);
+        // TODO Auto-generated constructor stub
+        initWidget();
+    }
 
-		directionsField.add(this.grid);
-	}
+    private void initWidget() {
+        directionsField = new FieldSet();
+        directionsField.setHeading("Directions");
+        directionsField.setCollapsible(false);
 
-	@Override
-	public void setGridProperties() {
-		// TODO Auto-generated method stub
-		grid.setBorders(false);
+        directionsField.add(this.grid);
+    }
 
-		grid.getView().setForceFit(true);
-		grid.setLoadMask(true);
+    @Override
+    public void setGridProperties() {
+        // TODO Auto-generated method stub
+        grid.setBorders(false);
 
-		grid.setAutoExpandColumn(DirectionsKeyValue.ROUTE.getValue());
-	}
+        grid.getView().setForceFit(true);
+        grid.setLoadMask(true);
 
-	@Override
-	public ColumnModel prepareColumnModel() {
-		// TODO Auto-generated method stub
-		List<ColumnConfig> columns = new ArrayList<ColumnConfig>();
+        grid.setAutoExpandColumn(DirectionsKeyValue.ROUTE.getValue());
+    }
 
-		ColumnConfig dirColumn = new ColumnConfig(
-				DirectionsKeyValue.ROUTE.getValue(), "Directions", 100);
-		dirColumn.setMenuDisabled(true);
-		dirColumn.setSortable(false);
+    @Override
+    public ColumnModel prepareColumnModel() {
+        // TODO Auto-generated method stub
+        List<ColumnConfig> columns = new ArrayList<ColumnConfig>();
 
-		columns.add(dirColumn);
+        ColumnConfig dirColumn = new ColumnConfig(
+                DirectionsKeyValue.ROUTE.getValue(), "Directions", 100);
+        dirColumn.setMenuDisabled(true);
+        dirColumn.setSortable(false);
 
-		return new ColumnModel(columns);
-	}
+        columns.add(dirColumn);
 
-	@Override
-	public void createStore() {
-		// TODO Auto-generated method stub
-		this.store = new ListStore<Directions>();
-	}
+        return new ColumnModel(columns);
+    }
 
-	/**
-	 * Clean The Store
-	 */
-	public void cleanUpTheStore() {
-		if (this.grid.getView().getBody().isMasked())
-			unMaskGrid();
-		this.store.removeAll();
-	}
+    @Override
+    public void createStore() {
+        // TODO Auto-generated method stub
+        this.store = new ListStore<Directions>();
+    }
 
-	/**
-	 * Create mask effect on Grid
-	 */
-	public void maskGrid() {
-		this.grid.getView().getBody().mask("Loading Directions");
-	}
+    /**
+     * Clean The Store
+     */
+    public void cleanUpTheStore() {
+        if (this.grid.getView().getBody().isMasked()) {
+            unMaskGrid();
+        }
+        this.store.removeAll();
+    }
 
-	/**
-	 * Remove mask effect from the Grid
-	 */
-	public void unMaskGrid() {
-		this.grid.getView().getBody().unmask();
-	}
+    /**
+     * Create mask effect on Grid
+     */
+    public void maskGrid() {
+        this.grid.getView().getBody().mask("Loading Directions");
+    }
 
-	/**
-	 * 
-	 * @param beans
-	 *            {@link ArrayList} of Directions to fill the Store
-	 */
-	public void fillStore(List<Directions> beans) {
-		this.store.add(beans);
-	}
+    /**
+     * Remove mask effect from the Grid
+     */
+    public void unMaskGrid() {
+        this.grid.getView().getBody().unmask();
+    }
 
-	/**
-	 * @return the directionsField
-	 */
-	public FieldSet getDirectionsField() {
-		return directionsField;
-	}
+    /**
+     *
+     * @param beans
+     *            {@link ArrayList} of Directions to fill the Store
+     */
+    public void fillStore(List<Directions> beans) {
+        this.store.add(beans);
+    }
+
+    /**
+     * @return the directionsField
+     */
+    public FieldSet getDirectionsField() {
+        return directionsField;
+    }
 }

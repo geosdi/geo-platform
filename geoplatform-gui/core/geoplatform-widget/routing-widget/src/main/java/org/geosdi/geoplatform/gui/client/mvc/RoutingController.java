@@ -52,57 +52,53 @@ import com.extjs.gxt.ui.client.mvc.AppEvent;
  */
 public class RoutingController extends GeoPlatformController {
 
-	private RoutingRemoteAsync routingService = RoutingRemote.Util
-			.getInstance();
+    private RoutingRemoteAsync routingService = RoutingRemote.Util.getInstance();
+    private GeocodingRemoteAsync geocodingService = GeocodingRemote.Util.getInstance();
 
-	private GeocodingRemoteAsync geocodingService = GeocodingRemote.Util
-			.getInstance();
+    /**
+     * @Construct
+     *
+     */
+    public RoutingController() {
+        registerEventTypes(RoutingEvents.INIT_ROUTING_WIDGET,
+                RoutingEvents.SHOW_ROUTING_WIDGET,
+                RoutingEvents.HIDE_ROUTING_WIDGET);
+    }
 
-	/**
-	 * @Construct
-	 * 
-	 */
-	public RoutingController() {
-		registerEventTypes(RoutingEvents.INIT_ROUTING_WIDGET,
-				RoutingEvents.SHOW_ROUTING_WIDGET,
-				RoutingEvents.HIDE_ROUTING_WIDGET);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.extjs.gxt.ui.client.mvc.Controller#initialize()
+     */
+    @Override
+    protected void initialize() {
+        // TODO Auto-generated method stub
+        this.view = new RoutingView(this);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.extjs.gxt.ui.client.mvc.Controller#initialize()
-	 */
-	@Override
-	protected void initialize() {
-		// TODO Auto-generated method stub
-		this.view = new RoutingView(this);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#
+     * handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
+     */
+    @Override
+    public void handleEvent(AppEvent event) {
+        // TODO Auto-generated method stub
+        super.handleEvent(event);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#
-	 * handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
-	 */
-	@Override
-	public void handleEvent(AppEvent event) {
-		// TODO Auto-generated method stub
-		super.handleEvent(event);
-	}
+    /**
+     * @return the routingService
+     */
+    public RoutingRemoteAsync getRoutingService() {
+        return routingService;
+    }
 
-	/**
-	 * @return the routingService
-	 */
-	public RoutingRemoteAsync getRoutingService() {
-		return routingService;
-	}
-
-	/**
-	 * @return the geocodingService
-	 */
-	public GeocodingRemoteAsync getGeocodingService() {
-		return geocodingService;
-	}
-
+    /**
+     * @return the geocodingService
+     */
+    public GeocodingRemoteAsync getGeocodingService() {
+        return geocodingService;
+    }
 }

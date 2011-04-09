@@ -70,150 +70,151 @@ import com.google.gwt.event.dom.client.KeyCodes;
  */
 public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
 
-	private FormPanel formPanel;
-	private TextField<String> search;
+    private FormPanel formPanel;
+    private TextField<String> search;
 
-	public GeocodingGridWidget() {
-		super(false);
-		initFormPanel();
-	}
+    public GeocodingGridWidget() {
+        super(false);
+        initFormPanel();
+    }
 
-	private void initFormPanel() {
-		// TODO Auto-generated method stub
-		formPanel = new FormPanel();
-		formPanel.setHeaderVisible(false);
-		formPanel.setFrame(true);
-		formPanel.setLayout(new FlowLayout());
+    private void initFormPanel() {
+        // TODO Auto-generated method stub
+        formPanel = new FormPanel();
+        formPanel.setHeaderVisible(false);
+        formPanel.setFrame(true);
+        formPanel.setLayout(new FlowLayout());
 
-		FieldSet searchFieldSet = new FieldSet();
-		searchFieldSet.setHeading("Search");
+        FieldSet searchFieldSet = new FieldSet();
+        searchFieldSet.setHeading("Search");
 
-		FormLayout layout = new FormLayout();
-		layout.setLabelWidth(60);
-		searchFieldSet.setLayout(layout);
+        FormLayout layout = new FormLayout();
+        layout.setLabelWidth(60);
+        searchFieldSet.setLayout(layout);
 
-		search = new TextField<String>();
-		search.setFieldLabel("Find");
+        search = new TextField<String>();
+        search.setFieldLabel("Find");
 
-		search.addKeyListener(new KeyListener() {
+        search.addKeyListener(new KeyListener() {
 
-			public void componentKeyUp(ComponentEvent event) {
-				if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE) || (event
-						.getKeyCode() == KeyCodes.KEY_DELETE))
-						&& (search.getValue() == null)) {
-					removeMarkersOnMap();
-					cleanUpTheStore();
-				}
-			}
+            @Override
+            public void componentKeyUp(ComponentEvent event) {
+                if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE) || (event.getKeyCode() == KeyCodes.KEY_DELETE))
+                        && (search.getValue() == null)) {
+                    removeMarkersOnMap();
+                    cleanUpTheStore();
+                }
+            }
 
-			public void componentKeyPress(ComponentEvent event) {
-				if ((event.getKeyCode() == 13)
-						&& (!search.getValue().equals(""))) {
-					Dispatcher.forwardEvent(
-							GeocodingEvents.BEGIN_GEOCODING_SEARCH,
-							search.getValue());
-				}
-			}
+            @Override
+            public void componentKeyPress(ComponentEvent event) {
+                if ((event.getKeyCode() == 13)
+                        && (!search.getValue().equals(""))) {
+                    Dispatcher.forwardEvent(
+                            GeocodingEvents.BEGIN_GEOCODING_SEARCH,
+                            search.getValue());
+                }
+            }
+        });
 
-		});
+        BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
+        data.setMargins(new Margins(5, 5, 5, 5));
 
-		BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
-		data.setMargins(new Margins(5, 5, 5, 5));
+        searchFieldSet.add(search, data);
 
-		searchFieldSet.add(search, data);
+        formPanel.add(searchFieldSet);
 
-		formPanel.add(searchFieldSet);
+        FieldSet locations = new FieldSet();
+        locations.setHeading("Locations");
+        locations.setCollapsible(true);
 
-		FieldSet locations = new FieldSet();
-		locations.setHeading("Locations");
-		locations.setCollapsible(true);
+        locations.add(this.grid);
 
-		locations.add(this.grid);
+        formPanel.add(locations);
+    }
 
-		formPanel.add(locations);
-	}
+    @Override
+    public void setGridProperties() {
+        // TODO Auto-generated method stub
+        grid.setAutoExpandColumn(GeocodingKeyValue.DESCRIPTION.getValue());
+        grid.setBorders(false);
 
-	@Override
-	public void setGridProperties() {
-		// TODO Auto-generated method stub
-		grid.setAutoExpandColumn(GeocodingKeyValue.DESCRIPTION.getValue());
-		grid.setBorders(false);
+        grid.getView().setForceFit(true);
+        grid.setLoadMask(true);
 
-		grid.getView().setForceFit(true);
-		grid.setLoadMask(true);
+        grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-		grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        grid.addListener(Events.CellDoubleClick, new Listener<BaseEvent>() {
 
-		grid.addListener(Events.CellDoubleClick, new Listener<BaseEvent>() {
+            @Override
+            public void handleEvent(BaseEvent be) {
+                Dispatcher.forwardEvent(
+                        GeoPlatformEvents.REGISTER_GEOCODING_LOCATION, grid.getSelectionModel().getSelectedItem());
+            }
+        });
+    }
 
-			public void handleEvent(BaseEvent be) {
-				Dispatcher.forwardEvent(
-						GeoPlatformEvents.REGISTER_GEOCODING_LOCATION, grid
-								.getSelectionModel().getSelectedItem());
-			}
-		});
-	}
+    @Override
+    public ColumnModel prepareColumnModel() {
+        // TODO Auto-generated method stub
+        List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
-	@Override
-	public ColumnModel prepareColumnModel() {
-		// TODO Auto-generated method stub
-		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
+        ColumnConfig column = new ColumnConfig();
+        column.setId(GeocodingKeyValue.DESCRIPTION.getValue());
+        column.setHeader("Location");
+        column.setWidth(240);
+        configs.add(column);
 
-		ColumnConfig column = new ColumnConfig();
-		column.setId(GeocodingKeyValue.DESCRIPTION.getValue());
-		column.setHeader("Location");
-		column.setWidth(240);
-		configs.add(column);
+        return new ColumnModel(configs);
+    }
 
-		return new ColumnModel(configs);
-	}
+    @Override
+    public void createStore() {
+        // TODO Auto-generated method stub
+        store = new ListStore<GeocodingBean>();
+    }
 
-	@Override
-	public void createStore() {
-		// TODO Auto-generated method stub
-		store = new ListStore<GeocodingBean>();
-	}
+    /**
+     * Clean The Store
+     */
+    public void cleanUpTheStore() {
+        if (this.grid.getView().getBody().isMasked()) {
+            unMaskGrid();
+        }
+        this.store.removeAll();
+    }
 
-	/**
-	 * Clean The Store
-	 */
-	public void cleanUpTheStore() {
-		if (this.grid.getView().getBody().isMasked())
-			unMaskGrid();
-		this.store.removeAll();
-	}
+    /**
+     * Create mask effect on Grid
+     */
+    public void maskGrid() {
+        this.grid.getView().getBody().mask("Loading Locations");
+    }
 
-	/**
-	 * Create mask effect on Grid
-	 */
-	public void maskGrid() {
-		this.grid.getView().getBody().mask("Loading Locations");
-	}
+    /**
+     * Remove mask effect from the Grid
+     */
+    public void unMaskGrid() {
+        this.grid.getView().getBody().unmask();
+    }
 
-	/**
-	 * Remove mask effect from the Grid
-	 */
-	public void unMaskGrid() {
-		this.grid.getView().getBody().unmask();
-	}
+    /**
+     *
+     * @param beans
+     *            {@link ArrayList} of GeocodingBean to fill the Store
+     */
+    public void fillStore(ArrayList<GeocodingBean> beans) {
+        this.store.add(beans);
+    }
 
-	/**
-	 * 
-	 * @param beans
-	 *            {@link ArrayList} of GeocodingBean to fill the Store
-	 */
-	public void fillStore(ArrayList<GeocodingBean> beans) {
-		this.store.add(beans);
-	}
+    /**
+     * @return the formPanel
+     */
+    public FormPanel getFormPanel() {
+        return formPanel;
+    }
 
-	/**
-	 * @return the formPanel
-	 */
-	public FormPanel getFormPanel() {
-		return formPanel;
-	}
-
-	private void removeMarkersOnMap() {
-		Dispatcher.forwardEvent(GeoPlatformEvents.RemoveMarker);
-	}
+    private void removeMarkersOnMap() {
+        Dispatcher.forwardEvent(GeoPlatformEvents.RemoveMarker);
+    }
 }

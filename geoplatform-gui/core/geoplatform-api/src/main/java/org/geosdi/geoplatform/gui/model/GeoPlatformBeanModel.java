@@ -43,9 +43,8 @@ import com.extjs.gxt.ui.client.data.BeanModel;
  */
 public class GeoPlatformBeanModel extends BeanModel {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3889943253386309853L;
-
+    /**
+     *
+     */
+    private static final long serialVersionUID = 3889943253386309853L;
 }

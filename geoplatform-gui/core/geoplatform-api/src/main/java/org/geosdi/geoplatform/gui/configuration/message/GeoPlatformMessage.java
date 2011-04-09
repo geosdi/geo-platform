@@ -50,96 +50,92 @@ import com.google.gwt.user.client.Timer;
  */
 public class GeoPlatformMessage {
 
-	/**
-	 * Display an Alert Message in the Application
-	 * 
-	 * @param title
-	 * @param message
-	 */
-	public static void alertMessage(String title, String message) {
-		// TODO Auto-generated method stub
-		MessageBox.alert(title, message, new Listener<MessageBoxEvent>() {
+    /**
+     * Display an Alert Message in the Application
+     *
+     * @param title
+     * @param message
+     */
+    public static void alertMessage(String title, String message) {
+        // TODO Auto-generated method stub
+        MessageBox.alert(title, message, new Listener<MessageBoxEvent>() {
 
-			public void handleEvent(MessageBoxEvent be) {
-				// TODO Auto-generated method stub
+            public void handleEvent(MessageBoxEvent be) {
+                // TODO Auto-generated method stub
+            }
+        });
+    }
 
-			}
-		});
-	}
+    /**
+     * Display an Error Message in the Application
+     *
+     * @param title
+     * @param message
+     */
+    public static void errorMessage(String title, String message) {
+        // TODO Auto-generated method stub
+        MessageBox box = new MessageBox();
+        box.setIcon(MessageBox.ERROR);
+        box.setTitle(title);
+        box.setMessage(message);
+        box.show();
+    }
 
-	/**
-	 * Display an Error Message in the Application
-	 * 
-	 * @param title
-	 * @param message
-	 */
-	public static void errorMessage(String title, String message) {
-		// TODO Auto-generated method stub
-		MessageBox box = new MessageBox();
-		box.setIcon(MessageBox.ERROR);
-		box.setTitle(title);
-		box.setMessage(message);
-		box.show();
-	}
+    /**
+     * Display an Info Message in the Application
+     *
+     * @param title
+     * @param message
+     */
+    public static void infoMessage(String title, String message) {
+        // TODO Auto-generated method stub
+        Info.display(title, message);
+    }
 
-	/**
-	 * Display an Info Message in the Application
-	 * 
-	 * @param title
-	 * @param message
-	 */
-	public static void infoMessage(String title, String message) {
-		// TODO Auto-generated method stub
-		Info.display(title, message);
-	}
+    /**
+     * Check GeoPlatformGridWidget Status
+     *
+     * @param widget
+     * @param title
+     * @param message
+     */
+    public static void checkGridWidgetStatus(
+            final IGeoPlatformGrid<GeoPlatformBeanModel> widget,
+            final String title, final String message) {
 
-	/**
-	 * Check GeoPlatformGridWidget Status
-	 * 
-	 * @param widget
-	 * @param title
-	 * @param message
-	 */
-	public static void checkGridWidgetStatus(
-			final IGeoPlatformGrid<GeoPlatformBeanModel> widget,
-			final String title, final String message) {
+        Timer timer = new Timer() {
 
-		Timer timer = new Timer() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                if (widget.getGrid().getView().getBody().isMasked()) {
+                    MessageBox.confirm(title, message,
+                            new Listener<MessageBoxEvent>() {
 
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				if (widget.getGrid().getView().getBody().isMasked()) {
-					MessageBox.confirm(title, message,
-							new Listener<MessageBoxEvent>() {
+                                public void handleEvent(MessageBoxEvent be) {
+                                    if (be.getButtonClicked().getText().equalsIgnoreCase("yes")
+                                            || be.getButtonClicked().getText().equalsIgnoreCase("si")) {
+                                        widget.getGrid().getView().getBody().unmask();
+                                        widget.getGrid().getView().refresh(false);
+                                    } else {
+                                        schedule(15000);
+                                    }
+                                }
+                            });
+                }
+            }
+        };
+        timer.schedule(15000);
+    }
 
-								public void handleEvent(MessageBoxEvent be) {
-									if (be.getButtonClicked().getText()
-											.equalsIgnoreCase("yes")
-											|| be.getButtonClicked().getText()
-													.equalsIgnoreCase("si")) {
-										widget.getGrid().getView().getBody()
-												.unmask();
-										widget.getGrid().getView()
-												.refresh(false);
-									} else
-										schedule(15000);
-								}
-							});
-				}
-			}
-		};
-		timer.schedule(15000);
-	}
-
-	/**
-	 * 
-	 * @param title
-	 * @param message
-	 * @param callback
-	 */
-	public static void confirmMessage(String title, String message,
-			Listener<MessageBoxEvent> callback) {
-		MessageBox.confirm(title, message, callback);
-	}
+    /**
+     *
+     * @param title
+     * @param message
+     * @param callback
+     */
+    public static void confirmMessage(String title, String message,
+            Listener<MessageBoxEvent> callback) {
+        MessageBox.confirm(title, message, callback);
+    }
 }

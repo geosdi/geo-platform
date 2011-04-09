@@ -50,35 +50,34 @@ import com.google.gwt.core.client.EntryPoint;
  */
 public class Routing implements EntryPoint {
 
-	private Dispatcher dispatcher;
+    private Dispatcher dispatcher;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
-	 */
-	@Override
-	public void onModuleLoad() {
-		// TODO Auto-generated method stub
-		dispatcher = Dispatcher.get();
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+     */
+    @Override
+    public void onModuleLoad() {
+        // TODO Auto-generated method stub
+        dispatcher = Dispatcher.get();
 
-		dispatcher.addController(new RoutingController());
+        dispatcher.addController(new RoutingController());
 
-		addRoutingMenuAction();
+        addRoutingMenuAction();
 
-		dispatcher.dispatch(RoutingEvents.INIT_ROUTING_WIDGET);
-	}
+        dispatcher.dispatch(RoutingEvents.INIT_ROUTING_WIDGET);
+    }
 
-	private void addRoutingMenuAction() {
-		// TODO Auto-generated method stub
-		MenuActionRegistar.put("routing", new MenuActionCreator() {
+    private void addRoutingMenuAction() {
+        // TODO Auto-generated method stub
+        MenuActionRegistar.put("routing", new MenuActionCreator() {
 
-			@Override
-			public MenuAction createAction() {
-				// TODO Auto-generated method stub
-				return new RoutingMenuAction();
-			}
-		});
-	}
-
+            @Override
+            public MenuAction createAction() {
+                // TODO Auto-generated method stub
+                return new RoutingMenuAction();
+            }
+        });
+    }
 }

@@ -43,6 +43,5 @@ import com.google.gwt.event.shared.EventHandler;
  */
 public interface ZoomPreviousEventHandler extends EventHandler {
 
-	void onActivation(boolean activate);
-
+    void onActivation(boolean activate);
 }

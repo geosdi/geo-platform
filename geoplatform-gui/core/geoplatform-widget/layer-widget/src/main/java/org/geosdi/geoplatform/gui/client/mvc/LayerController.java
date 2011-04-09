@@ -47,35 +47,34 @@ import com.extjs.gxt.ui.client.mvc.AppEvent;
  */
 public class LayerController extends GeoPlatformController {
 
-	/**
-	 * @Constructor
-	 */
-	public LayerController() {
-		registerEventTypes(LayerEvents.INIT_LAYER_WIDGET,
-				LayerEvents.SHOW_LAYER_WIDGET, LayerEvents.HIDE_LAYER_WIDGET);
-	}
+    /**
+     * @Constructor
+     */
+    public LayerController() {
+        registerEventTypes(LayerEvents.INIT_LAYER_WIDGET,
+                LayerEvents.SHOW_LAYER_WIDGET, LayerEvents.HIDE_LAYER_WIDGET);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.extjs.gxt.ui.client.mvc.Controller#initialize()
-	 */
-	@Override
-	protected void initialize() {
-		// TODO Auto-generated method stub
-		this.view = new LayerView(this);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.extjs.gxt.ui.client.mvc.Controller#initialize()
+     */
+    @Override
+    protected void initialize() {
+        // TODO Auto-generated method stub
+        this.view = new LayerView(this);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#
-	 * handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
-	 */
-	@Override
-	public void handleEvent(AppEvent event) {
-		// TODO Auto-generated method stub
-		super.handleEvent(event);
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#
+     * handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
+     */
+    @Override
+    public void handleEvent(AppEvent event) {
+        // TODO Auto-generated method stub
+        super.handleEvent(event);
+    }
 }

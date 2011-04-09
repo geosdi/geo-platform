@@ -44,7 +44,6 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public interface IRoutingService {
 
-	public RoutingBean findDirections(double xStart, double yStart,
-			double xStop, double yStop) throws GeoPlatformException;
-
+    public RoutingBean findDirections(double xStart, double yStart,
+            double xStop, double yStop) throws GeoPlatformException;
 }

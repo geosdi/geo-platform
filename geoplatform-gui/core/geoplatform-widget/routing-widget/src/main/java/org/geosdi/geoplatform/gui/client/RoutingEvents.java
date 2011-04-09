@@ -42,11 +42,8 @@ import com.extjs.gxt.ui.client.event.EventType;
  *
  */
 public class RoutingEvents {
-	
-	public static final EventType INIT_ROUTING_WIDGET = new EventType();
 
-	public static final EventType SHOW_ROUTING_WIDGET = new EventType();
-	
-	public static final EventType HIDE_ROUTING_WIDGET = new EventType();
-
+    public static final EventType INIT_ROUTING_WIDGET = new EventType();
+    public static final EventType SHOW_ROUTING_WIDGET = new EventType();
+    public static final EventType HIDE_ROUTING_WIDGET = new EventType();
 }

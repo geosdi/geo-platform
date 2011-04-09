@@ -43,22 +43,22 @@ import com.google.gwt.event.shared.GwtEvent;
  */
 public class ZoomPreviousEvent extends GwtEvent<ZoomPreviousEventHandler> {
 
-	public static Type<ZoomPreviousEventHandler> TYPE = new Type<ZoomPreviousEventHandler>();
-	private boolean activate;
+    public static Type<ZoomPreviousEventHandler> TYPE = new Type<ZoomPreviousEventHandler>();
+    private boolean activate;
 
-	public ZoomPreviousEvent(boolean activate) {
-		this.activate = activate;
-	}
+    public ZoomPreviousEvent(boolean activate) {
+        this.activate = activate;
+    }
 
-	@Override
-	public Type<ZoomPreviousEventHandler> getAssociatedType() {
-		// TODO Auto-generated method stub
-		return TYPE;
-	}
+    @Override
+    public Type<ZoomPreviousEventHandler> getAssociatedType() {
+        // TODO Auto-generated method stub
+        return TYPE;
+    }
 
-	@Override
-	protected void dispatch(ZoomPreviousEventHandler handler) {
-		// TODO Auto-generated method stub
-		handler.onActivation(activate);
-	}
+    @Override
+    protected void dispatch(ZoomPreviousEventHandler handler) {
+        // TODO Auto-generated method stub
+        handler.onActivation(activate);
+    }
 }

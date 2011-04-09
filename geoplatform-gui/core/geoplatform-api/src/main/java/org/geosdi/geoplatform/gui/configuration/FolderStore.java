@@ -47,8 +47,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
  */
 public interface FolderStore extends Serializable {
 
-	public List<GPFolderClientInfo> getFolders();
+    public List<GPFolderClientInfo> getFolders();
 
-	public void setFolders(List<GPFolderClientInfo> folders);
-	
+    public void setFolders(List<GPFolderClientInfo> folders);
 }

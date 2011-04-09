@@ -35,13 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.store;
 
-import org.geosdi.geoplatform.gui.client.widget.legend.LegendWindow;
 import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.layers.event.DisplayLegendEvent;
+import org.geosdi.geoplatform.gui.puregwt.layers.event.HideLegendEvent;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 
@@ -52,101 +54,106 @@ import org.gwtopenmaps.openlayers.client.layer.WMS;
  */
 public class LayersStore extends GPLayersStore<GPLayerBean, Layer> {
 
-	private LayerBuilder layerBuilder;
-	private LegendWindow legendWidget;
+    private LayerBuilder layerBuilder;
+    private DisplayLegendEvent displayLegend = new DisplayLegendEvent();
 
-	public LayersStore(GeoPlatformMap theMapWidget) {
-		super(theMapWidget);
-		// TODO Auto-generated constructor stub
-		this.layerBuilder = new LayerBuilder(theMapWidget);
-		this.legendWidget = new LegendWindow();
-		GPScaleWidget.display("Scale");
-	}
 
-	@Override
-	public boolean containsLayer(GPLayerBean key) {
-		// TODO Auto-generated method stub
-		return this.layers.containsKey(key);
-	}
+    public LayersStore(GeoPlatformMap theMapWidget) {
+        super(theMapWidget);
+        // TODO Auto-generated constructor stub
+        this.layerBuilder = new LayerBuilder(theMapWidget);
+//        this.legendWidget = new LegendWindow();
+        GPScaleWidget.display("Scale");
+    }
 
-	@Override
-	public Layer getLayer(GPLayerBean key) {
-		// TODO Auto-generated method stub
-		return this.layers.get(key);
-	}
+    @Override
+    public boolean containsLayer(GPLayerBean key) {
+        // TODO Auto-generated method stub
+        return this.layers.containsKey(key);
+    }
 
-	@Override
-	public void onDisplayLayer(GPLayerBean layerBean) {
-		// TODO Auto-generated method stub
-		super.displayLayer(layerBean);
-	}
+    @Override
+    public Layer getLayer(GPLayerBean key) {
+        // TODO Auto-generated method stub
+        return this.layers.get(key);
+    }
 
-	@Override
-	public void onHideLayer(GPLayerBean layerBean) {
-		// TODO Auto-generated method stub
-		this.hideLayer(layerBean);
-	}
+    @Override
+    public void onDisplayLayer(GPLayerBean layerBean) {
+        // TODO Auto-generated method stub
+        super.displayLayer(layerBean);
+    }
 
-	@Override
-	public void onRemoveLayer(GPLayerBean layerBean) {
-		// TODO Auto-generated method stub
-		this.removeLayer(layerBean);
-	}
+    @Override
+    public void onHideLayer(GPLayerBean layerBean) {
+        // TODO Auto-generated method stub
+        this.hideLayer(layerBean);
+    }
 
-	@Override
-	public void displayVector(GPVectorBean vectorBean) {
-		// TODO Auto-generated method stub
-		this.legendWidget.addLegend(vectorBean);
+    @Override
+    public void onRemoveLayer(GPLayerBean layerBean) {
+        // TODO Auto-generated method stub
+        this.removeLayer(layerBean);
+    }
 
-		if (containsLayer(vectorBean)) {
-			WMS layer = (WMS) this.layers.get(vectorBean);
-			layer.setIsVisible(true);
-			layer.redraw();
-		} else {
-			WMS layer = (WMS) this.layerBuilder.buildLayer(vectorBean);
-			this.layers.put(vectorBean, layer);
-			this.mapWidget.getMap().addLayer(layer);
-			layer.setZIndex(vectorBean.getzIndex());
-		}
-	}
+    @Override
+    public void displayVector(GPVectorBean vectorBean) {
+        // TODO Auto-generated method stub
+        displayLegend.setLayerBean(vectorBean);
+        LayerHandlerManager.fireEvent(displayLegend);
 
-	@Override
-	public void displayRaster(GPRasterBean rasterBean) {
-		// TODO Auto-generated method stub
-		this.legendWidget.addLegend(rasterBean);
+        if (containsLayer(vectorBean)) {
+            WMS layer = (WMS) this.layers.get(vectorBean);
+            layer.setIsVisible(true);
+            layer.redraw();
+        } else {
+            WMS layer = (WMS) this.layerBuilder.buildLayer(vectorBean);
+            this.layers.put(vectorBean, layer);
+            this.mapWidget.getMap().addLayer(layer);
+            layer.setZIndex(vectorBean.getzIndex());
+        }
+    }
 
-		if (containsLayer(rasterBean)) {
-			WMS layer = (WMS) this.layers.get(rasterBean);
-			layer.setIsVisible(true);
-			layer.redraw();
-		} else {
-			WMS layer = (WMS) this.layerBuilder.buildLayer(rasterBean);
-			this.layers.put(rasterBean, layer);
-			this.mapWidget.getMap().addLayer(layer);
-			layer.setZIndex(rasterBean.getzIndex());
-		}
-	}
+    @Override
+    public void displayRaster(GPRasterBean rasterBean) {
+        // TODO Auto-generated method stub
+        displayLegend.setLayerBean(rasterBean);
+        LayerHandlerManager.fireEvent(displayLegend);
 
-	@Override
-	public void hideLayer(GPLayerBean layerBean) {
-		// TODO Auto-generated method stub
-		Layer layer = getLayer(layerBean);
-		if (layer != null)
-			layer.setIsVisible(false);
-		this.legendWidget.hideLegenItem(layerBean);
-	}
+        if (containsLayer(rasterBean)) {
+            WMS layer = (WMS) this.layers.get(rasterBean);
+            layer.setIsVisible(true);
+            layer.redraw();
+        } else {
+            WMS layer = (WMS) this.layerBuilder.buildLayer(rasterBean);
+            this.layers.put(rasterBean, layer);
+            this.mapWidget.getMap().addLayer(layer);
+            layer.setZIndex(rasterBean.getzIndex());
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.impl.map.store.ILayersStore#removeLayer(org
-	 * .geosdi.geoplatform.gui.model.GPLayerBean)
-	 */
-	@Override
-	public void removeLayer(GPLayerBean layerBean) {
-		// TODO Auto-generated method stub
-		this.layers.remove(layerBean);
-		this.legendWidget.hideLegenItem(layerBean);
-	}
+    @Override
+    public void hideLayer(GPLayerBean layerBean) {
+        // TODO Auto-generated method stub
+        Layer layer = getLayer(layerBean);
+        if (layer != null) {
+            layer.setIsVisible(false);
+        }
+
+        LayerHandlerManager.fireEvent(new HideLegendEvent(layerBean));
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.impl.map.store.ILayersStore#removeLayer(org
+     * .geosdi.geoplatform.gui.model.GPLayerBean)
+     */
+    @Override
+    public void removeLayer(GPLayerBean layerBean) {
+        // TODO Auto-generated method stub
+        this.layers.remove(layerBean);
+//      F  this.legendWidget.hideLegenItem(layerBean);
+    }
 }

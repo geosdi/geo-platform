@@ -41,9 +41,8 @@ package org.geosdi.geoplatform.gui.model;
  * 
  */
 public interface GPVectorBean extends GPLayerBean {
-	
-	public String getFeatureNameSpace();
-	
-	public void setFeatureNameSpace(String featureNameSpace);
 
+    public String getFeatureNameSpace();
+
+    public void setFeatureNameSpace(String featureNameSpace);
 }

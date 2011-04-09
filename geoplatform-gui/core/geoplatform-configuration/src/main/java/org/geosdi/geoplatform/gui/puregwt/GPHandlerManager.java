@@ -46,35 +46,35 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public class GPHandlerManager {
 
-	private GPEventBus eventBus;
+    private GPEventBus eventBus;
+    private static GPHandlerManager INSTANCE;
 
-	private static GPHandlerManager INSTANCE;
+    public GPHandlerManager() {
+        this.eventBus = new GPEventBusImpl();
+    }
 
-	public GPHandlerManager() {
-		this.eventBus = new GPEventBusImpl();
-	}
+    public static GPHandlerManager get() {
+        if (INSTANCE == null) {
+            INSTANCE = new GPHandlerManager();
+        }
+        return INSTANCE;
+    }
 
-	public static GPHandlerManager get() {
-		if (INSTANCE == null)
-			INSTANCE = new GPHandlerManager();
-		return INSTANCE;
-	}
+    public static <T extends EventHandler> HandlerRegistration addHandler(
+            Type<T> type, T handler) {
+        return get().eventBus.addHandler(type, handler);
+    }
 
-	public static <T extends EventHandler> HandlerRegistration addHandler(
-			Type<T> type, T handler) {
-		return get().eventBus.addHandler(type, handler);
-	}
+    public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
+            Type<T> type, Object source, T handler) {
+        return get().eventBus.addHandlerToSource(type, source, handler);
+    }
 
-	public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
-			Type<T> type, Object source, T handler) {
-		return get().eventBus.addHandlerToSource(type, source, handler);
-	}
+    public static void fireEvent(GwtEvent<?> event) {
+        get().eventBus.fireEvent(event);
+    }
 
-	public static void fireEvent(GwtEvent<?> event) {
-		get().eventBus.fireEvent(event);
-	}
-
-	public static void fireEventFromSource(GwtEvent<?> event, Object source) {
-		get().eventBus.fireEventFromSource(event, source);
-	}
+    public static void fireEventFromSource(GwtEvent<?> event, Object source) {
+        get().eventBus.fireEventFromSource(event, source);
+    }
 }

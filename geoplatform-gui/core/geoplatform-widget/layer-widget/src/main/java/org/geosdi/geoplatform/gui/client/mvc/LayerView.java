@@ -50,57 +50,60 @@ import com.extjs.gxt.ui.client.mvc.Controller;
  */
 public class LayerView extends GeoPlatformView {
 
-	private LayerManagementWidget layerManagement;
+    private LayerManagementWidget layerManagement;
 
-	/**
-	 * @Constructor
-	 * 
-	 * @param controller
-	 */
-	public LayerView(Controller controller) {
-		super(controller);
-		// TODO Auto-generated constructor stub
-		this.layerManagement = new LayerManagementWidget();
-	}
+    /**
+     * @Constructor
+     *
+     * @param controller
+     */
+    public LayerView(Controller controller) {
+        super(controller);
+        // TODO Auto-generated constructor stub
+        this.layerManagement = new LayerManagementWidget();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent
-	 * (com.extjs.gxt.ui.client.mvc.AppEvent)
-	 */
-	@Override
-	protected void handleEvent(AppEvent event) {
-		// TODO Auto-generated method stub
-		if (event.getType() == LayerEvents.SHOW_LAYER_WIDGET)
-			onShowLayerWidget();
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent
+     * (com.extjs.gxt.ui.client.mvc.AppEvent)
+     */
+    @Override
+    protected void handleEvent(AppEvent event) {
+        // TODO Auto-generated method stub
+        if (event.getType() == LayerEvents.SHOW_LAYER_WIDGET) {
+            onShowLayerWidget();
+        }
 
-		if (event.getType() == LayerEvents.HIDE_LAYER_WIDGET)
-			onHideLayerWidget();
-	}
+        if (event.getType() == LayerEvents.HIDE_LAYER_WIDGET) {
+            onHideLayerWidget();
+        }
+    }
 
-	/**
-	 * Hide Layer Widget
-	 * 
-	 */
-	private void onHideLayerWidget() {
-		// TODO Auto-generated method stub
-		LayoutManager.removeComponentFromWest(layerManagement);
-		if (!LayoutManager.isOneWidgetVisibleAtWest())
-			LayoutManager.manageWest(false);
-	}
+    /**
+     * Hide Layer Widget
+     *
+     */
+    private void onHideLayerWidget() {
+        // TODO Auto-generated method stub
+        LayoutManager.removeComponentFromWest(layerManagement);
+        if (!LayoutManager.isOneWidgetVisibleAtWest()) {
+            LayoutManager.manageWest(false);
+        }
+    }
 
-	/**
-	 * Show Layer Widget
-	 * 
-	 */
-	private void onShowLayerWidget() {
-		// TODO Auto-generated method stub
-		this.layerManagement.buildTree();
-		if (!LayoutManager.isWestVisible())
-			LayoutManager.manageWest(true);
-		LayoutManager.addComponentToWest(layerManagement);
-	}
-
+    /**
+     * Show Layer Widget
+     *
+     */
+    private void onShowLayerWidget() {
+        // TODO Auto-generated method stub
+        this.layerManagement.buildTree();
+        if (!LayoutManager.isWestVisible()) {
+            LayoutManager.manageWest(true);
+        }
+        LayoutManager.addComponentToWest(layerManagement);
+    }
 }

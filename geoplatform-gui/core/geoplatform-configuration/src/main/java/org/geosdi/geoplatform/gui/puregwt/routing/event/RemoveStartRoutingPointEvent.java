@@ -42,31 +42,29 @@ import com.google.gwt.event.shared.GwtEvent;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class RemoveStartRoutingPointEvent extends
-		GwtEvent<RemoveStartRoutingPointEventHandler> {
+public class RemoveStartRoutingPointEvent extends GwtEvent<RemoveStartRoutingPointEventHandler> {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
-	 */
-	@Override
-	public Type<RemoveStartRoutingPointEventHandler> getAssociatedType() {
-		// TODO Auto-generated method stub
-		return RemoveStartRoutingPointEventHandler.TYPE;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+     */
+    @Override
+    public Type<RemoveStartRoutingPointEventHandler> getAssociatedType() {
+        // TODO Auto-generated method stub
+        return RemoveStartRoutingPointEventHandler.TYPE;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
-	 * .EventHandler)
-	 */
-	@Override
-	protected void dispatch(RemoveStartRoutingPointEventHandler handler) {
-		// TODO Auto-generated method stub
-		handler.removePoint();
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+     * .EventHandler)
+     */
+    @Override
+    protected void dispatch(RemoveStartRoutingPointEventHandler handler) {
+        // TODO Auto-generated method stub
+        handler.removePoint();
+    }
 }

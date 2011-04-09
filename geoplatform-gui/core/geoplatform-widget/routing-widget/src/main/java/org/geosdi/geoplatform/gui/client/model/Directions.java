@@ -43,66 +43,64 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
  */
 public class Directions extends GeoPlatformBeanModel {
 
-	public enum DirectionsKeyValue {
-		ROUTE("route");
+    public enum DirectionsKeyValue {
 
-		private String value;
+        ROUTE("route");
+        private String value;
 
-		DirectionsKeyValue(String theValue) {
-			this.value = theValue;
-		}
+        DirectionsKeyValue(String theValue) {
+            this.value = theValue;
+        }
 
-		public String getValue() {
-			return value;
-		}
-	}
+        public String getValue() {
+            return value;
+        }
+    }
+    /**
+     *
+     */
+    private static final long serialVersionUID = -400404488288047084L;
+    private String route;
+    private String wkt;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -400404488288047084L;
+    /**
+     * @return the route
+     */
+    public String getRoute() {
+        return route;
+    }
 
-	private String route;
-	private String wkt;
+    /**
+     * @param route
+     *            the route to set
+     */
+    public void setRoute(String route) {
+        this.route = route;
+        set(DirectionsKeyValue.ROUTE.getValue(), this.route);
+    }
 
-	/**
-	 * @return the route
-	 */
-	public String getRoute() {
-		return route;
-	}
+    /**
+     * @return the wkt
+     */
+    public String getWkt() {
+        return wkt;
+    }
 
-	/**
-	 * @param route
-	 *            the route to set
-	 */
-	public void setRoute(String route) {
-		this.route = route;
-		set(DirectionsKeyValue.ROUTE.getValue(), this.route);
-	}
+    /**
+     * @param wkt
+     *            the wkt to set
+     */
+    public void setWkt(String wkt) {
+        this.wkt = wkt;
+    }
 
-	/**
-	 * @return the wkt
-	 */
-	public String getWkt() {
-		return wkt;
-	}
-
-	/**
-	 * @param wkt
-	 *            the wkt to set
-	 */
-	public void setWkt(String wkt) {
-		this.wkt = wkt;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Directions [route=" + route + ", wkt=" + wkt + "]";
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Directions [route=" + route + ", wkt=" + wkt + "]";
+    }
 }

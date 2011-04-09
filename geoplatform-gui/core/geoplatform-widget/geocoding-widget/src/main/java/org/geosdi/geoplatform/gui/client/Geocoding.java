@@ -55,44 +55,44 @@ import com.google.gwt.core.client.EntryPoint;
  */
 public class Geocoding implements EntryPoint {
 
-	private Dispatcher dispatcher;
+    private Dispatcher dispatcher;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
-	 */
-	@Override
-	public void onModuleLoad() {
-		// TODO Auto-generated method stub
-		dispatcher = Dispatcher.get();
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+     */
+    @Override
+    public void onModuleLoad() {
+        // TODO Auto-generated method stub
+        dispatcher = Dispatcher.get();
 
-		dispatcher.addController(new GeocodingController());
+        dispatcher.addController(new GeocodingController());
 
-		addGeocodingAction();
+        addGeocodingAction();
 
-		dispatcher.dispatch(GeocodingEvents.INIT_GEOCODING_WIDGET);
-	}
+        dispatcher.dispatch(GeocodingEvents.INIT_GEOCODING_WIDGET);
+    }
 
-	private void addGeocodingAction() {
-		// TODO Auto-generated method stub
-		MenuActionRegistar.put("geocoding", new MenuActionCreator() {
+    private void addGeocodingAction() {
+        // TODO Auto-generated method stub
+        MenuActionRegistar.put("geocoding", new MenuActionCreator() {
 
-			@Override
-			public MenuAction createAction() {
-				// TODO Auto-generated method stub
-				return new GeocodingMenuAction();
-			}
-		});
+            @Override
+            public MenuAction createAction() {
+                // TODO Auto-generated method stub
+                return new GeocodingMenuAction();
+            }
+        });
 
-		ToolbarActionRegistar.put("reverseGeocoding",
-				new ToolbarActionCreator() {
+        ToolbarActionRegistar.put("reverseGeocoding",
+                new ToolbarActionCreator() {
 
-					public GeoPlatformToolbarAction createActionTool(
-							GeoPlatformMap mapWidget) {
-						// TODO Auto-generated method stub
-						return new ReverseGeocodingAction(mapWidget);
-					}
-				});
-	}
+                    public GeoPlatformToolbarAction createActionTool(
+                            GeoPlatformMap mapWidget) {
+                        // TODO Auto-generated method stub
+                        return new ReverseGeocodingAction(mapWidget);
+                    }
+                });
+    }
 }

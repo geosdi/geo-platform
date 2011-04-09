@@ -48,36 +48,35 @@ import com.google.gwt.event.shared.SimpleEventBus;
  */
 public class MapHandlerManager {
 
-	private SimpleEventBus eventBus;
+    private SimpleEventBus eventBus;
+    private static MapHandlerManager INSTANCE;
 
-	private static MapHandlerManager INSTANCE;
+    public MapHandlerManager() {
+        this.eventBus = new SimpleEventBus();
+    }
 
-	public MapHandlerManager() {
-		this.eventBus  = new SimpleEventBus();
-	}
+    public static MapHandlerManager get() {
+        if (INSTANCE == null) {
+            INSTANCE = new MapHandlerManager();
+        }
+        return INSTANCE;
+    }
 
-	public static MapHandlerManager get() {
-		if (INSTANCE == null)
-			INSTANCE = new MapHandlerManager();
-		return INSTANCE;
-	}
+    public static <T extends EventHandler> HandlerRegistration addHandler(
+            Type<T> type, T handler) {
+        return get().eventBus.addHandler(type, handler);
+    }
 
-	public static <T extends EventHandler> HandlerRegistration addHandler(
-			Type<T> type, T handler) {
-		return get().eventBus.addHandler(type, handler);
-	}
+    public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
+            Type<T> type, Object source, T handler) {
+        return get().eventBus.addHandlerToSource(type, source, handler);
+    }
 
-	public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
-			Type<T> type, Object source, T handler) {
-		return get().eventBus.addHandlerToSource(type, source, handler);
-	}
+    public static void fireEvent(GwtEvent<?> event) {
+        get().eventBus.fireEvent(event);
+    }
 
-	public static void fireEvent(GwtEvent<?> event) {
-		get().eventBus.fireEvent(event);
-	}
-
-	public void fireEventFromSource(GwtEvent<?> event, Object source) {
-		get().eventBus.fireEventFromSource(event, source);
-	}
-
+    public void fireEventFromSource(GwtEvent<?> event, Object source) {
+        get().eventBus.fireEventFromSource(event, source);
+    }
 }

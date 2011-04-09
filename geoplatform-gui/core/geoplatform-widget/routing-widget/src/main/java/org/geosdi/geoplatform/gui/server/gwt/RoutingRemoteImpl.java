@@ -49,25 +49,22 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * 
  */
 public class RoutingRemoteImpl extends RemoteServiceServlet implements
-		RoutingRemote {
+        RoutingRemote {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7133616799373101981L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 7133616799373101981L;
+    private IRoutingService routingService;
 
-	private IRoutingService routingService;
+    public RoutingRemoteImpl() {
+        this.routingService = (IRoutingService) GeoPlatformContextUtil.getInstance().getBean(RoutingService.class);
+    }
 
-	public RoutingRemoteImpl() {
-		this.routingService = (IRoutingService) GeoPlatformContextUtil
-				.getInstance().getBean(RoutingService.class);
-	}
-
-	@Override
-	public RoutingBean findDirections(double xStart, double yStart,
-			double xStop, double yStop) throws GeoPlatformException {
-		// TODO Auto-generated method stub
-		return this.routingService.findDirections(xStart, yStart, xStop, yStop);
-	}
-
+    @Override
+    public RoutingBean findDirections(double xStart, double yStart,
+            double xStop, double yStop) throws GeoPlatformException {
+        // TODO Auto-generated method stub
+        return this.routingService.findDirections(xStart, yStart, xStop, yStop);
+    }
 }

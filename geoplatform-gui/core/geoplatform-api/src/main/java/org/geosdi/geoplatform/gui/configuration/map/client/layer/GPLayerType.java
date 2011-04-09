@@ -44,12 +44,11 @@ import java.io.Serializable;
  */
 public enum GPLayerType implements Serializable {
 
-	RASTER,
-	POINT,
-	LINESTRING,
-	POLYGON,
-	MULTIPOINT,
-	MULTILINESTRING,
-	MULTIPOLYGON;
-
+    RASTER,
+    POINT,
+    LINESTRING,
+    POLYGON,
+    MULTIPOINT,
+    MULTILINESTRING,
+    MULTIPOLYGON;
 }

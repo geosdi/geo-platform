@@ -45,79 +45,86 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
  * 
  */
 public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
-		GPLayerBean {
+        GPLayerBean {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6964624685883651246L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -6964624685883651246L;
+    private String dataSource;
+    private String crs;
+    private BboxClientInfo bbox;
+    private GPLayerType layerType;
 
-	private String dataSource;
-	private String crs;
-	private BboxClientInfo bbox;
-	private GPLayerType layerType;
+    /**
+     * @return the dataSource
+     */
+    @Override
+    public String getDataSource() {
+        return dataSource;
+    }
 
-	/**
-	 * @return the dataSource
-	 */
-	public String getDataSource() {
-		return dataSource;
-	}
+    /**
+     * @param dataSource
+     *            the dataSource to set
+     */
+    @Override
+    public void setDataSource(String dataSource) {
+        this.dataSource = dataSource;
+    }
 
-	/**
-	 * @param dataSource
-	 *            the dataSource to set
-	 */
-	public void setDataSource(String dataSource) {
-		this.dataSource = dataSource;
-	}
+    /**
+     * @return the crs
+     */
+    @Override
+    public String getCrs() {
+        return crs;
+    }
 
-	/**
-	 * @return the crs
-	 */
-	public String getCrs() {
-		return crs;
-	}
+    /**
+     * @param crs
+     *            the crs to set
+     */
+    @Override
+    public void setCrs(String crs) {
+        this.crs = crs;
+    }
 
-	/**
-	 * @param crs
-	 *            the crs to set
-	 */
-	public void setCrs(String crs) {
-		this.crs = crs;
-	}
+    /**
+     * @return the bbox
+     */
+    @Override
+    public BboxClientInfo getBbox() {
+        return bbox;
+    }
 
-	/**
-	 * @return the bbox
-	 */
-	public BboxClientInfo getBbox() {
-		return bbox;
-	}
+    /**
+     * @param bbox
+     *            the bbox to set
+     */
+    @Override
+    public void setBbox(BboxClientInfo bbox) {
+        this.bbox = bbox;
+    }
 
-	/**
-	 * @param bbox
-	 *            the bbox to set
-	 */
-	public void setBbox(BboxClientInfo bbox) {
-		this.bbox = bbox;
-	}
+    /**
+     * @return the layerType
+     */
+    @Override
+    public GPLayerType getLayerType() {
+        return layerType;
+    }
 
-	/**
-	 * @return the layerType
-	 */
-	public GPLayerType getLayerType() {
-		return layerType;
-	}
+    /**
+     * @param layerType
+     *            the layerType to set
+     */
+    @Override
+    public void setLayerType(GPLayerType layerType) {
+        this.layerType = layerType;
+    }
 
-	/**
-	 * @param layerType
-	 *            the layerType to set
-	 */
-	public void setLayerType(GPLayerType layerType) {
-		this.layerType = layerType;
-	}
-
-	public boolean isParentChecked() {
-		return ((IFolderTreeNode) super.getParent()).isChecked();
-	}
+    public boolean isParentChecked() {
+        return ((IFolderTreeNode) super.getParent()).isChecked();
+    }
 }

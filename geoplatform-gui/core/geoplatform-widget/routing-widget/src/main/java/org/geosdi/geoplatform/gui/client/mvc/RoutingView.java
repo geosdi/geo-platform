@@ -57,109 +57,112 @@ import com.extjs.gxt.ui.client.widget.grid.Grid;
  */
 public class RoutingView extends GeoPlatformView {
 
-	private RoutingManagementWidget routingManagement;
-	private RoutingActivationEvent activationEvent;
+    private RoutingManagementWidget routingManagement;
+    private RoutingActivationEvent activationEvent;
 
-	public RoutingView(Controller controller) {
-		super(controller);
-		// TODO Auto-generated constructor stub
-		this.routingManagement = new RoutingManagementWidget(
-				(RoutingController) controller);
-	}
+    public RoutingView(Controller controller) {
+        super(controller);
+        // TODO Auto-generated constructor stub
+        this.routingManagement = new RoutingManagementWidget(
+                (RoutingController) controller);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.extjs.gxt.ui.client.mvc.View#initialize()
-	 */
-	@Override
-	protected void initialize() {
-		// TODO Auto-generated method stub
-		this.activationEvent = new RoutingActivationEvent();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.extjs.gxt.ui.client.mvc.View#initialize()
+     */
+    @Override
+    protected void initialize() {
+        // TODO Auto-generated method stub
+        this.activationEvent = new RoutingActivationEvent();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent
-	 * (com.extjs.gxt.ui.client.mvc.AppEvent)
-	 */
-	@Override
-	protected void handleEvent(AppEvent event) {
-		// TODO Auto-generated method stub
-		if (event.getType() == RoutingEvents.SHOW_ROUTING_WIDGET)
-			onShowRoutingWidget();
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent
+     * (com.extjs.gxt.ui.client.mvc.AppEvent)
+     */
+    @Override
+    protected void handleEvent(AppEvent event) {
+        // TODO Auto-generated method stub
+        if (event.getType() == RoutingEvents.SHOW_ROUTING_WIDGET) {
+            onShowRoutingWidget();
+        }
 
-		if (event.getType() == RoutingEvents.HIDE_ROUTING_WIDGET)
-			onHideRoutingWidget();
-	}
+        if (event.getType() == RoutingEvents.HIDE_ROUTING_WIDGET) {
+            onHideRoutingWidget();
+        }
+    }
 
-	/**
-	 * Show Routing Widget
-	 */
-	private void onShowRoutingWidget() {
-		// TODO Auto-generated method stub
-		if (!LayoutManager.isWestVisible())
-			LayoutManager.manageWest(true);
-		LayoutManager.addComponentToWest(routingManagement);
-		this.activationEvent.setActivate(Boolean.TRUE);
+    /**
+     * Show Routing Widget
+     */
+    private void onShowRoutingWidget() {
+        // TODO Auto-generated method stub
+        if (!LayoutManager.isWestVisible()) {
+            LayoutManager.manageWest(true);
+        }
+        LayoutManager.addComponentToWest(routingManagement);
+        this.activationEvent.setActivate(Boolean.TRUE);
 
-		RoutingHandlerManager.fireEvent(this.activationEvent);
-	}
+        RoutingHandlerManager.fireEvent(this.activationEvent);
+    }
 
-	/**
-	 * Hide Routing Widget
-	 */
-	private void onHideRoutingWidget() {
-		// TODO Auto-generated method stub
-		LayoutManager.removeComponentFromWest(routingManagement);
-		this.activationEvent.setActivate(Boolean.FALSE);
-		if (!LayoutManager.isOneWidgetVisibleAtWest())
-			LayoutManager.manageWest(false);
+    /**
+     * Hide Routing Widget
+     */
+    private void onHideRoutingWidget() {
+        // TODO Auto-generated method stub
+        LayoutManager.removeComponentFromWest(routingManagement);
+        this.activationEvent.setActivate(Boolean.FALSE);
+        if (!LayoutManager.isOneWidgetVisibleAtWest()) {
+            LayoutManager.manageWest(false);
+        }
 
-		RoutingHandlerManager.fireEvent(this.activationEvent);
-	}
+        RoutingHandlerManager.fireEvent(this.activationEvent);
+    }
 
-	/**
-	 * @return the routingManagement
-	 */
-	public RoutingManagementWidget getRoutingManagement() {
-		return routingManagement;
-	}
+    /**
+     * @return the routingManagement
+     */
+    public RoutingManagementWidget getRoutingManagement() {
+        return routingManagement;
+    }
 
-	/**
-	 * Mask RoutingGridWidget
-	 */
-	public void maskRoutingGrid() {
-		this.routingManagement.getRoutingGridWidget().maskGrid();
-	}
+    /**
+     * Mask RoutingGridWidget
+     */
+    public void maskRoutingGrid() {
+        this.routingManagement.getRoutingGridWidget().maskGrid();
+    }
 
-	/**
-	 * Un Mask RoutingGridWidget
-	 */
-	public void unMaskRoutingGrid() {
-		this.routingManagement.getRoutingGridWidget().unMaskGrid();
-	}
+    /**
+     * Un Mask RoutingGridWidget
+     */
+    public void unMaskRoutingGrid() {
+        this.routingManagement.getRoutingGridWidget().unMaskGrid();
+    }
 
-	/**
-	 * Clean the Store
-	 */
-	public void cleanStore() {
-		this.routingManagement.getRoutingGridWidget().getStore().removeAll();
-	}
+    /**
+     * Clean the Store
+     */
+    public void cleanStore() {
+        this.routingManagement.getRoutingGridWidget().getStore().removeAll();
+    }
 
-	/**
-	 * Fill RoutingGridWidget Store
-	 * 
-	 * @param beans
-	 */
-	public void fillStore(ArrayList<Directions> beans) {
-		this.routingManagement.getRoutingGridWidget().fillStore(beans);
-	}
+    /**
+     * Fill RoutingGridWidget Store
+     *
+     * @param beans
+     */
+    public void fillStore(ArrayList<Directions> beans) {
+        this.routingManagement.getRoutingGridWidget().fillStore(beans);
+    }
 
-	public Grid<Directions> getGrid() {
-		return this.routingManagement.getRoutingGridWidget().getGrid();
-	}
-
+    public Grid<Directions> getGrid() {
+        return this.routingManagement.getRoutingGridWidget().getGrid();
+    }
 }

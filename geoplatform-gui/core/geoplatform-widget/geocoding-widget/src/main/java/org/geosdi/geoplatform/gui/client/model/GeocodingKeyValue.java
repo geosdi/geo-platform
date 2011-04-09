@@ -41,20 +41,18 @@ package org.geosdi.geoplatform.gui.client.model;
  */
 public enum GeocodingKeyValue {
 
-	ID("id"), VISIBLE("visible"), DESCRIPTION("description"), ZERO_RESULTS(
-			"ZERO_RESULTS");
+    ID("id"), VISIBLE("visible"), DESCRIPTION("description"), ZERO_RESULTS(
+    "ZERO_RESULTS");
+    private String value;
 
-	private String value;
+    GeocodingKeyValue(String value) {
+        this.value = value;
+    }
 
-	GeocodingKeyValue(String value) {
-		this.value = value;
-	}
-
-	/**
-	 * @return the value
-	 */
-	public String getValue() {
-		return value;
-	}
-
+    /**
+     * @return the value
+     */
+    public String getValue() {
+        return value;
+    }
 }

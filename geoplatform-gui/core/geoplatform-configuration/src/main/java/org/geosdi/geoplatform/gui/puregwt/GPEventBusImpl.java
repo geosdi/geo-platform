@@ -47,31 +47,31 @@ import com.google.gwt.event.shared.SimpleEventBus;
  */
 public class GPEventBusImpl implements GPEventBus {
 
-	private SimpleEventBus eventBus = new SimpleEventBus();
+    private SimpleEventBus eventBus = new SimpleEventBus();
 
-	@Override
-	public <T extends EventHandler> HandlerRegistration addHandler(
-			Type<T> type, T handler) {
-		// TODO Auto-generated method stub
-		return eventBus.addHandler(type, handler);
-	}
+    @Override
+    public <T extends EventHandler> HandlerRegistration addHandler(
+            Type<T> type, T handler) {
+        // TODO Auto-generated method stub
+        return eventBus.addHandler(type, handler);
+    }
 
-	@Override
-	public <T extends EventHandler> HandlerRegistration addHandlerToSource(
-			Type<T> type, Object source, T handler) {
-		// TODO Auto-generated method stub
-		return eventBus.addHandlerToSource(type, source, handler);
-	}
+    @Override
+    public <T extends EventHandler> HandlerRegistration addHandlerToSource(
+            Type<T> type, Object source, T handler) {
+        // TODO Auto-generated method stub
+        return eventBus.addHandlerToSource(type, source, handler);
+    }
 
-	@Override
-	public void fireEvent(GwtEvent<?> event) {
-		// TODO Auto-generated method stub
-		this.eventBus.fireEvent(event);
-	}
+    @Override
+    public void fireEvent(GwtEvent<?> event) {
+        // TODO Auto-generated method stub
+        this.eventBus.fireEvent(event);
+    }
 
-	@Override
-	public void fireEventFromSource(GwtEvent<?> event, Object source) {
-		// TODO Auto-generated method stub
-		this.eventBus.fireEventFromSource(event, source);
-	}
+    @Override
+    public void fireEventFromSource(GwtEvent<?> event, Object source) {
+        // TODO Auto-generated method stub
+        this.eventBus.fireEventFromSource(event, source);
+    }
 }

@@ -51,38 +51,38 @@ import com.google.gwt.event.shared.HandlerRegistration;
  */
 public class MapModel extends GPMapModel implements HasLayerChangedHandler {
 
-	private LayersStore layersStore;
+    private LayersStore layersStore;
 
-	public MapModel(GeoPlatformMap theMapWidget) {
-		super(theMapWidget);
-		// TODO Auto-generated constructor stub
-		createStores();
-	}
+    public MapModel(GeoPlatformMap theMapWidget) {
+        super(theMapWidget);
+        // TODO Auto-generated constructor stub
+        createStores();
+    }
 
-	private void createStores() {
-		// TODO Auto-generated method stub
-		this.layersStore = new LayersStore(this.mapWidget);
-	}
+    private void createStores() {
+        // TODO Auto-generated method stub
+        this.layersStore = new LayersStore(this.mapWidget);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.client.widget.map.event.HasLayerChangedHandler
-	 * #addLayerChangedHandler(org.geosdi.geoplatform.gui.impl.map.event.
-	 * LayerChangedHandler)
-	 */
-	@Override
-	public HandlerRegistration addLayerChangedHandler() {
-		// TODO Auto-generated method stub
-		return GPHandlerManager.addHandler(LayerChangedHandler.TYPE,
-				this.layersStore);
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.map.event.HasLayerChangedHandler
+     * #addLayerChangedHandler(org.geosdi.geoplatform.gui.impl.map.event.
+     * LayerChangedHandler)
+     */
+    @Override
+    public HandlerRegistration addLayerChangedHandler() {
+        // TODO Auto-generated method stub
+        return GPHandlerManager.addHandler(LayerChangedHandler.TYPE,
+                this.layersStore);
+    }
 
-	/**
-	 * @return the layersStore
-	 */
-	public LayersStore getLayersStore() {
-		return layersStore;
-	}
+    /**
+     * @return the layersStore
+     */
+    public LayersStore getLayersStore() {
+        return layersStore;
+    }
 }

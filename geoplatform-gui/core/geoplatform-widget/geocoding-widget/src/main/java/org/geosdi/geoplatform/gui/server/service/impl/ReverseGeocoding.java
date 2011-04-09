@@ -60,61 +60,59 @@ import org.xml.sax.SAXException;
  */
 @Service("reverseGeocoding")
 public class ReverseGeocoding extends GPGeocodingService implements
-		IReverseGeocoding {
+        IReverseGeocoding {
 
-	// URL prefix to the reverse geocoder
-	private static final String REVERSE_GEOCODER_PREFIX_FOR_XML = "http://maps.googleapis.com/maps/api/geocode/xml";
+    // URL prefix to the reverse geocoder
+    private static final String REVERSE_GEOCODER_PREFIX_FOR_XML = "http://maps.googleapis.com/maps/api/geocode/xml";
+    private GeocodingBean bean;
 
-	private GeocodingBean bean;
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.server.service.IReverseGeocoding#findLocations
+     * (double, double)
+     */
+    @Override
+    public GeocodingBean findLocation(double lat, double lon)
+            throws IOException, SAXException, ParserConfigurationException,
+            XPathExpressionException {
+        // TODO Auto-generated method stub
+        this.bean = new GeocodingBean();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.server.service.IReverseGeocoding#findLocations
-	 * (double, double)
-	 */
-	@Override
-	public GeocodingBean findLocation(double lat, double lon)
-			throws IOException, SAXException, ParserConfigurationException,
-			XPathExpressionException {
-		// TODO Auto-generated method stub
-		this.bean = new GeocodingBean();
+        url = new URL(REVERSE_GEOCODER_PREFIX_FOR_XML + "?latlng="
+                + URLEncoder.encode(lat + "," + lon, "UTF-8") + "&sensor=true");
 
-		url = new URL(REVERSE_GEOCODER_PREFIX_FOR_XML + "?latlng="
-				+ URLEncoder.encode(lat + "," + lon, "UTF-8") + "&sensor=true");
+        conn = (HttpURLConnection) url.openConnection();
 
-		conn = (HttpURLConnection) url.openConnection();
+        Document geocoderResultDocument = null;
 
-		Document geocoderResultDocument = null;
+        try {
+            // open the connection and get results as InputSource.
+            conn.connect();
+            InputSource geocoderResultInputSource = new InputSource(
+                    conn.getInputStream());
 
-		try {
-			// open the connection and get results as InputSource.
-			conn.connect();
-			InputSource geocoderResultInputSource = new InputSource(
-					conn.getInputStream());
+            // read result and parse into XML Document
+            geocoderResultDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(geocoderResultInputSource);
+        } finally {
+            conn.disconnect();
+        }
 
-			// read result and parse into XML Document
-			geocoderResultDocument = DocumentBuilderFactory.newInstance()
-					.newDocumentBuilder().parse(geocoderResultInputSource);
-		} finally {
-			conn.disconnect();
-		}
+        // extract the result
+        NodeList resultNodeList = null;
 
-		// extract the result
-		NodeList resultNodeList = null;
+        // a) obtain the formatted_address field for every result
+        resultNodeList = (NodeList) xpath.evaluate(
+                "/GeocodeResponse/result/formatted_address",
+                geocoderResultDocument, XPathConstants.NODESET);
 
-		// a) obtain the formatted_address field for every result
-		resultNodeList = (NodeList) xpath.evaluate(
-				"/GeocodeResponse/result/formatted_address",
-				geocoderResultDocument, XPathConstants.NODESET);
+        if (resultNodeList.getLength() > 0) {
+            bean.setDescription(resultNodeList.item(0).getTextContent());
+        } else {
+            bean.setDescription(GeocodingKeyValue.ZERO_RESULTS.toString());
+        }
 
-		if (resultNodeList.getLength() > 0)
-			bean.setDescription(resultNodeList.item(0).getTextContent());
-		else
-			bean.setDescription(GeocodingKeyValue.ZERO_RESULTS.toString());
-
-		return bean;
-	}
-
+        return bean;
+    }
 }

@@ -44,27 +44,25 @@ import java.util.List;
  */
 public class GroupMenuClientTool extends MenuBarClientTool {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6262573797200577418L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -6262573797200577418L;
+    private List<MenuBarClientTool> tools;
 
-	private List<MenuBarClientTool> tools;
+    /**
+     * @return the tools
+     */
+    public List<MenuBarClientTool> getTools() {
+        return tools;
+    }
 
-	/**
-	 * @return the tools
-	 */
-	public List<MenuBarClientTool> getTools() {
-		return tools;
-	}
-
-	/**
-	 * @param tools
-	 *            the tools to set
-	 */
-	public void setTools(List<MenuBarClientTool> tools) {
-		Collections.sort(tools);
-		this.tools = tools;
-	}
-
+    /**
+     * @param tools
+     *            the tools to set
+     */
+    public void setTools(List<MenuBarClientTool> tools) {
+        Collections.sort(tools);
+        this.tools = tools;
+    }
 }

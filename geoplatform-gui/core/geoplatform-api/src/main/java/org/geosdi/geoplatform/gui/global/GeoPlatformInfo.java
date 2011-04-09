@@ -38,59 +38,57 @@ package org.geosdi.geoplatform.gui.global;
 import java.io.Serializable;
 import java.util.List;
 
-
 /**
  * @author giuseppe
  * 
  */
 public class GeoPlatformInfo implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6057828785239586928L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 6057828785239586928L;
+    private GeoPlatformVersionInfo version;
+    private List<CopyrightInfo> copyrightInfo;
 
-	private GeoPlatformVersionInfo version;
-	private List<CopyrightInfo> copyrightInfo;
+    /**
+     * @return the version
+     */
+    public GeoPlatformVersionInfo getVersion() {
+        return version;
+    }
 
-	/**
-	 * @return the version
-	 */
-	public GeoPlatformVersionInfo getVersion() {
-		return version;
-	}
+    /**
+     * @param version
+     *            the version to set
+     */
+    public void setVersion(GeoPlatformVersionInfo version) {
+        this.version = version;
+    }
 
-	/**
-	 * @param version
-	 *            the version to set
-	 */
-	public void setVersion(GeoPlatformVersionInfo version) {
-		this.version = version;
-	}
+    /**
+     * @return the copyrightInfo
+     */
+    public List<CopyrightInfo> getCopyrightInfo() {
+        return copyrightInfo;
+    }
 
-	/**
-	 * @return the copyrightInfo
-	 */
-	public List<CopyrightInfo> getCopyrightInfo() {
-		return copyrightInfo;
-	}
+    /**
+     * @param copyrightInfo
+     *            the copyrightInfo to set
+     */
+    public void setCopyrightInfo(List<CopyrightInfo> copyrightInfo) {
+        this.copyrightInfo = copyrightInfo;
+    }
 
-	/**
-	 * @param copyrightInfo
-	 *            the copyrightInfo to set
-	 */
-	public void setCopyrightInfo(List<CopyrightInfo> copyrightInfo) {
-		this.copyrightInfo = copyrightInfo;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "GeoPlatformInfo [version=" + version + ", copyrightInfo="
-				+ copyrightInfo + "]";
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "GeoPlatformInfo [version=" + version + ", copyrightInfo="
+                + copyrightInfo + "]";
+    }
 }

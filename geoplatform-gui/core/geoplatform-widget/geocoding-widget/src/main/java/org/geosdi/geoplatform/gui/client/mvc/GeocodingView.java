@@ -54,103 +54,103 @@ import com.extjs.gxt.ui.client.widget.grid.Grid;
  */
 public class GeocodingView extends GeoPlatformView {
 
-	private GeocodingManagementWidget geocodingManagement;
-	private ReverseGeocodingDispatcher reverseDispatcher;
+    private GeocodingManagementWidget geocodingManagement;
+    private ReverseGeocodingDispatcher reverseDispatcher;
 
-	public GeocodingView(Controller controller) {
-		super(controller);
-		// TODO Auto-generated constructor stub
-		this.geocodingManagement = new GeocodingManagementWidget();
-	}
-	
-	
+    public GeocodingView(Controller controller) {
+        super(controller);
+        // TODO Auto-generated constructor stub
+        this.geocodingManagement = new GeocodingManagementWidget();
+    }
 
-	/* (non-Javadoc)
-	 * @see com.extjs.gxt.ui.client.mvc.View#initialize()
-	 */
-	@Override
-	protected void initialize() {
-		// TODO Auto-generated method stub
-		this.reverseDispatcher = new ReverseGeocodingDispatcher();
-	}
+    /* (non-Javadoc)
+     * @see com.extjs.gxt.ui.client.mvc.View#initialize()
+     */
+    @Override
+    protected void initialize() {
+        // TODO Auto-generated method stub
+        this.reverseDispatcher = new ReverseGeocodingDispatcher();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent
-	 * (com.extjs.gxt.ui.client.mvc.AppEvent)
-	 */
-	@Override
-	protected void handleEvent(AppEvent event) {
-		// TODO Auto-generated method stub
-		if (event.getType() == GeocodingEvents.SHOW_GEOCODING_WIDGET)
-			onShowGeocodingWidget();
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent
+     * (com.extjs.gxt.ui.client.mvc.AppEvent)
+     */
+    @Override
+    protected void handleEvent(AppEvent event) {
+        // TODO Auto-generated method stub
+        if (event.getType() == GeocodingEvents.SHOW_GEOCODING_WIDGET) {
+            onShowGeocodingWidget();
+        }
 
-		if (event.getType() == GeocodingEvents.HIDE_GEOCODING_WIDGET)
-			onHideGeocodingWidget();
-	}
+        if (event.getType() == GeocodingEvents.HIDE_GEOCODING_WIDGET) {
+            onHideGeocodingWidget();
+        }
+    }
 
-	/**
-	 * Hide Geocoding Widget
-	 */
-	private void onHideGeocodingWidget() {
-		// TODO Auto-generated method stub
-		LayoutManager.removeComponentFromWest(geocodingManagement);
-		if (!LayoutManager.isOneWidgetVisibleAtWest())
-			LayoutManager.manageWest(false);
-	}
+    /**
+     * Hide Geocoding Widget
+     */
+    private void onHideGeocodingWidget() {
+        // TODO Auto-generated method stub
+        LayoutManager.removeComponentFromWest(geocodingManagement);
+        if (!LayoutManager.isOneWidgetVisibleAtWest()) {
+            LayoutManager.manageWest(false);
+        }
+    }
 
-	/**
-	 * Show Geocoding Widget
-	 */
-	private void onShowGeocodingWidget() {
-		// TODO Auto-generated method stub
-		if (!LayoutManager.isWestVisible())
-			LayoutManager.manageWest(true);
-		LayoutManager.addComponentToWest(geocodingManagement);
-	}
+    /**
+     * Show Geocoding Widget
+     */
+    private void onShowGeocodingWidget() {
+        // TODO Auto-generated method stub
+        if (!LayoutManager.isWestVisible()) {
+            LayoutManager.manageWest(true);
+        }
+        LayoutManager.addComponentToWest(geocodingManagement);
+    }
 
-	/**
-	 * @return the geocodingManagement
-	 */
-	public GeocodingManagementWidget getGeocodingManagement() {
-		return geocodingManagement;
-	}
+    /**
+     * @return the geocodingManagement
+     */
+    public GeocodingManagementWidget getGeocodingManagement() {
+        return geocodingManagement;
+    }
 
-	/**
-	 * Mask GeocodingGridWidget
-	 */
-	public void maskGeocodingGrid() {
-		this.geocodingManagement.getGeocodingGridWidget().maskGrid();
-	}
+    /**
+     * Mask GeocodingGridWidget
+     */
+    public void maskGeocodingGrid() {
+        this.geocodingManagement.getGeocodingGridWidget().maskGrid();
+    }
 
-	/**
-	 * Un Mask GeocodingGridWidget
-	 */
-	public void unMaskGeocodingGrid() {
-		this.geocodingManagement.getGeocodingGridWidget().unMaskGrid();
-	}
+    /**
+     * Un Mask GeocodingGridWidget
+     */
+    public void unMaskGeocodingGrid() {
+        this.geocodingManagement.getGeocodingGridWidget().unMaskGrid();
+    }
 
-	/**
-	 * Clean the Store
-	 */
-	public void cleanStore() {
-		this.geocodingManagement.getGeocodingGridWidget().getStore()
-				.removeAll();
-	}
+    /**
+     * Clean the Store
+     */
+    public void cleanStore() {
+        this.geocodingManagement.getGeocodingGridWidget().getStore().removeAll();
+    }
 
-	/**
-	 * Fill GeocodingGridWidget Store
-	 * 
-	 * @param beans
-	 */
-	public void fillStore(ArrayList<GeocodingBean> beans) {
-		this.geocodingManagement.getGeocodingGridWidget().fillStore(beans);
-	}
+    /**
+     * Fill GeocodingGridWidget Store
+     *
+     * @param beans
+     */
+    public void fillStore(ArrayList<GeocodingBean> beans) {
+        this.geocodingManagement.getGeocodingGridWidget().fillStore(beans);
+    }
 
-	public Grid<GeocodingBean> getGrid() {
-		return this.geocodingManagement.getGeocodingGridWidget().getGrid();
-	}
-
+    public Grid<GeocodingBean> getGrid() {
+        return this.geocodingManagement.getGeocodingGridWidget().getGrid();
+    }
 }

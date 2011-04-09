@@ -42,41 +42,39 @@ import com.google.gwt.event.shared.GwtEvent;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class TraceRoutingLineEvent extends
-		GwtEvent<TraceRoutingLineEventHandler> {
+public class TraceRoutingLineEvent extends GwtEvent<TraceRoutingLineEventHandler> {
 
-	private String wktLine;
+    private String wktLine;
 
-	/**
-	 * @param wktLine
-	 *            the wktLine to set
-	 */
-	public void setWktLine(String wktLine) {
-		this.wktLine = wktLine;
-	}
+    /**
+     * @param wktLine
+     *            the wktLine to set
+     */
+    public void setWktLine(String wktLine) {
+        this.wktLine = wktLine;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
-	 */
-	@Override
-	public Type<TraceRoutingLineEventHandler> getAssociatedType() {
-		// TODO Auto-generated method stub
-		return TraceRoutingLineEventHandler.TYPE;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+     */
+    @Override
+    public Type<TraceRoutingLineEventHandler> getAssociatedType() {
+        // TODO Auto-generated method stub
+        return TraceRoutingLineEventHandler.TYPE;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
-	 * .EventHandler)
-	 */
-	@Override
-	protected void dispatch(TraceRoutingLineEventHandler handler) {
-		// TODO Auto-generated method stub
-		handler.drawLine(wktLine);
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+     * .EventHandler)
+     */
+    @Override
+    protected void dispatch(TraceRoutingLineEventHandler handler) {
+        // TODO Auto-generated method stub
+        handler.drawLine(wktLine);
+    }
 }

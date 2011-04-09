@@ -44,41 +44,39 @@ import com.google.gwt.event.shared.GwtEvent;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class FinalRoutingPointEvent extends
-		GwtEvent<FinalRoutingPointEventHandler> {
+public class FinalRoutingPointEvent extends GwtEvent<FinalRoutingPointEventHandler> {
 
-	private IGeoPlatformLocation location;
+    private IGeoPlatformLocation location;
 
-	/**
-	 * @param location
-	 *            the location to set
-	 */
-	public void setLocation(IGeoPlatformLocation location) {
-		this.location = location;
-	}
+    /**
+     * @param location
+     *            the location to set
+     */
+    public void setLocation(IGeoPlatformLocation location) {
+        this.location = location;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
-	 */
-	@Override
-	public Type<FinalRoutingPointEventHandler> getAssociatedType() {
-		// TODO Auto-generated method stub
-		return FinalRoutingPointEventHandler.TYPE;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+     */
+    @Override
+    public Type<FinalRoutingPointEventHandler> getAssociatedType() {
+        // TODO Auto-generated method stub
+        return FinalRoutingPointEventHandler.TYPE;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
-	 * .EventHandler)
-	 */
-	@Override
-	protected void dispatch(FinalRoutingPointEventHandler handler) {
-		// TODO Auto-generated method stub
-		handler.drawFeature(location);
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+     * .EventHandler)
+     */
+    @Override
+    protected void dispatch(FinalRoutingPointEventHandler handler) {
+        // TODO Auto-generated method stub
+        handler.drawFeature(location);
+    }
 }

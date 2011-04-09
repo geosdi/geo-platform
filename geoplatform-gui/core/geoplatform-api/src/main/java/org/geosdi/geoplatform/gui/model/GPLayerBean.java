@@ -43,28 +43,27 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface GPLayerBean  {
+public interface GPLayerBean {
 
-	public String getLabel();
+    public String getLabel();
 
-	public void setLabel(String label);
+    public void setLabel(String label);
 
-	public String getDataSource();
+    public String getDataSource();
 
-	public void setDataSource(String dataSource);
+    public void setDataSource(String dataSource);
 
-	public String getCrs();
+    public String getCrs();
 
-	public void setCrs(String crs);
+    public void setCrs(String crs);
 
-	public BboxClientInfo getBbox();
+    public BboxClientInfo getBbox();
 
-	public void setBbox(BboxClientInfo bbox);
+    public void setBbox(BboxClientInfo bbox);
 
-	public GPLayerType getLayerType();
+    public GPLayerType getLayerType();
 
-	public void setLayerType(GPLayerType layerType);
-	
-	public int getzIndex();
+    public void setLayerType(GPLayerType layerType);
 
+    public int getzIndex();
 }

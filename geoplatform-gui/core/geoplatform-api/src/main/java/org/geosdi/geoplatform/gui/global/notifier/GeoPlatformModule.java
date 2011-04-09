@@ -42,11 +42,9 @@ package org.geosdi.geoplatform.gui.global.notifier;
  */
 public enum GeoPlatformModule {
 
-	/** HERE ALL MODULES **/
-	
-	MAP_WIDGET,
-	GEOCODING_WIDGET,
-	ROUTING_WIDGET,
-	LAYERS_WIDGET
-
+    /** HERE ALL MODULES **/
+    MAP_WIDGET,
+    GEOCODING_WIDGET,
+    ROUTING_WIDGET,
+    LAYERS_WIDGET
 }

@@ -44,94 +44,92 @@ import java.util.List;
  * 
  */
 public class MenuBarCategory implements Serializable,
-		Comparable<MenuBarCategory> {
+        Comparable<MenuBarCategory> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6392463898405375954L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -6392463898405375954L;
+    private String text;
+    private boolean enabled;
+    private int order;
+    private List<MenuBarClientTool> tools;
 
-	private String text;
-	private boolean enabled;
-	private int order;
+    /**
+     * @return the text
+     */
+    public String getText() {
+        return text;
+    }
 
-	private List<MenuBarClientTool> tools;
+    /**
+     * @param text
+     *            the text to set
+     */
+    public void setText(String text) {
+        this.text = text;
+    }
 
-	/**
-	 * @return the text
-	 */
-	public String getText() {
-		return text;
-	}
+    /**
+     * @return the enable
+     */
+    public boolean isEnabled() {
+        return enabled;
+    }
 
-	/**
-	 * @param text
-	 *            the text to set
-	 */
-	public void setText(String text) {
-		this.text = text;
-	}
+    /**
+     * @param enable
+     *            the enable to set
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
-	/**
-	 * @return the enable
-	 */
-	public boolean isEnabled() {
-		return enabled;
-	}
+    /**
+     * @return the order
+     */
+    public int getOrder() {
+        return order;
+    }
 
-	/**
-	 * @param enable
-	 *            the enable to set
-	 */
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+    /**
+     * @param order
+     *            the order to set
+     */
+    public void setOrder(int order) {
+        this.order = order;
+    }
 
-	/**
-	 * @return the order
-	 */
-	public int getOrder() {
-		return order;
-	}
+    /**
+     * @return the tools
+     */
+    public List<MenuBarClientTool> getTools() {
+        return tools;
+    }
 
-	/**
-	 * @param order
-	 *            the order to set
-	 */
-	public void setOrder(int order) {
-		this.order = order;
-	}
+    /**
+     * @param tools
+     *            the tools to set
+     */
+    public void setTools(List<MenuBarClientTool> tools) {
+        Collections.sort(tools);
+        this.tools = tools;
+    }
 
-	/**
-	 * @return the tools
-	 */
-	public List<MenuBarClientTool> getTools() {
-		return tools;
-	}
+    @Override
+    public int compareTo(MenuBarCategory o) {
+        // TODO Auto-generated method stub
+        return getOrder() - o.getOrder();
+    }
 
-	/**
-	 * @param tools
-	 *            the tools to set
-	 */
-	public void setTools(List<MenuBarClientTool> tools) {
-		Collections.sort(tools);
-		this.tools = tools;
-	}
-
-	@Override
-	public int compareTo(MenuBarCategory o) {
-		// TODO Auto-generated method stub
-		return getOrder() - o.getOrder();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "MenuBarCategory [text=" + text + ", enabled=" + enabled
-				+ ", order=" + order + ", tools=" + tools + "]";
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "MenuBarCategory [text=" + text + ", enabled=" + enabled
+                + ", order=" + order + ", tools=" + tools + "]";
+    }
 }

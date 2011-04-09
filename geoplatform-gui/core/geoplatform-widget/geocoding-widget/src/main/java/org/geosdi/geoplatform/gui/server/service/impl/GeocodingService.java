@@ -63,97 +63,96 @@ import org.xml.sax.SAXException;
  */
 @Service("geocodingService")
 public class GeocodingService extends GPGeocodingService implements
-		IGeocodingService {
+        IGeocodingService {
 
-	// URL prefix to the geocoder
-	private static final String GEOCODER_REQUEST_PREFIX_FOR_XML = "http://maps.google.com/maps/api/geocode/xml";
+    // URL prefix to the geocoder
+    private static final String GEOCODER_REQUEST_PREFIX_FOR_XML = "http://maps.google.com/maps/api/geocode/xml";
+    private ArrayList<GeocodingBean> beans;
 
-	private ArrayList<GeocodingBean> beans;
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.server.service.IGeocodingService#findLocations
+     * (java.lang.String)
+     */
+    @Override
+    public ArrayList<GeocodingBean> findLocations(String address)
+            throws IOException, SAXException, ParserConfigurationException,
+            XPathExpressionException {
+        // TODO Auto-generated method stub
+        this.beans = new ArrayList<GeocodingBean>();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.server.service.IGeocodingService#findLocations
-	 * (java.lang.String)
-	 */
-	@Override
-	public ArrayList<GeocodingBean> findLocations(String address)
-			throws IOException, SAXException, ParserConfigurationException,
-			XPathExpressionException {
-		// TODO Auto-generated method stub
-		this.beans = new ArrayList<GeocodingBean>();
+        url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?address="
+                + URLEncoder.encode(address, "UTF-8") + "&sensor=false");
 
-		url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?address="
-				+ URLEncoder.encode(address, "UTF-8") + "&sensor=false");
+        conn = (HttpURLConnection) url.openConnection();
 
-		conn = (HttpURLConnection) url.openConnection();
+        Document geocoderResultDocument = null;
+        try {
+            // open the connection and get results as InputSource.
+            conn.connect();
+            InputSource geocoderResultInputSource = new InputSource(
+                    conn.getInputStream());
 
-		Document geocoderResultDocument = null;
-		try {
-			// open the connection and get results as InputSource.
-			conn.connect();
-			InputSource geocoderResultInputSource = new InputSource(
-					conn.getInputStream());
+            // read result and parse into XML Document
+            geocoderResultDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(geocoderResultInputSource);
+        } finally {
+            conn.disconnect();
+        }
 
-			// read result and parse into XML Document
-			geocoderResultDocument = DocumentBuilderFactory.newInstance()
-					.newDocumentBuilder().parse(geocoderResultInputSource);
-		} finally {
-			conn.disconnect();
-		}
+        // extract the result
+        NodeList resultNodeList = null;
 
-		// extract the result
-		NodeList resultNodeList = null;
+        // a) obtain the formatted_address field for every result
+        resultNodeList = (NodeList) xpath.evaluate(
+                "/GeocodeResponse/result/formatted_address",
+                geocoderResultDocument, XPathConstants.NODESET);
 
-		// a) obtain the formatted_address field for every result
-		resultNodeList = (NodeList) xpath.evaluate(
-				"/GeocodeResponse/result/formatted_address",
-				geocoderResultDocument, XPathConstants.NODESET);
+        for (int i = 0; i < resultNodeList.getLength(); ++i) {
+            GeocodingBean bean = new GeocodingBean();
+            bean.setDescription(resultNodeList.item(i).getTextContent());
+            int resultID = i + 1;
+            getGeometryLocation(geocoderResultDocument,
+                    "/GeocodeResponse/result[" + resultID
+                    + "]/geometry/location/*", bean);
+            beans.add(bean);
+        }
 
-		for (int i = 0; i < resultNodeList.getLength(); ++i) {
-			GeocodingBean bean = new GeocodingBean();
-			bean.setDescription(resultNodeList.item(i).getTextContent());
-			int resultID = i + 1;
-			getGeometryLocation(geocoderResultDocument,
-					"/GeocodeResponse/result[" + resultID
-							+ "]/geometry/location/*", bean);
-			beans.add(bean);
-		}
+        return beans;
+    }
 
-		return beans;
-	}
+    /**
+     *
+     * @param geocoderResultDocument
+     * @param xpathQuery
+     * @param bean
+     */
+    private void getGeometryLocation(Document geocoderResultDocument,
+            String xpathQuery, GeocodingBean bean) {
+        XPath xpath = XPathFactory.newInstance().newXPath();
+        NodeList resultNodeListLocation = null;
+        try {
+            resultNodeListLocation = (NodeList) xpath.evaluate(xpathQuery,
+                    geocoderResultDocument, XPathConstants.NODESET);
 
-	/**
-	 * 
-	 * @param geocoderResultDocument
-	 * @param xpathQuery
-	 * @param bean
-	 */
-	private void getGeometryLocation(Document geocoderResultDocument,
-			String xpathQuery, GeocodingBean bean) {
-		XPath xpath = XPathFactory.newInstance().newXPath();
-		NodeList resultNodeListLocation = null;
-		try {
-			resultNodeListLocation = (NodeList) xpath.evaluate(xpathQuery,
-					geocoderResultDocument, XPathConstants.NODESET);
+            float lat = Float.NaN;
+            float lng = Float.NaN;
+            for (int i = 0; i < resultNodeListLocation.getLength(); ++i) {
+                Node node = resultNodeListLocation.item(i);
+                if ("lat".equals(node.getNodeName())) {
+                    lat = Float.parseFloat(node.getTextContent());
+                }
+                if ("lng".equals(node.getNodeName())) {
+                    lng = Float.parseFloat(node.getTextContent());
+                }
+            }
+            bean.setLat(lat);
+            bean.setLon(lng);
 
-			float lat = Float.NaN;
-			float lng = Float.NaN;
-			for (int i = 0; i < resultNodeListLocation.getLength(); ++i) {
-				Node node = resultNodeListLocation.item(i);
-				if ("lat".equals(node.getNodeName()))
-					lat = Float.parseFloat(node.getTextContent());
-				if ("lng".equals(node.getNodeName()))
-					lng = Float.parseFloat(node.getTextContent());
-			}
-			bean.setLat(lat);
-			bean.setLon(lng);
-
-		} catch (XPathExpressionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
+        } catch (XPathExpressionException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }

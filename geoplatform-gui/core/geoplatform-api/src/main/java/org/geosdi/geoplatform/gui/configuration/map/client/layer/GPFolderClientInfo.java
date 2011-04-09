@@ -39,7 +39,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
 
 /**
@@ -48,64 +47,63 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
  * 
  */
 public class GPFolderClientInfo implements Serializable,
-		Comparable<IGPFolderElements>, IGPFolderElements {
+        Comparable<IGPFolderElements>, IGPFolderElements {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8769227953810545929L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 8769227953810545929L;
+    private String label;
+    private int order;
+    private int zIndex;
+    private List<IGPFolderElements> folderElements = new ArrayList<IGPFolderElements>();
 
-	private String label;
-	private int order;
-        private int zIndex;
-	private List<IGPFolderElements> folderElements = new ArrayList<IGPFolderElements>();
+    /**
+     * @return the label
+     */
+    public String getLabel() {
+        return label;
+    }
 
-	/**
-	 * @return the label
-	 */
-	public String getLabel() {
-		return label;
-	}
+    /**
+     * @param label
+     *            the label to set
+     */
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
-	/**
-	 * @param label
-	 *            the label to set
-	 */
-	public void setLabel(String label) {
-		this.label = label;
-	}
+    /**
+     * @return the elements
+     */
+    public List<IGPFolderElements> getFolderElements() {
+        return folderElements;
+    }
 
-	/**
-	 * @return the elements
-	 */
-	public List<IGPFolderElements> getFolderElements() {
-		return folderElements;
-	}
+    /**
+     * @param elements
+     *            the elements to set
+     */
+    public void setFolderElements(List<IGPFolderElements> folderElements) {
+        Collections.sort(folderElements);
+        this.folderElements = folderElements;
+    }
 
-	/**
-	 * @param elements
-	 *            the elements to set
-	 */
-	public void setFolderElements(List<IGPFolderElements> folderElements) {
-		Collections.sort(folderElements);
-		this.folderElements = folderElements;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "GPFolderClientInfo [label=" + label + ", order=" + order
+                + ", layers=" + folderElements + "]";
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "GPFolderClientInfo [label=" + label + ", order=" + order
-				+ ", layers=" + folderElements + "]";
-	}
-
-	@Override
-	public int compareTo(IGPFolderElements o) {
-		return o.getzIndex() - getzIndex();
-	}
+    @Override
+    public int compareTo(IGPFolderElements o) {
+        return o.getzIndex() - getzIndex();
+    }
 
     /**
      * @return the zIndex
@@ -124,7 +122,6 @@ public class GPFolderClientInfo implements Serializable,
 
     @Override
     public void accept(IVisitorClient visitor) {
-       visitor.visitFolder(this);
+        visitor.visitFolder(this);
     }
-
 }

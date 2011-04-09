@@ -44,11 +44,10 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * 
  */
 public interface RoutingActivationEventHandler extends EventHandler {
-	
-	Type<RoutingActivationEventHandler> TYPE = new Type<RoutingActivationEventHandler>();
-	
-	void activate();
-	
-	void deactivate();
 
+    Type<RoutingActivationEventHandler> TYPE = new Type<RoutingActivationEventHandler>();
+
+    void activate();
+
+    void deactivate();
 }

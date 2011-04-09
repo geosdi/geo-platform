@@ -46,10 +46,9 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public interface ScaleChangeHandler extends EventHandler {
 
-	Type<ScaleChangeHandler> TYPE = new Type<ScaleChangeHandler>();
+    Type<ScaleChangeHandler> TYPE = new Type<ScaleChangeHandler>();
 
-	public void onPositionChange(Size s);
-	
-	public void activationScaleBar(boolean activate);
+    public void onPositionChange(Size s);
 
+    public void activationScaleBar(boolean activate);
 }

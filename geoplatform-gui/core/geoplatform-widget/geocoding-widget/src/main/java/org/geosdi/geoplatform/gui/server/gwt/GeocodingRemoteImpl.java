@@ -60,73 +60,68 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * 
  */
 public class GeocodingRemoteImpl extends RemoteServiceServlet implements
-		GeocodingRemote {
+        GeocodingRemote {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8960403782525028063L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 8960403782525028063L;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private IGeocodingService geocodingService;
+    private IReverseGeocoding reverseGeocoding;
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    public GeocodingRemoteImpl() {
+        this.geocodingService = (IGeocodingService) GeoPlatformContextUtil.getInstance().getBean(GeocodingService.class);
+        this.reverseGeocoding = (IReverseGeocoding) GeoPlatformContextUtil.getInstance().getBean(ReverseGeocoding.class);
+    }
 
-	private IGeocodingService geocodingService;
-	private IReverseGeocoding reverseGeocoding;
+    @Override
+    public ArrayList<GeocodingBean> findLocations(String search)
+            throws GeoPlatformException {
+        // TODO Auto-generated method stub
+        try {
+            return this.geocodingService.findLocations(search);
+        } catch (XPathExpressionException e) {
+            // TODO Auto-generated catch block
+            logger.error(e.getMessage());
+            throw new GeoPlatformException(e.getMessage());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            logger.error(e.getMessage());
+            throw new GeoPlatformException(e.getMessage());
+        } catch (SAXException e) {
+            // TODO Auto-generated catch block
+            logger.error(e.getMessage());
+            throw new GeoPlatformException(e.getMessage());
+        } catch (ParserConfigurationException e) {
+            // TODO Auto-generated catch block
+            logger.error(e.getMessage());
+            throw new GeoPlatformException(e.getMessage());
+        }
+    }
 
-	public GeocodingRemoteImpl() {
-		this.geocodingService = (IGeocodingService) GeoPlatformContextUtil
-				.getInstance().getBean(GeocodingService.class);
-		this.reverseGeocoding = (IReverseGeocoding) GeoPlatformContextUtil
-				.getInstance().getBean(ReverseGeocoding.class);
-	}
-
-	@Override
-	public ArrayList<GeocodingBean> findLocations(String search)
-			throws GeoPlatformException {
-		// TODO Auto-generated method stub
-		try {
-			return this.geocodingService.findLocations(search);
-		} catch (XPathExpressionException e) {
-			// TODO Auto-generated catch block
-			logger.error(e.getMessage());
-			throw new GeoPlatformException(e.getMessage());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			logger.error(e.getMessage());
-			throw new GeoPlatformException(e.getMessage());
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			logger.error(e.getMessage());
-			throw new GeoPlatformException(e.getMessage());
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			logger.error(e.getMessage());
-			throw new GeoPlatformException(e.getMessage());
-		}
-	}
-
-	@Override
-	public GeocodingBean findLocation(double lat, double lon)
-			throws GeoPlatformException {
-		// TODO Auto-generated method stub
-		try {
-			return this.reverseGeocoding.findLocation(lat, lon);
-		} catch (XPathExpressionException e) {
-			// TODO Auto-generated catch block
-			logger.error(e.getMessage());
-			throw new GeoPlatformException(e.getMessage());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			logger.error(e.getMessage());
-			throw new GeoPlatformException(e.getMessage());
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			logger.error(e.getMessage());
-			throw new GeoPlatformException(e.getMessage());
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			logger.error(e.getMessage());
-			throw new GeoPlatformException(e.getMessage());
-		}
-	}
-
+    @Override
+    public GeocodingBean findLocation(double lat, double lon)
+            throws GeoPlatformException {
+        // TODO Auto-generated method stub
+        try {
+            return this.reverseGeocoding.findLocation(lat, lon);
+        } catch (XPathExpressionException e) {
+            // TODO Auto-generated catch block
+            logger.error(e.getMessage());
+            throw new GeoPlatformException(e.getMessage());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            logger.error(e.getMessage());
+            throw new GeoPlatformException(e.getMessage());
+        } catch (SAXException e) {
+            // TODO Auto-generated catch block
+            logger.error(e.getMessage());
+            throw new GeoPlatformException(e.getMessage());
+        } catch (ParserConfigurationException e) {
+            // TODO Auto-generated catch block
+            logger.error(e.getMessage());
+            throw new GeoPlatformException(e.getMessage());
+        }
+    }
 }

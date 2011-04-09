@@ -42,37 +42,35 @@ import java.io.Serializable;
  * 
  */
 public class GeoPlatformException extends RuntimeException implements
-		Serializable {
+        Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -573700062406606079L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -573700062406606079L;
+    private String message;
 
-	private String message;
+    public GeoPlatformException() {
+    }
 
-	public GeoPlatformException() {
-	}
+    public GeoPlatformException(String message) {
+        this.message = message;
+    }
 
-	public GeoPlatformException(String message) {
-		this.message = message;
-	}
+    public GeoPlatformException(Exception e) {
+        super(e);
+    }
 
-	public GeoPlatformException(Exception e) {
-		super(e);
-	}
+    public GeoPlatformException(Throwable e) {
+        super(e);
+    }
 
-	public GeoPlatformException(Throwable e) {
-		super(e);
-	}
+    @Override
+    public String getMessage() {
+        return message;
+    }
 
-	@Override
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

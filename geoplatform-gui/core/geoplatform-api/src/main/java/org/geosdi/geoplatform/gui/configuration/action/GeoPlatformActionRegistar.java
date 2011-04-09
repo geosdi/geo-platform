@@ -44,24 +44,24 @@ import java.util.Map;
  */
 public class GeoPlatformActionRegistar {
 
-	private static GeoPlatformActionRegistar INSTANCE;
-	private Map<String, GeoPlatformActionCreator> registry;
-	
-	protected GeoPlatformActionRegistar() {
-		this.registry = new HashMap<String, GeoPlatformActionCreator>();
-	}
+    private static GeoPlatformActionRegistar INSTANCE;
+    private Map<String, GeoPlatformActionCreator> registry;
 
-	public static GeoPlatformActionRegistar createFactory() {
-		if (INSTANCE == null)
-			INSTANCE = new GeoPlatformActionRegistar();
-		return INSTANCE;
-	}
+    protected GeoPlatformActionRegistar() {
+        this.registry = new HashMap<String, GeoPlatformActionCreator>();
+    }
 
-	/**
-	 * @return the registry
-	 */
-	public Map<String, GeoPlatformActionCreator> getRegistry() {
-		return registry;
-	}
+    public static GeoPlatformActionRegistar createFactory() {
+        if (INSTANCE == null) {
+            INSTANCE = new GeoPlatformActionRegistar();
+        }
+        return INSTANCE;
+    }
 
+    /**
+     * @return the registry
+     */
+    public Map<String, GeoPlatformActionCreator> getRegistry() {
+        return registry;
+    }
 }

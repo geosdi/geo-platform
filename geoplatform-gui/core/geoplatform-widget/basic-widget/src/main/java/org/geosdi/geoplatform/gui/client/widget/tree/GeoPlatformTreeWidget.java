@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.widget.tree;
 
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel.GPKeyTreeModel;
 
 import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
@@ -49,90 +48,88 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
  */
 public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
 
-	protected TreeStore<T> store;
-	protected TreePanel<T> tree;
+    protected TreeStore<T> store;
+    protected TreePanel<T> tree;
 
-	/**
-	 * @Constructor
-	 * 
-	 */
-	public GeoPlatformTreeWidget() {
-		this.store = new TreeStore<T>();
-		this.tree = new TreePanel<T>(store);
-		this.tree.setDisplayProperty(GPKeyTreeModel.LABEL_VALUE.toString());
-		setTreePanelProperties();
-	}
+    /**
+     * @Constructor
+     *
+     */
+    public GeoPlatformTreeWidget() {
+        this.store = new TreeStore<T>();
+        this.tree = new TreePanel<T>(store);
+        setTreePanelProperties();
+    }
 
-	/**
-	 * True to highlight nodes when the mouse is over (defaults to true).
-	 * 
-	 * @param trackMouseOver
-	 *            true to highlight nodes on mouse over
-	 */
-	public void setTrackMouseOver(boolean trackMouseOver) {
-		this.tree.setTrackMouseOver(trackMouseOver);
-	}
+    /**
+     * True to highlight nodes when the mouse is over (defaults to true).
+     *
+     * @param trackMouseOver
+     *            true to highlight nodes on mouse over
+     */
+    public void setTrackMouseOver(boolean trackMouseOver) {
+        this.tree.setTrackMouseOver(trackMouseOver);
+    }
 
-	/**
-	 * Sets whether check boxes are used in the tree.
-	 * 
-	 * @param checkable
-	 *            true for check boxes
-	 */
-	public void setCheckable(boolean checkable) {
-		this.tree.setCheckable(checkable);
-	}
+    /**
+     * Sets whether check boxes are used in the tree.
+     *
+     * @param checkable
+     *            true for check boxes
+     */
+    public void setCheckable(boolean checkable) {
+        this.tree.setCheckable(checkable);
+    }
 
-	/**
-	 * Sets the cascading behavior for check tree (defaults to PARENTS). When
-	 * using CHILDREN, it is important to note that the cascade will only be
-	 * applied to rendered nodes. {@link #setAutoLoad(boolean)} can be used to
-	 * fully render the tree on render.
-	 * <p>
-	 * Valid values are:
-	 * <ul>
-	 * <li>NONE - no cascading</li>
-	 * <li>PARENTS - cascade to parents</li>
-	 * <li>CHILDREN - cascade to children</li>
-	 * </ul>
-	 * 
-	 * @param checkStyle
-	 *            the child style
-	 */
-	public void setCheckStyle(CheckCascade checkStyle) {
-		this.tree.setCheckStyle(checkStyle);
-	}
-	
-	public abstract void setTreePanelProperties();
+    /**
+     * Sets the cascading behavior for check tree (defaults to PARENTS). When
+     * using CHILDREN, it is important to note that the cascade will only be
+     * applied to rendered nodes. {@link #setAutoLoad(boolean)} can be used to
+     * fully render the tree on render.
+     * <p>
+     * Valid values are:
+     * <ul>
+     * <li>NONE - no cascading</li>
+     * <li>PARENTS - cascade to parents</li>
+     * <li>CHILDREN - cascade to children</li>
+     * </ul>
+     *
+     * @param checkStyle
+     *            the child style
+     */
+    public void setCheckStyle(CheckCascade checkStyle) {
+        this.tree.setCheckStyle(checkStyle);
+    }
 
-	/**
-	 * @return the store
-	 */
-	public TreeStore<T> getStore() {
-		return store;
-	}
+    public abstract void setTreePanelProperties();
 
-	/**
-	 * @param store
-	 *            the store to set
-	 */
-	public void setStore(TreeStore<T> store) {
-		this.store = store;
-	}
+    /**
+     * @return the store
+     */
+    public TreeStore<T> getStore() {
+        return store;
+    }
 
-	/**
-	 * @return the tree
-	 */
-	public TreePanel<T> getTree() {
-		return tree;
-	}
+    /**
+     * @param store
+     *            the store to set
+     */
+    public void setStore(TreeStore<T> store) {
+        this.store = store;
+    }
 
-	/**
-	 * @param tree
-	 *            the tree to set
-	 */
-	public void setTree(TreePanel<T> tree) {
-		this.tree = tree;
-	}
+    /**
+     * @return the tree
+     */
+    public TreePanel<T> getTree() {
+        return tree;
+    }
 
+    /**
+     * @param tree
+     *            the tree to set
+     */
+    public void setTree(TreePanel<T> tree) {
+        this.tree = tree;
+    }
 }

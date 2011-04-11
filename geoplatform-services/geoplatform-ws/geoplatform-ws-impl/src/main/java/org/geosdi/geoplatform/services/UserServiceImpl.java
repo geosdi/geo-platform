@@ -56,8 +56,9 @@ import com.trg.search.Search;
  *
  */
 class UserServiceImpl {
-    final private static Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
 
+    final private static Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
+    
     private GPUserDAO userDao;
 
     // note: may take lot of space
@@ -76,7 +77,7 @@ class UserServiceImpl {
         // Always insert users as disabled
         user.setEnabled(true);
         userDao.persist(user);
-        
+
         return user.getId();
     }
 
@@ -89,7 +90,7 @@ class UserServiceImpl {
      * @throws ResourceNotFoundFault
      */
     public GPUser getUser(RequestById request) throws ResourceNotFoundFault {
-    	GPUser user = userDao.find(request.getId());
+        GPUser user = userDao.find(request.getId());
 
         if (user == null) {
             throw new ResourceNotFoundFault("User not found", request.getId());
@@ -99,10 +100,10 @@ class UserServiceImpl {
     }
 
     public GPUser getUserByName(SearchRequest username) throws ResourceNotFoundFault {
-    	GPUser user = userDao.findByUsername(username.getNameLike());
+        GPUser user = userDao.findByUsername(username.getNameLike());
 
         if (user == null) {
-            throw new ResourceNotFoundFault("User not found (name="+username.getNameLike()+")");
+            throw new ResourceNotFoundFault("User not found (name=" + username.getNameLike() + ")");
         }
 
         return user;
@@ -114,8 +115,8 @@ class UserServiceImpl {
      * @throws ResourceNotFoundFault
      */
     public boolean deleteUser(RequestById request) throws ResourceNotFoundFault, IllegalParameterFault {
-    	GPUser user = userDao.find(request.getId());
-    	
+        GPUser user = userDao.find(request.getId());
+
         if (user == null) {
             throw new ResourceNotFoundFault("User not found", request.getId());
         }
@@ -138,7 +139,7 @@ class UserServiceImpl {
         searchCriteria.addSortAsc("username");
 
         String like = request.getNameLike();
-        if(like != null) {
+        if (like != null) {
             searchCriteria.addFilterILike("username", like);
         }
 
@@ -150,41 +151,40 @@ class UserServiceImpl {
     public long getUsersCount(SearchRequest request) {
         Search searchCriteria = new Search(GPUser.class);
 
-        if(request != null && request.getNameLike()!=null) {
-                searchCriteria.addFilterILike("username", request.getNameLike());
+        if (request != null && request.getNameLike() != null) {
+            searchCriteria.addFilterILike("username", request.getNameLike());
         }
         return userDao.count(searchCriteria);
     }
 
     public long updateUser(GPUser user) throws ResourceNotFoundFault, IllegalParameterFault {
-    	GPUser orig = userDao.find(user.getId());
+        GPUser orig = userDao.find(user.getId());
 
         if (orig == null) {
             throw new ResourceNotFoundFault("User not found", user.getId());
         }
 
         // manual checks (awful!)
-        if( ! user.getEmailAddress().equals(orig.getEmailAddress()) &&  orig.isEnabled() ) {
-            throw new IllegalParameterFault("Can't update the mail address for registered user:"+user.getId());
+        if (!user.getEmailAddress().equals(orig.getEmailAddress()) && orig.isEnabled()) {
+            throw new IllegalParameterFault("Can't update the mail address for registered user:" + user.getId());
         }
 
-        if( user.isEnabled() != orig.isEnabled() ) {
+        if (user.isEnabled() != orig.isEnabled()) {
 
-            throw new IllegalParameterFault("Can't change user enabled status for user:"+user.getId());
+            throw new IllegalParameterFault("Can't change user enabled status for user:" + user.getId());
         }
 
         // set the values
         orig.setEmailAddress(user.getEmailAddress());
-        if (user.getPassword() != null)
-        	orig.setPassword(user.getPassword());
+        if (user.getPassword() != null) {
+            orig.setPassword(user.getPassword());
+        }
         orig.setSendEmail(user.isSendEmail());
         orig.setUsername(user.getUsername());
-        orig.setTimerName(user.getTimerName());
 
         userDao.merge(orig);
         return orig.getId();
     }
-
 
     private UserList convertToShortList(List<GPUser> userList) {
         List<ShortUser> shortUsers = new ArrayList<ShortUser>(userList.size());
@@ -197,13 +197,10 @@ class UserServiceImpl {
         return users;
     }
 
-	/**
-	 * @param userDao the userDao to set
-	 */
-	public void setUserDao(GPUserDAO userDao) {
-		this.userDao = userDao;
-	}
-
-    
-
+    /**
+     * @param userDao the userDao to set
+     */
+    public void setUserDao(GPUserDAO userDao) {
+        this.userDao = userDao;
+    }
 }

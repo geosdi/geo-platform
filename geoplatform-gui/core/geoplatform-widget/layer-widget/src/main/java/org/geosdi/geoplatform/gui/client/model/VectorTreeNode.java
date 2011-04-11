@@ -53,100 +53,100 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  */
 public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2445765797861311204L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -2445765797861311204L;
+    private String featureNameSpace;
 
-	private String featureNameSpace;
+    /**
+     * @Constructor
+     *
+     * @param label
+     */
+    public VectorTreeNode(ClientVectorInfo layer) {
+        super.setLabel(layer.getFeatureType());
+        super.setDataSource(layer.getDataSource());
+        super.setCrs(layer.getCrs());
+        super.setBbox(layer.getBbox());
+        super.setzIndex(layer.getzIndex());
+        super.setLayerType(layer.getLayerType());
+        this.setFeatureNameSpace(layer.getFeatureNameSpace());
+    }
 
-	/**
-	 * @Constructor
-	 * 
-	 * @param label
-	 */
-	public VectorTreeNode(ClientVectorInfo layer) {
-		super.setLabel(layer.getFeatureType());
-		super.setDataSource(layer.getDataSource());
-		super.setCrs(layer.getCrs());
-		super.setBbox(layer.getBbox());
-		super.setzIndex(layer.getzIndex());
-		super.setLayerType(layer.getLayerType());
-		this.setFeatureNameSpace(layer.getFeatureNameSpace());
-	}
+    @Override
+    public String getFeatureNameSpace() {
+        // TODO Auto-generated method stub
+        return featureNameSpace;
+    }
 
-	@Override
-	public String getFeatureNameSpace() {
-		// TODO Auto-generated method stub
-		return featureNameSpace;
-	}
+    @Override
+    public void setFeatureNameSpace(String featureNameSpace) {
+        // TODO Auto-generated method stub
+        this.featureNameSpace = featureNameSpace;
+    }
 
-	@Override
-	public void setFeatureNameSpace(String featureNameSpace) {
-		// TODO Auto-generated method stub
-		this.featureNameSpace = featureNameSpace;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
+     */
+    @Override
+    public AbstractImagePrototype getIcon() {
+        // TODO Auto-generated method stub
+        switch (getLayerType()) {
+            case POINT:
+                return LayerResources.ICONS.point();
+            case MULTIPOINT:
+                return LayerResources.ICONS.point();
+            case LINESTRING:
+                return LayerResources.ICONS.line();
+            case MULTILINESTRING:
+                return LayerResources.ICONS.line();
+            case POLYGON:
+                return LayerResources.ICONS.shape();
+            case MULTIPOLYGON:
+                return LayerResources.ICONS.shape();
+        }
+        return null;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
-	 */
-	@Override
-	public AbstractImagePrototype getIcon() {
-		// TODO Auto-generated method stub
-		switch (getLayerType()) {
-		case POINT:
-			return LayerResources.ICONS.point();
-		case MULTIPOINT:
-			return LayerResources.ICONS.point();
-		case LINESTRING:
-			return LayerResources.ICONS.line();
-		case MULTILINESTRING:
-			return LayerResources.ICONS.line();
-		case POLYGON:
-			return LayerResources.ICONS.shape();
-		case MULTIPOLYGON:
-			return LayerResources.ICONS.shape();
-		}
-		return null;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#notifyCheckEvent
+     * (boolean)
+     */
+    @Override
+    public void notifyCheckEvent(boolean isChecked) {
+        // TODO Auto-generated method stub
+        if (isParentChecked()) {
+            if (isChecked) {
+                GPHandlerManager.fireEvent(new DisplayLayerEvent(this));
+            } else {
+                GPHandlerManager.fireEvent(new HideLayerEvent(this));
+            }
+        }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#notifyCheckEvent
-	 * (boolean)
-	 */
-	@Override
-	public void notifyCheckEvent(boolean isChecked) {
-		// TODO Auto-generated method stub
-		if (isParentChecked()) {
-			if (isChecked)
-				GPHandlerManager.fireEvent(new DisplayLayerEvent(this));
-			else
-				GPHandlerManager.fireEvent(new HideLayerEvent(this));
-		}
+    }
 
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "VectorTreeNode [featureNameSpace=" + featureNameSpace
+                + ", getDataSource()=" + getDataSource() + ", getCrs()="
+                + getCrs() + ", getBbox()=" + getBbox() + ", getLayerType()="
+                + getLayerType() + ", getzIndex()=" + getzIndex()
+                + ", getLabel()=" + getLabel() + "]";
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "VectorTreeNode [featureNameSpace=" + featureNameSpace
-				+ ", getDataSource()=" + getDataSource() + ", getCrs()="
-				+ getCrs() + ", getBbox()=" + getBbox() + ", getLayerType()="
-				+ getLayerType() + ", getzIndex()=" + getzIndex()
-				+ ", getLabel()=" + getLabel() + "]";
-	}
-
-	@Override
-	public void accept(IVisitor visitor) {
-		visitor.visitVector(this);
-	}
+    @Override
+    public void accept(IVisitor visitor) {
+        visitor.visitVector(this);
+    }
 }

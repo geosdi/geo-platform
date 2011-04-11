@@ -47,21 +47,6 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  */
 public abstract class GPBeanTreeModel extends BaseTreeModel {
 
-    public enum GPKeyTreeModel {
-
-        LABEL_VALUE("label");
-        private String value;
-
-        GPKeyTreeModel(String theValue) {
-            this.value = theValue;
-        }
-
-        @Override
-        public String toString() {
-            return this.value;
-        }
-    }
-
     /**
      *
      */
@@ -84,7 +69,6 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
      */
     public void setLabel(String label) {
         this.label = label;
-        set(GPKeyTreeModel.LABEL_VALUE.toString(), this.label);
     }
 
     /**

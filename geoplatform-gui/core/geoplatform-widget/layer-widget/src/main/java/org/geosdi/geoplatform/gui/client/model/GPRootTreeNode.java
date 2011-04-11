@@ -52,53 +52,51 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  */
 public class GPRootTreeNode extends AbstractRootTreeNode {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1765450539495169525L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1765450539495169525L;
+    private TreePanel<GPBeanTreeModel> tree;
 
-	private TreePanel<GPBeanTreeModel> tree;
+    public GPRootTreeNode(TreePanel<GPBeanTreeModel> theTree) {
+        super.setLabel("Geo-Platform Tree");
+        this.tree = theTree;
+    }
 
-	public GPRootTreeNode(TreePanel<GPBeanTreeModel> theTree) {
-		super.setLabel("Geo-Platform Tree");
-		this.tree = theTree;
-	}
+    /**
+     *
+     * @param clientFolders
+     */
+    public void modelConverter(List<GPFolderClientInfo> clientFolders) {
+        for (GPFolderClientInfo folder : clientFolders) {
+            super.add(new FolderTreeNode(folder));
+        }
+    }
 
-	/**
-	 * 
-	 * @param clientFolders
-	 */
-	public void modelConverter(List<GPFolderClientInfo> clientFolders) {
-		for (GPFolderClientInfo folder : clientFolders) {
-			super.add(new FolderTreeNode(folder));
-		}
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
+     */
+    @Override
+    public AbstractImagePrototype getIcon() {
+        // TODO Auto-generated method stub
+        return LayerResources.ICONS.geoPlatform();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
-	 */
-	@Override
-	public AbstractImagePrototype getIcon() {
-		// TODO Auto-generated method stub
-		return LayerResources.ICONS.geoPlatform();
-	}
+    /**
+     *
+     * @param model
+     * @return boolean
+     */
+    public boolean isNodeChecked(GPBeanTreeModel model) {
+        return this.tree.isChecked(model);
+    }
 
-	/**
-	 * 
-	 * @param model
-	 * @return boolean
-	 */
-	public boolean isNodeChecked(GPBeanTreeModel model) {
-		return this.tree.isChecked(model);
-	}
-
-	/**
-	 * @return the tree
-	 */
-	public TreePanel<GPBeanTreeModel> getTree() {
-		return tree;
-	}
-	
+    /**
+     * @return the tree
+     */
+    public TreePanel<GPBeanTreeModel> getTree() {
+        return tree;
+    }
 }

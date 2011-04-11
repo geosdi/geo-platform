@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.Style.SelectionMode;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import org.geosdi.geoplatform.gui.client.listener.DropAddListener;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GeoPlatformTreeWidget;
@@ -43,6 +45,7 @@ import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.ModelIconProvider;
+import com.extjs.gxt.ui.client.data.ModelStringProvider;
 import com.extjs.gxt.ui.client.dnd.DND.Feedback;
 import com.extjs.gxt.ui.client.dnd.TreePanelDragSource;
 import com.extjs.gxt.ui.client.dnd.TreePanelDropTarget;
@@ -50,6 +53,7 @@ import com.extjs.gxt.ui.client.event.DNDEvent;
 import com.extjs.gxt.ui.client.event.DNDListener;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
@@ -84,7 +88,9 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
     public void buildTree() {
         if (!initialized) {
             this.initialized = true;
-            this.root.modelConverter(GeoPlatformUtils.getInstance().getGlobalConfiguration().getFolderStore().getFolders());
+            this.root.modelConverter(GeoPlatformUtils.getInstance().
+                    getGlobalConfiguration().getFolderStore().
+                    getFolders());
             this.store.add(this.root, true);
         }
     }
@@ -94,6 +100,16 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
      */
     @Override
     public void setTreePanelProperties() {
+        setTreePresenter();
+        enableCheckChange();
+        enableDDSupport();
+    }
+
+    /*
+     * Define TreePresenter for both Icon and Label Presentation
+     * 
+     */
+    private void setTreePresenter() {
         this.tree.setIconProvider(new ModelIconProvider<GPBeanTreeModel>() {
 
             @Override
@@ -102,10 +118,34 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
             }
         });
 
+        this.tree.setLabelProvider(new ModelStringProvider<GPBeanTreeModel>() {
+
+            @Override
+            public String getStringValue(GPBeanTreeModel model, String property) {
+                return model.getLabel();
+            }
+        });
+
+        this.tree.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+        this.tree.getSelectionModel().addSelectionChangedListener(new SelectionChangedListener<GPBeanTreeModel>() {
+
+            @Override
+            public void selectionChanged(SelectionChangedEvent<GPBeanTreeModel> se) {
+
+                System.out.println("TEST SELECTION CHANGE ******** " + se.getSelectedItem().toString());
+            }
+        });
+
         this.setCheckable(true);
         this.setCheckStyle(CheckCascade.NONE);
         this.tree.setAutoHeight(true);
+    }
 
+    /*
+     * Enable Check Box on Tree
+     */
+    private void enableCheckChange() {
         this.tree.addListener(Events.CheckChange,
                 new Listener<TreePanelEvent<GPBeanTreeModel>>() {
 
@@ -114,7 +154,13 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                         be.getItem().notifyCheckEvent(be.isChecked());
                     }
                 });
+    }
 
+    /*
+     * Add Support for Drag and Drop
+     * 
+     */
+    private void enableDDSupport() {
         //TODO: Check the right position for the following code
         TreePanelDragSource dragSource = new TreePanelDragSource(super.tree);
         dragSource.addDNDListener(new DNDListener() {

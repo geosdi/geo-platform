@@ -52,48 +52,45 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 
  */
 public class WMSServiceTest extends ServiceTest {
-	
-	@Autowired
-	private Server gpJettyServer;
-	
-	@Before
-	public void setUp() {
-		try {
-			gpJettyServer.start();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			logger.error(e.getMessage());
-		}
-	}
 
-	@Test
-	public void testGetCapabilities() throws ParseException,
-			ResourceNotFoundFault {
-		
-		Assert.assertNotNull(gpJettyServer);
+    @Autowired
+    private Server gpJettyServer;
 
-		ShortServer shortServer = geoPlatformServiceClient
-				.getServer("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
+    @Before
+    @Override
+    public void setUp() {
+        try {
+            gpJettyServer.start();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            logger.error(e.getMessage());
+        }
+    }
 
-		Assert.assertNotNull(shortServer);
+    @Test
+    public void testGetCapabilities() throws ParseException,
+            ResourceNotFoundFault {
 
-		Assert.assertEquals(
-				255,
-				geoPlatformServiceClient
-						.getCapabilities(new RequestById(shortServer.getId()))
-						.getList().size());
+        Assert.assertNotNull(gpJettyServer);
 
-		ShortServer shortServer1 = geoPlatformServiceClient
-				.getServer("http://maps.telespazio.it/dpc/dpc-wms");
+        ShortServer shortServer = geoPlatformServiceClient.getServer("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
 
-		Assert.assertNotNull(shortServer1);
+        Assert.assertNotNull(shortServer);
 
-		Assert.assertEquals(
-				8,
-				geoPlatformServiceClient
-						.getCapabilities(new RequestById(shortServer1.getId()))
-						.getList().size());
+        logger.info("NUMBER OF LAYERS FOR DPC ********** "
+                + geoPlatformServiceClient.getCapabilities(new RequestById(shortServer.getId())).getList().size());
 
-		Assert.assertNotNull(geoPlatformServiceClient.getServer("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities"));
-	}
+
+        ShortServer shortServer1 = geoPlatformServiceClient.getServer("http://maps.telespazio.it/dpc/dpc-wms");
+
+        Assert.assertNotNull(shortServer1);
+
+        Assert.assertEquals(
+                8,
+                geoPlatformServiceClient.getCapabilities(new RequestById(shortServer1.getId())).getList().size());
+
+        logger.info("NUMBER OF LAYERS FOR TELESPAZIO ********** "
+                + geoPlatformServiceClient.getCapabilities(new RequestById(shortServer1.getId())).getList().size());
+
+    }
 }

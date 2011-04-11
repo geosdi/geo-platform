@@ -48,7 +48,6 @@ import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPStyle;
-import org.geosdi.geoplatform.core.model.GPTimerName;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.junit.Assert;
 import org.junit.Before;
@@ -67,135 +66,133 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext.xml" })
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public abstract class BaseDAOTest {
 
-	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	protected GPUserDAO userDAO;
+    @Autowired
+    protected GPUserDAO userDAO;
 
-	@Autowired
-	protected GPFolderDAO folderDAO;
+    @Autowired
+    protected GPFolderDAO folderDAO;
 
-	@Autowired
-	protected GPLayerDAO layerDAO;
+    @Autowired
+    protected GPLayerDAO layerDAO;
 
-	@Autowired
-	protected GPStyleDAO styleDAO;
+    @Autowired
+    protected GPStyleDAO styleDAO;
 
-	@Autowired
-	protected GPServerDAO serverDAO;
+    @Autowired
+    protected GPServerDAO serverDAO;
+    
+    @Autowired
+    protected GPAuthorityDAO authorityDAO;
 
-	@Autowired
-	protected GPAuthorityDAO authorityDAO;
+    @Before
+    public void setUp() {
+        logger.info("----------------------- Running "
+                + getClass().getSimpleName());
+    }
 
-	@Before
-	public void setUp() {
-		logger.info("----------------------- Running "
-				+ getClass().getSimpleName());
-	}
+    @Test
+    public void testCheckDAOs() {
+        Assert.assertNotNull(userDAO);
+        Assert.assertNotNull(folderDAO);
+        Assert.assertNotNull(layerDAO);
+        Assert.assertNotNull(styleDAO);
+        Assert.assertNotNull(serverDAO);
+        Assert.assertNotNull(authorityDAO);
+    }
 
-	@Test
-	public void testCheckDAOs() {
-		Assert.assertNotNull(userDAO);
-		Assert.assertNotNull(folderDAO);
-		Assert.assertNotNull(layerDAO);
-		Assert.assertNotNull(styleDAO);
-		Assert.assertNotNull(serverDAO);
-		Assert.assertNotNull(authorityDAO);
-	}
+    protected void removeAll() {
+        removeAllStyle();
+        removeAllLayer();
+        removeAllFolder();
+        removeAllAuthority();
+        removeAllUser();
+    }
 
-	protected void removeAll() {
-		removeAllStyle();
-		removeAllLayer();
-		removeAllFolder();
-		removeAllAuthority();
-		removeAllUser();
-	}
+    private void removeAllAuthority() {
+        List<GPAuthority> autorities = authorityDAO.findAll();
+        for (GPAuthority autority : autorities) {
+            logger.info("Removing " + autority);
+            boolean ret = authorityDAO.remove(autority);
+            Assert.assertTrue("Old Authority not removed", ret);
+        }
 
-	private void removeAllAuthority() {
-		List<GPAuthority> autorities = authorityDAO.findAll();
-		for (GPAuthority autority : autorities) {
-			logger.info("Removing " + autority);
-			boolean ret = authorityDAO.remove(autority);
-			Assert.assertTrue("Old Authority not removed", ret);
-		}
+    }
 
-	}
+    private void removeAllFolder() {
+        List<GPFolder> folders = folderDAO.findAll();
+        for (GPFolder folder : folders) {
+            logger.info("Removing " + folder);
+            boolean ret = folderDAO.remove(folder);
+            Assert.assertTrue("Old Folder not removed", ret);
+        }
 
-	private void removeAllFolder() {
-		List<GPFolder> folders = folderDAO.findAll();
-		for (GPFolder folder : folders) {
-			logger.info("Removing " + folder);
-			boolean ret = folderDAO.remove(folder);
-			Assert.assertTrue("Old Folder not removed", ret);
-		}
+    }
 
-	}
+    private void removeAllLayer() {
+        List<GPLayer> layers = layerDAO.findAll();
+        for (GPLayer layer : layers) {
+            logger.info("Removing " + layer);
+            boolean ret = layerDAO.remove(layer);
+            Assert.assertTrue("Old Layer not removed", ret);
+        }
 
-	private void removeAllLayer() {
-		List<GPLayer> layers = layerDAO.findAll();
-		for (GPLayer layer : layers) {
-			logger.info("Removing " + layer);
-			boolean ret = layerDAO.remove(layer);
-			Assert.assertTrue("Old Layer not removed", ret);
-		}
+    }
 
-	}
+    private void removeAllStyle() {
+        List<GPStyle> styles = styleDAO.findAll();
+        for (GPStyle style : styles) {
+            logger.info("Removing " + style);
+            boolean ret = styleDAO.remove(style);
+            Assert.assertTrue("Old Style not removed", ret);
+        }
+    }
 
-	private void removeAllStyle() {
-		List<GPStyle> styles = styleDAO.findAll();
-		for (GPStyle style : styles) {
-			logger.info("Removing " + style);
-			boolean ret = styleDAO.remove(style);
-			Assert.assertTrue("Old Style not removed", ret);
-		}
-	}
+    private void removeAllUser() {
+        List<GPUser> users = userDAO.findAll();
+        for (GPUser user : users) {
+            logger.info("Removing " + user);
+            boolean ret = userDAO.remove(user);
+            Assert.assertTrue("Old User not removed", ret);
+        }
 
-	private void removeAllUser() {
-		List<GPUser> users = userDAO.findAll();
-		for (GPUser user : users) {
-			logger.info("Removing " + user);
-			boolean ret = userDAO.remove(user);
-			Assert.assertTrue("Old User not removed", ret);
-		}
+    }
 
-	}
+    protected void insertData() throws ParseException {
+        insertUser();
+    }
 
-	protected void insertData() throws ParseException {
-		insertUser();
-	}
+    private void insertUser() {
 
-	private void insertUser() {
+        GPUser user = createUser("user_0");
+        userDAO.persist(user);
+        logger.info("Save user: " + user);
 
-		GPUser user = createUser("user_0");
-		userDAO.persist(user);
-		logger.info("Save user: " + user);
-		
-		
-		List<GPAuthority> authorities = new ArrayList<GPAuthority>();
-		GPAuthority authority = new GPAuthority("user_0", "ROLE_ADMIN");
-		authority.setGpUser(user);
-		authorities.add(authority);
-		user.setGpAuthorities(authorities);
-		authorityDAO.persist(authority);
-		logger.info("Save Authority for: " + authority);
-		
-		
 
-	}
+        List<GPAuthority> authorities = new ArrayList<GPAuthority>();
+        GPAuthority authority = new GPAuthority("user_0", "ROLE_ADMIN");
+        authority.setGpUser(user);
+        authorities.add(authority);
+        user.setGpAuthorities(authorities);
+        authorityDAO.persist(authority);
+        logger.info("Save Authority for: " + authority);
 
-	protected GPUser createUser(String name) {
-		String username = name;
-		GPUser user = new GPUser();
-		user.setUsername(username);
-		user.setEmailAddress(username + "@test");
-		user.setEnabled(true);
-		user.setPassword("test");
-		user.setSendEmail(true);
-		user.setTimerName(GPTimerName.TIMER_A);
-		return user;
-	}
 
+
+    }
+
+    protected GPUser createUser(String name) {
+        String username = name;
+        GPUser user = new GPUser();
+        user.setUsername(username);
+        user.setEmailAddress(username + "@test");
+        user.setEnabled(true);
+        user.setPassword("test");
+        user.setSendEmail(true);
+        return user;
+    }
 }

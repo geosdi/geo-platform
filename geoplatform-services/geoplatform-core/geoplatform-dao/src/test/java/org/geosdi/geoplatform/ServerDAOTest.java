@@ -39,11 +39,9 @@ import java.util.List;
 
 import junit.framework.Assert;
 
-import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPCababilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -52,50 +50,47 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class ServerDAOTest extends BaseDAOTest {
 
-	@Autowired
-	private GPServerDAO serverDAO;
 
-	@Test
-	public void testServers() {
-		Assert.assertNotNull(serverDAO);
+    @Test
+    public void testServers() {
+        Assert.assertNotNull(serverDAO);
 
-		removeAllServers();
+        removeAllServers();
 
-		insertServers();
+        insertServers();
 
-		logger.info("NUMBER OF PERSISTED SERVERS ******************* "
-				+ serverDAO.findAll().size());
-	}
+        logger.info("NUMBER OF PERSISTED SERVERS ******************* "
+                + serverDAO.findAll().size());
+    }
 
-	private void removeAllServers() {
-		List<GeoPlatformServer> servers = serverDAO.findAll();
-		for (GeoPlatformServer server : servers) {
-			logger.info("Delete Server ************************ " + server);
-			boolean ret = serverDAO.remove(server);
-			Assert.assertTrue("Old Server not removed", ret);
-		}
+    private void removeAllServers() {
+        List<GeoPlatformServer> servers = serverDAO.findAll();
+        for (GeoPlatformServer server : servers) {
+            logger.info("Delete Server ************************ " + server);
+            boolean ret = serverDAO.remove(server);
+            Assert.assertTrue("Old Server not removed", ret);
+        }
 
-	}
+    }
 
-	protected void insertServers() {
-		GeoPlatformServer server = createServer1();
-		GeoPlatformServer server1 = createServer2();
-		serverDAO.persist(server, server1);
-		logger.info("Persist Servers: " + server + " - " + server1);
-	}
+    protected void insertServers() {
+        GeoPlatformServer server = createServer1();
+        GeoPlatformServer server1 = createServer2();
+        serverDAO.persist(server, server1);
+        logger.info("Persist Servers: " + server + " - " + server1);
+    }
 
-	private GeoPlatformServer createServer1() {
-		GeoPlatformServer server = new GeoPlatformServer();
-		server.setServerUrl("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
-		server.setServerType(GPCababilityType.WMS);
-		return server;
-	}
+    private GeoPlatformServer createServer1() {
+        GeoPlatformServer server = new GeoPlatformServer();
+        server.setServerUrl("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
+        server.setServerType(GPCababilityType.WMS);
+        return server;
+    }
 
-	private GeoPlatformServer createServer2() {
-		GeoPlatformServer server = new GeoPlatformServer();
-		server.setServerUrl("http://maps.telespazio.it/dpc/dpc-wms");
-		server.setServerType(GPCababilityType.WMS);
-		return server;
-	}
-
+    private GeoPlatformServer createServer2() {
+        GeoPlatformServer server = new GeoPlatformServer();
+        server.setServerUrl("http://maps.telespazio.it/dpc/dpc-wms");
+        server.setServerType(GPCababilityType.WMS);
+        return server;
+    }
 }

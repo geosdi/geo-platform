@@ -55,109 +55,108 @@ import org.springframework.security.core.GrantedAuthority;
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
  * 
  */
-
 @Entity(name = "Authority")
 @XmlRootElement(name = "Authority")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "authority")
 @Table(name = "gp_authority")
 public class GPAuthority implements GrantedAuthority, Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5005299814060260152L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -5005299814060260152L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_AUTHORITY_SEQ")
-	@SequenceGenerator(name = "GP_AUTHORITY_SEQ", sequenceName = "GP_AUTHORITY_SEQ")
-	@Column
-	private long id;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_AUTHORITY_SEQ")
+    @SequenceGenerator(name = "GP_AUTHORITY_SEQ", sequenceName = "GP_AUTHORITY_SEQ")
+    @Column
+    private long id;
 
-	@Column(name = "username", nullable = false)
-	private String username;
+    @Column(name = "username", nullable = false)
+    private String username;
 
-	@Column(name = "authority", nullable = false)
-	private String authority;
+    @Column(name = "authority", nullable = false)
+    private String authority;
+    
+    @ManyToOne(optional = true)
+    private GPUser gpUser;
 
-	@ManyToOne(optional = true)
-	private GPUser gpUser;
+    public GPAuthority(String username, String authority) {
+        this.username = username;
+        this.authority = authority;
+    }
 
-	public GPAuthority(String username, String authority) {
-		this.username = username;
-		this.authority = authority;
-	}
+    public GPAuthority() {
+    }
 
-	public GPAuthority() {
-	}
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
 
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
 
-	/**
-	 * @return the username
-	 */
-	public String getUsername() {
-		return username;
-	}
+    /**
+     * @param username
+     *            the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	/**
-	 * @param username
-	 *            the username to set
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    /**
+     * @return the gpUser
+     */
+    public GPUser getGpUser() {
+        return gpUser;
+    }
 
-	/**
-	 * @return the gpUser
-	 */
-	public GPUser getGpUser() {
-		return gpUser;
-	}
+    /**
+     * @param gpUser
+     *            the gpUser to set
+     */
+    public void setGpUser(GPUser gpUser) {
+        this.gpUser = gpUser;
+    }
 
-	/**
-	 * @param gpUser
-	 *            the gpUser to set
-	 */
-	public void setGpUser(GPUser gpUser) {
-		this.gpUser = gpUser;
-	}
+    @Override
+    public String getAuthority() {
+        // TODO Auto-generated method stub
+        return authority;
+    }
 
-	@Override
-	public String getAuthority() {
-		// TODO Auto-generated method stub
-		return authority;
-	}
+    /**
+     * @param authority
+     *            the authority to set
+     */
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
 
-	/**
-	 * @param authority
-	 *            the authority to set
-	 */
-	public void setAuthority(String authority) {
-		this.authority = authority;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "GPAuthority [id=" + id + ", username=" + username
-				+ ", authority=" + authority + ", gpUser=" + gpUser + "]";
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "GPAuthority [id=" + id + ", username=" + username
+                + ", authority=" + authority + ", gpUser=" + gpUser + "]";
+    }
 }

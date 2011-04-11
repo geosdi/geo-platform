@@ -42,6 +42,5 @@ package org.geosdi.geoplatform.core.model;
  */
 public enum GPCababilityType {
 
-	WMS, WFS;
-
+    WMS, WFS;
 }

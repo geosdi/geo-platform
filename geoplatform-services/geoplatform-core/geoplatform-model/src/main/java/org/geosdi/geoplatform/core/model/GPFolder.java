@@ -65,137 +65,131 @@ import org.hibernate.annotations.OnDeleteAction;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "folder")
 public class GPFolder implements Serializable {
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = -5826659681483678835L;
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -5826659681483678835L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_FOLDER_SEQ")
-	@SequenceGenerator(name = "GP_FOLDER_SEQ", sequenceName = "GP_FOLDER_SEQ")
-	@Column
-	private long id;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_FOLDER_SEQ")
+    @SequenceGenerator(name = "GP_FOLDER_SEQ", sequenceName = "GP_FOLDER_SEQ")
+    @Column
+    private long id;
+    @Column(name = "name", nullable = false)
+    private String name;
+    @Column(name = "shared")
+    private boolean shared = false;
+    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<GPFolder> childern;
+    @ManyToOne(optional = true)
+    private GPFolder parent;
+    @Column(name = "position")
+    private int position;
+    @ManyToOne(optional = true)
+    private GPUser owner;
 
-	@Column(name = "name", nullable = false)
-	private String name;
-	
-	@Column(name = "shared")
-	private boolean shared = false;
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
 
-	@OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	private List<GPFolder> childern;
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	@ManyToOne(optional = true)
-	private GPFolder parent;
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
-	@Column(name = "position")
-	private int position;
+    /**
+     * @param name
+     *            the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@ManyToOne(optional = true)
-	private GPUser owner;
+    /**
+     * @return the shared
+     */
+    public boolean isShared() {
+        return shared;
+    }
 
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
+    /**
+     * @param shared the shared to set
+     */
+    public void setShared(boolean shared) {
+        this.shared = shared;
+    }
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
+    /**
+     * @return the childern
+     */
+    public List<GPFolder> getChildern() {
+        return childern;
+    }
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * @param childern
+     *            the childern to set
+     */
+    public void setChildern(List<GPFolder> childern) {
+        this.childern = childern;
+    }
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @return the parent
+     */
+    public GPFolder getParent() {
+        return parent;
+    }
 
-	/**
-	 * @return the shared
-	 */
-	public boolean isShared() {
-		return shared;
-	}
+    /**
+     * @param parent
+     *            the parent to set
+     */
+    public void setParent(GPFolder parent) {
+        this.parent = parent;
+    }
 
-	/**
-	 * @param shared the shared to set
-	 */
-	public void setShared(boolean shared) {
-		this.shared = shared;
-	}
+    /**
+     * @return the position
+     */
+    public int getPosition() {
+        return position;
+    }
 
-	/**
-	 * @return the childern
-	 */
-	public List<GPFolder> getChildern() {
-		return childern;
-	}
+    /**
+     * @param position the position to set
+     */
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
-	/**
-	 * @param childern
-	 *            the childern to set
-	 */
-	public void setChildern(List<GPFolder> childern) {
-		this.childern = childern;
-	}
+    /**
+     * @return the owner
+     */
+    public GPUser getOwner() {
+        return owner;
+    }
 
-	/**
-	 * @return the parent
-	 */
-	public GPFolder getParent() {
-		return parent;
-	}
-
-	/**
-	 * @param parent
-	 *            the parent to set
-	 */
-	public void setParent(GPFolder parent) {
-		this.parent = parent;
-	}
-
-	/**
-	 * @return the position
-	 */
-	public int getPosition() {
-		return position;
-	}
-
-	/**
-	 * @param position the position to set
-	 */
-	public void setPosition(int position) {
-		this.position = position;
-	}
-
-	/**
-	 * @return the owner
-	 */
-	public GPUser getOwner() {
-		return owner;
-	}
-
-	/**
-	 * @param owner
-	 *            the owner to set
-	 */
-	public void setOwner(GPUser owner) {
-		this.owner = owner;
-	}
-
+    /**
+     * @param owner
+     *            the owner to set
+     */
+    public void setOwner(GPUser owner) {
+        this.owner = owner;
+    }
 }

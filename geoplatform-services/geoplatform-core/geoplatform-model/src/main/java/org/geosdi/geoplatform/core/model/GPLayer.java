@@ -53,193 +53,189 @@ import javax.persistence.Table;
  * @author Francesco Izzi - geoSDI
  * 
  */
-
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "gp_layer")
 public abstract class GPLayer implements Serializable {
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 5746325405739614413L;
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 5746325405739614413L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_LAYER_SEQ")
-	@SequenceGenerator(name = "GP_LAYER_SEQ", sequenceName = "GP_LAYER_SEQ")
-	@Column
-	private long id;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_LAYER_SEQ")
+    @SequenceGenerator(name = "GP_LAYER_SEQ", sequenceName = "GP_LAYER_SEQ")
+    @Column
+    private long id;
+    @Column(name = "url_server")
+    private String urlServer;
+    @Column(name = "name", nullable = false)
+    private String name;
+    @Column(name = "abstract")
+    private String abstractText;
+    @Column(name = "title")
+    private String title;
+    @Column(name = "srs")
+    private String srs;
+    @Embedded
+    private GPBBox bbox;
+    @ManyToOne(optional = true)
+    private GPFolder folder;
 
-	@Column(name = "url_server")
-	private String urlServer;
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
 
-	@Column(name = "name", nullable = false)
-	private String name;
-	
-	@Column(name = "abstract")
-	private String abstractText;
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	@Column(name = "title")
-	private String title;
+    /**
+     * @return the urlServer
+     */
+    public String getUrlServer() {
+        return urlServer;
+    }
 
-	@Column(name = "srs")
-	private String srs;
+    /**
+     * @param urlServer
+     *            the urlServer to set
+     */
+    public void setUrlServer(String urlServer) {
+        this.urlServer = urlServer;
+    }
 
-	@Embedded
-	private GPBBox bbox;
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
-	@ManyToOne(optional = true)
-	private GPFolder folder;
+    /**
+     * @param name
+     *            the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
+    /**
+     * @return the abstractText
+     */
+    public String getAbstractText() {
+        return abstractText;
+    }
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
+    /**
+     * @param abstractText the abstractText to set
+     */
+    public void setAbstractText(String abstractText) {
+        this.abstractText = abstractText;
+    }
 
-	/**
-	 * @return the urlServer
-	 */
-	public String getUrlServer() {
-		return urlServer;
-	}
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+        return title;
+    }
 
-	/**
-	 * @param urlServer
-	 *            the urlServer to set
-	 */
-	public void setUrlServer(String urlServer) {
-		this.urlServer = urlServer;
-	}
+    /**
+     * @param title
+     *            the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * @return the srs
+     */
+    public String getSrs() {
+        return srs;
+    }
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @param srs
+     *            the srs to set
+     */
+    public void setSrs(String srs) {
+        this.srs = srs;
+    }
 
-	/**
-	 * @return the abstractText
-	 */
-	public String getAbstractText() {
-		return abstractText;
-	}
+    /**
+     * @return the bbox
+     */
+    public GPBBox getBbox() {
+        return bbox;
+    }
 
-	/**
-	 * @param abstractText the abstractText to set
-	 */
-	public void setAbstractText(String abstractText) {
-		this.abstractText = abstractText;
-	}
+    /**
+     * @param bbox
+     *            the bbox to set
+     */
+    public void setBbox(GPBBox bbox) {
+        this.bbox = bbox;
+    }
 
-	/**
-	 * @return the title
-	 */
-	public String getTitle() {
-		return title;
-	}
+    /**
+     * @return the folder
+     */
+    public GPFolder getFolder() {
+        return folder;
+    }
 
-	/**
-	 * @param title
-	 *            the title to set
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    /**
+     * @param folder
+     *            the folder to set
+     */
+    public void setFolder(GPFolder folder) {
+        this.folder = folder;
+    }
 
-	/**
-	 * @return the srs
-	 */
-	public String getSrs() {
-		return srs;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int) (id ^ (id >>> 32));
+        return result;
+    }
 
-	/**
-	 * @param srs
-	 *            the srs to set
-	 */
-	public void setSrs(String srs) {
-		this.srs = srs;
-	}
-
-	/**
-	 * @return the bbox
-	 */
-	public GPBBox getBbox() {
-		return bbox;
-	}
-
-	/**
-	 * @param bbox
-	 *            the bbox to set
-	 */
-	public void setBbox(GPBBox bbox) {
-		this.bbox = bbox;
-	}
-
-	/**
-	 * @return the folder
-	 */
-	public GPFolder getFolder() {
-		return folder;
-	}
-
-	/**
-	 * @param folder
-	 *            the folder to set
-	 */
-	public void setFolder(GPFolder folder) {
-		this.folder = folder;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		GPLayer other = (GPLayer) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        GPLayer other = (GPLayer) obj;
+        if (id != other.id) {
+            return false;
+        }
+        return true;
+    }
 }

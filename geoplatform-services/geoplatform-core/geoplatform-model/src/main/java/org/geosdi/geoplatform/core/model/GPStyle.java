@@ -60,120 +60,115 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "style")
 public class GPStyle implements Serializable {
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = -8623163339265164161L;
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -8623163339265164161L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_STYLE_SEQ")
-	@SequenceGenerator(name = "GP_STYLE_SEQ", sequenceName = "GP_STYLE_SEQ")
-	@Column
-	private long id;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_STYLE_SEQ")
+    @SequenceGenerator(name = "GP_STYLE_SEQ", sequenceName = "GP_STYLE_SEQ")
+    @Column
+    private long id;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "title")
+    private String title;
+    @Column(name = "abstract")
+    private String abstractText;
+    @Column(name = "legend_url")
+    private String legendURL;
+    @ManyToOne(optional = true)
+    private GPLayer layer;
 
-	@Column(name = "name")
-	private String name;
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
 
-	@Column(name = "title")
-	private String title;
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	@Column(name = "abstract")
-	private String abstractText;
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
-	@Column(name = "legend_url")
-	private String legendURL;
+    /**
+     * @param name
+     *            the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@ManyToOne(optional = true)
-	private GPLayer layer;
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+        return title;
+    }
 
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
+    /**
+     * @param title
+     *            the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
+    /**
+     * @return the abstractText
+     */
+    public String getAbstractText() {
+        return abstractText;
+    }
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * @param abstractText
+     *            the abstractText to set
+     */
+    public void setAbstractText(String abstractText) {
+        this.abstractText = abstractText;
+    }
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @return the legendURL
+     */
+    public String getLegendURL() {
+        return legendURL;
+    }
 
-	/**
-	 * @return the title
-	 */
-	public String getTitle() {
-		return title;
-	}
+    /**
+     * @param legendURL
+     *            the legendURL to set
+     */
+    public void setLegendURL(String legendURL) {
+        this.legendURL = legendURL;
+    }
 
-	/**
-	 * @param title
-	 *            the title to set
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    /**
+     * @return the layer
+     */
+    public GPLayer getLayer() {
+        return layer;
+    }
 
-	/**
-	 * @return the abstractText
-	 */
-	public String getAbstractText() {
-		return abstractText;
-	}
-
-	/**
-	 * @param abstractText
-	 *            the abstractText to set
-	 */
-	public void setAbstractText(String abstractText) {
-		this.abstractText = abstractText;
-	}
-
-	/**
-	 * @return the legendURL
-	 */
-	public String getLegendURL() {
-		return legendURL;
-	}
-
-	/**
-	 * @param legendURL
-	 *            the legendURL to set
-	 */
-	public void setLegendURL(String legendURL) {
-		this.legendURL = legendURL;
-	}
-
-	/**
-	 * @return the layer
-	 */
-	public GPLayer getLayer() {
-		return layer;
-	}
-
-	/**
-	 * @param layer
-	 *            the layer to set
-	 */
-	public void setLayer(GPLayer layer) {
-		this.layer = layer;
-	}
-
+    /**
+     * @param layer
+     *            the layer to set
+     */
+    public void setLayer(GPLayer layer) {
+        this.layer = layer;
+    }
 }

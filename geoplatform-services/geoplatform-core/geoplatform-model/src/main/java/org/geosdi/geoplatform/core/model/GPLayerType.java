@@ -43,35 +43,36 @@ import java.io.Serializable;
  */
 public enum GPLayerType implements Serializable {
 
-	RASTER(1),
-	POINT(2),
-	LINESTRING(3),
-	POLYGON(4),
-	MULTIPOINT(5),
-	MULTILINESTRING(6),
-	MULTIPOLYGON(7);
+    RASTER(1),
+    POINT(2),
+    LINESTRING(3),
+    POLYGON(4),
+    MULTIPOINT(5),
+    MULTILINESTRING(6),
+    MULTIPOLYGON(7);
 
-	private int code;
+    
+    private int code;
 
-	/**
-	 * Create layer type.
-	 *
-	 * @param code code to apply
-	 */
-	private GPLayerType(int code) {
-		this.code = code;
-	}
-	
-	public int getCode(){
-		return this.code;
-	}
+    /**
+     * Create layer type.
+     *
+     * @param code code to apply
+     */
+    private GPLayerType(int code) {
+        this.code = code;
+    }
 
-	/**
-	 * Convert to string.
-	 *
-	 * @return string representation of layer type
-	 */
-	public String toString() {
-		return Integer.toString(code);
-	}
+    public int getCode() {
+        return this.code;
+    }
+
+    /**
+     * Convert to string.
+     *
+     * @return string representation of layer type
+     */
+    public String toString() {
+        return Integer.toString(code);
+    }
 }

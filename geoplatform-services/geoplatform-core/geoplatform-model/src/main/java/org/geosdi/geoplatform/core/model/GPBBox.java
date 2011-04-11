@@ -46,74 +46,72 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class GPBBox implements Serializable {
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 2795112852068645206L;
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 2795112852068645206L;
+    private double minX;
+    private double minY;
+    private double maxX;
+    private double maxY;
 
-	private double minX;
-	private double minY;
-	private double maxX;
-	private double maxY;
+    /**
+     * @return the minX
+     */
+    public double getMinX() {
+        return minX;
+    }
 
-	/**
-	 * @return the minX
-	 */
-	public double getMinX() {
-		return minX;
-	}
+    /**
+     * @param minX
+     *            the minX to set
+     */
+    public void setMinX(double minX) {
+        this.minX = minX;
+    }
 
-	/**
-	 * @param minX
-	 *            the minX to set
-	 */
-	public void setMinX(double minX) {
-		this.minX = minX;
-	}
+    /**
+     * @return the minY
+     */
+    public double getMinY() {
+        return minY;
+    }
 
-	/**
-	 * @return the minY
-	 */
-	public double getMinY() {
-		return minY;
-	}
+    /**
+     * @param minY
+     *            the minY to set
+     */
+    public void setMinY(double minY) {
+        this.minY = minY;
+    }
 
-	/**
-	 * @param minY
-	 *            the minY to set
-	 */
-	public void setMinY(double minY) {
-		this.minY = minY;
-	}
+    /**
+     * @return the maxX
+     */
+    public double getMaxX() {
+        return maxX;
+    }
 
-	/**
-	 * @return the maxX
-	 */
-	public double getMaxX() {
-		return maxX;
-	}
+    /**
+     * @param maxX
+     *            the maxX to set
+     */
+    public void setMaxX(double maxX) {
+        this.maxX = maxX;
+    }
 
-	/**
-	 * @param maxX
-	 *            the maxX to set
-	 */
-	public void setMaxX(double maxX) {
-		this.maxX = maxX;
-	}
+    /**
+     * @return the maxY
+     */
+    public double getMaxY() {
+        return maxY;
+    }
 
-	/**
-	 * @return the maxY
-	 */
-	public double getMaxY() {
-		return maxY;
-	}
-
-	/**
-	 * @param maxY
-	 *            the maxY to set
-	 */
-	public void setMaxY(double maxY) {
-		this.maxY = maxY;
-	}
-
+    /**
+     * @param maxY
+     *            the maxY to set
+     */
+    public void setMaxY(double maxY) {
+        this.maxY = maxY;
+    }
 }

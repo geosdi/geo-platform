@@ -50,7 +50,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * @author Francesco Izzi - CNR IMAA - geoSDI
  * 
  */
-
 @Entity(name = "RasterLayer")
 @Table(name = "gp_raster_layer")
 @XmlRootElement(name = "RasterLayer")
@@ -58,27 +57,27 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @PrimaryKeyJoinColumn(name = "RASTER_ID")
 public class GPRasterLayer extends GPLayer implements Serializable {
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = -1852288981980627642L;
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -1852288981980627642L;
 
-	@Embedded
-	private GPLayerInfo layerInfo;
+    
+    @Embedded
+    private GPLayerInfo layerInfo;
 
-	/**
-	 * @return the layerInfo
-	 */
-	public GPLayerInfo getLayerInfo() {
-		return layerInfo;
-	}
+    /**
+     * @return the layerInfo
+     */
+    public GPLayerInfo getLayerInfo() {
+        return layerInfo;
+    }
 
-	/**
-	 * @param layerInfo
-	 *            the layerInfo to set
-	 */
-	public void setLayerInfo(GPLayerInfo layerInfo) {
-		this.layerInfo = layerInfo;
-	}
-
+    /**
+     * @param layerInfo
+     *            the layerInfo to set
+     */
+    public void setLayerInfo(GPLayerInfo layerInfo) {
+        this.layerInfo = layerInfo;
+    }
 }

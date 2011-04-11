@@ -62,170 +62,169 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "server")
 public class GeoPlatformServer implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8546115928654105043L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 8546115928654105043L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_SERVER_SEQ")
-	@SequenceGenerator(name = "GP_SERVER_SEQ", sequenceName = "GP_SERVER_SEQ")
-	private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_SERVER_SEQ")
+    @SequenceGenerator(name = "GP_SERVER_SEQ", sequenceName = "GP_SERVER_SEQ")
+    private long id;
 
-	@Column(name = "server_url", nullable = false, unique = true)
-	private String serverUrl;
+    @Column(name = "server_url", nullable = false, unique = true)
+    private String serverUrl;
 
-	@Column(name = "name")
-	private String name;
+    @Column(name = "name")
+    private String name;
 
-	@Column(name = "title")
-	private String title;
+    @Column(name = "title")
+    private String title;
 
-	@Column(name = "abstract")
-	private String abstractServer;
+    @Column(name = "abstract")
+    private String abstractServer;
 
-	@Column(name = "contact_person")
-	private String contactPerson;
+    @Column(name = "contact_person")
+    private String contactPerson;
 
-	@Column(name = "contact_organization")
-	private String contactOrganization;
+    @Column(name = "contact_organization")
+    private String contactOrganization;
 
-	@Column(name = "cabability_type", nullable = false)
-	@Enumerated(EnumType.STRING)
-	private GPCababilityType serverType;
+    @Column(name = "cabability_type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private GPCababilityType serverType;
 
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	/**
-	 * @return the serverUrl
-	 */
-	public String getServerUrl() {
-		return serverUrl;
-	}
+    /**
+     * @return the serverUrl
+     */
+    public String getServerUrl() {
+        return serverUrl;
+    }
 
-	/**
-	 * @param serverUrl
-	 *            the serverUrl to set
-	 */
-	public void setServerUrl(String serverUrl) {
-		this.serverUrl = serverUrl;
-	}
+    /**
+     * @param serverUrl
+     *            the serverUrl to set
+     */
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
+    }
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @param name
+     *            the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * @return the title
-	 */
-	public String getTitle() {
-		return title;
-	}
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+        return title;
+    }
 
-	/**
-	 * @param title
-	 *            the title to set
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    /**
+     * @param title
+     *            the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	/**
-	 * @return the abstractServer
-	 */
-	public String getAbstractServer() {
-		return abstractServer;
-	}
+    /**
+     * @return the abstractServer
+     */
+    public String getAbstractServer() {
+        return abstractServer;
+    }
 
-	/**
-	 * @param abstractServer
-	 *            the abstractServer to set
-	 */
-	public void setAbstractServer(String abstractServer) {
-		this.abstractServer = abstractServer;
-	}
+    /**
+     * @param abstractServer
+     *            the abstractServer to set
+     */
+    public void setAbstractServer(String abstractServer) {
+        this.abstractServer = abstractServer;
+    }
 
-	/**
-	 * @return the contactPerson
-	 */
-	public String getContactPerson() {
-		return contactPerson;
-	}
+    /**
+     * @return the contactPerson
+     */
+    public String getContactPerson() {
+        return contactPerson;
+    }
 
-	/**
-	 * @param contactPerson
-	 *            the contactPerson to set
-	 */
-	public void setContactPerson(String contactPerson) {
-		this.contactPerson = contactPerson;
-	}
+    /**
+     * @param contactPerson
+     *            the contactPerson to set
+     */
+    public void setContactPerson(String contactPerson) {
+        this.contactPerson = contactPerson;
+    }
 
-	/**
-	 * @return the contactOrganization
-	 */
-	public String getContactOrganization() {
-		return contactOrganization;
-	}
+    /**
+     * @return the contactOrganization
+     */
+    public String getContactOrganization() {
+        return contactOrganization;
+    }
 
-	/**
-	 * @param contactOrganization
-	 *            the contactOrganization to set
-	 */
-	public void setContactOrganization(String contactOrganization) {
-		this.contactOrganization = contactOrganization;
-	}
+    /**
+     * @param contactOrganization
+     *            the contactOrganization to set
+     */
+    public void setContactOrganization(String contactOrganization) {
+        this.contactOrganization = contactOrganization;
+    }
 
-	/**
-	 * @return the serverType
-	 */
-	public GPCababilityType getServerType() {
-		return serverType;
-	}
+    /**
+     * @return the serverType
+     */
+    public GPCababilityType getServerType() {
+        return serverType;
+    }
 
-	/**
-	 * @param serverType
-	 *            the serverType to set
-	 */
-	public void setServerType(GPCababilityType serverType) {
-		this.serverType = serverType;
-	}
+    /**
+     * @param serverType
+     *            the serverType to set
+     */
+    public void setServerType(GPCababilityType serverType) {
+        this.serverType = serverType;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "GeoPlatformServer [id=" + id + ", serverUrl=" + serverUrl
-				+ ", name=" + name + ", title=" + title + ", abstractServer="
-				+ abstractServer + ", contactPerson=" + contactPerson
-				+ ", contactOrganization=" + contactOrganization
-				+ ", serverType=" + serverType + "]";
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "GeoPlatformServer [id=" + id + ", serverUrl=" + serverUrl
+                + ", name=" + name + ", title=" + title + ", abstractServer="
+                + abstractServer + ", contactPerson=" + contactPerson
+                + ", contactOrganization=" + contactOrganization
+                + ", serverType=" + serverType + "]";
+    }
 }

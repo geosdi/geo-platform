@@ -49,48 +49,48 @@ import com.vividsolutions.jts.io.WKTWriter;
  */
 public class GeometryAdapter<T extends Geometry> extends XmlAdapter<String, T> {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public T unmarshal(String v) throws ParseException {
-		// TODO Auto-generated method stub
-		if (v != null) {
-			WKTReader reader = new WKTReader();
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public T unmarshal(String v) throws ParseException {
+        // TODO Auto-generated method stub
+        if (v != null) {
+            WKTReader reader = new WKTReader();
 
-			Geometry theGeom = reader.read(v);
-			if (theGeom.getSRID() == 0)
-				theGeom.setSRID(4326);
+            Geometry theGeom = reader.read(v);
+            if (theGeom.getSRID() == 0) {
+                theGeom.setSRID(4326);
+            }
 
-			try {
-				return (T) theGeom;
-			} catch (ClassCastException e) {
-				throw new ParseException("WKT v is a "
-						+ theGeom.getClass().getName());
-			}
-		}
-		return null;
-	}
+            try {
+                return (T) theGeom;
+            } catch (ClassCastException e) {
+                throw new ParseException("WKT v is a "
+                        + theGeom.getClass().getName());
+            }
+        }
+        return null;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
-	 */
-	@Override
-	public String marshal(T v) throws ParseException {
-		// TODO Auto-generated method stub
-		if (v != null) {
-			WKTWriter writer = new WKTWriter();
-			String wkt = writer.write(v);
-			return wkt;
-		}
-		return null;
-	}
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     */
+    @Override
+    public String marshal(T v) throws ParseException {
+        // TODO Auto-generated method stub
+        if (v != null) {
+            WKTWriter writer = new WKTWriter();
+            String wkt = writer.write(v);
+            return wkt;
+        }
+        return null;
+    }
 }

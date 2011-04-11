@@ -46,42 +46,43 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class GPLayerInfo implements Serializable {
 
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = -7418444235711934950L;
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -7418444235711934950L;
 
-	private boolean queryable = false;
-	private String keywords;
 
-	/**
-	 * @return the queryable
-	 */
-	public boolean isQueryable() {
-		return queryable;
-	}
+    
+    private boolean queryable = false;
+    private String keywords;
 
-	/**
-	 * @param queryable
-	 *            the queryable to set
-	 */
-	public void setQueryable(boolean queryable) {
-		this.queryable = queryable;
-	}
+    /**
+     * @return the queryable
+     */
+    public boolean isQueryable() {
+        return queryable;
+    }
 
-	/**
-	 * @return the keywords
-	 */
-	public String getKeywords() {
-		return keywords;
-	}
+    /**
+     * @param queryable
+     *            the queryable to set
+     */
+    public void setQueryable(boolean queryable) {
+        this.queryable = queryable;
+    }
 
-	/**
-	 * @param keywords
-	 *            the keywords to set
-	 */
-	public void setKeywords(String keywords) {
-		this.keywords = keywords;
-	}
+    /**
+     * @return the keywords
+     */
+    public String getKeywords() {
+        return keywords;
+    }
 
+    /**
+     * @param keywords
+     *            the keywords to set
+     */
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
+    }
 }

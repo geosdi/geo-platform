@@ -55,7 +55,6 @@ import com.vividsolutions.jts.geom.Geometry;
  * @author Francesco Izzi - CNR IMAA - geoSDI
  * 
  */
-
 @Entity(name = "VectorLayer")
 @Table(name = "gp_vector_layer")
 @XmlRootElement(name = "VectorLayer")
@@ -63,29 +62,28 @@ import com.vividsolutions.jts.geom.Geometry;
 @PrimaryKeyJoinColumn(name = "VECTOR_ID")
 public class GPVectorLayer extends GPLayer implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3309979650712821228L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 3309979650712821228L;
 
-	@Type(type = "org.hibernatespatial.GeometryUserType")
-	@Column(name = "geometry", nullable = true)
-	private Geometry geometry;
+    @Type(type = "org.hibernatespatial.GeometryUserType")
+    @Column(name = "geometry", nullable = true)
+    private Geometry geometry;
 
-	/**
-	 * @return the geometry
-	 */
-	@XmlJavaTypeAdapter(value = GeometryAdapter.class)
-	public Geometry getGeometry() {
-		return geometry;
-	}
+    /**
+     * @return the geometry
+     */
+    @XmlJavaTypeAdapter(value = GeometryAdapter.class)
+    public Geometry getGeometry() {
+        return geometry;
+    }
 
-	/**
-	 * @param geometry
-	 *            the geometry to set
-	 */
-	public void setGeometry(Geometry geometry) {
-		this.geometry = geometry;
-	}
-
+    /**
+     * @param geometry
+     *            the geometry to set
+     */
+    public void setGeometry(Geometry geometry) {
+        this.geometry = geometry;
+    }
 }

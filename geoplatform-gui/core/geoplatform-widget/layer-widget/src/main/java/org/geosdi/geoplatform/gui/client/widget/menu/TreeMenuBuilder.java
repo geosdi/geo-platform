@@ -33,46 +33,107 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-
-
 package org.geosdi.geoplatform.gui.client.widget.menu;
 
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.impl.tree.menu.GeoPlatformMenuTree;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
+import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class TreeMenuBuilder {
+public class TreeMenuBuilder implements GeoPlatformMenuTree {
 
-    private TreePanel<GPBeanTreeModel> tree;
     private Menu menu;
 
-    public TreeMenuBuilder(TreePanel<GPBeanTreeModel> theTree) {
-        this.tree = theTree;
-        this.buildMenu();
+    public TreeMenuBuilder() {
+        this.menu = new Menu();
     }
 
-    private void buildMenu() {
-        this.menu = new Menu();
+    @Override
+    public void buildMenu() {
+        this.buildRootMenu();
+        this.buildFolderMenu();
+        this.buildLeafMenu();
+    }
 
+    /*
+     *Build Menu for Root Composite Element
+     * 
+     */
+    private void buildRootMenu() {
         MenuItem addRootFolder = new MenuItem("Add Folder");
-        addRootFolder.setId("folderRoot");
+        addRootFolder.setItemId("folderRoot");
 
         this.menu.add(addRootFolder);
+    }
 
+    /*
+     * Build Menu for Folder Composite Element
+     *
+     */
+    private void buildFolderMenu() {
         MenuItem addFolder = new MenuItem("Add Folder");
-        addFolder.setId("folder");
+        addFolder.setItemId("folder");
 
         this.menu.add(addFolder);
 
         MenuItem deleteFolder = new MenuItem("Delete Folder");
+        deleteFolder.setItemId("deleteFolder");
 
+        this.menu.add(deleteFolder);
+
+        MenuItem addLayer = new MenuItem("Add Layer");
+        addLayer.setItemId("addLayer");
+
+        this.menu.add(addLayer);
     }
 
+    /*
+     * Build Menu for Leaf Composite Element
+     *
+     */
+    private void buildLeafMenu() {
+        MenuItem deleteLayer = new MenuItem("Delete Layer");
+        deleteLayer.setItemId("deleteLayer");
 
+        this.menu.add(deleteLayer);
+    }
+
+    @Override
+    public Menu getMenu() {
+        return this.menu;
+    }
+
+    @Override
+    public void show(AbstractRootTreeNode root) {
+        menu.getItemByItemId("folderRoot").setEnabled(true);
+        menu.getItemByItemId("folder").setEnabled(false);
+        menu.getItemByItemId("deleteFolder").setEnabled(false);
+        menu.getItemByItemId("addLayer").setEnabled(false);
+        menu.getItemByItemId("deleteLayer").setEnabled(false);
+    }
+
+    @Override
+    public void show(AbstractFolderTreeNode folder) {
+        menu.getItemByItemId("folderRoot").setEnabled(false);
+        menu.getItemByItemId("folder").setEnabled(true);
+        menu.getItemByItemId("deleteFolder").setEnabled(true);
+        menu.getItemByItemId("addLayer").setEnabled(true);
+        menu.getItemByItemId("deleteLayer").setEnabled(false);
+    }
+
+    @Override
+    public void showLeaf(GPLayerBean leaf) {
+         menu.getItemByItemId("folderRoot").setEnabled(false);
+        menu.getItemByItemId("folder").setEnabled(false);
+        menu.getItemByItemId("deleteFolder").setEnabled(false);
+        menu.getItemByItemId("addLayer").setEnabled(false);
+        menu.getItemByItemId("deleteLayer").setEnabled(true);
+    }
 }

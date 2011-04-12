@@ -50,28 +50,27 @@ import com.extjs.gxt.ui.client.widget.menu.Menu;
  */
 public class LayerMenuAction extends MenuAction {
 
-	public LayerMenuAction() {
-		super("Layers");
-		// TODO Auto-generated constructor stub
-	}
+    public LayerMenuAction() {
+        super("Layers");
+        // TODO Auto-generated constructor stub
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
-	@Override
-	public void componentSelected(MenuEvent ce) {
-		// TODO Auto-generated method stub
-		CheckMenuItem item = (CheckMenuItem) ((Menu) ce.getSource())
-				.getItemByItemId(super.getId());
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+     * .extjs.gxt.ui.client.event.ComponentEvent)
+     */
+    @Override
+    public void componentSelected(MenuEvent ce) {
+        // TODO Auto-generated method stub
+        CheckMenuItem item = (CheckMenuItem) ((Menu) ce.getSource()).getItemByItemId(super.getId());
 
-		if (item.isChecked())
-			Dispatcher.forwardEvent(LayerEvents.SHOW_LAYER_WIDGET);
-		else
-			Dispatcher.forwardEvent(LayerEvents.HIDE_LAYER_WIDGET);
-	}
-
+        if (item.isChecked()) {
+            Dispatcher.forwardEvent(LayerEvents.SHOW_LAYER_WIDGET);
+        } else {
+            Dispatcher.forwardEvent(LayerEvents.HIDE_LAYER_WIDGET);
+        }
+    }
 }

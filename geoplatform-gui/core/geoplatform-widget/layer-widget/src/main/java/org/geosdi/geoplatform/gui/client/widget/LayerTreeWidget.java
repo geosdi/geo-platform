@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style.SelectionMode;
-import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import org.geosdi.geoplatform.gui.client.listener.DropAddListener;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GeoPlatformTreeWidget;
@@ -53,11 +52,11 @@ import com.extjs.gxt.ui.client.event.DNDEvent;
 import com.extjs.gxt.ui.client.event.DNDListener;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.impl.tree.menu.GeoPlatformMenuTree;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -67,6 +66,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
     private GPRootTreeNode root;
+    private GeoPlatformMenuTree menuTree;
     private boolean initialized;
 
     /**
@@ -77,6 +77,10 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
         this.buildRoot();
     }
 
+    /*
+     * Create Root Composite Element
+     *
+     */
     private void buildRoot() {
         // TODO Auto-generated method stub
         this.root = new GPRootTreeNode(this.tree);
@@ -128,14 +132,13 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
         this.tree.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        this.tree.getSelectionModel().addSelectionChangedListener(new SelectionChangedListener<GPBeanTreeModel>() {
-
-            @Override
-            public void selectionChanged(SelectionChangedEvent<GPBeanTreeModel> se) {
-
-                System.out.println("TEST SELECTION CHANGE ******** " + se.getSelectedItem().toString());
-            }
-        });
+//        this.tree.getSelectionModel().addSelectionChangedListener(new SelectionChangedListener<GPBeanTreeModel>() {
+//
+//            @Override
+//            public void selectionChanged(SelectionChangedEvent<GPBeanTreeModel> se) {
+//               se.getSelectedItem().accept(visitor);
+//            }
+//        });
 
         this.setCheckable(true);
         this.setCheckStyle(CheckCascade.NONE);

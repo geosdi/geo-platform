@@ -66,13 +66,13 @@ public class VisitorPosition implements IVisitor {
 
         System.out.println("New index: " + newZIndex);
         System.out.println("Old position: " + oldZIndex);
-        if (oldZIndex < newZIndex) {
+        if (newZIndex < oldZIndex) {
             this.startPosition = this.getPrecedingElement(changedElement);
             oldParent.remove(changedElement);
             changedElement.setParent(parentDestination);
             parentDestination.insert(changedElement, newIndex);
             this.endPosition = this.getNextUnvisitedElement(this.findDeepestElementInNode(changedElement));
-        } else if (oldZIndex > newZIndex) {
+        } else if (newZIndex > oldZIndex) {
             this.endPosition = this.getNextUnvisitedElement(this.findDeepestElementInNode(changedElement));
             oldParent.remove(changedElement);
             changedElement.setParent(parentDestination);
@@ -100,7 +100,8 @@ public class VisitorPosition implements IVisitor {
 
     private GPBeanTreeModel getNextUnvisitedElement(GPBeanTreeModel element) {
         GPBeanTreeModel unvisitedElement = null;
-        if (!element.isLeaf()) {
+        //TODO: Verificare nel caso in cui l'elemento è una folder vuota
+        if (!element.isLeaf()) {//IS FOLDER
             unvisitedElement = (GPBeanTreeModel) element.getChild(0);
         } else {
             unvisitedElement = this.getFollowingElement(element);
@@ -115,6 +116,7 @@ public class VisitorPosition implements IVisitor {
         if (parent != null && parent.getChild(indexElement + 1) != null) {
             return (GPBeanTreeModel) parent.getChild(indexElement + 1);
         } else if (parent != null && parent instanceof GPRootTreeNode) {
+            System.out.println("Il padre non è uguale a null ed è istanza di root");
             return null;
         } else {
             followingElement = this.getFollowingElement(parent);

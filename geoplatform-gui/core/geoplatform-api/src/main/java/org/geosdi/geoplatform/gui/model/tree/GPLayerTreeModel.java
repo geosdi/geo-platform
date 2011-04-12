@@ -124,7 +124,4 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
         this.layerType = layerType;
     }
 
-    public boolean isParentChecked() {
-        return ((IFolderTreeNode) super.getParent()).isChecked();
-    }
 }

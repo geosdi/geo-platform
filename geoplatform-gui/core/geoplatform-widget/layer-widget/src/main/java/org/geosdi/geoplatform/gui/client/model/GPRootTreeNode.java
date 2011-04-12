@@ -57,11 +57,9 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
      *
      */
     private static final long serialVersionUID = 1765450539495169525L;
-    private TreePanel<GPBeanTreeModel> tree;
 
     public GPRootTreeNode(TreePanel<GPBeanTreeModel> theTree) {
         super.setLabel("Geo-Platform Tree");
-        this.tree = theTree;
     }
 
     /**
@@ -87,19 +85,4 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
         return LayerResources.ICONS.geoPlatform();
     }
 
-    /**
-     *
-     * @param model
-     * @return boolean
-     */
-    public boolean isNodeChecked(GPBeanTreeModel model) {
-        return this.tree.isChecked(model);
-    }
-
-    /**
-     * @return the tree
-     */
-    public TreePanel<GPBeanTreeModel> getTree() {
-        return tree;
-    }
 }

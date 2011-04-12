@@ -37,12 +37,9 @@ package org.geosdi.geoplatform.gui.client.model;
 
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
-import org.geosdi.geoplatform.gui.impl.map.event.DisplayLayerEvent;
-import org.geosdi.geoplatform.gui.impl.map.event.HideLayerEvent;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
@@ -109,26 +106,6 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
                 return LayerResources.ICONS.shape();
         }
         return null;
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#notifyCheckEvent
-     * (boolean)
-     */
-    @Override
-    public void notifyCheckEvent(boolean isChecked) {
-        // TODO Auto-generated method stub
-        if (isParentChecked()) {
-            if (isChecked) {
-                GPHandlerManager.fireEvent(new DisplayLayerEvent(this));
-            } else {
-                GPHandlerManager.fireEvent(new HideLayerEvent(this));
-            }
-        }
-
     }
 
     /*

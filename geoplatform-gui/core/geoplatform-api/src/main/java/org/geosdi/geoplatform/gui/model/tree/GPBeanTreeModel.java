@@ -55,6 +55,7 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
     
     private String label;
     private int zIndex;
+    private boolean isChecked = false;
 
     /**
      * @return the label
@@ -71,15 +72,6 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
         this.label = label;
     }
 
-    /**
-     * Notify Check Changed Event on the Map
-     *
-     * @param isChecked
-     */
-    public void notifyCheckEvent(boolean isChecked) {
-        // TODO Auto-generated method stub
-    }
-
     public abstract AbstractImagePrototype getIcon();
 
     public void setzIndex(int zIndex) {
@@ -91,4 +83,19 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
     }
 
     public abstract void accept(IVisitor visitor);
+
+    /**
+     * @return the isChecked
+     */
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    /**
+     * @param isChecked the isChecked to set
+     */
+    public void setChecked(boolean isChecked) {
+        System.out.println("Imposto cecked");
+        this.isChecked = isChecked;
+    }
 }

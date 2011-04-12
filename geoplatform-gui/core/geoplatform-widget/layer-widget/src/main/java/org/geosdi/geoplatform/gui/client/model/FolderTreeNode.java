@@ -40,14 +40,9 @@ import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
-import org.geosdi.geoplatform.gui.impl.map.event.HideLayerEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
-import com.extjs.gxt.ui.client.data.ModelData;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorModelConverter;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
@@ -66,14 +61,12 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
 
     
     private VisitorModelConverter visitor = new VisitorModelConverter(this);
-    private List<GPLayerBean> childChecked = new ArrayList<GPLayerBean>();
 
     public FolderTreeNode(GPFolderClientInfo folder) {
         super.setLabel(folder.getLabel());
         this.modelConverter(folder.getFolderElements());
     }
 
-    //TODO: Change model converter to fit new nidification
     /**
      *
      * @param layersClientInfo
@@ -93,63 +86,5 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
     public AbstractImagePrototype getIcon() {
         // TODO Auto-generated method stub
         return LayerResources.ICONS.layerFolder();
-    }
-
-    @Override
-    public void notifyCheckEvent(boolean isChecked) {
-        // TODO Auto-generated method stub
-        if (isChecked) {
-            for (ModelData child : super.getChildren()) {
-                if (isChildChecked((GPLayerTreeModel) child)) {
-                    ((GPBeanTreeModel) child).notifyCheckEvent(true);
-
-                }
-            }
-
-        } else {
-            for (ModelData child : super.getChildren()) {
-                if (isChildChecked((GPLayerTreeModel) child)) {
-                    GPHandlerManager.fireEvent(new HideLayerEvent(
-                            (GPLayerBean) child));
-
-                }
-            }
-
-        }
-    }
-
-    @Override
-    public boolean isChecked() {
-        return getRootNode().isNodeChecked(this);
-    }
-
-    @Override
-    public boolean isChildChecked(GPLayerTreeModel child) {
-        // TODO Auto-generated method stub
-        return getRootNode().isNodeChecked(child);
-    }
-
-    /**
-     *
-     * @return All Children Checked
-     */
-    public List<GPLayerBean> getChecked() {
-        this.childChecked.clear();
-        for (ModelData child : super.getChildren()) {
-            if (isChildChecked((GPLayerTreeModel) child)) {
-                this.childChecked.add((GPLayerTreeModel) child);
-
-            }
-        }
-        return this.childChecked;
-    }
-
-    /**
-     * Return Root Node
-     *
-     * @return GPRootTreeNode
-     */
-    public GPRootTreeNode getRootNode() {
-        return (GPRootTreeNode) super.getParent();
     }
 }

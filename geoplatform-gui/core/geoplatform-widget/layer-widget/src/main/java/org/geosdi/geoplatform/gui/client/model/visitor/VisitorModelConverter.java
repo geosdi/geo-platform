@@ -44,8 +44,9 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
 
 /**
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  *
- * @author -
  */
 public class VisitorModelConverter implements IVisitorClient {
 

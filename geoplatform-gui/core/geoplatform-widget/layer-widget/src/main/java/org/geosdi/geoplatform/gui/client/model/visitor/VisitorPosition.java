@@ -60,13 +60,19 @@ public class VisitorPosition implements IVisitor {
             GPBeanTreeModel parentDestination, int newIndex) {
         GPBeanTreeModel oldParent = (GPBeanTreeModel) changedElement.getParent();
         int oldPosition = oldParent.getChildren().indexOf(changedElement);
-        if (oldPosition < newIndex) {
+
+        int oldZIndex = changedElement.getzIndex();
+        int newZIndex = parentDestination.getzIndex() - newIndex-1;
+
+        System.out.println("New index: " + newZIndex);
+        System.out.println("Old position: " + oldZIndex);
+        if (oldZIndex < newZIndex) {
             this.startPosition = this.getPrecedingElement(changedElement);
             oldParent.remove(changedElement);
             changedElement.setParent(parentDestination);
             parentDestination.insert(changedElement, newIndex);
             this.endPosition = this.getNextUnvisitedElement(this.findDeepestElementInNode(changedElement));
-        } else if (oldPosition > newIndex) {
+        } else if (oldZIndex > newZIndex) {
             this.endPosition = this.getNextUnvisitedElement(this.findDeepestElementInNode(changedElement));
             oldParent.remove(changedElement);
             changedElement.setParent(parentDestination);
@@ -75,6 +81,8 @@ public class VisitorPosition implements IVisitor {
         } else {
             return;
         }
+        System.out.println("Start Position: " + this.startPosition.toString());
+        System.out.println("End position: " + this.endPosition.toString());
         this.preorderTraversal();
         System.out.println("Modifica terminata");
     }

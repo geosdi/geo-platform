@@ -56,7 +56,7 @@ import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.impl.tree.menu.GeoPlatformMenuTree;
+import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -66,7 +66,6 @@ import org.geosdi.geoplatform.gui.impl.tree.menu.GeoPlatformMenuTree;
 public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
     private GPRootTreeNode root;
-    private GeoPlatformMenuTree menuTree;
     private boolean initialized;
 
     /**
@@ -149,12 +148,16 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
      * Enable Check Box on Tree
      */
     private void enableCheckChange() {
+        this.tree.addCheckListener(null);
         this.tree.addListener(Events.CheckChange,
                 new Listener<TreePanelEvent<GPBeanTreeModel>>() {
 
                     @Override
                     public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
-                        be.getItem().notifyCheckEvent(be.isChecked());
+                        VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(be.getTreePanel());
+                        System.out.println("Mi ha chiamato: " + be.getItem());
+                        be.getItem().accept(visitorDisplay);
+                        //be.getItem().notifyCheckEvent(be.isChecked());
                     }
                 });
     }

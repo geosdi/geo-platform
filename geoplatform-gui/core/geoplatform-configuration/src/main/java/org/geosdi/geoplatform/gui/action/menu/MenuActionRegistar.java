@@ -43,28 +43,28 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionRegistar
  */
 public class MenuActionRegistar extends GeoPlatformActionRegistar {
 
-	/**
-	 * 
-	 * @param key
-	 * @param menuActionCreator
-	 */
-	public static void put(String key, MenuActionCreator menuActionCreator) {
-		if (key != null && menuActionCreator != null)
-			createFactory().getRegistry().put(key, menuActionCreator);
-	}
+    /**
+     *
+     * @param key
+     * @param menuActionCreator
+     */
+    public static void put(String key, MenuActionCreator menuActionCreator) {
+        if (key != null && menuActionCreator != null) {
+            createFactory().getRegistry().put(key, menuActionCreator);
+        }
+    }
 
-	/**
-	 * Return Menu Action
-	 * 
-	 * @param key
-	 *            key with the action is registered
-	 */
-	public static MenuAction get(String key) {
-		MenuActionCreator menuActionCreator = (MenuActionCreator) createFactory()
-				.getRegistry().get(key);
-		if (menuActionCreator == null)
-			return null;
-		return menuActionCreator.createAction();
-	}
-
+    /**
+     * Return Menu Action
+     *
+     * @param key
+     *            key with the action is registered
+     */
+    public static MenuAction get(String key) {
+        MenuActionCreator menuActionCreator = (MenuActionCreator) createFactory().getRegistry().get(key);
+        if (menuActionCreator == null) {
+            return null;
+        }
+        return menuActionCreator.createAction();
+    }
 }

@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
@@ -54,9 +53,8 @@ public class GPFolderClientInfo implements Serializable,
      */
     private static final long serialVersionUID = 8769227953810545929L;
     private String label;
-    private int order;
     private int zIndex;
-    private List<IGPFolderElements> folderElements = new ArrayList<IGPFolderElements>();
+    private List<IGPFolderElements> folderElements;
 
     /**
      * @return the label
@@ -96,7 +94,7 @@ public class GPFolderClientInfo implements Serializable,
      */
     @Override
     public String toString() {
-        return "GPFolderClientInfo [label=" + label + ", order=" + order
+        return "GPFolderClientInfo [label=" + label + ", zIndex=" + zIndex
                 + ", layers=" + folderElements + "]";
     }
 

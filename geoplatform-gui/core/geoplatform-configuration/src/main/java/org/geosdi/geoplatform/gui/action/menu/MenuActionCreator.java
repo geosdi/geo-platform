@@ -43,6 +43,5 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionCreator;
  */
 public interface MenuActionCreator extends GeoPlatformActionCreator {
 
-	public MenuAction createAction();
-
+    public MenuAction createAction();
 }

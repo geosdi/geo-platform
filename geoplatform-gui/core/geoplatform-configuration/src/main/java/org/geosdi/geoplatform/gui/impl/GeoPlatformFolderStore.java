@@ -49,23 +49,22 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
  */
 public class GeoPlatformFolderStore implements FolderStore, Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 261396367429146177L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 261396367429146177L;
+    private List<GPFolderClientInfo> folders;
 
-	private List<GPFolderClientInfo> folders;
+    @Override
+    public List<GPFolderClientInfo> getFolders() {
+        // TODO Auto-generated method stub
+        return this.folders;
+    }
 
-	@Override
-	public List<GPFolderClientInfo> getFolders() {
-		// TODO Auto-generated method stub
-		return this.folders;
-	}
-
-	@Override
-	public void setFolders(List<GPFolderClientInfo> folders) {
-		// TODO Auto-generated method stub
-		Collections.sort(folders);
-		this.folders = folders;
-	}
+    @Override
+    public void setFolders(List<GPFolderClientInfo> folders) {
+        // TODO Auto-generated method stub
+        Collections.sort(folders);
+        this.folders = folders;
+    }
 }

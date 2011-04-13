@@ -42,26 +42,25 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * 
  */
 public abstract class MenuBaseAction extends MenuAction {
-	
-	private AbstractImagePrototype image;
 
-	public MenuBaseAction(String title, AbstractImagePrototype image) {
-		super(title);
-		this.image = image;
-	}
+    private AbstractImagePrototype image;
 
-	/**
-	 * @return the image
-	 */
-	public AbstractImagePrototype getImage() {
-		return image;
-	}
+    public MenuBaseAction(String title, AbstractImagePrototype image) {
+        super(title);
+        this.image = image;
+    }
 
-	/**
-	 * @param image the image to set
-	 */
-	public void setImage(AbstractImagePrototype image) {
-		this.image = image;
-	}
+    /**
+     * @return the image
+     */
+    public AbstractImagePrototype getImage() {
+        return image;
+    }
 
+    /**
+     * @param image the image to set
+     */
+    public void setImage(AbstractImagePrototype image) {
+        this.image = image;
+    }
 }

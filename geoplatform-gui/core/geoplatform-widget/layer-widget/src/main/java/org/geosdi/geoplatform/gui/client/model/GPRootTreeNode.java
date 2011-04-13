@@ -44,7 +44,6 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -70,8 +69,6 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
         for (GPFolderClientInfo folder : clientFolders) {
             super.add(new FolderTreeNode(folder));
         }
-        VisitorPosition visitor = new VisitorPosition();
-        this.accept(visitor);
     }
 
     /*

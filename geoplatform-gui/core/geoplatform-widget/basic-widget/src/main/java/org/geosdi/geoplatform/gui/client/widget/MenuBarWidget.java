@@ -61,155 +61,152 @@ import com.extjs.gxt.ui.client.widget.menu.SeparatorMenuItem;
  */
 public class MenuBarWidget {
 
-	public static final String MENU_BAR_SEPARATOR = "MenuBarSeparator";
+    public static final String MENU_BAR_SEPARATOR = "MenuBarSeparator";
+    private MenuBar bar;
+    private IMenuBarContainerTool menuBarContainerTool;
 
-	private MenuBar bar;
-	private IMenuBarContainerTool menuBarContainerTool;
+    public MenuBarWidget(IMenuBarContainerTool menuBarContainerTool) {
+        this.bar = new MenuBar();
+        bar.setBorders(true);
+        bar.setStyleAttribute("borderTop", "none");
+        this.menuBarContainerTool = menuBarContainerTool;
+        initialize();
+    }
 
-	public MenuBarWidget(IMenuBarContainerTool menuBarContainerTool) {
-		this.bar = new MenuBar();
-		bar.setBorders(true);
-		bar.setStyleAttribute("borderTop", "none");
-		this.menuBarContainerTool = menuBarContainerTool;
-		initialize();
-	}
+    /**
+     * Widget initialize
+     */
+    private void initialize() {
+        for (MenuBarCategory category : this.menuBarContainerTool.getCategories()) {
+            Menu menu = new Menu();
+            this.bar.add(new MenuBarItem(category.getText(), menu));
+            addCategory(category, menu);
+        }
 
-	/**
-	 * Widget initialize
-	 */
-	private void initialize() {
-		for (MenuBarCategory category : this.menuBarContainerTool
-				.getCategories()) {
-			Menu menu = new Menu();
-			this.bar.add(new MenuBarItem(category.getText(), menu));
-			addCategory(category, menu);
-		}
+    }
 
-	}
+    /**
+     * Add MenuBarItem to MenuBar
+     *
+     * @param category
+     */
+    public void addCategory(MenuBarCategory category, Menu menu) {
+        // TODO Auto-generated method stub
+        buildTools(menu, category.getTools());
+    }
 
-	/**
-	 * Add MenuBarItem to MenuBar
-	 * 
-	 * @param category
-	 */
-	public void addCategory(MenuBarCategory category, Menu menu) {
-		// TODO Auto-generated method stub
-		buildTools(menu, category.getTools());
-	}
+    /**
+     *
+     * @param tools
+     * @param menu
+     */
+    public void buildTools(Menu menu, List<MenuBarClientTool> tools) {
+        for (MenuBarClientTool tool : tools) {
+            if (tool.getId().equals(MENU_BAR_SEPARATOR)) {
+                addMenuSeparator(menu);
+            } else {
+                checkToolType(tool, menu);
+            }
+        }
+    }
 
-	/**
-	 * 
-	 * @param tools
-	 * @param menu
-	 */
-	public void buildTools(Menu menu, List<MenuBarClientTool> tools) {
-		for (MenuBarClientTool tool : tools) {
-			if (tool.getId().equals(MENU_BAR_SEPARATOR)) {
-				addMenuSeparator(menu);
-			} else {
-				checkToolType(tool, menu);
-			}
-		}
-	}
+    /**
+     *
+     * @param tool
+     * @param menu
+     */
+    private void checkToolType(MenuBarClientTool tool, Menu menu) {
+        // TODO Auto-generated method stub
+        if (tool instanceof CheckMenuClientTool) {
+            addCheckMenuItem((CheckMenuClientTool) tool, menu);
+        } else if (tool instanceof DateMenuClientTool) {
+            addDateMenu(menu);
+        } else if (tool instanceof GroupMenuClientTool) {
+            addGroupMenuItem((GroupMenuClientTool) tool, menu);
+        } else {
+            addMenuItem(tool, menu);
+        }
+    }
 
-	/**
-	 * 
-	 * @param tool
-	 * @param menu
-	 */
-	private void checkToolType(MenuBarClientTool tool, Menu menu) {
-		// TODO Auto-generated method stub
-		if (tool instanceof CheckMenuClientTool) {
-			addCheckMenuItem((CheckMenuClientTool) tool, menu);
-		} else if (tool instanceof DateMenuClientTool) {
-			addDateMenu(menu);
-		} else if (tool instanceof GroupMenuClientTool) {
-			addGroupMenuItem((GroupMenuClientTool) tool, menu);
-		} else {
-			addMenuItem(tool, menu);
-		}
-	}
+    /**
+     * Add Simple MenuItem to Menu
+     *
+     * @param tool
+     * @param menu
+     */
+    public void addMenuItem(MenuBarClientTool tool, Menu menu) {
+        // TODO Auto-generated method stub
+        MenuBaseAction action = (MenuBaseAction) MenuActionRegistar.get(tool.getId());
 
-	/**
-	 * Add Simple MenuItem to Menu
-	 * 
-	 * @param tool
-	 * @param menu
-	 */
-	public void addMenuItem(MenuBarClientTool tool, Menu menu) {
-		// TODO Auto-generated method stub
-		MenuBaseAction action = (MenuBaseAction) MenuActionRegistar.get(tool
-				.getId());
+        MenuItem item = new MenuItem(tool.getText());
 
-		MenuItem item = new MenuItem(tool.getText());
+        if (action != null) {
+            action.setId(tool.getId());
+            item.setIcon(action.getImage());
+            item.setItemId(action.getId());
+            item.addSelectionListener(action);
+        }
+        menu.add(item);
+    }
 
-		if (action != null) {
-			action.setId(tool.getId());
-			item.setIcon(action.getImage());
-			item.setItemId(action.getId());
-			item.addSelectionListener(action);
-		}
-		menu.add(item);
-	}
+    /**
+     * Add a MenuItem with sub menu
+     *
+     * @param tool
+     */
+    public void addGroupMenuItem(GroupMenuClientTool tool, Menu menu) {
+        // TODO Auto-generated method stub
+        MenuItem item = new MenuItem(tool.getText());
+        menu.add(item);
+        Menu subMenu = new Menu();
+        buildTools(subMenu, tool.getTools());
+        item.setSubMenu(subMenu);
+    }
 
-	/**
-	 * Add a MenuItem with sub menu
-	 * 
-	 * @param tool
-	 */
-	public void addGroupMenuItem(GroupMenuClientTool tool, Menu menu) {
-		// TODO Auto-generated method stub
-		MenuItem item = new MenuItem(tool.getText());
-		menu.add(item);
-		Menu subMenu = new Menu();
-		buildTools(subMenu, tool.getTools());
-		item.setSubMenu(subMenu);
-	}
+    /**
+     * Add a DateMenu Item to Menu
+     *
+     * @param menu
+     */
+    public void addDateMenu(Menu menu) {
+        // TODO Auto-generated method stub
+        MenuItem date = new MenuItem("Choose a Date");
+        menu.add(date);
+        date.setSubMenu(new DateMenu());
+    }
 
-	/**
-	 * Add a DateMenu Item to Menu
-	 * 
-	 * @param menu
-	 */
-	public void addDateMenu(Menu menu) {
-		// TODO Auto-generated method stub
-		MenuItem date = new MenuItem("Choose a Date");
-		menu.add(date);
-		date.setSubMenu(new DateMenu());
-	}
+    /**
+     * Add CheckMenuItem to a Menu
+     *
+     * @param tool
+     * @param menu
+     */
+    public void addCheckMenuItem(CheckMenuClientTool tool, Menu menu) {
+        // TODO Auto-generated method stub
+        MenuAction action = MenuActionRegistar.get(tool.getId());
+        action.setId(tool.getId());
+        CheckMenuItem item = new CheckMenuItem(tool.getText());
+        item.setItemId(action.getId());
+        item.setChecked(tool.isChecked());
 
-	/**
-	 * Add CheckMenuItem to a Menu
-	 * 
-	 * @param tool
-	 * @param menu
-	 */
-	public void addCheckMenuItem(CheckMenuClientTool tool, Menu menu) {
-		// TODO Auto-generated method stub
-		MenuAction action = MenuActionRegistar.get(tool.getId());
-		action.setId(tool.getId());
-		CheckMenuItem item = new CheckMenuItem(tool.getText());
-		item.setItemId(action.getId());
-		item.setChecked(tool.isChecked());
+        if (action != null) {
+            item.addSelectionListener(action);
+        }
+        menu.add(item);
+    }
 
-		if (action != null)
-			item.addSelectionListener(action);
-		menu.add(item);
-	}
+    /**
+     * Add a Separator in Menu
+     */
+    public void addMenuSeparator(Menu menu) {
+        // TODO Auto-generated method stub
+        menu.add(new SeparatorMenuItem());
+    }
 
-	/**
-	 * Add a Separator in Menu
-	 */
-	public void addMenuSeparator(Menu menu) {
-		// TODO Auto-generated method stub
-		menu.add(new SeparatorMenuItem());
-	}
-
-	/**
-	 * @return the bar
-	 */
-	public MenuBar getBar() {
-		return bar;
-	}
-
+    /**
+     * @return the bar
+     */
+    public MenuBar getBar() {
+        return bar;
+    }
 }

@@ -52,11 +52,12 @@ import com.extjs.gxt.ui.client.event.DNDEvent;
 import com.extjs.gxt.ui.client.event.DNDListener;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -131,13 +132,15 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
         this.tree.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-//        this.tree.getSelectionModel().addSelectionChangedListener(new SelectionChangedListener<GPBeanTreeModel>() {
-//
-//            @Override
-//            public void selectionChanged(SelectionChangedEvent<GPBeanTreeModel> se) {
-//               se.getSelectedItem().accept(visitor);
-//            }
-//        });
+        this.tree.getSelectionModel().addSelectionChangedListener(new SelectionChangedListener<GPBeanTreeModel>() {
+
+            @Override
+            public void selectionChanged(SelectionChangedEvent<GPBeanTreeModel> se) {
+                if (se.getSelectedItem() != null) {
+                    System.out.println("TEST SELECTION CHANGED ************ " + se.getSelectedItem());
+                }
+            }
+        });
 
         this.setCheckable(true);
         this.setCheckStyle(CheckCascade.NONE);
@@ -154,9 +157,9 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
                     @Override
                     public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
-                        VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(be.getTreePanel());
+                        //VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(be.getTreePanel());
                         System.out.println("Mi ha chiamato: " + be.getItem());
-                        be.getItem().accept(visitorDisplay);
+                        //be.getItem().accept(visitorDisplay);
                         //be.getItem().notifyCheckEvent(be.isChecked());
                     }
                 });
@@ -189,6 +192,6 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
         dropTarget.setAllowDropOnLeaf(false);
         dropTarget.setFeedback(Feedback.BOTH);
 
-        super.store.addListener(Store.Add, new DropAddListener());
+//        super.store.addListener(Store.Add, new DropAddListener());
     }
 }

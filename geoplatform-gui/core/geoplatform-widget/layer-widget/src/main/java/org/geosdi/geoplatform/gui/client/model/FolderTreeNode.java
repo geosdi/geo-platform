@@ -64,6 +64,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
 
     public FolderTreeNode(GPFolderClientInfo folder) {
         super.setLabel(folder.getLabel());
+        super.setzIndex(folder.getzIndex());
         this.modelConverter(folder.getFolderElements());
     }
 

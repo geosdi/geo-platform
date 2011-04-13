@@ -440,6 +440,12 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-ws-security</artifactId>
+                <version>${cxf-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-rt-bindings-http</artifactId>
                 <version>${cxf-version}</version>
             </dependency>
@@ -1037,7 +1043,7 @@
 
     <properties>
         <geoplatform-version>1.2-SNAPSHOT</geoplatform-version>
-        <cxf-version>2.2.7</cxf-version>
+        <cxf-version>2.3.3</cxf-version>
         <spring-version>3.0.5.RELEASE</spring-version>
         <velocity-version>1.6.2</velocity-version>
         <javax-mail-version>1.4</javax-mail-version>

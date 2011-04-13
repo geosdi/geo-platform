@@ -51,18 +51,17 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "applicationContext-Test.xml" })
+@ContextConfiguration(locations = {"applicationContext-Test.xml"})
 public class GeoPlatformLayersTest {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private FolderStore folderStore;
 
-	@Autowired
-	private FolderStore folderStore;
-
-	@Test
-	public void test() {
-		for (GPFolderClientInfo folder : folderStore.getFolders()) {
-			logger.info("FOLDER  ***************** " + folder);
-		}
-	}
+    @Test
+    public void test() {
+        for (GPFolderClientInfo folder : folderStore.getFolders()) {
+            logger.info("FOLDER  ***************** " + folder);
+        }
+    }
 }

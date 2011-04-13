@@ -48,18 +48,16 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  */
 public abstract class ModifyFeatureAction extends ToolbarMapAction {
 
-	protected GeoPlatformMap mapWidget;
-	protected ModifyFeature control;
+    protected GeoPlatformMap mapWidget;
+    protected ModifyFeature control;
 
-	public ModifyFeatureAction(String tooltip, AbstractImagePrototype image,
-			GeoPlatformMap mapWidget) {
-		super(tooltip, image);
-		// TODO Auto-generated constructor stub
-		
-		this.mapWidget = mapWidget;
+    public ModifyFeatureAction(String tooltip, AbstractImagePrototype image,
+            GeoPlatformMap mapWidget) {
+        super(tooltip, image);
+        // TODO Auto-generated constructor stub
 
-		this.control = ((MapLayoutWidget) this.mapWidget).getMapControl()
-				.getModifyFeatureControl();
-	}
+        this.mapWidget = mapWidget;
 
+        this.control = ((MapLayoutWidget) this.mapWidget).getMapControl().getModifyFeatureControl();
+    }
 }

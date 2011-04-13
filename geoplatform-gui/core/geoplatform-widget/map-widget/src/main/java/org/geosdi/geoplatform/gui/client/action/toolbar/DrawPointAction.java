@@ -51,45 +51,46 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
  */
 public class DrawPointAction extends MapToggleAction {
 
-	public DrawPointAction(GeoPlatformMap mapWidget) {
-		super("Draw Point", Resources.ICONS.drawPointFeature(), mapWidget);
-		// TODO Auto-generated constructor stub
-	}
+    public DrawPointAction(GeoPlatformMap mapWidget) {
+        super("Draw Point", Resources.ICONS.drawPointFeature(), mapWidget);
+        // TODO Auto-generated constructor stub
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		ToggleButton button = (ToggleButton) ce.getSource();
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+     * .extjs.gxt.ui.client.event.ComponentEvent)
+     */
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        // TODO Auto-generated method stub
+        ToggleButton button = (ToggleButton) ce.getSource();
 
-		super.changeButtonState();
+        super.changeButtonState();
 
-		if (button.isPressed()) {
-			mapWidget.getButtonBar().setPressedButton(button);
-			this.mapWidget.activateDrawPointFeature();
-		} else
-			this.mapWidget.deactivateDrawPointFeature();
-	}
+        if (button.isPressed()) {
+            mapWidget.getButtonBar().setPressedButton(button);
+            this.mapWidget.activateDrawPointFeature();
+        } else {
+            this.mapWidget.deactivateDrawPointFeature();
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#getMapControl()
-	 */
-	@Override
-	public Control getMapControl() {
-		// TODO Auto-generated method stub
-		return ((MapLayoutWidget) mapWidget).getDrawPointFeature();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#getMapControl()
+     */
+    @Override
+    public Control getMapControl() {
+        // TODO Auto-generated method stub
+        return ((MapLayoutWidget) mapWidget).getDrawPointFeature();
+    }
 
-	@Override
-	public void disableControl() {
-		getMapControl().deactivate();
-	}
+    @Override
+    public void disableControl() {
+        getMapControl().deactivate();
+    }
 }

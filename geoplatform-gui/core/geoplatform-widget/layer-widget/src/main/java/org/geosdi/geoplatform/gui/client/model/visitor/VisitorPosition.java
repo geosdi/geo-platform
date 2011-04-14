@@ -48,6 +48,10 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 
+/**
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email  nazzareno.sileno@geosdi.org
+ */
 public class VisitorPosition implements IVisitor {
 
     private int tmpIndex = -1;
@@ -60,11 +64,11 @@ public class VisitorPosition implements IVisitor {
             GPBeanTreeModel parentDestination, int newIndex) {
         GPBeanTreeModel oldParent = (GPBeanTreeModel) changedElement.getParent();
         int oldZIndex = changedElement.getzIndex();
-        System.out.println("Old zIndex: " + oldZIndex);
-        System.out.println("parentDestination.getzIndex(): " + parentDestination.getzIndex());
-        System.out.println("New Index: " + newIndex);
+        //System.out.println("Old zIndex: " + oldZIndex);
+        //System.out.println("parentDestination.getzIndex(): " + parentDestination.getzIndex());
+        //System.out.println("New Index: " + newIndex);
         int newZIndex = parentDestination.getzIndex() - newIndex - 1;
-        System.out.println("New zIndex: " + newZIndex);
+        //System.out.println("New zIndex: " + newZIndex);
         if (newZIndex < oldZIndex) {
             this.startPosition = this.getPrecedingElement(changedElement);
             oldParent.remove(changedElement);
@@ -78,7 +82,7 @@ public class VisitorPosition implements IVisitor {
             parentDestination.insert(changedElement, newIndex);
             this.startPosition = this.getPrecedingElement(changedElement);
         } else {
-            System.out.println("In FixPosition: return without operations");
+            //System.out.println("In FixPosition: returning without operations");
             return;
         }
         System.out.println(this.startPosition == null ? null : "Start Position: " + this.startPosition.getLabel());
@@ -100,7 +104,6 @@ public class VisitorPosition implements IVisitor {
 
     private GPBeanTreeModel getNextUnvisitedElement(GPBeanTreeModel element) {
         GPBeanTreeModel unvisitedElement = null;
-        //TODO Verificare nel caso in cui l'elemento è una folder vuota
         if (!element.isLeaf()) {//IS FOLDER
             unvisitedElement = (GPBeanTreeModel) element.getChild(0);
         } else {
@@ -116,7 +119,7 @@ public class VisitorPosition implements IVisitor {
         if (parent != null && parent.getChild(indexElement + 1) != null) {
             return (GPBeanTreeModel) parent.getChild(indexElement + 1);
         } else if (parent != null && parent instanceof GPRootTreeNode) {
-            System.out.println("Il padre non e' uguale a null ed e' istanza di root");
+            //System.out.println("Il padre non e' uguale a null ed e' istanza di root");
             return null;//Returning null because we don't have a next element
         } else {
             followingElement = this.getFollowingElement(parent);
@@ -138,7 +141,7 @@ public class VisitorPosition implements IVisitor {
         assert (this.startPosition != null) : "You need to specify a startPosition before call this method";
         this.tmpIndex = this.startPosition.getzIndex();
         this.tmpElement = this.getNextUnvisitedElement(this.startPosition);
-        System.out.println(this.tmpElement == null ? null : "In preorder Traversal tmpElement: " + this.tmpElement.getLabel());
+        //System.out.println(this.tmpElement == null ? null : "In preorder Traversal tmpElement: " + this.tmpElement.getLabel());
         while (!this.isPreorderExitCondition()) {
             this.tmpElement.accept(this);
             this.tmpElement = this.getNextUnvisitedElement(this.tmpElement);
@@ -161,7 +164,7 @@ public class VisitorPosition implements IVisitor {
     public void visitRoot(AbstractRootTreeNode root) {
         if (this.numberOfElements != -1 && this.startPosition == null) {
             root.setzIndex(this.numberOfElements);
-            System.out.println("Index to the root: " + this.numberOfElements);
+            //System.out.println("Root zIndex: " + this.numberOfElements);
             List<ModelData> childrens = root.getChildren();
             for (int i = 0; i < childrens.size(); i++) {
                 ((GPBeanTreeModel) childrens.get(i)).accept(this);

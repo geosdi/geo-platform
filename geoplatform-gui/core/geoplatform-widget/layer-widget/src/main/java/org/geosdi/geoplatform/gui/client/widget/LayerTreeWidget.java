@@ -198,7 +198,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
             @Override
             public void handleEvent(BaseEvent be) {
                 ((TreePanelDragSource) be.getSource()).fireEvent(LayerEvents.GP_DRAG_LOST, new TreeStoreEvent<GPBeanTreeModel>(tree.getStore()));
-                System.out.println(this.getClass().getName() + "DragSource: Ho intercettato il drag cancelled");
+                System.out.println("DragSource: Ho intercettato il drag cancelled");
             }
         };
         //Intercepting Drag Lost Events

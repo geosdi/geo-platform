@@ -107,7 +107,7 @@ public class VisitorDisplayHide implements IVisitor {
 
     private void setParentsFolderChecked(GPBeanTreeModel element) {
         GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
-        System.out.println("Ho messo checked su: " + parent);
+        System.out.println("Ho messo checked su: " + parent.getLabel());
         parent.setChecked(true);
         this.treePanel.setChecked(parent, true);
         if (!(parent instanceof GPRootTreeNode)) {
@@ -122,7 +122,7 @@ public class VisitorDisplayHide implements IVisitor {
             if (child instanceof GPLayerBean && child.isChecked()) {
                 GPHandlerManager.fireEvent(new HideLayerEvent(((GPLayerBean) element)));
             } else if (child instanceof FolderTreeNode){
-                hideChildrens(folder);
+                hideChildrens((AbstractFolderTreeNode)child);
             }
         }
     }
@@ -134,7 +134,7 @@ public class VisitorDisplayHide implements IVisitor {
             if (child instanceof GPLayerBean && child.isChecked()) {
                 GPHandlerManager.fireEvent(new DisplayLayerEvent(((GPLayerBean) element)));
             } else if(child instanceof FolderTreeNode){
-                showChildrens(folder);
+                showChildrens((AbstractFolderTreeNode)child);
             }
         }
     }

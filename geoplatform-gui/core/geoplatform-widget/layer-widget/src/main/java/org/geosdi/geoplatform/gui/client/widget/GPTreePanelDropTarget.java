@@ -44,10 +44,16 @@ import com.extjs.gxt.ui.client.data.TreeModel;
 import com.extjs.gxt.ui.client.dnd.DND.Feedback;
 import com.extjs.gxt.ui.client.dnd.TreePanelDropTarget;
 import com.extjs.gxt.ui.client.event.DNDEvent;
+import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.TreeNode;
+import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
 
 public class GPTreePanelDropTarget extends TreePanelDropTarget {
+
+    private GPBeanTreeModel target;
+    private GPBeanTreeModel source;
 
     public GPTreePanelDropTarget(TreePanel<GPBeanTreeModel> tree) {
         super(tree);
@@ -72,11 +78,11 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
     private boolean canDropOn(TreeModel sourceTreeModel,
             TreeModel targetTreeModel, DNDEvent e) {
         boolean condition = true;
-        GPBeanTreeModel source = (GPBeanTreeModel) sourceTreeModel;
-        GPBeanTreeModel target = (GPBeanTreeModel) targetTreeModel;
-        if (target instanceof GPRootTreeNode) {
+        this.source = (GPBeanTreeModel) sourceTreeModel;
+        this.target = (GPBeanTreeModel) targetTreeModel;
+        if (this.target instanceof GPRootTreeNode) {
             condition = false;// Elements above root not allowed
-        } else if (target.isLeaf() && target instanceof FolderTreeNode) {
+        } else if (this.target.isLeaf() && this.target instanceof FolderTreeNode) {
             boolean dropLeaf = super.isAllowDropOnLeaf();
             Feedback feedback = super.getFeedback();
             super.setAllowDropOnLeaf(true);
@@ -91,4 +97,23 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
         }
         return condition;
     }
+
+    @Override
+    protected void onDragDrop(DNDEvent event) {
+        super.onDragDrop(event);
+        TreeStoreEvent be = new TreeStoreEvent(tree.getStore());
+        //be.setSource(this);
+//        be.setParent(target.getParent());
+//        be.setIndex(target.getParent().indexOf(target));
+//        be.setChild(this.source);
+        fireEvent(LayerEvents.GP_DROP, be);
+    }
+
+//    @Override
+//    public void onDragFail(DNDEvent e) {
+//        super.onDragFail(e);
+//        fireEvent(LayerEvents.GP_DRAG_LOST, new TreeStoreEvent(tree.getStore()));
+//        System.out.println(this.getClass().getName() + "Drag Fail avvenuto");
+//    }
+
 }

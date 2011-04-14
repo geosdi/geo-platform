@@ -41,13 +41,14 @@ import java.util.List;
 
 import org.geosdi.geoplatform.gui.configuration.FolderStore;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPParentElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GeoPlatformFolderStore implements FolderStore, Serializable {
+public class GeoPlatformFolderStore implements FolderStore, Serializable, IGPParentElement {
 
     /**
      *

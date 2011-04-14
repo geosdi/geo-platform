@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style.SelectionMode;
-import org.geosdi.geoplatform.gui.client.listener.DropAddListener;
+import org.geosdi.geoplatform.gui.client.listener.GPDNDListener;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GeoPlatformTreeWidget;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -48,6 +48,7 @@ import com.extjs.gxt.ui.client.data.ModelStringProvider;
 import com.extjs.gxt.ui.client.dnd.DND.Feedback;
 import com.extjs.gxt.ui.client.dnd.TreePanelDragSource;
 import com.extjs.gxt.ui.client.dnd.TreePanelDropTarget;
+import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.DNDEvent;
 import com.extjs.gxt.ui.client.event.DNDListener;
 import com.extjs.gxt.ui.client.event.Events;
@@ -56,8 +57,11 @@ import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.extjs.gxt.ui.client.store.Store;
+import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -157,9 +161,9 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
                     @Override
                     public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
-                        //VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(be.getTreePanel());
+                        VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(be.getTreePanel());
                         System.out.println("Mi ha chiamato: " + be.getItem());
-                        //be.getItem().accept(visitorDisplay);
+                        be.getItem().accept(visitorDisplay);
                         //be.getItem().notifyCheckEvent(be.isChecked());
                     }
                 });
@@ -170,7 +174,6 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
      * 
      */
     private void enableDDSupport() {
-        //TODO: Check the right position for the following code
         TreePanelDragSource dragSource = new TreePanelDragSource(super.tree);
         dragSource.addDNDListener(new DNDListener() {
 
@@ -184,14 +187,46 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                     return;
                 }
                 super.dragStart(e);
+                //TreeStoreEvent dragStartEvent =  new TreeStoreEvent<GPBeanTreeModel>(tree.getStore());
+                //dragStartEvent.setType(null)
+                ((TreePanelDragSource) e.getSource()).fireEvent(LayerEvents.GP_DRAG_START, new TreeStoreEvent<GPBeanTreeModel>(tree.getStore()));
             }
         });
+        //Listener for launch Drag Lost Events
+        Listener listenerDragLost = new Listener() {
+
+            @Override
+            public void handleEvent(BaseEvent be) {
+                ((TreePanelDragSource) be.getSource()).fireEvent(LayerEvents.GP_DRAG_LOST, new TreeStoreEvent<GPBeanTreeModel>(tree.getStore()));
+                System.out.println(this.getClass().getName() + "DragSource: Ho intercettato il drag cancelled");
+            }
+        };
+        //Intercepting Drag Lost Events
+        dragSource.addListener(Events.DragCancel, listenerDragLost);
+        dragSource.addListener(Events.DragEnd, listenerDragLost);
+        dragSource.addListener(Events.DragFail, listenerDragLost);
+
+        GPDNDListener dropAddListener = new GPDNDListener();
+        dragSource.addListener(LayerEvents.GP_DRAG_START, dropAddListener);
+        dragSource.addListener(LayerEvents.GP_DRAG_LOST, dropAddListener);
 
         TreePanelDropTarget dropTarget = new GPTreePanelDropTarget(super.tree);
         dropTarget.setAllowSelfAsSource(true);
         dropTarget.setAllowDropOnLeaf(false);
         dropTarget.setFeedback(Feedback.BOTH);
 
-//        super.store.addListener(Store.Add, new DropAddListener());
+        dropTarget.addListener(LayerEvents.GP_DROP, dropAddListener);
+        //dropTarget.addListener(LayerEvents.GP_DRAG_LOST, dropAddListener);
+
+        dropTarget.addListener(Events.DragCancel, new Listener() {
+
+            @Override
+            public void handleEvent(BaseEvent be) {
+                System.out.println(this.getClass().getName() + "DropTarget: Ho intercettato il drag cancelled");
+            }
+        });
+
+
+        super.store.addListener(Store.Add, dropAddListener);
     }
 }

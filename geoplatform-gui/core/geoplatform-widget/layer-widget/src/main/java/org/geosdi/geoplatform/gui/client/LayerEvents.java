@@ -50,4 +50,10 @@ public class LayerEvents {
 
 	public static final EventType HIDE_LAYER_WIDGET = new EventType();
 
+        public static final EventType GP_DROP = new EventType();
+
+        public static final EventType GP_DRAG_START = new EventType();
+
+        public static final EventType GP_DRAG_LOST = new EventType();
+
 }

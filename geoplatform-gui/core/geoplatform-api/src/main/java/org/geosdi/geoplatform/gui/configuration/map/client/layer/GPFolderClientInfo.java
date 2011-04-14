@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
  * 
  */
 public class GPFolderClientInfo implements Serializable,
-        Comparable<IGPFolderElements>, IGPFolderElements {
+        Comparable<IGPFolderElements>, IGPFolderElements, IGPParentElement {
 
     /**
      *
@@ -55,6 +55,7 @@ public class GPFolderClientInfo implements Serializable,
     private String label;
     private int zIndex;
     private List<IGPFolderElements> folderElements;
+    private IGPParentElement parent;
 
     /**
      * @return the label
@@ -121,5 +122,19 @@ public class GPFolderClientInfo implements Serializable,
     @Override
     public void accept(IVisitorClient visitor) {
         visitor.visitFolder(this);
+    }
+
+    /**
+     * @return the parent
+     */
+    public IGPParentElement getParent() {
+        return parent;
+    }
+
+    /**
+     * @param parent the parent to set
+     */
+    public void setParent(IGPParentElement parent) {
+        this.parent = parent;
     }
 }

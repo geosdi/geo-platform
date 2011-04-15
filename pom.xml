@@ -495,11 +495,6 @@
                 <artifactId>cxf-rt-frontend-jaxrs</artifactId>
                 <version>${cxf-version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-rt-ws-security</artifactId>
-                <version>${cxf-version}</version>
-            </dependency>
 
 
 			<!-- =========================================================== -->
@@ -1048,23 +1043,23 @@
         <spring-version>3.0.5.RELEASE</spring-version>
         <velocity-version>1.6.2</velocity-version>
         <javax-mail-version>1.4</javax-mail-version>
-        <jaxws-version>2.1</jaxws-version>
+        <jaxws-version>2.2.3</jaxws-version>
 
         <commons-io-version>1.4</commons-io-version>
         <commons-logging-version>1.1.1</commons-logging-version>
         <commons-httpclient-version>3.1</commons-httpclient-version>
-        <commons-lang-version>2.3</commons-lang-version>
-        <commons-collections-version>3.2</commons-collections-version>
+        <commons-lang-version>2.5</commons-lang-version>
+        <commons-collections-version>3.2.1</commons-collections-version>
         <commons-beanutils-version>1.7.0</commons-beanutils-version>
         <commons-dbcp-version>1.2.2</commons-dbcp-version>
         <commons-codec-version>1.4</commons-codec-version>
 
-        <jaxb-api-version>2.1</jaxb-api-version>
-        <jaxb-impl-version>2.1.2</jaxb-impl-version>
+        <jaxb-api-version>2.2.1</jaxb-api-version>
+        <jaxb-impl-version>2.2.1.1</jaxb-impl-version>
 
         <junit-version>4.7</junit-version>
         <log4j-version>1.2.14</log4j-version>
-        <slf4j-version>1.5.8</slf4j-version>
+        <slf4j-version>1.6.0</slf4j-version>
         <dom4j-version>1.6.1</dom4j-version>
 
         <maven-assembly-plugin-version>2.2-beta-5</maven-assembly-plugin-version>
@@ -1088,7 +1083,7 @@
         <hibernate-annotations-version>3.3.1.GA</hibernate-annotations-version>
         <hibernate-commons-annotations-version>3.3.0.ga</hibernate-commons-annotations-version>
         <hibernate-generic-dao-version>0.5.1</hibernate-generic-dao-version>
-        <asm-version>2.2.3</asm-version>
+        <asm-version>3.3</asm-version>
         <cglib-version>2.1_3</cglib-version>
 
         <javassist-version>3.8.0.GA</javassist-version>

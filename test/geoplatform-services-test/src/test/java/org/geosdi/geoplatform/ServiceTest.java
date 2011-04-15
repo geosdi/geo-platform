@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.runner.RunWith;
+import org.mortbay.jetty.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,17 +51,28 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext.xml" })
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public abstract class ServiceTest {
 
-	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	protected GeoPlatformService geoPlatformServiceClient;
+    @Autowired
+    protected GeoPlatformService geoPlatformServiceClient;
+    
+    @Autowired
+    private Server gpJettyServer;
 
-	@Before
-	public void setUp() {
-		Assert.assertNotNull(geoPlatformServiceClient);
-	}
+    @Before
+    public void setUp() {
 
+        Assert.assertNotNull(geoPlatformServiceClient);
+        Assert.assertNotNull(gpJettyServer);
+
+        try {
+            gpJettyServer.start();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            logger.error(e.getMessage());
+        }
+    }
 }

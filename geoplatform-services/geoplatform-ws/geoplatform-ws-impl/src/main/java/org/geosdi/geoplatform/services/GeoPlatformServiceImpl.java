@@ -65,202 +65,200 @@ import org.springframework.transaction.annotation.Transactional;
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformService")
 public class GeoPlatformServiceImpl implements GeoPlatformService {
 
-	private GPUserDAO userDao;
-	private GPServerDAO serverDao;
-	private GPFolderDAO folderDao;
-	private UserServiceImpl userServiceDelegate;
-	private WMSServiceImpl wmsServiceDelegate;
-	private FolderServiceImpl folderServiceDelegate;
+    private GPUserDAO userDao;
+    private GPServerDAO serverDao;
+    private GPFolderDAO folderDao;
+    private UserServiceImpl userServiceDelegate;
+    private WMSServiceImpl wmsServiceDelegate;
+    private FolderServiceImpl folderServiceDelegate;
 
-	public GeoPlatformServiceImpl() {
-		userServiceDelegate = new UserServiceImpl();
-		folderServiceDelegate = new FolderServiceImpl();
-		wmsServiceDelegate = new WMSServiceImpl();
-	}
+    public GeoPlatformServiceImpl() {
+        userServiceDelegate = new UserServiceImpl();
+        folderServiceDelegate = new FolderServiceImpl();
+        wmsServiceDelegate = new WMSServiceImpl();
+    }
 
-	// ==========================================================================
-	// === Users
-	// ==========================================================================
-	@Override
-	public long updateUser(GPUser user) throws ResourceNotFoundFault,
-			IllegalParameterFault {
-		return userServiceDelegate.updateUser(user);
-	}
+    // ==========================================================================
+    // === Users
+    // ==========================================================================
+    @Override
+    public long updateUser(GPUser user) throws ResourceNotFoundFault,
+            IllegalParameterFault {
+        return userServiceDelegate.updateUser(user);
+    }
 
-	@Override
-	public UserList searchUsers(PaginatedSearchRequest request) {
-		return userServiceDelegate.searchUsers(request);
-	}
+    @Override
+    public UserList searchUsers(PaginatedSearchRequest request) {
+        return userServiceDelegate.searchUsers(request);
+    }
 
-	@Override
-	public long insertUser(GPUser user) {
-		return userServiceDelegate.insertUser(user);
-	}
+    @Override
+    public long insertUser(GPUser user) {
+        return userServiceDelegate.insertUser(user);
+    }
 
-	@Override
-	public long getUsersCount(SearchRequest request) {
-		return userServiceDelegate.getUsersCount(request);
-	}
+    @Override
+    public long getUsersCount(SearchRequest request) {
+        return userServiceDelegate.getUsersCount(request);
+    }
 
-	@Override
-	public UserList getUsers() {
-		return userServiceDelegate.getUsers();
-	}
+    @Override
+    public UserList getUsers() {
+        return userServiceDelegate.getUsers();
+    }
 
-	@Override
-	public GPUser getUser(RequestById request) throws ResourceNotFoundFault {
-		return userServiceDelegate.getUser(request);
-	}
+    @Override
+    public GPUser getUser(RequestById request) throws ResourceNotFoundFault {
+        return userServiceDelegate.getUser(request);
+    }
 
-	@Override
-	public GPUser getUserByName(SearchRequest username)
-			throws ResourceNotFoundFault {
-		return userServiceDelegate.getUserByName(username);
-	}
+    @Override
+    public GPUser getUserByName(SearchRequest username)
+            throws ResourceNotFoundFault {
+        return userServiceDelegate.getUserByName(username);
+    }
 
-	@Override
-	public boolean deleteUser(RequestById request)
-			throws ResourceNotFoundFault, IllegalParameterFault {
-		return userServiceDelegate.deleteUser(request);
-	}
+    @Override
+    public boolean deleteUser(RequestById request)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return userServiceDelegate.deleteUser(request);
+    }
 
-	// ==========================================================================
-	// === Folder
-	// ==========================================================================
+    // ==========================================================================
+    // === Folder
+    // ==========================================================================
+    @Override
+    public long insertFolder(GPFolder folder) {
+        return this.folderServiceDelegate.insertFolder(folder);
+    }
 
-	@Override
-	public long insertFolder(GPFolder folder) {
-		return this.folderServiceDelegate.insertFolder(folder);
-	}
+    @Override
+    public long updateFolder(GPFolder folder) throws ResourceNotFoundFault,
+            IllegalParameterFault {
+        return folderServiceDelegate.updateFolder(folder);
+    }
 
-	@Override
-	public long updateFolder(GPFolder folder) throws ResourceNotFoundFault,
-			IllegalParameterFault {
-		return folderServiceDelegate.updateFolder(folder);
-	}
+    @Override
+    public GPFolder getFolder(RequestById request) throws ResourceNotFoundFault {
+        return folderServiceDelegate.getFolder(request);
+    }
 
-	@Override
-	public GPFolder getFolder(RequestById request) throws ResourceNotFoundFault {
-		return folderServiceDelegate.getFolder(request);
-	}
+    @Override
+    public boolean deleteFolder(RequestById request)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return folderServiceDelegate.deleteFolder(request);
+    }
 
-	@Override
-	public boolean deleteFolder(RequestById request)
-			throws ResourceNotFoundFault, IllegalParameterFault {
-		return folderServiceDelegate.deleteFolder(request);
-	}
+    @Override
+    public FolderList getFolders() {
+        return folderServiceDelegate.getFolders();
+    }
 
-	@Override
-	public FolderList getFolders() {
-		return folderServiceDelegate.getFolders();
-	}
+    @Override
+    public FolderList searchFolders(PaginatedSearchRequest searchRequest) {
+        return folderServiceDelegate.searchFolders(searchRequest);
+    }
 
-	@Override
-	public FolderList searchFolders(PaginatedSearchRequest searchRequest) {
-		return folderServiceDelegate.searchFolders(searchRequest);
-	}
+    @Override
+    public long getFoldersCount(SearchRequest searchRequest) {
+        return folderServiceDelegate.getFoldersCount(searchRequest);
+    }
 
-	@Override
-	public long getFoldersCount(SearchRequest searchRequest) {
-		return folderServiceDelegate.getFoldersCount(searchRequest);
-	}
+    @Override
+    public long getUserFoldersCount(RequestById request) {
+        return folderServiceDelegate.getUserFoldersCount(request);
+    }
 
-	@Override
-	public long getUserFoldersCount(RequestById request) {
-		return folderServiceDelegate.getUserFoldersCount(request);
-	}
+    @Override
+    public FolderList getUserFolders(RequestById request) {
+        return folderServiceDelegate.getUserFolders(request);
+    }
 
-	@Override
-	public FolderList getUserFolders(RequestById request) {
-		return folderServiceDelegate.getUserFolders(request);
-	}
+    @Override
+    public FolderList getAllUserFolders(long userId, int num, int page) {
+        return folderServiceDelegate.getAllUserFolders(userId, num, page);
+    }
 
-	@Override
-	public FolderList getAllUserFolders(long userId, int num, int page) {
-		return folderServiceDelegate.getAllUserFolders(userId, num, page);
-	}
+    @Override
+    public int getAllUserFoldersCount(long userId) {
+        return folderServiceDelegate.getAllUserFoldersCount(userId);
+    }
 
-	@Override
-	public int getAllUserFoldersCount(long userId) {
-		return folderServiceDelegate.getAllUserFoldersCount(userId);
-	}
+    @Override
+    public void setFolderShared(RequestById request)
+            throws ResourceNotFoundFault {
+        folderServiceDelegate.setFolderShared(request);
+    }
 
-	@Override
-	public void setFolderShared(RequestById request)
-			throws ResourceNotFoundFault {
-		folderServiceDelegate.setFolderShared(request);
-	}
+    @Override
+    public boolean setFolderOwner(RequestByUserFolder request)
+            throws ResourceNotFoundFault {
+        return folderServiceDelegate.setFolderOwner(request, false);
+    }
 
-	@Override
-	public boolean setFolderOwner(RequestByUserFolder request)
-			throws ResourceNotFoundFault {
-		return folderServiceDelegate.setFolderOwner(request, false);
-	}
+    @Override
+    public void forceFolderOwner(RequestByUserFolder request)
+            throws ResourceNotFoundFault {
+        folderServiceDelegate.setFolderOwner(request, true);
 
-	@Override
-	public void forceFolderOwner(RequestByUserFolder request)
-			throws ResourceNotFoundFault {
-		folderServiceDelegate.setFolderOwner(request, true);
+    }
 
-	}
+    // ==========================================================================
+    // === OWS
+    // ==========================================================================
+    @Override
+    public LayerList getCapabilities(RequestById request)
+            throws ResourceNotFoundFault {
+        return wmsServiceDelegate.getCapabilities(request);
+    }
 
-	// ==========================================================================
-	// === OWS
-	// ==========================================================================
-	@Override
-	public LayerList getCapabilities(RequestById request)
-			throws ResourceNotFoundFault {
-		return wmsServiceDelegate.getCapabilities(request);
-	}
+    @Override
+    public ShortServer getServer(String serverUrl) throws ResourceNotFoundFault {
+        // TODO Auto-generated method stub
 
-	@Override
-	public ShortServer getServer(String serverUrl) throws ResourceNotFoundFault {
-		// TODO Auto-generated method stub
+        GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
 
-		GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
+        if (server == null) {
+            throw new ResourceNotFoundFault("Server not found " + serverUrl);
+        }
 
-		if (server == null) {
-			throw new ResourceNotFoundFault("Server not found " + serverUrl);
-		}
+        ShortServer shortServer = new ShortServer();
+        shortServer.setId(server.getId());
 
-		ShortServer shortServer = new ShortServer();
-		shortServer.setId(server.getId());
+        return shortServer;
+    }
 
-		return shortServer;
-	}
+    // ==========================================================================
+    // === DAOs IoC
+    // ==========================================================================
+    /**
+     * @param userDao
+     *            the userDao to set
+     */
+    @Autowired
+    public void setUserDao(GPUserDAO theUserDao) {
+        this.userDao = theUserDao;
+        this.userServiceDelegate.setUserDao(userDao);
+        this.folderServiceDelegate.setUserDao(userDao);
+    }
 
-	// ==========================================================================
-	// === DAOs IoC
-	// ==========================================================================
-	/**
-	 * @param userDao
-	 *            the userDao to set
-	 */
-	@Autowired
-	public void setUserDao(GPUserDAO theUserDao) {
-		this.userDao = theUserDao;
-		this.userServiceDelegate.setUserDao(userDao);
-		this.folderServiceDelegate.setUserDao(userDao);
-	}
+    /**
+     * @param serverDao
+     *            the serverDao to set
+     */
+    @Autowired
+    public void setServerDao(GPServerDAO serverDao) {
+        this.serverDao = serverDao;
+        this.wmsServiceDelegate.setServerDao(serverDao);
+    }
 
-	/**
-	 * @param serverDao
-	 *            the serverDao to set
-	 */
-	@Autowired
-	public void setServerDao(GPServerDAO serverDao) {
-		this.serverDao = serverDao;
-		this.wmsServiceDelegate.setServerDao(serverDao);
-	}
-
-	/**
-	 * @param folderDao
-	 *            the folderDao to set
-	 */
-	@Autowired
-	public void setFolderDao(GPFolderDAO theFolderDao) {
-		this.folderDao = theFolderDao;
-		this.folderServiceDelegate.setFolderDao(folderDao);
-	}
-
+    /**
+     * @param folderDao
+     *            the folderDao to set
+     */
+    @Autowired
+    public void setFolderDao(GPFolderDAO theFolderDao) {
+        this.folderDao = theFolderDao;
+        this.folderServiceDelegate.setFolderDao(folderDao);
+    }
 }

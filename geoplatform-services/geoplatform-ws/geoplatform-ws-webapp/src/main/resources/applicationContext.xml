@@ -21,7 +21,7 @@
     <!-- ====================================================================-->
     <!-- ====================================================================-->
 
-	<context:annotation-config />
+    <context:annotation-config />
 	
 	
 	<!-- Load CXF modules from cxf.jar -->
@@ -39,16 +39,16 @@
     	implementor="#geoplatformService"
     	address="/soap">
         <jaxws:serviceFactory>
-		    <bean class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean">
-		        <property name="serviceConfigurations">
-		            <list>
-		                <bean class="org.apache.cxf.jaxws.support.JaxWsServiceConfiguration"/>
-		                <bean class="org.apache.cxf.service.factory.DefaultServiceConfiguration"/>
-		            </list>
-		        </property>
-		    </bean>
-    	</jaxws:serviceFactory>
-	</jaxws:endpoint>	
+            <bean class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean">
+                <property name="serviceConfigurations">
+                    <list>
+                        <bean class="org.apache.cxf.jaxws.support.JaxWsServiceConfiguration"/>
+                        <bean class="org.apache.cxf.service.factory.DefaultServiceConfiguration"/>
+                    </list>
+                </property>
+            </bean>
+        </jaxws:serviceFactory>
+    </jaxws:endpoint>
 
     <!-- ====================================================================
 
@@ -59,20 +59,20 @@
     	bindingUri="http://apache.org/cxf/binding/http"  >
 
         <jaxws:serviceFactory>
-		    <bean class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean">
-		    	<property name="wrapped" value="true" />
-		    </bean>
-    	</jaxws:serviceFactory>
-	</jaxws:endpoint>
+            <bean class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean">
+                <property name="wrapped" value="true" />
+            </bean>
+        </jaxws:serviceFactory>
+    </jaxws:endpoint>
 -->
     <!-- ====================================================================-->
 
     <!-- Enable message logging using the CXF logging feature -->
 
     <cxf:bus>
-    	<cxf:features>
-    		<cxf:logging/>
-	    </cxf:features>
-	</cxf:bus>
+        <cxf:features>
+            <cxf:logging/>
+        </cxf:features>
+    </cxf:bus>
 
 </beans>

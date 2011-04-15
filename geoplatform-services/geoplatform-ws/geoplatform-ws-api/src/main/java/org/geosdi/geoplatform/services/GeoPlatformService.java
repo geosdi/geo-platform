@@ -67,134 +67,133 @@ import org.geosdi.geoplatform.responce.UserList;
 @WebService(name = "GeoPlatformService", targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService {
 
-	// ==========================================================================
-	// === Users
-	// ==========================================================================
-	@Put
-	@HttpResource(location = "/users")
-	long insertUser(@WebParam(name = "User") GPUser user);
+    // ==========================================================================
+    // === Users
+    // ==========================================================================
+    @Put
+    @HttpResource(location = "/users")
+    long insertUser(@WebParam(name = "User") GPUser user);
 
-	@Post
-	@HttpResource(location = "/users")
-	long updateUser(@WebParam(name = "User") GPUser user)
-			throws ResourceNotFoundFault, IllegalParameterFault;
+    @Post
+    @HttpResource(location = "/users")
+    long updateUser(@WebParam(name = "User") GPUser user)
+            throws ResourceNotFoundFault, IllegalParameterFault;
 
-	@Get
-	@HttpResource(location = "/users/{id}")
-	@WebResult(name = "User")
-	GPUser getUser(RequestById request) throws ResourceNotFoundFault;
+    @Get
+    @HttpResource(location = "/users/{id}")
+    @WebResult(name = "User")
+    GPUser getUser(RequestById request) throws ResourceNotFoundFault;
 
-	@Get
-	@WebResult(name = "User")
-	GPUser getUserByName(SearchRequest username) throws ResourceNotFoundFault;
+    @Get
+    @WebResult(name = "User")
+    GPUser getUserByName(SearchRequest username) throws ResourceNotFoundFault;
 
-	@Delete
-	@HttpResource(location = "/users/{id}")
-	boolean deleteUser(RequestById request) throws ResourceNotFoundFault,
-			IllegalParameterFault;
+    @Delete
+    @HttpResource(location = "/users/{id}")
+    boolean deleteUser(RequestById request) throws ResourceNotFoundFault,
+            IllegalParameterFault;
 
-	@Get
-	@HttpResource(location = "/users")
-	@WebResult(name = "Users")
-	UserList getUsers();
+    @Get
+    @HttpResource(location = "/users")
+    @WebResult(name = "Users")
+    UserList getUsers();
 
-	@Get
-	@HttpResource(location = "/users/search/{num}/{page}/{nameLike}")
-	@WebResult(name = "Users")
-	UserList searchUsers(PaginatedSearchRequest searchRequest);
+    @Get
+    @HttpResource(location = "/users/search/{num}/{page}/{nameLike}")
+    @WebResult(name = "Users")
+    UserList searchUsers(PaginatedSearchRequest searchRequest);
 
-	@Get
-	@HttpResource(location = "/users/count/{nameLike}")
-	@WebResult(name = "count")
-	long getUsersCount(SearchRequest searchRequest);
+    @Get
+    @HttpResource(location = "/users/count/{nameLike}")
+    @WebResult(name = "count")
+    long getUsersCount(SearchRequest searchRequest);
 
-	// ==========================================================================
-	// === Folder
-	// ==========================================================================
+    // ==========================================================================
+    // === Folder
+    // ==========================================================================
 
-	@Put
-	@HttpResource(location = "/folder")
-	long insertFolder(@WebParam(name = "Folder") GPFolder folder);
+    @Put
+    @HttpResource(location = "/folder")
+    long insertFolder(@WebParam(name = "Folder") GPFolder folder);
 
-	@Post
-	@HttpResource(location = "/folder")
-	long updateFolder(@WebParam(name = "Folder") GPFolder folder)
-			throws ResourceNotFoundFault, IllegalParameterFault;
+    @Post
+    @HttpResource(location = "/folder")
+    long updateFolder(@WebParam(name = "Folder") GPFolder folder)
+            throws ResourceNotFoundFault, IllegalParameterFault;
 
-	@Get
-	@HttpResource(location = "/folders/{id}")
-	@WebResult(name = "Folder")
-	GPFolder getFolder(RequestById request) throws ResourceNotFoundFault;
+    @Get
+    @HttpResource(location = "/folders/{id}")
+    @WebResult(name = "Folder")
+    GPFolder getFolder(RequestById request) throws ResourceNotFoundFault;
 
-	@Delete
-	@HttpResource(location = "/folders/{id}")
-	boolean deleteFolder(RequestById request) throws ResourceNotFoundFault,
-			IllegalParameterFault;
+    @Delete
+    @HttpResource(location = "/folders/{id}")
+    boolean deleteFolder(RequestById request) throws ResourceNotFoundFault,
+            IllegalParameterFault;
 
-	@Get
-	@HttpResource(location = "/folders")
-	@WebResult(name = "Folders")
-	FolderList getFolders();
+    @Get
+    @HttpResource(location = "/folders")
+    @WebResult(name = "Folders")
+    FolderList getFolders();
 
-	@Get
-	@HttpResource(location = "/folders/search/{num}/{page}/{nameLike}")
-	@WebResult(name = "Folders")
-	FolderList searchFolders(PaginatedSearchRequest searchRequest);
+    @Get
+    @HttpResource(location = "/folders/search/{num}/{page}/{nameLike}")
+    @WebResult(name = "Folders")
+    FolderList searchFolders(PaginatedSearchRequest searchRequest);
 
-	@Get
-	@HttpResource(location = "/folders/count/{nameLike}")
-	@WebResult(name = "count")
-	long getFoldersCount(SearchRequest searchRequest);
+    @Get
+    @HttpResource(location = "/folders/count/{nameLike}")
+    @WebResult(name = "count")
+    long getFoldersCount(SearchRequest searchRequest);
 
-	@Get
-	@HttpResource(location = "/folders/user/{id}/count")
-	@WebResult(name = "count")
-	long getUserFoldersCount(RequestById request);
+    @Get
+    @HttpResource(location = "/folders/user/{id}/count")
+    @WebResult(name = "count")
+    long getUserFoldersCount(RequestById request);
 
-	// ==========================================================================
-	// === Folder / User
-	// ==========================================================================
+    // ==========================================================================
+    // === Folder / User
+    // ==========================================================================
+    @Get
+    @HttpResource(location = "/users/{id}/folder/{num}/{page}")
+    @WebResult(name = "FolderList")
+    FolderList getUserFolders(RequestById request);
 
-	@Get
-	@HttpResource(location = "/users/{id}/folder/{num}/{page}")
-	@WebResult(name = "FolderList")
-	FolderList getUserFolders(RequestById request);
+    /**
+     * @return Owned and shared Folders visible to a given user.
+     */
+    FolderList getAllUserFolders(long userId, int num, int page);
 
-	/**
-	 * @return Owned and shared Folders visible to a given user.
-	 */
-	FolderList getAllUserFolders(long userId, int num, int page);
+    /**
+     * @return Count Owned and shared Folders visible to a given user.
+     */
+    int getAllUserFoldersCount(long userId);
 
-	/**
-	 * @return Count Owned and shared Folders visible to a given user.
-	 */
-	int getAllUserFoldersCount(long userId);
+    @Post
+    @HttpResource(location = "/folder/{id}/shared")
+    void setFolderShared(RequestById request) throws ResourceNotFoundFault;
 
-	@Post
-	@HttpResource(location = "/folder/{id}/shared")
-	void setFolderShared(RequestById request) throws ResourceNotFoundFault;
+    @Post
+    @HttpResource(location = "/folder/{folderId}/owner/{userId}")
+    boolean setFolderOwner(RequestByUserFolder request)
+            throws ResourceNotFoundFault;
 
-	@Post
-	@HttpResource(location = "/folder/{folderId}/owner/{userId}")
-	boolean setFolderOwner(RequestByUserFolder request)
-			throws ResourceNotFoundFault;
+    @Post
+    @HttpResource(location = "/folder/{folderId}/forceowner/{userId}")
+    void forceFolderOwner(RequestByUserFolder request)
+            throws ResourceNotFoundFault;
 
-	@Post
-	@HttpResource(location = "/folder/{folderId}/forceowner/{userId}")
-	void forceFolderOwner(RequestByUserFolder request)
-			throws ResourceNotFoundFault;
+    // ==========================================================================
+    // === OWS
+    // ==========================================================================
+    @Get
+    @HttpResource(location = "/wms/capabilities/{id}")
+    @WebResult(name = "Capabilities")
+    LayerList getCapabilities(RequestById request) throws ResourceNotFoundFault;
 
-	// ==========================================================================
-	// === OWS
-	// ==========================================================================
-	@Get
-	@HttpResource(location = "/wms/capabilities/{id}")
-	@WebResult(name = "Capabilities")
-	LayerList getCapabilities(RequestById request) throws ResourceNotFoundFault;
-
-	@Get
-	@HttpResource(location = "/servers/{serverUrl}")
-	@WebResult(name = "Servers")
-	ShortServer getServer(@WebParam(name = "serverUrl") String serverUrl)
-			throws ResourceNotFoundFault;
+    @Get
+    @HttpResource(location = "/servers/{serverUrl}")
+    @WebResult(name = "Servers")
+    ShortServer getServer(@WebParam(name = "serverUrl") String serverUrl)
+            throws ResourceNotFoundFault;
 }

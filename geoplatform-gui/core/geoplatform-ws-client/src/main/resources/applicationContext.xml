@@ -7,16 +7,16 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 	default-autowire="byName">
 
-	<context:annotation-config />
+    <context:annotation-config />
 
-	<bean id="geoPlatformServiceClient" class="org.geosdi.geoplatform.services.GeoPlatformService"
+    <bean id="geoPlatformServiceClient" class="org.geosdi.geoplatform.services.GeoPlatformService"
 		factory-bean="geoPlatformProxyFactory" factory-method="create" />
 
-	<bean id="geoPlatformProxyFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
-		<property name="serviceClass"
+    <bean id="geoPlatformProxyFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+        <property name="serviceClass"
 			value="org.geosdi.geoplatform.services.GeoPlatformService" />
-		<property name="address"
+        <property name="address"
 			value="http://localhost:8080/geoplatform-service/soap" />
-	</bean>
+    </bean>
 
 </beans>

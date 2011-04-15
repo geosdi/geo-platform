@@ -51,53 +51,52 @@ import com.trg.search.Search;
  */
 @Transactional
 public class GPServerDAOImpl extends BaseDAO<GeoPlatformServer, Long> implements
-		GPServerDAO {
-	
-	@Override
-	public void persist(GeoPlatformServer... servers) {
-		super.persist(servers);
-	}
-	
-	@Override
-	public boolean remove(GeoPlatformServer server) {
-		return super.remove(server);
-	}
+        GPServerDAO {
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<GeoPlatformServer> search(ISearch search) {
-		// TODO Auto-generated method stub
-		return super.search(search);
-	}
+    @Override
+    public void persist(GeoPlatformServer... servers) {
+        super.persist(servers);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.core.dao.GPServerDAO#findByServerName(java.lang
-	 * .String)
-	 */
-	@Override
-	public List<GeoPlatformServer> findByServerName(String serverName) {
-		// TODO Auto-generated method stub
-		Search search = new Search();
-		search.addFilterEqual("name", serverName);
-		return super.search(search);
-	}
+    @Override
+    public boolean remove(GeoPlatformServer server) {
+        return super.remove(server);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.core.dao.GPServerDAO#findByServerUrl(java.lang
-	 * .String)
-	 */
-	@Override
-	public GeoPlatformServer findByServerUrl(String serverUrl) {
-		// TODO Auto-generated method stub
-		Search search = new Search();
-		search.addFilterEqual("serverUrl", serverUrl);
-		return super.searchUnique(search);
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<GeoPlatformServer> search(ISearch search) {
+        // TODO Auto-generated method stub
+        return super.search(search);
+    }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.core.dao.GPServerDAO#findByServerName(java.lang
+     * .String)
+     */
+    @Override
+    public List<GeoPlatformServer> findByServerName(String serverName) {
+        // TODO Auto-generated method stub
+        Search search = new Search();
+        search.addFilterEqual("name", serverName);
+        return super.search(search);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.core.dao.GPServerDAO#findByServerUrl(java.lang
+     * .String)
+     */
+    @Override
+    public GeoPlatformServer findByServerUrl(String serverUrl) {
+        // TODO Auto-generated method stub
+        Search search = new Search();
+        search.addFilterEqual("serverUrl", serverUrl);
+        return super.searchUnique(search);
+    }
 }

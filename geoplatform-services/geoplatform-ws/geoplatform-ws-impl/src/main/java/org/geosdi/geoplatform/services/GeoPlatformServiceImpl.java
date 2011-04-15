@@ -37,15 +37,19 @@ package org.geosdi.geoplatform.services;
 
 import javax.jws.WebService;
 
+import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
+import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.request.RequestByUserFolder;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.FolderList;
 import org.geosdi.geoplatform.responce.LayerList;
 import org.geosdi.geoplatform.responce.ShortServer;
 import org.geosdi.geoplatform.responce.UserList;
@@ -63,19 +67,20 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
 	private GPUserDAO userDao;
 	private GPServerDAO serverDao;
-
+	private GPFolderDAO folderDao;
 	private UserServiceImpl userServiceDelegate;
 	private WMSServiceImpl wmsServiceDelegate;
+	private FolderServiceImpl folderServiceDelegate;
 
 	public GeoPlatformServiceImpl() {
 		userServiceDelegate = new UserServiceImpl();
+		folderServiceDelegate = new FolderServiceImpl();
 		wmsServiceDelegate = new WMSServiceImpl();
 	}
 
 	// ==========================================================================
 	// === Users
 	// ==========================================================================
-
 	@Override
 	public long updateUser(GPUser user) throws ResourceNotFoundFault,
 			IllegalParameterFault {
@@ -120,46 +125,94 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 	}
 
 	// ==========================================================================
-	// === OWS
+	// === Folder
 	// ==========================================================================
 
+	@Override
+	public long insertFolder(GPFolder folder) {
+		return this.folderServiceDelegate.insertFolder(folder);
+	}
+
+	@Override
+	public long updateFolder(GPFolder folder) throws ResourceNotFoundFault,
+			IllegalParameterFault {
+		return folderServiceDelegate.updateFolder(folder);
+	}
+
+	@Override
+	public GPFolder getFolder(RequestById request) throws ResourceNotFoundFault {
+		return folderServiceDelegate.getFolder(request);
+	}
+
+	@Override
+	public boolean deleteFolder(RequestById request)
+			throws ResourceNotFoundFault, IllegalParameterFault {
+		return folderServiceDelegate.deleteFolder(request);
+	}
+
+	@Override
+	public FolderList getFolders() {
+		return folderServiceDelegate.getFolders();
+	}
+
+	@Override
+	public FolderList searchFolders(PaginatedSearchRequest searchRequest) {
+		return folderServiceDelegate.searchFolders(searchRequest);
+	}
+
+	@Override
+	public long getFoldersCount(SearchRequest searchRequest) {
+		return folderServiceDelegate.getFoldersCount(searchRequest);
+	}
+
+	@Override
+	public long getUserFoldersCount(RequestById request) {
+		return folderServiceDelegate.getUserFoldersCount(request);
+	}
+
+	@Override
+	public FolderList getUserFolders(RequestById request) {
+		return folderServiceDelegate.getUserFolders(request);
+	}
+
+	@Override
+	public FolderList getAllUserFolders(long userId, int num, int page) {
+		return folderServiceDelegate.getAllUserFolders(userId, num, page);
+	}
+
+	@Override
+	public int getAllUserFoldersCount(long userId) {
+		return folderServiceDelegate.getAllUserFoldersCount(userId);
+	}
+
+	@Override
+	public void setFolderShared(RequestById request)
+			throws ResourceNotFoundFault {
+		folderServiceDelegate.setFolderShared(request);
+	}
+
+	@Override
+	public boolean setFolderOwner(RequestByUserFolder request)
+			throws ResourceNotFoundFault {
+		return folderServiceDelegate.setFolderOwner(request, false);
+	}
+
+	@Override
+	public void forceFolderOwner(RequestByUserFolder request)
+			throws ResourceNotFoundFault {
+		folderServiceDelegate.setFolderOwner(request, true);
+
+	}
+
+	// ==========================================================================
+	// === OWS
+	// ==========================================================================
 	@Override
 	public LayerList getCapabilities(RequestById request)
 			throws ResourceNotFoundFault {
 		return wmsServiceDelegate.getCapabilities(request);
 	}
 
-	// ==========================================================================
-	// === DAOs IoC
-	// ==========================================================================
-
-	/**
-	 * @param userDao
-	 *            the userDao to set
-	 */
-	@Autowired
-	public void setUserDao(GPUserDAO userDao) {
-		this.userDao = userDao;
-		this.userServiceDelegate.setUserDao(userDao);
-	}
-
-	/**
-	 * @param serverDao
-	 *            the serverDao to set
-	 */
-	@Autowired
-	public void setServerDao(GPServerDAO serverDao) {
-		this.serverDao = serverDao;
-		this.wmsServiceDelegate.setServerDao(serverDao);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.services.GeoPlatformService#getServer(java.lang
-	 * .String)
-	 */
 	@Override
 	public ShortServer getServer(String serverUrl) throws ResourceNotFoundFault {
 		// TODO Auto-generated method stub
@@ -174,6 +227,40 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 		shortServer.setId(server.getId());
 
 		return shortServer;
+	}
+
+	// ==========================================================================
+	// === DAOs IoC
+	// ==========================================================================
+	/**
+	 * @param userDao
+	 *            the userDao to set
+	 */
+	@Autowired
+	public void setUserDao(GPUserDAO theUserDao) {
+		this.userDao = theUserDao;
+		this.userServiceDelegate.setUserDao(userDao);
+		this.folderServiceDelegate.setUserDao(userDao);
+	}
+
+	/**
+	 * @param serverDao
+	 *            the serverDao to set
+	 */
+	@Autowired
+	public void setServerDao(GPServerDAO serverDao) {
+		this.serverDao = serverDao;
+		this.wmsServiceDelegate.setServerDao(serverDao);
+	}
+
+	/**
+	 * @param folderDao
+	 *            the folderDao to set
+	 */
+	@Autowired
+	public void setFolderDao(GPFolderDAO theFolderDao) {
+		this.folderDao = theFolderDao;
+		this.folderServiceDelegate.setFolderDao(folderDao);
 	}
 
 }

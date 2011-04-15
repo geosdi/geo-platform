@@ -58,57 +58,56 @@ import org.geotools.ows.ServiceException;
  * 
  */
 class WMSServiceImpl {
-	final private static Logger LOGGER = Logger.getLogger(WMSServiceImpl.class);
 
-	private GPServerDAO serverDao;
+    final private static Logger LOGGER = Logger.getLogger(WMSServiceImpl.class);
+    private GPServerDAO serverDao;
 
-	public LayerList getCapabilities(RequestById request)
-			throws ResourceNotFoundFault {
+    public LayerList getCapabilities(RequestById request)
+            throws ResourceNotFoundFault {
 
-		GeoPlatformServer server = serverDao.find(request.getId());
+        GeoPlatformServer server = serverDao.find(request.getId());
 
-		URL serverURL = null;
-		WebMapServer wms = null;
-		WMSCapabilities cap = null;
-		
-		try {
-			serverURL = new URL(server.getServerUrl());
-			wms = new WebMapServer(serverURL);
-			cap = wms.getCapabilities();
+        URL serverURL = null;
+        WebMapServer wms = null;
+        WMSCapabilities cap = null;
 
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return convertToShortList(cap.getLayerList());
-	}
+        try {
+            serverURL = new URL(server.getServerUrl());
+            wms = new WebMapServer(serverURL);
+            cap = wms.getCapabilities();
 
-	private LayerList convertToShortList(List<Layer> layerList) {
-		List<ShortLayer> shortLayers = new ArrayList<ShortLayer>(
-				layerList.size());
-		for (Layer layer : layerList) {
-			shortLayers.add(new ShortLayer(layer.getName(), layer.getTitle(),
-					layer.get_abstract()));
-		}
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ServiceException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-		LayerList layers = new LayerList();
-		layers.setList(shortLayers);
-		return layers;
-	}
+        return convertToShortList(cap.getLayerList());
+    }
 
-	/**
-	 * @param serverDao
-	 *            the serverDao to set
-	 */
-	public void setServerDao(GPServerDAO serverDao) {
-		this.serverDao = serverDao;
-	}
+    private LayerList convertToShortList(List<Layer> layerList) {
+        List<ShortLayer> shortLayers = new ArrayList<ShortLayer>(
+                layerList.size());
+        for (Layer layer : layerList) {
+            shortLayers.add(new ShortLayer(layer.getName(), layer.getTitle(),
+                    layer.get_abstract()));
+        }
 
+        LayerList layers = new LayerList();
+        layers.setList(shortLayers);
+        return layers;
+    }
+
+    /**
+     * @param serverDao
+     *            the serverDao to set
+     */
+    public void setServerDao(GPServerDAO serverDao) {
+        this.serverDao = serverDao;
+    }
 }

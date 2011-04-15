@@ -46,16 +46,22 @@ import com.trg.search.ISearch;
  *
  */
 public interface GPFolderDAO {
-	
-	public List<GPFolder> findAll();
-	public GPFolder find(Long id);
-	public void persist(GPFolder... user);
-	public GPFolder merge(GPFolder user);
-	public boolean remove(GPFolder user);
-	public boolean removeById(Long userId);
+
+    public List<GPFolder> findAll();
+
+    public GPFolder find(Long id);
+
+    public void persist(GPFolder... user);
+
+    public GPFolder merge(GPFolder user);
+
+    public boolean remove(GPFolder user);
+
+    public boolean removeById(Long userId);
+
     public List<GPFolder> search(ISearch search);
+
     public int count(ISearch search);
 
-	public GPFolder findByFolderName(String name);
-
+    public GPFolder findByFolderName(String name);
 }

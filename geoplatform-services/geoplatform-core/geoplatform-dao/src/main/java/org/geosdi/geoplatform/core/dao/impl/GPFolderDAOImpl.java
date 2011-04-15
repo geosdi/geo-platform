@@ -50,29 +50,28 @@ import com.trg.search.Search;
  */
 @Transactional
 public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
-		GPFolderDAO {
-	
-	@Override
+        GPFolderDAO {
+
+    @Override
     public void persist(GPFolder... folder) {
         super.persist(folder);
     }
-	
-	@SuppressWarnings("unchecked")
-	@Override
+
+    @SuppressWarnings("unchecked")
+    @Override
     public List<GPFolder> search(ISearch search) {
         return super.search(search);
     }
-	
-	@Override
-	public boolean remove(GPFolder entity) {
-		return super.remove(entity);
-	}
 
-	@Override
-	public GPFolder findByFolderName(String name) {
-		Search search = new Search();
-		search.addFilterEqual("name", name);
-		return searchUnique(search);
-	}
+    @Override
+    public boolean remove(GPFolder entity) {
+        return super.remove(entity);
+    }
 
+    @Override
+    public GPFolder findByFolderName(String name) {
+        Search search = new Search();
+        search.addFilterEqual("name", name);
+        return searchUnique(search);
+    }
 }

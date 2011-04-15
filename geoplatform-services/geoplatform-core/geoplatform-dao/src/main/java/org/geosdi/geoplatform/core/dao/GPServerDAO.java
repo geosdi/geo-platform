@@ -48,24 +48,23 @@ import com.trg.search.ISearch;
  */
 public interface GPServerDAO {
 
-	public List<GeoPlatformServer> findAll();
+    public List<GeoPlatformServer> findAll();
 
-	public GeoPlatformServer find(Long id);
+    public GeoPlatformServer find(Long id);
 
-	public void persist(GeoPlatformServer... server);
+    public void persist(GeoPlatformServer... server);
 
-	public GeoPlatformServer merge(GeoPlatformServer server);
+    public GeoPlatformServer merge(GeoPlatformServer server);
 
-	public boolean remove(GeoPlatformServer server);
+    public boolean remove(GeoPlatformServer server);
 
-	public boolean removeById(Long serverId);
+    public boolean removeById(Long serverId);
 
-	public List<GeoPlatformServer> search(ISearch search);
+    public List<GeoPlatformServer> search(ISearch search);
 
-	public int count(ISearch search);
+    public int count(ISearch search);
 
-	public List<GeoPlatformServer> findByServerName(String serverName);
+    public List<GeoPlatformServer> findByServerName(String serverName);
 
-	public GeoPlatformServer findByServerUrl(String serverUrl);
-
+    public GeoPlatformServer findByServerUrl(String serverUrl);
 }

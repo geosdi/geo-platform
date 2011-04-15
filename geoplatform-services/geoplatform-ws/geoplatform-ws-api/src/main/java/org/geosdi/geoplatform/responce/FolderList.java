@@ -33,45 +33,52 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.core.dao.impl;
+package org.geosdi.geoplatform.responce;
 
-import java.util.List;
+import java.util.Collection;
 
-import org.geosdi.geoplatform.core.dao.GPLayerDAO;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.trg.search.ISearch;
-import com.trg.search.Search;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author Francesco Izzi - geoSDI
- * 
+ * @author Francesco Izzi - CNR IMAA geoSDI Group
+ *
  */
-@Transactional
-public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
-        GPLayerDAO {
+/**
+ * A list of cut down Folder info.
+ */
 
-    @Override
-    public void persist(GPLayer... layer) {
-        super.persist(layer);
-    }
+@XmlRootElement(name = "FolderList")
+public class FolderList {
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<GPLayer> search(ISearch search) {
-        return super.search(search);
-    }
+	private Collection<ShortFolder> list;
 
-    @Override
-    public boolean remove(GPLayer entity) {
-        return super.remove(entity);
-    }
+	/**
+	 * @return the users
+	 */
+	@XmlElement(name = "Folder", required = true, nillable = false)
+	public Collection<ShortFolder> getList() {
+		return list;
+	}
 
-    @Override
-    public GPLayer findByLayerName(String name) {
-        Search search = new Search();
-        search.addFilterEqual("name", name);
-        return searchUnique(search);
-    }
+	/**
+	 * @param users
+	 *            the users to set
+	 */
+	public void setList(Collection<ShortFolder> folders) {
+		this.list = folders;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder(getClass().getSimpleName())
+				.append('{');
+		if (list == null)
+			sb.append("NULL");
+		else
+			sb.append(list.size());
+		sb.append('}');
+		return sb.toString();
+	}
+
 }

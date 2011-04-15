@@ -46,23 +46,22 @@ import com.trg.search.ISearch;
  *
  */
 public interface GPStyleDAO {
-	
-	public List<GPStyle> findAll();
 
-	public GPStyle find(Long id);
+    public List<GPStyle> findAll();
 
-	public void persist(GPStyle... user);
+    public GPStyle find(Long id);
 
-	public GPStyle merge(GPStyle user);
+    public void persist(GPStyle... user);
 
-	public boolean remove(GPStyle user);
+    public GPStyle merge(GPStyle user);
 
-	public boolean removeById(Long userId);
+    public boolean remove(GPStyle user);
 
-	public List<GPStyle> search(ISearch search);
+    public boolean removeById(Long userId);
 
-	public int count(ISearch search);
+    public List<GPStyle> search(ISearch search);
 
-	public GPStyle findByStyleName(String name);
+    public int count(ISearch search);
 
+    public GPStyle findByStyleName(String name);
 }

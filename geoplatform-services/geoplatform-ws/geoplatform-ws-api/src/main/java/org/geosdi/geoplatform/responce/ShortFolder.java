@@ -33,45 +33,80 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.core.dao.impl;
+package org.geosdi.geoplatform.responce;
 
-import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
-import org.geosdi.geoplatform.core.dao.GPLayerDAO;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.trg.search.ISearch;
-import com.trg.search.Search;
+import org.geosdi.geoplatform.core.model.GPFolder;
 
 /**
- * @author Francesco Izzi - geoSDI
+ * @author giuseppe
  * 
  */
-@Transactional
-public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
-        GPLayerDAO {
 
-    @Override
-    public void persist(GPLayer... layer) {
-        super.persist(layer);
-    }
+@XmlRootElement(name = "ShortFolder")
+public class ShortFolder {
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<GPLayer> search(ISearch search) {
-        return super.search(search);
-    }
+	private long id;
+	private String name;
+	private boolean shared;
 
-    @Override
-    public boolean remove(GPLayer entity) {
-        return super.remove(entity);
-    }
+	/**
+	 * Default constructor
+	 */
+	public ShortFolder() {
+		super();
+	}
 
-    @Override
-    public GPLayer findByLayerName(String name) {
-        Search search = new Search();
-        search.addFilterEqual("name", name);
-        return searchUnique(search);
-    }
+	public ShortFolder(GPFolder folder) {
+		this.id = folder.getId();
+		this.name = folder.getName();
+		this.shared = folder.isShared();
+	}
+
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name
+	 *            the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the shared
+	 */
+	public boolean isShared() {
+		return shared;
+	}
+
+	/**
+	 * @param shared
+	 *            the shared to set
+	 */
+	public void setShared(boolean shared) {
+		this.shared = shared;
+	}
+
 }

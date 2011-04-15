@@ -50,7 +50,7 @@
     	</jaxws:serviceFactory>
 	</jaxws:endpoint>	
 
-    <!-- ====================================================================-->
+    <!-- ====================================================================
 
     <jaxws:endpoint id="geoplatformServiceXML"
     	implementorClass="org.geosdi.geoplatform.services.GeoPlatformServiceImpl"
@@ -64,7 +64,7 @@
 		    </bean>
     	</jaxws:serviceFactory>
 	</jaxws:endpoint>
-
+-->
     <!-- ====================================================================-->
 
     <!-- Enable message logging using the CXF logging feature -->

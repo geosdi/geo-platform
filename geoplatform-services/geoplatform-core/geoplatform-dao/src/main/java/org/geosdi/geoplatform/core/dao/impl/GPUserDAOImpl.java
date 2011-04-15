@@ -48,31 +48,29 @@ import com.trg.search.Search;
  * @author giuseppe
  * 
  */
-
 @Transactional
 public class GPUserDAOImpl extends BaseDAO<GPUser, Long> implements GPUserDAO {
 
-	@Override
-	public void persist(GPUser... users) {
-		super.persist(users);
-	}
+    @Override
+    public void persist(GPUser... users) {
+        super.persist(users);
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<GPUser> search(ISearch search) {
-		return super.search(search);
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<GPUser> search(ISearch search) {
+        return super.search(search);
+    }
 
-	@Override
-	public GPUser findByUsername(String name) {
-		Search search = new Search();
-		search.addFilterEqual("username", name);
-		return searchUnique(search);
-	}
+    @Override
+    public GPUser findByUsername(String name) {
+        Search search = new Search();
+        search.addFilterEqual("username", name);
+        return searchUnique(search);
+    }
 
-	@Override
-	public boolean remove(GPUser entity) {
-		return super.remove(entity);
-	}
-
+    @Override
+    public boolean remove(GPUser entity) {
+        return super.remove(entity);
+    }
 }

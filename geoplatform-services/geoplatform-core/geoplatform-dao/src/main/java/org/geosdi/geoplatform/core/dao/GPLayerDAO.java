@@ -46,16 +46,22 @@ import com.trg.search.ISearch;
  *
  */
 public interface GPLayerDAO {
-	
-	public List<GPLayer> findAll();
-	public GPLayer find(Long id);
-	public void persist(GPLayer... user);
-	public GPLayer merge(GPLayer user);
-	public boolean remove(GPLayer user);
-	public boolean removeById(Long userId);
+
+    public List<GPLayer> findAll();
+
+    public GPLayer find(Long id);
+
+    public void persist(GPLayer... user);
+
+    public GPLayer merge(GPLayer user);
+
+    public boolean remove(GPLayer user);
+
+    public boolean removeById(Long userId);
+
     public List<GPLayer> search(ISearch search);
+
     public int count(ISearch search);
 
-	public GPLayer findByLayerName(String name);
-
+    public GPLayer findByLayerName(String name);
 }

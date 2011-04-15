@@ -58,7 +58,6 @@ import com.trg.search.Search;
 class UserServiceImpl {
 
     final private static Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
-    
     private GPUserDAO userDao;
 
     // note: may take lot of space

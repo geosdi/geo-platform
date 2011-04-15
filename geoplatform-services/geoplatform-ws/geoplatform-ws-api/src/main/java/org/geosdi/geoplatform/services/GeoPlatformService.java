@@ -44,23 +44,26 @@ import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
 import org.codehaus.jra.Post;
 import org.codehaus.jra.Put;
+import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.request.RequestByUserFolder;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.FolderList;
 import org.geosdi.geoplatform.responce.LayerList;
 import org.geosdi.geoplatform.responce.ShortServer;
 import org.geosdi.geoplatform.responce.UserList;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
+ * @author Francesco Izzi - CNR IMAA - geoSDI
  * 
  *         Public interface to define the service operations mapped via REST
  *         using CXT framework
  */
-
 @WebService(name = "GeoPlatformService", targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService {
 
@@ -105,6 +108,85 @@ public interface GeoPlatformService {
 	@WebResult(name = "count")
 	long getUsersCount(SearchRequest searchRequest);
 
+	// ==========================================================================
+	// === Folder
+	// ==========================================================================
+
+	@Put
+	@HttpResource(location = "/folder")
+	long insertFolder(@WebParam(name = "Folder") GPFolder folder);
+
+	@Post
+	@HttpResource(location = "/folder")
+	long updateFolder(@WebParam(name = "Folder") GPFolder folder)
+			throws ResourceNotFoundFault, IllegalParameterFault;
+
+	@Get
+	@HttpResource(location = "/folders/{id}")
+	@WebResult(name = "Folder")
+	GPFolder getFolder(RequestById request) throws ResourceNotFoundFault;
+
+	@Delete
+	@HttpResource(location = "/folders/{id}")
+	boolean deleteFolder(RequestById request) throws ResourceNotFoundFault,
+			IllegalParameterFault;
+
+	@Get
+	@HttpResource(location = "/folders")
+	@WebResult(name = "Folders")
+	FolderList getFolders();
+
+	@Get
+	@HttpResource(location = "/folders/search/{num}/{page}/{nameLike}")
+	@WebResult(name = "Folders")
+	FolderList searchFolders(PaginatedSearchRequest searchRequest);
+
+	@Get
+	@HttpResource(location = "/folders/count/{nameLike}")
+	@WebResult(name = "count")
+	long getFoldersCount(SearchRequest searchRequest);
+
+	@Get
+	@HttpResource(location = "/folders/user/{id}/count")
+	@WebResult(name = "count")
+	long getUserFoldersCount(RequestById request);
+
+	// ==========================================================================
+	// === Folder / User
+	// ==========================================================================
+
+	@Get
+	@HttpResource(location = "/users/{id}/folder/{num}/{page}")
+	@WebResult(name = "FolderList")
+	FolderList getUserFolders(RequestById request);
+
+	/**
+	 * @return Owned and shared Folders visible to a given user.
+	 */
+	FolderList getAllUserFolders(long userId, int num, int page);
+
+	/**
+	 * @return Count Owned and shared Folders visible to a given user.
+	 */
+	int getAllUserFoldersCount(long userId);
+
+	@Post
+	@HttpResource(location = "/folder/{id}/shared")
+	void setFolderShared(RequestById request) throws ResourceNotFoundFault;
+
+	@Post
+	@HttpResource(location = "/folder/{folderId}/owner/{userId}")
+	boolean setFolderOwner(RequestByUserFolder request)
+			throws ResourceNotFoundFault;
+
+	@Post
+	@HttpResource(location = "/folder/{folderId}/forceowner/{userId}")
+	void forceFolderOwner(RequestByUserFolder request)
+			throws ResourceNotFoundFault;
+
+	// ==========================================================================
+	// === OWS
+	// ==========================================================================
 	@Get
 	@HttpResource(location = "/wms/capabilities/{id}")
 	@WebResult(name = "Capabilities")
@@ -115,5 +197,4 @@ public interface GeoPlatformService {
 	@WebResult(name = "Servers")
 	ShortServer getServer(@WebParam(name = "serverUrl") String serverUrl)
 			throws ResourceNotFoundFault;
-
 }

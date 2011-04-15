@@ -46,16 +46,22 @@ import com.trg.search.ISearch;
  *
  */
 public interface GPUserDAO {
-	
-	public List<GPUser> findAll();
-	public GPUser find(Long id);
-	public void persist(GPUser... user);
-	public GPUser merge(GPUser user);
-	public boolean remove(GPUser user);
-	public boolean removeById(Long userId);
+
+    public List<GPUser> findAll();
+
+    public GPUser find(Long id);
+
+    public void persist(GPUser... user);
+
+    public GPUser merge(GPUser user);
+
+    public boolean remove(GPUser user);
+
+    public boolean removeById(Long userId);
+
     public List<GPUser> search(ISearch search);
+
     public int count(ISearch search);
 
-	public GPUser findByUsername(String name);
-
+    public GPUser findByUsername(String name);
 }

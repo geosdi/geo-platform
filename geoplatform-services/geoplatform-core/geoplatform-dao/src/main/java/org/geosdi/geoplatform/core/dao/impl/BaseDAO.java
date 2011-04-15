@@ -51,47 +51,45 @@ import com.trg.search.jpa.JPASearchProcessor;
  * @author giuseppe
  * 
  */
-
 @Repository
 public class BaseDAO<T, ID extends Serializable> extends GenericDAOImpl<T, ID> {
 
-	/**
-	 * EntityManager setting
-	 * 
-	 * @param entityManager
-	 *            the entity manager to set
-	 */
-	@Override
-	@PersistenceContext
-	public void setEntityManager(EntityManager entityManager) {
-		super.setEntityManager(entityManager);
-	}
+    /**
+     * EntityManager setting
+     *
+     * @param entityManager
+     *            the entity manager to set
+     */
+    @Override
+    @PersistenceContext
+    public void setEntityManager(EntityManager entityManager) {
+        super.setEntityManager(entityManager);
+    }
 
-	/**
-	 * JPASearchProcessor setting
-	 * 
-	 * @param searchProcessor
-	 *            the search processor to set
-	 */
-	@Override
-	@Autowired
-	public void setSearchProcessor(JPASearchProcessor searchProcessor) {
-		super.setSearchProcessor(searchProcessor);
-	}
+    /**
+     * JPASearchProcessor setting
+     *
+     * @param searchProcessor
+     *            the search processor to set
+     */
+    @Override
+    @Autowired
+    public void setSearchProcessor(JPASearchProcessor searchProcessor) {
+        super.setSearchProcessor(searchProcessor);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.trg.dao.jpa.JPABaseDAO#em()
-	 */
-	@Override
-	public EntityManager em() {
-		// TODO Auto-generated method stub
-		return super.em();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.trg.dao.jpa.JPABaseDAO#em()
+     */
+    @Override
+    public EntityManager em() {
+        // TODO Auto-generated method stub
+        return super.em();
+    }
 
-	public Session getSession() {
-		return (Session) em().getDelegate();
-	}
-
+    public Session getSession() {
+        return (Session) em().getDelegate();
+    }
 }

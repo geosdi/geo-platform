@@ -50,29 +50,28 @@ import com.trg.search.Search;
  */
 @Transactional
 public class GPStyleDAOImpl extends BaseDAO<GPStyle, Long> implements
-		GPStyleDAO {
-	
-	@Override
+        GPStyleDAO {
+
+    @Override
     public void persist(GPStyle... style) {
         super.persist(style);
     }
-	
-	@SuppressWarnings("unchecked")
-	@Override
+
+    @SuppressWarnings("unchecked")
+    @Override
     public List<GPStyle> search(ISearch search) {
         return super.search(search);
     }
-	
-	@Override
-	public boolean remove(GPStyle entity) {
-		return super.remove(entity);
-	}
 
-	@Override
-	public GPStyle findByStyleName(String name) {
-		Search search = new Search();
-		search.addFilterEqual("name", name);
-		return searchUnique(search);
-	}
+    @Override
+    public boolean remove(GPStyle entity) {
+        return super.remove(entity);
+    }
 
+    @Override
+    public GPStyle findByStyleName(String name) {
+        Search search = new Search();
+        search.addFilterEqual("name", name);
+        return searchUnique(search);
+    }
 }

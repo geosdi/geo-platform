@@ -46,14 +46,20 @@ import com.trg.search.ISearch;
  *
  */
 public interface GPAuthorityDAO {
-	
-	public List<GPAuthority> findAll();
-	public GPAuthority find(Long id);
-	public void persist(GPAuthority... authority);
-	public GPAuthority merge(GPAuthority authority);
-	public boolean remove(GPAuthority authority);
-	public boolean removeById(Long authorityId);
-    public List<GPAuthority> search(ISearch search);
-    public int count(ISearch search);
 
+    public List<GPAuthority> findAll();
+
+    public GPAuthority find(Long id);
+
+    public void persist(GPAuthority... authority);
+
+    public GPAuthority merge(GPAuthority authority);
+
+    public boolean remove(GPAuthority authority);
+
+    public boolean removeById(Long authorityId);
+
+    public List<GPAuthority> search(ISearch search);
+
+    public int count(ISearch search);
 }

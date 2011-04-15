@@ -33,45 +33,55 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.core.dao.impl;
+package org.geosdi.geoplatform.request;
 
-import java.util.List;
-
-import org.geosdi.geoplatform.core.dao.GPLayerDAO;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.trg.search.ISearch;
-import com.trg.search.Search;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author Francesco Izzi - geoSDI
- * 
+ * @author Francesco Izzi - CNR IMAA geoSDI Group
+ *
  */
-@Transactional
-public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
-        GPLayerDAO {
+/**
+ * A request for calls involving a single User and a single Folder.
+ */
+@XmlRootElement(name = "RequestByUserFolder")
+public class RequestByUserFolder {
 
-    @Override
-    public void persist(GPLayer... layer) {
-        super.persist(layer);
-    }
+	private long userId;
+	private long folderId;
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<GPLayer> search(ISearch search) {
-        return super.search(search);
-    }
+	/**
+	 * 
+	 */
+	public RequestByUserFolder() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    @Override
-    public boolean remove(GPLayer entity) {
-        return super.remove(entity);
-    }
+	/**
+	 * @param userId
+	 * @param folderId
+	 */
+	public RequestByUserFolder(long userId, long folderId) {
+		super();
+		this.userId = userId;
+		this.folderId = folderId;
+	}
 
-    @Override
-    public GPLayer findByLayerName(String name) {
-        Search search = new Search();
-        search.addFilterEqual("name", name);
-        return searchUnique(search);
-    }
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
+	public long getFolderId() {
+		return folderId;
+	}
+
+	public void setFolderId(long folderId) {
+		this.folderId = folderId;
+	}
+
 }

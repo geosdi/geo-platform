@@ -49,22 +49,21 @@ import com.trg.search.ISearch;
  */
 @Transactional
 public class GPAuthorityDAOImpl extends BaseDAO<GPAuthority, Long> implements
-		GPAuthorityDAO {
+        GPAuthorityDAO {
 
-	@Override
-	public void persist(GPAuthority... authorities) {
-		super.persist(authorities);
-	}
+    @Override
+    public void persist(GPAuthority... authorities) {
+        super.persist(authorities);
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<GPAuthority> search(ISearch search) {
-		return super.search(search);
-	}
-	
-	@Override
-	public boolean remove(GPAuthority entity) {
-		return super.remove(entity);
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<GPAuthority> search(ISearch search) {
+        return super.search(search);
+    }
 
+    @Override
+    public boolean remove(GPAuthority entity) {
+        return super.remove(entity);
+    }
 }

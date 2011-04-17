@@ -95,7 +95,7 @@
         </dependency>
 
 
-		<!-- logging dependencies, delegate all to slf4j and use logback -->
+		<!-- logging dependencies, delegate all to slf4j and use logback 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -121,7 +121,7 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>0.9.9</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>junit</groupId>

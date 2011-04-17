@@ -43,35 +43,37 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.ShortServer;
 import org.junit.Test;
+import org.springframework.test.context.TestExecutionListeners;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
  * 
  */
+@TestExecutionListeners(value = {WSListenerServices.class})
 public class WMSServiceTest extends ServiceTest {
 
     @Test
     public void testGetCapabilities() throws ParseException,
             ResourceNotFoundFault {
 
-        ShortServer shortServer = geoPlatformServiceClient.getServer("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
+        ShortServer shortServer = geoPlatformService.getServer("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
 
         Assert.assertNotNull(shortServer);
 
         logger.info("NUMBER OF LAYERS FOR DPC ********** "
-                + geoPlatformServiceClient.getCapabilities(new RequestById(shortServer.getId())).getList().size());
+                + geoPlatformService.getCapabilities(new RequestById(shortServer.getId())).getList().size());
 
 
-        ShortServer shortServer1 = geoPlatformServiceClient.getServer("http://maps.telespazio.it/dpc/dpc-wms");
+        ShortServer shortServer1 = geoPlatformService.getServer("http://maps.telespazio.it/dpc/dpc-wms");
 
         Assert.assertNotNull(shortServer1);
 
         Assert.assertEquals(
                 8,
-                geoPlatformServiceClient.getCapabilities(new RequestById(shortServer1.getId())).getList().size());
+                geoPlatformService.getCapabilities(new RequestById(shortServer1.getId())).getList().size());
 
         logger.info("NUMBER OF LAYERS FOR TELESPAZIO ********** "
-                + geoPlatformServiceClient.getCapabilities(new RequestById(shortServer1.getId())).getList().size());
+                + geoPlatformService.getCapabilities(new RequestById(shortServer1.getId())).getList().size());
 
     }
 }

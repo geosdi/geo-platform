@@ -50,15 +50,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext.xml" })
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class GeoPlatformWSTest {
-	
-	@Autowired
-	private GeoPlatformService geoPlatformServiceClient;
-	
-	@Test
-	public void testWS() {
-		Assert.assertNotNull(geoPlatformServiceClient);
-	}
 
+    @Autowired
+    private GeoPlatformService geoPlatformServiceClient;
+
+    @Test
+    public void testWS() {
+        Assert.assertNotNull(geoPlatformServiceClient);
+    }
 }

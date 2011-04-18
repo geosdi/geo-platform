@@ -104,6 +104,7 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> {
 
         if (containsLayer(vectorBean)) {
             WMS layer = (WMS) this.layers.get(vectorBean);
+            layer.setZIndex(vectorBean.getzIndex());
             layer.setIsVisible(true);
             layer.redraw();
         } else {
@@ -122,6 +123,7 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> {
 
         if (containsLayer(rasterBean)) {
             WMS layer = (WMS) this.layers.get(rasterBean);
+            layer.setZIndex(rasterBean.getzIndex());
             layer.setIsVisible(true);
             layer.redraw();
         } else {

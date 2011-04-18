@@ -107,7 +107,6 @@ public class VisitorDisplayHide implements IVisitor {
 
     private void setParentsFolderChecked(GPBeanTreeModel element) {
         GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
-        //parent.setChecked(true);
         if (!parent.isChecked() && !(parent instanceof GPRootTreeNode)) {
             this.isInternalFolderCheck = true;
             this.treePanel.setChecked(parent, true);
@@ -117,17 +116,16 @@ public class VisitorDisplayHide implements IVisitor {
             GPBeanTreeModel gpBean = (GPBeanTreeModel) item;
             if (gpBean.isChecked() && !(gpBean instanceof FolderTreeNode)
                     && !gpBean.equals(element)) {
-                System.out.println("Visualizzo anche il layer: " + gpBean.getLabel());
+                //System.out.println("Visualizzo anche il layer: " + gpBean.getLabel());
                 GPHandlerManager.fireEvent(new DisplayLayerEvent(((GPLayerBean) gpBean)));
             }
         }
-        System.out.println("ParentsFolderChecked ha checkato: " + parent.getLabel());
+        //System.out.println("ParentsFolderChecked ha checkato: " + parent.getLabel());
         if (!(parent instanceof GPRootTreeNode)) {
             this.setParentsFolderChecked(parent);
         }
     }
 
-    //TODO: Nascondere i figli anche dei livelli inferiori
     private void hideChildrens(AbstractFolderTreeNode folder) {
         for (Object element : folder.getChildren()) {
             GPBeanTreeModel child = (GPBeanTreeModel) element;
@@ -139,7 +137,6 @@ public class VisitorDisplayHide implements IVisitor {
         }
     }
 
-    //TODO: Mostrare i figli anche dei livelli inferiori
     private void showChildrens(AbstractFolderTreeNode folder) {
         for (Object element : folder.getChildren()) {
             GPBeanTreeModel child = (GPBeanTreeModel) element;
@@ -152,9 +149,8 @@ public class VisitorDisplayHide implements IVisitor {
     }
 
     public void realignViewState(GPBeanTreeModel element) {
-        System.out.println("Turn on Visual Check on: " + element.getLabel());
+        //System.out.println("Turn on Visual Check on: " + element.getLabel());
         this.turnOnVisualCheck(element);
-        //this.displayLayers(element);
     }
 
     private boolean isAllParentsChecked(GPBeanTreeModel element) {
@@ -172,8 +168,6 @@ public class VisitorDisplayHide implements IVisitor {
     }
 
     private void turnOnVisualCheck(GPBeanTreeModel element) {
-        System.out.println("S'ingrippa: ");
-        System.out.println("qua: " + ((GPBeanTreeModel) element).getLabel());
         if (element.isChecked()) {
             this.treePanel.setExpanded(element, true, true);
             this.isInternalFolderCheck = true;
@@ -184,17 +178,9 @@ public class VisitorDisplayHide implements IVisitor {
         for (ModelData item : element.getChildren()) {
             GPBeanTreeModel gpBean = (GPBeanTreeModel) item;
             if (gpBean instanceof FolderTreeNode || gpBean.isChecked()) {
-                System.out.println("Riconosco che devo fare check su: " + gpBean.getLabel());
+                //System.out.println("Riconosco che devo fare check su: " + gpBean.getLabel());
                 this.turnOnVisualCheck(gpBean);
             }
         }
     }
-//    private void displayLayers(GPBeanTreeModel element) {
-//        boolean parentsChecked = this.isAllParentsChecked(element);
-//        if(parentsChecked && element instanceof FolderTreeNode){
-//            this.showChildrens((FolderTreeNode)element);
-//        } else if (parentsChecked && element instanceof GPLayerBean) {
-//            GPHandlerManager.fireEvent(new DisplayLayerEvent((GPLayerBean)element));
-//        }
-//    }
 }

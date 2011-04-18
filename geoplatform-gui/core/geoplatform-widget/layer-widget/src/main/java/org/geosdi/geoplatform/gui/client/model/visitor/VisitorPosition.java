@@ -64,18 +64,21 @@ public class VisitorPosition implements IVisitor {
             GPBeanTreeModel parentDestination, int newIndex) {
         GPBeanTreeModel oldParent = (GPBeanTreeModel) changedElement.getParent();
         int oldZIndex = changedElement.getzIndex();
-        //System.out.println("Old zIndex: " + oldZIndex);
-        //System.out.println("parentDestination.getzIndex(): " + parentDestination.getzIndex());
-        //System.out.println("New Index: " + newIndex);
-        int newZIndex = parentDestination.getzIndex() - newIndex - 1;
-        //System.out.println("New zIndex: " + newZIndex);
+        System.out.println("Old zIndex: " + oldZIndex);
+        System.out.println("parentDestination.getzIndex(): " + parentDestination.getzIndex());
+        System.out.println("New Index: " + newIndex);
+        //int newZIndex = parentDestination.getzIndex() - newIndex - 1;
+        int newZIndex = this.getNewZIndex(parentDestination, newIndex);
+        System.out.println("New zIndex: " + newZIndex);
         if (newZIndex < oldZIndex) {
+            System.out.println("Sono nel caso newIndex minore oldIndex");
             this.startPosition = this.getPrecedingElement(changedElement);
             oldParent.remove(changedElement);
             changedElement.setParent(parentDestination);
             parentDestination.insert(changedElement, newIndex);
             this.endPosition = this.getNextUnvisitedElement(this.findDeepestElementInNode(changedElement));
         } else if (newZIndex > oldZIndex) {
+            System.out.println("Sono nel caso newIndex maggiore oldIndex");
             this.endPosition = this.getNextUnvisitedElement(this.findDeepestElementInNode(changedElement));
             oldParent.remove(changedElement);
             changedElement.setParent(parentDestination);
@@ -85,13 +88,25 @@ public class VisitorPosition implements IVisitor {
             oldParent.remove(changedElement);
             changedElement.setParent(parentDestination);
             parentDestination.insert(changedElement, newIndex);
-            //System.out.println("In FixPosition: returning without index changes");
+            System.out.println("In FixPosition: returning without index changes");
             return;
         }
         System.out.println(this.startPosition == null ? null : "Start Position: " + this.startPosition.getLabel());
         System.out.println(this.endPosition == null ? null : "End position: " + this.endPosition.getLabel());
         this.preorderTraversal();
         System.out.println("Modifica terminata");
+    }
+
+    private int getNewZIndex(GPBeanTreeModel parentDestination, int newIndex) {
+        int newZIndex = 0;
+        if (parentDestination.getChild(newIndex) != null) {
+            newZIndex = ((GPBeanTreeModel) parentDestination.getChild(newIndex)).getzIndex();
+        } else if (newIndex > 0) {
+            newZIndex = ((GPBeanTreeModel) parentDestination.getChild(newIndex-1)).getzIndex() + 1;
+        } else {
+            newZIndex = parentDestination.getzIndex();
+        }
+        return newZIndex;
     }
 
     private GPBeanTreeModel getPrecedingElement(GPBeanTreeModel element) {

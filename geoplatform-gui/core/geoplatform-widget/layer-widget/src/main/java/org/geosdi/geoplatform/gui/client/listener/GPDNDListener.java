@@ -45,9 +45,6 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>> 
             this.newIndex = be.getIndex();
             this.changedElement = treeStore.getChild(parentDestination, newIndex);
             System.out.println("Changed element: " + changedElement.getLabel());
-//            System.out.println("Parent destinazione: " + parentDestination);
-//            System.out.println("Indice destinazione: " + newIndex);
-//            System.out.println("Source that fired the event: " + treeStore);
             if (this.changedElement instanceof FolderTreeNode) {
 //                this.visitor.fixPosition(changedElement, parentDestination, newIndex);
 //                this.activeDrop = false;
@@ -57,7 +54,7 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>> 
         } else if (activeDrop && LayerEvents.GP_DROP.equals(be.getType())) {
             System.out.println("IN fix del DND");
             System.out.println("Changed element: " + changedElement.getLabel());
-            System.out.println("Parent destinazione: " + parentDestination);
+            System.out.println("Parent destinazione: " + parentDestination.getLabel());
             System.out.println("Indice destinazione: " + newIndex);
             visitor.fixPosition(changedElement, parentDestination, newIndex);
             this.activeDrop = false;

@@ -47,14 +47,30 @@ import org.geosdi.geoplatform.services.GeoPlatformService;
  */
 public class GeoPlatformWSClient {
 
+    private String address;
+
     public GeoPlatformService create() {
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
         factory.getInInterceptors().add(new LoggingInInterceptor());
         factory.getOutInterceptors().add(new LoggingOutInterceptor());
         factory.setServiceClass(GeoPlatformService.class);
 
-        factory.setAddress("http://localhost:8080/geoplatform-service/soap");
+        factory.setAddress(this.address);
 
         return (GeoPlatformService) factory.create();
+    }
+
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

@@ -55,6 +55,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class GeoPlatformLayersTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    
     @Autowired
     private FolderStore folderStore;
 

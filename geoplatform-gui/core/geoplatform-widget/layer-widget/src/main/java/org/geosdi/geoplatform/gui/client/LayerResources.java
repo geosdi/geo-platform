@@ -45,7 +45,6 @@ import com.google.gwt.core.client.GWT;
  *
  */
 public class LayerResources {
-	
-	public static final LayerIcons ICONS = GWT.create(LayerIcons.class);
 
+    public static final LayerIcons ICONS = GWT.create(LayerIcons.class);
 }

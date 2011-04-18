@@ -51,35 +51,34 @@ import com.google.gwt.core.client.EntryPoint;
  */
 public class LayerWidgetUI implements EntryPoint {
 
-	private Dispatcher dispatcher;
+    private Dispatcher dispatcher;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
-	 */
-	@Override
-	public void onModuleLoad() {
-		// TODO Auto-generated method stub
-		dispatcher = Dispatcher.get();
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+     */
+    @Override
+    public void onModuleLoad() {
+        // TODO Auto-generated method stub
+        dispatcher = Dispatcher.get();
 
-		dispatcher.addController(new LayerController());
+        dispatcher.addController(new LayerController());
 
-		addLayerWidgetAction();
+        addLayerWidgetAction();
 
-		dispatcher.fireEvent(LayerEvents.INIT_LAYER_WIDGET);
-	}
+        dispatcher.fireEvent(LayerEvents.INIT_LAYER_WIDGET);
+    }
 
-	private void addLayerWidgetAction() {
-		// TODO Auto-generated method stub
-		MenuActionRegistar.put("layerMenu", new MenuActionCreator() {
+    private void addLayerWidgetAction() {
+        // TODO Auto-generated method stub
+        MenuActionRegistar.put("layerMenu", new MenuActionCreator() {
 
-			@Override
-			public MenuAction createAction() {
-				// TODO Auto-generated method stub
-				return new LayerMenuAction();
-			}
-		});
-	}
-
+            @Override
+            public MenuAction createAction() {
+                // TODO Auto-generated method stub
+                return new LayerMenuAction();
+            }
+        });
+    }
 }

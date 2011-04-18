@@ -11,6 +11,13 @@
 			http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
 	default-autowire="byName">
 
+    <context:annotation-config/>
+
+
+    <bean id="gpWSClient" class="org.geosdi.geoplatform.cxf.GeoPlatformWSClient">
+        <property name="address" value="http://localhost:8080/geoplatform-service/soap" />
+    </bean>
+
 	<!-- =============================================================== -->
 	<!-- Configure the Jetty Server with Spring -->
 	<!-- This file is the equivalent of jetty.xml, but written in spring -->

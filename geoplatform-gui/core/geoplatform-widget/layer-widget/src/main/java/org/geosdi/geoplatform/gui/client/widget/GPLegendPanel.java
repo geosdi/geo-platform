@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.google.gwt.event.shared.HandlerRegistration;
 import org.geosdi.geoplatform.gui.client.widget.map.legend.GPLegendWidget;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;

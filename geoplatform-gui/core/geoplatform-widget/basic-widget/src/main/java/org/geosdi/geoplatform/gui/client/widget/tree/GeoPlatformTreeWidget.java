@@ -58,7 +58,6 @@ public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
     public GeoPlatformTreeWidget() {
         this.store = new TreeStore<T>();
         this.tree = new TreePanel<T>(store);
-        setTreePanelProperties();
     }
 
     /**

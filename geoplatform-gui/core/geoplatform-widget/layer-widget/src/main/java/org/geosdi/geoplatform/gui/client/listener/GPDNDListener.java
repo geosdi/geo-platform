@@ -11,14 +11,21 @@ import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
+import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 
 public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>> {
 
+    private VisitorDisplayHide checkerVisitor;
     private VisitorPosition visitor = new VisitorPosition();
     private GPBeanTreeModel changedElement;
     private GPBeanTreeModel parentDestination;
     private int newIndex;
     private boolean activeDrop = false;
+    private boolean folderDrop = false;
+
+    public GPDNDListener(VisitorDisplayHide visitorDisplayHide) {
+        this.checkerVisitor = visitorDisplayHide;
+    }
 
 
     /*We need to manager three kinds of DND Events:
@@ -31,32 +38,38 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>> 
     @Override
     public void handleEvent(TreeStoreEvent<GPBeanTreeModel> be) {
         this.manageDropActivation(be.getType());
-        if (be.getParent() != null && Store.Add.equals(be.getType())) {
-            //!(be.getSource() instanceof GPTreePanelDropTarget) &&
+        //if (be.getParent() != null
+        if (be.getParent() != null && Store.Add.equals(be.getType()) && this.folderDrop == false) {
+            TreeStore<GPBeanTreeModel> treeStore = (TreeStore<GPBeanTreeModel>) be.getSource();
             this.parentDestination = be.getParent();
             this.newIndex = be.getIndex();
-            TreeStore<GPBeanTreeModel> treeStore = (TreeStore<GPBeanTreeModel>) be.getSource();
             this.changedElement = treeStore.getChild(parentDestination, newIndex);
-
-            System.out.println("Changed element: " + changedElement);
-            System.out.println("Parent destinazione: " + parentDestination);
-            System.out.println("Indice destinazione: " + newIndex);
-            System.out.println("Source that fired the event: " + treeStore);
-
-            if (this.changedElement instanceof FolderTreeNode
-                    && (parentDestination instanceof FolderTreeNode || parentDestination instanceof GPRootTreeNode)) {
-                visitor.fixPosition(changedElement, parentDestination, newIndex);
-                this.activeDrop = false;
+            System.out.println("Changed element: " + changedElement.getLabel());
+//            System.out.println("Parent destinazione: " + parentDestination);
+//            System.out.println("Indice destinazione: " + newIndex);
+//            System.out.println("Source that fired the event: " + treeStore);
+            if (this.changedElement instanceof FolderTreeNode) {
+//                this.visitor.fixPosition(changedElement, parentDestination, newIndex);
+//                this.activeDrop = false;
+//                this.checkerVisitor.realignViewState(changedElement);
+                this.folderDrop = true;
             }
         } else if (activeDrop && LayerEvents.GP_DROP.equals(be.getType())) {
+            System.out.println("IN fix del DND");
+            System.out.println("Changed element: " + changedElement.getLabel());
+            System.out.println("Parent destinazione: " + parentDestination);
+            System.out.println("Indice destinazione: " + newIndex);
             visitor.fixPosition(changedElement, parentDestination, newIndex);
             this.activeDrop = false;
+            this.folderDrop = false;
+            this.checkerVisitor.realignViewState(changedElement);
         }
     }
 
     private void manageDropActivation(EventType eventType) {
         if (LayerEvents.GP_DRAG_START.equals(eventType)) {
             this.activeDrop = true;
+            this.folderDrop = false;
         } else if (LayerEvents.GP_DRAG_LOST.equals(eventType)) {
             this.activeDrop = false;
         }

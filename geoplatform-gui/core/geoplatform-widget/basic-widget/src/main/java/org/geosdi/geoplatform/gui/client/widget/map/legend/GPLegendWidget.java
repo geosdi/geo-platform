@@ -67,20 +67,22 @@ public class GPLegendWidget {
      * @param layerBean
      */
     public void addLegend(GPLayerBean layerBean) {
-        ContentPanel cp = new ContentPanel();
-        cp.setHeading(layerBean.getLabel());
-        cp.setId(layerBean.getLabel());
+        if (this.legendsStore.getItemByItemId(layerBean.getLabel()) == null) {
+            ContentPanel cp = new ContentPanel();
+            cp.setHeading(layerBean.getLabel());
+            cp.setId(layerBean.getLabel());
 
-        Image image = new Image(
-                layerBean instanceof GPRasterBean ? layerBean.getDataSource()
-                + GET_LEGEND_REQUEST + layerBean.getLabel()
-                : layerBean.getDataSource().replaceAll("wfs", "wms")
-                + GET_LEGEND_REQUEST + layerBean.getLabel());
+            Image image = new Image(
+                    layerBean instanceof GPRasterBean ? layerBean.getDataSource()
+                    + GET_LEGEND_REQUEST + layerBean.getLabel()
+                    : layerBean.getDataSource().replaceAll("wfs", "wms")
+                    + GET_LEGEND_REQUEST + layerBean.getLabel());
 
-        cp.add(image);
+            cp.add(image);
 
-        this.legendsStore.add(cp);
-        this.legendsStore.layout();
+            this.legendsStore.add(cp);
+            this.legendsStore.layout();
+        }
     }
 
     /**

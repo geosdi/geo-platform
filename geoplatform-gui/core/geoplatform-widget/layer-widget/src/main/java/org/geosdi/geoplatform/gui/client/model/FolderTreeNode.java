@@ -35,12 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;

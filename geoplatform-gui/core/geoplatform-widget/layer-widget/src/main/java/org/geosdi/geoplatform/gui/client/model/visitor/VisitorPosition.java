@@ -82,7 +82,10 @@ public class VisitorPosition implements IVisitor {
             parentDestination.insert(changedElement, newIndex);
             this.startPosition = this.getPrecedingElement(changedElement);
         } else {
-            //System.out.println("In FixPosition: returning without operations");
+            oldParent.remove(changedElement);
+            changedElement.setParent(parentDestination);
+            parentDestination.insert(changedElement, newIndex);
+            //System.out.println("In FixPosition: returning without index changes");
             return;
         }
         System.out.println(this.startPosition == null ? null : "Start Position: " + this.startPosition.getLabel());

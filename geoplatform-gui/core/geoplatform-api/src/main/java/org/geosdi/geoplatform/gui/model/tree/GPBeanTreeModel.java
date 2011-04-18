@@ -95,7 +95,6 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
      * @param isChecked the isChecked to set
      */
     public void setChecked(boolean isChecked) {
-        System.out.println("Imposto cecked");
         this.isChecked = isChecked;
     }
 }

@@ -113,6 +113,14 @@ public class VisitorDisplayHide implements IVisitor {
             this.treePanel.setChecked(parent, true);
             this.isInternalFolderCheck = false;
         }
+        for (ModelData item : parent.getChildren()) {
+            GPBeanTreeModel gpBean = (GPBeanTreeModel) item;
+            if (gpBean.isChecked() && !(gpBean instanceof FolderTreeNode)
+                    && !gpBean.equals(element)) {
+                System.out.println("Visualizzo anche il layer: " + gpBean.getLabel());
+                GPHandlerManager.fireEvent(new DisplayLayerEvent(((GPLayerBean) gpBean)));
+            }
+        }
         System.out.println("ParentsFolderChecked ha checkato: " + parent.getLabel());
         if (!(parent instanceof GPRootTreeNode)) {
             this.setParentsFolderChecked(parent);

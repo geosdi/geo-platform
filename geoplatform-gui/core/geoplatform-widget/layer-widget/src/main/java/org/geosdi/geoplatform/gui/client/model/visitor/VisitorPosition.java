@@ -56,6 +56,7 @@ public class VisitorPosition implements IVisitor {
 
     private int tmpIndex = -1;
     private int numberOfElements = -1;
+    private boolean stopIterating;
     private GPBeanTreeModel startPosition;
     private GPBeanTreeModel endPosition;
     private GPBeanTreeModel tmpElement;
@@ -71,14 +72,14 @@ public class VisitorPosition implements IVisitor {
         int newZIndex = this.getNewZIndex(parentDestination, newIndex);
         System.out.println("New zIndex: " + newZIndex);
         if (newZIndex < oldZIndex) {
-            System.out.println("Sono nel caso newIndex minore oldIndex");
+            System.out.println("Executing: newIndex < oldIndex");
             this.startPosition = this.getPrecedingElement(changedElement);
             oldParent.remove(changedElement);
             changedElement.setParent(parentDestination);
             parentDestination.insert(changedElement, newIndex);
             this.endPosition = this.getNextUnvisitedElement(this.findDeepestElementInNode(changedElement));
         } else if (newZIndex > oldZIndex) {
-            System.out.println("Sono nel caso newIndex maggiore oldIndex");
+            System.out.println("Executing: newIndex > oldIndex");
             this.endPosition = this.getNextUnvisitedElement(this.findDeepestElementInNode(changedElement));
             oldParent.remove(changedElement);
             changedElement.setParent(parentDestination);
@@ -94,7 +95,7 @@ public class VisitorPosition implements IVisitor {
         System.out.println(this.startPosition == null ? null : "Start Position: " + this.startPosition.getLabel());
         System.out.println(this.endPosition == null ? null : "End position: " + this.endPosition.getLabel());
         this.preorderTraversal();
-        System.out.println("Modifica terminata");
+        System.out.println("End modification");
     }
 
     private int getNewZIndex(GPBeanTreeModel parentDestination, int newIndex) {
@@ -175,6 +176,7 @@ public class VisitorPosition implements IVisitor {
         this.startPosition = null;
         this.endPosition = null;
         this.tmpIndex = -1;
+        this.stopIterating = false;
         this.tmpElement = null;
     }
 
@@ -209,11 +211,12 @@ public class VisitorPosition implements IVisitor {
         System.out.println("Visitor Folder set zIndex: " + this.tmpIndex
                 + " to the folder: " + folder.getLabel());
         List<ModelData> childrens = folder.getChildren();
-        for (int i = 0; i < childrens.size(); i++) {
+        for (int i = 0; i < childrens.size() && !this.stopIterating; i++) {
             this.tmpElement = (GPBeanTreeModel) childrens.get(i);
             if (this.endPosition != null && this.isPreorderExitCondition()) {
                 this.tmpElement = this.getPrecedingElement(this.endPosition);
-                return;
+                this.stopIterating = true;
+                return;//TODO: We need to stop execution
             }
             this.tmpElement.accept(this);
         }

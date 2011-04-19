@@ -118,6 +118,9 @@ public class VisitorDisplayHide implements IVisitor {
                     && !gpBean.equals(element)) {
                 //System.out.println("Visualizzo anche il layer: " + gpBean.getLabel());
                 GPHandlerManager.fireEvent(new DisplayLayerEvent(((GPLayerBean) gpBean)));
+            } else if (gpBean.isChecked() && gpBean instanceof FolderTreeNode
+                    && !gpBean.equals(element)){
+                this.showChildrens((FolderTreeNode)gpBean);
             }
         }
         //System.out.println("ParentsFolderChecked ha checkato: " + parent.getLabel());

@@ -31,30 +31,21 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>> 
      *  LayerEvents.GP_DRAG_START
      *  LayerEvents.GP_DRAG_LOST
      *  LayerEvents.GP_DROP
-     * and the Store.Add event to enable or disable the visitor
+     * and the Store.Add event, in this way we can manage the visit on tree
      */
     @SuppressWarnings("unchecked")
     @Override
     public void handleEvent(TreeStoreEvent<GPBeanTreeModel> be) {
         this.manageDropActivation(be.getType());
-        //if (be.getParent() != null
         if (be.getParent() != null && Store.Add.equals(be.getType()) && this.folderDrop == false) {
             TreeStore<GPBeanTreeModel> treeStore = (TreeStore<GPBeanTreeModel>) be.getSource();
             this.parentDestination = be.getParent();
             this.newIndex = be.getIndex();
             this.changedElement = treeStore.getChild(parentDestination, newIndex);
-            System.out.println("Changed element: " + changedElement.getLabel());
             if (this.changedElement instanceof FolderTreeNode) {
-//                this.visitor.fixPosition(changedElement, parentDestination, newIndex);
-//                this.activeDrop = false;
-//                this.checkerVisitor.realignViewState(changedElement);
                 this.folderDrop = true;
             }
         } else if (activeDrop && LayerEvents.GP_DROP.equals(be.getType())) {
-            System.out.println("IN fix del DND");
-            System.out.println("Changed element: " + changedElement.getLabel());
-            System.out.println("Parent destinazione: " + parentDestination.getLabel());
-            System.out.println("Indice destinazione: " + newIndex);
             visitor.fixPosition(changedElement, parentDestination, newIndex);
             this.activeDrop = false;
             this.folderDrop = false;

@@ -50,4 +50,6 @@ public class LayerEvents {
     public static final EventType GP_DROP = new EventType();
     public static final EventType GP_DRAG_START = new EventType();
     public static final EventType GP_DRAG_LOST = new EventType();
+    public static final EventType GP_ADD_START = new EventType();
+    public static final EventType GP_ADD_ELEMENT = new EventType();
 }

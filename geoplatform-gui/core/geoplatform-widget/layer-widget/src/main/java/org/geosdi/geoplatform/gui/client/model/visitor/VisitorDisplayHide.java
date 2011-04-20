@@ -166,7 +166,6 @@ public class VisitorDisplayHide implements IVisitor {
                 condition = this.isAllParentsChecked((GPBeanTreeModel) element.getParent());
             }
         }
-        System.out.println("Condition: " + condition);
         return condition;
     }
 

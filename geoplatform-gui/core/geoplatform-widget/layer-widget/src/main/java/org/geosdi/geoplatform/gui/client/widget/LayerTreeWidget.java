@@ -61,6 +61,7 @@ import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.client.listener.GPAddListener;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 
 /**
@@ -80,7 +81,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
     public LayerTreeWidget() {
         super();
         this.buildRoot();
-        setTreePanelProperties();
+        this.setTreePanelProperties();
     }
 
     /*
@@ -109,9 +110,10 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
      */
     @Override
     public void setTreePanelProperties() {
-        setTreePresenter();
-        enableDDSupport();
-        enableCheckChange();
+        this.setTreePresenter();
+        this.enableAddElementSupport();
+        this.enableDDSupport();
+        this.enableCheckChange();
     }
 
     /*
@@ -161,7 +163,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
                     @Override
                     public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
-                        System.out.println("Events.CheckChange chiamato da: " + be.getItem().getLabel());
+                        //System.out.println("Events.CheckChange from: " + be.getItem().getLabel());
                         be.getItem().accept(visitorDisplay);
                     }
                 });
@@ -215,5 +217,14 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
         dropTarget.addListener(LayerEvents.GP_DROP, gpDNDListener);
 
         super.store.addListener(Store.Add, gpDNDListener);
+    }
+
+    private void enableAddElementSupport() {
+        GPAddListener gpAddListener = new GPAddListener();
+        //TODO: Inserire codice per listener su:
+        //GP_ADD_ELEMENT e GP_ADD_START es:
+        //azioneAggiungi.addListener(GP_ADD_START, gpAddListener);
+        //azioneAggiungi.addListener(GP_ADD_ELEMENT, gpAddListener);
+        super.store.addListener(Store.Add, gpAddListener);
     }
 }

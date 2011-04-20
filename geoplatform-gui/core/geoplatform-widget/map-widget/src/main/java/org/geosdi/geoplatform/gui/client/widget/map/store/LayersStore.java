@@ -57,7 +57,6 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> {
     private LayerBuilder layerBuilder;
     private DisplayLegendEvent displayLegend = new DisplayLegendEvent();
 
-
     public LayersStore(GeoPlatformMap theMapWidget) {
         super(theMapWidget);
         // TODO Auto-generated constructor stub
@@ -98,15 +97,16 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> {
 
     @Override
     public void displayVector(GPVectorBean vectorBean) {
-        // TODO Auto-generated method stub
         displayLegend.setLayerBean(vectorBean);
         LayerHandlerManager.fireEvent(displayLegend);
-
         if (containsLayer(vectorBean)) {
             WMS layer = (WMS) this.layers.get(vectorBean);
-            layer.setZIndex(vectorBean.getzIndex());
-            layer.setIsVisible(true);
-            layer.redraw();
+            //TODO: Why layer.getzIndex() retuns a Sting???
+            if (!layer.isVisible() || Integer.parseInt(layer.getZIndex()) != vectorBean.getzIndex()) {
+                layer.setZIndex(vectorBean.getzIndex());
+                layer.setIsVisible(true);
+                //layer.redraw();
+            }
         } else {
             WMS layer = (WMS) this.layerBuilder.buildLayer(vectorBean);
             this.layers.put(vectorBean, layer);
@@ -117,15 +117,15 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> {
 
     @Override
     public void displayRaster(GPRasterBean rasterBean) {
-        // TODO Auto-generated method stub
         displayLegend.setLayerBean(rasterBean);
         LayerHandlerManager.fireEvent(displayLegend);
-
         if (containsLayer(rasterBean)) {
             WMS layer = (WMS) this.layers.get(rasterBean);
-            layer.setZIndex(rasterBean.getzIndex());
-            layer.setIsVisible(true);
-            layer.redraw();
+            if (!layer.isVisible() || Integer.parseInt(layer.getZIndex()) != rasterBean.getzIndex()) {
+                layer.setZIndex(rasterBean.getzIndex());
+                layer.setIsVisible(true);
+                //layer.redraw();
+            }
         } else {
             WMS layer = (WMS) this.layerBuilder.buildLayer(rasterBean);
             this.layers.put(rasterBean, layer);

@@ -60,169 +60,171 @@ import com.extjs.gxt.ui.client.mvc.Controller;
  */
 public class MapView extends GeoPlatformView {
 
-	private MapLayoutWidget mapLayout;
-	private GeocodingMarker geocoderMarker;
-	private ReverseGeocodingWidget revGeoWidget;
+    private MapLayoutWidget mapLayout;
+    private GeocodingMarker geocoderMarker;
+    private ReverseGeocodingWidget revGeoWidget;
+    private ButtonBar buttonBar;
 
-	private ButtonBar buttonBar;
+    public MapView(Controller controller) {
+        super(controller);
 
-	public MapView(Controller controller) {
-		super(controller);
+        this.mapLayout = new MapLayoutWidget();
+        this.revGeoWidget = new ReverseGeocodingWidget(this.mapLayout);
+    }
 
-		this.mapLayout = new MapLayoutWidget();
-		this.revGeoWidget = new ReverseGeocodingWidget(this.mapLayout);
-	}
+    @Override
+    public void initialize() {
+        this.geocoderMarker = new GeocodingMarker();
+    }
 
-	public void initialize() {
-		this.geocoderMarker = new GeocodingMarker();
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.extjs.gxt.ui.client.mvc.View#handleEvent(com.extjs.gxt.ui.client.
+     * mvc.AppEvent)
+     */
+    @Override
+    protected void handleEvent(AppEvent event) {
+        if (event.getType() == MapWidgetEvents.INIT_MAP_WIDGET) {
+            onInitMapWidget();
+        }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.mvc.View#handleEvent(com.extjs.gxt.ui.client.
-	 * mvc.AppEvent)
-	 */
-	@Override
-	protected void handleEvent(AppEvent event) {
-		if (event.getType() == MapWidgetEvents.INIT_MAP_WIDGET)
-			onInitMapWidget();
+        if (event.getType() == MapWidgetEvents.ATTACH_MAP_WIDGET) {
+            this.mapLayout.onAddToCenterPanel();
+        }
 
-		if (event.getType() == MapWidgetEvents.ATTACH_MAP_WIDGET)
-			this.mapLayout.onAddToCenterPanel();
+        if (event.getType() == MapWidgetEvents.ATTACH_TOOLBAR) {
+            onAttachToolbar();
+        }
 
-		if (event.getType() == MapWidgetEvents.ATTACH_TOOLBAR)
-			onAttachToolbar();
+        if (event.getType() == GeoPlatformEvents.REGISTER_GEOCODING_LOCATION) {
+            onRegisterGeocodingLocation((IGeoPlatformLocation) event.getData());
+        }
 
-		if (event.getType() == GeoPlatformEvents.REGISTER_GEOCODING_LOCATION)
-			onRegisterGeocodingLocation((IGeoPlatformLocation) event.getData());
+        if (event.getType() == GeoPlatformEvents.RemoveMarker) {
+            onRemoveMarker();
+        }
 
-		if (event.getType() == GeoPlatformEvents.RemoveMarker)
-			onRemoveMarker();
+        if (event.getType() == GeoPlatformEvents.SCALE_REQUEST_CHANGE) {
+            onScaleRequestChange(event);
+        }
 
-		if (event.getType() == GeoPlatformEvents.SCALE_REQUEST_CHANGE)
-			onScaleRequestChange(event);
+    }
 
-	}
+    /**
+     * Change Scale on the map
+     */
+    private void onScaleRequestChange(AppEvent event) {
+        Scale scale = (Scale) event.getData();
+        String scaleString = scale.get("scale");
+        String scaleEffective = scaleString.substring(scaleString.indexOf(":") + 1);
+        Float floatScale = Float.parseFloat(scaleEffective);
+        this.mapLayout.getMap().zoomToScale(floatScale.floatValue(), false);
+    }
 
-	/**
-	 * Change Scale on the map
-	 */
-	private void onScaleRequestChange(AppEvent event) {
-		Scale scale = (Scale) event.getData();
-		String scaleString = scale.get("scale");
-		String scaleEffective = scaleString
-				.substring(scaleString.indexOf(":") + 1);
-		Float floatScale = Float.parseFloat(scaleEffective);
-		this.mapLayout.getMap().zoomToScale(floatScale.floatValue(), false);
-	}
+    /**
+     * Remove Marker from Map
+     */
+    private void onRemoveMarker() {
+        // TODO Auto-generated method stub
+        this.geocoderMarker.removeMarker();
+    }
 
-	/**
-	 * Remove Marker from Map
-	 */
-	private void onRemoveMarker() {
-		// TODO Auto-generated method stub
-		this.geocoderMarker.removeMarker();
-	}
+    /**
+     * Add a Marker on the Map with the coordinate of Location Found
+     *
+     * @param event
+     */
+    private void onRegisterGeocodingLocation(IGeoPlatformLocation bean) {
+        // TODO Auto-generated method stub
+        LonLat center = new LonLat(bean.getLon(), bean.getLat());
+        center.transform("EPSG:4326", "EPSG:900913");
+        this.geocoderMarker.addMarker(center, this.mapLayout.getMap());
+    }
 
-	/**
-	 * Add a Marker on the Map with the coordinate of Location Found
-	 * 
-	 * @param event
-	 */
-	private void onRegisterGeocodingLocation(IGeoPlatformLocation bean) {
-		// TODO Auto-generated method stub
-		LonLat center = new LonLat(bean.getLon(), bean.getLat());
-		center.transform("EPSG:4326", "EPSG:900913");
-		this.geocoderMarker.addMarker(center, this.mapLayout.getMap());
-	}
+    /**
+     * Init Map Widget
+     */
+    private void onInitMapWidget() {
+        // TODO Auto-generated method stub
+        this.addLayer(this.geocoderMarker.getMarkerLayer());
+    }
 
-	/**
-	 * Init Map Widget
-	 */
-	private void onInitMapWidget() {
-		// TODO Auto-generated method stub
-		this.addLayer(this.geocoderMarker.getMarkerLayer());
-	}
+    /**
+     * Activate Draw Control on Map
+     */
+    public void deactivateDrawControl() {
+        // TODO Auto-generated method stub
+        this.mapLayout.deactivateDrawFeature();
+    }
 
-	/**
-	 * Activate Draw Control on Map
-	 */
-	public void deactivateDrawControl() {
-		// TODO Auto-generated method stub
-		this.mapLayout.deactivateDrawFeature();
-	}
+    /**
+     * Deactivate Draw Control on Map
+     */
+    public void activateDrawControl() {
+        // TODO Auto-generated method stub
+        this.mapLayout.activateDrawFeature();
+    }
 
-	/**
-	 * Deactivate Draw Control on Map
-	 */
-	public void activateDrawControl() {
-		// TODO Auto-generated method stub
-		this.mapLayout.activateDrawFeature();
-	}
+    /**
+     * Attach GeoPlatform Toolbar to a LayoutManager
+     *
+     * @param event
+     */
+    private void onAttachToolbar() {
+        mapLayout.setTools(GeoPlatformUtils.getInstance().getGlobalConfiguration().getToolbarClientTool().getClientTools());
 
-	/**
-	 * Attach GeoPlatform Toolbar to a LayoutManager
-	 * 
-	 * @param event
-	 */
-	private void onAttachToolbar() {
-		mapLayout.setTools(GeoPlatformUtils.getInstance()
-				.getGlobalConfiguration().getToolbarClientTool()
-				.getClientTools());
+        this.buttonBar = new ButtonBar(mapLayout);
 
-		this.buttonBar = new ButtonBar(mapLayout);
+        LayoutManager.addComponentToNorth(buttonBar.getToolBar());
+    }
 
-		LayoutManager.addComponentToNorth(buttonBar.getToolBar());
-	}
+    /**
+     * Erase single Feature in MapLayout Vector Layer
+     *
+     * @param event
+     */
+    public void eraseFeature(VectorFeature vf) {
+        this.mapLayout.eraseFeature(vf);
+    }
 
-	/**
-	 * Erase single Feature in MapLayout Vector Layer
-	 * 
-	 * @param event
-	 */
-	public void eraseFeature(VectorFeature vf) {
-		this.mapLayout.eraseFeature(vf);
-	}
+    /**
+     * Update Map Size
+     */
+    public void updateMapSize() {
+        this.mapLayout.updateMapSize();
+    }
 
-	/**
-	 * Update Map Size
-	 */
-	public void updateMapSize() {
-		this.mapLayout.updateMapSize();
-	}
+    /**
+     * Add Layer to the Map
+     *
+     * @param layer
+     */
+    public void addLayer(Layer layer) {
+        this.mapLayout.getMap().addLayer(layer);
+    }
 
-	/**
-	 * Add Layer to the Map
-	 * 
-	 * @param layer
-	 */
-	public void addLayer(Layer layer) {
-		this.mapLayout.getMap().addLayer(layer);
-	}
+    /**
+     * Redraw Vector Layer
+     */
+    public void redrawVectorLayer() {
+        this.mapLayout.redrawVectorLayer();
+    }
 
-	/**
-	 * Redraw Vector Layer
-	 */
-	public void redrawVectorLayer() {
-		this.mapLayout.redrawVectorLayer();
-	}
+    /**
+     * Draw Feature on the Map
+     *
+     * @param feature
+     */
+    public void drawFeature(VectorFeature feature) {
+        this.mapLayout.drawFeature(feature);
+    }
 
-	/**
-	 * Draw Feature on the Map
-	 * 
-	 * @param feature
-	 */
-	public void drawFeature(VectorFeature feature) {
-		this.mapLayout.drawFeature(feature);
-	}
-
-	/**
-	 * @return the revGeoWidget
-	 */
-	public ReverseGeocodingWidget getRevGeoWidget() {
-		return revGeoWidget;
-	}
-
+    /**
+     * @return the revGeoWidget
+     */
+    public ReverseGeocodingWidget getRevGeoWidget() {
+        return revGeoWidget;
+    }
 }

@@ -38,30 +38,18 @@ package org.geosdi.geoplatform;
 import java.text.ParseException;
 
 import junit.framework.Assert;
-import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
 
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.ShortServer;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
  * 
  */
 //@TestExecutionListeners(value = {WSListenerServices.class})
-public class WMSServiceTest extends ServiceTest {
-
-    @Autowired
-    private GeoPlatformWSClient gpWSClient;
-
-    @Before
-    public void setUpWSClient() {
-        geoPlatformService = gpWSClient.create();
-    }
+public class CXFServiceTest extends ServiceTest  { 
 
     @Test
     public void testGetCapabilities() throws ParseException,
@@ -74,7 +62,10 @@ public class WMSServiceTest extends ServiceTest {
         logger.info("NUMBER OF LAYERS FOR DPC ********** "
                 + geoPlatformService.getCapabilities(new RequestById(shortServer.getId())).getList().size());
 
+    }
 
+    @Test
+    public void testServer1() throws ResourceNotFoundFault {
         ShortServer shortServer1 = geoPlatformService.getServer("http://maps.telespazio.it/dpc/dpc-wms");
 
         Assert.assertNotNull(shortServer1);
@@ -86,12 +77,5 @@ public class WMSServiceTest extends ServiceTest {
         logger.info("NUMBER OF LAYERS FOR TELESPAZIO ********** "
                 + geoPlatformService.getCapabilities(new RequestById(shortServer1.getId())).getList().size());
 
-    }
-
-    @After
-    public void stopServer() throws Exception {
-        if (gpJettyServer != null) {
-            gpJettyServer.stop();
-        }
     }
 }

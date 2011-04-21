@@ -45,23 +45,28 @@ import com.google.gwt.user.client.ui.ImageBundle;
  */
 @SuppressWarnings("deprecation")
 public interface LayerIcons extends ImageBundle {
-	
-	@Resource("layer_folder.png")
-	AbstractImagePrototype layerFolder();
-	
-	@Resource("line.png")
-	AbstractImagePrototype line();
-	
-	@Resource("point.png")
-	AbstractImagePrototype point();
-	
-	@Resource("raster.png")
-	AbstractImagePrototype raster();
-	
-	@Resource("shape.png")
-	AbstractImagePrototype shape();
-	
-	@Resource("gp.png")
-	AbstractImagePrototype geoPlatform();
 
+    @Resource("layer_folder.png")
+    AbstractImagePrototype layerFolder();
+
+    @Resource("line.png")
+    AbstractImagePrototype line();
+
+    @Resource("point.png")
+    AbstractImagePrototype point();
+
+    @Resource("raster.png")
+    AbstractImagePrototype raster();
+
+    @Resource("shape.png")
+    AbstractImagePrototype shape();
+
+    @Resource("gp.png")
+    AbstractImagePrototype geoPlatform();
+
+    @Resource("addFolder.png")
+    AbstractImagePrototype addFolder();
+
+    @Resource("deleteFolder.png")
+    AbstractImagePrototype deleteFolder();
 }

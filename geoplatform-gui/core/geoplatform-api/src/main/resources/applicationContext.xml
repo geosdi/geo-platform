@@ -7,33 +7,33 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 	default-autowire="byName">
 
-	<context:annotation-config />
+    <context:annotation-config />
 
-	<bean name="geoPlatformInfo" class="org.geosdi.geoplatform.gui.global.GeoPlatformInfo">
-		<property name="version">
-			<bean name="geoPlatformVersionInfo"
+    <bean name="geoPlatformInfo" class="org.geosdi.geoplatform.gui.global.GeoPlatformInfo">
+        <property name="version">
+            <bean name="geoPlatformVersionInfo"
 				class="org.geosdi.geoplatform.gui.global.GeoPlatformVersionInfo">
-				<property name="name" value="${name}" />
-				<property name="version" value="${version}" />
-			</bean>
-		</property>
-		<property name="copyrightInfo">
-			<list>
-				<bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
-					<property name="key" value="${keyGeosdi}" />
-					<property name="copyright" value="${copyrightGeosdi}" />
-					<property name="licenseName" value="${licenseNameGeosdi}" />
-					<property name="licenseUrl" value="${licenseUrlGeosdi}" />
-				</bean>
-				<bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
-					<property name="key" value="${keyGWT}" />
-					<property name="copyright" value="" />
-					<property name="licenseName" value="${licenseNameGWT}" />
-					<property name="licenseUrl" value="${licenseUrlGWT}" />
-				</bean>
-			</list>
-		</property>
-	</bean>
+                <property name="name" value="${name}" />
+                <property name="version" value="${version}" />
+            </bean>
+        </property>
+        <property name="copyrightInfo">
+            <list>
+                <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
+                    <property name="key" value="${keyGeosdi}" />
+                    <property name="copyright" value="${copyrightGeosdi}" />
+                    <property name="licenseName" value="${licenseNameGeosdi}" />
+                    <property name="licenseUrl" value="${licenseUrlGeosdi}" />
+                </bean>
+                <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
+                    <property name="key" value="${keyGWT}" />
+                    <property name="copyright" value="" />
+                    <property name="licenseName" value="${licenseNameGWT}" />
+                    <property name="licenseUrl" value="${licenseUrlGWT}" />
+                </bean>
+            </list>
+        </property>
+    </bean>
 
 
 </beans>

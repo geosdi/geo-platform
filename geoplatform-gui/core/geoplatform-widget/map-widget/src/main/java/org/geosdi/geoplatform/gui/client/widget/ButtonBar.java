@@ -67,188 +67,190 @@ import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
  */
 public class ButtonBar extends LayoutContainer implements GeoPlatformButtonBar {
 
-	public static final String TOOLBAR_SEPARATOR = "ToolbarSeparator";
+    public static final String TOOLBAR_SEPARATOR = "ToolbarSeparator";
+    private VerticalPanel vp;
+    private ToolBar toolBar;
+    private MapLayoutWidget mapLayoutWidget;
+    private GeoPlatformButtonObserver buttonObserver;
 
-	private VerticalPanel vp;
-	private ToolBar toolBar;
-	private MapLayoutWidget mapLayoutWidget;
+    /**
+     * Constructor
+     *
+     * @param mapLayoutWidget
+     */
+    public ButtonBar(MapLayoutWidget mapLayoutWidget) {
+        super();
+        this.vp = new VerticalPanel();
+        this.toolBar = new ToolBar();
+        this.mapLayoutWidget = mapLayoutWidget;
+        this.mapLayoutWidget.setButtonBar(this);
+        this.buttonObserver = new GeoPlatformButtonObserver();
+        initialize();
+    }
 
-	private GeoPlatformButtonObserver buttonObserver;
+    /**
+     * Widget initialize
+     */
+    private void initialize() {
+        List<GenericClientTool> tools = this.mapLayoutWidget.getTools();
+        for (GenericClientTool tool : tools) {
+            String id = tool.getId();
+            if (id.equals(TOOLBAR_SEPARATOR)) {
+                addSeparator();
+            } else if (tool instanceof MenuClientTool) {
+                addMenuButton((MenuClientTool) tool,
+                        (ToolbarApplicationAction) ToolbarActionRegistar.get(
+                        id, mapLayoutWidget));
+            } else {
+                GeoPlatformToolbarAction action = ToolbarActionRegistar.get(id,
+                        mapLayoutWidget);
 
-	/**
-	 * Constructor
-	 * 
-	 * @param mapLayoutWidget
-	 */
-	public ButtonBar(MapLayoutWidget mapLayoutWidget) {
-		super();
-		this.vp = new VerticalPanel();
-		this.toolBar = new ToolBar();
-		this.mapLayoutWidget = mapLayoutWidget;
-		this.mapLayoutWidget.setButtonBar(this);
-		this.buttonObserver = new GeoPlatformButtonObserver();
-		initialize();
-	}
+                action.setEnabled(((ActionClientTool) tool).isEnabled());
+                action.setId(id);
 
-	/**
-	 * Widget initialize
-	 */
-	private void initialize() {
-		List<GenericClientTool> tools = this.mapLayoutWidget.getTools();
-		for (GenericClientTool tool : tools) {
-			String id = tool.getId();
-			if (id.equals(TOOLBAR_SEPARATOR)) {
-				addSeparator();
-			} else if (tool instanceof MenuClientTool) {
-				addMenuButton((MenuClientTool) tool,
-						(ToolbarApplicationAction) ToolbarActionRegistar.get(
-								id, mapLayoutWidget));
-			} else {
-				GeoPlatformToolbarAction action = ToolbarActionRegistar.get(id,
-						mapLayoutWidget);
+                if (action instanceof ToolbarApplicationAction) {
+                    addApplicationButton((ToolbarApplicationAction) action);
+                }
 
-				action.setEnabled(((ActionClientTool) tool).isEnabled());
-				action.setId(id);
+                if (action instanceof ToolbarMapAction) {
+                    if (((ActionClientTool) tool).getType().equals("toggle")) {
+                        addMapToggleButton((ToolbarMapAction) action);
+                    } else {
+                        addMapButton((ToolbarMapAction) action);
+                    }
+                }
+            }
+        }
+        vp.add(toolBar);
+        add(vp);
+    }
 
-				if (action instanceof ToolbarApplicationAction)
-					addApplicationButton((ToolbarApplicationAction) action);
+    /**
+     * Create a Button with a Menu
+     *
+     * @param tool
+     */
+    public void addMenuButton(MenuClientTool tool,
+            ToolbarApplicationAction action) {
+        Button button = new Button();
+        button.setId(tool.getId());
+        button.setText(action.getButtonName());
+        button.setIcon(action.getImage());
+        button.setEnabled(tool.isEnabled());
 
-				if (action instanceof ToolbarMapAction) {
-					if (((ActionClientTool) tool).getType().equals("toggle")) {
-						addMapToggleButton((ToolbarMapAction) action);
-					} else {
-						addMapButton((ToolbarMapAction) action);
-					}
-				}
-			}
-		}
-		vp.add(toolBar);
-		add(vp);
-	}
+        button.setMenu(createMenu(tool.getActionTools()));
 
-	/**
-	 * Create a Button with a Menu
-	 * 
-	 * @param tool
-	 */
-	public void addMenuButton(MenuClientTool tool,
-			ToolbarApplicationAction action) {
-		Button button = new Button();
-		button.setId(tool.getId());
-		button.setText(action.getButtonName());
-		button.setIcon(action.getImage());
-		button.setEnabled(tool.isEnabled());
+        toolBar.add(button);
+    }
 
-		button.setMenu(createMenu(tool.getActionTools()));
+    /**
+     *
+     * @param actionTools
+     * @return Menu
+     */
+    private Menu createMenu(List<ActionClientTool> actionTools) {
+        Menu menu = new Menu();
+        for (ActionClientTool actionTool : actionTools) {
+            MenuBaseAction action = (MenuBaseAction) MenuActionRegistar.get(actionTool.getId());
+            MenuItem item = new MenuItem(action.getTitle());
+            item.addSelectionListener(action);
+            item.setIcon(action.getImage());
+            menu.add(item);
+        }
+        return menu;
+    }
 
-		toolBar.add(button);
-	}
+    /**
+     * Add a Vertical Line in the Toolbar
+     */
+    public void addSeparator() {
+        this.toolBar.add(new SeparatorToolItem());
+    }
 
-	/**
-	 * 
-	 * @param actionTools
-	 * @return Menu
-	 */
-	private Menu createMenu(List<ActionClientTool> actionTools) {
-		Menu menu = new Menu();
-		for (ActionClientTool actionTool : actionTools) {
-			MenuBaseAction action = (MenuBaseAction) MenuActionRegistar
-					.get(actionTool.getId());
-			MenuItem item = new MenuItem(action.getTitle());
-			item.addSelectionListener(action);
-			item.setIcon(action.getImage());
-			menu.add(item);
-		}
-		return menu;
-	}
+    /**
+     * Add a new Map Button to the Toolbar. A Map Button is a kind of button
+     * that interacts with the map.
+     *
+     * @param action
+     */
+    public void addMapButton(ToolbarMapAction action) {
+        GeoPlatformButton button = new GeoPlatformButton();
+        button.setAction(action);
+        button.setId(action.getId());
+        button.setToolTip(action.getTooltip());
+        button.setIcon(action.getImage());
+        button.addSelectionListener(action);
+        button.setEnabled(action.isEnabled());
+        this.toolBar.add(button);
+    }
 
-	/**
-	 * Add a Vertical Line in the Toolbar
-	 */
-	public void addSeparator() {
-		this.toolBar.add(new SeparatorToolItem());
-	}
+    /**
+     * Add a new Application Button to the Toolbar. An Application Button is a
+     * kind of button that configure a particular action for the Application.
+     *
+     * @param action
+     */
+    public void addApplicationButton(ToolbarApplicationAction action) {
+        Button button = new Button();
+        button.setId(action.getId());
+        button.setText(action.getButtonName());
+        button.setIcon(action.getImage());
+        button.addSelectionListener(action);
+        button.setEnabled(action.isEnabled());
+        this.toolBar.add(button);
+    }
 
-	/**
-	 * Add a new Map Button to the Toolbar. A Map Button is a kind of button
-	 * that interacts with the map.
-	 * 
-	 * @param action
-	 */
-	public void addMapButton(ToolbarMapAction action) {
-		GeoPlatformButton button = new GeoPlatformButton();
-		button.setAction(action);
-		button.setId(action.getId());
-		button.setToolTip(action.getTooltip());
-		button.setIcon(action.getImage());
-		button.addSelectionListener(action);
-		button.setEnabled(action.isEnabled());
-		this.toolBar.add(button);
-	}
+    /**
+     * Add a new Map ToggleButton to the Toolbar. A Map ToggleButton is a kind
+     * of button that interacts with the map.
+     *
+     * @param action
+     */
+    public void addMapToggleButton(ToolbarMapAction action) {
+        GeoPlatformToggleButton button = new GeoPlatformToggleButton();
+        button.setAction(action);
+        button.setId(action.getId());
+        button.setToolTip(action.getTooltip());
+        button.setIcon(action.getImage());
+        button.addSelectionListener(action);
+        button.setEnabled(action.isEnabled());
 
-	/**
-	 * Add a new Application Button to the Toolbar. An Application Button is a
-	 * kind of button that configure a particular action for the Application.
-	 * 
-	 * @param action
-	 */
-	public void addApplicationButton(ToolbarApplicationAction action) {
-		Button button = new Button();
-		button.setId(action.getId());
-		button.setText(action.getButtonName());
-		button.setIcon(action.getImage());
-		button.addSelectionListener(action);
-		button.setEnabled(action.isEnabled());
-		this.toolBar.add(button);
-	}
+        this.toolBar.add(button);
+    }
 
-	/**
-	 * Add a new Map ToggleButton to the Toolbar. A Map ToggleButton is a kind
-	 * of button that interacts with the map.
-	 * 
-	 * @param action
-	 */
-	public void addMapToggleButton(ToolbarMapAction action) {
-		GeoPlatformToggleButton button = new GeoPlatformToggleButton();
-		button.setAction(action);
-		button.setId(action.getId());
-		button.setToolTip(action.getTooltip());
-		button.setIcon(action.getImage());
-		button.addSelectionListener(action);
-		button.setEnabled(action.isEnabled());
+    /**
+     * @return the toolBar
+     */
+    public ToolBar getToolBar() {
+        return toolBar;
+    }
 
-		this.toolBar.add(button);
-	}
+    /**
+     * Checks for a Toggle Button pressed
+     *
+     * @return boolean
+     */
+    @Override
+    public boolean isTogglePressed() {
+        return this.buttonObserver.isButtonPressed();
+    }
 
-	/**
-	 * @return the toolBar
-	 */
-	public ToolBar getToolBar() {
-		return toolBar;
-	}
+    /**
+     *
+     * @param button
+     */
+    @Override
+    public void setPressedButton(ToggleButton button) {
+        this.buttonObserver.setButtonPressed(button);
+    }
 
-	/**
-	 * Checks for a Toggle Button pressed
-	 * 
-	 * @return boolean
-	 */
-	public boolean isTogglePressed() {
-		return this.buttonObserver.isButtonPressed();
-	}
+    @Override
+    public Button getPressedButton() {
+        return this.buttonObserver.getButtonPressed();
+    }
 
-	/**
-	 * 
-	 * @param button
-	 */
-	public void setPressedButton(ToggleButton button) {
-		this.buttonObserver.setButtonPressed(button);
-	}
-
-	public Button getPressedButton() {
-		return this.buttonObserver.getButtonPressed();
-	}
-
-	public void changeButtonState() {
-		this.buttonObserver.changeButtonState();
-	}
+    @Override
+    public void changeButtonState() {
+        this.buttonObserver.changeButtonState();
+    }
 }

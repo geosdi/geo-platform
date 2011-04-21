@@ -51,18 +51,18 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("GeoPlatformOGCRemote")
 public interface GeoPlatformOGCRemote extends RemoteService {
 
-	public static class Util {
-		private static GeoPlatformOGCRemoteAsync instance;
+    public static class Util {
 
-		public static GeoPlatformOGCRemoteAsync getInstance() {
-			if (instance == null)
-				instance = (GeoPlatformOGCRemoteAsync) GWT
-						.create(GeoPlatformOGCRemote.class);
+        private static GeoPlatformOGCRemoteAsync instance;
 
-			return instance;
-		}
-	}
-	
-	public List<GPFolderClientInfo> getFolders();
+        public static GeoPlatformOGCRemoteAsync getInstance() {
+            if (instance == null) {
+                instance = (GeoPlatformOGCRemoteAsync) GWT.create(GeoPlatformOGCRemote.class);
+            }
 
+            return instance;
+        }
+    }
+
+    public List<GPFolderClientInfo> getFolders();
 }

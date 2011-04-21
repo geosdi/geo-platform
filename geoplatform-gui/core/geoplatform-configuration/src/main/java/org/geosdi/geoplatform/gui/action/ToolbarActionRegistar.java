@@ -44,31 +44,30 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
  */
 public class ToolbarActionRegistar extends GeoPlatformActionRegistar {
 
-	/**
-	 * 
-	 * @param key
-	 * @param toolActionCreator
-	 */
-	public static void put(String key, ToolbarActionCreator toolActionCreator) {
-		if (key != null && toolActionCreator != null)
-			createFactory().getRegistry().put(key, toolActionCreator);
-	}
+    /**
+     *
+     * @param key
+     * @param toolActionCreator
+     */
+    public static void put(String key, ToolbarActionCreator toolActionCreator) {
+        if (key != null && toolActionCreator != null) {
+            createFactory().getRegistry().put(key, toolActionCreator);
+        }
+    }
 
-	/**
-	 * Return the Toolbar Action
-	 * 
-	 * @param key
-	 *            key with the action is registered
-	 * @param mapWidget
-	 *            map which will contains the toolAction
-	 * @return null or the toolAction registered
-	 */
-	public static GeoPlatformToolbarAction get(String key,
-			GeoPlatformMap mapWidget) {
-		ToolbarActionCreator toolActionCreator = (ToolbarActionCreator) createFactory()
-				.getRegistry().get(key);
-		
-		return toolActionCreator == null ? null : toolActionCreator
-				.createActionTool(mapWidget);
-	}
+    /**
+     * Return the Toolbar Action
+     *
+     * @param key
+     *            key with the action is registered
+     * @param mapWidget
+     *            map which will contains the toolAction
+     * @return null or the toolAction registered
+     */
+    public static GeoPlatformToolbarAction get(String key,
+            GeoPlatformMap mapWidget) {
+        ToolbarActionCreator toolActionCreator = (ToolbarActionCreator) createFactory().getRegistry().get(key);
+
+        return toolActionCreator == null ? null : toolActionCreator.createActionTool(mapWidget);
+    }
 }

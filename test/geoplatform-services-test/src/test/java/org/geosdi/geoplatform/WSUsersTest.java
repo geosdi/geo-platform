@@ -33,44 +33,33 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
+
+
 package org.geosdi.geoplatform;
 
-import org.mortbay.jetty.Server;
-import org.springframework.test.context.TestContext;
-import org.springframework.test.context.TestExecutionListener;
+import java.util.Iterator;
+
+import org.geosdi.geoplatform.responce.ShortUser;
+import org.geosdi.geoplatform.responce.UserList;
+import org.junit.Test;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class WSListenerServices implements TestExecutionListener {
+public class WSUsersTest extends CXFServiceTest{
 
-    private Server gpJettyServer;
+    @Test
+    public void testUsers() {
+        UserList userList = geoPlatformService.getUsers();
 
-    @Override
-    public void beforeTestClass(TestContext testContext) throws Exception {
-        this.gpJettyServer = (Server) testContext.getApplicationContext().getBean("gpJettyServer");
+        if (userList != null) {
+            for (Iterator<ShortUser> it = userList.getList().iterator(); it.hasNext();) {
+                logger.info("USER ********************* " + it.next());
 
-        gpJettyServer.start();
-    }
-
-    @Override
-    public void prepareTestInstance(TestContext testContext) throws Exception {
-    }
-
-    @Override
-    public void beforeTestMethod(TestContext testContext) throws Exception {
-    }
-
-    @Override
-    public void afterTestMethod(TestContext testContext) throws Exception {
-    }
-
-    @Override
-    public void afterTestClass(TestContext testContext) throws Exception {
-        if (gpJettyServer != null) {
-            gpJettyServer.stop();
+            }
         }
     }
+
 }

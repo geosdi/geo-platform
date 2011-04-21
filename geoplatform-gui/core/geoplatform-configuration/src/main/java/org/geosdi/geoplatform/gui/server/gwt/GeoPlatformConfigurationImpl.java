@@ -55,51 +55,53 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * @author giuseppe
  * 
  */
-@WebServlet(name = "GeoPlatformConfiguration", urlPatterns = { "/geoportal/GeoPlatformConfiguration" }, loadOnStartup = 1)
+@WebServlet(name = "GeoPlatformConfiguration", urlPatterns = {"/geoportal/GeoPlatformConfiguration"}, loadOnStartup = 1)
 public class GeoPlatformConfigurationImpl extends RemoteServiceServlet
-		implements GeoPlatformConfiguration {
+        implements GeoPlatformConfiguration {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4416552134318747534L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 4416552134318747534L;
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    
+    private IStartupService startupService;
 
-	private IStartupService startupService;
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
 
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
+        ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 
-		ApplicationContext context = WebApplicationContextUtils
-				.getWebApplicationContext(getServletContext());
+        GeoPlatformContextUtil.getInstance().setSpringContext(context);
 
-		GeoPlatformContextUtil.getInstance().setSpringContext(context);
+        this.injectValues();
+    }
 
-		this.injectValues();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.service.GeoPlatformConfiguration#
+     * initGeoPlatformConfiguration()
+     */
+    @Override
+    public IGeoPlatformGlobal initGeoPlatformConfiguration() {
+        // TODO Auto-generated method stub
+        return startupService.initGeoPlatformConfiguration();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.service.GeoPlatformConfiguration#
-	 * initGeoPlatformConfiguration()
-	 */
-	@Override
-	public IGeoPlatformGlobal initGeoPlatformConfiguration() {
-		// TODO Auto-generated method stub
-		return startupService.initGeoPlatformConfiguration();
-	}
+    /**
+     * Init Spring Context
+     */
+    private void injectValues() {
+        this.startupService = (IStartupService) GeoPlatformContextUtil.getInstance().getBean(StartupService.class);
 
-	/**
-	 * Init Spring Context
-	 */
-	private void injectValues() {
-		this.startupService = (IStartupService) GeoPlatformContextUtil
-				.getInstance().getBean(StartupService.class);
+        logger.info("################################################################");
+        logger.info("################################################################");
+        logger.info("################ GeoPlatform Context Initialized ###############");
+        logger.info("################################################################");
+        logger.info("################################################################");
 
-		logger.info("SPRING CONTEXT INITIALIZED" + this.startupService);
-	}
-
+    }
 }

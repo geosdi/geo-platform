@@ -48,20 +48,19 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * 
  */
 public class GeoPlatformOGCRemoteImpl extends RemoteServiceServlet implements
-		GeoPlatformOGCRemote {
+        GeoPlatformOGCRemote {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7340579377487014548L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 7340579377487014548L;
 
-	/* (non-Javadoc)
-	 * @see org.geosdi.geoplatform.gui.service.GeoPlatformOGCRemote#getFolders()
-	 */
-	@Override
-	public List<GPFolderClientInfo> getFolders() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+    /* (non-Javadoc)
+     * @see org.geosdi.geoplatform.gui.service.GeoPlatformOGCRemote#getFolders()
+     */
+    @Override
+    public List<GPFolderClientInfo> getFolders() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

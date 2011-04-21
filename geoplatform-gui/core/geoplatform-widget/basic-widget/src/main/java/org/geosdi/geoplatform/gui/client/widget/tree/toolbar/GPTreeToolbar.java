@@ -33,44 +33,27 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform;
+package org.geosdi.geoplatform.gui.client.widget.tree.toolbar;
 
-import org.mortbay.jetty.Server;
-import org.springframework.test.context.TestContext;
-import org.springframework.test.context.TestExecutionListener;
+import com.extjs.gxt.ui.client.widget.VerticalPanel;
+import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class WSListenerServices implements TestExecutionListener {
+public abstract class GPTreeToolbar {
 
-    private Server gpJettyServer;
+    public static final String TOOLBAR_SEPARATOR = "ToolbarSeparator";
+    private VerticalPanel vp;
+    private ToolBar toolBar;
+    private TreePanel tree;
 
-    @Override
-    public void beforeTestClass(TestContext testContext) throws Exception {
-        this.gpJettyServer = (Server) testContext.getApplicationContext().getBean("gpJettyServer");
-
-        gpJettyServer.start();
-    }
-
-    @Override
-    public void prepareTestInstance(TestContext testContext) throws Exception {
-    }
-
-    @Override
-    public void beforeTestMethod(TestContext testContext) throws Exception {
-    }
-
-    @Override
-    public void afterTestMethod(TestContext testContext) throws Exception {
-    }
-
-    @Override
-    public void afterTestClass(TestContext testContext) throws Exception {
-        if (gpJettyServer != null) {
-            gpJettyServer.stop();
-        }
+    public GPTreeToolbar(TreePanel theTree) {
+        this.tree = theTree;
+        this.vp = new VerticalPanel();
+        this.toolBar = new ToolBar();
     }
 }

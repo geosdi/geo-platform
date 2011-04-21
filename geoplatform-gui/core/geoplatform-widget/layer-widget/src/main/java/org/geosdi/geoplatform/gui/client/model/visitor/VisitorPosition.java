@@ -102,7 +102,7 @@ public class VisitorPosition extends AbstractVisitTree
         if (parentDestination.getChild(newIndex) != null) {
             newZIndex = ((GPBeanTreeModel) parentDestination.getChild(newIndex)).getzIndex();
         } else if (newIndex > 0) {
-            newZIndex = ((GPBeanTreeModel) parentDestination.getChild(newIndex-1)).getzIndex() + 1;
+            newZIndex = ((GPBeanTreeModel) parentDestination.getChild(newIndex - 1)).getzIndex() + 1;
         } else {
             newZIndex = parentDestination.getzIndex();
         }

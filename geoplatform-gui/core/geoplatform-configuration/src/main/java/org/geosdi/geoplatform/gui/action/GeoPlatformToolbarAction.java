@@ -45,57 +45,56 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  */
 public abstract class GeoPlatformToolbarAction extends SelectionListener<ButtonEvent> {
 
-	private AbstractImagePrototype image;
-	private String id;
-	private boolean enabled;
+    private AbstractImagePrototype image;
+    private String id;
+    private boolean enabled;
 
-	public GeoPlatformToolbarAction(AbstractImagePrototype image) {
-		this.image = image;
-	}
+    public GeoPlatformToolbarAction(AbstractImagePrototype image) {
+        this.image = image;
+    }
 
-	/**
-	 * @return the image
-	 */
-	public AbstractImagePrototype getImage() {
-		return image;
-	}
+    /**
+     * @return the image
+     */
+    public AbstractImagePrototype getImage() {
+        return image;
+    }
 
-	/**
-	 * @param image
-	 *            the image to set
-	 */
-	public void setImage(AbstractImagePrototype image) {
-		this.image = image;
-	}
+    /**
+     * @param image
+     *            the image to set
+     */
+    public void setImage(AbstractImagePrototype image) {
+        this.image = image;
+    }
 
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	/**
-	 * @return the enabled
-	 */
-	public boolean isEnabled() {
-		return enabled;
-	}
+    /**
+     * @return the enabled
+     */
+    public boolean isEnabled() {
+        return enabled;
+    }
 
-	/**
-	 * @param enabled
-	 *            the enabled to set
-	 */
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
+    /**
+     * @param enabled
+     *            the enabled to set
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 }

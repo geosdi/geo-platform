@@ -45,41 +45,39 @@ import com.extjs.gxt.ui.client.widget.button.Button;
  */
 public class GeoPlatformButtonObserver {
 
-	private Button buttonPressed;
+    private Button buttonPressed;
 
-	/**
-	 * @return the buttonPressed
-	 */
-	public Button getButtonPressed() {
-		return buttonPressed;
-	}
+    /**
+     * @return the buttonPressed
+     */
+    public Button getButtonPressed() {
+        return buttonPressed;
+    }
 
-	/**
-	 * @param buttonPressed
-	 *            the buttonPressed to set
-	 */
-	public void setButtonPressed(Button buttonPressed) {
-		this.buttonPressed = buttonPressed;
-	}
+    /**
+     * @param buttonPressed
+     *            the buttonPressed to set
+     */
+    public void setButtonPressed(Button buttonPressed) {
+        this.buttonPressed = buttonPressed;
+    }
 
-	/**
-	 * This method permit to understand if a Button is already Pressed
-	 * 
-	 * @return
-	 */
-	public boolean isButtonPressed() {
-		return this.buttonPressed != null;
-	}
+    /**
+     * This method permit to understand if a Button is already Pressed
+     *
+     * @return
+     */
+    public boolean isButtonPressed() {
+        return this.buttonPressed != null;
+    }
 
-	public void changeButtonState() {
-		if (this.buttonPressed instanceof GeoPlatformToggleButton) {
-			((GeoPlatformToggleButton) buttonPressed).disableControl();
-		}
-	}
+    public void changeButtonState() {
+        if (this.buttonPressed instanceof GeoPlatformToggleButton) {
+            ((GeoPlatformToggleButton) buttonPressed).disableControl();
+        }
+    }
 
-	public boolean isSameButton(String buttonId) {
-		return this.buttonPressed != null ? this.buttonPressed.getId()
-				.equalsIgnoreCase(buttonId) : false;
-	}
-
+    public boolean isSameButton(String buttonId) {
+        return this.buttonPressed != null ? this.buttonPressed.getId().equalsIgnoreCase(buttonId) : false;
+    }
 }

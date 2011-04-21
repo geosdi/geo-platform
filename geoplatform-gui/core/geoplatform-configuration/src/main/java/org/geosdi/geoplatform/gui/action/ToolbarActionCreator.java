@@ -44,6 +44,5 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
  */
 public interface ToolbarActionCreator extends GeoPlatformActionCreator {
 
-	public GeoPlatformToolbarAction createActionTool(GeoPlatformMap map);
-
+    public GeoPlatformToolbarAction createActionTool(GeoPlatformMap map);
 }

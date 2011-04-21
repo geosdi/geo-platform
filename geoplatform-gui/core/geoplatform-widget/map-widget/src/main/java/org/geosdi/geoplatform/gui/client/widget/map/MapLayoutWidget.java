@@ -83,446 +83,436 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
  */
 public class MapLayoutWidget implements GeoPlatformMap {
 
-	private MapWidget mapWidget;
-	private MapOptions defaultMapOptions;
-	private MapControlManager mapControl;
-	private Map map;
-	private Layer layer;
-	private Layer osm;
-	private GPRoutingManagerWidget routingWidget;
-
-	private WMSGetFeatureInfo info;
-
-	private MapModel mapModel;
-
-	private ButtonBar buttonBar;
-
-	private List<GenericClientTool> tools;
-
-	private Measure measure;
-	private Measure measureArea;
-
-	private boolean infoActive;
-	private boolean measureActive;
-	private boolean measureAreaActive;
-
-	public MapLayoutWidget() {
-		super();
-		this.createMapOption();
-		this.mapModel = new MapModel(this);
-		this.routingWidget = new GPRoutingManagerWidget(this);
-		this.mapModel.addLayerChangedHandler();
-	}
-
-	private void createMapOption() {
-
-		this.defaultMapOptions = new MapOptions();
-
-		this.defaultMapOptions.setNumZoomLevels(18);
-
-		this.defaultMapOptions.setProjection("EPSG:900913");
-		this.defaultMapOptions
-				.setDisplayProjection(new Projection("EPSG:4326"));
-		this.defaultMapOptions.setUnits(MapUnits.METERS);
-		this.defaultMapOptions.setMaxExtent(new Bounds(-20037508, -20037508,
-				20037508, 20037508.34));
-		this.defaultMapOptions.setMaxResolution(new Double(156543.0339)
-				.floatValue());
-
-		initMapWidget(this.defaultMapOptions);
-	}
-
-	private void initMapWidget(MapOptions defaultMapOptions) {
-		mapWidget = new MapWidget("100%", "100%", defaultMapOptions);
-		this.map = mapWidget.getMap();
-		this.map.addControl(new LayerSwitcher());
-		this.map.addControl(new ScaleLine());
-		this.addFeatureInfoControl();
-		this.addMeasureControl();
-		this.addMeasureAreaControl();
-
-		this.createOSM();
-		this.createBaseGoogleLayer();
-
-		this.mapControl = new MapControlManager(this.map);
-	}
-
-	public void addMeasureControl() {
-
-		MeasureOptions measOpts = new MeasureOptions();
-		measOpts.setPersist(true);
-		measOpts.setGeodesic(true);
-
-		this.measure = new Measure(new PathHandler(), measOpts);
-
-		this.map.addControl(measure);
-
-		this.measure.addMeasureListener(new MeasureListener() {
-
-			public void onMeasure(MeasureEvent eventObject) {
-				Info.display("Distance is: ", eventObject.getMeasure() + " "
-						+ eventObject.getUnits());
-			}
-		});
-
-	}
-
-	public void addMeasureAreaControl() {
-
-		MeasureOptions measOpts = new MeasureOptions();
-		measOpts.setPersist(true);
-		measOpts.setGeodesic(true);
-
-		this.measureArea = new Measure(new PolygonHandler(), measOpts);
-
-		this.map.addControl(measureArea);
-
-		this.measureArea.addMeasureListener(new MeasureListener() {
-
-			public void onMeasure(MeasureEvent eventObject) {
-				Info.display("Area is: ", eventObject.getMeasure() + " "
-						+ eventObject.getUnits());
-			}
-		});
-
-	}
-
-	private WMSGetFeatureInfo addFeatureInfoControl() {
-
-		WMSGetFeatureInfoOptions options = new WMSGetFeatureInfoOptions();
-		options.setURL("http://dpc.geosdi.org/geoserver/wms");
-		options.setTitle("Query visible layers");
-		options.setQueryVisible(true);
-
-		info = new WMSGetFeatureInfo(options);
-		info.addGetFeatureListener(new GetFeatureInfoListener() {
-
-			public void onGetFeatureInfo(GetFeatureInfoEvent eo) {
-				final Window wi = new Window();
-				wi.setClosable(true);
-				wi.setScrollMode(Scroll.AUTO);
-				wi.setHeight(200);
-				wi.setWidth(400);
-				wi.setResizable(true);
-				wi.setLayout(new FlowLayout());
-				wi.setPlain(true);
-				wi.setMaximizable(false);
-				wi.setHeading("Get Feature Info");
-				wi.addText(eo.getText());
-				wi.show();
-			}
-
-		});
-		this.map.addControl(info);
-
-		return info;
-
-	}
-
-	public void activateInfo() {
-		info.activate();
-		this.infoActive = true;
-	}
-
-	public void deactivateInfo() {
-		info.deactivate();
-		this.infoActive = false;
-	}
-
-	public void activateMeasure() {
-		measure.activate();
-		this.measureActive = true;
-	}
-
-	public void deactivateMeasure() {
-		measure.deactivate();
-		this.measureActive = false;
-	}
-
-	public void activateMeasureArea() {
-		measureArea.activate();
-		this.measureAreaActive = true;
-	}
-
-	public void deactivateMeasureArea() {
-		measureArea.deactivate();
-		this.measureAreaActive = false;
-	}
-
-	private void createOSM() {
-		OSMOptions osmOption = new OSMOptions();
-		// osmOption.setDisplayOutsideMaxExtent(true);
-		// osmOption.setWrapDateLine(true);
-
-		this.osm = OSM.Mapnik("OpenStreetMap", osmOption);
-		this.osm.setIsBaseLayer(true);
-		this.map.addLayer(osm);
-
-		this.osm.setZIndex(1);
-	}
-
-	private void createBaseGoogleLayer() {
-		GoogleOptions option = new GoogleOptions();
-		option.setType(GMapType.G_NORMAL_MAP);
-		option.setSphericalMercator(true);
-
-		layer = new Google("Google Normal", option);
-		layer.setIsBaseLayer(true);
-		this.map.addLayer(layer);
-
-		this.layer.setZIndex(2);
-	}
-
-	/**
-	 * Add Map to the ContentPanel passed from Dispatcher
-	 * 
-	 * @param center
-	 */
-	public void onAddToCenterPanel() {
-		LayoutManager.addComponentToCenter(mapWidget);
-
-		setMapCenter();
-	}
-
-	/**
-	 * Set center of the Map on Italy
-	 */
-	public void setMapCenter() {
-		// TODO Auto-generated method stub
-		LonLat center = new LonLat(13.375, 42.329);
-		center.transform("EPSG:4326", "EPSG:900913");
-		this.map.setCenter(center, 5);
-
-		this.mapControl.clearNavigationHistory();
-	}
-
-	/**
-	 * Draw Feature on the Map
-	 * 
-	 * @param wkt
-	 */
-	public void drawFeatureOnMap(String wkt) {
-		this.mapControl.drawFeatureOnMap(wkt);
-	}
-
-	/**
-	 * Erase all Features added to Vector Layer
-	 */
-	public void eraseFeatures() {
-		this.mapControl.eraseFeatures();
-	}
-
-	/**
-	 * Erase Single Feature from the Map
-	 * 
-	 * @param vf
-	 */
-	public void eraseFeature(VectorFeature vf) {
-		this.mapControl.eraseFeature(vf);
-	}
-
-	/**
-	 * @return the map
-	 */
-	public Map getMap() {
-		return map;
-	}
-
-	/**
-	 * @return the mapWidget
-	 */
-	public MapWidget getMapWidget() {
-		return mapWidget;
-	}
-
-	/**
-	 * @return the mapControl
-	 */
-	public MapControlManager getMapControl() {
-		return mapControl;
-	}
-
-	/**
-	 * Update Map Size
-	 */
-	public void updateMapSize() {
-		this.map.updateSize();
-		LayoutManager.get().getCenter().layout();
-	}
-
-	/**
-	 * @return the tools
-	 */
-	public List<GenericClientTool> getTools() {
-		return tools;
-	}
-
-	/**
-	 * @param tools
-	 *            the tools to set
-	 */
-	public void setTools(List<GenericClientTool> tools) {
-		Collections.sort(tools);
-		this.tools = tools;
-	}
-
-	/**
-	 * activate draw feature control on the map
-	 */
-	public void activateDrawFeature() {
-		this.mapControl.activateDrawFeature();
-	}
-
-	/**
-	 * deactivate draw feature control on the map
-	 */
-	public void deactivateDrawFeature() {
-		this.mapControl.deactivateDrawFeature();
-	}
-
-	public void activateDrawPointFeature() {
-		this.mapControl.activateDrawPointFeature();
-	}
-
-	public void deactivateDrawPointFeature() {
-		this.mapControl.deactivateDrawPointFeature();
-	}
-
-	public void redrawVectorLayer() {
-		this.mapControl.redrawVectorLayer();
-	}
-
-	/**
-	 * @return the buttonBar
-	 */
-	public ButtonBar getButtonBar() {
-		return buttonBar;
-	}
-
-	/**
-	 * @param buttonBar
-	 *            the buttonBar to set
-	 */
-	public void setButtonBar(ButtonBar buttonBar) {
-		this.buttonBar = buttonBar;
-	}
-
-	public DrawFeature getDrawPolygonFeature() {
-		return this.mapControl.getDrawFeatureControl();
-	}
-
-	public DrawFeature getDrawPointFeature() {
-		return this.mapControl.getDrawPointFeaureControl();
-	}
-	
-	public DrawFeature getDrawLineFeature() {
-		return this.mapControl.getDrawLineFeature().getControl();
-	}
-
-	public void activateModifyFeature() {
-		this.mapControl.activateModifyFeature();
-	}
-
-	public void deactivateModifyFeature() {
-		this.mapControl.deactivateModifyFeature();
-	}
-
-	public void activateFeatureOperation() {
-		this.mapControl.activateFeatureOperation();
-	}
-
-	public void deactivateFeatureOperation() {
-		this.mapControl.deactivateFeatureOperation();
-	}
-
-	public boolean isFeatureOperationEnable() {
-		return this.mapControl.isFeatureOperationEnable();
-	}
-
-	public boolean isModifyFeatureEnable() {
-		return this.mapControl.isModifyFeatureEnable();
-	}
-
-	public int getFeaturesNumber() {
-		return this.mapControl.getFeaturesNumber();
-	}
-
-	public void drawFeature(VectorFeature feature) {
-		this.mapControl.drawFeature(feature);
-	}
-
-	/**
-	 * @return the Navigation History Control
-	 */
-	public NavigationHistoryControl getNavigationHistory() {
-		return this.mapControl.getNavigationHistory();
-	}
-
-	/**
-	 * Clear Map and Remove All Features
-	 */
-	public void clearMap() {
-		this.mapControl.eraseFeatures();
-	}
-
-	/**
-	 * @return the measure
-	 */
-	public Measure getMeasure() {
-		return measure;
-	}
-
-	/**
-	 * @return the measureArea
-	 */
-	public Measure getMeasureArea() {
-		return measureArea;
-	}
-
-	/**
-	 * @return the infoActive
-	 */
-	public boolean isInfoActive() {
-		return infoActive;
-	}
-
-	/**
-	 * @return the measureActive
-	 */
-	public boolean isMeasureActive() {
-		return measureActive;
-	}
-
-	/**
-	 * @return the measureAreaActive
-	 */
-	public boolean isMeasureAreaActive() {
-		return measureAreaActive;
-	}
-
-	/**
-	 * @return the info
-	 */
-	public WMSGetFeatureInfo getInfo() {
-		return info;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.geosdi.geoplatform.gui.impl.map.GeoPlatformEditor#activateDrawLineFeature()
-	 */
-	@Override
-	public void activateDrawLineFeature() {
-		// TODO Auto-generated method stub
-		this.mapControl.activateDrawLineFeature();
-	}
-
-	/* (non-Javadoc)
-	 * @see org.geosdi.geoplatform.gui.impl.map.GeoPlatformEditor#deactivateDrawLineFeature()
-	 */
-	@Override
-	public void deactivateDrawLineFeature() {
-		// TODO Auto-generated method stub
-		this.mapControl.deactivateDrawLineFeature();
-	}
-
+    private MapWidget mapWidget;
+    private MapOptions defaultMapOptions;
+    private MapControlManager mapControl;
+    private Map map;
+    private Layer layer;
+    private Layer osm;
+    private GPRoutingManagerWidget routingWidget;
+    private WMSGetFeatureInfo info;
+    private MapModel mapModel;
+    private ButtonBar buttonBar;
+    private List<GenericClientTool> tools;
+    private Measure measure;
+    private Measure measureArea;
+    private boolean infoActive;
+    private boolean measureActive;
+    private boolean measureAreaActive;
+
+    public MapLayoutWidget() {
+        super();
+        this.createMapOption();
+        this.mapModel = new MapModel(this);
+        this.routingWidget = new GPRoutingManagerWidget(this);
+        this.mapModel.addLayerChangedHandler();
+    }
+
+    private void createMapOption() {
+
+        this.defaultMapOptions = new MapOptions();
+
+        this.defaultMapOptions.setNumZoomLevels(18);
+
+        this.defaultMapOptions.setProjection("EPSG:900913");
+        this.defaultMapOptions.setDisplayProjection(new Projection("EPSG:4326"));
+        this.defaultMapOptions.setUnits(MapUnits.METERS);
+        this.defaultMapOptions.setMaxExtent(new Bounds(-20037508, -20037508,
+                20037508, 20037508.34));
+        this.defaultMapOptions.setMaxResolution(new Double(156543.0339).floatValue());
+
+        initMapWidget(this.defaultMapOptions);
+    }
+
+    private void initMapWidget(MapOptions defaultMapOptions) {
+        mapWidget = new MapWidget("100%", "100%", defaultMapOptions);
+        this.map = mapWidget.getMap();
+        this.map.addControl(new LayerSwitcher());
+        this.map.addControl(new ScaleLine());
+        this.addFeatureInfoControl();
+        this.addMeasureControl();
+        this.addMeasureAreaControl();
+
+        this.createOSM();
+        this.createBaseGoogleLayer();
+
+        this.mapControl = new MapControlManager(this.map);
+    }
+
+    public void addMeasureControl() {
+
+        MeasureOptions measOpts = new MeasureOptions();
+        measOpts.setPersist(true);
+        measOpts.setGeodesic(true);
+
+        this.measure = new Measure(new PathHandler(), measOpts);
+
+        this.map.addControl(measure);
+
+        this.measure.addMeasureListener(new MeasureListener() {
+
+            public void onMeasure(MeasureEvent eventObject) {
+                Info.display("Distance is: ", eventObject.getMeasure() + " "
+                        + eventObject.getUnits());
+            }
+        });
+
+    }
+
+    public void addMeasureAreaControl() {
+
+        MeasureOptions measOpts = new MeasureOptions();
+        measOpts.setPersist(true);
+        measOpts.setGeodesic(true);
+
+        this.measureArea = new Measure(new PolygonHandler(), measOpts);
+
+        this.map.addControl(measureArea);
+
+        this.measureArea.addMeasureListener(new MeasureListener() {
+
+            public void onMeasure(MeasureEvent eventObject) {
+                Info.display("Area is: ", eventObject.getMeasure() + " "
+                        + eventObject.getUnits());
+            }
+        });
+
+    }
+
+    private WMSGetFeatureInfo addFeatureInfoControl() {
+
+        WMSGetFeatureInfoOptions options = new WMSGetFeatureInfoOptions();
+        options.setURL("http://dpc.geosdi.org/geoserver/wms");
+        options.setTitle("Query visible layers");
+        options.setQueryVisible(true);
+
+        info = new WMSGetFeatureInfo(options);
+        info.addGetFeatureListener(new GetFeatureInfoListener() {
+
+            public void onGetFeatureInfo(GetFeatureInfoEvent eo) {
+                final Window wi = new Window();
+                wi.setClosable(true);
+                wi.setScrollMode(Scroll.AUTO);
+                wi.setHeight(200);
+                wi.setWidth(400);
+                wi.setResizable(true);
+                wi.setLayout(new FlowLayout());
+                wi.setPlain(true);
+                wi.setMaximizable(false);
+                wi.setHeading("Get Feature Info");
+                wi.addText(eo.getText());
+                wi.show();
+            }
+        });
+        this.map.addControl(info);
+
+        return info;
+
+    }
+
+    public void activateInfo() {
+        info.activate();
+        this.infoActive = true;
+    }
+
+    public void deactivateInfo() {
+        info.deactivate();
+        this.infoActive = false;
+    }
+
+    public void activateMeasure() {
+        measure.activate();
+        this.measureActive = true;
+    }
+
+    public void deactivateMeasure() {
+        measure.deactivate();
+        this.measureActive = false;
+    }
+
+    public void activateMeasureArea() {
+        measureArea.activate();
+        this.measureAreaActive = true;
+    }
+
+    public void deactivateMeasureArea() {
+        measureArea.deactivate();
+        this.measureAreaActive = false;
+    }
+
+    private void createOSM() {
+        OSMOptions osmOption = new OSMOptions();
+        // osmOption.setDisplayOutsideMaxExtent(true);
+        // osmOption.setWrapDateLine(true);
+
+        this.osm = OSM.Mapnik("OpenStreetMap", osmOption);
+        this.osm.setIsBaseLayer(true);
+        this.map.addLayer(osm);
+
+        this.osm.setZIndex(1);
+    }
+
+    private void createBaseGoogleLayer() {
+        GoogleOptions option = new GoogleOptions();
+        option.setType(GMapType.G_NORMAL_MAP);
+        option.setSphericalMercator(true);
+
+        layer = new Google("Google Normal", option);
+        layer.setIsBaseLayer(true);
+        this.map.addLayer(layer);
+
+        this.layer.setZIndex(2);
+    }
+
+    /**
+     * Add Map to the ContentPanel passed from Dispatcher
+     *
+     * @param center
+     */
+    public void onAddToCenterPanel() {
+        LayoutManager.addComponentToCenter(mapWidget);
+
+        setMapCenter();
+    }
+
+    /**
+     * Set center of the Map on Italy
+     */
+    public void setMapCenter() {
+        // TODO Auto-generated method stub
+        LonLat center = new LonLat(13.375, 42.329);
+        center.transform("EPSG:4326", "EPSG:900913");
+        this.map.setCenter(center, 5);
+
+        this.mapControl.clearNavigationHistory();
+    }
+
+    /**
+     * Draw Feature on the Map
+     *
+     * @param wkt
+     */
+    public void drawFeatureOnMap(String wkt) {
+        this.mapControl.drawFeatureOnMap(wkt);
+    }
+
+    /**
+     * Erase all Features added to Vector Layer
+     */
+    public void eraseFeatures() {
+        this.mapControl.eraseFeatures();
+    }
+
+    /**
+     * Erase Single Feature from the Map
+     *
+     * @param vf
+     */
+    public void eraseFeature(VectorFeature vf) {
+        this.mapControl.eraseFeature(vf);
+    }
+
+    /**
+     * @return the map
+     */
+    public Map getMap() {
+        return map;
+    }
+
+    /**
+     * @return the mapWidget
+     */
+    public MapWidget getMapWidget() {
+        return mapWidget;
+    }
+
+    /**
+     * @return the mapControl
+     */
+    public MapControlManager getMapControl() {
+        return mapControl;
+    }
+
+    /**
+     * Update Map Size
+     */
+    public void updateMapSize() {
+        this.map.updateSize();
+        LayoutManager.get().getCenter().layout();
+    }
+
+    /**
+     * @return the tools
+     */
+    public List<GenericClientTool> getTools() {
+        return tools;
+    }
+
+    /**
+     * @param tools
+     *            the tools to set
+     */
+    public void setTools(List<GenericClientTool> tools) {
+        Collections.sort(tools);
+        this.tools = tools;
+    }
+
+    /**
+     * activate draw feature control on the map
+     */
+    public void activateDrawFeature() {
+        this.mapControl.activateDrawFeature();
+    }
+
+    /**
+     * deactivate draw feature control on the map
+     */
+    public void deactivateDrawFeature() {
+        this.mapControl.deactivateDrawFeature();
+    }
+
+    public void activateDrawPointFeature() {
+        this.mapControl.activateDrawPointFeature();
+    }
+
+    public void deactivateDrawPointFeature() {
+        this.mapControl.deactivateDrawPointFeature();
+    }
+
+    public void redrawVectorLayer() {
+        this.mapControl.redrawVectorLayer();
+    }
+
+    /**
+     * @return the buttonBar
+     */
+    public ButtonBar getButtonBar() {
+        return buttonBar;
+    }
+
+    /**
+     * @param buttonBar
+     *            the buttonBar to set
+     */
+    public void setButtonBar(ButtonBar buttonBar) {
+        this.buttonBar = buttonBar;
+    }
+
+    public DrawFeature getDrawPolygonFeature() {
+        return this.mapControl.getDrawFeatureControl();
+    }
+
+    public DrawFeature getDrawPointFeature() {
+        return this.mapControl.getDrawPointFeaureControl();
+    }
+
+    public DrawFeature getDrawLineFeature() {
+        return this.mapControl.getDrawLineFeature().getControl();
+    }
+
+    public void activateModifyFeature() {
+        this.mapControl.activateModifyFeature();
+    }
+
+    public void deactivateModifyFeature() {
+        this.mapControl.deactivateModifyFeature();
+    }
+
+    public void activateFeatureOperation() {
+        this.mapControl.activateFeatureOperation();
+    }
+
+    public void deactivateFeatureOperation() {
+        this.mapControl.deactivateFeatureOperation();
+    }
+
+    public boolean isFeatureOperationEnable() {
+        return this.mapControl.isFeatureOperationEnable();
+    }
+
+    public boolean isModifyFeatureEnable() {
+        return this.mapControl.isModifyFeatureEnable();
+    }
+
+    public int getFeaturesNumber() {
+        return this.mapControl.getFeaturesNumber();
+    }
+
+    public void drawFeature(VectorFeature feature) {
+        this.mapControl.drawFeature(feature);
+    }
+
+    /**
+     * @return the Navigation History Control
+     */
+    public NavigationHistoryControl getNavigationHistory() {
+        return this.mapControl.getNavigationHistory();
+    }
+
+    /**
+     * Clear Map and Remove All Features
+     */
+    public void clearMap() {
+        this.mapControl.eraseFeatures();
+    }
+
+    /**
+     * @return the measure
+     */
+    public Measure getMeasure() {
+        return measure;
+    }
+
+    /**
+     * @return the measureArea
+     */
+    public Measure getMeasureArea() {
+        return measureArea;
+    }
+
+    /**
+     * @return the infoActive
+     */
+    public boolean isInfoActive() {
+        return infoActive;
+    }
+
+    /**
+     * @return the measureActive
+     */
+    public boolean isMeasureActive() {
+        return measureActive;
+    }
+
+    /**
+     * @return the measureAreaActive
+     */
+    public boolean isMeasureAreaActive() {
+        return measureAreaActive;
+    }
+
+    /**
+     * @return the info
+     */
+    public WMSGetFeatureInfo getInfo() {
+        return info;
+    }
+
+    /* (non-Javadoc)
+     * @see org.geosdi.geoplatform.gui.impl.map.GeoPlatformEditor#activateDrawLineFeature()
+     */
+    @Override
+    public void activateDrawLineFeature() {
+        // TODO Auto-generated method stub
+        this.mapControl.activateDrawLineFeature();
+    }
+
+    /* (non-Javadoc)
+     * @see org.geosdi.geoplatform.gui.impl.map.GeoPlatformEditor#deactivateDrawLineFeature()
+     */
+    @Override
+    public void deactivateDrawLineFeature() {
+        // TODO Auto-generated method stub
+        this.mapControl.deactivateDrawLineFeature();
+    }
 }

@@ -58,89 +58,95 @@ import com.google.gwt.core.client.EntryPoint;
  */
 public class MapWidgetUI implements EntryPoint {
 
-	private Dispatcher dispatcher;
+    private Dispatcher dispatcher;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
-	 */
-	@Override
-	public void onModuleLoad() {
-		// TODO Auto-generated method stub
-		dispatcher = Dispatcher.get();
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+     */
+    @Override
+    public void onModuleLoad() {
+        // TODO Auto-generated method stub
+        dispatcher = Dispatcher.get();
 
-		dispatcher.addController(new MapController());
+        dispatcher.addController(new MapController());
 
-		addMapToolbarAction();
+        addMapToolbarAction();
 
-		dispatcher.dispatch(MapWidgetEvents.INIT_MAP_WIDGET);
+        dispatcher.dispatch(MapWidgetEvents.INIT_MAP_WIDGET);
 
-	}
+    }
 
-	private void addMapToolbarAction() {
-		// TODO Auto-generated method stub
-		ToolbarActionRegistar.put("ZoomIn", new ToolbarActionCreator() {
+    private void addMapToolbarAction() {
+        // TODO Auto-generated method stub
+        ToolbarActionRegistar.put("ZoomIn", new ToolbarActionCreator() {
 
-			public GeoPlatformToolbarAction createActionTool(
-					GeoPlatformMap mapWidget) {
-				// TODO Auto-generated method stub
-				return new ZoomInAction(mapWidget);
-			}
-		});
+            @Override
+            public GeoPlatformToolbarAction createActionTool(
+                    GeoPlatformMap mapWidget) {
+                // TODO Auto-generated method stub
+                return new ZoomInAction(mapWidget);
+            }
+        });
 
-		ToolbarActionRegistar.put("ZoomOut", new ToolbarActionCreator() {
+        ToolbarActionRegistar.put("ZoomOut", new ToolbarActionCreator() {
 
-			public GeoPlatformToolbarAction createActionTool(
-					GeoPlatformMap mapWidget) {
-				// TODO Auto-generated method stub
-				return new ZoomOutAction(mapWidget);
-			}
-		});
+            @Override
+            public GeoPlatformToolbarAction createActionTool(
+                    GeoPlatformMap mapWidget) {
+                // TODO Auto-generated method stub
+                return new ZoomOutAction(mapWidget);
+            }
+        });
 
-		ToolbarActionRegistar.put("ZoomPrevious", new ToolbarActionCreator() {
+        ToolbarActionRegistar.put("ZoomPrevious", new ToolbarActionCreator() {
 
-			public GeoPlatformToolbarAction createActionTool(
-					GeoPlatformMap mapWidget) {
-				// TODO Auto-generated method stub
-				return new ZoomPreviousAction(mapWidget);
-			}
-		});
+            @Override
+            public GeoPlatformToolbarAction createActionTool(
+                    GeoPlatformMap mapWidget) {
+                // TODO Auto-generated method stub
+                return new ZoomPreviousAction(mapWidget);
+            }
+        });
 
-		ToolbarActionRegistar.put("ZoomNext", new ToolbarActionCreator() {
+        ToolbarActionRegistar.put("ZoomNext", new ToolbarActionCreator() {
 
-			public GeoPlatformToolbarAction createActionTool(
-					GeoPlatformMap mapWidget) {
-				// TODO Auto-generated method stub
-				return new ZoomNextAction(mapWidget);
-			}
-		});
-		
-		ToolbarActionRegistar.put("GetFeatureInfo", new ToolbarActionCreator() {
+            @Override
+            public GeoPlatformToolbarAction createActionTool(
+                    GeoPlatformMap mapWidget) {
+                // TODO Auto-generated method stub
+                return new ZoomNextAction(mapWidget);
+            }
+        });
 
-			public GeoPlatformToolbarAction createActionTool(
-					GeoPlatformMap mapWidget) {
-				// TODO Auto-generated method stub
-				return new GetFeatureInfoAction(mapWidget);
-			}
-		});
-		
-		ToolbarActionRegistar.put("Measure", new ToolbarActionCreator() {
+        ToolbarActionRegistar.put("GetFeatureInfo", new ToolbarActionCreator() {
 
-			public GeoPlatformToolbarAction createActionTool(
-					GeoPlatformMap mapWidget) {
-				// TODO Auto-generated method stub
-				return new MeasureAction(mapWidget);
-			}
-		});
-		
-		ToolbarActionRegistar.put("MeasureArea", new ToolbarActionCreator() {
+            @Override
+            public GeoPlatformToolbarAction createActionTool(
+                    GeoPlatformMap mapWidget) {
+                // TODO Auto-generated method stub
+                return new GetFeatureInfoAction(mapWidget);
+            }
+        });
 
-			public GeoPlatformToolbarAction createActionTool(
-					GeoPlatformMap mapWidget) {
-				return new MeasureAreaAction(mapWidget);
-			}
-		});
-	}
+        ToolbarActionRegistar.put("Measure", new ToolbarActionCreator() {
 
+            @Override
+            public GeoPlatformToolbarAction createActionTool(
+                    GeoPlatformMap mapWidget) {
+                // TODO Auto-generated method stub
+                return new MeasureAction(mapWidget);
+            }
+        });
+
+        ToolbarActionRegistar.put("MeasureArea", new ToolbarActionCreator() {
+
+            @Override
+            public GeoPlatformToolbarAction createActionTool(
+                    GeoPlatformMap mapWidget) {
+                return new MeasureAreaAction(mapWidget);
+            }
+        });
+    }
 }

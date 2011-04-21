@@ -49,7 +49,9 @@ import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
  */
 public class LayerRemoteImpl implements LayerRemote {
 
-    private static final long serialVersionUID = 7133616799373101981L;
+    //TODO: Insert correct serialVersionUID
+    private static final long serialVersionUID = 8244727800484212092L;
+    
     private ILayerService layerService;
 
     public LayerRemoteImpl() {

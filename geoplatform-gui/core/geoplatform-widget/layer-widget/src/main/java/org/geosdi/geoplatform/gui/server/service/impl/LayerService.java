@@ -47,7 +47,7 @@ import org.springframework.stereotype.Service;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email  nazzareno.sileno@geosdi.org
  */
-@Service("routingService")
+@Service("layerService")
 public class LayerService implements ILayerService{
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

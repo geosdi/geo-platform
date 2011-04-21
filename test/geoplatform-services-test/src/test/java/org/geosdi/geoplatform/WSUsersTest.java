@@ -37,9 +37,10 @@
 
 package org.geosdi.geoplatform;
 
-import java.util.Iterator;
 
-import org.geosdi.geoplatform.responce.ShortUser;
+import java.text.ParseException;
+import junit.framework.Assert;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.UserList;
 import org.junit.Test;
 
@@ -50,16 +51,25 @@ import org.junit.Test;
  */
 public class WSUsersTest extends CXFServiceTest{
 
+//    @Test
+//    public void testUsers() {
+//        UserList userList = geoPlatformService.getUsers();
+//
+//        if (userList != null) {
+//            for (Iterator<ShortUser> it = userList.getList().iterator(); it.hasNext();) {
+//                logger.info("USER ********************* " + it.next());
+//
+//            }
+//        }
+//    }
+
     @Test
-    public void testUsers() {
-        UserList userList = geoPlatformService.getUsers();
-
-        if (userList != null) {
-            for (Iterator<ShortUser> it = userList.getList().iterator(); it.hasNext();) {
-                logger.info("USER ********************* " + it.next());
-
-            }
-        }
+    public void testEncryptedWS() throws ParseException, ResourceNotFoundFault {
+        logger.info("################### Inizio testEncryptedWS");
+        UserList userList = geoPlatformServiceEncrypted.getUsers();
+        Assert.assertNotNull(userList);
+        Assert.assertTrue("Number of users stored into database", userList.getList().size() == 1);
+        logger.info("################### Fine testEncryptedWS");
     }
 
 }

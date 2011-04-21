@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform;
 
 import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
+import org.geosdi.geoplatform.cxf.GeoPlatformWSClientEncrypted;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -60,8 +61,13 @@ public abstract class ServiceTest implements InitializingBean {
 
     @Autowired
     protected GeoPlatformWSClient gpWSClient;
+    
+    @Autowired
+    protected GeoPlatformWSClientEncrypted gpWSClientEncrypted;
 
     protected GeoPlatformService geoPlatformService;
+    protected GeoPlatformService geoPlatformServiceEncrypted;
+    
     
     @Autowired
     protected Server gpJettyServer;
@@ -77,6 +83,6 @@ public abstract class ServiceTest implements InitializingBean {
 
         gpJettyServer.start();
 
-        geoPlatformService = gpWSClient.create();
+//        geoPlatformService = gpWSClient.create();
     }
 }

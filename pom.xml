@@ -496,7 +496,6 @@
                 <version>${cxf-version}</version>
             </dependency>
 
-
 			<!-- =========================================================== -->
 			<!-- Velocity -->
 			<!-- =========================================================== -->
@@ -822,9 +821,8 @@
                     <target>1.6</target>
                     <debug>true</debug>
                     <encoding>UTF-8</encoding>
-                    <!-- Added comment because we have some problem on Windows Vista
-                    <fork>true</fork>
-                    -->
+                    <!-- Added comment because we have some problem on Windows Vista -->
+                    <!--fork>true</fork-->
                     <meminitial>64M</meminitial>
                     <maxmem>1512M</maxmem>
                 </configuration>

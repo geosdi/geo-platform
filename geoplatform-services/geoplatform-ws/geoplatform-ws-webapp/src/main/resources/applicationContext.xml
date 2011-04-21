@@ -47,24 +47,83 @@
                     </list>
                 </property>
             </bean>
-        </jaxws:serviceFactory>
+    	</jaxws:serviceFactory>
+        
+        <jaxws:outInterceptors>
+            <bean class="org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor"/>
+            <ref bean="TimestampSignEncrypt_Response"/>
+        </jaxws:outInterceptors>
+        <jaxws:inInterceptors>
+            <ref bean="TimestampSignEncrypt_Request"/>
+            <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
+        </jaxws:inInterceptors>
     </jaxws:endpoint>
 
-    <!-- ====================================================================
+    <!-- ====================================================================-->
+    <!--    
+         WSS4JInInterceptor for decrypting and validating the signature of the
+         SOAP request.
+    -->
+    <bean 
+        id="TimestampSignEncrypt_Request"
+        class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor"
+        >
+        <constructor-arg>
+            <map>
+                <!-- Use this action order for local clients -->
+                <entry key="action" value="Timestamp Signature Encrypt"/>
+                <!-- Use this action spec for WCF clients 
+                <entry key="action" value="Signature Encrypt Timestamp"/>
+                -->
+                <entry key="signaturePropFile" value="/alice.properties"/>
+                <entry key="decryptionPropFile" value="/bob.properties"/>
+                <entry key="passwordCallbackClass" value="org.geosdi.geoplatform.services.KeystorePasswordCallback"/>
+            </map>
+        </constructor-arg>
+    </bean>
+    
+    <!--    
+         WSS4JOutInterceptor for encoding and signing the SOAP response.    
+    -->
+    <bean 
+        id="TimestampSignEncrypt_Response"
+        class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor"
+        >
+        <constructor-arg>
+            <map>
+                <entry key="action" value="Timestamp Signature Encrypt"/>
+                <entry key="user" value="bob"/>
+                <entry key="signaturePropFile" value="/bob.properties"/>
+                <entry key="encryptionPropFile" value="/alice.properties"/>
+                <entry key="encryptionUser" value="Alice"/>
+                <entry key="signatureKeyIdentifier" value="DirectReference"/>
+                <entry key="passwordCallbackClass" value="org.geosdi.geoplatform.services.KeystorePasswordCallback"/>
+                <entry key="signatureParts" value="{Element}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp;{Element}{http://schemas.xmlsoap.org/soap/envelope/}Body"/>
+                <!--    
+                     Recommendation: signatures should be encrypted    
+                -->
+                <entry key="encryptionParts" value="{Element}{http://www.w3.org/2000/09/xmldsig#}Signature;{Content}{http://schemas.xmlsoap.org/soap/envelope/}Body"/>
+                <!-- <entry key="encryptionKeyTransportAlgorithm" value="RSA15"/> -->
+                <entry key="encryptionSymAlgorithm" value="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/>
+            </map>
+        </constructor-arg>
+    </bean>
 
-    <jaxws:endpoint id="geoplatformServiceXML"
+    <!-- ====================================================================-->
+    
+    <!--jaxws:endpoint id="geoplatformServiceXML"
     	implementorClass="org.geosdi.geoplatform.services.GeoPlatformServiceImpl"
     	implementor="#geoplatformService"
     	address="/xml"
     	bindingUri="http://apache.org/cxf/binding/http"  >
 
         <jaxws:serviceFactory>
-            <bean class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean">
-                <property name="wrapped" value="true" />
-            </bean>
-        </jaxws:serviceFactory>
-    </jaxws:endpoint>
--->
+		    <bean class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean">
+		    	<property name="wrapped" value="true" />
+		    </bean>
+    	</jaxws:serviceFactory>
+    </jaxws:endpoint-->
+
     <!-- ====================================================================-->
 
     <!-- Enable message logging using the CXF logging feature -->

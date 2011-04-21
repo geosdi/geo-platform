@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
@@ -76,7 +77,7 @@ public class GPFolderClientInfo implements Serializable,
      * @return the elements
      */
     public List<IGPFolderElements> getFolderElements() {
-        return folderElements;
+        return folderElements == null ? new ArrayList<IGPFolderElements>() : folderElements;
     }
 
     /**

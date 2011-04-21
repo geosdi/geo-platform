@@ -33,59 +33,41 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.listener;
+package org.geosdi.geoplatform.gui.client.action.menu;
 
-import com.extjs.gxt.ui.client.event.EventType;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.store.Store;
-import com.extjs.gxt.ui.client.store.TreeStore;
-import com.extjs.gxt.ui.client.store.TreeStoreEvent;
-import org.geosdi.geoplatform.gui.client.LayerEvents;
+import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email  nazzareno.sileno@geosdi.org
  */
-public class GPAddListener implements Listener<TreeStoreEvent<GPBeanTreeModel>> {
+public class AddLayerAction extends MenuAction {
 
-    private VisitorAddElement visitorAddElement = new VisitorAddElement();
-    private boolean activeAddElement;
-    private boolean isFolderAdd;
-    private GPBeanTreeModel newElement;
-    private GPBeanTreeModel parentDestination;
-    private int newIndex;
+    private TreePanel treePanel;
+    private VisitorAddElement addVisitor = new VisitorAddElement();
 
-    @Override
-    public void handleEvent(TreeStoreEvent<GPBeanTreeModel> be) {
-        this.manageAddActivation(be.getType());
-        if (be.getParent() != null && Store.Add.equals(be.getType()) && this.isFolderAdd == false) {
-            TreeStore<GPBeanTreeModel> treeStore = (TreeStore<GPBeanTreeModel>) be.getSource();
-            this.parentDestination = be.getParent();
-            this.newIndex = be.getIndex();
-            this.newElement = treeStore.getChild(parentDestination, newIndex);
-            System.out.println("Changed element: " + newElement.getLabel());
-            if (this.newElement instanceof FolderTreeNode) {
-                this.isFolderAdd = true;
-            }
-        } else if (this.activeAddElement && LayerEvents.GP_ADD_ELEMENT.equals(be.getType())) {
-            System.out.println("IN fix dell'AddListener");
-            System.out.println("Added element: " + newElement.getLabel());
-            System.out.println("Parent destinazione: " + parentDestination.getLabel());
-            System.out.println("Indice destinazione: " + newIndex);
-            visitorAddElement.insertElement(newElement, parentDestination, newIndex);
-            this.activeAddElement = false;
-            this.isFolderAdd = false;
-            //this.checkerVisitor.realignViewState(newElement);
-        }
+    public AddLayerAction(TreePanel treePanel) {
+        super("Add Folder");
+        this.treePanel = treePanel;
     }
 
-    private void manageAddActivation(EventType eventType) {
-        if (LayerEvents.GP_ADD_START.equals(eventType)) {
-            this.activeAddElement = true;
-            this.isFolderAdd = false;
+    @Override
+    public void componentSelected(MenuEvent ce) {
+        GPBeanTreeModel parentDestination = (GPBeanTreeModel) this.treePanel.getSelectionModel().getSelectedItem();
+        if (parentDestination instanceof FolderTreeNode) {
+            GPFolderClientInfo gpFolder = new GPFolderClientInfo();
+            gpFolder.setLabel("Andy Folder");
+            FolderTreeNode folder = new FolderTreeNode(gpFolder);
+            this.treePanel.getStore().insert(parentDestination, folder, 0, true);
+            this.addVisitor.insertElement(folder, parentDestination, 0);
+        } else {
+            System.out.println("I can't add here a folder");
         }
     }
 }

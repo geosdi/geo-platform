@@ -58,10 +58,13 @@ import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.store.TreeStoreEvent;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
+import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
-import org.geosdi.geoplatform.gui.client.listener.GPAddListener;
+import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.action.menu.AddLayerAction;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 
 /**
@@ -82,6 +85,8 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
         super();
         this.buildRoot();
         this.setTreePanelProperties();
+        //TODO: After toolbar implementation remove this method
+        this.addMenuAddElement();
     }
 
     /*
@@ -111,7 +116,6 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
     @Override
     public void setTreePanelProperties() {
         this.setTreePresenter();
-        this.enableAddElementSupport();
         this.enableDDSupport();
         this.enableCheckChange();
     }
@@ -219,12 +223,14 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
         super.store.addListener(Store.Add, gpDNDListener);
     }
 
-    private void enableAddElementSupport() {
-        GPAddListener gpAddListener = new GPAddListener();
-        //TODO: Inserire codice per listener su:
-        //GP_ADD_ELEMENT e GP_ADD_START es:
-        //azioneAggiungi.addListener(GP_ADD_START, gpAddListener);
-        //azioneAggiungi.addListener(GP_ADD_ELEMENT, gpAddListener);
-        super.store.addListener(Store.Add, gpAddListener);
+    private void addMenuAddElement() {
+        Menu contextMenu = new Menu();
+        MenuItem insert = new MenuItem();
+        insert.setText("Add Folder");
+        insert.setIcon(LayerResources.ICONS.addFolder());
+        insert.addSelectionListener(new AddLayerAction(tree));
+        contextMenu.add(insert);
+        this.tree.setContextMenu(contextMenu);
     }
+
 }

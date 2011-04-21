@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.model.visitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
@@ -54,7 +55,14 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
     private GPBeanTreeModel endPosition;
     private GPBeanTreeModel tmpElement;
     private int tmpIndex;
+    private GPRootTreeNode rootElement;
     private boolean stopIterating;
+
+    public VisitorAddElement(GPRootTreeNode root){
+        this.rootElement = root;
+    }
+
+    public VisitorAddElement(){}
 
     public void insertElement(GPBeanTreeModel newElement,
             GPBeanTreeModel parentDestination, int newIndex) {
@@ -64,8 +72,13 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
         this.preorderTraversal();
     }
 
+    //TODO: Gestire gli indici nel caso di aggiunta di più elementi
     private void preorderTraversal() {
-        this.tmpElement = this.findRootElement(this.endPosition);
+        if(this.rootElement == null){
+            this.rootElement = super.findRootElement(this.endPosition);
+        }
+        this.rootElement.setzIndex(this.rootElement.getzIndex()+1);
+        this.tmpElement = this.rootElement;
         this.tmpIndex = this.tmpElement.getzIndex();
         while (!this.isPreorderExitCondition()) {
             this.tmpElement.accept(this);

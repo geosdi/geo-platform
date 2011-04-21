@@ -48,7 +48,7 @@ public abstract class AbstractVisitTree {
 
     protected int numberOfElements = -1;
 
-    public GPBeanTreeModel getPrecedingElement(GPBeanTreeModel element) {
+    protected GPBeanTreeModel getPrecedingElement(GPBeanTreeModel element) {
         GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
         GPBeanTreeModel precedingElement = null;
         if (parent.indexOf(element) - 1 == -1) {
@@ -59,7 +59,7 @@ public abstract class AbstractVisitTree {
         return precedingElement;
     }
 
-    public GPBeanTreeModel getNextUnvisitedElement(GPBeanTreeModel element) {
+    protected  GPBeanTreeModel getNextUnvisitedElement(GPBeanTreeModel element) {
         GPBeanTreeModel unvisitedElement = null;
         if (!element.isLeaf() && element.getChild(0) != null) {//IS FOLDER
             unvisitedElement = (GPBeanTreeModel) element.getChild(0);
@@ -84,7 +84,7 @@ public abstract class AbstractVisitTree {
         return followingElement;
     }
 
-    public GPBeanTreeModel findDeepestElementInNode(GPBeanTreeModel node) {
+    protected GPBeanTreeModel findDeepestElementInNode(GPBeanTreeModel node) {
         GPBeanTreeModel deepestNode = node;
         if (!node.isLeaf()) {
             GPBeanTreeModel tmpNode = (GPBeanTreeModel) node.getChildren().get(
@@ -102,7 +102,7 @@ public abstract class AbstractVisitTree {
         }
     }
 
-    public GPRootTreeNode findRootElement(GPBeanTreeModel element){
+    protected GPRootTreeNode findRootElement(GPBeanTreeModel element){
         GPRootTreeNode root = null;
         if(element instanceof GPRootTreeNode){
             root = (GPRootTreeNode)element;

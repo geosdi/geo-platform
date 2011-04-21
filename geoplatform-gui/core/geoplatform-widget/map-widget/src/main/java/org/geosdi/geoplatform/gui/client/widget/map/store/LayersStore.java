@@ -101,7 +101,6 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> {
         LayerHandlerManager.fireEvent(displayLegend);
         if (containsLayer(vectorBean)) {
             WMS layer = (WMS) this.layers.get(vectorBean);
-            //TODO: Why layer.getzIndex() retuns a Sting???
             if (!layer.isVisible() || Integer.parseInt(layer.getZIndex()) != vectorBean.getzIndex()) {
                 layer.setZIndex(vectorBean.getzIndex());
                 layer.setIsVisible(true);

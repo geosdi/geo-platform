@@ -39,8 +39,13 @@ package org.geosdi.geoplatform;
 
 
 import java.text.ParseException;
+import java.util.Iterator;
 import junit.framework.Assert;
+import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.responce.ShortUser;
 import org.geosdi.geoplatform.responce.UserList;
 import org.junit.Test;
 
@@ -51,24 +56,37 @@ import org.junit.Test;
  */
 public class WSUsersTest extends CXFServiceTest{
 
-//    @Test
-//    public void testUsers() {
-//        UserList userList = geoPlatformService.getUsers();
-//
-//        if (userList != null) {
-//            for (Iterator<ShortUser> it = userList.getList().iterator(); it.hasNext();) {
-//                logger.info("USER ********************* " + it.next());
-//
-//            }
-//        }
-//    }
+    @Test
+    public void testUsers() {
+        UserList userList = geoPlatformService.getUsers();
+
+        if (userList != null) {
+            for (Iterator<ShortUser> it = userList.getList().iterator(); it.hasNext();) {
+                logger.info("USER ********************* " + it.next());
+
+            }
+        }
+    }
 
     @Test
     public void testEncryptedWS() throws ParseException, ResourceNotFoundFault {
         logger.info("################### Inizio testEncryptedWS");
-        UserList userList = geoPlatformServiceEncrypted.getUsers();
+//        GPUser user = new GPUser();
+//        user.setId(-1);
+//        user.setUsername("user");
+//        user.setPassword("password");
+//        user.setEmailAddress("user@geosdi.org");
+//        geoPlatformService.insertUser(user);
+        
+        UserList userList = geoPlatformService.getUsers();
         Assert.assertNotNull(userList);
-        Assert.assertTrue("Number of users stored into database", userList.getList().size() == 1);
+        Assert.assertTrue("Number of users stored into database", userList.getList().size() >= 1);
+//        try {
+//            geoPlatformService.deleteUser(new RequestById(-1));
+//        } catch (IllegalParameterFault ex) {
+//            logger.error("Error while deleting user");
+//            Assert.fail();
+//        }
         logger.info("################### Fine testEncryptedWS");
     }
 

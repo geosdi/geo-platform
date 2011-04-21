@@ -18,8 +18,8 @@ public class KeystorePasswordCallback implements CallbackHandler {
         new HashMap<String, String>();
     
     public KeystorePasswordCallback() {
-        passwords.put("alice", "password");
-        passwords.put("bob", "password");
+        passwords.put("client", "clientpwd");
+        passwords.put("server", "serverstorepwd");
     }
 
     /**

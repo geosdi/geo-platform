@@ -75,8 +75,8 @@
                 <!-- Use this action spec for WCF clients 
                 <entry key="action" value="Signature Encrypt Timestamp"/>
                 -->
-                <entry key="signaturePropFile" value="/alice.properties"/>
-                <entry key="decryptionPropFile" value="/bob.properties"/>
+                <entry key="signaturePropFile" value="/client.properties"/>
+                <entry key="decryptionPropFile" value="/server.properties"/>
                 <entry key="passwordCallbackClass" value="org.geosdi.geoplatform.services.KeystorePasswordCallback"/>
             </map>
         </constructor-arg>
@@ -92,10 +92,10 @@
         <constructor-arg>
             <map>
                 <entry key="action" value="Timestamp Signature Encrypt"/>
-                <entry key="user" value="bob"/>
-                <entry key="signaturePropFile" value="/bob.properties"/>
-                <entry key="encryptionPropFile" value="/alice.properties"/>
-                <entry key="encryptionUser" value="Alice"/>
+                <entry key="user" value="server"/>
+                <entry key="signaturePropFile" value="/server.properties"/>
+                <entry key="encryptionPropFile" value="/client.properties"/>
+                <entry key="encryptionUser" value="client"/>
                 <entry key="signatureKeyIdentifier" value="DirectReference"/>
                 <entry key="passwordCallbackClass" value="org.geosdi.geoplatform.services.KeystorePasswordCallback"/>
                 <entry key="signatureParts" value="{Element}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp;{Element}{http://schemas.xmlsoap.org/soap/envelope/}Body"/>

@@ -18,10 +18,8 @@ public class KeystorePasswordCallback implements CallbackHandler {
         new HashMap<String, String>();
     
     public KeystorePasswordCallback() {
-//        passwords.put("client", "clientstorepwd");
-//        passwords.put("server", "serverpwd");
-        passwords.put("alice", "password");
-        passwords.put("bob", "password");
+        passwords.put("client", "clientstorepwd");
+        passwords.put("server", "serverpwd");
     }
 
     /**
@@ -31,7 +29,7 @@ public class KeystorePasswordCallback implements CallbackHandler {
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
         for (int i = 0; i < callbacks.length; i++) {
             WSPasswordCallback pc = (WSPasswordCallback)callbacks[i];
-
+            
             String pass = passwords.get(pc.getIdentifier());
             if (pass != null) {
                 pc.setPassword(pass);

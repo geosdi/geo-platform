@@ -36,13 +36,17 @@
 package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -65,22 +69,24 @@ public class GPAuthority implements GrantedAuthority, Serializable {
      *
      */
     private static final long serialVersionUID = -5005299814060260152L;
-
-    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_AUTHORITY_SEQ")
     @SequenceGenerator(name = "GP_AUTHORITY_SEQ", sequenceName = "GP_AUTHORITY_SEQ")
     @Column
     private long id;
-
     @Column(name = "username", nullable = false)
     private String username;
-
     @Column(name = "authority", nullable = false)
     private String authority;
-    
-    @ManyToOne(optional = true)
-    private GPUser gpUser;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_authority",
+    joinColumns = {
+        @JoinColumn(name = "authorityId")
+    },
+    inverseJoinColumns = {
+        @JoinColumn(name = "userId")
+    })
+    private List<GPUser> gpUsers;
 
     public GPAuthority(String username, String authority) {
         this.username = username;
@@ -120,21 +126,6 @@ public class GPAuthority implements GrantedAuthority, Serializable {
         this.username = username;
     }
 
-    /**
-     * @return the gpUser
-     */
-    public GPUser getGpUser() {
-        return gpUser;
-    }
-
-    /**
-     * @param gpUser
-     *            the gpUser to set
-     */
-    public void setGpUser(GPUser gpUser) {
-        this.gpUser = gpUser;
-    }
-
     @Override
     public String getAuthority() {
         // TODO Auto-generated method stub
@@ -149,14 +140,11 @@ public class GPAuthority implements GrantedAuthority, Serializable {
         this.authority = authority;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return "GPAuthority [id=" + id + ", username=" + username
-                + ", authority=" + authority + ", gpUser=" + gpUser + "]";
+    public List<GPUser> getGpUsers() {
+        return gpUsers;
+    }
+
+    public void setGpUsers(List<GPUser> gpUsers) {
+        this.gpUsers = gpUsers;
     }
 }

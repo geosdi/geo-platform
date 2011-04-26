@@ -45,8 +45,12 @@ import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.dao.GPStyleDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPAuthority;
+import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPLayerInfo;
+import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPStyle;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.junit.Assert;
@@ -106,11 +110,13 @@ public abstract class BaseDAOTest {
     }
 
     protected void removeAll() {
+        removeAllUser();
+        removeAllAuthority();
         removeAllStyle();
         removeAllLayer();
         removeAllFolder();
-        removeAllAuthority();
-        removeAllUser();
+        
+        
     }
 
     private void removeAllAuthority() {
@@ -175,13 +181,59 @@ public abstract class BaseDAOTest {
 
         List<GPAuthority> authorities = new ArrayList<GPAuthority>();
         GPAuthority authority = new GPAuthority("user_0", "ROLE_ADMIN");
-        authority.setGpUser(user);
         authorities.add(authority);
         user.setGpAuthorities(authorities);
         authorityDAO.persist(authority);
         logger.info("Save Authority for: " + authority);
 
 
+
+    }
+
+    protected void insertFolders() throws ParseException {
+        insertFolderUser();
+    }
+
+    private void insertFolderUser() {
+
+        GPUser user = userDAO.findByUsername("user_0");
+
+
+        GPFolder folderRaster = new GPFolder();
+        folderRaster.setName("my raster");
+        folderRaster.setOwner(user);
+        folderRaster.setPosition(1);
+        folderRaster.setParent(null);
+
+        GPFolder folderIGM = new GPFolder();
+        folderIGM.setName("IGM");
+        folderIGM.setPosition(2);
+        folderIGM.setParent(folderRaster);
+      
+        GPRasterLayer layer1 = new GPRasterLayer();
+
+        layer1.setAbstractText("deagostini_ita_250mila");
+        layer1.setName("StratiDiBase:deagostini_ita_250mila");
+        layer1.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
+        layer1.setBbox(new GPBBox(6.342, 35.095, 19.003, 47.316));
+        layer1.setLayerType(GPLayerType.RASTER);
+        layer1.setSrs("EPSG:4326");
+        GPLayerInfo info = new GPLayerInfo();
+        info.setKeywords("IGM");
+        info.setQueryable(true);
+        
+        layer1.setLayerInfo(info);
+
+        List<GPLayer> layerList = new ArrayList<GPLayer>();
+
+        layerList.add(layer1);
+//        folderRaster.setLayer(layerList);
+
+        folderDAO.persist(folderRaster, folderIGM);
+        layerDAO.persist(layer1);
+
+
+        
 
     }
 

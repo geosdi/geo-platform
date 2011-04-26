@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.responce;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.geosdi.geoplatform.core.model.GPFolder;
@@ -43,70 +45,88 @@ import org.geosdi.geoplatform.core.model.GPFolder;
  * @author giuseppe
  * 
  */
-
 @XmlRootElement(name = "ShortFolder")
 public class ShortFolder {
 
-	private long id;
-	private String name;
-	private boolean shared;
+    private long id;
+    private String name;
+    private boolean shared;
+    private List<ShortFolder> childrens;
 
-	/**
-	 * Default constructor
-	 */
-	public ShortFolder() {
-		super();
-	}
+    /**
+     * Default constructor
+     */
+    public ShortFolder() {
+        super();
+    }
 
-	public ShortFolder(GPFolder folder) {
-		this.id = folder.getId();
-		this.name = folder.getName();
-		this.shared = folder.isShared();
-	}
+    public ShortFolder(GPFolder folder) {
+        this.id = folder.getId();
+        this.name = folder.getName();
+        this.shared = folder.isShared();
+        this.childrens = convertToShortList(folder.getChildern());
+    }
 
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @param name
+     *            the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * @return the shared
-	 */
-	public boolean isShared() {
-		return shared;
-	}
+    /**
+     * @return the shared
+     */
+    public boolean isShared() {
+        return shared;
+    }
 
-	/**
-	 * @param shared
-	 *            the shared to set
-	 */
-	public void setShared(boolean shared) {
-		this.shared = shared;
-	}
+    /**
+     * @param shared
+     *            the shared to set
+     */
+    public void setShared(boolean shared) {
+        this.shared = shared;
+    }
 
+    public List<ShortFolder> getChildrens() {
+        return childrens;
+    }
+
+    public void setChildrens(List<ShortFolder> childrens) {
+        this.childrens = childrens;
+    }
+
+    private List<ShortFolder> convertToShortList(List<GPFolder> folderList) {
+        List<ShortFolder> shortFolders = new ArrayList<ShortFolder>(
+                folderList.size());
+        for (GPFolder folder : folderList) {
+            shortFolders.add(new ShortFolder(folder));
+        }
+
+        return shortFolders;
+    }
 }

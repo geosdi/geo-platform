@@ -48,10 +48,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -69,8 +73,6 @@ public class GPFolder implements Serializable {
      * serialVersionUID
      */
     private static final long serialVersionUID = -5826659681483678835L;
-
-    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_FOLDER_SEQ")
     @SequenceGenerator(name = "GP_FOLDER_SEQ", sequenceName = "GP_FOLDER_SEQ")
@@ -83,7 +85,7 @@ public class GPFolder implements Serializable {
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<GPFolder> childern;
-    @ManyToOne(optional = true)
+    @ManyToOne(optional = true, fetch=FetchType.LAZY)
     private GPFolder parent;
     @Column(name = "position")
     private int position;
@@ -192,4 +194,11 @@ public class GPFolder implements Serializable {
     public void setOwner(GPUser owner) {
         this.owner = owner;
     }
+
+    @Override
+    public String toString() {
+        return "GPFolder{" + "id=" + id + "name=" + name + "shared=" + shared + "childern=" + childern + "parent=" + parent + "position=" + position + "owner=" + owner + '}';
+    }
+
+    
 }

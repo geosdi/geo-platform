@@ -62,8 +62,6 @@ public abstract class GPLayer implements Serializable {
      * serialVersionUID
      */
     private static final long serialVersionUID = 5746325405739614413L;
-
-    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_LAYER_SEQ")
     @SequenceGenerator(name = "GP_LAYER_SEQ", sequenceName = "GP_LAYER_SEQ")
@@ -81,8 +79,8 @@ public abstract class GPLayer implements Serializable {
     private String srs;
     @Embedded
     private GPBBox bbox;
-    @ManyToOne(optional = true)
-    private GPFolder folder;
+    
+    private GPLayerType layerType;
 
     /**
      * @return the id
@@ -188,19 +186,12 @@ public abstract class GPLayer implements Serializable {
         this.bbox = bbox;
     }
 
-    /**
-     * @return the folder
-     */
-    public GPFolder getFolder() {
-        return folder;
+    public void setLayerType(GPLayerType layerType) {
+        this.layerType = layerType;
     }
 
-    /**
-     * @param folder
-     *            the folder to set
-     */
-    public void setFolder(GPFolder folder) {
-        this.folder = folder;
+    public GPLayerType getLayerType() {
+        return layerType;
     }
 
     /*

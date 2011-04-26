@@ -35,7 +35,9 @@
  */
 package org.geosdi.geoplatform.responce;
 
+import java.util.Collection;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GPAuthority;
 
 import org.geosdi.geoplatform.core.model.GPUser;
 
@@ -43,116 +45,124 @@ import org.geosdi.geoplatform.core.model.GPUser;
  * @author giuseppe
  * 
  */
-
 @XmlRootElement(name = "ShortUser")
 public class ShortUser {
 
-	private long id;
-	private String username;
-	private boolean enabled;
-	private boolean sendEmail;
-	private String emailAddress;
+    private long id;
+    private String username;
+    private boolean enabled;
+    private boolean sendEmail;
+    private String emailAddress;
+    private Collection<GPAuthority> authorities;
 
-	/**
-	 * Default constructor
-	 */
-	public ShortUser() {
-		super();
-	}
+    /**
+     * Default constructor
+     */
+    public ShortUser() {
+        super();
+    }
 
-	public ShortUser(GPUser user) {
-		this.id = user.getId();
-		this.username = user.getUsername();
-		this.enabled = user.isEnabled();
-		this.sendEmail = user.isSendEmail();
-		this.emailAddress = user.getEmailAddress();
-	}
+    public ShortUser(GPUser user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.enabled = user.isEnabled();
+        this.sendEmail = user.isSendEmail();
+        this.emailAddress = user.getEmailAddress();
+        this.authorities = user.getGpAuthorities();
+    }
 
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	/**
-	 * @return the username
-	 */
-	public String getUsername() {
-		return username;
-	}
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
 
-	/**
-	 * @param username
-	 *            the username to set
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    /**
+     * @param username
+     *            the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	/**
-	 * @return the enabled
-	 */
-	public boolean isEnabled() {
-		return enabled;
-	}
+    /**
+     * @return the enabled
+     */
+    public boolean isEnabled() {
+        return enabled;
+    }
 
-	/**
-	 * @param enabled
-	 *            the enabled to set
-	 */
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+    /**
+     * @param enabled
+     *            the enabled to set
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
-	/**
-	 * @return the sendEmail
-	 */
-	public boolean isSendEmail() {
-		return sendEmail;
-	}
+    /**
+     * @return the sendEmail
+     */
+    public boolean isSendEmail() {
+        return sendEmail;
+    }
 
-	/**
-	 * @param sendEmail
-	 *            the sendEmail to set
-	 */
-	public void setSendEmail(boolean sendEmail) {
-		this.sendEmail = sendEmail;
-	}
+    /**
+     * @param sendEmail
+     *            the sendEmail to set
+     */
+    public void setSendEmail(boolean sendEmail) {
+        this.sendEmail = sendEmail;
+    }
 
-	/**
-	 * @return the emailAddress
-	 */
-	public String getEmailAddress() {
-		return emailAddress;
-	}
+    /**
+     * @return the emailAddress
+     */
+    public String getEmailAddress() {
+        return emailAddress;
+    }
 
-	/**
-	 * @param emailAddress
-	 *            the emailAddress to set
-	 */
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
+    /**
+     * @param emailAddress
+     *            the emailAddress to set
+     */
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "ShortUser [id=" + id + ", username=" + username + ", enabled="
-				+ enabled + ", sendEmail=" + sendEmail + ", emailAddress="
-				+ emailAddress + "]";
-	}
+    public Collection<GPAuthority> getAuthorities() {
+        return authorities;
+    }
 
+    public void setAuthorities(Collection<GPAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "ShortUser [id=" + id + ", username=" + username + ", enabled="
+                + enabled + ", sendEmail=" + sendEmail + ", emailAddress="
+                + emailAddress + "]";
+    }
 }

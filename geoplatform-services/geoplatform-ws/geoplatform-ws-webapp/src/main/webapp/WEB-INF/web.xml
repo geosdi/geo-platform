@@ -23,4 +23,20 @@
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
+    <filter>
+        <filter-name>oemInViewFilter</filter-name>
+        <filter-class>
+        org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter
+        </filter-class>
+        <init-param>
+            <param-name>entityManagerFactory</param-name>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>oemInViewFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
 </web-app>

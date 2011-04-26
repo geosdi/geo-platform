@@ -72,7 +72,4 @@ public class LayerList {
 	public String toString() {
 		return "LayerList [list=" + list + "]";
 	}
-	
-	
-
 }

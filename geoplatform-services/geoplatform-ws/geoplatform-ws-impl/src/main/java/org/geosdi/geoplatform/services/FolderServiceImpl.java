@@ -148,17 +148,17 @@ class FolderServiceImpl {
 		return folderDao.count(searchCriteria);
 	}
 
-	public FolderList getUserFolders(RequestById request) {
+	public List<GPFolder> getUserFolders(RequestById request) {
 		Search searchCriteria = new Search(GPFolder.class);
 		searchCriteria.setMaxResults(request.getNum());
 		searchCriteria.setPage(request.getPage());
-		searchCriteria.addSortAsc("name");
+		searchCriteria.addSortAsc("position");
 
 		searchCriteria.addFilterEqual("owner.id", request.getId());
 
 		List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-		FolderList list = convertToShortList(foundFolder);
-		return list;
+		
+		return foundFolder;
 	}
 
 	public FolderList getAllUserFolders(long userId, int num, int page) {
@@ -172,6 +172,7 @@ class FolderServiceImpl {
 		searchCriteria.addFilterOr(owner, shared);
 
 		List<GPFolder> foundFolder = folderDao.search(searchCriteria);
+
 		FolderList list = convertToShortList(foundFolder);
 		return list;
 	}

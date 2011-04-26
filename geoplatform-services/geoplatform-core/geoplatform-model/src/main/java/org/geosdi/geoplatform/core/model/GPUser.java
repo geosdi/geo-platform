@@ -11,11 +11,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -39,47 +40,38 @@ public class GPUser implements Serializable, UserDetails {
      * serialVersionUID
      */
     private static final long serialVersionUID = -1354980934257649175L;
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_USER_SEQ")
     @SequenceGenerator(name = "GP_USER_SEQ", sequenceName = "GP_USER_SEQ")
     @Column
     private long id;
-
-
     @Column(name = "user_name", unique = true, nullable = false)
     private String username;
-
     /**
      * since memberService integration
      */
     @Column(name = "user_password")
     private String password;
-
     @Column(name = "email_address", nullable = false)
     private String emailAddress;
-
     /**
      * since memberService integration
      */
     @Column(name = "is_enabled", nullable = false)
     private boolean enabled = false;
-
     @Column(name = "send_email", nullable = false)
     private boolean sendEmail = false;
-
     @Column(name = "accountNonExpired")
     private Boolean accountNonExpired;
-
     @Column(name = "accountNonLocked")
     private Boolean accountNonLocked;
-
     @Column(name = "credentialsNonExpired")
     private Boolean credentialsNonExpired;
-    
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "gpUser")
-    private List<GPAuthority> gpAuthorities;
+    //for joing the tables (many-to-many)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_authority",
+    joinColumns = {@JoinColumn(name = "userId")},inverseJoinColumns = {@JoinColumn(name = "authorityId")})
+    private Collection<GPAuthority> gpAuthorities;
 
     /**
      * Default constructor
@@ -182,10 +174,10 @@ public class GPUser implements Serializable, UserDetails {
 
     @Override
     public String toString() {
-        return "GPUser{" + "id=" + id + "username=" + username +
-                "password=" + password + "emailAddress=" + emailAddress +
-                "enabled=" + enabled + "sendEmail=" + sendEmail +
-                "accountNonExpired=" + accountNonExpired + "accountNonLocked="
+        return "GPUser{" + "id=" + id + "username=" + username
+                + "password=" + password + "emailAddress=" + emailAddress
+                + "enabled=" + enabled + "sendEmail=" + sendEmail
+                + "accountNonExpired=" + accountNonExpired + "accountNonLocked="
                 + accountNonLocked + "credentialsNonExpired="
                 + credentialsNonExpired + '}';
     }
@@ -212,7 +204,6 @@ public class GPUser implements Serializable, UserDetails {
         return hash;
     }
 
-
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> auth = new HashSet<GrantedAuthority>();
@@ -225,7 +216,7 @@ public class GPUser implements Serializable, UserDetails {
     /**
      * @return the gpAuthorities
      */
-    public List<GPAuthority> getGpAuthorities() {
+    public Collection<GPAuthority> getGpAuthorities() {
         return gpAuthorities;
     }
 

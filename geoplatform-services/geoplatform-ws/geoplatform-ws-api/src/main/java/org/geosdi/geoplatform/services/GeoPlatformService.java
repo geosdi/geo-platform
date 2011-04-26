@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
+import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
@@ -157,7 +158,7 @@ public interface GeoPlatformService {
     @Get
     @HttpResource(location = "/users/{id}/folder/{num}/{page}")
     @WebResult(name = "FolderList")
-    FolderList getUserFolders(RequestById request);
+    List<GPFolder> getUserFolders(RequestById request);
 
     /**
      * @return Owned and shared Folders visible to a given user.

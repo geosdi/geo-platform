@@ -55,6 +55,17 @@ public class GPBBox implements Serializable {
     private double maxX;
     private double maxY;
 
+    public GPBBox(double minX, double minY, double maxX, double maxY) {
+        this.minX = minX;
+        this.minY = minY;
+        this.maxX = maxX;
+        this.maxY = maxY;
+    }
+
+    public GPBBox() {
+    }
+
+    
     /**
      * @return the minX
      */

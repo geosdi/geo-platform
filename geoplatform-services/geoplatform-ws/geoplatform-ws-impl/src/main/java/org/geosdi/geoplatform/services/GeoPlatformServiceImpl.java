@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
+import java.util.List;
 import javax.jws.WebService;
 
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
@@ -170,7 +171,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public FolderList getUserFolders(RequestById request) {
+    public List<GPFolder> getUserFolders(RequestById request) {
         return folderServiceDelegate.getUserFolders(request);
     }
 

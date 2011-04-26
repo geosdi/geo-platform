@@ -33,17 +33,43 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.service;
+package org.geosdi.geoplatform.gui.client.mvc;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
 import java.util.List;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
+import org.geosdi.geoplatform.gui.client.model.visitor.VisitorLayerTreeAction;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email  nazzareno.sileno@geosdi.org
  */
-public interface LayerRemoteAsync {
-
-    public void loadUserFolders(String userName, AsyncCallback<List<GPFolderClientInfo>> callback);
+public class MediatorLayerTreeAction {
+    
+    private List<String> actionIdList = new ArrayList<String>();
+    
+    private List<String> disablingActions = new ArrayList<String>();
+    
+    private VisitorLayerTreeAction actionVisitor = new VisitorLayerTreeAction();
+    
+    public void enableActions(GPBeanTreeModel element) {
+        element.accept(this.actionVisitor);
+        List<String> enablingActions = this.actionVisitor.getIdActions();
+        this.disablingActions.clear();
+        this.disablingActions.addAll(actionIdList);
+        this.disablingActions.removeAll(enablingActions);
+        for (String actionId : this.disablingActions) {
+            //((GeoPlatformToolbarAction)Registry.getAction(actionId)).disable();
+        }
+        for (String actionId : enablingActions) {
+            //((GeoPlatformToolbarAction)Registry.getAction(actionId)).enable();
+        }
+    }
+    
+    public void disableActions() {
+        for (String actionId : this.actionIdList) {
+            //((GeoPlatformToolbarAction)Registry.getAction(actionId)).disable();
+        }
+    }
 }

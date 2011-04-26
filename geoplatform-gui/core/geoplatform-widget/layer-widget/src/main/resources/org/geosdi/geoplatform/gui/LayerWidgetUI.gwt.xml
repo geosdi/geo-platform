@@ -4,4 +4,6 @@
 
     <entry-point class='org.geosdi.geoplatform.gui.client.LayerWidgetUI' />
 
+    <servlet path="/LayerRemote" class="org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl" />
+
 </module>

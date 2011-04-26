@@ -33,17 +33,47 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.service;
+package org.geosdi.geoplatform.gui.client.model.visitor;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
 import java.util.List;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
+import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
+import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
+import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email  nazzareno.sileno@geosdi.org
  */
-public interface LayerRemoteAsync {
+public class VisitorLayerTreeAction implements IVisitor{
+    
+    private List<String> idActionList = new ArrayList<String>();
 
-    public void loadUserFolders(String userName, AsyncCallback<List<GPFolderClientInfo>> callback);
+    public List<String> getIdActions(){
+        return this.idActionList;
+    }
+    
+    @Override
+    public void visitRoot(AbstractRootTreeNode root) {
+        this.idActionList.clear();
+    }
+
+    @Override
+    public void visitFolder(AbstractFolderTreeNode folder) {
+        this.idActionList.clear();
+    }
+
+    @Override
+    public void visitVector(GPVectorBean vector) {
+        this.idActionList.clear();
+    }
+
+    @Override
+    public void visitRaster(GPRasterBean raster) {
+        this.idActionList.clear();
+    }
+    
 }

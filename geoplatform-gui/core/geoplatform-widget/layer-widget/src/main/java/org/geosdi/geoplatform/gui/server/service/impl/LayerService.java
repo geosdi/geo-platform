@@ -35,12 +35,17 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.ILayerService;
+import org.geosdi.geoplatform.responce.FolderList;
+import org.geosdi.geoplatform.responce.ShortFolder;
+import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -52,9 +57,19 @@ public class LayerService implements ILayerService{
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Autowired
+    GeoPlatformService geoPlatformServiceClient;
+    
     @Override
     public List<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<GPFolderClientInfo> userFolders = new ArrayList<GPFolderClientInfo>();
+        //TODO: check the right way to retrieve the user folders using the userName property
+        FolderList folderList = geoPlatformServiceClient.getUserFolders(null);
+        for (ShortFolder singleFolder : folderList.getList()) {
+            //singleFolder.
+        }
+        
+        return userFolders;
     }
 
 }

@@ -51,7 +51,6 @@ public class ShortFolder {
     private long id;
     private String name;
     private boolean shared;
-    private List<ShortFolder> childrens;
 
     /**
      * Default constructor
@@ -64,7 +63,6 @@ public class ShortFolder {
         this.id = folder.getId();
         this.name = folder.getName();
         this.shared = folder.isShared();
-        this.childrens = convertToShortList(folder.getChildern());
     }
 
     /**
@@ -110,23 +108,5 @@ public class ShortFolder {
      */
     public void setShared(boolean shared) {
         this.shared = shared;
-    }
-
-    public List<ShortFolder> getChildrens() {
-        return childrens;
-    }
-
-    public void setChildrens(List<ShortFolder> childrens) {
-        this.childrens = childrens;
-    }
-
-    private List<ShortFolder> convertToShortList(List<GPFolder> folderList) {
-        List<ShortFolder> shortFolders = new ArrayList<ShortFolder>(
-                folderList.size());
-        for (GPFolder folder : folderList) {
-            shortFolders.add(new ShortFolder(folder));
-        }
-
-        return shortFolders;
     }
 }

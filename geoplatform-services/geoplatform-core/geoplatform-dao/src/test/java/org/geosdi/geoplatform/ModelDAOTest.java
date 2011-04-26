@@ -44,11 +44,18 @@ import org.junit.Test;
  * @author giuseppe
  * 
  */
-public class FolderTest extends BaseDAOTest {
+public class ModelDAOTest extends BaseDAOTest {
 
     @Test
     public void testRemoveAll() throws ParseException {
+        removeAll();
 
-        System.out.println("TEST: "+ folderDAO.find(new Long(50)));
+        Assert.assertEquals(0, userDAO.findAll().size());
+        Assert.assertEquals(0, styleDAO.findAll().size());
+        Assert.assertEquals(0, folderDAO.findAll().size());
+        Assert.assertEquals(0, layerDAO.findAll().size());
+
+        insertData();
+        insertFolders();
     }
 }

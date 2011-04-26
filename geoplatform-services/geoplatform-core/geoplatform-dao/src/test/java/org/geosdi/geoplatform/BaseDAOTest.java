@@ -110,13 +110,11 @@ public abstract class BaseDAOTest {
     }
 
     protected void removeAll() {
-        removeAllUser();
-        removeAllAuthority();
         removeAllStyle();
         removeAllLayer();
         removeAllFolder();
-        
-        
+        removeAllAuthority();
+        removeAllUser();
     }
 
     private void removeAllAuthority() {
@@ -133,8 +131,7 @@ public abstract class BaseDAOTest {
         List<GPFolder> folders = folderDAO.findAll();
         for (GPFolder folder : folders) {
             logger.info("Removing " + folder);
-            boolean ret = folderDAO.remove(folder);
-            Assert.assertTrue("Old Folder not removed", ret);
+            folderDAO.remove(folder);
         }
 
     }
@@ -224,10 +221,8 @@ public abstract class BaseDAOTest {
         
         layer1.setLayerInfo(info);
 
-        List<GPLayer> layerList = new ArrayList<GPLayer>();
+        layer1.setFolder(folderRaster);
 
-        layerList.add(layer1);
-//        folderRaster.setLayer(layerList);
 
         folderDAO.persist(folderRaster, folderIGM);
         layerDAO.persist(layer1);

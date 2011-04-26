@@ -204,6 +204,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     }
 
+    @Override
+    public FolderList getChildrenFolders(long folderId, int num, int page) {
+        return folderServiceDelegate.getChildrenFolders(folderId, num, page);
+    }
+
     // ==========================================================================
     // === OWS
     // ==========================================================================
@@ -262,4 +267,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.folderDao = theFolderDao;
         this.folderServiceDelegate.setFolderDao(folderDao);
     }
+
+
 }

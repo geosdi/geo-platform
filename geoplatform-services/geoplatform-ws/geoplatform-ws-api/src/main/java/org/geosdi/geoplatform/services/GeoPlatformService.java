@@ -166,6 +166,11 @@ public interface GeoPlatformService {
     FolderList getAllUserFolders(long userId, int num, int page);
 
     /**
+     * @return Children folders.
+     */
+    FolderList getChildrenFolders(long folderId, int num, int page);
+
+    /**
      * @return Count Owned and shared Folders visible to a given user.
      */
     int getAllUserFoldersCount(long userId);

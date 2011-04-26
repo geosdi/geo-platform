@@ -10,16 +10,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ws.security.WSPasswordCallback;
 
-public class KeystorePasswordCallback implements CallbackHandler {
+public class ClientKeystorePasswordCallback implements CallbackHandler {
 
     private Log logger = LogFactory.getLog(this.getClass());
     
     private Map<String, String> passwords = 
         new HashMap<String, String>();
     
-    public KeystorePasswordCallback() {
+    public ClientKeystorePasswordCallback() {
         passwords.put("client", "clientpwd");
         passwords.put("server", "serverstorepwd");
+//        passwords.put("alice", "password");
+//        passwords.put("bob", "password");
     }
 
     /**
@@ -29,6 +31,8 @@ public class KeystorePasswordCallback implements CallbackHandler {
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
         for (int i = 0; i < callbacks.length; i++) {
             WSPasswordCallback pc = (WSPasswordCallback)callbacks[i];
+            
+            logger.info("########### Alias client: " + pc.getIdentifier());
 
             String pass = passwords.get(pc.getIdentifier());
             if (pass != null) {

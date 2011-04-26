@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ShortUser;
 import org.geosdi.geoplatform.responce.UserList;
 import org.junit.Test;
@@ -71,22 +72,25 @@ public class WSUsersTest extends CXFServiceTest{
     @Test
     public void testEncryptedWS() throws ParseException, ResourceNotFoundFault {
         logger.info("################### Inizio testEncryptedWS");
-//        GPUser user = new GPUser();
-//        user.setId(-1);
-//        user.setUsername("user");
-//        user.setPassword("password");
-//        user.setEmailAddress("user@geosdi.org");
-//        geoPlatformService.insertUser(user);
+        GPUser user = new GPUser();
+        user.setUsername("user");
+        user.setPassword("password");
+        user.setEmailAddress("user@geosdi.org");
+        geoPlatformService.insertUser(user);
         
         UserList userList = geoPlatformService.getUsers();
         Assert.assertNotNull(userList);
         Assert.assertTrue("Number of users stored into database", userList.getList().size() >= 1);
-//        try {
-//            geoPlatformService.deleteUser(new RequestById(-1));
-//        } catch (IllegalParameterFault ex) {
-//            logger.error("Error while deleting user");
-//            Assert.fail();
-//        }
+        
+        GPUser userFromWS = geoPlatformService.getUserByName(new SearchRequest("user"));
+        Assert.assertNotNull(userFromWS);
+        
+        try {
+            geoPlatformService.deleteUser(new RequestById(userFromWS.getId()));
+        } catch (IllegalParameterFault ex) {
+            logger.error("Error while deleting user");
+            Assert.fail();
+        }
         logger.info("################### Fine testEncryptedWS");
     }
 

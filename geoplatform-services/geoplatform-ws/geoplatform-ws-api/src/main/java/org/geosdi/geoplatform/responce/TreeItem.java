@@ -35,42 +35,47 @@
  */
 package org.geosdi.geoplatform.responce;
 
+import java.util.Collection;
+
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.geosdi.geoplatform.core.model.GPFolder;
-
 /**
- * @author giuseppe
- * 
+ * A list of cut down Folder and Layer info.
  */
-@XmlRootElement(name = "ShortFolder")
-public class ShortFolder extends AbstractShortItem {
 
-    private long id;
+@XmlRootElement(name = "ItemList")
+public class TreeItem {
 
-    /**
-     * Default constructor
-     */
-    public ShortFolder() {
-        super();
-    }
+	private Collection<IShortItem> list;
 
-    public ShortFolder(GPFolder folder) {
-        this.id = folder.getId();
-    }
+	/**
+	 * @return the items
+	 */
+	@XmlElement(name = "Item", required = true, nillable = false)
+	public Collection<IShortItem> getList() {
+		return list;
+	}
 
-    /**
-     * @return the id
-     */
-    public long getId() {
-        return id;
-    }
+	/**
+	 * @param items
+	 *            the items to set
+	 */
+	public void setList(Collection<IShortItem> items) {
+		this.list = items;
+	}
 
-    /**
-     * @param id
-     *            the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
-    }
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder(getClass().getSimpleName())
+				.append('{');
+		if (list == null) {
+                    sb.append("NULL");
+                } else {
+		    sb.append(list.size());
+                }
+		sb.append('}');
+		return sb.toString();
+	}
+
 }

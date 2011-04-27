@@ -42,9 +42,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  * 
  */
 @XmlRootElement(name = "ShortLayer")
-public class ShortLayer {
+public class ShortLayer extends AbstractShortItem {
 
-	private String name;
 	private String title;
 	private String theAbstract;
 
@@ -63,24 +62,8 @@ public class ShortLayer {
 	 */
 	public ShortLayer(String name, String title, String theAbstract) {
 		super();
-		this.name = name;
 		this.title = title;
 		this.theAbstract = theAbstract;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	/**
@@ -120,7 +103,7 @@ public class ShortLayer {
 	 */
 	@Override
 	public String toString() {
-		return "ShortLayer [name=" + name + ", title=" + title
+		return "ShortLayer [title=" + title
 				+ ", theAbstract=" + theAbstract + "]";
 	}
 

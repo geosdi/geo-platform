@@ -224,6 +224,8 @@ class FolderServiceImpl {
     }
 
     public FolderList getChildrenFolders(long folderId, int num, int page) {
+        // deve restituire un TreeFolderElemnts -> modificare FolderList
+        // Nota deve restituire ancehe le forder condivise (shared = true)
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.setMaxResults(num);
         searchCriteria.setPage(page);

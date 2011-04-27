@@ -35,42 +35,41 @@
  */
 package org.geosdi.geoplatform.responce;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-import org.geosdi.geoplatform.core.model.GPFolder;
-
-/**
- * @author giuseppe
- * 
- */
-@XmlRootElement(name = "ShortFolder")
-public class ShortFolder extends AbstractShortItem {
-
-    private long id;
-
+public abstract class AbstractShortItem implements IShortItem {
+    
+    private String name;
+    private boolean shared;
+    private int position;
+    
     /**
-     * Default constructor
+     * @return the name
      */
-    public ShortFolder() {
-        super();
+    public String getName() {
+        return name;
     }
 
-    public ShortFolder(GPFolder folder) {
-        this.id = folder.getId();
+     /**
+     * @param name
+     *            the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
-    /**
-     * @return the id
-     */
-    public long getId() {
-        return id;
+    public int getPosition() {
+        return position;
     }
 
-    /**
-     * @param id
-     *            the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
+    public void setPosition(int position) {
+        this.position = position;
     }
+
+    public boolean isShared() {
+        return shared;
+    }
+
+    public void setShared(boolean shared) {
+        this.shared = shared;
+    }
+    
 }

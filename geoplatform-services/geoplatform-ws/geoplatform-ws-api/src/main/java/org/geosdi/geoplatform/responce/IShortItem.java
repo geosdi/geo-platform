@@ -35,42 +35,9 @@
  */
 package org.geosdi.geoplatform.responce;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-import org.geosdi.geoplatform.core.model.GPFolder;
-
-/**
- * @author giuseppe
- * 
- */
-@XmlRootElement(name = "ShortFolder")
-public class ShortFolder extends AbstractShortItem {
-
-    private long id;
-
     /**
-     * Default constructor
+     * Tag Interface
      */
-    public ShortFolder() {
-        super();
-    }
-
-    public ShortFolder(GPFolder folder) {
-        this.id = folder.getId();
-    }
-
-    /**
-     * @return the id
-     */
-    public long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
-    }
+public interface IShortItem {
+    
 }

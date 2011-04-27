@@ -37,10 +37,15 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.ILayerService;
-import org.geosdi.geoplatform.responce.FolderList;
+import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ShortFolder;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
@@ -53,23 +58,32 @@ import org.springframework.stereotype.Service;
  * @email  nazzareno.sileno@geosdi.org
  */
 @Service("layerService")
-public class LayerService implements ILayerService{
+public class LayerService implements ILayerService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     GeoPlatformService geoPlatformServiceClient;
-    
+
     @Override
     public List<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException {
         List<GPFolderClientInfo> userFolders = new ArrayList<GPFolderClientInfo>();
-        //TODO: check the right way to retrieve the user folders using the userName property
-        FolderList folderList = geoPlatformServiceClient.getUserFolders(null);
-        for (ShortFolder singleFolder : folderList.getList()) {
-            //singleFolder.
+//        TODO: check the right way to retrieve the user folders using the userName property
+        SearchRequest userNameSearch = new SearchRequest("user_0");
+        GPUser user = null;
+        try {
+             user = geoPlatformServiceClient.getUserByName(userNameSearch);
+        } catch (ResourceNotFoundFault e) {
+            GeoPlatformMessage.errorMessage("LayerService", "Unable to find user with username: " + userNameSearch.getNameLike()); 
         }
-        
+        RequestById idRequest = new RequestById(user.getId());
+        List<GPFolder> folderList = geoPlatformServiceClient.getUserFolders(idRequest);
+        for (GPFolder singleFolder : folderList) {
+            GPFolderClientInfo folder = new GPFolderClientInfo();
+            folder.setLabel(singleFolder.getName());
+            folder.setzIndex(singleFolder.getPosition());
+        }
+
         return userFolders;
     }
-
 }

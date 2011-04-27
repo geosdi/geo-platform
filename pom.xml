@@ -181,6 +181,16 @@
                 <role>Project Management Committee (PMC) Member</role>
             </roles>
         </developer>
+        <developer>
+            <name>Nazzareno Sileno</name>
+            <id>nazzareno.sileno</id>
+            <email>nazzareno.sileno@geosdi.org</email>
+            <organization>geoSDI</organization>
+            <roles>
+                <role>Java Developer</role>
+                <role>Project Management Committee (PMC) Member</role>
+            </roles>
+        </developer>
     </developers>
 
     <issueManagement />

@@ -37,6 +37,16 @@
                 <role>Project Management Committee (PMC) Member</role>
             </roles>
         </developer>
+        <developer>
+            <name>Nazzareno Sileno</name>
+            <id>nazzareno.sileno</id>
+            <email>nazzareno.sileno@geosdi.org</email>
+            <organization>geoSDI</organization>
+            <roles>
+                <role>Java Developer</role>
+                <role>Project Management Committee (PMC) Member</role>
+            </roles>
+        </developer>
     </developers>
 
     <dependencies>
@@ -116,17 +126,17 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.5.8</version>
+            <version>1.6.0</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.5.8</version>
+            <version>1.6.0</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
-            <version>1.5.8</version>
+            <version>1.6.0</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>

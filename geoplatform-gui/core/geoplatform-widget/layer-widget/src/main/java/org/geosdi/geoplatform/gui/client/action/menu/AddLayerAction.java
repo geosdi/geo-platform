@@ -51,6 +51,7 @@ public class AddLayerAction extends MenuAction {
 
     private TreePanel treePanel;
     private VisitorAddElement addVisitor = new VisitorAddElement();
+    private int i = 1;
 
     public AddLayerAction(TreePanel treePanel) {
         super("Add Folder");
@@ -62,7 +63,7 @@ public class AddLayerAction extends MenuAction {
         GPBeanTreeModel parentDestination = (GPBeanTreeModel) this.treePanel.getSelectionModel().getSelectedItem();
         if (parentDestination instanceof FolderTreeNode) {
             GPFolderClientInfo gpFolder = new GPFolderClientInfo();
-            gpFolder.setLabel("Andy Folder");
+            gpFolder.setLabel("Folder " + i++);
             FolderTreeNode folder = new FolderTreeNode(gpFolder);
             this.treePanel.getStore().insert(parentDestination, folder, 0, true);
             this.addVisitor.insertElement(folder, parentDestination, 0);

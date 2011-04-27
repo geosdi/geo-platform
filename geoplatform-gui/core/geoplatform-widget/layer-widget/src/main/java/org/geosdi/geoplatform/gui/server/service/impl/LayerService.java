@@ -41,7 +41,6 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.request.RequestById;
@@ -73,7 +72,8 @@ public class LayerService implements ILayerService {
         try {
             user = geoPlatformServiceClient.getUserByName(userNameSearch);
         } catch (ResourceNotFoundFault e) {
-            GeoPlatformMessage.errorMessage("LayerService", "Unable to find user with username: " + userNameSearch.getNameLike());
+            logger.error("LayerService", "Unable to find user with username: " + userNameSearch.getNameLike()); 
+            throw new GeoPlatformException("Unable to find user with username: " + userNameSearch.getNameLike());
         }
         RequestById idRequest = new RequestById(user.getId());
         List<GPFolder> folderList = geoPlatformServiceClient.getUserFolders(idRequest);

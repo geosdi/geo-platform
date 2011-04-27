@@ -48,12 +48,18 @@ public abstract class GPTreeToolbar {
 
     public static final String TOOLBAR_SEPARATOR = "ToolbarSeparator";
     private VerticalPanel vp;
-    private ToolBar toolBar;
-    private TreePanel tree;
+    protected ToolBar toolBar;
+    protected TreePanel tree;
 
+    /*
+     * @Constructor
+     * 
+     */
     public GPTreeToolbar(TreePanel theTree) {
         this.tree = theTree;
         this.vp = new VerticalPanel();
         this.toolBar = new ToolBar();
     }
+
+    public abstract void buildToolbar();
 }

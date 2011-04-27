@@ -37,20 +37,32 @@ package org.geosdi.geoplatform.gui.action;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.action.event.ActionDisabledEvent;
+import org.geosdi.geoplatform.gui.action.event.ActionEnabledEvent;
+import org.geosdi.geoplatform.gui.action.event.ActionHandler;
 
 /**
  * @author giuseppe
  * 
  */
-public abstract class GeoPlatformToolbarAction extends SelectionListener<ButtonEvent> {
+public abstract class GeoPlatformToolbarAction extends SelectionListener<ButtonEvent> implements HasActionHandler {
 
     private AbstractImagePrototype image;
     private String id;
     private boolean enabled;
+    private HandlerManager handlerManager;
 
     public GeoPlatformToolbarAction(AbstractImagePrototype image) {
         this.image = image;
+        this.handlerManager = new HandlerManager(this);
+    }
+
+    @Override
+    public HandlerRegistration addActionHandler(ActionHandler actionHandler) {
+        return this.handlerManager.addHandler(ActionHandler.TYPE, actionHandler);
     }
 
     /**
@@ -96,5 +108,11 @@ public abstract class GeoPlatformToolbarAction extends SelectionListener<ButtonE
      */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+        if (enabled) {
+            this.handlerManager.fireEvent(new ActionEnabledEvent());
+        } else {
+            this.handlerManager.fireEvent(new ActionDisabledEvent());
+        }
+
     }
 }

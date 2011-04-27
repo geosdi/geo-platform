@@ -33,34 +33,43 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.server.gwt;
+package org.geosdi.geoplatform.gui.action.tree;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.ILayerService;
-import org.geosdi.geoplatform.gui.server.service.impl.LayerService;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionRegistar;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote {
+public class ToolbarTreeActionRegistar extends GeoPlatformActionRegistar {
 
-    //TODO: Insert correct serialVersionUID
-    private static final long serialVersionUID = 8244727800484212092L;
-
-    private ILayerService layerService;
-
-    public LayerRemoteImpl() {
-        this.layerService = (ILayerService) GeoPlatformContextUtil.getInstance().getBean(LayerService.class);
+    /**
+     * 
+     * @param key
+     * @param toolActionCreator
+     */
+    public static void put(String key, ToolbarTreeActionCreator toolActionCreator) {
+        if (key != null && toolActionCreator != null) {
+            createFactory().getRegistry().put(key, toolActionCreator);
+        }
     }
 
-    @Override
-    public List<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException {
-        return this.layerService.loadUserFolders(userName);
+    /**
+     * Return the Toolbar Action
+     *
+     * @param key
+     *            key with the action is registered
+     * @param tree
+     *            treePanel which will contains the toolAction
+     * @return null or the toolAction registered
+     */
+    public static GeoPlatformToolbarAction get(String key,
+            TreePanel tree) {
+        ToolbarTreeActionCreator toolActionCreator = (ToolbarTreeActionCreator) createFactory().getRegistry().get(key);
+
+        return toolActionCreator == null ? null : toolActionCreator.createActionTool(tree);
     }
 }

@@ -26,8 +26,8 @@
 	
 	<!-- Load CXF modules from cxf.jar -->
     <import resource="classpath:META-INF/cxf/cxf.xml"/>
-    <import resource="classpath:META-INF/cxf/cxf-extension-http-binding.xml"/>
-    <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+    <!-- import resource="classpath:META-INF/cxf/cxf-extension-http-binding.xml"/>
+    <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/ -->
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
 	    
     <!-- ====================================================================-->

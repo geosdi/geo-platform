@@ -33,41 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl;
+package org.geosdi.geoplatform.gui.client.service;
 
-import java.io.Serializable;
-import java.util.Collections;
 import java.util.List;
 
-import org.geosdi.geoplatform.gui.configuration.FolderStore;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPParentElement;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GeoPlatformFolderStore implements FolderStore, Serializable, IGPParentElement {
+@RemoteServiceRelativePath("GeoPlatformOGCRemote")
+public interface GeoPlatformOGCRemote extends RemoteService {
 
+    public static class Util {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 526645758036790638L;
-    
-    private List<GPFolderClientInfo> folders;
+        private static GeoPlatformOGCRemoteAsync instance;
 
-    @Override
-    public List<GPFolderClientInfo> getFolders() {
-        // TODO Auto-generated method stub
-        return this.folders;
+        public static GeoPlatformOGCRemoteAsync getInstance() {
+            if (instance == null) {
+                instance = (GeoPlatformOGCRemoteAsync) GWT.create(GeoPlatformOGCRemote.class);
+            }
+
+            return instance;
+        }
     }
 
-    @Override
-    public void setFolders(List<GPFolderClientInfo> folders) {
-        // TODO Auto-generated method stub
-        Collections.sort(folders);
-        this.folders = folders;
-    }
+    public List<GPFolderClientInfo> getFolders();
 }

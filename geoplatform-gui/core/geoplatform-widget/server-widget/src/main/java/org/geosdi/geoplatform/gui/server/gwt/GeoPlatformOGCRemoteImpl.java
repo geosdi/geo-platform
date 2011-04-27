@@ -38,9 +38,9 @@ package org.geosdi.geoplatform.gui.server.gwt;
 import java.util.List;
 
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
-import org.geosdi.geoplatform.gui.service.GeoPlatformOGCRemote;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemote;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -97,11 +97,9 @@ public class GeoPlatformConfigurationImpl extends RemoteServiceServlet
     private void injectValues() {
         this.startupService = (IStartupService) GeoPlatformContextUtil.getInstance().getBean(StartupService.class);
 
-        logger.info("################################################################");
-        logger.info("################################################################");
-        logger.info("################ GeoPlatform Context Initialized ###############");
-        logger.info("################################################################");
-        logger.info("################################################################");
+        assert (this.startupService != null) : "The GeoPlatform StartupService is null";
+
+        logger.info("################ GeoPlatform Context Initialized Correctly");
 
     }
 }

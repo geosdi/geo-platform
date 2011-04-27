@@ -33,34 +33,42 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.server.gwt;
+package org.geosdi.geoplatform.gui.client.widget.toolbar;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.ILayerService;
-import org.geosdi.geoplatform.gui.server.service.impl.LayerService;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.client.widget.tree.toolbar.GPTreeToolbar;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote {
+public class LayerTreeToolbar extends GPTreeToolbar {
 
-    //TODO: Insert correct serialVersionUID
-    private static final long serialVersionUID = 8244727800484212092L;
+    private boolean initialized;
 
-    private ILayerService layerService;
-
-    public LayerRemoteImpl() {
-        this.layerService = (ILayerService) GeoPlatformContextUtil.getInstance().getBean(LayerService.class);
+    /**
+     *
+     *
+     * @param theTree
+     */
+    public LayerTreeToolbar(TreePanel theTree) {
+        super(theTree);
     }
 
     @Override
-    public List<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException {
-        return this.layerService.loadUserFolders(userName);
+    public void buildToolbar() {
+        if(!initialized) {
+            initialize();
+        }
+        
+    }
+
+    /**
+     * Create the Toolbar for LayerTreeWidget
+     * 
+     */
+    private void initialize() {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }

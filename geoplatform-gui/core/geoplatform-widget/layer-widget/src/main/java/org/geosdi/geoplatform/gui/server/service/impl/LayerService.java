@@ -46,11 +46,11 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.responce.ShortFolder;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
@@ -62,8 +62,7 @@ public class LayerService implements ILayerService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    GeoPlatformService geoPlatformServiceClient;
+    private GeoPlatformService geoPlatformServiceClient;
 
     @Override
     public List<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException {
@@ -72,9 +71,9 @@ public class LayerService implements ILayerService {
         SearchRequest userNameSearch = new SearchRequest("user_0");
         GPUser user = null;
         try {
-             user = geoPlatformServiceClient.getUserByName(userNameSearch);
+            user = geoPlatformServiceClient.getUserByName(userNameSearch);
         } catch (ResourceNotFoundFault e) {
-            GeoPlatformMessage.errorMessage("LayerService", "Unable to find user with username: " + userNameSearch.getNameLike()); 
+            GeoPlatformMessage.errorMessage("LayerService", "Unable to find user with username: " + userNameSearch.getNameLike());
         }
         RequestById idRequest = new RequestById(user.getId());
         List<GPFolder> folderList = geoPlatformServiceClient.getUserFolders(idRequest);
@@ -85,5 +84,13 @@ public class LayerService implements ILayerService {
         }
 
         return userFolders;
+    }
+
+    /**
+     * @param geoPlatformServiceClient the geoPlatformServiceClient to set
+     */
+    @Autowired
+    public void setGeoPlatformServiceClient(@Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
+        this.geoPlatformServiceClient = geoPlatformServiceClient;
     }
 }

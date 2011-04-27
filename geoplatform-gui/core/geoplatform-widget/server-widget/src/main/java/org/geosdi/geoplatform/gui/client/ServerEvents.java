@@ -33,34 +33,16 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.server.gwt;
+package org.geosdi.geoplatform.gui.client;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.ILayerService;
-import org.geosdi.geoplatform.gui.server.service.impl.LayerService;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
+import com.extjs.gxt.ui.client.event.EventType;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote {
+public class ServerEvents {
 
-    //TODO: Insert correct serialVersionUID
-    private static final long serialVersionUID = 8244727800484212092L;
-
-    private ILayerService layerService;
-
-    public LayerRemoteImpl() {
-        this.layerService = (ILayerService) GeoPlatformContextUtil.getInstance().getBean(LayerService.class);
-    }
-
-    @Override
-    public List<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException {
-        return this.layerService.loadUserFolders(userName);
-    }
+    public static final EventType INIT_SERVER_WIDGET = new EventType();
 }

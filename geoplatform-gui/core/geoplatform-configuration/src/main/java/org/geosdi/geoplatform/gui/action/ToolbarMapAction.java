@@ -46,64 +46,63 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  */
 public abstract class ToolbarMapAction extends GeoPlatformToolbarAction {
 
-	private Button button;
-	private String tooltip;
+    private Button button;
+    private String tooltip;
 
-	public ToolbarMapAction(String tooltip, AbstractImagePrototype image) {
-		super(image);
-		this.tooltip = tooltip;
-	}
+    public ToolbarMapAction(String tooltip, AbstractImagePrototype image) {
+        super(image);
+        this.tooltip = tooltip;
+    }
 
-	/**
-	 * @return the tooltip
-	 */
-	public String getTooltip() {
-		return tooltip;
-	}
+    /**
+     * @return the tooltip
+     */
+    public String getTooltip() {
+        return tooltip;
+    }
 
-	/**
-	 * @param tooltip
-	 *            the tooltip to set
-	 */
-	public void setTooltip(String tooltip) {
-		this.tooltip = tooltip;
-	}
+    /**
+     * @param tooltip
+     *            the tooltip to set
+     */
+    public void setTooltip(String tooltip) {
+        this.tooltip = tooltip;
+    }
 
-	/**
-	 * @return the button
-	 */
-	public Button getButton() {
-		return button;
-	}
+    /**
+     * @return the button
+     */
+    public Button getButton() {
+        return button;
+    }
 
-	/**
-	 * @param button
-	 *            the button to set
-	 */
-	public void setButton(Button button) {
-		this.button = button;
-	}
+    /**
+     * @param button
+     *            the button to set
+     */
+    public void setButton(Button button) {
+        this.button = button;
+    }
 
-	public Control getMapControl() {
-		return null;
-	}
-	
-	public void disableControl() {
-		
-	}
+    public Control getMapControl() {
+        return null;
+    }
 
-	/**
-	 * 
-	 * Enable Button associated with this action
-	 */
-	public void enable() {
-		this.button.enable();
-	}
+    public void disableControl() {
+    }
 
-	/**
-	 * Disable Button associated with this action
-	 */
-	public void disable() {
-		this.button.disable();
-	}
+    /**
+     *
+     * Enable Button associated with this action
+     */
+    public void enable() {
+        this.button.enable();
+    }
+
+    /**
+     * Disable Button associated with this action
+     */
+    public void disable() {
+        this.button.disable();
+    }
 }

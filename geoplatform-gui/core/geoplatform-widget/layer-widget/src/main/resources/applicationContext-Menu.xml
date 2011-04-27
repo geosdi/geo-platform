@@ -7,13 +7,13 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 	default-autowire="byName">
 
-	<bean name="layerMenu"
+    <bean name="layerMenu"
 		class="org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool">
-		<property name="id" value="layerMenu" />
-		<property name="text" value="Layers" />
-		<property name="checked" value="false" />
-		<property name="enabled" value="true" />
-		<property name="order" value="30" />
-	</bean>
+        <property name="id" value="layerMenu" />
+        <property name="text" value="Layers" />
+        <property name="checked" value="false" />
+        <property name="enabled" value="true" />
+        <property name="order" value="30" />
+    </bean>
 
 </beans>

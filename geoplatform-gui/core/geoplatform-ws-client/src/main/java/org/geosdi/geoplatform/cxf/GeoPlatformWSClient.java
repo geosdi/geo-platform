@@ -35,13 +35,9 @@
  */
 package org.geosdi.geoplatform.cxf;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
-import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
-import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 
 /**

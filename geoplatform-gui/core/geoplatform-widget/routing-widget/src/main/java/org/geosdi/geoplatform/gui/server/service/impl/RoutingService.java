@@ -70,8 +70,10 @@ import org.xml.sax.SAXException;
 public class RoutingService implements IRoutingService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    
     @Autowired
     private RoutingServiceParameters serviceParameter;
+    
     private URL url;
     private HttpURLConnection conn;
     private XPath xpath;

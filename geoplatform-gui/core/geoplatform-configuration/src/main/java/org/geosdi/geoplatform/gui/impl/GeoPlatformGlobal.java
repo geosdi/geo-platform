@@ -51,82 +51,92 @@ import org.springframework.beans.factory.annotation.Autowired;
 //@Component("geoPlatformGlobal")
 public class GeoPlatformGlobal implements IGeoPlatformGlobal {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8229961575424418806L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -8229961575424418806L;
 
-	@Autowired
-	private GeoPlatformInfo geoPlatformInfo;
+    @Autowired
+    private GeoPlatformInfo geoPlatformInfo;
 
-//	@Autowired
-	private IToolbarClientTool toolbarClientTool;
+    private IToolbarClientTool toolbarClientTool;
 
-//	@Autowired
-	private IMenuBarContainerTool menuBarContainerTool;
-	
-//	@Autowired
-	private FolderStore folderStore;
+    private IMenuBarContainerTool menuBarContainerTool;
 
-	/**
-	 * @return the geoPlatformInfo
-	 */
-	public GeoPlatformInfo getGeoPlatformInfo() {
-		return geoPlatformInfo;
-	}
+    private FolderStore folderStore;
 
-	/**
-	 * @param geoPlatformInfo
-	 *            the geoPlatformInfo to set
-	 */
-	public void setGeoPlatformInfo(GeoPlatformInfo geoPlatformInfo) {
-		this.geoPlatformInfo = geoPlatformInfo;
-	}
+    /** In this way will be The Framework that build the Toolbar for TreeLayerWidget **/
+    @Autowired
+    private IToolbarClientTool toolbarTreeClientTool;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal#getToolbarClientTool
-	 * ()
-	 */
-	@Override
-	public IToolbarClientTool getToolbarClientTool() {
-		// TODO Auto-generated method stub
-		return toolbarClientTool;
-	}
+    /**
+     * @return the geoPlatformInfo
+     */
+    @Override
+    public GeoPlatformInfo getGeoPlatformInfo() {
+        return geoPlatformInfo;
+    }
 
-	/**
-	 * @param toolbarClientTool
-	 *            the toolbarClientTool to set
-	 */
-	public void setToolbarClientTool(IToolbarClientTool toolbarClientTool) {
-		this.toolbarClientTool = toolbarClientTool;
-	}
+    /**
+     * @param geoPlatformInfo
+     *            the geoPlatformInfo to set
+     */
+    public void setGeoPlatformInfo(GeoPlatformInfo geoPlatformInfo) {
+        this.geoPlatformInfo = geoPlatformInfo;
+    }
 
-	@Override
-	public IMenuBarContainerTool getMenuBarContainerTool() {
-		// TODO Auto-generated method stub
-		return menuBarContainerTool;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal#getToolbarClientTool
+     * ()
+     */
+    @Override
+    public IToolbarClientTool getToolbarClientTool() {
+        // TODO Auto-generated method stub
+        return toolbarClientTool;
+    }
 
-	/**
-	 * @param menuBarContainerTool
-	 *            the menuBarContainerTool to set
-	 */
-	public void setMenuBarContainerTool(
-			IMenuBarContainerTool menuBarContainerTool) {
-		this.menuBarContainerTool = menuBarContainerTool;
-	}
+    /**
+     * @param toolbarClientTool
+     *            the toolbarClientTool to set
+     */
+    public void setToolbarClientTool(IToolbarClientTool toolbarClientTool) {
+        this.toolbarClientTool = toolbarClientTool;
+    }
 
-	@Override
-	public FolderStore getFolderStore() {
-		// TODO Auto-generated method stub
-		return this.folderStore;
-	}
+    @Override
+    public IMenuBarContainerTool getMenuBarContainerTool() {
+        // TODO Auto-generated method stub
+        return menuBarContainerTool;
+    }
 
-	public void setFolderStore(FolderStore folserStore) {
-		this.folderStore = folserStore;
-	}
+    /**
+     * @param menuBarContainerTool
+     *            the menuBarContainerTool to set
+     */
+    public void setMenuBarContainerTool(
+            IMenuBarContainerTool menuBarContainerTool) {
+        this.menuBarContainerTool = menuBarContainerTool;
+    }
 
+    @Override
+    public FolderStore getFolderStore() {
+        // TODO Auto-generated method stub
+        return this.folderStore;
+    }
+
+    public void setFolderStore(FolderStore folserStore) {
+        this.folderStore = folserStore;
+    }
+
+    @Override
+    public IToolbarClientTool getToolbarTreeClientTool() {
+        return this.toolbarTreeClientTool;
+    }
+
+    public void setToolbarTreeClientTool(IToolbarClientTool toolbarTreeClientTool) {
+        this.toolbarTreeClientTool = toolbarTreeClientTool;
+    }
 }

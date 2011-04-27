@@ -7,9 +7,8 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 	default-autowire="byName">
 
-	<context:annotation-config />
+    <context:annotation-config />
 	
-	<import resource="applicationContext-Menu.xml" />
-	<!-- import resource="applicationContext-Layer.xml" / -->
+    <import resource="applicationContext-Menu.xml" />
 
 </beans>

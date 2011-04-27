@@ -55,4 +55,6 @@ public interface IGeoPlatformGlobal extends Serializable {
     public IMenuBarContainerTool getMenuBarContainerTool();
 
     public FolderStore getFolderStore();
+
+    public IToolbarClientTool getToolbarTreeClientTool();
 }

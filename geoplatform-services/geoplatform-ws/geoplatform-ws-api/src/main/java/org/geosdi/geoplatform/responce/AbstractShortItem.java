@@ -36,11 +36,48 @@
 package org.geosdi.geoplatform.responce;
 
 public abstract class AbstractShortItem implements IShortItem {
-    
-    private String name;
-    private boolean shared;
-    private int position;
-    
+
+    private long id = -1;
+    private String name = "NULL";
+    private int position = -1;
+    private boolean shared = false;
+
+    /**
+     * Default constructor
+     */
+    public AbstractShortItem() {
+    }
+
+    /**
+     * Constructor with args
+     * @param id
+     * @param name
+     * @param position
+     * @param shared
+     */
+    public AbstractShortItem(long id, String name, int position, boolean shared) {
+        this.id = id;
+        this.name = name;
+        this.position = position;
+        this.shared = shared;
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
+
     /**
      * @return the name
      */
@@ -48,7 +85,7 @@ public abstract class AbstractShortItem implements IShortItem {
         return name;
     }
 
-     /**
+    /**
      * @param name
      *            the name to set
      */
@@ -56,20 +93,34 @@ public abstract class AbstractShortItem implements IShortItem {
         this.name = name;
     }
 
+    /**
+     * @return the position
+     */
     public int getPosition() {
         return position;
     }
 
+    /**
+     * @param position
+     *            the position to set
+     */
     public void setPosition(int position) {
         this.position = position;
     }
 
+    /**
+     * @return the shared state
+     */
     public boolean isShared() {
         return shared;
     }
 
+    /**
+     * @param shared
+     *            the shared state to set
+     */
     public void setShared(boolean shared) {
         this.shared = shared;
     }
-    
+    //</editor-fold>
 }

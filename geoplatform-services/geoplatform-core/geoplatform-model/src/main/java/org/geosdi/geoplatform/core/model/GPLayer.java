@@ -70,23 +70,28 @@ public abstract class GPLayer implements Serializable {
     @SequenceGenerator(name = "GP_LAYER_SEQ", sequenceName = "GP_LAYER_SEQ")
     @Column
     private long id;
-    @Column(name = "url_server")
-    private String urlServer;
     @Column(name = "name", nullable = false)
     private String name;
+    @Column(name = "position")
+    private int position;
+    @Column(name = "shared")
+    private boolean shared = false;
     @Column(name = "abstract")
     private String abstractText;
     @Column(name = "title")
     private String title;
+    @Column(name = "url_server")
+    private String urlServer;
     @Column(name = "srs")
     private String srs;
     @Embedded
     private GPBBox bbox;
-    private GPLayerType layerType;
     @ManyToOne(cascade = CascadeType.REMOVE, optional = true)
-    @OnDelete(action=OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private GPFolder folder;
+    private GPLayerType layerType;
 
+    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
      * @return the id
      */
@@ -103,21 +108,6 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @return the urlServer
-     */
-    public String getUrlServer() {
-        return urlServer;
-    }
-
-    /**
-     * @param urlServer
-     *            the urlServer to set
-     */
-    public void setUrlServer(String urlServer) {
-        this.urlServer = urlServer;
-    }
-
-    /**
      * @return the name
      */
     public String getName() {
@@ -130,6 +120,34 @@ public abstract class GPLayer implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the position
+     */
+    public int getPosition() {
+        return position;
+    }
+
+    /**
+     * @param position the position to set
+     */
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    /**
+     * @return the shared
+     */
+    public boolean isShared() {
+        return shared;
+    }
+
+    /**
+     * @param shared the shared to set
+     */
+    public void setShared(boolean shared) {
+        this.shared = shared;
     }
 
     /**
@@ -162,6 +180,21 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
+     * @return the urlServer
+     */
+    public String getUrlServer() {
+        return urlServer;
+    }
+
+    /**
+     * @param urlServer
+     *            the urlServer to set
+     */
+    public void setUrlServer(String urlServer) {
+        this.urlServer = urlServer;
+    }
+
+    /**
      * @return the srs
      */
     public String getSrs() {
@@ -191,21 +224,36 @@ public abstract class GPLayer implements Serializable {
         this.bbox = bbox;
     }
 
-    public void setLayerType(GPLayerType layerType) {
-        this.layerType = layerType;
-    }
-
-    public GPLayerType getLayerType() {
-        return layerType;
-    }
-
+    /**
+     * @return the folder
+     */
     public GPFolder getFolder() {
         return folder;
     }
 
+    /**
+     * @param folder
+     *            the bbox to folder
+     */
     public void setFolder(GPFolder folder) {
         this.folder = folder;
     }
+
+    /**
+     * @return the layerType
+     */
+    public GPLayerType getLayerType() {
+        return layerType;
+    }
+
+    /**
+     * @param layerType
+     *            the layerType to set
+     */
+    public void setLayerType(GPLayerType layerType) {
+        this.layerType = layerType;
+    }
+    //</editor-fold>
 
     /*
      * (non-Javadoc)

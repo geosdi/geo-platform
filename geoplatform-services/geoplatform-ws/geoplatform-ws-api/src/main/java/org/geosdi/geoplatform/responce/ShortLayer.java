@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.responce;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GPLayer;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -44,67 +45,78 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "ShortLayer")
 public class ShortLayer extends AbstractShortItem {
 
-	private String title;
-	private String theAbstract;
+    private String abstractText;
+    private String title;
 
-	/**
-	 * 
-	 */
-	public ShortLayer() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * Default constructor
+     */
+    public ShortLayer() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+    
+    /**
+     * Constructor with GPLayer as arg
+     */
+    public ShortLayer(GPLayer layer) {
+        super(layer.getId(), layer.getName(), layer.getPosition(), layer.isShared());
+        this.abstractText = layer.getAbstractText();
+        this.title = layer.getTitle();
+    }    
 
-	/**
-	 * @param name
-	 * @param title
-	 * @param theAbstract
-	 */
-	public ShortLayer(String name, String title, String theAbstract) {
-		super();
-		this.title = title;
-		this.theAbstract = theAbstract;
-	}
+    /**
+     * @param name
+     * @param title
+     * @param abstractText
+     */
+    public ShortLayer(String name, String title, String abstractText) {
+        super();
+        super.setName(name);
+        this.title = title;
+        this.abstractText = abstractText;
+    }
 
-	/**
-	 * @return the title
-	 */
-	public String getTitle() {
-		return title;
-	}
+    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
+    /**
+     * @return the abstractText
+     */
+    public String getAbstractText() {
+        return abstractText;
+    }
+    
+    /**
+     * @param abstractText
+     *            the abstractText to set
+     */
+    public void setAbstractText(String abstractText) {
+        this.abstractText = abstractText;
+    }
+    
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+        return title;
+    }
+    
+    /**
+     * @param title
+     *            the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    //</editor-fold>
 
-	/**
-	 * @param title
-	 *            the title to set
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	/**
-	 * @return the theAbstract
-	 */
-	public String getTheAbstract() {
-		return theAbstract;
-	}
-
-	/**
-	 * @param theAbstract
-	 *            the theAbstract to set
-	 */
-	public void setTheAbstract(String theAbstract) {
-		this.theAbstract = theAbstract;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "ShortLayer [title=" + title
-				+ ", theAbstract=" + theAbstract + "]";
-	}
-
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "ShortLayer [title=" + title
+                + ", abstractText=" + abstractText + "]";
+    }
 }

@@ -91,8 +91,7 @@ class WMSServiceImpl {
     }
 
     private LayerList convertToShortList(List<Layer> layerList) {
-        List<ShortLayer> shortLayers = new ArrayList<ShortLayer>(
-                layerList.size());
+        List<ShortLayer> shortLayers = new ArrayList<ShortLayer>(layerList.size());
         for (Layer layer : layerList) {
             shortLayers.add(new ShortLayer(layer.getName(), layer.getTitle(),
                     layer.get_abstract()));

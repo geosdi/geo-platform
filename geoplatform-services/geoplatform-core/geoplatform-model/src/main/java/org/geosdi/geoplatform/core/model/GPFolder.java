@@ -75,17 +75,18 @@ public class GPFolder implements Serializable {
     private long id;
     @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "shared")
-    private boolean shared = false;
-    @ManyToOne(optional = true, fetch=FetchType.LAZY)
-    @OnDelete(action=OnDeleteAction.CASCADE)
-    private GPFolder parent;
     @Column(name = "position")
     private int position;
+    @Column(name = "shared")
+    private boolean shared = false;
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private GPFolder parent;
     @ManyToOne(cascade = CascadeType.REMOVE, optional = true)
-    @OnDelete(action=OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private GPUser owner;
 
+    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
      * @return the id
      */
@@ -114,6 +115,20 @@ public class GPFolder implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the position
+     */
+    public int getPosition() {
+        return position;
+    }
+
+    /**
+     * @param position the position to set
+     */
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     /**
@@ -146,20 +161,6 @@ public class GPFolder implements Serializable {
     }
 
     /**
-     * @return the position
-     */
-    public int getPosition() {
-        return position;
-    }
-
-    /**
-     * @param position the position to set
-     */
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    /**
      * @return the owner
      */
     public GPUser getOwner() {
@@ -173,11 +174,11 @@ public class GPFolder implements Serializable {
     public void setOwner(GPUser owner) {
         this.owner = owner;
     }
+    //</editor-fold>
 
     @Override
     public String toString() {
-        return "GPFolder{" + "id=" + id + "name=" + name + "shared=" + shared + "parent=" + parent + "position=" + position + "owner=" + owner + '}';
+        return "GPFolder{" + "id=" + id + "name=" + name + "position=" + position
+                + "shared=" + shared + "parent=" + parent + "owner=" + owner + '}';
     }
-
-    
 }

@@ -46,8 +46,6 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 @XmlRootElement(name = "ShortFolder")
 public class ShortFolder extends AbstractShortItem {
 
-    private long id;
-
     /**
      * Default constructor
      */
@@ -55,22 +53,11 @@ public class ShortFolder extends AbstractShortItem {
         super();
     }
 
+    /**
+     * Constructor with GPFolder as arg
+     * @param folder
+     */
     public ShortFolder(GPFolder folder) {
-        this.id = folder.getId();
-    }
-
-    /**
-     * @return the id
-     */
-    public long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
+        super(folder.getId(), folder.getName(), folder.getPosition(), folder.isShared());
     }
 }

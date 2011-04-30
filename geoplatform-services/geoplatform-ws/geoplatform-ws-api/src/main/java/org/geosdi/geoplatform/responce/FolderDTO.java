@@ -38,47 +38,60 @@
 package org.geosdi.geoplatform.responce;
 
 import java.util.Collection;
-
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * @author Francesco Izzi - CNR IMAA geoSDI Group
- *
- */
-/**
- * A list of cut down Folder info.
- */
-@XmlRootElement(name = "FolderList")
-public class FolderList {
+import org.geosdi.geoplatform.core.model.GPFolder;
 
-    private Collection<FolderDTO> list;
+/**
+ * @author giuseppe
+ * 
+ */
+@XmlRootElement(name = "FolderDTO")
+public class FolderDTO extends AbstractElementDTO {
 
+    private Collection<IElementDTO> collectionsItems;
+
+    //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
-     * @return the users
+     * Default constructor
      */
-    @XmlElement(name = "Folders", required = true, nillable = false)
-    public Collection<FolderDTO> getList() {
-        return list;
+    public FolderDTO() {
+        super();
     }
 
     /**
-     * @param users
-     *            the users to set
+     * Constructor with GPFolder as arg
+     * @param folder
      */
-    public void setList(Collection<FolderDTO> folders) {
-        this.list = folders;
+    public FolderDTO(GPFolder folder) {
+        super(folder.getId(), folder.getName(), folder.getPosition(), folder.isShared());
     }
 
+    /**
+     * Constructor with args
+     * @param folder
+     */
+    public FolderDTO(GPFolder folder, Collection<IElementDTO> items) {
+        super(folder.getId(), folder.getName(), folder.getPosition(), folder.isShared());
+        this.collectionsItems = items;
+    }
+    //</editor-fold>
+
+    public Collection<IElementDTO> getCollectionsItems() {
+        return collectionsItems;
+    }
+
+    public void setCollectionsItems(Collection<IElementDTO> collectionsItems) {
+        this.collectionsItems = collectionsItems;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(getClass().getSimpleName()).append('{');
-        if (list == null) {
-            sb.append("NULL");
-        } else {
-            sb.append(list.size());
-        }
-        sb.append('}');
-        return sb.toString();
+        return "FolderDTO [" + super.toString() + ']';
     }
 }

@@ -40,6 +40,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
+import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -50,10 +51,14 @@ import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.RequestByUserFolder;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderList;
-import org.geosdi.geoplatform.responce.ShortFolder;
+import org.geosdi.geoplatform.responce.FolderDTO;
 
 import com.trg.search.Filter;
 import com.trg.search.Search;
+import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.responce.LayerList;
+import org.geosdi.geoplatform.responce.LayerDTO;
+import org.geosdi.geoplatform.responce.TreeFolderElements;
 
 /**
  * @author giuseppe
@@ -64,22 +69,50 @@ class FolderServiceImpl {
     final private static Logger LOGGER = Logger.getLogger(FolderServiceImpl.class);
     private GPFolderDAO folderDao;
     private GPUserDAO userDao;
+    private GPLayerDAO layerDao;
+
+    //<editor-fold defaultstate="collapsed" desc="Setter methods">
+    /**
+     * @param folderDao
+     *            the folderDao to set
+     */
+    public void setFolderDao(GPFolderDAO folderDao) {
+        this.folderDao = folderDao;
+    }
+
+    /**
+     * @param userDao
+     *            the userDao to set
+     */
+    public void setUserDao(GPUserDAO userDao) {
+        this.userDao = userDao;
+    }
+
+    /**
+     * @param layerDao
+     *            the layerDao to set
+     */    
+    public void setLayerDao(GPLayerDAO layerDao) {
+        this.layerDao = layerDao;
+    }    
+    //</editor-fold>
 
     public long insertFolder(GPFolder folder) {
         folderDao.persist(folder);
         return folder.getId();
     }
 
-    public long updateFolder(GPFolder folder) throws ResourceNotFoundFault,
-            IllegalParameterFault {
+    public long updateFolder(GPFolder folder)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder orig = folderDao.find(folder.getId());
         if (orig == null) {
             throw new ResourceNotFoundFault("Folder not found", folder.getId());
         }
-
-        orig.setName(folder.getName());
+        // Update all properties (except the owner)
         orig.setParent(folder.getParent());
+        orig.setName(folder.getName());
         orig.setPosition(folder.getPosition());
+        orig.setShared(folder.isShared());
 
         folderDao.merge(orig);
         return orig.getId();
@@ -105,12 +138,11 @@ class FolderServiceImpl {
 
         // data on ancillary tables should be deleted by cascading
         return folderDao.remove(folder);
-
     }
 
     public FolderList getFolders() {
         List<GPFolder> found = folderDao.findAll();
-        return convertToShortList(found);
+        return convertToFolderList(found);
     }
 
     public FolderList searchFolders(PaginatedSearchRequest searchRequest) {
@@ -125,7 +157,7 @@ class FolderServiceImpl {
         }
 
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-        FolderList list = convertToShortList(foundFolder);
+        FolderList list = convertToFolderList(foundFolder);
         return list;
     }
 
@@ -154,7 +186,6 @@ class FolderServiceImpl {
         searchCriteria.addFilterEqual("owner.id", request.getId());
 
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-
         return foundFolder;
     }
 
@@ -170,7 +201,7 @@ class FolderServiceImpl {
 
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
 
-        FolderList list = convertToShortList(foundFolder);
+        FolderList list = convertToFolderList(foundFolder);
         return list;
     }
 
@@ -195,7 +226,6 @@ class FolderServiceImpl {
         folder.setShared(true);
         folder.setOwner(null);
         folderDao.merge(folder);
-
     }
 
     public boolean setFolderOwner(RequestByUserFolder request, boolean force)
@@ -223,9 +253,27 @@ class FolderServiceImpl {
         return true;
     }
 
+    public TreeFolderElements getChildrenElements(long folderId) {
+        TreeFolderElements tree = new TreeFolderElements();
+        
+        Search searchCriteria = new Search(GPFolder.class);
+        searchCriteria.addSortAsc("name");        
+        Filter parent = Filter.equal("parent.id", folderId);
+        searchCriteria.addFilter(parent);
+        List<GPFolder> foundFolder = folderDao.search(searchCriteria);
+        tree.AddFolderCollection(foundFolder);        
+        
+        searchCriteria = new Search(GPLayer.class);
+        searchCriteria.addSortAsc("name");        
+        Filter folder = Filter.equal("folder.id", folderId);
+        searchCriteria.addFilter(folder);
+        List<GPLayer> foundLayer = layerDao.search(searchCriteria);
+        tree.AddLayerCollection(foundLayer);
+
+        return tree;
+    }
+
     public FolderList getChildrenFolders(long folderId, int num, int page) {
-        // deve restituire un TreeFolderElemnts -> modificare FolderList
-        // Nota deve restituire ancehe le forder condivise (shared = true)
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.setMaxResults(num);
         searchCriteria.setPage(page);
@@ -235,37 +283,33 @@ class FolderServiceImpl {
         searchCriteria.addFilter(parent);
 
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-
-        FolderList list = convertToShortList(foundFolder);
+        FolderList list = convertToFolderList(foundFolder);
         return list;
-
     }
 
-    private FolderList convertToShortList(List<GPFolder> folderList) {
-        List<ShortFolder> shortFolders = new ArrayList<ShortFolder>(
-                folderList.size());
+    // TODO Move to FolderList?
+    // as constructor: FolderList list = new FolderList(List<GPFolder>);
+    private FolderList convertToFolderList(List<GPFolder> folderList) {
+        List<FolderDTO> foldersDTO = new ArrayList<FolderDTO>(folderList.size());
         for (GPFolder folder : folderList) {
-            shortFolders.add(new ShortFolder(folder));
+            foldersDTO.add(new FolderDTO(folder));
         }
 
         FolderList folders = new FolderList();
-        folders.setList(shortFolders);
+        folders.setList(foldersDTO);
         return folders;
     }
+    
+    // TODO Move to LayerList?
+    // as constructor: LayerList list = new LayerList(List<GPLayer>);
+    private LayerList convertToLayerList(List<GPLayer> layerList) {
+        List<LayerDTO> layersDTO = new ArrayList<LayerDTO>(layerList.size());
+        for (GPLayer layer : layerList) {
+            layersDTO.add(new LayerDTO(layer));
+        }
 
-    /**
-     * @param folderDao
-     *            the folderDao to set
-     */
-    public void setFolderDao(GPFolderDAO folderDao) {
-        this.folderDao = folderDao;
-    }
-
-    /**
-     * @param userDao
-     *            the userDao to set
-     */
-    public void setUserDao(GPUserDAO userDao) {
-        this.userDao = userDao;
+        LayerList layers = new LayerList();
+        layers.setList(layersDTO);
+        return layers;
     }
 }

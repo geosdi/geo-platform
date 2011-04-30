@@ -37,48 +37,49 @@
 //</editor-fold>
 package org.geosdi.geoplatform.responce;
 
-import java.util.Collection;
-
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author Francesco Izzi - CNR IMAA geoSDI Group
- *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ * 
  */
-/**
- * A list of cut down Folder info.
- */
-@XmlRootElement(name = "FolderList")
-public class FolderList {
+@XmlRootElement(name = "ServerDTO")
+public class ServerDTO {
 
-    private Collection<FolderDTO> list;
+	private long id;
 
-    /**
-     * @return the users
-     */
-    @XmlElement(name = "Folders", required = true, nillable = false)
-    public Collection<FolderDTO> getList() {
-        return list;
-    }
+	public ServerDTO() {
+		super();
+	}
 
-    /**
-     * @param users
-     *            the users to set
-     */
-    public void setList(Collection<FolderDTO> folders) {
-        this.list = folders;
-    }
+	public ServerDTO(long theId) {
+		this.id = theId;
+	}
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder(getClass().getSimpleName()).append('{');
-        if (list == null) {
-            sb.append("NULL");
-        } else {
-            sb.append(list.size());
-        }
-        sb.append('}');
-        return sb.toString();
-    }
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ServerDTO [id=" + id + "]";
+	}
+
 }

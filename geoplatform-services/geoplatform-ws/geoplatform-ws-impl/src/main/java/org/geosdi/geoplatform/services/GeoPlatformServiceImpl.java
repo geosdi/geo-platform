@@ -39,6 +39,7 @@ import java.util.List;
 import javax.jws.WebService;
 
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
+import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPFolder;
@@ -51,8 +52,10 @@ import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.RequestByUserFolder;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderList;
+import org.geosdi.geoplatform.responce.ElementList;
 import org.geosdi.geoplatform.responce.LayerList;
-import org.geosdi.geoplatform.responce.ShortServer;
+import org.geosdi.geoplatform.responce.ServerDTO;
+import org.geosdi.geoplatform.responce.TreeFolderElements;
 import org.geosdi.geoplatform.responce.UserList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,6 +72,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private GPUserDAO userDao;
     private GPServerDAO serverDao;
     private GPFolderDAO folderDao;
+    private GPLayerDAO layerDao;
     private UserServiceImpl userServiceDelegate;
     private WMSServiceImpl wmsServiceDelegate;
     private FolderServiceImpl folderServiceDelegate;
@@ -209,6 +213,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         return folderServiceDelegate.getChildrenFolders(folderId, num, page);
     }
 
+    @Override
+    public TreeFolderElements getChildrenElements(long folderId) {
+        return folderServiceDelegate.getChildrenElements(folderId);
+    }
+
     // ==========================================================================
     // === OWS
     // ==========================================================================
@@ -219,7 +228,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public ShortServer getServer(String serverUrl) throws ResourceNotFoundFault {
+    public ServerDTO getServer(String serverUrl) throws ResourceNotFoundFault {
         // TODO Auto-generated method stub
 
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
@@ -228,7 +237,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
             throw new ResourceNotFoundFault("Server not found " + serverUrl);
         }
 
-        ShortServer shortServer = new ShortServer();
+        ServerDTO shortServer = new ServerDTO();
         shortServer.setId(server.getId());
 
         return shortServer;
@@ -268,5 +277,13 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.folderServiceDelegate.setFolderDao(folderDao);
     }
 
-
+    /**
+     * @param layerDao
+     *            the layerDao to set
+     */
+    @Autowired
+    public void setLayerDao(GPLayerDAO theLayerDao) {
+        this.layerDao = theLayerDao;
+        this.folderServiceDelegate.setLayerDao(layerDao);
+    }
 }

@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.responce.ShortUser;
+import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.UserList;
 
 import com.trg.search.Search;
@@ -186,9 +186,9 @@ class UserServiceImpl {
     }
 
     private UserList convertToShortList(List<GPUser> userList) {
-        List<ShortUser> shortUsers = new ArrayList<ShortUser>(userList.size());
+        List<UserDTO> shortUsers = new ArrayList<UserDTO>(userList.size());
         for (GPUser dGUser : userList) {
-            shortUsers.add(new ShortUser(dGUser));
+            shortUsers.add(new UserDTO(dGUser));
         }
 
         UserList users = new UserList();

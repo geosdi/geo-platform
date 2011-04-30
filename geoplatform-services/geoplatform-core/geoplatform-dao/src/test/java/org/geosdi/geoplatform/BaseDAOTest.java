@@ -74,19 +74,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public abstract class BaseDAOTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
-
+    
     @Autowired
     protected GPUserDAO userDAO;
-
+    
     @Autowired
     protected GPFolderDAO folderDAO;
-
+    
     @Autowired
     protected GPLayerDAO layerDAO;
-
+    
     @Autowired
     protected GPStyleDAO styleDAO;
-
+    
     @Autowired
     protected GPServerDAO serverDAO;
     
@@ -99,6 +99,7 @@ public abstract class BaseDAOTest {
                 + getClass().getSimpleName());
     }
 
+    // This test is performed only after all test's subclasses were performed
     @Test
     public void testCheckDAOs() {
         Assert.assertNotNull(userDAO);
@@ -124,7 +125,6 @@ public abstract class BaseDAOTest {
             boolean ret = authorityDAO.remove(autority);
             Assert.assertTrue("Old Authority not removed", ret);
         }
-
     }
 
     private void removeAllFolder() {
@@ -133,7 +133,6 @@ public abstract class BaseDAOTest {
             logger.info("Removing " + folder);
             folderDAO.remove(folder);
         }
-
     }
 
     private void removeAllLayer() {
@@ -143,7 +142,6 @@ public abstract class BaseDAOTest {
             boolean ret = layerDAO.remove(layer);
             Assert.assertTrue("Old Layer not removed", ret);
         }
-
     }
 
     private void removeAllStyle() {
@@ -162,29 +160,23 @@ public abstract class BaseDAOTest {
             boolean ret = userDAO.remove(user);
             Assert.assertTrue("Old User not removed", ret);
         }
-
     }
 
     protected void insertData() throws ParseException {
         insertUser();
     }
-
+    
     private void insertUser() {
-
         GPUser user = createUser("user_0");
         userDAO.persist(user);
         logger.info("Save user: " + user);
 
-
         List<GPAuthority> authorities = new ArrayList<GPAuthority>();
-        GPAuthority authority = new GPAuthority("user_0", "ROLE_ADMIN");
-        authorities.add(authority);
+        GPAuthority authority = new GPAuthority(user.getUsername(), "ROLE_ADMIN");
+        authorities.add(authority);        
         user.setGpAuthorities(authorities);
         authorityDAO.persist(authority);
         logger.info("Save Authority for: " + authority);
-
-
-
     }
 
     protected void insertFolders() throws ParseException {
@@ -192,9 +184,7 @@ public abstract class BaseDAOTest {
     }
 
     private void insertFolderUser() {
-
         GPUser user = userDAO.findByUsername("user_0");
-
 
         GPFolder folderRaster = new GPFolder();
         folderRaster.setName("my raster");
@@ -206,30 +196,24 @@ public abstract class BaseDAOTest {
         folderIGM.setName("IGM");
         folderIGM.setPosition(2);
         folderIGM.setParent(folderRaster);
-      
-        GPRasterLayer layer1 = new GPRasterLayer();
 
+        GPRasterLayer layer1 = new GPRasterLayer();
         layer1.setAbstractText("deagostini_ita_250mila");
         layer1.setName("StratiDiBase:deagostini_ita_250mila");
         layer1.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
         layer1.setBbox(new GPBBox(6.342, 35.095, 19.003, 47.316));
         layer1.setLayerType(GPLayerType.RASTER);
         layer1.setSrs("EPSG:4326");
+
         GPLayerInfo info = new GPLayerInfo();
         info.setKeywords("IGM");
         info.setQueryable(true);
-        
+
         layer1.setLayerInfo(info);
-
         layer1.setFolder(folderRaster);
-
 
         folderDAO.persist(folderRaster, folderIGM);
         layerDAO.persist(layer1);
-
-
-        
-
     }
 
     protected GPUser createUser(String name) {

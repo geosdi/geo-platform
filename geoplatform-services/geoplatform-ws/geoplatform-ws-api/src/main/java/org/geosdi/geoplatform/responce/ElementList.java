@@ -43,31 +43,27 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author Francesco Izzi - CNR IMAA geoSDI Group
- *
+ * A list of cut down Folder and Layer info.
  */
-/**
- * A list of cut down Folder info.
- */
-@XmlRootElement(name = "FolderList")
-public class FolderList {
+@XmlRootElement(name = "ElementList")
+public class ElementList {
 
-    private Collection<FolderDTO> list;
+    private Collection<IElementDTO> list;
 
     /**
-     * @return the users
+     * @return the items
      */
-    @XmlElement(name = "Folders", required = true, nillable = false)
-    public Collection<FolderDTO> getList() {
+    @XmlElement(name = "Elements", required = true, nillable = false)
+    public Collection<IElementDTO> getList() {
         return list;
     }
 
     /**
-     * @param users
-     *            the users to set
+     * @param items
+     *            the items to set
      */
-    public void setList(Collection<FolderDTO> folders) {
-        this.list = folders;
+    public void setList(Collection<IElementDTO> items) {
+        this.list = items;
     }
 
     @Override

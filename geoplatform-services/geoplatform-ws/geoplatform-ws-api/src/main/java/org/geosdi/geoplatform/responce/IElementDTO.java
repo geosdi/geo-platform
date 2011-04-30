@@ -37,48 +37,19 @@
 //</editor-fold>
 package org.geosdi.geoplatform.responce;
 
-import java.util.Collection;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
- * @author Francesco Izzi - CNR IMAA geoSDI Group
+ * @author Vincenzo Monteverde
+ * @author Michele Santomauro
  *
  */
+
 /**
- * A list of cut down Folder info.
+ * Tag Interface: define the IElementDTO type
  */
-@XmlRootElement(name = "FolderList")
-public class FolderList {
-
-    private Collection<FolderDTO> list;
-
-    /**
-     * @return the users
-     */
-    @XmlElement(name = "Folders", required = true, nillable = false)
-    public Collection<FolderDTO> getList() {
-        return list;
-    }
-
-    /**
-     * @param users
-     *            the users to set
-     */
-    public void setList(Collection<FolderDTO> folders) {
-        this.list = folders;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder(getClass().getSimpleName()).append('{');
-        if (list == null) {
-            sb.append("NULL");
-        } else {
-            sb.append(list.size());
-        }
-        sb.append('}');
-        return sb.toString();
-    }
+// For handle this inteface in CXF
+@XmlJavaTypeAdapter(AbstractElementDTO.Adapter.class)
+public interface IElementDTO {
+    
 }

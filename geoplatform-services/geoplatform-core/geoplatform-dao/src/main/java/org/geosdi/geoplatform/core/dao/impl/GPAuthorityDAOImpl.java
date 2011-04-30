@@ -56,14 +56,14 @@ public class GPAuthorityDAOImpl extends BaseDAO<GPAuthority, Long> implements
         super.persist(authorities);
     }
 
+    @Override
+    public boolean remove(GPAuthority entity) {
+        return super.remove(entity);
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public List<GPAuthority> search(ISearch search) {
         return super.search(search);
-    }
-
-    @Override
-    public boolean remove(GPAuthority entity) {
-        return super.remove(entity);
     }
 }

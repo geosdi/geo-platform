@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.LayerList;
-import org.geosdi.geoplatform.responce.ShortLayer;
+import org.geosdi.geoplatform.responce.LayerDTO;
 import org.geotools.data.ows.Layer;
 import org.geotools.data.ows.WMSCapabilities;
 import org.geotools.data.wms.WebMapServer;
@@ -91,10 +91,14 @@ class WMSServiceImpl {
     }
 
     private LayerList convertToShortList(List<Layer> layerList) {
-        List<ShortLayer> shortLayers = new ArrayList<ShortLayer>(layerList.size());
+        List<LayerDTO> shortLayers = new ArrayList<LayerDTO>(layerList.size());
+        LayerDTO shortLayerIth = null;
         for (Layer layer : layerList) {
-            shortLayers.add(new ShortLayer(layer.getName(), layer.getTitle(),
-                    layer.get_abstract()));
+            shortLayerIth = new LayerDTO();
+            shortLayerIth.setName(layer.getName());
+            shortLayerIth.setTitle(layer.getTitle());
+            shortLayerIth.setAbstractText(layer.get_abstract());
+            shortLayers.add(shortLayerIth);
         }
 
         LayerList layers = new LayerList();

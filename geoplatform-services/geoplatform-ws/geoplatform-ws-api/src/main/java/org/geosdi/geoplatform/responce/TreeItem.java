@@ -43,39 +43,36 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * A list of cut down Folder and Layer info.
  */
-
 @XmlRootElement(name = "ItemList")
 public class TreeItem {
 
-	private Collection<IShortItem> list;
+    private Collection<IShortItem> list;
 
-	/**
-	 * @return the items
-	 */
-	@XmlElement(name = "Item", required = true, nillable = false)
-	public Collection<IShortItem> getList() {
-		return list;
-	}
+    /**
+     * @return the items
+     */
+    @XmlElement(name = "Item", required = true, nillable = false)
+    public Collection<IShortItem> getList() {
+        return list;
+    }
 
-	/**
-	 * @param items
-	 *            the items to set
-	 */
-	public void setList(Collection<IShortItem> items) {
-		this.list = items;
-	}
+    /**
+     * @param items
+     *            the items to set
+     */
+    public void setList(Collection<IShortItem> items) {
+        this.list = items;
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder(getClass().getSimpleName())
-				.append('{');
-		if (list == null) {
-                    sb.append("NULL");
-                } else {
-		    sb.append(list.size());
-                }
-		sb.append('}');
-		return sb.toString();
-	}
-
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(getClass().getSimpleName()).append('{');
+        if (list == null) {
+            sb.append("NULL");
+        } else {
+            sb.append(list.size());
+        }
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -40,7 +40,6 @@ import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -68,20 +67,26 @@ public class GPFolder implements Serializable {
      * serialVersionUID
      */
     private static final long serialVersionUID = -5826659681483678835L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_FOLDER_SEQ")
     @SequenceGenerator(name = "GP_FOLDER_SEQ", sequenceName = "GP_FOLDER_SEQ")
     @Column
     private long id;
+
     @Column(name = "name", nullable = false)
     private String name;
+
     @Column(name = "position")
     private int position;
+
     @Column(name = "shared")
     private boolean shared = false;
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+
+    @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPFolder parent;
+
     @ManyToOne(cascade = CascadeType.REMOVE, optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPUser owner;

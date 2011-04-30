@@ -47,38 +47,36 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * A list of cut down Folder info.
  */
-
 @XmlRootElement(name = "FolderList")
 public class FolderList {
 
-	private Collection<ShortFolder> list;
+    private Collection<ShortFolder> list;
 
-	/**
-	 * @return the users
-	 */
-	@XmlElement(name = "Folder", required = true, nillable = false)
-	public Collection<ShortFolder> getList() {
-		return list;
-	}
+    /**
+     * @return the users
+     */
+    @XmlElement(name = "Folder", required = true, nillable = false)
+    public Collection<ShortFolder> getList() {
+        return list;
+    }
 
-	/**
-	 * @param users
-	 *            the users to set
-	 */
-	public void setList(Collection<ShortFolder> folders) {
-		this.list = folders;
-	}
+    /**
+     * @param users
+     *            the users to set
+     */
+    public void setList(Collection<ShortFolder> folders) {
+        this.list = folders;
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder(getClass().getSimpleName())
-				.append('{');
-		if (list == null)
-			sb.append("NULL");
-		else
-			sb.append(list.size());
-		sb.append('}');
-		return sb.toString();
-	}
-
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(getClass().getSimpleName()).append('{');
+        if (list == null) {
+            sb.append("NULL");
+        } else {
+            sb.append(list.size());
+        }
+        sb.append('}');
+        return sb.toString();
+    }
 }

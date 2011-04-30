@@ -65,30 +65,41 @@ public abstract class GPLayer implements Serializable {
      * serialVersionUID
      */
     private static final long serialVersionUID = 5746325405739614413L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_LAYER_SEQ")
     @SequenceGenerator(name = "GP_LAYER_SEQ", sequenceName = "GP_LAYER_SEQ")
     @Column
     private long id;
+
     @Column(name = "name", nullable = false)
     private String name;
+
     @Column(name = "position")
     private int position;
+
     @Column(name = "shared")
     private boolean shared = false;
+
     @Column(name = "abstract")
     private String abstractText;
+
     @Column(name = "title")
     private String title;
+
     @Column(name = "url_server")
     private String urlServer;
+
     @Column(name = "srs")
     private String srs;
+
     @Embedded
     private GPBBox bbox;
+
     @ManyToOne(cascade = CascadeType.REMOVE, optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPFolder folder;
+
     private GPLayerType layerType;
 
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">

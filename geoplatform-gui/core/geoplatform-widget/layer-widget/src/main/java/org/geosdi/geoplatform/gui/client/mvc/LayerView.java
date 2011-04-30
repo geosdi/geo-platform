@@ -100,7 +100,7 @@ public class LayerView extends GeoPlatformView {
      */
     private void onShowLayerWidget() {
         // TODO Auto-generated method stub
-        this.layerManagement.buildTree();
+        this.layerManagement.buildComponents();
         if (!LayoutManager.isWestVisible()) {
             LayoutManager.manageWest(true);
         }

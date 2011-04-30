@@ -35,8 +35,22 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.toolbar;
 
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
+import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import java.util.List;
+import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
+import org.geosdi.geoplatform.gui.action.event.ActionDisabledEvent;
+import org.geosdi.geoplatform.gui.action.event.ActionEnabledEvent;
+import org.geosdi.geoplatform.gui.action.event.ActionHandler;
+import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
+import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionRegistar;
 import org.geosdi.geoplatform.gui.client.widget.tree.toolbar.GPTreeToolbar;
+import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
+import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
+import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 
 /**
  *
@@ -58,10 +72,11 @@ public class LayerTreeToolbar extends GPTreeToolbar {
 
     @Override
     public void buildToolbar() {
-        if(!initialized) {
+        if (!initialized) {
             initialize();
+            this.initialized = true;
         }
-        
+
     }
 
     /**
@@ -69,6 +84,97 @@ public class LayerTreeToolbar extends GPTreeToolbar {
      * 
      */
     private void initialize() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        List<GenericClientTool> tools = GeoPlatformUtils.getInstance().
+                getGlobalConfiguration().
+                getToolbarTreeClientTool().getClientTools();
+        for (GenericClientTool tool : tools) {
+            String id = tool.getId();
+            if (id.equals(TOOLBAR_SEPARATOR)) {
+                addSeparator();
+            } else {
+                GeoPlatformToolbarAction action = ToolbarTreeActionRegistar.get(
+                        id, tree);
+
+                action.setId(id);
+
+                if (((ActionClientTool) tool).getType().equals("toggle")) {
+                    addToggleButton((ToolbarLayerTreeAction) action);
+                } else {
+                    addButton((ToolbarLayerTreeAction) action);
+                }
+
+                action.setEnabled(((ActionClientTool) tool).isEnabled());
+            }
+        }
+    }
+
+    /**
+     * Add a Vertical Line in the Toolbar
+     */
+    public void addSeparator() {
+        this.toolBar.add(new SeparatorToolItem());
+    }
+
+    /**
+     * Add a button in the Toolbar
+     *
+     * @param action
+     */
+    public void addButton(ToolbarLayerTreeAction action) {
+        final Button button = new Button();
+        button.setId(action.getId());
+        button.setToolTip(action.getTooltip());
+        button.setIcon(action.getImage());
+        button.addSelectionListener(action);
+
+        action.addActionHandler(new ActionHandler() {
+
+            @Override
+            public void onActionEnabled(ActionEnabledEvent event) {
+                button.setEnabled(true);
+            }
+
+            @Override
+            public void onActionDisabled(ActionDisabledEvent event) {
+                button.setEnabled(false);
+            }
+        });
+
+        this.toolBar.add(button);
+    }
+
+    /**
+     * Add Toggle Button in the Toolbar
+     *
+     * @param action
+     */
+    public void addToggleButton(ToolbarLayerTreeAction action) {
+        final ToggleButton button = new ToggleButton();
+        button.setId(action.getId());
+        button.setToolTip(action.getTooltip());
+        button.setIcon(action.getImage());
+        button.addSelectionListener(action);
+
+        action.addActionHandler(new ActionHandler() {
+
+            @Override
+            public void onActionEnabled(ActionEnabledEvent event) {
+                button.setEnabled(true);
+            }
+
+            @Override
+            public void onActionDisabled(ActionDisabledEvent event) {
+                button.setEnabled(false);
+            }
+        });
+
+        this.toolBar.add(button);
+    }
+
+    /**
+     * @return the toolBar
+     */
+    public ToolBar getToolBar() {
+        return toolBar;
     }
 }

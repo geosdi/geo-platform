@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tree.toolbar;
 
-import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 
@@ -47,7 +46,6 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 public abstract class GPTreeToolbar {
 
     public static final String TOOLBAR_SEPARATOR = "ToolbarSeparator";
-    private VerticalPanel vp;
     protected ToolBar toolBar;
     protected TreePanel tree;
 
@@ -57,7 +55,6 @@ public abstract class GPTreeToolbar {
      */
     public GPTreeToolbar(TreePanel theTree) {
         this.tree = theTree;
-        this.vp = new VerticalPanel();
         this.toolBar = new ToolBar();
     }
 

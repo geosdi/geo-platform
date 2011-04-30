@@ -43,6 +43,7 @@ import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
+import org.geosdi.geoplatform.gui.client.widget.toolbar.LayerTreeToolbar;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -52,6 +53,7 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 public class LayerManagementWidget extends ContentPanel {
 
     private LayerTreeWidget layerTree;
+    private LayerTreeToolbar treeToolbar;
     private GPLegendPanel legendPanel;
     private ContentPanel treePanel;
 
@@ -91,6 +93,10 @@ public class LayerManagementWidget extends ContentPanel {
 
         treePanel.add(this.layerTree.getTree());
 
+        this.treeToolbar = new LayerTreeToolbar(this.layerTree.getTree());
+
+        this.treePanel.setTopComponent(this.treeToolbar.getToolBar());
+
         super.add(treePanel, northData);
 
         this.legendPanel = new GPLegendPanel();
@@ -105,7 +111,8 @@ public class LayerManagementWidget extends ContentPanel {
      * Build Layer Widget with Spring Configuration
      *
      */
-    public void buildTree() {
+    public void buildComponents() {
+        this.treeToolbar.buildToolbar();
         this.layerTree.buildTree();
     }
 

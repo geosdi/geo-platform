@@ -77,27 +77,34 @@ public class ToolbarTreeClientTool implements IToolbarClientTool {
         addFolder.setEnabled(false);
         addFolder.setOrder(1);
 
-        ActionClientTool addLayer = new ActionClientTool();
-        addLayer.setId("addLayer");
-        addLayer.setType("button");
-        addLayer.setEnabled(false);
-        addLayer.setOrder(2);
+        ActionClientTool addRasterLayer = new ActionClientTool();
+        addRasterLayer.setId("addRasterLayer");
+        addRasterLayer.setType("button");
+        addRasterLayer.setEnabled(false);
+        addRasterLayer.setOrder(2);
+
+        ActionClientTool addVectorLayer = new ActionClientTool();
+        addVectorLayer.setId("addVectorLayer");
+        addVectorLayer.setType("button");
+        addVectorLayer.setEnabled(false);
+        addVectorLayer.setOrder(3);
 
         GenericClientTool toolbarSeparator = new GenericClientTool();
         toolbarSeparator.setId("ToolbarSeparator");
-        toolbarSeparator.setOrder(3);
+        toolbarSeparator.setOrder(4);
 
 
         ActionClientTool removeElement = new ActionClientTool();
         removeElement.setId("removeElement");
         removeElement.setType("button");
         removeElement.setEnabled(false);
-        removeElement.setOrder(4);
+        removeElement.setOrder(5);
 
         this.clientTools.add(removeElement);
         this.clientTools.add(toolbarSeparator);
         this.clientTools.add(addFolder);
-        this.clientTools.add(addLayer);
+        this.clientTools.add(addVectorLayer);
+        this.clientTools.add(addRasterLayer);
 
         Collections.sort(clientTools);
 

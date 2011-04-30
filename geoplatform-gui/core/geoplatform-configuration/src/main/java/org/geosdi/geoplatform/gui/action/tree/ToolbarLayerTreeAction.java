@@ -49,8 +49,25 @@ public abstract class ToolbarLayerTreeAction extends GeoPlatformToolbarAction {
     private String tooltip;
     private TreePanel tree;
 
-    public ToolbarLayerTreeAction(TreePanel theTree, AbstractImagePrototype image) {
+    public ToolbarLayerTreeAction(TreePanel theTree,
+            AbstractImagePrototype image,
+            String tooltip) {
         super(image);
         this.tree = theTree;
+        this.tooltip = tooltip;
+    }
+
+    /**
+     * @return the tooltip
+     */
+    public String getTooltip() {
+        return tooltip;
+    }
+
+    /**
+     * @param tooltip the tooltip to set
+     */
+    public void setTooltip(String tooltip) {
+        this.tooltip = tooltip;
     }
 }

@@ -67,6 +67,12 @@ public interface LayerIcons extends ImageBundle {
     @Resource("addFolder.png")
     AbstractImagePrototype addFolder();
 
-    @Resource("deleteFolder.png")
-    AbstractImagePrototype deleteFolder();
+    @Resource("delete.png")
+    AbstractImagePrototype deleteElement();
+
+    @Resource("addRaster.png")
+    AbstractImagePrototype addRasterLayer();
+
+    @Resource("addVector.png")
+    AbstractImagePrototype addVectorLayer();
 }

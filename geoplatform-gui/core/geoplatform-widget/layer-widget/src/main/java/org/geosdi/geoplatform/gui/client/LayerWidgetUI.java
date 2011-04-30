@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
@@ -43,6 +45,13 @@ import org.geosdi.geoplatform.gui.client.mvc.LayerController;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
+import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionCreator;
+import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionRegistar;
+import org.geosdi.geoplatform.gui.client.action.toolbar.AddFolderTreeAction;
+import org.geosdi.geoplatform.gui.client.action.toolbar.AddRasterTreeAction;
+import org.geosdi.geoplatform.gui.client.action.toolbar.AddVectorTreeAction;
+import org.geosdi.geoplatform.gui.client.action.toolbar.DeleteElementTreeAction;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -66,6 +75,7 @@ public class LayerWidgetUI implements EntryPoint {
         dispatcher.addController(new LayerController());
 
         addLayerWidgetAction();
+        addToolbarTreeAction();
 
         dispatcher.fireEvent(LayerEvents.INIT_LAYER_WIDGET);
     }
@@ -78,6 +88,48 @@ public class LayerWidgetUI implements EntryPoint {
             public MenuAction createAction() {
                 // TODO Auto-generated method stub
                 return new LayerMenuAction();
+            }
+        });
+    }
+
+    private void addToolbarTreeAction() {
+        ToolbarTreeActionRegistar.put("addFolder", new ToolbarTreeActionCreator() {
+
+            @Override
+            public GeoPlatformToolbarAction createActionTool(TreePanel tree) {
+                ToolbarLayerTreeAction action = new AddFolderTreeAction(tree);
+                setAction(action);
+                return action;
+            }
+        });
+
+        ToolbarTreeActionRegistar.put("addRasterLayer", new ToolbarTreeActionCreator() {
+
+            @Override
+            public GeoPlatformToolbarAction createActionTool(TreePanel tree) {
+                ToolbarLayerTreeAction action = new AddRasterTreeAction(tree);
+                setAction(action);
+                return action;
+            }
+        });
+
+        ToolbarTreeActionRegistar.put("addVectorLayer", new ToolbarTreeActionCreator() {
+
+            @Override
+            public GeoPlatformToolbarAction createActionTool(TreePanel tree) {
+                ToolbarLayerTreeAction action = new AddVectorTreeAction(tree);
+                setAction(action);
+                return action;
+            }
+        });
+
+        ToolbarTreeActionRegistar.put("removeElement", new ToolbarTreeActionCreator() {
+
+            @Override
+            public GeoPlatformToolbarAction createActionTool(TreePanel tree) {
+                ToolbarLayerTreeAction action = new DeleteElementTreeAction(tree);
+                setAction(action);
+                return action;
             }
         });
     }

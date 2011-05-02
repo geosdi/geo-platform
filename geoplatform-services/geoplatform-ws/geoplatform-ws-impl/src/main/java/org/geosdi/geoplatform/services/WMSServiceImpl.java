@@ -90,6 +90,8 @@ class WMSServiceImpl {
         return convertToShortList(cap.getLayerList());
     }
 
+    // TODO Move to LayerList?
+    // as constructor: LayerList list = new LayerList(List<Layer>);    
     private LayerList convertToShortList(List<Layer> layerList) {
         List<LayerDTO> shortLayers = new ArrayList<LayerDTO>(layerList.size());
         LayerDTO shortLayerIth = null;
@@ -104,7 +106,7 @@ class WMSServiceImpl {
         LayerList layers = new LayerList();
         layers.setList(shortLayers);
         return layers;
-    }
+    }  
 
     /**
      * @param serverDao

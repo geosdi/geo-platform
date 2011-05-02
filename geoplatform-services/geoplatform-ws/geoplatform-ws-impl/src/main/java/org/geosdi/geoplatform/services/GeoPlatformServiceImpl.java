@@ -237,10 +237,10 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
             throw new ResourceNotFoundFault("Server not found " + serverUrl);
         }
 
-        ServerDTO shortServer = new ServerDTO();
-        shortServer.setId(server.getId());
+        ServerDTO serverDTO = new ServerDTO();
+        serverDTO.setId(server.getId());
 
-        return shortServer;
+        return serverDTO;
     }
 
     // ==========================================================================

@@ -63,7 +63,7 @@ class UserServiceImpl {
     // note: may take lot of space
     public UserList getUsers() {
         List<GPUser> userList = userDao.findAll();
-        return convertToShortList(userList);
+        return convertToUserList(userList);
     }
 
     /**
@@ -144,7 +144,7 @@ class UserServiceImpl {
 
         List<GPUser> userList = userDao.search(searchCriteria);
 
-        return convertToShortList(userList);
+        return convertToUserList(userList);
     }
 
     public long getUsersCount(SearchRequest request) {
@@ -185,14 +185,16 @@ class UserServiceImpl {
         return orig.getId();
     }
 
-    private UserList convertToShortList(List<GPUser> userList) {
-        List<UserDTO> shortUsers = new ArrayList<UserDTO>(userList.size());
+    // TODO Move to UserList?
+    // as constructor: UserList list = new UserList(List<GPUser>);    
+    private UserList convertToUserList(List<GPUser> userList) {
+        List<UserDTO> usersDTO = new ArrayList<UserDTO>(userList.size());
         for (GPUser dGUser : userList) {
-            shortUsers.add(new UserDTO(dGUser));
+            usersDTO.add(new UserDTO(dGUser));
         }
 
         UserList users = new UserList();
-        users.setList(shortUsers);
+        users.setList(usersDTO);
         return users;
     }
 

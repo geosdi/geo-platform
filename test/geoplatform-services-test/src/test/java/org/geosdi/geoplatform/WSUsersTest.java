@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.responce.ShortUser;
+import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.UserList;
 import org.junit.Test;
 
@@ -62,7 +62,7 @@ public class WSUsersTest extends CXFServiceTest{
         UserList userList = geoPlatformService.getUsers();
 
         if (userList != null) {
-            for (Iterator<ShortUser> it = userList.getList().iterator(); it.hasNext();) {
+            for (Iterator<UserDTO> it = userList.getList().iterator(); it.hasNext();) {
                 logger.info("USER ********************* " + it.next());
 
             }

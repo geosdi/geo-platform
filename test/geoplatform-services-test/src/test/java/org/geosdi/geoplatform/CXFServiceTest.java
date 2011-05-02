@@ -41,7 +41,7 @@ import junit.framework.Assert;
 
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
-import org.geosdi.geoplatform.responce.ShortServer;
+import org.geosdi.geoplatform.responce.ServerDTO;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -65,26 +65,26 @@ public class CXFServiceTest extends ServiceTest  {
     public void testGetCapabilities() throws ParseException,
             ResourceNotFoundFault {
 
-        ShortServer shortServer = geoPlatformService.getServer("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
+        ServerDTO serverDTO = geoPlatformService.getServer("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
 
-        Assert.assertNotNull(shortServer);
+        Assert.assertNotNull(serverDTO);
 
         logger.info("NUMBER OF LAYERS FOR DPC ********** "
-                + geoPlatformService.getCapabilities(new RequestById(shortServer.getId())).getList().size());
+                + geoPlatformService.getCapabilities(new RequestById(serverDTO.getId())).getList().size());
 
     }
 
     @Test
     public void testServer1() throws ResourceNotFoundFault {
-        ShortServer shortServer1 = geoPlatformService.getServer("http://maps.telespazio.it/dpc/dpc-wms");
+        ServerDTO serverDTO1 = geoPlatformService.getServer("http://maps.telespazio.it/dpc/dpc-wms");
 
-        Assert.assertNotNull(shortServer1);
+        Assert.assertNotNull(serverDTO1);
 
         Assert.assertEquals(
                 8,
-                geoPlatformService.getCapabilities(new RequestById(shortServer1.getId())).getList().size());
+                geoPlatformService.getCapabilities(new RequestById(serverDTO1.getId())).getList().size());
 
         logger.info("NUMBER OF LAYERS FOR TELESPAZIO ********** "
-                + geoPlatformService.getCapabilities(new RequestById(shortServer1.getId())).getList().size());
+                + geoPlatformService.getCapabilities(new RequestById(serverDTO1.getId())).getList().size());
     }
 }

@@ -64,9 +64,9 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.menu.AddLayerAction;
-import org.geosdi.geoplatform.gui.client.mvc.MediatorLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
+import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
 import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 
@@ -77,10 +77,10 @@ import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
  */
 public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
-    private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(this.tree);
-
     private LayerRemoteAsync layerService = LayerRemoteImpl.Util.getInstance();
 
+    private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(this.tree);
+    private MediatorToolbarTreeAction actionMediator;
     private GPRootTreeNode root;
 
     private boolean initialized;
@@ -92,6 +92,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
         super();
         this.buildRoot();
         this.setTreePanelProperties();
+        this.actionMediator = new MediatorToolbarTreeAction();
         //TODO: After toolbar implementation remove this method
         this.addMenuAddElement();
     }
@@ -166,17 +167,17 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
         this.tree.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        final MediatorLayerTreeAction mediatorLayer = new MediatorLayerTreeAction();
         this.tree.getSelectionModel().addSelectionChangedListener(new SelectionChangedListener<GPBeanTreeModel>() {
 
             @Override
-            public void selectionChanged(SelectionChangedEvent<GPBeanTreeModel> se) {
+            public void selectionChanged(
+                    SelectionChangedEvent<GPBeanTreeModel> se) {
                 if (se.getSelectedItem() != null) {
-                    System.out.println("TEST SELECTION CHANGED ************ " + se.getSelectedItem());
-                    mediatorLayer.enableActions(se.getSelectedItem());
+                    actionMediator.elementChanged(se.getSelectedItem());
                 } else {
-                    mediatorLayer.disableActions();
+                    actionMediator.disableAllActions();
                 }
+
             }
         });
 
@@ -218,7 +219,9 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                     return;
                 }
                 super.dragStart(e);
-                ((TreePanelDragSource) e.getSource()).fireEvent(LayerEvents.GP_DRAG_START, new TreeStoreEvent<GPBeanTreeModel>(tree.getStore()));
+                ((TreePanelDragSource) e.getSource()).fireEvent(
+                        LayerEvents.GP_DRAG_START, new TreeStoreEvent<GPBeanTreeModel>(
+                        tree.getStore()));
             }
         });
 
@@ -231,7 +234,9 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
             @Override
             public void handleEvent(BaseEvent be) {
-                ((TreePanelDragSource) be.getSource()).fireEvent(LayerEvents.GP_DRAG_LOST, new TreeStoreEvent<GPBeanTreeModel>(tree.getStore()));
+                ((TreePanelDragSource) be.getSource()).fireEvent(
+                        LayerEvents.GP_DRAG_LOST, new TreeStoreEvent<GPBeanTreeModel>(
+                        tree.getStore()));
                 //System.out.println("DragSource: Ho intercettato il drag cancelled");
             }
         };

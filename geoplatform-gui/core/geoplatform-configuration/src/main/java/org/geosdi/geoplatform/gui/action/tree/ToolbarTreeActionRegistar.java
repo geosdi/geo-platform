@@ -36,7 +36,10 @@
 package org.geosdi.geoplatform.gui.action.tree;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import java.util.ArrayList;
+import java.util.List;
 import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionCreator;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionRegistar;
 
 /**
@@ -46,12 +49,22 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionRegistar
  */
 public class ToolbarTreeActionRegistar extends GeoPlatformActionRegistar {
 
+    private static ToolbarTreeActionRegistar INSTANCE;
+
+    public static ToolbarTreeActionRegistar createFactory() {
+        if (INSTANCE == null) {
+            INSTANCE = new ToolbarTreeActionRegistar();
+        }
+        return INSTANCE;
+    }
+
     /**
      * 
      * @param key
      * @param toolActionCreator
      */
-    public static void put(String key, ToolbarTreeActionCreator toolActionCreator) {
+    public static void put(String key,
+            ToolbarTreeActionCreator toolActionCreator) {
         if (key != null && toolActionCreator != null) {
             createFactory().getRegistry().put(key, toolActionCreator);
         }
@@ -68,8 +81,33 @@ public class ToolbarTreeActionRegistar extends GeoPlatformActionRegistar {
      */
     public static GeoPlatformToolbarAction get(String key,
             TreePanel tree) {
-        ToolbarTreeActionCreator toolActionCreator = (ToolbarTreeActionCreator) createFactory().getRegistry().get(key);
+        ToolbarTreeActionCreator toolActionCreator = (ToolbarTreeActionCreator) createFactory().getRegistry().get(
+                key);
 
-        return toolActionCreator == null ? null : toolActionCreator.createActionTool(tree);
+        return toolActionCreator == null ? null : toolActionCreator.createActionTool(
+                tree);
+    }
+
+    /**
+     * 
+     * @param key
+     *
+     * @return null or the GeoPlatformToolbarAction 
+     */
+    public static GeoPlatformToolbarAction get(String key) {
+        ToolbarTreeActionCreator toolActionCreator = (ToolbarTreeActionCreator) createFactory().getRegistry().get(
+                key);
+
+        return toolActionCreator == null ? null : toolActionCreator.getAction();
+    }
+
+    /**
+     *
+     * @return List for all Actions
+     *
+     */
+    public static List<GeoPlatformActionCreator> getActionsCreator() {
+        return new ArrayList<GeoPlatformActionCreator>(
+                createFactory().getRegistry().values());
     }
 }

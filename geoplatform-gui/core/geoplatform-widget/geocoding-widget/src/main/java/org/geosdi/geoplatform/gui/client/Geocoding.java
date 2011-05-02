@@ -88,6 +88,7 @@ public class Geocoding implements EntryPoint {
         ToolbarActionRegistar.put("reverseGeocoding",
                 new ToolbarActionCreator() {
 
+                    @Override
                     public GeoPlatformToolbarAction createActionTool(
                             GeoPlatformMap mapWidget) {
                         // TODO Auto-generated method stub

@@ -43,6 +43,15 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionRegistar
  */
 public class MenuActionRegistar extends GeoPlatformActionRegistar {
 
+     private static MenuActionRegistar INSTANCE;
+
+     public static MenuActionRegistar createFactory() {
+        if (INSTANCE == null) {
+            INSTANCE = new MenuActionRegistar();
+        }
+        return INSTANCE;
+    }
+
     /**
      *
      * @param key

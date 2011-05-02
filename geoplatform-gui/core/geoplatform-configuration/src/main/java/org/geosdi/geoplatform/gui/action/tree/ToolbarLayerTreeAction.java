@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
 public abstract class ToolbarLayerTreeAction extends GeoPlatformToolbarAction {
 
     private String tooltip;
-    private TreePanel tree;
+    protected TreePanel tree;
 
     public ToolbarLayerTreeAction(TreePanel theTree,
             AbstractImagePrototype image,

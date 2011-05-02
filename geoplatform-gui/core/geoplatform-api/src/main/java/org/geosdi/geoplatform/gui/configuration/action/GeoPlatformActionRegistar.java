@@ -42,20 +42,12 @@ import java.util.Map;
  * @author giuseppe
  * 
  */
-public class GeoPlatformActionRegistar {
+public abstract class GeoPlatformActionRegistar {
 
-    private static GeoPlatformActionRegistar INSTANCE;
     private Map<String, GeoPlatformActionCreator> registry;
 
     protected GeoPlatformActionRegistar() {
         this.registry = new HashMap<String, GeoPlatformActionCreator>();
-    }
-
-    public static GeoPlatformActionRegistar createFactory() {
-        if (INSTANCE == null) {
-            INSTANCE = new GeoPlatformActionRegistar();
-        }
-        return INSTANCE;
     }
 
     /**

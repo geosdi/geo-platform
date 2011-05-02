@@ -44,6 +44,15 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
  */
 public class ToolbarActionRegistar extends GeoPlatformActionRegistar {
 
+    private static ToolbarActionRegistar INSTANCE;
+
+     public static ToolbarActionRegistar createFactory() {
+        if (INSTANCE == null) {
+            INSTANCE = new ToolbarActionRegistar();
+        }
+        return INSTANCE;
+    }
+
     /**
      *
      * @param key

@@ -33,43 +33,45 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.mvc;
+package org.geosdi.geoplatform.gui.client.model.visitor;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
-import org.geosdi.geoplatform.gui.client.model.visitor.VisitorLayerTreeAction;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
+import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
+import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
+import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email  nazzareno.sileno@geosdi.org
  */
-public class MediatorLayerTreeAction {
-    
-    private List<String> actionIdList = new ArrayList<String>();
-    
-    private List<String> disablingActions = new ArrayList<String>();
-    
-    private VisitorLayerTreeAction actionVisitor = new VisitorLayerTreeAction();
-    
-    public void enableActions(GPBeanTreeModel element) {
-        element.accept(this.actionVisitor);
-        List<String> enablingActions = this.actionVisitor.getIdActions();
-        this.disablingActions.clear();
-        this.disablingActions.addAll(actionIdList);
-        this.disablingActions.removeAll(enablingActions);
-        for (String actionId : this.disablingActions) {
-            //((GeoPlatformToolbarAction)Registry.getAction(actionId)).disable();
-        }
-        for (String actionId : enablingActions) {
-            //((GeoPlatformToolbarAction)Registry.getAction(actionId)).enable();
-        }
+public class VisitorToolbarTreeAction implements IVisitor {
+
+    private MediatorToolbarTreeAction mediator;
+
+    public VisitorToolbarTreeAction(MediatorToolbarTreeAction theMediator) {
+        this.mediator = theMediator;
     }
-    
-    public void disableActions() {
-        for (String actionId : this.actionIdList) {
-            //((GeoPlatformToolbarAction)Registry.getAction(actionId)).disable();
-        }
+
+    @Override
+    public void visitRoot(AbstractRootTreeNode root) {
+        this.mediator.enableActions("addFolder");
+    }
+
+    @Override
+    public void visitFolder(AbstractFolderTreeNode folder) {
+        this.mediator.enableActions("addFolder", "addRasterLayer",
+                "addVectorLayer", "removeElement");
+    }
+
+    @Override
+    public void visitVector(GPVectorBean vector) {
+        this.mediator.enableActions("removeElement");
+    }
+
+    @Override
+    public void visitRaster(GPRasterBean raster) {
+        this.mediator.enableActions("removeElement");
     }
 }

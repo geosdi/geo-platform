@@ -33,47 +33,58 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.model.visitor;
+package org.geosdi.geoplatform.gui.client.widget.toolbar.mediator;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
-import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
-import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
+import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionCreator;
+import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionRegistar;
+import org.geosdi.geoplatform.gui.client.model.visitor.VisitorToolbarTreeAction;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionCreator;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email  nazzareno.sileno@geosdi.org
  */
-public class VisitorLayerTreeAction implements IVisitor{
-    
-    private List<String> idActionList = new ArrayList<String>();
+public class MediatorToolbarTreeAction {
 
-    public List<String> getIdActions(){
-        return this.idActionList;
-    }
-    
-    @Override
-    public void visitRoot(AbstractRootTreeNode root) {
-        this.idActionList.clear();
+    private VisitorToolbarTreeAction actionVisitor;
+
+    public MediatorToolbarTreeAction() {
+        this.actionVisitor = new VisitorToolbarTreeAction(this);
     }
 
-    @Override
-    public void visitFolder(AbstractFolderTreeNode folder) {
-        this.idActionList.clear();
+    /**
+     *
+     * @param element
+     */
+    public void elementChanged(GPBeanTreeModel element) {
+        element.accept(actionVisitor);
     }
 
-    @Override
-    public void visitVector(GPVectorBean vector) {
-        this.idActionList.clear();
+   /**
+    * 
+    * @param idActions
+    */
+    public void enableActions(String... idActions) {
+        disableAllActions();
+
+        for (String idAcion : idActions) {
+            GeoPlatformToolbarAction action = ToolbarTreeActionRegistar.get(
+                    idAcion);
+            if (action != null)
+                action.setEnabled(true);
+        }
     }
 
-    @Override
-    public void visitRaster(GPRasterBean raster) {
-        this.idActionList.clear();
+    /**
+     * Disable all Actions
+     * 
+     */
+    public void disableAllActions() {
+        for (GeoPlatformActionCreator actionCreator : ToolbarTreeActionRegistar.getActionsCreator()) {
+            ((ToolbarTreeActionCreator) actionCreator).getAction().setEnabled(
+                    false);
+        }
     }
-    
 }

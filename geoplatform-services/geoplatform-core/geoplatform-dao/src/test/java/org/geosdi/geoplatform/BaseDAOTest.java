@@ -1,3 +1,4 @@
+//<editor-fold defaultstate="collapsed" desc="License">
 /*
  *  geo-platform
  *  Rich webgis framework
@@ -6,33 +7,34 @@
  *
  * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- * This program is free software: you can redistribute it and/or modify it 
- * under the terms of the GNU General Public License as published by 
- * the Free Software Foundation, either version 3 of the License, or 
- * (at your option) any later version. This program is distributed in the 
- * hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR 
- * A PARTICULAR PURPOSE. See the GNU General Public License 
- * for more details. You should have received a copy of the GNU General 
- * Public License along with this program. If not, see http://www.gnu.org/licenses/ 
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
  *
  * ====================================================================
  *
- * Linking this library statically or dynamically with other modules is 
- * making a combined work based on this library. Thus, the terms and 
- * conditions of the GNU General Public License cover the whole combination. 
- * 
- * As a special exception, the copyright holders of this library give you permission 
- * to link this library with independent modules to produce an executable, regardless 
- * of the license terms of these independent modules, and to copy and distribute 
- * the resulting executable under terms of your choice, provided that you also meet, 
- * for each linked independent module, the terms and conditions of the license of 
- * that module. An independent module is a module which is not derived from or 
- * based on this library. If you modify this library, you may extend this exception 
- * to your version of the library, but you are not obligated to do so. If you do not 
- * wish to do so, delete this exception statement from your version. 
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ *
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  *
  */
+//</editor-fold>
 package org.geosdi.geoplatform;
 
 import java.util.ArrayList;
@@ -74,22 +76,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public abstract class BaseDAOTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
-    
     @Autowired
     protected GPUserDAO userDAO;
-    
     @Autowired
     protected GPFolderDAO folderDAO;
-    
     @Autowired
     protected GPLayerDAO layerDAO;
-    
     @Autowired
     protected GPStyleDAO styleDAO;
-    
     @Autowired
     protected GPServerDAO serverDAO;
-    
     @Autowired
     protected GPAuthorityDAO authorityDAO;
 
@@ -110,6 +106,7 @@ public abstract class BaseDAOTest {
         Assert.assertNotNull(authorityDAO);
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Remove all data">
     protected void removeAll() {
         removeAllStyle();
         removeAllLayer();
@@ -161,11 +158,13 @@ public abstract class BaseDAOTest {
             Assert.assertTrue("Old User not removed", ret);
         }
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Insert data">
     protected void insertData() throws ParseException {
         insertUser();
     }
-    
+
     private void insertUser() {
         GPUser user = createUser("user_0");
         userDAO.persist(user);
@@ -173,47 +172,10 @@ public abstract class BaseDAOTest {
 
         List<GPAuthority> authorities = new ArrayList<GPAuthority>();
         GPAuthority authority = new GPAuthority(user.getUsername(), "ROLE_ADMIN");
-        authorities.add(authority);        
+        authorities.add(authority);
         user.setGpAuthorities(authorities);
         authorityDAO.persist(authority);
         logger.info("Save Authority for: " + authority);
-    }
-
-    protected void insertFolders() throws ParseException {
-        insertFolderUser();
-    }
-
-    private void insertFolderUser() {
-        GPUser user = userDAO.findByUsername("user_0");
-
-        GPFolder folderRaster = new GPFolder();
-        folderRaster.setName("my raster");
-        folderRaster.setOwner(user);
-        folderRaster.setPosition(1);
-        folderRaster.setParent(null);
-
-        GPFolder folderIGM = new GPFolder();
-        folderIGM.setName("IGM");
-        folderIGM.setPosition(2);
-        folderIGM.setParent(folderRaster);
-
-        GPRasterLayer layer1 = new GPRasterLayer();
-        layer1.setAbstractText("deagostini_ita_250mila");
-        layer1.setName("StratiDiBase:deagostini_ita_250mila");
-        layer1.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
-        layer1.setBbox(new GPBBox(6.342, 35.095, 19.003, 47.316));
-        layer1.setLayerType(GPLayerType.RASTER);
-        layer1.setSrs("EPSG:4326");
-
-        GPLayerInfo info = new GPLayerInfo();
-        info.setKeywords("IGM");
-        info.setQueryable(true);
-
-        layer1.setLayerInfo(info);
-        layer1.setFolder(folderRaster);
-
-        folderDAO.persist(folderRaster, folderIGM);
-        layerDAO.persist(layer1);
     }
 
     protected GPUser createUser(String name) {
@@ -226,4 +188,60 @@ public abstract class BaseDAOTest {
         user.setSendEmail(true);
         return user;
     }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Insert folders">
+    protected void insertFolders() throws ParseException {
+        insertFolderUser();
+    }
+
+    private void insertFolderUser() {
+        GPUser user = userDAO.findByUsername("user_0");
+        int position = 0;
+
+        GPFolder onlyFolders = new GPFolder();
+        onlyFolders.setName("only folders");
+        onlyFolders.setOwner(user);
+        onlyFolders.setPosition(++position);
+        onlyFolders.setParent(null);
+
+        GPFolder emptySubFolder = new GPFolder();
+        emptySubFolder.setName("empty sub folder");
+//        emptySubFolder.setOwner(null);
+        emptySubFolder.setPosition(++position);
+        emptySubFolder.setParent(onlyFolders);
+        folderDAO.persist(onlyFolders, emptySubFolder);
+
+        GPFolder folderRaster = new GPFolder();
+        folderRaster.setName("my raster");
+        folderRaster.setOwner(user);
+        folderRaster.setPosition(++position);
+        folderRaster.setParent(null);
+
+        GPRasterLayer layer1 = new GPRasterLayer();
+        layer1.setName("StratiDiBase:deagostini_ita_250mila");
+        layer1.setPosition(++position);
+        layer1.setAbstractText("deagostini_ita_250mila");
+        layer1.setTitle("deagostini");
+        layer1.setSrs("EPSG:4326");
+        layer1.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
+        layer1.setBbox(new GPBBox(6.342, 35.095, 19.003, 47.316));
+        layer1.setLayerType(GPLayerType.RASTER);
+
+        GPLayerInfo info = new GPLayerInfo();
+        info.setKeywords("IGM");
+        info.setQueryable(true);
+
+        layer1.setLayerInfo(info);
+        layer1.setFolder(folderRaster);
+
+        GPFolder folderIGM = new GPFolder();
+        folderIGM.setName("IGM");
+        folderIGM.setPosition(++position);
+        folderIGM.setParent(folderRaster);
+
+        folderDAO.persist(folderRaster, folderIGM);
+        layerDAO.persist(layer1);
+    }
+    //</editor-fold>
 }

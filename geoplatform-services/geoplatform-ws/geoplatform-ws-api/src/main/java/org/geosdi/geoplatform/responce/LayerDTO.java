@@ -37,9 +37,12 @@
 //</editor-fold>
 package org.geosdi.geoplatform.responce;
 
+import java.util.Collection;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPLayerType;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -52,10 +55,9 @@ public class LayerDTO extends AbstractElementDTO {
     private String title;
     private String urlServer;
     private String srs;
-    // TODO add referece to:
-//    private GPLayerType layerType;
-//    private GPBBox bbox;
-//    private Collection<StyleDTO> styles;
+    private GPLayerType layerType;
+    private GPBBox bbox;
+    private Collection<StyleDTO> styles;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
@@ -137,29 +139,29 @@ public class LayerDTO extends AbstractElementDTO {
         this.urlServer = urlServer;
     }
 
-//    public GPLayerType getLayerType() {
-//        return layerType;
-//    }
-//
-//    public void setLayerType(GPLayerType layerType) {
-//        this.layerType = layerType;
-//    }
-//
-//    public GPBBox getBbox() {
-//        return bbox;
-//    }
-//
-//    public void setBbox(GPBBox bbox) {
-//        this.bbox = bbox;
-//    }
-//
-//    public Collection<StyleDTO> getStyles() {
-//        return styles;
-//    }
-//
-//    public void setStyles(Collection<StyleDTO> styles) {
-//        this.styles = styles;
-//    }
+    public GPLayerType getLayerType() {
+        return layerType;
+    }
+
+    public void setLayerType(GPLayerType layerType) {
+        this.layerType = layerType;
+    }
+
+    public GPBBox getBbox() {
+        return bbox;
+    }
+
+    public void setBbox(GPBBox bbox) {
+        this.bbox = bbox;
+    }
+
+    public Collection<StyleDTO> getStyles() {
+        return styles;
+    }
+
+    public void setStyles(Collection<StyleDTO> styles) {
+        this.styles = styles;
+    }
     //</editor-fold>
 
     /*

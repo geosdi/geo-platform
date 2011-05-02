@@ -298,7 +298,7 @@ class FolderServiceImpl {
         FolderList folders = new FolderList();
         folders.setList(foldersDTO);
         return folders;
-    }
+    }    
     
     // TODO Move to LayerList?
     // as constructor: LayerList list = new LayerList(List<GPLayer>);
@@ -311,5 +311,5 @@ class FolderServiceImpl {
         LayerList layers = new LayerList();
         layers.setList(layersDTO);
         return layers;
-    }
+    }     
 }

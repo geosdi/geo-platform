@@ -38,39 +38,23 @@ package org.geosdi.geoplatform.gui.impl.tree;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
-import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-@Component("toolbarTreeClientTool")
-public class ToolbarTreeClientTool implements IToolbarClientTool {
+public class ToolbarTreeClientTool {
 
-    private static final long serialVersionUID = -8900045519375952954L;
+    private List<GenericClientTool> clientTools = new ArrayList<GenericClientTool>();
 
-    private List<GenericClientTool> clientTools;
-
-    @Override
-    public List<GenericClientTool> getClientTools() {
-        return clientTools;
+    public ToolbarTreeClientTool() {
+        this.buildActionTools();
     }
 
-    @Override
-    public void setClientTools(List<GenericClientTool> clientTools) {
-        Collections.sort(clientTools);
-        this.clientTools = clientTools;
-    }
-
-    @PostConstruct
-    public void buildActionTools() {
-        this.clientTools = new ArrayList<GenericClientTool>();
-
+    private void buildActionTools() {
         ActionClientTool addFolder = new ActionClientTool();
         addFolder.setId("addFolder");
         addFolder.setType("button");
@@ -100,13 +84,20 @@ public class ToolbarTreeClientTool implements IToolbarClientTool {
         removeElement.setEnabled(false);
         removeElement.setOrder(5);
 
-        this.clientTools.add(removeElement);
-        this.clientTools.add(toolbarSeparator);
-        this.clientTools.add(addFolder);
-        this.clientTools.add(addVectorLayer);
-        this.clientTools.add(addRasterLayer);
+        this.getClientTools().add(removeElement);
+        this.getClientTools().add(toolbarSeparator);
+        this.getClientTools().add(addFolder);
+        this.getClientTools().add(addVectorLayer);
+        this.getClientTools().add(addRasterLayer);
 
-        Collections.sort(clientTools);
+        Collections.sort(getClientTools());
 
+    }
+
+    /**
+     * @return the clientTools
+     */
+    public List<GenericClientTool> getClientTools() {
+        return clientTools;
     }
 }

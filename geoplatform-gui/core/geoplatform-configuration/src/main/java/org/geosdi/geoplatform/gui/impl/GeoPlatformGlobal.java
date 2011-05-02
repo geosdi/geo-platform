@@ -65,10 +65,6 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
 
     private FolderStore folderStore;
 
-    /** In this way will be The Framework that build the Toolbar for TreeLayerWidget **/
-    @Autowired
-    private IToolbarClientTool toolbarTreeClientTool;
-
     /**
      * @return the geoPlatformInfo
      */
@@ -129,14 +125,5 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
 
     public void setFolderStore(FolderStore folserStore) {
         this.folderStore = folserStore;
-    }
-
-    @Override
-    public IToolbarClientTool getToolbarTreeClientTool() {
-        return this.toolbarTreeClientTool;
-    }
-
-    public void setToolbarTreeClientTool(IToolbarClientTool toolbarTreeClientTool) {
-        this.toolbarTreeClientTool = toolbarTreeClientTool;
     }
 }

@@ -40,7 +40,6 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import java.util.List;
 import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
 import org.geosdi.geoplatform.gui.action.event.ActionDisabledEvent;
 import org.geosdi.geoplatform.gui.action.event.ActionEnabledEvent;
@@ -50,7 +49,7 @@ import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionRegistar;
 import org.geosdi.geoplatform.gui.client.widget.tree.toolbar.GPTreeToolbar;
 import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
-import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
+import org.geosdi.geoplatform.gui.impl.tree.ToolbarTreeClientTool;
 
 /**
  *
@@ -60,6 +59,8 @@ import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 public class LayerTreeToolbar extends GPTreeToolbar {
 
     private boolean initialized;
+
+    private ToolbarTreeClientTool toolbarTreeClientTool = new ToolbarTreeClientTool();
 
     /**
      *
@@ -84,10 +85,7 @@ public class LayerTreeToolbar extends GPTreeToolbar {
      * 
      */
     private void initialize() {
-        List<GenericClientTool> tools = GeoPlatformUtils.getInstance().
-                getGlobalConfiguration().
-                getToolbarTreeClientTool().getClientTools();
-        for (GenericClientTool tool : tools) {
+        for (GenericClientTool tool : this.toolbarTreeClientTool.getClientTools()) {
             String id = tool.getId();
             if (id.equals(TOOLBAR_SEPARATOR)) {
                 addSeparator();

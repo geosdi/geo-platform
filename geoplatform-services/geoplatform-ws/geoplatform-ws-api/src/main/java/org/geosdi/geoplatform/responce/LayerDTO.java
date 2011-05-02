@@ -38,7 +38,13 @@
 package org.geosdi.geoplatform.responce;
 
 import java.util.Collection;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayer;
@@ -48,8 +54,11 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
  * @author Francesco Izzi - CNR IMAA - geoSDI
  * 
  */
-@XmlRootElement(name = "LayerDTO")
-public class LayerDTO extends AbstractElementDTO {
+@XmlTransient
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"abstractText", "title", "urlServer", "srs", "layerType", "bbox", "styles"})
+@XmlSeeAlso(value = {RasterLayerDTO.class}) //TODO @XmlSeeAlso(value = {RasterLayerDTO.class, VectorLayerDTO.class})
+public abstract class LayerDTO extends AbstractElementDTO {
 
     private String abstractText;
     private String title;
@@ -57,6 +66,9 @@ public class LayerDTO extends AbstractElementDTO {
     private String srs;
     private GPLayerType layerType;
     private GPBBox bbox;
+    // TODO check
+    @XmlElementWrapper(name = "stylesCollection")
+    @XmlElement(name = "style")
     private Collection<StyleDTO> styles;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
@@ -75,6 +87,10 @@ public class LayerDTO extends AbstractElementDTO {
         super(layer.getId(), layer.getName(), layer.getPosition(), layer.isShared());
         this.abstractText = layer.getAbstractText();
         this.title = layer.getTitle();
+        this.urlServer = layer.getUrlServer();
+        this.srs = layer.getSrs();
+        this.layerType = layer.getLayerType();
+        this.bbox = layer.getBbox();        
     }
     //</editor-fold>
 
@@ -171,7 +187,13 @@ public class LayerDTO extends AbstractElementDTO {
      */
     @Override
     public String toString() {
-        return "LayerDTO [" + super.toString()
-                + "title=" + title + ", abstractText=" + abstractText + "]";
+        String s = super.toString()
+                + ", title=" + title + ", abstractText=" + abstractText
+                + ", urlServer=" + urlServer + ", title=" + title
+                + ", layerType=" + layerType.name() + ", " + bbox;
+        if (styles != null) {
+            s += ", #styles=" + styles.size();
+        }
+        return s;
     }
 }

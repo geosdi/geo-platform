@@ -48,6 +48,7 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.LayerList;
 import org.geosdi.geoplatform.responce.LayerDTO;
+import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geotools.data.ows.Layer;
 import org.geotools.data.ows.WMSCapabilities;
 import org.geotools.data.wms.WebMapServer;
@@ -92,15 +93,16 @@ class WMSServiceImpl {
 
     // TODO Move to LayerList?
     // as constructor: LayerList list = new LayerList(List<Layer>);    
+    // TODO Correct mapping Layer to LayerDTO
     private LayerList convertToShortList(List<Layer> layerList) {
         List<LayerDTO> shortLayers = new ArrayList<LayerDTO>(layerList.size());
-        LayerDTO shortLayerIth = null;
+        LayerDTO layerDTOIth = null;
         for (Layer layer : layerList) {
-            shortLayerIth = new LayerDTO();
-            shortLayerIth.setName(layer.getName());
-            shortLayerIth.setTitle(layer.getTitle());
-            shortLayerIth.setAbstractText(layer.get_abstract());
-            shortLayers.add(shortLayerIth);
+            layerDTOIth = new RasterLayerDTO(); // TODO LayerDTO as abstract class?
+            layerDTOIth.setName(layer.getName());          
+            layerDTOIth.setAbstractText(layer.get_abstract());
+            layerDTOIth.setTitle(layer.getTitle());
+            shortLayers.add(layerDTOIth);
         }
 
         LayerList layers = new LayerList();

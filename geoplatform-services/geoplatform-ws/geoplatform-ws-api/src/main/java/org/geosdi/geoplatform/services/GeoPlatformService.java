@@ -56,7 +56,6 @@ import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.RequestByUserFolder;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderList;
-import org.geosdi.geoplatform.responce.ElementList;
 import org.geosdi.geoplatform.responce.LayerList;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.TreeFolderElements;
@@ -166,22 +165,30 @@ public interface GeoPlatformService {
     /**
      * @return Owned and shared Folders visible to a given user.
      */
-    FolderList getAllUserFolders(long userId, int num, int page);
+    FolderList getAllUserFolders(
+            @WebParam(name = "userId") long userId,
+            @WebParam(name = "num") int num,
+            @WebParam(name = "page") int page);
 
     /**
      * @return Children folders.
      */
-    FolderList getChildrenFolders(long folderId, int num, int page);
+    FolderList getChildrenFolders(
+            @WebParam(name = "folderId") long folderId,
+            @WebParam(name = "num") int num,
+            @WebParam(name = "page") int page);    
 
     /**
      * @return Children elements (folder and layer).
      */
-    TreeFolderElements getChildrenElements(long folderId);
+    @Get
+    @WebResult(name = "ChildrenElement")
+    TreeFolderElements getChildrenElements(@WebParam(name = "folderId") long folderId);
 
     /**
      * @return Count Owned and shared Folders visible to a given user.
      */
-    int getAllUserFoldersCount(long userId);
+    int getAllUserFoldersCount(@WebParam(name = "userId") long userId);
 
     @Post
     @HttpResource(location = "/folder/{id}/shared")

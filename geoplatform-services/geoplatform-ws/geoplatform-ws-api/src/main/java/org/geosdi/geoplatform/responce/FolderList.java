@@ -57,7 +57,7 @@ public class FolderList {
     /**
      * @return the users
      */
-    @XmlElement(name = "Folders", required = true, nillable = false)
+    @XmlElement(name = "Folder", required = true, nillable = false)
     public Collection<FolderDTO> getList() {
         return list;
     }

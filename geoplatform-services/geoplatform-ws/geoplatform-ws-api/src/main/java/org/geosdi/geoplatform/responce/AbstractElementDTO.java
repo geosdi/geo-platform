@@ -37,13 +37,14 @@
 //</editor-fold>
 package org.geosdi.geoplatform.responce;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Vincenzo Monteverde
  * @author Michele Santomauro
  *
  */
+@XmlTransient
 public abstract class AbstractElementDTO implements IElementDTO, Comparable<IElementDTO> {
     
     private long id = -1; // Database identity
@@ -155,20 +156,5 @@ public abstract class AbstractElementDTO implements IElementDTO, Comparable<IEle
             return -1;
         }
         return 1;
-    }
-
-
-    // For handle IElementDTO inteface in CXF
-    static class Adapter extends XmlAdapter<AbstractElementDTO, IElementDTO> {
-
-        @Override
-        public IElementDTO unmarshal(AbstractElementDTO v) {
-            return v;
-        }
-
-        @Override
-        public AbstractElementDTO marshal(IElementDTO v) {
-            return (AbstractElementDTO) v;
-        }
     }
 }

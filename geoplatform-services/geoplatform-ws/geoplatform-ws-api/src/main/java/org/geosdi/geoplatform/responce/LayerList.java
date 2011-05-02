@@ -54,7 +54,7 @@ public class LayerList {
     /**
      * @return the layers
      */
-    @XmlElement(name = "Layers", required = true, nillable = false)
+    @XmlElement(name = "Layer", required = true, nillable = false)
     public Collection<LayerDTO> getList() {
         return list;
     }

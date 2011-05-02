@@ -65,7 +65,6 @@ public class GPBBox implements Serializable {
     public GPBBox() {
     }
 
-    
     /**
      * @return the minX
      */
@@ -124,5 +123,11 @@ public class GPBBox implements Serializable {
      */
     public void setMaxY(double maxY) {
         this.maxY = maxY;
+    }
+
+    @Override
+    public String toString() {
+        return "GPBBox [" + "minX=" + minX + ", minY=" + minY
+                + ", maxX=" + maxX + ", maxY=" + maxY + ']';
     }
 }

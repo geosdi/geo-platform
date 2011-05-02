@@ -85,4 +85,9 @@ public class GPLayerInfo implements Serializable {
     public void setKeywords(String keywords) {
         this.keywords = keywords;
     }
+
+    @Override
+    public String toString() {
+        return "GPLayerInfo [" + "queryable=" + queryable + ", keywords=" + keywords + ']';
+    }        
 }

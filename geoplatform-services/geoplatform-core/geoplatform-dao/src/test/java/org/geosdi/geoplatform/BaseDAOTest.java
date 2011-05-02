@@ -218,22 +218,30 @@ public abstract class BaseDAOTest {
         folderRaster.setPosition(++position);
         folderRaster.setParent(null);
 
-        GPRasterLayer layer1 = new GPRasterLayer();
-        layer1.setName("StratiDiBase:deagostini_ita_250mila");
-        layer1.setPosition(++position);
-        layer1.setAbstractText("deagostini_ita_250mila");
-        layer1.setTitle("deagostini");
-        layer1.setSrs("EPSG:4326");
-        layer1.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
-        layer1.setBbox(new GPBBox(6.342, 35.095, 19.003, 47.316));
-        layer1.setLayerType(GPLayerType.RASTER);
+        GPRasterLayer rasterLayer1 = new GPRasterLayer();
+        rasterLayer1.setName("StratiDiBase:deagostini_ita_250mila");
+        rasterLayer1.setPosition(++position);
+        rasterLayer1.setAbstractText("deagostini_ita_250mila");
+        rasterLayer1.setTitle("deagostini");
+        rasterLayer1.setSrs("EPSG:4326");
+        rasterLayer1.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
+        rasterLayer1.setBbox(new GPBBox(6.342, 35.095, 19.003, 47.316));
+        rasterLayer1.setLayerType(GPLayerType.RASTER);
 
+        // GPLayerInfo
         GPLayerInfo info = new GPLayerInfo();
         info.setKeywords("IGM");
         info.setQueryable(true);
+        rasterLayer1.setLayerInfo(info);
 
-        layer1.setLayerInfo(info);
-        layer1.setFolder(folderRaster);
+        // GPStyle #1
+        GPStyle style1 = createStyleDTO("style 1");
+        style1.setLayer(rasterLayer1);
+        // GPStyle #2
+        GPStyle style2 = createStyleDTO("style 2");
+        style2.setLayer(rasterLayer1);
+
+        rasterLayer1.setFolder(folderRaster);
 
         GPFolder folderIGM = new GPFolder();
         folderIGM.setName("IGM");
@@ -241,7 +249,17 @@ public abstract class BaseDAOTest {
         folderIGM.setParent(folderRaster);
 
         folderDAO.persist(folderRaster, folderIGM);
-        layerDAO.persist(layer1);
+        layerDAO.persist(rasterLayer1);
+        styleDAO.persist(style1, style2);
+    }
+
+    protected GPStyle createStyleDTO(String name) {
+        GPStyle style = new GPStyle();
+        style.setName(name);
+        style.setTitle("The " + name);
+        style.setAbstractText("Abstract for " + name);
+        style.setLegendURL("http://www.geosdi.org/" + name.replaceAll("[ ]+", "-"));
+        return style;
     }
     //</editor-fold>
 }

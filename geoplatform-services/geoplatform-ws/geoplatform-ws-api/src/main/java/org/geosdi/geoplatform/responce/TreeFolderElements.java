@@ -39,13 +39,19 @@ package org.geosdi.geoplatform.responce;
 
 import java.util.Collection;
 import java.util.TreeSet;
+import org.apache.commons.lang.NotImplementedException;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPRasterLayer;
 
 /**
  * @author Vincenzo Monteverde
  * @author Michele Santomauro
  *
+ */
+/**
+ * Ordered collection (wrt position) without duplicates
  */
 public class TreeFolderElements extends TreeSet<IElementDTO> {
 
@@ -55,7 +61,7 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
      */
     public void AddFolderCollection(Collection<GPFolder> folderList) {
         for (GPFolder folder : folderList) {
-            this.add(new FolderDTO(folder));
+            super.add(new FolderDTO(folder));
         }
     }
 
@@ -63,9 +69,25 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
      * @param layerList
      *            list of GPlayer
      */
-    public void AddLayerCollection(Collection<GPLayer> folderLayer) {
-        for (GPLayer layer : folderLayer) {
-            this.add(new LayerDTO(layer));
+    public void AddLayerCollection(Collection<GPLayer> layerList)
+            throws ClassCastException, NotImplementedException {
+        for (GPLayer layer : layerList) {
+            GPLayerType layerType = layer.getLayerType();
+            if (layerType.equals(GPLayerType.RASTER)) {
+                GPRasterLayer rasterLayer = (GPRasterLayer) layer;
+                RasterLayerDTO rasterLayerDTO = new RasterLayerDTO(rasterLayer);                
+                // TODO delete | log
+                System.out.println("@@@@\n" + rasterLayerDTO + "\n@@@@");
+                //
+                super.add(rasterLayerDTO);
+            } else if (layerType.equals(GPLayerType.MULTIPOLYGON)) {
+                // TODO GPVectorLayer
+                // Note: More LayerType match a GPVectorLayer                
+//                super.add(new );
+            } else {
+                // TODO                
+                throw new UnsupportedOperationException("Handle of all LayerType NOT implemented!");
+            }
         }
     }
 }

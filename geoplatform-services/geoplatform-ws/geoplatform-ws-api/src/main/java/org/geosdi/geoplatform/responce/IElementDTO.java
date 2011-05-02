@@ -48,8 +48,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 /**
  * Tag Interface: define the IElementDTO type
  */
-// For handle this inteface in CXF
-@XmlJavaTypeAdapter(AbstractElementDTO.Adapter.class)
+// For handle this inteface with JAXB
+@XmlJavaTypeAdapter(value = ElementDTOAdapter.class)
 public interface IElementDTO {
     
 }

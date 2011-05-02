@@ -37,44 +37,48 @@
 //</editor-fold>
 package org.geosdi.geoplatform.responce;
 
-import java.util.Collection;
-
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GPLayerInfo;
+import org.geosdi.geoplatform.core.model.GPRasterLayer;
 
 /**
- * A list of cut down Folder and Layer info.
+ * @author Vincenzo Monteverde
+ *
  */
-@XmlRootElement(name = "ElementList")
-public class ElementList {
+@XmlRootElement(name = "RasterLayerDTO")
+public class RasterLayerDTO extends LayerDTO {
+    
+    private GPLayerInfo layerInfo;
 
-    private Collection<IElementDTO> list;
-
-    /**
-     * @return the items
-     */
-    @XmlElement(name = "Element", required = true, nillable = false)
-    public Collection<IElementDTO> getList() {
-        return list;
+    //<editor-fold defaultstate="collapsed" desc="Constructor method">
+    public RasterLayerDTO() {
     }
-
-    /**
-     * @param items
-     *            the items to set
-     */
-    public void setList(Collection<IElementDTO> items) {
-        this.list = items;
+    
+    public RasterLayerDTO(GPRasterLayer rasterLayer) {
+        super(rasterLayer);
+        this.layerInfo = rasterLayer.getLayerInfo();
     }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
+    /**
+     * @return the layerInfo
+     */
+    public GPLayerInfo getLayerInfo() {
+        return layerInfo;
+    }
+    
+    /**
+     * @param layerInfo
+     *            the layerInfo to set
+     */
+    public void setLayerInfo(GPLayerInfo layerInfo) {
+        this.layerInfo = layerInfo;
+    }
+    //</editor-fold>
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(getClass().getSimpleName()).append('{');
-        if (list == null) {
-            sb.append("NULL");
-        } else {
-            sb.append(list.size());
-        }
-        sb.append('}');
-        return sb.toString();
+        return "RasterLayerDTO [" + super.toString() + ", " + layerInfo + ']';
     }
 }

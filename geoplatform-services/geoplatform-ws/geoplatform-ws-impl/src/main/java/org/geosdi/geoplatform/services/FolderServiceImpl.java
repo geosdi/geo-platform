@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
@@ -52,13 +53,11 @@ import org.geosdi.geoplatform.request.RequestByUserFolder;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderList;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.TreeFolderElements;
 
 import com.trg.search.Filter;
 import com.trg.search.Search;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.responce.LayerList;
-import org.geosdi.geoplatform.responce.LayerDTO;
-import org.geosdi.geoplatform.responce.TreeFolderElements;
+import javax.jws.WebParam;
 
 /**
  * @author giuseppe
@@ -252,7 +251,7 @@ class FolderServiceImpl {
 
         return true;
     }
-
+    
     public TreeFolderElements getChildrenElements(long folderId) {
         TreeFolderElements tree = new TreeFolderElements();
         
@@ -267,9 +266,9 @@ class FolderServiceImpl {
         searchCriteria.addSortAsc("name");        
         Filter folder = Filter.equal("folder.id", folderId);
         searchCriteria.addFilter(folder);
-        List<GPLayer> foundLayer = layerDao.search(searchCriteria);
-        tree.AddLayerCollection(foundLayer);
-
+        List<GPLayer> foundLayer = layerDao.search(searchCriteria);        
+        tree.AddLayerCollection(foundLayer);        
+        
         return tree;
     }
 
@@ -302,14 +301,14 @@ class FolderServiceImpl {
     
     // TODO Move to LayerList?
     // as constructor: LayerList list = new LayerList(List<GPLayer>);
-    private LayerList convertToLayerList(List<GPLayer> layerList) {
-        List<LayerDTO> layersDTO = new ArrayList<LayerDTO>(layerList.size());
-        for (GPLayer layer : layerList) {
-            layersDTO.add(new LayerDTO(layer));
-        }
-
-        LayerList layers = new LayerList();
-        layers.setList(layersDTO);
-        return layers;
-    }     
+//    private LayerList convertToLayerList(List<GPLayer> layerList) {
+//        List<LayerDTO> layersDTO = new ArrayList<LayerDTO>(layerList.size());
+//        for (GPLayer layer : layerList) {
+//            layersDTO.add(new LayerDTO(layer));
+//        }
+//
+//        LayerList layers = new LayerList();
+//        layers.setList(layersDTO);
+//        return layers;
+//    }     
 }

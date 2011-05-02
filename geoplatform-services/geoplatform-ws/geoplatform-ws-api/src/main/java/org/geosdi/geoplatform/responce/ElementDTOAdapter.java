@@ -37,44 +37,22 @@
 //</editor-fold>
 package org.geosdi.geoplatform.responce;
 
-import java.util.Collection;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
- * A list of cut down Folder and Layer info.
+ * @author Vincenzo Monteverde
+ *
  */
-@XmlRootElement(name = "ElementList")
-public class ElementList {
+// For handle IElementDTO inteface with JAXB
+public class ElementDTOAdapter extends XmlAdapter<AbstractElementDTO, IElementDTO> {
 
-    private Collection<IElementDTO> list;
-
-    /**
-     * @return the items
-     */
-    @XmlElement(name = "Element", required = true, nillable = false)
-    public Collection<IElementDTO> getList() {
-        return list;
-    }
-
-    /**
-     * @param items
-     *            the items to set
-     */
-    public void setList(Collection<IElementDTO> items) {
-        this.list = items;
+    @Override
+    public IElementDTO unmarshal(AbstractElementDTO v) {
+        return v;
     }
 
     @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder(getClass().getSimpleName()).append('{');
-        if (list == null) {
-            sb.append("NULL");
-        } else {
-            sb.append(list.size());
-        }
-        sb.append('}');
-        return sb.toString();
+    public AbstractElementDTO marshal(IElementDTO v) {
+        return (AbstractElementDTO) v;
     }
 }

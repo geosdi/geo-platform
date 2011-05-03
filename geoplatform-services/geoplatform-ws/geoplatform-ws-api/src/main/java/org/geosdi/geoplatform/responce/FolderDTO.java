@@ -38,6 +38,8 @@
 package org.geosdi.geoplatform.responce;
 
 import java.util.Collection;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -49,6 +51,7 @@ import org.geosdi.geoplatform.core.model.GPFolder;
  * 
  */
 @XmlRootElement(name = "FolderDTO")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class FolderDTO extends AbstractElementDTO {
 
     @XmlElementWrapper(name = "elementsCollection")

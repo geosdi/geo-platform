@@ -302,7 +302,8 @@ public abstract class BaseDAOTest {
                 infoLayer.setKeywords(layers.get(i).getKeywords()!= null?layers.get(i).getKeywords().toString():"");
                 infoLayer.setQueryable(true);
                 raster.setLayerInfo(infoLayer);
-                raster.setFolder(folderIGM);
+                raster.setFolder(folderRaster);
+                raster.setLayerType(GPLayerType.RASTER);
                 layerDAO.persist(raster);
             }
 

@@ -37,6 +37,9 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +58,11 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPStyle;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geotools.data.ows.Layer;
+import org.geotools.data.ows.WMSCapabilities;
+import org.geotools.data.wms.WebMapServer;
+import org.geotools.ows.ServiceException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -65,6 +73,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.ParseException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.xml.sax.SAXException;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -113,6 +122,7 @@ public abstract class BaseDAOTest {
         removeAllFolder();
         removeAllAuthority();
         removeAllUser();
+        removeAllServer();
     }
 
     private void removeAllAuthority() {
@@ -136,8 +146,7 @@ public abstract class BaseDAOTest {
         List<GPLayer> layers = layerDAO.findAll();
         for (GPLayer layer : layers) {
             logger.info("Removing " + layer);
-            boolean ret = layerDAO.remove(layer);
-            Assert.assertTrue("Old Layer not removed", ret);
+            layerDAO.remove(layer);
         }
     }
 
@@ -158,8 +167,17 @@ public abstract class BaseDAOTest {
             Assert.assertTrue("Old User not removed", ret);
         }
     }
-    //</editor-fold>
 
+    private void removeAllServer() {
+        List<GeoPlatformServer> servers = serverDAO.findAll();
+        for (GeoPlatformServer server : servers) {
+            logger.info("Removing " + server);
+            boolean ret = serverDAO.remove(server);
+            Assert.assertTrue("Old User not removed", ret);
+        }
+    }
+
+    //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Insert data">
     protected void insertData() throws ParseException {
         insertUser();
@@ -189,6 +207,10 @@ public abstract class BaseDAOTest {
         return user;
     }
     //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Insert folders">
+    protected void insertMockLayer() throws ParseException {
+    }
 
     //<editor-fold defaultstate="collapsed" desc="Insert folders">
     protected void insertFolders() throws ParseException {
@@ -251,6 +273,54 @@ public abstract class BaseDAOTest {
         folderDAO.persist(folderRaster, folderIGM);
         layerDAO.persist(rasterLayer1);
         styleDAO.persist(style1, style2);
+
+        //load sitpdc layer
+        URL url = null;
+        try {
+            url = new URL("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
+        } catch (MalformedURLException e) {
+            System.out.println("ERRORE:" +e);
+        }
+
+        WebMapServer wms = null;
+        try {
+            wms = new WebMapServer(url);
+
+            WMSCapabilities capabilities = wms.getCapabilities();
+
+            List<Layer> layers = capabilities.getLayerList();
+
+            for (int i=1; i<layers.size(); i++) {
+                System.out.println("LAYER"+layers.get(i));
+                GPRasterLayer raster = new GPRasterLayer();
+                raster.setName(layers.get(i).getName());
+                raster.setAbstractText(layers.get(i).get_abstract());
+                raster.setSrs(layers.get(i).getSrs().toString());
+                raster.setBbox(new GPBBox(layers.get(i).getLatLonBoundingBox().getMinX(), layers.get(i).getLatLonBoundingBox().getMinY(),
+                        layers.get(i).getLatLonBoundingBox().getMaxX(), layers.get(i).getLatLonBoundingBox().getMaxY()));
+                GPLayerInfo infoLayer = new GPLayerInfo();
+                infoLayer.setKeywords(layers.get(i).getKeywords()!= null?layers.get(i).getKeywords().toString():"");
+                infoLayer.setQueryable(true);
+                raster.setLayerInfo(infoLayer);
+                raster.setFolder(folderIGM);
+                layerDAO.persist(raster);
+            }
+
+
+        } catch (IOException e) {
+            //There was an error communicating with the server
+            //For example, the server is down
+        } catch (ServiceException e) {
+            //The server returned a ServiceException (unusual in this case)
+        } catch (SAXException e) {
+            //Unable to parse the response from the server
+            //For example, the capabilities it returned was not valid
+        }
+
+
+
+
+
     }
 
     protected GPStyle createStyleDTO(String name) {

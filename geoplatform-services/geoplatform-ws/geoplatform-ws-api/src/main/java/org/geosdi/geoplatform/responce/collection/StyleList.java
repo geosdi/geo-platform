@@ -35,40 +35,42 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.responce;
+package org.geosdi.geoplatform.responce.collection;
 
 import java.util.Collection;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.responce.StyleDTO;
 
 /**
- * @author giuseppe
- *
+ * @author Vincenzo Monteverde
+ * 
  */
-/**
- * A list of cut down DGUser info.
- */
-@XmlRootElement(name = "UserList")
-public class UserList {
+@XmlRootElement(name = "StyleList")
+public class StyleList {
 
-    private Collection<UserDTO> list;
+    private Collection<StyleDTO> list;
 
     /**
-     * @return the users
+     * @return the layers
      */
-    @XmlElement(name = "User", required = true, nillable = false)
-    public Collection<UserDTO> getList() {
+    @XmlElement(name = "Style", required = true, nillable = false)
+    public Collection<StyleDTO> getList() {
         return list;
     }
 
     /**
-     * @param users the users to set
+     * @param layers
+     *            the layer to set
      */
-    public void setList(Collection<UserDTO> users) {
-        this.list = users;
+    public void setList(Collection<StyleDTO> layers) {
+        this.list = layers;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(getClass().getSimpleName()).append('{');

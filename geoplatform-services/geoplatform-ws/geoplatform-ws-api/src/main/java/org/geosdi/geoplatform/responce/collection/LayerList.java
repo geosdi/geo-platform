@@ -35,41 +35,42 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.responce;
+package org.geosdi.geoplatform.responce.collection;
 
 import java.util.Collection;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.responce.AbstractLayerDTO;
 
 /**
- * @author Francesco Izzi - CNR IMAA geoSDI Group
- *
+ * @author Francesco Izzi - CNR IMAA - geoSDI
+ * 
  */
-/**
- * A list of cut down Folder info.
- */
-@XmlRootElement(name = "FolderList")
-public class FolderList {
+@XmlRootElement(name = "LayerList")
+public class LayerList {
 
-    private Collection<FolderDTO> list;
+    private Collection<AbstractLayerDTO> list;
 
     /**
-     * @return the users
+     * @return the layers
      */
-    @XmlElement(name = "Folder", required = true, nillable = false)
-    public Collection<FolderDTO> getList() {
+    @XmlElement(name = "Layer", required = true, nillable = false)
+    public Collection<AbstractLayerDTO> getList() {
         return list;
     }
 
     /**
      * @param users
-     *            the users to set
+     *            the layer to set
      */
-    public void setList(Collection<FolderDTO> folders) {
-        this.list = folders;
+    public void setList(Collection<AbstractLayerDTO> layers) {
+        this.list = layers;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(getClass().getSimpleName()).append('{');

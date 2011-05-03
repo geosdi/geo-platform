@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.UserDTO;
-import org.geosdi.geoplatform.responce.UserList;
+import org.geosdi.geoplatform.responce.collection.UserList;
 import org.junit.Test;
 
 /**

@@ -35,35 +35,40 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.responce;
+package org.geosdi.geoplatform.responce.collection;
 
 import java.util.Collection;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.responce.UserDTO;
+import org.geosdi.geoplatform.responce.UserDTO;
 
 /**
- * A list of cut down Folder and Layer info.
+ * @author giuseppe
+ *
  */
-@XmlRootElement(name = "ElementList")
-public class ElementList {
+/**
+ * A list of cut down DGUser info.
+ */
+@XmlRootElement(name = "UserList")
+public class UserList {
 
-    private Collection<IElementDTO> list;
+    private Collection<UserDTO> list;
 
     /**
-     * @return the items
+     * @return the users
      */
-    @XmlElement(name = "Element", required = true, nillable = false)
-    public Collection<IElementDTO> getList() {
+    @XmlElement(name = "User", required = true, nillable = false)
+    public Collection<UserDTO> getList() {
         return list;
     }
 
     /**
-     * @param items
-     *            the items to set
+     * @param users the users to set
      */
-    public void setList(Collection<IElementDTO> items) {
-        this.list = items;
+    public void setList(Collection<UserDTO> users) {
+        this.list = users;
     }
 
     @Override

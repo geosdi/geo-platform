@@ -58,7 +58,7 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"abstractText", "title", "urlServer", "srs", "layerType", "bbox", "styles"})
 @XmlSeeAlso(value = {RasterLayerDTO.class}) //TODO @XmlSeeAlso(value = {RasterLayerDTO.class, VectorLayerDTO.class})
-public abstract class LayerDTO extends AbstractElementDTO {
+public abstract class AbstractLayerDTO extends AbstractElementDTO {
 
     private String abstractText;
     private String title;
@@ -66,7 +66,6 @@ public abstract class LayerDTO extends AbstractElementDTO {
     private String srs;
     private GPLayerType layerType;
     private GPBBox bbox;
-    // TODO check
     @XmlElementWrapper(name = "stylesCollection")
     @XmlElement(name = "style")
     private Collection<StyleDTO> styles;
@@ -75,7 +74,7 @@ public abstract class LayerDTO extends AbstractElementDTO {
     /**
      * Default constructor
      */
-    public LayerDTO() {
+    public AbstractLayerDTO() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -83,7 +82,7 @@ public abstract class LayerDTO extends AbstractElementDTO {
     /**
      * Constructor with GPLayer as arg
      */
-    public LayerDTO(GPLayer layer) {
+    public AbstractLayerDTO(GPLayer layer) {
         super(layer.getId(), layer.getName(), layer.getPosition(), layer.isShared());
         this.abstractText = layer.getAbstractText();
         this.title = layer.getTitle();

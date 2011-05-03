@@ -35,15 +35,21 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.responce;
+package org.geosdi.geoplatform.responce.collection;
 
 import java.util.Collection;
 import java.util.TreeSet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.commons.lang.NotImplementedException;
+
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
+import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.IElementDTO;
+import org.geosdi.geoplatform.responce.RasterLayerDTO;
 
 /**
  * @author Vincenzo Monteverde
@@ -54,6 +60,8 @@ import org.geosdi.geoplatform.core.model.GPRasterLayer;
  * Ordered collection (wrt position) without duplicates
  */
 public class TreeFolderElements extends TreeSet<IElementDTO> {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * @param folderList
@@ -75,10 +83,8 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
             GPLayerType layerType = layer.getLayerType();
             if (layerType.equals(GPLayerType.RASTER)) {
                 GPRasterLayer rasterLayer = (GPRasterLayer) layer;
-                RasterLayerDTO rasterLayerDTO = new RasterLayerDTO(rasterLayer);                
-                // TODO delete | log
-                System.out.println("@@@@\n" + rasterLayerDTO + "\n@@@@");
-                //
+                RasterLayerDTO rasterLayerDTO = new RasterLayerDTO(rasterLayer);
+                logger.debug("###\n" + rasterLayerDTO + "\n###");
                 super.add(rasterLayerDTO);
             } else if (layerType.equals(GPLayerType.MULTIPOLYGON)) {
                 // TODO GPVectorLayer

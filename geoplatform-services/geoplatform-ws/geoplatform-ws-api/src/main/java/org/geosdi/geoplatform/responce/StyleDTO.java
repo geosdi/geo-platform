@@ -38,6 +38,8 @@
 package org.geosdi.geoplatform.responce;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 import org.geosdi.geoplatform.core.model.GPStyle;
 
 /**
@@ -46,6 +48,7 @@ import org.geosdi.geoplatform.core.model.GPStyle;
  *
  */
 @XmlRootElement(name = "StyleDTO")
+@XmlType(propOrder = {"id", "name", "title", "abstractText", "legendURL"})
 public class StyleDTO {
 
     private long id;

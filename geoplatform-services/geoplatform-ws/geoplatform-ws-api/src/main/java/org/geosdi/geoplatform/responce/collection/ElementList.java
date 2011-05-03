@@ -35,76 +35,47 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.responce;
+package org.geosdi.geoplatform.responce.collection;
 
 import java.util.Collection;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 
-import org.geosdi.geoplatform.core.model.GPFolder;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.responce.IElementDTO;
 
 /**
- * @author giuseppe
- * 
+ * A list of cut down Folder and Layer info.
  */
-@XmlRootElement(name = "FolderDTO")
-public class FolderDTO extends AbstractElementDTO {
+@XmlRootElement(name = "ElementList")
+public class ElementList {
 
-    @XmlElementWrapper(name = "elementsCollection")
-    @XmlElement(name = "element")    
-    private Collection<IElementDTO> elements;
+    private Collection<IElementDTO> list;
 
-    //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
-     * Default constructor
+     * @return the items
      */
-    public FolderDTO() {
-        super();
+    @XmlElement(name = "Element", required = true, nillable = false)
+    public Collection<IElementDTO> getList() {
+        return list;
     }
 
     /**
-     * Constructor with GPFolder as arg
-     * @param folder
+     * @param items
+     *            the items to set
      */
-    public FolderDTO(GPFolder folder) {
-        super(folder.getId(), folder.getName(), folder.getPosition(), folder.isShared());
+    public void setList(Collection<IElementDTO> items) {
+        this.list = items;
     }
 
-    /**
-     * Constructor with args
-     * @param folder
-     */
-    public FolderDTO(GPFolder folder, Collection<IElementDTO> elements) {
-        super(folder.getId(), folder.getName(), folder.getPosition(), folder.isShared());
-        this.elements = elements;
-    }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
-    /**
-     * @return the elements
-     */
-    public Collection<IElementDTO> getElements() {
-        return elements;
-    }
-    
-    /**
-     * @param elements
-     *            the elements to set
-     */
-    public void setElements(Collection<IElementDTO> elements) {
-        this.elements = elements;
-    }
-    //</editor-fold>
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
-        return "FolderDTO [" + super.toString() + ']';
+        StringBuilder sb = new StringBuilder(getClass().getSimpleName()).append('{');
+        if (list == null) {
+            sb.append("NULL");
+        } else {
+            sb.append(list.size());
+        }
+        sb.append('}');
+        return sb.toString();
     }
 }

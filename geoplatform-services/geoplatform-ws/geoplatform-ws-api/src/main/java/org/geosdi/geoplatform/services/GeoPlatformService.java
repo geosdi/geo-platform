@@ -55,11 +55,12 @@ import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.RequestByUserFolder;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.responce.FolderList;
-import org.geosdi.geoplatform.responce.LayerList;
+import org.geosdi.geoplatform.responce.collection.FolderList;
+import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.ServerDTO;
-import org.geosdi.geoplatform.responce.TreeFolderElements;
-import org.geosdi.geoplatform.responce.UserList;
+import org.geosdi.geoplatform.responce.collection.StyleList;
+import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
+import org.geosdi.geoplatform.responce.collection.UserList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
@@ -176,7 +177,7 @@ public interface GeoPlatformService {
     FolderList getChildrenFolders(
             @WebParam(name = "folderId") long folderId,
             @WebParam(name = "num") int num,
-            @WebParam(name = "page") int page);    
+            @WebParam(name = "page") int page);
 
     /**
      * @return Children elements (folder and layer).
@@ -203,6 +204,16 @@ public interface GeoPlatformService {
     @HttpResource(location = "/folder/{folderId}/forceowner/{userId}")
     void forceFolderOwner(RequestByUserFolder request)
             throws ResourceNotFoundFault;
+
+    // ==========================================================================
+    // === Layer / Style
+    // ==========================================================================
+    /**
+     * @return Styles of a layer.
+     */    
+    @Get
+    @WebResult(name = "LayerStyles")
+    StyleList getLayerStayls(@WebParam(name = "layerId") long layerId);
 
     // ==========================================================================
     // === OWS

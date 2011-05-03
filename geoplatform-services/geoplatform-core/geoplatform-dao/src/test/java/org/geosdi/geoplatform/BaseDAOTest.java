@@ -85,16 +85,22 @@ import org.xml.sax.SAXException;
 public abstract class BaseDAOTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     protected GPUserDAO userDAO;
+
     @Autowired
     protected GPFolderDAO folderDAO;
+
     @Autowired
     protected GPLayerDAO layerDAO;
+
     @Autowired
     protected GPStyleDAO styleDAO;
+
     @Autowired
     protected GPServerDAO serverDAO;
+
     @Autowired
     protected GPAuthorityDAO authorityDAO;
 
@@ -178,7 +184,6 @@ public abstract class BaseDAOTest {
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="Insert data">
     protected void insertData() throws ParseException {
         insertUser();
@@ -272,7 +277,8 @@ public abstract class BaseDAOTest {
         //load sitpdc layer
         URL url = null;
         try {
-            url = new URL("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
+            url = new URL(
+                    "http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
         } catch (MalformedURLException e) {
             System.out.println("ERRORE:" + e);
         }
@@ -291,10 +297,14 @@ public abstract class BaseDAOTest {
                 raster.setName(layers.get(i).getName());
                 raster.setAbstractText(layers.get(i).get_abstract());
                 raster.setSrs(layers.get(i).getSrs().toString());
-                raster.setBbox(new GPBBox(layers.get(i).getLatLonBoundingBox().getMinX(), layers.get(i).getLatLonBoundingBox().getMinY(),
-                        layers.get(i).getLatLonBoundingBox().getMaxX(), layers.get(i).getLatLonBoundingBox().getMaxY()));
+                raster.setBbox(new GPBBox(
+                        layers.get(i).getLatLonBoundingBox().getMinX(), layers.get(
+                        i).getLatLonBoundingBox().getMinY(),
+                        layers.get(i).getLatLonBoundingBox().getMaxX(), layers.get(
+                        i).getLatLonBoundingBox().getMaxY()));
                 GPLayerInfo infoLayer = new GPLayerInfo();
-                infoLayer.setKeywords(layers.get(i).getKeywords() != null ? layers.get(i).getKeywords().toString() : "");
+                infoLayer.setKeywords(layers.get(i).getKeywords() != null ? layers.get(
+                        i).getKeywords().toString() : "");
                 infoLayer.setQueryable(true);
                 raster.setLayerInfo(infoLayer);
                 raster.setFolder(folderRaster);
@@ -303,12 +313,12 @@ public abstract class BaseDAOTest {
                 layerDAO.persist(raster);
             }
 
-        GPFolder folderIGM = new GPFolder();
-        folderIGM.setName("IGM");
-        folderIGM.setPosition(++position);
-        folderIGM.setParent(folderRaster);
-        folderDAO.persist(folderIGM);
-        
+            GPFolder folderIGM = new GPFolder();
+            folderIGM.setName("IGM");
+            folderIGM.setPosition(++position);
+            folderIGM.setParent(folderRaster);
+            folderDAO.persist(folderIGM);
+
         } catch (IOException e) {
             //There was an error communicating with the server
             //For example, the server is down
@@ -330,7 +340,8 @@ public abstract class BaseDAOTest {
         style.setName(name);
         style.setTitle("The " + name);
         style.setAbstractText("Abstract for " + name);
-        style.setLegendURL("http://www.geosdi.org/" + name.replaceAll("[ ]+", "-"));
+        style.setLegendURL("http://www.geosdi.org/" + name.replaceAll("[ ]+",
+                "-"));
         return style;
     }
     //</editor-fold>

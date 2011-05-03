@@ -50,6 +50,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import com.vividsolutions.jts.geom.Geometry;
+import javax.persistence.CascadeType;
+import javax.persistence.ManyToOne;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -70,6 +74,25 @@ public class GPVectorLayer extends GPLayer implements Serializable {
     @Type(type = "org.hibernatespatial.GeometryUserType")
     @Column(name = "geometry", nullable = true)
     private Geometry geometry;
+
+    @ManyToOne(cascade = CascadeType.REMOVE, optional = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private GPFolder folder;
+
+    /**
+     * @return the folder
+     */
+    public GPFolder getFolder() {
+        return folder;
+    }
+
+    /**
+     * @param folder
+     *            the bbox to folder
+     */
+    public void setFolder(GPFolder folder) {
+        this.folder = folder;
+    }
 
     /**
      * @return the geometry

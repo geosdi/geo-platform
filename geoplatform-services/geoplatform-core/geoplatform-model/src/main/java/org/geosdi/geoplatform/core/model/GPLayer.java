@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -46,10 +45,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * @author Francesco Izzi - geoSDI
@@ -94,10 +90,6 @@ public abstract class GPLayer implements Serializable {
 
     @Embedded
     private GPBBox bbox;
-
-    @ManyToOne(cascade = CascadeType.REMOVE, optional = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private GPFolder folder;
 
     private GPLayerType layerType;
 
@@ -232,21 +224,6 @@ public abstract class GPLayer implements Serializable {
      */
     public void setBbox(GPBBox bbox) {
         this.bbox = bbox;
-    }
-
-    /**
-     * @return the folder
-     */
-    public GPFolder getFolder() {
-        return folder;
-    }
-
-    /**
-     * @param folder
-     *            the bbox to folder
-     */
-    public void setFolder(GPFolder folder) {
-        this.folder = folder;
     }
 
     /**

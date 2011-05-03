@@ -36,15 +36,19 @@
 package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -62,9 +66,27 @@ public class GPRasterLayer extends GPLayer implements Serializable {
      */
     private static final long serialVersionUID = -1852288981980627642L;
 
-    
     @Embedded
     private GPLayerInfo layerInfo;
+
+    @ManyToOne(cascade = CascadeType.REMOVE, optional = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private GPFolder folder;
+
+    /**
+     * @return the folder
+     */
+    public GPFolder getFolder() {
+        return folder;
+    }
+
+    /**
+     * @param folder
+     *            the bbox to folder
+     */
+    public void setFolder(GPFolder folder) {
+        this.folder = folder;
+    }
 
     /**
      * @return the layerInfo

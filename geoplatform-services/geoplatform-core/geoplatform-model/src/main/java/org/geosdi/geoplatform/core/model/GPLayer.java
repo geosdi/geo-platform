@@ -48,7 +48,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -57,8 +56,7 @@ import org.hibernate.annotations.OnDeleteAction;
  * 
  */
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "gp_layer")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class GPLayer implements Serializable {
 
     /**
@@ -67,7 +65,8 @@ public abstract class GPLayer implements Serializable {
     private static final long serialVersionUID = 5746325405739614413L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_LAYER_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+                    generator = "GP_LAYER_SEQ")
     @SequenceGenerator(name = "GP_LAYER_SEQ", sequenceName = "GP_LAYER_SEQ")
     @Column
     private long id;

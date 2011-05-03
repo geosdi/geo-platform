@@ -178,6 +178,7 @@ public abstract class BaseDAOTest {
     }
 
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Insert data">
     protected void insertData() throws ParseException {
         insertUser();
@@ -208,11 +209,10 @@ public abstract class BaseDAOTest {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Insert folders">
+    //<editor-fold defaultstate="collapsed" desc="Insert folders">    
     protected void insertMockLayer() throws ParseException {
     }
 
-    //<editor-fold defaultstate="collapsed" desc="Insert folders">
     protected void insertFolders() throws ParseException {
         insertFolderUser();
     }
@@ -265,12 +265,7 @@ public abstract class BaseDAOTest {
 
         rasterLayer1.setFolder(folderRaster);
 
-        GPFolder folderIGM = new GPFolder();
-        folderIGM.setName("IGM");
-        folderIGM.setPosition(++position);
-        folderIGM.setParent(folderRaster);
-
-        folderDAO.persist(folderRaster, folderIGM);
+        folderDAO.persist(folderRaster);
         layerDAO.persist(rasterLayer1);
         styleDAO.persist(style1, style2);
 
@@ -279,7 +274,7 @@ public abstract class BaseDAOTest {
         try {
             url = new URL("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
         } catch (MalformedURLException e) {
-            System.out.println("ERRORE:" +e);
+            System.out.println("ERRORE:" + e);
         }
 
         WebMapServer wms = null;
@@ -290,8 +285,8 @@ public abstract class BaseDAOTest {
 
             List<Layer> layers = capabilities.getLayerList();
 
-            for (int i=1; i<layers.size(); i++) {
-                System.out.println("LAYER"+layers.get(i));
+            for (int i = 1; i < layers.size(); i++) {
+                System.out.println("LAYER" + layers.get(i));
                 GPRasterLayer raster = new GPRasterLayer();
                 raster.setName(layers.get(i).getName());
                 raster.setAbstractText(layers.get(i).get_abstract());
@@ -299,15 +294,21 @@ public abstract class BaseDAOTest {
                 raster.setBbox(new GPBBox(layers.get(i).getLatLonBoundingBox().getMinX(), layers.get(i).getLatLonBoundingBox().getMinY(),
                         layers.get(i).getLatLonBoundingBox().getMaxX(), layers.get(i).getLatLonBoundingBox().getMaxY()));
                 GPLayerInfo infoLayer = new GPLayerInfo();
-                infoLayer.setKeywords(layers.get(i).getKeywords()!= null?layers.get(i).getKeywords().toString():"");
+                infoLayer.setKeywords(layers.get(i).getKeywords() != null ? layers.get(i).getKeywords().toString() : "");
                 infoLayer.setQueryable(true);
                 raster.setLayerInfo(infoLayer);
                 raster.setFolder(folderRaster);
                 raster.setLayerType(GPLayerType.RASTER);
+                raster.setPosition(++position);
                 layerDAO.persist(raster);
             }
 
-
+        GPFolder folderIGM = new GPFolder();
+        folderIGM.setName("IGM");
+        folderIGM.setPosition(++position);
+        folderIGM.setParent(folderRaster);
+        folderDAO.persist(folderIGM);
+        
         } catch (IOException e) {
             //There was an error communicating with the server
             //For example, the server is down

@@ -45,11 +45,15 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  */
 @XmlTransient
-public abstract class AbstractElementDTO implements IElementDTO, Comparable<IElementDTO> {
-    
+public abstract class AbstractElementDTO implements IElementDTO,
+        Comparable<IElementDTO> {
+
     private long id = -1; // Database identity
+
     private String name = "NULL";
+
     private int position = -1;
+
     private boolean shared = false;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
@@ -149,12 +153,6 @@ public abstract class AbstractElementDTO implements IElementDTO, Comparable<IEle
     // For sort IElementDTO object in the TreeFolderElements
     @Override
     public int compareTo(IElementDTO element) {
-        AbstractElementDTO abstractElement = (AbstractElementDTO) element;
-        if (this.position == abstractElement.getPosition()) {
-            return 0;
-        } else if (this.position < abstractElement.getPosition()) {
-            return -1;
-        }
-        return 1;
+        return ((AbstractElementDTO) element).getPosition() - getPosition();
     }
 }

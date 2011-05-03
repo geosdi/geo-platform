@@ -61,18 +61,18 @@ public class CXFServiceTest extends ServiceTest  {
         geoPlatformService = gpWSClient.create();
     }
 
-    @Test
-    public void testGetCapabilities() throws ParseException,
-            ResourceNotFoundFault {
-
-        ServerDTO serverDTO = geoPlatformService.getServer("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
-
-        Assert.assertNotNull(serverDTO);
-
-        logger.info("NUMBER OF LAYERS FOR DPC ********** "
-                + geoPlatformService.getCapabilities(new RequestById(serverDTO.getId())).getList().size());
-
-    }
+//    @Test
+//    public void testGetCapabilities() throws ParseException,
+//            ResourceNotFoundFault {
+//
+//        ServerDTO serverDTO = geoPlatformService.getServer("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
+//
+//        Assert.assertNotNull(serverDTO);
+//
+//        logger.info("NUMBER OF LAYERS FOR DPC ********** "
+//                + geoPlatformService.getCapabilities(new RequestById(serverDTO.getId())).getList().size());
+//
+//    }
 
     @Test
     public void testServer1() throws ResourceNotFoundFault {

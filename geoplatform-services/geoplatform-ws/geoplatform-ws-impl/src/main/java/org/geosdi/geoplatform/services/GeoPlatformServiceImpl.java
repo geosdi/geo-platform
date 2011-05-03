@@ -231,7 +231,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     @Override
     public StyleList getLayerStayls(long layerId) {
-        return layerServiceDelegate.getLayerStayls(layerId);
+        return layerServiceDelegate.getLayerStyles(layerId);
     }
 
     // ==========================================================================

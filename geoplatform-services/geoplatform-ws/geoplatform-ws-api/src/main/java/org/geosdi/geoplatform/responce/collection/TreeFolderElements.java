@@ -41,15 +41,16 @@ import java.util.Collection;
 import java.util.TreeSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.commons.lang.NotImplementedException;
 
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
+import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
+import org.geosdi.geoplatform.responce.VectorLayerDTO;
 
 /**
  * @author Vincenzo Monteverde
@@ -59,6 +60,9 @@ import org.geosdi.geoplatform.responce.RasterLayerDTO;
 /**
  * Ordered collection (wrt position) without duplicates
  */
+// TODO
+// !Handle the case where an element is not included in the tree!
+// Note: super.add() return boolean
 public class TreeFolderElements extends TreeSet<IElementDTO> {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -77,8 +81,9 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
      * @param layerList
      *            list of GPlayer
      */
-    public void AddLayerCollection(Collection<GPLayer> layerList)
-            throws ClassCastException, NotImplementedException {
+    // TODO
+    // !Note: More LayerType match a GPVectorLayer!
+    public void AddLayerCollection(Collection<GPLayer> layerList) throws ClassCastException {
         for (GPLayer layer : layerList) {
             GPLayerType layerType = layer.getLayerType();
             if (layerType.equals(GPLayerType.RASTER)) {
@@ -87,11 +92,12 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
                 logger.debug("###\n" + rasterLayerDTO + "\n###");
                 super.add(rasterLayerDTO);
             } else if (layerType.equals(GPLayerType.MULTIPOLYGON)) {
-                // TODO GPVectorLayer
-                // Note: More LayerType match a GPVectorLayer                
-//                super.add(new );
+                GPVectorLayer vectorLayer = (GPVectorLayer) layer;
+                VectorLayerDTO vectorLayerDTO = new VectorLayerDTO(vectorLayer);
+                logger.debug("###\n" + vectorLayerDTO + "\n###");
+                super.add(vectorLayerDTO);
             } else {
-                // TODO                
+                // TODO
                 throw new UnsupportedOperationException("Handle of all LayerType NOT implemented!");
             }
         }

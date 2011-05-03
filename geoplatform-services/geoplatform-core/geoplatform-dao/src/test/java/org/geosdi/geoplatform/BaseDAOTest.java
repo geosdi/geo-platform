@@ -37,6 +37,14 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.CoordinateFilter;
+import com.vividsolutions.jts.geom.CoordinateSequenceComparator;
+import com.vividsolutions.jts.geom.CoordinateSequenceFilter;
+import com.vividsolutions.jts.geom.Envelope;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.GeometryComponentFilter;
+import com.vividsolutions.jts.geom.GeometryFilter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -58,6 +66,7 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPStyle;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geotools.data.ows.Layer;
 import org.geotools.data.ows.WMSCapabilities;
@@ -85,22 +94,16 @@ import org.xml.sax.SAXException;
 public abstract class BaseDAOTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @Autowired
     protected GPUserDAO userDAO;
-
     @Autowired
     protected GPFolderDAO folderDAO;
-
     @Autowired
     protected GPLayerDAO layerDAO;
-
     @Autowired
     protected GPStyleDAO styleDAO;
-
     @Autowired
     protected GPServerDAO serverDAO;
-
     @Autowired
     protected GPAuthorityDAO authorityDAO;
 
@@ -219,12 +222,12 @@ public abstract class BaseDAOTest {
     }
 
     protected void insertFolders() throws ParseException {
-        insertFolderUser();
+        int position = 0;
+        insertFolderUser(position);
     }
 
-    private void insertFolderUser() {
+    private void insertFolderUser(int position) {
         GPUser user = userDAO.findByUsername("user_0");
-        int position = 0;
 
         GPFolder onlyFolders = new GPFolder();
         onlyFolders.setName("only folders");
@@ -292,7 +295,7 @@ public abstract class BaseDAOTest {
             List<Layer> layers = capabilities.getLayerList();
 
             for (int i = 1; i < layers.size(); i++) {
-                System.out.println("LAYER" + layers.get(i));
+                logger.debug("LAYER" + layers.get(i));
                 GPRasterLayer raster = new GPRasterLayer();
                 raster.setName(layers.get(i).getName());
                 raster.setAbstractText(layers.get(i).get_abstract());
@@ -318,6 +321,18 @@ public abstract class BaseDAOTest {
             folderIGM.setPosition(++position);
             folderIGM.setParent(folderRaster);
             folderDAO.persist(folderIGM);
+
+            GPVectorLayer vectorLayer1 = new GPVectorLayer();
+            vectorLayer1.setName("Name of vectorLayer");
+            vectorLayer1.setPosition(++position);
+            vectorLayer1.setAbstractText("AbstractText of vectorLayer");
+            vectorLayer1.setTitle("Title of vectorLayer");
+            vectorLayer1.setSrs("EPSG:4326");
+            vectorLayer1.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
+            vectorLayer1.setBbox(new GPBBox(1.1, 2.2, 3.3, 3.3));
+            vectorLayer1.setLayerType(GPLayerType.MULTIPOLYGON);
+            vectorLayer1.setFolder(folderIGM);
+            layerDAO.persist(vectorLayer1);            
 
         } catch (IOException e) {
             //There was an error communicating with the server

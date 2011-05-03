@@ -76,7 +76,7 @@ class LayerSericeImpl {
     }
     //</editor-fold>
 
-    StyleList getLayerStayls(long layerId) {
+    StyleList getLayerStyles(long layerId) {
         Search searchCriteria = new Search(GPStyle.class);
         searchCriteria.addSortAsc("name");
 

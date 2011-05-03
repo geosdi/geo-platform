@@ -57,7 +57,7 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
 @XmlTransient
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"abstractText", "title", "urlServer", "srs", "layerType", "bbox", "styles"})
-@XmlSeeAlso(value = {RasterLayerDTO.class}) //TODO @XmlSeeAlso(value = {RasterLayerDTO.class, VectorLayerDTO.class})
+@XmlSeeAlso(value = {RasterLayerDTO.class, VectorLayerDTO.class})
 public abstract class AbstractLayerDTO extends AbstractElementDTO {
 
     private String abstractText;

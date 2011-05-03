@@ -38,53 +38,32 @@
 package org.geosdi.geoplatform.responce;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.core.model.GPLayerInfo;
-import org.geosdi.geoplatform.core.model.GPRasterLayer;
+import org.geosdi.geoplatform.core.model.GPVectorLayer;
 
 /**
  * @author Vincenzo Monteverde
  *
  */
-@XmlRootElement(name = "RasterLayerDTO")
-public class RasterLayerDTO extends AbstractLayerDTO {
-    
-    private GPLayerInfo layerInfo;
+@XmlRootElement(name = "VectorLayerDTO")
+public class VectorLayerDTO extends AbstractLayerDTO {
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
      * Default constructor
-     */    
-    public RasterLayerDTO() {
+     */
+    public VectorLayerDTO() {
     }
     
     /**
-     * Constructor with GPRasterLayer as arg
-     */    
-    public RasterLayerDTO(GPRasterLayer rasterLayer) {
-        super(rasterLayer);
-        this.layerInfo = rasterLayer.getLayerInfo();
+     * Constructor with GPVectorLayer as arg
+     */
+    public VectorLayerDTO(GPVectorLayer vectorLayer) {
+        super(vectorLayer);
     }
     //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
-    /**
-     * @return the layerInfo
-     */
-    public GPLayerInfo getLayerInfo() {
-        return layerInfo;
-    }
     
-    /**
-     * @param layerInfo
-     *            the layerInfo to set
-     */
-    public void setLayerInfo(GPLayerInfo layerInfo) {
-        this.layerInfo = layerInfo;
-    }
-    //</editor-fold>
-
     @Override
     public String toString() {
-        return "RasterLayerDTO [" + super.toString() + ", " + layerInfo + ']';
-    }
+        return "VectorLayerDTO [" + super.toString() + ']';
+    }    
 }

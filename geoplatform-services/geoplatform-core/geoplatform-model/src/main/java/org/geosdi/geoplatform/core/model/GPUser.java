@@ -174,12 +174,12 @@ public class GPUser implements Serializable, UserDetails {
 
     @Override
     public String toString() {
-        return "GPUser{" + "id=" + id + "username=" + username
-                + "password=" + password + "emailAddress=" + emailAddress
-                + "enabled=" + enabled + "sendEmail=" + sendEmail
-                + "accountNonExpired=" + accountNonExpired + "accountNonLocked="
-                + accountNonLocked + "credentialsNonExpired="
-                + credentialsNonExpired + '}';
+        return "GPUser{" + "id=" + id + ", username=" + username
+                + ", password=" + password + ", emailAddress=" + emailAddress
+                + ", enabled=" + enabled + ", sendEmail=" + sendEmail
+                + ", accountNonExpired=" + accountNonExpired
+                + ", accountNonLocked=" + accountNonLocked
+                + ", credentialsNonExpired=" + credentialsNonExpired + '}';
     }
 
     @Override

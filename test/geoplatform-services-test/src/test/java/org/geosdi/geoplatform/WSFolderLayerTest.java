@@ -1,3 +1,4 @@
+//<editor-fold defaultstate="collapsed" desc="License">
 /*
  *  geo-platform
  *  Rich webgis framework
@@ -33,6 +34,7 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
+//</editor-fold>
 package org.geosdi.geoplatform;
 
 import junit.framework.Assert;
@@ -53,12 +55,13 @@ import org.junit.Test;
  */
 public class WSFolderLayerTest extends ServiceTest {
 
-    private String username = "user";
+    private String username = "user_folder_test";
     private GPUser findUser = null;
-    
+
     @Test
     public void testGetFolder() {
-        createAndInsertUser();
+        GPUser user_test = super.createUser(username);
+        geoPlatformService.insertUser(user_test);
 
         try {
             findUser = geoPlatformService.getUserDetailByName(new SearchRequest(username));
@@ -70,7 +73,7 @@ public class WSFolderLayerTest extends ServiceTest {
             Assert.assertEquals(findFolderA.getList().size(), 1);
             Assert.assertEquals(findFolderA.getList().iterator().next().getName(), "folderA");
             Assert.assertEquals(findFolderA.getList().iterator().next().getPosition(), 1);
-            
+
 //            GPFolder folderB1 = createAndInsertFolder("folderB1", null, , ++position, false);
 //            GPFolder folderC = createAndInsertFolder("folderC", null, folderB1, ++position, false);
 //            GPFolder folderB2 = createAndInsertFolder("folderB2", null, folderA, ++position, false);
@@ -100,7 +103,7 @@ public class WSFolderLayerTest extends ServiceTest {
 //    @Test
 //    public void testGetFolderAndLayer() {
 //    }
-
+    
     @After
     public void tearDown() {
         try {
@@ -110,14 +113,6 @@ public class WSFolderLayerTest extends ServiceTest {
         } catch (IllegalParameterFault ex) {
             Assert.fail("Unable to delete user \"" + findUser.getUsername() + "\"");
         }
-    }
-
-    private void createAndInsertUser() {
-        GPUser user = new GPUser();
-        user.setUsername(username);
-        user.setPassword("password");
-        user.setEmailAddress("user@geosdi.org");
-        long id = geoPlatformService.insertUser(user);
     }
 
     private void createAndInsertFolder(String folderName, GPUser owner, GPFolder parentFolder, int position, boolean shared) {

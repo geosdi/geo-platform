@@ -1,3 +1,4 @@
+//<editor-fold defaultstate="collapsed" desc="License">
 /*
  *  geo-platform
  *  Rich webgis framework
@@ -33,60 +34,111 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-
-
+//</editor-fold>
 package org.geosdi.geoplatform;
-
 
 import java.text.ParseException;
 import java.util.Iterator;
+import org.junit.Test;
+import junit.framework.Assert;
+
+import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.UserList;
-import org.junit.Test;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class WSUsersTest extends ServiceTest{
+public class WSUsersTest extends ServiceTest {
+    // TODO check:
+    //      searchUsers()
+    //      updateUser()
 
     @Test
-    public void testUsers() {
+    public void testUsersDB() {
         UserList userList = geoPlatformService.getUsers();
-
+        logger.info("\n***** Number of Users in the DB: " + userList.getList().size());
         if (userList != null) {
             for (Iterator<UserDTO> it = userList.getList().iterator(); it.hasNext();) {
-                logger.info("USER ********************* " + it.next());
+                logger.info("\nUSER ***** " + it.next());
 
             }
         }
     }
 
     @Test
-    public void testEncryptedWS() throws ParseException, ResourceNotFoundFault {
-//        logger.info("################### Inizio testEncryptedWS");
-//        GPUser user = new GPUser();
-//        user.setUsername("user");
-//        user.setPassword("password");
-//        user.setEmailAddress("user@geosdi.org");
-//        geoPlatformService.insertUser(user);
-//        
-//        UserList userList = geoPlatformService.getUsers();
-//        Assert.assertNotNull(userList);
-//        Assert.assertTrue("Number of users stored into database", userList.getList().size() >= 1);
-//        
-//        GPUser userFromWS = geoPlatformService.getUserByName(new SearchRequest("user"));
-//        Assert.assertNotNull(userFromWS);
-//        
-//        try {
-//            geoPlatformService.deleteUser(new RequestById(userFromWS.getId()));
-//        } catch (IllegalParameterFault ex) {
-//            logger.error("Error while deleting user");
-//            Assert.fail();
-//        }
-//        logger.info("################### Fine testEncryptedWS");
+    public void testManageUser() throws ParseException {
+        final String username = "username_test_ws";
+
+        // Insert User        
+        long idUser = this.createAndInsertUser(username);
+
+        // Number of User
+        UserList userList = geoPlatformService.getUsers();
+        Assert.assertNotNull(userList);
+        Assert.assertTrue("Number of Users stored into database", userList.getList().size() >= 1);
+
+        // Number of Users Like
+        long numUsersLike = geoPlatformService.getUsersCount(new SearchRequest(username));
+        Assert.assertEquals("Number of User Like", numUsersLike, new Long(1).longValue());
+
+        // Get User from Id
+        try {
+            // Get UserDTO from Id
+            UserDTO userDTOFromWS = geoPlatformService.getShortUser(new RequestById(idUser));
+            Assert.assertNotNull(userDTOFromWS);
+            Assert.assertEquals("Error found User from Id", idUser, userDTOFromWS.getId());
+            // Get GPUser from Id
+            GPUser userFromWS = geoPlatformService.getUserDetail(new RequestById(idUser));
+            Assert.assertNotNull(userFromWS);
+            Assert.assertEquals("Error found User from Id", idUser, userFromWS.getId());
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("Not found User with Id: " + idUser);
+            Assert.fail();
+        }
+
+        // Get User from Username
+        try {
+            // Get UserDTO from Username
+            UserDTO userDTOFromWS = geoPlatformService.getShortUserByName(new SearchRequest(username));
+            Assert.assertNotNull(userDTOFromWS);
+            Assert.assertEquals("Error found User from Username", idUser, userDTOFromWS.getId());
+            // Get GPUser from Username
+            GPUser userFromWS = geoPlatformService.getUserDetailByName(new SearchRequest(username));
+            Assert.assertNotNull(userFromWS);
+            Assert.assertEquals("Error found User from Username", idUser, userFromWS.getId());
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("Not found User with Username: " + username);
+            Assert.fail();
+        }
+
+        // Delete User
+        this.deleteUser(idUser);
     }
 
+    // Create and insert (with assert) a User
+    private long createAndInsertUser(String username) {
+        GPUser user = super.createUser(username);
+        logger.info("\n***** GPUser to INSERT: " + user);
+        long idUser = geoPlatformService.insertUser(user);
+        logger.info("\n***** Id ASSIGNED at the User in the DB: " + idUser);
+        Assert.assertTrue("Id ASSIGNED at the User in the DB", idUser > 0);
+        return idUser;
+    }
+
+    // Delete (with assert) a User
+    private void deleteUser(long idUser) {
+        try {
+            boolean check = geoPlatformService.deleteUser(new RequestById(idUser));
+            Assert.assertTrue("User with id = " + idUser + " has not been eliminated", check);
+        } catch (Exception e) {
+            logger.error("\n***** Error while deleting User with Id: " + idUser);
+            Assert.fail();
+        }
+    }
 }

@@ -37,14 +37,6 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.CoordinateFilter;
-import com.vividsolutions.jts.geom.CoordinateSequenceComparator;
-import com.vividsolutions.jts.geom.CoordinateSequenceFilter;
-import com.vividsolutions.jts.geom.Envelope;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryComponentFilter;
-import com.vividsolutions.jts.geom.GeometryFilter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -187,6 +179,7 @@ public abstract class BaseDAOTest {
     }
 
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Insert data">
     protected void insertData() throws ParseException {
         insertUser();
@@ -343,10 +336,6 @@ public abstract class BaseDAOTest {
             //Unable to parse the response from the server
             //For example, the capabilities it returned was not valid
         }
-
-
-
-
 
     }
 

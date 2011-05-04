@@ -68,7 +68,7 @@ public class LayerService implements ILayerService {
     public List<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException {
         List<GPFolderClientInfo> userFolders = new ArrayList<GPFolderClientInfo>();
 //        TODO: check the right way to retrieve the user folders using the userName property
-        SearchRequest userNameSearch = new SearchRequest("user_0");
+        SearchRequest userNameSearch = new SearchRequest(userName);
         GPUser user = null;
         try {
             user = geoPlatformServiceClient.getUserDetailByName(userNameSearch);
@@ -82,6 +82,7 @@ public class LayerService implements ILayerService {
             GPFolderClientInfo folder = new GPFolderClientInfo();
             folder.setLabel(singleFolder.getName());
             folder.setzIndex(singleFolder.getPosition());
+            userFolders.add(folder);
         }
 
         return userFolders;

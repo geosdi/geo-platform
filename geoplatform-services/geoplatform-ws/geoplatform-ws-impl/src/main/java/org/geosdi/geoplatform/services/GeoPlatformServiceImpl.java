@@ -37,7 +37,6 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
-import java.util.List;
 import javax.jws.WebService;
 
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
@@ -93,210 +92,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         layerServiceDelegate = new LayerSericeImpl();
     }
 
-    // ==========================================================================
-    // === Users
-    // ==========================================================================
-    @Override
-    public long updateUser(GPUser user) throws ResourceNotFoundFault,
-            IllegalParameterFault {
-        return userServiceDelegate.updateUser(user);
-    }
-
-    @Override
-    public UserList searchUsers(PaginatedSearchRequest request) {
-        return userServiceDelegate.searchUsers(request);
-    }
-
-    @Override
-    public long insertUser(GPUser user) {
-        return userServiceDelegate.insertUser(user);
-    }
-
-    @Override
-    public long getUsersCount(SearchRequest request) {
-        return userServiceDelegate.getUsersCount(request);
-    }
-
-    @Override
-    public UserList getUsers() {
-        return userServiceDelegate.getUsers();
-    }
-
-    @Override
-    public UserDTO getShortUser(RequestById request) throws ResourceNotFoundFault {
-        return userServiceDelegate.getShortUser(request);
-    }
-
-    @Override
-    public GPUser getUserDetail(RequestById request) throws ResourceNotFoundFault {
-        return userServiceDelegate.getUserDetail(request);
-    }
-
-    @Override
-    public UserDTO getShortUserByName(SearchRequest username)
-            throws ResourceNotFoundFault {
-        return userServiceDelegate.getShortUserByName(username);
-    }
-
-    @Override
-    public GPUser getUserDetailByName(SearchRequest username)
-            throws ResourceNotFoundFault {
-        return userServiceDelegate.getUserDetailByName(username);
-    }
-
-    @Override
-    public boolean deleteUser(RequestById request)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        return userServiceDelegate.deleteUser(request);
-    }
-
-    // ==========================================================================
-    // === Folder
-    // ==========================================================================
-    @Override
-    public long insertFolder(GPFolder folder) {
-        return this.folderServiceDelegate.insertFolder(folder);
-    }
-
-    @Override
-    public long updateFolder(GPFolder folder) throws ResourceNotFoundFault,
-            IllegalParameterFault {
-        return folderServiceDelegate.updateFolder(folder);
-    }
-
-    @Override
-    public FolderDTO getShortFolder(RequestById request) throws ResourceNotFoundFault {
-        return folderServiceDelegate.getShortFolder(request);
-    }
-
-    @Override
-    public GPFolder getFolderDetail(RequestById request) throws ResourceNotFoundFault {
-        return folderServiceDelegate.getFolderDetail(request);
-    }
-
-    @Override
-    public boolean deleteFolder(RequestById request)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        return folderServiceDelegate.deleteFolder(request);
-    }
-
-    @Override
-    public FolderList getFolders() {
-        return folderServiceDelegate.getFolders();
-    }
-
-    @Override
-    public FolderList searchFolders(PaginatedSearchRequest searchRequest) {
-        return folderServiceDelegate.searchFolders(searchRequest);
-    }
-
-    @Override
-    public long getFoldersCount(SearchRequest searchRequest) {
-        return folderServiceDelegate.getFoldersCount(searchRequest);
-    }
-
-    @Override
-    public long getUserFoldersCount(RequestById request) {
-        return folderServiceDelegate.getUserFoldersCount(request);
-    }
-
-//    @Override
-//    public List<GPFolder> getUserFolders(RequestById request) {
-//        return folderServiceDelegate.getUserFolders(request);
-//    }
-
-    @Override
-    public FolderList getUserFoldersByRequest(RequestById request) {
-        return folderServiceDelegate.getUserFolders(request);
-    }
-
-    @Override
-    public FolderList getUserFoldersByUserId(long userId) {
-        return folderServiceDelegate.getUserFolders(userId);
-    }
-
-    @Override
-    public FolderList getAllUserFolders(long userId, int num, int page) {
-        return folderServiceDelegate.getAllUserFolders(userId, num, page);
-    }
-
-    @Override
-    public FolderList getAllUserFoldersByUserId(long userId) {
-        return folderServiceDelegate.getAllUserFolders(userId);
-    }
-
-    @Override
-    public int getAllUserFoldersCount(long userId) {
-        return folderServiceDelegate.getAllUserFoldersCount(userId);
-    }
-
-    @Override
-    public void setFolderShared(RequestById request)
-            throws ResourceNotFoundFault {
-        folderServiceDelegate.setFolderShared(request);
-    }
-
-    @Override
-    public boolean setFolderOwner(RequestByUserFolder request)
-            throws ResourceNotFoundFault {
-        return folderServiceDelegate.setFolderOwner(request, false);
-    }
-
-    @Override
-    public void forceFolderOwner(RequestByUserFolder request)
-            throws ResourceNotFoundFault {
-        folderServiceDelegate.setFolderOwner(request, true);
-
-    }
-
-    @Override
-    public FolderList getChildrenFolders(long folderId, int num, int page) {
-        return folderServiceDelegate.getChildrenFolders(folderId, num, page);
-    }
-
-    @Override
-    public FolderList getChildrenFoldersByFolderId(long folderId) {
-        return folderServiceDelegate.getChildrenFolders(folderId);
-    }
-
-    @Override
-    public TreeFolderElements getChildrenElements(long folderId) {
-        return folderServiceDelegate.getChildrenElements(folderId);
-    }
-    // ==========================================================================
-    // === Layer / Style
-    // ==========================================================================
-
-    @Override
-    public StyleList getLayerStayls(long layerId) {
-        return layerServiceDelegate.getLayerStyles(layerId);
-    }
-
-    // ==========================================================================
-    // === OWS
-    // ==========================================================================
-    @Override
-    public LayerList getCapabilities(RequestById request)
-            throws ResourceNotFoundFault {
-        return wmsServiceDelegate.getCapabilities(request);
-    }
-
-    @Override
-    public ServerDTO getServer(String serverUrl) throws ResourceNotFoundFault {
-        // TODO Auto-generated method stub
-
-        GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
-
-        if (server == null) {
-            throw new ResourceNotFoundFault("Server not found " + serverUrl);
-        }
-
-        ServerDTO serverDTO = new ServerDTO();
-        serverDTO.setId(server.getId());
-
-        return serverDTO;
-    }
-
+    //<editor-fold defaultstate="collapsed" desc="DAOs IoC">
     // ==========================================================================
     // === DAOs IoC
     // ==========================================================================
@@ -351,4 +147,217 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.styleDao = theStyleDao;
         this.layerServiceDelegate.setStyleDao(styleDao);
     }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="User">
+    // ==========================================================================
+    // === User
+    // ==========================================================================
+    @Override
+    public long insertUser(GPUser user) {
+        return userServiceDelegate.insertUser(user);
+    }
+
+    @Override
+    public long updateUser(GPUser user) throws ResourceNotFoundFault,
+            IllegalParameterFault {
+        return userServiceDelegate.updateUser(user);
+    }
+
+    @Override
+    public boolean deleteUser(RequestById request)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return userServiceDelegate.deleteUser(request);
+    }
+
+    @Override
+    public UserDTO getShortUser(RequestById request) throws ResourceNotFoundFault {
+        return userServiceDelegate.getShortUser(request);
+    }
+
+    @Override
+    public GPUser getUserDetail(RequestById request) throws ResourceNotFoundFault {
+        return userServiceDelegate.getUserDetail(request);
+    }
+
+    @Override
+    public UserDTO getShortUserByName(SearchRequest username)
+            throws ResourceNotFoundFault {
+        return userServiceDelegate.getShortUserByName(username);
+    }
+
+    @Override
+    public GPUser getUserDetailByName(SearchRequest username)
+            throws ResourceNotFoundFault {
+        return userServiceDelegate.getUserDetailByName(username);
+    }
+
+    @Override
+    public UserList searchUsers(PaginatedSearchRequest request) {
+        return userServiceDelegate.searchUsers(request);
+    }
+
+    @Override
+    public UserList getUsers() {
+        return userServiceDelegate.getUsers();
+    }
+
+    @Override
+    public long getUsersCount(SearchRequest request) {
+        return userServiceDelegate.getUsersCount(request);
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Folder">
+    // ==========================================================================
+    // === Folder
+    // ==========================================================================
+    @Override
+    public long insertFolder(GPFolder folder) {
+        return this.folderServiceDelegate.insertFolder(folder);
+    }
+
+    @Override
+    public long updateFolder(GPFolder folder) throws ResourceNotFoundFault,
+            IllegalParameterFault {
+        return folderServiceDelegate.updateFolder(folder);
+    }
+
+    @Override
+    public boolean deleteFolder(RequestById request)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return folderServiceDelegate.deleteFolder(request);
+    }
+
+    @Override
+    public FolderDTO getShortFolder(RequestById request) throws ResourceNotFoundFault {
+        return folderServiceDelegate.getShortFolder(request);
+    }
+
+    @Override
+    public GPFolder getFolderDetail(RequestById request) throws ResourceNotFoundFault {
+        return folderServiceDelegate.getFolderDetail(request);
+    }
+
+    @Override
+    public FolderList searchFolders(PaginatedSearchRequest searchRequest) {
+        return folderServiceDelegate.searchFolders(searchRequest);
+    }
+
+    @Override
+    public FolderList getFolders() {
+        return folderServiceDelegate.getFolders();
+    }
+
+    @Override
+    public long getFoldersCount(SearchRequest searchRequest) {
+        return folderServiceDelegate.getFoldersCount(searchRequest);
+    }
+
+    @Override
+    public FolderList getChildrenFolders(long folderId, int num, int page) {
+        return folderServiceDelegate.getChildrenFolders(folderId, num, page);
+    }
+
+    @Override
+    public FolderList getChildrenFoldersByFolderId(long folderId) {
+        return folderServiceDelegate.getChildrenFolders(folderId);
+    }
+
+    @Override
+    public TreeFolderElements getChildrenElements(long folderId) {
+        return folderServiceDelegate.getChildrenElements(folderId);
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Folder / User">
+    // ==========================================================================
+    // === Folder / User
+    // ==========================================================================
+    @Override
+    public void setFolderShared(RequestById request)
+            throws ResourceNotFoundFault {
+        folderServiceDelegate.setFolderShared(request);
+    }
+
+    @Override
+    public boolean setFolderOwner(RequestByUserFolder request)
+            throws ResourceNotFoundFault {
+        return folderServiceDelegate.setFolderOwner(request, false);
+    }
+
+    @Override
+    public void forceFolderOwner(RequestByUserFolder request)
+            throws ResourceNotFoundFault {
+        folderServiceDelegate.setFolderOwner(request, true);
+
+    }
+
+    @Override
+    public FolderList getUserFoldersByRequest(RequestById request) {
+        return folderServiceDelegate.getUserFoldersByRequest(request);
+    }
+
+    @Override
+    public FolderList getUserFoldersByUserId(long userId) {
+        return folderServiceDelegate.getUserFoldersByUserId(userId);
+    }
+
+    @Override
+    public FolderList getAllUserFolders(long userId, int num, int page) {
+        return folderServiceDelegate.getAllUserFolders(userId, num, page);
+    }
+
+    @Override
+    public FolderList getAllUserFoldersByUserId(long userId) {
+        return folderServiceDelegate.getAllUserFoldersByUserId(userId);
+    }
+
+    @Override
+    public long getUserFoldersCount(RequestById request) {
+        return folderServiceDelegate.getUserFoldersCount(request);
+    }
+
+    @Override
+    public int getAllUserFoldersCount(long userId) {
+        return folderServiceDelegate.getAllUserFoldersCount(userId);
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Layer / Style">
+    // ==========================================================================
+    // === Layer / Style
+    // ==========================================================================
+    @Override
+    public StyleList getLayerStayls(long layerId) {
+        return layerServiceDelegate.getLayerStyles(layerId);
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="OWS">
+    // ==========================================================================
+    // === OWS
+    // ==========================================================================
+    @Override
+    public LayerList getCapabilities(RequestById request)
+            throws ResourceNotFoundFault {
+        return wmsServiceDelegate.getCapabilities(request);
+    }
+
+    @Override
+    public ServerDTO getServer(String serverUrl) throws ResourceNotFoundFault {
+        // TODO Auto-generated method stub
+
+        GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
+
+        if (server == null) {
+            throw new ResourceNotFoundFault("Server not found " + serverUrl);
+        }
+
+        ServerDTO serverDTO = new ServerDTO();
+        serverDTO.setId(server.getId());
+
+        return serverDTO;
+    }
+    //</editor-fold>
 }

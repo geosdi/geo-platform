@@ -65,6 +65,16 @@ class WMSServiceImpl {
     final private static Logger LOGGER = Logger.getLogger(WMSServiceImpl.class);
     private GPServerDAO serverDao;
 
+    //<editor-fold defaultstate="collapsed" desc="Setter method">
+    /**
+     * @param serverDao
+     *            the serverDao to set
+     */
+    public void setServerDao(GPServerDAO serverDao) {
+        this.serverDao = serverDao;
+    }
+    //</editor-fold>    
+
     public LayerList getCapabilities(RequestById request)
             throws ResourceNotFoundFault {
 
@@ -101,7 +111,7 @@ class WMSServiceImpl {
         AbstractLayerDTO layerDTOIth = null;
         for (Layer layer : layerList) {
             layerDTOIth = new RasterLayerDTO(); // TODO AbstractLayerDTO as abstract class?
-            layerDTOIth.setName(layer.getName());          
+            layerDTOIth.setName(layer.getName());
             layerDTOIth.setAbstractText(layer.get_abstract());
             layerDTOIth.setTitle(layer.getTitle());
             shortLayers.add(layerDTOIth);
@@ -110,13 +120,5 @@ class WMSServiceImpl {
         LayerList layers = new LayerList();
         layers.setList(shortLayers);
         return layers;
-    }  
-
-    /**
-     * @param serverDao
-     *            the serverDao to set
-     */
-    public void setServerDao(GPServerDAO serverDao) {
-        this.serverDao = serverDao;
     }
 }

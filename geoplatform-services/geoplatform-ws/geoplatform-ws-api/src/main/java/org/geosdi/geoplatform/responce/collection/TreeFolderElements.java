@@ -89,12 +89,12 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
             if (layerType.equals(GPLayerType.RASTER)) {
                 GPRasterLayer rasterLayer = (GPRasterLayer) layer;
                 RasterLayerDTO rasterLayerDTO = new RasterLayerDTO(rasterLayer);
-                logger.debug("###\n" + rasterLayerDTO + "\n###");
+                logger.debug("\n### RasterLayerDTO ###\n" + rasterLayerDTO + "\n###\t###\t###");
                 super.add(rasterLayerDTO);
             } else if (layerType.equals(GPLayerType.MULTIPOLYGON)) {
                 GPVectorLayer vectorLayer = (GPVectorLayer) layer;
                 VectorLayerDTO vectorLayerDTO = new VectorLayerDTO(vectorLayer);
-                logger.debug("###\n" + vectorLayerDTO + "\n###");
+                logger.debug("\n### VectorLayerDTO ###\n" + vectorLayerDTO + "\n###\t###\t###");
                 super.add(vectorLayerDTO);
             } else {
                 // TODO

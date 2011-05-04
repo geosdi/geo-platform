@@ -62,11 +62,14 @@ class UserServiceImpl {
     final private static Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
     private GPUserDAO userDao;
 
-    // note: may take lot of space
-    public UserList getUsers() {
-        List<GPUser> userList = userDao.findAll();
-        return convertToUserList(userList);
+    //<editor-fold defaultstate="collapsed" desc="Setter method">
+    /**
+     * @param userDao the userDao to set
+     */
+    public void setUserDao(GPUserDAO userDao) {
+        this.userDao = userDao;
     }
+    //</editor-fold>
 
     /**
      * This method is used to insert a User
@@ -80,6 +83,50 @@ class UserServiceImpl {
         userDao.persist(user);
 
         return user.getId();
+    }
+
+    public long updateUser(GPUser user) throws ResourceNotFoundFault, IllegalParameterFault {
+        GPUser orig = userDao.find(user.getId());
+
+        if (orig == null) {
+            throw new ResourceNotFoundFault("User not found", user.getId());
+        }
+
+        // manual checks (awful!)
+        if (!user.getEmailAddress().equals(orig.getEmailAddress()) && orig.isEnabled()) {
+            throw new IllegalParameterFault("Can't update the mail address for registered user:" + user.getId());
+        }
+
+        if (user.isEnabled() != orig.isEnabled()) {
+
+            throw new IllegalParameterFault("Can't change user enabled status for user:" + user.getId());
+        }
+
+        // set the values
+        orig.setEmailAddress(user.getEmailAddress());
+        if (user.getPassword() != null) {
+            orig.setPassword(user.getPassword());
+        }
+        orig.setSendEmail(user.isSendEmail());
+        orig.setUsername(user.getUsername());
+
+        userDao.merge(orig);
+        return orig.getId();
+    }
+
+    /**
+     * Delete a User by ID
+     *
+     * @throws ResourceNotFoundFault
+     */
+    public boolean deleteUser(RequestById request) throws ResourceNotFoundFault, IllegalParameterFault {
+        GPUser user = userDao.find(request.getId());
+
+        if (user == null) {
+            throw new ResourceNotFoundFault("User not found", request.getId());
+        }
+
+        return userDao.remove(user);
     }
 
     /**
@@ -157,21 +204,6 @@ class UserServiceImpl {
     }
 
     /**
-     * Delete a User by ID
-     *
-     * @throws ResourceNotFoundFault
-     */
-    public boolean deleteUser(RequestById request) throws ResourceNotFoundFault, IllegalParameterFault {
-        GPUser user = userDao.find(request.getId());
-
-        if (user == null) {
-            throw new ResourceNotFoundFault("User not found", request.getId());
-        }
-
-        return userDao.remove(user);
-    }
-
-    /**
      * Get a set of selected Users using paging.
      * The paging parameters are specified in the REST request
      *
@@ -195,6 +227,12 @@ class UserServiceImpl {
         return convertToUserList(userList);
     }
 
+    // note: may take lot of space
+    public UserList getUsers() {
+        List<GPUser> userList = userDao.findAll();
+        return convertToUserList(userList);
+    }
+
     public long getUsersCount(SearchRequest request) {
         Search searchCriteria = new Search(GPUser.class);
 
@@ -202,35 +240,6 @@ class UserServiceImpl {
             searchCriteria.addFilterILike("username", request.getNameLike());
         }
         return userDao.count(searchCriteria);
-    }
-
-    public long updateUser(GPUser user) throws ResourceNotFoundFault, IllegalParameterFault {
-        GPUser orig = userDao.find(user.getId());
-
-        if (orig == null) {
-            throw new ResourceNotFoundFault("User not found", user.getId());
-        }
-
-        // manual checks (awful!)
-        if (!user.getEmailAddress().equals(orig.getEmailAddress()) && orig.isEnabled()) {
-            throw new IllegalParameterFault("Can't update the mail address for registered user:" + user.getId());
-        }
-
-        if (user.isEnabled() != orig.isEnabled()) {
-
-            throw new IllegalParameterFault("Can't change user enabled status for user:" + user.getId());
-        }
-
-        // set the values
-        orig.setEmailAddress(user.getEmailAddress());
-        if (user.getPassword() != null) {
-            orig.setPassword(user.getPassword());
-        }
-        orig.setSendEmail(user.isSendEmail());
-        orig.setUsername(user.getUsername());
-
-        userDao.merge(orig);
-        return orig.getId();
     }
 
     // TODO Move to UserList?
@@ -244,12 +253,5 @@ class UserServiceImpl {
         UserList users = new UserList();
         users.setList(usersDTO);
         return users;
-    }
-
-    /**
-     * @param userDao the userDao to set
-     */
-    public void setUserDao(GPUserDAO userDao) {
-        this.userDao = userDao;
     }
 }

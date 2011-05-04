@@ -73,8 +73,9 @@ import org.geosdi.geoplatform.responce.collection.UserList;
 @WebService(name = "GeoPlatformService", targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService {
 
+    //<editor-fold defaultstate="collapsed" desc="User">
     // ==========================================================================
-    // === Users
+    // === User
     // ==========================================================================
     @Put
     @HttpResource(location = "/users")
@@ -84,6 +85,11 @@ public interface GeoPlatformService {
     @HttpResource(location = "/users")
     long updateUser(@WebParam(name = "User") GPUser user)
             throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Delete
+    @HttpResource(location = "/users/{id}")
+    boolean deleteUser(RequestById request) throws ResourceNotFoundFault,
+            IllegalParameterFault;
 
     @Get
     @HttpResource(location = "/users/{id}")
@@ -103,10 +109,10 @@ public interface GeoPlatformService {
     @WebResult(name = "User")
     GPUser getUserDetailByName(SearchRequest username) throws ResourceNotFoundFault;
 
-    @Delete
-    @HttpResource(location = "/users/{id}")
-    boolean deleteUser(RequestById request) throws ResourceNotFoundFault,
-            IllegalParameterFault;
+    @Get
+    @HttpResource(location = "/users/search/{num}/{page}/{nameLike}")
+    @WebResult(name = "Users")
+    UserList searchUsers(PaginatedSearchRequest searchRequest);
 
     @Get
     @HttpResource(location = "/users")
@@ -114,15 +120,12 @@ public interface GeoPlatformService {
     UserList getUsers();
 
     @Get
-    @HttpResource(location = "/users/search/{num}/{page}/{nameLike}")
-    @WebResult(name = "Users")
-    UserList searchUsers(PaginatedSearchRequest searchRequest);
-
-    @Get
     @HttpResource(location = "/users/count/{nameLike}")
     @WebResult(name = "count")
     long getUsersCount(SearchRequest searchRequest);
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Folder">
     // ==========================================================================
     // === Folder
     // ==========================================================================
@@ -135,6 +138,11 @@ public interface GeoPlatformService {
     long updateFolder(@WebParam(name = "Folder") GPFolder folder)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
+    @Delete
+    @HttpResource(location = "/folders/{id}")
+    boolean deleteFolder(RequestById request) throws ResourceNotFoundFault,
+            IllegalParameterFault;
+
     @Get
     @HttpResource(location = "/folders/{id}")
     @WebResult(name = "Folder")
@@ -145,10 +153,10 @@ public interface GeoPlatformService {
     @WebResult(name = "Folder")
     GPFolder getFolderDetail(RequestById request) throws ResourceNotFoundFault;
 
-    @Delete
-    @HttpResource(location = "/folders/{id}")
-    boolean deleteFolder(RequestById request) throws ResourceNotFoundFault,
-            IllegalParameterFault;
+    @Get
+    @HttpResource(location = "/folders/search/{num}/{page}/{nameLike}")
+    @WebResult(name = "Folders")
+    FolderList searchFolders(PaginatedSearchRequest searchRequest);
 
     @Get
     @HttpResource(location = "/folders")
@@ -156,56 +164,9 @@ public interface GeoPlatformService {
     FolderList getFolders();
 
     @Get
-    @HttpResource(location = "/folders/search/{num}/{page}/{nameLike}")
-    @WebResult(name = "Folders")
-    FolderList searchFolders(PaginatedSearchRequest searchRequest);
-
-    @Get
     @HttpResource(location = "/folders/count/{nameLike}")
     @WebResult(name = "count")
     long getFoldersCount(SearchRequest searchRequest);
-
-    @Get
-    @HttpResource(location = "/folders/user/{id}/count")
-    @WebResult(name = "count")
-    long getUserFoldersCount(RequestById request);
-
-    // ==========================================================================
-    // === Folder / User
-    // ==========================================================================
-//    @Get
-//    @HttpResource(location = "/users/{id}/folder/{num}/{page}")
-//    @WebResult(name = "FolderList")
-//    List<GPFolder> getUserFolders(RequestById request);
-
-    @Get
-    @HttpResource(location = "/users/{id}/folder/{num}/{page}")
-    @WebResult(name = "FolderList")
-    FolderList getUserFoldersByRequest(RequestById request);
-
-    @Get
-    @HttpResource(location = "/users/{id}/folder")
-    @WebResult(name = "FolderList")
-    FolderList getUserFoldersByUserId(@WebParam(name = "userId") long userId);
-
-    /**
-     * @return Owned and shared Folders visible to a given user.
-     */
-    @Get
-    //@HttpResource(location = "/users/{id}/folder/{num}/{page}")
-    @WebResult(name = "FolderList")
-    FolderList getAllUserFolders(
-            @WebParam(name = "userId") long userId,
-            @WebParam(name = "num") int num,
-            @WebParam(name = "page") int page);
-
-    /**
-     * @return Owned and shared Folders visible to a given user.
-     */
-    @Get
-    //@HttpResource(location = "/users/{id}/folder/{num}/{page}")
-    @WebResult(name = "FolderList")
-    FolderList getAllUserFoldersByUserId(@WebParam(name = "userId") long userId);
 
     /**
      * @return Children folders.
@@ -233,15 +194,12 @@ public interface GeoPlatformService {
     @HttpResource(location = "/folders/{folderId}")
     @WebResult(name = "ChildrenElement")
     TreeFolderElements getChildrenElements(@WebParam(name = "folderId") long folderId);
+    //</editor-fold>
 
-    /**
-     * @return Count Owned and shared Folders visible to a given user.
-     */
-    @Get
-    @HttpResource(location = "/folders/{userId}")
-    @WebResult(name = "count")
-    int getAllUserFoldersCount(@WebParam(name = "userId") long userId);
-
+    //<editor-fold defaultstate="collapsed" desc="Folder / User">
+    // ==========================================================================
+    // === Folder / User
+    // ==========================================================================
     @Post
     @HttpResource(location = "/folder/{id}/shared")
     void setFolderShared(RequestById request) throws ResourceNotFoundFault;
@@ -256,6 +214,50 @@ public interface GeoPlatformService {
     void forceFolderOwner(RequestByUserFolder request)
             throws ResourceNotFoundFault;
 
+    @Get
+    @HttpResource(location = "/users/{id}/folder/{num}/{page}")
+    @WebResult(name = "FolderList")
+    FolderList getUserFoldersByRequest(RequestById request);
+
+    @Get
+    @HttpResource(location = "/users/{userId}/folder")
+    @WebResult(name = "FolderList")
+    FolderList getUserFoldersByUserId(@WebParam(name = "userId") long userId);
+
+    /**
+     * @return Owned and shared Folders visible to a given user.
+     */
+    @Get
+    //@HttpResource(location = "/users/{id}/folder/{num}/{page}")
+    @WebResult(name = "FolderList")
+    FolderList getAllUserFolders(
+            @WebParam(name = "userId") long userId,
+            @WebParam(name = "num") int num,
+            @WebParam(name = "page") int page);
+
+    /**
+     * @return Owned and shared Folders visible to a given user.
+     */
+    @Get
+    //@HttpResource(location = "/users/{id}/folder/{num}/{page}")
+    @WebResult(name = "FolderList")
+    FolderList getAllUserFoldersByUserId(@WebParam(name = "userId") long userId);
+
+    @Get
+    @HttpResource(location = "/folders/user/{id}/count")
+    @WebResult(name = "count")
+    long getUserFoldersCount(RequestById request);
+
+    /**
+     * @return Count Owned and shared Folders visible to a given user.
+     */
+    @Get
+    @HttpResource(location = "/folders/{userId}")
+    @WebResult(name = "count")
+    int getAllUserFoldersCount(@WebParam(name = "userId") long userId);
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Layer / Style">
     // ==========================================================================
     // === Layer / Style
     // ==========================================================================
@@ -265,7 +267,9 @@ public interface GeoPlatformService {
     @Get
     @WebResult(name = "LayerStyles")
     StyleList getLayerStayls(@WebParam(name = "layerId") long layerId);
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="OWS">
     // ==========================================================================
     // === OWS
     // ==========================================================================
@@ -279,4 +283,5 @@ public interface GeoPlatformService {
     @WebResult(name = "Servers")
     ServerDTO getServer(@WebParam(name = "serverUrl") String serverUrl)
             throws ResourceNotFoundFault;
+    //</editor-fold>
 }

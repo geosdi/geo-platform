@@ -40,12 +40,7 @@ package org.geosdi.geoplatform;
 
 import java.text.ParseException;
 import java.util.Iterator;
-import junit.framework.Assert;
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.request.RequestById;
-import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.UserList;
 import org.junit.Test;

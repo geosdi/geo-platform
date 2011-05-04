@@ -54,6 +54,7 @@ public class MapController extends GeoPlatformController {
 				MapWidgetEvents.ATTACH_MAP_WIDGET,
 				MapWidgetEvents.ATTACH_TOOLBAR, MapWidgetEvents.ERASE_FEATURE,
 				MapWidgetEvents.DRAW_FEATURE, GeoPlatformEvents.UPDATE_CENTER,
+                                MapWidgetEvents.ACTIVATE_GRATICULE, MapWidgetEvents.DEACTIVATE_GRATICULE,
 				GeoPlatformEvents.REGISTER_GEOCODING_LOCATION,
 				GeoPlatformEvents.RemoveMarker, GeoPlatformEvents.SCALE_REQUEST_CHANGE);
 	}

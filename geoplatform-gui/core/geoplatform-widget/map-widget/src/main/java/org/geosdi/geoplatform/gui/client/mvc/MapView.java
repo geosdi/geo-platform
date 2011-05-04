@@ -52,6 +52,12 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
+import org.gwtopenmaps.openlayers.client.control.Graticule;
+import org.gwtopenmaps.openlayers.client.control.GraticuleOptions;
+import org.gwtopenmaps.openlayers.client.symbolizer.LineSymbolizer;
+import org.gwtopenmaps.openlayers.client.symbolizer.LineSymbolizerOptions;
+import org.gwtopenmaps.openlayers.client.symbolizer.TextSymbolizer;
+import org.gwtopenmaps.openlayers.client.symbolizer.TextSymbolizerOptions;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -64,6 +70,7 @@ public class MapView extends GeoPlatformView {
     private GeocodingMarker geocoderMarker;
     private ReverseGeocodingWidget revGeoWidget;
     private ButtonBar buttonBar;
+    private Graticule graticule;
 
     public MapView(Controller controller) {
         super(controller);
@@ -96,6 +103,14 @@ public class MapView extends GeoPlatformView {
 
         if (event.getType() == MapWidgetEvents.ATTACH_TOOLBAR) {
             onAttachToolbar();
+        }
+
+        if (event.getType() == MapWidgetEvents.ACTIVATE_GRATICULE) {
+            onActivateGraticule();
+        }
+
+        if (event.getType() == MapWidgetEvents.DEACTIVATE_GRATICULE) {
+            onDeActivateGraticule();
         }
 
         if (event.getType() == GeoPlatformEvents.REGISTER_GEOCODING_LOCATION) {
@@ -141,6 +156,39 @@ public class MapView extends GeoPlatformView {
         LonLat center = new LonLat(bean.getLon(), bean.getLat());
         center.transform("EPSG:4326", "EPSG:900913");
         this.geocoderMarker.addMarker(center, this.mapLayout.getMap());
+    }
+
+    private void onActivateGraticule() {
+        LineSymbolizerOptions lineOptions = new LineSymbolizerOptions();
+        lineOptions.setStrokeColor("#333333");
+        lineOptions.setStrokeOpacity(0.5);
+        lineOptions.setStrokeWidth(1);
+
+        LineSymbolizer line = new LineSymbolizer(lineOptions);
+
+        TextSymbolizerOptions textOptions = new TextSymbolizerOptions();
+        textOptions.setFontSize("9px");
+
+        TextSymbolizer text = new TextSymbolizer(textOptions);
+
+
+        final GraticuleOptions grtOptions = new GraticuleOptions();
+
+        grtOptions.setTargetSize(200);
+        grtOptions.setLabelled(true);
+        grtOptions.setLineSymbolyzer(line);
+        grtOptions.setLabelSymbolizer(text);
+        this.graticule = new Graticule(grtOptions);
+
+        this.graticule.setAutoActivate(false);
+        this.mapLayout.getMap().addControl(graticule);
+
+        this.graticule.activate();
+    }
+
+    private void onDeActivateGraticule() {
+        this.mapLayout.getMap().removeControl(graticule);
+        this.graticule.deactivate();
     }
 
     /**

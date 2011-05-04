@@ -63,4 +63,8 @@ public class MapWidgetEvents {
 	
 	public static final EventType DELETE_FEATURE = new EventType();
 
+        public static final EventType ACTIVATE_GRATICULE = new EventType();
+
+        public static final EventType DEACTIVATE_GRATICULE = new EventType();
+
 }

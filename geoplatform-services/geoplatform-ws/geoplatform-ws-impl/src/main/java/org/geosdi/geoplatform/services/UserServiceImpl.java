@@ -87,10 +87,29 @@ class UserServiceImpl {
      * Method to get a single User by ID specified in the REST request
      *
      * @param request the object representing the request parameters
-     * @return DGUser the User object
+     * @return UserDTO the short User object
      * @throws ResourceNotFoundFault
      */
-    public GPUser getUser(RequestById request) throws ResourceNotFoundFault {
+    public UserDTO getShortUser(RequestById request) throws ResourceNotFoundFault {
+        GPUser user = userDao.find(request.getId());
+
+        if (user == null) {
+            throw new ResourceNotFoundFault("User not found", request.getId());
+        }
+
+        UserDTO userDTO = new UserDTO(user);
+        return userDTO;
+    }
+
+    /**
+     *
+     * Method to get a single User by ID specified in the REST request
+     *
+     * @param request the object representing the request parameters
+     * @return GPUser the detailed User object
+     * @throws ResourceNotFoundFault
+     */
+    public GPUser getUserDetail(RequestById request) throws ResourceNotFoundFault {
         GPUser user = userDao.find(request.getId());
 
         if (user == null) {
@@ -100,7 +119,34 @@ class UserServiceImpl {
         return user;
     }
 
-    public GPUser getUserByName(SearchRequest username) throws ResourceNotFoundFault {
+    /**
+     *
+     * Method to get a single User by ID specified in the REST request
+     *
+     * @param request the object representing the request parameters
+     * @return UserDTO the short User object
+     * @throws ResourceNotFoundFault
+     */
+    public UserDTO getShortUserByName(SearchRequest username) throws ResourceNotFoundFault {
+        GPUser user = userDao.findByUsername(username.getNameLike());
+
+        if (user == null) {
+            throw new ResourceNotFoundFault("User not found (name=" + username.getNameLike() + ")");
+        }
+
+        UserDTO userDTO = new UserDTO(user);
+        return userDTO;
+    }
+
+    /**
+     *
+     * Method to get a single User by ID specified in the REST request
+     *
+     * @param request the object representing the request parameters
+     * @return GPUser the detailed User object
+     * @throws ResourceNotFoundFault
+     */
+    public GPUser getUserDetailByName(SearchRequest username) throws ResourceNotFoundFault {
         GPUser user = userDao.findByUsername(username.getNameLike());
 
         if (user == null) {

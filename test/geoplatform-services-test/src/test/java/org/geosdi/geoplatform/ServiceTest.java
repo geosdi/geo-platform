@@ -70,6 +70,7 @@ public abstract class ServiceTest implements InitializingBean {
     @Before
     public void setUp() throws Exception {
         logger.info("SetUp --------------------------------> " + this.getClass().getName());
+        geoPlatformService = gpWSClient.create();
     }
 
     @Override

@@ -55,10 +55,12 @@ import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.RequestByUserFolder;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.responce.collection.FolderList;
-import org.geosdi.geoplatform.responce.collection.LayerList;
+import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.collection.StyleList;
+import org.geosdi.geoplatform.responce.UserDTO;
+import org.geosdi.geoplatform.responce.collection.FolderList;
+import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.responce.collection.UserList;
 
@@ -87,11 +89,20 @@ public interface GeoPlatformService {
     @Get
     @HttpResource(location = "/users/{id}")
     @WebResult(name = "User")
-    GPUser getUser(RequestById request) throws ResourceNotFoundFault;
+    UserDTO getShortUser(RequestById request) throws ResourceNotFoundFault;
+
+    @Get
+    @HttpResource(location = "/users/{id}")
+    @WebResult(name = "User")
+    GPUser getUserDetail(RequestById request) throws ResourceNotFoundFault;
 
     @Get
     @WebResult(name = "User")
-    GPUser getUserByName(SearchRequest username) throws ResourceNotFoundFault;
+    UserDTO getShortUserByName(SearchRequest username) throws ResourceNotFoundFault;
+
+    @Get
+    @WebResult(name = "User")
+    GPUser getUserDetailByName(SearchRequest username) throws ResourceNotFoundFault;
 
     @Delete
     @HttpResource(location = "/users/{id}")
@@ -128,7 +139,12 @@ public interface GeoPlatformService {
     @Get
     @HttpResource(location = "/folders/{id}")
     @WebResult(name = "Folder")
-    GPFolder getFolder(RequestById request) throws ResourceNotFoundFault;
+    FolderDTO getShortFolder(RequestById request) throws ResourceNotFoundFault;
+
+    @Get
+    @HttpResource(location = "/folders/{id}")
+    @WebResult(name = "Folder")
+    GPFolder getFolderDetail(RequestById request) throws ResourceNotFoundFault;
 
     @Delete
     @HttpResource(location = "/folders/{id}")
@@ -158,37 +174,73 @@ public interface GeoPlatformService {
     // ==========================================================================
     // === Folder / User
     // ==========================================================================
+//    @Get
+//    @HttpResource(location = "/users/{id}/folder/{num}/{page}")
+//    @WebResult(name = "FolderList")
+//    List<GPFolder> getUserFolders(RequestById request);
+
     @Get
     @HttpResource(location = "/users/{id}/folder/{num}/{page}")
     @WebResult(name = "FolderList")
-    List<GPFolder> getUserFolders(RequestById request);
+    FolderList getUserFoldersByRequest(RequestById request);
+
+    @Get
+    @HttpResource(location = "/users/{id}/folder")
+    @WebResult(name = "FolderList")
+    FolderList getUserFoldersByUserId(@WebParam(name = "userId") long userId);
 
     /**
      * @return Owned and shared Folders visible to a given user.
      */
+    @Get
+    //@HttpResource(location = "/users/{id}/folder/{num}/{page}")
+    @WebResult(name = "FolderList")
     FolderList getAllUserFolders(
             @WebParam(name = "userId") long userId,
             @WebParam(name = "num") int num,
             @WebParam(name = "page") int page);
 
     /**
+     * @return Owned and shared Folders visible to a given user.
+     */
+    @Get
+    //@HttpResource(location = "/users/{id}/folder/{num}/{page}")
+    @WebResult(name = "FolderList")
+    FolderList getAllUserFoldersByUserId(@WebParam(name = "userId") long userId);
+
+    /**
      * @return Children folders.
      */
+    @Get
+    @HttpResource(location = "/folders/user/{id}/{num}/{page}")
+    @WebResult(name = "FolderList")
     FolderList getChildrenFolders(
             @WebParam(name = "folderId") long folderId,
             @WebParam(name = "num") int num,
             @WebParam(name = "page") int page);
 
     /**
+     * @return Children folders.
+     */
+    @Get
+    @HttpResource(location = "/folders/user/{id}")
+    @WebResult(name = "FolderList")
+    FolderList getChildrenFoldersByFolderId(@WebParam(name = "folderId") long folderId);
+
+    /**
      * @return Children elements (folder and layer).
      */
     @Get
+    @HttpResource(location = "/folders/{folderId}")
     @WebResult(name = "ChildrenElement")
     TreeFolderElements getChildrenElements(@WebParam(name = "folderId") long folderId);
 
     /**
      * @return Count Owned and shared Folders visible to a given user.
      */
+    @Get
+    @HttpResource(location = "/folders/{userId}")
+    @WebResult(name = "count")
     int getAllUserFoldersCount(@WebParam(name = "userId") long userId);
 
     @Post
@@ -210,7 +262,7 @@ public interface GeoPlatformService {
     // ==========================================================================
     /**
      * @return Styles of a layer.
-     */    
+     */
     @Get
     @WebResult(name = "LayerStyles")
     StyleList getLayerStayls(@WebParam(name = "layerId") long layerId);

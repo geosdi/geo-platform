@@ -54,10 +54,12 @@ import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.RequestByUserFolder;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.responce.collection.FolderList;
-import org.geosdi.geoplatform.responce.collection.LayerList;
+import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.collection.StyleList;
+import org.geosdi.geoplatform.responce.UserDTO;
+import org.geosdi.geoplatform.responce.collection.FolderList;
+import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.responce.collection.UserList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,14 +123,25 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public GPUser getUser(RequestById request) throws ResourceNotFoundFault {
-        return userServiceDelegate.getUser(request);
+    public UserDTO getShortUser(RequestById request) throws ResourceNotFoundFault {
+        return userServiceDelegate.getShortUser(request);
     }
 
     @Override
-    public GPUser getUserByName(SearchRequest username)
+    public GPUser getUserDetail(RequestById request) throws ResourceNotFoundFault {
+        return userServiceDelegate.getUserDetail(request);
+    }
+
+    @Override
+    public UserDTO getShortUserByName(SearchRequest username)
             throws ResourceNotFoundFault {
-        return userServiceDelegate.getUserByName(username);
+        return userServiceDelegate.getShortUserByName(username);
+    }
+
+    @Override
+    public GPUser getUserDetailByName(SearchRequest username)
+            throws ResourceNotFoundFault {
+        return userServiceDelegate.getUserDetailByName(username);
     }
 
     @Override
@@ -152,8 +165,13 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public GPFolder getFolder(RequestById request) throws ResourceNotFoundFault {
-        return folderServiceDelegate.getFolder(request);
+    public FolderDTO getShortFolder(RequestById request) throws ResourceNotFoundFault {
+        return folderServiceDelegate.getShortFolder(request);
+    }
+
+    @Override
+    public GPFolder getFolderDetail(RequestById request) throws ResourceNotFoundFault {
+        return folderServiceDelegate.getFolderDetail(request);
     }
 
     @Override
@@ -182,14 +200,29 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         return folderServiceDelegate.getUserFoldersCount(request);
     }
 
+//    @Override
+//    public List<GPFolder> getUserFolders(RequestById request) {
+//        return folderServiceDelegate.getUserFolders(request);
+//    }
+
     @Override
-    public List<GPFolder> getUserFolders(RequestById request) {
+    public FolderList getUserFoldersByRequest(RequestById request) {
         return folderServiceDelegate.getUserFolders(request);
+    }
+
+    @Override
+    public FolderList getUserFoldersByUserId(long userId) {
+        return folderServiceDelegate.getUserFolders(userId);
     }
 
     @Override
     public FolderList getAllUserFolders(long userId, int num, int page) {
         return folderServiceDelegate.getAllUserFolders(userId, num, page);
+    }
+
+    @Override
+    public FolderList getAllUserFoldersByUserId(long userId) {
+        return folderServiceDelegate.getAllUserFolders(userId);
     }
 
     @Override
@@ -219,6 +252,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     @Override
     public FolderList getChildrenFolders(long folderId, int num, int page) {
         return folderServiceDelegate.getChildrenFolders(folderId, num, page);
+    }
+
+    @Override
+    public FolderList getChildrenFoldersByFolderId(long folderId) {
+        return folderServiceDelegate.getChildrenFolders(folderId);
     }
 
     @Override

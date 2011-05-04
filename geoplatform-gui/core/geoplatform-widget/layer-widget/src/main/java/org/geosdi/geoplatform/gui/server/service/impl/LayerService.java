@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
@@ -45,6 +44,8 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.collection.FolderList;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,14 +71,14 @@ public class LayerService implements ILayerService {
         SearchRequest userNameSearch = new SearchRequest("user_0");
         GPUser user = null;
         try {
-            user = geoPlatformServiceClient.getUserByName(userNameSearch);
+            user = geoPlatformServiceClient.getUserDetailByName(userNameSearch);
         } catch (ResourceNotFoundFault e) {
             logger.error("LayerService", "Unable to find user with username: " + userNameSearch.getNameLike()); 
             throw new GeoPlatformException("Unable to find user with username: " + userNameSearch.getNameLike());
         }
         RequestById idRequest = new RequestById(user.getId());
-        List<GPFolder> folderList = geoPlatformServiceClient.getUserFolders(idRequest);
-        for (GPFolder singleFolder : folderList) {
+        FolderList folderList = geoPlatformServiceClient.getUserFoldersByRequest(idRequest);
+        for (FolderDTO singleFolder : folderList.getList()) {
             GPFolderClientInfo folder = new GPFolderClientInfo();
             folder.setLabel(singleFolder.getName());
             folder.setzIndex(singleFolder.getPosition());

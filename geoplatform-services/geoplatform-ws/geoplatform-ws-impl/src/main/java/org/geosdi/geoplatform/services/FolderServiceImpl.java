@@ -118,7 +118,18 @@ class FolderServiceImpl {
         return orig.getId();
     }
 
-    public GPFolder getFolder(RequestById request) throws ResourceNotFoundFault {
+    public FolderDTO getShortFolder(RequestById request) throws ResourceNotFoundFault {
+        GPFolder folder = folderDao.find(request.getId());
+
+        if (folder == null) {
+            throw new ResourceNotFoundFault("Folder not found", request.getId());
+        }
+
+        FolderDTO folderDTO = new FolderDTO(folder);
+        return folderDTO;
+    }
+
+    public GPFolder getFolderDetail(RequestById request) throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(request.getId());
 
         if (folder == null) {
@@ -126,6 +137,17 @@ class FolderServiceImpl {
         }
 
         return folder;
+    }
+
+    public FolderDTO getFolder(RequestByUserFolder request) throws ResourceNotFoundFault {
+        GPFolder folder = folderDao.find(request.getUserId());
+
+        if (folder == null) {
+            throw new ResourceNotFoundFault("Folder not found", request.getUserId());
+        }
+
+        FolderDTO folderDTO = new FolderDTO(folder);
+        return folderDTO;
     }
 
     public boolean deleteFolder(RequestById request)
@@ -177,7 +199,7 @@ class FolderServiceImpl {
         return folderDao.count(searchCriteria);
     }
 
-    public List<GPFolder> getUserFolders(RequestById request) {
+    public FolderList getUserFolders(RequestById request) {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.setMaxResults(request.getNum());
         searchCriteria.setPage(request.getPage());
@@ -186,13 +208,37 @@ class FolderServiceImpl {
         searchCriteria.addFilterEqual("owner.id", request.getId());
 
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-        return foundFolder;
+        return convertToFolderList(foundFolder);
+    }
+
+    public FolderList getUserFolders(long userId) {
+        Search searchCriteria = new Search(GPFolder.class);
+        searchCriteria.addSortAsc("position");
+
+        searchCriteria.addFilterEqual("owner.id", userId);
+
+        List<GPFolder> foundFolder = folderDao.search(searchCriteria);
+        return convertToFolderList(foundFolder);
     }
 
     public FolderList getAllUserFolders(long userId, int num, int page) {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.setMaxResults(num);
         searchCriteria.setPage(page);
+        searchCriteria.addSortAsc("name");
+
+        Filter owner = Filter.equal("owner.id", userId);
+        Filter shared = Filter.equal("shared", true);
+        searchCriteria.addFilterOr(owner, shared);
+
+        List<GPFolder> foundFolder = folderDao.search(searchCriteria);
+
+        FolderList list = convertToFolderList(foundFolder);
+        return list;
+    }
+
+    public FolderList getAllUserFolders(long userId) {
+        Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.addSortAsc("name");
 
         Filter owner = Filter.equal("owner.id", userId);
@@ -257,18 +303,18 @@ class FolderServiceImpl {
         TreeFolderElements tree = new TreeFolderElements();
         
         Search searchCriteria = new Search(GPFolder.class);
-        searchCriteria.addSortAsc("name");        
+        searchCriteria.addSortAsc("name");
         Filter parent = Filter.equal("parent.id", folderId);
         searchCriteria.addFilter(parent);
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-        tree.AddFolderCollection(foundFolder);        
+        tree.AddFolderCollection(foundFolder);
         
         searchCriteria = new Search(GPLayer.class);
-        searchCriteria.addSortAsc("name");        
+        searchCriteria.addSortAsc("name");
         Filter folder = Filter.equal("folder.id", folderId);
         searchCriteria.addFilter(folder);
-        List<GPLayer> foundLayer = layerDao.search(searchCriteria);        
-        tree.AddLayerCollection(foundLayer);    
+        List<GPLayer> foundLayer = layerDao.search(searchCriteria);
+        tree.AddLayerCollection(foundLayer);
         
         return tree;
     }
@@ -277,6 +323,18 @@ class FolderServiceImpl {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.setMaxResults(num);
         searchCriteria.setPage(page);
+        searchCriteria.addSortAsc("name");
+
+        Filter parent = Filter.equal("parent.id", folderId);
+        searchCriteria.addFilter(parent);
+
+        List<GPFolder> foundFolder = folderDao.search(searchCriteria);
+        FolderList list = convertToFolderList(foundFolder);
+        return list;
+    }
+
+    public FolderList getChildrenFolders(long folderId) {
+        Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.addSortAsc("name");
 
         Filter parent = Filter.equal("parent.id", folderId);

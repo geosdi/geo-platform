@@ -37,11 +37,16 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
+import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
+import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mortbay.jetty.Server;
 import org.slf4j.Logger;
@@ -60,21 +65,26 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public abstract class ServiceTest implements InitializingBean {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
-
+    
     @Autowired
     protected GeoPlatformWSClient gpWSClient;
-
-    protected GeoPlatformService geoPlatformService;
     
+    protected GeoPlatformService geoPlatformService;
     
     @Autowired
     protected Server gpJettyServer;
-
-    @Before
-    public void setUp() throws Exception {
-        logger.info("SetUp --------------------------------> " + this.getClass().getName());
-        geoPlatformService = gpWSClient.create();
-    }
+    
+    final String username = "username_test_ws";
+    protected GPUser findUser = null;
+    protected long idUser = -1;
+    
+    final String nameRootFolderA = "rootFolderA";
+    protected GPFolder rootFolderA = null;
+    protected long idRootFolderA = -1;
+    
+    final String nameRootFolderB = "rootFolderB";
+    protected GPFolder rootFolderB = null;
+    protected long idRootFolderB = -1;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -82,10 +92,56 @@ public abstract class ServiceTest implements InitializingBean {
 
         gpJettyServer.start();
 
-//        geoPlatformService = gpWSClient.create();
+        geoPlatformService = gpWSClient.create();
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        logger.info("ServiceTest - SetUp --------------------------------> " + this.getClass().getName());
+
+        // Insert User        
+        idUser = this.createAndInsertUser(username);
+        findUser = geoPlatformService.getUserDetailByName(new SearchRequest(username));
+        
+        // Create root folders for the user
+        idRootFolderA = createAndInsertFolderWithOwner(nameRootFolderA, findUser, 1, false);
+        rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
+
+        idRootFolderB = createAndInsertFolderWithOwner(nameRootFolderB, findUser, 2, false);
+        rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
+    }
+
+    @After
+    public void tearDown() {
+        logger.info("ServiceTest - tearDown --------------------------------> " + this.getClass().getName());
+        // Delete user
+        this.deleteUser(idUser);
     }
     
-    protected GPUser createUser(String name) {
+    @Test
+    public void testRootFolders() {
+        // Check root folder A
+        Assert.assertNotNull(rootFolderA);
+        Assert.assertEquals(rootFolderA.getName(), nameRootFolderA);
+        Assert.assertEquals(rootFolderA.getPosition(), 1);
+        
+        // Check root folder B
+        Assert.assertNotNull(rootFolderB);
+        Assert.assertEquals(rootFolderB.getName(), nameRootFolderB);
+        Assert.assertEquals(rootFolderB.getPosition(), 2);
+    }
+
+    // Create and insert (with assert) a User
+    protected long createAndInsertUser(String username) {
+        GPUser user = createUser(username);
+        logger.info("\n***** GPUser to INSERT: " + user);
+        long idUser = geoPlatformService.insertUser(user);
+        logger.info("\n***** Id ASSIGNED at the User in the DB: " + idUser);
+        Assert.assertTrue("Id ASSIGNED at the User in the DB", idUser > 0);
+        return idUser;
+    }
+
+    private GPUser createUser(String name) {
         String username = name;
         GPUser user = new GPUser();
         user.setUsername(username);
@@ -94,5 +150,38 @@ public abstract class ServiceTest implements InitializingBean {
         user.setPassword("test");
         user.setSendEmail(true);
         return user;
-    }    
+    }
+
+    // Delete (with assert) a User
+    protected void deleteUser(long idUser) {
+        try {
+            boolean check = geoPlatformService.deleteUser(new RequestById(idUser));
+            Assert.assertTrue("User with id = " + idUser + " has not been eliminated", check);
+        } catch (Exception e) {
+            logger.error("\n***** Error while deleting User with Id: " + idUser);
+            Assert.fail();
+        }
+    }
+
+    protected long createAndInsertFolderWithOwner(String folderName, GPUser owner, int position, boolean shared) {
+        GPFolder folder = createFolder(folderName, position, shared);
+        folder.setOwner(owner);
+        long id = geoPlatformService.insertFolder(folder);
+        return id;
+    }
+
+    protected long createAndInsertFolderWithParent(String folderName, GPFolder parentFolder, int position, boolean shared) {
+        GPFolder folder = createFolder(folderName, position, shared);
+        folder.setParent(parentFolder);
+        long id = geoPlatformService.insertFolder(folder);
+        return id;
+    }
+
+    private GPFolder createFolder(String folderName, int position, boolean shared) {
+        GPFolder folder = new GPFolder();
+        folder.setName(folderName);
+        folder.setPosition(position);
+        folder.setShared(shared);
+        return folder;
+    }
 }

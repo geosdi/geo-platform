@@ -39,13 +39,13 @@ package org.geosdi.geoplatform;
 
 import junit.framework.Assert;
 import org.geosdi.geoplatform.core.model.GPFolder;
-import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.collection.FolderList;
-import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -55,47 +55,109 @@ import org.junit.Test;
  */
 public class WSFolderLayerTest extends ServiceTest {
 
-    private String username = "user_folder_test";
-    private GPUser findUser = null;
+    private final String nameFolder1 = "folder1";
+    private GPFolder folder1 = null;
+    private long idFolder1 = -1;
+    private final String nameFolder2 = "folder2";
+    private GPFolder folder2 = null;
+    private long idFolder2 = -1;
+    private final String nameFolder3 = "folder3";
+    private GPFolder folder3 = null;
+    private long idFolder3 = -1;
+    private final String nameFolder4 = "folder4";
+    private GPFolder folder4 = null;
+    private long idFolder4 = -1;
+    private final String nameFolder5 = "folder5";
+    private GPFolder folder5 = null;
+    private long idFolder5 = -1;
+
+    @Before
+    public void setUp() throws Exception {
+        super.setUp();
+        logger.info("WSFolderLayerTest - SetUp --------------------------------> " + this.getClass().getName());
+
+        findUser = geoPlatformService.getUserDetailByName(new SearchRequest(username));
+
+        idFolder1 = createAndInsertFolderWithParent(nameFolder1, rootFolderA, -1, false);
+        folder1 = geoPlatformService.getFolderDetail(new RequestById(idFolder1));
+
+        idFolder2 = createAndInsertFolderWithParent(nameFolder2, rootFolderA, -1, false);
+        folder2 = geoPlatformService.getFolderDetail(new RequestById(idFolder2));
+        
+        idFolder3 = createAndInsertFolderWithParent(nameFolder3, rootFolderB, -1, false);
+        folder3 = geoPlatformService.getFolderDetail(new RequestById(idFolder3));
+
+        idFolder4 = createAndInsertFolderWithParent(nameFolder4, rootFolderB, -1, false);
+        folder4 = geoPlatformService.getFolderDetail(new RequestById(idFolder4));
+
+        idFolder5 = createAndInsertFolderWithParent(nameFolder5, rootFolderB, -1, false);
+        folder5 = geoPlatformService.getFolderDetail(new RequestById(idFolder5));
+    }
 
     @Test
     public void testGetFolder() {
-        GPUser user_test = super.createUser(username);
-        geoPlatformService.insertUser(user_test);
+        Assert.assertNotNull(folder1);
+        Assert.assertEquals(folder1.getId(), idFolder1);
+        Assert.assertEquals(folder1.getName(), nameFolder1);
 
+        Assert.assertNotNull(folder2);
+        Assert.assertEquals(folder2.getId(), idFolder2);
+        Assert.assertEquals(folder2.getName(), nameFolder2);
+
+        Assert.assertNotNull(folder3);
+        Assert.assertEquals(folder3.getId(), idFolder3);
+        Assert.assertEquals(folder3.getName(), nameFolder3);
+
+        Assert.assertNotNull(folder4);
+        Assert.assertEquals(folder4.getId(), idFolder4);
+        Assert.assertEquals(folder4.getName(), nameFolder4);
+
+        Assert.assertNotNull(folder5);
+        Assert.assertEquals(folder5.getId(), idFolder5);
+        Assert.assertEquals(folder5.getName(), nameFolder5);
+    }
+
+//    @Test
+//    public void testDeleteFolder() {
+//        try {
+//            
+//            FolderList folderList = geoPlatformService.getUserFoldersByUserId(idUser);
+//            for (FolderDTO folderDTO : folderList.getList()) {
+//                logger.info("########## Name : " + folderDTO.getName());
+//            }
+//            
+//            geoPlatformService.deleteFolder(new RequestById(idRootFolderB));
+//            
+//            folderList = geoPlatformService.getUserFoldersByUserId(idUser);
+//            for (FolderDTO folderDTO : folderList.getList()) {
+//                logger.info("########## Name : " + folderDTO.getName());
+//            }
+//        } catch (IllegalParameterFault ex) {
+//            Assert.fail("Folder has an illegal parameter");
+//        } catch (ResourceNotFoundFault ex) {
+//            Assert.fail("User \"" + username + "\" not found");
+//        }
+//    }
+
+    @Test
+    public void testUpdateFolder() {
+        final String nameFolderUpdated = "folderUpdated";
         try {
-            findUser = geoPlatformService.getUserDetailByName(new SearchRequest(username));
-
-            int position = 0;
-            createAndInsertFolder("folderA", findUser, null, ++position, false);
-            FolderList findFolderA = geoPlatformService.getUserFoldersByUserId(findUser.getId());
-            Assert.assertNotNull(findFolderA);
-            Assert.assertEquals(findFolderA.getList().size(), 1);
-            Assert.assertEquals(findFolderA.getList().iterator().next().getName(), "folderA");
-            Assert.assertEquals(findFolderA.getList().iterator().next().getPosition(), 1);
-
-//            GPFolder folderB1 = createAndInsertFolder("folderB1", null, , ++position, false);
-//            GPFolder folderC = createAndInsertFolder("folderC", null, folderB1, ++position, false);
-//            GPFolder folderB2 = createAndInsertFolder("folderB2", null, folderA, ++position, false);
-//            GPFolder folderD = createAndInsertFolder("folderD", null, folderB2, ++position, false);
-//            GPFolder folderE = createAndInsertFolder("folderE", null, folderB2, ++position, false);
-//
-//            FolderList rootChildrens = geoPlatformService.getChildrenFoldersByFolderId(findFolderA.getList().iterator().next().getId());
-//            Assert.assertNotNull(rootChildrens);
-//            Assert.assertEquals(rootChildrens.getList().size(), 2);
-//
-//            FolderDTO folderDTOCheckB1 = rootChildrens.getList().iterator().next();
-//            Assert.assertEquals(folderDTOCheckB1.getName(), "folderB1");
-//            Assert.assertEquals(folderDTOCheckB1.getPosition(), 2);
-//
-//            FolderDTO folderDTOCheckB2 = rootChildrens.getList().iterator().next();
-//            Assert.assertEquals(folderDTOCheckB2.getName(), "folderB2");
-//            Assert.assertEquals(folderDTOCheckB2.getPosition(), 4);            
+            folder5.setParent(rootFolderA);
+            folder5.setName(nameFolderUpdated);
+            
+            geoPlatformService.updateFolder(folder5);
+            GPFolder folderUpdated = geoPlatformService.getFolderDetail(new RequestById(idFolder5));
+            
+            Assert.assertNotNull(folderUpdated);
+            Assert.assertEquals(folderUpdated.getName(), nameFolderUpdated);
+            Assert.assertEquals(folderUpdated.getParent().getId(), idRootFolderA);
+        } catch (IllegalParameterFault ex) {
+            Assert.fail("Folder has an illegal parameter");
         } catch (ResourceNotFoundFault ex) {
             Assert.fail("User \"" + username + "\" not found");
         }
     }
-
 //    @Test
 //    public void testGetLayer() {
 //    }
@@ -103,28 +165,4 @@ public class WSFolderLayerTest extends ServiceTest {
 //    @Test
 //    public void testGetFolderAndLayer() {
 //    }
-    
-    @After
-    public void tearDown() {
-        try {
-            boolean check = geoPlatformService.deleteUser(new RequestById(findUser.getId()));
-        } catch (ResourceNotFoundFault ex) {
-            Assert.fail("User \"" + findUser.getUsername() + "\" not found");
-        } catch (IllegalParameterFault ex) {
-            Assert.fail("Unable to delete user \"" + findUser.getUsername() + "\"");
-        }
-    }
-
-    private void createAndInsertFolder(String folderName, GPUser owner, GPFolder parentFolder, int position, boolean shared) {
-        GPFolder folder = new GPFolder();
-        folder.setName(folderName);
-        if (owner != null) {
-            folder.setOwner(owner);
-        } else {
-            folder.setParent(parentFolder);
-        }
-        folder.setPosition(position);
-        folder.setShared(shared);
-        geoPlatformService.insertFolder(folder);
-    }
 }

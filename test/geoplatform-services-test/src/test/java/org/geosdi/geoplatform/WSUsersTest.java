@@ -37,7 +37,6 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
-import java.text.ParseException;
 import java.util.Iterator;
 import org.junit.Test;
 import junit.framework.Assert;
@@ -72,18 +71,13 @@ public class WSUsersTest extends ServiceTest {
     }
 
     @Test
-    public void testManageUser() throws ParseException {
-        final String username = "username_test_ws";
-
-        // Insert User        
-        long idUser = this.createAndInsertUser(username);
-
+    public void testManageUser() {
         // Number of User
         UserList userList = geoPlatformService.getUsers();
         Assert.assertNotNull(userList);
         Assert.assertTrue("Number of Users stored into database", userList.getList().size() >= 1);
 
-        // Number of Users Like
+        // Number of User Like
         long numUsersLike = geoPlatformService.getUsersCount(new SearchRequest(username));
         Assert.assertEquals("Number of User Like", numUsersLike, new Long(1).longValue());
 
@@ -114,30 +108,6 @@ public class WSUsersTest extends ServiceTest {
             Assert.assertEquals("Error found User from Username", idUser, userFromWS.getId());
         } catch (ResourceNotFoundFault ex) {
             logger.error("Not found User with Username: " + username);
-            Assert.fail();
-        }
-
-        // Delete User
-        this.deleteUser(idUser);
-    }
-
-    // Create and insert (with assert) a User
-    private long createAndInsertUser(String username) {
-        GPUser user = super.createUser(username);
-        logger.info("\n***** GPUser to INSERT: " + user);
-        long idUser = geoPlatformService.insertUser(user);
-        logger.info("\n***** Id ASSIGNED at the User in the DB: " + idUser);
-        Assert.assertTrue("Id ASSIGNED at the User in the DB", idUser > 0);
-        return idUser;
-    }
-
-    // Delete (with assert) a User
-    private void deleteUser(long idUser) {
-        try {
-            boolean check = geoPlatformService.deleteUser(new RequestById(idUser));
-            Assert.assertTrue("User with id = " + idUser + " has not been eliminated", check);
-        } catch (Exception e) {
-            logger.error("\n***** Error while deleting User with Id: " + idUser);
             Assert.fail();
         }
     }

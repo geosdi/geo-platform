@@ -45,6 +45,9 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public interface ILayerService {
 
-    public List<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException;
+    public List<GPFolderClientInfo> loadUserFolders(String userName)
+            throws GeoPlatformException;
 
+    public long saveFolder(String folderName, int position)
+            throws GeoPlatformException;
 }

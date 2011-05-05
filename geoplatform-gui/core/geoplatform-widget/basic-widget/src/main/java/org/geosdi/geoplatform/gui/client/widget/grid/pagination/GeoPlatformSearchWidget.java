@@ -71,234 +71,233 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.LabelToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
+import com.google.gwt.event.dom.client.KeyCodes;
 
 /**
  * @author giuseppe
  * 
  */
 public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
-		extends Window {
+        extends Window {
 
-	private VerticalPanel vp;
-	protected FormPanel formPanel;
-	protected ListStore<T> store;
-	protected Grid<T> grid;
-	protected TextField<String> search;
-	protected RpcProxy<PagingLoadResult<T>> proxy;
-	protected PagingLoader<PagingLoadResult<ModelData>> loader;
-	protected PagingToolBar toolBar;
-	protected Button select;
-	protected Button cancel;
-	protected SearchStatus searchStatus;
+    private VerticalPanel vp;
+    protected FormPanel formPanel;
+    protected ListStore<T> store;
+    protected Grid<T> grid;
+    protected TextField<String> search;
+    protected RpcProxy<PagingLoadResult<T>> proxy;
+    protected PagingLoader<PagingLoadResult<ModelData>> loader;
+    protected PagingToolBar toolBar;
+    protected Button select;
+    protected Button cancel;
+    protected SearchStatus searchStatus;
+    protected String searchText;
+    private boolean initialized;
 
-	protected String searchText;
+    /**
+     *
+     * @param lazy
+     */
+    public GeoPlatformSearchWidget(boolean lazy) {
+        if (!lazy) {
+            init();
+        }
+    }
 
-	private boolean initialized;
+    private void init() {
+        // TODO Auto-generated method stub
+        if (!isInitialized()) {
+            initWindow();
+            initVerticalPanel();
+            initFormPanel();
+            add(vp);
+            this.initialized = true;
+        }
+    }
 
-	/**
-	 * 
-	 * @param lazy
-	 */
-	public GeoPlatformSearchWidget(boolean lazy) {
-		if (!lazy)
-			init();
-	}
+    private void initWindow() {
+        setModal(true);
+        setResizable(false);
+        setLayout(new FlowLayout());
+        setPlain(true);
+        setMaximizable(false);
 
-	private void init() {
-		// TODO Auto-generated method stub
-		if (!isInitialized()) {
-			initWindow();
-			initVerticalPanel();
-			initFormPanel();
-			add(vp);
-			this.initialized = true;
-		}
-	}
+        addWindowListener(new WindowListener() {
 
-	private void initWindow() {
-		setModal(true);
-		setResizable(false);
-		setLayout(new FlowLayout());
-		setPlain(true);
-		setMaximizable(false);
+            @Override
+            public void windowHide(WindowEvent we) {
+                cancel();
+            }
+        });
 
-		addWindowListener(new WindowListener() {
+        setWindowProperties();
+    }
 
-			@Override
-			public void windowHide(WindowEvent we) {
-				cancel();
-			}
+    private void initVerticalPanel() {
+        vp = new VerticalPanel();
+        vp.setSpacing(10);
+        createStore();
+        initGrid();
+    }
 
-		});
+    private void initFormPanel() {
+        formPanel = new FormPanel();
+        formPanel.setHeaderVisible(false);
+        formPanel.setFrame(true);
+        formPanel.setLayout(new FlowLayout());
 
-		setWindowProperties();
-	}
+        FieldSet searchFieldSet = new FieldSet();
+        searchFieldSet.setHeading("Search");
 
-	private void initVerticalPanel() {
-		vp = new VerticalPanel();
-		vp.setSpacing(10);
-		createStore();
-		initGrid();
-	}
+        FormLayout layout = new FormLayout();
+        layout.setLabelWidth(80);
+        searchFieldSet.setLayout(layout);
 
-	private void initFormPanel() {
-		formPanel = new FormPanel();
-		formPanel.setHeaderVisible(false);
-		formPanel.setFrame(true);
-		formPanel.setLayout(new FlowLayout());
+        search = new TextField<String>();
+        search.setFieldLabel("Find");
 
-		FieldSet searchFieldSet = new FieldSet();
-		searchFieldSet.setHeading("Search");
+        search.addKeyListener(new KeyListener() {
 
-		FormLayout layout = new FormLayout();
-		layout.setLabelWidth(80);
-		searchFieldSet.setLayout(layout);
+            @Override
+            public void componentKeyUp(ComponentEvent event) {
+                if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
+                        || (event.getKeyCode() == KeyCodes.KEY_DELETE))
+                        && (search.getValue() == null)) {
+                    reset();
+                }
+            }
 
-		search = new TextField<String>();
-		search.setFieldLabel("Find");
+            @Override
+            public void componentKeyPress(ComponentEvent event) {
+                if ((event.getKeyCode() == 13)) {
+                    searchText = search.getValue() == null ? "" : search.getValue();
+                    loader.load(0, 25);
+                }
+            }
+        });
 
-		search.addKeyListener(new KeyListener() {
+        BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
+        data.setMargins(new Margins(5, 5, 5, 5));
 
-			@Override
-			public void componentKeyUp(ComponentEvent event) {
-				if ((event.getKeyCode() == 8) && (search.getValue() == null)) {
-					reset();
-				}
-			}
+        searchFieldSet.add(search, data);
 
-			@Override
-			public void componentKeyPress(ComponentEvent event) {
-				if ((event.getKeyCode() == 13)) {
-					searchText = search.getValue() == null ? "" : search
-							.getValue();
-					loader.load(0, 25);
-				}
-			}
+        formPanel.add(searchFieldSet);
 
-		});
+        formPanel.add(this.grid);
 
-		BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
-		data.setMargins(new Margins(5, 5, 5, 5));
+        this.searchStatus = new SearchStatus();
+        searchStatus.setAutoWidth(true);
 
-		searchFieldSet.add(search, data);
+        formPanel.getButtonBar().add(this.searchStatus);
 
-		formPanel.add(searchFieldSet);
+        formPanel.getButtonBar().add(new LabelToolItem("    "));
 
-		formPanel.add(this.grid);
+        formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
-		this.searchStatus = new SearchStatus();
-		searchStatus.setAutoWidth(true);
+        select = new Button("Select", new SelectionListener<ButtonEvent>() {
 
-		formPanel.getButtonBar().add(this.searchStatus);
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                select();
+            }
+        });
 
-		formPanel.getButtonBar().add(new LabelToolItem("    "));
+        select.setIcon(BasicWidgetResources.ICONS.select());
+        select.disable();
 
-		formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
+        formPanel.addButton(this.select);
 
-		select = new Button("Select", new SelectionListener<ButtonEvent>() {
+        cancel = new Button("Cancel", new SelectionListener<ButtonEvent>() {
 
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				select();
-			}
-		});
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                cancel();
+            }
+        });
 
-		select.setIcon(BasicWidgetResources.ICONS.select());
-		select.disable();
+        cancel.setIcon(BasicWidgetResources.ICONS.cancel());
 
-		formPanel.addButton(this.select);
+        formPanel.addButton(cancel);
 
-		cancel = new Button("Cancel", new SelectionListener<ButtonEvent>() {
+        formPanel.setBottomComponent(this.toolBar);
 
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				cancel();
-			}
-		});
+        vp.add(formPanel);
+    }
 
-		cancel.setIcon(BasicWidgetResources.ICONS.cancel());
+    private void initGrid() {
+        ColumnModel cm = prepareColumnModel();
 
-		formPanel.addButton(cancel);
+        grid = new Grid<T>(store, cm);
+        grid.setBorders(true);
 
-		formPanel.setBottomComponent(this.toolBar);
+        grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-		vp.add(formPanel);
-	}
+        grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
 
-	private void initGrid() {
-		ColumnModel cm = prepareColumnModel();
+            public void handleEvent(BaseEvent be) {
+                if (grid.getSelectionModel().getSelection().size() > 0) {
+                    select.enable();
+                } else {
+                    select.disable();
+                }
+            }
+        });
 
-		grid = new Grid<T>(store, cm);
-		grid.setBorders(true);
+        grid.addListener(Events.CellDoubleClick, new Listener<BaseEvent>() {
 
-		grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            public void handleEvent(BaseEvent be) {
+                select();
+            }
+        });
 
-		grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
+        setGridProperties();
+    }
 
-			public void handleEvent(BaseEvent be) {
-				if (grid.getSelectionModel().getSelection().size() > 0)
-					select.enable();
-				else
-					select.disable();
-			}
-		});
+    /**
+     * Remove all beans from the Store and after Hide the window
+     */
+    @SuppressWarnings("deprecation")
+    public void cancel() {
+        super.close();
+        reset();
+    }
 
-		grid.addListener(Events.CellDoubleClick, new Listener<BaseEvent>() {
+    public void reset() {
+        this.search.reset();
+        this.store.removeAll();
+        this.toolBar.clear();
+        this.select.disable();
+        this.searchStatus.clearStatus("");
+    }
 
-			public void handleEvent(BaseEvent be) {
-				select();
-			}
-		});
+    public void clearGridElements() {
+        this.store.removeAll();
+        this.toolBar.clear();
+    }
 
-		setGridProperties();
-	}
+    /**
+     * Set the correct Status Iconn Style
+     */
+    public void setSearchStatus(EnumSearchStatus status,
+            EnumSearchStatus message) {
+        this.searchStatus.setIconStyle(status.getValue());
+        this.searchStatus.setText(message.getValue());
+    }
 
-	/**
-	 * Remove all beans from the Store and after Hide the window
-	 */
-	@SuppressWarnings("deprecation")
-	public void cancel() {
-		super.close();
-		reset();
-	}
+    public abstract void setWindowProperties();
 
-	public void reset() {
-		this.search.reset();
-		this.store.removeAll();
-		this.toolBar.clear();
-		this.select.disable();
-		this.searchStatus.clearStatus("");
-	}
+    public abstract void createStore();
 
-	public void clearGridElements() {
-		this.store.removeAll();
-		this.toolBar.clear();
-	}
+    public abstract void setGridProperties();
 
-	/**
-	 * Set the correct Status Iconn Style
-	 */
-	public void setSearchStatus(EnumSearchStatus status,
-			EnumSearchStatus message) {
-		this.searchStatus.setIconStyle(status.getValue());
-		this.searchStatus.setText(message.getValue());
-	}
+    public abstract ColumnModel prepareColumnModel();
 
-	public abstract void setWindowProperties();
+    public abstract void select();
 
-	public abstract void createStore();
-
-	public abstract void setGridProperties();
-
-	public abstract ColumnModel prepareColumnModel();
-
-	public abstract void select();
-
-	/**
-	 * @return the initialized
-	 */
-	public boolean isInitialized() {
-		return initialized;
-	}
-
+    /**
+     * @return the initialized
+     */
+    public boolean isInitialized() {
+        return initialized;
+    }
 }

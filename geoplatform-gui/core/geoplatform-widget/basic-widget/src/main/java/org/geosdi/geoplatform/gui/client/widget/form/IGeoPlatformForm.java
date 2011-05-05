@@ -40,7 +40,6 @@ package org.geosdi.geoplatform.gui.client.widget.form;
  *
  */
 public interface IGeoPlatformForm {
-	
-	void execute();
 
+    void execute();
 }

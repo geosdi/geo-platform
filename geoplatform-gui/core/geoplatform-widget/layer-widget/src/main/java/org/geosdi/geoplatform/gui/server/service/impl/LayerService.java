@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
@@ -73,11 +74,14 @@ public class LayerService implements ILayerService {
         try {
             user = geoPlatformServiceClient.getUserDetailByName(userNameSearch);
         } catch (ResourceNotFoundFault e) {
-            logger.error("LayerService", "Unable to find user with username: " + userNameSearch.getNameLike()); 
-            throw new GeoPlatformException("Unable to find user with username: " + userNameSearch.getNameLike());
+            logger.error("LayerService",
+                    "Unable to find user with username: " + userNameSearch.getNameLike());
+            throw new GeoPlatformException(
+                    "Unable to find user with username: " + userNameSearch.getNameLike());
         }
         RequestById idRequest = new RequestById(user.getId());
-        FolderList folderList = geoPlatformServiceClient.getUserFoldersByRequest(idRequest);
+        FolderList folderList = geoPlatformServiceClient.getUserFoldersByRequest(
+                idRequest);
         for (FolderDTO singleFolder : folderList.getList()) {
             GPFolderClientInfo folder = new GPFolderClientInfo();
             folder.setLabel(singleFolder.getName());
@@ -88,11 +92,33 @@ public class LayerService implements ILayerService {
         return userFolders;
     }
 
+    @Override
+    public long saveFolder(String folderName, int position) throws GeoPlatformException {
+        GPUser user = null;
+        try {
+            user = geoPlatformServiceClient.getUserDetailByName(new SearchRequest(
+                    "user_0"));
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("LayerService",
+                    "Unable to find user with username : user_0");
+            throw new GeoPlatformException(ex);
+        }
+
+        GPFolder folder = new GPFolder();
+        folder.setName(folderName);
+        folder.setPosition(position);
+        folder.setShared(false);
+        folder.setOwner(user);
+
+        return this.geoPlatformServiceClient.insertFolder(folder);
+    }
+
     /**
      * @param geoPlatformServiceClient the geoPlatformServiceClient to set
      */
     @Autowired
-    public void setGeoPlatformServiceClient(@Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
+    public void setGeoPlatformServiceClient(
+            @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
     }
 }

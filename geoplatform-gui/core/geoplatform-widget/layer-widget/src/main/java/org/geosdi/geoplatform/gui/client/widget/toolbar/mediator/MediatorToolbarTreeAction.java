@@ -62,18 +62,32 @@ public class MediatorToolbarTreeAction {
         element.accept(actionVisitor);
     }
 
-   /**
-    * 
-    * @param idActions
-    */
+    /**
+     *
+     * @param idActions
+     */
     public void enableActions(String... idActions) {
-        disableAllActions();
-
         for (String idAcion : idActions) {
             GeoPlatformToolbarAction action = ToolbarTreeActionRegistar.get(
                     idAcion);
-            if (action != null)
+            if (action != null) {
                 action.setEnabled(true);
+            }
+        }
+    }
+
+    /**
+     *
+     * @param idActions
+     */
+    public void disableActions(String... idActions) {
+        for (String idAction : idActions) {
+            GeoPlatformToolbarAction action = ToolbarTreeActionRegistar.get(
+                    idAction);
+            if (action != null) {
+                action.setEnabled(false);
+                
+            }
         }
     }
 

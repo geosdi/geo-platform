@@ -45,5 +45,9 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
  */
 public interface LayerRemoteAsync {
 
-    public void loadUserFolders(String userName, AsyncCallback<List<GPFolderClientInfo>> callback);
+    public void loadUserFolders(String userName,
+            AsyncCallback<List<GPFolderClientInfo>> callback);
+
+    public void saveFolder(String folderName, int position,
+            AsyncCallback<Long> callback);
 }

@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
+import org.geosdi.geoplatform.gui.client.widget.form.AddFolderWidget;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,6 +52,7 @@ import com.extjs.gxt.ui.client.mvc.Controller;
 public class LayerView extends GeoPlatformView {
 
     private LayerManagementWidget layerManagement;
+    private AddFolderWidget addFolder;
 
     /**
      * @Constructor
@@ -61,6 +63,9 @@ public class LayerView extends GeoPlatformView {
         super(controller);
         // TODO Auto-generated constructor stub
         this.layerManagement = new LayerManagementWidget();
+        this.addFolder = new AddFolderWidget(
+                this.layerManagement.getLayerTree().getTree(),
+                (LayerController) controller);
     }
 
     /*
@@ -79,6 +84,10 @@ public class LayerView extends GeoPlatformView {
 
         if (event.getType() == LayerEvents.HIDE_LAYER_WIDGET) {
             onHideLayerWidget();
+        }
+
+        if (event.getType() == LayerEvents.SHOW_ADD_FOLDER) {
+            onShowAddFolder();
         }
     }
 
@@ -105,5 +114,14 @@ public class LayerView extends GeoPlatformView {
             LayoutManager.manageWest(true);
         }
         LayoutManager.addComponentToWest(layerManagement);
+    }
+
+    /**
+     * Show Add Folder Widger
+     * 
+     */
+    private void onShowAddFolder() {
+        this.addFolder.init();
+        this.addFolder.show();
     }
 }

@@ -60,6 +60,10 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
     
     private VisitorModelConverter visitor = new VisitorModelConverter(this);
 
+    public FolderTreeNode(String label) {
+        super.setLabel(label);
+    }
+
     public FolderTreeNode(GPFolderClientInfo folder) {
         super.setLabel(folder.getLabel());
         super.setzIndex(folder.getzIndex());

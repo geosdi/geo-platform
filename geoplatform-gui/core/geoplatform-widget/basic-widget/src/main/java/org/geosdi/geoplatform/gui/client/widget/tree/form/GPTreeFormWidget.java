@@ -33,51 +33,34 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.model.visitor;
+package org.geosdi.geoplatform.gui.client.widget.tree.form;
 
-import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
-import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
-import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
+import org.geosdi.geoplatform.gui.client.widget.form.GenericFormWidget;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public class VisitorToolbarTreeAction implements IVisitor {
+public abstract class GPTreeFormWidget<T extends GPBeanTreeModel>
+        extends GenericFormWidget {
 
-    private MediatorToolbarTreeAction mediator;
+    protected T entity;
 
-    public VisitorToolbarTreeAction(MediatorToolbarTreeAction theMediator) {
-        this.mediator = theMediator;
+    /**
+     * @Constructor
+     *
+     * @param lazy
+     */
+    public GPTreeFormWidget(boolean lazy) {
+        super(lazy);
     }
 
-    @Override
-    public void visitRoot(AbstractRootTreeNode root) {
-        this.mediator.disableActions("addRasterLayer", "addVectorLayer",
-                "removeElement");
-        this.mediator.enableActions("addFolder");
-    }
-
-    @Override
-    public void visitFolder(AbstractFolderTreeNode folder) {
-        this.mediator.enableActions("addFolder", "addRasterLayer",
-                "addVectorLayer", "removeElement");
-    }
-
-    @Override
-    public void visitVector(GPVectorBean vector) {
-        this.mediator.disableActions("addFolder", "addRasterLayer",
-                "addVectorLayer");
-        this.mediator.enableActions("removeElement");
-    }
-
-    @Override
-    public void visitRaster(GPRasterBean raster) {
-        this.mediator.disableActions("addFolder", "addRasterLayer",
-                "addVectorLayer");
-        this.mediator.enableActions("removeElement");
+    /**
+     * @return the entity
+     */
+    public T getEntity() {
+        return entity;
     }
 }

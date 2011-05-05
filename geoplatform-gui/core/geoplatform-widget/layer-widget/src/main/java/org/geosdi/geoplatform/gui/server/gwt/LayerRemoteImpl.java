@@ -63,4 +63,9 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     public List<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException {
         return this.layerService.loadUserFolders(userName);
     }
+
+    @Override
+    public long saveFolder(String folderName, int position) throws GeoPlatformException {
+        return this.layerService.saveFolder(folderName, position);
+    }
 }

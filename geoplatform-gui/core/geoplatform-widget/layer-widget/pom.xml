@@ -104,6 +104,31 @@
             <version>1.2-SNAPSHOT</version>
         </dependency>
 
+        <!-- =============================================================== -->
+                    <!-- GEOPLATFORM WS -->
+	<!-- =============================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-model</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>cglib</groupId>
+                    <artifactId>cglib</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-ws-api</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>cglib</groupId>
+                    <artifactId>cglib</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
 		<!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>

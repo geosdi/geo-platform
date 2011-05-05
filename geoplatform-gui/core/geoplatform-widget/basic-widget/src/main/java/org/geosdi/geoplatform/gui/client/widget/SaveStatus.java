@@ -41,23 +41,23 @@ package org.geosdi.geoplatform.gui.client.widget;
  */
 public class SaveStatus extends StatusWidget {
 
-	public enum EnumSaveStatus {
-		STATUS_SAVE("x-status-ok"), STATUS_NO_SAVE("x-status-not-ok"), STATUS_SAVE_ERROR(
-				"x-status-error"), STATUS_MESSAGE_SAVE("Operation Ok"), STATUS_MESSAGE_NOT_SAVE(
-				"Operation Failed"), STATUS_MESSAGE_SAVE_ERROR("Service Error");
+    public enum EnumSaveStatus {
 
-		private String value;
+        STATUS_SAVE("x-status-ok"), STATUS_NO_SAVE("x-status-not-ok"), STATUS_SAVE_ERROR(
+        "x-status-error"), STATUS_MESSAGE_SAVE("Operation Ok"), STATUS_MESSAGE_NOT_SAVE(
+        "Operation Failed"), STATUS_MESSAGE_SAVE_ERROR("Service Error");
 
-		EnumSaveStatus(String value) {
-			this.value = value;
-		}
+        private String value;
 
-		/**
-		 * @return the value
-		 */
-		public String getValue() {
-			return value;
-		}
-	}
+        EnumSaveStatus(String value) {
+            this.value = value;
+        }
 
+        /**
+         * @return the value
+         */
+        public String getValue() {
+            return value;
+        }
+    }
 }

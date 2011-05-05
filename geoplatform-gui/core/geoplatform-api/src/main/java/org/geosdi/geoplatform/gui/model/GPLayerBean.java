@@ -45,6 +45,10 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
  */
 public interface GPLayerBean {
 
+    public long getId();
+
+    public void setId(long id);
+
     public String getLabel();
 
     public void setLabel(String label);

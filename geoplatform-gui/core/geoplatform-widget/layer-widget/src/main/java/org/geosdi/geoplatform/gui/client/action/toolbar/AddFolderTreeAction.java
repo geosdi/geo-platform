@@ -36,10 +36,11 @@
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
+import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 
 /**
  *
@@ -54,9 +55,6 @@ public class AddFolderTreeAction extends ToolbarLayerTreeAction {
 
     @Override
     public void componentSelected(ButtonEvent ce) {
-        GeoPlatformMessage.infoMessage("AddFolderTreeAction",
-                "Action must be implemented");
-        System.out.println(
-                "Element SEOECTED ********** " + this.tree.getSelectionModel().getSelectedItem());
+        Dispatcher.forwardEvent(LayerEvents.SHOW_ADD_FOLDER);
     }
 }

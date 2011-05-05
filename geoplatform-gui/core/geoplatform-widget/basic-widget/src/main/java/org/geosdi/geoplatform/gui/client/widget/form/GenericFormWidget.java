@@ -33,90 +33,103 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.grid;
+package org.geosdi.geoplatform.gui.client.widget.form;
 
-import java.util.List;
+import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
+import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 
-import org.geosdi.geoplatform.gui.configuration.grid.IGeoPlatformGrid;
-import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
-
-import com.extjs.gxt.ui.client.Style.SelectionMode;
-import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.event.WindowEvent;
+import com.extjs.gxt.ui.client.event.WindowListener;
+import com.extjs.gxt.ui.client.widget.Window;
+import com.extjs.gxt.ui.client.widget.form.FieldSet;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 
 /**
- * @author giuseppe
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GeoPlatformGridWidget<T extends GeoPlatformBeanModel>
-        implements IGeoPlatformGrid<T> {
+public abstract class GenericFormWidget
+        extends Window implements IGeoPlatformForm {
 
-    protected ListStore<T> store;
-    protected Grid<T> grid;
+    protected FormPanel formPanel;
+    protected FieldSet fieldSet;
+    protected SaveStatus saveStatus;
     private boolean initialized;
 
     /**
+     * Param lazy specifies whether the component should be initialized
+     * at creation
      *
      * @param lazy
      */
-    public GeoPlatformGridWidget(boolean lazy) {
+    public GenericFormWidget(boolean lazy) {
         if (!lazy) {
             init();
         }
     }
 
+    /**
+     * Init the Widget
+     */
     public void init() {
         if (!isInitialized()) {
-            createStore();
-            initGrid();
+            this.initializeWindow();
+            this.initializeFormPanel();
+            this.add(this.formPanel);
             this.initialized = true;
         }
     }
 
+    private void initializeWindow() {
+        initSize();
+        setResizable(false);
+
+        addWindowListener(new WindowListener() {
+
+            @Override
+            public void windowHide(WindowEvent we) {
+                reset();
+            }
+        });
+
+        setLayout(new FitLayout());
+        setModal(true);
+        setPlain(true);
+    }
+
+    private void initializeFormPanel() {
+        this.formPanel = new FormPanel();
+        this.formPanel.setFrame(true);
+        this.formPanel.setLayout(new FlowLayout());
+
+        initSizeFormPanel();
+        addComponentToForm();
+    }
+
     /**
+     * Set the correct Status Iconn Style
+     */
+    public void setSaveStatus(EnumSaveStatus status, EnumSaveStatus message) {
+        this.saveStatus.setIconStyle(status.getValue());
+        this.saveStatus.setText(message.getValue());
+    }
+
+    public void reset() {
+    }
+
+    public abstract void addComponentToForm();
+
+    public abstract void initSize();
+
+    public abstract void initSizeFormPanel();
+
+    /**
+     * Specifies the state of the component initialization
      *
-     * @param models
-     *            Beans Model to fill the Store
-     */
-    public GeoPlatformGridWidget(List<T> models) {
-        createStore();
-        this.store.add(models);
-        initGrid();
-    }
-
-    private void initGrid() {
-        ColumnModel cm = prepareColumnModel();
-
-        grid = new Grid<T>(store, cm);
-        grid.setBorders(true);
-
-        grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-        setGridProperties();
-    }
-
-    public abstract void setGridProperties();
-
-    public abstract ColumnModel prepareColumnModel();
-
-    public abstract void createStore();
-
-    /**
-     * @return the store
-     */
-    public ListStore<T> getStore() {
-        return store;
-    }
-
-    /**
-     * @return the grid
-     */
-    public Grid<T> getGrid() {
-        return grid;
-    }
-
-    /**
      * @return the initialized
      */
     public boolean isInitialized() {

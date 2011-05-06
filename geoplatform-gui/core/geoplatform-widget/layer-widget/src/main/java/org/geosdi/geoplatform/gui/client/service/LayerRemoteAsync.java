@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.service;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
 public interface LayerRemoteAsync {
 
     public void loadUserFolders(String userName,
-            AsyncCallback<List<GPFolderClientInfo>> callback);
+            AsyncCallback<List<FolderTreeNode>> callback);
 
     public void saveFolder(String folderName, int position,
             AsyncCallback<Long> callback);

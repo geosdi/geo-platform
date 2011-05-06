@@ -40,7 +40,7 @@ import java.util.List;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.request.RequestById;
@@ -66,10 +66,11 @@ public class LayerService implements ILayerService {
     private GeoPlatformService geoPlatformServiceClient;
 
     @Override
-    public List<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException {
-        List<GPFolderClientInfo> userFolders = new ArrayList<GPFolderClientInfo>();
+    public List<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException {
+        List<FolderTreeNode> userFolders = new ArrayList<FolderTreeNode>();
 //        TODO: check the right way to retrieve the user folders using the userName property
         SearchRequest userNameSearch = new SearchRequest(userName);
+
         GPUser user = null;
         try {
             user = geoPlatformServiceClient.getUserDetailByName(userNameSearch);
@@ -79,11 +80,12 @@ public class LayerService implements ILayerService {
             throw new GeoPlatformException(
                     "Unable to find user with username: " + userNameSearch.getNameLike());
         }
+        
         RequestById idRequest = new RequestById(user.getId());
         FolderList folderList = geoPlatformServiceClient.getUserFoldersByRequest(
                 idRequest);
         for (FolderDTO singleFolder : folderList.getList()) {
-            GPFolderClientInfo folder = new GPFolderClientInfo();
+            FolderTreeNode folder = new FolderTreeNode();
             folder.setLabel(singleFolder.getName());
             folder.setzIndex(singleFolder.getPosition());
             userFolders.add(folder);

@@ -57,8 +57,11 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
      */
     private static final long serialVersionUID = -3687415822526940729L;
 
-    
-    private VisitorModelConverter visitor = new VisitorModelConverter(this);
+
+    /** THIS PROPERTY MUST NOT BE SERIALIZED **/
+    private transient VisitorModelConverter visitor = new VisitorModelConverter(this);
+
+    public FolderTreeNode(){};
 
     public FolderTreeNode(String label) {
         super.setLabel(label);

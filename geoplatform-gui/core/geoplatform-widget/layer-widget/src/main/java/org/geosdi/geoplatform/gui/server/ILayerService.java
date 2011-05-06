@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.server;
 
 import java.util.List;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public interface ILayerService {
 
-    public List<GPFolderClientInfo> loadUserFolders(String userName)
+    public List<FolderTreeNode> loadUserFolders(String userName)
             throws GeoPlatformException;
 
     public long saveFolder(String folderName, int position)

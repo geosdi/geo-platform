@@ -39,7 +39,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.List;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
@@ -71,7 +71,7 @@ public interface LayerRemote extends RemoteService {
      * 
      * @throws GeoPlatformException
      */
-    public List<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException;
+    public List<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException;
 
     /**
      * 

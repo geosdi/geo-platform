@@ -60,15 +60,18 @@ import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.menu.AddLayerAction;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
-import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -78,6 +81,7 @@ import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
     private LayerRemoteAsync layerService = LayerRemoteImpl.Util.getInstance();
+
     private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(this.tree);
     private MediatorToolbarTreeAction actionMediator;
     private GPRootTreeNode root;
@@ -109,26 +113,27 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
     public void buildTree() {
         if (!initialized) {
             //I need to specify mock userID
-//            layerService.loadUserFolders("user_0", new AsyncCallback<List<GPFolderClientInfo>>() {
-//
-//                @Override
-//                public void onFailure(Throwable caught) {
-//                    GeoPlatformMessage.errorMessage("Layer-Service", "Failed to load user folders");
-//                    initialized = false;
-//                }
-//
-//                @Override
-//                public void onSuccess(List<GPFolderClientInfo> result) {
-//                    root.modelConverter(result);
-//                    store.add(root, true);
-//                    initialized = true;
-//                }
-//            });
-            this.root.modelConverter(GeoPlatformUtils.getInstance().
-                    getGlobalConfiguration().getFolderStore().
-                    getFolders());
-            store.add(root, true);
-            initialized = true;
+            layerService.loadUserFolders("user_0", new AsyncCallback<List<FolderTreeNode>>() {
+
+                @Override
+                public void onFailure(Throwable caught) {
+                    GeoPlatformMessage.errorMessage("Layer-Service",
+                            "Failed to load user folders");
+                    initialized = false;
+                }
+
+                @Override
+                public void onSuccess(List<FolderTreeNode> result) {
+                    root.addElements(result);
+                    store.add(root, true);
+                    initialized = true;
+                }
+            });
+//            this.root.modelConverter(GeoPlatformUtils.getInstance().
+//                    getGlobalConfiguration().getFolderStore().
+//                    getFolders());
+//            store.add(root, true);
+//            initialized = true;
         }
     }
 

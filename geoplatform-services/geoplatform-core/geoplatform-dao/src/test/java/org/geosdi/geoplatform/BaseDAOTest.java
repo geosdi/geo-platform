@@ -238,7 +238,7 @@ public abstract class BaseDAOTest {
         GPFolder folderRaster = new GPFolder();
         folderRaster.setName("my raster");
         folderRaster.setOwner(user);
-        folderRaster.setPosition(++position);
+        folderRaster.setPosition(2);
         folderRaster.setParent(null);
 
         GPRasterLayer rasterLayer1 = new GPRasterLayer();

@@ -59,6 +59,7 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 
 import com.trg.search.Filter;
 import com.trg.search.Search;
+import java.util.Collections;
 
 /**
  * @author giuseppe
@@ -351,6 +352,8 @@ class FolderServiceImpl {
         for (GPFolder folder : folderList) {
             foldersDTO.add(new FolderDTO(folder));
         }
+
+        Collections.sort(foldersDTO);
 
         FolderList folders = new FolderList();
         folders.setList(foldersDTO);

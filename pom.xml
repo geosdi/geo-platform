@@ -119,13 +119,6 @@
             <url>http://maven.springframework.org/external</url>
         </repository>
 
-		<!-- Java.net -->
-        <repository>
-            <id>java.net</id>
-            <url>http://download.java.net/maven/1</url>
-            <layout>default</layout>
-        </repository>
-
 		<!-- OSGEO -->
         <repository>
             <id>opengeo</id>

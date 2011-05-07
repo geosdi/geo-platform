@@ -65,7 +65,13 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     }
 
     @Override
-    public long saveFolder(String folderName, int position) throws GeoPlatformException {
-        return this.layerService.saveFolder(folderName, position);
+    public long saveFolderForUser(String folderName, int position) throws GeoPlatformException {
+        return this.layerService.saveFolderForUser(folderName, position);
+    }
+
+    @Override
+    public long saveFolder(long idParentFolder, String folderName, int position) throws GeoPlatformException {
+        return this.layerService.saveFolder(idParentFolder, folderName,
+                position);
     }
 }

@@ -62,28 +62,29 @@ public interface LayerRemote extends RemoteService {
     }
 
     /**
-     *
-     * @param 
-     *        userName
-     *
-     * @return
-     *        List<GPFolderClientInfo>
      * 
+     * @param userName
+     * @return
      * @throws GeoPlatformException
      */
     public List<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException;
 
     /**
      * 
-     * @param 
-     *          folderName
-     *
-     * @param
-     *          position
+     * @param folderName
+     * @param position
      * @return
-     *          Folder ID
-     * 
      * @throws GeoPlatformException
      */
-    public long saveFolder(String folderName, int position) throws GeoPlatformException;
+    public long saveFolderForUser(String folderName, int position) throws GeoPlatformException;
+
+    /**
+     * 
+     * @param idParentFolder
+     * @param folderName
+     * @param positions
+     * @return
+     * @throws GeoPlatformException
+     */
+    public long saveFolder(long idParentFolder, String folderName, int position) throws GeoPlatformException;
 }

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -43,9 +42,9 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.ILayerService;
+import org.geosdi.geoplatform.gui.server.service.converter.DTOConverter;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.collection.FolderList;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
@@ -65,9 +64,11 @@ public class LayerService implements ILayerService {
 
     private GeoPlatformService geoPlatformServiceClient;
 
+    @Autowired
+    private DTOConverter dtoConverter;
+
     @Override
     public List<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException {
-        List<FolderTreeNode> userFolders = new ArrayList<FolderTreeNode>();
 //        TODO: check the right way to retrieve the user folders using the userName property
         SearchRequest userNameSearch = new SearchRequest(userName);
 
@@ -80,22 +81,17 @@ public class LayerService implements ILayerService {
             throw new GeoPlatformException(
                     "Unable to find user with username: " + userNameSearch.getNameLike());
         }
-        
+
         RequestById idRequest = new RequestById(user.getId());
         FolderList folderList = geoPlatformServiceClient.getUserFoldersByRequest(
                 idRequest);
-        for (FolderDTO singleFolder : folderList.getList()) {
-            FolderTreeNode folder = new FolderTreeNode();
-            folder.setLabel(singleFolder.getName());
-            folder.setzIndex(singleFolder.getPosition());
-            userFolders.add(folder);
-        }
 
-        return userFolders;
+
+        return this.dtoConverter.convert(folderList.getList());
     }
 
     @Override
-    public long saveFolder(String folderName, int position) throws GeoPlatformException {
+    public long saveFolderForUser(String folderName, int position) throws GeoPlatformException {
         GPUser user = null;
         try {
             user = geoPlatformServiceClient.getUserDetailByName(new SearchRequest(
@@ -113,6 +109,31 @@ public class LayerService implements ILayerService {
         folder.setOwner(user);
 
         return this.geoPlatformServiceClient.insertFolder(folder);
+    }
+
+    @Override
+    public long saveFolder(long idParentFolder, String folderName, int position)
+            throws GeoPlatformException {
+        GPFolder gpFolder = null;
+
+        try {
+            gpFolder = geoPlatformServiceClient.getFolderDetail(new RequestById(
+                    idParentFolder));
+        } catch (Exception e) {
+            logger.error("LayerService",
+                    "Ubable to load Folder with ID : " + idParentFolder);
+            throw new GeoPlatformException(
+                    "The Folder with ID : " + idParentFolder + " was deleted.");
+        }
+
+        GPFolder folder = new GPFolder();
+        folder.setName(folderName);
+        folder.setPosition(position);
+        folder.setShared(false);
+        folder.setParent(gpFolder);
+
+
+        return geoPlatformServiceClient.insertFolder(folder);
     }
 
     /**

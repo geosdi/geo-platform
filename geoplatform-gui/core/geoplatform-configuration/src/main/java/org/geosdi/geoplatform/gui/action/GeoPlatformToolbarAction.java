@@ -35,20 +35,19 @@
  */
 package org.geosdi.geoplatform.gui.action;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.event.ActionDisabledEvent;
 import org.geosdi.geoplatform.gui.action.event.ActionEnabledEvent;
 import org.geosdi.geoplatform.gui.action.event.ActionHandler;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 
 /**
  * @author giuseppe
  * 
  */
-public abstract class GeoPlatformToolbarAction extends SelectionListener<ButtonEvent> implements HasActionHandler {
+public abstract class GeoPlatformToolbarAction extends GeoPlatformAction implements HasActionHandler {
 
     private AbstractImagePrototype image;
     private String id;

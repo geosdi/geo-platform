@@ -49,11 +49,13 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
 import org.geosdi.geoplatform.gui.client.mvc.LayerController;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
@@ -70,6 +72,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
     private Button cancel;
 
     private VisitorAddElement visitorAdd;
+    private GPBeanTreeModel parentDestination;
 
     /**
      *@Constructor
@@ -171,7 +174,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
     @Override
     public void execute() {
         this.saveStatus.setBusy("Saving Folder");
-        final GPBeanTreeModel parentDestination = (GPBeanTreeModel) this.tree.getSelectionModel().getSelectedItem();
+        parentDestination = (GPBeanTreeModel) this.tree.getSelectionModel().getSelectedItem();
 
         this.entity = new FolderTreeNode(this.folderText.getValue());
         this.tree.getStore().insert(
@@ -179,7 +182,26 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
                 true);
         this.visitorAdd.insertElement(this.entity, parentDestination, 0);
 
-        this.controller.getLayerService().saveFolder(entity.getLabel(),
+        if (parentDestination instanceof GPRootTreeNode) {
+            saveFolderForUser();
+        } else {
+            saveFolder();
+        }
+    }
+
+    @Override
+    public void reset() {
+        this.save.disable();
+        this.folderText.clear();
+        this.saveStatus.clearStatus("");
+    }
+
+    private void clearComponents() {
+        super.hide();
+    }
+
+    private void saveFolderForUser() {
+        this.controller.getLayerService().saveFolderForUser(entity.getLabel(),
                 entity.getzIndex(), new AsyncCallback<Long>() {
 
             @Override
@@ -197,17 +219,31 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
                 clearComponents();
             }
         });
-
     }
 
-    @Override
-    public void reset() {
-        this.save.disable();
-        this.folderText.clear();
-        this.saveStatus.clearStatus("");
-    }
+    private void saveFolder() {
+        this.controller.getLayerService().saveFolder(
+                ((FolderTreeNode) parentDestination).getId(),
+                entity.getLabel(), entity.getzIndex(), new AsyncCallback<Long>() {
 
-    private void clearComponents() {
-        super.hide();
+            @Override
+            public void onFailure(Throwable caught) {
+                setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
+                        EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
+                parentDestination.getParent().remove(parentDestination);
+                GeoPlatformMessage.errorMessage("Add Folder Error",
+                        "The folder with label : "
+                        + ((GPBeanTreeModel) parentDestination.getParent()).getLabel()
+                        + " was deleted on the server.");
+            }
+
+            @Override
+            public void onSuccess(Long result) {
+                setSaveStatus(EnumSaveStatus.STATUS_SAVE,
+                        EnumSaveStatus.STATUS_MESSAGE_SAVE);
+                entity.setId(result);
+                clearComponents();
+            }
+        });
     }
 }

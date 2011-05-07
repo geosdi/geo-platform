@@ -48,6 +48,9 @@ public interface ILayerService {
     public List<FolderTreeNode> loadUserFolders(String userName)
             throws GeoPlatformException;
 
-    public long saveFolder(String folderName, int position)
+    public long saveFolderForUser(String folderName, int position)
+            throws GeoPlatformException;
+
+    public long saveFolder(long idParentFolder, String folderName, int position)
             throws GeoPlatformException;
 }

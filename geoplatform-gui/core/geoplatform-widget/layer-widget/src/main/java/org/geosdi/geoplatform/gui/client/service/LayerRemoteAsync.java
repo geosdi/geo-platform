@@ -48,6 +48,9 @@ public interface LayerRemoteAsync {
     public void loadUserFolders(String userName,
             AsyncCallback<List<FolderTreeNode>> callback);
 
-    public void saveFolder(String folderName, int position,
+    public void saveFolderForUser(String folderName, int position,
+            AsyncCallback<Long> callback);
+
+    public void saveFolder(long idParentFolder, String folderName, int position,
             AsyncCallback<Long> callback);
 }

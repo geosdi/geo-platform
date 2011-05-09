@@ -71,7 +71,7 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
      * @param folderList
      *            list of GPFolder
      */
-    public void AddFolderCollection(Collection<GPFolder> folderList) {
+    public void addFolderCollection(Collection<GPFolder> folderList) {
         for (GPFolder folder : folderList) {
             super.add(new FolderDTO(folder));
         }
@@ -83,7 +83,7 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
      */
     // TODO
     // !Note: More LayerType match a GPVectorLayer!
-    public void AddLayerCollection(Collection<GPLayer> layerList) throws ClassCastException {
+    public void addLayerCollection(Collection<GPLayer> layerList) throws ClassCastException {
         for (GPLayer layer : layerList) {
             GPLayerType layerType = layer.getLayerType();
             if (layerType.equals(GPLayerType.RASTER)) {
@@ -91,14 +91,11 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
                 RasterLayerDTO rasterLayerDTO = new RasterLayerDTO(rasterLayer);
                 logger.debug("\n### RasterLayerDTO ###\n" + rasterLayerDTO + "\n###\t###\t###");
                 super.add(rasterLayerDTO);
-            } else if (layerType.equals(GPLayerType.MULTIPOLYGON)) {
+            } else {
                 GPVectorLayer vectorLayer = (GPVectorLayer) layer;
                 VectorLayerDTO vectorLayerDTO = new VectorLayerDTO(vectorLayer);
                 logger.debug("\n### VectorLayerDTO ###\n" + vectorLayerDTO + "\n###\t###\t###");
                 super.add(vectorLayerDTO);
-            } else {
-                // TODO
-                throw new UnsupportedOperationException("Handle of all LayerType NOT implemented!");
             }
         }
     }

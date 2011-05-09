@@ -16,7 +16,7 @@
         <property name="serviceClass"
 			value="org.geosdi.geoplatform.services.GeoPlatformService" />
         <property name="address"
-			value="http://192.168.1.5:8080/geoplatform-service/soap" />
+			value="http://localhost:8080/geoplatform-service/soap" />
     </bean>
 
 </beans>

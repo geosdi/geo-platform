@@ -221,14 +221,14 @@ class FolderServiceImpl {
         Filter parent = Filter.equal("parent.id", folderId);
         searchCriteria.addFilter(parent);
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-        tree.AddFolderCollection(foundFolder);
+        tree.addFolderCollection(foundFolder);
 
         searchCriteria = new Search(GPLayer.class);
         searchCriteria.addSortAsc("name");
         Filter folder = Filter.equal("folder.id", folderId);
         searchCriteria.addFilter(folder);
         List<GPLayer> foundLayer = layerDao.search(searchCriteria);
-        tree.AddLayerCollection(foundLayer);
+        tree.addLayerCollection(foundLayer);
 
         return tree;
     }

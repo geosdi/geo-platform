@@ -39,7 +39,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.client.action.toolbar.responsibility.DeleteRequestManager;
 
 /**
  *
@@ -48,16 +48,16 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
  */
 public class DeleteElementTreeAction extends ToolbarLayerTreeAction {
 
+    private DeleteRequestManager deleteManager;
+
     public DeleteElementTreeAction(TreePanel theTree) {
         super(theTree, LayerResources.ICONS.deleteElement(),
                 "Delete Selected Element");
+        this.deleteManager = new DeleteRequestManager(theTree);
     }
 
     @Override
     public void componentSelected(ButtonEvent ce) {
-        GeoPlatformMessage.infoMessage("DeleteElementTreeAction",
-                "Action must be implemented");
-        System.out.println(
-                "Element SEOECTED ********** " + this.tree.getSelectionModel().getSelectedItem());
+        this.deleteManager.processRequest();
     }
 }

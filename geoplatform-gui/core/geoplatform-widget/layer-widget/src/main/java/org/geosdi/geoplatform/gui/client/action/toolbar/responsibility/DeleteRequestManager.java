@@ -36,9 +36,6 @@
 package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDeleteElement;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
@@ -46,38 +43,25 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class DeleteRequestHandler {
+public class DeleteRequestManager {
 
-    protected LayerRemoteAsync layerService = LayerRemote.Util.getInstance();
+    private TreePanel tree;
+    private DeleteRequestHandler deleteFolder;
+    private DeleteRequestHandler deleteLayer;
 
-    protected TreePanel tree;
-    private VisitorDeleteElement deleteVisitor = new VisitorDeleteElement();
-    private DeleteRequestHandler successor;
-
-    public DeleteRequestHandler(TreePanel theTree) {
+    public DeleteRequestManager(TreePanel theTree) {
         this.tree = theTree;
+        initChain();
     }
 
-    public void setSuperiorRequestHandler(DeleteRequestHandler theSuccessor) {
-        this.successor = theSuccessor;
+    public void processRequest() {
+        this.deleteFolder.deleteRequest(
+                (GPBeanTreeModel) this.tree.getSelectionModel().getSelectedItem());
     }
 
-    public void deleteRequest(GPBeanTreeModel model) {
-        forwardDeleteRequest(model);
+    private void initChain() {
+        this.deleteFolder = new DeleteFolderHandler(tree);
+        this.deleteLayer = new DeleteLayerHandler(tree);
+        this.deleteFolder.setSuperiorRequestHandler(deleteLayer);
     }
-
-    protected void forwardDeleteRequest(GPBeanTreeModel model) {
-        if (successor != null) {
-            successor.deleteRequest(model);
-        }
-    }
-
-    protected void delete() {
-        GPBeanTreeModel element = (GPBeanTreeModel) tree.getSelectionModel().getSelectedItem();
-        GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
-        /** HERE THE CODE FOR VISITOR DELETE ASK TOMORROW TO ANDY **/
-        parent.remove(element);
-    }
-
-    public abstract void processRequest();
 }

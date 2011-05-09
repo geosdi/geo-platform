@@ -112,9 +112,12 @@ public class GeoPlatformMessage {
                     MessageBox.confirm(title, message,
                             new Listener<MessageBoxEvent>() {
 
+                                @Override
                                 public void handleEvent(MessageBoxEvent be) {
-                                    if (be.getButtonClicked().getText().equalsIgnoreCase("yes")
-                                            || be.getButtonClicked().getText().equalsIgnoreCase("si")) {
+                                    if (be.getButtonClicked().getText().equalsIgnoreCase(
+                                            "yes")
+                                            || be.getButtonClicked().getText().equalsIgnoreCase(
+                                            "si")) {
                                         widget.getGrid().getView().getBody().unmask();
                                         widget.getGrid().getView().refresh(false);
                                     } else {

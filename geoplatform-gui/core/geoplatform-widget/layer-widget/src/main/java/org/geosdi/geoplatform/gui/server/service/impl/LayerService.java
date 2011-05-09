@@ -163,13 +163,21 @@ public class LayerService implements ILayerService {
             this.geoPlatformServiceClient.deleteFolder(new RequestById(id));
         } catch (Exception ex) {
             logger.error("LayerService",
-                    "Ubable to load Folder with ID : " + id);
+                    "Ubable to delete Folder with ID : " + id);
             throw new GeoPlatformException(
                     "The Folder with ID : " + id + " was deleted.");
         }
     }
 
     private void deleteLayer(long id) throws GeoPlatformException {
-        /** TODO MUST BE IMPLEMENTED ON WS **/
+        try {
+            this.geoPlatformServiceClient.deleteLayer(new RequestById(id));
+        } catch (Exception ex) {
+            logger.error("LayerService",
+                    "Ubable to delete Layer with ID : " + id);
+            throw new GeoPlatformException(
+                    "The Layer with ID : " + id + " was deleted.");
+        }
+
     }
 }

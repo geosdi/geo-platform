@@ -42,6 +42,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -91,7 +93,7 @@ public abstract class GPLayer implements Serializable {
     @Embedded
     private GPBBox bbox;
     
-    @Embedded
+    @Enumerated(EnumType.STRING)
     private GPLayerType layerType;
 
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">

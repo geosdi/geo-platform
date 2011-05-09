@@ -35,49 +35,66 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDeleteElement;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class DeleteRequestHandler {
+public class DeleteLayerHandler extends DeleteRequestHandler {
 
-    protected LayerRemoteAsync layerService = LayerRemote.Util.getInstance();
-
-    protected TreePanel tree;
-    private VisitorDeleteElement deleteVisitor = new VisitorDeleteElement();
-    private DeleteRequestHandler successor;
-
-    public DeleteRequestHandler(TreePanel theTree) {
-        this.tree = theTree;
+    public DeleteLayerHandler(TreePanel theTree) {
+        super(theTree);
     }
 
-    public void setSuperiorRequestHandler(DeleteRequestHandler theSuccessor) {
-        this.successor = theSuccessor;
-    }
-
+    @Override
     public void deleteRequest(GPBeanTreeModel model) {
-        forwardDeleteRequest(model);
-    }
+        if (model instanceof GPLayerTreeModel) {
+            GeoPlatformMessage.confirmMessage("Delete Layer",
+                    "Are you sure you sure you want to delete the Layer "
+                    + ((GPBeanTreeModel) tree.getSelectionModel().getSelectedItem()).getLabel()
+                    + " ?",
+                    new Listener<MessageBoxEvent>() {
 
-    protected void forwardDeleteRequest(GPBeanTreeModel model) {
-        if (successor != null) {
-            successor.deleteRequest(model);
+                        @Override
+                        public void handleEvent(MessageBoxEvent be) {
+                            if (be.getButtonClicked().getText().equalsIgnoreCase(
+                                    "yes")
+                                    || be.getButtonClicked().getText().equalsIgnoreCase(
+                                    "si")) {
+                                processRequest();
+                            }
+                        }
+                    });
+        } else {
+            forwardDeleteRequest(model);
         }
     }
 
-    protected void delete() {
-        GPBeanTreeModel element = (GPBeanTreeModel) tree.getSelectionModel().getSelectedItem();
-        GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
-        /** HERE THE CODE FOR VISITOR DELETE ASK TOMORROW TO ANDY **/
-        parent.remove(element);
-    }
+    @Override
+    public void processRequest() {
+        this.layerService.deleteElement(
+                ((GPLayerTreeModel) tree.getSelectionModel().getSelectedItem()).getId(),
+                TreeElement.LAYER, new AsyncCallback<Object>() {
 
-    public abstract void processRequest();
+            @Override
+            public void onFailure(Throwable caught) {
+                GeoPlatformMessage.errorMessage("Delete Layer",
+                        "An Error Occured while removing the Layer.");
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+               delete();
+            }
+        });
+    }
 }

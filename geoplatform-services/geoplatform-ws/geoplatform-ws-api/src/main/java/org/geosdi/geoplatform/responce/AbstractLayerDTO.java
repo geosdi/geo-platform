@@ -64,11 +64,6 @@ public abstract class AbstractLayerDTO extends AbstractElementDTO {
     private String title;
     private String urlServer;
     private String srs;
-    private GPLayerType layerType;
-    private GPBBox bbox;
-    @XmlElementWrapper(name = "stylesCollection")
-    @XmlElement(name = "style")
-    private Collection<StyleDTO> styles;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
@@ -87,9 +82,7 @@ public abstract class AbstractLayerDTO extends AbstractElementDTO {
         this.abstractText = layer.getAbstractText();
         this.title = layer.getTitle();
         this.urlServer = layer.getUrlServer();
-        this.srs = layer.getSrs();
-        this.layerType = layer.getLayerType();
-        this.bbox = layer.getBbox();        
+        this.srs = layer.getSrs();    
     }
     //</editor-fold>
 
@@ -154,31 +147,6 @@ public abstract class AbstractLayerDTO extends AbstractElementDTO {
         this.urlServer = urlServer;
     }
 
-    public GPLayerType getLayerType() {
-        return layerType;
-    }
-
-    public void setLayerType(GPLayerType layerType) {
-        this.layerType = layerType;
-    }
-
-    public GPBBox getBbox() {
-        return bbox;
-    }
-
-    public void setBbox(GPBBox bbox) {
-        this.bbox = bbox;
-    }
-
-    public Collection<StyleDTO> getStyles() {
-        return styles;
-    }
-
-    public void setStyles(Collection<StyleDTO> styles) {
-        this.styles = styles;
-    }
-    //</editor-fold>
-
     /*
      * (non-Javadoc)
      * 
@@ -188,11 +156,7 @@ public abstract class AbstractLayerDTO extends AbstractElementDTO {
     public String toString() {
         String s = super.toString()
                 + ", title=" + title + ", abstractText=" + abstractText
-                + ", urlServer=" + urlServer + ", title=" + title
-                + ", layerType=" + layerType.name() + ", " + bbox;
-        if (styles != null) {
-            s += ", #styles=" + styles.size();
-        }
+                + ", urlServer=" + urlServer + ", title=" + title;
         return s;
     }
 }

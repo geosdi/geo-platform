@@ -62,6 +62,8 @@ public enum GPLayerType implements Serializable {
      *
      * @param code code to apply
      */
+    private GPLayerType() {}
+    
     private GPLayerType(int code) {
         this.code = code;
     }

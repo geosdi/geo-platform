@@ -88,7 +88,7 @@ public class GPFolder implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPFolder parent;
 
-    @ManyToOne(cascade = CascadeType.REMOVE, optional = true)
+    @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPUser owner;
 

@@ -37,7 +37,11 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
+import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPLayerInfo;
+import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
 import org.geosdi.geoplatform.request.RequestById;
@@ -183,5 +187,36 @@ public abstract class ServiceTest implements InitializingBean {
         folder.setPosition(position);
         folder.setShared(shared);
         return folder;
+    }
+
+    protected long createAndInsertRasterLayer(String abstractFolder, GPFolder parentFolder, String name, int position, boolean shared,
+                                              String srs, String title, String urlServer) {
+        double minX = 10;
+        double minY = 10;
+        double maxX = 20;
+        double maxY = 20;
+        String layerInfoKeyword = "keyword";
+        
+        GPRasterLayer rasterLayer = new GPRasterLayer();
+        rasterLayer.setAbstractText(abstractFolder);
+        rasterLayer.setFolder(parentFolder);
+        rasterLayer.setName(name);
+        rasterLayer.setPosition(position);
+        rasterLayer.setShared(shared);
+        rasterLayer.setSrs(srs);
+        rasterLayer.setTitle(title);
+        rasterLayer.setUrlServer(urlServer);
+        
+        GPBBox bBox = new GPBBox(minX, minY, maxX, maxY);
+        rasterLayer.setBbox(bBox);
+        
+        GPLayerInfo layerInfo = new GPLayerInfo();
+        layerInfo.setKeywords(layerInfoKeyword);
+        layerInfo.setQueryable(false);
+        rasterLayer.setLayerInfo(layerInfo);
+        
+        rasterLayer.setLayerType(GPLayerType.RASTER);
+        long id = geoPlatformService.insertLayer(rasterLayer);
+        return id;
     }
 }

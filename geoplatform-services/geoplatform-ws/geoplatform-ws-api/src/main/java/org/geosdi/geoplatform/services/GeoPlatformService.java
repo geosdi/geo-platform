@@ -46,8 +46,10 @@ import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
 import org.codehaus.jra.Post;
 import org.codehaus.jra.Put;
+import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -262,13 +264,6 @@ public interface GeoPlatformService {
     // ==========================================================================
     // === Layer / Style
     // ==========================================================================
-    /**
-     * @return Styles of a layer.
-     */
-    @Get
-    @WebResult(name = "LayerStyles")
-    StyleList getLayerStyles(@WebParam(name = "layerId") long layerId);
-    //</editor-fold>
     
     @Put
     @HttpResource(location = "/layer")
@@ -283,6 +278,28 @@ public interface GeoPlatformService {
     @HttpResource(location = "/layers/{id}")
     boolean deleteLayer(RequestById request) throws ResourceNotFoundFault,
             IllegalParameterFault;
+    
+    /**
+     * @return Styles of a layer.
+     */
+    @Get
+    @WebResult(name = "LayerStyles")
+    StyleList getLayerStyles(@WebParam(name = "LayerId") long layerId);
+    //</editor-fold>
+    
+    /**
+     * @return BBox of a layer.
+     */
+    @Get
+    @WebResult(name = "BBox")
+    GPBBox getBBox(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault;
+    
+    /**
+     * @return layer Type.
+     */
+    @Get
+    @WebResult(name = "LayerType")
+    GPLayerType getLayerType(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault ;
 
     //<editor-fold defaultstate="collapsed" desc="OWS">
     // ==========================================================================

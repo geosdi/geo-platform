@@ -37,14 +37,19 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
+import java.util.Iterator;
 import junit.framework.Assert;
 import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.request.RequestByUserFolder;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.FolderList;
+import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -70,6 +75,14 @@ public class WSFolderLayerTest extends ServiceTest {
     private final String nameFolder5 = "folder5";
     private GPFolder folder5 = null;
     private long idFolder5 = -1;
+    
+    private final String urlServer = "http://www.geosdi.org/test";
+    private final String abstractFolderRasterLayer1 = "abstractFolderRasterLayer1";
+    private final String nameRasterLayer1 = "rasterLayer1";
+    private final String spatialReferenceSystemRasterLayer1 = "Geographic coordinate system";
+    private final String titleRasterLayer1 = "Raster Layer 1";
+    private GPRasterLayer rasterLayer1 = null;
+    private long idRasterLayer1 = -1;
 
     @Before
     public void setUp() throws Exception {
@@ -92,6 +105,9 @@ public class WSFolderLayerTest extends ServiceTest {
 
         idFolder5 = createAndInsertFolderWithParent(nameFolder5, rootFolderB, -1, false);
         folder5 = geoPlatformService.getFolderDetail(new RequestById(idFolder5));
+        
+//        idRasterLayer1 = createAndInsertRasterLayer(abstractFolderRasterLayer1, rootFolderA, nameRasterLayer1, -1, false, spatialReferenceSystemRasterLayer1,
+//                                                    titleRasterLayer1, urlServer);
     }
 
     @Test
@@ -117,28 +133,6 @@ public class WSFolderLayerTest extends ServiceTest {
         Assert.assertEquals(folder5.getName(), nameFolder5);
     }
 
-//    @Test
-//    public void testDeleteFolder() {
-//        try {
-//            
-//            FolderList folderList = geoPlatformService.getUserFoldersByUserId(idUser);
-//            for (FolderDTO folderDTO : folderList.getList()) {
-//                logger.info("########## Name : " + folderDTO.getName());
-//            }
-//            
-//            geoPlatformService.deleteFolder(new RequestById(idRootFolderB));
-//            
-//            folderList = geoPlatformService.getUserFoldersByUserId(idUser);
-//            for (FolderDTO folderDTO : folderList.getList()) {
-//                logger.info("########## Name : " + folderDTO.getName());
-//            }
-//        } catch (IllegalParameterFault ex) {
-//            Assert.fail("Folder has an illegal parameter");
-//        } catch (ResourceNotFoundFault ex) {
-//            Assert.fail("User \"" + username + "\" not found");
-//        }
-//    }
-
     @Test
     public void testUpdateFolder() {
         final String nameFolderUpdated = "folderUpdated";
@@ -158,10 +152,59 @@ public class WSFolderLayerTest extends ServiceTest {
             Assert.fail("User \"" + username + "\" not found");
         }
     }
-//    @Test
-//    public void testGetLayer() {
-//    }
-//
+
+    @Test
+    public void testDeleteFolderB() {
+        try {
+            geoPlatformService.deleteFolder(new RequestById(idRootFolderB));
+            
+            FolderList folderList = geoPlatformService.getUserFoldersByUserId(idUser);
+            
+            Assert.assertEquals(folderList.getList().size(), 1);
+            Assert.assertEquals(folderList.getList().iterator().next().getName(), nameRootFolderA);
+        } catch (IllegalParameterFault ex) {
+            Assert.fail("Folder has an illegal parameter");
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Folder with id \"" + idRootFolderB + "\" not found");
+        }
+    }
+
+    @Test
+    public void testDeleteChildrenFolder() {
+        try {
+            folder4.setParent(folder3);
+            folder5.setParent(folder3);
+            geoPlatformService.updateFolder(folder4);
+            geoPlatformService.updateFolder(folder5);
+            
+            geoPlatformService.deleteFolder(new RequestById(idFolder3));
+            
+            FolderList folderList = geoPlatformService.getUserFoldersByUserId(idUser);
+            
+            Assert.assertEquals(folderList.getList().size(), 2);
+            
+            Iterator<FolderDTO> iterator = folderList.getList().iterator();
+            Assert.assertEquals(iterator.next().getName(), nameRootFolderB);
+            Assert.assertEquals(iterator.next().getName(), nameRootFolderA);
+            
+            TreeFolderElements childrenRootFolderA = geoPlatformService.getChildrenElements(idRootFolderA);
+            Assert.assertNotNull(childrenRootFolderA);
+            Assert.assertEquals(childrenRootFolderA.size(), 1);
+            
+            TreeFolderElements childrenRootFolderB = geoPlatformService.getChildrenElements(idRootFolderB);
+            Assert.assertNull(childrenRootFolderB);
+        } catch (IllegalParameterFault ex) {
+            Assert.fail("Folder has an illegal parameter");
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Folder with id \"" + idFolder4 + "\" not found");
+        }
+    }
+    
+    @Test
+    public void testGetLayer() {
+        Assert.assertTrue(true);
+    }
+
 //    @Test
 //    public void testGetFolderAndLayer() {
 //    }

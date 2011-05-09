@@ -44,8 +44,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPStyleDAO;
+import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPStyle;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -124,13 +126,30 @@ class LayerSericeImpl {
     public boolean deleteLayer(RequestById request)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPLayer layer = layerDao.find(request.getId());
-
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", request.getId());
         }
 
         // data on ancillary tables should be deleted by cascading
         return layerDao.remove(layer);
+    }
+
+    public GPBBox getBBox(long layerId) throws ResourceNotFoundFault {
+        GPLayer layer = layerDao.find(layerId);
+        if (layer == null) {
+            throw new ResourceNotFoundFault("Layer not found", layerId);
+        }
+
+        return layer.getBbox();
+    }
+
+    public GPLayerType getLayerType(long layerId) throws ResourceNotFoundFault {
+        GPLayer layer = layerDao.find(layerId);
+        if (layer == null) {
+            throw new ResourceNotFoundFault("Layer not found", layerId);
+        }
+
+        return layer.getLayerType();
     }
 
     // TODO Move to StyleList?
@@ -141,9 +160,9 @@ class LayerSericeImpl {
             stylesDTO.add(new StyleDTO(style));
         }
 
-        StyleList stayles = new StyleList();
-        stayles.setList(stylesDTO);
-        return stayles;
+        StyleList styles = new StyleList();
+        styles.setList(stylesDTO);
+        return styles;
     }
     
     // TODO Move to LayerList?

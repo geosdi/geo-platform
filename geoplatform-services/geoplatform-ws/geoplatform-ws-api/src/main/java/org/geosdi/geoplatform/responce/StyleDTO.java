@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.core.model.GPStyle;
 
 /**
  * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  * @author Michele Santomauro
  *
  */

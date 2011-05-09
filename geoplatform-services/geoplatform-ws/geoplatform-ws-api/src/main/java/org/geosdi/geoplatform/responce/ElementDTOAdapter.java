@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  *
  */
 // For handle IElementDTO inteface with JAXB

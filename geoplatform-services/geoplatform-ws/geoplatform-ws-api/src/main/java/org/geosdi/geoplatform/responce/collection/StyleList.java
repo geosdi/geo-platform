@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.responce.StyleDTO;
 
 /**
  * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  * 
  */
 @XmlRootElement(name = "StyleList")

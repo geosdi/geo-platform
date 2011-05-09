@@ -42,7 +42,6 @@ import java.util.Collection;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.responce.UserDTO;
-import org.geosdi.geoplatform.responce.UserDTO;
 
 /**
  * @author giuseppe

@@ -35,47 +35,79 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.core.model;
+package org.geosdi.geoplatform.core.acl;
 
-import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * @author Francesco Izzi - geoSDI
- * 
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ *
  */
-public enum GPLayerType implements Serializable {
+@Entity
+@Table(name = "acl_class")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "class")
+public class AclClass {
 
-    RASTER(1),
-    POINT(2),
-    LINESTRING(3),
-    POLYGON(4),
-    MULTIPOINT(5),
-    MULTILINESTRING(6),
-    MULTIPOLYGON(7);
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACL_CLASS_SEQ")
+    @SequenceGenerator(name = "ACL_CLASS_SEQ", sequenceName = "ACL_CLASS_SEQ")
+    private long id;
+    
+    @Column(name = "class", unique = true, nullable = false)
+    private String clazz;
 
-    @Column(name = "layerType")
-    private int code;
-
-    /**
-     * Create layer type.
-     *
-     * @param code code to apply
-     */
-    private GPLayerType(int code) {
-        this.code = code;
+    //<editor-fold defaultstate="collapsed" desc="Constructor methods">
+    public AclClass() {
     }
-
-    public int getCode() {
-        return this.code;
+    
+    public AclClass(String clazz) {
+        this.clazz = clazz;
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
-     * Convert to string.
-     *
-     * @return string representation of layer type
+     * @return the id
      */
+    public long getId() {
+        return id;
+    }
+    
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
+    
+    /**
+     * @return the clazz
+     */
+    public String getClazz() {
+        return clazz;
+    }
+    
+    /**
+     * @param clazz the clazz to set
+     */
+    public void setClazz(String clazz) {
+        this.clazz = clazz;
+    }
+    //</editor-fold>
+
+    @Override
     public String toString() {
-        return Integer.toString(code);
-    }
+        return "AclClass{" + "id=" + id + ", clazz=" + clazz + '}';
+    }    
+    
 }

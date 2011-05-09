@@ -35,49 +35,56 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.responce;
+package org.geosdi.geoplatform.core.acl;
 
-import javax.xml.bind.annotation.XmlTransient;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- * @author Michele Santomauro
  *
  */
-@XmlTransient
-public abstract class AbstractElementDTO implements IElementDTO,
-        Comparable<IElementDTO> {
+/** 
+ * SID = Secure Identity
+ */
+@Entity
+@Table(name = "acl_sid", 
+        uniqueConstraints = @UniqueConstraint(columnNames = {"principal", "sid"}))
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "sid")
+// TODO: implements Sid? extends PrincipalSid, GrantedAuthoritySid?
+public class AclSid {
 
-    private long id = -1; // Database identity
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACL_SID_SEQ")
+    @SequenceGenerator(name = "ACL_SID_SEQ", sequenceName = "ACL_SID_SEQ")
+    private long id;
+    
+    // If Id refers to a principal name or a GrantedAuthority
+    @Column(name = "principal", nullable = false)
+    private boolean principal = true;
+    
+    @Column(name = "sid", nullable = false)
+    private String sid;
 
-    private String name = "NULL";
-
-    private int position = -1;
-
-    private boolean shared = false;
-
-    //<editor-fold defaultstate="collapsed" desc="Constructor method">
-    /**
-     * Default constructor
-     */
-    public AbstractElementDTO() {
+    //<editor-fold defaultstate="collapsed" desc="Constructor methods">
+    public AclSid() {
     }
 
-    /**
-     * Constructor with args
-     * @param id
-     * @param name
-     * @param position
-     * @param shared
-     */
-    public AbstractElementDTO(long id, String name, int position, boolean shared) {
-        this.id = id;
-        this.name = name;
-        this.position = position;
-        this.shared = shared;
+    public AclSid(boolean principal, String sid) {
+        this.principal = principal;
+        this.sid = sid;
     }
-    //</editor-fold>
+    //</editor-fold>    
 
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
@@ -88,72 +95,63 @@ public abstract class AbstractElementDTO implements IElementDTO,
     }
 
     /**
-     * @param id
-     *            the id to set
+     * @param id the id to set
      */
     public void setId(long id) {
         this.id = id;
     }
 
     /**
-     * @return the name
+     * @return the principal
      */
-    public String getName() {
-        return name;
+    public boolean isPrincipal() {
+        return principal;
     }
 
     /**
-     * @param name
-     *            the name to set
+     * @param principal the principal to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setPrincipal(boolean principal) {
+        this.principal = principal;
     }
 
     /**
-     * @return the position
+     * @return the sid
      */
-    public int getPosition() {
-        return position;
+    public String getSid() {
+        return sid;
     }
 
     /**
-     * @param position
-     *            the position to set
+     * @param sid the sid to set
      */
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    /**
-     * @return the shared state
-     */
-    public boolean isShared() {
-        return shared;
-    }
-
-    /**
-     * @param shared
-     *            the shared state to set
-     */
-    public void setShared(boolean shared) {
-        this.shared = shared;
+    public void setSid(String sid) {
+        this.sid = sid;
     }
     //</editor-fold>
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
-        return "id=" + id + ", name=" + name + ", position=" + position + ", shared=" + shared;
+        return "AclSid{" + "id=" + id + ", principal=" + principal + ", sid=" + sid + '}';
     }
 
-    // For sort IElementDTO object in the TreeFolderElements
     @Override
-    public int compareTo(IElementDTO element) {
-        return ((AbstractElementDTO) element).getPosition() - getPosition();
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AclSid other = (AclSid) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return sid.hashCode();
     }
 }

@@ -55,6 +55,7 @@ import org.geosdi.geoplatform.responce.collection.StyleList;
 
 /**
  * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  *
  */
 class LayerSericeImpl {

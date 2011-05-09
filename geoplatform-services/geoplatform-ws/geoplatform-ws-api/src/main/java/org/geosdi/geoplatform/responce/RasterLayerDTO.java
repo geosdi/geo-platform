@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.core.model.GPRasterLayer;
 
 /**
  * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  *
  */
 @XmlRootElement(name = "RasterLayerDTO")

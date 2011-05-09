@@ -52,6 +52,8 @@ import org.geosdi.geoplatform.responce.collection.UserList;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
 public class WSUsersTest extends ServiceTest {
     // TODO check:

@@ -20,10 +20,12 @@
 	<!-- Services -->
 	<!--===================================================================== -->
 
-	<bean id="geoplatformService" class="org.geosdi.geoplatform.services.GeoPlatformServiceImpl">
-		<property name="folderDao" ref="folderDAO" />
-		<property name="userDao" ref="userDAO" />
+	<bean id="geoplatformService" class="org.geosdi.geoplatform.services.GeoPlatformServiceImpl">		
+		<property name="userDao" ref="userDAO" />                
 		<property name="serverDao" ref="serverDAO" />
+                <property name="folderDao" ref="folderDAO" />
+                <property name="layerDao" ref="layerDAO" />
+                <property name="styleDao" ref="styleDAO" />
 	</bean>
 
 	<!--===================================================================== -->

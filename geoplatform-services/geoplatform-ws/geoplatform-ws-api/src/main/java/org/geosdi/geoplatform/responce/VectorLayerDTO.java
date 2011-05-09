@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.core.model.GPVectorLayer;
 
 /**
  * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  *
  */
 @XmlRootElement(name = "VectorLayerDTO")

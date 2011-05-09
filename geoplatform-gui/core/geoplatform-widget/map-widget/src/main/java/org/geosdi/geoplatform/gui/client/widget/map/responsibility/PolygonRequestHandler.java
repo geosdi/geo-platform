@@ -48,72 +48,73 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 public class PolygonRequestHandler extends GeometryRequestHandler {
 
-	public PolygonRequestHandler(ModifyFeatureControl theControl) {
-		super(theControl);
-		// TODO Auto-generated constructor stub
-	}
+    public PolygonRequestHandler(ModifyFeatureControl theControl) {
+        super(theControl);
+        // TODO Auto-generated constructor stub
+    }
 
-	public void geometryRequest(VectorFeature feature, Vector vector) {
-		// TODO Auto-generated method stub
-		if ((feature.getGeometry().getClassName()
-				.equals(Geometry.POLYGON_CLASS_NAME))
-				|| (feature.getGeometry().getClassName()
-						.equals(Geometry.MULTI_POLYGON_CLASS_NAME))) {
+    @Override
+    public void geometryRequest(VectorFeature feature, Vector vector) {
+        // TODO Auto-generated method stub
+        if ((feature.getGeometry().getClassName().equals(
+                Geometry.POLYGON_CLASS_NAME))
+                || (feature.getGeometry().getClassName().equals(
+                Geometry.MULTI_POLYGON_CLASS_NAME))) {
 
-			if (!checkModifications(feature))
-				showConfirmMessage(feature, vector);
+            if (!checkModifications(feature)) {
+                showConfirmMessage(feature, vector);
+            }
 
-		} else
-			forwardGeometryRequest(feature, vector);
-	}
+        } else {
+            forwardGeometryRequest(feature, vector);
+        }
+    }
 
-	@Override
-	public boolean checkModifications(VectorFeature feature) {
-		// TODO Auto-generated method stub
-		Polygon oldPolygon = Polygon.narrowToPolygon(control
-				.getSelectedFeature().getGeometry().getJSObject());
+    @Override
+    public boolean checkModifications(VectorFeature feature) {
+        // TODO Auto-generated method stub
+        Polygon oldPolygon = Polygon.narrowToPolygon(
+                control.getSelectedFeature().getGeometry().getJSObject());
 
-		Polygon pol = Polygon.narrowToPolygon(feature.getGeometry()
-				.getJSObject());
+        Polygon pol = Polygon.narrowToPolygon(
+                feature.getGeometry().getJSObject());
 
-		return pol.equals(oldPolygon);
-	}
+        return pol.equals(oldPolygon);
+    }
 
-	@Override
-	public void showConfirmMessage(final VectorFeature feature,
-			final Vector vector) {
-		// TODO Auto-generated method stub
+    @Override
+    public void showConfirmMessage(final VectorFeature feature,
+            final Vector vector) {
+        // TODO Auto-generated method stub
 
-		final VectorFeature selectedFeature = getSelectedFeaure();
+        final VectorFeature selectedFeature = getSelectedFeaure();
 
-		GeoPlatformMessage
-				.confirmMessage(
-						"Polygon Feature Status",
-						"The Geometry Polygon Feature is changed. Do you want to apply the changes?",
-						new Listener<MessageBoxEvent>() {
+        GeoPlatformMessage.confirmMessage(
+                "Polygon Feature Status",
+                "The Geometry Polygon Feature is changed. Do you want to apply the changes?",
+                new Listener<MessageBoxEvent>() {
 
-							@Override
-							public void handleEvent(MessageBoxEvent be) {
-								// TODO Auto-generated method stub
-								if (be.getButtonClicked().getText()
-										.equalsIgnoreCase("yes")
-										|| be.getButtonClicked().getText()
-												.equalsIgnoreCase("si"))
-									Dispatcher
-											.forwardEvent(
-													MapWidgetEvents.UPDATE_POLYGON_GEOMETRY,
-													feature);
-								else {
-									vector.removeFeature(feature);
-									vector.addFeature(selectedFeature);
-								}
-							}
-						});
-	}
-
+                    @Override
+                    public void handleEvent(MessageBoxEvent be) {
+                        // TODO Auto-generated method stub
+                        if (be.getButtonClicked().getText().equalsIgnoreCase(
+                                "yes")
+                                || be.getButtonClicked().getText().equalsIgnoreCase(
+                                "si")) {
+                            Dispatcher.forwardEvent(
+                                    MapWidgetEvents.UPDATE_POLYGON_GEOMETRY,
+                                    feature);
+                        } else {
+                            vector.removeFeature(feature);
+                            vector.addFeature(selectedFeature);
+                        }
+                    }
+                });
+    }
 }

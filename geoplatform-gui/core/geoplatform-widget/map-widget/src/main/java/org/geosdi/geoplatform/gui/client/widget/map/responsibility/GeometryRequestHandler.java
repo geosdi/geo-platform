@@ -40,39 +40,40 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 public abstract class GeometryRequestHandler {
 
-	protected ModifyFeatureControl control;
-	private GeometryRequestHandler successor;
+    protected ModifyFeatureControl control;
+    private GeometryRequestHandler successor;
 
-	public GeometryRequestHandler(ModifyFeatureControl theControl) {
-		this.control = theControl;
-	}
+    public GeometryRequestHandler(ModifyFeatureControl theControl) {
+        this.control = theControl;
+    }
 
-	public void setSuperiorRequestHandler(GeometryRequestHandler theSuperior) {
-		this.successor = theSuperior;
-	}
+    public void setSuperiorRequestHandler(GeometryRequestHandler theSuperior) {
+        this.successor = theSuperior;
+    }
 
-	public void geometryRequest(VectorFeature feature, Vector vector) {
-		forwardGeometryRequest(feature, vector);
-	}
+    public void geometryRequest(VectorFeature feature, Vector vector) {
+        forwardGeometryRequest(feature, vector);
+    }
 
-	protected void forwardGeometryRequest(VectorFeature feature, Vector vector) {
-		if (successor != null)
-			successor.geometryRequest(feature, vector);
-	}
+    protected void forwardGeometryRequest(VectorFeature feature, Vector vector) {
+        if (successor != null) {
+            successor.geometryRequest(feature, vector);
+        }
+    }
 
-	public VectorFeature getSelectedFeaure() {
-		return VectorFeature.narrowToVectorFeature(control.getSelectedFeature()
-				.getJSObject());
-	}
+    public VectorFeature getSelectedFeaure() {
+        return VectorFeature.narrowToVectorFeature(
+                control.getSelectedFeature().getJSObject());
+    }
 
-	public abstract boolean checkModifications(VectorFeature feature);
+    public abstract boolean checkModifications(VectorFeature feature);
 
-	public abstract void showConfirmMessage(final VectorFeature feature,
-			final Vector vector);
-
+    public abstract void showConfirmMessage(final VectorFeature feature,
+            final Vector vector);
 }

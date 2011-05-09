@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.server;
 
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
@@ -53,4 +54,6 @@ public interface ILayerService {
 
     public long saveFolder(long idParentFolder, String folderName, int position)
             throws GeoPlatformException;
+
+    public void deleteElement(long id, TreeElement elementType) throws GeoPlatformException;
 }

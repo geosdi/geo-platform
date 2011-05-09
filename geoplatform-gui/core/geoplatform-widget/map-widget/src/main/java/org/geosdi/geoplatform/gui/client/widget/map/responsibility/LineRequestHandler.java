@@ -48,72 +48,72 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 public class LineRequestHandler extends GeometryRequestHandler {
 
-	public LineRequestHandler(ModifyFeatureControl theControl) {
-		super(theControl);
-		// TODO Auto-generated constructor stub
-	}
+    public LineRequestHandler(ModifyFeatureControl theControl) {
+        super(theControl);
+        // TODO Auto-generated constructor stub
+    }
 
-	public void geometryRequest(VectorFeature feature, Vector vector) {
-		// TODO Auto-generated method stub
-		if ((feature.getGeometry().getClassName()
-				.equals(Geometry.LINESTRING_CLASS_NAME))
-				|| (feature.getGeometry().getClassName()
-						.equals(Geometry.MULTI_LINE_STRING_CLASS_NAME))) {
+    @Override
+    public void geometryRequest(VectorFeature feature, Vector vector) {
+        // TODO Auto-generated method stub
+        if ((feature.getGeometry().getClassName().equals(
+                Geometry.LINESTRING_CLASS_NAME))
+                || (feature.getGeometry().getClassName().equals(
+                Geometry.MULTI_LINE_STRING_CLASS_NAME))) {
 
-			if (!checkModifications(feature))
-				showConfirmMessage(feature, vector);
+            if (!checkModifications(feature)) {
+                showConfirmMessage(feature, vector);
+            }
 
-		} else
-			forwardGeometryRequest(feature, vector);
-	}
+        } else {
+            forwardGeometryRequest(feature, vector);
+        }
+    }
 
-	@Override
-	public boolean checkModifications(VectorFeature feature) {
-		// TODO Auto-generated method stub
-		LineString oldLine = LineString.narrowToLineString(control
-				.getSelectedFeature().getGeometry().getJSObject());
+    @Override
+    public boolean checkModifications(VectorFeature feature) {
+        // TODO Auto-generated method stub
+        LineString oldLine = LineString.narrowToLineString(
+                control.getSelectedFeature().getGeometry().getJSObject());
 
-		LineString li = LineString.narrowToLineString(feature.getGeometry()
-				.getJSObject());
+        LineString li = LineString.narrowToLineString(
+                feature.getGeometry().getJSObject());
 
-		return li.equals(oldLine);
-	}
+        return li.equals(oldLine);
+    }
 
-	@Override
-	public void showConfirmMessage(final VectorFeature feature,
-			final Vector vector) {
-		// TODO Auto-generated method stub
-		final VectorFeature selectedFeature = getSelectedFeaure();
+    @Override
+    public void showConfirmMessage(final VectorFeature feature,
+            final Vector vector) {
+        // TODO Auto-generated method stub
+        final VectorFeature selectedFeature = getSelectedFeaure();
 
-		GeoPlatformMessage
-				.confirmMessage(
-						"Line Feature Status",
-						"The Geometry Line Feature is changed. Do you want to apply the changes?",
-						new Listener<MessageBoxEvent>() {
+        GeoPlatformMessage.confirmMessage(
+                "Line Feature Status",
+                "The Geometry Line Feature is changed. Do you want to apply the changes?",
+                new Listener<MessageBoxEvent>() {
 
-							@Override
-							public void handleEvent(MessageBoxEvent be) {
-								// TODO Auto-generated method stub
-								if (be.getButtonClicked().getText()
-										.equalsIgnoreCase("yes")
-										|| be.getButtonClicked().getText()
-												.equalsIgnoreCase("si"))
-									Dispatcher
-											.forwardEvent(
-													MapWidgetEvents.UPDATE_LINE_GEOMETRY,
-													feature);
-
-								else {
-									vector.removeFeature(feature);
-									vector.addFeature(selectedFeature);
-								}
-							}
-						});
-	}
-
+                    @Override
+                    public void handleEvent(MessageBoxEvent be) {
+                        // TODO Auto-generated method stub
+                        if (be.getButtonClicked().getText().equalsIgnoreCase(
+                                "yes")
+                                || be.getButtonClicked().getText().equalsIgnoreCase(
+                                "si")) {
+                            Dispatcher.forwardEvent(
+                                    MapWidgetEvents.UPDATE_LINE_GEOMETRY,
+                                    feature);
+                        } else {
+                            vector.removeFeature(feature);
+                            vector.addFeature(selectedFeature);
+                        }
+                    }
+                });
+    }
 }

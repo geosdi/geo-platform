@@ -51,7 +51,8 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
-import org.geosdi.geoplatform.gui.client.mvc.LayerController;
+import org.geosdi.geoplatform.gui.client.service.LayerRemote;
+import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
@@ -65,8 +66,9 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  */
 public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
 
+    private LayerRemoteAsync layerService = LayerRemote.Util.getInstance();
+
     private TreePanel tree;
-    private LayerController controller;
     private TextField<String> folderText;
     private Button save;
     private Button cancel;
@@ -77,10 +79,9 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
     /**
      *@Constructor
      */
-    public AddFolderWidget(TreePanel theTree, LayerController theController) {
+    public AddFolderWidget(TreePanel theTree) {
         super(true);
         this.tree = theTree;
-        this.controller = theController;
         this.visitorAdd = new VisitorAddElement();
     }
 
@@ -201,7 +202,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
     }
 
     private void saveFolderForUser() {
-        this.controller.getLayerService().saveFolderForUser(entity.getLabel(),
+        this.layerService.saveFolderForUser(entity.getLabel(),
                 entity.getzIndex(), new AsyncCallback<Long>() {
 
             @Override
@@ -222,7 +223,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
     }
 
     private void saveFolder() {
-        this.controller.getLayerService().saveFolder(
+        this.layerService.saveFolder(
                 ((FolderTreeNode) parentDestination).getId(),
                 entity.getLabel(), entity.getzIndex(), new AsyncCallback<Long>() {
 

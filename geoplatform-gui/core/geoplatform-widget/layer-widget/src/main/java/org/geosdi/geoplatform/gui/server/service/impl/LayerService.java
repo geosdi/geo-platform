@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOConverter;
@@ -136,6 +137,18 @@ public class LayerService implements ILayerService {
         return geoPlatformServiceClient.insertFolder(folder);
     }
 
+    @Override
+    public void deleteElement(long id, TreeElement elementType) throws GeoPlatformException {
+        switch (elementType) {
+            case FOLDER:
+                deleteFolder(id);
+                break;
+            case LAYER:
+                deleteLayer(id);
+                break;
+        }
+    }
+
     /**
      * @param geoPlatformServiceClient the geoPlatformServiceClient to set
      */
@@ -143,5 +156,20 @@ public class LayerService implements ILayerService {
     public void setGeoPlatformServiceClient(
             @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
+    }
+
+    private void deleteFolder(long id) throws GeoPlatformException {
+        try {
+            this.geoPlatformServiceClient.deleteFolder(new RequestById(id));
+        } catch (Exception ex) {
+            logger.error("LayerService",
+                    "Ubable to load Folder with ID : " + id);
+            throw new GeoPlatformException(
+                    "The Folder with ID : " + id + " was deleted.");
+        }
+    }
+
+    private void deleteLayer(long id) throws GeoPlatformException {
+        /** TODO MUST BE IMPLEMENTED ON WS **/
     }
 }

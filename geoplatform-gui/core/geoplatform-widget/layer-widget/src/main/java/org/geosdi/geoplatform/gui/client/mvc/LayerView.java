@@ -64,8 +64,7 @@ public class LayerView extends GeoPlatformView {
         // TODO Auto-generated constructor stub
         this.layerManagement = new LayerManagementWidget();
         this.addFolder = new AddFolderWidget(
-                this.layerManagement.getLayerTree().getTree(),
-                (LayerController) controller);
+                this.layerManagement.getLayerTree().getTree());
     }
 
     /*

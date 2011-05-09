@@ -48,70 +48,72 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 public class PointRequestHandler extends GeometryRequestHandler {
 
-	public PointRequestHandler(ModifyFeatureControl theControl) {
-		super(theControl);
-		// TODO Auto-generated constructor stub
-	}
+    public PointRequestHandler(ModifyFeatureControl theControl) {
+        super(theControl);
+        // TODO Auto-generated constructor stub
+    }
 
-	public void geometryRequest(VectorFeature feature, Vector vector) {
-		// TODO Auto-generated method stub
-		if (feature.getGeometry().getClassName()
-				.equals(Geometry.POINT_CLASS_NAME)) {
+    @Override
+    public void geometryRequest(VectorFeature feature, Vector vector) {
+        // TODO Auto-generated method stub
+        if (feature.getGeometry().getClassName().equals(
+                Geometry.POINT_CLASS_NAME)) {
 
-			if (!checkModifications(feature))
-				showConfirmMessage(feature, vector);
+            if (!checkModifications(feature)) {
+                showConfirmMessage(feature, vector);
+            }
 
-		} else
-			forwardGeometryRequest(feature, vector);
+        } else {
+            forwardGeometryRequest(feature, vector);
+        }
 
-	}
+    }
 
-	@Override
-	public boolean checkModifications(VectorFeature feature) {
-		// TODO Auto-generated method stub
-		Point oldPoint = Point.narrowToPoint(control.getSelectedFeature()
-				.getGeometry().getJSObject());
+    @Override
+    public boolean checkModifications(VectorFeature feature) {
+        // TODO Auto-generated method stub
+        Point oldPoint = Point.narrowToPoint(
+                control.getSelectedFeature().getGeometry().getJSObject());
 
-		Point po = Point.narrowToPoint(feature.getGeometry().getJSObject());
+        Point po = Point.narrowToPoint(feature.getGeometry().getJSObject());
 
-		return ((po.getX() == oldPoint.getX()) && (po.getY() == oldPoint.getY()));
+        return ((po.getX() == oldPoint.getX()) && (po.getY() == oldPoint.getY()));
 
-		// return po.equals(oldPoint);
-	}
+        // return po.equals(oldPoint);
+    }
 
-	@Override
-	public void showConfirmMessage(final VectorFeature feature,
-			final Vector vector) {
-		// TODO Auto-generated method stub
-		final VectorFeature selectedFeature = getSelectedFeaure();
+    @Override
+    public void showConfirmMessage(final VectorFeature feature,
+            final Vector vector) {
+        // TODO Auto-generated method stub
+        final VectorFeature selectedFeature = getSelectedFeaure();
 
-		GeoPlatformMessage
-				.confirmMessage(
-						"Point Feature Status",
-						"The Geometry Point Feature is changed. Do you want to apply the changes?",
-						new Listener<MessageBoxEvent>() {
+        GeoPlatformMessage.confirmMessage(
+                "Point Feature Status",
+                "The Geometry Point Feature is changed. Do you want to apply the changes?",
+                new Listener<MessageBoxEvent>() {
 
-							@Override
-							public void handleEvent(MessageBoxEvent be) {
-								// TODO Auto-generated method stub
-								if (be.getButtonClicked().getText()
-										.equalsIgnoreCase("yes")
-										|| be.getButtonClicked().getText()
-												.equalsIgnoreCase("si"))
-									Dispatcher
-											.forwardEvent(
-													MapWidgetEvents.UPDATE_POINT_GEOMETRY,
-													feature);
-								else {
-									vector.removeFeature(feature);
-									vector.addFeature(selectedFeature);
-								}
-							}
-						});
-	}
+                    @Override
+                    public void handleEvent(MessageBoxEvent be) {
+                        // TODO Auto-generated method stub
+                        if (be.getButtonClicked().getText().equalsIgnoreCase(
+                                "yes")
+                                || be.getButtonClicked().getText().equalsIgnoreCase(
+                                "si")) {
+                            Dispatcher.forwardEvent(
+                                    MapWidgetEvents.UPDATE_POINT_GEOMETRY,
+                                    feature);
+                        } else {
+                            vector.removeFeature(feature);
+                            vector.addFeature(selectedFeature);
+                        }
+                    }
+                });
+    }
 }

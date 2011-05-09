@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.service;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -53,4 +54,7 @@ public interface LayerRemoteAsync {
 
     public void saveFolder(long idParentFolder, String folderName, int position,
             AsyncCallback<Long> callback);
+
+    public void deleteElement(long id, TreeElement elementType,
+            AsyncCallback<?> callback);
 }

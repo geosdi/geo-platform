@@ -40,6 +40,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
@@ -87,4 +88,12 @@ public interface LayerRemote extends RemoteService {
      * @throws GeoPlatformException
      */
     public long saveFolder(long idParentFolder, String folderName, int position) throws GeoPlatformException;
+
+    /**
+     * 
+     * @param id
+     * @param elementType
+     * @throws GeoPlatformException
+     */
+    public void deleteElement(long id, TreeElement elementType) throws GeoPlatformException;
 }

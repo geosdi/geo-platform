@@ -33,52 +33,18 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.server.gwt;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.ILayerService;
-import org.geosdi.geoplatform.gui.server.service.impl.LayerService;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
+
+package org.geosdi.geoplatform.gui.client.model.composite;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote {
+public enum TreeElement {
 
-    //TODO: Insert correct serialVersionUID
-    private static final long serialVersionUID = 8244727800484212092L;
+    FOLDER,
+    LAYER
 
-    private ILayerService layerService;
-
-    public LayerRemoteImpl() {
-        this.layerService = (ILayerService) GeoPlatformContextUtil.getInstance().getBean(
-                LayerService.class);
-    }
-
-    @Override
-    public List<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException {
-        return this.layerService.loadUserFolders(userName);
-    }
-
-    @Override
-    public long saveFolderForUser(String folderName, int position) throws GeoPlatformException {
-        return this.layerService.saveFolderForUser(folderName, position);
-    }
-
-    @Override
-    public long saveFolder(long idParentFolder, String folderName, int position) throws GeoPlatformException {
-        return this.layerService.saveFolder(idParentFolder, folderName,
-                position);
-    }
-
-    @Override
-    public void deleteElement(long id, TreeElement elementType) throws GeoPlatformException {
-        this.layerService.deleteElement(id, elementType);
-    }
 }

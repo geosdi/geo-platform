@@ -39,21 +39,21 @@ import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 public class GeometryRequestManager {
 
-	private Vector vector;
+    private Vector vector;
 
-	public GeometryRequestManager(Vector vector) {
-		this.vector = vector;
-	}
+    public GeometryRequestManager(Vector vector) {
+        this.vector = vector;
+    }
 
-	public void forwardRequest(GeometryRequestHandler handler,
-			VectorFeature feature) {
+    public void forwardRequest(GeometryRequestHandler handler,
+            VectorFeature feature) {
 
-		handler.geometryRequest(feature, vector);
-	}
-
+        handler.geometryRequest(feature, vector);
+    }
 }

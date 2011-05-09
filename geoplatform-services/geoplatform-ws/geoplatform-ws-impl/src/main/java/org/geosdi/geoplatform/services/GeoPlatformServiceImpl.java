@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
@@ -45,6 +46,7 @@ import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.dao.GPStyleDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -329,10 +331,26 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === Layer / Style
     // ==========================================================================
     @Override
-    public StyleList getLayerStayls(long layerId) {
+    public StyleList getLayerStyles(long layerId) {
         return layerServiceDelegate.getLayerStyles(layerId);
     }
     //</editor-fold>
+    
+    @Override
+    public long insertLayer(GPLayer layer) {
+        return layerServiceDelegate.insertLayer(layer);
+    }
+
+//    @Override
+//    public long updateLayer(GPLayer layer) throws ResourceNotFoundFault, IllegalParameterFault {
+//        return layerServiceDelegate.updateLayer(layer);
+//    }
+
+    @Override
+    public boolean deleteLayer(RequestById request)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return layerServiceDelegate.deleteLayer(request);
+    }
 
     //<editor-fold defaultstate="collapsed" desc="OWS">
     // ==========================================================================

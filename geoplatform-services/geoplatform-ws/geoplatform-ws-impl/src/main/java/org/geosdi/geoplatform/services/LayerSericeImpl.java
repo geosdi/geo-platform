@@ -44,7 +44,12 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPStyleDAO;
+import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPStyle;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geosdi.geoplatform.responce.collection.StyleList;
 
@@ -86,6 +91,45 @@ class LayerSericeImpl {
         List<GPStyle> foundStyle = styleDao.search(searchCriteria);
         StyleList list = convertToStyleList(foundStyle);
         return list;
+    }
+    
+    public long insertLayer(GPLayer layer) {
+        layerDao.persist(layer);
+        return layer.getId();
+    }
+
+//    public long updateLayer(GPLayer layer)
+//            throws ResourceNotFoundFault, IllegalParameterFault {
+//        GPLayer orig = layerDao.find(layer.getId());
+//        if (orig == null) {
+//            throw new ResourceNotFoundFault("Layer not found", layer.getId());
+//        }
+//        
+////        orig.setParent(layer.getParent());
+//        orig.setAbstractText(layer.getAbstractText());
+//        orig.setBbox(layer.getBbox());
+//        orig.setLayerType(layer.getLayerType());
+//        orig.setName(layer.getName());
+//        orig.setPosition(layer.getPosition());
+//        orig.setShared(layer.isShared());
+//        orig.setSrs(layer.getSrs());
+//        orig.setTitle(layer.getTitle());
+//        orig.setUrlServer(layer.getUrlServer());
+//
+//        layerDao.merge(orig);
+//        return orig.getId();
+//    }
+
+    public boolean deleteLayer(RequestById request)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        GPLayer layer = layerDao.find(request.getId());
+
+        if (layer == null) {
+            throw new ResourceNotFoundFault("Layer not found", request.getId());
+        }
+
+        // data on ancillary tables should be deleted by cascading
+        return layerDao.remove(layer);
     }
 
     // TODO Move to StyleList?

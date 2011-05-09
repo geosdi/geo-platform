@@ -47,6 +47,7 @@ import org.codehaus.jra.HttpResource;
 import org.codehaus.jra.Post;
 import org.codehaus.jra.Put;
 import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -266,8 +267,22 @@ public interface GeoPlatformService {
      */
     @Get
     @WebResult(name = "LayerStyles")
-    StyleList getLayerStayls(@WebParam(name = "layerId") long layerId);
+    StyleList getLayerStyles(@WebParam(name = "layerId") long layerId);
     //</editor-fold>
+    
+    @Put
+    @HttpResource(location = "/layer")
+    long insertLayer(@WebParam(name = "Layer") GPLayer layer);
+
+//    @Post
+//    @HttpResource(location = "/layer")
+//    long updateLayer(@WebParam(name = "Layer") GPLayer layer)
+//            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Delete
+    @HttpResource(location = "/layers/{id}")
+    boolean deleteLayer(RequestById request) throws ResourceNotFoundFault,
+            IllegalParameterFault;
 
     //<editor-fold defaultstate="collapsed" desc="OWS">
     // ==========================================================================

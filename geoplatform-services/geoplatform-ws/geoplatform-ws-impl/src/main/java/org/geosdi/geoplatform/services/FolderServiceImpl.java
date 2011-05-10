@@ -364,10 +364,22 @@ class FolderServiceImpl {
 
     // Check if the folder has childrens elmenent (folders or layers)
     private boolean folderIsEmpty(GPFolder folder) {
-        TreeFolderElements childrens = this.getChildrenElements(folder.getId());
-        if(childrens.size() == 0){
-            return true;
+        Search searchCriteria = new Search(GPFolder.class);
+        Filter parent = Filter.equal("parent.id", folder.getId());
+        searchCriteria.addFilter(parent);
+        List<GPFolder> foundFolder = folderDao.search(searchCriteria);
+        if(foundFolder.size() > 0){
+            return false;
         }
-        return false;
+        
+        searchCriteria = new Search(GPLayer.class);
+        parent = Filter.equal("folder.id", folder.getId());
+        searchCriteria.addFilter(parent);
+        List<GPLayer> foundLayer = layerDao.search(searchCriteria);        
+        if(foundLayer.size() > 0){
+            return false;
+        }
+        
+        return true;
     }
 }

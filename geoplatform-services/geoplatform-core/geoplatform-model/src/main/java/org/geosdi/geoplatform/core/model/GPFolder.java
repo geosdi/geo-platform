@@ -38,7 +38,6 @@
 package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

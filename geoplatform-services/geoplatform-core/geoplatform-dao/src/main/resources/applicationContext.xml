@@ -47,5 +47,10 @@
 	<bean id="styleDAO" class="org.geosdi.geoplatform.core.dao.impl.GPStyleDAOImpl" />
 	<bean id="serverDAO" class="org.geosdi.geoplatform.core.dao.impl.GPServerDAOImpl" />
 	<bean id="authorityDAO" class="org.geosdi.geoplatform.core.dao.impl.GPAuthorityDAOImpl" />
-	
+
+        <bean id="classDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.AclClassDAOImpl" />
+        <bean id="entryDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.AclEntryDAOImpl" />
+        <bean id="objectIdentityDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.AclObjectIdentityDAOImpl" />
+        <bean id="sidDAO" class="org.geosdi.geoplatform.core.acl.dao.impl.AclSidDAOImpl" />
+
 </beans>

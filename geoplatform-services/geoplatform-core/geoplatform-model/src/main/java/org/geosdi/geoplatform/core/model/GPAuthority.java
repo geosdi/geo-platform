@@ -38,23 +38,21 @@
 package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
@@ -83,13 +81,9 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     @Column(name = "authority", nullable = false)
     private String authority;
     
-    @ManyToMany(targetEntity = GPUser.class, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_authority",
-    joinColumns = {
-        @JoinColumn(name = "authorityId")},
-    inverseJoinColumns = {
-        @JoinColumn(name = "userId")})
-    private List<GPUser> gpUsers;
+    @ManyToOne(targetEntity = GPUser.class)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private GPUser gpUser;
 
     public GPAuthority() {
     }
@@ -143,18 +137,18 @@ public class GPAuthority implements GrantedAuthority, Serializable {
         this.authority = authority;
     }
 
-    public List<GPUser> getGpUsers() {
-        return gpUsers;
+    public GPUser getGpUser() {
+        return gpUser;
     }
 
-    public void setGpUsers(List<GPUser> gpUsers) {
-        this.gpUsers = gpUsers;
+    public void setGpUsers(GPUser gpUser) {
+        this.gpUser = gpUser;
     }
 
     @Override
     public String toString() {
         return "GPAuthority{" + "id=" + id + ", username=" + username
-                + ", authority=" + authority + ", gpUsers=" + gpUsers + '}';
+                + ", authority=" + authority + ", gpUsers=" + gpUser + '}';
     }
     
 }

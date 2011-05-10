@@ -35,38 +35,30 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.core.dao;
+package org.geosdi.geoplatform.core.acl.dao.impl;
 
-import java.util.List;
+import org.geosdi.geoplatform.core.acl.AclObjectIdentity;
+import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
+import org.geosdi.geoplatform.core.dao.impl.BaseDAO;
 
-import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-
-import com.trg.search.ISearch;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ *
  */
-public interface GPServerDAO {
+@Transactional
+public class AclObjectIdentityDAOImpl extends BaseDAO<AclObjectIdentity, Long>
+        implements AclObjectIdentityDAO {
 
-    public List<GeoPlatformServer> findAll();
+    @Override
+    public void persist(AclObjectIdentity... objectsIdentity) {
+        super.persist(objectsIdentity);
+    }
 
-    public GeoPlatformServer find(Long id);
-
-    public void persist(GeoPlatformServer... server);
-
-    public GeoPlatformServer merge(GeoPlatformServer server);
-
-    public boolean remove(GeoPlatformServer server);
-
-    public boolean removeById(Long serverId);
-
-    public List<GeoPlatformServer> search(ISearch search);
-
-    public int count(ISearch search);
-
-    public List<GeoPlatformServer> findByServerName(String serverName);
-
-    public GeoPlatformServer findByServerUrl(String serverUrl);
+    @Override
+    public boolean remove(AclObjectIdentity objectIdentity) {
+        return super.remove(objectIdentity);
+    }
 }

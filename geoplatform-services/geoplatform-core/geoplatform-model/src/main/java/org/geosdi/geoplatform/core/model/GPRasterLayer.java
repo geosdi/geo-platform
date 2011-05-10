@@ -43,7 +43,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -60,7 +59,6 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity(name = "RasterLayer")
 @Table(name = "gp_raster_layer")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "raster_layer")
-@PrimaryKeyJoinColumn(name = "RASTER_ID")
 public class GPRasterLayer extends GPLayer implements Serializable {
 
     /**

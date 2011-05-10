@@ -51,6 +51,7 @@
         <class>org.geosdi.geoplatform.core.model.GPStyle</class>
         <class>org.geosdi.geoplatform.core.model.GeoPlatformServer</class>
         <class>org.geosdi.geoplatform.core.model.GPAuthority</class>
+        <!-- ACL -->
         <class>org.geosdi.geoplatform.core.acl.AclSid</class>
         <class>org.geosdi.geoplatform.core.acl.AclClass</class>
         <class>org.geosdi.geoplatform.core.acl.AclObjectIdentity</class>

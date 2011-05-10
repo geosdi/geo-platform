@@ -18,11 +18,10 @@
     	<mapping  class="org.geosdi.geoplatform.core.model.GPStyle"/>
     	<mapping  class="org.geosdi.geoplatform.core.model.GeoPlatformServer"/>
     	<mapping  class="org.geosdi.geoplatform.core.model.GPAuthority"/>
-        
+        <!-- ACL -->
         <mapping  class="org.geosdi.geoplatform.core.acl.AclSid"/>
         <mapping  class="org.geosdi.geoplatform.core.acl.AclClass"/>
         <mapping  class="org.geosdi.geoplatform.core.acl.AclObjectIdentity"/>
         <mapping  class="org.geosdi.geoplatform.core.acl.AclEntry"/>
-    	
     </session-factory>
 </hibernate-configuration>

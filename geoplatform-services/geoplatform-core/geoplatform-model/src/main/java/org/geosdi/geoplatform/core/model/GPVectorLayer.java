@@ -41,7 +41,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -65,7 +64,6 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity(name = "VectorLayer")
 @Table(name = "gp_vector_layer")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "vector_layer")
-@PrimaryKeyJoinColumn(name = "VECTOR_ID")
 public class GPVectorLayer extends GPLayer implements Serializable {
 
     /**

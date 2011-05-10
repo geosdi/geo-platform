@@ -56,12 +56,14 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
      *
      */
     private static final long serialVersionUID = -3687415822526940729L;
-
-
     /** THIS PROPERTY MUST NOT BE SERIALIZED **/
     private transient VisitorModelConverter visitor = new VisitorModelConverter(this);
+    private boolean hasChildrens;
 
-    public FolderTreeNode(){};
+    public FolderTreeNode() {
+    }
+
+    ;
 
     public FolderTreeNode(String label) {
         super.setLabel(label);
@@ -79,7 +81,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
      */
     public void modelConverter(List<IGPFolderElements> layersClientInfo) {
         for (IGPFolderElements layer : layersClientInfo) {
-             layer.accept(this.visitor);
+            layer.accept(this.visitor);
         }
     }
 
@@ -92,5 +94,20 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
     public AbstractImagePrototype getIcon() {
         // TODO Auto-generated method stub
         return LayerResources.ICONS.layerFolder();
+    }
+
+    /**
+     * @return the hasChildrens
+     */
+    public boolean hasChildrens() {
+        System.out.println("Has childrens: " + this.hasChildrens);
+        return this.hasChildrens;
+    }
+
+    /**
+     * @param hasChildrens the hasChildrens to set
+     */
+    public void setHasChildrens(boolean hasChildrens) {
+        this.hasChildrens = hasChildrens;
     }
 }

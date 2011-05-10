@@ -69,4 +69,6 @@ public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
     public void accept(IVisitor visitor) {
         visitor.visitFolder(this);
     }
+
+
 }

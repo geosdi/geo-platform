@@ -68,11 +68,7 @@ public class DTOConverter {
         if(gpFolders == null) return null;
         List<FolderTreeNode> foldersClient = new ArrayList<FolderTreeNode>();
         for (FolderDTO folderDTO : gpFolders) {
-            FolderTreeNode folder = new FolderTreeNode();
-            folder.setId(folderDTO.getId());
-            folder.setLabel(folderDTO.getName());
-            folder.setzIndex(folderDTO.getPosition());
-            foldersClient.add(folder);
+            foldersClient.add(this.convertFolderElement(folderDTO));
         }
         return foldersClient;
     }
@@ -118,6 +114,7 @@ public class DTOConverter {
         FolderTreeNode folder = new FolderTreeNode(folderDTO.getName());
         folder.setId(folderDTO.getId());
         folder.setzIndex(folderDTO.getPosition());
+        folder.setHasChildrens(!folderDTO.isEmpty());
         return folder;
     }
     

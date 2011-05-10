@@ -301,16 +301,10 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
             @Override
             protected void load(Object loadConfig, AsyncCallback<List<GPBeanTreeModel>> callback) {
-                if(loadConfig != null){
-                    System.out.println("Vediamooo: " + loadConfig.toString());
-                }
                 if (initialized == false) {
                     layerService.loadUserFolders("user_0", callback);
                     System.out.println("User folder inizialized");
                     initialized = true;
-//                } else if (selectedElement != null && selectedElement instanceof FolderTreeNode) {
-//                    service.loadFolderElements(((FolderTreeNode) selectedElement).getId(), callback);
-//                    System.out.println("Eseguo dopo inzialized");
                 } else if (loadConfig != null && (loadConfig instanceof FolderTreeNode || loadConfig instanceof GPRootTreeNode)){
                     service.loadFolderElements(((FolderTreeNode) loadConfig).getId(), callback);
                 }
@@ -321,8 +315,13 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
             @Override
             public boolean hasChildren(GPBeanTreeModel element) {
-                System.out.println("Prova: " + element.getLabel());
-                return element instanceof FolderTreeNode || element instanceof GPRootTreeNode;
+                boolean condition = false;
+                if((element instanceof FolderTreeNode && ((FolderTreeNode)element).hasChildrens()) ||
+                        element instanceof GPRootTreeNode){
+                    condition = true;
+                }
+                System.out.println("Condition: " + condition);
+                return condition;
                 //return true;
             }
         };

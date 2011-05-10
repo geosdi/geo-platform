@@ -41,12 +41,15 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOConverter;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.collection.FolderList;
+import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,9 +65,7 @@ import org.springframework.stereotype.Service;
 public class LayerService implements ILayerService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     private GeoPlatformService geoPlatformServiceClient;
-
     @Autowired
     private DTOConverter dtoConverter;
 
@@ -88,7 +89,13 @@ public class LayerService implements ILayerService {
                 idRequest);
 
 
-        return this.dtoConverter.convert(folderList.getList());
+        return this.dtoConverter.convertOnlyFolder(folderList.getList());
+    }
+
+    @Override
+    public List<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException {
+        TreeFolderElements folderElements = geoPlatformServiceClient.getChildrenElements(folderId);
+        return this.dtoConverter.convertFolderElements(folderElements);
     }
 
     @Override

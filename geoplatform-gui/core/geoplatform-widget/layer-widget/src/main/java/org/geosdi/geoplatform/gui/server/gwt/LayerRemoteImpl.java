@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.service.impl.LayerService;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
@@ -65,6 +66,11 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     public List<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException {
         return this.layerService.loadUserFolders(userName);
     }
+    
+    @Override
+    public List<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException {
+        return this.layerService.loadFolderElements(folderId);
+    }
 
     @Override
     public long saveFolderForUser(String folderName, int position) throws GeoPlatformException {
@@ -81,4 +87,5 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     public void deleteElement(long id, TreeElement elementType) throws GeoPlatformException {
         this.layerService.deleteElement(id, elementType);
     }
+
 }

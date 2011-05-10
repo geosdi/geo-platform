@@ -55,6 +55,8 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
      */
     private static final long serialVersionUID = -2445765797861311204L;
     private String featureNameSpace;
+    
+    public VectorTreeNode(){}
 
     /**
      * @Constructor

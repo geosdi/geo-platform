@@ -57,6 +57,8 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
      */
     private static final long serialVersionUID = 8265365333381641340L;
     private List<String> styles;
+    
+    public RasterTreeNode(){}
 
     /**
      * @Constructor

@@ -37,7 +37,6 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.model;
 
-import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,8 +50,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import com.vividsolutions.jts.geom.Geometry;
-import javax.persistence.CascadeType;
-import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -63,8 +61,10 @@ import org.hibernate.annotations.OnDeleteAction;
 @XmlRootElement(name = "VectorLayer")
 @Entity(name = "VectorLayer")
 @Table(name = "gp_vector_layer")
+@PrimaryKeyJoinColumn(name = "VECTOR_LAYER_ID")
+@OnDelete(action = OnDeleteAction.CASCADE)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "vector_layer")
-public class GPVectorLayer extends GPLayer implements Serializable {
+public class GPVectorLayer extends GPLayer {
 
     /**
      *
@@ -74,25 +74,6 @@ public class GPVectorLayer extends GPLayer implements Serializable {
     @Type(type = "org.hibernatespatial.GeometryUserType")
     @Column(name = "geometry", nullable = true)
     private Geometry geometry;
-
-    @ManyToOne(cascade = CascadeType.REMOVE, optional = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private GPFolder folder;
-
-    /**
-     * @return the folder
-     */
-    public GPFolder getFolder() {
-        return folder;
-    }
-
-    /**
-     * @param folder
-     *            the bbox to folder
-     */
-    public void setFolder(GPFolder folder) {
-        this.folder = folder;
-    }
 
     /**
      * @return the geometry

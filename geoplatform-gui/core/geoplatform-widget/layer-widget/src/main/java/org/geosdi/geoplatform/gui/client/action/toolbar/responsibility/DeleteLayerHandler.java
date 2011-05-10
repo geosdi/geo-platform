@@ -93,8 +93,16 @@ public class DeleteLayerHandler extends DeleteRequestHandler {
 
             @Override
             public void onSuccess(Object result) {
-               delete();
+                delete();
             }
         });
+    }
+
+    @Override
+    public void displayMessage() {
+        GeoPlatformMessage.infoMessage("Delete Layer",
+                "The Layer "
+                + ((GPBeanTreeModel) tree.getSelectionModel().getSelectedItem()).getLabel()
+                + "  was deleted successfully.");
     }
 }

@@ -51,6 +51,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * @author Francesco Izzi - geoSDI
@@ -67,25 +69,26 @@ public class GPStyle implements Serializable {
      */
     private static final long serialVersionUID = -8623163339265164161L;
 
-    
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_STYLE_SEQ")
-    @SequenceGenerator(name = "GP_STYLE_SEQ", sequenceName = "GP_STYLE_SEQ")    
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+                    generator = "GP_STYLE_SEQ")
+    @SequenceGenerator(name = "GP_STYLE_SEQ", sequenceName = "GP_STYLE_SEQ")
     private long id;
-    
+
     @Column(name = "name")
     private String name;
-    
+
     @Column(name = "title")
     private String title;
-    
+
     @Column(name = "abstract")
     private String abstractText;
-    
+
     @Column(name = "legend_url")
     private String legendURL;
-    
+
     @ManyToOne(optional = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private GPLayer layer;
 
     /**

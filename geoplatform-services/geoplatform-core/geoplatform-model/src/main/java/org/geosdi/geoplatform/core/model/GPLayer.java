@@ -38,6 +38,7 @@
 package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -49,15 +50,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * @author Francesco Izzi - geoSDI
  * 
  */
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class GPLayer implements Serializable {
+@Entity(name = "GPLayer")
+@Table(name = "gp_layer")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class GPLayer implements Serializable {
 
     /**
      * serialVersionUID
@@ -65,7 +71,8 @@ public abstract class GPLayer implements Serializable {
     private static final long serialVersionUID = 5746325405739614413L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_LAYER_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+                    generator = "GP_LAYER_SEQ")
     @SequenceGenerator(name = "GP_LAYER_SEQ", sequenceName = "GP_LAYER_SEQ")
     private long id;
 
@@ -92,9 +99,13 @@ public abstract class GPLayer implements Serializable {
 
     @Embedded
     private GPBBox bbox;
-    
+
     @Enumerated(EnumType.STRING)
     private GPLayerType layerType;
+
+    @ManyToOne(cascade = CascadeType.REMOVE, optional = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private GPFolder folder;
 
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
@@ -242,6 +253,21 @@ public abstract class GPLayer implements Serializable {
      */
     public void setLayerType(GPLayerType layerType) {
         this.layerType = layerType;
+    }
+
+    /**
+     * @return the folder
+     */
+    public GPFolder getFolder() {
+        return folder;
+    }
+
+    /**
+     * @param folder
+     *            the bbox to folder
+     */
+    public void setFolder(GPFolder folder) {
+        this.folder = folder;
     }
     //</editor-fold>
 

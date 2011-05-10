@@ -76,8 +76,12 @@ public abstract class DeleteRequestHandler {
         GPBeanTreeModel element = (GPBeanTreeModel) tree.getSelectionModel().getSelectedItem();
         GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
         /** HERE THE CODE FOR VISITOR DELETE ASK TOMORROW TO ANDY **/
-        parent.remove(element);
+        this.tree.getStore().remove(parent, element);
+
+        displayMessage();
     }
 
     public abstract void processRequest();
+
+    public abstract void displayMessage();
 }

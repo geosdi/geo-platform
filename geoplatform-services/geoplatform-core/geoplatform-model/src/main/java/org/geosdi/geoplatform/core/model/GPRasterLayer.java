@@ -37,12 +37,9 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.model;
 
-import java.io.Serializable;
-import javax.persistence.CascadeType;
-
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -58,8 +55,10 @@ import org.hibernate.annotations.OnDeleteAction;
 @XmlRootElement(name = "RasterLayer")
 @Entity(name = "RasterLayer")
 @Table(name = "gp_raster_layer")
+@PrimaryKeyJoinColumn(name = "VECTOR_LAYER_ID")
+@OnDelete(action = OnDeleteAction.CASCADE)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "raster_layer")
-public class GPRasterLayer extends GPLayer implements Serializable {
+public class GPRasterLayer extends GPLayer {
 
     /**
      * serialVersionUID
@@ -68,25 +67,6 @@ public class GPRasterLayer extends GPLayer implements Serializable {
 
     @Embedded
     private GPLayerInfo layerInfo;
-
-    @ManyToOne(cascade = CascadeType.REMOVE, optional = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private GPFolder folder;
-
-    /**
-     * @return the folder
-     */
-    public GPFolder getFolder() {
-        return folder;
-    }
-
-    /**
-     * @param folder
-     *            the bbox to folder
-     */
-    public void setFolder(GPFolder folder) {
-        this.folder = folder;
-    }
 
     /**
      * @return the layerInfo

@@ -37,11 +37,8 @@
 //</editor-fold>
 package org.geosdi.geoplatform.responce;
 
-import java.util.Collection;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.geosdi.geoplatform.core.model.GPFolder;
@@ -54,9 +51,7 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class FolderDTO extends AbstractElementDTO {
 
-    @XmlElementWrapper(name = "elementsCollection")
-    @XmlElement(name = "element")    
-    private Collection<IElementDTO> elements;
+    private boolean empty;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
@@ -73,31 +68,21 @@ public class FolderDTO extends AbstractElementDTO {
     public FolderDTO(GPFolder folder) {
         super(folder.getId(), folder.getName(), folder.getPosition(), folder.isShared());
     }
-
-    /**
-     * Constructor with args
-     * @param folder
-     */
-    public FolderDTO(GPFolder folder, Collection<IElementDTO> elements) {
-        super(folder.getId(), folder.getName(), folder.getPosition(), folder.isShared());
-        this.elements = elements;
-    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
-     * @return the elements
+     * @return the empty
      */
-    public Collection<IElementDTO> getElements() {
-        return elements;
+    public boolean isEmpty() {
+        return empty;
     }
-    
+
     /**
-     * @param elements
-     *            the elements to set
+     * @param empty the empty to set
      */
-    public void setElements(Collection<IElementDTO> elements) {
-        this.elements = elements;
+    public void setEmpty(boolean empty) {
+        this.empty = empty;
     }
     //</editor-fold>
 

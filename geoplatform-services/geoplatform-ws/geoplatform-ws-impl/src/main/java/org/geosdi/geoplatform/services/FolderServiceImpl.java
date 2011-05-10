@@ -220,8 +220,8 @@ class FolderServiceImpl {
         searchCriteria.addSortAsc("name");
         Filter parent = Filter.equal("parent.id", folderId);
         searchCriteria.addFilter(parent);
-        List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-        tree.addFolderCollection(foundFolder);
+        List<GPFolder> foundFolder = folderDao.search(searchCriteria);        
+        tree.addFolderCollection(convertToFolderList(foundFolder));
 
         searchCriteria = new Search(GPLayer.class);
         searchCriteria.addSortAsc("name");
@@ -241,106 +241,106 @@ class FolderServiceImpl {
     public void setFolderShared(RequestById request)
             throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(request.getId());
-        
+
         if (folder == null) {
             throw new ResourceNotFoundFault("Folder not found", request.getId());
         }
-        
+
         folder.setShared(true);
         folder.setOwner(null);
         folderDao.merge(folder);
     }
-    
+
     public boolean setFolderOwner(RequestByUserFolder request, boolean force)
             throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(request.getFolderId());
-        
+
         if (folder == null) {
             throw new ResourceNotFoundFault("Folder not found",
                     request.getFolderId());
         }
-        
+
         GPUser user = userDao.find(request.getUserId());
-        
+
         if (user == null) {
             throw new ResourceNotFoundFault("User not found",
                     request.getUserId());
         }
-        
+
         // TODO: implement the logic described in this method's javadoc
-        
+
         folder.setShared(false);
         folder.setOwner(user);
         folderDao.merge(folder);
-        
+
         return true;
     }
-    
+
     public FolderList getUserFoldersByRequest(RequestById request) {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.setMaxResults(request.getNum());
         searchCriteria.setPage(request.getPage());
         searchCriteria.addSortAsc("position");
-        
+
         searchCriteria.addFilterEqual("owner.id", request.getId());
-        
+
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
         return convertToFolderList(foundFolder);
     }
-    
+
     public FolderList getUserFoldersByUserId(long userId) {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.addSortAsc("position");
-        
+
         searchCriteria.addFilterEqual("owner.id", userId);
-        
+
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
         return convertToFolderList(foundFolder);
     }
-    
+
     public FolderList getAllUserFolders(long userId, int num, int page) {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.setMaxResults(num);
         searchCriteria.setPage(page);
         searchCriteria.addSortAsc("name");
-        
+
         Filter owner = Filter.equal("owner.id", userId);
         Filter shared = Filter.equal("shared", true);
         searchCriteria.addFilterOr(owner, shared);
-        
+
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-        
+
         FolderList list = convertToFolderList(foundFolder);
         return list;
     }
-    
+
     public FolderList getAllUserFoldersByUserId(long userId) {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.addSortAsc("name");
-        
+
         Filter owner = Filter.equal("owner.id", userId);
         Filter shared = Filter.equal("shared", true);
         searchCriteria.addFilterOr(owner, shared);
-        
+
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-        
+
         FolderList list = convertToFolderList(foundFolder);
         return list;
     }
-    
+
     public long getUserFoldersCount(RequestById request) {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.addFilterEqual("owner.id", request.getId());
         return folderDao.count(searchCriteria);
     }
-    
+
     public int getAllUserFoldersCount(long userId) {
         Search searchCriteria = new Search(GPFolder.class);
-        
+
         Filter owner = Filter.equal("owner.id", userId);
         Filter shared = Filter.equal("shared", true);
         searchCriteria.addFilterOr(owner, shared);
-        
+
         return folderDao.count(searchCriteria);
     }
     //</editor-fold>
@@ -349,8 +349,10 @@ class FolderServiceImpl {
     // as constructor: FolderList list = new FolderList(List<GPFolder>);
     private FolderList convertToFolderList(List<GPFolder> folderList) {
         List<FolderDTO> foldersDTO = new ArrayList<FolderDTO>(folderList.size());
-        for (GPFolder folder : folderList) {
-            foldersDTO.add(new FolderDTO(folder));
+        for (GPFolder folderIth : folderList) {
+            FolderDTO folderIthDTO = new FolderDTO(folderIth);
+            folderIthDTO.setEmpty(this.folderIsEmpty(folderIth));
+            foldersDTO.add(folderIthDTO);
         }
 
         Collections.sort(foldersDTO);
@@ -358,5 +360,14 @@ class FolderServiceImpl {
         FolderList folders = new FolderList();
         folders.setList(foldersDTO);
         return folders;
+    }
+
+    // Check if the folder has childrens elmenent (folders or layers)
+    private boolean folderIsEmpty(GPFolder folder) {
+        TreeFolderElements childrens = this.getChildrenElements(folder.getId());
+        if(childrens.size() == 0){
+            return true;
+        }
+        return false;
     }
 }

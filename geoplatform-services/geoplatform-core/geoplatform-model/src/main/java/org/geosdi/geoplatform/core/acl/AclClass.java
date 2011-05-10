@@ -62,8 +62,8 @@ public class AclClass {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACL_CLASS_SEQ")
     @SequenceGenerator(name = "ACL_CLASS_SEQ", sequenceName = "ACL_CLASS_SEQ")
     private long id;
-    
-    @Column(name = "class", unique = true, nullable = false)
+    // Fully qualified name of a class (package.className)
+    @Column(name = "class", unique = true, nullable = false, length = 500)
     private String clazz;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor methods">

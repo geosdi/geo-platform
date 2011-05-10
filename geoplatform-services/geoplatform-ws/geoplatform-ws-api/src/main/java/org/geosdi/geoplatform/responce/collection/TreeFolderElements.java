@@ -70,12 +70,10 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
 
     /**
      * @param folderList
-     *            list of GPFolder
+     *            FolderList (list of FolderDTO)
      */
-    public void addFolderCollection(Collection<GPFolder> folderList) {
-        for (GPFolder folder : folderList) {
-            super.add(new FolderDTO(folder));
-        }
+    public void addFolderCollection(FolderList folderList) {
+        super.addAll(folderList.getList());
     }
 
     /**
@@ -100,4 +98,12 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
             }
         }
     }
+    
+    /**
+     * @param layerList
+     *            LayerList (list of LayerDTO)
+     */
+    public void addLayerCollection(LayerList layerList) {
+        super.addAll(layerList.getList());
+    }    
 }

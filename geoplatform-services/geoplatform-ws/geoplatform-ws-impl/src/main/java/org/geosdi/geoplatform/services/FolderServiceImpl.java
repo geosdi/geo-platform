@@ -351,7 +351,7 @@ class FolderServiceImpl {
         List<FolderDTO> foldersDTO = new ArrayList<FolderDTO>(folderList.size());
         for (GPFolder folderIth : folderList) {
             FolderDTO folderIthDTO = new FolderDTO(folderIth);
-            folderIthDTO.setEmpty(this.folderIsEmpty(folderIth));
+            folderIthDTO.setEmpty(this.isEmptyFolder(folderIth));
             foldersDTO.add(folderIthDTO);
         }
 
@@ -362,8 +362,8 @@ class FolderServiceImpl {
         return folders;
     }
 
-    // Check if the folder has childrens elmenent (folders or layers)
-    private boolean folderIsEmpty(GPFolder folder) {
+    // Check if the GPFolder has childrens elmenent (folders or layers)
+    private boolean isEmptyFolder(GPFolder folder) {
         Search searchCriteria = new Search(GPFolder.class);
         Filter parent = Filter.equal("parent.id", folder.getId());
         searchCriteria.addFilter(parent);

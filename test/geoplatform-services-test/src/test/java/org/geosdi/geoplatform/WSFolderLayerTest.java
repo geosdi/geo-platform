@@ -46,7 +46,6 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
-import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.collection.FolderList;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.junit.Before;
@@ -59,6 +58,7 @@ import org.junit.Test;
  */
 public class WSFolderLayerTest extends ServiceTest {
 
+    // Folder
     private final String nameFolder1 = "folder1";
     private GPFolder folder1 = null;
     private long idFolder1 = -1;
@@ -74,6 +74,7 @@ public class WSFolderLayerTest extends ServiceTest {
     private final String nameFolder5 = "folder5";
     private GPFolder folder5 = null;
     private long idFolder5 = -1;
+    // Layer
     private final String urlServer = "http://www.geosdi.org/test";
     private final String abstractFolderRasterLayer1 = "abstractFolderRasterLayer1";
     private final String nameRasterLayer1 = "rasterLayer1";
@@ -83,24 +84,27 @@ public class WSFolderLayerTest extends ServiceTest {
     private long idRasterLayer1 = -1;
 
     @Before
+    // "position" will be set without application logic, but only to have different values
     public void setUp() throws Exception {
         super.setUp();
         logger.info("WSFolderLayerTest - SetUp --------------------------------> " + this.getClass().getName());
 
         findUser = geoPlatformService.getUserDetailByName(new SearchRequest(username));
 
+        // "rootFolderA" ---> "folder1"
         idFolder1 = createAndInsertFolderWithParent(nameFolder1, rootFolderA, 3, false);
         folder1 = geoPlatformService.getFolderDetail(new RequestById(idFolder1));
-
+        // "rootFolderA" ---> "folder2"
         idFolder2 = createAndInsertFolderWithParent(nameFolder2, rootFolderA, 4, false);
         folder2 = geoPlatformService.getFolderDetail(new RequestById(idFolder2));
 
+        // "rootFolderB" ---> "folder3"
         idFolder3 = createAndInsertFolderWithParent(nameFolder3, rootFolderB, 5, false);
         folder3 = geoPlatformService.getFolderDetail(new RequestById(idFolder3));
-
+        // "rootFolderB" ---> "folder4"
         idFolder4 = createAndInsertFolderWithParent(nameFolder4, rootFolderB, 6, false);
         folder4 = geoPlatformService.getFolderDetail(new RequestById(idFolder4));
-
+        // "rootFolderB" ---> "folder5"
         idFolder5 = createAndInsertFolderWithParent(nameFolder5, rootFolderB, 7, false);
         folder5 = geoPlatformService.getFolderDetail(new RequestById(idFolder5));
 
@@ -152,49 +156,69 @@ public class WSFolderLayerTest extends ServiceTest {
     }
 
     @Test
-    public void testDeleteFolderB() {
+    public void testDeleteFolder() {
+        FolderDTO foderToCheck = null;
         try {
+            // Delete "rootFolderB" and in cascade "folder3" & "folder4" & "folder5"
             geoPlatformService.deleteFolder(new RequestById(idRootFolderB));
 
+            // "rootFolderA" ---> "folder1" & "folder2"
             FolderList folderList = geoPlatformService.getUserFoldersByUserId(idUser);
 
+            // Assert on the structure of user's folders
             Assert.assertEquals(folderList.getList().size(), 1);
-            Assert.assertEquals(folderList.getList().iterator().next().getName(), nameRootFolderA);
-        } catch (IllegalParameterFault ex) {
-            Assert.fail("Folder has an illegal parameter");
-        } catch (ResourceNotFoundFault ex) {
-            Assert.fail("Folder with id \"" + idRootFolderB + "\" not found");
-        }
-    }
 
-    @Test
-    public void testDeleteChildrenFolder() {
-        try {
-            folder4.setParent(folder3);
-            folder5.setParent(folder3);
-            geoPlatformService.updateFolder(folder4);
-            geoPlatformService.updateFolder(folder5);
-
-            geoPlatformService.deleteFolder(new RequestById(idFolder3));
-
-            FolderList folderList = geoPlatformService.getUserFoldersByUserId(idUser);
-
-            Assert.assertEquals(folderList.getList().size(), 2);
-
-            Iterator<FolderDTO> iterator = folderList.getList().iterator();
-            Assert.assertEquals(iterator.next().getName(), nameRootFolderB);
-            Assert.assertEquals(iterator.next().getName(), nameRootFolderA);
-
+            // Assert on "rootFolderA"
+            foderToCheck = folderList.getList().iterator().next();
+            logger.info("\n***** foderToCheck:\n" + foderToCheck + "\n*****");
+            Assert.assertEquals(foderToCheck.getId(), idRootFolderA);
+            Assert.assertEquals(foderToCheck.getName(), nameRootFolderA);
+            // Assert on the structure of the subfolders of "rootFolderA"
             TreeFolderElements childrenRootFolderA = geoPlatformService.getChildrenElements(idRootFolderA);
+            logger.info("\n***** childrenRootFolderA:\n" + childrenRootFolderA + "\n*****");
             Assert.assertNotNull(childrenRootFolderA);
             Assert.assertEquals(childrenRootFolderA.size(), 2);
+            // Iterator for scan folder in descending order
+            Iterator iterator = childrenRootFolderA.iterator();
+            // Assert on "folder2"
+            FolderDTO folderDTOToCheck = (FolderDTO) iterator.next();
+            logger.info("\n***** folderDTOToCheck:\n" + folderDTOToCheck + "\n*****");
+            Assert.assertEquals(folderDTOToCheck.getId(), idFolder2);
+            Assert.assertEquals(folderDTOToCheck.getName(), nameFolder2);
+            Assert.assertTrue(folderDTOToCheck.isEmpty());
+            // Assert on "folder1"
+            folderDTOToCheck = (FolderDTO) iterator.next();
+            logger.info("\n***** folderDTOToCheck:\n" + folderDTOToCheck + "\n*****");
+            Assert.assertEquals(folderDTOToCheck.getId(), idFolder1);
+            Assert.assertEquals(folderDTOToCheck.getName(), nameFolder1);
+            Assert.assertTrue(folderDTOToCheck.isEmpty());
 
+            // Assert on "rootFolderB" (deleted)
             TreeFolderElements childrenRootFolderB = geoPlatformService.getChildrenElements(idRootFolderB);
             Assert.assertNull(childrenRootFolderB);
-        } catch (IllegalParameterFault ex) {
+
+        } catch (IllegalParameterFault ipf) {
             Assert.fail("Folder has an illegal parameter");
-        } catch (ResourceNotFoundFault ex) {
-            Assert.fail("Folder with id \"" + idFolder4 + "\" not found");
+        } catch (ResourceNotFoundFault rnff) {
+            Assert.fail("Folder with id \"" + idRootFolderB + "\" not found");
+        } catch (Exception e) {
+            Assert.fail("Exception: " + e.getClass());
+        }
+
+        // Check ON DELETE CASCADE of the subforders of "rootFolderB"
+        checkFolderDeleted(idFolder3);
+        checkFolderDeleted(idFolder4);
+        checkFolderDeleted(idFolder5);
+    }
+
+    // Check if a folder was eliminated
+    private void checkFolderDeleted(long idFolder) {
+        try {
+            RequestById request = new RequestById(idFolder);
+            GPFolder subFolderOfRootFolder = geoPlatformService.getFolderDetail(request);
+            Assert.fail("Folder with id \"" + idFolder + "\" was NOT deleted in cascade");
+        } catch (Exception e) {
+            logger.info("\n***** Folder with id \"" + idFolder + "\" was deleted in cascade");
         }
     }
 

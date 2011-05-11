@@ -222,25 +222,35 @@ public abstract class BaseDAOTest {
     private void insertFolderUser(int position) {
         GPUser user = userDAO.findByUsername("user_0");
 
+        // "only folders"
         GPFolder onlyFolders = new GPFolder();
         onlyFolders.setName("only folders");
         onlyFolders.setOwner(user);
         onlyFolders.setPosition(++position);
         onlyFolders.setParent(null);
-
-        GPFolder emptySubFolder = new GPFolder();
-        emptySubFolder.setName("empty sub folder");
-//        emptySubFolder.setOwner(null);
-        emptySubFolder.setPosition(++position);
-        emptySubFolder.setParent(onlyFolders);
-        folderDAO.persist(onlyFolders, emptySubFolder);
-
+        
+        // "only folders" ---> "empty subfolder A"
+        GPFolder emptySubFolderA = new GPFolder();
+        emptySubFolderA.setName("empty subfolder A");
+        emptySubFolderA.setPosition(++position);
+        emptySubFolderA.setParent(onlyFolders);
+        
+        // "only folders" ---> "empty subfolder B"
+        GPFolder emptySubFolderB = new GPFolder();
+        emptySubFolderB.setName("empty subfolder B");
+        emptySubFolderB.setPosition(++position);
+        emptySubFolderB.setParent(onlyFolders);
+        
+        folderDAO.persist(onlyFolders, emptySubFolderA, emptySubFolderB);
+        
+        // "my raster"
         GPFolder folderRaster = new GPFolder();
         folderRaster.setName("my raster");
         folderRaster.setOwner(user);
-        folderRaster.setPosition(2);
+        folderRaster.setPosition(++position);
         folderRaster.setParent(null);
 
+        // GPRasterLayer
         GPRasterLayer rasterLayer1 = new GPRasterLayer();
         rasterLayer1.setName("StratiDiBase:deagostini_ita_250mila");
         rasterLayer1.setPosition(++position);

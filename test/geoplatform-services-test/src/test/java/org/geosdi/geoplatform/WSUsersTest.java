@@ -94,8 +94,7 @@ public class WSUsersTest extends ServiceTest {
             Assert.assertNotNull(userFromWS);
             Assert.assertEquals("Error found User from Id", idUser, userFromWS.getId());
         } catch (ResourceNotFoundFault ex) {
-            logger.error("Not found User with Id: " + idUser);
-            Assert.fail();
+            Assert.fail("Not found User with Id: \"" + idUser + "\"");
         }
 
         // Get User from Username
@@ -109,8 +108,7 @@ public class WSUsersTest extends ServiceTest {
             Assert.assertNotNull(userFromWS);
             Assert.assertEquals("Error found User from Username", idUser, userFromWS.getId());
         } catch (ResourceNotFoundFault ex) {
-            logger.error("Not found User with Username: " + username);
-            Assert.fail();
+            Assert.fail("Not found User with Username: \"" + username + "\"");
         }
     }
 }

@@ -1,4 +1,3 @@
-//<editor-fold defaultstate="collapsed" desc="License">
 /*
  *  geo-platform
  *  Rich webgis framework
@@ -34,75 +33,64 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-//</editor-fold>
-package org.geosdi.geoplatform.core.model;
+package org.geosdi.geoplatform.core.model.adapter;
 
+import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.Point;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.xml.bind.annotation.XmlTransient;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.annotations.Type;
+import com.vividsolutions.jts.io.ParseException;
+import com.vividsolutions.jts.io.WKTReader;
+import com.vividsolutions.jts.io.WKTWriter;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
- * @author Francesco Izzi - CNR IMAA - geoSDI
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement(name = "VectorLayer")
-@Entity(name = "VectorLayer")
-@Table(name = "gp_vector_layer")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "vector_layer")
-public class GPVectorLayer extends GPLayer {
+public class PointAdapter extends XmlAdapter<String, Point> {
 
     /**
      *
+     * This method provide unmarshalling by string value
+     *
+     * @param val the WKT representation of the geometry
+     *
      */
-    private static final long serialVersionUID = 3309979650712821228L;
+    @Override
+    public Point unmarshal(String val) throws ParseException {
+        WKTReader wktReader = new WKTReader();
 
-    @Type(type = "org.hibernatespatial.GeometryUserType")
-    @Column(name = "geometry", nullable = true)
-    private Point geometry;
+        Geometry the_geom = wktReader.read(val);
+        if (the_geom.getSRID() == 0) {
+            the_geom.setSRID(4326);
+        }
 
-    @ManyToOne(cascade = CascadeType.REMOVE, optional = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private GPFolder folder;
-
-    /**
-     * @return the geometry
-     */
-    @XmlTransient
-    public Point getGeometry() {
-        return geometry;
+        try {
+            return (Point) the_geom;
+        } catch (ClassCastException e) {
+            throw new ParseException(
+                    "WKT val is a " + the_geom.getClass().getName());
+        }
     }
 
     /**
-     * @param geometry
-     *            the geometry to set
+     *
+     * This method provide marshalling by value
+     *
+     * @param the WKT representation of the geometry
+     *
      */
-    public void setGeometry(Point geometry) {
-        this.geometry = geometry;
-    }
-    /**
-     * @return the folder
-     */
-    public GPFolder getFolder() {
-        return folder;
-    }
+    @Override
+    public String marshal(Point the_geom) throws ParseException {
+        if (the_geom != null) {
+            WKTWriter wktWriter = new WKTWriter();
+            if (the_geom.getSRID() == 0) {
+                the_geom.setSRID(4326);
+            }
 
-    /**
-     * @param folder
-     *            the bbox to folder
-     */
-    public void setFolder(GPFolder folder) {
-        this.folder = folder;
+            return wktWriter.write(the_geom);
+        } else {
+            throw new ParseException("Geometry obj is null.");
+        }
     }
 }

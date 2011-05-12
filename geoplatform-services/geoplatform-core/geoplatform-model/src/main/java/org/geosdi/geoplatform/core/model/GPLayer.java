@@ -51,11 +51,15 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Francesco Izzi - geoSDI
  * 
  */
+@XmlTransient
+@XmlSeeAlso(value = {GPRasterLayer.class, GPVectorLayer.class})
 @Entity(name = "GPLayer")
 @Table(name = "gp_layer")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)

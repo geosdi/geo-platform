@@ -56,8 +56,6 @@ import org.hibernate.annotations.OnDeleteAction;
 @XmlRootElement(name = "RasterLayer")
 @Entity(name = "RasterLayer")
 @Table(name = "gp_raster_layer")
-//@PrimaryKeyJoinColumn(name = "RASTER_LAYER_ID")
-//@OnDelete(action = OnDeleteAction.CASCADE)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "raster_layer")
 public class GPRasterLayer extends GPLayer {
 

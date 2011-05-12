@@ -175,9 +175,9 @@ public class WSFolderLayerTest extends ServiceTest {
             Assert.assertEquals(foderToCheck.getName(), nameRootFolderA);
             // Assert on the structure of the subfolders of "rootFolderA"
             TreeFolderElements childrenRootFolderA = geoPlatformService.getChildrenElements(idRootFolderA);
-            logger.info("\n***** childrenRootFolderA:\n" + childrenRootFolderA + "\n*****");
+            logger.info("\n************************ childrenRootFolderA:\n" + childrenRootFolderA + "\n*****");
             Assert.assertNotNull(childrenRootFolderA);
-            Assert.assertEquals(childrenRootFolderA.size(), 2);
+            Assert.assertEquals(childrenRootFolderA.size(), 3);
             // Iterator for scan folder in descending order
             Iterator iterator = childrenRootFolderA.iterator();
             // Assert on "folder2"

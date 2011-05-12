@@ -38,7 +38,6 @@
 package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -50,11 +49,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * @author Francesco Izzi - geoSDI
@@ -62,8 +58,8 @@ import org.hibernate.annotations.OnDeleteAction;
  */
 @Entity(name = "GPLayer")
 @Table(name = "gp_layer")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class GPLayer implements Serializable {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class GPLayer implements Serializable {
 
     /**
      * serialVersionUID
@@ -102,10 +98,6 @@ public class GPLayer implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private GPLayerType layerType;
-
-    @ManyToOne(cascade = CascadeType.REMOVE, optional = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private GPFolder folder;
 
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
@@ -255,20 +247,6 @@ public class GPLayer implements Serializable {
         this.layerType = layerType;
     }
 
-    /**
-     * @return the folder
-     */
-    public GPFolder getFolder() {
-        return folder;
-    }
-
-    /**
-     * @param folder
-     *            the bbox to folder
-     */
-    public void setFolder(GPFolder folder) {
-        this.folder = folder;
-    }
     //</editor-fold>
 
     /*

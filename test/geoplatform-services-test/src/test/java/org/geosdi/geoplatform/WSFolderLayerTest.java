@@ -108,8 +108,8 @@ public class WSFolderLayerTest extends ServiceTest {
         idFolder5 = createAndInsertFolderWithParent(nameFolder5, rootFolderB, 7, false);
         folder5 = geoPlatformService.getFolderDetail(new RequestById(idFolder5));
 
-//        idRasterLayer1 = createAndInsertRasterLayer(abstractFolderRasterLayer1, rootFolderA, nameRasterLayer1, -1, false, spatialReferenceSystemRasterLayer1,
-//                                                    titleRasterLayer1, urlServer);
+        idRasterLayer1 = createAndInsertRasterLayer(abstractFolderRasterLayer1, rootFolderA, nameRasterLayer1, -1, false, spatialReferenceSystemRasterLayer1,
+                                                    titleRasterLayer1, urlServer);
     }
 
     @Test

@@ -89,7 +89,7 @@ public class GPStyle implements Serializable {
 
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private GPLayer layer;
+    private GPRasterLayer layer;
 
     /**
      * @return the id
@@ -169,7 +169,7 @@ public class GPStyle implements Serializable {
     /**
      * @return the layer
      */
-    public GPLayer getLayer() {
+    public GPRasterLayer getLayer() {
         return layer;
     }
 
@@ -177,7 +177,7 @@ public class GPStyle implements Serializable {
      * @param layer
      *            the layer to set
      */
-    public void setLayer(GPLayer layer) {
+    public void setLayer(GPRasterLayer layer) {
         this.layer = layer;
     }
 }

@@ -82,11 +82,11 @@
             </exclusions>
         </dependency>
 
-		<!-- 4J UTILS 
+		<!-- 4J UTILS -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-        </dependency>-->
+        </dependency>
         <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>

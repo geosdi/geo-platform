@@ -64,7 +64,9 @@ import org.springframework.stereotype.Service;
 public class LayerService implements ILayerService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     private GeoPlatformService geoPlatformServiceClient;
+
     @Autowired
     private DTOConverter dtoConverter;
 
@@ -87,13 +89,13 @@ public class LayerService implements ILayerService {
         FolderList folderList = geoPlatformServiceClient.getUserFoldersByRequest(
                 idRequest);
 
-
         return this.dtoConverter.convertOnlyFolder(folderList.getList());
     }
 
     @Override
     public List<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException {
-        TreeFolderElements folderElements = geoPlatformServiceClient.getChildrenElements(folderId);
+        TreeFolderElements folderElements = geoPlatformServiceClient.getChildrenElements(
+                folderId);
         return this.dtoConverter.convertFolderElements(folderElements);
     }
 

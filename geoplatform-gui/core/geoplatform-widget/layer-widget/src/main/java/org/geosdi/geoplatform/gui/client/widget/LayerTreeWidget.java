@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style.SelectionMode;
-import com.extjs.gxt.ui.client.data.BaseTreeLoader;
 import org.geosdi.geoplatform.gui.client.listener.GPDNDListener;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GeoPlatformTreeWidget;
@@ -45,7 +44,6 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.ModelIconProvider;
 import com.extjs.gxt.ui.client.data.ModelStringProvider;
-import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.data.TreeLoader;
 import com.extjs.gxt.ui.client.dnd.DND.Feedback;
 import com.extjs.gxt.ui.client.dnd.TreePanelDragSource;
@@ -59,11 +57,9 @@ import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.extjs.gxt.ui.client.store.Store;
-import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -73,9 +69,9 @@ import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.menu.AddLayerAction;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 
 /**
@@ -83,14 +79,15 @@ import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
+public class LayerTreeWidget extends GeoPlatformTreeWidget {
 
     private LayerRemoteAsync layerService = LayerRemoteImpl.Util.getInstance();
+    
     private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(this.tree);
     private MediatorToolbarTreeAction actionMediator;
     private GPRootTreeNode root;
     private GPBeanTreeModel selectedElement;
-    TreeLoader<GPBeanTreeModel> loader;
+    private TreeLoader<GPBeanTreeModel> loader;
     private boolean initialized;
 
     /**
@@ -99,7 +96,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
     public LayerTreeWidget() {
         super();
         this.buildRoot();
-        this.enableAsyncLoader();
+//        this.enableAsyncLoader();
         this.setTreePanelProperties();
         this.actionMediator = new MediatorToolbarTreeAction();
         //TODO: After toolbar implementation remove this method
@@ -119,26 +116,27 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
      */
     public void buildTree() {
         if (!initialized) {
-            store.add(root, true);
-            tree.setExpanded(root, true, true);
+//            store.add(root, true);
+//            tree.setExpanded(root, true, true);
 
 //            //I need to specify mock userID
-//            layerService.loadUserFolders("user_0", new AsyncCallback<List<FolderTreeNode>>() {
-//
-//                @Override
-//                public void onFailure(Throwable caught) {
-//                    GeoPlatformMessage.errorMessage("Layer-Service",
-//                            "Failed to load user folders");
-//                    initialized = false;
-//                }
-//
-//                @Override
-//                public void onSuccess(List<FolderTreeNode> result) {
-//                    root.addElements(result);
+            layerService.loadUserFolders("user_0", new AsyncCallback<List<FolderTreeNode>>() {
+
+                @Override
+                public void onFailure(Throwable caught) {
+                    GeoPlatformMessage.errorMessage("Layer-Service",
+                            "Failed to load user folders");
+                    initialized = false;
+                }
+
+                @Override
+                public void onSuccess(List<FolderTreeNode> result) {
+                    root.addElements(result);
 //                    store.add(root, true);
-//                    initialized = true;
-//                }
-//            });
+                    store.insert(root, result, 0, true);
+                    initialized = true;
+                }
+            });
 
 
 //            this.root.modelConverter(GeoPlatformUtils.getInstance().
@@ -196,17 +194,17 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
             }
         });
 
-        this.tree.addListener(Events.OnMouseOver, new Listener<BaseEvent>() {
-
-            @Override
-            public void handleEvent(BaseEvent be) {
-                System.out.println("Entro in listener per selezione");                
-                if (be.getSource() instanceof GPBeanTreeModel) {
-                    selectedElement = (GPBeanTreeModel) be.getSource();
-                    System.out.println("impostata selezione su: " + selectedElement.getLabel());
-                }
-            }
-        });
+//        this.tree.addListener(Events.OnMouseOver, new Listener<BaseEvent>() {
+//
+//            @Override
+//            public void handleEvent(BaseEvent be) {
+//                System.out.println("Entro in listener per selezione");
+//                if (be.getSource() instanceof GPBeanTreeModel) {
+//                    selectedElement = (GPBeanTreeModel) be.getSource();
+//                    System.out.println("impostata selezione su: " + selectedElement.getLabel());
+//                }
+//            }
+//        });
 
         this.setCheckable(true);
         this.setCheckStyle(CheckCascade.NONE);
@@ -293,39 +291,39 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
     }
 
     private void enableAsyncLoader() {
-        final LayerRemoteAsync service = LayerRemote.Util.getInstance();
-        // data proxy  
-        RpcProxy<List<GPBeanTreeModel>> proxy = new RpcProxy<List<GPBeanTreeModel>>() {
-
-            @Override
-            protected void load(Object loadConfig, AsyncCallback<List<GPBeanTreeModel>> callback) {
-                if (initialized == false) {
-                    layerService.loadUserFolders("user_0", callback);
-                    System.out.println("User folder inizialized");
-                    initialized = true;
-                } else if (loadConfig != null && (loadConfig instanceof FolderTreeNode || loadConfig instanceof GPRootTreeNode)){
-                    service.loadFolderElements(((FolderTreeNode) loadConfig).getId(), callback);
-                }
-            }
-        };
-        // tree loader  
-        this.loader = new BaseTreeLoader<GPBeanTreeModel>(proxy) {
-
-            @Override
-            public boolean hasChildren(GPBeanTreeModel element) {
-                boolean condition = false;
-                if((element instanceof FolderTreeNode && ((FolderTreeNode)element).hasChildrens()) ||
-                        element instanceof GPRootTreeNode){
-                    condition = true;
-                }
-                System.out.println("Condition: " + condition);
-                return condition;
-                //return true;
-            }
-        };
-
-        // trees store  
-        super.store = new TreeStore<GPBeanTreeModel>(loader);
-        super.tree = new TreePanel<GPBeanTreeModel>(super.store);
+//        final LayerRemoteAsync service = LayerRemote.Util.getInstance();
+//        // data proxy
+//        RpcProxy<List<GPBeanTreeModel>> proxy = new RpcProxy<List<GPBeanTreeModel>>() {
+//
+//            @Override
+//            protected void load(Object loadConfig, AsyncCallback<List<GPBeanTreeModel>> callback) {
+//                if (initialized == false) {
+//                    layerService.loadUserFolders("user_0", callback);
+//                    System.out.println("User folder inizialized");
+//                    initialized = true;
+//                } else if (loadConfig != null && (loadConfig instanceof FolderTreeNode || loadConfig instanceof GPRootTreeNode)){
+//                    service.loadFolderElements(((FolderTreeNode) loadConfig).getId(), callback);
+//                }
+//            }
+//        };
+//        // tree loader
+//        this.loader = new BaseTreeLoader<GPBeanTreeModel>(proxy) {
+//
+//            @Override
+//            public boolean hasChildren(GPBeanTreeModel element) {
+//                boolean condition = false;
+//                if((element instanceof FolderTreeNode && ((FolderTreeNode)element).hasChildrens()) ||
+//                        element instanceof GPRootTreeNode){
+//                    condition = true;
+//                }
+//                System.out.println("Condition: " + condition);
+//                return condition;
+//                //return true;
+//            }
+//        };
+//
+//        // trees store
+//        super.store = new TreeStore<GPBeanTreeModel>(loader);
+//        super.tree = new TreePanel<GPBeanTreeModel>(super.store);
     }
 }

@@ -67,9 +67,9 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
      * @param children
      */
     public void addElements(List<FolderTreeNode> children) {
-        for(FolderTreeNode child: children) {
-            super.add(child);
-        }
+//        for(FolderTreeNode child: children) {
+//            super.add(child);
+//        }
         VisitorPosition visitor = new VisitorPosition();
         this.accept(visitor);
     }

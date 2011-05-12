@@ -41,6 +41,16 @@
             <version>6.1.25</version>
         </dependency>
 
+          <!-- 4J UTILS -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+
 		<!-- SCOPE TEST -->
         <dependency>
             <groupId>org.springframework</groupId>

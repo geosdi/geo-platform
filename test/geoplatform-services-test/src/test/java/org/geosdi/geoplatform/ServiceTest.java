@@ -37,12 +37,16 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.GeometryFactory;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
@@ -89,9 +93,10 @@ public abstract class ServiceTest implements InitializingBean {
     final String nameRootFolderB = "rootFolderB";
     protected GPFolder rootFolderB = null;
     protected long idRootFolderB = -1;
-
+    
     @Override
     public void afterPropertiesSet() throws Exception {
+        logger.info("ServiceTest - afterPropertiesSet-------------------------------> " + this.getClass().getName());
         Assert.assertNotNull(gpJettyServer);
 
         gpJettyServer.start();
@@ -189,26 +194,13 @@ public abstract class ServiceTest implements InitializingBean {
         return folder;
     }
 
-    protected long createAndInsertRasterLayer(String abstractFolder, GPFolder parentFolder, String name, int position, boolean shared,
+    protected long createAndInsertRasterLayer(String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
                                               String srs, String title, String urlServer) {
-        double minX = 10;
-        double minY = 10;
-        double maxX = 20;
-        double maxY = 20;
         String layerInfoKeyword = "keyword";
         
         GPRasterLayer rasterLayer = new GPRasterLayer();
-        rasterLayer.setAbstractText(abstractFolder);
+        createAndInsertLayer(rasterLayer, abstractText, parentFolder, name, position, shared, srs, title, urlServer);
         rasterLayer.setFolder(parentFolder);
-        rasterLayer.setName(name);
-        rasterLayer.setPosition(position);
-        rasterLayer.setShared(shared);
-        rasterLayer.setSrs(srs);
-        rasterLayer.setTitle(title);
-        rasterLayer.setUrlServer(urlServer);
-        
-        GPBBox bBox = new GPBBox(minX, minY, maxX, maxY);
-        rasterLayer.setBbox(bBox);
         
         GPLayerInfo layerInfo = new GPLayerInfo();
         layerInfo.setKeywords(layerInfoKeyword);
@@ -218,5 +210,35 @@ public abstract class ServiceTest implements InitializingBean {
         rasterLayer.setLayerType(GPLayerType.RASTER);
         long id = geoPlatformService.insertLayer(rasterLayer);
         return id;
+    }
+
+    protected long createAndInsertVectorLayer(String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
+                                              String srs, String title, String urlServer) {
+        GPVectorLayer vectorLayer = new GPVectorLayer();
+        createAndInsertLayer(vectorLayer, abstractText, parentFolder, name, position, shared, srs, title, urlServer);
+        vectorLayer.setFolder(parentFolder);
+        
+        vectorLayer.setLayerType(GPLayerType.POLYGON);
+        long id = geoPlatformService.insertLayer(vectorLayer);
+        return id;
+    }
+
+    protected void createAndInsertLayer(GPLayer gpLayer, String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
+                                           String srs, String title, String urlServer) {
+        double minX = 10;
+        double minY = 10;
+        double maxX = 20;
+        double maxY = 20;
+        
+        gpLayer.setAbstractText(abstractText);
+        gpLayer.setName(name);
+        gpLayer.setPosition(position);
+        gpLayer.setShared(shared);
+        gpLayer.setSrs(srs);
+        gpLayer.setTitle(title);
+        gpLayer.setUrlServer(urlServer);
+        
+        GPBBox bBox = new GPBBox(minX, minY, maxX, maxY);
+        gpLayer.setBbox(bBox);
     }
 }

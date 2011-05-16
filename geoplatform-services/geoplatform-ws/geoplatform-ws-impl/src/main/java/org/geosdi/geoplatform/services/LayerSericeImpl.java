@@ -45,14 +45,15 @@ import org.apache.log4j.Logger;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPStyleDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
-import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPStyle;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.StyleDTO;
+import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.collection.StyleList;
 
 /**
@@ -134,6 +135,20 @@ class LayerSericeImpl {
         return layerDao.remove(layer);
     }
 
+    public ShortLayerDTO getShortLayer(long layerId) throws ResourceNotFoundFault {
+        GPLayer layer = layerDao.find(layerId);
+        if (layer == null) {
+            throw new ResourceNotFoundFault("Layer not found", layerId);
+        }
+
+        return new ShortLayerDTO(layer);
+    }
+
+    public LayerList getLayers() {
+        List<GPLayer> found = layerDao.findAll();
+        return convertToLayerList(found);
+    }
+
     public GPBBox getBBox(long layerId) throws ResourceNotFoundFault {
         GPLayer layer = layerDao.find(layerId);
         if (layer == null) {
@@ -167,14 +182,14 @@ class LayerSericeImpl {
     
     // TODO Move to LayerList?
     // as constructor: LayerList list = new LayerList(List<GPLayer>);
-//    private LayerList convertToLayerList(List<GPLayer> layerList) {
-//        List<LayerDTO> layersDTO = new ArrayList<LayerDTO>(layerList.size());
-//        for (GPLayer layer : layerList) {
-//            layersDTO.add(new LayerDTO(layer));
-//        }
-//
-//        LayerList layers = new LayerList();
-//        layers.setList(layersDTO);
-//        return layers;
-//    }    
+    private LayerList convertToLayerList(List<GPLayer> layerList) {
+        List<ShortLayerDTO> layersDTO = new ArrayList<ShortLayerDTO>(layerList.size());
+        for (GPLayer layer : layerList) {
+            layersDTO.add(new ShortLayerDTO(layer));
+        }
+
+        LayerList layers = new LayerList();
+        layers.setList(layersDTO);
+        return layers;
+    }    
 }

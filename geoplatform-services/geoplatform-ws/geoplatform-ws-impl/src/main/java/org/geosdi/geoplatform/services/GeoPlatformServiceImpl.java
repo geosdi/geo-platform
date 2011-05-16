@@ -58,6 +58,7 @@ import org.geosdi.geoplatform.request.RequestByUserFolder;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
+import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.collection.StyleList;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.FolderList;
@@ -347,6 +348,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
+    public LayerList getLayers() {
+        return layerServiceDelegate.getLayers();
+    }
+
+    @Override
     public StyleList getLayerStyles(long layerId) {
         return layerServiceDelegate.getLayerStyles(layerId);
     }
@@ -355,6 +361,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     @Override
     public GPBBox getBBox(long layerId) throws ResourceNotFoundFault {
         return layerServiceDelegate.getBBox(layerId);
+    }
+
+    @Override
+    public ShortLayerDTO getShortLayer(long layerId) throws ResourceNotFoundFault {
+        return layerServiceDelegate.getShortLayer(layerId);
     }
 
     @Override

@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.collection.LayerList;
-import org.geosdi.geoplatform.responce.AbstractLayerDTO;
+import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geotools.data.ows.Layer;
 import org.geotools.data.ows.WMSCapabilities;
@@ -107,13 +107,13 @@ class WMSServiceImpl {
     // as constructor: LayerList list = new LayerList(List<Layer>);    
     // TODO Correct mapping Layer to AbstractLayerDTO
     private LayerList convertToShortList(List<Layer> layerList) {
-        List<AbstractLayerDTO> shortLayers = new ArrayList<AbstractLayerDTO>(layerList.size());
-        AbstractLayerDTO layerDTOIth = null;
+        List<ShortLayerDTO> shortLayers = new ArrayList<ShortLayerDTO>(layerList.size());
+        ShortLayerDTO layerDTOIth = null;
         for (Layer layer : layerList) {
             layerDTOIth = new RasterLayerDTO(); // TODO AbstractLayerDTO as abstract class?
             layerDTOIth.setName(layer.getName());
-            layerDTOIth.setAbstractText(layer.get_abstract());
-            layerDTOIth.setTitle(layer.getTitle());
+//            layerDTOIth.setAbstractText(layer.get_abstract());
+//            layerDTOIth.setTitle(layer.getTitle());
             shortLayers.add(layerDTOIth);
         }
 

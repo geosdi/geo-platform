@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.core.model.GPRasterLayer;
  *
  */
 @XmlRootElement(name = "RasterLayerDTO")
-public class RasterLayerDTO extends AbstractLayerDTO {
+public class RasterLayerDTO extends ShortLayerDTO {
     
     private GPLayerInfo layerInfo;
 

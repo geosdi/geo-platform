@@ -67,7 +67,7 @@ public class GPRasterLayer extends GPLayer {
     @Embedded
     private GPLayerInfo layerInfo;
 
-    @ManyToOne(cascade = CascadeType.REMOVE, optional = true)
+    @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPFolder folder;
 

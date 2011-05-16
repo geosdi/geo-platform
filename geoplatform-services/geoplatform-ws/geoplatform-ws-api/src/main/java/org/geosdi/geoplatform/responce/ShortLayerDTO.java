@@ -40,31 +40,31 @@ package org.geosdi.geoplatform.responce;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPLayerType;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
  * 
  */
-@XmlTransient
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"abstractText", "title", "urlServer", "srs", "layerType", "bbox", "styles"})
+@XmlType(propOrder = {"id", "name", "position", "shared", "urlServer", "srs", "layerType"})
 @XmlSeeAlso(value = {RasterLayerDTO.class, VectorLayerDTO.class})
-public abstract class AbstractLayerDTO extends AbstractElementDTO {
+public class ShortLayerDTO extends AbstractElementDTO {
 
-    private String abstractText;
-    private String title;
     private String urlServer;
     private String srs;
+    private String abstractText;
+    private String title;
+    private GPLayerType layerType;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
      * Default constructor
      */
-    public AbstractLayerDTO() {
+    public ShortLayerDTO() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -72,16 +72,46 @@ public abstract class AbstractLayerDTO extends AbstractElementDTO {
     /**
      * Constructor with GPLayer as arg
      */
-    public AbstractLayerDTO(GPLayer layer) {
+    public ShortLayerDTO(GPLayer layer) {
         super(layer.getId(), layer.getName(), layer.getPosition(), layer.isShared());
+        this.urlServer = layer.getUrlServer();
+        this.srs = layer.getSrs();
         this.abstractText = layer.getAbstractText();
         this.title = layer.getTitle();
-        this.urlServer = layer.getUrlServer();
-        this.srs = layer.getSrs();    
+        this.layerType = layer.getLayerType();
     }
     //</editor-fold>
+    
+    /**
+     * @return the srs
+     */
+    public String getSrs() {
+        return srs;
+    }
 
-    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
+    /**
+     * @param srs
+     *            the srs to set
+     */
+    public void setSrs(String srs) {
+        this.srs = srs;
+    }
+
+    /**
+     * @return the urlServer
+     */
+    public String getUrlServer() {
+        return urlServer;
+    }
+
+    /**
+     * @param urlServer
+     *            the urlServer to set
+     */
+    public void setUrlServer(String urlServer) {
+        this.urlServer = urlServer;
+    }
+
     /**
      * @return the abstractText
      */
@@ -113,33 +143,18 @@ public abstract class AbstractLayerDTO extends AbstractElementDTO {
     }
 
     /**
-     * @return the srs
+     * @return the layerType
      */
-    public String getSrs() {
-        return srs;
+    public GPLayerType getLayerType() {
+        return layerType;
     }
 
     /**
-     * @param srs
-     *            the srs to set
+     * @param layerType
+     *            the layerType to set
      */
-    public void setSrs(String srs) {
-        this.srs = srs;
-    }
-
-    /**
-     * @return the urlServer
-     */
-    public String getUrlServer() {
-        return urlServer;
-    }
-
-    /**
-     * @param urlServer
-     *            the urlServer to set
-     */
-    public void setUrlServer(String urlServer) {
-        this.urlServer = urlServer;
+    public void setLayerType(GPLayerType layerType) {
+        this.layerType = layerType;
     }
 
     /*
@@ -150,8 +165,7 @@ public abstract class AbstractLayerDTO extends AbstractElementDTO {
     @Override
     public String toString() {
         String s = super.toString()
-                + ", title=" + title + ", abstractText=" + abstractText
-                + ", urlServer=" + urlServer + ", title=" + title;
+                + ", urlServer=" + urlServer + ", srs=" + srs;
         return s;
     }
 }

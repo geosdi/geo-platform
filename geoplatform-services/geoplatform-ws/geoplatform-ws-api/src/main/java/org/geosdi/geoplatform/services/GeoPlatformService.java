@@ -59,6 +59,7 @@ import org.geosdi.geoplatform.request.RequestByUserFolder;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
+import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.collection.StyleList;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.FolderList;
@@ -279,6 +280,11 @@ public interface GeoPlatformService {
     boolean deleteLayer(RequestById request) throws ResourceNotFoundFault,
             IllegalParameterFault;
     
+    @Get
+    @HttpResource(location = "/layers")
+    @WebResult(name = "Layers")
+    LayerList getLayers();
+    
     /**
      * @return Styles of a layer.
      */
@@ -286,6 +292,13 @@ public interface GeoPlatformService {
     @WebResult(name = "LayerStyles")
     StyleList getLayerStyles(@WebParam(name = "LayerId") long layerId);
     //</editor-fold>
+    
+    /**
+     * @return a short layer.
+     */
+    @Get
+    @WebResult(name = "ShortLayerDTO")
+    ShortLayerDTO getShortLayer(@WebParam(name = "GPLayerId") long layerId) throws ResourceNotFoundFault;
     
     /**
      * @return BBox of a layer.

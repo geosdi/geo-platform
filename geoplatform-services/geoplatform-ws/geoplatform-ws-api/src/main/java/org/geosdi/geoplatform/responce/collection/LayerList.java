@@ -41,7 +41,7 @@ import java.util.Collection;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.geosdi.geoplatform.responce.AbstractLayerDTO;
+import org.geosdi.geoplatform.responce.ShortLayerDTO;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -50,13 +50,13 @@ import org.geosdi.geoplatform.responce.AbstractLayerDTO;
 @XmlRootElement(name = "LayerList")
 public class LayerList {
 
-    private Collection<AbstractLayerDTO> list;
+    private Collection<ShortLayerDTO> list;
 
     /**
      * @return the layers
      */
     @XmlElement(name = "Layer", required = true, nillable = false)
-    public Collection<AbstractLayerDTO> getList() {
+    public Collection<ShortLayerDTO> getList() {
         return list;
     }
 
@@ -64,7 +64,7 @@ public class LayerList {
      * @param users
      *            the layer to set
      */
-    public void setList(Collection<AbstractLayerDTO> layers) {
+    public void setList(Collection<ShortLayerDTO> layers) {
         this.list = layers;
     }
 

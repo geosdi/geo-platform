@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.core.model.GPVectorLayer;
  *
  */
 @XmlRootElement(name = "VectorLayerDTO")
-public class VectorLayerDTO extends AbstractLayerDTO {
+public class VectorLayerDTO extends ShortLayerDTO {
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**

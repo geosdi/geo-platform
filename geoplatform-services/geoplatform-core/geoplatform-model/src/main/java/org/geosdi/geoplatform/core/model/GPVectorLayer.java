@@ -72,7 +72,7 @@ public class GPVectorLayer extends GPLayer {
     @Column(name = "geometry", nullable = true)
     private Point geometry;
 
-    @ManyToOne(cascade = CascadeType.REMOVE, optional = true)
+    @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPFolder folder;
 

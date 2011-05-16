@@ -40,13 +40,17 @@ package org.geosdi.geoplatform;
 import java.util.Iterator;
 import junit.framework.Assert;
 import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
+import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.collection.FolderList;
+import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.junit.Before;
 import org.junit.Test;
@@ -74,14 +78,38 @@ public class WSFolderLayerTest extends ServiceTest {
     private final String nameFolder5 = "folder5";
     private GPFolder folder5 = null;
     private long idFolder5 = -1;
-    // Layer
+    
+    
     private final String urlServer = "http://www.geosdi.org/test";
-    private final String abstractFolderRasterLayer1 = "abstractFolderRasterLayer1";
+    private final String spatialReferenceSystem = "Geographic coordinate system";
+    
+    // Raster Layer 1
+    private final String abstractTextRasterLayer1 = "abstractTextRasterLayer1";
     private final String nameRasterLayer1 = "rasterLayer1";
-    private final String spatialReferenceSystemRasterLayer1 = "Geographic coordinate system";
     private final String titleRasterLayer1 = "Raster Layer 1";
     private GPRasterLayer rasterLayer1 = null;
     private long idRasterLayer1 = -1;
+    
+    // Vector Layer 1
+    private final String abstractTextVectorLayer1 = "abstractTextVectorLayer1";
+    private final String nameVectorLayer1 = "vectorLayer1";
+    private final String titleVectorLayer1 = "Vector Layer 1";
+    private GPVectorLayer vectorLayer1 = null;
+    private long idVectorLayer1 = -1;
+    
+    // Raster Layer 2
+    private final String abstractTextRasterLayer2 = "abstractTextRasterLayer2";
+    private final String nameRasterLayer2 = "rasterLayer2";
+    private final String titleRasterLayer2 = "Raster Layer 2";
+    private GPRasterLayer rasterLayer2 = null;
+    private long idRasterLayer2 = -1;
+    
+    // Vector Layer 2
+    private final String abstractTextVectorLayer2 = "abstractTextVectorLayer2";
+    private final String nameVectorLayer2 = "vectorLayer2";
+    private final String titleVectorLayer2 = "Vector Layer 2";
+    private GPVectorLayer vectorLayer2 = null;
+    private long idVectorLayer2 = -1;
 
     @Before
     // "position" will be set without application logic, but only to have different values
@@ -91,112 +119,86 @@ public class WSFolderLayerTest extends ServiceTest {
 
         findUser = geoPlatformService.getUserDetailByName(new SearchRequest(username));
 
-        // "rootFolderA" ---> "folder1"
-        idFolder1 = createAndInsertFolderWithParent(nameFolder1, rootFolderA, 3, false);
-        folder1 = geoPlatformService.getFolderDetail(new RequestById(idFolder1));
-        // "rootFolderA" ---> "folder2"
-        idFolder2 = createAndInsertFolderWithParent(nameFolder2, rootFolderA, 4, false);
-        folder2 = geoPlatformService.getFolderDetail(new RequestById(idFolder2));
-
-        // "rootFolderB" ---> "folder3"
-        idFolder3 = createAndInsertFolderWithParent(nameFolder3, rootFolderB, 5, false);
-        folder3 = geoPlatformService.getFolderDetail(new RequestById(idFolder3));
-        // "rootFolderB" ---> "folder4"
-        idFolder4 = createAndInsertFolderWithParent(nameFolder4, rootFolderB, 6, false);
-        folder4 = geoPlatformService.getFolderDetail(new RequestById(idFolder4));
-        // "rootFolderB" ---> "folder5"
-        idFolder5 = createAndInsertFolderWithParent(nameFolder5, rootFolderB, 7, false);
-        folder5 = geoPlatformService.getFolderDetail(new RequestById(idFolder5));
-
-        idRasterLayer1 = createAndInsertRasterLayer(abstractFolderRasterLayer1, rootFolderA, nameRasterLayer1, -1, false, spatialReferenceSystemRasterLayer1,
+        // "rootFolderA" ---> "rasterLayer1"
+        idRasterLayer1 = createAndInsertRasterLayer(abstractTextRasterLayer1, rootFolderA, nameRasterLayer1, 3, false, spatialReferenceSystem,
                                                     titleRasterLayer1, urlServer);
+
+        // "rootFolderA" ---> "vectorLayer1"
+        idVectorLayer1 = createAndInsertVectorLayer(abstractTextVectorLayer1, rootFolderA, nameVectorLayer1, 4, false, spatialReferenceSystem,
+                                                    titleVectorLayer1, urlServer);
+
+        // "rootFolderB" ---> "rasterLayer2"
+        idRasterLayer2 = createAndInsertRasterLayer(abstractTextRasterLayer2, rootFolderB, nameRasterLayer2, 3, false, spatialReferenceSystem,
+                                                    titleRasterLayer2, urlServer);
+
+        // "rootFolderB" ---> "vectorLayer2"
+        idVectorLayer2 = createAndInsertVectorLayer(abstractTextVectorLayer2, rootFolderB, nameVectorLayer2, 4, false, spatialReferenceSystem,
+                                                    titleVectorLayer2, urlServer);
     }
 
     @Test
-    public void testGetFolder() {
-        Assert.assertNotNull(folder1);
-        Assert.assertEquals(folder1.getId(), idFolder1);
-        Assert.assertEquals(folder1.getName(), nameFolder1);
-
-        Assert.assertNotNull(folder2);
-        Assert.assertEquals(folder2.getId(), idFolder2);
-        Assert.assertEquals(folder2.getName(), nameFolder2);
-
-        Assert.assertNotNull(folder3);
-        Assert.assertEquals(folder3.getId(), idFolder3);
-        Assert.assertEquals(folder3.getName(), nameFolder3);
-
-        Assert.assertNotNull(folder4);
-        Assert.assertEquals(folder4.getId(), idFolder4);
-        Assert.assertEquals(folder4.getName(), nameFolder4);
-
-        Assert.assertNotNull(folder5);
-        Assert.assertEquals(folder5.getId(), idFolder5);
-        Assert.assertEquals(folder5.getName(), nameFolder5);
-    }
-
-    @Test
-    public void testUpdateFolder() {
-        final String nameFolderUpdated = "folderUpdated";
+    public void testGetLayer() {
         try {
-            folder5.setParent(rootFolderA);
-            folder5.setName(nameFolderUpdated);
-
-            geoPlatformService.updateFolder(folder5);
-            GPFolder folderUpdated = geoPlatformService.getFolderDetail(new RequestById(idFolder5));
-
-            Assert.assertNotNull(folderUpdated);
-            Assert.assertEquals(folderUpdated.getName(), nameFolderUpdated);
-            Assert.assertEquals(folderUpdated.getParent().getId(), idRootFolderA);
-        } catch (IllegalParameterFault ex) {
-            Assert.fail("Folder has an illegal parameter");
+            ShortLayerDTO shortRasterLayer1 = geoPlatformService.getShortLayer(idRasterLayer1);
+            Assert.assertNotNull("assertNotNull shortRasterLayer1",shortRasterLayer1);
+            Assert.assertEquals("assertEquals shortRasterLayer1.getName()",shortRasterLayer1.getName(),nameRasterLayer1);
+            Assert.assertEquals("assertEquals shortRasterLayer1.getPosition()",shortRasterLayer1.getPosition(),3);
+            Assert.assertEquals("assertEquals shortRasterLayer1.getSrs()",shortRasterLayer1.getSrs(),spatialReferenceSystem);
+            Assert.assertEquals("assertEquals shortRasterLayer1.getUrlServer()",shortRasterLayer1.getUrlServer(),urlServer);
+            Assert.assertEquals("assertEquals shortRasterLayer1.getLayerType()",shortRasterLayer1.getLayerType(),GPLayerType.RASTER);
+            
+            ShortLayerDTO shortVectorLayer1 = geoPlatformService.getShortLayer(idVectorLayer1);
+            Assert.assertNotNull("assertNotNull shortVectorLayer1",shortVectorLayer1);
+            Assert.assertEquals("assertEquals shortVectorLayer1.getName()",shortVectorLayer1.getName(),nameVectorLayer1);
+            Assert.assertEquals("assertEquals shortVectorLayer1.getPosition()",shortVectorLayer1.getPosition(),4);
+            Assert.assertEquals("assertEquals shortVectorLayer1.getSrs()",shortVectorLayer1.getSrs(),spatialReferenceSystem);
+            Assert.assertEquals("assertEquals shortVectorLayer1.getUrlServer()",shortVectorLayer1.getUrlServer(),urlServer);
+            Assert.assertEquals("assertEquals shortVectorLayer1.getLayerType()",shortVectorLayer1.getLayerType(),GPLayerType.POLYGON);
         } catch (ResourceNotFoundFault ex) {
-            Assert.fail("User \"" + username + "\" not found");
+            logger.info("\n***** Layer with id \"" + idRasterLayer1 + "\" not found");
         }
     }
 
     @Test
-    public void testDeleteFolder() {
-        FolderDTO foderToCheck = null;
+    public void testDeleteLayer() {
+        FolderDTO folderToCheck = null;
+        ShortLayerDTO layerToCheck = null;
         try {
-            // Delete "rootFolderB" and in cascade "folder3" & "folder4" & "folder5"
-            geoPlatformService.deleteFolder(new RequestById(idRootFolderB));
+            // Assert total number of folders stored into DB before delete
+            LayerList allLayersBeforeDelete = geoPlatformService.getLayers();
+            Assert.assertEquals("assertEquals allLayersBeforeDelete.getList().size()",allLayersBeforeDelete.getList().size(), 260);
+            
+            // Delete "rasterLayer1" from "rootFolderA"
+            geoPlatformService.deleteLayer(new RequestById(idRasterLayer1));
 
-            // "rootFolderA" ---> "folder1" & "folder2"
+            // Get root folders for user
             FolderList folderList = geoPlatformService.getUserFoldersByUserId(idUser);
 
             // Assert on the structure of user's folders
-            Assert.assertEquals(folderList.getList().size(), 1);
+            Assert.assertEquals("assertEquals folderList.getList().size()",folderList.getList().size(), 2);
 
-            // Assert on "rootFolderA"
-            foderToCheck = folderList.getList().iterator().next();
-            logger.info("\n***** foderToCheck:\n" + foderToCheck + "\n*****");
-            Assert.assertEquals(foderToCheck.getId(), idRootFolderA);
-            Assert.assertEquals(foderToCheck.getName(), nameRootFolderA);
             // Assert on the structure of the subfolders of "rootFolderA"
             TreeFolderElements childrenRootFolderA = geoPlatformService.getChildrenElements(idRootFolderA);
             logger.info("\n************************ childrenRootFolderA:\n" + childrenRootFolderA + "\n*****");
-            Assert.assertNotNull(childrenRootFolderA);
-            Assert.assertEquals(childrenRootFolderA.size(), 3);
-            // Iterator for scan folder in descending order
-            Iterator iterator = childrenRootFolderA.iterator();
-            // Assert on "folder2"
-            FolderDTO folderDTOToCheck = (FolderDTO) iterator.next();
-            logger.info("\n***** folderDTOToCheck:\n" + folderDTOToCheck + "\n*****");
-            Assert.assertEquals(folderDTOToCheck.getId(), idFolder2);
-            Assert.assertEquals(folderDTOToCheck.getName(), nameFolder2);
-            Assert.assertTrue(folderDTOToCheck.isEmpty());
-            // Assert on "folder1"
-            folderDTOToCheck = (FolderDTO) iterator.next();
-            logger.info("\n***** folderDTOToCheck:\n" + folderDTOToCheck + "\n*****");
-            Assert.assertEquals(folderDTOToCheck.getId(), idFolder1);
-            Assert.assertEquals(folderDTOToCheck.getName(), nameFolder1);
-            Assert.assertTrue(folderDTOToCheck.isEmpty());
-
+            Assert.assertNotNull("assertNotNull childrenRootFolderA",childrenRootFolderA);
+            Assert.assertEquals("assertEquals childrenRootFolderA.size()",childrenRootFolderA.size(), 1);
+            ShortLayerDTO shortVectorLayerRootFolderA = (ShortLayerDTO)childrenRootFolderA.iterator().next();
+            Assert.assertEquals("assertEquals shortVectorLayerRootFolderA.getName()",shortVectorLayerRootFolderA.getName(), nameVectorLayer1);
+            
             // Assert on "rootFolderB" (deleted)
             TreeFolderElements childrenRootFolderB = geoPlatformService.getChildrenElements(idRootFolderB);
-            Assert.assertNull(childrenRootFolderB);
+            Assert.assertNotNull("assertNotNull childrenRootFolderB",childrenRootFolderB);
+            Assert.assertEquals("assertEquals childrenRootFolderB.size()",childrenRootFolderB.size(), 2);
+            
+            Iterator iterator = childrenRootFolderB.iterator();
+            ShortLayerDTO shortRasterLayerRootFolderB = (ShortLayerDTO)iterator.next();
+            Assert.assertEquals("assertEquals shortRasterLayerRootFolderB.getName()",shortRasterLayerRootFolderB.getName(), nameVectorLayer2);
+            ShortLayerDTO shortVectorLayerRootFolderB = (ShortLayerDTO)iterator.next();
+            Assert.assertEquals("assertEquals shortVectorLayerRootFolderB.getName()",shortVectorLayerRootFolderB.getName(), nameRasterLayer2);
 
+            // Assert total number of layers stored into DB after delete
+            LayerList allLayersAfterDelete = geoPlatformService.getLayers();
+            Assert.assertEquals("assertEquals allLayersAfterDelete.getList().size()",allLayersAfterDelete.getList().size(), 259);
         } catch (IllegalParameterFault ipf) {
             Assert.fail("Folder has an illegal parameter");
         } catch (ResourceNotFoundFault rnff) {
@@ -206,26 +208,20 @@ public class WSFolderLayerTest extends ServiceTest {
         }
 
         // Check ON DELETE CASCADE of the subforders of "rootFolderB"
-        checkFolderDeleted(idFolder3);
-        checkFolderDeleted(idFolder4);
-        checkFolderDeleted(idFolder5);
+        checkLayerDeleted(idRasterLayer1);
     }
 
     // Check if a folder was eliminated
-    private void checkFolderDeleted(long idFolder) {
+    private void checkLayerDeleted(long idLayer) {
         try {
-            RequestById request = new RequestById(idFolder);
-            GPFolder subFolderOfRootFolder = geoPlatformService.getFolderDetail(request);
-            Assert.fail("Folder with id \"" + idFolder + "\" was NOT deleted in cascade");
+            RequestById request = new RequestById(idLayer);
+            ShortLayerDTO layer = geoPlatformService.getShortLayer(idLayer);
+            Assert.fail("Layer with id \"" + idLayer + "\" was NOT deleted");
         } catch (Exception e) {
-            logger.info("\n***** Folder with id \"" + idFolder + "\" was deleted in cascade");
+            logger.info("\n***** Layer with id \"" + idLayer + "\" was deleted");
         }
     }
-
-    @Test
-    public void testGetLayer() {
-        Assert.assertTrue(true);
-    }
+    
 //    @Test
 //    public void testGetFolderAndLayer() {
 //    }

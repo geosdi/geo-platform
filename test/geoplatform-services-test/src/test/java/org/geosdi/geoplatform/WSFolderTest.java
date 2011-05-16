@@ -152,7 +152,7 @@ public class WSFolderTest extends ServiceTest {
         try {
             // Assert total number of folders stored into DB before delete
             FolderList allFoldersBeforeDelete = geoPlatformService.getFolders();
-            Assert.assertEquals("Assert number of folders stored into DB before delete",allFoldersBeforeDelete.getList().size(), 7);
+            Assert.assertEquals("Assert number of folders stored into DB before delete",allFoldersBeforeDelete.getList().size(), 12);
             
             // Delete "rootFolderB" and in cascade "folder3" & "folder4" & "folder5"
             geoPlatformService.deleteFolder(new RequestById(idRootFolderB));
@@ -194,7 +194,7 @@ public class WSFolderTest extends ServiceTest {
 
             // Assert total number of folders stored into DB after delete
             FolderList allFoldersAfterDelete = geoPlatformService.getFolders();
-            Assert.assertEquals("Assert number of folders stored into DB after delete",allFoldersAfterDelete.getList().size(), 3);
+            Assert.assertEquals("Assert number of folders stored into DB after delete",allFoldersAfterDelete.getList().size(), 8);
         } catch (IllegalParameterFault ipf) {
             Assert.fail("Folder has an illegal parameter");
         } catch (ResourceNotFoundFault rnff) {

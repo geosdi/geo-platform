@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import com.vividsolutions.jts.geom.Point;
 import javax.jws.WebService;
 
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
@@ -47,6 +48,7 @@ import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
@@ -341,6 +343,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 //    public long updateLayer(GPLayer layer) throws ResourceNotFoundFault, IllegalParameterFault {
 //        return layerServiceDelegate.updateLayer(layer);
 //    }
+    
     @Override
     public boolean deleteLayer(RequestById request)
             throws ResourceNotFoundFault, IllegalParameterFault {
@@ -356,12 +359,21 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public StyleList getLayerStyles(long layerId) {
         return layerServiceDelegate.getLayerStyles(layerId);
     }
-    //</editor-fold>
 
     @Override
     public GPBBox getBBox(long layerId) throws ResourceNotFoundFault {
         return layerServiceDelegate.getBBox(layerId);
     }
+
+    @Override
+    public GPLayerInfo getLayerInfo(long layerId) throws ResourceNotFoundFault {
+        return layerServiceDelegate.getLayerInfo(layerId);
+    }
+
+//    @Override
+//    public Point getGeometry(long layerId) throws ResourceNotFoundFault {
+//        return layerServiceDelegate.getGeometry(layerId);
+//    }
 
     @Override
     public ShortLayerDTO getShortLayer(long layerId) throws ResourceNotFoundFault {
@@ -372,6 +384,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public GPLayerType getLayerType(long layerId) throws ResourceNotFoundFault {
         return layerServiceDelegate.getLayerType(layerId);
     }
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="OWS">
     // ==========================================================================

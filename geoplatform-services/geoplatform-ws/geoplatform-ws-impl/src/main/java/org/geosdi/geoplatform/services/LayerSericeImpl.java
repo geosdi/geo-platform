@@ -39,6 +39,7 @@ package org.geosdi.geoplatform.services;
 
 import com.trg.search.Filter;
 import com.trg.search.Search;
+import com.vividsolutions.jts.geom.Point;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -46,8 +47,11 @@ import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPStyleDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPStyle;
+import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
@@ -157,6 +161,24 @@ class LayerSericeImpl {
 
         return layer.getBbox();
     }
+
+    public GPLayerInfo getLayerInfo(long layerId) throws ResourceNotFoundFault {
+        GPRasterLayer layer = (GPRasterLayer)layerDao.find(layerId);
+        if (layer == null) {
+            throw new ResourceNotFoundFault("Layer not found", layerId);
+        }
+
+        return layer.getLayerInfo();
+    }
+
+//    public Point getGeometry(long layerId) throws ResourceNotFoundFault {
+//        GPVectorLayer layer = (GPVectorLayer)layerDao.find(layerId);
+//        if (layer == null) {
+//            throw new ResourceNotFoundFault("Layer not found", layerId);
+//        }
+//
+//        return layer.getGeometry();
+//    }
 
     public GPLayerType getLayerType(long layerId) throws ResourceNotFoundFault {
         GPLayer layer = layerDao.find(layerId);

@@ -37,8 +37,10 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
+import com.vividsolutions.jts.geom.CoordinateSequence;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Point;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
@@ -93,6 +95,8 @@ public abstract class ServiceTest implements InitializingBean {
     final String nameRootFolderB = "rootFolderB";
     protected GPFolder rootFolderB = null;
     protected long idRootFolderB = -1;
+    
+    protected String layerInfoKeyword = "keyword";
     
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -195,9 +199,7 @@ public abstract class ServiceTest implements InitializingBean {
     }
 
     protected long createAndInsertRasterLayer(String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
-                                              String srs, String title, String urlServer) {
-        String layerInfoKeyword = "keyword";
-        
+                                              String srs, String title, String urlServer) {        
         GPRasterLayer rasterLayer = new GPRasterLayer();
         createAndInsertLayer(rasterLayer, abstractText, parentFolder, name, position, shared, srs, title, urlServer);
         rasterLayer.setFolder(parentFolder);

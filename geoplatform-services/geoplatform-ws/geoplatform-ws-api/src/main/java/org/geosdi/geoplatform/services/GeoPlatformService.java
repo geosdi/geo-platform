@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import com.vividsolutions.jts.geom.Point;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
@@ -49,6 +50,7 @@ import org.codehaus.jra.Put;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -291,7 +293,6 @@ public interface GeoPlatformService {
     @Get
     @WebResult(name = "LayerStyles")
     StyleList getLayerStyles(@WebParam(name = "LayerId") long layerId);
-    //</editor-fold>
     
     /**
      * @return a short layer.
@@ -308,11 +309,26 @@ public interface GeoPlatformService {
     GPBBox getBBox(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault;
     
     /**
+     * @return LayerInfo of a raster layer.
+     */
+    @Get
+    @WebResult(name = "LayerInfo")
+    GPLayerInfo getLayerInfo(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault;
+    
+//    /**
+//     * @return Geometry of a vector layer.
+//     */
+//    @Get
+//    @WebResult(name = "Geometry")
+//    Point getGeometry(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault;
+    
+    /**
      * @return layer Type.
      */
     @Get
     @WebResult(name = "LayerType")
     GPLayerType getLayerType(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault ;
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="OWS">
     // ==========================================================================

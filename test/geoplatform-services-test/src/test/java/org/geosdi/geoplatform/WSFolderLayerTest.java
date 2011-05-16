@@ -39,7 +39,9 @@ package org.geosdi.geoplatform;
 
 import java.util.Iterator;
 import junit.framework.Assert;
+import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
@@ -222,7 +224,48 @@ public class WSFolderLayerTest extends ServiceTest {
         }
     }
     
-//    @Test
-//    public void testGetFolderAndLayer() {
-//    }
+    @Test
+    public void testGetShortLayer() {
+        try {
+            ShortLayerDTO layer = geoPlatformService.getShortLayer(idVectorLayer2);
+            Assert.assertNotNull("assertNotNull layer",layer);
+            Assert.assertEquals("assertEquals layer.getAbstractText()",layer.getAbstractText(), abstractTextVectorLayer2);
+            Assert.assertEquals("assertEquals layer.getLayerType()",layer.getLayerType(), GPLayerType.POLYGON);
+            Assert.assertEquals("assertEquals layer.getName()",layer.getName(), nameVectorLayer2);
+            Assert.assertEquals("assertEquals layer.getSrs()",layer.getSrs(), spatialReferenceSystem);
+            Assert.assertEquals("assertEquals layer.getTitle()",layer.getTitle(), titleVectorLayer2);
+            Assert.assertEquals("assertEquals layer.getUrlServer()",layer.getUrlServer(), urlServer);
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail();
+            logger.error("\n***** Layer with id \"" + idVectorLayer2 + "\" not found");
+        }
+    }
+    
+    @Test
+    public void testGetBBox() {
+        try {
+            GPBBox bbox = geoPlatformService.getBBox(idVectorLayer1);
+            Assert.assertNotNull("assertNotNull bbox",bbox);
+            Assert.assertEquals("assertEquals bbox.getMaxX()",bbox.getMaxX(), 20.0);
+            Assert.assertEquals("assertEquals bbox.getMaxY()",bbox.getMaxY(), 20.0);
+            Assert.assertEquals("assertEquals bbox.getMinX()",bbox.getMinX(), 10.0);
+            Assert.assertEquals("assertEquals bbox.getMinY()",bbox.getMinY(), 10.0);
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail();
+            logger.error("\n***** Layer with id \"" + idVectorLayer1 + "\" not found");
+        }
+    }
+    
+    @Test
+    public void testGetLayerInfo() {
+        try {
+            GPLayerInfo layerInfo = geoPlatformService.getLayerInfo(idRasterLayer2);
+            Assert.assertNotNull("assertNotNull layerInfo",layerInfo);
+            Assert.assertEquals("assertEquals layerInfo.getKeywords()",layerInfo.getKeywords(), layerInfoKeyword);
+            Assert.assertEquals("assertEquals layerInfo.isQueryable()",layerInfo.isQueryable(), false);
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail();
+            logger.error("\n***** Layer with id \"" + idRasterLayer2 + "\" not found");
+        }
+    }
 }

@@ -52,10 +52,8 @@ import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformButtonBar;
+import org.geosdi.geoplatform.gui.impl.map.IGeoPlatofomMapButtonBar;
 
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
-import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
@@ -68,11 +66,10 @@ import org.geosdi.geoplatform.gui.action.event.ActionHandler;
  * @author giuseppe
  * 
  */
-public class ButtonBar extends LayoutContainer implements GeoPlatformButtonBar {
+public class ButtonBar extends GeoPlatformToolbarWidget implements
+        IGeoPlatofomMapButtonBar {
 
-    public static final String TOOLBAR_SEPARATOR = "ToolbarSeparator";
-    private VerticalPanel vp;
-    private ToolBar toolBar;
+
     private MapLayoutWidget mapLayoutWidget;
     private GeoPlatformButtonObserver buttonObserver;
 
@@ -83,7 +80,6 @@ public class ButtonBar extends LayoutContainer implements GeoPlatformButtonBar {
      */
     public ButtonBar(MapLayoutWidget mapLayoutWidget) {
         super();
-        this.vp = new VerticalPanel();
         this.toolBar = new ToolBar();
         this.mapLayoutWidget = mapLayoutWidget;
         this.mapLayoutWidget.setButtonBar(this);
@@ -94,7 +90,8 @@ public class ButtonBar extends LayoutContainer implements GeoPlatformButtonBar {
     /**
      * Widget initialize
      */
-    private void initialize() {
+    @Override
+    public void initialize() {
         List<GenericClientTool> tools = this.mapLayoutWidget.getTools();
         for (GenericClientTool tool : tools) {
             String id = tool.getId();
@@ -125,8 +122,6 @@ public class ButtonBar extends LayoutContainer implements GeoPlatformButtonBar {
                 action.setEnabled(((ActionClientTool) tool).isEnabled());
             }
         }
-        vp.add(toolBar);
-        add(vp);
     }
 
     /**
@@ -155,7 +150,8 @@ public class ButtonBar extends LayoutContainer implements GeoPlatformButtonBar {
     private Menu createMenu(List<ActionClientTool> actionTools) {
         Menu menu = new Menu();
         for (ActionClientTool actionTool : actionTools) {
-            MenuBaseAction action = (MenuBaseAction) MenuActionRegistar.get(actionTool.getId());
+            MenuBaseAction action = (MenuBaseAction) MenuActionRegistar.get(
+                    actionTool.getId());
             MenuItem item = new MenuItem(action.getTitle());
             item.addSelectionListener(action);
             item.setIcon(action.getImage());
@@ -184,7 +180,7 @@ public class ButtonBar extends LayoutContainer implements GeoPlatformButtonBar {
         button.setToolTip(action.getTooltip());
         button.setIcon(action.getImage());
         button.addSelectionListener(action);
-       
+
         action.addActionHandler(new ActionHandler() {
 
             @Override

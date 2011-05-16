@@ -33,28 +33,26 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tree.toolbar;
 
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformToolbarWidget;
+
+package org.geosdi.geoplatform.gui.client.widget;
+
+import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPTreeToolbar extends GeoPlatformToolbarWidget {
+public abstract class GeoPlatformToolbarWidget {
 
-    protected TreePanel tree;
+    public static final String TOOLBAR_SEPARATOR = "ToolbarSeparator";
+    protected ToolBar toolBar;
 
-    /*
-     * @Constructor
-     * 
-     */
-    public GPTreeToolbar(TreePanel theTree) {
-        super();
-        this.tree = theTree;
+    public GeoPlatformToolbarWidget() {
+        this.toolBar = new ToolBar();
     }
 
-    public abstract void buildToolbar();
+    public abstract void initialize();
+
 }

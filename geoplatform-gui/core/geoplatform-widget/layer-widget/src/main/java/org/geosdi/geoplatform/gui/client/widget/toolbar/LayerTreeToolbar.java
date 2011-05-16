@@ -84,7 +84,8 @@ public class LayerTreeToolbar extends GPTreeToolbar {
      * Create the Toolbar for LayerTreeWidget
      * 
      */
-    private void initialize() {
+    @Override
+    public void initialize() {
         for (GenericClientTool tool : this.toolbarTreeClientTool.getClientTools()) {
             String id = tool.getId();
             if (id.equals(TOOLBAR_SEPARATOR)) {

@@ -50,6 +50,6 @@ public interface GeoPlatformMap extends GeoPlatformEditor, GeoPlatformMeasure,
 
 	public Map getMap();
 
-	public GeoPlatformButtonBar getButtonBar();
+	public IGeoPlatofomMapButtonBar getButtonBar();
 
 }

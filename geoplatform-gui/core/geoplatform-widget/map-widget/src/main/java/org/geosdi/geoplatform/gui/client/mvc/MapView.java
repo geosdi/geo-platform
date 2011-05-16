@@ -133,7 +133,8 @@ public class MapView extends GeoPlatformView {
     private void onScaleRequestChange(AppEvent event) {
         Scale scale = (Scale) event.getData();
         String scaleString = scale.get("scale");
-        String scaleEffective = scaleString.substring(scaleString.indexOf(":") + 1);
+        String scaleEffective = scaleString.substring(
+                scaleString.indexOf(":") + 1);
         Float floatScale = Float.parseFloat(scaleEffective);
         this.mapLayout.getMap().zoomToScale(floatScale.floatValue(), false);
     }
@@ -221,7 +222,9 @@ public class MapView extends GeoPlatformView {
      * @param event
      */
     private void onAttachToolbar() {
-        mapLayout.setTools(GeoPlatformUtils.getInstance().getGlobalConfiguration().getToolbarClientTool().getClientTools());
+        mapLayout.setTools(GeoPlatformUtils.getInstance().
+                getGlobalConfiguration().getToolbarClientTool().
+                getClientTools());
 
         this.buttonBar = new ButtonBar(mapLayout);
 

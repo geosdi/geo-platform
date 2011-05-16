@@ -43,7 +43,7 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface GeoPlatformButtonBar {
+public interface IGeoPlatofomMapButtonBar {
 
 	boolean isTogglePressed();
 

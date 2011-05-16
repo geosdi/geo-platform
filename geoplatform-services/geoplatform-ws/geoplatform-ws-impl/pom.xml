@@ -106,9 +106,16 @@
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
         </dependency>
-        <dependency>
+
+        <!--dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
+        </dependency-->
+
+        <!-- logging dependencies, delegate all to slf4j and use logback -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
 
 		<!-- GeoAPI and its dependencies -->

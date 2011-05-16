@@ -381,7 +381,7 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>0.9.21</version>
+                <version>0.9.28</version>
             </dependency>
 
 			<!-- =========================================================== -->
@@ -1082,7 +1082,7 @@
 
         <junit-version>4.7</junit-version>
         <log4j-version>1.2.14</log4j-version>
-        <slf4j-version>1.6.0</slf4j-version>
+        <slf4j-version>1.6.1</slf4j-version>
         <dom4j-version>1.6.1</dom4j-version>
 
         <maven-assembly-plugin-version>2.2-beta-5</maven-assembly-plugin-version>

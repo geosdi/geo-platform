@@ -114,7 +114,7 @@ public class DTOConverter {
         FolderTreeNode folder = new FolderTreeNode(folderDTO.getName());
         folder.setId(folderDTO.getId());
         folder.setzIndex(folderDTO.getPosition());
-        folder.setHasChildrens(!folderDTO.isEmpty());
+        folder.setNumberOfChildrens(folderDTO.getNumberOfChilds());
         return folder;
     }
     

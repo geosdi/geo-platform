@@ -58,7 +58,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
     private static final long serialVersionUID = -3687415822526940729L;
     /** THIS PROPERTY MUST NOT BE SERIALIZED **/
     private transient VisitorModelConverter visitor = new VisitorModelConverter(this);
-    private boolean hasChildrens;
+    private int numberOfChildrens;
 
     public FolderTreeNode() {
     }
@@ -97,17 +97,18 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
     }
 
     /**
-     * @return the hasChildrens
+     * @return the number of childrens
      */
-    public boolean hasChildrens() {
-        System.out.println("Has childrens: " + this.hasChildrens);
-        return this.hasChildrens;
+    public int getNumberOfChildrens() {
+        return numberOfChildrens;
     }
 
     /**
-     * @param hasChildrens the hasChildrens to set
+     * @param numberOfChildrens the numberOfChildrens to set
      */
-    public void setHasChildrens(boolean hasChildrens) {
-        this.hasChildrens = hasChildrens;
+    public void setNumberOfChildrens(int numberOfChildrens) {
+        this.numberOfChildrens = numberOfChildrens;
     }
+    
+    
 }

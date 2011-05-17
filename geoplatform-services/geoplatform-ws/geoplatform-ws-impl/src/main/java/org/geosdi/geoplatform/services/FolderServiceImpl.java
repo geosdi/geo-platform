@@ -143,6 +143,7 @@ class FolderServiceImpl {
         }
 
         FolderDTO folderDTO = new FolderDTO(folder);
+        folderDTO.setNumberOfChilds(getNumberOfFolderChildren(folder));
         return folderDTO;
     }
 
@@ -351,7 +352,7 @@ class FolderServiceImpl {
         List<FolderDTO> foldersDTO = new ArrayList<FolderDTO>(folderList.size());
         for (GPFolder folderIth : folderList) {
             FolderDTO folderIthDTO = new FolderDTO(folderIth);
-            folderIthDTO.setEmpty(this.isEmptyFolder(folderIth));
+            folderIthDTO.setNumberOfChilds(getNumberOfFolderChildren(folderIth));
             foldersDTO.add(folderIthDTO);
         }
 
@@ -362,24 +363,21 @@ class FolderServiceImpl {
         return folders;
     }
 
-    // Check if the GPFolder has childrens elmenent (folders or layers)
-    private boolean isEmptyFolder(GPFolder folder) {
+    // Return the number of children of a GPFolder (folders or layers)
+    private int getNumberOfFolderChildren(GPFolder folder) {
+        int counter = 0;
         Search searchCriteria = new Search(GPFolder.class);
         Filter parent = Filter.equal("parent.id", folder.getId());
         searchCriteria.addFilter(parent);
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-        if(foundFolder.size() > 0){
-            return false;
-        }
+        counter += foundFolder.size();
         
         searchCriteria = new Search(GPLayer.class);
         parent = Filter.equal("folder.id", folder.getId());
         searchCriteria.addFilter(parent);
         List<GPLayer> foundLayer = layerDao.search(searchCriteria);        
-        if(foundLayer.size() > 0){
-            return false;
-        }
+        counter += foundLayer.size();
         
-        return true;
+        return counter;
     }
 }

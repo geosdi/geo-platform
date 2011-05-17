@@ -38,6 +38,8 @@
 package org.geosdi.geoplatform;
 
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import junit.framework.Assert;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayerType;
@@ -104,7 +106,23 @@ public class WSFolderTest extends ServiceTest {
     }
 
     @Test
-    public void testGetFolder() {
+    public void testGetShortFolder() {
+        try {
+            FolderDTO folderA = geoPlatformService.getShortFolder(new RequestById(idRootFolderA));
+            Assert.assertNotNull("assertNotNull folderA", folderA);
+            Assert.assertEquals("assertEquals folderA.getNumberOfChilds()",folderA.getNumberOfChilds(), 2);
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Unable to find folder with id \"" + idRootFolderA);
+        }
+        
+        try {
+            FolderDTO folderB = geoPlatformService.getShortFolder(new RequestById(idRootFolderB));
+            Assert.assertNotNull("assertNotNull folderB", folderB);
+            Assert.assertEquals("assertEquals folderB.getNumberOfChilds()",folderB.getNumberOfChilds(), 3);
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Unable to find folder with id \"" + idRootFolderB);
+        }
+        
         Assert.assertNotNull(folder1);
         Assert.assertEquals(folder1.getId(), idFolder1);
         Assert.assertEquals(folder1.getName(), nameFolder1);
@@ -180,13 +198,13 @@ public class WSFolderTest extends ServiceTest {
             logger.info("\n***** folderDTOToCheck:\n" + folderDTOToCheck + "\n*****");
             Assert.assertEquals(folderDTOToCheck.getId(), idFolder2);
             Assert.assertEquals(folderDTOToCheck.getName(), nameFolder2);
-            Assert.assertTrue(folderDTOToCheck.isEmpty());
+            Assert.assertEquals(folderDTOToCheck.getNumberOfChilds(), 0);
             // Assert on "folder1"
             folderDTOToCheck = (FolderDTO) iterator.next();
             logger.info("\n***** folderDTOToCheck:\n" + folderDTOToCheck + "\n*****");
             Assert.assertEquals(folderDTOToCheck.getId(), idFolder1);
             Assert.assertEquals(folderDTOToCheck.getName(), nameFolder1);
-            Assert.assertTrue(folderDTOToCheck.isEmpty());
+            Assert.assertEquals(folderDTOToCheck.getNumberOfChilds(), 0);
 
             // Assert on "rootFolderB" (deleted)
             TreeFolderElements childrenRootFolderB = geoPlatformService.getChildrenElements(idRootFolderB);

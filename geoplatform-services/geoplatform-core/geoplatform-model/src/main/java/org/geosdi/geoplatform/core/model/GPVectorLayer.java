@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.model;
 
+import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.Point;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -70,7 +71,7 @@ public class GPVectorLayer extends GPLayer {
 
     @Type(type = "org.hibernatespatial.GeometryUserType")
     @Column(name = "geometry", nullable = true)
-    private Point geometry;
+    private Geometry geometry;
 
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -80,7 +81,7 @@ public class GPVectorLayer extends GPLayer {
      * @return the geometry
      */
     @XmlTransient
-    public Point getGeometry() {
+    public Geometry getGeometry() {
         return geometry;
     }
 
@@ -88,7 +89,7 @@ public class GPVectorLayer extends GPLayer {
      * @param geometry
      *            the geometry to set
      */
-    public void setGeometry(Point geometry) {
+    public void setGeometry(Geometry geometry) {
         this.geometry = geometry;
     }
     /**

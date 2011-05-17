@@ -51,7 +51,7 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class FolderDTO extends AbstractElementDTO {
 
-    private boolean empty;
+    private int numberOfChilds;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
@@ -72,17 +72,17 @@ public class FolderDTO extends AbstractElementDTO {
 
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
-     * @return the empty
+     * @return the numberOfChilds
      */
-    public boolean isEmpty() {
-        return empty;
+    public int getNumberOfChilds() {
+        return numberOfChilds;
     }
 
     /**
-     * @param empty the empty to set
+     * @param numberOfChilds to set
      */
-    public void setEmpty(boolean empty) {
-        this.empty = empty;
+    public void setNumberOfChilds(int numberOfChilds) {
+        this.numberOfChilds = numberOfChilds;
     }
     //</editor-fold>
 

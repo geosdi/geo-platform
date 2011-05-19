@@ -37,7 +37,6 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
-import com.vividsolutions.jts.geom.Point;
 import javax.jws.WebService;
 
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
@@ -50,7 +49,9 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -339,15 +340,30 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         return layerServiceDelegate.insertLayer(layer);
     }
 
-//    @Override
-//    public long updateLayer(GPLayer layer) throws ResourceNotFoundFault, IllegalParameterFault {
-//        return layerServiceDelegate.updateLayer(layer);
-//    }
+    @Override
+    public long updateRasterLayer(GPRasterLayer layer) throws ResourceNotFoundFault, IllegalParameterFault {
+        return layerServiceDelegate.updateRasterLayer(layer);
+    }
+
+    @Override
+    public long updateVectorLayer(GPVectorLayer layer) throws ResourceNotFoundFault, IllegalParameterFault {
+        return layerServiceDelegate.updateVectorLayer(layer);
+    }
     
     @Override
     public boolean deleteLayer(RequestById request)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.deleteLayer(request);
+    }
+    
+    @Override
+    public GPRasterLayer getRasterLayer(long layerId) throws ResourceNotFoundFault {
+        return layerServiceDelegate.getRasterLayer(layerId);
+    }
+    
+    @Override
+    public GPVectorLayer getVectorLayer(long layerId) throws ResourceNotFoundFault {
+        return layerServiceDelegate.getVectorLayer(layerId);
     }
 
     @Override

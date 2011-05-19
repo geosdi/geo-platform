@@ -39,7 +39,6 @@ package org.geosdi.geoplatform.services;
 
 import com.trg.search.Filter;
 import com.trg.search.Search;
-import com.vividsolutions.jts.geom.Point;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -106,27 +105,53 @@ class LayerSericeImpl {
         return layer.getId();
     }
 
-//    public long updateLayer(GPLayer layer)
-//            throws ResourceNotFoundFault, IllegalParameterFault {
-//        GPLayer orig = layerDao.find(layer.getId());
-//        if (orig == null) {
-//            throw new ResourceNotFoundFault("Layer not found", layer.getId());
-//        }
-//        
-////        orig.setParent(layer.getParent());
-//        orig.setAbstractText(layer.getAbstractText());
-//        orig.setBbox(layer.getBbox());
-//        orig.setLayerType(layer.getLayerType());
-//        orig.setName(layer.getName());
-//        orig.setPosition(layer.getPosition());
-//        orig.setShared(layer.isShared());
-//        orig.setSrs(layer.getSrs());
-//        orig.setTitle(layer.getTitle());
-//        orig.setUrlServer(layer.getUrlServer());
-//
-//        layerDao.merge(orig);
-//        return orig.getId();
-//    }
+    public long updateRasterLayer(GPRasterLayer layer)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        GPRasterLayer orig = (GPRasterLayer)layerDao.find(layer.getId());
+        if (orig == null) {
+            throw new ResourceNotFoundFault("Layer not found", layer.getId());
+        }
+        
+//        orig.setParent(layer.getParent());
+        orig.setAbstractText(layer.getAbstractText());
+        orig.setBbox(layer.getBbox());
+        orig.setFolder(layer.getFolder());
+        orig.setLayerInfo(layer.getLayerInfo());
+        orig.setLayerType(layer.getLayerType());
+        orig.setName(layer.getName());
+        orig.setPosition(layer.getPosition());
+        orig.setShared(layer.isShared());
+        orig.setSrs(layer.getSrs());
+        orig.setTitle(layer.getTitle());
+        orig.setUrlServer(layer.getUrlServer());
+
+        layerDao.merge(orig);
+        return orig.getId();
+    }
+
+    public long updateVectorLayer(GPVectorLayer layer)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        GPVectorLayer orig = (GPVectorLayer)layerDao.find(layer.getId());
+        if (orig == null) {
+            throw new ResourceNotFoundFault("Layer not found", layer.getId());
+        }
+        
+//        orig.setParent(layer.getParent());
+        orig.setAbstractText(layer.getAbstractText());
+        orig.setBbox(layer.getBbox());
+        orig.setFolder(layer.getFolder());
+        orig.setGeometry(layer.getGeometry());
+        orig.setLayerType(layer.getLayerType());
+        orig.setName(layer.getName());
+        orig.setPosition(layer.getPosition());
+        orig.setShared(layer.isShared());
+        orig.setSrs(layer.getSrs());
+        orig.setTitle(layer.getTitle());
+        orig.setUrlServer(layer.getUrlServer());
+
+        layerDao.merge(orig);
+        return orig.getId();
+    }
 
     public boolean deleteLayer(RequestById request)
             throws ResourceNotFoundFault, IllegalParameterFault {
@@ -137,6 +162,24 @@ class LayerSericeImpl {
 
         // data on ancillary tables should be deleted by cascading
         return layerDao.remove(layer);
+    }
+
+    public GPRasterLayer getRasterLayer(long layerId) throws ResourceNotFoundFault {
+        GPRasterLayer layer = (GPRasterLayer)layerDao.find(layerId);
+        if (layer == null) {
+            throw new ResourceNotFoundFault("Layer not found", layerId);
+        }
+
+        return layer;
+    }
+
+    public GPVectorLayer getVectorLayer(long layerId) throws ResourceNotFoundFault {
+        GPVectorLayer layer = (GPVectorLayer)layerDao.find(layerId);
+        if (layer == null) {
+            throw new ResourceNotFoundFault("Layer not found", layerId);
+        }
+
+        return layer;
     }
 
     public ShortLayerDTO getShortLayer(long layerId) throws ResourceNotFoundFault {

@@ -37,7 +37,6 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
-import com.vividsolutions.jts.geom.Point;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
@@ -52,7 +51,9 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
@@ -272,15 +273,34 @@ public interface GeoPlatformService {
     @HttpResource(location = "/layer")
     long insertLayer(@WebParam(name = "Layer") GPLayer layer);
 
-//    @Post
-//    @HttpResource(location = "/layer")
-//    long updateLayer(@WebParam(name = "Layer") GPLayer layer)
-//            throws ResourceNotFoundFault, IllegalParameterFault;
+    @Post
+    @HttpResource(location = "/layer")
+    long updateRasterLayer(@WebParam(name = "Layer") GPRasterLayer layer)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Post
+    @HttpResource(location = "/layer")
+    long updateVectorLayer(@WebParam(name = "Layer") GPVectorLayer layer)
+            throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Delete
     @HttpResource(location = "/layers/{id}")
     boolean deleteLayer(RequestById request) throws ResourceNotFoundFault,
             IllegalParameterFault;
+    
+    /**
+     * @return a raster layer.
+     */
+    @Get
+    @WebResult(name = "RasterLayer")
+    GPRasterLayer getRasterLayer(@WebParam(name = "GPRasterLayer") long layerId) throws ResourceNotFoundFault;
+    
+    /**
+     * @return a vector layer.
+     */
+    @Get
+    @WebResult(name = "VectorLayer")
+    GPVectorLayer getVectorLayer(@WebParam(name = "GPVectorLayer") long layerId) throws ResourceNotFoundFault;
     
     @Get
     @HttpResource(location = "/layers")

@@ -64,24 +64,6 @@ import org.junit.Test;
  */
 public class WSFolderLayerTest extends ServiceTest {
 
-    // Folder
-    private final String nameFolder1 = "folder1";
-    private GPFolder folder1 = null;
-    private long idFolder1 = -1;
-    private final String nameFolder2 = "folder2";
-    private GPFolder folder2 = null;
-    private long idFolder2 = -1;
-    private final String nameFolder3 = "folder3";
-    private GPFolder folder3 = null;
-    private long idFolder3 = -1;
-    private final String nameFolder4 = "folder4";
-    private GPFolder folder4 = null;
-    private long idFolder4 = -1;
-    private final String nameFolder5 = "folder5";
-    private GPFolder folder5 = null;
-    private long idFolder5 = -1;
-    
-    
     private final String urlServer = "http://www.geosdi.org/test";
     private final String spatialReferenceSystem = "Geographic coordinate system";
     
@@ -124,18 +106,22 @@ public class WSFolderLayerTest extends ServiceTest {
         // "rootFolderA" ---> "rasterLayer1"
         idRasterLayer1 = createAndInsertRasterLayer(abstractTextRasterLayer1, rootFolderA, nameRasterLayer1, 3, false, spatialReferenceSystem,
                                                     titleRasterLayer1, urlServer);
+        rasterLayer1 = geoPlatformService.getRasterLayer(idRasterLayer1);
 
         // "rootFolderA" ---> "vectorLayer1"
         idVectorLayer1 = createAndInsertVectorLayer(abstractTextVectorLayer1, rootFolderA, nameVectorLayer1, 4, false, spatialReferenceSystem,
                                                     titleVectorLayer1, urlServer);
+        vectorLayer1 = geoPlatformService.getVectorLayer(idVectorLayer1);
 
         // "rootFolderB" ---> "rasterLayer2"
-        idRasterLayer2 = createAndInsertRasterLayer(abstractTextRasterLayer2, rootFolderB, nameRasterLayer2, 3, false, spatialReferenceSystem,
+        idRasterLayer2 = createAndInsertRasterLayer(abstractTextRasterLayer2, rootFolderB, nameRasterLayer2, 5, false, spatialReferenceSystem,
                                                     titleRasterLayer2, urlServer);
+        rasterLayer2 = geoPlatformService.getRasterLayer(idRasterLayer2);
 
         // "rootFolderB" ---> "vectorLayer2"
-        idVectorLayer2 = createAndInsertVectorLayer(abstractTextVectorLayer2, rootFolderB, nameVectorLayer2, 4, false, spatialReferenceSystem,
+        idVectorLayer2 = createAndInsertVectorLayer(abstractTextVectorLayer2, rootFolderB, nameVectorLayer2, 6, false, spatialReferenceSystem,
                                                     titleVectorLayer2, urlServer);
+        vectorLayer2 = geoPlatformService.getVectorLayer(idVectorLayer2);
     }
 
     @Test
@@ -159,6 +145,47 @@ public class WSFolderLayerTest extends ServiceTest {
         } catch (ResourceNotFoundFault ex) {
             logger.info("\n***** Layer with id \"" + idRasterLayer1 + "\" not found");
         }
+    }
+
+    @Test
+    public void testUpdateRasterLayer() {
+        final String nameLayerUpdated = "rasterLayerUpdated";
+        try {
+            rasterLayer1.setFolder(rootFolderB);
+            rasterLayer1.setName(nameLayerUpdated);
+
+            geoPlatformService.updateRasterLayer(rasterLayer1);
+            ShortLayerDTO layerUpdated = geoPlatformService.getShortLayer(idRasterLayer1);
+
+            Assert.assertNotNull("assertNotNull layerUpdated", layerUpdated);
+            Assert.assertEquals("assertEquals layerUpdated.getName()", layerUpdated.getName(), nameLayerUpdated);
+        } catch (IllegalParameterFault ex) {
+            Assert.fail("Layer has an illegal parameter");
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Layer with id \"" + idRasterLayer1 + "\" not found");
+        }
+        
+        try {
+            FolderDTO folderA = geoPlatformService.getShortFolder(new RequestById(idRootFolderA));
+            Assert.assertNotNull("assertNotNull folderA", folderA);
+            Assert.assertEquals("assertEquals folderA.getNumberOfChilds()",folderA.getNumberOfChilds(), 1);
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Unable to find folder with id \"" + idRootFolderA);
+        }
+        
+        try {
+            FolderDTO folderB = geoPlatformService.getShortFolder(new RequestById(idRootFolderB));
+            Assert.assertNotNull("assertNotNull folderB", folderB);
+            Assert.assertEquals("assertEquals folderB.getNumberOfChilds()",folderB.getNumberOfChilds(), 3);
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Unable to find folder with id \"" + idRootFolderB);
+        }
+    }
+
+    @Test
+    public void testUpdateVectorLayer() {
+        Assert.assertTrue(true);
+        // TODO build testUpdateVectorLayer
     }
 
     @Test

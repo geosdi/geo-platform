@@ -45,9 +45,8 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 import java.util.List;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
 public abstract class GeoPlatformAsyncTreeWidget<T extends GPBeanTreeModel> {
 

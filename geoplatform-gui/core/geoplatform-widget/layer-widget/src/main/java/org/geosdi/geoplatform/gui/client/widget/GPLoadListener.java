@@ -92,7 +92,7 @@ public class GPLoadListener extends LoadListener {
     public void loaderLoadException(LoadEvent le) {
         this.resetLoaderListener();
         GeoPlatformMessage.errorMessage("Error loading", "An error occurred while making the requested connection.\n"
-                + "Verify network connections and try again.\nIf the problem persist contact your system administrator.");
+                + "Verify network connections and try again.\nIf the problem persists contact your system administrator.");
         
         System.out.println("Errore avvenuto nel loader del tree: " + le.exception
                         + " data: " + le.getData());

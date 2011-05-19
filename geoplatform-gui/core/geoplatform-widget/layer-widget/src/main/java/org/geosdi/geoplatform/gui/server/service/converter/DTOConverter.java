@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.service.converter;
 
+import com.extjs.gxt.ui.client.data.ModelData;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -42,6 +43,7 @@ import java.util.List;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
@@ -75,6 +77,9 @@ public class DTOConverter {
         for (Iterator<FolderDTO> it = gpFolders.iterator(); it.hasNext();) {
             foldersClient.add(this.convertFolderElement(it.next(), parent));
         }
+        if(parent instanceof GPRootTreeNode){
+            ((GPRootTreeNode)parent).addElements(foldersClient);
+        }
         return foldersClient;
     }
 
@@ -92,6 +97,11 @@ public class DTOConverter {
                 clientFolderElements.add(this.convertFolderElement((FolderDTO) element, parent));
             }
         }
+        List<ModelData> listModelData = new ArrayList<ModelData>();
+        for (Iterator<GPBeanTreeModel> it = clientFolderElements.iterator(); it.hasNext();) {
+            listModelData.add(it.next());
+        }
+        parent.setChildren(listModelData);
         System.out.println("Client folder elements size: " + clientFolderElements.size());
         return clientFolderElements;
     }
@@ -105,7 +115,7 @@ public class DTOConverter {
         raster.setzIndex(rasterDTO.getPosition());
         raster.setBbox(this.convertBbox(rasterDTO.getBbox()));
         raster.setParent(parent);
-        parent.add(raster);
+//        parent.add(raster);
         raster.setChecked(false);
         return raster;
     }
@@ -120,7 +130,7 @@ public class DTOConverter {
         vector.setzIndex(vectorDTO.getPosition());
         vector.setBbox(this.convertBbox(vectorDTO.getBbox()));
         vector.setParent(parent);
-        parent.add(vector);
+//        parent.add(vector);
         vector.setChecked(false);
         return vector;
     }
@@ -131,7 +141,7 @@ public class DTOConverter {
         folder.setzIndex(folderDTO.getPosition());
         folder.setNumberOfChildrens(folderDTO.getNumberOfChilds());
         folder.setParent(parent);
-        parent.add(folder);
+//        parent.add(folder);
         folder.setChecked(false);
         return folder;
     }

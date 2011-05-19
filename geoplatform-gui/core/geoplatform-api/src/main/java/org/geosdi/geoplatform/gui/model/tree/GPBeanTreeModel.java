@@ -55,6 +55,9 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
     
     private String label;
     private int zIndex;
+
+    public GPBeanTreeModel() {
+    }
     private boolean isChecked = false;
 
     /**

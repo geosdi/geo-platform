@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
+import org.geosdi.geoplatform.core.model.GPBBox;
 
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerType;
@@ -51,7 +52,7 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-propOrder = {"id", "name", "position", "shared", "urlServer", "srs", "layerType", "abstractText", "title"})
+propOrder = {"id", "name", "position", "shared", "urlServer", "srs", "layerType", "abstractText", "title", "bbox"})
 @XmlSeeAlso(value = {RasterLayerDTO.class, VectorLayerDTO.class})
 public class ShortLayerDTO extends AbstractElementDTO {
 
@@ -60,6 +61,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
     private String abstractText;
     private String title;
     private GPLayerType layerType;
+    private GPBBox bbox;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
@@ -81,6 +83,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
         this.abstractText = layer.getAbstractText();
         this.title = layer.getTitle();
         this.layerType = layer.getLayerType();
+        this.bbox = layer.getBbox();
     }
     //</editor-fold>
 
@@ -169,5 +172,19 @@ public class ShortLayerDTO extends AbstractElementDTO {
         String s = super.toString()
                 + ", urlServer=" + urlServer + ", srs=" + srs;
         return s;
+    }
+
+    /**
+     * @return the bbox
+     */
+    public GPBBox getBbox() {
+        return bbox;
+    }
+
+    /**
+     * @param bbox the bbox to set
+     */
+    public void setBbox(GPBBox bbox) {
+        this.bbox = bbox;
     }
 }

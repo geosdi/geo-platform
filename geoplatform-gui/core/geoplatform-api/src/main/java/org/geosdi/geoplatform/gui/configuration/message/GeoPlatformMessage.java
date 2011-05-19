@@ -137,8 +137,8 @@ public class GeoPlatformMessage {
      * @param message
      * @param callback
      */
-    public static void confirmMessage(String title, String message,
+    public static MessageBox confirmMessage(String title, String message,
             Listener<MessageBoxEvent> callback) {
-        MessageBox.confirm(title, message, callback);
+        return MessageBox.confirm(title, message, callback);
     }
 }

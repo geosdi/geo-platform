@@ -63,8 +63,6 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
     public FolderTreeNode() {
     }
 
-    ;
-
     public FolderTreeNode(String label) {
         super.setLabel(label);
     }

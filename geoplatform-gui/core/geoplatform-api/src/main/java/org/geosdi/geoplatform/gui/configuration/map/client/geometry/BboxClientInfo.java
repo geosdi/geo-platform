@@ -53,6 +53,16 @@ public class BboxClientInfo implements Serializable {
     private double upperRightX;
     private double upperRightY;
 
+    public BboxClientInfo() {
+    }
+
+    public BboxClientInfo(double lowerLeftX, double lowerLeftY, double upperRightX, double upperRightY) {
+        this.lowerLeftX = lowerLeftX;
+        this.lowerLeftY = lowerLeftY;
+        this.upperRightX = upperRightX;
+        this.upperRightY = upperRightY;
+    }
+
     /**
      * @return the lowerLeftX
      */

@@ -316,6 +316,7 @@ public abstract class BaseDAOTest {
                 raster.setFolder(folderRaster);
                 raster.setLayerType(GPLayerType.RASTER);
                 raster.setPosition(++position);
+                raster.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
                 layerDAO.persist(raster);
             }
 

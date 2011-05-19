@@ -71,7 +71,7 @@ public class LayerService implements ILayerService {
     private DTOConverter dtoConverter;
 
     @Override
-    public List<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException {
+    public List<FolderTreeNode> loadUserFolders(String userName, GPBeanTreeModel parent) throws GeoPlatformException {
 //        TODO: check the right way to retrieve the user folders using the userName property
         SearchRequest userNameSearch = new SearchRequest(userName);
 
@@ -89,14 +89,16 @@ public class LayerService implements ILayerService {
         FolderList folderList = geoPlatformServiceClient.getUserFoldersByRequest(
                 idRequest);
 
-        return this.dtoConverter.convertOnlyFolder(folderList.getList());
+        return this.dtoConverter.convertOnlyFolder(folderList.getList(), parent);
     }
 
     @Override
-    public List<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException {
+    public List<GPBeanTreeModel> loadFolderElements(GPBeanTreeModel folder) throws GeoPlatformException {
+        assert(folder instanceof FolderTreeNode): "The folder parameter must be an istance of FolderTreeNode";
+        long folderId = ((FolderTreeNode)folder).getId();
         TreeFolderElements folderElements = geoPlatformServiceClient.getChildrenElements(
                 folderId);
-        return this.dtoConverter.convertFolderElements(folderElements);
+        return this.dtoConverter.convertFolderElements(folderElements, folder);
     }
 
     @Override

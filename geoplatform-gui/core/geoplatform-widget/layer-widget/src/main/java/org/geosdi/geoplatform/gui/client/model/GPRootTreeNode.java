@@ -58,6 +58,9 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
      */
     private static final long serialVersionUID = 1765450539495169525L;
 
+    public GPRootTreeNode() {
+    }
+
     public GPRootTreeNode(TreePanel<GPBeanTreeModel> theTree) {
         super.setLabel("Geo-Platform Tree");
     }

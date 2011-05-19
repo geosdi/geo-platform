@@ -47,10 +47,10 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  */
 public interface ILayerService {
 
-    public List<FolderTreeNode> loadUserFolders(String userName)
+    public List<FolderTreeNode> loadUserFolders(String userName, GPBeanTreeModel parent)
             throws GeoPlatformException;
     
-    public List<GPBeanTreeModel> loadFolderElements(long folderId)
+    public List<GPBeanTreeModel> loadFolderElements(GPBeanTreeModel folder)
             throws GeoPlatformException;
 
     public long saveFolderForUser(String folderName, int position)

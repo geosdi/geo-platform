@@ -53,6 +53,7 @@ import org.geosdi.geoplatform.gui.client.widget.toolbar.LayerTreeToolbar;
 public class LayerManagementWidget extends ContentPanel {
 
     private LayerTreeWidget layerTree;
+    //private LayerAsyncTreeWidget layerTree;
     private LayerTreeToolbar treeToolbar;
     private GPLegendPanel legendPanel;
     private ContentPanel treePanel;
@@ -87,6 +88,7 @@ public class LayerManagementWidget extends ContentPanel {
         treePanel.setHeaderVisible(false);
 
         this.layerTree = new LayerTreeWidget();
+        //this.layerTree = new LayerAsyncTreeWidget();
 
         BorderLayoutData northData = new BorderLayoutData(LayoutRegion.NORTH);
         northData.setMargins(new Margins(5, 5, 0, 5));
@@ -122,6 +124,12 @@ public class LayerManagementWidget extends ContentPanel {
     public LayerTreeWidget getLayerTree() {
         return layerTree;
     }
+//    /**
+//     * @return the layerTree
+//     */
+//    public LayerAsyncTreeWidget getLayerTree() {
+//        return layerTree;
+//    }
 
     /**
      * @return the legendPanel

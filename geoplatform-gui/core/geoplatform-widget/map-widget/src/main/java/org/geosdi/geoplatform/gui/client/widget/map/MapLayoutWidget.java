@@ -75,6 +75,7 @@ import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import org.gwtopenmaps.openlayers.client.control.MousePosition;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -129,7 +130,9 @@ public class MapLayoutWidget implements GeoPlatformMap {
         this.map = mapWidget.getMap();
         this.map.addControl(new LayerSwitcher());
         this.map.addControl(new ScaleLine());
-        this.addFeatureInfoControl();
+        this.map.addControl(new MousePosition());
+        
+       
         this.addMeasureControl();
         this.addMeasureAreaControl();
 

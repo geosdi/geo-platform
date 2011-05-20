@@ -77,6 +77,7 @@ public class VisitorDisplayHide implements IVisitor {
         } else {
             System.out.println("Folder non e' checkata e ora la checko: ");
             folder.setChecked(true);
+            System.out.println("Folder contiene: " + folder.getChildCount());
             if (!this.isInternalFolderCheck && this.isAllParentsChecked(folder)) {
                 this.showChildrens(folder);
             }

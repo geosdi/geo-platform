@@ -46,10 +46,10 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  */
 public interface LayerRemoteAsync {
 
-    public void loadUserFolders(String userName, GPBeanTreeModel parent,
+    public void loadUserFolders(String userName,
             AsyncCallback<List<GPBeanTreeModel>> callback);
     
-    public void loadFolderElements(GPBeanTreeModel folder,
+    public void loadFolderElements(long folderId,
             AsyncCallback<List<GPBeanTreeModel>> callback);
 
     public void saveFolderForUser(String folderName, int position,

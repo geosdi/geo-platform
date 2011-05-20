@@ -82,7 +82,8 @@ import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeModel> {
 
     private LayerRemoteAsync layerService = LayerRemoteImpl.Util.getInstance();
-    private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(super.tree);;
+    private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(super.tree);
+    private GPBeanTreeModel tmpFolder;
     private MediatorToolbarTreeAction actionMediator;
     private GPRootTreeNode root;
     private boolean initialized;
@@ -113,8 +114,8 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
     public void buildTree() {
         if (!initialized) {
             //this code is necessary for async tree loader implementation
-            store.add(root, true);
-            tree.setExpanded(root, true, true);
+            store.add(getRoot(), true);
+            tree.setExpanded(getRoot(), true, true);
         }
     }
 
@@ -268,11 +269,13 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
             @Override
             protected void load(Object loadConfig, AsyncCallback<List<GPBeanTreeModel>> callback) {
                 if (initialized == false) {
-                    layerService.loadUserFolders("user_0", root, callback);
+                    tmpFolder = root;
+                    layerService.loadUserFolders("user_0", callback);
                     //System.out.println("User folder inizialized");
                     initialized = true;
                 } else if (loadConfig != null && (loadConfig instanceof FolderTreeNode || loadConfig instanceof GPRootTreeNode)) {
-                    layerService.loadFolderElements((GPBeanTreeModel) loadConfig, callback);
+                    tmpFolder = (GPBeanTreeModel) loadConfig;
+                    layerService.loadFolderElements(((FolderTreeNode)tmpFolder).getId(), callback);
                 }
             }
         };
@@ -294,7 +297,18 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
                 return condition;
             }
         };
-        treeLoader.addLoadListener(new GPLoadListener());
+        treeLoader.addLoadListener(new GPLoadListener(this));
         return treeLoader;
+    }
+
+    /**
+     * @return the root
+     */
+    public GPRootTreeNode getRoot() {
+        return root;
+    }
+    
+    public GPBeanTreeModel getSelectedFolder(){
+        return this.tmpFolder;
     }
 }

@@ -63,13 +63,13 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     }
 
     @Override
-    public List<FolderTreeNode> loadUserFolders(String userName, GPBeanTreeModel parent) throws GeoPlatformException {
-        return this.layerService.loadUserFolders(userName, parent);
+    public List<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException {
+        return this.layerService.loadUserFolders(userName);
     }
     
     @Override
-    public List<GPBeanTreeModel> loadFolderElements(GPBeanTreeModel folder) throws GeoPlatformException {
-        return this.layerService.loadFolderElements(folder);
+    public List<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException {
+        return this.layerService.loadFolderElements(folderId);
     }
 
     @Override

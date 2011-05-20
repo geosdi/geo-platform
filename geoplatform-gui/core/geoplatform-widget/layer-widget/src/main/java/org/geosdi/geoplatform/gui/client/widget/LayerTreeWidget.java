@@ -89,7 +89,6 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget {
     ;
     private MediatorToolbarTreeAction actionMediator;
     private GPRootTreeNode root;
-    private TreeLoader<GPBeanTreeModel> loader;
     private boolean initialized;
 
     /**
@@ -119,7 +118,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget {
         if (!initialized) {
             //this code is necessary for standard tree version
             //I need to specify mock userID
-            layerService.loadUserFolders("user_0", this.root, new AsyncCallback<List<GPBeanTreeModel>>() {
+            layerService.loadUserFolders("user_0", new AsyncCallback<List<GPBeanTreeModel>>() {
 
                 @Override
                 public void onFailure(Throwable caught) {

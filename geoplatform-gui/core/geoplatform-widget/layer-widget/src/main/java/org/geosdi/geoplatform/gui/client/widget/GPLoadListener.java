@@ -43,7 +43,10 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.google.gwt.user.client.Timer;
+import java.util.Iterator;
+import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -51,6 +54,11 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
  */
 public class GPLoadListener extends LoadListener {
 
+    private LayerAsyncTreeWidget layer;
+
+    public GPLoadListener(LayerAsyncTreeWidget layer) {
+        this.layer = layer;
+    }
     private final static int WAITING_TIME = 7000;
     private Timer timer;
     private MessageBox messageBox = new MessageBox();
@@ -85,7 +93,15 @@ public class GPLoadListener extends LoadListener {
     @Override
     public void loaderLoad(LoadEvent le) {
         this.resetLoaderListener();
+        this.layer.getSelectedFolder().setChildren((List)le.getData());
+        this.setElementsParent((List)le.getData(), this.layer.getSelectedFolder());
         GeoPlatformMessage.infoMessage("Load completed", "Operation completed successfully.");
+    }
+    
+    private void setElementsParent(List<GPBeanTreeModel> elementList, GPBeanTreeModel parent){
+        for (Iterator<GPBeanTreeModel> it = elementList.iterator(); it.hasNext();) {
+            it.next().setParent(parent);
+        }
     }
 
     @Override
@@ -93,9 +109,9 @@ public class GPLoadListener extends LoadListener {
         this.resetLoaderListener();
         GeoPlatformMessage.errorMessage("Error loading", "An error occurred while making the requested connection.\n"
                 + "Verify network connections and try again.\nIf the problem persists contact your system administrator.");
-        
+
         System.out.println("Errore avvenuto nel loader del tree: " + le.exception
-                        + " data: " + le.getData());
+                + " data: " + le.getData());
     }
 
     private void resetLoaderListener() {

@@ -69,7 +69,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public List<FolderTreeNode> loadUserFolders(String userName, GPBeanTreeModel parent) throws GeoPlatformException;
+    public List<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException;
     
     /**
      * 
@@ -77,7 +77,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public List<GPBeanTreeModel> loadFolderElements(GPBeanTreeModel folder) throws GeoPlatformException;
+    public List<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException;
 
     /**
      * 

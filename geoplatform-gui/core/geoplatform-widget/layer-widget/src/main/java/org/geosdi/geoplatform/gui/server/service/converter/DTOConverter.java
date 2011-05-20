@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.service.converter;
 
-import com.extjs.gxt.ui.client.data.ModelData;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -43,7 +42,6 @@ import java.util.List;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
@@ -69,44 +67,35 @@ public class DTOConverter {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public List<FolderTreeNode> convertOnlyFolder(Collection<FolderDTO> gpFolders, GPBeanTreeModel parent) {
+    public List<FolderTreeNode> convertOnlyFolder(Collection<FolderDTO> gpFolders) {
 //        if (gpFolders == null) {
 //            return null;
 //        }
         List<FolderTreeNode> foldersClient = new ArrayList<FolderTreeNode>();
         for (Iterator<FolderDTO> it = gpFolders.iterator(); it.hasNext();) {
-            foldersClient.add(this.convertFolderElement(it.next(), parent));
-        }
-        if(parent instanceof GPRootTreeNode){
-            ((GPRootTreeNode)parent).addElements(foldersClient);
+            foldersClient.add(this.convertFolderElement(it.next()));
         }
         return foldersClient;
     }
 
-    public List<GPBeanTreeModel> convertFolderElements(TreeFolderElements folderElements, GPBeanTreeModel parent) {
+    public List<GPBeanTreeModel> convertFolderElements(TreeFolderElements folderElements) {
         List<GPBeanTreeModel> clientFolderElements = new ArrayList<GPBeanTreeModel>();
         Object element;
         Iterator iterator = folderElements.iterator();
         while (iterator.hasNext()) {
             element = iterator.next();
             if (element instanceof RasterLayerDTO) {
-                clientFolderElements.add(this.convertRasterElement((RasterLayerDTO) element, parent));
+                clientFolderElements.add(this.convertRasterElement((RasterLayerDTO) element));
             } else if (element instanceof VectorLayerDTO) {
-                clientFolderElements.add(this.convertVectorElement((VectorLayerDTO) element, parent));
+                clientFolderElements.add(this.convertVectorElement((VectorLayerDTO) element));
             } else if (element instanceof FolderDTO) {
-                clientFolderElements.add(this.convertFolderElement((FolderDTO) element, parent));
+                clientFolderElements.add(this.convertFolderElement((FolderDTO) element));
             }
         }
-        List<ModelData> listModelData = new ArrayList<ModelData>();
-        for (Iterator<GPBeanTreeModel> it = clientFolderElements.iterator(); it.hasNext();) {
-            listModelData.add(it.next());
-        }
-        parent.setChildren(listModelData);
-        System.out.println("Client folder elements size: " + clientFolderElements.size());
         return clientFolderElements;
     }
 
-    private RasterTreeNode convertRasterElement(RasterLayerDTO rasterDTO, GPBeanTreeModel parent) {
+    private RasterTreeNode convertRasterElement(RasterLayerDTO rasterDTO) {
         RasterTreeNode raster = new RasterTreeNode();
         raster.setId(rasterDTO.getId());
         raster.setLabel(rasterDTO.getName());
@@ -114,13 +103,11 @@ public class DTOConverter {
         raster.setDataSource(rasterDTO.getUrlServer());
         raster.setzIndex(rasterDTO.getPosition());
         raster.setBbox(this.convertBbox(rasterDTO.getBbox()));
-        raster.setParent(parent);
-//        parent.add(raster);
         raster.setChecked(false);
         return raster;
     }
 
-    private VectorTreeNode convertVectorElement(VectorLayerDTO vectorDTO, GPBeanTreeModel parent) {
+    private VectorTreeNode convertVectorElement(VectorLayerDTO vectorDTO) {
         VectorTreeNode vector = new VectorTreeNode();
         vector.setId(vectorDTO.getId());
         this.setVectorLayerType(vector, vectorDTO.getLayerType());
@@ -129,19 +116,15 @@ public class DTOConverter {
         vector.setDataSource(vectorDTO.getUrlServer());
         vector.setzIndex(vectorDTO.getPosition());
         vector.setBbox(this.convertBbox(vectorDTO.getBbox()));
-        vector.setParent(parent);
-//        parent.add(vector);
         vector.setChecked(false);
         return vector;
     }
 
-    private FolderTreeNode convertFolderElement(FolderDTO folderDTO, GPBeanTreeModel parent) {
+    private FolderTreeNode convertFolderElement(FolderDTO folderDTO) {
         FolderTreeNode folder = new FolderTreeNode(folderDTO.getName());
         folder.setId(folderDTO.getId());
         folder.setzIndex(folderDTO.getPosition());
         folder.setNumberOfChildrens(folderDTO.getNumberOfChilds());
-        folder.setParent(parent);
-//        parent.add(folder);
         folder.setChecked(false);
         return folder;
     }

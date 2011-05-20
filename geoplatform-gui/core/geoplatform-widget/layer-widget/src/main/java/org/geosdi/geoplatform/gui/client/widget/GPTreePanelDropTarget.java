@@ -81,6 +81,9 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
         this.target = (GPBeanTreeModel) targetTreeModel;
         if (this.target instanceof GPRootTreeNode) {
             condition = false;// Elements above root not allowed
+        } else if (this.target instanceof FolderTreeNode && ((FolderTreeNode)this.target).getNumberOfChildrens() != 0
+                && !this.tree.isExpanded(target)){
+            condition = false;//Folder having elements must be expanded before drop on it
         } else if (this.target.isLeaf() && this.target instanceof FolderTreeNode) {
             boolean dropLeaf = super.isAllowDropOnLeaf();
             Feedback feedback = super.getFeedback();

@@ -45,10 +45,13 @@ import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.WidgetListener;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Status;
 import com.extjs.gxt.ui.client.widget.Viewport;
 import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
+import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
+import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 
 /**
  * @author giuseppe
@@ -62,6 +65,7 @@ public abstract class GeoPlatformLayoutManager {
     protected ContentPanel south;
     protected ContentPanel center;
     protected ContentPanel north;
+    protected Status statusMap;
 
     public GeoPlatformLayoutManager() {
         intiLayoutManager();
@@ -147,6 +151,16 @@ public abstract class GeoPlatformLayoutManager {
                 MapHandlerManager.fireEvent(new ScaleChangeEvent(XDOM.getViewportSize()));
             }
         });
+        
+        ToolBar toolBar = new ToolBar();
+
+        statusMap = new Status();
+        statusMap.setText("Not loading...");
+        statusMap.setWidth(150);
+        toolBar.add(statusMap);
+        toolBar.add(new FillToolItem());
+        
+        center.setBottomComponent(toolBar);
 
         viewport.add(center, data);
     }
@@ -207,4 +221,14 @@ public abstract class GeoPlatformLayoutManager {
         }
         return north;
     }
+
+    /**
+     * 
+     * @return Status Map component
+     */
+    public Status getStatusMap() {
+        return statusMap;
+    }
+    
+    
 }

@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.mvc;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import org.geosdi.geoplatform.gui.client.ServerEvents;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  *
@@ -51,7 +52,8 @@ public class ServerController extends GeoPlatformController {
      * 
      */
     public ServerController() {
-        registerEventTypes(ServerEvents.INIT_SERVER_WIDGET);
+        registerEventTypes(ServerEvents.INIT_SERVER_WIDGET,
+                GeoPlatformEvents.SHOW_CABABILITIES_SERVER_WIDGET);
     }
 
     @Override

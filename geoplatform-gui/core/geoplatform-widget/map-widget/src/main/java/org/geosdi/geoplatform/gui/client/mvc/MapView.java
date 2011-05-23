@@ -52,6 +52,7 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.gwtopenmaps.openlayers.client.control.Graticule;
 import org.gwtopenmaps.openlayers.client.control.GraticuleOptions;
 import org.gwtopenmaps.openlayers.client.symbolizer.LineSymbolizer;
@@ -123,6 +124,10 @@ public class MapView extends GeoPlatformView {
 
         if (event.getType() == GeoPlatformEvents.SCALE_REQUEST_CHANGE) {
             onScaleRequestChange(event);
+        }
+
+        if(event.getType() == GeoPlatformEvents.ZOOM_TO_MAX_EXTEND){
+            onZoomToMaxExtend(event);
         }
 
     }
@@ -277,5 +282,10 @@ public class MapView extends GeoPlatformView {
      */
     public ReverseGeocodingWidget getRevGeoWidget() {
         return revGeoWidget;
+    }
+
+    private void onZoomToMaxExtend(AppEvent event) {
+        BboxClientInfo bbox = (BboxClientInfo) event.getData();
+        this.mapLayout.zoomToMaxExtend(bbox);
     }
 }

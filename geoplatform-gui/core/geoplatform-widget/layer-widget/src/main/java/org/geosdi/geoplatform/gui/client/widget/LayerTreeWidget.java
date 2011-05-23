@@ -44,7 +44,6 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.ModelIconProvider;
 import com.extjs.gxt.ui.client.data.ModelStringProvider;
-import com.extjs.gxt.ui.client.data.TreeLoader;
 import com.extjs.gxt.ui.client.dnd.DND.Feedback;
 import com.extjs.gxt.ui.client.dnd.TreePanelDragSource;
 import com.extjs.gxt.ui.client.dnd.TreePanelDropTarget;
@@ -61,19 +60,13 @@ import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.menu.AddLayerAction;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 
@@ -86,7 +79,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget {
 
     private LayerRemoteAsync layerService = LayerRemoteImpl.Util.getInstance();
     private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(this.tree);
-    ;
+    
     private MediatorToolbarTreeAction actionMediator;
     private GPRootTreeNode root;
     private boolean initialized;
@@ -116,29 +109,6 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget {
      */
     public void buildTree() {
         if (!initialized) {
-            //this code is necessary for standard tree version
-            //I need to specify mock userID
-            layerService.loadUserFolders("user_0", new AsyncCallback<List<GPBeanTreeModel>>() {
-
-                @Override
-                public void onFailure(Throwable caught) {
-                    GeoPlatformMessage.errorMessage("Layer-Service",
-                            "Failed to load user folders");
-                    initialized = false;
-                }
-
-                @Override
-                public void onSuccess(List<GPBeanTreeModel> result) {
-                    List<FolderTreeNode> folderList = new ArrayList<FolderTreeNode>();
-                    for (Iterator<GPBeanTreeModel> it = result.iterator(); it.hasNext();) {
-                        folderList.add((FolderTreeNode) it.next());
-                    }
-                    root.addElements(folderList);
-//                    store.add(root, true);
-                    store.insert(root, result, 0, true);
-                    initialized = true;
-                }
-            });
             this.root.modelConverter(GeoPlatformUtils.getInstance().
                     getGlobalConfiguration().getFolderStore().
                     getFolders());

@@ -37,13 +37,13 @@ package org.geosdi.geoplatform.gui.client.model;
 
 import java.util.List;
 
-import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -56,6 +56,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
      *
      */
     private static final long serialVersionUID = 8265365333381641340L;
+    
     private List<String> styles;
     
     public RasterTreeNode(){}
@@ -95,7 +96,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
     @Override
     public AbstractImagePrototype getIcon() {
         // TODO Auto-generated method stub
-        return LayerResources.ICONS.raster();
+        return BasicWidgetResources.ICONS.raster();
     }
 
     /*

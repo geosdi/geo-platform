@@ -33,27 +33,21 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.client.icons;
 
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.gui.client.mvc.ServerController;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.google.gwt.user.client.ui.ImageBundle;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class ServerWidgetUI implements EntryPoint {
+public interface ServerWidgetIcons extends ImageBundle {
 
-    private Dispatcher dispatcher;
+    @Resource("server.png")
+    AbstractImagePrototype addServer();
 
-    @Override
-    public void onModuleLoad() {
-        dispatcher = Dispatcher.get();
-
-        dispatcher.addController(new ServerController());
-
-        dispatcher.dispatch(ServerEvents.INIT_SERVER_WIDGET);
-    }
+    @Resource("done.png")
+    AbstractImagePrototype done();
 }

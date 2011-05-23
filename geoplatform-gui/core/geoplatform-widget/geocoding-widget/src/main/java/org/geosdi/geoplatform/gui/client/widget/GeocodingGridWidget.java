@@ -99,7 +99,8 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
 
             @Override
             public void componentKeyUp(ComponentEvent event) {
-                if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE) || (event.getKeyCode() == KeyCodes.KEY_DELETE))
+                if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
+                        || (event.getKeyCode() == KeyCodes.KEY_DELETE))
                         && (search.getValue() == null)) {
                     removeMarkersOnMap();
                     cleanUpTheStore();
@@ -149,7 +150,8 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
             @Override
             public void handleEvent(BaseEvent be) {
                 Dispatcher.forwardEvent(
-                        GeoPlatformEvents.REGISTER_GEOCODING_LOCATION, grid.getSelectionModel().getSelectedItem());
+                        GeoPlatformEvents.REGISTER_GEOCODING_LOCATION,
+                        grid.getSelectionModel().getSelectedItem());
             }
         });
     }

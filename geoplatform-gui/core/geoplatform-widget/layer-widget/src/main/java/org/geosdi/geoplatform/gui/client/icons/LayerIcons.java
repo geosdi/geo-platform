@@ -55,9 +55,6 @@ public interface LayerIcons extends ImageBundle {
     @Resource("point.png")
     AbstractImagePrototype point();
 
-    @Resource("raster.png")
-    AbstractImagePrototype raster();
-
     @Resource("shape.png")
     AbstractImagePrototype shape();
 

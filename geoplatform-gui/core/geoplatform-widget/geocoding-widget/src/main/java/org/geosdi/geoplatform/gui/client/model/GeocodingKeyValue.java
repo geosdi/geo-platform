@@ -43,6 +43,7 @@ public enum GeocodingKeyValue {
 
     ID("id"), VISIBLE("visible"), DESCRIPTION("description"), ZERO_RESULTS(
     "ZERO_RESULTS");
+
     private String value;
 
     GeocodingKeyValue(String value) {

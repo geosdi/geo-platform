@@ -58,196 +58,194 @@ import com.google.gwt.user.client.ui.Image;
  */
 public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extends GeoPlatformController> {
 
-	/**
-	 * 
-	 * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
-	 * @email giuseppe.lascaleia@geosdi.org
-	 * 
-	 */
-	public enum TypeImage {
+    /**
+     *
+     * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+     * @email giuseppe.lascaleia@geosdi.org
+     *
+     */
+    public enum TypeImage {
 
-		IMAGE_LOADING(GWT.getModuleBaseURL() + "/gp-images/loading.gif"), IMAGE_RESULT_FOUND(
-				GWT.getModuleBaseURL() + "/gp-images/ok.png"), IMAGE_RESULT_NOT_FOUND(
-				GWT.getModuleBaseURL() + "/gp-images/not_found.png"), IMAGE_SERVICE_ERROR(
-				GWT.getModuleBaseURL() + "/gp-images/error.png");
+        IMAGE_LOADING(GWT.getModuleBaseURL() + "/gp-images/loading.gif"), IMAGE_RESULT_FOUND(
+        GWT.getModuleBaseURL() + "/gp-images/ok.png"), IMAGE_RESULT_NOT_FOUND(
+        GWT.getModuleBaseURL() + "/gp-images/not_found.png"), IMAGE_SERVICE_ERROR(
+        GWT.getModuleBaseURL() + "/gp-images/error.png");
 
-		private String value;
+        private String value;
 
-		TypeImage(String theValue) {
-			this.value = theValue;
-		}
+        TypeImage(String theValue) {
+            this.value = theValue;
+        }
 
-		public String toString() {
-			return this.value;
-		}
+        @Override
+        public String toString() {
+            return this.value;
+        }
+    }
 
-	}
+    protected C controller;
+    protected FlexTable tableWidget;
+    protected ListStore<T> store;
+    protected GPComboBox<T> combo;
+    protected Image loadImage;
+    protected Image display;
 
-	protected C controller;
-	protected FlexTable tableWidget;
-	protected ListStore<T> store;
-	protected GPComboBox<T> combo;
-	protected Image loadImage;
-	protected Image display;
+    /**
+     * @Default Constructor
+     *
+     */
+    public ComboSearchWidget() {
+        this.init();
+    }
 
-	/**
-	 * @Default Constructor
-	 * 
-	 */
-	public ComboSearchWidget() {
-		this.init();
-	}
+    /**
+     * @Constructor
+     *
+     * @param theController
+     */
+    public ComboSearchWidget(C theController) {
+        this.controller = theController;
+        this.init();
+    }
 
-	/**
-	 * @Constructor
-	 * 
-	 * @param theController
-	 */
-	public ComboSearchWidget(C theController) {
-		this.controller = theController;
-		this.init();
-	}
+    private void init() {
+        this.createCombo();
+        this.initWidget();
+    }
 
-	private void init() {
-		this.createCombo();
-		this.initWidget();
-	}
+    /**
+     * Create ComboBox
+     *
+     */
+    private void createCombo() {
+        // TODO Auto-generated method stub
+        this.store = new ListStore<T>();
+        this.combo = new GPComboBox<T>();
+        this.combo.setStore(store);
 
-	/**
-	 * Create ComboBox
-	 * 
-	 */
-	private void createCombo() {
-		// TODO Auto-generated method stub
-		this.store = new ListStore<T>();
-		this.combo = new GPComboBox<T>();
-		this.combo.setStore(store);
+        setWidgetProperties();
+        setComboToolTip();
 
-		setWidgetProperties();
-		setComboToolTip();
+        setComboSelectionChangedListener();
 
-		setComboSelectionChangedListener();
+    }
 
-	}
+    /**
+     * Create FormPanel
+     *
+     */
+    private void initWidget() {
+        tableWidget = new FlexTable();
 
-	/**
-	 * Create FormPanel
-	 * 
-	 */
-	private void initWidget() {
-		tableWidget = new FlexTable();
+        tableWidget.setCellSpacing(8);
+        tableWidget.setCellPadding(4);
 
-		tableWidget.setCellSpacing(8);
-		tableWidget.setCellPadding(4);
+        tableWidget.getCellFormatter().setHorizontalAlignment(1, 1,
+                HasHorizontalAlignment.ALIGN_CENTER);
 
-		tableWidget.getCellFormatter().setHorizontalAlignment(1, 1,
-				HasHorizontalAlignment.ALIGN_CENTER);
+        tableWidget.setWidget(1, 1, this.combo);
 
-		tableWidget.setWidget(1, 1, this.combo);
+        this.loadImage = new Image();
+        this.loadImage.setVisible(false);
 
-		this.loadImage = new Image();
-		this.loadImage.setVisible(false);
+        tableWidget.getCellFormatter().setHorizontalAlignment(1, 2,
+                HasHorizontalAlignment.ALIGN_CENTER);
 
-		tableWidget.getCellFormatter().setHorizontalAlignment(1, 2,
-				HasHorizontalAlignment.ALIGN_CENTER);
+        tableWidget.setWidget(1, 2, this.loadImage);
 
-		tableWidget.setWidget(1, 2, this.loadImage);
+        this.display = new Image();
+        this.display.setUrl(GWT.getModuleBaseURL() + "/gp-images/help-icon.png");
 
-		this.display = new Image();
-		this.display
-				.setUrl(GWT.getModuleBaseURL() + "/gp-images/help-icon.png");
+        this.display.setTitle("Reload Results after Combo Collapse.");
 
-		this.display.setTitle("Reload Results after Combo Collapse.");
+        this.display.addClickHandler(new ClickHandler() {
 
-		this.display.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                // TODO Auto-generated method stub
+                if (store.getModels().size() > 0) {
+                    combo.focus();
+                    combo.expand();
+                }
+            }
+        });
 
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				if (store.getModels().size() > 0) {
-					combo.focus();
-					combo.expand();
-				}
-			}
-		});
+        tableWidget.setWidget(1, 3, this.display);
+    }
 
-		tableWidget.setWidget(1, 3, this.display);
-	}
+    /**
+     *
+     */
+    private void setComboSelectionChangedListener() {
+        // TODO Auto-generated method stub
+        this.combo.addSelectionChangedListener(new SelectionChangedListener<T>() {
 
-	/**
-	 * 
-	 */
-	private void setComboSelectionChangedListener() {
-		// TODO Auto-generated method stub
-		this.combo
-				.addSelectionChangedListener(new SelectionChangedListener<T>() {
+            @Override
+            public void selectionChanged(SelectionChangedEvent<T> se) {
+                // TODO Auto-generated method stub
+                changeSelection(se);
+            }
+        });
+    }
 
-					@Override
-					public void selectionChanged(SelectionChangedEvent<T> se) {
-						// TODO Auto-generated method stub
-						changeSelection(se);
-					}
-				});
-	}
+    /**
+     *
+     * @param type
+     */
+    public void loadImage(TypeImage type, boolean visible) {
+        this.loadImage.setUrl(type.toString());
+        this.loadImage.setVisible(visible);
+    }
 
-	/**
-	 * 
-	 * @param type
-	 */
-	public void loadImage(TypeImage type, boolean visible) {
-		this.loadImage.setUrl(type.toString());
-		this.loadImage.setVisible(visible);
-	}
+    /**
+     *
+     * @param models
+     */
+    public void fillStore(List<T> models) {
+        this.store.add(models);
+    }
 
-	/**
-	 * 
-	 * @param models
-	 */
-	public void fillStore(List<T> models) {
-		this.store.add(models);
-	}
+    /**
+     * Clear the Store
+     */
+    public void clearStore() {
+        this.store.removeAll();
+    }
 
-	/**
-	 * Clear the Store
-	 */
-	public void clearStore() {
-		this.store.removeAll();
-	}
+    /**
+     * Clear Widget State
+     */
+    public void clearWidget() {
+        clearStore();
+        this.combo.collapse();
+        this.combo.setRawValue("");
+        this.loadImage.setUrl("");
+        this.loadImage.setVisible(false);
+    }
 
-	/**
-	 * Clear Widget State
-	 */
-	public void clearWidget() {
-		clearStore();
-		this.combo.collapse();
-		this.combo.setRawValue("");
-		this.loadImage.setUrl("");
-		this.loadImage.setVisible(false);
-	}
+    /**
+     * This method set Properties on ComboBox such us
+     * <ul>
+     * <li>Define a KeyListener on ComboBox</li>
+     * <li>Define the Display Field on ComboBox</li>
+     * </ul>
+     *
+     */
+    public abstract void setWidgetProperties();
 
-	/**
-	 * This method set Properties on ComboBox such us
-	 * <ul>
-	 * <li>Define a KeyListener on ComboBox</li>
-	 * <li>Define the Display Field on ComboBox</li>
-	 * </ul>
-	 * 
-	 */
-	public abstract void setWidgetProperties();
+    public abstract void setComboToolTip();
 
-	public abstract void setComboToolTip();
+    public abstract void changeSelection(SelectionChangedEvent<T> se);
 
-	public abstract void changeSelection(SelectionChangedEvent<T> se);
+    public void expand() {
+        combo.focus();
+        combo.expand();
+    }
 
-	public void expand() {
-		combo.focus();
-		combo.expand();
-	}
-
-	/**
-	 * @return the tableWidget
-	 */
-	public FlexTable getTableWidget() {
-		return tableWidget;
-	}
+    /**
+     * @return the tableWidget
+     */
+    public FlexTable getTableWidget() {
+        return tableWidget;
+    }
 }

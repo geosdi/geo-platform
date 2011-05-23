@@ -35,9 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
-import java.util.List;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemote;
@@ -55,12 +53,4 @@ public class GeoPlatformOGCRemoteImpl extends RemoteServiceServlet implements
      */
     private static final long serialVersionUID = 7340579377487014548L;
 
-    /* (non-Javadoc)
-     * @see org.geosdi.geoplatform.gui.service.GeoPlatformOGCRemote#getFolders()
-     */
-    @Override
-    public List<GPFolderClientInfo> getFolders() {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

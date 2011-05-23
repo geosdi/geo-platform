@@ -52,13 +52,42 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
      */
     private static final long serialVersionUID = 2095233644130779285L;
 
-    
+    private String name;
+    private String abstractText;
     private String label;
     private int zIndex;
+    private boolean isChecked = false;
 
     public GPBeanTreeModel() {
     }
-    private boolean isChecked = false;
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the abstractText
+     */
+    public String getAbstractText() {
+        return abstractText;
+    }
+
+    /**
+     * @param abstractText the abstractText to set
+     */
+    public void setAbstractText(String abstractText) {
+        this.abstractText = abstractText;
+    }
 
     /**
      * @return the label
@@ -85,9 +114,7 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
         return zIndex;
     }
 
-    public abstract void accept(IVisitor visitor);
-
-    /**
+     /**
      * @return the isChecked
      */
     public boolean isChecked() {
@@ -100,4 +127,7 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
     public void setChecked(boolean isChecked) {
         this.isChecked = isChecked;
     }
+
+    public abstract void accept(IVisitor visitor);
+
 }

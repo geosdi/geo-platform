@@ -33,27 +33,80 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.client.widget;
 
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.gui.client.mvc.ServerController;
+import com.extjs.gxt.ui.client.event.WindowEvent;
+import com.extjs.gxt.ui.client.event.WindowListener;
+import com.extjs.gxt.ui.client.widget.Window;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class ServerWidgetUI implements EntryPoint {
+public class CababilitiesServerWidget extends Window {
 
-    private Dispatcher dispatcher;
+    private GridLayersWidget gridLayers;
+    private boolean initialized;
+
+    /**
+     *
+     * @param lazy
+     *       If true the component will not build in Construction Fase
+     *       otherwise set to False
+     */
+    public CababilitiesServerWidget(boolean lazy) {
+        if (!lazy) {
+            init();
+        }
+    }
+
+    private void init() {
+        if (!isInitialized()) {
+            initializeWindow();
+            initComponents();
+            this.initialized = true;
+        }
+    }
+
+    private void initializeWindow() {
+        super.setSize(600, 400);
+        setResizable(false);
+
+        addWindowListener(new WindowListener() {
+
+            @Override
+            public void windowHide(WindowEvent we) {
+                resetComponents();
+            }
+        });
+
+        setLayout(new FitLayout());
+        setModal(true);
+        setPlain(true);
+    }
+
+    private void initComponents() {
+        this.gridLayers = new GridLayersWidget();
+        super.add(this.gridLayers.getFormPanel());
+    }
+
+    private void resetComponents() {
+        
+    }
 
     @Override
-    public void onModuleLoad() {
-        dispatcher = Dispatcher.get();
+    public void show() {
+        if(!isInitialized())
+            this.init();
+       super.show();
+    }
 
-        dispatcher.addController(new ServerController());
-
-        dispatcher.dispatch(ServerEvents.INIT_SERVER_WIDGET);
+    /**
+     * @return the initialized
+     */
+    public boolean isInitialized() {
+        return initialized;
     }
 }

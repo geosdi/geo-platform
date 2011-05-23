@@ -33,27 +33,33 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.client.model;
 
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.gui.client.mvc.ServerController;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class ServerWidgetUI implements EntryPoint {
+public class GPVectorBeanModel extends GPLayerBeanModel implements GPVectorBean {
 
-    private Dispatcher dispatcher;
+    private static final long serialVersionUID = 211533898795409938L;
+
+    private String featureNameSpace;
 
     @Override
-    public void onModuleLoad() {
-        dispatcher = Dispatcher.get();
+    public String getFeatureNameSpace() {
+        return this.featureNameSpace;
+    }
 
-        dispatcher.addController(new ServerController());
+    @Override
+    public void setFeatureNameSpace(String featureNameSpace) {
+        this.featureNameSpace = featureNameSpace;
+    }
 
-        dispatcher.dispatch(ServerEvents.INIT_SERVER_WIDGET);
+    @Override
+    public String toString() {
+        return "GPVectorBeanModel{" + "featureNameSpace=" + featureNameSpace + '}';
     }
 }

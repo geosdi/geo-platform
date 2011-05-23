@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.configuration.grid;
 
-import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+import com.extjs.gxt.ui.client.data.ModelData;
 
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 
@@ -43,7 +43,7 @@ import com.extjs.gxt.ui.client.widget.grid.Grid;
  * @author giuseppe
  * 
  */
-public interface IGeoPlatformGrid<T extends GeoPlatformBeanModel> {
+public interface IGeoPlatformGrid<T extends ModelData> {
 
     public Grid<T> getGrid();
 }

@@ -1,23 +1,24 @@
+
 <module>
-	<inherits name='com.google.gwt.user.User' />
-	<inherits name='com.extjs.gxt.ui.GXT' />
+    <inherits name='com.google.gwt.user.User' />
+    <inherits name='com.extjs.gxt.ui.GXT' />
 	
 	<!-- ADDING GEOPLATFORM-RESOURCES MODULE -->
-	<inherits name='org.geosdi.geoplatform.gui.Resources' />
+    <inherits name='org.geosdi.geoplatform.gui.Resources' />
 	
-	<source path="client" />
+    <source path="client" />
 	
-	<source path="configuration" />
-	<source path="configuration/mvc" />
-	<source path="configuration/action" />
-	<source path="global" />
-	<source path="model" />
-	<source path="puregwt" />
-	<source path="service" />
-	<source path="view" />
-	<source path="action" />
-	<source path="impl" />
-	<source path="utility" />
-	<source path="factory" />
+    <source path="configuration" />
+    <source path="configuration/mvc" />
+    <source path="configuration/action" />
+    <source path="global" />
+    <source path="model" />
+    <source path="puregwt" />
+    <source path="service" />
+    <source path="view" />
+    <source path="action" />
+    <source path="impl" />
+    <source path="utility" />
+    <source path="factory" />
 	
 </module>

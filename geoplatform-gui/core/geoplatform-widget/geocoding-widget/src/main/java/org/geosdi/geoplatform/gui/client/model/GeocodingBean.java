@@ -72,6 +72,7 @@ public class GeocodingBean extends GeoPlatformBeanModel implements
     /**
      * @return the lon
      */
+    @Override
     public double getLon() {
         return lon;
     }
@@ -80,6 +81,7 @@ public class GeocodingBean extends GeoPlatformBeanModel implements
      * @param lon
      *            the lon to set
      */
+    @Override
     public void setLon(double lon) {
         this.lon = lon;
     }
@@ -87,6 +89,7 @@ public class GeocodingBean extends GeoPlatformBeanModel implements
     /**
      * @return the lat
      */
+    @Override
     public double getLat() {
         return lat;
     }
@@ -95,6 +98,7 @@ public class GeocodingBean extends GeoPlatformBeanModel implements
      * @param lat
      *            the lat to set
      */
+    @Override
     public void setLat(double lat) {
         this.lat = lat;
     }

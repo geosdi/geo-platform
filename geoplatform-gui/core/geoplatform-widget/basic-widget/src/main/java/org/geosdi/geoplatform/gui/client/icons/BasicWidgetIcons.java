@@ -45,25 +45,27 @@ import com.google.gwt.user.client.ui.ImageBundle;
 @SuppressWarnings("deprecation")
 public interface BasicWidgetIcons extends ImageBundle {
 
-	@Resource("cancel.png")
-	AbstractImagePrototype cancel();
+    @Resource("cancel.png")
+    AbstractImagePrototype cancel();
 
-	@Resource("reset.png")
-	AbstractImagePrototype reset();
+    @Resource("reset.png")
+    AbstractImagePrototype reset();
 
-	@Resource("save.png")
-	AbstractImagePrototype save();
+    @Resource("save.png")
+    AbstractImagePrototype save();
 
-	@Resource("select.png")
-	AbstractImagePrototype select();
+    @Resource("select.png")
+    AbstractImagePrototype select();
 
-	@Resource("search.png")
-	AbstractImagePrototype search();
+    @Resource("search.png")
+    AbstractImagePrototype search();
 
-	@Resource("routing.png")
-	AbstractImagePrototype routing();
+    @Resource("routing.png")
+    AbstractImagePrototype routing();
 
-	@Resource("eraser_minus.png")
-	AbstractImagePrototype erase();
+    @Resource("eraser_minus.png")
+    AbstractImagePrototype erase();
 
+    @Resource("raster.png")
+    AbstractImagePrototype raster();
 }

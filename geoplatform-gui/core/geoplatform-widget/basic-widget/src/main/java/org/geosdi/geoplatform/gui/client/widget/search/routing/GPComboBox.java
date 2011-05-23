@@ -50,23 +50,24 @@ import com.google.gwt.event.dom.client.KeyCodes;
  */
 public class GPComboBox<T extends GeoPlatformBeanModel> extends ComboBox<T> {
 
-	/**
-	 * This Method must be override to prevente any errors on Widget
-	 * 
-	 * Clear Component Status for Widget :
-	 * <ul>
-	 * <li>Clear Store</li>
-	 * <li>Collapse ComboBox</li>
-	 * <li>Remove Marker on the Map</li>
-	 * </ul>
-	 * 
-	 */
-	@Override
-	protected void onKeyUp(FieldEvent fe) {
-		if (((fe.getKeyCode() == KeyCodes.KEY_BACKSPACE) || (fe.getKeyCode() == KeyCodes.KEY_DELETE))
-				&& (getRawValue().equals(""))) {
-			RoutingHandlerManager.fireEventFromSource(new CleanComboEvent(),
-					this);
-		}
-	}
+    /**
+     * This Method must be override to prevente any errors on Widget
+     *
+     * Clear Component Status for Widget :
+     * <ul>
+     * <li>Clear Store</li>
+     * <li>Collapse ComboBox</li>
+     * <li>Remove Marker on the Map</li>
+     * </ul>
+     *
+     */
+    @Override
+    protected void onKeyUp(FieldEvent fe) {
+        if (((fe.getKeyCode() == KeyCodes.KEY_BACKSPACE)
+                || (fe.getKeyCode() == KeyCodes.KEY_DELETE))
+                && (getRawValue().equals(""))) {
+            RoutingHandlerManager.fireEventFromSource(new CleanComboEvent(),
+                    this);
+        }
+    }
 }

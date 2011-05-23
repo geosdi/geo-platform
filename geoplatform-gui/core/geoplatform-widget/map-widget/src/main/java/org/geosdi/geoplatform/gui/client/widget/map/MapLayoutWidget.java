@@ -75,6 +75,7 @@ import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.gwtopenmaps.openlayers.client.control.MousePosition;
 
 /**
@@ -120,7 +121,8 @@ public class MapLayoutWidget implements GeoPlatformMap {
         this.defaultMapOptions.setUnits(MapUnits.METERS);
         this.defaultMapOptions.setMaxExtent(new Bounds(-20037508, -20037508,
                 20037508, 20037508.34));
-        this.defaultMapOptions.setMaxResolution(new Double(156543.0339).floatValue());
+        this.defaultMapOptions.setMaxResolution(
+                new Double(156543.0339).floatValue());
 
         initMapWidget(this.defaultMapOptions);
     }
@@ -131,8 +133,8 @@ public class MapLayoutWidget implements GeoPlatformMap {
         this.map.addControl(new LayerSwitcher());
         this.map.addControl(new ScaleLine());
         this.map.addControl(new MousePosition());
-        
-       
+
+
         this.addMeasureControl();
         this.addMeasureAreaControl();
 
@@ -284,7 +286,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
     public void setMapCenter() {
         // TODO Auto-generated method stub
         LonLat center = new LonLat(13.375, 42.329);
-        center.transform("EPSG:4326", "EPSG:900913");
+        center.transform("EPSG:4326", map.getProjection());
         this.map.setCenter(center, 5);
 
         this.mapControl.clearNavigationHistory();
@@ -517,5 +519,18 @@ public class MapLayoutWidget implements GeoPlatformMap {
     public void deactivateDrawLineFeature() {
         // TODO Auto-generated method stub
         this.mapControl.deactivateDrawLineFeature();
+    }
+
+    /**
+     * 
+     * @param bbox
+     */
+    public void zoomToMaxExtend(BboxClientInfo bbox) {
+        Bounds b = new Bounds(bbox.getLowerLeftX(), bbox.getLowerLeftY(),
+                bbox.getUpperRightX(), bbox.getUpperRightY());
+
+        b.transform(new Projection("EPSG:4326"), new Projection(map.getProjection()));
+
+        this.map.zoomToExtent(b);
     }
 }

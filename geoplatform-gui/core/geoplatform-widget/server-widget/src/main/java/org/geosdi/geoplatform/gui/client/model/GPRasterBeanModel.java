@@ -33,27 +33,29 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.client.model;
 
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.gui.client.mvc.ServerController;
+import java.util.List;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class ServerWidgetUI implements EntryPoint {
+public class GPRasterBeanModel extends GPLayerBeanModel implements GPRasterBean {
 
-    private Dispatcher dispatcher;
+    private static final long serialVersionUID = -421196804918413910L;
+    
+    private List<String> styles;
 
     @Override
-    public void onModuleLoad() {
-        dispatcher = Dispatcher.get();
+    public List<String> getStyles() {
+        return this.styles;
+    }
 
-        dispatcher.addController(new ServerController());
-
-        dispatcher.dispatch(ServerEvents.INIT_SERVER_WIDGET);
+    @Override
+    public void setStyles(List<String> styles) {
+        this.styles = styles;
     }
 }

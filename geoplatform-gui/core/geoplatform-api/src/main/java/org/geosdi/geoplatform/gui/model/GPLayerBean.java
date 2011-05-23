@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.model;
 
+import com.extjs.gxt.ui.client.data.ModelData;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 
@@ -43,7 +44,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface GPLayerBean {
+public interface GPLayerBean extends ModelData{
 
     public long getId();
 
@@ -52,6 +53,14 @@ public interface GPLayerBean {
     public String getLabel();
 
     public void setLabel(String label);
+
+    public void setName(String name);
+
+    public String getName();
+
+    public void setAbstractText(String abstractText);
+
+    public String getAbstractText();
 
     public String getDataSource();
 

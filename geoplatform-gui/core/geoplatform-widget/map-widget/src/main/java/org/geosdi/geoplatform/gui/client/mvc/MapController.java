@@ -49,66 +49,70 @@ import com.extjs.gxt.ui.client.mvc.AppEvent;
  */
 public class MapController extends GeoPlatformController {
 
-	public MapController() {
-		registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_MAP_WIDGET,
-				MapWidgetEvents.ATTACH_TOOLBAR, MapWidgetEvents.ERASE_FEATURE,
-				MapWidgetEvents.DRAW_FEATURE, GeoPlatformEvents.UPDATE_CENTER,
-                                MapWidgetEvents.ACTIVATE_GRATICULE, MapWidgetEvents.DEACTIVATE_GRATICULE,
-				GeoPlatformEvents.REGISTER_GEOCODING_LOCATION,
-				GeoPlatformEvents.RemoveMarker, GeoPlatformEvents.SCALE_REQUEST_CHANGE);
-	}
+    public MapController() {
+        registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
+                MapWidgetEvents.ATTACH_MAP_WIDGET,
+                MapWidgetEvents.ATTACH_TOOLBAR, MapWidgetEvents.ERASE_FEATURE,
+                MapWidgetEvents.DRAW_FEATURE, GeoPlatformEvents.UPDATE_CENTER,
+                MapWidgetEvents.ACTIVATE_GRATICULE,
+                MapWidgetEvents.DEACTIVATE_GRATICULE,
+                GeoPlatformEvents.REGISTER_GEOCODING_LOCATION,
+                GeoPlatformEvents.RemoveMarker,
+                GeoPlatformEvents.SCALE_REQUEST_CHANGE,
+                GeoPlatformEvents.ZOOM_TO_MAX_EXTEND);
+    }
 
-	@Override
-	public void initialize() {
-		this.view = new MapView(this);
-	}
+    @Override
+    public void initialize() {
+        this.view = new MapView(this);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client
-	 * .mvc.AppEvent)
-	 */
-	@Override
-	public void handleEvent(AppEvent event) {
-		if (event.getType() == MapWidgetEvents.ERASE_FEATURE)
-			onEraseFeature(event);
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client
+     * .mvc.AppEvent)
+     */
+    @Override
+    public void handleEvent(AppEvent event) {
+        if (event.getType() == MapWidgetEvents.ERASE_FEATURE) {
+            onEraseFeature(event);
+        }
 
-		if (event.getType() == GeoPlatformEvents.UPDATE_CENTER)
-			onUpdateCenter();
+        if (event.getType() == GeoPlatformEvents.UPDATE_CENTER) {
+            onUpdateCenter();
+        }
 
-		if (event.getType() == MapWidgetEvents.DRAW_FEATURE)
-			onDrawFeature(event);
+        if (event.getType() == MapWidgetEvents.DRAW_FEATURE) {
+            onDrawFeature(event);
+        }
 
-		forwardToView(view, event);
-	}
+        forwardToView(view, event);
+    }
 
-	
-	private void onDrawFeature(AppEvent event) {
-		// TODO Auto-generated method stub
-		((MapView) this.view).drawFeature((VectorFeature) event.getData());
-	}
+    private void onDrawFeature(AppEvent event) {
+        // TODO Auto-generated method stub
+        ((MapView) this.view).drawFeature((VectorFeature) event.getData());
+    }
 
-	public void onRedrawVectorLayer() {
-		((MapView) this.view).redrawVectorLayer();
-	}
+    public void onRedrawVectorLayer() {
+        ((MapView) this.view).redrawVectorLayer();
+    }
 
-	/**
-	 * 
-	 * @param event
-	 */
-	private void onEraseFeature(AppEvent event) {
-		// TODO Auto-generated method stub
-		((MapView) this.view).eraseFeature((VectorFeature) event.getData());
-	}
+    /**
+     *
+     * @param event
+     */
+    private void onEraseFeature(AppEvent event) {
+        // TODO Auto-generated method stub
+        ((MapView) this.view).eraseFeature((VectorFeature) event.getData());
+    }
 
-	/**
-	 * Update Center Widget
-	 */
-	private void onUpdateCenter() {
-		((MapView) this.view).updateMapSize();
-	}
-
+    /**
+     * Update Center Widget
+     */
+    private void onUpdateCenter() {
+        ((MapView) this.view).updateMapSize();
+    }
 }

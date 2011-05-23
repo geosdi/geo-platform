@@ -35,25 +35,17 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.gui.client.mvc.ServerController;
+import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.icons.ServerWidgetIcons;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class ServerWidgetUI implements EntryPoint {
+public class ServerWidgetResources {
 
-    private Dispatcher dispatcher;
+    public static final ServerWidgetIcons ICONS = GWT.create(
+            ServerWidgetIcons.class);
 
-    @Override
-    public void onModuleLoad() {
-        dispatcher = Dispatcher.get();
-
-        dispatcher.addController(new ServerController());
-
-        dispatcher.dispatch(ServerEvents.INIT_SERVER_WIDGET);
-    }
 }

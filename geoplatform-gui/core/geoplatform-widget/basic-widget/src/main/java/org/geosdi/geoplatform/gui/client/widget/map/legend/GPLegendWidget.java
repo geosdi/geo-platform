@@ -39,6 +39,8 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Html;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.google.gwt.user.client.ui.Image;
 
 /**
@@ -49,7 +51,7 @@ import com.google.gwt.user.client.ui.Image;
 public class GPLegendWidget {
 
     protected static final String GET_LEGEND_REQUEST = "?REQUEST=GetLegendGraphic"
-            + "&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=";
+            + "&VERSION=1.0.0&FORMAT=image/png&WIDTH=18&HEIGHT=18&LAYER=";
     protected ContentPanel legendsStore;
 
     /**
@@ -59,6 +61,9 @@ public class GPLegendWidget {
     public GPLegendWidget() {
         this.legendsStore = new ContentPanel();
         this.legendsStore.setHeaderVisible(false);
+        this.legendsStore.setBodyBorder(false);
+        this.legendsStore.setBorders(false);
+        //this.legendsStore.setLayout(new BorderLayout());
     }
 
     /**
@@ -71,12 +76,23 @@ public class GPLegendWidget {
             ContentPanel cp = new ContentPanel();
             cp.setHeading(layerBean.getLabel());
             cp.setId(layerBean.getLabel());
+            cp.setHeaderVisible(false);
+            cp.setBorders(false);
+            cp.setBodyBorder(false);
+            
+            cp.add(new Html("<h3>"+layerBean.getLabel()+"</h3>"));
 
-            Image image = new Image(
-                    layerBean instanceof GPRasterBean ? layerBean.getDataSource()
-                    + GET_LEGEND_REQUEST + layerBean.getLabel()
-                    : layerBean.getDataSource().replaceAll("wfs", "wms")
+            
+            Image image;
+//            System.out.println("LEGEND URL: "+ layerBean.getDataSource()
+//                    + GET_LEGEND_REQUEST + layerBean.getLabel());
+            if(layerBean instanceof GPRasterBean || layerBean.getDataSource().contains("gwc/service/wms")) {
+                image = new Image(layerBean.getDataSource().replaceAll("gwc/service/wms", "wms") + GET_LEGEND_REQUEST + layerBean.getLabel());
+            } else {
+                layerBean.getDataSource().replaceAll("wfs", "wms");
+                image = new Image(layerBean.getDataSource()
                     + GET_LEGEND_REQUEST + layerBean.getLabel());
+            }
 
             cp.add(image);
 

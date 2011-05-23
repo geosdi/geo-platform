@@ -66,7 +66,8 @@ public class FolderDTO extends AbstractElementDTO {
      * @param folder
      */
     public FolderDTO(GPFolder folder) {
-        super(folder.getId(), folder.getName(), folder.getPosition(), folder.isShared());
+        super(folder.getId(), folder.getName(), folder.getPosition(), 
+                folder.isShared(), folder.isChecked());
     }
     //</editor-fold>
 

@@ -234,12 +234,14 @@ public abstract class BaseDAOTest {
         emptySubFolderA.setName("empty subfolder A");
         emptySubFolderA.setPosition(++position);
         emptySubFolderA.setParent(onlyFolders);
+        emptySubFolderA.setChecked(true);
         
         // "only folders" ---> "empty subfolder B"
         GPFolder emptySubFolderB = new GPFolder();
         emptySubFolderB.setName("empty subfolder B");
         emptySubFolderB.setPosition(++position);
         emptySubFolderB.setParent(onlyFolders);
+        emptySubFolderB.setChecked(true);
         
         folderDAO.persist(onlyFolders, emptySubFolderA, emptySubFolderB);
         
@@ -336,7 +338,8 @@ public abstract class BaseDAOTest {
             vectorLayer1.setBbox(new GPBBox(1.1, 2.2, 3.3, 3.3));
             vectorLayer1.setLayerType(GPLayerType.MULTIPOLYGON);
             vectorLayer1.setFolder(folderIGM);
-            layerDAO.persist(vectorLayer1);            
+            vectorLayer1.setChecked(true);
+            layerDAO.persist(vectorLayer1);
 
         } catch (IOException e) {
             //There was an error communicating with the server

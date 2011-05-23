@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.acl.dao.impl;
 
+import com.trg.search.Search;
 import org.geosdi.geoplatform.core.acl.AclSid;
 import org.geosdi.geoplatform.core.acl.dao.AclSidDAO;
 import org.geosdi.geoplatform.core.dao.impl.BaseDAO;
@@ -59,5 +60,13 @@ public class AclSidDAOImpl extends BaseDAO<AclSid, Long> implements AclSidDAO {
     @Override
     public boolean remove(AclSid sid) {
         return super.remove(sid);
+    }
+
+    @Override
+    public AclSid findBySid(String sid, boolean principal) {
+        Search search = new Search();
+        search.addFilterEqual("sid", sid);
+        search.addFilterEqual("principal", principal);
+        return searchUnique(search);        
     }
 }

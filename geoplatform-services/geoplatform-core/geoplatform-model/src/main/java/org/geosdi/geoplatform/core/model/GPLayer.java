@@ -102,6 +102,9 @@ public abstract class GPLayer implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private GPLayerType layerType;
+    
+    @Column(name = "checked")
+    private boolean checked = false;    
 
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
@@ -251,6 +254,20 @@ public abstract class GPLayer implements Serializable {
         this.layerType = layerType;
     }
 
+    /**
+     * @return the checked
+     */    
+    public boolean isChecked() {
+        return checked;
+    }
+
+    /**
+     * @param checked
+     *            the checked to set
+     */    
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }       
     //</editor-fold>
 
     /*

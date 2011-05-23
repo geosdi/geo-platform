@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.acl.dao.impl;
 
+import com.trg.search.Search;
 import org.geosdi.geoplatform.core.acl.AclObjectIdentity;
 import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
 import org.geosdi.geoplatform.core.dao.impl.BaseDAO;
@@ -60,5 +61,13 @@ public class AclObjectIdentityDAOImpl extends BaseDAO<AclObjectIdentity, Long>
     @Override
     public boolean remove(AclObjectIdentity objectIdentity) {
         return super.remove(objectIdentity);
+    }
+
+    @Override
+    public AclObjectIdentity findByObjectId(long objectIdClass, long objectIdIdentity) {
+        Search search = new Search();
+        search.addFilterEqual("object_id_class", objectIdClass);
+        search.addFilterEqual("object_id_identity", objectIdIdentity);
+        return searchUnique(search);
     }
 }

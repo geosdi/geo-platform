@@ -81,7 +81,7 @@ public class GPFolder implements Serializable {
     private int position;
 
     @Column(name = "shared")
-    private boolean shared = false;
+    private boolean shared = false;    
 
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -90,6 +90,9 @@ public class GPFolder implements Serializable {
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPUser owner;
+    
+    @Column(name = "checked")
+    private boolean checked = false;    
 
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
@@ -178,6 +181,21 @@ public class GPFolder implements Serializable {
      */
     public void setOwner(GPUser owner) {
         this.owner = owner;
+    }
+
+    /**
+     * @return the checked
+     */    
+    public boolean isChecked() {
+        return checked;
+    }
+
+    /**
+     * @param checked
+     *            the checked to set
+     */    
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
     //</editor-fold>
 

@@ -59,4 +59,6 @@ public interface AclClassDAO {
     public boolean remove(AclClass clazz);
 
     public boolean removeById(Long clazzId);
+    
+    public AclClass findByClass(String clazz);
 }

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.data.BaseTreeLoader;
+import com.extjs.gxt.ui.client.data.DataReader;
 import org.geosdi.geoplatform.gui.client.listener.GPDNDListener;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -87,6 +88,7 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
     private MediatorToolbarTreeAction actionMediator;
     private GPRootTreeNode root;
     private boolean initialized;
+    private GPLoadListener loadListener;
 
     /**
      * @Constructor
@@ -265,7 +267,7 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
     @Override
     public RpcProxy<List<GPBeanTreeModel>> generateRpcProxy() {
         RpcProxy<List<GPBeanTreeModel>> rpcProxy = new RpcProxy<List<GPBeanTreeModel>>() {
-
+            
             @Override
             protected void load(Object loadConfig, AsyncCallback<List<GPBeanTreeModel>> callback) {
                 if (initialized == false) {
@@ -275,7 +277,7 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
                     initialized = true;
                 } else if (loadConfig != null && (loadConfig instanceof FolderTreeNode || loadConfig instanceof GPRootTreeNode)) {
                     tmpFolder = (GPBeanTreeModel) loadConfig;
-                    layerService.loadFolderElements(((FolderTreeNode)tmpFolder).getId(), callback);
+                    layerService.loadFolderElements(((FolderTreeNode) tmpFolder).getId(), callback);
                 }
             }
         };
@@ -289,15 +291,16 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
             @Override
             public boolean hasChildren(GPBeanTreeModel element) {
                 boolean condition = false;
-                if ((element instanceof FolderTreeNode && ((FolderTreeNode) element).getNumberOfChildrens() != 0)
-                        || element instanceof GPRootTreeNode) {
+                if (element instanceof FolderTreeNode || element instanceof GPRootTreeNode) {
                     condition = true;
                 }
                 //System.out.println("Node hasChildren: " + condition);
                 return condition;
             }
+
         };
-        treeLoader.addLoadListener(new GPLoadListener(this));
+        this.loadListener = new GPLoadListener(this);
+        treeLoader.addLoadListener(this.loadListener);
         return treeLoader;
     }
 
@@ -307,8 +310,8 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
     public GPRootTreeNode getRoot() {
         return root;
     }
-    
-    public GPBeanTreeModel getSelectedFolder(){
+
+    public GPBeanTreeModel getSelectedFolder() {
         return this.tmpFolder;
     }
 }

@@ -46,13 +46,14 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email  nazzareno.sileno@geosdi.org
  */
 public class VisitorPosition extends AbstractVisitTree
-        implements IVisitor{
+        implements IVisitor {
 
     private int tmpIndex = -1;
     private boolean stopIterating;
@@ -91,10 +92,21 @@ public class VisitorPosition extends AbstractVisitTree
             System.out.println("In FixPosition: returning without index changes");
             return;
         }
+        this.updateNumberOfChildrens(oldParent, parentDestination);
+
         System.out.println(this.startPosition == null ? null : "Start Position: " + this.startPosition.getLabel());
         System.out.println(this.endPosition == null ? null : "End position: " + this.endPosition.getLabel());
         this.preorderTraversal();
         System.out.println("End modification");
+    }
+
+    private void updateNumberOfChildrens(GPBeanTreeModel oldParent, GPBeanTreeModel parentDestination) {
+        if (oldParent instanceof FolderTreeNode) {
+            ((FolderTreeNode) oldParent).setNumberOfChildrens(((FolderTreeNode) oldParent).getNumberOfChildrens() - 1);
+        }
+        if (parentDestination instanceof FolderTreeNode) {
+            ((FolderTreeNode) parentDestination).setNumberOfChildrens(((FolderTreeNode) parentDestination).getNumberOfChildrens() + 1);
+        }
     }
 
     private int getNewZIndex(GPBeanTreeModel parentDestination, int newIndex) {
@@ -108,8 +120,6 @@ public class VisitorPosition extends AbstractVisitTree
         }
         return newZIndex;
     }
-
-
 
     private void preorderTraversal() {
         assert (this.startPosition != null) : "You need to specify a startPosition before call this method";

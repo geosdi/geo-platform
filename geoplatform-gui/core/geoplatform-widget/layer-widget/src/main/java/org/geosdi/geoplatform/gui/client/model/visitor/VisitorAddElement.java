@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.model.visitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
@@ -58,11 +59,12 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
     private GPRootTreeNode rootElement;
     private boolean stopIterating;
 
-    public VisitorAddElement(GPRootTreeNode root){
+    public VisitorAddElement(GPRootTreeNode root) {
         this.rootElement = root;
     }
 
-    public VisitorAddElement(){}
+    public VisitorAddElement() {
+    }
 
     public void insertElement(GPBeanTreeModel newElement,
             GPBeanTreeModel parentDestination, int newIndex) {
@@ -70,14 +72,21 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
         parentDestination.insert(newElement, newIndex);
         this.endPosition = super.getNextUnvisitedElement(newElement);
         this.preorderTraversal();
+        this.updateNumberOfChildrens(parentDestination);
+    }
+
+    private void updateNumberOfChildrens(GPBeanTreeModel parentDestination) {
+        if (parentDestination instanceof FolderTreeNode) {
+            ((FolderTreeNode) parentDestination).setNumberOfChildrens(((FolderTreeNode) parentDestination).getNumberOfChildrens() + 1);
+        }
     }
 
     //TODO: Gestire gli indici nel caso di aggiunta di più elementi
     private void preorderTraversal() {
-        if(this.rootElement == null){
+        if (this.rootElement == null) {
             this.rootElement = super.findRootElement(this.endPosition);
         }
-        this.rootElement.setzIndex(this.rootElement.getzIndex()+1);
+        this.rootElement.setzIndex(this.rootElement.getzIndex() + 1);
         this.tmpElement = this.rootElement;
         this.tmpIndex = this.tmpElement.getzIndex();
         while (!this.isPreorderExitCondition()) {

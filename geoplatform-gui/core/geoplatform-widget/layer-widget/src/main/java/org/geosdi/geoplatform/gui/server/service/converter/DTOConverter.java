@@ -103,7 +103,7 @@ public class DTOConverter {
         raster.setDataSource(rasterDTO.getUrlServer());
         raster.setzIndex(rasterDTO.getPosition());
         raster.setBbox(this.convertBbox(rasterDTO.getBbox()));
-        raster.setChecked(false);
+        raster.setChecked(raster.isChecked());
         return raster;
     }
 
@@ -116,7 +116,7 @@ public class DTOConverter {
         vector.setDataSource(vectorDTO.getUrlServer());
         vector.setzIndex(vectorDTO.getPosition());
         vector.setBbox(this.convertBbox(vectorDTO.getBbox()));
-        vector.setChecked(false);
+        vector.setChecked(vector.isChecked());
         return vector;
     }
 
@@ -125,11 +125,11 @@ public class DTOConverter {
         folder.setId(folderDTO.getId());
         folder.setzIndex(folderDTO.getPosition());
         folder.setNumberOfChildrens(folderDTO.getNumberOfChilds());
-        folder.setChecked(false);
+        folder.setChecked(folderDTO.isChecked());
         return folder;
     }
-    
-    private BboxClientInfo convertBbox(GPBBox gpBbox){
+
+    private BboxClientInfo convertBbox(GPBBox gpBbox) {
         return new BboxClientInfo(gpBbox.getMinX(), gpBbox.getMinY(), gpBbox.getMaxX(), gpBbox.getMaxY());
     }
 

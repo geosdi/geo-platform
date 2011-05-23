@@ -155,7 +155,7 @@ public abstract class GeoPlatformLayoutManager {
         ToolBar toolBar = new ToolBar();
 
         statusMap = new Status();
-        statusMap.setText("Not loading...");
+        statusMap.setText("Wellcome to GeoPortal.");
         statusMap.setWidth(150);
         toolBar.add(statusMap);
         toolBar.add(new FillToolItem());

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.model.visitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
@@ -58,25 +59,33 @@ public class VisitorDeleteElement extends AbstractVisitTree implements IVisitor 
     private GPRootTreeNode rootElement;
     private boolean stopIterating;
 
-    public VisitorDeleteElement(GPRootTreeNode root){
+    public VisitorDeleteElement(GPRootTreeNode root) {
         this.rootElement = root;
     }
 
-    public VisitorDeleteElement(){}
+    public VisitorDeleteElement() {
+    }
 
     public void deleteElement(GPBeanTreeModel removedElement,
             GPBeanTreeModel parentElementRemoved, int indexElementRemoved) {
         parentElementRemoved.remove(removedElement);
         this.endPosition = super.getNextUnvisitedElement(removedElement);
         this.preorderTraversal();
+        this.updateNumberOfChildrens(parentElementRemoved);
+    }
+
+    private void updateNumberOfChildrens(GPBeanTreeModel parentElementRemoved) {
+        if (parentElementRemoved instanceof FolderTreeNode) {
+            ((FolderTreeNode) parentElementRemoved).setNumberOfChildrens(((FolderTreeNode) parentElementRemoved).getNumberOfChildrens() - 1);
+        }
     }
 
     //TODO: Gestire gli indici nel caso di aggiunta di più elementi
     private void preorderTraversal() {
-        if(this.rootElement == null){
+        if (this.rootElement == null) {
             this.rootElement = super.findRootElement(this.endPosition);
         }
-        this.rootElement.setzIndex(this.rootElement.getzIndex()-1);
+        this.rootElement.setzIndex(this.rootElement.getzIndex() - 1);
         this.tmpElement = this.rootElement;
         this.tmpIndex = this.tmpElement.getzIndex();
         while (!this.isPreorderExitCondition()) {

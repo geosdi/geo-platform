@@ -46,6 +46,7 @@ import com.google.gwt.user.client.Timer;
 import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
@@ -63,6 +64,7 @@ public class GPLoadListener extends LoadListener {
     private Timer timer;
     private MessageBox messageBox = new MessageBox();
     private boolean isBusy = false;
+    private String tmpStatus;
     private Listener<MessageBoxEvent> listener = new Listener<MessageBoxEvent>() {
 
         @Override
@@ -87,7 +89,15 @@ public class GPLoadListener extends LoadListener {
         };
 
         timer.schedule(WAITING_TIME);
-        GeoPlatformMessage.infoMessage("Loading...", "Please wait untill contents fully loads.");
+        this.tmpStatus = LayoutManager.get().getStatusMap().getText();
+        LayoutManager.get().getStatusMap().setBusy("Loading tree elements: please, wait untill contents fully loads.");
+        //GeoPlatformMessage.infoMessage("Loading...", "Please wait untill contents fully loads.");
+    }
+    
+    public void stopBeforeLoad(){
+        this.isBusy = false;
+        this.timer.cancel();
+        LayoutManager.get().getStatusMap().setStatus(this.tmpStatus, null);
     }
 
     @Override
@@ -95,7 +105,8 @@ public class GPLoadListener extends LoadListener {
         this.resetLoaderListener();
         this.layer.getSelectedFolder().setChildren((List)le.getData());
         this.setElementsParent((List)le.getData(), this.layer.getSelectedFolder());
-        GeoPlatformMessage.infoMessage("Load completed", "Operation completed successfully.");
+        LayoutManager.get().getStatusMap().setStatus("Tree elements loaded successfully.", null);
+        //GeoPlatformMessage.infoMessage("Load completed", "Operation completed successfully.");
     }
     
     private void setElementsParent(List<GPBeanTreeModel> elementList, GPBeanTreeModel parent){
@@ -109,7 +120,7 @@ public class GPLoadListener extends LoadListener {
         this.resetLoaderListener();
         GeoPlatformMessage.errorMessage("Error loading", "An error occurred while making the requested connection.\n"
                 + "Verify network connections and try again.\nIf the problem persists contact your system administrator.");
-
+        LayoutManager.get().getStatusMap().setStatus("Error loading tree elements.", null);
         System.out.println("Errore avvenuto nel loader del tree: " + le.exception
                 + " data: " + le.getData());
     }

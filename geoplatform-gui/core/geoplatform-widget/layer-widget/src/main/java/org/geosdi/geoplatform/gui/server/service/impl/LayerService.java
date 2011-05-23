@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -64,9 +65,7 @@ import org.springframework.stereotype.Service;
 public class LayerService implements ILayerService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     private GeoPlatformService geoPlatformServiceClient;
-
     @Autowired
     private DTOConverter dtoConverter;
 
@@ -96,7 +95,14 @@ public class LayerService implements ILayerService {
     public List<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException {
         TreeFolderElements folderElements = geoPlatformServiceClient.getChildrenElements(
                 folderId);
-        return this.dtoConverter.convertFolderElements(folderElements);
+        List<GPBeanTreeModel> elements = new ArrayList<GPBeanTreeModel>();
+        try {
+            folderElements.isEmpty();
+            elements = this.dtoConverter.convertFolderElements(folderElements);
+        } catch (Exception e) {
+            logger.debug("Returning no elements");
+        }
+        return elements;
     }
 
     @Override

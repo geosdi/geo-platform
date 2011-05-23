@@ -141,4 +141,5 @@ public abstract class GeoPlatformAsyncTreeWidget<T extends GPBeanTreeModel> {
     public abstract RpcProxy<List<T>> generateRpcProxy();
 
     public abstract TreeLoader<T> generateTreeLoader();
+
 }

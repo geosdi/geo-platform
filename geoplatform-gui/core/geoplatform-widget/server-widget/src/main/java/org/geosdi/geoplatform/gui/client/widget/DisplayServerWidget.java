@@ -44,12 +44,15 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel.GPServerKeyValue;
 import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemote;
 import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 
 /**
  *
@@ -129,7 +132,7 @@ public class DisplayServerWidget {
             ].join("");
     }-*/;
 
-     /**
+    /**
      * Set the correct Status Iconn Style
      */
     public void setSearchStatus(EnumSearchStatus status,
@@ -143,6 +146,31 @@ public class DisplayServerWidget {
      */
     public void loadServers() {
         this.searchStatus.setBusy("Loading Server...");
+
+        this.service.loadServers(new AsyncCallback<ArrayList<GPServerBeanModel>>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
+                        EnumSearchStatus.STATUS_MESSAGE_SEARCH_ERROR);
+                GeoPlatformMessage.errorMessage("Server Service",
+                        "An Error occured loading Servers.");
+            }
+
+            @Override
+            public void onSuccess(ArrayList<GPServerBeanModel> result) {
+                if (result.isEmpty()) {
+                    setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
+                            EnumSearchStatus.STATUS_MESSAGE_NOT_SEARCH);
+                    GeoPlatformMessage.alertMessage("Server Service",
+                            "There are no Servers.");
+                } else {
+                    setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
+                            EnumSearchStatus.STATUS_MESSAGE_SEARCH);
+                    store.add(result);
+                }
+            }
+        });
     }
 
     /**

@@ -66,29 +66,35 @@ public class DTOConverter {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public ArrayList<FolderTreeNode> convertOnlyFolder(Collection<FolderDTO> gpFolders) {
-//        if (gpFolders == null) {
-//            return null;
-//        }
+    public ArrayList<FolderTreeNode> convertOnlyFolder(
+            Collection<FolderDTO> gpFolders) {
         ArrayList<FolderTreeNode> foldersClient = new ArrayList<FolderTreeNode>();
-        for (Iterator<FolderDTO> it = gpFolders.iterator(); it.hasNext();) {
-            foldersClient.add(this.convertFolderElement(it.next()));
+
+        if (gpFolders != null) {
+            for (Iterator<FolderDTO> it = gpFolders.iterator(); it.hasNext();) {
+                foldersClient.add(this.convertFolderElement(it.next()));
+            }
         }
+        
         return foldersClient;
     }
 
-    public ArrayList<GPBeanTreeModel> convertFolderElements(TreeFolderElements folderElements) {
+    public ArrayList<GPBeanTreeModel> convertFolderElements(
+            TreeFolderElements folderElements) {
         ArrayList<GPBeanTreeModel> clientFolderElements = new ArrayList<GPBeanTreeModel>();
         Object element;
         Iterator iterator = folderElements.iterator();
         while (iterator.hasNext()) {
             element = iterator.next();
             if (element instanceof RasterLayerDTO) {
-                clientFolderElements.add(this.convertRasterElement((RasterLayerDTO) element));
+                clientFolderElements.add(this.convertRasterElement(
+                        (RasterLayerDTO) element));
             } else if (element instanceof VectorLayerDTO) {
-                clientFolderElements.add(this.convertVectorElement((VectorLayerDTO) element));
+                clientFolderElements.add(this.convertVectorElement(
+                        (VectorLayerDTO) element));
             } else if (element instanceof FolderDTO) {
-                clientFolderElements.add(this.convertFolderElement((FolderDTO) element));
+                clientFolderElements.add(this.convertFolderElement(
+                        (FolderDTO) element));
             }
         }
         return clientFolderElements;
@@ -129,28 +135,36 @@ public class DTOConverter {
     }
 
     private BboxClientInfo convertBbox(GPBBox gpBbox) {
-        return new BboxClientInfo(gpBbox.getMinX(), gpBbox.getMinY(), gpBbox.getMaxX(), gpBbox.getMaxY());
+        return new BboxClientInfo(gpBbox.getMinX(), gpBbox.getMinY(),
+                gpBbox.getMaxX(), gpBbox.getMaxY());
     }
 
-    private void setVectorLayerType(VectorTreeNode vector, GPLayerType gPLayerType) {
+    private void setVectorLayerType(VectorTreeNode vector,
+            GPLayerType gPLayerType) {
         switch (gPLayerType) {
             case POINT:
-                vector.setLayerType(org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.POINT);
+                vector.setLayerType(
+                        org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.POINT);
                 break;
             case LINESTRING:
-                vector.setLayerType(org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.LINESTRING);
+                vector.setLayerType(
+                        org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.LINESTRING);
                 break;
             case POLYGON:
-                vector.setLayerType(org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.POLYGON);
+                vector.setLayerType(
+                        org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.POLYGON);
                 break;
             case MULTIPOINT:
-                vector.setLayerType(org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.MULTIPOINT);
+                vector.setLayerType(
+                        org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.MULTIPOINT);
                 break;
             case MULTILINESTRING:
-                vector.setLayerType(org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.MULTILINESTRING);
+                vector.setLayerType(
+                        org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.MULTILINESTRING);
                 break;
             case MULTIPOLYGON:
-                vector.setLayerType(org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.MULTIPOLYGON);
+                vector.setLayerType(
+                        org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.MULTIPOLYGON);
                 break;
         }
     }

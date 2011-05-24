@@ -35,11 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.service;
 
-
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -55,11 +56,31 @@ public interface GeoPlatformOGCRemote extends RemoteService {
 
         public static GeoPlatformOGCRemoteAsync getInstance() {
             if (instance == null) {
-                instance = (GeoPlatformOGCRemoteAsync) GWT.create(GeoPlatformOGCRemote.class);
+                instance = (GeoPlatformOGCRemoteAsync) GWT.create(
+                        GeoPlatformOGCRemote.class);
             }
 
             return instance;
         }
     }
 
+    /**
+     * Load All Server from GeoPlatform Web Services
+     *
+     * @return
+     *          ArrayList<GPServerBeanModel>
+     *
+     * @throws GeoPlatformException
+     */
+    public ArrayList<GPServerBeanModel> loadServers() throws GeoPlatformException;
+
+    /**
+     *
+     * Load Server Detail
+     *
+     * @param idServer
+     * @return
+     * @throws GeoPlatformException
+     */
+    public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException;
 }

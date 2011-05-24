@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface GPLayerBean extends ModelData{
+public interface GPLayerBean extends ModelData {
 
     public long getId();
 

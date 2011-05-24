@@ -35,6 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.client.service;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -42,4 +47,9 @@ package org.geosdi.geoplatform.gui.client.service;
  */
 public interface GeoPlatformOGCRemoteAsync {
 
+    public void loadServers(AsyncCallback<ArrayList<GPServerBeanModel>> callback)
+            throws GeoPlatformException;
+
+    public void getServerDetails(long idServer,
+            AsyncCallback<GPServerBeanModel> callback) throws GeoPlatformException;
 }

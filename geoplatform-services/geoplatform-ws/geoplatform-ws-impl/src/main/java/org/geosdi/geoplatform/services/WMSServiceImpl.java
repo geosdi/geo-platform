@@ -41,13 +41,11 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
-import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -147,13 +145,16 @@ class WMSServiceImpl {
 
         } catch (MalformedURLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.error("MalformedURLException : " + e);
+            throw new ResourceNotFoundFault("MalformedURLException ", e);
         } catch (ServiceException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.error("ServiceException : " + e);
+            throw new ResourceNotFoundFault("ServiceException ", e);
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+           LOGGER.error("IOException : " + e);
+           throw new ResourceNotFoundFault("IOException ", e);
         }
 
         return convertToLayerList(cap.getLayerList());
@@ -178,8 +179,8 @@ class WMSServiceImpl {
         for (Layer layer : layerList) {
             layerDTOIth = new RasterLayerDTO(); // TODO AbstractLayerDTO as abstract class?
             layerDTOIth.setName(layer.getName());
-//            layerDTOIth.setAbstractText(layer.get_abstract());
-//            layerDTOIth.setTitle(layer.getTitle());
+            layerDTOIth.setAbstractText(layer.get_abstract());
+            layerDTOIth.setTitle(layer.getTitle());
             shortLayers.add(layerDTOIth);
         }
 

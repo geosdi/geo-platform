@@ -6,4 +6,6 @@
 
     <servlet path="/LayerRemote" class="org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl" />
 
+    <servlet path="/GeoPlatformOGCRemote" class="org.geosdi.geoplatform.gui.server.gwt.GeoPlatformOGCRemoteImpl" />
+
 </module>

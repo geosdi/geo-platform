@@ -165,6 +165,39 @@ public class GridLayersWidget extends GeoPlatformGridWidget<GPLayerBean> {
     }
 
     /**
+     * Clean The Store
+     */
+    public void cleanUpTheStore() {
+        if (this.grid.getView().getBody().isMasked()) {
+            unMaskGrid();
+        }
+        this.store.removeAll();
+    }
+
+    /**
+     * Create mask effect on Grid
+     */
+    public void maskGrid() {
+        this.grid.getView().getBody().mask("Loading Layers");
+    }
+
+    /**
+     * Remove mask effect from the Grid
+     */
+    public void unMaskGrid() {
+        this.grid.getView().getBody().unmask();
+    }
+
+    /**
+     *
+     * @param beans
+     *            {@link ArrayList} of GeocodingBean to fill the Store
+     */
+    public void fillStore(ArrayList<GPLayerBean> beans) {
+        this.store.add(beans);
+    }
+
+    /**
      * @return the formPanel
      */
     public FormPanel getFormPanel() {

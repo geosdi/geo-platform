@@ -35,10 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
-
-
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemote;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.server.service.IOGCService;
+import org.geosdi.geoplatform.gui.server.service.impl.OGCService;
+import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -53,4 +57,20 @@ public class GeoPlatformOGCRemoteImpl extends RemoteServiceServlet implements
      */
     private static final long serialVersionUID = 7340579377487014548L;
 
+    private IOGCService ogcService;
+
+    public GeoPlatformOGCRemoteImpl() {
+        this.ogcService = (IOGCService) GeoPlatformContextUtil.getInstance().getBean(
+                OGCService.class);
+    }
+
+    @Override
+    public ArrayList<GPServerBeanModel> loadServers() throws GeoPlatformException {
+        return this.ogcService.loadServers();
+    }
+
+    @Override
+    public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException {
+        return this.ogcService.getServerDetails(idServer);
+    }
 }

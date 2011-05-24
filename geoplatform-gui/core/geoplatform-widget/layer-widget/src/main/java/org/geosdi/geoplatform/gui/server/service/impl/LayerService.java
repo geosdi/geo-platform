@@ -64,7 +64,9 @@ import org.springframework.stereotype.Service;
 public class LayerService implements ILayerService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     private GeoPlatformService geoPlatformServiceClient;
+    
     @Autowired
     private DTOConverter dtoConverter;
 

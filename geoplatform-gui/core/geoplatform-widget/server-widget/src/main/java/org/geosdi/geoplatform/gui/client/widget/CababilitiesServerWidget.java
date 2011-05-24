@@ -99,7 +99,8 @@ public class CababilitiesServerWidget extends Window {
         });
 
         setLayout(new FitLayout());
-        setModal(true);
+        setModal(false);
+        setCollapsible(true);
         setPlain(true);
     }
 

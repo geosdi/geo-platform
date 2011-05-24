@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -52,7 +52,7 @@ public abstract class GeoPlatformAsyncTreeWidget<T extends GPBeanTreeModel> {
 
     protected TreeStore<T> store;
     protected TreePanel<T> tree;
-    protected RpcProxy<List<T>> proxy;
+    protected RpcProxy<ArrayList<T>> proxy;
     private TreeLoader<T> loader;
 
     /**
@@ -138,7 +138,7 @@ public abstract class GeoPlatformAsyncTreeWidget<T extends GPBeanTreeModel> {
         this.tree = tree;
     }
 
-    public abstract RpcProxy<List<T>> generateRpcProxy();
+    public abstract RpcProxy<ArrayList<T>> generateRpcProxy();
 
     public abstract TreeLoader<T> generateTreeLoader();
 

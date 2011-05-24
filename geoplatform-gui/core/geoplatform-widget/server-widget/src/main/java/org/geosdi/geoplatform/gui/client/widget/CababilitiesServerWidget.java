@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.WidgetListener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.widget.Window;
@@ -71,14 +73,28 @@ public class CababilitiesServerWidget extends Window {
     }
 
     private void initializeWindow() {
-        super.setSize(600, 400);
+        super.setSize(600, 500);
+        super.setHeading("Server Cababilities");
         setResizable(false);
 
         addWindowListener(new WindowListener() {
 
             @Override
+            public void windowShow(WindowEvent we) {
+                gridLayers.loadServers();
+            }
+
+            @Override
             public void windowHide(WindowEvent we) {
                 resetComponents();
+            }
+        });
+
+        addWidgetListener(new WidgetListener() {
+
+            @Override
+            public void widgetAttached(ComponentEvent ce) {
+                gridLayers.getGrid().setHeight(400);
             }
         });
 
@@ -93,14 +109,14 @@ public class CababilitiesServerWidget extends Window {
     }
 
     private void resetComponents() {
-        
     }
 
     @Override
     public void show() {
-        if(!isInitialized())
+        if (!isInitialized()) {
             this.init();
-       super.show();
+        }
+        super.show();
     }
 
     /**

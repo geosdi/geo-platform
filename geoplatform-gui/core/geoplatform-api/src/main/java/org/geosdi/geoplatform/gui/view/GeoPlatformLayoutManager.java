@@ -147,6 +147,7 @@ public abstract class GeoPlatformLayoutManager {
 
         center.addWidgetListener(new WidgetListener() {
 
+            @Override
             public void widgetResized(ComponentEvent ce) {
                 MapHandlerManager.fireEvent(new ScaleChangeEvent(XDOM.getViewportSize()));
             }

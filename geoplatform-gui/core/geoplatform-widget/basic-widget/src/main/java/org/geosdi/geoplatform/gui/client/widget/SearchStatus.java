@@ -41,24 +41,24 @@ package org.geosdi.geoplatform.gui.client.widget;
  */
 public class SearchStatus extends StatusWidget {
 
-	public enum EnumSearchStatus {
-		STATUS_SEARCH("x-status-ok"), STATUS_NO_SEARCH("x-status-not-ok"), STATUS_SEARCH_ERROR(
-				"x-status-error"), STATUS_MESSAGE_SEARCH("Search OK"), STATUS_MESSAGE_NOT_SEARCH(
-				"No Results Found"), STATUS_MESSAGE_SEARCH_ERROR(
-				"Search Service Error");
+    public enum EnumSearchStatus {
 
-		private String value;
+        STATUS_SEARCH("x-status-ok"), STATUS_NO_SEARCH("x-status-not-ok"), STATUS_SEARCH_ERROR(
+        "x-status-error"), STATUS_MESSAGE_SEARCH("Search OK"), STATUS_MESSAGE_NOT_SEARCH(
+        "No Results Found"), STATUS_MESSAGE_SEARCH_ERROR(
+        "Search Service Error");
 
-		EnumSearchStatus(String value) {
-			this.value = value;
-		}
+        private String value;
 
-		/**
-		 * @return the value
-		 */
-		public String getValue() {
-			return value;
-		}
-	}
+        EnumSearchStatus(String value) {
+            this.value = value;
+        }
 
+        /**
+         * @return the value
+         */
+        public String getValue() {
+            return value;
+        }
+    }
 }

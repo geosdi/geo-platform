@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.server.service.converter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -67,19 +66,19 @@ public class DTOConverter {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public List<FolderTreeNode> convertOnlyFolder(Collection<FolderDTO> gpFolders) {
+    public ArrayList<FolderTreeNode> convertOnlyFolder(Collection<FolderDTO> gpFolders) {
 //        if (gpFolders == null) {
 //            return null;
 //        }
-        List<FolderTreeNode> foldersClient = new ArrayList<FolderTreeNode>();
+        ArrayList<FolderTreeNode> foldersClient = new ArrayList<FolderTreeNode>();
         for (Iterator<FolderDTO> it = gpFolders.iterator(); it.hasNext();) {
             foldersClient.add(this.convertFolderElement(it.next()));
         }
         return foldersClient;
     }
 
-    public List<GPBeanTreeModel> convertFolderElements(TreeFolderElements folderElements) {
-        List<GPBeanTreeModel> clientFolderElements = new ArrayList<GPBeanTreeModel>();
+    public ArrayList<GPBeanTreeModel> convertFolderElements(TreeFolderElements folderElements) {
+        ArrayList<GPBeanTreeModel> clientFolderElements = new ArrayList<GPBeanTreeModel>();
         Object element;
         Iterator iterator = folderElements.iterator();
         while (iterator.hasNext()) {

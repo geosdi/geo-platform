@@ -37,9 +37,7 @@ public class ZoomToLayerExtentAction extends MenuAction {
 
         if (item instanceof RasterTreeNode) {
             BboxClientInfo bbox = ((RasterTreeNode) item).getBbox();
-            System.out.println("BBOX: "+bbox);
             Dispatcher.forwardEvent(GeoPlatformEvents.ZOOM_TO_MAX_EXTEND, bbox);
-
         }
     }
 }

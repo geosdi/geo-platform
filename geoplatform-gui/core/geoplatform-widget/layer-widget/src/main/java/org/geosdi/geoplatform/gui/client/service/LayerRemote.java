@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.service;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import java.util.List;
+import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -69,7 +69,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public List<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException;
+    public ArrayList<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException;
     
     /**
      * 
@@ -77,7 +77,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public List<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException;
+    public ArrayList<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException;
 
     /**
      * 

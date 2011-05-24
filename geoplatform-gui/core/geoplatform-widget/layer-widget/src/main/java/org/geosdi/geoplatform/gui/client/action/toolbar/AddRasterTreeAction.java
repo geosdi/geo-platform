@@ -36,11 +36,10 @@
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
+import org.geosdi.geoplatform.gui.client.widget.CababilitiesServerWidget;
 
 /**
  *
@@ -49,13 +48,15 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  */
 public class AddRasterTreeAction extends ToolbarLayerTreeAction {
 
+    private CababilitiesServerWidget serverWidget = new CababilitiesServerWidget(
+            true);
+
     public AddRasterTreeAction(TreePanel theTree) {
         super(theTree, LayerResources.ICONS.addRasterLayer(), "Add Raster Layer");
     }
 
     @Override
     public void componentSelected(ButtonEvent ce) {
-        Dispatcher.forwardEvent(
-                GeoPlatformEvents.SHOW_CABABILITIES_SERVER_WIDGET);
+        this.serverWidget.show();
     }
 }

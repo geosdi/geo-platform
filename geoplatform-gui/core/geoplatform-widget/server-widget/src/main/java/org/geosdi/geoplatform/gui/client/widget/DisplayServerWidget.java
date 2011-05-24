@@ -41,11 +41,15 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
+import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel.GPServerKeyValue;
+import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemote;
+import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemoteAsync;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 
 /**
  *
@@ -54,9 +58,12 @@ import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel.GPServerKeyValu
  */
 public class DisplayServerWidget {
 
+    private GeoPlatformOGCRemoteAsync service = GeoPlatformOGCRemote.Util.getInstance();
+
     private ToolBar toolbar;
     private ComboBox<GPServerBeanModel> comboServer;
     private ListStore<GPServerBeanModel> store;
+    private SearchStatus searchStatus;
     private Button addServer;
 
     /**
@@ -77,9 +84,8 @@ public class DisplayServerWidget {
 
         comboServer.setEmptyText("Select a Server...");
         comboServer.setDisplayField(GPServerKeyValue.URL_SERVER.getValue());
-        comboServer.setFieldLabel("Choose Server :");
         comboServer.setTemplate(getTemplate());
-        comboServer.setWidth(150);
+        comboServer.setWidth(250);
         comboServer.setStore(this.store);
         comboServer.setTypeAhead(true);
         comboServer.setTriggerAction(TriggerAction.ALL);
@@ -97,8 +103,17 @@ public class DisplayServerWidget {
 
     private void createToolBar() {
         this.toolbar = new ToolBar();
+
+        this.searchStatus = new SearchStatus();
+        searchStatus.setAutoWidth(true);
+
+        this.toolbar.add(this.searchStatus);
+
         this.toolbar.add(this.comboServer);
         this.toolbar.add(new SeparatorToolItem());
+
+        toolbar.add(new FillToolItem());
+
         this.toolbar.add(this.addServer);
     }
 
@@ -113,6 +128,22 @@ public class DisplayServerWidget {
             '</tpl>'
             ].join("");
     }-*/;
+
+     /**
+     * Set the correct Status Iconn Style
+     */
+    public void setSearchStatus(EnumSearchStatus status,
+            EnumSearchStatus message) {
+        this.searchStatus.setIconStyle(status.getValue());
+        this.searchStatus.setText(message.getValue());
+    }
+
+    /**
+     * Load All Server from WS
+     */
+    public void loadServers() {
+        this.searchStatus.setBusy("Loading Server...");
+    }
 
     /**
      * @return the toolbar

@@ -83,15 +83,15 @@ public class GridLayersWidget extends GeoPlatformGridWidget<GPLayerBean> {
 
     private void initFormPanel() {
         this.formPanel = new FormPanel();
-        getFormPanel().setHeaderVisible(false);
-        getFormPanel().setFrame(true);
-        getFormPanel().setLayout(new FlowLayout());
+        formPanel.setHeaderVisible(false);
+        formPanel.setFrame(true);
+        formPanel.setLayout(new FlowLayout());
 
-        this.getFormPanel().setTopComponent(this.displayWidget.getToolbar());
+        this.formPanel.setTopComponent(this.displayWidget.getToolbar());
 
-        this.getFormPanel().add(this.grid);
+        this.formPanel.add(this.grid);
 
-        this.getFormPanel().setButtonAlign(HorizontalAlignment.RIGHT);
+        this.formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
         this.done = new Button("Done", ServerWidgetResources.ICONS.done());
 
@@ -102,6 +102,10 @@ public class GridLayersWidget extends GeoPlatformGridWidget<GPLayerBean> {
                 //** TODO: HERE THE CODE TO SEND ALL SELECTED LAYERS IN THE LAYERS STORE **/
             }
         });
+
+        this.done.disable();
+
+        this.formPanel.getButtonBar().add(this.done);
     }
 
     @Override
@@ -151,6 +155,13 @@ public class GridLayersWidget extends GeoPlatformGridWidget<GPLayerBean> {
     @Override
     public void createStore() {
         this.store = new ListStore<GPLayerBean>();
+    }
+
+    /**
+     * 
+     */
+    public void loadServers() {
+        this.displayWidget.loadServers();
     }
 
     /**

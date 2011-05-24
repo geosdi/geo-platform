@@ -55,8 +55,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<GeocodingBean, RoutingController> implements
-        CleanComboEventHandler {
+public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<GeocodingBean, RoutingController>
+        implements CleanComboEventHandler {
 
     /**
      * @Constructor

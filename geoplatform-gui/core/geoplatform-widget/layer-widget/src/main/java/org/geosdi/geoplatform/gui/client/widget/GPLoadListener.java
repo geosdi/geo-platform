@@ -56,10 +56,6 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 public class GPLoadListener extends LoadListener {
 
     private LayerAsyncTreeWidget layer;
-
-    public GPLoadListener(LayerAsyncTreeWidget layer) {
-        this.layer = layer;
-    }
     private final static int WAITING_TIME = 7000;
     private Timer timer;
     private MessageBox messageBox = new MessageBox();
@@ -77,6 +73,15 @@ public class GPLoadListener extends LoadListener {
         }
     };
 
+    /**
+     * @Constructor
+     *
+     * @param layer
+     */
+    public GPLoadListener(LayerAsyncTreeWidget layer) {
+        this.layer = layer;
+    }
+
     @Override
     public void loaderBeforeLoad(LoadEvent le) {
         this.isBusy = true;
@@ -84,17 +89,19 @@ public class GPLoadListener extends LoadListener {
 
             @Override
             public void run() {
-                messageBox = GeoPlatformMessage.confirmMessage("Network busy", "Do you want to retry the load operation?", listener);
+                messageBox = GeoPlatformMessage.confirmMessage("Network busy",
+                        "Do you want to retry the load operation?", listener);
             }
         };
 
         timer.schedule(WAITING_TIME);
         this.tmpStatus = LayoutManager.get().getStatusMap().getText();
-        LayoutManager.get().getStatusMap().setBusy("Loading tree elements: please, wait untill contents fully loads.");
+        LayoutManager.get().getStatusMap().setBusy(
+                "Loading tree elements: please, wait untill contents fully loads.");
         //GeoPlatformMessage.infoMessage("Loading...", "Please wait untill contents fully loads.");
     }
-    
-    public void stopBeforeLoad(){
+
+    public void stopBeforeLoad() {
         this.isBusy = false;
         this.timer.cancel();
         LayoutManager.get().getStatusMap().setStatus(this.tmpStatus, null);
@@ -103,13 +110,16 @@ public class GPLoadListener extends LoadListener {
     @Override
     public void loaderLoad(LoadEvent le) {
         this.resetLoaderListener();
-        this.layer.getSelectedFolder().setChildren((List)le.getData());
-        this.setElementsParent((List)le.getData(), this.layer.getSelectedFolder());
-        LayoutManager.get().getStatusMap().setStatus("Tree elements loaded successfully.", null);
+        this.layer.getSelectedFolder().setChildren((List) le.getData());
+        this.setElementsParent((List) le.getData(),
+                this.layer.getSelectedFolder());
+        LayoutManager.get().getStatusMap().setStatus(
+                "Tree elements loaded successfully.", null);
         //GeoPlatformMessage.infoMessage("Load completed", "Operation completed successfully.");
     }
-    
-    private void setElementsParent(List<GPBeanTreeModel> elementList, GPBeanTreeModel parent){
+
+    private void setElementsParent(List<GPBeanTreeModel> elementList,
+            GPBeanTreeModel parent) {
         for (Iterator<GPBeanTreeModel> it = elementList.iterator(); it.hasNext();) {
             it.next().setParent(parent);
         }
@@ -118,9 +128,11 @@ public class GPLoadListener extends LoadListener {
     @Override
     public void loaderLoadException(LoadEvent le) {
         this.resetLoaderListener();
-        GeoPlatformMessage.errorMessage("Error loading", "An error occurred while making the requested connection.\n"
+        GeoPlatformMessage.errorMessage("Error loading",
+                "An error occurred while making the requested connection.\n"
                 + "Verify network connections and try again.\nIf the problem persists contact your system administrator.");
-        LayoutManager.get().getStatusMap().setStatus("Error loading tree elements.", null);
+        LayoutManager.get().getStatusMap().setStatus(
+                "Error loading tree elements.", null);
         System.out.println("Errore avvenuto nel loader del tree: " + le.exception
                 + " data: " + le.getData());
     }
@@ -129,7 +141,8 @@ public class GPLoadListener extends LoadListener {
         this.isBusy = false;
         this.timer.cancel();
         if (this.messageBox != null && this.messageBox.isVisible()) {
-            this.messageBox.getDialog().getButtonById(Dialog.NO).fireEvent(Events.Select);
+            this.messageBox.getDialog().getButtonById(Dialog.NO).fireEvent(
+                    Events.Select);
         }
     }
 }

@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -70,7 +69,7 @@ public class LayerService implements ILayerService {
     private DTOConverter dtoConverter;
 
     @Override
-    public List<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException {
+    public ArrayList<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException {
 //        TODO: check the right way to retrieve the user folders using the userName property
         SearchRequest userNameSearch = new SearchRequest(userName);
 
@@ -92,10 +91,10 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public List<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException {
+    public ArrayList<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException {
         TreeFolderElements folderElements = geoPlatformServiceClient.getChildrenElements(
                 folderId);
-        List<GPBeanTreeModel> elements = new ArrayList<GPBeanTreeModel>();
+        ArrayList<GPBeanTreeModel> elements = new ArrayList<GPBeanTreeModel>();
         try {
             folderElements.isEmpty();
             elements = this.dtoConverter.convertFolderElements(folderElements);

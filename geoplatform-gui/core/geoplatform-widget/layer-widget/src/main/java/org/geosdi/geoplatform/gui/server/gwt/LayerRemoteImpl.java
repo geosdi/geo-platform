@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.server.gwt;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import java.util.List;
+import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
@@ -63,12 +63,12 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     }
 
     @Override
-    public List<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException {
+    public ArrayList<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException {
         return this.layerService.loadUserFolders(userName);
     }
     
     @Override
-    public List<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException {
+    public ArrayList<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException {
         return this.layerService.loadFolderElements(folderId);
     }
 

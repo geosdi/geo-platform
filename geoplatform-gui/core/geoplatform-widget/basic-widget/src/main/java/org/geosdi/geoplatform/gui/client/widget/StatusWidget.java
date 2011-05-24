@@ -43,19 +43,19 @@ import com.extjs.gxt.ui.client.widget.Status;
  */
 public abstract class StatusWidget extends Status {
 
-	public StatusWidget() {
-		super();
-	}
+    public StatusWidget() {
+        super();
+    }
 
-	/**
-	 * Enables a busy icon and displays the given text.
-	 * 
-	 * @param text
-	 *            the text to display
-	 */
-	public void setBusy(String text) {
-		setIconStyle("x-loading-status");
-		setText(text);
-	}
-
+    /**
+     * Enables a busy icon and displays the given text.
+     *
+     * @param text
+     *            the text to display
+     */
+    @Override
+    public void setBusy(String text) {
+        setIconStyle("x-loading-status");
+        setText(text);
+    }
 }

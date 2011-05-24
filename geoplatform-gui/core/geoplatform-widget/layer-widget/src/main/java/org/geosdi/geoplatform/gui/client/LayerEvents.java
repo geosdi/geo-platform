@@ -44,8 +44,6 @@ import com.extjs.gxt.ui.client.event.EventType;
  */
 public class LayerEvents {
 
-    public static final EventType INIT_LAYER_WIDGET = new EventType();
-
     public static final EventType SHOW_LAYER_WIDGET = new EventType();
 
     public static final EventType HIDE_LAYER_WIDGET = new EventType();

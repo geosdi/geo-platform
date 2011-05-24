@@ -53,6 +53,8 @@ public class GeoPlatformEvents {
 
     public static final EventType ZOOM_TO_MAX_EXTEND = new EventType();
 
+    public static final EventType INIT_OGC_MODULES_WIDGET = new EventType();
+
     public static final EventType SHOW_CABABILITIES_SERVER_WIDGET = new EventType();
 
 }

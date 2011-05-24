@@ -95,6 +95,18 @@
             <groupId>org.geosdi</groupId>
             <artifactId>basic-widget</artifactId>
         </dependency>
+
+        <!-- GeoPlatform Server Module -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>server-widget</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>server-widget</artifactId>
+            <classifier>sources</classifier>
+        </dependency>
         
         <!-- GeoPlatform-WS-Client -->
 

@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -55,7 +56,7 @@ public class LayerController extends GeoPlatformController {
      * @Constructor
      */
     public LayerController() {
-        registerEventTypes(LayerEvents.INIT_LAYER_WIDGET,
+        registerEventTypes(GeoPlatformEvents.INIT_OGC_MODULES_WIDGET,
                 LayerEvents.SHOW_LAYER_WIDGET, LayerEvents.HIDE_LAYER_WIDGET,
                 LayerEvents.SHOW_ADD_FOLDER);
     }

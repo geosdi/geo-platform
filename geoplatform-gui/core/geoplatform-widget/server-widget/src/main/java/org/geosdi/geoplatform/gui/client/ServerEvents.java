@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
-import com.extjs.gxt.ui.client.event.EventType;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -44,5 +42,4 @@ import com.extjs.gxt.ui.client.event.EventType;
  */
 public class ServerEvents {
 
-    public static final EventType INIT_SERVER_WIDGET = new EventType();
 }

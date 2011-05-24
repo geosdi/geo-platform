@@ -52,6 +52,8 @@ import org.geosdi.geoplatform.gui.client.action.toolbar.AddFolderTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddRasterTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddVectorTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.DeleteElementTreeAction;
+import org.geosdi.geoplatform.gui.client.mvc.ServerController;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -73,11 +75,12 @@ public class LayerWidgetUI implements EntryPoint {
         dispatcher = Dispatcher.get();
 
         dispatcher.addController(new LayerController());
+        dispatcher.addController(new ServerController());
 
         addLayerWidgetAction();
         addToolbarTreeAction();
 
-        dispatcher.fireEvent(LayerEvents.INIT_LAYER_WIDGET);
+        dispatcher.fireEvent(GeoPlatformEvents.INIT_OGC_MODULES_WIDGET);
     }
 
     private void addLayerWidgetAction() {

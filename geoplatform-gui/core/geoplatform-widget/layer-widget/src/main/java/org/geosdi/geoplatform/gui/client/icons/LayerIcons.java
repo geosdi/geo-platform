@@ -72,4 +72,7 @@ public interface LayerIcons extends ImageBundle {
 
     @Resource("addVector.png")
     AbstractImagePrototype addVectorLayer();
+    
+    @Resource("zoom.png")
+    AbstractImagePrototype zoomToMaxExtend();
 }

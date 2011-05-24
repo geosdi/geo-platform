@@ -66,5 +66,7 @@ public class MapWidgetEvents {
         public static final EventType ACTIVATE_GRATICULE = new EventType();
 
         public static final EventType DEACTIVATE_GRATICULE = new EventType();
+        
+        public static final EventType ZOOM_TO_EXTENT = new EventType();
 
 }

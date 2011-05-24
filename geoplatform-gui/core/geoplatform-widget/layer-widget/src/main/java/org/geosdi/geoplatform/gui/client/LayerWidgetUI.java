@@ -48,6 +48,7 @@ import com.google.gwt.core.client.EntryPoint;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionCreator;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionRegistar;
+import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddFolderTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddRasterTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddVectorTreeAction;
@@ -91,6 +92,15 @@ public class LayerWidgetUI implements EntryPoint {
             public MenuAction createAction() {
                 // TODO Auto-generated method stub
                 return new LayerMenuAction();
+            }
+        });
+        
+        MenuActionRegistar.put("ZoomToLayerExtent", new MenuActionCreator() {
+
+            @Override
+            public MenuAction createAction() {
+                // TODO Auto-generated method stub
+                return new ZoomToLayerExtentAction();
             }
         });
     }

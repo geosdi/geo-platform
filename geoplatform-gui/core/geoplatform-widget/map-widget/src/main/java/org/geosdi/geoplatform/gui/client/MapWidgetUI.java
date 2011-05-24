@@ -50,6 +50,9 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
+import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -139,7 +142,7 @@ public class MapWidgetUI implements EntryPoint {
                 return new MeasureAction(mapWidget);
             }
         });
-
+        
         ToolbarActionRegistar.put("MeasureArea", new ToolbarActionCreator() {
 
             @Override
@@ -147,6 +150,6 @@ public class MapWidgetUI implements EntryPoint {
                     GeoPlatformMap mapWidget) {
                 return new MeasureAreaAction(mapWidget);
             }
-        });
+        }); 
     }
 }

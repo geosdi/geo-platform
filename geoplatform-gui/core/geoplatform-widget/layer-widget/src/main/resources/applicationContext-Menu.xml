@@ -15,5 +15,13 @@
         <property name="enabled" value="true" />
         <property name="order" value="30" />
     </bean>
+    
+     <bean name="ZoomToLayerExtent"
+		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+        <property name="id" value="ZoomToLayerExtent" />
+        <property name="text" value="Zoom to layer extent" />
+        <property name="enabled" value="true" />
+        <property name="order" value="40" />
+    </bean>
 
 </beans>

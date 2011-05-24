@@ -64,5 +64,4 @@
         <property name="enabled" value="${measureArea.enabled}" />
         <property name="order" value="${measureArea.order}" />
     </bean>
-
 </beans>

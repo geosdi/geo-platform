@@ -69,6 +69,7 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.menu.AddLayerAction;
+import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
@@ -256,11 +257,19 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
 
     private void addMenuAddElement() {
         Menu contextMenu = new Menu();
-        MenuItem insert = new MenuItem();
-        insert.setText("Add Folder");
-        insert.setIcon(LayerResources.ICONS.addFolder());
-        insert.addSelectionListener(new AddLayerAction(tree));
-        contextMenu.add(insert);
+//        MenuItem insert = new MenuItem();
+//        insert.setText("Add Folder");
+//        insert.setIcon(LayerResources.ICONS.addFolder());
+//        insert.addSelectionListener(new AddLayerAction(tree));
+//        contextMenu.add(insert);
+
+        // add zoom to max extent
+        MenuItem zoomToMaxExtend = new MenuItem();
+        zoomToMaxExtend.setText("Zoom to layer extend");
+        zoomToMaxExtend.setIcon(LayerResources.ICONS.zoomToMaxExtend());
+        zoomToMaxExtend.addSelectionListener(new ZoomToLayerExtentAction(tree));
+        contextMenu.add(zoomToMaxExtend);
+
         this.tree.setContextMenu(contextMenu);
     }
 

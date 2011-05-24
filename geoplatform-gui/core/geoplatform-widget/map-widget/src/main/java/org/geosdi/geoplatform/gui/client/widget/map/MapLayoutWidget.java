@@ -77,6 +77,8 @@ import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.gwtopenmaps.openlayers.client.control.MousePosition;
+import org.gwtopenmaps.openlayers.client.control.MousePositionOptions;
+import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -119,6 +121,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
         this.defaultMapOptions.setProjection("EPSG:900913");
         this.defaultMapOptions.setDisplayProjection(new Projection("EPSG:4326"));
         this.defaultMapOptions.setUnits(MapUnits.METERS);
+        
         this.defaultMapOptions.setMaxExtent(new Bounds(-20037508, -20037508,
                 20037508, 20037508.34));
         this.defaultMapOptions.setMaxResolution(
@@ -261,6 +264,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
         GoogleOptions option = new GoogleOptions();
         option.setType(GMapType.G_NORMAL_MAP);
         option.setSphericalMercator(true);
+        option.setTransitionEffect(TransitionEffect.RESIZE);
 
         layer = new Google("Google Normal", option);
         layer.setIsBaseLayer(true);

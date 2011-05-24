@@ -15,7 +15,7 @@
 
 
     <bean id="gpWSClient" class="org.geosdi.geoplatform.cxf.GeoPlatformWSClient">
-        <property name="address" value="http://localhost:8080/geoplatform-service/soap" />
+        <property name="address" value="http://localhost:8282/geoplatform-service/soap" />
     </bean>
 
 	<!-- =============================================================== -->
@@ -37,7 +37,7 @@
         <property name="connectors">
             <list>
                 <bean id="Connector" class="org.mortbay.jetty.nio.SelectChannelConnector">
-                    <property name="port" value="8080" />
+                    <property name="port" value="8282" />
                     <property name="maxIdleTime" value="30000" />
                     <property name="acceptors" value="2" />
                     <property name="confidentialPort" value="8443" />
@@ -55,7 +55,7 @@
                                     <bean class="org.mortbay.jetty.webapp.WebAppContext">
                                         <property name="contextPath" value="/geoplatform-service" />
                                         <property name="war"
-											value="deploy/geoplatform-service.war" />
+						value="deploy/geoplatform-service.war" />
                                     </bean>
                                 </list>
                             </property>

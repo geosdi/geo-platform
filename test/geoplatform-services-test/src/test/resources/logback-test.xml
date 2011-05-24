@@ -26,5 +26,7 @@
         <level value="info" />
         <appender-ref ref="STDOUT" />
     </root>
+    
+    <!-- logger name="org.geosdi.geoplatform.WSFolderLayerTest" level="debug"/-->
 
 </configuration>

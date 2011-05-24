@@ -183,25 +183,25 @@ public class WSFolderTest extends ServiceTest {
 
             // Assert on "rootFolderA"
             foderToCheck = folderList.getList().iterator().next();
-            logger.info("\n***** foderToCheck:\n" + foderToCheck + "\n*****");
+            logger.debug("\n***** foderToCheck:\n" + foderToCheck + "\n*****");
             Assert.assertEquals(foderToCheck.getId(), idRootFolderA);
             Assert.assertEquals(foderToCheck.getName(), nameRootFolderA);
             // Assert on the structure of the subfolders of "rootFolderA"
             TreeFolderElements childrenRootFolderA = geoPlatformService.getChildrenElements(idRootFolderA);
-            logger.info("\n************************ childrenRootFolderA:\n" + childrenRootFolderA + "\n*****");
+            logger.debug("\n************************ childrenRootFolderA:\n" + childrenRootFolderA + "\n*****");
             Assert.assertNotNull(childrenRootFolderA);
             Assert.assertEquals(childrenRootFolderA.size(), 2);
             // Iterator for scan folder in descending order
             Iterator iterator = childrenRootFolderA.iterator();
             // Assert on "folder2"
             FolderDTO folderDTOToCheck = (FolderDTO) iterator.next();
-            logger.info("\n***** folderDTOToCheck:\n" + folderDTOToCheck + "\n*****");
+            logger.debug("\n***** folderDTOToCheck:\n" + folderDTOToCheck + "\n*****");
             Assert.assertEquals(folderDTOToCheck.getId(), idFolder2);
             Assert.assertEquals(folderDTOToCheck.getName(), nameFolder2);
             Assert.assertEquals(folderDTOToCheck.getNumberOfChilds(), 0);
             // Assert on "folder1"
             folderDTOToCheck = (FolderDTO) iterator.next();
-            logger.info("\n***** folderDTOToCheck:\n" + folderDTOToCheck + "\n*****");
+            logger.debug("\n***** folderDTOToCheck:\n" + folderDTOToCheck + "\n*****");
             Assert.assertEquals(folderDTOToCheck.getId(), idFolder1);
             Assert.assertEquals(folderDTOToCheck.getName(), nameFolder1);
             Assert.assertEquals(folderDTOToCheck.getNumberOfChilds(), 0);
@@ -234,7 +234,7 @@ public class WSFolderTest extends ServiceTest {
             GPFolder subFolderOfRootFolder = geoPlatformService.getFolderDetail(request);
             Assert.fail("Folder with id \"" + idFolder + "\" was NOT deleted in cascade");
         } catch (Exception e) {
-            logger.info("\n***** Folder with id \"" + idFolder + "\" was deleted in cascade");
+            logger.debug("\n***** Folder with id \"" + idFolder + "\" was deleted in cascade");
         }
     }
 }

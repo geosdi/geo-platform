@@ -147,9 +147,9 @@ public abstract class ServiceTest implements InitializingBean {
     // Create and insert (with assert) a User
     protected long createAndInsertUser(String username) {
         GPUser user = createUser(username);
-        logger.info("\n***** GPUser to INSERT: " + user);
+        logger.debug("\n***** GPUser to INSERT: " + user);
         long idUser = geoPlatformService.insertUser(user);
-        logger.info("\n***** Id ASSIGNED at the User in the DB: " + idUser);
+        logger.debug("\n***** Id ASSIGNED at the User in the DB: " + idUser);
         Assert.assertTrue("Id ASSIGNED at the User in the DB", idUser > 0);
         return idUser;
     }

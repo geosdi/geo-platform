@@ -41,16 +41,21 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
+import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geotools.data.ows.Layer;
 import org.geotools.data.ows.WMSCapabilities;
 import org.geotools.data.wms.WebMapServer;
@@ -73,7 +78,58 @@ class WMSServiceImpl {
     public void setServerDao(GPServerDAO serverDao) {
         this.serverDao = serverDao;
     }
-    //</editor-fold>    
+    //</editor-fold>
+
+    public long insertServer(GeoPlatformServer server) {
+        serverDao.persist(server);
+        return server.getId();
+    }
+
+    public long updateServer(GeoPlatformServer server)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        GeoPlatformServer orig = serverDao.find(server.getId());
+        if (orig == null) {
+            throw new ResourceNotFoundFault("Server not found", server.getId());
+        }
+        // Update all properties
+        orig.setServerUrl(server.getServerUrl());
+        orig.setName(server.getName());
+        orig.setTitle(server.getTitle());
+        orig.setAbstractServer(server.getAbstractServer());
+        orig.setContactPerson(server.getContactPerson());
+        orig.setContactOrganization(server.getContactOrganization());
+        orig.setServerType(server.getServerType());
+
+        serverDao.merge(orig);
+        return orig.getId();
+    }
+
+    public boolean deleteServer(long idServer)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        GeoPlatformServer server = serverDao.find(idServer);
+
+        if (server == null) {
+            throw new ResourceNotFoundFault("Server not found", idServer);
+        }
+
+        return serverDao.remove(server);
+    }
+
+    public GeoPlatformServer getServerDetail(long idServer)
+            throws ResourceNotFoundFault {
+        GeoPlatformServer server = serverDao.find(idServer);
+
+        if (server == null) {
+            throw new ResourceNotFoundFault("Server not found", idServer);
+        }
+
+        return server;
+    }
+
+    public Collection<ServerDTO> getServers() {
+        List<GeoPlatformServer> found = serverDao.findAll();
+        return convertToServerCollection(found);
+    }
 
     public LayerList getCapabilities(RequestById request)
             throws ResourceNotFoundFault {
@@ -100,13 +156,23 @@ class WMSServiceImpl {
             e.printStackTrace();
         }
 
-        return convertToShortList(cap.getLayerList());
+        return convertToLayerList(cap.getLayerList());
+    }
+
+    private Collection<ServerDTO> convertToServerCollection(List<GeoPlatformServer> serverList) {
+        Collection<ServerDTO> shortServers = new ArrayList<ServerDTO>(serverList.size());
+        ServerDTO serverDTOIth = null;
+        for (GeoPlatformServer server : serverList) {
+            serverDTOIth = new ServerDTO(server);
+            shortServers.add(serverDTOIth);
+        }
+        return shortServers;
     }
 
     // TODO Move to LayerList?
     // as constructor: LayerList list = new LayerList(List<Layer>);    
     // TODO Correct mapping Layer to AbstractLayerDTO
-    private LayerList convertToShortList(List<Layer> layerList) {
+    private LayerList convertToLayerList(List<Layer> layerList) {
         List<ShortLayerDTO> shortLayers = new ArrayList<ShortLayerDTO>(layerList.size());
         ShortLayerDTO layerDTOIth = null;
         for (Layer layer : layerList) {

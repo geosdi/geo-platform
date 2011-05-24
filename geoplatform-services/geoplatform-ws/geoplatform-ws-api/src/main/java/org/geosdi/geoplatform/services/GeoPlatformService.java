@@ -37,15 +37,16 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import java.util.Collection;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
-
 import org.codehaus.jra.Delete;
 import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
 import org.codehaus.jra.Post;
 import org.codehaus.jra.Put;
+
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
@@ -54,6 +55,7 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
@@ -179,7 +181,7 @@ public interface GeoPlatformService {
      * @return Children folders.
      */
     @Get
-    @HttpResource(location = "/folders/user/{id}/{num}/{page}")
+    @HttpResource(location = "/folders/user/{folderId}/{num}/{page}")
     @WebResult(name = "FolderList")
     FolderList getChildrenFolders(
             @WebParam(name = "folderId") long folderId,
@@ -190,7 +192,7 @@ public interface GeoPlatformService {
      * @return Children folders.
      */
     @Get
-    @HttpResource(location = "/folders/user/{id}")
+    @HttpResource(location = "/folders/user/{folderId}")
     @WebResult(name = "FolderList")
     FolderList getChildrenFoldersByFolderId(@WebParam(name = "folderId") long folderId);
 
@@ -235,7 +237,7 @@ public interface GeoPlatformService {
      * @return Owned and shared Folders visible to a given user.
      */
     @Get
-    //@HttpResource(location = "/users/{id}/folder/{num}/{page}")
+    //@HttpResource(location = "/users/{userId}/folder/{num}/{page}")
     @WebResult(name = "FolderList")
     FolderList getAllUserFolders(
             @WebParam(name = "userId") long userId,
@@ -246,7 +248,7 @@ public interface GeoPlatformService {
      * @return Owned and shared Folders visible to a given user.
      */
     @Get
-    //@HttpResource(location = "/users/{id}/folder/{num}/{page}")
+    //@HttpResource(location = "/users/{userId}/folder/{num}/{page}")
     @WebResult(name = "FolderList")
     FolderList getAllUserFoldersByUserId(@WebParam(name = "userId") long userId);
 
@@ -268,7 +270,6 @@ public interface GeoPlatformService {
     // ==========================================================================
     // === Layer / Style
     // ==========================================================================
-    
     @Put
     @HttpResource(location = "/layer")
     long insertLayer(@WebParam(name = "Layer") GPLayer layer);
@@ -287,82 +288,106 @@ public interface GeoPlatformService {
     @HttpResource(location = "/layers/{id}")
     boolean deleteLayer(RequestById request) throws ResourceNotFoundFault,
             IllegalParameterFault;
-    
+
     /**
      * @return a raster layer.
      */
     @Get
     @WebResult(name = "RasterLayer")
     GPRasterLayer getRasterLayer(@WebParam(name = "GPRasterLayer") long layerId) throws ResourceNotFoundFault;
-    
+
     /**
      * @return a vector layer.
      */
     @Get
     @WebResult(name = "VectorLayer")
     GPVectorLayer getVectorLayer(@WebParam(name = "GPVectorLayer") long layerId) throws ResourceNotFoundFault;
-    
+
     @Get
     @HttpResource(location = "/layers")
     @WebResult(name = "Layers")
     LayerList getLayers();
-    
+
     /**
      * @return Styles of a layer.
      */
     @Get
     @WebResult(name = "LayerStyles")
     StyleList getLayerStyles(@WebParam(name = "LayerId") long layerId);
-    
+
     /**
      * @return a short layer.
      */
     @Get
     @WebResult(name = "ShortLayerDTO")
     ShortLayerDTO getShortLayer(@WebParam(name = "GPLayerId") long layerId) throws ResourceNotFoundFault;
-    
+
     /**
      * @return BBox of a layer.
      */
     @Get
     @WebResult(name = "BBox")
     GPBBox getBBox(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault;
-    
+
     /**
      * @return LayerInfo of a raster layer.
      */
     @Get
     @WebResult(name = "LayerInfo")
     GPLayerInfo getLayerInfo(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault;
-    
+
 //    /**
 //     * @return Geometry of a vector layer.
 //     */
 //    @Get
 //    @WebResult(name = "Geometry")
 //    Point getGeometry(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault;
-    
     /**
      * @return layer Type.
      */
     @Get
     @WebResult(name = "LayerType")
-    GPLayerType getLayerType(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault ;
+    GPLayerType getLayerType(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="OWS">
     // ==========================================================================
     // === OWS
     // ==========================================================================
+    @Put
+    @HttpResource(location = "/server")
+    long insertServer(@WebParam(name = "Server") GeoPlatformServer server);
+
+    @Post
+    @HttpResource(location = "/server")
+    long updateServer(@WebParam(name = "Server") GeoPlatformServer server)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Delete
+    @HttpResource(location = "/server/{idServer}")
+    boolean deleteServer(@WebParam(name = "idServer") long idServer)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
     @Get
-    @HttpResource(location = "/wms/capabilities/{id}")
-    @WebResult(name = "Capabilities")
-    LayerList getCapabilities(RequestById request) throws ResourceNotFoundFault;
+    @HttpResource(location = "/servers")
+    @WebResult(name = "Servers")
+    Collection<ServerDTO> getAllServers();
+
+    @Get
+    @HttpResource(location = "/servers/{idServer}")
+    @WebResult(name = "Server")
+    GeoPlatformServer getServerDetail(@WebParam(name = "idServer") long idServer)
+            throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/servers/{serverUrl}")
     @WebResult(name = "Servers")
     ServerDTO getServer(@WebParam(name = "serverUrl") String serverUrl)
             throws ResourceNotFoundFault;
+
+    @Get
+    @HttpResource(location = "/wms/capabilities/{id}")
+    @WebResult(name = "Capabilities")
+    LayerList getCapabilities(RequestById request) throws ResourceNotFoundFault;
     //</editor-fold>
 }

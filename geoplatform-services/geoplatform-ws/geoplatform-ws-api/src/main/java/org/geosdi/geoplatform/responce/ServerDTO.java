@@ -38,6 +38,7 @@
 package org.geosdi.geoplatform.responce;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -47,39 +48,72 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "ServerDTO")
 public class ServerDTO {
 
-	private long id;
+    private long id;
+    private String serverUrl;
+    private String name;
 
-	public ServerDTO() {
-		super();
-	}
+    public ServerDTO() {
+        super();
+    }
 
-	public ServerDTO(long theId) {
-		this.id = theId;
-	}
+    public ServerDTO(GeoPlatformServer server) {
+        this.id = server.getId();
+        this.serverUrl = server.getServerUrl();
+        this.name = server.getName();
+    }
 
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "ServerDTO [id=" + id + "]";
-	}
+    /**
+     * @return the serverUrl
+     */
+    public String getServerUrl() {
+        return serverUrl;
+    }
 
+    /**
+     * @param serverUrl the serverUrl to set
+     */
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "ServerDTO{" + "id=" + id + ", serverUrl=" + serverUrl
+                + ", name=" + name + '}';
+    }
+ 
 }

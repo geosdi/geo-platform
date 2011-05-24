@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import java.util.Collection;
 import javax.jws.WebService;
 
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
@@ -349,18 +350,18 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public long updateVectorLayer(GPVectorLayer layer) throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.updateVectorLayer(layer);
     }
-    
+
     @Override
     public boolean deleteLayer(RequestById request)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.deleteLayer(request);
     }
-    
+
     @Override
     public GPRasterLayer getRasterLayer(long layerId) throws ResourceNotFoundFault {
         return layerServiceDelegate.getRasterLayer(layerId);
     }
-    
+
     @Override
     public GPVectorLayer getVectorLayer(long layerId) throws ResourceNotFoundFault {
         return layerServiceDelegate.getVectorLayer(layerId);
@@ -390,7 +391,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 //    public Point getGeometry(long layerId) throws ResourceNotFoundFault {
 //        return layerServiceDelegate.getGeometry(layerId);
 //    }
-
     @Override
     public ShortLayerDTO getShortLayer(long layerId) throws ResourceNotFoundFault {
         return layerServiceDelegate.getShortLayer(layerId);
@@ -407,9 +407,30 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === OWS
     // ==========================================================================
     @Override
-    public LayerList getCapabilities(RequestById request)
+    public long insertServer(GeoPlatformServer server) {
+        return wmsServiceDelegate.insertServer(server);
+    }
+
+    @Override
+    public long updateServer(GeoPlatformServer server)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return wmsServiceDelegate.updateServer(server);
+    }
+
+    @Override
+    public boolean deleteServer(long idServer) throws ResourceNotFoundFault, IllegalParameterFault {
+        return wmsServiceDelegate.deleteServer(idServer);
+    }
+
+    @Override
+    public Collection<ServerDTO> getAllServers() {
+        return wmsServiceDelegate.getServers();
+    }
+
+    @Override
+    public GeoPlatformServer getServerDetail(long idServer)
             throws ResourceNotFoundFault {
-        return wmsServiceDelegate.getCapabilities(request);
+        return wmsServiceDelegate.getServerDetail(idServer);
     }
 
     @Override
@@ -426,6 +447,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         serverDTO.setId(server.getId());
 
         return serverDTO;
+    }
+
+    @Override
+    public LayerList getCapabilities(RequestById request)
+            throws ResourceNotFoundFault {
+        return wmsServiceDelegate.getCapabilities(request);
     }
     //</editor-fold>
 }

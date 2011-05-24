@@ -83,6 +83,7 @@ public class ServerDAOTest extends BaseDAOTest {
     private GeoPlatformServer createServer1() {
         GeoPlatformServer server = new GeoPlatformServer();
         server.setServerUrl("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
+        server.setName("dpc.geosdi.org");
         server.setServerType(GPCababilityType.WMS);
         return server;
     }
@@ -90,6 +91,7 @@ public class ServerDAOTest extends BaseDAOTest {
     private GeoPlatformServer createServer2() {
         GeoPlatformServer server = new GeoPlatformServer();
         server.setServerUrl("http://maps.telespazio.it/dpc/dpc-wms");
+        server.setName("maps.telespazio.it");
         server.setServerType(GPCababilityType.WMS);
         return server;
     }

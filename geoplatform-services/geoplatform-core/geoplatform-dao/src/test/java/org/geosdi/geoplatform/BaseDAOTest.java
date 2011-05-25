@@ -123,7 +123,6 @@ public abstract class BaseDAOTest {
         removeAllFolder();
         removeAllAuthority();
         removeAllUser();
-        removeAllServer();
     }
 
     private void removeAllAuthority() {

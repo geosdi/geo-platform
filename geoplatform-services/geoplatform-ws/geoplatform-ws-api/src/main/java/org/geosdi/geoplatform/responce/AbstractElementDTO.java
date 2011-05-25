@@ -166,7 +166,8 @@ public abstract class AbstractElementDTO implements IElementDTO,
      */
     @Override
     public String toString() {
-        return "id=" + id + ", name=" + name + ", position=" + position + ", shared=" + shared;
+        return "id=" + id + ", name=" + name + ", position=" + position
+                + ", shared=" + shared + ", checked" + checked;
     }
 
     // For sort IElementDTO object in the TreeFolderElements

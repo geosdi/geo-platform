@@ -94,6 +94,7 @@ public class FolderDTO extends AbstractElementDTO {
      */
     @Override
     public String toString() {
-        return "FolderDTO [" + super.toString() + ']';
+        return "FolderDTO [" + super.toString()
+                + ", numberOfChilds=" + numberOfChilds + ']';
     }
 }

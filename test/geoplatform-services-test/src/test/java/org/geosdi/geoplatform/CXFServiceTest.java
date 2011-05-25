@@ -38,7 +38,11 @@
 package org.geosdi.geoplatform;
 
 import java.text.ParseException;
+import java.util.Collection;
 import junit.framework.Assert;
+import org.geosdi.geoplatform.core.model.GPCababilityType;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 
 
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -51,22 +55,152 @@ import org.junit.Test;
  * 
  */
 //@TestExecutionListeners(value = {WSListenerServices.class})
-public class CXFServiceTest extends ServiceTest  { 
+public class CXFServiceTest extends ServiceTest {
 
-//    @Autowired
-//    private GeoPlatformWSClient gpWSClient;
 //    private GeoPlatformWSClientEncrypted gpWSClientEncrypted;
+    // Server
+    private final String serverUrlTest = "http://map.serverNameTest.org";
+    private long idServerTest = -1;
+
+    @Override
+    public void setUp() throws Exception {
+        super.setUp();
+        logger.info("CXFServiceTest - SetUp --------------------------------> " + this.getClass().getName());
+        // Insert Server
+        idServerTest = this.createAndInsertServer(serverUrlTest, GPCababilityType.WMS);
+    }
+
+    @Override
+    public void tearDown() {
+        super.tearDown();
+        logger.info("CXFServiceTest - tearDown --------------------------------> " + this.getClass().getName());
+        // Delete Server
+        this.deleteServer(idServerTest);
+    }
+
+    @Test
+    public void testUpdateServer() {
+        final String serverUrlUpdated = serverUrlTest.replaceAll("org", "com");
+        try {
+            // Retrieve Server
+            GeoPlatformServer serverTest = geoPlatformService.getServerDetail(idServerTest);
+            logger.debug("\n*** serverTest:\n{}\n***", serverTest);
+            // Update Server
+            serverTest.setServerUrl(serverUrlUpdated);
+            geoPlatformService.updateServer(serverTest);
+
+            // Retrieve Server modified
+            GeoPlatformServer serverModified = geoPlatformService.getServerDetail(idServerTest);
+            logger.debug("\n*** serverModified:\n{}\n***", serverModified);
+            // Assert on Server modified
+            Assert.assertNotNull(serverModified);
+            Assert.assertEquals(serverTest.getServerUrl(), serverModified.getServerUrl());
+        } catch (IllegalParameterFault ex) {
+            Assert.fail("Server has an Illegal Parameter");
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Server \"" + usernameTest + "\" not found");
+        }
+    }
+
+    @Test
+    public void testGetServer() {
+        // Get Server from Id
+        try {
+            // Get GeoPlatformServer from id
+            GeoPlatformServer gpServer = geoPlatformService.getServerDetail(idServerTest);
+            logger.debug("\n*** gpServer:\n{}\n***", gpServer);
+            Assert.assertNotNull(gpServer);
+            Assert.assertEquals("Id Server NOT match", idServerTest, gpServer.getId());
+            Assert.assertEquals("URL Server NOT match", serverUrlTest, gpServer.getServerUrl());
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Not found Server with Id: \"" + idServerTest + "\"");
+        }
+
+        // Get Server from serverUrl
+        try {
+            // Get ServerDTO from serverUrl
+            ServerDTO serverDTO = geoPlatformService.getShortServer(serverUrlTest);
+            logger.debug("\n*** serverDTO:\n{}\n***", serverDTO);
+            Assert.assertNotNull(serverDTO);
+            Assert.assertEquals("Id Server NOT match", idServerTest, serverDTO.getId());
+            Assert.assertEquals("URL Server NOT match", serverUrlTest, serverDTO.getServerUrl());
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Not found Server with serverUrl: \"" + idServerTest + "\"");
+        }
+    }
+
+    @Test
+    public void testGetAllServer() {
+        // Number of Servers
+        Collection<ServerDTO> servers = geoPlatformService.getAllServers();
+        Assert.assertNotNull(servers);
+        int totalServers = servers.size();
+        Assert.assertTrue("Number of Servers stored into database",
+                totalServers >= 1); // SetUp() added 1 server
+
+        // Insert new Server
+        long idNewServer = this.createAndInsertServer("map.testGetAllServer.com", GPCababilityType.WMS);
+
+        // Assert of number of Servers
+        Assert.assertEquals("Total numebr of Servers is wrong after inserted new Server",
+                geoPlatformService.getAllServers().size(), totalServers + 1);
+
+        // Delete new Server
+        this.deleteServer(idNewServer);
+
+        // Assert of number of Servers
+        Assert.assertEquals("Total numebr of Servers is wrong after deleted new Server",
+                geoPlatformService.getAllServers().size(), totalServers);
+    }
 
     @Test
     public void testGetCapabilities() throws ParseException,
             ResourceNotFoundFault {
-        ServerDTO serverDTO = geoPlatformService.getServer(
+        ServerDTO serverDTO = geoPlatformService.getShortServer(
                 "http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
 
         Assert.assertNotNull(serverDTO);
 
-        logger.info("NUMBER OF LAYERS FOR DPC ********** "
-                + geoPlatformService.getCapabilities(new RequestById(serverDTO.getId())).getList().size());
+        logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***",
+                geoPlatformService.getCapabilities(new RequestById(serverDTO.getId())).getList().size());
 
+    }
+
+    // Create and insert (with assert) a Server
+    private long createAndInsertServer(String serverUrl, GPCababilityType serverType) {
+        GeoPlatformServer server = this.createServer(serverUrl, serverType);
+        logger.debug("\n*** GeoPlatformServer to INSERT:\n{}\n***", server);
+        long idServer = geoPlatformService.insertServer(server);
+        logger.debug("\n*** Id ASSIGNED at the Server in the DB: {} ***", idServer);
+        Assert.assertTrue("Id ASSIGNED at the Server in the DB", idServer > 0);
+        return idServer;
+    }
+
+    private GeoPlatformServer createServer(String serverUrl, GPCababilityType serverType) {
+        // Create field's value from Regex on Server URL
+        String serverName = serverUrl.replaceAll("http://(dpc|map|www)\\.([^\\.]+)\\.(org|it|com)", "$1.$2.$3");
+        logger.debug("\n*** serverName:\n{}\n***", serverName);
+        String labelServer = serverName.replaceAll("(dpc|map|www)\\.([^\\.]+)\\.(org|it|com)", "$2");
+        logger.debug("\n*** labelServer:\n{}\n***", labelServer);
+        // Create Server
+        GeoPlatformServer server = new GeoPlatformServer();
+        server.setServerUrl(serverUrl);
+        server.setName(serverName);
+        server.setTitle(labelServer);
+        server.setAbstractServer("Abstract of " + labelServer);
+        server.setContactPerson("Contact Person of " + labelServer);
+        server.setContactOrganization("Contact Organization of " + labelServer);
+        server.setServerType(serverType);
+        return server;
+    }
+
+    // Delete (with assert) a Server
+    private void deleteServer(long idServer) {
+        try {
+            boolean check = geoPlatformService.deleteServer(idServer);
+            Assert.assertTrue("Server with id = " + idServer + " has not been eliminated", check);
+        } catch (Exception e) {
+            Assert.fail("Error while deleting Server with Id: " + idServer);
+        }
     }
 }

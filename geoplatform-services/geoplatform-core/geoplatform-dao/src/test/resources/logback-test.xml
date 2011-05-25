@@ -19,5 +19,7 @@
         <level value="info" />
         <appender-ref ref="STDOUT" />
     </root>
+    
+    <!--logger name="org.geosdi.geoplatform.BaseDAOTest" level="debug"/-->
 
 </configuration>

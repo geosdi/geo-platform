@@ -129,7 +129,7 @@ public abstract class BaseDAOTest {
     private void removeAllAuthority() {
         List<GPAuthority> autorities = authorityDAO.findAll();
         for (GPAuthority autority : autorities) {
-            logger.info("Removing " + autority);
+            logger.debug("Removing " + autority);
             boolean ret = authorityDAO.remove(autority);
             Assert.assertTrue("Old Authority not removed", ret);
         }
@@ -138,7 +138,7 @@ public abstract class BaseDAOTest {
     private void removeAllFolder() {
         List<GPFolder> folders = folderDAO.findAll();
         for (GPFolder folder : folders) {
-            logger.info("Removing " + folder);
+            logger.debug("Removing " + folder);
             folderDAO.remove(folder);
         }
     }
@@ -146,7 +146,7 @@ public abstract class BaseDAOTest {
     private void removeAllLayer() {
         List<GPLayer> layers = layerDAO.findAll();
         for (GPLayer layer : layers) {
-            logger.info("Removing " + layer);
+            logger.debug("Removing " + layer);
             layerDAO.remove(layer);
         }
     }
@@ -154,7 +154,7 @@ public abstract class BaseDAOTest {
     private void removeAllStyle() {
         List<GPStyle> styles = styleDAO.findAll();
         for (GPStyle style : styles) {
-            logger.info("Removing " + style);
+            logger.debug("Removing " + style);
             boolean ret = styleDAO.remove(style);
             Assert.assertTrue("Old Style not removed", ret);
         }
@@ -163,7 +163,7 @@ public abstract class BaseDAOTest {
     private void removeAllUser() {
         List<GPUser> users = userDAO.findAll();
         for (GPUser user : users) {
-            logger.info("Removing " + user);
+            logger.debug("Removing " + user);
             boolean ret = userDAO.remove(user);
             Assert.assertTrue("Old User not removed", ret);
         }
@@ -172,14 +172,13 @@ public abstract class BaseDAOTest {
     private void removeAllServer() {
         List<GeoPlatformServer> servers = serverDAO.findAll();
         for (GeoPlatformServer server : servers) {
-            logger.info("Removing " + server);
+            logger.debug("Removing " + server);
             boolean ret = serverDAO.remove(server);
             Assert.assertTrue("Old User not removed", ret);
         }
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="Insert data">
     protected void insertData() throws ParseException {
         insertUser();
@@ -188,14 +187,14 @@ public abstract class BaseDAOTest {
     private void insertUser() {
         GPUser user = createUser("user_0");
         userDAO.persist(user);
-        logger.info("Save user: " + user);
+        logger.debug("Save user: " + user);
 
         List<GPAuthority> authorities = new ArrayList<GPAuthority>();
         GPAuthority authority = new GPAuthority(user.getUsername(), "ROLE_ADMIN");
         authorities.add(authority);
         user.setGpAuthorities(authorities);
         authorityDAO.persist(authority);
-        logger.info("Save Authority for: " + authority);
+        logger.debug("Save Authority for: " + authority);
     }
 
     protected GPUser createUser(String name) {
@@ -228,23 +227,23 @@ public abstract class BaseDAOTest {
         onlyFolders.setOwner(user);
         onlyFolders.setPosition(++position);
         onlyFolders.setParent(null);
-        
+
         // "only folders" ---> "empty subfolder A"
         GPFolder emptySubFolderA = new GPFolder();
         emptySubFolderA.setName("empty subfolder A");
         emptySubFolderA.setPosition(++position);
         emptySubFolderA.setParent(onlyFolders);
         emptySubFolderA.setChecked(true);
-        
+
         // "only folders" ---> "empty subfolder B"
         GPFolder emptySubFolderB = new GPFolder();
         emptySubFolderB.setName("empty subfolder B");
         emptySubFolderB.setPosition(++position);
         emptySubFolderB.setParent(onlyFolders);
         emptySubFolderB.setChecked(true);
-        
+
         folderDAO.persist(onlyFolders, emptySubFolderA, emptySubFolderB);
-        
+
         // "my raster"
         GPFolder folderRaster = new GPFolder();
         folderRaster.setName("my raster");
@@ -358,8 +357,8 @@ public abstract class BaseDAOTest {
         style.setName(name);
         style.setTitle("The " + name);
         style.setAbstractText("Abstract for " + name);
-        style.setLegendURL("http://www.geosdi.org/" + name.replaceAll("[ ]+",
-                "-"));
+        style.setLegendURL("http://www.geosdi.org/"
+                + name.replaceAll("[ ]+", "-"));
         return style;
     }
     //</editor-fold>

@@ -382,7 +382,7 @@ public interface GeoPlatformService {
     @Get
     @HttpResource(location = "/servers/{serverUrl}")
     @WebResult(name = "Servers")
-    ServerDTO getServer(@WebParam(name = "serverUrl") String serverUrl)
+    ServerDTO getShortServer(@WebParam(name = "serverUrl") String serverUrl)
             throws ResourceNotFoundFault;
 
     @Get

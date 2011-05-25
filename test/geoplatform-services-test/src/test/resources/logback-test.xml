@@ -27,6 +27,7 @@
         <appender-ref ref="STDOUT" />
     </root>
     
-    <!-- logger name="org.geosdi.geoplatform.WSFolderLayerTest" level="debug"/-->
+    <logger name="org.geosdi.geoplatform.CXFServiceTest" level="info"/>
+    <logger name="org.geosdi.geoplatform.WSFolderLayerTest" level="info"/>
 
 </configuration>

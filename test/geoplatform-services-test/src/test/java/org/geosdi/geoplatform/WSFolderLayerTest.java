@@ -97,7 +97,7 @@ public class WSFolderLayerTest extends ServiceTest {
         super.setUp();
         logger.info("WSFolderLayerTest - SetUp --------------------------------> " + this.getClass().getName());
 
-        findUser = geoPlatformService.getUserDetailByName(new SearchRequest(username));
+        userTest = geoPlatformService.getUserDetailByName(new SearchRequest(usernameTest));
 
         // "rootFolderA" ---> "rasterLayer1"
         idRasterLayer1 = createAndInsertRasterLayer(abstractTextRasterLayer1, rootFolderA, nameRasterLayer1, 3,
@@ -139,7 +139,7 @@ public class WSFolderLayerTest extends ServiceTest {
             Assert.assertEquals("assertEquals shortVectorLayer1.getUrlServer()", shortVectorLayer1.getUrlServer(), urlServer);
             Assert.assertEquals("assertEquals shortVectorLayer1.getLayerType()", shortVectorLayer1.getLayerType(), GPLayerType.POLYGON);
         } catch (ResourceNotFoundFault ex) {
-            logger.debug("\n***** Layer with id \"" + idRasterLayer1 + "\" not found");
+            logger.debug("\n*** Layer with id \"{}\" was NOT found ***", idRasterLayer1);
         }
     }
 
@@ -156,9 +156,9 @@ public class WSFolderLayerTest extends ServiceTest {
             Assert.assertNotNull("assertNotNull layerUpdated", layerUpdated);
             Assert.assertEquals("assertEquals layerUpdated.getName()", layerUpdated.getName(), nameLayerUpdated);
         } catch (IllegalParameterFault ex) {
-            Assert.fail("Layer has an illegal parameter");
+            Assert.fail("Layer has an Illegal Parameter");
         } catch (ResourceNotFoundFault ex) {
-            Assert.fail("Layer with id \"" + idRasterLayer1 + "\" not found");
+            Assert.fail("Layer with id \"" + idRasterLayer1 + "\" was NOT found");
         }
 
         try {
@@ -166,7 +166,7 @@ public class WSFolderLayerTest extends ServiceTest {
             Assert.assertNotNull("assertNotNull folderA", folderA);
             Assert.assertEquals("assertEquals folderA.getNumberOfChilds()", folderA.getNumberOfChilds(), 1);
         } catch (ResourceNotFoundFault ex) {
-            Assert.fail("Unable to find folder with id \"" + idRootFolderA);
+            Assert.fail("Folder with id \"" + idRootFolderA + "\" was NOT found");
         }
 
         try {
@@ -174,7 +174,7 @@ public class WSFolderLayerTest extends ServiceTest {
             Assert.assertNotNull("assertNotNull folderB", folderB);
             Assert.assertEquals("assertEquals folderB.getNumberOfChilds()", folderB.getNumberOfChilds(), 3);
         } catch (ResourceNotFoundFault ex) {
-            Assert.fail("Unable to find folder with id \"" + idRootFolderB);
+            Assert.fail("Folder with id \"" + idRootFolderB + "\" was NOT found");
         }
     }
 
@@ -197,13 +197,13 @@ public class WSFolderLayerTest extends ServiceTest {
             Assert.assertTrue("Deletion of the layer rasterLayer1", erased);
 
             // Get root folders for user
-            FolderList folderList = geoPlatformService.getUserFoldersByUserId(idUser);
+            FolderList folderList = geoPlatformService.getUserFoldersByUserId(idUserTest);
 
             // Assert on the structure of user's folders
             Assert.assertEquals("assertEquals folderList.getList().size()", folderList.getList().size(), 2);
             // Assert on the structure of "rootFolderA"
             TreeFolderElements childrenRootFolderA = geoPlatformService.getChildrenElements(idRootFolderA);
-            logger.debug("\n************************ childrenRootFolderA:\n" + childrenRootFolderA + "\n*****");
+            logger.debug("\n*** childrenRootFolderA:\n{}\n***", childrenRootFolderA);
             Assert.assertNotNull("assertNotNull childrenRootFolderA", childrenRootFolderA);
             Assert.assertEquals("assertEquals childrenRootFolderA.size()", childrenRootFolderA.size(), 1);
             // Assert on layers of "rootFolderA"
@@ -211,6 +211,7 @@ public class WSFolderLayerTest extends ServiceTest {
             Assert.assertEquals("assertEquals shortVectorLayerRootFolderA.getName()", shortVectorLayerRootFolderA.getName(), nameVectorLayer1);
             // Assert on the structure of "rootFolderB"
             TreeFolderElements childrenRootFolderB = geoPlatformService.getChildrenElements(idRootFolderB);
+            logger.debug("\n*** childrenRootFolderB:\n{}\n***", childrenRootFolderB);
             Assert.assertNotNull("assertNotNull childrenRootFolderB", childrenRootFolderB);
             Assert.assertEquals("assertEquals childrenRootFolderB.size()", childrenRootFolderB.size(), 2);
             // Assert on layers of "rootFolderB"
@@ -224,9 +225,9 @@ public class WSFolderLayerTest extends ServiceTest {
             LayerList allLayersAfterDelete = geoPlatformService.getLayers();
             Assert.assertEquals("assertEquals allLayersAfterDelete.getList().size()", allLayersAfterDelete.getList().size(), totalLayers - 1);
         } catch (IllegalParameterFault ipf) {
-            Assert.fail("Folder has an illegal parameter");
+            Assert.fail("Folder has an Illegal Parameter");
         } catch (ResourceNotFoundFault rnff) {
-            Assert.fail("Folder with id \"" + idRootFolderB + "\" not found");
+            Assert.fail("Folder with id \"" + idRootFolderB + "\" was NOT found");
         } catch (Exception e) {
             Assert.fail("Exception: " + e.getClass());
         }
@@ -238,11 +239,10 @@ public class WSFolderLayerTest extends ServiceTest {
     // Check if a folder was eliminated
     private void checkLayerDeleted(long idLayer) {
         try {
-            RequestById request = new RequestById(idLayer);
             ShortLayerDTO layer = geoPlatformService.getShortLayer(idLayer);
             Assert.fail("Layer with id \"" + idLayer + "\" was NOT deleted");
         } catch (Exception e) {
-            logger.debug("\n***** Layer with id \"" + idLayer + "\" was deleted");
+            logger.debug("\n*** Layer with id \"{}\" was deleted ***", idLayer);
         }
     }
 
@@ -258,8 +258,7 @@ public class WSFolderLayerTest extends ServiceTest {
             Assert.assertEquals("assertEquals layer.getTitle()", layer.getTitle(), titleVectorLayer2);
             Assert.assertEquals("assertEquals layer.getUrlServer()", layer.getUrlServer(), urlServer);
         } catch (ResourceNotFoundFault ex) {
-            Assert.fail();
-            logger.error("\n***** Layer with id \"" + idVectorLayer2 + "\" not found");
+            Assert.fail("Layer with id \"" + idVectorLayer2 + "\" was NOT found");
         }
     }
 
@@ -273,8 +272,7 @@ public class WSFolderLayerTest extends ServiceTest {
             Assert.assertEquals("assertEquals bbox.getMinX()", bbox.getMinX(), 10.0);
             Assert.assertEquals("assertEquals bbox.getMinY()", bbox.getMinY(), 10.0);
         } catch (ResourceNotFoundFault ex) {
-            Assert.fail();
-            logger.error("\n***** Layer with id \"" + idVectorLayer1 + "\" not found");
+            Assert.fail("Layer with id \"" + idVectorLayer1 + "\" was NOT found");
         }
     }
 
@@ -286,8 +284,7 @@ public class WSFolderLayerTest extends ServiceTest {
             Assert.assertEquals("assertEquals layerInfo.getKeywords()", layerInfo.getKeywords(), layerInfoKeyword);
             Assert.assertEquals("assertEquals layerInfo.isQueryable()", layerInfo.isQueryable(), false);
         } catch (ResourceNotFoundFault ex) {
-            Assert.fail();
-            logger.error("\n***** Layer with id \"" + idRasterLayer2 + "\" not found");
+            Assert.fail("Layer with id \"" + idRasterLayer2 + "\" was NOT found");
         }
     }
 }

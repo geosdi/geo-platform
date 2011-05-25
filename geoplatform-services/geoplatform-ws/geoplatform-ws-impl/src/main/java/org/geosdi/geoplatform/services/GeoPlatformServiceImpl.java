@@ -39,6 +39,8 @@ package org.geosdi.geoplatform.services;
 
 import java.util.Collection;
 import javax.jws.WebService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
@@ -69,8 +71,6 @@ import org.geosdi.geoplatform.responce.collection.FolderList;
 import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.responce.collection.UserList;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
@@ -423,31 +423,20 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public Collection<ServerDTO> getAllServers() {
-        return wmsServiceDelegate.getServers();
-    }
-
-    @Override
     public GeoPlatformServer getServerDetail(long idServer)
             throws ResourceNotFoundFault {
         return wmsServiceDelegate.getServerDetail(idServer);
     }
 
     @Override
-    public ServerDTO getServer(String serverUrl) throws ResourceNotFoundFault {
-        // TODO Auto-generated method stub
-
-        GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
-
-        if (server == null) {
-            throw new ResourceNotFoundFault("Server not found " + serverUrl);
-        }
-
-        ServerDTO serverDTO = new ServerDTO();
-        serverDTO.setId(server.getId());
-
-        return serverDTO;
+    public ServerDTO getShortServer(String serverUrl) throws ResourceNotFoundFault {
+        return wmsServiceDelegate.getShortServer(serverUrl);
     }
+    
+    @Override
+    public Collection<ServerDTO> getAllServers() {
+        return wmsServiceDelegate.getServers();
+    }    
 
     @Override
     public LayerList getCapabilities(RequestById request)

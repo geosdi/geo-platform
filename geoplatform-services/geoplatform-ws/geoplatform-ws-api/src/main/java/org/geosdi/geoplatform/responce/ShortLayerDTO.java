@@ -51,8 +51,8 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"id", "name", "position", "shared",
-    "urlServer", "srs", "layerType", "abstractText", "title", "bbox", "checked"})
+@XmlType(propOrder = {"id", "name", "position", "shared", "checked",
+    "urlServer", "srs", "abstractText", "title", "layerType", "bbox"})
 @XmlSeeAlso(value = {RasterLayerDTO.class, VectorLayerDTO.class})
 public class ShortLayerDTO extends AbstractElementDTO {
 
@@ -161,19 +161,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
     public void setLayerType(GPLayerType layerType) {
         this.layerType = layerType;
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        String s = super.toString()
-                + ", urlServer=" + urlServer + ", srs=" + srs;
-        return s;
-    }
-
+    
     /**
      * @return the bbox
      */
@@ -186,5 +174,19 @@ public class ShortLayerDTO extends AbstractElementDTO {
      */
     public void setBbox(GPBBox bbox) {
         this.bbox = bbox;
+    }    
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        String s = super.toString()
+                + ", urlServer=" + urlServer + ", srs=" + srs
+                + ", abstractText=" + abstractText + ", title=" + title
+                + ", layerType=" + layerType + ", " + bbox;
+        return s;
     }
 }

@@ -123,6 +123,18 @@ class WMSServiceImpl {
 
         return server;
     }
+    
+
+    public ServerDTO getShortServer(String serverUrl) throws ResourceNotFoundFault {
+        GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
+
+        if (server == null) {
+            throw new ResourceNotFoundFault("Server not found " + serverUrl);
+        }
+
+        ServerDTO serverDTO = new ServerDTO(server);
+        return serverDTO;
+    }    
 
     public Collection<ServerDTO> getServers() {
         List<GeoPlatformServer> found = serverDao.findAll();
@@ -153,8 +165,8 @@ class WMSServiceImpl {
             throw new ResourceNotFoundFault("ServiceException ", e);
         } catch (IOException e) {
             // TODO Auto-generated catch block
-           LOGGER.error("IOException : " + e);
-           throw new ResourceNotFoundFault("IOException ", e);
+            LOGGER.error("IOException : " + e);
+            throw new ResourceNotFoundFault("IOException ", e);
         }
 
         return convertToLayerList(cap.getLayerList());

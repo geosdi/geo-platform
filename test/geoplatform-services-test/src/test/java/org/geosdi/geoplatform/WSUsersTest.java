@@ -63,10 +63,10 @@ public class WSUsersTest extends ServiceTest {
     @Test
     public void testUsersDB() {
         UserList userList = geoPlatformService.getUsers();
-        logger.info("\n***** Number of Users in the DB: " + userList.getList().size());
+        logger.info("\n*** Number of Users in the DB: {} ***", userList.getList().size());
         if (userList != null) {
             for (Iterator<UserDTO> it = userList.getList().iterator(); it.hasNext();) {
-                logger.info("\nUSER ***** " + it.next());
+                logger.info("\n** USER:\n{}\n***", it.next());
 
             }
         }
@@ -74,41 +74,41 @@ public class WSUsersTest extends ServiceTest {
 
     @Test
     public void testManageUser() {
-        // Number of User
+        // Number of Users
         UserList userList = geoPlatformService.getUsers();
         Assert.assertNotNull(userList);
         Assert.assertTrue("Number of Users stored into database", userList.getList().size() >= 1);
 
         // Number of User Like
-        long numUsersLike = geoPlatformService.getUsersCount(new SearchRequest(username));
+        long numUsersLike = geoPlatformService.getUsersCount(new SearchRequest(usernameTest));
         Assert.assertEquals("Number of User Like", numUsersLike, new Long(1).longValue());
 
         // Get User from Id
         try {
             // Get UserDTO from Id
-            UserDTO userDTOFromWS = geoPlatformService.getShortUser(new RequestById(idUser));
+            UserDTO userDTOFromWS = geoPlatformService.getShortUser(new RequestById(idUserTest));
             Assert.assertNotNull(userDTOFromWS);
-            Assert.assertEquals("Error found User from Id", idUser, userDTOFromWS.getId());
+            Assert.assertEquals("Error found User from Id", idUserTest, userDTOFromWS.getId());
             // Get GPUser from Id
-            GPUser userFromWS = geoPlatformService.getUserDetail(new RequestById(idUser));
+            GPUser userFromWS = geoPlatformService.getUserDetail(new RequestById(idUserTest));
             Assert.assertNotNull(userFromWS);
-            Assert.assertEquals("Error found User from Id", idUser, userFromWS.getId());
+            Assert.assertEquals("Error found User from Id", idUserTest, userFromWS.getId());
         } catch (ResourceNotFoundFault ex) {
-            Assert.fail("Not found User with Id: \"" + idUser + "\"");
+            Assert.fail("Not found User with Id: \"" + idUserTest + "\"");
         }
 
         // Get User from Username
         try {
             // Get UserDTO from Username
-            UserDTO userDTOFromWS = geoPlatformService.getShortUserByName(new SearchRequest(username));
+            UserDTO userDTOFromWS = geoPlatformService.getShortUserByName(new SearchRequest(usernameTest));
             Assert.assertNotNull(userDTOFromWS);
-            Assert.assertEquals("Error found User from Username", idUser, userDTOFromWS.getId());
+            Assert.assertEquals("Error found User from Username", idUserTest, userDTOFromWS.getId());
             // Get GPUser from Username
-            GPUser userFromWS = geoPlatformService.getUserDetailByName(new SearchRequest(username));
+            GPUser userFromWS = geoPlatformService.getUserDetailByName(new SearchRequest(usernameTest));
             Assert.assertNotNull(userFromWS);
-            Assert.assertEquals("Error found User from Username", idUser, userFromWS.getId());
+            Assert.assertEquals("Error found User from Username", idUserTest, userFromWS.getId());
         } catch (ResourceNotFoundFault ex) {
-            Assert.fail("Not found User with Username: \"" + username + "\"");
+            Assert.fail("Not found User with Username: \"" + usernameTest + "\"");
         }
     }
 }

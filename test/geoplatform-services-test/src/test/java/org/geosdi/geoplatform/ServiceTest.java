@@ -37,10 +37,19 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
-import com.vividsolutions.jts.geom.CoordinateSequence;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Point;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mortbay.jetty.Server;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
@@ -53,18 +62,6 @@ import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mortbay.jetty.Server;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -84,20 +81,20 @@ public abstract class ServiceTest implements InitializingBean {
     @Autowired
     protected Server gpJettyServer;
     
-    final String username = "username_test_ws";
-    protected GPUser findUser = null;
-    protected long idUser = -1;
-    
-    final String nameRootFolderA = "rootFolderA";
+    protected String layerInfoKeyword = "keyword";
+    // User
+    protected final String usernameTest = "username_test_ws";
+    protected GPUser userTest = null;
+    protected long idUserTest = -1;
+    // Folder A
+    protected final String nameRootFolderA = "rootFolderA";
     protected GPFolder rootFolderA = null;
     protected long idRootFolderA = -1;
-    
-    final String nameRootFolderB = "rootFolderB";
+    // Folder B
+    protected final String nameRootFolderB = "rootFolderB";
     protected GPFolder rootFolderB = null;
     protected long idRootFolderB = -1;
-    
-    protected String layerInfoKeyword = "keyword";
-    
+
     @Override
     public void afterPropertiesSet() throws Exception {
         logger.info("ServiceTest - afterPropertiesSet-------------------------------> " + this.getClass().getName());
@@ -113,14 +110,14 @@ public abstract class ServiceTest implements InitializingBean {
         logger.info("ServiceTest - SetUp --------------------------------> " + this.getClass().getName());
 
         // Insert User        
-        idUser = this.createAndInsertUser(username);
-        findUser = geoPlatformService.getUserDetailByName(new SearchRequest(username));
-        
+        idUserTest = this.createAndInsertUser(usernameTest);
+        userTest = geoPlatformService.getUserDetailByName(new SearchRequest(usernameTest));
+
         // Create root folders for the user
-        idRootFolderA = createAndInsertFolderWithOwner(nameRootFolderA, findUser, 1, false);
+        idRootFolderA = createAndInsertFolderWithOwner(nameRootFolderA, userTest, 1, false);
         rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
 
-        idRootFolderB = createAndInsertFolderWithOwner(nameRootFolderB, findUser, 2, false);
+        idRootFolderB = createAndInsertFolderWithOwner(nameRootFolderB, userTest, 2, false);
         rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
     }
 
@@ -128,16 +125,16 @@ public abstract class ServiceTest implements InitializingBean {
     public void tearDown() {
         logger.info("ServiceTest - tearDown --------------------------------> " + this.getClass().getName());
         // Delete user
-        this.deleteUser(idUser);
+        this.deleteUser(idUserTest);
     }
-    
+
     @Test
     public void testRootFolders() {
         // Check root folder A
         Assert.assertNotNull(rootFolderA);
         Assert.assertEquals(rootFolderA.getName(), nameRootFolderA);
         Assert.assertEquals(rootFolderA.getPosition(), 1);
-        
+
         // Check root folder B
         Assert.assertNotNull(rootFolderB);
         Assert.assertEquals(rootFolderB.getName(), nameRootFolderB);
@@ -147,15 +144,14 @@ public abstract class ServiceTest implements InitializingBean {
     // Create and insert (with assert) a User
     protected long createAndInsertUser(String username) {
         GPUser user = createUser(username);
-        logger.debug("\n***** GPUser to INSERT: " + user);
+        logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
         long idUser = geoPlatformService.insertUser(user);
-        logger.debug("\n***** Id ASSIGNED at the User in the DB: " + idUser);
+        logger.debug("\n*** Id ASSIGNED at the User in the DB: {} ***", idUser);
         Assert.assertTrue("Id ASSIGNED at the User in the DB", idUser > 0);
         return idUser;
     }
 
-    private GPUser createUser(String name) {
-        String username = name;
+    private GPUser createUser(String username) {
         GPUser user = new GPUser();
         user.setUsername(username);
         user.setEmailAddress(username + "@test.org");
@@ -171,8 +167,7 @@ public abstract class ServiceTest implements InitializingBean {
             boolean check = geoPlatformService.deleteUser(new RequestById(idUser));
             Assert.assertTrue("User with id = " + idUser + " has not been eliminated", check);
         } catch (Exception e) {
-            logger.error("\n***** Error while deleting User with Id: " + idUser);
-            Assert.fail();
+            Assert.fail("Error while deleting User with Id: " + idUser);
         }
     }
 
@@ -199,39 +194,39 @@ public abstract class ServiceTest implements InitializingBean {
     }
 
     protected long createAndInsertRasterLayer(String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
-                                              String srs, String title, String urlServer) {        
+            String srs, String title, String urlServer) {
         GPRasterLayer rasterLayer = new GPRasterLayer();
         createAndInsertLayer(rasterLayer, abstractText, parentFolder, name, position, shared, srs, title, urlServer);
         rasterLayer.setFolder(parentFolder);
-        
+
         GPLayerInfo layerInfo = new GPLayerInfo();
         layerInfo.setKeywords(layerInfoKeyword);
         layerInfo.setQueryable(false);
         rasterLayer.setLayerInfo(layerInfo);
-        
+
         rasterLayer.setLayerType(GPLayerType.RASTER);
         long id = geoPlatformService.insertLayer(rasterLayer);
         return id;
     }
 
     protected long createAndInsertVectorLayer(String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
-                                              String srs, String title, String urlServer) {
+            String srs, String title, String urlServer) {
         GPVectorLayer vectorLayer = new GPVectorLayer();
         createAndInsertLayer(vectorLayer, abstractText, parentFolder, name, position, shared, srs, title, urlServer);
         vectorLayer.setFolder(parentFolder);
-        
+
         vectorLayer.setLayerType(GPLayerType.POLYGON);
         long id = geoPlatformService.insertLayer(vectorLayer);
         return id;
     }
 
     protected void createAndInsertLayer(GPLayer gpLayer, String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
-                                           String srs, String title, String urlServer) {
+            String srs, String title, String urlServer) {
         double minX = 10;
         double minY = 10;
         double maxX = 20;
         double maxY = 20;
-        
+
         gpLayer.setAbstractText(abstractText);
         gpLayer.setName(name);
         gpLayer.setPosition(position);
@@ -239,7 +234,7 @@ public abstract class ServiceTest implements InitializingBean {
         gpLayer.setSrs(srs);
         gpLayer.setTitle(title);
         gpLayer.setUrlServer(urlServer);
-        
+
         GPBBox bBox = new GPBBox(minX, minY, maxX, maxY);
         gpLayer.setBbox(bBox);
     }

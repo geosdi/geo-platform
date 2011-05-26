@@ -62,7 +62,6 @@ import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
@@ -82,7 +81,6 @@ import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeModel> {
 
     private LayerRemoteAsync layerService = LayerRemoteImpl.Util.getInstance();
-
     private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(
             super.tree);
     private GPBeanTreeModel tmpFolder;
@@ -263,26 +261,27 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
 
     @Override
     public RpcProxy<ArrayList<GPBeanTreeModel>> generateRpcProxy() {
-        RpcProxy<ArrayList<GPBeanTreeModel>> rpcProxy = new RpcProxy<ArrayList<GPBeanTreeModel>>() {
-
-            @Override
-            protected void load(Object loadConfig,
-                    AsyncCallback<ArrayList<GPBeanTreeModel>> callback) {
-                if (initialized == false) {
-                    tmpFolder = root;
-                    layerService.loadUserFolders("user_0", callback);
-                    //System.out.println("User folder inizialized");
-                    initialized = true;
-                } else if (loadConfig != null
-                        && (loadConfig instanceof FolderTreeNode
-                        || loadConfig instanceof GPRootTreeNode)) {
-                    tmpFolder = (GPBeanTreeModel) loadConfig;
-                    layerService.loadFolderElements(
-                            ((FolderTreeNode) tmpFolder).getId(), callback);
-                }
-            }
-        };
-        return rpcProxy;
+//        RpcProxy<ArrayList<GPBeanTreeModel>> rpcProxy = new RpcProxy<ArrayList<GPBeanTreeModel>>() {
+//
+//            @Override
+//            protected void load(Object loadConfig,
+//                    AsyncCallback<ArrayList<GPBeanTreeModel>> callback) {
+//                if (initialized == false) {
+//                    tmpFolder = root;
+//                    layerService.loadUserFolders("user_0", callback);
+//                    //System.out.println("User folder inizialized");
+//                    initialized = true;
+//                } else if (loadConfig != null
+//                        && (loadConfig instanceof FolderTreeNode
+//                        || loadConfig instanceof GPRootTreeNode)) {
+//                    tmpFolder = (GPBeanTreeModel) loadConfig;
+//                    layerService.loadFolderElements(
+//                            ((FolderTreeNode) tmpFolder).getId(), callback);
+//                }
+//            }
+//        };
+//        return rpcProxy;
+        return null;
     }
 
     @Override
@@ -315,4 +314,5 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
     public GPBeanTreeModel getSelectedFolder() {
         return this.tmpFolder;
     }
+
 }

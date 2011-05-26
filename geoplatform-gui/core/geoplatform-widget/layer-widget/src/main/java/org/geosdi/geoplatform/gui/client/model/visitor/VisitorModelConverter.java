@@ -60,16 +60,22 @@ public class VisitorModelConverter implements IVisitorClient {
 
     @Override
     public void visitFolder(GPFolderClientInfo clientFolder) {
-        this.folder.add(new FolderTreeNode(clientFolder));
+        FolderTreeNode node = new FolderTreeNode(clientFolder);
+        this.folder.add(node);
+        node.setParent(this.folder);
     }
 
     @Override
     public void visitVector(ClientVectorInfo clientVector) {
-        this.folder.add(new VectorTreeNode(clientVector));
+        VectorTreeNode vector = new VectorTreeNode(clientVector);
+        this.folder.add(vector);
+        vector.setParent(this.folder);
     }
 
     @Override
     public void visitRaster(ClientRasterInfo clientRaster) {
-        this.folder.add(new RasterTreeNode(clientRaster));
+        RasterTreeNode raster = new RasterTreeNode(clientRaster);
+        this.folder.add(raster);
+        raster.setParent(this.folder);
     }
 }

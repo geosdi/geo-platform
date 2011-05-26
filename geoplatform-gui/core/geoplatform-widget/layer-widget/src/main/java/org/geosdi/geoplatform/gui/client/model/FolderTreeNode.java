@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
+import com.extjs.gxt.ui.client.GXT;
 import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.LayerResources;
@@ -58,6 +59,8 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
     private static final long serialVersionUID = -3687415822526940729L;
     /** THIS PROPERTY MUST NOT BE SERIALIZED **/
     private transient VisitorModelConverter visitor = new VisitorModelConverter(this);
+    private transient boolean loaded = false;
+    private transient boolean loading = false;
     private int numberOfChildrens;
 
     public FolderTreeNode() {
@@ -69,7 +72,10 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
 
     public FolderTreeNode(GPFolderClientInfo folder) {
         super.setLabel(folder.getLabel());
+        super.setId(folder.getId());
         super.setzIndex(folder.getzIndex());
+        super.setChecked(folder.isChecked());
+        this.numberOfChildrens = folder.getNumberOfChildrens();
         this.modelConverter(folder.getFolderElements());
     }
 
@@ -90,7 +96,9 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
      */
     @Override
     public AbstractImagePrototype getIcon() {
-        // TODO Auto-generated method stub
+        if (this.isLoading()) {
+            return GXT.IMAGES.icon_wait();
+        }
         return LayerResources.ICONS.layerFolder();
     }
 
@@ -107,6 +115,26 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
     public void setNumberOfChildrens(int numberOfChildrens) {
         this.numberOfChildrens = numberOfChildrens;
     }
-    
-    
+
+    /**
+     * @return the loaded
+     */
+    public boolean isLoaded() {
+        return loaded;
+    }
+
+    /**
+     * @param loaded the loaded to set
+     */
+    public void setLoaded(boolean loaded) {
+        this.loaded = loaded;
+    }
+
+    public boolean isLoading() {
+        return loading;
+    }
+
+    public void setLoading(boolean loading) {
+        this.loading = loading;
+    }
 }

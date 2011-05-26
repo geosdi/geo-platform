@@ -50,6 +50,33 @@ public class ClientVectorInfo extends GPLayerClientInfo {
     private static final long serialVersionUID = -4276234033316787251L;
     private String featureType;
     private String featureNameSpace;
+    private long id;
+    private boolean checked;
+    private String layerName;
+
+    public String getLayerName() {
+        return layerName;
+    }
+
+    public void setLayerName(String layerName) {
+        this.layerName = layerName;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     /**
      * @return the featureType

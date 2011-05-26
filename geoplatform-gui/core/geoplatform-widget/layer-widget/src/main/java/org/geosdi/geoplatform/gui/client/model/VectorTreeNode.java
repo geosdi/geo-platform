@@ -55,8 +55,9 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
      */
     private static final long serialVersionUID = -2445765797861311204L;
     private String featureNameSpace;
-    
-    public VectorTreeNode(){}
+
+    public VectorTreeNode() {
+    }
 
     /**
      * @Constructor
@@ -70,6 +71,8 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
         super.setBbox(layer.getBbox());
         super.setzIndex(layer.getzIndex());
         super.setLayerType(layer.getLayerType());
+        super.setChecked(layer.isChecked());
+        super.setId(layer.getId());
         this.setFeatureNameSpace(layer.getFeatureNameSpace());
     }
 

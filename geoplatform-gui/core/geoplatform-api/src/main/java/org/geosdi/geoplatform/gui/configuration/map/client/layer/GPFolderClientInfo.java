@@ -57,6 +57,33 @@ public class GPFolderClientInfo implements Serializable,
     private int zIndex;
     private List<IGPFolderElements> folderElements;
     private IGPParentElement parent;
+    private int numberOfChildrens;
+    private boolean checked;
+    private long id;
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public int getNumberOfChildrens() {
+        return numberOfChildrens;
+    }
+
+    public void setNumberOfChildrens(int numberOfChildrens) {
+        this.numberOfChildrens = numberOfChildrens;
+    }
 
     /**
      * @return the label

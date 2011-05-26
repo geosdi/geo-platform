@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tree;
 
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import com.extjs.gxt.ui.client.store.TreeStore;
@@ -49,7 +50,7 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
 
     protected TreeStore<T> store;
-    protected TreePanel<T> tree;
+    protected GPTreePanel<T> tree;
 
     /**
      * @Constructor
@@ -57,7 +58,7 @@ public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
      */
     public GeoPlatformTreeWidget() {
         this.store = new TreeStore<T>();
-        this.tree = new TreePanel<T>(store);
+        this.tree = this.createTreePanel(store);
     }
 
     /**
@@ -128,7 +129,9 @@ public abstract class GeoPlatformTreeWidget<T extends GPBeanTreeModel> {
      * @param tree
      *            the tree to set
      */
-    public void setTree(TreePanel<T> tree) {
+    public void setTree(GPTreePanel<T> tree) {
         this.tree = tree;
     }
+
+    public abstract GPTreePanel<T> createTreePanel(TreeStore<T> store);
 }

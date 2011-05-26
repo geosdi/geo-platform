@@ -80,11 +80,14 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
         this.source = (GPBeanTreeModel) sourceTreeModel;
         this.target = (GPBeanTreeModel) targetTreeModel;
         if (this.target instanceof GPRootTreeNode) {
+            //System.out.println("Target instanceof GPRootTreeNode");
             condition = false;// Elements above root not allowed
-        } else if (this.target instanceof FolderTreeNode && ((FolderTreeNode)this.target).getNumberOfChildrens() != 0
+        } else if (this.target instanceof FolderTreeNode && !((FolderTreeNode)this.target).isLoaded()
                 && !this.tree.isExpanded(target)){
+            //System.out.println("Folder having elements must be expanded before drop on it");
             condition = false;//Folder having elements must be expanded before drop on it
         } else if (this.target.isLeaf() && this.target instanceof FolderTreeNode) {
+            //System.out.println("Insert elements into empty folders");
             boolean dropLeaf = super.isAllowDropOnLeaf();
             Feedback feedback = super.getFeedback();
             super.setAllowDropOnLeaf(true);
@@ -95,6 +98,7 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
             condition = true;// Insert elements into empty folders
         } else if (!(source instanceof FolderTreeNode)
                 && target.getParent() instanceof GPRootTreeNode) {
+            //System.out.println("Leafs without a folder not allowed");
             condition = false;// Leafs without a folder not allowed
         }
         return condition;

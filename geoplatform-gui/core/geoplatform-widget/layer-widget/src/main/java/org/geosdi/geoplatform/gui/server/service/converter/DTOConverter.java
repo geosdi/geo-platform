@@ -40,11 +40,11 @@ import java.util.Collection;
 import java.util.Iterator;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayerType;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
@@ -66,22 +66,22 @@ public class DTOConverter {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public ArrayList<FolderTreeNode> convertOnlyFolder(
+    public ArrayList<GPFolderClientInfo> convertOnlyFolder(
             Collection<FolderDTO> gpFolders) {
-        ArrayList<FolderTreeNode> foldersClient = new ArrayList<FolderTreeNode>();
+        ArrayList<GPFolderClientInfo> foldersClient = new ArrayList<GPFolderClientInfo>();
 
         if (gpFolders != null) {
             for (Iterator<FolderDTO> it = gpFolders.iterator(); it.hasNext();) {
                 foldersClient.add(this.convertFolderElement(it.next()));
             }
         }
-        
+
         return foldersClient;
     }
 
-    public ArrayList<GPBeanTreeModel> convertFolderElements(
+    public ArrayList<IGPFolderElements> convertFolderElements(
             TreeFolderElements folderElements) {
-        ArrayList<GPBeanTreeModel> clientFolderElements = new ArrayList<GPBeanTreeModel>();
+        ArrayList<IGPFolderElements> clientFolderElements = new ArrayList<IGPFolderElements>();
         Object element;
         Iterator iterator = folderElements.iterator();
         while (iterator.hasNext()) {
@@ -100,33 +100,68 @@ public class DTOConverter {
         return clientFolderElements;
     }
 
-    private RasterTreeNode convertRasterElement(RasterLayerDTO rasterDTO) {
-        RasterTreeNode raster = new RasterTreeNode();
+//    private RasterTreeNode convertRasterElement(RasterLayerDTO rasterDTO) {
+//        RasterTreeNode raster = new RasterTreeNode();
+//        raster.setId(rasterDTO.getId());
+//        raster.setLabel(rasterDTO.getName());
+//        raster.setCrs(rasterDTO.getSrs());
+//        raster.setDataSource(rasterDTO.getUrlServer());
+//        raster.setzIndex(rasterDTO.getPosition());
+//        raster.setBbox(this.convertBbox(rasterDTO.getBbox()));
+//        raster.setChecked(raster.isChecked());
+//        return raster;
+//    }
+    
+    private ClientRasterInfo convertRasterElement(RasterLayerDTO rasterDTO) {
+        ClientRasterInfo raster = new ClientRasterInfo();
         raster.setId(rasterDTO.getId());
-        raster.setLabel(rasterDTO.getName());
+        raster.setLayerName(rasterDTO.getName());
         raster.setCrs(rasterDTO.getSrs());
         raster.setDataSource(rasterDTO.getUrlServer());
         raster.setzIndex(rasterDTO.getPosition());
         raster.setBbox(this.convertBbox(rasterDTO.getBbox()));
-        raster.setChecked(raster.isChecked());
+        raster.setChecked(rasterDTO.isChecked());
         return raster;
     }
 
-    private VectorTreeNode convertVectorElement(VectorLayerDTO vectorDTO) {
-        VectorTreeNode vector = new VectorTreeNode();
+    private ClientVectorInfo convertVectorElement(VectorLayerDTO vectorDTO) {
+        ClientVectorInfo vector = new ClientVectorInfo();
         vector.setId(vectorDTO.getId());
         this.setVectorLayerType(vector, vectorDTO.getLayerType());
-        vector.setLabel(vectorDTO.getName());
+        vector.setFeatureType(vectorDTO.getName());
         vector.setCrs(vectorDTO.getSrs());
         vector.setDataSource(vectorDTO.getUrlServer());
         vector.setzIndex(vectorDTO.getPosition());
         vector.setBbox(this.convertBbox(vectorDTO.getBbox()));
-        vector.setChecked(vector.isChecked());
+        vector.setChecked(vectorDTO.isChecked());
         return vector;
     }
 
-    private FolderTreeNode convertFolderElement(FolderDTO folderDTO) {
-        FolderTreeNode folder = new FolderTreeNode(folderDTO.getName());
+//    private VectorTreeNode convertVectorElement(VectorLayerDTO vectorDTO) {
+//        VectorTreeNode vector = new VectorTreeNode();
+//        vector.setId(vectorDTO.getId());
+//        this.setVectorLayerType(vector, vectorDTO.getLayerType());
+//        vector.setLabel(vectorDTO.getName());
+//        vector.setCrs(vectorDTO.getSrs());
+//        vector.setDataSource(vectorDTO.getUrlServer());
+//        vector.setzIndex(vectorDTO.getPosition());
+//        vector.setBbox(this.convertBbox(vectorDTO.getBbox()));
+//        vector.setChecked(vector.isChecked());
+//        return vector;
+//    }
+
+//    private FolderTreeNode convertFolderElement(FolderDTO folderDTO) {
+//        FolderTreeNode folder = new FolderTreeNode(folderDTO.getName());
+//        folder.setId(folderDTO.getId());
+//        folder.setzIndex(folderDTO.getPosition());
+//        folder.setNumberOfChildrens(folderDTO.getNumberOfChilds());
+//        folder.setChecked(folderDTO.isChecked());
+//        return folder;
+//    }
+
+    private GPFolderClientInfo convertFolderElement(FolderDTO folderDTO) {
+        GPFolderClientInfo folder = new GPFolderClientInfo();
+        folder.setLabel(folderDTO.getName());
         folder.setId(folderDTO.getId());
         folder.setzIndex(folderDTO.getPosition());
         folder.setNumberOfChildrens(folderDTO.getNumberOfChilds());
@@ -139,8 +174,7 @@ public class DTOConverter {
                 gpBbox.getMaxX(), gpBbox.getMaxY());
     }
 
-    private void setVectorLayerType(VectorTreeNode vector,
-            GPLayerType gPLayerType) {
+    private void setVectorLayerType(ClientVectorInfo vector, GPLayerType gPLayerType) {
         switch (gPLayerType) {
             case POINT:
                 vector.setLayerType(

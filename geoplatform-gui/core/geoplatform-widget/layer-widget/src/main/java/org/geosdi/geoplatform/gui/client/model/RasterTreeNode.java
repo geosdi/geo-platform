@@ -73,6 +73,8 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
         super.setBbox(layer.getBbox());
         super.setzIndex(layer.getzIndex());
         super.setLayerType(layer.getLayerType());
+        super.setChecked(layer.isChecked());
+        super.setId(layer.getId());
         this.setStyles(layer.getStyles());
     }
 

@@ -45,6 +45,7 @@ import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.google.gwt.user.client.Timer;
 import java.util.Iterator;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -55,7 +56,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  */
 public class GPLoadListener extends LoadListener {
 
-    private LayerAsyncTreeWidget layer;
+    private LayerAsyncTreeWidget layerTreeWidget;
     private final static int WAITING_TIME = 7000;
     private Timer timer;
     private MessageBox messageBox = new MessageBox();
@@ -79,7 +80,7 @@ public class GPLoadListener extends LoadListener {
      * @param layer
      */
     public GPLoadListener(LayerAsyncTreeWidget layer) {
-        this.layer = layer;
+        this.layerTreeWidget = layer;
     }
 
     @Override
@@ -110,9 +111,12 @@ public class GPLoadListener extends LoadListener {
     @Override
     public void loaderLoad(LoadEvent le) {
         this.resetLoaderListener();
-        this.layer.getSelectedFolder().setChildren((List) le.getData());
+        this.layerTreeWidget.getSelectedFolder().setChildren((List) le.getData());
         this.setElementsParent((List) le.getData(),
-                this.layer.getSelectedFolder());
+                this.layerTreeWidget.getSelectedFolder());
+        if (this.layerTreeWidget.getSelectedFolder() instanceof FolderTreeNode) {
+            ((FolderTreeNode) this.layerTreeWidget.getSelectedFolder()).setLoaded(true);
+        }
         LayoutManager.get().getStatusMap().setStatus(
                 "Tree elements loaded successfully.", null);
         //GeoPlatformMessage.infoMessage("Load completed", "Operation completed successfully.");
@@ -138,8 +142,8 @@ public class GPLoadListener extends LoadListener {
     }
 
     private void resetLoaderListener() {
-        this.isBusy = false;
         this.timer.cancel();
+        this.isBusy = false;
         if (this.messageBox != null && this.messageBox.isVisible()) {
             this.messageBox.getDialog().getButtonById(Dialog.NO).fireEvent(
                     Events.Select);

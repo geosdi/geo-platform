@@ -33,89 +33,27 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.map.client.layer;
+package org.geosdi.geoplatform.gui.client.widget.tree;
 
-import java.util.List;
-import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
+import com.extjs.gxt.ui.client.store.TreeStore;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class ClientRasterInfo extends GPLayerClientInfo {
+public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 3956898488739664952L;
-    private String layerName;
-    private List<String> styles;
-    private long id;
-    private boolean checked;
-
-    public boolean isChecked() {
-        return checked;
-    }
-
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the layerName
-     */
-    public String getLayerName() {
-        return layerName;
-    }
-
-    /**
-     * @param layerName
-     *            the layerName to set
-     */
-    public void setLayerName(String layerName) {
-        this.layerName = layerName;
-    }
-
-    /**
-     * @return the styles
-     */
-    public List<String> getStyles() {
-        return styles;
-    }
-
-    /**
-     * @param styles
-     *            the styles to set
-     */
-    public void setStyles(List<String> styles) {
-        this.styles = styles;
+    public GPTreePanel(TreeStore<T> store) {
+        super(store);
     }
 
     @Override
-    public void accept(IVisitorClient visitor) {
-        visitor.visitRaster(this);
+    public void refresh(T model) {
+        super.refresh(model);
     }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return "ClientRasterInfo [layerName=" + layerName + ", styles="
-                + styles + ", getDataSource()=" + getDataSource()
-                + ", getCrs()=" + getCrs() + ", getBbox()=" + getBbox()
-                + ", getLayerType()=" + getLayerType() + ", getzIndex()="
-                + getzIndex() + "]";
-    }
+    
+    
+    
 }

@@ -190,7 +190,7 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-
+        
 		<!-- SCOPE TEST -->
         <dependency>
             <groupId>org.springframework</groupId>

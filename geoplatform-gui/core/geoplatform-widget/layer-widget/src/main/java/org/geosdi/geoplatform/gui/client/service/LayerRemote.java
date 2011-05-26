@@ -41,6 +41,8 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -69,7 +71,23 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public ArrayList<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException;
+    //public ArrayList<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException;
+    
+        /**
+     * 
+     * @param userName
+     * @return
+     * @throws GeoPlatformException
+     */
+    public ArrayList<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException;
+    
+//    /**
+//     * 
+//     * @param folderId
+//     * @return
+//     * @throws GeoPlatformException
+//     */
+//    public ArrayList<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException;
     
     /**
      * 
@@ -77,7 +95,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public ArrayList<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException;
+    public ArrayList<IGPFolderElements> loadFolderElements(long folderId) throws GeoPlatformException;
 
     /**
      * 

@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.gui.server;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -47,10 +49,14 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  */
 public interface ILayerService {
 
-    public ArrayList<FolderTreeNode> loadUserFolders(String userName)
+//    public ArrayList<FolderTreeNode> loadUserFolders(String userName)
+//            throws GeoPlatformException;
+    public ArrayList<GPFolderClientInfo> loadUserFolders(String userName)
             throws GeoPlatformException;
     
-    public ArrayList<GPBeanTreeModel> loadFolderElements(long folderId)
+//    public ArrayList<GPBeanTreeModel> loadFolderElements(long folderId)
+//            throws GeoPlatformException;
+    public ArrayList<IGPFolderElements> loadFolderElements(long folderId)
             throws GeoPlatformException;
 
     public long saveFolderForUser(String folderName, int position)

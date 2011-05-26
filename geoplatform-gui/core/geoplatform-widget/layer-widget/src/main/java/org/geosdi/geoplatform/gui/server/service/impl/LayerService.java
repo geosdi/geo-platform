@@ -41,6 +41,8 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.server.ILayerService;
@@ -71,7 +73,7 @@ public class LayerService implements ILayerService {
     private DTOConverter dtoConverter;
 
     @Override
-    public ArrayList<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException {
+    public ArrayList<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException {
 //        TODO: check the right way to retrieve the user folders using the userName property
         SearchRequest userNameSearch = new SearchRequest(userName);
 
@@ -93,10 +95,10 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public ArrayList<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException {
+    public ArrayList<IGPFolderElements> loadFolderElements(long folderId) throws GeoPlatformException {
         TreeFolderElements folderElements = geoPlatformServiceClient.getChildrenElements(
                 folderId);
-        ArrayList<GPBeanTreeModel> elements = new ArrayList<GPBeanTreeModel>();
+        ArrayList<IGPFolderElements> elements = new ArrayList<IGPFolderElements>();
         try {
             folderElements.isEmpty();
             elements = this.dtoConverter.convertFolderElements(folderElements);

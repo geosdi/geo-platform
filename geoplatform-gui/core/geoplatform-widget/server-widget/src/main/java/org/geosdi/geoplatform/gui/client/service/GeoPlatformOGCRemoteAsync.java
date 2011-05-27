@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.service;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.client.model.GPLayerBeanModel;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
@@ -52,4 +53,7 @@ public interface GeoPlatformOGCRemoteAsync {
 
     public void getServerDetails(long idServer,
             AsyncCallback<GPServerBeanModel> callback) throws GeoPlatformException;
+
+    public void getCababilities(long idServer,
+            AsyncCallback<ArrayList<? extends GPLayerBeanModel>> callback) throws GeoPlatformException;
 }

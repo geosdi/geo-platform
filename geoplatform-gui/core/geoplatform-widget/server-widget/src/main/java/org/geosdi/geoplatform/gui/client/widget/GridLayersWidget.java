@@ -62,10 +62,11 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GridLayersWidget extends GeoPlatformGridWidget<GPLayerBean> {
+public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidget<L> {
 
     private FormPanel formPanel;
     private Button done;
+    private RowExpander rowExpander;
     private DisplayServerWidget displayWidget;
 
     /**
@@ -78,7 +79,7 @@ public class GridLayersWidget extends GeoPlatformGridWidget<GPLayerBean> {
     }
 
     private void initServerWidget() {
-        this.displayWidget = new DisplayServerWidget();
+        this.displayWidget = new DisplayServerWidget(this);
     }
 
     private void initFormPanel() {
@@ -116,6 +117,8 @@ public class GridLayersWidget extends GeoPlatformGridWidget<GPLayerBean> {
         grid.getView().setForceFit(true);
         grid.setLoadMask(true);
 
+        grid.addPlugin(this.rowExpander);
+
         grid.getSelectionModel().setSelectionMode(SelectionMode.MULTI);
 
         grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
@@ -132,8 +135,9 @@ public class GridLayersWidget extends GeoPlatformGridWidget<GPLayerBean> {
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
         XTemplate tpl = XTemplate.create(
-                "<p><b>Abstract:</b> {abstractText}</p>");
-        RowExpander rowExpander = new RowExpander(tpl);
+                "<p><b>Abstract:</b> {label}</p>");
+
+        rowExpander = new RowExpander(tpl);
 
         configs.add(rowExpander);
 
@@ -154,7 +158,7 @@ public class GridLayersWidget extends GeoPlatformGridWidget<GPLayerBean> {
 
     @Override
     public void createStore() {
-        this.store = new ListStore<GPLayerBean>();
+        this.store = new ListStore<L>();
     }
 
     /**
@@ -193,8 +197,22 @@ public class GridLayersWidget extends GeoPlatformGridWidget<GPLayerBean> {
      * @param beans
      *            {@link ArrayList} of GeocodingBean to fill the Store
      */
-    public void fillStore(ArrayList<GPLayerBean> beans) {
+    public void fillStore(ArrayList<L> beans) {
         this.store.add(beans);
+    }
+
+    /**
+     * 
+     */
+    public void cleanStore() {
+        this.store.removeAll();
+    }
+
+    public void resetComponents() {
+        this.store.removeAll();
+        unMaskGrid();
+        this.done.disable();
+        this.displayWidget.resetComponents();
     }
 
     /**

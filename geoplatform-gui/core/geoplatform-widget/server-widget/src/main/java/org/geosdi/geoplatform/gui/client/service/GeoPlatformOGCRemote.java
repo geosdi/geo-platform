@@ -39,6 +39,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.client.model.GPLayerBeanModel;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
@@ -83,4 +84,14 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      * @throws GeoPlatformException
      */
     public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException;
+
+    /**
+     *
+     * @param urlServer
+     *
+     * @return
+     * @throws GeoPlatformException
+     */
+    public ArrayList<? extends GPLayerBeanModel> getCababilities(
+            long idServer) throws GeoPlatformException;
 }

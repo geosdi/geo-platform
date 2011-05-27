@@ -147,6 +147,7 @@ public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<Geocod
      * <li>Remove Marker on the Map</li>
      * </ul>
      */
+    @Override
     public void clearStatus() {
         super.clearWidget();
         cleanGeoPlatformMap();

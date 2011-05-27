@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -47,12 +49,14 @@ import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
+import org.geosdi.geoplatform.gui.client.model.GPLayerBeanModel;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel.GPServerKeyValue;
 import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemote;
 import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
 /**
  *
@@ -68,12 +72,14 @@ public class DisplayServerWidget {
     private ListStore<GPServerBeanModel> store;
     private SearchStatus searchStatus;
     private Button addServer;
+    private GridLayersWidget gridWidget;
 
     /**
      * @Constructor
      */
-    public DisplayServerWidget() {
+    public DisplayServerWidget(GridLayersWidget theGridWidget) {
         init();
+        this.gridWidget = theGridWidget;
     }
 
     private void init() {
@@ -92,6 +98,15 @@ public class DisplayServerWidget {
         comboServer.setStore(this.store);
         comboServer.setTypeAhead(true);
         comboServer.setTriggerAction(TriggerAction.ALL);
+
+        this.comboServer.addSelectionChangedListener(new SelectionChangedListener<GPServerBeanModel>() {
+
+            @Override
+            public void selectionChanged(
+                    SelectionChangedEvent<GPServerBeanModel> se) {
+                changeSelection(se.getSelectedItem());
+            }
+        });
 
         this.addServer = new Button("Add Server",
                 ServerWidgetResources.ICONS.addServer(),
@@ -127,7 +142,7 @@ public class DisplayServerWidget {
     private native String getTemplate() /*-{
         return  [
             '<tpl for=".">',
-                '<div class="x-combo-list-item" qtip="{slogan}" qtitle="Server">{urlServer}</div>',
+                '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{urlServer}</div>',
             '</tpl>'
             ].join("");
     }-*/;
@@ -135,10 +150,10 @@ public class DisplayServerWidget {
     /**
      * Set the correct Status Iconn Style
      */
-    public void setSearchStatus(EnumSearchStatus status,
-            EnumSearchStatus message) {
-        this.searchStatus.setIconStyle(status.getValue());
-        this.searchStatus.setText(message.getValue());
+    public void setSearchStatus(Enum status,
+            Enum message) {
+        this.searchStatus.setIconStyle(status.toString());
+        this.searchStatus.setText(message.toString());
     }
 
     /**
@@ -166,11 +181,47 @@ public class DisplayServerWidget {
                             "There are no Servers.");
                 } else {
                     setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                            EnumSearchStatus.STATUS_MESSAGE_SEARCH);
+                            EnumSearchServer.STATUS_MESSAGE_LOAD);
                     store.add(result);
                 }
             }
         });
+    }
+
+    public void resetComponents() {
+        this.store.removeAll();
+        this.comboServer.setRawValue("");
+    }
+
+    /**
+     * 
+     * @param selected
+     */
+    private void changeSelection(GPServerBeanModel selected) {
+        this.gridWidget.cleanStore();
+        LayoutManager.get().getStatusMap().setBusy("Loading Layers.....");
+        this.gridWidget.maskGrid();
+
+        this.service.getCababilities(selected.getId(),
+                new AsyncCallback<ArrayList<? extends GPLayerBeanModel>>() {
+
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        GeoPlatformMessage.errorMessage("Server Service",
+                                "An error occured loading layers.");
+                        gridWidget.unMaskGrid();
+                    }
+
+                    @Override
+                    public void onSuccess(
+                            ArrayList<? extends GPLayerBeanModel> result) {
+                        gridWidget.unMaskGrid();
+                        gridWidget.fillStore(result);
+                        LayoutManager.get().getStatusMap().setStatus(
+                                "Layers have been loaded correctly by the service",
+                                EnumSearchStatus.STATUS_SEARCH.toString());
+                    }
+                });
     }
 
     /**

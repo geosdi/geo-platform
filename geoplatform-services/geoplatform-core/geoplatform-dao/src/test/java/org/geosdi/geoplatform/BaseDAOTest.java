@@ -86,16 +86,22 @@ import org.xml.sax.SAXException;
 public abstract class BaseDAOTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     protected GPUserDAO userDAO;
+
     @Autowired
     protected GPFolderDAO folderDAO;
+
     @Autowired
     protected GPLayerDAO layerDAO;
+
     @Autowired
     protected GPStyleDAO styleDAO;
+
     @Autowired
     protected GPServerDAO serverDAO;
+
     @Autowired
     protected GPAuthorityDAO authorityDAO;
 

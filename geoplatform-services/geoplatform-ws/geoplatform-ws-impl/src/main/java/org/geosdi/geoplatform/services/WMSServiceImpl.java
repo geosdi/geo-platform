@@ -66,6 +66,7 @@ import org.geotools.ows.ServiceException;
 class WMSServiceImpl {
 
     final private static Logger LOGGER = Logger.getLogger(WMSServiceImpl.class);
+
     private GPServerDAO serverDao;
 
     //<editor-fold defaultstate="collapsed" desc="Setter method">
@@ -79,6 +80,15 @@ class WMSServiceImpl {
     //</editor-fold>
 
     public long insertServer(GeoPlatformServer server) {
+
+        /** IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER **/
+        GeoPlatformServer serverSearch = serverDao.findByServerUrl(
+                server.getServerUrl());
+
+        if (serverSearch != null) {
+            return serverSearch.getId();
+        }
+
         serverDao.persist(server);
         return server.getId();
     }
@@ -123,7 +133,6 @@ class WMSServiceImpl {
 
         return server;
     }
-    
 
     public ServerDTO getShortServer(String serverUrl) throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
@@ -134,7 +143,7 @@ class WMSServiceImpl {
 
         ServerDTO serverDTO = new ServerDTO(server);
         return serverDTO;
-    }    
+    }
 
     public Collection<ServerDTO> getServers() {
         List<GeoPlatformServer> found = serverDao.findAll();
@@ -146,12 +155,53 @@ class WMSServiceImpl {
 
         GeoPlatformServer server = serverDao.find(request.getId());
 
+        if (server == null) {
+            throw new ResourceNotFoundFault(
+                    "The Server with ID : " + request.getId() + " has been deleted.");
+        }
+
+        return convertToLayerList(getCababilities(server.getServerUrl()));
+    }
+
+    private Collection<ServerDTO> convertToServerCollection(
+            List<GeoPlatformServer> serverList) {
+        Collection<ServerDTO> shortServers = new ArrayList<ServerDTO>(
+                serverList.size());
+        ServerDTO serverDTOIth = null;
+        for (GeoPlatformServer server : serverList) {
+            serverDTOIth = new ServerDTO(server);
+            shortServers.add(serverDTOIth);
+        }
+        return shortServers;
+    }
+
+    // TODO Move to LayerList?
+    // as constructor: LayerList list = new LayerList(List<Layer>);    
+    // TODO Correct mapping Layer to AbstractLayerDTO
+    private LayerList convertToLayerList(List<Layer> layerList) {
+        List<ShortLayerDTO> shortLayers = new ArrayList<ShortLayerDTO>(
+                layerList.size());
+        ShortLayerDTO layerDTOIth = null;
+        for (Layer layer : layerList) {
+            layerDTOIth = new RasterLayerDTO(); // TODO AbstractLayerDTO as abstract class?
+            layerDTOIth.setName(layer.getName());
+            layerDTOIth.setAbstractText(layer.get_abstract());
+            layerDTOIth.setTitle(layer.getTitle());
+            shortLayers.add(layerDTOIth);
+        }
+
+        LayerList layers = new LayerList();
+        layers.setList(shortLayers);
+        return layers;
+    }
+
+    private List<Layer> getCababilities(String urlServer) throws ResourceNotFoundFault {
         URL serverURL = null;
         WebMapServer wms = null;
         WMSCapabilities cap = null;
 
         try {
-            serverURL = new URL(server.getServerUrl());
+            serverURL = new URL(urlServer);
             wms = new WebMapServer(serverURL);
             cap = wms.getCapabilities();
 
@@ -169,35 +219,6 @@ class WMSServiceImpl {
             throw new ResourceNotFoundFault("IOException ", e);
         }
 
-        return convertToLayerList(cap.getLayerList());
-    }
-
-    private Collection<ServerDTO> convertToServerCollection(List<GeoPlatformServer> serverList) {
-        Collection<ServerDTO> shortServers = new ArrayList<ServerDTO>(serverList.size());
-        ServerDTO serverDTOIth = null;
-        for (GeoPlatformServer server : serverList) {
-            serverDTOIth = new ServerDTO(server);
-            shortServers.add(serverDTOIth);
-        }
-        return shortServers;
-    }
-
-    // TODO Move to LayerList?
-    // as constructor: LayerList list = new LayerList(List<Layer>);    
-    // TODO Correct mapping Layer to AbstractLayerDTO
-    private LayerList convertToLayerList(List<Layer> layerList) {
-        List<ShortLayerDTO> shortLayers = new ArrayList<ShortLayerDTO>(layerList.size());
-        ShortLayerDTO layerDTOIth = null;
-        for (Layer layer : layerList) {
-            layerDTOIth = new RasterLayerDTO(); // TODO AbstractLayerDTO as abstract class?
-            layerDTOIth.setName(layer.getName());
-            layerDTOIth.setAbstractText(layer.get_abstract());
-            layerDTOIth.setTitle(layer.getTitle());
-            shortLayers.add(layerDTOIth);
-        }
-
-        LayerList layers = new LayerList();
-        layers.setList(shortLayers);
-        return layers;
+        return cap.getLayerList();
     }
 }

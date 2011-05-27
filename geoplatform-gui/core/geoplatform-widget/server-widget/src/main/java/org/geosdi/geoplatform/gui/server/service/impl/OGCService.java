@@ -36,12 +36,16 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.client.model.GPLayerBeanModel;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.service.IOGCService;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOServerConverter;
+import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,8 +87,24 @@ public class OGCService implements IOGCService {
                     "The server with id " + idServer + " was bean deleted.");
         }
     }
-    
-        /**
+
+    @Override
+    public ArrayList<? extends GPLayerBeanModel> getCababilities(long idServer)
+            throws GeoPlatformException {
+        try {
+            RequestById req = new RequestById(idServer);
+
+            Collection<ShortLayerDTO> layers = this.geoPlatformServiceClient.getCapabilities(
+                    req).getList();
+
+            return this.dtoServerConverter.convertRasterLayer(layers);
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("Error : " + ex);
+            throw new GeoPlatformException(ex);
+        }
+    }
+
+    /**
      * @param geoPlatformServiceClient the geoPlatformServiceClient to set
      */
     @Autowired
@@ -92,5 +112,4 @@ public class OGCService implements IOGCService {
             @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
     }
-    
 }

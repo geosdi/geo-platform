@@ -33,24 +33,25 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.server.service;
-
-import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.client.model.GPLayerBeanModel;
-import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+package org.geosdi.geoplatform.gui.client.widget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface IOGCService {
+public enum EnumSearchServer {
 
-    public ArrayList<GPServerBeanModel> loadServers() throws GeoPlatformException;
+    STATUS_MESSAGE_LOAD("Servers Loaded");
 
-    public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException;
+    private String value;
 
-    public ArrayList<? extends GPLayerBeanModel> getCababilities(
-            long idServer) throws GeoPlatformException;
+    EnumSearchServer(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return this.value;
+    }
 }

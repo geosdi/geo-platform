@@ -280,8 +280,8 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
      */
     public void setSearchStatus(EnumSearchStatus status,
             EnumSearchStatus message) {
-        this.searchStatus.setIconStyle(status.getValue());
-        this.searchStatus.setText(message.getValue());
+        this.searchStatus.setIconStyle(status.toString());
+        this.searchStatus.setText(message.toString());
     }
 
     public abstract void setWindowProperties();

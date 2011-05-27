@@ -110,6 +110,7 @@ public class CababilitiesServerWidget extends Window {
     }
 
     private void resetComponents() {
+        this.gridLayers.resetComponents();
     }
 
     @Override

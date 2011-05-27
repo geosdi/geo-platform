@@ -76,7 +76,10 @@ public class VisitorDeleteElement extends AbstractVisitTree implements IVisitor 
 
     private void updateNumberOfChildrens(GPBeanTreeModel parentElementRemoved) {
         if (parentElementRemoved instanceof FolderTreeNode) {
-            ((FolderTreeNode) parentElementRemoved).setNumberOfChildrens(((FolderTreeNode) parentElementRemoved).getNumberOfChildrens() - 1);
+            ((FolderTreeNode) parentElementRemoved).setNumberOfDescendants(((FolderTreeNode) parentElementRemoved).getNumberOfDescendants() - 1);
+        }
+        if (!(parentElementRemoved.getParent() instanceof GPRootTreeNode)) {
+            this.updateNumberOfChildrens((GPBeanTreeModel) parentElementRemoved.getParent());
         }
     }
 

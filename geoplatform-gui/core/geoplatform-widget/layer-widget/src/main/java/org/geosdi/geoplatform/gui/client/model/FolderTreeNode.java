@@ -61,7 +61,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
     private transient VisitorModelConverter visitor = new VisitorModelConverter(this);
     private transient boolean loaded = false;
     private transient boolean loading = false;
-    private int numberOfChildrens;
+    private int numberOfDescendants;
 
     public FolderTreeNode() {
     }
@@ -75,7 +75,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
         super.setId(folder.getId());
         super.setzIndex(folder.getzIndex());
         super.setChecked(folder.isChecked());
-        this.numberOfChildrens = folder.getNumberOfChildrens();
+        this.numberOfDescendants = folder.getNumberOfDescendants();
         this.modelConverter(folder.getFolderElements());
     }
 
@@ -105,15 +105,15 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
     /**
      * @return the number of childrens
      */
-    public int getNumberOfChildrens() {
-        return numberOfChildrens;
+    public int getNumberOfDescendants() {
+        return numberOfDescendants;
     }
 
     /**
      * @param numberOfChildrens the numberOfChildrens to set
      */
-    public void setNumberOfChildrens(int numberOfChildrens) {
-        this.numberOfChildrens = numberOfChildrens;
+    public void setNumberOfDescendants(int numberOfChildrens) {
+        this.numberOfDescendants = numberOfChildrens;
     }
 
     /**

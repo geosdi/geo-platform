@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.model.visitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -59,7 +60,7 @@ public abstract class AbstractVisitTree {
         return precedingElement;
     }
 
-    protected  GPBeanTreeModel getNextUnvisitedElement(GPBeanTreeModel element) {
+    protected GPBeanTreeModel getNextUnvisitedElement(GPBeanTreeModel element) {
         GPBeanTreeModel unvisitedElement = null;
         if (!element.isLeaf() && element.getChild(0) != null) {//IS FOLDER
             unvisitedElement = (GPBeanTreeModel) element.getChild(0);
@@ -95,19 +96,24 @@ public abstract class AbstractVisitTree {
     }
 
     protected void countNumberOfElements(GPBeanTreeModel element) {
-        ++this.numberOfElements;
         List<ModelData> childrens = element.getChildren();
-        for (int i = 0; i < childrens.size(); i++) {
-            this.countNumberOfElements((GPBeanTreeModel) childrens.get(i));
+        if (childrens.isEmpty() && element instanceof FolderTreeNode
+                && !((FolderTreeNode) element).isLoaded()) {
+            this.numberOfElements = this.numberOfElements + 1 + ((FolderTreeNode) element).getNumberOfDescendants();
+        } else {
+            ++this.numberOfElements;
+            for (int i = 0; i < childrens.size(); i++) {
+                this.countNumberOfElements((GPBeanTreeModel) childrens.get(i));
+            }
         }
     }
 
-    protected GPRootTreeNode findRootElement(GPBeanTreeModel element){
+    protected GPRootTreeNode findRootElement(GPBeanTreeModel element) {
         GPRootTreeNode root = null;
-        if(element instanceof GPRootTreeNode){
-            root = (GPRootTreeNode)element;
+        if (element instanceof GPRootTreeNode) {
+            root = (GPRootTreeNode) element;
         } else {
-            root = this.findRootElement((GPBeanTreeModel)element.getParent());
+            root = this.findRootElement((GPBeanTreeModel) element.getParent());
         }
         return root;
     }

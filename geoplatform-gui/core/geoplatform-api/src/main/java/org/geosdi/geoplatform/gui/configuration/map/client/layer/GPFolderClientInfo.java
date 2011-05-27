@@ -57,7 +57,7 @@ public class GPFolderClientInfo implements Serializable,
     private int zIndex;
     private List<IGPFolderElements> folderElements;
     private IGPParentElement parent;
-    private int numberOfChildrens;
+    private int numberOfDescendants;
     private boolean checked;
     private long id;
 
@@ -77,12 +77,12 @@ public class GPFolderClientInfo implements Serializable,
         this.id = id;
     }
 
-    public int getNumberOfChildrens() {
-        return numberOfChildrens;
+    public int getNumberOfDescendants() {
+        return numberOfDescendants;
     }
 
-    public void setNumberOfChildrens(int numberOfChildrens) {
-        this.numberOfChildrens = numberOfChildrens;
+    public void setNumberOfDescendants(int numberOfChildrens) {
+        this.numberOfDescendants = numberOfChildrens;
     }
 
     /**

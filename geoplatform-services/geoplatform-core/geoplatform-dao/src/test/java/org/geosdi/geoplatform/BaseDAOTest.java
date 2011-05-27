@@ -226,34 +226,38 @@ public abstract class BaseDAOTest {
     private void insertFolderUser(int position) {
         GPUser user = userDAO.findByUsername("user_0");
 
+        // "only folders" ---> "empty subfolder A"
+        GPFolder emptySubFolderA = new GPFolder();
+        emptySubFolderA.setName("empty subfolder A");
+        emptySubFolderA.setPosition(++position);
+        emptySubFolderA.setChecked(true);
+        emptySubFolderA.setNumberOfDescendants(0);
+
+        // "only folders" ---> "empty subfolder B"
+        GPFolder emptySubFolderB = new GPFolder();
+        emptySubFolderB.setName("empty subfolder B");
+        emptySubFolderB.setPosition(++position);
+        emptySubFolderB.setChecked(true);
+        emptySubFolderB.setNumberOfDescendants(0);
+
         // "only folders"
         GPFolder onlyFolders = new GPFolder();
         onlyFolders.setName("only folders");
         onlyFolders.setOwner(user);
         onlyFolders.setPosition(++position);
         onlyFolders.setParent(null);
-
-        // "only folders" ---> "empty subfolder A"
-        GPFolder emptySubFolderA = new GPFolder();
-        emptySubFolderA.setName("empty subfolder A");
-        emptySubFolderA.setPosition(++position);
+        onlyFolders.setNumberOfDescendants(2);
+        
         emptySubFolderA.setParent(onlyFolders);
-        emptySubFolderA.setChecked(true);
-
-        // "only folders" ---> "empty subfolder B"
-        GPFolder emptySubFolderB = new GPFolder();
-        emptySubFolderB.setName("empty subfolder B");
-        emptySubFolderB.setPosition(++position);
         emptySubFolderB.setParent(onlyFolders);
-        emptySubFolderB.setChecked(true);
-
         folderDAO.persist(onlyFolders, emptySubFolderA, emptySubFolderB);
 
         // "my raster"
         GPFolder folderRaster = new GPFolder();
         folderRaster.setName("my raster");
         folderRaster.setOwner(user);
-        folderRaster.setPosition(++position);
+        folderRaster.setPosition(257);
+        folderRaster.setNumberOfDescendants(253);
         folderRaster.setParent(null);
 
         // GPRasterLayer
@@ -331,8 +335,9 @@ public abstract class BaseDAOTest {
 
             GPFolder folderIGM = new GPFolder();
             folderIGM.setName("IGM");
-            folderIGM.setPosition(++position);
+            folderIGM.setPosition(256);
             folderIGM.setParent(folderRaster);
+            folderIGM.setNumberOfDescendants(1);
             folderDAO.persist(folderIGM);
 
             GPVectorLayer vectorLayer1 = new GPVectorLayer();

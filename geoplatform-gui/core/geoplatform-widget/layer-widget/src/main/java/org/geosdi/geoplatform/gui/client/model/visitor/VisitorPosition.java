@@ -101,11 +101,13 @@ public class VisitorPosition extends AbstractVisitTree
     }
 
     private void updateNumberOfChildrens(GPBeanTreeModel oldParent, GPBeanTreeModel parentDestination) {
-        if (oldParent instanceof FolderTreeNode) {
-            ((FolderTreeNode) oldParent).setNumberOfChildrens(((FolderTreeNode) oldParent).getNumberOfChildrens() - 1);
+        while (oldParent instanceof FolderTreeNode) {
+            ((FolderTreeNode) oldParent).setNumberOfDescendants(((FolderTreeNode) oldParent).getNumberOfDescendants() - 1);
+            oldParent = (GPBeanTreeModel) oldParent.getParent();
         }
-        if (parentDestination instanceof FolderTreeNode) {
-            ((FolderTreeNode) parentDestination).setNumberOfChildrens(((FolderTreeNode) parentDestination).getNumberOfChildrens() + 1);
+        while (parentDestination instanceof FolderTreeNode) {
+            ((FolderTreeNode) parentDestination).setNumberOfDescendants(((FolderTreeNode) parentDestination).getNumberOfDescendants() + 1);
+            parentDestination = (GPBeanTreeModel) parentDestination.getParent();
         }
     }
 
@@ -123,7 +125,11 @@ public class VisitorPosition extends AbstractVisitTree
 
     private void preorderTraversal() {
         assert (this.startPosition != null) : "You need to specify a startPosition before call this method";
-        this.tmpIndex = this.startPosition.getzIndex();
+        if(this.startPosition instanceof FolderTreeNode && !((FolderTreeNode)this.startPosition).isLoaded()){
+            this.tmpIndex = this.startPosition.getzIndex() - ((FolderTreeNode)this.startPosition).getNumberOfDescendants();
+        } else {
+            this.tmpIndex = this.startPosition.getzIndex();
+        }
         this.tmpElement = super.getNextUnvisitedElement(this.startPosition);
         //System.out.println(this.tmpElement == null ? null : "In preorder Traversal tmpElement: " + this.tmpElement.getLabel());
         while (!this.isPreorderExitCondition()) {
@@ -158,16 +164,21 @@ public class VisitorPosition extends AbstractVisitTree
             super.numberOfElements = 0;
             super.countNumberOfElements(root);
             this.tmpIndex = super.numberOfElements;
+            System.out.println("Number of elements: " + super.numberOfElements);
             this.visitRoot(root);
         }
     }
 
     @Override
     public void visitFolder(AbstractFolderTreeNode folder) {
-        folder.setzIndex(--this.tmpIndex);
-        System.out.println("Visitor Folder set zIndex: " + this.tmpIndex
-                + " to the folder: " + folder.getLabel());
-        List<ModelData> childrens = folder.getChildren();
+        FolderTreeNode localFolder = (FolderTreeNode) folder;
+        localFolder.setzIndex(--this.tmpIndex);
+        if (!localFolder.isLoaded()) {
+            this.tmpIndex = this.tmpIndex - localFolder.getNumberOfDescendants();
+        }
+        System.out.println("Visitor Folder set zIndex: " + localFolder.getzIndex()
+                + " to the folder: " + localFolder.getLabel());
+        List<ModelData> childrens = localFolder.getChildren();
         for (int i = 0; i < childrens.size() && !this.stopIterating; i++) {
             this.tmpElement = (GPBeanTreeModel) childrens.get(i);
             if (this.endPosition != null && this.isPreorderExitCondition()) {

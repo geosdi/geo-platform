@@ -164,7 +164,6 @@ public class WSFolderLayerTest extends ServiceTest {
         try {
             FolderDTO folderA = geoPlatformService.getShortFolder(new RequestById(idRootFolderA));
             Assert.assertNotNull("assertNotNull folderA", folderA);
-            Assert.assertEquals("assertEquals folderA.getNumberOfChilds()", folderA.getNumberOfChilds(), 1);
         } catch (ResourceNotFoundFault ex) {
             Assert.fail("Folder with id \"" + idRootFolderA + "\" was NOT found");
         }
@@ -172,7 +171,6 @@ public class WSFolderLayerTest extends ServiceTest {
         try {
             FolderDTO folderB = geoPlatformService.getShortFolder(new RequestById(idRootFolderB));
             Assert.assertNotNull("assertNotNull folderB", folderB);
-            Assert.assertEquals("assertEquals folderB.getNumberOfChilds()", folderB.getNumberOfChilds(), 3);
         } catch (ResourceNotFoundFault ex) {
             Assert.fail("Folder with id \"" + idRootFolderB + "\" was NOT found");
         }

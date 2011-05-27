@@ -94,6 +94,24 @@ public class GPFolder implements Serializable {
     @Column(name = "checked")
     private boolean checked = false;    
 
+    @Column(name = "number_of_descendants")
+    private int numberOfDescendants = -1;
+
+    /**
+     * 
+     * @return the numberOfDescendant
+     */
+    public int getNumberOfDescendants() {
+        return numberOfDescendants;
+    }
+
+    /**
+     * @param numberOfDescendant
+     *            the numberOfDescendant to set
+     */
+    public void setNumberOfDescendants(int numberOfDescendants) {
+        this.numberOfDescendants = numberOfDescendants;
+    }
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
      * @return the id
@@ -201,7 +219,8 @@ public class GPFolder implements Serializable {
 
     @Override
     public String toString() {
-        return "GPFolder{" + "id=" + id + "name=" + name + "position=" + position
-                + "shared=" + shared + "parent=" + parent + "owner=" + owner + '}';
+        return "GPFolder{" + " id=" + id + ", name=" + name + ", position=" + position
+                + ", shared=" + shared + ", parent=" + parent + ", owner=" + owner
+                + ", numberOfDescendants=" + numberOfDescendants + '}';
     }
 }

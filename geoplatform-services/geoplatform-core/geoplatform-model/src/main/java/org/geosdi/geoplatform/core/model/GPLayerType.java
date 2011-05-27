@@ -54,7 +54,7 @@ public enum GPLayerType implements Serializable {
     MULTILINESTRING(6),
     MULTIPOLYGON(7);
 
-    @Column(name = "layerType")
+    @Column(name = "layer_type")
     private int code;
 
     /**

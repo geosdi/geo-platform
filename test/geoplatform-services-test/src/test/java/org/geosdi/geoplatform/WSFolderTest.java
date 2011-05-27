@@ -106,7 +106,6 @@ public class WSFolderTest extends ServiceTest {
         try {
             FolderDTO folderA = geoPlatformService.getShortFolder(new RequestById(idRootFolderA));
             Assert.assertNotNull("assertNotNull folderA", folderA);
-            Assert.assertEquals("assertEquals folderA.getNumberOfChilds()", folderA.getNumberOfChilds(), 2);
         } catch (ResourceNotFoundFault ex) {
             Assert.fail("Unable to find folder with id \"" + idRootFolderA);
         }
@@ -114,7 +113,6 @@ public class WSFolderTest extends ServiceTest {
         try {
             FolderDTO folderB = geoPlatformService.getShortFolder(new RequestById(idRootFolderB));
             Assert.assertNotNull("assertNotNull folderB", folderB);
-            Assert.assertEquals("assertEquals folderB.getNumberOfChilds()", folderB.getNumberOfChilds(), 3);
         } catch (ResourceNotFoundFault ex) {
             Assert.fail("Unable to find folder with id \"" + idRootFolderB);
         }
@@ -196,13 +194,11 @@ public class WSFolderTest extends ServiceTest {
             logger.debug("\n*** folderDTOToCheck:\n{}\n***", folderDTOToCheck);
             Assert.assertEquals(folderDTOToCheck.getId(), idFolder2);
             Assert.assertEquals(folderDTOToCheck.getName(), nameFolder2);
-            Assert.assertEquals(folderDTOToCheck.getNumberOfChilds(), 0);
             // Assert on "folder1"
             folderDTOToCheck = (FolderDTO) iterator.next();
             logger.debug("\n*** folderDTOToCheck:\n{}\n***", folderDTOToCheck);
             Assert.assertEquals(folderDTOToCheck.getId(), idFolder1);
             Assert.assertEquals(folderDTOToCheck.getName(), nameFolder1);
-            Assert.assertEquals(folderDTOToCheck.getNumberOfChilds(), 0);
 
             // Assert on "rootFolderB" (deleted)
             TreeFolderElements childrenRootFolderB = geoPlatformService.getChildrenElements(idRootFolderB);

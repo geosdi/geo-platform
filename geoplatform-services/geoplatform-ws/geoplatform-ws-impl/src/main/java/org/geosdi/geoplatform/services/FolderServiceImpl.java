@@ -118,6 +118,7 @@ class FolderServiceImpl {
         orig.setName(folder.getName());
         orig.setPosition(folder.getPosition());
         orig.setShared(folder.isShared());
+        orig.setNumberOfDescendants(folder.getNumberOfDescendants());
 
         folderDao.merge(orig);
         return orig.getId();
@@ -143,7 +144,6 @@ class FolderServiceImpl {
         }
 
         FolderDTO folderDTO = new FolderDTO(folder);
-        folderDTO.setNumberOfChilds(getNumberOfFolderChildren(folder));
         return folderDTO;
     }
 
@@ -352,7 +352,6 @@ class FolderServiceImpl {
         List<FolderDTO> foldersDTO = new ArrayList<FolderDTO>(folderList.size());
         for (GPFolder folderIth : folderList) {
             FolderDTO folderIthDTO = new FolderDTO(folderIth);
-            folderIthDTO.setNumberOfChilds(getNumberOfFolderChildren(folderIth));
             foldersDTO.add(folderIthDTO);
         }
 
@@ -361,23 +360,5 @@ class FolderServiceImpl {
         FolderList folders = new FolderList();
         folders.setList(foldersDTO);
         return folders;
-    }
-
-    // Return the number of children of a GPFolder (folders or layers)
-    private int getNumberOfFolderChildren(GPFolder folder) {
-        int counter = 0;
-        Search searchCriteria = new Search(GPFolder.class);
-        Filter parent = Filter.equal("parent.id", folder.getId());
-        searchCriteria.addFilter(parent);
-        List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-        counter += foundFolder.size();
-        
-        searchCriteria = new Search(GPLayer.class);
-        parent = Filter.equal("folder.id", folder.getId());
-        searchCriteria.addFilter(parent);
-        List<GPLayer> foundLayer = layerDao.search(searchCriteria);        
-        counter += foundLayer.size();
-        
-        return counter;
     }
 }

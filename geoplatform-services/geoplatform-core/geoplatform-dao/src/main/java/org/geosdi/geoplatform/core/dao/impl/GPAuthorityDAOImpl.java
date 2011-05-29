@@ -37,13 +37,13 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.dao.impl;
 
+import com.googlecode.genericdao.search.ISearch;
 import java.util.List;
 
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.trg.search.ISearch;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI Group

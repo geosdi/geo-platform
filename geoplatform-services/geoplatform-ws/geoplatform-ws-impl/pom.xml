@@ -197,6 +197,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
             <scope>provided</scope>
@@ -204,8 +210,8 @@
 
 		<!-- HIBERNATE-GENERIC-DAO -->
         <dependency>
-            <groupId>com.trg</groupId>
-            <artifactId>trg-dao</artifactId>
+            <groupId>com.googlecode.genericdao</groupId>
+            <artifactId>dao</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -213,9 +219,15 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
-            <groupId>com.trg</groupId>
-            <artifactId>trg-search-jpa-hibernate</artifactId>
+            <groupId>com.googlecode.genericdao</groupId>
+            <artifactId>search-hibernate</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.genericdao</groupId>
+            <artifactId>search-jpa-hibernate</artifactId>
         </dependency>
 
 		<!-- HIBERNATE-SPATIAL -->

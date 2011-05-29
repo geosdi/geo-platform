@@ -39,12 +39,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -71,24 +69,8 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    //public ArrayList<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException;
-    
-        /**
-     * 
-     * @param userName
-     * @return
-     * @throws GeoPlatformException
-     */
     public ArrayList<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException;
-    
-//    /**
-//     * 
-//     * @param folderId
-//     * @return
-//     * @throws GeoPlatformException
-//     */
-//    public ArrayList<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException;
-    
+
     /**
      * 
      * @param folderId

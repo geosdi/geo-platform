@@ -37,7 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.acl.dao.impl;
 
-import com.trg.search.Search;
+import com.googlecode.genericdao.search.Search;
 import org.geosdi.geoplatform.core.acl.AclClass;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
 import org.geosdi.geoplatform.core.dao.impl.BaseDAO;

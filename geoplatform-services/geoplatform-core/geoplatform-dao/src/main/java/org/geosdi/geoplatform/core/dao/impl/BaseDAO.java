@@ -37,6 +37,8 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.dao.impl;
 
+import com.googlecode.genericdao.dao.jpa.GenericDAOImpl;
+import com.googlecode.genericdao.search.jpa.JPASearchProcessor;
 import java.io.Serializable;
 
 import javax.persistence.EntityManager;
@@ -45,9 +47,6 @@ import javax.persistence.PersistenceContext;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.trg.dao.jpa.GenericDAOImpl;
-import com.trg.search.jpa.JPASearchProcessor;
 
 /**
  * @author giuseppe

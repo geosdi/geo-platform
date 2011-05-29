@@ -37,14 +37,13 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.dao.impl;
 
+import com.googlecode.genericdao.search.ISearch;
+import com.googlecode.genericdao.search.Search;
 import java.util.List;
 
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.trg.search.ISearch;
-import com.trg.search.Search;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

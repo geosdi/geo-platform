@@ -72,7 +72,6 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
     private TextField<String> folderText;
     private Button save;
     private Button cancel;
-
     private VisitorAddElement visitorAdd;
     private GPBeanTreeModel parentDestination;
 
@@ -195,6 +194,14 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
         this.save.disable();
         this.folderText.clear();
         this.saveStatus.clearStatus("");
+    }
+
+    @Override
+    public void show() {
+        if (!isInitialized()) {
+            super.init();
+        }
+        super.show();
     }
 
     private void clearComponents() {

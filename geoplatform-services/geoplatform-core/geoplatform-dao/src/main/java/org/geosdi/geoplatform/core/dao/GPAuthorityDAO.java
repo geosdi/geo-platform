@@ -37,11 +37,11 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.dao;
 
+import com.googlecode.genericdao.search.ISearch;
 import java.util.List;
 
 import org.geosdi.geoplatform.core.model.GPAuthority;
 
-import com.trg.search.ISearch;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI Group

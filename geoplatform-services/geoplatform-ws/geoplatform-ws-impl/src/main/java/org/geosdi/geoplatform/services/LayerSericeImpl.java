@@ -37,8 +37,8 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
-import com.trg.search.Filter;
-import com.trg.search.Search;
+import com.googlecode.genericdao.search.Filter;
+import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;

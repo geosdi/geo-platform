@@ -37,6 +37,8 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import com.googlecode.genericdao.search.Filter;
+import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,8 +59,6 @@ import org.geosdi.geoplatform.responce.collection.FolderList;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 
-import com.trg.search.Filter;
-import com.trg.search.Search;
 import java.util.Collections;
 
 /**

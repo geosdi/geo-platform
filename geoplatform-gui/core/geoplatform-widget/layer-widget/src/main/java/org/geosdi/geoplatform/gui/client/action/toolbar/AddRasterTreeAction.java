@@ -39,7 +39,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.widget.CababilitiesServerWidget;
+import org.geosdi.geoplatform.gui.client.widget.GPCababilitiesWidget;
 
 /**
  *
@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.gui.client.widget.CababilitiesServerWidget;
  */
 public class AddRasterTreeAction extends ToolbarLayerTreeAction {
 
-    private CababilitiesServerWidget serverWidget = new CababilitiesServerWidget(
+    private GPCababilitiesWidget serverWidget = new GPCababilitiesWidget(
             true);
 
     public AddRasterTreeAction(TreePanel theTree) {

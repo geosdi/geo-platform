@@ -36,11 +36,10 @@
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.widget.form.AddFolderWidget;
 
 /**
  *
@@ -49,12 +48,15 @@ import org.geosdi.geoplatform.gui.client.LayerResources;
  */
 public class AddFolderTreeAction extends ToolbarLayerTreeAction {
 
+    private AddFolderWidget addFolder;
+
     public AddFolderTreeAction(TreePanel theTree) {
         super(theTree, LayerResources.ICONS.addFolder(), "Add Folder");
+        this.addFolder = new AddFolderWidget(theTree);
     }
 
     @Override
     public void componentSelected(ButtonEvent ce) {
-        Dispatcher.forwardEvent(LayerEvents.SHOW_ADD_FOLDER);
+       this.addFolder.show();
     }
 }

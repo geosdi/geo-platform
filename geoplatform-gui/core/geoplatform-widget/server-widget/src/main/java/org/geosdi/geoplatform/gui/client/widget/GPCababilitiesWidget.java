@@ -47,7 +47,7 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class CababilitiesServerWidget extends Window {
+public class GPCababilitiesWidget extends Window {
 
     private GridLayersWidget gridLayers;
     private boolean initialized;
@@ -58,7 +58,7 @@ public class CababilitiesServerWidget extends Window {
      *       If true the component will not build in Construction Fase
      *       otherwise set to False
      */
-    public CababilitiesServerWidget(boolean lazy) {
+    public GPCababilitiesWidget(boolean lazy) {
         if (!lazy) {
             init();
         }

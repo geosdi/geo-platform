@@ -99,18 +99,6 @@ public class DTOConverter {
         }
         return clientFolderElements;
     }
-
-//    private RasterTreeNode convertRasterElement(RasterLayerDTO rasterDTO) {
-//        RasterTreeNode raster = new RasterTreeNode();
-//        raster.setId(rasterDTO.getId());
-//        raster.setLabel(rasterDTO.getName());
-//        raster.setCrs(rasterDTO.getSrs());
-//        raster.setDataSource(rasterDTO.getUrlServer());
-//        raster.setzIndex(rasterDTO.getPosition());
-//        raster.setBbox(this.convertBbox(rasterDTO.getBbox()));
-//        raster.setChecked(raster.isChecked());
-//        return raster;
-//    }
     
     private ClientRasterInfo convertRasterElement(RasterLayerDTO rasterDTO) {
         ClientRasterInfo raster = new ClientRasterInfo();
@@ -136,28 +124,6 @@ public class DTOConverter {
         vector.setChecked(vectorDTO.isChecked());
         return vector;
     }
-
-//    private VectorTreeNode convertVectorElement(VectorLayerDTO vectorDTO) {
-//        VectorTreeNode vector = new VectorTreeNode();
-//        vector.setId(vectorDTO.getId());
-//        this.setVectorLayerType(vector, vectorDTO.getLayerType());
-//        vector.setLabel(vectorDTO.getName());
-//        vector.setCrs(vectorDTO.getSrs());
-//        vector.setDataSource(vectorDTO.getUrlServer());
-//        vector.setzIndex(vectorDTO.getPosition());
-//        vector.setBbox(this.convertBbox(vectorDTO.getBbox()));
-//        vector.setChecked(vector.isChecked());
-//        return vector;
-//    }
-
-//    private FolderTreeNode convertFolderElement(FolderDTO folderDTO) {
-//        FolderTreeNode folder = new FolderTreeNode(folderDTO.getName());
-//        folder.setId(folderDTO.getId());
-//        folder.setzIndex(folderDTO.getPosition());
-//        folder.setNumberOfChildrens(folderDTO.getNumberOfChilds());
-//        folder.setChecked(folderDTO.isChecked());
-//        return folder;
-//    }
 
     private GPFolderClientInfo convertFolderElement(FolderDTO folderDTO) {
         GPFolderClientInfo folder = new GPFolderClientInfo();

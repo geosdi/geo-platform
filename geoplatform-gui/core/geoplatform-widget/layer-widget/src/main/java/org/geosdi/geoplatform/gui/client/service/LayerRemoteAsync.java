@@ -46,15 +46,9 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElemen
  * @email  nazzareno.sileno@geosdi.org
  */
 public interface LayerRemoteAsync {
-
-//    public void loadUserFolders(String userName,
-//            AsyncCallback<ArrayList<GPBeanTreeModel>> callback);
     
     public void loadUserFolders(String userName,
             AsyncCallback<ArrayList<GPFolderClientInfo>> callback);
-    
-//    public void loadFolderElements(long folderId,
-//            AsyncCallback<ArrayList<GPBeanTreeModel>> callback);
     
     public void loadFolderElements(long folderId,
             AsyncCallback<ArrayList<IGPFolderElements>> callback);

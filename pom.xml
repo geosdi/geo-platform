@@ -46,9 +46,9 @@
         </repository>
 
         <repository>
-            <id>trg-dao-repo</id>
-            <name>Repository for The Revere Group's Hibernate Generic DAO framework</name>
-            <url>http://hibernate-generic-dao.googlecode.com/svn/trunk/maven-repo/</url>
+            <id>sonatype-oss-repo</id>
+            <name>Sonatype Open Source maven snapshot repo</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
         </repository>
 
 		<!-- Apache -->
@@ -136,7 +136,7 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
-        </repository>   
+        </repository>
     </repositories>
 
 
@@ -622,13 +622,20 @@
 			<!-- HIBERNATE-GENERIC-DAO -->
 			<!-- =========================================================== -->
             <dependency>
-                <groupId>com.trg</groupId>
-                <artifactId>trg-dao</artifactId>
+                <groupId>com.googlecode.genericdao</groupId>
+                <artifactId>dao</artifactId>
                 <version>${hibernate-generic-dao-version}</version>
             </dependency>
+
             <dependency>
-                <groupId>com.trg</groupId>
-                <artifactId>trg-search-jpa-hibernate</artifactId>
+                <groupId>com.googlecode.genericdao</groupId>
+                <artifactId>search-hibernate</artifactId>
+                <version>${hibernate-generic-dao-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.googlecode.genericdao</groupId>
+                <artifactId>search-jpa-hibernate</artifactId>
                 <version>${hibernate-generic-dao-version}</version>
             </dependency>
 
@@ -1105,7 +1112,7 @@
         <hibernate-spatial-version>1.0</hibernate-spatial-version>
         <hibernate-annotations-version>3.3.1.GA</hibernate-annotations-version>
         <hibernate-commons-annotations-version>3.3.0.ga</hibernate-commons-annotations-version>
-        <hibernate-generic-dao-version>0.5.1</hibernate-generic-dao-version>
+        <hibernate-generic-dao-version>1.0.0</hibernate-generic-dao-version>
         <asm-version>3.3</asm-version>
         <cglib-version>2.1_3</cglib-version>
 

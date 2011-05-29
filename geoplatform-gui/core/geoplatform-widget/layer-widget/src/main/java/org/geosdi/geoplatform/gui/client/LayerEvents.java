@@ -54,6 +54,4 @@ public class LayerEvents {
 
     public static final EventType GP_DRAG_LOST = new EventType();
 
-    public static final EventType SHOW_ADD_FOLDER = new EventType();
-
 }

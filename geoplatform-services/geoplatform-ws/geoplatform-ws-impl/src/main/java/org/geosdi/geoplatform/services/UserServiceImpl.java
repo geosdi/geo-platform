@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +52,6 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.UserList;
 
-import com.trg.search.Search;
 
 /**
  * @author giuseppe

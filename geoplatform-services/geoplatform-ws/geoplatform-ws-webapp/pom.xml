@@ -156,14 +156,17 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jmx</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -173,21 +176,39 @@
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
         </dependency>
 
 		<!-- =============================================================== -->
 		<!-- HIBERNATE-GENERIC-DAO -->
 		<!-- =============================================================== -->
         <dependency>
-            <groupId>com.trg</groupId>
-            <artifactId>trg-dao</artifactId>
+            <groupId>com.googlecode.genericdao</groupId>
+            <artifactId>dao</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
         <dependency>
-            <groupId>com.trg</groupId>
-            <artifactId>trg-search-jpa-hibernate</artifactId>
+            <groupId>com.googlecode.genericdao</groupId>
+            <artifactId>search-hibernate</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.genericdao</groupId>
+            <artifactId>search-jpa-hibernate</artifactId>
         </dependency>
 
 		<!-- =============================================================== -->

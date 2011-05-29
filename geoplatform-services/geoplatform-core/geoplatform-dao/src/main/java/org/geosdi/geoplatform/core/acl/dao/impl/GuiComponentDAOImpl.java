@@ -37,7 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.acl.dao.impl;
 
-import com.trg.search.Search;
+import com.googlecode.genericdao.search.Search;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.geosdi.geoplatform.core.acl.AclClass;

@@ -58,7 +58,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity
 @Table(name = "acl_object_identity",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"object_id_class", "object_id_identity"}))
+uniqueConstraints =
+@UniqueConstraint(columnNames = {"object_id_class", "object_id_identity"}))
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "object_identity")
 // TODO: implements Acl? extends AclImpl?
 public class AclObjectIdentity {
@@ -84,17 +85,40 @@ public class AclObjectIdentity {
     private AclSid aclSid;
     
     @Column(name = "entries_inheriting", nullable = false)
-    private boolean inheriting = true;
+    private boolean inheriting = false;
 
     //<editor-fold defaultstate="collapsed" desc="Contructor Methods">
     public AclObjectIdentity() {
     }
-    
-    public AclObjectIdentity(AclClass aclClass, long objectId, AclSid aclSid, boolean inheriting) {
+
+    /**
+     * Constructor that doesn't handle inheritance
+     * 
+     * @param aclClass
+     * @param objectId
+     * @param aclSid
+     */
+    public AclObjectIdentity(AclClass aclClass, long objectId, AclSid aclSid) {
         this.aclClass = aclClass;
         this.objectId = objectId;
         this.aclSid = aclSid;
-        this.inheriting = inheriting;
+    }
+
+    /**
+     * Constructor that handle inheritance
+     * 
+     * @param aclClass
+     * @param objectId
+     * @param aclSid
+     * @param parentAclObject 
+     */
+    public AclObjectIdentity(AclClass aclClass, long objectId, AclSid aclSid,
+            AclObjectIdentity parentAclObject) {
+        this.aclClass = aclClass;
+        this.objectId = objectId;
+        this.aclSid = aclSid;
+        this.inheriting = true;
+        this.parentAclObject = parentAclObject;
     }
     //</editor-fold>
 
@@ -105,77 +129,77 @@ public class AclObjectIdentity {
     public long getId() {
         return id;
     }
-    
+
     /**
      * @param id the id to set
      */
     public void setId(long id) {
         this.id = id;
     }
-    
+
     /**
      * @return the aclClass
      */
     public AclClass getAclClass() {
         return aclClass;
     }
-    
+
     /**
      * @param aclClass the aclClass to set
      */
     public void setAclClass(AclClass aclClass) {
         this.aclClass = aclClass;
     }
-    
+
     /**
      * @return the objectId
      */
     public long getObjectId() {
         return objectId;
     }
-    
+
     /**
      * @param objectId the objectId to set
      */
     public void setObjectId(long objectId) {
         this.objectId = objectId;
     }
-    
+
     /**
      * @return the parentAclObject
      */
     public AclObjectIdentity getParentAclObject() {
         return parentAclObject;
     }
-    
+
     /**
      * @param parentAclObject the parentAclObject to set
      */
     public void setParentAclObject(AclObjectIdentity parentAclObject) {
         this.parentAclObject = parentAclObject;
     }
-    
+
     /**
      * @return the aclSid
      */
     public AclSid getAclSid() {
         return aclSid;
     }
-    
+
     /**
      * @param aclSid the aclSid to set
      */
     public void setAclSid(AclSid aclSid) {
         this.aclSid = aclSid;
     }
-    
+
     /**
      * @return the inheriting
      */
     public boolean isInheriting() {
         return inheriting;
     }
-    
+
     /**
      * @param inheriting the inheriting to set
      */
@@ -186,8 +210,8 @@ public class AclObjectIdentity {
 
     @Override
     public String toString() {
-        return "AclObjectIdentity{" + "id=" + id + ", aclClass=" + aclClass
+        return "AclObjectIdentity{" + "id=" + id + ", " + aclClass
                 + ", objectId=" + objectId + ", parentAclObject=" + parentAclObject
-                + ", aclSid=" + aclSid + ", inheriting=" + inheriting + '}';
-    }           
+                + ", " + aclSid + ", inheriting=" + inheriting + '}';
+    }
 }

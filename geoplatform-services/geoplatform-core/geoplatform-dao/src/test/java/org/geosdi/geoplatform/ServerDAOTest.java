@@ -36,12 +36,11 @@
 package org.geosdi.geoplatform;
 
 import java.util.List;
-
-import junit.framework.Assert;
+import org.junit.Assert;
+import org.junit.Test;
 
 import org.geosdi.geoplatform.core.model.GPCababilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.junit.Test;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -49,7 +48,6 @@ import org.junit.Test;
  * 
  */
 public class ServerDAOTest extends BaseDAOTest {
-
 
     @Test
     public void testServers() {
@@ -59,25 +57,25 @@ public class ServerDAOTest extends BaseDAOTest {
 
         insertServers();
 
-        logger.info("NUMBER OF PERSISTED SERVERS ******************* "
-                + serverDAO.findAll().size());
+        logger.info("\n*** Number of Servers into DB: {} ***",
+                serverDAO.findAll().size());
     }
 
     private void removeAllServers() {
         List<GeoPlatformServer> servers = serverDAO.findAll();
         for (GeoPlatformServer server : servers) {
-            logger.info("Delete Server ************************ " + server);
+            logger.debug("\n*** Server to REMOVE:\n{}\n***", server);
             boolean ret = serverDAO.remove(server);
-            Assert.assertTrue("Old Server not removed", ret);
+            Assert.assertTrue("Old Server NOT removed", ret);
         }
-
     }
 
     protected void insertServers() {
-        GeoPlatformServer server = createServer1();
-        GeoPlatformServer server1 = createServer2();
-        serverDAO.persist(server, server1);
-        logger.info("Persist Servers: " + server + " - " + server1);
+        GeoPlatformServer server1 = createServer1();
+        GeoPlatformServer server2 = createServer2();
+        serverDAO.persist(server1, server2);
+        logger.debug("\n*** SAVED Server:\n{}\n***", server1);
+        logger.debug("\n*** SAVED Server:\n{}\n***", server2);
     }
 
     private GeoPlatformServer createServer1() {

@@ -58,6 +58,11 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
     public void persist(GPFolder... folder) {
         super.persist(folder);
     }
+    
+    @Override
+    public GPFolder merge(GPFolder folder) {
+        return super.merge(folder);
+    }    
 
     @SuppressWarnings("unchecked")
     @Override
@@ -71,9 +76,9 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
     }
 
     @Override
-    public GPFolder findByFolderName(String name) {
+    public GPFolder findByFolderName(String folderName) {
         Search search = new Search();
-        search.addFilterEqual("name", name);
+        search.addFilterEqual("name", folderName);
         return searchUnique(search);
     }
 }

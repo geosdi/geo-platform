@@ -63,6 +63,11 @@ public class GPUserDAOImpl extends BaseDAO<GPUser, Long> implements GPUserDAO {
         return super.remove(entity);
     }
 
+    @Override
+    public boolean removeById(Long id) {
+        return super.removeById(id);   
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public List<GPUser> search(ISearch search) {

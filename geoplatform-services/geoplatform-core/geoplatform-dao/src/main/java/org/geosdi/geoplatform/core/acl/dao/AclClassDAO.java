@@ -52,13 +52,13 @@ public interface AclClassDAO {
 
     public AclClass find(Long id);
 
-    public void persist(AclClass... clazz);
+    public void persist(AclClass... clazzs);
 
     public AclClass merge(AclClass clazz);
 
     public boolean remove(AclClass clazz);
 
-    public boolean removeById(Long clazzId);
+    public boolean removeById(Long id);
     
     public AclClass findByClass(String clazz);
 }

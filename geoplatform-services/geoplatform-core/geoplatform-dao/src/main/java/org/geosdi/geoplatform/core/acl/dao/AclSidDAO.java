@@ -58,7 +58,7 @@ public interface AclSidDAO {
 
     public boolean remove(AclSid sid);
 
-    public boolean removeById(Long sidId);
+    public boolean removeById(Long id);
     
     public AclSid findBySid(String sid, boolean principal);    
 }

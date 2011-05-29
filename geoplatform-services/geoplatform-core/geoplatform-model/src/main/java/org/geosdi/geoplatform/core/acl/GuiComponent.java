@@ -35,30 +35,77 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.core.acl.dao;
+package org.geosdi.geoplatform.core.acl;
 
-import java.util.List;
-
-import org.geosdi.geoplatform.core.acl.AclEntry;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  *
  */
-public interface AclEntryDAO {
+@Entity
+@Table(name = "gui_component")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gui_component")
+public class GuiComponent {
 
-    public List<AclEntry> findAll();
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GUI_COMPONENT_SEQ")
+    @SequenceGenerator(name = "GUI_COMPONENT_SEQ", sequenceName = "GUI_COMPONENT_SEQ")
+    private long id;
+    // The ID (string ype) of the GUI Component
+    @Column(name = "component_id", nullable = false, unique = true)
+    private String componentId;
 
-    public AclEntry find(Long id);
+    public GuiComponent() {
+    }
 
-    public void persist(AclEntry... entry);
+    public GuiComponent(String componentId) {
+        this.componentId = componentId;
+    }
 
-    public AclEntry merge(AclEntry entry);
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
 
-    public boolean remove(AclEntry entry);
+    /**
+     * @param id 
+     *          the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
 
-    public boolean removeById(Long id);
-    
-    public List<AclEntry> findBySid(Long idSid);
+    /**
+     * @return the componentId
+     */
+    public String getComponentId() {
+        return componentId;
+    }
+
+    /**
+     * @param componentId
+     *          the componentId to set
+     */
+    public void setComponentId(String componentId) {
+        this.componentId = componentId;
+    }
+
+    @Override
+    public String toString() {
+        return "GuiComponent{" + "id=" + id
+                + ", componentId=" + componentId + '}';
+    }
 }

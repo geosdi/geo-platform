@@ -19,7 +19,9 @@
         <level value="info" />
         <appender-ref ref="STDOUT" />
     </root>
-    
-    <!--logger name="org.geosdi.geoplatform.BaseDAOTest" level="debug"/-->
+        
+    <!--logger name="org.geosdi.geoplatform.AclDAOTest" level="trace"/-->
+    <!--logger name="org.geosdi.geoplatform.ModelDAOTest" level="debug"/-->
+    <!--logger name="org.geosdi.geoplatform.ServerDAOTest" level="trace"/-->
 
 </configuration>

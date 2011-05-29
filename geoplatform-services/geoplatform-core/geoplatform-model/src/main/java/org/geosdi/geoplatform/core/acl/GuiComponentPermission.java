@@ -35,30 +35,36 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.core.acl.dao;
+package org.geosdi.geoplatform.core.acl;
 
-import java.util.List;
-
-import org.geosdi.geoplatform.core.acl.AclEntry;
+import org.springframework.security.acls.domain.AclFormattingUtils;
+import org.springframework.security.acls.model.Permission;
 
 /**
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  *
  */
-public interface AclEntryDAO {
+public class GuiComponentPermission implements Permission {
 
-    public List<AclEntry> findAll();
+    public static final Permission VISIBLE =
+            new GuiComponentPermission(1 << 0, 'v'); // 1
+    // Fields
+    private char code;
+    private int mask;
 
-    public AclEntry find(Long id);
+    private GuiComponentPermission(int mask, char code) {
+        this.mask = mask;
+        this.code = code;
+    }
 
-    public void persist(AclEntry... entry);
+    @Override
+    public int getMask() {
+        return this.mask;
+    }
 
-    public AclEntry merge(AclEntry entry);
-
-    public boolean remove(AclEntry entry);
-
-    public boolean removeById(Long id);
-    
-    public List<AclEntry> findBySid(Long idSid);
+    @Override
+    public String getPattern() {
+        return AclFormattingUtils.printBinary(mask, code);
+    }
 }

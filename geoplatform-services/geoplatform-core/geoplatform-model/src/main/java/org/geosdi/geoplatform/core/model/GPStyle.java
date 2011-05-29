@@ -68,25 +68,25 @@ public class GPStyle implements Serializable {
      * serialVersionUID
      */
     private static final long serialVersionUID = -8623163339265164161L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-                    generator = "GP_STYLE_SEQ")
+    generator = "GP_STYLE_SEQ")
     @SequenceGenerator(name = "GP_STYLE_SEQ", sequenceName = "GP_STYLE_SEQ")
     private long id;
-
+    
     @Column(name = "name")
     private String name;
-
+    
     @Column(name = "title")
     private String title;
-
+    
     @Column(name = "abstract")
     private String abstractText;
-
+    
     @Column(name = "legend_url")
     private String legendURL;
-
+    
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPRasterLayer layer;
@@ -179,5 +179,12 @@ public class GPStyle implements Serializable {
      */
     public void setLayer(GPRasterLayer layer) {
         this.layer = layer;
+    }
+
+    @Override
+    public String toString() {
+        return "GPStyle{" + "id=" + id + ", name=" + name + ", title=" + title
+                + ", abstractText=" + abstractText + ", legendURL=" + legendURL
+                + ", layer.id=" + layer.getId() + '}';
     }
 }

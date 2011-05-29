@@ -50,10 +50,10 @@ public class ModelDAOTest extends BaseDAOTest {
     public void testRemoveAll() throws ParseException {
         removeAll();
 
-        Assert.assertEquals(0, userDAO.findAll().size());
-        Assert.assertEquals(0, styleDAO.findAll().size());
-        Assert.assertEquals(0, folderDAO.findAll().size());
-        Assert.assertEquals(0, layerDAO.findAll().size());
+        Assert.assertEquals("All Users doesn't REMOVED", 0, userDAO.findAll().size());
+        Assert.assertEquals("All Styles doesn't REMOVED", 0, styleDAO.findAll().size());
+        Assert.assertEquals("All Folders doesn't REMOVED", 0, folderDAO.findAll().size());
+        Assert.assertEquals("All Layers doesn't REMOVED", 0, layerDAO.findAll().size());
 
         insertData();
         insertFolders();

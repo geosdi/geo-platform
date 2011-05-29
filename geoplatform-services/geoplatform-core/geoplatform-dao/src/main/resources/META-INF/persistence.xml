@@ -49,12 +49,13 @@
         <class>org.geosdi.geoplatform.core.model.GPRasterLayer</class>
         <class>org.geosdi.geoplatform.core.model.GPVectorLayer</class>
         <class>org.geosdi.geoplatform.core.model.GPStyle</class>
-        <class>org.geosdi.geoplatform.core.model.GeoPlatformServer</class>
         <class>org.geosdi.geoplatform.core.model.GPAuthority</class>
+        <class>org.geosdi.geoplatform.core.model.GeoPlatformServer</class>        
         <!-- ACL -->
         <class>org.geosdi.geoplatform.core.acl.AclSid</class>
         <class>org.geosdi.geoplatform.core.acl.AclClass</class>
         <class>org.geosdi.geoplatform.core.acl.AclObjectIdentity</class>
         <class>org.geosdi.geoplatform.core.acl.AclEntry</class>
+        <class>org.geosdi.geoplatform.core.acl.GuiComponent</class>
     </persistence-unit>
 </persistence>

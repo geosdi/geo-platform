@@ -53,17 +53,17 @@ public interface GPFolderDAO {
 
     public GPFolder find(Long id);
 
-    public void persist(GPFolder... user);
+    public void persist(GPFolder... folder);
 
-    public GPFolder merge(GPFolder user);
+    public GPFolder merge(GPFolder folder);
 
-    public boolean remove(GPFolder user);
+    public boolean remove(GPFolder folder);
 
-    public boolean removeById(Long userId);
+    public boolean removeById(Long folderId);
 
     public List<GPFolder> search(ISearch search);
 
     public int count(ISearch search);
 
-    public GPFolder findByFolderName(String name);
+    public GPFolder findByFolderName(String folderName);
 }

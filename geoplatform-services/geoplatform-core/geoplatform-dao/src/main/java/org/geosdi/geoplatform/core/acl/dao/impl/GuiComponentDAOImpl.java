@@ -35,30 +35,39 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.core.acl.dao;
+package org.geosdi.geoplatform.core.acl.dao.impl;
 
-import java.util.List;
+import com.trg.search.Search;
+import org.springframework.transaction.annotation.Transactional;
 
-import org.geosdi.geoplatform.core.acl.AclEntry;
+import org.geosdi.geoplatform.core.acl.AclClass;
+import org.geosdi.geoplatform.core.acl.GuiComponent;
+import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
+import org.geosdi.geoplatform.core.dao.impl.BaseDAO;
 
 /**
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  *
  */
-public interface AclEntryDAO {
+@Transactional
+public class GuiComponentDAOImpl extends BaseDAO<GuiComponent, Long>
+        implements GuiComponentDAO {
 
-    public List<AclEntry> findAll();
+    @Override
+    public void persist(GuiComponent... components) {
+        super.persist(components);
+    }
 
-    public AclEntry find(Long id);
+    @Override
+    public boolean remove(GuiComponent component) {
+        return super.remove(component);
+    }
 
-    public void persist(AclEntry... entry);
-
-    public AclEntry merge(AclEntry entry);
-
-    public boolean remove(AclEntry entry);
-
-    public boolean removeById(Long id);
-    
-    public List<AclEntry> findBySid(Long idSid);
+    @Override
+    public GuiComponent findByComponentId(String componentId) {
+        Search search = new Search();
+        search.addFilterEqual("component_id", componentId);
+        return searchUnique(search);
+    }
 }

@@ -92,6 +92,12 @@ public class GPAuthority implements GrantedAuthority, Serializable {
         this.username = username;
         this.authority = authority;
     }
+    
+    public GPAuthority(GPUser gpUser, String authority) {
+        this.gpUser = gpUser;
+        this.username = gpUser.getUsername();
+        this.authority = authority;
+    }    
 
     /**
      * @return the id
@@ -137,10 +143,18 @@ public class GPAuthority implements GrantedAuthority, Serializable {
         this.authority = authority;
     }
 
+    /**
+     * 
+     * @return gpUser
+     */
     public GPUser getGpUser() {
         return gpUser;
     }
 
+    /**
+     * @param gpUser
+     *            the gpUser to set
+     */    
     public void setGpUsers(GPUser gpUser) {
         this.gpUser = gpUser;
     }

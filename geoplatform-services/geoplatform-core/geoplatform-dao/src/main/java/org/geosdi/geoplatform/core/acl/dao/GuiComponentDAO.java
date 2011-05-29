@@ -39,26 +39,27 @@ package org.geosdi.geoplatform.core.acl.dao;
 
 import java.util.List;
 
-import org.geosdi.geoplatform.core.acl.AclEntry;
+import org.geosdi.geoplatform.core.acl.AclClass;
+import org.geosdi.geoplatform.core.acl.GuiComponent;
 
 /**
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  *
  */
-public interface AclEntryDAO {
+public interface GuiComponentDAO {
 
-    public List<AclEntry> findAll();
+    public List<GuiComponent> findAll();
 
-    public AclEntry find(Long id);
+    public GuiComponent find(Long id);
 
-    public void persist(AclEntry... entry);
+    public void persist(GuiComponent... components);
 
-    public AclEntry merge(AclEntry entry);
+    public GuiComponent merge(GuiComponent component);
 
-    public boolean remove(AclEntry entry);
+    public boolean remove(GuiComponent component);
 
     public boolean removeById(Long id);
-    
-    public List<AclEntry> findBySid(Long idSid);
+
+    public GuiComponent findByComponentId(String componentId);
 }

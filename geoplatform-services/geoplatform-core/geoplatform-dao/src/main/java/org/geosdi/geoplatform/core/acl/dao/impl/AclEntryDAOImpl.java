@@ -37,6 +37,8 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.acl.dao.impl;
 
+import com.trg.search.Search;
+import java.util.List;
 import org.geosdi.geoplatform.core.acl.AclEntry;
 import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
 import org.geosdi.geoplatform.core.dao.impl.BaseDAO;
@@ -59,5 +61,12 @@ public class AclEntryDAOImpl extends BaseDAO<AclEntry, Long> implements AclEntry
     @Override
     public boolean remove(AclEntry entry) {
         return super.remove(entry);
+    }
+
+    @Override
+    public List<AclEntry> findBySid(Long idSid) {
+        Search search = new Search();
+        search.addFilterEqual("sid", idSid);
+        return searchUnique(search);
     }
 }

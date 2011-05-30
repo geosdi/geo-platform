@@ -67,12 +67,11 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
 
     private LayerRemoteAsync layerService = LayerRemote.Util.getInstance();
-
     private TreePanel tree;
     private TextField<String> folderText;
     private Button save;
     private Button cancel;
-    private VisitorAddElement visitorAdd;
+    private VisitorAddElement addVisitor;
     private GPBeanTreeModel parentDestination;
 
     /**
@@ -81,7 +80,8 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
     public AddFolderWidget(TreePanel theTree) {
         super(true);
         this.tree = theTree;
-        this.visitorAdd = new VisitorAddElement();
+        //this.addVisitor = new VisitorAddElement((GPRootTreeNode)tree.getStore().getRootItems().get(0));
+        this.addVisitor = new VisitorAddElement();
     }
 
     @Override
@@ -177,15 +177,18 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
         parentDestination = (GPBeanTreeModel) this.tree.getSelectionModel().getSelectedItem();
 
         this.entity = new FolderTreeNode(this.folderText.getValue());
+        this.tree.getStore().insert(parentDestination, this.entity, 0, true);
+        this.addVisitor.insertElement(this.entity, parentDestination, 0);
+
 //        this.tree.getStore().insert(
 //                parentDestination, this.entity, 0,
 //                true);
 
         if (parentDestination instanceof GPRootTreeNode) {
-            this.visitorAdd.insertElement(this.entity, parentDestination, 0);
-            saveFolderForUser();
+            //this.addVisitor.insertElement(this.entity, parentDestination, 0);
+            this.saveFolderForUser();
         } else {
-            saveFolder();
+            this.saveFolder();
         }
     }
 

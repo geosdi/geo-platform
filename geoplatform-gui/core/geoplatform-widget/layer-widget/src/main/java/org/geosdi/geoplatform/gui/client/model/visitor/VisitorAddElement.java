@@ -80,9 +80,8 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
             ((FolderTreeNode) parentDestination).setNumberOfDescendants(
                     ((FolderTreeNode) parentDestination).getNumberOfDescendants() + 1);
         }
-        if (!(parentDestination.getParent() instanceof GPRootTreeNode)) {
-            this.updateNumberOfChildrens(
-                    (GPBeanTreeModel) parentDestination.getParent());
+        if (parentDestination.getParent() != null && !(parentDestination.getParent() instanceof GPRootTreeNode)) {
+            this.updateNumberOfChildrens((GPBeanTreeModel) parentDestination.getParent());
         }
     }
 

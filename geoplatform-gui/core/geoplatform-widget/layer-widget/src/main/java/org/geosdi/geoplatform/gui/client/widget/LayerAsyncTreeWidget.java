@@ -268,7 +268,7 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
 //                    AsyncCallback<ArrayList<GPBeanTreeModel>> callback) {
 //                if (initialized == false) {
 //                    tmpFolder = root;
-//                    layerService.loadUserFolders("user_0", callback);
+//                    layerService.loadUserFolders("user_test_0", callback);
 //                    //System.out.println("User folder inizialized");
 //                    initialized = true;
 //                } else if (loadConfig != null

@@ -102,7 +102,7 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
     public void displayMessage() {
         GeoPlatformMessage.infoMessage("Delete Folder",
                 "The Folder "
-                + ((GPBeanTreeModel) tree.getSelectionModel().getSelectedItem()).getLabel()
+                //+ ((GPBeanTreeModel) tree.getSelectionModel().getSelectedItem()).getLabel()
                 + "  was deleted successfully.");
     }
 }

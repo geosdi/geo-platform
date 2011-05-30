@@ -111,10 +111,10 @@ public class LayerService implements ILayerService {
         GPUser user = null;
         try {
             user = geoPlatformServiceClient.getUserDetailByName(new SearchRequest(
-                    "user_0"));
+                    "user_test_0"));
         } catch (ResourceNotFoundFault ex) {
             logger.error("LayerService",
-                    "Unable to find user with username : user_0");
+                    "Unable to find user with username : user_test_0");
             throw new GeoPlatformException(ex);
         }
 

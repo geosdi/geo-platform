@@ -78,7 +78,7 @@ public abstract class AbstractVisitTree {
             return (GPBeanTreeModel) parent.getChild(indexElement + 1);
         } else if (parent != null && parent instanceof GPRootTreeNode) {
             //System.out.println("Il padre non e' uguale a null ed e' istanza di root");
-            return element;//Returning null because we don't have a next element
+            return null;//Returning null because we don't have a next element
         } else {
             followingElement = this.getFollowingElement(parent);
         }

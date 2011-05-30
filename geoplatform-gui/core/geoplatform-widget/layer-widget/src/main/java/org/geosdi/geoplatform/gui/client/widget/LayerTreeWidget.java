@@ -349,13 +349,13 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                                     true);
                             visitorDisplay.enableCheckedComponent(parentFolder);
                             parentFolder.setLoading(false);
+                            parentFolder.setLoaded(true);
                             tree.refresh(parentFolder);
                             LayoutManager.get().getStatusMap().setStatus(
                                     "Tree elements loaded successfully.",
                                     EnumSearchStatus.STATUS_SEARCH.toString());
                         }
                     });
-                    parentFolder.setLoaded(true);
                 }
             }
         });

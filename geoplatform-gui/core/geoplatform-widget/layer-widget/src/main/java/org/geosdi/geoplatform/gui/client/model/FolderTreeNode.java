@@ -57,10 +57,10 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
      *
      */
     private static final long serialVersionUID = -3687415822526940729L;
-    /** THIS PROPERTY MUST NOT BE SERIALIZED **/
-    private transient VisitorModelConverter visitor = new VisitorModelConverter(this);
-    private transient boolean loaded = false;
-    private transient boolean loading = false;
+   
+    private VisitorModelConverter visitor = new VisitorModelConverter(this);
+    private boolean loaded = false;
+    private boolean loading = false;
     private int numberOfDescendants;
 
     public FolderTreeNode() {

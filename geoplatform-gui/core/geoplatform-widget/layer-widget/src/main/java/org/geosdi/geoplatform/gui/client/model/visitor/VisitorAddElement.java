@@ -76,9 +76,6 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
     }
 
     private void updateNumberOfChildrens(GPBeanTreeModel parentDestination) {
-        if (parentDestination instanceof GPRootTreeNode) {
-            return;
-        }
         if (parentDestination instanceof FolderTreeNode) {
             ((FolderTreeNode) parentDestination).setNumberOfDescendants(
                     ((FolderTreeNode) parentDestination).getNumberOfDescendants() + 1);

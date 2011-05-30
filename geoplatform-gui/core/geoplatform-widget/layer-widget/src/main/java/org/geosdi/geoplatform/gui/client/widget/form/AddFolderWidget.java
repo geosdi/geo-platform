@@ -177,12 +177,12 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
         parentDestination = (GPBeanTreeModel) this.tree.getSelectionModel().getSelectedItem();
 
         this.entity = new FolderTreeNode(this.folderText.getValue());
-        this.tree.getStore().insert(
-                parentDestination, this.entity, 0,
-                true);
-        this.visitorAdd.insertElement(this.entity, parentDestination, 0);
+//        this.tree.getStore().insert(
+//                parentDestination, this.entity, 0,
+//                true);
 
         if (parentDestination instanceof GPRootTreeNode) {
+            this.visitorAdd.insertElement(this.entity, parentDestination, 0);
             saveFolderForUser();
         } else {
             saveFolder();
@@ -224,6 +224,9 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
                 setSaveStatus(EnumSaveStatus.STATUS_SAVE,
                         EnumSaveStatus.STATUS_MESSAGE_SAVE);
                 entity.setId(result);
+//                tree.getStore().insert(
+//                        parentDestination, entity, 0,
+//                        true);
                 clearComponents();
             }
         });
@@ -250,6 +253,13 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
                 setSaveStatus(EnumSaveStatus.STATUS_SAVE,
                         EnumSaveStatus.STATUS_MESSAGE_SAVE);
                 entity.setId(result);
+                if (((FolderTreeNode) parentDestination).isLoaded()) {
+                    tree.getStore().insert(
+                            parentDestination, entity, 0,
+                            true);
+                } else {
+                    tree.setExpanded(parentDestination, true);
+                }
                 clearComponents();
             }
         });

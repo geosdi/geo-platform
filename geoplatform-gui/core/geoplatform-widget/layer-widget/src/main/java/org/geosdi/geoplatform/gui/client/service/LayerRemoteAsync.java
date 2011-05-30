@@ -53,11 +53,11 @@ public interface LayerRemoteAsync {
     public void loadFolderElements(long folderId,
             AsyncCallback<ArrayList<IGPFolderElements>> callback);
 
-    public void saveFolderForUser(String folderName, int position,
-            AsyncCallback<Long> callback);
+    public void saveFolderForUser(String folderName, int position, int numberOfDescendants, 
+            boolean isChecked, AsyncCallback<Long> callback);
 
     public void saveFolder(long idParentFolder, String folderName, int position,
-            AsyncCallback<Long> callback);
+            int numberOfDescendants, boolean isChecked, AsyncCallback<Long> callback);
 
     public void deleteElement(long id, TreeElement elementType,
             AsyncCallback<?> callback);

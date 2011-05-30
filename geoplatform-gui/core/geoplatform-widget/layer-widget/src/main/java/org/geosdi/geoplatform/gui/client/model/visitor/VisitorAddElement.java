@@ -63,6 +63,10 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
         this.rootElement = root;
     }
 
+    /**
+     * If possible is better for CC reasons to use consturctor with parm root.
+     * 
+     */
     public VisitorAddElement() {
     }
 
@@ -71,6 +75,9 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
         newElement.setParent(parentDestination);
         parentDestination.insert(newElement, newIndex);
         this.endPosition = super.getNextUnvisitedElement(newElement);
+        if(this.endPosition == null){
+            this.rootElement = super.findRootElement(parentDestination);
+        }
         this.preorderTraversal();
         this.updateNumberOfChildrens(parentDestination);
     }
@@ -87,9 +94,10 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
 
     //TODO: Gestire gli indici nel caso di aggiunta di più elementi
     private void preorderTraversal() {
-        if (this.rootElement == null) {
+        if (this.rootElement == null && this.endPosition != null) {
             this.rootElement = super.findRootElement(this.endPosition);
-        }
+        } 
+        assert(this.rootElement != null): "VisitorAddElement on preorderTraversal: impossible to visit tree, the root element is null";
         this.rootElement.setzIndex(this.rootElement.getzIndex() + 1);
         this.tmpElement = this.rootElement;
         this.tmpIndex = this.tmpElement.getzIndex();
@@ -119,8 +127,11 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
 
     @Override
     public void visitFolder(AbstractFolderTreeNode folder) {
-        folder.setzIndex(--this.tmpIndex);
-        System.out.println("Visitor Folder set zIndex: " + this.tmpIndex
+        ((FolderTreeNode) folder).setzIndex(--this.tmpIndex);
+        if (!((FolderTreeNode) folder).isLoaded()) {
+            this.tmpIndex = this.tmpIndex - ((FolderTreeNode) folder).getNumberOfDescendants();
+        }
+        System.out.println("VisitorAddElem Folder set zIndex: " + folder.getzIndex()
                 + " to the folder: " + folder.getLabel());
         List<ModelData> childrens = folder.getChildren();
         for (int i = 0; i < childrens.size() && !this.stopIterating; i++) {
@@ -137,7 +148,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
 
     private void visitLeaf(GPLayerBean leaf) {
         ((GPBeanTreeModel) leaf).setzIndex(--this.tmpIndex);
-        System.out.println("Visitor Leaf set zIndex: " + this.tmpIndex
+        System.out.println("VisitorAddElem Leaf set zIndex: " + this.tmpIndex
                 + " to the leaf: " + leaf.getLabel());
     }
 

@@ -84,7 +84,7 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
     public void modelConverter(List<GPFolderClientInfo> clientFolders) {
         for (GPFolderClientInfo folder : clientFolders) {
             FolderTreeNode folderTreeNode = new FolderTreeNode(folder);
-            //folderTreeNode.setParent(this);
+            folderTreeNode.setParent(this);
             super.add(folderTreeNode);
         }
         VisitorPosition visitor = new VisitorPosition();

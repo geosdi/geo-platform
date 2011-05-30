@@ -37,13 +37,11 @@ package org.geosdi.geoplatform.gui.server.gwt;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.service.impl.LayerService;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
@@ -83,14 +81,14 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     }
 
     @Override
-    public long saveFolderForUser(String folderName, int position) throws GeoPlatformException {
-        return this.layerService.saveFolderForUser(folderName, position);
+    public long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
+        return this.layerService.saveFolderForUser(folderName, position, numberOfDescendants, isChecked);
     }
 
     @Override
-    public long saveFolder(long idParentFolder, String folderName, int position) throws GeoPlatformException {
+    public long saveFolder(long idParentFolder, String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
         return this.layerService.saveFolder(idParentFolder, folderName,
-                position);
+                position, numberOfDescendants, isChecked);
     }
 
     @Override

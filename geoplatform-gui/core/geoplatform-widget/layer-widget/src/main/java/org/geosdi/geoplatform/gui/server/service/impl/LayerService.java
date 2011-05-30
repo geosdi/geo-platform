@@ -64,9 +64,7 @@ import org.springframework.stereotype.Service;
 public class LayerService implements ILayerService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     private GeoPlatformService geoPlatformServiceClient;
-    
     @Autowired
     private DTOConverter dtoConverter;
 
@@ -107,7 +105,7 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public long saveFolderForUser(String folderName, int position) throws GeoPlatformException {
+    public long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
         GPUser user = null;
         try {
             user = geoPlatformServiceClient.getUserDetailByName(new SearchRequest(
@@ -123,12 +121,15 @@ public class LayerService implements ILayerService {
         folder.setPosition(position);
         folder.setShared(false);
         folder.setOwner(user);
+        folder.setNumberOfDescendants(numberOfDescendants);
+        folder.setChecked(isChecked);
 
         return this.geoPlatformServiceClient.insertFolder(folder);
     }
 
     @Override
-    public long saveFolder(long idParentFolder, String folderName, int position)
+    public long saveFolder(long idParentFolder, String folderName, int position,
+            int numberOfDescendants, boolean isChecked)
             throws GeoPlatformException {
         GPFolder gpFolder = null;
 
@@ -147,7 +148,8 @@ public class LayerService implements ILayerService {
         folder.setPosition(position);
         folder.setShared(false);
         folder.setParent(gpFolder);
-
+        folder.setNumberOfDescendants(numberOfDescendants);
+        folder.setChecked(isChecked);
 
         return geoPlatformServiceClient.insertFolder(folder);
     }

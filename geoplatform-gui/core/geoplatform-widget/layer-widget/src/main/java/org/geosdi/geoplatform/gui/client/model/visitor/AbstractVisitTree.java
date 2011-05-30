@@ -96,11 +96,11 @@ public abstract class AbstractVisitTree {
     }
 
     protected void countNumberOfElements(GPBeanTreeModel element) {
-        List<ModelData> childrens = element.getChildren();
-        if (childrens.isEmpty() && element instanceof FolderTreeNode
+        if (element instanceof FolderTreeNode
                 && !((FolderTreeNode) element).isLoaded()) {
             this.numberOfElements = this.numberOfElements + 1 + ((FolderTreeNode) element).getNumberOfDescendants();
         } else {
+            List<ModelData> childrens = element.getChildren();
             ++this.numberOfElements;
             for (int i = 0; i < childrens.size(); i++) {
                 this.countNumberOfElements((GPBeanTreeModel) childrens.get(i));
@@ -109,6 +109,7 @@ public abstract class AbstractVisitTree {
     }
 
     protected GPRootTreeNode findRootElement(GPBeanTreeModel element) {
+        assert(element != null): "AbstractVisitTree on findRootElement the passed element could not be null.";
         GPRootTreeNode root = null;
         if (element instanceof GPRootTreeNode) {
             root = (GPRootTreeNode) element;

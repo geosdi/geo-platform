@@ -41,7 +41,9 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
@@ -100,9 +102,7 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
 
     @Override
     public void displayMessage() {
-        GeoPlatformMessage.infoMessage("Delete Folder",
-                "The Folder "
-                //+ ((GPBeanTreeModel) tree.getSelectionModel().getSelectedItem()).getLabel()
-                + "  was deleted successfully.");
+        LayoutManager.get().getStatusMap().setStatus("The selected folder was deleted succesfully",
+                                    EnumSearchStatus.STATUS_SEARCH.toString());
     }
 }

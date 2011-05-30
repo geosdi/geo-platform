@@ -59,10 +59,10 @@ public interface ILayerService {
     public ArrayList<IGPFolderElements> loadFolderElements(long folderId)
             throws GeoPlatformException;
 
-    public long saveFolderForUser(String folderName, int position)
+    public long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked)
             throws GeoPlatformException;
 
-    public long saveFolder(long idParentFolder, String folderName, int position)
+    public long saveFolder(long idParentFolder, String folderName, int position, int numberOfDescendants, boolean isChecked)
             throws GeoPlatformException;
 
     public void deleteElement(long id, TreeElement elementType) throws GeoPlatformException;

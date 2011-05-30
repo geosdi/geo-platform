@@ -89,7 +89,8 @@ public class VisitorPosition extends AbstractVisitTree
             oldParent.remove(changedElement);
             changedElement.setParent(parentDestination);
             parentDestination.insert(changedElement, newIndex);
-            System.out.println("In FixPosition: returning without index changes");
+            System.out.println("In FixPosition: returning without index changes"
+                    + "for element: " + changedElement.getLabel());
             return;
         }
         this.updateNumberOfChildrens(oldParent, parentDestination);
@@ -164,21 +165,20 @@ public class VisitorPosition extends AbstractVisitTree
             super.numberOfElements = 0;
             super.countNumberOfElements(root);
             this.tmpIndex = super.numberOfElements;
-            System.out.println("Number of elements: " + super.numberOfElements);
+            System.out.println("Number of elements on tree: " + super.numberOfElements);
             this.visitRoot(root);
         }
     }
 
     @Override
     public void visitFolder(AbstractFolderTreeNode folder) {
-        FolderTreeNode localFolder = (FolderTreeNode) folder;
-        localFolder.setzIndex(--this.tmpIndex);
-        if (!localFolder.isLoaded()) {
-            this.tmpIndex = this.tmpIndex - localFolder.getNumberOfDescendants();
+        ((FolderTreeNode) folder).setzIndex(--this.tmpIndex);
+        if (!((FolderTreeNode) folder).isLoaded()) {
+            this.tmpIndex = this.tmpIndex - ((FolderTreeNode) folder).getNumberOfDescendants();
         }
-        System.out.println("Visitor Folder set zIndex: " + localFolder.getzIndex()
-                + " to the folder: " + localFolder.getLabel());
-        List<ModelData> childrens = localFolder.getChildren();
+        System.out.println("VisitorPos Folder set zIndex: " + folder.getzIndex()
+                + " to the folder: " + folder.getLabel());
+        List<ModelData> childrens = folder.getChildren();
         for (int i = 0; i < childrens.size() && !this.stopIterating; i++) {
             this.tmpElement = (GPBeanTreeModel) childrens.get(i);
             if (this.endPosition != null && this.isPreorderExitCondition()) {
@@ -193,7 +193,7 @@ public class VisitorPosition extends AbstractVisitTree
 
     private void visitLeaf(GPLayerBean leaf) {
         ((GPBeanTreeModel) leaf).setzIndex(--this.tmpIndex);
-        System.out.println("Visitor Leaf set zIndex: " + this.tmpIndex
+        System.out.println("VisitorPos Leaf set zIndex: " + this.tmpIndex
                 + " to the leaf: " + leaf.getLabel());
     }
 

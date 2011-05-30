@@ -61,7 +61,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
     private VisitorModelConverter visitor = new VisitorModelConverter(this);
     private boolean loaded = false;
     private boolean loading = false;
-    private int numberOfDescendants;
+    private int numberOfDescendants = 0;
 
     public FolderTreeNode() {
     }

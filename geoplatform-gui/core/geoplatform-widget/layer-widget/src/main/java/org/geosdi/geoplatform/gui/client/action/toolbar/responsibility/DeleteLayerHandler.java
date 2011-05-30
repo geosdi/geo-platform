@@ -40,7 +40,9 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
@@ -100,9 +102,7 @@ public class DeleteLayerHandler extends DeleteRequestHandler {
 
     @Override
     public void displayMessage() {
-        GeoPlatformMessage.infoMessage("Delete Layer",
-                "The Layer "
-                + ((GPBeanTreeModel) tree.getSelectionModel().getSelectedItem()).getLabel()
-                + "  was deleted successfully.");
+        LayoutManager.get().getStatusMap().setStatus("The selected layer was deleted succesfully",
+                                    EnumSearchStatus.STATUS_SEARCH.toString());
     }
 }

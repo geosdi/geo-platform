@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.TreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.store.TreeStore;
@@ -92,6 +93,8 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
     private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(this.tree);
     private MediatorToolbarTreeAction actionMediator;
+    TreePanelDropTarget dropTarget;
+    TreePanelDragSource dragSource;
     private GPRootTreeNode root;
     private boolean initialized;
 
@@ -232,7 +235,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
      * 
      */
     private void enableDDSupport() {
-        TreePanelDragSource dragSource = new TreePanelDragSource(super.tree);
+        dragSource = new TreePanelDragSource(super.tree);
         dragSource.addDNDListener(new DNDListener() {
 
             @Override
@@ -271,12 +274,12 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
         dragSource.addListener(Events.DragEnd, listenerDragLost);
         dragSource.addListener(Events.DragFail, listenerDragLost);
 
-        TreePanelDropTarget dropTarget = new GPTreePanelDropTarget(super.tree);
-        dropTarget.setAllowSelfAsSource(true);
-        dropTarget.setAllowDropOnLeaf(false);
-        dropTarget.setFeedback(Feedback.BOTH);
-
-        dropTarget.addListener(LayerEvents.GP_DROP, gpDNDListener);
+        this.dropTarget = new GPTreePanelDropTarget(super.tree);
+        this.dropTarget.setAllowSelfAsSource(true);
+        this.dropTarget.setAllowDropOnLeaf(false);
+        this.dropTarget.setFeedback(Feedback.BOTH);
+        
+        this.dropTarget.addListener(LayerEvents.GP_DROP, gpDNDListener);
 
         super.store.addListener(Store.Add, gpDNDListener);
     }
@@ -358,6 +361,18 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                     });
                 }
             }
+        });
+        tree.addListener(Events.Expand, new Listener<TreePanelEvent<ModelData>>() {
+
+            @Override
+            public void handleEvent(TreePanelEvent<ModelData> be) {
+                if (dragSource.getFiresEvents() && be.getItem() instanceof FolderTreeNode && !((FolderTreeNode) be.getItem()).isLoaded()) {
+                    FolderTreeNode parentFolder = (FolderTreeNode) be.getItem();
+                    tree.setExpanded(parentFolder, true);
+                    dragSource.getDraggable().cancelDrag();
+                }
+            }
+            
         });
     }
 }

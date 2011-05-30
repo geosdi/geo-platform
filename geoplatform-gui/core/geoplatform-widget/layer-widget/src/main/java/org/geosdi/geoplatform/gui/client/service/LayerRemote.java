@@ -86,7 +86,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public long saveFolderForUser(String folderName, int position) throws GeoPlatformException;
+    public long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException;
 
     /**
      * 
@@ -96,7 +96,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public long saveFolder(long idParentFolder, String folderName, int position) throws GeoPlatformException;
+    public long saveFolder(long idParentFolder, String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException;
 
     /**
      * 

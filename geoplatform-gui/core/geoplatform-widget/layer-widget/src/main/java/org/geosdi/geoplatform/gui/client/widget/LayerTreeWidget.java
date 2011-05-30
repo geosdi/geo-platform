@@ -128,7 +128,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
             LayoutManager.get().getStatusMap().setBusy(
                     "Loading tree elements: please, wait untill contents fully loads.");
-            layerService.loadUserFolders("user_0",
+            layerService.loadUserFolders("user_test_0",
                     new AsyncCallback<ArrayList<GPFolderClientInfo>>() {
 
                         @Override

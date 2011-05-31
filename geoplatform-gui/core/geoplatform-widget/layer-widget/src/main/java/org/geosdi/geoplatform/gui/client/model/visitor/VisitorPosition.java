@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -126,8 +127,8 @@ public class VisitorPosition extends AbstractVisitTree
 
     private void preorderTraversal() {
         assert (this.startPosition != null) : "You need to specify a startPosition before call this method";
-        if(this.startPosition instanceof FolderTreeNode && !((FolderTreeNode)this.startPosition).isLoaded()){
-            this.tmpIndex = this.startPosition.getzIndex() - ((FolderTreeNode)this.startPosition).getNumberOfDescendants();
+        if (this.startPosition instanceof FolderTreeNode && !((FolderTreeNode) this.startPosition).isLoaded()) {
+            this.tmpIndex = this.startPosition.getzIndex() - ((FolderTreeNode) this.startPosition).getNumberOfDescendants();
         } else {
             this.tmpIndex = this.startPosition.getzIndex();
         }
@@ -195,6 +196,15 @@ public class VisitorPosition extends AbstractVisitTree
         ((GPBeanTreeModel) leaf).setzIndex(--this.tmpIndex);
         System.out.println("VisitorPos Leaf set zIndex: " + this.tmpIndex
                 + " to the leaf: " + leaf.getLabel());
+    }
+
+    public void assignTmpIndex(GPBeanTreeModel element) {
+        assert (this.tmpIndex == -1) : "The temporary index is accessed from other method?";
+        if (element instanceof GPRootTreeNode) {
+            this.tmpIndex = 0;
+        } else {
+            this.tmpIndex = element.getzIndex();
+        }
     }
 
     @Override

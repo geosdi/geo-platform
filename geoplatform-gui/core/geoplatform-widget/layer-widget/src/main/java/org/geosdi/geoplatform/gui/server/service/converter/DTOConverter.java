@@ -106,7 +106,7 @@ public class DTOConverter {
         raster.setLayerName(rasterDTO.getName());
         raster.setCrs(rasterDTO.getSrs());
         raster.setDataSource(rasterDTO.getUrlServer());
-        raster.setzIndex(rasterDTO.getPosition());
+        //raster.setzIndex(rasterDTO.getPosition());
         raster.setBbox(this.convertBbox(rasterDTO.getBbox()));
         raster.setChecked(rasterDTO.isChecked());
         return raster;
@@ -119,7 +119,7 @@ public class DTOConverter {
         vector.setFeatureType(vectorDTO.getName());
         vector.setCrs(vectorDTO.getSrs());
         vector.setDataSource(vectorDTO.getUrlServer());
-        vector.setzIndex(vectorDTO.getPosition());
+        //vector.setzIndex(vectorDTO.getPosition());
         vector.setBbox(this.convertBbox(vectorDTO.getBbox()));
         vector.setChecked(vectorDTO.isChecked());
         return vector;
@@ -129,7 +129,7 @@ public class DTOConverter {
         GPFolderClientInfo folder = new GPFolderClientInfo();
         folder.setLabel(folderDTO.getName());
         folder.setId(folderDTO.getId());
-        folder.setzIndex(folderDTO.getPosition());
+        //folder.setzIndex(folderDTO.getPosition());
         folder.setNumberOfDescendants(folderDTO.getNumberOfChilds());
         folder.setChecked(folderDTO.isChecked());
         return folder;

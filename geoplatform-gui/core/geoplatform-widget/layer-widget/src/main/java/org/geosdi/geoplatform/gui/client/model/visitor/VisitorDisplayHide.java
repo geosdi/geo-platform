@@ -42,7 +42,6 @@ import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
-import org.geosdi.geoplatform.gui.client.util.Util;
 import org.geosdi.geoplatform.gui.impl.map.event.DisplayLayerEvent;
 import org.geosdi.geoplatform.gui.impl.map.event.HideLayerEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -51,6 +50,7 @@ import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
@@ -212,7 +212,7 @@ public class VisitorDisplayHide implements IVisitor {
             if (element instanceof FolderTreeNode && element.isChecked()
                     && element.getChildCount() != 0) {
                 this.getVisibleLayers(element.getChildren(), visibleLayers);
-            } else if (element.isChecked()) {
+            } else if (element instanceof GPLayerTreeModel && element.isChecked()) {
                 visibleLayers.add(element);
             }
         }
@@ -222,6 +222,7 @@ public class VisitorDisplayHide implements IVisitor {
     public List<GPBeanTreeModel> getVisibleLayers() {
         List<GPBeanTreeModel> visibleLayers = new ArrayList<GPBeanTreeModel>();
         GPRootTreeNode root = (GPRootTreeNode) this.treePanel.getStore().getRootItems().get(0);
+        assert(root != null): "VisitorDisplayHide on getVisibleLayers(): Impossible to retrieve root element";
         return this.getVisibleLayers(root.getChildren(), visibleLayers);
     }
 }

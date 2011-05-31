@@ -36,10 +36,16 @@
 package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import java.util.Iterator;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDeleteElement;
+import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
+import org.geosdi.geoplatform.gui.impl.map.event.HideLayerEvent;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 /**
  *
@@ -52,10 +58,12 @@ public abstract class DeleteRequestHandler {
 
     protected TreePanel tree;
     private VisitorDeleteElement deleteVisitor = new VisitorDeleteElement();
+    private VisitorDisplayHide visitorDispalyHide;
     private DeleteRequestHandler successor;
 
     public DeleteRequestHandler(TreePanel theTree) {
         this.tree = theTree;
+        this.visitorDispalyHide = new VisitorDisplayHide(tree);
     }
 
     public void setSuperiorRequestHandler(DeleteRequestHandler theSuccessor) {
@@ -75,9 +83,13 @@ public abstract class DeleteRequestHandler {
     protected void delete() {
         GPBeanTreeModel element = (GPBeanTreeModel) tree.getSelectionModel().getSelectedItem();
         GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
+        List<GPBeanTreeModel> visibleLayers = this.visitorDispalyHide.getVisibleLayers();
+        for (Iterator<GPBeanTreeModel> it = visibleLayers.iterator(); it.hasNext();) {
+            GPHandlerManager.fireEvent(new HideLayerEvent(((GPLayerBean) it.next())));
+        }
         this.deleteVisitor.deleteElement(element, parent, parent.indexOf(element));
         this.tree.getStore().remove(element);
-
+        
         displayMessage();
     }
 

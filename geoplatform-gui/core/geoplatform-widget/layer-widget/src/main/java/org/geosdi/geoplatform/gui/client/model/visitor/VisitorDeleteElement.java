@@ -69,30 +69,30 @@ public class VisitorDeleteElement extends AbstractVisitTree implements IVisitor 
     public void deleteElement(GPBeanTreeModel removedElement,
             GPBeanTreeModel parentElementRemoved, int indexElementRemoved) {
         this.endPosition = super.getNextUnvisitedElement(removedElement);
-        if (this.endPosition == null) {
-            this.rootElement = super.findRootElement(parentElementRemoved);
-        }
+        this.rootElement = super.findRootElement(parentElementRemoved);
         parentElementRemoved.remove(removedElement);
-        this.preorderTraversal();
-        this.updateNumberOfChildrens(parentElementRemoved);
+        this.preorderTraversal((removedElement instanceof FolderTreeNode)
+                ? ((FolderTreeNode) removedElement).getNumberOfDescendants() : 0);
+        this.updateNumberOfChildrens(parentElementRemoved, (removedElement instanceof FolderTreeNode)
+                ? ((FolderTreeNode) removedElement).getNumberOfDescendants() : 0);
     }
 
-    private void updateNumberOfChildrens(GPBeanTreeModel parentElementRemoved) {
+    private void updateNumberOfChildrens(GPBeanTreeModel parentElementRemoved, int numberOfDescendant) {
         if (parentElementRemoved instanceof FolderTreeNode) {
-            ((FolderTreeNode) parentElementRemoved).setNumberOfDescendants(((FolderTreeNode) parentElementRemoved).getNumberOfDescendants() - 1);
+            ((FolderTreeNode) parentElementRemoved).setNumberOfDescendants(
+                    ((FolderTreeNode) parentElementRemoved).getNumberOfDescendants() - 1 - numberOfDescendant);
+            System.out.println(parentElementRemoved.getLabel() + " has " + ((FolderTreeNode) parentElementRemoved).getNumberOfDescendants()
+                    + " number of descendants.");
         }
-        if (!(parentElementRemoved.getParent() instanceof GPRootTreeNode)) {
-            this.updateNumberOfChildrens((GPBeanTreeModel) parentElementRemoved.getParent());
+        if (parentElementRemoved.getParent() != null && !(parentElementRemoved.getParent() instanceof GPRootTreeNode)) {
+            this.updateNumberOfChildrens((GPBeanTreeModel) parentElementRemoved.getParent(), numberOfDescendant);
         }
     }
 
     //TODO: Gestire gli indici nel caso di aggiunta di più elementi
-    private void preorderTraversal() {
-        if (this.rootElement == null && this.endPosition != null) {
-            this.rootElement = super.findRootElement(this.endPosition);
-        }
+    private void preorderTraversal(int numberOfDescendant) {
         assert (this.rootElement != null) : "VisitorDeleteElement on preorderTraversal: impossible to visit tree, the root element is null";
-        this.rootElement.setzIndex(this.rootElement.getzIndex() - 1);
+        this.rootElement.setzIndex(this.rootElement.getzIndex() - 1 - numberOfDescendant);
         this.tmpElement = this.rootElement;
         this.tmpIndex = this.tmpElement.getzIndex();
         System.out.println("this.tmpZindex: " + this.tmpIndex);

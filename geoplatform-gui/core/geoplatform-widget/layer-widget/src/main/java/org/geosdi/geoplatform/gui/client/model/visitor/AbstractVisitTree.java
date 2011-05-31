@@ -72,11 +72,11 @@ public abstract class AbstractVisitTree {
 
     private GPBeanTreeModel getFollowingElement(GPBeanTreeModel element) {
         GPBeanTreeModel followingElement = null;
+        System.out.println("Element label: " + element.getLabel());
         GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
-        int indexElement = parent.indexOf(element);
-        if (parent != null && parent.getChild(indexElement + 1) != null) {
-            return (GPBeanTreeModel) parent.getChild(indexElement + 1);
-        } else if (parent != null && parent instanceof GPRootTreeNode) {
+        if (parent != null && parent.getChild(parent.indexOf(element) + 1) != null) {
+            return (GPBeanTreeModel) parent.getChild(parent.indexOf(element) + 1);
+        } else if (parent == null || (parent != null && parent instanceof GPRootTreeNode)) {
             //System.out.println("Il padre non e' uguale a null ed e' istanza di root");
             return null;//Returning null because we don't have a next element
         } else {

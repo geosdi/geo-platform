@@ -75,9 +75,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
         newElement.setParent(parentDestination);
         parentDestination.insert(newElement, newIndex);
         this.endPosition = super.getNextUnvisitedElement(newElement);
-        if(this.endPosition == null){
-            this.rootElement = super.findRootElement(parentDestination);
-        }
+        this.rootElement = super.findRootElement(parentDestination);
         this.preorderTraversal();
         this.updateNumberOfChildrens(parentDestination);
     }
@@ -94,10 +92,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
 
     //TODO: Gestire gli indici nel caso di aggiunta di più elementi
     private void preorderTraversal() {
-        if (this.rootElement == null && this.endPosition != null) {
-            this.rootElement = super.findRootElement(this.endPosition);
-        } 
-        assert(this.rootElement != null): "VisitorAddElement on preorderTraversal: impossible to visit tree, the root element is null";
+        assert (this.rootElement != null) : "VisitorAddElement on preorderTraversal: impossible to visit tree, the root element is null";
         this.rootElement.setzIndex(this.rootElement.getzIndex() + 1);
         this.tmpElement = this.rootElement;
         this.tmpIndex = this.tmpElement.getzIndex();

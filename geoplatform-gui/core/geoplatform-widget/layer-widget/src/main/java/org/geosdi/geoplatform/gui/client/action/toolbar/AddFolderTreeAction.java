@@ -57,6 +57,6 @@ public class AddFolderTreeAction extends ToolbarLayerTreeAction {
 
     @Override
     public void componentSelected(ButtonEvent ce) {
-       this.addFolder.show();
+       this.addFolder.showForm();
     }
 }

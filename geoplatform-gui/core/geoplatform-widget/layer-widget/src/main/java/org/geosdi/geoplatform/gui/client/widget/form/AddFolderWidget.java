@@ -36,14 +36,10 @@
 package org.geosdi.geoplatform.gui.client.widget.form;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
-import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.KeyListener;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.TextField;
@@ -59,12 +55,10 @@ import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.client.widget.expander.GPLayerExpander;
 import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  *
@@ -74,12 +68,14 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
 
     private LayerRemoteAsync layerService = LayerRemote.Util.getInstance();
+
     private TreePanel tree;
     private TextField<String> folderText;
     private Button save;
     private Button cancel;
     private VisitorAddElement addVisitor;
     private GPBeanTreeModel parentDestination;
+    private GPLayerExpander expander;
 
     /**
      *@Constructor
@@ -88,6 +84,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
         super(true);
         this.tree = theTree;
         this.addVisitor = new VisitorAddElement();
+        this.expander = new GPLayerExpander(this);
     }
 
     @Override
@@ -180,10 +177,10 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
     @Override
     public void execute() {
         this.saveStatus.setBusy("Saving Folder");
-        this.parentDestination = (GPBeanTreeModel) this.tree.getSelectionModel().getSelectedItem();
-        assert(this.tree.isExpanded(parentDestination)): "AddFolderWidget on execute: the parent folder must be expanded before the add operation";
+        this.parentDestination = (GPBeanTreeModel) this.getTree().getSelectionModel().getSelectedItem();
+        assert(this.getTree().isExpanded(parentDestination)): "AddFolderWidget on execute: the parent folder must be expanded before the add operation";
         this.entity = new FolderTreeNode(this.folderText.getValue());
-        this.tree.getStore().insert(parentDestination, this.entity, 0, true);
+        this.getTree().getStore().insert(parentDestination, this.entity, 0, true);
         this.addVisitor.insertElement(this.entity, parentDestination, 0);
 
         if (parentDestination instanceof GPRootTreeNode) {
@@ -200,46 +197,23 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
         this.saveStatus.clearStatus("");
     }
 
-    @Override
-    public void show() {
+    public void showForm() {
         if (!isInitialized()) {
             super.init();
         }
-        this.parentDestination = (GPBeanTreeModel) this.tree.getSelectionModel().getSelectedItem();
-        if (!this.tree.isExpanded(parentDestination)) {
-            final Listener executor = new Listener() {
 
-                @Override
-                public void handleEvent(BaseEvent be) {
-                    AddFolderWidget.super.show();
-                    tree.removeListener(GeoPlatformEvents.GP_NODE_EXPANDED, this);
-                }
-            };
-            Listener<MessageBoxEvent> listener = new Listener<MessageBoxEvent>() {
-
-                @Override
-                public void handleEvent(MessageBoxEvent be) {
-                    if (be.getButtonClicked().getItemId().equalsIgnoreCase(Dialog.YES)) {
-                        tree.addListener(GeoPlatformEvents.GP_NODE_EXPANDED, executor);
-                        tree.setExpanded(parentDestination, true);
-                    } else {
-                        tree.removeListener(GeoPlatformEvents.GP_NODE_EXPANDED, executor);
-                        LayoutManager.get().getStatusMap().setStatus(
-                                    "Add folder operation cancelled.",
-                                    EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                    }
-                }
-            };
-            GeoPlatformMessage.confirmMessage("Folder not expanded",
-                    "The folder you are trying to put elements must be expanded before the adding operation."
-                    + "\nDo you want to expand it?", listener);
-        } else {
-            super.show();
-        }
+        this.expander.checkNodeState();
     }
 
     private void clearComponents() {
         super.hide();
+    }
+
+    /**
+     * @return the tree
+     */
+    public TreePanel getTree() {
+        return tree;
     }
 
     private void saveFolderForUser() {
@@ -259,9 +233,6 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
                 setSaveStatus(EnumSaveStatus.STATUS_SAVE,
                         EnumSaveStatus.STATUS_MESSAGE_SAVE);
                 entity.setId(result);
-//                tree.getStore().insert(
-//                        parentDestination, entity, 0,
-//                        true);
                 clearComponents();
             }
         });

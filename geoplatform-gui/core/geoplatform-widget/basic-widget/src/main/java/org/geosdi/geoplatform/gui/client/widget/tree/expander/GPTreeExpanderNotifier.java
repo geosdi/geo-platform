@@ -36,13 +36,13 @@
 package org.geosdi.geoplatform.gui.client.widget.tree.expander;
 
 import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  *
@@ -52,10 +52,9 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 public abstract class GPTreeExpanderNotifier<T extends GPBeanTreeModel> {
 
     private TreePanel tree;
-
     protected Listener executor;
-
     protected Listener<MessageBoxEvent> message;
+    protected T selectedElement;
 
     /**
      * @Constructor
@@ -73,7 +72,7 @@ public abstract class GPTreeExpanderNotifier<T extends GPBeanTreeModel> {
             @Override
             public void handleEvent(BaseEvent be) {
                 execute();
-                tree.removeListener(Events.Expand, this);
+                tree.removeListener(GeoPlatformEvents.GP_NODE_EXPANDED, this);
             }
         };
 
@@ -83,12 +82,12 @@ public abstract class GPTreeExpanderNotifier<T extends GPBeanTreeModel> {
             public void handleEvent(MessageBoxEvent be) {
                 if (be.getButtonClicked().getItemId().equalsIgnoreCase(
                         Dialog.YES)) {
-                    tree.addListener(Events.Expand, executor);
+                    tree.addListener(GeoPlatformEvents.GP_NODE_EXPANDED, executor);
                     tree.setExpanded(
                             (T) tree.getSelectionModel().getSelectedItem(),
                             true);
                 } else {
-                    tree.removeListener(Events.Expand, executor);
+                    tree.removeListener(GeoPlatformEvents.GP_NODE_EXPANDED, executor);
                     defineStatusBarCancelMessage();
                 }
             }
@@ -100,7 +99,8 @@ public abstract class GPTreeExpanderNotifier<T extends GPBeanTreeModel> {
      * 
      */
     public void checkNodeState() {
-        if (!tree.isExpanded(tree.getSelectionModel().getSelectedItem())) {
+        this.selectedElement = (T) tree.getSelectionModel().getSelectedItem();
+        if (!tree.isExpanded(selectedElement)) {
             this.confirmExpandingMessage();
         } else {
             execute();

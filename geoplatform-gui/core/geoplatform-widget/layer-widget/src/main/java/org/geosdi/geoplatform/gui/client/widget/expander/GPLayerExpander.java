@@ -35,30 +35,29 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.expander;
 
-import org.geosdi.geoplatform.gui.client.widget.GridLayersWidget;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.client.widget.form.AddFolderWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeNode> {
+public class GPLayerExpander extends GPTreeExpanderNotifier<FolderTreeNode> {
 
-    private GridLayersWidget gridLayers;
+    private AddFolderWidget addFolderWidget;
 
-    public GPServerExpander(GridLayersWidget theWidget) {
+    public GPLayerExpander(AddFolderWidget theWidget) {
         super(theWidget.getTree());
-        this.gridLayers = theWidget;
+        this.addFolderWidget = theWidget;
     }
 
     @Override
     public void execute() {
-        System.out.println(
-                "TEST ELEMENTI NELLA FOLDER ****** " + this.selectedElement.getChildCount());
+        this.addFolderWidget.show();
     }
 
     @Override

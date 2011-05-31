@@ -35,38 +35,30 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.core.acl.dao.impl;
+package org.geosdi.geoplatform.responce.collection;
 
-import com.googlecode.genericdao.search.Search;
-import java.util.List;
-import org.springframework.transaction.annotation.Transactional;
-
-import org.geosdi.geoplatform.core.acl.AclEntry;
-import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
-import org.geosdi.geoplatform.core.dao.impl.BaseDAO;
+import java.util.HashMap;
+import java.util.Map;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  *
  */
-@Transactional
-public class AclEntryDAOImpl extends BaseDAO<AclEntry, Long> implements AclEntryDAO {
+public class GuiComponentsPermissionMapData {
 
-    @Override
-    public void persist(AclEntry... entries) {
-        super.persist(entries);
+    private Map<String, Boolean> map = new HashMap<String, Boolean>();
+
+    public GuiComponentsPermissionMapData() {
     }
 
-    @Override
-    public boolean remove(AclEntry entry) {
-        return super.remove(entry);
+    @XmlJavaTypeAdapter(AclMapAdapter.class)
+    public Map<String, Boolean> getGuiComponentsPermissionMap() {
+        return map;
     }
 
-    @Override
-    public List<AclEntry> findBySid(Long idSid) {
-        Search search = new Search();
-        search.addFilterEqual("aclSid.id", idSid);
-        return super.search(search);
+    public void setGuiComponentsPermissionMap(Map<String, Boolean> d) {
+        map = d;
     }
 }

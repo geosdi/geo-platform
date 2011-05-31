@@ -42,7 +42,6 @@ import java.util.List;
 
 import org.geosdi.geoplatform.core.model.GPAuthority;
 
-
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
  *
@@ -64,4 +63,6 @@ public interface GPAuthorityDAO {
     public List<GPAuthority> search(ISearch search);
 
     public int count(ISearch search);
+
+    public List<GPAuthority> findByUsername(String username);
 }

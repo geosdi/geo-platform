@@ -38,12 +38,12 @@
 package org.geosdi.geoplatform.core.dao.impl;
 
 import com.googlecode.genericdao.search.ISearch;
+import com.googlecode.genericdao.search.Search;
 import java.util.List;
 
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.springframework.transaction.annotation.Transactional;
-
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
@@ -66,6 +66,13 @@ public class GPAuthorityDAOImpl extends BaseDAO<GPAuthority, Long> implements
     @SuppressWarnings("unchecked")
     @Override
     public List<GPAuthority> search(ISearch search) {
+        return super.search(search);
+    }
+
+    @Override
+    public List<GPAuthority> findByUsername(String username) {
+        Search search = new Search();
+        search.addFilterEqual("username", username);
         return super.search(search);
     }
 }

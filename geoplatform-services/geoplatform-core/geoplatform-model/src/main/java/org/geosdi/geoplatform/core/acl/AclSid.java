@@ -58,8 +58,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * SID = Secure Identity
  */
 @Entity
-@Table(name = "acl_sid", 
-        uniqueConstraints = @UniqueConstraint(columnNames = {"principal", "sid"}))
+@Table(name = "acl_sid",
+uniqueConstraints =
+@UniqueConstraint(columnNames = {"principal", "sid"}))
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "sid")
 // TODO: implements Sid? extends PrincipalSid, GrantedAuthoritySid?
 public class AclSid {
@@ -68,11 +69,10 @@ public class AclSid {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACL_SID_SEQ")
     @SequenceGenerator(name = "ACL_SID_SEQ", sequenceName = "ACL_SID_SEQ")
     private long id;
-    
     // If Id refers to a principal name or a GrantedAuthority
     @Column(name = "principal", nullable = false)
     private boolean principal = true;
-    
+    //
     @Column(name = "sid", nullable = false)
     private String sid;
 
@@ -130,11 +130,25 @@ public class AclSid {
     }
     //</editor-fold>
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
-        return "AclSid{" + "id=" + id + ", principal=" + principal + ", sid=" + sid + '}';
+        StringBuilder str = new StringBuilder("AclSid {");
+        str.append("id=").append(id);
+        str.append(", principal=").append(principal);
+        str.append(", sid=").append(sid).append('}');
+        return str.toString();
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -150,6 +164,11 @@ public class AclSid {
         return true;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode() {
         return sid.hashCode();

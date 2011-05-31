@@ -66,38 +66,38 @@ import org.springframework.security.core.GrantedAuthority;
 public class GPAuthority implements GrantedAuthority, Serializable {
 
     /**
-     *
+     * serialVersionUID
      */
     private static final long serialVersionUID = -5005299814060260152L;
-    
+    //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_AUTHORITY_SEQ")
     @SequenceGenerator(name = "GP_AUTHORITY_SEQ", sequenceName = "GP_AUTHORITY_SEQ")
     private long id;
-    
+    //
     @Column(name = "username", nullable = false)
     private String username;
-    
+    //
     @Column(name = "authority", nullable = false)
     private String authority;
-    
+    //
     @ManyToOne(targetEntity = GPUser.class)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPUser gpUser;
 
     public GPAuthority() {
     }
-    
+
     public GPAuthority(String username, String authority) {
         this.username = username;
         this.authority = authority;
     }
-    
+
     public GPAuthority(GPUser gpUser, String authority) {
         this.gpUser = gpUser;
         this.username = gpUser.getUsername();
         this.authority = authority;
-    }    
+    }
 
     /**
      * @return the id
@@ -154,15 +154,23 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     /**
      * @param gpUser
      *            the gpUser to set
-     */    
+     */
     public void setGpUsers(GPUser gpUser) {
         this.gpUser = gpUser;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
-        return "GPAuthority{" + "id=" + id + ", username=" + username
-                + ", authority=" + authority + ", gpUsers=" + gpUser + '}';
+        StringBuilder str = new StringBuilder("GPAuthority {");
+        str.append("id=").append(id);
+        str.append(", username=").append(username);
+        str.append(", authority=").append(authority);
+        str.append(", gpUsers=").append(gpUser).append("}");
+        return str.toString();
     }
-    
 }

@@ -65,33 +65,33 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 public class GeoPlatformServer implements Serializable {
 
     /**
-     *
+     * serialVersionUID
      */
     private static final long serialVersionUID = 8546115928654105043L;
-
+    //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_SERVER_SEQ")
     @SequenceGenerator(name = "GP_SERVER_SEQ", sequenceName = "GP_SERVER_SEQ")
     private long id;
-
+    //
     @Column(name = "server_url", nullable = false, unique = true)
     private String serverUrl;
-
+    //
     @Column(name = "name")
     private String name;
-
+    //
     @Column(name = "title")
     private String title;
-
+    //
     @Column(name = "abstract")
     private String abstractServer;
-
+    //
     @Column(name = "contact_person")
     private String contactPerson;
-
+    //
     @Column(name = "contact_organization")
     private String contactOrganization;
-
+    //
     @Column(name = "cabability_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private GPCababilityType serverType;
@@ -223,10 +223,15 @@ public class GeoPlatformServer implements Serializable {
      */
     @Override
     public String toString() {
-        return "GeoPlatformServer [id=" + id + ", serverUrl=" + serverUrl
-                + ", name=" + name + ", title=" + title + ", abstractServer="
-                + abstractServer + ", contactPerson=" + contactPerson
-                + ", contactOrganization=" + contactOrganization
-                + ", serverType=" + serverType + "]";
+        StringBuilder str = new StringBuilder("GeoPlatformServer {");
+        str.append("id=").append(id);
+        str.append(", serverUrl=").append(serverUrl);
+        str.append(", name=").append(name);
+        str.append(", title=").append(title);
+        str.append(", abstractServer=").append(abstractServer);
+        str.append(", contactPerson=").append(contactPerson);
+        str.append(", contactOrganization=").append(contactOrganization);
+        str.append(", serverType=").append(serverType).append("}");
+        return str.toString();
     }
 }

@@ -68,50 +68,35 @@ public class GPFolder implements Serializable {
      * serialVersionUID
      */
     private static final long serialVersionUID = -5826659681483678835L;
-
+    //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_FOLDER_SEQ")
     @SequenceGenerator(name = "GP_FOLDER_SEQ", sequenceName = "GP_FOLDER_SEQ")
     private long id;
-
+    //
     @Column(name = "name", nullable = false)
     private String name;
-
+    //
     @Column(name = "position")
-    private int position;
-
+    private int position = -1;
+    //
     @Column(name = "shared")
-    private boolean shared = false;    
-
+    private boolean shared = false;
+    //
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPFolder parent;
-
+    //
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPUser owner;
-    
+    //
     @Column(name = "checked")
-    private boolean checked = false;    
-
+    private boolean checked = false;
+    //
     @Column(name = "number_of_descendants")
-    private int numberOfDescendants = -1;
+    private int numberOfDescendants = 0;
 
-    /**
-     * 
-     * @return the numberOfDescendant
-     */
-    public int getNumberOfDescendants() {
-        return numberOfDescendants;
-    }
-
-    /**
-     * @param numberOfDescendant
-     *            the numberOfDescendant to set
-     */
-    public void setNumberOfDescendants(int numberOfDescendants) {
-        this.numberOfDescendants = numberOfDescendants;
-    }
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
      * @return the id
@@ -203,7 +188,7 @@ public class GPFolder implements Serializable {
 
     /**
      * @return the checked
-     */    
+     */
     public boolean isChecked() {
         return checked;
     }
@@ -211,16 +196,37 @@ public class GPFolder implements Serializable {
     /**
      * @param checked
      *            the checked to set
-     */    
+     */
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+    /**
+     * @return the numberOfDescendant
+     */
+    public int getNumberOfDescendants() {
+        return numberOfDescendants;
+    }
+
+    /**
+     * @param numberOfDescendant
+     *            the numberOfDescendant to set
+     */
+    public void setNumberOfDescendants(int numberOfDescendants) {
+        this.numberOfDescendants = numberOfDescendants;
     }
     //</editor-fold>
 
     @Override
     public String toString() {
-        return "GPFolder{" + " id=" + id + ", name=" + name + ", position=" + position
-                + ", shared=" + shared + ", parent=" + parent + ", owner=" + owner
-                + ", numberOfDescendants=" + numberOfDescendants + '}';
+        StringBuilder str = new StringBuilder("GPFolder {");
+        str.append(" id=").append(id);
+        str.append(", name=").append(name);
+        str.append(", position=").append(position);
+        str.append(", shared=").append(shared);
+        str.append(", parent=").append(parent);
+        str.append(", owner=").append(owner);
+        str.append(", numberOfDescendants=").append(numberOfDescendants).append('}');
+        return str.toString();
     }
 }

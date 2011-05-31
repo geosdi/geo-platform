@@ -53,21 +53,26 @@ public enum GPLayerType implements Serializable {
     MULTIPOINT(5),
     MULTILINESTRING(6),
     MULTIPOLYGON(7);
-
+    //
     @Column(name = "layer_type")
     private int code;
+
+    private GPLayerType() {
+    }
 
     /**
      * Create layer type.
      *
-     * @param code code to apply
+     * @param code to apply
      */
-    private GPLayerType() {}
-    
     private GPLayerType(int code) {
         this.code = code;
     }
 
+    /**
+     * 
+     * @return the code
+     */
     public int getCode() {
         return this.code;
     }
@@ -77,6 +82,7 @@ public enum GPLayerType implements Serializable {
      *
      * @return string representation of layer type
      */
+    @Override
     public String toString() {
         return Integer.toString(code);
     }

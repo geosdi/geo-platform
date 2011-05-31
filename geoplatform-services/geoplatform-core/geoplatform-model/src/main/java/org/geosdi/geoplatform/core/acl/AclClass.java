@@ -69,7 +69,7 @@ public class AclClass {
     //<editor-fold defaultstate="collapsed" desc="Constructor methods">
     public AclClass() {
     }
-    
+
     public AclClass(String clazz) {
         this.clazz = clazz;
     }
@@ -82,21 +82,21 @@ public class AclClass {
     public long getId() {
         return id;
     }
-    
+
     /**
      * @param id the id to set
      */
     public void setId(long id) {
         this.id = id;
     }
-    
+
     /**
      * @return the clazz
      */
     public String getClazz() {
         return clazz;
     }
-    
+
     /**
      * @param clazz the clazz to set
      */
@@ -105,9 +105,16 @@ public class AclClass {
     }
     //</editor-fold>
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */    
     @Override
     public String toString() {
-        return "AclClass{" + "id=" + id + ", clazz=" + clazz + '}';
-    }    
-    
+        StringBuilder str = new StringBuilder("AclClass {");
+        str.append("id=").append(id);
+        str.append(", clazz=").append(clazz).append('}');
+        return str.toString();
+    }
 }

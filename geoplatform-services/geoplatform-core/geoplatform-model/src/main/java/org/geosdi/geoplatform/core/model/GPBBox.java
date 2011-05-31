@@ -127,9 +127,18 @@ public class GPBBox implements Serializable {
         this.maxY = maxY;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
-        return "GPBBox [" + "minX=" + minX + ", minY=" + minY
-                + ", maxX=" + maxX + ", maxY=" + maxY + ']';
+        StringBuilder str = new StringBuilder("GPBBox {");
+        str.append("minX=").append(minX);
+        str.append(", minY=").append(minY);
+        str.append(", maxX=").append(maxX);
+        str.append(", maxY=").append(maxY).append('}');
+        return str.toString();
     }
 }

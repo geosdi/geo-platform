@@ -88,7 +88,7 @@ public abstract class BaseDAOTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     
-    @Autowired
+    @Autowired    
     protected GPUserDAO userDAO;
     
     @Autowired
@@ -109,7 +109,7 @@ public abstract class BaseDAOTest {
     private final String nameUserTest = "user_test_0";
     protected final String nameSuperUser = "super_user_test_acl";
     protected final String roleAdmin = "ROLE_ADMIN";
-    protected final String roleUser = "ROLE_USER";    
+    protected final String roleUser = "ROLE_USER";
 
     @Before
     public void setUp() {
@@ -201,8 +201,8 @@ public abstract class BaseDAOTest {
         this.insertUser(nameUserTest, roleAdmin);
         // ACL Data
         this.insertUser(nameSuperUser, roleAdmin, roleUser);
-        this.insertUser("admin_test_acl", roleAdmin);
-        this.insertUser("user_test_acl", roleUser);
+        this.insertUser("admin_acl_test", roleAdmin);
+        this.insertUser("user_acl_test", roleUser);
     }
 
     protected long insertUser(String name, String... roles) {
@@ -221,11 +221,11 @@ public abstract class BaseDAOTest {
         return user.getId();
     }
 
-    private List<GPAuthority> createAuthorities(String usernname,
+    private List<GPAuthority> createAuthorities(String username,
             String... roles) {
         List<GPAuthority> authorities = new ArrayList<GPAuthority>();
         for (String role : roles) {
-            GPAuthority auth = new GPAuthority(usernname, role);
+            GPAuthority auth = new GPAuthority(username, role);
             authorities.add(auth);
         }
         return authorities;
@@ -277,11 +277,11 @@ public abstract class BaseDAOTest {
         folderDAO.persist(folderRaster);
         layerDAO.persist(rasterLayer1);
         styleDAO.persist(style1, style2);
-        
+
         // "my raster" ---> (#251) _RasterLayer_
-        List<GPRasterLayer> layers = this.loadRasterLayer(++position, folderRaster);        
+        List<GPRasterLayer> layers = this.loadRasterLayer(++position, folderRaster);
         layerDAO.persist(layers.toArray(new GPRasterLayer[]{}));
-        
+
         // Fix position
         position += layers.size() - 1;
 
@@ -296,7 +296,7 @@ public abstract class BaseDAOTest {
         folderIGM.setPosition(++position);
         folderIGM.setParent(folderRaster);
         // ---> "my raster" --> "IGM" _vectorLayer1_
-        GPVectorLayer vectorLayer1 = this.createVectorLayer1(++position, folderIGM);        
+        GPVectorLayer vectorLayer1 = this.createVectorLayer1(++position, folderIGM);
         //
         folderIGM.setNumberOfDescendants(1);
         folderDAO.persist(folderIGM);
@@ -383,13 +383,13 @@ public abstract class BaseDAOTest {
         }
 
         List<GPRasterLayer> rasterLayers = null;
-        WebMapServer wms = null;        
+        WebMapServer wms = null;
         try {
             wms = new WebMapServer(url);
 
             WMSCapabilities capabilities = wms.getCapabilities();
 
-            List<Layer> layers = capabilities.getLayerList(); 
+            List<Layer> layers = capabilities.getLayerList();
             rasterLayers = new ArrayList<GPRasterLayer>(layers.size());
 
             for (int i = 1; i < layers.size(); i++) {

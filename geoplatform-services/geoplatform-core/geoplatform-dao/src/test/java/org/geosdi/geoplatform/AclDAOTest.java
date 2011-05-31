@@ -39,6 +39,9 @@ package org.geosdi.geoplatform;
 
 import java.util.List;
 import junit.framework.Assert;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.geosdi.geoplatform.core.acl.AclClass;
 import org.geosdi.geoplatform.core.acl.AclEntry;
 import org.geosdi.geoplatform.core.acl.AclObjectIdentity;
@@ -51,11 +54,6 @@ import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclSidDAO;
 import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
 import org.geosdi.geoplatform.core.model.GPAuthority;
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Vincenzo Monteverde
@@ -100,6 +98,7 @@ public class AclDAOTest extends BaseDAOTest {
 
         // Insert Users and Authorities ACL
         insertData();
+        // Insert ACL data
         insertGuiComponents();
     }
 

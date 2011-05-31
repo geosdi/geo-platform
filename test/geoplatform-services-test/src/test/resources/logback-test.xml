@@ -29,5 +29,6 @@
     
     <logger name="org.geosdi.geoplatform.CXFServiceTest" level="info"/>
     <logger name="org.geosdi.geoplatform.WSFolderLayerTest" level="info"/>
+    <logger name="org.geosdi.geoplatform.WSUsersTest" level="info"/>    
 
 </configuration>

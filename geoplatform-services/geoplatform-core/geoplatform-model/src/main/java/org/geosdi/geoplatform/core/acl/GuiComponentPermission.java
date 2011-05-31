@@ -53,16 +53,32 @@ public class GuiComponentPermission implements Permission {
     private char code;
     private int mask;
 
+    /**
+     * Contructor with args
+     * 
+     * @param mask
+     * @param code 
+     */
     private GuiComponentPermission(int mask, char code) {
         this.mask = mask;
         this.code = code;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.acegisecurity.acls#getMask()
+     */
     @Override
     public int getMask() {
         return this.mask;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see org.acegisecurity.acls#getPattern()
+     */    
     @Override
     public String getPattern() {
         return AclFormattingUtils.printBinary(mask, code);

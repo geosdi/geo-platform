@@ -37,7 +37,9 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import java.util.Collection;
+import java.util.HashMap;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
@@ -389,5 +391,13 @@ public interface GeoPlatformService {
     @HttpResource(location = "/wms/capabilities/{id}")
     @WebResult(name = "Capabilities")
     LayerList getCapabilities(RequestById request) throws ResourceNotFoundFault;
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="ACL">
+    @Get
+    @HttpResource(location = "/user/{userId}")
+    @WebResult(name = "GuiComponentsPermissionMapData")
+    GuiComponentsPermissionMapData getUserGuiComponentVisible(@WebParam(name = "userId") long userId)
+            throws ResourceNotFoundFault;
     //</editor-fold>
 }

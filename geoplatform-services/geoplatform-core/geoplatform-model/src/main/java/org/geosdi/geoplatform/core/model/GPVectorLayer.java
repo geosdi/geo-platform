@@ -65,14 +65,14 @@ import org.hibernate.annotations.Type;
 public class GPVectorLayer extends GPLayer {
 
     /**
-     *
+     * serialVersionUID
      */
     private static final long serialVersionUID = 3309979650712821228L;
-
+    //
     @Type(type = "org.hibernatespatial.GeometryUserType")
     @Column(name = "geometry", nullable = true)
     private Geometry geometry;
-
+    //
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPFolder folder;
@@ -92,6 +92,7 @@ public class GPVectorLayer extends GPLayer {
     public void setGeometry(Geometry geometry) {
         this.geometry = geometry;
     }
+
     /**
      * @return the folder
      */
@@ -105,5 +106,19 @@ public class GPVectorLayer extends GPLayer {
      */
     public void setFolder(GPFolder folder) {
         this.folder = folder;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder("GPVectorLayer {");
+        str.append(super.toString());
+        str.append(", geometry=").append(geometry);
+        str.append(", folder=").append(folder).append('}');
+        return str.toString();
     }
 }

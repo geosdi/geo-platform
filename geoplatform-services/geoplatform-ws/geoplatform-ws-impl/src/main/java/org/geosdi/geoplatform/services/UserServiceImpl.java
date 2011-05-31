@@ -40,8 +40,9 @@ package org.geosdi.geoplatform.services;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
-import org.apache.log4j.Logger;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -52,24 +53,23 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.UserList;
 
-
 /**
  * @author giuseppe
  *
  */
 class UserServiceImpl {
 
-    final private static Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    // DAO
     private GPUserDAO userDao;
 
-    //<editor-fold defaultstate="collapsed" desc="Setter method">
     /**
-     * @param userDao the userDao to set
+     * @param userDao
+     *          the userDao to set
      */
     public void setUserDao(GPUserDAO userDao) {
         this.userDao = userDao;
     }
-    //</editor-fold>
 
     /**
      * This method is used to insert a User

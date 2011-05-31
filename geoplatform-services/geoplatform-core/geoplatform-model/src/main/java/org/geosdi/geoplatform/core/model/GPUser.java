@@ -71,12 +71,12 @@ public class GPUser implements Serializable, UserDetails {
      * serialVersionUID
      */
     private static final long serialVersionUID = -1354980934257649175L;
-    
+    //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_USER_SEQ")
     @SequenceGenerator(name = "GP_USER_SEQ", sequenceName = "GP_USER_SEQ")
     private long id;
-    
+    //
     @Column(name = "user_name", unique = true, nullable = false)
     private String username;
     /**
@@ -84,7 +84,7 @@ public class GPUser implements Serializable, UserDetails {
      */
     @Column(name = "user_password")
     private String password;
-    
+    //
     @Column(name = "email_address", nullable = false)
     private String emailAddress;
     /**
@@ -92,19 +92,19 @@ public class GPUser implements Serializable, UserDetails {
      */
     @Column(name = "is_enabled", nullable = false)
     private boolean enabled = false;
-    
+    //
     @Column(name = "send_email", nullable = false)
     private boolean sendEmail = false;
-    
+    //
     @Transient
     private Boolean accountNonExpired;
-    
+    //
     @Transient
     private Boolean accountNonLocked;
-    
+    //
     @Transient
     private Boolean credentialsNonExpired;
-    
+    //
     @Transient
     private Collection<GPAuthority> gpAuthorities;
 
@@ -112,7 +112,6 @@ public class GPUser implements Serializable, UserDetails {
      * Default constructor
      */
     public GPUser() {
-        super();
     }
 
     /**
@@ -225,7 +224,8 @@ public class GPUser implements Serializable, UserDetails {
     }
 
     /**
-     * @param gpAuthorities the gpAuthorities to set
+     * @param gpAuthorities
+     *          the gpAuthorities to set
      */
     public void setGpAuthorities(List<GPAuthority> gpAuthorities) {
         this.gpAuthorities = gpAuthorities;
@@ -248,17 +248,32 @@ public class GPUser implements Serializable, UserDetails {
         // TODO Auto-generated method stub
         return credentialsNonExpired;
     }
-    
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
-        return "GPUser{" + "id=" + id + ", username=" + username
-                + ", password=" + password + ", emailAddress=" + emailAddress
-                + ", enabled=" + enabled + ", sendEmail=" + sendEmail
-                + ", accountNonExpired=" + accountNonExpired
-                + ", accountNonLocked=" + accountNonLocked
-                + ", credentialsNonExpired=" + credentialsNonExpired + '}';
+        StringBuilder str = new StringBuilder("GPUser {");
+        str.append("id=").append(id);
+        str.append(", username=").append(username);
+        str.append(", password=").append(password);
+        str.append(", emailAddress=").append(emailAddress);
+        str.append(", enabled=").append(enabled);
+        str.append(", sendEmail=").append(sendEmail);
+        str.append(", accountNonExpired=").append(accountNonExpired);
+        str.append(", accountNonLocked=").append(accountNonLocked);
+        str.append(", credentialsNonExpired=").append(credentialsNonExpired).append('}');
+        return str.toString();
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -274,6 +289,11 @@ public class GPUser implements Serializable, UserDetails {
         return true;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode() {
         int hash = 7;

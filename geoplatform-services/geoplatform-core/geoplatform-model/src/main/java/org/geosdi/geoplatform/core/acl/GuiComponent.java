@@ -103,9 +103,16 @@ public class GuiComponent {
         this.componentId = componentId;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
-        return "GuiComponent{" + "id=" + id
-                + ", componentId=" + componentId + '}';
+        StringBuilder str = new StringBuilder("GuiComponent {");
+        str.append("id=").append(id);
+        str.append(", componentId=").append(componentId).append('}');
+        return str.toString();
     }
 }

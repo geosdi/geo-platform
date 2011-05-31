@@ -37,8 +37,16 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import java.util.Collection;
+import java.util.HashMap;
 import javax.jws.WebService;
+import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
+import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
+import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
+import org.geosdi.geoplatform.core.acl.dao.AclSidDAO;
+import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
+import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,6 +55,7 @@ import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.dao.GPStyleDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
+import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
@@ -87,17 +96,26 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private GPFolderDAO folderDao;
     private GPLayerDAO layerDao;
     private GPStyleDAO styleDao;
+    private GPAuthorityDAO authorityDao;
+    // ACL
+    private AclClassDAO classDao;
+    private AclSidDAO sidDao;
+    private AclObjectIdentityDAO objectIdentityDao;
+    private AclEntryDAO entryDao;
+    private GuiComponentDAO guiComponentDao;
     // Delegate
     private UserServiceImpl userServiceDelegate;
     private WMSServiceImpl wmsServiceDelegate;
     private FolderServiceImpl folderServiceDelegate;
     private LayerSericeImpl layerServiceDelegate;
+    private AclServiceImpl aclServiceDelegate;
 
     public GeoPlatformServiceImpl() {
         userServiceDelegate = new UserServiceImpl();
         folderServiceDelegate = new FolderServiceImpl();
         wmsServiceDelegate = new WMSServiceImpl();
         layerServiceDelegate = new LayerSericeImpl();
+        aclServiceDelegate = new AclServiceImpl();
     }
 
     //<editor-fold defaultstate="collapsed" desc="DAOs IoC">
@@ -109,10 +127,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      *            the userDao to set
      */
     @Autowired
-    public void setUserDao(GPUserDAO theUserDao) {
-        this.userDao = theUserDao;
+    public void setUserDao(GPUserDAO userDao) {
+        this.userDao = userDao;
         this.userServiceDelegate.setUserDao(userDao);
         this.folderServiceDelegate.setUserDao(userDao);
+        this.aclServiceDelegate.setUserDao(userDao);
     }
 
     /**
@@ -130,8 +149,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      *            the folderDao to set
      */
     @Autowired
-    public void setFolderDao(GPFolderDAO theFolderDao) {
-        this.folderDao = theFolderDao;
+    public void setFolderDao(GPFolderDAO folderDao) {
+        this.folderDao = folderDao;
         this.folderServiceDelegate.setFolderDao(folderDao);
     }
 
@@ -140,8 +159,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      *            the layerDao to set
      */
     @Autowired
-    public void setLayerDao(GPLayerDAO theLayerDao) {
-        this.layerDao = theLayerDao;
+    public void setLayerDao(GPLayerDAO layerDao) {
+        this.layerDao = layerDao;
         this.folderServiceDelegate.setLayerDao(layerDao);
         this.layerServiceDelegate.setLayerDao(layerDao);
     }
@@ -151,9 +170,68 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      *            the styleDao to set
      */
     @Autowired
-    public void setStyleDao(GPStyleDAO theStyleDao) {
-        this.styleDao = theStyleDao;
+    public void setStyleDao(GPStyleDAO styleDao) {
+        this.styleDao = styleDao;
         this.layerServiceDelegate.setStyleDao(styleDao);
+    }
+
+    /**
+     * @param authorityDao
+     *          the authorityDao to set
+     */
+    public void setAuthorityDao(GPAuthorityDAO authorityDao) {
+        this.authorityDao = authorityDao;
+        this.aclServiceDelegate.setAuthorityDao(authorityDao);
+    }
+
+    /**
+     * @param classDao
+     *          the classDao to set
+     */
+    @Autowired
+    public void setClassDao(AclClassDAO classDao) {
+        this.classDao = classDao;
+        this.aclServiceDelegate.setClassDao(classDao);
+    }
+
+    /**
+     * @param sidDao
+     *          the sidDao to set
+     */
+    @Autowired
+    public void setSidDao(AclSidDAO sidDao) {
+        this.sidDao = sidDao;
+        this.aclServiceDelegate.setSidDao(sidDao);
+    }
+
+    /**
+     * @param objectIdentityDao
+     *          the objectIdentityDao to set
+     */
+    @Autowired
+    public void setObjectIdentityDao(AclObjectIdentityDAO objectIdentityDao) {
+        this.objectIdentityDao = objectIdentityDao;
+        this.aclServiceDelegate.setObjectIdentityDao(objectIdentityDao);
+    }
+
+    /**
+     * @param entryDao
+     *          the entryDao to set
+     */
+    @Autowired
+    public void setEntryDao(AclEntryDAO entryDao) {
+        this.entryDao = entryDao;
+        this.aclServiceDelegate.setEntryDao(entryDao);
+    }
+
+    /**
+     * @param guiComponentDao
+     *          the guiComponentDao to set
+     */
+    @Autowired
+    public void setGuiComponentDao(GuiComponentDAO guiComponentDao) {
+        this.guiComponentDao = guiComponentDao;
+        this.aclServiceDelegate.setGuiComponentDao(guiComponentDao);
     }
     //</editor-fold>
 
@@ -432,16 +510,24 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public ServerDTO getShortServer(String serverUrl) throws ResourceNotFoundFault {
         return wmsServiceDelegate.getShortServer(serverUrl);
     }
-    
+
     @Override
     public Collection<ServerDTO> getAllServers() {
         return wmsServiceDelegate.getServers();
-    }    
+    }
 
     @Override
     public LayerList getCapabilities(RequestById request)
             throws ResourceNotFoundFault {
         return wmsServiceDelegate.getCapabilities(request);
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="ACL">
+    @Override
+    public GuiComponentsPermissionMapData getUserGuiComponentVisible(long userId)
+            throws ResourceNotFoundFault {
+        return this.aclServiceDelegate.getUserGuiComponentVisible(userId);
     }
     //</editor-fold>
 }

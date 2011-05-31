@@ -52,9 +52,7 @@ public class GPLayerInfo implements Serializable {
      * serialVersionUID
      */
     private static final long serialVersionUID = -7418444235711934950L;
-
-
-    
+    //
     private boolean queryable = false;
     private String keywords;
 
@@ -88,8 +86,16 @@ public class GPLayerInfo implements Serializable {
         this.keywords = keywords;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
-        return "GPLayerInfo [" + "queryable=" + queryable + ", keywords=" + keywords + ']';
-    }        
+        StringBuilder str = new StringBuilder("GPLayerInfo {");
+        str.append("queryable=").append(queryable);
+        str.append(", keywords=").append(keywords).append("}");
+        return str.toString();
+    }
 }

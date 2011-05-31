@@ -69,42 +69,41 @@ public abstract class GPLayer implements Serializable {
      * serialVersionUID
      */
     private static final long serialVersionUID = 5746325405739614413L;
-
+    //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-                    generator = "GP_LAYER_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_LAYER_SEQ")
     @SequenceGenerator(name = "GP_LAYER_SEQ", sequenceName = "GP_LAYER_SEQ")
     private long id;
-
+    //
     @Column(name = "name", nullable = false)
     private String name;
-
+    //
     @Column(name = "position")
-    private int position;
-
+    private int position = -1;
+    //
     @Column(name = "shared")
     private boolean shared = false;
-
+    //
     @Column(name = "abstract")
     private String abstractText;
-
+    //
     @Column(name = "title")
     private String title;
-
+    //
     @Column(name = "url_server")
     private String urlServer;
-
+    //
     @Column(name = "srs")
     private String srs;
-
+    //
     @Embedded
     private GPBBox bbox;
-
+    //
     @Enumerated(EnumType.STRING)
     private GPLayerType layerType;
-    
+    //
     @Column(name = "checked")
-    private boolean checked = false;    
+    private boolean checked = false;
 
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
@@ -256,7 +255,7 @@ public abstract class GPLayer implements Serializable {
 
     /**
      * @return the checked
-     */    
+     */
     public boolean isChecked() {
         return checked;
     }
@@ -264,10 +263,10 @@ public abstract class GPLayer implements Serializable {
     /**
      * @param checked
      *            the checked to set
-     */    
+     */
     public void setChecked(boolean checked) {
         this.checked = checked;
-    }       
+    }
     //</editor-fold>
 
     /*
@@ -304,5 +303,27 @@ public abstract class GPLayer implements Serializable {
             return false;
         }
         return true;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        str.append("id=").append(id);
+        str.append(", name=").append(name);
+        str.append(", position=").append(position);
+        str.append(", shared=").append(shared);
+        str.append(", abstractText=").append(abstractText);
+        str.append(", title=").append(title);
+        str.append(", urlServer=").append(urlServer);
+        str.append(", srs=").append(srs);
+        str.append(", bbox=").append(bbox);
+        str.append(", layerType=").append(layerType);
+        str.append(", checked=").append(checked);
+        return str.toString();
     }
 }

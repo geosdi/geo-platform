@@ -63,10 +63,10 @@ public class GPRasterLayer extends GPLayer {
      * serialVersionUID
      */
     private static final long serialVersionUID = -1852288981980627642L;
-
+    //
     @Embedded
     private GPLayerInfo layerInfo;
-
+    //
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPFolder folder;
@@ -99,5 +99,19 @@ public class GPRasterLayer extends GPLayer {
      */
     public void setFolder(GPFolder folder) {
         this.folder = folder;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder("GPRasterLayer {");
+        str.append(super.toString());
+        str.append(", layerInfo=").append(layerInfo);
+        str.append(", folder=").append(folder).append('}');
+        return str.toString();
     }
 }

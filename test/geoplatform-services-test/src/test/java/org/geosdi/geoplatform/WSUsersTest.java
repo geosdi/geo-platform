@@ -63,21 +63,23 @@ public class WSUsersTest extends ServiceTest {
     @Test
     public void testUsersDB() {
         UserList userList = geoPlatformService.getUsers();
-        logger.info("\n*** Number of Users in the DB: {} ***", userList.getList().size());
+        logger.info("\n*** Number of Users into DB: {} ***", userList.getList().size());
         if (userList != null) {
             for (Iterator<UserDTO> it = userList.getList().iterator(); it.hasNext();) {
-                logger.info("\n** USER:\n{}\n***", it.next());
+                logger.info("\n*** USER into DB:\n{}\n***", it.next());
 
             }
         }
     }
 
     @Test
-    public void testManageUser() {
+    public void testRetrieveUser() {
+        logger.trace("\n\t@@@ testRetrieveUser @@@");
+
         // Number of Users
         UserList userList = geoPlatformService.getUsers();
         Assert.assertNotNull(userList);
-        Assert.assertTrue("Number of Users stored into database", userList.getList().size() >= 1);
+        Assert.assertTrue("Number of Users stored into database", userList.getList().size() >= 1); // super.SetUp() added 1 user
 
         // Number of User Like
         long numUsersLike = geoPlatformService.getUsersCount(new SearchRequest(usernameTest));

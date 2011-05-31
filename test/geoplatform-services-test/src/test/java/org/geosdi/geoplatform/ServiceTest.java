@@ -154,9 +154,9 @@ public abstract class ServiceTest implements InitializingBean {
     private GPUser createUser(String username) {
         GPUser user = new GPUser();
         user.setUsername(username);
-        user.setEmailAddress(username + "@test.org");
+        user.setEmailAddress(username + "@test");
         user.setEnabled(true);
-        user.setPassword("test");
+        user.setPassword("pwd_" + username);
         user.setSendEmail(true);
         return user;
     }

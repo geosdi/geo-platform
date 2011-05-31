@@ -57,8 +57,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  *
  */
 @Entity
-@Table(name = "acl_entry",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"acl_object_identity", "ace_order"}))
+@Table(name = "acl_entry", uniqueConstraints =
+@UniqueConstraint(columnNames = {"acl_object_identity", "ace_order"}))
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "entry")
 // TODO: implements AccessControlEntry?
 public class AclEntry {
@@ -67,27 +67,27 @@ public class AclEntry {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACL_ENTRY_SEQ")
     @SequenceGenerator(name = "ACL_ENTRY_SEQ", sequenceName = "ACL_ENTRY_SEQ")
     private long id;
-    
+    //
     @ManyToOne(targetEntity = AclObjectIdentity.class)
     @JoinColumn(name = "acl_object_identity", nullable = false)
     private AclObjectIdentity aclObject;
-    
+    //
     @Column(name = "ace_order", nullable = false)
     private Integer aceOrder;
-    
+    //
     @ManyToOne(targetEntity = AclSid.class)
     @JoinColumn(name = "sid", nullable = false)
     private AclSid aclSid;
-    
+    //
     @Column(name = "mask", nullable = false)
     private Integer mask;
-    
+    //
     @Column(name = "granting", nullable = false)
     private boolean granting = true;
-    
+    //
     @Column(name = "audit_success", nullable = false)
     private boolean auditSuccess = true;
-    
+    //
     @Column(name = "audit_failure", nullable = false)
     private boolean auditFailure = true;
 
@@ -221,13 +221,24 @@ public class AclEntry {
     }
     //</editor-fold>
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
-        return "AclEntry{" + "id=" + id + ", aclObject=" + aclObject
-                + ", aceOrder=" + aceOrder + ", aclSid=" + aclSid
-                + ", mask=" + mask + ", granting=" + granting
-                + ", auditSuccess=" + auditSuccess 
-                + ", auditFailure=" + auditFailure + '}';
+        StringBuilder str = new StringBuilder("AclEntry {");
+        str.append("id=").append(id);
+        str.append(", aclObject.id=").append(
+                aclObject != null ? aclObject.getId() : "NULL");
+        str.append(", aceOrder=").append(aceOrder);
+        str.append(", aclSid.id=").append(
+                aclSid != null ? aclSid.getId() : "NULL");
+        str.append(", mask=").append(mask);
+        str.append(", granting=").append(granting);
+        str.append(", auditSuccess=").append(auditSuccess);
+        str.append(", auditFailure=").append(auditFailure).append('}');
+        return str.toString();
     }
-    
 }

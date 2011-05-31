@@ -68,22 +68,22 @@ public class AclObjectIdentity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACL_OBJECT_IDENTITY_SEQ")
     @SequenceGenerator(name = "ACL_OBJECT_IDENTITY_SEQ", sequenceName = "ACL_OBJECT_IDENTITY_SEQ")
     private long id;
-    
+    //
     @ManyToOne(targetEntity = AclClass.class)
     @JoinColumn(name = "object_id_class", nullable = false)
     private AclClass aclClass;
-    
+    //
     @Column(name = "object_id_identity", nullable = false)
     private long objectId;
-    
+    //
     @ManyToOne(targetEntity = AclObjectIdentity.class)
     @JoinColumn(name = "parent_object")
     private AclObjectIdentity parentAclObject;
-    
+    //
     @ManyToOne(targetEntity = AclSid.class)
     @JoinColumn(name = "owner_sid")
     private AclSid aclSid;
-    
+    //
     @Column(name = "entries_inheriting", nullable = false)
     private boolean inheriting = false;
 
@@ -208,10 +208,23 @@ public class AclObjectIdentity {
     }
     //</editor-fold>
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */    
     @Override
     public String toString() {
-        return "AclObjectIdentity{" + "id=" + id + ", " + aclClass
-                + ", objectId=" + objectId + ", parentAclObject=" + parentAclObject
-                + ", " + aclSid + ", inheriting=" + inheriting + '}';
+        StringBuilder str = new StringBuilder("AclObjectIdentity {");
+        str.append("id=").append(id);
+        str.append(", aclClass.id=").append(
+                aclClass != null ? aclClass.getId() : "NULL");
+        str.append(", objectId=").append(objectId);
+        str.append(", parentAclObject.id=").append(
+                parentAclObject != null ? parentAclObject.getId() : "NULL");
+        str.append(", aclSid.id=").append(
+                aclSid != null ? aclSid.getId() : "NULL");
+        str.append(", inheriting=").append(inheriting).append('}');
+        return str.toString();
     }
 }

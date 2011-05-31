@@ -370,7 +370,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                     FolderTreeNode parentFolder = (FolderTreeNode) be.getItem();
                     tree.setExpanded(parentFolder, true);
                     dragSource.getDraggable().cancelDrag();
-                } else if (((FolderTreeNode)be.getItem()).isLoaded()) {
+                } else if (be.getItem() instanceof FolderTreeNode && ((FolderTreeNode)be.getItem()).isLoaded()) {
                     tree.fireEvent(GeoPlatformEvents.GP_NODE_EXPANDED);
                 }
             }

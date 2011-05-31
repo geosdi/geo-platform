@@ -50,12 +50,16 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.RowExpander;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.GPLayerBeanModel.GPLayerBeanKeyValue;
+import org.geosdi.geoplatform.gui.client.widget.expander.GPServerExpander;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 
 /**
  *
@@ -65,17 +69,21 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidget<L> {
 
     private FormPanel formPanel;
+    private TreePanel tree;
     private Button done;
     private RowExpander rowExpander;
     private DisplayServerWidget displayWidget;
+    private GPServerExpander expander;
 
     /**
      * @Constructor
      */
-    public GridLayersWidget() {
+    public GridLayersWidget(TreePanel theTree) {
         super(false);
         this.initServerWidget();
         this.initFormPanel();
+        this.tree = theTree;
+        this.expander = new GPServerExpander(this);
     }
 
     private void initServerWidget() {
@@ -100,7 +108,13 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                //** TODO: HERE THE CODE TO SEND ALL SELECTED LAYERS IN THE LAYERS STORE **/
+                if (getTree().getSelectionModel().getSelectedItem() instanceof AbstractFolderTreeNode) {
+                    expander.checkNodeState();
+                } else {
+                    GeoPlatformMessage.alertMessage("GPCababilitiesWidget",
+                            "You can put layers into Folders only."
+                            + "Please select the correct node");
+                }
             }
         });
 
@@ -220,5 +234,16 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
      */
     public FormPanel getFormPanel() {
         return formPanel;
+    }
+
+    /**
+     * @return the tree
+     */
+    public TreePanel getTree() {
+        return tree;
+    }
+
+    public List<L> getSelectedItems() {
+        return this.grid.getSelectionModel().getSelectedItems();
     }
 }

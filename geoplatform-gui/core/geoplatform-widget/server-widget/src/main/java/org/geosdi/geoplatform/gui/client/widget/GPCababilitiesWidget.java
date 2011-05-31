@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 
 /**
  *
@@ -50,7 +51,14 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 public class GPCababilitiesWidget extends Window {
 
     private GridLayersWidget gridLayers;
+    private TreePanel tree;
     private boolean initialized;
+
+    public GPCababilitiesWidget(boolean lazy) {
+         if (!lazy) {
+            init();
+        }
+    }
 
     /**
      *
@@ -58,10 +66,11 @@ public class GPCababilitiesWidget extends Window {
      *       If true the component will not build in Construction Fase
      *       otherwise set to False
      */
-    public GPCababilitiesWidget(boolean lazy) {
+    public GPCababilitiesWidget(boolean lazy, TreePanel theTree) {
         if (!lazy) {
             init();
         }
+        this.tree = theTree;
     }
 
     private void init() {
@@ -105,7 +114,7 @@ public class GPCababilitiesWidget extends Window {
     }
 
     private void initComponents() {
-        this.gridLayers = new GridLayersWidget();
+        this.gridLayers = new GridLayersWidget(this.tree);
         super.add(this.gridLayers.getFormPanel());
     }
 

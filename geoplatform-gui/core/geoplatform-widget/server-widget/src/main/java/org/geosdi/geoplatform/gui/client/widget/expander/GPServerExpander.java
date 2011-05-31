@@ -33,30 +33,37 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.client.widget.expander;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.widget.GPCababilitiesWidget;
+import org.geosdi.geoplatform.gui.client.widget.GridLayersWidget;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class AddRasterTreeAction extends ToolbarLayerTreeAction {
+public class GPServerExpander extends GPTreeExpanderNotifier<GPBeanTreeModel> {
 
-    private GPCababilitiesWidget serverWidget;
+    private GridLayersWidget gridLayers;
 
-    public AddRasterTreeAction(TreePanel theTree) {
-        super(theTree, LayerResources.ICONS.addRasterLayer(), "Add Raster Layer");
-        this.serverWidget = new GPCababilitiesWidget(true, theTree);
+    public GPServerExpander(GridLayersWidget theWidget) {
+        super(theWidget.getTree());
+        this.gridLayers = theWidget;
     }
 
     @Override
-    public void componentSelected(ButtonEvent ce) {
-        this.serverWidget.show();
+    public void execute() {
+       
+    }
+
+    @Override
+    public void defineStatusBarCancelMessage() {
+        LayoutManager.get().getStatusMap().setStatus(
+                "Add folder operation cancelled.",
+                EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
     }
 }

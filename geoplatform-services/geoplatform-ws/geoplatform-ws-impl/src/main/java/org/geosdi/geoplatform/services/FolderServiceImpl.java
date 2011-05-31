@@ -42,7 +42,6 @@ import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
@@ -60,6 +59,8 @@ import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 
 import java.util.Collections;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author giuseppe
@@ -67,7 +68,8 @@ import java.util.Collections;
  */
 class FolderServiceImpl {
 
-    final private static Logger LOGGER = Logger.getLogger(FolderServiceImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(FolderServiceImpl.class);
+
     private GPFolderDAO folderDao;
     private GPUserDAO userDao;
     private GPLayerDAO layerDao;

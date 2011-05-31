@@ -1124,7 +1124,7 @@
         <gt-version>2.7-SNAPSHOT</gt-version>
 
         <gwtVersion>2.3.0</gwtVersion>
-        <gxtVersion>2.2.3</gxtVersion>
+        <gxtVersion>2.2.4</gxtVersion>
 
     </properties>
 

@@ -39,7 +39,6 @@ import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
@@ -65,6 +64,7 @@ import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  *
@@ -212,7 +212,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
                 @Override
                 public void handleEvent(BaseEvent be) {
                     AddFolderWidget.super.show();
-                    tree.removeListener(Events.Expand, this);
+                    tree.removeListener(GeoPlatformEvents.GP_NODE_EXPANDED, this);
                 }
             };
             Listener<MessageBoxEvent> listener = new Listener<MessageBoxEvent>() {
@@ -220,10 +220,10 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> {
                 @Override
                 public void handleEvent(MessageBoxEvent be) {
                     if (be.getButtonClicked().getItemId().equalsIgnoreCase(Dialog.YES)) {
-                        tree.addListener(Events.Expand, executor);
+                        tree.addListener(GeoPlatformEvents.GP_NODE_EXPANDED, executor);
                         tree.setExpanded(parentDestination, true);
                     } else {
-                        tree.removeListener(Events.Expand, executor);
+                        tree.removeListener(GeoPlatformEvents.GP_NODE_EXPANDED, executor);
                         LayoutManager.get().getStatusMap().setStatus(
                                     "Add folder operation cancelled.",
                                     EnumSearchStatus.STATUS_SEARCH_ERROR.toString());

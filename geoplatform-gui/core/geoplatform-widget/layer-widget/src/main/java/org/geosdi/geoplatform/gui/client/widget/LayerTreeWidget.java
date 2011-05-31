@@ -81,6 +81,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElemen
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -90,10 +91,8 @@ import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
     private LayerRemoteAsync layerService = LayerRemoteImpl.Util.getInstance();
-
     private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(this.tree);
     private MediatorToolbarTreeAction actionMediator;
-    TreePanelDropTarget dropTarget;
     TreePanelDragSource dragSource;
     private GPRootTreeNode root;
     private boolean initialized;
@@ -274,12 +273,12 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
         dragSource.addListener(Events.DragEnd, listenerDragLost);
         dragSource.addListener(Events.DragFail, listenerDragLost);
 
-        this.dropTarget = new GPTreePanelDropTarget(super.tree);
-        this.dropTarget.setAllowSelfAsSource(true);
-        this.dropTarget.setAllowDropOnLeaf(false);
-        this.dropTarget.setFeedback(Feedback.BOTH);
-        
-        this.dropTarget.addListener(LayerEvents.GP_DROP, gpDNDListener);
+        TreePanelDropTarget dropTarget = new GPTreePanelDropTarget(super.tree);
+        dropTarget.setAllowSelfAsSource(true);
+        dropTarget.setAllowDropOnLeaf(false);
+        dropTarget.setFeedback(Feedback.BOTH);
+
+        dropTarget.addListener(LayerEvents.GP_DROP, gpDNDListener);
 
         super.store.addListener(Store.Add, gpDNDListener);
     }
@@ -353,6 +352,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                             visitorDisplay.enableCheckedComponent(parentFolder);
                             parentFolder.setLoading(false);
                             parentFolder.setLoaded(true);
+                            tree.fireEvent(GeoPlatformEvents.GP_NODE_EXPANDED);
                             tree.refresh(parentFolder);
                             LayoutManager.get().getStatusMap().setStatus(
                                     "Tree elements loaded successfully.",
@@ -370,9 +370,10 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                     FolderTreeNode parentFolder = (FolderTreeNode) be.getItem();
                     tree.setExpanded(parentFolder, true);
                     dragSource.getDraggable().cancelDrag();
+                } else if (((FolderTreeNode)be.getItem()).isLoaded()) {
+                    tree.fireEvent(GeoPlatformEvents.GP_NODE_EXPANDED);
                 }
             }
-            
         });
     }
 }

@@ -67,12 +67,19 @@ public abstract class GPLayerBeanModel extends GeoPlatformBeanModel implements
     private static final long serialVersionUID = 7746607426284214904L;
 
     private long id;
+
     private String name;
+
     private String label;
+
     private String abstractText;
+
     private String dataSource;
+
     private String crs;
+
     private BboxClientInfo bbox;
+
     private GPLayerType layerType;
 
     /**
@@ -209,8 +216,8 @@ public abstract class GPLayerBeanModel extends GeoPlatformBeanModel implements
 
     @Override
     public String toString() {
-        return "GPLayerBeanModel{" + "id=" + id + "name=" + name
-                + "abstractText=" + abstractText + "dataSource=" + dataSource
-                + "crs=" + crs + "bbox=" + bbox + "layerType=" + layerType + '}';
+        return "GPLayerBeanModel{" + "id = " + id + ", name = " + name
+                + ", abstractText = " + abstractText + ", dataSource = " + dataSource
+                + ", crs = " + crs + ", bbox = " + bbox + ", layerType = " + layerType + '}';
     }
 }

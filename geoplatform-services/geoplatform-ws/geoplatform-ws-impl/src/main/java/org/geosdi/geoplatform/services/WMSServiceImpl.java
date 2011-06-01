@@ -42,24 +42,42 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;;
+import java.util.List;
+
+;
 
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
+
 import org.geosdi.geoplatform.core.model.GPBBox;
+
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
+
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+
 import org.geosdi.geoplatform.request.RequestById;
+
 import org.geosdi.geoplatform.responce.collection.LayerList;
+
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
+
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
+
 import org.geosdi.geoplatform.responce.ServerDTO;
+
 import org.geotools.data.ows.CRSEnvelope;
+
 import org.geotools.data.ows.Layer;
+
 import org.geotools.data.ows.WMSCapabilities;
+
 import org.geotools.data.wms.WebMapServer;
+
 import org.geotools.ows.ServiceException;
+
 import org.slf4j.LoggerFactory;
+
 import org.slf4j.Logger;
 
 /**
@@ -68,7 +86,8 @@ import org.slf4j.Logger;
  */
 class WMSServiceImpl {
 
-    final private static Logger LOGGER = LoggerFactory.getLogger(WMSServiceImpl.class);
+    final private static Logger LOGGER = LoggerFactory.getLogger(
+            WMSServiceImpl.class);
 
     private GPServerDAO serverDao;
 
@@ -163,7 +182,8 @@ class WMSServiceImpl {
                     "The Server with ID : " + request.getId() + " has been deleted.");
         }
 
-        return convertToLayerList(getCababilities(server.getServerUrl()));
+        return convertToLayerList(getCababilities(server.getServerUrl()),
+                server.getServerUrl());
     }
 
     private Collection<ServerDTO> convertToServerCollection(
@@ -181,23 +201,30 @@ class WMSServiceImpl {
     // TODO Move to LayerList?
     // as constructor: LayerList list = new LayerList(List<Layer>);    
     // TODO Correct mapping Layer to AbstractLayerDTO
-    private LayerList convertToLayerList(List<Layer> layerList) {
+    private LayerList convertToLayerList(List<Layer> layerList, String urlServer) {
         List<ShortLayerDTO> shortLayers = new ArrayList<ShortLayerDTO>(
                 layerList.size());
         ShortLayerDTO layerDTOIth = null;
         for (Layer layer : layerList) {
             layerDTOIth = new RasterLayerDTO(); // TODO AbstractLayerDTO as abstract class?
+            layerDTOIth.setUrlServer(urlServer);
             layerDTOIth.setName(layer.getName());
             layerDTOIth.setAbstractText(layer.get_abstract());
             layerDTOIth.setTitle(layer.getTitle());
 
-            if (layer.getBoundingBoxes().values().size() != 0) {
-                for (Object SRSID : layer.getBoundingBoxes().keySet()) {
-                    layerDTOIth.setBbox(this.createBbox(layer.getBoundingBoxes().get(
-                            SRSID)));
-                    layerDTOIth.setSrs((String) SRSID);
-                }
+            if (layer.getLatLonBoundingBox() != null) {
+                layerDTOIth.setBbox(
+                        this.createBbox(layer.getLatLonBoundingBox()));
+                layerDTOIth.setSrs("EPSG:4326");
             }
+
+//            if (layer.getBoundingBoxes().values().size() != 0) {
+//                for (Object SRSID : layer.getBoundingBoxes().keySet()) {
+//                    layerDTOIth.setBbox(this.createBbox(layer.getBoundingBoxes().get(
+//                            SRSID)));
+//                    layerDTOIth.setSrs((String) SRSID);
+//                }
+//            }
 
             shortLayers.add(layerDTOIth);
         }

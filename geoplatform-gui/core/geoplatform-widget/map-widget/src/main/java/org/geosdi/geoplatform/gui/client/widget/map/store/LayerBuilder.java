@@ -76,13 +76,18 @@ public class LayerBuilder extends AbstractLayerBuilder<GPLayerBean> implements
         wmsParams.setStyles("");
         wmsParams.setIsTransparent(true);
 
-        Bounds bbox = new Bounds(rasterBean.getBbox().getLowerLeftX(),
-                rasterBean.getBbox().getLowerLeftY(), rasterBean.getBbox().getUpperRightX(), rasterBean.getBbox().getUpperRightY());
+        if (rasterBean.getBbox() != null) {
 
-        bbox.transform(new Projection(rasterBean.getCrs()), new Projection(
-                mapWidget.getMap().getProjection()));
+            Bounds bbox = new Bounds(rasterBean.getBbox().getLowerLeftX(),
+                    rasterBean.getBbox().getLowerLeftY(),
+                    rasterBean.getBbox().getUpperRightX(),
+                    rasterBean.getBbox().getUpperRightY());
 
-        wmsParams.setMaxExtent(bbox);
+            bbox.transform(new Projection(rasterBean.getCrs()), new Projection(
+                    mapWidget.getMap().getProjection()));
+
+            wmsParams.setMaxExtent(bbox);
+        }
 
         WMSOptions wmsOption = new WMSOptions();
         wmsOption.setIsBaseLayer(false);
@@ -108,13 +113,18 @@ public class LayerBuilder extends AbstractLayerBuilder<GPLayerBean> implements
         wmsParams.setStyles("");
         wmsParams.setIsTransparent(true);
 
-        Bounds bbox = new Bounds(vectorBean.getBbox().getLowerLeftX(),
-                vectorBean.getBbox().getLowerLeftY(), vectorBean.getBbox().getUpperRightX(), vectorBean.getBbox().getUpperRightY());
+        if (vectorBean.getBbox() != null) {
 
-        bbox.transform(new Projection(vectorBean.getCrs()), new Projection(
-                mapWidget.getMap().getProjection()));
+            Bounds bbox = new Bounds(vectorBean.getBbox().getLowerLeftX(),
+                    vectorBean.getBbox().getLowerLeftY(),
+                    vectorBean.getBbox().getUpperRightX(),
+                    vectorBean.getBbox().getUpperRightY());
 
-        wmsParams.setMaxExtent(bbox);
+            bbox.transform(new Projection(vectorBean.getCrs()), new Projection(
+                    mapWidget.getMap().getProjection()));
+
+            wmsParams.setMaxExtent(bbox);
+        }
 
         WMSOptions wmsOption = new WMSOptions();
         wmsOption.setIsBaseLayer(false);

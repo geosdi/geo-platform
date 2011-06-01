@@ -42,10 +42,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.List;;
 
-import org.apache.log4j.Logger;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
+import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -54,10 +54,13 @@ import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
+import org.geotools.data.ows.CRSEnvelope;
 import org.geotools.data.ows.Layer;
 import org.geotools.data.ows.WMSCapabilities;
 import org.geotools.data.wms.WebMapServer;
 import org.geotools.ows.ServiceException;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -65,7 +68,7 @@ import org.geotools.ows.ServiceException;
  */
 class WMSServiceImpl {
 
-    final private static Logger LOGGER = Logger.getLogger(WMSServiceImpl.class);
+    final private static Logger LOGGER = LoggerFactory.getLogger(WMSServiceImpl.class);
 
     private GPServerDAO serverDao;
 
@@ -187,6 +190,15 @@ class WMSServiceImpl {
             layerDTOIth.setName(layer.getName());
             layerDTOIth.setAbstractText(layer.get_abstract());
             layerDTOIth.setTitle(layer.getTitle());
+
+            if (layer.getBoundingBoxes().values().size() != 0) {
+                for (Object SRSID : layer.getBoundingBoxes().keySet()) {
+                    layerDTOIth.setBbox(this.createBbox(layer.getBoundingBoxes().get(
+                            SRSID)));
+                    layerDTOIth.setSrs((String) SRSID);
+                }
+            }
+
             shortLayers.add(layerDTOIth);
         }
 
@@ -220,5 +232,10 @@ class WMSServiceImpl {
         }
 
         return cap.getLayerList();
+    }
+
+    private GPBBox createBbox(CRSEnvelope env) {
+        return new GPBBox(env.getMinX(), env.getMinY(), env.getMaxX(),
+                env.getMaxY());
     }
 }

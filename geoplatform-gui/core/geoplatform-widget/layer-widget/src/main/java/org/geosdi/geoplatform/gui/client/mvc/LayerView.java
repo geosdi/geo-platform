@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
+import org.geosdi.geoplatform.gui.client.widget.progressbar.GPLayerProgressBar;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,6 +52,7 @@ import com.extjs.gxt.ui.client.mvc.Controller;
 public class LayerView extends GeoPlatformView {
 
     private LayerManagementWidget layerManagement;
+    private GPLayerProgressBar layerProgressBar;
 
     /**
      * @Constructor
@@ -61,6 +63,11 @@ public class LayerView extends GeoPlatformView {
         super(controller);
         // TODO Auto-generated constructor stub
         this.layerManagement = new LayerManagementWidget();
+    }
+
+    @Override
+    protected void initialize() {
+        this.layerProgressBar = new GPLayerProgressBar();
     }
 
     /*

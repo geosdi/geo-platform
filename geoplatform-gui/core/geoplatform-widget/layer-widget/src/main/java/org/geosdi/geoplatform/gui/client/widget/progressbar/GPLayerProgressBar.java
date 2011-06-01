@@ -1,4 +1,3 @@
-//<editor-fold defaultstate="collapsed" desc="License">
 /*
  *  geo-platform
  *  Rich webgis framework
@@ -34,67 +33,47 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-//</editor-fold>
-package org.geosdi.geoplatform.core.dao.impl;
+package org.geosdi.geoplatform.gui.client.widget.progressbar;
 
-import com.googlecode.genericdao.dao.jpa.GenericDAOImpl;
-import com.googlecode.genericdao.search.jpa.JPASearchProcessor;
-import java.io.Serializable;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import org.hibernate.Session;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.LayersProgressBarEventHandler;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-@Repository
-public class BaseDAO<T, ID extends Serializable> extends GenericDAOImpl<T, ID> {
-
-    protected Logger LOGGER = LoggerFactory.getLogger(BaseDAO.class);
+public class GPLayerProgressBar extends GeoPlatformProgressBar implements
+        LayersProgressBarEventHandler {
 
     /**
-     * EntityManager setting
-     *
-     * @param entityManager
-     *            the entity manager to set
+     * 
      */
-    @Override
-    @PersistenceContext
-    public void setEntityManager(EntityManager entityManager) {
-        super.setEntityManager(entityManager);
+    public GPLayerProgressBar() {
+        super();
+        LayerHandlerManager.addHandler(LayersProgressBarEventHandler.TYPE, this);
     }
 
-    /**
-     * JPASearchProcessor setting
-     *
-     * @param searchProcessor
-     *            the search processor to set
-     */
     @Override
-    @Autowired
-    public void setSearchProcessor(JPASearchProcessor searchProcessor) {
-        super.setSearchProcessor(searchProcessor);
+    public void setProgressBarProperties() {
+        this.box.setTitle("GPLayers Progress Bar");
+        this.box.setMessage("Check Layers");
+        this.box.setProgressText("Searching.....");
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.trg.dao.jpa.JPABaseDAO#em()
-     */
     @Override
-    public EntityManager em() {
-        // TODO Auto-generated method stub
-        return super.em();
+    public void showProgressBar() {
+        this.box.show();
     }
 
-    public Session getSession() {
-        return (Session) em().getDelegate();
+    @Override
+    public void closeProgressBar() {
+        this.box.close();
+        this.box.getProgressBar().reset();
+    }
+
+    @Override
+    public void updateProgressBarText(String progressText) {
+        this.box.updateText(progressText);
     }
 }

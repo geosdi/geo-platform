@@ -1,4 +1,3 @@
-//<editor-fold defaultstate="collapsed" desc="License">
 /*
  *  geo-platform
  *  Rich webgis framework
@@ -34,67 +33,52 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-//</editor-fold>
-package org.geosdi.geoplatform.core.dao.impl;
+package org.geosdi.geoplatform.gui.client.widget.progressbar;
 
-import com.googlecode.genericdao.dao.jpa.GenericDAOImpl;
-import com.googlecode.genericdao.search.jpa.JPASearchProcessor;
-import java.io.Serializable;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import org.hibernate.Session;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.extjs.gxt.ui.client.widget.MessageBox.MessageBoxType;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-@Repository
-public class BaseDAO<T, ID extends Serializable> extends GenericDAOImpl<T, ID> {
+public abstract class GeoPlatformProgressBar {
 
-    protected Logger LOGGER = LoggerFactory.getLogger(BaseDAO.class);
+    protected MessageBox box;
 
-    /**
-     * EntityManager setting
-     *
-     * @param entityManager
-     *            the entity manager to set
-     */
-    @Override
-    @PersistenceContext
-    public void setEntityManager(EntityManager entityManager) {
-        super.setEntityManager(entityManager);
+    public GeoPlatformProgressBar() {
+        createProgressBar();
+        setProgressBarProperties();
+    }
+
+    private void createProgressBar() {
+        this.box = new MessageBox();
+        this.box.setType(MessageBoxType.WAIT);
+        this.box.setButtons("");
+        this.box.setClosable(true);
+        this.box.setModal(true);
     }
 
     /**
-     * JPASearchProcessor setting
-     *
-     * @param searchProcessor
-     *            the search processor to set
+     * 
+     * @param title
      */
-    @Override
-    @Autowired
-    public void setSearchProcessor(JPASearchProcessor searchProcessor) {
-        super.setSearchProcessor(searchProcessor);
+    public void setProgressBarTitle(String title) {
+        this.box.setTitle(title);
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.trg.dao.jpa.JPABaseDAO#em()
+    /**
+     * 
+     * @param progressText
      */
-    @Override
-    public EntityManager em() {
-        // TODO Auto-generated method stub
-        return super.em();
+    public void setProgressText(String progressText) {
+        this.box.setProgressText(progressText);
     }
 
-    public Session getSession() {
-        return (Session) em().getDelegate();
-    }
+    /**
+     * Set ProgressBar Properties such as Title and Message Progress
+     *
+     */
+    public abstract void setProgressBarProperties();
 }

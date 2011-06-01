@@ -1,4 +1,3 @@
-//<editor-fold defaultstate="collapsed" desc="License">
 /*
  *  geo-platform
  *  Rich webgis framework
@@ -34,67 +33,31 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-//</editor-fold>
-package org.geosdi.geoplatform.core.dao.impl;
+package org.geosdi.geoplatform.gui.puregwt.progressbar.event;
 
-import com.googlecode.genericdao.dao.jpa.GenericDAOImpl;
-import com.googlecode.genericdao.search.jpa.JPASearchProcessor;
-import java.io.Serializable;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import org.hibernate.Session;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.puregwt.progressbar.GenericProgressBarEventHandler;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-@Repository
-public class BaseDAO<T, ID extends Serializable> extends GenericDAOImpl<T, ID> {
+public abstract class GenericDisplayProgressBarEvent<E extends GenericProgressBarEventHandler>
+        extends GwtEvent<E> {
 
-    protected Logger LOGGER = LoggerFactory.getLogger(BaseDAO.class);
+    private boolean visible;
 
-    /**
-     * EntityManager setting
-     *
-     * @param entityManager
-     *            the entity manager to set
-     */
-    @Override
-    @PersistenceContext
-    public void setEntityManager(EntityManager entityManager) {
-        super.setEntityManager(entityManager);
+    public GenericDisplayProgressBarEvent(boolean visible) {
+        this.visible = visible;
     }
 
-    /**
-     * JPASearchProcessor setting
-     *
-     * @param searchProcessor
-     *            the search processor to set
-     */
     @Override
-    @Autowired
-    public void setSearchProcessor(JPASearchProcessor searchProcessor) {
-        super.setSearchProcessor(searchProcessor);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.trg.dao.jpa.JPABaseDAO#em()
-     */
-    @Override
-    public EntityManager em() {
-        // TODO Auto-generated method stub
-        return super.em();
-    }
-
-    public Session getSession() {
-        return (Session) em().getDelegate();
+    protected void dispatch(GenericProgressBarEventHandler handler) {
+        if (visible) {
+            handler.showProgressBar();
+        } else {
+            handler.closeProgressBar();
+        }
     }
 }

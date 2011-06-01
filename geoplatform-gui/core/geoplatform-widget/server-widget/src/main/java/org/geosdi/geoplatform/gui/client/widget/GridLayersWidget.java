@@ -139,6 +139,8 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
 
             @Override
             public void handleEvent(BaseEvent be) {
+                System.out.println(
+                        "TEST ****************** " + grid.getSelectionModel().getSelectedItem());
                 done.enable();
             }
         });

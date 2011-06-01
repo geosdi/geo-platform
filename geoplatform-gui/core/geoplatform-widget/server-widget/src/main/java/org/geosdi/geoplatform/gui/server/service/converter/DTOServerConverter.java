@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.gui.client.model.GPLayerBeanModel;
 import org.geosdi.geoplatform.gui.client.model.GPRasterBeanModel;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.slf4j.Logger;
@@ -107,13 +108,20 @@ public class DTOServerConverter {
             Collection<ShortLayerDTO> layers) {
         ArrayList<GPRasterBeanModel> layersDTO = new ArrayList<GPRasterBeanModel>();
 
-        if(layers != null) {
-            for(ShortLayerDTO layer : layers) {
+        if (layers != null) {
+            for (ShortLayerDTO layer : layers) {
                 GPRasterBeanModel raster = new GPRasterBeanModel();
                 raster.setId(layer.getId());
                 raster.setLabel(layer.getTitle());
                 raster.setName(layer.getName());
                 raster.setAbstractText(layer.getAbstractText());
+
+                if(layer.getBbox() != null) {
+                    raster.setBbox(new BboxClientInfo(layer.getBbox().getMinX(),
+                            layer.getBbox().getMinY(), layer.getBbox().getMaxX(),
+                            layer.getBbox().getMaxY()));
+                    raster.setCrs(layer.getSrs());
+                    }
                 layersDTO.add(raster);
             }
         }

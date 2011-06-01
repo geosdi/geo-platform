@@ -87,22 +87,22 @@ import org.xml.sax.SAXException;
 public abstract class BaseDAOTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
-    
-    @Autowired    
+    //
+    @Autowired
     protected GPUserDAO userDAO;
-    
+    //
     @Autowired
     protected GPFolderDAO folderDAO;
-    
+    //
     @Autowired
     protected GPLayerDAO layerDAO;
-    
+    //
     @Autowired
     protected GPStyleDAO styleDAO;
-    
+    //
     @Autowired
     protected GPServerDAO serverDAO;
-    
+    //
     @Autowired
     protected GPAuthorityDAO authorityDAO;
     //
@@ -118,16 +118,16 @@ public abstract class BaseDAOTest {
     }
 
     // This test is performed only after all test's subclasses were performed
-    @Test
-    public void testCheckDAOs() {
-        logger.trace("\n\t@@@ testCheckDAOs @@@");
-        Assert.assertNotNull(userDAO);
-        Assert.assertNotNull(folderDAO);
-        Assert.assertNotNull(layerDAO);
-        Assert.assertNotNull(styleDAO);
-        Assert.assertNotNull(serverDAO);
-        Assert.assertNotNull(authorityDAO);
-    }
+//    @Test
+//    public void testCheckDAOs() {
+//        logger.trace("\n\t@@@ testCheckDAOs @@@");
+//        Assert.assertNotNull(userDAO);
+//        Assert.assertNotNull(folderDAO);
+//        Assert.assertNotNull(layerDAO);
+//        Assert.assertNotNull(styleDAO);
+//        Assert.assertNotNull(serverDAO);
+//        Assert.assertNotNull(authorityDAO);
+//    }
 
     //<editor-fold defaultstate="collapsed" desc="Remove all data">
     protected void removeAll() {
@@ -205,20 +205,22 @@ public abstract class BaseDAOTest {
         this.insertUser("user_acl_test", roleUser);
     }
 
-    protected long insertUser(String name, String... roles) {
+    protected GPUser insertUser(String name, String... roles) {
         GPUser user = createUser(name);
         userDAO.persist(user);
         logger.debug("\n*** User SAVED:\n{}\n***", user);
 
-        List<GPAuthority> authorities = createAuthorities(user.getUsername(), roles);
-        user.setGpAuthorities(authorities);
+        if (roles.length > 0) {
+            List<GPAuthority> authorities = createAuthorities(user.getUsername(), roles);
+            user.setGpAuthorities(authorities);
 
-        for (GPAuthority authority : authorities) {
-            authorityDAO.persist(authority);
-            logger.debug("\n*** Authority SAVED:\n{}\n***", authority);
+            for (GPAuthority authority : authorities) {
+                authorityDAO.persist(authority);
+                logger.debug("\n*** Authority SAVED:\n{}\n***", authority);
+            }
         }
 
-        return user.getId();
+        return user;
     }
 
     private List<GPAuthority> createAuthorities(String username,
@@ -307,7 +309,7 @@ public abstract class BaseDAOTest {
         folderDAO.merge(folderRaster);
     }
 
-    private GPFolder createUserFolder(String name, int position, GPUser user) {
+    protected GPFolder createUserFolder(String name, int position, GPUser user) {
         GPFolder userFolder = new GPFolder();
         userFolder.setName(name);
         userFolder.setPosition(position);
@@ -316,7 +318,7 @@ public abstract class BaseDAOTest {
         return userFolder;
     }
 
-    private GPFolder createEmptyFolder(String name, int position, GPFolder parent) {
+    protected GPFolder createEmptyFolder(String name, int position, GPFolder parent) {
         GPFolder emptyFolder = new GPFolder();
         emptyFolder.setName(name);
         emptyFolder.setPosition(position);
@@ -326,7 +328,7 @@ public abstract class BaseDAOTest {
         return emptyFolder;
     }
 
-    private GPRasterLayer createRasterLayer1(int position, GPFolder folder) {
+    protected GPRasterLayer createRasterLayer1(int position, GPFolder folder) {
         // GPRasterLayer
         GPRasterLayer rasterLayer1 = new GPRasterLayer();
         rasterLayer1.setName("StratiDiBase:deagostini_ita_250mila");
@@ -357,7 +359,7 @@ public abstract class BaseDAOTest {
         return style;
     }
 
-    private GPVectorLayer createVectorLayer1(int position, GPFolder folder) {
+    protected GPVectorLayer createVectorLayer1(int position, GPFolder folder) {
         GPVectorLayer vectorLayer1 = new GPVectorLayer();
         vectorLayer1.setName("Name of vectorLayer");
         vectorLayer1.setPosition(position);

@@ -42,7 +42,6 @@ import java.util.List;
 
 import org.geosdi.geoplatform.core.model.GPLayer;
 
-
 /**
  * @author Francesco Izzi - geoSDI
  *
@@ -53,17 +52,22 @@ public interface GPLayerDAO {
 
     public GPLayer find(Long id);
 
-    public void persist(GPLayer... user);
+    public void persist(GPLayer... layers);
 
-    public GPLayer merge(GPLayer user);
+    public GPLayer merge(GPLayer layer);
 
-    public boolean remove(GPLayer user);
+    public GPLayer[] merge(GPLayer... layers);
 
-    public boolean removeById(Long userId);
+    public boolean remove(GPLayer layer);
+
+    public boolean removeById(Long layerId);
 
     public List<GPLayer> search(ISearch search);
 
     public int count(ISearch search);
 
-    public GPLayer findByLayerName(String name);
+    public GPLayer findByLayerName(String layerName);
+
+    public boolean updatePositionsRange(int beginPosition, int endPosition,
+            int deltaValue);
 }

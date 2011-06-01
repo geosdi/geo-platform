@@ -54,8 +54,18 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
         GPLayerDAO {
 
     @Override
-    public void persist(GPLayer... layer) {
-        super.persist(layer);
+    public void persist(GPLayer... layers) {
+        super.persist(layers);
+    }
+
+    @Override
+    public GPLayer merge(GPLayer layer) {
+        return super.merge(layer);
+    }
+
+    @Override
+    public GPLayer[] merge(GPLayer... layers) {
+        return super.merge(layers);
     }
 
     @SuppressWarnings("unchecked")
@@ -65,14 +75,45 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
     }
 
     @Override
-    public boolean remove(GPLayer entity) {
-        return super.remove(entity);
+    public boolean remove(GPLayer layer) {
+        return super.remove(layer);
     }
 
     @Override
-    public GPLayer findByLayerName(String name) {
+    public GPLayer findByLayerName(String layerName) {
         Search search = new Search();
-        search.addFilterEqual("name", name);
+        search.addFilterEqual("name", layerName);
         return searchUnique(search);
+    }
+
+    @Override
+    public boolean updatePositionsRange(int beginPosition, int endPosition, int deltaValue) {
+        Search search = new Search();
+        search.addFilterGreaterOrEqual("position", beginPosition).
+                addFilterLessOrEqual("position", endPosition);
+        List<GPLayer> matchingLayers = super.search(search);
+
+//        System.out.println("*** Layers with Position in range: " + beginPosition
+//                + " to " + endPosition + " [#" + (endPosition - beginPosition + 1) + "] ***");
+//        System.out.println("*** Matching Layers count: " + matchingLayers.size() + " ***");
+
+        int[] oldPositions = new int[matchingLayers.size()];
+        for (int ind = 0; ind < matchingLayers.size(); ind++) {
+            GPLayer layer = matchingLayers.get(ind);
+//            System.out.println("\n*** GPLayer TO UPDATE:\n" + layer + "\n***");
+            oldPositions[ind] = layer.getPosition();
+            layer.setPosition(layer.getPosition() + deltaValue);
+        }
+
+        GPLayer[] layersUpdated = merge(matchingLayers.toArray(new GPLayer[matchingLayers.size()]));
+
+        // TODO: check only one layer (first or last)? 
+        for (int ind = 0; ind < layersUpdated.length; ind++) {
+//            System.out.println("\n*** GPLayer UPDATED:\n" + layersUpdated[ind] + "\n***");
+            if ((oldPositions[ind] + deltaValue) != layersUpdated[ind].getPosition()) {
+                return false;
+            }
+        }
+        return true;
     }
 }

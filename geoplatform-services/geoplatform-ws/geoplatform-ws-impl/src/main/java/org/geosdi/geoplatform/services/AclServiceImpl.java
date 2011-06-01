@@ -63,7 +63,7 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  *
  */
-public class AclServiceImpl {
+class AclServiceImpl {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     // DAO
@@ -145,7 +145,7 @@ public class AclServiceImpl {
      *      value = Permission
      * @throws ResourceNotFoundFault
      *      if the user not found
-     */
+     */    
     public GuiComponentsPermissionMapData getUserGuiComponentVisible(long userId)
             throws ResourceNotFoundFault {
         // Retrieve the user
@@ -158,27 +158,27 @@ public class AclServiceImpl {
 
         // Retrieve the Authorities of the User
         List<GPAuthority> authorities = authorityDao.findByUsername(user.getUsername());
-        logger.debug("\n*** #Authorities: {} ***", authorities.size());
+        logger.trace("\n*** #Authorities: {} ***", authorities.size());
         // For each Autorities (disjoined)
         for (GPAuthority authority : authorities) {
             String nameAuthority = authority.getAuthority();
-            logger.debug("\n*** nameAuthority: {} ***", nameAuthority);
+            logger.trace("\n*** nameAuthority: {} ***", nameAuthority);
             // Retrieve the Sid corresponding to the Authority
             AclSid sid = sidDao.findBySid(nameAuthority, false);
-            logger.debug("\n*** AclSid:\n{}\n***", sid);
+            logger.trace("\n*** AclSid:\n{}\n***", sid);
             // Retrieve the ACEs of the Sid
             List<AclEntry> entries = entryDao.findBySid(sid.getId());
-            logger.debug("\n*** #Entries: " + entries.size() + " ***");
+            logger.trace("\n*** #Entries: " + entries.size() + " ***");
             // For each ACEs
             // (ACL has a single ACE for User+GuiComponent,
             // because there is a singe Permission)
             for (AclEntry entry : entries) {
-                logger.debug("\n*** AclEntry:\n{}\n***", entry);
+                logger.trace("\n*** AclEntry:\n{}\n***", entry);
                 if (entry.getMask().equals(GuiComponentPermission.VISIBLE.getMask())) {
                     AclObjectIdentity objectIdentity = entry.getAclObject();
-                    logger.debug("\n*** AclObjectIdentity:\n{}\n***", objectIdentity);
+                    logger.trace("\n*** AclObjectIdentity:\n{}\n***", objectIdentity);
                     GuiComponent gc = guiComponentDao.find(objectIdentity.getObjectId());
-                    logger.debug("\n*** GuiComponent:\n{}\n***", gc);
+                    logger.trace("\n*** GuiComponent:\n{}\n***", gc);
                     logger.debug("\n*** ComponentId: {} ***\n*** Granting: {} ***",
                             gc.getComponentId(), entry.isGranting());
                     mapComponentPermission.getGuiComponentsPermissionMap().put(gc.getComponentId(), entry.isGranting());

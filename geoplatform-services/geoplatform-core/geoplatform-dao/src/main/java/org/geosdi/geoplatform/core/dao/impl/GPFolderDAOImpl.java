@@ -54,14 +54,19 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
         GPFolderDAO {
 
     @Override
-    public void persist(GPFolder... folder) {
-        super.persist(folder);
+    public void persist(GPFolder... folders) {
+        super.persist(folders);
     }
-    
+
     @Override
     public GPFolder merge(GPFolder folder) {
         return super.merge(folder);
-    }    
+    }
+
+    @Override
+    public GPFolder[] merge(GPFolder... folders) {
+        return super.merge(folders);
+    }
 
     @SuppressWarnings("unchecked")
     @Override
@@ -70,8 +75,8 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
     }
 
     @Override
-    public boolean remove(GPFolder entity) {
-        return super.remove(entity);
+    public boolean remove(GPFolder folder) {
+        return super.remove(folder);
     }
 
     @Override
@@ -79,5 +84,37 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
         Search search = new Search();
         search.addFilterEqual("name", folderName);
         return searchUnique(search);
+    }
+
+    @Override
+    public boolean updatePositionsRange(int beginPosition, int endPosition,
+            int deltaValue) {
+        Search search = new Search();
+        search.addFilterGreaterOrEqual("position", beginPosition).
+                addFilterLessOrEqual("position", endPosition);
+        List<GPFolder> matchingFolders = super.search(search);
+
+//        System.out.println("*** Folders with Position in range: " + beginPosition
+//                + " to " + endPosition + " [#" + (endPosition - beginPosition + 1) + "] ***");
+//        System.out.println("*** Matching Folders count: " + matchingFolders.size() + " ***");
+
+        int[] oldPositions = new int[matchingFolders.size()];
+        for (int ind = 0; ind < matchingFolders.size(); ind++) {
+            GPFolder folder = matchingFolders.get(ind);
+//            System.out.println("\n*** GPFolder TO UPDATE:\n" + folder + "\n***");
+            oldPositions[ind] = folder.getPosition();
+            folder.setPosition(folder.getPosition() + deltaValue);
+        }
+
+        GPFolder[] foldersUpdated = merge(matchingFolders.toArray(new GPFolder[matchingFolders.size()]));
+
+        // TODO: check only one folder (first or last)? 
+        for (int ind = 0; ind < foldersUpdated.length; ind++) {
+//            System.out.println("\n*** GPFolder UPDATED:\n" + foldersUpdated[ind] + "\n***");
+            if ((oldPositions[ind] + deltaValue) != foldersUpdated[ind].getPosition()) {
+                return false;
+            }
+        }
+        return true;
     }
 }

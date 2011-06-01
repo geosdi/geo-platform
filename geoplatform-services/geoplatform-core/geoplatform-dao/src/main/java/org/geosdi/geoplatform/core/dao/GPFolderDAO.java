@@ -42,7 +42,6 @@ import java.util.List;
 
 import org.geosdi.geoplatform.core.model.GPFolder;
 
-
 /**
  * @author Francesco Izzi - geoSDI
  *
@@ -53,9 +52,11 @@ public interface GPFolderDAO {
 
     public GPFolder find(Long id);
 
-    public void persist(GPFolder... folder);
+    public void persist(GPFolder... folders);
 
     public GPFolder merge(GPFolder folder);
+
+    public GPFolder[] merge(GPFolder... folder);
 
     public boolean remove(GPFolder folder);
 
@@ -66,4 +67,7 @@ public interface GPFolderDAO {
     public int count(ISearch search);
 
     public GPFolder findByFolderName(String folderName);
+
+    public boolean updatePositionsRange(int beginPosition, int endPosition,
+            int deltaValue);
 }

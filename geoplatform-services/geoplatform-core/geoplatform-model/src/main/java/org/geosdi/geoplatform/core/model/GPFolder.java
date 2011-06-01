@@ -224,8 +224,10 @@ public class GPFolder implements Serializable {
         str.append(", name=").append(name);
         str.append(", position=").append(position);
         str.append(", shared=").append(shared);
-        str.append(", parent=").append(parent);
-        str.append(", owner=").append(owner);
+        str.append(", parent.id=").append(
+                parent != null ? parent.getId() : "NULL");
+        str.append(", owner.id=").append(
+                owner != null ? owner.getId() : "NULL");
         str.append(", numberOfDescendants=").append(numberOfDescendants).append('}');
         return str.toString();
     }

@@ -212,7 +212,7 @@ public class VisitorDisplayHide implements IVisitor {
             if (element instanceof FolderTreeNode && element.isChecked()
                     && element.getChildCount() != 0) {
                 this.getVisibleLayers(element.getChildren(), visibleLayers);
-            } else if (element instanceof GPLayerTreeModel && element.isChecked()) {
+            } else if (element.isChecked() && element instanceof GPLayerTreeModel) {
                 visibleLayers.add(element);
             }
         }

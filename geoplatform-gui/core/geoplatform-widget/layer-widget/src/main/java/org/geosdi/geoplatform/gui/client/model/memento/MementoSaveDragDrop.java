@@ -33,27 +33,37 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.client.model.memento;
 
-import com.extjs.gxt.ui.client.event.EventType;
+import java.util.HashMap;
+import java.util.Map;
+import org.geosdi.geoplatform.gui.action.ISave;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class LayerEvents {
+public class MementoSaveDragDrop extends AbstractMementoSave {
 
-    public static final EventType SHOW_LAYER_WIDGET = new EventType();
+    //private long idElementMoved;
+    //private long newParent;
+    //private int newZIndex;
+    private Map<Long, Integer> changedElements = new HashMap<Long, Integer>();
 
-    public static final EventType HIDE_LAYER_WIDGET = new EventType();
+    public MementoSaveDragDrop(ISave saveAction) {
+        super(saveAction);
+    }
 
-    public static final EventType GP_DROP = new EventType();
+    public void addChangedElement(long idChangedElement, int zIndex) {
+        this.changedElements.put(idChangedElement, zIndex);
+    }
 
-    public static final EventType GP_DRAG_START = new EventType();
+    public Map<Long, Integer> getChangedElements() {
+        return changedElements;
+    }
 
-    public static final EventType GP_DRAG_LOST = new EventType();
-    
-    public static final EventType FOLDER_ADDED_ID = new EventType();
+    public void setChangedElements(Map<Long, Integer> changedElements) {
+        this.changedElements = changedElements;
+    }
 
 }

@@ -36,6 +36,9 @@
 package org.geosdi.geoplatform.gui.client.model;
 
 import com.extjs.gxt.ui.client.GXT;
+import com.extjs.gxt.ui.client.data.BaseModel;
+import com.extjs.gxt.ui.client.data.Model;
+import com.extjs.gxt.ui.client.event.Events;
 import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.LayerResources;
@@ -43,6 +46,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorModelConverter;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 
@@ -136,5 +140,11 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
 
     public void setLoading(boolean loading) {
         this.loading = loading;
+    }
+    
+    @Override
+    public void setId(long id){
+        super.setId(id);
+        fireEvent(BaseModel.Update, this);
     }
 }

@@ -33,27 +33,64 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.client.model.memento;
 
-import com.extjs.gxt.ui.client.event.EventType;
+import org.geosdi.geoplatform.gui.action.ISave;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class LayerEvents {
-
-    public static final EventType SHOW_LAYER_WIDGET = new EventType();
-
-    public static final EventType HIDE_LAYER_WIDGET = new EventType();
-
-    public static final EventType GP_DROP = new EventType();
-
-    public static final EventType GP_DRAG_START = new EventType();
-
-    public static final EventType GP_DRAG_LOST = new EventType();
+public class MementoFolder extends AbstractMementoSave{
     
-    public static final EventType FOLDER_ADDED_ID = new EventType();
+    private String folderName;
+    private int zIndex;
+    private long idParent;
+    private boolean isChecked;
+    private int numberOfDescendants;
 
+    public String getFolderName() {
+        return folderName;
+    }
+
+    public void setFolderName(String folderName) {
+        this.folderName = folderName;
+    }
+
+    public long getIdParent() {
+        return idParent;
+    }
+
+    public void setIdParent(long idParent) {
+        this.idParent = idParent;
+    }
+
+    public boolean isIsChecked() {
+        return isChecked;
+    }
+
+    public void setIsChecked(boolean isChecked) {
+        this.isChecked = isChecked;
+    }
+
+    public int getNumberOfDescendants() {
+        return numberOfDescendants;
+    }
+
+    public void setNumberOfDescendants(int numberOfDescendants) {
+        this.numberOfDescendants = numberOfDescendants;
+    }
+
+    public int getzIndex() {
+        return zIndex;
+    }
+
+    public void setzIndex(int zIndex) {
+        this.zIndex = zIndex;
+    }
+
+    public MementoFolder(ISave saveAction) {
+        super(saveAction);
+    }
+    
 }

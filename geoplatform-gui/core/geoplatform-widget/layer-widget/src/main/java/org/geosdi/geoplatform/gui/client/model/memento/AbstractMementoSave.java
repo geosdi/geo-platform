@@ -33,27 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.client.model.memento;
 
-import com.extjs.gxt.ui.client.event.EventType;
+import java.util.HashMap;
+import java.util.Map;
+import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.model.memento.IMemento;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class LayerEvents {
+public abstract class AbstractMementoSave implements IMemento<ISave> {
 
-    public static final EventType SHOW_LAYER_WIDGET = new EventType();
+    private ISave saveAction;
+    private Map<Long, Integer> descendantMap = new HashMap<Long, Integer>();
 
-    public static final EventType HIDE_LAYER_WIDGET = new EventType();
+    public AbstractMementoSave(ISave saveAction) {
+        this.saveAction = saveAction;
+    }
 
-    public static final EventType GP_DROP = new EventType();
+    @Override
+    public ISave getAction() {
+        return this.saveAction;
+    }
 
-    public static final EventType GP_DRAG_START = new EventType();
+    @Override
+    public void setAction(ISave action) {
+        this.saveAction = action;
+    }
 
-    public static final EventType GP_DRAG_LOST = new EventType();
-    
-    public static final EventType FOLDER_ADDED_ID = new EventType();
+    public void addFolderDescendantChanged(long idFolderChanged, int zIndex) {
+        this.descendantMap.put(idFolderChanged, zIndex);
+    }
 
+    public Map<Long, Integer> getDescendantMap() {
+        return descendantMap;
+    }
+
+    public void setDescendantMap(Map<Long, Integer> descendantMap) {
+        this.descendantMap = descendantMap;
+    }
 }

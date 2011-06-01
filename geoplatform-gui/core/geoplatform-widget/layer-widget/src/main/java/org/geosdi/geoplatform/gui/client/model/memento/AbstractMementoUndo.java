@@ -33,27 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.client.model.memento;
 
-import com.extjs.gxt.ui.client.event.EventType;
+import org.geosdi.geoplatform.gui.action.IUndo;
+import org.geosdi.geoplatform.gui.model.memento.IMemento;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class LayerEvents {
-
-    public static final EventType SHOW_LAYER_WIDGET = new EventType();
-
-    public static final EventType HIDE_LAYER_WIDGET = new EventType();
-
-    public static final EventType GP_DROP = new EventType();
-
-    public static final EventType GP_DRAG_START = new EventType();
-
-    public static final EventType GP_DRAG_LOST = new EventType();
+public abstract class AbstractMementoUndo implements IMemento<IUndo>{
     
-    public static final EventType FOLDER_ADDED_ID = new EventType();
+    private IUndo undoAction;
+    
+    public AbstractMementoUndo(IUndo undoAction){
+        this.undoAction = undoAction;
+    }
 
+    @Override
+    public IUndo getAction() {
+        return this.getAction();
+    }
+
+    @Override
+    public void setAction(IUndo undoAction) {
+        this.undoAction = undoAction;
+    }
+
+    
 }

@@ -118,6 +118,11 @@ public abstract class GenericFormWidget
         this.saveStatus.setText(message.getValue());
     }
 
+    public void setSaveStatus(EnumSaveStatus status, String message) {
+        this.saveStatus.setIconStyle(status.getValue());
+        this.saveStatus.setText(message);
+    }
+
     public void reset() {
     }
 

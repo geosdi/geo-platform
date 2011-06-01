@@ -33,27 +33,39 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.client.model.memento;
 
-import com.extjs.gxt.ui.client.event.EventType;
+import java.util.HashMap;
+import java.util.Map;
+import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.model.memento.IMemento;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class LayerEvents {
+public class MementoSaveRemove extends AbstractMementoSave {
 
-    public static final EventType SHOW_LAYER_WIDGET = new EventType();
+    private long idElementRemoved;
+    private IMemento<? extends AbstractMementoSave> typeOfRemovedElement;
 
-    public static final EventType HIDE_LAYER_WIDGET = new EventType();
+    public MementoSaveRemove(ISave saveAction) {
+        super(saveAction);
+    }
 
-    public static final EventType GP_DROP = new EventType();
+    public long getIdElementRemoved() {
+        return idElementRemoved;
+    }
 
-    public static final EventType GP_DRAG_START = new EventType();
+    public void setIdElementRemoved(long idElementRemoved) {
+        this.idElementRemoved = idElementRemoved;
+    }
 
-    public static final EventType GP_DRAG_LOST = new EventType();
-    
-    public static final EventType FOLDER_ADDED_ID = new EventType();
+    public IMemento<? extends AbstractMementoSave> getTypeOfRemovedElement() {
+        return typeOfRemovedElement;
+    }
 
+    public void setTypeOfRemovedElement(IMemento<? extends AbstractMementoSave> typeOfRemovedElement) {
+        this.typeOfRemovedElement = typeOfRemovedElement;
+    }
 }

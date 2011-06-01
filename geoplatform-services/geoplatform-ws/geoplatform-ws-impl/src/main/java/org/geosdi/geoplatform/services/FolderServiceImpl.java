@@ -59,6 +59,7 @@ import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 
 import java.util.Collections;
+import org.geosdi.geoplatform.responce.collection.DescendantsMapData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -138,6 +139,20 @@ class FolderServiceImpl {
         return folderDao.remove(folder);
     }
 
+    // TODO Implementation of action that puts into tree a folder and updates other folders/layers
+    //      for what concerning their positions and number of descendants
+    public long saveFolderAndTreeModifications(GPFolder folder, DescendantsMapData descendantsMapData) {
+//        folderDao.persist(folder);
+//        return folder.getId();
+        return -1;
+    }
+
+    // TODO Implementation of action that deletes from tree a folder and updates other folders/layers
+    //      for what concerning their positions and number of descendants
+    public boolean deleteFolderAndTreeModifications(long id, DescendantsMapData descendantsMapData) {
+        return false;
+    }
+    
     public FolderDTO getShortFolder(RequestById request) throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(request.getId());
 

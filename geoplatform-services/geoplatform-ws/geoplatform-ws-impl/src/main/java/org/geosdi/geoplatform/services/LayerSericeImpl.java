@@ -56,6 +56,7 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.StyleDTO;
+import org.geosdi.geoplatform.responce.collection.DescendantsMapData;
 import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.collection.StyleList;
 
@@ -162,6 +163,20 @@ class LayerSericeImpl {
 
         // data on ancillary tables should be deleted by cascading
         return layerDao.remove(layer);
+    }
+    
+    // TODO Implementation of action that puts into tree a layer and updates other folders/layers
+    //      for what concerning their positions and number of descendants
+    public long saveLayerAndTreeModification(GPLayer layer, DescendantsMapData descendantsMapData) {
+//        layerDao.persist(layer);
+//        return layer.getId();
+        return -1;
+    }
+
+    // TODO Implementation of action that deletes from tree a layer and updates other folders/layers
+    //      for what concerning their positions and number of descendants
+    public boolean deleteLayerAndTreeModifications(long id, DescendantsMapData descendantsMapData) {
+        return false;
     }
 
     public GPRasterLayer getRasterLayer(long layerId) throws ResourceNotFoundFault {

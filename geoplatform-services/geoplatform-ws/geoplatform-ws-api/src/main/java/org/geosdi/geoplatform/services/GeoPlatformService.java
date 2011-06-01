@@ -69,6 +69,7 @@ import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.collection.StyleList;
 import org.geosdi.geoplatform.responce.UserDTO;
+import org.geosdi.geoplatform.responce.collection.DescendantsMapData;
 import org.geosdi.geoplatform.responce.collection.FolderList;
 import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
@@ -153,6 +154,18 @@ public interface GeoPlatformService {
     @HttpResource(location = "/folders/{id}")
     boolean deleteFolder(RequestById request) throws ResourceNotFoundFault,
             IllegalParameterFault;
+    
+    @Put
+    @HttpResource(location = "/folder/{descendantsMap}")
+    long saveFolderAndTreeModifications(
+            @WebParam(name = "folder") GPFolder folder,
+            @WebParam(name = "descendantsMap") DescendantsMapData descendantsMapData);
+
+    @Delete
+    @HttpResource(location = "/folder/{id}/{descendantsMap}")
+    boolean deleteFolderAndTreeModification(@WebParam(name = "id") long id,
+                                            @WebParam(name = "descendantsMapData") DescendantsMapData descendantsMapData) 
+            throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Get
     @HttpResource(location = "/folders/{id}")
@@ -290,6 +303,18 @@ public interface GeoPlatformService {
     @HttpResource(location = "/layers/{id}")
     boolean deleteLayer(RequestById request) throws ResourceNotFoundFault,
             IllegalParameterFault;
+    
+    @Put
+    @HttpResource(location = "/layer/{descendantsMap}")
+    long saveLayerAndTreeModification(
+            @WebParam(name = "layer") GPLayer layer,
+            @WebParam(name = "descendantsMapData") DescendantsMapData descendantsMapData);
+
+    @Delete
+    @HttpResource(location = "/layers/{id}/{descendantsMap}")
+    boolean deleteLayerAndTreeModification(@WebParam(name = "id") long id,
+                                           @WebParam(name = "descendantsMapData") DescendantsMapData descendantsMapData) 
+            throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
      * @return a raster layer.

@@ -39,7 +39,6 @@ package org.geosdi.geoplatform.services;
 
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import java.util.Collection;
-import java.util.HashMap;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
@@ -55,7 +54,6 @@ import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.dao.GPStyleDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
-import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
@@ -76,6 +74,7 @@ import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.collection.StyleList;
 import org.geosdi.geoplatform.responce.UserDTO;
+import org.geosdi.geoplatform.responce.collection.DescendantsMapData;
 import org.geosdi.geoplatform.responce.collection.FolderList;
 import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
@@ -316,6 +315,16 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
+    public long saveFolderAndTreeModifications(GPFolder folder, DescendantsMapData descendantsMapData) {
+        return folderServiceDelegate.saveFolderAndTreeModifications(folder, descendantsMapData);
+    }
+
+    @Override
+    public boolean deleteFolderAndTreeModification(long id, DescendantsMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
+        return folderServiceDelegate.deleteFolderAndTreeModifications(id, descendantsMapData);
+    }
+    
+    @Override
     public FolderDTO getShortFolder(RequestById request) throws ResourceNotFoundFault {
         return folderServiceDelegate.getShortFolder(request);
     }
@@ -436,6 +445,16 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
+    public long saveLayerAndTreeModification(GPLayer layer, DescendantsMapData descendantsMapData) {
+        return layerServiceDelegate.saveLayerAndTreeModification(layer, descendantsMapData);
+    }
+    
+    @Override
+    public boolean deleteLayerAndTreeModification(long id, DescendantsMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
+        return layerServiceDelegate.deleteLayerAndTreeModifications(id, descendantsMapData);
+    }
+
+    @Override
     public GPRasterLayer getRasterLayer(long layerId) throws ResourceNotFoundFault {
         return layerServiceDelegate.getRasterLayer(layerId);
     }
@@ -530,4 +549,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         return this.aclServiceDelegate.getUserGuiComponentVisible(userId);
     }
     //</editor-fold>
+
+
 }

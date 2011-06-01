@@ -64,12 +64,16 @@ public class AclDAOTest extends BaseDAOTest {
 
     @Autowired
     protected AclClassDAO classDAO;
+    //
     @Autowired
     protected AclSidDAO sidDAO;
+    //
     @Autowired
     protected AclObjectIdentityDAO objectIdentityDAO;
+    //
     @Autowired
     protected AclEntryDAO entryDAO;
+    //
     @Autowired
     protected GuiComponentDAO guiComponentDAO;
 

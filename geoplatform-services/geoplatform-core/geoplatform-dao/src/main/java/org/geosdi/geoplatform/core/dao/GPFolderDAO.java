@@ -70,4 +70,7 @@ public interface GPFolderDAO {
 
     public boolean updatePositionsRange(int beginPosition, int endPosition,
             int deltaValue);
+
+    public boolean updatePositionsLowerBound(int lowerBoundPosition,
+            int deltaValue);
 }

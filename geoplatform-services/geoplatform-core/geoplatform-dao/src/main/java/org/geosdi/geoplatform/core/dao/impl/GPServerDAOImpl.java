@@ -56,8 +56,6 @@ public class GPServerDAOImpl extends BaseDAO<GeoPlatformServer, Long> implements
 
     @Override
     public void persist(GeoPlatformServer... servers) {
-        LOGGER.info("SERVER PEPPE ********************************");
-
         super.persist(servers);
     }
 

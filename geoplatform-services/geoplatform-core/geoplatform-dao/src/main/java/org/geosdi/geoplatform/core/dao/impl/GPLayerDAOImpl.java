@@ -47,6 +47,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Francesco Izzi - geoSDI
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  * 
  */
 @Transactional
@@ -87,29 +89,49 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
     }
 
     @Override
-    public boolean updatePositionsRange(int beginPosition, int endPosition, int deltaValue) {
+    public boolean updatePositionsRange(int beginPosition, int endPosition,
+            int deltaValue) {
+        // Select the layers of interest
         Search search = new Search();
         search.addFilterGreaterOrEqual("position", beginPosition).
                 addFilterLessOrEqual("position", endPosition);
         List<GPLayer> matchingLayers = super.search(search);
 
-//        System.out.println("*** Layers with Position in range: " + beginPosition
-//                + " to " + endPosition + " [#" + (endPosition - beginPosition + 1) + "] ***");
-//        System.out.println("*** Matching Layers count: " + matchingLayers.size() + " ***");
+        logger.debug("\n*** Layers with Position in range: {} to {} [# {}] *** deltaValue = {} ***",
+                new Object[]{beginPosition, endPosition, endPosition - beginPosition + 1, deltaValue});
+        logger.debug("\n*** Matching Layers count: {} ***", matchingLayers.size());
 
+        return this.updatePositions(matchingLayers, deltaValue);
+    }
+
+    @Override
+    public boolean updatePositionsLowerBound(int lowerBoundPosition, int deltaValue) {
+        // Select the layers of interest
+        Search search = new Search();
+        search.addFilterGreaterOrEqual("position", lowerBoundPosition);
+        List<GPLayer> matchingLayers = super.search(search);
+
+        logger.debug("\n*** UPDATE Layers with Position from {} *** deltaValue = {} ***",
+                new Object[]{lowerBoundPosition, deltaValue});
+        logger.debug("\n*** Matching Layers count: {} ***", matchingLayers.size());
+
+        return this.updatePositions(matchingLayers, deltaValue);
+    }
+
+    private boolean updatePositions(List<GPLayer> matchingLayers, int deltaValue) {
+        // Update
         int[] oldPositions = new int[matchingLayers.size()];
         for (int ind = 0; ind < matchingLayers.size(); ind++) {
             GPLayer layer = matchingLayers.get(ind);
-//            System.out.println("\n*** GPLayer TO UPDATE:\n" + layer + "\n***");
             oldPositions[ind] = layer.getPosition();
             layer.setPosition(layer.getPosition() + deltaValue);
         }
-
         GPLayer[] layersUpdated = merge(matchingLayers.toArray(new GPLayer[matchingLayers.size()]));
 
-        // TODO: check only one layer (first or last)? 
+        // Check the update
         for (int ind = 0; ind < layersUpdated.length; ind++) {
-//            System.out.println("\n*** GPLayer UPDATED:\n" + layersUpdated[ind] + "\n***");
+            logger.trace("\n*** Position of the UPDATED GPLayer: {} ({} + {}) ***", new Object[]{
+                        layersUpdated[ind].getPosition(), oldPositions[ind], deltaValue});
             if ((oldPositions[ind] + deltaValue) != layersUpdated[ind].getPosition()) {
                 return false;
             }

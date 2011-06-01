@@ -14,7 +14,6 @@
         <appender-ref ref="STDOUT" />
     </logger>
 
-
     <root>
         <level value="info" />
         <appender-ref ref="STDOUT" />
@@ -24,5 +23,8 @@
     <logger name="org.geosdi.geoplatform.GPDAOTest" level="trace"/>
     <logger name="org.geosdi.geoplatform.ModelDAOTest" level="info"/>
     <logger name="org.geosdi.geoplatform.ServerDAOTest" level="info"/>
+
+    <logger name="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" level="trace"/>
+    <logger name="org.geosdi.geoplatform.core.dao.impl.GPLayerDAOImpl" level="trace"/>
 
 </configuration>

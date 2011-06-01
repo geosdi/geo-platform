@@ -67,7 +67,7 @@ public class GPDAOTest extends BaseDAOTest {
     private String nameRasterLayer = null;
     private String nameVectorLayer = null;
     // Positions
-    private int beginPosition = 1000;
+    private int beginPosition = 333000;
     private int endPosition = beginPosition;
     private int posUserFolder = 0;
     private int posFolderA = 0;
@@ -80,18 +80,18 @@ public class GPDAOTest extends BaseDAOTest {
         logger.info("\n\t@@@ " + getClass().getSimpleName() + ".setUp @@@");
         userPositionTest = super.insertUser(nameUser);
 
-        GPFolder userFolder = super.createUserFolder(nameUserFolder, beginPosition, userPositionTest); // 1000
+        GPFolder userFolder = super.createUserFolder(nameUserFolder, beginPosition, userPositionTest); // 333000
         posUserFolder = userFolder.getPosition();
         folderDAO.persist(userFolder);
 
-        GPFolder folderA = super.createEmptyFolder(nameFolderA, endPosition += 10, userFolder); // 1010
-        GPFolder folderB = super.createEmptyFolder(nameFolderB, endPosition += 10, userFolder); // 1020
+        GPFolder folderA = super.createEmptyFolder(nameFolderA, endPosition += 10, userFolder); // 333010
+        GPFolder folderB = super.createEmptyFolder(nameFolderB, endPosition += 10, userFolder); // 333020
         posFolderA = folderA.getPosition();
         posFolderB = folderB.getPosition();
         folderDAO.persist(folderA, folderB);
 
-        GPRasterLayer rasterLayer = super.createRasterLayer1(endPosition += 30, folderB); // 1050
-        GPVectorLayer vectorLayer = super.createVectorLayer1(endPosition += 30, folderB); // 1080
+        GPRasterLayer rasterLayer = super.createRasterLayer1(endPosition += 30, folderB); // 333050
+        GPVectorLayer vectorLayer = super.createVectorLayer1(endPosition += 30, folderB); // 333080
         nameRasterLayer = rasterLayer.getName() + "_position_test";
         nameVectorLayer = vectorLayer.getName() + "_position_test";
         rasterLayer.setName(nameRasterLayer);
@@ -99,8 +99,6 @@ public class GPDAOTest extends BaseDAOTest {
         posRasterLayer = rasterLayer.getPosition();
         posVectorLayer = vectorLayer.getPosition();
         layerDAO.persist(rasterLayer, vectorLayer);
-
-        logger.trace("\n*** beginPosition = {} ***\n*** endPosition = {} ***", beginPosition, endPosition);
     }
 
     @After
@@ -120,17 +118,14 @@ public class GPDAOTest extends BaseDAOTest {
         Assert.assertTrue("Increase Position NOT done", check);
 
         GPFolder userFolder = folderDAO.findByFolderName(nameUserFolder);
-        logger.trace("\n*** Position of \"{}\": {} ***", nameUserFolder, userFolder.getPosition());
         Assert.assertEquals("Position NOT increased for \"" + nameUserFolder + "\"",
                 userFolder.getPosition(), posUserFolder + deltaValue);
 
         GPFolder folderA = folderDAO.findByFolderName(nameFolderA);
-        logger.trace("\n*** Position of \"{}\": {} ***", nameFolderA, folderA.getPosition());
         Assert.assertEquals("Position NOT increased for \"" + nameFolderA + "\"",
                 folderA.getPosition(), posFolderA + deltaValue);
 
         GPFolder folderB = folderDAO.findByFolderName(nameFolderB);
-        logger.trace("\n*** Position of \"{}\": {} ***", nameFolderB, folderB.getPosition());
         Assert.assertEquals("Position NOT increased for \"" + nameFolderB + "\"",
                 folderB.getPosition(), posFolderB + deltaValue);
     }
@@ -143,17 +138,37 @@ public class GPDAOTest extends BaseDAOTest {
         Assert.assertTrue("Decrease Position NOT done", check);
 
         GPFolder userFolder = folderDAO.findByFolderName(nameUserFolder);
-        logger.trace("\n*** Position of \"{}\": {} ***", nameUserFolder, userFolder.getPosition());
         Assert.assertEquals("Position NOT decreased for \"" + nameUserFolder + "\"",
                 userFolder.getPosition(), posUserFolder + deltaValue);
 
         GPFolder folderA = folderDAO.findByFolderName(nameFolderA);
-        logger.trace("\n*** Position of \"{}\": {} ***", nameFolderA, folderA.getPosition());
         Assert.assertEquals("Position NOT decreased for \"" + nameFolderA + "\"",
                 folderA.getPosition(), posFolderA + deltaValue);
 
         GPFolder folderB = folderDAO.findByFolderName(nameFolderB);
-        logger.trace("\n*** Position of \"{}\": {} ***", nameFolderB, folderB.getPosition());
+        Assert.assertEquals("Position NOT decreased for \"" + nameFolderB + "\"",
+                folderB.getPosition(), posFolderB + deltaValue);
+    }
+
+    /**
+     * Test of updatePositionsLowerBound method for Foders
+     */
+    @Test
+    public void testShiftPositionsFolders() {
+        logger.trace("\n\t@@@ testShiftPositionsFolders @@@");
+        int deltaValue = 33;
+        boolean check = folderDAO.updatePositionsLowerBound(beginPosition, deltaValue);
+        Assert.assertTrue("Decrease Position NOT done", check);
+
+        GPFolder userFolder = folderDAO.findByFolderName(nameUserFolder);
+        Assert.assertEquals("Position NOT decreased for \"" + nameUserFolder + "\"",
+                userFolder.getPosition(), posUserFolder + deltaValue);
+
+        GPFolder folderA = folderDAO.findByFolderName(nameFolderA);
+        Assert.assertEquals("Position NOT decreased for \"" + nameFolderA + "\"",
+                folderA.getPosition(), posFolderA + deltaValue);
+
+        GPFolder folderB = folderDAO.findByFolderName(nameFolderB);
         Assert.assertEquals("Position NOT decreased for \"" + nameFolderB + "\"",
                 folderB.getPosition(), posFolderB + deltaValue);
     }
@@ -169,12 +184,10 @@ public class GPDAOTest extends BaseDAOTest {
         Assert.assertTrue("Increase Position NOT done", check);
 
         GPLayer rasterLayer = layerDAO.findByLayerName(nameRasterLayer);
-        logger.trace("\n*** Position of \"{}\": {} ***", nameRasterLayer, rasterLayer.getPosition());
         Assert.assertEquals("Position NOT increased for \"" + nameRasterLayer + "\"",
                 rasterLayer.getPosition(), posRasterLayer + deltaValue);
 
         GPLayer vectorLayer = layerDAO.findByLayerName(nameVectorLayer);
-        logger.trace("\n*** Position of \"{}\": {} ***", nameVectorLayer, vectorLayer.getPosition());
         Assert.assertEquals("Position NOT increased for \"" + nameVectorLayer + "\"",
                 vectorLayer.getPosition(), posVectorLayer + deltaValue);
     }
@@ -187,12 +200,29 @@ public class GPDAOTest extends BaseDAOTest {
         Assert.assertTrue("Decrease Position NOT done", check);
 
         GPLayer rasterLayer = layerDAO.findByLayerName(nameRasterLayer);
-        logger.trace("\n*** Position of \"{}\": {} ***", nameRasterLayer, rasterLayer.getPosition());
         Assert.assertEquals("Position NOT decreased for \"" + nameRasterLayer + "\"",
                 rasterLayer.getPosition(), posRasterLayer + deltaValue);
 
         GPLayer vectorLayer = layerDAO.findByLayerName(nameVectorLayer);
-        logger.trace("\n*** Position of \"{}\": {} ***", nameVectorLayer, vectorLayer.getPosition());
+        Assert.assertEquals("Position NOT decreased for \"" + nameVectorLayer + "\"",
+                vectorLayer.getPosition(), posVectorLayer + deltaValue);
+    }
+
+    /**
+     * Test of updatePositionsLowerBound method for Layers
+     */
+    @Test
+    public void testShiftPositionsLayers() {
+        logger.trace("\n\t@@@ testShiftPositionsLayers @@@");
+        int deltaValue = 99;
+        boolean check = layerDAO.updatePositionsLowerBound(beginPosition, deltaValue);
+        Assert.assertTrue("Decrease Position NOT done", check);
+
+        GPLayer rasterLayer = layerDAO.findByLayerName(nameRasterLayer);
+        Assert.assertEquals("Position NOT decreased for \"" + nameRasterLayer + "\"",
+                rasterLayer.getPosition(), posRasterLayer + deltaValue);
+
+        GPLayer vectorLayer = layerDAO.findByLayerName(nameVectorLayer);
         Assert.assertEquals("Position NOT decreased for \"" + nameVectorLayer + "\"",
                 vectorLayer.getPosition(), posVectorLayer + deltaValue);
     }

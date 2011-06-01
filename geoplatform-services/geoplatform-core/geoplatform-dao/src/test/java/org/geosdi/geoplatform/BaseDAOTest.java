@@ -111,23 +111,17 @@ public abstract class BaseDAOTest {
     protected final String roleAdmin = "ROLE_ADMIN";
     protected final String roleUser = "ROLE_USER";
 
-    @Before
-    public void setUp() {
-        logger.info("----------------------- Running "
-                + getClass().getSimpleName());
-    }
-
     // This test is performed only after all test's subclasses were performed
-//    @Test
-//    public void testCheckDAOs() {
-//        logger.trace("\n\t@@@ testCheckDAOs @@@");
-//        Assert.assertNotNull(userDAO);
-//        Assert.assertNotNull(folderDAO);
-//        Assert.assertNotNull(layerDAO);
-//        Assert.assertNotNull(styleDAO);
-//        Assert.assertNotNull(serverDAO);
-//        Assert.assertNotNull(authorityDAO);
-//    }
+    @Test
+    public void testCheckDAOs() {
+        logger.trace("\n\t@@@ testCheckDAOs @@@");
+        Assert.assertNotNull(userDAO);
+        Assert.assertNotNull(folderDAO);
+        Assert.assertNotNull(layerDAO);
+        Assert.assertNotNull(styleDAO);
+        Assert.assertNotNull(serverDAO);
+        Assert.assertNotNull(authorityDAO);
+    }
 
     //<editor-fold defaultstate="collapsed" desc="Remove all data">
     protected void removeAll() {

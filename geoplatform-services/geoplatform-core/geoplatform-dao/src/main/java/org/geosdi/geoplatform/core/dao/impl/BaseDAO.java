@@ -57,7 +57,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class BaseDAO<T, ID extends Serializable> extends GenericDAOImpl<T, ID> {
 
-    protected Logger LOGGER = LoggerFactory.getLogger(BaseDAO.class);
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * EntityManager setting

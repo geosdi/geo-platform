@@ -50,7 +50,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
@@ -63,7 +62,6 @@ import org.geosdi.geoplatform.gui.client.widget.expander.GPLayerExpander;
 import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
@@ -188,7 +186,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> implements
         this.getTree().getStore().insert(parentDestination, this.entity, 0, true);
         this.addVisitor.insertElement(this.entity, parentDestination, 0);
 
-        /* TO REMOVE
+        /* CODE TO REMOVE
         if (parentDestination instanceof GPRootTreeNode) {
         this.saveFolderForUser();
         } else {
@@ -225,7 +223,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> implements
         return tree;
     }
 
-    /* TO REMOVE
+    /* CODE TO REMOVE
     private void saveFolderForUser() {
     this.layerService.saveFolderForUser(entity.getLabel(),
     entity.getzIndex(), entity.getNumberOfDescendants(),
@@ -277,7 +275,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> implements
     @Override
     public void executeSave(MementoSaveAdd memento) {
         assert(memento.getAddedElement() instanceof MementoFolder): 
-                AddFolderWidget.class.getCanonicalName() + " on executeSave: Illegal argument passed";
+                "AddFolderWidget on executeSave: Illegal argument passed";
         MementoFolder mementoAdded = (MementoFolder)memento.getAddedElement();
         //this.layerService.
         //TODO: rimuovere l'if-else ed il codice in esso contenuto, una volta up la parte 

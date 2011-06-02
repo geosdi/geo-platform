@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento;
 
-import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.gui.action.ISave;
 
 /**
@@ -44,7 +43,8 @@ import org.geosdi.geoplatform.gui.action.ISave;
  */
 public class MementoRaster extends AbstractMementoLayer {
     
-    private GPLayerInfo layerInfo;
+    //TODO: vedere come fornire il GPLayerInfo
+    //private GPLayerInfo layerInfo;
 
     public MementoRaster(ISave saveAction) {
         super(saveAction);

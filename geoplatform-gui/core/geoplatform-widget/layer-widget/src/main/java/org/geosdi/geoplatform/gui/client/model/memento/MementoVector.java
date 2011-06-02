@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento;
 
-import com.vividsolutions.jts.geom.Geometry;
 import org.geosdi.geoplatform.gui.action.ISave;
 
 /**
@@ -44,7 +43,8 @@ import org.geosdi.geoplatform.gui.action.ISave;
  */
 public class MementoVector extends AbstractMementoLayer{
     
-    private Geometry geometry;
+    //TODO: vedere come fornire la Geometry
+    //private Geometry geometry;
 
     public MementoVector(ISave saveAction) {
         super(saveAction);

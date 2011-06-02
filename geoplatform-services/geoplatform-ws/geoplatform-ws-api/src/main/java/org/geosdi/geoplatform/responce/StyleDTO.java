@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import org.geosdi.geoplatform.core.model.GPStyle;
+import org.geotools.data.ows.StyleImpl;
 
 /**
  * @author Vincenzo Monteverde
@@ -52,19 +53,19 @@ import org.geosdi.geoplatform.core.model.GPStyle;
 @XmlType(propOrder = {"id", "name", "title", "abstractText", "legendURL"})
 public class StyleDTO {
 
-    private long id;
+    private long id = -1;
     private String name;
     private String title;
     private String abstractText;
     private String legendURL;
-    
+
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
      * Default constructor
      */
     public StyleDTO() {
     }
-    
+
     /**
      * Constructor with GPLayer as arg
      */
@@ -75,22 +76,14 @@ public class StyleDTO {
         this.abstractText = style.getAbstractText();
         this.legendURL = style.getLegendURL();
     }
-    
-    /**
-     * @param id
-     * @param name
-     * @param title
-     * @param abstractText
-     * @param legendURL
-     * @param layer_id
-     */
-    public StyleDTO(long id, String name, String title, String abstractText,
-            String legendURL, long layer_id) {
-        this.id = id;
-        this.name = name;
-        this.title = title;
-        this.abstractText = abstractText;
-        this.legendURL = legendURL;
+
+    public StyleDTO(StyleImpl style) {
+        this.name = style.getName();
+        this.title = style.getTitle().toString();
+        this.abstractText = style.getAbstract().toString();
+        // TODO: FIX
+//        this.legendURL = style.getLegendURLs() != null ? style.getLegendURLs().toArray().toString() : "";
+        this.legendURL = "TODO";
     }
     //</editor-fold>
 

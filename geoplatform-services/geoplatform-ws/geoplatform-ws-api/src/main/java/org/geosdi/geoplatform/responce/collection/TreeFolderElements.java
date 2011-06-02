@@ -78,8 +78,6 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
      * @param layerList
      *            list of GPlayer
      */
-    // TODO
-    // !Note: More LayerType match a GPVectorLayer!
     public void addLayerCollection(Collection<GPLayer> layerList) throws ClassCastException {
         for (GPLayer layer : layerList) {
             GPLayerType layerType = layer.getLayerType();
@@ -88,7 +86,7 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
                 RasterLayerDTO rasterLayerDTO = new RasterLayerDTO(rasterLayer);
                 logger.debug("\n### RasterLayerDTO ###\n" + rasterLayerDTO + "\n###\t###\t###");
                 super.add(rasterLayerDTO);
-            } else {
+            } else { // More LayerType match a GPVectorLayer
                 GPVectorLayer vectorLayer = (GPVectorLayer) layer;
                 VectorLayerDTO vectorLayerDTO = new VectorLayerDTO(vectorLayer);
                 logger.debug("\n### VectorLayerDTO ###\n" + vectorLayerDTO + "\n###\t###\t###");

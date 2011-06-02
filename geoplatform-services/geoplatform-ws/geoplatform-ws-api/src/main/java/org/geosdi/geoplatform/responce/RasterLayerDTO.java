@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.responce;
 
+import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
@@ -48,19 +49,20 @@ import org.geosdi.geoplatform.core.model.GPRasterLayer;
  */
 @XmlRootElement(name = "RasterLayerDTO")
 public class RasterLayerDTO extends ShortLayerDTO {
-    
+
     private GPLayerInfo layerInfo;
+    private List<StyleDTO> styleList;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
      * Default constructor
-     */    
+     */
     public RasterLayerDTO() {
     }
-    
+
     /**
      * Constructor with GPRasterLayer as arg
-     */    
+     */
     public RasterLayerDTO(GPRasterLayer rasterLayer) {
         super(rasterLayer);
         this.layerInfo = rasterLayer.getLayerInfo();
@@ -74,7 +76,7 @@ public class RasterLayerDTO extends ShortLayerDTO {
     public GPLayerInfo getLayerInfo() {
         return layerInfo;
     }
-    
+
     /**
      * @param layerInfo
      *            the layerInfo to set
@@ -82,10 +84,26 @@ public class RasterLayerDTO extends ShortLayerDTO {
     public void setLayerInfo(GPLayerInfo layerInfo) {
         this.layerInfo = layerInfo;
     }
+
+    /**
+     * @return the styleList
+     */
+    public List<StyleDTO> getStyleList() {
+        return styleList;
+    }
+
+    /**
+     * @param styleList
+     *          the styleList to set
+     */
+    public void setStyleList(List<StyleDTO> styleList) {
+        this.styleList = styleList;
+    }
     //</editor-fold>
 
     @Override
     public String toString() {
-        return "RasterLayerDTO [" + super.toString() + ", " + layerInfo + ']';
+        return "RasterLayerDTO [" + super.toString() + ", "
+                + layerInfo + ", styles" + styleList + "]";
     }
 }

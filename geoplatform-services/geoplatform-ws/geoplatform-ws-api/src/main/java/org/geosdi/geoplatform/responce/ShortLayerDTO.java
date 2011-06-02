@@ -161,7 +161,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
     public void setLayerType(GPLayerType layerType) {
         this.layerType = layerType;
     }
-    
+
     /**
      * @return the bbox
      */
@@ -174,7 +174,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
      */
     public void setBbox(GPBBox bbox) {
         this.bbox = bbox;
-    }    
+    }
 
     /*
      * (non-Javadoc)
@@ -185,8 +185,9 @@ public class ShortLayerDTO extends AbstractElementDTO {
     public String toString() {
         String s = super.toString()
                 + ", urlServer=" + urlServer + ", srs=" + srs
-                + ", abstractText=" + abstractText + ", title=" + title
-                + ", layerType=" + layerType + ", " + bbox;
+                + ", title=" + title
+                + ", layerType=" + layerType + ", " + bbox
+                + ", abstractText=" + abstractText;
         return s;
     }
 }

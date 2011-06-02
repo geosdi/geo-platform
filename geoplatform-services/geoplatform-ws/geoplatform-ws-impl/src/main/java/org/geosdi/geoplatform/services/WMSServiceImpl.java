@@ -43,42 +43,26 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-;
-
-import org.geosdi.geoplatform.core.dao.GPServerDAO;
-
-import org.geosdi.geoplatform.core.model.GPBBox;
-
-import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-
-import org.geosdi.geoplatform.request.RequestById;
-
-import org.geosdi.geoplatform.responce.collection.LayerList;
-
-import org.geosdi.geoplatform.responce.ShortLayerDTO;
-
-import org.geosdi.geoplatform.responce.RasterLayerDTO;
-
-import org.geosdi.geoplatform.responce.ServerDTO;
-
-import org.geotools.data.ows.CRSEnvelope;
-
-import org.geotools.data.ows.Layer;
-
-import org.geotools.data.ows.WMSCapabilities;
-
-import org.geotools.data.wms.WebMapServer;
-
-import org.geotools.ows.ServiceException;
-
 import org.slf4j.LoggerFactory;
-
 import org.slf4j.Logger;
+
+import org.geosdi.geoplatform.responce.StyleDTO;
+import org.geotools.data.ows.StyleImpl;
+import org.geosdi.geoplatform.core.dao.GPServerDAO;
+import org.geosdi.geoplatform.core.model.GPBBox;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.responce.collection.LayerList;
+import org.geosdi.geoplatform.responce.ShortLayerDTO;
+import org.geosdi.geoplatform.responce.RasterLayerDTO;
+import org.geosdi.geoplatform.responce.ServerDTO;
+import org.geotools.data.ows.CRSEnvelope;
+import org.geotools.data.ows.Layer;
+import org.geotools.data.ows.WMSCapabilities;
+import org.geotools.data.wms.WebMapServer;
+import org.geotools.ows.ServiceException;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -86,9 +70,7 @@ import org.slf4j.Logger;
  */
 class WMSServiceImpl {
 
-    final private static Logger LOGGER = LoggerFactory.getLogger(
-            WMSServiceImpl.class);
-
+    final private Logger logger = LoggerFactory.getLogger(WMSServiceImpl.class);
     private GPServerDAO serverDao;
 
     //<editor-fold defaultstate="collapsed" desc="Setter method">
@@ -204,7 +186,10 @@ class WMSServiceImpl {
     private LayerList convertToLayerList(List<Layer> layerList, String urlServer) {
         List<ShortLayerDTO> shortLayers = new ArrayList<ShortLayerDTO>(
                 layerList.size());
-        ShortLayerDTO layerDTOIth = null;
+        RasterLayerDTO layerDTOIth = null;
+
+//        for (int i = 0; i < 10; i++) { // DEL
+//            Layer layer = layerList.get(i); // DEL
         for (Layer layer : layerList) {
             layerDTOIth = new RasterLayerDTO(); // TODO AbstractLayerDTO as abstract class?
             layerDTOIth.setUrlServer(urlServer);
@@ -226,6 +211,30 @@ class WMSServiceImpl {
 //                }
 //            }
 
+            // Set Styles of Raster Ith
+            List<StyleImpl> stylesImpl = layer.getStyles();
+            logger.debug("\n*** Layer \"{}\" has {} StyleImpl ***", layer.getTitle(), stylesImpl.size());
+            List<StyleDTO> stylesDTO = new ArrayList<StyleDTO>(stylesImpl.size());
+            for (StyleImpl style : stylesImpl) {
+                StyleDTO styleDTO = new StyleDTO(style);
+                stylesDTO.add(styleDTO);
+                logger.trace("\n*** CONVERTED StyleDTO:\n{}\n***", styleDTO);
+                // TODO: FIX StyleDTO(StyleImpl style) and DEL
+                if (style.getLegendURLs() != null) {
+                    logger.trace("\n\nURL#K\n" + style.getLegendURLs().size());
+                    for (Object o : style.getLegendURLs()) {
+                        logger.trace("\n\nURL#K\n" + o);
+                    }
+                }
+                if (style.getStyleSheetURL() != null) {
+                    logger.trace("\n\nURL#1\n" + style.getStyleSheetURL().toString());
+                }
+                if (style.getStyleURL() != null) {
+                    logger.trace("\n\nURL#2\n" + style.getStyleURL().toString());
+                }
+            }
+            layerDTOIth.setStyleList(stylesDTO);
+
             shortLayers.add(layerDTOIth);
         }
 
@@ -246,15 +255,15 @@ class WMSServiceImpl {
 
         } catch (MalformedURLException e) {
             // TODO Auto-generated catch block
-            LOGGER.error("MalformedURLException : " + e);
+            logger.error("MalformedURLException : " + e);
             throw new ResourceNotFoundFault("MalformedURLException ", e);
         } catch (ServiceException e) {
             // TODO Auto-generated catch block
-            LOGGER.error("ServiceException : " + e);
+            logger.error("ServiceException : " + e);
             throw new ResourceNotFoundFault("ServiceException ", e);
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            LOGGER.error("IOException : " + e);
+            logger.error("IOException : " + e);
             throw new ResourceNotFoundFault("IOException ", e);
         }
 

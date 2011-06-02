@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.collection.FolderList;
+import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 
@@ -100,22 +101,22 @@ public class WSFolderLayerTest extends ServiceTest {
         userTest = geoPlatformService.getUserDetailByName(new SearchRequest(usernameTest));
 
         // "rootFolderA" ---> "rasterLayer1"
-        idRasterLayer1 = createAndInsertRasterLayer(abstractTextRasterLayer1, rootFolderA, nameRasterLayer1, 3,
+        idRasterLayer1 = createAndInsertRasterLayer(abstractTextRasterLayer1, rootFolderA, nameRasterLayer1, 6,
                 false, spatialReferenceSystem, titleRasterLayer1, urlServer);
         rasterLayer1 = geoPlatformService.getRasterLayer(idRasterLayer1);
 
         // "rootFolderA" ---> "vectorLayer1"
-        idVectorLayer1 = createAndInsertVectorLayer(abstractTextVectorLayer1, rootFolderA, nameVectorLayer1, 4,
+        idVectorLayer1 = createAndInsertVectorLayer(abstractTextVectorLayer1, rootFolderA, nameVectorLayer1, 5,
                 false, spatialReferenceSystem, titleVectorLayer1, urlServer);
         vectorLayer1 = geoPlatformService.getVectorLayer(idVectorLayer1);
 
         // "rootFolderB" ---> "rasterLayer2"
-        idRasterLayer2 = createAndInsertRasterLayer(abstractTextRasterLayer2, rootFolderB, nameRasterLayer2, 5,
+        idRasterLayer2 = createAndInsertRasterLayer(abstractTextRasterLayer2, rootFolderB, nameRasterLayer2, 3,
                 false, spatialReferenceSystem, titleRasterLayer2, urlServer);
         rasterLayer2 = geoPlatformService.getRasterLayer(idRasterLayer2);
 
         // "rootFolderB" ---> "vectorLayer2"
-        idVectorLayer2 = createAndInsertVectorLayer(abstractTextVectorLayer2, rootFolderB, nameVectorLayer2, 6,
+        idVectorLayer2 = createAndInsertVectorLayer(abstractTextVectorLayer2, rootFolderB, nameVectorLayer2, 2,
                 false, spatialReferenceSystem, titleVectorLayer2, urlServer);
         vectorLayer2 = geoPlatformService.getVectorLayer(idVectorLayer2);
     }
@@ -126,7 +127,7 @@ public class WSFolderLayerTest extends ServiceTest {
             ShortLayerDTO shortRasterLayer1 = geoPlatformService.getShortLayer(idRasterLayer1);
             Assert.assertNotNull("assertNotNull shortRasterLayer1", shortRasterLayer1);
             Assert.assertEquals("assertEquals shortRasterLayer1.getName()", shortRasterLayer1.getName(), nameRasterLayer1);
-            Assert.assertEquals("assertEquals shortRasterLayer1.getPosition()", shortRasterLayer1.getPosition(), 3);
+            Assert.assertEquals("assertEquals shortRasterLayer1.getPosition()", shortRasterLayer1.getPosition(), 6);
             Assert.assertEquals("assertEquals shortRasterLayer1.getSrs()", shortRasterLayer1.getSrs(), spatialReferenceSystem);
             Assert.assertEquals("assertEquals shortRasterLayer1.getUrlServer()", shortRasterLayer1.getUrlServer(), urlServer);
             Assert.assertEquals("assertEquals shortRasterLayer1.getLayerType()", shortRasterLayer1.getLayerType(), GPLayerType.RASTER);
@@ -134,7 +135,7 @@ public class WSFolderLayerTest extends ServiceTest {
             ShortLayerDTO shortVectorLayer1 = geoPlatformService.getShortLayer(idVectorLayer1);
             Assert.assertNotNull("assertNotNull shortVectorLayer1", shortVectorLayer1);
             Assert.assertEquals("assertEquals shortVectorLayer1.getName()", shortVectorLayer1.getName(), nameVectorLayer1);
-            Assert.assertEquals("assertEquals shortVectorLayer1.getPosition()", shortVectorLayer1.getPosition(), 4);
+            Assert.assertEquals("assertEquals shortVectorLayer1.getPosition()", shortVectorLayer1.getPosition(), 5);
             Assert.assertEquals("assertEquals shortVectorLayer1.getSrs()", shortVectorLayer1.getSrs(), spatialReferenceSystem);
             Assert.assertEquals("assertEquals shortVectorLayer1.getUrlServer()", shortVectorLayer1.getUrlServer(), urlServer);
             Assert.assertEquals("assertEquals shortVectorLayer1.getLayerType()", shortVectorLayer1.getLayerType(), GPLayerType.POLYGON);
@@ -215,9 +216,9 @@ public class WSFolderLayerTest extends ServiceTest {
             // Assert on layers of "rootFolderB"
             Iterator iterator = childrenRootFolderB.iterator();
             ShortLayerDTO shortRasterLayerRootFolderB = (ShortLayerDTO) iterator.next();
-            Assert.assertEquals("assertEquals shortRasterLayerRootFolderB.getName()", shortRasterLayerRootFolderB.getName(), nameVectorLayer2);
+            Assert.assertEquals("assertEquals shortRasterLayerRootFolderB.getName()", shortRasterLayerRootFolderB.getName(), nameRasterLayer2);
             ShortLayerDTO shortVectorLayerRootFolderB = (ShortLayerDTO) iterator.next();
-            Assert.assertEquals("assertEquals shortVectorLayerRootFolderB.getName()", shortVectorLayerRootFolderB.getName(), nameRasterLayer2);
+            Assert.assertEquals("assertEquals shortVectorLayerRootFolderB.getName()", shortVectorLayerRootFolderB.getName(), nameVectorLayer2);
 
             // Assert total number of layers stored into DB after delete
             LayerList allLayersAfterDelete = geoPlatformService.getLayers();
@@ -232,6 +233,73 @@ public class WSFolderLayerTest extends ServiceTest {
 
         // Check ON DELETE CASCADE of the subforders of "rootFolderB"
         checkLayerDeleted(idRasterLayer1);
+    }
+
+    @Test
+    public void testSaveAndDeleteLayerAndTreeModifications() {
+        GPRasterLayer layerToTest = null;
+        try {
+            String abstractTextLayerToTest = "layerToTest";
+            String nameLayerToTest = "layerToTest";
+            String titleLayerToTest = "Layer to test";
+            layerToTest = new GPRasterLayer();
+            super.createLayer(layerToTest, abstractTextLayerToTest, rootFolderB, nameLayerToTest, 3, false, spatialReferenceSystem,
+                    titleLayerToTest, urlServer);
+
+            GPLayerInfo layerInfo = new GPLayerInfo();
+            layerInfo.setKeywords(layerInfoKeyword);
+            layerInfo.setQueryable(false);
+            layerToTest.setLayerInfo(layerInfo);
+
+            GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
+
+            // Adding new layer to user's root folder B
+            long idLayerToTest = geoPlatformService.saveLayerAndTreeModification(layerToTest, descendantsMapData);
+            layerToTest.setId(idLayerToTest);
+
+            rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
+            Assert.assertEquals("Position of root folder A before removing", 8, rootFolderA.getPosition());
+
+            rasterLayer1 = geoPlatformService.getRasterLayer(idRasterLayer1);
+            Assert.assertEquals("Position of raster layer 1 before removing", 7, rasterLayer1.getPosition());
+
+            vectorLayer1 = geoPlatformService.getVectorLayer(idVectorLayer1);
+            Assert.assertEquals("Position of vector layer 1 before removing", 6, vectorLayer1.getPosition());
+
+            rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
+            Assert.assertEquals("Position of root folder B before removing", 5, rootFolderB.getPosition());
+
+            rasterLayer2 = geoPlatformService.getRasterLayer(idRasterLayer2);
+            Assert.assertEquals("Position of raster layer 2 before removing", 4, rasterLayer2.getPosition());
+
+            vectorLayer2 = geoPlatformService.getVectorLayer(idVectorLayer2);
+            Assert.assertEquals("Position of vector layer 2 before removing", 2, vectorLayer2.getPosition());
+
+            // Removing folder from user's root
+            geoPlatformService.deleteLayerAndTreeModification(layerToTest.getId(), descendantsMapData);
+
+            rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
+            Assert.assertEquals("Position of root folder A after removing", 7, rootFolderA.getPosition());
+
+            rasterLayer1 = geoPlatformService.getRasterLayer(idRasterLayer1);
+            Assert.assertEquals("Position of raster layer 1 after removing", 6, rasterLayer1.getPosition());
+
+            vectorLayer1 = geoPlatformService.getVectorLayer(idVectorLayer1);
+            Assert.assertEquals("Position of vector layer 1 after removing", 5, vectorLayer1.getPosition());
+
+            rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
+            Assert.assertEquals("Position of root folder B after removing", 4, rootFolderB.getPosition());
+
+            rasterLayer2 = geoPlatformService.getRasterLayer(idRasterLayer2);
+            Assert.assertEquals("Position of raster layer 2 after removing", 3, rasterLayer2.getPosition());
+
+            vectorLayer2 = geoPlatformService.getVectorLayer(idVectorLayer2);
+            Assert.assertEquals("Position of vector layer 2 after removing", 2, vectorLayer2.getPosition());
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Folder was not found");
+        } catch (IllegalParameterFault ex) {
+            Assert.fail("Folder with id \"" + layerToTest.getId() + "\" was not found");
+        }
     }
 
     // Check if a folder was eliminated

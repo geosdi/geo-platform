@@ -37,17 +37,22 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.FolderList;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 
@@ -84,20 +89,20 @@ public class WSFolderTest extends ServiceTest {
         userTest = geoPlatformService.getUserDetailByName(new SearchRequest(usernameTest));
 
         // "rootFolderA" ---> "folder1"
-        idFolder1 = createAndInsertFolderWithParent(nameFolder1, rootFolderA, 3, false);
+        idFolder1 = createAndInsertFolderWithParent(nameFolder1, rootFolderA, 6, false);
         folder1 = geoPlatformService.getFolderDetail(new RequestById(idFolder1));
         // "rootFolderA" ---> "folder2"
-        idFolder2 = createAndInsertFolderWithParent(nameFolder2, rootFolderA, 4, false);
+        idFolder2 = createAndInsertFolderWithParent(nameFolder2, rootFolderA, 5, false);
         folder2 = geoPlatformService.getFolderDetail(new RequestById(idFolder2));
 
         // "rootFolderB" ---> "folder3"
-        idFolder3 = createAndInsertFolderWithParent(nameFolder3, rootFolderB, 5, false);
+        idFolder3 = createAndInsertFolderWithParent(nameFolder3, rootFolderB, 3, false);
         folder3 = geoPlatformService.getFolderDetail(new RequestById(idFolder3));
         // "rootFolderB" ---> "folder4"
-        idFolder4 = createAndInsertFolderWithParent(nameFolder4, rootFolderB, 6, false);
+        idFolder4 = createAndInsertFolderWithParent(nameFolder4, rootFolderB, 2, false);
         folder4 = geoPlatformService.getFolderDetail(new RequestById(idFolder4));
         // "rootFolderB" ---> "folder5"
-        idFolder5 = createAndInsertFolderWithParent(nameFolder5, rootFolderB, 7, false);
+        idFolder5 = createAndInsertFolderWithParent(nameFolder5, rootFolderB, 1, false);
         folder5 = geoPlatformService.getFolderDetail(new RequestById(idFolder5));
     }
 
@@ -160,7 +165,7 @@ public class WSFolderTest extends ServiceTest {
 
     @Test
     public void testDeleteFolder() {
-        FolderDTO foderToCheck = null;
+        FolderDTO folderToCheck = null;
         try {
             // Assert total number of folders stored into DB before delete
             FolderList allFoldersBeforeDelete = geoPlatformService.getFolders();
@@ -178,31 +183,31 @@ public class WSFolderTest extends ServiceTest {
             Assert.assertEquals(folderList.getList().size(), 1);
 
             // Assert on "rootFolderA"
-            foderToCheck = folderList.getList().iterator().next();
-            logger.debug("\n*** foderToCheck:\n{}\n***", foderToCheck);
-            Assert.assertEquals(foderToCheck.getId(), idRootFolderA);
-            Assert.assertEquals(foderToCheck.getName(), nameRootFolderA);
+            folderToCheck = folderList.getList().iterator().next();
+            logger.debug("\n*** folderToCheck:\n{}\n***", folderToCheck);
+            Assert.assertEquals("Check id on rootFolderA", folderToCheck.getId(), idRootFolderA);
+            Assert.assertEquals("Check name on rootFolderA", folderToCheck.getName(), nameRootFolderA);
             // Assert on the structure of the subfolders of "rootFolderA"
             TreeFolderElements childrenRootFolderA = geoPlatformService.getChildrenElements(idRootFolderA);
             logger.debug("\n*** childrenRootFolderA:\n{}\n***", childrenRootFolderA);
-            Assert.assertNotNull(childrenRootFolderA);
-            Assert.assertEquals(childrenRootFolderA.size(), 2);
+            Assert.assertNotNull("Check childrenRootFolderA not null", childrenRootFolderA);
+            Assert.assertEquals("Check size of childrenRootFolderA", childrenRootFolderA.size(), 2);
             // Iterator for scan folder in descending order
             Iterator iterator = childrenRootFolderA.iterator();
-            // Assert on "folder2"
+            // Assert on "folder1"
             FolderDTO folderDTOToCheck = (FolderDTO) iterator.next();
             logger.debug("\n*** folderDTOToCheck:\n{}\n***", folderDTOToCheck);
-            Assert.assertEquals(folderDTOToCheck.getId(), idFolder2);
-            Assert.assertEquals(folderDTOToCheck.getName(), nameFolder2);
-            // Assert on "folder1"
+            Assert.assertEquals("Check id of folder 1", folderDTOToCheck.getId(), idFolder1);
+            Assert.assertEquals("Check name of folder 1", folderDTOToCheck.getName(), nameFolder1);
+            // Assert on "folder2"
             folderDTOToCheck = (FolderDTO) iterator.next();
             logger.debug("\n*** folderDTOToCheck:\n{}\n***", folderDTOToCheck);
-            Assert.assertEquals(folderDTOToCheck.getId(), idFolder1);
-            Assert.assertEquals(folderDTOToCheck.getName(), nameFolder1);
+            Assert.assertEquals("Check id of folder 2", folderDTOToCheck.getId(), idFolder2);
+            Assert.assertEquals("Check name of folder 2", folderDTOToCheck.getName(), nameFolder2);
 
             // Assert on "rootFolderB" (deleted)
             TreeFolderElements childrenRootFolderB = geoPlatformService.getChildrenElements(idRootFolderB);
-            Assert.assertNull(childrenRootFolderB);
+            Assert.assertNull("Check childrenRootFolderB null", childrenRootFolderB);
 
             // Assert total number of folders stored into DB after delete
             FolderList allFoldersAfterDelete = geoPlatformService.getFolders();
@@ -220,6 +225,80 @@ public class WSFolderTest extends ServiceTest {
         checkFolderDeleted(idFolder3);
         checkFolderDeleted(idFolder4);
         checkFolderDeleted(idFolder5);
+    }
+
+    @Test
+    public void testSaveAndDeleteFolderAndTreeModifications() {
+        GPFolder folderToTest = null;
+        try {
+            FolderList childrenFolders = geoPlatformService.getChildrenFoldersByFolderId(idRootFolderB);
+            Assert.assertEquals("Before adding new folder - Number of subfolders of root folder B ", 3, childrenFolders.getList().size());
+
+            String nameFolderToTest = "folderToTest";
+            folderToTest = super.createFolder(nameFolderToTest, 3, false);
+            folderToTest.setParent(rootFolderB);
+
+            GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
+
+            // Adding new folder to user's root folder B
+            long idFolderToTest = geoPlatformService.saveFolderAndTreeModifications(folderToTest, descendantsMapData);
+            folderToTest.setId(idFolderToTest);
+
+            childrenFolders = geoPlatformService.getChildrenFoldersByFolderId(idRootFolderB);
+            Assert.assertEquals("After adding new folder - Number of subfolders of root folder B ", 4, childrenFolders.getList().size());
+
+            rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
+            Assert.assertEquals("Position of root folder A before removing", 8, rootFolderA.getPosition());
+
+            folder1 = geoPlatformService.getFolderDetail(new RequestById(idFolder1));
+            Assert.assertEquals("Position of folder 1 before removing", 7, folder1.getPosition());
+
+            folder2 = geoPlatformService.getFolderDetail(new RequestById(idFolder2));
+            Assert.assertEquals("Position of folder 2 before removing", 6, folder2.getPosition());
+
+            rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
+            Assert.assertEquals("Position of root folder B before removing", 5, rootFolderB.getPosition());
+
+            folder3 = geoPlatformService.getFolderDetail(new RequestById(idFolder3));
+            Assert.assertEquals("Position of folder 3 before removing", 4, folder3.getPosition());
+
+            folder4 = geoPlatformService.getFolderDetail(new RequestById(idFolder4));
+            Assert.assertEquals("Position of folder 4 before removing", 2, folder4.getPosition());
+
+            folder5 = geoPlatformService.getFolderDetail(new RequestById(idFolder5));
+            Assert.assertEquals("Position of folder 5 before removing", 1, folder5.getPosition());
+
+            // Removing folder from user's root folder B
+            geoPlatformService.deleteFolderAndTreeModification(folderToTest.getId(), descendantsMapData);
+
+            childrenFolders = geoPlatformService.getChildrenFoldersByFolderId(idRootFolderB);
+            Assert.assertEquals("After removing new folder - Number of subfolders of root folder B ", 3, childrenFolders.getList().size());
+
+            rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
+            Assert.assertEquals("Position of root folder A after removing", 7, rootFolderA.getPosition());
+
+            folder1 = geoPlatformService.getFolderDetail(new RequestById(idFolder1));
+            Assert.assertEquals("Position of folder 1 after removing", 6, folder1.getPosition());
+
+            folder2 = geoPlatformService.getFolderDetail(new RequestById(idFolder2));
+            Assert.assertEquals("Position of folder 2 after removing", 5, folder2.getPosition());
+
+            rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
+            Assert.assertEquals("Position of root folder B after removing", 4, rootFolderB.getPosition());
+
+            folder3 = geoPlatformService.getFolderDetail(new RequestById(idFolder3));
+            Assert.assertEquals("Position of folder 3 after removing", 3, folder3.getPosition());
+
+            folder4 = geoPlatformService.getFolderDetail(new RequestById(idFolder4));
+            Assert.assertEquals("Position of folder 4 after removing", 2, folder4.getPosition());
+
+            folder5 = geoPlatformService.getFolderDetail(new RequestById(idFolder5));
+            Assert.assertEquals("Position of folder 5 after removing", 1, folder5.getPosition());
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Folder was not found");
+        } catch (IllegalParameterFault ex) {
+            Assert.fail("Folder with id \"" + folderToTest.getId() + "\" was not found");
+        }
     }
 
     // Check if a folder was eliminated

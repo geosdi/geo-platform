@@ -114,10 +114,10 @@ public abstract class ServiceTest implements InitializingBean {
         userTest = geoPlatformService.getUserDetailByName(new SearchRequest(usernameTest));
 
         // Create root folders for the user
-        idRootFolderA = createAndInsertFolderWithOwner(nameRootFolderA, userTest, 1, false);
+        idRootFolderA = createAndInsertFolderWithOwner(nameRootFolderA, userTest, 7, false);
         rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
 
-        idRootFolderB = createAndInsertFolderWithOwner(nameRootFolderB, userTest, 2, false);
+        idRootFolderB = createAndInsertFolderWithOwner(nameRootFolderB, userTest, 4, false);
         rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
     }
 
@@ -133,12 +133,12 @@ public abstract class ServiceTest implements InitializingBean {
         // Check root folder A
         Assert.assertNotNull(rootFolderA);
         Assert.assertEquals(rootFolderA.getName(), nameRootFolderA);
-        Assert.assertEquals(rootFolderA.getPosition(), 1);
+        Assert.assertEquals(rootFolderA.getPosition(), 7);
 
         // Check root folder B
         Assert.assertNotNull(rootFolderB);
         Assert.assertEquals(rootFolderB.getName(), nameRootFolderB);
-        Assert.assertEquals(rootFolderB.getPosition(), 2);
+        Assert.assertEquals(rootFolderB.getPosition(), 4);
     }
 
     // Create and insert (with assert) a User
@@ -185,7 +185,7 @@ public abstract class ServiceTest implements InitializingBean {
         return id;
     }
 
-    private GPFolder createFolder(String folderName, int position, boolean shared) {
+    protected GPFolder createFolder(String folderName, int position, boolean shared) {
         GPFolder folder = new GPFolder();
         folder.setName(folderName);
         folder.setPosition(position);
@@ -196,7 +196,7 @@ public abstract class ServiceTest implements InitializingBean {
     protected long createAndInsertRasterLayer(String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
             String srs, String title, String urlServer) {
         GPRasterLayer rasterLayer = new GPRasterLayer();
-        createAndInsertLayer(rasterLayer, abstractText, parentFolder, name, position, shared, srs, title, urlServer);
+        createLayer(rasterLayer, abstractText, parentFolder, name, position, shared, srs, title, urlServer);
         rasterLayer.setFolder(parentFolder);
 
         GPLayerInfo layerInfo = new GPLayerInfo();
@@ -212,7 +212,7 @@ public abstract class ServiceTest implements InitializingBean {
     protected long createAndInsertVectorLayer(String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
             String srs, String title, String urlServer) {
         GPVectorLayer vectorLayer = new GPVectorLayer();
-        createAndInsertLayer(vectorLayer, abstractText, parentFolder, name, position, shared, srs, title, urlServer);
+        createLayer(vectorLayer, abstractText, parentFolder, name, position, shared, srs, title, urlServer);
         vectorLayer.setFolder(parentFolder);
 
         vectorLayer.setLayerType(GPLayerType.POLYGON);
@@ -220,7 +220,7 @@ public abstract class ServiceTest implements InitializingBean {
         return id;
     }
 
-    protected void createAndInsertLayer(GPLayer gpLayer, String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
+    protected void createLayer(GPLayer gpLayer, String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
             String srs, String title, String urlServer) {
         double minX = 10;
         double minY = 10;

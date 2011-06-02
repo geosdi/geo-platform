@@ -59,6 +59,8 @@ import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 
 import java.util.Collections;
+import java.util.Map;
+import org.geosdi.geoplatform.responce.collection.AclMapAdapter.EntryAclMap;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -158,7 +160,7 @@ class FolderServiceImpl {
     public boolean deleteFolderAndTreeModifications(long id, GPWebServiceMapData descendantsMapData) {
         GPFolder folder = folderDao.find(id);
         int oldPosition = folder.getPosition();
-        int decrement = -1;
+        int decrement = (folder.getNumberOfDescendants() + 1) * (-1);
 
         // Shift positions
         folderDao.updatePositionsLowerBound(oldPosition, decrement);

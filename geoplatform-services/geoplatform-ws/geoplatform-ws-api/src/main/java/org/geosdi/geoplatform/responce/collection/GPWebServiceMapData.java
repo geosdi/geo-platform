@@ -53,7 +53,7 @@ public class GPWebServiceMapData<T,E> {
     public GPWebServiceMapData() {
     }
 
-    @XmlJavaTypeAdapter(DescendantsAdapter.class)
+    @XmlJavaTypeAdapter(WebServiceMapAdapter.class)
     public Map<T, E> getDescendantsMap() {
         return map;
     }

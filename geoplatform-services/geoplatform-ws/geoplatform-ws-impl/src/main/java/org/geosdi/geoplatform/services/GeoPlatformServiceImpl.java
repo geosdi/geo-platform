@@ -151,6 +151,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public void setFolderDao(GPFolderDAO folderDao) {
         this.folderDao = folderDao;
         this.folderServiceDelegate.setFolderDao(folderDao);
+        this.layerServiceDelegate.setFolderDao(folderDao);
     }
 
     /**

@@ -37,28 +37,79 @@
 //</editor-fold>
 package org.geosdi.geoplatform.responce.collection;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
+import org.geosdi.geoplatform.responce.collection.WebServiceMapAdapter.DescendantMap;
 
 /**
  *
  * @author Michele Santomauro
  * @email michele.santomauro@geosdi.org
  */
-public class DescendantsMapData {
+public class WebServiceMapAdapter extends XmlAdapter<DescendantMap, Map<Long, Integer>> {
 
-    private Map<Long, Integer> map = new HashMap<Long, Integer>();
-
-    public DescendantsMapData() {
+    @Override
+    public DescendantMap marshal(Map<Long, Integer> v) throws Exception {
+        DescendantMap descendantMap = new DescendantMap();
+        List<EntryDescendantMap> entries = descendantMap.getEntryDescendantMap();
+        for (Map.Entry<Long, Integer> e : v.entrySet()) {
+            entries.add(new EntryDescendantMap(e.getKey(), e.getValue()));
+        }
+        return descendantMap;
     }
 
-    @XmlJavaTypeAdapter(DescendantsAdapter.class)
-    public Map<Long, Integer> getDescendantsMap() {
+    @Override
+    public Map<Long, Integer> unmarshal(DescendantMap v) throws Exception {
+        Map<Long, Integer> map = new HashMap<Long, Integer>();
+        for (EntryDescendantMap e : v.getEntryDescendantMap()) {
+            map.put(e.getKey(), e.getValue());
+        }
         return map;
     }
 
-    public void setDescendantsMap(Map<Long, Integer> d) {
-        map = d;
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static class DescendantMap {
+
+        @XmlElement(name = "entryDescendantMap", required = true, nillable = false)
+        private final List<EntryDescendantMap> entryMap = new ArrayList<EntryDescendantMap>();
+
+        public List<EntryDescendantMap> getEntryDescendantMap() {
+            return this.entryMap;
+        }
+    }
+
+    @XmlAccessorType(XmlAccessType.FIELD)
+    public static class EntryDescendantMap {
+
+        @XmlAttribute(name = "key", required = true)
+        private final Long key;
+        @XmlValue
+        private final Integer value;
+
+        public EntryDescendantMap(Long key, Integer value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public EntryDescendantMap() {
+            this.key = null;
+            this.value = null;
+        }
+
+        public Long getKey() {
+            return key;
+        }
+
+        public Integer getValue() {
+            return value;
+        }
     }
 }

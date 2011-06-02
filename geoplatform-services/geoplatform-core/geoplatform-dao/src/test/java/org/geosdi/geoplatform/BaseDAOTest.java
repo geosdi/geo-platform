@@ -243,7 +243,7 @@ public abstract class BaseDAOTest {
     }
 
     protected void insertFolders() throws ParseException {
-        int position = 0;
+        int position = 257;
         insertUserFolders(position);
     }
 
@@ -251,21 +251,23 @@ public abstract class BaseDAOTest {
         GPUser user = userDAO.findByUsername(nameUserTest);
 
         // "only folders"
-        GPFolder onlyFolders = this.createUserFolder("only folders", ++position, user);
+        GPFolder onlyFolders = this.createUserFolder("only folders", position, user);
         // "only folders" ---> "empty subfolder A"
         GPFolder emptySubFolderA = this.createEmptyFolder("empty subfolder A",
-                ++position, onlyFolders);
+                --position, onlyFolders);
         // "only folders" ---> "empty subfolder B"
         GPFolder emptySubFolderB = this.createEmptyFolder("empty subfolder B",
-                ++position, onlyFolders);
+                --position, onlyFolders);
         //
         onlyFolders.setNumberOfDescendants(2);
+//        emptySubFolderA.setNumberOfDescendants(z);
+//        emptySubFolderB.setNumberOfDescendants(3);
         folderDAO.persist(onlyFolders, emptySubFolderA, emptySubFolderB);
 
         // "my raster"
-        GPFolder folderRaster = this.createUserFolder("my raster", ++position, user);
+        GPFolder folderRaster = this.createUserFolder("my raster", --position, user);
         // "my raster" ---> _rasterLayer1_ ---> Styles
-        GPRasterLayer rasterLayer1 = this.createRasterLayer1(++position, folderRaster);
+        GPRasterLayer rasterLayer1 = this.createRasterLayer1(--position, folderRaster);
         GPStyle style1 = this.createStyle("style 1", rasterLayer1);
         GPStyle style2 = this.createStyle("style 2", rasterLayer1);
         //
@@ -275,32 +277,22 @@ public abstract class BaseDAOTest {
         styleDAO.persist(style1, style2);
 
         // "my raster" ---> (#251) _RasterLayer_
-        List<GPRasterLayer> layers = this.loadRasterLayer(++position, folderRaster);
+        List<GPRasterLayer> layers = this.loadRasterLayer(--position, folderRaster);
         layerDAO.persist(layers.toArray(new GPRasterLayer[]{}));
-
-        // Fix position
-        position += layers.size() - 1;
-
-        // Update number of descendants of "my raster" 
-        folderRaster.setNumberOfDescendants(folderRaster.getNumberOfDescendants()
-                + layers.size());
-        folderDAO.merge(folderRaster);
+        
+        position -= 250;
 
         // ---> "my raster" --> "IGM"
         GPFolder folderIGM = new GPFolder();
         folderIGM.setName("IGM");
-        folderIGM.setPosition(++position);
+        folderIGM.setPosition(position);
         folderIGM.setParent(folderRaster);
         // ---> "my raster" --> "IGM" _vectorLayer1_
-        GPVectorLayer vectorLayer1 = this.createVectorLayer1(++position, folderIGM);
+        GPVectorLayer vectorLayer1 = this.createVectorLayer1(--position, folderIGM);
         //
         folderIGM.setNumberOfDescendants(1);
         folderDAO.persist(folderIGM);
         layerDAO.persist(vectorLayer1);
-
-        // Update number of descendants of "my raster" 
-        folderRaster.setNumberOfDescendants(folderRaster.getNumberOfDescendants() + 2);
-        folderDAO.merge(folderRaster);
     }
 
     protected GPFolder createUserFolder(String name, int position, GPUser user) {
@@ -411,7 +403,7 @@ public abstract class BaseDAOTest {
                     raster.setChecked(true);
                 }
                 rasterLayers.add(raster);
-                position++;
+                position--;
             }
         } catch (IOException e) {
             //There was an error communicating with the server

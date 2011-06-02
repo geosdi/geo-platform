@@ -74,7 +74,7 @@ import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.collection.StyleList;
 import org.geosdi.geoplatform.responce.UserDTO;
-import org.geosdi.geoplatform.responce.collection.DescendantsMapData;
+import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.FolderList;
 import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
@@ -106,14 +106,14 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private UserServiceImpl userServiceDelegate;
     private WMSServiceImpl wmsServiceDelegate;
     private FolderServiceImpl folderServiceDelegate;
-    private LayerSericeImpl layerServiceDelegate;
+    private LayerServiceImpl layerServiceDelegate;
     private AclServiceImpl aclServiceDelegate;
 
     public GeoPlatformServiceImpl() {
         userServiceDelegate = new UserServiceImpl();
         folderServiceDelegate = new FolderServiceImpl();
         wmsServiceDelegate = new WMSServiceImpl();
-        layerServiceDelegate = new LayerSericeImpl();
+        layerServiceDelegate = new LayerServiceImpl();
         aclServiceDelegate = new AclServiceImpl();
     }
 
@@ -315,12 +315,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public long saveFolderAndTreeModifications(GPFolder folder, DescendantsMapData descendantsMapData) {
+    public long saveFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData) {
         return folderServiceDelegate.saveFolderAndTreeModifications(folder, descendantsMapData);
     }
 
     @Override
-    public boolean deleteFolderAndTreeModification(long id, DescendantsMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
+    public boolean deleteFolderAndTreeModification(long id, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
         return folderServiceDelegate.deleteFolderAndTreeModifications(id, descendantsMapData);
     }
     
@@ -445,12 +445,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public long saveLayerAndTreeModification(GPLayer layer, DescendantsMapData descendantsMapData) {
+    public long saveLayerAndTreeModification(GPLayer layer, GPWebServiceMapData descendantsMapData) {
         return layerServiceDelegate.saveLayerAndTreeModification(layer, descendantsMapData);
     }
     
     @Override
-    public boolean deleteLayerAndTreeModification(long id, DescendantsMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
+    public boolean deleteLayerAndTreeModification(long id, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.deleteLayerAndTreeModifications(id, descendantsMapData);
     }
 

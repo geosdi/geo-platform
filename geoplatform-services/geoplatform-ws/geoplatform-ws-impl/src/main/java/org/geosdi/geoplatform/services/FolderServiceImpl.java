@@ -59,7 +59,7 @@ import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 
 import java.util.Collections;
-import org.geosdi.geoplatform.responce.collection.DescendantsMapData;
+import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,7 +70,6 @@ import org.slf4j.LoggerFactory;
 class FolderServiceImpl {
 
     private static Logger logger = LoggerFactory.getLogger(FolderServiceImpl.class);
-
     private GPFolderDAO folderDao;
     private GPUserDAO userDao;
     private GPLayerDAO layerDao;
@@ -139,20 +138,41 @@ class FolderServiceImpl {
         return folderDao.remove(folder);
     }
 
-    // TODO Implementation of action that puts into tree a folder and updates other folders/layers
-    //      for what concerning their positions and number of descendants
-    public long saveFolderAndTreeModifications(GPFolder folder, DescendantsMapData descendantsMapData) {
-//        folderDao.persist(folder);
-//        return folder.getId();
-        return -1;
+    public long saveFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData) {
+        int newPosition = folder.getPosition();
+        int increment = 1;
+
+        // Shift positions
+        folderDao.updatePositionsLowerBound(newPosition, increment);
+        layerDao.updatePositionsLowerBound(newPosition, increment);
+
+        folderDao.persist(folder);
+
+        if (folder.getId() > 0) {
+            // Update number of descendants
+            folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
+        }
+        return folder.getId();
     }
 
-    // TODO Implementation of action that deletes from tree a folder and updates other folders/layers
-    //      for what concerning their positions and number of descendants
-    public boolean deleteFolderAndTreeModifications(long id, DescendantsMapData descendantsMapData) {
-        return false;
+    public boolean deleteFolderAndTreeModifications(long id, GPWebServiceMapData descendantsMapData) {
+        GPFolder folder = folderDao.find(id);
+        int oldPosition = folder.getPosition();
+        int decrement = -1;
+
+        // Shift positions
+        folderDao.updatePositionsLowerBound(oldPosition, decrement);
+        layerDao.updatePositionsLowerBound(oldPosition, decrement);
+
+        boolean result = folderDao.remove(folder);
+
+        if (result) {
+            // Update number of descendants
+            folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
+        }
+        return result;
     }
-    
+
     public FolderDTO getShortFolder(RequestById request) throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(request.getId());
 
@@ -238,7 +258,7 @@ class FolderServiceImpl {
         searchCriteria.addSortAsc("name");
         Filter parent = Filter.equal("parent.id", folderId);
         searchCriteria.addFilter(parent);
-        List<GPFolder> foundFolder = folderDao.search(searchCriteria);        
+        List<GPFolder> foundFolder = folderDao.search(searchCriteria);
         tree.addFolderCollection(convertToFolderList(foundFolder));
 
         searchCriteria = new Search(GPLayer.class);

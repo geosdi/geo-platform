@@ -67,7 +67,7 @@ import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.collection.StyleList;
 import org.geosdi.geoplatform.responce.UserDTO;
-import org.geosdi.geoplatform.responce.collection.DescendantsMapData;
+import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.FolderList;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.responce.collection.LayerList;
@@ -158,12 +158,12 @@ public interface GeoPlatformService {
     @HttpResource(location = "/folder/{descendantsMap}")
     long saveFolderAndTreeModifications(
             @WebParam(name = "folder") GPFolder folder,
-            @WebParam(name = "descendantsMap") DescendantsMapData descendantsMapData);
+            @WebParam(name = "descendantsMap") GPWebServiceMapData descendantsMapData);
 
     @Delete
     @HttpResource(location = "/folder/{id}/{descendantsMap}")
     boolean deleteFolderAndTreeModification(@WebParam(name = "id") long id,
-                                            @WebParam(name = "descendantsMapData") DescendantsMapData descendantsMapData) 
+                                            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData) 
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Get
@@ -307,12 +307,12 @@ public interface GeoPlatformService {
     @HttpResource(location = "/layer/{descendantsMap}")
     long saveLayerAndTreeModification(
             @WebParam(name = "layer") GPLayer layer,
-            @WebParam(name = "descendantsMapData") DescendantsMapData descendantsMapData);
+            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData);
 
     @Delete
     @HttpResource(location = "/layers/{id}/{descendantsMap}")
     boolean deleteLayerAndTreeModification(@WebParam(name = "id") long id,
-                                           @WebParam(name = "descendantsMapData") DescendantsMapData descendantsMapData) 
+                                           @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData) 
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**

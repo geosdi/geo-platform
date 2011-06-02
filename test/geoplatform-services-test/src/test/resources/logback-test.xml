@@ -27,6 +27,10 @@
         <appender-ref ref="STDOUT" />
     </root>
     
+    <logger name="org.geosdi.geoplatform.services.AclServiceImpl" level="info"/>
+    <logger name="org.geosdi.geoplatform.services.UserServiceImpl" level="info"/>
+    <logger name="org.geosdi.geoplatform.services.WMSServiceImpl" level="trace"/>
+    
     <logger name="org.geosdi.geoplatform.CXFServiceTest" level="trace"/>
     <logger name="org.geosdi.geoplatform.WSFolderLayerTest" level="info"/>
     <logger name="org.geosdi.geoplatform.WSUsersTest" level="info"/>    

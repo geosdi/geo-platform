@@ -39,6 +39,7 @@ package org.geosdi.geoplatform.services;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -188,8 +189,6 @@ class WMSServiceImpl {
                 layerList.size());
         RasterLayerDTO layerDTOIth = null;
 
-//        for (int i = 0; i < 10; i++) { // DEL
-//            Layer layer = layerList.get(i); // DEL
         for (Layer layer : layerList) {
             layerDTOIth = new RasterLayerDTO(); // TODO AbstractLayerDTO as abstract class?
             layerDTOIth.setUrlServer(urlServer);
@@ -203,23 +202,16 @@ class WMSServiceImpl {
                 layerDTOIth.setSrs("EPSG:4326");
             }
 
-//            if (layer.getBoundingBoxes().values().size() != 0) {
-//                for (Object SRSID : layer.getBoundingBoxes().keySet()) {
-//                    layerDTOIth.setBbox(this.createBbox(layer.getBoundingBoxes().get(
-//                            SRSID)));
-//                    layerDTOIth.setSrs((String) SRSID);
-//                }
-//            }
-
             // Set Styles of Raster Ith
             List<StyleImpl> stylesImpl = layer.getStyles();
-            logger.debug("\n*** Layer \"{}\" has {} StyleImpl ***", layer.getTitle(), stylesImpl.size());
+            logger.info("\n*** Layer \"{}\" has {} StyleImpl ***", layer.getTitle(), stylesImpl.size());
             List<StyleDTO> stylesDTO = new ArrayList<StyleDTO>(stylesImpl.size());
             for (StyleImpl style : stylesImpl) {
                 StyleDTO styleDTO = new StyleDTO(style);
                 stylesDTO.add(styleDTO);
                 logger.trace("\n*** CONVERTED StyleDTO:\n{}\n***", styleDTO);
-                // TODO: FIX StyleDTO(StyleImpl style) and DEL
+                // TODO: FIX StyleDTO(StyleImpl style) and DEL               
+                
                 if (style.getLegendURLs() != null) {
                     logger.trace("\n\nURL#K\n" + style.getLegendURLs().size());
                     for (Object o : style.getLegendURLs()) {

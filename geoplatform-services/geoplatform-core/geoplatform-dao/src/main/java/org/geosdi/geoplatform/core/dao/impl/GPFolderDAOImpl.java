@@ -39,8 +39,11 @@ package org.geosdi.geoplatform.core.dao.impl;
 
 import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
+import java.util.Collection;
+import java.util.Iterator;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.Map;
 
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.model.GPFolder;
@@ -91,7 +94,7 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
     @Override
     public boolean updatePositionsRange(int beginPosition, int endPosition,
             int deltaValue) {
-        // Select the folders of interest
+        // Select the folders of interest (position >= beginP && position <= endP)
         Search search = new Search();
         search.addFilterGreaterOrEqual("position", beginPosition).
                 addFilterLessOrEqual("position", endPosition);
@@ -106,7 +109,7 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
 
     @Override
     public boolean updatePositionsLowerBound(int lowerBoundPosition, int deltaValue) {
-        // Select the folders of interest
+        // Select the folders of interest (position >= lowerBoundP)
         Search search = new Search();
         search.addFilterGreaterOrEqual("position", lowerBoundPosition);
         List<GPFolder> matchingFolders = super.search(search);
@@ -121,7 +124,7 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
     private boolean updatePositions(List<GPFolder> matchingFolders, int deltaValue) {
         // Update
         int[] oldPositions = new int[matchingFolders.size()];
-        for (int ind = 0; ind < matchingFolders.size(); ind++) {
+        for (int ind = matchingFolders.size() - 1; ind >= 0; ind--) {
             GPFolder folder = matchingFolders.get(ind);
             oldPositions[ind] = folder.getPosition();
             folder.setPosition(folder.getPosition() + deltaValue);
@@ -129,10 +132,41 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
         GPFolder[] foldersUpdated = merge(matchingFolders.toArray(new GPFolder[matchingFolders.size()]));
 
         // Check the update
-        for (int ind = 0; ind < foldersUpdated.length; ind++) {
+        for (int ind = foldersUpdated.length - 1; ind >= 0; ind--) {
             logger.trace("\n*** Position of the UPDATED GPFolder: {} ({} + {}) ***", new Object[]{
                         foldersUpdated[ind].getPosition(), oldPositions[ind], deltaValue});
             if ((oldPositions[ind] + deltaValue) != foldersUpdated[ind].getPosition()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean updateAncestorsDescendants(Map<Long, Integer> descendantsMap) {
+        // Select the folders of interest (wrt the set od ID)
+        Search search = new Search();
+        search.addFilterIn("id", descendantsMap.keySet());
+        List<GPFolder> matchingFolders = super.search(search);
+        logger.debug("\n*** Matching Folders count: {} ***", matchingFolders.size());
+
+        int[] oldDescendants = new int[matchingFolders.size()];
+        for (int ind = 0; ind < matchingFolders.size(); ind++) {
+//        for (GPFolder folder : matchingFolders) {
+            GPFolder folder = matchingFolders.get(ind);
+            oldDescendants[ind] = folder.getNumberOfDescendants();
+            int newNumberOfDescendants = descendantsMap.get(folder.getId());
+            folder.setNumberOfDescendants(newNumberOfDescendants);
+        }
+        GPFolder[] foldersUpdated = merge(matchingFolders.toArray(new GPFolder[matchingFolders.size()]));
+
+        // Check the update
+        for (int ind = 0; ind < foldersUpdated.length; ind++) {
+            long id = foldersUpdated[ind].getId();
+            int numberOfDescendants = foldersUpdated[ind].getNumberOfDescendants();
+            logger.trace("\n*** Number of Descentans of the UPDATED GPFolder: {} (OLD Descentans = {}) ***",
+                    numberOfDescendants, oldDescendants[ind]);
+            if (descendantsMap.get(id) != numberOfDescendants) {
                 return false;
             }
         }

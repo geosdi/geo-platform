@@ -39,6 +39,7 @@ package org.geosdi.geoplatform.core.dao;
 
 import com.googlecode.genericdao.search.ISearch;
 import java.util.List;
+import java.util.Map;
 
 import org.geosdi.geoplatform.core.model.GPFolder;
 
@@ -73,4 +74,6 @@ public interface GPFolderDAO {
 
     public boolean updatePositionsLowerBound(int lowerBoundPosition,
             int deltaValue);
+    
+    public boolean updateAncestorsDescendants(Map<Long, Integer> descendantsMap);
 }

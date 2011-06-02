@@ -37,9 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
-import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import java.util.Collection;
-import java.util.HashMap;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
@@ -71,6 +69,7 @@ import org.geosdi.geoplatform.responce.collection.StyleList;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.DescendantsMapData;
 import org.geosdi.geoplatform.responce.collection.FolderList;
+import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.responce.collection.UserList;
@@ -79,8 +78,8 @@ import org.geosdi.geoplatform.responce.collection.UserList;
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
  * @author Francesco Izzi - CNR IMAA - geoSDI
  * 
- *         Public interface to define the service operations mapped via REST
- *         using CXT framework
+ * Public interface to define the service operations mapped via REST
+ * using CXT framework
  */
 @WebService(name = "GeoPlatformService", targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService {

@@ -121,7 +121,7 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
     private boolean updatePositions(List<GPLayer> matchingLayers, int deltaValue) {
         // Update
         int[] oldPositions = new int[matchingLayers.size()];
-        for (int ind = 0; ind < matchingLayers.size(); ind++) {
+        for (int ind = matchingLayers.size() - 1; ind >= 0; ind--) {
             GPLayer layer = matchingLayers.get(ind);
             oldPositions[ind] = layer.getPosition();
             layer.setPosition(layer.getPosition() + deltaValue);
@@ -129,7 +129,7 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
         GPLayer[] layersUpdated = merge(matchingLayers.toArray(new GPLayer[matchingLayers.size()]));
 
         // Check the update
-        for (int ind = 0; ind < layersUpdated.length; ind++) {
+        for (int ind = layersUpdated.length - 1; ind >= 0; ind--) {
             logger.trace("\n*** Position of the UPDATED GPLayer: {} ({} + {}) ***", new Object[]{
                         layersUpdated[ind].getPosition(), oldPositions[ind], deltaValue});
             if ((oldPositions[ind] + deltaValue) != layersUpdated[ind].getPosition()) {

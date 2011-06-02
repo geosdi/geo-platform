@@ -65,6 +65,7 @@ import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
+ *
  */
 public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidget<L> {
 
@@ -76,6 +77,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
     private GPServerExpander expander;
 
     /**
+     * @param theTree
      * @Constructor
      */
     public GridLayersWidget(TreePanel theTree) {
@@ -139,8 +141,6 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
 
             @Override
             public void handleEvent(BaseEvent be) {
-                System.out.println(
-                        "TEST ****************** " + grid.getSelectionModel().getSelectedItem());
                 done.enable();
             }
         });

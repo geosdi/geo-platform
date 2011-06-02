@@ -65,6 +65,7 @@ public class GPCababilitiesWidget extends Window {
      * @param lazy
      *       If true the component will not build in Construction Fase
      *       otherwise set to False
+     * @param theTree 
      */
     public GPCababilitiesWidget(boolean lazy, TreePanel theTree) {
         if (!lazy) {

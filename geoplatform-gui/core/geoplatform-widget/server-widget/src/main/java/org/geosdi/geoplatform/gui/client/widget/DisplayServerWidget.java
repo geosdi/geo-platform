@@ -35,6 +35,18 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import java.util.ArrayList;
+
+import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
+import org.geosdi.geoplatform.gui.client.model.GPLayerBeanModel;
+import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
+import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel.GPServerKeyValue;
+import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemote;
+import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemoteAsync;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
@@ -47,16 +59,6 @@ import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
-import org.geosdi.geoplatform.gui.client.model.GPLayerBeanModel;
-import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
-import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel.GPServerKeyValue;
-import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemote;
-import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemoteAsync;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
 /**
  *
@@ -76,6 +78,7 @@ public class DisplayServerWidget {
 
     /**
      * @Constructor
+     * @param theGridWidget 
      */
     public DisplayServerWidget(GridLayersWidget theGridWidget) {
         init();
@@ -149,6 +152,8 @@ public class DisplayServerWidget {
 
     /**
      * Set the correct Status Iconn Style
+     * @param status
+     * @param message
      */
     public void setSearchStatus(Enum status,
             Enum message) {
@@ -209,6 +214,9 @@ public class DisplayServerWidget {
                     public void onFailure(Throwable caught) {
                         GeoPlatformMessage.errorMessage("Server Service",
                                 "An error occured loading layers.");
+                        LayoutManager.get().getStatusMap().setStatus(
+                                "An error occured loading layers from the service.",
+                                EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                         gridWidget.unMaskGrid();
                     }
 

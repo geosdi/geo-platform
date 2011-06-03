@@ -158,7 +158,8 @@ public interface GeoPlatformService {
     @HttpResource(location = "/folder/{descendantsMap}")
     long saveFolderAndTreeModifications(
             @WebParam(name = "folder") GPFolder folder,
-            @WebParam(name = "descendantsMap") GPWebServiceMapData descendantsMapData);
+            @WebParam(name = "descendantsMap") GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault;
 
     @Delete
     @HttpResource(location = "/folder/{id}/{descendantsMap}")

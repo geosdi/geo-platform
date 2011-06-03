@@ -316,7 +316,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public long saveFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData) {
+    public long saveFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
         return folderServiceDelegate.saveFolderAndTreeModifications(folder, descendantsMapData);
     }
 

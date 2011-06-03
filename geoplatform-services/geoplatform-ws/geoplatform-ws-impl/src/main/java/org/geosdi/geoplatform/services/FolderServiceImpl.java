@@ -140,7 +140,26 @@ class FolderServiceImpl {
         return folderDao.remove(folder);
     }
 
-    public long saveFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData) {
+    public long saveFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
+        if (folder.getParent() == null) {
+            assert (folder.getOwner() != null) : this.getClass().getCanonicalName() + " on saveFolderAndTreeModifications - "
+                    + "Illegal argument exception: User must not be null";
+
+            GPUser user = userDao.findByUsername(folder.getOwner().getUsername());
+            if (user != null) {
+                throw new ResourceNotFoundFault("User not found", folder.getOwner().getId());
+            }
+
+            folder.setOwner(user);
+        } else {
+            GPFolder folderParent = folderDao.find(folder.getParent().getId());
+            if (folderParent != null) {
+                throw new ResourceNotFoundFault("Folder parent not found", folder.getParent().getId());
+            }
+
+            folder.setParent(folderParent);
+        }
+
         int newPosition = folder.getPosition();
         int increment = 1;
 

@@ -146,14 +146,14 @@ class FolderServiceImpl {
                     + "Illegal argument exception: User must not be null";
 
             GPUser user = userDao.findByUsername(folder.getOwner().getUsername());
-            if (user != null) {
+            if (user == null) {
                 throw new ResourceNotFoundFault("User not found", folder.getOwner().getId());
             }
 
             folder.setOwner(user);
         } else {
             GPFolder folderParent = folderDao.find(folder.getParent().getId());
-            if (folderParent != null) {
+            if (folderParent == null) {
                 throw new ResourceNotFoundFault("Folder parent not found", folder.getParent().getId());
             }
 

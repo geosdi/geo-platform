@@ -184,10 +184,8 @@ class LayerServiceImpl {
 
         layerDao.persist(layer);
 
-        if (layer.getId() > 0) {
-            // Update number of descendants
-            folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-        }
+        folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
+
         return layer.getId();
     }
 
@@ -205,10 +203,9 @@ class LayerServiceImpl {
         folderDao.updatePositionsLowerBound(oldPosition, -decrement);
 
         boolean result = layerDao.remove(layer);
-        if (result) {
-            // Update number of descendants
-            folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-        }
+
+        folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
+
         return result;
     }
 

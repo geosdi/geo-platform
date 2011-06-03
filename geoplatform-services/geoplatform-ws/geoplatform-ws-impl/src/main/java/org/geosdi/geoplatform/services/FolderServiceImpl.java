@@ -141,20 +141,21 @@ class FolderServiceImpl {
     }
 
     public long saveFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
+        assert (folder.getOwner() != null || folder.getParent() != null) :
+                this.getClass().getCanonicalName() + " on saveFolderAndTreeModifications - "
+                + "Illegal argument exception: User must not be null";
         if (folder.getParent() == null) {
-            assert (folder.getOwner() != null) : this.getClass().getCanonicalName() + " on saveFolderAndTreeModifications - "
-                    + "Illegal argument exception: User must not be null";
-
+            // TODO verify problems when saving a folder with owner from interface
             GPUser user = userDao.findByUsername(folder.getOwner().getUsername());
             if (user == null) {
-                throw new ResourceNotFoundFault("User not found", folder.getOwner().getId());
+                throw new ResourceNotFoundFault("User " + folder.getOwner().getUsername() + " not found");
             }
 
             folder.setOwner(user);
         } else {
             GPFolder folderParent = folderDao.find(folder.getParent().getId());
             if (folderParent == null) {
-                throw new ResourceNotFoundFault("Folder parent not found", folder.getParent().getId());
+                throw new ResourceNotFoundFault("Folder parent not found ", folder.getParent().getId());
             }
 
             folder.setParent(folderParent);
@@ -167,11 +168,8 @@ class FolderServiceImpl {
         layerDao.updatePositionsLowerBound(newPosition, increment);
 
         folderDao.persist(folder);
+        folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
 
-        if (folder.getId() > 0) {
-            // Update number of descendants
-            folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-        }
         return folder.getId();
     }
 
@@ -189,11 +187,21 @@ class FolderServiceImpl {
         layerDao.updatePositionsLowerBound(oldPosition, -decrement);
 
         boolean result = folderDao.remove(folder);
-        if (result) {
-            // Update number of descendants
-            folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-        }
+
+        folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
+
         return result;
+    }
+
+    public boolean dragEDropMoveUp(long idElementMoved, long idNewParent, int startPosition, int endPosition,
+            GPWebServiceMapData descendantsMapData) {
+//        GPFolder folder
+        return false;
+    }
+
+    public boolean dragEDropMoveDown(long idElementMoved, long idNewParent, int startPosition, int endPosition,
+            GPWebServiceMapData descendantsMapData) {
+        return false;
     }
 
     public FolderDTO getShortFolder(RequestById request) throws ResourceNotFoundFault {

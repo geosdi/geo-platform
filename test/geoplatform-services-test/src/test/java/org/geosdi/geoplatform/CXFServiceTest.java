@@ -161,9 +161,9 @@ public class CXFServiceTest extends ServiceTest {
     public void testGetCapabilities() throws ParseException,
             ResourceNotFoundFault {
         ServerDTO serverDTO = geoPlatformService.getShortServer(serverUrlGeoSDI);
-
+        
         Assert.assertNotNull(serverDTO);
-
+        
         LayerList layers = geoPlatformService.getCapabilities(new RequestById(serverDTO.getId()));
         logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", layers.getList().size());
     }

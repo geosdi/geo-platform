@@ -112,15 +112,8 @@ public class LayerService implements ILayerService {
         //TODO: fill the gpFolder and the map converted in Long and Integer
         GPFolder gpFolder = this.dtoConverter.convertMementoFolder((MementoFolder) memento.getAddedElement());
         if (gpFolder.getParent() == null) {
-            GPUser user = null;
-            try {
-                user = geoPlatformServiceClient.getUserDetailByName(new SearchRequest(
-                        "user_test_0"));
-            } catch (ResourceNotFoundFault ex) {
-                logger.error("LayerService",
-                        "Unable to find user with username : user_test_0");
-                throw new GeoPlatformException(ex);
-            }
+            GPUser user = new GPUser();
+            user.setUsername("user_test_0");
             gpFolder.setOwner(user);
         }
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(memento.getWsDescendantMap());

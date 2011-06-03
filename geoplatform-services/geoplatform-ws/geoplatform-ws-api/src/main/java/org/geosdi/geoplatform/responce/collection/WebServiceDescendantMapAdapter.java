@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
-import org.geosdi.geoplatform.responce.collection.WebServiceMapAdapter.DescendantMap;
+import org.geosdi.geoplatform.responce.collection.WebServiceDescendantMapAdapter.DescendantMap;
 
 /**
  *
  * @author Michele Santomauro
  * @email michele.santomauro@geosdi.org
  */
-public class WebServiceMapAdapter extends XmlAdapter<DescendantMap, Map<Long, Integer>> {
+public class WebServiceDescendantMapAdapter extends XmlAdapter<DescendantMap, Map<Long, Integer>> {
 
     @Override
     public DescendantMap marshal(Map<Long, Integer> v) throws Exception {

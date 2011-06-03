@@ -37,7 +37,9 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -100,6 +102,9 @@ public class WSFolderLayerTest extends ServiceTest {
 
         userTest = geoPlatformService.getUserDetailByName(new SearchRequest(usernameTest));
 
+        rootFolderA.setNumberOfDescendants(2);
+        geoPlatformService.updateFolder(rootFolderA);
+        
         // "rootFolderA" ---> "rasterLayer1"
         idRasterLayer1 = createAndInsertRasterLayer(abstractTextRasterLayer1, rootFolderA, nameRasterLayer1, 6,
                 false, spatialReferenceSystem, titleRasterLayer1, urlServer);
@@ -110,6 +115,9 @@ public class WSFolderLayerTest extends ServiceTest {
                 false, spatialReferenceSystem, titleVectorLayer1, urlServer);
         vectorLayer1 = geoPlatformService.getVectorLayer(idVectorLayer1);
 
+        rootFolderB.setNumberOfDescendants(2);
+        geoPlatformService.updateFolder(rootFolderB);
+        
         // "rootFolderB" ---> "rasterLayer2"
         idRasterLayer2 = createAndInsertRasterLayer(abstractTextRasterLayer2, rootFolderB, nameRasterLayer2, 3,
                 false, spatialReferenceSystem, titleRasterLayer2, urlServer);
@@ -238,6 +246,8 @@ public class WSFolderLayerTest extends ServiceTest {
     @Test
     public void testSaveAndDeleteLayerAndTreeModifications() {
         GPRasterLayer layerToTest = null;
+        Map<Long, Integer> map = new HashMap<Long, Integer>();
+        GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         try {
             String abstractTextLayerToTest = "layerToTest";
             String nameLayerToTest = "layerToTest";
@@ -251,7 +261,10 @@ public class WSFolderLayerTest extends ServiceTest {
             layerInfo.setQueryable(false);
             layerToTest.setLayerInfo(layerInfo);
 
-            GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
+            // Adding new layer to user's root folder B
+            map.clear();
+            map.put(idRootFolderB, 3);
+            descendantsMapData.setDescendantsMap(map);
 
             // Adding new layer to user's root folder B
             long idLayerToTest = geoPlatformService.saveLayerAndTreeModification(layerToTest, descendantsMapData);
@@ -259,6 +272,7 @@ public class WSFolderLayerTest extends ServiceTest {
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
             Assert.assertEquals("Position of root folder A before removing", 8, rootFolderA.getPosition());
+            Assert.assertEquals("Number of descendant of root folder A before removing", 2, rootFolderA.getNumberOfDescendants());
 
             rasterLayer1 = geoPlatformService.getRasterLayer(idRasterLayer1);
             Assert.assertEquals("Position of raster layer 1 before removing", 7, rasterLayer1.getPosition());
@@ -268,6 +282,7 @@ public class WSFolderLayerTest extends ServiceTest {
 
             rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
             Assert.assertEquals("Position of root folder B before removing", 5, rootFolderB.getPosition());
+            Assert.assertEquals("Number of descendant of root folder B before removing", 3, rootFolderB.getNumberOfDescendants());
 
             rasterLayer2 = geoPlatformService.getRasterLayer(idRasterLayer2);
             Assert.assertEquals("Position of raster layer 2 before removing", 4, rasterLayer2.getPosition());
@@ -275,11 +290,15 @@ public class WSFolderLayerTest extends ServiceTest {
             vectorLayer2 = geoPlatformService.getVectorLayer(idVectorLayer2);
             Assert.assertEquals("Position of vector layer 2 before removing", 2, vectorLayer2.getPosition());
 
-            // Removing folder from user's root
+            // Removing layer from user's root folder B
+            map.clear();
+            map.put(idRootFolderB, 2);
+            descendantsMapData.setDescendantsMap(map);
             geoPlatformService.deleteLayerAndTreeModification(layerToTest.getId(), descendantsMapData);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
             Assert.assertEquals("Position of root folder A after removing", 7, rootFolderA.getPosition());
+            Assert.assertEquals("Number of descendant of root folder A before removing", 2, rootFolderA.getNumberOfDescendants());
 
             rasterLayer1 = geoPlatformService.getRasterLayer(idRasterLayer1);
             Assert.assertEquals("Position of raster layer 1 after removing", 6, rasterLayer1.getPosition());
@@ -289,6 +308,7 @@ public class WSFolderLayerTest extends ServiceTest {
 
             rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
             Assert.assertEquals("Position of root folder B after removing", 4, rootFolderB.getPosition());
+            Assert.assertEquals("Number of descendant of root folder A before removing", 2, rootFolderB.getNumberOfDescendants());
 
             rasterLayer2 = geoPlatformService.getRasterLayer(idRasterLayer2);
             Assert.assertEquals("Position of raster layer 2 after removing", 3, rasterLayer2.getPosition());

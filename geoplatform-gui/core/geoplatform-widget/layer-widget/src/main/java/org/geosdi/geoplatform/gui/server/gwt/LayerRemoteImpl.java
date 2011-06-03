@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.server.gwt;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
@@ -54,7 +55,6 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
 
     //TODO: Insert correct serialVersionUID
     private static final long serialVersionUID = 8244727800484212092L;
-
     private ILayerService layerService;
 
     public LayerRemoteImpl() {
@@ -70,7 +70,7 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     public ArrayList<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException {
         return this.layerService.loadUserFolders(userName);
     }
-    
+
 //    @Override
 //    public ArrayList<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException {
 //        return this.layerService.loadFolderElements(folderId);
@@ -78,6 +78,11 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     @Override
     public ArrayList<IGPFolderElements> loadFolderElements(long folderId) throws GeoPlatformException {
         return this.layerService.loadFolderElements(folderId);
+    }
+
+    @Override
+    public long saveFolderAndTreeModification(MementoSaveAdd memento) throws GeoPlatformException {
+        return this.layerService.saveFolderAndTreeModification(memento);
     }
 
     @Override
@@ -95,5 +100,4 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     public void deleteElement(long id, TreeElement elementType) throws GeoPlatformException {
         this.layerService.deleteElement(id, elementType);
     }
-
 }

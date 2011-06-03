@@ -44,8 +44,10 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
  */
 public abstract class AbstractMementoLayer extends AbstractMementoSave {
 
+    private static final long serialVersionUID = -3151230290345781610L;
     private String layerName;
     private int zIndex;
+    private long idLayer;
     private long idFolderParent;
     private String abstractText;
     private String title;
@@ -58,6 +60,13 @@ public abstract class AbstractMementoLayer extends AbstractMementoSave {
     private double upperRightY;
     private GPLayerType layerType;
     private boolean isChecked;
+
+    public AbstractMementoLayer(ISave saveAction) {
+        super(saveAction);
+    }
+
+    public AbstractMementoLayer() {
+    }
 
     public String getAbstractText() {
         return abstractText;
@@ -75,7 +84,7 @@ public abstract class AbstractMementoLayer extends AbstractMementoSave {
         this.dataSource = dataSource;
     }
 
-    public boolean isIsChecked() {
+    public boolean isChecked() {
         return isChecked;
     }
 
@@ -163,7 +172,17 @@ public abstract class AbstractMementoLayer extends AbstractMementoSave {
         this.idFolderParent = idFolderParent;
     }
 
-    public AbstractMementoLayer(ISave saveAction) {
-        super(saveAction);
+    /**
+     * @return the idLayer
+     */
+    public long getIdLayer() {
+        return idLayer;
+    }
+
+    /**
+     * @param idLayer the idLayer to set
+     */
+    public void setIdLayer(long idLayer) {
+        this.idLayer = idLayer;
     }
 }

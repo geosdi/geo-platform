@@ -37,8 +37,6 @@ package org.geosdi.geoplatform.gui.client.model;
 
 import com.extjs.gxt.ui.client.GXT;
 import com.extjs.gxt.ui.client.data.BaseModel;
-import com.extjs.gxt.ui.client.data.Model;
-import com.extjs.gxt.ui.client.event.Events;
 import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.LayerResources;
@@ -49,6 +47,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorModelConverter;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
+import org.geosdi.geoplatform.gui.observable.Observable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -61,8 +60,8 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
      *
      */
     private static final long serialVersionUID = -3687415822526940729L;
-   
     private VisitorModelConverter visitor = new VisitorModelConverter(this);
+    private ObservableFolderTreeNode observable = new ObservableFolderTreeNode();
     private boolean loaded = false;
     private boolean loading = false;
     private int numberOfDescendants = 0;
@@ -141,10 +140,29 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
     public void setLoading(boolean loading) {
         this.loading = loading;
     }
-    
+
     @Override
-    public void setId(long id){
+    public void setId(long id) {
         super.setId(id);
-        fireEvent(BaseModel.Update, this);
+        observable.setChanged();
+        observable.notifyObservers(id);
+    }
+
+    public ObservableFolderTreeNode getObservable() {
+        return observable;
+    }
+
+    public void setObservable(ObservableFolderTreeNode observable) {
+        this.observable = observable;
+    }
+
+    public class ObservableFolderTreeNode extends Observable {
+
+        @Override
+        protected synchronized void setChanged() {
+            super.setChanged();
+        }
+        
+        
     }
 }

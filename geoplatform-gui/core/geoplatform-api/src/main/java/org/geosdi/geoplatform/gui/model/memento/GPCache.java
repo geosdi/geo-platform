@@ -36,21 +36,26 @@
 package org.geosdi.geoplatform.gui.model.memento;
 
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPCache<T> {
+public class GPCache<T> extends LinkedList<T> {
+    private static final long serialVersionUID = 757371410507432854L;
 
-    private Queue<T> queue = new LinkedList<T>();
-
-    public T poll() {
-        return this.queue.poll();
-    }
-
-    public void add(T memento) {
-        this.queue.add(memento);
-    }
+//    private Queue<T> queue = new LinkedList<T>();
+//
+//    public T poll() {
+//        return this.queue.poll();
+//    }
+//
+//    public T peek() {
+//        return this.queue.peek();
+//    }
+//
+//    public void add(T memento) {
+//        this.queue.add(memento);
+//    }
+    
 }

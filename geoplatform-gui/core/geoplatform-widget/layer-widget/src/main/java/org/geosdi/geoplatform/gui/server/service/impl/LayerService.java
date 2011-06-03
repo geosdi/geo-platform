@@ -36,10 +36,13 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoFolder;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -48,6 +51,7 @@ import org.geosdi.geoplatform.gui.server.service.converter.DTOConverter;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.collection.FolderList;
+import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
@@ -102,6 +106,33 @@ public class LayerService implements ILayerService {
             logger.debug("Returning no elements");
         }
         return elements;
+    }
+
+    @Override
+    public long saveFolderAndTreeModification(MementoSaveAdd memento) throws GeoPlatformException {
+        //TODO: fill the gpFolder and the map converted in Long and Integer
+        GPFolder gpFolder = this.dtoConverter.convertMementoFolder((MementoFolder) memento.getAddedElement());
+        if (gpFolder.getParent() == null) {
+            GPUser user = null;
+            try {
+                user = geoPlatformServiceClient.getUserDetailByName(new SearchRequest(
+                        "user_test_0"));
+            } catch (ResourceNotFoundFault ex) {
+                logger.error("LayerService",
+                        "Unable to find user with username : user_test_0");
+                throw new GeoPlatformException(ex);
+            }
+            gpFolder.setOwner(user);
+        }
+        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(memento.getWsDescendantMap());
+        long idSavedFolder = 0L;
+        try {
+            idSavedFolder = this.geoPlatformServiceClient.saveFolderAndTreeModifications(gpFolder, map);
+        } catch (ResourceNotFoundFault ex) {
+            this.logger.error("Failed to save folder on LayerService: " + ex);
+            throw new GeoPlatformException(ex);
+        }
+        return idSavedFolder;
     }
 
     @Override

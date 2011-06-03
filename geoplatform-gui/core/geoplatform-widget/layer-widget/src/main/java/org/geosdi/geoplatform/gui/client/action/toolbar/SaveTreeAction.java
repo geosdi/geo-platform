@@ -33,39 +33,52 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.server;
+package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.EventType;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
+import org.geosdi.geoplatform.gui.model.memento.IMemento;
+import org.geosdi.geoplatform.gui.observable.Observable;
+import org.geosdi.geoplatform.gui.observable.Observer;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ * @email nazzareno.sileno@geosdi.org
  */
-public interface ILayerService {
+public class SaveTreeAction extends ToolbarLayerTreeAction implements Observer {
 
-//    public ArrayList<FolderTreeNode> loadUserFolders(String userName)
-//            throws GeoPlatformException;
-    public ArrayList<GPFolderClientInfo> loadUserFolders(String userName)
-            throws GeoPlatformException;
+    //TODO: Implement SaveTree oparetions
     
-//    public ArrayList<GPBeanTreeModel> loadFolderElements(long folderId)
-//            throws GeoPlatformException;
-    public ArrayList<IGPFolderElements> loadFolderElements(long folderId)
-            throws GeoPlatformException;
+    public SaveTreeAction(TreePanel theTree) {
+        super(theTree, BasicWidgetResources.ICONS.save(),
+                "Save Tree State");
+        GPLayerSaveCache.getInstance().getObservable().addObserver(this);
+    }
 
-    public long saveFolderAndTreeModification(MementoSaveAdd memento)
-            throws GeoPlatformException;
-    
-    public long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked)
-            throws GeoPlatformException;
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        if(GPLayerSaveCache.getInstance().peek() != null){
+            IMemento<ISave> memento = GPLayerSaveCache.getInstance().peek();
+            memento.getAction().executeSave(GPLayerSaveCache.getInstance().peek());
+        }
+    }
 
-    public long saveFolder(long idParentFolder, String folderName, int position, int numberOfDescendants, boolean isChecked)
-            throws GeoPlatformException;
-
-    public void deleteElement(long id, TreeElement elementType) throws GeoPlatformException;
+    @Override
+    public void update(Observable o, Object o1) {
+        System.out.println("SaveTreeAction receive observable notify");
+        if(LayerEvents.SAVE_CACHE_NOT_EMPTY == ((EventType)o1)){
+            MediatorToolbarTreeAction.getInstance().enableActions("saveTreeState");
+        } else {
+            MediatorToolbarTreeAction.getInstance().disableActions("saveTreeState");
+        }
+    }
 }

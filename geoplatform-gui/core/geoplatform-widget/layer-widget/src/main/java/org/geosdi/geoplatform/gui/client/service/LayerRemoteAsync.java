@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.service;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 
@@ -52,6 +53,8 @@ public interface LayerRemoteAsync {
     
     public void loadFolderElements(long folderId,
             AsyncCallback<ArrayList<IGPFolderElements>> callback);
+    
+    public void saveFolderAndTreeModification(MementoSaveAdd memento, AsyncCallback<Long> callback);
 
     public void saveFolderForUser(String folderName, int position, int numberOfDescendants, 
             boolean isChecked, AsyncCallback<Long> callback);

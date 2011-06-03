@@ -271,7 +271,7 @@ public abstract class BaseDAOTest {
         GPStyle style1 = this.createStyle("style 1", rasterLayer1);
         GPStyle style2 = this.createStyle("style 2", rasterLayer1);
         //
-        folderRaster.setNumberOfDescendants(1);
+        folderRaster.setNumberOfDescendants(253);
         folderDAO.persist(folderRaster);
         layerDAO.persist(rasterLayer1);
         styleDAO.persist(style1, style2);

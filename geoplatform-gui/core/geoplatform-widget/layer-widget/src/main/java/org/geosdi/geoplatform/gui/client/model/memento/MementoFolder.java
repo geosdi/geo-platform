@@ -36,18 +36,38 @@
 package org.geosdi.geoplatform.gui.client.model.memento;
 
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.observable.Observable;
+import org.geosdi.geoplatform.gui.observable.Observer;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoFolder extends AbstractMementoSave{
-    
+public class MementoFolder extends AbstractMementoSave implements Observer {
+
+    private static final long serialVersionUID = -2323528396954124089L;
+    private transient FolderTreeNode refFolder;
     private String folderName;
     private int zIndex;
+    private long idElement;
     private long idParent;
+    private transient FolderTreeNode refParent;
     private boolean isChecked;
     private int numberOfDescendants;
+
+    public MementoFolder() {
+    }
+
+    public MementoFolder(ISave saveAction) {
+        super(saveAction);
+    }
+
+    public void convertParentWS() {
+        if (this.getRefParent() != null) {
+            this.idParent = this.refParent.getId();
+        }
+    }
 
     public String getFolderName() {
         return folderName;
@@ -57,15 +77,7 @@ public class MementoFolder extends AbstractMementoSave{
         this.folderName = folderName;
     }
 
-    public long getIdParent() {
-        return idParent;
-    }
-
-    public void setIdParent(long idParent) {
-        this.idParent = idParent;
-    }
-
-    public boolean isIsChecked() {
+    public boolean isChecked() {
         return isChecked;
     }
 
@@ -89,8 +101,59 @@ public class MementoFolder extends AbstractMementoSave{
         this.zIndex = zIndex;
     }
 
-    public MementoFolder(ISave saveAction) {
-        super(saveAction);
+    public FolderTreeNode getRefFolder() {
+        return refFolder;
     }
-    
+
+    public void setRefFolder(FolderTreeNode refFolder) {
+        this.refFolder = refFolder;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println("MementoFolder received observable notify");
+        this.idElement = ((Long) arg);
+    }
+
+    /**
+     * @return the idElement
+     */
+    public long getIdElement() {
+        return idElement;
+    }
+
+    /**
+     * @param idElement the idElement to set
+     */
+    public void setIdElement(long idElement) {
+        this.idElement = idElement;
+    }
+
+    /**
+     * @return the refParent
+     */
+    public FolderTreeNode getRefParent() {
+        return refParent;
+    }
+
+    /**
+     * @param refParent the refParent to set
+     */
+    public void setRefParent(FolderTreeNode refParent) {
+        this.refParent = refParent;
+    }
+
+    /**
+     * @return the idParent
+     */
+    public long getIdParent() {
+        return idParent;
+    }
+
+    /**
+     * @param idParent the idParent to set
+     */
+    public void setIdParent(long idParent) {
+        this.idParent = idParent;
+    }
 }

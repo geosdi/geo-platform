@@ -84,6 +84,15 @@ public class ToolbarTreeClientTool {
         removeElement.setEnabled(false);
         removeElement.setOrder(5);
 
+
+        ActionClientTool saveTreeState = new ActionClientTool();
+        saveTreeState.setId("saveTreeState");
+        saveTreeState.setType("button");
+        saveTreeState.setEnabled(false);
+        saveTreeState.setOrder(6);
+
+
+        this.clientTools.add(saveTreeState);
         this.clientTools.add(removeElement);
         this.clientTools.add(toolbarSeparator);
         this.clientTools.add(addFolder);

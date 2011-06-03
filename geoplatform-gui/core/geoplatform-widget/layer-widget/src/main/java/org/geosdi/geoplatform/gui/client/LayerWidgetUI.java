@@ -53,6 +53,7 @@ import org.geosdi.geoplatform.gui.client.action.toolbar.AddFolderTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddRasterTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddVectorTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.DeleteElementTreeAction;
+import org.geosdi.geoplatform.gui.client.action.toolbar.SaveTreeAction;
 import org.geosdi.geoplatform.gui.client.mvc.ServerController;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
@@ -141,6 +142,16 @@ public class LayerWidgetUI implements EntryPoint {
             @Override
             public GeoPlatformToolbarAction createActionTool(TreePanel tree) {
                 ToolbarLayerTreeAction action = new DeleteElementTreeAction(tree);
+                setAction(action);
+                return action;
+            }
+        });
+        
+        ToolbarTreeActionRegistar.put("saveTreeState", new ToolbarTreeActionCreator() {
+
+            @Override
+            public GeoPlatformToolbarAction createActionTool(TreePanel tree) {
+                ToolbarLayerTreeAction action = new SaveTreeAction(tree);
                 setAction(action);
                 return action;
             }

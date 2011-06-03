@@ -48,36 +48,30 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
  */
 public class VisitorToolbarTreeAction implements IVisitor {
 
-    private MediatorToolbarTreeAction mediator;
-
-    public VisitorToolbarTreeAction(MediatorToolbarTreeAction theMediator) {
-        this.mediator = theMediator;
-    }
-
     @Override
     public void visitRoot(AbstractRootTreeNode root) {
-        this.mediator.disableActions("addRasterLayer", "addVectorLayer",
+        MediatorToolbarTreeAction.getInstance().disableActions("addRasterLayer", "addVectorLayer",
                 "removeElement");
-        this.mediator.enableActions("addFolder");
+        MediatorToolbarTreeAction.getInstance().enableActions("addFolder");
     }
 
     @Override
     public void visitFolder(AbstractFolderTreeNode folder) {
-        this.mediator.enableActions("addFolder", "addRasterLayer",
+        MediatorToolbarTreeAction.getInstance().enableActions("addFolder", "addRasterLayer",
                 "addVectorLayer", "removeElement");
     }
 
     @Override
     public void visitVector(GPVectorBean vector) {
-        this.mediator.disableActions("addFolder", "addRasterLayer",
+        MediatorToolbarTreeAction.getInstance().disableActions("addFolder", "addRasterLayer",
                 "addVectorLayer");
-        this.mediator.enableActions("removeElement");
+        MediatorToolbarTreeAction.getInstance().enableActions("removeElement");
     }
 
     @Override
     public void visitRaster(GPRasterBean raster) {
-        this.mediator.disableActions("addFolder", "addRasterLayer",
+        MediatorToolbarTreeAction.getInstance().disableActions("addFolder", "addRasterLayer",
                 "addVectorLayer");
-        this.mediator.enableActions("removeElement");
+        MediatorToolbarTreeAction.getInstance().enableActions("removeElement");
     }
 }

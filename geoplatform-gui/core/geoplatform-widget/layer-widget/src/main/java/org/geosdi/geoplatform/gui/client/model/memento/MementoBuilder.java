@@ -33,21 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action;
+package org.geosdi.geoplatform.gui.client.model.memento;
 
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.EventType;
-import com.extjs.gxt.ui.client.event.Listener;
-import org.geosdi.geoplatform.gui.model.memento.IMemento;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface ISave<T extends IMemento> {
+public class MementoBuilder {
     
-    public void executeSave(T memento);
-    
-    public void addListener(EventType eventType, Listener<? extends BaseEvent> listener);
-    
+    public static MementoFolder buildSaveFolderMemento(FolderTreeNode folder) {
+        MementoFolder memento = new MementoFolder();
+        if (folder.getId() != 0L) {
+            memento.setIdElement(folder.getId());
+        } else {
+            memento.setRefFolder(folder);
+            folder.getObservable().addObserver(memento);
+        }
+        memento.setFolderName(folder.getLabel());
+        memento.setRefParent((folder.getParent() instanceof FolderTreeNode)? (FolderTreeNode)folder.getParent() : null);
+        memento.setIsChecked(folder.isChecked());
+        memento.setNumberOfDescendants(folder.getNumberOfDescendants());
+        memento.setzIndex(folder.getzIndex());
+        return memento;
+    }
 }

@@ -48,11 +48,17 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  */
 public class MediatorToolbarTreeAction {
 
-    private VisitorToolbarTreeAction actionVisitor;
+    private static MediatorToolbarTreeAction instance = new MediatorToolbarTreeAction();
+    
+    private VisitorToolbarTreeAction actionVisitor = new VisitorToolbarTreeAction();
 
-    public MediatorToolbarTreeAction() {
-        this.actionVisitor = new VisitorToolbarTreeAction(this);
+    private MediatorToolbarTreeAction() {}
+    
+
+    public static MediatorToolbarTreeAction getInstance(){
+        return instance;
     }
+    
 
     /**
      *

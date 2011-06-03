@@ -45,10 +45,14 @@ import org.geosdi.geoplatform.gui.action.ISave;
  */
 public class MementoSaveDragDrop extends AbstractMementoSave {
 
+    private static final long serialVersionUID = 7503831906608161666L;
     //private long idElementMoved;
     //private long newParent;
     //private int newZIndex;
     private Map<Long, Integer> changedElements = new HashMap<Long, Integer>();
+
+    public MementoSaveDragDrop() {
+    }
 
     public MementoSaveDragDrop(ISave saveAction) {
         super(saveAction);
@@ -65,5 +69,4 @@ public class MementoSaveDragDrop extends AbstractMementoSave {
     public void setChangedElements(Map<Long, Integer> changedElements) {
         this.changedElements = changedElements;
     }
-
 }

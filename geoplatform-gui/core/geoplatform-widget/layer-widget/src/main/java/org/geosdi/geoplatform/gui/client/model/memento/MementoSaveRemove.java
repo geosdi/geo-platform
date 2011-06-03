@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 
@@ -45,9 +43,14 @@ import org.geosdi.geoplatform.gui.model.memento.IMemento;
  * @email nazzareno.sileno@geosdi.org
  */
 public class MementoSaveRemove extends AbstractMementoSave {
+    
+    private static final long serialVersionUID = 802906770383599380L;
 
     private long idElementRemoved;
     private IMemento<? extends AbstractMementoSave> typeOfRemovedElement;
+
+    public MementoSaveRemove() {
+    }
 
     public MementoSaveRemove(ISave saveAction) {
         super(saveAction);

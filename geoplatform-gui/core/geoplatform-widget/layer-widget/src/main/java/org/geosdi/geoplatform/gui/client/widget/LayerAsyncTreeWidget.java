@@ -84,7 +84,6 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
     private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(
             super.tree);
     private GPBeanTreeModel tmpFolder;
-    private MediatorToolbarTreeAction actionMediator;
     private GPRootTreeNode root;
     private boolean initialized;
     private GPLoadListener loadListener;
@@ -96,7 +95,6 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
         super();
         this.buildRoot();
         this.setTreePanelProperties();
-        this.actionMediator = new MediatorToolbarTreeAction();
         //TODO: After toolbar implementation remove this method
         this.addMenuAddElement();
     }
@@ -159,9 +157,9 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
             public void selectionChanged(
                     SelectionChangedEvent<GPBeanTreeModel> se) {
                 if (se.getSelectedItem() != null) {
-                    actionMediator.elementChanged(se.getSelectedItem());
+                    MediatorToolbarTreeAction.getInstance().elementChanged(se.getSelectedItem());
                 } else {
-                    actionMediator.disableAllActions();
+                    MediatorToolbarTreeAction.getInstance().disableAllActions();
                 }
 
             }

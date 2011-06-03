@@ -35,22 +35,39 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento;
 
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public abstract class AbstractMementoSave implements IMemento<ISave> {
+public abstract class AbstractMementoSave implements IMemento<ISave>, Serializable {
 
-    private ISave saveAction;
-    private Map<Long, Integer> descendantMap = new HashMap<Long, Integer>();
+    private static final long serialVersionUID = 3466894382316001150L;
+    private transient ISave saveAction;
+    private transient Map<FolderTreeNode, Integer> descendantMap = new HashMap<FolderTreeNode, Integer>();
+    private Map<Long, Integer> wsDescendantMap = new HashMap<Long, Integer>();
 
     public AbstractMementoSave(ISave saveAction) {
         this.saveAction = saveAction;
+    }
+
+    public AbstractMementoSave() {
+    }
+
+    public void convertMapToWs() {
+        Map<Long, Integer> tmpMap = new HashMap<Long, Integer>();
+        FolderTreeNode folderTmp = null;
+        for (Iterator<FolderTreeNode> it = this.descendantMap.keySet().iterator(); it.hasNext();) {
+            folderTmp = it.next();
+            tmpMap.put(folderTmp.getId(), this.descendantMap.get(folderTmp));
+        }
     }
 
     @Override
@@ -63,15 +80,29 @@ public abstract class AbstractMementoSave implements IMemento<ISave> {
         this.saveAction = action;
     }
 
-    public void addFolderDescendantChanged(long idFolderChanged, int zIndex) {
-        this.descendantMap.put(idFolderChanged, zIndex);
+    public void addFolderDescendantChanged(FolderTreeNode folder, int zIndex) {
+        this.descendantMap.put(folder, zIndex);
     }
 
-    public Map<Long, Integer> getDescendantMap() {
+    public Map<FolderTreeNode, Integer> getDescendantMap() {
         return descendantMap;
     }
 
-    public void setDescendantMap(Map<Long, Integer> descendantMap) {
+    public void setDescendantMap(Map<FolderTreeNode, Integer> descendantMap) {
         this.descendantMap = descendantMap;
+    }
+
+    /**
+     * @return the wsDescendantMap
+     */
+    public Map<Long, Integer> getWsDescendantMap() {
+        return wsDescendantMap;
+    }
+
+    /**
+     * @param wsDescendantMap the wsDescendantMap to set
+     */
+    public void setWsDescendantMap(Map<Long, Integer> wsDescendantMap) {
+        this.wsDescendantMap = wsDescendantMap;
     }
 }

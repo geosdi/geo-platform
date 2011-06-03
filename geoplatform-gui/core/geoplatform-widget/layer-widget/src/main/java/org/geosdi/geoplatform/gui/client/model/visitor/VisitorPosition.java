@@ -94,7 +94,7 @@ public class VisitorPosition extends AbstractVisitTree
                     + "for element: " + changedElement.getLabel());
             return;
         }
-        this.updateNumberOfChildrens(oldParent, parentDestination);
+        this.updateNumberOfDescendants(oldParent, parentDestination);
 
         System.out.println(this.startPosition == null ? null : "Start Position: " + this.startPosition.getLabel());
         System.out.println(this.endPosition == null ? null : "End position: " + this.endPosition.getLabel());
@@ -102,7 +102,7 @@ public class VisitorPosition extends AbstractVisitTree
         System.out.println("End modification");
     }
 
-    private void updateNumberOfChildrens(GPBeanTreeModel oldParent, GPBeanTreeModel parentDestination) {
+    private void updateNumberOfDescendants(GPBeanTreeModel oldParent, GPBeanTreeModel parentDestination) {
         while (oldParent instanceof FolderTreeNode) {
             ((FolderTreeNode) oldParent).setNumberOfDescendants(((FolderTreeNode) oldParent).getNumberOfDescendants() - 1);
             oldParent = (GPBeanTreeModel) oldParent.getParent();

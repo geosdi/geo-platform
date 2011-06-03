@@ -92,7 +92,6 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
     private LayerRemoteAsync layerService = LayerRemoteImpl.Util.getInstance();
     private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(this.tree);
-    private MediatorToolbarTreeAction actionMediator;
     TreePanelDragSource dragSource;
     private GPRootTreeNode root;
     private boolean initialized;
@@ -104,7 +103,6 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
         super();
         this.buildRoot();
         this.setTreePanelProperties();
-        this.actionMediator = new MediatorToolbarTreeAction();
         //TODO: After toolbar implementation remove this method
         this.addMenuAddElement();
     }
@@ -202,9 +200,9 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
             public void selectionChanged(
                     SelectionChangedEvent<GPBeanTreeModel> se) {
                 if (se.getSelectedItem() != null) {
-                    actionMediator.elementChanged(se.getSelectedItem());
+                    MediatorToolbarTreeAction.getInstance().elementChanged(se.getSelectedItem());
                 } else {
-                    actionMediator.disableAllActions();
+                    MediatorToolbarTreeAction.getInstance().disableAllActions();
                 }
 
             }

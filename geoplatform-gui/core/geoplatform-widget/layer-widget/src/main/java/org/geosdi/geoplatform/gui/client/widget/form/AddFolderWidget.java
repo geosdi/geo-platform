@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.form;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.KeyListener;
@@ -49,7 +50,10 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoBuilder;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
@@ -140,7 +144,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> implements
 
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
-        save = new Button("Save", BasicWidgetResources.ICONS.save(),
+        save = new Button("Create", LayerResources.ICONS.addFolder(),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -184,7 +188,14 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> implements
 //        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";
         this.entity = new FolderTreeNode(this.folderText.getValue());
         this.getTree().getStore().insert(parentDestination, this.entity, 0, true);
+
         this.addVisitor.insertElement(this.entity, parentDestination, 0);
+
+        MementoSaveAdd mementoSaveAdd = new MementoSaveAdd(this);
+        mementoSaveAdd.setAddedElement(MementoBuilder.buildSaveFolderMemento(this.entity));
+        mementoSaveAdd.setDescendantMap(this.addVisitor.getFolderDescendantMap());
+
+        GPLayerSaveCache.getInstance().add(mementoSaveAdd);
 
         /* CODE TO REMOVE
         if (parentDestination instanceof GPRootTreeNode) {
@@ -273,58 +284,85 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> implements
     });
     }*/
     @Override
-    public void executeSave(MementoSaveAdd memento) {
-        assert(memento.getAddedElement() instanceof MementoFolder): 
+    public void executeSave(final MementoSaveAdd memento) {
+        assert (memento.getAddedElement() instanceof MementoFolder) :
                 "AddFolderWidget on executeSave: Illegal argument passed";
-        MementoFolder mementoAdded = (MementoFolder)memento.getAddedElement();
-        //this.layerService.
+        final MementoFolder mementoAdded = (MementoFolder) memento.getAddedElement();
+        if (mementoAdded.getRefParent() != null) {
+            mementoAdded.setIdParent(mementoAdded.getRefParent().getId());
+        }
+        //The following two conversions are absolutely necessary!
+        mementoAdded.convertParentWS();
+        memento.convertMapToWs();
+
+        this.layerService.saveFolderAndTreeModification(memento, new AsyncCallback<Long>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
+                        EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
+                GeoPlatformMessage.errorMessage("Save Folder Error", "Problems on saving the new tree state after folder creation");
+                System.out.println("Error on saving created folder: " + caught + " - "
+                        + caught.getMessage() + " - " + caught.getCause() + " - " + caught.getLocalizedMessage());
+                caught.printStackTrace();
+            }
+
+            @Override
+            public void onSuccess(Long result) {
+                GPLayerSaveCache.getInstance().remove(memento);
+                setSaveStatus(EnumSaveStatus.STATUS_SAVE,
+                        EnumSaveStatus.STATUS_MESSAGE_SAVE);
+                //Attention: What happens when I delete a folder before save it???
+                mementoAdded.getRefFolder().setId(result);
+                //TODO: Now we must launch an event to the cache for the next save operation
+            }
+        });
         //TODO: rimuovere l'if-else ed il codice in esso contenuto, una volta up la parte 
         // lato web service organizzare il salvataggio
-        if (mementoAdded.getIdParent() == 0L) {
-            this.layerService.saveFolderForUser(entity.getLabel(),
-                    entity.getzIndex(), entity.getNumberOfDescendants(),
-                    entity.isChecked(), new AsyncCallback<Long>() {
-
-                @Override
-                public void onFailure(Throwable caught) {
-                    setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
-                            EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
-                    parentDestination.remove(entity);
-                }
-
-                @Override
-                public void onSuccess(Long result) {
-                    setSaveStatus(EnumSaveStatus.STATUS_SAVE,
-                            EnumSaveStatus.STATUS_MESSAGE_SAVE);
-                    entity.setId(result);
-                    clearComponents();
-                }
-            });
-        } else {
-            this.layerService.saveFolder(
-                    ((FolderTreeNode) parentDestination).getId(),
-                    entity.getLabel(), entity.getzIndex(), entity.getNumberOfDescendants(),
-                    entity.isChecked(), new AsyncCallback<Long>() {
-
-                @Override
-                public void onFailure(Throwable caught) {
-                    setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
-                            EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
-                    parentDestination.getParent().remove(parentDestination);
-                    GeoPlatformMessage.errorMessage("Add Folder Error",
-                            "The folder with label : "
-                            + ((GPBeanTreeModel) parentDestination.getParent()).getLabel()
-                            + " was deleted on the server.");
-                }
-
-                @Override
-                public void onSuccess(Long result) {
-                    setSaveStatus(EnumSaveStatus.STATUS_SAVE,
-                            EnumSaveStatus.STATUS_MESSAGE_SAVE);
-                    entity.setId(result);
-                    clearComponents();
-                }
-            });
-        }
+//        if (mementoAdded.getIdParent() == 0L) {
+//            this.layerService.saveFolderForUser(entity.getLabel(),
+//                    entity.getzIndex(), entity.getNumberOfDescendants(),
+//                    entity.isChecked(), new AsyncCallback<Long>() {
+//
+//                @Override
+//                public void onFailure(Throwable caught) {
+//                    setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
+//                            EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
+//                }
+//
+//                @Override
+//                public void onSuccess(Long result) {
+//                    setSaveStatus(EnumSaveStatus.STATUS_SAVE,
+//                            EnumSaveStatus.STATUS_MESSAGE_SAVE);
+//                    entity.setId(result);
+//                    clearComponents();
+//                }
+//            });
+//        } else {
+//            this.layerService.saveFolder(
+//                    ((FolderTreeNode) parentDestination).getId(),
+//                    entity.getLabel(), entity.getzIndex(), entity.getNumberOfDescendants(),
+//                    entity.isChecked(), new AsyncCallback<Long>() {
+//
+//                @Override
+//                public void onFailure(Throwable caught) {
+//                    setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
+//                            EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
+//                    parentDestination.getParent().remove(parentDestination);
+//                    GeoPlatformMessage.errorMessage("Add Folder Error",
+//                            "The folder with label : "
+//                            + ((GPBeanTreeModel) parentDestination.getParent()).getLabel()
+//                            + " was deleted on the server.");
+//                }
+//
+//                @Override
+//                public void onSuccess(Long result) {
+//                    setSaveStatus(EnumSaveStatus.STATUS_SAVE,
+//                            EnumSaveStatus.STATUS_MESSAGE_SAVE);
+//                    entity.setId(result);
+//                    clearComponents();
+//                }
+//            });
+//        }
     }
 }

@@ -36,25 +36,34 @@
 package org.geosdi.geoplatform.gui.client.model.memento;
 
 import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.model.memento.IMemento;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoSaveAdd extends AbstractMementoSave {
+public class MementoSaveAdd<T extends AbstractMementoSave> extends AbstractMementoSave {
 
-    private AbstractMementoSave addedElement;
+    private static final long serialVersionUID = -3384768384840157219L;
+    private T addedElement;
 
-    public AbstractMementoSave getAddedElement() {
-        return addedElement;
-    }
-
-    public void setAddedElement(AbstractMementoSave addedElement) {
-        this.addedElement = addedElement;
+    public MementoSaveAdd() {
     }
 
     public MementoSaveAdd(ISave saveAction) {
         super(saveAction);
+    }
+
+    /**
+     * @return the addedElement
+     */
+    public T getAddedElement() {
+        return addedElement;
+    }
+
+    /**
+     * @param addedElement the addedElement to set
+     */
+    public void setAddedElement(T addedElement) {
+        this.addedElement = addedElement;
     }
 }

@@ -51,12 +51,12 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
      *
      */
     private static final long serialVersionUID = 2095233644130779285L;
-
     private String name;
     private String abstractText;
     private String label;
     private int zIndex;
     private boolean isChecked = false;
+    private long id;
 
     public GPBeanTreeModel() {
     }
@@ -114,7 +114,7 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
         return zIndex;
     }
 
-     /**
+    /**
      * @return the isChecked
      */
     public boolean isChecked() {
@@ -130,4 +130,17 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
 
     public abstract void accept(IVisitor visitor);
 
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
 }

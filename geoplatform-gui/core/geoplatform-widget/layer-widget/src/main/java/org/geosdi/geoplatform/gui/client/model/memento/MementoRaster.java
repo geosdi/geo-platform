@@ -36,12 +36,19 @@
 package org.geosdi.geoplatform.gui.client.model.memento;
 
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.observable.Observable;
+import org.geosdi.geoplatform.gui.observable.Observer;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoRaster extends AbstractMementoLayer {
+public class MementoRaster extends AbstractMementoLayer implements Observer{
+
+    
+    private static final long serialVersionUID = 4343601977419367986L;
+    
+    public MementoRaster() {}
     
     //TODO: vedere come fornire il GPLayerInfo
     //private GPLayerInfo layerInfo;
@@ -51,6 +58,11 @@ public class MementoRaster extends AbstractMementoLayer {
 //        RasterTreeNode raster = new RasterTreeNode();
 //        VectorTreeNode vector = new VectorTreeNode();
 //                raster.getProperties().get("wkt");
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        super.setIdLayer((Long)arg);
     }
     
 }

@@ -51,27 +51,10 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
      *
      */
     private static final long serialVersionUID = -6964624685883651246L;
-    private long id;
     private String dataSource;
     private String crs;
     private BboxClientInfo bbox;
     private GPLayerType layerType;
-
-     /**
-     * @return the id
-     */
-    @Override
-    public long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    @Override
-    public void setId(long id) {
-        this.id = id;
-    }
 
     /**
      * @return the dataSource

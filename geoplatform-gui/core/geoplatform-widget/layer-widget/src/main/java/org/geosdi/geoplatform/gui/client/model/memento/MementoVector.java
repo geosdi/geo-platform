@@ -36,18 +36,30 @@
 package org.geosdi.geoplatform.gui.client.model.memento;
 
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.observable.Observable;
+import org.geosdi.geoplatform.gui.observable.Observer;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoVector extends AbstractMementoLayer{
-    
+public class MementoVector extends AbstractMementoLayer implements Observer {
+
+    private static final long serialVersionUID = -5551744199479235803L;
+
     //TODO: vedere come fornire la Geometry
     //private Geometry geometry;
+    public MementoVector() {
+    }
 
     public MementoVector(ISave saveAction) {
         super(saveAction);
     }
-    
+
+    @Override
+    public void update(Observable o, Object arg) {
+        super.setIdLayer((Long) arg);
+    }
+
+
 }

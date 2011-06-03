@@ -36,7 +36,10 @@
 package org.geosdi.geoplatform.gui.client.model.visitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
+import java.lang.Integer;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -58,6 +61,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
     private int tmpIndex;
     private GPRootTreeNode rootElement;
     private boolean stopIterating;
+    private Map<FolderTreeNode, Integer> folderDescendantMap = new HashMap<FolderTreeNode, Integer>();
 
     public VisitorAddElement(GPRootTreeNode root) {
         this.rootElement = root;
@@ -77,16 +81,17 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
         this.endPosition = super.getNextUnvisitedElement(newElement);
         this.rootElement = super.findRootElement(parentDestination);
         this.preorderTraversal();
-        this.updateNumberOfChildrens(parentDestination);
+        this.updateNumberOfDescendants(parentDestination);
     }
 
-    private void updateNumberOfChildrens(GPBeanTreeModel parentDestination) {
+    private void updateNumberOfDescendants(GPBeanTreeModel parentDestination) {
         if (parentDestination instanceof FolderTreeNode) {
             ((FolderTreeNode) parentDestination).setNumberOfDescendants(
                     ((FolderTreeNode) parentDestination).getNumberOfDescendants() + 1);
+            this.getFolderDescendantMap().put((FolderTreeNode)parentDestination, ((FolderTreeNode) parentDestination).getNumberOfDescendants());
         }
         if (parentDestination.getParent() != null && !(parentDestination.getParent() instanceof GPRootTreeNode)) {
-            this.updateNumberOfChildrens((GPBeanTreeModel) parentDestination.getParent());
+            this.updateNumberOfDescendants((GPBeanTreeModel) parentDestination.getParent());
         }
     }
 
@@ -155,5 +160,12 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
     @Override
     public void visitRaster(GPRasterBean raster) {
         this.visitLeaf(raster);
+    }
+
+    /**
+     * @return the folderDescendantMap
+     */
+    public Map<FolderTreeNode, Integer> getFolderDescendantMap() {
+        return folderDescendantMap;
     }
 }

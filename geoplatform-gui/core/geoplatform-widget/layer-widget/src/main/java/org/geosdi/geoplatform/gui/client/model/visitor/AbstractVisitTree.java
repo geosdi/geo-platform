@@ -96,20 +96,31 @@ public abstract class AbstractVisitTree {
     }
 
     protected void countNumberOfElements(GPBeanTreeModel element) {
-        if (element instanceof FolderTreeNode
-                && !((FolderTreeNode) element).isLoaded()) {
-            this.numberOfElements = this.numberOfElements + 1 + ((FolderTreeNode) element).getNumberOfDescendants();
-        } else {
+        if (element instanceof FolderTreeNode) {
+            this.numberOfElements = ((FolderTreeNode) element).getNumberOfDescendants();
+        } else if (element instanceof GPRootTreeNode) {
             List<ModelData> childrens = element.getChildren();
-            ++this.numberOfElements;
             for (int i = 0; i < childrens.size(); i++) {
-                this.countNumberOfElements((GPBeanTreeModel) childrens.get(i));
+                this.numberOfElements += 1 + ((FolderTreeNode) childrens.get(i)).getNumberOfDescendants();
             }
+            ++this.numberOfElements;//Adding the root element
         }
     }
+//    protected void countNumberOfElements(GPBeanTreeModel element) {
+//        if (element instanceof FolderTreeNode
+//                && !((FolderTreeNode) element).isLoaded()) {
+//            this.numberOfElements = this.numberOfElements + 1 + ((FolderTreeNode) element).getNumberOfDescendants();
+//        } else {
+//            List<ModelData> childrens = element.getChildren();
+//            ++this.numberOfElements;
+//            for (int i = 0; i < childrens.size(); i++) {
+//                this.countNumberOfElements((GPBeanTreeModel) childrens.get(i));
+//            }
+//        }
+//    }
 
     protected GPRootTreeNode findRootElement(GPBeanTreeModel element) {
-        assert(element != null): "AbstractVisitTree on findRootElement the passed element could not be null.";
+        assert (element != null) : "AbstractVisitTree on findRootElement the passed element could not be null.";
         GPRootTreeNode root = null;
         if (element instanceof GPRootTreeNode) {
             root = (GPRootTreeNode) element;

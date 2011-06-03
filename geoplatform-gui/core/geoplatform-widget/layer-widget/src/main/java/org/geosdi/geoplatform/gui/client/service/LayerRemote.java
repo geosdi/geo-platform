@@ -40,6 +40,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -79,6 +80,16 @@ public interface LayerRemote extends RemoteService {
      */
     public ArrayList<IGPFolderElements> loadFolderElements(long folderId) throws GeoPlatformException;
 
+    
+    /**
+     * 
+     * @param MementoSaveAdd
+     * @return
+     * @throws GeoPlatformException
+     */
+    public long saveFolderAndTreeModification(MementoSaveAdd memento) throws GeoPlatformException;
+
+    
     /**
      * 
      * @param folderName

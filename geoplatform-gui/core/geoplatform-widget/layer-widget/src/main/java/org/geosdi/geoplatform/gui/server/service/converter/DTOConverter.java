@@ -37,9 +37,15 @@ package org.geosdi.geoplatform.gui.server.service.converter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import org.geosdi.geoplatform.core.model.GPBBox;
+import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoFolder;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
@@ -48,6 +54,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElemen
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
+import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,7 +106,7 @@ public class DTOConverter {
         }
         return clientFolderElements;
     }
-    
+
     private ClientRasterInfo convertRasterElement(RasterLayerDTO rasterDTO) {
         ClientRasterInfo raster = new ClientRasterInfo();
         raster.setId(rasterDTO.getId());
@@ -167,5 +174,28 @@ public class DTOConverter {
                         org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.MULTIPOLYGON);
                 break;
         }
+    }
+
+    public GPFolder convertMementoFolder(MementoFolder memento) {
+        GPFolder gpFolder = new GPFolder();
+        gpFolder.setName(memento.getFolderName());
+        gpFolder.setChecked(memento.isChecked());
+        gpFolder.setId(memento.getIdElement());
+        gpFolder.setNumberOfDescendants(memento.getNumberOfDescendants());
+        if (memento.getIdParent() != 0L) {
+            GPFolder parent = new GPFolder();
+            parent.setId(memento.getIdParent());
+            gpFolder.setParent(parent);
+        }
+        gpFolder.setPosition(memento.getzIndex());
+        /*TODO: Once implemented shared function you must set this property
+        gpFolder.setShared(true);*/
+        return gpFolder;
+    }
+
+    public GPWebServiceMapData<Long, Integer> convertDescendantMap(Map<Long, Integer> descendantMap) {
+        GPWebServiceMapData<Long, Integer> wsMap = new GPWebServiceMapData<Long, Integer>();
+        wsMap.setDescendantsMap(descendantMap);
+        return wsMap;
     }
 }

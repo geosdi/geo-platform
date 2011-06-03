@@ -36,22 +36,65 @@
 package org.geosdi.geoplatform.gui.client.model.memento;
 
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.model.memento.GPCache;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
+import org.geosdi.geoplatform.gui.observable.Observable;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
-    
+
     private static GPLayerSaveCache instance = new GPLayerSaveCache();
-    
-    private GPLayerSaveCache(){};
-    
-    public static GPLayerSaveCache getInstance(){
+    private ObservableGPLayerSaveCache observable = new ObservableGPLayerSaveCache();
+
+    public static GPLayerSaveCache getInstance() {
         return instance;
     }
 
+    private GPLayerSaveCache() {
+    }
 
+    @Override
+    public boolean add(IMemento<ISave> memento) {
+        if (super.peek() == null) {
+            observable.setChanged();
+            observable.notifyObservers(LayerEvents.SAVE_CACHE_NOT_EMPTY);
+            System.out.println("Event SAVE_CACHE_NOT_EMPTY notified to " +
+                    observable.countObservers() + " observers");
+        }
+        return super.add(memento);
+    }
+
+    @Override
+    public IMemento<ISave> poll() {
+        IMemento<ISave> memento = super.poll();
+        if (super.peek() == null) {
+            observable.setChanged();
+            observable.notifyObservers(LayerEvents.SAVE_CACHE_EMPTY);
+            System.out.println("Event SAVE_CACHE_EMPTY notified to " + 
+                    observable.countObservers() + " observers");
+        }
+        return memento;
+    }
+
+    public ObservableGPLayerSaveCache getObservable() {
+        return observable;
+    }
+
+    public class ObservableGPLayerSaveCache extends Observable {
+
+        @Override
+        protected synchronized void setChanged() {
+            super.setChanged();
+        }
+        
+        
+
+        public void notifyObservers(LayerEvents o) {
+            super.notifyObservers(o);
+        }
+    }
 }

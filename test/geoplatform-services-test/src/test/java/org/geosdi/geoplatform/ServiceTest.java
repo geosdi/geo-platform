@@ -72,15 +72,15 @@ import org.geosdi.geoplatform.services.GeoPlatformService;
 public abstract class ServiceTest implements InitializingBean {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
-    
+    //
     @Autowired
     protected GeoPlatformWSClient gpWSClient;
-    
+    //
     protected GeoPlatformService geoPlatformService;
-    
+    //
     @Autowired
     protected Server gpJettyServer;
-    
+    //
     protected String layerInfoKeyword = "keyword";
     // User
     protected final String usernameTest = "username_test_ws";
@@ -112,7 +112,7 @@ public abstract class ServiceTest implements InitializingBean {
         // Insert User        
         idUserTest = this.createAndInsertUser(usernameTest);
         userTest = geoPlatformService.getUserDetailByName(new SearchRequest(usernameTest));
-
+        
         // Create root folders for the user
         idRootFolderA = createAndInsertFolderWithOwner(nameRootFolderA, userTest, 7, false);
         rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -131,14 +131,18 @@ public abstract class ServiceTest implements InitializingBean {
     @Test
     public void testRootFolders() {
         // Check root folder A
-        Assert.assertNotNull(rootFolderA);
-        Assert.assertEquals(rootFolderA.getName(), nameRootFolderA);
-        Assert.assertEquals(rootFolderA.getPosition(), 7);
+        Assert.assertNotNull("RootFolderA is NULL", rootFolderA);
+        Assert.assertEquals("Name of RootFolderA is NOT equal",
+                rootFolderA.getName(), nameRootFolderA);
+        Assert.assertEquals("Position of RootFolderA is NOT correct",
+                rootFolderA.getPosition(), 7);
 
         // Check root folder B
-        Assert.assertNotNull(rootFolderB);
-        Assert.assertEquals(rootFolderB.getName(), nameRootFolderB);
-        Assert.assertEquals(rootFolderB.getPosition(), 4);
+        Assert.assertNotNull("RootFolderB is NULL", rootFolderB);
+        Assert.assertEquals("Name of RootFolderB is NOT equal",
+                rootFolderB.getName(), nameRootFolderB);
+        Assert.assertEquals("Position of RootFolderA is NOT correct",
+                rootFolderB.getPosition(), 4);
     }
 
     // Create and insert (with assert) a User

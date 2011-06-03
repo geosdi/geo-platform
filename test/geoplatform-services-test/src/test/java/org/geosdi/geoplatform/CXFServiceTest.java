@@ -48,6 +48,7 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.ServerDTO;
+import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.junit.Test;
 
 /**
@@ -59,6 +60,7 @@ public class CXFServiceTest extends ServiceTest {
 
 //    private GeoPlatformWSClientEncrypted gpWSClientEncrypted;
     // Server
+    private final String serverUrlGeoSDI = "http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
     private final String serverUrlTest = "http://map.serverNameTest.org";
     private long idServerTest = -1;
 
@@ -156,14 +158,12 @@ public class CXFServiceTest extends ServiceTest {
     @Test
     public void testGetCapabilities() throws ParseException,
             ResourceNotFoundFault {
-        ServerDTO serverDTO = geoPlatformService.getShortServer(
-                "http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
+        ServerDTO serverDTO = geoPlatformService.getShortServer(serverUrlGeoSDI);
 
         Assert.assertNotNull(serverDTO);
 
-        logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***",
-                geoPlatformService.getCapabilities(new RequestById(serverDTO.getId())).getList().size());
-
+        LayerList layers = geoPlatformService.getCapabilities(new RequestById(serverDTO.getId()));
+        logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", layers.getList().size());
     }
 
     // Create and insert (with assert) a Server
@@ -179,9 +179,9 @@ public class CXFServiceTest extends ServiceTest {
     private GeoPlatformServer createServer(String serverUrl, GPCababilityType serverType) {
         // Create field's value from Regex on Server URL
         String serverName = serverUrl.replaceAll("http://(dpc|map|www)\\.([^\\.]+)\\.(org|it|com)", "$1.$2.$3");
-        logger.debug("\n*** serverName:\n{}\n***", serverName);
+        logger.debug("\n*** serverName: {} ***", serverName);
         String labelServer = serverName.replaceAll("(dpc|map|www)\\.([^\\.]+)\\.(org|it|com)", "$2");
-        logger.debug("\n*** labelServer:\n{}\n***", labelServer);
+        logger.debug("\n*** labelServer: {} ***", labelServer);
         // Create Server
         GeoPlatformServer server = new GeoPlatformServer();
         server.setServerUrl(serverUrl);

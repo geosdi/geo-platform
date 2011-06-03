@@ -39,8 +39,6 @@ package org.geosdi.geoplatform.core.dao.impl;
 
 import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
-import java.util.Collection;
-import java.util.Iterator;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
@@ -150,9 +148,8 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
         List<GPFolder> matchingFolders = super.search(search);
         logger.debug("\n*** Matching Folders count: {} ***", matchingFolders.size());
 
-        int[] oldDescendants = new int[matchingFolders.size()];
+        int[] oldDescendants = new int[matchingFolders.size()]; // Only for log
         for (int ind = 0; ind < matchingFolders.size(); ind++) {
-//        for (GPFolder folder : matchingFolders) {
             GPFolder folder = matchingFolders.get(ind);
             oldDescendants[ind] = folder.getNumberOfDescendants();
             int newNumberOfDescendants = descendantsMap.get(folder.getId());
@@ -167,6 +164,29 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
             logger.trace("\n*** Number of Descentans of the UPDATED GPFolder: {} (OLD Descentans = {}) ***",
                     numberOfDescendants, oldDescendants[ind]);
             if (descendantsMap.get(id) != numberOfDescendants) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean saveCheckStatusFolder(long idFolder, boolean isChecked) {
+        GPFolder folder = this.find(idFolder);
+        if(folder == null){
+            logger.debug("\n*** The Folder with ID \"{}\" does NOT exist into DB ***", idFolder);
+            return false;
+        }
+        logger.trace("\n*** Folder RETRIEVED:\n{}\n*** MOD checked to {} ***", folder, isChecked);
+        
+        // Merge iff the check status is different
+        if (isChecked != folder.isChecked()) {
+//            logger.trace("\n*** The Check status is different --> Merge Folder ***");
+            folder.setChecked(isChecked);
+
+            GPFolder folderUpdated = merge(folder);
+
+            if (folderUpdated.isChecked() != isChecked) {
                 return false;
             }
         }

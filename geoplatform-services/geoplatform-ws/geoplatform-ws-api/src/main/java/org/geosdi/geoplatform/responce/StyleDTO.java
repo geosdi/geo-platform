@@ -79,11 +79,10 @@ public class StyleDTO {
 
     public StyleDTO(StyleImpl style) {
         this.name = style.getName();
-        this.title = style.getTitle().toString();
-        this.abstractText = style.getAbstract().toString();
+        this.title = style.getTitle() == null ? "" : style.getTitle().toString();
+        this.abstractText = style.getAbstract() == null ? "" : style.getAbstract().toString();
         // TODO: FIX
-//        this.legendURL = style.getLegendURLs() != null ? style.getLegendURLs().toArray().toString() : "";
-        this.legendURL = "TODO";
+        this.legendURL = style.getLegendURLs() == null ? "" : style.getLegendURLs().toArray().toString();
     }
     //</editor-fold>
 

@@ -76,4 +76,6 @@ public interface GPFolderDAO {
             int deltaValue);
     
     public boolean updateAncestorsDescendants(Map<Long, Integer> descendantsMap);
+    
+    public boolean saveCheckStatusFolder(long idFolder, boolean isChecked);
 }

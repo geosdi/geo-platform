@@ -41,8 +41,10 @@ package org.geosdi.geoplatform.core.model;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
+ * Web service standards from the Open Geospatial Consortium (OGC)
  */
 public enum GPCababilityType {
 
-    WMS, WFS;
+    WMS, // Web Map Server
+    WFS; // Web Feature Service
 }

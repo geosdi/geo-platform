@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 public class AddVectorTreeAction extends ToolbarLayerTreeAction {
 
     public AddVectorTreeAction(TreePanel theTree) {
-        super(theTree, LayerResources.ICONS.addVectorLayer(), "Add Vector Layer");
+        super(theTree, LayerResources.ICONS.addVectorLayer(), "Add WFS");
     }
 
     @Override

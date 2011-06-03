@@ -181,7 +181,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> implements
     public void execute() {
         this.saveStatus.setBusy("Adding Folder");
         this.parentDestination = (GPBeanTreeModel) this.getTree().getSelectionModel().getSelectedItem();
-        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";
+//        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";
         this.entity = new FolderTreeNode(this.folderText.getValue());
         this.getTree().getStore().insert(parentDestination, this.entity, 0, true);
         this.addVisitor.insertElement(this.entity, parentDestination, 0);

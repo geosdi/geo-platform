@@ -51,7 +51,7 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  */
 public abstract class GPTreeExpanderNotifier<T extends GPBeanTreeModel> {
 
-    private TreePanel tree;
+    protected TreePanel tree;
     protected Listener executor;
     protected Listener<MessageBoxEvent> message;
     protected T selectedElement;
@@ -100,7 +100,7 @@ public abstract class GPTreeExpanderNotifier<T extends GPBeanTreeModel> {
      */
     public void checkNodeState() {
         this.selectedElement = (T) tree.getSelectionModel().getSelectedItem();
-        if (!tree.isExpanded(selectedElement)) {
+        if ((!tree.isExpanded(selectedElement)) && (!(checkNode()))) {
             this.confirmExpandingMessage();
         } else {
             execute();
@@ -118,6 +118,8 @@ public abstract class GPTreeExpanderNotifier<T extends GPBeanTreeModel> {
                 + "Do you want to expand it?",
                 this.message);
     }
+
+    public abstract boolean checkNode();
 
     public abstract void execute();
 

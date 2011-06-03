@@ -46,14 +46,14 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.GenericProgressBarEventHan
 public abstract class GenericProgressBarTextEvent<E extends GenericProgressBarEventHandler>
         extends GwtEvent<E> {
 
-    private String progressText;
+    private String message;
 
-    public GenericProgressBarTextEvent(String progressText) {
-        this.progressText = progressText;
+    public GenericProgressBarTextEvent(String message) {
+        this.message = message;
     }
 
     @Override
     protected void dispatch(GenericProgressBarEventHandler handler) {
-        handler.updateProgressBarText(progressText);
+        handler.updateProgressBarText(message);
     }
 }

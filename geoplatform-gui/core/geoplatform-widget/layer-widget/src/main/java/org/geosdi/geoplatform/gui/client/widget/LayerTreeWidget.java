@@ -317,14 +317,17 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
             @Override
             public void handleEvent(TreePanelEvent<ModelData> be) {
-                if (be.getItem() instanceof FolderTreeNode && !((FolderTreeNode) be.getItem()).isLoaded()) {
+                if ((be.getItem() instanceof FolderTreeNode)
+                        && (!((FolderTreeNode) be.getItem()).isLoaded())
+                        && (((FolderTreeNode) be.getItem()).getId() != 0L)) {
                     final VisitorPosition visitorPosition = new VisitorPosition();
                     final FolderTreeNode parentFolder = (FolderTreeNode) be.getItem();
                     parentFolder.setLoading(true);
                     LayoutManager.get().getStatusMap().setBusy(
                             "Loading tree elements: please, wait untill contents fully loads.");
+
                     layerService.loadFolderElements(
-                            ((FolderTreeNode) parentFolder).getId(), new AsyncCallback<ArrayList<IGPFolderElements>>() {
+                            parentFolder.getId(), new AsyncCallback<ArrayList<IGPFolderElements>>() {
 
                         @Override
                         public void onFailure(Throwable caught) {
@@ -372,7 +375,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                     FolderTreeNode parentFolder = (FolderTreeNode) be.getItem();
                     tree.setExpanded(parentFolder, true);
                     dragSource.getDraggable().cancelDrag();
-                } else if (be.getItem() instanceof FolderTreeNode && ((FolderTreeNode) be.getItem()).isLoaded()) {
+                } else if (be.getItem() instanceof FolderTreeNode && (((FolderTreeNode) be.getItem()).isLoaded())) {
                     tree.fireEvent(GeoPlatformEvents.GP_NODE_EXPANDED);
                 }
             }

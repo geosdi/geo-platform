@@ -47,38 +47,12 @@ public abstract class GeoPlatformProgressBar {
 
     protected MessageBox box;
 
-    public GeoPlatformProgressBar() {
-        createProgressBar();
-        setProgressBarProperties();
-    }
-
-    private void createProgressBar() {
+    public void createProgressBar(String title, String msg, String progressText) {
         this.box = new MessageBox();
-        this.box.setType(MessageBoxType.WAIT);
-        this.box.setButtons("");
-        this.box.setClosable(true);
-        this.box.setModal(true);
+        box.setTitle(title);
+        box.setMessage(msg);
+        box.setType(MessageBoxType.WAIT);
+        box.setProgressText(progressText);
+        box.setButtons("");
     }
-
-    /**
-     * 
-     * @param title
-     */
-    public void setProgressBarTitle(String title) {
-        this.box.setTitle(title);
-    }
-
-    /**
-     * 
-     * @param progressText
-     */
-    public void setProgressText(String progressText) {
-        this.box.setProgressText(progressText);
-    }
-
-    /**
-     * Set ProgressBar Properties such as Title and Message Progress
-     *
-     */
-    public abstract void setProgressBarProperties();
 }

@@ -66,4 +66,9 @@ public class GPLayerExpander extends GPTreeExpanderNotifier<FolderTreeNode> {
                 "Add folder operation cancelled.",
                 EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
     }
+
+    @Override
+    public boolean checkNode() {
+        return ((FolderTreeNode) tree.getSelectionModel().getSelectedItem()).getId() == 0L;
+    }
 }

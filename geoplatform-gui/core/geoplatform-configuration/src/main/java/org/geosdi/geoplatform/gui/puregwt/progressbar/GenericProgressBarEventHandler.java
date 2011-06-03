@@ -49,5 +49,5 @@ public interface GenericProgressBarEventHandler extends EventHandler {
 
     public void closeProgressBar();
 
-    public void updateProgressBarText(String progressText);
+    public void updateProgressBarText(String message);
 }

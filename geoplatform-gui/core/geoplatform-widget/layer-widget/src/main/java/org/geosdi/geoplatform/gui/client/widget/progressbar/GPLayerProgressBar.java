@@ -46,34 +46,24 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.LayersProgressBarEv
 public class GPLayerProgressBar extends GeoPlatformProgressBar implements
         LayersProgressBarEventHandler {
 
-    /**
-     * 
-     */
     public GPLayerProgressBar() {
-        super();
         LayerHandlerManager.addHandler(LayersProgressBarEventHandler.TYPE, this);
     }
 
-    @Override
-    public void setProgressBarProperties() {
-        this.box.setTitle("GPLayers Progress Bar");
-        this.box.setMessage("Check Layers");
-        this.box.setProgressText("Searching.....");
-    }
 
     @Override
     public void showProgressBar() {
+        super.createProgressBar("GPLayer ProgressBar", "Search Layers", "Loading...");
         this.box.show();
     }
 
     @Override
     public void closeProgressBar() {
         this.box.close();
-        this.box.getProgressBar().reset();
     }
 
     @Override
-    public void updateProgressBarText(String progressText) {
-        this.box.updateText(progressText);
+    public void updateProgressBarText(String message) {
+        this.box.updateText(message);
     }
 }

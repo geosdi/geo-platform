@@ -51,7 +51,7 @@ public class AddRasterTreeAction extends ToolbarLayerTreeAction {
     private GPCababilitiesWidget serverWidget;
 
     public AddRasterTreeAction(TreePanel theTree) {
-        super(theTree, LayerResources.ICONS.addRasterLayer(), "Add Raster Layer");
+        super(theTree, LayerResources.ICONS.addRasterLayer(), "Add WMS");
         this.serverWidget = new GPCababilitiesWidget(true, theTree);
     }
 

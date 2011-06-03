@@ -84,13 +84,13 @@ public class ToolbarTreeClientTool {
         removeElement.setEnabled(false);
         removeElement.setOrder(5);
 
-        this.getClientTools().add(removeElement);
-        this.getClientTools().add(toolbarSeparator);
-        this.getClientTools().add(addFolder);
-        this.getClientTools().add(addVectorLayer);
-        this.getClientTools().add(addRasterLayer);
+        this.clientTools.add(removeElement);
+        this.clientTools.add(toolbarSeparator);
+        this.clientTools.add(addFolder);
+        this.clientTools.add(addVectorLayer);
+        this.clientTools.add(addRasterLayer);
 
-        Collections.sort(getClientTools());
+        Collections.sort(clientTools);
 
     }
 

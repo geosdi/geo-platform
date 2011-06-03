@@ -35,12 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -51,7 +55,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class DeleteFolderHandler extends DeleteRequestHandler {
+public class DeleteFolderHandler extends DeleteRequestHandler implements ISave<MementoSaveRemove> {
 
     public DeleteFolderHandler(TreePanel theTree) {
         super(theTree);
@@ -83,6 +87,19 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
 
     @Override
     public void processRequest() {
+        super.delete();
+    }
+
+    @Override
+    public void displayMessage() {
+        LayoutManager.get().getStatusMap().setStatus("The selected folder was deleted succesfully",
+                                    EnumSearchStatus.STATUS_SEARCH.toString());
+    }
+
+    @Override
+    public void executeSave(MementoSaveRemove memento) {
+        assert (memento.getIdElementRemoved() != 0L) :
+                "DeleteFolderHandler on executeSave: Illegal argument passed";
         this.layerService.deleteElement(
                 ((FolderTreeNode) tree.getSelectionModel().getSelectedItem()).getId(),
                 TreeElement.FOLDER, new AsyncCallback<Object>() {
@@ -100,9 +117,4 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
         });
     }
 
-    @Override
-    public void displayMessage() {
-        LayoutManager.get().getStatusMap().setStatus("The selected folder was deleted succesfully",
-                                    EnumSearchStatus.STATUS_SEARCH.toString());
-    }
 }

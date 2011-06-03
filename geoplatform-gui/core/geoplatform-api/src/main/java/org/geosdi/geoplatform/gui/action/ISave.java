@@ -35,9 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.action;
 
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.EventType;
-import com.extjs.gxt.ui.client.event.Listener;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 
 /**
@@ -47,7 +44,5 @@ import org.geosdi.geoplatform.gui.model.memento.IMemento;
 public interface ISave<T extends IMemento> {
     
     public void executeSave(T memento);
-    
-    public void addListener(EventType eventType, Listener<? extends BaseEvent> listener);
     
 }

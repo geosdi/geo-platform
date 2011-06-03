@@ -62,11 +62,10 @@ public abstract class AbstractMementoSave implements IMemento<ISave>, Serializab
     }
 
     public void convertMapToWs() {
-        Map<Long, Integer> tmpMap = new HashMap<Long, Integer>();
         FolderTreeNode folderTmp = null;
         for (Iterator<FolderTreeNode> it = this.descendantMap.keySet().iterator(); it.hasNext();) {
             folderTmp = it.next();
-            tmpMap.put(folderTmp.getId(), this.descendantMap.get(folderTmp));
+            wsDescendantMap.put(folderTmp.getId(), this.descendantMap.get(folderTmp));
         }
     }
 

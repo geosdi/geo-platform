@@ -288,9 +288,6 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> implements
         assert (memento.getAddedElement() instanceof MementoFolder) :
                 "AddFolderWidget on executeSave: Illegal argument passed";
         final MementoFolder mementoAdded = (MementoFolder) memento.getAddedElement();
-        if (mementoAdded.getRefParent() != null) {
-            mementoAdded.setIdParent(mementoAdded.getRefParent().getId());
-        }
         //The following two conversions are absolutely necessary!
         mementoAdded.convertParentWS();
         memento.convertMapToWs();

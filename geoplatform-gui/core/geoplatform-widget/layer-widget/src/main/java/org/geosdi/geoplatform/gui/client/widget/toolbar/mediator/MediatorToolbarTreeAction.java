@@ -49,16 +49,14 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 public class MediatorToolbarTreeAction {
 
     private static MediatorToolbarTreeAction instance = new MediatorToolbarTreeAction();
-    
     private VisitorToolbarTreeAction actionVisitor = new VisitorToolbarTreeAction();
 
-    private MediatorToolbarTreeAction() {}
-    
+    private MediatorToolbarTreeAction() {
+    }
 
-    public static MediatorToolbarTreeAction getInstance(){
+    public static MediatorToolbarTreeAction getInstance() {
         return instance;
     }
-    
 
     /**
      *
@@ -92,7 +90,7 @@ public class MediatorToolbarTreeAction {
                     idAction);
             if (action != null) {
                 action.setEnabled(false);
-                
+
             }
         }
     }
@@ -103,8 +101,10 @@ public class MediatorToolbarTreeAction {
      */
     public void disableAllActions() {
         for (GeoPlatformActionCreator actionCreator : ToolbarTreeActionRegistar.getActionsCreator()) {
-            ((ToolbarTreeActionCreator) actionCreator).getAction().setEnabled(
-                    false);
+            if (!((ToolbarTreeActionCreator) actionCreator).getAction().getId().equals("saveTreeState")) {
+                ((ToolbarTreeActionCreator) actionCreator).getAction().setEnabled(
+                        false);
+            }
         }
     }
 }

@@ -40,6 +40,8 @@ import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 
 /**
  *
@@ -49,6 +51,8 @@ import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeNode> {
 
     private GridLayersWidget gridLayers;
+    private DisplayLayersProgressBarEvent displayEvent = new DisplayLayersProgressBarEvent(
+            true);
 
     public GPServerExpander(GridLayersWidget theWidget) {
         super(theWidget.getTree());
@@ -57,6 +61,7 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
 
     @Override
     public void execute() {
+        LayerHandlerManager.fireEvent(displayEvent);
         System.out.println(
                 "TEST ELEMENTI NELLA FOLDER ****** " + this.selectedElement.getChildCount());
     }
@@ -66,5 +71,10 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
         LayoutManager.get().getStatusMap().setStatus(
                 "Add folder operation cancelled.",
                 EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+    }
+
+    @Override
+    public boolean checkNode() {
+        return ((AbstractFolderTreeNode) this.tree.getSelectionModel().getSelectedItem()).getId() == 0L;
     }
 }

@@ -321,10 +321,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean deleteFolderAndTreeModification(long id, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
+    public boolean deleteFolderAndTreeModification(long id, GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         return folderServiceDelegate.deleteFolderAndTreeModifications(id, descendantsMapData);
     }
-    
+
     @Override
     public FolderDTO getShortFolder(RequestById request) throws ResourceNotFoundFault {
         return folderServiceDelegate.getShortFolder(request);
@@ -449,9 +450,10 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public long saveLayerAndTreeModification(GPLayer layer, GPWebServiceMapData descendantsMapData) {
         return layerServiceDelegate.saveLayerAndTreeModification(layer, descendantsMapData);
     }
-    
+
     @Override
-    public boolean deleteLayerAndTreeModification(long id, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
+    public boolean deleteLayerAndTreeModification(long id, GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.deleteLayerAndTreeModifications(id, descendantsMapData);
     }
 
@@ -537,9 +539,21 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
+    public GeoPlatformServer getServerDetailByUrl(String serverUrl)
+            throws ResourceNotFoundFault {
+        return wmsServiceDelegate.getServerDetailByUrl(serverUrl);
+    }
+
+    @Override
     public LayerList getCapabilities(RequestById request)
             throws ResourceNotFoundFault {
         return wmsServiceDelegate.getCapabilities(request);
+    }
+
+    @Override
+    public LayerList saveServer(String serverUrl)
+            throws ResourceNotFoundFault {
+        return wmsServiceDelegate.saveServer(serverUrl);
     }
     //</editor-fold>
 
@@ -550,6 +564,4 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         return this.aclServiceDelegate.getUserGuiComponentVisible(userId);
     }
     //</editor-fold>
-
-
 }

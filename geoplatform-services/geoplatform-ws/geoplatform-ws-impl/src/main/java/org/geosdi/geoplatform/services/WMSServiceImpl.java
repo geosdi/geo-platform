@@ -39,7 +39,6 @@ package org.geosdi.geoplatform.services;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -51,6 +50,7 @@ import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geotools.data.ows.StyleImpl;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
+import org.geosdi.geoplatform.core.model.GPCababilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -61,9 +61,13 @@ import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geotools.data.ows.CRSEnvelope;
 import org.geotools.data.ows.Layer;
+import org.geotools.data.ows.Service;
 import org.geotools.data.ows.WMSCapabilities;
 import org.geotools.data.wms.WebMapServer;
 import org.geotools.ows.ServiceException;
+import org.opengis.metadata.citation.Contact;
+import org.opengis.metadata.citation.ResponsibleParty;
+import org.opengis.util.InternationalString;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -85,7 +89,6 @@ class WMSServiceImpl {
     //</editor-fold>
 
     public long insertServer(GeoPlatformServer server) {
-
         /** IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER **/
         GeoPlatformServer serverSearch = serverDao.findByServerUrl(
                 server.getServerUrl());
@@ -155,6 +158,17 @@ class WMSServiceImpl {
         return convertToServerCollection(found);
     }
 
+    public GeoPlatformServer getServerDetailByUrl(String serverUrl)
+            throws ResourceNotFoundFault {
+        GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
+
+        if (server == null) {
+            throw new ResourceNotFoundFault("Server not found by URL");
+        }
+
+        return server;
+    }
+
     public LayerList getCapabilities(RequestById request)
             throws ResourceNotFoundFault {
 
@@ -165,32 +179,65 @@ class WMSServiceImpl {
                     "The Server with ID : " + request.getId() + " has been deleted.");
         }
 
-        return convertToLayerList(getCababilities(server.getServerUrl()),
-                server.getServerUrl());
+        WMSCapabilities wmsCapabilities = this.getWMSCapabilities(server.getServerUrl());
+        return convertToLayerList(wmsCapabilities.getLayerList(), server.getServerUrl());
     }
 
-    private Collection<ServerDTO> convertToServerCollection(
-            List<GeoPlatformServer> serverList) {
-        Collection<ServerDTO> shortServers = new ArrayList<ServerDTO>(
-                serverList.size());
-        ServerDTO serverDTOIth = null;
-        for (GeoPlatformServer server : serverList) {
-            serverDTOIth = new ServerDTO(server);
-            shortServers.add(serverDTOIth);
+    public LayerList saveServer(String serverUrl)
+            throws ResourceNotFoundFault {
+        // Retrieve the server by URL
+        GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
+        if (server != null) {
+            WMSCapabilities wmsCapabilities = this.getWMSCapabilities(serverUrl);
+            return convertToLayerList(wmsCapabilities.getLayerList(), serverUrl);
         }
-        return shortServers;
+
+        WMSCapabilities wmsCapabilities = this.getWMSCapabilities(serverUrl);
+        // Create and Save a new Server
+        Service service = wmsCapabilities.getService();
+        GeoPlatformServer newServer = this.createWMSServerFromService(serverUrl, service);
+        serverDao.persist(newServer);
+
+        return convertToLayerList(wmsCapabilities.getLayerList(), serverUrl);
+    }
+
+    private WMSCapabilities getWMSCapabilities(String urlServer)
+            throws ResourceNotFoundFault {
+        URL serverURL = null;
+        WebMapServer wms = null;
+        WMSCapabilities cap = null;
+
+        try {
+            serverURL = new URL(urlServer);
+            wms = new WebMapServer(serverURL);
+            cap = wms.getCapabilities();
+
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            logger.error("MalformedURLException: " + e);
+            throw new ResourceNotFoundFault("MalformedURLException ", e);
+        } catch (ServiceException e) {
+            // TODO Auto-generated catch block
+            logger.error("ServiceException: " + e);
+            throw new ResourceNotFoundFault("ServiceException ", e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            logger.error("IOException: " + e);
+            throw new ResourceNotFoundFault("IOException ", e);
+        }
+        return cap;
     }
 
     // TODO Move to LayerList?
     // as constructor: LayerList list = new LayerList(List<Layer>);    
-    // TODO Correct mapping Layer to AbstractLayerDTO
+    // TODO Correct mapping Layer to AbstractLayerDTO (as abstract class?)
     private LayerList convertToLayerList(List<Layer> layerList, String urlServer) {
         List<ShortLayerDTO> shortLayers = new ArrayList<ShortLayerDTO>(
                 layerList.size());
         RasterLayerDTO layerDTOIth = null;
 
         for (Layer layer : layerList) {
-            layerDTOIth = new RasterLayerDTO(); // TODO AbstractLayerDTO as abstract class?
+            layerDTOIth = new RasterLayerDTO();
             layerDTOIth.setUrlServer(urlServer);
             layerDTOIth.setName(layer.getName());
             layerDTOIth.setAbstractText(layer.get_abstract());
@@ -205,26 +252,8 @@ class WMSServiceImpl {
             // Set Styles of Raster Ith
             List<StyleImpl> stylesImpl = layer.getStyles();
             logger.info("\n*** Layer \"{}\" has {} StyleImpl ***", layer.getTitle(), stylesImpl.size());
-            List<StyleDTO> stylesDTO = new ArrayList<StyleDTO>(stylesImpl.size());
-            for (StyleImpl style : stylesImpl) {
-                StyleDTO styleDTO = new StyleDTO(style);
-                stylesDTO.add(styleDTO);
-                logger.trace("\n*** CONVERTED StyleDTO:\n{}\n***", styleDTO);
-                // TODO: FIX StyleDTO(StyleImpl style) and DEL               
-                
-                if (style.getLegendURLs() != null) {
-                    logger.trace("\n\nURL#K\n" + style.getLegendURLs().size());
-                    for (Object o : style.getLegendURLs()) {
-                        logger.trace("\n\nURL#K\n" + o);
-                    }
-                }
-                if (style.getStyleSheetURL() != null) {
-                    logger.trace("\n\nURL#1\n" + style.getStyleSheetURL().toString());
-                }
-                if (style.getStyleURL() != null) {
-                    logger.trace("\n\nURL#2\n" + style.getStyleURL().toString());
-                }
-            }
+
+            List<StyleDTO> stylesDTO = this.createStyleDTOList(stylesImpl);
             layerDTOIth.setStyleList(stylesDTO);
 
             shortLayers.add(layerDTOIth);
@@ -235,31 +264,50 @@ class WMSServiceImpl {
         return layers;
     }
 
-    private List<Layer> getCababilities(String urlServer) throws ResourceNotFoundFault {
-        URL serverURL = null;
-        WebMapServer wms = null;
-        WMSCapabilities cap = null;
-
-        try {
-            serverURL = new URL(urlServer);
-            wms = new WebMapServer(serverURL);
-            cap = wms.getCapabilities();
-
-        } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
-            logger.error("MalformedURLException : " + e);
-            throw new ResourceNotFoundFault("MalformedURLException ", e);
-        } catch (ServiceException e) {
-            // TODO Auto-generated catch block
-            logger.error("ServiceException : " + e);
-            throw new ResourceNotFoundFault("ServiceException ", e);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            logger.error("IOException : " + e);
-            throw new ResourceNotFoundFault("IOException ", e);
+    private Collection<ServerDTO> convertToServerCollection(
+            List<GeoPlatformServer> serverList) {
+        Collection<ServerDTO> shortServers = new ArrayList<ServerDTO>(
+                serverList.size());
+        ServerDTO serverDTOIth = null;
+        for (GeoPlatformServer server : serverList) {
+            serverDTOIth = new ServerDTO(server);
+            shortServers.add(serverDTOIth);
         }
+        return shortServers;
+    }
 
-        return cap.getLayerList();
+    private GeoPlatformServer createWMSServerFromService(String serverUrl, Service service) {
+        GeoPlatformServer newServer = new GeoPlatformServer();
+        newServer.setServerUrl(serverUrl);
+        newServer.setServerType(GPCababilityType.WMS);
+        newServer.setName(service.getName());
+        newServer.setTitle(service.getTitle());
+        newServer.setAbstractServer(service.get_abstract());
+        ResponsibleParty party = service.getContactInformation();
+        if (party != null) {
+            Contact contact = party.getContactInfo();
+            if (contact != null) {
+                InternationalString is = contact.getContactInstructions();
+                if (is != null) {
+                    newServer.setContactPerson(is.toString());
+                }
+            }
+            InternationalString is = party.getOrganisationName();
+            if (is != null) {
+                newServer.setContactOrganization(is.toString());
+            }
+        }
+        return newServer;
+    }
+
+    private List<StyleDTO> createStyleDTOList(List<StyleImpl> stylesImpl) {
+        List<StyleDTO> stylesDTO = new ArrayList<StyleDTO>(stylesImpl.size());
+        for (StyleImpl style : stylesImpl) {
+            StyleDTO styleDTO = new StyleDTO(style);
+            stylesDTO.add(styleDTO);
+            logger.trace("\n*** CONVERTED StyleDTO:\n{}\n***", styleDTO);
+        }
+        return stylesDTO;
     }
 
     private GPBBox createBbox(CRSEnvelope env) {

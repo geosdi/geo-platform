@@ -81,8 +81,21 @@ public class StyleDTO {
         this.name = style.getName();
         this.title = style.getTitle() == null ? "" : style.getTitle().toString();
         this.abstractText = style.getAbstract() == null ? "" : style.getAbstract().toString();
-        // TODO: FIX
+        // TODO: FIX StyleDTO(StyleImpl style) and DEL
         this.legendURL = style.getLegendURLs() == null ? "" : style.getLegendURLs().toArray().toString();
+        // 
+        if (style.getLegendURLs() != null) {
+            System.out.println("\n\nURL#K\n" + style.getLegendURLs().size());
+            for (Object o : style.getLegendURLs()) {
+                System.out.println("\n\nURL#K\n" + o);
+            }
+        }
+        if (style.getStyleSheetURL() != null) {
+            System.out.println("\n\nURL#1\n" + style.getStyleSheetURL().toString());
+        }
+        if (style.getStyleURL() != null) {
+            System.out.println("\n\nURL#2\n" + style.getStyleURL().toString());
+        }
     }
     //</editor-fold>
 

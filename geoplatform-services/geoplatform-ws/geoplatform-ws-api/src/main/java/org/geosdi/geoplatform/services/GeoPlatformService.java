@@ -153,7 +153,7 @@ public interface GeoPlatformService {
     @HttpResource(location = "/folders/{id}")
     boolean deleteFolder(RequestById request) throws ResourceNotFoundFault,
             IllegalParameterFault;
-    
+
     @Put
     @HttpResource(location = "/folder/{descendantsMap}")
     long saveFolderAndTreeModifications(
@@ -164,7 +164,7 @@ public interface GeoPlatformService {
     @Delete
     @HttpResource(location = "/folder/{id}/{descendantsMap}")
     boolean deleteFolderAndTreeModification(@WebParam(name = "id") long id,
-                                            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData) 
+            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Get
@@ -303,7 +303,7 @@ public interface GeoPlatformService {
     @HttpResource(location = "/layers/{id}")
     boolean deleteLayer(RequestById request) throws ResourceNotFoundFault,
             IllegalParameterFault;
-    
+
     @Put
     @HttpResource(location = "/layer/{descendantsMap}")
     long saveLayerAndTreeModification(
@@ -313,7 +313,7 @@ public interface GeoPlatformService {
     @Delete
     @HttpResource(location = "/layers/{id}/{descendantsMap}")
     boolean deleteLayerAndTreeModification(@WebParam(name = "id") long id,
-                                           @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData) 
+            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
@@ -401,21 +401,33 @@ public interface GeoPlatformService {
     Collection<ServerDTO> getAllServers();
 
     @Get
-    @HttpResource(location = "/servers/{idServer}")
+    @HttpResource(location = "/server/{idServer}")
     @WebResult(name = "Server")
     GeoPlatformServer getServerDetail(@WebParam(name = "idServer") long idServer)
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/servers/{serverUrl}")
+    @HttpResource(location = "/server/{serverUrl}")
     @WebResult(name = "Servers")
     ServerDTO getShortServer(@WebParam(name = "serverUrl") String serverUrl)
+            throws ResourceNotFoundFault;
+
+    @Get
+    @HttpResource(location = "/server")
+    @WebResult(name = "Server")
+    GeoPlatformServer getServerDetailByUrl(
+            @WebParam(name = "serverUrl") String serverUrl)
             throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/wms/capabilities/{id}")
     @WebResult(name = "Capabilities")
     LayerList getCapabilities(RequestById request) throws ResourceNotFoundFault;
+
+    @Post
+    @HttpResource(location = "/server")
+    LayerList saveServer(@WebParam(name = "serverUrl") String serverUrl)
+            throws ResourceNotFoundFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="ACL">

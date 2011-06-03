@@ -48,6 +48,7 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.ServerDTO;
+import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.junit.Test;
 
@@ -61,6 +62,7 @@ public class CXFServiceTest extends ServiceTest {
 //    private GeoPlatformWSClientEncrypted gpWSClientEncrypted;
     // Server
     private final String serverUrlGeoSDI = "http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
+    private final int numLayersGeoSDI = 251;
     private final String serverUrlTest = "http://map.serverNameTest.org";
     private long idServerTest = -1;
 
@@ -166,6 +168,37 @@ public class CXFServiceTest extends ServiceTest {
         logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", layers.getList().size());
     }
 
+    @Test
+    public void testSaveServer() throws ResourceNotFoundFault, IllegalParameterFault {
+        logger.trace("\n@@@ testSaveServer @@@");
+        // Server is into DB
+        LayerList layers = geoPlatformService.saveServer(serverUrlGeoSDI);
+        Assert.assertNotNull("LayerList is NULL for server URL:\n" + serverUrlGeoSDI, layers);
+
+        Collection<ShortLayerDTO> layersList = layers.getList();
+        Assert.assertNotNull("List of LayerList is NULL for server URL:\n" + serverUrlTest, layersList);
+        Assert.assertEquals("LayerList must have " + numLayersGeoSDI + " layers", layersList.size(), numLayersGeoSDI);
+
+        // Server is not into DB
+        String serverUrlEx = "http://iws.erdas.com/ecwp/ecw_wms.dll?request=GetCapabilities";
+        layers = geoPlatformService.saveServer(serverUrlEx);
+        Assert.assertNotNull("LayerList is NULL for server URL:\n" + serverUrlEx, layers);
+
+        layersList = layers.getList();
+        Assert.assertNotNull("List of LayerList is NULL for server URL:\n" + serverUrlEx, layersList);
+        // Check if the server was insert
+        GeoPlatformServer serverEx = geoPlatformService.getServerDetailByUrl(serverUrlEx);
+        Assert.assertNotNull("Server is NULL for URL:\n" + serverEx);
+        Assert.assertEquals("Server should have the URL:\n" + serverUrlEx,
+                serverEx.getServerUrl(), serverUrlEx);
+        // Delete server
+        geoPlatformService.deleteServer(serverEx.getId());
+    }
+
+    /**
+     * Service methods
+     * 
+     */
     // Create and insert (with assert) a Server
     private long createAndInsertServer(String serverUrl, GPCababilityType serverType) {
         GeoPlatformServer server = this.createServer(serverUrl, serverType);

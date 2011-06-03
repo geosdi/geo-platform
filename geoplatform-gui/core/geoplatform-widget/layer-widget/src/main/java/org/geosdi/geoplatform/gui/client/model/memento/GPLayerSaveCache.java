@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.gui.observable.Observable;
  */
 public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
 
+    private static final long serialVersionUID = -5458269761345444182L;
     private static GPLayerSaveCache instance = new GPLayerSaveCache();
     private ObservableGPLayerSaveCache observable = new ObservableGPLayerSaveCache();
 
@@ -60,10 +61,10 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
     @Override
     public boolean add(IMemento<ISave> memento) {
         if (super.peek() == null) {
-            observable.setChanged();
-            observable.notifyObservers(LayerEvents.SAVE_CACHE_NOT_EMPTY);
-            System.out.println("Event SAVE_CACHE_NOT_EMPTY notified to " +
-                    observable.countObservers() + " observers");
+            this.observable.setChanged();
+            this.observable.notifyObservers(LayerEvents.SAVE_CACHE_NOT_EMPTY);
+            System.out.println("Event SAVE_CACHE_NOT_EMPTY notified to "
+                    + this.observable.countObservers() + " observers");
         }
         return super.add(memento);
     }
@@ -72,16 +73,28 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
     public IMemento<ISave> poll() {
         IMemento<ISave> memento = super.poll();
         if (super.peek() == null) {
-            observable.setChanged();
-            observable.notifyObservers(LayerEvents.SAVE_CACHE_EMPTY);
-            System.out.println("Event SAVE_CACHE_EMPTY notified to " + 
-                    observable.countObservers() + " observers");
+            this.observable.setChanged();
+            this.observable.notifyObservers(LayerEvents.SAVE_CACHE_EMPTY);
+            System.out.println("Event SAVE_CACHE_EMPTY notified to "
+                    + this.observable.countObservers() + " observers");
         }
         return memento;
     }
 
+    @Override
+    public boolean remove(Object o) {
+        boolean operation = super.remove(o);
+        if (super.peek() == null) {
+            this.observable.setChanged();
+            this.observable.notifyObservers(LayerEvents.SAVE_CACHE_EMPTY);
+            System.out.println("Event SAVE_CACHE_EMPTY notified to "
+                    + this.observable.countObservers() + " observers");
+        }
+        return operation;
+    }
+
     public ObservableGPLayerSaveCache getObservable() {
-        return observable;
+        return this.observable;
     }
 
     public class ObservableGPLayerSaveCache extends Observable {
@@ -90,8 +103,6 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
         protected synchronized void setChanged() {
             super.setChanged();
         }
-        
-        
 
         public void notifyObservers(LayerEvents o) {
             super.notifyObservers(o);

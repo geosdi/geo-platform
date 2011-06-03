@@ -310,8 +310,9 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> implements
             @Override
             public void onSuccess(Long result) {
                 GPLayerSaveCache.getInstance().remove(memento);
-                setSaveStatus(EnumSaveStatus.STATUS_SAVE,
-                        EnumSaveStatus.STATUS_MESSAGE_SAVE);
+                LayoutManager.get().getStatusMap().setStatus(
+                                    "Folders saveded successfully.",
+                                    EnumSearchStatus.STATUS_SEARCH.toString());
                 //Attention: What happens when I delete a folder before save it???
                 mementoAdded.getRefFolder().setId(result);
                 //TODO: Now we must launch an event to the cache for the next save operation

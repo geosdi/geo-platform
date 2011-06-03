@@ -92,6 +92,8 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
     @Override
     public boolean updatePositionsRange(int beginPosition, int endPosition,
             int deltaValue) {
+        assert (beginPosition < endPosition) : "beginPosition must be lesser than endPosition";
+        assert (deltaValue != 0) : "deltaValue does not be 0";
         // Select the folders of interest (position >= beginP && position <= endP)
         Search search = new Search();
         search.addFilterGreaterOrEqual("position", beginPosition).
@@ -102,11 +104,16 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
                 new Object[]{beginPosition, endPosition, endPosition - beginPosition + 1, deltaValue});
         logger.debug("\n*** Matching Folders count: {} ***", matchingFolders.size());
 
+        // No updates (select 0 folders)
+        if (matchingFolders.isEmpty()) {
+            return false;
+        }
         return this.updatePositions(matchingFolders, deltaValue);
     }
 
     @Override
     public boolean updatePositionsLowerBound(int lowerBoundPosition, int deltaValue) {
+        assert (deltaValue != 0) : "deltaValue does not be 0";
         // Select the folders of interest (position >= lowerBoundP)
         Search search = new Search();
         search.addFilterGreaterOrEqual("position", lowerBoundPosition);
@@ -116,6 +123,10 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
                 new Object[]{lowerBoundPosition, deltaValue});
         logger.debug("\n*** Matching Folders count: {} ***", matchingFolders.size());
 
+        // No updates (select 0 folders)
+        if (matchingFolders.isEmpty()) {
+            return false;
+        }
         return this.updatePositions(matchingFolders, deltaValue);
     }
 
@@ -142,11 +153,21 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
 
     @Override
     public boolean updateAncestorsDescendants(Map<Long, Integer> descendantsMap) {
+        assert (descendantsMap != null) : "descendantsMap does not be NULL";
+        // No descendants to update // TODO: assert?
+        if (descendantsMap.isEmpty()) {
+            return false;
+        }
         // Select the folders of interest (wrt the set od ID)
         Search search = new Search();
         search.addFilterIn("id", descendantsMap.keySet());
         List<GPFolder> matchingFolders = super.search(search);
         logger.debug("\n*** Matching Folders count: {} ***", matchingFolders.size());
+
+        // No updates (select 0 folders)
+        if (matchingFolders.isEmpty()) {
+            return false;
+        }
 
         int[] oldDescendants = new int[matchingFolders.size()]; // Only for log
         for (int ind = 0; ind < matchingFolders.size(); ind++) {
@@ -172,16 +193,16 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
 
     @Override
     public boolean saveCheckStatusFolder(long idFolder, boolean isChecked) {
+        // Retrieve the folder
         GPFolder folder = this.find(idFolder);
-        if(folder == null){
+        if (folder == null) {
             logger.debug("\n*** The Folder with ID \"{}\" does NOT exist into DB ***", idFolder);
             return false;
         }
         logger.trace("\n*** Folder RETRIEVED:\n{}\n*** MOD checked to {} ***", folder, isChecked);
-        
+
         // Merge iff the check status is different
         if (isChecked != folder.isChecked()) {
-//            logger.trace("\n*** The Check status is different --> Merge Folder ***");
             folder.setChecked(isChecked);
 
             GPFolder folderUpdated = merge(folder);

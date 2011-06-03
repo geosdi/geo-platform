@@ -162,7 +162,6 @@ class FolderServiceImpl {
 
         int newPosition = folder.getPosition();
         int increment = 1;
-
         // Shift positions
         folderDao.updatePositionsLowerBound(newPosition, increment);
         layerDao.updatePositionsLowerBound(newPosition, increment);
@@ -176,17 +175,20 @@ class FolderServiceImpl {
         return folder.getId();
     }
 
-    public boolean deleteFolderAndTreeModifications(long id, GPWebServiceMapData descendantsMapData) {
+    public boolean deleteFolderAndTreeModifications(long id, GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder folder = folderDao.find(id);
-        int oldPosition = folder.getPosition();
-        int decrement = (folder.getNumberOfDescendants() + 1) * (-1);
+        if (folder == null) {
+            throw new ResourceNotFoundFault("Folder not found", id);
+        }
 
+        int oldPosition = folder.getPosition();
+        int decrement = folder.getNumberOfDescendants() + 1;
         // Shift positions
-        folderDao.updatePositionsLowerBound(oldPosition, decrement);
-        layerDao.updatePositionsLowerBound(oldPosition, decrement);
+        folderDao.updatePositionsLowerBound(oldPosition, -decrement);
+        layerDao.updatePositionsLowerBound(oldPosition, -decrement);
 
         boolean result = folderDao.remove(folder);
-
         if (result) {
             // Update number of descendants
             folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());

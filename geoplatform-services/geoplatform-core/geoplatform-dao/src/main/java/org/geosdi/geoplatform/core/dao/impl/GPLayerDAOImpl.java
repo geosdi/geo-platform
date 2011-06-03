@@ -91,6 +91,8 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
     @Override
     public boolean updatePositionsRange(int beginPosition, int endPosition,
             int deltaValue) {
+        assert (beginPosition < endPosition) : "beginPosition must be lesser than endPosition";
+        assert (deltaValue != 0) : "deltaValue does not be 0";
         // Select the layers of interest
         Search search = new Search();
         search.addFilterGreaterOrEqual("position", beginPosition).
@@ -101,11 +103,16 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
                 new Object[]{beginPosition, endPosition, endPosition - beginPosition + 1, deltaValue});
         logger.debug("\n*** Matching Layers count: {} ***", matchingLayers.size());
 
+        // No updates (select 0 folders)
+        if (matchingLayers.isEmpty()) {
+            return false;
+        }
         return this.updatePositions(matchingLayers, deltaValue);
     }
 
     @Override
     public boolean updatePositionsLowerBound(int lowerBoundPosition, int deltaValue) {
+        assert (deltaValue != 0) : "deltaValue does not be 0";
         // Select the layers of interest
         Search search = new Search();
         search.addFilterGreaterOrEqual("position", lowerBoundPosition);
@@ -115,6 +122,10 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
                 new Object[]{lowerBoundPosition, deltaValue});
         logger.debug("\n*** Matching Layers count: {} ***", matchingLayers.size());
 
+        // No updates (select 0 folders)
+        if (matchingLayers.isEmpty()) {
+            return false;
+        }
         return this.updatePositions(matchingLayers, deltaValue);
     }
 

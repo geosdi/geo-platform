@@ -38,6 +38,7 @@
 package org.geosdi.geoplatform;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -304,56 +305,111 @@ public class GPDAOTest extends BaseDAOTest {
         Assert.assertFalse("Update Ancestors Descendants should NOT be done (nothing to update)", check);
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Test of persistCheckStatus">
     /**
-     * Test of saveCheckStatusFolder method for Folders
+     * Test of persistCheckStatusFolder method for Folders
      */
     @Test
-    public void testSaveCheckStatusFolder() {
-        logger.trace("\n\t@@@ testSaveCheckStatusFolder @@@");
+    public void testPersistCheckStatusFolder() {
+        logger.trace("\n\t@@@ testPersistCheckStatusFolder @@@");
         boolean beginIsChecked = folderA.isChecked(); // false
 
         // No Swith: false to false
-        boolean checkSave = folderDAO.saveCheckStatusFolder(folderA.getId(),
+        boolean checkSave = folderDAO.persistCheckStatusFolder(folderA.getId(),
                 beginIsChecked);
         Assert.assertTrue("Save Check Status Folder NOT done (Not Swith: false to false)", checkSave);
 
         GPFolder folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Checked NOT updated (Not Swith: false to false)",
+        Assert.assertEquals("Checked Folder NOT updated (Not Swith: false to false)",
                 folderAUpdated.isChecked(), beginIsChecked);
 
         // Switch: false to true
-        checkSave = folderDAO.saveCheckStatusFolder(folderA.getId(),
+        checkSave = folderDAO.persistCheckStatusFolder(folderA.getId(),
                 !beginIsChecked);
         Assert.assertTrue("Save Check Status Folder NOT done (Switch: false to true)", checkSave);
 
         folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Checked NOT updated for (Not Swith: false to true)",
+        Assert.assertEquals("Checked Folder NOT updated for (Not Swith: false to true)",
                 folderAUpdated.isChecked(), !beginIsChecked);
 
         // No Swith: true to true
-        checkSave = folderDAO.saveCheckStatusFolder(folderA.getId(),
+        checkSave = folderDAO.persistCheckStatusFolder(folderA.getId(),
                 !beginIsChecked);
         Assert.assertTrue("Save Check Status Folder NOT done (Not Swith: true to true)", checkSave);
 
         folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Checked NOT updated for (Not Swith: true to true)",
+        Assert.assertEquals("Checked Folder NOT updated for (Not Swith: true to true)",
                 folderAUpdated.isChecked(), !beginIsChecked);
 
         // Swith: true to false
-        checkSave = folderDAO.saveCheckStatusFolder(folderA.getId(),
+        checkSave = folderDAO.persistCheckStatusFolder(folderA.getId(),
                 beginIsChecked);
         Assert.assertTrue("Save Check Status Folder NOT done (Swith: true to false)", checkSave);
 
         folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Checked NOT updated for (Swith: true to false)",
+        Assert.assertEquals("Checked Folder NOT updated for (Swith: true to false)",
                 folderAUpdated.isChecked(), beginIsChecked);
 
         // ID Folder NOT correct
-        checkSave = folderDAO.saveCheckStatusFolder(Integer.MAX_VALUE, false);
+        checkSave = folderDAO.persistCheckStatusFolder(Integer.MAX_VALUE, false);
         Assert.assertFalse("Save Check Status Folder NOT done (ID Folder NOT correct)", checkSave);
 
         folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Checked NOT updated for (ID Folder NOT correct)",
+        Assert.assertEquals("Checked Folder NOT updated for (ID Folder NOT correct)",
                 folderAUpdated.isChecked(), beginIsChecked);
     }
+
+    /**
+     * Test of persistCheckStatusLayer method for Layers
+     */
+    @Test
+    public void testPersistCheckStatusLayer() {
+        logger.trace("\n\t@@@ testPersistCheckStatusLayer @@@");
+        boolean beginIsChecked = rasterLayer.isChecked(); // false
+
+        // No Swith: false to false
+        boolean checkSave = layerDAO.persistCheckStatusLayer(rasterLayer.getId(),
+                beginIsChecked);
+        Assert.assertTrue("Save Check Status Layer NOT done (Not Swith: false to false)", checkSave);
+
+        GPLayer raster = layerDAO.find(rasterLayer.getId());
+        Assert.assertEquals("Checked Layer NOT updated (Not Swith: false to false)",
+                raster.isChecked(), beginIsChecked);
+
+        // Switch: false to true
+        checkSave = layerDAO.persistCheckStatusLayer(rasterLayer.getId(),
+                !beginIsChecked);
+        Assert.assertTrue("Save Check Status Layer NOT done (Switch: false to true)", checkSave);
+
+        raster = layerDAO.find(rasterLayer.getId());
+        Assert.assertEquals("Checked Layer NOT updated for (Not Swith: false to true)",
+                raster.isChecked(), !beginIsChecked);
+
+        // No Swith: true to true
+        checkSave = layerDAO.persistCheckStatusLayer(rasterLayer.getId(),
+                !beginIsChecked);
+        Assert.assertTrue("Save Check Status Layer NOT done (Not Swith: true to true)", checkSave);
+
+        raster = layerDAO.find(rasterLayer.getId());
+        Assert.assertEquals("Checked Layer NOT updated for (Not Swith: true to true)",
+                raster.isChecked(), !beginIsChecked);
+
+        // Swith: true to false
+        checkSave = layerDAO.persistCheckStatusLayer(rasterLayer.getId(),
+                beginIsChecked);
+        Assert.assertTrue("Save Check Status Layer NOT done (Swith: true to false)", checkSave);
+
+        raster = layerDAO.find(rasterLayer.getId());
+        Assert.assertEquals("Checked Layer NOT updated for (Swith: true to false)",
+                raster.isChecked(), beginIsChecked);
+
+        // ID Folder NOT correct
+        checkSave = layerDAO.persistCheckStatusLayer(Integer.MAX_VALUE, false);
+        Assert.assertFalse("Save Check Status Layer NOT done (ID Folder NOT correct)", checkSave);
+
+        raster = layerDAO.find(rasterLayer.getId());
+        Assert.assertEquals("Checked Layer NOT updated for (ID Folder NOT correct)",
+                raster.isChecked(), beginIsChecked);
+    }
+    //</editor-fold>
 }

@@ -370,6 +370,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public TreeFolderElements getChildrenElements(long folderId) {
         return folderServiceDelegate.getChildrenElements(folderId);
     }
+
+    @Override
+    public boolean saveCheckStatusFolderAndTreeModifications(long folderId, boolean isChecked)
+            throws ResourceNotFoundFault {
+        return folderServiceDelegate.saveCheckStatusFolder(folderId, isChecked);
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Folder / User">
@@ -509,6 +515,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     @Override
     public GPLayerType getLayerType(long layerId) throws ResourceNotFoundFault {
         return layerServiceDelegate.getLayerType(layerId);
+    }
+
+    @Override
+    public boolean saveCheckStatusLayerAndTreeModifications(long layerId, boolean isChecked)
+            throws ResourceNotFoundFault {
+        return layerServiceDelegate.saveCheckStatusLayer(layerId, isChecked);
     }
     //</editor-fold>
 

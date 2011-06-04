@@ -192,22 +192,35 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
     }
 
     @Override
-    public boolean saveCheckStatusFolder(long idFolder, boolean isChecked) {
+    public boolean persistCheckStatusFolder(long idFolder, boolean isChecked) {
         // Retrieve the folder
         GPFolder folder = this.find(idFolder);
         if (folder == null) {
-            logger.debug("\n*** The Folder with ID \"{}\" does NOT exist into DB ***", idFolder);
+            logger.debug("\n*** The Folder with ID \"{}\" is NOT exist into DB ***", idFolder);
             return false;
         }
         logger.trace("\n*** Folder RETRIEVED:\n{}\n*** MOD checked to {} ***", folder, isChecked);
 
         // Merge iff the check status is different
-        if (isChecked != folder.isChecked()) {
+        if (folder.isChecked() != isChecked) {
             folder.setChecked(isChecked);
 
             GPFolder folderUpdated = merge(folder);
 
             if (folderUpdated.isChecked() != isChecked) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // TODO Improve
+    @Override
+    public boolean persistCheckStatusFolders(boolean isChecked, Long... idFolders) {
+        for (Long longIth : idFolders) {
+            boolean checkSave = this.persistCheckStatusFolder(longIth, isChecked);
+            if (!checkSave) {
+                logger.debug("\n*** The Folder with ID \"{}\" is NOT changed ***", longIth);
                 return false;
             }
         }

@@ -269,6 +269,10 @@ public abstract class GPLayer implements Serializable {
     }
     //</editor-fold>
 
+    public abstract GPFolder getFolder();
+
+    public abstract void setFolder(GPFolder folder);
+
     /*
      * (non-Javadoc)
      *

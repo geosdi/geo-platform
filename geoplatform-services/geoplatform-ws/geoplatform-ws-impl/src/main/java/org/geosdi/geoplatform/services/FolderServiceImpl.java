@@ -140,11 +140,17 @@ class FolderServiceImpl {
         return folderDao.remove(folder);
     }
 
-    public long saveAddedFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
-        assert (folder.getOwner() != null || folder.getParent() != null) :
+    public long saveFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault {
+        assert ((folder.getOwner() == null && folder.getParent() != null)
+                || (folder.getOwner() != null && folder.getParent() == null)) :
                 this.getClass().getCanonicalName() + " on saveFolderAndTreeModifications - "
-                + "Illegal argument exception: User must not be null";
-        if (folder.getParent() == null) {
+                + "Illegal argument exception: folder must have or Owner or Parent NOT NULL";
+        assert ((folder.getOwner() != null && descendantsMapData.getDescendantsMap().isEmpty())
+                || (folder.getParent() != null && !descendantsMapData.getDescendantsMap().isEmpty())) :
+                "descendantsMapData must have one or more entries if the folder has a parent";
+
+        if (folder.getOwner() != null) {
             // TODO verify problems when saving a folder with owner from interface
             GPUser user = userDao.findByUsername(folder.getOwner().getUsername());
             if (user == null) {
@@ -155,7 +161,7 @@ class FolderServiceImpl {
         } else {
             GPFolder folderParent = folderDao.find(folder.getParent().getId());
             if (folderParent == null) {
-                throw new ResourceNotFoundFault("Folder parent not found ", folder.getParent().getId());
+                throw new ResourceNotFoundFault("Folder parent not found", folder.getParent().getId());
             }
 
             folder.setParent(folderParent);
@@ -422,5 +428,15 @@ class FolderServiceImpl {
         FolderList folders = new FolderList();
         folders.setList(foldersDTO);
         return folders;
+    }
+
+    public boolean saveCheckStatusFolder(long folderId, boolean isChecked)
+            throws ResourceNotFoundFault {
+        GPFolder folder = folderDao.find(folderId);
+        if (folder == null) {
+            throw new ResourceNotFoundFault("Folder not found", folderId);
+        }
+        
+        return folderDao.persistCheckStatusFolder(folderId, isChecked);
     }
 }

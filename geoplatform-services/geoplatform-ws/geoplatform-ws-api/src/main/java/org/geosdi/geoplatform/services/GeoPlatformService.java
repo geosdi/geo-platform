@@ -227,6 +227,13 @@ public interface GeoPlatformService {
     @HttpResource(location = "/folders/{folderId}")
     @WebResult(name = "ChildrenElement")
     TreeFolderElements getChildrenElements(@WebParam(name = "folderId") long folderId);
+
+    @Put
+    @HttpResource(location = "/folder/{folderId}")
+    boolean saveCheckStatusFolderAndTreeModifications(
+            @WebParam(name = "folderId") long folderId,
+            @WebParam(name = "isChecked") boolean isChecked)
+            throws ResourceNotFoundFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Folder / User">
@@ -393,6 +400,13 @@ public interface GeoPlatformService {
     @Get
     @WebResult(name = "LayerType")
     GPLayerType getLayerType(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault;
+
+    @Put
+    @HttpResource(location = "/layer/{layerId}")
+    boolean saveCheckStatusLayerAndTreeModifications(
+            @WebParam(name = "layerId") long layerId,
+            @WebParam(name = "isChecked") boolean isChecked)
+            throws ResourceNotFoundFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="OWS">

@@ -73,4 +73,6 @@ public interface GPLayerDAO {
 
     public boolean updatePositionsLowerBound(int lowerBoundPosition,
             int deltaValue);
+    
+    public boolean persistCheckStatusLayer(long idLayer, boolean isChecked);
 }

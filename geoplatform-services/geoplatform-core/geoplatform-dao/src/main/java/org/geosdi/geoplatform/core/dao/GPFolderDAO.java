@@ -74,8 +74,10 @@ public interface GPFolderDAO {
 
     public boolean updatePositionsLowerBound(int lowerBoundPosition,
             int deltaValue);
-    
+
     public boolean updateAncestorsDescendants(Map<Long, Integer> descendantsMap);
-    
-    public boolean saveCheckStatusFolder(long idFolder, boolean isChecked);
+
+    public boolean persistCheckStatusFolder(long idFolder, boolean isChecked);
+
+    public boolean persistCheckStatusFolders(boolean isChecked, Long... idFolders);
 }

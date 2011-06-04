@@ -222,13 +222,14 @@ public class GPFolder implements Serializable {
         StringBuilder str = new StringBuilder("GPFolder {");
         str.append(" id=").append(id);
         str.append(", name=").append(name);
-        str.append(", position=").append(position);
-        str.append(", shared=").append(shared);
         str.append(", parent.id=").append(
                 parent != null ? parent.getId() : "NULL");
         str.append(", owner.id=").append(
                 owner != null ? owner.getId() : "NULL");
-        str.append(", numberOfDescendants=").append(numberOfDescendants).append('}');
+        str.append(", position=").append(position);
+        str.append(", numberOfDescendants=").append(numberOfDescendants);
+        str.append(", shared=").append(shared);
+        str.append(", checked=").append(checked).append('}');
         return str.toString();
     }
 }

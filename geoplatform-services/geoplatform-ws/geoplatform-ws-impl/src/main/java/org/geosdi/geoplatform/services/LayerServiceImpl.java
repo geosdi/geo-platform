@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPStyleDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
+import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
@@ -305,5 +306,44 @@ class LayerServiceImpl {
         LayerList layers = new LayerList();
         layers.setList(layersDTO);
         return layers;
+    }
+
+    public boolean saveCheckStatusLayer(long layerId, boolean isChecked)
+            throws ResourceNotFoundFault {
+        GPLayer layer = layerDao.find(layerId);
+        if (layer == null) {
+            throw new ResourceNotFoundFault("Layer not found", layerId);
+        }
+
+        boolean checkSave = layerDao.persistCheckStatusLayer(layerId, isChecked);
+
+        // Iff isChecked is true, all the ancestor folders must be checked
+        if (isChecked && checkSave) {
+            assert (layer.getFolder() != null) : "Layer must have a folder as parent";
+
+            List<Long> layerAncestor = this.getFolderAndAncestorsId(layer.getFolder());
+            return folderDao.persistCheckStatusFolders(true, layerAncestor.toArray(new Long[layerAncestor.size()]));
+        }
+
+        return checkSave;
+    }
+
+    /**
+     * 
+     * @return List of his and ancestor folders ID
+     */
+    private List<Long> getFolderAndAncestorsId(GPFolder folder) {
+        assert ((folder.getOwner() == null && folder.getParent() != null)
+                || (folder.getOwner() != null && folder.getParent() == null)) :
+                "getFolderAndAncestorsId - Illegal Argument Exception: folder must have or Owner or Parent NOT NULL";
+        List<Long> ancestors = new ArrayList<Long>();
+        ancestors.add(folder.getId());
+
+        GPFolder ancestorIth = folder.getParent();
+        while (ancestorIth != null) {
+            ancestors.add(ancestorIth.getId());
+            ancestorIth = ancestorIth.getParent();
+        }
+        return ancestors;
     }
 }

@@ -37,17 +37,14 @@ package org.geosdi.geoplatform.gui.client.model.memento;
 
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.observable.Observable;
-import org.geosdi.geoplatform.gui.observable.Observer;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoFolder extends AbstractMementoSave implements Observer {
+public class MementoFolder extends AbstractMementoSave<FolderTreeNode> {
 
     private static final long serialVersionUID = -2323528396954124089L;
-    private transient FolderTreeNode refFolder;
     private String folderName;
     private int zIndex;
     private long idElement;
@@ -63,7 +60,9 @@ public class MementoFolder extends AbstractMementoSave implements Observer {
         super(saveAction);
     }
 
-    public void convertParentWS() {
+    @Override
+    public void convertMementoToWs() {
+        super.convertMementoToWs();
         if (this.getRefParent() != null) {
             this.idParent = this.refParent.getId();
         }
@@ -99,21 +98,6 @@ public class MementoFolder extends AbstractMementoSave implements Observer {
 
     public void setzIndex(int zIndex) {
         this.zIndex = zIndex;
-    }
-
-    public FolderTreeNode getRefFolder() {
-        return refFolder;
-    }
-
-    public void setRefFolder(FolderTreeNode refFolder) {
-        this.refFolder = refFolder;
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        System.out.println("MementoFolder received observable notify");
-        this.idElement = ((Long) arg);
-        this.refFolder.setLoaded(true);
     }
 
     /**

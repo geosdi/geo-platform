@@ -41,35 +41,43 @@ import org.geosdi.geoplatform.gui.action.ISave;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoSaveAdd<T extends AbstractMementoSave> extends AbstractMementoSave {
+public class MementoSaveCheck extends AbstractMementoSave {
 
-    private static final long serialVersionUID = -3384768384840157219L;
-    private T addedElement;
+    private static final long serialVersionUID = -1097048315113513051L;
+    private boolean isChecked;
+    private transient AbstractMementoSave typeOfRemovedElement;
+    
+    public MementoSaveCheck(){}
 
-    public MementoSaveAdd() {
-    }
-
-    public MementoSaveAdd(ISave saveAction) {
+    public MementoSaveCheck(ISave saveAction) {
         super(saveAction);
     }
 
-    @Override
-    public void convertMementoToWs() {
-        super.convertMementoToWs();
-        addedElement.convertMementoToWs();
-    }
-    
     /**
-     * @return the addedElement
+     * @return the isChecked
      */
-    public T getAddedElement() {
-        return addedElement;
+    public boolean isChecked() {
+        return isChecked;
     }
 
     /**
-     * @param addedElement the addedElement to set
+     * @param isChecked the isChecked to set
      */
-    public void setAddedElement(T addedElement) {
-        this.addedElement = addedElement;
+    public void setIsChecked(boolean isChecked) {
+        this.isChecked = isChecked;
+    }
+
+    /**
+     * @return the typeOfRemovedElement
+     */
+    public AbstractMementoSave getTypeOfRemovedElement() {
+        return typeOfRemovedElement;
+    }
+
+    /**
+     * @param typeOfRemovedElement the typeOfRemovedElement to set
+     */
+    public void setTypeOfRemovedElement(AbstractMementoSave typeOfRemovedElement) {
+        this.typeOfRemovedElement = typeOfRemovedElement;
     }
 }

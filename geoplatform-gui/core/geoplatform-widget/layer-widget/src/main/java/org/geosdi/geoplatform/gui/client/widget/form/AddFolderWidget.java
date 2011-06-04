@@ -68,6 +68,7 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 
 /**
  *
@@ -201,12 +202,6 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
         GPLayerSaveCache.getInstance().add(mementoSaveAdd);
 
-        /* CODE TO REMOVE
-        if (parentDestination instanceof GPRootTreeNode) {
-        this.saveFolderForUser();
-        } else {
-        this.saveFolder();
-        }*/
         clearComponents();
         LayoutManager.get().getStatusMap().setStatus(
                 "Added folder on tree succesfully.",
@@ -239,69 +234,19 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
         return tree;
     }
 
-    /* CODE TO REMOVE
-    private void saveFolderForUser() {
-    this.layerService.saveFolderForUser(entity.getLabel(),
-    entity.getzIndex(), entity.getNumberOfDescendants(),
-    entity.isChecked(), new AsyncCallback<Long>() {
-    
-    @Override
-    public void onFailure(Throwable caught) {
-    setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
-    EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
-    parentDestination.remove(entity);
-    }
-    
-    @Override
-    public void onSuccess(Long result) {
-    setSaveStatus(EnumSaveStatus.STATUS_SAVE,
-    EnumSaveStatus.STATUS_MESSAGE_SAVE);
-    entity.setId(result);
-    clearComponents();
-    }
-    });
-    }
-    
-    private void saveFolder() {
-    this.layerService.saveFolder(
-    ((FolderTreeNode) parentDestination).getId(),
-    entity.getLabel(), entity.getzIndex(), entity.getNumberOfDescendants(), 
-    entity.isChecked(), new AsyncCallback<Long>() {
-    
-    @Override
-    public void onFailure(Throwable caught) {
-    setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
-    EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
-    parentDestination.getParent().remove(parentDestination);
-    GeoPlatformMessage.errorMessage("Add Folder Error",
-    "The folder with label : "
-    + ((GPBeanTreeModel) parentDestination.getParent()).getLabel()
-    + " was deleted on the server.");
-    }
-    
-    @Override
-    public void onSuccess(Long result) {
-    setSaveStatus(EnumSaveStatus.STATUS_SAVE,
-    EnumSaveStatus.STATUS_MESSAGE_SAVE);
-    entity.setId(result);
-    clearComponents();
-    }
-    });
-    }*/
     @Override
     public void executeSave(final MementoSaveAdd memento) {
         assert (memento.getAddedElement() instanceof MementoFolder) :
                 "AddFolderWidget on executeSave: Illegal argument passed";
-        final MementoFolder mementoAdded = (MementoFolder) memento.getAddedElement();
-        //The following two conversions are absolutely necessary!
-        mementoAdded.convertParentWS();
-        memento.convertMapToWs();
+        //Warning: The following conversion is absolutely necessary!
+        memento.convertMementoToWs();
 
-        this.layerService.saveFolderAndTreeModification(memento,
+        this.layerService.saveAddedFolderAndTreeModifications(memento,
                 new AsyncCallback<Long>() {
 
                     @Override
                     public void onFailure(Throwable caught) {
+                        LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
                         setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
                                 EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
                         GeoPlatformMessage.errorMessage("Save Folder Error",
@@ -318,58 +263,12 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
                         LayoutManager.get().getStatusMap().setStatus(
                                 "Folders saveded successfully.",
                                 EnumSearchStatus.STATUS_SEARCH.toString());
-                        //Attention: What happens when I delete a folder before save it???
-                        mementoAdded.getRefFolder().setId(result);
+                        //Warning: What happens when I delete a folder before save it???
+                        MementoFolder mementoAdded = (MementoFolder) memento.getAddedElement();
+                        mementoAdded.getRefBaseElement().setId(result);
+                        mementoAdded.getRefBaseElement().setLoaded(true);
                         LayerHandlerManager.fireEvent(peekCacheEvent);
-                        //TODO: Now we must launch an event to the cache for the next save operation
                     }
                 });
-        //TODO: rimuovere l'if-else ed il codice in esso contenuto, una volta up la parte 
-        // lato web service organizzare il salvataggio
-//        if (mementoAdded.getIdParent() == 0L) {
-//            this.layerService.saveFolderForUser(entity.getLabel(),
-//                    entity.getzIndex(), entity.getNumberOfDescendants(),
-//                    entity.isChecked(), new AsyncCallback<Long>() {
-//
-//                @Override
-//                public void onFailure(Throwable caught) {
-//                    setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
-//                            EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
-//                }
-//
-//                @Override
-//                public void onSuccess(Long result) {
-//                    setSaveStatus(EnumSaveStatus.STATUS_SAVE,
-//                            EnumSaveStatus.STATUS_MESSAGE_SAVE);
-//                    entity.setId(result);
-//                    clearComponents();
-//                }
-//            });
-//        } else {
-//            this.layerService.saveFolder(
-//                    ((FolderTreeNode) parentDestination).getId(),
-//                    entity.getLabel(), entity.getzIndex(), entity.getNumberOfDescendants(),
-//                    entity.isChecked(), new AsyncCallback<Long>() {
-//
-//                @Override
-//                public void onFailure(Throwable caught) {
-//                    setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
-//                            EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
-//                    parentDestination.getParent().remove(parentDestination);
-//                    GeoPlatformMessage.errorMessage("Add Folder Error",
-//                            "The folder with label : "
-//                            + ((GPBeanTreeModel) parentDestination.getParent()).getLabel()
-//                            + " was deleted on the server.");
-//                }
-//
-//                @Override
-//                public void onSuccess(Long result) {
-//                    setSaveStatus(EnumSaveStatus.STATUS_SAVE,
-//                            EnumSaveStatus.STATUS_MESSAGE_SAVE);
-//                    entity.setId(result);
-//                    clearComponents();
-//                }
-//            });
-//        }
     }
 }

@@ -90,6 +90,7 @@ public class VisitorPosition extends AbstractVisitTree
             oldParent.remove(changedElement);
             changedElement.setParent(parentDestination);
             parentDestination.insert(changedElement, newIndex);
+            this.updateNumberOfDescendants(oldParent, parentDestination);
             System.out.println("In FixPosition: returning without index changes"
                     + "for element: " + changedElement.getLabel());
             return;

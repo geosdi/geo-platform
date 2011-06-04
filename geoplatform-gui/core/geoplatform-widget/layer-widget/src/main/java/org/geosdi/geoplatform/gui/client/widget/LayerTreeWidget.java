@@ -216,15 +216,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
      * Enable Check Box on Tree
      */
     private void enableCheckChange() {
-        this.tree.addListener(Events.CheckChange,
-                new Listener<TreePanelEvent<GPBeanTreeModel>>() {
-
-                    @Override
-                    public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
-//                        System.out.println("Events.CheckChange from: " + be.getItem().getLabel());
-                        be.getItem().accept(visitorDisplay);
-                    }
-                });
+        this.tree.addListener(Events.CheckChange, new GPCheckListener(visitorDisplay));
     }
 
     /*

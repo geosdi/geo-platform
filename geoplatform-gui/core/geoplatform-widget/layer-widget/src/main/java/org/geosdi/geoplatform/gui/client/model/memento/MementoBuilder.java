@@ -36,26 +36,41 @@
 package org.geosdi.geoplatform.gui.client.model.memento;
 
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
+import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 public class MementoBuilder {
-    
+
     public static MementoFolder buildSaveFolderMemento(FolderTreeNode folder) {
         MementoFolder memento = new MementoFolder();
         if (folder.getId() != 0L) {
             memento.setIdElement(folder.getId());
         } else {
-            memento.setRefFolder(folder);
+            memento.setRefBaseElement(folder);
             folder.getObservable().addObserver(memento);
         }
         memento.setFolderName(folder.getLabel());
-        memento.setRefParent((folder.getParent() instanceof FolderTreeNode)? (FolderTreeNode)folder.getParent() : null);
+        memento.setRefParent((folder.getParent() instanceof FolderTreeNode) ? (FolderTreeNode) folder.getParent() : null);
         memento.setIsChecked(folder.isChecked());
         memento.setNumberOfDescendants(folder.getNumberOfDescendants());
         memento.setzIndex(folder.getzIndex());
+        return memento;
+    }
+
+    public static AbstractMementoSave generateTypeOfSaveMemento(GPBeanTreeModel element) {
+        AbstractMementoSave memento = null;
+        if (element instanceof FolderTreeNode) {
+            memento = new MementoFolder();
+        } else if (element instanceof VectorTreeNode) {
+            memento = new MementoVector();
+        } else if (element instanceof RasterTreeNode) {
+            memento = new MementoRaster();
+        }
         return memento;
     }
 }

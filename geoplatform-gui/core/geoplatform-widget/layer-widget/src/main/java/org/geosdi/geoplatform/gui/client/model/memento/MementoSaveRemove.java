@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.model.memento;
 
 import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.model.memento.IMemento;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -46,8 +45,7 @@ public class MementoSaveRemove extends AbstractMementoSave {
     
     private static final long serialVersionUID = 802906770383599380L;
 
-    private long idElementRemoved;
-    private IMemento<? extends AbstractMementoSave> typeOfRemovedElement;
+    private transient AbstractMementoSave typeOfRemovedElement;
 
     public MementoSaveRemove() {
     }
@@ -56,19 +54,12 @@ public class MementoSaveRemove extends AbstractMementoSave {
         super(saveAction);
     }
 
-    public long getIdElementRemoved() {
-        return idElementRemoved;
-    }
-
-    public void setIdElementRemoved(long idElementRemoved) {
-        this.idElementRemoved = idElementRemoved;
-    }
-
-    public IMemento<? extends AbstractMementoSave> getTypeOfRemovedElement() {
+    public AbstractMementoSave getTypeOfRemovedElement() {
         return typeOfRemovedElement;
     }
 
-    public void setTypeOfRemovedElement(IMemento<? extends AbstractMementoSave> typeOfRemovedElement) {
+    public void setTypeOfRemovedElement(AbstractMementoSave typeOfRemovedElement) {
         this.typeOfRemovedElement = typeOfRemovedElement;
     }
+
 }

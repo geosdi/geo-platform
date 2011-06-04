@@ -81,6 +81,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
         this.endPosition = super.getNextUnvisitedElement(newElement);
         this.rootElement = super.findRootElement(parentDestination);
         this.preorderTraversal();
+        this.folderDescendantMap.clear();
         this.updateNumberOfDescendants(parentDestination);
     }
 

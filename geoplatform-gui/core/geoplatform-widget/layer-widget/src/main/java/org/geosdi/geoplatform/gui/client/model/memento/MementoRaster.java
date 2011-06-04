@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.model.memento;
 
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.observable.Observable;
 import org.geosdi.geoplatform.gui.observable.Observer;
 
@@ -43,7 +44,7 @@ import org.geosdi.geoplatform.gui.observable.Observer;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoRaster extends AbstractMementoLayer implements Observer{
+public class MementoRaster extends AbstractMementoLayer<RasterTreeNode> implements Observer{
 
     
     private static final long serialVersionUID = 4343601977419367986L;
@@ -62,7 +63,7 @@ public class MementoRaster extends AbstractMementoLayer implements Observer{
 
     @Override
     public void update(Observable o, Object arg) {
-        super.setIdLayer((Long)arg);
+        super.setIdBaseElement((Long)arg);
     }
     
 }

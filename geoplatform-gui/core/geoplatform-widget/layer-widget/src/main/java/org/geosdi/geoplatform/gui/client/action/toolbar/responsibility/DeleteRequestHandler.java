@@ -38,10 +38,12 @@ package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import java.util.Iterator;
 import java.util.List;
+import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoBuilder;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDeleteElement;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.impl.map.event.HideLayerEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -52,9 +54,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class DeleteRequestHandler {
-
-    protected LayerRemoteAsync layerService = LayerRemote.Util.getInstance();
+public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
 
     protected TreePanel tree;
     private VisitorDeleteElement deleteVisitor = new VisitorDeleteElement();
@@ -87,11 +87,20 @@ public abstract class DeleteRequestHandler {
         for (Iterator<GPBeanTreeModel> it = visibleLayers.iterator(); it.hasNext();) {
             GPHandlerManager.fireEvent(new HideLayerEvent(((GPLayerBean) it.next())));
         }
+        MementoSaveRemove mementoSaveRemove = new MementoSaveRemove(this);
+        mementoSaveRemove.setRefBaseElement(element);
+        mementoSaveRemove.setTypeOfRemovedElement(MementoBuilder.generateTypeOfSaveMemento(element));
+
         this.deleteVisitor.deleteElement(element, parent, parent.indexOf(element));
         this.tree.getStore().remove(element);
-        
+
+        mementoSaveRemove.setDescendantMap(this.deleteVisitor.getFolderDescendantMap());
+        GPLayerSaveCache.getInstance().add(mementoSaveRemove);
         displayMessage();
     }
+
+    @Override
+    public abstract void executeSave(MementoSaveRemove memento);
 
     public abstract void processRequest();
 

@@ -38,6 +38,9 @@ package org.geosdi.geoplatform.gui.server;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveDragDrop;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -52,15 +55,36 @@ public interface ILayerService {
 //            throws GeoPlatformException;
     public ArrayList<GPFolderClientInfo> loadUserFolders(String userName)
             throws GeoPlatformException;
-    
+
 //    public ArrayList<GPBeanTreeModel> loadFolderElements(long folderId)
 //            throws GeoPlatformException;
     public ArrayList<IGPFolderElements> loadFolderElements(long folderId)
             throws GeoPlatformException;
 
-    public long saveFolderAndTreeModification(MementoSaveAdd memento)
+    public long saveAddedFolderAndTreeModifications(MementoSaveAdd memento)
             throws GeoPlatformException;
-    
+
+    public long saveAddedLayerAndTreeModifications(MementoSaveAdd memento)
+            throws GeoPlatformException;
+
+    public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento)
+            throws GeoPlatformException;
+
+    public boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento)
+            throws GeoPlatformException;
+
+    public boolean saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento)
+            throws GeoPlatformException;
+
+    public boolean saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento)
+            throws GeoPlatformException;
+
+    public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento)
+            throws GeoPlatformException;
+
+    public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento)
+            throws GeoPlatformException;
+
     public long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked)
             throws GeoPlatformException;
 

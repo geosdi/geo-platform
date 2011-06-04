@@ -39,6 +39,9 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveDragDrop;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
@@ -81,11 +84,6 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     }
 
     @Override
-    public long saveFolderAndTreeModification(MementoSaveAdd memento) throws GeoPlatformException {
-        return this.layerService.saveFolderAndTreeModification(memento);
-    }
-
-    @Override
     public long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
         return this.layerService.saveFolderForUser(folderName, position, numberOfDescendants, isChecked);
     }
@@ -99,5 +97,45 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     @Override
     public void deleteElement(long id, TreeElement elementType) throws GeoPlatformException {
         this.layerService.deleteElement(id, elementType);
+    }
+
+    @Override
+    public long saveAddedFolderAndTreeModifications(MementoSaveAdd memento) throws GeoPlatformException {
+        return this.layerService.saveAddedFolderAndTreeModifications(memento);
+    }
+    
+    @Override
+    public long saveAddedLayerAndTreeModifications(MementoSaveAdd memento) throws GeoPlatformException {
+        return this.layerService.saveAddedLayerAndTreeModifications(memento);
+    }
+
+    @Override
+    public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento) throws GeoPlatformException {
+        return this.layerService.saveDeletedFolderAndTreeModifications(memento);
+    }
+
+    @Override
+    public boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento) throws GeoPlatformException {
+        return this.layerService.saveDeletedLayerAndTreeModifications(memento);
+    }
+
+    @Override
+    public boolean saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException {
+        return this.layerService.saveDragAndDropLayerAndTreeModifications(memento);
+    }
+
+    @Override
+    public boolean saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException {
+        return this.layerService.saveDragAndDropFolderAndTreeModifications(memento);
+    }
+
+    @Override
+    public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException {
+        return this.layerService.saveCheckStatusFolderAndTreeModifications(memento);
+    }
+
+    @Override
+    public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException {
+        return this.layerService.saveCheckStatusLayerAndTreeModifications(memento);
     }
 }

@@ -41,6 +41,9 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveDragDrop;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -80,16 +83,71 @@ public interface LayerRemote extends RemoteService {
      */
     public ArrayList<IGPFolderElements> loadFolderElements(long folderId) throws GeoPlatformException;
 
-    
     /**
      * 
      * @param MementoSaveAdd
      * @return
      * @throws GeoPlatformException
      */
-    public long saveFolderAndTreeModification(MementoSaveAdd memento) throws GeoPlatformException;
+    public long saveAddedFolderAndTreeModifications(MementoSaveAdd memento) throws GeoPlatformException;
+
+    /**
+     * 
+     * @param MementoSaveAdd
+     * @return
+     * @throws GeoPlatformException
+     */
+    public long saveAddedLayerAndTreeModifications(MementoSaveAdd memento) throws GeoPlatformException;
 
     
+    /**
+     * 
+     * @param MementoSaveRemove
+     * @return
+     * @throws GeoPlatformException
+     */
+    public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento) throws GeoPlatformException;
+
+    /**
+     * 
+     * @param MementoSaveRemove
+     * @return
+     * @throws GeoPlatformException
+     */
+    public boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento) throws GeoPlatformException;
+
+    /**
+     * 
+     * @param MementoSaveDragDrop
+     * @return
+     * @throws GeoPlatformException
+     */
+    public boolean saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException;
+
+    /**
+     * 
+     * @param MementoSaveDragDrop
+     * @return
+     * @throws GeoPlatformException
+     */
+    public boolean saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException;
+
+    /**
+     * 
+     * @param MementoSaveCheck
+     * @return
+     * @throws GeoPlatformException
+     */
+    public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException;
+
+    /**
+     * 
+     * @param MementoSaveCheck
+     * @return
+     * @throws GeoPlatformException
+     */
+    public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException;
+
     /**
      * 
      * @param folderName

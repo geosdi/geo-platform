@@ -36,18 +36,20 @@
 package org.geosdi.geoplatform.gui.client.model.memento;
 
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public abstract class AbstractMementoLayer extends AbstractMementoSave {
+public abstract class AbstractMementoLayer<T extends GPLayerTreeModel> extends AbstractMementoSave<T> {
 
     private static final long serialVersionUID = -3151230290345781610L;
     private String layerName;
     private int zIndex;
-    private long idLayer;
+    private transient FolderTreeNode refParent;
     private long idFolderParent;
     private String abstractText;
     private String title;
@@ -66,6 +68,15 @@ public abstract class AbstractMementoLayer extends AbstractMementoSave {
     }
 
     public AbstractMementoLayer() {
+    }
+
+    @Override
+    public void convertMementoToWs() {
+        System.out.println("Converting for ws");
+        super.convertMementoToWs();
+        if (this.getRefParent() != null) {
+            this.idFolderParent = this.refParent.getId();
+        }
     }
 
     public String getAbstractText() {
@@ -173,16 +184,16 @@ public abstract class AbstractMementoLayer extends AbstractMementoSave {
     }
 
     /**
-     * @return the idLayer
+     * @return the refParent
      */
-    public long getIdLayer() {
-        return idLayer;
+    public FolderTreeNode getRefParent() {
+        return refParent;
     }
 
     /**
-     * @param idLayer the idLayer to set
+     * @param refParent the refParent to set
      */
-    public void setIdLayer(long idLayer) {
-        this.idLayer = idLayer;
+    public void setRefParent(FolderTreeNode refParent) {
+        this.refParent = refParent;
     }
 }

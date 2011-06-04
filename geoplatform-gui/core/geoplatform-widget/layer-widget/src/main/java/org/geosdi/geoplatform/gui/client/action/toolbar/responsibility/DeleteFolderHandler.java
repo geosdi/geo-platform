@@ -35,27 +35,30 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
+import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
+import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
+import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class DeleteFolderHandler extends DeleteRequestHandler implements ISave<MementoSaveRemove> {
+public class DeleteFolderHandler extends DeleteRequestHandler {
+
+    private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
 
     public DeleteFolderHandler(TreePanel theTree) {
         super(theTree);
@@ -93,28 +96,29 @@ public class DeleteFolderHandler extends DeleteRequestHandler implements ISave<M
     @Override
     public void displayMessage() {
         LayoutManager.get().getStatusMap().setStatus("The selected folder was deleted succesfully",
-                                    EnumSearchStatus.STATUS_SEARCH.toString());
+                EnumSearchStatus.STATUS_SEARCH.toString());
     }
 
     @Override
-    public void executeSave(MementoSaveRemove memento) {
-        assert (memento.getIdElementRemoved() != 0L) :
-                "DeleteFolderHandler on executeSave: Illegal argument passed";
-        this.layerService.deleteElement(
-                ((FolderTreeNode) tree.getSelectionModel().getSelectedItem()).getId(),
-                TreeElement.FOLDER, new AsyncCallback<Object>() {
+    public void executeSave(final MementoSaveRemove memento) {
+        memento.convertMementoToWs();
+        LayerRemote.Util.getInstance().saveDeletedFolderAndTreeModifications(memento, new AsyncCallback<Boolean>() {
 
             @Override
             public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage("Delete Folder",
-                        "An Error Occured while removing the Folder.");
+                LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
+                GeoPlatformMessage.errorMessage("Save Delete Operation Error",
+                        "Problems on saving the new tree state after deleting elements");
             }
 
             @Override
-            public void onSuccess(Object result) {
-                delete();
+            public void onSuccess(Boolean result) {
+                GPLayerSaveCache.getInstance().remove(memento);
+                LayoutManager.get().getStatusMap().setStatus(
+                        "Elements deleted successfully.",
+                        EnumSearchStatus.STATUS_SEARCH.toString());
+                LayerHandlerManager.fireEvent(peekCacheEvent);
             }
         });
     }
-
 }

@@ -39,6 +39,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveDragDrop;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 
@@ -47,16 +50,30 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElemen
  * @email  nazzareno.sileno@geosdi.org
  */
 public interface LayerRemoteAsync {
-    
+
     public void loadUserFolders(String userName,
             AsyncCallback<ArrayList<GPFolderClientInfo>> callback);
-    
+
     public void loadFolderElements(long folderId,
             AsyncCallback<ArrayList<IGPFolderElements>> callback);
-    
-    public void saveFolderAndTreeModification(MementoSaveAdd memento, AsyncCallback<Long> callback);
 
-    public void saveFolderForUser(String folderName, int position, int numberOfDescendants, 
+    public void saveAddedFolderAndTreeModifications(MementoSaveAdd memento, AsyncCallback<Long> callback);
+
+    public void saveAddedLayerAndTreeModifications(MementoSaveAdd memento, AsyncCallback<Long> callback);
+
+    public void saveDeletedFolderAndTreeModifications(MementoSaveRemove memento, AsyncCallback<Boolean> callback);
+
+    public void saveDeletedLayerAndTreeModifications(MementoSaveRemove memento, AsyncCallback<Boolean> callback);
+
+    public void saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento, AsyncCallback<Boolean> callback);
+
+    public void saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento, AsyncCallback<Boolean> callback);
+
+    public void saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento, AsyncCallback<Boolean> callback);
+
+    public void saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento, AsyncCallback<Boolean> callback);
+
+    public void saveFolderForUser(String folderName, int position, int numberOfDescendants,
             boolean isChecked, AsyncCallback<Long> callback);
 
     public void saveFolder(long idParentFolder, String folderName, int position,

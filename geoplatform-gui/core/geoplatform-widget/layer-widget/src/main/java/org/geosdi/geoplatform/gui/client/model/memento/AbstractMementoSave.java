@@ -42,15 +42,20 @@ import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.observable.Observable;
+import org.geosdi.geoplatform.gui.observable.Observer;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public abstract class AbstractMementoSave implements IMemento<ISave>, Serializable {
+public abstract class AbstractMementoSave<T extends GPBeanTreeModel> implements IMemento<ISave>, Serializable, Observer {
 
     private static final long serialVersionUID = 3466894382316001150L;
     private transient ISave saveAction;
+    private transient T refBaseElement;
+    private long idBaseElement;
     private transient Map<FolderTreeNode, Integer> descendantMap = new HashMap<FolderTreeNode, Integer>();
     private Map<Long, Integer> wsDescendantMap = new HashMap<Long, Integer>();
 
@@ -61,11 +66,14 @@ public abstract class AbstractMementoSave implements IMemento<ISave>, Serializab
     public AbstractMementoSave() {
     }
 
-    public void convertMapToWs() {
+    public void convertMementoToWs() {
         FolderTreeNode folderTmp = null;
         for (Iterator<FolderTreeNode> it = this.descendantMap.keySet().iterator(); it.hasNext();) {
             folderTmp = it.next();
             wsDescendantMap.put(folderTmp.getId(), this.descendantMap.get(folderTmp));
+        }
+        if (this.refBaseElement != null) {
+            this.idBaseElement = this.refBaseElement.getId();
         }
     }
 
@@ -103,5 +111,39 @@ public abstract class AbstractMementoSave implements IMemento<ISave>, Serializab
      */
     public void setWsDescendantMap(Map<Long, Integer> wsDescendantMap) {
         this.wsDescendantMap = wsDescendantMap;
+    }
+
+    /**
+     * @return the idBaseElement
+     */
+    public long getIdBaseElement() {
+        return idBaseElement;
+    }
+
+    /**
+     * @param idBaseElement the idBaseElement to set
+     */
+    public void setIdBaseElement(long idBaseElement) {
+        this.idBaseElement = idBaseElement;
+    }
+
+    /**
+     * @return the refBaseElement
+     */
+    public T getRefBaseElement() {
+        return refBaseElement;
+    }
+
+    /**
+     * @param refBaseElement the refBaseElement to set
+     */
+    public void setRefBaseElement(T refBaseElement) {
+        this.refBaseElement = refBaseElement;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println("Memento received observable notify");
+        this.idBaseElement = ((Long) arg);
     }
 }

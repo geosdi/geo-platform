@@ -36,7 +36,9 @@
 package org.geosdi.geoplatform.gui.client.model.visitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -58,6 +60,7 @@ public class VisitorDeleteElement extends AbstractVisitTree implements IVisitor 
     private int tmpIndex;
     private GPRootTreeNode rootElement;
     private boolean stopIterating;
+    private Map<FolderTreeNode, Integer> folderDescendantMap = new HashMap<FolderTreeNode, Integer>();
 
     public VisitorDeleteElement(GPRootTreeNode root) {
         this.rootElement = root;
@@ -73,6 +76,7 @@ public class VisitorDeleteElement extends AbstractVisitTree implements IVisitor 
         parentElementRemoved.remove(removedElement);
         this.preorderTraversal((removedElement instanceof FolderTreeNode)
                 ? ((FolderTreeNode) removedElement).getNumberOfDescendants() : 0);
+        this.folderDescendantMap.clear();
         this.updateNumberOfDescendants(parentElementRemoved, (removedElement instanceof FolderTreeNode)
                 ? ((FolderTreeNode) removedElement).getNumberOfDescendants() : 0);
     }
@@ -81,6 +85,7 @@ public class VisitorDeleteElement extends AbstractVisitTree implements IVisitor 
         if (parentElementRemoved instanceof FolderTreeNode) {
             ((FolderTreeNode) parentElementRemoved).setNumberOfDescendants(
                     ((FolderTreeNode) parentElementRemoved).getNumberOfDescendants() - 1 - numberOfDescendant);
+            this.getFolderDescendantMap().put((FolderTreeNode) parentElementRemoved, ((FolderTreeNode) parentElementRemoved).getNumberOfDescendants());
             System.out.println(parentElementRemoved.getLabel() + " has " + ((FolderTreeNode) parentElementRemoved).getNumberOfDescendants()
                     + " number of descendants.");
         }
@@ -155,4 +160,19 @@ public class VisitorDeleteElement extends AbstractVisitTree implements IVisitor 
     public void visitRaster(GPRasterBean raster) {
         this.visitLeaf(raster);
     }
+
+    /**
+     * @return the folderDescendantMap
+     */
+    public Map<FolderTreeNode, Integer> getFolderDescendantMap() {
+        return folderDescendantMap;
+    }
+
+    /**
+     * @param folderDescendantMap the folderDescendantMap to set
+     */
+    public void setFolderDescendantMap(Map<FolderTreeNode, Integer> folderDescendantMap) {
+        this.folderDescendantMap = folderDescendantMap;
+    }
+    
 }

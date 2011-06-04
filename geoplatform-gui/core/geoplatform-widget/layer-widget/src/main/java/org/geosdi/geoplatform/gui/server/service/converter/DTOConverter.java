@@ -37,14 +37,12 @@ package org.geosdi.geoplatform.gui.server.service.converter;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoFolder;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
@@ -186,6 +184,10 @@ public class DTOConverter {
             GPFolder parent = new GPFolder();
             parent.setId(memento.getIdParent());
             gpFolder.setParent(parent);
+        } else {
+            GPUser user = new GPUser();
+            user.setUsername("user_test_0");
+            gpFolder.setOwner(user);
         }
         gpFolder.setPosition(memento.getzIndex());
         /*TODO: Once implemented shared function you must set this property

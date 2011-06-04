@@ -65,7 +65,7 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
     public SaveTreeAction(TreePanel theTree) {
         super(theTree, BasicWidgetResources.ICONS.save(),
                 "Save Tree State");
-        displayEvent.setMessage("Save Folder On Service");
+        displayEvent.setMessage("Saving Operations On Service");
         GPLayerSaveCache.getInstance().getObservable().addObserver(this);
         LayerHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);
     }

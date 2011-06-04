@@ -39,12 +39,17 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
+import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
+import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
+import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 
 /**
  *
@@ -52,6 +57,8 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class DeleteLayerHandler extends DeleteRequestHandler {
+
+    private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
 
     public DeleteLayerHandler(TreePanel theTree) {
         super(theTree);
@@ -83,26 +90,36 @@ public class DeleteLayerHandler extends DeleteRequestHandler {
 
     @Override
     public void processRequest() {
-        this.layerService.deleteElement(
-                ((GPLayerTreeModel) tree.getSelectionModel().getSelectedItem()).getId(),
-                TreeElement.LAYER, new AsyncCallback<Object>() {
-
-            @Override
-            public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage("Delete Layer",
-                        "An Error Occured while removing the Layer.");
-            }
-
-            @Override
-            public void onSuccess(Object result) {
-                delete();
-            }
-        });
+        super.delete();
     }
 
     @Override
     public void displayMessage() {
         LayoutManager.get().getStatusMap().setStatus("The selected layer was deleted succesfully",
-                                    EnumSearchStatus.STATUS_SEARCH.toString());
+                EnumSearchStatus.STATUS_SEARCH.toString());
+    }
+
+    @Override
+    public void executeSave(final MementoSaveRemove memento) {
+        //Warning: The following conversion is absolutely necessary!
+        memento.convertMementoToWs();
+        LayerRemote.Util.getInstance().saveDeletedLayerAndTreeModifications(memento, new AsyncCallback<Boolean>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
+                GeoPlatformMessage.errorMessage("Save Delete Operation Error",
+                        "Problems on saving the new tree state after deleting layer");
+            }
+
+            @Override
+            public void onSuccess(Boolean result) {
+                GPLayerSaveCache.getInstance().remove(memento);
+                LayoutManager.get().getStatusMap().setStatus(
+                        "Layer deleted successfully.",
+                        EnumSearchStatus.STATUS_SEARCH.toString());
+                LayerHandlerManager.fireEvent(peekCacheEvent);
+            }
+        });
     }
 }

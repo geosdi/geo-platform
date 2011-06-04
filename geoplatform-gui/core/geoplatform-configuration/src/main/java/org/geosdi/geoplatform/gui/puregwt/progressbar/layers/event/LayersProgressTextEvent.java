@@ -46,6 +46,8 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.LayersProgressBarEv
  */
 public class LayersProgressTextEvent extends GenericProgressBarTextEvent<LayersProgressBarEventHandler> {
 
+    public LayersProgressTextEvent(){}
+    
     public LayersProgressTextEvent(String message) {
         super(message);
     }

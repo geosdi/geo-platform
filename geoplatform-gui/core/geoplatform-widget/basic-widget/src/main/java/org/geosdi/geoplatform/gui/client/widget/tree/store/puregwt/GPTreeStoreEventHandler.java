@@ -33,36 +33,23 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.puregwt.progressbar.event;
+package org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt;
 
-import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.puregwt.progressbar.GenericProgressBarEventHandler;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import java.util.List;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GenericProgressBarTextEvent<E extends GenericProgressBarEventHandler>
-        extends GwtEvent<E> {
+public interface GPTreeStoreEventHandler extends EventHandler {
 
-    private String message;
-    
-    public GenericProgressBarTextEvent(){}
+    Type<GPTreeStoreEventHandler> TYPE = new Type<GPTreeStoreEventHandler>();
 
-    public GenericProgressBarTextEvent(String message) {
-        this.message = message;
-    }
+    public void addRasterLayers(List<? extends GPLayerBean> layers);
 
-    /**
-     * @param message the message to set
-     */
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    @Override
-    protected void dispatch(GenericProgressBarEventHandler handler) {
-        handler.updateProgressBarText(message);
-    }
+    public void addVectorLayers(List<? extends GPLayerBean> layers);
 }

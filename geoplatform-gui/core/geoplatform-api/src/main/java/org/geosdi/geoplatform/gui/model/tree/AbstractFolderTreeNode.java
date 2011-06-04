@@ -35,8 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.model.tree;
 
+import com.extjs.gxt.ui.client.data.ModelData;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
-
 
 public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
 
@@ -50,5 +56,26 @@ public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
         visitor.visitFolder(this);
     }
 
+    /**
+     * The Folder Child as a Map
+     * 
+     * @return 
+     *          Map<String, GPLayerBean>
+     * 
+     */
+    public Map<String, GPLayerBean> getLayers() {
+        Map<String, GPLayerBean> childMap = new HashMap<String, GPLayerBean>();
 
+        List<ModelData> childList = super.getChildren();
+
+        for (Iterator<ModelData> it = childList.iterator(); it.hasNext();) {
+            ModelData model = it.next();
+
+            if (model instanceof GPLayerBean) {
+                childMap.put(((GPLayerBean) model).getLabel(), (GPLayerBean) model);
+            }
+        }
+
+        return childMap;
+    }
 }

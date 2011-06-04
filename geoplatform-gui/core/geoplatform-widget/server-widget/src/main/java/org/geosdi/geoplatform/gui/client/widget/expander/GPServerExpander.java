@@ -35,10 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.expander;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import org.geosdi.geoplatform.gui.client.widget.GridLayersWidget;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
@@ -51,6 +56,7 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayers
 public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeNode> {
 
     private GridLayersWidget gridLayers;
+    private List<GPLayerBean> layersToSend = new ArrayList<GPLayerBean>();
     private DisplayLayersProgressBarEvent displayEvent = new DisplayLayersProgressBarEvent(
             true);
 
@@ -63,8 +69,8 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
     @Override
     public void execute() {
         LayerHandlerManager.fireEvent(displayEvent);
-        System.out.println(
-                "TEST ELEMENTI NELLA FOLDER ****** " + this.selectedElement.getChildCount());
+        checkLayers();
+
     }
 
     @Override
@@ -77,5 +83,22 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
     @Override
     public boolean checkNode() {
         return ((AbstractFolderTreeNode) this.tree.getSelectionModel().getSelectedItem()).getId() == 0L;
+    }
+
+    private void checkLayers() {
+        this.layersToSend.clear();
+        List<GPLayerBean> selectedLayers = this.gridLayers.getSelectedItems();
+
+        Map<String, GPLayerBean> childMap = this.selectedElement.getLayers();
+
+        for (GPLayerBean gPLayerBean : selectedLayers) {
+            if (!childMap.containsKey(gPLayerBean.getLabel())) {
+                this.layersToSend.add(gPLayerBean);
+            }
+        }
+
+        System.out.println(
+                "TEST LAYERS DIMENSION ******************* " + layersToSend.size());
+
     }
 }

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tree;
 
-import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import com.extjs.gxt.ui.client.store.TreeStore;

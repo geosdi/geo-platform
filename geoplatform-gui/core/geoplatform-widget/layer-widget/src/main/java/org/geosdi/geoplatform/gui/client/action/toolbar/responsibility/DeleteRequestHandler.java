@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.MementoBuilder;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDeleteElement;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
-import org.geosdi.geoplatform.gui.impl.map.event.HideLayerEvent;
+import org.geosdi.geoplatform.gui.impl.map.event.RemoveLayerEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
@@ -85,7 +85,7 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
         GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
         List<GPBeanTreeModel> visibleLayers = this.visitorDispalyHide.getVisibleLayers();
         for (Iterator<GPBeanTreeModel> it = visibleLayers.iterator(); it.hasNext();) {
-            GPHandlerManager.fireEvent(new HideLayerEvent(((GPLayerBean) it.next())));
+            GPHandlerManager.fireEvent(new RemoveLayerEvent(((GPLayerBean) it.next())));
         }
         MementoSaveRemove mementoSaveRemove = new MementoSaveRemove(this);
         mementoSaveRemove.setRefBaseElement(element);

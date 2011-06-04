@@ -33,36 +33,47 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.puregwt.progressbar.event;
+package org.geosdi.geoplatform.gui.client.widget.store;
 
-import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.puregwt.progressbar.GenericProgressBarEventHandler;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.client.widget.tree.store.GenericTreeStoreWidget;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.LayersProgressTextEvent;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GenericProgressBarTextEvent<E extends GenericProgressBarEventHandler>
-        extends GwtEvent<E> {
+public class GPTreeStoreWidget extends GenericTreeStoreWidget {
 
-    private String message;
+    private LayersProgressTextEvent layersTextEvent = new LayersProgressTextEvent();
     
-    public GenericProgressBarTextEvent(){}
 
-    public GenericProgressBarTextEvent(String message) {
-        this.message = message;
-    }
-
-    /**
-     * @param message the message to set
-     */
-    public void setMessage(String message) {
-        this.message = message;
+    /**********************************************************/
+    /**HERE THE MEMENTO AND VISITOR PROPERTIES TO ADD LAYERS **/
+    /**********************************************************/
+    public GPTreeStoreWidget(GPTreePanel<? extends GPBeanTreeModel> theTree) {
+        super(theTree);
     }
 
     @Override
-    protected void dispatch(GenericProgressBarEventHandler handler) {
-        handler.updateProgressBarText(message);
+    public void addRasterLayers(List<? extends GPLayerBean> layers) {
+        this.changeProgressBarMessage("Load Raster Layers in the Store");
+        System.out.println("ADD RASTER ******************* " + layers);
+    }
+
+    @Override
+    public void addVectorLayers(List<? extends GPLayerBean> layers) {
+        this.changeProgressBarMessage("Load Vector Layers in the Store");
+        System.out.println("ADD VECTOR *********************** " + layers);
+    }
+
+    private void changeProgressBarMessage(String message) {
+        layersTextEvent.setMessage(message);
+        LayerHandlerManager.fireEvent(layersTextEvent);
     }
 }

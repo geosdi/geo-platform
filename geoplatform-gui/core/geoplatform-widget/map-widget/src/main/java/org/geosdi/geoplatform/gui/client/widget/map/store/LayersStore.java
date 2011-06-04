@@ -136,12 +136,7 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> {
     @Override
     public void hideLayer(GPLayerBean layerBean) {
         // TODO Auto-generated method stub
-        Layer layer = getLayer(layerBean);
-        if (layer != null) {
-            layer.setIsVisible(false);
-        }
-
-        LayerHandlerManager.fireEvent(new HideLegendEvent(layerBean));
+        this.visibilityLayerOff(layerBean);
     }
 
     /*
@@ -154,7 +149,16 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> {
     @Override
     public void removeLayer(GPLayerBean layerBean) {
         // TODO Auto-generated method stub
-        this.layers.remove(layerBean);
-//      F  this.legendWidget.hideLegenItem(layerBean);
+        this.visibilityLayerOff(layerBean);
+        this.layers.remove(layerBean);        
+    }
+    
+    private void visibilityLayerOff(GPLayerBean layerBean) {
+        Layer layer = getLayer(layerBean);
+        if (layer != null) {
+            layer.setIsVisible(false);
+        }
+
+        LayerHandlerManager.fireEvent(new HideLegendEvent(layerBean));
     }
 }

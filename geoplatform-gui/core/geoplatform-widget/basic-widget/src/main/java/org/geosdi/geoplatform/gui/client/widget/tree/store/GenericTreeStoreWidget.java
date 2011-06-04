@@ -33,36 +33,24 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.puregwt.progressbar.event;
+package org.geosdi.geoplatform.gui.client.widget.tree.store;
 
-import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.puregwt.progressbar.GenericProgressBarEventHandler;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.GPTreeStoreEventHandler;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GenericProgressBarTextEvent<E extends GenericProgressBarEventHandler>
-        extends GwtEvent<E> {
+public abstract class GenericTreeStoreWidget implements GPTreeStoreEventHandler {
 
-    private String message;
-    
-    public GenericProgressBarTextEvent(){}
+    protected GPTreePanel<? extends GPBeanTreeModel> tree;
 
-    public GenericProgressBarTextEvent(String message) {
-        this.message = message;
-    }
-
-    /**
-     * @param message the message to set
-     */
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    @Override
-    protected void dispatch(GenericProgressBarEventHandler handler) {
-        handler.updateProgressBarText(message);
+    public GenericTreeStoreWidget(GPTreePanel<? extends GPBeanTreeModel> theTree) {
+        this.tree = theTree;
+        LayerHandlerManager.addHandler(GPTreeStoreEventHandler.TYPE, this);
     }
 }

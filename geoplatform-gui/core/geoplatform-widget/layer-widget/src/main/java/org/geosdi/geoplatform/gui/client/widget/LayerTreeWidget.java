@@ -75,6 +75,7 @@ import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
 import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.client.widget.store.GPTreeStoreWidget;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
@@ -91,6 +92,8 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
     private LayerRemoteAsync layerService = LayerRemoteImpl.Util.getInstance();
+    
+    private GPTreeStoreWidget treeStore;
     private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(this.tree);
     TreePanelDragSource dragSource;
     private GPRootTreeNode root;
@@ -103,6 +106,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
         super();
         this.buildRoot();
         this.setTreePanelProperties();
+        this.treeStore = new GPTreeStoreWidget(this.tree); 
         //TODO: After toolbar implementation remove this method
         this.addMenuAddElement();
     }

@@ -33,36 +33,35 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.puregwt.progressbar.event;
+package org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import org.geosdi.geoplatform.gui.puregwt.progressbar.GenericProgressBarEventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.GPTreeStoreEventHandler;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GenericProgressBarTextEvent<E extends GenericProgressBarEventHandler>
-        extends GwtEvent<E> {
-
-    private String message;
+public class GPRasterAddStoreEvent extends GwtEvent<GPTreeStoreEventHandler> {
     
-    public GenericProgressBarTextEvent(){}
-
-    public GenericProgressBarTextEvent(String message) {
-        this.message = message;
-    }
-
-    /**
-     * @param message the message to set
-     */
-    public void setMessage(String message) {
-        this.message = message;
+    private List<GPRasterBean> layers;
+    
+    public GPRasterAddStoreEvent(List<GPRasterBean> theLayers) {
+        this.layers = theLayers;
     }
 
     @Override
-    protected void dispatch(GenericProgressBarEventHandler handler) {
-        handler.updateProgressBarText(message);
+    public Type<GPTreeStoreEventHandler> getAssociatedType() {
+        return GPTreeStoreEventHandler.TYPE;
     }
+
+    @Override
+    protected void dispatch(GPTreeStoreEventHandler handler) {
+        handler.addRasterLayers(layers);
+    }
+    
 }

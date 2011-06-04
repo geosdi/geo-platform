@@ -198,16 +198,69 @@ class LayerServiceImpl {
         }
 
         int oldPosition = layer.getPosition();
+        boolean result = layerDao.remove(layer);
+
         int decrement = 1;
         // Shift positions
         layerDao.updatePositionsLowerBound(oldPosition, -decrement);
         folderDao.updatePositionsLowerBound(oldPosition, -decrement);
 
-        boolean result = layerDao.remove(layer);
-
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
 
         return result;
+    }
+
+    public boolean saveCheckStatusLayerAndTreeModifications(long layerId, boolean isChecked)
+            throws ResourceNotFoundFault {
+        GPLayer layer = layerDao.find(layerId);
+        if (layer == null) {
+            throw new ResourceNotFoundFault("Layer not found", layerId);
+        }
+        assert (layer.getFolder() != null) : "Layer must be stored into a folder";
+
+        boolean checkSave = layerDao.persistCheckStatusLayer(layerId, isChecked);
+
+        // Iff isChecked is true, all the ancestor folders must be checked
+        if (isChecked && checkSave) {
+            Long[] layerAncestors = this.getIdsFolderAndAncestors(layer.getFolder());
+            return folderDao.persistCheckStatusFolders(true, layerAncestors);
+        }
+
+        return checkSave;
+    }
+
+    /**
+     * For Drag and Drop, fix the check of new ancestors for a layer checked
+     * 
+     * The old and new folders (parent) will be extraxted from DB
+     */
+    public boolean fixCheckStatusLayerAndTreeModifications(long layerId,
+            long oldFolderId, long newFolderId) throws ResourceNotFoundFault {
+        // Retrieve the layer
+        GPLayer layer = layerDao.find(layerId);
+        if (layer == null) {
+            throw new ResourceNotFoundFault("Layer not found", layerId);
+        }        
+        assert (layer.isChecked()) : "For Fix the check, the layer must be checked";
+
+        // Retrieve the folders parent
+        GPFolder oldFolder = folderDao.find(oldFolderId);
+        if (oldFolder == null) {
+            throw new ResourceNotFoundFault("Old Folder not found", oldFolderId);
+        }
+        GPFolder newFolder = folderDao.find(newFolderId);
+        if (newFolder == null) {
+            throw new ResourceNotFoundFault("New Folder not found", newFolderId);
+        }
+
+        // Test if the Check was valid (all the old ancestor must be checked)
+        GPFolder[] oldAncestors = this.getFolderAndAncestors(oldFolder);
+        if (this.isAllFoldersChecked(oldAncestors)) {
+            Long[] idNewAncestors = this.getIdsFolderAndAncestors(newFolder);
+            return folderDao.persistCheckStatusFolders(true, idNewAncestors);
+        }
+
+        return true;
     }
 
     public boolean saveDragAndDropLayerModifications(long idElementMoved, long idNewParent, int newPosition,
@@ -216,12 +269,12 @@ class LayerServiceImpl {
         if (layerMoved == null) {
             throw new ResourceNotFoundFault("Layer with id " + idElementMoved + " not found");
         }
-        
+
         GPFolder folderParent = folderDao.find(idNewParent);
         if (folderParent == null) {
             throw new ResourceNotFoundFault("Folder with id " + idNewParent + " not found");
         }
-        
+
         int delta = 0;
         if (layerMoved.getPosition() < newPosition) {
             // Move up
@@ -230,10 +283,10 @@ class LayerServiceImpl {
             // Move down
             delta = layerMoved.getPosition() - newPosition;
         }
-        
+
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
         // TODO update of checkedElementsMapData
-        
+
         return false;
     }
 
@@ -330,31 +383,21 @@ class LayerServiceImpl {
         return layers;
     }
 
-    public boolean saveCheckStatusLayer(long layerId, boolean isChecked)
+    private GPFolder[] getFolderAndAncestors(GPFolder folderChild)
             throws ResourceNotFoundFault {
-        GPLayer layer = layerDao.find(layerId);
-        if (layer == null) {
-            throw new ResourceNotFoundFault("Layer not found", layerId);
+        Long[] idFolderAndAncestors = this.getIdsFolderAndAncestors(folderChild);
+        GPFolder[] folderAndAncestors = folderDao.find(idFolderAndAncestors);
+        if (folderAndAncestors.length == 0) {
+            throw new ResourceNotFoundFault("Ancestors Folders of Layer not found");
         }
-
-        boolean checkSave = layerDao.persistCheckStatusLayer(layerId, isChecked);
-
-        // Iff isChecked is true, all the ancestor folders must be checked
-        if (isChecked && checkSave) {
-            assert (layer.getFolder() != null) : "Layer must have a folder as parent";
-
-            List<Long> layerAncestor = this.getFolderAndAncestorsId(layer.getFolder());
-            return folderDao.persistCheckStatusFolders(true, layerAncestor.toArray(new Long[layerAncestor.size()]));
-        }
-
-        return checkSave;
+        return folderAndAncestors;
     }
 
     /**
-     * 
      * @return List of his and ancestor folders ID
      */
-    private List<Long> getFolderAndAncestorsId(GPFolder folder) {
+    private Long[] getIdsFolderAndAncestors(GPFolder folder) {
+        assert (folder != null) : "Folder in getFolderAndAncestorsId must be NOT NULL";
         assert ((folder.getOwner() == null && folder.getParent() != null)
                 || (folder.getOwner() != null && folder.getParent() == null)) :
                 "getFolderAndAncestorsId - Illegal Argument Exception: folder must have or Owner or Parent NOT NULL";
@@ -366,6 +409,19 @@ class LayerServiceImpl {
             ancestors.add(ancestorIth.getId());
             ancestorIth = ancestorIth.getParent();
         }
-        return ancestors;
+        return ancestors.toArray(new Long[ancestors.size()]);
+    }
+
+    /**
+     * @return True if all folders are checked
+     */
+    private boolean isAllFoldersChecked(GPFolder... folders)
+            throws ResourceNotFoundFault {
+        for (GPFolder folder : folders) {
+            if (!folder.isChecked()) {
+                return false;
+            }
+        }
+        return true;
     }
 }

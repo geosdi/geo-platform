@@ -57,6 +57,11 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
         GPFolderDAO {
 
     @Override
+    public GPFolder[] find(Long[] ids) {
+        return super.find(ids);
+    }
+
+    @Override
     public void persist(GPFolder... folders) {
         super.persist(folders);
     }
@@ -205,7 +210,7 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
         if (folder.isChecked() != isChecked) {
             folder.setChecked(isChecked);
 
-            GPFolder folderUpdated = merge(folder);
+            GPFolder folderUpdated = this.merge(folder);
 
             if (folderUpdated.isChecked() != isChecked) {
                 return false;
@@ -214,13 +219,12 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
         return true;
     }
 
-    // TODO Improve
     @Override
     public boolean persistCheckStatusFolders(boolean isChecked, Long... idFolders) {
         for (Long longIth : idFolders) {
             boolean checkSave = this.persistCheckStatusFolder(longIth, isChecked);
             if (!checkSave) {
-                logger.debug("\n*** The Folder with ID \"{}\" is NOT changed ***", longIth);
+                logger.debug("\n*** The Folder with ID \"{}\" is has NOT changed the check***", longIth);
                 return false;
             }
         }

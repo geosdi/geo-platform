@@ -188,9 +188,9 @@ class FolderServiceImpl {
 
         int oldPosition = folder.getPosition();
         int decrement = folder.getNumberOfDescendants() + 1;
-        
+
         boolean result = folderDao.remove(folder);
-        
+
         // Shift positions (shift must be done only after removing folder)
         folderDao.updatePositionsLowerBound(oldPosition, -decrement);
         layerDao.updatePositionsLowerBound(oldPosition, -decrement);
@@ -199,6 +199,16 @@ class FolderServiceImpl {
 
         return result;
     }
+    
+    public boolean saveCheckStatusFolderAndTreeModifications(long folderId, boolean isChecked)
+            throws ResourceNotFoundFault {
+        GPFolder folder = folderDao.find(folderId);
+        if (folder == null) {
+            throw new ResourceNotFoundFault("Folder not found", folderId);
+        }
+
+        return folderDao.persistCheckStatusFolder(folderId, isChecked);
+    }    
 
     public boolean saveDragAndDropFolderModifications(long idElementMoved, long idNewParent, int newPosition,
             GPWebServiceMapData descendantsMapData, GPWebServiceMapData checkedElementsMapData) throws ResourceNotFoundFault {
@@ -429,15 +439,5 @@ class FolderServiceImpl {
         FolderList folders = new FolderList();
         folders.setList(foldersDTO);
         return folders;
-    }
-
-    public boolean saveCheckStatusFolder(long folderId, boolean isChecked)
-            throws ResourceNotFoundFault {
-        GPFolder folder = folderDao.find(folderId);
-        if (folder == null) {
-            throw new ResourceNotFoundFault("Folder not found", folderId);
-        }
-        
-        return folderDao.persistCheckStatusFolder(folderId, isChecked);
     }
 }

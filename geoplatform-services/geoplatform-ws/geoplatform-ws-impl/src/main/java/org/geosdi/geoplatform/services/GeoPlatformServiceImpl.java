@@ -327,8 +327,14 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public long saveDragAndDropFolderAndTreeModification(long idElementMoved, long idNewParent, int newPosition, 
-        GPWebServiceMapData descendantsMapData, GPWebServiceMapData checkedElementsMapData) throws ResourceNotFoundFault {
+    public boolean saveCheckStatusFolderAndTreeModifications(long folderId, boolean isChecked)
+            throws ResourceNotFoundFault {
+        return folderServiceDelegate.saveCheckStatusFolderAndTreeModifications(folderId, isChecked);
+    }
+
+    @Override
+    public long saveDragAndDropFolderAndTreeModification(long idElementMoved, long idNewParent, int newPosition,
+            GPWebServiceMapData descendantsMapData, GPWebServiceMapData checkedElementsMapData) throws ResourceNotFoundFault {
         return -1;
     }
 
@@ -370,12 +376,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     @Override
     public TreeFolderElements getChildrenElements(long folderId) {
         return folderServiceDelegate.getChildrenElements(folderId);
-    }
-
-    @Override
-    public boolean saveCheckStatusFolderAndTreeModifications(long folderId, boolean isChecked)
-            throws ResourceNotFoundFault {
-        return folderServiceDelegate.saveCheckStatusFolder(folderId, isChecked);
     }
     //</editor-fold>
 
@@ -470,8 +470,20 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public long saveDragAndDropLayerAndTreeModification(long idElementMoved, long idNewParent, int newPosition, 
-        GPWebServiceMapData descendantsMapData, GPWebServiceMapData checkedElementsMapData) throws ResourceNotFoundFault {
+    public boolean saveCheckStatusLayerAndTreeModifications(long layerId, boolean isChecked)
+            throws ResourceNotFoundFault {
+        return layerServiceDelegate.saveCheckStatusLayerAndTreeModifications(layerId, isChecked);
+    }
+
+    @Override
+    public boolean fixCheckStatusLayerAndTreeModifications(long layerId, long oldFolderId, long newFolderId)
+            throws ResourceNotFoundFault {
+        return layerServiceDelegate.fixCheckStatusLayerAndTreeModifications(layerId, oldFolderId, newFolderId);
+    }
+
+    @Override
+    public long saveDragAndDropLayerAndTreeModification(long idElementMoved, long idNewParent, int newPosition,
+            GPWebServiceMapData descendantsMapData, GPWebServiceMapData checkedElementsMapData) throws ResourceNotFoundFault {
         return -1;
     }
 
@@ -517,12 +529,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     @Override
     public GPLayerType getLayerType(long layerId) throws ResourceNotFoundFault {
         return layerServiceDelegate.getLayerType(layerId);
-    }
-
-    @Override
-    public boolean saveCheckStatusLayerAndTreeModifications(long layerId, boolean isChecked)
-            throws ResourceNotFoundFault {
-        return layerServiceDelegate.saveCheckStatusLayer(layerId, isChecked);
     }
     //</editor-fold>
 

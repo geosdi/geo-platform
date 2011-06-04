@@ -168,6 +168,13 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Put
+    @HttpResource(location = "/folder/{folderId}")
+    boolean saveCheckStatusFolderAndTreeModifications(
+            @WebParam(name = "folderId") long folderId,
+            @WebParam(name = "isChecked") boolean isChecked)
+            throws ResourceNotFoundFault;
+
+    @Put
     @HttpResource(location = "/layer/{idElementMoved}/{idNewParent}/{newPosition}/{descendantsMap}/{checkedElementsMapData}")
     long saveDragAndDropFolderAndTreeModification(
             @WebParam(name = "idElementMoved") long idElementMoved,
@@ -229,14 +236,7 @@ public interface GeoPlatformService {
     @WebResult(name = "ChildrenElement")
     TreeFolderElements getChildrenElements(@WebParam(name = "folderId") long folderId);
 
-    @Put
-    @HttpResource(location = "/folder/{folderId}")
-    boolean saveCheckStatusFolderAndTreeModifications(
-            @WebParam(name = "folderId") long folderId,
-            @WebParam(name = "isChecked") boolean isChecked)
-            throws ResourceNotFoundFault;
     //</editor-fold>
-
     //<editor-fold defaultstate="collapsed" desc="Folder / User">
     // ==========================================================================
     // === Folder / User
@@ -334,6 +334,21 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Put
+    @HttpResource(location = "/layer/{layerId}")
+    boolean saveCheckStatusLayerAndTreeModifications(
+            @WebParam(name = "layerId") long layerId,
+            @WebParam(name = "isChecked") boolean isChecked)
+            throws ResourceNotFoundFault;
+
+    @Put
+    @HttpResource(location = "/layer/{layerId}")
+    public boolean fixCheckStatusLayerAndTreeModifications(
+            @WebParam(name = "layerId") long layerId,
+            @WebParam(name = "oldFolderId") long oldFolderId,
+            @WebParam(name = "newFolderId") long newFolderId)
+            throws ResourceNotFoundFault;
+
+    @Put
     @HttpResource(location = "/layer/{idElementMoved}/{idNewParent}/{newPosition}/{descendantsMap}/{checkedElementsMapData}")
     long saveDragAndDropLayerAndTreeModification(
             @WebParam(name = "idElementMoved") long idElementMoved,
@@ -402,13 +417,6 @@ public interface GeoPlatformService {
     @Get
     @WebResult(name = "LayerType")
     GPLayerType getLayerType(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault;
-
-    @Put
-    @HttpResource(location = "/layer/{layerId}")
-    boolean saveCheckStatusLayerAndTreeModifications(
-            @WebParam(name = "layerId") long layerId,
-            @WebParam(name = "isChecked") boolean isChecked)
-            throws ResourceNotFoundFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="OWS">

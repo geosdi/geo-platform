@@ -52,6 +52,8 @@ public interface GPFolderDAO {
     public List<GPFolder> findAll();
 
     public GPFolder find(Long id);
+    
+    public GPFolder[] find(Long[] ids);
 
     public void persist(GPFolder... folders);
 

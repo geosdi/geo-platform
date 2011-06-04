@@ -119,7 +119,7 @@ public class LayerService implements ILayerService {
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(memento.getWsDescendantMap());
         long idSavedFolder = 0L;
         try {
-            idSavedFolder = this.geoPlatformServiceClient.saveFolderAndTreeModifications(gpFolder, map);
+            idSavedFolder = this.geoPlatformServiceClient.saveAddedFolderAndTreeModifications(gpFolder, map);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to save folder on LayerService: " + ex);
             throw new GeoPlatformException(ex);

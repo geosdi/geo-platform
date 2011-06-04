@@ -175,7 +175,7 @@ class LayerServiceImpl {
         return layerDao.remove(layer);
     }
 
-    public long saveLayerAndTreeModification(GPLayer layer, GPWebServiceMapData descendantsMapData) {
+    public long saveAddedLayerAndTreeModification(GPLayer layer, GPWebServiceMapData descendantsMapData) {
         int newPosition = layer.getPosition();
         int increment = 1;
         // Shift positions
@@ -189,7 +189,7 @@ class LayerServiceImpl {
         return layer.getId();
     }
 
-    public boolean deleteLayerAndTreeModifications(long id, GPWebServiceMapData descendantsMapData)
+    public boolean saveDeletedLayerAndTreeModifications(long id, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPLayer layer = layerDao.find(id);
         if (layer == null) {
@@ -207,6 +207,11 @@ class LayerServiceImpl {
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
 
         return result;
+    }
+
+    public boolean saveLayerDragAndDropModifications(long idElementMoved, long idNewParent, int newPosition,
+            GPWebServiceMapData descendantsMapData, GPWebServiceMapData checkedElementsMapData) {
+        return false;
     }
 
     public GPRasterLayer getRasterLayer(long layerId) throws ResourceNotFoundFault {

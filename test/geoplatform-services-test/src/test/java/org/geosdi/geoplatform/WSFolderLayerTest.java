@@ -267,7 +267,7 @@ public class WSFolderLayerTest extends ServiceTest {
             descendantsMapData.setDescendantsMap(map);
 
             // Adding new layer to user's root folder B
-            long idLayerToTest = geoPlatformService.saveLayerAndTreeModification(layerToTest, descendantsMapData);
+            long idLayerToTest = geoPlatformService.saveAddedLayerAndTreeModification(layerToTest, descendantsMapData);
             layerToTest.setId(idLayerToTest);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -294,7 +294,7 @@ public class WSFolderLayerTest extends ServiceTest {
             map.clear();
             map.put(idRootFolderB, 2);
             descendantsMapData.setDescendantsMap(map);
-            geoPlatformService.deleteLayerAndTreeModification(layerToTest.getId(), descendantsMapData);
+            geoPlatformService.saveDeletedLayerAndTreeModification(layerToTest.getId(), descendantsMapData);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
             Assert.assertEquals("Position of root folder A after removing", 7, rootFolderA.getPosition());

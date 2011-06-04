@@ -140,7 +140,7 @@ class FolderServiceImpl {
         return folderDao.remove(folder);
     }
 
-    public long saveFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
+    public long saveAddedFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
         assert (folder.getOwner() != null || folder.getParent() != null) :
                 this.getClass().getCanonicalName() + " on saveFolderAndTreeModifications - "
                 + "Illegal argument exception: User must not be null";
@@ -173,7 +173,7 @@ class FolderServiceImpl {
         return folder.getId();
     }
 
-    public boolean deleteFolderAndTreeModifications(long id, GPWebServiceMapData descendantsMapData)
+    public boolean saveDeletedFolderAndTreeModifications(long id, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder folder = folderDao.find(id);
         if (folder == null) {
@@ -193,14 +193,8 @@ class FolderServiceImpl {
         return result;
     }
 
-    public boolean dragEDropMoveUp(long idElementMoved, long idNewParent, int startPosition, int endPosition,
-            GPWebServiceMapData descendantsMapData) {
-//        GPFolder folder
-        return false;
-    }
-
-    public boolean dragEDropMoveDown(long idElementMoved, long idNewParent, int startPosition, int endPosition,
-            GPWebServiceMapData descendantsMapData) {
+    public boolean saveFolderDragAndDropModifications(long idElementMoved, long idNewParent, int newPosition,
+            GPWebServiceMapData descendantsMapData, GPWebServiceMapData checkedElementsMapData) {
         return false;
     }
 

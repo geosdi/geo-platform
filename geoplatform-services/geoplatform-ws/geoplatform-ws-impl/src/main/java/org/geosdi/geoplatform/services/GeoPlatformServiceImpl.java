@@ -316,14 +316,19 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public long saveFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
-        return folderServiceDelegate.saveFolderAndTreeModifications(folder, descendantsMapData);
+    public long saveAddedFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
+        return folderServiceDelegate.saveAddedFolderAndTreeModifications(folder, descendantsMapData);
     }
 
     @Override
-    public boolean deleteFolderAndTreeModification(long id, GPWebServiceMapData descendantsMapData)
+    public boolean saveDeletedFolderAndTreeModification(long id, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return folderServiceDelegate.deleteFolderAndTreeModifications(id, descendantsMapData);
+        return folderServiceDelegate.saveDeletedFolderAndTreeModifications(id, descendantsMapData);
+    }
+
+    @Override
+    public long saveFolderDragAndDropModifications(long idElementMoved, long idNewParent, int newPosition, GPWebServiceMapData descendantsMapData, GPWebServiceMapData checkedElementsMapData) {
+        return -1;
     }
 
     @Override
@@ -447,14 +452,19 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public long saveLayerAndTreeModification(GPLayer layer, GPWebServiceMapData descendantsMapData) {
-        return layerServiceDelegate.saveLayerAndTreeModification(layer, descendantsMapData);
+    public long saveAddedLayerAndTreeModification(GPLayer layer, GPWebServiceMapData descendantsMapData) {
+        return layerServiceDelegate.saveAddedLayerAndTreeModification(layer, descendantsMapData);
     }
 
     @Override
-    public boolean deleteLayerAndTreeModification(long id, GPWebServiceMapData descendantsMapData)
+    public boolean saveDeletedLayerAndTreeModification(long id, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return layerServiceDelegate.deleteLayerAndTreeModifications(id, descendantsMapData);
+        return layerServiceDelegate.saveDeletedLayerAndTreeModifications(id, descendantsMapData);
+    }
+
+    @Override
+    public long saveLayerDragAndDropModifications(long idElementMoved, long idNewParent, int newPosition, GPWebServiceMapData descendantsMapData, GPWebServiceMapData checkedElementsMapData) {
+        return -1;
     }
 
     @Override

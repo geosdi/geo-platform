@@ -156,16 +156,25 @@ public interface GeoPlatformService {
 
     @Put
     @HttpResource(location = "/folder/{descendantsMap}")
-    long saveFolderAndTreeModifications(
+    long saveAddedFolderAndTreeModifications(
             @WebParam(name = "folder") GPFolder folder,
             @WebParam(name = "descendantsMap") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault;
 
     @Delete
     @HttpResource(location = "/folder/{id}/{descendantsMap}")
-    boolean deleteFolderAndTreeModification(@WebParam(name = "id") long id,
+    boolean saveDeletedFolderAndTreeModification(@WebParam(name = "id") long id,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Put
+    @HttpResource(location = "/layer/{idElementMoved}/{idNewParent}/{newPosition}/{descendantsMap}/{checkedElementsMapData}")
+    long saveFolderDragAndDropModifications(
+            @WebParam(name = "idElementMoved") long idElementMoved,
+            @WebParam(name = "idNewParent") long idNewParent,
+            @WebParam(name = "newPosition") int newPosition,
+            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData,
+            @WebParam(name = "checkedElementsMapData") GPWebServiceMapData checkedElementsMapData);
 
     @Get
     @HttpResource(location = "/folders/{id}")
@@ -306,15 +315,24 @@ public interface GeoPlatformService {
 
     @Put
     @HttpResource(location = "/layer/{descendantsMap}")
-    long saveLayerAndTreeModification(
+    long saveAddedLayerAndTreeModification(
             @WebParam(name = "layer") GPLayer layer,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData);
 
     @Delete
     @HttpResource(location = "/layers/{id}/{descendantsMap}")
-    boolean deleteLayerAndTreeModification(@WebParam(name = "id") long id,
+    boolean saveDeletedLayerAndTreeModification(@WebParam(name = "id") long id,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Put
+    @HttpResource(location = "/layer/{idElementMoved}/{idNewParent}/{newPosition}/{descendantsMap}/{checkedElementsMapData}")
+    long saveLayerDragAndDropModifications(
+            @WebParam(name = "idElementMoved") long idElementMoved,
+            @WebParam(name = "idNewParent") long idNewParent,
+            @WebParam(name = "newPosition") int newPosition,
+            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData,
+            @WebParam(name = "checkedElementsMapData") GPWebServiceMapData checkedElementsMapData);
 
     /**
      * @return a raster layer.

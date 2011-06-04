@@ -175,13 +175,13 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault;
 
     @Put
-    @HttpResource(location = "/layer/{idElementMoved}/{idNewParent}/{newPosition}/{descendantsMap}/{checkedElementsMapData}")
-    long saveDragAndDropFolderAndTreeModification(
+    @HttpResource(location = "/layer/{idElementMoved}")
+    boolean saveDragAndDropFolderAndTreeModification(
             @WebParam(name = "idElementMoved") long idElementMoved,
             @WebParam(name = "idNewParent") long idNewParent,
+            @WebParam(name = "owner")  GPUser owner,
             @WebParam(name = "newPosition") int newPosition,
-            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData,
-            @WebParam(name = "checkedElementsMapData") GPWebServiceMapData checkedElementsMapData)
+            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault;
 
     @Get
@@ -349,13 +349,12 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault;
 
     @Put
-    @HttpResource(location = "/layer/{idElementMoved}/{idNewParent}/{newPosition}/{descendantsMap}/{checkedElementsMapData}")
-    long saveDragAndDropLayerAndTreeModification(
+    @HttpResource(location = "/layer/{idElementMoved}")
+    boolean saveDragAndDropLayerAndTreeModification(
             @WebParam(name = "idElementMoved") long idElementMoved,
             @WebParam(name = "idNewParent") long idNewParent,
             @WebParam(name = "newPosition") int newPosition,
-            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData,
-            @WebParam(name = "checkedElementsMapData") GPWebServiceMapData checkedElementsMapData)
+            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault;
 
     /**

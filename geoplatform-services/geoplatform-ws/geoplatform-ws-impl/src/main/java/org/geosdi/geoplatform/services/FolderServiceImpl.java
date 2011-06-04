@@ -140,6 +140,7 @@ class FolderServiceImpl {
         return folderDao.remove(folder);
     }
 
+    // Add @Transaction ?
     public long saveAddedFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault {
         assert ((folder.getOwner() == null && folder.getParent() != null)
@@ -179,6 +180,7 @@ class FolderServiceImpl {
         return folder.getId();
     }
 
+    // Add @Transaction ?
     public boolean saveDeletedFolderAndTreeModifications(long id, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder folder = folderDao.find(id);
@@ -208,11 +210,57 @@ class FolderServiceImpl {
         }
 
         return folderDao.persistCheckStatusFolder(folderId, isChecked);
-    }    
+    }
+    
+    // Add @Transaction ?
+    public boolean saveDragAndDropFolderModifications(long idFolderMoved, long idNewParent, GPUser owner,
+            int newPosition, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
+        GPFolder folderMoved = folderDao.find(idFolderMoved);
+        if (folderMoved == null) {
+            throw new ResourceNotFoundFault("Folder with id " + idFolderMoved + " not found");
+        }
 
-    public boolean saveDragAndDropFolderModifications(long idElementMoved, long idNewParent, int newPosition,
-            GPWebServiceMapData descendantsMapData, GPWebServiceMapData checkedElementsMapData) throws ResourceNotFoundFault {
-        return false;
+        int beginPosition = -1, endPosition = -1, delta = 0;
+        int oldPosition = folderMoved.getPosition();
+        if (oldPosition < newPosition) {
+            // Drag & Drop to up
+            beginPosition = oldPosition + 1;
+            endPosition = newPosition;
+            delta = -(folderMoved.getNumberOfDescendants() + 1);
+        } else if (newPosition < oldPosition) {
+            // Drag & Drop to down
+            beginPosition = newPosition;
+            endPosition = oldPosition - 1;
+            delta = folderMoved.getNumberOfDescendants() + 1;
+        }
+
+        GPFolder folderParent = folderDao.find(idNewParent);
+        if (folderParent == null) {
+            // Drag & Drop to the root
+            GPUser ownerDetail = userDao.findByUsername(owner.getUsername());
+            assert (ownerDetail != null) : "Unable to find user from DB with username " + owner.getUsername();
+            
+            folderMoved.setOwner(ownerDetail);
+        } else {
+            // Drag & Drop to a folder
+            folderMoved.setParent(folderParent);
+        }
+        
+        boolean resultUpdateOfLayers = true, resultUpdateOfFolders = true;
+        if (delta != 0) {
+            resultUpdateOfLayers = layerDao.updatePositionsRange(beginPosition, endPosition, delta);
+            resultUpdateOfFolders = folderDao.updatePositionsRange(beginPosition, endPosition, delta);
+        }
+        assert (resultUpdateOfLayers) : "Errors occured when updating position of layers";
+        assert (resultUpdateOfFolders) : "Errors occured when updating position of folders";
+
+        folderMoved.setPosition(newPosition);
+        folderDao.merge(folderMoved);
+
+        boolean resultUpdateAncestorsDescendants = folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
+        assert (resultUpdateAncestorsDescendants) : "Errors occured when updating ancestors and descendants on tree";
+
+        return resultUpdateOfLayers && resultUpdateOfFolders && resultUpdateAncestorsDescendants;
     }
 
     public FolderDTO getShortFolder(RequestById request) throws ResourceNotFoundFault {

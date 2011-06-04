@@ -91,7 +91,7 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
     @Override
     public boolean updatePositionsRange(int beginPosition, int endPosition,
             int deltaValue) {
-        assert (beginPosition < endPosition) : "beginPosition must be lesser than endPosition";
+        assert (beginPosition <= endPosition) : "beginPosition must be lesser than or equal endPosition";
         assert (deltaValue != 0) : "deltaValue does not be 0";
         // Select the layers of interest
         Search search = new Search();

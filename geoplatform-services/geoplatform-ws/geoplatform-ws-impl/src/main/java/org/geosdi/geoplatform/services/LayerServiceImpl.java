@@ -176,6 +176,7 @@ class LayerServiceImpl {
         return layerDao.remove(layer);
     }
 
+    // Add @Transaction ?
     public long saveAddedLayerAndTreeModification(GPLayer layer, GPWebServiceMapData descendantsMapData) {
         int newPosition = layer.getPosition();
         int increment = 1;
@@ -190,6 +191,7 @@ class LayerServiceImpl {
         return layer.getId();
     }
 
+    // Add @Transaction ?
     public boolean saveDeletedLayerAndTreeModifications(long id, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPLayer layer = layerDao.find(id);
@@ -209,6 +211,7 @@ class LayerServiceImpl {
 
         return result;
     }
+
 
     public boolean saveCheckStatusLayerAndTreeModifications(long layerId, boolean isChecked)
             throws ResourceNotFoundFault {
@@ -263,31 +266,58 @@ class LayerServiceImpl {
         return true;
     }
 
-    public boolean saveDragAndDropLayerModifications(long idElementMoved, long idNewParent, int newPosition,
-            GPWebServiceMapData descendantsMapData, GPWebServiceMapData checkedElementsMapData) throws ResourceNotFoundFault {
-        GPLayer layerMoved = layerDao.find(idElementMoved);
+    // Add @Transaction ?
+    public boolean saveDragAndDropLayerModifications(long idLayerMoved, long idNewParent, int newPosition,
+            GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
+        GPLayer layerMoved = layerDao.find(idLayerMoved);
         if (layerMoved == null) {
-            throw new ResourceNotFoundFault("Layer with id " + idElementMoved + " not found");
+            throw new ResourceNotFoundFault("Layer with id " + idLayerMoved + " not found");
         }
-
-        GPFolder folderParent = folderDao.find(idNewParent);
-        if (folderParent == null) {
+        assert(layerMoved.getFolder() != null) : "Layer specified must be stored into a folder";
+        
+//        GPFolder oldFolder = layerMoved.getFolder();
+//        if (layerMoved.getPosition() == newPosition) {
+//            if(oldFolder.getId() == idNewParent){
+//                return false;
+//            }
+//            // Fix parent and descendants assotiation
+//        }
+        
+        GPFolder newFolder = folderDao.find(idNewParent);
+        if (newFolder == null) {
             throw new ResourceNotFoundFault("Folder with id " + idNewParent + " not found");
         }
 
-        int delta = 0;
-        if (layerMoved.getPosition() < newPosition) {
-            // Move up
-            delta = newPosition - layerMoved.getPosition();
-        } else if (newPosition < layerMoved.getPosition()) {
-            // Move down
-            delta = layerMoved.getPosition() - newPosition;
+        int beginPosition = -1, endPosition = -1, delta = 0;
+        int oldPosition = layerMoved.getPosition();
+        if (oldPosition < newPosition) {
+            // Drag & Drop to up
+            beginPosition = oldPosition + 1;
+            endPosition = newPosition;
+            delta = -1;
+        } else if (newPosition < oldPosition) {
+            // Drag & Drop to down
+            beginPosition = newPosition;
+            endPosition = oldPosition - 1;
+            delta = 1;
         }
 
-        folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-        // TODO update of checkedElementsMapData
+        boolean resultUpdateOfLayers = true, resultUpdateOfFolders = true;
+        if(delta != 0){
+            resultUpdateOfLayers = layerDao.updatePositionsRange(beginPosition, endPosition, delta);
+            resultUpdateOfFolders = folderDao.updatePositionsRange(beginPosition, endPosition, delta);
+        }
+        assert(resultUpdateOfLayers) : "Errors occured when updating position of layers";
+        assert(resultUpdateOfFolders) : "Errors occured when updating position of folders";
 
-        return false;
+        layerMoved.setFolder(newFolder);
+        layerMoved.setPosition(newPosition);
+        layerDao.merge(layerMoved);
+        
+        boolean resultUpdateAncestorsDescendants = folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
+        assert(resultUpdateAncestorsDescendants) : "Errors occured when updating ancestors and descendants on tree";
+        
+        return resultUpdateOfLayers && resultUpdateOfFolders && resultUpdateAncestorsDescendants;
     }
 
     public GPRasterLayer getRasterLayer(long layerId) throws ResourceNotFoundFault {

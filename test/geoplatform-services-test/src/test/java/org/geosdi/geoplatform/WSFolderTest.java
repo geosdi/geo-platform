@@ -233,7 +233,6 @@ public class WSFolderTest extends ServiceTest {
 
     @Test
     public void testSaveAndDeleteFolderAndTreeModifications() {
-        String userNameUserToTest = "user_test_0";
         GPFolder folderToTest = null;
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
@@ -243,10 +242,7 @@ public class WSFolderTest extends ServiceTest {
 
             String nameFolderToTest = "folderToTest";
             folderToTest = super.createFolder(nameFolderToTest, 1, false);
-            
-            GPUser userToTest = new GPUser();
-            userToTest.setUsername(userNameUserToTest);
-            folderToTest.setOwner(userToTest);
+            folderToTest.setOwner(userTest);
 
             // Adding new folder to user's root folder B
             map.clear();

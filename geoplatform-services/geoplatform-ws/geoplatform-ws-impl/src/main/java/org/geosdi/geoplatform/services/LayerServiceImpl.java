@@ -210,8 +210,30 @@ class LayerServiceImpl {
         return result;
     }
 
-    public boolean saveLayerDragAndDropModifications(long idElementMoved, long idNewParent, int newPosition,
-            GPWebServiceMapData descendantsMapData, GPWebServiceMapData checkedElementsMapData) {
+    public boolean saveDragAndDropLayerModifications(long idElementMoved, long idNewParent, int newPosition,
+            GPWebServiceMapData descendantsMapData, GPWebServiceMapData checkedElementsMapData) throws ResourceNotFoundFault {
+        GPLayer layerMoved = layerDao.find(idElementMoved);
+        if (layerMoved == null) {
+            throw new ResourceNotFoundFault("Layer with id " + idElementMoved + " not found");
+        }
+        
+        GPFolder folderParent = folderDao.find(idNewParent);
+        if (folderParent == null) {
+            throw new ResourceNotFoundFault("Folder with id " + idNewParent + " not found");
+        }
+        
+        int delta = 0;
+        if (layerMoved.getPosition() < newPosition) {
+            // Move up
+            delta = newPosition - layerMoved.getPosition();
+        } else if (newPosition < layerMoved.getPosition()) {
+            // Move down
+            delta = layerMoved.getPosition() - newPosition;
+        }
+        
+        folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
+        // TODO update of checkedElementsMapData
+        
         return false;
     }
 

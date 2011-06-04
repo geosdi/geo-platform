@@ -140,7 +140,7 @@ class FolderServiceImpl {
         return folderDao.remove(folder);
     }
 
-    public long saveFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData)
+    public long saveAddedFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault {
         assert ((folder.getOwner() == null && folder.getParent() != null)
                 || (folder.getOwner() != null && folder.getParent() == null)) :
@@ -188,19 +188,20 @@ class FolderServiceImpl {
 
         int oldPosition = folder.getPosition();
         int decrement = folder.getNumberOfDescendants() + 1;
-        // Shift positions
+        
+        boolean result = folderDao.remove(folder);
+        
+        // Shift positions (shift must be done only after removing folder)
         folderDao.updatePositionsLowerBound(oldPosition, -decrement);
         layerDao.updatePositionsLowerBound(oldPosition, -decrement);
-
-        boolean result = folderDao.remove(folder);
 
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
 
         return result;
     }
 
-    public boolean saveFolderDragAndDropModifications(long idElementMoved, long idNewParent, int newPosition,
-            GPWebServiceMapData descendantsMapData, GPWebServiceMapData checkedElementsMapData) {
+    public boolean saveDragAndDropFolderModifications(long idElementMoved, long idNewParent, int newPosition,
+            GPWebServiceMapData descendantsMapData, GPWebServiceMapData checkedElementsMapData) throws ResourceNotFoundFault {
         return false;
     }
 

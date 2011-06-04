@@ -169,12 +169,13 @@ public interface GeoPlatformService {
 
     @Put
     @HttpResource(location = "/layer/{idElementMoved}/{idNewParent}/{newPosition}/{descendantsMap}/{checkedElementsMapData}")
-    long saveFolderDragAndDropModifications(
+    long saveDragAndDropFolderAndTreeModification(
             @WebParam(name = "idElementMoved") long idElementMoved,
             @WebParam(name = "idNewParent") long idNewParent,
             @WebParam(name = "newPosition") int newPosition,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData,
-            @WebParam(name = "checkedElementsMapData") GPWebServiceMapData checkedElementsMapData);
+            @WebParam(name = "checkedElementsMapData") GPWebServiceMapData checkedElementsMapData)
+            throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/folders/{id}")
@@ -334,12 +335,13 @@ public interface GeoPlatformService {
 
     @Put
     @HttpResource(location = "/layer/{idElementMoved}/{idNewParent}/{newPosition}/{descendantsMap}/{checkedElementsMapData}")
-    long saveLayerDragAndDropModifications(
+    long saveDragAndDropLayerAndTreeModification(
             @WebParam(name = "idElementMoved") long idElementMoved,
             @WebParam(name = "idNewParent") long idNewParent,
             @WebParam(name = "newPosition") int newPosition,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData,
-            @WebParam(name = "checkedElementsMapData") GPWebServiceMapData checkedElementsMapData);
+            @WebParam(name = "checkedElementsMapData") GPWebServiceMapData checkedElementsMapData)
+            throws ResourceNotFoundFault;
 
     /**
      * @return a raster layer.

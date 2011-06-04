@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.widget.form;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
-import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.KeyListener;
@@ -56,6 +55,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoBuilder;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
+import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
@@ -67,13 +67,15 @@ import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> implements ISave<MementoSaveAdd> {
+public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
+        implements ISave<MementoSaveAdd> {
 
     private LayerRemoteAsync layerService = LayerRemote.Util.getInstance();
     private TreePanel tree;
@@ -83,6 +85,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> implements
     private VisitorAddElement addVisitor;
     private GPBeanTreeModel parentDestination;
     private GPLayerExpander expander;
+    private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
 
     /**
      *@Constructor
@@ -192,7 +195,8 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> implements
         this.addVisitor.insertElement(this.entity, parentDestination, 0);
 
         MementoSaveAdd mementoSaveAdd = new MementoSaveAdd(this);
-        mementoSaveAdd.setAddedElement(MementoBuilder.buildSaveFolderMemento(this.entity));
+        mementoSaveAdd.setAddedElement(MementoBuilder.buildSaveFolderMemento(
+                this.entity));
         mementoSaveAdd.setDescendantMap(this.addVisitor.getFolderDescendantMap());
 
         GPLayerSaveCache.getInstance().add(mementoSaveAdd);
@@ -204,7 +208,8 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> implements
         this.saveFolder();
         }*/
         clearComponents();
-        LayoutManager.get().getStatusMap().setStatus("Added folder on tree succesfully.",
+        LayoutManager.get().getStatusMap().setStatus(
+                "Added folder on tree succesfully.",
                 EnumSearchStatus.STATUS_SEARCH.toString());
     }
 
@@ -292,29 +297,33 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode> implements
         mementoAdded.convertParentWS();
         memento.convertMapToWs();
 
-        this.layerService.saveFolderAndTreeModification(memento, new AsyncCallback<Long>() {
+        this.layerService.saveFolderAndTreeModification(memento,
+                new AsyncCallback<Long>() {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
-                        EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
-                GeoPlatformMessage.errorMessage("Save Folder Error", "Problems on saving the new tree state after folder creation");
-                System.out.println("Error on saving created folder: " + caught + " - "
-                        + caught.getMessage() + " - " + caught.getCause() + " - " + caught.getLocalizedMessage());
-                caught.printStackTrace();
-            }
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
+                                EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
+                        GeoPlatformMessage.errorMessage("Save Folder Error",
+                                "Problems on saving the new tree state after folder creation");
+                        System.out.println(
+                                "Error on saving created folder: " + caught + " - "
+                                + caught.getMessage() + " - " + caught.getCause() + " - " + caught.getLocalizedMessage());
+                        caught.printStackTrace();
+                    }
 
-            @Override
-            public void onSuccess(Long result) {
-                GPLayerSaveCache.getInstance().remove(memento);
-                LayoutManager.get().getStatusMap().setStatus(
-                                    "Folders saveded successfully.",
-                                    EnumSearchStatus.STATUS_SEARCH.toString());
-                //Attention: What happens when I delete a folder before save it???
-                mementoAdded.getRefFolder().setId(result);
-                //TODO: Now we must launch an event to the cache for the next save operation
-            }
-        });
+                    @Override
+                    public void onSuccess(Long result) {
+                        GPLayerSaveCache.getInstance().remove(memento);
+                        LayoutManager.get().getStatusMap().setStatus(
+                                "Folders saveded successfully.",
+                                EnumSearchStatus.STATUS_SEARCH.toString());
+                        //Attention: What happens when I delete a folder before save it???
+                        mementoAdded.getRefFolder().setId(result);
+                        LayerHandlerManager.fireEvent(peekCacheEvent);
+                        //TODO: Now we must launch an event to the cache for the next save operation
+                    }
+                });
         //TODO: rimuovere l'if-else ed il codice in esso contenuto, una volta up la parte 
         // lato web service organizzare il salvataggio
 //        if (mementoAdded.getIdParent() == 0L) {

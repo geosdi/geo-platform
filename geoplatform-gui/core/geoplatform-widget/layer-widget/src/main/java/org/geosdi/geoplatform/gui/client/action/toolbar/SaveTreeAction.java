@@ -35,50 +35,75 @@
  */
 package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.EventType;
-import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
-import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
+import org.geosdi.geoplatform.gui.client.model.memento.puregwt.GPPeekCacheEventHandler;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.observable.Observable;
 import org.geosdi.geoplatform.gui.observable.Observer;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class SaveTreeAction extends ToolbarLayerTreeAction implements Observer {
+public class SaveTreeAction extends ToolbarLayerTreeAction
+        implements GPPeekCacheEventHandler, Observer {
+
+    private DisplayLayersProgressBarEvent displayEvent = new DisplayLayersProgressBarEvent(
+            true);
+    private boolean visibiltyProgressBar;
 
     //TODO: Implement SaveTree oparetions
-    
     public SaveTreeAction(TreePanel theTree) {
         super(theTree, BasicWidgetResources.ICONS.save(),
                 "Save Tree State");
+        displayEvent.setMessage("Save Folder On Service");
         GPLayerSaveCache.getInstance().getObservable().addObserver(this);
+        LayerHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);
     }
 
     @Override
     public void componentSelected(ButtonEvent ce) {
-        if(GPLayerSaveCache.getInstance().peek() != null){
-            IMemento<ISave> memento = GPLayerSaveCache.getInstance().peek();
-            memento.getAction().executeSave(GPLayerSaveCache.getInstance().peek());
-        }
+        showProgressBar();
+        peek();
     }
 
     @Override
     public void update(Observable o, Object o1) {
         System.out.println("SaveTreeAction receive observable notify");
-        if(LayerEvents.SAVE_CACHE_NOT_EMPTY == ((EventType)o1)){
-            MediatorToolbarTreeAction.getInstance().enableActions("saveTreeState");
+        if (LayerEvents.SAVE_CACHE_NOT_EMPTY == ((EventType) o1)) {
+            super.setEnabled(true);
         } else {
-            MediatorToolbarTreeAction.getInstance().disableActions("saveTreeState");
+            super.setEnabled(false);
+        }
+    }
+
+    @Override
+    public void peek() {
+        if (GPLayerSaveCache.getInstance().peek() != null) {
+            IMemento<ISave> memento = GPLayerSaveCache.getInstance().peek();
+            memento.getAction().executeSave(
+                    GPLayerSaveCache.getInstance().peek());
+        } else {
+            this.displayEvent.setVisible(false);
+            LayerHandlerManager.fireEvent(this.displayEvent);
+            this.visibiltyProgressBar = false;
+        }
+    }
+    
+    private void showProgressBar() {
+        if(!visibiltyProgressBar) {
+            this.displayEvent.setVisible(true);
+            LayerHandlerManager.fireEvent(this.displayEvent);
+            this.visibiltyProgressBar = true;
         }
     }
 }

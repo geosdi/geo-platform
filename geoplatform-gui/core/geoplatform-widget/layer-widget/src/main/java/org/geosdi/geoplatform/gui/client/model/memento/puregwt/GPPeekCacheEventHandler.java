@@ -33,37 +33,20 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.progressbar;
+package org.geosdi.geoplatform.gui.client.model.memento.puregwt;
 
-import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.LayersProgressBarEventHandler;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
+
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPLayerProgressBar extends GeoPlatformProgressBar implements
-        LayersProgressBarEventHandler {
-
-    public GPLayerProgressBar() {
-        LayerHandlerManager.addHandler(LayersProgressBarEventHandler.TYPE, this);
-    }
-
-
-    @Override
-    public void showProgressBar(String message) {
-        super.createProgressBar("GPLayer ProgressBar", message, "Loading...");
-        this.box.show();
-    }
-
-    @Override
-    public void closeProgressBar() {
-        this.box.close();
-    }
-
-    @Override
-    public void updateProgressBarText(String message) {
-        this.box.updateText(message);
-    }
+public interface GPPeekCacheEventHandler extends EventHandler {
+    
+    Type<GPPeekCacheEventHandler> TYPE = new Type<GPPeekCacheEventHandler>();
+    
+    public void peek();
 }

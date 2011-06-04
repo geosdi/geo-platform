@@ -57,6 +57,7 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
     public GPServerExpander(GridLayersWidget theWidget) {
         super(theWidget.getTree());
         this.gridLayers = theWidget;
+        this.displayEvent.setMessage("Search Layers");
     }
 
     @Override

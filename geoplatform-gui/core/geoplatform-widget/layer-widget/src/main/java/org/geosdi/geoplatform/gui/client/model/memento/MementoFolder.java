@@ -113,6 +113,7 @@ public class MementoFolder extends AbstractMementoSave implements Observer {
     public void update(Observable o, Object arg) {
         System.out.println("MementoFolder received observable notify");
         this.idElement = ((Long) arg);
+        this.refFolder.setLoaded(true);
     }
 
     /**

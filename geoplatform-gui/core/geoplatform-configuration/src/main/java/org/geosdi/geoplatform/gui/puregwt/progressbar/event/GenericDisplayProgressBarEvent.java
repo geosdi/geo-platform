@@ -47,15 +47,30 @@ public abstract class GenericDisplayProgressBarEvent<E extends GenericProgressBa
         extends GwtEvent<E> {
 
     private boolean visible;
+    private String message;
 
     public GenericDisplayProgressBarEvent(boolean visible) {
         this.visible = visible;
     }
 
+    /**
+     * @param visible the visible to set
+     */
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    /**
+     * @param message the message to set
+     */
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     @Override
     protected void dispatch(GenericProgressBarEventHandler handler) {
         if (visible) {
-            handler.showProgressBar();
+            handler.showProgressBar(message != null ? this.message : "");
         } else {
             handler.closeProgressBar();
         }

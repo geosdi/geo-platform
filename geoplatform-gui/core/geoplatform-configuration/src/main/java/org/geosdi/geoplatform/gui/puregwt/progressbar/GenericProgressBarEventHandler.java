@@ -45,7 +45,7 @@ import com.google.gwt.event.shared.EventHandler;
 public interface GenericProgressBarEventHandler extends EventHandler {
 
 //    Type<GenericProgressBarEventHandler> TYPE = new Type<GenericProgressBarEventHandler>();
-    public void showProgressBar();
+    public void showProgressBar(String message);
 
     public void closeProgressBar();
 

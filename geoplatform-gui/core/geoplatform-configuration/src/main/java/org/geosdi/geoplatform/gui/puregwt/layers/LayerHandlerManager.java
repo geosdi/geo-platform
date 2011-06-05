@@ -52,7 +52,7 @@ public class LayerHandlerManager {
     private GPEventBus eventBus;
     private static LayerHandlerManager INSTANCE;
 
-    public LayerHandlerManager() {
+    private LayerHandlerManager() {
         this.eventBus = new GPEventBusImpl();
     }
 

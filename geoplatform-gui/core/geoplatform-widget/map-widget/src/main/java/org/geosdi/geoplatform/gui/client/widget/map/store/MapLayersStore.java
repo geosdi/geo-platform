@@ -152,12 +152,12 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
     @Override
     public void removeLayer(GPLayerBean layerBean) {
         // TODO Auto-generated method stub
-       Layer layer = getLayer(layerBean);
+        Layer layer = getLayer(layerBean);
         if (layer != null) {
             this.mapWidget.getMap().removeLayer(layer);
         }
-        this.layers.remove(layerBean);   
-        
+        this.layers.remove(layerBean);
+
         LayerHandlerManager.fireEvent(new HideLegendEvent(layerBean));
     }
 }

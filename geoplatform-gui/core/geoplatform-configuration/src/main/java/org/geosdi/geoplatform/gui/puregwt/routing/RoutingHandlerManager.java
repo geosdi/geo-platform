@@ -55,7 +55,7 @@ public class RoutingHandlerManager {
     private GPEventBus eventBus;
     private static RoutingHandlerManager INSTANCE;
 
-    public RoutingHandlerManager() {
+    private RoutingHandlerManager() {
         this.eventBus = new GPEventBusImpl();
     }
 

@@ -51,7 +51,7 @@ public class MapHandlerManager {
     private SimpleEventBus eventBus;
     private static MapHandlerManager INSTANCE;
 
-    public MapHandlerManager() {
+    private MapHandlerManager() {
         this.eventBus = new SimpleEventBus();
     }
 

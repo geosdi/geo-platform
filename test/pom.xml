@@ -53,10 +53,26 @@
 		</repository>
     </repositories>
     
-    <modules>
+    <!-- modules>
 		<module>geoplatform-services-test</module>
         <module>geoplatform-ui-test</module>
-	</modules>
+	</modules -->
+    
+     <profiles>
+        <profile>
+            <id>test.services</id>
+            <modules>
+                <module>geoplatform-services-test</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>test.ui</id>
+            <modules>
+                <module>geoplatform-ui-test</module>
+            </modules>
+        </profile>
+    </profiles>
+
 
 
 </project>

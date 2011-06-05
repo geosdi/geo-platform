@@ -49,7 +49,7 @@ public class GPHandlerManager {
     private GPEventBus eventBus;
     private static GPHandlerManager INSTANCE;
 
-    public GPHandlerManager() {
+    private GPHandlerManager() {
         this.eventBus = new GPEventBusImpl();
     }
 

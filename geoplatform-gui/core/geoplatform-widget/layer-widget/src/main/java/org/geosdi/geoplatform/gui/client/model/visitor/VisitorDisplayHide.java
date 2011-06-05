@@ -206,12 +206,12 @@ public class VisitorDisplayHide implements IVisitor {
         return condition;
     }
 
-    private List<GPBeanTreeModel> getVisibleLayers(List<ModelData> layers, List<GPBeanTreeModel> visibleLayers) {
+    private List<GPBeanTreeModel> getVisibleLayersOnTree(List<ModelData> layers, List<GPBeanTreeModel> visibleLayers) {
         for (Iterator<ModelData> it = layers.iterator(); it.hasNext();) {
             GPBeanTreeModel element = (GPBeanTreeModel) it.next();
             if (element instanceof FolderTreeNode && element.isChecked()
                     && element.getChildCount() != 0) {
-                this.getVisibleLayers(element.getChildren(), visibleLayers);
+                this.getVisibleLayersOnTree(element.getChildren(), visibleLayers);
             } else if (element.isChecked() && element instanceof GPLayerTreeModel) {
                 visibleLayers.add(element);
             }
@@ -219,10 +219,19 @@ public class VisitorDisplayHide implements IVisitor {
         return visibleLayers;
     }
 
-    public List<GPBeanTreeModel> getVisibleLayers() {
+    public List<GPBeanTreeModel> getVisibleLayersOnTree() {
         List<GPBeanTreeModel> visibleLayers = new ArrayList<GPBeanTreeModel>();
         GPRootTreeNode root = (GPRootTreeNode) this.treePanel.getStore().getRootItems().get(0);
         assert(root != null): "VisitorDisplayHide on getVisibleLayers(): Impossible to retrieve root element";
-        return this.getVisibleLayers(root.getChildren(), visibleLayers);
+        return this.getVisibleLayersOnTree(root.getChildren(), visibleLayers);
+    }
+    
+    public void hideLayers(GPBeanTreeModel element){
+        boolean isAllParentsChecked = this.isAllParentsChecked(element);
+        if(element instanceof FolderTreeNode && isAllParentsChecked){
+            this.hideChildrens((FolderTreeNode)element);
+        } else if (element.isChecked() && isAllParentsChecked){
+            GPHandlerManager.fireEvent(new HideLayerEvent((GPLayerBean)element));
+        }
     }
 }

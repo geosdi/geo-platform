@@ -60,24 +60,20 @@ import org.junit.Test;
 public class CXFServiceTest extends ServiceTest {
 
 //    private GeoPlatformWSClientEncrypted gpWSClientEncrypted;
-    // Server
-    private final String serverUrlGeoSDI = "http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
-    private final int numLayersGeoSDI = 251;
     private final String serverUrlTest = "http://map.serverNameTest.org";
     private long idServerTest = -1;
+    // Server geoSDI
+    private final String serverUrlGeoSDI = "http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
+    private final int numLayersGeoSDI = 251;    
 
     @Override
     public void setUp() throws Exception {
-        super.setUp();
-        logger.info("CXFServiceTest - SetUp --------------------------------> " + this.getClass().getName());
         // Insert Server
         idServerTest = this.createAndInsertServer(serverUrlTest, GPCababilityType.WMS);
     }
 
     @Override
     public void tearDown() {
-        super.tearDown();
-        logger.info("CXFServiceTest - tearDown --------------------------------> " + this.getClass().getName());
         // Delete Server
         this.deleteServer(idServerTest);
     }
@@ -161,9 +157,9 @@ public class CXFServiceTest extends ServiceTest {
     public void testGetCapabilities() throws ParseException,
             ResourceNotFoundFault {
         ServerDTO serverDTO = geoPlatformService.getShortServer(serverUrlGeoSDI);
-        
+
         Assert.assertNotNull(serverDTO);
-        
+
         LayerList layers = geoPlatformService.getCapabilities(new RequestById(serverDTO.getId()));
         logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", layers.getList().size());
     }

@@ -51,7 +51,8 @@ public class ServerDAOTest extends BaseDAOTest {
 
     @Test
     public void testServers() {
-        Assert.assertNotNull(serverDAO);
+        logger.trace("\n\t@@@ testServers @@@");
+        Assert.assertNotNull("serverDAO is NULL", super.serverDAO);
 
         removeAllServers();
 

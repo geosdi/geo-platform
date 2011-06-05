@@ -41,7 +41,9 @@ import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPStyleDAO;
@@ -69,7 +71,8 @@ import org.geosdi.geoplatform.responce.collection.StyleList;
  */
 class LayerServiceImpl {
 
-    final private static Logger LOGGER = Logger.getLogger(LayerServiceImpl.class);
+    final private static Logger logger = LoggerFactory.getLogger(LayerServiceImpl.class);
+    //
     private GPFolderDAO folderDao;
     private GPLayerDAO layerDao;
     private GPStyleDAO styleDao;
@@ -124,18 +127,8 @@ class LayerServiceImpl {
             throw new ResourceNotFoundFault("Layer not found", layer.getId());
         }
 
-//        orig.setParent(layer.getParent());
-        orig.setAbstractText(layer.getAbstractText());
-        orig.setBbox(layer.getBbox());
-        orig.setFolder(layer.getFolder());
         orig.setLayerInfo(layer.getLayerInfo());
-        orig.setLayerType(layer.getLayerType());
-        orig.setName(layer.getName());
-        orig.setPosition(layer.getPosition());
-        orig.setShared(layer.isShared());
-        orig.setSrs(layer.getSrs());
-        orig.setTitle(layer.getTitle());
-        orig.setUrlServer(layer.getUrlServer());
+        this.updateLayer(orig, layer);
 
         layerDao.merge(orig);
         return orig.getId();
@@ -148,18 +141,8 @@ class LayerServiceImpl {
             throw new ResourceNotFoundFault("Layer not found", layer.getId());
         }
 
-//        orig.setParent(layer.getParent());
-        orig.setAbstractText(layer.getAbstractText());
-        orig.setBbox(layer.getBbox());
-        orig.setFolder(layer.getFolder());
         orig.setGeometry(layer.getGeometry());
-        orig.setLayerType(layer.getLayerType());
-        orig.setName(layer.getName());
-        orig.setPosition(layer.getPosition());
-        orig.setShared(layer.isShared());
-        orig.setSrs(layer.getSrs());
-        orig.setTitle(layer.getTitle());
-        orig.setUrlServer(layer.getUrlServer());
+        this.updateLayer(orig, layer);
 
         layerDao.merge(orig);
         return orig.getId();
@@ -212,7 +195,6 @@ class LayerServiceImpl {
         return result;
     }
 
-
     public boolean saveCheckStatusLayerAndTreeModifications(long layerId, boolean isChecked)
             throws ResourceNotFoundFault {
         GPLayer layer = layerDao.find(layerId);
@@ -243,7 +225,7 @@ class LayerServiceImpl {
         GPLayer layer = layerDao.find(layerId);
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
-        }        
+        }
         assert (layer.isChecked()) : "For Fix the check, the layer must be checked";
 
         // Retrieve the folders parent
@@ -273,8 +255,8 @@ class LayerServiceImpl {
         if (layerMoved == null) {
             throw new ResourceNotFoundFault("Layer with id " + idLayerMoved + " not found");
         }
-        assert(layerMoved.getFolder() != null) : "Layer specified must be stored into a folder";
-        
+        assert (layerMoved.getFolder() != null) : "Layer specified must be stored into a folder";
+
 //        GPFolder oldFolder = layerMoved.getFolder();
 //        if (layerMoved.getPosition() == newPosition) {
 //            if(oldFolder.getId() == idNewParent){
@@ -282,7 +264,7 @@ class LayerServiceImpl {
 //            }
 //            // Fix parent and descendants assotiation
 //        }
-        
+
         GPFolder newFolder = folderDao.find(idNewParent);
         if (newFolder == null) {
             throw new ResourceNotFoundFault("Folder with id " + idNewParent + " not found");
@@ -303,20 +285,20 @@ class LayerServiceImpl {
         }
 
         boolean resultUpdateOfLayers = true, resultUpdateOfFolders = true;
-        if(delta != 0){
+        if (delta != 0) {
             resultUpdateOfLayers = layerDao.updatePositionsRange(beginPosition, endPosition, delta);
             resultUpdateOfFolders = folderDao.updatePositionsRange(beginPosition, endPosition, delta);
         }
-        assert(resultUpdateOfLayers) : "Errors occured when updating position of layers";
-        assert(resultUpdateOfFolders) : "Errors occured when updating position of folders";
+        assert (resultUpdateOfLayers) : "Errors occured when updating position of layers";
+        assert (resultUpdateOfFolders) : "Errors occured when updating position of folders";
 
         layerMoved.setFolder(newFolder);
         layerMoved.setPosition(newPosition);
         layerDao.merge(layerMoved);
-        
+
         boolean resultUpdateAncestorsDescendants = folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-        assert(resultUpdateAncestorsDescendants) : "Errors occured when updating ancestors and descendants on tree";
-        
+        assert (resultUpdateAncestorsDescendants) : "Errors occured when updating ancestors and descendants on tree";
+
         return resultUpdateOfLayers && resultUpdateOfFolders && resultUpdateAncestorsDescendants;
     }
 
@@ -387,6 +369,22 @@ class LayerServiceImpl {
         return layer.getLayerType();
     }
 
+    /**
+     * Updates all common fiels of raster and vector layers (GPLayer) 
+     */
+    private void updateLayer(GPLayer layerToUpdate, GPLayer layer) {
+        layerToUpdate.setAbstractText(layer.getAbstractText());
+        layerToUpdate.setBbox(layer.getBbox());
+        layerToUpdate.setFolder(layer.getFolder());
+        layerToUpdate.setLayerType(layer.getLayerType());
+        layerToUpdate.setName(layer.getName());
+        layerToUpdate.setPosition(layer.getPosition());
+        layerToUpdate.setShared(layer.isShared());
+        layerToUpdate.setSrs(layer.getSrs());
+        layerToUpdate.setTitle(layer.getTitle());
+        layerToUpdate.setUrlServer(layer.getUrlServer());
+    }
+
     // TODO Move to StyleList?
     // as constructor: StyleList list = new StyleList(List<GPStyle>);    
     private StyleList convertToStyleList(List<GPStyle> foundStyle) {
@@ -413,6 +411,9 @@ class LayerServiceImpl {
         return layers;
     }
 
+    /**
+     * @return Folder argument and his ancestor folders
+     */
     private GPFolder[] getFolderAndAncestors(GPFolder folderChild)
             throws ResourceNotFoundFault {
         Long[] idFolderAndAncestors = this.getIdsFolderAndAncestors(folderChild);
@@ -424,7 +425,7 @@ class LayerServiceImpl {
     }
 
     /**
-     * @return List of his and ancestor folders ID
+     * @return IDs of folder argument and his ancestor folders
      */
     private Long[] getIdsFolderAndAncestors(GPFolder folder) {
         assert (folder != null) : "Folder in getFolderAndAncestorsId must be NOT NULL";

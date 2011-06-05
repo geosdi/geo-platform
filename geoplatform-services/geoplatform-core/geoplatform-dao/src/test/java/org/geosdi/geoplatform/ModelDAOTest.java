@@ -48,6 +48,14 @@ public class ModelDAOTest extends BaseDAOTest {
 
     @Test
     public void testRemoveAll() throws ParseException {
+        logger.trace("\n\t@@@ testServers @@@");
+        Assert.assertNotNull("userDAO is NULL", super.userDAO);
+        Assert.assertNotNull("folderDAO is NULL", super.folderDAO);
+        Assert.assertNotNull("layerDAO is NULL", super.layerDAO);
+        Assert.assertNotNull("styleDAO is NULL", super.styleDAO);
+        Assert.assertNotNull("serverDAO is NULL", super.serverDAO);
+        Assert.assertNotNull("authorityDAO is NULL", super.authorityDAO);
+        
         removeAll();
 
         Assert.assertEquals("All Users doesn't REMOVED", 0, userDAO.findAll().size());

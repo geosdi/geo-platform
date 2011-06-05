@@ -50,7 +50,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * This test is not intended test the business logic but only the correctness
+ * This test is not intended to test the business logic but only the correctness
  * of the updates on DAO
  * 
  * @author Vincenzo Monteverde
@@ -109,6 +109,14 @@ public class GPDAOTest extends BaseDAOTest {
         logger.info("\n\t@@@ " + getClass().getSimpleName() + ".tearDown @@@");
         // Remove user and his folders and layers
         userDAO.remove(userPositionTest);
+    }
+
+    @Test
+    public void testCheckDAOs() {
+        Assert.assertNotNull("userDAO is NULL", super.userDAO);
+        Assert.assertNotNull("folderDAO is NULL", super.folderDAO);
+        Assert.assertNotNull("layerDAO is NULL", super.layerDAO);
+//        Assert.assertNotNull("styleDAO is NULL", super.styleDAO);
     }
 
     //<editor-fold defaultstate="collapsed" desc="Test of updatePositionsRange">
@@ -295,7 +303,7 @@ public class GPDAOTest extends BaseDAOTest {
                 folderAUpdated.getNumberOfDescendants(), folderA.getNumberOfDescendants());
 
         // No Update
-        descendantsMap = new HashMap<Long, Integer>();
+        descendantsMap.clear();
         check = folderDAO.updateAncestorsDescendants(descendantsMap);
         Assert.assertFalse("Update Ancestors Descendants should NOT be done (empty map)", check);
 

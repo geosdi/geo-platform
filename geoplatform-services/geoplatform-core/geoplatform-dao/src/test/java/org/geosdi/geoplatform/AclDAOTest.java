@@ -80,11 +80,14 @@ public class AclDAOTest extends BaseDAOTest {
     @Test
     public void testCheckAclDAOs() {
         logger.trace("\n\t@@@ testCheckAclDAOs @@@");
-        Assert.assertNotNull(classDAO);
-        Assert.assertNotNull(sidDAO);
-        Assert.assertNotNull(objectIdentityDAO);
-        Assert.assertNotNull(entryDAO);
-        Assert.assertNotNull(guiComponentDAO);
+        Assert.assertNotNull("userDAO is NULL", super.userDAO);
+        Assert.assertNotNull("authorityDAO is NULL", super.authorityDAO);
+        //
+        Assert.assertNotNull("classDAO is NULL", classDAO);
+        Assert.assertNotNull("sidDAO is NULL", sidDAO);
+        Assert.assertNotNull("objectIdentityDAO is NULL", objectIdentityDAO);
+        Assert.assertNotNull("entryDAO is NULL", entryDAO);
+        Assert.assertNotNull("guiComponentDAO is NULL", guiComponentDAO);
     }
 
     @Test

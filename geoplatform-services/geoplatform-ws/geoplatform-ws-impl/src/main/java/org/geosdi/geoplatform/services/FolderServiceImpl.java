@@ -41,29 +41,26 @@ import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPFolder;
-import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.RequestByUserFolder;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.responce.collection.FolderList;
 import org.geosdi.geoplatform.responce.FolderDTO;
-import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
-
-import java.util.Collections;
-import java.util.Map;
-import org.geosdi.geoplatform.responce.collection.AclMapAdapter.EntryAclMap;
+import org.geosdi.geoplatform.responce.collection.FolderList;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 
 /**
  * @author giuseppe
@@ -71,7 +68,8 @@ import org.slf4j.LoggerFactory;
  */
 class FolderServiceImpl {
 
-    private static Logger logger = LoggerFactory.getLogger(FolderServiceImpl.class);
+    final private static Logger logger = LoggerFactory.getLogger(FolderServiceImpl.class);
+    //
     private GPFolderDAO folderDao;
     private GPUserDAO userDao;
     private GPLayerDAO layerDao;
@@ -104,7 +102,7 @@ class FolderServiceImpl {
 
     //<editor-fold defaultstate="collapsed" desc="Folder">
     // ==========================================================================
-    // === Folder / User
+    // === Folder
     // ==========================================================================    
     public long insertFolder(GPFolder folder) {
         folderDao.persist(folder);
@@ -122,6 +120,7 @@ class FolderServiceImpl {
         orig.setName(folder.getName());
         orig.setPosition(folder.getPosition());
         orig.setShared(folder.isShared());
+        orig.setChecked(folder.isChecked());
         orig.setNumberOfDescendants(folder.getNumberOfDescendants());
 
         folderDao.merge(orig);
@@ -201,7 +200,7 @@ class FolderServiceImpl {
 
         return result;
     }
-    
+
     public boolean saveCheckStatusFolderAndTreeModifications(long folderId, boolean isChecked)
             throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(folderId);
@@ -211,7 +210,7 @@ class FolderServiceImpl {
 
         return folderDao.persistCheckStatusFolder(folderId, isChecked);
     }
-    
+
     // Add @Transaction ?
     public boolean saveDragAndDropFolderModifications(long idFolderMoved, long idNewParent, GPUser owner,
             int newPosition, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
@@ -239,13 +238,13 @@ class FolderServiceImpl {
             // Drag & Drop to the root
             GPUser ownerDetail = userDao.findByUsername(owner.getUsername());
             assert (ownerDetail != null) : "Unable to find user from DB with username " + owner.getUsername();
-            
+
             folderMoved.setOwner(ownerDetail);
         } else {
             // Drag & Drop to a folder
             folderMoved.setParent(folderParent);
         }
-        
+
         boolean resultUpdateOfLayers = true, resultUpdateOfFolders = true;
         if (delta != 0) {
             resultUpdateOfLayers = layerDao.updatePositionsRange(beginPosition, endPosition, delta);
@@ -296,8 +295,7 @@ class FolderServiceImpl {
         }
 
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-        FolderList list = convertToFolderList(foundFolder);
-        return list;
+        return convertToFolderList(foundFolder);
     }
 
     public FolderList getFolders() {
@@ -325,8 +323,7 @@ class FolderServiceImpl {
         searchCriteria.addFilter(parent);
 
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-        FolderList list = convertToFolderList(foundFolder);
-        return list;
+        return convertToFolderList(foundFolder);
     }
 
     public FolderList getChildrenFolders(long folderId) {
@@ -337,8 +334,7 @@ class FolderServiceImpl {
         searchCriteria.addFilter(parent);
 
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-        FolderList list = convertToFolderList(foundFolder);
-        return list;
+        return convertToFolderList(foundFolder);
     }
 
     public TreeFolderElements getChildrenElements(long folderId) {
@@ -477,9 +473,9 @@ class FolderServiceImpl {
     // as constructor: FolderList list = new FolderList(List<GPFolder>);
     private FolderList convertToFolderList(List<GPFolder> folderList) {
         List<FolderDTO> foldersDTO = new ArrayList<FolderDTO>(folderList.size());
-        for (GPFolder folderIth : folderList) {
-            FolderDTO folderIthDTO = new FolderDTO(folderIth);
-            foldersDTO.add(folderIthDTO);
+        for (GPFolder folder : folderList) {
+            FolderDTO folderDTO = new FolderDTO(folder);
+            foldersDTO.add(folderDTO);
         }
 
         Collections.sort(foldersDTO);

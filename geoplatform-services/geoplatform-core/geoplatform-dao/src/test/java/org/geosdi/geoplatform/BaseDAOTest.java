@@ -111,18 +111,6 @@ public abstract class BaseDAOTest {
     protected final String roleAdmin = "ROLE_ADMIN";
     protected final String roleUser = "ROLE_USER";
 
-    // This test is performed only after all test's subclasses were performed
-    @Test
-    public void testCheckDAOs() {
-        logger.trace("\n\t@@@ testCheckDAOs @@@");
-        Assert.assertNotNull(userDAO);
-        Assert.assertNotNull(folderDAO);
-        Assert.assertNotNull(layerDAO);
-        Assert.assertNotNull(styleDAO);
-        Assert.assertNotNull(serverDAO);
-        Assert.assertNotNull(authorityDAO);
-    }
-
     //<editor-fold defaultstate="collapsed" desc="Remove all data">
     protected void removeAll() {
         removeAllStyles();
@@ -279,7 +267,7 @@ public abstract class BaseDAOTest {
         // "my raster" ---> (#251) _RasterLayer_
         List<GPRasterLayer> layers = this.loadRasterLayer(--position, folderRaster);
         layerDAO.persist(layers.toArray(new GPRasterLayer[]{}));
-        
+
         position -= 250;
 
         // ---> "my raster" --> "IGM"

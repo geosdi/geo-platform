@@ -330,7 +330,7 @@ public abstract class GPLayer implements Serializable {
         str.append(", srs=").append(srs);
         str.append(", bbox=").append(bbox);
         str.append(", layerType=").append(layerType);
-        str.append(", checked=").append(checked);        
+        str.append(", checked=").append(checked);
         str.append(", folder.name=").append(getFolder().getName());
         str.append("(id=").append(getFolder().getId()).append(")");
         return str.toString();

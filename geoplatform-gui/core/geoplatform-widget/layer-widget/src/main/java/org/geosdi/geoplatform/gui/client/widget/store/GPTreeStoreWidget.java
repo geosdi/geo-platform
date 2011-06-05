@@ -35,12 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.store;
 
+import com.google.gwt.user.client.Timer;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.GenericTreeStoreWidget;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.LayersProgressTextEvent;
 
 /**
@@ -51,11 +53,14 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.LayersProgres
 public class GPTreeStoreWidget extends GenericTreeStoreWidget {
 
     private LayersProgressTextEvent layersTextEvent = new LayersProgressTextEvent();
-    
+    private DisplayLayersProgressBarEvent hideProgressBar = new DisplayLayersProgressBarEvent(
+            false);
 
     /**********************************************************/
     /**HERE THE MEMENTO AND VISITOR PROPERTIES TO ADD LAYERS **/
-    /**********************************************************/
+    /**********************************************************
+     * @param theTree 
+     */
     public GPTreeStoreWidget(GPTreePanel<? extends GPBeanTreeModel> theTree) {
         super(theTree);
     }
@@ -64,6 +69,18 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget {
     public void addRasterLayers(List<? extends GPLayerBean> layers) {
         this.changeProgressBarMessage("Load Raster Layers in the Store");
         System.out.println("ADD RASTER ******************* " + layers);
+
+        //TODO :
+        //     THIS CODE MUST BE CHANGED AND WILL BE SEND AN EVENT
+        //     THAT DELESECT LAYERS IN THE GRID AND CLOSE PROGRESS BAR
+        Timer t = new Timer() {
+
+            @Override
+            public void run() {
+                LayerHandlerManager.fireEvent(hideProgressBar);
+            }
+        };
+        t.schedule(5000);
     }
 
     @Override

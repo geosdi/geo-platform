@@ -44,16 +44,16 @@ import org.geosdi.geoplatform.gui.observable.Observer;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoRaster extends AbstractMementoLayer<RasterTreeNode> implements Observer{
+public class MementoRaster extends AbstractMementoLayer<RasterTreeNode>
+        implements Observer {
 
-    
     private static final long serialVersionUID = 4343601977419367986L;
-    
-    public MementoRaster() {}
-    
+
+    public MementoRaster() {
+    }
+
     //TODO: vedere come fornire il GPLayerInfo
     //private GPLayerInfo layerInfo;
-
     public MementoRaster(ISave saveAction) {
         super(saveAction);
 //        RasterTreeNode raster = new RasterTreeNode();
@@ -63,7 +63,6 @@ public class MementoRaster extends AbstractMementoLayer<RasterTreeNode> implemen
 
     @Override
     public void update(Observable o, Object arg) {
-        super.setIdBaseElement((Long)arg);
+        super.setIdBaseElement((Long) arg);
     }
-    
 }

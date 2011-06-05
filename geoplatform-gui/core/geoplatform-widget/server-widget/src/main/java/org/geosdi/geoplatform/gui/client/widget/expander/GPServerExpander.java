@@ -41,6 +41,8 @@ import java.util.Map;
 import org.geosdi.geoplatform.gui.client.widget.GridLayersWidget;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
+import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.GPRasterAddStoreEvent;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
@@ -97,8 +99,13 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
             }
         }
 
-        System.out.println(
-                "TEST LAYERS DIMENSION ******************* " + layersToStore.size());
+        if (this.layersToStore.isEmpty()) {
+            GeoPlatformMessage.alertMessage("Add Layers",
+                    "All Selected Layers have been already added to the node "
+                    + this.selectedElement.getLabel());
+            return;
+        } else 
+            LayerHandlerManager.fireEvent(new GPRasterAddStoreEvent(this.layersToStore));
 
     }
 }

@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  *
+ * @param <T> 
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */

@@ -71,7 +71,9 @@ import org.springframework.stereotype.Service;
 public class LayerService implements ILayerService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    
     private GeoPlatformService geoPlatformServiceClient;
+    
     @Autowired
     private DTOConverter dtoConverter;
 
@@ -112,7 +114,8 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
+    public long saveFolderForUser(String folderName, int position,
+            int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
         GPUser user = null;
         try {
             user = geoPlatformServiceClient.getUserDetailByName(new SearchRequest(
@@ -207,11 +210,14 @@ public class LayerService implements ILayerService {
     @Override
     public long saveAddedFolderAndTreeModifications(MementoSaveAdd memento) throws GeoPlatformException {
         //TODO: fill the gpFolder and the map converted in Long and Integer
-        GPFolder gpFolder = this.dtoConverter.convertMementoFolder((MementoFolder) memento.getAddedElement());
-        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(memento.getWsDescendantMap());
+        GPFolder gpFolder = this.dtoConverter.convertMementoFolder(
+                (MementoFolder) memento.getAddedElement());
+        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
+                memento.getWsDescendantMap());
         long idSavedFolder = 0L;
         try {
-            idSavedFolder = this.geoPlatformServiceClient.saveAddedFolderAndTreeModifications(gpFolder, map);
+            idSavedFolder = this.geoPlatformServiceClient.saveAddedFolderAndTreeModifications(
+                    gpFolder, map);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to save folder on LayerService: " + ex);
             throw new GeoPlatformException(ex);
@@ -225,11 +231,14 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento) throws GeoPlatformException {
-        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(memento.getWsDescendantMap());
+    public boolean saveDeletedFolderAndTreeModifications(
+            MementoSaveRemove memento) throws GeoPlatformException {
+        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
+                memento.getWsDescendantMap());
         boolean result = false;
         try {
-            result = this.geoPlatformServiceClient.saveDeletedFolderAndTreeModification(memento.getIdBaseElement(), map);
+            result = this.geoPlatformServiceClient.saveDeletedFolderAndTreeModification(
+                    memento.getIdBaseElement(), map);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to delete folder on LayerService: " + ex);
             throw new GeoPlatformException(ex);
@@ -241,11 +250,14 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento) throws GeoPlatformException {
-        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(memento.getWsDescendantMap());
+    public boolean saveDeletedLayerAndTreeModifications(
+            MementoSaveRemove memento) throws GeoPlatformException {
+        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
+                memento.getWsDescendantMap());
         boolean result = false;
         try {
-            result = this.geoPlatformServiceClient.saveDeletedLayerAndTreeModification(memento.getIdBaseElement(), map);
+            result = this.geoPlatformServiceClient.saveDeletedLayerAndTreeModification(
+                    memento.getIdBaseElement(), map);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to delete layer on LayerService: " + ex);
             throw new GeoPlatformException(ex);
@@ -257,7 +269,8 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public boolean saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException {
+    public boolean saveDragAndDropLayerAndTreeModifications(
+            MementoSaveDragDrop memento) throws GeoPlatformException {
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(memento.getWsDescendantMap());
         boolean result = false;
         try {
@@ -271,7 +284,8 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public boolean saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException {
+    public boolean saveDragAndDropFolderAndTreeModifications(
+            MementoSaveDragDrop memento) throws GeoPlatformException {
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(memento.getWsDescendantMap());
         boolean result = false;
         GPUser user = new GPUser();
@@ -287,24 +301,30 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException {
+    public boolean saveCheckStatusFolderAndTreeModifications(
+            MementoSaveCheck memento) throws GeoPlatformException {
         boolean result = false;
         try {
-            result = this.geoPlatformServiceClient.saveCheckStatusFolderAndTreeModifications(memento.getIdBaseElement(), memento.isChecked());
+            result = this.geoPlatformServiceClient.saveCheckStatusFolderAndTreeModifications(
+                    memento.getIdBaseElement(), memento.isChecked());
         } catch (ResourceNotFoundFault ex) {
-            this.logger.error("Failed to save checked folder on LayerService: " + ex);
+            this.logger.error(
+                    "Failed to save checked folder on LayerService: " + ex);
             throw new GeoPlatformException(ex);
         }
         return result;
     }
 
     @Override
-    public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException {
+    public boolean saveCheckStatusLayerAndTreeModifications(
+            MementoSaveCheck memento) throws GeoPlatformException {
         boolean result = false;
         try {
-            result = this.geoPlatformServiceClient.saveCheckStatusLayerAndTreeModifications(memento.getIdBaseElement(), memento.isChecked());
+            result = this.geoPlatformServiceClient.saveCheckStatusLayerAndTreeModifications(
+                    memento.getIdBaseElement(), memento.isChecked());
         } catch (ResourceNotFoundFault ex) {
-            this.logger.error("Failed to save checked layer on LayerService: " + ex);
+            this.logger.error(
+                    "Failed to save checked layer on LayerService: " + ex);
             throw new GeoPlatformException(ex);
         }
         return result;

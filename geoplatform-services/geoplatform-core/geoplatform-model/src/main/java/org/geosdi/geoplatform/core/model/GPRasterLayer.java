@@ -89,6 +89,7 @@ public class GPRasterLayer extends GPLayer {
     /**
      * @return the folder
      */
+    @Override
     public GPFolder getFolder() {
         return folder;
     }
@@ -97,6 +98,7 @@ public class GPRasterLayer extends GPLayer {
      * @param folder
      *            the bbox to folder
      */
+    @Override
     public void setFolder(GPFolder folder) {
         this.folder = folder;
     }
@@ -110,8 +112,7 @@ public class GPRasterLayer extends GPLayer {
     public String toString() {
         StringBuilder str = new StringBuilder("GPRasterLayer {");
         str.append(super.toString());
-        str.append(", layerInfo=").append(layerInfo);
-        str.append(", folder=").append(folder).append('}');
+        str.append(", layerInfo=").append(layerInfo).append("}");
         return str.toString();
     }
 }

@@ -96,6 +96,7 @@ public class GPVectorLayer extends GPLayer {
     /**
      * @return the folder
      */
+    @Override
     public GPFolder getFolder() {
         return folder;
     }
@@ -104,6 +105,7 @@ public class GPVectorLayer extends GPLayer {
      * @param folder
      *            the bbox to folder
      */
+    @Override
     public void setFolder(GPFolder folder) {
         this.folder = folder;
     }
@@ -117,8 +119,7 @@ public class GPVectorLayer extends GPLayer {
     public String toString() {
         StringBuilder str = new StringBuilder("GPVectorLayer {");
         str.append(super.toString());
-        str.append(", geometry=").append(geometry);
-        str.append(", folder=").append(folder).append('}');
+        str.append(", geometry=").append(geometry).append("}");
         return str.toString();
     }
 }

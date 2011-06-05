@@ -217,19 +217,30 @@ public class GPFolder implements Serializable {
     }
     //</editor-fold>
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
+        assert ((owner == null && parent != null) || (owner != null && parent == null)) :
+                "GPFolder.toString() - Folder must have or Owner or Parent (NOT NULL)";
+
         StringBuilder str = new StringBuilder("GPFolder {");
         str.append(" id=").append(id);
         str.append(", name=").append(name);
-        str.append(", parent.id=").append(
-                parent != null ? parent.getId() : "NULL");
-        str.append(", owner.id=").append(
-                owner != null ? owner.getId() : "NULL");
+        if (parent != null) {
+            str.append(", parent.name=").append(parent.getName());
+            str.append("(id=").append(parent.getId()).append(")");
+        } else { // owner != null
+            str.append(", owner.username=").append(owner.getUsername());
+            str.append("(id=").append(owner.getId()).append(")");
+        }
         str.append(", position=").append(position);
         str.append(", numberOfDescendants=").append(numberOfDescendants);
         str.append(", shared=").append(shared);
-        str.append(", checked=").append(checked).append('}');
+        str.append(", checked=").append(checked).append("}");
         return str.toString();
     }
 }

@@ -316,6 +316,9 @@ public abstract class GPLayer implements Serializable {
      */
     @Override
     public String toString() {
+        assert (getFolder() != null) :
+                "GPLayer.toString() - Layer must have always a folder parent (NOT NULL)";
+
         StringBuilder str = new StringBuilder();
         str.append("id=").append(id);
         str.append(", name=").append(name);
@@ -327,7 +330,9 @@ public abstract class GPLayer implements Serializable {
         str.append(", srs=").append(srs);
         str.append(", bbox=").append(bbox);
         str.append(", layerType=").append(layerType);
-        str.append(", checked=").append(checked);
+        str.append(", checked=").append(checked);        
+        str.append(", folder.name=").append(getFolder().getName());
+        str.append("(id=").append(getFolder().getId()).append(")");
         return str.toString();
     }
 }

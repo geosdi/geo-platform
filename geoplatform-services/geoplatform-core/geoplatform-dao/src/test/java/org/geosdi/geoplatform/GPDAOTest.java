@@ -38,7 +38,6 @@
 package org.geosdi.geoplatform;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -357,6 +356,48 @@ public class GPDAOTest extends BaseDAOTest {
         folderAUpdated = folderDAO.find(folderA.getId());
         Assert.assertEquals("Checked Folder NOT updated for (ID Folder NOT correct)",
                 folderAUpdated.isChecked(), beginIsChecked);
+    }
+
+    /**
+     * Test of persistCheckStatusFolderS method for Folders
+     */
+    @Test
+    public void testPersistCheckStatusFolderS() {
+        logger.trace("\n\t@@@ testPersistCheckStatusFolderS @@@");
+
+        Long[] ids = new Long[]{userFolder.getId(), folderA.getId(), folderB.getId()};
+
+        // Set all folders checked
+        boolean checkSave = folderDAO.persistCheckStatusFolders(true, ids);
+        Assert.assertTrue("Save Check Status Folder to true NOT done", checkSave);
+
+        GPFolder userFolderUpdated = folderDAO.find(userFolder.getId());
+        Assert.assertEquals("NOT checked Folder \"" + userFolder.getName() + "\"",
+                userFolderUpdated.isChecked(), true);
+
+        GPFolder folderAUpdated = folderDAO.find(folderA.getId());
+        Assert.assertEquals("NOT checked Folder \"" + folderA.getName() + "\"",
+                folderAUpdated.isChecked(), true);
+
+        GPFolder folderBUpdated = folderDAO.find(folderB.getId());
+        Assert.assertEquals("NOT checked Folder \"" + folderB.getName() + "\"",
+                folderBUpdated.isChecked(), true);
+
+        // Set all folders unchecked
+        checkSave = folderDAO.persistCheckStatusFolders(false, ids);
+        Assert.assertTrue("Save Check Status Folder to false NOT done", checkSave);
+
+        userFolderUpdated = folderDAO.find(userFolder.getId());
+        Assert.assertEquals("NOT unchecked Folder \"" + userFolder.getName() + "\"",
+                userFolderUpdated.isChecked(), false);
+
+        folderAUpdated = folderDAO.find(folderA.getId());
+        Assert.assertEquals("NOT unchecked Folder \"" + folderA.getName() + "\"",
+                folderAUpdated.isChecked(), false);
+
+        folderBUpdated = folderDAO.find(folderB.getId());
+        Assert.assertEquals("NOT unchecked Folder \"" + folderB.getName() + "\"",
+                folderBUpdated.isChecked(), false);
     }
 
     /**

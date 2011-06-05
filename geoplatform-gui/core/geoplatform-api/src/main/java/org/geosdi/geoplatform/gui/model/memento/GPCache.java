@@ -42,6 +42,7 @@ import java.util.LinkedList;
  * @email nazzareno.sileno@geosdi.org
  */
 public class GPCache<T> extends LinkedList<T> {
+
     private static final long serialVersionUID = 757371410507432854L;
 
 //    private Queue<T> queue = new LinkedList<T>();
@@ -57,5 +58,4 @@ public class GPCache<T> extends LinkedList<T> {
 //    public void add(T memento) {
 //        this.queue.add(memento);
 //    }
-    
 }

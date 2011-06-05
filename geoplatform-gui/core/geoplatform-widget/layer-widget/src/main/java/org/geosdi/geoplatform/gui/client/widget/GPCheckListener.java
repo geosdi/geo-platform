@@ -50,6 +50,7 @@ import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
@@ -70,16 +71,24 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
     @Override
     public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
         //System.out.println("Events.CheckChange from: " + be.getItem().getLabel());
-        boolean precedingState = be.getTreePanel().isChecked(be.getItem());
+        boolean isCacheable = this.visitorDisplay.isCacheableCheck();
         be.getItem().accept(this.visitorDisplay);
-        boolean followingState = be.getTreePanel().isChecked(be.getItem());
-        //ToDo: Controllare quando abilitare il salvataggio del check
-        if (precedingState != followingState) {
-            MementoSaveCheck mementoCheck = new MementoSaveCheck(this);
-            mementoCheck.setRefBaseElement(be.getItem());
-            mementoCheck.setIsChecked(be.getItem().isChecked());
-            mementoCheck.setTypeOfRemovedElement(MementoBuilder.generateTypeOfSaveMemento(be.getItem()));
-            GPLayerSaveCache.getInstance().add(mementoCheck);
+        if (isCacheable) {
+            IMemento<ISave> precedingMemento = null;
+            try {
+                precedingMemento = GPLayerSaveCache.getInstance().getLast();
+            } catch (Exception e) {
+            }
+            if (precedingMemento != null && precedingMemento instanceof MementoSaveCheck
+                    && ((MementoSaveCheck) precedingMemento).getRefBaseElement().equals(be.getItem())) {
+                GPLayerSaveCache.getInstance().remove(precedingMemento);
+            } else {
+                MementoSaveCheck mementoCheck = new MementoSaveCheck(this);
+                mementoCheck.setRefBaseElement(be.getItem());
+                mementoCheck.setIsChecked(be.getItem().isChecked());
+                mementoCheck.setTypeOfRemovedElement(MementoBuilder.generateTypeOfSaveMemento(be.getItem()));
+                GPLayerSaveCache.getInstance().add(mementoCheck);
+            }
         }
     }
 
@@ -106,7 +115,7 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
                 }
             });
         } else if (memento.getTypeOfRemovedElement() instanceof AbstractMementoLayer) {
-            LayerRemote.Util.getInstance().saveCheckStatusFolderAndTreeModifications(memento, new AsyncCallback<Boolean>() {
+            LayerRemote.Util.getInstance().saveCheckStatusLayerAndTreeModifications(memento, new AsyncCallback<Boolean>() {
 
                 @Override
                 public void onFailure(Throwable caught) {

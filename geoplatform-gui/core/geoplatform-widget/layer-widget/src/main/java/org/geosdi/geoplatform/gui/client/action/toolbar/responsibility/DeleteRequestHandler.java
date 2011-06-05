@@ -78,7 +78,7 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
     protected void delete() {
         GPBeanTreeModel element = (GPBeanTreeModel) tree.getSelectionModel().getSelectedItem();
         GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
-        this.visitorDispalyHide.hideLayers(element);
+        this.visitorDispalyHide.removeVisibleLayers(element);
         MementoSaveRemove mementoSaveRemove = new MementoSaveRemove(this);
         mementoSaveRemove.setRefBaseElement(element);
         mementoSaveRemove.setTypeOfRemovedElement(MementoBuilder.generateTypeOfSaveMemento(element));

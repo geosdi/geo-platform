@@ -273,7 +273,8 @@ public class LayerService implements ILayerService {
         try {
             result = this.geoPlatformServiceClient.saveCheckStatusFolderAndTreeModifications(memento.getIdBaseElement(), memento.isChecked());
         } catch (ResourceNotFoundFault ex) {
-            java.util.logging.Logger.getLogger(LayerService.class.getName()).log(Level.SEVERE, null, ex);
+            this.logger.error("Failed to save checked folder on LayerService: " + ex);
+            throw new GeoPlatformException(ex);
         }
         return result;
     }
@@ -284,7 +285,8 @@ public class LayerService implements ILayerService {
         try {
             result = this.geoPlatformServiceClient.saveCheckStatusLayerAndTreeModifications(memento.getIdBaseElement(), memento.isChecked());
         } catch (ResourceNotFoundFault ex) {
-            java.util.logging.Logger.getLogger(LayerService.class.getName()).log(Level.SEVERE, null, ex);
+            this.logger.error("Failed to save checked layer on LayerService: " + ex);
+            throw new GeoPlatformException(ex);
         }
         return result;
     }

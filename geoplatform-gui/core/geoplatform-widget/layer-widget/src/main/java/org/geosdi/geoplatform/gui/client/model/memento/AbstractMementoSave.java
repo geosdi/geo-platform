@@ -67,6 +67,7 @@ public abstract class AbstractMementoSave<T extends GPBeanTreeModel> implements 
     }
 
     public void convertMementoToWs() {
+        System.out.println("Converting abstract memento to Ws");
         FolderTreeNode folderTmp = null;
         for (Iterator<FolderTreeNode> it = this.descendantMap.keySet().iterator(); it.hasNext();) {
             folderTmp = it.next();

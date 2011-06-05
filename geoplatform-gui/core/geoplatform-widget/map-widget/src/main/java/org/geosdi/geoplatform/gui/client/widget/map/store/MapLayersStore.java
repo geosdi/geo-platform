@@ -134,7 +134,6 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     @Override
     public void hideLayer(GPLayerBean layerBean) {
-        // TODO Auto-generated method stub
         Layer layer = getLayer(layerBean);
         if (layer != null) {
             layer.setIsVisible(false);

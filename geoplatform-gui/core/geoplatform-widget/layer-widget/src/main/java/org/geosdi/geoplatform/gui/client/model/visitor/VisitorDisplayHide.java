@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.impl.map.event.DisplayLayerMapEvent;
 import org.geosdi.geoplatform.gui.impl.map.event.HideLayerMapEvent;
+import org.geosdi.geoplatform.gui.impl.map.event.RemoveLayerMapEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
@@ -63,6 +64,7 @@ public class VisitorDisplayHide implements IVisitor {
     private TreePanel treePanel;
     private boolean isInternalFolderCheck;
     private boolean isInternalLeafCheck;
+    private boolean isCacheableCheck = true;
 
     public VisitorDisplayHide(TreePanel treePanel) {
         this.treePanel = treePanel;
@@ -113,6 +115,7 @@ public class VisitorDisplayHide implements IVisitor {
     }
 
     private void setParentsFolderChecked(GPBeanTreeModel element) {
+        this.isCacheableCheck = false;
         GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
         if (!parent.isChecked() && !(parent instanceof GPRootTreeNode)) {
             this.isInternalFolderCheck = true;
@@ -134,15 +137,16 @@ public class VisitorDisplayHide implements IVisitor {
         if (!(parent instanceof GPRootTreeNode)) {
             this.setParentsFolderChecked(parent);
         }
+        this.isCacheableCheck = true;
     }
 
     private void hideChildrens(AbstractFolderTreeNode folder) {
-        for (Object element : folder.getChildren()) {
-            GPBeanTreeModel child = (GPBeanTreeModel) element;
+        for (Iterator it = folder.getChildren().iterator(); it.hasNext();) {
+            GPBeanTreeModel child = (GPBeanTreeModel) it.next();
             if (child instanceof GPLayerBean && child.isChecked()) {
-                GPHandlerManager.fireEvent(new HideLayerMapEvent(((GPLayerBean) element)));
+                GPHandlerManager.fireEvent(new HideLayerMapEvent(((GPLayerBean) child)));
             } else if (child instanceof FolderTreeNode && child.isChecked()) {
-                hideChildrens((AbstractFolderTreeNode) child);
+                this.hideChildrens((AbstractFolderTreeNode) child);
             }
         }
     }
@@ -159,6 +163,7 @@ public class VisitorDisplayHide implements IVisitor {
     }
 
     public void realignViewState(GPBeanTreeModel element) {
+        this.isCacheableCheck = false;
         System.out.println("Realign view");
         if (element.isChecked()) {
             this.treePanel.setExpanded(element, true, true);
@@ -174,9 +179,11 @@ public class VisitorDisplayHide implements IVisitor {
                 this.realignViewState(gpBean);
             }
         }
+        this.isCacheableCheck = true;
     }
 
     public void enableCheckedComponent(GPBeanTreeModel element) {
+        this.isCacheableCheck = false;
         for (ModelData item : element.getChildren()) {
             GPBeanTreeModel gpBean = (GPBeanTreeModel) item;
             if (gpBean.isChecked() && (gpBean instanceof FolderTreeNode || this.isAllParentsChecked(gpBean))) {
@@ -191,6 +198,7 @@ public class VisitorDisplayHide implements IVisitor {
                 this.isInternalLeafCheck = false;
             }
         }
+        this.isCacheableCheck = true;
     }
 
     private boolean isAllParentsChecked(GPBeanTreeModel element) {
@@ -222,16 +230,34 @@ public class VisitorDisplayHide implements IVisitor {
     public List<GPBeanTreeModel> getVisibleLayersOnTree() {
         List<GPBeanTreeModel> visibleLayers = new ArrayList<GPBeanTreeModel>();
         GPRootTreeNode root = (GPRootTreeNode) this.treePanel.getStore().getRootItems().get(0);
-        assert(root != null): "VisitorDisplayHide on getVisibleLayers(): Impossible to retrieve root element";
+        assert (root != null) : "VisitorDisplayHide on getVisibleLayers(): Impossible to retrieve root element";
         return this.getVisibleLayersOnTree(root.getChildren(), visibleLayers);
     }
-    
-    public void hideLayers(GPBeanTreeModel element){
+
+    public void removeVisibleLayers(GPBeanTreeModel element) {
         boolean isAllParentsChecked = this.isAllParentsChecked(element);
-        if(element instanceof FolderTreeNode && isAllParentsChecked){
-            this.hideChildrens((FolderTreeNode)element);
-        } else if (element.isChecked() && isAllParentsChecked){
-            GPHandlerManager.fireEvent(new HideLayerMapEvent((GPLayerBean)element));
+        if (isAllParentsChecked && element instanceof FolderTreeNode) {
+            this.removeChildrens((FolderTreeNode) element);
+        } else if (isAllParentsChecked && element.isChecked()) {
+            GPHandlerManager.fireEvent(new RemoveLayerMapEvent((GPLayerBean) element));
         }
+    }
+
+    private void removeChildrens(AbstractFolderTreeNode folder) {
+        for (Iterator it = folder.getChildren().iterator(); it.hasNext();) {
+            GPBeanTreeModel child = (GPBeanTreeModel) it.next();
+            if (child instanceof GPLayerBean && child.isChecked()) {
+                GPHandlerManager.fireEvent(new RemoveLayerMapEvent(((GPLayerBean) child)));
+            } else if (child instanceof FolderTreeNode && child.isChecked()) {
+                this.removeChildrens((AbstractFolderTreeNode) child);
+            }
+        }
+    }
+
+    /**
+     * @return the isCacheableCheck
+     */
+    public boolean isCacheableCheck() {
+        return isCacheableCheck;
     }
 }

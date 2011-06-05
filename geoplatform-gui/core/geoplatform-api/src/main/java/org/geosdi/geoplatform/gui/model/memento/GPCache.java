@@ -35,27 +35,63 @@
  */
 package org.geosdi.geoplatform.gui.model.memento;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPCache<T> extends LinkedList<T> {
+public class GPCache<T> extends ArrayList<T> {
+    
+    private static final long serialVersionUID = 6490859516090670592L;
 
-    private static final long serialVersionUID = 757371410507432854L;
+    /**
+     * 
+     * @return Retrieves and removes the head of this queue, or returns null if this queue is empty.
+     */
+    public T poll() {
+        T t = null;
+        if (!super.isEmpty()) {
+            t = super.get(0);
+            super.remove(t);
+        }
+        return t;
+    }
 
-//    private Queue<T> queue = new LinkedList<T>();
-//
-//    public T poll() {
-//        return this.queue.poll();
-//    }
-//
-//    public T peek() {
-//        return this.queue.peek();
-//    }
-//
-//    public void add(T memento) {
-//        this.queue.add(memento);
-//    }
+    /**
+     * 
+     * @return Retrieves, but does not remove, the head of this queue, or returns null if this queue is empty.
+     */
+    public T peek() {
+        T t = null;
+        if (!super.isEmpty()) {
+            t = super.get(0);
+        }
+        return t;
+    }
+
+    /**
+     * 
+     * @return Retrieves, but does not remove, the last element of this deque, or returns null if this deque is empty.
+     */
+    public T peekLast() {
+        T t = null;
+        if (!super.isEmpty()) {
+            t = super.get(super.size()-1);
+        }
+        return t;
+    }
+
+    /**
+     * 
+     * @return Retrieves and removes the last element of this deque, or returns null if this deque is empty.
+     */
+    public T poolLast() {
+        T t = null;
+        if (!super.isEmpty()) {
+            t = super.get(super.size()-1);
+            super.remove(t);
+        }
+        return t;
+    }
 }

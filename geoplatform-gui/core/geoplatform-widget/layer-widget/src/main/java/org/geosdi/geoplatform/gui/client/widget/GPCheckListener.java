@@ -75,10 +75,7 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
         be.getItem().accept(this.visitorDisplay);
         if (isCacheable) {
             IMemento<ISave> precedingMemento = null;
-            try {
-                precedingMemento = GPLayerSaveCache.getInstance().getLast();
-            } catch (Exception e) {
-            }
+            precedingMemento = GPLayerSaveCache.getInstance().pollLast();
             if (precedingMemento != null && precedingMemento instanceof MementoSaveCheck
                     && ((MementoSaveCheck) precedingMemento).getRefBaseElement().equals(be.getItem())) {
                 GPLayerSaveCache.getInstance().remove(precedingMemento);

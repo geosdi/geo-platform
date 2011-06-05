@@ -39,9 +39,12 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoBuilder;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDeleteElement;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
+import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
@@ -79,15 +82,28 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
         GPBeanTreeModel element = (GPBeanTreeModel) tree.getSelectionModel().getSelectedItem();
         GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
         this.visitorDispalyHide.removeVisibleLayers(element);
-        MementoSaveRemove mementoSaveRemove = new MementoSaveRemove(this);
-        mementoSaveRemove.setRefBaseElement(element);
-        mementoSaveRemove.setTypeOfRemovedElement(MementoBuilder.generateTypeOfSaveMemento(element));
+
+        IMemento<ISave> precedingMemento = null;
+        precedingMemento = GPLayerSaveCache.getInstance().pollLast();
+        boolean isAllowedNewMemento = true;
+        MementoSaveRemove mementoSaveRemove = null;
+        if (precedingMemento != null && precedingMemento instanceof MementoSaveAdd
+                && ((MementoSaveAdd) precedingMemento).getRefBaseElement().equals(element)) {
+            GPLayerSaveCache.getInstance().remove(precedingMemento);
+            isAllowedNewMemento = false;
+        } else {
+            mementoSaveRemove = new MementoSaveRemove(this);
+            mementoSaveRemove.setRefBaseElement(element);
+            mementoSaveRemove.setTypeOfRemovedElement(MementoBuilder.generateTypeOfSaveMemento(element));
+        }
 
         this.deleteVisitor.deleteElement(element, parent, parent.indexOf(element));
         this.tree.getStore().remove(element);
 
-        mementoSaveRemove.setDescendantMap(this.deleteVisitor.getFolderDescendantMap());
-        GPLayerSaveCache.getInstance().add(mementoSaveRemove);
+        if (isAllowedNewMemento) {
+            mementoSaveRemove.setDescendantMap(this.deleteVisitor.getFolderDescendantMap());
+            GPLayerSaveCache.getInstance().add(mementoSaveRemove);
+        }
         displayMessage();
     }
 

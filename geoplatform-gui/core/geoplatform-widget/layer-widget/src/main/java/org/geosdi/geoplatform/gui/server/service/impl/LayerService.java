@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;

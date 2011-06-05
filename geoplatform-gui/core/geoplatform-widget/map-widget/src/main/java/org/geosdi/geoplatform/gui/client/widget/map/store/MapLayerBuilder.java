@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.gui.client.widget.map.store;
 
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.store.AbstractLayerBuilder;
-import org.geosdi.geoplatform.gui.impl.map.store.GPLayerBuilder;
+import org.geosdi.geoplatform.gui.impl.map.store.AbstractMapLayerBuilder;
+import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayerBuilder;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
@@ -52,10 +52,10 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class LayerBuilder extends AbstractLayerBuilder<GPLayerBean> implements
-        GPLayerBuilder {
+public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implements
+        GPMapLayerBuilder {
 
-    public LayerBuilder(GeoPlatformMap theMapWidget) {
+    public MapLayerBuilder(GeoPlatformMap theMapWidget) {
         super(theMapWidget);
         // TODO Auto-generated constructor stub
     }

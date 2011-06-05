@@ -35,52 +35,28 @@
  */
 package org.geosdi.geoplatform.gui.impl.map.store;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.event.LayerChangedHandler;
-import org.geosdi.geoplatform.gui.impl.tree.DisplayLayersManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author giuseppe
  * 
  */
-public abstract class GPLayersStore<K extends GPLayerBean, T extends Layer>
-        implements ILayersStore<T>, LayerChangedHandler {
+public abstract class AbstractMapLayerBuilder<T extends GPLayerBean> implements
+		GPMapLayerBuilder {
+	
+	protected GeoPlatformMap mapWidget;
+	
+	public AbstractMapLayerBuilder(GeoPlatformMap theMapWidget) {
+		this.mapWidget = theMapWidget;
+	}
 
-    protected GeoPlatformMap mapWidget;
-    protected Map<K, T> layers = new HashMap<K, T>();
-    private DisplayLayersManager displayLayers;
+	public Layer buildLayer(T layerBean) {
+		return layerBean instanceof GPRasterBean ? buildRaster((GPRasterBean) layerBean)
+				: buildVector((GPVectorBean) layerBean);
+	}
 
-    /**
-     * @Constructor
-     *
-     * @param theMapWidget
-     */
-    public GPLayersStore(GeoPlatformMap theMapWidget) {
-        this.mapWidget = theMapWidget;
-        this.displayLayers = new DisplayLayersManager(this);
-    }
-
-    /**
-     *
-     * @param layer
-     */
-    protected void displayLayer(GPLayerBean layer) {
-        this.displayLayers.forwardRequest(layer);
-    }
-
-    /**
-     *
-     * @return List<T>
-     */
-    public List<T> getLayers() {
-        return new ArrayList<T>(this.layers.values());
-    }
 }

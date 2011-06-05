@@ -56,7 +56,7 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayers
 public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeNode> {
 
     private GridLayersWidget gridLayers;
-    private List<GPLayerBean> layersToSend = new ArrayList<GPLayerBean>();
+    private List<GPLayerBean> layersToStore = new ArrayList<GPLayerBean>();
     private DisplayLayersProgressBarEvent displayEvent = new DisplayLayersProgressBarEvent(
             true);
 
@@ -86,19 +86,19 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
     }
 
     private void checkLayers() {
-        this.layersToSend.clear();
+        this.layersToStore.clear();
         List<GPLayerBean> selectedLayers = this.gridLayers.getSelectedItems();
 
         Map<String, GPLayerBean> childMap = this.selectedElement.getLayers();
 
         for (GPLayerBean gPLayerBean : selectedLayers) {
             if (!childMap.containsKey(gPLayerBean.getLabel())) {
-                this.layersToSend.add(gPLayerBean);
+                this.layersToStore.add(gPLayerBean);
             }
         }
 
         System.out.println(
-                "TEST LAYERS DIMENSION ******************* " + layersToSend.size());
+                "TEST LAYERS DIMENSION ******************* " + layersToStore.size());
 
     }
 }

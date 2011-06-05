@@ -36,18 +36,13 @@
 package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import java.util.Iterator;
-import java.util.List;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoBuilder;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDeleteElement;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
-import org.geosdi.geoplatform.gui.impl.map.event.RemoveLayerEvent;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 /**
  *

@@ -33,20 +33,41 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.store;
+package org.geosdi.geoplatform.gui.impl.map.event;
 
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.gwtopenmaps.openlayers.client.layer.WMS;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
- * @author giuseppe
- *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ * 
  */
-public interface GPLayerBuilder {
-	
-	public WMS buildRaster(GPRasterBean rasterBean);
-	
-	public WMS buildVector(GPVectorBean vectorBean);
+public class DisplayLayerMapEvent extends GwtEvent<LayerMapChangedHandler> {
 
+    private GPLayerBean layerBean;
+
+    public DisplayLayerMapEvent(GPLayerBean theLayerBean) {
+        this.layerBean = theLayerBean;
+    }
+
+    /**
+     * @return the layerBean
+     */
+    public GPLayerBean getLayerBean() {
+        return layerBean;
+    }
+
+    @Override
+    public Type<LayerMapChangedHandler> getAssociatedType() {
+        // TODO Auto-generated method stub
+        return LayerMapChangedHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(LayerMapChangedHandler handler) {
+        // TODO Auto-generated method stub
+        handler.onDisplayLayer(this.layerBean);
+    }
 }

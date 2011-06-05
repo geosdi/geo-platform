@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.impl.tree;
 
-import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
+import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayersStore;
 import org.geosdi.geoplatform.gui.model.tree.responsibility.GPLayerRequestHandler;
 
 /**
@@ -46,9 +46,9 @@ import org.geosdi.geoplatform.gui.model.tree.responsibility.GPLayerRequestHandle
 public abstract class AbstractRequestHandler extends
 		GPLayerRequestHandler {
 
-	protected GPLayersStore<?, ?> layersStore;
+	protected GPMapLayersStore<?, ?> layersStore;
 
-	public AbstractRequestHandler(GPLayersStore<?, ?> theStore) {
+	public AbstractRequestHandler(GPMapLayersStore<?, ?> theStore) {
 		this.layersStore = theStore;
 	}
 

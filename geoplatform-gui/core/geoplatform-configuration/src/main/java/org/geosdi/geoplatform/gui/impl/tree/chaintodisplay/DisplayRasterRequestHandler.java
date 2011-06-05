@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.impl.tree.chaintodisplay;
 
-import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
+import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayersStore;
 import org.geosdi.geoplatform.gui.impl.tree.AbstractRequestHandler;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
@@ -50,7 +50,7 @@ public class DisplayRasterRequestHandler extends AbstractRequestHandler {
 	/**
 	 * @param theStore
 	 */
-	public DisplayRasterRequestHandler(GPLayersStore<?, ?> theStore) {
+	public DisplayRasterRequestHandler(GPMapLayersStore<?, ?> theStore) {
 		super(theStore);
 		// TODO Auto-generated constructor stub
 	}

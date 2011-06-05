@@ -33,30 +33,41 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.store;
+package org.geosdi.geoplatform.gui.impl.map.event;
 
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
+
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface ILayersStore<T extends Layer> {
+public class HideLayerMapEvent extends GwtEvent<LayerMapChangedHandler> {
 
-	boolean containsLayer(GPLayerBean key);
+    private GPLayerBean layerBean;
 
-	T getLayer(GPLayerBean key);
-	
-	void displayVector(GPVectorBean vectorBean);
-	
-	void displayRaster(GPRasterBean rasterBean);
-	
-	void hideLayer(GPLayerBean layerBean);
-	
-	void removeLayer(GPLayerBean layerBean);
+    public HideLayerMapEvent(GPLayerBean theLayerBean) {
+        this.layerBean = theLayerBean;
+    }
 
+    /**
+     * @return the layerBean
+     */
+    public GPLayerBean getLayerBean() {
+        return layerBean;
+    }
+
+    @Override
+    public Type<LayerMapChangedHandler> getAssociatedType() {
+        // TODO Auto-generated method stub
+        return LayerMapChangedHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(LayerMapChangedHandler handler) {
+        // TODO Auto-generated method stub
+        handler.onHideLayer(this.layerBean);
+    }
 }

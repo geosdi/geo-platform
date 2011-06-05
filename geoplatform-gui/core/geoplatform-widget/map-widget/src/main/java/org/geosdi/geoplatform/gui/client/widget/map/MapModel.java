@@ -36,10 +36,10 @@
 package org.geosdi.geoplatform.gui.client.widget.map;
 
 import org.geosdi.geoplatform.gui.client.widget.map.event.HasLayerChangedHandler;
-import org.geosdi.geoplatform.gui.client.widget.map.store.LayersStore;
+import org.geosdi.geoplatform.gui.client.widget.map.store.MapLayersStore;
 import org.geosdi.geoplatform.gui.impl.map.GPMapModel;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.event.LayerChangedHandler;
+import org.geosdi.geoplatform.gui.impl.map.event.LayerMapChangedHandler;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -51,7 +51,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
  */
 public class MapModel extends GPMapModel implements HasLayerChangedHandler {
 
-    private LayersStore layersStore;
+    private MapLayersStore layersStore;
 
     public MapModel(GeoPlatformMap theMapWidget) {
         super(theMapWidget);
@@ -61,7 +61,7 @@ public class MapModel extends GPMapModel implements HasLayerChangedHandler {
 
     private void createStores() {
         // TODO Auto-generated method stub
-        this.layersStore = new LayersStore(this.mapWidget);
+        this.layersStore = new MapLayersStore(this.mapWidget);
     }
 
     /*
@@ -75,14 +75,14 @@ public class MapModel extends GPMapModel implements HasLayerChangedHandler {
     @Override
     public HandlerRegistration addLayerChangedHandler() {
         // TODO Auto-generated method stub
-        return GPHandlerManager.addHandler(LayerChangedHandler.TYPE,
+        return GPHandlerManager.addHandler(LayerMapChangedHandler.TYPE,
                 this.layersStore);
     }
 
     /**
      * @return the layersStore
      */
-    public LayersStore getLayersStore() {
+    public MapLayersStore getLayersStore() {
         return layersStore;
     }
 }

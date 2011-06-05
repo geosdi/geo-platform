@@ -44,11 +44,11 @@ import com.google.gwt.event.shared.GwtEvent;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class DisplayLayerEvent extends GwtEvent<LayerChangedHandler> {
+public class RemoveLayerMapEvent extends GwtEvent<LayerMapChangedHandler> {
 
     private GPLayerBean layerBean;
 
-    public DisplayLayerEvent(GPLayerBean theLayerBean) {
+    public RemoveLayerMapEvent(GPLayerBean theLayerBean) {
         this.layerBean = theLayerBean;
     }
 
@@ -60,14 +60,14 @@ public class DisplayLayerEvent extends GwtEvent<LayerChangedHandler> {
     }
 
     @Override
-    public Type<LayerChangedHandler> getAssociatedType() {
+    public Type<LayerMapChangedHandler> getAssociatedType() {
         // TODO Auto-generated method stub
-        return LayerChangedHandler.TYPE;
+        return LayerMapChangedHandler.TYPE;
     }
 
     @Override
-    protected void dispatch(LayerChangedHandler handler) {
+    protected void dispatch(LayerMapChangedHandler handler) {
         // TODO Auto-generated method stub
-        handler.onDisplayLayer(this.layerBean);
+        handler.onRemoveLayer(this.layerBean);
     }
 }

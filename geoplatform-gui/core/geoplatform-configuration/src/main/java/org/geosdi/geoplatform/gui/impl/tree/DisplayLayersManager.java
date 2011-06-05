@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.impl.tree;
 
-import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
+import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayersStore;
 import org.geosdi.geoplatform.gui.impl.tree.chaintodisplay.DisplayRasterRequestHandler;
 import org.geosdi.geoplatform.gui.impl.tree.chaintodisplay.DisplayVectorRequestHandler;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -56,7 +56,7 @@ public class DisplayLayersManager {
 	 * 
 	 * @param store
 	 */
-	public DisplayLayersManager(GPLayersStore<?, ?> store) {
+	public DisplayLayersManager(GPMapLayersStore<?, ?> store) {
 		this.rasterHandler = new DisplayRasterRequestHandler(store);
 		this.vectorHandler = new DisplayVectorRequestHandler(store);
 		this.rasterHandler.setSuccessor(this.vectorHandler);

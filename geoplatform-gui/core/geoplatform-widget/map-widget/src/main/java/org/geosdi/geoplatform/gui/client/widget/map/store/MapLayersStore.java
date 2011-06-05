@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.map.store;
 
 import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.impl.map.store.GPLayersStore;
+import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayersStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
@@ -52,16 +52,15 @@ import org.gwtopenmaps.openlayers.client.layer.WMS;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class LayersStore extends GPLayersStore<GPLayerBean, Layer> {
+public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
-    private LayerBuilder layerBuilder;
+    private MapLayerBuilder layerBuilder;
     private DisplayLegendEvent displayLegend = new DisplayLegendEvent();
 
-    public LayersStore(GeoPlatformMap theMapWidget) {
+    public MapLayersStore(GeoPlatformMap theMapWidget) {
         super(theMapWidget);
         // TODO Auto-generated constructor stub
-        this.layerBuilder = new LayerBuilder(theMapWidget);
-//        this.legendWidget = new LegendWindow();
+        this.layerBuilder = new MapLayerBuilder(theMapWidget);
         GPScaleWidget.display("Scale");
     }
 
@@ -136,7 +135,12 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> {
     @Override
     public void hideLayer(GPLayerBean layerBean) {
         // TODO Auto-generated method stub
-        this.visibilityLayerOff(layerBean);
+        Layer layer = getLayer(layerBean);
+        if (layer != null) {
+            layer.setIsVisible(false);
+        }
+
+        LayerHandlerManager.fireEvent(new HideLegendEvent(layerBean));
     }
 
     /*
@@ -149,16 +153,12 @@ public class LayersStore extends GPLayersStore<GPLayerBean, Layer> {
     @Override
     public void removeLayer(GPLayerBean layerBean) {
         // TODO Auto-generated method stub
-        this.visibilityLayerOff(layerBean);
-        this.layers.remove(layerBean);        
-    }
-    
-    private void visibilityLayerOff(GPLayerBean layerBean) {
-        Layer layer = getLayer(layerBean);
+       Layer layer = getLayer(layerBean);
         if (layer != null) {
-            layer.setIsVisible(false);
+            this.mapWidget.getMap().removeLayer(layer);
         }
-
+        this.layers.remove(layerBean);   
+        
         LayerHandlerManager.fireEvent(new HideLegendEvent(layerBean));
     }
 }

@@ -37,37 +37,21 @@ package org.geosdi.geoplatform.gui.impl.map.event;
 
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
-import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class HideLayerEvent extends GwtEvent<LayerChangedHandler> {
+public interface LayerMapChangedHandler extends EventHandler {
 
-    private GPLayerBean layerBean;
+    Type<LayerMapChangedHandler> TYPE = new Type<LayerMapChangedHandler>();
 
-    public HideLayerEvent(GPLayerBean theLayerBean) {
-        this.layerBean = theLayerBean;
-    }
+    public void onDisplayLayer(GPLayerBean layerBean);
 
-    /**
-     * @return the layerBean
-     */
-    public GPLayerBean getLayerBean() {
-        return layerBean;
-    }
+    public void onHideLayer(GPLayerBean layerBean);
 
-    @Override
-    public Type<LayerChangedHandler> getAssociatedType() {
-        // TODO Auto-generated method stub
-        return LayerChangedHandler.TYPE;
-    }
-
-    @Override
-    protected void dispatch(LayerChangedHandler handler) {
-        // TODO Auto-generated method stub
-        handler.onHideLayer(this.layerBean);
-    }
+    public void onRemoveLayer(GPLayerBean layerBean);
 }

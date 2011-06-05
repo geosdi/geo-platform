@@ -33,41 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.event;
+package org.geosdi.geoplatform.gui.impl.map.store;
 
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-
-import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class RemoveLayerEvent extends GwtEvent<LayerChangedHandler> {
+public interface IMapLayersStore<T extends Layer> {
 
-    private GPLayerBean layerBean;
+	boolean containsLayer(GPLayerBean key);
 
-    public RemoveLayerEvent(GPLayerBean theLayerBean) {
-        this.layerBean = theLayerBean;
-    }
+	T getLayer(GPLayerBean key);
+	
+	void displayVector(GPVectorBean vectorBean);
+	
+	void displayRaster(GPRasterBean rasterBean);
+	
+	void hideLayer(GPLayerBean layerBean);
+	
+	void removeLayer(GPLayerBean layerBean);
 
-    /**
-     * @return the layerBean
-     */
-    public GPLayerBean getLayerBean() {
-        return layerBean;
-    }
-
-    @Override
-    public Type<LayerChangedHandler> getAssociatedType() {
-        // TODO Auto-generated method stub
-        return LayerChangedHandler.TYPE;
-    }
-
-    @Override
-    protected void dispatch(LayerChangedHandler handler) {
-        // TODO Auto-generated method stub
-        handler.onRemoveLayer(this.layerBean);
-    }
 }

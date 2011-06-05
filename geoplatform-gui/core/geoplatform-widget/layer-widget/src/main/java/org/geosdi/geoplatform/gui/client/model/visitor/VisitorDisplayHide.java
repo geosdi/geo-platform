@@ -42,8 +42,8 @@ import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
-import org.geosdi.geoplatform.gui.impl.map.event.DisplayLayerEvent;
-import org.geosdi.geoplatform.gui.impl.map.event.HideLayerEvent;
+import org.geosdi.geoplatform.gui.impl.map.event.DisplayLayerMapEvent;
+import org.geosdi.geoplatform.gui.impl.map.event.HideLayerMapEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
@@ -92,11 +92,11 @@ public class VisitorDisplayHide implements IVisitor {
         GPBeanTreeModel element = (GPBeanTreeModel) layer;
         if (element.isChecked()) {
             element.setChecked(false);
-            GPHandlerManager.fireEvent(new HideLayerEvent(layer));
+            GPHandlerManager.fireEvent(new HideLayerMapEvent(layer));
         } else {
             element.setChecked(true);
             if (!this.isInternalLeafCheck) {
-                GPHandlerManager.fireEvent(new DisplayLayerEvent(layer));
+                GPHandlerManager.fireEvent(new DisplayLayerMapEvent(layer));
                 this.setParentsFolderChecked(element);
             }
         }
@@ -124,7 +124,7 @@ public class VisitorDisplayHide implements IVisitor {
             if (gpBean.isChecked() && !(gpBean instanceof FolderTreeNode)
                     && !gpBean.equals(element)) {
                 //System.out.println("Visualizzo anche il layer: " + gpBean.getLabel());
-                GPHandlerManager.fireEvent(new DisplayLayerEvent(((GPLayerBean) gpBean)));
+                GPHandlerManager.fireEvent(new DisplayLayerMapEvent(((GPLayerBean) gpBean)));
             } else if (gpBean.isChecked() && gpBean instanceof FolderTreeNode
                     && !gpBean.equals(element)) {
                 this.showChildrens((FolderTreeNode) gpBean);
@@ -140,7 +140,7 @@ public class VisitorDisplayHide implements IVisitor {
         for (Object element : folder.getChildren()) {
             GPBeanTreeModel child = (GPBeanTreeModel) element;
             if (child instanceof GPLayerBean && child.isChecked()) {
-                GPHandlerManager.fireEvent(new HideLayerEvent(((GPLayerBean) element)));
+                GPHandlerManager.fireEvent(new HideLayerMapEvent(((GPLayerBean) element)));
             } else if (child instanceof FolderTreeNode && child.isChecked()) {
                 hideChildrens((AbstractFolderTreeNode) child);
             }
@@ -151,7 +151,7 @@ public class VisitorDisplayHide implements IVisitor {
         for (Object element : folder.getChildren()) {
             GPBeanTreeModel child = (GPBeanTreeModel) element;
             if (child instanceof GPLayerBean && child.isChecked()) {
-                GPHandlerManager.fireEvent(new DisplayLayerEvent(((GPLayerBean) element)));
+                GPHandlerManager.fireEvent(new DisplayLayerMapEvent(((GPLayerBean) element)));
             } else if (child instanceof FolderTreeNode && child.isChecked()) {
                 showChildrens((AbstractFolderTreeNode) child);
             }
@@ -231,7 +231,7 @@ public class VisitorDisplayHide implements IVisitor {
         if(element instanceof FolderTreeNode && isAllParentsChecked){
             this.hideChildrens((FolderTreeNode)element);
         } else if (element.isChecked() && isAllParentsChecked){
-            GPHandlerManager.fireEvent(new HideLayerEvent((GPLayerBean)element));
+            GPHandlerManager.fireEvent(new HideLayerMapEvent((GPLayerBean)element));
         }
     }
 }

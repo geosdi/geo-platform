@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoBuilder;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDeleteElement;
@@ -93,7 +92,6 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
         } else {
             mementoSaveRemove = new MementoSaveRemove(this);
             mementoSaveRemove.setRefBaseElement(element);
-            mementoSaveRemove.setTypeOfRemovedElement(MementoBuilder.generateTypeOfSaveMemento(element));
         }
 
         this.deleteVisitor.deleteElement(element, parent, parent.indexOf(element));

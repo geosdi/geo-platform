@@ -45,21 +45,11 @@ public class MementoSaveRemove extends AbstractMementoSave {
     
     private static final long serialVersionUID = 802906770383599380L;
 
-    private transient AbstractMementoSave typeOfRemovedElement;
-
     public MementoSaveRemove() {
     }
 
     public MementoSaveRemove(ISave saveAction) {
         super(saveAction);
-    }
-
-    public AbstractMementoSave getTypeOfRemovedElement() {
-        return typeOfRemovedElement;
-    }
-
-    public void setTypeOfRemovedElement(AbstractMementoSave typeOfRemovedElement) {
-        this.typeOfRemovedElement = typeOfRemovedElement;
     }
 
 }

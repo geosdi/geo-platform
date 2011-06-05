@@ -258,12 +258,32 @@ public class LayerService implements ILayerService {
 
     @Override
     public boolean saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(memento.getWsDescendantMap());
+        boolean result = false;
+        try {
+            result = this.geoPlatformServiceClient.saveDragAndDropLayerAndTreeModification(
+                    memento.getIdBaseElement(), memento.getIdNewParent(), memento.getNewZIndex(), map);
+        } catch (ResourceNotFoundFault ex) {
+            this.logger.error("Failed to save layer drag&drop on LayerService: " + ex);
+            throw new GeoPlatformException(ex);
+        }
+        return result;
     }
 
     @Override
     public boolean saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(memento.getWsDescendantMap());
+        boolean result = false;
+        GPUser user = new GPUser();
+        user.setUsername("user_test_0");
+        try {
+            result = this.geoPlatformServiceClient.saveDragAndDropFolderAndTreeModification(
+                    memento.getIdBaseElement(), memento.getIdNewParent(), user, memento.getNewZIndex(), map);
+        } catch (ResourceNotFoundFault ex) {
+            this.logger.error("Failed to save folder drag&drop on LayerService: " + ex);
+            throw new GeoPlatformException(ex);
+        }
+        return result;
     }
 
     @Override

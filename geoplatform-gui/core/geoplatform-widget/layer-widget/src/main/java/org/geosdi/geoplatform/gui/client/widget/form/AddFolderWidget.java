@@ -58,7 +58,6 @@ import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
@@ -78,7 +77,6 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayers
 public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
         implements ISave<MementoSaveAdd> {
 
-    private LayerRemoteAsync layerService = LayerRemote.Util.getInstance();
     private TreePanel tree;
     private TextField<String> folderText;
     private Button save;
@@ -241,7 +239,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
         //Warning: The following conversion is absolutely necessary!
         memento.convertMementoToWs();
 
-        this.layerService.saveAddedFolderAndTreeModifications(memento,
+        LayerRemote.Util.getInstance().saveAddedFolderAndTreeModifications(memento,
                 new AsyncCallback<Long>() {
 
                     @Override
@@ -251,10 +249,6 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
                                 EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
                         GeoPlatformMessage.errorMessage("Save Folder Error",
                                 "Problems on saving the new tree state after folder creation");
-                        System.out.println(
-                                "Error on saving created folder: " + caught + " - "
-                                + caught.getMessage() + " - " + caught.getCause() + " - " + caught.getLocalizedMessage());
-                        caught.printStackTrace();
                     }
 
                     @Override

@@ -46,6 +46,8 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
+import java.util.HashMap;
+import java.util.Map;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 
@@ -61,6 +63,7 @@ public class VisitorPosition extends AbstractVisitTree
     private GPBeanTreeModel startPosition;
     private GPBeanTreeModel endPosition;
     private GPBeanTreeModel tmpElement;
+    private Map<FolderTreeNode, Integer> folderDescendantMap = new HashMap<FolderTreeNode, Integer>();
 
     public void fixPosition(GPBeanTreeModel changedElement,
             GPBeanTreeModel parentDestination, int newIndex) {
@@ -90,11 +93,13 @@ public class VisitorPosition extends AbstractVisitTree
             oldParent.remove(changedElement);
             changedElement.setParent(parentDestination);
             parentDestination.insert(changedElement, newIndex);
+            this.getFolderDescendantMap().clear();
             this.updateNumberOfDescendants(oldParent, parentDestination);
             System.out.println("In FixPosition: returning without index changes"
                     + "for element: " + changedElement.getLabel());
             return;
         }
+        this.getFolderDescendantMap().clear();
         this.updateNumberOfDescendants(oldParent, parentDestination);
 
         System.out.println(this.startPosition == null ? null : "Start Position: " + this.startPosition.getLabel());
@@ -106,10 +111,12 @@ public class VisitorPosition extends AbstractVisitTree
     private void updateNumberOfDescendants(GPBeanTreeModel oldParent, GPBeanTreeModel parentDestination) {
         while (oldParent instanceof FolderTreeNode) {
             ((FolderTreeNode) oldParent).setNumberOfDescendants(((FolderTreeNode) oldParent).getNumberOfDescendants() - 1);
+            this.folderDescendantMap.put((FolderTreeNode) oldParent, ((FolderTreeNode) oldParent).getNumberOfDescendants());
             oldParent = (GPBeanTreeModel) oldParent.getParent();
         }
         while (parentDestination instanceof FolderTreeNode) {
             ((FolderTreeNode) parentDestination).setNumberOfDescendants(((FolderTreeNode) parentDestination).getNumberOfDescendants() + 1);
+            this.folderDescendantMap.put((FolderTreeNode) parentDestination, ((FolderTreeNode) parentDestination).getNumberOfDescendants());
             parentDestination = (GPBeanTreeModel) parentDestination.getParent();
         }
     }
@@ -216,5 +223,12 @@ public class VisitorPosition extends AbstractVisitTree
     @Override
     public void visitRaster(GPRasterBean raster) {
         this.visitLeaf(raster);
+    }
+
+    /**
+     * @return the folderDescendantMap
+     */
+    public Map<FolderTreeNode, Integer> getFolderDescendantMap() {
+        return folderDescendantMap;
     }
 }

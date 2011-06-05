@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.model.visitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
-import java.lang.Integer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,7 +88,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
         if (parentDestination instanceof FolderTreeNode) {
             ((FolderTreeNode) parentDestination).setNumberOfDescendants(
                     ((FolderTreeNode) parentDestination).getNumberOfDescendants() + 1);
-            this.getFolderDescendantMap().put((FolderTreeNode)parentDestination, ((FolderTreeNode) parentDestination).getNumberOfDescendants());
+            this.folderDescendantMap.put((FolderTreeNode)parentDestination, ((FolderTreeNode) parentDestination).getNumberOfDescendants());
         }
         if (parentDestination.getParent() != null && !(parentDestination.getParent() instanceof GPRootTreeNode)) {
             this.updateNumberOfDescendants((GPBeanTreeModel) parentDestination.getParent());

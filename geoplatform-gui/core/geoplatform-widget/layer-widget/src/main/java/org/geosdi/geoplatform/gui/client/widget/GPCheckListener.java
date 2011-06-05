@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.AbstractMementoLayer;
 import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoBuilder;
@@ -50,6 +51,7 @@ import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
@@ -83,7 +85,6 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
                 MementoSaveCheck mementoCheck = new MementoSaveCheck(this);
                 mementoCheck.setRefBaseElement(be.getItem());
                 mementoCheck.setIsChecked(be.getItem().isChecked());
-                mementoCheck.setTypeOfRemovedElement(MementoBuilder.generateTypeOfSaveMemento(be.getItem()));
                 GPLayerSaveCache.getInstance().add(mementoCheck);
             }
         }
@@ -92,7 +93,7 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
     @Override
     public void executeSave(final MementoSaveCheck memento) {
         memento.convertMementoToWs();
-        if (memento.getTypeOfRemovedElement() instanceof MementoFolder) {
+        if (memento.getRefBaseElement() instanceof FolderTreeNode) {
             LayerRemote.Util.getInstance().saveCheckStatusFolderAndTreeModifications(memento, new AsyncCallback<Boolean>() {
 
                 @Override
@@ -111,7 +112,7 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
                     LayerHandlerManager.fireEvent(peekCacheEvent);
                 }
             });
-        } else if (memento.getTypeOfRemovedElement() instanceof AbstractMementoLayer) {
+        } else if (memento.getRefBaseElement() instanceof GPLayerBean) {
             LayerRemote.Util.getInstance().saveCheckStatusLayerAndTreeModifications(memento, new AsyncCallback<Boolean>() {
 
                 @Override

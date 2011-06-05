@@ -45,7 +45,6 @@ public class MementoSaveCheck extends AbstractMementoSave {
 
     private static final long serialVersionUID = -1097048315113513051L;
     private boolean isChecked;
-    private transient AbstractMementoSave typeOfRemovedElement;
     
     public MementoSaveCheck(){}
 
@@ -65,19 +64,5 @@ public class MementoSaveCheck extends AbstractMementoSave {
      */
     public void setIsChecked(boolean isChecked) {
         this.isChecked = isChecked;
-    }
-
-    /**
-     * @return the typeOfRemovedElement
-     */
-    public AbstractMementoSave getTypeOfRemovedElement() {
-        return typeOfRemovedElement;
-    }
-
-    /**
-     * @param typeOfRemovedElement the typeOfRemovedElement to set
-     */
-    public void setTypeOfRemovedElement(AbstractMementoSave typeOfRemovedElement) {
-        this.typeOfRemovedElement = typeOfRemovedElement;
     }
 }

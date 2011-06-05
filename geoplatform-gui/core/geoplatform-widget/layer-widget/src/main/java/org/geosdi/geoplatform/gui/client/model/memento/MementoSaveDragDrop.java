@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -46,10 +45,9 @@ import org.geosdi.geoplatform.gui.action.ISave;
 public class MementoSaveDragDrop extends AbstractMementoSave {
 
     private static final long serialVersionUID = 7503831906608161666L;
-    //private long idElementMoved;
-    //private long newParent;
-    //private int newZIndex;
-    private Map<Long, Integer> changedElements = new HashMap<Long, Integer>();
+    private long idNewParent;
+    private transient FolderTreeNode refNewParent;
+    private int newZIndex;
 
     public MementoSaveDragDrop() {
     }
@@ -58,15 +56,53 @@ public class MementoSaveDragDrop extends AbstractMementoSave {
         super(saveAction);
     }
 
-    public void addChangedElement(long idChangedElement, int zIndex) {
-        this.changedElements.put(idChangedElement, zIndex);
+    @Override
+    public void convertMementoToWs() {
+        super.convertMementoToWs();
+        if(refNewParent != null){
+            this.idNewParent = refNewParent.getId();
+        }
     }
 
-    public Map<Long, Integer> getChangedElements() {
-        return changedElements;
+    /**
+     * @return the refNewParent
+     */
+    public FolderTreeNode getRefNewParent() {
+        return refNewParent;
     }
 
-    public void setChangedElements(Map<Long, Integer> changedElements) {
-        this.changedElements = changedElements;
+    /**
+     * @param refNewParent the refNewParent to set
+     */
+    public void setRefNewParent(FolderTreeNode refNewParent) {
+        this.refNewParent = refNewParent;
+    }
+
+    /**
+     * @return the idNewParent
+     */
+    public long getIdNewParent() {
+        return idNewParent;
+    }
+
+    /**
+     * @param idNewParent the idNewParent to set
+     */
+    public void setIdNewParent(long idNewParent) {
+        this.idNewParent = idNewParent;
+    }
+
+    /**
+     * @return the newZIndex
+     */
+    public int getNewZIndex() {
+        return newZIndex;
+    }
+
+    /**
+     * @param newZIndex the newZIndex to set
+     */
+    public void setNewZIndex(int newZIndex) {
+        this.newZIndex = newZIndex;
     }
 }

@@ -272,13 +272,11 @@ class LayerServiceImpl {
 
         int beginPosition = -1, endPosition = -1, delta = 0;
         int oldPosition = layerMoved.getPosition();
-        if (oldPosition < newPosition) {
-            // Drag & Drop to up
+        if (oldPosition < newPosition) { // Drag & Drop to up
             beginPosition = oldPosition + 1;
             endPosition = newPosition;
             delta = -1;
-        } else if (newPosition < oldPosition) {
-            // Drag & Drop to down
+        } else if (oldPosition > newPosition) { // Drag & Drop to down
             beginPosition = newPosition;
             endPosition = oldPosition - 1;
             delta = 1;

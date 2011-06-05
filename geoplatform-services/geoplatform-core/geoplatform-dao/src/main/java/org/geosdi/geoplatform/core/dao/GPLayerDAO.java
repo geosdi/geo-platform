@@ -68,11 +68,14 @@ public interface GPLayerDAO {
 
     public GPLayer findByLayerName(String layerName);
 
+    public boolean updatePositionsRangeInOppositeWay(int beginPositionFirstRange, int endPositionFirstRange,
+            int beginPositionSecondRange, int endPositionSecondRange, int deltaValue);
+
     public boolean updatePositionsRange(int beginPosition, int endPosition,
             int deltaValue);
 
     public boolean updatePositionsLowerBound(int lowerBoundPosition,
             int deltaValue);
-    
+
     public boolean persistCheckStatusLayer(long idLayer, boolean isChecked);
 }

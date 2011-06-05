@@ -89,6 +89,14 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
     }
 
     @Override
+    public boolean updatePositionsRangeInOppositeWay(
+            int beginPositionFirstRange, int endPositionFirstRange,
+            int beginPositionSecondRange, int endPositionSecondRange, int deltaValue) {
+        // TODO
+        return true;
+    }
+
+    @Override
     public boolean updatePositionsRange(int beginPosition, int endPosition,
             int deltaValue) {
         assert (beginPosition <= endPosition) : "beginPosition must be lesser than or equal endPosition";
@@ -105,7 +113,7 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
 
         // No updates (select 0 folders)
         if (matchingLayers.isEmpty()) {
-            return false;
+            return true;
         }
         return this.updatePositions(matchingLayers, deltaValue);
     }
@@ -124,7 +132,7 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
 
         // No updates (select 0 folders)
         if (matchingLayers.isEmpty()) {
-            return false;
+            return true;
         }
         return this.updatePositions(matchingLayers, deltaValue);
     }
@@ -149,7 +157,7 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
         }
         return true;
     }
-    
+
     @Override
     public boolean persistCheckStatusLayer(long idLayer, boolean isChecked) {
         // Retrieve the folder
@@ -171,5 +179,5 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
             }
         }
         return true;
-    }    
+    }
 }

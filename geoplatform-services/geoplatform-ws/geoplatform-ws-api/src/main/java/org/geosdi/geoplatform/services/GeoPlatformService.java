@@ -180,7 +180,7 @@ public interface GeoPlatformService {
     boolean saveDragAndDropFolderAndTreeModification(
             @WebParam(name = "idElementMoved") long idElementMoved,
             @WebParam(name = "idNewParent") long idNewParent,
-            @WebParam(name = "owner")  GPUser owner,
+            @WebParam(name = "owner") GPUser owner,
             @WebParam(name = "newPosition") int newPosition,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault;
@@ -236,8 +236,8 @@ public interface GeoPlatformService {
     @HttpResource(location = "/folders/{folderId}")
     @WebResult(name = "ChildrenElement")
     TreeFolderElements getChildrenElements(@WebParam(name = "folderId") long folderId);
-
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Folder / User">
     // ==========================================================================
     // === Folder / User
@@ -474,7 +474,7 @@ public interface GeoPlatformService {
 
     @Post
     @HttpResource(location = "/server")
-    LayerList saveServer(@WebParam(name = "serverUrl") String serverUrl)
+    ServerDTO saveServer(@WebParam(name = "serverUrl") String serverUrl)
             throws ResourceNotFoundFault;
     //</editor-fold>
 

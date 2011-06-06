@@ -37,6 +37,11 @@
 //</editor-fold>
 package org.geosdi.geoplatform.responce;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 
@@ -51,6 +56,10 @@ public class ServerDTO {
     private long id;
     private String serverUrl;
     private String name;
+    //
+    @XmlElementWrapper(name = "layersCollection")
+    @XmlElement(name = "layer")
+    private List<ShortLayerDTO> layersDTO;
 
     public ServerDTO() {
         super();
@@ -71,7 +80,7 @@ public class ServerDTO {
 
     /**
      * @param id
-     *            the id to set
+     *          the id to set
      */
     public void setId(long id) {
         this.id = id;
@@ -85,7 +94,8 @@ public class ServerDTO {
     }
 
     /**
-     * @param serverUrl the serverUrl to set
+     * @param serverUrl
+     *          the serverUrl to set
      */
     public void setServerUrl(String serverUrl) {
         this.serverUrl = serverUrl;
@@ -99,12 +109,28 @@ public class ServerDTO {
     }
 
     /**
-     * @param name the name to set
+     * @param name
+     *          the name to set
      */
     public void setName(String name) {
         this.name = name;
     }
-    
+
+    /**
+     * @return the layersDTO
+     */
+    public List<ShortLayerDTO> getLayersDTO() {
+        return layersDTO;
+    }
+
+    /**
+     * @param layersDTO
+     *          the layersDTO to set
+     */
+    public void setLayersDTO(Collection<ShortLayerDTO> layersDTO) {
+        this.layersDTO = new ArrayList<ShortLayerDTO>(layersDTO);
+    }
+
     /*
      * (non-Javadoc)
      * 
@@ -115,5 +141,4 @@ public class ServerDTO {
         return "ServerDTO{" + "id=" + id + ", serverUrl=" + serverUrl
                 + ", name=" + name + '}';
     }
- 
 }

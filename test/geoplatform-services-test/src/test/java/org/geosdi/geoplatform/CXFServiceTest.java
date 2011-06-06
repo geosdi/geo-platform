@@ -64,7 +64,7 @@ public class CXFServiceTest extends ServiceTest {
     private long idServerTest = -1;
     // Server geoSDI
     private final String serverUrlGeoSDI = "http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
-    private final int numLayersGeoSDI = 251;    
+    private final int numLayersGeoSDI = 251;
 
     @Override
     public void setUp() throws Exception {
@@ -168,25 +168,25 @@ public class CXFServiceTest extends ServiceTest {
     public void testSaveServer() throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n@@@ testSaveServer @@@");
         // Server is into DB
-        LayerList layers = geoPlatformService.saveServer(serverUrlGeoSDI);
-        Assert.assertNotNull("LayerList is NULL for server URL:\n" + serverUrlGeoSDI, layers);
+        ServerDTO serverDTO = geoPlatformService.saveServer(serverUrlGeoSDI);
+        Assert.assertNotNull("ServerDTO geoSDI is NULL", serverDTO);
 
-        Collection<ShortLayerDTO> layersList = layers.getList();
-        Assert.assertNotNull("List of LayerList is NULL for server URL:\n" + serverUrlTest, layersList);
-        Assert.assertEquals("LayerList must have " + numLayersGeoSDI + " layers", layersList.size(), numLayersGeoSDI);
+        Collection<ShortLayerDTO> layersList = serverDTO.getLayersDTO();
+        Assert.assertNotNull("Collection of ShortLayerDTO is NULL for server geoSDI", layersList);
+        Assert.assertEquals("Number of layer into Collection of ShortLayerDTO is NOT correct", numLayersGeoSDI, layersList.size());
 
-        // Server is not into DB
+        // Server is NOT into DB
         String serverUrlEx = "http://iws.erdas.com/ecwp/ecw_wms.dll?request=GetCapabilities";
-        layers = geoPlatformService.saveServer(serverUrlEx);
-        Assert.assertNotNull("LayerList is NULL for server URL:\n" + serverUrlEx, layers);
+        serverDTO = geoPlatformService.saveServer(serverUrlEx);
+        Assert.assertNotNull("ServerDTO EX is NULL", serverDTO);
 
-        layersList = layers.getList();
-        Assert.assertNotNull("List of LayerList is NULL for server URL:\n" + serverUrlEx, layersList);
+        layersList = serverDTO.getLayersDTO();
+        Assert.assertNotNull("Collection of ShortLayerDTO is NULL for server Ex", layersList);
         // Check if the server was insert
         GeoPlatformServer serverEx = geoPlatformService.getServerDetailByUrl(serverUrlEx);
-        Assert.assertNotNull("Server is NULL for URL:\n" + serverEx);
-        Assert.assertEquals("Server should have the URL:\n" + serverUrlEx,
-                serverEx.getServerUrl(), serverUrlEx);
+        Assert.assertNotNull("Server Ex is NULL for URL", serverEx);
+        Assert.assertEquals("Server Ex URL is NOT correct", serverUrlEx, serverEx.getServerUrl());
+        Assert.assertEquals("Server Ex ID is NOT correct", serverDTO.getId(), serverEx.getId());
         // Delete server
         geoPlatformService.deleteServer(serverEx.getId());
     }

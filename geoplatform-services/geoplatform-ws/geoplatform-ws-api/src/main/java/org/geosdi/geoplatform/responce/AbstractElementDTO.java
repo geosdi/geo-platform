@@ -50,13 +50,9 @@ public abstract class AbstractElementDTO implements IElementDTO,
         Comparable<IElementDTO> {
 
     private long id = -1; // Database identity
-
     private String name = "NULL";
-
     private int position = -1;
-
     private boolean shared = false;
-    
     private boolean checked = false;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
@@ -142,10 +138,10 @@ public abstract class AbstractElementDTO implements IElementDTO,
     public void setShared(boolean shared) {
         this.shared = shared;
     }
-    
+
     /**
      * @return the checked
-     */    
+     */
     public boolean isChecked() {
         return checked;
     }
@@ -153,10 +149,10 @@ public abstract class AbstractElementDTO implements IElementDTO,
     /**
      * @param checked
      *            the checked to set
-     */    
+     */
     public void setChecked(boolean checked) {
         this.checked = checked;
-    }    
+    }
     //</editor-fold>
 
     /*
@@ -171,6 +167,11 @@ public abstract class AbstractElementDTO implements IElementDTO,
     }
 
     // For sort IElementDTO object in the TreeFolderElements
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#compareTo(java.lang.Object)
+     */
     @Override
     public int compareTo(IElementDTO element) {
         return ((AbstractElementDTO) element).getPosition() - getPosition();

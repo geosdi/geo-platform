@@ -50,10 +50,9 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 @XmlRootElement(name = "FolderDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class FolderDTO extends AbstractElementDTO {
-
+    
     private int numberOfDescendants;
 
-    //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
      * Default constructor
      */
@@ -66,13 +65,11 @@ public class FolderDTO extends AbstractElementDTO {
      * @param folder
      */
     public FolderDTO(GPFolder folder) {
-        super(folder.getId(), folder.getName(), folder.getPosition(), 
+        super(folder.getId(), folder.getName(), folder.getPosition(),
                 folder.isShared(), folder.isChecked());
-        this.numberOfDescendants = folder.getNumberOfDescendants(); // DEL?
+        this.numberOfDescendants = folder.getNumberOfDescendants();
     }
-    //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
      * @return the numberOfChilds
      */
@@ -86,7 +83,6 @@ public class FolderDTO extends AbstractElementDTO {
     public void setNumberOfChilds(int numberOfChilds) {
         this.numberOfDescendants = numberOfChilds;
     }
-    //</editor-fold>
 
     /*
      * (non-Javadoc)

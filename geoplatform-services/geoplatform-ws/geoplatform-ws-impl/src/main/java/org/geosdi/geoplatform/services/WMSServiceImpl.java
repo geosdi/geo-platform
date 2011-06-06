@@ -183,22 +183,23 @@ class WMSServiceImpl {
         return convertToLayerList(wmsCapabilities.getLayerList(), server.getServerUrl());
     }
 
-    public LayerList saveServer(String serverUrl)
+    public ServerDTO saveServer(String serverUrl)
             throws ResourceNotFoundFault {
+        ServerDTO serverDTO = null;
+        WMSCapabilities wmsCapabilities = this.getWMSCapabilities(serverUrl);
+
         // Retrieve the server by URL
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
-        if (server != null) {
-            WMSCapabilities wmsCapabilities = this.getWMSCapabilities(serverUrl);
-            return convertToLayerList(wmsCapabilities.getLayerList(), serverUrl);
+        if (server == null) { // Create and Save a new Server
+            Service service = wmsCapabilities.getService();
+            server = this.createWMSServerFromService(serverUrl, service);
+            serverDao.persist(server);
         }
+        serverDTO = new ServerDTO(server);
+        LayerList layers = convertToLayerList(wmsCapabilities.getLayerList(), serverUrl);
+        serverDTO.setLayersDTO(layers.getList());
 
-        WMSCapabilities wmsCapabilities = this.getWMSCapabilities(serverUrl);
-        // Create and Save a new Server
-        Service service = wmsCapabilities.getService();
-        GeoPlatformServer newServer = this.createWMSServerFromService(serverUrl, service);
-        serverDao.persist(newServer);
-
-        return convertToLayerList(wmsCapabilities.getLayerList(), serverUrl);
+        return serverDTO;
     }
 
     private WMSCapabilities getWMSCapabilities(String urlServer)

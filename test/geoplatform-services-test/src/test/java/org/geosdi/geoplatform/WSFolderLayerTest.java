@@ -169,7 +169,7 @@ public class WSFolderLayerTest extends ServiceTest {
             Assert.assertEquals("name of newVectorLayer3", nameVectorLayer3, newVectorLayer3.getName());
             Assert.assertEquals("position of newVectorLayer3", 7, newVectorLayer3.getPosition());
         } catch (ResourceNotFoundFault ex) {
-            logger.debug("\n*** Layer with id \"{}\" was NOT found ***", idRasterLayer1);
+            logger.debug("\n*** Layer with id \"{}\" was NOT found ***", ex.getId());
         }
     }
 
@@ -360,7 +360,7 @@ public class WSFolderLayerTest extends ServiceTest {
             vectorLayer2 = geoPlatformService.getVectorLayer(idVectorLayer2);
             Assert.assertEquals("Position of vector layer 2 after removing", 1, vectorLayer2.getPosition());
         } catch (ResourceNotFoundFault ex) {
-            Assert.fail("Folder was not found");
+            Assert.fail("Folder was not found " + ex.getId());
         } catch (IllegalParameterFault ex) {
             Assert.fail("Folder with id \"" + layerToTest.getId() + "\" was not found");
         }
@@ -526,7 +526,7 @@ public class WSFolderLayerTest extends ServiceTest {
         }
     }
 
-    // Check if a folder was eliminated
+//     Check if a folder was eliminated
     private void checkLayerDeleted(long idLayer) {
         try {
             ShortLayerDTO layer = geoPlatformService.getShortLayer(idLayer);

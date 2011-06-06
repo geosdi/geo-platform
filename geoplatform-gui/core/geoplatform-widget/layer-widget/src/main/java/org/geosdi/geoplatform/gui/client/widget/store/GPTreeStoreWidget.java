@@ -41,8 +41,8 @@ import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.GenericTreeStoreWidget;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridElementEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.LayersProgressTextEvent;
 
 /**
@@ -53,8 +53,7 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.LayersProgres
 public class GPTreeStoreWidget extends GenericTreeStoreWidget {
 
     private LayersProgressTextEvent layersTextEvent = new LayersProgressTextEvent();
-    private DisplayLayersProgressBarEvent hideProgressBar = new DisplayLayersProgressBarEvent(
-            false);
+    private DeselectGridElementEvent deselectEvent = new DeselectGridElementEvent();
 
     /**********************************************************/
     /**HERE THE MEMENTO AND VISITOR PROPERTIES TO ADD LAYERS **/
@@ -77,7 +76,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget {
 
             @Override
             public void run() {
-                LayerHandlerManager.fireEvent(hideProgressBar);
+                LayerHandlerManager.fireEvent(deselectEvent);
             }
         };
         t.schedule(5000);

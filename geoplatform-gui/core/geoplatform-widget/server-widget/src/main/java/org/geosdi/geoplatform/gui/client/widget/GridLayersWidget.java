@@ -41,7 +41,6 @@ import com.extjs.gxt.ui.client.core.XTemplate;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
@@ -61,6 +60,9 @@ import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
+import org.geosdi.geoplatform.gui.puregwt.grid.GPGridEventHandler;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 
 /**
  *
@@ -68,7 +70,8 @@ import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
  * @email  giuseppe.lascaleia@geosdi.org
  *
  */
-public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidget<L> {
+public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidget<L>
+        implements GPGridEventHandler {
 
     private FormPanel formPanel;
     private TreePanel tree;
@@ -76,6 +79,8 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
     private RowExpander rowExpander;
     private DisplayServerWidget displayWidget;
     private GPServerExpander expander;
+    private DisplayLayersProgressBarEvent hideProgressBar = new DisplayLayersProgressBarEvent(
+            false);
 
     /**
      * @param theTree
@@ -87,6 +92,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         this.initFormPanel();
         this.tree = theTree;
         this.expander = new GPServerExpander(this);
+        LayerHandlerManager.addHandler(GPGridEventHandler.TYPE, this);
     }
 
     private void initServerWidget() {
@@ -248,5 +254,12 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
 
     public List<L> getSelectedItems() {
         return this.grid.getSelectionModel().getSelectedItems();
+    }
+
+    @Override
+    public void deselectElements() {
+        this.grid.getSelectionModel().deselectAll();
+        this.done.disable();
+        LayerHandlerManager.fireEvent(hideProgressBar);
     }
 }

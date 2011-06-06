@@ -162,7 +162,18 @@ class LayerServiceImpl {
     }
 
     // Add @Transaction ?
-    public long saveAddedLayerAndTreeModifications(GPLayer layer, GPWebServiceMapData descendantsMapData) {
+    public long saveAddedLayerAndTreeModifications(GPLayer layer, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
+        GPFolder parent = layer.getFolder();
+        if (parent == null) {
+            throw new IllegalParameterFault("Parent of layer not found " + layer.getId());
+        }
+
+        long idParent = parent.getId();
+        GPFolder parentFromDB = folderDao.find(idParent);
+        if (parentFromDB == null) {
+            throw new ResourceNotFoundFault("Parent of layer not found into DB", idParent);
+        }
+
         int newPosition = layer.getPosition();
         int increment = 1;
         // Shift positions
@@ -176,7 +187,24 @@ class LayerServiceImpl {
     }
 
     // Add @Transaction ?
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(ArrayList<GPLayer> layersList, GPWebServiceMapData descendantsMapData) {
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(ArrayList<GPLayer> layersList, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
+        GPLayer[] layersArray = layersList.toArray(new GPLayer[layersList.size()]);
+
+        GPFolder parent = null;
+        GPFolder parentFromDB = null;
+        for (int i = 0; i < layersArray.length; i++) {
+            parent = layersArray[i].getFolder();
+            if (parent == null) {
+                throw new IllegalParameterFault("Parent of layer not found " + layersArray[i].getId());
+            }
+
+            long idParent = parent.getId();
+            parentFromDB = folderDao.find(idParent);
+            if (parentFromDB == null) {
+                throw new ResourceNotFoundFault("Parent of layer not found into DB", idParent);
+            }
+        }
+
         ArrayList<Long> arrayList = new ArrayList<Long>(layersList.size());
         int newPosition = layersList.get(0).getPosition();
         int increment = layersList.size();
@@ -184,10 +212,9 @@ class LayerServiceImpl {
         layerDao.updatePositionsLowerBound(newPosition, increment);
         folderDao.updatePositionsLowerBound(newPosition, increment);
 
-        GPLayer[] layersArray = layersList.toArray(new GPLayer[layersList.size()]);
         layerDao.persist(layersArray);
-        
-        for(int i = 0;i < layersArray.length;i++) {
+
+        for (int i = 0; i < layersArray.length; i++) {
             arrayList.add(layersArray[i].getId());
         }
 

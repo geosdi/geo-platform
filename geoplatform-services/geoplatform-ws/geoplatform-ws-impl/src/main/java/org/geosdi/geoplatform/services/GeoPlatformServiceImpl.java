@@ -460,12 +460,14 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public long saveAddedLayerAndTreeModifications(GPLayer layer, GPWebServiceMapData descendantsMapData) {
+    public long saveAddedLayerAndTreeModifications(GPLayer layer, GPWebServiceMapData descendantsMapData) 
+            throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.saveAddedLayerAndTreeModifications(layer, descendantsMapData);
     }
 
     @Override
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(ArrayList<GPLayer>  layersList, GPWebServiceMapData descendantsMapData) {
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(ArrayList<GPLayer>  layersList, GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.saveAddedLayersAndTreeModifications(layersList, descendantsMapData);
     }
 

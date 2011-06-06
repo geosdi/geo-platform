@@ -270,7 +270,7 @@ public class WSFolderTest extends ServiceTest {
             Assert.assertEquals("Position of folder 5 before removing", 2, folder5.getPosition());
 
             // Removing folder from user's root
-            boolean checkDelete = geoPlatformService.saveDeletedFolderAndTreeModification(folderToTest.getId(), descendantsMapData);
+            boolean checkDelete = geoPlatformService.saveDeletedFolderAndTreeModifications(folderToTest.getId(), descendantsMapData);
             Assert.assertTrue("Delete NOT done for \"" + folderToTest.getName() + "\"", checkDelete);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -350,7 +350,7 @@ public class WSFolderTest extends ServiceTest {
             // Removing folder from user's root folder B
             map.clear();
             map.put(idRootFolderB, 3);
-            boolean checkDelete = geoPlatformService.saveDeletedFolderAndTreeModification(folderToTest.getId(), descendantsMapData);
+            boolean checkDelete = geoPlatformService.saveDeletedFolderAndTreeModifications(folderToTest.getId(), descendantsMapData);
             Assert.assertTrue("Delete NOT done for \"" + folderToTest.getName() + "\"", checkDelete);
 
             childrenFolders = geoPlatformService.getChildrenFoldersByFolderId(idRootFolderB);
@@ -392,7 +392,7 @@ public class WSFolderTest extends ServiceTest {
         descendantsMapData.setDescendantsMap(map);
         try {
             // Move folder 5 between folder 3 and folder 4 (oldPosition < new Position)
-            boolean checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModification(
+            boolean checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
                     idFolder5, super.idRootFolderB, super.userTest, 2, descendantsMapData);
             Assert.assertTrue("Folder 5 doesn't moved to position 2", checkDD);
 
@@ -420,7 +420,7 @@ public class WSFolderTest extends ServiceTest {
             Assert.assertEquals("Position of folder 5 after DD I", 2, folder5.getPosition());
 
             // Move folder 5 after folder 4, in initial position (oldPosition > new Position)
-            checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModification(
+            checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
                     idFolder5, super.idRootFolderB, super.userTest, 1, descendantsMapData);
             Assert.assertTrue("Folder 5 doesn't moved to position 1", checkDD);
 
@@ -461,7 +461,7 @@ public class WSFolderTest extends ServiceTest {
             map.put(super.idRootFolderA, 3);
             map.put(super.idRootFolderB, 2);
             // Move folder 4 between folder 1 and folder 2 (oldPosition < new Position)
-            boolean checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModification(
+            boolean checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
                     idFolder4, super.idRootFolderA, super.userTest, 5, descendantsMapData);
             Assert.assertTrue("Folder 4 doesn't moved to position 5", checkDD);
 
@@ -492,7 +492,7 @@ public class WSFolderTest extends ServiceTest {
             map.clear();
             map.put(super.idRootFolderA, 2);
             map.put(super.idRootFolderB, 3);
-            checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModification(
+            checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
                     idFolder4, super.idRootFolderB, super.userTest, 2, descendantsMapData);
             Assert.assertTrue("Folder 4 doesn't moved to position 2", checkDD);
 
@@ -531,7 +531,7 @@ public class WSFolderTest extends ServiceTest {
         descendantsMapData.setDescendantsMap(map);
         try {
             // Move folder B before folder A (oldPosition < new Position)
-            boolean checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModification(
+            boolean checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
                     super.idRootFolderB, 0, super.userTest, 7, descendantsMapData);
             Assert.assertTrue("Folder B doesn't moved to position 7", checkDD);
 
@@ -559,7 +559,7 @@ public class WSFolderTest extends ServiceTest {
             Assert.assertEquals("Position of folder 5 after DD I", 4, folder5.getPosition());
 
             // Move folder B after folder A, in initial position (oldPosition > new Position)
-            checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModification(
+            checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
                     super.idRootFolderB, 0, super.userTest, 4, descendantsMapData);
             Assert.assertTrue("Folder 4 doesn't moved to position 2", checkDD);
 
@@ -602,7 +602,7 @@ public class WSFolderTest extends ServiceTest {
             map.put(idRootFolderA, 6);
             descendantsMapData.setDescendantsMap(map);
 
-            boolean result = geoPlatformService.saveDragAndDropFolderAndTreeModification(idRootFolderB, idRootFolderA, null, 6, descendantsMapData);
+            boolean result = geoPlatformService.saveDragAndDropFolderAndTreeModifications(idRootFolderB, idRootFolderA, null, 6, descendantsMapData);
             Assert.assertTrue("Drag and Drop successful", result);
             
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -651,7 +651,7 @@ public class WSFolderTest extends ServiceTest {
             map.put(idRootFolderB, 6);
             descendantsMapData.setDescendantsMap(map);
 
-            boolean result = geoPlatformService.saveDragAndDropFolderAndTreeModification(idRootFolderA, idRootFolderB, null, 3, descendantsMapData);
+            boolean result = geoPlatformService.saveDragAndDropFolderAndTreeModifications(idRootFolderA, idRootFolderB, null, 3, descendantsMapData);
             Assert.assertTrue("Drag and Drop successful", result);
             
             rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));

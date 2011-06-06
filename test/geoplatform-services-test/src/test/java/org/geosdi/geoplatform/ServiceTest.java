@@ -216,6 +216,7 @@ public abstract class ServiceTest implements InitializingBean {
         double maxX = 20;
         double maxY = 20;
 
+        gpLayer.setFolder(parentFolder);
         gpLayer.setAbstractText(abstractText);
         gpLayer.setName(name);
         gpLayer.setPosition(position);

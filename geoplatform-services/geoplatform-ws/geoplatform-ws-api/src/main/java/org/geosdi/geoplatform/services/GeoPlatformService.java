@@ -326,13 +326,15 @@ public interface GeoPlatformService {
     @HttpResource(location = "/layer/{descendantsMap}")
     long saveAddedLayerAndTreeModifications(
             @WebParam(name = "layer") GPLayer layer,
-            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData);
+            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Put
     @HttpResource(location = "/layers/{descendantsMap}")
     ArrayList<Long> saveAddedLayersAndTreeModifications(
             @WebParam(name = "layers") ArrayList<GPLayer> layersList,
-            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData);
+            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Delete
     @HttpResource(location = "/layers/{id}/{descendantsMap}")

@@ -592,6 +592,104 @@ public class WSFolderTest extends ServiceTest {
     
     // TODO TEST DD ON SAME POSITION
     
+    @Test
+    public void testSaveDragAndDropFolderModificationsToTop() {
+        Map<Long, Integer> map = new HashMap<Long, Integer>();
+        GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
+        try {
+            // Drag & Drop action of rootFolderB on folder1
+            map.clear();
+            map.put(idRootFolderA, 6);
+            descendantsMapData.setDescendantsMap(map);
+
+            boolean result = geoPlatformService.saveDragAndDropFolderAndTreeModification(idRootFolderB, idRootFolderA, null, 6, descendantsMapData);
+            Assert.assertTrue("Drag and Drop successful", result);
+            
+            rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
+            Assert.assertEquals("Position of root folder A after drag and drop operation", 7, rootFolderA.getPosition());
+            Assert.assertEquals("Number of descendant of root folder A after drag and drop operation", 6, rootFolderA.getNumberOfDescendants());
+            Assert.assertEquals("Owner of root folder A after drag and drop operation", userTest, rootFolderA.getOwner());
+            Assert.assertNull("Parent of root folder A after drag and drop operation", rootFolderA.getParent());
+            
+            rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
+            Assert.assertEquals("Position of root folder B after drag and drop operation", 6, rootFolderB.getPosition());
+            Assert.assertEquals("Number of descendant of root folder B after drag and drop operation", 3, rootFolderB.getNumberOfDescendants());
+            Assert.assertEquals("Parent of root folder B after drag and drop operation", idRootFolderA, rootFolderB.getParent().getId());
+            Assert.assertNull("Owner of root folder B after drag and drop operation", rootFolderB.getOwner());
+
+            folder3 = geoPlatformService.getFolderDetail(new RequestById(idFolder3));
+            Assert.assertEquals("Position of folder 3 after drag and drop operation", 5, folder3.getPosition());
+            Assert.assertEquals("Parent of folder 3 after drag and drop operation", idRootFolderB, folder3.getParent().getId());
+
+            folder4 = geoPlatformService.getFolderDetail(new RequestById(idFolder4));
+            Assert.assertEquals("Position of folder 4 after drag and drop operation", 4, folder4.getPosition());
+            Assert.assertEquals("Parent of folder 4 after drag and drop operation", idRootFolderB, folder4.getParent().getId());
+
+            folder5 = geoPlatformService.getFolderDetail(new RequestById(idFolder5));
+            Assert.assertEquals("Position of folder 5 after drag and drop operation", 3, folder5.getPosition());
+            Assert.assertEquals("Parent of folder 5 after drag and drop operation", idRootFolderB, folder5.getParent().getId());
+
+            folder1 = geoPlatformService.getFolderDetail(new RequestById(idFolder1));
+            Assert.assertEquals("Position of folder 1 after drag and drop operation", 2, folder1.getPosition());
+            Assert.assertEquals("Parent of folder 1 after drag and drop operation", idRootFolderA, folder1.getParent().getId());
+
+            folder2 = geoPlatformService.getFolderDetail(new RequestById(idFolder2));
+            Assert.assertEquals("Position of folder 2 after drag and drop operation", 1, folder2.getPosition());
+            Assert.assertEquals("Parent of folder 2 after drag and drop operation", idRootFolderA, folder2.getParent().getId());
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Folder or Layer was not found");
+        }
+    }
+
+    @Test
+    public void testSaveDragAndDropFolderModificationsToBottom() {
+        Map<Long, Integer> map = new HashMap<Long, Integer>();
+        GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
+        try {
+            // Drag & Drop action of rootFolderA on folder3
+            map.clear();
+            map.put(idRootFolderB, 6);
+            descendantsMapData.setDescendantsMap(map);
+
+            boolean result = geoPlatformService.saveDragAndDropFolderAndTreeModification(idRootFolderA, idRootFolderB, null, 3, descendantsMapData);
+            Assert.assertTrue("Drag and Drop successful", result);
+            
+            rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
+            Assert.assertEquals("Position of root folder B after drag and drop operation", 7, rootFolderB.getPosition());
+            Assert.assertEquals("Number of descendant of root folder B after drag and drop operation", 6, rootFolderB.getNumberOfDescendants());
+            Assert.assertEquals("Owner of root folder B after drag and drop operation", userTest, rootFolderB.getOwner());
+            Assert.assertNull("Parent of root folder B after drag and drop operation", rootFolderB.getParent());
+
+            rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
+            Assert.assertEquals("Position of root folder A after drag and drop operation", 6, rootFolderA.getPosition());
+            Assert.assertEquals("Number of descendant of root folder A after drag and drop operation", 2, rootFolderA.getNumberOfDescendants());
+            Assert.assertEquals("Parent of root folder A after drag and drop operation", idRootFolderB, rootFolderA.getParent().getId());
+            Assert.assertNull("Owner of root folder A after drag and drop operation", rootFolderA.getOwner());
+
+            folder1 = geoPlatformService.getFolderDetail(new RequestById(idFolder1));
+            Assert.assertEquals("Position of folder 1 after drag and drop operation", 5, folder1.getPosition());
+            Assert.assertEquals("Parent of folder 1 after drag and drop operation", idRootFolderA, folder1.getParent().getId());
+
+            folder2 = geoPlatformService.getFolderDetail(new RequestById(idFolder2));
+            Assert.assertEquals("Position of folder 2 after drag and drop operation", 4, folder2.getPosition());
+            Assert.assertEquals("Parent of folder 2 after drag and drop operation", idRootFolderA, folder2.getParent().getId());
+            
+            folder3 = geoPlatformService.getFolderDetail(new RequestById(idFolder3));
+            Assert.assertEquals("Position of folder 3 after drag and drop operation", 3, folder3.getPosition());
+            Assert.assertEquals("Parent of folder 3 after drag and drop operation", idRootFolderB, folder3.getParent().getId());
+
+            folder4 = geoPlatformService.getFolderDetail(new RequestById(idFolder4));
+            Assert.assertEquals("Position of folder 4 after drag and drop operation", 2, folder4.getPosition());
+            Assert.assertEquals("Parent of folder 4 after drag and drop operation", idRootFolderB, folder4.getParent().getId());
+
+            folder5 = geoPlatformService.getFolderDetail(new RequestById(idFolder5));
+            Assert.assertEquals("Position of folder 5 after drag and drop operation", 1, folder5.getPosition());
+            Assert.assertEquals("Parent of folder 5 after drag and drop operation", idRootFolderB, folder5.getParent().getId());
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Folder or Layer was not found");
+        }
+    }
+
     // Check if a folder was eliminated
     private void checkFolderDeleted(long idFolder) {
         try {

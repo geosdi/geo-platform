@@ -40,7 +40,9 @@ package org.geosdi.geoplatform.services;
 import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import org.aspectj.weaver.NewParentTypeMunger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -170,8 +172,27 @@ class LayerServiceImpl {
         layerDao.persist(layer);
 
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-
         return layer.getId();
+    }
+
+    // Add @Transaction ?
+    public ArrayList<Long> saveAddedLayersAndTreeModification(ArrayList<GPLayer> layersList, GPWebServiceMapData descendantsMapData) {
+        ArrayList<Long> arrayList = new ArrayList<Long>(layersList.size());
+        int newPosition = layersList.get(0).getPosition();
+        int increment = layersList.size();
+        // Shift positions
+        layerDao.updatePositionsLowerBound(newPosition, increment);
+        folderDao.updatePositionsLowerBound(newPosition, increment);
+
+        GPLayer[] layersArray = layersList.toArray(new GPLayer[layersList.size()]);
+        layerDao.persist(layersArray);
+        
+        for(int i = 0;i < layersArray.length;i++) {
+            arrayList.add(layersArray[i].getId());
+        }
+
+        folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
+        return arrayList;
     }
 
     // Add @Transaction ?
@@ -253,40 +274,32 @@ class LayerServiceImpl {
             GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
         GPLayer layerMoved = layerDao.find(idLayerMoved);
         if (layerMoved == null) {
-            throw new ResourceNotFoundFault("Layer with id " + idLayerMoved + " not found");
+            throw new ResourceNotFoundFault("Layer not found", idLayerMoved);
         }
+        assert (layerMoved.getPosition() != newPosition) : "Layer must have a different initial and final position";
         assert (layerMoved.getFolder() != null) : "Layer specified must be stored into a folder";
-
-//        GPFolder oldFolder = layerMoved.getFolder();
-//        if (layerMoved.getPosition() == newPosition) {
-//            if(oldFolder.getId() == idNewParent){
-//                return false;
-//            }
-//            // Fix parent and descendants assotiation
-//        }
 
         GPFolder newFolder = folderDao.find(idNewParent);
         if (newFolder == null) {
-            throw new ResourceNotFoundFault("Folder with id " + idNewParent + " not found");
+            throw new ResourceNotFoundFault("Folder not found", idNewParent);
         }
 
         int beginPosition = -1, endPosition = -1, delta = 0;
         int oldPosition = layerMoved.getPosition();
-        if (oldPosition < newPosition) { // Drag & Drop to up
+        if (oldPosition < newPosition) {
+            // Drag & Drop to top
             beginPosition = oldPosition + 1;
             endPosition = newPosition;
             delta = -1;
-        } else if (oldPosition > newPosition) { // Drag & Drop to down
+        } else if (oldPosition > newPosition) {
+            // Drag & Drop to bottom
             beginPosition = newPosition;
             endPosition = oldPosition - 1;
             delta = 1;
         }
 
-        boolean resultUpdateOfLayers = true, resultUpdateOfFolders = true;
-        if (delta != 0) {
-            resultUpdateOfLayers = layerDao.updatePositionsRange(beginPosition, endPosition, delta);
-            resultUpdateOfFolders = folderDao.updatePositionsRange(beginPosition, endPosition, delta);
-        }
+        boolean resultUpdateOfLayers = layerDao.updatePositionsRange(beginPosition, endPosition, delta);
+        boolean resultUpdateOfFolders = folderDao.updatePositionsRange(beginPosition, endPosition, delta);
         assert (resultUpdateOfLayers) : "Errors occured when updating position of layers";
         assert (resultUpdateOfFolders) : "Errors occured when updating position of folders";
 

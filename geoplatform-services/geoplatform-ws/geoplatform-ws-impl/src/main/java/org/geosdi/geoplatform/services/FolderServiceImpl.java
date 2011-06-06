@@ -298,7 +298,6 @@ class FolderServiceImpl {
 //                resultUpdates = resultUpdates && resultUpdatesOfSubLayers && resultUpdatesOfSubFolders;
                 resultUpdates = resultUpdates && resultUpdatesOfSubFolders;
             }
-            logger.trace("#########################################################################");
             FolderList fs = this.getAllUserFoldersByUserId(owner.getId());
             for (FolderDTO folder : fs.getList()) {
                 logger.trace("\n***\n{}\n***", folder);

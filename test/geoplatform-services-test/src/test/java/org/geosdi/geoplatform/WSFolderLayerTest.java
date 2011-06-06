@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -45,6 +46,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import org.geosdi.geoplatform.core.model.GPBBox;
+import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
@@ -123,6 +126,51 @@ public class WSFolderLayerTest extends ServiceTest {
         rootFolderB.setPosition(3);
         rootFolderB.setNumberOfDescendants(2);
         geoPlatformService.updateFolder(rootFolderB);
+    }
+
+    @Test
+    public void testAddLayers() {
+        try {
+            String nameRasterLayer3 = "Raster Layer 3";
+            String nameVectorLayer3 = "Vector Layer 3";
+
+            // "rootFolderA" ---> "rasterLayer3"
+            GPRasterLayer rasterLayer3 = new GPRasterLayer();
+            createLayer(rasterLayer3, "", rootFolderA, nameRasterLayer3, 6,
+                    false, spatialReferenceSystem, "", urlServer);
+            GPLayerInfo layerInfo = new GPLayerInfo();
+            layerInfo.setKeywords(layerInfoKeyword);
+            layerInfo.setQueryable(false);
+            rasterLayer3.setLayerInfo(layerInfo);
+            // "rootFolderA" ---> "vectorLayer3"
+            GPVectorLayer vectorLayer3 = new GPVectorLayer();
+            createLayer(vectorLayer3, "", rootFolderA, nameVectorLayer3, 7,
+                    false, spatialReferenceSystem, "", urlServer);
+            //
+            ArrayList<GPLayer> arrayList = new ArrayList<GPLayer>();
+            arrayList.add(rasterLayer3);
+            arrayList.add(vectorLayer3);
+
+            Map<Long, Integer> map = new HashMap<Long, Integer>();
+            map.put(idRootFolderA, 4);
+            GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
+            descendantsMapData.setDescendantsMap(map);
+            
+            ArrayList<Long> idList = geoPlatformService.saveAddedLayersAndTreeModification(arrayList, descendantsMapData);
+            
+            rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
+            Assert.assertEquals("position of rootFolderA", 8, rootFolderA.getPosition());
+            
+            GPLayer newRasterLayer3 = geoPlatformService.getRasterLayer(idList.get(0));
+            Assert.assertEquals("name of newRasterLayer3", nameRasterLayer3, newRasterLayer3.getName());
+            Assert.assertEquals("position of newRasterLayer3", 6, newRasterLayer3.getPosition());
+            
+            GPLayer newVectorLayer3 = geoPlatformService.getVectorLayer(idList.get(1));
+            Assert.assertEquals("name of newVectorLayer3", nameVectorLayer3, newVectorLayer3.getName());
+            Assert.assertEquals("position of newVectorLayer3", 7, newVectorLayer3.getPosition());
+        } catch (ResourceNotFoundFault ex) {
+            logger.debug("\n*** Layer with id \"{}\" was NOT found ***", idRasterLayer1);
+        }
     }
 
     @Test
@@ -315,6 +363,166 @@ public class WSFolderLayerTest extends ServiceTest {
             Assert.fail("Folder was not found");
         } catch (IllegalParameterFault ex) {
             Assert.fail("Folder with id \"" + layerToTest.getId() + "\" was not found");
+        }
+    }
+
+    @Test
+    public void testSaveDragAndDropLayerModificationsToTopOnSameFolder() {
+        Map<Long, Integer> map = new HashMap<Long, Integer>();
+        GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
+        descendantsMapData.setDescendantsMap(map);
+        try {
+            // Drag & Drop action of vectorLayer2 on rasterLayer2       
+
+            boolean result = geoPlatformService.saveDragAndDropLayerAndTreeModification(idVectorLayer2, idRootFolderB, 2, descendantsMapData);
+            Assert.assertTrue("Drag and Drop successful", result);
+
+            rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
+            Assert.assertEquals("Position of root folder A after drag and drop operation", 6, rootFolderA.getPosition());
+            Assert.assertEquals("Number of descendant of root folder A after drag and drop operation", 2, rootFolderA.getNumberOfDescendants());
+
+            rasterLayer1 = geoPlatformService.getRasterLayer(idRasterLayer1);
+            Assert.assertEquals("Position of raster layer 1 after drag and drop operation", 5, rasterLayer1.getPosition());
+            Assert.assertEquals("Parent of raster layer 1 after drag and drop operation", idRootFolderA, rasterLayer1.getFolder().getId());
+
+            vectorLayer1 = geoPlatformService.getVectorLayer(idVectorLayer1);
+            Assert.assertEquals("Position of vector layer 1 after drag and drop operation", 4, vectorLayer1.getPosition());
+            Assert.assertEquals("Parent of vector layer 1 after drag and drop operation", idRootFolderA, vectorLayer1.getFolder().getId());
+
+            rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
+            Assert.assertEquals("Position of root folder B after drag and drop operation", 3, rootFolderB.getPosition());
+            Assert.assertEquals("Number of descendant of root folder B after drag and drop operation", 2, rootFolderB.getNumberOfDescendants());
+
+            rasterLayer2 = geoPlatformService.getRasterLayer(idRasterLayer2);
+            Assert.assertEquals("Position of raster layer 2 after drag and drop operation", 1, rasterLayer2.getPosition());
+            Assert.assertEquals("Parent of raster layer 2 after drag and drop operation", idRootFolderB, rasterLayer2.getFolder().getId());
+
+            vectorLayer2 = geoPlatformService.getVectorLayer(idVectorLayer2);
+            Assert.assertEquals("Position of vector layer 2 after drag and drop operation", 2, vectorLayer2.getPosition());
+            Assert.assertEquals("Parent of vector layer 2 after drag and drop operation", idRootFolderB, vectorLayer2.getFolder().getId());
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Folder or Layer was not found");
+        }
+    }
+
+    @Test
+    public void testSaveDragAndDropLayerModificationsToBottomOnSameFolder() {
+        Map<Long, Integer> map = new HashMap<Long, Integer>();
+        GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
+        descendantsMapData.setDescendantsMap(map);
+        try {
+            // Drag & Drop action of rasterLayer2 on vectorLayer2
+
+            boolean result = geoPlatformService.saveDragAndDropLayerAndTreeModification(idRasterLayer2, idRootFolderB, 1, descendantsMapData);
+            Assert.assertTrue("Drag and Drop successful", result);
+
+            rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
+            Assert.assertEquals("Position of root folder A after drag and drop operation", 6, rootFolderA.getPosition());
+            Assert.assertEquals("Number of descendant of root folder A after drag and drop operation", 2, rootFolderA.getNumberOfDescendants());
+
+            rasterLayer1 = geoPlatformService.getRasterLayer(idRasterLayer1);
+            Assert.assertEquals("Position of raster layer 1 after drag and drop operation", 5, rasterLayer1.getPosition());
+            Assert.assertEquals("Parent of raster layer 1 after drag and drop operation", idRootFolderA, rasterLayer1.getFolder().getId());
+
+            vectorLayer1 = geoPlatformService.getVectorLayer(idVectorLayer1);
+            Assert.assertEquals("Position of vector layer 1 after drag and drop operation", 4, vectorLayer1.getPosition());
+            Assert.assertEquals("Parent of vector layer 1 after drag and drop operation", idRootFolderA, vectorLayer1.getFolder().getId());
+
+            rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
+            Assert.assertEquals("Position of root folder B after drag and drop operation", 3, rootFolderB.getPosition());
+            Assert.assertEquals("Number of descendant of root folder B after drag and drop operation", 2, rootFolderB.getNumberOfDescendants());
+
+            rasterLayer2 = geoPlatformService.getRasterLayer(idRasterLayer2);
+            Assert.assertEquals("Position of raster layer 2 after drag and drop operation", 1, rasterLayer2.getPosition());
+            Assert.assertEquals("Parent of raster layer 2 after drag and drop operation", idRootFolderB, rasterLayer2.getFolder().getId());
+
+            vectorLayer2 = geoPlatformService.getVectorLayer(idVectorLayer2);
+            Assert.assertEquals("Position of vector layer 2 after drag and drop operation", 2, vectorLayer2.getPosition());
+            Assert.assertEquals("Parent of vector layer 2 after drag and drop operation", idRootFolderB, vectorLayer2.getFolder().getId());
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Folder or Layer was not found");
+        }
+    }
+
+    @Test
+    public void testSaveDragAndDropLayerModificationsToTopOnDifferentFolder() {
+        Map<Long, Integer> map = new HashMap<Long, Integer>();
+        GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
+        descendantsMapData.setDescendantsMap(map);
+        try {
+            // Drag & Drop action of vectorLayer2 on vectorLayer1
+            map.put(idRootFolderA, 3);
+            map.put(idRootFolderB, 1);
+
+            boolean result = geoPlatformService.saveDragAndDropLayerAndTreeModification(idVectorLayer2, idRootFolderA, 4, descendantsMapData);
+            Assert.assertTrue("Drag and Drop successful", result);
+
+            rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
+            Assert.assertEquals("Position of root folder A after drag and drop operation", 6, rootFolderA.getPosition());
+            Assert.assertEquals("Number of descendant of root folder A after drag and drop operation", 3, rootFolderA.getNumberOfDescendants());
+
+            rasterLayer1 = geoPlatformService.getRasterLayer(idRasterLayer1);
+            Assert.assertEquals("Position of raster layer 1 after drag and drop operation", 5, rasterLayer1.getPosition());
+            Assert.assertEquals("Parent of raster layer 1 after drag and drop operation", idRootFolderA, rasterLayer1.getFolder().getId());
+
+            vectorLayer1 = geoPlatformService.getVectorLayer(idVectorLayer1);
+            Assert.assertEquals("Position of vector layer 1 after drag and drop operation", 3, vectorLayer1.getPosition());
+            Assert.assertEquals("Parent of vector layer 1 after drag and drop operation", idRootFolderA, vectorLayer1.getFolder().getId());
+
+            rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
+            Assert.assertEquals("Position of root folder B after drag and drop operation", 2, rootFolderB.getPosition());
+            Assert.assertEquals("Number of descendant of root folder B after drag and drop operation", 1, rootFolderB.getNumberOfDescendants());
+
+            rasterLayer2 = geoPlatformService.getRasterLayer(idRasterLayer2);
+            Assert.assertEquals("Position of raster layer 2 after drag and drop operation", 1, rasterLayer2.getPosition());
+            Assert.assertEquals("Parent of raster layer 2 after drag and drop operation", idRootFolderB, rasterLayer2.getFolder().getId());
+
+            vectorLayer2 = geoPlatformService.getVectorLayer(idVectorLayer2);
+            Assert.assertEquals("Position of vector layer 2 after drag and drop operation", 4, vectorLayer2.getPosition());
+            Assert.assertEquals("Parent of vector layer 2 after drag and drop operation", idRootFolderA, vectorLayer2.getFolder().getId());
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Folder or Layer was not found");
+        }
+    }
+
+    @Test
+    public void testSaveDragAndDropLayerModificationsToBottomOnDifferentFolder() {
+        Map<Long, Integer> map = new HashMap<Long, Integer>();
+        GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
+        descendantsMapData.setDescendantsMap(map);
+        try {
+            // Drag & Drop action of vectorLayer1 on vectorLayer2
+            map.put(idRootFolderA, 1);
+            map.put(idRootFolderB, 3);
+
+            boolean result = geoPlatformService.saveDragAndDropLayerAndTreeModification(idVectorLayer1, idRootFolderB, 1, descendantsMapData);
+            Assert.assertTrue("Drag and Drop successful", result);
+
+            rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
+            Assert.assertEquals("Position of root folder A after drag and drop operation", 6, rootFolderA.getPosition());
+            Assert.assertEquals("Number of descendant of root folder A after drag and drop operation", 1, rootFolderA.getNumberOfDescendants());
+
+            rasterLayer1 = geoPlatformService.getRasterLayer(idRasterLayer1);
+            Assert.assertEquals("Position of raster layer 1 after drag and drop operation", 5, rasterLayer1.getPosition());
+            Assert.assertEquals("Parent of raster layer 1 after drag and drop operation", idRootFolderA, rasterLayer1.getFolder().getId());
+
+            vectorLayer1 = geoPlatformService.getVectorLayer(idVectorLayer1);
+            Assert.assertEquals("Position of vector layer 1 after drag and drop operation", 1, vectorLayer1.getPosition());
+            Assert.assertEquals("Parent of vector layer 1 after drag and drop operation", idRootFolderB, vectorLayer1.getFolder().getId());
+
+            rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
+            Assert.assertEquals("Position of root folder B after drag and drop operation", 4, rootFolderB.getPosition());
+            Assert.assertEquals("Number of descendant of root folder B after drag and drop operation", 3, rootFolderB.getNumberOfDescendants());
+
+            rasterLayer2 = geoPlatformService.getRasterLayer(idRasterLayer2);
+            Assert.assertEquals("Position of raster layer 2 after drag and drop operation", 3, rasterLayer2.getPosition());
+            Assert.assertEquals("Parent of raster layer 2 after drag and drop operation", idRootFolderB, rasterLayer2.getFolder().getId());
+
+            vectorLayer2 = geoPlatformService.getVectorLayer(idVectorLayer2);
+            Assert.assertEquals("Position of vector layer 2 after drag and drop operation", 2, vectorLayer2.getPosition());
+            Assert.assertEquals("Parent of vector layer 2 after drag and drop operation", idRootFolderB, vectorLayer2.getFolder().getId());
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail("Folder or Layer was not found");
         }
     }
 

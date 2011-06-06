@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import java.util.ArrayList;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import java.util.Collection;
 import javax.jws.WebService;
@@ -461,6 +462,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     @Override
     public long saveAddedLayerAndTreeModification(GPLayer layer, GPWebServiceMapData descendantsMapData) {
         return layerServiceDelegate.saveAddedLayerAndTreeModification(layer, descendantsMapData);
+    }
+
+    @Override
+    public ArrayList<Long> saveAddedLayersAndTreeModification(ArrayList<GPLayer>  layersList, GPWebServiceMapData descendantsMapData) {
+        return layerServiceDelegate.saveAddedLayersAndTreeModification(layersList, descendantsMapData);
     }
 
     @Override

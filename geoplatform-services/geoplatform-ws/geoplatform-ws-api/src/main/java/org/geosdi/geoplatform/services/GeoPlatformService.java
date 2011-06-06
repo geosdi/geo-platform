@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -325,6 +326,12 @@ public interface GeoPlatformService {
     @HttpResource(location = "/layer/{descendantsMap}")
     long saveAddedLayerAndTreeModification(
             @WebParam(name = "layer") GPLayer layer,
+            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData);
+
+    @Put
+    @HttpResource(location = "/layers/{descendantsMap}")
+    ArrayList<Long> saveAddedLayersAndTreeModification(
+            @WebParam(name = "layers") ArrayList<GPLayer> layersList,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData);
 
     @Delete

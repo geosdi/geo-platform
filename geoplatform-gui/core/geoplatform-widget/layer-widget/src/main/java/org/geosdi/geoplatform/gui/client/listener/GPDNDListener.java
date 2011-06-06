@@ -62,7 +62,7 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
             this.visitor.fixPosition(changedElement, parentDestination, newIndex);
             MementoSaveDragDrop mementoSaveDND = new MementoSaveDragDrop(this);
             mementoSaveDND.setRefBaseElement(changedElement);
-            mementoSaveDND.setNewZIndex(newIndex);
+            mementoSaveDND.setNewZIndex(changedElement.getzIndex());
             mementoSaveDND.setRefNewParent((parentDestination instanceof FolderTreeNode) ? (FolderTreeNode) parentDestination : null);
             mementoSaveDND.setDescendantMap(this.visitor.getFolderDescendantMap());
             GPLayerSaveCache.getInstance().add(mementoSaveDND);

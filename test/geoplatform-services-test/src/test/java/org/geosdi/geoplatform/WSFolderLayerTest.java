@@ -41,6 +41,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -168,8 +170,10 @@ public class WSFolderLayerTest extends ServiceTest {
             GPLayer newVectorLayer3 = geoPlatformService.getVectorLayer(idList.get(1));
             Assert.assertEquals("name of newVectorLayer3", nameVectorLayer3, newVectorLayer3.getName());
             Assert.assertEquals("position of newVectorLayer3", 7, newVectorLayer3.getPosition());
+        } catch (IllegalParameterFault ex) {
+            Assert.fail("Layer has an Illegal Parameter");
         } catch (ResourceNotFoundFault ex) {
-            logger.debug("\n*** Layer with id \"{}\" was NOT found ***", ex.getId());
+            Assert.fail("Layer has a resource not found ");
         }
     }
 
@@ -192,7 +196,7 @@ public class WSFolderLayerTest extends ServiceTest {
             Assert.assertEquals("assertEquals shortVectorLayer1.getUrlServer()", shortVectorLayer1.getUrlServer(), urlServer);
             Assert.assertEquals("assertEquals shortVectorLayer1.getLayerType()", shortVectorLayer1.getLayerType(), GPLayerType.POLYGON);
         } catch (ResourceNotFoundFault ex) {
-            logger.debug("\n*** Layer with id \"{}\" was NOT found ***", idRasterLayer1);
+            Assert.fail("Layer has a resource not found ");
         }
     }
 
@@ -532,7 +536,7 @@ public class WSFolderLayerTest extends ServiceTest {
             ShortLayerDTO layer = geoPlatformService.getShortLayer(idLayer);
             Assert.fail("Layer with id \"" + idLayer + "\" was NOT deleted");
         } catch (Exception e) {
-            logger.debug("\n*** Layer with id \"{}\" was deleted ***", idLayer);
+            Assert.fail("Layer with id \"" + idLayer + "\" was NOT deleted");
         }
     }
 

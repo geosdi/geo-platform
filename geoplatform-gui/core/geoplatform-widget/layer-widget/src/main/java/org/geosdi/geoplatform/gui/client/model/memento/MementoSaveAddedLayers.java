@@ -35,41 +35,47 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento;
 
+import java.util.Iterator;
+import java.util.List;
 import org.geosdi.geoplatform.gui.action.ISave;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoSaveAdd<T extends AbstractMementoSave> extends AbstractMementoSave {
+public class MementoSaveAddedLayers extends AbstractMementoSave {
 
     private static final long serialVersionUID = -3384768384840157219L;
-    private T addedElement;
+    private List<AbstractMementoLayer> addedLayers;
 
-    public MementoSaveAdd() {
+    public MementoSaveAddedLayers() {
     }
 
-    public MementoSaveAdd(ISave saveAction) {
+    public MementoSaveAddedLayers(ISave saveAction) {
         super(saveAction);
     }
 
     @Override
     public void convertMementoToWs() {
         super.convertMementoToWs();
-        addedElement.convertMementoToWs();
-    }
-    
-    /**
-     * @return the addedElement
-     */
-    public T getAddedElement() {
-        return addedElement;
+        for (Iterator<AbstractMementoLayer> it = addedLayers.iterator(); it.hasNext();) {
+            it.next().convertMementoToWs();   
+        }
     }
 
     /**
-     * @param addedElement the addedElement to set
+     * @return the addedLayers
      */
-    public void setAddedElement(T addedElement) {
-        this.addedElement = addedElement;
+    public List<AbstractMementoLayer> getAddedLayers() {
+        return addedLayers;
     }
+
+    /**
+     * @param addedLayers the addedLayers to set
+     */
+    public void setAddedLayers(List<AbstractMementoLayer> addedLayers) {
+        this.addedLayers = addedLayers;
+    }
+    
+
 }

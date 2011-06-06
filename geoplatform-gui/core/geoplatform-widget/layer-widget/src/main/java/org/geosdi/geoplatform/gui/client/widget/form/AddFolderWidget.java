@@ -54,7 +54,7 @@ import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoBuilder;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoFolder;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
@@ -62,6 +62,7 @@ import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPLayerExpander;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -75,9 +76,9 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayers
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
-        implements ISave<MementoSaveAdd> {
+        implements ISave<MementoSaveAddedFolder> {
 
-    private TreePanel tree;
+    private TreePanel<GPBeanTreeModel> tree;
     private TextField<String> folderText;
     private Button save;
     private Button cancel;
@@ -89,7 +90,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
     /**
      *@Constructor
      */
-    public AddFolderWidget(TreePanel theTree) {
+    public AddFolderWidget(TreePanel<GPBeanTreeModel> theTree) {
         super(true);
         this.tree = theTree;
         this.addVisitor = new VisitorAddElement();
@@ -186,15 +187,15 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
     @Override
     public void execute() {
         this.saveStatus.setBusy("Adding Folder");
-        this.parentDestination = (GPBeanTreeModel) this.getTree().getSelectionModel().getSelectedItem();
+        this.parentDestination = this.getTree().getSelectionModel().getSelectedItem();
 //        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";
         this.entity = new FolderTreeNode(this.folderText.getValue());
         this.getTree().getStore().insert(parentDestination, this.entity, 0, true);
 
         this.addVisitor.insertElement(this.entity, parentDestination, 0);
 
-        MementoSaveAdd mementoSaveAdd = new MementoSaveAdd(this);
-        mementoSaveAdd.setAddedElement(MementoBuilder.buildSaveFolderMemento(
+        MementoSaveAddedFolder mementoSaveAdd = new MementoSaveAddedFolder(this);
+        mementoSaveAdd.setAddedFolder(MementoBuilder.buildSaveFolderMemento(
                 this.entity));
         mementoSaveAdd.setDescendantMap(this.addVisitor.getFolderDescendantMap());
 
@@ -228,14 +229,12 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
     /**
      * @return the tree
      */
-    public TreePanel getTree() {
+    public TreePanel<GPBeanTreeModel> getTree() {
         return tree;
     }
 
     @Override
-    public void executeSave(final MementoSaveAdd memento) {
-        assert (memento.getAddedElement() instanceof MementoFolder) :
-                "AddFolderWidget on executeSave: Illegal argument passed";
+    public void executeSave(final MementoSaveAddedFolder memento) {
         //Warning: The following conversion is absolutely necessary!
         memento.convertMementoToWs();
 
@@ -258,7 +257,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
                                 "Folders saveded successfully.",
                                 EnumSearchStatus.STATUS_SEARCH.toString());
                         //Warning: What happens when I delete a folder before save it???
-                        MementoFolder mementoAdded = (MementoFolder) memento.getAddedElement();
+                        MementoFolder mementoAdded = memento.getAddedFolder();
                         mementoAdded.getRefBaseElement().setId(result);
                         mementoAdded.getRefBaseElement().setLoaded(true);
                         LayerHandlerManager.fireEvent(peekCacheEvent);

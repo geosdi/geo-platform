@@ -40,7 +40,8 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedFolder;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
@@ -89,7 +90,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public long saveAddedFolderAndTreeModifications(MementoSaveAdd memento) throws GeoPlatformException;
+    public long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento) throws GeoPlatformException;
 
     /**
      * 
@@ -97,7 +98,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public long saveAddedLayerAndTreeModifications(MementoSaveAdd memento) throws GeoPlatformException;
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento) throws GeoPlatformException;
 
     
     /**

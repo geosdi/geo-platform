@@ -36,13 +36,30 @@
 package org.geosdi.geoplatform.gui.client.widget.store;
 
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.model.GPRasterBeanModel;
+import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
+import org.geosdi.geoplatform.gui.client.model.memento.AbstractMementoLayer;
+import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoBuilder;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedLayers;
+import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
+import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
+import org.geosdi.geoplatform.gui.client.service.LayerRemote;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.GenericTreeStoreWidget;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridElementEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.LayersProgressTextEvent;
 
 /**
@@ -50,25 +67,34 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.LayersProgres
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPTreeStoreWidget extends GenericTreeStoreWidget {
+public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<MementoSaveAddedLayers> {
 
     private LayersProgressTextEvent layersTextEvent = new LayersProgressTextEvent();
     private DeselectGridElementEvent deselectEvent = new DeselectGridElementEvent();
+    private VisitorAddElement visitorAdd = new VisitorAddElement();
+    private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
 
-    /**********************************************************/
-    /**HERE THE MEMENTO AND VISITOR PROPERTIES TO ADD LAYERS **/
-    /**********************************************************
+    /*
      * @param theTree 
      */
-    public GPTreeStoreWidget(GPTreePanel<? extends GPBeanTreeModel> theTree) {
+    public GPTreeStoreWidget(GPTreePanel<GPBeanTreeModel> theTree) {
         super(theTree);
     }
 
     @Override
     public void addRasterLayers(List<? extends GPLayerBean> layers) {
-        this.changeProgressBarMessage("Load Raster Layers in the Store");
-        System.out.println("ADD RASTER ******************* " + layers);
-
+        this.changeProgressBarMessage("Loading Raster Layers into the Store");
+        GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
+        List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
+        for (Iterator it = layers.iterator(); it.hasNext();) {
+            layerList.add((GPBeanTreeModel) it.next());
+        }
+        this.tree.getStore().insert(parentDestination, layerList, 0, true);
+        this.visitorAdd.insertLayerElements(layers, parentDestination);
+        MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
+        mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(layers));
+        mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
+        GPLayerSaveCache.getInstance().add(mementoSaveLayer);
         //TODO :
         //     THIS CODE MUST BE CHANGED AND WILL BE SEND AN EVENT
         //     THAT DELESECT LAYERS IN THE GRID AND CLOSE PROGRESS BAR
@@ -85,11 +111,41 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget {
     @Override
     public void addVectorLayers(List<? extends GPLayerBean> layers) {
         this.changeProgressBarMessage("Load Vector Layers in the Store");
-        System.out.println("ADD VECTOR *********************** " + layers);
+        System.out.println("A*********************************************************DD VECTOR *********************** " + layers);
     }
 
     private void changeProgressBarMessage(String message) {
         layersTextEvent.setMessage(message);
         LayerHandlerManager.fireEvent(layersTextEvent);
+    }
+
+    @Override
+    public void executeSave(final MementoSaveAddedLayers memento) {
+        //Warning: The following conversion is absolutely necessary!
+        memento.convertMementoToWs();
+
+        LayerRemote.Util.getInstance().saveAddedLayersAndTreeModifications(memento,
+                new AsyncCallback<ArrayList<Long>>() {
+
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
+                        GeoPlatformMessage.errorMessage("Save Layers Error",
+                                "Problems on saving the new tree state after layers creation");
+                    }
+
+                    @Override
+                    public void onSuccess(ArrayList<Long> result) {
+                        GPLayerSaveCache.getInstance().remove(memento);
+                        LayoutManager.get().getStatusMap().setStatus(
+                                "Layers saveded successfully.",
+                                EnumSearchStatus.STATUS_SEARCH.toString());
+                        List<AbstractMementoLayer> listMementoLayers = memento.getAddedLayers();
+                        for (int i = 0; i < listMementoLayers.size(); i++) {
+                            listMementoLayers.get(i).getRefBaseElement().setId(i);
+                        }
+                        LayerHandlerManager.fireEvent(peekCacheEvent);
+                    }
+                });
     }
 }

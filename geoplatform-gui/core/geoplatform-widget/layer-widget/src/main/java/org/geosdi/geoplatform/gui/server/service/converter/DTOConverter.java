@@ -38,12 +38,21 @@ package org.geosdi.geoplatform.gui.server.service.converter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
+import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
+import org.geosdi.geoplatform.gui.client.model.memento.AbstractMementoLayer;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoFolder;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoRaster;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoVector;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
@@ -178,7 +187,7 @@ public class DTOConverter {
         GPFolder gpFolder = new GPFolder();
         gpFolder.setName(memento.getFolderName());
         gpFolder.setChecked(memento.isChecked());
-        gpFolder.setId(memento.getIdElement());
+        gpFolder.setId(memento.getIdBaseElement());
         gpFolder.setNumberOfDescendants(memento.getNumberOfDescendants());
         if (memento.getIdParent() != 0L) {
             GPFolder parent = new GPFolder();
@@ -200,5 +209,51 @@ public class DTOConverter {
         wsMap.setDescendantsMap(descendantMap);
         System.out.println("Size della mappa descendants: " + descendantMap.size());
         return wsMap;
+    }
+
+    public ArrayList<GPLayer> convertMementoLayers(List<AbstractMementoLayer> addedLayers) {
+        ArrayList<GPLayer> layersList = new ArrayList<GPLayer>();
+        for (AbstractMementoLayer layer : addedLayers) {
+            if (layer instanceof MementoRaster) {
+                MementoRaster memento = (MementoRaster) layer;
+                GPRasterLayer raster = new GPRasterLayer();
+                raster.setAbstractText(memento.getAbstractText());
+                raster.setBbox(new GPBBox(memento.getLowerLeftX(), memento.getLowerLeftY(),
+                        memento.getUpperRightX(), memento.getUpperRightY()));
+                raster.setChecked(memento.isChecked());
+                GPFolder parent = new GPFolder();
+                parent.setId(memento.getIdFolderParent());
+                raster.setFolder(parent);
+                raster.setId(memento.getIdBaseElement());
+                //raster.setLayerInfo();???
+                raster.setName(memento.getLayerName());
+                raster.setPosition(memento.getzIndex());
+                //raster.setShared();???
+                raster.setSrs(memento.getSrs());
+                raster.setTitle(memento.getTitle());
+                raster.setUrlServer(memento.getDataSource());
+                layersList.add(raster);
+            } else if (layer instanceof MementoVector) {
+                GPVectorLayer vector = new GPVectorLayer();
+                MementoRaster memento = (MementoRaster) layer;
+                vector.setAbstractText(memento.getAbstractText());
+                vector.setBbox(new GPBBox(memento.getLowerLeftX(), memento.getLowerLeftY(),
+                        memento.getUpperRightX(), memento.getUpperRightY()));
+                vector.setChecked(memento.isChecked());
+                GPFolder parent = new GPFolder();
+                parent.setId(memento.getIdFolderParent());
+                vector.setFolder(parent);
+                vector.setId(memento.getIdBaseElement());
+                //vector.setGeometry()???
+                vector.setName(memento.getLayerName());
+                vector.setPosition(memento.getzIndex());
+                //vector.setShared();???
+                vector.setSrs(memento.getSrs());
+                vector.setTitle(memento.getTitle());
+                vector.setUrlServer(memento.getDataSource());
+                layersList.add(vector);
+            }
+        }
+        return layersList;
     }
 }

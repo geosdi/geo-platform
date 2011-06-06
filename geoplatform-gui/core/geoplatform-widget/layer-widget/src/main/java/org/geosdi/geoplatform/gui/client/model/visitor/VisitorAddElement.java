@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.model.visitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -68,7 +69,6 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
 
     /**
      * If possible is better for CC reasons to use consturctor with parm root.
-     * 
      */
     public VisitorAddElement() {
     }
@@ -84,11 +84,26 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
         this.updateNumberOfDescendants(parentDestination);
     }
 
+    public void insertLayerElements(List<? extends GPLayerBean> listNewElements,
+            GPBeanTreeModel parentDestination) {
+        GPBeanTreeModel gPLayerBean = null;
+        for (int i = 0; i < listNewElements.size(); i++) {
+            gPLayerBean = (GPBeanTreeModel)listNewElements.get(i);
+            gPLayerBean.setParent(parentDestination);
+            parentDestination.insert(gPLayerBean, i++);
+        }
+        this.endPosition = super.getNextUnvisitedElement(gPLayerBean);
+        this.rootElement = super.findRootElement(parentDestination);
+        this.preorderTraversal();
+        this.folderDescendantMap.clear();
+        this.updateNumberOfDescendants(parentDestination);
+    }
+
     private void updateNumberOfDescendants(GPBeanTreeModel parentDestination) {
         if (parentDestination instanceof FolderTreeNode) {
             ((FolderTreeNode) parentDestination).setNumberOfDescendants(
                     ((FolderTreeNode) parentDestination).getNumberOfDescendants() + 1);
-            this.folderDescendantMap.put((FolderTreeNode)parentDestination, ((FolderTreeNode) parentDestination).getNumberOfDescendants());
+            this.folderDescendantMap.put((FolderTreeNode) parentDestination, ((FolderTreeNode) parentDestination).getNumberOfDescendants());
         }
         if (parentDestination.getParent() != null && !(parentDestination.getParent() instanceof GPRootTreeNode)) {
             this.updateNumberOfDescendants((GPBeanTreeModel) parentDestination.getParent());

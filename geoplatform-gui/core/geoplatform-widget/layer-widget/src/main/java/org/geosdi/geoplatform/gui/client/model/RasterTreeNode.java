@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.observable.Observable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -56,10 +57,11 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
      *
      */
     private static final long serialVersionUID = 8265365333381641340L;
-    
+    private ObservableFolderTreeNode observable = new ObservableFolderTreeNode();
     private List<String> styles;
-    
-    public RasterTreeNode(){}
+
+    public RasterTreeNode() {
+    }
 
     /**
      * @Constructor
@@ -118,5 +120,28 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
     @Override
     public void accept(IVisitor visitor) {
         visitor.visitRaster(this);
+    }
+
+    @Override
+    public void setId(long id) {
+        super.setId(id);
+        observable.setChanged();
+        observable.notifyObservers(id);
+    }
+
+    public ObservableFolderTreeNode getObservable() {
+        return observable;
+    }
+
+    public void setObservable(ObservableFolderTreeNode observable) {
+        this.observable = observable;
+    }
+
+    public class ObservableFolderTreeNode extends Observable {
+
+        @Override
+        protected synchronized void setChanged() {
+            super.setChanged();
+        }
     }
 }

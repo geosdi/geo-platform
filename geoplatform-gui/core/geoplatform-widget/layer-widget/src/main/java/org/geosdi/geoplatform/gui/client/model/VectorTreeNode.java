@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.observable.Observable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -50,10 +51,8 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  */
 public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -2445765797861311204L;
+    private ObservableFolderTreeNode observable = new ObservableFolderTreeNode();
     private String featureNameSpace;
 
     public VectorTreeNode() {
@@ -128,7 +127,30 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
     }
 
     @Override
+    public void setId(long id) {
+        super.setId(id);
+        observable.setChanged();
+        observable.notifyObservers(id);
+    }
+
+    @Override
     public void accept(IVisitor visitor) {
         visitor.visitVector(this);
+    }
+
+    public ObservableFolderTreeNode getObservable() {
+        return observable;
+    }
+
+    public void setObservable(ObservableFolderTreeNode observable) {
+        this.observable = observable;
+    }
+
+    public class ObservableFolderTreeNode extends Observable {
+
+        @Override
+        protected synchronized void setChanged() {
+            super.setChanged();
+        }
     }
 }

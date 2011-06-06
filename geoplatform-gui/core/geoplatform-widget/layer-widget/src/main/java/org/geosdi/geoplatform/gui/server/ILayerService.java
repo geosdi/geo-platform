@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.gui.server;
 
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedFolder;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
@@ -61,10 +62,10 @@ public interface ILayerService {
     public ArrayList<IGPFolderElements> loadFolderElements(long folderId)
             throws GeoPlatformException;
 
-    public long saveAddedFolderAndTreeModifications(MementoSaveAdd memento)
+    public long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento)
             throws GeoPlatformException;
 
-    public long saveAddedLayerAndTreeModifications(MementoSaveAdd memento)
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento)
             throws GeoPlatformException;
 
     public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento)

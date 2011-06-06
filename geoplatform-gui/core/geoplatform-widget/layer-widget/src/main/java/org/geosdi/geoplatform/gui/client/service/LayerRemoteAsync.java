@@ -38,7 +38,8 @@ package org.geosdi.geoplatform.gui.client.service;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedFolder;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
@@ -57,9 +58,9 @@ public interface LayerRemoteAsync {
     public void loadFolderElements(long folderId,
             AsyncCallback<ArrayList<IGPFolderElements>> callback);
 
-    public void saveAddedFolderAndTreeModifications(MementoSaveAdd memento, AsyncCallback<Long> callback);
+    public void saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento, AsyncCallback<Long> callback);
 
-    public void saveAddedLayerAndTreeModifications(MementoSaveAdd memento, AsyncCallback<Long> callback);
+    public void saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento, AsyncCallback<ArrayList<Long>> callback);
 
     public void saveDeletedFolderAndTreeModifications(MementoSaveRemove memento, AsyncCallback<Boolean> callback);
 

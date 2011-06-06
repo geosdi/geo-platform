@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDeleteElement;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
@@ -85,8 +85,8 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
         precedingMemento = GPLayerSaveCache.getInstance().peekLast();
         boolean isAllowedNewMemento = true;
         MementoSaveRemove mementoSaveRemove = null;
-        if (precedingMemento != null && precedingMemento instanceof MementoSaveAdd
-                && ((MementoSaveAdd) precedingMemento).getAddedElement().getRefBaseElement().equals(element)) {
+        if (precedingMemento != null && precedingMemento instanceof MementoSaveAddedFolder
+                && ((MementoSaveAddedFolder) precedingMemento).getAddedFolder().getRefBaseElement().equals(element)) {
             GPLayerSaveCache.getInstance().remove(precedingMemento);
             isAllowedNewMemento = false;
         } else {

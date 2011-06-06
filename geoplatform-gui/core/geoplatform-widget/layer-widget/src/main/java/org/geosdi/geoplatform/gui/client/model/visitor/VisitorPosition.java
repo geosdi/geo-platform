@@ -102,8 +102,8 @@ public class VisitorPosition extends AbstractVisitTree
         this.getFolderDescendantMap().clear();
         this.updateNumberOfDescendants(oldParent, parentDestination);
 
-        System.out.println(this.startPosition == null ? null : "Start Position: " + this.startPosition.getLabel());
-        System.out.println(this.endPosition == null ? null : "End position: " + this.endPosition.getLabel());
+        System.out.println(this.startPosition == null ? "Start Position: null" : "Start Position: " + this.startPosition.getLabel());
+        System.out.println(this.endPosition == null ? "End position: untill the end of the Tree" : "End position: " + this.endPosition.getLabel());
         this.preorderTraversal();
         System.out.println("End modification");
     }

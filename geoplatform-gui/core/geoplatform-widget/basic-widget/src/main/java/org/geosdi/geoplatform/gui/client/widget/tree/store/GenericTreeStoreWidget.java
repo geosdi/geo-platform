@@ -47,9 +47,9 @@ import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
  */
 public abstract class GenericTreeStoreWidget implements GPTreeStoreEventHandler {
 
-    protected GPTreePanel<? extends GPBeanTreeModel> tree;
+    protected GPTreePanel<GPBeanTreeModel> tree;
 
-    public GenericTreeStoreWidget(GPTreePanel<? extends GPBeanTreeModel> theTree) {
+    public GenericTreeStoreWidget(GPTreePanel<GPBeanTreeModel> theTree) {
         this.tree = theTree;
         LayerHandlerManager.addHandler(GPTreeStoreEventHandler.TYPE, this);
     }

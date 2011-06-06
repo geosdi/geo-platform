@@ -70,7 +70,7 @@ public class MediatorToolbarTreeAction {
      *
      * @param idActions
      */
-    public void enableActions(String... idActions) {
+    public void enableActions(String ... idActions) {
         for (String idAcion : idActions) {
             GeoPlatformToolbarAction action = ToolbarTreeActionRegistar.get(
                     idAcion);

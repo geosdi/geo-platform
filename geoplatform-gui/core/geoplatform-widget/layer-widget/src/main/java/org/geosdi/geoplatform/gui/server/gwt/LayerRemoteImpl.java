@@ -38,7 +38,8 @@ package org.geosdi.geoplatform.gui.server.gwt;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedFolder;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
@@ -100,13 +101,13 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     }
 
     @Override
-    public long saveAddedFolderAndTreeModifications(MementoSaveAdd memento) throws GeoPlatformException {
+    public long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento) throws GeoPlatformException {
         return this.layerService.saveAddedFolderAndTreeModifications(memento);
     }
     
     @Override
-    public long saveAddedLayerAndTreeModifications(MementoSaveAdd memento) throws GeoPlatformException {
-        return this.layerService.saveAddedLayerAndTreeModifications(memento);
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento) throws GeoPlatformException {
+        return this.layerService.saveAddedLayersAndTreeModifications(memento);
     }
 
     @Override

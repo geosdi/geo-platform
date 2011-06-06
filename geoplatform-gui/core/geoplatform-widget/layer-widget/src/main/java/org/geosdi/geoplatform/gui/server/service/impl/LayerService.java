@@ -37,12 +37,13 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
 import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoFolder;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAdd;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedFolder;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
@@ -71,9 +72,7 @@ import org.springframework.stereotype.Service;
 public class LayerService implements ILayerService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    
     private GeoPlatformService geoPlatformServiceClient;
-    
     @Autowired
     private DTOConverter dtoConverter;
 
@@ -208,10 +207,8 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public long saveAddedFolderAndTreeModifications(MementoSaveAdd memento) throws GeoPlatformException {
-        //TODO: fill the gpFolder and the map converted in Long and Integer
-        GPFolder gpFolder = this.dtoConverter.convertMementoFolder(
-                (MementoFolder) memento.getAddedElement());
+    public long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento) throws GeoPlatformException {
+        GPFolder gpFolder = this.dtoConverter.convertMementoFolder(memento.getAddedFolder());
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         long idSavedFolder = 0L;
@@ -226,8 +223,21 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public long saveAddedLayerAndTreeModifications(MementoSaveAdd memento) throws GeoPlatformException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento) throws GeoPlatformException {
+        ArrayList<GPLayer> layersList = this.dtoConverter.convertMementoLayers(memento.getAddedLayers());
+        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
+                memento.getWsDescendantMap());
+        ArrayList<Long> idSavedLayers = null;
+        try {
+            idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications(layersList, map);
+        } catch (ResourceNotFoundFault ex) {
+            this.logger.error("Failed to save layers on LayerService: " + ex);
+            throw new GeoPlatformException(ex);
+        } catch (IllegalParameterFault ex) {
+            this.logger.error("Failed to save layers on LayerService: " + ex);
+            throw new GeoPlatformException(ex);
+        }
+        return idSavedLayers;
     }
 
     @Override

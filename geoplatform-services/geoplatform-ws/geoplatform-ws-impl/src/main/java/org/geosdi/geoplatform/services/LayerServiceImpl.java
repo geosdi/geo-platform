@@ -162,7 +162,7 @@ class LayerServiceImpl {
     }
 
     // Add @Transaction ?
-    public long saveAddedLayerAndTreeModification(GPLayer layer, GPWebServiceMapData descendantsMapData) {
+    public long saveAddedLayerAndTreeModifications(GPLayer layer, GPWebServiceMapData descendantsMapData) {
         int newPosition = layer.getPosition();
         int increment = 1;
         // Shift positions
@@ -176,7 +176,7 @@ class LayerServiceImpl {
     }
 
     // Add @Transaction ?
-    public ArrayList<Long> saveAddedLayersAndTreeModification(ArrayList<GPLayer> layersList, GPWebServiceMapData descendantsMapData) {
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(ArrayList<GPLayer> layersList, GPWebServiceMapData descendantsMapData) {
         ArrayList<Long> arrayList = new ArrayList<Long>(layersList.size());
         int newPosition = layersList.get(0).getPosition();
         int increment = layersList.size();

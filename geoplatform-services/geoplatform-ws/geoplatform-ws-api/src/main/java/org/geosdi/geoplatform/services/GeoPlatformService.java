@@ -164,7 +164,7 @@ public interface GeoPlatformService {
 
     @Delete
     @HttpResource(location = "/folder/{id}/{descendantsMap}")
-    boolean saveDeletedFolderAndTreeModification(@WebParam(name = "id") long id,
+    boolean saveDeletedFolderAndTreeModifications(@WebParam(name = "id") long id,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
@@ -177,7 +177,7 @@ public interface GeoPlatformService {
 
     @Put
     @HttpResource(location = "/layer/{idElementMoved}")
-    boolean saveDragAndDropFolderAndTreeModification(
+    boolean saveDragAndDropFolderAndTreeModifications(
             @WebParam(name = "idElementMoved") long idElementMoved,
             @WebParam(name = "idNewParent") long idNewParent,
             @WebParam(name = "owner") GPUser owner,
@@ -324,19 +324,19 @@ public interface GeoPlatformService {
 
     @Put
     @HttpResource(location = "/layer/{descendantsMap}")
-    long saveAddedLayerAndTreeModification(
+    long saveAddedLayerAndTreeModifications(
             @WebParam(name = "layer") GPLayer layer,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData);
 
     @Put
     @HttpResource(location = "/layers/{descendantsMap}")
-    ArrayList<Long> saveAddedLayersAndTreeModification(
+    ArrayList<Long> saveAddedLayersAndTreeModifications(
             @WebParam(name = "layers") ArrayList<GPLayer> layersList,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData);
 
     @Delete
     @HttpResource(location = "/layers/{id}/{descendantsMap}")
-    boolean saveDeletedLayerAndTreeModification(@WebParam(name = "id") long id,
+    boolean saveDeletedLayerAndTreeModifications(@WebParam(name = "id") long id,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
@@ -357,7 +357,7 @@ public interface GeoPlatformService {
 
     @Put
     @HttpResource(location = "/layer/{idElementMoved}")
-    boolean saveDragAndDropLayerAndTreeModification(
+    boolean saveDragAndDropLayerAndTreeModifications(
             @WebParam(name = "idElementMoved") long idElementMoved,
             @WebParam(name = "idNewParent") long idNewParent,
             @WebParam(name = "newPosition") int newPosition,

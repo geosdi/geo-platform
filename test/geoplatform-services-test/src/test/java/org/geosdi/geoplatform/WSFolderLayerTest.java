@@ -156,7 +156,7 @@ public class WSFolderLayerTest extends ServiceTest {
             GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
             descendantsMapData.setDescendantsMap(map);
             
-            ArrayList<Long> idList = geoPlatformService.saveAddedLayersAndTreeModification(arrayList, descendantsMapData);
+            ArrayList<Long> idList = geoPlatformService.saveAddedLayersAndTreeModifications(arrayList, descendantsMapData);
             
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
             Assert.assertEquals("position of rootFolderA", 8, rootFolderA.getPosition());
@@ -311,7 +311,7 @@ public class WSFolderLayerTest extends ServiceTest {
             descendantsMapData.setDescendantsMap(map);
 
             // Adding new layer to user's root folder B
-            long idLayerToTest = geoPlatformService.saveAddedLayerAndTreeModification(layerToTest, descendantsMapData);
+            long idLayerToTest = geoPlatformService.saveAddedLayerAndTreeModifications(layerToTest, descendantsMapData);
             layerToTest.setId(idLayerToTest);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -338,7 +338,7 @@ public class WSFolderLayerTest extends ServiceTest {
             map.clear();
             map.put(idRootFolderB, 2);
             descendantsMapData.setDescendantsMap(map);
-            geoPlatformService.saveDeletedLayerAndTreeModification(layerToTest.getId(), descendantsMapData);
+            geoPlatformService.saveDeletedLayerAndTreeModifications(layerToTest.getId(), descendantsMapData);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
             Assert.assertEquals("Position of root folder A after removing", 6, rootFolderA.getPosition());
@@ -374,7 +374,7 @@ public class WSFolderLayerTest extends ServiceTest {
         try {
             // Drag & Drop action of vectorLayer2 on rasterLayer2       
 
-            boolean result = geoPlatformService.saveDragAndDropLayerAndTreeModification(idVectorLayer2, idRootFolderB, 2, descendantsMapData);
+            boolean result = geoPlatformService.saveDragAndDropLayerAndTreeModifications(idVectorLayer2, idRootFolderB, 2, descendantsMapData);
             Assert.assertTrue("Drag and Drop successful", result);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -413,7 +413,7 @@ public class WSFolderLayerTest extends ServiceTest {
         try {
             // Drag & Drop action of rasterLayer2 on vectorLayer2
 
-            boolean result = geoPlatformService.saveDragAndDropLayerAndTreeModification(idRasterLayer2, idRootFolderB, 1, descendantsMapData);
+            boolean result = geoPlatformService.saveDragAndDropLayerAndTreeModifications(idRasterLayer2, idRootFolderB, 1, descendantsMapData);
             Assert.assertTrue("Drag and Drop successful", result);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -454,7 +454,7 @@ public class WSFolderLayerTest extends ServiceTest {
             map.put(idRootFolderA, 3);
             map.put(idRootFolderB, 1);
 
-            boolean result = geoPlatformService.saveDragAndDropLayerAndTreeModification(idVectorLayer2, idRootFolderA, 4, descendantsMapData);
+            boolean result = geoPlatformService.saveDragAndDropLayerAndTreeModifications(idVectorLayer2, idRootFolderA, 4, descendantsMapData);
             Assert.assertTrue("Drag and Drop successful", result);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -495,7 +495,7 @@ public class WSFolderLayerTest extends ServiceTest {
             map.put(idRootFolderA, 1);
             map.put(idRootFolderB, 3);
 
-            boolean result = geoPlatformService.saveDragAndDropLayerAndTreeModification(idVectorLayer1, idRootFolderB, 1, descendantsMapData);
+            boolean result = geoPlatformService.saveDragAndDropLayerAndTreeModifications(idVectorLayer1, idRootFolderB, 1, descendantsMapData);
             Assert.assertTrue("Drag and Drop successful", result);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));

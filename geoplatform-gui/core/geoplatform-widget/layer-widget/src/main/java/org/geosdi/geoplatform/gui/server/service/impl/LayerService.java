@@ -237,7 +237,7 @@ public class LayerService implements ILayerService {
                 memento.getWsDescendantMap());
         boolean result = false;
         try {
-            result = this.geoPlatformServiceClient.saveDeletedFolderAndTreeModification(
+            result = this.geoPlatformServiceClient.saveDeletedFolderAndTreeModifications(
                     memento.getIdBaseElement(), map);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to delete folder on LayerService: " + ex);
@@ -256,7 +256,7 @@ public class LayerService implements ILayerService {
                 memento.getWsDescendantMap());
         boolean result = false;
         try {
-            result = this.geoPlatformServiceClient.saveDeletedLayerAndTreeModification(
+            result = this.geoPlatformServiceClient.saveDeletedLayerAndTreeModifications(
                     memento.getIdBaseElement(), map);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to delete layer on LayerService: " + ex);
@@ -274,7 +274,7 @@ public class LayerService implements ILayerService {
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(memento.getWsDescendantMap());
         boolean result = false;
         try {
-            result = this.geoPlatformServiceClient.saveDragAndDropLayerAndTreeModification(
+            result = this.geoPlatformServiceClient.saveDragAndDropLayerAndTreeModifications(
                     memento.getIdBaseElement(), memento.getIdNewParent(), memento.getNewZIndex(), map);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to save layer drag&drop on LayerService: " + ex);
@@ -291,7 +291,7 @@ public class LayerService implements ILayerService {
         GPUser user = new GPUser();
         user.setUsername("user_test_0");
         try {
-            result = this.geoPlatformServiceClient.saveDragAndDropFolderAndTreeModification(
+            result = this.geoPlatformServiceClient.saveDragAndDropFolderAndTreeModifications(
                     memento.getIdBaseElement(), memento.getIdNewParent(), user, memento.getNewZIndex(), map);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to save folder drag&drop on LayerService: " + ex);

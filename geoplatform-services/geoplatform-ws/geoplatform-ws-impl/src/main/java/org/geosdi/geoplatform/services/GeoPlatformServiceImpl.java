@@ -322,7 +322,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean saveDeletedFolderAndTreeModification(long id, GPWebServiceMapData descendantsMapData)
+    public boolean saveDeletedFolderAndTreeModifications(long id, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return folderServiceDelegate.saveDeletedFolderAndTreeModifications(id, descendantsMapData);
     }
@@ -334,7 +334,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean saveDragAndDropFolderAndTreeModification(long idElementMoved, long idNewParent, GPUser owner, int newPosition, 
+    public boolean saveDragAndDropFolderAndTreeModifications(long idElementMoved, long idNewParent, GPUser owner, int newPosition, 
         GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
         return folderServiceDelegate.saveDragAndDropFolderModifications(idElementMoved, idNewParent, owner, newPosition, descendantsMapData);
     }
@@ -460,17 +460,17 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public long saveAddedLayerAndTreeModification(GPLayer layer, GPWebServiceMapData descendantsMapData) {
-        return layerServiceDelegate.saveAddedLayerAndTreeModification(layer, descendantsMapData);
+    public long saveAddedLayerAndTreeModifications(GPLayer layer, GPWebServiceMapData descendantsMapData) {
+        return layerServiceDelegate.saveAddedLayerAndTreeModifications(layer, descendantsMapData);
     }
 
     @Override
-    public ArrayList<Long> saveAddedLayersAndTreeModification(ArrayList<GPLayer>  layersList, GPWebServiceMapData descendantsMapData) {
-        return layerServiceDelegate.saveAddedLayersAndTreeModification(layersList, descendantsMapData);
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(ArrayList<GPLayer>  layersList, GPWebServiceMapData descendantsMapData) {
+        return layerServiceDelegate.saveAddedLayersAndTreeModifications(layersList, descendantsMapData);
     }
 
     @Override
-    public boolean saveDeletedLayerAndTreeModification(long id, GPWebServiceMapData descendantsMapData)
+    public boolean saveDeletedLayerAndTreeModifications(long id, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.saveDeletedLayerAndTreeModifications(id, descendantsMapData);
     }
@@ -488,7 +488,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean saveDragAndDropLayerAndTreeModification(long idElementMoved, long idNewParent, int newPosition, 
+    public boolean saveDragAndDropLayerAndTreeModifications(long idElementMoved, long idNewParent, int newPosition, 
         GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
         return layerServiceDelegate.saveDragAndDropLayerModifications(idElementMoved, idNewParent, newPosition, descendantsMapData);
     }

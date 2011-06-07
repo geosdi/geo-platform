@@ -42,7 +42,7 @@ import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.GPRasterBeanModel;
-import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.AbstractMementoLayer;
 import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoBuilder;
@@ -83,16 +83,16 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
 
     @Override
     public void addRasterLayers(List<? extends GPLayerBean> layers) {
-        this.changeProgressBarMessage("Loading Raster Layers into the Store");
+        this.changeProgressBarMessage("Loading " + layers.size() + " Raster Layers into the Store");
         GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
         List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
         for (Iterator it = layers.iterator(); it.hasNext();) {
-            layerList.add((GPBeanTreeModel) it.next());
+            layerList.add(this.convertGPRasterBeanModelToRasterTreeNode((GPRasterBeanModel) it.next()));
         }
         this.tree.getStore().insert(parentDestination, layerList, 0, true);
-        this.visitorAdd.insertLayerElements(layers, parentDestination);
+        this.visitorAdd.insertLayerElements(layerList, parentDestination);
         MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
-        mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(layers));
+        mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(layerList));
         mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
         GPLayerSaveCache.getInstance().add(mementoSaveLayer);
         //TODO :
@@ -106,6 +106,21 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
             }
         };
         t.schedule(5000);
+    }
+
+    private RasterTreeNode convertGPRasterBeanModelToRasterTreeNode(GPRasterBeanModel rasterBean) {
+        RasterTreeNode raster = new RasterTreeNode();
+        raster.setAbstractText(rasterBean.getAbstractText());
+        raster.setBbox(rasterBean.getBbox());
+        raster.setChecked(true);
+        raster.setCrs(rasterBean.getCrs());
+        raster.setDataSource(rasterBean.getDataSource());
+        raster.setLabel(rasterBean.getLabel());
+        raster.setLayerType(rasterBean.getLayerType());
+        raster.setName(rasterBean.getName());
+        raster.setStyles(rasterBean.getStyles());
+        raster.setzIndex(rasterBean.getzIndex());
+        return raster;
     }
 
     @Override

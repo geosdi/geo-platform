@@ -66,9 +66,9 @@ public class MementoBuilder {
         return memento;
     }
 
-    public static List<AbstractMementoLayer> generateMementoLayerList(List<? extends GPLayerBean> layers) {
+    public static List<AbstractMementoLayer> generateMementoLayerList(List<GPBeanTreeModel> layers) {
         List<AbstractMementoLayer> mementoLayerList = new ArrayList<AbstractMementoLayer>();
-        for (GPLayerBean layerBean : layers) {
+        for (GPBeanTreeModel layerBean : layers) {
             if (layerBean instanceof RasterTreeNode) {
                 RasterTreeNode raster = ((RasterTreeNode) layerBean);
                 MementoRaster mementoRaster = new MementoRaster();
@@ -79,18 +79,18 @@ public class MementoBuilder {
                     raster.getObservable().addObserver(mementoRaster);
                 }
                 mementoRaster.setAbstractText(layerBean.getAbstractText());
-                mementoRaster.setDataSource(layerBean.getDataSource());
+                mementoRaster.setDataSource(raster.getDataSource());
                 mementoRaster.setRefBaseElement(raster);
                 mementoRaster.setIsChecked(raster.isChecked());
                 mementoRaster.setLayerName(layerBean.getName());
                 mementoRaster.setLayerType(GPLayerType.RASTER);
-                mementoRaster.setLowerLeftX(layerBean.getBbox().getLowerLeftX());
-                mementoRaster.setLowerLeftY(layerBean.getBbox().getLowerLeftY());
-                mementoRaster.setSrs(layerBean.getCrs());
+                mementoRaster.setLowerLeftX(raster.getBbox().getLowerLeftX());
+                mementoRaster.setLowerLeftY(raster.getBbox().getLowerLeftY());
+                mementoRaster.setSrs(raster.getCrs());
                 mementoRaster.setTitle(layerBean.getLabel());
                 mementoRaster.setzIndex(layerBean.getzIndex());
-                mementoRaster.setUpperRightX(layerBean.getBbox().getUpperRightX());
-                mementoRaster.setUpperRightY(layerBean.getBbox().getUpperRightY());
+                mementoRaster.setUpperRightX(raster.getBbox().getUpperRightX());
+                mementoRaster.setUpperRightY(raster.getBbox().getUpperRightY());
                 FolderTreeNode refParent = (FolderTreeNode) raster.getParent();
                 mementoRaster.setRefParent(refParent);
                 mementoLayerList.add(mementoRaster);
@@ -104,23 +104,24 @@ public class MementoBuilder {
                     vector.getObservable().addObserver(mementoVector);
                 }
                 mementoVector.setAbstractText(layerBean.getAbstractText());
-                mementoVector.setDataSource(layerBean.getDataSource());
+                mementoVector.setDataSource(vector.getDataSource());
                 mementoVector.setRefBaseElement(vector);
                 mementoVector.setIsChecked(vector.isChecked());
                 mementoVector.setLayerName(layerBean.getName());
                 mementoVector.setLayerType(vector.getLayerType());
-                mementoVector.setLowerLeftX(layerBean.getBbox().getLowerLeftX());
-                mementoVector.setLowerLeftY(layerBean.getBbox().getLowerLeftY());
-                mementoVector.setSrs(layerBean.getCrs());
+                mementoVector.setLowerLeftX(vector.getBbox().getLowerLeftX());
+                mementoVector.setLowerLeftY(vector.getBbox().getLowerLeftY());
+                mementoVector.setSrs(vector.getCrs());
                 mementoVector.setTitle(layerBean.getLabel());
                 mementoVector.setzIndex(layerBean.getzIndex());
-                mementoVector.setUpperRightX(layerBean.getBbox().getUpperRightX());
-                mementoVector.setUpperRightY(layerBean.getBbox().getUpperRightY());
+                mementoVector.setUpperRightX(vector.getBbox().getUpperRightX());
+                mementoVector.setUpperRightY(vector.getBbox().getUpperRightY());
                 FolderTreeNode refParent = (FolderTreeNode) vector.getParent();
                 mementoVector.setRefParent(refParent);
                 mementoLayerList.add(mementoVector);
             }
         }
+        System.out.println("Memento layer list size: " + mementoLayerList.size());
         return mementoLayerList;
     }
 

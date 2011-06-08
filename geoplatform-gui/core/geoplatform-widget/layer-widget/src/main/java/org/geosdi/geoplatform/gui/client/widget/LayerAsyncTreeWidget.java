@@ -66,6 +66,8 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.action.menu.ExportoToGML;
+import org.geosdi.geoplatform.gui.client.action.menu.ExportoToKML;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
@@ -241,11 +243,6 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
 
     private void addMenuAddElement() {
         Menu contextMenu = new Menu();
-//        MenuItem insert = new MenuItem();
-//        insert.setText("Add Folder");
-//        insert.setIcon(LayerResources.ICONS.addFolder());
-//        insert.addSelectionListener(new AddLayerAction(tree));
-//        contextMenu.add(insert);
 
         // add zoom to max extent
         MenuItem zoomToMaxExtend = new MenuItem();

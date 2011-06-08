@@ -48,6 +48,9 @@ import com.google.gwt.core.client.EntryPoint;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionCreator;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionRegistar;
+import org.geosdi.geoplatform.gui.client.action.menu.ExportoToKML;
+import org.geosdi.geoplatform.gui.client.action.menu.ExportoToPDF;
+import org.geosdi.geoplatform.gui.client.action.menu.ExportoToTIFF;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddFolderTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddRasterTreeAction;
@@ -104,6 +107,35 @@ public class LayerWidgetUI implements EntryPoint {
                 return new ZoomToLayerExtentAction();
             }
         });
+        
+        MenuActionRegistar.put("exportToKML", new MenuActionCreator() {
+
+            @Override
+            public MenuAction createAction() {
+                // TODO Auto-generated method stub
+                return new ExportoToKML();
+            }
+        });
+        
+        MenuActionRegistar.put("exportToPDF", new MenuActionCreator() {
+
+            @Override
+            public MenuAction createAction() {
+                // TODO Auto-generated method stub
+                return new ExportoToPDF();
+            }
+        });
+        
+        
+        MenuActionRegistar.put("exportToTIFF", new MenuActionCreator() {
+
+            @Override
+            public MenuAction createAction() {
+                // TODO Auto-generated method stub
+                return new ExportoToTIFF();
+            }
+        });
+        
     }
 
     private void addToolbarTreeAction() {

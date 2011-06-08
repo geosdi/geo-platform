@@ -23,5 +23,30 @@
         <property name="enabled" value="true" />
         <property name="order" value="40" />
     </bean>
+    
+    <bean name="exportToKML"
+		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+        <property name="id" value="exportToKML" />
+        <property name="text" value="Export To KML" />
+        <property name="enabled" value="true" />
+        <property name="order" value="50" />
+    </bean>
+    
+    <bean name="exportToPDF"
+		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+        <property name="id" value="exportToPDF" />
+        <property name="text" value="Export To PDF" />
+        <property name="enabled" value="true" />
+        <property name="order" value="60" />
+    </bean>
+    
+    <bean name="exportToTIFF"
+		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+        <property name="id" value="exportToTIFF" />
+        <property name="text" value="Export To Tiff" />
+        <property name="enabled" value="true" />
+        <property name="order" value="70" />
+    </bean>
+    
 
 </beans>

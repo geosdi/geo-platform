@@ -69,6 +69,9 @@ import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.action.menu.ExportoToKML;
+import org.geosdi.geoplatform.gui.client.action.menu.ExportoToPDF;
+import org.geosdi.geoplatform.gui.client.action.menu.ExportoToTIFF;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
@@ -292,6 +295,29 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
         zoomToMaxExtend.addSelectionListener(new ZoomToLayerExtentAction(tree));
         contextMenu.add(zoomToMaxExtend);
 
+        MenuItem exportToKML = new MenuItem();
+        exportToKML.setText("Export To KML");
+        exportToKML.setIcon(LayerResources.ICONS.exportToKML());
+        exportToKML.addSelectionListener(new ExportoToKML(tree));
+        contextMenu.add(exportToKML);
+
+        MenuItem exportToPDF = new MenuItem();
+        exportToPDF.setText("Export To PDF");
+        exportToPDF.setIcon(LayerResources.ICONS.exportToPDF());
+        exportToPDF.addSelectionListener(new ExportoToPDF(tree));
+        contextMenu.add(exportToPDF);
+        
+        MenuItem exportToTIFF = new MenuItem();
+        exportToTIFF.setText("Export To TIFF");
+        exportToTIFF.setIcon(LayerResources.ICONS.exportToTIFF());
+        exportToTIFF.addSelectionListener(new ExportoToTIFF(tree));
+        contextMenu.add(exportToTIFF);
+//        MenuItem exportToGML = new MenuItem();
+//        exportToGML.setText("Export To GML");
+//        exportToGML.setIcon(LayerResources.ICONS.exportToGML());
+//        exportToGML.addSelectionListener(new ExportoToGML(tree));
+//        contextMenu.add(exportToGML);
+        
         this.tree.setContextMenu(contextMenu);
     }
 

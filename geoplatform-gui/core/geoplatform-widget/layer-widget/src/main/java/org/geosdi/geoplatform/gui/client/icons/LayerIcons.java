@@ -75,4 +75,18 @@ public interface LayerIcons extends ImageBundle {
     
     @Resource("zoom.png")
     AbstractImagePrototype zoomToMaxExtend();
+    
+    @Resource("kml.png")
+    AbstractImagePrototype exportToKML();
+    
+    @Resource("vector.png")
+    AbstractImagePrototype exportToGML();
+    
+    @Resource("pdf.png")
+    AbstractImagePrototype exportToPDF();
+    
+    @Resource("raster.png")
+    AbstractImagePrototype exportToTIFF();
+    
+    
 }

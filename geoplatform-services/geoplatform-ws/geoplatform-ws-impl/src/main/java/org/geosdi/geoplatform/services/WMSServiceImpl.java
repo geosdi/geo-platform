@@ -179,8 +179,10 @@ class WMSServiceImpl {
                     "The Server with ID : " + request.getId() + " has been deleted.");
         }
 
-        WMSCapabilities wmsCapabilities = this.getWMSCapabilities(server.getServerUrl());
-        return convertToLayerList(wmsCapabilities.getLayerList(), server.getServerUrl());
+        WMSCapabilities wmsCapabilities = this.getWMSCapabilities(
+                server.getServerUrl());
+        return convertToLayerList(wmsCapabilities.getLayerList(),
+                server.getServerUrl());
     }
 
     public ServerDTO saveServer(String serverUrl)
@@ -196,7 +198,8 @@ class WMSServiceImpl {
             serverDao.persist(server);
         }
         serverDTO = new ServerDTO(server);
-        LayerList layers = convertToLayerList(wmsCapabilities.getLayerList(), serverUrl);
+        LayerList layers = convertToLayerList(wmsCapabilities.getLayerList(),
+                serverUrl);
         serverDTO.setLayersDTO(layers.getList());
 
         return serverDTO;
@@ -239,7 +242,7 @@ class WMSServiceImpl {
 
         for (Layer layer : layerList) {
             layerDTOIth = new RasterLayerDTO();
-            layerDTOIth.setUrlServer(urlServer);
+            layerDTOIth.setUrlServer(getUrlServer(urlServer));
             layerDTOIth.setName(layer.getName());
             layerDTOIth.setAbstractText(layer.get_abstract());
             layerDTOIth.setTitle(layer.getTitle());
@@ -252,7 +255,8 @@ class WMSServiceImpl {
 
             // Set Styles of Raster Ith
             List<StyleImpl> stylesImpl = layer.getStyles();
-            logger.info("\n*** Layer \"{}\" has {} StyleImpl ***", layer.getTitle(), stylesImpl.size());
+            logger.info("\n*** Layer \"{}\" has {} StyleImpl ***",
+                    layer.getTitle(), stylesImpl.size());
 
             List<StyleDTO> stylesDTO = this.createStyleDTOList(stylesImpl);
             layerDTOIth.setStyleList(stylesDTO);
@@ -277,7 +281,8 @@ class WMSServiceImpl {
         return shortServers;
     }
 
-    private GeoPlatformServer createWMSServerFromService(String serverUrl, Service service) {
+    private GeoPlatformServer createWMSServerFromService(String serverUrl,
+            Service service) {
         GeoPlatformServer newServer = new GeoPlatformServer();
         newServer.setServerUrl(serverUrl);
         newServer.setServerType(GPCababilityType.WMS);
@@ -314,5 +319,21 @@ class WMSServiceImpl {
     private GPBBox createBbox(CRSEnvelope env) {
         return new GPBBox(env.getMinX(), env.getMinY(), env.getMaxX(),
                 env.getMaxY());
+    }
+
+    private String getUrlServer(String urlServer) {
+        int index = -1;
+        if (urlServer.contains("mapserv.exe")
+                || urlServer.contains("mapserver")
+                || urlServer.contains("mapserv")) {
+            index = urlServer.indexOf("&");
+        } else {
+            index = urlServer.indexOf("?");
+        }
+        if (index != -1) {
+            String newUrl = urlServer.substring(0, index);
+            return newUrl;
+        }
+        return urlServer;
     }
 }

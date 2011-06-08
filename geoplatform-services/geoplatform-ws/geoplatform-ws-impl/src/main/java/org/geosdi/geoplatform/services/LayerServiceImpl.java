@@ -190,20 +190,21 @@ class LayerServiceImpl {
     public ArrayList<Long> saveAddedLayersAndTreeModifications(ArrayList<GPLayer> layersList, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
         GPLayer[] layersArray = layersList.toArray(new GPLayer[layersList.size()]);
 
-        GPFolder parent = null;
-        GPFolder parentFromDB = null;
-        for (int i = 0; i < layersArray.length; i++) {
-            parent = layersArray[i].getFolder();
-            if (parent == null) {
-                throw new IllegalParameterFault("Parent of layer not found " + layersArray[i].getId());
-            }
-
-            long idParent = parent.getId();
-            parentFromDB = folderDao.find(idParent);
-            if (parentFromDB == null) {
-                throw new ResourceNotFoundFault("Parent of layer not found into DB", idParent);
-            }
-        }
+        /**INUTIL CODE TO DROP **/
+//        GPFolder parent = null;
+//        GPFolder parentFromDB = null;
+//        for (int i = 0; i < layersArray.length; i++) {
+//            parent = layersArray[i].getFolder();
+//            if (parent == null) {
+//                throw new IllegalParameterFault("Parent of layer not found " + layersArray[i].getId());
+//            }
+//
+//            long idParent = parent.getId();
+//            parentFromDB = folderDao.find(idParent);
+//            if (parentFromDB == null) {
+//                throw new ResourceNotFoundFault("Parent of layer not found into DB", idParent);
+//            }
+//        }
 
         ArrayList<Long> arrayList = new ArrayList<Long>(layersList.size());
         int newPosition = layersList.get(0).getPosition();

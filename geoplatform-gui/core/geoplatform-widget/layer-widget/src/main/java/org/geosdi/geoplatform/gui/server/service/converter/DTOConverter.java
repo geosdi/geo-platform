@@ -47,8 +47,6 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
-import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.AbstractMementoLayer;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoRaster;
@@ -235,6 +233,7 @@ public class DTOConverter {
                 raster.setSrs(memento.getSrs());
                 raster.setTitle(memento.getTitle());
                 raster.setUrlServer(memento.getDataSource());
+                raster.setLayerType(GPLayerType.RASTER);
                 layersList.add(raster);
             } else if (layer instanceof MementoVector) {
                 GPVectorLayer vector = new GPVectorLayer();

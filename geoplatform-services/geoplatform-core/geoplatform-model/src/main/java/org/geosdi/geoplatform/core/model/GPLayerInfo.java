@@ -53,7 +53,7 @@ public class GPLayerInfo implements Serializable {
      */
     private static final long serialVersionUID = -7418444235711934950L;
     //
-    private boolean queryable = false;
+    private Boolean queryable = false;
     private String keywords;
 
     /**

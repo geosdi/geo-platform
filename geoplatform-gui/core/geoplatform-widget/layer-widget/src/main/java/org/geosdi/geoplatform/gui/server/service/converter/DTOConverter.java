@@ -154,7 +154,8 @@ public class DTOConverter {
                 gpBbox.getMaxX(), gpBbox.getMaxY());
     }
 
-    private void setVectorLayerType(ClientVectorInfo vector, GPLayerType gPLayerType) {
+    private void setVectorLayerType(ClientVectorInfo vector,
+            GPLayerType gPLayerType) {
         switch (gPLayerType) {
             case POINT:
                 vector.setLayerType(
@@ -204,26 +205,28 @@ public class DTOConverter {
         return gpFolder;
     }
 
-    public GPWebServiceMapData<Long, Integer> convertDescendantMap(Map<Long, Integer> descendantMap) {
+    public GPWebServiceMapData<Long, Integer> convertDescendantMap(
+            Map<Long, Integer> descendantMap) {
         GPWebServiceMapData<Long, Integer> wsMap = new GPWebServiceMapData<Long, Integer>();
         wsMap.setDescendantsMap(descendantMap);
-        System.out.println("Size della mappa descendants: " + descendantMap.size());
+        System.out.println(
+                "Size della mappa descendants: " + descendantMap.size());
         return wsMap;
     }
 
-    public ArrayList<GPLayer> convertMementoLayers(List<AbstractMementoLayer> addedLayers) {
+    public ArrayList<GPLayer> convertMementoLayers(
+            List<AbstractMementoLayer> addedLayers, GPFolder folder) {
         ArrayList<GPLayer> layersList = new ArrayList<GPLayer>();
         for (AbstractMementoLayer layer : addedLayers) {
             if (layer instanceof MementoRaster) {
                 MementoRaster memento = (MementoRaster) layer;
                 GPRasterLayer raster = new GPRasterLayer();
                 raster.setAbstractText(memento.getAbstractText());
-                raster.setBbox(new GPBBox(memento.getLowerLeftX(), memento.getLowerLeftY(),
+                raster.setBbox(new GPBBox(memento.getLowerLeftX(),
+                        memento.getLowerLeftY(),
                         memento.getUpperRightX(), memento.getUpperRightY()));
                 raster.setChecked(memento.isChecked());
-                GPFolder parent = new GPFolder();
-                parent.setId(memento.getIdFolderParent());
-                raster.setFolder(parent);
+                raster.setFolder(folder);
                 raster.setId(memento.getIdBaseElement());
                 //raster.setLayerInfo();???
                 raster.setName(memento.getLayerName());
@@ -237,12 +240,11 @@ public class DTOConverter {
                 GPVectorLayer vector = new GPVectorLayer();
                 MementoRaster memento = (MementoRaster) layer;
                 vector.setAbstractText(memento.getAbstractText());
-                vector.setBbox(new GPBBox(memento.getLowerLeftX(), memento.getLowerLeftY(),
+                vector.setBbox(new GPBBox(memento.getLowerLeftX(),
+                        memento.getLowerLeftY(),
                         memento.getUpperRightX(), memento.getUpperRightY()));
                 vector.setChecked(memento.isChecked());
-                GPFolder parent = new GPFolder();
-                parent.setId(memento.getIdFolderParent());
-                vector.setFolder(parent);
+                vector.setFolder(folder);
                 vector.setId(memento.getIdBaseElement());
                 //vector.setGeometry()???
                 vector.setName(memento.getLayerName());

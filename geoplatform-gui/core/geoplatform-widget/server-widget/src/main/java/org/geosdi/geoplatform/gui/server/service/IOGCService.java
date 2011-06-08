@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.server.service;
 
 import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.client.model.GPLayerBeanModel;
+import org.geosdi.geoplatform.gui.client.model.GPLayerGrid;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
@@ -51,6 +51,8 @@ public interface IOGCService {
 
     public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException;
 
-    public ArrayList<? extends GPLayerBeanModel> getCababilities(
+    public ArrayList<? extends GPLayerGrid> getCababilities(
             long idServer) throws GeoPlatformException;
+
+    public GPServerBeanModel insertServer(String urlServer) throws GeoPlatformException;
 }

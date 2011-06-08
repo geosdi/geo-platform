@@ -211,6 +211,9 @@ public interface GeoPlatformService {
     long getFoldersCount(SearchRequest searchRequest);
 
     /**
+     * @param folderId 
+     * @param num 
+     * @param page 
      * @return Children folders.
      */
     @Get
@@ -222,6 +225,7 @@ public interface GeoPlatformService {
             @WebParam(name = "page") int page);
 
     /**
+     * @param folderId 
      * @return Children folders.
      */
     @Get
@@ -230,6 +234,7 @@ public interface GeoPlatformService {
     FolderList getChildrenFoldersByFolderId(@WebParam(name = "folderId") long folderId);
 
     /**
+     * @param folderId 
      * @return Children elements (folder and layer).
      */
     @Get

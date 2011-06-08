@@ -39,12 +39,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.client.model.GPLayerBeanModel;
+import org.geosdi.geoplatform.gui.client.model.GPLayerGrid;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.service.IOGCService;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOServerConverter;
 import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
@@ -62,9 +63,7 @@ import org.springframework.stereotype.Service;
 public class OGCService implements IOGCService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     private GeoPlatformService geoPlatformServiceClient;
-
     @Autowired
     private DTOServerConverter dtoServerConverter;
 
@@ -89,7 +88,7 @@ public class OGCService implements IOGCService {
     }
 
     @Override
-    public ArrayList<? extends GPLayerBeanModel> getCababilities(long idServer)
+    public ArrayList<? extends GPLayerGrid> getCababilities(long idServer)
             throws GeoPlatformException {
         try {
             RequestById req = new RequestById(idServer);
@@ -102,6 +101,18 @@ public class OGCService implements IOGCService {
             logger.error("Error : " + ex);
             throw new GeoPlatformException(ex);
         }
+    }
+
+    @Override
+    public GPServerBeanModel insertServer(String urlServer) throws GeoPlatformException {
+        try {
+            ServerDTO serverWS = this.geoPlatformServiceClient.saveServer(
+                    urlServer);
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("Inser Server Error : " + ex);
+            throw new GeoPlatformException(ex);
+        }
+        return null;
     }
 
     /**

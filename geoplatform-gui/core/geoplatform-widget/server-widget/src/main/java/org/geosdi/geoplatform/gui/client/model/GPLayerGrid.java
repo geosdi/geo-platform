@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPLayerBeanModel extends GeoPlatformBeanModel implements
+public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
         GPLayerBean {
 
     public enum GPLayerBeanKeyValue {

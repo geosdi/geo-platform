@@ -54,7 +54,7 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
-import org.geosdi.geoplatform.gui.client.model.GPLayerBeanModel.GPLayerBeanKeyValue;
+import org.geosdi.geoplatform.gui.client.model.GPLayerGrid.GPLayerBeanKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPServerExpander;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -77,7 +77,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
     private TreePanel tree;
     private Button done;
     private RowExpander rowExpander;
-    private DisplayServerWidget displayWidget;
+    private DisplayServerWidget displayServerWidget;
     private GPServerExpander expander;
     private DisplayLayersProgressBarEvent hideProgressBar = new DisplayLayersProgressBarEvent(
             false);
@@ -96,7 +96,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
     }
 
     private void initServerWidget() {
-        this.displayWidget = new DisplayServerWidget(this);
+        this.displayServerWidget = new DisplayServerWidget(this);
     }
 
     private void initFormPanel() {
@@ -105,7 +105,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         formPanel.setFrame(true);
         formPanel.setLayout(new FlowLayout());
 
-        this.formPanel.setTopComponent(this.displayWidget.getToolbar());
+        this.formPanel.setTopComponent(this.displayServerWidget.getToolbar());
 
         this.formPanel.add(this.grid);
 
@@ -188,7 +188,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
      * 
      */
     public void loadServers() {
-        this.displayWidget.loadServers();
+        this.displayServerWidget.loadServers();
     }
 
     /**
@@ -235,7 +235,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         this.store.removeAll();
         unMaskGrid();
         this.done.disable();
-        this.displayWidget.resetComponents();
+        this.displayServerWidget.resetComponents();
     }
 
     /**

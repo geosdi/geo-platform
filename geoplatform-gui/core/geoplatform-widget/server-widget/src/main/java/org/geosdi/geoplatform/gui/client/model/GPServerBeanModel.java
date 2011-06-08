@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
+import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
@@ -49,7 +50,6 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
         URL_SERVER("urlServer"), NAME("name"), TITLE("title"),
         CONTACT_PERSON("contactPerson"),
         CONTACT_ORGANIZATION("contactOrganization");
-
         private String value;
 
         GPServerKeyValue(String theValue) {
@@ -60,20 +60,19 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
             return value;
         }
     }
-
     /**
      * 
      */
     private static final long serialVersionUID = 3734113612153640102L;
-
     private long id;
     private String urlServer;
     private String name;
     private String title;
     private String contactPerson;
     private String contactOrganization;
+    private ArrayList<? extends GPLayerGrid> layers;
 
-     /**
+    /**
      * @return the id
      */
     public long getId() {
@@ -159,7 +158,22 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
      */
     public void setContactOrganization(String contactOrganization) {
         this.contactOrganization = contactOrganization;
-        set(GPServerKeyValue.CONTACT_ORGANIZATION.getValue(), this.contactOrganization);
+        set(GPServerKeyValue.CONTACT_ORGANIZATION.getValue(),
+                this.contactOrganization);
+    }
+
+    /**
+     * @return the layers
+     */
+    public ArrayList<? extends GPLayerGrid> getLayers() {
+        return this.layers;
+    }
+
+    /**
+     * @param layers the layers to set
+     */
+    public void setLayers(ArrayList<? extends GPLayerGrid> layers) {
+        this.layers = layers;
     }
 
     @Override
@@ -186,8 +200,8 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
 
     @Override
     public String toString() {
-        return "GPServerDTO{" + "id = " + id + "urlServer = " + urlServer + "name =  "
-                + name + "title=" + title + "contactPerson=" + contactPerson +
-                "contactOrganization = " + contactOrganization + '}';
+        return "GPServerDTO{" + "id = " + id + ", urlServer = " + urlServer + ", name =  "
+                + name + ", title = " + title + ", contactPerson = " + contactPerson
+                + ", contactOrganization = " + contactOrganization + '}';
     }
 }

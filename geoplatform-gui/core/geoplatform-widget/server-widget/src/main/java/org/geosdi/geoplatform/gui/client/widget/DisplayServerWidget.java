@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget;
 import java.util.ArrayList;
 
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
-import org.geosdi.geoplatform.gui.client.model.GPLayerBeanModel;
+import org.geosdi.geoplatform.gui.client.model.GPLayerGrid;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel.GPServerKeyValue;
 import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemote;
@@ -59,6 +59,7 @@ import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.widget.form.AddServerWidget;
 
 /**
  *
@@ -68,13 +69,14 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class DisplayServerWidget {
 
     private GeoPlatformOGCRemoteAsync service = GeoPlatformOGCRemote.Util.getInstance();
-
+    
     private ToolBar toolbar;
     private ComboBox<GPServerBeanModel> comboServer;
     private ListStore<GPServerBeanModel> store;
     private SearchStatus searchStatus;
     private Button addServer;
     private GridLayersWidget gridWidget;
+    private AddServerWidget addServerWidget;
 
     /**
      * @Constructor
@@ -83,6 +85,7 @@ public class DisplayServerWidget {
     public DisplayServerWidget(GridLayersWidget theGridWidget) {
         init();
         this.gridWidget = theGridWidget;
+        this.addServerWidget = new AddServerWidget(this);
     }
 
     private void init() {
@@ -117,7 +120,7 @@ public class DisplayServerWidget {
 
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-                        /** HERE THE CODE TO OPEN ADD SERVER WINDOW **/
+                        addServerWidget.showForm();
                     }
                 });
     }
@@ -143,11 +146,11 @@ public class DisplayServerWidget {
      * @return String
      */
     private native String getTemplate() /*-{
-        return  [
-            '<tpl for=".">',
-                '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{urlServer}</div>',
-            '</tpl>'
-            ].join("");
+    return  [
+    '<tpl for=".">',
+    '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{urlServer}</div>',
+    '</tpl>'
+    ].join("");
     }-*/;
 
     /**
@@ -208,7 +211,7 @@ public class DisplayServerWidget {
         this.gridWidget.maskGrid();
 
         this.service.getCababilities(selected.getId(),
-                new AsyncCallback<ArrayList<? extends GPLayerBeanModel>>() {
+                new AsyncCallback<ArrayList<? extends GPLayerGrid>>() {
 
                     @Override
                     public void onFailure(Throwable caught) {
@@ -222,7 +225,7 @@ public class DisplayServerWidget {
 
                     @Override
                     public void onSuccess(
-                            ArrayList<? extends GPLayerBeanModel> result) {
+                            ArrayList<? extends GPLayerGrid> result) {
                         gridWidget.unMaskGrid();
                         gridWidget.fillStore(result);
                         LayoutManager.get().getStatusMap().setStatus(

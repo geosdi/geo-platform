@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.store;
 
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.client.model.GPRasterBeanModel;
+import org.geosdi.geoplatform.gui.client.model.GPRasterLayerGrid;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.AbstractMementoLayer;
 import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
@@ -83,32 +82,30 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
 
     @Override
     public void addRasterLayers(List<? extends GPLayerBean> layers) {
-        this.changeProgressBarMessage("Loading " + layers.size() + " Raster Layers into the Store");
+        this.changeProgressBarMessage(
+                "Loading " + layers.size() + " Raster Layers into the Store");
         GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
         List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
         for (Iterator it = layers.iterator(); it.hasNext();) {
-            layerList.add(this.convertGPRasterBeanModelToRasterTreeNode((GPRasterBeanModel) it.next()));
+            layerList.add(this.convertGPRasterBeanModelToRasterTreeNode(
+                    (GPRasterLayerGrid) it.next()));
         }
         this.tree.getStore().insert(parentDestination, layerList, 0, true);
         this.visitorAdd.insertLayerElements(layerList, parentDestination);
-        MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
-        mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(layerList));
-        mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
+        MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(
+                this);
+        mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(
+                layerList));
+        mementoSaveLayer.setDescendantMap(
+                this.visitorAdd.getFolderDescendantMap());
         GPLayerSaveCache.getInstance().add(mementoSaveLayer);
-        //TODO :
-        //     THIS CODE MUST BE CHANGED AND WILL BE SEND AN EVENT
-        //     THAT DELESECT LAYERS IN THE GRID AND CLOSE PROGRESS BAR
-        Timer t = new Timer() {
 
-            @Override
-            public void run() {
-                LayerHandlerManager.fireEvent(deselectEvent);
-            }
-        };
-        t.schedule(5000);
+
+        LayerHandlerManager.fireEvent(deselectEvent);
     }
 
-    private RasterTreeNode convertGPRasterBeanModelToRasterTreeNode(GPRasterBeanModel rasterBean) {
+    private RasterTreeNode convertGPRasterBeanModelToRasterTreeNode(
+            GPRasterLayerGrid rasterBean) {
         RasterTreeNode raster = new RasterTreeNode();
         raster.setAbstractText(rasterBean.getAbstractText());
         raster.setBbox(rasterBean.getBbox());
@@ -126,7 +123,8 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
     @Override
     public void addVectorLayers(List<? extends GPLayerBean> layers) {
         this.changeProgressBarMessage("Load Vector Layers in the Store");
-        System.out.println("A*********************************************************DD VECTOR *********************** " + layers);
+        System.out.println(
+                "ADD VECTORS *********************** " + layers);
     }
 
     private void changeProgressBarMessage(String message) {
@@ -139,12 +137,14 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         //Warning: The following conversion is absolutely necessary!
         memento.convertMementoToWs();
 
-        LayerRemote.Util.getInstance().saveAddedLayersAndTreeModifications(memento,
+        LayerRemote.Util.getInstance().saveAddedLayersAndTreeModifications(
+                memento,
                 new AsyncCallback<ArrayList<Long>>() {
 
                     @Override
                     public void onFailure(Throwable caught) {
-                        LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
+                        LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(
+                                false));
                         GeoPlatformMessage.errorMessage("Save Layers Error",
                                 "Problems on saving the new tree state after layers creation");
                     }

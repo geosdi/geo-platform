@@ -35,31 +35,27 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
-import org.geosdi.geoplatform.gui.model.GPVectorBean;
+import java.util.List;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPVectorBeanModel extends GPLayerBeanModel implements GPVectorBean {
+public class GPRasterLayerGrid extends GPLayerGrid implements GPRasterBean {
 
-    private static final long serialVersionUID = 211533898795409938L;
-
-    private String featureNameSpace;
+    private static final long serialVersionUID = -421196804918413910L;
+    
+    private List<String> styles;
 
     @Override
-    public String getFeatureNameSpace() {
-        return this.featureNameSpace;
+    public List<String> getStyles() {
+        return this.styles;
     }
 
     @Override
-    public void setFeatureNameSpace(String featureNameSpace) {
-        this.featureNameSpace = featureNameSpace;
-    }
-
-    @Override
-    public String toString() {
-        return "GPVectorBeanModel{" + "featureNameSpace=" + featureNameSpace + '}';
+    public void setStyles(List<String> styles) {
+        this.styles = styles;
     }
 }

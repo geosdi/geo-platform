@@ -38,8 +38,8 @@ package org.geosdi.geoplatform.gui.server.service.converter;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.gui.client.model.GPLayerBeanModel;
-import org.geosdi.geoplatform.gui.client.model.GPRasterBeanModel;
+import org.geosdi.geoplatform.gui.client.model.GPLayerGrid;
+import org.geosdi.geoplatform.gui.client.model.GPRasterLayerGrid;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.responce.ServerDTO;
@@ -104,28 +104,45 @@ public class DTOServerConverter {
      * @return
      *        ArrayList<? extends GPLayerBeanModel>
      */
-    public ArrayList<? extends GPLayerBeanModel> convertRasterLayer(
+    public ArrayList<? extends GPLayerGrid> convertRasterLayer(
             Collection<ShortLayerDTO> layers) {
-        ArrayList<GPRasterBeanModel> layersDTO = new ArrayList<GPRasterBeanModel>();
+        ArrayList<GPRasterLayerGrid> layersDTO = new ArrayList<GPRasterLayerGrid>();
 
         if (layers != null) {
             for (ShortLayerDTO layer : layers) {
-                GPRasterBeanModel raster = new GPRasterBeanModel();
+                GPRasterLayerGrid raster = new GPRasterLayerGrid();
                 raster.setId(layer.getId());
                 raster.setLabel(layer.getTitle());
                 raster.setName(layer.getName());
                 raster.setAbstractText(layer.getAbstractText());
 
-                if(layer.getBbox() != null) {
+                if (layer.getBbox() != null) {
                     raster.setBbox(new BboxClientInfo(layer.getBbox().getMinX(),
                             layer.getBbox().getMinY(), layer.getBbox().getMaxX(),
                             layer.getBbox().getMaxY()));
                     raster.setCrs(layer.getSrs());
-                    }
+                }
                 layersDTO.add(raster);
             }
         }
 
         return layersDTO;
+    }
+
+    /**
+     * 
+     * @param serverWS
+     * 
+     * @return 
+     *        GPServerBeanModel
+     */
+    public GPServerBeanModel convertServerWS(ServerDTO serverWS) {
+        GPServerBeanModel serverDTO = new GPServerBeanModel();
+        serverDTO.setId(serverWS.getId());
+        serverDTO.setName(serverWS.getName());
+        serverDTO.setUrlServer(serverWS.getServerUrl());
+        serverDTO.setLayers(this.convertRasterLayer(serverWS.getLayersDTO()));
+
+        return serverDTO;
     }
 }

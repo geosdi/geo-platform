@@ -40,9 +40,7 @@ package org.geosdi.geoplatform.services;
 import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import org.aspectj.weaver.NewParentTypeMunger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -205,7 +203,6 @@ class LayerServiceImpl {
 //                throw new ResourceNotFoundFault("Parent of layer not found into DB", idParent);
 //            }
 //        }
-
         ArrayList<Long> arrayList = new ArrayList<Long>(layersList.size());
         int newPosition = layersList.get(0).getPosition();
         int increment = layersList.size();
@@ -303,6 +300,7 @@ class LayerServiceImpl {
         GPLayer layerMoved = layerDao.find(idLayerMoved);
         if (layerMoved == null) {
             throw new ResourceNotFoundFault("Layer not found", idLayerMoved);
+
         }
         assert (layerMoved.getPosition() != newPosition) : "Layer must have a different initial and final position";
         assert (layerMoved.getFolder() != null) : "Layer specified must be stored into a folder";

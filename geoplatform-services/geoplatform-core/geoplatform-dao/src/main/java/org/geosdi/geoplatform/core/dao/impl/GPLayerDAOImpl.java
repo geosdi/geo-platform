@@ -91,9 +91,12 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
     @Override
     public boolean updatePositionsRangeInOppositeWay(
             int beginPositionFirstRange, int endPositionFirstRange,
-            int beginPositionSecondRange, int endPositionSecondRange, int deltaValue) {
-        // TODO
-        return true;
+            int beginPositionSecondRange, int endPositionSecondRange,
+            int deltaValueFirstRange, int deltaValueSecondRange) {
+        
+        // TODO From the same method of GPFolderDAOImpl
+        
+        return this.updatePositionsRange(beginPositionFirstRange, endPositionFirstRange, deltaValueFirstRange);
     }
 
     @Override

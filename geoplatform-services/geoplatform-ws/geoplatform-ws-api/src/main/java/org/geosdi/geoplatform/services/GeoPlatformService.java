@@ -181,7 +181,7 @@ public interface GeoPlatformService {
             @WebParam(name = "idElementMoved") long idElementMoved,
             @WebParam(name = "idNewParent") long idNewParent,
             @WebParam(name = "owner") GPUser owner,
-            @WebParam(name = "newPosition") int newPosition,
+            @WebParam(name = "newPosition") int newPseudoPosition,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault;
 

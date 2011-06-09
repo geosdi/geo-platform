@@ -40,7 +40,6 @@ package org.geosdi.geoplatform.core.dao.impl;
 import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
-import java.util.Arrays;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
@@ -99,11 +98,13 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
     @Override
     public boolean updatePositionsRangeInOppositeWay(
             int beginPositionFirstRange, int endPositionFirstRange,
-            int beginPositionSecondRange, int endPositionSecondRange, int deltaValue) {
+            int beginPositionSecondRange, int endPositionSecondRange,
+            int deltaValueFirstRange, int deltaValueSecondRange) {
         assert (beginPositionFirstRange < endPositionFirstRange) : "beginPositionFirstRange must be lesser than endPositionFirstRange";
         assert (beginPositionSecondRange < endPositionSecondRange) : "beginPositionSecondRange must be lesser than endPositionSecondRange";
         assert (endPositionFirstRange > beginPositionSecondRange) : "endPositionFirstRange must be greater than beginPositionSecondRange";
-        assert (deltaValue != 0) : "deltaValue does not be 0";
+        assert (deltaValueFirstRange != 0) : "deltaValueFirstRange does not be 0";
+        assert (deltaValueSecondRange != 0) : "deltaValueSecondRange does not be 0";
         // Select the folders of interest (first range)
         Search search = new Search();
         search.addFilterGreaterOrEqual("position", beginPositionFirstRange).
@@ -111,8 +112,13 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
         List<GPFolder> matchingFoldersFirstRange = super.search(search);
 
         logger.debug("\n*** UPDATE First Range Folders with Position: {} to {} [# {}] *** deltaValue = {} ***",
-                new Object[]{beginPositionFirstRange, endPositionFirstRange, endPositionFirstRange - beginPositionFirstRange + 1, deltaValue});
+                new Object[]{beginPositionFirstRange, endPositionFirstRange, endPositionFirstRange - beginPositionFirstRange + 1, deltaValueFirstRange});
         logger.debug("\n*** Matching First Range Folders count: {} ***", matchingFoldersFirstRange.size());
+
+//        // TODO DEL
+//        for (GPFolder gPFolder : matchingFoldersFirstRange) {
+//            logger.trace("\n*** First Range\n{}\n***", gPFolder);
+//        }
 
         // Select the folders of interest (second range)
         search = new Search();
@@ -120,16 +126,24 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
                 addFilterLessOrEqual("position", endPositionSecondRange);
         List<GPFolder> matchingFoldersSecondRange = super.search(search);
 
-        logger.debug("\n*** UPDATE SecondRange Folders with Position: {} to {} [# {}] *** deltaValue = {} ***",
-                new Object[]{beginPositionSecondRange, endPositionSecondRange, endPositionSecondRange - beginPositionSecondRange + 1, deltaValue});
-        logger.debug("\n*** Matching SecondRange Folders count: {} ***", matchingFoldersSecondRange.size());
+        logger.debug("\n*** UPDATE Second Range Folders with Position: {} to {} [# {}] *** deltaValue = {} ***",
+                new Object[]{beginPositionSecondRange, endPositionSecondRange, endPositionSecondRange - beginPositionSecondRange + 1, deltaValueSecondRange});
+        logger.debug("\n*** Matching Second Range Folders count: {} ***", matchingFoldersSecondRange.size());
+
+//        // TODO DEL
+//        for (GPFolder gPFolder : matchingFoldersSecondRange) {
+//            logger.trace("\n*** Second Range\n{}\n***", gPFolder);
+//        }
 
         // Update (first range)
         int[] oldPositionsFirstRange = new int[matchingFoldersFirstRange.size()];
         for (int ind = matchingFoldersFirstRange.size() - 1; ind >= 0; ind--) {
             GPFolder folder = matchingFoldersFirstRange.get(ind);
             oldPositionsFirstRange[ind] = folder.getPosition();
-            folder.setPosition(folder.getPosition() + deltaValue);
+            folder.setPosition(folder.getPosition() + deltaValueFirstRange);
+
+            logger.trace("\n*** Position of the UPDATED GPFolder First Range: {} ({} + {}) ***", new Object[]{
+                        folder.getPosition(), oldPositionsFirstRange[ind], deltaValueFirstRange});
         }
 
         // Update (second range)
@@ -137,7 +151,10 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
         for (int ind = matchingFoldersSecondRange.size() - 1; ind >= 0; ind--) {
             GPFolder folder = matchingFoldersSecondRange.get(ind);
             oldPositionsSecondRange[ind] = folder.getPosition();
-            folder.setPosition(folder.getPosition() - deltaValue); // (shift in opposite way)
+            folder.setPosition(folder.getPosition() + deltaValueSecondRange); // (shift in opposite way)
+
+            logger.trace("\n*** Position of the UPDATED GPFolder Second Range: {} ({} + {}) ***", new Object[]{
+                        folder.getPosition(), oldPositionsSecondRange[ind], deltaValueSecondRange});
         }
 
         List<GPFolder> matchingFolders = new ArrayList<GPFolder>();
@@ -145,15 +162,24 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
         matchingFolders.addAll(matchingFoldersSecondRange);
         GPFolder[] foldersUpdated = merge(matchingFolders.toArray(new GPFolder[matchingFolders.size()]));
 
-        int[] oldPositions = new int[oldPositionsFirstRange.length + oldPositionsSecondRange.length];
-        System.arraycopy(oldPositionsFirstRange, 0, oldPositions, 0, oldPositionsFirstRange.length - 1);
-        System.arraycopy(oldPositionsSecondRange, 0, oldPositions, oldPositionsFirstRange.length, oldPositionsFirstRange.length - 1);
+//        // TODO DEL
+//        for (GPFolder gPFolder : foldersUpdated) {
+//            logger.trace("\n*** GPFolder merged\n{}\n***", gPFolder);
+//        }
 
         // Check the update
-        for (int ind = foldersUpdated.length - 1; ind >= 0; ind--) {
-            logger.trace("\n*** Position of the UPDATED GPFolder: {} ({} + {}) ***", new Object[]{
-                        foldersUpdated[ind].getPosition(), oldPositions[ind], deltaValue});
-            if ((oldPositions[ind] + deltaValue) != foldersUpdated[ind].getPosition()) {
+        for (int ind = 0; ind < matchingFoldersFirstRange.size(); ind++) {
+            logger.trace("\n*** Check Position - First Range: {} ({} + {}) ***", new Object[]{
+                        foldersUpdated[ind].getPosition(), oldPositionsFirstRange[ind], deltaValueFirstRange});
+            if ((oldPositionsFirstRange[ind] + deltaValueFirstRange) != foldersUpdated[ind].getPosition()) {
+                return false;
+            }
+        }
+        int indRef = matchingFoldersFirstRange.size();
+        for (int ind = 0; ind < matchingFoldersSecondRange.size(); ind++) {
+            logger.trace("\n*** Check Position - Second Range: {} ({} + {}) ***", new Object[]{
+                        foldersUpdated[ind + indRef].getPosition(), oldPositionsSecondRange[ind], deltaValueSecondRange});
+            if ((oldPositionsSecondRange[ind] + deltaValueSecondRange) != foldersUpdated[ind + indRef].getPosition()) {
                 return false;
             }
         }

@@ -217,46 +217,54 @@ class FolderServiceImpl {
      * @param idFolderMoved
      * @param idNewParent: set conventionaly 0 if idFolderMoved is refer to a folder of root
      * @param owner
-     * @param newPosition
+     * @param newPseudoPosition: in DD to up id the element with major position to shift to down
+     *                  , meanwhile in DD to down is the element with minor position to shift to up
      * @param descendantsMapData
      * @return
      * @throws ResourceNotFoundFault 
      */
-    public boolean saveDragAndDropFolderModifications(long idFolderMoved, long idNewParent, GPUser owner,
-            int newPosition, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
+    public boolean saveDragAndDropFolderModifications(long idFolderMoved, long idNewParent,
+            GPUser owner, int newPseudoPosition, GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault {
+        // Retrieve the folder by ID and obtain informations of interest
         GPFolder folderMoved = folderDao.find(idFolderMoved);
         if (folderMoved == null) {
-            throw new ResourceNotFoundFault("Folder with id " + idFolderMoved + " not found");
+            throw new ResourceNotFoundFault("Folder not found", idFolderMoved);
         }
-        assert (folderMoved.getPosition() != newPosition) : "New Position must be NOT equal to Old Position";
-
-        // Iff there isn't a folder of root
-        if (idNewParent != 0) {
-            GPFolder folderParent = folderDao.find(idNewParent);
-            if (folderParent == null) { // Drag & Drop to the root
-                logger.trace("***owner");
-                GPUser ownerDetail = userDao.findByUsername(owner.getUsername());
-                assert (ownerDetail != null) : "Unable to find user from DB with username " + owner.getUsername();
-                folderMoved.setOwner(ownerDetail);
-            } else { // Drag & Drop to a folder                
-                logger.trace("***parent");
-                folderMoved.setParent(folderParent);
-            }
-        }
-
-        // Shift range of folders with ID from oldPosition to newPosition
-        // (exclude descentants)
         int oldPosition = folderMoved.getPosition();
         int descendants = folderMoved.getNumberOfDescendants();
+        assert (oldPosition != newPseudoPosition) : "New Pseudo Position must be NOT equal to Old Position";
+        assert (descendants >= 0) : "Descendants must be greater than zero";
+        logger.debug("\n*** oldPosition = {} | newPosition = {} | descendants = {} ***",
+                new Object[]{oldPosition, newPseudoPosition, descendants});
+
+        // Retrieve and fix associations with other elements in the tree
+//        int descendantsNewParent = 0;
+        if (idNewParent == 0) { // Drag & Drop to the root
+            logger.trace("\n*** Folder with Owner ***");
+            GPUser ownerDetail = userDao.findByUsername(owner.getUsername());
+            assert (ownerDetail != null) : "Unable to find user from DB with username " + owner.getUsername();
+
+            folderMoved.setOwner(ownerDetail);
+        } else { // Drag & Drop to a folder
+            logger.trace("\n*** Folder with Folder Parent ***");
+            GPFolder folderParent = folderDao.find(idNewParent);
+            if (folderParent == null) {
+                throw new ResourceNotFoundFault("Folder Parent not found", idNewParent);
+            }
+
+//            descendantsNewParent = folderParent.getNumberOfDescendants();
+            folderMoved.setParent(folderParent);
+        }
+
+        // First Range (not folder of interest and his descendants)
         int beginPosition = -1, endPosition = -1, delta = 0;
-        if (oldPosition < newPosition) { // Drag & Drop to up
-            logger.trace("***oldPosition < newPosition");
+        if (oldPosition < newPseudoPosition) { // Drag & Drop to up
             beginPosition = oldPosition + 1;
-            endPosition = newPosition;
+            endPosition = newPseudoPosition;
             delta = -(descendants + 1);
-        } else if (oldPosition > newPosition) { // Drag & Drop to down
-            logger.trace("***oldPosition > newPosition");
-            beginPosition = newPosition;
+        } else if (oldPosition > newPseudoPosition) { // Drag & Drop to down
+            beginPosition = newPseudoPosition;
             endPosition = oldPosition - 1 - descendants;
             delta = descendants + 1;
         }
@@ -264,60 +272,57 @@ class FolderServiceImpl {
                 new Object[]{beginPosition, endPosition, delta});
 
         // Shift positions
-        boolean resultUpdates = true;
-        if (delta != 0) { // DEL if
-            assert (descendants >= 0) : "descendants < 0";
-            if (descendants == 0) {
-                logger.trace("***descendants == 0");
-                boolean resultUpdatesOfLayers = layerDao.updatePositionsRange(beginPosition, endPosition, delta);
-                boolean resultUpdatesOfFolders = folderDao.updatePositionsRange(beginPosition, endPosition, delta);
+        boolean resultUpdates = false;
+        int newRealPosition = newPseudoPosition;
+        if (descendants == 0) {
+            boolean resultUpdatesOfLayers = layerDao.updatePositionsRange(beginPosition, endPosition, delta);
+            boolean resultUpdatesOfFolders = folderDao.updatePositionsRange(beginPosition, endPosition, delta);
 
-                assert (resultUpdatesOfLayers) : "Errors occured when updating position of layers";
-                assert (resultUpdatesOfFolders) : "Errors occured when updating position of folders";
-
-                resultUpdates = resultUpdates && resultUpdatesOfLayers && resultUpdatesOfFolders;
-            } else { // Shift descendants positions
-                logger.trace("***descendants > 0");
-                int beginPositionDescendants = oldPosition - descendants;
-                int endPositionDescendants = oldPosition - 1;
-                int deltaDescendants = -delta;
-                logger.debug("\n*** beginPositionDescendants = {} | endPositionDescendants = {} | deltaDescendants = {} ***",
-                        new Object[]{beginPositionDescendants, endPositionDescendants, deltaDescendants});
-                //
-                // TODO !!! shift folders and layers simultaneous
-//                boolean resultUpdatesOfSubLayers = layerDao.updatePositionsRangeInOppositeWay(
-//                        beginPosition, endPosition,
-//                        beginPositionDescendants, endPositionDescendants, delta);
-                boolean resultUpdatesOfSubFolders = folderDao.updatePositionsRangeInOppositeWay(
-                        beginPosition, endPosition,
-                        beginPositionDescendants, endPositionDescendants, delta);
-
-//                assert (resultUpdatesOfSubLayers) : "Errors occured when updating position of sub-layers";
-                assert (resultUpdatesOfSubFolders) : "Errors occured when updating position of sub-folders";
-
-//                resultUpdates = resultUpdates && resultUpdatesOfSubLayers && resultUpdatesOfSubFolders;
-                resultUpdates = resultUpdates && resultUpdatesOfSubFolders;
+            assert (resultUpdatesOfLayers) : "Errors occured when updating position of layers";
+            assert (resultUpdatesOfFolders) : "Errors occured when updating position of folders";
+            logger.trace("\n*** updatesOfLayers = {} | udatesOfFolders = {} ***",
+                    resultUpdatesOfLayers, resultUpdatesOfFolders);
+            resultUpdates = resultUpdatesOfLayers && resultUpdatesOfFolders;
+        } else {
+            // Second Range (folder of interest and his descendants)
+            int beginPositionDescendants = oldPosition - descendants;
+            int endPositionDescendants = oldPosition - 1;
+            int deltaDescendants = 0;
+            if (oldPosition < newPseudoPosition) {
+                deltaDescendants = newPseudoPosition - oldPosition;
+            } else if (oldPosition > newPseudoPosition) {
+                deltaDescendants = -(oldPosition - newPseudoPosition) + descendants;
+                newRealPosition = newPseudoPosition + descendants;
             }
-            FolderList fs = this.getAllUserFoldersByUserId(owner.getId());
-            for (FolderDTO folder : fs.getList()) {
-                logger.trace("\n***\n{}\n***", folder);
-                TreeFolderElements tree = this.getChildrenElements(folder.getId());
-                for (Object object : tree) {
-                    logger.trace("\n***\n{}\n***", object);
-                }
-            }
+            logger.debug("\n*** beginPositionDesc = {} | endPositionDesc = {} | deltaDesc = {} ***",
+                    new Object[]{beginPositionDescendants, endPositionDescendants, deltaDescendants});
+            //
+            boolean resultUpdatesOfSubLayers = layerDao.updatePositionsRangeInOppositeWay(
+                    beginPosition, endPosition,
+                    beginPositionDescendants, endPositionDescendants,
+                    delta, deltaDescendants);
+            boolean resultUpdatesOfSubFolders = folderDao.updatePositionsRangeInOppositeWay(
+                    beginPosition, endPosition,
+                    beginPositionDescendants, endPositionDescendants,
+                    delta, deltaDescendants);
+
+            assert (resultUpdatesOfSubLayers) : "Errors occured when updating position of sub-layers";
+            assert (resultUpdatesOfSubFolders) : "Errors occured when updating position of sub-folders";
+            logger.trace("\n*** updatesOfSubLayers = {} | udatesOfSubFolders = {} ***",
+                    resultUpdatesOfSubLayers, resultUpdatesOfSubFolders);
+            resultUpdates = resultUpdatesOfSubLayers && resultUpdatesOfSubFolders;
         }
 
-        folderMoved.setPosition(newPosition);
-        folderDao.merge(folderMoved);
+        logger.debug("\n*** newRealPosition = {} ***", newRealPosition);
+        folderMoved.setPosition(newRealPosition);
+        GPFolder folderToCheck = folderDao.merge(folderMoved);
+        assert (folderToCheck.getPosition() == newRealPosition) : "folderToCheck must have set newPosition";
 
         boolean resultUpdateAncestorsDescendants = folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-        assert (resultUpdateAncestorsDescendants) : "Errors occured when updating ancestors and descendants on tree";
+        assert (resultUpdateAncestorsDescendants) : "Errors occured when updating ancestors descendants on tree";
 
-        System.out.println("@@@@");
-        System.out.print(resultUpdates + " - ");
-        System.out.print(resultUpdateAncestorsDescendants);
-        System.out.println("@@@@");
+        logger.trace("\n*** updatePosition = {} | updateDescendants = {} ***",
+                resultUpdates, resultUpdateAncestorsDescendants);
 
         return resultUpdates && resultUpdateAncestorsDescendants;
     }

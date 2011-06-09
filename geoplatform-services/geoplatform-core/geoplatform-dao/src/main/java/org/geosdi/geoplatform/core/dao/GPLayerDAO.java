@@ -69,7 +69,8 @@ public interface GPLayerDAO {
     public GPLayer findByLayerName(String layerName);
 
     public boolean updatePositionsRangeInOppositeWay(int beginPositionFirstRange, int endPositionFirstRange,
-            int beginPositionSecondRange, int endPositionSecondRange, int deltaValue);
+            int beginPositionSecondRange, int endPositionSecondRange,
+            int deltaValueFirstRange, int deltaValueSecondRange);
 
     public boolean updatePositionsRange(int beginPosition, int endPosition,
             int deltaValue);

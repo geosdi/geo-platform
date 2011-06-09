@@ -52,7 +52,7 @@ public interface GPFolderDAO {
     public List<GPFolder> findAll();
 
     public GPFolder find(Long id);
-    
+
     public GPFolder[] find(Long[] ids);
 
     public void persist(GPFolder... folders);
@@ -70,9 +70,10 @@ public interface GPFolderDAO {
     public int count(ISearch search);
 
     public GPFolder findByFolderName(String folderName);
-    
+
     public boolean updatePositionsRangeInOppositeWay(int beginPositionFirstRange, int endPositionFirstRange,
-            int beginPositionSecondRange, int endPositionSecondRange, int deltaValue);    
+            int beginPositionSecondRange, int endPositionSecondRange,
+            int deltaValueFirstRange, int deltaValueSecondRange);
 
     public boolean updatePositionsRange(int beginPosition, int endPosition,
             int deltaValue);
@@ -84,5 +85,5 @@ public interface GPFolderDAO {
 
     public boolean persistCheckStatusFolder(long idFolder, boolean isChecked);
 
-    public boolean persistCheckStatusFolders(boolean isChecked, Long... idFolders);        
+    public boolean persistCheckStatusFolders(boolean isChecked, Long... idFolders);
 }

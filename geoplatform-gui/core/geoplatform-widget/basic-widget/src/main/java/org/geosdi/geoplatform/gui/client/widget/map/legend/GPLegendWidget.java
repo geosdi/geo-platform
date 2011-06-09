@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Html;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.google.gwt.user.client.ui.Image;
 
 /**

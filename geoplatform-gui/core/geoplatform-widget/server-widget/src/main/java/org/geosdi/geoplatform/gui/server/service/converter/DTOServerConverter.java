@@ -117,6 +117,7 @@ public class DTOServerConverter {
                 raster.setName(layer.getName());
                 raster.setAbstractText(layer.getAbstractText());
                 raster.setLayerType(GPLayerType.RASTER);
+                raster.setDataSource(layer.getUrlServer());
 
                 if (layer.getBbox() != null) {
                     raster.setBbox(new BboxClientInfo(layer.getBbox().getMinX(),

@@ -57,6 +57,6 @@ public class AddVectorTreeAction extends ToolbarLayerTreeAction {
         GeoPlatformMessage.infoMessage("AddVectorTreeAction",
                 "Action must be implemented");
         System.out.println(
-                "Element SEOECTED ********** " + this.tree.getSelectionModel().getSelectedItem());
+                "Element SELECTED ********** " + this.tree.getSelectionModel().getSelectedItem());
     }
 }

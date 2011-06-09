@@ -144,7 +144,7 @@ public abstract class AbstractMementoSave<T extends GPBeanTreeModel> implements 
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("Memento received observable notify");
+        //System.out.println("Memento received observable notify");
         this.idBaseElement = ((Long) arg);
     }
 }

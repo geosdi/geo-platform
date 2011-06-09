@@ -207,8 +207,7 @@ public class DTOConverter {
             Map<Long, Integer> descendantMap) {
         GPWebServiceMapData<Long, Integer> wsMap = new GPWebServiceMapData<Long, Integer>();
         wsMap.setDescendantsMap(descendantMap);
-        System.out.println(
-                "Size della mappa descendants: " + descendantMap.size());
+        System.out.println("Size descendants map: " + descendantMap.size());
         return wsMap;
     }
 

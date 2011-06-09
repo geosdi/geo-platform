@@ -147,7 +147,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                             LayoutManager.get().getStatusMap().setStatus(
                                     "Error loading tree elements.",
                                     EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                            System.out.println("Errore avvenuto nel loader del tree: " + caught.toString()
+                            System.out.println("Error loading tree elements: " + caught.toString()
                                     + " data: " + caught.getMessage());
                         }
 
@@ -359,7 +359,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                             LayoutManager.get().getStatusMap().setStatus(
                                     "Error loading tree elements.",
                                     EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                            System.out.println("Errore avvenuto nel loader del tree: " + caught.toString()
+                            System.out.println("Error loading tree elements: " + caught.toString()
                                     + " data: " + caught.getMessage());
                         }
 

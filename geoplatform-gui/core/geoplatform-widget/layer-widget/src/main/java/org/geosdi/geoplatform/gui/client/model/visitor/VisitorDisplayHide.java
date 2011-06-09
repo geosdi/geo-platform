@@ -162,9 +162,13 @@ public class VisitorDisplayHide implements IVisitor {
         }
     }
 
+    /**
+     * 
+     * @return This method shows the checked layers on map
+     */
     public void realignViewState(GPBeanTreeModel element) {
         this.isCacheableCheck = false;
-        System.out.println("Realign view");
+        //System.out.println("Realigning view");
         if (element.isChecked()) {
             this.treePanel.setExpanded(element, true, true);
             this.isInternalFolderCheck = true;

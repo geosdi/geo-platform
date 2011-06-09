@@ -78,7 +78,7 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
 
     @Override
     public void update(Observable o, Object o1) {
-        System.out.println("SaveTreeAction receive observable notify");
+        //System.out.println("SaveTreeAction receive observable notify");
         if (LayerEvents.SAVE_CACHE_NOT_EMPTY == ((EventType) o1)) {
             super.setEnabled(true);
         } else {

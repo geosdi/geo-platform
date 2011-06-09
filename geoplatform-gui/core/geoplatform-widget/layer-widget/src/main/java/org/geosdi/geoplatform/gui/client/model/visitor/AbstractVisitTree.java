@@ -72,7 +72,7 @@ public abstract class AbstractVisitTree {
 
     private GPBeanTreeModel getFollowingElement(GPBeanTreeModel element) {
         GPBeanTreeModel followingElement = null;
-        System.out.println("Element label: " + element.getLabel());
+        //System.out.println("Element label: " + element.getLabel());
         GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
         if (parent != null && parent.getChild(parent.indexOf(element) + 1) != null) {
             return (GPBeanTreeModel) parent.getChild(parent.indexOf(element) + 1);

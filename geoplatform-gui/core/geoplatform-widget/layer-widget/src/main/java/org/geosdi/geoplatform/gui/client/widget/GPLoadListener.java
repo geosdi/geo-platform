@@ -137,7 +137,7 @@ public class GPLoadListener extends LoadListener {
                 + "Verify network connections and try again.\nIf the problem persists contact your system administrator.");
         LayoutManager.get().getStatusMap().setStatus(
                 "Error loading tree elements.", null);
-        System.out.println("Errore avvenuto nel loader del tree: " + le.exception
+        System.out.println("Error loading tree elements: " + le.exception
                 + " data: " + le.getData());
     }
 

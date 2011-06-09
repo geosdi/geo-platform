@@ -63,8 +63,8 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
         if (super.peek() == null) {
             this.observable.setChanged();
             this.observable.notifyObservers(LayerEvents.SAVE_CACHE_NOT_EMPTY);
-            System.out.println("Event SAVE_CACHE_NOT_EMPTY notified to "
-                    + this.observable.countObservers() + " observers");
+            /*System.out.println("Event SAVE_CACHE_NOT_EMPTY notified to "
+                    + this.observable.countObservers() + " observers");*/
         }
         return super.add(memento);
     }
@@ -75,8 +75,8 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
         if (super.peek() == null) {
             this.observable.setChanged();
             this.observable.notifyObservers(LayerEvents.SAVE_CACHE_EMPTY);
-            System.out.println("Event SAVE_CACHE_EMPTY notified to "
-                    + this.observable.countObservers() + " observers");
+            /*System.out.println("Event SAVE_CACHE_EMPTY notified to "
+                    + this.observable.countObservers() + " observers");*/
         }
         return memento;
     }
@@ -87,8 +87,8 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
         if (super.peek() == null) {
             this.observable.setChanged();
             this.observable.notifyObservers(LayerEvents.SAVE_CACHE_EMPTY);
-            System.out.println("Event SAVE_CACHE_EMPTY notified to "
-                    + this.observable.countObservers() + " observers");
+            /*System.out.println("Event SAVE_CACHE_EMPTY notified to "
+                    + this.observable.countObservers() + " observers");*/
         }
         return operation;
     }

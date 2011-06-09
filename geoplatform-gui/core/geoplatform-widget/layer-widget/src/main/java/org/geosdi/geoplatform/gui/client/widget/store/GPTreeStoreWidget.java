@@ -48,6 +48,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.MementoBuilder;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
+import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
@@ -71,6 +72,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
     private LayersProgressTextEvent layersTextEvent = new LayersProgressTextEvent();
     private DeselectGridElementEvent deselectEvent = new DeselectGridElementEvent();
     private VisitorAddElement visitorAdd = new VisitorAddElement();
+    private VisitorDisplayHide visitorDispayLayer;
     private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
 
     /*
@@ -78,6 +80,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
      */
     public GPTreeStoreWidget(GPTreePanel<GPBeanTreeModel> theTree) {
         super(theTree);
+        this.visitorDispayLayer = new VisitorDisplayHide(theTree);
     }
 
     @Override
@@ -92,26 +95,24 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         }
         this.tree.getStore().insert(parentDestination, layerList, 0, true);
         this.visitorAdd.insertLayerElements(layerList, parentDestination);
-        MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(
-                this);
-        mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(
-                layerList));
-        mementoSaveLayer.setDescendantMap(
-                this.visitorAdd.getFolderDescendantMap());
+        this.visitorDispayLayer.realignViewState(parentDestination);
+        MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
+        mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(layerList));
+        mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
         GPLayerSaveCache.getInstance().add(mementoSaveLayer);
 
 
         LayerHandlerManager.fireEvent(deselectEvent);
     }
 
-    private RasterTreeNode convertGPRasterBeanModelToRasterTreeNode(
-            GPRasterLayerGrid rasterBean) {
+    private RasterTreeNode convertGPRasterBeanModelToRasterTreeNode(GPRasterLayerGrid rasterBean) {
         RasterTreeNode raster = new RasterTreeNode();
         raster.setAbstractText(rasterBean.getAbstractText());
         raster.setBbox(rasterBean.getBbox());
         raster.setChecked(true);
         raster.setCrs(rasterBean.getCrs());
         raster.setDataSource(rasterBean.getDataSource());
+        System.out.println("Data Source: " + raster.getDataSource());
         raster.setLabel(rasterBean.getLabel());
         raster.setLayerType(rasterBean.getLayerType());
         raster.setName(rasterBean.getName());
@@ -123,8 +124,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
     @Override
     public void addVectorLayers(List<? extends GPLayerBean> layers) {
         this.changeProgressBarMessage("Load Vector Layers in the Store");
-        System.out.println(
-                "ADD VECTORS *********************** " + layers);
+        System.out.println("ADD VECTORS *********************** " + layers);
     }
 
     private void changeProgressBarMessage(String message) {

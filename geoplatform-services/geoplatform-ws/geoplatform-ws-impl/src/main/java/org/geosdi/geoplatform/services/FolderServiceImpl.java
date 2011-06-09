@@ -246,6 +246,7 @@ class FolderServiceImpl {
             assert (ownerDetail != null) : "Unable to find user from DB with username " + owner.getUsername();
 
             folderMoved.setOwner(ownerDetail);
+            folderMoved.setParent(null);
         } else { // Drag & Drop to a folder
             logger.trace("\n*** Folder with Folder Parent ***");
             GPFolder folderParent = folderDao.find(idNewParent);
@@ -255,6 +256,7 @@ class FolderServiceImpl {
 
 //            descendantsNewParent = folderParent.getNumberOfDescendants();
             folderMoved.setParent(folderParent);
+            folderMoved.setOwner(null);
         }
 
         // First Range (not folder of interest and his descendants)

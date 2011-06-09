@@ -40,15 +40,13 @@ package org.geosdi.geoplatform;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import org.geosdi.geoplatform.core.model.GPBBox;
-import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
@@ -141,7 +139,7 @@ public class WSFolderLayerTest extends ServiceTest {
             createLayer(rasterLayer3, "", rootFolderA, nameRasterLayer3, 6,
                     false, spatialReferenceSystem, "", urlServer);
             GPLayerInfo layerInfo = new GPLayerInfo();
-            layerInfo.setKeywords(layerInfoKeyword);
+            layerInfo.setKeywords(layerInfoKeywords);
             layerInfo.setQueryable(false);
             rasterLayer3.setLayerInfo(layerInfo);
             // "rootFolderA" ---> "vectorLayer3"
@@ -157,16 +155,16 @@ public class WSFolderLayerTest extends ServiceTest {
             map.put(idRootFolderA, 4);
             GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
             descendantsMapData.setDescendantsMap(map);
-            
+
             ArrayList<Long> idList = geoPlatformService.saveAddedLayersAndTreeModifications(arrayList, descendantsMapData);
-            
+
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
             Assert.assertEquals("position of rootFolderA", 8, rootFolderA.getPosition());
-            
+
             GPLayer newRasterLayer3 = geoPlatformService.getRasterLayer(idList.get(0));
             Assert.assertEquals("name of newRasterLayer3", nameRasterLayer3, newRasterLayer3.getName());
             Assert.assertEquals("position of newRasterLayer3", 6, newRasterLayer3.getPosition());
-            
+
             GPLayer newVectorLayer3 = geoPlatformService.getVectorLayer(idList.get(1));
             Assert.assertEquals("name of newVectorLayer3", nameVectorLayer3, newVectorLayer3.getName());
             Assert.assertEquals("position of newVectorLayer3", 7, newVectorLayer3.getPosition());
@@ -305,7 +303,7 @@ public class WSFolderLayerTest extends ServiceTest {
                     titleLayerToTest, urlServer);
 
             GPLayerInfo layerInfo = new GPLayerInfo();
-            layerInfo.setKeywords(layerInfoKeyword);
+            layerInfo.setKeywords(layerInfoKeywords);
             layerInfo.setQueryable(false);
             layerToTest.setLayerInfo(layerInfo);
 
@@ -575,8 +573,14 @@ public class WSFolderLayerTest extends ServiceTest {
         try {
             GPLayerInfo layerInfo = geoPlatformService.getLayerInfo(idRasterLayer2);
             Assert.assertNotNull("assertNotNull layerInfo", layerInfo);
-            Assert.assertEquals("assertEquals layerInfo.getKeywords()", layerInfo.getKeywords(), layerInfoKeyword);
-            Assert.assertEquals("assertEquals layerInfo.isQueryable()", layerInfo.isQueryable(), false);
+            Assert.assertEquals("assertEquals layerInfo.isQueryable()", false, layerInfo.isQueryable());
+            List<String> keywords = layerInfo.getKeywords();
+            Assert.assertNotNull("assertNotNull keywords of layerInfo", keywords);
+            Assert.assertEquals("assertEquals layerInfo.getKeywords()", layerInfoKeywords.size(), keywords.size());
+            for (int i = 0; i < keywords.size(); i++) {
+                String key = keywords.get(i);
+                Assert.assertEquals("assert keyword: index = " + i, layerInfoKeywords.get(i), key);
+            }
         } catch (ResourceNotFoundFault ex) {
             Assert.fail("Layer with id \"" + idRasterLayer2 + "\" was NOT found");
         }

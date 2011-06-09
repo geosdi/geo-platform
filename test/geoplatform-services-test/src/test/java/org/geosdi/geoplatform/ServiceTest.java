@@ -37,10 +37,11 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mortbay.jetty.Server;
 import org.springframework.beans.factory.InitializingBean;
@@ -81,7 +82,7 @@ public abstract class ServiceTest implements InitializingBean {
     @Autowired
     protected Server gpJettyServer;
     //
-    protected String layerInfoKeyword = "keyword";
+    protected List<String> layerInfoKeywords;
     // User
     protected final String usernameTest = "username_test_ws";
     protected GPUser userTest = null;
@@ -121,6 +122,10 @@ public abstract class ServiceTest implements InitializingBean {
 
         Assert.assertNotNull("RootFolderA is NULL", rootFolderA);
         Assert.assertNotNull("RootFolderB is NULL", rootFolderB);
+
+        // Set the list of keywords (for raster layer)
+        layerInfoKeywords = new ArrayList<String>();
+        layerInfoKeywords.add("keyword_test");
     }
 
     @After
@@ -189,7 +194,7 @@ public abstract class ServiceTest implements InitializingBean {
         rasterLayer.setFolder(parentFolder);
 
         GPLayerInfo layerInfo = new GPLayerInfo();
-        layerInfo.setKeywords(layerInfoKeyword);
+        layerInfo.setKeywords(layerInfoKeywords);
         layerInfo.setQueryable(false);
         rasterLayer.setLayerInfo(layerInfo);
 

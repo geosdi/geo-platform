@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -66,8 +67,6 @@ import org.geotools.data.ows.WMSCapabilities;
 import org.geotools.data.wms.WebMapServer;
 import org.geotools.ows.ServiceException;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -316,7 +315,9 @@ public abstract class BaseDAOTest {
         rasterLayer1.setFolder(folder);
         // GPLayerInfo
         GPLayerInfo info = new GPLayerInfo();
-        info.setKeywords("IGM");
+        List<String> keywords = new ArrayList<String>();
+        keywords.add("IGM");
+        info.setKeywords(keywords);
         info.setQueryable(true);
         rasterLayer1.setLayerInfo(info);
         return rasterLayer1;
@@ -369,20 +370,28 @@ public abstract class BaseDAOTest {
             rasterLayers = new ArrayList<GPRasterLayer>(layers.size());
 
             for (int i = 1; i < layers.size(); i++) {
+                Layer layer = layers.get(i);
+
                 GPRasterLayer raster = new GPRasterLayer();
-                raster.setName(layers.get(i).getName());
-                raster.setAbstractText(layers.get(i).get_abstract());
-                raster.setSrs(layers.get(i).getSrs().toString());
+                raster.setName(layer.getName());
+                raster.setAbstractText(layer.get_abstract());
+                raster.setSrs(layer.getSrs().toString());
                 raster.setBbox(new GPBBox(
-                        layers.get(i).getLatLonBoundingBox().getMinX(),
-                        layers.get(i).getLatLonBoundingBox().getMinY(),
-                        layers.get(i).getLatLonBoundingBox().getMaxX(),
-                        layers.get(i).getLatLonBoundingBox().getMaxY()));
+                        layer.getLatLonBoundingBox().getMinX(),
+                        layer.getLatLonBoundingBox().getMinY(),
+                        layer.getLatLonBoundingBox().getMaxX(),
+                        layer.getLatLonBoundingBox().getMaxY()));
+
                 GPLayerInfo infoLayer = new GPLayerInfo();
-                infoLayer.setKeywords(layers.get(i).getKeywords() != null
-                        ? layers.get(i).getKeywords().toString() : "");
-                infoLayer.setQueryable(true);
+                infoLayer.setQueryable(layer.isQueryable());
+                if (layer.getKeywords() != null) {
+                    List<String> keywordList = Arrays.asList(layer.getKeywords());
+                    if (keywordList.size() > 0) {
+                        infoLayer.setKeywords(keywordList);
+                    }
+                }
                 raster.setLayerInfo(infoLayer);
+
                 raster.setFolder(folder);
                 raster.setLayerType(GPLayerType.RASTER);
                 raster.setPosition(position);

@@ -52,6 +52,7 @@ public class GPBBox implements Serializable {
      * serialVersionUID
      */
     private static final long serialVersionUID = 2795112852068645206L;
+    //
     private double minX;
     private double minY;
     private double maxX;

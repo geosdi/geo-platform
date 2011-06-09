@@ -57,7 +57,7 @@ public class ServerDTO {
     private String serverUrl;
     private String name;
     //
-    @XmlElementWrapper(name = "layersCollection")
+    @XmlElementWrapper(name = "layerList")
     @XmlElement(name = "layer")
     private List<ShortLayerDTO> layersDTO;
 

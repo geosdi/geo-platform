@@ -38,14 +38,20 @@
 package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
+import javax.persistence.Column;
 
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * @author Francesco Izzi - geoSDI
  * 
  */
 @Embeddable
+@XmlAccessorType(XmlAccessType.FIELD)
 public class GPLayerInfo implements Serializable {
 
     /**
@@ -54,6 +60,8 @@ public class GPLayerInfo implements Serializable {
     private static final long serialVersionUID = -7418444235711934950L;
     //
     private Boolean queryable = false;
+    // The character ; separated list of keywords
+    @Column(name = "keywords")
     private String keywords;
 
     /**
@@ -74,16 +82,20 @@ public class GPLayerInfo implements Serializable {
     /**
      * @return the keywords
      */
-    public String getKeywords() {
-        return keywords;
+    public List<String> getKeywords() {
+        return Arrays.asList(keywords.split(";"));
     }
 
     /**
      * @param keywords
      *            the keywords to set
      */
-    public void setKeywords(String keywords) {
-        this.keywords = keywords;
+    public void setKeywords(List<String> keys) {
+        StringBuilder str = new StringBuilder();
+        for (String key : keys) {
+            str.append(key).append(";");
+        }
+        this.keywords = str.toString();
     }
 
     /*

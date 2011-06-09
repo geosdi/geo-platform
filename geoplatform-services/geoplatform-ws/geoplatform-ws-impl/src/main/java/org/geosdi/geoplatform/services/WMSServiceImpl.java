@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import org.slf4j.LoggerFactory;
@@ -51,6 +52,7 @@ import org.geotools.data.ows.StyleImpl;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPCababilityType;
+import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -173,10 +175,8 @@ class WMSServiceImpl {
             throws ResourceNotFoundFault {
 
         GeoPlatformServer server = serverDao.find(request.getId());
-
         if (server == null) {
-            throw new ResourceNotFoundFault(
-                    "The Server with ID : " + request.getId() + " has been deleted.");
+            throw new ResourceNotFoundFault("Server has been deleted", request.getId());
         }
 
         WMSCapabilities wmsCapabilities = this.getWMSCapabilities(
@@ -236,22 +236,31 @@ class WMSServiceImpl {
     // as constructor: LayerList list = new LayerList(List<Layer>);    
     // TODO Correct mapping Layer to AbstractLayerDTO (as abstract class?)
     private LayerList convertToLayerList(List<Layer> layerList, String urlServer) {
-        List<ShortLayerDTO> shortLayers = new ArrayList<ShortLayerDTO>(
-                layerList.size());
-        RasterLayerDTO layerDTOIth = null;
+        List<ShortLayerDTO> shortLayers = new ArrayList<ShortLayerDTO>(layerList.size());
 
         for (Layer layer : layerList) {
-            layerDTOIth = new RasterLayerDTO();
-            layerDTOIth.setUrlServer(getUrlServer(urlServer));
+            RasterLayerDTO layerDTOIth = new RasterLayerDTO();
+
+            layerDTOIth.setUrlServer(this.getUrlServer(urlServer));
             layerDTOIth.setName(layer.getName());
             layerDTOIth.setAbstractText(layer.get_abstract());
             layerDTOIth.setTitle(layer.getTitle());
 
             if (layer.getLatLonBoundingBox() != null) {
-                layerDTOIth.setBbox(
-                        this.createBbox(layer.getLatLonBoundingBox()));
+                layerDTOIth.setBbox(this.createBbox(layer.getLatLonBoundingBox()));
                 layerDTOIth.setSrs("EPSG:4326");
             }
+
+            // Set LayerInfo of Raster Ith
+            GPLayerInfo layerInfo = new GPLayerInfo();
+            layerInfo.setQueryable(layer.isQueryable());
+            if (layer.getKeywords() != null) {
+                List<String> keywordList = Arrays.asList(layer.getKeywords());
+                if (keywordList.size() > 0) {
+                    layerInfo.setKeywords(keywordList);
+                }
+            }
+            layerDTOIth.setLayerInfo(layerInfo);
 
             // Set Styles of Raster Ith
             List<StyleImpl> stylesImpl = layer.getStyles();

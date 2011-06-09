@@ -38,6 +38,8 @@
 package org.geosdi.geoplatform.responce;
 
 import java.util.List;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
@@ -51,6 +53,9 @@ import org.geosdi.geoplatform.core.model.GPRasterLayer;
 public class RasterLayerDTO extends ShortLayerDTO {
 
     private GPLayerInfo layerInfo;
+    //
+    @XmlElementWrapper(name = "styleList")
+    @XmlElement(name = "style")    
     private List<StyleDTO> styleList;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">

@@ -78,19 +78,23 @@ public class GPLegendWidget {
             cp.setHeaderVisible(false);
             cp.setBorders(false);
             cp.setBodyBorder(false);
-            
-            cp.add(new Html("<h3>"+layerBean.getLabel()+"</h3>"));
 
-            
+            cp.add(new Html("<h3>" + layerBean.getLabel() + "</h3>"));
+
+
             Image image;
 //            System.out.println("LEGEND URL: "+ layerBean.getDataSource()
 //                    + GET_LEGEND_REQUEST + layerBean.getLabel());
-            if(layerBean instanceof GPRasterBean || layerBean.getDataSource().contains("gwc/service/wms")) {
-                image = new Image(layerBean.getDataSource().replaceAll("gwc/service/wms", "wms") + GET_LEGEND_REQUEST + layerBean.getLabel()+"&scale=5000");
+            if (layerBean instanceof GPRasterBean || layerBean.getDataSource().contains(
+                    "gwc/service/wms")) {
+                image = new Image(
+                        layerBean.getDataSource().replaceAll("gwc/service/wms",
+                        "wms") + GET_LEGEND_REQUEST + layerBean.getLabel() + "&scale=5000");
             } else {
                 layerBean.getDataSource().replaceAll("wfs", "wms");
-                image = new Image(layerBean.getDataSource()
-                    + GET_LEGEND_REQUEST + layerBean.getLabel()+"&scale=5000");
+                image = new Image(
+                        layerBean.getDataSource()
+                        + GET_LEGEND_REQUEST + layerBean.getLabel() + "&scale=5000");
             }
 
             cp.add(image);
@@ -107,7 +111,8 @@ public class GPLegendWidget {
      */
     public void hideLegenItem(GPLayerBean layerBean) {
         if (this.legendsStore.getItemByItemId(layerBean.getLabel()) != null) {
-            this.legendsStore.remove(this.legendsStore.getItemByItemId(layerBean.getLabel()));
+            this.legendsStore.remove(this.legendsStore.getItemByItemId(
+                    layerBean.getLabel()));
             this.legendsStore.layout();
         }
     }

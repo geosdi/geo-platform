@@ -96,7 +96,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
                         reset();
                     }
                 } else {
-                    if (serverTextField.getValue().length() > 13) {
+                    if (serverTextField.getValue().length() > 15) {
                         save.enable();
                     } else {
                         save.disable();
@@ -107,7 +107,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
             @Override
             public void componentKeyPress(ComponentEvent event) {
                 if ((event.getKeyCode() == 13) && (serverTextField.getValue() != null)
-                        && (serverTextField.getValue().length() > 13)) {
+                        && (serverTextField.getValue().length() > 15)) {
                     execute();
                 }
             }
@@ -143,6 +143,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         clearComponents();
+                        clearStatusBarStatus();
                     }
                 });
 
@@ -152,13 +153,13 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
     @Override
     public void initSize() {
         setHeading("Add Server");
-        setSize(330, 170);
+        setSize(380, 170);
     }
 
     @Override
     public void initSizeFormPanel() {
         this.formPanel.setHeaderVisible(false);
-        this.formPanel.setSize(280, 120);
+        this.formPanel.setSize(320, 120);
     }
 
     @Override
@@ -181,7 +182,8 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
                     }
 
                     @Override
-                    public void onSuccess(GPServerBeanModel result) {
+                    public void onSuccess(GPServerBeanModel server) {
+                        System.out.println("TEST SERVER ************* " + server);
                     }
                 });
 
@@ -203,5 +205,9 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
 
     private void clearComponents() {
         super.hide();
+    }
+
+    private void clearStatusBarStatus() {
+        LayoutManager.get().getStatusMap().clearStatus("");
     }
 }

@@ -104,9 +104,6 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
         displayMessage();
     }
 
-    @Override
-    public abstract void executeSave(MementoSaveRemove memento);
-
     public abstract void processRequest();
 
     public abstract void displayMessage();

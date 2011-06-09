@@ -47,7 +47,8 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
  * @author giuseppe
  * 
  */
-public abstract class GeoPlatformToolbarAction extends GeoPlatformAction implements HasActionHandler {
+public abstract class GeoPlatformToolbarAction extends GeoPlatformAction
+        implements HasActionHandler {
 
     private AbstractImagePrototype image;
     private String id;

@@ -95,7 +95,8 @@ public class DeleteLayerHandler extends DeleteRequestHandler {
 
     @Override
     public void displayMessage() {
-        LayoutManager.get().getStatusMap().setStatus("The selected layer was deleted succesfully",
+        LayoutManager.get().getStatusMap().setStatus(
+                "The selected layer was deleted succesfully",
                 EnumSearchStatus.STATUS_SEARCH.toString());
     }
 
@@ -103,11 +104,13 @@ public class DeleteLayerHandler extends DeleteRequestHandler {
     public void executeSave(final MementoSaveRemove memento) {
         //Warning: The following conversion is absolutely necessary!
         memento.convertMementoToWs();
-        LayerRemote.Util.getInstance().saveDeletedLayerAndTreeModifications(memento, new AsyncCallback<Boolean>() {
+        LayerRemote.Util.getInstance().saveDeletedLayerAndTreeModifications(
+                memento, new AsyncCallback<Boolean>() {
 
             @Override
             public void onFailure(Throwable caught) {
-                LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
+                LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(
+                        false));
                 GeoPlatformMessage.errorMessage("Save Delete Operation Error",
                         "Problems on saving the new tree state after deleting layer");
             }

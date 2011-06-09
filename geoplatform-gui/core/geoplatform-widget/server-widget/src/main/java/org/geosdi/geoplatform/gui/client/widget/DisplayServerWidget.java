@@ -69,7 +69,6 @@ import org.geosdi.geoplatform.gui.client.widget.form.AddServerWidget;
 public class DisplayServerWidget {
 
     private GeoPlatformOGCRemoteAsync service = GeoPlatformOGCRemote.Util.getInstance();
-    
     private ToolBar toolbar;
     private ComboBox<GPServerBeanModel> comboServer;
     private ListStore<GPServerBeanModel> store;
@@ -146,11 +145,11 @@ public class DisplayServerWidget {
      * @return String
      */
     private native String getTemplate() /*-{
-    return  [
-    '<tpl for=".">',
-    '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{urlServer}</div>',
-    '</tpl>'
-    ].join("");
+        return  [
+            '<tpl for=".">',
+                '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{urlServer}</div>',
+            '</tpl>'
+        ].join("");
     }-*/;
 
     /**
@@ -233,6 +232,29 @@ public class DisplayServerWidget {
                                 EnumSearchStatus.STATUS_SEARCH.toString());
                     }
                 });
+    }
+
+    /**
+     * 
+     * @param server 
+     */
+    public void addServer(GPServerBeanModel server) {
+    }
+
+    /**
+     * Verify if the Server Url is already present in Store
+     * 
+     * @param urlServer
+     * @return 
+     *         GPServerBeanModel
+     */
+    public GPServerBeanModel containsServer(String urlServer) {
+        for (GPServerBeanModel server : store.getModels()) {
+            if (server.getUrlServer().equalsIgnoreCase(urlServer)) {
+                return server;
+            }
+        }
+        return null;
     }
 
     /**

@@ -95,18 +95,21 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
 
     @Override
     public void displayMessage() {
-        LayoutManager.get().getStatusMap().setStatus("The selected folder was deleted succesfully",
+        LayoutManager.get().getStatusMap().setStatus(
+                "The selected folder was deleted succesfully",
                 EnumSearchStatus.STATUS_SEARCH.toString());
     }
 
     @Override
     public void executeSave(final MementoSaveRemove memento) {
         memento.convertMementoToWs();
-        LayerRemote.Util.getInstance().saveDeletedFolderAndTreeModifications(memento, new AsyncCallback<Boolean>() {
+        LayerRemote.Util.getInstance().saveDeletedFolderAndTreeModifications(
+                memento, new AsyncCallback<Boolean>() {
 
             @Override
             public void onFailure(Throwable caught) {
-                LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
+                LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(
+                        false));
                 GeoPlatformMessage.errorMessage("Save Delete Operation Error",
                         "Problems on saving the new tree state after deleting elements");
             }

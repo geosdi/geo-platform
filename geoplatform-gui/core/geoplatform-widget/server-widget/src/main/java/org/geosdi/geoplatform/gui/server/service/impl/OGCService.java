@@ -108,11 +108,12 @@ public class OGCService implements IOGCService {
         try {
             ServerDTO serverWS = this.geoPlatformServiceClient.saveServer(
                     urlServer);
+            
+            return this.dtoServerConverter.convertServerWS(serverWS);
         } catch (ResourceNotFoundFault ex) {
             logger.error("Inser Server Error : " + ex);
             throw new GeoPlatformException(ex);
         }
-        return null;
     }
 
     /**

@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.GPLayerGrid;
@@ -46,7 +45,6 @@ import org.geosdi.geoplatform.gui.server.service.IOGCService;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOServerConverter;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.ServerDTO;
-import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,10 +91,10 @@ public class OGCService implements IOGCService {
         try {
             RequestById req = new RequestById(idServer);
 
-            Collection<ShortLayerDTO> layers = this.geoPlatformServiceClient.getCapabilities(
-                    req).getList();
+            ServerDTO server = this.geoPlatformServiceClient.getCapabilities(
+                    req);
 
-            return this.dtoServerConverter.convertRasterLayer(layers);
+            return this.dtoServerConverter.convertRasterLayer(server.getLayersDTO());
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error : " + ex);
             throw new GeoPlatformException(ex);

@@ -52,9 +52,11 @@ import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemote;
 import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.DisplayServerWidget;
+import org.geosdi.geoplatform.gui.client.widget.EnumSearchServer;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
 /**
@@ -68,19 +70,23 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
     private TextField<String> serverTextField;
     private Button save;
     private Button cancel;
+    private PerformOperation performSaveServer;
 
     public AddServerWidget(DisplayServerWidget theWidget) {
         super(true);
         this.displayServerWidget = theWidget;
+        this.performSaveServer = new PerformOperation();
     }
 
     @Override
     public void addComponentToForm() {
         this.fieldSet = new FieldSet();
         this.fieldSet.setHeading("Server Url");
+        
+        this.fieldSet.setToolTip("Insert valid WMS Url.");
 
         FormLayout layout = new FormLayout();
-        layout.setLabelWidth(40);
+        layout.setLabelWidth(60);
         fieldSet.setLayout(layout);
 
         this.serverTextField = new TextField<String>();
@@ -167,26 +173,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
         this.saveStatus.setBusy("Adding Server");
 
         LayoutManager.get().getStatusMap().setBusy("Saving Server");
-
-        GeoPlatformOGCRemote.Util.getInstance().insertServer(
-                this.serverTextField.getValue(),
-                new AsyncCallback<GPServerBeanModel>() {
-
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        setSaveStatus(EnumSaveStatus.STATUS_NO_SAVE,
-                                EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE);
-                        LayoutManager.get().getStatusMap().setStatus(
-                                "Save Server Error. " + caught.getMessage(),
-                                EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                    }
-
-                    @Override
-                    public void onSuccess(GPServerBeanModel server) {
-                        System.out.println("TEST SERVER ************* " + server);
-                    }
-                });
-
+        this.performSaveServer.addServer();
     }
 
     @Override
@@ -209,5 +196,53 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
 
     private void clearStatusBarStatus() {
         LayoutManager.get().getStatusMap().clearStatus("");
+    }
+
+    /**
+     * Internal Class for Business Logic
+     * 
+     */
+    private class PerformOperation {
+
+        private void addServer() {
+            if (displayServerWidget.containsServer(serverTextField.getValue())) {
+                notifyServerPresence();
+            } else {
+                saveServer();
+            }
+        }
+
+        private void saveServer() {
+            GeoPlatformOGCRemote.Util.getInstance().insertServer(
+                    serverTextField.getValue(),
+                    new AsyncCallback<GPServerBeanModel>() {
+
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            setSaveStatus(EnumSaveStatus.STATUS_NO_SAVE,
+                                    EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE);
+                            LayoutManager.get().getStatusMap().setStatus(
+                                    "Save Server Error. " + caught.getMessage(),
+                                    EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                        }
+
+                        @Override
+                        public void onSuccess(GPServerBeanModel server) {
+                            clearComponents();
+                            displayServerWidget.addServer(server);
+                        }
+                    });
+        }
+
+        private void notifyServerPresence() {
+            setSaveStatus(EnumSaveStatus.STATUS_NO_SAVE,
+                    EnumSearchServer.STATUS_MESSAGE_SERVER_EXISTING.toString());
+            LayoutManager.get().getStatusMap().setStatus(
+                    "Save Server",
+                    EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+            GeoPlatformMessage.alertMessage("Server Present",
+                    "The Server with url : " + serverTextField.getValue()
+                    + " is already present in Combo Box.");
+        }
     }
 }

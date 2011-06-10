@@ -72,7 +72,8 @@ public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
             ModelData model = it.next();
 
             if (model instanceof GPLayerBean) {
-                childMap.put(((GPLayerBean) model).getLabel(), (GPLayerBean) model);
+                childMap.put(((GPLayerBean) model).getLabel(),
+                        (GPLayerBean) model);
             }
         }
 

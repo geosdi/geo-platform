@@ -69,6 +69,7 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
 
     @Override
     public void execute() {
+        displayEvent.setVisible(true);
         LayerHandlerManager.fireEvent(displayEvent);
         checkLayers();
 
@@ -93,18 +94,22 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
         Map<String, GPLayerBean> childMap = this.selectedElement.getLayers();
 
         for (GPLayerBean gPLayerBean : selectedLayers) {
-            if (!childMap.containsKey(gPLayerBean.getLabel())) {
+            if (!childMap.containsKey(gPLayerBean.getName())) {
                 this.layersToStore.add(gPLayerBean);
             }
         }
 
         if (this.layersToStore.isEmpty()) {
+            displayEvent.setVisible(false);
+            LayerHandlerManager.fireEvent(displayEvent);
             GeoPlatformMessage.alertMessage("Add Layers",
-                    "All Selected Layers have been already added to the node "
+                    "All Selected Layers have been already added to the Folder : "
                     + this.selectedElement.getLabel());
-            return;
-        } else 
-            LayerHandlerManager.fireEvent(new GPRasterAddStoreEvent(this.layersToStore));
+            
+        } else {
+            LayerHandlerManager.fireEvent(new GPRasterAddStoreEvent(
+                    this.layersToStore));
+        }
 
     }
 }

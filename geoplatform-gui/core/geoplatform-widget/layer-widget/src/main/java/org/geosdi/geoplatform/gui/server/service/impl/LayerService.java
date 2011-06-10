@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -54,7 +55,7 @@ import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOConverter;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.responce.collection.FolderList;
+import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -92,10 +93,10 @@ public class LayerService implements ILayerService {
         }
 
         RequestById idRequest = new RequestById(user.getId());
-        FolderList folderList = geoPlatformServiceClient.getUserFoldersByRequest(
+        List<FolderDTO> folderList = geoPlatformServiceClient.getUserFoldersByRequest(
                 idRequest);
 
-        return this.dtoConverter.convertOnlyFolder(folderList.getList());
+        return this.dtoConverter.convertOnlyFolder(folderList);
     }
 
     @Override

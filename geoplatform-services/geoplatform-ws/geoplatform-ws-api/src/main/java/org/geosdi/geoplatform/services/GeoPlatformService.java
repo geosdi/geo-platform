@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -332,7 +333,7 @@ public interface GeoPlatformService {
 
     @Put
     @HttpResource(location = "/layers/{descendantsMap}")
-    List<Long> saveAddedLayersAndTreeModifications(
+    ArrayList<Long> saveAddedLayersAndTreeModifications(
             @WebParam(name = "layers") List<GPLayer> layers,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault;

@@ -176,6 +176,13 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
         this.layers = layers;
     }
 
+    /**
+     * @return the layersLoaded
+     */
+    public boolean isLayersLoaded() {
+        return this.layers != null;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

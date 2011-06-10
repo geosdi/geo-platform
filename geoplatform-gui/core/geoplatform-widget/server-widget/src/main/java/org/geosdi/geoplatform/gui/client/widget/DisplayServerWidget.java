@@ -76,6 +76,7 @@ public class DisplayServerWidget {
     private Button addServer;
     private GridLayersWidget gridWidget;
     private AddServerWidget addServerWidget;
+    private PerformGetCababilities loadCababilities;
 
     /**
      * @Constructor
@@ -85,6 +86,7 @@ public class DisplayServerWidget {
         init();
         this.gridWidget = theGridWidget;
         this.addServerWidget = new AddServerWidget(this);
+        this.loadCababilities = new PerformGetCababilities();
     }
 
     private void init() {
@@ -209,29 +211,7 @@ public class DisplayServerWidget {
         LayoutManager.get().getStatusMap().setBusy("Loading Layers.....");
         this.gridWidget.maskGrid();
 
-        this.service.getCababilities(selected.getId(),
-                new AsyncCallback<ArrayList<? extends GPLayerGrid>>() {
-
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        GeoPlatformMessage.errorMessage("Server Service",
-                                "An error occured loading layers.");
-                        LayoutManager.get().getStatusMap().setStatus(
-                                "An error occured loading layers from the service.",
-                                EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                        gridWidget.unMaskGrid();
-                    }
-
-                    @Override
-                    public void onSuccess(
-                            ArrayList<? extends GPLayerGrid> result) {
-                        gridWidget.unMaskGrid();
-                        gridWidget.fillStore(result);
-                        LayoutManager.get().getStatusMap().setStatus(
-                                "Layers have been loaded correctly by the service",
-                                EnumSearchStatus.STATUS_SEARCH.toString());
-                    }
-                });
+        this.loadCababilities.checkSelectedServer(selected);
     }
 
     /**
@@ -239,6 +219,8 @@ public class DisplayServerWidget {
      * @param server 
      */
     public void addServer(GPServerBeanModel server) {
+        this.store.add(server);
+        this.comboServer.setValue(server);
     }
 
     /**
@@ -246,15 +228,15 @@ public class DisplayServerWidget {
      * 
      * @param urlServer
      * @return 
-     *         GPServerBeanModel
+     *         boolean
      */
-    public GPServerBeanModel containsServer(String urlServer) {
+    public boolean containsServer(String urlServer) {
         for (GPServerBeanModel server : store.getModels()) {
             if (server.getUrlServer().equalsIgnoreCase(urlServer)) {
-                return server;
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
     /**
@@ -262,5 +244,58 @@ public class DisplayServerWidget {
      */
     public ToolBar getToolbar() {
         return toolbar;
+    }
+
+    /**
+     * 
+     * @param layers 
+     */
+    private void fillGrid(ArrayList<? extends GPLayerGrid> layers) {
+        gridWidget.unMaskGrid();
+        gridWidget.fillStore(layers);
+        LayoutManager.get().getStatusMap().setStatus(
+                "Layers have been loaded correctly by the service",
+                EnumSearchStatus.STATUS_SEARCH.toString());
+    }
+
+    /**
+     * Internal class
+     * 
+     */
+    private class PerformGetCababilities {
+
+        private GPServerBeanModel selectedServer;
+
+        private void checkSelectedServer(GPServerBeanModel selected) {
+            this.selectedServer = selected;
+            if (selected.isLayersLoaded()) {
+                fillGrid(selected.getLayers());
+            } else {
+                loadCababilitiesFromWS();
+            }
+        }
+
+        private void loadCababilitiesFromWS() {
+            service.getCababilities(selectedServer.getId(),
+                    new AsyncCallback<ArrayList<? extends GPLayerGrid>>() {
+
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            GeoPlatformMessage.errorMessage("Server Service",
+                                    "An error occured loading layers.");
+                            LayoutManager.get().getStatusMap().setStatus(
+                                    "An error occured loading layers from the service.",
+                                    EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                            gridWidget.unMaskGrid();
+                        }
+
+                        @Override
+                        public void onSuccess(
+                                ArrayList<? extends GPLayerGrid> result) {
+                            selectedServer.setLayers(result);
+                            fillGrid(result);
+                        }
+                    });
+        }
     }
 }

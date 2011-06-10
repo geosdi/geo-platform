@@ -182,7 +182,7 @@ class LayerServiceImpl {
     }
 
     // Add @Transaction ?
-    public List<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
         GPLayer[] layersArray = layers.toArray(new GPLayer[layers.size()]);
 
         /**INUTIL CODE TO DROP **/
@@ -200,7 +200,7 @@ class LayerServiceImpl {
 //                throw new ResourceNotFoundFault("Parent of layer not found into DB", idParent);
 //            }
 //        }
-        List<Long> arrayList = new ArrayList<Long>(layers.size());
+        ArrayList<Long> arrayList = new ArrayList<Long>(layers.size());
         int newPosition = layers.get(layers.size() - 1).getPosition();
         int increment = layers.size();
         // Shift positions

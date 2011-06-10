@@ -39,6 +39,7 @@ package org.geosdi.geoplatform.core.dao.impl;
 
 import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
@@ -93,10 +94,92 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
             int beginPositionFirstRange, int endPositionFirstRange,
             int beginPositionSecondRange, int endPositionSecondRange,
             int deltaValueFirstRange, int deltaValueSecondRange) {
-        
-        // TODO From the same method of GPFolderDAOImpl
-        
-        return this.updatePositionsRange(beginPositionFirstRange, endPositionFirstRange, deltaValueFirstRange);
+        assert (beginPositionFirstRange > 0) : "beginPositionFirstRange must be greater than zero";
+        assert (beginPositionSecondRange > 0) : "beginPositionSecondRange must be greater than zero";
+        assert (beginPositionFirstRange < endPositionFirstRange) : "beginPositionFirstRange must be lesser than endPositionFirstRange";
+        assert (beginPositionSecondRange < endPositionSecondRange) : "beginPositionSecondRange must be lesser than endPositionSecondRange";
+        assert (endPositionFirstRange > beginPositionSecondRange) : "endPositionFirstRange must be greater than beginPositionSecondRange";
+        assert (deltaValueFirstRange != 0) : "deltaValueFirstRange does not be 0";
+        assert (deltaValueSecondRange != 0) : "deltaValueSecondRange does not be 0";
+        // Select the layers of interest (first range)
+        Search search = new Search();
+        search.addFilterGreaterOrEqual("position", beginPositionFirstRange).
+                addFilterLessOrEqual("position", endPositionFirstRange);
+        List<GPLayer> matchingLayerFirstRange = super.search(search);
+
+        logger.debug("\n*** UPDATE First Range Layer with Position: {} to {} [# {}] *** deltaValue = {} ***",
+                new Object[]{beginPositionFirstRange, endPositionFirstRange, endPositionFirstRange - beginPositionFirstRange + 1, deltaValueFirstRange});
+        logger.debug("\n*** Matching First Range Layer count: {} ***", matchingLayerFirstRange.size());
+
+        // TODO DEL
+        for (GPLayer layer : matchingLayerFirstRange) {
+            logger.trace("\n*** First Range\n{}\n***", layer);
+        }
+
+        // Select the layers of interest (second range)
+        search = new Search();
+        search.addFilterGreaterOrEqual("position", beginPositionSecondRange).
+                addFilterLessOrEqual("position", endPositionSecondRange);
+        List<GPLayer> matchingLayerSecondRange = super.search(search);
+
+        logger.debug("\n*** UPDATE Second Range Layer with Position: {} to {} [# {}] *** deltaValue = {} ***",
+                new Object[]{beginPositionSecondRange, endPositionSecondRange, endPositionSecondRange - beginPositionSecondRange + 1, deltaValueSecondRange});
+        logger.debug("\n*** Matching Second Range Layer count: {} ***", matchingLayerSecondRange.size());
+
+        // TODO DEL
+        for (GPLayer layer : matchingLayerSecondRange) {
+            logger.trace("\n*** Second Range\n{}\n***", layer);
+        }
+
+        // Update (first range)
+        int[] oldPositionsFirstRange = new int[matchingLayerFirstRange.size()];
+        for (int ind = matchingLayerFirstRange.size() - 1; ind >= 0; ind--) {
+            GPLayer layer = matchingLayerFirstRange.get(ind);
+            oldPositionsFirstRange[ind] = layer.getPosition();
+            layer.setPosition(layer.getPosition() + deltaValueFirstRange);
+
+            logger.trace("\n*** Position of the UPDATED GPLayer First Range: {} ({} + {}) ***", new Object[]{
+                        layer.getPosition(), oldPositionsFirstRange[ind], deltaValueFirstRange});
+        }
+
+        // Update (second range)
+        int[] oldPositionsSecondRange = new int[matchingLayerSecondRange.size()];
+        for (int ind = matchingLayerSecondRange.size() - 1; ind >= 0; ind--) {
+            GPLayer layer = matchingLayerSecondRange.get(ind);
+            oldPositionsSecondRange[ind] = layer.getPosition();
+            layer.setPosition(layer.getPosition() + deltaValueSecondRange); // (shift in opposite way)
+
+            logger.trace("\n*** Position of the UPDATED GPLayer Second Range: {} ({} + {}) ***", new Object[]{
+                        layer.getPosition(), oldPositionsSecondRange[ind], deltaValueSecondRange});
+        }
+
+        List<GPLayer> matchingLayers = new ArrayList<GPLayer>();
+        matchingLayers.addAll(matchingLayerFirstRange);
+        matchingLayers.addAll(matchingLayerSecondRange);
+        GPLayer[] layersUpdated = merge(matchingLayers.toArray(new GPLayer[matchingLayers.size()]));
+
+        // TODO DEL
+        for (GPLayer layer : layersUpdated) {
+            logger.trace("\n*** GPLayer merged\n{}\n***", layer);
+        }
+
+        // Check the update
+        for (int ind = 0; ind < matchingLayerFirstRange.size(); ind++) {
+            logger.trace("\n*** Check Position - First Range: {} ({} + {}) ***", new Object[]{
+                        layersUpdated[ind].getPosition(), oldPositionsFirstRange[ind], deltaValueFirstRange});
+            if ((oldPositionsFirstRange[ind] + deltaValueFirstRange) != layersUpdated[ind].getPosition()) {
+                return false;
+            }
+        }
+        int indSplit = matchingLayerFirstRange.size();
+        for (int ind = 0; ind < matchingLayerSecondRange.size(); ind++) {
+            logger.trace("\n*** Check Position - Second Range: {} ({} + {}) ***", new Object[]{
+                        layersUpdated[ind + indSplit].getPosition(), oldPositionsSecondRange[ind], deltaValueSecondRange});
+            if ((oldPositionsSecondRange[ind] + deltaValueSecondRange) != layersUpdated[ind + indSplit].getPosition()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -114,7 +197,7 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
                 new Object[]{beginPosition, endPosition, endPosition - beginPosition + 1, deltaValue});
         logger.debug("\n*** Matching Layers count: {} ***", matchingLayers.size());
 
-        // No updates (select 0 folders)
+        // No updates (select 0 layers)
         if (matchingLayers.isEmpty()) {
             return true;
         }
@@ -133,7 +216,7 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
                 new Object[]{lowerBoundPosition, deltaValue});
         logger.debug("\n*** Matching Layers count: {} ***", matchingLayers.size());
 
-        // No updates (select 0 folders)
+        // No updates (select 0 layers)
         if (matchingLayers.isEmpty()) {
             return true;
         }
@@ -163,7 +246,7 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
 
     @Override
     public boolean persistCheckStatusLayer(long idLayer, boolean isChecked) {
-        // Retrieve the folder
+        // Retrieve the layer
         GPLayer layer = this.find(idLayer);
         if (layer == null) {
             logger.debug("\n*** The Layer with ID \"{}\" does NOT exist into DB ***", idLayer);

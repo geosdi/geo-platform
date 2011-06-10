@@ -114,15 +114,15 @@ public class WSFolderTest extends ServiceTest {
         try {
             FolderDTO folderA = geoPlatformService.getShortFolder(new RequestById(idRootFolderA));
             Assert.assertNotNull("assertNotNull folderA", folderA);
-        } catch (ResourceNotFoundFault ex) {
-            Assert.fail("Unable to find folder with id \"" + idRootFolderA);
+        } catch (ResourceNotFoundFault rnnf) {
+            Assert.fail("Unable to find folder with id \"" + rnnf.getId());
         }
 
         try {
             FolderDTO folderB = geoPlatformService.getShortFolder(new RequestById(idRootFolderB));
             Assert.assertNotNull("assertNotNull folderB", folderB);
-        } catch (ResourceNotFoundFault ex) {
-            Assert.fail("Unable to find folder with id \"" + idRootFolderB);
+        } catch (ResourceNotFoundFault rnnf) {
+            Assert.fail("Unable to find folder with id \"" + rnnf.getId());
         }
 
         Assert.assertNotNull(folder1);
@@ -161,8 +161,8 @@ public class WSFolderTest extends ServiceTest {
             Assert.assertEquals(folderUpdated.getParent().getId(), idRootFolderA);
         } catch (IllegalParameterFault ex) {
             Assert.fail("Folder has an Illegal Parameter");
-        } catch (ResourceNotFoundFault ex) {
-            Assert.fail("Folder with id \"" + idFolder5 + "\" not found");
+        } catch (ResourceNotFoundFault rnnf) {
+            Assert.fail("Folder with id \"" + rnnf.getId() + "\" not found");
         }
     }
 
@@ -219,7 +219,7 @@ public class WSFolderTest extends ServiceTest {
         } catch (IllegalParameterFault ipf) {
             Assert.fail("Folder has an illegal parameter");
         } catch (ResourceNotFoundFault rnff) {
-            Assert.fail("Folder with id \"" + idRootFolderB + "\" not found");
+            Assert.fail("Folder with id \"" + rnff.getId() + "\" not found");
         } catch (Exception e) {
             Assert.fail("Exception: " + e.getClass());
         }

@@ -233,7 +233,8 @@ class FolderServiceImpl {
         }
         int oldPosition = folderMoved.getPosition();
         int descendants = folderMoved.getNumberOfDescendants();
-        assert (oldPosition != newPseudoPosition) : "New Pseudo Position must be NOT equal to Old Position";
+        assert (oldPosition > 0) : "oldPosition must be greater than zero";
+        assert (oldPosition != newPseudoPosition) : "NewPseudoPosition must be NOT equal to OldPosition";
         assert (descendants >= 0) : "Descendants must be greater than zero";
         logger.debug("\n*** oldPosition = {} | newPosition = {} | descendants = {} ***",
                 new Object[]{oldPosition, newPseudoPosition, descendants});
@@ -280,8 +281,8 @@ class FolderServiceImpl {
             boolean resultUpdatesOfLayers = layerDao.updatePositionsRange(beginPosition, endPosition, delta);
             boolean resultUpdatesOfFolders = folderDao.updatePositionsRange(beginPosition, endPosition, delta);
 
-            assert (resultUpdatesOfLayers) : "Errors occured when updating position of layers";
-            assert (resultUpdatesOfFolders) : "Errors occured when updating position of folders";
+            assert (resultUpdatesOfLayers) : "Errors occured when updating positions of layers";
+            assert (resultUpdatesOfFolders) : "Errors occured when updating positions of folders";
             logger.trace("\n*** updatesOfLayers = {} | udatesOfFolders = {} ***",
                     resultUpdatesOfLayers, resultUpdatesOfFolders);
             resultUpdates = resultUpdatesOfLayers && resultUpdatesOfFolders;
@@ -308,8 +309,8 @@ class FolderServiceImpl {
                     beginPositionDescendants, endPositionDescendants,
                     delta, deltaDescendants);
 
-            assert (resultUpdatesOfSubLayers) : "Errors occured when updating position of sub-layers";
-            assert (resultUpdatesOfSubFolders) : "Errors occured when updating position of sub-folders";
+            assert (resultUpdatesOfSubLayers) : "Errors occured when updating positions of sub-layers";
+            assert (resultUpdatesOfSubFolders) : "Errors occured when updating positions of sub-folders";
             logger.trace("\n*** updatesOfSubLayers = {} | udatesOfSubFolders = {} ***",
                     resultUpdatesOfSubLayers, resultUpdatesOfSubFolders);
             resultUpdates = resultUpdatesOfSubLayers && resultUpdatesOfSubFolders;

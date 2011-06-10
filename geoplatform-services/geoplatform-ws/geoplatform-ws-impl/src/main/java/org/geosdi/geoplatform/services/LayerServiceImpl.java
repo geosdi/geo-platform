@@ -295,30 +295,30 @@ class LayerServiceImpl {
     }
 
     // Add @Transaction ?
-    public boolean saveDragAndDropLayerModifications(long idLayerMoved, long idNewParent, int newPosition,
-            GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
+    public boolean saveDragAndDropLayerModifications(long idLayerMoved, long idNewParent,
+            int newPosition, GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault {
         GPLayer layerMoved = layerDao.find(idLayerMoved);
         if (layerMoved == null) {
             throw new ResourceNotFoundFault("Layer not found", idLayerMoved);
 
         }
-        assert (layerMoved.getPosition() != newPosition) : "Layer must have a different initial and final position";
-        assert (layerMoved.getFolder() != null) : "Layer specified must be stored into a folder";
+        int oldPosition = layerMoved.getPosition();
+        assert (oldPosition > 0) : "oldPosition must be greater than zero";
+        assert (oldPosition != newPosition) : "NewPosition must be NOT equal to OldPosition";
+        assert (layerMoved.getFolder() != null) : "Layer specified must be stored into a folder"; // Old Parent
 
-        GPFolder newFolder = folderDao.find(idNewParent);
-        if (newFolder == null) {
+        GPFolder newParent = folderDao.find(idNewParent);
+        if (newParent == null) {
             throw new ResourceNotFoundFault("Folder not found", idNewParent);
         }
 
         int beginPosition = -1, endPosition = -1, delta = 0;
-        int oldPosition = layerMoved.getPosition();
-        if (oldPosition < newPosition) {
-            // Drag & Drop to top
+        if (oldPosition < newPosition) { // Drag & Drop to top            
             beginPosition = oldPosition + 1;
             endPosition = newPosition;
             delta = -1;
-        } else if (oldPosition > newPosition) {
-            // Drag & Drop to bottom
+        } else if (oldPosition > newPosition) { // Drag & Drop to bottom            
             beginPosition = newPosition;
             endPosition = oldPosition - 1;
             delta = 1;
@@ -326,15 +326,15 @@ class LayerServiceImpl {
 
         boolean resultUpdateOfLayers = layerDao.updatePositionsRange(beginPosition, endPosition, delta);
         boolean resultUpdateOfFolders = folderDao.updatePositionsRange(beginPosition, endPosition, delta);
-        assert (resultUpdateOfLayers) : "Errors occured when updating position of layers";
-        assert (resultUpdateOfFolders) : "Errors occured when updating position of folders";
+        assert (resultUpdateOfLayers) : "Errors occured when updating positions of layers";
+        assert (resultUpdateOfFolders) : "Errors occured when updating positions of folders";
 
-        layerMoved.setFolder(newFolder);
+        layerMoved.setFolder(newParent);
         layerMoved.setPosition(newPosition);
         layerDao.merge(layerMoved);
 
         boolean resultUpdateAncestorsDescendants = folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-        assert (resultUpdateAncestorsDescendants) : "Errors occured when updating ancestors and descendants on tree";
+        assert (resultUpdateAncestorsDescendants) : "Errors occured when updating ancestors descendants on tree";
 
         return resultUpdateOfLayers && resultUpdateOfFolders && resultUpdateAncestorsDescendants;
     }

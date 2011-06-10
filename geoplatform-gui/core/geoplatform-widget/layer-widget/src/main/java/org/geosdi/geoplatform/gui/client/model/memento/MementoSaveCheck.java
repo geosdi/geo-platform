@@ -45,6 +45,7 @@ public class MementoSaveCheck extends AbstractMementoSave {
 
     private static final long serialVersionUID = -1097048315113513051L;
     private boolean isChecked;
+    private transient boolean isParentsElementModified;
     
     public MementoSaveCheck(){}
 
@@ -64,5 +65,19 @@ public class MementoSaveCheck extends AbstractMementoSave {
      */
     public void setIsChecked(boolean isChecked) {
         this.isChecked = isChecked;
+    }
+
+    /**
+     * @return the isParentsElementModified
+     */
+    public boolean isParentsElementModified() {
+        return isParentsElementModified;
+    }
+
+    /**
+     * @param isParentsElementModified the isParentsElementModified to set
+     */
+    public void setIsParentsElementModified(boolean isParentsElementModified) {
+        this.isParentsElementModified = isParentsElementModified;
     }
 }

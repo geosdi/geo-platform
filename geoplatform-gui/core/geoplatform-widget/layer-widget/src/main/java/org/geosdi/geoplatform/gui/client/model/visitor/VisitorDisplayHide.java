@@ -65,6 +65,7 @@ public class VisitorDisplayHide implements IVisitor {
     private boolean isInternalFolderCheck;
     private boolean isInternalLeafCheck;
     private boolean isCacheableCheck = true;
+    private boolean isParentsElementModified;
 
     public VisitorDisplayHide(TreePanel treePanel) {
         this.treePanel = treePanel;
@@ -121,6 +122,7 @@ public class VisitorDisplayHide implements IVisitor {
             this.isInternalFolderCheck = true;
             this.treePanel.setChecked(parent, true);
             this.isInternalFolderCheck = false;
+            this.setIsParentsElementModified(true);
         }
         for (ModelData item : parent.getChildren()) {
             GPBeanTreeModel gpBean = (GPBeanTreeModel) item;
@@ -263,5 +265,19 @@ public class VisitorDisplayHide implements IVisitor {
      */
     public boolean isCacheableCheck() {
         return isCacheableCheck;
+    }
+
+    /**
+     * @return the isParentsElementModified
+     */
+    public boolean isParentsElementModified() {
+        return isParentsElementModified;
+    }
+
+    /**
+     * @param isParentsElementModified the isParentsElementModified to set
+     */
+    public void setIsParentsElementModified(boolean value) {
+        this.isParentsElementModified = value;
     }
 }

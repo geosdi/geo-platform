@@ -181,7 +181,6 @@ class LayerServiceImpl {
         return layer.getId();
     }
 
-    // Add @Transaction ?
     public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
         GPLayer[] layersArray = layers.toArray(new GPLayer[layers.size()]);
 
@@ -203,6 +202,8 @@ class LayerServiceImpl {
         ArrayList<Long> arrayList = new ArrayList<Long>(layers.size());
         int newPosition = layers.get(layers.size() - 1).getPosition();
         int increment = layers.size();
+        System.out.println("### newPosition: " + newPosition);
+        System.out.println("### increment: " + increment);
         // Shift positions
         layerDao.updatePositionsLowerBound(newPosition, increment);
         folderDao.updatePositionsLowerBound(newPosition, increment);
@@ -297,43 +298,78 @@ class LayerServiceImpl {
             throws ResourceNotFoundFault {
         GPLayer layerMoved = layerDao.find(idLayerMoved);
         if (layerMoved == null) {
-            throw new ResourceNotFoundFault("Layer not found", idLayerMoved);
-
+            throw new ResourceNotFoundFault("Layer with id " + idLayerMoved + " not found");
         }
-        int oldPosition = layerMoved.getPosition();
-        assert (oldPosition > 0) : "oldPosition must be greater than zero";
-        assert (oldPosition != newPosition) : "NewPosition must be NOT equal to OldPosition";
-        assert (layerMoved.getFolder() != null) : "Layer specified must be stored into a folder"; // Old Parent
+        //assert (folderMoved.getPosition() != newPosition) : "New Position must be NOT equal to Old Position";
 
-        GPFolder newParent = folderDao.find(idNewParent);
-        if (newParent == null) {
-            throw new ResourceNotFoundFault("Folder not found", idNewParent);
+        if (idNewParent == 0L) {
+            throw new ResourceNotFoundFault("Folder parent with id " + idNewParent + " not found");
+        }
+        
+        GPFolder folderParent = folderDao.find(idNewParent);
+        if (folderParent == null) {
+            throw new ResourceNotFoundFault("The new parent does not exists into DB.", idNewParent);
+        }
+        layerMoved.setFolder(folderParent);
+
+        int startFirstRange = 0, endFirstRange = 0;
+        System.out.println("### layerMoved.getPosition(): " + layerMoved.getPosition());
+        System.out.println("### newPosition: " + newPosition);
+        if (layerMoved.getPosition() < newPosition) {// Drag & Drop to top
+            System.out.println("### Drag & Drop to top");
+            startFirstRange = newPosition;
+            endFirstRange = layerMoved.getPosition() + 1;
+        } else if (layerMoved.getPosition() > newPosition) {// Drag & Drop to bottom
+            System.out.println("### Drag & Drop to bottom");
+            startFirstRange = layerMoved.getPosition() - 1;
+            endFirstRange = newPosition;
+        }
+        int shiftValue = 1;
+
+        Search search = new Search();
+        search.addFilterGreaterOrEqual("position", endFirstRange).
+                addFilterLessOrEqual("position", startFirstRange);
+        List<GPFolder> matchingFoldersFirstRange = folderDao.search(search);
+        List<GPLayer> matchingLayersFirstRange = layerDao.search(search);
+        System.out.println("Range: " + startFirstRange + " - " + endFirstRange + " - ");
+        System.out.println("### matchingFoldersFirstRange.size(): " + matchingFoldersFirstRange.size());
+        System.out.println("### matchingLayersFirstRange.size(): " + matchingLayersFirstRange.size());
+        System.out.println((matchingLayersFirstRange.isEmpty() ? "lista vuota" : matchingLayersFirstRange.get(0)));
+
+        System.out.println("### startFirstRange: " + startFirstRange);
+        System.out.println("### endFirstRange: " + endFirstRange);
+        System.out.println("### shiftValue: " + shiftValue);
+
+        if (layerMoved.getPosition() < newPosition) {// Drag & Drop to top
+            this.executeFoldersModifications(matchingFoldersFirstRange, -shiftValue);
+            this.executeLayersModifications(matchingLayersFirstRange, -shiftValue);
+        } else if (layerMoved.getPosition() > newPosition) {// Drag & Drop to bottom
+            this.executeFoldersModifications(matchingFoldersFirstRange, shiftValue);
+            this.executeLayersModifications(matchingLayersFirstRange, shiftValue);
         }
 
-        int beginPosition = -1, endPosition = -1, delta = 0;
-        if (oldPosition < newPosition) { // Drag & Drop to top            
-            beginPosition = oldPosition + 1;
-            endPosition = newPosition;
-            delta = -1;
-        } else if (oldPosition > newPosition) { // Drag & Drop to bottom            
-            beginPosition = newPosition;
-            endPosition = oldPosition - 1;
-            delta = 1;
-        }
-
-        boolean resultUpdateOfLayers = layerDao.updatePositionsRange(beginPosition, endPosition, delta);
-        boolean resultUpdateOfFolders = folderDao.updatePositionsRange(beginPosition, endPosition, delta);
-        assert (resultUpdateOfLayers) : "Errors occured when updating positions of layers";
-        assert (resultUpdateOfFolders) : "Errors occured when updating positions of folders";
-
-        layerMoved.setFolder(newParent);
+        folderDao.merge(matchingFoldersFirstRange.toArray(new GPFolder[matchingFoldersFirstRange.size()]));
+        layerDao.merge(matchingLayersFirstRange.toArray(new GPLayer[matchingLayersFirstRange.size()]));
         layerMoved.setPosition(newPosition);
         layerDao.merge(layerMoved);
 
-        boolean resultUpdateAncestorsDescendants = folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-        assert (resultUpdateAncestorsDescendants) : "Errors occured when updating ancestors descendants on tree";
+        folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
 
-        return resultUpdateOfLayers && resultUpdateOfFolders && resultUpdateAncestorsDescendants;
+        return true;
+    }
+
+    private void executeLayersModifications(List<GPLayer> elements, int value) {
+        for (GPLayer gPLayer : elements) {
+            gPLayer.setPosition(gPLayer.getPosition() + value);
+            System.out.println("New position assignet to: " + gPLayer.getName() + " posiz: " + gPLayer.getPosition());
+        }
+    }
+
+    private void executeFoldersModifications(List<GPFolder> elements, int value) {
+        for (GPFolder gPFolder : elements) {
+            gPFolder.setPosition(gPFolder.getPosition() + value);
+            System.out.println("New position assignet to: " + gPFolder.getName() + " posiz: " + gPFolder.getPosition());
+        }
     }
 
     public GPRasterLayer getRasterLayer(long layerId) throws ResourceNotFoundFault {

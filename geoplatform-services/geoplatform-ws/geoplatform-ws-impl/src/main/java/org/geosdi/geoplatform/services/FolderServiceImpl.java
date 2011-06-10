@@ -210,14 +210,12 @@ class FolderServiceImpl {
         return folderDao.persistCheckStatusFolder(folderId, isChecked);
     }
 
-    // Add @Transaction ?
     /**
      * 
      * @param idFolderMoved
      * @param idNewParent: set conventionaly 0 if idFolderMoved is refer to a folder of root
      * @param owner
-     * @param newPseudoPosition: in DD to up id the element with major position to shift to down
-     *                  , meanwhile in DD to down is the element with minor position to shift to up
+     * @param newPosition
      * @param descendantsMapData
      * @return
      * @throws ResourceNotFoundFault 
@@ -238,6 +236,7 @@ class FolderServiceImpl {
             }
             logger.trace("***parent");
             folderMoved.setParent(folderParent);
+            folderMoved.setOwner(null);
         } else {
             logger.trace("***owner");
             GPUser ownerDetail = userDao.findByUsername(owner.getUsername());
@@ -245,20 +244,25 @@ class FolderServiceImpl {
                 throw new ResourceNotFoundFault("Unable to find user from DB with username " + owner.getUsername());
             }
             folderMoved.setOwner(ownerDetail);
+            folderMoved.setParent(null);
         }
 
         int startFirstRange = 0, endFirstRange = 0;
+//        System.out.println("### folderMoved.getPosition(): " + folderMoved.getPosition());
+//        System.out.println("### newPosition: " + newPosition);
         if (folderMoved.getPosition() < newPosition) {// Drag & Drop to top
+//            System.out.println("### Drag & Drop to top");
             startFirstRange = newPosition;
             endFirstRange = folderMoved.getPosition() + 1;
         } else if (folderMoved.getPosition() > newPosition) {// Drag & Drop to bottom
+//            System.out.println("### Drag & Drop to bottom");
             startFirstRange = folderMoved.getPosition() - folderMoved.getNumberOfDescendants() - 1;
             endFirstRange = newPosition - folderMoved.getNumberOfDescendants();
         }
         int startSecondRange = folderMoved.getPosition();
         int endSecondRange = folderMoved.getPosition() - folderMoved.getNumberOfDescendants();
         int shiftValue = folderMoved.getNumberOfDescendants() + 1;
-
+        
         Search search = new Search();
         search.addFilterGreaterOrEqual("position", endFirstRange).
                 addFilterLessOrEqual("position", startFirstRange);
@@ -269,9 +273,19 @@ class FolderServiceImpl {
                 addFilterLessOrEqual("position", startSecondRange);
         List<GPFolder> matchingFoldersSecondRange = folderDao.search(search);
         List<GPLayer> matchingLayersSecondRange = layerDao.search(search);
-        System.out.println("Range: " + startFirstRange + " - " + endFirstRange + " - "
-                + startSecondRange + " - " + endSecondRange + " - ");
+//        System.out.println("Range: " + startFirstRange + " - " + endFirstRange + " - "
+//                + startSecondRange + " - " + endSecondRange + " - ");
+//        System.out.println("### matchingFoldersFirstRange.size(): " + matchingFoldersFirstRange.size());
+//        System.out.println("### matchingLayersFirstRange.size(): " + matchingLayersFirstRange.size());
+//        System.out.println((matchingLayersFirstRange.isEmpty()? "lista vuota" : matchingLayersFirstRange.get(0)));
         int moveValue = matchingFoldersFirstRange.size() + matchingLayersFirstRange.size();
+
+//        System.out.println("### startFirstRange: " + startFirstRange);
+//        System.out.println("### endFirstRange: " + endFirstRange);
+//        System.out.println("### startSecondRange: " + startSecondRange);
+//        System.out.println("### endSecondRange: " + endSecondRange);
+//        System.out.println("### shiftValue: " + shiftValue);
+//        System.out.println("### moveValue: " + moveValue);
 
         if (folderMoved.getPosition() < newPosition) {// Drag & Drop to top
             this.executeFoldersModifications(matchingFoldersFirstRange, -shiftValue);
@@ -292,6 +306,8 @@ class FolderServiceImpl {
         folderMoved.setPosition(newPosition);
         folderDao.merge(folderMoved);
 
+        folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
+        
         return true;
     }
 

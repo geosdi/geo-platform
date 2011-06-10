@@ -58,7 +58,6 @@ import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.RequestByUserFolder;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
-import org.geosdi.geoplatform.responce.collection.FolderList;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 
@@ -331,7 +330,7 @@ class FolderServiceImpl {
         return folder;
     }
 
-    public FolderList searchFolders(PaginatedSearchRequest searchRequest) {
+    public List<FolderDTO> searchFolders(PaginatedSearchRequest searchRequest) {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.setMaxResults(searchRequest.getNum());
         searchCriteria.setPage(searchRequest.getPage());
@@ -346,7 +345,7 @@ class FolderServiceImpl {
         return convertToFolderList(foundFolder);
     }
 
-    public FolderList getFolders() {
+    public List<FolderDTO> getFolders() {
         List<GPFolder> found = folderDao.findAll();
         return convertToFolderList(found);
     }
@@ -361,7 +360,7 @@ class FolderServiceImpl {
         return folderDao.count(searchCriteria);
     }
 
-    public FolderList getChildrenFolders(long folderId, int num, int page) {
+    public List<FolderDTO> getChildrenFolders(long folderId, int num, int page) {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.setMaxResults(num);
         searchCriteria.setPage(page);
@@ -374,7 +373,7 @@ class FolderServiceImpl {
         return convertToFolderList(foundFolder);
     }
 
-    public FolderList getChildrenFolders(long folderId) {
+    public List<FolderDTO> getChildrenFolders(long folderId) {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.addSortAsc("name");
 
@@ -448,7 +447,7 @@ class FolderServiceImpl {
         return true;
     }
 
-    public FolderList getUserFoldersByRequest(RequestById request) {
+    public List<FolderDTO> getUserFoldersByRequest(RequestById request) {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.setMaxResults(request.getNum());
         searchCriteria.setPage(request.getPage());
@@ -460,7 +459,7 @@ class FolderServiceImpl {
         return convertToFolderList(foundFolder);
     }
 
-    public FolderList getUserFoldersByUserId(long userId) {
+    public List<FolderDTO> getUserFoldersByUserId(long userId) {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.addSortAsc("position");
 
@@ -470,7 +469,7 @@ class FolderServiceImpl {
         return convertToFolderList(foundFolder);
     }
 
-    public FolderList getAllUserFolders(long userId, int num, int page) {
+    public List<FolderDTO> getAllUserFolders(long userId, int num, int page) {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.setMaxResults(num);
         searchCriteria.setPage(page);
@@ -482,11 +481,10 @@ class FolderServiceImpl {
 
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
 
-        FolderList list = convertToFolderList(foundFolder);
-        return list;
+        return convertToFolderList(foundFolder);
     }
 
-    public FolderList getAllUserFoldersByUserId(long userId) {
+    public List<FolderDTO> getAllUserFoldersByUserId(long userId) {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.addSortAsc("name");
 
@@ -496,8 +494,7 @@ class FolderServiceImpl {
 
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
 
-        FolderList list = convertToFolderList(foundFolder);
-        return list;
+        return convertToFolderList(foundFolder);
     }
 
     public long getUserFoldersCount(RequestById request) {
@@ -517,9 +514,7 @@ class FolderServiceImpl {
     }
     //</editor-fold>
 
-    // TODO Move to FolderList?
-    // as constructor: FolderList list = new FolderList(List<GPFolder>);
-    private FolderList convertToFolderList(List<GPFolder> folderList) {
+    private List<FolderDTO> convertToFolderList(List<GPFolder> folderList) {
         List<FolderDTO> foldersDTO = new ArrayList<FolderDTO>(folderList.size());
         for (GPFolder folder : folderList) {
             FolderDTO folderDTO = new FolderDTO(folder);
@@ -528,8 +523,6 @@ class FolderServiceImpl {
 
         Collections.sort(foldersDTO);
 
-        FolderList folders = new FolderList();
-        folders.setList(foldersDTO);
-        return folders;
+        return foldersDTO;
     }
 }

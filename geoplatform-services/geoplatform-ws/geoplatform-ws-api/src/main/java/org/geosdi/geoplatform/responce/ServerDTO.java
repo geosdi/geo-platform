@@ -43,6 +43,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 
 /**
@@ -51,6 +52,7 @@ import org.geosdi.geoplatform.core.model.GeoPlatformServer;
  * 
  */
 @XmlRootElement(name = "ServerDTO")
+@XmlType(propOrder = {"id", "serverUrl", "name", "layersDTO"})
 public class ServerDTO {
 
     private long id;

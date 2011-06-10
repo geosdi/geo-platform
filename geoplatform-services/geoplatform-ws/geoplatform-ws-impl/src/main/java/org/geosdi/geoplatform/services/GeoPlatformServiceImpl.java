@@ -39,7 +39,7 @@ package org.geosdi.geoplatform.services;
 
 import java.util.ArrayList;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
-import java.util.Collection;
+import java.util.List;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
@@ -73,13 +73,10 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.collection.StyleList;
+import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
-import org.geosdi.geoplatform.responce.collection.FolderList;
-import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
-import org.geosdi.geoplatform.responce.collection.UserList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
@@ -280,12 +277,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public UserList searchUsers(PaginatedSearchRequest request) {
+    public List<UserDTO> searchUsers(PaginatedSearchRequest request) {
         return userServiceDelegate.searchUsers(request);
     }
 
     @Override
-    public UserList getUsers() {
+    public List<UserDTO> getUsers() {
         return userServiceDelegate.getUsers();
     }
 
@@ -350,12 +347,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public FolderList searchFolders(PaginatedSearchRequest searchRequest) {
+    public List<FolderDTO> searchFolders(PaginatedSearchRequest searchRequest) {
         return folderServiceDelegate.searchFolders(searchRequest);
     }
 
     @Override
-    public FolderList getFolders() {
+    public List<FolderDTO> getFolders() {
         return folderServiceDelegate.getFolders();
     }
 
@@ -365,12 +362,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public FolderList getChildrenFolders(long folderId, int num, int page) {
+    public List<FolderDTO> getChildrenFolders(long folderId, int num, int page) {
         return folderServiceDelegate.getChildrenFolders(folderId, num, page);
     }
 
     @Override
-    public FolderList getChildrenFoldersByFolderId(long folderId) {
+    public List<FolderDTO> getChildrenFoldersByFolderId(long folderId) {
         return folderServiceDelegate.getChildrenFolders(folderId);
     }
 
@@ -404,22 +401,22 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public FolderList getUserFoldersByRequest(RequestById request) {
+    public List<FolderDTO> getUserFoldersByRequest(RequestById request) {
         return folderServiceDelegate.getUserFoldersByRequest(request);
     }
 
     @Override
-    public FolderList getUserFoldersByUserId(long userId) {
+    public List<FolderDTO> getUserFoldersByUserId(long userId) {
         return folderServiceDelegate.getUserFoldersByUserId(userId);
     }
 
     @Override
-    public FolderList getAllUserFolders(long userId, int num, int page) {
+    public List<FolderDTO> getAllUserFolders(long userId, int num, int page) {
         return folderServiceDelegate.getAllUserFolders(userId, num, page);
     }
 
     @Override
-    public FolderList getAllUserFoldersByUserId(long userId) {
+    public List<FolderDTO> getAllUserFoldersByUserId(long userId) {
         return folderServiceDelegate.getAllUserFoldersByUserId(userId);
     }
 
@@ -466,9 +463,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(ArrayList<GPLayer>  layersList, GPWebServiceMapData descendantsMapData)
+    public List<Long> saveAddedLayersAndTreeModifications(List<GPLayer>  layers, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return layerServiceDelegate.saveAddedLayersAndTreeModifications(layersList, descendantsMapData);
+        return layerServiceDelegate.saveAddedLayersAndTreeModifications(layers, descendantsMapData);
     }
 
     @Override
@@ -506,12 +503,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public LayerList getLayers() {
+    public List<ShortLayerDTO> getLayers() {
         return layerServiceDelegate.getLayers();
     }
 
     @Override
-    public StyleList getLayerStyles(long layerId) {
+    public List<StyleDTO> getLayerStyles(long layerId) {
         return layerServiceDelegate.getLayerStyles(layerId);
     }
 
@@ -572,7 +569,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public Collection<ServerDTO> getAllServers() {
+    public List<ServerDTO> getAllServers() {
         return wmsServiceDelegate.getServers();
     }
 
@@ -583,7 +580,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public LayerList getCapabilities(RequestById request)
+    public ServerDTO getCapabilities(RequestById request)
             throws ResourceNotFoundFault {
         return wmsServiceDelegate.getCapabilities(request);
     }

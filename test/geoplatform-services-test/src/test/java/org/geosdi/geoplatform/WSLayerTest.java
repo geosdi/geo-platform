@@ -57,9 +57,7 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.collection.FolderList;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
-import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 
 /**
@@ -148,7 +146,7 @@ public class WSLayerTest extends ServiceTest {
             GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
             descendantsMapData.setDescendantsMap(map);
 
-            ArrayList<Long> idList = geoPlatformService.saveAddedLayersAndTreeModifications(arrayList, descendantsMapData);
+            List<Long> idList = geoPlatformService.saveAddedLayersAndTreeModifications(arrayList, descendantsMapData);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
             Assert.assertEquals("position of rootFolderA", 8, rootFolderA.getPosition());
@@ -233,8 +231,8 @@ public class WSLayerTest extends ServiceTest {
     public void testDeleteLayer() {
         try {
             // Assert total number of folders stored into DB before delete            
-            LayerList allLayersBeforeDelete = geoPlatformService.getLayers();
-            int totalLayers = allLayersBeforeDelete.getList().size();
+            List<ShortLayerDTO> allLayersBeforeDelete = geoPlatformService.getLayers();
+            int totalLayers = allLayersBeforeDelete.size();
             Assert.assertTrue("assertEquals totalLayers", totalLayers >= 4); // SetUp() added 4 layers
 
             // Delete "rasterLayer1" from "rootFolderA"
@@ -242,10 +240,10 @@ public class WSLayerTest extends ServiceTest {
             Assert.assertTrue("Deletion of the layer rasterLayer1", erased);
 
             // Get root folders for user
-            FolderList folderList = geoPlatformService.getUserFoldersByUserId(idUserTest);
+            List<FolderDTO> folderList = geoPlatformService.getUserFoldersByUserId(idUserTest);
 
             // Assert on the structure of user's folders
-            Assert.assertEquals("assertEquals folderList.getList().size()", folderList.getList().size(), 2);
+            Assert.assertEquals("assertEquals folderList.getList().size()", folderList.size(), 2);
             // Assert on the structure of "rootFolderA"
             TreeFolderElements childrenRootFolderA = geoPlatformService.getChildrenElements(idRootFolderA);
             logger.debug("\n*** childrenRootFolderA:\n{}\n***", childrenRootFolderA);
@@ -267,8 +265,8 @@ public class WSLayerTest extends ServiceTest {
             Assert.assertEquals("assertEquals shortVectorLayerRootFolderB.getName()", shortVectorLayerRootFolderB.getName(), nameVector2);
 
             // Assert total number of layers stored into DB after delete
-            LayerList allLayersAfterDelete = geoPlatformService.getLayers();
-            Assert.assertEquals("assertEquals allLayersAfterDelete.getList().size()", allLayersAfterDelete.getList().size(), totalLayers - 1);
+            List<ShortLayerDTO> allLayersAfterDelete = geoPlatformService.getLayers();
+            Assert.assertEquals("assertEquals allLayersAfterDelete.getList().size()", allLayersAfterDelete.size(), totalLayers - 1);
         } catch (IllegalParameterFault ipf) {
             Assert.fail("Folder has an Illegal Parameter");
         } catch (ResourceNotFoundFault rnff) {

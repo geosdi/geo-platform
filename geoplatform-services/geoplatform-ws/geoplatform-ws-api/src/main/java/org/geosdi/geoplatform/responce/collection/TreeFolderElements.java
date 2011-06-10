@@ -38,6 +38,7 @@
 package org.geosdi.geoplatform.responce.collection;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.TreeSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,8 +47,10 @@ import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
+import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
 
 /**
@@ -67,11 +70,11 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
-     * @param folderList
-     *            FolderList (list of FolderDTO)
+     * @param folders
+     *            list of FolderDTO
      */
-    public void addFolderCollection(FolderList folderList) {
-        super.addAll(folderList.getList());
+    public void addFolderCollection(List<FolderDTO> folders) {
+        super.addAll(folders);
     }
 
     /**
@@ -94,12 +97,12 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
             }
         }
     }
-    
+
     /**
-     * @param layerList
-     *            LayerList (list of LayerDTO)
+     * @param layers
+     *            list of ShortLayerDTO
      */
-    public void addLayerCollection(LayerList layerList) {
-        super.addAll(layerList.getList());
-    }    
+    public void addLayerCollection(List<ShortLayerDTO> layers) {
+        super.addAll(layers);
+    }
 }

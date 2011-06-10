@@ -61,8 +61,6 @@ import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
-import org.geosdi.geoplatform.responce.collection.LayerList;
-import org.geosdi.geoplatform.responce.collection.StyleList;
 
 /**
  * @author Vincenzo Monteverde
@@ -103,7 +101,7 @@ class LayerServiceImpl {
     }
     //</editor-fold>
 
-    StyleList getLayerStyles(long layerId) {
+    public List<StyleDTO> getLayerStyles(long layerId) {
         Search searchCriteria = new Search(GPStyle.class);
         searchCriteria.addSortAsc("name");
 
@@ -111,8 +109,7 @@ class LayerServiceImpl {
         searchCriteria.addFilter(layer);
 
         List<GPStyle> foundStyle = styleDao.search(searchCriteria);
-        StyleList list = convertToStyleList(foundStyle);
-        return list;
+        return convertToStyleList(foundStyle);
     }
 
     public long insertLayer(GPLayer layer) {
@@ -185,8 +182,8 @@ class LayerServiceImpl {
     }
 
     // Add @Transaction ?
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(ArrayList<GPLayer> layersList, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
-        GPLayer[] layersArray = layersList.toArray(new GPLayer[layersList.size()]);
+    public List<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
+        GPLayer[] layersArray = layers.toArray(new GPLayer[layers.size()]);
 
         /**INUTIL CODE TO DROP **/
 //        GPFolder parent = null;
@@ -203,9 +200,9 @@ class LayerServiceImpl {
 //                throw new ResourceNotFoundFault("Parent of layer not found into DB", idParent);
 //            }
 //        }
-        ArrayList<Long> arrayList = new ArrayList<Long>(layersList.size());
-        int newPosition = layersList.get(layersList.size()-1).getPosition();
-        int increment = layersList.size();
+        List<Long> arrayList = new ArrayList<Long>(layers.size());
+        int newPosition = layers.get(layers.size() - 1).getPosition();
+        int increment = layers.size();
         // Shift positions
         layerDao.updatePositionsLowerBound(newPosition, increment);
         folderDao.updatePositionsLowerBound(newPosition, increment);
@@ -366,7 +363,7 @@ class LayerServiceImpl {
         return new ShortLayerDTO(layer);
     }
 
-    public LayerList getLayers() {
+    public List<ShortLayerDTO> getLayers() {
         List<GPLayer> found = layerDao.findAll();
         return convertToLayerList(found);
     }
@@ -422,30 +419,22 @@ class LayerServiceImpl {
         layerToUpdate.setUrlServer(layer.getUrlServer());
     }
 
-    // TODO Move to StyleList?
-    // as constructor: StyleList list = new StyleList(List<GPStyle>);    
-    private StyleList convertToStyleList(List<GPStyle> foundStyle) {
+    private List<StyleDTO> convertToStyleList(List<GPStyle> foundStyle) {
         List<StyleDTO> stylesDTO = new ArrayList<StyleDTO>(foundStyle.size());
         for (GPStyle style : foundStyle) {
             stylesDTO.add(new StyleDTO(style));
         }
 
-        StyleList styles = new StyleList();
-        styles.setList(stylesDTO);
-        return styles;
+        return stylesDTO;
     }
 
-    // TODO Move to LayerList?
-    // as constructor: LayerList list = new LayerList(List<GPLayer>);
-    private LayerList convertToLayerList(List<GPLayer> layerList) {
+    private List<ShortLayerDTO> convertToLayerList(List<GPLayer> layerList) {
         List<ShortLayerDTO> layersDTO = new ArrayList<ShortLayerDTO>(layerList.size());
         for (GPLayer layer : layerList) {
             layersDTO.add(new ShortLayerDTO(layer));
         }
 
-        LayerList layers = new LayerList();
-        layers.setList(layersDTO);
-        return layers;
+        return layersDTO;
     }
 
     /**

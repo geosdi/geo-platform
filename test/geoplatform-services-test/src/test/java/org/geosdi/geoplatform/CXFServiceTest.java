@@ -49,7 +49,6 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.junit.Test;
 
 /**
@@ -160,8 +159,8 @@ public class CXFServiceTest extends ServiceTest {
 
         Assert.assertNotNull(serverDTO);
 
-        LayerList layers = geoPlatformService.getCapabilities(new RequestById(serverDTO.getId()));
-        logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", layers.getList().size());
+        serverDTO = geoPlatformService.getCapabilities(new RequestById(serverDTO.getId()));
+        logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", serverDTO.getLayersDTO().size());
     }
 
     @Test

@@ -39,6 +39,7 @@ package org.geosdi.geoplatform;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import junit.framework.Assert;
 import org.junit.Before;
@@ -50,7 +51,6 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
-import org.geosdi.geoplatform.responce.collection.FolderList;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 
 /**
@@ -171,8 +171,8 @@ public class WSFolderTest extends ServiceTest {
         FolderDTO folderToCheck = null;
         try {
             // Assert total number of folders stored into DB before delete
-            FolderList allFoldersBeforeDelete = geoPlatformService.getFolders();
-            int totalFolders = allFoldersBeforeDelete.getList().size();
+            List<FolderDTO> allFoldersBeforeDelete = geoPlatformService.getFolders();
+            int totalFolders = allFoldersBeforeDelete.size();
             Assert.assertTrue("Assert number of folders stored into DB before delete",
                     totalFolders >= 7); // SetUp() added 2+5 folders
 
@@ -180,13 +180,13 @@ public class WSFolderTest extends ServiceTest {
             geoPlatformService.deleteFolder(new RequestById(idRootFolderB));
 
             // "rootFolderA" ---> "folder1" & "folder2"
-            FolderList folderList = geoPlatformService.getUserFoldersByUserId(idUserTest);
+            List<FolderDTO> folderList = geoPlatformService.getUserFoldersByUserId(idUserTest);
 
             // Assert on the structure of user's folders
-            Assert.assertEquals(folderList.getList().size(), 1);
+            Assert.assertEquals(folderList.size(), 1);
 
             // Assert on "rootFolderA"
-            folderToCheck = folderList.getList().iterator().next();
+            folderToCheck = folderList.iterator().next();
             logger.debug("\n*** folderToCheck:\n{}\n***", folderToCheck);
             Assert.assertEquals("Check id on rootFolderA", folderToCheck.getId(), idRootFolderA);
             Assert.assertEquals("Check name on rootFolderA", folderToCheck.getName(), nameRootFolderA);
@@ -213,9 +213,9 @@ public class WSFolderTest extends ServiceTest {
             Assert.assertNull("Check childrenRootFolderB null", childrenRootFolderB);
 
             // Assert total number of folders stored into DB after delete
-            FolderList allFoldersAfterDelete = geoPlatformService.getFolders();
+            List<FolderDTO> allFoldersAfterDelete = geoPlatformService.getFolders();
             Assert.assertTrue("Assert number of folders stored into DB after delete",
-                    allFoldersAfterDelete.getList().size() == totalFolders - 4); // Has been deleted 4 folders
+                    allFoldersAfterDelete.size() == totalFolders - 4); // Has been deleted 4 folders
         } catch (IllegalParameterFault ipf) {
             Assert.fail("Folder has an illegal parameter");
         } catch (ResourceNotFoundFault rnff) {
@@ -237,8 +237,8 @@ public class WSFolderTest extends ServiceTest {
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map); // Set an empty map
         try {
-            FolderList childrenFolders = geoPlatformService.getChildrenFoldersByFolderId(idRootFolderB);
-            Assert.assertEquals("Before adding new folder - Number of subfolders of root folder B ", 3, childrenFolders.getList().size());
+            List<FolderDTO> childrenFolders = geoPlatformService.getChildrenFoldersByFolderId(idRootFolderB);
+            Assert.assertEquals("Before adding new folder - Number of subfolders of root folder B ", 3, childrenFolders.size());
 
             String nameFolderToTest = "folderToTest";
             folderToTest = super.createFolder(nameFolderToTest, 1, false);
@@ -311,8 +311,8 @@ public class WSFolderTest extends ServiceTest {
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map);
         try {
-            FolderList childrenFolders = geoPlatformService.getChildrenFoldersByFolderId(idRootFolderB);
-            Assert.assertEquals("Before adding new folder - Number of subfolders of root folder B ", 3, childrenFolders.getList().size());
+            List<FolderDTO> childrenFolders = geoPlatformService.getChildrenFoldersByFolderId(idRootFolderB);
+            Assert.assertEquals("Before adding new folder - Number of subfolders of root folder B ", 3, childrenFolders.size());
 
             String nameFolderToTest = "folderToTest";
             folderToTest = super.createFolder(nameFolderToTest, 3, false);
@@ -324,7 +324,7 @@ public class WSFolderTest extends ServiceTest {
             folderToTest.setId(idFolderToTest);
 
             childrenFolders = geoPlatformService.getChildrenFoldersByFolderId(idRootFolderB);
-            Assert.assertEquals("After adding new folder - Number of subfolders of root folder B ", 4, childrenFolders.getList().size());
+            Assert.assertEquals("After adding new folder - Number of subfolders of root folder B ", 4, childrenFolders.size());
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
             Assert.assertEquals("Position of root folder A before removing", 8, rootFolderA.getPosition());
@@ -356,7 +356,7 @@ public class WSFolderTest extends ServiceTest {
             Assert.assertTrue("Delete NOT done for \"" + folderToTest.getName() + "\"", checkDelete);
 
             childrenFolders = geoPlatformService.getChildrenFoldersByFolderId(idRootFolderB);
-            Assert.assertEquals("After removing new folder - Number of subfolders of root folder B ", 3, childrenFolders.getList().size());
+            Assert.assertEquals("After removing new folder - Number of subfolders of root folder B ", 3, childrenFolders.size());
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
             Assert.assertEquals("Position of root folder A after removing", 7, rootFolderA.getPosition());

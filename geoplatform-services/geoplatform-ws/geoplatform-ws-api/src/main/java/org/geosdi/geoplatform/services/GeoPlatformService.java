@@ -37,8 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
@@ -66,14 +65,11 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.collection.StyleList;
+import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
-import org.geosdi.geoplatform.responce.collection.FolderList;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
-import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
-import org.geosdi.geoplatform.responce.collection.UserList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
@@ -123,13 +119,13 @@ public interface GeoPlatformService {
 
     @Get
     @HttpResource(location = "/users/search/{num}/{page}/{nameLike}")
-    @WebResult(name = "Users")
-    UserList searchUsers(PaginatedSearchRequest searchRequest);
+    @WebResult(name = "User")
+    List<UserDTO> searchUsers(PaginatedSearchRequest searchRequest);
 
     @Get
     @HttpResource(location = "/users")
-    @WebResult(name = "Users")
-    UserList getUsers();
+    @WebResult(name = "User")
+    List<UserDTO> getUsers();
 
     @Get
     @HttpResource(location = "/users/count/{nameLike}")
@@ -197,13 +193,13 @@ public interface GeoPlatformService {
 
     @Get
     @HttpResource(location = "/folders/search/{num}/{page}/{nameLike}")
-    @WebResult(name = "Folders")
-    FolderList searchFolders(PaginatedSearchRequest searchRequest);
+    @WebResult(name = "Folder")
+    List<FolderDTO> searchFolders(PaginatedSearchRequest searchRequest);
 
     @Get
     @HttpResource(location = "/folders")
-    @WebResult(name = "Folders")
-    FolderList getFolders();
+    @WebResult(name = "Folder")
+    List<FolderDTO> getFolders();
 
     @Get
     @HttpResource(location = "/folders/count/{nameLike}")
@@ -218,8 +214,8 @@ public interface GeoPlatformService {
      */
     @Get
     @HttpResource(location = "/folders/user/{folderId}/{num}/{page}")
-    @WebResult(name = "FolderList")
-    FolderList getChildrenFolders(
+    @WebResult(name = "Folder")
+    List<FolderDTO> getChildrenFolders(
             @WebParam(name = "folderId") long folderId,
             @WebParam(name = "num") int num,
             @WebParam(name = "page") int page);
@@ -230,8 +226,8 @@ public interface GeoPlatformService {
      */
     @Get
     @HttpResource(location = "/folders/user/{folderId}")
-    @WebResult(name = "FolderList")
-    FolderList getChildrenFoldersByFolderId(@WebParam(name = "folderId") long folderId);
+    @WebResult(name = "Folder")
+    List<FolderDTO> getChildrenFoldersByFolderId(@WebParam(name = "folderId") long folderId);
 
     /**
      * @param folderId 
@@ -263,21 +259,21 @@ public interface GeoPlatformService {
 
     @Get
     @HttpResource(location = "/users/{id}/folder/{num}/{page}")
-    @WebResult(name = "FolderList")
-    FolderList getUserFoldersByRequest(RequestById request);
+    @WebResult(name = "Folder")
+    List<FolderDTO> getUserFoldersByRequest(RequestById request);
 
     @Get
     @HttpResource(location = "/users/{userId}/folder")
-    @WebResult(name = "FolderList")
-    FolderList getUserFoldersByUserId(@WebParam(name = "userId") long userId);
+    @WebResult(name = "Folder")
+    List<FolderDTO> getUserFoldersByUserId(@WebParam(name = "userId") long userId);
 
     /**
      * @return Owned and shared Folders visible to a given user.
      */
     @Get
     //@HttpResource(location = "/users/{userId}/folder/{num}/{page}")
-    @WebResult(name = "FolderList")
-    FolderList getAllUserFolders(
+    @WebResult(name = "Folder")
+    List<FolderDTO> getAllUserFolders(
             @WebParam(name = "userId") long userId,
             @WebParam(name = "num") int num,
             @WebParam(name = "page") int page);
@@ -287,8 +283,8 @@ public interface GeoPlatformService {
      */
     @Get
     //@HttpResource(location = "/users/{userId}/folder/{num}/{page}")
-    @WebResult(name = "FolderList")
-    FolderList getAllUserFoldersByUserId(@WebParam(name = "userId") long userId);
+    @WebResult(name = "Folder")
+    List<FolderDTO> getAllUserFoldersByUserId(@WebParam(name = "userId") long userId);
 
     @Get
     @HttpResource(location = "/folders/user/{id}/count")
@@ -336,8 +332,8 @@ public interface GeoPlatformService {
 
     @Put
     @HttpResource(location = "/layers/{descendantsMap}")
-    ArrayList<Long> saveAddedLayersAndTreeModifications(
-            @WebParam(name = "layers") ArrayList<GPLayer> layersList,
+    List<Long> saveAddedLayersAndTreeModifications(
+            @WebParam(name = "layers") List<GPLayer> layers,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
@@ -387,15 +383,15 @@ public interface GeoPlatformService {
 
     @Get
     @HttpResource(location = "/layers")
-    @WebResult(name = "Layers")
-    LayerList getLayers();
+    @WebResult(name = "Layer")
+    List<ShortLayerDTO> getLayers();
 
     /**
      * @return Styles of a layer.
      */
     @Get
     @WebResult(name = "LayerStyles")
-    StyleList getLayerStyles(@WebParam(name = "LayerId") long layerId);
+    List<StyleDTO> getLayerStyles(@WebParam(name = "LayerId") long layerId);
 
     /**
      * @return a short layer.
@@ -452,8 +448,8 @@ public interface GeoPlatformService {
 
     @Get
     @HttpResource(location = "/servers")
-    @WebResult(name = "Servers")
-    Collection<ServerDTO> getAllServers();
+    @WebResult(name = "Server")
+    List<ServerDTO> getAllServers();
 
     @Get
     @HttpResource(location = "/server/{idServer}")
@@ -477,7 +473,7 @@ public interface GeoPlatformService {
     @Get
     @HttpResource(location = "/wms/capabilities/{id}")
     @WebResult(name = "Capabilities")
-    LayerList getCapabilities(RequestById request) throws ResourceNotFoundFault;
+    ServerDTO getCapabilities(RequestById request) throws ResourceNotFoundFault;
 
     @Post
     @HttpResource(location = "/server")

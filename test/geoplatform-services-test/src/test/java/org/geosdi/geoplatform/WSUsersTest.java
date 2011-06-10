@@ -38,6 +38,7 @@
 package org.geosdi.geoplatform;
 
 import java.util.Iterator;
+import java.util.List;
 import org.junit.Test;
 import junit.framework.Assert;
 
@@ -46,7 +47,6 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.UserDTO;
-import org.geosdi.geoplatform.responce.collection.UserList;
 
 /**
  *
@@ -62,10 +62,10 @@ public class WSUsersTest extends ServiceTest {
 
     @Test
     public void testUsersDB() {
-        UserList userList = geoPlatformService.getUsers();
-        logger.info("\n*** Number of Users into DB: {} ***", userList.getList().size());
+        List<UserDTO> userList = geoPlatformService.getUsers();
+        logger.info("\n*** Number of Users into DB: {} ***", userList.size());
         if (userList != null) {
-            for (Iterator<UserDTO> it = userList.getList().iterator(); it.hasNext();) {
+            for (Iterator<UserDTO> it = userList.iterator(); it.hasNext();) {
                 logger.info("\n*** USER into DB:\n{}\n***", it.next());
 
             }
@@ -77,9 +77,9 @@ public class WSUsersTest extends ServiceTest {
         logger.trace("\n\t@@@ testRetrieveUser @@@");
 
         // Number of Users
-        UserList userList = geoPlatformService.getUsers();
+        List<UserDTO> userList = geoPlatformService.getUsers();
         Assert.assertNotNull(userList);
-        Assert.assertTrue("Number of Users stored into database", userList.getList().size() >= 1); // super.SetUp() added 1 user
+        Assert.assertTrue("Number of Users stored into database", userList.size() >= 1); // super.SetUp() added 1 user
 
         // Number of User Like
         long numUsersLike = geoPlatformService.getUsersCount(new SearchRequest(usernameTest));

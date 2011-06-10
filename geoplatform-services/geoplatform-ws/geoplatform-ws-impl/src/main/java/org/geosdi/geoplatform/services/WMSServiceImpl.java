@@ -42,7 +42,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -57,7 +56,6 @@ import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
-import org.geosdi.geoplatform.responce.collection.LayerList;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
@@ -155,9 +153,9 @@ class WMSServiceImpl {
         return serverDTO;
     }
 
-    public Collection<ServerDTO> getServers() {
+    public List<ServerDTO> getServers() {
         List<GeoPlatformServer> found = serverDao.findAll();
-        return convertToServerCollection(found);
+        return convertToServerList(found);
     }
 
     public GeoPlatformServer getServerDetailByUrl(String serverUrl)
@@ -171,7 +169,7 @@ class WMSServiceImpl {
         return server;
     }
 
-    public LayerList getCapabilities(RequestById request)
+    public ServerDTO getCapabilities(RequestById request)
             throws ResourceNotFoundFault {
 
         GeoPlatformServer server = serverDao.find(request.getId());
@@ -179,10 +177,14 @@ class WMSServiceImpl {
             throw new ResourceNotFoundFault("Server has been deleted", request.getId());
         }
 
-        WMSCapabilities wmsCapabilities = this.getWMSCapabilities(
-                server.getServerUrl());
-        return convertToLayerList(wmsCapabilities.getLayerList(),
-                server.getServerUrl());
+        WMSCapabilities wmsCapabilities = this.getWMSCapabilities(server.getServerUrl());
+
+        ServerDTO serverDTO = new ServerDTO(server);
+        List<ShortLayerDTO> layers = convertToLayerList(
+                wmsCapabilities.getLayerList(), server.getServerUrl());
+        serverDTO.setLayersDTO(layers);
+
+        return serverDTO;
     }
 
     public ServerDTO saveServer(String serverUrl)
@@ -198,9 +200,9 @@ class WMSServiceImpl {
             serverDao.persist(server);
         }
         serverDTO = new ServerDTO(server);
-        LayerList layers = convertToLayerList(wmsCapabilities.getLayerList(),
-                serverUrl);
-        serverDTO.setLayersDTO(layers.getList());
+        List<ShortLayerDTO> layers = convertToLayerList(
+                wmsCapabilities.getLayerList(), serverUrl);
+        serverDTO.setLayersDTO(layers);
 
         return serverDTO;
     }
@@ -232,10 +234,8 @@ class WMSServiceImpl {
         return cap;
     }
 
-    // TODO Move to LayerList?
-    // as constructor: LayerList list = new LayerList(List<Layer>);    
     // TODO Correct mapping Layer to AbstractLayerDTO (as abstract class?)
-    private LayerList convertToLayerList(List<Layer> layerList, String urlServer) {
+    private List<ShortLayerDTO> convertToLayerList(List<Layer> layerList, String urlServer) {
         List<ShortLayerDTO> shortLayers = new ArrayList<ShortLayerDTO>(layerList.size());
 
         for (Layer layer : layerList) {
@@ -273,15 +273,11 @@ class WMSServiceImpl {
             shortLayers.add(layerDTOIth);
         }
 
-        LayerList layers = new LayerList();
-        layers.setList(shortLayers);
-        return layers;
+        return shortLayers;
     }
 
-    private Collection<ServerDTO> convertToServerCollection(
-            List<GeoPlatformServer> serverList) {
-        Collection<ServerDTO> shortServers = new ArrayList<ServerDTO>(
-                serverList.size());
+    private List<ServerDTO> convertToServerList(List<GeoPlatformServer> serverList) {
+        List<ServerDTO> shortServers = new ArrayList<ServerDTO>(serverList.size());
         ServerDTO serverDTOIth = null;
         for (GeoPlatformServer server : serverList) {
             serverDTOIth = new ServerDTO(server);

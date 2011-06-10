@@ -51,7 +51,6 @@ import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.UserDTO;
-import org.geosdi.geoplatform.responce.collection.UserList;
 
 /**
  * @author giuseppe
@@ -210,7 +209,7 @@ class UserServiceImpl {
      * @param request the object representing the request parameters
      * @return Users the list of Users found
      */
-    public UserList searchUsers(PaginatedSearchRequest request) {
+    public List<UserDTO> searchUsers(PaginatedSearchRequest request) {
 
         Search searchCriteria = new Search(GPUser.class);
         searchCriteria.setMaxResults(request.getNum());
@@ -228,7 +227,7 @@ class UserServiceImpl {
     }
 
     // note: may take lot of space
-    public UserList getUsers() {
+    public List<UserDTO> getUsers() {
         List<GPUser> userList = userDao.findAll();
         return convertToUserList(userList);
     }
@@ -242,16 +241,12 @@ class UserServiceImpl {
         return userDao.count(searchCriteria);
     }
 
-    // TODO Move to UserList?
-    // as constructor: UserList list = new UserList(List<GPUser>);    
-    private UserList convertToUserList(List<GPUser> userList) {
+    private List<UserDTO> convertToUserList(List<GPUser> userList) {
         List<UserDTO> usersDTO = new ArrayList<UserDTO>(userList.size());
         for (GPUser dGUser : userList) {
             usersDTO.add(new UserDTO(dGUser));
         }
 
-        UserList users = new UserList();
-        users.setList(usersDTO);
-        return users;
+        return usersDTO;
     }
 }

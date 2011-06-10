@@ -204,7 +204,7 @@ class LayerServiceImpl {
 //            }
 //        }
         ArrayList<Long> arrayList = new ArrayList<Long>(layersList.size());
-        int newPosition = layersList.get(0).getPosition();
+        int newPosition = layersList.get(layersList.size()-1).getPosition();
         int increment = layersList.size();
         // Shift positions
         layerDao.updatePositionsLowerBound(newPosition, increment);

@@ -94,13 +94,23 @@ public class VisitorPosition extends AbstractVisitTree
             changedElement.setParent(parentDestination);
             parentDestination.insert(changedElement, newIndex);
             this.getFolderDescendantMap().clear();
-            this.updateNumberOfDescendants(oldParent, parentDestination);
+            if (changedElement instanceof FolderTreeNode) {
+                this.updateNumberOfDescendants(oldParent, parentDestination,
+                        ((FolderTreeNode) changedElement).getNumberOfDescendants()+1);
+            } else {
+                this.updateNumberOfDescendants(oldParent, parentDestination);
+            }
             System.out.println("In FixPosition: returning without index changes"
                     + "for element: " + changedElement.getLabel());
             return;
         }
         this.getFolderDescendantMap().clear();
-        this.updateNumberOfDescendants(oldParent, parentDestination);
+        if (changedElement instanceof FolderTreeNode) {
+            this.updateNumberOfDescendants(oldParent, parentDestination,
+                    ((FolderTreeNode) changedElement).getNumberOfDescendants()+1);
+        } else {
+            this.updateNumberOfDescendants(oldParent, parentDestination);
+        }
 
         System.out.println(this.startPosition == null ? "Start Position: null" : "Start Position: " + this.startPosition.getLabel());
         System.out.println(this.endPosition == null ? "End position: untill the end of the Tree" : "End position: " + this.endPosition.getLabel());
@@ -108,17 +118,22 @@ public class VisitorPosition extends AbstractVisitTree
         System.out.println("End modification");
     }
 
-    private void updateNumberOfDescendants(GPBeanTreeModel oldParent, GPBeanTreeModel parentDestination) {
+    private void updateNumberOfDescendants(GPBeanTreeModel oldParent, GPBeanTreeModel parentDestination,
+            int numElementsModev) {
         while (oldParent instanceof FolderTreeNode) {
-            ((FolderTreeNode) oldParent).setNumberOfDescendants(((FolderTreeNode) oldParent).getNumberOfDescendants() - 1);
+            ((FolderTreeNode) oldParent).setNumberOfDescendants(((FolderTreeNode) oldParent).getNumberOfDescendants() - numElementsModev);
             this.folderDescendantMap.put((FolderTreeNode) oldParent, ((FolderTreeNode) oldParent).getNumberOfDescendants());
             oldParent = (GPBeanTreeModel) oldParent.getParent();
         }
         while (parentDestination instanceof FolderTreeNode) {
-            ((FolderTreeNode) parentDestination).setNumberOfDescendants(((FolderTreeNode) parentDestination).getNumberOfDescendants() + 1);
+            ((FolderTreeNode) parentDestination).setNumberOfDescendants(((FolderTreeNode) parentDestination).getNumberOfDescendants() + numElementsModev);
             this.folderDescendantMap.put((FolderTreeNode) parentDestination, ((FolderTreeNode) parentDestination).getNumberOfDescendants());
             parentDestination = (GPBeanTreeModel) parentDestination.getParent();
         }
+    }
+
+    private void updateNumberOfDescendants(GPBeanTreeModel oldParent, GPBeanTreeModel parentDestination) {
+        this.updateNumberOfDescendants(oldParent, parentDestination, 1);
     }
 
     private int getNewZIndex(GPBeanTreeModel parentDestination, int newIndex) {

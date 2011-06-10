@@ -225,33 +225,13 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(
-            MementoSaveAddedLayers memento) throws GeoPlatformException {
-
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento) throws GeoPlatformException {
+        ArrayList<GPLayer> layersList = this.dtoConverter.convertMementoLayers(memento.getAddedLayers());
+        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
+                memento.getWsDescendantMap());
+        ArrayList<Long> idSavedLayers = null;
         try {
-            long idParentFolder = memento.getAddedLayers().get(0).getIdFolderParent();
-
-            GPFolder folder = this.geoPlatformServiceClient.getFolderDetail(new RequestById(
-                    idParentFolder));
-
-            /** TODO :  MANAGE THIS EXCEPTION IN CLIEN SIDE. 
-             *  AND DELETE ALL ADDED LAYERS AND FOLDER.
-             **/
-            
-            if (folder == null) {
-                throw new GeoPlatformException(
-                        "The Folder will be contains Layers has been deleted.");
-            }
-
-            ArrayList<GPLayer> layersList = this.dtoConverter.convertMementoLayers(
-                    memento.getAddedLayers(), folder);
-            GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
-                    memento.getWsDescendantMap());
-
-            ArrayList<Long> idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications(
-                    layersList, map);
-
-            return idSavedLayers;
+            idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications(layersList, map);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to save layers on LayerService: " + ex);
             throw new GeoPlatformException(ex);
@@ -259,6 +239,7 @@ public class LayerService implements ILayerService {
             this.logger.error("Failed to save layers on LayerService: " + ex);
             throw new GeoPlatformException(ex);
         }
+        return idSavedLayers;
     }
 
     @Override

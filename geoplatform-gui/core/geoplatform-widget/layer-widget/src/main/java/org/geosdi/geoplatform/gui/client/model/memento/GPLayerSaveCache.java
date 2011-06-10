@@ -66,6 +66,7 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
             /*System.out.println("Event SAVE_CACHE_NOT_EMPTY notified to "
                     + this.observable.countObservers() + " observers");*/
         }
+        System.out.println("GPLayerSaveCache: added " + memento.getClass().getName());
         return super.add(memento);
     }
 

@@ -47,7 +47,6 @@ import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 /**
@@ -68,7 +67,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
     }
 
     /**
-     * If possible is better for CC reasons to use consturctor with parm root.
+     *  @param If possible is better for CC reasons to use consturctor with parm root.
      */
     public VisitorAddElement() {
     }
@@ -88,26 +87,36 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
             GPBeanTreeModel parentDestination) {
         GPBeanTreeModel gPLayerBean = null;
         for (int i = 0; i < listNewElements.size(); i++) {
-            gPLayerBean = (GPBeanTreeModel)listNewElements.get(i);
+            gPLayerBean = (GPBeanTreeModel) listNewElements.get(i);
             gPLayerBean.setParent(parentDestination);
             parentDestination.insert(gPLayerBean, i);
         }
         this.endPosition = super.getNextUnvisitedElement(gPLayerBean);
-        this.rootElement = super.findRootElement(parentDestination);
+        if (this.rootElement == null) {
+            this.rootElement = super.findRootElement(parentDestination);
+        }
         this.preorderTraversal();
         this.folderDescendantMap.clear();
-        this.updateNumberOfDescendants(parentDestination);
+        this.updateNumberOfDescendants(parentDestination, listNewElements.size());
     }
 
-    private void updateNumberOfDescendants(GPBeanTreeModel parentDestination) {
+    private void updateNumberOfDescendants(GPBeanTreeModel parentDestination, int numOfAddedElements) {
         if (parentDestination instanceof FolderTreeNode) {
             ((FolderTreeNode) parentDestination).setNumberOfDescendants(
-                    ((FolderTreeNode) parentDestination).getNumberOfDescendants() + 1);
+                    ((FolderTreeNode) parentDestination).getNumberOfDescendants() + numOfAddedElements);
             this.folderDescendantMap.put((FolderTreeNode) parentDestination, ((FolderTreeNode) parentDestination).getNumberOfDescendants());
         }
         if (parentDestination.getParent() != null && !(parentDestination.getParent() instanceof GPRootTreeNode)) {
             this.updateNumberOfDescendants((GPBeanTreeModel) parentDestination.getParent());
         }
+    }
+
+    /**
+     * 
+     * @return automatically increase the number of descendant +1 
+     */
+    private void updateNumberOfDescendants(GPBeanTreeModel parentDestination) {
+        this.updateNumberOfDescendants(parentDestination, 1);
     }
 
     //TODO: Gestire gli indici nel caso di aggiunta di più elementi

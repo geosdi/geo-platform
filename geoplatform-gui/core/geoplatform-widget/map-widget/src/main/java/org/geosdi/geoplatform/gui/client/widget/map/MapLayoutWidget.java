@@ -77,7 +77,6 @@ import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.gwtopenmaps.openlayers.client.control.MousePosition;
-import org.gwtopenmaps.openlayers.client.control.MousePositionOptions;
 import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
 
 /**

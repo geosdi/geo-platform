@@ -50,9 +50,6 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

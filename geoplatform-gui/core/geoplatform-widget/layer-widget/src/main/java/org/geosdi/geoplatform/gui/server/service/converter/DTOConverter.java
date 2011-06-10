@@ -212,8 +212,9 @@ public class DTOConverter {
     }
 
     public ArrayList<GPLayer> convertMementoLayers(
-            List<AbstractMementoLayer> addedLayers, GPFolder folder) {
+            List<AbstractMementoLayer> addedLayers) {
         ArrayList<GPLayer> layersList = new ArrayList<GPLayer>();
+        GPFolder folder = new GPFolder();
         for (AbstractMementoLayer layer : addedLayers) {
             if (layer instanceof MementoRaster) {
                 MementoRaster memento = (MementoRaster) layer;
@@ -223,6 +224,7 @@ public class DTOConverter {
                         memento.getLowerLeftY(),
                         memento.getUpperRightX(), memento.getUpperRightY()));
                 raster.setChecked(memento.isChecked());
+                folder.setId(memento.getIdFolderParent());
                 raster.setFolder(folder);
                 raster.setId(memento.getIdBaseElement());
                 //raster.setLayerInfo();???
@@ -242,6 +244,7 @@ public class DTOConverter {
                         memento.getLowerLeftY(),
                         memento.getUpperRightX(), memento.getUpperRightY()));
                 vector.setChecked(memento.isChecked());
+                folder.setId(memento.getIdFolderParent());
                 vector.setFolder(folder);
                 vector.setId(memento.getIdBaseElement());
                 //vector.setGeometry()???

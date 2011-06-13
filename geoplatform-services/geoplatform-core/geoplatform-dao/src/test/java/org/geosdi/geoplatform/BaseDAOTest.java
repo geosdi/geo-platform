@@ -254,7 +254,7 @@ public abstract class BaseDAOTest {
         // "my raster"
         GPFolder folderRaster = this.createUserFolder("my raster", --position, user);
         // "my raster" ---> _rasterLayer1_ ---> Styles
-        GPRasterLayer rasterLayer1 = this.createRasterLayer1(--position, folderRaster);
+        GPRasterLayer rasterLayer1 = this.createRasterLayer(--position, folderRaster);
         GPStyle style1 = this.createStyle("style 1", rasterLayer1);
         GPStyle style2 = this.createStyle("style 2", rasterLayer1);
         //
@@ -275,7 +275,7 @@ public abstract class BaseDAOTest {
         folderIGM.setPosition(position);
         folderIGM.setParent(folderRaster);
         // ---> "my raster" --> "IGM" _vectorLayer1_
-        GPVectorLayer vectorLayer1 = this.createVectorLayer1(--position, folderIGM);
+        GPVectorLayer vectorLayer1 = this.createVectorLayer(--position, folderIGM);
         //
         folderIGM.setNumberOfDescendants(1);
         folderDAO.persist(folderIGM);
@@ -301,7 +301,7 @@ public abstract class BaseDAOTest {
         return emptyFolder;
     }
 
-    protected GPRasterLayer createRasterLayer1(int position, GPFolder folder) {
+    protected GPRasterLayer createRasterLayer(int position, GPFolder folder) {
         // GPRasterLayer
         GPRasterLayer rasterLayer1 = new GPRasterLayer();
         rasterLayer1.setName("StratiDiBase:deagostini_ita_250mila");
@@ -334,7 +334,7 @@ public abstract class BaseDAOTest {
         return style;
     }
 
-    protected GPVectorLayer createVectorLayer1(int position, GPFolder folder) {
+    protected GPVectorLayer createVectorLayer(int position, GPFolder folder) {
         GPVectorLayer vectorLayer1 = new GPVectorLayer();
         vectorLayer1.setName("Name of vectorLayer");
         vectorLayer1.setPosition(position);

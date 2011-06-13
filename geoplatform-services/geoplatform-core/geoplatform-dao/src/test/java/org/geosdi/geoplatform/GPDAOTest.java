@@ -37,17 +37,22 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
 import junit.framework.Assert;
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
 
 /**
  * This test is not intended to test the business logic but only the correctness
@@ -94,8 +99,8 @@ public class GPDAOTest extends BaseDAOTest {
         //
         folderDAO.persist(folderA, folderB);
 
-        rasterLayer = super.createRasterLayer1(beginPosition + 30, folderB); // 333030
-        vectorLayer = super.createVectorLayer1(beginPosition, folderB); // 333000
+        rasterLayer = super.createRasterLayer(beginPosition + 30, folderB); // 333030
+        vectorLayer = super.createVectorLayer(beginPosition, folderB); // 333000
         rasterLayer.setName(rasterLayer.getName() + "_position_test");
         vectorLayer.setName(vectorLayer.getName() + "_position_test");
         rasterLayer.setChecked(false);
@@ -117,6 +122,58 @@ public class GPDAOTest extends BaseDAOTest {
         Assert.assertNotNull("folderDAO is NULL", super.folderDAO);
         Assert.assertNotNull("layerDAO is NULL", super.layerDAO);
 //        Assert.assertNotNull("styleDAO is NULL", super.styleDAO);
+    }
+
+    @Test
+    public void testTransactionsOnLayers() {
+        List<String> layerInfoKeywords = new ArrayList<String>();
+        layerInfoKeywords.add("keyword_test");
+
+        GPLayerInfo layerInfo = new GPLayerInfo();
+        layerInfo.setKeywords(layerInfoKeywords);
+        layerInfo.setQueryable(false);
+
+        String nameRasterLayer3 = "Raster Layer 3";
+        String nameVectorLayer3 = "Vector Layer 3";
+        try {
+
+            // "folder_position_test_A" ---> "rasterLayer3"
+            GPRasterLayer rasterLayer3 = super.createRasterLayer(beginPosition, folderA);
+            rasterLayer3.setName(nameRasterLayer3);
+            rasterLayer3.setChecked(false);
+
+            // "folder_position_test_A" ---> "vectorLayer3"
+            GPVectorLayer vectorLayer3 = super.createVectorLayer(beginPosition, folderA);
+            vectorLayer3.setName(nameVectorLayer3);
+            vectorLayer3.setChecked(true);
+
+            // "folder_position_test_A" ---> "rasterLayer4"
+            GPRasterLayer rasterLayer4 = super.createRasterLayer(beginPosition, folderA);
+            rasterLayer4.setName(null);
+            rasterLayer4.setChecked(false);
+
+            // "folder_position_test_A" ---> "vectorLayer4"
+            GPVectorLayer vectorLayer4 = super.createVectorLayer(beginPosition, folderA);
+            vectorLayer4.setName(null);
+            vectorLayer4.setChecked(true);
+            //
+            ArrayList<GPLayer> layersList = new ArrayList<GPLayer>();
+            layersList.add(rasterLayer3);
+            layersList.add(vectorLayer3);
+            layersList.add(rasterLayer4);
+            layersList.add(vectorLayer4);
+
+            GPLayer[] layersArray = layersList.toArray(new GPLayer[layersList.size()]);
+            layerDAO.persist(layersArray);
+            Assert.fail("saveAddedLayersAndTreeModifications must throws an exception");
+        } catch (Exception ex) {
+        }
+
+        GPLayer newRasterLayer3 = layerDAO.findByLayerName(nameRasterLayer3);
+        Assert.assertNull("rasterLayer3 must be null", newRasterLayer3);
+
+        GPLayer newVectorLayer3 = layerDAO.findByLayerName(nameVectorLayer3);
+        Assert.assertNull("rectorLayer3 must be null", newVectorLayer3);
     }
 
     //<editor-fold defaultstate="collapsed" desc="Test of updatePositionsRange">

@@ -156,7 +156,6 @@ class LayerServiceImpl {
         return layerDao.remove(layer);
     }
 
-    // Add @Transaction ?
     public long saveAddedLayerAndTreeModifications(GPLayer layer, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder parent = layer.getFolder();
         if (parent == null) {
@@ -184,26 +183,21 @@ class LayerServiceImpl {
     public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
         GPLayer[] layersArray = layers.toArray(new GPLayer[layers.size()]);
 
-        /**INUTIL CODE TO DROP **/
-//        GPFolder parent = null;
-//        GPFolder parentFromDB = null;
-//        for (int i = 0; i < layersArray.length; i++) {
-//            parent = layersArray[i].getFolder();
-//            if (parent == null) {
-//                throw new IllegalParameterFault("Parent of layer not found " + layersArray[i].getId());
-//            }
-//
-//            long idParent = parent.getId();
-//            parentFromDB = folderDao.find(idParent);
-//            if (parentFromDB == null) {
-//                throw new ResourceNotFoundFault("Parent of layer not found into DB", idParent);
-//            }
-//        }
+        GPFolder parent = null;
+        GPFolder parentFromDB = null;
+        parent = layersArray[0].getFolder();
+        if (parent == null) {
+            throw new IllegalParameterFault("Parent of layer not found " + layersArray[0].getId());
+        }
+
+        long idParent = parent.getId();
+        parentFromDB = folderDao.find(idParent);
+        if (parentFromDB == null) {
+            throw new ResourceNotFoundFault("Parent of layer not found into DB", idParent);
+        }
         ArrayList<Long> arrayList = new ArrayList<Long>(layers.size());
         int newPosition = layers.get(layers.size() - 1).getPosition();
         int increment = layers.size();
-        System.out.println("### newPosition: " + newPosition);
-        System.out.println("### increment: " + increment);
         // Shift positions
         layerDao.updatePositionsLowerBound(newPosition, increment);
         folderDao.updatePositionsLowerBound(newPosition, increment);
@@ -218,7 +212,6 @@ class LayerServiceImpl {
         return arrayList;
     }
 
-    // Add @Transaction ?
     public boolean saveDeletedLayerAndTreeModifications(long id, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPLayer layer = layerDao.find(id);
@@ -292,7 +285,6 @@ class LayerServiceImpl {
         return true;
     }
 
-    // Add @Transaction ?
     public boolean saveDragAndDropLayerModifications(long idLayerMoved, long idNewParent,
             int newPosition, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault {
@@ -305,7 +297,7 @@ class LayerServiceImpl {
         if (idNewParent == 0L) {
             throw new ResourceNotFoundFault("Folder parent with id " + idNewParent + " not found");
         }
-        
+
         GPFolder folderParent = folderDao.find(idNewParent);
         if (folderParent == null) {
             throw new ResourceNotFoundFault("The new parent does not exists into DB.", idNewParent);
@@ -313,14 +305,10 @@ class LayerServiceImpl {
         layerMoved.setFolder(folderParent);
 
         int startFirstRange = 0, endFirstRange = 0;
-        System.out.println("### layerMoved.getPosition(): " + layerMoved.getPosition());
-        System.out.println("### newPosition: " + newPosition);
         if (layerMoved.getPosition() < newPosition) {// Drag & Drop to top
-            System.out.println("### Drag & Drop to top");
             startFirstRange = newPosition;
             endFirstRange = layerMoved.getPosition() + 1;
         } else if (layerMoved.getPosition() > newPosition) {// Drag & Drop to bottom
-            System.out.println("### Drag & Drop to bottom");
             startFirstRange = layerMoved.getPosition() - 1;
             endFirstRange = newPosition;
         }
@@ -331,15 +319,7 @@ class LayerServiceImpl {
                 addFilterLessOrEqual("position", startFirstRange);
         List<GPFolder> matchingFoldersFirstRange = folderDao.search(search);
         List<GPLayer> matchingLayersFirstRange = layerDao.search(search);
-        System.out.println("Range: " + startFirstRange + " - " + endFirstRange + " - ");
-        System.out.println("### matchingFoldersFirstRange.size(): " + matchingFoldersFirstRange.size());
-        System.out.println("### matchingLayersFirstRange.size(): " + matchingLayersFirstRange.size());
-        System.out.println((matchingLayersFirstRange.isEmpty() ? "lista vuota" : matchingLayersFirstRange.get(0)));
-
-        System.out.println("### startFirstRange: " + startFirstRange);
-        System.out.println("### endFirstRange: " + endFirstRange);
-        System.out.println("### shiftValue: " + shiftValue);
-
+        
         if (layerMoved.getPosition() < newPosition) {// Drag & Drop to top
             this.executeFoldersModifications(matchingFoldersFirstRange, -shiftValue);
             this.executeLayersModifications(matchingLayersFirstRange, -shiftValue);

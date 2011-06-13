@@ -138,7 +138,6 @@ class FolderServiceImpl {
         return folderDao.remove(folder);
     }
 
-    // Add @Transaction ?
     public long saveAddedFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault {
         assert ((folder.getOwner() == null && folder.getParent() != null)
@@ -178,7 +177,6 @@ class FolderServiceImpl {
         return folder.getId();
     }
 
-    // Add @Transaction ?
     public boolean saveDeletedFolderAndTreeModifications(long folderId, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder folder = folderDao.find(folderId);

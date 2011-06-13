@@ -230,7 +230,6 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
     }
 
     private boolean updatePositions(List<GPFolder> matchingFolders, int deltaValue) {
-        // Update
         int[] oldPositions = new int[matchingFolders.size()];
         for (int ind = matchingFolders.size() - 1; ind >= 0; ind--) {
             GPFolder folder = matchingFolders.get(ind);

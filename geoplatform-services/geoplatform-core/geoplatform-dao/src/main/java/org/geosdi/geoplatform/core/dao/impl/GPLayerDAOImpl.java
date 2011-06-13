@@ -224,7 +224,7 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
     }
 
     private boolean updatePositions(List<GPLayer> matchingLayers, int deltaValue) {
-        // Update
+        // Update position of selected elements
         int[] oldPositions = new int[matchingLayers.size()];
         for (int ind = matchingLayers.size() - 1; ind >= 0; ind--) {
             GPLayer layer = matchingLayers.get(ind);

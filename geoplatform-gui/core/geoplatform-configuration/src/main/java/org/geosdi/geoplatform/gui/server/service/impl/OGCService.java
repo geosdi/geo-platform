@@ -38,9 +38,10 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.client.model.GPLayerGrid;
-import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
+
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
+import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.server.service.IOGCService;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOServerConverter;
 import org.geosdi.geoplatform.request.RequestById;
@@ -62,6 +63,7 @@ public class OGCService implements IOGCService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private GeoPlatformService geoPlatformServiceClient;
+    
     @Autowired
     private DTOServerConverter dtoServerConverter;
 
@@ -94,7 +96,8 @@ public class OGCService implements IOGCService {
             ServerDTO server = this.geoPlatformServiceClient.getCapabilities(
                     req);
 
-            return this.dtoServerConverter.convertRasterLayer(server.getLayersDTO());
+            return this.dtoServerConverter.convertRasterLayer(
+                    server.getLayersDTO());
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error : " + ex);
             throw new GeoPlatformException(ex);
@@ -106,7 +109,7 @@ public class OGCService implements IOGCService {
         try {
             ServerDTO serverWS = this.geoPlatformServiceClient.saveServer(
                     urlServer);
-            
+
             return this.dtoServerConverter.convertServerWS(serverWS);
         } catch (ResourceNotFoundFault ex) {
             logger.error("Inser Server Error : " + ex);

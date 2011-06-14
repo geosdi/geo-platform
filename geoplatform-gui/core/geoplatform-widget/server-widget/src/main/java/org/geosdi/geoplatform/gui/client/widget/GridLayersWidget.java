@@ -55,11 +55,12 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
-import org.geosdi.geoplatform.gui.client.model.GPLayerGrid.GPLayerBeanKeyValue;
+
 import org.geosdi.geoplatform.gui.client.widget.expander.GPServerExpander;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.server.GPLayerGrid.GPLayerBeanKeyValue;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.puregwt.grid.GPGridEventHandler;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;

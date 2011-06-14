@@ -38,10 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget;
 import java.util.ArrayList;
 
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
-import org.geosdi.geoplatform.gui.client.model.GPLayerGrid;
-import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
-import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel.GPServerKeyValue;
-import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemote;
+
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -59,6 +56,10 @@ import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.widget.form.AddServerWidget;
+import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
+import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel.GPServerKeyValue;
+import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
 
 /**
  *

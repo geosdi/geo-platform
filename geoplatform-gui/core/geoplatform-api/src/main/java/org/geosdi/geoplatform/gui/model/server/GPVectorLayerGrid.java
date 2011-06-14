@@ -33,26 +33,33 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.server.service;
+package org.geosdi.geoplatform.gui.model.server;
 
-import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.client.model.GPLayerGrid;
-import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.model.GPVectorBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface IOGCService {
+public class GPVectorLayerGrid extends GPLayerGrid implements GPVectorBean {
 
-    public ArrayList<GPServerBeanModel> loadServers() throws GeoPlatformException;
+    private static final long serialVersionUID = 211533898795409938L;
 
-    public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException;
+    private String featureNameSpace;
 
-    public ArrayList<? extends GPLayerGrid> getCababilities(
-            long idServer) throws GeoPlatformException;
+    @Override
+    public String getFeatureNameSpace() {
+        return this.featureNameSpace;
+    }
 
-    public GPServerBeanModel insertServer(String urlServer) throws GeoPlatformException;
+    @Override
+    public void setFeatureNameSpace(String featureNameSpace) {
+        this.featureNameSpace = featureNameSpace;
+    }
+
+    @Override
+    public String toString() {
+        return "GPVectorBeanModel{" + "featureNameSpace=" + featureNameSpace + '}';
+    }
 }

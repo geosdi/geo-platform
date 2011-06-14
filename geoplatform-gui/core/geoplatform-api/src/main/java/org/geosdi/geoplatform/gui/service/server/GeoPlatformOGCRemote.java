@@ -33,56 +33,76 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.gwt;
+package org.geosdi.geoplatform.gui.service.server;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.client.model.GPLayerGrid;
-import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
-import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemote;
+
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.service.IOGCService;
-import org.geosdi.geoplatform.gui.server.service.impl.OGCService;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
+import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
+import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GeoPlatformOGCRemoteImpl extends RemoteServiceServlet implements
-        GeoPlatformOGCRemote {
+@RemoteServiceRelativePath("GeoPlatformOGCRemote")
+public interface GeoPlatformOGCRemote extends RemoteService {
+
+    public static class Util {
+
+        private static GeoPlatformOGCRemoteAsync instance;
+
+        public static GeoPlatformOGCRemoteAsync getInstance() {
+            if (instance == null) {
+                instance = (GeoPlatformOGCRemoteAsync) GWT.create(
+                        GeoPlatformOGCRemote.class);
+            }
+
+            return instance;
+        }
+    }
+
+    /**
+     * Load All Server from GeoPlatform Web Services
+     *
+     * @return
+     *          ArrayList<GPServerBeanModel>
+     *
+     * @throws GeoPlatformException
+     */
+    public ArrayList<GPServerBeanModel> loadServers() throws GeoPlatformException;
 
     /**
      *
+     * Load Server Detail
+     *
+     * @param idServer
+     * @return
+     * @throws GeoPlatformException
      */
-    private static final long serialVersionUID = 7340579377487014548L;
+    public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException;
 
-    private IOGCService ogcService;
-
-    public GeoPlatformOGCRemoteImpl() {
-        this.ogcService = (IOGCService) GeoPlatformContextUtil.getInstance().getBean(
-                OGCService.class);
-    }
-
-    @Override
-    public ArrayList<GPServerBeanModel> loadServers() throws GeoPlatformException {
-        return this.ogcService.loadServers();
-    }
-
-    @Override
-    public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException {
-        return this.ogcService.getServerDetails(idServer);
-    }
-
-    @Override
+    /**
+     *
+     * @param idServer
+     *
+     * @return
+     * @throws GeoPlatformException
+     */
     public ArrayList<? extends GPLayerGrid> getCababilities(
-            long idServer) throws GeoPlatformException {
-        return this.ogcService.getCababilities(idServer);
-    }
-
-    @Override
-    public GPServerBeanModel insertServer(String urlServer) throws GeoPlatformException {
-        return this.ogcService.insertServer(urlServer);
-    }
+            long idServer) throws GeoPlatformException;
+    
+    /**
+     * 
+     * @param urlServer
+     * @return
+     *         GPServerDTO  
+     * 
+     * @throws GeoPlatformException 
+     */
+    public GPServerBeanModel insertServer(String urlServer) throws GeoPlatformException;
 }

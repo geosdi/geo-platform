@@ -86,6 +86,14 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
         </dependency>
+        
+		<!-- GeoPlatform-WS-Client -->
+
+        <dependency>
+            <groupId>org.geosdi.geoplatform</groupId>
+            <artifactId>geoplatform-ws-client</artifactId>
+            <version>1.2-SNAPSHOT</version>
+        </dependency>
 
 		<!-- SPRING -->
         <dependency>

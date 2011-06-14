@@ -38,11 +38,12 @@ package org.geosdi.geoplatform.gui.server.service.converter;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.gui.client.model.GPLayerGrid;
-import org.geosdi.geoplatform.gui.client.model.GPRasterLayerGrid;
-import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
+
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
+import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
+import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
+import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.slf4j.Logger;

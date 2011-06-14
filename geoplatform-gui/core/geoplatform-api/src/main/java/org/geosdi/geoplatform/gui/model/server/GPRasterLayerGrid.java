@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.model;
+package org.geosdi.geoplatform.gui.model.server;
 
 import java.util.List;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;

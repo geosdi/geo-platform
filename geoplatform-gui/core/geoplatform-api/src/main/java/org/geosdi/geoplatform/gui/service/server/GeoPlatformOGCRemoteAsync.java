@@ -33,75 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.service;
+package org.geosdi.geoplatform.gui.service.server;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.client.model.GPLayerGrid;
-import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
+
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
+import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-@RemoteServiceRelativePath("GeoPlatformOGCRemote")
-public interface GeoPlatformOGCRemote extends RemoteService {
+public interface GeoPlatformOGCRemoteAsync {
 
-    public static class Util {
+    public void loadServers(AsyncCallback<ArrayList<GPServerBeanModel>> callback)
+            throws GeoPlatformException;
 
-        private static GeoPlatformOGCRemoteAsync instance;
+    public void getServerDetails(long idServer,
+            AsyncCallback<GPServerBeanModel> callback) throws GeoPlatformException;
 
-        public static GeoPlatformOGCRemoteAsync getInstance() {
-            if (instance == null) {
-                instance = (GeoPlatformOGCRemoteAsync) GWT.create(
-                        GeoPlatformOGCRemote.class);
-            }
+    public void getCababilities(long idServer,
+            AsyncCallback<ArrayList<? extends GPLayerGrid>> callback)
+            throws GeoPlatformException;
 
-            return instance;
-        }
-    }
-
-    /**
-     * Load All Server from GeoPlatform Web Services
-     *
-     * @return
-     *          ArrayList<GPServerBeanModel>
-     *
-     * @throws GeoPlatformException
-     */
-    public ArrayList<GPServerBeanModel> loadServers() throws GeoPlatformException;
-
-    /**
-     *
-     * Load Server Detail
-     *
-     * @param idServer
-     * @return
-     * @throws GeoPlatformException
-     */
-    public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException;
-
-    /**
-     *
-     * @param idServer
-     *
-     * @return
-     * @throws GeoPlatformException
-     */
-    public ArrayList<? extends GPLayerGrid> getCababilities(
-            long idServer) throws GeoPlatformException;
-    
-    /**
-     * 
-     * @param urlServer
-     * @return
-     *         GPServerDTO  
-     * 
-     * @throws GeoPlatformException 
-     */
-    public GPServerBeanModel insertServer(String urlServer) throws GeoPlatformException;
+    public void insertServer(String urlServer,
+            AsyncCallback<GPServerBeanModel> callback) throws GeoPlatformException;
 }

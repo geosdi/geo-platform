@@ -48,9 +48,7 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
-import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
-import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemote;
-import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemoteAsync;
+
 import org.geosdi.geoplatform.gui.client.widget.DisplayServerWidget;
 import org.geosdi.geoplatform.gui.client.widget.EnumSearchServer;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
@@ -58,6 +56,8 @@ import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
 
 /**
  *

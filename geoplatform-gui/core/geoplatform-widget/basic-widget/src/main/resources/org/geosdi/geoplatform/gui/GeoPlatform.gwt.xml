@@ -21,5 +21,7 @@
     <source path="impl" />
     <source path="utility" />
     <source path="factory" />
+    
+    <servlet path="/GeoPlatformOGCRemote" class="org.geosdi.geoplatform.gui.server.gwt.GeoPlatformOGCRemoteImpl" />
 	
 </module>

@@ -33,14 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.featureinfo.action;
 
 import org.geosdi.geoplatform.gui.action.MapToggleAction;
-import org.geosdi.geoplatform.gui.client.Resources;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -49,40 +49,44 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
  */
 public class GetFeatureInfoAction extends MapToggleAction {
 
-	public GetFeatureInfoAction(GeoPlatformMap mapWidget) {
-		super("GetFeatureInfo", Resources.ICONS.getFeatureInfo(), mapWidget);
-	}
+    public GetFeatureInfoAction(GeoPlatformMap mapWidget) {
+        super("GetFeatureInfo", BasicWidgetResources.ICONS.getFeatureInfo(),
+                mapWidget);
+    }
 
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		ToggleButton button = (ToggleButton) ce.getSource();
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        ToggleButton button = (ToggleButton) ce.getSource();
 
-		super.changeButtonState();
+        super.changeButtonState();
 
-		this.deactivateAllMapControl();
+        this.deactivateAllMapControl();
 
-		if (button.isPressed()) {
-			mapWidget.getButtonBar().setPressedButton(button);
-			this.mapWidget.activateInfo();
-		} else
-			this.mapWidget.deactivateInfo();
-	}
-	
+        if (button.isPressed()) {
+            mapWidget.getButtonBar().setPressedButton(button);
+            this.mapWidget.activateInfo();
+        } else {
+            this.mapWidget.deactivateInfo();
+        }
+    }
 
-	/* (non-Javadoc)
-	 * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
-	 */
-	@Override
-	public void disableControl() {
-		// TODO Auto-generated method stub
-		this.mapWidget.deactivateInfo();
-	}
 
-	private void deactivateAllMapControl() {
-		if (mapWidget.isFeatureOperationEnable())
-			mapWidget.deactivateFeatureOperation();
+    /* (non-Javadoc)
+     * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
+     */
+    @Override
+    public void disableControl() {
+        // TODO Auto-generated method stub
+        this.mapWidget.deactivateInfo();
+    }
 
-		if (mapWidget.isModifyFeatureEnable())
-			mapWidget.deactivateModifyFeature();
-	}
+    private void deactivateAllMapControl() {
+        if (mapWidget.isFeatureOperationEnable()) {
+            mapWidget.deactivateFeatureOperation();
+        }
+
+        if (mapWidget.isModifyFeatureEnable()) {
+            mapWidget.deactivateModifyFeature();
+        }
+    }
 }

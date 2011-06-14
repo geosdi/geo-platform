@@ -1,21 +1,25 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+  
     <parent>
         <groupId>org.geosdi</groupId>
-        <artifactId>geoplatform-widget</artifactId>
+        <artifactId>plugin</artifactId>
         <version>1.2-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
-    <artifactId>map-widget</artifactId>
+    <artifactId>geoplatform-featureinfo</artifactId>
     <version>1.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Geo-Platform :: == Map Module</name>
-
+    <name>Geo-Platform :: == FeatureInfo Module</name>
+  
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+  
     <developers>
         <developer>
             <name>Francesco Izzi</name>
@@ -55,87 +59,46 @@
             <artifactId>gwt-user</artifactId>
             <scope>provided</scope>
         </dependency>
-
-		<!-- GXT -->
+    
+    	<!-- GXT -->
         <dependency>
             <groupId>com.extjs</groupId>
             <artifactId>gxt</artifactId>
         </dependency>
 
-		<!-- GWT-OL Resources -->
-        <dependency>
-            <groupId>org.gwtopenmaps.openlayers</groupId>
-            <artifactId>openlayers_gwt</artifactId>
-            <version>0.6-SNAPSHOT</version>
-        </dependency>
-
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
             <classifier>sources</classifier>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-configuration</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-configuration</artifactId>
             <classifier>sources</classifier>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>basic-widget</artifactId>
+            <version>${project.version}</version>
         </dependency>
         
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-featureinfo</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-featureinfo</artifactId>
-            <version>${project.version}</version>
-            <classifier>sources</classifier>
-        </dependency>
-
-		<!-- SPRING -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-asm</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-expression</artifactId>
-        </dependency>
-
-	<!-- logging dependencies, delegate all to slf4j and use logback -->
+        <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -152,31 +115,14 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
-
+        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-
-		<!-- SCOPE TEST -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-collections</groupId>
-                    <artifactId>commons-collections</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>xerces</groupId>
-                    <artifactId>xercesImpl</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
     </dependencies>
-
+  
     <build>
 
         <plugins>
@@ -212,7 +158,7 @@
                 </executions>
             </plugin>
 
-			<!-- tell the compiler we can use 1.5 -->
+			<!-- tell the compiler we can use 1.6 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -262,5 +208,4 @@
         </resources>
 
     </build>
-
 </project>

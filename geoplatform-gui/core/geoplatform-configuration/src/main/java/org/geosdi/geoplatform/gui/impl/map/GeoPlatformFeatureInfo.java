@@ -42,10 +42,9 @@ package org.geosdi.geoplatform.gui.impl.map;
  */
 public interface GeoPlatformFeatureInfo {
 
-	public void activateInfo();
+    public void activateInfo();
 
-	public void deactivateInfo();
+    public void deactivateInfo();
 
-	public boolean isInfoActive();
-
+    public boolean isInfoActive();
 }

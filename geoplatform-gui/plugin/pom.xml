@@ -87,6 +87,7 @@
     <modules>
 		<module>geoplatform-print</module>
 		<module>geoplatform-xmpp</module>
+        <module>geoplatform-featureinfo</module>
 	</modules>
 
 

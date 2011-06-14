@@ -42,7 +42,6 @@ import org.geosdi.geoplatform.gui.client.model.GPLayerGrid;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.client.model.GPServerBeanModel.GPServerKeyValue;
 import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemote;
-import org.geosdi.geoplatform.gui.client.service.GeoPlatformOGCRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -68,7 +67,6 @@ import org.geosdi.geoplatform.gui.client.widget.form.AddServerWidget;
  */
 public class DisplayServerWidget {
 
-    private GeoPlatformOGCRemoteAsync service = GeoPlatformOGCRemote.Util.getInstance();
     private ToolBar toolbar;
     private ComboBox<GPServerBeanModel> comboServer;
     private ListStore<GPServerBeanModel> store;
@@ -102,6 +100,7 @@ public class DisplayServerWidget {
         comboServer.setDisplayField(GPServerKeyValue.URL_SERVER.getValue());
         comboServer.setTemplate(getTemplate());
         comboServer.setWidth(250);
+        comboServer.setEditable(false);
         comboServer.setStore(this.store);
         comboServer.setTypeAhead(true);
         comboServer.setTriggerAction(TriggerAction.ALL);
@@ -171,7 +170,7 @@ public class DisplayServerWidget {
     public void loadServers() {
         this.searchStatus.setBusy("Loading Server...");
 
-        this.service.loadServers(new AsyncCallback<ArrayList<GPServerBeanModel>>() {
+        GeoPlatformOGCRemote.Util.getInstance().loadServers(new AsyncCallback<ArrayList<GPServerBeanModel>>() {
 
             @Override
             public void onFailure(Throwable caught) {
@@ -276,7 +275,7 @@ public class DisplayServerWidget {
         }
 
         private void loadCababilitiesFromWS() {
-            service.getCababilities(selectedServer.getId(),
+            GeoPlatformOGCRemote.Util.getInstance().getCababilities(selectedServer.getId(),
                     new AsyncCallback<ArrayList<? extends GPLayerGrid>>() {
 
                         @Override

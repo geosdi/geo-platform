@@ -68,4 +68,7 @@ public interface BasicWidgetIcons extends ImageBundle {
 
     @Resource("raster.png")
     AbstractImagePrototype raster();
+
+    @Resource("information.png")
+    AbstractImagePrototype getFeatureInfo();
 }

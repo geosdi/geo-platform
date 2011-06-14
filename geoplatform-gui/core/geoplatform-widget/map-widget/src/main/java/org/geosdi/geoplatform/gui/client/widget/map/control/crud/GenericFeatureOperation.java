@@ -54,92 +54,88 @@ import com.extjs.gxt.ui.client.mvc.Dispatcher;
  */
 public class GenericFeatureOperation extends MapControl {
 
-	private SelectFeature control;
-	private OperationType operation;
+    private SelectFeature control;
+    private OperationType operation;
 
-	public GenericFeatureOperation(Vector vector) {
-		super(vector);
-		// TODO Auto-generated constructor stub
-	}
+    public GenericFeatureOperation(Vector vector) {
+        super(vector);
+        // TODO Auto-generated constructor stub
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.impl.map.control.GeoPlatformMapControl#
-	 * createControl()
-	 */
-	@Override
-	public void createControl() {
-		// TODO Auto-generated method stub
-		SelectFeatureOptions selectFeatureOptions = new SelectFeatureOptions();
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.impl.map.control.GeoPlatformMapControl#
+     * createControl()
+     */
+    @Override
+    public void createControl() {
+        // TODO Auto-generated method stub
+        SelectFeatureOptions selectFeatureOptions = new SelectFeatureOptions();
 
-		selectFeatureOptions.clickFeature(new ClickFeatureListener() {
+        selectFeatureOptions.clickFeature(new ClickFeatureListener() {
 
-			@Override
-			public void onFeatureClicked(final VectorFeature vectorFeature) {
-				// TODO Auto-generated method stub
-				GeoPlatformMessage
-						.confirmMessage(
-								"Delete Feature",
-								"Are you sure you want to delete the selected feature ?",
-								new Listener<MessageBoxEvent>() {
+            @Override
+            public void onFeatureClicked(final VectorFeature vectorFeature) {
+                // TODO Auto-generated method stub
+                GeoPlatformMessage.confirmMessage(
+                        "Delete Feature",
+                        "Are you sure you want to delete the selected feature ?",
+                        new Listener<MessageBoxEvent>() {
 
-									@Override
-									public void handleEvent(MessageBoxEvent be) {
-										// TODO Auto-generated method stub
-										if (be.getButtonClicked().getText()
-												.equalsIgnoreCase("yes")
-												|| be.getButtonClicked()
-														.getText()
-														.equalsIgnoreCase("si"))
+                            @Override
+                            public void handleEvent(MessageBoxEvent be) {
+                                // TODO Auto-generated method stub
+                                if (be.getButtonClicked().getText().equalsIgnoreCase(
+                                        "yes")
+                                        || be.getButtonClicked().getText().equalsIgnoreCase(
+                                        "si")) {
+                                    Dispatcher.forwardEvent(
+                                            MapWidgetEvents.DELETE_FEATURE,
+                                            vectorFeature);
+                                }
 
-											Dispatcher
-													.forwardEvent(
-															MapWidgetEvents.DELETE_FEATURE,
-															vectorFeature);
+                            }
+                        });
+            }
+        });
 
-									}
-								});
-			}
-		});
+        control = new SelectFeature(vector, selectFeatureOptions);
+    }
 
-		control = new SelectFeature(vector, selectFeatureOptions);
-	}
+    @Override
+    public void activateControl() {
+        // TODO Auto-generated method stub
+        this.control.activate();
+        this.enabled = true;
+    }
 
-	@Override
-	public void activateControl() {
-		// TODO Auto-generated method stub
-		this.control.activate();
-		this.enabled = true;
-	}
+    @Override
+    public void deactivateControl() {
+        // TODO Auto-generated method stub
+        this.control.deactivate();
+        this.enabled = false;
+    }
 
-	@Override
-	public void deactivateControl() {
-		// TODO Auto-generated method stub
-		this.control.deactivate();
-		this.enabled = false;
-	}
+    /**
+     * @return the control
+     */
+    public SelectFeature getControl() {
+        return control;
+    }
 
-	/**
-	 * @return the control
-	 */
-	public SelectFeature getControl() {
-		return control;
-	}
+    /**
+     * @param operation
+     *            the operation to set
+     */
+    public void setOperation(OperationType operation) {
+        this.operation = operation;
+    }
 
-	/**
-	 * @param operation
-	 *            the operation to set
-	 */
-	public void setOperation(OperationType operation) {
-		this.operation = operation;
-	}
-
-	/**
-	 * @return the operation
-	 */
-	public OperationType getOperation() {
-		return operation;
-	}
-
+    /**
+     * @return the operation
+     */
+    public OperationType getOperation() {
+        return operation;
+    }
 }

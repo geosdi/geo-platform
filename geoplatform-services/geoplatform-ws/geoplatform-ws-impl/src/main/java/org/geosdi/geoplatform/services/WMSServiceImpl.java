@@ -334,6 +334,7 @@ class WMSServiceImpl {
             index = urlServer.indexOf("&");
         } else {
             index = urlServer.indexOf("?");
+//            index += 1;
         }
         if (index != -1) {
             String newUrl = urlServer.substring(0, index);

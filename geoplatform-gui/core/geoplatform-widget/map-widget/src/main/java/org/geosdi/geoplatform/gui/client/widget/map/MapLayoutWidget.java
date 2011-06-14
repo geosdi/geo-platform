@@ -217,31 +217,37 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
     }
 
+    @Override
     public void activateInfo() {
         info.activate();
         this.infoActive = true;
     }
 
+    @Override
     public void deactivateInfo() {
         info.deactivate();
         this.infoActive = false;
     }
 
+    @Override
     public void activateMeasure() {
         measure.activate();
         this.measureActive = true;
     }
 
+    @Override
     public void deactivateMeasure() {
         measure.deactivate();
         this.measureActive = false;
     }
 
+    @Override
     public void activateMeasureArea() {
         measureArea.activate();
         this.measureAreaActive = true;
     }
 
+    @Override
     public void deactivateMeasureArea() {
         measureArea.deactivate();
         this.measureAreaActive = false;
@@ -323,6 +329,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
     /**
      * @return the map
      */
+    @Override
     public Map getMap() {
         return map;
     }
@@ -330,6 +337,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
     /**
      * @return the mapWidget
      */
+    @Override
     public MapWidget getMapWidget() {
         return mapWidget;
     }
@@ -368,6 +376,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
     /**
      * activate draw feature control on the map
      */
+    @Override
     public void activateDrawFeature() {
         this.mapControl.activateDrawFeature();
     }
@@ -375,14 +384,17 @@ public class MapLayoutWidget implements GeoPlatformMap {
     /**
      * deactivate draw feature control on the map
      */
+    @Override
     public void deactivateDrawFeature() {
         this.mapControl.deactivateDrawFeature();
     }
 
+    @Override
     public void activateDrawPointFeature() {
         this.mapControl.activateDrawPointFeature();
     }
 
+    @Override
     public void deactivateDrawPointFeature() {
         this.mapControl.deactivateDrawPointFeature();
     }
@@ -394,6 +406,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
     /**
      * @return the buttonBar
      */
+    @Override
     public ButtonBar getButtonBar() {
         return buttonBar;
     }
@@ -418,10 +431,12 @@ public class MapLayoutWidget implements GeoPlatformMap {
         return this.mapControl.getDrawLineFeature().getControl();
     }
 
+    @Override
     public void activateModifyFeature() {
         this.mapControl.activateModifyFeature();
     }
 
+    @Override
     public void deactivateModifyFeature() {
         this.mapControl.deactivateModifyFeature();
     }
@@ -430,14 +445,17 @@ public class MapLayoutWidget implements GeoPlatformMap {
         this.mapControl.activateFeatureOperation();
     }
 
+    @Override
     public void deactivateFeatureOperation() {
         this.mapControl.deactivateFeatureOperation();
     }
 
+    @Override
     public boolean isFeatureOperationEnable() {
         return this.mapControl.isFeatureOperationEnable();
     }
 
+    @Override
     public boolean isModifyFeatureEnable() {
         return this.mapControl.isModifyFeatureEnable();
     }
@@ -481,6 +499,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
     /**
      * @return the infoActive
      */
+    @Override
     public boolean isInfoActive() {
         return infoActive;
     }
@@ -488,6 +507,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
     /**
      * @return the measureActive
      */
+    @Override
     public boolean isMeasureActive() {
         return measureActive;
     }

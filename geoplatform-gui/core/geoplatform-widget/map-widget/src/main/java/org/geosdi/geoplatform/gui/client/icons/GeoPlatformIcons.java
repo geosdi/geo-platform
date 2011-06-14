@@ -45,52 +45,48 @@ import com.google.gwt.user.client.ui.ImageBundle;
 @SuppressWarnings("deprecation")
 public interface GeoPlatformIcons extends ImageBundle {
 
-	@Resource("zoom-in.png")
-	AbstractImagePrototype zoomIn();
+    @Resource("zoom-in.png")
+    AbstractImagePrototype zoomIn();
 
-	@Resource("zoom-out.png")
-	AbstractImagePrototype zoomOut();
+    @Resource("zoom-out.png")
+    AbstractImagePrototype zoomOut();
 
-	@Resource("draw-feature.png")
-	AbstractImagePrototype drawFeature();
+    @Resource("draw-feature.png")
+    AbstractImagePrototype drawFeature();
 
-	@Resource("rotate.png")
-	AbstractImagePrototype rotate();
-	
-	@Resource("drag.png")
-	AbstractImagePrototype drag();
-	
-	@Resource("resize.png")
-	AbstractImagePrototype resize();
-	
-	@Resource("shape.png")
-	AbstractImagePrototype shape();
+    @Resource("rotate.png")
+    AbstractImagePrototype rotate();
 
-	@Resource("gp-icon-16x16.png")
-	AbstractImagePrototype geoPortalInfo();
-	
-	@Resource("draw-point.png")
-	AbstractImagePrototype drawPointFeature();
-	
-	@Resource("draw-line.png")
-	AbstractImagePrototype drawLineFeature();
-	
-	@Resource("clear-map.png")
-	AbstractImagePrototype clearMap();
-	
-	@Resource("zoom-last.png")
-	AbstractImagePrototype zoomPrevious();
-	
-	@Resource("zoom-next.png")
-	AbstractImagePrototype zoomNext();
-	
-	@Resource("information.png")
-	AbstractImagePrototype getFeatureInfo();
-	
-	@Resource("ruler.png")
-	AbstractImagePrototype measure();
-	
-	@Resource("ruler_square.png")
-	AbstractImagePrototype measureArea();
+    @Resource("drag.png")
+    AbstractImagePrototype drag();
 
+    @Resource("resize.png")
+    AbstractImagePrototype resize();
+
+    @Resource("shape.png")
+    AbstractImagePrototype shape();
+
+    @Resource("gp-icon-16x16.png")
+    AbstractImagePrototype geoPortalInfo();
+
+    @Resource("draw-point.png")
+    AbstractImagePrototype drawPointFeature();
+
+    @Resource("draw-line.png")
+    AbstractImagePrototype drawLineFeature();
+
+    @Resource("clear-map.png")
+    AbstractImagePrototype clearMap();
+
+    @Resource("zoom-last.png")
+    AbstractImagePrototype zoomPrevious();
+
+    @Resource("zoom-next.png")
+    AbstractImagePrototype zoomNext();
+
+    @Resource("ruler.png")
+    AbstractImagePrototype measure();
+
+    @Resource("ruler_square.png")
+    AbstractImagePrototype measureArea();
 }

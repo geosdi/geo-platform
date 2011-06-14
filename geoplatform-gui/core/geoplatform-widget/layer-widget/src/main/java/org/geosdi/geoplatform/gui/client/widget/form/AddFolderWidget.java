@@ -88,7 +88,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
     private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
 
     /**
-     *@Constructor
+     *@param theTree 
      * 
      */
     public AddFolderWidget(TreePanel<GPBeanTreeModel> theTree) {
@@ -171,6 +171,8 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
                 });
 
         this.formPanel.addButton(cancel);
+        
+        setFocusWidget(this.folderText);
     }
 
     @Override
@@ -213,6 +215,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
         this.save.disable();
         this.folderText.clear();
         this.saveStatus.clearStatus("");
+        setFocusWidget(this.folderText);
     }
 
     public void showForm() {

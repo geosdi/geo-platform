@@ -50,6 +50,7 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.RowExpander;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +111,19 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         this.formPanel.add(this.grid);
 
         this.formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
+        
+        Button clear = new Button("Clear", new SelectionListener<ButtonEvent>() {
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                
+            }
+        });
+        
+        ToolTipConfig config = new ToolTipConfig();
+        config.setTitle("Information");
+        config.setText("Clear Combo Server and Layers Grid.");
+        config.setTrackMouse(true);
 
         this.done = new Button("Done", ServerWidgetResources.ICONS.done());
 

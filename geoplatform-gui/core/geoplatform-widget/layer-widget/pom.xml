@@ -108,6 +108,20 @@
             <classifier>sources</classifier>
         </dependency>
         
+         <!-- GeoPlatform Print Module -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-print</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-print</artifactId>
+            <version>${project.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+        
         <!-- GeoPlatform-WS-Client -->
 
         <dependency>

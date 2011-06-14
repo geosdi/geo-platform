@@ -41,27 +41,26 @@ package org.geosdi.geoplatform.gui.impl.map;
  * 
  */
 public interface GeoPlatformEditor {
-	
-	public void activateDrawPointFeature();
 
-	public void deactivateDrawPointFeature();
-	
-	public void activateDrawLineFeature();
+    public void activateDrawPointFeature();
 
-	public void deactivateDrawLineFeature();
+    public void deactivateDrawPointFeature();
 
-	public void activateDrawFeature();
+    public void activateDrawLineFeature();
 
-	public void deactivateDrawFeature();
+    public void deactivateDrawLineFeature();
 
-	public boolean isFeatureOperationEnable();
+    public void activateDrawFeature();
 
-	public void deactivateFeatureOperation();
+    public void deactivateDrawFeature();
 
-	public void activateModifyFeature();
+    public boolean isFeatureOperationEnable();
 
-	public void deactivateModifyFeature();
+    public void deactivateFeatureOperation();
 
-	public boolean isModifyFeatureEnable();
+    public void activateModifyFeature();
 
+    public void deactivateModifyFeature();
+
+    public boolean isModifyFeatureEnable();
 }

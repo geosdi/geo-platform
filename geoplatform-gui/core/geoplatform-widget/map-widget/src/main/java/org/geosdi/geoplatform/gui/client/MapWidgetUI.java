@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client;
 import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
-import org.geosdi.geoplatform.gui.client.action.toolbar.GetFeatureInfoAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.MeasureAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.MeasureAreaAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.ZoomInAction;
@@ -50,6 +49,7 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.gui.featureinfo.action.GetFeatureInfoAction;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

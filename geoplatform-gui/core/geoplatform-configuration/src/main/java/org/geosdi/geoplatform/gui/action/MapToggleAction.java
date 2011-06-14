@@ -46,20 +46,20 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  */
 public abstract class MapToggleAction extends ToolbarMapAction {
 
-	protected GeoPlatformMap mapWidget;
+    protected GeoPlatformMap mapWidget;
 
-	public MapToggleAction(String tooltip, AbstractImagePrototype image,
-			GeoPlatformMap theMapWidget) {
-		super(tooltip, image);
-		// TODO Auto-generated constructor stub
-		this.mapWidget = theMapWidget;
-	}
+    public MapToggleAction(String tooltip, AbstractImagePrototype image,
+            GeoPlatformMap theMapWidget) {
+        super(tooltip, image);
+        // TODO Auto-generated constructor stub
+        this.mapWidget = theMapWidget;
+    }
 
-	protected void changeButtonState() {
-		if ((mapWidget.getButtonBar().isTogglePressed())
-				&& (!mapWidget.getButtonBar().getPressedButton().getId()
-						.equals(getButton().getId())))
-			mapWidget.getButtonBar().changeButtonState();
-	}
-
+    protected void changeButtonState() {
+        if ((mapWidget.getButtonBar().isTogglePressed())
+                && (!mapWidget.getButtonBar().getPressedButton().getId().equals(
+                getButton().getId()))) {
+            mapWidget.getButtonBar().changeButtonState();
+        }
+    }
 }

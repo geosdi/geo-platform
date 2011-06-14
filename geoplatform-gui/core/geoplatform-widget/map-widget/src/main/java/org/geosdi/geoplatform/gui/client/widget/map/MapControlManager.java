@@ -60,233 +60,232 @@ import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
  */
 public class MapControlManager {
 
-	private Map map;
-	private Vector vector;
-	private VectorFeatureStyle style;
+    private Map map;
+    private Vector vector;
+    private VectorFeatureStyle style;
+    private DrawPolygonControl drawFeature;
+    private DrawPointFeature drawPointFeature;
+    private DrawLineFeature drawLineFeature;
+    private ModifyFeatureControl modifyFeature;
+    private GenericFeatureOperation featureOperation;
+    private NavigationHistoryControl navigationHistory;
 
-	private DrawPolygonControl drawFeature;
-	private DrawPointFeature drawPointFeature;
-	private DrawLineFeature drawLineFeature;
-	private ModifyFeatureControl modifyFeature;
-	private GenericFeatureOperation featureOperation;
+    public MapControlManager(Map map) {
+        this.map = map;
+        this.style = new VectorFeatureStyle();
+        this.initVectorLayer();
+    }
 
-	private NavigationHistoryControl navigationHistory;
+    /**
+     * Create a vector layer to add to the map which defines a set of controls
+     * 
+     */
+    private void initVectorLayer() {
+        VectorOptions vectorOption = new VectorOptions();
+        vectorOption.setStyle(this.style.getVectorStyle());
+        vectorOption.setDisplayInLayerSwitcher(false);
+        this.vector = new Vector("GeoPlatform Vector Layer", vectorOption);
+        this.map.addLayer(vector);
 
-	public MapControlManager(Map map) {
-		this.map = map;
-		this.style = new VectorFeatureStyle();
-		this.initVectorLayer();
-	}
+        this.initControl();
 
-	/**
-	 * Create a vector layer to add to the map which defines a set of controls
-	 * 
-	 */
-	private void initVectorLayer() {
-		VectorOptions vectorOption = new VectorOptions();
-		vectorOption.setStyle(this.style.getVectorStyle());
-		vectorOption.setDisplayInLayerSwitcher(false);
-		this.vector = new Vector("GeoPlatform Vector Layer", vectorOption);
-		this.map.addLayer(vector);
+        this.addMapControl();
+    }
 
-		this.initControl();
+    /**
+     * Initialize Control on Vector Layer
+     * 
+     */
+    private void initControl() {
+        this.drawFeature = new DrawPolygonControl(vector);
+        this.drawPointFeature = new DrawPointFeature(vector);
+        this.drawLineFeature = new DrawLineFeature(vector);
+        this.modifyFeature = new ModifyFeatureControl(vector);
+        this.featureOperation = new GenericFeatureOperation(vector);
+        this.navigationHistory = new NavigationHistoryControl();
+    }
 
-		this.addMapControl();
-	}
+    /**
+     * Add Control to the Map
+     * 
+     */
+    private void addMapControl() {
+        this.map.addControl(this.drawFeature.getControl());
+        this.map.addControl(this.drawLineFeature.getControl());
+        this.map.addControl(this.drawPointFeature.getControl());
+        this.map.addControl(this.modifyFeature.getControl());
+        this.map.addControl(this.featureOperation.getControl());
+        this.map.addControl(this.navigationHistory.getControl());
 
-	/**
-	 * Initialize Control on Vector Layer
-	 * 
-	 */
-	private void initControl() {
-		this.drawFeature = new DrawPolygonControl(vector);
-		this.drawPointFeature = new DrawPointFeature(vector);
-		this.drawLineFeature = new DrawLineFeature(vector);
-		this.modifyFeature = new ModifyFeatureControl(vector);
-		this.featureOperation = new GenericFeatureOperation(vector);
-		this.navigationHistory = new NavigationHistoryControl();
-	}
+        this.modifyFeature.activateControl();
+    }
 
-	/**
-	 * Add Control to the Map
-	 * 
-	 */
-	private void addMapControl() {
-		this.map.addControl(this.drawFeature.getControl());
-		this.map.addControl(this.drawLineFeature.getControl());
-		this.map.addControl(this.drawPointFeature.getControl());
-		this.map.addControl(this.modifyFeature.getControl());
-		this.map.addControl(this.featureOperation.getControl());
-		this.map.addControl(this.navigationHistory.getControl());
+    /**
+     * Draw Feature on the Map
+     * 
+     * @param wkt
+     */
+    public void drawFeatureOnMap(String wkt) {
+        MultiPolygon geom = MultiPolygon.narrowToMultiPolygon(Geometry.fromWKT(
+                wkt).getJSObject());
+        geom.transform(new Projection("EPSG:4326"), new Projection(
+                "EPSG:900913"));
+        VectorFeature vectorFeature = new VectorFeature(geom);
+        this.vector.addFeature(vectorFeature);
+        this.map.zoomToExtent(geom.getBounds());
+    }
 
-		this.modifyFeature.activateControl();
-	}
+    /**
+     * 
+     * @param feature
+     */
+    public void drawFeature(VectorFeature feature) {
+        if (vector.getFeatureById(feature.getFeatureId()) == null) {
+            this.vector.addFeature(feature);
+        }
+        this.map.zoomToExtent(feature.getGeometry().getBounds());
+    }
 
-	/**
-	 * Draw Feature on the Map
-	 * 
-	 * @param wkt
-	 */
-	public void drawFeatureOnMap(String wkt) {
-		MultiPolygon geom = MultiPolygon.narrowToMultiPolygon(Geometry.fromWKT(
-				wkt).getJSObject());
-		geom.transform(new Projection("EPSG:4326"), new Projection(
-				"EPSG:900913"));
-		VectorFeature vectorFeature = new VectorFeature(geom);
-		this.vector.addFeature(vectorFeature);
-		this.map.zoomToExtent(geom.getBounds());
-	}
+    /**
+     * Erase all Features added to Vector Layer
+     */
+    public void eraseFeatures() {
+        this.vector.destroyFeatures();
+    }
 
-	/**
-	 * 
-	 * @param feature
-	 */
-	public void drawFeature(VectorFeature feature) {
-		if (vector.getFeatureById(feature.getFeatureId()) == null)
-			this.vector.addFeature(feature);
-		this.map.zoomToExtent(feature.getGeometry().getBounds());
-	}
+    /**
+     * Erase Single Feature from the Map
+     * 
+     * @param vf
+     */
+    public void eraseFeature(VectorFeature vf) {
+        this.vector.removeFeature(vf);
+        this.vector.redraw();
+    }
 
-	/**
-	 * Erase all Features added to Vector Layer
-	 */
-	public void eraseFeatures() {
-		this.vector.destroyFeatures();
-	}
+    /**
+     * activate draw feature control on the map
+     */
+    public void activateDrawFeature() {
+        this.drawFeature.activateControl();
+    }
 
-	/**
-	 * Erase Single Feature from the Map
-	 * 
-	 * @param vf
-	 */
-	public void eraseFeature(VectorFeature vf) {
-		this.vector.removeFeature(vf);
-		this.vector.redraw();
-	}
+    /**
+     * deactivate draw feature control on the map
+     */
+    public void deactivateDrawFeature() {
+        this.drawFeature.deactivateControl();
+    }
 
-	/**
-	 * activate draw feature control on the map
-	 */
-	public void activateDrawFeature() {
-		this.drawFeature.activateControl();
-	}
+    /**
+     * 
+     * @return DrawFeature
+     */
+    public DrawFeature getDrawFeatureControl() {
+        return this.drawFeature.getControl();
+    }
 
-	/**
-	 * deactivate draw feature control on the map
-	 */
-	public void deactivateDrawFeature() {
-		this.drawFeature.deactivateControl();
-	}
+    public DrawFeature getDrawPointFeaureControl() {
+        return this.drawPointFeature.getControl();
+    }
 
-	/**
-	 * 
-	 * @return DrawFeature
-	 */
-	public DrawFeature getDrawFeatureControl() {
-		return this.drawFeature.getControl();
-	}
+    /**
+     * 
+     * @return ModifyFeature
+     */
+    public ModifyFeature getModifyFeatureControl() {
+        return this.modifyFeature.getControl();
+    }
 
-	public DrawFeature getDrawPointFeaureControl() {
-		return this.drawPointFeature.getControl();
-	}
+    /**
+     * 
+     * @return SelectFeature
+     */
+    public SelectFeature getSelectFeatureControl() {
+        return this.featureOperation.getControl();
+    }
 
-	/**
-	 * 
-	 * @return ModifyFeature
-	 */
-	public ModifyFeature getModifyFeatureControl() {
-		return this.modifyFeature.getControl();
-	}
+    /**
+     * @return the featureOperation
+     */
+    public GenericFeatureOperation getFeatureOperation() {
+        return featureOperation;
+    }
 
-	/**
-	 * 
-	 * @return SelectFeature
-	 */
-	public SelectFeature getSelectFeatureControl() {
-		return this.featureOperation.getControl();
-	}
+    /**
+     * @return the navigationHistory
+     */
+    public NavigationHistoryControl getNavigationHistory() {
+        return navigationHistory;
+    }
 
-	/**
-	 * @return the featureOperation
-	 */
-	public GenericFeatureOperation getFeatureOperation() {
-		return featureOperation;
-	}
+    /**
+     * @return the drawLineFeature
+     */
+    public DrawLineFeature getDrawLineFeature() {
+        return drawLineFeature;
+    }
 
-	/**
-	 * @return the navigationHistory
-	 */
-	public NavigationHistoryControl getNavigationHistory() {
-		return navigationHistory;
-	}
+    /**
+     * Redraw the Vector Layer
+     */
+    public void redrawVectorLayer() {
+        this.vector.redraw();
+    }
 
-	/**
-	 * @return the drawLineFeature
-	 */
-	public DrawLineFeature getDrawLineFeature() {
-		return drawLineFeature;
-	}
+    public void activateDrawPointFeature() {
+        this.drawPointFeature.activateControl();
+    }
 
-	/**
-	 * Redraw the Vector Layer
-	 */
-	public void redrawVectorLayer() {
-		this.vector.redraw();
-	}
+    public void deactivateDrawPointFeature() {
+        this.drawPointFeature.deactivateControl();
+    }
 
-	public void activateDrawPointFeature() {
-		this.drawPointFeature.activateControl();
-	}
+    public void activateFeatureOperation() {
+        this.featureOperation.activateControl();
+    }
 
-	public void deactivateDrawPointFeature() {
-		this.drawPointFeature.deactivateControl();
-	}
+    public void deactivateFeatureOperation() {
+        this.featureOperation.deactivateControl();
+    }
 
-	public void activateFeatureOperation() {
-		this.featureOperation.activateControl();
-	}
+    public boolean isFeatureOperationEnable() {
+        return this.featureOperation.isEnabled();
+    }
 
-	public void deactivateFeatureOperation() {
-		this.featureOperation.deactivateControl();
-	}
+    public void activateModifyFeature() {
+        this.modifyFeature.activateControl();
+    }
 
-	public boolean isFeatureOperationEnable() {
-		return this.featureOperation.isEnabled();
-	}
+    public void deactivateModifyFeature() {
+        this.modifyFeature.deactivateControl();
+    }
 
-	public void activateModifyFeature() {
-		this.modifyFeature.activateControl();
-	}
+    public boolean isModifyFeatureEnable() {
+        return this.modifyFeature.isEnabled();
+    }
 
-	public void deactivateModifyFeature() {
-		this.modifyFeature.deactivateControl();
-	}
+    public int getFeaturesNumber() {
+        return this.vector.getNumberOfFeatures();
+    }
 
-	public boolean isModifyFeatureEnable() {
-		return this.modifyFeature.isEnabled();
-	}
+    public void clearNavigationHistory() {
+        this.navigationHistory.clearHistory();
+    }
 
-	public int getFeaturesNumber() {
-		return this.vector.getNumberOfFeatures();
-	}
+    public void activateNavigationHistory() {
+        this.navigationHistory.activateControl();
+    }
 
-	public void clearNavigationHistory() {
-		this.navigationHistory.clearHistory();
-	}
+    public void deactivateNavigationHistory() {
+        this.navigationHistory.deactivateControl();
+    }
 
-	public void activateNavigationHistory() {
-		this.navigationHistory.activateControl();
-	}
+    public void activateDrawLineFeature() {
+        this.drawLineFeature.activateControl();
+    }
 
-	public void deactivateNavigationHistory() {
-		this.navigationHistory.deactivateControl();
-	}
-
-	public void activateDrawLineFeature() {
-		this.drawLineFeature.activateControl();
-	}
-
-	public void deactivateDrawLineFeature() {
-		this.drawLineFeature.deactivateControl();
-	}
+    public void deactivateDrawLineFeature() {
+        this.drawLineFeature.deactivateControl();
+    }
 }

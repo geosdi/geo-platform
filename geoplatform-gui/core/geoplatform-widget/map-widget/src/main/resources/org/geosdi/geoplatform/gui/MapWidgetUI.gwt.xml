@@ -1,9 +1,10 @@
   <!-- Inherit the core Web Toolkit stuff. -->
 <module>
-	<inherits name='org.gwtopenmaps.openlayers.OpenLayers' />
+    <inherits name='org.gwtopenmaps.openlayers.OpenLayers' />
 	
-	<source path="client" />
+    <source path="client" />
+    <source path="featureinfo" />
 
-	<entry-point class='org.geosdi.geoplatform.gui.client.MapWidgetUI' />
+    <entry-point class='org.geosdi.geoplatform.gui.client.MapWidgetUI' />
 
 </module>

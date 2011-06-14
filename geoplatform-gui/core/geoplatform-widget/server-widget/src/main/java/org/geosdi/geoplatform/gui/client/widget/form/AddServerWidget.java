@@ -36,9 +36,12 @@
 package org.geosdi.geoplatform.gui.client.widget.form;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.KeyListener;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
@@ -92,6 +95,14 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
         this.serverTextField = new TextField<String>();
         this.serverTextField.setFieldLabel("Server");
 
+        this.serverTextField.addListener(Events.OnPaste, new Listener() {
+
+            @Override
+            public void handleEvent(BaseEvent be) {
+                save.enable();
+            }
+        });
+        
         this.serverTextField.addKeyListener(new KeyListener() {
 
             @Override

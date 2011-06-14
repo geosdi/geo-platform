@@ -147,11 +147,11 @@ public class DisplayServerWidget {
      * @return String
      */
     private native String getTemplate() /*-{
-        return  [
-            '<tpl for=".">',
-                '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{urlServer}</div>',
-            '</tpl>'
-        ].join("");
+    return  [
+    '<tpl for=".">',
+    '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{urlServer}</div>',
+    '</tpl>'
+    ].join("");
     }-*/;
 
     /**
@@ -200,6 +200,7 @@ public class DisplayServerWidget {
     public void resetComponents() {
         this.store.removeAll();
         this.comboServer.setRawValue("");
+        this.comboServer.clearSelections();
     }
 
     /**

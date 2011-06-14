@@ -219,7 +219,6 @@ public class DTOConverter {
             if (layer instanceof MementoRaster) {
                 MementoRaster memento = (MementoRaster) layer;
                 GPRasterLayer raster = new GPRasterLayer();
-                raster.setAbstractText(memento.getAbstractText());
                 raster.setBbox(new GPBBox(memento.getLowerLeftX(),
                         memento.getLowerLeftY(),
                         memento.getUpperRightX(), memento.getUpperRightY()));
@@ -228,11 +227,12 @@ public class DTOConverter {
                 raster.setFolder(folder);
                 raster.setId(memento.getIdBaseElement());
                 //raster.setLayerInfo();???
-                raster.setName(memento.getLayerName());
+                raster.setAbstractText(memento.getAbstractText());
+                raster.setName(memento.getTitle());
                 raster.setPosition(memento.getzIndex());
                 //raster.setShared();???
                 raster.setSrs(memento.getSrs());
-                raster.setTitle(memento.getTitle());
+                raster.setTitle(memento.getLayerName());
                 raster.setUrlServer(memento.getDataSource());
                 raster.setLayerType(GPLayerType.RASTER);
                 layersList.add(raster);

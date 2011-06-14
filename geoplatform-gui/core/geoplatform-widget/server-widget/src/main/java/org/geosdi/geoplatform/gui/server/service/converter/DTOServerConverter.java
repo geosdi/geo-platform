@@ -113,8 +113,8 @@ public class DTOServerConverter {
             for (ShortLayerDTO layer : layers) {
                 GPRasterLayerGrid raster = new GPRasterLayerGrid();
                 raster.setId(layer.getId());
-                raster.setLabel(layer.getTitle());
-                raster.setName(layer.getName());
+                raster.setLabel(layer.getName());
+                raster.setName(layer.getTitle());
                 raster.setAbstractText(layer.getAbstractText());
                 raster.setLayerType(GPLayerType.RASTER);
                 raster.setDataSource(layer.getUrlServer());

@@ -85,6 +85,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         this.changeProgressBarMessage(
                 "Loading " + layers.size() + " Raster Layers into the Store");
         GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
+        super.tree.setExpanded(parentDestination, true);
         List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
         for (Iterator it = layers.iterator(); it.hasNext();) {
             layerList.add(this.convertGPRasterBeanModelToRasterTreeNode(
@@ -108,9 +109,9 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         raster.setChecked(false);
         raster.setCrs(rasterBean.getCrs());
         raster.setDataSource(rasterBean.getDataSource());
-        raster.setLabel(rasterBean.getName());
+        raster.setLabel(rasterBean.getLabel());
         raster.setLayerType(rasterBean.getLayerType());
-        raster.setName(rasterBean.getLabel());
+        raster.setName(rasterBean.getName());
         raster.setStyles(rasterBean.getStyles());
         raster.setzIndex(rasterBean.getzIndex());
         return raster;
@@ -152,7 +153,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
                                 EnumSearchStatus.STATUS_SEARCH.toString());
                         List<AbstractMementoLayer> listMementoLayers = memento.getAddedLayers();
                         for (int i = 0; i < listMementoLayers.size(); i++) {
-                            listMementoLayers.get(i).getRefBaseElement().setId(i);
+                            listMementoLayers.get(i).getRefBaseElement().setId(result.get(i));
                         }
                         LayerHandlerManager.fireEvent(peekCacheEvent);
                     }

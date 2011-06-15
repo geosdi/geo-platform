@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
@@ -74,7 +75,7 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
         boolean isCacheable = this.visitorDisplay.isCacheableCheck();
         this.visitorDisplay.setIsParentsElementModified(false);
         be.getItem().accept(this.visitorDisplay);
-        if (isCacheable) {
+        if (isCacheable && !(be.getItem() instanceof GPRootTreeNode)) {
             IMemento<ISave> precedingMemento = null;
             precedingMemento = GPLayerSaveCache.getInstance().peekLast();
             if (precedingMemento != null && precedingMemento instanceof MementoSaveCheck

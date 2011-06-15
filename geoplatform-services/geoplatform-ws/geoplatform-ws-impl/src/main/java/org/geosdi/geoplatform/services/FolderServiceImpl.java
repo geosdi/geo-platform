@@ -68,7 +68,7 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 class FolderServiceImpl {
 
     final private static Logger logger = LoggerFactory.getLogger(FolderServiceImpl.class);
-    //
+    // DAO
     private GPFolderDAO folderDao;
     private GPUserDAO userDao;
     private GPLayerDAO layerDao;

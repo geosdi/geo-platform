@@ -63,7 +63,6 @@ public class CXFServiceTest extends ServiceTest {
     private long idServerTest = -1;
     // Server geoSDI
     private final String serverUrlGeoSDI = "http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
-    private final int numLayersGeoSDI = 251;
 
     @Override
     public void setUp() throws Exception {
@@ -172,7 +171,6 @@ public class CXFServiceTest extends ServiceTest {
 
         Collection<ShortLayerDTO> layersList = serverDTO.getLayersDTO();
         Assert.assertNotNull("Collection of ShortLayerDTO is NULL for server geoSDI", layersList);
-        Assert.assertEquals("Number of layer into Collection of ShortLayerDTO is NOT correct", numLayersGeoSDI, layersList.size());
 
         // Server is NOT into DB
         String serverUrlEx = "http://iws.erdas.com/ecwp/ecw_wms.dll?request=GetCapabilities";

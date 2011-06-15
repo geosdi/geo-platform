@@ -70,7 +70,7 @@ import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 class LayerServiceImpl {
 
     final private static Logger logger = LoggerFactory.getLogger(LayerServiceImpl.class);
-    //
+    // DAO
     private GPFolderDAO folderDao;
     private GPLayerDAO layerDao;
     private GPStyleDAO styleDao;
@@ -156,7 +156,8 @@ class LayerServiceImpl {
         return layerDao.remove(layer);
     }
 
-    public long saveAddedLayerAndTreeModifications(GPLayer layer, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
+    public long saveAddedLayerAndTreeModifications(GPLayer layer, GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder parent = layer.getFolder();
         if (parent == null) {
             throw new IllegalParameterFault("Parent of layer not found " + layer.getId());
@@ -180,7 +181,8 @@ class LayerServiceImpl {
         return layer.getId();
     }
 
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers, GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         GPLayer[] layersArray = layers.toArray(new GPLayer[layers.size()]);
 
         GPFolder parent = null;
@@ -319,7 +321,7 @@ class LayerServiceImpl {
                 addFilterLessOrEqual("position", startFirstRange);
         List<GPFolder> matchingFoldersFirstRange = folderDao.search(search);
         List<GPLayer> matchingLayersFirstRange = layerDao.search(search);
-        
+
         if (layerMoved.getPosition() < newPosition) {// Drag & Drop to top
             this.executeFoldersModifications(matchingFoldersFirstRange, -shiftValue);
             this.executeLayersModifications(matchingLayersFirstRange, -shiftValue);
@@ -437,6 +439,7 @@ class LayerServiceImpl {
 
     private List<StyleDTO> convertToStyleList(List<GPStyle> foundStyle) {
         List<StyleDTO> stylesDTO = new ArrayList<StyleDTO>(foundStyle.size());
+
         for (GPStyle style : foundStyle) {
             stylesDTO.add(new StyleDTO(style));
         }
@@ -446,6 +449,7 @@ class LayerServiceImpl {
 
     private List<ShortLayerDTO> convertToLayerList(List<GPLayer> layerList) {
         List<ShortLayerDTO> layersDTO = new ArrayList<ShortLayerDTO>(layerList.size());
+
         for (GPLayer layer : layerList) {
             layersDTO.add(new ShortLayerDTO(layer));
         }
@@ -470,10 +474,6 @@ class LayerServiceImpl {
      * @return IDs of folder argument and his ancestor folders
      */
     private Long[] getIdsFolderAndAncestors(GPFolder folder) {
-        assert (folder != null) : "Folder in getFolderAndAncestorsId must be NOT NULL";
-        assert ((folder.getOwner() == null && folder.getParent() != null)
-                || (folder.getOwner() != null && folder.getParent() == null)) :
-                "getFolderAndAncestorsId - Illegal Argument Exception: folder must have or Owner or Parent NOT NULL";
         List<Long> ancestors = new ArrayList<Long>();
         ancestors.add(folder.getId());
 

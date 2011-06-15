@@ -305,9 +305,9 @@ public abstract class BaseDAOTest {
         // GPRasterLayer
         GPRasterLayer rasterLayer1 = new GPRasterLayer();
         rasterLayer1.setName("StratiDiBase:deagostini_ita_250mila");
-        rasterLayer1.setPosition(position);
-        rasterLayer1.setAbstractText("deagostini_ita_250mila");
         rasterLayer1.setTitle("deagostini");
+        rasterLayer1.setPosition(position);
+        rasterLayer1.setAbstractText("deagostini_ita_250mila");        
         rasterLayer1.setSrs("EPSG:4326");
         rasterLayer1.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
         rasterLayer1.setBbox(new GPBBox(6.342, 35.095, 19.003, 47.316));
@@ -337,9 +337,9 @@ public abstract class BaseDAOTest {
     protected GPVectorLayer createVectorLayer(int position, GPFolder folder) {
         GPVectorLayer vectorLayer1 = new GPVectorLayer();
         vectorLayer1.setName("Name of vectorLayer");
-        vectorLayer1.setPosition(position);
-        vectorLayer1.setAbstractText("AbstractText of vectorLayer");
         vectorLayer1.setTitle("Title of vectorLayer");
+        vectorLayer1.setPosition(position);
+        vectorLayer1.setAbstractText("AbstractText of vectorLayer");        
         vectorLayer1.setSrs("EPSG:4326");
         vectorLayer1.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
         vectorLayer1.setBbox(new GPBBox(1.1, 2.2, 3.3, 3.3));
@@ -374,6 +374,7 @@ public abstract class BaseDAOTest {
 
                 GPRasterLayer raster = new GPRasterLayer();
                 raster.setName(layer.getName());
+                raster.setTitle(layer.getTitle());
                 raster.setAbstractText(layer.get_abstract());
                 raster.setSrs(layer.getSrs().toString());
                 raster.setBbox(new GPBBox(

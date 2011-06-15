@@ -211,16 +211,16 @@ public class WSLayerTest extends ServiceTest {
 
     @Test
     public void testUpdateRasterLayer() {
-        final String nameLayerUpdated = "rasterLayerUpdated";
+        final String titleLayerUpdated = "rasterLayerUpdated";
         try {
             raster1.setFolder(rootFolderB);
-            raster1.setName(nameLayerUpdated);
+            raster1.setTitle(titleLayerUpdated);
 
             geoPlatformService.updateRasterLayer(raster1);
             ShortLayerDTO layerUpdated = geoPlatformService.getShortLayer(idRaster1);
 
             Assert.assertNotNull("assertNotNull layerUpdated", layerUpdated);
-            Assert.assertEquals("assertEquals layerUpdated.getName()", layerUpdated.getName(), nameLayerUpdated);
+            Assert.assertEquals("assertEquals layerUpdated.getTitle()", layerUpdated.getTitle(), titleLayerUpdated);
         } catch (IllegalParameterFault ipf) {
             Assert.fail("Layer has an Illegal Parameter");
         } catch (ResourceNotFoundFault rnnf) {
@@ -621,6 +621,7 @@ public class WSLayerTest extends ServiceTest {
             Assert.fail("Layer with id \"" + rnnf.getId() + "\" was NOT found");
         }
     }
+
     private void checkInitialState()
             throws ResourceNotFoundFault {
         rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));

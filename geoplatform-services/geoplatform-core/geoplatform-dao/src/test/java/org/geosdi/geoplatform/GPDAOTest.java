@@ -101,8 +101,8 @@ public class GPDAOTest extends BaseDAOTest {
 
         rasterLayer = super.createRasterLayer(beginPosition + 30, folderB); // 333030
         vectorLayer = super.createVectorLayer(beginPosition, folderB); // 333000
-        rasterLayer.setName(rasterLayer.getName() + "_position_test");
-        vectorLayer.setName(vectorLayer.getName() + "_position_test");
+        rasterLayer.setTitle(rasterLayer.getTitle() + "_position_test");
+        vectorLayer.setTitle(vectorLayer.getTitle() + "_position_test");
         rasterLayer.setChecked(false);
         vectorLayer.setChecked(true);
         //
@@ -133,28 +133,28 @@ public class GPDAOTest extends BaseDAOTest {
         layerInfo.setKeywords(layerInfoKeywords);
         layerInfo.setQueryable(false);
 
-        String nameRasterLayer3 = "Raster Layer 3";
-        String nameVectorLayer3 = "Vector Layer 3";
+        String titleRasterLayer3 = "Raster Layer 3";
+        String titleVectorLayer3 = "Vector Layer 3";
+        
         try {
-
             // "folder_position_test_A" ---> "rasterLayer3"
             GPRasterLayer rasterLayer3 = super.createRasterLayer(beginPosition, folderA);
-            rasterLayer3.setName(nameRasterLayer3);
+            rasterLayer3.setTitle(titleRasterLayer3);
             rasterLayer3.setChecked(false);
 
             // "folder_position_test_A" ---> "vectorLayer3"
             GPVectorLayer vectorLayer3 = super.createVectorLayer(beginPosition, folderA);
-            vectorLayer3.setName(nameVectorLayer3);
+            vectorLayer3.setTitle(titleVectorLayer3);
             vectorLayer3.setChecked(true);
 
             // "folder_position_test_A" ---> "rasterLayer4"
             GPRasterLayer rasterLayer4 = super.createRasterLayer(beginPosition, folderA);
-            rasterLayer4.setName(null);
+            rasterLayer4.setTitle(null);
             rasterLayer4.setChecked(false);
 
             // "folder_position_test_A" ---> "vectorLayer4"
             GPVectorLayer vectorLayer4 = super.createVectorLayer(beginPosition, folderA);
-            vectorLayer4.setName(null);
+            vectorLayer4.setTitle(null);
             vectorLayer4.setChecked(true);
             //
             ArrayList<GPLayer> layersList = new ArrayList<GPLayer>();
@@ -169,10 +169,10 @@ public class GPDAOTest extends BaseDAOTest {
         } catch (Exception ex) {
         }
 
-        GPLayer newRasterLayer3 = layerDAO.findByLayerName(nameRasterLayer3);
+        GPLayer newRasterLayer3 = layerDAO.findByLayerName(titleRasterLayer3);
         Assert.assertNull("rasterLayer3 must be null", newRasterLayer3);
 
-        GPLayer newVectorLayer3 = layerDAO.findByLayerName(nameVectorLayer3);
+        GPLayer newVectorLayer3 = layerDAO.findByLayerName(titleVectorLayer3);
         Assert.assertNull("rectorLayer3 must be null", newVectorLayer3);
     }
 

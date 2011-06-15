@@ -28,18 +28,18 @@
     </root>
     
     <logger name="org.geosdi.geoplatform.services.AclServiceImpl" level="info"/>
-    <logger name="org.geosdi.geoplatform.services.FolderServiceImpl" level="trace"/>
+    <logger name="org.geosdi.geoplatform.services.FolderServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.GeoPlatformServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.LayerServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.UserServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.WMSServiceImpl" level="info"/>
     
-    <logger name="org.geosdi.geoplatform.CXFServiceTest" level="trace"/>
+    <logger name="org.geosdi.geoplatform.CXFServiceTest" level="info"/>
     <logger name="org.geosdi.geoplatform.WSFolderLayerTest" level="info"/>
-    <logger name="org.geosdi.geoplatform.WSFolderTest" level="trace"/>
+    <logger name="org.geosdi.geoplatform.WSFolderTest" level="info"/>
     <logger name="org.geosdi.geoplatform.WSUsersTest" level="info"/>
     
-    <logger name="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" level="trace"/>
+    <logger name="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPLayerDAOImpl" level="info"/>    
 
 </configuration>

@@ -77,16 +77,16 @@ class UserServiceImpl {
      * @return long the User ID
      */
     public long insertUser(GPUser user) {
-        // Always insert users as disabled
+        // Always insert users as enabled
         user.setEnabled(true);
         userDao.persist(user);
 
         return user.getId();
     }
 
-    public long updateUser(GPUser user) throws ResourceNotFoundFault, IllegalParameterFault {
+    public long updateUser(GPUser user)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         GPUser orig = userDao.find(user.getId());
-
         if (orig == null) {
             throw new ResourceNotFoundFault("User not found", user.getId());
         }
@@ -97,7 +97,6 @@ class UserServiceImpl {
         }
 
         if (user.isEnabled() != orig.isEnabled()) {
-
             throw new IllegalParameterFault("Can't change user enabled status for user:" + user.getId());
         }
 
@@ -118,9 +117,9 @@ class UserServiceImpl {
      *
      * @throws ResourceNotFoundFault
      */
-    public boolean deleteUser(RequestById request) throws ResourceNotFoundFault, IllegalParameterFault {
+    public boolean deleteUser(RequestById request)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         GPUser user = userDao.find(request.getId());
-
         if (user == null) {
             throw new ResourceNotFoundFault("User not found", request.getId());
         }
@@ -136,15 +135,14 @@ class UserServiceImpl {
      * @return UserDTO the short User object
      * @throws ResourceNotFoundFault
      */
-    public UserDTO getShortUser(RequestById request) throws ResourceNotFoundFault {
+    public UserDTO getShortUser(RequestById request)
+            throws ResourceNotFoundFault {
         GPUser user = userDao.find(request.getId());
-
         if (user == null) {
             throw new ResourceNotFoundFault("User not found", request.getId());
         }
 
-        UserDTO userDTO = new UserDTO(user);
-        return userDTO;
+        return new UserDTO(user);
     }
 
     /**
@@ -155,9 +153,9 @@ class UserServiceImpl {
      * @return GPUser the detailed User object
      * @throws ResourceNotFoundFault
      */
-    public GPUser getUserDetail(RequestById request) throws ResourceNotFoundFault {
+    public GPUser getUserDetail(RequestById request)
+            throws ResourceNotFoundFault {
         GPUser user = userDao.find(request.getId());
-
         if (user == null) {
             throw new ResourceNotFoundFault("User not found", request.getId());
         }
@@ -173,15 +171,14 @@ class UserServiceImpl {
      * @return UserDTO the short User object
      * @throws ResourceNotFoundFault
      */
-    public UserDTO getShortUserByName(SearchRequest username) throws ResourceNotFoundFault {
+    public UserDTO getShortUserByName(SearchRequest username)
+            throws ResourceNotFoundFault {
         GPUser user = userDao.findByUsername(username.getNameLike());
-
         if (user == null) {
-            throw new ResourceNotFoundFault("User not found (name=" + username.getNameLike() + ")");
+            throw new ResourceNotFoundFault("User not found (username=" + username.getNameLike() + ")");
         }
 
-        UserDTO userDTO = new UserDTO(user);
-        return userDTO;
+        return new UserDTO(user);
     }
 
     /**
@@ -192,11 +189,11 @@ class UserServiceImpl {
      * @return GPUser the detailed User object
      * @throws ResourceNotFoundFault
      */
-    public GPUser getUserDetailByName(SearchRequest username) throws ResourceNotFoundFault {
+    public GPUser getUserDetailByName(SearchRequest username)
+            throws ResourceNotFoundFault {
         GPUser user = userDao.findByUsername(username.getNameLike());
-
         if (user == null) {
-            throw new ResourceNotFoundFault("User not found (name=" + username.getNameLike() + ")");
+            throw new ResourceNotFoundFault("User not found (username=" + username.getNameLike() + ")");
         }
 
         return user;
@@ -210,7 +207,6 @@ class UserServiceImpl {
      * @return Users the list of Users found
      */
     public List<UserDTO> searchUsers(PaginatedSearchRequest request) {
-
         Search searchCriteria = new Search(GPUser.class);
         searchCriteria.setMaxResults(request.getNum());
         searchCriteria.setPage(request.getPage());
@@ -243,6 +239,7 @@ class UserServiceImpl {
 
     private List<UserDTO> convertToUserList(List<GPUser> userList) {
         List<UserDTO> usersDTO = new ArrayList<UserDTO>(userList.size());
+        
         for (GPUser dGUser : userList) {
             usersDTO.add(new UserDTO(dGUser));
         }

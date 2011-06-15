@@ -76,9 +76,9 @@ import org.opengis.util.InternationalString;
 class WMSServiceImpl {
 
     final private Logger logger = LoggerFactory.getLogger(WMSServiceImpl.class);
+    // DAO
     private GPServerDAO serverDao;
 
-    //<editor-fold defaultstate="collapsed" desc="Setter method">
     /**
      * @param serverDao
      *            the serverDao to set
@@ -86,13 +86,10 @@ class WMSServiceImpl {
     public void setServerDao(GPServerDAO serverDao) {
         this.serverDao = serverDao;
     }
-    //</editor-fold>
 
     public long insertServer(GeoPlatformServer server) {
         /** IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER **/
-        GeoPlatformServer serverSearch = serverDao.findByServerUrl(
-                server.getServerUrl());
-
+        GeoPlatformServer serverSearch = serverDao.findByServerUrl(server.getServerUrl());
         if (serverSearch != null) {
             return serverSearch.getId();
         }
@@ -123,7 +120,6 @@ class WMSServiceImpl {
     public boolean deleteServer(long idServer)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GeoPlatformServer server = serverDao.find(idServer);
-
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found", idServer);
         }
@@ -134,7 +130,6 @@ class WMSServiceImpl {
     public GeoPlatformServer getServerDetail(long idServer)
             throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(idServer);
-
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found", idServer);
         }
@@ -142,15 +137,14 @@ class WMSServiceImpl {
         return server;
     }
 
-    public ServerDTO getShortServer(String serverUrl) throws ResourceNotFoundFault {
+    public ServerDTO getShortServer(String serverUrl)
+            throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
-
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found " + serverUrl);
         }
 
-        ServerDTO serverDTO = new ServerDTO(server);
-        return serverDTO;
+        return new ServerDTO(server);
     }
 
     public List<ServerDTO> getServers() {
@@ -161,7 +155,6 @@ class WMSServiceImpl {
     public GeoPlatformServer getServerDetailByUrl(String serverUrl)
             throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
-
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found by URL");
         }
@@ -171,7 +164,6 @@ class WMSServiceImpl {
 
     public ServerDTO getCapabilities(RequestById request)
             throws ResourceNotFoundFault {
-
         GeoPlatformServer server = serverDao.find(request.getId());
         if (server == null) {
             throw new ResourceNotFoundFault("Server has been deleted", request.getId());

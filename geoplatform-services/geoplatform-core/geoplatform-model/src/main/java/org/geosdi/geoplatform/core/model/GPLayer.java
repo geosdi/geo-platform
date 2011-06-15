@@ -75,9 +75,12 @@ public abstract class GPLayer implements Serializable {
     @SequenceGenerator(name = "GP_LAYER_SEQ", sequenceName = "GP_LAYER_SEQ")
     private long id;
     //
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
     //
+    @Column(name = "title", nullable = false)
+    private String title;
+    //    
     @Column(name = "position")
     private int position = -1;
     //
@@ -86,9 +89,6 @@ public abstract class GPLayer implements Serializable {
     //
     @Column(name = "abstract")
     private String abstractText;
-    //
-    @Column(name = "title")
-    private String title;
     //
     @Column(name = "url_server")
     private String urlServer;
@@ -137,6 +137,21 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
+     * @return the title
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * @param title
+     *            the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
      * @return the position
      */
     public int getPosition() {
@@ -176,21 +191,6 @@ public abstract class GPLayer implements Serializable {
      */
     public void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
-    }
-
-    /**
-     * @return the title
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * @param title
-     *            the title to set
-     */
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     /**
@@ -316,16 +316,13 @@ public abstract class GPLayer implements Serializable {
      */
     @Override
     public String toString() {
-        assert (getFolder() != null) :
-                "GPLayer.toString() - Layer must have always a folder parent (NOT NULL)";
-
         StringBuilder str = new StringBuilder();
         str.append("id=").append(id);
         str.append(", name=").append(name);
+        str.append(", title=").append(title);
         str.append(", position=").append(position);
         str.append(", shared=").append(shared);
         str.append(", abstractText=").append(abstractText);
-        str.append(", title=").append(title);
         str.append(", urlServer=").append(urlServer);
         str.append(", srs=").append(srs);
         str.append(", bbox=").append(bbox);

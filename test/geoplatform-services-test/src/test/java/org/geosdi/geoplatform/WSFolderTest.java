@@ -494,9 +494,6 @@ public class WSFolderTest extends ServiceTest {
         descendantsMapData.setDescendantsMap(map);
         try {
             // Move folder B before folder A (oldPosition < new Position)
-            
-            System.out.println("### rootFolderB: " + rootFolderB.getPosition());
-            
             boolean checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
                     super.idRootFolderB, 0, super.userTest, 7, descendantsMapData);
             Assert.assertTrue("Folder B doesn't moved to position 7", checkDD);

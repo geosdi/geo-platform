@@ -43,17 +43,16 @@ import java.util.Map;
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.UnsupportedCallbackException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.ws.security.WSPasswordCallback;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ServerKeystorePasswordCallback implements CallbackHandler {
 
-    private Log logger = LogFactory.getLog(this.getClass());
-    
-    private Map<String, String> passwords = 
-        new HashMap<String, String>();
-    
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    private Map<String, String> passwords = new HashMap<String, String>();
+
     public ServerKeystorePasswordCallback() {
         passwords.put("client", "clientstorepwd");
         passwords.put("server", "serverpwd");
@@ -65,10 +64,11 @@ public class ServerKeystorePasswordCallback implements CallbackHandler {
      * It attempts to get the password from the private 
      * alias/passwords map.
      */
+    @Override
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
         for (int i = 0; i < callbacks.length; i++) {
-            WSPasswordCallback pc = (WSPasswordCallback)callbacks[i];
-            
+            WSPasswordCallback pc = (WSPasswordCallback) callbacks[i];
+
 //            logger.info("########### Alias server: " + pc.getIdentifier());
             logger.info("########### pc.getUsage(): " + pc.getUsage());
 
@@ -81,7 +81,7 @@ public class ServerKeystorePasswordCallback implements CallbackHandler {
             logger.info("########### WSPasswordCallback.ENCRYPTED_KEY_TOKEN: " + WSPasswordCallback.ENCRYPTED_KEY_TOKEN);
             logger.info("########### WSPasswordCallback.USERNAME_TOKEN_UNKNOWN: " + WSPasswordCallback.USERNAME_TOKEN_UNKNOWN);
             logger.info("########### WSPasswordCallback.KEY_NAME: " + WSPasswordCallback.KEY_NAME);
-            
+
             String pass = passwords.get(pc.getIdentifier());
             if (pass != null) {
                 pc.setPassword(pass);
@@ -89,12 +89,11 @@ public class ServerKeystorePasswordCallback implements CallbackHandler {
             }
         }
     }
-    
+
     /**
      * Add an alias/password pair to the callback mechanism.
      */
     public void setAliasPassword(String alias, String password) {
         passwords.put(alias, password);
     }
-    
 }

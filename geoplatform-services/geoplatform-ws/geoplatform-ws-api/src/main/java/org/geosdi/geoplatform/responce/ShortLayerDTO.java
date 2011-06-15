@@ -52,14 +52,14 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"id", "name", "position", "shared", "checked",
-    "urlServer", "srs", "abstractText", "title", "layerType", "bbox"})
+    "title", "urlServer", "srs", "abstractText", "layerType", "bbox"})
 @XmlSeeAlso(value = {RasterLayerDTO.class, VectorLayerDTO.class})
 public class ShortLayerDTO extends AbstractElementDTO {
 
+    private String title;
     private String urlServer;
     private String srs;
     private String abstractText;
-    private String title;
     private GPLayerType layerType;
     private GPBBox bbox;
 
@@ -78,28 +78,28 @@ public class ShortLayerDTO extends AbstractElementDTO {
     public ShortLayerDTO(GPLayer layer) {
         super(layer.getId(), layer.getName(), layer.getPosition(),
                 layer.isShared(), layer.isChecked());
+        this.title = layer.getTitle();
         this.urlServer = layer.getUrlServer();
         this.srs = layer.getSrs();
         this.abstractText = layer.getAbstractText();
-        this.title = layer.getTitle();
         this.layerType = layer.getLayerType();
         this.bbox = layer.getBbox();
     }
     //</editor-fold>
 
     /**
-     * @return the srs
+     * @return the title
      */
-    public String getSrs() {
-        return srs;
+    public String getTitle() {
+        return title;
     }
 
     /**
-     * @param srs
-     *            the srs to set
+     * @param title
+     *            the title to set
      */
-    public void setSrs(String srs) {
-        this.srs = srs;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
@@ -118,6 +118,21 @@ public class ShortLayerDTO extends AbstractElementDTO {
     }
 
     /**
+     * @return the srs
+     */
+    public String getSrs() {
+        return srs;
+    }
+
+    /**
+     * @param srs
+     *            the srs to set
+     */
+    public void setSrs(String srs) {
+        this.srs = srs;
+    }
+
+    /**
      * @return the abstractText
      */
     public String getAbstractText() {
@@ -130,21 +145,6 @@ public class ShortLayerDTO extends AbstractElementDTO {
      */
     public void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
-    }
-
-    /**
-     * @return the title
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * @param title
-     *            the title to set
-     */
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     /**
@@ -184,8 +184,8 @@ public class ShortLayerDTO extends AbstractElementDTO {
     @Override
     public String toString() {
         String s = super.toString()
-                + ", urlServer=" + urlServer + ", srs=" + srs
                 + ", title=" + title
+                + ", urlServer=" + urlServer + ", srs=" + srs
                 + ", layerType=" + layerType + ", " + bbox
                 + ", abstractText=" + abstractText;
         return s;

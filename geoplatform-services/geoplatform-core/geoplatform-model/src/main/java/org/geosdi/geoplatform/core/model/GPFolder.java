@@ -224,9 +224,6 @@ public class GPFolder implements Serializable {
      */
     @Override
     public String toString() {
-        assert ((owner == null && parent != null) || (owner != null && parent == null)) :
-                "GPFolder.toString() - Folder must have or Owner or Parent (NOT NULL)";
-
         StringBuilder str = new StringBuilder("GPFolder {");
         str.append(" id=").append(id);
         str.append(", name=").append(name);

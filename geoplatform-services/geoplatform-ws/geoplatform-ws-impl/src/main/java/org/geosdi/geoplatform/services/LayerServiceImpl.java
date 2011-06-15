@@ -47,6 +47,7 @@ import org.slf4j.LoggerFactory;
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPStyleDAO;
+import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
@@ -54,6 +55,7 @@ import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPStyle;
+import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -71,11 +73,29 @@ class LayerServiceImpl {
 
     final private static Logger logger = LoggerFactory.getLogger(LayerServiceImpl.class);
     // DAO
+    private GPUserDAO userDao;
     private GPFolderDAO folderDao;
     private GPLayerDAO layerDao;
     private GPStyleDAO styleDao;
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
+
+    /**
+     * @param userDao 
+     *            the userDao to set
+     */
+    public GPUserDAO getUserDao() {
+        return userDao;
+    }
+
+    /**
+     * @param userDao
+     *            the userDao to set
+     */
+    public void setUserDao(GPUserDAO userDao) {
+        this.userDao = userDao;
+    }
+    
     /**
      * @param folderDao 
      *            the folderDao to set
@@ -419,6 +439,15 @@ class LayerServiceImpl {
         }
 
         return layer.getLayerType();
+    }
+    
+    public List<String> getLayersDataSourceByOwner(String userName) throws ResourceNotFoundFault {
+        GPUser user = userDao.findByUsername(userName);
+        if (user == null) {
+            throw new ResourceNotFoundFault("User with username " + userName + " not found");
+        }
+        
+        return layerDao.findDistinctDataSourceByUserId(user.getId());
     }
 
     /**

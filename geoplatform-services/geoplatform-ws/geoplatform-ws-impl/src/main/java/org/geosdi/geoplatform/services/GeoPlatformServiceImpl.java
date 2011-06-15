@@ -128,6 +128,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.userDao = userDao;
         this.userServiceDelegate.setUserDao(userDao);
         this.folderServiceDelegate.setUserDao(userDao);
+        this.layerServiceDelegate.setUserDao(userDao);
         this.aclServiceDelegate.setUserDao(userDao);
     }
 
@@ -534,6 +535,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     @Override
     public GPLayerType getLayerType(long layerId) throws ResourceNotFoundFault {
         return layerServiceDelegate.getLayerType(layerId);
+    }
+
+    @Override
+    public List<String> getLayersDataSourceByOwner(String userName) throws ResourceNotFoundFault {
+        return layerServiceDelegate.getLayersDataSourceByOwner(userName);
     }
     //</editor-fold>
 

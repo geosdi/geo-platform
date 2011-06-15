@@ -87,6 +87,9 @@ public abstract class GPLayer implements Serializable {
     @Column(name = "shared")
     private boolean shared = false;
     //
+    @Column(name = "owner_id", nullable = false)
+    private long ownerId = -1;
+    //
     @Column(name = "abstract")
     private String abstractText;
     //
@@ -177,6 +180,20 @@ public abstract class GPLayer implements Serializable {
      */
     public void setShared(boolean shared) {
         this.shared = shared;
+    }
+
+    /**
+     * @return the ownerId
+     */
+    public long getOwnerId() {
+        return ownerId;
+    }
+
+    /**
+     * @param ownerId the ownerId to set
+     */
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
     }
 
     /**

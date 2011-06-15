@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.core.model.GPLayer;
  * @author Francesco Izzi - geoSDI
  *
  */
-public interface GPLayerDAO {
+public interface GPLayerDAO<T> {
 
     public List<GPLayer> findAll();
 
@@ -62,11 +62,13 @@ public interface GPLayerDAO {
 
     public boolean removeById(Long layerId);
 
-    public List<GPLayer> search(ISearch search);
+    public List<T> search(ISearch search);
 
     public int count(ISearch search);
 
     public GPLayer findByLayerName(String layerName);
+
+    public List<String> findDistinctDataSourceByUserId(long userId);
 
     public boolean updatePositionsRangeInOppositeWay(int beginPositionFirstRange, int endPositionFirstRange,
             int beginPositionSecondRange, int endPositionSecondRange,

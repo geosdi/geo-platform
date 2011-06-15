@@ -44,6 +44,7 @@ import java.util.List;
 
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.model.GPLayer;
+import org.hibernate.criterion.Projections;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -73,7 +74,7 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<GPLayer> search(ISearch search) {
+    public List search(ISearch search) {
         return super.search(search);
     }
 
@@ -87,6 +88,15 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
         Search search = new Search();
         search.addFilterEqual("name", layerName);
         return searchUnique(search);
+    }
+
+    @Override
+    public List<String> findDistinctDataSourceByUserId(long userId) {
+        Search search = new Search();
+        search.addFilterEqual("ownerId", userId);
+        search.addField("urlServer");
+        search.setDistinct(true);
+        return search(search);
     }
 
     @Override

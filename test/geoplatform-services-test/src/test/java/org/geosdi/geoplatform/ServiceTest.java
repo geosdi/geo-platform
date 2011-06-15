@@ -188,9 +188,9 @@ public abstract class ServiceTest implements InitializingBean {
     }
 
     protected long createAndInsertRasterLayer(String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
-            String srs, String title, String urlServer) {
+            long ownerId, String srs, String title, String urlServer) {
         GPRasterLayer rasterLayer = new GPRasterLayer();
-        createLayer(rasterLayer, abstractText, parentFolder, name, position, shared, srs, title, urlServer);
+        createLayer(rasterLayer, abstractText, parentFolder, name, position, shared, ownerId, srs, title, urlServer);
         rasterLayer.setFolder(parentFolder);
 
         GPLayerInfo layerInfo = new GPLayerInfo();
@@ -204,9 +204,9 @@ public abstract class ServiceTest implements InitializingBean {
     }
 
     protected long createAndInsertVectorLayer(String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
-            String srs, String title, String urlServer) {
+            long ownerId, String srs, String title, String urlServer) {
         GPVectorLayer vectorLayer = new GPVectorLayer();
-        createLayer(vectorLayer, abstractText, parentFolder, name, position, shared, srs, title, urlServer);
+        createLayer(vectorLayer, abstractText, parentFolder, name, position, shared, ownerId, srs, title, urlServer);
         vectorLayer.setFolder(parentFolder);
 
         vectorLayer.setLayerType(GPLayerType.POLYGON);
@@ -215,7 +215,7 @@ public abstract class ServiceTest implements InitializingBean {
     }
 
     protected void createLayer(GPLayer gpLayer, String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
-            String srs, String title, String urlServer) {
+            long ownerId, String srs, String title, String urlServer) {
         double minX = 10;
         double minY = 10;
         double maxX = 20;
@@ -226,6 +226,7 @@ public abstract class ServiceTest implements InitializingBean {
         gpLayer.setName(name);
         gpLayer.setPosition(position);
         gpLayer.setShared(shared);
+        gpLayer.setOwnerId(ownerId);
         gpLayer.setSrs(srs);
         gpLayer.setTitle(title);
         gpLayer.setUrlServer(urlServer);

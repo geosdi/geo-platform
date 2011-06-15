@@ -427,6 +427,15 @@ public interface GeoPlatformService {
     @Get
     @WebResult(name = "LayerType")
     GPLayerType getLayerType(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault;
+
+    /**
+     * @return layer data source of given owner.
+     */
+    @Get
+    @WebResult(name = "LayerDataSources")
+    List<String> getLayersDataSourceByOwner(
+            @WebParam(name = "userName") String userName)
+            throws ResourceNotFoundFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="OWS">

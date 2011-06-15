@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.featureinfo.widget.GPFeatureInfoWidget;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -49,9 +50,12 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
  */
 public class GetFeatureInfoAction extends MapToggleAction {
 
+    private GPFeatureInfoWidget featureWidget;
+
     public GetFeatureInfoAction(GeoPlatformMap mapWidget) {
         super("GetFeatureInfo", BasicWidgetResources.ICONS.getFeatureInfo(),
                 mapWidget);
+        this.featureWidget = new GPFeatureInfoWidget(mapWidget);
     }
 
     @Override

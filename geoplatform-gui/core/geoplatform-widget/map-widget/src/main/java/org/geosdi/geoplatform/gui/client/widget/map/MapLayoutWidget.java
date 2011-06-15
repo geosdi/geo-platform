@@ -56,9 +56,6 @@ import org.gwtopenmaps.openlayers.client.control.LayerSwitcher;
 import org.gwtopenmaps.openlayers.client.control.Measure;
 import org.gwtopenmaps.openlayers.client.control.MeasureOptions;
 import org.gwtopenmaps.openlayers.client.control.ScaleLine;
-import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfo;
-import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfoOptions;
-import org.gwtopenmaps.openlayers.client.event.GetFeatureInfoListener;
 import org.gwtopenmaps.openlayers.client.event.MeasureEvent;
 import org.gwtopenmaps.openlayers.client.event.MeasureListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
@@ -71,11 +68,10 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.OSM;
 import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
 
-import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.Info;
-import com.extjs.gxt.ui.client.widget.Window;
-import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.GPFeatureInfoEvent;
 import org.gwtopenmaps.openlayers.client.control.MousePosition;
 import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
 
@@ -93,7 +89,6 @@ public class MapLayoutWidget implements GeoPlatformMap {
     private Layer layer;
     private Layer osm;
     private GPRoutingManagerWidget routingWidget;
-    private WMSGetFeatureInfo info;
     private MapModel mapModel;
     private ButtonBar buttonBar;
     private List<GenericClientTool> tools;
@@ -120,7 +115,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
         this.defaultMapOptions.setProjection("EPSG:900913");
         this.defaultMapOptions.setDisplayProjection(new Projection("EPSG:4326"));
         this.defaultMapOptions.setUnits(MapUnits.METERS);
-        
+
         this.defaultMapOptions.setMaxExtent(new Bounds(-20037508, -20037508,
                 20037508, 20037508.34));
         this.defaultMapOptions.setMaxResolution(
@@ -186,47 +181,16 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
     }
 
-    private WMSGetFeatureInfo addFeatureInfoControl() {
-
-        WMSGetFeatureInfoOptions options = new WMSGetFeatureInfoOptions();
-        options.setURL("http://dpc.geosdi.org/geoserver/wms");
-        options.setTitle("Query visible layers");
-        options.setQueryVisible(true);
-
-        info = new WMSGetFeatureInfo(options);
-        info.addGetFeatureListener(new GetFeatureInfoListener() {
-
-            public void onGetFeatureInfo(GetFeatureInfoEvent eo) {
-                final Window wi = new Window();
-                wi.setClosable(true);
-                wi.setScrollMode(Scroll.AUTO);
-                wi.setHeight(200);
-                wi.setWidth(400);
-                wi.setResizable(true);
-                wi.setLayout(new FlowLayout());
-                wi.setPlain(true);
-                wi.setMaximizable(false);
-                wi.setHeading("Get Feature Info");
-                wi.addText(eo.getText());
-                wi.show();
-            }
-        });
-        this.map.addControl(info);
-
-        return info;
-
-    }
-
     @Override
     public void activateInfo() {
-        info.activate();
         this.infoActive = true;
+        MapHandlerManager.fireEvent(new GPFeatureInfoEvent(infoActive));
     }
 
     @Override
     public void deactivateInfo() {
-        info.deactivate();
         this.infoActive = false;
+        MapHandlerManager.fireEvent(new GPFeatureInfoEvent(infoActive));
     }
 
     @Override
@@ -519,13 +483,6 @@ public class MapLayoutWidget implements GeoPlatformMap {
         return measureAreaActive;
     }
 
-    /**
-     * @return the info
-     */
-    public WMSGetFeatureInfo getInfo() {
-        return info;
-    }
-
     /* (non-Javadoc)
      * @see org.geosdi.geoplatform.gui.impl.map.GeoPlatformEditor#activateDrawLineFeature()
      */
@@ -552,7 +509,8 @@ public class MapLayoutWidget implements GeoPlatformMap {
         Bounds b = new Bounds(bbox.getLowerLeftX(), bbox.getLowerLeftY(),
                 bbox.getUpperRightX(), bbox.getUpperRightY());
 
-        b.transform(new Projection("EPSG:4326"), new Projection(map.getProjection()));
+        b.transform(new Projection("EPSG:4326"),
+                new Projection(map.getProjection()));
 
         this.map.zoomToExtent(b);
     }

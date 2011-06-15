@@ -78,6 +78,8 @@ public class StyleDTO {
     }
 
     public StyleDTO(StyleImpl style) {
+        assert (style != null) : "StyleImpl is NULL";
+        
         this.name = style.getName();
         this.title = style.getTitle() == null ? "" : style.getTitle().toString();
         this.abstractText = style.getAbstract() == null ? "" : style.getAbstract().toString();

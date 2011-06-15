@@ -254,7 +254,7 @@ public abstract class BaseDAOTest {
         // "my raster"
         GPFolder folderRaster = this.createUserFolder("my raster", --position, user);
         // "my raster" ---> _rasterLayer1_ ---> Styles
-        GPRasterLayer rasterLayer1 = this.createRasterLayer(--position, folderRaster);
+        GPRasterLayer rasterLayer1 = this.createRasterLayer(--position, folderRaster, user.getId());
         GPStyle style1 = this.createStyle("style 1", rasterLayer1);
         GPStyle style2 = this.createStyle("style 2", rasterLayer1);
         //
@@ -264,7 +264,7 @@ public abstract class BaseDAOTest {
         styleDAO.persist(style1, style2);
 
         // "my raster" ---> (#251) _RasterLayer_
-        List<GPRasterLayer> layers = this.loadRasterLayer(--position, folderRaster);
+        List<GPRasterLayer> layers = this.loadRasterLayer(--position, folderRaster, user.getId());
         layerDAO.persist(layers.toArray(new GPRasterLayer[]{}));
 
         position -= 250;
@@ -275,7 +275,7 @@ public abstract class BaseDAOTest {
         folderIGM.setPosition(position);
         folderIGM.setParent(folderRaster);
         // ---> "my raster" --> "IGM" _vectorLayer1_
-        GPVectorLayer vectorLayer1 = this.createVectorLayer(--position, folderIGM);
+        GPVectorLayer vectorLayer1 = this.createVectorLayer(--position, folderIGM, user.getId());
         //
         folderIGM.setNumberOfDescendants(1);
         folderDAO.persist(folderIGM);
@@ -301,26 +301,27 @@ public abstract class BaseDAOTest {
         return emptyFolder;
     }
 
-    protected GPRasterLayer createRasterLayer(int position, GPFolder folder) {
+    protected GPRasterLayer createRasterLayer(int position, GPFolder folder, long ownerId) {
         // GPRasterLayer
-        GPRasterLayer rasterLayer1 = new GPRasterLayer();
-        rasterLayer1.setName("StratiDiBase:deagostini_ita_250mila");
-        rasterLayer1.setTitle("deagostini");
-        rasterLayer1.setPosition(position);
-        rasterLayer1.setAbstractText("deagostini_ita_250mila");        
-        rasterLayer1.setSrs("EPSG:4326");
-        rasterLayer1.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
-        rasterLayer1.setBbox(new GPBBox(6.342, 35.095, 19.003, 47.316));
-        rasterLayer1.setLayerType(GPLayerType.RASTER);
-        rasterLayer1.setFolder(folder);
+        GPRasterLayer raster = new GPRasterLayer();
+        raster.setName("StratiDiBase:deagostini_ita_250mila");
+        raster.setTitle("deagostini");
+        raster.setPosition(position);
+        raster.setAbstractText("deagostini_ita_250mila");
+        raster.setSrs("EPSG:4326");
+        raster.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
+        raster.setBbox(new GPBBox(6.342, 35.095, 19.003, 47.316));
+        raster.setLayerType(GPLayerType.RASTER);
+        raster.setFolder(folder);
+        raster.setOwnerId(ownerId);
         // GPLayerInfo
         GPLayerInfo info = new GPLayerInfo();
         List<String> keywords = new ArrayList<String>();
         keywords.add("IGM");
         info.setKeywords(keywords);
         info.setQueryable(true);
-        rasterLayer1.setLayerInfo(info);
-        return rasterLayer1;
+        raster.setLayerInfo(info);
+        return raster;
     }
 
     private GPStyle createStyle(String name, GPRasterLayer layer) {
@@ -334,22 +335,23 @@ public abstract class BaseDAOTest {
         return style;
     }
 
-    protected GPVectorLayer createVectorLayer(int position, GPFolder folder) {
-        GPVectorLayer vectorLayer1 = new GPVectorLayer();
-        vectorLayer1.setName("Name of vectorLayer");
-        vectorLayer1.setTitle("Title of vectorLayer");
-        vectorLayer1.setPosition(position);
-        vectorLayer1.setAbstractText("AbstractText of vectorLayer");        
-        vectorLayer1.setSrs("EPSG:4326");
-        vectorLayer1.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
-        vectorLayer1.setBbox(new GPBBox(1.1, 2.2, 3.3, 3.3));
-        vectorLayer1.setLayerType(GPLayerType.MULTIPOLYGON);
-        vectorLayer1.setChecked(true);
-        vectorLayer1.setFolder(folder);
-        return vectorLayer1;
+    protected GPVectorLayer createVectorLayer(int position, GPFolder folder, long ownerId) {
+        GPVectorLayer vector = new GPVectorLayer();
+        vector.setName("Name of vectorLayer");
+        vector.setTitle("Title of vectorLayer");
+        vector.setPosition(position);
+        vector.setAbstractText("AbstractText of vectorLayer");
+        vector.setSrs("EPSG:4326");
+        vector.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
+        vector.setBbox(new GPBBox(1.1, 2.2, 3.3, 3.3));
+        vector.setLayerType(GPLayerType.MULTIPOLYGON);
+        vector.setChecked(true);
+        vector.setFolder(folder);
+        vector.setOwnerId(ownerId);
+        return vector;
     }
 
-    private List<GPRasterLayer> loadRasterLayer(int position, GPFolder folder) {
+    private List<GPRasterLayer> loadRasterLayer(int position, GPFolder folder, long ownerId) {
         // Load sitpdc Layers
         URL url = null;
         try {
@@ -394,6 +396,7 @@ public abstract class BaseDAOTest {
                 raster.setLayerInfo(infoLayer);
 
                 raster.setFolder(folder);
+                raster.setOwnerId(ownerId);
                 raster.setLayerType(GPLayerType.RASTER);
                 raster.setPosition(position);
                 raster.setUrlServer("http://dpc.geosdi.org/geoserver/wms");

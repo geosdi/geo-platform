@@ -49,11 +49,11 @@ import javax.xml.bind.annotation.XmlTransient;
 public abstract class AbstractElementDTO implements IElementDTO,
         Comparable<IElementDTO> {
 
-    private long id = -1; // Database identity
-    private String name = "NULL";
-    private int position = -1;
-    private boolean shared = false;
-    private boolean checked = false;
+    private Long id = null; // Database identity
+    private String name;
+    private Integer position = null;
+    private boolean shared;
+    private boolean checked;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
@@ -155,17 +155,6 @@ public abstract class AbstractElementDTO implements IElementDTO,
     }
     //</editor-fold>
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return "id=" + id + ", name=" + name + ", position=" + position
-                + ", shared=" + shared + ", checked=" + checked;
-    }
-
     // For sort IElementDTO object in the TreeFolderElements
     /*
      * (non-Javadoc)
@@ -175,5 +164,16 @@ public abstract class AbstractElementDTO implements IElementDTO,
     @Override
     public int compareTo(IElementDTO element) {
         return ((AbstractElementDTO) element).getPosition() - getPosition();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "id=" + id + ", name=" + name + ", position=" + position
+                + ", shared=" + shared + ", checked=" + checked;
     }
 }

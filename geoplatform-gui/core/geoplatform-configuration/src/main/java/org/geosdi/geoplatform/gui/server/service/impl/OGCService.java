@@ -98,7 +98,7 @@ public class OGCService implements IOGCService {
                     req);
 
             return this.dtoServerConverter.convertRasterLayer(
-                    server.getLayersDTO());
+                    server.getLayerList());
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error : " + ex);
             throw new GeoPlatformException(ex);

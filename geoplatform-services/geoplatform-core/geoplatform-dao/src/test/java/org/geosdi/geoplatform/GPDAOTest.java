@@ -99,8 +99,8 @@ public class GPDAOTest extends BaseDAOTest {
         //
         folderDAO.persist(folderA, folderB);
 
-        rasterLayer = super.createRasterLayer(beginPosition + 30, folderB); // 333030
-        vectorLayer = super.createVectorLayer(beginPosition, folderB); // 333000
+        rasterLayer = super.createRasterLayer(beginPosition + 30, folderB, userPositionTest.getId()); // 333030
+        vectorLayer = super.createVectorLayer(beginPosition, folderB, userPositionTest.getId()); // 333000
         rasterLayer.setTitle(rasterLayer.getTitle() + "_position_test");
         vectorLayer.setTitle(vectorLayer.getTitle() + "_position_test");
         rasterLayer.setChecked(false);
@@ -135,25 +135,25 @@ public class GPDAOTest extends BaseDAOTest {
 
         String titleRasterLayer3 = "Raster Layer 3";
         String titleVectorLayer3 = "Vector Layer 3";
-        
+
         try {
             // "folder_position_test_A" ---> "rasterLayer3"
-            GPRasterLayer rasterLayer3 = super.createRasterLayer(beginPosition, folderA);
+            GPRasterLayer rasterLayer3 = super.createRasterLayer(beginPosition, folderA, userPositionTest.getId());
             rasterLayer3.setTitle(titleRasterLayer3);
             rasterLayer3.setChecked(false);
 
             // "folder_position_test_A" ---> "vectorLayer3"
-            GPVectorLayer vectorLayer3 = super.createVectorLayer(beginPosition, folderA);
+            GPVectorLayer vectorLayer3 = super.createVectorLayer(beginPosition, folderA, userPositionTest.getId());
             vectorLayer3.setTitle(titleVectorLayer3);
             vectorLayer3.setChecked(true);
 
             // "folder_position_test_A" ---> "rasterLayer4"
-            GPRasterLayer rasterLayer4 = super.createRasterLayer(beginPosition, folderA);
+            GPRasterLayer rasterLayer4 = super.createRasterLayer(beginPosition, folderA, userPositionTest.getId());
             rasterLayer4.setTitle(null);
             rasterLayer4.setChecked(false);
 
             // "folder_position_test_A" ---> "vectorLayer4"
-            GPVectorLayer vectorLayer4 = super.createVectorLayer(beginPosition, folderA);
+            GPVectorLayer vectorLayer4 = super.createVectorLayer(beginPosition, folderA, userPositionTest.getId());
             vectorLayer4.setTitle(null);
             vectorLayer4.setChecked(true);
             //

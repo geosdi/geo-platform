@@ -80,15 +80,6 @@ public abstract class GPLayer implements Serializable {
     //
     @Column(name = "title", nullable = false)
     private String title;
-    //    
-    @Column(name = "position")
-    private int position = -1;
-    //
-    @Column(name = "shared")
-    private boolean shared = false;
-    //
-    @Column(name = "owner_id", nullable = false)
-    private long ownerId = -1;
     //
     @Column(name = "abstract")
     private String abstractText;
@@ -104,9 +95,21 @@ public abstract class GPLayer implements Serializable {
     //
     @Enumerated(EnumType.STRING)
     private GPLayerType layerType;
+    //    
+    @Column(name = "position")
+    private int position = -1;
+    //
+    @Column(name = "owner_id", nullable = false)
+    private long ownerId = -1;
+    //
+    @Column(name = "shared")
+    private boolean shared = false;
     //
     @Column(name = "checked")
     private boolean checked = false;
+    //
+    @Column(name = "cached")
+    private boolean cached = false;
 
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
@@ -162,7 +165,8 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param position the position to set
+     * @param position
+     *            the position to set
      */
     public void setPosition(int position) {
         this.position = position;
@@ -176,7 +180,8 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param shared the shared to set
+     * @param shared
+     *            the shared to set
      */
     public void setShared(boolean shared) {
         this.shared = shared;
@@ -190,7 +195,8 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param ownerId the ownerId to set
+     * @param ownerId
+     *            the ownerId to set
      */
     public void setOwnerId(long ownerId) {
         this.ownerId = ownerId;
@@ -204,7 +210,8 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @param abstractText the abstractText to set
+     * @param abstractText
+     *            the abstractText to set
      */
     public void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
@@ -284,6 +291,21 @@ public abstract class GPLayer implements Serializable {
     public void setChecked(boolean checked) {
         this.checked = checked;
     }
+
+    /**
+     * @return the cached
+     */
+    public boolean isCached() {
+        return cached;
+    }
+
+    /**
+     * @param cached
+     *            the cached to set
+     */
+    public void setCached(boolean cached) {
+        this.cached = cached;
+    }
     //</editor-fold>
 
     public abstract GPFolder getFolder();
@@ -337,14 +359,16 @@ public abstract class GPLayer implements Serializable {
         str.append("id=").append(id);
         str.append(", name=").append(name);
         str.append(", title=").append(title);
-        str.append(", position=").append(position);
-        str.append(", shared=").append(shared);
         str.append(", abstractText=").append(abstractText);
         str.append(", urlServer=").append(urlServer);
         str.append(", srs=").append(srs);
         str.append(", bbox=").append(bbox);
         str.append(", layerType=").append(layerType);
+        str.append(", position=").append(position);
+        str.append(", ownerId=").append(ownerId);
+        str.append(", shared=").append(shared);
         str.append(", checked=").append(checked);
+        str.append(", cached=").append(cached);
         str.append(", folder.name=").append(getFolder().getName());
         str.append("(id=").append(getFolder().getId()).append(")");
         return str.toString();

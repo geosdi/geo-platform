@@ -174,7 +174,7 @@ class WMSServiceImpl {
         ServerDTO serverDTO = new ServerDTO(server);
         List<ShortLayerDTO> layers = convertToLayerList(
                 wmsCapabilities.getLayerList(), server.getServerUrl());
-        serverDTO.setLayersDTO(layers);
+        serverDTO.setLayerList(layers);
 
         return serverDTO;
     }
@@ -194,7 +194,7 @@ class WMSServiceImpl {
         serverDTO = new ServerDTO(server);
         List<ShortLayerDTO> layers = convertToLayerList(
                 wmsCapabilities.getLayerList(), serverUrl);
-        serverDTO.setLayersDTO(layers);
+        serverDTO.setLayerList(layers);
 
         return serverDTO;
     }

@@ -159,7 +159,7 @@ public class CXFServiceTest extends ServiceTest {
         Assert.assertNotNull(serverDTO);
 
         serverDTO = geoPlatformService.getCapabilities(new RequestById(serverDTO.getId()));
-        logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", serverDTO.getLayersDTO().size());
+        logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", serverDTO.getLayerList().size());
     }
 
     @Test
@@ -169,7 +169,7 @@ public class CXFServiceTest extends ServiceTest {
         ServerDTO serverDTO = geoPlatformService.saveServer(serverUrlGeoSDI);
         Assert.assertNotNull("ServerDTO geoSDI is NULL", serverDTO);
 
-        Collection<ShortLayerDTO> layersList = serverDTO.getLayersDTO();
+        Collection<ShortLayerDTO> layersList = serverDTO.getLayerList();
         Assert.assertNotNull("Collection of ShortLayerDTO is NULL for server geoSDI", layersList);
 
         // Server is NOT into DB
@@ -177,7 +177,7 @@ public class CXFServiceTest extends ServiceTest {
         serverDTO = geoPlatformService.saveServer(serverUrlEx);
         Assert.assertNotNull("ServerDTO EX is NULL", serverDTO);
 
-        layersList = serverDTO.getLayersDTO();
+        layersList = serverDTO.getLayerList();
         Assert.assertNotNull("Collection of ShortLayerDTO is NULL for server Ex", layersList);
         // Check if the server was insert
         GeoPlatformServer serverEx = geoPlatformService.getServerDetailByUrl(serverUrlEx);

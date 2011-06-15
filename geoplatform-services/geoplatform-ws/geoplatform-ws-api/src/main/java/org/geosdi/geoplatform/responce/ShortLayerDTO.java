@@ -52,7 +52,7 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"id", "name", "position", "shared", "checked",
-    "title", "urlServer", "srs", "abstractText", "layerType", "bbox"})
+    "title", "urlServer", "srs", "abstractText", "layerType", "bbox", "cached"})
 @XmlSeeAlso(value = {RasterLayerDTO.class, VectorLayerDTO.class})
 public class ShortLayerDTO extends AbstractElementDTO {
 
@@ -62,6 +62,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
     private String abstractText;
     private GPLayerType layerType;
     private GPBBox bbox;
+    private boolean cached;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
@@ -84,6 +85,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
         this.abstractText = layer.getAbstractText();
         this.layerType = layer.getLayerType();
         this.bbox = layer.getBbox();
+        this.cached = layer.isCached();
     }
     //</editor-fold>
 
@@ -176,6 +178,21 @@ public class ShortLayerDTO extends AbstractElementDTO {
         this.bbox = bbox;
     }
 
+    /**
+     * @return the cached
+     */
+    public boolean isCached() {
+        return cached;
+    }
+
+    /**
+     * @param cached
+     *          the cached to set
+     */
+    public void setCached(boolean cached) {
+        this.cached = cached;
+    }
+
     /*
      * (non-Javadoc)
      * 
@@ -185,9 +202,12 @@ public class ShortLayerDTO extends AbstractElementDTO {
     public String toString() {
         String s = super.toString()
                 + ", title=" + title
-                + ", urlServer=" + urlServer + ", srs=" + srs
-                + ", layerType=" + layerType + ", " + bbox
-                + ", abstractText=" + abstractText;
+                + ", urlServer=" + urlServer
+                + ", srs=" + srs
+                + ", abstractText=" + abstractText
+                + ", layerType=" + layerType
+                + ", " + bbox                
+                + ", cached=" + cached;
         return s;
     }
 }

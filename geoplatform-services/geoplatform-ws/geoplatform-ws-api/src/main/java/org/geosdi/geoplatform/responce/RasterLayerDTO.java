@@ -55,7 +55,7 @@ public class RasterLayerDTO extends ShortLayerDTO {
     private GPLayerInfo layerInfo;
     //
     @XmlElementWrapper(name = "styleList")
-    @XmlElement(name = "style")    
+    @XmlElement(name = "style")
     private List<StyleDTO> styleList;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">

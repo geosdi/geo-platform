@@ -36,14 +36,11 @@
 package org.geosdi.geoplatform.gui.featureinfo.widget;
 
 import com.extjs.gxt.ui.client.Style.Scroll;
-import com.extjs.gxt.ui.client.event.WindowEvent;
-import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.Window;
 import java.util.Iterator;
+import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.featureinfo.cache.FeatureInfoFlyWeight;
 import org.geosdi.geoplatform.gui.featureinfo.cache.IGPFeatureInfoElement;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.GPFeatureInfoHandler;
@@ -53,65 +50,53 @@ import org.geosdi.geoplatform.gui.puregwt.featureinfo.GPFeatureInfoHandler;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPFeatureInfoWidget extends Window implements GPFeatureInfoHandler {
+public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureInfoHandler {
 
-    private boolean initialized;
     private ContentPanel mainPanel;
-    private FeatureInfoFlyWeight featureCache = new FeatureInfoFlyWeight();
+    private GPFeatureInfoCaller featureCaller;
     private GeoPlatformMap mapWidget;
 
     public GPFeatureInfoWidget(GeoPlatformMap theMapWidget) {
-        this.initializeWindow();
-        this.initMainPanel();
+        super(false);
         this.mapWidget = theMapWidget;
+        this.featureCaller = new GPFeatureInfoCaller(this.mapWidget.getMap());
         MapHandlerManager.addHandler(GPFeatureInfoHandler.TYPE, this);
     }
 
     @Override
-    public void activateHandler() {
-        if (!isInitialized()) {
-            loadServers();
-        } else {
-            activateFeatureInfoControl();
-        }
-    }
-
-    @Override
-    public void deactivateHandler() {
-        for (Iterator<IGPFeatureInfoElement> it = featureCache.getCollection().iterator(); it.hasNext();) {
-            it.next().getElementControl().deactivate();
-        }
-    }
-
-    /**
-     * 
-     */
-    private void initializeWindow() {
-        super.setClosable(true);
-        super.setScrollMode(Scroll.AUTO);
-        super.setHeight(200);
-        super.setWidth(400);
-        super.setResizable(true);
-        super.setPlain(true);
-        super.setModal(true);
-
-        super.addWindowListener(new WindowListener() {
-
-            @Override
-            public void windowHide(WindowEvent we) {
-                resetMainPanel();
-            }
-        });
-
-        super.setMaximizable(false);
-        super.setHeading("Get Feature Info");
-    }
-
-    private void initMainPanel() {
+    public void addComponent() {
         this.mainPanel = new ContentPanel();
         this.mainPanel.setHeaderVisible(false);
 
         add(this.mainPanel);
+    }
+
+    @Override
+    public void initSize() {
+        super.setHeight(200);
+        super.setWidth(400);
+    }
+
+    @Override
+    public void setWindowProperties() {
+        super.setClosable(true);
+        super.setScrollMode(Scroll.AUTO);
+
+        super.setResizable(true);
+        super.setPlain(true);
+        super.setModal(true);
+
+        super.setHeading("Get Feature Info");
+    }
+
+    @Override
+    public void activateHandler() {
+        this.featureCaller.load();
+    }
+
+    @Override
+    public void deactivateHandler() {
+        this.featureCaller.deactivateFeatureInfoControl();
     }
 
     public void resetMainPanel() {
@@ -120,9 +105,10 @@ public class GPFeatureInfoWidget extends Window implements GPFeatureInfoHandler 
 
     @Override
     public void showInfoWidget() {
-        for (Iterator<IGPFeatureInfoElement> it = featureCache.getCollection().iterator(); it.hasNext();) {
+        for (Iterator<IGPFeatureInfoElement> it = featureCaller.getCollection().iterator(); it.hasNext();) {
             IGPFeatureInfoElement element = it.next();
-            System.out.println("ELEMENT *********************** " + element.isActive());
+            System.out.println(
+                    "ELEMENT *********************** " + element.isActive());
             if (element.isActive()) {
                 this.mainPanel.add(element.getElementPanel());
             }
@@ -133,32 +119,6 @@ public class GPFeatureInfoWidget extends Window implements GPFeatureInfoHandler 
         } else {
             GeoPlatformMessage.alertMessage("GeoPlatform Feature Widget",
                     "There are no layers to show Info.");
-        }
-    }
-
-    public boolean isInitialized() {
-        return initialized;
-    }
-
-    private void loadServers() {
-        // TODO : HERE THE CALL TO THE OGC_SERVICE TO LOAD ALL URL SERVERS FOR USER
-        IGPFeatureInfoElement element = this.featureCache.get(
-                "http://maps.telespazio.it/dpc/dpc-wms");
-        
-        this.mapWidget.getMap().addControl(element.getElementControl());
-        element.getElementControl().activate();
-        
-
-        IGPFeatureInfoElement element1 = this.featureCache.get(
-                "http://dpc.geosdi.org/geoserver/wms");
-        
-        this.mapWidget.getMap().addControl(element1.getElementControl());
-        element1.getElementControl().activate();
-    }
-
-    private void activateFeatureInfoControl() {
-        for (Iterator<IGPFeatureInfoElement> it = featureCache.getCollection().iterator(); it.hasNext();) {
-            it.next().getElementControl().activate();
         }
     }
 }

@@ -60,26 +60,26 @@ import org.springframework.stereotype.Service;
  */
 @Service(value = "ogcService")
 public class OGCService implements IOGCService {
-
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
     private GeoPlatformService geoPlatformServiceClient;
     
     @Autowired
     private DTOServerConverter dtoServerConverter;
-
+    
     @Override
     public ArrayList<GPServerBeanModel> loadServers() throws GeoPlatformException {
         return this.dtoServerConverter.convertServer(
                 this.geoPlatformServiceClient.getAllServers());
     }
-
+    
     @Override
     public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException {
         try {
             GeoPlatformServer serverWS = this.geoPlatformServiceClient.getServerDetail(
                     idServer);
-
+            
             return this.dtoServerConverter.getServerDetail(serverWS);
         } catch (ResourceNotFoundFault ex) {
             logger.error("The server with id " + idServer + " was bean deleted.");
@@ -87,16 +87,16 @@ public class OGCService implements IOGCService {
                     "The server with id " + idServer + " was bean deleted.");
         }
     }
-
+    
     @Override
     public ArrayList<? extends GPLayerGrid> getCababilities(long idServer)
             throws GeoPlatformException {
         try {
             RequestById req = new RequestById(idServer);
-
+            
             ServerDTO server = this.geoPlatformServiceClient.getCapabilities(
                     req);
-
+            
             return this.dtoServerConverter.convertRasterLayer(
                     server.getLayerList());
         } catch (ResourceNotFoundFault ex) {
@@ -104,13 +104,13 @@ public class OGCService implements IOGCService {
             throw new GeoPlatformException(ex);
         }
     }
-
+    
     @Override
     public GPServerBeanModel insertServer(String urlServer) throws GeoPlatformException {
         try {
             ServerDTO serverWS = this.geoPlatformServiceClient.saveServer(
                     urlServer);
-
+            
             return this.dtoServerConverter.convertServerWS(serverWS);
         } catch (ResourceNotFoundFault ex) {
             logger.error("Inser Server Error : " + ex);

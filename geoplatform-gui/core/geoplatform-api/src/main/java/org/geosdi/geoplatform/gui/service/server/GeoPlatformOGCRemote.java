@@ -65,6 +65,13 @@ public interface GeoPlatformOGCRemote extends RemoteService {
             return instance;
         }
     }
+    
+    /**
+     * Load Distinct layers data source
+     * @return
+     * @throws GeoPlatformException 
+     */
+    public ArrayList<String> findDistinctLayersDataSource() throws GeoPlatformException;
 
     /**
      * Load All Server from GeoPlatform Web Services

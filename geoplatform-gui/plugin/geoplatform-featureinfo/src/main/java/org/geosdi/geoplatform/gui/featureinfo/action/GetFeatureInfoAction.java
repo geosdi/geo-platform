@@ -80,7 +80,6 @@ public class GetFeatureInfoAction extends MapToggleAction {
      */
     @Override
     public void disableControl() {
-        // TODO Auto-generated method stub
         this.mapWidget.deactivateInfo();
     }
 

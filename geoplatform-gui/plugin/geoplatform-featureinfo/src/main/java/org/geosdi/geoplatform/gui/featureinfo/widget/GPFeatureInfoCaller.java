@@ -35,10 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.featureinfo.widget;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.featureinfo.cache.FeatureInfoFlyWeight;
 import org.geosdi.geoplatform.gui.featureinfo.cache.IGPFeatureInfoElement;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
 import org.gwtopenmaps.openlayers.client.Map;
 
 /**
@@ -65,19 +71,28 @@ public class GPFeatureInfoCaller {
     }
 
     private void loadUserServers() {
-        IGPFeatureInfoElement element = this.featureCache.get(
-                "http://maps.telespazio.it/dpc/dpc-wms");
+        LayoutManager.get().getStatusMap().setStatus("Loading Feature Info Data Sources.",
+                EnumSearchStatus.STATUS_SEARCH.toString());
+        GeoPlatformOGCRemote.Util.getInstance().findDistinctLayersDataSource(new AsyncCallback<ArrayList<String>>() {
 
-        this.map.addControl(element.getElementControl());
-        element.getElementControl().activate();
+            @Override
+            public void onFailure(Throwable caught) {
+                GeoPlatformMessage.errorMessage("Get Feature Info Error",
+                        "Problems to perform Get Feature Info");
+            }
 
-
-        IGPFeatureInfoElement element1 = this.featureCache.get(
-                "http://dpc.geosdi.org/geoserver/wms");
-
-        this.map.addControl(element1.getElementControl());
-        element1.getElementControl().activate();
-        this.loaded = true;
+            @Override
+            public void onSuccess(ArrayList<String> result) {
+                for (String string : result) {
+                    IGPFeatureInfoElement element = featureCache.get(string);
+                    map.addControl(element.getElementControl());
+                }
+                activateFeatureInfoControl();
+                loaded = true;
+                LayoutManager.get().getStatusMap().setStatus("Feature Info Function loaded succesfully.",
+                EnumSearchStatus.STATUS_SEARCH.toString());
+            }
+        });
     }
 
     /**

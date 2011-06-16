@@ -79,7 +79,6 @@ public class LayerService implements ILayerService {
 
     @Override
     public ArrayList<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException {
-//        TODO: check the right way to retrieve the user folders using the userName property
         SearchRequest userNameSearch = new SearchRequest(userName);
 
         GPUser user = null;
@@ -232,7 +231,7 @@ public class LayerService implements ILayerService {
                 memento.getWsDescendantMap());
         ArrayList<Long> idSavedLayers = null;
         try {
-            idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications(layersList, map);
+            idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications("user_test_0", layersList, map);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to save layers on LayerService: " + ex);
             throw new GeoPlatformException(ex);

@@ -48,6 +48,8 @@ import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
  */
 public interface IOGCService {
 
+    public ArrayList<String> findDistinctLayersDataSource() throws GeoPlatformException;
+
     public ArrayList<GPServerBeanModel> loadServers() throws GeoPlatformException;
 
     public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException;

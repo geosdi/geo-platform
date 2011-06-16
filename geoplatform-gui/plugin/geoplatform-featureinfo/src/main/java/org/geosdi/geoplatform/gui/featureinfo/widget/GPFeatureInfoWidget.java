@@ -99,12 +99,14 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
         this.featureCaller.deactivateFeatureInfoControl();
     }
 
-    public void resetMainPanel() {
+    @Override
+    public void reset() {
         this.mainPanel.removeAll();
     }
 
     @Override
     public void showInfoWidget() {
+        System.out.println("Showing the info widget");
         for (Iterator<IGPFeatureInfoElement> it = featureCaller.getCollection().iterator(); it.hasNext();) {
             IGPFeatureInfoElement element = it.next();
             System.out.println(
@@ -113,6 +115,7 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
                 this.mainPanel.add(element.getElementPanel());
             }
         }
+        this.mainPanel.layout();
 
         if (this.mainPanel.getItemCount() > 0) {
             super.show();

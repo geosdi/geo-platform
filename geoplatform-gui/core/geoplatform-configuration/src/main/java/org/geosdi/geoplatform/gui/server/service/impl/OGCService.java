@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
+import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 
@@ -118,6 +119,16 @@ public class OGCService implements IOGCService {
         }
     }
 
+    @Override
+    public ArrayList<String> findDistinctLayersDataSource() throws GeoPlatformException {
+        ArrayList<String> dataSources = null;
+        try {
+            dataSources = this.geoPlatformServiceClient.getLayersDataSourceByOwner("user_test_0");
+        } catch (Exception e) {
+        }
+        return dataSources;
+    }
+
     /**
      * @param geoPlatformServiceClient the geoPlatformServiceClient to set
      */
@@ -126,4 +137,5 @@ public class OGCService implements IOGCService {
             @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
     }
+
 }

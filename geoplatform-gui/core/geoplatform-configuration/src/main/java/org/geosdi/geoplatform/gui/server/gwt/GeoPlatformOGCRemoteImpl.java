@@ -86,4 +86,9 @@ public class GeoPlatformOGCRemoteImpl extends RemoteServiceServlet implements
     public GPServerBeanModel insertServer(String urlServer) throws GeoPlatformException {
         return this.ogcService.insertServer(urlServer);
     }
+
+    @Override
+    public ArrayList<String> findDistinctLayersDataSource() throws GeoPlatformException {
+        return this.ogcService.findDistinctLayersDataSource();
+    }
 }

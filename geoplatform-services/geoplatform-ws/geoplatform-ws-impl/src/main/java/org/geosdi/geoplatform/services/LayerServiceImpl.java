@@ -176,8 +176,14 @@ class LayerServiceImpl {
         return layerDao.remove(layer);
     }
 
-    public long saveAddedLayerAndTreeModifications(GPLayer layer, GPWebServiceMapData descendantsMapData)
+    public long saveAddedLayerAndTreeModifications(String username, GPLayer layer, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
+        GPUser owner = userDao.findByUsername(username);
+        if (owner == null) {
+            throw new ResourceNotFoundFault("Owner \"" + username + "\" of layer not found into DB");
+        }
+        layer.setOwnerId(owner.getId());
+        
         GPFolder parent = layer.getFolder();
         if (parent == null) {
             throw new IllegalParameterFault("Parent of layer not found " + layer.getId());
@@ -194,16 +200,24 @@ class LayerServiceImpl {
         // Shift positions
         layerDao.updatePositionsLowerBound(newPosition, increment);
         folderDao.updatePositionsLowerBound(newPosition, increment);
-
+        
         layerDao.persist(layer);
 
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
         return layer.getId();
     }
 
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers, GPWebServiceMapData descendantsMapData)
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(String username, List<GPLayer> layers, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
+        GPUser owner = userDao.findByUsername(username);
+        if (owner == null) {
+            throw new ResourceNotFoundFault("Owner \"" + username + "\" of layer not found into DB");
+        }        
+        
         GPLayer[] layersArray = layers.toArray(new GPLayer[layers.size()]);
+        for (GPLayer gpLayer : layersArray) {
+            gpLayer.setOwnerId(owner.getId());
+        }
 
         GPFolder parent = null;
         GPFolder parentFromDB = null;

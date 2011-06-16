@@ -57,6 +57,10 @@ public class RasterLayerDTO extends ShortLayerDTO {
     @XmlElementWrapper(name = "styleList")
     @XmlElement(name = "style")
     private List<StyleDTO> styleList;
+    //
+    @XmlElementWrapper(name = "subLayerList")
+    @XmlElement(name = "layer")
+    private List<RasterLayerDTO> subLayerList;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
@@ -104,11 +108,27 @@ public class RasterLayerDTO extends ShortLayerDTO {
     public void setStyleList(List<StyleDTO> styleList) {
         this.styleList = styleList;
     }
+
+    /**
+     * @return the subLayerList
+     */
+    public List<RasterLayerDTO> getSubLayerList() {
+        return subLayerList;
+    }
+
+    /**
+     * @param subLayerList
+     *          the subLayerList to set
+     */
+    public void setSubLayerList(List<RasterLayerDTO> subLayerList) {
+        this.subLayerList = subLayerList;
+    }
     //</editor-fold>
 
     @Override
     public String toString() {
-        return "RasterLayerDTO [" + super.toString() + ", "
-                + layerInfo + ", styles" + styleList + "]";
+        return "RasterLayerDTO [" + super.toString() + ", " + layerInfo
+                + ", styles=" + styleList
+                + ", subLayerList=" + subLayerList + "]";
     }
 }

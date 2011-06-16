@@ -173,7 +173,7 @@ class WMSServiceImpl {
 
         ServerDTO serverDTO = new ServerDTO(server);
         List<ShortLayerDTO> layers = convertToLayerList(
-                wmsCapabilities.getLayerList(), server.getServerUrl());
+                wmsCapabilities.getLayer(), server.getServerUrl());
         serverDTO.setLayerList(layers);
 
         return serverDTO;
@@ -193,7 +193,7 @@ class WMSServiceImpl {
         }
         serverDTO = new ServerDTO(server);
         List<ShortLayerDTO> layers = convertToLayerList(
-                wmsCapabilities.getLayerList(), serverUrl);
+                wmsCapabilities.getLayer(), serverUrl);
         serverDTO.setLayerList(layers);
 
         return serverDTO;
@@ -226,46 +226,64 @@ class WMSServiceImpl {
         return cap;
     }
 
-    // TODO Correct mapping Layer to AbstractLayerDTO (as abstract class?)
-    private List<ShortLayerDTO> convertToLayerList(List<Layer> layerList, String urlServer) {
-        List<ShortLayerDTO> shortLayers = new ArrayList<ShortLayerDTO>(layerList.size());
+    private List<ShortLayerDTO> convertToLayerList(Layer layer, String urlServer) {
+        List<ShortLayerDTO> shortLayers = new ArrayList<ShortLayerDTO>();
 
-        for (Layer layer : layerList) {
-            RasterLayerDTO layerDTOIth = new RasterLayerDTO();
-
-            layerDTOIth.setUrlServer(this.getUrlServer(urlServer));
-            layerDTOIth.setName(layer.getName());
-            layerDTOIth.setAbstractText(layer.get_abstract());
-            layerDTOIth.setTitle(layer.getTitle());
-
-            if (layer.getLatLonBoundingBox() != null) {
-                layerDTOIth.setBbox(this.createBbox(layer.getLatLonBoundingBox()));
-                layerDTOIth.setSrs("EPSG:4326");
-            }
-
-            // Set LayerInfo of Raster Ith
-            GPLayerInfo layerInfo = new GPLayerInfo();
-            layerInfo.setQueryable(layer.isQueryable());
-            if (layer.getKeywords() != null) {
-                List<String> keywordList = Arrays.asList(layer.getKeywords());
-                if (keywordList.size() > 0) {
-                    layerInfo.setKeywords(keywordList);
-                }
-            }
-            layerDTOIth.setLayerInfo(layerInfo);
-
-            // Set Styles of Raster Ith
-            List<StyleImpl> stylesImpl = layer.getStyles();
-            logger.info("\n*** Layer \"{}\" has {} StyleImpl ***",
-                    layer.getTitle(), stylesImpl.size());
-
-            List<StyleDTO> stylesDTO = this.createStyleDTOList(stylesImpl);
-            layerDTOIth.setStyleList(stylesDTO);
-
-            shortLayers.add(layerDTOIth);
-        }
+        RasterLayerDTO raster = this.getRasterAndSubRaster(layer, urlServer);
+        shortLayers.add(raster);
 
         return shortLayers;
+    }
+
+    private RasterLayerDTO getRasterAndSubRaster(Layer layer, String urlServer) {
+        RasterLayerDTO raster = this.convertLayerToRaster(layer, urlServer);
+        
+        List<Layer> subLayerList = layer.getLayerChildren();        
+        List<RasterLayerDTO> subRasterList = new ArrayList<RasterLayerDTO>(subLayerList.size());
+        raster.setSubLayerList(subRasterList);
+
+        // ADD subRaster
+        for (Layer layerIth : subLayerList) {
+            RasterLayerDTO rasterIth = this.getRasterAndSubRaster(layerIth, urlServer);
+            subRasterList.add(rasterIth);
+        }
+
+        return raster;
+    }
+
+    private RasterLayerDTO convertLayerToRaster(Layer layer, String urlServer) {
+        RasterLayerDTO raster = new RasterLayerDTO();
+
+        raster.setUrlServer(this.getUrlServer(urlServer));
+        raster.setName(layer.getName());
+        raster.setAbstractText(layer.get_abstract());
+        raster.setTitle(layer.getTitle());
+
+        if (layer.getLatLonBoundingBox() != null) {
+            raster.setBbox(this.createBbox(layer.getLatLonBoundingBox()));
+            raster.setSrs("EPSG:4326");
+        }
+
+        // Set LayerInfo of Raster Ith
+        GPLayerInfo layerInfo = new GPLayerInfo();
+        layerInfo.setQueryable(layer.isQueryable());
+        if (layer.getKeywords() != null) {
+            List<String> keywordList = Arrays.asList(layer.getKeywords());
+            if (keywordList.size() > 0) {
+                layerInfo.setKeywords(keywordList);
+            }
+        }
+        raster.setLayerInfo(layerInfo);
+
+        // Set Styles of Raster Ith
+        List<StyleImpl> stylesImpl = layer.getStyles();
+        logger.info("\n*** Layer \"{}\" has {} SubLayers and {} StyleImpl ***",
+                new Object[]{layer.getTitle(), layer.getLayerChildren().size(), stylesImpl.size()});
+
+        List<StyleDTO> stylesDTO = this.createStyleDTOList(stylesImpl);
+        raster.setStyleList(stylesDTO);
+
+        return raster;
     }
 
     private List<ServerDTO> convertToServerList(List<GeoPlatformServer> serverList) {

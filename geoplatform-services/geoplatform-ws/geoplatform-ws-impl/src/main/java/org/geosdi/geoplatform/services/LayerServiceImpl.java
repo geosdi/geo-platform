@@ -441,7 +441,7 @@ class LayerServiceImpl {
         return layer.getLayerType();
     }
     
-    public List<String> getLayersDataSourceByOwner(String userName) throws ResourceNotFoundFault {
+    public ArrayList<String> getLayersDataSourceByOwner(String userName) throws ResourceNotFoundFault {
         GPUser user = userDao.findByUsername(userName);
         if (user == null) {
             throw new ResourceNotFoundFault("User with username " + userName + " not found");

@@ -62,7 +62,7 @@ public class CXFServiceTest extends ServiceTest {
     private final String serverUrlTest = "http://map.serverNameTest.org";
     private long idServerTest = -1;
     // Server geoSDI
-    private final String serverUrlGeoSDI = "http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
+    private final String serverUrlGeoSDI = "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
 
     @Override
     public void setUp() throws Exception {

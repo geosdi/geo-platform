@@ -109,6 +109,7 @@ public abstract class BaseDAOTest {
     protected final String nameSuperUser = "super_user_test_acl";
     protected final String roleAdmin = "ROLE_ADMIN";
     protected final String roleUser = "ROLE_USER";
+    private URL url = null;
 
     //<editor-fold defaultstate="collapsed" desc="Remove all data">
     protected void removeAll() {
@@ -230,11 +231,14 @@ public abstract class BaseDAOTest {
     }
 
     protected void insertFolders() throws ParseException {
-        int position = 257;
-        insertUserFolders(position);
+        List<Layer> layerList = loadLayersFromServer();
+        insertUserFolders(layerList);
     }
 
-    private void insertUserFolders(int position) {
+    private void insertUserFolders(List<Layer> layerList) {
+        int position = layerList.size() + 6; // +6 because {"only folders"; "empty subfolder A"; "empty subfolder B";
+                                             //            "my raster"; "IGM"; "vector layer"}
+
         GPUser user = userDAO.findByUsername(nameUserTest);
 
         // "only folders"
@@ -247,8 +251,6 @@ public abstract class BaseDAOTest {
                 --position, onlyFolders);
         //
         onlyFolders.setNumberOfDescendants(2);
-//        emptySubFolderA.setNumberOfDescendants(z);
-//        emptySubFolderB.setNumberOfDescendants(3);
         folderDAO.persist(onlyFolders, emptySubFolderA, emptySubFolderB);
 
         // "my raster"
@@ -258,17 +260,16 @@ public abstract class BaseDAOTest {
         GPStyle style1 = this.createStyle("style 1", rasterLayer1);
         GPStyle style2 = this.createStyle("style 2", rasterLayer1);
         //
-        folderRaster.setNumberOfDescendants(253);
+        folderRaster.setNumberOfDescendants(layerList.size() + 2); // +2 because {"IGM"; "vector layer"}
         folderDAO.persist(folderRaster);
         layerDAO.persist(rasterLayer1);
         styleDAO.persist(style1, style2);
 
-        // "my raster" ---> (#251) _RasterLayer_
-        List<GPRasterLayer> layers = this.loadRasterLayer(--position, folderRaster, user.getId());
+        List<GPRasterLayer> layers = this.loadRasterLayer(layerList, position, folderRaster, user.getId());
         layerDAO.persist(layers.toArray(new GPRasterLayer[]{}));
 
-        position -= 250;
-
+        position = position - layerList.size();
+        
         // ---> "my raster" --> "IGM"
         GPFolder folderIGM = new GPFolder();
         folderIGM.setName("IGM");
@@ -309,7 +310,7 @@ public abstract class BaseDAOTest {
         raster.setPosition(position);
         raster.setAbstractText("deagostini_ita_250mila");
         raster.setSrs("EPSG:4326");
-        raster.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
+        raster.setUrlServer("http://imaa.geosdi.org/geoserver/wms");
         raster.setBbox(new GPBBox(6.342, 35.095, 19.003, 47.316));
         raster.setLayerType(GPLayerType.RASTER);
         raster.setFolder(folder);
@@ -342,7 +343,7 @@ public abstract class BaseDAOTest {
         vector.setPosition(position);
         vector.setAbstractText("AbstractText of vectorLayer");
         vector.setSrs("EPSG:4326");
-        vector.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
+        vector.setUrlServer("http://imaa.geosdi.org/geoserver/wms");
         vector.setBbox(new GPBBox(1.1, 2.2, 3.3, 3.3));
         vector.setLayerType(GPLayerType.MULTIPOLYGON);
         vector.setChecked(true);
@@ -351,61 +352,23 @@ public abstract class BaseDAOTest {
         return vector;
     }
 
-    private List<GPRasterLayer> loadRasterLayer(int position, GPFolder folder, long ownerId) {
-        // Load sitpdc Layers
-        URL url = null;
+    private List<Layer> loadLayersFromServer() {
+        // Load imaa Layers
         try {
-            url = new URL(
-                    "http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
+            url = new URL("http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
         } catch (MalformedURLException e) {
             logger.error("Error:" + e);
         }
 
         List<GPRasterLayer> rasterLayers = null;
         WebMapServer wms = null;
+        List<Layer> layers = null;
         try {
             wms = new WebMapServer(url);
 
             WMSCapabilities capabilities = wms.getCapabilities();
 
-            List<Layer> layers = capabilities.getLayerList();
-            rasterLayers = new ArrayList<GPRasterLayer>(layers.size());
-
-            for (int i = 1; i < layers.size(); i++) {
-                Layer layer = layers.get(i);
-
-                GPRasterLayer raster = new GPRasterLayer();
-                raster.setName(layer.getName());
-                raster.setTitle(layer.getTitle());
-                raster.setAbstractText(layer.get_abstract());
-                raster.setSrs(layer.getSrs().toString());
-                raster.setBbox(new GPBBox(
-                        layer.getLatLonBoundingBox().getMinX(),
-                        layer.getLatLonBoundingBox().getMinY(),
-                        layer.getLatLonBoundingBox().getMaxX(),
-                        layer.getLatLonBoundingBox().getMaxY()));
-
-                GPLayerInfo infoLayer = new GPLayerInfo();
-                infoLayer.setQueryable(layer.isQueryable());
-                if (layer.getKeywords() != null) {
-                    List<String> keywordList = Arrays.asList(layer.getKeywords());
-                    if (keywordList.size() > 0) {
-                        infoLayer.setKeywords(keywordList);
-                    }
-                }
-                raster.setLayerInfo(infoLayer);
-
-                raster.setFolder(folder);
-                raster.setOwnerId(ownerId);
-                raster.setLayerType(GPLayerType.RASTER);
-                raster.setPosition(position);
-                raster.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
-                if (i < 5) {
-                    raster.setChecked(true);
-                }
-                rasterLayers.add(raster);
-                position--;
-            }
+            layers = capabilities.getLayerList();
         } catch (IOException e) {
             //There was an error communicating with the server
             //For example, the server is down
@@ -415,7 +378,50 @@ public abstract class BaseDAOTest {
             //Unable to parse the response from the server
             //For example, the capabilities it returned was not valid
         }
+
+        return layers;
+    }
+
+    private List<GPRasterLayer> loadRasterLayer(List<Layer> layers, int position, GPFolder folder, long ownerId) {
+        List<GPRasterLayer> rasterLayers = null;
+        rasterLayers = new ArrayList<GPRasterLayer>(layers.size());
+
+        for (int i = 1; i < layers.size(); i++) {
+            Layer layer = layers.get(i);
+
+            GPRasterLayer raster = new GPRasterLayer();
+            raster.setName(layer.getName());
+            raster.setTitle(layer.getTitle());
+            raster.setAbstractText(layer.get_abstract());
+            raster.setSrs(layer.getSrs().toString());
+            raster.setBbox(new GPBBox(
+                    layer.getLatLonBoundingBox().getMinX(),
+                    layer.getLatLonBoundingBox().getMinY(),
+                    layer.getLatLonBoundingBox().getMaxX(),
+                    layer.getLatLonBoundingBox().getMaxY()));
+
+            GPLayerInfo infoLayer = new GPLayerInfo();
+            infoLayer.setQueryable(layer.isQueryable());
+            if (layer.getKeywords() != null) {
+                List<String> keywordList = Arrays.asList(layer.getKeywords());
+                if (keywordList.size() > 0) {
+                    infoLayer.setKeywords(keywordList);
+                }
+            }
+            raster.setLayerInfo(infoLayer);
+
+            raster.setFolder(folder);
+            raster.setOwnerId(ownerId);
+            raster.setLayerType(GPLayerType.RASTER);
+            raster.setPosition(--position);
+            raster.setUrlServer("http://imaa.geosdi.org/geoserver/wms");
+            if (i < 5) {
+                raster.setChecked(true);
+            }
+            rasterLayers.add(raster);
+        }
+
         return rasterLayers;
     }
-    //</editor-fold>
+//</editor-fold>
 }

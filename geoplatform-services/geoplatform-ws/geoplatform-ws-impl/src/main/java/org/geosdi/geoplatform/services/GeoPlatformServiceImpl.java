@@ -538,7 +538,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<String> getLayersDataSourceByOwner(String userName) throws ResourceNotFoundFault {
+    public ArrayList<String> getLayersDataSourceByOwner(String userName) throws ResourceNotFoundFault {
         return layerServiceDelegate.getLayersDataSourceByOwner(userName);
     }
     //</editor-fold>

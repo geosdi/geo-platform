@@ -38,6 +38,7 @@
 package org.geosdi.geoplatform.core.dao;
 
 import com.googlecode.genericdao.search.ISearch;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.geosdi.geoplatform.core.model.GPLayer;
@@ -68,7 +69,7 @@ public interface GPLayerDAO<T> {
 
     public GPLayer findByLayerName(String layerName);
 
-    public List<String> findDistinctDataSourceByUserId(long userId);
+    public ArrayList<String> findDistinctDataSourceByUserId(long userId);
 
     public boolean updatePositionsRangeInOppositeWay(int beginPositionFirstRange, int endPositionFirstRange,
             int beginPositionSecondRange, int endPositionSecondRange,

@@ -81,8 +81,8 @@ public class ServerDAOTest extends BaseDAOTest {
 
     private GeoPlatformServer createServer1() {
         GeoPlatformServer server = new GeoPlatformServer();
-        server.setServerUrl("http://dpc.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
-        server.setName("dpc.geosdi.org");
+        server.setServerUrl("http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
+        server.setName("imaa.geosdi.org");
         server.setServerType(GPCababilityType.WMS);
         return server;
     }

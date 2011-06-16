@@ -91,12 +91,12 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
     }
 
     @Override
-    public List<String> findDistinctDataSourceByUserId(long userId) {
+    public ArrayList<String> findDistinctDataSourceByUserId(long userId) {
         Search search = new Search();
         search.addFilterEqual("ownerId", userId);
         search.addField("urlServer");
         search.setDistinct(true);
-        return search(search);
+        return (ArrayList)search(search);
     }
 
     @Override

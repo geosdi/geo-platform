@@ -433,7 +433,7 @@ public interface GeoPlatformService {
      */
     @Get
     @WebResult(name = "LayerDataSources")
-    List<String> getLayersDataSourceByOwner(
+    ArrayList<String> getLayersDataSourceByOwner(
             @WebParam(name = "userName") String userName)
             throws ResourceNotFoundFault;
     //</editor-fold>

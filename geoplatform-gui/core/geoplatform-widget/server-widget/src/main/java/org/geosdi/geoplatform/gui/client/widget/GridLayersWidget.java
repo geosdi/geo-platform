@@ -112,15 +112,15 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         this.formPanel.add(this.grid);
 
         this.formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
-        
-        Button clear = new Button("Clear", new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                
-            }
-        });
-        
+        Button clear = new Button("Clear",
+                new SelectionListener<ButtonEvent>() {
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                    }
+                });
+
         ToolTipConfig config = new ToolTipConfig();
         config.setTitle("Information");
         config.setText("Clear Combo Server and Layers Grid.");
@@ -239,6 +239,12 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         this.store.add(beans);
     }
 
+    public void cleanComponentForSelection() {
+        this.cleanStore();
+        this.grid.getSelectionModel().deselectAll();
+        this.done.disable();
+    }
+
     /**
      * 
      */
@@ -249,6 +255,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
     public void resetComponents() {
         this.store.removeAll();
         unMaskGrid();
+        this.grid.getSelectionModel().deselectAll();
         this.done.disable();
         this.displayServerWidget.resetComponents();
     }

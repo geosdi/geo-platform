@@ -147,11 +147,11 @@ public class DisplayServerWidget {
      * @return String
      */
     private native String getTemplate() /*-{
-    return  [
-    '<tpl for=".">',
-    '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{urlServer}</div>',
-    '</tpl>'
-    ].join("");
+        return  [
+            '<tpl for=".">',
+                '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{urlServer}</div>',
+            '</tpl>'
+        ].join("");
     }-*/;
 
     /**
@@ -208,7 +208,7 @@ public class DisplayServerWidget {
      * @param selected
      */
     private void changeSelection(GPServerBeanModel selected) {
-        this.gridWidget.cleanStore();
+        this.gridWidget.cleanComponentForSelection();
         LayoutManager.get().getStatusMap().setBusy("Loading Layers.....");
         this.gridWidget.maskGrid();
 

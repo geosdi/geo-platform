@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.server.service.converter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
@@ -44,6 +45,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.slf4j.Logger;
@@ -106,30 +108,31 @@ public class DTOServerConverter {
      * @return
      *        ArrayList<? extends GPLayerBeanModel>
      */
-    public ArrayList<? extends GPLayerGrid> convertRasterLayer(
-            Collection<ShortLayerDTO> layers) {
-        ArrayList<GPRasterLayerGrid> layersDTO = new ArrayList<GPRasterLayerGrid>();
+    public ArrayList<GPLayerGrid> createRasterLayerList(
+            List<? extends ShortLayerDTO> layers) {
+
+        return this.createRasterLayerList(layers,
+                new ArrayList<GPLayerGrid>());
+    }
+
+    private ArrayList<GPLayerGrid> createRasterLayerList(
+            List layers,
+            ArrayList<GPLayerGrid> list) {
 
         if (layers != null) {
-            for (ShortLayerDTO layer : layers) {
-                GPRasterLayerGrid raster = new GPRasterLayerGrid();
-                raster.setLabel(layer.getName());
-                raster.setName(layer.getTitle());
-                raster.setAbstractText(layer.getAbstractText());
-                raster.setLayerType(GPLayerType.RASTER);
-                raster.setDataSource(layer.getUrlServer());
+            for (Object layer : layers) {
 
-                if (layer.getBbox() != null) {
-                    raster.setBbox(new BboxClientInfo(layer.getBbox().getMinX(),
-                            layer.getBbox().getMinY(), layer.getBbox().getMaxX(),
-                            layer.getBbox().getMaxY()));
-                    raster.setCrs(layer.getSrs());
+                if ((layer instanceof RasterLayerDTO) && ((RasterLayerDTO) layer).getSubLayerList().size() > 0) {
+                    this.createRasterLayerList(
+                            ((RasterLayerDTO) layer).getSubLayerList(), list);
+                } else {
+                    GPRasterLayerGrid raster = this.convertToRasterLayerGrid((RasterLayerDTO) layer);
+                    list.add(raster);
                 }
-                layersDTO.add(raster);
             }
         }
 
-        return layersDTO;
+        return list;
     }
 
     /**
@@ -144,8 +147,24 @@ public class DTOServerConverter {
         serverDTO.setId(serverWS.getId());
         serverDTO.setName(serverWS.getName());
         serverDTO.setUrlServer(serverWS.getServerUrl());
-        serverDTO.setLayers(this.convertRasterLayer(serverWS.getLayerList()));
-
+        serverDTO.setLayers(this.createRasterLayerList(serverWS.getLayerList()));
         return serverDTO;
+    }
+
+    private GPRasterLayerGrid convertToRasterLayerGrid(RasterLayerDTO layer) {
+        GPRasterLayerGrid raster = new GPRasterLayerGrid();
+        raster.setLabel(layer.getName());
+        raster.setName(layer.getTitle());
+        raster.setAbstractText(layer.getAbstractText());
+        raster.setLayerType(GPLayerType.RASTER);
+        raster.setDataSource(layer.getUrlServer());
+
+        if (layer.getBbox() != null) {
+            raster.setBbox(new BboxClientInfo(layer.getBbox().getMinX(),
+                    layer.getBbox().getMinY(), layer.getBbox().getMaxX(),
+                    layer.getBbox().getMaxY()));
+            raster.setCrs(layer.getSrs());
+        }
+        return raster;
     }
 }

@@ -39,7 +39,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.widget.GPCababilitiesWidget;
+import org.geosdi.geoplatform.gui.client.widget.GPCapabilitiesWidget;
 
 /**
  *
@@ -48,11 +48,11 @@ import org.geosdi.geoplatform.gui.client.widget.GPCababilitiesWidget;
  */
 public class AddRasterTreeAction extends ToolbarLayerTreeAction {
 
-    private GPCababilitiesWidget serverWidget;
+    private GPCapabilitiesWidget serverWidget;
 
     public AddRasterTreeAction(TreePanel theTree) {
         super(theTree, LayerResources.ICONS.addRasterLayer(), "Add WMS");
-        this.serverWidget = new GPCababilitiesWidget(true, theTree);
+        this.serverWidget = new GPCapabilitiesWidget(true, theTree);
     }
 
     @Override

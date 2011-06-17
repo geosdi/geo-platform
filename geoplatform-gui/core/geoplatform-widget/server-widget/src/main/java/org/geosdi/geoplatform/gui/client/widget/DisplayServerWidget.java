@@ -75,7 +75,7 @@ public class DisplayServerWidget {
     private Button addServer;
     private GridLayersWidget gridWidget;
     private AddServerWidget addServerWidget;
-    private PerformGetCababilities loadCababilities;
+    private PerformGetcapabilities loadcapabilities;
 
     /**
      * @Constructor
@@ -85,7 +85,7 @@ public class DisplayServerWidget {
         init();
         this.gridWidget = theGridWidget;
         this.addServerWidget = new AddServerWidget(this);
-        this.loadCababilities = new PerformGetCababilities();
+        this.loadcapabilities = new PerformGetcapabilities();
     }
 
     private void init() {
@@ -212,7 +212,7 @@ public class DisplayServerWidget {
         LayoutManager.get().getStatusMap().setBusy("Loading Layers.....");
         this.gridWidget.maskGrid();
 
-        this.loadCababilities.checkSelectedServer(selected);
+        this.loadcapabilities.checkSelectedServer(selected);
     }
 
     /**
@@ -263,7 +263,7 @@ public class DisplayServerWidget {
      * Internal class
      * 
      */
-    private class PerformGetCababilities {
+    private class PerformGetcapabilities {
 
         private GPServerBeanModel selectedServer;
 
@@ -272,12 +272,12 @@ public class DisplayServerWidget {
             if (selected.isLayersLoaded()) {
                 fillGrid(selected.getLayers());
             } else {
-                loadCababilitiesFromWS();
+                loadcapabilitiesFromWS();
             }
         }
 
-        private void loadCababilitiesFromWS() {
-            GeoPlatformOGCRemote.Util.getInstance().getCababilities(selectedServer.getId(),
+        private void loadcapabilitiesFromWS() {
+            GeoPlatformOGCRemote.Util.getInstance().getcapabilities(selectedServer.getId(),
                     new AsyncCallback<ArrayList<? extends GPLayerGrid>>() {
 
                         @Override

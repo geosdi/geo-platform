@@ -77,9 +77,9 @@ public class GeoPlatformOGCRemoteImpl extends RemoteServiceServlet implements
     }
 
     @Override
-    public ArrayList<? extends GPLayerGrid> getCababilities(
+    public ArrayList<? extends GPLayerGrid> getcapabilities(
             long idServer) throws GeoPlatformException {
-        return this.ogcService.getCababilities(idServer);
+        return this.ogcService.getcapabilities(idServer);
     }
 
     @Override

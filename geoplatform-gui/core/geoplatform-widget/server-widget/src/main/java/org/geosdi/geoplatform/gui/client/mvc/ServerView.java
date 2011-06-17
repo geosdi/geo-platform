@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.mvc;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
-import org.geosdi.geoplatform.gui.client.widget.GPCababilitiesWidget;
+import org.geosdi.geoplatform.gui.client.widget.GPCapabilitiesWidget;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  */
 public class ServerView extends GeoPlatformView {
 
-    private GPCababilitiesWidget serverWidget;
+    private GPCapabilitiesWidget serverWidget;
 
     /**
      * @Constructor
@@ -57,17 +57,17 @@ public class ServerView extends GeoPlatformView {
      */
     public ServerView(Controller controller) {
         super(controller);
-        this.serverWidget = new GPCababilitiesWidget(true);
+        this.serverWidget = new GPCapabilitiesWidget(true);
     }
 
     @Override
     protected void handleEvent(AppEvent event) {
-        if (event.getType() == GeoPlatformEvents.SHOW_CABABILITIES_SERVER_WIDGET) {
-            onShowCababilitiesServerWidget();
+        if (event.getType() == GeoPlatformEvents.SHOW_capabilities_SERVER_WIDGET) {
+            onShowcapabilitiesServerWidget();
         }
     }
 
-    private void onShowCababilitiesServerWidget() {
+    private void onShowcapabilitiesServerWidget() {
         this.serverWidget.show();
     }
 }

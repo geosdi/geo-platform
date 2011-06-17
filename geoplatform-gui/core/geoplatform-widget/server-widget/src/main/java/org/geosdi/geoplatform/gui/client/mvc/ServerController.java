@@ -52,7 +52,7 @@ public class ServerController extends GeoPlatformController {
      */
     public ServerController() {
         registerEventTypes(GeoPlatformEvents.INIT_OGC_MODULES_WIDGET,
-                GeoPlatformEvents.SHOW_CABABILITIES_SERVER_WIDGET);
+                GeoPlatformEvents.SHOW_capabilities_SERVER_WIDGET);
     }
 
     @Override

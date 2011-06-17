@@ -90,7 +90,7 @@ public class OGCService implements IOGCService {
     }
     
     @Override
-    public ArrayList<? extends GPLayerGrid> getCababilities(long idServer)
+    public ArrayList<? extends GPLayerGrid> getcapabilities(long idServer)
             throws GeoPlatformException {
         try {
             RequestById req = new RequestById(idServer);

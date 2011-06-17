@@ -55,7 +55,7 @@ public class GeoPlatformEvents {
 
     public static final EventType INIT_OGC_MODULES_WIDGET = new EventType();
 
-    public static final EventType SHOW_CABABILITIES_SERVER_WIDGET = new EventType();
+    public static final EventType SHOW_capabilities_SERVER_WIDGET = new EventType();
     
     public static final EventType GP_NODE_EXPANDED = new EventType();
     

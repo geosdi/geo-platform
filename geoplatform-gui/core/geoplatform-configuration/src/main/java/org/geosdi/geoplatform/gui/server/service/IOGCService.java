@@ -54,7 +54,7 @@ public interface IOGCService {
 
     public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException;
 
-    public ArrayList<? extends GPLayerGrid> getCababilities(
+    public ArrayList<? extends GPLayerGrid> getcapabilities(
             long idServer) throws GeoPlatformException;
 
     public GPServerBeanModel insertServer(String urlServer) throws GeoPlatformException;

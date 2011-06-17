@@ -135,7 +135,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
                 if (getTree().getSelectionModel().getSelectedItem() instanceof AbstractFolderTreeNode) {
                     expander.checkNodeState();
                 } else {
-                    GeoPlatformMessage.alertMessage("GPCababilitiesWidget",
+                    GeoPlatformMessage.alertMessage("GPcapabilitiesWidget",
                             "You can put layers into Folders only."
                             + "Please select the correct node");
                 }

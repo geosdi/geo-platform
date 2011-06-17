@@ -48,6 +48,7 @@ import com.google.gwt.core.client.EntryPoint;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionCreator;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionRegistar;
+import org.geosdi.geoplatform.gui.client.action.PrintLayersAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToKML;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToPDF;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToTIFF;
@@ -98,7 +99,7 @@ public class LayerWidgetUI implements EntryPoint {
                 return new LayerMenuAction();
             }
         });
-        
+
         MenuActionRegistar.put("ZoomToLayerExtent", new MenuActionCreator() {
 
             @Override
@@ -107,7 +108,7 @@ public class LayerWidgetUI implements EntryPoint {
                 return new ZoomToLayerExtentAction();
             }
         });
-        
+
         MenuActionRegistar.put("exportToKML", new MenuActionCreator() {
 
             @Override
@@ -116,7 +117,7 @@ public class LayerWidgetUI implements EntryPoint {
                 return new ExportoToKML();
             }
         });
-        
+
         MenuActionRegistar.put("exportToPDF", new MenuActionCreator() {
 
             @Override
@@ -125,8 +126,8 @@ public class LayerWidgetUI implements EntryPoint {
                 return new ExportoToPDF();
             }
         });
-        
-        
+
+
         MenuActionRegistar.put("exportToTIFF", new MenuActionCreator() {
 
             @Override
@@ -135,58 +136,85 @@ public class LayerWidgetUI implements EntryPoint {
                 return new ExportoToTIFF();
             }
         });
-        
+
     }
 
     private void addToolbarTreeAction() {
-        ToolbarTreeActionRegistar.put("addFolder", new ToolbarTreeActionCreator() {
+        ToolbarTreeActionRegistar.put("addFolder",
+                new ToolbarTreeActionCreator() {
 
-            @Override
-            public GeoPlatformToolbarAction createActionTool(TreePanel tree) {
-                ToolbarLayerTreeAction action = new AddFolderTreeAction(tree);
-                setAction(action);
-                return action;
-            }
-        });
+                    @Override
+                    public GeoPlatformToolbarAction createActionTool(
+                            TreePanel tree) {
+                        ToolbarLayerTreeAction action = new AddFolderTreeAction(
+                                tree);
+                        setAction(action);
+                        return action;
+                    }
+                });
 
-        ToolbarTreeActionRegistar.put("addRasterLayer", new ToolbarTreeActionCreator() {
+        ToolbarTreeActionRegistar.put("addRasterLayer",
+                new ToolbarTreeActionCreator() {
 
-            @Override
-            public GeoPlatformToolbarAction createActionTool(TreePanel tree) {
-                ToolbarLayerTreeAction action = new AddRasterTreeAction(tree);
-                setAction(action);
-                return action;
-            }
-        });
+                    @Override
+                    public GeoPlatformToolbarAction createActionTool(
+                            TreePanel tree) {
+                        ToolbarLayerTreeAction action = new AddRasterTreeAction(
+                                tree);
+                        setAction(action);
+                        return action;
+                    }
+                });
 
-        ToolbarTreeActionRegistar.put("addVectorLayer", new ToolbarTreeActionCreator() {
+        ToolbarTreeActionRegistar.put("addVectorLayer",
+                new ToolbarTreeActionCreator() {
 
-            @Override
-            public GeoPlatformToolbarAction createActionTool(TreePanel tree) {
-                ToolbarLayerTreeAction action = new AddVectorTreeAction(tree);
-                setAction(action);
-                return action;
-            }
-        });
+                    @Override
+                    public GeoPlatformToolbarAction createActionTool(
+                            TreePanel tree) {
+                        ToolbarLayerTreeAction action = new AddVectorTreeAction(
+                                tree);
+                        setAction(action);
+                        return action;
+                    }
+                });
 
-        ToolbarTreeActionRegistar.put("removeElement", new ToolbarTreeActionCreator() {
+        ToolbarTreeActionRegistar.put("removeElement",
+                new ToolbarTreeActionCreator() {
 
-            @Override
-            public GeoPlatformToolbarAction createActionTool(TreePanel tree) {
-                ToolbarLayerTreeAction action = new DeleteElementTreeAction(tree);
-                setAction(action);
-                return action;
-            }
-        });
-        
-        ToolbarTreeActionRegistar.put("saveTreeState", new ToolbarTreeActionCreator() {
+                    @Override
+                    public GeoPlatformToolbarAction createActionTool(
+                            TreePanel tree) {
+                        ToolbarLayerTreeAction action = new DeleteElementTreeAction(
+                                tree);
+                        setAction(action);
+                        return action;
+                    }
+                });
 
-            @Override
-            public GeoPlatformToolbarAction createActionTool(TreePanel tree) {
-                ToolbarLayerTreeAction action = new SaveTreeAction(tree);
-                setAction(action);
-                return action;
-            }
-        });
+        ToolbarTreeActionRegistar.put("saveTreeState",
+                new ToolbarTreeActionCreator() {
+
+                    @Override
+                    public GeoPlatformToolbarAction createActionTool(
+                            TreePanel tree) {
+                        ToolbarLayerTreeAction action = new SaveTreeAction(tree);
+                        setAction(action);
+                        return action;
+                    }
+                });
+
+        ToolbarTreeActionRegistar.put("printTreeLayers",
+                new ToolbarTreeActionCreator() {
+
+                    @Override
+                    public GeoPlatformToolbarAction createActionTool(
+                            TreePanel tree) {
+                        PrintLayersAction action = new PrintLayersAction(
+                                tree);
+                        setAction(action);
+                        return action;
+                    }
+                });
     }
 }

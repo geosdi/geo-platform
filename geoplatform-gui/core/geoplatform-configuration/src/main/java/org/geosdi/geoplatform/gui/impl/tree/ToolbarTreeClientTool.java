@@ -90,8 +90,15 @@ public class ToolbarTreeClientTool {
         saveTreeState.setType("button");
         saveTreeState.setEnabled(false);
         saveTreeState.setOrder(6);
+        
+        ActionClientTool printClientTool = new ActionClientTool();
+        printClientTool.setId("printTreeLayers");
+        printClientTool.setType("button");
+        printClientTool.setEnabled(false);
+        printClientTool.setOrder(7);
 
 
+        this.clientTools.add(printClientTool);
         this.clientTools.add(saveTreeState);
         this.clientTools.add(removeElement);
         this.clientTools.add(toolbarSeparator);

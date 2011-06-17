@@ -38,9 +38,11 @@ package org.geosdi.geoplatform.gui.featureinfo.widget;
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import java.util.Iterator;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.featureinfo.cache.FeatureInfoFlyWeight;
 import org.geosdi.geoplatform.gui.featureinfo.cache.IGPFeatureInfoElement;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.GPFeatureInfoHandler;
@@ -67,7 +69,6 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
     public void addComponent() {
         this.mainPanel = new ContentPanel();
         this.mainPanel.setHeaderVisible(false);
-
         add(this.mainPanel);
     }
 
@@ -107,7 +108,7 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
     @Override
     public void showInfoWidget() {
         System.out.println("Showing the info widget");
-        for (Iterator<IGPFeatureInfoElement> it = featureCaller.getCollection().iterator(); it.hasNext();) {
+        for (Iterator<IGPFeatureInfoElement> it = FeatureInfoFlyWeight.getInstance().getCollection().iterator(); it.hasNext();) {
             IGPFeatureInfoElement element = it.next();
             System.out.println(
                     "ELEMENT *********************** " + element.isActive());
@@ -123,5 +124,12 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
             GeoPlatformMessage.alertMessage("GeoPlatform Feature Widget",
                     "There are no layers to show Info.");
         }
+    }
+
+    @Override
+    public void addLayersServer(String urlServers) {
+        IGPFeatureInfoElement element = FeatureInfoFlyWeight.getInstance().get(urlServers);
+        this.mapWidget.getMap().addControl(element.getElementControl());
+        element.getElementControl().activate();
     }
 }

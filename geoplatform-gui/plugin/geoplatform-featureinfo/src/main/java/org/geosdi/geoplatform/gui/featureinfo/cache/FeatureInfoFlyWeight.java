@@ -60,9 +60,17 @@ import org.gwtopenmaps.openlayers.client.event.NoGetFeatureInfoListener.NoGetFea
  */
 public class FeatureInfoFlyWeight {
 
+    private static FeatureInfoFlyWeight instance = new FeatureInfoFlyWeight();
+    
     private Map<String, IGPFeatureInfoElement> cache = new HashMap<String, IGPFeatureInfoElement>();
     private FeatureInfoShowWidgetEvent event = new FeatureInfoShowWidgetEvent();
     private int count = 0;
+    
+    private FeatureInfoFlyWeight(){}
+    
+    public static FeatureInfoFlyWeight getInstance(){
+        return instance;
+    }
 
     private void checkLastElement() {
         if (++count == cache.size()) {

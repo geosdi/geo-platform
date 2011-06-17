@@ -50,34 +50,31 @@ import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
 public class LayerHandlerManager {
 
     private GPEventBus eventBus;
-    private static LayerHandlerManager INSTANCE;
+    private static LayerHandlerManager instance = new LayerHandlerManager();
 
     private LayerHandlerManager() {
         this.eventBus = new GPEventBusImpl();
     }
 
-    public static LayerHandlerManager get() {
-        if (INSTANCE == null) {
-            INSTANCE = new LayerHandlerManager();
-        }
-        return INSTANCE;
+    public static LayerHandlerManager getInstance() {
+        return instance;
     }
 
     public static <T extends EventHandler> HandlerRegistration addHandler(
             Type<T> type, T handler) {
-        return get().eventBus.addHandler(type, handler);
+        return getInstance().eventBus.addHandler(type, handler);
     }
 
     public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
             Type<T> type, Object source, T handler) {
-        return get().eventBus.addHandlerToSource(type, source, handler);
+        return getInstance().eventBus.addHandlerToSource(type, source, handler);
     }
 
     public static void fireEvent(GwtEvent<?> event) {
-        get().eventBus.fireEvent(event);
+        getInstance().eventBus.fireEvent(event);
     }
 
     public static void fireEventFromSource(GwtEvent<?> event, Object source) {
-        get().eventBus.fireEventFromSource(event, source);
+        getInstance().eventBus.fireEventFromSource(event, source);
     }
 }

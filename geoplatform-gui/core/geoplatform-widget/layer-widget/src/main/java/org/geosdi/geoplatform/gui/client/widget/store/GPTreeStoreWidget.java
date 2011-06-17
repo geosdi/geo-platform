@@ -52,11 +52,13 @@ import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.GenericTreeStoreWidget;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoAddLayersServer;
 import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridElementEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
@@ -70,6 +72,7 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.LayersProgres
 public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<MementoSaveAddedLayers> {
 
     private LayersProgressTextEvent layersTextEvent = new LayersProgressTextEvent();
+    private FeatureInfoAddLayersServer featureInfoAddLayersEvent = new FeatureInfoAddLayersServer();
     private DeselectGridElementEvent deselectEvent = new DeselectGridElementEvent();
     private VisitorAddElement visitorAdd = new VisitorAddElement();
     private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
@@ -83,24 +86,27 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
 
     @Override
     public void addRasterLayers(List<? extends GPLayerBean> layers) {
-        this.changeProgressBarMessage(
-                "Loading " + layers.size() + " Raster Layers into the Store");
-        GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
-        super.tree.setExpanded(parentDestination, true);
-        List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
-        for (Iterator it = layers.iterator(); it.hasNext();) {
-            layerList.add(this.convertGPRasterBeanModelToRasterTreeNode(
-                    (GPRasterLayerGrid) it.next()));
+        if (layers.size() > 0) {
+            this.changeProgressBarMessage(
+                    "Loading " + layers.size() + " Raster Layers into the Store");
+            GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
+            super.tree.setExpanded(parentDestination, true);
+            List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
+            for (Iterator it = layers.iterator(); it.hasNext();) {
+                layerList.add(this.convertGPRasterBeanModelToRasterTreeNode(
+                        (GPRasterLayerGrid) it.next()));
+            }
+            this.tree.getStore().insert(parentDestination, layerList, 0, true);
+            this.visitorAdd.insertLayerElements(layerList, parentDestination);
+            MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
+            mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(layerList));
+            mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
+            GPLayerSaveCache.getInstance().add(mementoSaveLayer);
+            this.featureInfoAddLayersEvent.setUrlServers(layers.get(0).getDataSource());
+            MapHandlerManager.fireEvent(this.featureInfoAddLayersEvent);
+
+            LayerHandlerManager.fireEvent(deselectEvent);
         }
-        this.tree.getStore().insert(parentDestination, layerList, 0, true);
-        this.visitorAdd.insertLayerElements(layerList, parentDestination);
-        MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
-        mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(layerList));
-        mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
-        GPLayerSaveCache.getInstance().add(mementoSaveLayer);
-
-
-        LayerHandlerManager.fireEvent(deselectEvent);
     }
 
     private RasterTreeNode convertGPRasterBeanModelToRasterTreeNode(GPRasterLayerGrid rasterBean) {

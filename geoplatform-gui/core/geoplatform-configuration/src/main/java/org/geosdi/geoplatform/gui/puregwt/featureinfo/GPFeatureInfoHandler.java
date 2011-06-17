@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.puregwt.featureinfo;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import java.util.List;
 
 /**
  *
@@ -52,4 +53,6 @@ public interface GPFeatureInfoHandler extends EventHandler {
     public void deactivateHandler();
     
     public void showInfoWidget();
+    
+    public void addLayersServer(String urlServers);
 }

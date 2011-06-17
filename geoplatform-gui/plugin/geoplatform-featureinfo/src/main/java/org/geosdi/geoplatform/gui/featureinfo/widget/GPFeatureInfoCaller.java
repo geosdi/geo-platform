@@ -55,7 +55,6 @@ import org.gwtopenmaps.openlayers.client.Map;
 public class GPFeatureInfoCaller {
 
     private boolean loaded;
-    private FeatureInfoFlyWeight featureCache = new FeatureInfoFlyWeight();
     private Map map;
 
     public GPFeatureInfoCaller(Map theMap) {
@@ -84,7 +83,7 @@ public class GPFeatureInfoCaller {
             @Override
             public void onSuccess(ArrayList<String> result) {
                 for (String string : result) {
-                    IGPFeatureInfoElement element = featureCache.get(string);
+                    IGPFeatureInfoElement element = FeatureInfoFlyWeight.getInstance().get(string);
                     map.addControl(element.getElementControl());
                 }
                 activateFeatureInfoControl();
@@ -99,7 +98,7 @@ public class GPFeatureInfoCaller {
      * 
      */
     public void activateFeatureInfoControl() {
-        for (Iterator<IGPFeatureInfoElement> it = featureCache.getCollection().iterator(); it.hasNext();) {
+        for (Iterator<IGPFeatureInfoElement> it = FeatureInfoFlyWeight.getInstance().getCollection().iterator(); it.hasNext();) {
             it.next().getElementControl().activate();
         }
     }
@@ -108,18 +107,9 @@ public class GPFeatureInfoCaller {
      * 
      */
     public void deactivateFeatureInfoControl() {
-        for (Iterator<IGPFeatureInfoElement> it = featureCache.getCollection().iterator(); it.hasNext();) {
+        for (Iterator<IGPFeatureInfoElement> it = FeatureInfoFlyWeight.getInstance().getCollection().iterator(); it.hasNext();) {
             it.next().getElementControl().deactivate();
         }
-    }
-
-    /**
-     * 
-     * @return  
-     *          Collection<IGPFeatureInfoElement>
-     */
-    public Collection<IGPFeatureInfoElement> getCollection() {
-        return this.featureCache.getCollection();
     }
 
     /**

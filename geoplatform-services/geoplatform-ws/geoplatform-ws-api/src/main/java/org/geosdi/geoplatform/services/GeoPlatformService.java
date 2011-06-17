@@ -88,7 +88,8 @@ public interface GeoPlatformService {
     // ==========================================================================
     @Put
     @HttpResource(location = "/users")
-    long insertUser(@WebParam(name = "User") GPUser user);
+    long insertUser(@WebParam(name = "User") GPUser user)
+            throws IllegalParameterFault;
 
     @Post
     @HttpResource(location = "/users")
@@ -239,7 +240,7 @@ public interface GeoPlatformService {
     @WebResult(name = "ChildrenElement")
     TreeFolderElements getChildrenElements(@WebParam(name = "folderId") long folderId);
     //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc="Folder / User">
     // ==========================================================================
     // === Folder / User
@@ -497,7 +498,8 @@ public interface GeoPlatformService {
     @Get
     @HttpResource(location = "/user/{userId}")
     @WebResult(name = "GuiComponentsPermissionMapData")
-    GuiComponentsPermissionMapData getUserGuiComponentVisible(@WebParam(name = "userId") long userId)
+    GuiComponentsPermissionMapData getUserGuiComponentVisible(
+            @WebParam(name = "userId") long userId)
             throws ResourceNotFoundFault;
     //</editor-fold>
 }

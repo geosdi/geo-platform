@@ -172,7 +172,7 @@ class WMSServiceImpl {
         WMSCapabilities wmsCapabilities = this.getWMSCapabilities(server.getServerUrl());
 
         ServerDTO serverDTO = new ServerDTO(server);
-        List<ShortLayerDTO> layers = convertToLayerList(
+        List<RasterLayerDTO> layers = convertToLayerList(
                 wmsCapabilities.getLayer(), server.getServerUrl());
         serverDTO.setLayerList(layers);
 
@@ -192,7 +192,7 @@ class WMSServiceImpl {
             serverDao.persist(server);
         }
         serverDTO = new ServerDTO(server);
-        List<ShortLayerDTO> layers = convertToLayerList(
+        List<RasterLayerDTO> layers = convertToLayerList(
                 wmsCapabilities.getLayer(), serverUrl);
         serverDTO.setLayerList(layers);
 
@@ -226,8 +226,8 @@ class WMSServiceImpl {
         return cap;
     }
 
-    private List<ShortLayerDTO> convertToLayerList(Layer layer, String urlServer) {
-        List<ShortLayerDTO> shortLayers = new ArrayList<ShortLayerDTO>();
+    private List<RasterLayerDTO> convertToLayerList(Layer layer, String urlServer) {
+        List<RasterLayerDTO> shortLayers = new ArrayList<RasterLayerDTO>();
 
         RasterLayerDTO raster = this.getRasterAndSubRaster(layer, urlServer);
         shortLayers.add(raster);
@@ -237,8 +237,8 @@ class WMSServiceImpl {
 
     private RasterLayerDTO getRasterAndSubRaster(Layer layer, String urlServer) {
         RasterLayerDTO raster = this.convertLayerToRaster(layer, urlServer);
-        
-        List<Layer> subLayerList = layer.getLayerChildren();        
+
+        List<Layer> subLayerList = layer.getLayerChildren();
         List<RasterLayerDTO> subRasterList = new ArrayList<RasterLayerDTO>(subLayerList.size());
         raster.setSubLayerList(subRasterList);
 

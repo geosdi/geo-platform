@@ -39,6 +39,7 @@ package org.geosdi.geoplatform;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -136,7 +137,7 @@ public abstract class ServiceTest implements InitializingBean {
     }
 
     // Create and insert (with assert) a User
-    protected long createAndInsertUser(String username) {
+    protected long createAndInsertUser(String username) throws IllegalParameterFault {
         GPUser user = createUser(username);
         logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
         long idUser = geoPlatformService.insertUser(user);

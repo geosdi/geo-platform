@@ -76,7 +76,12 @@ class UserServiceImpl {
      * @param user the User object to insert
      * @return long the User ID
      */
-    public long insertUser(GPUser user) {
+    public long insertUser(GPUser user) throws IllegalParameterFault {
+        GPUser duplicateUser = userDao.findByUsername(user.getUsername());
+        if (duplicateUser != null) {
+            throw new IllegalParameterFault("User with username \"" + user.getUsername() + "\" already exists");
+        }
+
         // Always insert users as enabled
         user.setEnabled(true);
         userDao.persist(user);
@@ -239,7 +244,7 @@ class UserServiceImpl {
 
     private List<UserDTO> convertToUserList(List<GPUser> userList) {
         List<UserDTO> usersDTO = new ArrayList<UserDTO>(userList.size());
-        
+
         for (GPUser dGUser : userList) {
             usersDTO.add(new UserDTO(dGUser));
         }

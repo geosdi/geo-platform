@@ -62,7 +62,7 @@ public class ServerDTO {
     //
     @XmlElementWrapper(name = "layerList")
     @XmlElement(name = "layer")
-    private List<ShortLayerDTO> layerList;
+    private List<? extends ShortLayerDTO> layerList;
 
     public ServerDTO() {
         super();
@@ -122,7 +122,7 @@ public class ServerDTO {
     /**
      * @return the layersDTO
      */
-    public List<ShortLayerDTO> getLayerList() {
+    public List<? extends ShortLayerDTO> getLayerList() {
         return layerList;
     }
 
@@ -130,7 +130,7 @@ public class ServerDTO {
      * @param layerList
      *          the layersDTO to set
      */
-    public void setLayerList(List<ShortLayerDTO> layerList) {
+    public void setLayerList(List<? extends ShortLayerDTO> layerList) {
         this.layerList = layerList;
     }
 

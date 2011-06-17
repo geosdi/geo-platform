@@ -54,8 +54,8 @@ public class AclObjectIdentityDAOImpl extends BaseDAO<AclObjectIdentity, Long>
         implements AclObjectIdentityDAO {
 
     @Override
-    public void persist(AclObjectIdentity... objectsIdentity) {
-        super.persist(objectsIdentity);
+    public void persist(AclObjectIdentity... objectsIdentities) {
+        super.persist(objectsIdentities);
     }
 
     @Override

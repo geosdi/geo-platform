@@ -58,13 +58,13 @@ public class GPUserDAOImpl extends BaseDAO<GPUser, Long> implements GPUserDAO {
     }
 
     @Override
-    public boolean remove(GPUser entity) {
-        return super.remove(entity);
+    public boolean remove(GPUser user) {
+        return super.remove(user);
     }
 
     @Override
-    public boolean removeById(Long id) {
-        return super.removeById(id);   
+    public boolean removeById(Long userId) {
+        return super.removeById(userId);   
     }
 
     @SuppressWarnings("unchecked")
@@ -74,9 +74,9 @@ public class GPUserDAOImpl extends BaseDAO<GPUser, Long> implements GPUserDAO {
     }
 
     @Override
-    public GPUser findByUsername(String name) {
+    public GPUser findByUsername(String username) {
         Search search = new Search();
-        search.addFilterEqual("username", name);
+        search.addFilterEqual("username", username);
         return searchUnique(search);
     }
 }

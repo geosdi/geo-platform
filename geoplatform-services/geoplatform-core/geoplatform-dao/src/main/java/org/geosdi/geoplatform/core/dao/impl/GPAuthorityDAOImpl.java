@@ -59,8 +59,8 @@ public class GPAuthorityDAOImpl extends BaseDAO<GPAuthority, Long> implements
     }
 
     @Override
-    public boolean remove(GPAuthority entity) {
-        return super.remove(entity);
+    public boolean remove(GPAuthority authority) {
+        return super.remove(authority);
     }
 
     @SuppressWarnings("unchecked")

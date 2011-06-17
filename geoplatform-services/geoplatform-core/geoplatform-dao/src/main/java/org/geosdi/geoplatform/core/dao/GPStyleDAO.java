@@ -53,17 +53,17 @@ public interface GPStyleDAO {
 
     public GPStyle find(Long id);
 
-    public void persist(GPStyle... user);
+    public void persist(GPStyle... styles);
 
-    public GPStyle merge(GPStyle user);
+    public GPStyle merge(GPStyle style);
 
-    public boolean remove(GPStyle user);
+    public boolean remove(GPStyle style);
 
-    public boolean removeById(Long userId);
+    public boolean removeById(Long styleId);
 
     public List<GPStyle> search(ISearch search);
 
     public int count(ISearch search);
 
-    public GPStyle findByStyleName(String name);
+    public GPStyle findByStyleName(String styleName);
 }

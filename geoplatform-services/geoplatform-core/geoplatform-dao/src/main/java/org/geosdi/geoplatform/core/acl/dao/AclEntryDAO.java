@@ -52,7 +52,7 @@ public interface AclEntryDAO {
 
     public AclEntry find(Long id);
 
-    public void persist(AclEntry... entry);
+    public void persist(AclEntry... entries);
 
     public AclEntry merge(AclEntry entry);
 
@@ -60,5 +60,5 @@ public interface AclEntryDAO {
 
     public boolean removeById(Long id);
     
-    public List<AclEntry> findBySid(Long idSid);
+    public List<AclEntry> findBySid(Long sidId);
 }

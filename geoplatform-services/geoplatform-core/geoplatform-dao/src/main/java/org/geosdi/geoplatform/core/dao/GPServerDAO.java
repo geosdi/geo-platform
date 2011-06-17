@@ -54,7 +54,7 @@ public interface GPServerDAO {
 
     public GeoPlatformServer find(Long id);
 
-    public void persist(GeoPlatformServer... server);
+    public void persist(GeoPlatformServer... servers);
 
     public GeoPlatformServer merge(GeoPlatformServer server);
 

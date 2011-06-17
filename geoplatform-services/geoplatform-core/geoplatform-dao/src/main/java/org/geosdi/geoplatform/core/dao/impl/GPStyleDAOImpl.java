@@ -54,8 +54,8 @@ public class GPStyleDAOImpl extends BaseDAO<GPStyle, Long> implements
         GPStyleDAO {
 
     @Override
-    public void persist(GPStyle... style) {
-        super.persist(style);
+    public void persist(GPStyle... styles) {
+        super.persist(styles);
     }
 
     @SuppressWarnings("unchecked")
@@ -65,14 +65,14 @@ public class GPStyleDAOImpl extends BaseDAO<GPStyle, Long> implements
     }
 
     @Override
-    public boolean remove(GPStyle entity) {
-        return super.remove(entity);
+    public boolean remove(GPStyle style) {
+        return super.remove(style);
     }
 
     @Override
-    public GPStyle findByStyleName(String name) {
+    public GPStyle findByStyleName(String styleName) {
         Search search = new Search();
-        search.addFilterEqual("name", name);
+        search.addFilterEqual("name", styleName);
         return searchUnique(search);
     }
 }

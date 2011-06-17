@@ -64,9 +64,9 @@ public class AclEntryDAOImpl extends BaseDAO<AclEntry, Long> implements AclEntry
     }
 
     @Override
-    public List<AclEntry> findBySid(Long idSid) {
+    public List<AclEntry> findBySid(Long sidId) {
         Search search = new Search();
-        search.addFilterEqual("aclSid.id", idSid);
+        search.addFilterEqual("aclSid.id", sidId);
         return super.search(search);
     }
 }

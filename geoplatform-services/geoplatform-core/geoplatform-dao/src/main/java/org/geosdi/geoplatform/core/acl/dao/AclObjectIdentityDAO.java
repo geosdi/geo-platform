@@ -52,13 +52,13 @@ public interface AclObjectIdentityDAO {
 
     public AclObjectIdentity find(Long id);
 
-    public void persist(AclObjectIdentity... objectsIdentity);
+    public void persist(AclObjectIdentity... objectsIdentities);
 
     public AclObjectIdentity merge(AclObjectIdentity ObjectIdentity);
 
     public boolean remove(AclObjectIdentity ObjectIdentity);
 
     public boolean removeById(Long id);
-    
-    public AclObjectIdentity findByObjectId(long objectIdClass, long objectIdIdentity);    
+
+    public AclObjectIdentity findByObjectId(long objectIdClass, long objectIdIdentity);
 }

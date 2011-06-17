@@ -53,7 +53,7 @@ public interface GPUserDAO {
 
     public GPUser find(Long id);
 
-    public void persist(GPUser... user);
+    public void persist(GPUser... users);
 
     public GPUser merge(GPUser user);
 
@@ -65,5 +65,5 @@ public interface GPUserDAO {
 
     public int count(ISearch search);
 
-    public GPUser findByUsername(String name);
+    public GPUser findByUsername(String username);
 }

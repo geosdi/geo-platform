@@ -52,7 +52,7 @@ public interface GPAuthorityDAO {
 
     public GPAuthority find(Long id);
 
-    public void persist(GPAuthority... authority);
+    public void persist(GPAuthority... authorities);
 
     public GPAuthority merge(GPAuthority authority);
 

@@ -303,7 +303,8 @@ public class WSLayerTest extends ServiceTest {
             map.put(idRootFolderB, 3);
 
             // Adding new layer to user's root folder B
-            long idLayerToTest = geoPlatformService.saveAddedLayerAndTreeModifications(layerToTest, descendantsMapData);
+            long idLayerToTest = geoPlatformService.saveAddedLayerAndTreeModifications(
+                    super.usernameTest, layerToTest, descendantsMapData);
             layerToTest.setId(idLayerToTest);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -645,7 +646,8 @@ public class WSLayerTest extends ServiceTest {
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map);
 
-        return geoPlatformService.saveAddedLayersAndTreeModifications(arrayList, descendantsMapData);
+        return geoPlatformService.saveAddedLayersAndTreeModifications(
+                super.usernameTest, arrayList, descendantsMapData);
     }
 
     private void checkInitialState()

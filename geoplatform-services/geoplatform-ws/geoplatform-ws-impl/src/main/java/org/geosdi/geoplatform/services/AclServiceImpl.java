@@ -145,7 +145,7 @@ class AclServiceImpl {
      *      value = Permission
      * @throws ResourceNotFoundFault
      *      if the user not found
-     */    
+     */
     public GuiComponentsPermissionMapData getUserGuiComponentVisible(long userId)
             throws ResourceNotFoundFault {
         // Retrieve the user
@@ -168,7 +168,7 @@ class AclServiceImpl {
             logger.trace("\n*** AclSid:\n{}\n***", sid);
             // Retrieve the ACEs of the Sid
             List<AclEntry> entries = entryDao.findBySid(sid.getId());
-            logger.trace("\n*** #Entries: " + entries.size() + " ***");
+            logger.trace("\n*** #Entries: {} ***", entries.size());
             // For each ACEs
             // (ACL has a single ACE for User+GuiComponent,
             // because there is a singe Permission)

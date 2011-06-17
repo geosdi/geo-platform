@@ -39,6 +39,7 @@ package org.geosdi.geoplatform;
 
 import java.text.ParseException;
 import java.util.Collection;
+import java.util.List;
 import junit.framework.Assert;
 import org.geosdi.geoplatform.core.model.GPCababilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
@@ -61,8 +62,9 @@ public class CXFServiceTest extends ServiceTest {
 //    private GeoPlatformWSClientEncrypted gpWSClientEncrypted;
     private final String serverUrlTest = "http://map.serverNameTest.org";
     private long idServerTest = -1;
-    // Server geoSDI
+    // Servers
     private final String serverUrlGeoSDI = "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
+//    private final String serverUrlTelespazio = "http://maps.telespazio.it/dpc/dpc-wms?service=wms&version=1.1.1&request=GetCapabilities";
 
     @Override
     public void setUp() throws Exception {
@@ -169,7 +171,7 @@ public class CXFServiceTest extends ServiceTest {
         ServerDTO serverDTO = geoPlatformService.saveServer(serverUrlGeoSDI);
         Assert.assertNotNull("ServerDTO geoSDI is NULL", serverDTO);
 
-        Collection<ShortLayerDTO> layersList = serverDTO.getLayerList();
+        List<ShortLayerDTO> layersList = (List<ShortLayerDTO>) serverDTO.getLayerList();
         Assert.assertNotNull("Collection of ShortLayerDTO is NULL for server geoSDI", layersList);
 
         // Server is NOT into DB
@@ -177,7 +179,7 @@ public class CXFServiceTest extends ServiceTest {
         serverDTO = geoPlatformService.saveServer(serverUrlEx);
         Assert.assertNotNull("ServerDTO EX is NULL", serverDTO);
 
-        layersList = serverDTO.getLayerList();
+        layersList = (List<ShortLayerDTO>) serverDTO.getLayerList();
         Assert.assertNotNull("Collection of ShortLayerDTO is NULL for server Ex", layersList);
         // Check if the server was insert
         GeoPlatformServer serverEx = geoPlatformService.getServerDetailByUrl(serverUrlEx);

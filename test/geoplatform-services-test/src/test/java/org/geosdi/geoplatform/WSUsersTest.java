@@ -39,6 +39,9 @@ package org.geosdi.geoplatform;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.ws.soap.SOAPFaultException;
 import org.junit.Test;
 import junit.framework.Assert;
 
@@ -111,6 +114,46 @@ public class WSUsersTest extends ServiceTest {
             Assert.assertEquals("Error found User from Username", idUserTest, userFromWS.getId());
         } catch (ResourceNotFoundFault ex) {
             Assert.fail("Not found User with Username: \"" + usernameTest + "\"");
+        }
+    }
+
+    @Test
+    public void testGetUserDetailByUsernameAndPassword1() {
+        GPUser user = null;
+        try {
+            user = geoPlatformService.getUserDetailByUsernameAndPassword(usernameTest, "pwd_username_test_ws");
+            Assert.assertNotNull("User is null", user);
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail(ex.getMessage());
+        } catch (SOAPFaultException ex) {
+            Assert.fail(ex.getMessage());
+        }
+    }
+
+    @Test
+    public void testGetUserDetailByUsernameAndPassword2() {
+        GPUser user = null;
+        try {
+            String newUsername = usernameTest + "_";
+            user = geoPlatformService.getUserDetailByUsernameAndPassword(newUsername, "pwd_username_test_ws");
+            Assert.fail("Test must fail because username is wrong");
+        } catch (ResourceNotFoundFault ex) {
+            Assert.assertNull("User is not null", user);
+        } catch (SOAPFaultException ex) {
+            Assert.fail(ex.getMessage());
+        }
+    }
+
+    @Test
+    public void testGetUserDetailByUsernameAndPassword3() {
+        GPUser user = null;
+        try {
+            user = geoPlatformService.getUserDetailByUsernameAndPassword(usernameTest, "pwd_username_test_ws_");
+            Assert.fail("Test must fail because password is wrong");
+        } catch (ResourceNotFoundFault ex) {
+            Assert.fail(ex.getMessage());
+        } catch (SOAPFaultException ex) {
+            Assert.assertNull("User is not null", user);
         }
     }
 }

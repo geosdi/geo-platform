@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.List;
@@ -240,6 +241,19 @@ class UserServiceImpl {
             searchCriteria.addFilterILike("username", request.getNameLike());
         }
         return userDao.count(searchCriteria);
+    }
+
+    public GPUser getUserDetailByUsernameAndPassword(String username) {
+        Search searchCriteria = new Search(GPUser.class);
+        
+        Filter usernameFilter = Filter.equal("username", username);
+        searchCriteria.addFilter(usernameFilter);
+
+        List<GPUser> usersList = userDao.search(searchCriteria);
+        if (usersList.isEmpty()) {
+            return null;
+        }
+        return usersList.get(0);
     }
 
     private List<UserDTO> convertToUserList(List<GPUser> userList) {

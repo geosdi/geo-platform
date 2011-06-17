@@ -37,10 +37,13 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import java.util.List;
 import javax.jws.WebService;
+import javax.xml.ws.soap.SOAPFaultException;
+import org.apache.cxf.binding.soap.SoapFault;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
@@ -290,6 +293,24 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     @Override
     public long getUsersCount(SearchRequest request) {
         return userServiceDelegate.getUsersCount(request);
+    }
+
+    @Override
+    public GPUser getUserDetailByUsernameAndPassword(String username, String password) throws ResourceNotFoundFault, SOAPFaultException {
+        GPUser user = null;
+        try {
+            user = userServiceDelegate.getUserDetailByUsernameAndPassword(username);
+            if (user == null) {
+                throw new ResourceNotFoundFault("User with specified username was not found");
+            }
+            System.out.println("### user: " + user.toString());
+            if (!user.verify(password)) {
+                throw new SoapFault("Specified password was incorrect", null);
+            }
+        } catch (NoSuchAlgorithmException e) {
+            throw new SoapFault(e.getMessage(), null);
+        }
+        return user;
     }
     //</editor-fold>
 

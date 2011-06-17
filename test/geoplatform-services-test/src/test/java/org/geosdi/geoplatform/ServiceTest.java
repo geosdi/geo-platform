@@ -151,7 +151,7 @@ public abstract class ServiceTest implements InitializingBean {
         user.setUsername(username);
         user.setEmailAddress(username + "@test");
         user.setEnabled(true);
-        user.setPassword("pwd_" + username);
+        user.setPassword("918706bb28e76c3a5f3c7f0dd6f06ff0"); // clear password: 'pwd_username_test_ws'
         user.setSendEmail(true);
         return user;
     }

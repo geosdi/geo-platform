@@ -38,6 +38,7 @@
 package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -299,5 +300,26 @@ public class GPUser implements Serializable, UserDetails {
         int hash = 7;
         hash = 89 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
+    }
+
+    public boolean verify(String password) throws NoSuchAlgorithmException {
+        String hashPasswordSpeicifed = md5hash(password);
+        if (this.password.equals(hashPasswordSpeicifed)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private String md5hash(String password) throws NoSuchAlgorithmException {
+        String hashString = null;
+        java.security.MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+        byte[] hash = digest.digest(password.getBytes());
+        hashString = "";
+        for (int i = 0; i < hash.length; i++) {
+            hashString += Integer.toHexString(
+                    (hash[i] & 0xFF) | 0x100).toLowerCase().substring(1, 3);
+        }
+        return hashString;
     }
 }

@@ -41,7 +41,7 @@ import java.text.ParseException;
 import java.util.Collection;
 import java.util.List;
 import junit.framework.Assert;
-import org.geosdi.geoplatform.core.model.GPCababilityType;
+import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 
@@ -69,7 +69,7 @@ public class CXFServiceTest extends ServiceTest {
     @Override
     public void setUp() throws Exception {
         // Insert Server
-        idServerTest = this.createAndInsertServer(serverUrlTest, GPCababilityType.WMS);
+        idServerTest = this.createAndInsertServer(serverUrlTest, GPCapabilityType.WMS);
     }
 
     @Override
@@ -139,7 +139,7 @@ public class CXFServiceTest extends ServiceTest {
                 totalServers >= 1); // SetUp() added 1 server
 
         // Insert new Server
-        long idNewServer = this.createAndInsertServer("map.testGetAllServer.com", GPCababilityType.WMS);
+        long idNewServer = this.createAndInsertServer("map.testGetAllServer.com", GPCapabilityType.WMS);
 
         // Assert of number of Servers
         Assert.assertEquals("Total numebr of Servers is wrong after inserted new Server",
@@ -195,7 +195,7 @@ public class CXFServiceTest extends ServiceTest {
      * 
      */
     // Create and insert (with assert) a Server
-    private long createAndInsertServer(String serverUrl, GPCababilityType serverType) {
+    private long createAndInsertServer(String serverUrl, GPCapabilityType serverType) {
         GeoPlatformServer server = this.createServer(serverUrl, serverType);
         logger.debug("\n*** GeoPlatformServer to INSERT:\n{}\n***", server);
         long idServer = geoPlatformService.insertServer(server);
@@ -204,7 +204,7 @@ public class CXFServiceTest extends ServiceTest {
         return idServer;
     }
 
-    private GeoPlatformServer createServer(String serverUrl, GPCababilityType serverType) {
+    private GeoPlatformServer createServer(String serverUrl, GPCapabilityType serverType) {
         // Create field's value from Regex on Server URL
         String serverName = serverUrl.replaceAll("http://(dpc|map|www)\\.([^\\.]+)\\.(org|it|com)", "$1.$2.$3");
         logger.debug("\n*** serverName: {} ***", serverName);

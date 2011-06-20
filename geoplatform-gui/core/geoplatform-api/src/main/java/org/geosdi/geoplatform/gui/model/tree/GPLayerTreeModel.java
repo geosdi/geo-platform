@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientIn
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.observable.Observable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -60,6 +61,8 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
     private String crs;
     private BboxClientInfo bbox;
     private GPLayerType layerType;
+    //
+    private ObservableFolderTreeNode observable = new ObservableFolderTreeNode();
 
     protected GPLayerTreeModel() {
     }
@@ -95,6 +98,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
     /**
      * @return the name
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -103,6 +107,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
      * @param name
      *          the name to set
      */
+    @Override
     public void setName(String name) {
         this.name = name;
     }
@@ -190,5 +195,28 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
     @Override
     public void setLayerType(GPLayerType layerType) {
         this.layerType = layerType;
+    }
+
+    @Override
+    public void setId(long id) {
+        super.setId(id);
+        observable.setChanged();
+        observable.notifyObservers(id);
+    }
+
+    public ObservableFolderTreeNode getObservable() {
+        return observable;
+    }
+
+    public void setObservable(ObservableFolderTreeNode observable) {
+        this.observable = observable;
+    }
+
+    public class ObservableFolderTreeNode extends Observable {
+
+        @Override
+        protected synchronized void setChanged() {
+            super.setChanged();
+        }
     }
 }

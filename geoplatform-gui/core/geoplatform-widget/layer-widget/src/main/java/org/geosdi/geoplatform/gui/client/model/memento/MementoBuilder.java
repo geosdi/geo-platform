@@ -40,9 +40,8 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -68,61 +67,48 @@ public class MementoBuilder {
 
     public static List<AbstractMementoLayer> generateMementoLayerList(List<GPBeanTreeModel> layers) {
         List<AbstractMementoLayer> mementoLayerList = new ArrayList<AbstractMementoLayer>();
-        for (GPBeanTreeModel layerBean : layers) {
-            if (layerBean instanceof RasterTreeNode) {
-                RasterTreeNode raster = ((RasterTreeNode) layerBean);
-                MementoRaster mementoRaster = new MementoRaster();
-                if (layerBean.getId() != 0L) {
-                    mementoRaster.setIdBaseElement(layerBean.getId());
-                } else {
-                    mementoRaster.setRefBaseElement(raster);
-                    raster.getObservable().addObserver(mementoRaster);
-                }
-                mementoRaster.setAbstractText(raster.getAbstractText());
-                mementoRaster.setDataSource(raster.getDataSource());
-                mementoRaster.setRefBaseElement(raster);
-                mementoRaster.setChecked(raster.isChecked());
-                mementoRaster.setLayerName(raster.getName());
-                mementoRaster.setLayerType(GPLayerType.RASTER);
-                mementoRaster.setLowerLeftX(raster.getBbox().getLowerLeftX());
-                mementoRaster.setLowerLeftY(raster.getBbox().getLowerLeftY());
-                mementoRaster.setSrs(raster.getCrs());
-                mementoRaster.setTitle(layerBean.getLabel());
-                mementoRaster.setzIndex(layerBean.getzIndex());
-                mementoRaster.setUpperRightX(raster.getBbox().getUpperRightX());
-                mementoRaster.setUpperRightY(raster.getBbox().getUpperRightY());
-                FolderTreeNode refParent = (FolderTreeNode) raster.getParent();
-                mementoRaster.setRefParent(refParent);
-                mementoLayerList.add(mementoRaster);
-            } else if (layerBean instanceof VectorTreeNode) {
-                VectorTreeNode vector = ((VectorTreeNode) layerBean);
-                MementoVector mementoVector = new MementoVector();
-                if (layerBean.getId() != 0L) {
-                    mementoVector.setIdBaseElement(layerBean.getId());
-                } else {
-                    mementoVector.setRefBaseElement(vector);
-                    vector.getObservable().addObserver(mementoVector);
-                }
-                mementoVector.setAbstractText(vector.getAbstractText());
-                mementoVector.setDataSource(vector.getDataSource());
-                mementoVector.setRefBaseElement(vector);
-                mementoVector.setChecked(vector.isChecked());
-                mementoVector.setLayerName(vector.getName());
-                mementoVector.setLayerType(vector.getLayerType());
-                mementoVector.setLowerLeftX(vector.getBbox().getLowerLeftX());
-                mementoVector.setLowerLeftY(vector.getBbox().getLowerLeftY());
-                mementoVector.setSrs(vector.getCrs());
-                mementoVector.setTitle(layerBean.getLabel());
-                mementoVector.setzIndex(layerBean.getzIndex());
-                mementoVector.setUpperRightX(vector.getBbox().getUpperRightX());
-                mementoVector.setUpperRightY(vector.getBbox().getUpperRightY());
-                FolderTreeNode refParent = (FolderTreeNode) vector.getParent();
-                mementoVector.setRefParent(refParent);
-                mementoLayerList.add(mementoVector);
+        for (GPBeanTreeModel beanModel : layers) {
+            GPLayerTreeModel layer = null;
+            AbstractMementoLayer memento = null;
+
+            if (beanModel instanceof RasterTreeNode) {
+                layer = ((RasterTreeNode) beanModel);
+                memento = new MementoRaster();
+            } else if (beanModel instanceof VectorTreeNode) {
+                layer = ((VectorTreeNode) beanModel);
+                memento = new MementoVector();
             }
+            MementoBuilder.convertToMementoLayerFromLayerModel(memento, layer);
+
+            mementoLayerList.add(memento);
         }
         System.out.println("Memento layer list size: " + mementoLayerList.size());
         return mementoLayerList;
+    }
+
+    private static void convertToMementoLayerFromLayerModel(AbstractMementoLayer memento, GPLayerTreeModel layer) {
+        memento.setRefBaseElement(layer);
+        if (layer.getId() != 0L) {
+            memento.setIdBaseElement(layer.getId());
+        } else {
+            layer.getObservable().addObserver(memento);
+        }
+        memento.setAbstractText(layer.getAbstractText());
+        memento.setDataSource(layer.getDataSource());
+        memento.setChecked(layer.isChecked());
+        memento.setLayerName(layer.getName());
+        memento.setLayerType(layer.getLayerType());
+        memento.setSrs(layer.getCrs());
+        memento.setTitle(layer.getTitle());
+        memento.setzIndex(layer.getzIndex());
+        // Bbox
+        memento.setLowerLeftX(layer.getBbox().getLowerLeftX());
+        memento.setLowerLeftY(layer.getBbox().getLowerLeftY());
+        memento.setUpperRightX(layer.getBbox().getUpperRightX());
+        memento.setUpperRightY(layer.getBbox().getUpperRightY());
+        // Parent folder
+        FolderTreeNode refParent = (FolderTreeNode) layer.getParent();
+        memento.setRefParent(refParent);
     }
 
     public static AbstractMementoSave generateTypeOfSaveMemento(GPBeanTreeModel element) {

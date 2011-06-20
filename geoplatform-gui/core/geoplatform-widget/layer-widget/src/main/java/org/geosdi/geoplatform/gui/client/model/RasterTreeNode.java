@@ -59,7 +59,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
      *
      */
     private static final long serialVersionUID = 8265365333381641340L;
-    private ObservableFolderTreeNode observable = new ObservableFolderTreeNode();
+    //
     private List<String> styles;
 
     public RasterTreeNode() {
@@ -99,6 +99,11 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
         return BasicWidgetResources.ICONS.raster();
     }
 
+    @Override
+    public void accept(IVisitor visitor) {
+        visitor.visitRaster(this);
+    }
+
     /*
      * (non-Javadoc)
      *
@@ -111,33 +116,5 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
                 + ", getCrs()=" + getCrs() + ", getBbox()=" + getBbox()
                 + ", getLayerType()=" + getLayerType() + ", getzIndex()="
                 + getzIndex() + "]";
-    }
-
-    @Override
-    public void accept(IVisitor visitor) {
-        visitor.visitRaster(this);
-    }
-
-    @Override
-    public void setId(long id) {
-        super.setId(id);
-        observable.setChanged();
-        observable.notifyObservers(id);
-    }
-
-    public ObservableFolderTreeNode getObservable() {
-        return observable;
-    }
-
-    public void setObservable(ObservableFolderTreeNode observable) {
-        this.observable = observable;
-    }
-
-    public class ObservableFolderTreeNode extends Observable {
-
-        @Override
-        protected synchronized void setChanged() {
-            super.setChanged();
-        }
     }
 }

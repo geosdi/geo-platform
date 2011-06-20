@@ -237,7 +237,7 @@ public abstract class BaseDAOTest {
 
     private void insertUserFolders(List<Layer> layerList) {
         int position = layerList.size() + 6; // +6 because {"only folders"; "empty subfolder A"; "empty subfolder B";
-                                             //            "my raster"; "IGM"; "vector layer"}
+        //            "my raster"; "IGM"; "vector layer"}
 
         GPUser user = userDAO.findByUsername(nameUserTest);
 
@@ -269,7 +269,7 @@ public abstract class BaseDAOTest {
         layerDAO.persist(layers.toArray(new GPRasterLayer[]{}));
 
         position = position - layerList.size();
-        
+
         // ---> "my raster" --> "IGM"
         GPFolder folderIGM = new GPFolder();
         folderIGM.setName("IGM");
@@ -303,12 +303,13 @@ public abstract class BaseDAOTest {
     }
 
     protected GPRasterLayer createRasterLayer(int position, GPFolder folder, long ownerId) {
+        String title = "deagostini_ita_250mila";
         // GPRasterLayer
         GPRasterLayer raster = new GPRasterLayer();
-        raster.setName("StratiDiBase:deagostini_ita_250mila");
-        raster.setTitle("StratiDiBase:deagostini_ita_250mila");
+        raster.setTitle(title);
+        raster.setName("StratiDiBase:" + title);
+        raster.setAbstractText(title);
         raster.setPosition(position);
-        raster.setAbstractText("deagostini_ita_250mila");
         raster.setSrs("EPSG:4326");
         raster.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
         raster.setBbox(new GPBBox(6.342, 35.095, 19.003, 47.316));

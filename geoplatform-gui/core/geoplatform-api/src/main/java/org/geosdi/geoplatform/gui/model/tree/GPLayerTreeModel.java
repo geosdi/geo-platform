@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.model.tree;
 
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
@@ -51,12 +52,28 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
      *
      */
     private static final long serialVersionUID = -6964624685883651246L;
+    //
     private String title;
+    private String name;
     private String abstractText;
     private String dataSource;
     private String crs;
     private BboxClientInfo bbox;
     private GPLayerType layerType;
+
+    protected GPLayerTreeModel() {
+    }
+
+    protected GPLayerTreeModel(GPLayerClientInfo layer) {
+        super(layer.getId(), layer.getzIndex(), layer.isChecked());
+        this.title = layer.getTitle();
+        this.name = layer.getLayerName();
+        this.abstractText = layer.getAbstractText();
+        this.dataSource = layer.getDataSource();
+        this.crs = layer.getCrs();
+        this.bbox = layer.getBbox();
+        this.layerType = layer.getLayerType();
+    }
 
     /**
      * @return the title
@@ -73,6 +90,21 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
     @Override
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name
+     *          the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**

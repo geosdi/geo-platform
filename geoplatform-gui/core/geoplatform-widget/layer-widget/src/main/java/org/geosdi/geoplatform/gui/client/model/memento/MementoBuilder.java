@@ -82,7 +82,7 @@ public class MementoBuilder {
                 mementoRaster.setDataSource(raster.getDataSource());
                 mementoRaster.setRefBaseElement(raster);
                 mementoRaster.setChecked(raster.isChecked());
-                mementoRaster.setLayerName(layerBean.getName());
+                mementoRaster.setLayerName(raster.getName());
                 mementoRaster.setLayerType(GPLayerType.RASTER);
                 mementoRaster.setLowerLeftX(raster.getBbox().getLowerLeftX());
                 mementoRaster.setLowerLeftY(raster.getBbox().getLowerLeftY());
@@ -107,7 +107,7 @@ public class MementoBuilder {
                 mementoVector.setDataSource(vector.getDataSource());
                 mementoVector.setRefBaseElement(vector);
                 mementoVector.setChecked(vector.isChecked());
-                mementoVector.setLayerName(layerBean.getName());
+                mementoVector.setLayerName(vector.getName());
                 mementoVector.setLayerType(vector.getLayerType());
                 mementoVector.setLowerLeftX(vector.getBbox().getLowerLeftX());
                 mementoVector.setLowerLeftY(vector.getBbox().getLowerLeftY());

@@ -64,23 +64,8 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
      * @param label
      */
     public VectorTreeNode(ClientVectorInfo layer) {
-        // GPBeanTreeModel
-        super.setLabel(layer.getLayerName());
-        super.setName(layer.getLayerName());
-        super.setAbstractText(layer.getAbstractText());
-        super.setzIndex(layer.getzIndex());
-        super.setChecked(layer.isChecked());
-        super.setId(layer.getId());
-        // GPLayerTreeModel
-        super.setDataSource(layer.getDataSource());
-        super.setTitle(layer.getTitle());
-        super.setCrs(layer.getCrs());
-        super.setBbox(layer.getBbox());
-        super.setzIndex(layer.getzIndex());
-        super.setLayerType(layer.getLayerType());
-        super.setChecked(layer.isChecked());
-        super.setId(layer.getId());
-        //
+        super(layer);
+        super.setLabel(layer.getFeatureType()); // Label of a raster is different
         this.setFeatureNameSpace(layer.getFeatureNameSpace());
     }
 

@@ -40,6 +40,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
@@ -49,6 +50,13 @@ public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
      *
      */
     private static final long serialVersionUID = 4886440607031207404L;
+
+    protected AbstractFolderTreeNode() {
+    }
+
+    protected AbstractFolderTreeNode(GPFolderClientInfo folder) {
+        super(folder.getId(), folder.getLabel(), folder.getzIndex(), folder.isChecked());
+    }
 
     @Override
     public void accept(IVisitor visitor) {

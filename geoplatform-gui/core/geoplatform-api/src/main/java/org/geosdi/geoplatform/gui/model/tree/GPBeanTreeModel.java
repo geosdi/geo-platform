@@ -51,13 +51,55 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
      *
      */
     private static final long serialVersionUID = 2095233644130779285L;
+    private long id;
     private String label;
-    private String name;
     private int zIndex;
     private boolean checked = false;
-    private long id;
 
-    public GPBeanTreeModel() {
+    protected GPBeanTreeModel() {
+    }
+
+    /**
+     * Constructor for a layer (raster and vector set a different label)
+     * 
+     * @param id
+     * @param zIndex
+     * @param checked 
+     */
+    protected GPBeanTreeModel(long id, int zIndex, boolean checked) {
+        this.id = id;
+        this.zIndex = zIndex;
+        this.checked = checked;
+    }
+
+    /**
+     * Constructor for a folder
+     * 
+     * @param id
+     * @param label
+     * @param zIndex
+     * @param checked 
+     */
+    protected GPBeanTreeModel(long id, String label, int zIndex, boolean checked) {
+        this.id = id;
+        this.label = label;
+        this.zIndex = zIndex;
+        this.checked = checked;
+    }
+
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * @param id
+     *          the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
     }
 
     /**
@@ -73,21 +115,6 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
      */
     public void setLabel(String label) {
         this.label = label;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name
-     *          the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 
     /**
@@ -118,21 +145,6 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
      */
     public void setChecked(boolean checked) {
         this.checked = checked;
-    }
-
-    /**
-     * @return the id
-     */
-    public long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *          the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
     }
 
     public abstract AbstractImagePrototype getIcon();

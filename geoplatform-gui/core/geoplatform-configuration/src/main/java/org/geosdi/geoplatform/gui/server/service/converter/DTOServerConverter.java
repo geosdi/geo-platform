@@ -151,10 +151,8 @@ public class DTOServerConverter {
 
     private GPRasterLayerGrid convertToRasterLayerGrid(RasterLayerDTO layer) {
         GPRasterLayerGrid raster = new GPRasterLayerGrid();
-        //raster.setLabel(layer.getName());
         raster.setLabel(layer.getTitle());
         raster.setTitle(layer.getTitle());
-        //raster.setName(layer.getTitle());
         raster.setName(layer.getName());
         raster.setAbstractText(layer.getAbstractText());
         raster.setLayerType(GPLayerType.RASTER);

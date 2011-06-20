@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  */
 public class ServerView extends GeoPlatformView {
 
-    private GPCapabilitiesWidget serverWidget;
+    private GPCapabilitiesWidget serverWidget = new GPCapabilitiesWidget(true);;
 
     /**
      * @Constructor
@@ -57,7 +57,6 @@ public class ServerView extends GeoPlatformView {
      */
     public ServerView(Controller controller) {
         super(controller);
-        this.serverWidget = new GPCapabilitiesWidget(true);
     }
 
     @Override

@@ -48,13 +48,13 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPCapabilitiesWidget extends Window {
+public class GPCababilitiesWidget extends Window {
 
     private GridLayersWidget gridLayers;
     private TreePanel tree;
     private boolean initialized;
 
-    public GPCapabilitiesWidget(boolean lazy) {
+    public GPCababilitiesWidget(boolean lazy) {
          if (!lazy) {
             init();
         }
@@ -67,7 +67,7 @@ public class GPCapabilitiesWidget extends Window {
      *       otherwise set to False
      * @param theTree 
      */
-    public GPCapabilitiesWidget(boolean lazy, TreePanel theTree) {
+    public GPCababilitiesWidget(boolean lazy, TreePanel theTree) {
         if (!lazy) {
             init();
         }
@@ -84,7 +84,7 @@ public class GPCapabilitiesWidget extends Window {
 
     private void initializeWindow() {
         super.setSize(600, 500);
-        super.setHeading("Server capabilities");
+        super.setHeading("Server Cababilities");
         setResizable(false);
 
         addWindowListener(new WindowListener() {

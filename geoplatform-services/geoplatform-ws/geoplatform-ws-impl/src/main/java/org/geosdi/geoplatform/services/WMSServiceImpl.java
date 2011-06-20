@@ -50,13 +50,12 @@ import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geotools.data.ows.StyleImpl;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
-import org.geosdi.geoplatform.core.model.GPCababilityType;
+import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
-import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geotools.data.ows.CRSEnvelope;
@@ -300,7 +299,7 @@ class WMSServiceImpl {
             Service service) {
         GeoPlatformServer newServer = new GeoPlatformServer();
         newServer.setServerUrl(serverUrl);
-        newServer.setServerType(GPCababilityType.WMS);
+        newServer.setServerType(GPCapabilityType.WMS);
         newServer.setName(service.getName());
         newServer.setTitle(service.getTitle());
         newServer.setAbstractServer(service.get_abstract());

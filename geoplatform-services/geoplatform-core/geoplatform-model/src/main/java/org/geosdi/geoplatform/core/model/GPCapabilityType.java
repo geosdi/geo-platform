@@ -43,7 +43,7 @@ package org.geosdi.geoplatform.core.model;
  * 
  * Web service standards from the Open Geospatial Consortium (OGC)
  */
-public enum GPCababilityType {
+public enum GPCapabilityType {
 
     WMS, // Web Map Server
     WFS; // Web Feature Service

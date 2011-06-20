@@ -39,7 +39,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import org.geosdi.geoplatform.core.model.GPCababilityType;
+import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 
 /**
@@ -83,7 +83,7 @@ public class ServerDAOTest extends BaseDAOTest {
         GeoPlatformServer server = new GeoPlatformServer();
         server.setServerUrl("http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
         server.setName("imaa.geosdi.org");
-        server.setServerType(GPCababilityType.WMS);
+        server.setServerType(GPCapabilityType.WMS);
         return server;
     }
 
@@ -91,7 +91,7 @@ public class ServerDAOTest extends BaseDAOTest {
         GeoPlatformServer server = new GeoPlatformServer();
         server.setServerUrl("http://maps.telespazio.it/dpc/dpc-wms");
         server.setName("maps.telespazio.it");
-        server.setServerType(GPCababilityType.WMS);
+        server.setServerType(GPCapabilityType.WMS);
         return server;
     }
 }

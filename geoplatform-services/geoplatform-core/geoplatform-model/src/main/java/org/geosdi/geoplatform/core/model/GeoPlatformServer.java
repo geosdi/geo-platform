@@ -94,7 +94,7 @@ public class GeoPlatformServer implements Serializable {
     //
     @Column(name = "cabability_type", nullable = false)
     @Enumerated(EnumType.STRING)
-    private GPCababilityType serverType;
+    private GPCapabilityType serverType;
 
     /**
      * @return the id
@@ -204,7 +204,7 @@ public class GeoPlatformServer implements Serializable {
     /**
      * @return the serverType
      */
-    public GPCababilityType getServerType() {
+    public GPCapabilityType getServerType() {
         return serverType;
     }
 
@@ -212,7 +212,7 @@ public class GeoPlatformServer implements Serializable {
      * @param serverType
      *            the serverType to set
      */
-    public void setServerType(GPCababilityType serverType) {
+    public void setServerType(GPCapabilityType serverType) {
         this.serverType = serverType;
     }
 

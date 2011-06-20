@@ -52,10 +52,23 @@ public abstract class GPLayerClientInfo implements Serializable,
      */
     private static final long serialVersionUID = 2098509654335891064L;
     private String dataSource;
+    private String abstractText;
+    private String layerName;
+    private String title;
     private String crs;
     private BboxClientInfo bbox;
     private GPLayerType layerType;
     private int zIndex;
+    private long id;
+    private boolean checked;
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
 
     /**
      * @return the dataSource
@@ -77,6 +90,14 @@ public abstract class GPLayerClientInfo implements Serializable,
      */
     public String getCrs() {
         return crs;
+    }
+
+    public String getLayerName() {
+        return this.layerName;
+    }
+
+    public void setLayerName(String name) {
+        this.layerName = name;
     }
 
     /**
@@ -149,5 +170,47 @@ public abstract class GPLayerClientInfo implements Serializable,
     public int compareTo(IGPFolderElements o) {
         // TODO Auto-generated method stub
         return o.getzIndex() - getzIndex();
+    }
+
+    /**
+     * @return the abstractText
+     */
+    public String getAbstractText() {
+        return abstractText;
+    }
+
+    /**
+     * @param abstractText the abstractText to set
+     */
+    public void setAbstractText(String abstractText) {
+        this.abstractText = abstractText;
+    }
+
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * @param title the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
     }
 }

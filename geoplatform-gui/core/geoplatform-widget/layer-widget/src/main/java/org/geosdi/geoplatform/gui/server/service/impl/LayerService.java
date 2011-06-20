@@ -107,7 +107,7 @@ public class LayerService implements ILayerService {
             folderElements.isEmpty();
             elements = this.dtoConverter.convertFolderElements(folderElements);
         } catch (Exception e) {
-            logger.debug("Returning no elements");
+            logger.debug("Returning no elements: " + e);
         }
         return elements;
     }

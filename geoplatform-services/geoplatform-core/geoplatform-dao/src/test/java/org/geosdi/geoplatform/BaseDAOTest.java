@@ -306,11 +306,11 @@ public abstract class BaseDAOTest {
         // GPRasterLayer
         GPRasterLayer raster = new GPRasterLayer();
         raster.setName("StratiDiBase:deagostini_ita_250mila");
-        raster.setTitle("deagostini");
+        raster.setTitle("StratiDiBase:deagostini_ita_250mila");
         raster.setPosition(position);
         raster.setAbstractText("deagostini_ita_250mila");
         raster.setSrs("EPSG:4326");
-        raster.setUrlServer("http://imaa.geosdi.org/geoserver/wms");
+        raster.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
         raster.setBbox(new GPBBox(6.342, 35.095, 19.003, 47.316));
         raster.setLayerType(GPLayerType.RASTER);
         raster.setFolder(folder);

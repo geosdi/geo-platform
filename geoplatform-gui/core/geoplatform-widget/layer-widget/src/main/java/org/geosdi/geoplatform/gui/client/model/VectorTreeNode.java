@@ -64,7 +64,9 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
      * @param label
      */
     public VectorTreeNode(ClientVectorInfo layer) {
+        super.setAbstractText(layer.getAbstractText());
         super.setLabel(layer.getFeatureType());
+        super.setName(layer.getLayerName());
         super.setDataSource(layer.getDataSource());
         super.setCrs(layer.getCrs());
         super.setBbox(layer.getBbox());

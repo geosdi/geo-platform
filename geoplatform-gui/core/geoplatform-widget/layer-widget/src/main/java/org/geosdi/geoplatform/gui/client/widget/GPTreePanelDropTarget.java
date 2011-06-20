@@ -34,6 +34,7 @@
  *
  */package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.data.ModelData;
 import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -48,6 +49,8 @@ import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.TreeNode;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 public class GPTreePanelDropTarget extends TreePanelDropTarget {
 
@@ -80,14 +83,14 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
         this.source = (GPBeanTreeModel) sourceTreeModel;
         this.target = (GPBeanTreeModel) targetTreeModel;
         if (this.target instanceof GPRootTreeNode) {
-            //System.out.println("Target instanceof GPRootTreeNode");
+            System.out.println("Target instanceof GPRootTreeNode");
             condition = false;// Elements above root not allowed
-        } else if (this.target instanceof FolderTreeNode && !((FolderTreeNode)this.target).isLoaded()
-                && !this.tree.isExpanded(target)){
-            //System.out.println("Folder having elements must be expanded before drop on it");
-            condition = false;//Folder having elements must be expanded before drop on it
+        } else if (this.target instanceof FolderTreeNode && !((FolderTreeNode) this.target).isLoaded()
+                && !this.tree.isExpanded(target)) {
+            System.out.println("The Folders must be expanded before drop on it");
+            condition = false;//The Folders must be expanded before drop on it
         } else if (this.target.isLeaf() && this.target instanceof FolderTreeNode) {
-            //System.out.println("Insert elements into empty folders");
+            System.out.println("Insert elements into empty folders");
             boolean dropLeaf = super.isAllowDropOnLeaf();
             Feedback feedback = super.getFeedback();
             super.setAllowDropOnLeaf(true);
@@ -98,28 +101,36 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
             condition = true;// Insert elements into empty folders
         } else if (!(source instanceof FolderTreeNode)
                 && target.getParent() instanceof GPRootTreeNode) {
-            //System.out.println("Leafs without a folder not allowed");
+            System.out.println("Leafs without a folder not allowed");
             condition = false;// Leafs without a folder not allowed
+        } else if (source instanceof GPLayerTreeModel && 
+                this.duplicateLayerCondition(target, (GPLayerTreeModel)source)){
+            System.out.println("Duplicated layers are not allowed on the same folder");
+            condition = false;//Duplicated layers are not allowed on the same folder
         }
         return condition;
+    }
+
+    private boolean duplicateLayerCondition(GPBeanTreeModel target, GPLayerTreeModel layer) {
+        boolean duplicatedLayer = false;
+        GPBeanTreeModel parent = target;
+        if(target instanceof GPLayerTreeModel){
+            parent = (GPBeanTreeModel)target.getParent();
+        }
+        for (ModelData element : parent.getChildren()) {
+            if (element != null && element instanceof GPLayerTreeModel
+                    && ((GPLayerTreeModel) element).getName().equals(layer.getName())) {
+                duplicatedLayer = true;
+                break;
+            }
+        }
+        return duplicatedLayer;
     }
 
     @Override
     protected void onDragDrop(DNDEvent event) {
         super.onDragDrop(event);
         TreeStoreEvent be = new TreeStoreEvent(tree.getStore());
-        //be.setSource(this);
-//        be.setParent(target.getParent());
-//        be.setIndex(target.getParent().indexOf(target));
-//        be.setChild(this.source);
         fireEvent(LayerEvents.GP_DROP, be);
     }
-
-//    @Override
-//    public void onDragFail(DNDEvent e) {
-//        super.onDragFail(e);
-//        fireEvent(LayerEvents.GP_DRAG_LOST, new TreeStoreEvent(tree.getStore()));
-//        System.out.println(this.getClass().getName() + "Drag Fail avvenuto");
-//    }
-
 }

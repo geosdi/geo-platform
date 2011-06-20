@@ -118,10 +118,8 @@ public class DTOServerConverter {
     private ArrayList<? extends GPLayerGrid> createRasterLayerList(
             List<? extends ShortLayerDTO> layers,
             ArrayList<GPLayerGrid> list) {
-
         if (layers != null) {
             for (ShortLayerDTO layer : layers) {
-
                 if (((RasterLayerDTO) layer).getSubLayerList().size() > 0) {
                     this.createRasterLayerList(
                             ((RasterLayerDTO) layer).getSubLayerList(), list);
@@ -153,12 +151,13 @@ public class DTOServerConverter {
 
     private GPRasterLayerGrid convertToRasterLayerGrid(RasterLayerDTO layer) {
         GPRasterLayerGrid raster = new GPRasterLayerGrid();
-        raster.setLabel(layer.getName());
-        raster.setName(layer.getTitle());
+        //raster.setLabel(layer.getName());
+        raster.setLabel(layer.getTitle());
+        //raster.setName(layer.getTitle());
+        raster.setName(layer.getName());
         raster.setAbstractText(layer.getAbstractText());
         raster.setLayerType(GPLayerType.RASTER);
         raster.setDataSource(layer.getUrlServer());
-
         if (layer.getBbox() != null) {
             raster.setBbox(new BboxClientInfo(layer.getBbox().getMinX(),
                     layer.getBbox().getMinY(), layer.getBbox().getMaxX(),

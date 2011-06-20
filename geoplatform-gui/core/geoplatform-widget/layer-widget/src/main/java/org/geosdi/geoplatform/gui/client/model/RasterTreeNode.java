@@ -38,12 +38,14 @@ package org.geosdi.geoplatform.gui.client.model;
 import java.util.List;
 
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
 import org.geosdi.geoplatform.gui.observable.Observable;
 
 /**
@@ -69,7 +71,9 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
      * @param label
      */
     public RasterTreeNode(ClientRasterInfo layer) {
-        super.setLabel(layer.getLayerName());
+        super.setLabel(layer.getTitle());
+        super.setAbstractText(layer.getAbstractText());
+        super.setName(layer.getLayerName());
         super.setDataSource(layer.getDataSource());
         super.setCrs(layer.getCrs());
         super.setBbox(layer.getBbox());

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.store;
 
+import com.extjs.gxt.ui.client.data.ModelData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -92,20 +93,41 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
             GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
             super.tree.setExpanded(parentDestination, true);
             List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
+            GPRasterLayerGrid layer = null;
+            StringBuilder existingLayers = new StringBuilder();
+            boolean duplicatedLayer = false;
             for (Iterator it = layers.iterator(); it.hasNext();) {
-                layerList.add(this.convertGPRasterBeanModelToRasterTreeNode(
-                        (GPRasterLayerGrid) it.next()));
+                duplicatedLayer = false;
+                layer = (GPRasterLayerGrid) it.next();
+                for (ModelData element : parentDestination.getChildren()) {
+                    if (element != null && element instanceof RasterTreeNode
+                            && ((RasterTreeNode) element).getName().equals(layer.getName())) {
+                        existingLayers.append(layer.getLabel());
+                        existingLayers.append("\n");
+                        duplicatedLayer = true;
+                        break;
+                    }
+                }
+                if (!duplicatedLayer) {
+                    layerList.add(this.convertGPRasterBeanModelToRasterTreeNode(layer));
+                }
             }
-            this.tree.getStore().insert(parentDestination, layerList, 0, true);
-            this.visitorAdd.insertLayerElements(layerList, parentDestination);
-            MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
-            mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(layerList));
-            mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
-            GPLayerSaveCache.getInstance().add(mementoSaveLayer);
-            this.featureInfoAddLayersEvent.setUrlServers(layers.get(0).getDataSource());
-            MapHandlerManager.fireEvent(this.featureInfoAddLayersEvent);
-
+            if (layerList.size() > 0) {
+                this.tree.getStore().insert(parentDestination, layerList, 0, true);
+                this.visitorAdd.insertLayerElements(layerList, parentDestination);
+                MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
+                mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(layerList));
+                mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
+                GPLayerSaveCache.getInstance().add(mementoSaveLayer);
+                this.featureInfoAddLayersEvent.setUrlServers(layers.get(0).getDataSource());
+                MapHandlerManager.fireEvent(this.featureInfoAddLayersEvent);
+            }
             LayerHandlerManager.fireEvent(deselectEvent);
+            if (existingLayers.length() != 0) {
+                GeoPlatformMessage.alertMessage("Add Layers Notification",
+                        "The following layers will not be added to the tree because they already exsists in this folder:"
+                        + "\n" + existingLayers);
+            }
         }
     }
 

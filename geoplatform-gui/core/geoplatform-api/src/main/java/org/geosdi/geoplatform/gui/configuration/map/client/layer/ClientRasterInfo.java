@@ -49,41 +49,7 @@ public class ClientRasterInfo extends GPLayerClientInfo {
      *
      */
     private static final long serialVersionUID = 3956898488739664952L;
-    private String layerName;
     private List<String> styles;
-    private long id;
-    private boolean checked;
-
-    public boolean isChecked() {
-        return checked;
-    }
-
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the layerName
-     */
-    public String getLayerName() {
-        return layerName;
-    }
-
-    /**
-     * @param layerName
-     *            the layerName to set
-     */
-    public void setLayerName(String layerName) {
-        this.layerName = layerName;
-    }
 
     /**
      * @return the styles
@@ -112,7 +78,7 @@ public class ClientRasterInfo extends GPLayerClientInfo {
      */
     @Override
     public String toString() {
-        return "ClientRasterInfo [layerName=" + layerName + ", styles="
+        return "ClientRasterInfo [layerName=" + super.getLayerName() + ", styles="
                 + styles + ", getDataSource()=" + getDataSource()
                 + ", getCrs()=" + getCrs() + ", getBbox()=" + getBbox()
                 + ", getLayerType()=" + getLayerType() + ", getzIndex()="

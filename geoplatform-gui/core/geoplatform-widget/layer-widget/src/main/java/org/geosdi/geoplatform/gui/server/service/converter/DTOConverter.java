@@ -118,6 +118,8 @@ public class DTOConverter {
         raster.setLayerName(rasterDTO.getName());
         raster.setCrs(rasterDTO.getSrs());
         raster.setDataSource(rasterDTO.getUrlServer());
+        raster.setTitle(rasterDTO.getTitle());
+        raster.setAbstractText(rasterDTO.getAbstractText());
         //raster.setzIndex(rasterDTO.getPosition());
         raster.setBbox(this.convertBbox(rasterDTO.getBbox()));
         raster.setChecked(rasterDTO.isChecked());
@@ -131,6 +133,8 @@ public class DTOConverter {
         vector.setFeatureType(vectorDTO.getName());
         vector.setCrs(vectorDTO.getSrs());
         vector.setDataSource(vectorDTO.getUrlServer());
+        vector.setTitle(vectorDTO.getTitle());
+        vector.setAbstractText(vectorDTO.getAbstractText());
         //vector.setzIndex(vectorDTO.getPosition());
         vector.setBbox(this.convertBbox(vectorDTO.getBbox()));
         vector.setChecked(vectorDTO.isChecked());
@@ -192,11 +196,10 @@ public class DTOConverter {
             GPFolder parent = new GPFolder();
             parent.setId(memento.getIdParent());
             gpFolder.setParent(parent);
-        } else {
-            GPUser user = new GPUser();
-            user.setUsername("user_test_0");
-            gpFolder.setOwner(user);
         }
+        GPUser user = new GPUser();
+        user.setUsername("user_test_0");
+        gpFolder.setOwner(user);
         gpFolder.setPosition(memento.getzIndex());
         /*TODO: Once implemented shared function you must set this property
         gpFolder.setShared(true);*/
@@ -228,11 +231,13 @@ public class DTOConverter {
                 raster.setId(memento.getIdBaseElement());
                 //raster.setLayerInfo();???
                 raster.setAbstractText(memento.getAbstractText());
-                raster.setName(memento.getTitle());
+//                raster.setName(memento.getTitle());
+                raster.setName(memento.getLayerName());
                 raster.setPosition(memento.getzIndex());
                 //raster.setShared();???
                 raster.setSrs(memento.getSrs());
-                raster.setTitle(memento.getLayerName());
+//                raster.setTitle(memento.getLayerName());
+                raster.setTitle(memento.getTitle());
                 raster.setUrlServer(memento.getDataSource());
                 raster.setLayerType(GPLayerType.RASTER);
                 layersList.add(raster);

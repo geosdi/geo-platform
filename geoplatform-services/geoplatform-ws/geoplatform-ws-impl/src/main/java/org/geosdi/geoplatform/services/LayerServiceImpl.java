@@ -243,7 +243,7 @@ class LayerServiceImpl {
         for (int i = 0; i < layersArray.length; i++) {
             arrayList.add(layersArray[i].getId());
         }
-
+        
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
         return arrayList;
     }

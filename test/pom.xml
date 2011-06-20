@@ -58,7 +58,7 @@
         <module>geoplatform-ui-test</module>
 	</modules -->
     
-     <profiles>
+    <profiles>
         <profile>
             <id>test.services</id>
             <modules>

@@ -88,7 +88,6 @@ public class WSLayerTest extends ServiceTest {
     private final String nameVector2 = "vector_2";
     private GPVectorLayer vector2 = null;
     private long idVector2 = -1;
-    
     // Raster Layer 3
     private final String nameRaster3 = "raster_3";
     // Vector Layer 3
@@ -559,7 +558,25 @@ public class WSLayerTest extends ServiceTest {
             Assert.fail("Folder or Layer with ID \"" + rnnf.getId() + "\" was not found");
         }
     }
+    
+    @Test
+    public void testTransactionOnAddLayer() throws IllegalParameterFault, ResourceNotFoundFault {
+        logger.trace("\n\t@@@ testTransactionOnAddLayer @@@");
+        String name = "raster";
+        Map<Long, Integer> map = new HashMap<Long, Integer>();
+        GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
+        descendantsMapData.setDescendantsMap(map);
+        map.put(idRootFolderA, 3);
 
+        try {
+            GPRasterLayer raster = new GPRasterLayer();
+            createLayer(raster, usernameTest, rootFolderA, name, 5, false, idUserTest, spatialReferenceSystem, null, urlServer);
+            geoPlatformService.saveAddedLayerAndTreeModifications(usernameTest, raster, descendantsMapData);
+            Assert.fail("Add layer must fail because title value is null");
+        } catch (Exception e) {
+            checkInitialState();
+        }
+    }
     @Test
     public void testGetShortLayer() {
         try {
@@ -605,12 +622,12 @@ public class WSLayerTest extends ServiceTest {
             Assert.fail("Layer with id \"" + rnnf.getId() + "\" was NOT found");
         }
     }
-    
+
     @Test
     public void testGetLayersDataSourceByOwner() {
         try {
             addLayer3();
-            
+
             List<String> list = geoPlatformService.getLayersDataSourceByOwner(usernameTest);
 
             Assert.assertEquals("Number of elements of server's url", 2, list.size());
@@ -622,7 +639,7 @@ public class WSLayerTest extends ServiceTest {
             Assert.fail("User with username \"" + usernameTest + "\" was NOT found");
         }
     }
-
+    
     private List<Long> addLayer3() throws IllegalParameterFault, ResourceNotFoundFault {
         // "rootFolderA" ---> "rasterLayer3"
         GPRasterLayer rasterLayer3 = new GPRasterLayer();

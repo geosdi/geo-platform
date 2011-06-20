@@ -86,7 +86,7 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
  * @author Francesco Izzi - CNR IMAA - geoSDI
  * 
  */
-@Transactional
+@Transactional // Give atomicity on WS methods
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformService")
 public class GeoPlatformServiceImpl implements GeoPlatformService {
 

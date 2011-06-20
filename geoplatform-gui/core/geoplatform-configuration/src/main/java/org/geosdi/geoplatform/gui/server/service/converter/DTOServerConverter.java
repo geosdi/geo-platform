@@ -108,21 +108,21 @@ public class DTOServerConverter {
      * @return
      *        ArrayList<? extends GPLayerBeanModel>
      */
-    public ArrayList<GPLayerGrid> createRasterLayerList(
+    public ArrayList<? extends GPLayerGrid> createRasterLayerList(
             List<? extends ShortLayerDTO> layers) {
 
         return this.createRasterLayerList(layers,
                 new ArrayList<GPLayerGrid>());
     }
 
-    private ArrayList<GPLayerGrid> createRasterLayerList(
-            List layers,
+    private ArrayList<? extends GPLayerGrid> createRasterLayerList(
+            List<? extends ShortLayerDTO> layers,
             ArrayList<GPLayerGrid> list) {
 
         if (layers != null) {
-            for (Object layer : layers) {
+            for (ShortLayerDTO layer : layers) {
 
-                if ((layer instanceof RasterLayerDTO) && ((RasterLayerDTO) layer).getSubLayerList().size() > 0) {
+                if (((RasterLayerDTO) layer).getSubLayerList().size() > 0) {
                     this.createRasterLayerList(
                             ((RasterLayerDTO) layer).getSubLayerList(), list);
                 } else {

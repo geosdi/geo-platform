@@ -51,6 +51,7 @@ import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.PrintLayersAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToKML;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToPDF;
+import org.geosdi.geoplatform.gui.client.action.menu.ExportoToShpZip;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToTIFF;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddFolderTreeAction;
@@ -134,6 +135,15 @@ public class LayerWidgetUI implements EntryPoint {
             public MenuAction createAction() {
                 // TODO Auto-generated method stub
                 return new ExportoToTIFF();
+            }
+        });
+        
+        MenuActionRegistar.put("exportToShpZip", new MenuActionCreator() {
+
+            @Override
+            public MenuAction createAction() {
+                // TODO Auto-generated method stub
+                return new ExportoToShpZip();
             }
         });
 

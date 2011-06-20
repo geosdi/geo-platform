@@ -48,5 +48,13 @@
         <property name="order" value="70" />
     </bean>
     
+    <bean name="exportToShpZip"
+		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+        <property name="id" value="exportToShpZip" />
+        <property name="text" value="Export To Shape-Zip" />
+        <property name="enabled" value="true" />
+        <property name="order" value="80" />
+    </bean>
+    
 
 </beans>

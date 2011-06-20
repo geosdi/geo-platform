@@ -88,5 +88,8 @@ public interface LayerIcons extends ImageBundle {
     @Resource("raster.png")
     AbstractImagePrototype exportToTIFF();
     
+    @Resource("shape-zip.png")
+    AbstractImagePrototype exportToShpZip();
+    
     
 }

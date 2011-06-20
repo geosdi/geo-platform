@@ -49,7 +49,7 @@ public class MementoFolder extends AbstractMementoSave<FolderTreeNode> {
     private int zIndex;
     private long idParent;
     private transient FolderTreeNode refParent;
-    private boolean isChecked;
+    private boolean checked;
     private int numberOfDescendants;
 
     public MementoFolder() {
@@ -76,11 +76,11 @@ public class MementoFolder extends AbstractMementoSave<FolderTreeNode> {
     }
 
     public boolean isChecked() {
-        return isChecked;
+        return checked;
     }
 
-    public void setIsChecked(boolean isChecked) {
-        this.isChecked = isChecked;
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
     public int getNumberOfDescendants() {

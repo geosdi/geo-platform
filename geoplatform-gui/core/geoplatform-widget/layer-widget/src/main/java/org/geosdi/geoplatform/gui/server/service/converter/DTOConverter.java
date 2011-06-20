@@ -55,9 +55,11 @@ import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientIn
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
+import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
@@ -114,38 +116,40 @@ public class DTOConverter {
 
     private ClientRasterInfo convertRasterElement(RasterLayerDTO rasterDTO) {
         ClientRasterInfo raster = new ClientRasterInfo();
-        raster.setId(rasterDTO.getId());
-        raster.setLayerName(rasterDTO.getName());
-        raster.setCrs(rasterDTO.getSrs());
-        raster.setDataSource(rasterDTO.getUrlServer());
-        raster.setTitle(rasterDTO.getTitle());
-        raster.setAbstractText(rasterDTO.getAbstractText());
-        //raster.setzIndex(rasterDTO.getPosition());
-        raster.setBbox(this.convertBbox(rasterDTO.getBbox()));
-        raster.setChecked(rasterDTO.isChecked());
+
+        this.convertToLayerElementFromLayerDTO(raster, rasterDTO);
+        raster.setLayerType(org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.RASTER);
+
         return raster;
     }
 
     private ClientVectorInfo convertVectorElement(VectorLayerDTO vectorDTO) {
         ClientVectorInfo vector = new ClientVectorInfo();
-        vector.setId(vectorDTO.getId());
+
+        this.convertToLayerElementFromLayerDTO(vector, vectorDTO);
         this.setVectorLayerType(vector, vectorDTO.getLayerType());
         vector.setFeatureType(vectorDTO.getName());
-        vector.setCrs(vectorDTO.getSrs());
-        vector.setDataSource(vectorDTO.getUrlServer());
-        vector.setTitle(vectorDTO.getTitle());
-        vector.setAbstractText(vectorDTO.getAbstractText());
-        //vector.setzIndex(vectorDTO.getPosition());
-        vector.setBbox(this.convertBbox(vectorDTO.getBbox()));
-        vector.setChecked(vectorDTO.isChecked());
+
         return vector;
+    }
+
+    private void convertToLayerElementFromLayerDTO(GPLayerClientInfo layer, ShortLayerDTO layerDTO) {
+        layer.setAbstractText(layerDTO.getAbstractText());
+        layer.setBbox(this.convertBbox(layerDTO.getBbox()));
+        layer.setChecked(layerDTO.isChecked());
+        layer.setCrs(layerDTO.getSrs());
+        layer.setDataSource(layerDTO.getUrlServer());
+        layer.setId(layerDTO.getId());
+        layer.setLayerName(layerDTO.getName());
+        layer.setTitle(layerDTO.getTitle());
+        // layer.setzIndex(layerDTO.getPosition());
     }
 
     private GPFolderClientInfo convertFolderElement(FolderDTO folderDTO) {
         GPFolderClientInfo folder = new GPFolderClientInfo();
         folder.setLabel(folderDTO.getName());
         folder.setId(folderDTO.getId());
-        //folder.setzIndex(folderDTO.getPosition());
+        // folder.setzIndex(folderDTO.getPosition());
         folder.setNumberOfDescendants(folderDTO.getNumberOfChilds());
         folder.setChecked(folderDTO.isChecked());
         return folder;
@@ -214,54 +218,46 @@ public class DTOConverter {
         return wsMap;
     }
 
-    public ArrayList<GPLayer> convertMementoLayers(
-            List<AbstractMementoLayer> addedLayers) {
+    public ArrayList<GPLayer> convertMementoLayers(List<AbstractMementoLayer> addedLayers) {
         ArrayList<GPLayer> layersList = new ArrayList<GPLayer>();
         GPFolder folder = new GPFolder();
-        for (AbstractMementoLayer layer : addedLayers) {
-            if (layer instanceof MementoRaster) {
-                MementoRaster memento = (MementoRaster) layer;
-                GPRasterLayer raster = new GPRasterLayer();
-                raster.setBbox(new GPBBox(memento.getLowerLeftX(),
-                        memento.getLowerLeftY(),
-                        memento.getUpperRightX(), memento.getUpperRightY()));
-                raster.setChecked(memento.isChecked());
-                folder.setId(memento.getIdFolderParent());
-                raster.setFolder(folder);
-                raster.setId(memento.getIdBaseElement());
-                //raster.setLayerInfo();???
-                raster.setAbstractText(memento.getAbstractText());
-//                raster.setName(memento.getTitle());
-                raster.setName(memento.getLayerName());
-                raster.setPosition(memento.getzIndex());
-                //raster.setShared();???
-                raster.setSrs(memento.getSrs());
-//                raster.setTitle(memento.getLayerName());
-                raster.setTitle(memento.getTitle());
-                raster.setUrlServer(memento.getDataSource());
-                raster.setLayerType(GPLayerType.RASTER);
-                layersList.add(raster);
-            } else if (layer instanceof MementoVector) {
-                GPVectorLayer vector = new GPVectorLayer();
-                MementoRaster memento = (MementoRaster) layer;
-                vector.setAbstractText(memento.getAbstractText());
-                vector.setBbox(new GPBBox(memento.getLowerLeftX(),
-                        memento.getLowerLeftY(),
-                        memento.getUpperRightX(), memento.getUpperRightY()));
-                vector.setChecked(memento.isChecked());
-                folder.setId(memento.getIdFolderParent());
-                vector.setFolder(folder);
-                vector.setId(memento.getIdBaseElement());
-                //vector.setGeometry()???
-                vector.setName(memento.getLayerName());
-                vector.setPosition(memento.getzIndex());
-                //vector.setShared();???
-                vector.setSrs(memento.getSrs());
-                vector.setTitle(memento.getTitle());
-                vector.setUrlServer(memento.getDataSource());
-                layersList.add(vector);
+        for (AbstractMementoLayer memento : addedLayers) {
+            GPLayer layer = null;
+
+            if (memento instanceof MementoRaster) {
+//                MementoRaster mementoRaster = (MementoRaster) memento;
+
+                layer = new GPRasterLayer();
+                layer.setLayerType(GPLayerType.RASTER);
+                // layer.setLayerInfo();???
+            } else if (memento instanceof MementoVector) {
+//                MementoVector mementoVector = (MementoVector) memento;
+
+                layer = new GPVectorLayer();
+                // layer.setGeometry()???
             }
+
+            this.convertToLayerElementFromMementoLayer(layer, memento);
+
+            folder.setId(memento.getIdFolderParent());
+            layer.setFolder(folder);
+
+            layersList.add(layer);
         }
         return layersList;
+    }
+
+    private void convertToLayerElementFromMementoLayer(GPLayer layer, AbstractMementoLayer memento) {
+        layer.setAbstractText(memento.getAbstractText());
+        layer.setBbox(new GPBBox(memento.getLowerLeftX(), memento.getLowerLeftY(),
+                memento.getUpperRightX(), memento.getUpperRightY()));
+        layer.setChecked(memento.isChecked());
+        layer.setSrs(memento.getSrs());
+        layer.setUrlServer(memento.getDataSource());
+        layer.setId(memento.getIdBaseElement());
+        layer.setName(memento.getLayerName());
+        layer.setTitle(memento.getTitle());
+        layer.setPosition(memento.getzIndex());
+//        layer.setShared(mementoLayer.isShared());
     }
 }

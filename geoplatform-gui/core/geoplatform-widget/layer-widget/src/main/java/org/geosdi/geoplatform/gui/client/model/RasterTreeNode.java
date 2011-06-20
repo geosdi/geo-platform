@@ -71,16 +71,23 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
      * @param label
      */
     public RasterTreeNode(ClientRasterInfo layer) {
-        super.setLabel(layer.getTitle());
-        super.setAbstractText(layer.getAbstractText());
+        // GPBeanTreeModel
+        super.setLabel(layer.getLayerName());
         super.setName(layer.getLayerName());
+        super.setAbstractText(layer.getAbstractText());
+        super.setzIndex(layer.getzIndex());
+        super.setChecked(layer.isChecked());
+        super.setId(layer.getId());
+        // GPLayerTreeModel
         super.setDataSource(layer.getDataSource());
+        super.setTitle(layer.getTitle());
         super.setCrs(layer.getCrs());
         super.setBbox(layer.getBbox());
         super.setzIndex(layer.getzIndex());
         super.setLayerType(layer.getLayerType());
         super.setChecked(layer.isChecked());
         super.setId(layer.getId());
+        //
         this.setStyles(layer.getStyles());
     }
 

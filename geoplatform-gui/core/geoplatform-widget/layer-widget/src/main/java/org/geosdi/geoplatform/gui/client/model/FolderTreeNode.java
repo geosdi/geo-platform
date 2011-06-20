@@ -74,10 +74,13 @@ public class FolderTreeNode extends AbstractFolderTreeNode {
     }
 
     public FolderTreeNode(GPFolderClientInfo folder) {
+        // GPBeanTreeModel
         super.setLabel(folder.getLabel());
-        super.setId(folder.getId());
+//        super.setName(folder.getName());
         super.setzIndex(folder.getzIndex());
         super.setChecked(folder.isChecked());
+        super.setId(folder.getId());
+        //
         this.numberOfDescendants = folder.getNumberOfDescendants();
         this.modelConverter(folder.getFolderElements());
     }

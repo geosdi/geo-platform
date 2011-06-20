@@ -51,10 +51,46 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
      *
      */
     private static final long serialVersionUID = -6964624685883651246L;
+    private String title;
+    private String abstractText;
     private String dataSource;
     private String crs;
     private BboxClientInfo bbox;
     private GPLayerType layerType;
+
+    /**
+     * @return the title
+     */
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * @param title
+     *          the title to set
+     */
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * @return the abstractText
+     */
+    @Override
+    public String getAbstractText() {
+        return abstractText;
+    }
+
+    /**
+     * @param abstractText
+     *          the abstractText to set
+     */
+    @Override
+    public void setAbstractText(String abstractText) {
+        this.abstractText = abstractText;
+    }
 
     /**
      * @return the dataSource
@@ -123,5 +159,4 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
     public void setLayerType(GPLayerType layerType) {
         this.layerType = layerType;
     }
-
 }

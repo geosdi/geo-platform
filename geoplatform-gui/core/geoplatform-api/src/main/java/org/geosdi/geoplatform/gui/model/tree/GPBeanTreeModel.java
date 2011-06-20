@@ -51,42 +51,13 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
      *
      */
     private static final long serialVersionUID = 2095233644130779285L;
-    private String name;
-    private String abstractText;
     private String label;
+    private String name;
     private int zIndex;
-    private boolean isChecked = false;
+    private boolean checked = false;
     private long id;
 
     public GPBeanTreeModel() {
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the abstractText
-     */
-    public String getAbstractText() {
-        return abstractText;
-    }
-
-    /**
-     * @param abstractText the abstractText to set
-     */
-    public void setAbstractText(String abstractText) {
-        this.abstractText = abstractText;
     }
 
     /**
@@ -98,37 +69,56 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
 
     /**
      * @param label
-     *            the label to set
+     *          the label to set
      */
     public void setLabel(String label) {
         this.label = label;
     }
 
-    public abstract AbstractImagePrototype getIcon();
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
+    /**
+     * @param name
+     *          the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @param zIndex
+     *          the zIndex to set
+     */
     public void setzIndex(int zIndex) {
         this.zIndex = zIndex;
     }
 
+    /**
+     * @return the zIndex
+     */
     public int getzIndex() {
         return zIndex;
     }
 
     /**
-     * @return the isChecked
+     * @return the checked
      */
     public boolean isChecked() {
-        return isChecked;
+        return checked;
     }
 
     /**
-     * @param isChecked the isChecked to set
+     * @param checked
+     *          the checked to set
      */
-    public void setChecked(boolean isChecked) {
-        this.isChecked = isChecked;
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
-
-    public abstract void accept(IVisitor visitor);
 
     /**
      * @return the id
@@ -138,9 +128,14 @@ public abstract class GPBeanTreeModel extends BaseTreeModel {
     }
 
     /**
-     * @param id the id to set
+     * @param id
+     *          the id to set
      */
     public void setId(long id) {
         this.id = id;
     }
+
+    public abstract AbstractImagePrototype getIcon();
+
+    public abstract void accept(IVisitor visitor);
 }

@@ -52,7 +52,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
 
         GPLAYER_NAME("name"), GPLAYER_ABSTRACT_TEXT("abstractText"),
         GPLAYER_LABEL("label");
-
+        
         private String value;
 
         GPLayerBeanKeyValue(String theValue) {
@@ -63,23 +63,25 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
             return value;
         }
     }
-
+    
     private static final long serialVersionUID = 7746607426284214904L;
-
+    
     private long id;
-
+    
     private String name;
-
+    
     private String label;
-
+    
+    private String title;
+    
     private String abstractText;
-
+    
     private String dataSource;
-
+    
     private String crs;
-
+    
     private BboxClientInfo bbox;
-
+    
     private GPLayerType layerType;
 
     /**
@@ -91,7 +93,8 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
     }
 
     /**
-     * @param id the id to set
+     * @param id
+     *          the id to set
      */
     @Override
     public void setId(long id) {
@@ -103,11 +106,12 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
      */
     @Override
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
-     * @param name the name to set
+     * @param name
+     *          the name to set
      */
     @Override
     public void setName(String name) {
@@ -115,17 +119,41 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
         super.set(GPLayerBeanKeyValue.GPLAYER_NAME.getValue(), this.name);
     }
 
+    /**
+     * @return the label
+     */
     @Override
     public String getLabel() {
         return this.label;
     }
 
+    /**
+     * @param label
+     *          the label to set
+     */
     @Override
     public void setLabel(String label) {
         this.label = label;
         super.set(GPLayerBeanKeyValue.GPLAYER_LABEL.getValue(),
                 this.label);
     }
+    
+    /**
+     * @return the title
+     */
+    @Override
+    public String getTitle() {
+        return this.title;
+    }
+
+    /**
+     * @param title
+     *          the title to set
+     */
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
+    }    
 
     /**
      * @return the abstractText
@@ -136,7 +164,8 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
     }
 
     /**
-     * @param abstractText the abstractText to set
+     * @param abstractText
+     *          the abstractText to set
      */
     @Override
     public void setAbstractText(String abstractText) {
@@ -154,7 +183,8 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
     }
 
     /**
-     * @param dataSource the dataSource to set
+     * @param dataSource
+     *          the dataSource to set
      */
     @Override
     public void setDataSource(String dataSource) {
@@ -170,7 +200,8 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
     }
 
     /**
-     * @param crs the crs to set
+     * @param crs the
+     *          crs to set
      */
     @Override
     public void setCrs(String crs) {
@@ -186,7 +217,8 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
     }
 
     /**
-     * @param bbox the bbox to set
+     * @param bbox
+     *          the bbox to set
      */
     @Override
     public void setBbox(BboxClientInfo bbox) {
@@ -202,7 +234,8 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
     }
 
     /**
-     * @param layerType the layerType to set
+     * @param layerType
+     *          the layerType to set
      */
     @Override
     public void setLayerType(GPLayerType layerType) {
@@ -214,6 +247,11 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
         return 0;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return "GPLayerBeanModel{" + "id = " + id + ", name = " + name

@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.action.ISave;
 public class MementoSaveCheck extends AbstractMementoSave {
 
     private static final long serialVersionUID = -1097048315113513051L;
-    private boolean isChecked;
+    private boolean checked;
     private transient boolean isParentsElementModified;
     
     public MementoSaveCheck(){}
@@ -57,14 +57,14 @@ public class MementoSaveCheck extends AbstractMementoSave {
      * @return the isChecked
      */
     public boolean isChecked() {
-        return isChecked;
+        return checked;
     }
 
     /**
-     * @param isChecked the isChecked to set
+     * @param checked the checked to set
      */
-    public void setIsChecked(boolean isChecked) {
-        this.isChecked = isChecked;
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
     /**

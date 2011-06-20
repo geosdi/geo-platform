@@ -60,7 +60,7 @@ public class MementoBuilder {
         }
         memento.setFolderName(folder.getLabel());
         memento.setRefParent((folder.getParent() instanceof FolderTreeNode) ? (FolderTreeNode) folder.getParent() : null);
-        memento.setIsChecked(folder.isChecked());
+        memento.setChecked(folder.isChecked());
         memento.setNumberOfDescendants(folder.getNumberOfDescendants());
         memento.setzIndex(folder.getzIndex());
         return memento;
@@ -78,10 +78,10 @@ public class MementoBuilder {
                     mementoRaster.setRefBaseElement(raster);
                     raster.getObservable().addObserver(mementoRaster);
                 }
-                mementoRaster.setAbstractText(layerBean.getAbstractText());
+                mementoRaster.setAbstractText(raster.getAbstractText());
                 mementoRaster.setDataSource(raster.getDataSource());
                 mementoRaster.setRefBaseElement(raster);
-                mementoRaster.setIsChecked(raster.isChecked());
+                mementoRaster.setChecked(raster.isChecked());
                 mementoRaster.setLayerName(layerBean.getName());
                 mementoRaster.setLayerType(GPLayerType.RASTER);
                 mementoRaster.setLowerLeftX(raster.getBbox().getLowerLeftX());
@@ -103,10 +103,10 @@ public class MementoBuilder {
                     mementoVector.setRefBaseElement(vector);
                     vector.getObservable().addObserver(mementoVector);
                 }
-                mementoVector.setAbstractText(layerBean.getAbstractText());
+                mementoVector.setAbstractText(vector.getAbstractText());
                 mementoVector.setDataSource(vector.getDataSource());
                 mementoVector.setRefBaseElement(vector);
-                mementoVector.setIsChecked(vector.isChecked());
+                mementoVector.setChecked(vector.isChecked());
                 mementoVector.setLayerName(layerBean.getName());
                 mementoVector.setLayerType(vector.getLayerType());
                 mementoVector.setLowerLeftX(vector.getBbox().getLowerLeftX());

@@ -61,7 +61,7 @@ public abstract class AbstractMementoLayer<T extends GPLayerTreeModel> extends A
     private double upperRightX;
     private double upperRightY;
     private GPLayerType layerType;
-    private boolean isChecked;
+    private boolean checked;
 
     public AbstractMementoLayer(ISave saveAction) {
         super(saveAction);
@@ -96,11 +96,11 @@ public abstract class AbstractMementoLayer<T extends GPLayerTreeModel> extends A
     }
 
     public boolean isChecked() {
-        return isChecked;
+        return checked;
     }
 
-    public void setIsChecked(boolean isChecked) {
-        this.isChecked = isChecked;
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
     public String getLayerName() {

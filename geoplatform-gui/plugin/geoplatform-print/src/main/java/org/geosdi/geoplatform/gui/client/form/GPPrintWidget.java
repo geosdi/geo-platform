@@ -57,12 +57,13 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     @Override
     public void initSize() {
         super.setHeading("GeoPlatform Print Widget");
-        setSize(450, 480);
+        setSize(400, 450);
     }
 
     @Override
     public void initSizeFormPanel() {
-        formPanel.setSize(450, 480);
+        formPanel.setHeaderVisible(false);
+        formPanel.setSize(400, 450);
     }
 
     @Override
@@ -101,7 +102,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         fieldSet = new FieldSet();
         fieldSet.setHeading("Edit Print Settings");
         FormLayout layout = new FormLayout();
-        layout.setLabelWidth(150);
+        layout.setLabelWidth(100);
         layout.setLabelPad(5);
         fieldSet.setLayout(layout);
 
@@ -133,7 +134,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
         fieldSet = new FieldSet();
         fieldSet.setHeading("DPI");
         FormLayout layout = new FormLayout();
-        layout.setLabelWidth(150);
+        layout.setLabelWidth(100);
         layout.setLabelPad(5);
         fieldSet.setLayout(layout);
 

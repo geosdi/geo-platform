@@ -73,6 +73,7 @@ import org.geosdi.geoplatform.gui.client.action.menu.ExportoToKML;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToPDF;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToShpZip;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToTIFF;
+import org.geosdi.geoplatform.gui.client.action.menu.ShowLayerProperties;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
@@ -320,6 +321,12 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
         exportToShpZip.setIcon(LayerResources.ICONS.exportToShpZip());
         exportToShpZip.addSelectionListener(new ExportoToShpZip(tree));
         contextMenu.add(exportToShpZip);
+        
+        MenuItem layerProperties = new MenuItem();
+        layerProperties.setText("Layer Properties");
+        layerProperties.setIcon(LayerResources.ICONS.layerProperties());
+        layerProperties.addSelectionListener(new ShowLayerProperties(tree));
+        contextMenu.add(layerProperties);
         
 //        MenuItem exportToGML = new MenuItem();
 //        exportToGML.setText("Export To GML");

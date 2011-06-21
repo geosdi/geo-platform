@@ -91,5 +91,8 @@ public interface LayerIcons extends ImageBundle {
     @Resource("shape-zip.png")
     AbstractImagePrototype exportToShpZip();
     
+    @Resource("layer-properties.png")
+    AbstractImagePrototype layerProperties();
+    
     
 }

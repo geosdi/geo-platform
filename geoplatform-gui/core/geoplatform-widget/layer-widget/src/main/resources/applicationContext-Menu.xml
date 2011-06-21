@@ -56,5 +56,13 @@
         <property name="order" value="80" />
     </bean>
     
+    <bean name="LayerProperties"
+		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+        <property name="id" value="LayerProperties" />
+        <property name="text" value="Layer Properties" />
+        <property name="enabled" value="true" />
+        <property name="order" value="90" />
+    </bean>
+    
 
 </beans>

@@ -42,7 +42,9 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
+import org.geosdi.geoplatform.gui.client.widget.form.LayerProperties;
 import org.geosdi.geoplatform.gui.client.widget.progressbar.GPLayerProgressBar;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -87,6 +89,10 @@ public class LayerView extends GeoPlatformView {
         if (event.getType() == LayerEvents.HIDE_LAYER_WIDGET) {
             onHideLayerWidget();
         }
+        
+        if (event.getType() == LayerEvents.SHOW_LAYER_PROPERTIES) {
+            onShowLayerProperties((GPBeanTreeModel)event.getData());
+        }
     }
 
     /**
@@ -112,5 +118,10 @@ public class LayerView extends GeoPlatformView {
             LayoutManager.manageWest(true);
         }
         LayoutManager.addComponentToWest(layerManagement);
+    }
+
+    private void onShowLayerProperties(GPBeanTreeModel model) {
+        LayerProperties properties = new LayerProperties(true, model);
+        properties.show();
     }
 }

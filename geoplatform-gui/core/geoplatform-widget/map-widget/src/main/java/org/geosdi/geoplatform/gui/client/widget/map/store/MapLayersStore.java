@@ -45,7 +45,10 @@ import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.DisplayLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.HideLegendEvent;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
+import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
+import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
+import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -159,5 +162,12 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         this.layers.remove(layerBean);
 
         LayerHandlerManager.fireEvent(new HideLegendEvent(layerBean));
+    }
+
+    @Override
+    public void onChangeStyle(GPLayerBean layerBean, String newStyle) {
+        
+        //TODO: implement me
+
     }
 }

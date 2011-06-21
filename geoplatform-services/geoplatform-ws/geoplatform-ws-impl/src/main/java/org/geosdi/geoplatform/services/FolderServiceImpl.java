@@ -115,12 +115,12 @@ class FolderServiceImpl {
             throw new ResourceNotFoundFault("Folder not found", folder.getId());
         }
         // Update all properties (except the owner)
-        orig.setParent(folder.getParent());
         orig.setName(folder.getName());
+        orig.setParent(folder.getParent());
         orig.setPosition(folder.getPosition());
+        orig.setNumberOfDescendants(folder.getNumberOfDescendants());
         orig.setShared(folder.isShared());
         orig.setChecked(folder.isChecked());
-        orig.setNumberOfDescendants(folder.getNumberOfDescendants());
 
         folderDao.merge(orig);
         return orig.getId();
@@ -129,7 +129,6 @@ class FolderServiceImpl {
     public boolean deleteFolder(RequestById request)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder folder = folderDao.find(request.getId());
-
         if (folder == null) {
             throw new ResourceNotFoundFault("Folder not found", request.getId());
         }
@@ -140,28 +139,26 @@ class FolderServiceImpl {
 
     public long saveAddedFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault {
-        assert ((folder.getOwner() == null && folder.getParent() != null)
-                || (folder.getOwner() != null && folder.getParent() == null)) :
-                this.getClass().getCanonicalName() + " on saveFolderAndTreeModifications - "
-                + "Illegal argument exception: folder must have or Owner or Parent NOT NULL";
-        assert ((folder.getOwner() != null && descendantsMapData.getDescendantsMap().isEmpty())
-                || (folder.getParent() != null && !descendantsMapData.getDescendantsMap().isEmpty())) :
-                "descendantsMapData must have one or more entries if the folder has a parent";
+//        assert ((folder.getOwner() == null && folder.getParent() != null)
+//                || (folder.getOwner() != null && folder.getParent() == null)) :
+//                this.getClass().getCanonicalName() + " on saveFolderAndTreeModifications - "
+//                + "Illegal argument exception: folder must have or Owner or Parent NOT NULL";
+//        assert ((folder.getOwner() != null && descendantsMapData.getDescendantsMap().isEmpty())
+//                || (folder.getParent() != null && !descendantsMapData.getDescendantsMap().isEmpty())) :
+//                "descendantsMapData must have one or more entries if the folder has a parent";
 
-        if (folder.getOwner() != null) {
-            // TODO verify problems when saving a folder with owner from interface
-            GPUser user = userDao.findByUsername(folder.getOwner().getUsername());
-            if (user == null) {
-                throw new ResourceNotFoundFault("User " + folder.getOwner().getUsername() + " not found");
-            }
+        // TODO verify problems when saving a folder with owner from interface
+        GPUser user = userDao.findByUsername(folder.getOwner().getUsername());
+        if (user == null) {
+            throw new ResourceNotFoundFault("User " + folder.getOwner().getUsername() + " not found");
+        }
+        folder.setOwner(user);
 
-            folder.setOwner(user);
-        } else {
+        if (folder.getParent() != null) {
             GPFolder folderParent = folderDao.find(folder.getParent().getId());
             if (folderParent == null) {
                 throw new ResourceNotFoundFault("Folder parent not found", folder.getParent().getId());
             }
-
             folder.setParent(folderParent);
         }
 
@@ -209,20 +206,24 @@ class FolderServiceImpl {
     }
 
     /**
-     * 
+     * @param username
      * @param idFolderMoved
      * @param idNewParent: set conventionaly 0 if idFolderMoved is refer to a folder of root
-     * @param owner
      * @param newPosition
      * @param descendantsMapData
      * @return
      * @throws ResourceNotFoundFault 
      */
-    public boolean saveDragAndDropFolderModifications(long idFolderMoved, long idNewParent, GPUser owner,
+    public boolean saveDragAndDropFolderModifications(String username, long idFolderMoved, long idNewParent,
             int newPosition, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
+        GPUser user = userDao.findByUsername(username);
+        if (user == null) {
+            throw new ResourceNotFoundFault("User with username \"" + username + "\" not found");
+        }
+
         GPFolder folderMoved = folderDao.find(idFolderMoved);
         if (folderMoved == null) {
-            throw new ResourceNotFoundFault("Folder with id " + idFolderMoved + " not found");
+            throw new ResourceNotFoundFault("Folder with not found", idFolderMoved);
         }
         //assert (folderMoved.getPosition() != newPosition) : "New Position must be NOT equal to Old Position";
 
@@ -230,18 +231,13 @@ class FolderServiceImpl {
         if (idNewParent != 0L) {
             GPFolder folderParent = folderDao.find(idNewParent);
             if (folderParent == null) { // Drag & Drop to the root
-                throw new ResourceNotFoundFault("The new parent does not exists into DB.", idNewParent);
+                throw new ResourceNotFoundFault("New Parent not found", idNewParent);
             }
-            logger.trace("***parent");
+            logger.trace("*** Folder has a Parent");
             folderMoved.setParent(folderParent);
-            folderMoved.setOwner(null);
         } else {
-            logger.trace("***owner");
-            GPUser ownerDetail = userDao.findByUsername(owner.getUsername());
-            if (ownerDetail == null) {
-                throw new ResourceNotFoundFault("Unable to find user from DB with username " + owner.getUsername());
-            }
-            folderMoved.setOwner(ownerDetail);
+            logger.trace("*** Folder has a Owner");
+            folderMoved.setOwner(user);
             folderMoved.setParent(null);
         }
 
@@ -260,22 +256,28 @@ class FolderServiceImpl {
         int startSecondRange = folderMoved.getPosition();
         int endSecondRange = folderMoved.getPosition() - folderMoved.getNumberOfDescendants();
         int shiftValue = folderMoved.getNumberOfDescendants() + 1;
-        
+
         Search search = new Search();
         search.addFilterGreaterOrEqual("position", endFirstRange).
                 addFilterLessOrEqual("position", startFirstRange);
+        search.addFilterEqual("owner.id", user.getId());
         List<GPFolder> matchingFoldersFirstRange = folderDao.search(search);
+        search.removeFiltersOnProperty("owner.id");
+        search.addFilterEqual("ownerId", user.getId());
         List<GPLayer> matchingLayersFirstRange = layerDao.search(search);
         search.clear();
         search.addFilterGreaterOrEqual("position", endSecondRange).
                 addFilterLessOrEqual("position", startSecondRange);
+        search.addFilterEqual("owner.id", user.getId());
         List<GPFolder> matchingFoldersSecondRange = folderDao.search(search);
+        search.removeFiltersOnProperty("owner.id");
+        search.addFilterEqual("ownerId", user.getId());
         List<GPLayer> matchingLayersSecondRange = layerDao.search(search);
         System.out.println("Range: " + startFirstRange + " - " + endFirstRange + " - "
                 + startSecondRange + " - " + endSecondRange + " - ");
 //        System.out.println("### matchingFoldersFirstRange.size(): " + matchingFoldersFirstRange.size());
 //        System.out.println("### matchingLayersFirstRange.size(): " + matchingLayersFirstRange.size());
-        System.out.println((matchingLayersFirstRange.isEmpty()? "lista vuota" : matchingLayersFirstRange.get(0)));
+        System.out.println((matchingLayersFirstRange.isEmpty() ? "lista vuota" : matchingLayersFirstRange.get(0)));
         int moveValue = matchingFoldersFirstRange.size() + matchingLayersFirstRange.size();
 
 //        System.out.println("### startFirstRange: " + startFirstRange);
@@ -305,7 +307,7 @@ class FolderServiceImpl {
         folderDao.merge(folderMoved);
 
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-        
+
         return true;
     }
 
@@ -325,7 +327,6 @@ class FolderServiceImpl {
 
     public FolderDTO getShortFolder(RequestById request) throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(request.getId());
-
         if (folder == null) {
             throw new ResourceNotFoundFault("Folder not found", request.getId());
         }
@@ -336,7 +337,6 @@ class FolderServiceImpl {
 
     public GPFolder getFolderDetail(RequestById request) throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(request.getId());
-
         if (folder == null) {
             throw new ResourceNotFoundFault("Folder not found", request.getId());
         }
@@ -366,7 +366,6 @@ class FolderServiceImpl {
 
     public long getFoldersCount(SearchRequest searchRequest) {
         Search searchCriteria = new Search(GPFolder.class);
-
         if (searchRequest != null && searchRequest.getNameLike() != null) {
             searchCriteria.addFilterILike("name", searchRequest.getNameLike());
         }
@@ -426,27 +425,24 @@ class FolderServiceImpl {
     public void setFolderShared(RequestById request)
             throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(request.getId());
-
         if (folder == null) {
             throw new ResourceNotFoundFault("Folder not found", request.getId());
         }
 
         folder.setShared(true);
-        folder.setOwner(null);
+//        folder.setOwner(null);
         folderDao.merge(folder);
     }
 
     public boolean setFolderOwner(RequestByUserFolder request, boolean force)
             throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(request.getFolderId());
-
         if (folder == null) {
             throw new ResourceNotFoundFault("Folder not found",
                     request.getFolderId());
         }
 
         GPUser user = userDao.find(request.getUserId());
-
         if (user == null) {
             throw new ResourceNotFoundFault("User not found",
                     request.getUserId());
@@ -478,6 +474,7 @@ class FolderServiceImpl {
         searchCriteria.addSortAsc("position");
 
         searchCriteria.addFilterEqual("owner.id", userId);
+        searchCriteria.addFilterNull("parent.id");
 
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
         return convertToFolderList(foundFolder);

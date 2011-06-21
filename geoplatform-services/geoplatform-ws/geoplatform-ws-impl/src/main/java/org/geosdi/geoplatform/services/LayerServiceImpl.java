@@ -79,7 +79,6 @@ class LayerServiceImpl {
     private GPStyleDAO styleDao;
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
-
     /**
      * @param userDao 
      *            the userDao to set
@@ -95,7 +94,7 @@ class LayerServiceImpl {
     public void setUserDao(GPUserDAO userDao) {
         this.userDao = userDao;
     }
-    
+
     /**
      * @param folderDao 
      *            the folderDao to set
@@ -180,19 +179,19 @@ class LayerServiceImpl {
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPUser owner = userDao.findByUsername(username);
         if (owner == null) {
-            throw new ResourceNotFoundFault("Owner \"" + username + "\" of layer not found into DB");
+            throw new ResourceNotFoundFault("Owner with username \"" + username + "\" not found");
         }
         layer.setOwnerId(owner.getId());
-        
+
         GPFolder parent = layer.getFolder();
         if (parent == null) {
-            throw new IllegalParameterFault("Parent of layer not found " + layer.getId());
+            throw new IllegalParameterFault("Parent of layer with id " + layer.getId() + " not found");
         }
 
         long idParent = parent.getId();
         GPFolder parentFromDB = folderDao.find(idParent);
         if (parentFromDB == null) {
-            throw new ResourceNotFoundFault("Parent of layer not found into DB", idParent);
+            throw new ResourceNotFoundFault("Parent of layer not found", idParent);
         }
 
         int newPosition = layer.getPosition();
@@ -200,7 +199,7 @@ class LayerServiceImpl {
         // Shift positions
         layerDao.updatePositionsLowerBound(newPosition, increment);
         folderDao.updatePositionsLowerBound(newPosition, increment);
-        
+
         layerDao.persist(layer);
 
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
@@ -211,9 +210,9 @@ class LayerServiceImpl {
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPUser owner = userDao.findByUsername(username);
         if (owner == null) {
-            throw new ResourceNotFoundFault("Owner \"" + username + "\" of layer not found into DB");
-        }        
-        
+            throw new ResourceNotFoundFault("Owner with username \"" + username + "\" not found");
+        }
+
         GPLayer[] layersArray = layers.toArray(new GPLayer[layers.size()]);
         for (GPLayer gpLayer : layersArray) {
             gpLayer.setOwnerId(owner.getId());
@@ -223,13 +222,13 @@ class LayerServiceImpl {
         GPFolder parentFromDB = null;
         parent = layersArray[0].getFolder();
         if (parent == null) {
-            throw new IllegalParameterFault("Parent of layer not found " + layersArray[0].getId());
+            throw new IllegalParameterFault("Parent of layer with id " + layersArray[0].getId() + " not found");
         }
 
         long idParent = parent.getId();
         parentFromDB = folderDao.find(idParent);
         if (parentFromDB == null) {
-            throw new ResourceNotFoundFault("Parent of layer not found into DB", idParent);
+            throw new ResourceNotFoundFault("Parent of layer not found", idParent);
         }
         ArrayList<Long> arrayList = new ArrayList<Long>(layers.size());
         int newPosition = layers.get(layers.size() - 1).getPosition();
@@ -243,7 +242,7 @@ class LayerServiceImpl {
         for (int i = 0; i < layersArray.length; i++) {
             arrayList.add(layersArray[i].getId());
         }
-        
+
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
         return arrayList;
     }
@@ -321,9 +320,14 @@ class LayerServiceImpl {
         return true;
     }
 
-    public boolean saveDragAndDropLayerModifications(long idLayerMoved, long idNewParent,
-            int newPosition, GPWebServiceMapData descendantsMapData)
+    public boolean saveDragAndDropLayerModifications(String username, long idLayerMoved,
+            long idNewParent, int newPosition, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault {
+        GPUser user = userDao.findByUsername(username);
+        if (user == null) {
+            throw new ResourceNotFoundFault("User with username \"" + username + "\" not found");
+        }
+
         GPLayer layerMoved = layerDao.find(idLayerMoved);
         if (layerMoved == null) {
             throw new ResourceNotFoundFault("Layer with id " + idLayerMoved + " not found");
@@ -353,7 +357,10 @@ class LayerServiceImpl {
         Search search = new Search();
         search.addFilterGreaterOrEqual("position", endFirstRange).
                 addFilterLessOrEqual("position", startFirstRange);
+        search.addFilterEqual("owner.id", user.getId());
         List<GPFolder> matchingFoldersFirstRange = folderDao.search(search);
+        search.removeFiltersOnProperty("owner.id");
+        search.addFilterEqual("ownerId", user.getId());
         List<GPLayer> matchingLayersFirstRange = layerDao.search(search);
 
         if (layerMoved.getPosition() < newPosition) {// Drag & Drop to top
@@ -454,13 +461,13 @@ class LayerServiceImpl {
 
         return layer.getLayerType();
     }
-    
+
     public ArrayList<String> getLayersDataSourceByOwner(String userName) throws ResourceNotFoundFault {
         GPUser user = userDao.findByUsername(userName);
         if (user == null) {
-            throw new ResourceNotFoundFault("User with username " + userName + " not found");
+            throw new ResourceNotFoundFault("User with username \"" + userName + "\" not found");
         }
-        
+
         return layerDao.findDistinctDataSourceByUserId(user.getId());
     }
 

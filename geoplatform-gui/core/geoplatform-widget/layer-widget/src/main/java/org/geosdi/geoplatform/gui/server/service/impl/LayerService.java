@@ -286,9 +286,11 @@ public class LayerService implements ILayerService {
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
+        GPUser user = new GPUser();
+        user.setUsername("user_test_0");
         try {
             result = this.geoPlatformServiceClient.saveDragAndDropLayerAndTreeModifications(
-                    memento.getIdBaseElement(), memento.getIdNewParent(),
+                    user.getUsername(), memento.getIdBaseElement(), memento.getIdNewParent(),
                     memento.getNewZIndex(), map);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error(
@@ -308,7 +310,7 @@ public class LayerService implements ILayerService {
         user.setUsername("user_test_0");
         try {
             result = this.geoPlatformServiceClient.saveDragAndDropFolderAndTreeModifications(
-                    memento.getIdBaseElement(), memento.getIdNewParent(), user,
+                    user.getUsername(), memento.getIdBaseElement(), memento.getIdNewParent(),
                     memento.getNewZIndex(), map);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error(

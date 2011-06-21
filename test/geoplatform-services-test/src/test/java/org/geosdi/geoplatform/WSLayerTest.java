@@ -42,8 +42,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -366,7 +364,7 @@ public class WSLayerTest extends ServiceTest {
         try {
             // Move vector 2 before raster 2 (oldPosition < new Position)
             boolean checkDD = geoPlatformService.saveDragAndDropLayerAndTreeModifications(
-                    idVector2, idRootFolderB, 2, descendantsMapData);
+                    super.usernameTest, idVector2, idRootFolderB, 2, descendantsMapData);
             Assert.assertTrue("Drag and Drop successful", checkDD);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -395,7 +393,7 @@ public class WSLayerTest extends ServiceTest {
 
             // Move vector 2 after raster 2, in initial position (oldPosition > new Position)
             checkDD = geoPlatformService.saveDragAndDropLayerAndTreeModifications(
-                    idVector2, idRootFolderB, 1, descendantsMapData);
+                    super.usernameTest, idVector2, idRootFolderB, 1, descendantsMapData);
             Assert.assertTrue("Vector 2 doesn't moved to position 1", checkDD);
 
             this.checkInitialState();
@@ -414,7 +412,7 @@ public class WSLayerTest extends ServiceTest {
         try {
             // Move raster 2 before vector 2 (oldPosition > new Position)
             boolean checkDD = geoPlatformService.saveDragAndDropLayerAndTreeModifications(
-                    idRaster2, idRootFolderB, 1, descendantsMapData);
+                    super.usernameTest, idRaster2, idRootFolderB, 1, descendantsMapData);
             Assert.assertTrue("Drag and Drop successful", checkDD);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -443,7 +441,7 @@ public class WSLayerTest extends ServiceTest {
 
             // Move raster 2 after vector 2, in initial position (oldPosition < new Position)
             checkDD = geoPlatformService.saveDragAndDropLayerAndTreeModifications(
-                    idRaster2, idRootFolderB, 2, descendantsMapData);
+                    super.usernameTest, idRaster2, idRootFolderB, 2, descendantsMapData);
             Assert.assertTrue("Raster 2 doesn't moved to position 2", checkDD);
 
             this.checkInitialState();
@@ -464,7 +462,7 @@ public class WSLayerTest extends ServiceTest {
             map.put(idRootFolderB, 1);
             // Move vector 2 before vector 1 (oldPosition < new Position)
             boolean checkDD = geoPlatformService.saveDragAndDropLayerAndTreeModifications(
-                    idVector2, idRootFolderA, 4, descendantsMapData);
+                    super.usernameTest, idVector2, idRootFolderA, 4, descendantsMapData);
             Assert.assertTrue("Drag and Drop successful", checkDD);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -496,7 +494,7 @@ public class WSLayerTest extends ServiceTest {
             map.put(idRootFolderB, 2);
             // Move vector 2 after raster 2, in initial position (oldPosition > new Position)
             checkDD = geoPlatformService.saveDragAndDropLayerAndTreeModifications(
-                    idVector2, idRootFolderB, 1, descendantsMapData);
+                    super.usernameTest, idVector2, idRootFolderB, 1, descendantsMapData);
             Assert.assertTrue("Vector 2 doesn't moved to position 1", checkDD);
 
             this.checkInitialState();
@@ -517,7 +515,7 @@ public class WSLayerTest extends ServiceTest {
             map.put(idRootFolderB, 3);
             // Move vector 1 before vector 2 (oldPosition > new Position)
             boolean checkDD = geoPlatformService.saveDragAndDropLayerAndTreeModifications(
-                    idVector1, idRootFolderB, 1, descendantsMapData);
+                    super.usernameTest, idVector1, idRootFolderB, 1, descendantsMapData);
             Assert.assertTrue("Drag and Drop successful", checkDD);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -549,7 +547,7 @@ public class WSLayerTest extends ServiceTest {
             map.put(idRootFolderB, 2);
             // Move vector 1 after raster 1, in initial position (oldPosition > new Position)
             checkDD = geoPlatformService.saveDragAndDropLayerAndTreeModifications(
-                    idVector1, idRootFolderA, 4, descendantsMapData);
+                    super.usernameTest, idVector1, idRootFolderA, 4, descendantsMapData);
             Assert.assertTrue("Vector 1 doesn't moved to position 4", checkDD);
 
             this.checkInitialState();
@@ -558,7 +556,7 @@ public class WSLayerTest extends ServiceTest {
             Assert.fail("Folder or Layer with ID \"" + rnnf.getId() + "\" was not found");
         }
     }
-    
+
     @Test
     public void testTransactionOnAddLayer() throws IllegalParameterFault, ResourceNotFoundFault {
         logger.trace("\n\t@@@ testTransactionOnAddLayer @@@");
@@ -577,6 +575,7 @@ public class WSLayerTest extends ServiceTest {
             checkInitialState();
         }
     }
+
     @Test
     public void testGetShortLayer() {
         try {
@@ -639,7 +638,7 @@ public class WSLayerTest extends ServiceTest {
             Assert.fail("User with username \"" + usernameTest + "\" was NOT found");
         }
     }
-    
+
     private List<Long> addLayer3() throws IllegalParameterFault, ResourceNotFoundFault {
         // "rootFolderA" ---> "rasterLayer3"
         GPRasterLayer rasterLayer3 = new GPRasterLayer();

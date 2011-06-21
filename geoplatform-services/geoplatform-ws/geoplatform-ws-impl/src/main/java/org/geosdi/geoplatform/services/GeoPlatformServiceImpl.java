@@ -353,9 +353,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean saveDragAndDropFolderAndTreeModifications(long idElementMoved, long idNewParent, GPUser owner, int newPseudoPosition,
+    public boolean saveDragAndDropFolderAndTreeModifications(String username, long idElementMoved, long idNewParent, int newPseudoPosition,
             GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
-        return folderServiceDelegate.saveDragAndDropFolderModifications(idElementMoved, idNewParent, owner, newPseudoPosition, descendantsMapData);
+        return folderServiceDelegate.saveDragAndDropFolderModifications(username, idElementMoved, idNewParent, newPseudoPosition, descendantsMapData);
     }
 
     @Override
@@ -509,9 +509,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean saveDragAndDropLayerAndTreeModifications(long idElementMoved, long idNewParent, int newPosition,
+    public boolean saveDragAndDropLayerAndTreeModifications(String username, long idElementMoved, long idNewParent, int newPosition,
             GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
-        return layerServiceDelegate.saveDragAndDropLayerModifications(idElementMoved, idNewParent, newPosition, descendantsMapData);
+        return layerServiceDelegate.saveDragAndDropLayerModifications(username, idElementMoved, idNewParent, newPosition, descendantsMapData);
     }
 
     @Override

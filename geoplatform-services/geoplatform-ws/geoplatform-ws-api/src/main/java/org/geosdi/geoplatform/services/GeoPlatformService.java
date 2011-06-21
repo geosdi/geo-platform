@@ -181,9 +181,9 @@ public interface GeoPlatformService {
     @Put
     @HttpResource(location = "/layer/{idElementMoved}")
     boolean saveDragAndDropFolderAndTreeModifications(
+            @WebParam(name = "username") String username,
             @WebParam(name = "idElementMoved") long idElementMoved,
             @WebParam(name = "idNewParent") long idNewParent,
-            @WebParam(name = "owner") GPUser owner,
             @WebParam(name = "newPosition") int newPseudoPosition,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault;
@@ -370,6 +370,7 @@ public interface GeoPlatformService {
     @Put
     @HttpResource(location = "/layer/{idElementMoved}")
     boolean saveDragAndDropLayerAndTreeModifications(
+            @WebParam(name = "username") String username,
             @WebParam(name = "idElementMoved") long idElementMoved,
             @WebParam(name = "idNewParent") long idNewParent,
             @WebParam(name = "newPosition") int newPosition,

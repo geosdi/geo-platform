@@ -121,9 +121,6 @@ public abstract class ServiceTest implements InitializingBean {
         idRootFolderB = createAndInsertFolderWithOwner(nameRootFolderB, userTest, 1, false);
         rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
 
-        Assert.assertNotNull("RootFolderA is NULL", rootFolderA);
-        Assert.assertNotNull("RootFolderB is NULL", rootFolderB);
-
         // Set the list of keywords (for raster layer)
         layerInfoKeywords = new ArrayList<String>();
         layerInfoKeywords.add("keyword_test");
@@ -167,21 +164,22 @@ public abstract class ServiceTest implements InitializingBean {
     }
 
     protected long createAndInsertFolderWithOwner(String folderName, GPUser owner, int position, boolean shared) {
-        GPFolder folder = createFolder(folderName, position, shared);
-        folder.setOwner(owner);
+        GPFolder folder = createFolder(folderName, owner, position, shared);
+        folder.setParent(null);
         long id = geoPlatformService.insertFolder(folder);
         return id;
     }
 
-    protected long createAndInsertFolderWithParent(String folderName, GPFolder parentFolder, int position, boolean shared) {
-        GPFolder folder = createFolder(folderName, position, shared);
+    protected long createAndInsertFolderWithParent(String folderName, GPUser owner, GPFolder parentFolder, int position, boolean shared) {
+        GPFolder folder = createFolder(folderName, owner, position, shared);
         folder.setParent(parentFolder);
         long id = geoPlatformService.insertFolder(folder);
         return id;
     }
 
-    protected GPFolder createFolder(String folderName, int position, boolean shared) {
+    protected GPFolder createFolder(String folderName, GPUser owner, int position, boolean shared) {
         GPFolder folder = new GPFolder();
+        folder.setOwner(owner);
         folder.setName(folderName);
         folder.setPosition(position);
         folder.setShared(shared);

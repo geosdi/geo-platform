@@ -79,15 +79,14 @@ public class WSFolderTest extends ServiceTest {
     private long idFolder5 = -1;
 
     @Before
-    // "position" will be set without application logic, but only to have different values
     public void setUp() throws Exception {
         super.setUp();
 
         // "rootFolderA" ---> "folder1"
-        idFolder1 = createAndInsertFolderWithParent(nameFolder1, rootFolderA, 6, false);
+        idFolder1 = createAndInsertFolderWithParent(nameFolder1, userTest, rootFolderA, 6, false);
         folder1 = geoPlatformService.getFolderDetail(new RequestById(idFolder1));
         // "rootFolderA" ---> "folder2"
-        idFolder2 = createAndInsertFolderWithParent(nameFolder2, rootFolderA, 5, false);
+        idFolder2 = createAndInsertFolderWithParent(nameFolder2, userTest, rootFolderA, 5, false);
         folder2 = geoPlatformService.getFolderDetail(new RequestById(idFolder2));
         //
         rootFolderA.setPosition(7);
@@ -95,13 +94,13 @@ public class WSFolderTest extends ServiceTest {
         geoPlatformService.updateFolder(rootFolderA);
 
         // "rootFolderB" ---> "folder3"
-        idFolder3 = createAndInsertFolderWithParent(nameFolder3, rootFolderB, 3, false);
+        idFolder3 = createAndInsertFolderWithParent(nameFolder3, userTest, rootFolderB, 3, false);
         folder3 = geoPlatformService.getFolderDetail(new RequestById(idFolder3));
         // "rootFolderB" ---> "folder4"
-        idFolder4 = createAndInsertFolderWithParent(nameFolder4, rootFolderB, 2, false);
+        idFolder4 = createAndInsertFolderWithParent(nameFolder4, userTest, rootFolderB, 2, false);
         folder4 = geoPlatformService.getFolderDetail(new RequestById(idFolder4));
         // "rootFolderB" ---> "folder5"
-        idFolder5 = createAndInsertFolderWithParent(nameFolder5, rootFolderB, 1, false);
+        idFolder5 = createAndInsertFolderWithParent(nameFolder5, userTest, rootFolderB, 1, false);
         folder5 = geoPlatformService.getFolderDetail(new RequestById(idFolder5));
         //
         rootFolderB.setPosition(4);
@@ -168,7 +167,6 @@ public class WSFolderTest extends ServiceTest {
 
     @Test
     public void testDeleteFolder() {
-        FolderDTO folderToCheck = null;
         try {
             // Assert total number of folders stored into DB before delete
             List<FolderDTO> allFoldersBeforeDelete = geoPlatformService.getFolders();
@@ -186,7 +184,7 @@ public class WSFolderTest extends ServiceTest {
             Assert.assertEquals(folderList.size(), 1);
 
             // Assert on "rootFolderA"
-            folderToCheck = folderList.iterator().next();
+            FolderDTO folderToCheck = folderList.iterator().next();
             logger.debug("\n*** folderToCheck:\n{}\n***", folderToCheck);
             Assert.assertEquals("Check id on rootFolderA", folderToCheck.getId(), idRootFolderA);
             Assert.assertEquals("Check name on rootFolderA", folderToCheck.getName(), nameRootFolderA);
@@ -241,7 +239,7 @@ public class WSFolderTest extends ServiceTest {
             Assert.assertEquals("Before adding new folder - Number of subfolders of root folder B ", 3, childrenFolders.size());
 
             String nameFolderToTest = "folderToTest";
-            folderToTest = super.createFolder(nameFolderToTest, 1, false);
+            folderToTest = super.createFolder(nameFolderToTest, super.userTest, 1, false);
             folderToTest.setOwner(userTest);
 
             // Adding new folder to user's root            
@@ -315,7 +313,7 @@ public class WSFolderTest extends ServiceTest {
             Assert.assertEquals("Before adding new folder - Number of subfolders of root folder B ", 3, childrenFolders.size());
 
             String nameFolderToTest = "folderToTest";
-            folderToTest = super.createFolder(nameFolderToTest, 3, false);
+            folderToTest = super.createFolder(nameFolderToTest, super.userTest, 3, false);
             folderToTest.setParent(rootFolderB);
 
             // Adding new folder to user's root folder B
@@ -396,7 +394,7 @@ public class WSFolderTest extends ServiceTest {
         try {
             // Move folder 5 between folder 3 and folder 4 (oldPosition < new Position)
             boolean checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
-                    idFolder5, super.idRootFolderB, super.userTest, 2, descendantsMapData);
+                    super.usernameTest, idFolder5, super.idRootFolderB, 2, descendantsMapData);
             Assert.assertTrue("Folder 5 doesn't moved to position 2", checkDD);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -424,7 +422,7 @@ public class WSFolderTest extends ServiceTest {
 
             // Move folder 5 after folder 4, in initial position (oldPosition > new Position)
             checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
-                    idFolder5, super.idRootFolderB, super.userTest, 1, descendantsMapData);
+                    super.usernameTest, idFolder5, super.idRootFolderB, 1, descendantsMapData);
             Assert.assertTrue("Folder 5 doesn't moved to position 1", checkDD);
 
             this.checkInitialState();
@@ -445,7 +443,7 @@ public class WSFolderTest extends ServiceTest {
             map.put(super.idRootFolderB, 2);
             // Move folder 4 between folder 1 and folder 2 (oldPosition < new Position)
             boolean checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
-                    idFolder4, super.idRootFolderA, super.userTest, 5, descendantsMapData);
+                    super.usernameTest, idFolder4, super.idRootFolderA, 5, descendantsMapData);
             Assert.assertTrue("Folder 4 doesn't moved to position 5", checkDD);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -476,7 +474,7 @@ public class WSFolderTest extends ServiceTest {
             map.put(super.idRootFolderA, 2);
             map.put(super.idRootFolderB, 3);
             checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
-                    idFolder4, super.idRootFolderB, super.userTest, 2, descendantsMapData);
+                    super.usernameTest, idFolder4, super.idRootFolderB, 2, descendantsMapData);
             Assert.assertTrue("Folder 4 doesn't moved to position 2", checkDD);
 
             this.checkInitialState();
@@ -495,7 +493,7 @@ public class WSFolderTest extends ServiceTest {
         try {
             // Move folder B before folder A (oldPosition < new Position)
             boolean checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
-                    super.idRootFolderB, 0, super.userTest, 7, descendantsMapData);
+                    super.usernameTest, super.idRootFolderB, 0, 7, descendantsMapData);
             Assert.assertTrue("Folder B doesn't moved to position 7", checkDD);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -523,7 +521,7 @@ public class WSFolderTest extends ServiceTest {
 
             // Move folder B after folder A, in initial position (oldPosition > new Position)
             checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
-                    super.idRootFolderB, 0, super.userTest, 4, descendantsMapData);
+                    super.usernameTest, super.idRootFolderB, 0, 4, descendantsMapData);
             Assert.assertTrue("Folder 4 doesn't moved to position 4", checkDD);
 
             this.checkInitialState();
@@ -543,7 +541,7 @@ public class WSFolderTest extends ServiceTest {
             map.put(idRootFolderA, 6);
             // Move Folder B after Folder 1 (oldPosition < new Position)
             boolean checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
-                    super.idRootFolderB, super.idRootFolderA, null, 6, descendantsMapData);
+                    super.usernameTest, super.idRootFolderB, super.idRootFolderA, 6, descendantsMapData);
             Assert.assertTrue("Drag and Drop successful", checkDD);
 
             rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
@@ -556,7 +554,7 @@ public class WSFolderTest extends ServiceTest {
             Assert.assertEquals("Position of root folder B after drag and drop operation", 6, rootFolderB.getPosition());
             Assert.assertEquals("Number of descendant of root folder B after drag and drop operation", 3, rootFolderB.getNumberOfDescendants());
             Assert.assertEquals("Parent of root folder B after drag and drop operation", idRootFolderA, rootFolderB.getParent().getId());
-            Assert.assertNull("Owner of root folder B after drag and drop operation", rootFolderB.getOwner());
+            Assert.assertNotNull("Owner of root folder B after drag and drop operation", rootFolderB.getOwner());
 
             folder3 = geoPlatformService.getFolderDetail(new RequestById(idFolder3));
             Assert.assertEquals("Position of folder 3 after drag and drop operation", 5, folder3.getPosition());
@@ -582,7 +580,7 @@ public class WSFolderTest extends ServiceTest {
             map.put(idRootFolderA, 2);
             // Move folder B in initial position (oldPosition > new Position)
             checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
-                    super.idRootFolderB, 0, super.userTest, 4, descendantsMapData);
+                    super.usernameTest, super.idRootFolderB, 0, 4, descendantsMapData);
             Assert.assertTrue("Folder B doesn't moved to position 4", checkDD);
 
             this.checkInitialState();
@@ -602,7 +600,7 @@ public class WSFolderTest extends ServiceTest {
             map.put(idRootFolderB, 6);
             // Move Folder A after Folder 3 (oldPosition > new Position)
             boolean checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
-                    super.idRootFolderA, super.idRootFolderB, null, 5, descendantsMapData);
+                    super.usernameTest, super.idRootFolderA, super.idRootFolderB, 5, descendantsMapData);
             Assert.assertTrue("Drag and Drop successful", checkDD);
 
             rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
@@ -615,7 +613,7 @@ public class WSFolderTest extends ServiceTest {
             Assert.assertEquals("Position of root folder A after drag and drop operation", 5, rootFolderA.getPosition());
             Assert.assertEquals("Number of descendant of root folder A after drag and drop operation", 2, rootFolderA.getNumberOfDescendants());
             Assert.assertEquals("Parent of root folder A after drag and drop operation", idRootFolderB, rootFolderA.getParent().getId());
-            Assert.assertNull("Owner of root folder A after drag and drop operation", rootFolderA.getOwner());
+            Assert.assertNotNull("Owner of root folder A after drag and drop operation", rootFolderA.getOwner());
 
             folder1 = geoPlatformService.getFolderDetail(new RequestById(idFolder1));
             Assert.assertEquals("Position of folder 1 after drag and drop operation", 4, folder1.getPosition());
@@ -641,7 +639,7 @@ public class WSFolderTest extends ServiceTest {
             map.put(idRootFolderB, 3);
             // Move folder A in initial position (oldPosition < new Position)
             checkDD = geoPlatformService.saveDragAndDropFolderAndTreeModifications(
-                    super.idRootFolderA, 0, super.userTest, 7, descendantsMapData);
+                    super.usernameTest, super.idRootFolderA, 0, 7, descendantsMapData);
             Assert.assertTrue("Folder B doesn't moved to position 7", checkDD);
 
             this.checkInitialState();
@@ -682,7 +680,7 @@ public class WSFolderTest extends ServiceTest {
     private void checkFolderDeleted(long idFolder) {
         try {
             RequestById request = new RequestById(idFolder);
-            GPFolder subFolderOfRootFolder = geoPlatformService.getFolderDetail(request);
+            geoPlatformService.getFolderDetail(request);
             Assert.fail("Folder with id \"" + idFolder + "\" was NOT deleted in cascade");
         } catch (Exception e) {
             logger.debug("\n*** Folder with id \"{}\" was deleted in cascade ***", idFolder);

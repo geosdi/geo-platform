@@ -242,19 +242,19 @@ public abstract class BaseDAOTest {
         GPUser user = userDAO.findByUsername(nameUserTest);
 
         // "only folders"
-        GPFolder onlyFolders = this.createUserFolder("only folders", position, user);
+        GPFolder onlyFolders = this.createUserFolder("only folders", user, position);
         // "only folders" ---> "empty subfolder A"
         GPFolder emptySubFolderA = this.createEmptyFolder("empty subfolder A",
-                --position, onlyFolders);
+                user, onlyFolders, --position);
         // "only folders" ---> "empty subfolder B"
         GPFolder emptySubFolderB = this.createEmptyFolder("empty subfolder B",
-                --position, onlyFolders);
+                user, onlyFolders, --position);
         //
         onlyFolders.setNumberOfDescendants(2);
         folderDAO.persist(onlyFolders, emptySubFolderA, emptySubFolderB);
 
         // "my raster"
-        GPFolder folderRaster = this.createUserFolder("my raster", --position, user);
+        GPFolder folderRaster = this.createUserFolder("my raster", user, --position);
         // "my raster" ---> _rasterLayer1_ ---> Styles
         GPRasterLayer rasterLayer1 = this.createRasterLayer(--position, folderRaster, user.getId());
         GPStyle style1 = this.createStyle("style 1", rasterLayer1);
@@ -272,9 +272,10 @@ public abstract class BaseDAOTest {
 
         // ---> "my raster" --> "IGM"
         GPFolder folderIGM = new GPFolder();
-        folderIGM.setName("IGM");
-        folderIGM.setPosition(position);
+        folderIGM.setName("IGM");       
+        folderIGM.setOwner(user);
         folderIGM.setParent(folderRaster);
+        folderIGM.setPosition(position);
         // ---> "my raster" --> "IGM" _vectorLayer1_
         GPVectorLayer vectorLayer1 = this.createVectorLayer(--position, folderIGM, user.getId());
         //
@@ -283,20 +284,21 @@ public abstract class BaseDAOTest {
         layerDAO.persist(vectorLayer1);
     }
 
-    protected GPFolder createUserFolder(String name, int position, GPUser user) {
+    protected GPFolder createUserFolder(String name, GPUser user, int position) {
         GPFolder userFolder = new GPFolder();
         userFolder.setName(name);
-        userFolder.setPosition(position);
         userFolder.setOwner(user);
+        userFolder.setPosition(position);
         userFolder.setParent(null);
         return userFolder;
     }
 
-    protected GPFolder createEmptyFolder(String name, int position, GPFolder parent) {
+    protected GPFolder createEmptyFolder(String name, GPUser user, GPFolder parent, int position) {
         GPFolder emptyFolder = new GPFolder();
         emptyFolder.setName(name);
-        emptyFolder.setPosition(position);
+        emptyFolder.setOwner(user);
         emptyFolder.setParent(parent);
+        emptyFolder.setPosition(position);
         emptyFolder.setChecked(true);
         emptyFolder.setNumberOfDescendants(0);
         return emptyFolder;

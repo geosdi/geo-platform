@@ -84,14 +84,14 @@ public class GPDAOTest extends BaseDAOTest {
         userPositionTest = super.insertUser(nameUser);
 
         endPosition = beginPosition + 930;
-        userFolder = super.createUserFolder("folder_of_" + nameUser, beginPosition + 900, userPositionTest); // 333930
+        userFolder = super.createUserFolder("folder_of_" + nameUser, userPositionTest, beginPosition + 900); // 333930
         userFolder.setNumberOfDescendants(13);
         userFolder.setChecked(false);
         //
         folderDAO.persist(userFolder);
 
-        folderA = super.createEmptyFolder("folder_position_test_A", beginPosition + 600, userFolder); // 333630        
-        folderB = super.createEmptyFolder("folder_position_test_B", beginPosition + 300, userFolder); // 333330
+        folderA = super.createEmptyFolder("folder_position_test_A", userPositionTest, userFolder, beginPosition + 600); // 333630        
+        folderB = super.createEmptyFolder("folder_position_test_B", userPositionTest, userFolder, beginPosition + 300); // 333330
         folderA.setNumberOfDescendants(3);
         folderB.setNumberOfDescendants(9);
         folderA.setChecked(false);

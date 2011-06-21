@@ -33,34 +33,28 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.action;
+package org.geosdi.geoplatform.gui.client.utility;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.PrintResources;
-import org.geosdi.geoplatform.gui.client.form.GPPrintWidget;
+import java.util.ArrayList;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.model.DPI;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class PrintLayersAction extends ToolbarLayerTreeAction {
+public class PrintUtility {
 
-    private GPPrintWidget formPrint;
+    public static List<DPI> getDPI() {
+        List<DPI> dpi = new ArrayList<DPI>();
 
-    public PrintLayersAction(TreePanel theTree) {
-        super(theTree, PrintResources.ICONS.print(), "Print Visible Layers");
-        this.formPrint = new GPPrintWidget();
-    }
+        dpi.add(new DPI("56"));
+        dpi.add(new DPI("72"));
+        dpi.add(new DPI("127"));
+        dpi.add(new DPI("190"));
+        dpi.add(new DPI("254"));
 
-    @Override
-    public void componentSelected(ButtonEvent ce) {
-        this.formPrint.showForm();
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
+        return dpi;
     }
 }

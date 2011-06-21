@@ -22,7 +22,7 @@ public class PrintingView extends GeoPlatformView {
     
     public PrintingView(Controller controller) {
         super(controller);
-        this.printWidget = new GPPrintWidget(true);
+        this.printWidget = new GPPrintWidget();
     }
     
     @Override

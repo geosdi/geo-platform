@@ -33,34 +33,45 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.action;
+package org.geosdi.geoplatform.gui.client.widget.form.binding;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.PrintResources;
-import org.geosdi.geoplatform.gui.client.form.GPPrintWidget;
+import com.extjs.gxt.ui.client.binding.FormBinding;
+import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class PrintLayersAction extends ToolbarLayerTreeAction {
+public abstract class GPDynamicFormBinding<T extends GeoPlatformBeanModel>
+        extends GeoPlatformFormWidget<T> {
 
-    private GPPrintWidget formPrint;
+    protected FormBinding formBinding;
 
-    public PrintLayersAction(TreePanel theTree) {
-        super(theTree, PrintResources.ICONS.print(), "Print Visible Layers");
-        this.formPrint = new GPPrintWidget();
+    public GPDynamicFormBinding() {
+        super(true);
+        bind();
     }
 
-    @Override
-    public void componentSelected(ButtonEvent ce) {
-        this.formPrint.showForm();
+    private void bind() {
+        if (isInitialized()) {
+            this.formBinding = new FormBinding(formPanel);
+            addFieldsBinding();
+            this.formBinding.autoBind();
+        }
     }
 
-    @Override
-    public void setEnabled(boolean enabled) {
+    /**
+     * Add Bindings Manually
+     * 
+     */
+    public abstract void addFieldsBinding();
+    
+    public void showForm() {
+        super.init();
+        this.bind();
+        super.show();
+        this.formBinding.bind(entity);
     }
 }

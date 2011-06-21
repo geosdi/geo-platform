@@ -4,14 +4,14 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
-import com.extjs.gxt.ui.client.data.BeanModel;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  *
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @mail francesco.izzi@geosdi.org
  */
-public class PrintTemplate extends BeanModel {
+public class PrintTemplate extends GeoPlatformBeanModel {
 
     public enum PrintEnumTemplate {
 

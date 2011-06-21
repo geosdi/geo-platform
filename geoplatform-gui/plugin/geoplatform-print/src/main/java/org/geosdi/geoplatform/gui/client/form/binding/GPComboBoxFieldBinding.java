@@ -33,34 +33,28 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.action;
+package org.geosdi.geoplatform.gui.client.form.binding;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.PrintResources;
-import org.geosdi.geoplatform.gui.client.form.GPPrintWidget;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import org.geosdi.geoplatform.gui.client.model.DPI;
+import org.geosdi.geoplatform.gui.client.model.GPPrintBean;
+import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class PrintLayersAction extends ToolbarLayerTreeAction {
+public class GPComboBoxFieldBinding extends GPFieldBinding<GPPrintBean> {
 
-    private GPPrintWidget formPrint;
-
-    public PrintLayersAction(TreePanel theTree) {
-        super(theTree, PrintResources.ICONS.print(), "Print Visible Layers");
-        this.formPrint = new GPPrintWidget();
+    public GPComboBoxFieldBinding(ComboBox field, String property) {
+        super(field, property);
     }
+ 
 
     @Override
-    public void componentSelected(ButtonEvent ce) {
-        this.formPrint.showForm();
+    public void setModelProperty(Object val) {
+        ((GPPrintBean) model).setDpi((DPI) val);
     }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-    }
+    
 }

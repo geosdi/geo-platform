@@ -68,31 +68,26 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     @Override
     public boolean containsLayer(GPLayerBean key) {
-        // TODO Auto-generated method stub
         return this.layers.containsKey(key);
     }
 
     @Override
     public Layer getLayer(GPLayerBean key) {
-        // TODO Auto-generated method stub
         return this.layers.get(key);
     }
 
     @Override
     public void onDisplayLayer(GPLayerBean layerBean) {
-        // TODO Auto-generated method stub
         super.displayLayer(layerBean);
     }
 
     @Override
     public void onHideLayer(GPLayerBean layerBean) {
-        // TODO Auto-generated method stub
         this.hideLayer(layerBean);
     }
 
     @Override
     public void onRemoveLayer(GPLayerBean layerBean) {
-        // TODO Auto-generated method stub
         this.removeLayer(layerBean);
     }
 
@@ -163,7 +158,6 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         LayerHandlerManager.fireEvent(new HideLegendEvent(layerBean));
     }
 
-    @Override
     public void onChangeStyle(GPLayerBean layerBean, String newStyle) {
         
         //TODO: implement me

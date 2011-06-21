@@ -135,6 +135,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         RasterTreeNode raster = new RasterTreeNode();
         raster.setAbstractText(rasterBean.getAbstractText());
         raster.setBbox(rasterBean.getBbox());
+        raster.setTitle(rasterBean.getTitle());
         raster.setChecked(false);
         raster.setCrs(rasterBean.getCrs());
         raster.setDataSource(rasterBean.getDataSource());

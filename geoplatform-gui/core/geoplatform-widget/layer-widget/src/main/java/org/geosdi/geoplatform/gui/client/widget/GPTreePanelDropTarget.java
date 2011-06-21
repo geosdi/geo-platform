@@ -49,7 +49,6 @@ import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.TreeNode;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
-import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 public class GPTreePanelDropTarget extends TreePanelDropTarget {
@@ -118,8 +117,8 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
             parent = (GPBeanTreeModel)target.getParent();
         }
         for (ModelData element : parent.getChildren()) {
-            if (element != null && element instanceof GPLayerTreeModel
-                    && ((GPLayerTreeModel) element).getName().equals(layer.getName())) {
+            if (element != null && element instanceof GPLayerTreeModel &&
+                    !element.equals(layer) && ((GPLayerTreeModel) element).getName().equals(layer.getName())) {
                 duplicatedLayer = true;
                 break;
             }

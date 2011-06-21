@@ -141,8 +141,6 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         raster.setDataSource(rasterBean.getDataSource());
         raster.setLabel(rasterBean.getLabel());
         raster.setLayerType(rasterBean.getLayerType());
-        System.out.println("Name: " + rasterBean.getName());
-        System.out.println("Title: " + rasterBean.getTitle());
         raster.setName(rasterBean.getName());
         raster.setStyles(rasterBean.getStyles());
         raster.setzIndex(rasterBean.getzIndex());

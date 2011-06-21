@@ -49,7 +49,6 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.featureinfo.action.GetFeatureInfoAction;
 
 /**
@@ -69,14 +68,9 @@ public class MapWidgetUI implements EntryPoint {
     @Override
     public void onModuleLoad() {
         dispatcher = Dispatcher.get();
-
         dispatcher.addController(new MapController());
-
-        addMapToolbarAction();//
-
-        dispatcher.dispatch(MapWidgetEvents.INIT_MAP_WIDGET);//
-        GeoPlatformMessage.infoMessage("SOy", "Aqui");//
-
+        addMapToolbarAction();
+        dispatcher.dispatch(MapWidgetEvents.INIT_MAP_WIDGET);
     }
 
     private void addMapToolbarAction() {
@@ -85,7 +79,6 @@ public class MapWidgetUI implements EntryPoint {
             @Override
             public GeoPlatformToolbarAction createActionTool(
                     GeoPlatformMap mapWidget) {
-                // TODO Auto-generated method stub
                 return new ZoomInAction(mapWidget);
             }
         });
@@ -95,7 +88,6 @@ public class MapWidgetUI implements EntryPoint {
             @Override
             public GeoPlatformToolbarAction createActionTool(
                     GeoPlatformMap mapWidget) {
-                // TODO Auto-generated method stub
                 return new ZoomOutAction(mapWidget);
             }
         });
@@ -105,7 +97,6 @@ public class MapWidgetUI implements EntryPoint {
             @Override
             public GeoPlatformToolbarAction createActionTool(
                     GeoPlatformMap mapWidget) {
-                // TODO Auto-generated method stub
                 return new ZoomPreviousAction(mapWidget);
             }
         });
@@ -115,7 +106,6 @@ public class MapWidgetUI implements EntryPoint {
             @Override
             public GeoPlatformToolbarAction createActionTool(
                     GeoPlatformMap mapWidget) {
-                // TODO Auto-generated method stub
                 return new ZoomNextAction(mapWidget);
             }
         });
@@ -125,7 +115,6 @@ public class MapWidgetUI implements EntryPoint {
             @Override
             public GeoPlatformToolbarAction createActionTool(
                     GeoPlatformMap mapWidget) {
-                // TODO Auto-generated method stub
                 return new GetFeatureInfoAction(mapWidget);
             }
         });
@@ -135,11 +124,10 @@ public class MapWidgetUI implements EntryPoint {
             @Override
             public GeoPlatformToolbarAction createActionTool(
                     GeoPlatformMap mapWidget) {
-                // TODO Auto-generated method stub
                 return new MeasureAction(mapWidget);
             }
         });
-        
+
         ToolbarActionRegistar.put("MeasureArea", new ToolbarActionCreator() {
 
             @Override
@@ -147,6 +135,6 @@ public class MapWidgetUI implements EntryPoint {
                     GeoPlatformMap mapWidget) {
                 return new MeasureAreaAction(mapWidget);
             }
-        }); 
+        });
     }
 }

@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import com.extjs.gxt.ui.client.data.TreeModel;
 import com.extjs.gxt.ui.client.dnd.DND.Feedback;
+import com.extjs.gxt.ui.client.dnd.StatusProxy;
 import com.extjs.gxt.ui.client.dnd.TreePanelDropTarget;
 import com.extjs.gxt.ui.client.event.DNDEvent;
 import com.extjs.gxt.ui.client.store.TreeStoreEvent;
@@ -102,8 +103,8 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
                 && target.getParent() instanceof GPRootTreeNode) {
             System.out.println("Leafs without a folder not allowed");
             condition = false;// Leafs without a folder not allowed
-        } else if (source instanceof GPLayerTreeModel && 
-                this.duplicateLayerCondition(target, (GPLayerTreeModel)source)){
+        } else if (source instanceof GPLayerTreeModel
+                && this.duplicateLayerCondition(target, (GPLayerTreeModel) source)) {
             System.out.println("Duplicated layers are not allowed on the same folder");
             condition = false;//Duplicated layers are not allowed on the same folder
         }
@@ -113,12 +114,12 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
     private boolean duplicateLayerCondition(GPBeanTreeModel target, GPLayerTreeModel layer) {
         boolean duplicatedLayer = false;
         GPBeanTreeModel parent = target;
-        if(target instanceof GPLayerTreeModel){
-            parent = (GPBeanTreeModel)target.getParent();
+        if (target instanceof GPLayerTreeModel) {
+            parent = (GPBeanTreeModel) target.getParent();
         }
         for (ModelData element : parent.getChildren()) {
-            if (element != null && element instanceof GPLayerTreeModel &&
-                    !element.equals(layer) && ((GPLayerTreeModel) element).getName().equals(layer.getName())) {
+            if (element != null && element instanceof GPLayerTreeModel
+                    && !element.equals(layer) && ((GPLayerTreeModel) element).getName().equals(layer.getName())) {
                 duplicatedLayer = true;
                 break;
             }

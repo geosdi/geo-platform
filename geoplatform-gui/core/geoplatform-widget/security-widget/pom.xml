@@ -67,6 +67,12 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>basic-widget</artifactId>
+            <version>${geoplatform-version}</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <build>

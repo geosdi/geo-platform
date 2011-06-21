@@ -101,7 +101,7 @@
             <artifactId>geoplatform-featureinfo</artifactId>
             <version>${project.version}</version>
         </dependency>
-
+        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-featureinfo</artifactId>

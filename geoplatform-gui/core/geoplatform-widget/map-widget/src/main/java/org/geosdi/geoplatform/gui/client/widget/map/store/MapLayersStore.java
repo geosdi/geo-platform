@@ -62,7 +62,6 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     public MapLayersStore(GeoPlatformMap theMapWidget) {
         super(theMapWidget);
-        // TODO Auto-generated constructor stub
         this.layerBuilder = new MapLayerBuilder(theMapWidget);
         GPScaleWidget.display("Scale");
     }

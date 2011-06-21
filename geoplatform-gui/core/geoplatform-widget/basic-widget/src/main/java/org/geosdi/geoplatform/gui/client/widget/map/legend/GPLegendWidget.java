@@ -89,12 +89,12 @@ public class GPLegendWidget {
                     "gwc/service/wms")) {
                 image = new Image(
                         layerBean.getDataSource().replaceAll("gwc/service/wms",
-                        "wms") + GET_LEGEND_REQUEST + layerBean.getLabel() + "&scale=5000");
+                        "wms") + GET_LEGEND_REQUEST + layerBean.getName() + "&scale=5000");
             } else {
                 layerBean.getDataSource().replaceAll("wfs", "wms");
                 image = new Image(
                         layerBean.getDataSource()
-                        + GET_LEGEND_REQUEST + layerBean.getLabel() + "&scale=5000");
+                        + GET_LEGEND_REQUEST + layerBean.getName() + "&scale=5000");
             }
 
             cp.add(image);

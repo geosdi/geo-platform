@@ -303,12 +303,12 @@ public abstract class BaseDAOTest {
     }
 
     protected GPRasterLayer createRasterLayer(int position, GPFolder folder, long ownerId) {
-        String title = "deagostini_ita_250mila";
+        String name = "deagostini_ita_250mila";
         // GPRasterLayer
         GPRasterLayer raster = new GPRasterLayer();
-        raster.setTitle(title);
-        raster.setName("StratiDiBase:" + title);
-        raster.setAbstractText(title);
+        raster.setTitle("StratiDiBase:" + name);
+        raster.setName(name);
+        raster.setAbstractText("abstract:" + name);
         raster.setPosition(position);
         raster.setSrs("EPSG:4326");
         raster.setUrlServer("http://dpc.geosdi.org/geoserver/wms");

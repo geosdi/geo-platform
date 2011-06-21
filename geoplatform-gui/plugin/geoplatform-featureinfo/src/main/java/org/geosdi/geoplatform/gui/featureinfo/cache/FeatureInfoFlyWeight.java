@@ -134,11 +134,8 @@ public class FeatureInfoFlyWeight {
                 @Override
                 public void onGetFeatureInfo(GetFeatureInfoEvent eventObject) {
                     infoPanel.removeAll();
-
                     infoPanel.add(new HTMLPanel(eventObject.getText()));
-
                     isActive = true;
-
                     checkLastElement();
                 }
             });
@@ -149,7 +146,6 @@ public class FeatureInfoFlyWeight {
                 public void onNoGetFeatureInfo(NoGetFeatureInfoEvent eventObject) {
                     infoPanel.removeAll();
                     isActive = false;
-
                     checkLastElement();
                 }
             });

@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.featureinfo.action.GetFeatureInfoAction;
 
 /**
@@ -67,19 +68,18 @@ public class MapWidgetUI implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
-        // TODO Auto-generated method stub
         dispatcher = Dispatcher.get();
 
         dispatcher.addController(new MapController());
 
-        addMapToolbarAction();
+        addMapToolbarAction();//
 
-        dispatcher.dispatch(MapWidgetEvents.INIT_MAP_WIDGET);
+        dispatcher.dispatch(MapWidgetEvents.INIT_MAP_WIDGET);//
+        GeoPlatformMessage.infoMessage("SOy", "Aqui");//
 
     }
 
     private void addMapToolbarAction() {
-        // TODO Auto-generated method stub
         ToolbarActionRegistar.put("ZoomIn", new ToolbarActionCreator() {
 
             @Override

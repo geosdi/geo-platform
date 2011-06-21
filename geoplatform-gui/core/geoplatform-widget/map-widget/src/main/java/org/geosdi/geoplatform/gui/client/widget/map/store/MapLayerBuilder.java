@@ -72,7 +72,7 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
         // TODO Auto-generated method stub
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
-        wmsParams.setLayers(rasterBean.getLabel());
+        wmsParams.setLayers(rasterBean.getName());
         wmsParams.setStyles("");
         wmsParams.setIsTransparent(true);
 
@@ -109,7 +109,7 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
         // TODO Auto-generated method stub
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
-        wmsParams.setLayers(vectorBean.getLabel());
+        wmsParams.setLayers(vectorBean.getName());
         wmsParams.setStyles("");
         wmsParams.setIsTransparent(true);
 

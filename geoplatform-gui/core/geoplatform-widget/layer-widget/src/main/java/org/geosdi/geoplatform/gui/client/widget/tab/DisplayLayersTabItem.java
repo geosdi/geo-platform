@@ -44,6 +44,6 @@ public class DisplayLayersTabItem extends GeoPlatformTabItem {
 
     @Override
     public void addComponents() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 }

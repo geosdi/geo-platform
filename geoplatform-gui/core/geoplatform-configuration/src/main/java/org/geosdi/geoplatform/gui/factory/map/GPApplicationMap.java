@@ -33,17 +33,27 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tab;
+package org.geosdi.geoplatform.gui.factory.map;
+
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class WPSLayerTabItem extends GeoPlatformTabItem {
+public class GPApplicationMap {
 
-    @Override
-    public void addComponents() {
-        
+    private static GeoPlatformMap applicationMap;
+
+    private GPApplicationMap() {
+    }
+
+    public static GeoPlatformMap getApplicationMap() {
+        return applicationMap;
+    }
+
+    public static void setApplicationMap(GeoPlatformMap applicationMap) {
+        GPApplicationMap.applicationMap = applicationMap;
     }
 }

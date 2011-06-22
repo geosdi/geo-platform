@@ -35,12 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab;
 
-import com.extjs.gxt.ui.client.widget.TabItem;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class LayersInfoTabItem extends TabItem {
+public class LayersInfoTabItem extends GeoPlatformTabItem {
+
+    @Override
+    public void addComponents() {
+       
+    }
 }

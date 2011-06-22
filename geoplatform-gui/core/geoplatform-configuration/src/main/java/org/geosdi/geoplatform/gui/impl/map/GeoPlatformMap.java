@@ -44,12 +44,11 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
  * 
  */
 public interface GeoPlatformMap extends GeoPlatformEditor, GeoPlatformMeasure,
-		GeoPlatformFeatureInfo {
+        GeoPlatformFeatureInfo {
 
-	public MapWidget getMapWidget();
+    public MapWidget getMapWidget();
 
-	public Map getMap();
+    public Map getMap();
 
-	public IGeoPlatofomMapButtonBar getButtonBar();
-
+    public IGeoPlatofomMapButtonBar getButtonBar();
 }

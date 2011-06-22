@@ -71,6 +71,7 @@ import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
 import com.extjs.gxt.ui.client.widget.Info;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
+import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.GPFeatureInfoEvent;
 import org.gwtopenmaps.openlayers.client.control.MousePosition;
 import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
@@ -100,6 +101,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
     public MapLayoutWidget() {
         super();
+        GPApplicationMap.setApplicationMap(this);
         this.createMapOption();
         this.mapModel = new MapModel(this);
         this.routingWidget = new GPRoutingManagerWidget(this);

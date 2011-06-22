@@ -42,13 +42,12 @@ package org.geosdi.geoplatform.gui.factory.map;
  */
 public abstract class GPAbstractMapFactory {
 
-	/**
-	 * Create DefaultMapFactory
-	 * 
-	 * @return GeoPlatformMapFactory
-	 */
-	public static GeoPlatformMapFactory createMapFactory() {
-		return new DefaultMapFactory();
-	}
-
+    /**
+     * Create DefaultMapFactory
+     * 
+     * @return GeoPlatformMapFactory
+     */
+    public static GeoPlatformMapFactory createMapFactory() {
+        return new DefaultMapFactory();
+    }
 }

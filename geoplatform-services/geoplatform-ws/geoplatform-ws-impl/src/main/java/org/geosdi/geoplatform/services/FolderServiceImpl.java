@@ -464,6 +464,7 @@ class FolderServiceImpl {
         searchCriteria.addSortAsc("position");
 
         searchCriteria.addFilterEqual("owner.id", request.getId());
+        searchCriteria.addFilterNull("parent.id");
 
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
         return convertToFolderList(foundFolder);
@@ -489,6 +490,7 @@ class FolderServiceImpl {
         Filter owner = Filter.equal("owner.id", userId);
         Filter shared = Filter.equal("shared", true);
         searchCriteria.addFilterOr(owner, shared);
+        searchCriteria.addFilterNull("parent.id");
 
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
 
@@ -502,6 +504,7 @@ class FolderServiceImpl {
         Filter owner = Filter.equal("owner.id", userId);
         Filter shared = Filter.equal("shared", true);
         searchCriteria.addFilterOr(owner, shared);
+        searchCriteria.addFilterNull("parent.id");
 
         List<GPFolder> foundFolder = folderDao.search(searchCriteria);
 
@@ -511,6 +514,7 @@ class FolderServiceImpl {
     public long getUserFoldersCount(RequestById request) {
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.addFilterEqual("owner.id", request.getId());
+        searchCriteria.addFilterNull("parent.id");
         return folderDao.count(searchCriteria);
     }
 
@@ -520,6 +524,7 @@ class FolderServiceImpl {
         Filter owner = Filter.equal("owner.id", userId);
         Filter shared = Filter.equal("shared", true);
         searchCriteria.addFilterOr(owner, shared);
+        searchCriteria.addFilterNull("parent.id");
 
         return folderDao.count(searchCriteria);
     }

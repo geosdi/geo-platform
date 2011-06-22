@@ -35,56 +35,18 @@
  */
 package org.geosdi.geoplatform.gui.client.mvc;
 
-import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
 
-import com.extjs.gxt.ui.client.mvc.AppEvent;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
-
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class LayerController extends GeoPlatformController {
+public class SecurityController extends GeoPlatformController {
 
-    private LayerRemoteAsync layerService = LayerRemote.Util.getInstance();
-
-    /**
-     * @Constructor
-     */
-    public LayerController() {
-        registerEventTypes(GeoPlatformEvents.INIT_OGC_MODULES_WIDGET,
-                LayerEvents.SHOW_LAYER_WIDGET, LayerEvents.HIDE_LAYER_WIDGET);
+    public SecurityController() {
+        registerEventTypes();
     }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.extjs.gxt.ui.client.mvc.Controller#initialize()
-     */
-    @Override
-    protected void initialize() {
-        this.view = new LayerView(this);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#
-     * handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
-     */
-    @Override
-    public void handleEvent(AppEvent event) {
-        super.handleEvent(event);
-    }
-
-    /**
-     * @return the layerService
-     */
-    public LayerRemoteAsync getLayerService() {
-        return layerService;
-    }
+    
+    
+    
 }

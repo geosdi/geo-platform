@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.impl;
 import org.geosdi.geoplatform.gui.configuration.FolderStore;
 import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
 import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
+import org.geosdi.geoplatform.gui.configuration.startup.IStartupConfigurationStrategy;
 import org.geosdi.geoplatform.gui.global.GeoPlatformInfo;
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,8 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
     private IMenuBarContainerTool menuBarContainerTool;
 
     private FolderStore folderStore;
+    
+    private IStartupConfigurationStrategy strategy;
 
     /**
      * @return the geoPlatformInfo
@@ -125,5 +128,17 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
 
     public void setFolderStore(FolderStore folserStore) {
         this.folderStore = folserStore;
+    }
+
+    @Override
+    public IStartupConfigurationStrategy getStrategy() {
+        return this.strategy;
+    }
+
+    /**
+     * @param strategy the strategy to set
+     */
+    public void setStrategy(IStartupConfigurationStrategy strategy) {
+        this.strategy = strategy;
     }
 }

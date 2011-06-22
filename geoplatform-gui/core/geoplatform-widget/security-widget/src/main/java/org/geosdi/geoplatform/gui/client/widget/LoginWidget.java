@@ -38,8 +38,10 @@ package org.geosdi.geoplatform.gui.client.widget;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.TextField;
@@ -59,11 +61,13 @@ public class LoginWidget extends Dialog {
     protected Button reset;
     protected Button login;
     protected LoginStatus status;
+    private EventType eventOnSuccess;
 
     /**
      * 
      */
-    public LoginWidget() {
+    public LoginWidget(EventType eventOnSuccess) {
+        this.eventOnSuccess = eventOnSuccess;
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(90);
         layout.setDefaultWidth(155);
@@ -156,8 +160,10 @@ public class LoginWidget extends Dialog {
         getButtonBar().disable();
 
         System.out.println("Login pressed");
+        Dispatcher.forwardEvent(this.eventOnSuccess);
         /*Dispatcher.forwardEvent(DGWATCHEvents.LOGIN,
                 new String[]{userName.getValue(), password.getValue()});*/
+        super.hide();
     }
 
     protected boolean hasValue(TextField<String> field) {

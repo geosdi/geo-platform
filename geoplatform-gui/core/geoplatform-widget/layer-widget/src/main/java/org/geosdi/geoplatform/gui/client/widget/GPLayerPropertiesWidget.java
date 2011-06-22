@@ -33,47 +33,31 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.form.binding;
-
-import com.extjs.gxt.ui.client.binding.FormBinding;
-import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
-import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+package org.geosdi.geoplatform.gui.client.widget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
- * 
- * @param <T> 
  */
-public abstract class GPDynamicFormBinding<T extends GeoPlatformBeanModel>
-        extends GeoPlatformFormWidget<T> {
+public class GPLayerPropertiesWidget extends GeoPlatformWindow {
 
-    protected FormBinding formBinding;
-
-    public GPDynamicFormBinding() {
+    public GPLayerPropertiesWidget() {
         super(true);
-        bind();
     }
 
-    private void bind() {
-        if (isInitialized()) {
-            this.formBinding = new FormBinding(formPanel);
-            addFieldsBinding();
-            this.formBinding.autoBind();
-        }
+    @Override
+    public void addComponent() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    /**
-     * Add Bindings Manually
-     * 
-     */
-    public abstract void addFieldsBinding();
-    
-    public void showForm() {
-        super.init();
-        this.bind();
-        super.show();
-        this.formBinding.bind(entity);
+    @Override
+    public void initSize() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setWindowProperties() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

@@ -59,7 +59,5 @@ public class LayerEvents {
     public static final EventType SAVE_CACHE_EMPTY = new EventType();
     
     public static final EventType SAVE_CACHE_NOT_EMPTY = new EventType();
-    
-    public static final EventType SHOW_LAYER_PROPERTIES = new EventType();
 
 }

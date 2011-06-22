@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.featureinfo.widget;
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import java.util.Iterator;
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -110,8 +109,7 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
         System.out.println("Showing the info widget");
         for (Iterator<IGPFeatureInfoElement> it = FeatureInfoFlyWeight.getInstance().getCollection().iterator(); it.hasNext();) {
             IGPFeatureInfoElement element = it.next();
-            System.out.println(
-                    "ELEMENT *********************** " + element.isActive());
+            
             if (element.isActive()) {
                 this.mainPanel.add(element.getElementPanel());
             }

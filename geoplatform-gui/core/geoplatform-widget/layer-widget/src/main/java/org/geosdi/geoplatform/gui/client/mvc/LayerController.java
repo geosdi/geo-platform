@@ -57,7 +57,7 @@ public class LayerController extends GeoPlatformController {
      */
     public LayerController() {
         registerEventTypes(GeoPlatformEvents.INIT_OGC_MODULES_WIDGET,
-                LayerEvents.SHOW_LAYER_WIDGET, LayerEvents.HIDE_LAYER_WIDGET, LayerEvents.SHOW_LAYER_PROPERTIES);
+                LayerEvents.SHOW_LAYER_WIDGET, LayerEvents.HIDE_LAYER_WIDGET);
     }
 
     /*

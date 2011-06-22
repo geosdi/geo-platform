@@ -33,47 +33,26 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.form.binding;
+package org.geosdi.geoplatform.gui.client.widget.tab;
 
-import com.extjs.gxt.ui.client.binding.FormBinding;
-import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
-import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+import com.extjs.gxt.ui.client.widget.TabPanel;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
- * 
- * @param <T> 
  */
-public abstract class GPDynamicFormBinding<T extends GeoPlatformBeanModel>
-        extends GeoPlatformFormWidget<T> {
-
-    protected FormBinding formBinding;
-
-    public GPDynamicFormBinding() {
-        super(true);
-        bind();
-    }
-
-    private void bind() {
-        if (isInitialized()) {
-            this.formBinding = new FormBinding(formPanel);
-            addFieldsBinding();
-            this.formBinding.autoBind();
-        }
-    }
-
-    /**
-     * Add Bindings Manually
-     * 
-     */
-    public abstract void addFieldsBinding();
+public abstract class GeoPlatformTabWidget extends TabPanel {
     
-    public void showForm() {
-        super.init();
-        this.bind();
-        super.show();
-        this.formBinding.bind(entity);
+    public GeoPlatformTabWidget() {
+        initSize();
+        setWidgetProperties();
+        addComponents();
     }
+    
+    public abstract void initSize();
+    
+    public abstract void addComponents();
+    
+    public abstract void setWidgetProperties();
 }

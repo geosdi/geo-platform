@@ -33,30 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.service;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoginStatus extends StatusWidget {
+@RemoteServiceRelativePath("SecurityRemote")
+public interface SecurityRemote extends RemoteService {
 
-    public enum EnumLoginStatus {
+    public static class Util {
 
-        STATUS_LOGIN("x-status-ok"), STATUS_NO_LOGIN("x-status-not-ok"), STATUS_LOGIN_ERROR(
-        "x-status-error"), STATUS_MESSAGE_LOGIN("Login Succesfull"), STATUS_MESSAGE_NOT_LOGIN(
-        "Login Failed"), STATUS_MESSAGE_LOGIN_ERROR("Login Service Error");
-        private String value;
+        private static SecurityRemoteAsync instance = (SecurityRemoteAsync) GWT.create(SecurityRemote.class);
 
-        EnumLoginStatus(String value) {
-            this.value = value;
-        }
-
-        /**
-         * @return the value
-         */
-        public String getValue() {
-            return value;
+        public static SecurityRemoteAsync getInstance() {
+            return instance;
         }
     }
+
+    /**
+     * 
+     * @param userName password
+     * @return GPUser
+     * @throws GeoPlatformException
+     */
+    public void userLogin(String userName, String password) throws GeoPlatformException;
 }

@@ -33,30 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.core.model;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoginStatus extends StatusWidget {
-
-    public enum EnumLoginStatus {
-
-        STATUS_LOGIN("x-status-ok"), STATUS_NO_LOGIN("x-status-not-ok"), STATUS_LOGIN_ERROR(
-        "x-status-error"), STATUS_MESSAGE_LOGIN("Login Succesfull"), STATUS_MESSAGE_NOT_LOGIN(
-        "Login Failed"), STATUS_MESSAGE_LOGIN_ERROR("Login Service Error");
-        private String value;
-
-        EnumLoginStatus(String value) {
-            this.value = value;
+public class Utility {
+    
+    
+    public static String md5hash(String password) {
+        String hashString = null;
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        /**
-         * @return the value
-         */
-        public String getValue() {
-            return value;
+        byte[] hash = digest.digest(password.getBytes());
+        hashString = "";
+        for (int i = 0; i < hash.length; i++) {
+            hashString += Integer.toHexString(
+                    (hash[i] & 0xFF) | 0x100).toLowerCase().substring(1, 3);
         }
+        return hashString;
     }
+    
 }

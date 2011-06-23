@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -48,6 +50,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
+import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -78,24 +81,23 @@ public class LayerService implements ILayerService {
     private DTOConverter dtoConverter;
 
     @Override
-    public ArrayList<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException {
-        SearchRequest userNameSearch = new SearchRequest(userName);
-
-        GPUser user = null;
-        try {
-            user = geoPlatformServiceClient.getUserDetailByName(userNameSearch);
-        } catch (ResourceNotFoundFault e) {
-            logger.error("LayerService",
-                    "Unable to find user with username: " + userNameSearch.getNameLike());
-            throw new GeoPlatformException(
-                    "Unable to find user with username: " + userNameSearch.getNameLike());
-        }
-
-        RequestById idRequest = new RequestById(user.getId());
+    public ArrayList<GPFolderClientInfo> loadUserFolders(HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        RequestById idRequest = new RequestById(this.getUserAlreadyFromSession(httpServletRequest).getId());
         List<FolderDTO> folderList = geoPlatformServiceClient.getUserFoldersByRequest(
                 idRequest);
-
         return this.dtoConverter.convertOnlyFolder(folderList);
+    }
+
+    private GPUser getUserAlreadyFromSession(HttpServletRequest httpServletRequest) {
+        GPUser user = null;
+        HttpSession session = httpServletRequest.getSession();
+        Object userObj = session.getAttribute(SaveStatus.EnumSaveStatus.USER_LOGGED.getValue());
+        if (userObj != null && userObj instanceof GPUser) {
+            user = (GPUser) userObj;
+        } else {
+            //TODO: go to log-in page
+        }
+        return user;
     }
 
     @Override
@@ -114,22 +116,12 @@ public class LayerService implements ILayerService {
 
     @Override
     public long saveFolderForUser(String folderName, int position,
-            int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
-        GPUser user = null;
-        try {
-            user = geoPlatformServiceClient.getUserDetailByName(new SearchRequest(
-                    "user_test_0"));
-        } catch (ResourceNotFoundFault ex) {
-            logger.error("LayerService",
-                    "Unable to find user with username : user_test_0");
-            throw new GeoPlatformException(ex);
-        }
-
+            int numberOfDescendants, boolean isChecked, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPFolder folder = new GPFolder();
         folder.setName(folderName);
         folder.setPosition(position);
         folder.setShared(false);
-        folder.setOwner(user);
+        folder.setOwner(this.getUserAlreadyFromSession(httpServletRequest));
         folder.setNumberOfDescendants(numberOfDescendants);
         folder.setChecked(isChecked);
 
@@ -208,9 +200,10 @@ public class LayerService implements ILayerService {
 
     @Override
     public long saveAddedFolderAndTreeModifications(
-            MementoSaveAddedFolder memento) throws GeoPlatformException {
+            MementoSaveAddedFolder memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPFolder gpFolder = this.dtoConverter.convertMementoFolder(
                 memento.getAddedFolder());
+        gpFolder.setOwner(this.getUserAlreadyFromSession(httpServletRequest));
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         long idSavedFolder = 0L;
@@ -225,13 +218,15 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento) throws GeoPlatformException {
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
         ArrayList<GPLayer> layersList = this.dtoConverter.convertMementoLayers(memento.getAddedLayers());
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         ArrayList<Long> idSavedLayers = null;
         try {
-            idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications("user_test_0", layersList, map);
+            GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
+            idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications(user.getUsername(), layersList, map);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to save layers on LayerService: " + ex);
             throw new GeoPlatformException(ex);
@@ -282,12 +277,11 @@ public class LayerService implements ILayerService {
 
     @Override
     public boolean saveDragAndDropLayerAndTreeModifications(
-            MementoSaveDragDrop memento) throws GeoPlatformException {
+            MementoSaveDragDrop memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
-        GPUser user = new GPUser();
-        user.setUsername("user_test_0");
+        GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
         try {
             result = this.geoPlatformServiceClient.saveDragAndDropLayerAndTreeModifications(
                     user.getUsername(), memento.getIdBaseElement(), memento.getIdNewParent(),
@@ -302,12 +296,11 @@ public class LayerService implements ILayerService {
 
     @Override
     public boolean saveDragAndDropFolderAndTreeModifications(
-            MementoSaveDragDrop memento) throws GeoPlatformException {
+            MementoSaveDragDrop memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
-        GPUser user = new GPUser();
-        user.setUsername("user_test_0");
+        GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
         try {
             result = this.geoPlatformServiceClient.saveDragAndDropFolderAndTreeModifications(
                     user.getUsername(), memento.getIdBaseElement(), memento.getIdNewParent(),

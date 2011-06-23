@@ -58,12 +58,9 @@ public interface LayerRemote extends RemoteService {
 
     public static class Util {
 
-        private static LayerRemoteAsync instance;
+        private static LayerRemoteAsync instance = (LayerRemoteAsync) GWT.create(LayerRemote.class);;
 
         public static LayerRemoteAsync getInstance() {
-            if (instance == null) {
-                instance = (LayerRemoteAsync) GWT.create(LayerRemote.class);
-            }
             return instance;
         }
     }
@@ -74,7 +71,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public ArrayList<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException;
+    public ArrayList<GPFolderClientInfo> loadUserFolders() throws GeoPlatformException;
 
     /**
      * 

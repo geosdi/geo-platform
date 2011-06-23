@@ -73,6 +73,24 @@
             <version>${geoplatform-version}</version>
             <type>jar</type>
         </dependency>
+        
+        <!-- GWT-OL Resources -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-api</artifactId>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-model</artifactId>
+        </dependency>
+        
     </dependencies>
 
     <build>

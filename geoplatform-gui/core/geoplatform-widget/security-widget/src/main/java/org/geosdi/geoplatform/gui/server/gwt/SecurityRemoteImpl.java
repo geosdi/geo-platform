@@ -33,30 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.server.gwt;
+
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.gui.client.service.SecurityRemote;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.server.ISecurityService;
+import org.geosdi.geoplatform.gui.server.service.impl.SecurityService;
+import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoginStatus extends StatusWidget {
+public class SecurityRemoteImpl extends RemoteServiceServlet implements SecurityRemote{
+    
+    private static final long serialVersionUID = -1494707375482103152L;
 
-    public enum EnumLoginStatus {
+    private ISecurityService securityService = (ISecurityService) GeoPlatformContextUtil.getInstance().getBean(
+                SecurityService.class);
+    
 
-        STATUS_LOGIN("x-status-ok"), STATUS_NO_LOGIN("x-status-not-ok"), STATUS_LOGIN_ERROR(
-        "x-status-error"), STATUS_MESSAGE_LOGIN("Login Succesfull"), STATUS_MESSAGE_NOT_LOGIN(
-        "Login Failed"), STATUS_MESSAGE_LOGIN_ERROR("Login Service Error");
-        private String value;
-
-        EnumLoginStatus(String value) {
-            this.value = value;
-        }
-
-        /**
-         * @return the value
-         */
-        public String getValue() {
-            return value;
-        }
+    @Override
+    public void userLogin(String userName, String password) throws GeoPlatformException {
+        this.securityService.userLogin(userName, password, super.getThreadLocalRequest());
     }
+    
 }

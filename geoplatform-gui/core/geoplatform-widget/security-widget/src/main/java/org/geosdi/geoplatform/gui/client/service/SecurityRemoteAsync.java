@@ -33,30 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.service;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoginStatus extends StatusWidget {
-
-    public enum EnumLoginStatus {
-
-        STATUS_LOGIN("x-status-ok"), STATUS_NO_LOGIN("x-status-not-ok"), STATUS_LOGIN_ERROR(
-        "x-status-error"), STATUS_MESSAGE_LOGIN("Login Succesfull"), STATUS_MESSAGE_NOT_LOGIN(
-        "Login Failed"), STATUS_MESSAGE_LOGIN_ERROR("Login Service Error");
-        private String value;
-
-        EnumLoginStatus(String value) {
-            this.value = value;
-        }
-
-        /**
-         * @return the value
-         */
-        public String getValue() {
-            return value;
-        }
-    }
+public interface SecurityRemoteAsync {
+    
+    public void userLogin(String userName, String password, AsyncCallback<?> callback) throws GeoPlatformException;
+    
 }

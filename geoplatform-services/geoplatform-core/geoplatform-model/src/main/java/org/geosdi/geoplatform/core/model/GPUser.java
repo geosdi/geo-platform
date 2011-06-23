@@ -234,19 +234,16 @@ public class GPUser implements Serializable, UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
         return accountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
         return accountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
         return credentialsNonExpired;
     }
 
@@ -303,23 +300,11 @@ public class GPUser implements Serializable, UserDetails {
     }
 
     public boolean verify(String password) throws NoSuchAlgorithmException {
-        String hashPasswordSpeicifed = md5hash(password);
+        String hashPasswordSpeicifed = Utility.md5hash(password);
         if (this.password.equals(hashPasswordSpeicifed)) {
             return true;
         } else {
             return false;
         }
-    }
-
-    private String md5hash(String password) throws NoSuchAlgorithmException {
-        String hashString = null;
-        java.security.MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
-        byte[] hash = digest.digest(password.getBytes());
-        hashString = "";
-        for (int i = 0; i < hash.length; i++) {
-            hashString += Integer.toHexString(
-                    (hash[i] & 0xFF) | 0x100).toLowerCase().substring(1, 3);
-        }
-        return hashString;
     }
 }

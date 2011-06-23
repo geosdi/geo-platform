@@ -43,12 +43,17 @@ import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Dialog;
+import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -92,13 +97,11 @@ public class LoginWidget extends Dialog {
         };
 
         userName = new TextField<String>();
-        userName.setMinLength(4);
         userName.setFieldLabel("Username");
         userName.addKeyListener(keyListener);
         add(userName);
 
         password = new TextField<String>();
-        password.setMinLength(4);
         password.setPassword(true);
         password.setFieldLabel("Password");
         password.addKeyListener(keyListener);
@@ -135,7 +138,6 @@ public class LoginWidget extends Dialog {
 
         addButton(reset);
         addButton(login);
-
     }
 
     public void reset() {
@@ -147,7 +149,6 @@ public class LoginWidget extends Dialog {
     }
 
     public void errorConnection() {
-        userName.reset();
         password.reset();
         validate();
         userName.focus();
@@ -158,12 +159,27 @@ public class LoginWidget extends Dialog {
     protected void onSubmit() {
         status.setBusy("please wait...");
         getButtonBar().disable();
+        SecurityRemoteImpl.Util.getInstance().userLogin(this.userName.getValue(),
+                this.password.getValue(), new AsyncCallback() {
 
-        System.out.println("Login pressed");
-        Dispatcher.forwardEvent(this.eventOnSuccess);
+            @Override
+            public void onFailure(Throwable caught) {
+                errorConnection();
+                status.setStatus(LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.getValue(), 
+                        LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.getValue());
+                GeoPlatformMessage.infoMessage("Login Error", caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                status.setStatus(LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(), 
+                        LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
+                Dispatcher.forwardEvent(eventOnSuccess);
+                hide();
+            }
+        });
         /*Dispatcher.forwardEvent(DGWATCHEvents.LOGIN,
-                new String[]{userName.getValue(), password.getValue()});*/
-        super.hide();
+        new String[]{userName.getValue(), password.getValue()});*/
     }
 
     protected boolean hasValue(TextField<String> field) {

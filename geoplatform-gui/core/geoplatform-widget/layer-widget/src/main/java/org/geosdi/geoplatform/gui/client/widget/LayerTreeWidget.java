@@ -95,8 +95,6 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  * 
  */
 public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
-
-    private LayerRemoteAsync layerService = LayerRemoteImpl.Util.getInstance();
     
     private GPTreeStoreWidget treeStore;
     private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(this.tree);
@@ -137,8 +135,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
             LayoutManager.get().getStatusMap().setBusy(
                     "Loading tree elements: please, wait untill contents fully loads.");
-            layerService.loadUserFolders("user_test_0",
-                    new AsyncCallback<ArrayList<GPFolderClientInfo>>() {
+            LayerRemoteImpl.Util.getInstance().loadUserFolders(new AsyncCallback<ArrayList<GPFolderClientInfo>>() {
 
                         @Override
                         public void onFailure(Throwable caught) {
@@ -362,7 +359,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                     LayoutManager.get().getStatusMap().setBusy(
                             "Loading tree elements: please, wait untill contents fully loads.");
 
-                    layerService.loadFolderElements(
+                    LayerRemoteImpl.Util.getInstance().loadFolderElements(
                             parentFolder.getId(), new AsyncCallback<ArrayList<IGPFolderElements>>() {
 
                         @Override

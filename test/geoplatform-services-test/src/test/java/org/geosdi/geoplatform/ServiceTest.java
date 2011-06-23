@@ -60,6 +60,7 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.core.model.Utility;
 import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
@@ -148,7 +149,7 @@ public abstract class ServiceTest implements InitializingBean {
         user.setUsername(username);
         user.setEmailAddress(username + "@test");
         user.setEnabled(true);
-        user.setPassword("918706bb28e76c3a5f3c7f0dd6f06ff0"); // clear password: 'pwd_username_test_ws'
+        user.setPassword(Utility.md5hash("pwd_username_test_ws"));
         user.setSendEmail(true);
         return user;
     }

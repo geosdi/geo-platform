@@ -33,30 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.server;
+
+import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoginStatus extends StatusWidget {
-
-    public enum EnumLoginStatus {
-
-        STATUS_LOGIN("x-status-ok"), STATUS_NO_LOGIN("x-status-not-ok"), STATUS_LOGIN_ERROR(
-        "x-status-error"), STATUS_MESSAGE_LOGIN("Login Succesfull"), STATUS_MESSAGE_NOT_LOGIN(
-        "Login Failed"), STATUS_MESSAGE_LOGIN_ERROR("Login Service Error");
-        private String value;
-
-        EnumLoginStatus(String value) {
-            this.value = value;
-        }
-
-        /**
-         * @return the value
-         */
-        public String getValue() {
-            return value;
-        }
-    }
+public interface ISecurityService {
+    
+    public void userLogin(String userName, String password, HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    
 }

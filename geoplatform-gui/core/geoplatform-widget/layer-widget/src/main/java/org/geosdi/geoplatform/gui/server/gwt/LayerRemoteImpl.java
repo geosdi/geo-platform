@@ -59,20 +59,16 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
 
     //TODO: Insert correct serialVersionUID
     private static final long serialVersionUID = 8244727800484212092L;
-    private ILayerService layerService;
-
-    public LayerRemoteImpl() {
-        this.layerService = (ILayerService) GeoPlatformContextUtil.getInstance().getBean(
+    private ILayerService layerService = (ILayerService) GeoPlatformContextUtil.getInstance().getBean(
                 LayerService.class);
-    }
 
 //    @Override
 //    public ArrayList<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException {
 //        return this.layerService.loadUserFolders(userName);
 //    }
     @Override
-    public ArrayList<GPFolderClientInfo> loadUserFolders(String userName) throws GeoPlatformException {
-        return this.layerService.loadUserFolders(userName);
+    public ArrayList<GPFolderClientInfo> loadUserFolders() throws GeoPlatformException {
+        return this.layerService.loadUserFolders(super.getThreadLocalRequest());
     }
 
 //    @Override
@@ -86,7 +82,8 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
 
     @Override
     public long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
-        return this.layerService.saveFolderForUser(folderName, position, numberOfDescendants, isChecked);
+        return this.layerService.saveFolderForUser(folderName, position, numberOfDescendants, 
+                isChecked, super.getThreadLocalRequest());
     }
 
     @Override
@@ -102,12 +99,12 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
 
     @Override
     public long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento) throws GeoPlatformException {
-        return this.layerService.saveAddedFolderAndTreeModifications(memento);
+        return this.layerService.saveAddedFolderAndTreeModifications(memento, super.getThreadLocalRequest());
     }
     
     @Override
     public ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento) throws GeoPlatformException {
-        return this.layerService.saveAddedLayersAndTreeModifications(memento);
+        return this.layerService.saveAddedLayersAndTreeModifications(memento, super.getThreadLocalRequest());
     }
 
     @Override
@@ -122,12 +119,12 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
 
     @Override
     public boolean saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException {
-        return this.layerService.saveDragAndDropLayerAndTreeModifications(memento);
+        return this.layerService.saveDragAndDropLayerAndTreeModifications(memento, super.getThreadLocalRequest());
     }
 
     @Override
     public boolean saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException {
-        return this.layerService.saveDragAndDropFolderAndTreeModifications(memento);
+        return this.layerService.saveDragAndDropFolderAndTreeModifications(memento, super.getThreadLocalRequest());
     }
 
     @Override

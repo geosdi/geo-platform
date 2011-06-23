@@ -62,6 +62,7 @@ import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPStyle;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.core.model.Utility;
 import org.geotools.data.ows.Layer;
 import org.geotools.data.ows.WMSCapabilities;
 import org.geotools.data.wms.WebMapServer;
@@ -220,7 +221,7 @@ public abstract class BaseDAOTest {
         user.setUsername(username);
         user.setEmailAddress(username + "@test");
         user.setEnabled(true);
-        user.setPassword("pwd_" + username);
+        user.setPassword(Utility.md5hash("pwd_" + username));
         user.setSendEmail(true);
         return user;
     }

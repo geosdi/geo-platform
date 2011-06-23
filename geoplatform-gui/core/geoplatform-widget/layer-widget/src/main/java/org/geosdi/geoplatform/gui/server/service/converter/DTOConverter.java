@@ -201,9 +201,6 @@ public class DTOConverter {
             parent.setId(memento.getIdParent());
             gpFolder.setParent(parent);
         }
-        GPUser user = new GPUser();
-        user.setUsername("user_test_0");
-        gpFolder.setOwner(user);
         gpFolder.setPosition(memento.getzIndex());
         /*TODO: Once implemented shared function you must set this property
         gpFolder.setShared(true);*/

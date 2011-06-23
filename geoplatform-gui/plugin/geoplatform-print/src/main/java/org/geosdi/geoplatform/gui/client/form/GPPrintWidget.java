@@ -19,6 +19,9 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.Window;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.PrintResources;
 import org.geosdi.geoplatform.gui.client.form.binding.GPComboBoxFieldBinding;
@@ -29,6 +32,7 @@ import org.geosdi.geoplatform.gui.client.model.DPI;
 import org.geosdi.geoplatform.gui.client.model.GPPrintBean;
 import org.geosdi.geoplatform.gui.client.model.GPPrintBean.GPPrintEnumBean;
 import org.geosdi.geoplatform.gui.client.model.Scale;
+import org.geosdi.geoplatform.gui.client.utility.LayerComparable;
 import org.geosdi.geoplatform.gui.client.utility.PrintUtility;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPDynamicFormBinding;
 import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
@@ -52,6 +56,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     private TreePanel tree;
     private LonLat center;
     private double scale;
+    private List<GPLayerBean> layerList;
 
     public GPPrintWidget() {
         super();
@@ -102,10 +107,13 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
                     + ",\"rotation\":0,\"mapTitle\":\"" + mapTitle.getValue()
                     + "\",\"comment\":\"" + comments.getValue() + "\"}],\"layers\":[";
 
-            for (int i = 0; i < tree.getCheckedSelection().size(); i++) {
+            layerList = buildLayerList(tree.getCheckedSelection());
+            
+            Collections.sort(layerList, new LayerComparable());
 
-                if (tree.getCheckedSelection().get(i) instanceof GPLayerBean) {
-                    GPLayerBean layer = (GPLayerBean) tree.getCheckedSelection().get(i);
+            for (int i = 0; i < layerList.size(); i++) {
+                if (layerList.get(i) instanceof GPLayerBean) {
+                    GPLayerBean layer = (GPLayerBean) layerList.get(i);
                     layers = layers.concat(buildLayersOrderList(layer));
                 }
             }
@@ -119,7 +127,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
             System.out.println(URL.decode(url));
 
             Window.open(url, "_blank", "");
-            
+
             this.hide();
         }
 
@@ -246,5 +254,15 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
                 });
 
         this.formPanel.addButton(cancel);
+    }
+
+    private List<GPLayerBean> buildLayerList(List checkedSelection) {
+        layerList = new ArrayList<GPLayerBean>();
+        for (int i = 0; i < checkedSelection.size(); i++) {
+            if (checkedSelection.get(i) instanceof GPLayerBean) {
+                layerList.add((GPLayerBean) checkedSelection.get(i));
+            }
+        }
+        return layerList;
     }
 }

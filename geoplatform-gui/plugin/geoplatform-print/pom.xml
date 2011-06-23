@@ -48,6 +48,13 @@
             </roles>
         </developer>
     </developers>
+    
+    <repositories>
+        <repository>
+            <id>org.mapfish</id>
+            <url>http://dev.mapfish.org/maven/repository</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -84,26 +91,26 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
             <classifier>sources</classifier>
-             <version>${project.version}</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-configuration</artifactId>
-             <version>${project.version}</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-configuration</artifactId>
             <classifier>sources</classifier>
-             <version>${project.version}</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>basic-widget</artifactId>
-             <version>${project.version}</version>
+            <version>${project.version}</version>
         </dependency>
 
 		<!-- SPRING -->

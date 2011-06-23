@@ -15,6 +15,10 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.http.client.URL;
+import com.google.gwt.user.client.Window;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.PrintResources;
 import org.geosdi.geoplatform.gui.client.form.binding.GPComboBoxFieldBinding;
@@ -24,8 +28,12 @@ import org.geosdi.geoplatform.gui.client.form.binding.PrintTitleFieldBinding;
 import org.geosdi.geoplatform.gui.client.model.DPI;
 import org.geosdi.geoplatform.gui.client.model.GPPrintBean;
 import org.geosdi.geoplatform.gui.client.model.GPPrintBean.GPPrintEnumBean;
+import org.geosdi.geoplatform.gui.client.model.Scale;
 import org.geosdi.geoplatform.gui.client.utility.PrintUtility;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPDynamicFormBinding;
+import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.gwtopenmaps.openlayers.client.LonLat;
 
 /**
  *
@@ -41,10 +49,18 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     private TextArea comments;
     private Button print;
     private Button cancel;
+    private TreePanel tree;
+    private LonLat center;
+    private double scale;
 
     public GPPrintWidget() {
         super();
         this.entity = new GPPrintBean();
+    }
+
+    public GPPrintWidget(TreePanel theTree) {
+        this.entity = new GPPrintBean();
+        this.tree = theTree;
     }
 
     @Override
@@ -69,10 +85,58 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     @Override
     public void execute() {
         if (formPanel.isValid()) {
-            System.out.println(
-                    "TEST ********************** " + this.entity.toString());
+
+            double lat = GPApplicationMap.getApplicationMap().getMap().getCenter().lat();
+            double lon = GPApplicationMap.getApplicationMap().getMap().getCenter().lon();
+
+
+            LonLat center = new LonLat(lon, lat);
+            center.transform("EPSG:900913", "EPSG:4326");
+
+            Double scaleDouble = new Double(GPApplicationMap.getApplicationMap().getMap().getScale());
+
+            String layers = "{\"title\":\"" + title.getValue() + "\",\"pages\":[{\"center\":["
+                    + center.lon() + ","
+                    + center.lat()
+                    + "],\"scale\":" + Scale.searchValue(scaleDouble)
+                    + ",\"rotation\":0,\"mapTitle\":\"" + mapTitle.getValue()
+                    + "\",\"comment\":\"" + comments.getValue() + "\"}],\"layers\":[";
+
+            for (int i = 0; i < tree.getCheckedSelection().size(); i++) {
+
+                if (tree.getCheckedSelection().get(i) instanceof GPLayerBean) {
+                    GPLayerBean layer = (GPLayerBean) tree.getCheckedSelection().get(i);
+                    layers = layers.concat(buildLayersOrderList(layer));
+                }
+            }
+
+            layers = layers.concat("],\"layout\":\"A3 portrait\",\"srs\":\"EPSG:4326\",\"dpi\":"
+                    + comboDPI.getValue().getDpi() + ",\"units\":\"degrees\"}");
+
+            String url = GWT.getHostPageBaseURL() + "geoportal/pdf/print.pdf?spec="
+                    + URL.encode(layers);
+
+            System.out.println(URL.decode(url));
+
+            Window.open(url, "_blank", "");
+            
+            this.hide();
         }
 
+    }
+
+    public String buildLayersOrderList(GPLayerBean layer) {
+        String start = "{\"layers\":[";
+        String apice = "\"";
+        String layerList = "";
+        String baseURL = "],\"baseURL\":\"" + layer.getDataSource();
+        String format = "\",\"format\":\"" + "image/png";
+        String end = "\",\"type\":\"WMS\"},";
+        layerList = layerList.concat(start);
+        layerList = layerList.concat(apice + layer.getName() + apice + ",");
+        layerList = layerList.substring(0, layerList.length() - 1);
+
+        return layerList.concat(baseURL + format + end);
     }
 
     @Override

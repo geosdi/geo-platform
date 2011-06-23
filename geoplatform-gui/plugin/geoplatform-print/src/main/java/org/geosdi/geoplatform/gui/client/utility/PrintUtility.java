@@ -49,11 +49,12 @@ public class PrintUtility {
     public static List<DPI> getDPI() {
         List<DPI> dpi = new ArrayList<DPI>();
 
-        dpi.add(new DPI("56"));
         dpi.add(new DPI("72"));
         dpi.add(new DPI("127"));
         dpi.add(new DPI("190"));
         dpi.add(new DPI("254"));
+        dpi.add(new DPI("300"));
+        dpi.add(new DPI("600"));
 
         return dpi;
     }

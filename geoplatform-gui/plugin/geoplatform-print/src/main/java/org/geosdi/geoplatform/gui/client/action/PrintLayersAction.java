@@ -40,6 +40,8 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.PrintResources;
 import org.geosdi.geoplatform.gui.client.form.GPPrintWidget;
+import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
  *
@@ -52,7 +54,7 @@ public class PrintLayersAction extends ToolbarLayerTreeAction {
 
     public PrintLayersAction(TreePanel theTree) {
         super(theTree, PrintResources.ICONS.print(), "Print Visible Layers");
-        this.formPrint = new GPPrintWidget();
+        this.formPrint = new GPPrintWidget(theTree);
     }
 
     @Override

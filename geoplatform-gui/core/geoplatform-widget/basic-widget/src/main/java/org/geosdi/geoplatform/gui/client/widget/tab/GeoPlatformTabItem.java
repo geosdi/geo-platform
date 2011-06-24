@@ -35,7 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab;
 
+
 import com.extjs.gxt.ui.client.widget.TabItem;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
 
 /**
  *
@@ -44,9 +46,18 @@ import com.extjs.gxt.ui.client.widget.TabItem;
  */
 public abstract class GeoPlatformTabItem extends TabItem {
     
+    protected FormPanel formPanel = new FormPanel();
+    
+    public GeoPlatformTabItem(String title) {
+        super(title);
+        addComponents();
+        super.add(formPanel);
+    }
+    
     public GeoPlatformTabItem() {
         addComponents();
     }
     
     public abstract void addComponents();
+
 }

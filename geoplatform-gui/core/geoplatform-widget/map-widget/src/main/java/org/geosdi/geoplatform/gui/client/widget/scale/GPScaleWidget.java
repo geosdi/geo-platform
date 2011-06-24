@@ -45,10 +45,12 @@ import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ScaleChangeHan
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 import com.extjs.gxt.ui.client.GXT;
+import com.extjs.gxt.ui.client.Style.Direction;
 import com.extjs.gxt.ui.client.core.XDOM;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldEvent;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.fx.FxConfig;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.util.Format;
@@ -67,188 +69,189 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
 
-	private static Stack<GPScaleWidget> infoStack = new Stack<GPScaleWidget>();
-	private static ArrayList<GPScaleWidget> slots = new ArrayList<GPScaleWidget>();
-	protected GPScaleConfig config;
-	protected int level;
+    private static Stack<GPScaleWidget> infoStack = new Stack<GPScaleWidget>();
+    private static ArrayList<GPScaleWidget> slots = new ArrayList<GPScaleWidget>();
+    protected GPScaleConfig config;
+    protected int level;
+    private Size size;
 
-	private Size size;
+    /**
+     * Creates a new GPScaleWidget instance.
+     */
+    public GPScaleWidget() {
+        baseStyle = "x-info";
+        frame = true;
+        setShadow(false);
+        setLayoutOnChange(true);
 
-	/**
-	 * Creates a new GPScaleWidget instance.
-	 */
-	public GPScaleWidget() {
-		baseStyle = "x-info";
-		frame = true;
-		setShadow(false);
-		setLayoutOnChange(true);
+        MapHandlerManager.addHandler(ScaleChangeHandler.TYPE, this);
+    }
 
-		MapHandlerManager.addHandler(ScaleChangeHandler.TYPE, this);
-	}
+    @Override
+    protected void onRender(Element parent, int pos) {
+        super.onRender(parent, pos);
+        if (GXT.isAriaEnabled()) {
+            Accessibility.setRole(getElement(), "alert");
+        }
+    }
 
-	@Override
-	protected void onRender(Element parent, int pos) {
-		super.onRender(parent, pos);
-		if (GXT.isAriaEnabled()) {
-			Accessibility.setRole(getElement(), "alert");
-		}
-	}
+    public static void display(String title) {
+        display(new GPScaleConfig(title));
+    }
 
-	public static void display(String title) {
-		display(new GPScaleConfig(title));
-	}
+    public static void display(GPScaleConfig config) {
+        pop().show(config);
+    }
 
-	public static void display(GPScaleConfig config) {
-		pop().show(config);
-	}
+    public static void remove() {
+        pop().hide();
+    }
 
-	public static void remove() {
-		pop().hide();
-	}
+    private static GPScaleWidget pop() {
+        GPScaleWidget info = infoStack.size() > 0 ? (GPScaleWidget) infoStack.pop() : null;
+        if (info == null) {
+            info = new GPScaleWidget();
+        }
+        return info;
+    }
 
-	private static GPScaleWidget pop() {
-		GPScaleWidget info = infoStack.size() > 0 ? (GPScaleWidget) infoStack
-				.pop() : null;
-		if (info == null) {
-			info = new GPScaleWidget();
-		}
-		return info;
-	}
+    /**
+     * Displays the ScaleBar.
+     * 
+     * @param config
+     *            the info config
+     */
+    public void show(GPScaleConfig config) {
+        this.config = config;
+        onShowInfo();
+    }
 
-	/**
-	 * Displays the ScaleBar.
-	 * 
-	 * @param config
-	 *            the info config
-	 */
-	public void show(GPScaleConfig config) {
-		this.config = config;
-		onShowInfo();
-	}
+    private static void push(GPScaleWidget scale) {
+        infoStack.push(scale);
+    }
 
-	private static void push(GPScaleWidget scale) {
-		infoStack.push(scale);
-	}
+    protected void onShowInfo() {
+        RootPanel.get().add(this);
+        el().makePositionable(true);
 
-	protected void onShowInfo() {
-		RootPanel.get().add(this);
-		el().makePositionable(true);
+        setTitle();
+        setText();
 
-		setTitle();
-		setText();
+        List<Scale> scales = new ArrayList<Scale>();
 
-		List<Scale> scales = new ArrayList<Scale>();
+        scales.add(new Scale("1:1000"));
+        scales.add(new Scale("1:10000"));
+        scales.add(new Scale("1:100000"));
+        scales.add(new Scale("1:1000000"));
+        scales.add(new Scale("1:10000000"));
+        scales.add(new Scale("1:100000000"));
+        scales.add(new Scale("1:1000000000"));
 
-		scales.add(new Scale("1:1000"));
-		scales.add(new Scale("1:10000"));
-		scales.add(new Scale("1:100000"));
-		scales.add(new Scale("1:1000000"));
-		scales.add(new Scale("1:10000000"));
-		scales.add(new Scale("1:100000000"));
-		scales.add(new Scale("1:1000000000"));
+        ListStore<Scale> scaleStore = new ListStore<Scale>();
+        scaleStore.add(scales);
 
-		ListStore<Scale> scaleStore = new ListStore<Scale>();
-		scaleStore.add(scales);
+        ComboBox<Scale> comboScale = new ComboBox<Scale>();
+        comboScale.setEmptyText("Select a scale...");
+        comboScale.setDisplayField("scale");
+        comboScale.setWidth(150);
+        comboScale.setStore(scaleStore);
+        comboScale.setTypeAhead(true);
+        comboScale.setTriggerAction(TriggerAction.ALL);
 
-		ComboBox<Scale> comboScale = new ComboBox<Scale>();
-		comboScale.setEmptyText("Select a scale...");
-		comboScale.setDisplayField("scale");
-		comboScale.setWidth(150);
-		comboScale.setStore(scaleStore);
-		comboScale.setTypeAhead(true);
-		comboScale.setTriggerAction(TriggerAction.ALL);
+        add(comboScale);
 
-		add(comboScale);
+        level = firstAvail();
+        slots.add(level, this);
 
-		level = firstAvail();
-		slots.add(level, this);
+        Point p = position();
+        el().setLeftTop(p.x, p.y);
+        setSize(config.width, config.height);
 
-		Point p = position();
-		el().setLeftTop(p.x, p.y);
-		setSize(config.width, config.height);
+        comboScale.addListener(Events.Select, new Listener<FieldEvent>() {
 
-		comboScale.addListener(Events.Select, new Listener<FieldEvent>() {
-			public void handleEvent(FieldEvent fe) {
-				ComboBox cb = (ComboBox) fe.getComponent();
-				Scale s = (Scale) cb.getValue();
-				Dispatcher.forwardEvent(GeoPlatformEvents.SCALE_REQUEST_CHANGE,
-						s);
-			}
-		});
+            @Override
+            public void handleEvent(FieldEvent fe) {
+                ComboBox cb = (ComboBox) fe.getComponent();
+                Scale s = (Scale) cb.getValue();
+                Dispatcher.forwardEvent(GeoPlatformEvents.SCALE_REQUEST_CHANGE,
+                        s);
+            }
+        });
 
-	}
+        el().slideIn(Direction.DOWN, FxConfig.NONE);
 
-	protected Point position() {
-		this.size = XDOM.getViewportSize();
-		int left = this.size.width - config.width - 10
-				+ XDOM.getBodyScrollLeft();
-		int top = this.size.height - config.height - 10
-				- (level * (config.height + 10)) + XDOM.getBodyScrollTop();
-		return new Point(left, top);
-	}
+    }
 
-	private static int firstAvail() {
-		int size = slots.size();
-		for (int i = 0; i < size; i++) {
-			if (slots.get(i) == null) {
-				return i;
-			}
-		}
-		return size;
-	}
+    protected Point position() {
+        this.size = XDOM.getViewportSize();
+        int left = this.size.width - config.width - 10
+                + XDOM.getBodyScrollLeft();
+        int top = this.size.height - config.height - 10
+                - (level * (config.height + 10)) + XDOM.getBodyScrollTop();
+        return new Point(left, top);
+    }
 
-	private void setTitle() {
-		if (config.title != null) {
-			head.setVisible(true);
-			if (config.params != null) {
-				config.title = Format.substitute(config.title, config.params);
-			}
-			setHeading(config.title);
-		} else {
-			head.setVisible(false);
-		}
-	}
+    private static int firstAvail() {
+        int size = slots.size();
+        for (int i = 0; i < size; i++) {
+            if (slots.get(i) == null) {
+                return i;
+            }
+        }
+        return size;
+    }
 
-	private void setText() {
-		if (config.text != null) {
-			if (config.params != null) {
-				config.text = Format.substitute(config.text, config.params);
-			}
-			removeAll();
-			addText(config.text);
-		}
-	}
+    private void setTitle() {
+        if (config.title != null) {
+            head.setVisible(true);
+            if (config.params != null) {
+                config.title = Format.substitute(config.title, config.params);
+            }
+            setHeading(config.title);
+        } else {
+            head.setVisible(false);
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.client.widget.scale.event.ScaleChangeHandler
-	 * #onPositionChange(com.extjs.gxt.ui.client.util.Size)
-	 */
-	@Override
-	public void onPositionChange(Size s) {
-		// TODO Auto-generated method stub
-		if (this.size != s) {
-			this.size = s;
-			int left = this.size.width - config.width - 10
-					+ XDOM.getBodyScrollLeft();
-			int top = this.size.height - config.height - 10
-					- (level * (config.height + 10)) + XDOM.getBodyScrollTop();
-			Point p = new Point(left, top);
-			el().setLeftTop(p.x, p.y);
-		}
+    private void setText() {
+        if (config.text != null) {
+            if (config.params != null) {
+                config.text = Format.substitute(config.text, config.params);
+            }
+            removeAll();
+            addText(config.text);
+        }
+    }
 
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.scale.event.ScaleChangeHandler
+     * #onPositionChange(com.extjs.gxt.ui.client.util.Size)
+     */
+    @Override
+    public void onPositionChange(Size s) {
+        // TODO Auto-generated method stub
+        if ((this.size != null) && (this.size != s)) {
+            this.size = s;
+            int left = this.size.width - config.width - 10
+                    + XDOM.getBodyScrollLeft();
+            int top = this.size.height - config.height - 10
+                    - (level * (config.height + 10)) + XDOM.getBodyScrollTop();
+            Point p = new Point(left, top);
+            el().setLeftTop(p.x, p.y);
+        }
 
-	@Override
-	public void activationScaleBar(boolean activate) {
-		if (activate) {
-			show();
-		} else {
-			hide();
-		}
+    }
 
-	}
+    @Override
+    public void activationScaleBar(boolean activate) {
+        if (activate) {
+            show();
+        } else {
+            hide();
+        }
 
+    }
 }

@@ -51,129 +51,125 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class LayoutManager extends GeoPlatformLayoutManager {
 
-	private static LayoutManager INSTANCE;
+    private static LayoutManager INSTANCE;
 
-	/**
-	 * Build Singleton Instace
-	 * 
-	 * @return Instance Reference
-	 */
-	public static LayoutManager get() {
-		if (INSTANCE == null)
-			INSTANCE = new LayoutManager();
-		return INSTANCE;
-	}
+    /**
+     * Build Singleton Instace
+     * 
+     * @return Instance Reference
+     */
+    public static LayoutManager get() {
+        if (INSTANCE == null) {
+            INSTANCE = new LayoutManager();
+        }
+        return INSTANCE;
+    }
 
-	/**
-	 * Add a generic Widget to Center
-	 * 
-	 * @param Widget
-	 *            w
-	 */
-	public static void addComponentToCenter(Widget w) {
-		get().center.removeAll();
-		get().center.add(w);
-		get().center.layout();
-		MapHandlerManager.fireEvent(new ScaleVisibleEvent(
-				w instanceof MapWidget ? true : false));
+    /**
+     * Add a generic Widget to Center
+     * 
+     * @param w 
+     */
+    public static void addComponentToCenter(Widget w) {
+        get().center.removeAll();
+        get().center.add(w);
+        get().center.layout();
+        MapHandlerManager.fireEvent(new ScaleVisibleEvent(
+                w instanceof MapWidget ? true : false));
 
-	}
+    }
 
-	/**
-	 * Add a generic Widget to West
-	 * 
-	 * @param Widget
-	 *            w
-	 */
-	public static void addComponentToWest(Widget w) {
-		get().west.add(w);
-		get().west.layout();
-	}
+    /**
+     * Add a generic Widget to West
+     * 
+     * @param w 
+     */
+    public static void addComponentToWest(Widget w) {
+        get().west.add(w);
+        get().west.layout();
+    }
 
-	/**
-	 * Remove a generic widget from West
-	 * 
-	 * @param WWidget
-	 *            w
-	 */
-	public static void removeComponentFromWest(Widget w) {
-		get().west.remove(w);
-		get().west.layout();
-	}
+    /**
+     * Remove a generic widget from West
+     * 
+     * @param w 
+     */
+    public static void removeComponentFromWest(Widget w) {
+        get().west.remove(w);
+        get().west.layout();
+    }
 
-	/**
-	 * Add a generic Widget to East
-	 * 
-	 * @param Widget
-	 *            w
-	 */
-	public static void addComponentToEast(Widget w) {
-		get().east.add(w);
-		get().east.layout();
-	}
+    /**
+     * Add a generic Widget to East
+     * 
+     * @param w 
+     */
+    public static void addComponentToEast(Widget w) {
+        get().east.add(w);
+        get().east.layout();
+    }
 
-	/**
-	 * Add a generic Widget to North
-	 * 
-	 * @param Widget
-	 *            w
-	 */
-	public static void addComponentToNorth(Widget w) {
-		get().north.add(w);
-		get().north.layout();
-	}
+    /**
+     * Add a generic Widget to North
+     * 
+     * @param w 
+     */
+    public static void addComponentToNorth(Widget w) {
+        get().north.add(w);
+        get().north.layout();
+    }
 
-	/**
-	 * Add a generic Widget to South
-	 * 
-	 * @param Widget
-	 *            w
-	 */
-	public static void addComponentToSouth(Widget w) {
-		get().south.add(w);
-		get().south.layout();
-	}
+    /**
+     * Add a generic Widget to South
+     * 
+     * @param w 
+     */
+    public static void addComponentToSouth(Widget w) {
+        get().south.add(w);
+        get().south.layout();
+    }
 
-	/**
-	 * Show or Hide West panel
-	 * 
-	 * @param visible
-	 */
-	public static void manageWest(boolean visible) {
-		if (visible)
-			get().west.show();
-		else
-			get().west.hide();
-		Dispatcher.forwardEvent(GeoPlatformEvents.UPDATE_CENTER);
-	}
+    /**
+     * Show or Hide West panel
+     * 
+     * @param visible
+     */
+    public static void manageWest(boolean visible) {
+        if (visible) {
+            get().west.show();
+        } else {
+            get().west.hide();
+        }
+        Dispatcher.forwardEvent(GeoPlatformEvents.UPDATE_CENTER);
+    }
 
-	/**
-	 * Layout West Panel
-	 */
-	public static void layoutWest() {
-		get().west.layout();
-	}
+    /**
+     * Layout West Panel
+     */
+    public static void layoutWest() {
+        get().west.layout();
+    }
 
-	/**
-	 * Check the Visibility of West Panel
-	 * 
-	 * @return boolean
-	 */
-	public static boolean isWestVisible() {
-		return get().west.isVisible();
-	}
+    /**
+     * Check the Visibility of West Panel
+     * 
+     * @return boolean
+     */
+    public static boolean isWestVisible() {
+        return get().west.isVisible();
+    }
 
-	/**
-	 * Check If always one Widget is visible on West
-	 * 
-	 * @return boolean
-	 */
-	public static boolean isOneWidgetVisibleAtWest() {
-		for (Component c : get().west.getItems()) {
-			if (c.isVisible())
-				return true;
-		}
-		return false;
-	}
-
+    /**
+     * Check If always one Widget is visible on West
+     * 
+     * @return boolean
+     */
+    public static boolean isOneWidgetVisibleAtWest() {
+        for (Component c : get().west.getItems()) {
+            if (c.isVisible()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

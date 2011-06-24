@@ -41,6 +41,10 @@ package org.geosdi.geoplatform.gui.client.widget.tab;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class LayersInfoTabItem extends GeoPlatformTabItem {
+    
+    public LayersInfoTabItem() {
+        super("Layer Info");
+    }
 
     @Override
     public void addComponents() {

@@ -41,9 +41,16 @@ package org.geosdi.geoplatform.gui.client.widget.tab;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class DisplayLayersTabItem extends GeoPlatformTabItem {
+    
+    
+    public DisplayLayersTabItem() {
+        super("Display");
+    }
 
     @Override
     public void addComponents() {
+        this.formPanel.setHeaderVisible(false);
         
-    }
+        
+    }    
 }

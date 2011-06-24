@@ -33,21 +33,31 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tab;
+package org.geosdi.geoplatform.gui.client.widget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class WPSLayerTabItem extends GeoPlatformTabItem {
-    
-    public WPSLayerTabItem() {
-        super("WPS");
+public class LayersPropertiesWidget extends GeoPlatformWindow {
+
+    public LayersPropertiesWidget() {
+        super(true);
     }
 
     @Override
-    public void addComponents() {
-        
+    public void addComponent() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void initSize() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setWindowProperties() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

@@ -40,14 +40,30 @@ package org.geosdi.geoplatform.gui.client.widget.tab;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class WPSLayerTabItem extends GeoPlatformTabItem {
+public class LayersTabWidget extends GeoPlatformTabWidget {
     
-    public WPSLayerTabItem() {
-        super("WPS");
+    private DisplayLayersTabItem displayItem;
+    private LayersInfoTabItem infoItem;
+    private WPSLayerTabItem wpsItem;
+
+    public LayersTabWidget() {
+        
+    }
+    
+
+    @Override
+    public void initSize() {
+        setAutoWidth(true);
+        setAutoHeight(true);
     }
 
     @Override
     public void addComponents() {
+        
+    }
+
+    @Override
+    public void setWidgetProperties() {
         
     }
 }

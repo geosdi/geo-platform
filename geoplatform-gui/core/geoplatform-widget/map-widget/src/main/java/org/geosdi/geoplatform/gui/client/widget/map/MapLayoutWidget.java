@@ -69,6 +69,8 @@ import org.gwtopenmaps.openlayers.client.layer.OSM;
 import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
 
 import com.extjs.gxt.ui.client.widget.Info;
+import com.google.gwt.user.client.Timer;
+import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
@@ -253,6 +255,9 @@ public class MapLayoutWidget implements GeoPlatformMap {
         LayoutManager.addComponentToCenter(mapWidget);
 
         setMapCenter();
+
+        /** OPEN SCALE WIDGET **/
+        showScaleWidget();
     }
 
     /**
@@ -515,5 +520,16 @@ public class MapLayoutWidget implements GeoPlatformMap {
                 new Projection(map.getProjection()));
 
         this.map.zoomToExtent(b);
+    }
+
+    private void showScaleWidget() {
+        Timer t = new Timer() {
+
+            @Override
+            public void run() {
+                GPScaleWidget.display("Scale");
+            }
+        };
+        t.schedule(3000);
     }
 }

@@ -157,6 +157,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
         this.measure.addMeasureListener(new MeasureListener() {
 
+            @Override
             public void onMeasure(MeasureEvent eventObject) {
                 Info.display("Distance is: ", eventObject.getMeasure() + " "
                         + eventObject.getUnits());
@@ -177,6 +178,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
         this.measureArea.addMeasureListener(new MeasureListener() {
 
+            @Override
             public void onMeasure(MeasureEvent eventObject) {
                 Info.display("Area is: ", eventObject.getMeasure() + " "
                         + eventObject.getUnits());
@@ -257,7 +259,9 @@ public class MapLayoutWidget implements GeoPlatformMap {
         setMapCenter();
 
         /** OPEN SCALE WIDGET **/
-        showScaleWidget();
+        if (!GPScaleWidget.isScaleWidgetEnabled()) {
+            showScaleWidget();
+        }
     }
 
     /**
@@ -523,6 +527,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
     }
 
     private void showScaleWidget() {
+
         Timer t = new Timer() {
 
             @Override

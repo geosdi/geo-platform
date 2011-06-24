@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.widget.scale;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 import org.geosdi.geoplatform.gui.client.widget.map.store.Scale;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
@@ -69,8 +68,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
 
-    private static Stack<GPScaleWidget> infoStack = new Stack<GPScaleWidget>();
-    private static ArrayList<GPScaleWidget> slots = new ArrayList<GPScaleWidget>();
+    private static GPScaleWidget instance;
     protected GPScaleConfig config;
     protected int level;
     private Size size;
@@ -108,11 +106,11 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
     }
 
     private static GPScaleWidget pop() {
-        GPScaleWidget info = infoStack.size() > 0 ? (GPScaleWidget) infoStack.pop() : null;
-        if (info == null) {
-            info = new GPScaleWidget();
+        if (instance == null) {
+            System.out.println("CODICE ESEGUITO ********************************");
+            instance = new GPScaleWidget();
         }
-        return info;
+        return instance;
     }
 
     /**
@@ -126,9 +124,9 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
         onShowInfo();
     }
 
-    private static void push(GPScaleWidget scale) {
-        infoStack.push(scale);
-    }
+//    private static void push(GPScaleWidget scale) {
+//        infoStack.push(scale);
+//    }
 
     protected void onShowInfo() {
         RootPanel.get().add(this);
@@ -160,8 +158,8 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
 
         add(comboScale);
 
-        level = firstAvail();
-        slots.add(level, this);
+//        level = firstAvail();
+//        slots.add(level, this);
 
         Point p = position();
         el().setLeftTop(p.x, p.y);
@@ -179,7 +177,7 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
         });
 
         el().slideIn(Direction.DOWN, FxConfig.NONE);
-
+        
     }
 
     protected Point position() {
@@ -189,16 +187,6 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
         int top = this.size.height - config.height - 10
                 - (level * (config.height + 10)) + XDOM.getBodyScrollTop();
         return new Point(left, top);
-    }
-
-    private static int firstAvail() {
-        int size = slots.size();
-        for (int i = 0; i < size; i++) {
-            if (slots.get(i) == null) {
-                return i;
-            }
-        }
-        return size;
     }
 
     private void setTitle() {
@@ -253,5 +241,9 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
             hide();
         }
 
+    }
+    
+    public static boolean isScaleWidgetEnabled() {
+        return pop().isVisible();
     }
 }

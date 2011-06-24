@@ -33,26 +33,27 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.mvc;
+package org.geosdi.geoplatform.gui.impl.map.event;
 
-import com.extjs.gxt.ui.client.mvc.AppEvent;
-import com.extjs.gxt.ui.client.mvc.Controller;
-import com.extjs.gxt.ui.client.mvc.View;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginHandler;
 
 /**
- * @author giuseppe
- *
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public abstract class GeoPlatformView extends View {
+public class GPLoginEvent extends GwtEvent<GPLoginHandler> {
 
-    public GeoPlatformView(Controller controller) {
-        super(controller);
-    }
-
-    /* (non-Javadoc)
-     * @see com.extjs.gxt.ui.client.mvc.View#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
-     */
     @Override
-    protected void handleEvent(AppEvent event) {
+    public Type<GPLoginHandler> getAssociatedType() {
+        return GPLoginHandler.TYPE;
     }
+
+    @Override
+    protected void dispatch(GPLoginHandler handler) {
+        handler.showUserLogin();
+    }
+    
 }

@@ -205,7 +205,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
         GPLayerSaveCache.getInstance().add(mementoSaveAdd);
 
         clearComponents();
-        LayoutManager.get().getStatusMap().setStatus(
+        LayoutManager.getInstance().getStatusMap().setStatus(
                 "Added folder on tree succesfully.",
                 EnumSearchStatus.STATUS_SEARCH.toString());
     }
@@ -257,7 +257,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
                     @Override
                     public void onSuccess(Long result) {
                         GPLayerSaveCache.getInstance().remove(memento);
-                        LayoutManager.get().getStatusMap().setStatus(
+                        LayoutManager.getInstance().getStatusMap().setStatus(
                                 "Folders saveded successfully.",
                                 EnumSearchStatus.STATUS_SEARCH.toString());
                         //Warning: What happens when I delete a folder before save it???

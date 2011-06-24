@@ -33,26 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.mvc;
+package org.geosdi.geoplatform.gui.client.event;
 
-import com.extjs.gxt.ui.client.mvc.AppEvent;
-import com.extjs.gxt.ui.client.mvc.Controller;
-import com.extjs.gxt.ui.client.mvc.View;
+import org.geosdi.geoplatform.gui.client.widget.LoginWidget;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginHandler;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 /**
- * @author giuseppe
- *
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public abstract class GeoPlatformView extends View {
-
-    public GeoPlatformView(Controller controller) {
-        super(controller);
+public class UserLoginManager implements GPLoginHandler{
+    
+    private LoginWidget loginWidget;
+    
+    public UserLoginManager() {
+        GPHandlerManager.addHandler(TYPE, this);
     }
 
-    /* (non-Javadoc)
-     * @see com.extjs.gxt.ui.client.mvc.View#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
-     */
     @Override
-    protected void handleEvent(AppEvent event) {
+    public void showUserLogin() {
+        LayoutManager.getInstance().getViewport().mask("Session Timeout", 
+                    SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString()); 
+        this.loginWidget = new LoginWidget(null);
     }
+    
 }

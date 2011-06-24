@@ -78,6 +78,8 @@ public class SecurityService implements ISecurityService {
 
     private void storeUserInSession(GPUser user, HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
+        //TODO: Set the right time to way before session interrupt
+        //session.setMaxInactiveInterval(10);
         session.setAttribute(SaveStatus.EnumSaveStatus.USER_LOGGED.getValue(), user);
     }
 
@@ -92,8 +94,7 @@ public class SecurityService implements ISecurityService {
     }
 
     public GPUser loginFromSessionServer(HttpServletRequest httpServletRequest) {
-        GPUser user = getUserAlreadyFromSession(httpServletRequest);
-        return user;
+        return getUserAlreadyFromSession(httpServletRequest);
     }
 
     public void logout(HttpServletRequest httpServletRequest) {

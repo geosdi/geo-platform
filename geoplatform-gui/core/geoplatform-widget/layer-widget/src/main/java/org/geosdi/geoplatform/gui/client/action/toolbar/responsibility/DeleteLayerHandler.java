@@ -95,7 +95,7 @@ public class DeleteLayerHandler extends DeleteRequestHandler {
 
     @Override
     public void displayMessage() {
-        LayoutManager.get().getStatusMap().setStatus(
+        LayoutManager.getInstance().getStatusMap().setStatus(
                 "The selected layer was deleted succesfully",
                 EnumSearchStatus.STATUS_SEARCH.toString());
     }
@@ -118,7 +118,7 @@ public class DeleteLayerHandler extends DeleteRequestHandler {
             @Override
             public void onSuccess(Boolean result) {
                 GPLayerSaveCache.getInstance().remove(memento);
-                LayoutManager.get().getStatusMap().setStatus(
+                LayoutManager.getInstance().getStatusMap().setStatus(
                         "Layer deleted successfully.",
                         EnumSearchStatus.STATUS_SEARCH.toString());
                 LayerHandlerManager.fireEvent(peekCacheEvent);

@@ -47,34 +47,31 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 public class GPHandlerManager {
 
     private GPEventBus eventBus;
-    private static GPHandlerManager INSTANCE;
+    private static GPHandlerManager INSTANCE = new GPHandlerManager();
 
     private GPHandlerManager() {
         this.eventBus = new GPEventBusImpl();
     }
 
-    public static GPHandlerManager get() {
-        if (INSTANCE == null) {
-            INSTANCE = new GPHandlerManager();
-        }
+    public static GPHandlerManager getInstance() {
         return INSTANCE;
     }
 
     public static <T extends EventHandler> HandlerRegistration addHandler(
             Type<T> type, T handler) {
-        return get().eventBus.addHandler(type, handler);
+        return getInstance().eventBus.addHandler(type, handler);
     }
 
     public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
             Type<T> type, Object source, T handler) {
-        return get().eventBus.addHandlerToSource(type, source, handler);
+        return getInstance().eventBus.addHandlerToSource(type, source, handler);
     }
 
     public static void fireEvent(GwtEvent<?> event) {
-        get().eventBus.fireEvent(event);
+        getInstance().eventBus.fireEvent(event);
     }
 
     public static void fireEventFromSource(GwtEvent<?> event, Object source) {
-        get().eventBus.fireEventFromSource(event, source);
+        getInstance().eventBus.fireEventFromSource(event, source);
     }
 }

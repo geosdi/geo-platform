@@ -84,7 +84,7 @@ public class GPCapabilitiesWidget extends Window {
 
     private void initializeWindow() {
         super.setSize(600, 500);
-        super.setHeading("Server Cababilities");
+        super.setHeading("Server Capabilities");
         setResizable(false);
 
         addWindowListener(new WindowListener() {

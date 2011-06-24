@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tree.expander;
 
+import com.extjs.gxt.ui.client.data.TreeModel;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
@@ -50,7 +50,7 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPTreeExpanderNotifier<T extends GPBeanTreeModel> {
+public abstract class GPTreeExpanderNotifier<T extends TreeModel> {
 
     protected TreePanel tree;
     protected Listener executor;

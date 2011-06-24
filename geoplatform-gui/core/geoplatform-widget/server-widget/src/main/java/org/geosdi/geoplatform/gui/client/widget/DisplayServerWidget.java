@@ -209,7 +209,7 @@ public class DisplayServerWidget {
      */
     private void changeSelection(GPServerBeanModel selected) {
         this.gridWidget.cleanComponentForSelection();
-        LayoutManager.get().getStatusMap().setBusy("Loading Layers.....");
+        LayoutManager.getInstance().getStatusMap().setBusy("Loading Layers.....");
         this.gridWidget.maskGrid();
 
         this.loadcapabilities.checkSelectedServer(selected);
@@ -254,7 +254,7 @@ public class DisplayServerWidget {
     private void fillGrid(ArrayList<? extends GPLayerGrid> layers) {
         gridWidget.unMaskGrid();
         gridWidget.fillStore(layers);
-        LayoutManager.get().getStatusMap().setStatus(
+        LayoutManager.getInstance().getStatusMap().setStatus(
                 "Layers have been loaded correctly by the service",
                 EnumSearchStatus.STATUS_SEARCH.toString());
     }
@@ -284,7 +284,7 @@ public class DisplayServerWidget {
                         public void onFailure(Throwable caught) {
                             GeoPlatformMessage.errorMessage("Server Service",
                                     "An error occured loading layers.");
-                            LayoutManager.get().getStatusMap().setStatus(
+                            LayoutManager.getInstance().getStatusMap().setStatus(
                                     "An error occured loading layers from the service.",
                                     EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                             gridWidget.unMaskGrid();

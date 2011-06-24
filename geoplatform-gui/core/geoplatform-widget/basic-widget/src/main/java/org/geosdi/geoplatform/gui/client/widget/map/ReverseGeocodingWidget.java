@@ -72,7 +72,6 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
 	@Override
 	public void register() {
-		// TODO Auto-generated method stub
 		GeoPlatformMessage.infoMessage("Reverse Geocoding",
 				"Click on the map to have Information.");
 		this.mapWidget.getMap().addLayer(this.rGMarker.getMarkerLayer());
@@ -81,7 +80,6 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
 	@Override
 	public void unregister() {
-		// TODO Auto-generated method stub
 		GeoPlatformMessage.infoMessage("Reverse Geocoding",
 				"Reverse Geocoding Control Deactivated.");
 		this.clearWidgetStatus();
@@ -93,7 +91,6 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 	 * 
 	 */
 	public void clearWidgetStatus() {
-		// TODO Auto-generated method stub
 		this.mapWidget.getMap().removeLayer(this.rGMarker.getMarkerLayer(),
 				false);
 		this.mapWidget.getMap().removeMapClickListener(listener);
@@ -106,12 +103,10 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 	}
 
 	private void createListener() {
-		// TODO Auto-generated method stub
 		this.listener = new MapClickListener() {
 
 			@Override
 			public void onClick(MapClickEvent mapClickEvent) {
-				// TODO Auto-generated method stub
 				if (!busy) {
 					busy = true;
 					removeMapElements();

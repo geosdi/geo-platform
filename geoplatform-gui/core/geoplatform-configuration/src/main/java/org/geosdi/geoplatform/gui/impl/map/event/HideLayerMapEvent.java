@@ -61,13 +61,11 @@ public class HideLayerMapEvent extends GwtEvent<LayerMapChangedHandler> {
 
     @Override
     public Type<LayerMapChangedHandler> getAssociatedType() {
-        // TODO Auto-generated method stub
         return LayerMapChangedHandler.TYPE;
     }
 
     @Override
     protected void dispatch(LayerMapChangedHandler handler) {
-        // TODO Auto-generated method stub
         handler.onHideLayer(this.layerBean);
     }
 }

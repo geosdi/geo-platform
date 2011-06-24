@@ -45,7 +45,7 @@ public class GeoPlatformEvents {
 
     public static final EventType UPDATE_CENTER = new EventType();
     
-    public static final EventType INIT_GEO_PLATFORM_MOCK = new EventType();
+    public static final EventType INIT_GEO_PLATFORM = new EventType();
     
     public static final EventType APPLICATION_LOGIN = new EventType();
 

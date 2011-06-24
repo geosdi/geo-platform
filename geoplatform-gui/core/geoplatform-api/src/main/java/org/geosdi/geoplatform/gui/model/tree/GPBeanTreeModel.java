@@ -45,7 +45,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GPBeanTreeModel extends BaseTreeModel {
+public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode{
 
     /**
      *

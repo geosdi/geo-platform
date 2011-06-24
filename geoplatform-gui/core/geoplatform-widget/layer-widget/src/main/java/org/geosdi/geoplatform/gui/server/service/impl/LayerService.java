@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.geosdi.geoplatform.core.model.GPFolder;
@@ -51,13 +52,17 @@ import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.impl.GeoPlatformGlobal;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOConverter;
 import org.geosdi.geoplatform.request.RequestById;
-import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
@@ -95,7 +100,8 @@ public class LayerService implements ILayerService {
         if (userObj != null && userObj instanceof GPUser) {
             user = (GPUser) userObj;
         } else {
-            //TODO: go to log-in page
+            GPHandlerManager.fireEvent(new GPLoginEvent());
+            throw new GeoPlatformException("login");
         }
         return user;
     }

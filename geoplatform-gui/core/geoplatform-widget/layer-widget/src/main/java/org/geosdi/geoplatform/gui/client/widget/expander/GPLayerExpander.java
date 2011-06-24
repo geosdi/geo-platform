@@ -40,13 +40,14 @@ import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.AddFolderWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.tree.IGPNode;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPLayerExpander extends GPTreeExpanderNotifier<FolderTreeNode> {
+public class GPLayerExpander extends GPTreeExpanderNotifier<IGPNode> {
 
     private AddFolderWidget addFolderWidget;
 
@@ -62,13 +63,17 @@ public class GPLayerExpander extends GPTreeExpanderNotifier<FolderTreeNode> {
 
     @Override
     public void defineStatusBarCancelMessage() {
-        LayoutManager.get().getStatusMap().setStatus(
+        LayoutManager.getInstance().getStatusMap().setStatus(
                 "Add folder operation cancelled.",
                 EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
     }
 
     @Override
     public boolean checkNode() {
-        return ((FolderTreeNode) tree.getSelectionModel().getSelectedItem()).getId() == 0L;
+        boolean result = false;
+        if(tree.getSelectionModel().getSelectedItem() instanceof FolderTreeNode){
+            result = ((FolderTreeNode) tree.getSelectionModel().getSelectedItem()).getId() == 0L;
+        }
+        return result;
     }
 }

@@ -329,7 +329,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
      */
     public void updateMapSize() {
         this.map.updateSize();
-        LayoutManager.get().getCenter().layout();
+        LayoutManager.getInstance().getCenter().layout();
     }
 
     /**

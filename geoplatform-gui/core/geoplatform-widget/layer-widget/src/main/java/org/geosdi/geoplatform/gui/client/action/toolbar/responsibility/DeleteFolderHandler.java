@@ -95,7 +95,7 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
 
     @Override
     public void displayMessage() {
-        LayoutManager.get().getStatusMap().setStatus(
+        LayoutManager.getInstance().getStatusMap().setStatus(
                 "The selected folder was deleted succesfully",
                 EnumSearchStatus.STATUS_SEARCH.toString());
     }
@@ -117,7 +117,7 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
             @Override
             public void onSuccess(Boolean result) {
                 GPLayerSaveCache.getInstance().remove(memento);
-                LayoutManager.get().getStatusMap().setStatus(
+                LayoutManager.getInstance().getStatusMap().setStatus(
                         "Elements deleted successfully.",
                         EnumSearchStatus.STATUS_SEARCH.toString());
                 LayerHandlerManager.fireEvent(peekCacheEvent);

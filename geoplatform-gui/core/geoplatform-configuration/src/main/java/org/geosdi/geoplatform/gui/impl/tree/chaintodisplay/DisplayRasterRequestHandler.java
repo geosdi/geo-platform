@@ -52,7 +52,6 @@ public class DisplayRasterRequestHandler extends AbstractRequestHandler {
 	 */
 	public DisplayRasterRequestHandler(GPMapLayersStore<?, ?> theStore) {
 		super(theStore);
-		// TODO Auto-generated constructor stub
 	}
 
 	/*

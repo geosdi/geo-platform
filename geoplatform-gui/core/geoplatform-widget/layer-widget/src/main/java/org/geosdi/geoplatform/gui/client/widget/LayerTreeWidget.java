@@ -133,7 +133,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 //            store.add(root, true);
 //            initialized = true;
 
-            LayoutManager.get().getStatusMap().setBusy(
+            LayoutManager.getInstance().getStatusMap().setBusy(
                     "Loading tree elements: please, wait untill contents fully loads.");
             LayerRemoteImpl.Util.getInstance().loadUserFolders(new AsyncCallback<ArrayList<GPFolderClientInfo>>() {
 
@@ -143,7 +143,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                                     "An error occurred while making the requested connection.\n"
                                     + "Verify network connections and try again."
                                     + "\nIf the problem persists contact your system administrator.");
-                            LayoutManager.get().getStatusMap().setStatus(
+                            LayoutManager.getInstance().getStatusMap().setStatus(
                                     "Error loading tree elements.",
                                     EnumSearchStatus.STATUS_NO_SEARCH.toString());
                             System.out.println("Error loading tree elements: " + caught.toString()
@@ -158,7 +158,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                             visitorDisplay.enableCheckedComponent(root);
                             initialized = true;
                             tree.setExpanded(root, true);
-                            LayoutManager.get().getStatusMap().setStatus(
+                            LayoutManager.getInstance().getStatusMap().setStatus(
                                     "Tree elements loaded successfully.",
                                     EnumSearchStatus.STATUS_SEARCH.toString());
                         }
@@ -356,7 +356,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                     final VisitorPosition visitorPosition = new VisitorPosition();
                     final FolderTreeNode parentFolder = (FolderTreeNode) be.getItem();
                     parentFolder.setLoading(true);
-                    LayoutManager.get().getStatusMap().setBusy(
+                    LayoutManager.getInstance().getStatusMap().setBusy(
                             "Loading tree elements: please, wait untill contents fully loads.");
 
                     LayerRemoteImpl.Util.getInstance().loadFolderElements(
@@ -369,7 +369,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                                     "An error occurred while making the requested connection.\n"
                                     + "Verify network connections and try again.\n"
                                     + "If the problem persists contact your system administrator.");
-                            LayoutManager.get().getStatusMap().setStatus(
+                            LayoutManager.getInstance().getStatusMap().setStatus(
                                     "Error loading tree elements.",
                                     EnumSearchStatus.STATUS_NO_SEARCH.toString());
                             System.out.println("Error loading tree elements: " + caught.toString()
@@ -392,7 +392,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                             parentFolder.setLoaded(true);
                             tree.refresh(parentFolder);
                             tree.fireEvent(GeoPlatformEvents.GP_NODE_EXPANDED);
-                            LayoutManager.get().getStatusMap().setStatus(
+                            LayoutManager.getInstance().getStatusMap().setStatus(
                                     "Tree elements loaded successfully.",
                                     EnumSearchStatus.STATUS_SEARCH.toString());
                         }

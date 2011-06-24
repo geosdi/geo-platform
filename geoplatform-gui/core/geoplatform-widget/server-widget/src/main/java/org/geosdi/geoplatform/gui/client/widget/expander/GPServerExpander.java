@@ -77,7 +77,7 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
 
     @Override
     public void defineStatusBarCancelMessage() {
-        LayoutManager.get().getStatusMap().setStatus(
+        LayoutManager.getInstance().getStatusMap().setStatus(
                 "Add folder operation cancelled.",
                 EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
     }

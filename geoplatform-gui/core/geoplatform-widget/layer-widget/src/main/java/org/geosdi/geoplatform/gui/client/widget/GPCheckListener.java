@@ -108,7 +108,7 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
                 @Override
                 public void onSuccess(Boolean result) {
                     GPLayerSaveCache.getInstance().remove(memento);
-                    LayoutManager.get().getStatusMap().setStatus(
+                    LayoutManager.getInstance().getStatusMap().setStatus(
                             "Save Check Folder Operation completed successfully.",
                             EnumSearchStatus.STATUS_SEARCH.toString());
                     LayerHandlerManager.fireEvent(peekCacheEvent);
@@ -127,7 +127,7 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
                 @Override
                 public void onSuccess(Boolean result) {
                     GPLayerSaveCache.getInstance().remove(memento);
-                    LayoutManager.get().getStatusMap().setStatus(
+                    LayoutManager.getInstance().getStatusMap().setStatus(
                             "Save Check Layer Operation completed successfully.",
                             EnumSearchStatus.STATUS_SEARCH.toString());
                     LayerHandlerManager.fireEvent(peekCacheEvent);

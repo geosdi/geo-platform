@@ -96,8 +96,8 @@ public class GPLoadListener extends LoadListener {
         };
 
         timer.schedule(WAITING_TIME);
-        this.tmpStatus = LayoutManager.get().getStatusMap().getText();
-        LayoutManager.get().getStatusMap().setBusy(
+        this.tmpStatus = LayoutManager.getInstance().getStatusMap().getText();
+        LayoutManager.getInstance().getStatusMap().setBusy(
                 "Loading tree elements: please, wait untill contents fully loads.");
         //GeoPlatformMessage.infoMessage("Loading...", "Please wait untill contents fully loads.");
     }
@@ -105,7 +105,7 @@ public class GPLoadListener extends LoadListener {
     public void stopBeforeLoad() {
         this.isBusy = false;
         this.timer.cancel();
-        LayoutManager.get().getStatusMap().setStatus(this.tmpStatus, null);
+        LayoutManager.getInstance().getStatusMap().setStatus(this.tmpStatus, null);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class GPLoadListener extends LoadListener {
         if (this.layerTreeWidget.getSelectedFolder() instanceof FolderTreeNode) {
             ((FolderTreeNode) this.layerTreeWidget.getSelectedFolder()).setLoaded(true);
         }
-        LayoutManager.get().getStatusMap().setStatus(
+        LayoutManager.getInstance().getStatusMap().setStatus(
                 "Tree elements loaded successfully.", null);
         //GeoPlatformMessage.infoMessage("Load completed", "Operation completed successfully.");
     }
@@ -135,7 +135,7 @@ public class GPLoadListener extends LoadListener {
         GeoPlatformMessage.errorMessage("Error loading",
                 "An error occurred while making the requested connection.\n"
                 + "Verify network connections and try again.\nIf the problem persists contact your system administrator.");
-        LayoutManager.get().getStatusMap().setStatus(
+        LayoutManager.getInstance().getStatusMap().setStatus(
                 "Error loading tree elements.", null);
         System.out.println("Error loading tree elements: " + le.exception
                 + " data: " + le.getData());

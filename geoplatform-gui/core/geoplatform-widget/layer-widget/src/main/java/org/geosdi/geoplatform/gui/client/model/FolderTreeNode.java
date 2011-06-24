@@ -47,6 +47,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorModelConverter;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
+import org.geosdi.geoplatform.gui.model.tree.IGPNode;
 import org.geosdi.geoplatform.gui.observable.Observable;
 
 /**
@@ -54,7 +55,7 @@ import org.geosdi.geoplatform.gui.observable.Observable;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class FolderTreeNode extends AbstractFolderTreeNode {
+public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode{
 
     /**
      *

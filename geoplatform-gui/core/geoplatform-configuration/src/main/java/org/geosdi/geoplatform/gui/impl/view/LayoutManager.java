@@ -51,17 +51,14 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class LayoutManager extends GeoPlatformLayoutManager {
 
-    private static LayoutManager INSTANCE;
+    private static LayoutManager INSTANCE = new LayoutManager();
 
     /**
      * Build Singleton Instace
      * 
      * @return Instance Reference
      */
-    public static LayoutManager get() {
-        if (INSTANCE == null) {
-            INSTANCE = new LayoutManager();
-        }
+    public static LayoutManager getInstance() {
         return INSTANCE;
     }
 
@@ -71,9 +68,9 @@ public class LayoutManager extends GeoPlatformLayoutManager {
      * @param w 
      */
     public static void addComponentToCenter(Widget w) {
-        get().center.removeAll();
-        get().center.add(w);
-        get().center.layout();
+        getInstance().center.removeAll();
+        getInstance().center.add(w);
+        getInstance().center.layout();
         MapHandlerManager.fireEvent(new ScaleVisibleEvent(
                 w instanceof MapWidget ? true : false));
 
@@ -85,8 +82,8 @@ public class LayoutManager extends GeoPlatformLayoutManager {
      * @param w 
      */
     public static void addComponentToWest(Widget w) {
-        get().west.add(w);
-        get().west.layout();
+        getInstance().west.add(w);
+        getInstance().west.layout();
     }
 
     /**
@@ -95,8 +92,8 @@ public class LayoutManager extends GeoPlatformLayoutManager {
      * @param w 
      */
     public static void removeComponentFromWest(Widget w) {
-        get().west.remove(w);
-        get().west.layout();
+        getInstance().west.remove(w);
+        getInstance().west.layout();
     }
 
     /**
@@ -105,8 +102,8 @@ public class LayoutManager extends GeoPlatformLayoutManager {
      * @param w 
      */
     public static void addComponentToEast(Widget w) {
-        get().east.add(w);
-        get().east.layout();
+        getInstance().east.add(w);
+        getInstance().east.layout();
     }
 
     /**
@@ -115,8 +112,8 @@ public class LayoutManager extends GeoPlatformLayoutManager {
      * @param w 
      */
     public static void addComponentToNorth(Widget w) {
-        get().north.add(w);
-        get().north.layout();
+        getInstance().north.add(w);
+        getInstance().north.layout();
     }
 
     /**
@@ -125,8 +122,8 @@ public class LayoutManager extends GeoPlatformLayoutManager {
      * @param w 
      */
     public static void addComponentToSouth(Widget w) {
-        get().south.add(w);
-        get().south.layout();
+        getInstance().south.add(w);
+        getInstance().south.layout();
     }
 
     /**
@@ -136,9 +133,9 @@ public class LayoutManager extends GeoPlatformLayoutManager {
      */
     public static void manageWest(boolean visible) {
         if (visible) {
-            get().west.show();
+            getInstance().west.show();
         } else {
-            get().west.hide();
+            getInstance().west.hide();
         }
         Dispatcher.forwardEvent(GeoPlatformEvents.UPDATE_CENTER);
     }
@@ -147,7 +144,7 @@ public class LayoutManager extends GeoPlatformLayoutManager {
      * Layout West Panel
      */
     public static void layoutWest() {
-        get().west.layout();
+        getInstance().west.layout();
     }
 
     /**
@@ -156,7 +153,7 @@ public class LayoutManager extends GeoPlatformLayoutManager {
      * @return boolean
      */
     public static boolean isWestVisible() {
-        return get().west.isVisible();
+        return getInstance().west.isVisible();
     }
 
     /**
@@ -165,7 +162,7 @@ public class LayoutManager extends GeoPlatformLayoutManager {
      * @return boolean
      */
     public static boolean isOneWidgetVisibleAtWest() {
-        for (Component c : get().west.getItems()) {
+        for (Component c : getInstance().west.getItems()) {
             if (c.isVisible()) {
                 return true;
             }

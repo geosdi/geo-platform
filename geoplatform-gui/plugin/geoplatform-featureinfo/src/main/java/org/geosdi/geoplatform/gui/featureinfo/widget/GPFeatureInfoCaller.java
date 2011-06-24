@@ -70,7 +70,7 @@ public class GPFeatureInfoCaller {
     }
 
     private void loadUserServers() {
-        LayoutManager.get().getStatusMap().setStatus("Loading Feature Info Data Sources.",
+        LayoutManager.getInstance().getStatusMap().setStatus("Loading Feature Info Data Sources.",
                 EnumSearchStatus.STATUS_SEARCH.toString());
         GeoPlatformOGCRemote.Util.getInstance().findDistinctLayersDataSource(new AsyncCallback<ArrayList<String>>() {
 
@@ -88,7 +88,7 @@ public class GPFeatureInfoCaller {
                 }
                 activateFeatureInfoControl();
                 loaded = true;
-                LayoutManager.get().getStatusMap().setStatus("Feature Info Function loaded succesfully.",
+                LayoutManager.getInstance().getStatusMap().setStatus("Feature Info Function loaded succesfully.",
                 EnumSearchStatus.STATUS_SEARCH.toString());
             }
         });

@@ -55,7 +55,6 @@ public abstract class GeoPlatformController extends Controller {
      */
     @Override
     public void handleEvent(AppEvent event) {
-        // TODO Auto-generated method stub
         forwardToView(view, event);
     }
 }

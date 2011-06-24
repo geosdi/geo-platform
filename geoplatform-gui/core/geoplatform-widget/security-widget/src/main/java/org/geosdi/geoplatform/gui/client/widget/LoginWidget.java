@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.core.TemplatesCache.Cache.Key;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.EventType;
@@ -43,12 +44,11 @@ import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Dialog;
-import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
-import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
@@ -91,11 +91,19 @@ public class LoginWidget extends Dialog {
 
         KeyListener keyListener = new KeyListener() {
 
+            @Override
+            public void componentKeyPress(ComponentEvent event) {
+                if (event.getKeyCode() == 13 && login.isEnabled()) {
+                    onSubmit();
+                }
+                super.componentKeyPress(event);
+            }
+
+            @Override
             public void componentKeyUp(ComponentEvent event) {
                 validate();
             }
         };
-
         userName = new TextField<String>();
         userName.setFieldLabel("Username");
         userName.addKeyListener(keyListener);
@@ -110,6 +118,7 @@ public class LoginWidget extends Dialog {
         setFocusWidget(userName);
     }
 
+    @Override
     protected void createButtons() {
         super.createButtons();
         status = new LoginStatus();
@@ -165,14 +174,14 @@ public class LoginWidget extends Dialog {
             @Override
             public void onFailure(Throwable caught) {
                 errorConnection();
-                status.setStatus(LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.getValue(), 
+                status.setStatus(LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.getValue(),
                         LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.getValue());
                 GeoPlatformMessage.infoMessage("Login Error", caught.getMessage());
             }
 
             @Override
             public void onSuccess(Object result) {
-                status.setStatus(LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(), 
+                status.setStatus(LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
                         LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
                 Dispatcher.forwardEvent(eventOnSuccess);
                 hide();
@@ -187,8 +196,7 @@ public class LoginWidget extends Dialog {
     }
 
     protected void validate() {
-        login.setEnabled(hasValue(userName) && hasValue(password)
-                && password.getValue().length() > 3);
+        login.setEnabled(hasValue(userName) && hasValue(password));
     }
 
     /**

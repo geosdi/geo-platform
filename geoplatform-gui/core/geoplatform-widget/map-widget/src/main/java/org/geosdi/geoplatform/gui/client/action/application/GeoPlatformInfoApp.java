@@ -47,12 +47,10 @@ public class GeoPlatformInfoApp extends ToolbarApplicationAction {
 
 	public GeoPlatformInfoApp() {
 		super("geoSDI", null);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
 		
 	}
 

@@ -49,7 +49,7 @@ public class StartupConfigurationMock implements IStartupConfigurationStrategy{
     
     @Override
     public void initGeoPlatformConfiguration() {
-        Dispatcher.forwardEvent(GeoPlatformEvents.INIT_GEO_PLATFORM_MOCK);
+        Dispatcher.forwardEvent(GeoPlatformEvents.INIT_GEO_PLATFORM);
     }
     
 }

@@ -35,23 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
-import com.extjs.gxt.ui.client.core.TemplatesCache.Cache.Key;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.EventType;
-import com.extjs.gxt.ui.client.event.KeyListener;
-import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.extjs.gxt.ui.client.widget.Dialog;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
-import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
+import org.geosdi.geoplatform.gui.client.widget.security.GPSecurityWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
 
@@ -59,96 +49,31 @@ import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoginWidget extends Dialog {
+public class LoginWidget extends GPSecurityWidget {
 
-    protected TextField<String> userName;
-    protected TextField<String> password;
-    protected Button reset;
-    protected Button login;
-    protected LoginStatus status;
+    private LoginStatus status;
     private EventType eventOnSuccess;
 
     /**
      * 
+     * @param eventOnSuccess 
      */
     public LoginWidget(EventType eventOnSuccess) {
+        super();
         this.eventOnSuccess = eventOnSuccess;
-        FormLayout layout = new FormLayout();
-        layout.setLabelWidth(90);
-        layout.setDefaultWidth(155);
-        setLayout(layout);
-
-        setButtonAlign(HorizontalAlignment.LEFT);
-        setButtons("");
-        setIcon(BasicWidgetResources.ICONS.search());
-        setHeading("Login Service");
-        setModal(true);
-        setBodyBorder(true);
-        setBodyStyle("padding: 8px;background: none");
-        setWidth(300);
-        setResizable(false);
-        setClosable(false);
-
-        KeyListener keyListener = new KeyListener() {
-
-            @Override
-            public void componentKeyPress(ComponentEvent event) {
-                if (event.getKeyCode() == 13 && login.isEnabled()) {
-                    onSubmit();
-                }
-                super.componentKeyPress(event);
-            }
-
-            @Override
-            public void componentKeyUp(ComponentEvent event) {
-                validate();
-            }
-        };
-        userName = new TextField<String>();
-        userName.setFieldLabel("Username");
-        userName.addKeyListener(keyListener);
-        add(userName);
-
-        password = new TextField<String>();
-        password.setPassword(true);
-        password.setFieldLabel("Password");
-        password.addKeyListener(keyListener);
-        add(password);
-
-        setFocusWidget(userName);
     }
 
     @Override
-    protected void createButtons() {
-        super.createButtons();
+    public void addStatusComponent() {
         status = new LoginStatus();
 
         status.setAutoWidth(true);
         getButtonBar().add(status);
 
         getButtonBar().add(new FillToolItem());
-
-        reset = new Button("Reset");
-        reset.addSelectionListener(new SelectionListener<ButtonEvent>() {
-
-            public void componentSelected(ButtonEvent ce) {
-                reset();
-            }
-        });
-
-        login = new Button("Login");
-        login.disable();
-        login.addSelectionListener(new SelectionListener<ButtonEvent>() {
-
-            public void componentSelected(ButtonEvent ce) {
-                onSubmit();
-            }
-        });
-
-        addButton(reset);
-        addButton(login);
     }
 
+    @Override
     public void reset() {
         userName.reset();
         password.reset();
@@ -165,42 +90,50 @@ public class LoginWidget extends Dialog {
         getButtonBar().enable();
     }
 
-    protected void onSubmit() {
+    @Override
+    public void onSubmit() {
         status.setBusy("please wait...");
         getButtonBar().disable();
         SecurityRemoteImpl.Util.getInstance().userLogin(this.userName.getValue(),
-                this.password.getValue(), new AsyncCallback() {
+                this.password.getValue(),
+                new AsyncCallback() {
+
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        errorConnection();
+                        status.setStatus(
+                                LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.getValue(),
+                                LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.getValue());
+                        GeoPlatformMessage.infoMessage("Login Error",
+                                caught.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(Object result) {
+                        status.setStatus(
+                                LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
+                                LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
+                        userScreen();
+                    }
+                });
+    }
+
+    private void userScreen() {
+        Timer t = new Timer() {
 
             @Override
-            public void onFailure(Throwable caught) {
-                errorConnection();
-                status.setStatus(LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.getValue(),
-                        LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.getValue());
-                GeoPlatformMessage.infoMessage("Login Error", caught.getMessage());
-            }
-
-            @Override
-            public void onSuccess(Object result) {
-                status.setStatus(LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
-                        LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
+            public void run() {
                 Dispatcher.forwardEvent(eventOnSuccess);
                 hide();
             }
-        });
-        /*Dispatcher.forwardEvent(DGWATCHEvents.LOGIN,
-        new String[]{userName.getValue(), password.getValue()});*/
-    }
-
-    protected boolean hasValue(TextField<String> field) {
-        return field.getValue() != null && field.getValue().length() > 0;
-    }
-
-    protected void validate() {
-        login.setEnabled(hasValue(userName) && hasValue(password));
+        };
+        t.schedule(100);
     }
 
     /**
      * Set the correct Status Iconn Style
+     * @param status
+     * @param message  
      */
     public void setStatusLoginFinder(EnumLoginStatus status,
             EnumLoginStatus message) {

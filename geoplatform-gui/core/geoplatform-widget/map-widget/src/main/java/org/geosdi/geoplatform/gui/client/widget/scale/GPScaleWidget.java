@@ -107,7 +107,6 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
 
     private static GPScaleWidget pop() {
         if (instance == null) {
-            System.out.println("CODICE ESEGUITO ********************************");
             instance = new GPScaleWidget();
         }
         return instance;
@@ -123,10 +122,6 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
         this.config = config;
         onShowInfo();
     }
-
-//    private static void push(GPScaleWidget scale) {
-//        infoStack.push(scale);
-//    }
 
     protected void onShowInfo() {
         RootPanel.get().add(this);
@@ -157,9 +152,6 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
         comboScale.setTriggerAction(TriggerAction.ALL);
 
         add(comboScale);
-
-//        level = firstAvail();
-//        slots.add(level, this);
 
         Point p = position();
         el().setLeftTop(p.x, p.y);

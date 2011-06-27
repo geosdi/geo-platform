@@ -68,21 +68,19 @@ public abstract class GeoPlatformLayoutManager {
     protected Status statusMap;
 
     public GeoPlatformLayoutManager() {
-        intiLayoutManager();
+        initLayoutManager();
     }
 
     /**
      * Build The Main GeoPlatform UI
      */
-    private void intiLayoutManager() {
-        // TODO Auto-generated method stub
-        viewport = new Viewport();
-        viewport.setLayout(new BorderLayout());
-
-        createEast();
-        createWest();
-        createCenter();
-        createSouth();
+    private void initLayoutManager() {
+            viewport = new Viewport();
+            viewport.setLayout(new BorderLayout());
+            createEast();
+            createWest();
+            createCenter();
+            createSouth();
     }
 
     /**
@@ -152,7 +150,7 @@ public abstract class GeoPlatformLayoutManager {
                 MapHandlerManager.fireEvent(new ScaleChangeEvent(XDOM.getViewportSize()));
             }
         });
-        
+
         ToolBar toolBar = new ToolBar();
 
         statusMap = new Status();
@@ -160,7 +158,7 @@ public abstract class GeoPlatformLayoutManager {
         statusMap.setWidth(150);
         toolBar.add(statusMap);
         toolBar.add(new FillToolItem());
-        
+
         center.setBottomComponent(toolBar);
 
         viewport.add(center, data);
@@ -230,6 +228,4 @@ public abstract class GeoPlatformLayoutManager {
     public Status getStatusMap() {
         return statusMap;
     }
-    
-    
 }

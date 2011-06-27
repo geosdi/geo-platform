@@ -68,7 +68,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
 
-    private static GPScaleWidget instance;
+    private static GPScaleWidget instance = new GPScaleWidget();
     protected GPScaleConfig config;
     protected int level;
     private Size size;
@@ -106,9 +106,6 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
     }
 
     private static GPScaleWidget pop() {
-        if (instance == null) {
-            instance = new GPScaleWidget();
-        }
         return instance;
     }
 

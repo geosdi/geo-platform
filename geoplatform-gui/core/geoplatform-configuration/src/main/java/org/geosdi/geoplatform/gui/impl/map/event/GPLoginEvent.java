@@ -35,10 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.impl.map.event;
 
-import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.impl.map.event.GPLoginHandler;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -46,6 +44,9 @@ import org.geosdi.geoplatform.gui.impl.map.event.GPLoginHandler;
  */
 public class GPLoginEvent extends GwtEvent<GPLoginHandler> {
 
+    public GPLoginEvent() {
+    }
+    
     @Override
     public Type<GPLoginHandler> getAssociatedType() {
         return GPLoginHandler.TYPE;

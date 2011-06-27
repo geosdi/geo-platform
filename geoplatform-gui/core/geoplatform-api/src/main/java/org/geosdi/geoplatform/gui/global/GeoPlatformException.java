@@ -49,6 +49,7 @@ public class GeoPlatformException extends RuntimeException implements
      */
     private static final long serialVersionUID = -573700062406606079L;
     private String message;
+    private Throwable e;
 
     public GeoPlatformException() {
     }
@@ -57,12 +58,14 @@ public class GeoPlatformException extends RuntimeException implements
         this.message = message;
     }
 
-    public GeoPlatformException(Exception e) {
-        super(e);
+    @Override
+    public Throwable getCause() {
+        return e;
     }
 
     public GeoPlatformException(Throwable e) {
         super(e);
+        this.e = e;
     }
 
     @Override

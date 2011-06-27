@@ -74,6 +74,7 @@ import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
 import org.geosdi.geoplatform.gui.client.widget.tree.GeoPlatformAsyncTreeWidget;
+import org.geosdi.geoplatform.gui.model.tree.IGPNode;
 import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 
 /**
@@ -287,7 +288,7 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
             @Override
             public boolean hasChildren(GPBeanTreeModel element) {
                 boolean condition = false;
-                if (element instanceof FolderTreeNode || element instanceof GPRootTreeNode) {
+                if (element instanceof IGPNode) {
                     condition = true;
                 }
                 //System.out.println("Node hasChildren: " + condition);

@@ -55,6 +55,7 @@ public class UserLoginManager implements GPLoginHandler{
 
     @Override
     public void showUserLogin() {
+        System.out.println("UserLoginManager: Calling show User Login");
         LayoutManager.getInstance().getViewport().mask("Session Timeout", 
                     SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString()); 
         this.loginWidget = new LoginWidget(null);

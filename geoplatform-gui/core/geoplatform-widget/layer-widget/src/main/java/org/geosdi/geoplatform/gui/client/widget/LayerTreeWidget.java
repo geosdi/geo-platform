@@ -78,14 +78,17 @@ import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
-import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.store.GPTreeStoreWidget;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.client.exception.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.tree.IGPNode;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
@@ -95,7 +98,7 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  * 
  */
 public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
-    
+
     private GPTreeStoreWidget treeStore;
     private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(this.tree);
     TreePanelDragSource dragSource;
@@ -109,7 +112,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
         super();
         this.buildRoot();
         this.setTreePanelProperties();
-        this.treeStore = new GPTreeStoreWidget(this.tree); 
+        this.treeStore = new GPTreeStoreWidget(this.tree);
         //TODO: After toolbar implementation remove this method
         this.addMenuAddElement();
     }
@@ -137,32 +140,38 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
                     "Loading tree elements: please, wait untill contents fully loads.");
             LayerRemoteImpl.Util.getInstance().loadUserFolders(new AsyncCallback<ArrayList<GPFolderClientInfo>>() {
 
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            GeoPlatformMessage.errorMessage("Error loading",
-                                    "An error occurred while making the requested connection.\n"
-                                    + "Verify network connections and try again."
-                                    + "\nIf the problem persists contact your system administrator.");
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "Error loading tree elements.",
-                                    EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                            System.out.println("Error loading tree elements: " + caught.toString()
-                                    + " data: " + caught.getMessage());
-                        }
+                @Override
+                public void onFailure(Throwable caught) {
+                    System.out.println("On failure: " + caught.getCause());
+                    System.out.println("On failure: " + caught);
+                    if (caught.getCause() instanceof GPSessionTimeout) {
+                        GPHandlerManager.fireEvent(new GPLoginEvent());
+                    } else {
+                        GeoPlatformMessage.errorMessage("Error loading",
+                                "An error occurred while making the requested connection.\n"
+                                + "Verify network connections and try again."
+                                + "\nIf the problem persists contact your system administrator.");
+                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                "Error loading tree elements.",
+                                EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                        System.out.println("Error loading tree elements: " + caught.toString()
+                                + " data: " + caught.getMessage());
+                    }
+                }
 
-                        @Override
-                        public void onSuccess(
-                                ArrayList<GPFolderClientInfo> result) {
-                            root.modelConverter(result);
-                            store.add(root, true);
-                            visitorDisplay.enableCheckedComponent(root);
-                            initialized = true;
-                            tree.setExpanded(root, true);
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "Tree elements loaded successfully.",
-                                    EnumSearchStatus.STATUS_SEARCH.toString());
-                        }
-                    });
+                @Override
+                public void onSuccess(
+                        ArrayList<GPFolderClientInfo> result) {
+                    root.modelConverter(result);
+                    store.add(root, true);
+                    visitorDisplay.enableCheckedComponent(root);
+                    initialized = true;
+                    tree.setExpanded(root, true);
+                    LayoutManager.getInstance().getStatusMap().setStatus(
+                            "Tree elements loaded successfully.",
+                            EnumSearchStatus.STATUS_SEARCH.toString());
+                }
+            });
         }
     }
 
@@ -305,32 +314,32 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
         exportToPDF.setIcon(LayerResources.ICONS.exportToPDF());
         exportToPDF.addSelectionListener(new ExportoToPDF(tree));
         contextMenu.add(exportToPDF);
-        
+
         MenuItem exportToTIFF = new MenuItem();
         exportToTIFF.setText("Export To TIFF");
         exportToTIFF.setIcon(LayerResources.ICONS.exportToTIFF());
         exportToTIFF.addSelectionListener(new ExportoToTIFF(tree));
         contextMenu.add(exportToTIFF);
-        
-        
+
+
         MenuItem exportToShpZip = new MenuItem();
         exportToShpZip.setText("Export To Shp-Zip");
         exportToShpZip.setIcon(LayerResources.ICONS.exportToShpZip());
         exportToShpZip.addSelectionListener(new ExportoToShpZip(tree));
         contextMenu.add(exportToShpZip);
-        
+
         MenuItem layerProperties = new MenuItem();
         layerProperties.setText("Layer Properties");
         layerProperties.setIcon(LayerResources.ICONS.layerProperties());
         layerProperties.addSelectionListener(new ShowLayerProperties(tree));
         contextMenu.add(layerProperties);
-        
+
 //        MenuItem exportToGML = new MenuItem();
 //        exportToGML.setText("Export To GML");
 //        exportToGML.setIcon(LayerResources.ICONS.exportToGML());
 //        exportToGML.addSelectionListener(new ExportoToGML(tree));
 //        contextMenu.add(exportToGML);
-        
+
         this.tree.setContextMenu(contextMenu);
     }
 
@@ -340,7 +349,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel> {
 
             @Override
             protected boolean hasChildren(ModelData model) {
-                return model instanceof FolderTreeNode || model instanceof GPRootTreeNode;
+                return model instanceof IGPNode;
             }
         };
     }

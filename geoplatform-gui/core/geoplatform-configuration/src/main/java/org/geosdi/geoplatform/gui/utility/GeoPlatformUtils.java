@@ -44,13 +44,10 @@ import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
  */
 public class GeoPlatformUtils {
 
-    private static GeoPlatformUtils INSTANCE;
+    private static GeoPlatformUtils INSTANCE = new GeoPlatformUtils();
     private IGeoPlatformGlobal globalConfiguration;
 
     public static GeoPlatformUtils getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new GeoPlatformUtils();
-        }
         return INSTANCE;
     }
 

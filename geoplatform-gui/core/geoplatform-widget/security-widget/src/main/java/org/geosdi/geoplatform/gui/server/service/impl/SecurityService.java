@@ -80,7 +80,7 @@ public class SecurityService implements ISecurityService {
     private void storeUserInSession(GPUser user, HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
-        session.setMaxInactiveInterval(10);
+        //session.setMaxInactiveInterval(10);
         session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), user);
     }
 

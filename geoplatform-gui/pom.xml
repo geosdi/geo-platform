@@ -42,6 +42,7 @@
     <modules>
         <module>core</module>
         <module>plugin</module>
+        <module>extensions</module>
         <module>application</module>
     </modules>
 

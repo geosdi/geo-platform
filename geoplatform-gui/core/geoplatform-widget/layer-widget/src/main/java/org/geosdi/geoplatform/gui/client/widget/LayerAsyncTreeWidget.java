@@ -66,15 +66,12 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.action.menu.ExportoToGML;
-import org.geosdi.geoplatform.gui.client.action.menu.ExportoToKML;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
 import org.geosdi.geoplatform.gui.client.widget.tree.GeoPlatformAsyncTreeWidget;
-import org.geosdi.geoplatform.gui.model.tree.IGPNode;
 import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 
 /**
@@ -288,7 +285,7 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
             @Override
             public boolean hasChildren(GPBeanTreeModel element) {
                 boolean condition = false;
-                if (element instanceof IGPNode) {
+                if (element instanceof FolderTreeNode || element instanceof GPRootTreeNode) {
                     condition = true;
                 }
                 //System.out.println("Node hasChildren: " + condition);

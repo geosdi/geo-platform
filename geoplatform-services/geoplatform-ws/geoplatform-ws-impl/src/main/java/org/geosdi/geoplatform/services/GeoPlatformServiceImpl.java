@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import java.util.List;
 import javax.jws.WebService;
+import javax.xml.namespace.QName;
 import javax.xml.ws.soap.SOAPFaultException;
 import org.apache.cxf.binding.soap.SoapFault;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
@@ -305,7 +306,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
             }
             System.out.println("### user: " + user.toString());
             if (!user.verify(password)) {
-                throw new SoapFault("Specified password was incorrect", null);
+                throw new SoapFault("Specified password was incorrect", new QName("password"));
             }
         } catch (NoSuchAlgorithmException e) {
             throw new SoapFault(e.getMessage(), null);

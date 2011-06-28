@@ -186,6 +186,9 @@ public abstract class BaseDAOTest {
         this.insertUser(nameSuperUser, roleAdmin, roleUser);
         this.insertUser("admin_acl_test", roleAdmin);
         this.insertUser("user_acl_test", roleUser);
+        // User for GUI test
+        GPUser admin = this.insertUser("admin", roleAdmin);
+        GPUser user = this.insertUser("user", roleUser);
     }
 
     protected GPUser insertUser(String name, String... roles) {
@@ -221,7 +224,11 @@ public abstract class BaseDAOTest {
         user.setUsername(username);
         user.setEmailAddress(username + "@test");
         user.setEnabled(true);
-        user.setPassword(Utility.md5hash("pwd_" + username));
+        if (user.getUsername().equals("user") || user.getUsername().equals("admin")) {
+            user.setPassword(username);
+        } else {
+            user.setPassword("pwd_" + username);
+        }
         user.setSendEmail(true);
         return user;
     }
@@ -273,7 +280,7 @@ public abstract class BaseDAOTest {
 
         // ---> "my raster" --> "IGM"
         GPFolder folderIGM = new GPFolder();
-        folderIGM.setName("IGM");       
+        folderIGM.setName("IGM");
         folderIGM.setOwner(user);
         folderIGM.setParent(folderRaster);
         folderIGM.setPosition(position);

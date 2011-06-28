@@ -40,6 +40,8 @@ import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.event.ILoginManager;
+import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
 import org.geosdi.geoplatform.gui.client.widget.security.GPSecurityWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -49,7 +51,7 @@ import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoginWidget extends GPSecurityWidget {
+public class LoginWidget extends GPSecurityWidget implements ILoginManager{
 
     private LoginStatus status;
     private EventType eventOnSuccess;
@@ -61,6 +63,7 @@ public class LoginWidget extends GPSecurityWidget {
     public LoginWidget(EventType eventOnSuccess) {
         super();
         this.eventOnSuccess = eventOnSuccess;
+        this.generateLoginManager();
     }
 
     @Override
@@ -140,5 +143,10 @@ public class LoginWidget extends GPSecurityWidget {
         this.status.setIconStyle(status.getValue());
         this.status.setText(message.getValue());
         getButtonBar().enable();
+    }
+
+    @Override
+    public void generateLoginManager() {
+        UserLoginManager loginManager = new UserLoginManager();
     }
 }

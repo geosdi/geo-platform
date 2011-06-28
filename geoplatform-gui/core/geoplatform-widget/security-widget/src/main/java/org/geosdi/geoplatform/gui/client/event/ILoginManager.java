@@ -35,31 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.event;
 
-import org.geosdi.geoplatform.gui.client.widget.LoginWidget;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
-import org.geosdi.geoplatform.gui.impl.map.event.GPLoginHandler;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class UserLoginManager implements GPLoginHandler{
+public interface ILoginManager {
     
-    private LoginWidget loginWidget;
-    
-    public UserLoginManager() {
-        GPHandlerManager.addHandler(TYPE, this);
-    }
-
-    @Override
-    public void showUserLogin() {
-        System.out.println("UserLoginManager: Calling show User Login");
-        LayoutManager.getInstance().getViewport().mask("Session Timeout", 
-                    SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString()); 
-        this.loginWidget = new LoginWidget(null);
-        this.loginWidget.show();
-    }
+    public void generateLoginManager();
     
 }

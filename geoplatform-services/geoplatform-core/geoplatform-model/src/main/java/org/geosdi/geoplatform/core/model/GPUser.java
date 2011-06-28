@@ -159,7 +159,9 @@ public class GPUser implements Serializable, UserDetails {
      *            the password to set
      */
     public void setPassword(String password) {
-        this.password = password;
+        System.out.println("Wawawa " + password);
+        this.password = Utility.md5hash(password);
+        System.out.println("Wawawa hashed " + this.password);
     }
 
     /**

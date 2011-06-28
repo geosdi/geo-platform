@@ -44,7 +44,10 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public class GPLoginEvent extends GwtEvent<GPLoginHandler> {
 
-    public GPLoginEvent() {
+    private GwtEvent event;
+    
+    public GPLoginEvent(GwtEvent event) {
+        this.event = event;
     }
     
     @Override
@@ -54,7 +57,7 @@ public class GPLoginEvent extends GwtEvent<GPLoginHandler> {
 
     @Override
     protected void dispatch(GPLoginHandler handler) {
-        handler.showUserLogin();
+        handler.showUserLogin(event);
     }
     
 }

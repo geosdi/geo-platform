@@ -35,8 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.event;
 
+import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.client.widget.LoginWidget;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginHandler;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
@@ -45,21 +47,24 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class UserLoginManager implements GPLoginHandler{
-    
+public class UserLoginManager implements GPLoginHandler {
+
     private LoginWidget loginWidget;
-    
-    public UserLoginManager() {
+
+    public UserLoginManager(LoginWidget loginWidget) {
+        this.loginWidget = loginWidget;
         GPHandlerManager.addHandler(TYPE, this);
     }
 
     @Override
-    public void showUserLogin() {
-        System.out.println("UserLoginManager: Calling show User Login");
-        LayoutManager.getInstance().getViewport().mask("Session Timeout", 
-                    SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString()); 
-        this.loginWidget = new LoginWidget(null);
+    public void showUserLogin(GwtEvent event) {
+        LayoutManager.getInstance().getStatusMap().setStatus(
+                "Session Timeout.",
+                EnumSearchStatus.STATUS_NO_SEARCH.toString());
+        LayoutManager.getInstance().getViewport().mask("Session Timeout",
+                SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+        this.loginWidget.setGwtEventOnSuccess(event);
+
         this.loginWidget.show();
     }
-    
 }

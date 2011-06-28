@@ -50,6 +50,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.event.timeout.GPExpandTreeNodeEvent;
+import org.geosdi.geoplatform.gui.client.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoBuilder;
@@ -62,11 +64,12 @@ import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPLayerExpander;
-import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 
@@ -171,7 +174,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
                 });
 
         this.formPanel.addButton(cancel);
-        
+
         setFocusWidget(this.folderText);
     }
 
@@ -247,11 +250,15 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
                     @Override
                     public void onFailure(Throwable caught) {
-                        LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-                        setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
-                                EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
-                        GeoPlatformMessage.errorMessage("Save Folder Error",
-                                "Problems on saving the new tree state after folder creation");
+                        if (caught.getCause() instanceof GPSessionTimeout) {
+                            GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
+                        } else {
+                            LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
+                            setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
+                                    EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
+                            GeoPlatformMessage.errorMessage("Save Folder Error",
+                                    "Problems on saving the new tree state after folder creation");
+                        }
                     }
 
                     @Override

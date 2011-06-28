@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.exception.GPSessionTimeout;
 
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.AbstractMementoLayer;
@@ -55,10 +56,12 @@ import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.GenericTreeStoreWidget;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoAddLayersServer;
 import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridElementEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
@@ -169,10 +172,14 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
 
                     @Override
                     public void onFailure(Throwable caught) {
-                        LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(
-                                false));
-                        GeoPlatformMessage.errorMessage("Save Layers Error",
-                                "Problems on saving the new tree state after layers creation");
+                        if (caught.getCause() instanceof GPSessionTimeout) {
+                            GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
+                        } else {
+                            LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(
+                                    false));
+                            GeoPlatformMessage.errorMessage("Save Layers Error",
+                                    "Problems on saving the new tree state after layers creation");
+                        }
                     }
 
                     @Override

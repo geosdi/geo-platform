@@ -56,28 +56,20 @@ import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
  * @email  nazzareno.sileno@geosdi.org
  */
 public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote {
+    
+    private static final long serialVersionUID = -2177973379191108728L;
 
-    //TODO: Insert correct serialVersionUID
-    private static final long serialVersionUID = 8244727800484212092L;
     private ILayerService layerService = (ILayerService) GeoPlatformContextUtil.getInstance().getBean(
                 LayerService.class);
 
-//    @Override
-//    public ArrayList<FolderTreeNode> loadUserFolders(String userName) throws GeoPlatformException {
-//        return this.layerService.loadUserFolders(userName);
-//    }
     @Override
     public ArrayList<GPFolderClientInfo> loadUserFolders() throws GeoPlatformException {
         return this.layerService.loadUserFolders(super.getThreadLocalRequest());
     }
 
-//    @Override
-//    public ArrayList<GPBeanTreeModel> loadFolderElements(long folderId) throws GeoPlatformException {
-//        return this.layerService.loadFolderElements(folderId);
-//    }
     @Override
     public ArrayList<IGPFolderElements> loadFolderElements(long folderId) throws GeoPlatformException {
-        return this.layerService.loadFolderElements(folderId);
+        return this.layerService.loadFolderElements(folderId, super.getThreadLocalRequest());
     }
 
     @Override
@@ -89,12 +81,12 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     @Override
     public long saveFolder(long idParentFolder, String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
         return this.layerService.saveFolder(idParentFolder, folderName,
-                position, numberOfDescendants, isChecked);
+                position, numberOfDescendants, isChecked, super.getThreadLocalRequest());
     }
 
     @Override
     public void deleteElement(long id, TreeElement elementType) throws GeoPlatformException {
-        this.layerService.deleteElement(id, elementType);
+        this.layerService.deleteElement(id, elementType, super.getThreadLocalRequest());
     }
 
     @Override
@@ -109,12 +101,12 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
 
     @Override
     public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento) throws GeoPlatformException {
-        return this.layerService.saveDeletedFolderAndTreeModifications(memento);
+        return this.layerService.saveDeletedFolderAndTreeModifications(memento, super.getThreadLocalRequest());
     }
 
     @Override
     public boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento) throws GeoPlatformException {
-        return this.layerService.saveDeletedLayerAndTreeModifications(memento);
+        return this.layerService.saveDeletedLayerAndTreeModifications(memento, super.getThreadLocalRequest());
     }
 
     @Override
@@ -129,11 +121,11 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
 
     @Override
     public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException {
-        return this.layerService.saveCheckStatusFolderAndTreeModifications(memento);
+        return this.layerService.saveCheckStatusFolderAndTreeModifications(memento, super.getThreadLocalRequest());
     }
 
     @Override
     public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException {
-        return this.layerService.saveCheckStatusLayerAndTreeModifications(memento);
+        return this.layerService.saveCheckStatusLayerAndTreeModifications(memento, super.getThreadLocalRequest());
     }
 }

@@ -104,7 +104,8 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public ArrayList<IGPFolderElements> loadFolderElements(long folderId) throws GeoPlatformException {
+    public ArrayList<IGPFolderElements> loadFolderElements(long folderId, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        this.getUserAlreadyFromSession(httpServletRequest);
         TreeFolderElements folderElements = geoPlatformServiceClient.getChildrenElements(
                 folderId);
         ArrayList<IGPFolderElements> elements = new ArrayList<IGPFolderElements>();
@@ -133,10 +134,10 @@ public class LayerService implements ILayerService {
 
     @Override
     public long saveFolder(long idParentFolder, String folderName, int position,
-            int numberOfDescendants, boolean isChecked)
+            int numberOfDescendants, boolean isChecked, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
+        this.getUserAlreadyFromSession(httpServletRequest);
         GPFolder gpFolder = null;
-
         try {
             gpFolder = geoPlatformServiceClient.getFolderDetail(new RequestById(
                     idParentFolder));
@@ -159,7 +160,8 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public void deleteElement(long id, TreeElement elementType) throws GeoPlatformException {
+    public void deleteElement(long id, TreeElement elementType, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        this.getUserAlreadyFromSession(httpServletRequest);
         switch (elementType) {
             case FOLDER:
                 deleteFolder(id);
@@ -241,8 +243,9 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public boolean saveDeletedFolderAndTreeModifications(
-            MementoSaveRemove memento) throws GeoPlatformException {
+    public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento, 
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        this.getUserAlreadyFromSession(httpServletRequest);
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
@@ -260,8 +263,9 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public boolean saveDeletedLayerAndTreeModifications(
-            MementoSaveRemove memento) throws GeoPlatformException {
+    public boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        this.getUserAlreadyFromSession(httpServletRequest);
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
@@ -317,8 +321,9 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public boolean saveCheckStatusFolderAndTreeModifications(
-            MementoSaveCheck memento) throws GeoPlatformException {
+    public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        this.getUserAlreadyFromSession(httpServletRequest);
         boolean result = false;
         try {
             result = this.geoPlatformServiceClient.saveCheckStatusFolderAndTreeModifications(
@@ -332,8 +337,9 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public boolean saveCheckStatusLayerAndTreeModifications(
-            MementoSaveCheck memento) throws GeoPlatformException {
+    public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        this.getUserAlreadyFromSession(httpServletRequest);
         boolean result = false;
         try {
             result = this.geoPlatformServiceClient.saveCheckStatusLayerAndTreeModifications(

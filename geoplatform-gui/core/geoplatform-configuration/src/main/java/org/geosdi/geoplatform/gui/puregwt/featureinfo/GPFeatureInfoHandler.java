@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.puregwt.featureinfo;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import java.util.List;
 
 /**
  *

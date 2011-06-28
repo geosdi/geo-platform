@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget;
 import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.event.ILoginManager;
@@ -45,16 +46,19 @@ import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
 import org.geosdi.geoplatform.gui.client.widget.security.GPSecurityWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoginWidget extends GPSecurityWidget implements ILoginManager{
+public class LoginWidget extends GPSecurityWidget implements ILoginManager {
 
     private LoginStatus status;
     private EventType eventOnSuccess;
+    private GwtEvent gwtEventOnSuccess = null;
 
     /**
      * 
@@ -80,7 +84,6 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager{
     public void reset() {
         userName.reset();
         password.reset();
-        validate();
         userName.focus();
         status.clearStatus("");
     }
@@ -126,8 +129,14 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager{
 
             @Override
             public void run() {
-                Dispatcher.forwardEvent(eventOnSuccess);
+                if (gwtEventOnSuccess != null) {
+                    LayoutManager.getInstance().getViewport().unmask();
+                    LayerHandlerManager.fireEvent(gwtEventOnSuccess);
+                } else if (eventOnSuccess != null) {
+                    Dispatcher.forwardEvent(eventOnSuccess);
+                }
                 hide();
+                reset();
             }
         };
         t.schedule(100);
@@ -147,6 +156,21 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager{
 
     @Override
     public void generateLoginManager() {
-        UserLoginManager loginManager = new UserLoginManager();
+        UserLoginManager loginManager = new UserLoginManager(this);
+    }
+
+    /**
+     * @param gwtEventOnSuccess the gwtEventOnSuccess to set
+     */
+    public void setGwtEventOnSuccess(GwtEvent gwtEventOnSuccess) {
+        this.gwtEventOnSuccess = gwtEventOnSuccess;
+        this.eventOnSuccess = null;
+    }
+
+    @Override
+    public void show() {
+        getButtonBar().enable();
+        validate();
+        super.show();
     }
 }

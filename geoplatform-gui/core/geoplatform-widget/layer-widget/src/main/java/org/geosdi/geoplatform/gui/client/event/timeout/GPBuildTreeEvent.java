@@ -33,9 +33,8 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.event;
+package org.geosdi.geoplatform.gui.client.event.timeout;
 
-import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
@@ -43,10 +42,16 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface GPLoginHandler extends EventHandler{
-    
-    Type<GPLoginHandler> TYPE = new Type<GPLoginHandler>();
+public class GPBuildTreeEvent extends GwtEvent<IGPBuildTreeHandler> {
 
-    public void showUserLogin(GwtEvent event);
+    @Override
+    public Type<IGPBuildTreeHandler> getAssociatedType() {
+        return IGPBuildTreeHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(IGPBuildTreeHandler handler) {
+        handler.buildTree();
+    }
     
 }

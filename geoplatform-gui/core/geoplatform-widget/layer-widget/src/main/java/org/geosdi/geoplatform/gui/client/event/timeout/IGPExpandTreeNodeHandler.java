@@ -33,20 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.event;
+package org.geosdi.geoplatform.gui.client.event.timeout;
 
 import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
-
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface GPLoginHandler extends EventHandler{
+public interface IGPExpandTreeNodeHandler extends EventHandler{
+ 
+    Type<IGPExpandTreeNodeHandler> TYPE = new Type<IGPExpandTreeNodeHandler>();
     
-    Type<GPLoginHandler> TYPE = new Type<GPLoginHandler>();
-
-    public void showUserLogin(GwtEvent event);
+    public void expandNode(FolderTreeNode node);
     
 }

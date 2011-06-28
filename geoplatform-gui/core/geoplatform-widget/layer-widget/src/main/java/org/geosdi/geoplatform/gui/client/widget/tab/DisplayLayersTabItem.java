@@ -42,15 +42,12 @@ package org.geosdi.geoplatform.gui.client.widget.tab;
  */
 public class DisplayLayersTabItem extends GeoPlatformTabItem {
     
-    
     public DisplayLayersTabItem() {
         super("Display");
     }
 
     @Override
     public void addComponents() {
-        this.formPanel.setHeaderVisible(false);
-        
-        
+        this.formPanel.setHeaderVisible(false);    
     }    
 }

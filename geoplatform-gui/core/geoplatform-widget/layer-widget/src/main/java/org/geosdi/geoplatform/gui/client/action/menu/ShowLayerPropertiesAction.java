@@ -33,39 +33,31 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tab;
+package org.geosdi.geoplatform.gui.client.action.menu;
 
-
-import com.extjs.gxt.ui.client.widget.TabItem;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.client.widget.LayersPropertiesWidget;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Francesco Izzi - CNR IMAA geoSDI Group
+ * @mail francesco.izzi@geosdi.org
  */
-public abstract class GeoPlatformTabItem extends TabItem {
-    
-    protected FormPanel formPanel;
-    
-    public GeoPlatformTabItem(String title) {
-        super(title);
-        createFormPanel();
-        addComponents();
-        super.add(formPanel);
-    }
-    
-    public GeoPlatformTabItem() {
-        createFormPanel();
-        addComponents();
-        super.add(formPanel);
-    }
-    
-    private void createFormPanel() {
-        this.formPanel = new FormPanel();
-        this.formPanel.setHeaderVisible(false);
-    }
-    
-    public abstract void addComponents();
+public class ShowLayerPropertiesAction extends MenuAction {
 
+    private TreePanel treePanel;
+    private LayersPropertiesWidget layersPropertiesWidget;
+
+    public ShowLayerPropertiesAction(TreePanel treePanel) {
+        super("LayerProperties");
+        this.treePanel = treePanel;
+        this.layersPropertiesWidget = new LayersPropertiesWidget();
+    }
+
+    @Override
+    public void componentSelected(MenuEvent ce) {
+        this.layersPropertiesWidget.showForm();
+    }
 }

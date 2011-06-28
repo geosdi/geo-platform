@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.widget;
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.widget.Window;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 
 /**
  *
@@ -89,8 +88,7 @@ public abstract class GeoPlatformWindow extends Window {
     
     public abstract void setWindowProperties();
     
-    @Override
-    public void show() {
+    public void showForm() {
         this.init();
         super.show();
     }

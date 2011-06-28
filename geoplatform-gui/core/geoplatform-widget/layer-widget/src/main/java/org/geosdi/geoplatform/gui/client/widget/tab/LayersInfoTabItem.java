@@ -48,6 +48,6 @@ public class LayersInfoTabItem extends GeoPlatformTabItem {
 
     @Override
     public void addComponents() {
-       
+         
     }
 }

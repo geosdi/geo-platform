@@ -53,7 +53,6 @@ import org.geosdi.geoplatform.gui.client.action.menu.ExportoToKML;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToPDF;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToShpZip;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToTIFF;
-import org.geosdi.geoplatform.gui.client.action.menu.ShowLayerProperties;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddFolderTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddRasterTreeAction;
@@ -148,15 +147,6 @@ public class LayerWidgetUI implements EntryPoint {
             }
         });
         
-        MenuActionRegistar.put("LayerProperties", new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                // TODO Auto-generated method stub
-                return new ShowLayerProperties();
-            }
-        });
-
     }
 
     private void addToolbarTreeAction() {

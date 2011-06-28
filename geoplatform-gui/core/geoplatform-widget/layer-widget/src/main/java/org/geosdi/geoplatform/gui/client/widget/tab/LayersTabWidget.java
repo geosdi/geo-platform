@@ -46,10 +46,6 @@ public class LayersTabWidget extends GeoPlatformTabWidget {
     private LayersInfoTabItem infoItem;
     private WPSLayerTabItem wpsItem;
 
-    public LayersTabWidget() {
-        
-    }
-    
 
     @Override
     public void initSize() {
@@ -59,11 +55,21 @@ public class LayersTabWidget extends GeoPlatformTabWidget {
 
     @Override
     public void addComponents() {
+        createTabItems();
         
+        super.add(displayItem);
+        super.add(infoItem);
+        super.add(wpsItem);
     }
 
     @Override
     public void setWidgetProperties() {
-        
+              
+    }
+
+    private void createTabItems() {
+        this.displayItem = new DisplayLayersTabItem();
+        this.infoItem = new LayersInfoTabItem();
+        this.wpsItem = new WPSLayerTabItem();
     }
 }

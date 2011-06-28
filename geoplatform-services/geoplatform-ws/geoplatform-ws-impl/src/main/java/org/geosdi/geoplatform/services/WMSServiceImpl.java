@@ -276,7 +276,7 @@ class WMSServiceImpl {
 
         // Set Styles of Raster Ith
         List<StyleImpl> stylesImpl = layer.getStyles();
-        logger.info("\n*** Layer \"{}\" has {} SubLayers and {} StyleImpl ***",
+        logger.debug("\n*** Layer \"{}\" has {} SubLayers and {} StyleImpl ***",
                 new Object[]{layer.getTitle(), layer.getLayerChildren().size(), stylesImpl.size()});
 
         List<StyleDTO> stylesDTO = this.createStyleDTOList(stylesImpl);

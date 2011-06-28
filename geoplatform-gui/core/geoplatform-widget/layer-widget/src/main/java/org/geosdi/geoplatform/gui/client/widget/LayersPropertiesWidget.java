@@ -35,6 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.event.WidgetListener;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import org.geosdi.geoplatform.gui.client.widget.tab.LayersTabWidget;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -42,22 +52,62 @@ package org.geosdi.geoplatform.gui.client.widget;
  */
 public class LayersPropertiesWidget extends GeoPlatformWindow {
 
+    private LayersTabWidget layersTabWidget;
+    private FormPanel formPanel;
+
     public LayersPropertiesWidget() {
         super(true);
     }
 
     @Override
     public void addComponent() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        formPanel = new FormPanel();
+        formPanel.setLayout(new FlowLayout());
+
+        formPanel.setHeaderVisible(false);
+
+        this.layersTabWidget = new LayersTabWidget();
+        formPanel.add(this.layersTabWidget);
+
+        formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
+
+        Button close = new Button("Close",
+                new SelectionListener<ButtonEvent>() {
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        hide();
+                    }
+                });
+
+        formPanel.addButton(close);
+
+        super.add(formPanel);
     }
 
     @Override
     public void initSize() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        setWidth(300);
+        setHeight(200);
     }
 
     @Override
     public void setWindowProperties() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        setHeading("GP Layers Properties Widget");
+        setModal(true);
+
+        setCollapsible(true);
+
+        setLayoutOnChange(true);
+
+        addWidgetListener(new WidgetListener() {
+
+            @Override
+            public void widgetResized(ComponentEvent ce) {
+                if ((getHeight() > 0) && (getWidth() > 0)) {
+                    formPanel.setSize(getWidth() - 10, getHeight() - 40);
+                }
+            }
+        });
     }
 }

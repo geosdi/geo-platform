@@ -2,19 +2,24 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   
-   <parent>
+  <parent>
 		<groupId>org.geosdi</groupId>
-		<artifactId>geo-platform</artifactId>
+		<artifactId>geoplatform-publisher</artifactId>
 		<version>1.2-SNAPSHOT</version>
 	</parent>
 
   <groupId>org.geosdi</groupId>
-  <artifactId>geoplatform-services</artifactId>
+  <artifactId>geoplatform-publisher-impl</artifactId>
   <version>1.2-SNAPSHOT</version>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
- <name>Geo-Platform :: == All Services Module</name>
+  <name>Geo-Platform :: == Publish Module Implementation</name>
+  <url>http://maven.apache.org</url>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
    <developers>
         <developer>
             <name>Francesco Izzi</name>
@@ -37,12 +42,13 @@
             </roles>
         </developer>
     </developers>
-    
-    <modules>
-		<module>geoplatform-core</module>
-        <module>geoplatform-modules</module>
-        <module>geoplatform-ws</module>
-	</modules>
 
-
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>

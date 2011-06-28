@@ -163,29 +163,13 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>gwt-maven-plugin</artifactId>
-                    <version>2.2.0</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.google.gwt</groupId>
-                            <artifactId>gwt-user</artifactId>
-                            <version>${gwtVersion}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>com.google.gwt</groupId>
-                            <artifactId>gwt-dev</artifactId>
-                            <version>${gwtVersion}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>com.google.gwt</groupId>
-                            <artifactId>gwt-servlet</artifactId>
-                            <version>${gwtVersion}</version>
-                        </dependency>
-                    </dependencies>
+                    <version>2.3.0</version>
                 </plugin>
 				
             </plugins>
         </pluginManagement>
     </build>
+
     
     <modules>
         <module>geoplatform-api</module>

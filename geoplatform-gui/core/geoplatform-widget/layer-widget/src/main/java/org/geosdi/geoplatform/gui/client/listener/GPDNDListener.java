@@ -11,6 +11,7 @@ import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.client.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveDragDrop;
@@ -19,13 +20,15 @@ import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 
 public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>, ISave<MementoSaveDragDrop> {
-    
+
     private VisitorDisplayHide checkerVisitor;
     private VisitorPosition visitor = new VisitorPosition();
     private GPBeanTreeModel changedElement;
@@ -34,7 +37,7 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
     private boolean isActiveDrop = false;
     private boolean isFolderDrop = false;
     private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
-    
+
     public GPDNDListener(VisitorDisplayHide visitorDisplayHide) {
         this.checkerVisitor = visitorDisplayHide;
     }
@@ -71,7 +74,7 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
             this.checkerVisitor.realignViewState(changedElement);
         }
     }
-    
+
     private void manageDropActivation(EventType eventType) {
         if (LayerEvents.GP_DRAG_START.equals(eventType)) {
             this.isActiveDrop = true;
@@ -80,7 +83,7 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
             this.isActiveDrop = false;
         }
     }
-    
+
     @Override
     public void executeSave(final MementoSaveDragDrop memento) {
         //Warning: The following conversion is absolutely necessary!
@@ -88,14 +91,18 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
         if (memento.getRefBaseElement() instanceof FolderTreeNode) {
             LayerRemote.Util.getInstance().saveDragAndDropFolderAndTreeModifications(memento,
                     new AsyncCallback<Boolean>() {
-                        
+
                         @Override
                         public void onFailure(Throwable caught) {
-                            LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-                            GeoPlatformMessage.errorMessage("Save Folder Drag&Drop Operation Error",
-                                    "Problems on saving the new tree state after folder drag&drop operation");
+                            if (caught.getCause() instanceof GPSessionTimeout) {
+                                GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
+                            } else {
+                                LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
+                                GeoPlatformMessage.errorMessage("Save Folder Drag&Drop Operation Error",
+                                        "Problems on saving the new tree state after folder drag&drop operation");
+                            }
                         }
-                        
+
                         @Override
                         public void onSuccess(Boolean result) {
                             GPLayerSaveCache.getInstance().remove(memento);
@@ -108,14 +115,18 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
         } else if (memento.getRefBaseElement() instanceof GPLayerBean) {
             LayerRemote.Util.getInstance().saveDragAndDropLayerAndTreeModifications(memento,
                     new AsyncCallback<Boolean>() {
-                        
+
                         @Override
                         public void onFailure(Throwable caught) {
-                            LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-                            GeoPlatformMessage.errorMessage("Save Layer Drag&Drop Operation Error",
-                                    "Problems on saving the new tree state after layer drag&drop operation");
+                            if (caught.getCause() instanceof GPSessionTimeout) {
+                                GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
+                            } else {
+                                LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
+                                GeoPlatformMessage.errorMessage("Save Layer Drag&Drop Operation Error",
+                                        "Problems on saving the new tree state after layer drag&drop operation");
+                            }
                         }
-                        
+
                         @Override
                         public void onSuccess(Boolean result) {
                             GPLayerSaveCache.getInstance().remove(memento);

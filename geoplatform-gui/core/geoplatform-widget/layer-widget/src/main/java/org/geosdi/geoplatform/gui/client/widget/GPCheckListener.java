@@ -39,20 +39,22 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
-import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 
@@ -100,9 +102,13 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
 
                 @Override
                 public void onFailure(Throwable caught) {
-                    LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-                    GeoPlatformMessage.errorMessage("Save Check Operation on Folder Error",
-                            "Problems on saving the new tree state after checking folder");
+                    if (caught.getCause() instanceof GPSessionTimeout) {
+                        GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
+                    } else {
+                        LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
+                        GeoPlatformMessage.errorMessage("Save Check Operation on Folder Error",
+                                "Problems on saving the new tree state after checking folder");
+                    }
                 }
 
                 @Override
@@ -119,9 +125,13 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
 
                 @Override
                 public void onFailure(Throwable caught) {
-                    LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-                    GeoPlatformMessage.errorMessage("Save Check Operation on Layer Error",
-                            "Problems on saving the new tree state after checking layer");
+                    if (caught.getCause() instanceof GPSessionTimeout) {
+                        GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
+                    } else {
+                        LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
+                        GeoPlatformMessage.errorMessage("Save Check Operation on Layer Error",
+                                "Problems on saving the new tree state after checking layer");
+                    }
                 }
 
                 @Override

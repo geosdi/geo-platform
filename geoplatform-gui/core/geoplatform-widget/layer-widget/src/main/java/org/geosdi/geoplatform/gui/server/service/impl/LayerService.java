@@ -50,15 +50,13 @@ import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
-import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.client.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOConverter;
+import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
@@ -69,7 +67,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.web.HttpSessionRequiredException;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -94,7 +91,7 @@ public class LayerService implements ILayerService {
     private GPUser getUserAlreadyFromSession(HttpServletRequest httpServletRequest) {
         GPUser user = null;
         HttpSession session = httpServletRequest.getSession();
-        Object userObj = session.getAttribute(SaveStatus.EnumSaveStatus.USER_LOGGED.getValue());
+        Object userObj = session.getAttribute(UserLoginEnum.USER_LOGGED.toString());
         if (userObj != null && userObj instanceof GPUser) {
             user = (GPUser) userObj;
         } else {

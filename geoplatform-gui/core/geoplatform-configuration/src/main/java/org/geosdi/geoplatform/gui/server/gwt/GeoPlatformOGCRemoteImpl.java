@@ -79,7 +79,7 @@ public class GeoPlatformOGCRemoteImpl extends RemoteServiceServlet implements
     @Override
     public ArrayList<? extends GPLayerGrid> getcapabilities(
             long idServer) throws GeoPlatformException {
-        return this.ogcService.getcapabilities(idServer);
+        return this.ogcService.getCapabilities(idServer);
     }
 
     @Override
@@ -89,6 +89,6 @@ public class GeoPlatformOGCRemoteImpl extends RemoteServiceServlet implements
 
     @Override
     public ArrayList<String> findDistinctLayersDataSource() throws GeoPlatformException {
-        return this.ogcService.findDistinctLayersDataSource();
+        return this.ogcService.findDistinctLayersDataSource(this.getThreadLocalRequest());
     }
 }

@@ -33,60 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.service.impl;
+package org.geosdi.geoplatform.gui.featureinfo.event.timeout;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
-import org.geosdi.geoplatform.gui.global.CopyrightInfo;
-import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
-import org.geosdi.geoplatform.gui.server.service.IStartupService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
- * @author giuseppe
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-@Service("startupService")
-public class StartupService implements IStartupService {
-
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-	@Autowired
-	private IGeoPlatformGlobal geoPlatformGlobal;
-
-	@PostConstruct
-	public void init() {
-		logger.info("------------------------------> INIT STARTUP-GEO-PLATFORM SERVICE");
-		logger.info(this.geoPlatformGlobal.getGeoPlatformInfo().getVersion()
-				.getName()
-				+ " - Version : "
-				+ this.geoPlatformGlobal.getGeoPlatformInfo().getVersion()
-						.getVersion());
-
-		for (CopyrightInfo info : this.geoPlatformGlobal.getGeoPlatformInfo()
-				.getCopyrightInfo()) {
-			logger.info(info.toString());
-		}
-	}
-
-	@PreDestroy
-	public void destroy() {
-		logger.info("-------------------> DESTROY STARTUP-GEO-PLATFORM SERVICE");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.server.service.IStartupService#
-	 * initGeoPlatformConfiguration()
-	 */
-	@Override
-	public IGeoPlatformGlobal initGeoPlatformConfiguration() {
-		return geoPlatformGlobal;
-	}
-
+public interface ILoadLayersDataSourceHandler extends EventHandler{
+    
+    Type<ILoadLayersDataSourceHandler> TYPE = new Type<ILoadLayersDataSourceHandler>();
+    
+    public void loadUserServers();
+    
 }

@@ -37,13 +37,17 @@ package org.geosdi.geoplatform.gui.featureinfo.widget;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
+import org.geosdi.geoplatform.gui.client.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.featureinfo.cache.FeatureInfoFlyWeight;
 import org.geosdi.geoplatform.gui.featureinfo.cache.IGPFeatureInfoElement;
+import org.geosdi.geoplatform.gui.featureinfo.event.timeout.ILoadLayersDataSourceHandler;
+import org.geosdi.geoplatform.gui.featureinfo.event.timeout.LoadLayersDataSouceEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
 import org.gwtopenmaps.openlayers.client.Map;
 
@@ -52,32 +56,38 @@ import org.gwtopenmaps.openlayers.client.Map;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPFeatureInfoCaller {
+public class GPFeatureInfoCaller implements ILoadLayersDataSourceHandler{
 
     private boolean loaded;
     private Map map;
 
     public GPFeatureInfoCaller(Map theMap) {
         this.map = theMap;
+        LayerHandlerManager.addHandler(ILoadLayersDataSourceHandler.TYPE, this);
     }
 
     public void load() {
         if (!isLoaded()) {
-            loadUserServers();
+            this.loadUserServers();
         } else {
             activateFeatureInfoControl();
         }
     }
 
-    private void loadUserServers() {
+    @Override
+    public void loadUserServers() {
         LayoutManager.getInstance().getStatusMap().setStatus("Loading Feature Info Data Sources.",
                 EnumSearchStatus.STATUS_SEARCH.toString());
         GeoPlatformOGCRemote.Util.getInstance().findDistinctLayersDataSource(new AsyncCallback<ArrayList<String>>() {
 
             @Override
             public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage("Get Feature Info Error",
-                        "Problems to perform Get Feature Info");
+                if (caught.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new LoadLayersDataSouceEvent());
+                } else {
+                    GeoPlatformMessage.errorMessage("Get Feature Info Error",
+                            "Problems to perform Get Feature Info");
+                }
             }
 
             @Override
@@ -89,7 +99,7 @@ public class GPFeatureInfoCaller {
                 activateFeatureInfoControl();
                 loaded = true;
                 LayoutManager.getInstance().getStatusMap().setStatus("Feature Info Function loaded succesfully.",
-                EnumSearchStatus.STATUS_SEARCH.toString());
+                        EnumSearchStatus.STATUS_SEARCH.toString());
             }
         });
     }

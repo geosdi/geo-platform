@@ -45,7 +45,7 @@ public class SaveStatus extends StatusWidget {
 
         STATUS_SAVE("x-status-ok"), STATUS_NO_SAVE("x-status-not-ok"), STATUS_SAVE_ERROR(
         "x-status-error"), STATUS_MESSAGE_SAVE("Operation Ok"), STATUS_MESSAGE_NOT_SAVE(
-        "Operation Failed"), STATUS_MESSAGE_SAVE_ERROR("Service Error"), USER_LOGGED("user");
+        "Operation Failed"), STATUS_MESSAGE_SAVE_ERROR("Service Error");
 
         private String value;
 

@@ -33,30 +33,27 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.server.service;
+package org.geosdi.geoplatform.gui.exception;
 
-import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
-
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
-import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import java.io.Serializable;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public interface IOGCService {
+public class GPSessionTimeout extends Exception implements Serializable{
 
-    public ArrayList<String> findDistinctLayersDataSource(HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    private static final long serialVersionUID = -8102758398277955480L;
 
-    public ArrayList<GPServerBeanModel> loadServers() throws GeoPlatformException;
+    public GPSessionTimeout() {
+    }
+    
+    public GPSessionTimeout(Throwable cause) {
+        super(cause);
+    }
 
-    public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException;
-
-    public ArrayList<? extends GPLayerGrid> getCapabilities(
-            long idServer) throws GeoPlatformException;
-
-    public GPServerBeanModel insertServer(String urlServer) throws GeoPlatformException;
+    public GPSessionTimeout(String message) {
+        super(message);
+    }
+    
 }

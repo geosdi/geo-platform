@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
+import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -79,14 +80,14 @@ public class SecurityService implements ISecurityService {
     private void storeUserInSession(GPUser user, HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
-        //session.setMaxInactiveInterval(10);
-        session.setAttribute(SaveStatus.EnumSaveStatus.USER_LOGGED.getValue(), user);
+        session.setMaxInactiveInterval(10);
+        session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), user);
     }
 
     private GPUser getUserAlreadyFromSession(HttpServletRequest httpServletRequest) {
         GPUser user = null;
         HttpSession session = httpServletRequest.getSession();
-        Object userObj = session.getAttribute(SaveStatus.EnumSaveStatus.USER_LOGGED.getValue());
+        Object userObj = session.getAttribute(UserLoginEnum.USER_LOGGED.toString());
         if (userObj != null && userObj instanceof GPUser) {
             user = (GPUser) userObj;
         }
@@ -103,7 +104,7 @@ public class SecurityService implements ISecurityService {
 
     private void deleteUserFromSession(HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
-        session.removeAttribute(SaveStatus.EnumSaveStatus.USER_LOGGED.getValue());
+        session.removeAttribute(UserLoginEnum.USER_LOGGED.toString());
     }
 
 

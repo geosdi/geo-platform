@@ -38,13 +38,14 @@ package org.geosdi.geoplatform.gui.featureinfo.widget;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.Iterator;
-import org.geosdi.geoplatform.gui.client.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.client.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.featureinfo.cache.FeatureInfoFlyWeight;
 import org.geosdi.geoplatform.gui.featureinfo.cache.IGPFeatureInfoElement;
 import org.geosdi.geoplatform.gui.featureinfo.event.timeout.ILoadLayersDataSourceHandler;
 import org.geosdi.geoplatform.gui.featureinfo.event.timeout.LoadLayersDataSouceEvent;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
@@ -60,6 +61,7 @@ public class GPFeatureInfoCaller implements ILoadLayersDataSourceHandler{
 
     private boolean loaded;
     private Map map;
+    private LoadLayersDataSouceEvent dataSouceEvent = new LoadLayersDataSouceEvent();
 
     public GPFeatureInfoCaller(Map theMap) {
         this.map = theMap;
@@ -83,7 +85,7 @@ public class GPFeatureInfoCaller implements ILoadLayersDataSourceHandler{
             @Override
             public void onFailure(Throwable caught) {
                 if (caught.getCause() instanceof GPSessionTimeout) {
-                    GPHandlerManager.fireEvent(new LoadLayersDataSouceEvent());
+                    GPHandlerManager.fireEvent(new GPLoginEvent(dataSouceEvent));
                 } else {
                     GeoPlatformMessage.errorMessage("Get Feature Info Error",
                             "Problems to perform Get Feature Info");

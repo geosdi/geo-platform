@@ -39,7 +39,7 @@
     </developers>
     
     <modules>
-	  <module>api</module>
-      <module>impl</module>
+	  <module>publisher-api</module>
+      <module>publisher-impl</module>
 	</modules>
 </project>

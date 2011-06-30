@@ -41,14 +41,17 @@ import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.event.ILoginManager;
 import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
 import org.geosdi.geoplatform.gui.client.widget.security.GPSecurityWidget;
+import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
+import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -59,6 +62,7 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
     private LoginStatus status;
     private EventType eventOnSuccess;
     private GwtEvent gwtEventOnSuccess = null;
+    private String userLogged;
 
     /**
      * 
@@ -98,30 +102,35 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
 
     @Override
     public void onSubmit() {
-        status.setBusy("please wait...");
-        getButtonBar().disable();
-        SecurityRemoteImpl.Util.getInstance().userLogin(this.userName.getValue(),
-                this.password.getValue(),
-                new AsyncCallback() {
+        if (this.userLogged == null || !this.userLogged.equals(this.userName.getValue())) {
+            status.setBusy("please wait...");
+            getButtonBar().disable();
+            SecurityRemoteImpl.Util.getInstance().userLogin(this.userName.getValue(),
+                    this.password.getValue(),
+                    new AsyncCallback() {
 
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        errorConnection();
-                        status.setStatus(
-                                LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.getValue(),
-                                LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.getValue());
-                        GeoPlatformMessage.infoMessage("Login Error",
-                                caught.getMessage());
-                    }
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            errorConnection();
+                            status.setStatus(
+                                    LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.getValue(),
+                                    LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.getValue());
+                            GeoPlatformMessage.infoMessage("Login Error",
+                                    caught.getMessage());
+                        }
 
-                    @Override
-                    public void onSuccess(Object result) {
-                        status.setStatus(
-                                LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
-                                LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
-                        userScreen();
-                    }
-                });
+                        @Override
+                        public void onSuccess(Object result) {
+                            status.setStatus(
+                                    LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
+                                    LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
+                            userScreen();
+                            userLogged = userName.getValue();
+                        }
+                    });
+        } else {
+            //TODO: call log-out
+        }
     }
 
     private void userScreen() {
@@ -129,6 +138,12 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
 
             @Override
             public void run() {
+                List<MenuBarCategory> categories = GeoPlatformUtils.getInstance().getGlobalConfiguration().getMenuBarContainerTool().getCategories();
+                for (MenuBarCategory menuBarCategory : categories) {
+                    if (menuBarCategory.getText().equals("User")) {
+                        menuBarCategory.setText("Hello " + userName.getValue());
+                    }
+                }
                 if (gwtEventOnSuccess != null) {
                     LayoutManager.getInstance().getViewport().unmask();
                     LayerHandlerManager.fireEvent(gwtEventOnSuccess);

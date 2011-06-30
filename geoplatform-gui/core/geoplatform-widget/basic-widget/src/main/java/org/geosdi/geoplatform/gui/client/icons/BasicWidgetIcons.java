@@ -71,4 +71,7 @@ public interface BasicWidgetIcons extends ImageBundle {
 
     @Resource("information.png")
     AbstractImagePrototype getFeatureInfo();
+
+    @Resource("logout.png")
+    AbstractImagePrototype logout();
 }

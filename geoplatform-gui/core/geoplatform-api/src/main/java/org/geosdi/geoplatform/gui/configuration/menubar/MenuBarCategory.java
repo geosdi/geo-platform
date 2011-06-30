@@ -118,7 +118,6 @@ public class MenuBarCategory implements Serializable,
 
     @Override
     public int compareTo(MenuBarCategory o) {
-        // TODO Auto-generated method stub
         return getOrder() - o.getOrder();
     }
 

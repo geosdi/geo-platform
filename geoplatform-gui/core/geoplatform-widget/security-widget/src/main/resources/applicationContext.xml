@@ -9,6 +9,6 @@
 
     <context:annotation-config />
 	
-    <!--<bean id="userLoginManager" class="org.geosdi.geoplatform.gui.client.event.UserLoginManager"/>-->
+    <!--<bean id="userLoginManager" class="org.geosdi.geoplatform.gui.client.event.UserLoginManager"/>-->    
 
 </beans>

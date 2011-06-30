@@ -56,7 +56,6 @@ public class MenuBarContainerTool implements IMenuBarContainerTool {
 
 	@Override
 	public List<MenuBarCategory> getCategories() {
-		// TODO Auto-generated method stub
 		return categories;
 	}
 

@@ -93,7 +93,6 @@ public class GenericClientTool implements Serializable,
 
     @Override
     public int compareTo(GenericClientTool o) {
-        // TODO Auto-generated method stub
         return getOrder() - o.getOrder();
     }
 }

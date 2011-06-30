@@ -173,8 +173,9 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
         this.size = XDOM.getViewportSize();
         int left = this.size.width - config.width - 10
                 + XDOM.getBodyScrollLeft();
-        int top = this.size.height - config.height - 10
+        int top = this.size.height - config.height - 54
                 - (level * (config.height + 10)) + XDOM.getBodyScrollTop();
+        
         return new Point(left, top);
     }
 

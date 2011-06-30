@@ -41,7 +41,7 @@ import javax.servlet.http.HttpSession;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.client.exception.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;

@@ -44,6 +44,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 public abstract class MenuBaseAction extends MenuAction {
 
     private AbstractImagePrototype image;
+    private boolean enabled;
 
     public MenuBaseAction(String title, AbstractImagePrototype image) {
         super(title);

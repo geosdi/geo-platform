@@ -40,6 +40,8 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.action.menu.event.MenuActionDisabledEvent;
+import org.geosdi.geoplatform.gui.action.menu.event.MenuActionEnabledEvent;
 import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.DateMenuClientTool;
@@ -54,17 +56,19 @@ import com.extjs.gxt.ui.client.widget.menu.MenuBar;
 import com.extjs.gxt.ui.client.widget.menu.MenuBarItem;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.menu.SeparatorMenuItem;
+import org.geosdi.geoplatform.gui.action.menu.event.MenuActionHandler;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class MenuBarWidget {
-
+    
     public static final String MENU_BAR_SEPARATOR = "MenuBarSeparator";
     private MenuBar bar;
     private IMenuBarContainerTool menuBarContainerTool;
-
+    
     public MenuBarWidget(IMenuBarContainerTool menuBarContainerTool) {
         this.bar = new MenuBar();
         bar.setBorders(true);
@@ -82,13 +86,14 @@ public class MenuBarWidget {
             this.bar.add(new MenuBarItem(category.getText(), menu));
             addCategory(category, menu);
         }
-
+        
     }
 
     /**
      * Add MenuBarItem to MenuBar
      *
      * @param category
+     * @param menu  
      */
     public void addCategory(MenuBarCategory category, Menu menu) {
         // TODO Auto-generated method stub
@@ -136,15 +141,31 @@ public class MenuBarWidget {
      */
     public void addMenuItem(MenuBarClientTool tool, Menu menu) {
         // TODO Auto-generated method stub
-        MenuBaseAction action = (MenuBaseAction) MenuActionRegistar.get(tool.getId());
-
-        MenuItem item = new MenuItem(tool.getText());
-
+        MenuBaseAction action = (MenuBaseAction) MenuActionRegistar.get(
+                tool.getId());
+        
+        final MenuItem item = new MenuItem(tool.getText());
+        
         if (action != null) {
             action.setId(tool.getId());
             item.setIcon(action.getImage());
             item.setItemId(action.getId());
             item.addSelectionListener(action);
+            
+            action.addMenuActionHandler(new MenuActionHandler() {
+                
+                @Override
+                public void onActionEnabled(MenuActionEnabledEvent event) {
+                    item.setEnabled(true);
+                }
+                
+                @Override
+                public void onActionDisabled(MenuActionDisabledEvent event) {
+                    item.setEnabled(false);
+                }
+            });
+            
+            action.setEnabled(tool.isEnabled());
         }
         menu.add(item);
     }
@@ -153,6 +174,7 @@ public class MenuBarWidget {
      * Add a MenuItem with sub menu
      *
      * @param tool
+     * @param menu  
      */
     public void addGroupMenuItem(GroupMenuClientTool tool, Menu menu) {
         // TODO Auto-generated method stub
@@ -188,7 +210,7 @@ public class MenuBarWidget {
         CheckMenuItem item = new CheckMenuItem(tool.getText());
         item.setItemId(action.getId());
         item.setChecked(tool.isChecked());
-
+        
         if (action != null) {
             item.addSelectionListener(action);
         }
@@ -197,6 +219,7 @@ public class MenuBarWidget {
 
     /**
      * Add a Separator in Menu
+     * @param menu 
      */
     public void addMenuSeparator(Menu menu) {
         // TODO Auto-generated method stub

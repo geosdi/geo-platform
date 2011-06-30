@@ -44,7 +44,8 @@ import org.geosdi.geoplatform.gui.action.event.ActionHandler;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public abstract class GeoPlatformToolbarAction extends GeoPlatformAction

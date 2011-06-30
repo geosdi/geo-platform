@@ -55,7 +55,7 @@ import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.GenericTreeStoreWidget;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.client.exception.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;

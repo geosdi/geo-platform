@@ -64,7 +64,7 @@ import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPLayerExpander;
 import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.client.exception.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;

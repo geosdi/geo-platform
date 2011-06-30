@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.client.exception.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.featureinfo.cache.FeatureInfoFlyWeight;
 import org.geosdi.geoplatform.gui.featureinfo.cache.IGPFeatureInfoElement;
 import org.geosdi.geoplatform.gui.featureinfo.event.timeout.ILoadLayersDataSourceHandler;

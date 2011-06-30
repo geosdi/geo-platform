@@ -52,7 +52,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
-import org.geosdi.geoplatform.gui.client.exception.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOConverter;

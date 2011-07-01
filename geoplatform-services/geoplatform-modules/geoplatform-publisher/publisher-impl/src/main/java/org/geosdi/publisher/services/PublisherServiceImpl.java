@@ -37,27 +37,26 @@
 //</editor-fold>
 package org.geosdi.publisher.services;
 
-import javax.jws.WebParam;
-import javax.jws.WebResult;
 import javax.jws.WebService;
-import org.codehaus.jra.Get;
-import org.codehaus.jra.HttpResource;
-
+import org.springframework.transaction.annotation.Transactional;
 import org.geosdi.publisher.exception.ResourceNotFoundFault;
 
 /**
- * @author Luca Paolino  - geoSDI
- * 
- * Public interface to define the service operations mapped via REST
- * using CXT framework
+ * @author Luca Paolino - geoSDI
+ *
  */
-@WebService(name = "GeoPlatformService", targetNamespace = "http://services.geo-platform.org/")
-public interface GeoPlatformService {
+@Transactional // Give atomicity on WS methods
+@WebService(endpointInterface = "org.geosdi.publisher.services.GPPublisherService")
+public class PublisherServiceImpl  implements GPPublisherService{
+
+    public PublisherServiceImpl() {
+   }
+
+    @Override
+    public boolean upload(String serverUrl) throws ResourceNotFoundFault
+    {
+        return true;
+    }
 
 
-    @Get
-    @HttpResource(location = "/preview/")
-    @WebResult(name = "Result")
-    boolean upload(@WebParam(name = "serverUrl") String serverUrl)
-            throws ResourceNotFoundFault;
 }

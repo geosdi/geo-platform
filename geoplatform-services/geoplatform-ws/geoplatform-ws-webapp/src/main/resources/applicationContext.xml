@@ -62,7 +62,7 @@
     </jaxws:endpoint>
 
     <jaxws:endpoint id="publisherServiceSOAP"
-    	implementorClass="org.geosdi.publisher.services.GeoPlatformServiceImpl"
+    	implementorClass="org.geosdi.publisher.services.PublisherServiceImpl"
     	implementor="#geoplatformService"
     	address="/soap">
         <jaxws:serviceFactory>

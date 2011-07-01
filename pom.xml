@@ -137,6 +137,11 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+
+
+
+
+
     </repositories>
 
 
@@ -223,6 +228,17 @@
                 <version>${geoplatform-version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-publisher-api</artifactId>
+                <version>${geoplatform-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-publisher-impl</artifactId>
+                <version>${geoplatform-version}</version>
+            </dependency>
 
 			<!-- =========================================================== -->
 			<!-- SPRING -->

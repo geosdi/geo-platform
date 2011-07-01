@@ -54,10 +54,10 @@ public class LayersTabWidget extends GeoPlatformTabWidget {
 
     public LayersTabWidget(TreePanel treePanel) {
         GPBeanTreeModel model = (GPBeanTreeModel) treePanel.getSelectionModel().getSelectedItem();
-        System.out.println(item);
         if (model instanceof RasterTreeNode) {
             item = (RasterTreeNode) model;
         }
+        addComponents();
     }
 
     @Override
@@ -69,8 +69,7 @@ public class LayersTabWidget extends GeoPlatformTabWidget {
         setLayout(new FlowLayout(10));  
     }
 
-    @Override
-    public void addComponents() {
+    private void addComponents() {
         createTabItems();
         
         super.add(infoItem);

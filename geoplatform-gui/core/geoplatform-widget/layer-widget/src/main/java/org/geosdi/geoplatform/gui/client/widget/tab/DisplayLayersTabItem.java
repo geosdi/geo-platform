@@ -47,10 +47,11 @@ public class DisplayLayersTabItem extends GeoPlatformTabItem {
 
     public DisplayLayersTabItem() {
         super("Display");
+        addComponents();
     }
 
-    @Override
-    public void addComponents() {
+   
+    private void addComponents() {
         this.formPanel.setHeaderVisible(false);
         final Slider slider = new Slider();
         slider.setWidth(200);

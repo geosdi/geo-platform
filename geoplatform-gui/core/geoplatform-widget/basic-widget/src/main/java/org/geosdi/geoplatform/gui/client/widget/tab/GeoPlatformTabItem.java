@@ -51,13 +51,11 @@ public abstract class GeoPlatformTabItem extends TabItem {
     public GeoPlatformTabItem(String title) {
         super(title);
         createFormPanel();
-        addComponents();
         super.add(formPanel);
     }
     
     public GeoPlatformTabItem() {
         createFormPanel();
-        addComponents();
         super.add(formPanel);
     }
     
@@ -65,7 +63,5 @@ public abstract class GeoPlatformTabItem extends TabItem {
         this.formPanel = new FormPanel();
         this.formPanel.setHeaderVisible(false);
     }
-    
-    public abstract void addComponents();
 
 }

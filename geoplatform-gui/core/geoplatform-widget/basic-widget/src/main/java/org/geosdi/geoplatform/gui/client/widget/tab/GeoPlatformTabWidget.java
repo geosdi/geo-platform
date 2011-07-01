@@ -47,12 +47,9 @@ public abstract class GeoPlatformTabWidget extends TabPanel {
     public GeoPlatformTabWidget() {
         initSize();
         setWidgetProperties();
-        addComponents();
     }
     
     public abstract void initSize();
-    
-    public abstract void addComponents();
     
     public abstract void setWidgetProperties();
 }

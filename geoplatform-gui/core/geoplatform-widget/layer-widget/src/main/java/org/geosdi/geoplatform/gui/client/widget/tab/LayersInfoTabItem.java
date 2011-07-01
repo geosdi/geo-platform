@@ -52,10 +52,10 @@ public class LayersInfoTabItem extends GeoPlatformTabItem {
     public LayersInfoTabItem(RasterTreeNode item) {
         super("Layer Info");
         this.item = item;
+        addComponents();
     }
 
-    @Override
-    public void addComponents() {
+    private void addComponents() {
         
         FormData formData = new FormData("100%");
 

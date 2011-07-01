@@ -44,10 +44,10 @@ public class WPSLayerTabItem extends GeoPlatformTabItem {
     
     public WPSLayerTabItem() {
         super("WPS");
+        addComponents();
     }
 
-    @Override
-    public void addComponents() {
+    private void addComponents() {
         
     }
 }

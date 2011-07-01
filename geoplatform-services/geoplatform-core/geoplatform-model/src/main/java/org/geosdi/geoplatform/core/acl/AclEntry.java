@@ -83,7 +83,7 @@ public class AclEntry {
     private Integer mask;
     //
     @Column(name = "granting", nullable = false)
-    private boolean granting = true;
+    private boolean granting = false;
     //
     @Column(name = "audit_success", nullable = false)
     private boolean auditSuccess = true;
@@ -94,6 +94,17 @@ public class AclEntry {
     //<editor-fold defaultstate="collapsed" desc="Constructor methods">
     public AclEntry() {
     }
+    
+    public AclEntry(AclObjectIdentity aclObjectIdentity, Integer aceOrder, AclSid aclSid,
+            Integer mask, boolean granting) {
+        this.aclObject = aclObjectIdentity;
+        this.aceOrder = aceOrder;
+        this.aclSid = aclSid;
+        this.mask = mask;
+        this.granting = granting;
+        this.auditSuccess = true;
+        this.auditFailure = true;
+    }    
 
     public AclEntry(AclObjectIdentity aclObjectIdentity, Integer aceOrder, AclSid aclSid,
             Integer mask, boolean granting, boolean auditSuccess, boolean auditFailure) {

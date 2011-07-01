@@ -106,10 +106,12 @@ public abstract class BaseDAOTest {
     @Autowired
     protected GPAuthorityDAO authorityDAO;
     //
-    private final String nameUserTest = "user_test_0";
-    protected final String nameSuperUser = "super_user_test_acl";
+    private final String usernameUserTest = "user_test_0";
+    protected final String usernameSuperUser = "super_user_test_acl";
+    //
     protected final String roleAdmin = "ROLE_ADMIN";
     protected final String roleUser = "ROLE_USER";
+    protected final String roleViewer = "ROLE_VIEWER"; // Can only zoom
     private URL url = null;
 
     //<editor-fold defaultstate="collapsed" desc="Remove all data">
@@ -181,14 +183,15 @@ public abstract class BaseDAOTest {
 
     //<editor-fold defaultstate="collapsed" desc="Insert data">
     protected void insertData() throws ParseException {
-        this.insertUser(nameUserTest, roleAdmin);
+        this.insertUser(usernameUserTest, roleAdmin);
         // ACL Data
-        this.insertUser(nameSuperUser, roleAdmin, roleUser);
+        this.insertUser(usernameSuperUser, roleAdmin, roleUser);
         this.insertUser("admin_acl_test", roleAdmin);
         this.insertUser("user_acl_test", roleUser);
         // User for GUI test
-        GPUser admin = this.insertUser("admin", roleAdmin);
-        GPUser user = this.insertUser("user", roleUser);
+        this.insertUser("admin", roleAdmin);
+        this.insertUser("user", roleUser);
+        this.insertUser("viewer", roleViewer);
     }
 
     protected GPUser insertUser(String name, String... roles) {
@@ -224,10 +227,10 @@ public abstract class BaseDAOTest {
         user.setUsername(username);
         user.setEmailAddress(username + "@test");
         user.setEnabled(true);
-        if (user.getUsername().equals("user") || user.getUsername().equals("admin")) {
-            user.setPassword(username);
-        } else {
+        if (username.contains("_")) {
             user.setPassword("pwd_" + username);
+        } else { // User for GUI test
+            user.setPassword(username);
         }
         user.setSendEmail(true);
         return user;
@@ -247,7 +250,7 @@ public abstract class BaseDAOTest {
         int position = layerList.size() + 6; // +6 because {"only folders"; "empty subfolder A"; "empty subfolder B";
         //            "my raster"; "IGM"; "vector layer"}
 
-        GPUser user = userDAO.findByUsername(nameUserTest);
+        GPUser user = userDAO.findByUsername(usernameUserTest);
 
         // "only folders"
         GPFolder onlyFolders = this.createUserFolder("only folders", user, position);

@@ -55,12 +55,18 @@ import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
 import org.geosdi.geoplatform.gui.impl.map.IGeoPlatofomMapButtonBar;
 
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.button.SplitButton;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
+import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import org.geosdi.geoplatform.gui.action.event.ActionHandler;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool;
+import org.geosdi.geoplatform.gui.configuration.menubar.MenuInToolBar;
+import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 
 /**
  * @author giuseppe
@@ -68,7 +74,6 @@ import org.geosdi.geoplatform.gui.action.event.ActionHandler;
  */
 public class ButtonBar extends GeoPlatformToolbarWidget implements
         IGeoPlatofomMapButtonBar {
-
 
     private MapLayoutWidget mapLayoutWidget;
     private GeoPlatformButtonObserver buttonObserver;
@@ -101,6 +106,8 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
                 addMenuButton((MenuClientTool) tool,
                         (ToolbarApplicationAction) ToolbarActionRegistar.get(
                         id, mapLayoutWidget));
+            } else if (tool instanceof MenuInToolBar && ((MenuInToolBar) tool).getId().equals(UserLoginEnum.USER_MENU.toString())) {
+                this.addUserLoginMenu((MenuInToolBar) tool);
             } else {
                 GeoPlatformToolbarAction action = ToolbarActionRegistar.get(id,
                         mapLayoutWidget);
@@ -195,6 +202,21 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
         });
 
         this.toolBar.add(button);
+    }
+
+    private void addUserLoginMenu(MenuInToolBar menuInToolBar) {
+        SplitButton splitItem = new SplitButton(menuInToolBar.getText());
+        splitItem.setIcon(BasicWidgetResources.ICONS.logged_user());
+        splitItem.setId(menuInToolBar.getId());
+
+        Menu menu = new Menu();
+        MenuUtilityBuilder.buildTools(menu, menuInToolBar.getTools());
+//        for (MenuBarClientTool tool : menuInToolBar.getTools()) {
+//            //menu.add();
+//        }
+        splitItem.setMenu(menu);
+        toolBar.add(new FillToolItem());
+        this.toolBar.add(splitItem);
     }
 
     /**

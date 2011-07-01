@@ -41,17 +41,20 @@ import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.RootPanel;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.event.ILoginManager;
 import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
 import org.geosdi.geoplatform.gui.client.widget.security.GPSecurityWidget;
-import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory;
+import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
+import org.geosdi.geoplatform.gui.configuration.menubar.MenuInToolBar;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
+import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -107,7 +110,7 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
             getButtonBar().disable();
             SecurityRemoteImpl.Util.getInstance().userLogin(this.userName.getValue(),
                     this.password.getValue(),
-                    new AsyncCallback() {
+                    new AsyncCallback<String>() {
 
                         @Override
                         public void onFailure(Throwable caught) {
@@ -120,11 +123,11 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
                         }
 
                         @Override
-                        public void onSuccess(Object result) {
+                        public void onSuccess(String result) {
                             status.setStatus(
                                     LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
                                     LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
-                            userScreen();
+                            userScreen(result, userLogged == null);
                             userLogged = userName.getValue();
                         }
                     });
@@ -133,20 +136,22 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
         }
     }
 
-    private void userScreen() {
+    private void userScreen(final String name, final boolean changeUseName) {
         Timer t = new Timer() {
 
             @Override
             public void run() {
-                List<MenuBarCategory> categories = GeoPlatformUtils.getInstance().getGlobalConfiguration().getMenuBarContainerTool().getCategories();
-                for (MenuBarCategory menuBarCategory : categories) {
-                    if (menuBarCategory.getText().equals("User")) {
-                        menuBarCategory.setText("Hello " + userName.getValue());
+                List<GenericClientTool> categories = GeoPlatformUtils.getInstance().getGlobalConfiguration().getToolbarClientTool().getClientTools();
+                if (changeUseName) {
+                    for (GenericClientTool menuBarCategory : categories) {
+                        if (menuBarCategory.getId().equals(UserLoginEnum.USER_MENU.toString())) {
+                            ((MenuInToolBar) menuBarCategory).setText(name);
+                        }
                     }
                 }
-                if (gwtEventOnSuccess != null) {
+                if (getGwtEventOnSuccess() != null) {
                     LayoutManager.getInstance().getViewport().unmask();
-                    LayerHandlerManager.fireEvent(gwtEventOnSuccess);
+                    LayerHandlerManager.fireEvent(getGwtEventOnSuccess());
                 } else if (eventOnSuccess != null) {
                     Dispatcher.forwardEvent(eventOnSuccess);
                 }
@@ -187,5 +192,12 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
         getButtonBar().enable();
         validate();
         super.show();
+    }
+
+    /**
+     * @return the gwtEventOnSuccess
+     */
+    public GwtEvent getGwtEventOnSuccess() {
+        return gwtEventOnSuccess;
     }
 }

@@ -74,4 +74,7 @@ public interface BasicWidgetIcons extends ImageBundle {
 
     @Resource("logout.png")
     AbstractImagePrototype logout();
+
+    @Resource("logged_user.png")
+    AbstractImagePrototype logged_user();
 }

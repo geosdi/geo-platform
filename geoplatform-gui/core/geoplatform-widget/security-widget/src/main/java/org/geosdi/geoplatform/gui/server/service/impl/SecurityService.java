@@ -62,7 +62,7 @@ public class SecurityService implements ISecurityService {
     private GeoPlatformService geoPlatformServiceClient;
 
     @Override
-    public void userLogin(String userName, String password, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public String userLogin(String userName, String password, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPUser user = null;
         try {
             user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(userName, password);
@@ -75,6 +75,7 @@ public class SecurityService implements ISecurityService {
             throw new GeoPlatformException("Password incorrect");
         }
         this.storeUserInSession(user, httpServletRequest);
+        return user.getEmailAddress();
     }
 
     private void storeUserInSession(GPUser user, HttpServletRequest httpServletRequest) {

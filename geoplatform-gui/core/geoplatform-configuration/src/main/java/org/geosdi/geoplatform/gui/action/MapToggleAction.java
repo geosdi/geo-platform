@@ -51,7 +51,6 @@ public abstract class MapToggleAction extends ToolbarMapAction {
     public MapToggleAction(String tooltip, AbstractImagePrototype image,
             GeoPlatformMap theMapWidget) {
         super(tooltip, image);
-        // TODO Auto-generated constructor stub
         this.mapWidget = theMapWidget;
     }
 

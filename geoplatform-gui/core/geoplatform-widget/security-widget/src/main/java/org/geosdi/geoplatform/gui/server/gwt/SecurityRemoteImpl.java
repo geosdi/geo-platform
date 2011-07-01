@@ -56,8 +56,8 @@ public class SecurityRemoteImpl extends RemoteServiceServlet implements Security
     
 
     @Override
-    public void userLogin(String userName, String password) throws GeoPlatformException {
-        this.securityService.userLogin(userName, password, super.getThreadLocalRequest());
+    public String userLogin(String userName, String password) throws GeoPlatformException {
+        return this.securityService.userLogin(userName, password, super.getThreadLocalRequest());
     }
     
 }

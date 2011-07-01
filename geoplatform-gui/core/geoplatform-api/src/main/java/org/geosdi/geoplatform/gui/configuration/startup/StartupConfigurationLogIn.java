@@ -49,7 +49,7 @@ public class StartupConfigurationLogIn implements IStartupConfigurationStrategy{
     
     @Override
     public void initGeoPlatformConfiguration() {
-        Dispatcher.forwardEvent(GeoPlatformEvents.APPLICATION_LOGIN);
+        Dispatcher.forwardEvent(GeoPlatformEvents.APPLICATION_FIRST_LOGIN);
     }
     
 }

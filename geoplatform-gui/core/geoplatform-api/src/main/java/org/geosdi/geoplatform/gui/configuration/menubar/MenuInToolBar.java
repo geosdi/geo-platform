@@ -33,59 +33,82 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.configuration.menubar;
 
-import org.geosdi.geoplatform.gui.action.MapToggleAction;
-import org.geosdi.geoplatform.gui.client.Resources;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import java.util.Collections;
+import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 
 /**
- * @author Francesco Izzi - CNR IMAA - geoSDI Group
+ * @author giuseppe
  * 
  */
-public class MeasureAreaAction extends MapToggleAction {
+public class MenuInToolBar extends GenericClientTool {
+    
+    private static final long serialVersionUID = -6673336990643383453L;
 
-    public MeasureAreaAction(GeoPlatformMap mapWidget) {
-        super("MeasureArea", Resources.ICONS.measureArea(), mapWidget);
+    /**
+     *
+     */
+    private String text;
+    private boolean enabled;
+    private List<MenuBarClientTool> tools;
+
+    /**
+     * @return the text
+     */
+    public String getText() {
+        return text;
     }
 
-    @Override
-    public void componentSelected(ButtonEvent ce) {
-        ToggleButton button = (ToggleButton) ce.getSource();
-
-        super.changeButtonState();
-
-        this.deactivateAllMapControl();
-
-        if (button.isPressed()) {
-            mapWidget.getButtonBar().setPressedButton(button);
-            this.mapWidget.activateMeasureArea();
-        } else {
-            this.mapWidget.deactivateMeasureArea();
-        }
-
+    /**
+     * @param text
+     *            the text to set
+     */
+    public void setText(String text) {
+        this.text = text;
     }
+
+    /**
+     * @return the enabled
+     */
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    /**
+     * @param enabled
+     *            the enabled to set
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+    
+    /**
+     * @return the tools
+     */
+    public List<MenuBarClientTool> getTools() {
+        return tools;
+    }
+
+    /**
+     * @param tools
+     *            the tools to set
+     */
+    public void setTools(List<MenuBarClientTool> tools) {
+        Collections.sort(tools);
+        this.tools = tools;
+    }
+    
 
     /*
      * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
+     *
+     * @see java.lang.Object#toString()
      */
     @Override
-    public void disableControl() {
-        this.mapWidget.deactivateMeasureArea();
-    }
-
-    private void deactivateAllMapControl() {
-        if (mapWidget.isFeatureOperationEnable()) {
-            mapWidget.deactivateFeatureOperation();
-        }
-
-        if (mapWidget.isModifyFeatureEnable()) {
-            mapWidget.deactivateModifyFeature();
-        }
+    public String toString() {
+        return "MenuInToolBar [text=" + text + ", enabled=" + enabled
+                + ", getId()=" + getId() + ", getOrder()=" + getOrder() + "]";
     }
 }

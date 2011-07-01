@@ -47,7 +47,7 @@ public class GeoPlatformEvents {
     
     public static final EventType INIT_GEO_PLATFORM = new EventType();
     
-    public static final EventType APPLICATION_LOGIN = new EventType();
+    public static final EventType APPLICATION_FIRST_LOGIN = new EventType();
 
     public static final EventType REGISTER_GEOCODING_LOCATION = new EventType();
 

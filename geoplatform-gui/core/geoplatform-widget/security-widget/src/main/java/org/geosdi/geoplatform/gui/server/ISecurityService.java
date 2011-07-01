@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server;
 
 import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
@@ -44,6 +45,6 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public interface ISecurityService {
     
-    public void userLogin(String userName, String password, HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    public String userLogin(String userName, String password, HttpServletRequest httpServletRequest) throws GeoPlatformException;
     
 }

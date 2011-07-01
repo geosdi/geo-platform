@@ -148,7 +148,6 @@ public class MapView extends GeoPlatformView {
      * Remove Marker from Map
      */
     private void onRemoveMarker() {
-        // TODO Auto-generated method stub
         this.geocoderMarker.removeMarker();
     }
 
@@ -158,7 +157,6 @@ public class MapView extends GeoPlatformView {
      * @param event
      */
     private void onRegisterGeocodingLocation(IGeoPlatformLocation bean) {
-        // TODO Auto-generated method stub
         LonLat center = new LonLat(bean.getLon(), bean.getLat());
         center.transform("EPSG:4326", "EPSG:900913");
         this.geocoderMarker.addMarker(center, this.mapLayout.getMap());
@@ -201,7 +199,6 @@ public class MapView extends GeoPlatformView {
      * Init Map Widget
      */
     private void onInitMapWidget() {
-        // TODO Auto-generated method stub
         this.addLayer(this.geocoderMarker.getMarkerLayer());
     }
 
@@ -209,7 +206,6 @@ public class MapView extends GeoPlatformView {
      * Activate Draw Control on Map
      */
     public void deactivateDrawControl() {
-        // TODO Auto-generated method stub
         this.mapLayout.deactivateDrawFeature();
     }
 
@@ -217,7 +213,6 @@ public class MapView extends GeoPlatformView {
      * Deactivate Draw Control on Map
      */
     public void activateDrawControl() {
-        // TODO Auto-generated method stub
         this.mapLayout.activateDrawFeature();
     }
 

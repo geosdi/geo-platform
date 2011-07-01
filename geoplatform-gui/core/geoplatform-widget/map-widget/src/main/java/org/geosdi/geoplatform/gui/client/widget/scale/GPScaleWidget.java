@@ -210,7 +210,6 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
      */
     @Override
     public void onPositionChange(Size s) {
-        // TODO Auto-generated method stub
         if ((this.size != null) && (this.size != s)) {
             this.size = s;
             int left = this.size.width - config.width - 10
@@ -223,14 +222,15 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
 
     }
 
+    
+    
     @Override
     public void activationScaleBar(boolean activate) {
         if (activate) {
             show();
         } else {
-            hide();
+            remove();
         }
-
     }
     
     public static boolean isScaleWidgetEnabled() {

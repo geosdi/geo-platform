@@ -268,7 +268,6 @@ public class MapLayoutWidget implements GeoPlatformMap {
      * Set center of the Map on Italy
      */
     public void setMapCenter() {
-        // TODO Auto-generated method stub
         LonLat center = new LonLat(13.375, 42.329);
         center.transform("EPSG:4326", map.getProjection());
         this.map.setCenter(center, 5);
@@ -499,7 +498,6 @@ public class MapLayoutWidget implements GeoPlatformMap {
      */
     @Override
     public void activateDrawLineFeature() {
-        // TODO Auto-generated method stub
         this.mapControl.activateDrawLineFeature();
     }
 
@@ -508,7 +506,6 @@ public class MapLayoutWidget implements GeoPlatformMap {
      */
     @Override
     public void deactivateDrawLineFeature() {
-        // TODO Auto-generated method stub
         this.mapControl.deactivateDrawLineFeature();
     }
 

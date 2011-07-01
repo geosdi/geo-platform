@@ -14,7 +14,16 @@
   <packaging>pom</packaging>
 
   <name>Geo-Platform :: == WS Modules</name>
-  
+  <repositories>
+              <repository>
+            <id>geosolutions</id>
+            <name>Geosolutions</name>
+            <url>http://maven.geo-solutions.it/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+  </repositories>
   <developers>
         <developer>
             <name>Francesco Izzi</name>
@@ -37,7 +46,13 @@
             </roles>
         </developer>
     </developers>
-    
+    <dependencies>
+          <dependency>
+           <groupId>it.geosolutions</groupId>
+           <artifactId>geoserver-manager</artifactId>
+           <version>1.1-SNAPSHOT</version>
+          </dependency>
+    </dependencies>
     <modules>
 	  <module>geoplatform-publisher</module>
 	</modules>

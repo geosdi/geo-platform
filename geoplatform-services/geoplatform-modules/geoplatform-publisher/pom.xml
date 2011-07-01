@@ -40,6 +40,6 @@
     
     <modules>
 	  <module>publisher-api</module>
-      <module>publisher-impl</module>
+        <module>publisher-impl</module>
 	</modules>
 </project>

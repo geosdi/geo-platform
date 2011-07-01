@@ -53,7 +53,9 @@ public class ShowLayerPropertiesAction extends MenuAction {
     public ShowLayerPropertiesAction(TreePanel treePanel) {
         super("LayerProperties");
         this.treePanel = treePanel;
-        this.layersPropertiesWidget = new LayersPropertiesWidget();
+        
+        System.out.println(this.treePanel);
+        this.layersPropertiesWidget = new LayersPropertiesWidget(this.treePanel);
     }
 
     @Override

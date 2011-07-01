@@ -35,6 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab;
 
+import com.extjs.gxt.ui.client.widget.form.TextArea;
+import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.extjs.gxt.ui.client.widget.layout.FormData;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -42,12 +47,42 @@ package org.geosdi.geoplatform.gui.client.widget.tab;
  */
 public class LayersInfoTabItem extends GeoPlatformTabItem {
     
-    public LayersInfoTabItem() {
+    private RasterTreeNode item;
+
+    public LayersInfoTabItem(RasterTreeNode item) {
         super("Layer Info");
+        this.item = item;
     }
 
     @Override
     public void addComponents() {
-         
+        
+        FormData formData = new FormData("100%");
+
+        TextField<String> title = new TextField<String>();
+        title.setFieldLabel("Title");
+        title.setValue(item.getTitle());
+        add(title, formData);
+        
+        TextField<String> name = new TextField<String>();
+        name.setFieldLabel("Name");
+        name.setValue(item.getName());
+        add(name, formData);
+        
+        
+        TextField<String> server = new TextField<String>();
+        server.setFieldLabel("Server");
+        server.setValue(item.getDataSource());
+        add(server, formData);
+        
+        TextArea abstractText = new TextArea();
+        abstractText.setFieldLabel("Abstract");
+        abstractText.setValue(item.getAbstractText());
+        add(abstractText, formData);
+        
+        
+        
+        
+
     }
 }

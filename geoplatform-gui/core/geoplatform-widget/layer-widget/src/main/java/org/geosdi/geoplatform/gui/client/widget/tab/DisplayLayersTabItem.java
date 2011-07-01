@@ -35,19 +35,28 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab;
 
+import com.extjs.gxt.ui.client.widget.Slider;
+import com.extjs.gxt.ui.client.widget.layout.FillData;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class DisplayLayersTabItem extends GeoPlatformTabItem {
-    
+
     public DisplayLayersTabItem() {
         super("Display");
     }
 
     @Override
     public void addComponents() {
-        this.formPanel.setHeaderVisible(false);    
-    }    
+        this.formPanel.setHeaderVisible(false);
+        final Slider slider = new Slider();
+        slider.setWidth(200);
+        slider.setIncrement(1);
+        slider.setMaxValue(100);
+        slider.setClickToChange(false);
+        add(slider, new FillData(30));
+    }
 }

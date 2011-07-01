@@ -43,6 +43,7 @@ import com.extjs.gxt.ui.client.event.WidgetListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tab.LayersTabWidget;
 
 /**
@@ -54,19 +55,26 @@ public class LayersPropertiesWidget extends GeoPlatformWindow {
 
     private LayersTabWidget layersTabWidget;
     private FormPanel formPanel;
+    private TreePanel treePanel;
 
     public LayersPropertiesWidget() {
         super(true);
+    }
+    
+    public LayersPropertiesWidget(TreePanel treePanel) {
+        super(true);
+        this.treePanel = treePanel;
     }
 
     @Override
     public void addComponent() {
         formPanel = new FormPanel();
-        formPanel.setLayout(new FlowLayout());
-
+        formPanel.setLayout(new FlowLayout(10));
+        formPanel.setBorders(false);
+        formPanel.setBodyBorder(false);
         formPanel.setHeaderVisible(false);
 
-        this.layersTabWidget = new LayersTabWidget();
+        this.layersTabWidget = new LayersTabWidget(treePanel);
         formPanel.add(this.layersTabWidget);
 
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);

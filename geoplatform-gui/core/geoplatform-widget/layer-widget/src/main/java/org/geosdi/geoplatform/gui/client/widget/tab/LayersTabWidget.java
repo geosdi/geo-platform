@@ -35,41 +35,56 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab;
 
+import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class LayersTabWidget extends GeoPlatformTabWidget {
-    
+
     private DisplayLayersTabItem displayItem;
     private LayersInfoTabItem infoItem;
     private WPSLayerTabItem wpsItem;
+    private RasterTreeNode item;
 
+    public LayersTabWidget(TreePanel treePanel) {
+        GPBeanTreeModel model = (GPBeanTreeModel) treePanel.getSelectionModel().getSelectedItem();
+        System.out.println(item);
+        if (model instanceof RasterTreeNode) {
+            item = (RasterTreeNode) model;
+        }
+    }
 
     @Override
     public void initSize() {
         setAutoWidth(true);
         setAutoHeight(true);
+        setBorders(false);
+        setBodyBorder(false);
+        setLayout(new FlowLayout(10));  
     }
 
     @Override
     public void addComponents() {
         createTabItems();
         
-        super.add(displayItem);
         super.add(infoItem);
+        super.add(displayItem);
         super.add(wpsItem);
     }
 
     @Override
     public void setWidgetProperties() {
-              
     }
 
     private void createTabItems() {
+        this.infoItem = new LayersInfoTabItem(item);
         this.displayItem = new DisplayLayersTabItem();
-        this.infoItem = new LayersInfoTabItem();
         this.wpsItem = new WPSLayerTabItem();
     }
 }

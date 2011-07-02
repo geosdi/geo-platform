@@ -76,7 +76,7 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
     /**
      * Creates a new GPScaleWidget instance.
      */
-    public GPScaleWidget() {
+    private GPScaleWidget() {
         baseStyle = "x-info";
         frame = true;
         setShadow(false);
@@ -150,7 +150,7 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
 
         add(comboScale);
 
-        Point p = position();
+        Point p = position(XDOM.getViewportSize());
         el().setLeftTop(p.x, p.y);
         setSize(config.width, config.height);
 
@@ -166,16 +166,16 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
         });
 
         el().slideIn(Direction.DOWN, FxConfig.NONE);
-        
+
     }
 
-    protected Point position() {
-        this.size = XDOM.getViewportSize();
+    protected Point position(Size s) {
+        this.size = s;
         int left = this.size.width - config.width - 10
                 + XDOM.getBodyScrollLeft();
         int top = this.size.height - config.height - 54
                 - (level * (config.height + 10)) + XDOM.getBodyScrollTop();
-        
+
         return new Point(left, top);
     }
 
@@ -211,19 +211,12 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
     @Override
     public void onPositionChange(Size s) {
         if ((this.size != null) && (this.size != s)) {
-            this.size = s;
-            int left = this.size.width - config.width - 10
-                    + XDOM.getBodyScrollLeft();
-            int top = this.size.height - config.height - 10
-                    - (level * (config.height + 10)) + XDOM.getBodyScrollTop();
-            Point p = new Point(left, top);
+            Point p = position(s);
             el().setLeftTop(p.x, p.y);
         }
 
     }
 
-    
-    
     @Override
     public void activationScaleBar(boolean activate) {
         if (activate) {
@@ -232,7 +225,7 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
             remove();
         }
     }
-    
+
     public static boolean isScaleWidgetEnabled() {
         return pop().isVisible();
     }

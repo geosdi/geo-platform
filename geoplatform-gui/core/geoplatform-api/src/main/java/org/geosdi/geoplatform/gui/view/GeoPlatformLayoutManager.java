@@ -94,6 +94,13 @@ public abstract class GeoPlatformLayoutManager {
 
         viewport.add(north, data);
     }
+    
+    public void resetView(){
+        this.resetWest();
+    }
+    
+    private void resetWest(){
+    }
 
     /**
      * Create West Panel in Main UI

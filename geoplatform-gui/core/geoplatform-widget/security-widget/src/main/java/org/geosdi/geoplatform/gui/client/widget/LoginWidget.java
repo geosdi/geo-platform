@@ -41,7 +41,6 @@ import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.RootPanel;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.event.ILoginManager;
 import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
@@ -105,7 +104,7 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
 
     @Override
     public void onSubmit() {
-        if (this.userLogged == null || !this.userLogged.equals(this.userName.getValue())) {
+        if (this.userLogged == null || this.userLogged.equals(this.userName.getValue())) {
             status.setBusy("please wait...");
             getButtonBar().disable();
             SecurityRemoteImpl.Util.getInstance().userLogin(this.userName.getValue(),
@@ -132,6 +131,7 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
                         }
                     });
         } else {
+            userLogged = null;
             //TODO: call log-out
         }
     }

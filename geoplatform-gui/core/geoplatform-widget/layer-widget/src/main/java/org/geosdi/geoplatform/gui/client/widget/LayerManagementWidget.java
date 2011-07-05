@@ -74,17 +74,18 @@ public class LayerManagementWidget extends ContentPanel {
 
             @Override
             public void widgetResized(ComponentEvent ce) {
-                if (getHeight() > 0) 
+                if (getHeight() > 0) {
                     treePanel.setHeight(getHeight() - 220);
+                }
             }
         });
 
-        setScrollMode(Scroll.AUTO);
+        setScrollMode(Scroll.NONE);
     }
 
     private void addComponents() {
         treePanel = new ContentPanel();
-        treePanel.setScrollMode(Scroll.AUTO);
+        treePanel.setScrollMode(Scroll.AUTOY);
         treePanel.setHeaderVisible(false);
 
         this.layerTree = new LayerTreeWidget();
@@ -99,7 +100,7 @@ public class LayerManagementWidget extends ContentPanel {
 
         this.treePanel.setTopComponent(this.treeToolbar.getToolBar());
 
-        super.add(treePanel, northData);
+        super.add(this.treePanel, northData);
 
         this.legendPanel = new GPLegendPanel();
 

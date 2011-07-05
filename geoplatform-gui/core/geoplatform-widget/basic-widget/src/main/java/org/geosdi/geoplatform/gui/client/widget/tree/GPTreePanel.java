@@ -53,7 +53,4 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> {
     public void refresh(T model) {
         super.refresh(model);
     }
-    
-    
-    
 }

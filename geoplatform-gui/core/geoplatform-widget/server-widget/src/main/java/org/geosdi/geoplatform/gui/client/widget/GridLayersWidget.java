@@ -173,7 +173,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
         XTemplate tpl = XTemplate.create(
-                "<p><b>Abstract:</b> {label}</p>");
+                "<p><b>Abstract:</b> {abstractText}</p>");
 
         rowExpander = new RowExpander(tpl);
 

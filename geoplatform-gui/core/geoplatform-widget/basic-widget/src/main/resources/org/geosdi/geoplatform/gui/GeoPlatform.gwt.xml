@@ -22,7 +22,6 @@
     <source path="utility" />
     <source path="factory" />
     <source path="exception" />
-    <source path="event" />
     
     <servlet path="/GeoPlatformOGCRemote" class="org.geosdi.geoplatform.gui.server.gwt.GeoPlatformOGCRemoteImpl" />
 	

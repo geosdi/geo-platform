@@ -95,16 +95,6 @@ public abstract class GeoPlatformLayoutManager {
         viewport.add(north, data);
     }
 
-    public void resetView() {
-        this.viewport.remove(this.north);
-        this.viewport.remove(this.west);
-        this.createNorth(50);
-        this.createWest();
-        //this.createWest(false);
-
-        //this.center.removeAll();
-    }
-
     /**
      * Create West Panel in Main UI
      */

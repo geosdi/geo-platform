@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.featureinfo.widget;
 
 import com.extjs.gxt.ui.client.Style.Scroll;
+import com.extjs.gxt.ui.client.event.ScrollListener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import java.util.Iterator;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
@@ -67,6 +68,7 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
     @Override
     public void addComponent() {
         this.mainPanel = new ContentPanel();
+        this.mainPanel.setScrollMode(Scroll.ALWAYS);
         this.mainPanel.setHeaderVisible(false);
         add(this.mainPanel);
     }

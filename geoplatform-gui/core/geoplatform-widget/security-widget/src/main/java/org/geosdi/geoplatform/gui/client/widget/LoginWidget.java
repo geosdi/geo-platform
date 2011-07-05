@@ -36,25 +36,19 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.event.EventType;
-import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.RootPanel;
 import java.util.List;
-import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.client.event.ILoginManager;
 import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
-import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
 import org.geosdi.geoplatform.gui.client.widget.security.GPSecurityWidget;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.MenuInToolBar;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.event.DisplayApplicationHandler;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
@@ -66,12 +60,14 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoginWidget extends GPSecurityWidget implements ILoginManager, DisplayApplicationHandler {
+public class LoginWidget extends GPSecurityWidget implements ILoginManager {
 
+    private final static int MAX_NUMBER_ATTEMPTS = 5;
     private LoginStatus status;
     private EventType eventOnSuccess;
     private GwtEvent gwtEventOnSuccess = null;
     private String userLogged;
+    private int reloginAttempts;
 
     /**
      * 
@@ -81,16 +77,13 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager, Disp
         super();
         this.eventOnSuccess = eventOnSuccess;
         this.generateLoginManager();
-        LayerHandlerManager.addHandler(DisplayApplicationHandler.TYPE, this);
     }
 
     @Override
     public void addStatusComponent() {
         status = new LoginStatus();
-
         status.setAutoWidth(true);
         getButtonBar().add(status);
-
         getButtonBar().add(new FillToolItem());
     }
 
@@ -127,6 +120,7 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager, Disp
                                     LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.getValue());
                             GeoPlatformMessage.infoMessage("Login Error",
                                     caught.getMessage());
+                            ++reloginAttempts;
                         }
 
                         @Override
@@ -136,17 +130,21 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager, Disp
                                     LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
                             userScreen(result, userLogged == null);
                             userLogged = userName.getValue();
+                            reloginAttempts = 0;
                         }
                     });
+        } else if((this.reloginAttempts+1) < MAX_NUMBER_ATTEMPTS) {
+            ++this.reloginAttempts;
+            GeoPlatformMessage.infoMessage("Number of attempts remained: " + (MAX_NUMBER_ATTEMPTS - this.reloginAttempts),
+                    "A different user from the previous one is trying to connect to the application.");
         } else {
-            Dispatcher.forwardEvent(GeoPlatformEvents.USER_LOGOUT);
             GeoPlatformMessage.infoMessage("Application Logout",
                     "A different user from the previous one is trying to connect to the application");
+            Dispatcher.forwardEvent(GeoPlatformEvents.USER_LOGOUT);
         }
     }
 
     public void resetUserSession() {
-        this.userLogged = null;
         SecurityRemoteImpl.Util.getInstance().invalidateSession(new AsyncCallback<Object>() {
 
             @Override
@@ -156,6 +154,7 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager, Disp
 
             @Override
             public void onSuccess(Object result) {
+                userLogged = null;
             }
         });
     }
@@ -223,21 +222,5 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager, Disp
      */
     public GwtEvent getGwtEventOnSuccess() {
         return gwtEventOnSuccess;
-    }
-
-    @Override
-    public void displayApplication() {
-        //The north components: menu bar, toolbar will be recreated because changing user
-        //can change the menu voices to display or activate-deactivate, also the map
-        //will be repositionate to the center
-        MenuBarWidget menuBar = new MenuBarWidget(GeoPlatformUtils.getInstance().getGlobalConfiguration().getMenuBarContainerTool());
-        LayoutManager.getInstance().getNorth().setTopComponent(menuBar.getBar());
-        Dispatcher.forwardEvent(MapWidgetEvents.ATTACH_MAP_WIDGET);
-        Dispatcher.forwardEvent(MapWidgetEvents.ATTACH_TOOLBAR);
-        LayoutManager.getInstance().getStatusMap().setStatus("Wellcome to GeoPortal.",
-                                    EnumSearchStatus.STATUS_SEARCH.toString());
-        RootPanel.get().add(LayoutManager.getInstance().getViewport());
-        LayoutManager.getInstance().getViewport().fireEvent(Events.Resize);
-        GPScaleWidget.display("Scale");
     }
 }

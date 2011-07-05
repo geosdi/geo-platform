@@ -205,18 +205,14 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
     }
 
     private void addUserLoginMenu(MenuInToolBar menuInToolBar) {
-        SplitButton splitItem = new SplitButton(menuInToolBar.getText());
-        splitItem.setIcon(BasicWidgetResources.ICONS.logged_user());
-        splitItem.setId(menuInToolBar.getId());
-
+        Button buttonItem = new Button(menuInToolBar.getText());
+        buttonItem.setIcon(BasicWidgetResources.ICONS.logged_user());
+        buttonItem.setId(menuInToolBar.getId());
         Menu menu = new Menu();
         MenuUtilityBuilder.buildTools(menu, menuInToolBar.getTools());
-//        for (MenuBarClientTool tool : menuInToolBar.getTools()) {
-//            //menu.add();
-//        }
-        splitItem.setMenu(menu);
+        buttonItem.setMenu(menu);
         toolBar.add(new FillToolItem());
-        this.toolBar.add(splitItem);
+        this.toolBar.add(buttonItem);
     }
 
     /**

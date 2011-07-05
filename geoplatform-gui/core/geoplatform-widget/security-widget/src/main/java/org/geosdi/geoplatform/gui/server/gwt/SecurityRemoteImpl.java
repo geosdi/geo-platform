@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.server.gwt;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.gui.client.service.SecurityRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
@@ -58,6 +57,11 @@ public class SecurityRemoteImpl extends RemoteServiceServlet implements Security
     @Override
     public String userLogin(String userName, String password) throws GeoPlatformException {
         return this.securityService.userLogin(userName, password, super.getThreadLocalRequest());
+    }
+
+    @Override
+    public void invalidateSession() throws GeoPlatformException {
+        this.securityService.invalidateSession(super.getThreadLocalRequest());
     }
     
 }

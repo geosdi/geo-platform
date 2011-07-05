@@ -55,12 +55,10 @@ public class MapModel extends GPMapModel implements HasLayerChangedHandler {
 
     public MapModel(GeoPlatformMap theMapWidget) {
         super(theMapWidget);
-        // TODO Auto-generated constructor stub
         createStores();
     }
 
     private void createStores() {
-        // TODO Auto-generated method stub
         this.layersStore = new MapLayersStore(this.mapWidget);
     }
 
@@ -74,7 +72,6 @@ public class MapModel extends GPMapModel implements HasLayerChangedHandler {
      */
     @Override
     public HandlerRegistration addLayerChangedHandler() {
-        // TODO Auto-generated method stub
         return GPHandlerManager.addHandler(LayerMapChangedHandler.TYPE,
                 this.layersStore);
     }

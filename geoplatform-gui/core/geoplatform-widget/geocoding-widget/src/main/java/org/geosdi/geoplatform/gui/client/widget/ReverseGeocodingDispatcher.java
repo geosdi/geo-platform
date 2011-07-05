@@ -73,7 +73,6 @@ public class ReverseGeocodingDispatcher implements
      */
     @Override
     public void processRequest(final ReverseGeocodingWidget widget) {
-        // TODO Auto-generated method stub
         LonLat lonlat = widget.getLonlat();
 
         this.geocodingService.findLocation(lonlat.lat(), lonlat.lon(),
@@ -81,13 +80,11 @@ public class ReverseGeocodingDispatcher implements
 
                     @Override
                     public void onFailure(Throwable caught) {
-                        // TODO Auto-generated method stub
                         widget.onRequestFailure("An error occurred processing the request");
                     }
 
                     @Override
                     public void onSuccess(GeocodingBean result) {
-                        // TODO Auto-generated method stub
                         widget.onRequestSuccess(result.getDescription());
                     }
                 });

@@ -47,4 +47,6 @@ public interface SecurityRemoteAsync {
     
     public void userLogin(String userName, String password, AsyncCallback<String> callback) throws GeoPlatformException;
     
+    public void invalidateSession(AsyncCallback<?> callback) throws GeoPlatformException;
+    
 }

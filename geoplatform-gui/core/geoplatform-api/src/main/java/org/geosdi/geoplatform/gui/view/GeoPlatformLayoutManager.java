@@ -75,31 +75,34 @@ public abstract class GeoPlatformLayoutManager {
      * Build The Main GeoPlatform UI
      */
     private void initLayoutManager() {
-            viewport = new Viewport();
-            viewport.setLayout(new BorderLayout());
-            createEast();
-            createWest();
-            createCenter();
-            createSouth();
+        viewport = new Viewport();
+        viewport.setLayout(new BorderLayout());
+        createEast();
+        createWest();
+        createCenter();
+        createSouth();
     }
 
     /**
      * Create North Panel in Main UI
      */
     public void createNorth(float size) {
-        north = new ContentPanel();
-        north.setHeaderVisible(false);
+        this.north = new ContentPanel();
+        this.north.setHeaderVisible(false);
         BorderLayoutData data = new BorderLayoutData(LayoutRegion.NORTH, size);
         data.setMargins(new Margins(0, 5, 0, 5));
 
         viewport.add(north, data);
     }
-    
-    public void resetView(){
-        this.resetWest();
-    }
-    
-    private void resetWest(){
+
+    public void resetView() {
+        this.viewport.remove(this.north);
+        this.viewport.remove(this.west);
+        this.createNorth(50);
+        this.createWest();
+        //this.createWest(false);
+
+        //this.center.removeAll();
     }
 
     /**
@@ -108,15 +111,12 @@ public abstract class GeoPlatformLayoutManager {
     private void createWest() {
         BorderLayoutData data = new BorderLayoutData(LayoutRegion.WEST, 350);
         data.setMargins(new Margins(5, 0, 5, 5));
-
         west = new ContentPanel();
         west.setHeaderVisible(false);
         west.setBodyBorder(false);
         west.setLayout(new AccordionLayout());
         west.setScrollMode(Scroll.NONE);
-
         west.hide();
-
         viewport.add(west, data);
     }
 
@@ -126,15 +126,12 @@ public abstract class GeoPlatformLayoutManager {
     private void createEast() {
         BorderLayoutData data = new BorderLayoutData(LayoutRegion.EAST, 350);
         data.setMargins(new Margins(5, 0, 5, 5));
-
         east = new ContentPanel();
         east.setHeaderVisible(false);
         east.setBodyBorder(false);
         east.setLayout(new AccordionLayout());
         east.setScrollMode(Scroll.NONE);
-
         east.hide();
-
         viewport.add(east, data);
     }
 

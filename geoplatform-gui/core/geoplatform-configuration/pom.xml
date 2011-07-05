@@ -86,7 +86,7 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
         </dependency>
-        
+
 		<!-- GeoPlatform-WS-Client -->
 
         <dependency>

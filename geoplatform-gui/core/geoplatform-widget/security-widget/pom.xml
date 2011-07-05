@@ -73,8 +73,14 @@
             <version>${geoplatform-version}</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>map-widget</artifactId>
+            <version>${geoplatform-version}</version>
+        </dependency>
         
         <!-- GWT-OL Resources -->
+        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
@@ -90,6 +96,7 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-model</artifactId>
         </dependency>
+        
         
     </dependencies>
 

@@ -33,43 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.map.puregwt.event;
+package org.geosdi.geoplatform.gui.event;
 
-import com.extjs.gxt.ui.client.util.Size;
-import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class ScaleChangeEvent extends GwtEvent<ScaleChangeHandler> {
-
-    private Size size;
-
-    public ScaleChangeEvent(Size theSize) {
-        this.size = theSize;
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
-     */
-    @Override
-    public Type<ScaleChangeHandler> getAssociatedType() {
-        return ScaleChangeHandler.TYPE;
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
-     * .EventHandler)
-     */
-    @Override
-    protected void dispatch(ScaleChangeHandler handler) {
-        handler.onPositionChange(size);
-    }
+public interface DisplayApplicationHandler extends EventHandler{
+    
+    Type<DisplayApplicationHandler> TYPE = new Type<DisplayApplicationHandler>();
+    
+    public void displayApplication();
+    
 }

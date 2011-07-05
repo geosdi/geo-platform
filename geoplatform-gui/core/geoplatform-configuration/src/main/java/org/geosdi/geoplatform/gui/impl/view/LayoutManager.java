@@ -52,8 +52,8 @@ import com.google.gwt.user.client.ui.Widget;
 public class LayoutManager extends GeoPlatformLayoutManager {
 
     private static LayoutManager instance = new LayoutManager();
-    
-    private LayoutManager(){}
+
+    private LayoutManager() {}
 
     /**
      * Build Singleton Instace

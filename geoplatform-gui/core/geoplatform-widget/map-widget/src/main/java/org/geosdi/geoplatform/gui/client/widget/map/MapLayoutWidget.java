@@ -516,7 +516,6 @@ public class MapLayoutWidget implements GeoPlatformMap {
     public void zoomToMaxExtend(BboxClientInfo bbox) {
         Bounds b = new Bounds(bbox.getLowerLeftX(), bbox.getLowerLeftY(),
                 bbox.getUpperRightX(), bbox.getUpperRightY());
-
         b.transform(new Projection("EPSG:4326"),
                 new Projection(map.getProjection()));
 

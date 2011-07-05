@@ -64,4 +64,6 @@ public interface SecurityRemote extends RemoteService {
      * @throws GeoPlatformException
      */
     public String userLogin(String userName, String password) throws GeoPlatformException;
+
+    public void invalidateSession() throws GeoPlatformException;
 }

@@ -57,7 +57,6 @@ public class ScaleVisibleEvent extends GwtEvent<ScaleChangeHandler> {
      */
     @Override
     public Type<ScaleChangeHandler> getAssociatedType() {
-        // TODO Auto-generated method stub
         return ScaleChangeHandler.TYPE;
     }
 
@@ -70,7 +69,6 @@ public class ScaleVisibleEvent extends GwtEvent<ScaleChangeHandler> {
      */
     @Override
     protected void dispatch(ScaleChangeHandler handler) {
-        // TODO Auto-generated method stub
         handler.activationScaleBar(activate);
     }
 }

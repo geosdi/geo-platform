@@ -47,4 +47,6 @@ public interface ISecurityService {
     
     public String userLogin(String userName, String password, HttpServletRequest httpServletRequest) throws GeoPlatformException;
     
+    public void invalidateSession(HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    
 }

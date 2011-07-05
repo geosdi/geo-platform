@@ -36,30 +36,37 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.event.EventType;
+import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.RootPanel;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.client.event.ILoginManager;
 import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
 import org.geosdi.geoplatform.gui.client.widget.security.GPSecurityWidget;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.MenuInToolBar;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.event.DisplayApplicationHandler;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoginWidget extends GPSecurityWidget implements ILoginManager {
+public class LoginWidget extends GPSecurityWidget implements ILoginManager, DisplayApplicationHandler {
 
     private LoginStatus status;
     private EventType eventOnSuccess;
@@ -74,6 +81,7 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
         super();
         this.eventOnSuccess = eventOnSuccess;
         this.generateLoginManager();
+        LayerHandlerManager.addHandler(DisplayApplicationHandler.TYPE, this);
     }
 
     @Override
@@ -131,9 +139,25 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
                         }
                     });
         } else {
-            userLogged = null;
-            //TODO: call log-out
+            Dispatcher.forwardEvent(GeoPlatformEvents.USER_LOGOUT);
+            GeoPlatformMessage.infoMessage("Application Logout",
+                    "A different user from the previous one is trying to connect to the application");
         }
+    }
+
+    public void resetUserSession() {
+        this.userLogged = null;
+        SecurityRemoteImpl.Util.getInstance().invalidateSession(new AsyncCallback<Object>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                //TODO: In case of fail... what is possible to do??
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+            }
+        });
     }
 
     private void userScreen(final String name, final boolean changeUseName) {
@@ -199,5 +223,21 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
      */
     public GwtEvent getGwtEventOnSuccess() {
         return gwtEventOnSuccess;
+    }
+
+    @Override
+    public void displayApplication() {
+        //The north components: menu bar, toolbar will be recreated because changing user
+        //can change the menu voices to display or activate-deactivate, also the map
+        //will be repositionate to the center
+        MenuBarWidget menuBar = new MenuBarWidget(GeoPlatformUtils.getInstance().getGlobalConfiguration().getMenuBarContainerTool());
+        LayoutManager.getInstance().getNorth().setTopComponent(menuBar.getBar());
+        Dispatcher.forwardEvent(MapWidgetEvents.ATTACH_MAP_WIDGET);
+        Dispatcher.forwardEvent(MapWidgetEvents.ATTACH_TOOLBAR);
+        LayoutManager.getInstance().getStatusMap().setStatus("Wellcome to GeoPortal.",
+                                    EnumSearchStatus.STATUS_SEARCH.toString());
+        RootPanel.get().add(LayoutManager.getInstance().getViewport());
+        LayoutManager.getInstance().getViewport().fireEvent(Events.Resize);
+        GPScaleWidget.display("Scale");
     }
 }

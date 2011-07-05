@@ -80,7 +80,7 @@ public class SecurityService implements ISecurityService {
     private void storeUserInSession(GPUser user, HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
-        //session.setMaxInactiveInterval(10);
+        session.setMaxInactiveInterval(10);
         session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), user);
     }
 
@@ -98,10 +98,6 @@ public class SecurityService implements ISecurityService {
         return getUserAlreadyFromSession(httpServletRequest);
     }
 
-    public void logout(HttpServletRequest httpServletRequest) {
-        deleteUserFromSession(httpServletRequest);
-    }
-
     private void deleteUserFromSession(HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         session.removeAttribute(UserLoginEnum.USER_LOGGED.toString());
@@ -115,5 +111,12 @@ public class SecurityService implements ISecurityService {
         public void setGeoPlatformServiceClient(
             @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
+    }
+
+    @Override
+    public void invalidateSession(HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        //deleteUserFromSession(httpServletRequest);
+        HttpSession session = httpServletRequest.getSession(false);
+        session.invalidate();
     }
 }

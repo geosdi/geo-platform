@@ -92,7 +92,6 @@ public class MapController extends GeoPlatformController {
     }
 
     private void onDrawFeature(AppEvent event) {
-        // TODO Auto-generated method stub
         ((MapView) this.view).drawFeature((VectorFeature) event.getData());
     }
 
@@ -105,7 +104,6 @@ public class MapController extends GeoPlatformController {
      * @param event
      */
     private void onEraseFeature(AppEvent event) {
-        // TODO Auto-generated method stub
         ((MapView) this.view).eraseFeature((VectorFeature) event.getData());
     }
 

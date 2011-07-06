@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.event.ILoginManager;
@@ -133,14 +134,16 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
                             reloginAttempts = 0;
                         }
                     });
-        } else if((this.reloginAttempts+1) < MAX_NUMBER_ATTEMPTS) {
+        } else if ((this.reloginAttempts + 1) < MAX_NUMBER_ATTEMPTS) {
             ++this.reloginAttempts;
             GeoPlatformMessage.infoMessage("Number of attempts remained: " + (MAX_NUMBER_ATTEMPTS - this.reloginAttempts),
                     "A different user from the previous one is trying to connect to the application.");
         } else {
+            Dispatcher.forwardEvent(GeoPlatformEvents.REMOVE_WINDOW_CLOSE_LISTENER);
             GeoPlatformMessage.infoMessage("Application Logout",
                     "A different user from the previous one is trying to connect to the application");
-            Dispatcher.forwardEvent(GeoPlatformEvents.USER_LOGOUT);
+            this.resetUserSession();
+            Window.Location.reload();
         }
     }
 

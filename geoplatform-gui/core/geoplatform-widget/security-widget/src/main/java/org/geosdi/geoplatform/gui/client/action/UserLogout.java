@@ -33,38 +33,40 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.view.event;
+package org.geosdi.geoplatform.gui.client.action;
 
-import com.extjs.gxt.ui.client.event.EventType;
+import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
- * @author giuseppe
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class GeoPlatformEvents {
+public class UserLogout extends MenuBaseAction {
 
-    public static final EventType UPDATE_CENTER = new EventType();
-    
-    public static final EventType INIT_GEO_PLATFORM = new EventType();
-    
-    public static final EventType APPLICATION_FIRST_LOGIN = new EventType();
+    public UserLogout() {
+        super("Logout", BasicWidgetResources.ICONS.logout());
+    }
 
-    public static final EventType REGISTER_GEOCODING_LOCATION = new EventType();
+    @Override
+    public void componentSelected(MenuEvent ce) {
+        SecurityRemoteImpl.Util.getInstance().invalidateSession(new AsyncCallback<Object>() {
 
-    public static final EventType RemoveMarker = new EventType();
+            @Override
+            public void onFailure(Throwable caught) {
+                //TODO: In case of fail... what is possible to do??
+            }
 
-    public static final EventType SCALE_REQUEST_CHANGE = new EventType();
-
-    public static final EventType ZOOM_TO_MAX_EXTEND = new EventType();
-
-    public static final EventType INIT_OGC_MODULES_WIDGET = new EventType();
-
-    public static final EventType SHOW_capabilities_SERVER_WIDGET = new EventType();
-    
-    public static final EventType GP_NODE_EXPANDED = new EventType();
-    
-    public static final EventType SHOW_PRINTING_WIDGET = new EventType();
-    
-    public static final EventType REMOVE_WINDOW_CLOSE_LISTENER = new EventType();
-
+            @Override
+            public void onSuccess(Object result) {
+                Window.Location.reload();
+            }
+        });
+    }
 }

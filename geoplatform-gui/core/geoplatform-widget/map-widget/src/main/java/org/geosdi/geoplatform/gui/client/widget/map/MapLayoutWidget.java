@@ -232,7 +232,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
         this.osm.setIsBaseLayer(true);
         this.map.addLayer(osm);
 
-        this.osm.setZIndex(1);
+        this.osm.setZIndex(-1);
     }
 
     private void createBaseGoogleLayer() {
@@ -245,7 +245,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
         layer.setIsBaseLayer(true);
         this.map.addLayer(layer);
 
-        this.layer.setZIndex(2);
+        this.layer.setZIndex(-2);
     }
 
     /**

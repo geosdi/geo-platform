@@ -107,7 +107,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
             this.folderDescendantMap.put((FolderTreeNode) parentDestination, ((FolderTreeNode) parentDestination).getNumberOfDescendants());
         }
         if (parentDestination.getParent() != null && !(parentDestination.getParent() instanceof GPRootTreeNode)) {
-            this.updateNumberOfDescendants((GPBeanTreeModel) parentDestination.getParent());
+            this.updateNumberOfDescendants((GPBeanTreeModel) parentDestination.getParent(), numOfAddedElements);
         }
     }
 
@@ -119,7 +119,6 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
         this.updateNumberOfDescendants(parentDestination, 1);
     }
 
-    //TODO: Gestire gli indici nel caso di aggiunta di più elementi
     private void preorderTraversal() {
         this.preorderTraversal(1);
     }

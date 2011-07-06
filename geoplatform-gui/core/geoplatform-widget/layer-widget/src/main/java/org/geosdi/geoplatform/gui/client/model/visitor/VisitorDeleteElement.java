@@ -94,7 +94,6 @@ public class VisitorDeleteElement extends AbstractVisitTree implements IVisitor 
         }
     }
 
-    //TODO: Gestire gli indici nel caso di aggiunta di più elementi
     private void preorderTraversal(int numberOfDescendant) {
         assert (this.rootElement != null) : "VisitorDeleteElement on preorderTraversal: impossible to visit tree, the root element is null";
         this.rootElement.setzIndex(this.rootElement.getzIndex() - 1 - numberOfDescendant);

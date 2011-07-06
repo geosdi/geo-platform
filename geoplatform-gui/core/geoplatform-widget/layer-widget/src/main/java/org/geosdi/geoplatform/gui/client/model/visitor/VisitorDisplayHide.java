@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.impl.map.event.DisplayLayerMapEvent;
@@ -172,11 +173,19 @@ public class VisitorDisplayHide implements IVisitor {
         this.isCacheableCheck = false;
         //System.out.println("Realigning view");
         if (element.isChecked()) {
-            this.treePanel.setExpanded(element, true, true);
-            this.isInternalFolderCheck = true;
             element.setChecked(false);
-            this.treePanel.setChecked(element, true);
-            this.isInternalFolderCheck = false;
+            if (element instanceof FolderTreeNode) {
+                this.treePanel.setExpanded(element, true, true);
+                this.isInternalFolderCheck = true;
+                this.treePanel.setChecked(element, true);
+                this.isInternalFolderCheck = false;
+            } else if (element instanceof GPLayerTreeModel && this.isAllParentsChecked(element)) {
+                this.treePanel.setChecked(element, true);
+            } else if (element instanceof GPLayerTreeModel) {
+                this.isInternalLeafCheck = true;
+                this.treePanel.setChecked(element, true);
+                this.isInternalLeafCheck = false;
+            }
         }
         for (ModelData item : element.getChildren()) {
             GPBeanTreeModel gpBean = (GPBeanTreeModel) item;

@@ -68,7 +68,6 @@ public class GPFeatureInfoWidget extends GeoPlatformWindow implements GPFeatureI
     @Override
     public void addComponent() {
         this.mainPanel = new ContentPanel();
-        this.mainPanel.setScrollMode(Scroll.ALWAYS);
         this.mainPanel.setHeaderVisible(false);
         add(this.mainPanel);
     }

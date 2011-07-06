@@ -139,11 +139,7 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
             GeoPlatformMessage.infoMessage("Number of attempts remained: " + (MAX_NUMBER_ATTEMPTS - this.reloginAttempts),
                     "A different user from the previous one is trying to connect to the application.");
         } else {
-            Dispatcher.forwardEvent(GeoPlatformEvents.REMOVE_WINDOW_CLOSE_LISTENER);
-            GeoPlatformMessage.infoMessage("Application Logout",
-                    "A different user from the previous one is trying to connect to the application");
             this.resetUserSession();
-            Window.Location.reload();
         }
     }
 
@@ -157,7 +153,11 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
 
             @Override
             public void onSuccess(Object result) {
+                Dispatcher.forwardEvent(GeoPlatformEvents.REMOVE_WINDOW_CLOSE_LISTENER);
+                GeoPlatformMessage.infoMessage("Application Logout",
+                        "A different user from the previous one is trying to connect to the application");
                 userLogged = null;
+                Window.Location.reload();
             }
         });
     }

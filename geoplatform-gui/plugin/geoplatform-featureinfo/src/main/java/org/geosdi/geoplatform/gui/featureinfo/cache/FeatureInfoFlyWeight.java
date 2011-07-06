@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.featureinfo.cache;
 
+import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import java.util.ArrayList;
@@ -125,6 +126,7 @@ public class FeatureInfoFlyWeight {
             this.infoControl = FeatureInfoControlFactory.createControl(urlServer);
             this.infoPanel = FeatureInfoPanelFactory.createPanel(urlServer,
                     urlServer);
+            this.infoPanel.setScrollMode(Scroll.AUTOX);
             addFeatureListener();
         }
 

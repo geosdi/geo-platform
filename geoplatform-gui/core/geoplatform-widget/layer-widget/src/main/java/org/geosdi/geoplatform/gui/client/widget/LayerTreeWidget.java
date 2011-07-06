@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import com.extjs.gxt.ui.client.event.ComponentEvent;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.store.TreeStore;
@@ -55,7 +54,6 @@ import com.extjs.gxt.ui.client.event.DNDEvent;
 import com.extjs.gxt.ui.client.event.DNDListener;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.ScrollListener;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
@@ -113,14 +111,14 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
     private GPRootTreeNode root;
     private boolean initialized;
     private GPBuildTreeEvent buildEvent = new GPBuildTreeEvent();
-    private ContentPanel treePanel;
+    private ContentPanel parentPanel;
 
     /**
      * @Constructor
      */
     public LayerTreeWidget(ContentPanel treePanel) {
         super();
-        this.treePanel = treePanel;
+        this.parentPanel = treePanel;
         LayerHandlerManager.addHandler(IGPBuildTreeHandler.TYPE, this);
         LayerHandlerManager.addHandler(IGPExpandTreeNodeHandler.TYPE, this);
         this.buildRoot();
@@ -302,9 +300,9 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
 
             @Override
             public void handleEvent(BaseEvent be) {
-                dropTarget.getScrollSupport().setScrollElement(treePanel.getLayoutTarget());
+                dropTarget.getScrollSupport().setScrollElement(parentPanel.getLayoutTarget());
             }
-        });       
+        });
     }
 
     private void addContextMenu() {

@@ -66,6 +66,9 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
     protected void showFeedback(DNDEvent e) {
         super.showFeedback(e);
         TreeNode overItem = tree.findNode(e.getTarget());
+        if(overItem == null){
+            e.getStatus().setStatus(false);
+        }
         TreeModel targetTreeModel = (TreeModel) overItem.getModel();
         List<TreeModel> data = e.getData();
         for (final TreeModel tm : data) {

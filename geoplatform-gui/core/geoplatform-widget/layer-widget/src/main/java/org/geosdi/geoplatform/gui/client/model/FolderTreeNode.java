@@ -73,7 +73,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode{
     public FolderTreeNode(String label) {
         super.setLabel(label);
     }
-
+    
     public FolderTreeNode(GPFolderClientInfo folder) {
         super(folder);
         this.numberOfDescendants = folder.getNumberOfDescendants();

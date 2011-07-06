@@ -88,7 +88,7 @@ public class LayerManagementWidget extends ContentPanel {
         treePanel.setScrollMode(Scroll.AUTOY);
         treePanel.setHeaderVisible(false);
 
-        this.layerTree = new LayerTreeWidget();
+        this.layerTree = new LayerTreeWidget(treePanel);
         //this.layerTree = new LayerAsyncTreeWidget();
 
         BorderLayoutData northData = new BorderLayoutData(LayoutRegion.NORTH);

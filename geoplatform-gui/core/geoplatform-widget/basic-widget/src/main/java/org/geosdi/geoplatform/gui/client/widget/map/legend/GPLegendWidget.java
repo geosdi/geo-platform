@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.widget.map.legend;
 
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Html;
@@ -83,19 +82,23 @@ public class GPLegendWidget {
 
 
             Image image;
-//            System.out.println("LEGEND URL: "+ layerBean.getDataSource()
-//                    + GET_LEGEND_REQUEST + layerBean.getLabel());
-            if (layerBean instanceof GPRasterBean || layerBean.getDataSource().contains(
+            String dataSource;
+
+            if (layerBean.getDataSource().contains(
                     "gwc/service/wms")) {
-                image = new Image(
-                        layerBean.getDataSource().replaceAll("gwc/service/wms",
-                        "wms") + GET_LEGEND_REQUEST + layerBean.getName() + "&scale=5000");
+                dataSource = layerBean.getDataSource().replaceAll(
+                        "gwc/service/wms",
+                        "wms");
+            } else if (layerBean.getDataSource().contains("/ows")) {
+                dataSource = layerBean.getDataSource().replaceAll("/ows",
+                        "/wms");
             } else {
-                layerBean.getDataSource().replaceAll("wfs", "wms");
-                image = new Image(
-                        layerBean.getDataSource()
-                        + GET_LEGEND_REQUEST + layerBean.getName() + "&scale=5000");
+                dataSource = layerBean.getDataSource().replaceAll("/wfs",
+                        "/wms");
             }
+
+            image = new Image(
+                    dataSource + GET_LEGEND_REQUEST + layerBean.getName() + "&scale=5000");
 
             cp.add(image);
 

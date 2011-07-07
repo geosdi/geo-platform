@@ -54,7 +54,6 @@ public class DefaultMapFactory implements GeoPlatformMapFactory {
      */
     @Override
     public MapWidget createMap(String width, String height) {
-        // TODO Auto-generated method stub
         return new MapWidget(width, height);
     }
 
@@ -68,7 +67,6 @@ public class DefaultMapFactory implements GeoPlatformMapFactory {
      */
     @Override
     public MapWidget createMap(String width, String height, MapOptions options) {
-        // TODO Auto-generated method stub
         return new MapWidget(width, height, options);
     }
 }

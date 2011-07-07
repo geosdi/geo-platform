@@ -40,6 +40,7 @@ import java.util.Collections;
 import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
+import org.geosdi.geoplatform.gui.server.gwt.GeoPlatformConfigurationImpl;
 
 /**
  *
@@ -90,14 +91,25 @@ public class ToolbarTreeClientTool {
         saveTreeState.setType("button");
         saveTreeState.setEnabled(false);
         saveTreeState.setOrder(6);
-        
+
         ActionClientTool printClientTool = new ActionClientTool();
         printClientTool.setId("printTreeLayers");
         printClientTool.setType("button");
         printClientTool.setEnabled(false);
         printClientTool.setOrder(7);
 
+        GenericClientTool toolbarSeparator2 = new GenericClientTool();
+        toolbarSeparator2.setId("ToolbarSeparator");
+        toolbarSeparator2.setOrder(8);
 
+        ActionClientTool uploaderClientTool = new ActionClientTool();
+        uploaderClientTool.setId("uploadShape");
+        uploaderClientTool.setType("button");
+        uploaderClientTool.setEnabled(true);
+        uploaderClientTool.setOrder(9);
+
+        this.clientTools.add(uploaderClientTool);
+        this.clientTools.add(toolbarSeparator2);
         this.clientTools.add(printClientTool);
         this.clientTools.add(saveTreeState);
         this.clientTools.add(removeElement);

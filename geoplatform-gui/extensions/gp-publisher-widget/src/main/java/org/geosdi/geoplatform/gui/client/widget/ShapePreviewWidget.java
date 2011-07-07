@@ -33,42 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu;
+package org.geosdi.geoplatform.gui.client.widget;
 
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
-import org.geosdi.geoplatform.gui.client.LayerEvents;
-
-import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.extjs.gxt.ui.client.widget.menu.CheckMenuItem;
-import com.extjs.gxt.ui.client.widget.menu.Menu;
+import org.geosdi.geoplatform.gui.client.widget.form.GPMapPreviewWidget;
+import org.gwtopenmaps.openlayers.client.MapOptions;
+import org.gwtopenmaps.openlayers.client.layer.OSM;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class LayerMenuAction extends MenuAction {
-
-    public LayerMenuAction() {
-        super("Layers");
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-     * .extjs.gxt.ui.client.event.ComponentEvent)
-     */
+public class ShapePreviewWidget extends GPMapPreviewWidget{
+    
     @Override
-    public void componentSelected(MenuEvent ce) {
-        CheckMenuItem item = (CheckMenuItem) ((Menu) ce.getSource()).getItemByItemId(super.getId());
-
-        if (item.isChecked()) {
-            Dispatcher.forwardEvent(LayerEvents.SHOW_LAYER_WIDGET);
-        } else {
-            Dispatcher.forwardEvent(LayerEvents.HIDE_LAYER_WIDGET);
-        }
+    public MapOptions createMapPreviewOption() {
+        MapOptions defaultMapOptions = new MapOptions();
+        defaultMapOptions.setNumZoomLevels(18);
+        defaultMapOptions.setProjection("EPSG:4326");
+        return defaultMapOptions;
     }
+
+    @Override
+    public void createBaseLayer(){
+        super.baseLayer = OSM.Mapnik("OpenStreetMap Preview");
+        super.mapWidget.getMap().addLayer(baseLayer);
+    }    
 }

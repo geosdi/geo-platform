@@ -33,42 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.menu;
-
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
-import org.geosdi.geoplatform.gui.client.LayerEvents;
-
-import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.extjs.gxt.ui.client.widget.menu.CheckMenuItem;
-import com.extjs.gxt.ui.client.widget.menu.Menu;
+package org.geosdi.geoplatform.gui.client.widget.fileupload;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class LayerMenuAction extends MenuAction {
-
-    public LayerMenuAction() {
-        super("Layers");
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-     * .extjs.gxt.ui.client.event.ComponentEvent)
-     */
-    @Override
-    public void componentSelected(MenuEvent ce) {
-        CheckMenuItem item = (CheckMenuItem) ((Menu) ce.getSource()).getItemByItemId(super.getId());
-
-        if (item.isChecked()) {
-            Dispatcher.forwardEvent(LayerEvents.SHOW_LAYER_WIDGET);
-        } else {
-            Dispatcher.forwardEvent(LayerEvents.HIDE_LAYER_WIDGET);
-        }
-    }
+public enum GPExtensions {
+    
+    shp, zip, jar, png, jpeg;
+    
 }

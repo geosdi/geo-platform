@@ -121,6 +121,20 @@
             <classifier>sources</classifier>
         </dependency>
         
+                 <!-- GeoPlatform Publisher Widget Module -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>gp-publisher-widget</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>gp-publisher-widget</artifactId>
+            <version>${project.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+        
         <!-- GeoPlatform-WS-Client -->
 
         <dependency>

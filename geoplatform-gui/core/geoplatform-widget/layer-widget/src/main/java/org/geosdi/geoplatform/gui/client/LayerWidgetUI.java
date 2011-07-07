@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionCreator;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.PrintLayersAction;
+import org.geosdi.geoplatform.gui.client.action.UploadShapeAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToKML;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToPDF;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToShpZip;
@@ -78,7 +79,6 @@ public class LayerWidgetUI implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
-        // TODO Auto-generated method stub
         dispatcher = Dispatcher.get();
 
         dispatcher.addController(new LayerController());
@@ -91,12 +91,10 @@ public class LayerWidgetUI implements EntryPoint {
     }
 
     private void addLayerWidgetAction() {
-        // TODO Auto-generated method stub
         MenuActionRegistar.put("layerMenu", new MenuActionCreator() {
 
             @Override
             public MenuAction createAction() {
-                // TODO Auto-generated method stub
                 return new LayerMenuAction();
             }
         });
@@ -105,7 +103,6 @@ public class LayerWidgetUI implements EntryPoint {
 
             @Override
             public MenuAction createAction() {
-                // TODO Auto-generated method stub
                 return new ZoomToLayerExtentAction();
             }
         });
@@ -114,7 +111,6 @@ public class LayerWidgetUI implements EntryPoint {
 
             @Override
             public MenuAction createAction() {
-                // TODO Auto-generated method stub
                 return new ExportoToKML();
             }
         });
@@ -123,7 +119,6 @@ public class LayerWidgetUI implements EntryPoint {
 
             @Override
             public MenuAction createAction() {
-                // TODO Auto-generated method stub
                 return new ExportoToPDF();
             }
         });
@@ -133,20 +128,18 @@ public class LayerWidgetUI implements EntryPoint {
 
             @Override
             public MenuAction createAction() {
-                // TODO Auto-generated method stub
                 return new ExportoToTIFF();
             }
         });
-        
+
         MenuActionRegistar.put("exportToShpZip", new MenuActionCreator() {
 
             @Override
             public MenuAction createAction() {
-                // TODO Auto-generated method stub
                 return new ExportoToShpZip();
             }
         });
-        
+
     }
 
     private void addToolbarTreeAction() {
@@ -221,6 +214,19 @@ public class LayerWidgetUI implements EntryPoint {
                     public GeoPlatformToolbarAction createActionTool(
                             TreePanel tree) {
                         PrintLayersAction action = new PrintLayersAction(
+                                tree);
+                        setAction(action);
+                        return action;
+                    }
+                });
+
+        ToolbarTreeActionRegistar.put("uploadShape",
+                new ToolbarTreeActionCreator() {
+
+                    @Override
+                    public GeoPlatformToolbarAction createActionTool(
+                            TreePanel tree) {
+                        UploadShapeAction action = new UploadShapeAction(
                                 tree);
                         setAction(action);
                         return action;

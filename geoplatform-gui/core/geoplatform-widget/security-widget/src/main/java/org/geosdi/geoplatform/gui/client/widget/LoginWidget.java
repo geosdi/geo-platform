@@ -42,19 +42,16 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.event.ILoginManager;
 import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
 import org.geosdi.geoplatform.gui.client.widget.security.GPSecurityWidget;
-import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
-import org.geosdi.geoplatform.gui.configuration.menubar.MenuInToolBar;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
+import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
-import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
-import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
@@ -106,12 +103,14 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
 
     @Override
     public void onSubmit() {
-        if (this.userLogged == null || this.userLogged.equals(this.userName.getValue())) {
+        if (this.userLogged == null || this.userLogged.equals(
+                this.userName.getValue())) {
             status.setBusy("please wait...");
             getButtonBar().disable();
-            SecurityRemoteImpl.Util.getInstance().userLogin(this.userName.getValue(),
+            SecurityRemoteImpl.Util.getInstance().userLogin(
+                    this.userName.getValue(),
                     this.password.getValue(),
-                    new AsyncCallback<String>() {
+                    new AsyncCallback<IGPUserDetail>() {
 
                         @Override
                         public void onFailure(Throwable caught) {
@@ -125,18 +124,21 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
                         }
 
                         @Override
-                        public void onSuccess(String result) {
+                        public void onSuccess(IGPUserDetail result) {
+                            GPUserGuiComponents.getInstance().setUserDetail(
+                                    result);
                             status.setStatus(
                                     LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
                                     LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
-                            userScreen(result, userLogged == null);
+                            userScreen();
                             userLogged = userName.getValue();
                             reloginAttempts = 0;
                         }
                     });
         } else if ((this.reloginAttempts + 1) < MAX_NUMBER_ATTEMPTS) {
             ++this.reloginAttempts;
-            GeoPlatformMessage.infoMessage("Number of attempts remained: " + (MAX_NUMBER_ATTEMPTS - this.reloginAttempts),
+            GeoPlatformMessage.infoMessage(
+                    "Number of attempts remained: " + (MAX_NUMBER_ATTEMPTS - this.reloginAttempts),
                     "A different user from the previous one is trying to connect to the application.");
         } else {
             this.resetUserSession();
@@ -153,7 +155,8 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
 
             @Override
             public void onSuccess(Object result) {
-                Dispatcher.forwardEvent(GeoPlatformEvents.REMOVE_WINDOW_CLOSE_LISTENER);
+                Dispatcher.forwardEvent(
+                        GeoPlatformEvents.REMOVE_WINDOW_CLOSE_LISTENER);
                 GeoPlatformMessage.infoMessage("Application Logout",
                         "A different user from the previous one is trying to connect to the application");
                 userLogged = null;
@@ -162,19 +165,11 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
         });
     }
 
-    private void userScreen(final String name, final boolean changeUseName) {
+    private void userScreen() {
         Timer t = new Timer() {
 
             @Override
             public void run() {
-                List<GenericClientTool> categories = GeoPlatformUtils.getInstance().getGlobalConfiguration().getToolbarClientTool().getClientTools();
-                if (changeUseName) {
-                    for (GenericClientTool menuBarCategory : categories) {
-                        if (menuBarCategory.getId().equals(UserLoginEnum.USER_MENU.toString())) {
-                            ((MenuInToolBar) menuBarCategory).setText(name);
-                        }
-                    }
-                }
                 if (getGwtEventOnSuccess() != null) {
                     LayoutManager.getInstance().getViewport().unmask();
                     LayerHandlerManager.fireEvent(getGwtEventOnSuccess());

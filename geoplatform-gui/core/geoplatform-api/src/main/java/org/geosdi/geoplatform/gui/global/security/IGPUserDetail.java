@@ -10,8 +10,17 @@ import java.util.Map;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 public interface IGPUserDetail extends Serializable {
+    
+    public String getName();
+    
+    public void setName(String name);
+    
+    public String getEmail();
+    
+    public void setEmail(String email);
 
     public String getUserName();
 
@@ -19,7 +28,7 @@ public interface IGPUserDetail extends Serializable {
 
     public void setComponentPermission(Map<String, Boolean> componentPermission);
 
-    public Map<String, Boolean> geoComponentPermission();
+    public Map<String, Boolean> getComponentPermission();
 
-    public boolean haveComponentPermission(String idComponent);
+    public boolean hasComponentPermission(String idComponent);
 }

@@ -36,17 +36,17 @@
 package org.geosdi.geoplatform.gui.client.service;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 public interface SecurityRemoteAsync {
-    
-    public void userLogin(String userName, String password, AsyncCallback<String> callback) throws GeoPlatformException;
-    
+
+    public void userLogin(String userName, String password,
+            AsyncCallback<IGPUserDetail> callback) throws GeoPlatformException;
+
     public void invalidateSession(AsyncCallback<?> callback) throws GeoPlatformException;
-    
 }

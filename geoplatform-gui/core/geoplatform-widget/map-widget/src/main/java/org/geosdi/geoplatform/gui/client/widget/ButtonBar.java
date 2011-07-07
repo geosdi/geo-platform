@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import org.geosdi.geoplatform.gui.client.widget.menu.MenuUtilityBuilder;
 import java.util.List;
 
 import org.geosdi.geoplatform.gui.action.GeoPlatformButtonObserver;

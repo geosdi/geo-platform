@@ -38,8 +38,8 @@ package org.geosdi.geoplatform.gui.client.service;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -59,11 +59,12 @@ public interface SecurityRemote extends RemoteService {
 
     /**
      * 
-     * @param userName password
+     * @param userName 
+     * @param password 
      * @return GPUser
      * @throws GeoPlatformException
      */
-    public String userLogin(String userName, String password) throws GeoPlatformException;
+    public IGPUserDetail userLogin(String userName, String password) throws GeoPlatformException;
 
     public void invalidateSession() throws GeoPlatformException;
 }

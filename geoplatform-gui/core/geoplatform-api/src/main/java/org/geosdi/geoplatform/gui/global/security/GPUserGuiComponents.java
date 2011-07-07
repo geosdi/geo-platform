@@ -18,7 +18,7 @@ public class GPUserGuiComponents {
     private GPUserGuiComponents() {
     }
 
-    public GPUserGuiComponents getInstance() {
+    public static GPUserGuiComponents getInstance() {
         return instance;
     }
 

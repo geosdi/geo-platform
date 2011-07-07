@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.widget.menu;
 
 
 import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
@@ -69,6 +69,7 @@ public class MenuBarWidget {
             Menu menu = new Menu();
             this.bar.add(new MenuBarItem(category.getText(), menu));
             addCategory(category, menu);
+            
         }
     }
 

@@ -15,32 +15,68 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
 public class GPLoginUserDetail implements IGPUserDetail {
 
     private static final long serialVersionUID = -7265573728577702116L;
-    
     private String userName;
+    private String name;
+    private String email;
     private Map<String, Boolean> componentPermission;
+
+    public GPLoginUserDetail() {
+    }
 
     @Override
     public String getUserName() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.userName;
     }
 
     @Override
     public void setUserName(String userName) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.userName = userName;
+    }
+
+    /**
+     * @return the name
+     */
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the email
+     */
+    @Override
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    @Override
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
     public void setComponentPermission(Map<String, Boolean> componentPermission) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.componentPermission = componentPermission;
     }
 
     @Override
-    public Map<String, Boolean> geoComponentPermission() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Map<String, Boolean> getComponentPermission() {
+        return componentPermission;
     }
 
     @Override
-    public boolean haveComponentPermission(String idComponent) {
+    public boolean hasComponentPermission(String idComponent) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.soap.SOAPFaultException;
@@ -43,8 +44,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
+import org.geosdi.geoplatform.gui.server.converter.GPUserConverter;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
+import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -59,35 +63,54 @@ public class SecurityService implements ISecurityService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private GeoPlatformService geoPlatformServiceClient;
+    private GPUserConverter userConverter;
 
     @Override
-    public String userLogin(String userName, String password, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public IGPUserDetail userLogin(String userName, String password,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPUser user = null;
+        GuiComponentsPermissionMapData guiComponemtPermission;
         try {
-            user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(userName, password);
+            user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(
+                    userName, password);
+            guiComponemtPermission = geoPlatformServiceClient.getUserGuiComponentVisible(
+                    user.getId());
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
                     "Unable to find user with username: " + userName + " Error: " + ex);
-            throw new GeoPlatformException("Unable to find user with username: " + userName);
+            throw new GeoPlatformException(
+                    "Unable to find user with username: " + userName);
         } catch (SOAPFaultException ex) {
-            logger.error("Error on SecurityService: " + ex + " password incorrect");
+            logger.error(
+                    "Error on SecurityService: " + ex + " password incorrect");
             throw new GeoPlatformException("Password incorrect");
         }
         this.storeUserInSession(user, httpServletRequest);
-        return user.getEmailAddress();
+
+        IGPUserDetail userDetail = this.userConverter.convertUserToDTO(user);
+
+        if (guiComponemtPermission != null) {
+            userDetail.setComponentPermission(
+                    guiComponemtPermission.getGuiComponentsPermissionMap());
+        }
+
+        return userDetail;
     }
 
-    private void storeUserInSession(GPUser user, HttpServletRequest httpServletRequest) {
+    private void storeUserInSession(GPUser user,
+            HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
         session.setMaxInactiveInterval(900);
         session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), user);
     }
 
-    private GPUser getUserAlreadyFromSession(HttpServletRequest httpServletRequest) {
+    private GPUser getUserAlreadyFromSession(
+            HttpServletRequest httpServletRequest) {
         GPUser user = null;
         HttpSession session = httpServletRequest.getSession();
-        Object userObj = session.getAttribute(UserLoginEnum.USER_LOGGED.toString());
+        Object userObj = session.getAttribute(
+                UserLoginEnum.USER_LOGGED.toString());
         if (userObj != null && userObj instanceof GPUser) {
             user = (GPUser) userObj;
         }
@@ -103,12 +126,11 @@ public class SecurityService implements ISecurityService {
         session.removeAttribute(UserLoginEnum.USER_LOGGED.toString());
     }
 
-
-/**
- * @param geoPlatformServiceClient the geoPlatformServiceClient to set
- */
-@Autowired
-        public void setGeoPlatformServiceClient(
+    /**
+     * @param geoPlatformServiceClient the geoPlatformServiceClient to set
+     */
+    @Autowired
+    public void setGeoPlatformServiceClient(
             @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
     }
@@ -118,5 +140,10 @@ public class SecurityService implements ISecurityService {
         //deleteUserFromSession(httpServletRequest);
         HttpSession session = httpServletRequest.getSession(false);
         session.invalidate();
+    }
+
+    @PostConstruct
+    public void createConverter() {
+        this.userConverter = new GPUserConverter();
     }
 }

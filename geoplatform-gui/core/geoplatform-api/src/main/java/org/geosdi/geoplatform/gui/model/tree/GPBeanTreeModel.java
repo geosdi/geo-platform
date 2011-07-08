@@ -45,12 +45,13 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode{
+public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
 
     /**
      *
      */
     private static final long serialVersionUID = 2095233644130779285L;
+    //
     private long id;
     private String label;
     private int zIndex;

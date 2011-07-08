@@ -54,17 +54,17 @@ public interface GPLayerBean extends ModelData {
 
     public void setLabel(String label);
 
-    public void setName(String name);
-
-    public String getName();
+    public String getTitle();
 
     public void setTitle(String title);
 
-    public String getTitle();
+    public String getName();
 
-    public void setAbstractText(String abstractText);
+    public void setName(String name);
 
     public String getAbstractText();
+
+    public void setAbstractText(String abstractText);
 
     public String getDataSource();
 

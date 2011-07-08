@@ -50,21 +50,24 @@ public abstract class AbstractVisitTree {
     protected int numberOfElements = -1;
 
     protected GPBeanTreeModel getPrecedingElement(GPBeanTreeModel element) {
-        GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
         GPBeanTreeModel precedingElement = null;
-        if (parent.indexOf(element) - 1 == -1) {
+
+        GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
+        int elementIndex = parent.indexOf(element);
+        if (elementIndex == 0) { // Element is the first child
             precedingElement = parent;
-        } else if (parent.indexOf(element) - 1 != -1) {
-            precedingElement = this.findDeepestElementInNode((GPBeanTreeModel) parent.getChild(parent.indexOf(element) - 1));
+        } else if (elementIndex > 0) { // Element is the second or subsequent child (i.e. has a previuos sibling)
+            precedingElement = this.findDeepestElementInNode(
+                    (GPBeanTreeModel) parent.getChild(elementIndex - 1));
         }
         return precedingElement;
     }
 
     protected GPBeanTreeModel getNextUnvisitedElement(GPBeanTreeModel element) {
         GPBeanTreeModel unvisitedElement = null;
-        if (!element.isLeaf() && element.getChild(0) != null) {//IS FOLDER
+        if (!element.isLeaf() && element.getChild(0) != null) { // Element isn't a leaf (i.e. a folder not empty) // TODO: enough a sigle condition (the latter)
             unvisitedElement = (GPBeanTreeModel) element.getChild(0);
-        } else {
+        } else { // Element is a leaf (i.e. an empty folder or a layer)
             unvisitedElement = this.getFollowingElement(element);
         }
         return unvisitedElement;
@@ -72,14 +75,13 @@ public abstract class AbstractVisitTree {
 
     private GPBeanTreeModel getFollowingElement(GPBeanTreeModel element) {
         GPBeanTreeModel followingElement = null;
-        //System.out.println("Element label: " + element.getLabel());
+//        System.out.println("Element label: " + element.getLabel());
         GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
-        if (parent != null && parent.getChild(parent.indexOf(element) + 1) != null) {
+        if (parent != null && parent.getChild(parent.indexOf(element) + 1) != null) { // Element has a next sibling
             return (GPBeanTreeModel) parent.getChild(parent.indexOf(element) + 1);
-        } else if (parent == null || (parent != null && parent instanceof GPRootTreeNode)) {
-            //System.out.println("Il padre non e' uguale a null ed e' istanza di root");
-            return null;//Returning null because we don't have a next element
-        } else {
+        } else if (parent == null || (parent != null && parent instanceof GPRootTreeNode)) { // Element is root or is the last child of root
+            return null; // Returning null because we don't have a next element
+        } else { // Element hasn't a next sibling and the parent isn't the root
             followingElement = this.getFollowingElement(parent);
         }
         return followingElement;
@@ -88,9 +90,9 @@ public abstract class AbstractVisitTree {
     protected GPBeanTreeModel findDeepestElementInNode(GPBeanTreeModel node) {
         GPBeanTreeModel deepestNode = node;
         if (!node.isLeaf()) {
-            GPBeanTreeModel tmpNode = (GPBeanTreeModel) node.getChildren().get(
-                    node.getChildren().size() - 1);
-            deepestNode = this.findDeepestElementInNode(tmpNode);
+            GPBeanTreeModel lastChild = (GPBeanTreeModel) node.getChildren().
+                    get(node.getChildCount() - 1);
+            deepestNode = this.findDeepestElementInNode(lastChild);
         }
         return deepestNode;
     }
@@ -103,7 +105,7 @@ public abstract class AbstractVisitTree {
             for (int i = 0; i < childrens.size(); i++) {
                 this.numberOfElements += 1 + ((FolderTreeNode) childrens.get(i)).getNumberOfDescendants();
             }
-            ++this.numberOfElements;//Adding the root element
+            ++this.numberOfElements; // Adding the root element
         }
     }
 //    protected void countNumberOfElements(GPBeanTreeModel element) {

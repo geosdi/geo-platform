@@ -73,6 +73,7 @@ public class VisitorPosition extends AbstractVisitTree
         System.out.println("parentDestination.getzIndex(): " + parentDestination.getzIndex());
         System.out.println("New Index: " + newIndex);
         //int newZIndex = parentDestination.getzIndex() - newIndex - 1;
+        int numElementsMoved = 1; // Iff changedElement is a layer
         int newZIndex = this.getNewZIndex(parentDestination, newIndex);
         System.out.println("New zIndex: " + newZIndex);
         if (newZIndex < oldZIndex) {
@@ -93,24 +94,20 @@ public class VisitorPosition extends AbstractVisitTree
             oldParent.remove(changedElement);
             changedElement.setParent(parentDestination);
             parentDestination.insert(changedElement, newIndex);
-            this.getFolderDescendantMap().clear();
+
             if (changedElement instanceof FolderTreeNode) {
-                this.updateNumberOfDescendants(oldParent, parentDestination,
-                        ((FolderTreeNode) changedElement).getNumberOfDescendants()+1);
-            } else {
-                this.updateNumberOfDescendants(oldParent, parentDestination);
+                numElementsMoved = ((FolderTreeNode) changedElement).getNumberOfDescendants() + 1;
             }
+            this.updateNumberOfDescendants(oldParent, parentDestination, numElementsMoved);
             System.out.println("In FixPosition: returning without index changes"
                     + "for element: " + changedElement.getLabel());
             return;
         }
-        this.getFolderDescendantMap().clear();
+
         if (changedElement instanceof FolderTreeNode) {
-            this.updateNumberOfDescendants(oldParent, parentDestination,
-                    ((FolderTreeNode) changedElement).getNumberOfDescendants()+1);
-        } else {
-            this.updateNumberOfDescendants(oldParent, parentDestination);
+            numElementsMoved = ((FolderTreeNode) changedElement).getNumberOfDescendants() + 1;
         }
+        this.updateNumberOfDescendants(oldParent, parentDestination, numElementsMoved);
 
         System.out.println(this.startPosition == null ? "Start Position: null" : "Start Position: " + this.startPosition.getLabel());
         System.out.println(this.endPosition == null ? "End position: untill the end of the Tree" : "End position: " + this.endPosition.getLabel());
@@ -119,21 +116,19 @@ public class VisitorPosition extends AbstractVisitTree
     }
 
     private void updateNumberOfDescendants(GPBeanTreeModel oldParent, GPBeanTreeModel parentDestination,
-            int numElementsModev) {
-        while (oldParent instanceof FolderTreeNode) {
-            ((FolderTreeNode) oldParent).setNumberOfDescendants(((FolderTreeNode) oldParent).getNumberOfDescendants() - numElementsModev);
-            this.folderDescendantMap.put((FolderTreeNode) oldParent, ((FolderTreeNode) oldParent).getNumberOfDescendants());
-            oldParent = (GPBeanTreeModel) oldParent.getParent();
-        }
-        while (parentDestination instanceof FolderTreeNode) {
-            ((FolderTreeNode) parentDestination).setNumberOfDescendants(((FolderTreeNode) parentDestination).getNumberOfDescendants() + numElementsModev);
-            this.folderDescendantMap.put((FolderTreeNode) parentDestination, ((FolderTreeNode) parentDestination).getNumberOfDescendants());
-            parentDestination = (GPBeanTreeModel) parentDestination.getParent();
-        }
+            int numElementsMoved) {
+        this.folderDescendantMap.clear();
+        this.updateNumberOfDescendants(oldParent, -numElementsMoved);
+        this.updateNumberOfDescendants(parentDestination, numElementsMoved);
     }
 
-    private void updateNumberOfDescendants(GPBeanTreeModel oldParent, GPBeanTreeModel parentDestination) {
-        this.updateNumberOfDescendants(oldParent, parentDestination, 1);
+    private void updateNumberOfDescendants(GPBeanTreeModel parent, int numElementsMoved) {
+        while (parent instanceof FolderTreeNode) {
+            FolderTreeNode parentFolder = (FolderTreeNode) parent;
+            parentFolder.setNumberOfDescendants(parentFolder.getNumberOfDescendants() + numElementsMoved);
+            this.folderDescendantMap.put(parentFolder, parentFolder.getNumberOfDescendants());
+            parent = (GPBeanTreeModel) parent.getParent();
+        }
     }
 
     private int getNewZIndex(GPBeanTreeModel parentDestination, int newIndex) {
@@ -150,6 +145,7 @@ public class VisitorPosition extends AbstractVisitTree
 
     private void preorderTraversal() {
         assert (this.startPosition != null) : "You need to specify a startPosition before call this method";
+
         if (this.startPosition instanceof FolderTreeNode && !((FolderTreeNode) this.startPosition).isLoaded()) {
             this.tmpIndex = this.startPosition.getzIndex() - ((FolderTreeNode) this.startPosition).getNumberOfDescendants();
         } else {
@@ -169,10 +165,10 @@ public class VisitorPosition extends AbstractVisitTree
     }
 
     private void resetVisit() {
-        this.startPosition = null;
-        this.endPosition = null;
         this.tmpIndex = -1;
         this.stopIterating = false;
+        this.startPosition = null;
+        this.endPosition = null;
         this.tmpElement = null;
     }
 

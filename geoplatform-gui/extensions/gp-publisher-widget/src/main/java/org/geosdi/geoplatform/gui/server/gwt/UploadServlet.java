@@ -63,6 +63,7 @@ public class UploadServlet extends HttpServlet {
     private static final long serialVersionUID = -1464439864247709647L;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+//    private GPPublisherService publisherService = new GPPublisherServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -119,6 +120,13 @@ public class UploadServlet extends HttpServlet {
                         + e.getMessage());
             }
             //TODO: Insert call to the services
+//            String pngURL = null;
+//            try {
+//                pngURL = this.publisherService.uploadZIPInPreview(uploadedFile);
+//            } catch (ResourceNotFoundFault ex) {
+//                java.util.logging.Logger.getLogger(UploadServlet.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            System.out.println("PNG URL: " + pngURL);
 //            try {
 //                String wkt = calculateWKT(uploadedFile);
 //                resp.getWriter().print(wkt);

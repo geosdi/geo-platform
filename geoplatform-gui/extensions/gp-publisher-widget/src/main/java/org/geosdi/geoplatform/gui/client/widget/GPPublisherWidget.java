@@ -40,10 +40,14 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.util.Margins;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Window;
+import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.ui.Image;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPFileUploader;
 
@@ -51,12 +55,16 @@ import org.geosdi.geoplatform.gui.client.widget.fileupload.GPFileUploader;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
+
 public class GPPublisherWidget extends Window {
 
     private TreePanel tree;
     private boolean initialized;
+    private boolean mapInitialized;
+    private ContentPanel centralPanel;
     private ShapePreviewWidget shpPreviewWidget;
     private GPFileUploader fileUploader;
+    private FieldSet southPanel;
 
     public GPPublisherWidget(boolean lazy, TreePanel theTree) {
         if (!lazy) {
@@ -74,7 +82,7 @@ public class GPPublisherWidget extends Window {
     }
 
     private void initializeWindow() {
-        super.setSize(700, 500);
+        super.setSize(600, 500);
         super.setHeading("Shape Files Uploader");
         setResizable(false);
         setLayout(new BorderLayout());
@@ -85,25 +93,42 @@ public class GPPublisherWidget extends Window {
 
             @Override
             public void handleEvent(WindowEvent be) {
+                if(mapInitialized){
                 shpPreviewWidget.getMapPreview().getMap().zoomToMaxExtent();
                 shpPreviewWidget.getMapPreview().getMap().updateSize();
+                }
             }
         });
     }
 
     private void initComponents() {
-        this.shpPreviewWidget = new ShapePreviewWidget();
-        this.fileUploader = new GPFileUploader("UploadServlet", GPExtensions.shp);
+        this.centralPanel = new ContentPanel();
+        this.centralPanel.setHeaderVisible(false);
+        this.fileUploader = new GPFileUploader("UploadServlet", GPExtensions.shp, GPExtensions.zip,
+                GPExtensions.dbf, GPExtensions.prj, GPExtensions.shx);
         BorderLayoutData centerData = new BorderLayoutData(LayoutRegion.CENTER);
         centerData.setMargins(new Margins(5));
-        super.add(this.shpPreviewWidget.getMapPreview(), centerData);
-        BorderLayoutData eastData = new BorderLayoutData(LayoutRegion.EAST, 250);
-        eastData.setMargins(new Margins(5));
-        super.add(this.fileUploader.getComponent(), eastData);
+        //this.centralPanel.addText("No Preview Available. \nPlease upload a shapefile for the preview.");
+        Image image = BasicWidgetResources.ICONS.geo_platform_logo().createImage();
+        this.centralPanel.add(image);
+        super.add(this.centralPanel, centerData);
+        this.southPanel = new FieldSet();
+        this.southPanel.add(this.fileUploader.getComponent());
+        this.southPanel.setHeading("File uploader");
+        this.southPanel.setWidth("350px");
+        BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH, 100);
+        southData.setMargins(new Margins(20, 187, 20, 187));
+        super.add(this.southPanel, southData);
     }
 
     private void resetComponents() {
         this.fileUploader.getComponent().reset();
+    }
+
+    public void showLayerPreview() {
+        this.shpPreviewWidget = new ShapePreviewWidget();
+        this.centralPanel.removeAll();
+        this.centralPanel.add(this.shpPreviewWidget.getMapPreview());
     }
 
     @Override

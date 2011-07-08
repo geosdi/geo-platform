@@ -77,4 +77,7 @@ public interface BasicWidgetIcons extends ImageBundle {
 
     @Resource("logged_user.png")
     AbstractImagePrototype logged_user();
+
+    @Resource("geo_platform_logo.png")
+    AbstractImagePrototype geo_platform_logo();
 }

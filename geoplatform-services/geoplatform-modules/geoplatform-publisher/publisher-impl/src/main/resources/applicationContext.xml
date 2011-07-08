@@ -21,9 +21,7 @@
 	<!-- Services -->
 	<!--===================================================================== -->
 
-    <bean id="publisherService"
-               class="org.geosdi.publisher.services.GPPublisherServiceImpl">
-
+    <bean id="publisherService" class="org.geosdi.publisher.services.GPPublisherServiceImpl">
     </bean>
 
 	<!--===================================================================== -->

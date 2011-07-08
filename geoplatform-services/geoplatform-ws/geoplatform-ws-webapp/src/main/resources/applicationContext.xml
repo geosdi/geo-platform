@@ -48,9 +48,6 @@
                 </property>
             </bean>
     	</jaxws:serviceFactory>
-
-
-
         <!--<jaxws:outInterceptors>
             <bean class="org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor"/>
             <ref bean="TimestampSignEncrypt_Response"/>
@@ -61,10 +58,10 @@
         </jaxws:inInterceptors>-->
     </jaxws:endpoint>
 
-    <!-- jaxws:endpoint id="publisherServiceSOAP"
-    	implementorClass="org.geosdi.publisher.services.PublisherServiceImpl"
-    	implementor="#geoplatformService"
-    	address="/soap">
+    <jaxws:endpoint id="publisherServiceSOAP"
+    	implementorClass="org.geosdi.publisher.services.GPPublisherServiceImpl"
+    	implementor="#publisherService"
+    	address="/publish">
         <jaxws:serviceFactory>
             <bean class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean">
                 <property name="serviceConfigurations">
@@ -74,10 +71,7 @@
                     </list>
                 </property>
             </bean>
-    	</jaxws:serviceFactory -->
-
-
-
+    	</jaxws:serviceFactory >
         <!--<jaxws:outInterceptors>
             <bean class="org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor"/>
             <ref bean="TimestampSignEncrypt_Response"/>
@@ -86,7 +80,7 @@
             <ref bean="TimestampSignEncrypt_Request"/>
             <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
         </jaxws:inInterceptors>-->
-    <!-- /jaxws:endpoint -->
+    </jaxws:endpoint>
 
 
     <!-- ====================================================================-->

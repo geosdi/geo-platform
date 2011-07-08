@@ -70,6 +70,33 @@
         </dependency>
 
 		<!-- =============================================================== -->
+		<!-- PUBLISHER WS -->
+		<!-- =============================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-publisher-api</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>cglib</groupId>
+                    <artifactId>cglib</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-publisher-impl</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>cglib</groupId>
+                    <artifactId>cglib</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+
+		<!-- =============================================================== -->
 		<!-- GEOPLATFORM WS -->
 		<!-- =============================================================== -->
         <dependency>

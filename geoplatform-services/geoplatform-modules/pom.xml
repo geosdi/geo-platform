@@ -3,10 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
   
    <parent>
-		<groupId>org.geosdi</groupId>
-		<artifactId>geoplatform-services</artifactId>
-		<version>1.2-SNAPSHOT</version>
-	</parent>
+	<groupId>org.geosdi</groupId>
+	<artifactId>geoplatform-services</artifactId>
+	<version>1.2-SNAPSHOT</version>
+   </parent>
 
   <groupId>org.geosdi</groupId>
   <artifactId>geoplatform-modules</artifactId>
@@ -15,7 +15,7 @@
 
   <name>Geo-Platform :: == WS Modules</name>
   <repositories>
-              <repository>
+    <repository>
             <id>geosolutions</id>
             <name>Geosolutions</name>
             <url>http://maven.geo-solutions.it/</url>
@@ -53,7 +53,7 @@
            <version>1.1-SNAPSHOT</version>
           </dependency>
     </dependencies>
-    <modules>
-	  <module>geoplatform-publisher</module>
+        <modules>
+            <module>geoplatform-publisher</module>
 	</modules>
 </project>

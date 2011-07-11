@@ -3,11 +3,13 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
   
+
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-modules</artifactId>
         <version>1.2-SNAPSHOT</version>
     </parent>
+
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-publisher</artifactId>
@@ -40,7 +42,8 @@
     </developers>
     
     <modules>
-        <module>publisher-api</module>
+	<module>publisher-api</module>
+
         <module>publisher-impl</module>
     </modules>
 </project>

@@ -41,8 +41,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.jws.WebService;
 import org.springframework.transaction.annotation.Transactional;
 import org.geosdi.publisher.exception.ResourceNotFoundFault;
@@ -51,7 +50,6 @@ import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import it.geosolutions.geoserver.rest.decoder.RESTDataStore;
 import it.geosolutions.geoserver.rest.decoder.RESTFeatureType;
 import it.geosolutions.geoserver.rest.decoder.RESTDataStoreList;
-import it.geosolutions.geoserver.rest.decoder.RESTLayer;
 import it.geosolutions.geoserver.rest.decoder.utils.NameLinkElem;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -68,6 +66,10 @@ import org.geotools.data.FileDataStoreFinder;
 
 import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.referencing.CRS;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 
 /**
  * @author Luca Paolino - geoSDI
@@ -77,107 +79,134 @@ import org.geotools.referencing.CRS;
 @WebService(endpointInterface = "org.geosdi.publisher.services.GPPublisherService")
 public class GPPublisherServiceImpl implements GPPublisherService {
 
+
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+    
     class InfoShape {
+
         String name;
         String epsg;
         String sld;
     }
-    String RESTURL = "http://localhost:8084/geoserver";
-    String RESTUSER = "admin";
-    String RESTPW = "geoserver";
-    GeoServerRESTPublisher publisher = null;
-    GeoServerRESTReader reader = null;
-    String tempDir = null;
 
+    private String RESTURL  = "";
+    private String RESTUSER = "";
+    private String RESTPW   = "";
+
+
+    private GeoServerRESTPublisher publisher= null;
+    private GeoServerRESTReader reader = null;
+    private String tempDir = "";
+    private String previewWorkspace="";
+
+    public GPPublisherServiceImpl(String _RESTURL, String _RESTUSER, String _RESTPW, String _previewWorkspace) {
+        RESTURL = _RESTURL;
+        RESTUSER = _RESTUSER;
+        RESTPW = _RESTPW;
+        previewWorkspace = _previewWorkspace;
+        
+        publisher= new GeoServerRESTPublisher(RESTURL, RESTUSER, RESTPW);
+        try {
+            reader = new GeoServerRESTReader(RESTURL, RESTUSER, RESTPW);
+        } catch (MalformedURLException ex) {
+            logger.info("Problems for connecting to the REST reader");
+
+        }
+        tempDir = System.getProperty("java.io.tmpdir");
+   }
+
+    /****************************
+     *
+     * @param workspace
+     * @param dataStoreName
+     * @param layerName
+     * @return
+     * @throws ResourceNotFoundFault
+     * @throws FileNotFoundException
+     * this service publishes the layer <layerName> we loaded in the previews workspace into the DB datastore identified by the <dataStoreName> and published into the <workspace> workspace
+     */
     @Override
     public boolean publish(String workspace, String dataStoreName, String layerName) throws ResourceNotFoundFault, FileNotFoundException {
         String filename = tempDir + layerName + ".zip";
         File file = new File(filename);
         boolean publish = false;
-        if (file.exists()) {
-            publisher.unpublishFeatureType("previews", layerName, layerName);
-            publisher.removeDatastore("previews", layerName);
-            System.out.println(" **************** il file esiste. Layer name " + layerName);
-            try {
-                publish = publisher.publishShp("preview2", "data", layerName, file, "EPSG:4326");
-                //             InfoShape info = getInfoFromCompressedShape(file);
-            } catch (FileNotFoundException e) {
-                System.out.println("\n ********** File not found");
+
+        if (file.exists()){
+//          publisher.unpublishFeatureType(previewWorkspace, layerName, layerName);
+//          logger.info("removing "+layerName+" from "+previewWorkspace);
+//          publisher.removeDatastore(previewWorkspace, layerName);
+//          logger.info("removing "+dataStoreName);
+           try {
+               logger.info("start to publish "+layerName+" into "+workspace+":"+dataStoreName);
+               publish = publisher.publishShp(workspace, dataStoreName, layerName, file, "EPSG:4326");
+               if (!publish) throw new ResourceNotFoundFault("Cannot publish "+layerName+" into "+workspace+":"+dataStoreName);
+               logger.info(layerName+" correctly pulished into "+workspace+":"+dataStoreName);
+           } catch(FileNotFoundException e) {
+                logger.info("\n ********** File "+layerName+".zip not found");
             }
-        }
-//       
-//
-//        System.out.println("uno can read "+file.canRead());
-//        System.out.println("workspace"+workspace);
-//        System.out.println("dataStoreName"+dataStoreName);
-//        System.out.println("layerName"+layerName);
-//        System.out.println("Name: "+info.name+" SLD: "+info.sld+" EPSG: "+info.epsg);
-
-
-        if (!publish) {
-            throw new ResourceNotFoundFault("Cannot publish " + layerName + " into " + workspace + ":" + dataStoreName);
-        }
-        //      publish = removeFromPreview(layerName);
-/*            File filetemp = new File ("./repository/"+layerName+".shp");
-        filetemp.delete();
-        filetemp = new File ("./repository/"+layerName+".dbf");
-        filetemp.delete();
-        filetemp = new File ("./repository/"+layerName+".shx");
-        filetemp.delete();
-        filetemp = new File ("./repository/"+layerName+".prj");
-        filetemp.delete();*/
-        if (!publish) {
-            throw new ResourceNotFoundFault("Cannot unpublish from preview");
-        }
-        //    publisher.removeDatastore("previews", layerName);
+        //publisher.removeDatastore("previews", layerName);
         return true;
+      }
+       return false;
     }
-
+/*************************
+ *
+ * @param dataStoreName
+ * @return
+ * @throws ResourceNotFoundFault
+ * this service removes a layer from the previews workspace
+ */
     @Override
     public boolean removeFromPreview(String dataStoreName) throws ResourceNotFoundFault {
         File file = new File(tempDir + dataStoreName + ".zip");
         file.delete();
-        publisher.unpublishFeatureType("previews", dataStoreName, dataStoreName);
+        publisher.unpublishFeatureType(previewWorkspace, dataStoreName, dataStoreName);
+        logger.info(dataStoreName+" correctly removed from "+previewWorkspace);
         return true;
     }
+  /*******************************
+   *
+   * @param dataStoreName
+   * @return
+   * @throws ResourceNotFoundFault
+   * get the URL to the PNG if the layer dataStoreName
+   */
+    private String getURLPreviewByDataStoreName(String dataStoreName) throws ResourceNotFoundFault{
+          RESTFeatureType featureType =  reader.getFeatureType(reader.getLayer(dataStoreName));
+          double minX = featureType.getMinX();
+          double maxX = featureType.getMaxX();
+          double minY = featureType.getMinY();
+          double maxY = featureType.getMaxY();
+          return RESTURL+"/"+previewWorkspace+"/wms?service=WMS&version=1.1.0&request=GetMap&layers=previews:"+dataStoreName+"&styles=&bbox="+minX+","+minY+","+maxX+","+maxY+"&width=512&height=499&srs="+featureType.getCRS()+"&format=image/png";
+   }
 
-    private String getURLPreviewByDataStoreName(String dataStoreName) throws ResourceNotFoundFault {
-        RESTFeatureType featureType = reader.getFeatureType(reader.getLayer(dataStoreName));
-        double minX = featureType.getMinX();
-        double maxX = featureType.getMaxX();
-        double minY = featureType.getMinY();
-        double maxY = featureType.getMaxY();
-        return RESTURL + "/previews/wms?service=WMS&version=1.1.0&request=GetMap&layers=previews:" + dataStoreName + "&styles=&bbox=" + minX + "," + minY + "," + maxX + "," + maxY + "&width=512&height=499&srs=" + featureType.getCRS() + "&format=image/png";
-    }
+
+    /*************************
+     *
+     * @return
+     * @throws ResourceNotFoundFault
+     * this methods returns the list of the datastores in the previews workspace. For each datastore the URL to the PNG is also specified
+     */
 
     @Override
-    public List<PreviewElement> getPreviewDataStores() throws ResourceNotFoundFault {
-        List<PreviewElement> listPreviews = new ArrayList<PreviewElement>();
-        System.out.println("sono qui");
-        RESTDataStoreList list = reader.getDatastores("previews");
-        for (NameLinkElem element : list) {
-            PreviewElement item = new PreviewElement(element.getName(), getURLPreviewByDataStoreName(element.getName()));
-            listPreviews.add(item);
-        }
-        return listPreviews;
-
-
+    public   List<PreviewElement> getPreviewDataStores() throws ResourceNotFoundFault {
+          List<PreviewElement> listPreviews = new ArrayList<PreviewElement>();
+          RESTDataStoreList list = reader.getDatastores(previewWorkspace);
+          for (NameLinkElem element : list) {
+              PreviewElement item = new PreviewElement(element.getName(), getURLPreviewByDataStoreName(element.getName()));
+              listPreviews.add(item);
+          }
+          return listPreviews;
     }
-
-    public GPPublisherServiceImpl() {
-        publisher = new GeoServerRESTPublisher(RESTURL, RESTUSER, RESTPW);
-        try {
-            reader = new GeoServerRESTReader(RESTURL, RESTUSER, RESTPW);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(GPPublisherServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        tempDir = System.getProperty("java.io.tmpdir");
-    }
-
-    private InfoShape getInfoFromCompressedShape(File file) {
+          /**************
+ *
+ * @param file the ZIP file from where extracting the info
+ * @return the information of the shapefile
+ * this method extracts from a zip file conntaining the shape files the name, the CRS and the geometry types
+ */
+   private InfoShape getInfoFromCompressedShape(File file) {
         System.setProperty("org.geotools.referencing.forceXY", "true");
         String name = "";
-
         try {
             InfoShape info = new InfoShape();
             ZipFile zipSrc = new ZipFile(file);
@@ -192,7 +221,6 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                     name = info.name;
                 }
                 InputStream zipinputstream = zipSrc.getInputStream(entry);
-                //         System.out.println("entryname "+entryName);
                 entryName = entryName.toLowerCase();
                 FileOutputStream fileoutputstream = new FileOutputStream(tempDir + entryName);
                 while ((n = zipinputstream.read(buf, 0, 1024)) > -1) {
@@ -204,28 +232,29 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             FileDataStore store = FileDataStoreFinder.getDataStore(new File(tempDir + info.name + ".shp"));
             SimpleFeatureSource featureSource = store.getFeatureSource();
             String geomType = featureSource.getSchema().getGeometryDescriptor().getType().getName().toString();
-
-            //    System.out.println("geometry descriptor"+geomType);
-            if (geomType.equals("MultyPolygon")) {
-                info.sld = "default_polygon";
-            }
-            if (geomType.equals("PolyLine")) {
-                info.sld = "default_polyline";
-            }
-            if (geomType.equals("MultiPoint")) {
-                info.sld = "default_point";
-            }
-            Integer code = CRS.lookupEpsgCode(featureSource.getSchema().getCoordinateReferenceSystem(), true);
-            if (code != null) {
+            if (geomType.equals("MultyPolygon")) info.sld="default_polygon";
+            if (geomType.equals("PolyLine")) info.sld="default_polyline";
+            if (geomType.equals("MultiPoint")) info.sld="default_point";
+            Integer code  = CRS.lookupEpsgCode(featureSource.getSchema().getCoordinateReferenceSystem(), true);
+            if (code!=null) {
+                if (geomType.equals("MultyPolygon")) {
+                    info.sld = "default_polygon";
+                }
+                if (geomType.equals("PolyLine")) {
+                    info.sld = "default_polyline";
+                }
+                if (geomType.equals("MultiPoint")) {
+                    info.sld = "default_point";
+                }
                 try {
-                    info.epsg = "EPSG:" + code.toString();
+                   info.epsg = "EPSG:" + code.toString();
                 } catch (Exception e) {
                     info.epsg = "EPSG:4326";
                 }
-                System.out.println("CODE " + code.toString());
-            } else {
-                info.epsg = "EPSG:4326";
             }
+            else {
+                    info.epsg = "EPSG:4326";
+                }
             zipSrc.close();
             return info;
         } catch (Exception e) {
@@ -234,29 +263,30 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         }
 
     }
-
+   /******************************
+    *
+    * @param file
+    * @return returns the URL to the PNG of the layer uploaded in the ZIP file
+    * @throws ResourceNotFoundFault this exception may be launched when: the ZIP file does not contain a SHP file
+    * this service upload in the previews workspace a shapefile. The ZIP file must contain the sho, the prj, the shx and the dbf files. Otherwise, an exception is raised
+    ******************************/
     @Override
     public String uploadZIPInPreview(File file) throws ResourceNotFoundFault {
+
         InfoShape info = getInfoFromCompressedShape(file);
         if (info == null) {
             throw new ResourceNotFoundFault("The ZIP archive does not contain a shp file");
         }
-        //GeoServerRESTPublisher publisher= new GeoServerRESTPublisher(RESTURL, RESTUSER, RESTPW);
-        System.out.println("tre");
         try {
             List<String> workspaces = reader.getWorkspaceNames();
             // check if the previews workspace exist, create it if not
-            if (!workspaces.contains("previews")) {
-                publisher.createWorkspace("previews");
-            }
+            if (!workspaces.contains(previewWorkspace)) publisher.createWorkspace(previewWorkspace);
             // check if the layer already exists, if not the service returns an exception
 
             //publish the shape in the previews workspace
             // calculate the PNG URL to return
             String urlPNGPreview = "error";
-
             // create the <layername>.zip file
-
             FileInputStream in = new FileInputStream(file);
             FileOutputStream out = new FileOutputStream(tempDir + info.name + ".zip");
             byte[] buf = new byte[1024];
@@ -266,24 +296,32 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             }
             in.close();
             out.close();
-
-            RESTDataStore dataStore = reader.getDatastore("previews", info.name);
-            //      if (dataStore!=null) throw new ResourceNotFoundFault(info.name+" layer already exists");
+            // this checks whether the shp is already published. In this case, the service returns the URL to PNG of the stored shapefile
+            RESTDataStore dataStore = reader.getDatastore(previewWorkspace, info.name);
             if (dataStore == null) {
-                System.out.println("\n ********** Il layer in preview non esiste, lo pubblico in preview");
                 File temp = new File(tempDir + info.name + ".zip");
-                boolean published = publisher.publishShp("previews", info.name, info.name, temp, info.epsg);
+                //publish the shape in the previews workspace
+                boolean published = publisher.publishShp(previewWorkspace, info.name, info.name, temp, info.epsg);
+                if (published) logger.info(info.name+ "correctly published in the "+previewWorkspace+" workspace");
+                else logger.info("Some problems occured when publishing "+info.name+" into the "+previewWorkspace+" workspace");
             }
+            // calculate the PNG URL to return
             urlPNGPreview = getURLPreviewByDataStoreName(info.name);
             return urlPNGPreview;
-
         } catch (FileNotFoundException ex) {
             throw new ResourceNotFoundFault("File not found Exception");
         } catch (IOException ex) {
             throw new ResourceNotFoundFault("IO Exception");
         }
     }
-
+/************************
+ *
+ * @param out the archive stream where compressing the inFile
+ * @param inFile the file to compress
+ * @return
+ * @throws IOException this exception is raised when inFile does not exist
+ * this method at the first opens and compresses  the fileinFile, then it inserts it in the out stream
+ */
     private ZipOutputStream compress(ZipOutputStream out, File inFile) throws IOException {
         FileInputStream inShpFil = new FileInputStream(inFile); // Stream to read file
         ZipEntry entryShp = new ZipEntry(inFile.getName()); // Make a ZipEntry
@@ -296,35 +334,37 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         inShpFil.close();
         return out;
     }
-
+   /***********************
+    *
+    * @param shpFile
+    * @param dbfFile
+    * @param shxFile
+    * @param prjFile
+    * @return
+    * @throws ResourceNotFoundFault
+    * this service upload in the previews workspace a shapefile. The shapefile file must contain the shp, the prj, the shx and the dbf files. Otherwise, an exception is raised
+    */
     @Override
     public String uploadShapeInPreview(File shpFile, File dbfFile, File shxFile, File prjFile) throws ResourceNotFoundFault {
-        //     System.out.println("uploadShape");
 
         String name = shpFile.getName().substring(0, shpFile.getName().length() - 4);
         try {
             ZipOutputStream out = new ZipOutputStream(new FileOutputStream(tempDir + "temp.zip"));
-            System.out.println("due");
             out = compress(out, shpFile);
             out = compress(out, dbfFile);
             out = compress(out, shxFile);
             out = compress(out, prjFile);
             out.close();
-            System.out.println("due");
             File compressedFile = new File(tempDir + "temp.zip");
-            System.out.println("due");
             String url = uploadZIPInPreview(compressedFile);
-            System.out.println("due");
-            //     compressedFile.delete();
             return url;
         } catch (ResourceNotFoundFault e) {
-            //   ex.printStackTrace();
-            throw new ResourceNotFoundFault(name + " layer already exists");
-        } catch (Exception ex) {
-            //   ex.printStackTrace();
-            throw new ResourceNotFoundFault("Cannot create the zip temp file, some files are missing or are malformed" + ex.getMessage());
+            logger.info("the Layer already exists");
+            throw new ResourceNotFoundFault(name+" layer already exists");
         }
-
-
+        catch (Exception ex) {
+            logger.info("the zip file cannot be created because some files are missing or are malformed");
+            throw new ResourceNotFoundFault("Cannot create the zip temp file, some files are missing or are malformed"+ex.getMessage());
+        }
     }
 }

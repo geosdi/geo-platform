@@ -78,10 +78,10 @@ public class AclDAOTest extends BaseDAOTest {
     @Autowired
     protected GuiComponentDAO guiComponentDAO;
     // Component ID
-    final private String idZoomNext = "zoomNext";
-    final private String idZoomPrevious = "zoomPrevious";
-    final private String idZoomIn = "zoomIn";
-    final private String idZoomOut = "zoomOut";
+    final private String idZoomNext = "ZoomNext";
+    final private String idZoomPrevious = "ZoomPrevious";
+    final private String idZoomIn = "ZoomIn";
+    final private String idZoomOut = "ZoomOut";
 
     @Test
     public void testCheckAclDAOs() {

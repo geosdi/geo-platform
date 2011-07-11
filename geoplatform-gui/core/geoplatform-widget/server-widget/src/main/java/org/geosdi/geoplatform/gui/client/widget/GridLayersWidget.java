@@ -54,7 +54,7 @@ import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import java.util.ArrayList;
 import java.util.List;
-import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 
 import org.geosdi.geoplatform.gui.client.widget.expander.GPServerExpander;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
@@ -126,7 +126,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         config.setText("Clear Combo Server and Layers Grid.");
         config.setTrackMouse(true);
 
-        this.done = new Button("Done", ServerWidgetResources.ICONS.done());
+        this.done = new Button("Done", BasicWidgetResources.ICONS.done());
 
         this.done.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
@@ -136,7 +136,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
                     expander.checkNodeState();
                 } else {
                     GeoPlatformMessage.alertMessage("GPcapabilitiesWidget",
-                            "You can put layers into Folders only."
+                            "You can put layers into Folders only.\n"
                             + "Please select the correct node");
                 }
             }

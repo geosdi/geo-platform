@@ -99,6 +99,20 @@
             <version>${project.version}</version>
         </dependency>
         
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-publisher-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+                <!-- GeoPlatform-WS-Client -->
+
+        <dependency>
+            <groupId>org.geosdi.geoplatform</groupId>
+            <artifactId>geoplatform-ws-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>

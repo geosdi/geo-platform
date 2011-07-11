@@ -57,7 +57,7 @@ public abstract class GeoPlatformWindow extends Window {
     /**
      * Init the Widget
      */
-    private void init() {
+    protected void init() {
         if (!isInitialized()) {
             this.initializeWindow();
             this.addComponent();

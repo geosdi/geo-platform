@@ -36,12 +36,14 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.Window;
+import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
@@ -55,11 +57,9 @@ import org.geosdi.geoplatform.gui.client.widget.fileupload.GPFileUploader;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-
-public class GPPublisherWidget extends Window {
+public class GPPublisherWidget extends GeoPlatformWindow {
 
     private TreePanel tree;
-    private boolean initialized;
     private boolean mapInitialized;
     private ContentPanel centralPanel;
     private ShapePreviewWidget shpPreviewWidget;
@@ -67,22 +67,12 @@ public class GPPublisherWidget extends Window {
     private FieldSet southPanel;
 
     public GPPublisherWidget(boolean lazy, TreePanel theTree) {
-        if (!lazy) {
-            init();
-        }
+        super(lazy);
         this.tree = theTree;
     }
 
-    private void init() {
-        if (!isInitialized()) {
-            initializeWindow();
-            initComponents();
-            this.initialized = true;
-        }
-    }
-
-    private void initializeWindow() {
-        super.setSize(600, 500);
+    @Override
+    public void setWindowProperties() {
         super.setHeading("Shape Files Uploader");
         setResizable(false);
         setLayout(new BorderLayout());
@@ -93,35 +83,70 @@ public class GPPublisherWidget extends Window {
 
             @Override
             public void handleEvent(WindowEvent be) {
-                if(mapInitialized){
-                shpPreviewWidget.getMapPreview().getMap().zoomToMaxExtent();
-                shpPreviewWidget.getMapPreview().getMap().updateSize();
+                if (mapInitialized) {
+                    shpPreviewWidget.getMapPreview().getMap().zoomToMaxExtent();
+                    shpPreviewWidget.getMapPreview().getMap().updateSize();
                 }
             }
         });
     }
 
-    private void initComponents() {
+    @Override
+    public void addComponent() {
+        this.addCentralPanel();
+        this.addSouthPanel();
+        Button publishButton = new Button("Add on Tree", BasicWidgetResources.ICONS.done());
+        publishButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                //TODO: add shape on tree
+            }
+        });
+        super.addButton(publishButton);
+        Button resetButton = new Button("Reset", BasicWidgetResources.ICONS.cancel());
+        resetButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                reset();
+            }
+        });
+        super.addButton(resetButton);
+    }
+
+    private void addCentralPanel() {
         this.centralPanel = new ContentPanel();
         this.centralPanel.setHeaderVisible(false);
         this.fileUploader = new GPFileUploader("UploadServlet", GPExtensions.shp, GPExtensions.zip,
                 GPExtensions.dbf, GPExtensions.prj, GPExtensions.shx);
         BorderLayoutData centerData = new BorderLayoutData(LayoutRegion.CENTER);
-        centerData.setMargins(new Margins(5));
-        //this.centralPanel.addText("No Preview Available. \nPlease upload a shapefile for the preview.");
+        centerData.setMargins(new Margins(5, 5, 0, 5));
         Image image = BasicWidgetResources.ICONS.geo_platform_logo().createImage();
         this.centralPanel.add(image);
         super.add(this.centralPanel, centerData);
+    }
+
+    private void addSouthPanel() {
         this.southPanel = new FieldSet();
-        this.southPanel.add(this.fileUploader.getComponent());
+        this.southPanel.setHeight(78);
+        this.southPanel.setWidth(522);
+        this.southPanel.setLayout(new BorderLayout());
+//        BorderLayoutData marginFieldset = new BorderLayoutData(LayoutRegion.SOUTH, 100);
+//        marginFieldset.setMargins(new Margins(1, 150, 1, 151));
+//        this.southPanel.add(this.fileUploader.getComponent(), marginFieldset);
+        BorderLayoutData centerFileUploader = new BorderLayoutData(LayoutRegion.CENTER);
+        centerFileUploader.setMargins(new Margins(10, 150, 9, 151));
+        this.southPanel.add(this.fileUploader.getComponent(), centerFileUploader);
         this.southPanel.setHeading("File uploader");
-        this.southPanel.setWidth("350px");
+        this.southPanel.add(this.southPanel);
         BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH, 100);
-        southData.setMargins(new Margins(20, 187, 20, 187));
+        southData.setMargins(new Margins(5, 20, 5, 20));
         super.add(this.southPanel, southData);
     }
 
-    private void resetComponents() {
+    @Override
+    public void reset() {
         this.fileUploader.getComponent().reset();
     }
 
@@ -134,15 +159,14 @@ public class GPPublisherWidget extends Window {
     @Override
     public void show() {
         if (!isInitialized()) {
-            this.init();
+            super.init();
         }
         super.show();
     }
 
-    /**
-     * @return the initialized
-     */
-    public boolean isInitialized() {
-        return initialized;
+    @Override
+    public void initSize() {
+        //Warging: changing window size will be necessary change panel's size also.
+        super.setSize(600, 500);
     }
 }

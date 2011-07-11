@@ -114,7 +114,7 @@ public abstract class GPSecurityWidget extends Dialog {
        
         addStatusComponent();
 
-        reset = new Button("Reset");
+        reset = new Button("Reset", BasicWidgetResources.ICONS.cancel());
         reset.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
@@ -123,7 +123,7 @@ public abstract class GPSecurityWidget extends Dialog {
             }
         });
 
-        login = new Button("Login");
+        login = new Button("Login", BasicWidgetResources.ICONS.login());
         login.disable();
         login.addSelectionListener(new SelectionListener<ButtonEvent>() {
 

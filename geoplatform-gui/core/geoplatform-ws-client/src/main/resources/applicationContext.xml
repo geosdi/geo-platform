@@ -11,7 +11,19 @@
 
     <bean id="geoPlatformServiceClient" class="org.geosdi.geoplatform.services.GeoPlatformService"
 		factory-bean="geoPlatformProxyFactory" factory-method="create" />
+    
+    
+    <bean id="geoPlatformPublishClient" class="org.geosdi.publisher.services.GPPublisherService"
+		factory-bean="geoPlatformPublishProxyFactory" factory-method="create" />
+    
 
+    <bean id="geoPlatformPublishProxyFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+        <property name="serviceClass"
+			value="org.geosdi.publisher.services.GPPublisherService" />
+        <property name="address"
+			value="http://localhost:8080/geoplatform-service/publish" />
+    </bean>
+    
     <bean id="geoPlatformProxyFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
         <property name="serviceClass"
 			value="org.geosdi.geoplatform.services.GeoPlatformService" />

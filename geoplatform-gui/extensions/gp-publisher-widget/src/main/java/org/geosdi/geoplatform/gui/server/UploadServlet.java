@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.gwt;
+package org.geosdi.geoplatform.gui.server;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,15 +52,22 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
+import org.geosdi.publisher.exception.ResourceNotFoundFault;
+import org.geosdi.publisher.services.GPPublisherService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
+@Service("uploadServlet")
 public class UploadServlet extends HttpServlet {
-    private static final long serialVersionUID = -1464439864247709647L;
 
+    private static final long serialVersionUID = -1464439864247709647L;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private GPPublisherService geoPlatformPublishClient;
 //    private GPPublisherService publisherService = new GPPublisherServiceImpl();
 
     @Override
@@ -73,10 +80,8 @@ public class UploadServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
         // process only multipart requests
         if (ServletFileUpload.isMultipartContent(req)) {
-
             // Create a factory for disk-based file items
             FileItemFactory factory = new DiskFileItemFactory();
 
@@ -93,7 +98,6 @@ public class UploadServlet extends HttpServlet {
                     if (item.isFormField()) {
                         continue;
                     }
-
                     String fileName = item.getName();
                     // get only the file name not whole path
                     if (fileName != null) {
@@ -118,13 +122,16 @@ public class UploadServlet extends HttpServlet {
                         + e.getMessage());
             }
             //TODO: Insert call to the services
-//            String pngURL = null;
-//            try {
-//                pngURL = this.publisherService.uploadZIPInPreview(uploadedFile);
-//            } catch (ResourceNotFoundFault ex) {
-//                java.util.logging.Logger.getLogger(UploadServlet.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            System.out.println("PNG URL: " + pngURL);
+            String pngURL = null;
+            System.out.println("THis.geoplatqualcosa null");
+            System.out.println(this.geoPlatformPublishClient == null);
+            try {
+                pngURL = this.geoPlatformPublishClient.uploadZIPInPreview(uploadedFile);
+            } catch (ResourceNotFoundFault ex) {
+                logger.equals("Error on uploading shape: " + ex);
+            }
+            System.out.println("PNG URL: uguale null");
+            System.out.println(pngURL == null);
 //            try {
 //                String wkt = calculateWKT(uploadedFile);
 //                resp.getWriter().print(wkt);
@@ -138,5 +145,14 @@ public class UploadServlet extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE,
                     "Request contents type is not supported by the servlet.");
         }
+    }
+
+    /**
+     * @param geoPlatformServiceClient the geoPlatformServiceClient to set
+     */
+    @Autowired
+    public void setGeoPlatformPublishClient(
+            @Qualifier("geoPlatformPublishClient") GPPublisherService geoPlatformPublishClient) {
+        this.geoPlatformPublishClient = geoPlatformPublishClient;
     }
 }

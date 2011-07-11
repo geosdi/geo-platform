@@ -39,12 +39,9 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ImageBundle;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public interface ServerWidgetIcons extends ImageBundle {
+public interface SecurityWidgetIcons extends ImageBundle {
 
-    @Resource("server.png")
-    AbstractImagePrototype addServer();
 }

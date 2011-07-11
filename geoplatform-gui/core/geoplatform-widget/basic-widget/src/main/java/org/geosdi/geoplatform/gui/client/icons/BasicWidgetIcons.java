@@ -80,4 +80,10 @@ public interface BasicWidgetIcons extends ImageBundle {
 
     @Resource("geo_platform_logo.png")
     AbstractImagePrototype geo_platform_logo();
+
+    @Resource("done.png")
+    AbstractImagePrototype done();
+
+    @Resource("login.png")
+    AbstractImagePrototype login();
 }

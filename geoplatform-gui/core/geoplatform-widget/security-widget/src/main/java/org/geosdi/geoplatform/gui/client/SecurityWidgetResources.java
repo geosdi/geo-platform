@@ -33,18 +33,18 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.client;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.icons.SecurityWidgetIcons;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public interface ServerWidgetIcons extends ImageBundle {
+public class SecurityWidgetResources {
 
-    @Resource("server.png")
-    AbstractImagePrototype addServer();
+    public static final SecurityWidgetIcons ICONS = GWT.create(
+            SecurityWidgetIcons.class);
+
 }

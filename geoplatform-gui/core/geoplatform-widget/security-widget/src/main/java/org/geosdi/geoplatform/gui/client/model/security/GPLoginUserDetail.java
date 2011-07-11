@@ -77,6 +77,7 @@ public class GPLoginUserDetail implements IGPUserDetail {
 
     @Override
     public boolean hasComponentPermission(String idComponent) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.componentPermission != null ? this.componentPermission.containsKey(
+                idComponent) : true;
     }
 }

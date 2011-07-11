@@ -67,6 +67,7 @@ import org.geosdi.geoplatform.gui.action.event.ActionHandler;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.MenuInToolBar;
+import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 
 /**
@@ -101,16 +102,19 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
         List<GenericClientTool> tools = this.mapLayoutWidget.getTools();
         for (GenericClientTool tool : tools) {
             String id = tool.getId();
+
             if (id.equals(TOOLBAR_SEPARATOR)) {
                 addSeparator();
             } else if (tool instanceof MenuClientTool) {
                 addMenuButton((MenuClientTool) tool,
                         (ToolbarApplicationAction) ToolbarActionRegistar.get(
                         id, mapLayoutWidget));
-            } else if (tool instanceof MenuInToolBar && ((MenuInToolBar) tool).getId().equals(UserLoginEnum.USER_MENU.toString())) {
+            } else if (tool instanceof MenuInToolBar && ((MenuInToolBar) tool).getId().equals(
+                    UserLoginEnum.USER_MENU.toString())) {
                 this.addUserLoginMenu((MenuInToolBar) tool);
             } else {
-                GeoPlatformToolbarAction action = ToolbarActionRegistar.get(id,
+                GeoPlatformToolbarAction action = ToolbarActionRegistar.get(
+                        id,
                         mapLayoutWidget);
 
                 action.setId(id);
@@ -127,7 +131,9 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
                     }
                 }
 
-                action.setEnabled(((ActionClientTool) tool).isEnabled());
+//                    action.setEnabled(((ActionClientTool) tool).isEnabled());
+                action.setEnabled(GPUserGuiComponents.getInstance().getPermissionForComponent(
+                        id));
             }
         }
     }
@@ -136,18 +142,22 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
      * Create a Button with a Menu
      *
      * @param tool
+     * @param action  
      */
     public void addMenuButton(MenuClientTool tool,
             ToolbarApplicationAction action) {
-        Button button = new Button();
-        button.setId(tool.getId());
-        button.setText(action.getButtonName());
-        button.setIcon(action.getImage());
-        button.setEnabled(tool.isEnabled());
+        if (GPUserGuiComponents.getInstance().hasComponentPermission(
+                tool.getId())) {
+            Button button = new Button();
+            button.setId(tool.getId());
+            button.setText(action.getButtonName());
+            button.setIcon(action.getImage());
+            button.setEnabled(tool.isEnabled());
 
-        button.setMenu(createMenu(tool.getActionTools()));
+            button.setMenu(createMenu(tool.getActionTools()));
 
-        toolBar.add(button);
+            toolBar.add(button);
+        }
     }
 
     /**
@@ -172,7 +182,10 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
      * Add a Vertical Line in the Toolbar
      */
     public void addSeparator() {
-        this.toolBar.add(new SeparatorToolItem());
+        if (GPUserGuiComponents.getInstance().hasComponentPermission(
+                TOOLBAR_SEPARATOR)) {
+            this.toolBar.add(new SeparatorToolItem());
+        }
     }
 
     /**
@@ -182,31 +195,35 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
      * @param action
      */
     public void addMapButton(ToolbarMapAction action) {
-        final GeoPlatformButton button = new GeoPlatformButton();
-        button.setAction(action);
-        button.setId(action.getId());
-        button.setToolTip(action.getTooltip());
-        button.setIcon(action.getImage());
-        button.addSelectionListener(action);
+        if (GPUserGuiComponents.getInstance().hasComponentPermission(
+                action.getId())) {
+            final GeoPlatformButton button = new GeoPlatformButton();
+            button.setAction(action);
+            button.setId(action.getId());
+            button.setToolTip(action.getTooltip());
+            button.setIcon(action.getImage());
+            button.addSelectionListener(action);
 
-        action.addActionHandler(new ActionHandler() {
+            action.addActionHandler(new ActionHandler() {
 
-            @Override
-            public void onActionEnabled(ActionEnabledEvent event) {
-                button.setEnabled(true);
-            }
+                @Override
+                public void onActionEnabled(ActionEnabledEvent event) {
+                    button.setEnabled(true);
+                }
 
-            @Override
-            public void onActionDisabled(ActionDisabledEvent event) {
-                button.setEnabled(false);
-            }
-        });
+                @Override
+                public void onActionDisabled(ActionDisabledEvent event) {
+                    button.setEnabled(false);
+                }
+            });
 
-        this.toolBar.add(button);
+            this.toolBar.add(button);
+        }
     }
 
     private void addUserLoginMenu(MenuInToolBar menuInToolBar) {
-        Button buttonItem = new Button(menuInToolBar.getText());
+        Button buttonItem = new Button(
+                GPUserGuiComponents.getInstance().getUserName());
         buttonItem.setIcon(BasicWidgetResources.ICONS.logged_user());
         buttonItem.setId(menuInToolBar.getId());
         Menu menu = new Menu();
@@ -252,27 +269,30 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
      * @param action
      */
     public void addMapToggleButton(ToolbarMapAction action) {
-        final GeoPlatformToggleButton button = new GeoPlatformToggleButton();
-        button.setAction(action);
-        button.setId(action.getId());
-        button.setToolTip(action.getTooltip());
-        button.setIcon(action.getImage());
-        button.addSelectionListener(action);
+        if (GPUserGuiComponents.getInstance().hasComponentPermission(
+                action.getId())) {
+            final GeoPlatformToggleButton button = new GeoPlatformToggleButton();
+            button.setAction(action);
+            button.setId(action.getId());
+            button.setToolTip(action.getTooltip());
+            button.setIcon(action.getImage());
+            button.addSelectionListener(action);
 
-        action.addActionHandler(new ActionHandler() {
+            action.addActionHandler(new ActionHandler() {
 
-            @Override
-            public void onActionEnabled(ActionEnabledEvent event) {
-                button.setEnabled(true);
-            }
+                @Override
+                public void onActionEnabled(ActionEnabledEvent event) {
+                    button.setEnabled(true);
+                }
 
-            @Override
-            public void onActionDisabled(ActionDisabledEvent event) {
-                button.setEnabled(false);
-            }
-        });
+                @Override
+                public void onActionDisabled(ActionDisabledEvent event) {
+                    button.setEnabled(false);
+                }
+            });
 
-        this.toolBar.add(button);
+            this.toolBar.add(button);
+        }
     }
 
     /**
@@ -309,5 +329,13 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
     @Override
     public void changeButtonState() {
         this.buttonObserver.changeButtonState();
+    }
+
+    /**
+     * 
+     * @return Toolbar Elements Number
+     */
+    public int getItemsCount() {
+        return this.toolBar.getItemCount();
     }
 }

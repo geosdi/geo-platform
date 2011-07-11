@@ -53,7 +53,8 @@ public class LayoutManager extends GeoPlatformLayoutManager {
 
     private static LayoutManager instance = new LayoutManager();
 
-    private LayoutManager() {}
+    private LayoutManager() {
+    }
 
     /**
      * Build Singleton Instace
@@ -170,5 +171,19 @@ public class LayoutManager extends GeoPlatformLayoutManager {
             }
         }
         return false;
+    }
+
+    /**
+     * Reset North Component Border Layout Size
+     * 
+     */
+    public static void normalizeNorthPanel() {
+        if ((getInstance().north.getItemCount() == 0)
+                && (getInstance().north.getTopComponent() == null)) {
+            getInstance().removeNorth();
+        } else if ((getInstance().north.getItemCount() == 0)
+                && (getInstance().north.getTopComponent() != null)) {
+            getInstance().resetNorthBorderLayout();
+        }
     }
 }

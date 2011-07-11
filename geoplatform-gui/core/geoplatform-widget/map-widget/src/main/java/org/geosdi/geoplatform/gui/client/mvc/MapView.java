@@ -126,7 +126,7 @@ public class MapView extends GeoPlatformView {
             onScaleRequestChange(event);
         }
 
-        if(event.getType() == GeoPlatformEvents.ZOOM_TO_MAX_EXTEND){
+        if (event.getType() == GeoPlatformEvents.ZOOM_TO_MAX_EXTEND) {
             onZoomToMaxExtend(event);
         }
 
@@ -228,7 +228,11 @@ public class MapView extends GeoPlatformView {
 
         this.buttonBar = new ButtonBar(mapLayout);
 
-        LayoutManager.addComponentToNorth(buttonBar.getToolBar());
+        if (this.buttonBar.getItemsCount() > 0) {
+            LayoutManager.addComponentToNorth(buttonBar.getToolBar());
+        }
+
+        LayoutManager.normalizeNorthPanel();
     }
 
     /**

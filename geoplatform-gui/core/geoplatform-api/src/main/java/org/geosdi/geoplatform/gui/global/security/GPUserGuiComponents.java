@@ -12,7 +12,6 @@ package org.geosdi.geoplatform.gui.global.security;
 public class GPUserGuiComponents {
 
     private static GPUserGuiComponents instance = new GPUserGuiComponents();
-    
     private IGPUserDetail userDetail;
 
     private GPUserGuiComponents() {
@@ -34,5 +33,32 @@ public class GPUserGuiComponents {
      */
     public void setUserDetail(IGPUserDetail userDetail) {
         this.userDetail = userDetail;
+    }
+
+    /**
+     * 
+     * @return UserName
+     */
+    public String getUserName() {
+        return this.userDetail.getUserName();
+    }
+
+    /**
+     * 
+     * @param idComponent
+     * @return 
+     */
+    public boolean hasComponentPermission(String idComponent) {
+        return userDetail.hasComponentPermission(idComponent);
+    }
+
+    /**
+     * 
+     * @param idComponent
+     * @return 
+     */
+    public boolean getPermissionForComponent(String idComponent) {
+        return userDetail.getComponentPermission() != null ? userDetail.getComponentPermission().get(
+                idComponent) == null ? false : true : false;
     }
 }

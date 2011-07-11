@@ -85,6 +85,7 @@ public abstract class GeoPlatformLayoutManager {
 
     /**
      * Create North Panel in Main UI
+     * @param size 
      */
     public void createNorth(float size) {
         this.north = new ContentPanel();
@@ -92,7 +93,9 @@ public abstract class GeoPlatformLayoutManager {
         BorderLayoutData data = new BorderLayoutData(LayoutRegion.NORTH, size);
         data.setMargins(new Margins(0, 5, 0, 5));
 
-        viewport.add(north, data);
+        this.north.setData("layoutData", data);
+
+        viewport.add(north);
     }
 
     /**
@@ -141,7 +144,8 @@ public abstract class GeoPlatformLayoutManager {
 
             @Override
             public void widgetResized(ComponentEvent ce) {
-                MapHandlerManager.fireEvent(new ScaleChangeEvent(XDOM.getViewportSize()));
+                MapHandlerManager.fireEvent(new ScaleChangeEvent(
+                        XDOM.getViewportSize()));
             }
         });
 
@@ -221,5 +225,27 @@ public abstract class GeoPlatformLayoutManager {
      */
     public Status getStatusMap() {
         return statusMap;
+    }
+
+    /**
+     * Remove North Panel from Viewport
+     */
+    public void removeNorth() {
+        this.viewport.remove(north);
+        this.viewport.layout();
+    }
+
+    /**
+     * Reset BorderLayout North Component
+     */
+    public void resetNorthBorderLayout() {
+        BorderLayoutData data = new BorderLayoutData(LayoutRegion.NORTH, 23);
+        data.setMargins(new Margins(0, 5, 0, 5));
+
+        this.north.setData("layoutData", data);
+
+        this.north.layout();
+        
+        this.viewport.layout();
     }
 }

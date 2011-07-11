@@ -1,37 +1,42 @@
 /*
- * $Header: com.digitalglobe.dgwatch.gui.server.UploadServlet,v. 0.1 17/lug/2010 16.53.09 created by giuseppe $
- * $Revision: 0.1 $
- * $Date: 17/lug/2010 16.53.09 $
+ *  geo-platform
+ *  Rich webgis framework
+ *  http://geo-plartform.org
+ * ====================================================================
+ *
+ * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *
+ * This program is free software: you can redistribute it and/or modify it 
+ * under the terms of the GNU General Public License as published by 
+ * the Free Software Foundation, either version 3 of the License, or 
+ * (at your option) any later version. This program is distributed in the 
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR 
+ * A PARTICULAR PURPOSE. See the GNU General Public License 
+ * for more details. You should have received a copy of the GNU General 
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/ 
  *
  * ====================================================================
  *
- * Copyright (C) 2010 GeoSolutions S.A.S.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. 
- *
- * ====================================================================
- *
- * This software consists of voluntary contributions made by developers
- * of GeoSolutions.  For more information on GeoSolutions, please see
- * <http://www.geo-solutions.it/>.
+ * Linking this library statically or dynamically with other modules is 
+ * making a combined work based on this library. Thus, the terms and 
+ * conditions of the GNU General Public License cover the whole combination. 
+ * 
+ * As a special exception, the copyright holders of this library give you permission 
+ * to link this library with independent modules to produce an executable, regardless 
+ * of the license terms of these independent modules, and to copy and distribute 
+ * the resulting executable under terms of your choice, provided that you also meet, 
+ * for each linked independent module, the terms and conditions of the license of 
+ * that module. An independent module is a module which is not derived from or 
+ * based on this library. If you modify this library, you may extend this exception 
+ * to your version of the library, but you are not obligated to do so. If you do not 
+ * wish to do so, delete this exception statement from your version. 
  *
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -39,21 +44,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.geotools.data.shapefile.ShpFiles;
-import org.geotools.data.shapefile.shp.ShapefileReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.MultiPolygon;
-import com.vividsolutions.jts.geom.Polygon;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
-import org.geosdi.geoplatform.gui.server.PublisherIOUtility;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -140,56 +138,5 @@ public class UploadServlet extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE,
                     "Request contents type is not supported by the servlet.");
         }
-    }
-
-    /**
-     * @param file
-     * @return String
-     * @throws Exception
-     */
-    private String calculateWKT(File file) throws Exception {
-        ShapefileReader reader = null;
-        Polygon[] geomArray = null;
-        File shpDir = null;
-        try {
-            shpDir = PublisherIOUtility.decompress("DGWATCH", file,
-                    File.createTempFile("dgwatch-temp", ".tmp"));
-
-            reader = new ShapefileReader(new ShpFiles(shpDir), false, false,
-                    new GeometryFactory());
-
-            List<Geometry> geomList = new ArrayList<Geometry>();
-            while (reader.hasNext()) {
-                Geometry geometry = (Geometry) reader.nextRecord().shape();
-                if (geometry != null && geometry instanceof Polygon) {
-                    geomList.add(geometry);
-                } else if (geometry != null && geometry instanceof MultiPolygon) {
-                    for (int g = 0; g < geometry.getNumGeometries(); g++) {
-                        if (geometry.getGeometryN(g) != null
-                                && geometry.getGeometryN(g) instanceof Polygon) {
-                            geomList.add(geometry.getGeometryN(g));
-                        }
-                    }
-                }
-            }
-
-            geomArray = new Polygon[geomList.size()];
-            for (int i = 0; i < geomArray.length; i++) {
-                Geometry geometry = geomList.get(i);
-                geomArray[i] = (Polygon) geometry;
-            }
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            shpDir.delete();
-            if (reader != null) {
-                reader.close();
-            }
-        }
-
-        MultiPolygon polygon = new MultiPolygon(geomArray,
-                new GeometryFactory());
-
-        return polygon.toText();
     }
 }

@@ -51,10 +51,6 @@ public class ResourceNotFoundFault extends Exception {
     public ResourceNotFoundFault() {
     }
 
-    /**
-     * This is needed, or the SOAP client will throw an ex in initialization:
-     * java.lang.NoSuchMethodException: com.digitalglobe.dgwatch.services.exception.ResourceNotFoundFault.<init>(java.lang.String)
-     */
     public ResourceNotFoundFault(String msg) {
         super(msg);
     }

@@ -47,10 +47,6 @@ public class IllegalParameterFault extends Exception {
     public IllegalParameterFault() {
     }
 
-    /**
-     * This is needed, or the SOAP client will throw an ex in initialization:
-     * java.lang.NoSuchMethodException: com.digitalglobe.dgwatch.services.exception.ResourceNotFoundFault.<init>(java.lang.String)
-     */
     public IllegalParameterFault(String msg) {
         super(msg);
     }

@@ -131,9 +131,9 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
                     }
                 }
 
-//                    action.setEnabled(((ActionClientTool) tool).isEnabled());
-                action.setEnabled(GPUserGuiComponents.getInstance().getPermissionForComponent(
-                        id));
+                action.setEnabled(((ActionClientTool) tool).isEnabled());
+//                action.setEnabled(GPUserGuiComponents.getInstance().getPermissionForComponent(
+//                        id));
             }
         }
     }
@@ -182,10 +182,10 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
      * Add a Vertical Line in the Toolbar
      */
     public void addSeparator() {
-        if (GPUserGuiComponents.getInstance().hasComponentPermission(
-                TOOLBAR_SEPARATOR)) {
-            this.toolBar.add(new SeparatorToolItem());
-        }
+//        if (GPUserGuiComponents.getInstance().hasComponentPermission(
+//                TOOLBAR_SEPARATOR)) {
+        this.toolBar.add(new SeparatorToolItem());
+//        }
     }
 
     /**
@@ -195,30 +195,30 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
      * @param action
      */
     public void addMapButton(ToolbarMapAction action) {
-        if (GPUserGuiComponents.getInstance().hasComponentPermission(
-                action.getId())) {
-            final GeoPlatformButton button = new GeoPlatformButton();
-            button.setAction(action);
-            button.setId(action.getId());
-            button.setToolTip(action.getTooltip());
-            button.setIcon(action.getImage());
-            button.addSelectionListener(action);
+//        if (GPUserGuiComponents.getInstance().hasComponentPermission(
+//                action.getId())) {
+        final GeoPlatformButton button = new GeoPlatformButton();
+        button.setAction(action);
+        button.setId(action.getId());
+        button.setToolTip(action.getTooltip());
+        button.setIcon(action.getImage());
+        button.addSelectionListener(action);
 
-            action.addActionHandler(new ActionHandler() {
+        action.addActionHandler(new ActionHandler() {
 
-                @Override
-                public void onActionEnabled(ActionEnabledEvent event) {
-                    button.setEnabled(true);
-                }
+            @Override
+            public void onActionEnabled(ActionEnabledEvent event) {
+                button.setEnabled(true);
+            }
 
-                @Override
-                public void onActionDisabled(ActionDisabledEvent event) {
-                    button.setEnabled(false);
-                }
-            });
+            @Override
+            public void onActionDisabled(ActionDisabledEvent event) {
+                button.setEnabled(false);
+            }
+        });
 
-            this.toolBar.add(button);
-        }
+        this.toolBar.add(button);
+//        }
     }
 
     private void addUserLoginMenu(MenuInToolBar menuInToolBar) {
@@ -269,30 +269,30 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
      * @param action
      */
     public void addMapToggleButton(ToolbarMapAction action) {
-        if (GPUserGuiComponents.getInstance().hasComponentPermission(
-                action.getId())) {
-            final GeoPlatformToggleButton button = new GeoPlatformToggleButton();
-            button.setAction(action);
-            button.setId(action.getId());
-            button.setToolTip(action.getTooltip());
-            button.setIcon(action.getImage());
-            button.addSelectionListener(action);
+//        if (GPUserGuiComponents.getInstance().hasComponentPermission(
+//                action.getId())) {
+        final GeoPlatformToggleButton button = new GeoPlatformToggleButton();
+        button.setAction(action);
+        button.setId(action.getId());
+        button.setToolTip(action.getTooltip());
+        button.setIcon(action.getImage());
+        button.addSelectionListener(action);
 
-            action.addActionHandler(new ActionHandler() {
+        action.addActionHandler(new ActionHandler() {
 
-                @Override
-                public void onActionEnabled(ActionEnabledEvent event) {
-                    button.setEnabled(true);
-                }
+            @Override
+            public void onActionEnabled(ActionEnabledEvent event) {
+                button.setEnabled(true);
+            }
 
-                @Override
-                public void onActionDisabled(ActionDisabledEvent event) {
-                    button.setEnabled(false);
-                }
-            });
+            @Override
+            public void onActionDisabled(ActionDisabledEvent event) {
+                button.setEnabled(false);
+            }
+        });
 
-            this.toolBar.add(button);
-        }
+        this.toolBar.add(button);
+//        }
     }
 
     /**

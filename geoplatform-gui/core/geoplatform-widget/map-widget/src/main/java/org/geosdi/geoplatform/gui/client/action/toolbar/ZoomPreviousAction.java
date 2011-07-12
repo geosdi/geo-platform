@@ -52,52 +52,51 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * 
  */
 public class ZoomPreviousAction extends ToolbarMapAction implements
-		GeoPlatformEventHandler {
+        GeoPlatformEventHandler {
 
-	private GeoPlatformMap mapWidget;
-	private HandlerRegistration handlerRegistration;
+    private GeoPlatformMap mapWidget;
+    private HandlerRegistration handlerRegistration;
 
-	public ZoomPreviousAction(GeoPlatformMap theMapWidget) {
-		super("Zoom Previous", Resources.ICONS.zoomPrevious());
-		// TODO Auto-generated constructor stub
-		this.mapWidget = theMapWidget;
-		this.addHandler();
-	}
+    public ZoomPreviousAction(GeoPlatformMap theMapWidget) {
+        super("Zoom Previous", Resources.ICONS.zoomPrevious());
+        // TODO Auto-generated constructor stub
+        this.mapWidget = theMapWidget;
+        this.addHandler();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		((MapLayoutWidget) this.mapWidget).getNavigationHistory()
-				.previousTrigger();
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+     * .extjs.gxt.ui.client.event.ComponentEvent)
+     */
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        // TODO Auto-generated method stub
+        ((MapLayoutWidget) this.mapWidget).getNavigationHistory().previousTrigger();
+    }
 
-	public void addHandler() {
-		// TODO Auto-generated method stub
-		this.handlerRegistration = GPHandlerManager.addHandler(
-				ZoomPreviousEvent.TYPE, new ZoomPreviousEventHandler() {
+    public void addHandler() {
+        // TODO Auto-generated method stub
+        this.handlerRegistration = GPHandlerManager.addHandler(
+                ZoomPreviousEvent.TYPE, new ZoomPreviousEventHandler() {
 
-					@Override
-					public void onActivation(boolean activate) {
-						// TODO Auto-generated method stub
-						if (activate)
-							enable();
-						else
-							disable();
-					}
-				});
-	}
+            @Override
+            public void onActivation(boolean activate) {
+                // TODO Auto-generated method stub
+                if (activate) {
+                    enable();
+                } else {
+                    disable();
+                }
+            }
+        });
+    }
 
-	@Override
-	public void removeHandler() {
-		// TODO Auto-generated method stub
-		this.handlerRegistration.removeHandler();
-	}
-
+    @Override
+    public void removeHandler() {
+        // TODO Auto-generated method stub
+        this.handlerRegistration.removeHandler();
+    }
 }

@@ -118,7 +118,6 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
      *
      */
     private void createCombo() {
-        // TODO Auto-generated method stub
         this.store = new ListStore<T>();
         this.combo = new GPComboBox<T>();
         this.combo.setStore(store);
@@ -162,7 +161,6 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
 
             @Override
             public void onClick(ClickEvent event) {
-                // TODO Auto-generated method stub
                 if (store.getModels().size() > 0) {
                     combo.focus();
                     combo.expand();
@@ -177,12 +175,10 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
      *
      */
     private void setComboSelectionChangedListener() {
-        // TODO Auto-generated method stub
         this.combo.addSelectionChangedListener(new SelectionChangedListener<T>() {
 
             @Override
             public void selectionChanged(SelectionChangedEvent<T> se) {
-                // TODO Auto-generated method stub
                 changeSelection(se);
             }
         });

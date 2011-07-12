@@ -52,34 +52,32 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.geosdi.publisher.exception.ResourceNotFoundFault;
 import org.geosdi.publisher.services.GPPublisherService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@Service("uploadServlet")
 public class UploadServlet extends HttpServlet {
 
     private static final long serialVersionUID = -1464439864247709647L;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private GPPublisherService geoPlatformPublishClient;
+    private GPPublisherService geoPlatformPublishClient = (GPPublisherService)GeoPlatformContextUtil.getInstance().getBean("geoPlatformPublishClient");
 //    private GPPublisherService publisherService = new GPPublisherServiceImpl();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException, GeoPlatformException {
         super.doGet(req, resp);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException, GeoPlatformException {
         // process only multipart requests
         if (ServletFileUpload.isMultipartContent(req)) {
             // Create a factory for disk-based file items
@@ -116,22 +114,25 @@ public class UploadServlet extends HttpServlet {
                     // "The file already exists in repository.");
                 }
             } catch (Exception e) {
-                resp.sendError(
-                        HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                         "An error occurred creating the file: "
+                        + e.getMessage());
+                System.out.println("An error occurred creating the file: "
                         + e.getMessage());
             }
             //TODO: Insert call to the services
-            String pngURL = null;
-            System.out.println("THis.geoplatqualcosa null");
-            System.out.println(this.geoPlatformPublishClient == null);
+            String pngURL = null; 
+            System.out.println(this.geoPlatformPublishClient == null ? 
+                    "this.geoPlatformPublishClient is null" : "this.geoPlatformPublishClient" + this.geoPlatformPublishClient);
             try {
                 pngURL = this.geoPlatformPublishClient.uploadZIPInPreview(uploadedFile);
+                //this.geoPlatformPublishClient.publish("previews", "dataTest", );
             } catch (ResourceNotFoundFault ex) {
                 logger.equals("Error on uploading shape: " + ex);
+                System.out.println("Error on uploading shape: " + ex);
             }
-            System.out.println("PNG URL: uguale null");
-            System.out.println(pngURL == null);
+            System.out.println(pngURL == null ? "PNG URL: uguale null" : "PNg url: " + pngURL);
+            
 //            try {
 //                String wkt = calculateWKT(uploadedFile);
 //                resp.getWriter().print(wkt);
@@ -145,14 +146,5 @@ public class UploadServlet extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE,
                     "Request contents type is not supported by the servlet.");
         }
-    }
-
-    /**
-     * @param geoPlatformServiceClient the geoPlatformServiceClient to set
-     */
-    @Autowired
-    public void setGeoPlatformPublishClient(
-            @Qualifier("geoPlatformPublishClient") GPPublisherService geoPlatformPublishClient) {
-        this.geoPlatformPublishClient = geoPlatformPublishClient;
     }
 }

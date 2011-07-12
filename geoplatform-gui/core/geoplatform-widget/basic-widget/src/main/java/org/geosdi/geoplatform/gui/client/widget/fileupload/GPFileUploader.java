@@ -110,13 +110,9 @@ public class GPFileUploader {
             @Override
             public void onSubmitComplete(SubmitCompleteEvent event) {
                 // When the form submission is successfully completed,
-                // this
-                // event is fired. Assuming the service returned a
-                // response of
-                // type
-                // text/html, we can get the result text here (see the
-                // FormPanel
-                // documentation for further explanation).
+                // this event is fired. Assuming the service returned a
+                // response of type text/html, we can get the result text here 
+                // (see the FormPanel documentation for further explanation).
                 formPanel.reset();
                 htmlResult = event.getResults();
 //                htmlResult = htmlResult.replaceAll("<pre>", "");

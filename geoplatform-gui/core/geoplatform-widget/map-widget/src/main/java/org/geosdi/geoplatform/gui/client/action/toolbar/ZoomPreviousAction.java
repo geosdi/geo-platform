@@ -59,7 +59,6 @@ public class ZoomPreviousAction extends ToolbarMapAction implements
 
     public ZoomPreviousAction(GeoPlatformMap theMapWidget) {
         super("Zoom Previous", Resources.ICONS.zoomPrevious());
-        // TODO Auto-generated constructor stub
         this.mapWidget = theMapWidget;
         this.addHandler();
     }
@@ -73,18 +72,15 @@ public class ZoomPreviousAction extends ToolbarMapAction implements
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
-        // TODO Auto-generated method stub
         ((MapLayoutWidget) this.mapWidget).getNavigationHistory().previousTrigger();
     }
 
     public void addHandler() {
-        // TODO Auto-generated method stub
         this.handlerRegistration = GPHandlerManager.addHandler(
                 ZoomPreviousEvent.TYPE, new ZoomPreviousEventHandler() {
 
             @Override
             public void onActivation(boolean activate) {
-                // TODO Auto-generated method stub
                 if (activate) {
                     enable();
                 } else {
@@ -96,7 +92,6 @@ public class ZoomPreviousAction extends ToolbarMapAction implements
 
     @Override
     public void removeHandler() {
-        // TODO Auto-generated method stub
         this.handlerRegistration.removeHandler();
     }
 }

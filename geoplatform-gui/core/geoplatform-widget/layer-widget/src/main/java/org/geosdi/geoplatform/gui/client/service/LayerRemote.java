@@ -58,7 +58,7 @@ public interface LayerRemote extends RemoteService {
 
     public static class Util {
 
-        private static LayerRemoteAsync instance = (LayerRemoteAsync) GWT.create(LayerRemote.class);;
+        private static LayerRemoteAsync instance = (LayerRemoteAsync) GWT.create(LayerRemote.class);
 
         public static LayerRemoteAsync getInstance() {
             return instance;

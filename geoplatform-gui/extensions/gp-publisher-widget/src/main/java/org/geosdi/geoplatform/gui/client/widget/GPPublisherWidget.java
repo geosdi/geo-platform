@@ -118,8 +118,7 @@ public class GPPublisherWidget extends GeoPlatformWindow {
     private void addCentralPanel() {
         this.centralPanel = new ContentPanel();
         this.centralPanel.setHeaderVisible(false);
-        this.fileUploader = new GPFileUploader("UploadServlet", GPExtensions.shp, GPExtensions.zip,
-                GPExtensions.dbf, GPExtensions.prj, GPExtensions.shx);
+        this.fileUploader = new GPFileUploader("UploadServlet", GPExtensions.zip);
         BorderLayoutData centerData = new BorderLayoutData(LayoutRegion.CENTER);
         centerData.setMargins(new Margins(5, 5, 0, 5));
         Image image = BasicWidgetResources.ICONS.geo_platform_logo().createImage();

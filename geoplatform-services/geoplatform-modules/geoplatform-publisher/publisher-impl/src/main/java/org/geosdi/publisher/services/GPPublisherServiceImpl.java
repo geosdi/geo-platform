@@ -41,7 +41,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
-
 import javax.jws.WebService;
 import org.springframework.transaction.annotation.Transactional;
 import org.geosdi.publisher.exception.ResourceNotFoundFault;
@@ -112,7 +111,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             logger.info("Problems for connecting to the REST reader");
 
         }
-        tempDir = System.getProperty("java.io.tmpdir");
+        tempDir = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator");
    }
 
     /****************************
@@ -130,7 +129,6 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         String filename = tempDir + layerName + ".zip";
         File file = new File(filename);
         boolean publish = false;
-
         if (file.exists()){
 //          publisher.unpublishFeatureType(previewWorkspace, layerName, layerName);
 //          logger.info("removing "+layerName+" from "+previewWorkspace);
@@ -272,7 +270,6 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     ******************************/
     @Override
     public String uploadZIPInPreview(File file) throws ResourceNotFoundFault {
-
         InfoShape info = getInfoFromCompressedShape(file);
         if (info == null) {
             throw new ResourceNotFoundFault("The ZIP archive does not contain a shp file");

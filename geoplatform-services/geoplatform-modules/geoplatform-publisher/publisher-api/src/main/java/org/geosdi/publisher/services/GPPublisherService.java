@@ -10,6 +10,7 @@ import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
 
 import org.geosdi.publisher.exception.ResourceNotFoundFault;
+import org.geosdi.publisher.responce.InfoPreview;
 import org.geosdi.publisher.responce.PreviewElement;
 
 /**
@@ -24,13 +25,13 @@ public interface GPPublisherService {
     @Get
     @HttpResource(location = "/preview/uploadZipInPreview")
     @WebResult(name = "Result")
-    String uploadZIPInPreview(@WebParam(name = "fileName") File file)
+    InfoPreview uploadZIPInPreview(@WebParam(name = "fileName") File file)
             throws ResourceNotFoundFault;
     
     @Get
     @HttpResource(location = "/preview/uploadShpInPreview")
     @WebResult(name = "Result")
-    String uploadShapeInPreview(@WebParam(name = "shpFileName") File shpFile,
+    InfoPreview uploadShapeInPreview(@WebParam(name = "shpFileName") File shpFile,
                        @WebParam(name = "dbfFileName") File dbfFile,
                        @WebParam(name = "shxFileName") File shxFile,
                        @WebParam(name = "prjFileName") File prjFile)

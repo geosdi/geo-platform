@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.geosdi.publisher.exception.ResourceNotFoundFault;
+import org.geosdi.publisher.responce.InfoPreview;
 
 import org.geosdi.publisher.services.GPPublisherService;
 import org.junit.Test;
@@ -50,12 +51,14 @@ public class PublisherWSTest extends TestCase{
         Assert.assertNotNull(gppublisherService);
         try {
             logger.info("\n **** Start to upload Archivio.zip");
-            File zipFile = new File("c:\\Archivio.zip");
-            String image = gppublisherService.uploadZIPInPreview(zipFile);
-            logger.info("\n **** Preview image at: "+image);
-            } catch (ResourceNotFoundFault ex) {
-                logger.error("\n **** Eccezione nella gestione di Archivio.zip: "+ex.getMessage());
-            }
+            File zipFile = new File("c:\\shape.zip");
+            InfoPreview info = gppublisherService.uploadZIPInPreview(zipFile);
+            logger.info("\n **** Preview image at: "+info.getDataStoreName());
+            logger.info("\n **** Preview image at: "+info.getWorkspace());
+            System.out.println("\n **** Preview url at: "+info.getUrl());
+            System.out.println("\n **** Preview data store name at: "+info.getDataStoreName());
+            System.out.println("\n **** Preview workspace at: "+info.getWorkspace());
+            logger.info("\n **** Publishing SHAPE "+gppublisherService.publish("preview2", "data", "it_aeropo" ));
             File shpFile = new File("c:\\limiti_adb_4326.shp");
             File dbfFile = new File("c:\\limiti_adb_4326.dbf");
             File shxFile = new File("c:\\limiti_adb_4326.shx");
@@ -66,7 +69,7 @@ public class PublisherWSTest extends TestCase{
 //            } catch (Exception ex) {
 //                logger.error("\n **** Eccezione nella gestione di Limiti_AdB_4326 files: "+ex.getMessage());
 //            }
-            try {
+
                 logger.info("\n **** Start again to upload Limiti_AdB_4326 files");
                 logger.info("\n **** Preview image at: "+gppublisherService.uploadShapeInPreview(shpFile, dbfFile, shxFile, prjFile));
                 logger.info("\n **** Successfully published in preview");

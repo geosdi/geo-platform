@@ -15,10 +15,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "PreviewElement")
 public class PreviewElement {
     private String dataStoreName;
-    private String previewURL;
+    private InfoPreview previewURL;
 
     public PreviewElement() {
     }
+
+    public PreviewElement(String dataStoreName, InfoPreview previewURL) {
+        this.dataStoreName = dataStoreName;
+        this.previewURL = previewURL;
+    }
+
+    
 
     public String getDataStoreName() {
         return dataStoreName;
@@ -28,18 +35,14 @@ public class PreviewElement {
         this.dataStoreName = dataStoreName;
     }
 
-    public String getPreviewURL() {
+    public InfoPreview getPreviewURL() {
         return previewURL;
     }
 
-    public void setPreviewURL(String previewURL) {
+    public void setPreviewURL(InfoPreview previewURL) {
         this.previewURL = previewURL;
     }
 
-    public PreviewElement(String dataStoreName, String previewURL) {
-        this.dataStoreName = dataStoreName;
-        this.previewURL = previewURL;
-    }
 
 
 

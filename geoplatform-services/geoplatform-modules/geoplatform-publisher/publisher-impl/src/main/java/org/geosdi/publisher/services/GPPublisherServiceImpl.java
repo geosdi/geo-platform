@@ -59,6 +59,7 @@ import java.util.zip.ZipFile;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+import org.geosdi.publisher.responce.InfoPreview;
 import org.geosdi.publisher.responce.PreviewElement;
 import org.geotools.data.FileDataStore;
 import org.geotools.data.FileDataStoreFinder;
@@ -98,6 +99,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     private String tempDir = "";
     private String previewWorkspace="";
 
+
     public GPPublisherServiceImpl(String _RESTURL, String _RESTUSER, String _RESTPW, String _previewWorkspace) {
         RESTURL = _RESTURL;
         RESTUSER = _RESTUSER;
@@ -130,10 +132,6 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         File file = new File(filename);
         boolean publish = false;
         if (file.exists()){
-//          publisher.unpublishFeatureType(previewWorkspace, layerName, layerName);
-//          logger.info("removing "+layerName+" from "+previewWorkspace);
-//          publisher.removeDatastore(previewWorkspace, layerName);
-//          logger.info("removing "+dataStoreName);
            try {
                logger.info("start to publish "+layerName+" into "+workspace+":"+dataStoreName);
                publish = publisher.publishShp(workspace, dataStoreName, layerName, file, "EPSG:4326");
@@ -142,8 +140,14 @@ public class GPPublisherServiceImpl implements GPPublisherService {
            } catch(FileNotFoundException e) {
                 logger.info("\n ********** File "+layerName+".zip not found");
             }
-        //publisher.removeDatastore("previews", layerName);
-        return true;
+            RESTDataStore dataStore = reader.getDatastore(previewWorkspace, layerName);
+            if (dataStore!=null) System.out.println("\n ***************** trovato");
+            else System.out.println("\n ***************** NON trovato");
+//            if (dataStore!=null) {
+//                publisher.unpublishFeatureType(previewWorkspace, layerName, layerName);
+//                publisher.removeDatastore(previewWorkspace, layerName);
+//            }
+           return true;
       }
        return false;
     }
@@ -169,13 +173,12 @@ public class GPPublisherServiceImpl implements GPPublisherService {
    * @throws ResourceNotFoundFault
    * get the URL to the PNG if the layer dataStoreName
    */
-    private String getURLPreviewByDataStoreName(String dataStoreName) throws ResourceNotFoundFault{
+    private InfoPreview getURLPreviewByDataStoreName(String dataStoreName) throws ResourceNotFoundFault{
           RESTFeatureType featureType =  reader.getFeatureType(reader.getLayer(dataStoreName));
-          double minX = featureType.getMinX();
-          double maxX = featureType.getMaxX();
-          double minY = featureType.getMinY();
-          double maxY = featureType.getMaxY();
-          return RESTURL+"/"+previewWorkspace+"/wms?service=WMS&version=1.1.0&request=GetMap&layers=previews:"+dataStoreName+"&styles=&bbox="+minX+","+minY+","+maxX+","+maxY+"&width=512&height=499&srs="+featureType.getCRS()+"&format=image/png";
+          InfoPreview info = new InfoPreview(RESTURL, previewWorkspace, dataStoreName, featureType.getMinX(), featureType.getMinY(), featureType.getMaxX(), featureType.getMaxY(),0,0, "EPSG:4326");
+          return info;
+
+        //  return RESTURL+"/"+previewWorkspace+"/wms?service=WMS&version=1.1.0&request=GetMap&layers=previews:"+dataStoreName+"&styles=&bbox="+minX+","+minY+","+maxX+","+maxY+"&width=512&height=499&srs="+featureType.getCRS()+"&format=image/png";
    }
 
 
@@ -235,21 +238,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             if (geomType.equals("MultiPoint")) info.sld="default_point";
             Integer code  = CRS.lookupEpsgCode(featureSource.getSchema().getCoordinateReferenceSystem(), true);
             if (code!=null) {
-                if (geomType.equals("MultyPolygon")) {
-                    info.sld = "default_polygon";
-                }
-                if (geomType.equals("PolyLine")) {
-                    info.sld = "default_polyline";
-                }
-                if (geomType.equals("MultiPoint")) {
-                    info.sld = "default_point";
-                }
-                try {
                    info.epsg = "EPSG:" + code.toString();
-                } catch (Exception e) {
-                    info.epsg = "EPSG:4326";
-                }
-            }
+             }
             else {
                     info.epsg = "EPSG:4326";
                 }
@@ -269,7 +259,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     * this service upload in the previews workspace a shapefile. The ZIP file must contain the sho, the prj, the shx and the dbf files. Otherwise, an exception is raised
     ******************************/
     @Override
-    public String uploadZIPInPreview(File file) throws ResourceNotFoundFault {
+    public InfoPreview uploadZIPInPreview(File file) throws ResourceNotFoundFault {
         InfoShape info = getInfoFromCompressedShape(file);
         if (info == null) {
             throw new ResourceNotFoundFault("The ZIP archive does not contain a shp file");
@@ -282,9 +272,10 @@ public class GPPublisherServiceImpl implements GPPublisherService {
 
             //publish the shape in the previews workspace
             // calculate the PNG URL to return
-            String urlPNGPreview = "error";
+            InfoPreview urlPNGPreview = null;
             // create the <layername>.zip file
             FileInputStream in = new FileInputStream(file);
+            System.out.println("*****************PATH: "+tempDir + info.name + ".zip");
             FileOutputStream out = new FileOutputStream(tempDir + info.name + ".zip");
             byte[] buf = new byte[1024];
             int len;
@@ -304,6 +295,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             }
             // calculate the PNG URL to return
             urlPNGPreview = getURLPreviewByDataStoreName(info.name);
+            urlPNGPreview.setCrs(info.epsg);
             return urlPNGPreview;
         } catch (FileNotFoundException ex) {
             throw new ResourceNotFoundFault("File not found Exception");
@@ -342,7 +334,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     * this service upload in the previews workspace a shapefile. The shapefile file must contain the shp, the prj, the shx and the dbf files. Otherwise, an exception is raised
     */
     @Override
-    public String uploadShapeInPreview(File shpFile, File dbfFile, File shxFile, File prjFile) throws ResourceNotFoundFault {
+    public InfoPreview uploadShapeInPreview(File shpFile, File dbfFile, File shxFile, File prjFile) throws ResourceNotFoundFault {
 
         String name = shpFile.getName().substring(0, shpFile.getName().length() - 4);
         try {
@@ -353,7 +345,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             out = compress(out, prjFile);
             out.close();
             File compressedFile = new File(tempDir + "temp.zip");
-            String url = uploadZIPInPreview(compressedFile);
+            InfoPreview url = uploadZIPInPreview(compressedFile);
             return url;
         } catch (ResourceNotFoundFault e) {
             logger.info("the Layer already exists");

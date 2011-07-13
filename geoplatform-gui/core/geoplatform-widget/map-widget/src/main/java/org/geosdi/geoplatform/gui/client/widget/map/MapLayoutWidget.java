@@ -35,13 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map;
 
-import java.util.Collections;
-import java.util.List;
 
-import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
+import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.GPRoutingManagerWidget;
-import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.gwtopenmaps.openlayers.client.Bounds;
@@ -93,8 +90,8 @@ public class MapLayoutWidget implements GeoPlatformMap {
     private Layer osm;
     private GPRoutingManagerWidget routingWidget;
     private MapModel mapModel;
-    private ButtonBar buttonBar;
-    private List<GenericClientTool> tools;
+    private MapToolbar buttonBar;
+    
     private Measure measure;
     private Measure measureArea;
     private boolean infoActive;
@@ -332,22 +329,6 @@ public class MapLayoutWidget implements GeoPlatformMap {
     }
 
     /**
-     * @return the tools
-     */
-    public List<GenericClientTool> getTools() {
-        return tools;
-    }
-
-    /**
-     * @param tools
-     *            the tools to set
-     */
-    public void setTools(List<GenericClientTool> tools) {
-        Collections.sort(tools);
-        this.tools = tools;
-    }
-
-    /**
      * activate draw feature control on the map
      */
     @Override
@@ -381,7 +362,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
      * @return the buttonBar
      */
     @Override
-    public ButtonBar getButtonBar() {
+    public MapToolbar getButtonBar() {
         return buttonBar;
     }
 
@@ -389,7 +370,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
      * @param buttonBar
      *            the buttonBar to set
      */
-    public void setButtonBar(ButtonBar buttonBar) {
+    public void setButtonBar(MapToolbar buttonBar) {
         this.buttonBar = buttonBar;
     }
 

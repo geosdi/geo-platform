@@ -1,44 +1,48 @@
 /*
  *  geo-platform
  *  Rich webgis framework
- *  http://geo-plartform.org
+ *  http://geo-platform.org
  * ====================================================================
  *
  * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
- * This program is free software: you can redistribute it and/or modify it 
- * under the terms of the GNU General Public License as published by 
- * the Free Software Foundation, either version 3 of the License, or 
- * (at your option) any later version. This program is distributed in the 
- * hope that it will be useful, but WITHOUT ANY WARRANTY; without 
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR 
- * A PARTICULAR PURPOSE. See the GNU General Public License 
- * for more details. You should have received a copy of the GNU General 
- * Public License along with this program. If not, see http://www.gnu.org/licenses/ 
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details. You should have received a copy of the GNU General
+ * Public License along with this program. If not, see http://www.gnu.org/licenses/
  *
  * ====================================================================
  *
- * Linking this library statically or dynamically with other modules is 
- * making a combined work based on this library. Thus, the terms and 
- * conditions of the GNU General Public License cover the whole combination. 
- * 
- * As a special exception, the copyright holders of this library give you permission 
- * to link this library with independent modules to produce an executable, regardless 
- * of the license terms of these independent modules, and to copy and distribute 
- * the resulting executable under terms of your choice, provided that you also meet, 
- * for each linked independent module, the terms and conditions of the license of 
- * that module. An independent module is a module which is not derived from or 
- * based on this library. If you modify this library, you may extend this exception 
- * to your version of the library, but you are not obligated to do so. If you do not 
- * wish to do so, delete this exception statement from your version. 
+ * Linking this library statically or dynamically with other modules is
+ * making a combined work based on this library. Thus, the terms and
+ * conditions of the GNU General Public License cover the whole combination.
+ *
+ * As a special exception, the copyright holders of this library give you permission
+ * to link this library with independent modules to produce an executable, regardless
+ * of the license terms of these independent modules, and to copy and distribute
+ * the resulting executable under terms of your choice, provided that you also meet,
+ * for each linked independent module, the terms and conditions of the license of
+ * that module. An independent module is a module which is not derived from or
+ * based on this library. If you modify this library, you may extend this exception
+ * to your version of the library, but you are not obligated to do so. If you do not
+ * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.widget.map.toolbar;
 
-import org.geosdi.geoplatform.gui.client.widget.menu.MenuUtilityBuilder;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
+import com.extjs.gxt.ui.client.widget.menu.MenuItem;
+import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
+import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
+import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
+import java.util.Collections;
 import java.util.List;
-
-import org.geosdi.geoplatform.gui.action.GeoPlatformButtonObserver;
 import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.action.ToolbarApplicationAction;
@@ -47,57 +51,39 @@ import org.geosdi.geoplatform.gui.action.button.GeoPlatformButton;
 import org.geosdi.geoplatform.gui.action.button.GeoPlatformToggleButton;
 import org.geosdi.geoplatform.gui.action.event.ActionDisabledEvent;
 import org.geosdi.geoplatform.gui.action.event.ActionEnabledEvent;
+import org.geosdi.geoplatform.gui.action.event.ActionHandler;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
-import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.widget.menu.MenuUtilityBuilder;
+import org.geosdi.geoplatform.gui.client.widget.toolbar.GeoPlatformToolbarWidget;
 import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
-import org.geosdi.geoplatform.gui.impl.map.IGeoPlatofomMapButtonBar;
-
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.button.ToggleButton;
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import com.extjs.gxt.ui.client.widget.menu.MenuItem;
-import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
-import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
-import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
-import org.geosdi.geoplatform.gui.action.event.ActionHandler;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.configuration.menubar.MenuInToolBar;
 import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public class ButtonBar extends GeoPlatformToolbarWidget implements
-        IGeoPlatofomMapButtonBar {
+public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
 
-    private MapLayoutWidget mapLayoutWidget;
-    private GeoPlatformButtonObserver buttonObserver;
+    protected GeoPlatformMap geoPlatformMap;
+    private List<GenericClientTool> tools;
 
-    /**
-     * Constructor
-     *
-     * @param mapLayoutWidget
-     */
-    public ButtonBar(MapLayoutWidget mapLayoutWidget) {
-        super();
-        this.toolBar = new ToolBar();
-        this.mapLayoutWidget = mapLayoutWidget;
-        this.mapLayoutWidget.setButtonBar(this);
-        this.buttonObserver = new GeoPlatformButtonObserver();
+    public GPMapToolbarWidget(GeoPlatformMap geoPlatformMap,
+            List<GenericClientTool> tools) {
+        this.geoPlatformMap = geoPlatformMap;
+        setTools(tools);
         initialize();
     }
 
-    /**
-     * Widget initialize
-     */
     @Override
     public void initialize() {
-        List<GenericClientTool> tools = this.mapLayoutWidget.getTools();
         for (GenericClientTool tool : tools) {
             String id = tool.getId();
 
@@ -106,14 +92,14 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
             } else if (tool instanceof MenuClientTool) {
                 addMenuButton((MenuClientTool) tool,
                         (ToolbarApplicationAction) ToolbarActionRegistar.get(
-                        id, mapLayoutWidget));
+                        id, geoPlatformMap));
             } else if (tool instanceof MenuInToolBar && ((MenuInToolBar) tool).getId().equals(
                     UserLoginEnum.USER_MENU.toString())) {
                 this.addUserLoginMenu((MenuInToolBar) tool);
             } else {
                 GeoPlatformToolbarAction action = ToolbarActionRegistar.get(
                         id,
-                        mapLayoutWidget);
+                        geoPlatformMap);
 
                 action.setId(id);
 
@@ -129,9 +115,9 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
                     }
                 }
 
-                action.setEnabled(((ActionClientTool) tool).isEnabled());
-//                action.setEnabled(GPUserGuiComponents.getInstance().getPermissionForComponent(
-//                        id));
+//                action.setEnabled(((ActionClientTool) tool).isEnabled());
+                action.setEnabled(GPUserGuiComponents.getInstance().getPermissionForComponent(
+                        id));
             }
         }
     }
@@ -146,15 +132,15 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
             ToolbarApplicationAction action) {
 //        if (GPUserGuiComponents.getInstance().hasComponentPermission(
 //                tool.getId())) {
-            Button button = new Button();
-            button.setId(tool.getId());
-            button.setText(action.getButtonName());
-            button.setIcon(action.getImage());
-            button.setEnabled(tool.isEnabled());
+        Button button = new Button();
+        button.setId(tool.getId());
+        button.setText(action.getButtonName());
+        button.setIcon(action.getImage());
+        button.setEnabled(tool.isEnabled());
 
-            button.setMenu(createMenu(tool.getActionTools()));
+        button.setMenu(createMenu(tool.getActionTools()));
 
-            toolBar.add(button);
+        toolBar.add(button);
 //        }
     }
 
@@ -301,39 +287,18 @@ public class ButtonBar extends GeoPlatformToolbarWidget implements
     }
 
     /**
-     * Checks for a Toggle Button pressed
-     *
-     * @return boolean
+     * @return the tools
      */
-    @Override
-    public boolean isTogglePressed() {
-        return this.buttonObserver.isButtonPressed();
+    public List<GenericClientTool> getTools() {
+        return tools;
     }
 
     /**
-     *
-     * @param button
+     * @param tools
+     *            the tools to set
      */
-    @Override
-    public void setPressedButton(ToggleButton button) {
-        this.buttonObserver.setButtonPressed(button);
-    }
-
-    @Override
-    public Button getPressedButton() {
-        return this.buttonObserver.getButtonPressed();
-    }
-
-    @Override
-    public void changeButtonState() {
-        this.buttonObserver.changeButtonState();
-    }
-
-    /**
-     * 
-     * @return Toolbar Elements Number
-     */
-    public int getItemsCount() {
-        return this.toolBar.getItemCount();
+    public void setTools(List<GenericClientTool> tools) {
+        Collections.sort(tools);
+        this.tools = tools;
     }
 }

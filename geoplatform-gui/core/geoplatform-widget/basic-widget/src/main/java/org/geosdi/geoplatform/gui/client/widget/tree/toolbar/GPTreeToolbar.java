@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.tree.toolbar;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformToolbarWidget;
+import org.geosdi.geoplatform.gui.client.widget.toolbar.GeoPlatformToolbarWidget;
 
 /**
  *

@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.mvc;
 
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
-import org.geosdi.geoplatform.gui.client.widget.ButtonBar;
+import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.GeocodingMarker;
@@ -70,7 +70,7 @@ public class MapView extends GeoPlatformView {
     private MapLayoutWidget mapLayout;
     private GeocodingMarker geocoderMarker;
     private ReverseGeocodingWidget revGeoWidget;
-    private ButtonBar buttonBar;
+    private MapToolbar buttonBar;
     private Graticule graticule;
 
     public MapView(Controller controller) {
@@ -222,11 +222,9 @@ public class MapView extends GeoPlatformView {
      * @param event
      */
     private void onAttachToolbar() {
-        mapLayout.setTools(GeoPlatformUtils.getInstance().
+        this.buttonBar = new MapToolbar(mapLayout, GeoPlatformUtils.getInstance().
                 getGlobalConfiguration().getToolbarClientTool().
                 getClientTools());
-
-        this.buttonBar = new ButtonBar(mapLayout);
 
         if (this.buttonBar.getItemsCount() > 0) {
             LayoutManager.addComponentToNorth(buttonBar.getToolBar());

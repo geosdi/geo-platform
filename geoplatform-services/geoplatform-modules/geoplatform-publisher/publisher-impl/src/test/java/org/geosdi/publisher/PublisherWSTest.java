@@ -59,29 +59,28 @@ public class PublisherWSTest extends TestCase{
             System.out.println("\n **** Preview data store name at: "+info.getDataStoreName());
             System.out.println("\n **** Preview workspace at: "+info.getWorkspace());
             logger.info("\n **** Publishing SHAPE "+gppublisherService.publish("preview2", "data", "it_aeropo" ));
-            File shpFile = new File("c:\\limiti_adb_4326.shp");
-            File dbfFile = new File("c:\\limiti_adb_4326.dbf");
-            File shxFile = new File("c:\\limiti_adb_4326.shx");
-            File prjFile = new File("c:\\limiti_adb_4326.prj");
-//            try {
-//                logger.info("\n **** Start to upload Limiti_AdB_4326 files");
-//                logger.info("\n **** Preview image at: "+gppublisherService.uploadShapeInPreview(shpFile, dbfFile, shxFile, null));
-//            } catch (Exception ex) {
-//                logger.error("\n **** Eccezione nella gestione di Limiti_AdB_4326 files: "+ex.getMessage());
-//            }
-
-                logger.info("\n **** Start again to upload Limiti_AdB_4326 files");
-                logger.info("\n **** Preview image at: "+gppublisherService.uploadShapeInPreview(shpFile, dbfFile, shxFile, prjFile));
-                logger.info("\n **** Successfully published in preview");
-                logger.info("\n **** Start to publish Limiti_AdB_4326 files");
-                logger.info("\n **** Publishing Limiti_AdB_4326 "+gppublisherService.publish("preview2", "data", "limiti_adb_4326"));
+//            logger.info("\n **** Remove it_aeropo files from Preview");
+        //    logger.info("\n **** Removing result "+gppublisherService.removeFromPreview("it_aeropo"));
+//            File shpFile = new File("c:\\limiti_adb_4326.shp");
+//            File dbfFile = new File("c:\\limiti_adb_4326.dbf");
+//            File shxFile = new File("c:\\limiti_adb_4326.shx");
+//            File prjFile = new File("c:\\limiti_adb_4326.prj");
+//
+//                logger.info("\n **** Start again to upload Limiti_AdB_4326 files");
+//                logger.info("\n **** Preview image at: "+gppublisherService.uploadShapeInPreview(shpFile, dbfFile, shxFile, prjFile));
+//                logger.info("\n **** Successfully published in preview");
+//                logger.info("\n **** Start to publish Limiti_AdB_4326 files");
+//                logger.info("\n **** Publishing Limiti_AdB_4326 "+gppublisherService.publish("preview2", "data", "limiti_adb_4326"));
+//                logger.info("\n **** Remove Limiti_AdB_4326 files from Preview");
+         //       logger.info("\n **** Removing result "+gppublisherService.removeFromPreview("limiti_adb_4326"));
                 logger.info("\n **** Process successfully terminated");
             } catch (ResourceNotFoundFault ex) {
                 logger.error("\n **** Eccezione nella pubblicazione: "+ex.getMessage());
-                
+                System.out.println("\n **** Eccezione nella pubblicazione: "+ex.getMessage());
             }
             catch (FileNotFoundException ex) {
                 logger.error("\n **** File zip non trovato");
+                            System.out.println("\n **** Eccezione nella pubblicazione: "+ex.getMessage());
             }
     }
 }

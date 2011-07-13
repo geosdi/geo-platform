@@ -26,8 +26,10 @@ public class InfoPreview {
     private int width=0;
     private int height=0;
     private String crs="";
+    private boolean isVector = true;
 
     public InfoPreview(String url, String workspace, String dataStoreName, double minX, double minY, double maxX, double maxY, int width, int height, String crs) {
+
         this.url = url;
         this.workspace = workspace;
         this.dataStoreName = dataStoreName;
@@ -38,10 +40,21 @@ public class InfoPreview {
         this.width = width;
         this.height = height;
         this.crs = crs;
+        this.isVector = true;
     }
 
     public InfoPreview() {
     }
+
+    public boolean isIsVector() {
+        return isVector;
+    }
+
+    public void setIsVector(boolean isVector) {
+        this.isVector = isVector;
+    }
+
+    
 
     public String getUrl() {
         return url;

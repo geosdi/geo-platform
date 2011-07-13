@@ -52,9 +52,14 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.geosdi.publisher.exception.ResourceNotFoundFault;
+import org.geosdi.publisher.responce.InfoPreview;
 import org.geosdi.publisher.services.GPPublisherService;
 
 /**
@@ -66,6 +71,7 @@ public class UploadServlet extends HttpServlet {
     private static final long serialVersionUID = -1464439864247709647L;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private GPPublisherService geoPlatformPublishClient = (GPPublisherService)GeoPlatformContextUtil.getInstance().getBean("geoPlatformPublishClient");
+    //private UploadPreviewEvent previewEvent = new UploadPreviewEvent();
 //    private GPPublisherService publisherService = new GPPublisherServiceImpl();
 
     @Override
@@ -120,18 +126,17 @@ public class UploadServlet extends HttpServlet {
                 System.out.println("An error occurred creating the file: "
                         + e.getMessage());
             }
-            //TODO: Insert call to the services
-            String pngURL = null; 
-            System.out.println(this.geoPlatformPublishClient == null ? 
-                    "this.geoPlatformPublishClient is null" : "this.geoPlatformPublishClient" + this.geoPlatformPublishClient);
+            InfoPreview infoPreview = null;
             try {
-                pngURL = this.geoPlatformPublishClient.uploadZIPInPreview(uploadedFile);
+                infoPreview = this.geoPlatformPublishClient.uploadZIPInPreview(uploadedFile);
+                //rthis.previewEvent.setLayerPreview(this.generateLayer(infoPreview));
+                //rGPHandlerManager.fireEvent(this.previewEvent);
                 //this.geoPlatformPublishClient.publish("previews", "dataTest", );
             } catch (ResourceNotFoundFault ex) {
                 logger.equals("Error on uploading shape: " + ex);
                 System.out.println("Error on uploading shape: " + ex);
+                throw new GeoPlatformException("Error on uploading shape.");
             }
-            System.out.println(pngURL == null ? "PNG URL: uguale null" : "PNg url: " + pngURL);
             
 //            try {
 //                String wkt = calculateWKT(uploadedFile);
@@ -146,5 +151,17 @@ public class UploadServlet extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE,
                     "Request contents type is not supported by the servlet.");
         }
+    }
+    
+    private GPLayerTreeModel generateLayer(InfoPreview infoPreview){
+        RasterTreeNode layer = new RasterTreeNode();
+        layer.setBbox(new BboxClientInfo(infoPreview.getMinX(), infoPreview.getMinY(), 
+                infoPreview.getMaxX(), infoPreview.getMaxY()));
+        layer.setCrs(infoPreview.getCrs());
+        layer.setDataSource(infoPreview.getUrl());
+        layer.setName(infoPreview.getDataStoreName());
+        layer.setTitle(infoPreview.getDataStoreName());
+        layer.setLayerType(GPLayerType.RASTER);
+        return layer;
     }
 }

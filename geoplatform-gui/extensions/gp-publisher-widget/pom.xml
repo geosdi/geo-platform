@@ -101,6 +101,19 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
+            <artifactId>layer-widget</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>layer-widget</artifactId>
+            <classifier>sources</classifier>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-publisher-api</artifactId>
             <version>${project.version}</version>
         </dependency>

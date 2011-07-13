@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.fileupload;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.js.JsonConverter;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.google.gwt.core.client.GWT;
@@ -44,9 +45,14 @@ import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
+import java.util.Map;
+import org.geosdi.geoplatform.gui.client.event.UploadPreviewEvent;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -57,15 +63,16 @@ public class GPFileUploader {
     private FormPanel formPanel = new FormPanel();
     private FileUpload upload;
     private String htmlResult;
+    private UploadPreviewEvent previewEvent = new UploadPreviewEvent();
 
     public GPFileUploader(String uploadAction, GPExtensions... extensions) {
         this.createUploadComponent(uploadAction, extensions);
     }
 
-    public FormPanel getComponent(){
+    public FormPanel getComponent() {
         return this.formPanel;
     }
-    
+
     private void createUploadComponent(String uploadAction, final GPExtensions... extensions) {
         formPanel = new FormPanel();
         formPanel.setAction(GWT.getModuleBaseURL() + uploadAction);
@@ -115,14 +122,17 @@ public class GPFileUploader {
                 // (see the FormPanel documentation for further explanation).
                 formPanel.reset();
                 htmlResult = event.getResults();
-//                htmlResult = htmlResult.replaceAll("<pre>", "");
-//                htmlResult = htmlResult.replaceAll("</pre>", "");
+                htmlResult = htmlResult.replaceAll("<pre>", "");
+                htmlResult = htmlResult.replaceAll("</pre>", "");
 //
 //                htmlResult = htmlResult.replaceAll(
 //                        "<pre style=\"word-wrap: break-word; white-space: pre-wrap;\">",
 //                        "");
                 if ((htmlResult != null) && !(htmlResult.equals(""))) {
                     System.out.println("HTMLResult: " + htmlResult);
+                    Map<String, Object> jsonMap = JsonConverter.decode(htmlResult);
+                    previewEvent.setJsonMap(jsonMap);
+                    GPHandlerManager.fireEvent(previewEvent);
                     //done.enable();
                     //mapPreviewWidget.drawAoiOnMap(wkt);
                     LayoutManager.getInstance().getStatusMap().setStatus(
@@ -133,8 +143,7 @@ public class GPFileUploader {
                 }
             }
         });
-
-    }
+    }    
 
     private boolean isValidExtensions(String fileName, GPExtensions... extensions) {
         for (GPExtensions gPExtensions : extensions) {

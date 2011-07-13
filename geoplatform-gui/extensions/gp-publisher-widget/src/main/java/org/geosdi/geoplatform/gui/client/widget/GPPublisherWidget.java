@@ -49,15 +49,19 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.ui.Image;
+import java.util.Map;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.event.IUploadPreviewHandler;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPFileUploader;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPPublisherWidget extends GeoPlatformWindow {
+public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPreviewHandler {
 
     private TreePanel tree;
     private boolean mapInitialized;
@@ -65,10 +69,12 @@ public class GPPublisherWidget extends GeoPlatformWindow {
     private ShapePreviewWidget shpPreviewWidget;
     private GPFileUploader fileUploader;
     private FieldSet southPanel;
+    private Image centralImage;
 
     public GPPublisherWidget(boolean lazy, TreePanel theTree) {
         super(lazy);
         this.tree = theTree;
+        GPHandlerManager.addHandler(IUploadPreviewHandler.TYPE, this);
     }
 
     @Override
@@ -89,6 +95,22 @@ public class GPPublisherWidget extends GeoPlatformWindow {
                 }
             }
         });
+    }
+
+    @Override
+    public void showLayerPreview(Map<String, Object> jsonMap) {
+        this.shpPreviewWidget = new ShapePreviewWidget();
+        this.centralPanel.removeAll();
+        this.centralPanel.add(this.shpPreviewWidget.getMapPreview());
+        this.centralPanel.layout();
+        System.out.println("Funziona la preview");
+    }
+
+    @Override
+    public void reset() {
+        this.centralPanel.removeAll();
+        this.centralPanel.add(this.centralImage);
+        this.fileUploader.getComponent().reset();
     }
 
     @Override
@@ -118,22 +140,19 @@ public class GPPublisherWidget extends GeoPlatformWindow {
     private void addCentralPanel() {
         this.centralPanel = new ContentPanel();
         this.centralPanel.setHeaderVisible(false);
-        this.fileUploader = new GPFileUploader("UploadServlet", GPExtensions.zip);
         BorderLayoutData centerData = new BorderLayoutData(LayoutRegion.CENTER);
         centerData.setMargins(new Margins(5, 5, 0, 5));
-        Image image = BasicWidgetResources.ICONS.geo_platform_logo().createImage();
-        this.centralPanel.add(image);
+        this.centralImage = BasicWidgetResources.ICONS.geo_platform_logo().createImage();
+        this.centralPanel.add(this.centralImage);
         super.add(this.centralPanel, centerData);
     }
 
     private void addSouthPanel() {
+        this.fileUploader = new GPFileUploader("UploadServlet", GPExtensions.zip);
         this.southPanel = new FieldSet();
         this.southPanel.setHeight(78);
         this.southPanel.setWidth(522);
         this.southPanel.setLayout(new BorderLayout());
-//        BorderLayoutData marginFieldset = new BorderLayoutData(LayoutRegion.SOUTH, 100);
-//        marginFieldset.setMargins(new Margins(1, 150, 1, 151));
-//        this.southPanel.add(this.fileUploader.getComponent(), marginFieldset);
         BorderLayoutData centerFileUploader = new BorderLayoutData(LayoutRegion.CENTER);
         centerFileUploader.setMargins(new Margins(10, 150, 9, 151));
         this.southPanel.add(this.fileUploader.getComponent(), centerFileUploader);
@@ -142,17 +161,6 @@ public class GPPublisherWidget extends GeoPlatformWindow {
         BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH, 100);
         southData.setMargins(new Margins(5, 20, 5, 20));
         super.add(this.southPanel, southData);
-    }
-
-    @Override
-    public void reset() {
-        this.fileUploader.getComponent().reset();
-    }
-
-    public void showLayerPreview() {
-        this.shpPreviewWidget = new ShapePreviewWidget();
-        this.centralPanel.removeAll();
-        this.centralPanel.add(this.shpPreviewWidget.getMapPreview());
     }
 
     @Override
@@ -165,7 +173,17 @@ public class GPPublisherWidget extends GeoPlatformWindow {
 
     @Override
     public void initSize() {
-        //Warging: changing window size will be necessary change panel's size also.
+        //Warning: changing window size will be necessary change panel's size also.
         super.setSize(600, 500);
     }
+    
+    private GPLayerTreeModel generateLayer(Map<String, Object> jsonMap) {
+        //GPLayerTreeModel layer = new RasterTreeNode();
+        GPLayerTreeModel layer = null;
+        Number lowerX = (Number) jsonMap.get("lowerX");
+
+        //layer.setBbox(new BboxClientInfo(lowerX.doubleValue(), jsonMap.get("lowerX"), jsonMap.get("lowerX"), jsonMap.get("lowerX")));
+        return layer;
+    }
+    
 }

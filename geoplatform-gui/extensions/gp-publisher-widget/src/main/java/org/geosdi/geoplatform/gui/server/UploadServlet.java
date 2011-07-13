@@ -35,18 +35,17 @@
  */
 package org.geosdi.geoplatform.gui.server;
 
+import com.google.gson.JsonObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import org.apache.commons.fileupload.FileUploadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -66,9 +65,7 @@ public class UploadServlet extends HttpServlet {
 
     private static final long serialVersionUID = -1464439864247709647L;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private GPPublisherService geoPlatformPublishClient = (GPPublisherService)GeoPlatformContextUtil.getInstance().getBean("geoPlatformPublishClient");
-    //private UploadPreviewEvent previewEvent = new UploadPreviewEvent();
-//    private GPPublisherService publisherService = new GPPublisherServiceImpl();
+    private GPPublisherService geoPlatformPublishClient = (GPPublisherService) GeoPlatformContextUtil.getInstance().getBean("geoPlatformPublishClient");
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -80,19 +77,17 @@ public class UploadServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException, GeoPlatformException {
+        InfoPreview infoPreview = null;
         // process only multipart requests
         if (ServletFileUpload.isMultipartContent(req)) {
             // Create a factory for disk-based file items
             FileItemFactory factory = new DiskFileItemFactory();
-
             // Create a new file upload handler
             ServletFileUpload upload = new ServletFileUpload(factory);
-
             File uploadedFile = null;
             // Parse the request
             try {
                 List<FileItem> items = upload.parseRequest(req);
-
                 for (FileItem item : items) {
                     // process only file upload - discard other form item types
                     if (item.isFormField()) {
@@ -103,61 +98,57 @@ public class UploadServlet extends HttpServlet {
                     if (fileName != null) {
                         fileName = FilenameUtils.getName(fileName);
                     }
-
                     uploadedFile = File.createTempFile(fileName, "");
-                    // if (uploadedFile.createNewFile()) {
-                    item.write(uploadedFile);
+                    try {
+                        item.write(uploadedFile);
+                    } catch (Exception ex) {
+                        resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                                "An error occurred writing the file: "
+                                + ex.getMessage());
+                        System.out.println("An error occurred writing the file: "
+                                + ex.getMessage());
+                        throw new GeoPlatformException("Error on uploading shape.");
+                    }
                     resp.setStatus(HttpServletResponse.SC_CREATED);
                     resp.flushBuffer();
-
-                    // uploadedFile.delete();
-                    // } else
-                    // throw new IOException(
-                    // "The file already exists in repository.");
                 }
-            } catch (Exception e) {
+                infoPreview = this.geoPlatformPublishClient.uploadZIPInPreview(uploadedFile);
+                resp.setContentType("text/x-json;charset=UTF-8");
+                resp.setHeader("Cache-Control", "no-cache");
+                JsonObject jsonObject = this.generateJONObject(infoPreview);
+                resp.getWriter().write(jsonObject.toString());
+                System.out.println("Json Response: " + resp.getWriter().toString());
+                //geoPlatformPublishClient.publish("previews", "dataTest", infoPreview.getDataStoreName());
+            } catch (FileUploadException ex) {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                         "An error occurred creating the file: "
-                        + e.getMessage());
+                        + ex.getMessage());
                 System.out.println("An error occurred creating the file: "
-                        + e.getMessage());
-            }
-            InfoPreview infoPreview = null;
-            try {
-                infoPreview = this.geoPlatformPublishClient.uploadZIPInPreview(uploadedFile);
-                //rthis.previewEvent.setLayerPreview(this.generateLayer(infoPreview));
-                //rGPHandlerManager.fireEvent(this.previewEvent);
-                //this.geoPlatformPublishClient.publish("previews", "dataTest", );
+                        + ex.getMessage());
+                throw new GeoPlatformException("Error on uploading shape.");
             } catch (ResourceNotFoundFault ex) {
                 logger.equals("Error on uploading shape: " + ex);
                 System.out.println("Error on uploading shape: " + ex);
                 throw new GeoPlatformException("Error on uploading shape.");
+            } finally {
+                uploadedFile.delete();
             }
-            
-//            try {
-//                String wkt = calculateWKT(uploadedFile);
-//                resp.getWriter().print(wkt);
-//            } catch (Exception exc) {
-//                logger.info("ERROR ********** " + exc);
-//            }
-
-            uploadedFile.delete();
-
         } else {
             resp.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE,
                     "Request contents type is not supported by the servlet.");
         }
     }
-    
-//    private GPLayerTreeModel generateLayer(InfoPreview infoPreview){
-//        RasterTreeNode layer = new RasterTreeNode();
-//        layer.setBbox(new BboxClientInfo(infoPreview.getMinX(), infoPreview.getMinY(), 
-//                infoPreview.getMaxX(), infoPreview.getMaxY()));
-//        layer.setCrs(infoPreview.getCrs());
-//        layer.setDataSource(infoPreview.getUrl());
-//        layer.setName(infoPreview.getDataStoreName());
-//        layer.setTitle(infoPreview.getDataStoreName());
-//        layer.setLayerType(GPLayerType.RASTER);
-//        return layer;
-//    }
+
+    private JsonObject generateJONObject(InfoPreview infoPreview) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("crs", infoPreview.getCrs());
+        jsonObject.addProperty("layerName", infoPreview.getDataStoreName());
+        jsonObject.addProperty("lowerX", infoPreview.getMaxX());
+        jsonObject.addProperty("lowerY", infoPreview.getMaxY());
+        jsonObject.addProperty("upperX", infoPreview.getMinX());
+        jsonObject.addProperty("upperY", infoPreview.getMinY());
+        jsonObject.addProperty("url", infoPreview.getUrl());
+        jsonObject.addProperty("workspace", infoPreview.getWorkspace());
+        return jsonObject;
+    }
 }

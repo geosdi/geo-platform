@@ -1,7 +1,7 @@
 /*
  *  geo-platform
  *  Rich webgis framework
- *  http://geo-plartform.org
+ *  http://geo-platform.org
  * ====================================================================
  *
  * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
@@ -45,11 +45,11 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
  */
 public interface IGeoPlatofomMapButtonBar {
 
-	boolean isTogglePressed();
+    boolean isTogglePressed();
 
-	void changeButtonState();
+    void changeButtonState();
 
-	Button getPressedButton();
+    Button getPressedButton();
 
-	void setPressedButton(ToggleButton button);
+    void setPressedButton(ToggleButton button);
 }

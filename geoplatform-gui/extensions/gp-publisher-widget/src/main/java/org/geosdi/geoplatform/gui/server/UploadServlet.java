@@ -52,11 +52,7 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
-import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.geosdi.publisher.exception.ResourceNotFoundFault;
 import org.geosdi.publisher.responce.InfoPreview;
@@ -153,15 +149,15 @@ public class UploadServlet extends HttpServlet {
         }
     }
     
-    private GPLayerTreeModel generateLayer(InfoPreview infoPreview){
-        RasterTreeNode layer = new RasterTreeNode();
-        layer.setBbox(new BboxClientInfo(infoPreview.getMinX(), infoPreview.getMinY(), 
-                infoPreview.getMaxX(), infoPreview.getMaxY()));
-        layer.setCrs(infoPreview.getCrs());
-        layer.setDataSource(infoPreview.getUrl());
-        layer.setName(infoPreview.getDataStoreName());
-        layer.setTitle(infoPreview.getDataStoreName());
-        layer.setLayerType(GPLayerType.RASTER);
-        return layer;
-    }
+//    private GPLayerTreeModel generateLayer(InfoPreview infoPreview){
+//        RasterTreeNode layer = new RasterTreeNode();
+//        layer.setBbox(new BboxClientInfo(infoPreview.getMinX(), infoPreview.getMinY(), 
+//                infoPreview.getMaxX(), infoPreview.getMaxY()));
+//        layer.setCrs(infoPreview.getCrs());
+//        layer.setDataSource(infoPreview.getUrl());
+//        layer.setName(infoPreview.getDataStoreName());
+//        layer.setTitle(infoPreview.getDataStoreName());
+//        layer.setLayerType(GPLayerType.RASTER);
+//        return layer;
+//    }
 }

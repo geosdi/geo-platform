@@ -35,12 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client.action;
 
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
@@ -56,6 +59,24 @@ public class UserLogout extends MenuBaseAction {
 
     @Override
     public void componentSelected(MenuEvent ce) {
+        GeoPlatformMessage.confirmMessage("Log-out message", "Do you really want to leave the application?",
+                new Listener<MessageBoxEvent>() {
+
+                    @Override
+                    public void handleEvent(MessageBoxEvent be) {
+                        if (be.getButtonClicked().getText().equalsIgnoreCase(
+                                "yes")
+                                || be.getButtonClicked().getText().equalsIgnoreCase(
+                                "si")) {
+                            Dispatcher.forwardEvent(
+                                    GeoPlatformEvents.REMOVE_WINDOW_CLOSE_LISTENER);
+                            invalidateSession();
+                        }
+                    }
+                });
+    }
+
+    private void invalidateSession() {
         SecurityRemoteImpl.Util.getInstance().invalidateSession(new AsyncCallback<Object>() {
 
             @Override

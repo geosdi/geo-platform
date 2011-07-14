@@ -57,11 +57,9 @@ public class GeoPlatformMessage {
      * @param message
      */
     public static void alertMessage(String title, String message) {
-        // TODO Auto-generated method stub
         MessageBox.alert(title, message, new Listener<MessageBoxEvent>() {
 
             public void handleEvent(MessageBoxEvent be) {
-                // TODO Auto-generated method stub
             }
         });
     }
@@ -73,7 +71,6 @@ public class GeoPlatformMessage {
      * @param message
      */
     public static void errorMessage(String title, String message) {
-        // TODO Auto-generated method stub
         MessageBox box = new MessageBox();
         box.setIcon(MessageBox.ERROR);
         box.setTitle(title);
@@ -88,7 +85,6 @@ public class GeoPlatformMessage {
      * @param message
      */
     public static void infoMessage(String title, String message) {
-        // TODO Auto-generated method stub
         Info.display(title, message);
     }
 
@@ -107,7 +103,6 @@ public class GeoPlatformMessage {
 
             @Override
             public void run() {
-                // TODO Auto-generated method stub
                 if (widget.getGrid().getView().getBody().isMasked()) {
                     MessageBox.confirm(title, message,
                             new Listener<MessageBoxEvent>() {

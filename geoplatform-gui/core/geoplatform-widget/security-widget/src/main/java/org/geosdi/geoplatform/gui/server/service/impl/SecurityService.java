@@ -60,11 +60,11 @@ import org.springframework.stereotype.Service;
  */
 @Service("securityService")
 public class SecurityService implements ISecurityService {
-    
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private GeoPlatformService geoPlatformServiceClient;
     private GPUserConverter userConverter;
-    
+
     @Override
     public IGPUserDetail userLogin(String userName, String password,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
@@ -86,16 +86,16 @@ public class SecurityService implements ISecurityService {
             throw new GeoPlatformException("Password incorrect");
         }
         this.storeUserInSession(user, httpServletRequest);
-        
+
         IGPUserDetail userDetail = this.userConverter.convertUserToDTO(user);
-        
+
         userDetail.setComponentPermission(
                 guiComponemtPermission.getGuiComponentsPermissionMap());
-        
-        
+
+
         return userDetail;
     }
-    
+
     private void storeUserInSession(GPUser user,
             HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
@@ -103,7 +103,7 @@ public class SecurityService implements ISecurityService {
         session.setMaxInactiveInterval(900);
         session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), user);
     }
-    
+
     private GPUser getUserAlreadyFromSession(
             HttpServletRequest httpServletRequest) {
         GPUser user = null;
@@ -115,23 +115,25 @@ public class SecurityService implements ISecurityService {
         }
         return user;
     }
-    
+
     public GPUser loginFromSessionServer(HttpServletRequest httpServletRequest) {
         return getUserAlreadyFromSession(httpServletRequest);
     }
-    
+
     private void deleteUserFromSession(HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         session.removeAttribute(UserLoginEnum.USER_LOGGED.toString());
     }
-    
+
     @Override
     public void invalidateSession(HttpServletRequest httpServletRequest) throws GeoPlatformException {
         //deleteUserFromSession(httpServletRequest);
         HttpSession session = httpServletRequest.getSession(false);
-        session.invalidate();
+        if (session != null) {
+            session.invalidate();
+        }
     }
-    
+
     @PostConstruct
     public void createConverter() {
         this.userConverter = new GPUserConverter();

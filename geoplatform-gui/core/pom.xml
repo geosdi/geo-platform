@@ -51,6 +51,20 @@
             <url>
             http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/
             </url>
+        </repository>        
+        <repository>
+            <id>pehl-parent</id> 
+            <url>http://pehl-parent.googlecode.com/svn/repository</url>
+        </repository>
+        <repository>
+            <id>totoe-repo</id>
+            <name>Totoe Repository</name>
+            <url>http://totoe.googlecode.com/svn/repository</url>
+        </repository>
+        <repository>
+            <id>piriti-repo</id>
+            <name>Piriti Repository</name>
+            <url>http://piriti.googlecode.com/svn/repository</url>
         </repository>
     </repositories>
     

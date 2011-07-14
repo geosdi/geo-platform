@@ -48,10 +48,8 @@ import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.client.event.UploadPreviewEvent;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 /**
@@ -130,8 +128,7 @@ public class GPFileUploader {
 //                        "");
                 if ((htmlResult != null) && !(htmlResult.equals(""))) {
                     System.out.println("HTMLResult: " + htmlResult);
-                    Map<String, Object> jsonMap = JsonConverter.decode(htmlResult);
-                    previewEvent.setJsonMap(jsonMap);
+                    previewEvent.setJsonString(htmlResult);
                     GPHandlerManager.fireEvent(previewEvent);
                     //done.enable();
                     //mapPreviewWidget.drawAoiOnMap(wkt);

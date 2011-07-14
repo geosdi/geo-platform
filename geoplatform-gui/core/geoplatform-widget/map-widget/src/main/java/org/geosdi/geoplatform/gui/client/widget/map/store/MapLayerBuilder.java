@@ -57,7 +57,6 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
 
     public MapLayerBuilder(GeoPlatformMap theMapWidget) {
         super(theMapWidget);
-        // TODO Auto-generated constructor stub
     }
 
     /*
@@ -69,7 +68,6 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
      */
     @Override
     public WMS buildRaster(GPRasterBean rasterBean) {
-        // TODO Auto-generated method stub
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
         wmsParams.setLayers(rasterBean.getName());
@@ -106,7 +104,6 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
      */
     @Override
     public WMS buildVector(GPVectorBean vectorBean) {
-        // TODO Auto-generated method stub
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
         wmsParams.setLayers(vectorBean.getName());

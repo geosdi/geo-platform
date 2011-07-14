@@ -152,6 +152,29 @@
             <artifactId>gson</artifactId>
             <version>1.8-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>name.pehl.piriti</groupId>
+            <artifactId>piriti-core</artifactId>
+            <version>0.7b2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.gwt.inject</groupId>
+            <artifactId>gin</artifactId>
+            <version>1.5-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>name.pehl</groupId>
+            <artifactId>totoe</artifactId>
+            <version>0.2.4</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
   
     <build>

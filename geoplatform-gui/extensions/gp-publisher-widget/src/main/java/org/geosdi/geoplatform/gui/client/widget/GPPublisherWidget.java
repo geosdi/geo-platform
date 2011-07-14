@@ -49,13 +49,17 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.ui.Image;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.event.IUploadPreviewHandler;
+import org.geosdi.geoplatform.gui.client.model.WMSPreview;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPFileUploader;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.gwtopenmaps.openlayers.client.Bounds;
+import org.gwtopenmaps.openlayers.client.Projection;
+import org.gwtopenmaps.openlayers.client.layer.WMS;
+import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
+import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -70,6 +74,7 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
     private GPFileUploader fileUploader;
     private FieldSet southPanel;
     private Image centralImage;
+    private Bounds bbox;
 
     public GPPublisherWidget(boolean lazy, TreePanel theTree) {
         super(lazy);
@@ -98,17 +103,63 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
     }
 
     @Override
-    public void showLayerPreview(Map<String, Object> jsonMap) {
-        this.shpPreviewWidget = new ShapePreviewWidget();
+    public void showLayerPreview(String jsonString) {
         this.centralPanel.removeAll();
+        WMS previewLayer = this.generateLayer(jsonString);
+        this.shpPreviewWidget.getMapPreview().getMap().addLayer(previewLayer);
         this.centralPanel.add(this.shpPreviewWidget.getMapPreview());
-        //shpPreviewWidget.getMapPreview().getMap().zoomToExtent();
-        shpPreviewWidget.getMapPreview().getMap().zoomToMaxExtent();
+        shpPreviewWidget.getMapPreview().getMap().zoomToExtent(bbox);
         shpPreviewWidget.getMapPreview().getMap().updateSize();
         this.centralPanel.layout();
         System.out.println("Funziona la preview");
     }
 
+    public WMS generateLayer(String jsonString) {
+        WMSPreview wmsPreview = WMSPreview.JSON.read(jsonString);
+        System.out.println("wmsPreview toString: " + wmsPreview);
+        WMSParams wmsParams = new WMSParams();
+        wmsParams.setFormat("image/png");
+        wmsParams.setLayers(wmsPreview.getLayerName());
+        wmsParams.setStyles("");
+        wmsParams.setIsTransparent(true);
+        
+        Double lowerX = wmsPreview.getLowerX();
+        Double lowerY = wmsPreview.getLowerY();
+        Double upperX = wmsPreview.getUpperX();
+        Double upperY = wmsPreview.getUpperY();
+        
+        this.bbox = new Bounds(lowerX, lowerY, upperX, upperY);
+
+        bbox.transform(new Projection(wmsPreview.getCrs()), new Projection(
+                this.shpPreviewWidget.getMapPreview().getMap().getProjection()));
+
+        wmsParams.setMaxExtent(bbox);
+
+        WMSOptions wmsOption = new WMSOptions();
+        wmsOption.setIsBaseLayer(false);
+        wmsOption.setDisplayInLayerSwitcher(false);
+
+        return new WMS(wmsPreview.getLayerName(), wmsPreview.getUrl(),
+                wmsParams, wmsOption);
+    }
+
+//    private PreviewLayer generateLayer(Map<String, Object> jsonMap) {
+//        String label = (String) jsonMap.get("layerName");
+//        String title = (String) jsonMap.get("layerName");
+//        String name = (String) jsonMap.get("layerName");
+//        String abstractText = (String) jsonMap.get("");
+//        String dataSource = (String) jsonMap.get("url");
+//        String crs = (String) jsonMap.get("crs");
+//        Number lowerX = (Number) jsonMap.get("lowerX");
+//        Number lowerY = (Number) jsonMap.get("lowerY");
+//        Number upperX = (Number) jsonMap.get("upperX");
+//        Number upperY = (Number) jsonMap.get("upperY");
+//        BboxClientInfo bbox = new BboxClientInfo(lowerX.doubleValue(), lowerY.doubleValue(), upperX.doubleValue(), upperY.doubleValue());
+//        PreviewLayer previewLayer = new PreviewLayer(label, title, name, abstractText, dataSource, crs, bbox, GPLayerType.RASTER);
+//
+//        //layer.setBbox(new BboxClientInfo(lowerX.doubleValue(), jsonMap.get("lowerX"), jsonMap.get("lowerX"), jsonMap.get("lowerX")));
+//        return previewLayer;
+//    }
     @Override
     public void reset() {
         this.centralPanel.removeAll();
@@ -142,6 +193,7 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
     }
 
     private void addCentralPanel() {
+        this.shpPreviewWidget = new ShapePreviewWidget();
         this.centralPanel = new ContentPanel();
         this.centralPanel.setHeaderVisible(false);
         BorderLayoutData centerData = new BorderLayoutData(LayoutRegion.CENTER);
@@ -179,14 +231,5 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
     public void initSize() {
         //Warning: changing window size will be necessary change panel's size also.
         super.setSize(600, 500);
-    }
-
-    private GPLayerTreeModel generateLayer(Map<String, Object> jsonMap) {
-        //GPLayerTreeModel layer = new RasterTreeNode();
-        GPLayerTreeModel layer = null;
-        Number lowerX = (Number) jsonMap.get("lowerX");
-
-        //layer.setBbox(new BboxClientInfo(lowerX.doubleValue(), jsonMap.get("lowerX"), jsonMap.get("lowerX"), jsonMap.get("lowerX")));
-        return layer;
     }
 }

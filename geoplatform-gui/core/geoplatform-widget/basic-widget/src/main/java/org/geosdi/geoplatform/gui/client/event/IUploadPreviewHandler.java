@@ -47,6 +47,6 @@ public interface IUploadPreviewHandler extends EventHandler {
     
     Type<IUploadPreviewHandler> TYPE = new Type<IUploadPreviewHandler>();
     
-    public void showLayerPreview(Map<String, Object> jsonMap);
+    public void showLayerPreview(String jsonString);
     
 }

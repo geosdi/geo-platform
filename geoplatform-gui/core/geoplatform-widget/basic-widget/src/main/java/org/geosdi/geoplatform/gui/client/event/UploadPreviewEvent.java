@@ -37,8 +37,6 @@ package org.geosdi.geoplatform.gui.client.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import java.util.Map;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -46,7 +44,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
  */
 public class UploadPreviewEvent extends GwtEvent<IUploadPreviewHandler> {
     
-    private Map<String, Object> jsonMap;
+    private String jsonString;
 
     @Override
     public Type<IUploadPreviewHandler> getAssociatedType() {
@@ -55,14 +53,14 @@ public class UploadPreviewEvent extends GwtEvent<IUploadPreviewHandler> {
 
     @Override
     protected void dispatch(IUploadPreviewHandler handler) {
-        handler.showLayerPreview(this.jsonMap);
+        handler.showLayerPreview(this.jsonString);
     }
 
     /**
      * @param infoPreview the infoPreview to set
      */
-    public void setJsonMap(Map<String, Object> jsonMap) {
-        this.jsonMap = jsonMap;
+    public void setJsonString(String jsonString) {
+        this.jsonString = jsonString;
     }
     
 }

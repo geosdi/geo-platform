@@ -33,81 +33,87 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.mvc;
+package org.geosdi.geoplatform.gui.client.model;
 
-import org.geosdi.geoplatform.gui.client.LayerEvents;
-import org.geosdi.geoplatform.gui.client.widget.LayerManagementWidget;
-import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-
-import com.extjs.gxt.ui.client.mvc.AppEvent;
-import com.extjs.gxt.ui.client.mvc.Controller;
-import org.geosdi.geoplatform.gui.client.widget.progressbar.GPLayerProgressBar;
+import com.google.gwt.core.client.GWT;
+import name.pehl.piriti.json.client.JsonReader;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class LayerView extends GeoPlatformView {
+public class WMSPreview {
 
-    private LayerManagementWidget layerManagement;
-    private GPLayerProgressBar layerProgressBar;
-
-    /**
-     * @Constructor
-     *
-     * @param controller
-     */
-    public LayerView(Controller controller) {
-        super(controller);
-        this.layerManagement = new LayerManagementWidget();
+    public interface WMSPreviewReader extends JsonReader<WMSPreview> {
     }
+    public static final WMSPreviewReader JSON = GWT.create(WMSPreviewReader.class);
+    private String crs;
+    private String layerName;
+    private String url;
+    private String workspace;
+    private double lowerX;
+    private double lowerY;
+    private double upperX;
+    private double upperY;
 
     @Override
-    protected void initialize() {
-        this.layerProgressBar = new GPLayerProgressBar();
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent
-     * (com.extjs.gxt.ui.client.mvc.AppEvent)
-     */
-    @Override
-    protected void handleEvent(AppEvent event) {
-        if (event.getType() == LayerEvents.SHOW_LAYER_WIDGET) {
-            onShowLayerWidget();
-        }
-
-        if (event.getType() == LayerEvents.HIDE_LAYER_WIDGET) {
-            onHideLayerWidget();
-        }
-        
+    public String toString() {
+        return "WMSPreview{" + "crs=" + getCrs() + ", layerName=" + getLayerName() + ", url=" + getUrl() + ", workspace=" + getWorkspace() + ", lowerX=" + getLowerX() + ", lowerY=" + getLowerY() + ", upperX=" + getUpperX() + ", upperY=" + getUpperY() + '}';
     }
 
     /**
-     * Hide Layer Widget
-     *
+     * @return the crs
      */
-    private void onHideLayerWidget() {
-        LayoutManager.removeComponentFromWest(layerManagement);
-        if (!LayoutManager.isOneWidgetVisibleAtWest()) {
-            LayoutManager.manageWest(false);
-        }
+    public String getCrs() {
+        return crs;
     }
 
     /**
-     * Show Layer Widget
-     *
+     * @return the layerName
      */
-    private void onShowLayerWidget() {
-        this.layerManagement.buildComponents();
-        if (!LayoutManager.isWestVisible()) {
-            LayoutManager.manageWest(true);
-        }
-        LayoutManager.addComponentToWest(layerManagement);
+    public String getLayerName() {
+        return layerName;
+    }
+
+    /**
+     * @return the url
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * @return the workspace
+     */
+    public String getWorkspace() {
+        return workspace;
+    }
+
+    /**
+     * @return the lowerX
+     */
+    public double getLowerX() {
+        return lowerX;
+    }
+
+    /**
+     * @return the lowerY
+     */
+    public double getLowerY() {
+        return lowerY;
+    }
+
+    /**
+     * @return the upperX
+     */
+    public double getUpperX() {
+        return upperX;
+    }
+
+    /**
+     * @return the upperY
+     */
+    public double getUpperY() {
+        return upperY;
     }
 }

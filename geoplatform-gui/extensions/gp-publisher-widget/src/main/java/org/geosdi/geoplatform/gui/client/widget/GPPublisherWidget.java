@@ -102,6 +102,9 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
         this.shpPreviewWidget = new ShapePreviewWidget();
         this.centralPanel.removeAll();
         this.centralPanel.add(this.shpPreviewWidget.getMapPreview());
+        //shpPreviewWidget.getMapPreview().getMap().zoomToExtent();
+        shpPreviewWidget.getMapPreview().getMap().zoomToMaxExtent();
+        shpPreviewWidget.getMapPreview().getMap().updateSize();
         this.centralPanel.layout();
         System.out.println("Funziona la preview");
     }
@@ -110,6 +113,7 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
     public void reset() {
         this.centralPanel.removeAll();
         this.centralPanel.add(this.centralImage);
+        this.centralPanel.layout();
         this.fileUploader.getComponent().reset();
     }
 
@@ -176,7 +180,7 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
         //Warning: changing window size will be necessary change panel's size also.
         super.setSize(600, 500);
     }
-    
+
     private GPLayerTreeModel generateLayer(Map<String, Object> jsonMap) {
         //GPLayerTreeModel layer = new RasterTreeNode();
         GPLayerTreeModel layer = null;
@@ -185,5 +189,4 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
         //layer.setBbox(new BboxClientInfo(lowerX.doubleValue(), jsonMap.get("lowerX"), jsonMap.get("lowerX"), jsonMap.get("lowerX")));
         return layer;
     }
-    
 }

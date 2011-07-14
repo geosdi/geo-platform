@@ -9,6 +9,7 @@
     <name>Geo-Platform :: == GeoSDI Framework</name>
 
 
+
     <scm>
         <connection>scm:svn:https://trac.geosdi.org/svn/geo-platform/trunk</connection>
         <url>https://trac.geosdi.org/svn/geo-platform/trunk</url>

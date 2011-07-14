@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xmlns:aop="http://www.springframework.org/schema/aop"
-	   xmlns:cxf="http://cxf.apache.org/core" 
+	   xmlns:cxf="http://cxf.apache.org/core"
 	   xmlns:jaxws="http://cxf.apache.org/jaxws"
 	   xsi:schemaLocation="
-	    	http://www.springframework.org/schema/beans 
+	    	http://www.springframework.org/schema/beans
 	   		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 			http://www.springframework.org/schema/context
 			http://www.springframework.org/schema/context/spring-context-3.0.xsd
-			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop
 			http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
-			http://cxf.apache.org/core             
+			http://cxf.apache.org/core
             http://cxf.apache.org/schemas/core.xsd
             http://cxf.apache.org/jaxws
             http://cxf.apache.org/schemas/jaxws.xsd"
@@ -22,14 +22,14 @@
     <!-- ====================================================================-->
 
     <context:annotation-config />
-	
-	
+
+
 	<!-- Load CXF modules from cxf.jar -->
     <import resource="classpath:META-INF/cxf/cxf.xml"/>
     <!-- import resource="classpath:META-INF/cxf/cxf-extension-http-binding.xml"/>
     <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/ -->
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
-	    
+
     <!-- ====================================================================-->
     <!-- Service endpoints -->
     <!-- ====================================================================-->
@@ -59,7 +59,7 @@
     </jaxws:endpoint>
 
     <jaxws:endpoint id="publisherServiceSOAP"
-    	implementorClass="org.geosdi.publisher.services.GPPublisherServiceImpl"
+    	implementorClass="org.geosdi.geoplatform.publish.GPPublisherServiceImpl"
     	implementor="#publisherService"
     	address="/publish">
         <jaxws:serviceFactory>
@@ -84,11 +84,11 @@
 
 
     <!-- ====================================================================-->
-    <!--    
+    <!--
          WSS4JInInterceptor for decrypting and validating the signature of the
          SOAP request.
     -->
-    <bean 
+    <bean
         id="TimestampSignEncrypt_Request"
         class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor"
         >
@@ -96,23 +96,23 @@
             <map>
                 <!-- Use this action order for local clients -->
                 <entry key="action" value="Timestamp Signature Encrypt"/>
-                <!-- Use this action spec for WCF clients 
+                <!-- Use this action spec for WCF clients
                 <entry key="action" value="Signature Encrypt Timestamp"/>
                 -->
                 <entry key="signaturePropFile" value="/client.properties"/>
                 <entry key="decryptionPropFile" value="/server.properties"/>
-                
+
                 <!--<entry key="signaturePropFile" value="/alice.properties"/>
                 <entry key="decryptionPropFile" value="/bob.properties"/>-->
                 <entry key="passwordCallbackClass" value="org.geosdi.geoplatform.services.ServerKeystorePasswordCallback"/>
             </map>
         </constructor-arg>
     </bean>
-    
-    <!--    
-         WSS4JOutInterceptor for encoding and signing the SOAP response.    
+
+    <!--
+         WSS4JOutInterceptor for encoding and signing the SOAP response.
     -->
-    <bean 
+    <bean
         id="TimestampSignEncrypt_Response"
         class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor"
         >
@@ -123,7 +123,7 @@
                 <entry key="signaturePropFile" value="/server.properties"/>
                 <entry key="encryptionPropFile" value="/client.properties"/>
                 <entry key="encryptionUser" value="client"/>
-                
+
                 <!--<entry key="user" value="bob"/>
                 <entry key="signaturePropFile" value="bob.properties"/>
                 <entry key="encryptionPropFile" value="alice.properties"/>
@@ -131,8 +131,8 @@
                 <entry key="signatureKeyIdentifier" value="DirectReference"/>
                 <entry key="passwordCallbackClass" value="org.geosdi.geoplatform.services.ServerKeystorePasswordCallback"/>
                 <entry key="signatureParts" value="{Element}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp;{Element}{http://schemas.xmlsoap.org/soap/envelope/}Body"/>
-                <!--    
-                     Recommendation: signatures should be encrypted    
+                <!--
+                     Recommendation: signatures should be encrypted
                 -->
                 <entry key="encryptionParts" value="{Element}{http://www.w3.org/2000/09/xmldsig#}Signature;{Content}{http://schemas.xmlsoap.org/soap/envelope/}Body"/>
                 <!-- <entry key="encryptionKeyTransportAlgorithm" value="RSA15"/> -->
@@ -142,7 +142,7 @@
     </bean>
 
     <!-- ====================================================================-->
-    
+
     <!--jaxws:endpoint id="geoplatformServiceXML"
     	implementorClass="org.geosdi.geoplatform.services.GeoPlatformServiceImpl"
     	implementor="#geoplatformService"

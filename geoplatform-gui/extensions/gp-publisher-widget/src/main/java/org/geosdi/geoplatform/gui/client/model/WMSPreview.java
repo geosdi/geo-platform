@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.model;
 
 import com.google.gwt.core.client.GWT;
+import name.pehl.piriti.commons.client.Transient;
 import name.pehl.piriti.json.client.JsonReader;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.LayerBaseProperties;
@@ -58,6 +59,8 @@ public class WMSPreview implements LayerBaseProperties {
     private double lowerY;
     private double upperX;
     private double upperY;
+    
+    @Transient
     private GPLayerType layerType;
 
     @Override

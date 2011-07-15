@@ -51,7 +51,7 @@
             <url>
             http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/
             </url>
-        </repository>        
+        </repository>     
     </repositories>
     
     <dependencyManagement>

@@ -53,7 +53,6 @@
         </developer>
     </developers>
 
-
     <dependencies>
         <dependency>
             <groupId>com.google.gwt</groupId>
@@ -161,7 +160,7 @@
         <dependency>
             <groupId>com.googlecode.gwt.inject</groupId>
             <artifactId>gin</artifactId>
-            <version>1.5-SNAPSHOT</version>
+            <version>1.5-post-gwt-2.2</version>
         </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>

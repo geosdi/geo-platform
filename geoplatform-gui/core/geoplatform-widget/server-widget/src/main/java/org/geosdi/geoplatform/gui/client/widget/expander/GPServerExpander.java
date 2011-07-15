@@ -41,7 +41,7 @@ import java.util.Map;
 import org.geosdi.geoplatform.gui.client.widget.GridLayersWidget;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
-import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.GPRasterAddStoreEvent;
+import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddRasterFromCapabilitiesEvent;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -107,7 +107,7 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
                     + this.selectedElement.getLabel());
             
         } else {
-            LayerHandlerManager.fireEvent(new GPRasterAddStoreEvent(
+            LayerHandlerManager.fireEvent(new AddRasterFromCapabilitiesEvent(
                     this.layersToStore));
         }
 

@@ -53,12 +53,14 @@ import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.GenericTreeStoreWidget;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.LayerBaseProperties;
 import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
@@ -89,7 +91,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
     }
 
     @Override
-    public void addRasterLayers(List<? extends GPLayerBean> layers) {
+    public void addRasterLayersfromCapabilities(List<? extends GPLayerBean> layers) {
         if (layers.size() > 0) {
             this.changeProgressBarMessage(
                     "Loading " + layers.size() + " Raster Layers into the Store");
@@ -134,6 +136,71 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         }
     }
 
+    @Override
+    public void addRasterLayersfromPublisher(List<? extends LayerBaseProperties> layers) {
+        if (layers.size() > 0) {
+            this.changeProgressBarMessage(
+                    "Loading " + layers.size() + " Raster Layers into the Store");
+            GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
+            super.tree.setExpanded(parentDestination, true);
+            List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
+            StringBuilder existingLayers = new StringBuilder();
+            boolean duplicatedLayer = false;
+            for (LayerBaseProperties layer : layers) {
+                duplicatedLayer = false;
+                for (ModelData element : parentDestination.getChildren()) {
+                    if (element != null && element instanceof RasterTreeNode
+                            && ((RasterTreeNode) element).getName().equals(layer.getLayerName())) {
+                        existingLayers.append(layer.getLayerName());
+                        existingLayers.append("\n");
+                        duplicatedLayer = true;
+                        break;
+                    }
+                }
+                if (!duplicatedLayer) {
+                    layerList.add(this.generateRasterTreeNodeFromLayerBaseProperties(layer));
+                }
+            }
+            if (layerList.size() > 0) {
+                this.tree.getStore().insert(parentDestination, layerList, 0, true);
+                this.visitorAdd.insertLayerElements(layerList, parentDestination);
+                MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
+                mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(layerList));
+                mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
+                GPLayerSaveCache.getInstance().add(mementoSaveLayer);
+                this.featureInfoAddLayersEvent.setUrlServers(layers.get(0).getUrl());
+                MapHandlerManager.fireEvent(this.featureInfoAddLayersEvent);
+            }
+            LayerHandlerManager.fireEvent(deselectEvent);
+            if (existingLayers.length() != 0) {
+                GeoPlatformMessage.alertMessage("Add Layers Notification",
+                        "The following layers will not be added to the tree because they already exsists in this folder:"
+                        + "\n" + existingLayers);
+            }
+        }
+    }
+
+    @Override
+    public void addVectorLayersfromPublisher(List<? extends LayerBaseProperties> layers) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    private RasterTreeNode generateRasterTreeNodeFromLayerBaseProperties(LayerBaseProperties layer) {
+        RasterTreeNode raster = new RasterTreeNode();
+        raster.setAbstractText(layer.getLayerName());
+        raster.setBbox(new BboxClientInfo(layer.getLowerX(), layer.getLowerY(), layer.getUpperX(), layer.getUpperY()));
+        raster.setTitle(layer.getLayerName());
+        raster.setChecked(false);
+        raster.setCrs(layer.getCrs());
+        raster.setDataSource(layer.getUrl());
+        raster.setLabel(layer.getLayerName());
+        raster.setLayerType(layer.getGPLayerType());
+        raster.setName(layer.getLayerName());
+//        raster.setStyles(rasterBean.getStyles());
+//        raster.setzIndex(rasterBean.getzIndex());
+        return raster;
+    }
+
     private RasterTreeNode convertGPRasterBeanModelToRasterTreeNode(GPRasterLayerGrid rasterBean) {
         RasterTreeNode raster = new RasterTreeNode();
         raster.setAbstractText(rasterBean.getAbstractText());
@@ -151,7 +218,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
     }
 
     @Override
-    public void addVectorLayers(List<? extends GPLayerBean> layers) {
+    public void addVectorLayersfromCapabilities(List<? extends GPLayerBean> layers) {
         this.changeProgressBarMessage("Load Vector Layers in the Store");
         System.out.println("ADD VECTORS *********************** " + layers);
     }

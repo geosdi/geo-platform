@@ -46,11 +46,11 @@ import org.geosdi.geoplatform.gui.model.GPVectorBean;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPVectorAddStoreEvent extends GwtEvent<GPTreeStoreEventHandler> {
+public class AddVectorFromCapabilitiesEvent extends GwtEvent<GPTreeStoreEventHandler> {
 
     private List<GPVectorBean> layers;
 
-    public GPVectorAddStoreEvent(List<GPVectorBean> theLayers) {
+    public AddVectorFromCapabilitiesEvent(List<GPVectorBean> theLayers) {
         this.layers = theLayers;
     }
 
@@ -61,6 +61,6 @@ public class GPVectorAddStoreEvent extends GwtEvent<GPTreeStoreEventHandler> {
 
     @Override
     protected void dispatch(GPTreeStoreEventHandler handler) {
-        handler.addVectorLayers(layers);
+        handler.addVectorLayersfromCapabilities(layers);
     }
 }

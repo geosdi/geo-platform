@@ -54,7 +54,12 @@ import org.geosdi.geoplatform.gui.client.event.IUploadPreviewHandler;
 import org.geosdi.geoplatform.gui.client.model.WMSPreview;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPFileUploader;
+import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddRasterFromPublisherEvent;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
@@ -116,6 +121,7 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
 
     public WMS generateLayer(String jsonString) {
         WMSPreview wmsPreview = WMSPreview.JSON.read(jsonString);
+        wmsPreview.setGPLayerType(GPLayerType.RASTER);
         System.out.println("wmsPreview toString: " + wmsPreview);
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
@@ -172,6 +178,8 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
     public void addComponent() {
         this.addCentralPanel();
         this.addSouthPanel();
+
+        
         Button publishButton = new Button("Add on Tree", BasicWidgetResources.ICONS.done());
         publishButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
@@ -180,6 +188,22 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
                 //TODO: add shape on tree
             }
         });
+        publishButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                if (tree.getSelectionModel().getSelectedItem() instanceof AbstractFolderTreeNode) {
+                    //expander.checkNodeState();
+                    LayerHandlerManager.fireEvent(new AddRasterFromPublisherEvent(null));
+                    //LayerHandlerManager.fireEvent(new AddRasterFromPublisherEvent(this.layersToStore));
+                } else {
+                    GeoPlatformMessage.alertMessage("Shaper Preview",
+                            "You can put layers into Folders only.\n"
+                            + "Please select the correct node");
+                }
+            }
+        });
+        publishButton.disable();
         super.addButton(publishButton);
         Button resetButton = new Button("Reset", BasicWidgetResources.ICONS.cancel());
         resetButton.addSelectionListener(new SelectionListener<ButtonEvent>() {

@@ -39,18 +39,18 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.GPTreeStoreEventHandler;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.LayerBaseProperties;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPRasterAddStoreEvent extends GwtEvent<GPTreeStoreEventHandler> {
+public class AddRasterFromPublisherEvent extends GwtEvent<GPTreeStoreEventHandler> {
     
-    private List<GPLayerBean> layers;
+    private List<LayerBaseProperties> layers;
     
-    public GPRasterAddStoreEvent(List<GPLayerBean> theLayers) {
+    public AddRasterFromPublisherEvent(List<LayerBaseProperties> theLayers) {
         this.layers = theLayers;
     }
 
@@ -61,7 +61,7 @@ public class GPRasterAddStoreEvent extends GwtEvent<GPTreeStoreEventHandler> {
 
     @Override
     protected void dispatch(GPTreeStoreEventHandler handler) {
-        handler.addRasterLayers(layers);
+        handler.addRasterLayersfromPublisher(layers);
     }
     
 }

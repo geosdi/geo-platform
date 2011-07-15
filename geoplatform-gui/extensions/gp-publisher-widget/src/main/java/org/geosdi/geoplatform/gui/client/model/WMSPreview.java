@@ -37,12 +37,15 @@ package org.geosdi.geoplatform.gui.client.model;
 
 import com.google.gwt.core.client.GWT;
 import name.pehl.piriti.json.client.JsonReader;
+import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
+import org.geosdi.geoplatform.gui.model.LayerBaseProperties;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class WMSPreview {
+public class WMSPreview implements LayerBaseProperties {
+
 
     public interface WMSPreviewReader extends JsonReader<WMSPreview> {
     }
@@ -55,6 +58,7 @@ public class WMSPreview {
     private double lowerY;
     private double upperX;
     private double upperY;
+    private GPLayerType layerType;
 
     @Override
     public String toString() {
@@ -64,6 +68,7 @@ public class WMSPreview {
     /**
      * @return the crs
      */
+    @Override
     public String getCrs() {
         return crs;
     }
@@ -71,6 +76,7 @@ public class WMSPreview {
     /**
      * @return the layerName
      */
+    @Override
     public String getLayerName() {
         return layerName;
     }
@@ -78,6 +84,7 @@ public class WMSPreview {
     /**
      * @return the url
      */
+    @Override
     public String getUrl() {
         return url;
     }
@@ -85,6 +92,7 @@ public class WMSPreview {
     /**
      * @return the workspace
      */
+    @Override
     public String getWorkspace() {
         return workspace;
     }
@@ -92,6 +100,7 @@ public class WMSPreview {
     /**
      * @return the lowerX
      */
+    @Override
     public double getLowerX() {
         return lowerX;
     }
@@ -99,6 +108,7 @@ public class WMSPreview {
     /**
      * @return the lowerY
      */
+    @Override
     public double getLowerY() {
         return lowerY;
     }
@@ -106,6 +116,7 @@ public class WMSPreview {
     /**
      * @return the upperX
      */
+    @Override
     public double getUpperX() {
         return upperX;
     }
@@ -113,7 +124,82 @@ public class WMSPreview {
     /**
      * @return the upperY
      */
+    @Override
     public double getUpperY() {
         return upperY;
+    }
+
+    /**
+     * @param crs the crs to set
+     */
+    @Override
+    public void setCrs(String crs) {
+        this.crs = crs;
+    }
+
+    /**
+     * @param layerName the layerName to set
+     */
+    @Override
+    public void setLayerName(String layerName) {
+        this.layerName = layerName;
+    }
+
+    /**
+     * @param url the url to set
+     */
+    @Override
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    /**
+     * @param workspace the workspace to set
+     */
+    @Override
+    public void setWorkspace(String workspace) {
+        this.workspace = workspace;
+    }
+
+    /**
+     * @param lowerX the lowerX to set
+     */
+    @Override
+    public void setLowerX(double lowerX) {
+        this.lowerX = lowerX;
+    }
+
+    /**
+     * @param lowerY the lowerY to set
+     */
+    @Override
+    public void setLowerY(double lowerY) {
+        this.lowerY = lowerY;
+    }
+
+    /**
+     * @param upperX the upperX to set
+     */
+    @Override
+    public void setUpperX(double upperX) {
+        this.upperX = upperX;
+    }
+
+    /**
+     * @param upperY the upperY to set
+     */
+    @Override
+    public void setUpperY(double upperY) {
+        this.upperY = upperY;
+    }
+    
+    @Override
+    public void setGPLayerType(GPLayerType layerType) {
+        this.layerType = layerType;
+    }
+
+    @Override
+    public GPLayerType getGPLayerType() {
+        return this.layerType;
     }
 }

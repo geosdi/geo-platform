@@ -57,7 +57,6 @@ import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.geosdi.geoplatform.publish.GPPublisherService;
 import org.geosdi.geoplatform.responce.InfoPreview;
 
-
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
@@ -128,7 +127,7 @@ public class UploadServlet extends HttpServlet {
                         + ex.getMessage());
                 throw new GeoPlatformException("Error on uploading shape.");
             } catch (ResourceNotFoundFault ex) {
-                logger.equals("Error on uploading shape: " + ex);
+                logger.error("Error on uploading shape: " + ex);
                 System.out.println("Error on uploading shape: " + ex);
                 throw new GeoPlatformException("Error on uploading shape.");
             } finally {
@@ -143,12 +142,12 @@ public class UploadServlet extends HttpServlet {
     private JsonObject generateJONObject(InfoPreview infoPreview) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("crs", infoPreview.getCrs());
-        jsonObject.addProperty("layerName", infoPreview.getDataStoreName());
-        jsonObject.addProperty("lowerX", infoPreview.getMaxX());
-        jsonObject.addProperty("lowerY", infoPreview.getMaxY());
-        jsonObject.addProperty("upperX", infoPreview.getMinX());
-        jsonObject.addProperty("upperY", infoPreview.getMinY());
-        jsonObject.addProperty("url", infoPreview.getUrl());
+        jsonObject.addProperty("name", infoPreview.getDataStoreName());
+        jsonObject.addProperty("lowerX", infoPreview.getMinX());
+        jsonObject.addProperty("lowerY", infoPreview.getMinY());
+        jsonObject.addProperty("upperX", infoPreview.getMaxX());
+        jsonObject.addProperty("upperY", infoPreview.getMaxY());
+        jsonObject.addProperty("dataSource", infoPreview.getUrl());
         jsonObject.addProperty("workspace", infoPreview.getWorkspace());
         return jsonObject;
     }

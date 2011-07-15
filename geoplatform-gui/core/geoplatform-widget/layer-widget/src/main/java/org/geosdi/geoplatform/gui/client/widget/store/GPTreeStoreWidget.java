@@ -53,14 +53,12 @@ import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.GenericTreeStoreWidget;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.LayerBaseProperties;
 import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
@@ -137,7 +135,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
     }
 
     @Override
-    public void addRasterLayersfromPublisher(List<? extends LayerBaseProperties> layers) {
+    public void addRasterLayersfromPublisher(List<? extends GPLayerBean> layers) {
         if (layers.size() > 0) {
             this.changeProgressBarMessage(
                     "Loading " + layers.size() + " Raster Layers into the Store");
@@ -146,12 +144,12 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
             List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
             StringBuilder existingLayers = new StringBuilder();
             boolean duplicatedLayer = false;
-            for (LayerBaseProperties layer : layers) {
+            for (GPLayerBean layer : layers) {
                 duplicatedLayer = false;
                 for (ModelData element : parentDestination.getChildren()) {
                     if (element != null && element instanceof RasterTreeNode
-                            && ((RasterTreeNode) element).getName().equals(layer.getLayerName())) {
-                        existingLayers.append(layer.getLayerName());
+                            && ((RasterTreeNode) element).getName().equals(layer.getName())) {
+                        existingLayers.append(layer.getName());
                         existingLayers.append("\n");
                         duplicatedLayer = true;
                         break;
@@ -168,7 +166,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
                 mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(layerList));
                 mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
                 GPLayerSaveCache.getInstance().add(mementoSaveLayer);
-                this.featureInfoAddLayersEvent.setUrlServers(layers.get(0).getUrl());
+                this.featureInfoAddLayersEvent.setUrlServers(layers.get(0).getDataSource());
                 MapHandlerManager.fireEvent(this.featureInfoAddLayersEvent);
             }
             LayerHandlerManager.fireEvent(deselectEvent);
@@ -181,21 +179,21 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
     }
 
     @Override
-    public void addVectorLayersfromPublisher(List<? extends LayerBaseProperties> layers) {
+    public void addVectorLayersfromPublisher(List<? extends GPLayerBean> layers) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    private RasterTreeNode generateRasterTreeNodeFromLayerBaseProperties(LayerBaseProperties layer) {
+    private RasterTreeNode generateRasterTreeNodeFromLayerBaseProperties(GPLayerBean layer) {
         RasterTreeNode raster = new RasterTreeNode();
-        raster.setAbstractText(layer.getLayerName());
-        raster.setBbox(new BboxClientInfo(layer.getLowerX(), layer.getLowerY(), layer.getUpperX(), layer.getUpperY()));
-        raster.setTitle(layer.getLayerName());
+        raster.setAbstractText(layer.getName());
+        raster.setBbox(layer.getBbox());
+        raster.setTitle(layer.getName());
         raster.setChecked(false);
         raster.setCrs(layer.getCrs());
-        raster.setDataSource(layer.getUrl());
-        raster.setLabel(layer.getLayerName());
-        raster.setLayerType(layer.getGPLayerType());
-        raster.setName(layer.getLayerName());
+        raster.setDataSource(layer.getDataSource());
+        raster.setLabel(layer.getName());
+        raster.setLayerType(layer.getLayerType());
+        raster.setName(layer.getCrs() + ":" + layer.getName());
 //        raster.setStyles(rasterBean.getStyles());
 //        raster.setzIndex(rasterBean.getzIndex());
         return raster;

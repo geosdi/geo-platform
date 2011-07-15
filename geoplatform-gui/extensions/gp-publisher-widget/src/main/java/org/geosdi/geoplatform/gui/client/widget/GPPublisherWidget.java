@@ -48,15 +48,25 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
+import java.util.ArrayList;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.event.IUploadPreviewHandler;
-import org.geosdi.geoplatform.gui.client.model.WMSPreview;
+import org.geosdi.geoplatform.gui.client.event.timeout.GPPublishShapePreviewEvent;
+import org.geosdi.geoplatform.gui.client.event.timeout.IGPPublishShapePreviewHandler;
+import org.geosdi.geoplatform.gui.client.model.PreviewLayer;
+import org.geosdi.geoplatform.gui.client.service.PublisherRemote;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPFileUploader;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddRasterFromPublisherEvent;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
@@ -70,7 +80,8 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPreviewHandler {
+public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPreviewHandler,
+        IGPPublishShapePreviewHandler{
 
     private TreePanel tree;
     private boolean mapInitialized;
@@ -80,11 +91,15 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
     private FieldSet southPanel;
     private Image centralImage;
     private Bounds bbox;
+    private GPPublishShapePreviewEvent publishShapePreviewEvent = new GPPublishShapePreviewEvent();
+    private List<PreviewLayer> layerList = new ArrayList<PreviewLayer>();
+    private Button publishButton;
 
     public GPPublisherWidget(boolean lazy, TreePanel theTree) {
         super(lazy);
         this.tree = theTree;
         GPHandlerManager.addHandler(IUploadPreviewHandler.TYPE, this);
+        LayerHandlerManager.addHandler(IGPPublishShapePreviewHandler.TYPE, this);
     }
 
     @Override
@@ -110,42 +125,45 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
     @Override
     public void showLayerPreview(String jsonString) {
         this.centralPanel.removeAll();
-        WMS previewLayer = this.generateLayer(jsonString);
-        this.shpPreviewWidget.getMapPreview().getMap().addLayer(previewLayer);
+        PreviewLayer previewLayer = PreviewLayer.JSON.read(jsonString);
+        previewLayer.setLayerType(GPLayerType.RASTER);
+        this.layerList.clear();
+        this.layerList.add(previewLayer);
+        WMS wmsLayer = this.generateLayer(previewLayer);
+        this.shpPreviewWidget.getMapPreview().getMap().addLayer(wmsLayer);
         this.centralPanel.add(this.shpPreviewWidget.getMapPreview());
         shpPreviewWidget.getMapPreview().getMap().zoomToExtent(bbox);
         shpPreviewWidget.getMapPreview().getMap().updateSize();
         this.centralPanel.layout();
-        System.out.println("Funziona la preview");
+        this.publishButton.enable();
+        System.out.println("Showing the preview");
     }
 
-    public WMS generateLayer(String jsonString) {
-        WMSPreview wmsPreview = WMSPreview.JSON.read(jsonString);
-        wmsPreview.setGPLayerType(GPLayerType.RASTER);
-        System.out.println("wmsPreview toString: " + wmsPreview);
+    public WMS generateLayer(PreviewLayer previewLayer) {
+        System.out.println("wmsPreview toString: " + previewLayer);
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
-        wmsParams.setLayers(wmsPreview.getLayerName());
+        wmsParams.setLayers(previewLayer.getWorkspace() + ":" + previewLayer.getName());
         wmsParams.setStyles("");
         wmsParams.setIsTransparent(true);
-        
-        Double lowerX = wmsPreview.getLowerX();
-        Double lowerY = wmsPreview.getLowerY();
-        Double upperX = wmsPreview.getUpperX();
-        Double upperY = wmsPreview.getUpperY();
-        
+
+        Double lowerX = previewLayer.getLowerX();
+        Double lowerY = previewLayer.getLowerY();
+        Double upperX = previewLayer.getUpperX();
+        Double upperY = previewLayer.getUpperY();
+
         this.bbox = new Bounds(lowerX, lowerY, upperX, upperY);
 
-        bbox.transform(new Projection(wmsPreview.getCrs()), new Projection(
+        this.bbox.transform(new Projection(previewLayer.getCrs()), new Projection(
                 this.shpPreviewWidget.getMapPreview().getMap().getProjection()));
-
+        System.out.println("CRS Map: " + this.shpPreviewWidget.getMapPreview().getMap().getProjection());
+        System.out.println(bbox);
         wmsParams.setMaxExtent(bbox);
 
         WMSOptions wmsOption = new WMSOptions();
         wmsOption.setIsBaseLayer(false);
         wmsOption.setDisplayInLayerSwitcher(false);
-
-        return new WMS(wmsPreview.getLayerName(), wmsPreview.getUrl(),
+        return new WMS(previewLayer.getName(), previewLayer.getDataSource() + "/wms",
                 wmsParams, wmsOption);
     }
 
@@ -171,31 +189,51 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
         this.centralPanel.removeAll();
         this.centralPanel.add(this.centralImage);
         this.centralPanel.layout();
+        this.publishButton.disable();
         this.fileUploader.getComponent().reset();
     }
 
     @Override
+    public void publishShapePreview() {
+        this.publishButton.fireEvent(Events.OnClick);
+    }
+    
+    @Override
     public void addComponent() {
         this.addCentralPanel();
         this.addSouthPanel();
-
-        
-        Button publishButton = new Button("Add on Tree", BasicWidgetResources.ICONS.done());
-        publishButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
-
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                //TODO: add shape on tree
-            }
-        });
+        publishButton = new Button("Add on Tree", BasicWidgetResources.ICONS.done());
         publishButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
                 if (tree.getSelectionModel().getSelectedItem() instanceof AbstractFolderTreeNode) {
                     //expander.checkNodeState();
-                    LayerHandlerManager.fireEvent(new AddRasterFromPublisherEvent(null));
-                    //LayerHandlerManager.fireEvent(new AddRasterFromPublisherEvent(this.layersToStore));
+                    PublisherRemote.Util.getInstance().publishLayerPreview(layerList, new AsyncCallback<Object>() {
+
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            //ToDO: verify session timeout
+                            if (caught.getCause() instanceof GPSessionTimeout) {
+                                GPHandlerManager.fireEvent(new GPLoginEvent(publishShapePreviewEvent));
+                            } else {
+                                GeoPlatformMessage.errorMessage("Error Publishing",
+                                        "An error occurred while making the requested connection.\n"
+                                        + "Verify network connections and try again."
+                                        + "\nIf the problem persists contact your system administrator.");
+                                LayoutManager.getInstance().getStatusMap().setStatus(
+                                        "Error Publishing previewed shape.",
+                                        EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                                System.out.println("Error Publishing previewed shape: " + caught.toString()
+                                        + " data: " + caught.getMessage());
+                            }
+                        }
+
+                        @Override
+                        public void onSuccess(Object result) {
+                            LayerHandlerManager.fireEvent(new AddRasterFromPublisherEvent(layerList));
+                        }
+                    });
                 } else {
                     GeoPlatformMessage.alertMessage("Shaper Preview",
                             "You can put layers into Folders only.\n"
@@ -256,4 +294,5 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
         //Warning: changing window size will be necessary change panel's size also.
         super.setSize(600, 500);
     }
+
 }

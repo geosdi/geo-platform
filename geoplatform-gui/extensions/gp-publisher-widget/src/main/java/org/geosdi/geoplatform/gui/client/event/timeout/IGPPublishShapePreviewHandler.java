@@ -33,38 +33,18 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.event.timeout;
 
-import org.geosdi.geoplatform.gui.client.widget.form.GPMapPreviewWidget;
-import org.gwtopenmaps.openlayers.client.Bounds;
-import org.gwtopenmaps.openlayers.client.MapOptions;
-import org.gwtopenmaps.openlayers.client.MapUnits;
-import org.gwtopenmaps.openlayers.client.Projection;
-import org.gwtopenmaps.openlayers.client.layer.OSM;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class ShapePreviewWidget extends GPMapPreviewWidget {
-
-    @Override
-    public MapOptions createMapPreviewOption() {
-        MapOptions defaultMapOptions = new MapOptions();
-        defaultMapOptions.setNumZoomLevels(18);
-        defaultMapOptions.setProjection("EPSG:900913");
-        defaultMapOptions.setDisplayProjection(new Projection("EPSG:4326"));
-        defaultMapOptions.setUnits(MapUnits.METERS);
-        defaultMapOptions.setMaxExtent(new Bounds(-20037508, -20037508,
-                20037508, 20037508.34));
-        defaultMapOptions.setMaxResolution(
-                new Double(156543.0339).floatValue());
-        return defaultMapOptions;
-    }
-
-    @Override
-    public void createBaseLayer() {
-        super.baseLayer = OSM.Mapnik("OpenStreetMap Preview");
-        super.mapWidget.getMap().addLayer(baseLayer);
-    }
+public interface IGPPublishShapePreviewHandler extends EventHandler{
+    
+    Type<IGPPublishShapePreviewHandler> TYPE = new Type<IGPPublishShapePreviewHandler>();
+    
+    public void publishShapePreview();
 }

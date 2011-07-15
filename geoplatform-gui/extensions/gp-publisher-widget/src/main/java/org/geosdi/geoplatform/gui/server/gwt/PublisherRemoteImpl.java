@@ -36,7 +36,13 @@
 package org.geosdi.geoplatform.gui.server.gwt;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.model.PreviewLayer;
 import org.geosdi.geoplatform.gui.client.service.PublisherRemote;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.server.IPublisherService;
+import org.geosdi.geoplatform.gui.server.service.impl.PublisherService;
+import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -45,7 +51,12 @@ import org.geosdi.geoplatform.gui.client.service.PublisherRemote;
 public class PublisherRemoteImpl extends RemoteServiceServlet implements PublisherRemote {
     private static final long serialVersionUID = 5204638800999412388L;
 
-    //private IPublisherService publisherService = (IPublisherService) GeoPlatformContextUtil.getInstance().getBean(
-    //        UploadServlet.class);
+    private IPublisherService publisherService = (IPublisherService) GeoPlatformContextUtil.getInstance().getBean(
+            PublisherService.class);
+
+    @Override
+    public void publishLayerPreview(List<PreviewLayer> layerList) throws GeoPlatformException {
+        this.publisherService.publishLayerPreview(super.getThreadLocalRequest(), layerList);
+    }
 
 }

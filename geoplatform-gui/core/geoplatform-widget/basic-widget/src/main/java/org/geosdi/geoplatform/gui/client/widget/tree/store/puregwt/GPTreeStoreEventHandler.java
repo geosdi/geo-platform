@@ -39,7 +39,6 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import java.util.List;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.LayerBaseProperties;
 
 /**
  *
@@ -54,7 +53,7 @@ public interface GPTreeStoreEventHandler extends EventHandler {
 
     public void addVectorLayersfromCapabilities(List<? extends GPLayerBean> layers);
 
-    public void addRasterLayersfromPublisher(List<? extends LayerBaseProperties> layers);
+    public void addRasterLayersfromPublisher(List<? extends GPLayerBean> layers);
 
-    public void addVectorLayersfromPublisher(List<? extends LayerBaseProperties> layers);
+    public void addVectorLayersfromPublisher(List<? extends GPLayerBean> layers);
 }

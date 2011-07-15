@@ -35,10 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.server;
 
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.gui.client.model.PreviewLayer;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email  nazzareno.sileno@geosdi.org
  */
 public interface IPublisherService {
-    
+
+    public void publishLayerPreview(HttpServletRequest httpServletRequest, List<PreviewLayer> layerList) throws GeoPlatformException;
 }

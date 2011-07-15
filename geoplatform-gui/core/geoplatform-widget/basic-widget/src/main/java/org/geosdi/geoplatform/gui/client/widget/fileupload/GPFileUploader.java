@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.widget.fileupload;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.js.JsonConverter;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.google.gwt.core.client.GWT;
@@ -45,7 +44,6 @@ import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.client.event.UploadPreviewEvent;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -122,10 +120,9 @@ public class GPFileUploader {
                 htmlResult = event.getResults();
                 htmlResult = htmlResult.replaceAll("<pre>", "");
                 htmlResult = htmlResult.replaceAll("</pre>", "");
-//
-//                htmlResult = htmlResult.replaceAll(
-//                        "<pre style=\"word-wrap: break-word; white-space: pre-wrap;\">",
-//                        "");
+                htmlResult = htmlResult.replaceAll(
+                        "<pre style=\"word-wrap: break-word; white-space: pre-wrap;\">",
+                        "");
                 if ((htmlResult != null) && !(htmlResult.equals(""))) {
                     System.out.println("HTMLResult: " + htmlResult);
                     previewEvent.setJsonString(htmlResult);

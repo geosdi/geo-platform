@@ -35,8 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
+import com.google.gwt.core.client.GWT;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
+import javax.persistence.Transient;
+import name.pehl.piriti.json.client.JsonReader;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -45,18 +49,36 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class PreviewLayer implements GPLayerBean {
+public class PreviewLayer implements GPLayerBean, Serializable {
+    
+    private static final long serialVersionUID = 1223233615230469683L;
 
-    private long id;
-    private String label;
-    private String title;
-    private String name;
-    private String abstractText;
-    private String dataSource;
+    public interface PreviewLayerReader extends JsonReader<PreviewLayer> {
+    }
+    public static final PreviewLayerReader JSON = GWT.create(PreviewLayerReader.class);
     private String crs;
+    private String name;
+    private String dataSource;
+    private String workspace;
+    private double lowerX;
+    private double lowerY;
+    private double upperX;
+    private double upperY;
+    @Transient
+    private long id;
+    @Transient
+    private String label;
+    @Transient
+    private String title;
+    @Transient
+    private String abstractText;
+    @Transient
     private BboxClientInfo bbox;
+    @Transient
     private GPLayerType layerType;
 
+    public PreviewLayer() {}
+    
     public PreviewLayer(String label, String title, String name, String abstractText, String dataSource, String crs, BboxClientInfo bbox, GPLayerType layerType) {
         this.label = label;
         this.title = title;
@@ -67,7 +89,7 @@ public class PreviewLayer implements GPLayerBean {
         this.bbox = bbox;
         this.layerType = layerType;
     }
-    
+
     @Override
     public long getId() {
         return this.id;
@@ -140,6 +162,9 @@ public class PreviewLayer implements GPLayerBean {
 
     @Override
     public BboxClientInfo getBbox() {
+        if(this.bbox == null){
+            this.bbox = new BboxClientInfo(this.lowerX, this.lowerY, this.upperX, this.upperY);
+        }
         return this.bbox;
     }
 
@@ -156,6 +181,76 @@ public class PreviewLayer implements GPLayerBean {
     @Override
     public void setLayerType(GPLayerType layerType) {
         this.layerType = layerType;
+    }
+
+    /**
+     * @return the workspace
+     */
+    public String getWorkspace() {
+        return workspace;
+    }
+
+    /**
+     * @return the lowerX
+     */
+    public double getLowerX() {
+        return lowerX;
+    }
+
+    /**
+     * @return the lowerY
+     */
+    public double getLowerY() {
+        return lowerY;
+    }
+
+    /**
+     * @return the upperX
+     */
+    public double getUpperX() {
+        return upperX;
+    }
+
+    /**
+     * @return the upperY
+     */
+    public double getUpperY() {
+        return upperY;
+    }
+
+    /**
+     * @param workspace the workspace to set
+     */
+    public void setWorkspace(String workspace) {
+        this.workspace = workspace;
+    }
+
+    /**
+     * @param lowerX the lowerX to set
+     */
+    public void setLowerX(double lowerX) {
+        this.lowerX = lowerX;
+    }
+
+    /**
+     * @param lowerY the lowerY to set
+     */
+    public void setLowerY(double lowerY) {
+        this.lowerY = lowerY;
+    }
+
+    /**
+     * @param upperX the upperX to set
+     */
+    public void setUpperX(double upperX) {
+        this.upperX = upperX;
+    }
+
+    /**
+     * @param upperY the upperY to set
+     */
+    public void setUpperY(double upperY) {
+        this.upperY = upperY;
     }
 
     @Override
@@ -187,5 +282,4 @@ public class PreviewLayer implements GPLayerBean {
     public <X> X set(String property, X value) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
 }

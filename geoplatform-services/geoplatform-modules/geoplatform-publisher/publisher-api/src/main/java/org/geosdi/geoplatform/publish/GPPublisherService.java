@@ -40,7 +40,7 @@ public interface GPPublisherService {
     @Get
     @HttpResource(location = "/preview/getPreviewDataStores")
     @WebResult(name = "Result")
-    List<PreviewElement> getPreviewDataStores()
+    List<InfoPreview> getPreviewDataStores()
             throws ResourceNotFoundFault;
 
     @Get

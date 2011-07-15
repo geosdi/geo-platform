@@ -234,32 +234,38 @@ public class GPPublisherServiceImpl implements GPPublisherService {
      */
     @Override
     public boolean publish(String workspace, String dataStoreName, String layerName) throws ResourceNotFoundFault, FileNotFoundException {
-        String filename = tempDirZIP + layerName + ".zip";
-        String result = reload();
-        File file = new File(filename);
+
         boolean publish = true;
         System.out.println("\n ***************** PUBLISHING ....");
+        RESTDataStore dataStore = reader.getDatastore(previewWorkspace, layerName);
+
+        if (dataStore!=null) {
+            System.out.println("Workspace Name "+dataStore.getWorkspaceName()+" DataStore Name "+dataStore.getName());
+            System.out.println("\n ***************** DATA STORE EXISTS IN "+previewWorkspace);
+            boolean unpublish = publisher.unpublishFeatureType(previewWorkspace, layerName, layerName);
+            reload();
+            boolean remove = publisher.removeDatastore(previewWorkspace, layerName);
+            System.out.println("Unpublish :"+unpublish+", Remove :"+remove);
+        }
+        else System.out.println("\n ***************** DATA STORE NOT EXISTS "+previewWorkspace);
+
+        String filename = tempDirZIP + layerName + ".zip";
+        File file = new File(filename);
         if (file.exists()){
-            RESTDataStore dataStore = reader.getDatastore(previewWorkspace, layerName);
-            if (dataStore!=null) System.out.println("\n ***************** DATA STORE EXISTS");
-            else System.out.println("\n ***************** DATA STORE NOT EXISTS");
-           try {
+          String result = reload();
+          try {
                logger.info("START TO PUBLISH "+layerName+" INTO "+workspace+":"+dataStoreName);
                System.out.println("\n ***************** TRYING TO PUBLISH  "+layerName+" INTO "+workspace+":"+dataStoreName);
 
                publish = publisher.publishShp(workspace, dataStoreName, layerName, file, "EPSG:4326");
 
-
+               System.out.println("\n ********* STATO DEL PUBLISH "+publish);
                if (!publish) throw new ResourceNotFoundFault("Cannot publish "+layerName+" into "+workspace+":"+dataStoreName);
                logger.info(layerName+" correctly pulished into "+workspace+":"+dataStoreName);
            } catch(FileNotFoundException e) {
                 logger.info("\n ********** File "+layerName+".zip not found");
             }
-            if (dataStore!=null) {
-                System.out.println("\n ********** FOUND DATASTORE "+layerName+ " TRYING TO UNPUBLISH FROM "+previewWorkspace);
-                publisher.unpublishFeatureType(previewWorkspace, layerName, layerName);
-                publisher.removeDatastore(previewWorkspace, layerName);
-          }
+
             file.deleteOnExit();
            return true;
       }

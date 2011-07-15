@@ -50,8 +50,10 @@ public class PublisherWSTest extends TestCase{
     public void testWS() {
         Assert.assertNotNull(gppublisherService);
         try {
+String currentdir = System.getProperty("user.dir");
+            System.out.println("\n ******** directory corrente "+currentdir);
             logger.info("\n **** Start to upload Archivio.zip");
-            File zipFile = new File("c:\\prova.zip");
+            File zipFile = new File("./src/test/resources/prova.zip");
             List<InfoPreview> infoList = gppublisherService.uploadZIPInPreview(zipFile);
             for (InfoPreview info: infoList){
                 logger.info("\n **** Preview image at: "+info.getDataStoreName());
@@ -64,10 +66,10 @@ public class PublisherWSTest extends TestCase{
             logger.info("\n **** Publishing SHAPE "+gppublisherService.publish("preview2", "data", "zip_it_aeropo" ));
          //   logger.info("\n **** Remove it_aeropo files from Preview");
    //         logger.info("\n **** Removing result "+gppublisherService.removeFromPreview("it_aeropo"));
-            File shpFile = new File("c:\\limiti_adb_4326.shp");
-            File dbfFile = new File("c:\\limiti_adb_4326.dbf");
-            File shxFile = new File("c:\\limiti_adb_4326.shx");
-            File prjFile = new File("c:\\limiti_adb_4326.prj");
+            File shpFile = new File("./src/test/resources/limiti_adb_4326.shp");
+            File dbfFile = new File("./src/test/resources/limiti_adb_4326.dbf");
+            File shxFile = new File("./src/test/resources/limiti_adb_4326.shx");
+            File prjFile = new File("./src/test/resources/limiti_adb_4326.prj");
 
                 logger.info("\n **** Start again to upload Limiti_AdB_4326 files");
                 logger.info("\n **** Preview image at: "+gppublisherService.uploadShapeInPreview(shpFile, dbfFile, shxFile, prjFile));

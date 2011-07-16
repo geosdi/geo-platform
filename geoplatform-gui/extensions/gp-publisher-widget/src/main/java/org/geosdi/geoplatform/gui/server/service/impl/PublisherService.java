@@ -60,13 +60,13 @@ import org.springframework.stereotype.Service;
 public class PublisherService implements IPublisherService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private GPPublisherService geoPlatformPublishClient = (GPPublisherService) GeoPlatformContextUtil.getInstance().getBean("geoPlatformPublishClient");
 
     @Override
     public void publishLayerPreview(HttpServletRequest httpServletRequest, List<PreviewLayer> layerList) throws GeoPlatformException {
         this.getUserAlreadyFromSession(httpServletRequest);
         for (PreviewLayer layerBaseProperties : layerList) {
             try {
+                GPPublisherService geoPlatformPublishClient = (GPPublisherService) GeoPlatformContextUtil.getInstance().getBean("geoPlatformPublishClient");
                 geoPlatformPublishClient.publish("previews", "dataTest", layerBaseProperties.getName());
             } catch (ResourceNotFoundFault ex) {
                 logger.error("Error on publish shape: " + ex);

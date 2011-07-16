@@ -49,14 +49,18 @@ import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
  * @email  nazzareno.sileno@geosdi.org
  */
 public class PublisherRemoteImpl extends RemoteServiceServlet implements PublisherRemote {
-    private static final long serialVersionUID = 5204638800999412388L;
 
-    private IPublisherService publisherService = (IPublisherService) GeoPlatformContextUtil.getInstance().getBean(
-            PublisherService.class);
+    private static final long serialVersionUID = 5204638800999412388L;
+    
+    private IPublisherService publisherService;
+
+    public PublisherRemoteImpl() {
+        this.publisherService = (IPublisherService) GeoPlatformContextUtil.getInstance().getBean(
+                "publisherService");
+    }
 
     @Override
     public void publishLayerPreview(List<PreviewLayer> layerList) throws GeoPlatformException {
         this.publisherService.publishLayerPreview(super.getThreadLocalRequest(), layerList);
     }
-
 }

@@ -46,10 +46,10 @@ import org.geosdi.geoplatform.gui.client.model.PreviewLayer;
 import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.IPublisherService;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.publish.GPPublisherService;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -60,13 +60,18 @@ import org.springframework.stereotype.Service;
 public class PublisherService implements IPublisherService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    
+    @Autowired
+    private GPPublisherService geoPlatformPublishClient;
 
     @Override
     public void publishLayerPreview(HttpServletRequest httpServletRequest, List<PreviewLayer> layerList) throws GeoPlatformException {
         this.getUserAlreadyFromSession(httpServletRequest);
+        
+        /** TODO : The Service must espone a method that receives a List of Appropriate Objetc. This for atomicity transactions **/
+        
         for (PreviewLayer layerBaseProperties : layerList) {
             try {
-                GPPublisherService geoPlatformPublishClient = (GPPublisherService) GeoPlatformContextUtil.getInstance().getBean("geoPlatformPublishClient");
                 geoPlatformPublishClient.publish("previews", "dataTest", layerBaseProperties.getName());
             } catch (ResourceNotFoundFault ex) {
                 logger.error("Error on publish shape: " + ex);

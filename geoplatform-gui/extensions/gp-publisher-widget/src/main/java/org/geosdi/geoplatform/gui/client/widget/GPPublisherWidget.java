@@ -90,7 +90,7 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
     private GPFileUploader fileUploader;
     private FieldSet southPanel;
     private Image centralImage;
-    private Bounds bbox;
+    private Bounds bounds;
     private GPPublishShapePreviewEvent publishShapePreviewEvent = new GPPublishShapePreviewEvent();
     private List<PreviewLayer> layerList = new ArrayList<PreviewLayer>();
     private Button publishButton;
@@ -132,7 +132,7 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
         WMS wmsLayer = this.generateLayer(previewLayer);
         this.shpPreviewWidget.getMapPreview().getMap().addLayer(wmsLayer);
         this.centralPanel.add(this.shpPreviewWidget.getMapPreview());
-        shpPreviewWidget.getMapPreview().getMap().zoomToExtent(bbox);
+        shpPreviewWidget.getMapPreview().getMap().zoomToExtent(bounds);
         shpPreviewWidget.getMapPreview().getMap().updateSize();
         this.centralPanel.layout();
         this.publishButton.enable();
@@ -152,13 +152,13 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
         Double upperX = previewLayer.getUpperX();
         Double upperY = previewLayer.getUpperY();
 
-        this.bbox = new Bounds(lowerX, lowerY, upperX, upperY);
+        this.bounds = new Bounds(lowerX, lowerY, upperX, upperY);
 
-        this.bbox.transform(new Projection(previewLayer.getCrs()), new Projection(
+        this.bounds.transform(new Projection(previewLayer.getCrs()), new Projection(
                 this.shpPreviewWidget.getMapPreview().getMap().getProjection()));
         System.out.println("CRS Map: " + this.shpPreviewWidget.getMapPreview().getMap().getProjection());
-        System.out.println(bbox);
-        wmsParams.setMaxExtent(bbox);
+        System.out.println(bounds);
+        wmsParams.setMaxExtent(bounds);
 
         WMSOptions wmsOption = new WMSOptions();
         wmsOption.setIsBaseLayer(false);

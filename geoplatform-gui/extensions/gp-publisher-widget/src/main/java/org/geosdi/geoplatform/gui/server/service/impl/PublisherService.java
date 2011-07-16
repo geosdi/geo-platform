@@ -50,11 +50,13 @@ import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.publish.GPPublisherService;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
+@Service("publisherService")
 public class PublisherService implements IPublisherService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

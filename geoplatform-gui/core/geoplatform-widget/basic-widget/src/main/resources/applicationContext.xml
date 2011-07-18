@@ -11,7 +11,7 @@
 	
     <bean name="geoPlatform"
 		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory">
-        <property name="text" value="GEO-Platforn" />
+        <property name="text" value="Geo-Platform" />
         <property name="enabled" value="true" />
         <property name="order" value="10" />
         <property name="tools">

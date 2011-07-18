@@ -61,7 +61,8 @@ public class PublisherService implements IPublisherService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
-    @Autowired
+    /** COMMENT THIS FOR MOMENT BECAUSE CAUSE RUNTIME ERROR **/
+//    @Autowired
     private GPPublisherService geoPlatformPublishClient;
 
     @Override

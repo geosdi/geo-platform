@@ -115,9 +115,9 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
                     }
                 }
 
-//                action.setEnabled(((ActionClientTool) tool).isEnabled());
-                action.setEnabled(GPUserGuiComponents.getInstance().getPermissionForComponent(
-                        id));
+                action.setEnabled(((ActionClientTool) tool).isEnabled());
+//                action.setEnabled(GPUserGuiComponents.getInstance().getPermissionForComponent(
+//                        id));
             }
         }
     }

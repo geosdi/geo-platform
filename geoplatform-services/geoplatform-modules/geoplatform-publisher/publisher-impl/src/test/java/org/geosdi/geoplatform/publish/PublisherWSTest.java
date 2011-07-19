@@ -65,11 +65,14 @@ public class PublisherWSTest extends TestCase{
             File dbfFile = new File("./src/test/resources/limiti_adb_4326.dbf");
             File shxFile = new File("./src/test/resources/limiti_adb_4326.shx");
             File prjFile = new File("./src/test/resources/limiti_adb_4326.prj");
-
+            List<InfoPreview> successfullPreview = null ;
             logger.info("\n **** CALL TO UPLOADSHAPEINPREVIEW ON Limiti_AdB_4326 files");
-            logger.info("\n **** RESULT: "+gppublisherService.uploadShapeInPreview(shpFile, dbfFile, shxFile, prjFile));
-            logger.info("\n **** CALL TO PUBLISH ON Limiti_AdB_4326 files");
-            logger.info("\n **** RESULT "+gppublisherService.publish("preview2", "data", "limiti_adb_4326"));
+            successfullPreview = gppublisherService.uploadShapeInPreview(shpFile, dbfFile, shxFile, prjFile);
+            logger.info("\n **** RESULT: "+successfullPreview);
+            if (successfullPreview!=null) {
+                logger.info("\n **** CALL TO PUBLISH ON Limiti_AdB_4326 files");
+                logger.info("\n **** RESULT "+gppublisherService.publish("preview2", "data", "limiti_adb_4326"));
+                }
               logger.info("\n **** CALL TO GETPREVIEWDATASTORES");
             List<InfoPreview> infoList2 = gppublisherService.getPreviewDataStores();
              for (InfoPreview info: infoList2){

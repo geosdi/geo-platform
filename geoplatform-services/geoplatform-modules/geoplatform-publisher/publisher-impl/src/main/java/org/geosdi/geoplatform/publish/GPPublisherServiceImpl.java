@@ -41,9 +41,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.logging.Level;
 import javax.jws.WebService;
-import org.springframework.transaction.annotation.Transactional;
 
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
@@ -98,7 +96,6 @@ import org.slf4j.LoggerFactory;
  * @author Luca Paolino - geoSDI
  *
  */
-@Transactional // Give atomicity on WS methods
 @WebService(endpointInterface = "org.geosdi.geoplatform.publish.GPPublisherService")
 public class GPPublisherServiceImpl implements GPPublisherService {
 

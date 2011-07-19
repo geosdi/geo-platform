@@ -223,7 +223,13 @@ public class GPPublisherServiceImpl implements GPPublisherService {
    */
     private InfoPreview getURLPreviewByDataStoreName(String dataStoreName) throws ResourceNotFoundFault{
           RESTFeatureType featureType =  reader.getFeatureType(reader.getLayer(dataStoreName));
-          InfoPreview info = new InfoPreview(RESTURL, previewWorkspace, dataStoreName, featureType.getMinX(), featureType.getMinY(), featureType.getMaxX(), featureType.getMaxY(),0,0, "EPSG:4326");
+          InfoPreview info = null;
+          try {
+            info = new InfoPreview(RESTURL, previewWorkspace, dataStoreName, featureType.getMinX(), featureType.getMinY(), featureType.getMaxX(), featureType.getMaxY(),0,0, "EPSG:4326");
+          } catch(Exception e) {
+              logger.info("The layer "+dataStoreName+" is published in the "+previewWorkspace+" workspace, but the server cannot provide info");
+              info = new InfoPreview(dataStoreName, "The layer "+dataStoreName+" is published in the "+previewWorkspace+" workspace, but the server cannot provide info");
+          };
           return info;
 
         //  return RESTURL+"/"+previewWorkspace+"/wms?service=WMS&version=1.1.0&request=GetMap&layers=previews:"+dataStoreName+"&styles=&bbox="+minX+","+minY+","+maxX+","+maxY+"&width=512&height=499&srs="+featureType.getCRS()+"&format=image/png";
@@ -365,11 +371,16 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                 FileDataStore store = FileDataStoreFinder.getDataStore(shpFile);
                 SimpleFeatureSource featureSource = store.getFeatureSource();
                 String geomType = featureSource.getSchema().getGeometryDescriptor().getType().getName().toString();
-                if (geomType.equals("MultyPolygon")) info.sld="default_polygon";
-                if (geomType.equals("PolyLine")) info.sld="default_polyline";
-                if (geomType.equals("MultiPoint")) info.sld="default_point";
-                Integer code  = CRS.lookupEpsgCode(featureSource.getSchema().getCoordinateReferenceSystem(), true);
-                //if (code!=4326) exportCRS(shpFile, 4326);
+                logger.info("\n ************** GEOMETRY TYPE : "+geomType);
+                if (geomType.equals("MultiPolygon")) info.sld="default_polygon";
+                if (geomType.equals("MultiLineString")) info.sld="default_polyline";
+                if (geomType.equals("Point")) info.sld="default_point";
+                logger.info("\n ************** GEOMETRY TYPE SLD: "+info.sld);
+                Integer code  = null;
+                try {
+                    code = CRS.lookupEpsgCode(featureSource.getSchema().getCoordinateReferenceSystem(), true);
+                } catch(Exception e){};
+               // if (code.intValue()!=4326) exportCRS(shpFile, 4326);
                 if (code!=null) {
                        info.epsg = "EPSG:" + code.toString();
                  }
@@ -453,6 +464,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                     }
                 } catch (Exception ex) {
                      logger.info("Some problems occured when publishing "+info.name+" into the "+previewWorkspace+" workspace");
+                     ex.printStackTrace();
                      urlPNGPreview = new InfoPreview(info.name, "Some problems occured when publishing "+info.name+" into the "+previewWorkspace+" workspace");
                 }
                 //publish the shape in the previews workspace

@@ -83,7 +83,7 @@ public class PublisherWSTest extends TestCase{
             }
             logger.info("\n **** CALL TO PUBLISH ON zip_it_aeropo ");
             logger.info("\n **** RESULT "+gppublisherService.publish("preview2", "data", "zip_it_aeropo" ));
-            logger.info("\n **** CALL TO REMOVEFROMPREVIEW it_aeropo ");
+            logger.info("\n **** CALL TO REMOVEFROMPREVIEW zip_it_aree_meteoclimatiche ");
             logger.info("\n **** RESULT "+gppublisherService.removeFromPreview("zip_it_aree_meteoclimatiche"));
             File shpFile = new File("./src/test/resources/limiti_adb_4326.shp");
             File dbfFile = new File("./src/test/resources/limiti_adb_4326.dbf");
@@ -111,6 +111,9 @@ public class PublisherWSTest extends TestCase{
                 logger.error("\n **** File zip non trovato");
                 System.out.println("\n **** Eccezione nella pubblicazione: "+ex.getMessage());
             }
-
+            catch (Exception ex) {
+                logger.error("\n **** Generic exception"+ex.getMessage());
+                
+            }
     }
 }

@@ -46,37 +46,36 @@ import org.gwtopenmaps.openlayers.client.popup.Popup;
  */
 public class PopupMapWidget {
 
-	private Popup popup;
+    private Popup popup;
 
-	public PopupMapWidget() {
-		this.popup = new Popup("GP-Map-Popup", null, new Size(150, 50),
-				"", false);
-		this.popup.setAutoSize(true);
-	}
+    public PopupMapWidget() {
+        this.popup = new Popup("GP-Map-Popup", null, new Size(150, 50),
+                "", false);
+        this.popup.setAutoSize(true);
+    }
 
-	/**
-	 * Set HTML Content in the Popup
-	 * 
-	 * @param contentHTML
-	 */
-	public void setContentHTML(String contentHTML) {
-		this.popup.setContentHTML(contentHTML);
-	}
+    /**
+     * Set HTML Content in the Popup
+     * 
+     * @param contentHTML
+     */
+    public void setContentHTML(String contentHTML) {
+        this.popup.setContentHTML(contentHTML);
+    }
 
-	/**
-	 * Set LonLat Popup Property
-	 * 
-	 * @param lonlat
-	 */
-	public void setLonLat(LonLat lonlat) {
-		this.popup.setLonLat(lonlat);
-	}
+    /**
+     * Set LonLat Popup Property
+     * 
+     * @param lonlat
+     */
+    public void setLonLat(LonLat lonlat) {
+        this.popup.setLonLat(lonlat);
+    }
 
-	/**
-	 * @return the popup
-	 */
-	public Popup getPopup() {
-		return popup;
-	}
-
+    /**
+     * @return the popup
+     */
+    public Popup getPopup() {
+        return popup;
+    }
 }

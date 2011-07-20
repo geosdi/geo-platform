@@ -98,7 +98,7 @@
             </snapshots>
         </repository>
 
-		<!-- JBoss 
+		<!-- JBoss --> 
         <repository>
             <id>jboss-repo</id>
             <name>JBoss Maven2 Repository</name>
@@ -106,7 +106,7 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository> -->
+        </repository>
 
 		<!-- Spring -->
         <repository>
@@ -833,7 +833,21 @@
                 <artifactId>gxt</artifactId>
                 <version>${gxtVersion}</version>
             </dependency>
-
+            
+            <!-- GWT-OPENLAYERS -->
+            
+            <dependency>
+                <groupId>org.gwtopenmaps.openlayers</groupId>
+                <artifactId>gwt-openlayers-client</artifactId>
+                <version>${gwtOpenlayersVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.gwtopenmaps.openlayers</groupId>
+                <artifactId>gwt-openlayers-server</artifactId>
+                <version>${gwtOpenlayersVersion}</version>
+                <scope>runtime</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -1137,6 +1151,8 @@
 
         <gwtVersion>2.3.0</gwtVersion>
         <gxtVersion>2.2.4</gxtVersion>
+        
+        <gwtOpenlayersVersion>0.6-SNAPSHOT</gwtOpenlayersVersion>
 
     </properties>
 

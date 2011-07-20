@@ -53,33 +53,33 @@ import com.google.gwt.core.client.GWT;
  */
 public class GeocodingMarker extends GeoPlatformMarker {
 
-	public void buildMarkerLayer() {
-		MarkersOptions options = new MarkersOptions();
-		options.setNumZoomLevels(18);
-		options.setMaxZoomLevel(18);
-		options.setDisplayInLayerSwitcher(false);
+    public void buildMarkerLayer() {
+        MarkersOptions options = new MarkersOptions();
+        options.setNumZoomLevels(18);
+        options.setMaxZoomLevel(18);
+        options.setDisplayInLayerSwitcher(false);
 
-		this.markerLayer = new Markers("GP-Geocoding-Markers-Layer", options);
-	}
+        this.markerLayer = new Markers("GP-Geocoding-Markers-Layer", options);
+    }
 
-	public void buildIconMarker() {
-		Size size = new Size(21, 25);
-		Pixel offset = new Pixel(-(size.getWidth() / 2), -size.getHeight());
-		this.iconMarker = new Icon(GWT.getModuleName()
-				+ "/gp-images/geocodmarker.png", size, offset);
+    public void buildIconMarker() {
+        Size size = new Size(21, 25);
+        Pixel offset = new Pixel(-(size.getWidth() / 2), -size.getHeight());
+        this.iconMarker = new Icon(GWT.getModuleName()
+                + "/gp-images/geocodmarker.png", size, offset);
 
-		this.iconMarker.setZIndex(950);
-	}
+        this.iconMarker.setZIndex(950);
+    }
 
-	/**
-	 * 
-	 * @param lonlat
-	 *            LonLat to build the marker and add to the markerLayer
-	 */
-	public void addMarker(LonLat lonlat, Map map) {
-		this.markerLayer.clearMarkers();
-		map.setCenter(lonlat, 16);
-		this.marker = new Marker(lonlat, this.iconMarker);
-		this.markerLayer.addMarker(this.marker);
-	}
+    /**
+     * 
+     * @param lonlat
+     *            LonLat to build the marker and add to the markerLayer
+     */
+    public void addMarker(LonLat lonlat, Map map) {
+        this.markerLayer.clearMarkers();
+        map.setCenter(lonlat, 16);
+        this.marker = new Marker(lonlat, this.iconMarker);
+        this.markerLayer.addMarker(this.marker);
+    }
 }

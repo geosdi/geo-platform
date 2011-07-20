@@ -98,6 +98,18 @@
             <version>${project.version}</version>
         </dependency>
         
+        	<!-- GWT-OL Resources -->
+        <dependency>
+            <groupId>org.gwtopenmaps.openlayers</groupId>
+            <artifactId>gwt-openlayers-client</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.gwtopenmaps.openlayers</groupId>
+            <artifactId>gwt-openlayers-server</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>

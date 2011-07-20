@@ -78,8 +78,13 @@
 		<!-- GWT-OL Resources -->
         <dependency>
             <groupId>org.gwtopenmaps.openlayers</groupId>
-            <artifactId>openlayers_gwt</artifactId>
-            <version>0.6-SNAPSHOT</version>
+            <artifactId>gwt-openlayers-client</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.gwtopenmaps.openlayers</groupId>
+            <artifactId>gwt-openlayers-server</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>

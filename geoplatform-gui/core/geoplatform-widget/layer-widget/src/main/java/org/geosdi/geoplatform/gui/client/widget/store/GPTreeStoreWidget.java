@@ -80,6 +80,9 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
     private DeselectGridElementEvent deselectEvent = new DeselectGridElementEvent();
     private VisitorAddElement visitorAdd = new VisitorAddElement();
     private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
+    //
+    private final static int LAYERS_FROM_CAPABILITIES = 1;
+    private final static int LAYERS_FROM_PUBLISHER = 2;
 
     /*
      * @param theTree 
@@ -90,92 +93,12 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
 
     @Override
     public void addRasterLayersfromCapabilities(List<? extends GPLayerBean> layers) {
-        if (layers.size() > 0) {
-            this.changeProgressBarMessage(
-                    "Loading " + layers.size() + " Raster Layers into the Store");
-            GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
-            super.tree.setExpanded(parentDestination, true);
-            List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
-            GPRasterLayerGrid layer = null;
-            StringBuilder existingLayers = new StringBuilder();
-            boolean duplicatedLayer = false;
-            for (Iterator it = layers.iterator(); it.hasNext();) {
-                duplicatedLayer = false;
-                layer = (GPRasterLayerGrid) it.next();
-                for (ModelData element : parentDestination.getChildren()) {
-                    if (element != null && element instanceof RasterTreeNode
-                            && ((RasterTreeNode) element).getName().equals(layer.getName())) {
-                        existingLayers.append(layer.getLabel());
-                        existingLayers.append("\n");
-                        duplicatedLayer = true;
-                        break;
-                    }
-                }
-                if (!duplicatedLayer) {
-                    layerList.add(this.convertGPRasterBeanModelToRasterTreeNode(layer));
-                }
-            }
-            if (layerList.size() > 0) {
-                this.tree.getStore().insert(parentDestination, layerList, 0, true);
-                this.visitorAdd.insertLayerElements(layerList, parentDestination);
-                MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
-                mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(layerList));
-                mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
-                GPLayerSaveCache.getInstance().add(mementoSaveLayer);
-                this.featureInfoAddLayersEvent.setUrlServers(layers.get(0).getDataSource());
-                MapHandlerManager.fireEvent(this.featureInfoAddLayersEvent);
-            }
-            LayerHandlerManager.fireEvent(deselectEvent);
-            if (existingLayers.length() != 0) {
-                GeoPlatformMessage.alertMessage("Add Layers Notification",
-                        "The following layers will not be added to the tree because they already exsists in this folder:"
-                        + "\n" + existingLayers);
-            }
-        }
+        this.addRasterLayers(layers, LAYERS_FROM_CAPABILITIES);
     }
 
     @Override
     public void addRasterLayersfromPublisher(List<? extends GPLayerBean> layers) {
-        if (layers.size() > 0) {
-            this.changeProgressBarMessage(
-                    "Loading " + layers.size() + " Raster Layers into the Store");
-            GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
-            super.tree.setExpanded(parentDestination, true);
-            List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
-            StringBuilder existingLayers = new StringBuilder();
-            boolean duplicatedLayer = false;
-            for (GPLayerBean layer : layers) {
-                duplicatedLayer = false;
-                for (ModelData element : parentDestination.getChildren()) {
-                    if (element != null && element instanceof RasterTreeNode
-                            && ((RasterTreeNode) element).getName().equals(layer.getName())) {
-                        existingLayers.append(layer.getName());
-                        existingLayers.append("\n");
-                        duplicatedLayer = true;
-                        break;
-                    }
-                }
-                if (!duplicatedLayer) {
-                    layerList.add(this.generateRasterTreeNodeFromLayerBaseProperties(layer));
-                }
-            }
-            if (layerList.size() > 0) {
-                this.tree.getStore().insert(parentDestination, layerList, 0, true);
-                this.visitorAdd.insertLayerElements(layerList, parentDestination);
-                MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
-                mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(layerList));
-                mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
-                GPLayerSaveCache.getInstance().add(mementoSaveLayer);
-                this.featureInfoAddLayersEvent.setUrlServers(layers.get(0).getDataSource());
-                MapHandlerManager.fireEvent(this.featureInfoAddLayersEvent);
-            }
-            LayerHandlerManager.fireEvent(deselectEvent);
-            if (existingLayers.length() != 0) {
-                GeoPlatformMessage.alertMessage("Add Layers Notification",
-                        "The following layers will not be added to the tree because they already exsists in this folder:"
-                        + "\n" + existingLayers);
-            }
-        }
+        this.addRasterLayers(layers, LAYERS_FROM_PUBLISHER);
     }
 
     @Override
@@ -183,47 +106,10 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    private RasterTreeNode generateRasterTreeNodeFromLayerBaseProperties(GPLayerBean layer) {
-        RasterTreeNode raster = new RasterTreeNode();
-        raster.setAbstractText(layer.getName());
-        raster.setBbox(layer.getBbox());
-        raster.setTitle(layer.getName());
-        raster.setChecked(false);
-        raster.setCrs(layer.getCrs());
-        raster.setDataSource(layer.getDataSource());
-        raster.setLabel(layer.getName());
-        raster.setLayerType(layer.getLayerType());
-        raster.setName(layer.getCrs() + ":" + layer.getName());
-//        raster.setStyles(rasterBean.getStyles());
-//        raster.setzIndex(rasterBean.getzIndex());
-        return raster;
-    }
-
-    private RasterTreeNode convertGPRasterBeanModelToRasterTreeNode(GPRasterLayerGrid rasterBean) {
-        RasterTreeNode raster = new RasterTreeNode();
-        raster.setAbstractText(rasterBean.getAbstractText());
-        raster.setBbox(rasterBean.getBbox());
-        raster.setTitle(rasterBean.getTitle());
-        raster.setChecked(false);
-        raster.setCrs(rasterBean.getCrs());
-        raster.setDataSource(rasterBean.getDataSource());
-        raster.setLabel(rasterBean.getLabel());
-        raster.setLayerType(rasterBean.getLayerType());
-        raster.setName(rasterBean.getName());
-        raster.setStyles(rasterBean.getStyles());
-        raster.setzIndex(rasterBean.getzIndex());
-        return raster;
-    }
-
     @Override
     public void addVectorLayersfromCapabilities(List<? extends GPLayerBean> layers) {
         this.changeProgressBarMessage("Load Vector Layers in the Store");
         System.out.println("ADD VECTORS *********************** " + layers);
-    }
-
-    private void changeProgressBarMessage(String message) {
-        layersTextEvent.setMessage(message);
-        LayerHandlerManager.fireEvent(layersTextEvent);
     }
 
     @Override
@@ -240,8 +126,8 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
                         if (caught.getCause() instanceof GPSessionTimeout) {
                             GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
                         } else {
-                            LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(
-                                    false));
+                            LayerHandlerManager.fireEvent(
+                                    new DisplayLayersProgressBarEvent(false));
                             GeoPlatformMessage.errorMessage("Save Layers Error",
                                     "Problems on saving the new tree state after layers creation");
                         }
@@ -260,5 +146,112 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
                         LayerHandlerManager.fireEvent(peekCacheEvent);
                     }
                 });
+    }
+
+    private void addRasterLayers(List<? extends GPLayerBean> layers, int sourceLayer) {
+        if (layers.size() > 0) {
+            this.changeProgressBarMessage("Loading " + layers.size() + " Raster Layers into the Store");
+            GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
+            super.tree.setExpanded(parentDestination, true);
+
+            List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
+            StringBuilder existingLayers = new StringBuilder();
+            for (GPLayerBean layer : layers) {
+                boolean duplicatedLayer = this.checkDuplicateLayer(layer, parentDestination);
+
+                if (duplicatedLayer) {
+                    existingLayers.append(layer.getLabel()).append("\n");
+                } else {
+                    switch (sourceLayer) {
+                        case LAYERS_FROM_CAPABILITIES:
+                            layerList.add(
+                                    this.convertGPRasterBeanModelToRasterTreeNode(
+                                    (GPRasterLayerGrid) layer));
+                            break;
+
+                        case LAYERS_FROM_PUBLISHER:
+                            layerList.add(
+                                    this.generateRasterTreeNodeFromLayerBaseProperties(
+                                    layer));
+                            break;
+                    }
+                }
+            }
+
+            this.manageUnduplicatedLayer(layerList, parentDestination, layers.get(0).getDataSource());
+            LayerHandlerManager.fireEvent(deselectEvent);
+            this.createAlertMessage(existingLayers);
+        }
+    }
+
+    private void changeProgressBarMessage(String message) {
+        layersTextEvent.setMessage(message);
+        LayerHandlerManager.fireEvent(layersTextEvent);
+    }
+
+    private boolean checkDuplicateLayer(GPLayerBean layer, GPBeanTreeModel parentDestination) {
+        for (ModelData element : parentDestination.getChildren()) {
+            if (element != null && element instanceof RasterTreeNode
+                    && ((RasterTreeNode) element).getName().equals(layer.getName())) { // TODO Title is better? (exists always)
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void manageUnduplicatedLayer(List<GPBeanTreeModel> layerList,
+            GPBeanTreeModel parentDestination, String urlServer) {
+        if (layerList.size() > 0) {
+            this.tree.getStore().insert(parentDestination, layerList, 0, true);
+            this.visitorAdd.insertLayerElements(layerList, parentDestination);
+
+            MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
+            mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(layerList));
+            mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
+            GPLayerSaveCache.getInstance().add(mementoSaveLayer);
+
+            this.featureInfoAddLayersEvent.setUrlServers(urlServer);
+            MapHandlerManager.fireEvent(this.featureInfoAddLayersEvent);
+        }
+    }
+
+    private void createAlertMessage(StringBuilder existingLayers) {
+        if (existingLayers.length() != 0) {
+            GeoPlatformMessage.alertMessage("Add Layers Notification",
+                    "The following layers will not be added to the tree because they already exsists in this folder:"
+                    + "\n" + existingLayers);
+        }
+    }
+
+    private RasterTreeNode convertGPRasterBeanModelToRasterTreeNode(GPRasterLayerGrid rasterBean) {
+        RasterTreeNode raster = new RasterTreeNode();
+        raster.setAbstractText(rasterBean.getAbstractText());
+        raster.setBbox(rasterBean.getBbox());
+        raster.setTitle(rasterBean.getTitle());
+        raster.setChecked(false);
+        raster.setCrs(rasterBean.getCrs());
+        raster.setDataSource(rasterBean.getDataSource());
+        raster.setLabel(rasterBean.getLabel());
+        raster.setLayerType(rasterBean.getLayerType());
+        raster.setName(rasterBean.getName());
+        raster.setStyles(rasterBean.getStyles());
+        raster.setzIndex(rasterBean.getzIndex());
+        return raster;
+    }
+
+    private RasterTreeNode generateRasterTreeNodeFromLayerBaseProperties(GPLayerBean layer) {
+        RasterTreeNode raster = new RasterTreeNode();
+        raster.setAbstractText(layer.getName());
+        raster.setBbox(layer.getBbox());
+        raster.setTitle(layer.getName());
+        raster.setChecked(false);
+        raster.setCrs(layer.getCrs());
+        raster.setDataSource(layer.getDataSource());
+        raster.setLabel(layer.getName());
+        raster.setLayerType(layer.getLayerType());
+        raster.setName(layer.getCrs() + ":" + layer.getName());
+//        raster.setStyles(rasterBean.getStyles());
+//        raster.setzIndex(rasterBean.getzIndex());
+        return raster;
     }
 }

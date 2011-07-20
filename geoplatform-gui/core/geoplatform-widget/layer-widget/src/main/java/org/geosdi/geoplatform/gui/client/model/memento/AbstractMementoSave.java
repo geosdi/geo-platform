@@ -50,20 +50,22 @@ import org.geosdi.geoplatform.gui.observable.Observer;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public abstract class AbstractMementoSave<T extends GPBeanTreeModel> implements IMemento<ISave>, Serializable, Observer {
+public abstract class AbstractMementoSave<T extends GPBeanTreeModel>
+        implements IMemento<ISave>, Serializable, Observer {
 
     private static final long serialVersionUID = 3466894382316001150L;
+    //
     private transient ISave saveAction;
     private transient T refBaseElement;
     private long idBaseElement;
     private transient Map<FolderTreeNode, Integer> descendantMap = new HashMap<FolderTreeNode, Integer>();
     private Map<Long, Integer> wsDescendantMap = new HashMap<Long, Integer>();
 
-    public AbstractMementoSave(ISave saveAction) {
-        this.saveAction = saveAction;
+    public AbstractMementoSave() {
     }
 
-    public AbstractMementoSave() {
+    public AbstractMementoSave(ISave saveAction) {
+        this.saveAction = saveAction;
     }
 
     public void convertMementoToWs() {

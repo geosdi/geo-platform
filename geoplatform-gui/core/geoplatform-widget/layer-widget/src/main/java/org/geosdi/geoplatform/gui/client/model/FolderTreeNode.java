@@ -55,12 +55,13 @@ import org.geosdi.geoplatform.gui.observable.Observable;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode{
+public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
 
     /**
      *
      */
     private static final long serialVersionUID = -3687415822526940729L;
+    //
     private VisitorModelConverter visitor = new VisitorModelConverter(this);
     private ObservableFolderTreeNode observable = new ObservableFolderTreeNode();
     private boolean loaded = false;
@@ -73,7 +74,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode{
     public FolderTreeNode(String label) {
         super.setLabel(label);
     }
-    
+
     public FolderTreeNode(GPFolderClientInfo folder) {
         super(folder);
         this.numberOfDescendants = folder.getNumberOfDescendants();

@@ -44,9 +44,6 @@ import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.InfoPreview;
-import org.geosdi.geoplatform.responce.PreviewElement;
-
-
 
 /**
  * @author Luca Paolino  - geoSDI

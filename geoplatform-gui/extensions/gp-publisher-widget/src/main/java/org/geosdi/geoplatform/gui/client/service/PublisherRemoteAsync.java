@@ -46,5 +46,5 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public interface PublisherRemoteAsync {
     
-    public void publishLayerPreview(List<PreviewLayer> layerList, AsyncCallback<?> callback) throws GeoPlatformException;
+    public void publishLayerPreview(List<PreviewLayer> layerList, AsyncCallback<?> callback);
 }

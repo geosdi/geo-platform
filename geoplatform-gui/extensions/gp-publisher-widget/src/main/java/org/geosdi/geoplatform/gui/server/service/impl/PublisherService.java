@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.io.FileNotFoundException;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.slf4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -60,17 +61,14 @@ import org.springframework.stereotype.Service;
 public class PublisherService implements IPublisherService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    
-    /** COMMENT THIS FOR MOMENT BECAUSE CAUSE RUNTIME ERROR **/
-//    @Autowired
+
     private GPPublisherService geoPlatformPublishClient;
 
     @Override
     public void publishLayerPreview(HttpServletRequest httpServletRequest, List<PreviewLayer> layerList) throws GeoPlatformException {
         this.getUserAlreadyFromSession(httpServletRequest);
-        
+
         /** TODO : The Service must espone a method that receives a List of Appropriate Objetc. This for atomicity transactions **/
-        
         for (PreviewLayer layerBaseProperties : layerList) {
             try {
                 geoPlatformPublishClient.publish("previews", "dataTest", layerBaseProperties.getName());
@@ -96,5 +94,14 @@ public class PublisherService implements IPublisherService {
             throw new GeoPlatformException(new GPSessionTimeout("Session Timeout"));
         }
         return user;
+    }
+
+    /**
+     * @param geoPlatformServiceClient the geoPlatformServiceClient to set
+     */
+    @Autowired
+    public void setGeoPlatformPublishClient(
+            @Qualifier("geoPlatformPublishClient") GPPublisherService geoPlatformPublishClient) {
+        this.geoPlatformPublishClient = geoPlatformPublishClient;
     }
 }

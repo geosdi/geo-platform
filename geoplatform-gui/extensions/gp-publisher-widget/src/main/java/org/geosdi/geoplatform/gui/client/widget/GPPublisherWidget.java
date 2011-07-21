@@ -202,8 +202,8 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
     public void addComponent() {
         this.addCentralPanel();
         this.addSouthPanel();
-        publishButton = new Button("Add on Tree", BasicWidgetResources.ICONS.done());
-        publishButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
+        this.publishButton = new Button("Add on Tree", BasicWidgetResources.ICONS.done());
+        this.publishButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -237,12 +237,12 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
                 } else {
                     GeoPlatformMessage.alertMessage("Shaper Preview",
                             "You can put layers into Folders only.\n"
-                            + "Please select the correct node");
+                            + "Please select the correct node from the tree.");
                 }
             }
         });
-        publishButton.disable();
-        super.addButton(publishButton);
+        this.publishButton.disable();
+        super.addButton(this.publishButton);
         Button resetButton = new Button("Reset", BasicWidgetResources.ICONS.cancel());
         resetButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
 

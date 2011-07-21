@@ -77,7 +77,6 @@ public class UploadServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException, GeoPlatformException {
-        InfoPreview infoPreview = null;
         // process only multipart requests
         if (ServletFileUpload.isMultipartContent(req)) {
             // Create a factory for disk-based file items

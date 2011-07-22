@@ -460,7 +460,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                         urlPNGPreview.setCrs(info.epsg);
                     } else {
                         logger.info("Some problems occured when publishing "+info.name+" into the "+previewWorkspace+" workspace");
-                        urlPNGPreview = new InfoPreview(info.name, "Some problems occured when publishing "+info.name+" into the "+previewWorkspace+" workspace");
+                        urlPNGPreview = new InfoPreview(info.name,"Some problems occured when publishing "+info.name+" into the "+previewWorkspace+" workspace");
                     }
                 } catch (Exception ex) {
                      logger.info("Some problems occured when publishing "+info.name+" into the "+previewWorkspace+" workspace");
@@ -470,7 +470,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                 //publish the shape in the previews workspace
             }
             else {
-                urlPNGPreview = new InfoPreview(info.name, "The data store "+info.name+" in "+previewWorkspace+" already exists");
+               urlPNGPreview = getURLPreviewByDataStoreName(info.name);
+               urlPNGPreview.setMessage("The data store "+info.name+" in "+previewWorkspace+" already exists");
             }
                 // calculate the PNG URL to return
             infoPreviewList.add(urlPNGPreview);

@@ -80,11 +80,12 @@ public class PublisherWSTest extends TestCase{
             List<InfoPreview> infoList = gppublisherService.uploadZIPInPreview(zipFile);
             for (InfoPreview info: infoList){
                 logger.info("\n **** Preview at: "+info.getWorkspace()+":"+info.getDataStoreName()+" --> "+info.getMessage());
+                logger.info("\n **** continue at: "+info.getCrs()+":"+info.getMinX()+","+info.getMinY());
             }
             logger.info("\n **** CALL TO PUBLISH ON zip_it_aeropo ");
-            logger.info("\n **** RESULT "+gppublisherService.publish("preview2", "data", "zip_it_aeropo" ));
+       //     logger.info("\n **** RESULT "+gppublisherService.publish("preview2", "data", "zip_it_aeropo" ));
             logger.info("\n **** CALL TO REMOVEFROMPREVIEW zip_it_aree_meteoclimatiche ");
-            logger.info("\n **** RESULT "+gppublisherService.removeFromPreview("zip_it_aree_meteoclimatiche"));
+        //    logger.info("\n **** RESULT "+gppublisherService.removeFromPreview("zip_it_aree_meteoclimatiche"));
             File shpFile = new File("./src/test/resources/limiti_adb_4326.shp");
             File dbfFile = new File("./src/test/resources/limiti_adb_4326.dbf");
             File shxFile = new File("./src/test/resources/limiti_adb_4326.shx");

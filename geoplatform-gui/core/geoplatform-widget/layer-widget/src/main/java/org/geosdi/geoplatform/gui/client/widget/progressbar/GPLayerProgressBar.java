@@ -50,7 +50,6 @@ public class GPLayerProgressBar extends GeoPlatformProgressBar implements
         LayerHandlerManager.addHandler(LayersProgressBarEventHandler.TYPE, this);
     }
 
-
     @Override
     public void showProgressBar(String message) {
         super.createProgressBar("GPLayer ProgressBar", message, "Loading...");
@@ -64,6 +63,10 @@ public class GPLayerProgressBar extends GeoPlatformProgressBar implements
 
     @Override
     public void updateProgressBarText(String message) {
-        this.box.updateText(message);
+        if (super.box == null) {
+            super.createProgressBar("GPLayer ProgressBar", message, "Loading...");
+        } else {
+            this.box.updateText(message);
+        }
     }
 }

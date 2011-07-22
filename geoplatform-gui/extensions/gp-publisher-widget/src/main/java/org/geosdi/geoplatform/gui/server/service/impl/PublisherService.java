@@ -43,7 +43,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.client.model.PreviewLayer;
 import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.IPublisherService;
@@ -65,13 +64,13 @@ public class PublisherService implements IPublisherService {
     private GPPublisherService geoPlatformPublishClient;
 
     @Override
-    public void publishLayerPreview(HttpServletRequest httpServletRequest, List<PreviewLayer> layerList) throws GeoPlatformException {
+    public void publishLayerPreview(HttpServletRequest httpServletRequest, List<String> layerList) throws GeoPlatformException {
         this.getUserAlreadyFromSession(httpServletRequest);
 
         /** TODO : The Service must espone a method that receives a List of Appropriate Objetc. This for atomicity transactions **/
-        for (PreviewLayer layerBaseProperties : layerList) {
+        for (String layer : layerList) {
             try {
-                geoPlatformPublishClient.publish("previews", "dataTest", layerBaseProperties.getName());
+                geoPlatformPublishClient.publish("previews", "dataTest", layer);
             } catch (ResourceNotFoundFault ex) {
                 logger.error("Error on publish shape: " + ex);
                 System.out.println("Error on publish shape: " + ex);

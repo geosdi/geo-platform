@@ -141,7 +141,7 @@ public class UploadServlet extends HttpServlet {
     private JsonObject generateJONObject(InfoPreview infoPreview) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("crs", infoPreview.getCrs());
-        jsonObject.addProperty("name", infoPreview.getDataStoreName());
+        jsonObject.addProperty("title", infoPreview.getDataStoreName());
         jsonObject.addProperty("lowerX", infoPreview.getMinX());
         jsonObject.addProperty("lowerY", infoPreview.getMinY());
         jsonObject.addProperty("upperX", infoPreview.getMaxX());

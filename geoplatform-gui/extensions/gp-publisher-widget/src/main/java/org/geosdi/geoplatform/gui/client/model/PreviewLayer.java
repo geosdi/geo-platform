@@ -50,14 +50,14 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
  * @email nazzareno.sileno@geosdi.org
  */
 public class PreviewLayer implements GPLayerBean, Serializable {
-    
+
     private static final long serialVersionUID = 1223233615230469683L;
 
     public interface PreviewLayerReader extends JsonReader<PreviewLayer> {
     }
     public static final PreviewLayerReader JSON = GWT.create(PreviewLayerReader.class);
     private String crs;
-    private String name;
+    private String title;
     private String dataSource;
     private String workspace;
     private double lowerX;
@@ -69,7 +69,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     @Transient
     private String label;
     @Transient
-    private String title;
+    private String name;
     @Transient
     private String abstractText;
     @Transient
@@ -77,8 +77,9 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     @Transient
     private GPLayerType layerType;
 
-    public PreviewLayer() {}
-    
+    public PreviewLayer() {
+    }
+
     public PreviewLayer(String label, String title, String name, String abstractText, String dataSource, String crs, BboxClientInfo bbox, GPLayerType layerType) {
         this.label = label;
         this.title = title;
@@ -122,7 +123,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
 
     @Override
     public String getName() {
-        return this.name;
+        return this.workspace + ":" + this.title;
     }
 
     @Override
@@ -162,7 +163,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
 
     @Override
     public BboxClientInfo getBbox() {
-        if(this.bbox == null){
+        if (this.bbox == null) {
             this.bbox = new BboxClientInfo(this.lowerX, this.lowerY, this.upperX, this.upperY);
         }
         return this.bbox;

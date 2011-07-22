@@ -39,7 +39,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.PreviewLayer;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
@@ -58,6 +57,6 @@ public interface PublisherRemote extends RemoteService {
         }
     }
     
-    public void publishLayerPreview(List<PreviewLayer> layerList) throws GeoPlatformException;
+    public void publishLayerPreview(List<String> layerList) throws GeoPlatformException;
 
 }

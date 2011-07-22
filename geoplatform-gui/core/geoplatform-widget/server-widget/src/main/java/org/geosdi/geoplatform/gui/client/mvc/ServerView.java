@@ -61,7 +61,7 @@ public class ServerView extends GeoPlatformView {
 
     @Override
     protected void handleEvent(AppEvent event) {
-        if (event.getType() == GeoPlatformEvents.SHOW_capabilities_SERVER_WIDGET) {
+        if (event.getType() == GeoPlatformEvents.SHOW_CAPABILITIES_SERVER_WIDGET) {
             onShowcapabilitiesServerWidget();
         }
     }

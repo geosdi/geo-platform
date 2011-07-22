@@ -37,8 +37,6 @@ package org.geosdi.geoplatform.gui.client.service;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.PreviewLayer;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -46,5 +44,5 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public interface PublisherRemoteAsync {
     
-    public void publishLayerPreview(List<PreviewLayer> layerList, AsyncCallback<?> callback);
+    public void publishLayerPreview(List<String> layerList, AsyncCallback<?> callback);
 }

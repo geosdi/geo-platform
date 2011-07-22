@@ -241,15 +241,15 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
 
     private RasterTreeNode generateRasterTreeNodeFromLayerBaseProperties(GPLayerBean layer) {
         RasterTreeNode raster = new RasterTreeNode();
-        raster.setAbstractText(layer.getName());
+        raster.setAbstractText(layer.getTitle());
         raster.setBbox(layer.getBbox());
-        raster.setTitle(layer.getName());
+        raster.setTitle(layer.getTitle());
         raster.setChecked(false);
         raster.setCrs(layer.getCrs());
         raster.setDataSource(layer.getDataSource());
-        raster.setLabel(layer.getName());
+        raster.setLabel(layer.getTitle());
         raster.setLayerType(layer.getLayerType());
-        raster.setName(layer.getCrs() + ":" + layer.getName());
+        raster.setName(layer.getName());
 //        raster.setStyles(rasterBean.getStyles());
 //        raster.setzIndex(rasterBean.getzIndex());
         return raster;

@@ -43,6 +43,8 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Label;
+import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
@@ -94,6 +96,7 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
     private GPPublishShapePreviewEvent publishShapePreviewEvent = new GPPublishShapePreviewEvent();
     private List<PreviewLayer> layerList = new ArrayList<PreviewLayer>();
     private Button publishButton;
+    private Text uploadMessage = new Text("Select a file to show in preview:");
 
     public GPPublisherWidget(boolean lazy, TreePanel theTree) {
         super(lazy);
@@ -143,7 +146,7 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
         System.out.println("wmsPreview toString: " + previewLayer);
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
-        wmsParams.setLayers(previewLayer.getWorkspace() + ":" + previewLayer.getName());
+        wmsParams.setLayers(previewLayer.getName());
         wmsParams.setStyles("");
         wmsParams.setIsTransparent(true);
 
@@ -209,7 +212,11 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
             public void componentSelected(ButtonEvent ce) {
                 if (tree.getSelectionModel().getSelectedItem() instanceof AbstractFolderTreeNode) {
                     //expander.checkNodeState();
-                    PublisherRemote.Util.getInstance().publishLayerPreview(layerList, new AsyncCallback<Object>() {
+                    List<String> layersName = new ArrayList<String>();
+                    for (PreviewLayer layer : layerList) {
+                        layersName.add(layer.getName());
+                    }
+                    PublisherRemote.Util.getInstance().publishLayerPreview(layersName, new AsyncCallback<Object>() {
 
                         @Override
                         public void onFailure(Throwable caught) {
@@ -232,6 +239,10 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
                         @Override
                         public void onSuccess(Object result) {
                             LayerHandlerManager.fireEvent(new AddRasterFromPublisherEvent(layerList));
+                            reset();
+                            LayoutManager.getInstance().getStatusMap().setStatus(
+                            "Shape\\s published successfully: remember to save the new tree state.",
+                            EnumSearchStatus.STATUS_SEARCH.toString());
                         }
                     });
                 } else {
@@ -271,8 +282,15 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
         this.southPanel.setHeight(78);
         this.southPanel.setWidth(522);
         this.southPanel.setLayout(new BorderLayout());
+        
+        BorderLayoutData uploadMessageOnTop = new BorderLayoutData(LayoutRegion.NORTH);
+        uploadMessageOnTop.setMargins(new Margins(3, 150, 0, 151));
+        uploadMessageOnTop.setSize(13);
+        this.southPanel.add(this.uploadMessage, uploadMessageOnTop);
+        
         BorderLayoutData centerFileUploader = new BorderLayoutData(LayoutRegion.CENTER);
-        centerFileUploader.setMargins(new Margins(10, 150, 9, 151));
+        centerFileUploader.setMargins(new Margins(1, 150, 9, 151));
+        
         this.southPanel.add(this.fileUploader.getComponent(), centerFileUploader);
         this.southPanel.setHeading("File uploader");
         this.southPanel.add(this.southPanel);

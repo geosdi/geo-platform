@@ -60,7 +60,7 @@ public class PublisherRemoteImpl extends RemoteServiceServlet implements Publish
     }
 
     @Override
-    public void publishLayerPreview(List<PreviewLayer> layerList) throws GeoPlatformException {
+    public void publishLayerPreview(List<String> layerList) throws GeoPlatformException {
         this.publisherService.publishLayerPreview(super.getThreadLocalRequest(), layerList);
     }
 }

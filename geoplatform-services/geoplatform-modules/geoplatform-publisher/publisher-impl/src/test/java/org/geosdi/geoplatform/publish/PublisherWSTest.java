@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.publish;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -98,6 +99,10 @@ public class PublisherWSTest extends TestCase{
                 logger.info("\n **** CALL TO PUBLISH ON Limiti_AdB_4326 files");
                 logger.info("\n **** RESULT "+gppublisherService.publish("preview2", "data", "limiti_adb_4326"));
                 }
+            List<String> listNames = new ArrayList<String>();
+            listNames.add("zip_it_augustus_ccs");
+            listNames.add("zip_it_augustus_ccs_sede");
+            logger.info("\n **** RESULT MULTIPLE PUBLISHING"+gppublisherService.publishAll("preview2", "data", listNames));
               logger.info("\n **** CALL TO GETPREVIEWDATASTORES");
             List<InfoPreview> infoList2 = gppublisherService.getPreviewDataStores();
              for (InfoPreview info: infoList2){

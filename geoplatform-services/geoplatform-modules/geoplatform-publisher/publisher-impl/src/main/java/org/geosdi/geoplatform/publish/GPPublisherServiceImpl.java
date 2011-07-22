@@ -88,7 +88,7 @@ import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.transaction.annotation.Transactional;
 
 
 
@@ -96,6 +96,7 @@ import org.slf4j.LoggerFactory;
  * @author Luca Paolino - geoSDI
  *
  */
+
 @WebService(endpointInterface = "org.geosdi.geoplatform.publish.GPPublisherService")
 public class GPPublisherServiceImpl implements GPPublisherService {
 
@@ -175,6 +176,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         RESTDataStore dataStore = reader.getDatastore(previewWorkspace, layerName);
         if (dataStore!=null) {
             this.removeLayer(layerName);
+            reload();
             boolean unpublish = publisher.unpublishFeatureType(previewWorkspace, layerName, layerName);
             reload();
             boolean remove = publisher.removeDatastore(previewWorkspace, layerName);
@@ -189,7 +191,10 @@ public class GPPublisherServiceImpl implements GPPublisherService {
           if (listInfo!=null && listInfo.get(0)!=null) epsg = listInfo.get(0).epsg;
           try {
                publish = publisher.publishShp(workspace, dataStoreName, layerName, file, epsg);
-               if (!publish) throw new ResourceNotFoundFault("Cannot publish "+layerName+" into "+workspace+":"+dataStoreName);
+               if (!publish) {
+                   logger.info("\n Cannot publish "+layerName+" into "+workspace+":"+dataStoreName);
+                   throw new ResourceNotFoundFault("Cannot publish "+layerName+" into "+workspace+":"+dataStoreName);
+               }
            } catch(FileNotFoundException e) {
                 logger.info("\n ********** File "+layerName+".zip not found");
            }
@@ -198,6 +203,17 @@ public class GPPublisherServiceImpl implements GPPublisherService {
       }
        return false;
     }
+
+    @Override
+    public boolean publishAll(String workspace, String dataStoreName, List<String> layerNames) throws ResourceNotFoundFault, FileNotFoundException {
+        for (String name: layerNames)
+            publish(workspace, dataStoreName, name);
+        return true;
+    }
+
+
+
+
 /*************************
  *
  * @param dataStoreName

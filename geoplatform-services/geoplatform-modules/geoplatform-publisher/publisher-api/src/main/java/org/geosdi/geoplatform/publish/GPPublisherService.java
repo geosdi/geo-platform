@@ -45,12 +45,14 @@ import org.codehaus.jra.HttpResource;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.InfoPreview;
 
+
 /**
  * @author Luca Paolino  - geoSDI
  *
  * Public interface to define the service operations mapped via REST
  * using CXT framework
  */
+
 @WebService(name = "GPPublisherService", targetNamespace = "http://services.geo-platform.org/")
 public interface GPPublisherService {
 
@@ -81,6 +83,14 @@ public interface GPPublisherService {
     boolean publish(@WebParam(name = "workspace") String workspace,
                     @WebParam(name = "dataStoreName") String dataStoreName,
                     @WebParam(name = "layerName") String layerName) throws ResourceNotFoundFault, FileNotFoundException;
+
+    @Get
+    @HttpResource(location = "/preview/publishAll")
+    @WebResult(name = "Result")
+    boolean publishAll(@WebParam(name = "workspace") String workspace,
+                    @WebParam(name = "dataStoreName") String dataStoreName,
+                    @WebParam(name = "layerName") List<String> layerNames) throws ResourceNotFoundFault, FileNotFoundException;
+
 
     @Get
     @HttpResource(location = "/preview/removeFromPreview")

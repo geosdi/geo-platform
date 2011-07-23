@@ -107,6 +107,13 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+        
+        <repository>
+            <id>jboss</id>
+            <name>JBoss Public Repository</name>
+            <url>http://repository.jboss.org/nexus/content/groups/public-jboss/
+            </url>
+        </repository>
 
 		<!-- Spring -->
         <repository>
@@ -656,19 +663,22 @@
 			<!-- =========================================================== -->
             <dependency>
                 <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-annotations</artifactId>
-                <version>${hibernate-annotations-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-commons-annotations</artifactId>
-                <version>${hibernate-commons-annotations-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-entitymanager</artifactId>
                 <version>${hibernate-version}</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate-version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate</artifactId>
+                <version>${hibernate-version}</version>
+            </dependency>
+
 
 			<!-- =========================================================== -->
 			<!-- HIBERNATE-SPATIAL -->
@@ -1134,15 +1144,13 @@
         <postgis-jdbc-version>1.1.6</postgis-jdbc-version>
 
         <persistence-version>1.0</persistence-version>
-        <hibernate-version>3.3.2.GA</hibernate-version>
-        <hibernate-spatial-version>1.0</hibernate-spatial-version>
-        <hibernate-annotations-version>3.3.1.GA</hibernate-annotations-version>
-        <hibernate-commons-annotations-version>3.3.0.ga</hibernate-commons-annotations-version>
+        <hibernate-version>3.6.6.Final</hibernate-version>
+        <hibernate-spatial-version>1.1</hibernate-spatial-version>
         <hibernate-generic-dao-version>1.0.0</hibernate-generic-dao-version>
         <asm-version>3.3</asm-version>
         <cglib-version>2.1_3</cglib-version>
 
-        <javassist-version>3.8.0.GA</javassist-version>
+        <javassist-version>3.12.0.GA</javassist-version>
 
         <jai-version>1.1.3</jai-version>
         <jai-imageio-version>1.1</jai-imageio-version>

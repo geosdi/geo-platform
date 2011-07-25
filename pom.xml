@@ -570,12 +570,13 @@
             </dependency>
 
 			<!-- =========================================================== -->
-			<!-- JAVAX PERSISTENCE -->
+			<!-- HIBERNATE JAVAX PERSISTENCE -->
 			<!-- =========================================================== -->
+            
             <dependency>
-                <groupId>javax.persistence</groupId>
-                <artifactId>persistence-api</artifactId>
-                <version>${persistence-version}</version>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.0-api</artifactId>
+                <version>${hibernate-persistence-version}</version>
             </dependency>
 
 			<!-- =========================================================== -->
@@ -1143,7 +1144,7 @@
         <postgresql-version>8.4-701.jdbc3</postgresql-version>
         <postgis-jdbc-version>1.1.6</postgis-jdbc-version>
 
-        <persistence-version>1.0</persistence-version>
+        <hibernate-persistence-version>1.0.1.Final</hibernate-persistence-version>
         <hibernate-version>3.6.6.Final</hibernate-version>
         <hibernate-spatial-version>1.1</hibernate-spatial-version>
         <hibernate-generic-dao-version>1.0.0</hibernate-generic-dao-version>

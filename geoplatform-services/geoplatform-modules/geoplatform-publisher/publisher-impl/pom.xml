@@ -203,49 +203,7 @@
             <artifactId>spring-tx</artifactId>
             <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-		<!-- HIBERNATE-GENERIC-DAO -->
-<!--
-        <dependency>
-            <groupId>com.googlecode.genericdao</groupId>
-            <artifactId>dao</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.genericdao</groupId>
-            <artifactId>search-hibernate</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.genericdao</groupId>
-            <artifactId>search-jpa-hibernate</artifactId>
-        </dependency>
--->
-		<!-- HIBERNATE-SPATIAL -->
- <!--
- <dependency>
-            <groupId>org.hibernatespatial</groupId>
-            <artifactId>hibernate-spatial-postgis</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
--->
+        
 		<!-- CGLIB -->
         <dependency>
             <groupId>asm</groupId>

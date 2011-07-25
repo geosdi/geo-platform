@@ -59,13 +59,15 @@ public interface GPPublisherService {
     @Get
     @HttpResource(location = "/preview/uploadZipInPreview")
     @WebResult(name = "Result")
-    List<InfoPreview> uploadZIPInPreview(@WebParam(name = "fileName") File file)
+    List<InfoPreview> uploadZIPInPreview(@WebParam(name = "userName") String userName,
+                @WebParam(name = "fileName") File file)
             throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/preview/uploadShpInPreview")
     @WebResult(name = "Result")
-    List<InfoPreview> uploadShapeInPreview(@WebParam(name = "shpFileName") File shpFile,
+    List<InfoPreview> uploadShapeInPreview(@WebParam(name = "userName") String userName,
+                        @WebParam(name = "shpFileName") File shpFile,
                        @WebParam(name = "dbfFileName") File dbfFile,
                        @WebParam(name = "shxFileName") File shxFile,
                        @WebParam(name = "prjFileName") File prjFile)
@@ -74,28 +76,40 @@ public interface GPPublisherService {
     @Get
     @HttpResource(location = "/preview/getPreviewDataStores")
     @WebResult(name = "Result")
-    List<InfoPreview> getPreviewDataStores()
+    List<InfoPreview> getPreviewDataStores(@WebParam(name = "userName") String userName)
             throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/preview/publish")
     @WebResult(name = "Result")
-    boolean publish(@WebParam(name = "workspace") String workspace,
+    boolean publish(@WebParam(name = "userName") String userName,
+                    @WebParam(name = "workspace") String workspace,
                     @WebParam(name = "dataStoreName") String dataStoreName,
                     @WebParam(name = "layerName") String layerName) throws ResourceNotFoundFault, FileNotFoundException;
 
     @Get
     @HttpResource(location = "/preview/publishAll")
     @WebResult(name = "Result")
-    boolean publishAll(@WebParam(name = "workspace") String workspace,
+    boolean publishAll(@WebParam(name = "userName") String userName,
+                    @WebParam(name = "workspace") String workspace,
                     @WebParam(name = "dataStoreName") String dataStoreName,
                     @WebParam(name = "layerName") List<String> layerNames) throws ResourceNotFoundFault, FileNotFoundException;
 
 
     @Get
+    @HttpResource(location = "/preview/publishAllofPreview")
+    @WebResult(name = "Result")
+    boolean publishAllofPreview(@WebParam(name = "userName") String userName,
+                    @WebParam(name = "workspace") String workspace,
+                    @WebParam(name = "dataStoreName") String dataStoreName
+                    ) throws ResourceNotFoundFault, FileNotFoundException;
+
+
+    @Get
     @HttpResource(location = "/preview/removeFromPreview")
     @WebResult(name = "Result")
-    boolean removeFromPreview(@WebParam(name = "dataStoreName") String dataStoreName)
+    boolean removeFromPreview(@WebParam(name = "userName") String userName,
+            @WebParam(name = "dataStoreName") String dataStoreName)
             throws ResourceNotFoundFault;
 
 }

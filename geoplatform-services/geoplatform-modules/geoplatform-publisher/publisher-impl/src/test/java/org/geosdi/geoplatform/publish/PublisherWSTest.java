@@ -78,13 +78,13 @@ public class PublisherWSTest extends TestCase{
             logger.info("\n **** START TEST");
             logger.info("\n **** CALL TO UPLOADSHAPEINPREVIEW ON prova.zip");
             File zipFile = new File("./src/test/resources/prova.zip");
-            List<InfoPreview> infoList = gppublisherService.uploadZIPInPreview(zipFile);
+            List<InfoPreview> infoList = gppublisherService.uploadZIPInPreview("luca",zipFile);
             for (InfoPreview info: infoList){
                 logger.info("\n **** Preview at: "+info.getWorkspace()+":"+info.getDataStoreName()+" --> "+info.getMessage());
                 logger.info("\n **** continue at: "+info.getCrs()+":"+info.getMinX()+","+info.getMinY());
             }
             logger.info("\n **** CALL TO PUBLISH ON zip_it_aeropo ");
-       //     logger.info("\n **** RESULT "+gppublisherService.publish("preview2", "data", "zip_it_aeropo" ));
+            logger.info("\n **** RESULT "+gppublisherService.publish("luca", "preview2", "data", "zip_it_aeropo" ));
             logger.info("\n **** CALL TO REMOVEFROMPREVIEW zip_it_aree_meteoclimatiche ");
         //    logger.info("\n **** RESULT "+gppublisherService.removeFromPreview("zip_it_aree_meteoclimatiche"));
             File shpFile = new File("./src/test/resources/limiti_adb_4326.shp");
@@ -93,18 +93,18 @@ public class PublisherWSTest extends TestCase{
             File prjFile = new File("./src/test/resources/limiti_adb_4326.prj");
             List<InfoPreview> successfullPreview = null ;
             logger.info("\n **** CALL TO UPLOADSHAPEINPREVIEW ON Limiti_AdB_4326 files");
-            successfullPreview = gppublisherService.uploadShapeInPreview(shpFile, dbfFile, shxFile, prjFile);
+            successfullPreview = gppublisherService.uploadShapeInPreview("rosanna",shpFile, dbfFile, shxFile, prjFile);
             logger.info("\n **** RESULT: "+successfullPreview);
             if (successfullPreview!=null) {
                 logger.info("\n **** CALL TO PUBLISH ON Limiti_AdB_4326 files");
-                logger.info("\n **** RESULT "+gppublisherService.publish("preview2", "data", "limiti_adb_4326"));
+                logger.info("\n **** RESULT "+gppublisherService.publish("rosanna","preview2", "data", "limiti_adb_4326"));
                 }
             List<String> listNames = new ArrayList<String>();
             listNames.add("zip_it_augustus_ccs");
             listNames.add("zip_it_augustus_ccs_sede");
-            logger.info("\n **** RESULT MULTIPLE PUBLISHING"+gppublisherService.publishAll("preview2", "data", listNames));
+            logger.info("\n **** RESULT MULTIPLE PUBLISHING"+gppublisherService.publishAll("luca","preview2", "data", listNames));
               logger.info("\n **** CALL TO GETPREVIEWDATASTORES");
-            List<InfoPreview> infoList2 = gppublisherService.getPreviewDataStores();
+            List<InfoPreview> infoList2 = gppublisherService.getPreviewDataStores("luca");
              for (InfoPreview info: infoList2){
                 logger.info("\n **** Preview at: "+info.getWorkspace()+":"+info.getDataStoreName()+" --> "+info.getMessage());
             }

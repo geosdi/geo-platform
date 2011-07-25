@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.server;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.File;
 import java.io.IOException;
@@ -57,7 +57,6 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
@@ -80,23 +79,19 @@ public class UploadServlet extends HttpServlet {
         super.doGet(req, resp);
     }
 
-    private GPUser getUserAlreadyFromSession(HttpServletRequest httpServletRequest) {
-        GPUser user = null;
-        HttpSession session = httpServletRequest.getSession();
-        Object userObj = session.getAttribute(UserLoginEnum.USER_LOGGED.toString());
-        if (userObj != null && userObj instanceof GPUser) {
-            user = (GPUser) userObj;
-        } else {
-            throw new GeoPlatformException(new GPSessionTimeout("Session Timeout"));
-        }
-        return user;
-    }
-
     @SuppressWarnings("unchecked")
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException, GeoPlatformException {
-        GPUser user = this.getUserAlreadyFromSession(req);
+        GPUser user = null;
+        HttpSession session = req.getSession();
+        Object userObj = session.getAttribute(UserLoginEnum.USER_LOGGED.toString());
+        if (userObj != null && userObj instanceof GPUser) {
+            user = (GPUser) userObj;
+        } else {
+            resp.getWriter().write("Session Timeout");
+            return; 
+        }
         // process only multipart requests
         if (ServletFileUpload.isMultipartContent(req)) {
             // Create a factory for disk-based file items
@@ -159,13 +154,11 @@ public class UploadServlet extends HttpServlet {
     }
 
     private String generateJSONObjects(List<InfoPreview> infoPreview) {
-        Type listType = new TypeToken<List<InfoPreview>>() {}.getType();
-        Gson gson = new Gson(); 
-        System.out.println("Vediam che succede: " + gson.toJson(infoPreview, listType));
-
-        //gson.fromJson(json, listType);
-        
-        return gson.toJson(infoPreview, listType);
+        Gson gson = new GsonBuilder().create();
+        Type listType = new TypeToken<List<InfoPreview>>() {
+        }.getType();
+        //Note: the name previewLayers must correspond to the field name in PreviewLayerList class
+        return "{\"previewLayers\":" + gson.toJson(infoPreview, listType) + "}";
     }
 //    private String generateJSONObjects(List<InfoPreview> infoPreview) {
 //        com.google.gson.

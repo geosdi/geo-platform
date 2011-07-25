@@ -170,11 +170,13 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
 
             @Override
             public void run() {
-                if (getGwtEventOnSuccess() != null) {
-                    LayoutManager.getInstance().getViewport().unmask();
-                    LayerHandlerManager.fireEvent(getGwtEventOnSuccess());
-                } else if (eventOnSuccess != null) {
+                if (eventOnSuccess != null) {
                     Dispatcher.forwardEvent(eventOnSuccess);
+                } else {
+                    LayoutManager.getInstance().getViewport().unmask();
+                    if (getGwtEventOnSuccess() != null) {
+                        LayerHandlerManager.fireEvent(getGwtEventOnSuccess());
+                    }
                 }
                 hide();
                 reset();

@@ -45,13 +45,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "InfoPreview")
 public class InfoPreview {
 
-    private String url = "";
+    private String dataSource = "";
     private String workspace = "";
-    private String dataStoreName = "";
-    private double minX = 0.0d;
-    private double minY = 0.0d;
-    private double maxX = 0.0d;
-    private double maxY = 0.0d;
+    private String title = "";
+    private double lowerX = 0.0d;
+    private double lowerY = 0.0d;
+    private double upperX = 0.0d;
+    private double upperY = 0.0d;
     private int width = 0;
     private int height = 0;
     private String crs = "";
@@ -61,13 +61,13 @@ public class InfoPreview {
     public InfoPreview(String url, String workspace, String dataStoreName,
             double minX, double minY, double maxX, double maxY, int width,
             int height, String crs) {
-        this.url = url;
+        this.dataSource = url;
         this.workspace = workspace;
-        this.dataStoreName = dataStoreName;
-        this.minX = minX;
-        this.minY = minY;
-        this.maxX = maxX;
-        this.maxY = maxY;
+        this.title = dataStoreName;
+        this.lowerX = minX;
+        this.lowerY = minY;
+        this.upperX = maxX;
+        this.upperY = maxY;
         this.width = width;
         this.height = height;
         this.crs = crs;
@@ -78,7 +78,7 @@ public class InfoPreview {
     }
 
     public InfoPreview(String dataStoreName, String message) {
-        this.dataStoreName = dataStoreName;
+        this.title = dataStoreName;
         this.message = message;
     }
 
@@ -99,11 +99,11 @@ public class InfoPreview {
     }
 
     public String getUrl() {
-        return url;
+        return dataSource;
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        this.dataSource = url;
     }
 
     public String getCrs() {
@@ -115,11 +115,11 @@ public class InfoPreview {
     }
 
     public String getDataStoreName() {
-        return dataStoreName;
+        return title;
     }
 
     public void setDataStoreName(String dataStoreName) {
-        this.dataStoreName = dataStoreName;
+        this.title = dataStoreName;
     }
 
     public int getHeight() {
@@ -131,35 +131,35 @@ public class InfoPreview {
     }
 
     public double getMaxX() {
-        return maxX;
+        return upperX;
     }
 
     public void setMaxX(double maxX) {
-        this.maxX = maxX;
+        this.upperX = maxX;
     }
 
     public double getMaxY() {
-        return maxY;
+        return upperY;
     }
 
     public void setMaxY(double maxY) {
-        this.maxY = maxY;
+        this.upperY = maxY;
     }
 
     public double getMinX() {
-        return minX;
+        return lowerX;
     }
 
     public void setMinX(double minX) {
-        this.minX = minX;
+        this.lowerX = minX;
     }
 
     public double getMinY() {
-        return minY;
+        return lowerY;
     }
 
     public void setMinY(double minY) {
-        this.minY = minY;
+        this.lowerY = minY;
     }
 
     public int getWidth() {

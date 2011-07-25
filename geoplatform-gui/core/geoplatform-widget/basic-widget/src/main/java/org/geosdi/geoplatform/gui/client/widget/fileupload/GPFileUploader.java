@@ -47,6 +47,7 @@ import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
 import org.geosdi.geoplatform.gui.client.event.UploadPreviewEvent;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
@@ -116,28 +117,33 @@ public class GPFileUploader {
                 // this event is fired. Assuming the service returned a
                 // response of type text/html, we can get the result text here 
                 // (see the FormPanel documentation for further explanation).
-                formPanel.reset();
                 htmlResult = event.getResults();
-                htmlResult = htmlResult.replaceAll("<pre>", "");
-                htmlResult = htmlResult.replaceAll("</pre>", "");
-                htmlResult = htmlResult.replaceAll(
-                        "<pre style=\"word-wrap: break-word; white-space: pre-wrap;\">",
-                        "");
-                if ((htmlResult != null) && !(htmlResult.equals(""))) {
-                    System.out.println("HTMLResult: " + htmlResult);
-                    previewEvent.setJsonString(htmlResult);
-                    GPHandlerManager.fireEvent(previewEvent);
-                    //done.enable();
-                    //mapPreviewWidget.drawAoiOnMap(wkt);
-                    LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Uploaded File Succesfully", EnumSearchStatus.STATUS_SEARCH.toString());
+                //Execute this code only if the session is still alive
+                if (!htmlResult.contains("Session Timeout")) {
+                    formPanel.reset();
+                    htmlResult = htmlResult.replaceAll("<pre>", "");
+                    htmlResult = htmlResult.replaceAll("</pre>", "");
+                    htmlResult = htmlResult.replaceAll(
+                            "<pre style=\"word-wrap: break-word; white-space: pre-wrap;\">",
+                            "");
+                    if ((htmlResult != null) && !(htmlResult.equals(""))) {
+                        System.out.println("HTMLResult: " + htmlResult);
+                        previewEvent.setJsonString(htmlResult);
+                        GPHandlerManager.fireEvent(previewEvent);
+                        //done.enable();
+                        //mapPreviewWidget.drawAoiOnMap(wkt);
+                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                "Uploaded File Succesfully", EnumSearchStatus.STATUS_SEARCH.toString());
+                    } else {
+                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                "Failed to Upload File.", EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                    }
                 } else {
-                    LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Failed to Upload File.", EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                    GPHandlerManager.fireEvent(new GPLoginEvent(null));
                 }
             }
         });
-    }    
+    }
 
     private boolean isValidExtensions(String fileName, GPExtensions... extensions) {
         for (GPExtensions gPExtensions : extensions) {

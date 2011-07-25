@@ -42,6 +42,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.util.Margins;
+import com.extjs.gxt.ui.client.util.SwallowEvent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.Text;
@@ -60,6 +61,7 @@ import org.geosdi.geoplatform.gui.client.event.IUploadPreviewHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.GPPublishShapePreviewEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.IGPPublishShapePreviewHandler;
 import org.geosdi.geoplatform.gui.client.model.PreviewLayer;
+import org.geosdi.geoplatform.gui.client.model.PreviewLayerList;
 import org.geosdi.geoplatform.gui.client.service.PublisherRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
@@ -129,16 +131,14 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
     @Override
     public void showLayerPreview(String jsonString) {
         this.centralPanel.removeAll();
-        StringTokenizer tokenizer = new StringTokenizer(jsonString, "}&&{", false);
-        while(tokenizer.hasMoreTokens()){
-            tokenizer.nextToken();
-        }
-        PreviewLayer previewLayer = PreviewLayer.JSON.read(jsonString);
-        previewLayer.setLayerType(GPLayerType.RASTER);
         this.layerList.clear();
-        this.layerList.add(previewLayer);
-        WMS wmsLayer = this.generateLayer(previewLayer);
-        this.shpPreviewWidget.getMapPreview().getMap().addLayer(wmsLayer);
+        PreviewLayerList previewLayers = PreviewLayerList.JSON.read(jsonString);
+        for (PreviewLayer previewLayer : previewLayers.getPreviewLayers()) {
+            previewLayer.setLayerType(GPLayerType.RASTER);
+            this.layerList.add(previewLayer);
+            WMS wmsLayer = this.generateLayer(previewLayer);
+            this.shpPreviewWidget.getMapPreview().getMap().addLayer(wmsLayer);
+        }
         this.centralPanel.add(this.shpPreviewWidget.getMapPreview());
         shpPreviewWidget.getMapPreview().getMap().zoomToExtent(bounds);
         shpPreviewWidget.getMapPreview().getMap().updateSize();
@@ -148,7 +148,6 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
     }
 
     public WMS generateLayer(PreviewLayer previewLayer) {
-        System.out.println("wmsPreview toString: " + previewLayer);
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
         wmsParams.setLayers(previewLayer.getName());
@@ -164,14 +163,12 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
 
         this.bounds.transform(new Projection(previewLayer.getCrs()), new Projection(
                 this.shpPreviewWidget.getMapPreview().getMap().getProjection()));
-        System.out.println("CRS Map: " + this.shpPreviewWidget.getMapPreview().getMap().getProjection());
-        System.out.println(bounds);
         wmsParams.setMaxExtent(bounds);
 
         WMSOptions wmsOption = new WMSOptions();
         wmsOption.setIsBaseLayer(false);
-        wmsOption.setDisplayInLayerSwitcher(false);
-        return new WMS(previewLayer.getName(), previewLayer.getDataSource() + "/wms",
+        wmsOption.setDisplayInLayerSwitcher(true);
+        return new WMS(previewLayer.getName(), previewLayer.getDataSource(),
                 wmsParams, wmsOption);
     }
 
@@ -203,7 +200,7 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
 
     @Override
     public void publishShapePreview() {
-        this.publishButton.fireEvent(Events.OnClick);
+        this.publishButton.fireEvent(Events.Select);
     }
     
     @Override
@@ -225,7 +222,6 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
 
                         @Override
                         public void onFailure(Throwable caught) {
-                            //ToDO: verify session timeout
                             if (caught.getCause() instanceof GPSessionTimeout) {
                                 GPHandlerManager.fireEvent(new GPLoginEvent(publishShapePreviewEvent));
                             } else {

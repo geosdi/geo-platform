@@ -60,26 +60,21 @@ import org.springframework.stereotype.Service;
 public class PublisherService implements IPublisherService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     private GPPublisherService geoPlatformPublishClient;
 
     @Override
     public void publishLayerPreview(HttpServletRequest httpServletRequest, List<String> layerList) throws GeoPlatformException {
         GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
-
-        /** TODO : The Service must espone a method that receives a List of Appropriate Objetc. This for atomicity transactions **/
-        for (String layer : layerList) {
-            try {
-                geoPlatformPublishClient.publish(user.getUsername(), "previews", "dataTest", layer);
-            } catch (ResourceNotFoundFault ex) {
-                logger.error("Error on publish shape: " + ex);
-                System.out.println("Error on publish shape: " + ex);
-                throw new GeoPlatformException("Error on publish shape.");
-            } catch (FileNotFoundException ex) {
-                logger.error("Error on publish shape: " + ex);
-                System.out.println("Error on publish shape: " + ex);
-                throw new GeoPlatformException("Error on publish shape.");
-            }
+        try {
+            geoPlatformPublishClient.publishAll(user.getUsername(), "previews", "dataTest", layerList);
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("Error on publish shape: " + ex);
+            System.out.println("Error on publish shape: " + ex);
+            throw new GeoPlatformException("Error on publish shape.");
+        } catch (FileNotFoundException ex) {
+            logger.error("Error on publish shape: " + ex);
+            System.out.println("Error on publish shape: " + ex);
+            throw new GeoPlatformException("Error on publish shape.");
         }
     }
 

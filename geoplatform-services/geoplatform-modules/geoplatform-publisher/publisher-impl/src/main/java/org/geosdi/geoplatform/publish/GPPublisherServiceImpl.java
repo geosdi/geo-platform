@@ -500,7 +500,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                urlPNGPreview.setMessage("The data store "+info.name+" in "+previewWorkspace+" already exists");
             }
                 // calculate the PNG URL to return
-            urlPNGPreview.setUrl(urlPNGPreview.getUrl() + "//wms");
+            urlPNGPreview.setUrl(urlPNGPreview.getUrl() + "/wms");
             infoPreviewList.add(urlPNGPreview);
         }
         return infoPreviewList;

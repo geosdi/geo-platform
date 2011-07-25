@@ -35,14 +35,18 @@
  */
 package org.geosdi.geoplatform.gui.server;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileUploadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,9 +55,12 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
+import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
+import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.publish.GPPublisherService;
 import org.geosdi.geoplatform.responce.InfoPreview;
 
@@ -73,10 +80,23 @@ public class UploadServlet extends HttpServlet {
         super.doGet(req, resp);
     }
 
+    private GPUser getUserAlreadyFromSession(HttpServletRequest httpServletRequest) {
+        GPUser user = null;
+        HttpSession session = httpServletRequest.getSession();
+        Object userObj = session.getAttribute(UserLoginEnum.USER_LOGGED.toString());
+        if (userObj != null && userObj instanceof GPUser) {
+            user = (GPUser) userObj;
+        } else {
+            throw new GeoPlatformException(new GPSessionTimeout("Session Timeout"));
+        }
+        return user;
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException, GeoPlatformException {
+        GPUser user = this.getUserAlreadyFromSession(req);
         // process only multipart requests
         if (ServletFileUpload.isMultipartContent(req)) {
             // Create a factory for disk-based file items
@@ -111,11 +131,11 @@ public class UploadServlet extends HttpServlet {
                     resp.setStatus(HttpServletResponse.SC_CREATED);
                     resp.flushBuffer();
                 }
-                List<InfoPreview> infoPreviews = this.geoPlatformPublishClient.uploadZIPInPreview(uploadedFile);
+                List<InfoPreview> infoPreviews = this.geoPlatformPublishClient.uploadZIPInPreview(user.getUsername(), uploadedFile);
                 resp.setContentType("text/x-json;charset=UTF-8");
                 resp.setHeader("Cache-Control", "no-cache");
-                JsonObject jsonObject = this.generateJONObject(infoPreviews.get(0));
-                resp.getWriter().write(jsonObject.toString());
+                String result = this.generateJSONObjects(infoPreviews);
+                resp.getWriter().write(result);
                 System.out.println("Json Response: " + resp.getWriter().toString());
                 //geoPlatformPublishClient.publish("previews", "dataTest", infoPreview.getDataStoreName());
             } catch (FileUploadException ex) {
@@ -138,16 +158,35 @@ public class UploadServlet extends HttpServlet {
         }
     }
 
-    private JsonObject generateJONObject(InfoPreview infoPreview) {
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("crs", infoPreview.getCrs());
-        jsonObject.addProperty("title", infoPreview.getDataStoreName());
-        jsonObject.addProperty("lowerX", infoPreview.getMinX());
-        jsonObject.addProperty("lowerY", infoPreview.getMinY());
-        jsonObject.addProperty("upperX", infoPreview.getMaxX());
-        jsonObject.addProperty("upperY", infoPreview.getMaxY());
-        jsonObject.addProperty("dataSource", infoPreview.getUrl());
-        jsonObject.addProperty("workspace", infoPreview.getWorkspace());
-        return jsonObject;
+    private String generateJSONObjects(List<InfoPreview> infoPreview) {
+        Type listType = new TypeToken<List<InfoPreview>>() {}.getType();
+        Gson gson = new Gson(); 
+        System.out.println("Vediam che succede: " + gson.toJson(infoPreview, listType));
+
+        //gson.fromJson(json, listType);
+        
+        return gson.toJson(infoPreview, listType);
     }
+//    private String generateJSONObjects(List<InfoPreview> infoPreview) {
+//        com.google.gson.
+//        JsonObject jsonObject = new JsonObject();
+//        String result = new String();
+//        for (InfoPreview infoPrev : infoPreview) {
+//            jsonObject = new JsonObject();
+//            jsonObject.addProperty("crs", infoPrev.getCrs());
+//            jsonObject.addProperty("title", infoPrev.getDataStoreName());
+//            jsonObject.addProperty("lowerX", infoPrev.getMinX());
+//            jsonObject.addProperty("lowerY", infoPrev.getMinY());
+//            jsonObject.addProperty("upperX", infoPrev.getMaxX());
+//            jsonObject.addProperty("upperY", infoPrev.getMaxY());
+//            jsonObject.addProperty("dataSource", infoPrev.getUrl());
+//            jsonObject.addProperty("workspace", infoPrev.getWorkspace());
+//            if (result.isEmpty()) {
+//                result = jsonObject.toString();
+//            } else {
+//                result += "&&" + jsonObject.toString();
+//            }
+//        }
+//        return result;
+//    }
 }

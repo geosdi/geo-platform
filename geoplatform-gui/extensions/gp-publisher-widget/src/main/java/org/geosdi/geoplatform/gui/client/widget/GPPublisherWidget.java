@@ -54,6 +54,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.event.IUploadPreviewHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.GPPublishShapePreviewEvent;
@@ -128,6 +129,10 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
     @Override
     public void showLayerPreview(String jsonString) {
         this.centralPanel.removeAll();
+        StringTokenizer tokenizer = new StringTokenizer(jsonString, "}&&{", false);
+        while(tokenizer.hasMoreTokens()){
+            tokenizer.nextToken();
+        }
         PreviewLayer previewLayer = PreviewLayer.JSON.read(jsonString);
         previewLayer.setLayerType(GPLayerType.RASTER);
         this.layerList.clear();

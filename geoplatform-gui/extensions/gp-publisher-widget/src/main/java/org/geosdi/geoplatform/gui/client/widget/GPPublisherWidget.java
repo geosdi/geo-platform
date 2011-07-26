@@ -86,10 +86,10 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  * @email nazzareno.sileno@geosdi.org
  */
 public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPreviewHandler,
-        IGPPublishShapePreviewHandler{
+        IGPPublishShapePreviewHandler {
 
     private TreePanel tree;
-    private boolean mapInitialized;
+//    private boolean mapInitialized;
     private ContentPanel centralPanel;
     private ShapePreviewWidget shpPreviewWidget;
     private GPFileUploader fileUploader;
@@ -116,35 +116,46 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
         setModal(false);
         setCollapsible(true);
         setPlain(true);
-        this.addListener(Events.Show, new Listener<WindowEvent>() {
-
-            @Override
-            public void handleEvent(WindowEvent be) {
-                if (mapInitialized) {
-                    shpPreviewWidget.getMapPreview().getMap().zoomToMaxExtent();
-                    shpPreviewWidget.getMapPreview().getMap().updateSize();
-                }
-            }
-        });
+//        this.addListener(Events.Show, new Listener<WindowEvent>() {
+//
+//            @Override
+//            public void handleEvent(WindowEvent be) {
+//                if (mapInitialized) {
+//                    shpPreviewWidget.getMapPreview().getMap().zoomToMaxExtent();
+//                    shpPreviewWidget.getMapPreview().getMap().updateSize();
+//                }
+//            }
+//        });
     }
 
     @Override
     public void showLayerPreview(String jsonString) {
-        this.centralPanel.removeAll();
-        this.layerList.clear();
+        StringBuilder layerProblems = new StringBuilder();
         PreviewLayerList previewLayers = PreviewLayerList.JSON.read(jsonString);
         for (PreviewLayer previewLayer : previewLayers.getPreviewLayers()) {
-            previewLayer.setLayerType(GPLayerType.RASTER);
-            this.layerList.add(previewLayer);
-            WMS wmsLayer = this.generateLayer(previewLayer);
-            this.shpPreviewWidget.getMapPreview().getMap().addLayer(wmsLayer);
+            if (!previewLayer.getMessage().contains("Some problems")) {
+                previewLayer.setLayerType(GPLayerType.RASTER);
+                this.layerList.add(previewLayer);
+                WMS wmsLayer = this.generateLayer(previewLayer);
+                this.shpPreviewWidget.getMapPreview().getMap().addLayer(wmsLayer);
+            } else {
+                layerProblems.append(previewLayer.getTitle());
+                layerProblems.append("\n");
+            }
         }
-        this.centralPanel.add(this.shpPreviewWidget.getMapPreview());
-        shpPreviewWidget.getMapPreview().getMap().zoomToExtent(bounds);
-        shpPreviewWidget.getMapPreview().getMap().updateSize();
-        this.centralPanel.layout();
-        this.publishButton.enable();
-        System.out.println("Showing the preview");
+        System.out.println("Num layers: " + this.shpPreviewWidget.getMapPreview().getMap().getNumLayers());
+        if (this.shpPreviewWidget.getMapPreview().getMap().getNumLayers() > 1) {
+            this.centralPanel.removeAll();
+            this.centralPanel.add(this.shpPreviewWidget.getMapPreview());
+            shpPreviewWidget.getMapPreview().getMap().zoomToExtent(bounds);
+            shpPreviewWidget.getMapPreview().getMap().updateSize();
+            this.centralPanel.layout();
+            this.publishButton.enable();
+        }
+        if (layerProblems.length() != 0) {
+            GeoPlatformMessage.alertMessage("Upload Shape Error", "Some problems occurred with following layers:\n"
+                    + layerProblems);
+        }
     }
 
     public WMS generateLayer(PreviewLayer previewLayer) {
@@ -159,36 +170,28 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
         Double upperX = previewLayer.getUpperX();
         Double upperY = previewLayer.getUpperY();
 
-        this.bounds = new Bounds(lowerX, lowerY, upperX, upperY);
+        Bounds layerBounds = new Bounds(lowerX, lowerY, upperX, upperY);
 
-        this.bounds.transform(new Projection(previewLayer.getCrs()), new Projection(
+        layerBounds.transform(new Projection(previewLayer.getCrs()), new Projection(
                 this.shpPreviewWidget.getMapPreview().getMap().getProjection()));
-        wmsParams.setMaxExtent(bounds);
+        wmsParams.setMaxExtent(layerBounds);
 
         WMSOptions wmsOption = new WMSOptions();
         wmsOption.setIsBaseLayer(false);
         wmsOption.setDisplayInLayerSwitcher(true);
+        this.updateMapBounds(layerBounds);
         return new WMS(previewLayer.getName(), previewLayer.getDataSource(),
                 wmsParams, wmsOption);
     }
 
-//    private PreviewLayer generateLayer(Map<String, Object> jsonMap) {
-//        String label = (String) jsonMap.get("layerName");
-//        String title = (String) jsonMap.get("layerName");
-//        String name = (String) jsonMap.get("layerName");
-//        String abstractText = (String) jsonMap.get("");
-//        String dataSource = (String) jsonMap.get("url");
-//        String crs = (String) jsonMap.get("crs");
-//        Number lowerX = (Number) jsonMap.get("lowerX");
-//        Number lowerY = (Number) jsonMap.get("lowerY");
-//        Number upperX = (Number) jsonMap.get("upperX");
-//        Number upperY = (Number) jsonMap.get("upperY");
-//        BboxClientInfo bbox = new BboxClientInfo(lowerX.doubleValue(), lowerY.doubleValue(), upperX.doubleValue(), upperY.doubleValue());
-//        PreviewLayer previewLayer = new PreviewLayer(label, title, name, abstractText, dataSource, crs, bbox, GPLayerType.RASTER);
-//
-//        //layer.setBbox(new BboxClientInfo(lowerX.doubleValue(), jsonMap.get("lowerX"), jsonMap.get("lowerX"), jsonMap.get("lowerX")));
-//        return previewLayer;
-//    }
+    private void updateMapBounds(Bounds layerBounds) {
+        if (this.bounds == null) {
+            this.bounds = layerBounds;
+        } else {
+            this.bounds.extend(layerBounds);
+        }
+    }
+
     @Override
     public void reset() {
         this.centralPanel.removeAll();
@@ -196,13 +199,16 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
         this.centralPanel.layout();
         this.publishButton.disable();
         this.fileUploader.getComponent().reset();
+        this.shpPreviewWidget.getMapPreview().getMap().removeOverlayLayers();
+        this.bounds = null;
+        this.layerList.clear();
     }
 
     @Override
     public void publishShapePreview() {
         this.publishButton.fireEvent(Events.Select);
     }
-    
+
     @Override
     public void addComponent() {
         this.addCentralPanel();
@@ -242,8 +248,8 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
                             LayerHandlerManager.fireEvent(new AddRasterFromPublisherEvent(layerList));
                             reset();
                             LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Shape\\s published successfully: remember to save the new tree state.",
-                            EnumSearchStatus.STATUS_SEARCH.toString());
+                                    "Shape\\s published successfully: remember to save the new tree state.",
+                                    EnumSearchStatus.STATUS_SEARCH.toString());
                         }
                     });
                 } else {
@@ -283,15 +289,15 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
         this.southPanel.setHeight(78);
         this.southPanel.setWidth(522);
         this.southPanel.setLayout(new BorderLayout());
-        
+
         BorderLayoutData uploadMessageOnTop = new BorderLayoutData(LayoutRegion.NORTH);
         uploadMessageOnTop.setMargins(new Margins(3, 150, 0, 151));
         uploadMessageOnTop.setSize(13);
         this.southPanel.add(this.uploadMessage, uploadMessageOnTop);
-        
+
         BorderLayoutData centerFileUploader = new BorderLayoutData(LayoutRegion.CENTER);
         centerFileUploader.setMargins(new Margins(1, 150, 9, 151));
-        
+
         this.southPanel.add(this.fileUploader.getComponent(), centerFileUploader);
         this.southPanel.setHeading("File uploader");
         this.southPanel.add(this.southPanel);
@@ -313,5 +319,4 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
         //Warning: changing window size will be necessary change panel's size also.
         super.setSize(600, 500);
     }
-
 }

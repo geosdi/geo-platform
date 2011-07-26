@@ -64,6 +64,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     private double lowerY;
     private double upperX;
     private double upperY;
+    private String message;
     @Transient
     private long id;
     @Transient
@@ -89,6 +90,21 @@ public class PreviewLayer implements GPLayerBean, Serializable {
         this.crs = crs;
         this.bbox = bbox;
         this.layerType = layerType;
+    }
+    
+    
+    /**
+     * @return the message
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * @param message the message to set
+     */
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override

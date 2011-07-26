@@ -89,7 +89,8 @@ public class UploadServlet extends HttpServlet {
         if (userObj != null && userObj instanceof GPUser) {
             user = (GPUser) userObj;
         } else {
-            resp.getWriter().write("Session Timeout");
+            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+            "Session Timeout");
             return; 
         }
         // process only multipart requests

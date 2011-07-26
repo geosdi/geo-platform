@@ -52,15 +52,13 @@ public class InfoPreview {
     private double lowerY = 0.0d;
     private double upperX = 0.0d;
     private double upperY = 0.0d;
-    private int width = 0;
-    private int height = 0;
     private String crs = "";
     private boolean isVector = true;
     private String message = "ok";
+    private String sld;
 
     public InfoPreview(String url, String workspace, String dataStoreName,
-            double minX, double minY, double maxX, double maxY, int width,
-            int height, String crs) {
+            double minX, double minY, double maxX, double maxY, String crs) {
         this.dataSource = url;
         this.workspace = workspace;
         this.title = dataStoreName;
@@ -68,10 +66,9 @@ public class InfoPreview {
         this.lowerY = minY;
         this.upperX = maxX;
         this.upperY = maxY;
-        this.width = width;
-        this.height = height;
         this.crs = crs;
         this.isVector = true;
+        this.sld = sld;
     }
 
     public InfoPreview() {
@@ -80,6 +77,14 @@ public class InfoPreview {
     public InfoPreview(String dataStoreName, String message) {
         this.title = dataStoreName;
         this.message = message;
+    }
+
+    public String getSld() {
+        return sld;
+    }
+
+    public void setSld(String sld) {
+        this.sld = sld;
     }
 
     public String getMessage() {
@@ -122,13 +127,6 @@ public class InfoPreview {
         this.title = dataStoreName;
     }
 
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
 
     public double getMaxX() {
         return upperX;
@@ -162,13 +160,6 @@ public class InfoPreview {
         this.lowerY = minY;
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
 
     public String getWorkspace() {
         return workspace;

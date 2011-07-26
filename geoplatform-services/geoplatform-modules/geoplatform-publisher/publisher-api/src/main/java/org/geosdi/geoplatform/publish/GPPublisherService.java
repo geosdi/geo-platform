@@ -70,7 +70,8 @@ public interface GPPublisherService {
                         @WebParam(name = "shpFileName") File shpFile,
                        @WebParam(name = "dbfFileName") File dbfFile,
                        @WebParam(name = "shxFileName") File shxFile,
-                       @WebParam(name = "prjFileName") File prjFile)
+                       @WebParam(name = "prjFileName") File prjFile,
+                       @WebParam(name = "sldFileName") File sldFile)
             throws ResourceNotFoundFault;
 
     @Get
@@ -86,6 +87,7 @@ public interface GPPublisherService {
                     @WebParam(name = "workspace") String workspace,
                     @WebParam(name = "dataStoreName") String dataStoreName,
                     @WebParam(name = "layerName") String layerName) throws ResourceNotFoundFault, FileNotFoundException;
+
 
     @Get
     @HttpResource(location = "/preview/publishAll")

@@ -89,7 +89,7 @@ public interface GPPublisherService {
     boolean createSHP(@WebParam(name = "userName") String userName,
                       @WebParam(name = "featureList") List<Feature> list,
                       @WebParam(name = "shpFileName") String shpFileName)
-            throws ResourceNotFoundFault;
+            throws ResourceNotFoundFault, Exception;
 
 
     @Get

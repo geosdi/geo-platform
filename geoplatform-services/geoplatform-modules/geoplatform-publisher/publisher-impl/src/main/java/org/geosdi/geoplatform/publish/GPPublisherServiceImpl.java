@@ -51,6 +51,10 @@ import it.geosolutions.geoserver.rest.decoder.RESTDataStoreList;
 import it.geosolutions.geoserver.rest.decoder.utils.NameLinkElem;
 
 import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.io.ParseException;
+import com.vividsolutions.jts.io.WKTReader;
 import org.geosdi.geoplatform.request.Feature;
 import org.geotools.geometry.jts.JTS;
 import java.io.FileInputStream;
@@ -247,10 +251,21 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     }
 
     @Override
-    public boolean createSHP(String userName, List<Feature> list, String shpFileName) throws ResourceNotFoundFault {
+    public boolean createSHP(String userName, List<Feature> list, String shpFileName) throws ResourceNotFoundFault, Exception {
         SimpleFeatureTypeBuilder typeBuilder = new SimpleFeatureTypeBuilder();
+        logger.info("\n CREATE SHP SCHEMA");
       //  fb.set("the_geom", geom);
         if (list.size()>0) {
+            GeometryFactory geometryFactory = new GeometryFactory();
+
+            WKTReader reader = new WKTReader( geometryFactory );
+            try {
+                 Geometry geometry = reader.read(list.get(0).getWkt());
+                 typeBuilder.setDefaultGeometry("the_geom");
+                 typeBuilder.add("the_geom", geometry.getClass());
+            } catch (ParseException e) { 
+                throw new ResourceNotFoundFault("Cannot identify the geometry class");
+            }
             List<Attribute> attributes = list.get(0).getAttributes();
             for (Attribute attribute: attributes) {
                 Class clazz = null;
@@ -271,32 +286,28 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                 }
                 typeBuilder.add(attribute.getName(), clazz);
             }
-            typeBuilder.add("the_geom", Geometry.class);
-        }
-        try {
-            String tempUserDir = createDir(userName);
-            ShapefileDataStoreFactory dataStoreFactory = new ShapefileDataStoreFactory();
-            Map<String, Serializable> params = new HashMap<String, Serializable>();
-            File newFile = new File(tempUserDir + shpFileName);
-            params.put("url", newFile.toURI().toURL());
-            params.put("create spatial index", Boolean.TRUE);
-            ShapefileDataStore newDataStore = (ShapefileDataStore) dataStoreFactory.createNewDataStore(params);
-            newDataStore.forceSchemaCRS(DefaultGeographicCRS.WGS84);
 
-            //        newDataStore.createSchema(TYPE);
-
-        } catch (MalformedURLException ex) {
-            throw new  ResourceNotFoundFault("Malformed URL Exception");
         }
-        catch(IOException ex){
-            throw new  ResourceNotFoundFault("IO Exception");
-        }
+        logger.info("\n  SHP SCHEMA SUCCESSFULLY CREATED ");
+        typeBuilder.setName("SHP_CREATION");
+        logger.info("\n  START COLLECTION CREATION ");
         SimpleFeatureBuilder fb = new SimpleFeatureBuilder(typeBuilder.buildFeatureType());
         SimpleFeatureCollection result = FeatureCollections.newCollection();
+        GeometryFactory geometryFactory = new GeometryFactory();
+        WKTReader reader = new WKTReader( geometryFactory );
+        Geometry geometry = null;
+        int featureID = 0;
         for (Feature feature: list) {
             List<Attribute> attributes = feature.getAttributes();
+            try {
+                 geometry = reader.read(feature.getWkt());
+            } catch (ParseException e) { 
+                continue;
+            }
+            fb.set("the_geom",geometry);
             for (Attribute attribute: attributes) {
                 Object value = null;
+                logger.info("Name: "+attribute.getName()+" type:"+attribute.getType()+" value: "+attribute.getValue());
                 if (attribute.getType().equals("int")) {
                     value = new Integer(Integer.parseInt(attribute.getValue()));
                 }
@@ -310,9 +321,63 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                     value = attribute.getValue();
                 }
                 fb.set(attribute.getName(), value);
+                result.add(fb.buildFeature("feature_"+(featureID++)));
             }
 
 
+        }
+        logger.info("\n  STOP COLLECTION CREATION ");
+        logger.info("\n  START SHP FILE CREATION ");
+        FeatureWriter<SimpleFeatureType, SimpleFeature> writer = null;
+        SimpleFeatureIterator iterator = null;
+        Transaction transaction = null;
+        try {
+            String tempUserDir = createDir(userName);
+            ShapefileDataStoreFactory dataStoreFactory = new ShapefileDataStoreFactory();
+            Map<String, Serializable> params = new HashMap<String, Serializable>();
+            String shpFullPathName = tempUserDir + shpFileName;
+            logger.info("SHP FULL PATH NAME "+shpFullPathName);
+            File newFile = new File(shpFullPathName);
+            params.put("url", newFile.toURI().toURL());
+            params.put("create spatial index", Boolean.TRUE);
+            ShapefileDataStore newDataStore = (ShapefileDataStore) dataStoreFactory.createNewDataStore(params);
+            newDataStore.forceSchemaCRS(DefaultGeographicCRS.WGS84);
+            logger.info("\n  START SHP FILE CREATION prima");
+            logger.info("SCHEMA count"+result.getSchema().getAttributeCount());
+
+            newDataStore.createSchema(result.getSchema()); // DA ECCEZIONE
+            logger.info("\n  START SHP FILE CREATION dopo");
+            writer = newDataStore.getFeatureWriter(Transaction.AUTO_COMMIT);
+            iterator = result.features();
+            transaction = new DefaultTransaction("Reproject");
+            while(iterator.hasNext() ){
+                // copy the contents of each feature and transform the geometry
+                SimpleFeature feature = iterator.next();
+                SimpleFeature copy = writer.next();
+                copy.setAttributes( feature.getAttributes() );
+
+                Geometry geometrySource = (Geometry) feature.getDefaultGeometry();
+                copy.setDefaultGeometry( geometrySource );
+                writer.write();
+            }
+            transaction.commit();
+            logger.info("\n  STOP SHP FILE CREATION ");
+        } catch (MalformedURLException ex) {
+            throw new  ResourceNotFoundFault("Malformed URL Exception");
+        }
+        catch(IOException ex){
+            ex.printStackTrace();
+            throw new  ResourceNotFoundFault("IO Exception");
+        }
+        catch(Exception ex){
+            if (transaction!=null) transaction.rollback();
+            ex.printStackTrace();
+            throw new  ResourceNotFoundFault("Exception");
+        }
+        finally {
+            if (writer!=null) writer.close();
+            if (iterator!=null)iterator.close();
+            if (transaction!=null)transaction.close();
         }
         return true;
     }

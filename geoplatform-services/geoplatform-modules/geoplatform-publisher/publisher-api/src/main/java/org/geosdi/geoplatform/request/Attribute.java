@@ -45,6 +45,13 @@ package org.geosdi.geoplatform.request;
         String value;
         String type;
 
+    public Attribute(String name, String value, String type) {
+        this.name = name;
+        this.value = value;
+        this.type = type;
+    }
+
+
     public String getName() {
         return name;
     }

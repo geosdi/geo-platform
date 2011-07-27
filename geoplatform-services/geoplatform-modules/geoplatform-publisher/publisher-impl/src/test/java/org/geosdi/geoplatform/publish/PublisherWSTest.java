@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.publish;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +44,8 @@ import org.slf4j.Logger;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.Attribute;
+import org.geosdi.geoplatform.request.Feature;
 import org.geosdi.geoplatform.responce.InfoPreview;
 
 import org.junit.Test;
@@ -71,6 +72,27 @@ public class PublisherWSTest extends TestCase{
     @Autowired
     private GPPublisherService gppublisherService;
 
+    @Test
+    public void testWS(){
+        Assert.assertNotNull(gppublisherService);
+        try {
+            Attribute attribute1 = new Attribute("int","1", "int");
+            Attribute attribute2 = new Attribute("String","1", "String");
+            List<Attribute> attributeList1 = new ArrayList<Attribute>();
+            attributeList1.add(attribute1);
+            attributeList1.add(attribute2);
+            Feature feature = new Feature("POINT(1 1)", attributeList1);
+            List<Feature> featureList = new ArrayList<Feature>();
+            featureList.add(feature);
+            gppublisherService.createSHP("luca", featureList, "feature.shp");
+        }
+        catch (Exception ex) {
+                logger.error("\n **** Generic exception"+ex.getMessage());
+                ex.printStackTrace();
+        }
+    }
+
+/*
     @Test
     public void testWS() {
         Assert.assertNotNull(gppublisherService);
@@ -115,14 +137,15 @@ public class PublisherWSTest extends TestCase{
                 logger.error("\n **** Eccezione nella pubblicazione: "+ex.getMessage());
                 System.out.println("\n **** Eccezione nella pubblicazione: "+ex.getMessage());
             }
-     /*       catch (FileNotFoundException ex) {
+            catch (FileNotFoundException ex) {
                 logger.error("\n **** File zip non trovato");
                 System.out.println("\n **** Eccezione nella pubblicazione: "+ex.getMessage());
-            }*/
+            }
             catch (Exception ex) {
                 logger.error("\n **** Generic exception"+ex.getMessage());
                 ex.printStackTrace();
                 
             }
-    }
+    }*/
+
 }

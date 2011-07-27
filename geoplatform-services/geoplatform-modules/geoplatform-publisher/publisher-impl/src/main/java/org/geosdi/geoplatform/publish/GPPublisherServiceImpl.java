@@ -362,6 +362,17 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             }
             transaction.commit();
             logger.info("\n  STOP SHP FILE CREATION ");
+            String tempUserZipDir = createZIPDir(userName);
+            String name = shpFileName.substring(0, shpFileName.length()-4);
+            ZipOutputStream out = new ZipOutputStream(new FileOutputStream(tempUserZipDir +name+".zip"));
+            out = compress(out, new File(tempUserDir+name+".shp"));
+            out = compress(out, new File(tempUserDir+name+".dbf"));
+            out = compress(out, new File(tempUserDir+name+".shx"));
+            out = compress(out, new File(tempUserDir+name+".prj"));
+            out.close();
+//            File compressedFile = new File(tempUserZipDir + name+".zip");
+//            return uploadZIPInPreview(userName, compressedFile);
+
         } catch (MalformedURLException ex) {
             throw new  ResourceNotFoundFault("Malformed URL Exception");
         }
@@ -375,9 +386,9 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             throw new  ResourceNotFoundFault("Exception");
         }
         finally {
-            if (writer!=null) writer.close();
-            if (iterator!=null)iterator.close();
-            if (transaction!=null)transaction.close();
+            writer.close();
+            iterator.close();
+            transaction.close();
         }
         return true;
     }

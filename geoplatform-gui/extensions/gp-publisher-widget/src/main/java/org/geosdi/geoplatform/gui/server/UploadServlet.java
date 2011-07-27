@@ -56,11 +56,11 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
-import org.geosdi.geoplatform.publish.GPPublisherService;
 import org.geosdi.geoplatform.responce.InfoPreview;
 
 /**
@@ -71,7 +71,8 @@ public class UploadServlet extends HttpServlet {
 
     private static final long serialVersionUID = -1464439864247709647L;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private GPPublisherService geoPlatformPublishClient = (GPPublisherService) GeoPlatformContextUtil.getInstance().getBean("geoPlatformPublishClient");
+    private GeoPlatformPublishClient geoPlatformPublishClient = (GeoPlatformPublishClient) GeoPlatformContextUtil.getInstance().getBean(
+            "geoPlatformPublishClient");
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -85,13 +86,14 @@ public class UploadServlet extends HttpServlet {
             throws ServletException, IOException, GeoPlatformException {
         GPUser user = null;
         HttpSession session = req.getSession();
-        Object userObj = session.getAttribute(UserLoginEnum.USER_LOGGED.toString());
+        Object userObj = session.getAttribute(
+                UserLoginEnum.USER_LOGGED.toString());
         if (userObj != null && userObj instanceof GPUser) {
             user = (GPUser) userObj;
         } else {
             resp.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-            "Session Timeout");
-            return; 
+                    "Session Timeout");
+            return;
         }
         // process only multipart requests
         if (ServletFileUpload.isMultipartContent(req)) {
@@ -117,22 +119,26 @@ public class UploadServlet extends HttpServlet {
                     try {
                         item.write(uploadedFile);
                     } catch (Exception ex) {
-                        resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                        resp.sendError(
+                                HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                                 "An error occurred writing the file: "
                                 + ex.getMessage());
                         System.out.println("An error occurred writing the file: "
                                 + ex.getMessage());
-                        throw new GeoPlatformException("Error on uploading shape.");
+                        throw new GeoPlatformException(
+                                "Error on uploading shape.");
                     }
                     resp.setStatus(HttpServletResponse.SC_CREATED);
                     resp.flushBuffer();
                 }
-                List<InfoPreview> infoPreviews = this.geoPlatformPublishClient.uploadZIPInPreview(user.getUsername(), uploadedFile);
+                List<InfoPreview> infoPreviews = this.geoPlatformPublishClient.getPublishService().uploadZIPInPreview(
+                        user.getUsername(), uploadedFile);
                 resp.setContentType("text/x-json;charset=UTF-8");
                 resp.setHeader("Cache-Control", "no-cache");
                 String result = this.generateJSONObjects(infoPreviews);
                 resp.getWriter().write(result);
-                System.out.println("Json Response: " + resp.getWriter().toString());
+                System.out.println(
+                        "Json Response: " + resp.getWriter().toString());
                 //geoPlatformPublishClient.publish("previews", "dataTest", infoPreview.getDataStoreName());
             } catch (FileUploadException ex) {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
@@ -161,26 +167,4 @@ public class UploadServlet extends HttpServlet {
         //Note: the name previewLayers must correspond to the field name in PreviewLayerList class
         return "{\"previewLayers\":" + gson.toJson(infoPreview, listType) + "}";
     }
-//    private String generateJSONObjects(List<InfoPreview> infoPreview) {
-//        com.google.gson.
-//        JsonObject jsonObject = new JsonObject();
-//        String result = new String();
-//        for (InfoPreview infoPrev : infoPreview) {
-//            jsonObject = new JsonObject();
-//            jsonObject.addProperty("crs", infoPrev.getCrs());
-//            jsonObject.addProperty("title", infoPrev.getDataStoreName());
-//            jsonObject.addProperty("lowerX", infoPrev.getMinX());
-//            jsonObject.addProperty("lowerY", infoPrev.getMinY());
-//            jsonObject.addProperty("upperX", infoPrev.getMaxX());
-//            jsonObject.addProperty("upperY", infoPrev.getMaxY());
-//            jsonObject.addProperty("dataSource", infoPrev.getUrl());
-//            jsonObject.addProperty("workspace", infoPrev.getWorkspace());
-//            if (result.isEmpty()) {
-//                result = jsonObject.toString();
-//            } else {
-//                result += "&&" + jsonObject.toString();
-//            }
-//        }
-//        return result;
-//    }
 }

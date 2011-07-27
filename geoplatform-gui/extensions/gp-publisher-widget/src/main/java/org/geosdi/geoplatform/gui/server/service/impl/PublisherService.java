@@ -42,12 +42,12 @@ import org.slf4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.IPublisherService;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
-import org.geosdi.geoplatform.publish.GPPublisherService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,13 +60,13 @@ import org.springframework.stereotype.Service;
 public class PublisherService implements IPublisherService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private GPPublisherService geoPlatformPublishClient;
+    private GeoPlatformPublishClient geoPlatformPublishClient;
 
     @Override
     public void publishLayerPreview(HttpServletRequest httpServletRequest, List<String> layerList) throws GeoPlatformException {
         GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
         try {
-            geoPlatformPublishClient.publishAll(user.getUsername(), "previews", "dataTest", layerList);
+            geoPlatformPublishClient.getPublishService().publishAll(user.getUsername(), "previews", "dataTest", layerList);
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error on publish shape: " + ex);
             System.out.println("Error on publish shape: " + ex);
@@ -95,7 +95,7 @@ public class PublisherService implements IPublisherService {
      */
     @Autowired
     public void setGeoPlatformPublishClient(
-            @Qualifier("geoPlatformPublishClient") GPPublisherService geoPlatformPublishClient) {
+            @Qualifier("geoPlatformPublishClient") GeoPlatformPublishClient geoPlatformPublishClient) {
         this.geoPlatformPublishClient = geoPlatformPublishClient;
     }
 }

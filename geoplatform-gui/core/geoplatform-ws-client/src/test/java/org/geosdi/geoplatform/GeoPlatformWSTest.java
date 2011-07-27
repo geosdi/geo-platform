@@ -36,9 +36,9 @@
 package org.geosdi.geoplatform;
 
 import junit.framework.Assert;
+import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 
 import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.geosdi.geoplatform.publish.GPPublisherService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +58,7 @@ public class GeoPlatformWSTest {
     private GeoPlatformService geoPlatformServiceClient;
     
     @Autowired
-    private GPPublisherService geoPlatformPublishClient;
+    private GeoPlatformPublishClient geoPlatformPublishClient;
 
     @Test
     public void testWS() {

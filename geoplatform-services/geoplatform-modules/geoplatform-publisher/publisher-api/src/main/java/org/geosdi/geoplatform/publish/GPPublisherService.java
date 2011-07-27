@@ -42,7 +42,9 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
+import org.codehaus.jra.Post;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.Feature;
 import org.geosdi.geoplatform.responce.InfoPreview;
 
 
@@ -79,6 +81,16 @@ public interface GPPublisherService {
     @WebResult(name = "Result")
     List<InfoPreview> getPreviewDataStores(@WebParam(name = "userName") String userName)
             throws ResourceNotFoundFault;
+
+
+    @Post
+    @HttpResource(location = "/preview/createSHP")
+    @WebResult(name = "Result")
+    boolean createSHP(@WebParam(name = "userName") String userName,
+                      @WebParam(name = "featureList") List<Feature> list,
+                      @WebParam(name = "shpFileName") String shpFileName)
+            throws ResourceNotFoundFault;
+
 
     @Get
     @HttpResource(location = "/preview/publish")

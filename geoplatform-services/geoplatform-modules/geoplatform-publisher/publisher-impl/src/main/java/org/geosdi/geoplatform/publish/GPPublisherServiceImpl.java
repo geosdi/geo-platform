@@ -51,6 +51,7 @@ import it.geosolutions.geoserver.rest.decoder.RESTDataStoreList;
 import it.geosolutions.geoserver.rest.decoder.utils.NameLinkElem;
 
 import com.vividsolutions.jts.geom.Geometry;
+import org.geosdi.geoplatform.request.Feature;
 import org.geotools.geometry.jts.JTS;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -65,6 +66,7 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.Attribute;
 import org.geosdi.geoplatform.responce.InfoPreview;
 
 import org.geotools.data.simple.SimpleFeatureIterator;
@@ -78,8 +80,12 @@ import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.data.shapefile.ShapefileDataStoreFactory;
 import org.geotools.data.DataStoreFactorySpi;
+import org.geotools.data.shapefile.ShapefileDataStore;
+import org.geotools.feature.FeatureCollections;
+import org.geotools.feature.simple.SimpleFeatureBuilder;
 import org.geotools.referencing.CRS;
 import org.geotools.feature.simple.SimpleFeatureTypeBuilder;
+import org.geotools.referencing.crs.DefaultGeographicCRS;
 import org.opengis.feature.simple.SimpleFeatureType;
 
 import org.opengis.feature.simple.SimpleFeature;
@@ -88,7 +94,6 @@ import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
 
 
 
@@ -109,6 +114,9 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         String epsg;
         String sld;
     }
+
+
+
 
     private String RESTURL  = "";
     private String RESTUSER = "";
@@ -237,6 +245,80 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     public boolean publishAllofPreview(String userName, String workspace, String dataStoreName) throws ResourceNotFoundFault, FileNotFoundException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public boolean createSHP(String userName, List<Feature> list, String shpFileName) throws ResourceNotFoundFault {
+        SimpleFeatureTypeBuilder typeBuilder = new SimpleFeatureTypeBuilder();
+      //  fb.set("the_geom", geom);
+        if (list.size()>0) {
+            List<Attribute> attributes = list.get(0).getAttributes();
+            for (Attribute attribute: attributes) {
+                Class clazz = null;
+                if (attribute.getType().equals("int")) {
+                    clazz = Integer.class;
+                }
+                if (attribute.getType().equals("double")) {
+                    clazz = Double.class;
+                }
+                if (attribute.getType().equals("float")) {
+                    clazz = Float.class;
+                }
+                if (attribute.getType().equals("String")) {
+                    clazz = String.class;
+                }
+                if (attribute.getType().equals("char")) {
+                    clazz = Character.class;
+                }
+                typeBuilder.add(attribute.getName(), clazz);
+            }
+            typeBuilder.add("the_geom", Geometry.class);
+        }
+        try {
+            String tempUserDir = createDir(userName);
+            ShapefileDataStoreFactory dataStoreFactory = new ShapefileDataStoreFactory();
+            Map<String, Serializable> params = new HashMap<String, Serializable>();
+            File newFile = new File(tempUserDir + shpFileName);
+            params.put("url", newFile.toURI().toURL());
+            params.put("create spatial index", Boolean.TRUE);
+            ShapefileDataStore newDataStore = (ShapefileDataStore) dataStoreFactory.createNewDataStore(params);
+            newDataStore.forceSchemaCRS(DefaultGeographicCRS.WGS84);
+
+            //        newDataStore.createSchema(TYPE);
+
+        } catch (MalformedURLException ex) {
+            throw new  ResourceNotFoundFault("Malformed URL Exception");
+        }
+        catch(IOException ex){
+            throw new  ResourceNotFoundFault("IO Exception");
+        }
+        SimpleFeatureBuilder fb = new SimpleFeatureBuilder(typeBuilder.buildFeatureType());
+        SimpleFeatureCollection result = FeatureCollections.newCollection();
+        for (Feature feature: list) {
+            List<Attribute> attributes = feature.getAttributes();
+            for (Attribute attribute: attributes) {
+                Object value = null;
+                if (attribute.getType().equals("int")) {
+                    value = new Integer(Integer.parseInt(attribute.getValue()));
+                }
+                if (attribute.getType().equals("double")) {
+                    value = new Double(Double.parseDouble(attribute.getValue()));
+                }
+                if (attribute.getType().equals("float")) {
+                    value = new Float(Float.parseFloat(attribute.getValue()));
+                }
+                if (attribute.getType().equals("String")) {
+                    value = attribute.getValue();
+                }
+                fb.set(attribute.getName(), value);
+            }
+
+
+        }
+        return true;
+    }
+
+
+
 
 
 
@@ -500,6 +582,12 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         String sUrl = RESTURL + "/rest/layers/"+layer + "?purge=true";
         return HttpUtilsLocal.delete(sUrl, RESTUSER, RESTPW);
     }
+
+   public boolean existsLayer(String layerName) throws RuntimeException {
+        String url = RESTURL + "/rest/layers/" + layerName + ".xml";
+        return HttpUtilsLocal.exists(url, RESTUSER, RESTPW);
+    }
+
 /*******************
  *
  * @return
@@ -550,7 +638,9 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                     File temp = new File(fileName);
                     //publish the <layername>.zip file in the previews workspace
                     logger.info("\n INFO: STYLE TO PUBLISH "+info.sld+" NAME :"+info.name);
-                    boolean published = publisher.publishShp(userWorkspace, info.name, info.name, temp, info.epsg, info.sld);
+                    boolean published = false;
+                    if (existsLayer(info.name))
+                        published = publisher.publishShp(userWorkspace, info.name, info.name, temp, info.epsg, info.sld);
                     // check if pubblication is ok
                     if (published) {
                         logger.info(info.name+ "correctly published in the "+userWorkspace+" workspace");

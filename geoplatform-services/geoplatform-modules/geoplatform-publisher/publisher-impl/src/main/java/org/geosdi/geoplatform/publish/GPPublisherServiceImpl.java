@@ -54,6 +54,7 @@ import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
+import it.geosolutions.geoserver.rest.decoder.RESTStyleList;
 import org.geosdi.geoplatform.request.Feature;
 import org.geotools.geometry.jts.JTS;
 import java.io.FileInputStream;
@@ -289,7 +290,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     }
 
     @Override
-    public boolean createSHP(String userName, List<Feature> list, String shpFileName) throws ResourceNotFoundFault, Exception {
+    public FileOutputStream createSHP(String userName, List<Feature> list, String shpFileName) throws ResourceNotFoundFault, Exception {
         SimpleFeatureTypeBuilder typeBuilder = new SimpleFeatureTypeBuilder();
         logger.info("\n CREATE SHP SCHEMA");
         //  fb.set("the_geom", geom);
@@ -408,7 +409,10 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             out = compress(out, new File(tempUserDir + name + ".shx"));
             out = compress(out, new File(tempUserDir + name + ".prj"));
             out.close();
-//            File compressedFile = new File(tempUserZipDir + name+".zip");
+            File compressedFile = new File(tempUserZipDir + name+".zip");
+
+            FileOutputStream fileoutputstream = new FileOutputStream(tempUserZipDir + name+".zip");
+            return fileoutputstream;
 //            return uploadZIPInPreview(userName, compressedFile);
 
         } catch (MalformedURLException ex) {
@@ -427,7 +431,6 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             iterator.close();
             transaction.close();
         }
-        return true;
     }
 
     /*************************
@@ -653,8 +656,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                     info.sld = info.name;
                     logger.info("\n INFO: FOUND STYLE FILE " + tempUserDir + SLDFileName + ". TRYING TO PUBLISH WITH " + info.name + " NAME");
                     boolean returnPS = false;
-                    //    if (reader.getSLD(info.name)!=null)
-                    returnPS = publisher.publishStyle(fileSLD, info.name);
+                    if (!existsStyle(info.name))
+                        returnPS = publisher.publishStyle(fileSLD, info.name);
                     logger.info("\n INFO: PUBLISH STYLE RESULT " + returnPS);
                 }
                 logger.info("\n INFO: STYLE " + info.sld + " for " + info.name);
@@ -696,9 +699,19 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         return HttpUtilsLocal.delete(sUrl, RESTUSER, RESTPW);
     }
 
-    public boolean existsLayer(String layerName) throws RuntimeException {
-        String url = RESTURL + "/rest/layers/" + layerName + ".xml";
-        return HttpUtilsLocal.exists(url, RESTUSER, RESTPW);
+    public boolean existsStyle(String styleName) {
+        RESTStyleList styleList = reader.getStyles();
+        for (int i=0;i < styleList.size();i++){
+            if (styleList.get(i).getName().equals(styleName)) return true;
+        }
+        return false;
+    }
+    public boolean existsLayer(String workspace, String layerName) {
+        RESTDataStoreList workspaceDataStores = reader.getDatastores(workspace);
+        for (int i=0;i < workspaceDataStores.size();i++){
+            if (workspaceDataStores.get(i).getName().equals(layerName)) return true;
+        }
+        return false;
     }
 
     /*******************
@@ -711,13 +724,22 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         return HttpUtilsLocal.post(sUrl, "", "text/html", RESTUSER, RESTPW);
     }
 
-    private String createWorkspace(String userName) {
-        List<String> workspaces = reader.getWorkspaceNames();
-        String userWorkspace = previewWorkspace + "_" + userName;
-        if (!workspaces.contains(userWorkspace)) {
-            publisher.createWorkspace(userWorkspace);
-        }
-        return userWorkspace;
+   private String createDataStore(String workspace, String dataStore){
+       String content = "<dataStores> <dataStore><name>"+dataStore+"</name>"+
+       "<atom:link xmlns:atom=\"http://www.w3.org/2005/Atom\" rel=\"alternate\" href=\""+RESTURL+"/rest/workspaces/"+workspace+"/datastores/"+dataStore+".xml\" type=\"application/xml\"/>"+
+       " </dataStore>"+
+       "</dataStores>";
+        String sUrl = RESTURL + "/rest/workspaces/"+workspace+"/datastores.xml";
+        logger.info("****************************************Stringa: "+sUrl);
+        return HttpUtilsLocal.postXml(RESTURL, content, RESTUSER, RESTPW);
+   }
+
+   private String createWorkspace(String userName){
+         List<String> workspaces = reader.getWorkspaceNames();
+         String userWorkspace = previewWorkspace+"_"+userName;
+         if (!workspaces.contains(userWorkspace)) publisher.createWorkspace(userWorkspace);
+         return userWorkspace;
+
 
     }
 
@@ -745,8 +767,9 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         for (InfoShape info : infoShapeList) {
             InfoPreview urlPNGPreview = null;
             // check if the layer already exists in the preview, if not an error message is returned int the InfoPreviewList
-            RESTDataStore dataStore = reader.getDatastore(userWorkspace, info.name);
-            if (dataStore == null) {
+            
+
+            if (!existsLayer(userWorkspace, info.name) ) {
                 try {
                     // check if the previews workspace exist, create it if not
                     // create the <layername>.zip file
@@ -755,9 +778,13 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                     //publish the <layername>.zip file in the previews workspace
                     logger.info("\n INFO: STYLE TO PUBLISH " + info.sld + " NAME :" + info.name);
                     boolean published = false;
-                    if (existsLayer(info.name)) {
-                        published = publisher.publishShp(userWorkspace, info.name, info.name, temp, info.epsg, info.sld);
-                    }
+
+                    logger.info("\n INFO: CREATE DATASTORE "+userWorkspace+" NAME :"+info.name);
+                  //  String result = createDataStore(userWorkspace, info.name);
+                  //  logger.info("RESULT: "+result);
+                    published = publisher.publishShp(userWorkspace, info.name, info.name, temp, info.epsg, info.sld);
+
+                    
                     // check if pubblication is ok
                     if (published) {
                         logger.info(info.name + "correctly published in the " + userWorkspace + " workspace");
@@ -774,7 +801,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                     urlPNGPreview = new InfoPreview(info.name, "Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace");
                 }
                 //publish the shape in the previews workspace
-            } else {
+           } else {
                 urlPNGPreview = getURLPreviewByDataStoreName(userName, info.name);
                 urlPNGPreview.setMessage("The data store " + info.name + " in " + userWorkspace + " already exists");
             }

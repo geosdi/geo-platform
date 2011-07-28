@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.publish;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -86,7 +87,7 @@ public interface GPPublisherService {
     @Post
     @HttpResource(location = "/preview/createSHP")
     @WebResult(name = "Result")
-    boolean createSHP(@WebParam(name = "userName") String userName,
+    FileOutputStream createSHP(@WebParam(name = "userName") String userName,
                       @WebParam(name = "featureList") List<Feature> list,
                       @WebParam(name = "shpFileName") String shpFileName)
             throws ResourceNotFoundFault, Exception;

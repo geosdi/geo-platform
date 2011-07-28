@@ -46,9 +46,9 @@ import java.util.List;
 
 
 
-    public class Feature {
-        private String wkt;
-        private List<Attribute> attributes;
+public class Feature {
+    private String wkt;
+    private List<Attribute> attributes;
 
     public Feature() {
     }
@@ -75,7 +75,4 @@ import java.util.List;
     public void setWkt(String wkt) {
         this.wkt = wkt;
     }
-     
-
-
-    }
+}

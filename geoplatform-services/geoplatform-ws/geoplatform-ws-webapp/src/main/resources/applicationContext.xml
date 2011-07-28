@@ -47,7 +47,7 @@
                     </list>
                 </property>
             </bean>
-    	</jaxws:serviceFactory>
+        </jaxws:serviceFactory>
         <!--<jaxws:outInterceptors>
             <bean class="org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor"/>
             <ref bean="TimestampSignEncrypt_Response"/>
@@ -71,7 +71,7 @@
                     </list>
                 </property>
             </bean>
-    	</jaxws:serviceFactory >
+        </jaxws:serviceFactory >
         <!--<jaxws:outInterceptors>
             <bean class="org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor"/>
             <ref bean="TimestampSignEncrypt_Response"/>
@@ -165,5 +165,5 @@
             <cxf:logging/>
         </cxf:features>
     </cxf:bus>
-
+    
 </beans>

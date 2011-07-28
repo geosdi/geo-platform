@@ -132,7 +132,7 @@ public class UploadServlet extends HttpServlet {
                     resp.flushBuffer();
                 }
                 List<InfoPreview> infoPreviews = this.geoPlatformPublishClient.getPublishService().uploadZIPInPreview(
-                        user.getUsername(), uploadedFile);
+                        session.getId(), uploadedFile);
                 resp.setContentType("text/x-json;charset=UTF-8");
                 resp.setHeader("Cache-Control", "no-cache");
                 String result = this.generateJSONObjects(infoPreviews);

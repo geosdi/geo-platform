@@ -91,7 +91,12 @@ public interface GPPublisherService {
                       @WebParam(name = "shpFileName") String shpFileName)
             throws ResourceNotFoundFault, Exception;
 
+    @Post
+    @HttpResource(location = "/preview/verifyAndDeleteSessionDir")
+    @WebResult(name = "Result")
+    boolean verifyAndDeleteSessionDir(@WebParam(name = "userName") String idSessionDestroyed);
 
+            
     @Get
     @HttpResource(location = "/preview/publish")
     @WebResult(name = "Result")

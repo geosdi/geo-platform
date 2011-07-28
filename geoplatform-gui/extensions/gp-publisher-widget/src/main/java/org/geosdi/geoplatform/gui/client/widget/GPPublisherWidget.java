@@ -143,7 +143,6 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
                 layerProblems.append("\n");
             }
         }
-        System.out.println("Num layers: " + this.shpPreviewWidget.getMapPreview().getMap().getNumLayers());
         if (this.shpPreviewWidget.getMapPreview().getMap().getNumLayers() > 1) {
             this.centralPanel.removeAll();
             this.centralPanel.add(this.shpPreviewWidget.getMapPreview());

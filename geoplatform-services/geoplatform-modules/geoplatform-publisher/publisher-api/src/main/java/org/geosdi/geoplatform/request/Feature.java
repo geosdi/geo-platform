@@ -43,9 +43,17 @@ import java.util.List;
  * @author Luca
  */
 
+
+
+
     public class Feature {
         private String wkt;
         private List<Attribute> attributes;
+
+    public Feature() {
+    }
+
+
 
     public Feature(String wkt, List<Attribute> attributes) {
         this.wkt = wkt;

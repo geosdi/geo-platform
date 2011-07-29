@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.publish;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +85,10 @@ public class PublisherWSTest extends TestCase{
             Feature feature = new Feature("POINT(1 1)", attributeList1);
             List<Feature> featureList = new ArrayList<Feature>();
             featureList.add(feature);
-//            gppublisherService.createSHP("luca", featureList, "feature.shp");
+            byte[]  stream = gppublisherService.createSHP("luca", featureList, "feature.shp");
+            FileOutputStream outputStream = new FileOutputStream("C:\\Users\\Luca\\AppData\\Local\\Temp\\geoportal\\zip\\luca\\pippo.zip");
+            outputStream.write(stream);
+            outputStream.close();
         }
         catch (Exception ex) {
                 logger.error("\n **** Generic exception"+ex.getMessage());
@@ -105,7 +109,7 @@ public class PublisherWSTest extends TestCase{
                 logger.info("\n **** Preview at: "+info.getWorkspace()+":"+info.getDataStoreName()+" --> "+info.getMessage());
                 logger.info("\n **** continue at: "+info.getCrs()+":"+info.getMinX()+","+info.getMinY());
             }
-            logger.info("\n **** CALL TO PUBLISH ON zip_it_aeropo ");
+/*            logger.info("\n **** CALL TO PUBLISH ON zip_it_aeropo ");
             logger.info("\n **** RESULT "+gppublisherService.publish("luca", "preview2", "data", "it_aeropo" ));
             logger.info("\n **** CALL TO REMOVEFROMPREVIEW zip_it_aree_meteoclimatiche ");
      
@@ -137,15 +141,11 @@ public class PublisherWSTest extends TestCase{
                 logger.error("\n **** Eccezione nella pubblicazione: "+ex.getMessage());
                 System.out.println("\n **** Eccezione nella pubblicazione: "+ex.getMessage());
             }
-            catch (FileNotFoundException ex) {
-                logger.error("\n **** File zip non trovato");
-                System.out.println("\n **** Eccezione nella pubblicazione: "+ex.getMessage());
-            }
             catch (Exception ex) {
                 logger.error("\n **** Generic exception"+ex.getMessage());
                 ex.printStackTrace();
                 
             }
-    }*/
-
+    }
+*/
 }

@@ -289,11 +289,18 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-   
-    public FileOutputStream createSHP(String userName, List<Feature> list, String shpFileName) throws ResourceNotFoundFault, Exception {
+   /**********************
+    *
+    * @param userName this is the user name who
+    * @param list the list of
+    * @param shpFileName
+    * @return
+    * @throws ResourceNotFoundFault
+    * @throws Exception
+    */
+    public byte[] createSHP(String userName, List<Feature> list, String shpFileName) throws ResourceNotFoundFault, Exception {
         SimpleFeatureTypeBuilder typeBuilder = new SimpleFeatureTypeBuilder();
-        logger.info("\n CREATE SHP SCHEMA");
-        //  fb.set("the_geom", geom);
+        logger.info("\n INFO: Parsing feature schema");
         if (list.size() > 0) {
             GeometryFactory geometryFactory = new GeometryFactory();
 
@@ -327,9 +334,9 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             }
 
         }
-        logger.info("\n  SHP SCHEMA SUCCESSFULLY CREATED ");
+
         typeBuilder.setName("SHP_CREATION");
-        logger.info("\n  START COLLECTION CREATION ");
+        logger.info("\n  INFO: Parsing feature data ");
         SimpleFeatureBuilder fb = new SimpleFeatureBuilder(typeBuilder.buildFeatureType());
         SimpleFeatureCollection result = FeatureCollections.newCollection();
         GeometryFactory geometryFactory = new GeometryFactory();
@@ -365,8 +372,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
 
 
         }
-        logger.info("\n  STOP COLLECTION CREATION ");
-        logger.info("\n  START SHP FILE CREATION ");
+        logger.info("\n  INFO: Creating SHP files ");
         FeatureWriter<SimpleFeatureType, SimpleFeature> writer = null;
         SimpleFeatureIterator iterator = null;
         Transaction transaction = null;
@@ -375,17 +381,12 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             ShapefileDataStoreFactory dataStoreFactory = new ShapefileDataStoreFactory();
             Map<String, Serializable> params = new HashMap<String, Serializable>();
             String shpFullPathName = tempUserDir + shpFileName;
-            logger.info("SHP FULL PATH NAME " + shpFullPathName);
             File newFile = new File(shpFullPathName);
             params.put("url", newFile.toURI().toURL());
             params.put("create spatial index", Boolean.TRUE);
             ShapefileDataStore newDataStore = (ShapefileDataStore) dataStoreFactory.createNewDataStore(params);
             newDataStore.forceSchemaCRS(DefaultGeographicCRS.WGS84);
-            logger.info("\n  START SHP FILE CREATION prima");
-            logger.info("SCHEMA count" + result.getSchema().getAttributeCount());
-
             newDataStore.createSchema(result.getSchema()); // DA ECCEZIONE
-            logger.info("\n  START SHP FILE CREATION dopo");
             writer = newDataStore.getFeatureWriter(Transaction.AUTO_COMMIT);
             iterator = result.features();
             transaction = new DefaultTransaction("Reproject");
@@ -394,13 +395,12 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                 SimpleFeature feature = iterator.next();
                 SimpleFeature copy = writer.next();
                 copy.setAttributes(feature.getAttributes());
-
                 Geometry geometrySource = (Geometry) feature.getDefaultGeometry();
                 copy.setDefaultGeometry(geometrySource);
                 writer.write();
             }
             transaction.commit();
-            logger.info("\n  STOP SHP FILE CREATION ");
+            logger.info("\n  INFO: Compressing SHP Files ");
             String tempUserZipDir = createZIPDir(userName);
             String name = shpFileName.substring(0, shpFileName.length() - 4);
             ZipOutputStream out = new ZipOutputStream(new FileOutputStream(tempUserZipDir + name + ".zip"));
@@ -409,12 +409,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             out = compress(out, new File(tempUserDir + name + ".shx"));
             out = compress(out, new File(tempUserDir + name + ".prj"));
             out.close();
-            File compressedFile = new File(tempUserZipDir + name+".zip");
-
-            FileOutputStream fileoutputstream = new FileOutputStream(tempUserZipDir + name+".zip");
-            return fileoutputstream;
-//            return uploadZIPInPreview(userName, compressedFile);
-
+            return getStreamOfByteFromFile(tempUserZipDir + name+".zip");
         } catch (MalformedURLException ex) {
             throw new ResourceNotFoundFault("Malformed URL Exception");
         } catch (IOException ex) {
@@ -432,6 +427,38 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             transaction.close();
         }
     }
+
+    private byte[] getStreamOfByteFromFile(String fileName) throws FileNotFoundException, IOException {
+        File file = new File(fileName);
+        InputStream is = new FileInputStream(file);
+
+        // Get the size of the file
+        long length = file.length();
+
+        if (length > Integer.MAX_VALUE) {
+            // File is too large
+        }
+
+        // Create the byte array to hold the data
+        byte[] bytes = new byte[(int)length];
+
+        // Read in the bytes
+        int offset = 0;
+        int numRead = 0;
+        while (offset < bytes.length && (numRead=is.read(bytes, offset, bytes.length-offset)) >= 0) {
+            offset += numRead;
+        }
+
+        // Ensure all the bytes have been read in
+        if (offset < bytes.length) {
+            throw new IOException("Could not completely read file "+file.getName());
+        }
+
+        // Close the input stream and return bytes
+        is.close();
+        return bytes;
+    }
+
 
     /*************************
      *
@@ -699,6 +726,13 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         return HttpUtilsLocal.delete(sUrl, RESTUSER, RESTPW);
     }
 
+
+    /*************
+     *
+     * @param styleName
+     * @return
+     * check whether the style styleName exists
+     */
     public boolean existsStyle(String styleName) {
         RESTStyleList styleList = reader.getStyles();
         for (int i=0;i < styleList.size();i++){
@@ -706,6 +740,14 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         }
         return false;
     }
+
+    /**************
+     *
+     * @param workspace
+     * @param layerName
+     * @return
+     * check whether the layer layerName exists in the workspace workspace
+     */
     public boolean existsLayer(String workspace, String layerName) {
         RESTDataStoreList workspaceDataStores = reader.getDatastores(workspace);
         for (int i=0;i < workspaceDataStores.size();i++){
@@ -723,17 +765,13 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         String sUrl = RESTURL + "/rest/reload";
         return HttpUtilsLocal.post(sUrl, "", "text/html", RESTUSER, RESTPW);
     }
-
-   private String createDataStore(String workspace, String dataStore){
-       String content = "<dataStores> <dataStore><name>"+dataStore+"</name>"+
-       "<atom:link xmlns:atom=\"http://www.w3.org/2005/Atom\" rel=\"alternate\" href=\""+RESTURL+"/rest/workspaces/"+workspace+"/datastores/"+dataStore+".xml\" type=\"application/xml\"/>"+
-       " </dataStore>"+
-       "</dataStores>";
-        String sUrl = RESTURL + "/rest/workspaces/"+workspace+"/datastores.xml";
-        logger.info("****************************************Stringa: "+sUrl);
-        return HttpUtilsLocal.postXml(RESTURL, content, RESTUSER, RESTPW);
-   }
-
+   /********************
+    *
+    * @param userName
+    * @return
+    *
+    * create the workspace "previewWorkspace+"_"+userName" if not exists
+    */
    private String createWorkspace(String userName){
          List<String> workspaces = reader.getWorkspaceNames();
          String userWorkspace = previewWorkspace+"_"+userName;
@@ -778,14 +816,9 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                     //publish the <layername>.zip file in the previews workspace
                     logger.info("\n INFO: STYLE TO PUBLISH " + info.sld + " NAME :" + info.name);
                     boolean published = false;
-
                     logger.info("\n INFO: CREATE DATASTORE "+userWorkspace+" NAME :"+info.name);
-                  //  String result = createDataStore(userWorkspace, info.name);
-                  //  logger.info("RESULT: "+result);
                     published = publisher.publishShp(userWorkspace, info.name, info.name, temp, info.epsg, info.sld);
-
-                    
-                    // check if pubblication is ok
+                    // check if publish is ok otherwise returns an error message
                     if (published) {
                         logger.info(info.name + "correctly published in the " + userWorkspace + " workspace");
                         urlPNGPreview = getURLPreviewByDataStoreName(userName, info.name);

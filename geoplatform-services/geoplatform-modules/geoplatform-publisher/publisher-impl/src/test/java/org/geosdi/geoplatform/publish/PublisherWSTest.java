@@ -84,7 +84,7 @@ public class PublisherWSTest extends TestCase{
             Feature feature = new Feature("POINT(1 1)", attributeList1);
             List<Feature> featureList = new ArrayList<Feature>();
             featureList.add(feature);
-            gppublisherService.createSHP("luca", featureList, "feature.shp");
+//            gppublisherService.createSHP("luca", featureList, "feature.shp");
         }
         catch (Exception ex) {
                 logger.error("\n **** Generic exception"+ex.getMessage());

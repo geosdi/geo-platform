@@ -84,13 +84,13 @@ public interface GPPublisherService {
             throws ResourceNotFoundFault;
 
 
-    @Post
-    @HttpResource(location = "/preview/createSHP")
-    @WebResult(name = "Result")
-    FileOutputStream createSHP(@WebParam(name = "userName") String userName,
-                      @WebParam(name = "featureList") List<Feature> list,
-                      @WebParam(name = "shpFileName") String shpFileName)
-            throws ResourceNotFoundFault, Exception;
+//    @Post
+//    @HttpResource(location = "/preview/createSHP")
+//    @WebResult(name = "Result")
+//    FileOutputStream createSHP(@WebParam(name = "userName") String userName,
+//                      @WebParam(name = "featureList") List<Feature> list,
+//                      @WebParam(name = "shpFileName") String shpFileName)
+//            throws ResourceNotFoundFault, Exception;
 
     @Post
     @HttpResource(location = "/preview/verifyAndDeleteSessionDir")

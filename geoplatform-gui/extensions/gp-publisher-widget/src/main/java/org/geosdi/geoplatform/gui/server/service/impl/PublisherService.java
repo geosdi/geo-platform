@@ -66,7 +66,7 @@ public class PublisherService implements IPublisherService {
     public void publishLayerPreview(HttpServletRequest httpServletRequest, List<String> layerList) throws GeoPlatformException {
         GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
         try {
-            geoPlatformPublishClient.getPublishService().publishAll(user.getUsername(), "previews", "dataTest", layerList);
+            geoPlatformPublishClient.getPublishService().publishAll(httpServletRequest.getSession().getId(), "previews", "dataTest", layerList);
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error on publish shape: " + ex);
             System.out.println("Error on publish shape: " + ex);

@@ -62,14 +62,14 @@ public interface GPPublisherService {
     @Get
     @HttpResource(location = "/preview/uploadZipInPreview")
     @WebResult(name = "Result")
-    List<InfoPreview> uploadZIPInPreview(@WebParam(name = "userName") String userName,
+    List<InfoPreview> uploadZIPInPreview(@WebParam(name = "sessionID") String sessionID,
                 @WebParam(name = "fileName") File file)
             throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/preview/uploadShpInPreview")
     @WebResult(name = "Result")
-    List<InfoPreview> uploadShapeInPreview(@WebParam(name = "userName") String userName,
+    List<InfoPreview> uploadShapeInPreview(@WebParam(name = "sessionID") String sessionID,
                         @WebParam(name = "shpFileName") File shpFile,
                        @WebParam(name = "dbfFileName") File dbfFile,
                        @WebParam(name = "shxFileName") File shxFile,
@@ -80,30 +80,27 @@ public interface GPPublisherService {
     @Get
     @HttpResource(location = "/preview/getPreviewDataStores")
     @WebResult(name = "Result")
-    List<InfoPreview> getPreviewDataStores(@WebParam(name = "userName") String userName)
+    List<InfoPreview> getPreviewDataStores(@WebParam(name = "sessionID") String sessionID)
             throws ResourceNotFoundFault;
-
-
-
+    
     @Post
     @HttpResource(location = "/preview/createSHP")
     @WebResult(name = "Result")
-    byte[] createSHP(@WebParam(name = "userName") String userName,
+    byte[] createSHP(@WebParam(name = "sessionID") String sessionID,
                       @WebParam(name = "featureList") List<Feature> list,
                       @WebParam(name = "shpFileName") String shpFileName)
             throws ResourceNotFoundFault, Exception;
 
-
     @Post
     @HttpResource(location = "/preview/verifyAndDeleteSessionDir")
     @WebResult(name = "Result")
-    boolean verifyAndDeleteSessionDir(@WebParam(name = "userName") String idSessionDestroyed);
+    boolean verifyAndDeleteSessionDir(@WebParam(name = "idSessionDestroyed") String idSessionDestroyed);
 
             
     @Get
     @HttpResource(location = "/preview/publish")
     @WebResult(name = "Result")
-    boolean publish(@WebParam(name = "userName") String userName,
+    boolean publish(@WebParam(name = "sessionID") String sessionID,
                     @WebParam(name = "workspace") String workspace,
                     @WebParam(name = "dataStoreName") String dataStoreName,
                     @WebParam(name = "layerName") String layerName) throws ResourceNotFoundFault, FileNotFoundException;
@@ -112,7 +109,7 @@ public interface GPPublisherService {
     @Get
     @HttpResource(location = "/preview/publishAll")
     @WebResult(name = "Result")
-    boolean publishAll(@WebParam(name = "userName") String userName,
+    boolean publishAll(@WebParam(name = "sessionID") String sessionID,
                     @WebParam(name = "workspace") String workspace,
                     @WebParam(name = "dataStoreName") String dataStoreName,
                     @WebParam(name = "layerName") List<String> layerNames) throws ResourceNotFoundFault, FileNotFoundException;
@@ -121,16 +118,18 @@ public interface GPPublisherService {
     @Get
     @HttpResource(location = "/preview/publishAllofPreview")
     @WebResult(name = "Result")
-    boolean publishAllofPreview(@WebParam(name = "userName") String userName,
+    boolean publishAllofPreview(@WebParam(name = "sessionID") String sessionID,
                     @WebParam(name = "workspace") String workspace,
                     @WebParam(name = "dataStoreName") String dataStoreName
                     ) throws ResourceNotFoundFault, FileNotFoundException;
 
 
     @Get
+
+
     @HttpResource(location = "/preview/removeFromPreview")
     @WebResult(name = "Result")
-    boolean removeFromPreview(@WebParam(name = "userName") String userName,
+    boolean removeFromPreview(@WebParam(name = "sessionID") String sessionID,
             @WebParam(name = "dataStoreName") String dataStoreName)
             throws ResourceNotFoundFault;
 

@@ -52,16 +52,14 @@ public class SessionListenerTemplateMethod implements HttpSessionListener {
 
     @Override
     public void sessionCreated(HttpSessionEvent hse) {
-        System.out.println("E new session created: " + hse.getSession());
     }
 
     @Override//This is the template method
     public void sessionDestroyed(HttpSessionEvent hse) {
         System.out.println("A new session destroyed");
         GeoPlatformPublishClient geoPlatformPublishClient = (GeoPlatformPublishClient) GeoPlatformContextUtil.getInstance().getBean(
-            "geoPlatformPublishClient");
+                "geoPlatformPublishClient");
         geoPlatformPublishClient.getPublishService().verifyAndDeleteSessionDir(hse.getSession().getId());
-        //this.verifyAndDeleteSessionDir(hse.getSession().getId());
     }
 
     protected void addManagedSession(String userSession) {

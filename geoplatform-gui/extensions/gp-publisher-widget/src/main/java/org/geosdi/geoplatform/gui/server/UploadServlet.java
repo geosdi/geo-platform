@@ -51,7 +51,6 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
@@ -66,13 +65,35 @@ import org.geosdi.geoplatform.responce.InfoPreview;
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
+ * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class UploadServlet extends HttpServlet {
 
     private static final long serialVersionUID = -1464439864247709647L;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private GeoPlatformPublishClient geoPlatformPublishClient = (GeoPlatformPublishClient) GeoPlatformContextUtil.getInstance().getBean(
-            "geoPlatformPublishClient");
+    private String TMP_DIR_PATH = System.getProperty("java.io.tmpdir");
+    private File tmpDir;
+    private GeoPlatformPublishClient geoPlatformPublishClient;
+
+    public UploadServlet() {
+        this.geoPlatformPublishClient = (GeoPlatformPublishClient) GeoPlatformContextUtil.getInstance().getBean(
+                "geoPlatformPublishClient");
+    }
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        if (!TMP_DIR_PATH.endsWith(File.separator)) {
+            TMP_DIR_PATH += File.separator;
+        }
+        tmpDir = new File(TMP_DIR_PATH);
+
+        if (!tmpDir.exists()) {
+            tmpDir.mkdir();
+        }
+    }
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -98,8 +119,13 @@ public class UploadServlet extends HttpServlet {
         // process only multipart requests
         if (ServletFileUpload.isMultipartContent(req)) {
             // Create a factory for disk-based file items
-            FileItemFactory factory = new DiskFileItemFactory();
+            DiskFileItemFactory factory = new DiskFileItemFactory();
             // Create a new file upload handler
+           /*
+             *Set the size threshold, above which content will be stored on disk.
+             */
+            factory.setSizeThreshold(1 * 1024 * 1024); //1 MB
+
             ServletFileUpload upload = new ServletFileUpload(factory);
             File uploadedFile = null;
             // Parse the request
@@ -115,15 +141,17 @@ public class UploadServlet extends HttpServlet {
                     if (fileName != null) {
                         fileName = FilenameUtils.getName(fileName);
                     }
-                    uploadedFile = File.createTempFile(fileName, "");
+
                     try {
+                        uploadedFile = new File(tmpDir.getAbsolutePath() + File.separator + fileName + Long.toString(
+                                System.nanoTime()));
+
                         item.write(uploadedFile);
                     } catch (Exception ex) {
+                        logger.info("ERRORE : " + ex);
                         resp.sendError(
                                 HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                                 "An error occurred writing the file: "
-                                + ex.getMessage());
-                        System.out.println("An error occurred writing the file: "
                                 + ex.getMessage());
                         throw new GeoPlatformException(
                                 "Error on uploading shape.");
@@ -137,22 +165,20 @@ public class UploadServlet extends HttpServlet {
                 resp.setHeader("Cache-Control", "no-cache");
                 String result = this.generateJSONObjects(infoPreviews);
                 resp.getWriter().write(result);
-                System.out.println(
-                        "Json Response: " + resp.getWriter().toString());
                 //geoPlatformPublishClient.publish("previews", "dataTest", infoPreview.getDataStoreName());
             } catch (FileUploadException ex) {
+                logger.info("ERRORE : " + ex);
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                         "An error occurred creating the file: "
                         + ex.getMessage());
-                System.out.println("An error occurred creating the file: "
-                        + ex.getMessage());
                 throw new GeoPlatformException("Error on uploading shape.");
             } catch (ResourceNotFoundFault ex) {
-                logger.error("Error on uploading shape: " + ex);
-                System.out.println("Error on uploading shape: " + ex);
+                logger.info("Error on uploading shape: " + ex);
                 throw new GeoPlatformException("Error on uploading shape.");
             } finally {
+//                FileUtils.deleteDirectory(destinationDir);
                 uploadedFile.delete();
+                resp.getWriter().close();
             }
         } else {
             resp.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE,

@@ -103,13 +103,15 @@ import org.slf4j.LoggerFactory;
  * @author Luca Paolino - geoSDI
  *
  */
-@WebService(endpointInterface = "org.geosdi.geoplatform.publish.GPPublisherService")
+@WebService(
+endpointInterface = "org.geosdi.geoplatform.publish.GPPublisherService")
 public class GPPublisherServiceImpl implements GPPublisherService {
-
-    protected Logger logger = LoggerFactory.getLogger(GPPublisherServiceImpl.class);
-
+    
+    protected Logger logger = LoggerFactory.getLogger(
+            GPPublisherServiceImpl.class);
+    
     class InfoShape {
-
+        
         String name;
         String origName;
         String epsg;
@@ -124,7 +126,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     private String zipTempDir = "";
     private String previewWorkspace = "";
     private List<String> managedSessions = new ArrayList<String>();
-
+    
     @Override
     public boolean verifyAndDeleteSessionDir(String idSessionDestroyed) {
         for (String session : this.managedSessions) {
@@ -132,8 +134,10 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             if (idSessionDestroyed.equals(session)) {
 //                String shpDir = tmpDir + GEOPORTAL + System.getProperty("file.separator") + "shp";
 //                String zipDir = tmpDir + GEOPORTAL + System.getProperty("file.separator") + "zip";
-                PublishUtility.deleteDir(new File(this.shpTempDir + System.getProperty("file.separator") + session));
-                PublishUtility.deleteDir(new File(this.zipTempDir + System.getProperty("file.separator") + session));
+                PublishUtility.deleteDir(new File(this.shpTempDir + System.getProperty(
+                        "file.separator") + session));
+                PublishUtility.deleteDir(new File(this.zipTempDir + System.getProperty(
+                        "file.separator") + session));
                 logger.info("Deleted user folder: " + session);
                 this.managedSessions.remove(session);
                 return true;
@@ -141,13 +145,14 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         }
         return false;
     }
-
-    public GPPublisherServiceImpl(String RESTURL, String RESTUSER, String RESTPW, String _previewWorkspace) {
+    
+    public GPPublisherServiceImpl(String RESTURL, String RESTUSER, String RESTPW,
+            String _previewWorkspace) {
         this.RESTURL = RESTURL;
         this.RESTUSER = RESTUSER;
         this.RESTPW = RESTPW;
         previewWorkspace = _previewWorkspace;
-
+        
         publisher = new GeoServerRESTPublisher(RESTURL, RESTUSER, RESTPW);
         try {
             reader = new GeoServerRESTReader(RESTURL, RESTUSER, RESTPW);
@@ -163,21 +168,24 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             success = geoportalDir.mkdir();
         }
         //creation of the shp temporary directory. This will contain all the decompressed shape files
-        shpTempDir = geoportalDirName + System.getProperty("file.separator") + "shp" + System.getProperty("file.separator");
+        shpTempDir = geoportalDirName + System.getProperty("file.separator") + "shp" + System.getProperty(
+                "file.separator");
         File dir = new File(shpTempDir);
         if (!dir.exists()) {
             success = dir.mkdir();
         }
         //creation of the zip temporary directory. This will contain all the compressed zip files
 //        shpTempDir = shpTempDir.concat(System.getProperty("file.separator"));
-        zipTempDir = geoportalDirName + System.getProperty("file.separator") + "zip" + System.getProperty("file.separator");
+        zipTempDir = geoportalDirName + System.getProperty("file.separator") + "zip" + System.getProperty(
+                "file.separator");
         File dirZip = new File(zipTempDir);
-
+        
         if (!dirZip.exists()) {
             success = dirZip.mkdir();
         }
 //        zipTempDir = zipTempDir.concat(System.getProperty("file.separator"));
-        logger.info("GEOSERVER AT: " + RESTURL + ", USER: " + RESTUSER + ", PWD: " + RESTPW);
+        logger.info(
+                "GEOSERVER AT: " + RESTURL + ", USER: " + RESTUSER + ", PWD: " + RESTPW);
     }
 
     /****************************
@@ -191,28 +199,34 @@ public class GPPublisherServiceImpl implements GPPublisherService {
      * this service publishes the layer <layerName> we loaded in the previews workspace into the DB datastore identified by the <dataStoreName> and published into the <workspace> workspace
      */
     @Override
-    public boolean publish(String sessionID, String workspace, String dataStoreName, String layerName) throws ResourceNotFoundFault, FileNotFoundException {
-        logger.info("\n Start to publish " + layerName + " in " + workspace + ":" + dataStoreName);
-        String tempUserDirZIP = PublishUtility.createDir(this.zipTempDir + sessionID + System.getProperty("file.separator"));
+    public boolean publish(String sessionID, String workspace,
+            String dataStoreName, String layerName) throws ResourceNotFoundFault, FileNotFoundException {
+        logger.info(
+                "\n Start to publish " + layerName + " in " + workspace + ":" + dataStoreName);
+        String tempUserDirZIP = PublishUtility.createDir(this.zipTempDir + sessionID + System.getProperty(
+                "file.separator"));
         String userWorkspace = createPreviewWorkspace(sessionID);
         reload();
         boolean publish = true;
         RESTDataStore dataStore = reader.getDatastore(userWorkspace, layerName);
-
+        
         if (dataStore != null) {
             this.removeLayer(layerName);
             reload();
-            boolean unpublish = publisher.unpublishFeatureType(userWorkspace, layerName, layerName);
+            boolean unpublish = publisher.unpublishFeatureType(userWorkspace,
+                    layerName, layerName);
             reload();
             boolean remove = publisher.removeDatastore(userWorkspace, layerName);
         } else {
-            logger.info("\n The " + userWorkspace + ":" + dataStoreName + " does not exist");
+            logger.info(
+                    "\n The " + userWorkspace + ":" + dataStoreName + " does not exist");
         }
         String filename = tempUserDirZIP + layerName + ".zip";
         File file = new File(filename);
         if (file.exists()) {
             String result = reload();
-            List<InfoShape> listInfo = getInfoFromCompressedShape(sessionID, file);
+            List<InfoShape> listInfo = getInfoFromCompressedShape(sessionID,
+                    file);
             String epsg = "EPSG:4326";
             String sld = null;
             String name = null;
@@ -223,10 +237,13 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                 logger.info("\n PUBLISHING IN THE DB " + epsg + " , " + sld);
             }
             try {
-                publish = publisher.publishShp(workspace, dataStoreName, layerName, file, epsg, sld);
+                publish = publisher.publishShp(workspace, dataStoreName,
+                        layerName, file, epsg, sld);
                 if (!publish) {
-                    logger.info("\n Cannot publish " + layerName + " into " + workspace + ":" + dataStoreName);
-                    throw new ResourceNotFoundFault("Cannot publish " + layerName + " into " + workspace + ":" + dataStoreName);
+                    logger.info(
+                            "\n Cannot publish " + layerName + " into " + workspace + ":" + dataStoreName);
+                    throw new ResourceNotFoundFault(
+                            "Cannot publish " + layerName + " into " + workspace + ":" + dataStoreName);
                 }
             } catch (FileNotFoundException e) {
                 logger.info("\n ********** File " + layerName + ".zip not found");
@@ -236,17 +253,19 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         }
         return false;
     }
-
+    
     @Override
-    public boolean publishAll(String sessionID, String workspace, String dataStoreName, List<String> layerNames) throws ResourceNotFoundFault, FileNotFoundException {
+    public boolean publishAll(String sessionID, String workspace,
+            String dataStoreName, List<String> layerNames) throws ResourceNotFoundFault, FileNotFoundException {
         for (String name : layerNames) {
             publish(sessionID, workspace, dataStoreName, name);
         }
         return true;
     }
-
+    
     @Override
-    public boolean publishAllofPreview(String sessionID, String workspace, String dataStoreName) throws ResourceNotFoundFault, FileNotFoundException {
+    public boolean publishAllofPreview(String sessionID, String workspace,
+            String dataStoreName) throws ResourceNotFoundFault, FileNotFoundException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -260,19 +279,21 @@ public class GPPublisherServiceImpl implements GPPublisherService {
      * @throws Exception
      */
     @Override
-    public byte[] createSHP(String sessionID, List<Feature> list, String shpFileName) throws ResourceNotFoundFault, Exception {
+    public byte[] createSHP(String sessionID, List<Feature> list,
+            String shpFileName) throws ResourceNotFoundFault, Exception {
         SimpleFeatureTypeBuilder typeBuilder = new SimpleFeatureTypeBuilder();
         logger.info("\n INFO: Parsing feature schema");
         if (list.size() > 0) {
             GeometryFactory geometryFactory = new GeometryFactory();
-
+            
             WKTReader reader = new WKTReader(geometryFactory);
             try {
                 Geometry geometry = reader.read(list.get(0).getWkt());
                 typeBuilder.setDefaultGeometry("the_geom");
                 typeBuilder.add("the_geom", geometry.getClass());
             } catch (ParseException e) {
-                throw new ResourceNotFoundFault("Cannot identify the geometry class");
+                throw new ResourceNotFoundFault(
+                        "Cannot identify the geometry class");
             }
             List<Attribute> attributes = list.get(0).getAttributes();
             for (Attribute attribute : attributes) {
@@ -294,12 +315,13 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                 }
                 typeBuilder.add(attribute.getName(), clazz);
             }
-
+            
         }
-
+        
         typeBuilder.setName("SHP_CREATION");
         logger.info("\n  INFO: Parsing feature data ");
-        SimpleFeatureBuilder fb = new SimpleFeatureBuilder(typeBuilder.buildFeatureType());
+        SimpleFeatureBuilder fb = new SimpleFeatureBuilder(
+                typeBuilder.buildFeatureType());
         SimpleFeatureCollection result = FeatureCollections.newCollection();
         GeometryFactory geometryFactory = new GeometryFactory();
         WKTReader reader = new WKTReader(geometryFactory);
@@ -315,7 +337,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             fb.set("the_geom", geometry);
             for (Attribute attribute : attributes) {
                 Object value = null;
-                logger.info("Name: " + attribute.getName() + " type:" + attribute.getType() + " value: " + attribute.getValue());
+                logger.info(
+                        "Name: " + attribute.getName() + " type:" + attribute.getType() + " value: " + attribute.getValue());
                 if (attribute.getType().equals("int")) {
                     value = new Integer(Integer.parseInt(attribute.getValue()));
                 }
@@ -331,22 +354,24 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                 fb.set(attribute.getName(), value);
                 result.add(fb.buildFeature("feature_" + (featureID++)));
             }
-
-
+            
+            
         }
         logger.info("\n  INFO: Creating SHP files ");
         FeatureWriter<SimpleFeatureType, SimpleFeature> writer = null;
         SimpleFeatureIterator iterator = null;
         Transaction transaction = null;
         try {
-            String tempUserDir = PublishUtility.createDir(this.shpTempDir + sessionID);
+            String tempUserDir = PublishUtility.createDir(
+                    this.shpTempDir + sessionID);
             ShapefileDataStoreFactory dataStoreFactory = new ShapefileDataStoreFactory();
             Map<String, Serializable> params = new HashMap<String, Serializable>();
             String shpFullPathName = tempUserDir + shpFileName;
             File newFile = new File(shpFullPathName);
             params.put("url", newFile.toURI().toURL());
             params.put("create spatial index", Boolean.TRUE);
-            ShapefileDataStore newDataStore = (ShapefileDataStore) dataStoreFactory.createNewDataStore(params);
+            ShapefileDataStore newDataStore = (ShapefileDataStore) dataStoreFactory.createNewDataStore(
+                    params);
             newDataStore.forceSchemaCRS(DefaultGeographicCRS.WGS84);
             newDataStore.createSchema(result.getSchema()); // DA ECCEZIONE
             writer = newDataStore.getFeatureWriter(Transaction.AUTO_COMMIT);
@@ -363,13 +388,19 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             }
             transaction.commit();
             logger.info("\n  INFO: Compressing SHP Files ");
-            String tempUserZipDir = PublishUtility.createDir(this.zipTempDir + sessionID + System.getProperty("file.separator"));
+            String tempUserZipDir = PublishUtility.createDir(this.zipTempDir + sessionID + System.getProperty(
+                    "file.separator"));
             String name = shpFileName.substring(0, shpFileName.length() - 4);
-            ZipOutputStream out = new ZipOutputStream(new FileOutputStream(tempUserZipDir + name + ".zip"));
-            out = PublishUtility.compress(out, new File(tempUserDir + name + ".shp"));
-            out = PublishUtility.compress(out, new File(tempUserDir + name + ".dbf"));
-            out = PublishUtility.compress(out, new File(tempUserDir + name + ".shx"));
-            out = PublishUtility.compress(out, new File(tempUserDir + name + ".prj"));
+            ZipOutputStream out = new ZipOutputStream(new FileOutputStream(
+                    tempUserZipDir + name + ".zip"));
+            out = PublishUtility.compress(out, new File(
+                    tempUserDir + name + ".shp"));
+            out = PublishUtility.compress(out, new File(
+                    tempUserDir + name + ".dbf"));
+            out = PublishUtility.compress(out, new File(
+                    tempUserDir + name + ".shx"));
+            out = PublishUtility.compress(out, new File(
+                    tempUserDir + name + ".prj"));
             out.close();
             return getStreamOfByteFromFile(tempUserZipDir + name + ".zip");
         } catch (MalformedURLException ex) {
@@ -389,14 +420,14 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             transaction.close();
         }
     }
-
+    
     private byte[] getStreamOfByteFromFile(String fileName) throws FileNotFoundException, IOException {
         File file = new File(fileName);
         InputStream is = new FileInputStream(file);
 
         // Get the size of the file
         long length = file.length();
-
+        
         if (length > Integer.MAX_VALUE) {
             // File is too large
         }
@@ -407,13 +438,15 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         // Read in the bytes
         int offset = 0;
         int numRead = 0;
-        while (offset < bytes.length && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
+        while (offset < bytes.length && (numRead = is.read(bytes, offset,
+                bytes.length - offset)) >= 0) {
             offset += numRead;
         }
 
         // Ensure all the bytes have been read in
         if (offset < bytes.length) {
-            throw new IOException("Could not completely read file " + file.getName());
+            throw new IOException(
+                    "Could not completely read file " + file.getName());
         }
 
         // Close the input stream and return bytes
@@ -433,7 +466,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         String userWorkspace = createPreviewWorkspace(sessionID);
         logger.info("Removing " + dataStoreName + " from " + userWorkspace);
         this.removeLayer(dataStoreName);
-        boolean unpublish = publisher.unpublishFeatureType(userWorkspace, dataStoreName, dataStoreName);
+        boolean unpublish = publisher.unpublishFeatureType(userWorkspace,
+                dataStoreName, dataStoreName);
         reload();
         boolean remove = publisher.removeDatastore(userWorkspace, dataStoreName);
         return true;
@@ -446,16 +480,23 @@ public class GPPublisherServiceImpl implements GPPublisherService {
      * @throws ResourceNotFoundFault
      * get the URL to the PNG if the layer dataStoreName
      */
-    private InfoPreview getURLPreviewByDataStoreName(String sessionID, String dataStoreName) throws ResourceNotFoundFault {
-        RESTFeatureType featureType = reader.getFeatureType(reader.getLayer(dataStoreName));
-        logger.info("\n *********************" + dataStoreName + "  *********************** " + featureType.getMaxX());
+    private InfoPreview getURLPreviewByDataStoreName(String sessionID,
+            String dataStoreName) throws ResourceNotFoundFault {
+        RESTFeatureType featureType = reader.getFeatureType(reader.getLayer(
+                dataStoreName));
+        logger.info(
+                "\n *********************" + dataStoreName + "  *********************** " + featureType.getMaxX());
         String userWorkspace = createPreviewWorkspace(sessionID);
         InfoPreview info = null;
         try {
-            info = new InfoPreview(RESTURL, userWorkspace, dataStoreName, featureType.getMinX(), featureType.getMinY(), featureType.getMaxX(), featureType.getMaxY(), "EPSG:4326");
+            info = new InfoPreview(RESTURL, userWorkspace, dataStoreName,
+                    featureType.getMinX(), featureType.getMinY(),
+                    featureType.getMaxX(), featureType.getMaxY(), "EPSG:4326");
         } catch (Exception e) {
-            logger.info("The layer " + dataStoreName + " is published in the " + userWorkspace + " workspace, but the server cannot provide info");
-            info = new InfoPreview(dataStoreName, "The layer " + dataStoreName + " is published in the " + userWorkspace + " workspace, but the server cannot provide info");
+            logger.info(
+                    "The layer " + dataStoreName + " is published in the " + userWorkspace + " workspace, but the server cannot provide info");
+            info = new InfoPreview(dataStoreName,
+                    "The layer " + dataStoreName + " is published in the " + userWorkspace + " workspace, but the server cannot provide info");
         }
         return info;
 
@@ -472,7 +513,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     public List<InfoPreview> getPreviewDataStores(String sessionID) throws ResourceNotFoundFault {
         reload();
         List<InfoPreview> listPreviews = new ArrayList<InfoPreview>();
-        String tempUserZipDir = PublishUtility.createDir(this.zipTempDir + sessionID);
+        String tempUserZipDir = PublishUtility.createDir(
+                this.zipTempDir + sessionID);
         String userWorkspace = createPreviewWorkspace(sessionID);
         File dir = new File(tempUserZipDir);
         RESTDataStoreList list = reader.getDatastores(userWorkspace);
@@ -483,7 +525,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         }
         return listPreviews;
     }
-
+    
     private boolean exportCRS(File shpFile, int code) {
         SimpleFeatureSource featureSource = null;
         FeatureWriter<SimpleFeatureType, SimpleFeature> writer = null;
@@ -502,14 +544,16 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             create.put("url", shpFile.toURI().toURL());
             create.put("create spatial index", Boolean.TRUE);
             DataStore dataStore = factory.createNewDataStore(create);
-            SimpleFeatureType featureType = SimpleFeatureTypeBuilder.retype(schema, toCRS);
+            SimpleFeatureType featureType = SimpleFeatureTypeBuilder.retype(
+                    schema, toCRS);
             dataStore.createSchema(featureType);
             transaction = new DefaultTransaction("Reproject");
-            writer = dataStore.getFeatureWriterAppend(featureType.getTypeName(), transaction);
+            writer = dataStore.getFeatureWriterAppend(featureType.getTypeName(),
+                    transaction);
         } catch (Exception e) {
             return false;
         }
-
+        
         SimpleFeatureCollection featureCollection = null;
         SimpleFeatureIterator iterator = null;
         try {
@@ -520,10 +564,10 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                 SimpleFeature feature = iterator.next();
                 SimpleFeature copy = writer.next();
                 copy.setAttributes(feature.getAttributes());
-
+                
                 Geometry geometry = (Geometry) feature.getDefaultGeometry();
                 Geometry geometry2 = JTS.transform(geometry, transform);
-
+                
                 copy.setDefaultGeometry(geometry2);
                 writer.write();
             }
@@ -546,7 +590,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             } catch (IOException ex) {
                 return false;
             }
-
+            
         }
     }
 
@@ -556,10 +600,13 @@ public class GPPublisherServiceImpl implements GPPublisherService {
      * @return the information of the shapefile
      * this method extracts from a zip file conntaining the shape files the name, the CRS and the geometry types
      */
-    private List<InfoShape> getInfoFromCompressedShape(String sessionID, File file) {
+    private List<InfoShape> getInfoFromCompressedShape(String sessionID,
+            File file) {
         logger.info("Call to getInfoFromCompressedShape");
-        String tempUserDir = PublishUtility.createDir(this.shpTempDir + sessionID + System.getProperty("file.separator"));
-        String tempUserZipDir = PublishUtility.createDir(this.zipTempDir + sessionID + System.getProperty("file.separator"));
+        String tempUserDir = PublishUtility.createDir(this.shpTempDir + sessionID + System.getProperty(
+                "file.separator"));
+        String tempUserZipDir = PublishUtility.createDir(this.zipTempDir + sessionID + System.getProperty(
+                "file.separator"));
         String userWorkspace = createPreviewWorkspace(sessionID);
         System.setProperty("org.geotools.referencing.forceXY", "true");
         List<String> shpList = new ArrayList<String>();
@@ -642,7 +689,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                 if (fileSLD.exists()) {
                     reload();
                     info.sld = info.name;
-                    logger.info("\n INFO: FOUND STYLE FILE " + tempUserDir + SLDFileName + ". TRYING TO PUBLISH WITH " + info.name + " NAME");
+                    logger.info(
+                            "\n INFO: FOUND STYLE FILE " + tempUserDir + SLDFileName + ". TRYING TO PUBLISH WITH " + info.name + " NAME");
                     boolean returnPS = false;
                     if (!existsStyle(info.name)) {
                         returnPS = publisher.publishStyle(fileSLD, info.name);
@@ -652,7 +700,9 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                 logger.info("\n INFO: STYLE " + info.sld + " for " + info.name);
                 Integer code = null;
                 try {
-                    code = CRS.lookupEpsgCode(featureSource.getSchema().getCoordinateReferenceSystem(), true);
+                    code = CRS.lookupEpsgCode(
+                            featureSource.getSchema().getCoordinateReferenceSystem(),
+                            true);
                 } catch (Exception e) {
                 };
                 // if (code.intValue()!=4326) exportCRS(shpFile, 4326);
@@ -663,7 +713,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                 }
                 // fine analisi shape
                 infoShapeList.add(info);
-                compressFiles(tempUserZipDir, tempUserDir, info.name + ".zip", info.name, info.name); // questo metodo comprime in un file <nomeshape>.zip gli shp file associati: shp, dbf, shx e prj
+                compressFiles(tempUserZipDir, tempUserDir, info.name + ".zip",
+                        info.name, info.name); // questo metodo comprime in un file <nomeshape>.zip gli shp file associati: shp, dbf, shx e prj
             }
             // svuota la cartella degli shape <tmp>/geoportal/shp
             File directory = new File(tempUserDir);
@@ -672,7 +723,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                 f.delete();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("ERRORE : " + e);
         }
         return infoShapeList;
     }
@@ -759,20 +810,24 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         logger.info("Call to uploadZIPInPreview");
         this.managedSessions.add(sessionID);
         reload();
-        String tempUserDir = PublishUtility.createDir(this.shpTempDir + sessionID + System.getProperty("file.separator"));
-        String tempUserZipDir = PublishUtility.createDir(this.zipTempDir + sessionID + System.getProperty("file.separator"));
+        String tempUserDir = PublishUtility.createDir(this.shpTempDir + sessionID + System.getProperty(
+                "file.separator"));
+        String tempUserZipDir = PublishUtility.createDir(this.zipTempDir + sessionID + System.getProperty(
+                "file.separator"));
         String userWorkspace = createPreviewWorkspace(sessionID);
         List<InfoPreview> infoPreviewList = new ArrayList<InfoPreview>();
         // decompress the zip file in the <tmp>/shp directory, read info and create <layername>.zip files for each layer in <tmp>/zip
-        List<InfoShape> infoShapeList = getInfoFromCompressedShape(sessionID, file);
+        List<InfoShape> infoShapeList = getInfoFromCompressedShape(sessionID,
+                file);
         if (infoShapeList.isEmpty()) {
-            throw new ResourceNotFoundFault("The ZIP archive does not contain shp files");
+            throw new ResourceNotFoundFault(
+                    "The ZIP archive does not contain shp files");
         }
         for (InfoShape info : infoShapeList) {
             InfoPreview urlPNGPreview = null;
             // check if the layer already exists in the preview, if not an error message is returned int the InfoPreviewList
 
-
+            
             if (!existsLayer(userWorkspace, info.name)) {
                 try {
                     // check if the previews workspace exist, create it if not
@@ -780,34 +835,45 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                     String fileName = tempUserZipDir + info.name + ".zip";
                     File temp = new File(fileName);
                     //publish the <layername>.zip file in the previews workspace
-                    logger.info("\n INFO: STYLE TO PUBLISH " + info.sld + " NAME :" + info.name);
-                    logger.info("\n INFO: CREATE DATASTORE " + userWorkspace + " NAME :" + info.name);                    
-                    boolean published = publisher.publishShp(userWorkspace, info.name, info.name, temp, info.epsg, info.sld);             
+                    logger.info(
+                            "\n INFO: STYLE TO PUBLISH " + info.sld + " NAME :" + info.name);
+                    logger.info(
+                            "\n INFO: CREATE DATASTORE " + userWorkspace + " NAME :" + info.name);                    
+                    boolean published = publisher.publishShp(userWorkspace,
+                            info.name, info.name, temp, info.epsg, info.sld);                    
                     if (published) {
-                        logger.info(info.name + "correctly published in the " + userWorkspace + " workspace");
-                        urlPNGPreview = getURLPreviewByDataStoreName(sessionID, info.name);
+                        logger.info(
+                                info.name + "correctly published in the " + userWorkspace + " workspace");
+                        urlPNGPreview = getURLPreviewByDataStoreName(sessionID,
+                                info.name);
                         urlPNGPreview.setCrs(info.epsg);
                     } else {
-                        logger.info("Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace: may be the layer is already published in a db");
-                        urlPNGPreview = new InfoPreview(info.name, "Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace");
+                        logger.info(
+                                "Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace: may be the layer is already published in a db");
+                        urlPNGPreview = new InfoPreview(info.name,
+                                "Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace");
                     }
                 } catch (Exception ex) {
-
-                    logger.info("Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace");
+                    
+                    logger.info(
+                            "Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace");
                     ex.printStackTrace();
-                    urlPNGPreview = new InfoPreview(info.name, "Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace");
+                    urlPNGPreview = new InfoPreview(info.name,
+                            "Some problems occured when publishing " + info.name + " into the " + userWorkspace + " workspace");
                 }
                 //publish the shape in the previews workspace
             } else {
-                urlPNGPreview = getURLPreviewByDataStoreName(sessionID, info.name);
-                urlPNGPreview.setMessage("The data store " + info.name + " in " + userWorkspace + " already exists");
+                urlPNGPreview = getURLPreviewByDataStoreName(sessionID,
+                        info.name);
+                urlPNGPreview.setMessage(
+                        "The data store " + info.name + " in " + userWorkspace + " already exists");
             }
             // calculate the PNG URL to return
             urlPNGPreview.setUrl(urlPNGPreview.getUrl() + "/wms");
             infoPreviewList.add(urlPNGPreview);
         }
         return infoPreviewList;
-
+        
     }
 
     /*****************
@@ -817,24 +883,27 @@ public class GPPublisherServiceImpl implements GPPublisherService {
      * @return
      *
      */
-    private ZipOutputStream compressFiles(String tempUserZipDir, String tempUserDir, String zipFileName, String origName, String destName) {
+    private ZipOutputStream compressFiles(String tempUserZipDir,
+            String tempUserDir, String zipFileName, String origName,
+            String destName) {
         ZipOutputStream out = null;
-
+        
         try {
-            out = new ZipOutputStream(new FileOutputStream(tempUserZipDir + zipFileName));
+            out = new ZipOutputStream(new FileOutputStream(
+                    tempUserZipDir + zipFileName));
             File shpFile = new File(tempUserDir + origName + ".shp");
             File dbfFile = new File(tempUserDir + origName + ".dbf");
             File shxFile = new File(tempUserDir + origName + ".shx");
             File prjFile = new File(tempUserDir + origName + ".prj");
-
+            
             File shpDestFile = shpFile;
             File dbfDestFile = dbfFile;
             File shxDestFile = shxFile;
             File prjDestFile = prjFile;
-
+            
             File sldFile = new File(tempUserDir + origName + ".sld");
             File sldDestFile = sldFile;
-
+            
             if (destName != null) {
                 shpDestFile = new File(tempUserDir + destName + ".shp");
                 shpFile.renameTo(shpDestFile);
@@ -873,13 +942,17 @@ public class GPPublisherServiceImpl implements GPPublisherService {
      * this service uploads in the previews workspace a shapefile. The shapefile file must contain the shp, the prj, the shx and the dbf files. Otherwise, an exception is raised
      */
     @Override
-    public List<InfoPreview> uploadShapeInPreview(String sessionID, File shpFile, File dbfFile, File shxFile, File prjFile, File sldFile) throws ResourceNotFoundFault {
+    public List<InfoPreview> uploadShapeInPreview(String sessionID, File shpFile,
+            File dbfFile, File shxFile, File prjFile, File sldFile) throws ResourceNotFoundFault {
         InfoPreview infoPreview = null;
         List<InfoPreview> listInfoPreview = new ArrayList<InfoPreview>();
-        String name = shpFile.getName().substring(0, shpFile.getName().length() - 4);
-        String tempUserDirZIP = PublishUtility.createDir(this.zipTempDir + sessionID + System.getProperty("file.separator"));
+        String name = shpFile.getName().substring(0,
+                shpFile.getName().length() - 4);
+        String tempUserDirZIP = PublishUtility.createDir(this.zipTempDir + sessionID + System.getProperty(
+                "file.separator"));
         try {
-            ZipOutputStream out = new ZipOutputStream(new FileOutputStream(tempUserDirZIP + "temp.zip"));
+            ZipOutputStream out = new ZipOutputStream(new FileOutputStream(
+                    tempUserDirZIP + "temp.zip"));
             out = PublishUtility.compress(out, shpFile);
             out = PublishUtility.compress(out, dbfFile);
             out = PublishUtility.compress(out, shxFile);
@@ -892,8 +965,10 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             // compressedFile.deleteOnExit();
             return uploadZIPInPreview(sessionID, compressedFile);
         } catch (Exception ex) {
-            logger.info("the zip file cannot be created because some files are missing or are malformed");
-            infoPreview = new InfoPreview(name, "Some problems occured when publishing " + name + " into the " + previewWorkspace + " workspace. The zip file cannot be created because some files are missing or are malformed. Check whether the shp, dbf, shx, prj files are well-formed");
+            logger.info(
+                    "the zip file cannot be created because some files are missing or are malformed");
+            infoPreview = new InfoPreview(name,
+                    "Some problems occured when publishing " + name + " into the " + previewWorkspace + " workspace. The zip file cannot be created because some files are missing or are malformed. Check whether the shp, dbf, shx, prj files are well-formed");
             listInfoPreview.add(infoPreview);
             return listInfoPreview;
         }

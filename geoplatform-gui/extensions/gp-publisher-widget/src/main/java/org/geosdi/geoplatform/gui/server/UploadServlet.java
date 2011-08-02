@@ -58,6 +58,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.responce.InfoPreview;
@@ -72,27 +73,18 @@ import org.geosdi.geoplatform.responce.InfoPreview;
 public class UploadServlet extends HttpServlet {
 
     private static final long serialVersionUID = -1464439864247709647L;
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private String TMP_DIR_PATH = System.getProperty("java.io.tmpdir");
-    private File tmpDir;
+    
+    private PublisherFileUtils publisherFileUtils;
     private GeoPlatformPublishClient geoPlatformPublishClient;
-
-    public UploadServlet() {
-        this.geoPlatformPublishClient = (GeoPlatformPublishClient) GeoPlatformContextUtil.getInstance().getBean(
-                "geoPlatformPublishClient");
-    }
 
     @Override
     public void init() throws ServletException {
         super.init();
-        if (!TMP_DIR_PATH.endsWith(File.separator)) {
-            TMP_DIR_PATH += File.separator;
-        }
-        tmpDir = new File(TMP_DIR_PATH);
-
-        if (!tmpDir.exists()) {
-            tmpDir.mkdir();
-        }
+        this.geoPlatformPublishClient = (GeoPlatformPublishClient) GeoPlatformContextUtil.getInstance().getBean(
+                "geoPlatformPublishClient");
+        this.publisherFileUtils = (PublisherFileUtils) GeoPlatformContextUtil.getInstance().getBean(PublisherFileUtils.class);
     }
 
     @Override
@@ -143,9 +135,7 @@ public class UploadServlet extends HttpServlet {
                     }
 
                     try {
-                        uploadedFile = new File(tmpDir.getAbsolutePath() + File.separator + fileName + Long.toString(
-                                System.nanoTime()));
-
+                        uploadedFile = this.publisherFileUtils.createFileWithUniqueName(fileName);
                         item.write(uploadedFile);
                     } catch (Exception ex) {
                         logger.info("ERRORE : " + ex);
@@ -176,7 +166,6 @@ public class UploadServlet extends HttpServlet {
                 logger.info("Error on uploading shape: " + ex);
                 throw new GeoPlatformException("Error on uploading shape.");
             } finally {
-//                FileUtils.deleteDirectory(destinationDir);
                 uploadedFile.delete();
                 resp.getWriter().close();
             }

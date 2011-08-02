@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.publish;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebResult;

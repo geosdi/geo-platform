@@ -33,8 +33,9 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.server;
+package org.geosdi.geoplatform.gui.server.service;
 
+import org.geosdi.geoplatform.gui.server.*;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;

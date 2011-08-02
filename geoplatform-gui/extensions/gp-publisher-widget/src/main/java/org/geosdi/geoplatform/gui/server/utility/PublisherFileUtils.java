@@ -33,32 +33,58 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.server.gwt;
+package org.geosdi.geoplatform.gui.server.utility;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.service.PublisherRemote;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.service.IPublisherService;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
+import java.io.File;
+import java.io.IOException;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public class PublisherRemoteImpl extends RemoteServiceServlet implements PublisherRemote {
+@Component(value = "publisherFileUtils")
+public class PublisherFileUtils {
 
-    private static final long serialVersionUID = 5204638800999412388L;
-    
-    private IPublisherService publisherService;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private String TMP_DIR_PATH = System.getProperty("java.io.tmpdir");
+    private File pbDir;
 
-    public PublisherRemoteImpl() {
-        this.publisherService = (IPublisherService) GeoPlatformContextUtil.getInstance().getBean(
-                "publisherService");
+    public File createFileWithUniqueName(String fileName) {
+        return new File(pbDir.getAbsolutePath() + File.separator + fileName + Long.toString(
+                System.nanoTime()));
     }
 
-    @Override
-    public void publishLayerPreview(List<String> layerList) throws GeoPlatformException {
-        this.publisherService.publishLayerPreview(super.getThreadLocalRequest(), layerList);
+    @PostConstruct
+    public void init() {
+        if (!TMP_DIR_PATH.endsWith(File.separator)) {
+            TMP_DIR_PATH += File.separator;
+        }
+        pbDir = new File(TMP_DIR_PATH + "GPPublishDir");
+
+        if (!pbDir.exists()) {
+            pbDir.mkdir();
+        }
+
+        logger.info("GP_PUBLISH_DIR_PATH : ***************************** " + pbDir.getAbsolutePath());
+    }
+
+    @PreDestroy
+    public void destroy() {
+        try {
+            if (pbDir.exists()) {
+                FileUtils.deleteDirectory(pbDir);
+                logger.info("- ----------------------> Destroy PublisherFileUtils "
+                        + "and  Delete GPPublishDir");
+            }
+        } catch (IOException ex) {
+            logger.error("GeoPlatform Publish Dir Delete Error : " + ex);
+        }
     }
 }

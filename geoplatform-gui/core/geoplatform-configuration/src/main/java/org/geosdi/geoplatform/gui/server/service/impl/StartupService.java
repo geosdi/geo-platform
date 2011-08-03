@@ -54,13 +54,16 @@ import org.springframework.stereotype.Service;
 public class StartupService implements IStartupService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    
     @Autowired
     private IGeoPlatformGlobal geoPlatformGlobal;
 
     @PostConstruct
     public void init() {
-        logger.info("------------------------------> INIT STARTUP-GEO-PLATFORM SERVICE");
-        logger.info(this.geoPlatformGlobal.getGeoPlatformInfo().getVersion().getName()
+        logger.info(
+                "------------------------------> INIT STARTUP-GEO-PLATFORM SERVICE");
+        logger.info(
+                this.geoPlatformGlobal.getGeoPlatformInfo().getVersion().getName()
                 + " - Version : "
                 + this.geoPlatformGlobal.getGeoPlatformInfo().getVersion().getVersion());
 

@@ -58,6 +58,7 @@ public class MapToolbar extends GPMapToolbarWidget implements
      * Constructor
      *
      * @param mapLayoutWidget
+     * @param tools  
      */
     public MapToolbar(MapLayoutWidget mapLayoutWidget,
             List<GenericClientTool> tools) {

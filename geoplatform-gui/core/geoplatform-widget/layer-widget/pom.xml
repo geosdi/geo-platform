@@ -66,13 +66,11 @@
        <dependency>
             <groupId>org.gwtopenmaps.openlayers</groupId>
             <artifactId>gwt-openlayers-client</artifactId>
-            <version>0.6-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.gwtopenmaps.openlayers</groupId>
             <artifactId>gwt-openlayers-server</artifactId>
-            <version>0.6-SNAPSHOT</version>
             <scope>runtime</scope>
         </dependency>
 

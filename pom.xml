@@ -9,7 +9,6 @@
     <name>Geo-Platform :: == GeoSDI Framework</name>
 
 
-
     <scm>
         <connection>scm:svn:https://trac.geosdi.org/svn/geo-platform/trunk</connection>
         <url>https://trac.geosdi.org/svn/geo-platform/trunk</url>
@@ -1134,7 +1133,7 @@
         <xbean-version>3.1.0.2-fuse</xbean-version>
 
         <spring-support>2.0.8</spring-support>
-        <spring-security-version>3.0.3.RELEASE</spring-security-version>
+        <spring-security-version>3.0.5.RELEASE</spring-security-version>
         <spring-ws-version>1.0.1</spring-ws-version>
         <aspectj-version>1.5.4</aspectj-version>
         <ubl-version>2.0</ubl-version>

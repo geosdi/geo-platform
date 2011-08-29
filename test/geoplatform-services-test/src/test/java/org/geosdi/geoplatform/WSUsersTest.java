@@ -39,8 +39,6 @@ package org.geosdi.geoplatform;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.ws.soap.SOAPFaultException;
 import org.junit.Test;
 import junit.framework.Assert;

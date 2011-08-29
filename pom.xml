@@ -19,7 +19,7 @@
         <url>http://www.geosdi.org</url>
     </organization>
     <inceptionYear>2011</inceptionYear>
-
+    
     <distributionManagement>
 		<!--.................................. -->
 		<!-- geoSDI Repository -->
@@ -1162,6 +1162,7 @@
         
         <gwtOpenlayersVersion>0.6-SNAPSHOT</gwtOpenlayersVersion>
 
+        <netbeans.hint.license>geo-platform</netbeans.hint.license>
     </properties>
 
 </project>

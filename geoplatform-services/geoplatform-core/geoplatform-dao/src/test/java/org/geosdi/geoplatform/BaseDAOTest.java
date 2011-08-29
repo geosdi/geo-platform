@@ -228,9 +228,9 @@ public abstract class BaseDAOTest {
         user.setEmailAddress(username + "@test");
         user.setEnabled(true);
         if (username.contains("_")) {
-            user.setPassword("pwd_" + username);
+            user.setPassword(Utility.md5hash("pwd_" + username));
         } else { // User for GUI test
-            user.setPassword(username);
+            user.setPassword(Utility.md5hash(username));
         }
         user.setSendEmail(true);
         return user;

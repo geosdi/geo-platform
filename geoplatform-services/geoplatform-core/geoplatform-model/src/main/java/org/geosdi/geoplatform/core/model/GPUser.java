@@ -159,7 +159,7 @@ public class GPUser implements Serializable, UserDetails {
      *            the password to set
      */
     public void setPassword(String password) {
-        this.password = Utility.md5hash(password);
+        this.password = password;
     }
 
     /**
@@ -300,7 +300,9 @@ public class GPUser implements Serializable, UserDetails {
     }
 
     public boolean verify(String password) throws NoSuchAlgorithmException {
+        System.out.println("$$$$$$$$$$$$ Password: " + this.password);
         String hashPasswordSpeicifed = Utility.md5hash(password);
+        System.out.println("$$$$$$$$$$$$ HashPassword: " + hashPasswordSpeicifed);
         if (this.password.equals(hashPasswordSpeicifed)) {
             return true;
         } else {

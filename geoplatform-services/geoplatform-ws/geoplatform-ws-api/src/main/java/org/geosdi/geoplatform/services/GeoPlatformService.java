@@ -122,7 +122,8 @@ public interface GeoPlatformService {
 
     @Get
     @WebResult(name = "User")
-    GPUser getUserDetailByUsernameAndPassword(String username, String password) throws ResourceNotFoundFault, SOAPFaultException;
+    GPUser getUserDetailByUsernameAndPassword(String username, String password)
+            throws ResourceNotFoundFault, SOAPFaultException;
 
     @Get
     @HttpResource(location = "/users/search/{num}/{page}/{nameLike}")
@@ -138,6 +139,12 @@ public interface GeoPlatformService {
     @HttpResource(location = "/users/count/{nameLike}")
     @WebResult(name = "count")
     long getUsersCount(SearchRequest searchRequest);
+
+    @Get
+    @HttpResource(location = "/users/{id}/authorities")
+    @WebResult(name = "Authority")
+    List<String> getUserAuthorities(@WebParam(name = "userId") long userId)
+            throws ResourceNotFoundFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Folder">

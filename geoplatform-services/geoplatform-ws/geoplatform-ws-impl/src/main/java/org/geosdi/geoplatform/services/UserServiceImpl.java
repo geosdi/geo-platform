@@ -41,10 +41,12 @@ import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.List;
+import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
+import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -62,6 +64,7 @@ class UserServiceImpl {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     // DAO
     private GPUserDAO userDao;
+    private GPAuthorityDAO authorityDao;
 
     /**
      * @param userDao
@@ -69,6 +72,14 @@ class UserServiceImpl {
      */
     public void setUserDao(GPUserDAO userDao) {
         this.userDao = userDao;
+    }
+
+    /**
+     * @param authorityDao
+     *          the authorityDao to set
+     */
+    public void setAuthorityDao(GPAuthorityDAO authorityDao) {
+        this.authorityDao = authorityDao;
     }
 
     /**
@@ -245,7 +256,7 @@ class UserServiceImpl {
 
     public GPUser getUserDetailByUsernameAndPassword(String username) {
         Search searchCriteria = new Search(GPUser.class);
-        
+
         Filter usernameFilter = Filter.equal("username", username);
         searchCriteria.addFilter(usernameFilter);
 
@@ -254,6 +265,26 @@ class UserServiceImpl {
             return null;
         }
         return usersList.get(0);
+    }
+
+    public List<String> getUserAuthorities(long userId)
+            throws ResourceNotFoundFault {
+        // Retrieve the user
+        GPUser user = userDao.find(userId);
+        if (user == null) {
+            throw new ResourceNotFoundFault("User not found", userId);
+        }
+
+        // Retrieve the Authorities of the User
+        List<GPAuthority> authorities = authorityDao.findByUsername(user.getUsername());
+        logger.trace("\n*** #Authorities: {} ***", authorities.size());
+
+        List<String> authorityName = new ArrayList<String>(authorities.size());
+        for (GPAuthority authority : authorities) {
+            authorityName.add(authority.getAuthority());
+        }
+
+        return authorityName;
     }
 
     private List<UserDTO> convertToUserList(List<GPUser> userList) {

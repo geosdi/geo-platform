@@ -184,6 +184,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      */
     public void setAuthorityDao(GPAuthorityDAO authorityDao) {
         this.authorityDao = authorityDao;
+        this.userServiceDelegate.setAuthorityDao(authorityDao);
         this.aclServiceDelegate.setAuthorityDao(authorityDao);
     }
 
@@ -312,6 +313,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
             throw new SoapFault(e.getMessage(), null);
         }
         return user;
+    }
+
+    @Override
+    public List<String> getUserAuthorities(long userId)
+            throws ResourceNotFoundFault {
+        return userServiceDelegate.getUserAuthorities(userId);
     }
     //</editor-fold>
 

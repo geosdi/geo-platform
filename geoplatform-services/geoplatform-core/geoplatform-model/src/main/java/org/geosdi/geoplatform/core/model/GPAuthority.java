@@ -81,7 +81,7 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     @Column(name = "authority", nullable = false)
     private String authority;
     //
-    @ManyToOne(targetEntity = GPUser.class)
+    @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPUser gpUser;
 
@@ -129,9 +129,12 @@ public class GPAuthority implements GrantedAuthority, Serializable {
         this.username = username;
     }
 
+    /**
+     * 
+     * @return authority
+     */    
     @Override
     public String getAuthority() {
-        // TODO Auto-generated method stub
         return authority;
     }
 

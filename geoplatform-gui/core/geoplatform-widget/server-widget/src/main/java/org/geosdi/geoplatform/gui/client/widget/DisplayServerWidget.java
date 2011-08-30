@@ -55,10 +55,12 @@ import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.form.AddServerWidget;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel.GPServerKeyValue;
+import org.geosdi.geoplatform.gui.server.gwt.ServerRemoteImpl;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
 
 /**
@@ -67,7 +69,8 @@ import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class DisplayServerWidget {
-
+    
+    public final static String ROLE_ADMIN = "ROLE_ADMIN";
     private ToolBar toolbar;
     private ComboBox<GPServerBeanModel> comboServer;
     private ListStore<GPServerBeanModel> store;
@@ -87,16 +90,16 @@ public class DisplayServerWidget {
         this.addServerWidget = new AddServerWidget(this);
         this.loadcapabilities = new PerformGetcapabilities();
     }
-
+    
     private void init() {
         this.createComponents();
         this.createToolBar();
     }
-
+    
     private void createComponents() {
         this.store = new ListStore<GPServerBeanModel>();
         this.comboServer = new ComboBox<GPServerBeanModel>();
-
+        
         comboServer.setEmptyText("Select a Server...");
         comboServer.setDisplayField(GPServerKeyValue.URL_SERVER.getValue());
         comboServer.setTemplate(getTemplate());
@@ -105,40 +108,58 @@ public class DisplayServerWidget {
         comboServer.setStore(this.store);
         comboServer.setTypeAhead(true);
         comboServer.setTriggerAction(TriggerAction.ALL);
-
+        
         this.comboServer.addSelectionChangedListener(new SelectionChangedListener<GPServerBeanModel>() {
-
+            
             @Override
             public void selectionChanged(
                     SelectionChangedEvent<GPServerBeanModel> se) {
                 changeSelection(se.getSelectedItem());
             }
         });
-
+        
         this.addServer = new Button("Add Server",
                 ServerWidgetResources.ICONS.addServer(),
                 new SelectionListener<ButtonEvent>() {
-
+                    
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         addServerWidget.showForm();
                     }
                 });
+        ServerRemoteImpl.Util.getInstance().getUserAuthorities(new AsyncCallback<List<String>>() {
+            
+            @Override
+            public void onFailure(Throwable caught) {
+                System.out.println("Failure on DisplayServerWidget");
+            }
+            
+            @Override
+            public void onSuccess(List<String> result) {
+                addServer.setEnabled(false);
+                for (String role : result) {
+                    System.out.println("Role: " + role);
+                    if(role.equals(ROLE_ADMIN)){
+                        addServer.setEnabled(true);
+                    }
+                }
+            }
+        });
     }
-
+    
     private void createToolBar() {
         this.toolbar = new ToolBar();
-
+        
         this.searchStatus = new SearchStatus();
         searchStatus.setAutoWidth(true);
-
+        
         this.toolbar.add(this.searchStatus);
-
+        
         this.toolbar.add(this.comboServer);
         this.toolbar.add(new SeparatorToolItem());
-
+        
         toolbar.add(new FillToolItem());
-
+        
         this.toolbar.add(this.addServer);
     }
 
@@ -147,11 +168,11 @@ public class DisplayServerWidget {
      * @return String
      */
     private native String getTemplate() /*-{
-        return  [
-            '<tpl for=".">',
-                '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{urlServer}</div>',
-            '</tpl>'
-        ].join("");
+    return  [
+    '<tpl for=".">',
+    '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{urlServer}</div>',
+    '</tpl>'
+    ].join("");
     }-*/;
 
     /**
@@ -170,9 +191,9 @@ public class DisplayServerWidget {
      */
     public void loadServers() {
         this.searchStatus.setBusy("Loading Server...");
-
+        
         GeoPlatformOGCRemote.Util.getInstance().loadServers(new AsyncCallback<ArrayList<GPServerBeanModel>>() {
-
+            
             @Override
             public void onFailure(Throwable caught) {
                 setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
@@ -180,7 +201,7 @@ public class DisplayServerWidget {
                 GeoPlatformMessage.errorMessage("Server Service",
                         "An Error occured loading Servers.");
             }
-
+            
             @Override
             public void onSuccess(ArrayList<GPServerBeanModel> result) {
                 if (result.isEmpty()) {
@@ -196,7 +217,7 @@ public class DisplayServerWidget {
             }
         });
     }
-
+    
     public void resetComponents() {
         this.store.removeAll();
         this.comboServer.setRawValue("");
@@ -211,7 +232,7 @@ public class DisplayServerWidget {
         this.gridWidget.cleanComponentForSelection();
         LayoutManager.getInstance().getStatusMap().setBusy("Loading Layers.....");
         this.gridWidget.maskGrid();
-
+        
         this.loadcapabilities.checkSelectedServer(selected);
     }
 
@@ -264,9 +285,9 @@ public class DisplayServerWidget {
      * 
      */
     private class PerformGetcapabilities {
-
+        
         private GPServerBeanModel selectedServer;
-
+        
         private void checkSelectedServer(GPServerBeanModel selected) {
             this.selectedServer = selected;
             if (selected.isLayersLoaded()) {
@@ -275,11 +296,11 @@ public class DisplayServerWidget {
                 loadcapabilitiesFromWS();
             }
         }
-
+        
         private void loadcapabilitiesFromWS() {
             GeoPlatformOGCRemote.Util.getInstance().getcapabilities(selectedServer.getId(),
                     new AsyncCallback<ArrayList<? extends GPLayerGrid>>() {
-
+                        
                         @Override
                         public void onFailure(Throwable caught) {
                             GeoPlatformMessage.errorMessage("Server Service",
@@ -289,7 +310,7 @@ public class DisplayServerWidget {
                                     EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                             gridWidget.unMaskGrid();
                         }
-
+                        
                         @Override
                         public void onSuccess(
                                 ArrayList<? extends GPLayerGrid> result) {

@@ -100,7 +100,7 @@ public class SecurityService implements ISecurityService {
             HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
-        session.setMaxInactiveInterval(900);
+        session.setMaxInactiveInterval(5);
         session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), user);
     }
 

@@ -35,23 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
-
 import com.google.gwt.core.client.EntryPoint;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class ServerWidgetUI implements EntryPoint {
+public class ServerWidgetUI implements EntryPoint{
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
-     */
     @Override
     public void onModuleLoad() {
     }
-
+    
 }

@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.gui.observable.Observable;
 import org.geosdi.geoplatform.gui.observable.Observer;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
+import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -61,12 +62,12 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
             true);
     private boolean visibiltyProgressBar;
 
-    //TODO: Implement SaveTree oparetions
     public SaveTreeAction(TreePanel theTree) {
         super(theTree, BasicWidgetResources.ICONS.save(),
                 "Save Tree State");
         displayEvent.setMessage("Saving Operations On Service");
         GPLayerSaveCache.getInstance().getObservable().addObserver(this);
+        TimeoutHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);
         LayerHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);
     }
 

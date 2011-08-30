@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.gui.featureinfo.event.timeout.LoadLayersDataSouceE
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
 import org.gwtopenmaps.openlayers.client.Map;
 
@@ -65,7 +65,7 @@ public class GPFeatureInfoCaller implements ILoadLayersDataSourceHandler{
 
     public GPFeatureInfoCaller(Map theMap) {
         this.map = theMap;
-        LayerHandlerManager.addHandler(ILoadLayersDataSourceHandler.TYPE, this);
+        TimeoutHandlerManager.addHandler(ILoadLayersDataSourceHandler.TYPE, this);
     }
 
     public void load() {

@@ -94,6 +94,7 @@ import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
@@ -119,8 +120,8 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
     public LayerTreeWidget(ContentPanel treePanel) {
         super();
         this.parentPanel = treePanel;
-        LayerHandlerManager.addHandler(IGPBuildTreeHandler.TYPE, this);
-        LayerHandlerManager.addHandler(IGPExpandTreeNodeHandler.TYPE, this);
+        TimeoutHandlerManager.addHandler(IGPBuildTreeHandler.TYPE, this);
+        TimeoutHandlerManager.addHandler(IGPExpandTreeNodeHandler.TYPE, this);
         this.buildRoot();
         this.setTreePanelProperties();
         this.treeStore = new GPTreeStoreWidget(this.tree);

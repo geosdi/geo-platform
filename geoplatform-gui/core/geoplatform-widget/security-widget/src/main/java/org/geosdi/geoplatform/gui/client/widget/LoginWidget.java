@@ -50,7 +50,7 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
 import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
@@ -175,7 +175,7 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
                 } else {
                     LayoutManager.getInstance().getViewport().unmask();
                     if (getGwtEventOnSuccess() != null) {
-                        LayerHandlerManager.fireEvent(getGwtEventOnSuccess());
+                        TimeoutHandlerManager.fireEvent(getGwtEventOnSuccess());
                     }
                 }
                 hide();

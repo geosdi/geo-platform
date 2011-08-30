@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.List;
-import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -68,7 +67,6 @@ public class ServerService implements IServerService {
         List<String> userAuthorities = null;
         try {
             userAuthorities = geoPlatformServiceClient.getUserAuthorities(user.getId());
-            System.out.println("Found user auth size: " + userAuthorities.size());
         } catch (ResourceNotFoundFault ex) {
             logger.debug("Returning no elements: " + ex);
         }

@@ -38,13 +38,9 @@ package org.geosdi.geoplatform.gui.client.widget;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.util.Margins;
-import com.extjs.gxt.ui.client.util.SwallowEvent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
@@ -55,7 +51,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.event.IUploadPreviewHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.GPPublishShapePreviewEvent;
@@ -75,6 +70,7 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
@@ -105,7 +101,7 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
         super(lazy);
         this.tree = theTree;
         GPHandlerManager.addHandler(IUploadPreviewHandler.TYPE, this);
-        LayerHandlerManager.addHandler(IGPPublishShapePreviewHandler.TYPE, this);
+        TimeoutHandlerManager.addHandler(IGPPublishShapePreviewHandler.TYPE, this);
     }
 
     @Override

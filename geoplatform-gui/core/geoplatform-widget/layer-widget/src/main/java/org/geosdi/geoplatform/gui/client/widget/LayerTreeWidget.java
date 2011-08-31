@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.store.TreeStore;
@@ -63,6 +64,7 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
+import com.google.gwt.event.dom.client.ContextMenuEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
@@ -81,9 +83,11 @@ import org.geosdi.geoplatform.gui.client.event.timeout.GPExpandTreeNodeEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.IGPBuildTreeHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.IGPExpandTreeNodeHandler;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.client.widget.contextmenu.GPDynamicTreeContextMenu;
 import org.geosdi.geoplatform.gui.client.widget.store.GPTreeStoreWidget;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
@@ -93,7 +97,6 @@ import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
@@ -108,7 +111,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
 
     private GPTreeStoreWidget treeStore;
     private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(this.tree);
-    TreePanelDragSource dragSource;
+    private TreePanelDragSource dragSource;
     private GPRootTreeNode root;
     private boolean initialized;
     private GPBuildTreeEvent buildEvent = new GPBuildTreeEvent();
@@ -125,7 +128,8 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
         this.buildRoot();
         this.setTreePanelProperties();
         this.treeStore = new GPTreeStoreWidget(this.tree);
-        this.addContextMenu();
+        //Assigning a dynamic context menu to the tree
+        GPDynamicTreeContextMenu dynamicMenu = new GPDynamicTreeContextMenu(tree);
     }
 
     /*
@@ -304,62 +308,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
                 dropTarget.getScrollSupport().setScrollElement(parentPanel.getLayoutTarget());
             }
         });
-    }
-
-    private void addContextMenu() {
-        Menu contextMenu = new Menu();
-//        MenuItem insert = new MenuItem();
-//        insert.setText("Add Folder");
-//        insert.setIcon(LayerResources.ICONS.addFolder());
-//        insert.addSelectionListener(new AddLayerAction(tree));
-//        contextMenu.add(insert);
-
-        // add zoom to max extent
-        MenuItem zoomToMaxExtend = new MenuItem();
-        zoomToMaxExtend.setText("Zoom to layer extend");
-        zoomToMaxExtend.setIcon(LayerResources.ICONS.zoomToMaxExtend());
-        zoomToMaxExtend.addSelectionListener(new ZoomToLayerExtentAction(tree));
-        contextMenu.add(zoomToMaxExtend);
-
-        MenuItem exportToKML = new MenuItem();
-        exportToKML.setText("Export To KML");
-        exportToKML.setIcon(LayerResources.ICONS.exportToKML());
-        exportToKML.addSelectionListener(new ExportoToKML(tree));
-        contextMenu.add(exportToKML);
-
-        MenuItem exportToPDF = new MenuItem();
-        exportToPDF.setText("Export To PDF");
-        exportToPDF.setIcon(LayerResources.ICONS.exportToPDF());
-        exportToPDF.addSelectionListener(new ExportoToPDF(tree));
-        contextMenu.add(exportToPDF);
-
-        MenuItem exportToTIFF = new MenuItem();
-        exportToTIFF.setText("Export To TIFF");
-        exportToTIFF.setIcon(LayerResources.ICONS.exportToTIFF());
-        exportToTIFF.addSelectionListener(new ExportoToTIFF(tree));
-        contextMenu.add(exportToTIFF);
-
-
-        MenuItem exportToShpZip = new MenuItem();
-        exportToShpZip.setText("Export To Shp-Zip");
-        exportToShpZip.setIcon(LayerResources.ICONS.exportToShpZip());
-        exportToShpZip.addSelectionListener(new ExportoToShpZip(tree));
-        contextMenu.add(exportToShpZip);
-
-        MenuItem layerProperties = new MenuItem();
-        layerProperties.setText("Layer Properties");
-        layerProperties.setIcon(LayerResources.ICONS.layerProperties());
-        layerProperties.addSelectionListener(new ShowLayerPropertiesAction(tree));
-        contextMenu.add(layerProperties);
-
-//        MenuItem exportToGML = new MenuItem();
-//        exportToGML.setText("Export To GML");
-//        exportToGML.setIcon(LayerResources.ICONS.exportToGML());
-//        exportToGML.addSelectionListener(new ExportoToGML(tree));
-//        contextMenu.add(exportToGML);
-
-        this.tree.setContextMenu(contextMenu);
-    }
+    } 
 
     @Override
     public GPTreePanel<GPBeanTreeModel> createTreePanel(TreeStore store) {

@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 import com.extjs.gxt.ui.client.data.TreeModel;
 import com.extjs.gxt.ui.client.dnd.DND.Feedback;
-import com.extjs.gxt.ui.client.dnd.StatusProxy;
 import com.extjs.gxt.ui.client.dnd.TreePanelDropTarget;
 import com.extjs.gxt.ui.client.event.DNDEvent;
 import com.extjs.gxt.ui.client.store.TreeStoreEvent;

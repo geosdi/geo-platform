@@ -146,6 +146,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                 if (caught.getCause() instanceof GPSessionTimeout) {
                     GPHandlerManager.fireEvent(new GPLoginEvent(new DisplayGetCapabilitiesEvent()));
                 } else {
+                    addServer.setEnabled(false);
                     GeoPlatformMessage.errorMessage("Error",
                             "An error occurred while making the requested operation.\n"
                             + "Verify network connections and try again."
@@ -165,6 +166,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                     System.out.println("Role: " + role);
                     if (role.equals(ROLE_ADMIN)) {
                         addServer.setEnabled(true);
+                        return;
                     }
                 }
             }

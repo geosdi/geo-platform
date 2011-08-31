@@ -194,11 +194,11 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      * @return String
      */
     private native String getTemplate() /*-{
-    return  [
-    '<tpl for=".">',
-    '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{urlServer}</div>',
-    '</tpl>'
-    ].join("");
+        return  [
+            '<tpl for=".">',
+                '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{urlServer}</div>',
+            '</tpl>'
+        ].join("");
     }-*/;
 
     /**
@@ -319,11 +319,11 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
             if (selected.isLayersLoaded()) {
                 fillGrid(selected.getLayers());
             } else {
-                loadcapabilitiesFromWS();
+                loadCapabilitiesFromWS();
             }
         }
 
-        private void loadcapabilitiesFromWS() {
+        private void loadCapabilitiesFromWS() {
             GeoPlatformOGCRemote.Util.getInstance().getcapabilities(selectedServer.getId(),
                     new AsyncCallback<ArrayList<? extends GPLayerGrid>>() {
 

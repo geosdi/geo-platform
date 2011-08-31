@@ -49,14 +49,7 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionRegistar
  */
 public class ToolbarTreeActionRegistar extends GeoPlatformActionRegistar {
 
-    private static ToolbarTreeActionRegistar INSTANCE;
-
-    public static ToolbarTreeActionRegistar createFactory() {
-        if (INSTANCE == null) {
-            INSTANCE = new ToolbarTreeActionRegistar();
-        }
-        return INSTANCE;
-    }
+    private static ToolbarTreeActionRegistar INSTANCE = new ToolbarTreeActionRegistar();
 
     /**
      * 
@@ -66,7 +59,7 @@ public class ToolbarTreeActionRegistar extends GeoPlatformActionRegistar {
     public static void put(String key,
             ToolbarTreeActionCreator toolActionCreator) {
         if (key != null && toolActionCreator != null) {
-            createFactory().getRegistry().put(key, toolActionCreator);
+            INSTANCE.getRegistry().put(key, toolActionCreator);
         }
     }
 
@@ -81,7 +74,7 @@ public class ToolbarTreeActionRegistar extends GeoPlatformActionRegistar {
      */
     public static GeoPlatformToolbarAction get(String key,
             TreePanel tree) {
-        ToolbarTreeActionCreator toolActionCreator = (ToolbarTreeActionCreator) createFactory().getRegistry().get(
+        ToolbarTreeActionCreator toolActionCreator = (ToolbarTreeActionCreator) INSTANCE.getRegistry().get(
                 key);
 
         return toolActionCreator == null ? null : toolActionCreator.createActionTool(
@@ -95,7 +88,7 @@ public class ToolbarTreeActionRegistar extends GeoPlatformActionRegistar {
      * @return null or the GeoPlatformToolbarAction 
      */
     public static GeoPlatformToolbarAction get(String key) {
-        ToolbarTreeActionCreator toolActionCreator = (ToolbarTreeActionCreator) createFactory().getRegistry().get(
+        ToolbarTreeActionCreator toolActionCreator = (ToolbarTreeActionCreator) INSTANCE.getRegistry().get(
                 key);
 
         return toolActionCreator == null ? null : toolActionCreator.getAction();
@@ -108,6 +101,6 @@ public class ToolbarTreeActionRegistar extends GeoPlatformActionRegistar {
      */
     public static List<GeoPlatformActionCreator> getActionsCreator() {
         return new ArrayList<GeoPlatformActionCreator>(
-                createFactory().getRegistry().values());
+                INSTANCE.getRegistry().values());
     }
 }

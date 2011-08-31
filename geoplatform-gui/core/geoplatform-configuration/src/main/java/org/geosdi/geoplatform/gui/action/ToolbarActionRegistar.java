@@ -44,14 +44,7 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
  */
 public class ToolbarActionRegistar extends GeoPlatformActionRegistar {
 
-    private static ToolbarActionRegistar INSTANCE;
-
-     public static ToolbarActionRegistar createFactory() {
-        if (INSTANCE == null) {
-            INSTANCE = new ToolbarActionRegistar();
-        }
-        return INSTANCE;
-    }
+    private static ToolbarActionRegistar INSTANCE = new ToolbarActionRegistar();
 
     /**
      *
@@ -60,7 +53,7 @@ public class ToolbarActionRegistar extends GeoPlatformActionRegistar {
      */
     public static void put(String key, ToolbarActionCreator toolActionCreator) {
         if (key != null && toolActionCreator != null) {
-            createFactory().getRegistry().put(key, toolActionCreator);
+            INSTANCE.getRegistry().put(key, toolActionCreator);
         }
     }
 
@@ -75,8 +68,10 @@ public class ToolbarActionRegistar extends GeoPlatformActionRegistar {
      */
     public static GeoPlatformToolbarAction get(String key,
             GeoPlatformMap mapWidget) {
-        ToolbarActionCreator toolActionCreator = (ToolbarActionCreator) createFactory().getRegistry().get(key);
+        ToolbarActionCreator toolActionCreator = (ToolbarActionCreator) INSTANCE.getRegistry().get(
+                key);
 
-        return toolActionCreator == null ? null : toolActionCreator.createActionTool(mapWidget);
+        return toolActionCreator == null ? null : toolActionCreator.createActionTool(
+                mapWidget);
     }
 }

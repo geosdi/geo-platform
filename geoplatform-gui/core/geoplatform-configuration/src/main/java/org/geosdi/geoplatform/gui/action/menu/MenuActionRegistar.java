@@ -43,14 +43,7 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionRegistar
  */
 public class MenuActionRegistar extends GeoPlatformActionRegistar {
 
-     private static MenuActionRegistar INSTANCE;
-
-     public static MenuActionRegistar createFactory() {
-        if (INSTANCE == null) {
-            INSTANCE = new MenuActionRegistar();
-        }
-        return INSTANCE;
-    }
+    private static MenuActionRegistar INSTANCE = new MenuActionRegistar();
 
     /**
      *
@@ -59,7 +52,7 @@ public class MenuActionRegistar extends GeoPlatformActionRegistar {
      */
     public static void put(String key, MenuActionCreator menuActionCreator) {
         if (key != null && menuActionCreator != null) {
-            createFactory().getRegistry().put(key, menuActionCreator);
+            INSTANCE.getRegistry().put(key, menuActionCreator);
         }
     }
 
@@ -68,9 +61,12 @@ public class MenuActionRegistar extends GeoPlatformActionRegistar {
      *
      * @param key
      *            key with the action is registered
+     * 
+     * @return  MenuAction
      */
     public static MenuAction get(String key) {
-        MenuActionCreator menuActionCreator = (MenuActionCreator) createFactory().getRegistry().get(key);
+        MenuActionCreator menuActionCreator = (MenuActionCreator) INSTANCE.getRegistry().get(
+                key);
         if (menuActionCreator == null) {
             return null;
         }

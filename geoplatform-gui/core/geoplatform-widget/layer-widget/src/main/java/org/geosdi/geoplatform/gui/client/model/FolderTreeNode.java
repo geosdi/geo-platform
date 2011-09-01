@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.model;
 
 import com.extjs.gxt.ui.client.GXT;
-import com.extjs.gxt.ui.client.data.BaseModel;
 import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.LayerResources;
@@ -44,7 +43,6 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorModelConverter;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.model.tree.IGPNode;

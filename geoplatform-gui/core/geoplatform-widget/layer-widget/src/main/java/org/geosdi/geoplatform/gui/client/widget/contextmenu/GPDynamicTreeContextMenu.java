@@ -41,10 +41,12 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.action.menu.CopyLayerAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToKML;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToPDF;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToShpZip;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToTIFF;
+import org.geosdi.geoplatform.gui.client.action.menu.PasteLayerAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowLayerPropertiesAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -58,14 +60,15 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 public class GPDynamicTreeContextMenu extends Menu {
 
     private GPTreePanel<GPBeanTreeModel> tree;
-    
+    private final Menu folderContextMenu = new Menu();
+    private final Menu layerContextMenu = new Menu();
+
     public GPDynamicTreeContextMenu(GPTreePanel tree) {
         this.tree = tree;
         this.buildMenu();
     }
 
     private void buildMenu() {
-        final Menu layerContextMenu = new Menu();
         // add zoom to max extent
         MenuItem zoomToMaxExtend = new MenuItem();
         zoomToMaxExtend.setText("Zoom to layer extend");
@@ -110,16 +113,20 @@ public class GPDynamicTreeContextMenu extends Menu {
 //        exportToGML.addSelectionListener(new ExportoToGML(tree));
 //        contextMenu.add(exportToGML);
         
-//        MenuItem copy = new MenuItem("Copy");
-//        copy.setIcon(LayerResources.ICONS.);
-//        layerContextMenu.add(copy);
-//        
-//        MenuItem paste = new MenuItem("Copy");
-//        paste.setIcon(LayerResources.ICONS.);
-//        layerContextMenu.add(paste);
-
-        this.tree.setContextMenu(layerContextMenu);
-        final Menu folderContextMenu = new Menu();
+        MenuItem pasteMenuItem = new MenuItem("Paste in Folder");
+        pasteMenuItem.setIcon(LayerResources.ICONS.paste());
+        pasteMenuItem.setEnabled(false);
+        PasteLayerAction pasteAction = new PasteLayerAction(tree);
+        pasteMenuItem.addSelectionListener(pasteAction);
+        folderContextMenu.add(pasteMenuItem);
+        
+        MenuItem copyMenuItem = new MenuItem("Copy Layer");
+        copyMenuItem.setIcon(LayerResources.ICONS.copy());
+        copyMenuItem.addSelectionListener(new CopyLayerAction(tree, pasteAction, pasteMenuItem));
+        layerContextMenu.add(copyMenuItem);
+        
+        this.tree.setContextMenu(this.layerContextMenu);
+        
         this.tree.addListener(Events.OnContextMenu, new Listener() {
 
             @Override

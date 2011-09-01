@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.widget.store;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.ISave;
 
@@ -83,6 +82,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
     //
     private final static int LAYERS_FROM_CAPABILITIES = 1;
     private final static int LAYERS_FROM_PUBLISHER = 2;
+    private final static int LAYERS_FROM_COPY_MENU = 3;
 
     /*
      * @param theTree 
@@ -104,6 +104,16 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
     @Override
     public void addVectorLayersfromPublisher(List<? extends GPLayerBean> layers) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void addRasterLayersfromCopyMenu(List<? extends GPLayerBean> layers) {
+        this.addRasterLayers(layers, LAYERS_FROM_COPY_MENU);
+    }
+
+    @Override
+    public void addVectorLayersfromCopyMenu(List<? extends GPLayerBean> layers) {
+        //TODO this.addVectorLayers();
     }
 
     @Override
@@ -173,6 +183,9 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
                             layerList.add(
                                     this.generateRasterTreeNodeFromLayerBaseProperties(
                                     layer));
+                            break;
+                        case LAYERS_FROM_COPY_MENU:
+                            layerList.add(this.duplicateRaster(layer));
                             break;
                     }
                 }
@@ -252,6 +265,19 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         raster.setName(layer.getName());
 //        raster.setStyles(rasterBean.getStyles());
 //        raster.setzIndex(rasterBean.getzIndex());
+        return raster;
+    }
+
+    private RasterTreeNode duplicateRaster(GPLayerBean layer) {
+        RasterTreeNode raster = new RasterTreeNode();
+        raster.setAbstractText(layer.getAbstractText());
+        raster.setCrs(layer.getCrs());
+        raster.setDataSource(layer.getDataSource());
+        raster.setLabel(layer.getLabel());
+        raster.setName(layer.getName());
+        raster.setTitle(layer.getTitle());
+        raster.setBbox(layer.getBbox());
+        raster.setLayerType(layer.getLayerType());
         return raster;
     }
 }

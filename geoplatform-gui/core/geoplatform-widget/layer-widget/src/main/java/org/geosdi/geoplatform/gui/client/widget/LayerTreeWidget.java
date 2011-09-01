@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import com.extjs.gxt.ui.client.event.SelectionListener;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.store.TreeStore;
@@ -61,28 +60,17 @@ import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.store.TreeStoreEvent;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
-import com.google.gwt.event.dom.client.ContextMenuEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
-import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.action.menu.ExportoToKML;
-import org.geosdi.geoplatform.gui.client.action.menu.ExportoToPDF;
-import org.geosdi.geoplatform.gui.client.action.menu.ExportoToShpZip;
-import org.geosdi.geoplatform.gui.client.action.menu.ExportoToTIFF;
-import org.geosdi.geoplatform.gui.client.action.menu.ShowLayerPropertiesAction;
-import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.event.timeout.GPBuildTreeEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.GPExpandTreeNodeEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.IGPBuildTreeHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.IGPExpandTreeNodeHandler;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
@@ -118,6 +106,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
     private ContentPanel parentPanel;
 
     /**
+     * @param treePanel 
      * @Constructor
      */
     public LayerTreeWidget(ContentPanel treePanel) {

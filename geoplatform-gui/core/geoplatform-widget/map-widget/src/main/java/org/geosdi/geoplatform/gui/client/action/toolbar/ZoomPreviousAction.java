@@ -48,7 +48,8 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class ZoomPreviousAction extends ToolbarMapAction implements
@@ -75,6 +76,7 @@ public class ZoomPreviousAction extends ToolbarMapAction implements
         ((MapLayoutWidget) this.mapWidget).getNavigationHistory().previousTrigger();
     }
 
+    @Override
     public void addHandler() {
         this.handlerRegistration = GPHandlerManager.addHandler(
                 ZoomPreviousEvent.TYPE, new ZoomPreviousEventHandler() {

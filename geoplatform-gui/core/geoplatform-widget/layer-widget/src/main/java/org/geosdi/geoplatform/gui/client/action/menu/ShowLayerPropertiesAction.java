@@ -44,6 +44,9 @@ import org.geosdi.geoplatform.gui.client.widget.LayersPropertiesWidget;
  *
  * @author Francesco Izzi - CNR IMAA geoSDI Group
  * @mail francesco.izzi@geosdi.org
+ * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class ShowLayerPropertiesAction extends MenuAction {
 
@@ -54,7 +57,6 @@ public class ShowLayerPropertiesAction extends MenuAction {
         super("LayerProperties");
         this.treePanel = treePanel;
         
-        System.out.println(this.treePanel);
         this.layersPropertiesWidget = new LayersPropertiesWidget(this.treePanel);
     }
 

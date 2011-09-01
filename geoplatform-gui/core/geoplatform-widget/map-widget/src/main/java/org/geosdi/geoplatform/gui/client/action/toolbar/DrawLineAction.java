@@ -52,9 +52,8 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 public class DrawLineAction extends MapToggleAction {
 
     /**
-     * @param tooltip
-     * @param image
      * @param theMapWidget
+     * 
      */
     public DrawLineAction(GeoPlatformMap theMapWidget) {
         super("Draw Line", Resources.ICONS.drawLineFeature(), theMapWidget);

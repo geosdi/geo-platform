@@ -50,21 +50,20 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  */
 public abstract class GenericFeatureAction extends ToolbarMapAction {
 
-	protected GeoPlatformMap mapWidget;
-	protected GenericFeatureOperation featureOperation;
+    protected GeoPlatformMap mapWidget;
+    protected GenericFeatureOperation featureOperation;
 
-	public GenericFeatureAction(String tooltip, AbstractImagePrototype image,
-			GeoPlatformMap theMapWidget) {
-		super(tooltip, image);
-		// TODO Auto-generated constructor stub
-		this.mapWidget = theMapWidget;
+    public GenericFeatureAction(String tooltip, AbstractImagePrototype image,
+            GeoPlatformMap theMapWidget) {
+        super(tooltip, image);
+        // TODO Auto-generated constructor stub
+        this.mapWidget = theMapWidget;
 
-		this.featureOperation = ((MapLayoutWidget) this.mapWidget)
-				.getMapControl().getFeatureOperation();
-	}
+        this.featureOperation = ((MapLayoutWidget) this.mapWidget).getMapControl().getFeatureOperation();
+    }
 
-	public SelectFeature getMapControl() {
-		return this.featureOperation.getControl();
-	}
-
+    @Override
+    public SelectFeature getMapControl() {
+        return this.featureOperation.getControl();
+    }
 }

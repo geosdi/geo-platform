@@ -42,7 +42,8 @@ import org.gwtopenmaps.openlayers.client.control.ModifyFeature;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class DragAction extends ModifyFeatureAction {

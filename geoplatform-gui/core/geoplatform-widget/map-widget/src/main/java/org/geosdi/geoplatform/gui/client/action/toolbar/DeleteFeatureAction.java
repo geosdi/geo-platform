@@ -50,29 +50,31 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
  */
 public class DeleteFeatureAction extends GenericFeatureAction {
 
-	public DeleteFeatureAction(GeoPlatformMap theMapWidget) {
-		super("Delete Feature", BasicWidgetResources.ICONS.erase(),
-				theMapWidget);
-		// TODO Auto-generated constructor stub
-	}
+    public DeleteFeatureAction(GeoPlatformMap theMapWidget) {
+        super("Delete Feature", BasicWidgetResources.ICONS.erase(),
+                theMapWidget);
+        // TODO Auto-generated constructor stub
+    }
 
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		if (((MapLayoutWidget) this.mapWidget).getFeaturesNumber() == 0) {
-			GeoPlatformMessage.alertMessage("Feaures Service",
-					"There are no Features to erase.");
-			return;
-		}
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        // TODO Auto-generated method stub
+        if (((MapLayoutWidget) this.mapWidget).getFeaturesNumber() == 0) {
+            GeoPlatformMessage.alertMessage("Feaures Service",
+                    "There are no Features to erase.");
+            return;
+        }
 
-		if (((MapLayoutWidget) this.mapWidget).getButtonBar().isTogglePressed())
-			((MapLayoutWidget) mapWidget).getButtonBar().changeButtonState();
+        if (((MapLayoutWidget) this.mapWidget).getButtonBar().isTogglePressed()) {
+            ((MapLayoutWidget) mapWidget).getButtonBar().changeButtonState();
+        }
 
-		((MapLayoutWidget) mapWidget).deactivateModifyFeature();
+        ((MapLayoutWidget) mapWidget).deactivateModifyFeature();
 
-		if (!((MapLayoutWidget) mapWidget).isFeatureOperationEnable())
-			((MapLayoutWidget) mapWidget).activateFeatureOperation();
+        if (!((MapLayoutWidget) mapWidget).isFeatureOperationEnable()) {
+            ((MapLayoutWidget) mapWidget).activateFeatureOperation();
+        }
 
-		this.featureOperation.setOperation(OperationType.DELETE);
-	}
+        this.featureOperation.setOperation(OperationType.DELETE);
+    }
 }

@@ -48,41 +48,43 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
  */
 public class MeasureAction extends MapToggleAction {
 
-	public MeasureAction(GeoPlatformMap mapWidget) {
-		super("Measure", Resources.ICONS.measure(), mapWidget);
-	}
+    public MeasureAction(GeoPlatformMap mapWidget) {
+        super("Measure", Resources.ICONS.measure(), mapWidget);
+    }
 
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		ToggleButton button = (ToggleButton) ce.getSource();
-		
-		super.changeButtonState();
-		
-		this.deactivateAllMapControl();
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        ToggleButton button = (ToggleButton) ce.getSource();
 
-		if (button.isPressed()) {
-			mapWidget.getButtonBar().setPressedButton(button);
-			this.mapWidget.activateMeasure();
-		} else
-			this.mapWidget.deactivateMeasure();
+        super.changeButtonState();
 
-	}
+        this.deactivateAllMapControl();
 
-	/* (non-Javadoc)
-	 * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
-	 */
-	@Override
-	public void disableControl() {
-		// TODO Auto-generated method stub
-		this.mapWidget.deactivateMeasure();
-	}
-	
-	private void deactivateAllMapControl() {
-		if (mapWidget.isFeatureOperationEnable())
-			mapWidget.deactivateFeatureOperation();
+        if (button.isPressed()) {
+            mapWidget.getButtonBar().setPressedButton(button);
+            this.mapWidget.activateMeasure();
+        } else {
+            this.mapWidget.deactivateMeasure();
+        }
 
-		if (mapWidget.isModifyFeatureEnable())
-			mapWidget.deactivateModifyFeature();
-	}
+    }
 
+    /* (non-Javadoc)
+     * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
+     */
+    @Override
+    public void disableControl() {
+        // TODO Auto-generated method stub
+        this.mapWidget.deactivateMeasure();
+    }
+
+    private void deactivateAllMapControl() {
+        if (mapWidget.isFeatureOperationEnable()) {
+            mapWidget.deactivateFeatureOperation();
+        }
+
+        if (mapWidget.isModifyFeatureEnable()) {
+            mapWidget.deactivateModifyFeature();
+        }
+    }
 }

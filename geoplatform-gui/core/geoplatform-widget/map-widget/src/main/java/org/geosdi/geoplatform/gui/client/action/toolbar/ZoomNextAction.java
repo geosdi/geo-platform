@@ -48,55 +48,57 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class ZoomNextAction extends ToolbarMapAction implements
-		GeoPlatformEventHandler {
+        GeoPlatformEventHandler {
 
-	private GeoPlatformMap mapWidget;
-	private HandlerRegistration handlerRegistration;
+    private GeoPlatformMap mapWidget;
+    private HandlerRegistration handlerRegistration;
 
-	public ZoomNextAction(GeoPlatformMap theMapWidget) {
-		super("Zoom Next", Resources.ICONS.zoomNext());
-		// TODO Auto-generated constructor stub
-		this.mapWidget = theMapWidget;
-		this.addHandler();
-	}
+    public ZoomNextAction(GeoPlatformMap theMapWidget) {
+        super("Zoom Next", Resources.ICONS.zoomNext());
+        // TODO Auto-generated constructor stub
+        this.mapWidget = theMapWidget;
+        this.addHandler();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		((MapLayoutWidget) this.mapWidget).getNavigationHistory().nextTrigger();
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
+     * .extjs.gxt.ui.client.event.ComponentEvent)
+     */
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        // TODO Auto-generated method stub
+        ((MapLayoutWidget) this.mapWidget).getNavigationHistory().nextTrigger();
+    }
 
-	@Override
-	public void addHandler() {
-		// TODO Auto-generated method stub
-		this.handlerRegistration = GPHandlerManager.addHandler(
-				ZoomNextEvent.TYPE, new ZoomNextEventHandler() {
+    @Override
+    public void addHandler() {
+        // TODO Auto-generated method stub
+        this.handlerRegistration = GPHandlerManager.addHandler(
+                ZoomNextEvent.TYPE, new ZoomNextEventHandler() {
 
-					@Override
-					public void onActivation(boolean activate) {
-						// TODO Auto-generated method stub
-						if (activate)
-							enable();
-						else
-							disable();
-					}
-				});
-	}
+            @Override
+            public void onActivation(boolean activate) {
+                // TODO Auto-generated method stub
+                if (activate) {
+                    enable();
+                } else {
+                    disable();
+                }
+            }
+        });
+    }
 
-	@Override
-	public void removeHandler() {
-		// TODO Auto-generated method stub
-		this.handlerRegistration.removeHandler();
-	}
+    @Override
+    public void removeHandler() {
+        // TODO Auto-generated method stub
+        this.handlerRegistration.removeHandler();
+    }
 }

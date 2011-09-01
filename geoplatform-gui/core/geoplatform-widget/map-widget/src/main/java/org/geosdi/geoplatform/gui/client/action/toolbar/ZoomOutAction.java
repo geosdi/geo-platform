@@ -43,28 +43,28 @@ import org.gwtopenmaps.openlayers.client.LonLat;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class ZoomOutAction extends ToolbarMapAction {
 
-	private GeoPlatformMap mapWidget;
+    private GeoPlatformMap mapWidget;
+    private int zoomFactor = 1;
 
-	private int zoomFactor = 1;
+    public ZoomOutAction(GeoPlatformMap mapWidget) {
+        super("ZoomOut", Resources.ICONS.zoomOut());
 
-	public ZoomOutAction(GeoPlatformMap mapWidget) {
-		super("ZoomOut", Resources.ICONS.zoomOut());
+        this.mapWidget = mapWidget;
+    }
 
-		this.mapWidget = mapWidget;
-	}
-
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		LonLat center = this.mapWidget.getMap().getCenter();
-		int oldZoom = this.mapWidget.getMap().getZoom();
-		if ((oldZoom - this.zoomFactor) > 0)
-			this.mapWidget.getMap()
-					.setCenter(center, oldZoom - this.zoomFactor);
-	}
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        // TODO Auto-generated method stub
+        LonLat center = this.mapWidget.getMap().getCenter();
+        int oldZoom = this.mapWidget.getMap().getZoom();
+        if ((oldZoom - this.zoomFactor) > 0) {
+            this.mapWidget.getMap().setCenter(center, oldZoom - this.zoomFactor);
+        }
+    }
 }

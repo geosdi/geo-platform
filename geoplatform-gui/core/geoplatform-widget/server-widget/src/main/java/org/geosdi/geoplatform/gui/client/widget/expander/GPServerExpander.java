@@ -35,16 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.expander;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.client.widget.GridLayersWidget;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddRasterFromCapabilitiesEvent;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
@@ -57,7 +52,6 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayers
 public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeNode> {
 
     private GridLayersWidget gridLayers;
-    private List<GPLayerBean> layersToStore = new ArrayList<GPLayerBean>();
     private DisplayLayersProgressBarEvent displayEvent = new DisplayLayersProgressBarEvent(
             true);
 
@@ -69,9 +63,9 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
 
     @Override
     public void execute() {
-        displayEvent.setVisible(true);
         LayerHandlerManager.fireEvent(displayEvent);
-        checkLayers();
+        LayerHandlerManager.fireEvent(new AddRasterFromCapabilitiesEvent(
+                this.gridLayers.getSelectedItems()));
 
     }
 
@@ -85,31 +79,5 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
     @Override
     public boolean checkNode() {
         return ((AbstractFolderTreeNode) this.tree.getSelectionModel().getSelectedItem()).getId() == 0L;
-    }
-
-    private void checkLayers() {
-        this.layersToStore.clear();
-        List<GPLayerBean> selectedLayers = this.gridLayers.getSelectedItems();
-
-        Map<String, GPLayerBean> childMap = this.selectedElement.getLayers();
-
-        for (GPLayerBean gPLayerBean : selectedLayers) {
-            if (!childMap.containsKey(gPLayerBean.getName())) {
-                this.layersToStore.add(gPLayerBean);
-            }
-        }
-
-        if (this.layersToStore.isEmpty()) {
-            displayEvent.setVisible(false);
-            LayerHandlerManager.fireEvent(displayEvent);
-            GeoPlatformMessage.alertMessage("Add Layers",
-                    "All Selected Layers have been already added to the Folder : "
-                    + this.selectedElement.getLabel());
-            
-        } else {
-            LayerHandlerManager.fireEvent(new AddRasterFromCapabilitiesEvent(
-                    this.layersToStore));
-        }
-
     }
 }

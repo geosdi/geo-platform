@@ -43,26 +43,26 @@ import org.gwtopenmaps.openlayers.client.LonLat;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  * 
  */
 public class ZoomInAction extends ToolbarMapAction {
 
-	private GeoPlatformMap mapWidget;
+    private GeoPlatformMap mapWidget;
+    private int zoomFactor = 1;
 
-	private int zoomFactor = 1;
+    public ZoomInAction(GeoPlatformMap mapWidget) {
+        super("ZoomIn", Resources.ICONS.zoomIn());
 
-	public ZoomInAction(GeoPlatformMap mapWidget) {
-		super("ZoomIn", Resources.ICONS.zoomIn());
+        this.mapWidget = mapWidget;
+    }
 
-		this.mapWidget = mapWidget;
-	}
-
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		LonLat center = this.mapWidget.getMap().getCenter();
-		int oldZoom = this.mapWidget.getMap().getZoom();
-		this.mapWidget.getMap().setCenter(center, oldZoom + this.zoomFactor);
-	}
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        // TODO Auto-generated method stub
+        LonLat center = this.mapWidget.getMap().getCenter();
+        int oldZoom = this.mapWidget.getMap().getZoom();
+        this.mapWidget.getMap().setCenter(center, oldZoom + this.zoomFactor);
+    }
 }

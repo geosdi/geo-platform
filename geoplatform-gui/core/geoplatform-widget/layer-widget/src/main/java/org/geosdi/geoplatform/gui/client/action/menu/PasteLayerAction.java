@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddRasterFromCopyMenuEvent;
+import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddVectorFromCopyMenuEvent;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
@@ -65,15 +66,15 @@ public class PasteLayerAction extends MenuAction {
     @Override
     public void componentSelected(MenuEvent ce) {
         GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
-        if((!(itemSelected instanceof FolderTreeNode)) || this.layerToCopy == null){
+        if ((!(itemSelected instanceof FolderTreeNode)) || this.layerToCopy == null) {
             throw new IllegalArgumentException("It is possible to copy only copied layer into a Folder");
         }
-        if(layerToCopy instanceof RasterTreeNode){
-            List<GPLayerBean> rasterList = new ArrayList<GPLayerBean>();
-            rasterList.add(layerToCopy);
-            LayerHandlerManager.fireEvent(new AddRasterFromCopyMenuEvent(rasterList));
+        List<GPLayerBean> layerList = new ArrayList<GPLayerBean>();
+        layerList.add(layerToCopy);
+        if (layerToCopy instanceof RasterTreeNode) {
+            LayerHandlerManager.fireEvent(new AddRasterFromCopyMenuEvent(layerList));
         } else {
-            
+            LayerHandlerManager.fireEvent(new AddVectorFromCopyMenuEvent(layerList));
         }
     }
 
@@ -83,5 +84,4 @@ public class PasteLayerAction extends MenuAction {
     public void setLayerToCopy(GPLayerTreeModel layerToCopy) {
         this.layerToCopy = layerToCopy;
     }
-    
 }

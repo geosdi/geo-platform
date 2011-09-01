@@ -33,31 +33,34 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt;
+package org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event;
 
-import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.GPTreeStoreEventHandler;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public interface GPTreeStoreEventHandler extends EventHandler {
+public class AddRasterFromCopyMenuEvent extends GwtEvent<GPTreeStoreEventHandler> {
+    
+    private List<? extends GPLayerBean> layers;
+    
+    public AddRasterFromCopyMenuEvent(List<? extends GPLayerBean> theLayers) {
+        this.layers = theLayers;
+    }
 
-    Type<GPTreeStoreEventHandler> TYPE = new Type<GPTreeStoreEventHandler>();
+    @Override
+    public Type<GPTreeStoreEventHandler> getAssociatedType() {
+        return GPTreeStoreEventHandler.TYPE;
+    }
 
-    public void addRasterLayersfromCapabilities(List<? extends GPLayerBean> layers);
-
-    public void addVectorLayersfromCapabilities(List<? extends GPLayerBean> layers);
-
-    public void addRasterLayersfromPublisher(List<? extends GPLayerBean> layers);
-
-    public void addVectorLayersfromPublisher(List<? extends GPLayerBean> layers);
-
-    public void addRasterLayersfromCopyMenu(List<? extends GPLayerBean> layers);
-
-    public void addVectorLayersfromCopyMenu(List<? extends GPLayerBean> layers);
+    @Override
+    protected void dispatch(GPTreeStoreEventHandler handler) {
+        handler.addRasterLayersfromCopyMenu(layers);
+    }
+    
 }

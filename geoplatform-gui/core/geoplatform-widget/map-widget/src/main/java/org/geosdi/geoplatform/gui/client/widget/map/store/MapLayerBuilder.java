@@ -90,6 +90,9 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
         WMSOptions wmsOption = new WMSOptions();
         wmsOption.setIsBaseLayer(false);
         wmsOption.setDisplayInLayerSwitcher(false);
+        wmsOption.setDisplayOutsideMaxExtent(true);
+        wmsOption.setBuffer(0);
+        wmsOption.setRatio(1);
 
         return new WMS(rasterBean.getLabel(), rasterBean.getDataSource(),
                 wmsParams, wmsOption);
@@ -126,6 +129,9 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
         WMSOptions wmsOption = new WMSOptions();
         wmsOption.setIsBaseLayer(false);
         wmsOption.setDisplayInLayerSwitcher(false);
+        wmsOption.setDisplayOutsideMaxExtent(true);
+        wmsOption.setBuffer(0);
+        wmsOption.setRatio(1);
 
         String dataSource = vectorBean.getDataSource();
 

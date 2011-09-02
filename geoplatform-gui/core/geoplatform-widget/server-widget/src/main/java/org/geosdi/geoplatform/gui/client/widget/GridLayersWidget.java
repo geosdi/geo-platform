@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.core.XTemplate;
 import com.extjs.gxt.ui.client.event.BaseEvent;
@@ -45,13 +46,17 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Store;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.RowExpander;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,10 +122,10 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
 
         StoreFilterField<L> filter = this.createFilter();
         filter.bind(super.store);
-
+        
+        this.formPanel.setButtonAlign(HorizontalAlignment.LEFT);
         this.formPanel.getButtonBar().add(filter);
-
-        this.formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
+        this.formPanel.getButtonBar().add(new FillToolItem());
 
         this.done = new Button("Done", BasicWidgetResources.ICONS.done());
 

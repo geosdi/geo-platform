@@ -47,21 +47,21 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
+import java.util.List;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoBuilder;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoFolder;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedFolder;
+import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
-import org.geosdi.geoplatform.gui.client.widget.expander.GPLayerExpander;
 import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
@@ -74,55 +74,53 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayers
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
-        implements ISave<MementoSaveAddedFolder> {
+public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
+        implements ISave<MementoSaveAddedLayers> {
 
     private TreePanel<GPBeanTreeModel> tree;
-    private TextField<String> folderText;
+    private TextField<String> urlText;
     private Button save;
     private Button cancel;
     private VisitorAddElement addVisitor;
     private GPBeanTreeModel parentDestination;
-    private GPLayerExpander expander;
     private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
 
     /**
      *@param theTree 
      * 
      */
-    public AddFolderWidget(TreePanel<GPBeanTreeModel> theTree) {
+    public AddRasterFromUrlWidget(TreePanel<GPBeanTreeModel> theTree) {
         super(true);
         this.tree = theTree;
         this.addVisitor = new VisitorAddElement();
-        this.expander = new GPLayerExpander(this);
     }
 
     @Override
     public void addComponentToForm() {
         this.fieldSet = new FieldSet();
-        this.fieldSet.setHeading("Folder Name");
+        this.fieldSet.setHeading("Raster from URL");
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(40);
         fieldSet.setLayout(layout);
 
-        this.folderText = new TextField<String>();
-        this.folderText.setFieldLabel("Folder");
+        this.urlText = new TextField<String>();
+        this.urlText.setFieldLabel("Raster");
 
-        this.folderText.addKeyListener(new KeyListener() {
+        this.urlText.addKeyListener(new KeyListener() {
 
             @Override
             public void componentKeyUp(ComponentEvent event) {
-                if (folderText.getValue() == null) {
+                if (urlText.getValue() == null) {
                     if ((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
                             || (event.getKeyCode() == KeyCodes.KEY_DELETE)) {
                         reset();
                     }
                 } else {
-                    if (folderText.getValue().length() > 3) {
+                    if (urlText.getValue().indexOf("&") > 0) { // TODO more robust
                         save.enable();
                     } else {
                         save.disable();
@@ -132,14 +130,14 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
             @Override
             public void componentKeyPress(ComponentEvent event) {
-                if ((event.getKeyCode() == 13) && (folderText.getValue() != null)
-                        && (folderText.getValue().length() > 3)) {
+                if ((event.getKeyCode() == 13) && (urlText.getValue() != null)
+                        && (urlText.getValue().indexOf("&") > 0)) { // TODO more robust
                     execute();
                 }
             }
         });
 
-        this.fieldSet.add(this.folderText);
+        this.fieldSet.add(this.urlText);
 
         this.formPanel.add(this.fieldSet);
 
@@ -150,7 +148,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
-        save = new Button("Create", LayerResources.ICONS.addFolder(),
+        save = new Button("Add", LayerResources.ICONS.addRasterLayer(),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -174,12 +172,12 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
         this.formPanel.addButton(cancel);
 
-        setFocusWidget(this.folderText);
+        setFocusWidget(this.urlText);
     }
 
     @Override
     public void initSize() {
-        setHeading("Add Folder");
+        setHeading("Add Raster from URL");
         setSize(330, 170);
     }
 
@@ -191,42 +189,42 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
     @Override
     public void execute() {
-        this.saveStatus.setBusy("Adding Folder");
+        this.saveStatus.setBusy("Adding Raster");
         this.parentDestination = this.getTree().getSelectionModel().getSelectedItem();
-//        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";
-        this.entity = new FolderTreeNode(this.folderText.getValue());
-        this.entity.setLoaded(true);
+//        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";    
+
+        //        this.urlText.getValue(); --> analyze URL                
+        this.entity = new RasterTreeNode();
         this.getTree().getStore().insert(parentDestination, this.entity, 0, true);
 
         this.addVisitor.insertElement(this.entity, parentDestination, 0);
 
-        MementoSaveAddedFolder mementoSaveAdd = new MementoSaveAddedFolder(this);
-        mementoSaveAdd.setAddedFolder(MementoBuilder.buildSaveFolderMemento(
-                this.entity));
-        mementoSaveAdd.setDescendantMap(this.addVisitor.getFolderDescendantMap());
-
-        GPLayerSaveCache.getInstance().add(mementoSaveAdd);
+        MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
+        // TODO Manage a List (URL depends) of layer
+        List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
+        layerList.add(entity);
+        mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(layerList));
+        mementoSaveLayer.setDescendantMap(this.addVisitor.getFolderDescendantMap());
+        GPLayerSaveCache.getInstance().add(mementoSaveLayer);
 
         clearComponents();
         LayoutManager.getInstance().getStatusMap().setStatus(
-                "Added folder on tree succesfully.",
+                "Added raster on tree succesfully.",
                 EnumSearchStatus.STATUS_SEARCH.toString());
     }
 
     @Override
     public void reset() {
         this.save.disable();
-        this.folderText.clear();
+        this.urlText.clear();
         this.saveStatus.clearStatus("");
-        setFocusWidget(this.folderText);
+        setFocusWidget(this.urlText);
     }
 
     public void showForm() {
         if (!isInitialized()) {
             super.init();
         }
-
-        this.expander.checkNodeState();
     }
 
     private void clearComponents() {
@@ -241,12 +239,12 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
     }
 
     @Override
-    public void executeSave(final MementoSaveAddedFolder memento) {
+    public void executeSave(final MementoSaveAddedLayers memento) {
         //Warning: The following conversion is absolutely necessary!
         memento.convertMementoToWs();
 
-        LayerRemote.Util.getInstance().saveAddedFolderAndTreeModifications(memento,
-                new AsyncCallback<Long>() {
+        LayerRemote.Util.getInstance().saveAddedLayersAndTreeModifications(memento,
+                new AsyncCallback<ArrayList<Long>>() {
 
                     @Override
                     public void onFailure(Throwable caught) {
@@ -256,21 +254,19 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
                             LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
                             setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
                                     EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
-                            GeoPlatformMessage.errorMessage("Save Folder Error",
-                                    "Problems on saving the new tree state after folder creation");
+                            GeoPlatformMessage.errorMessage("Save Raster Error",
+                                    "Problems on saving the new tree state after raster creation");
                         }
                     }
 
                     @Override
-                    public void onSuccess(Long result) {
+                    public void onSuccess(ArrayList<Long> result) {
                         GPLayerSaveCache.getInstance().remove(memento);
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Folders saved successfully.",
+                                "Raster saved successfully.",
                                 EnumSearchStatus.STATUS_SEARCH.toString());
-                        //Warning: What happens when I delete a folder before save it???
-                        MementoFolder mementoAdded = memento.getAddedFolder();
-                        mementoAdded.getRefBaseElement().setId(result);
-                        mementoAdded.getRefBaseElement().setLoaded(true);
+                        //Warning: What happens when I delete a raster before save it???
+                        memento.getRefBaseElement().setId(result.get(0)); // TODO
                         LayerHandlerManager.fireEvent(peekCacheEvent);
                     }
                 });

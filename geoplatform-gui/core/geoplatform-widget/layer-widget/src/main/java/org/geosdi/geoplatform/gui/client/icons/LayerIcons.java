@@ -54,10 +54,10 @@ public interface LayerIcons extends ImageBundle {
 
     @Resource("point.png")
     AbstractImagePrototype point();
-    
+
     @Resource("copy.png")
     AbstractImagePrototype copy();
-    
+
     @Resource("paste.png")
     AbstractImagePrototype paste();
 
@@ -78,27 +78,26 @@ public interface LayerIcons extends ImageBundle {
 
     @Resource("addVector.png")
     AbstractImagePrototype addVectorLayer();
-    
+
     @Resource("zoom.png")
     AbstractImagePrototype zoomToMaxExtend();
-    
+
     @Resource("kml.png")
     AbstractImagePrototype exportToKML();
-    
+
     @Resource("vector.png")
     AbstractImagePrototype exportToGML();
-    
+
     @Resource("pdf.png")
     AbstractImagePrototype exportToPDF();
-    
+
     @Resource("raster.png")
     AbstractImagePrototype exportToTIFF();
-    
+
     @Resource("shape-zip.png")
     AbstractImagePrototype exportToShpZip();
-    
+
     @Resource("layer-properties.png")
     AbstractImagePrototype layerProperties();
-    
     
 }

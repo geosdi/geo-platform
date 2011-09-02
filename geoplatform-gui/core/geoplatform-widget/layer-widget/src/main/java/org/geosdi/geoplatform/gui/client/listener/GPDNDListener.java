@@ -107,7 +107,7 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
                         public void onSuccess(Boolean result) {
                             GPLayerSaveCache.getInstance().remove(memento);
                             LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "Folder Drag&Drop operation saveded successfully.",
+                                    "Folder Drag&Drop operation saved successfully.",
                                     EnumSearchStatus.STATUS_SEARCH.toString());
                             LayerHandlerManager.fireEvent(peekCacheEvent);
                         }
@@ -131,7 +131,7 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
                         public void onSuccess(Boolean result) {
                             GPLayerSaveCache.getInstance().remove(memento);
                             LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "Layer Drag&Drop operation saveded successfully.",
+                                    "Layer Drag&Drop operation saved successfully.",
                                     EnumSearchStatus.STATUS_SEARCH.toString());
                             LayerHandlerManager.fireEvent(peekCacheEvent);
                         }

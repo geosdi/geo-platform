@@ -147,7 +147,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
                     public void onSuccess(ArrayList<Long> result) {
                         GPLayerSaveCache.getInstance().remove(memento);
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Layers saveded successfully.",
+                                "Layers saved successfully.",
                                 EnumSearchStatus.STATUS_SEARCH.toString());
                         List<AbstractMementoLayer> listMementoLayers = memento.getAddedLayers();
                         for (int i = 0; i < listMementoLayers.size(); i++) {

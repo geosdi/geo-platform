@@ -162,8 +162,9 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         if (layers.size() > 0) {
             this.changeProgressBarMessage("Loading " + layers.size() + " Raster Layers into the Store");
             GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
-            super.tree.setExpanded(parentDestination, true);
-
+            if (!super.tree.isExpanded(parentDestination)) {
+                super.tree.setExpanded(parentDestination, true);
+            }
             List<GPBeanTreeModel> layerList = new ArrayList<GPBeanTreeModel>();
             StringBuilder existingLayers = new StringBuilder();
             for (GPLayerBean layer : layers) {

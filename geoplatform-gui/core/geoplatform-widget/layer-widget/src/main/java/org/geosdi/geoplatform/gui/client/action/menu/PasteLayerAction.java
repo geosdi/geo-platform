@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddRasterFromCopyMenuEvent;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddVectorFromCopyMenuEvent;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
@@ -69,6 +70,16 @@ public class PasteLayerAction extends MenuAction {
         if ((!(itemSelected instanceof FolderTreeNode)) || this.layerToCopy == null) {
             throw new IllegalArgumentException("It is possible to copy only copied layer into a Folder");
         }
+        if (!this.treePanel.isExpanded(itemSelected)) {
+            this.treePanel.setExpanded(itemSelected, true, false);
+            GeoPlatformMessage.alertMessage("Paste Operation",
+                    "It is necessary to open the destination folder before the paste operation");
+        } else {
+            this.executePaste();
+        }
+    }
+
+    private void executePaste() {
         List<GPLayerBean> layerList = new ArrayList<GPLayerBean>();
         layerList.add(layerToCopy);
         if (layerToCopy instanceof RasterTreeNode) {

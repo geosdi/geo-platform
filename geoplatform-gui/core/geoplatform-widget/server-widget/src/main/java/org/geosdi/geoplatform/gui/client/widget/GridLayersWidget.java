@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
-import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.core.XTemplate;
 import com.extjs.gxt.ui.client.event.BaseEvent;
@@ -46,18 +45,16 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Store;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.RowExpander;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.core.client.JsArrayString;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -122,7 +119,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
 
         StoreFilterField<L> filter = this.createFilter();
         filter.bind(super.store);
-        
+
         this.formPanel.setButtonAlign(HorizontalAlignment.LEFT);
         this.formPanel.getButtonBar().add(filter);
         this.formPanel.getButtonBar().add(new FillToolItem());
@@ -286,41 +283,32 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         LayerHandlerManager.fireEvent(hideProgressBar);
     }
 
+    private native JsArrayString match(String searchString, String regex) /*-{
+    return searchString.match(regex);
+    }-*/;
+
     private StoreFilterField<L> createFilter() {
         return new StoreFilterField<L>() {
 
             @Override
             protected boolean doSelect(Store<L> store, L parent, L record,
                     String property, String filter) {
-                String title = record.getTitle();
-                String abstractText = record.getAbstractText();
+                filter = filter.toLowerCase();
 
-                Pattern pattern = null;
-                try {
-                    // Compiles regex's contents into a tree-structured object representation 
-                    pattern = Pattern.compile(filter, Pattern.CASE_INSENSITIVE | Pattern.LITERAL);
-                } catch (PatternSyntaxException pse) {
-                    System.err.println("\nRegex syntax error: " + pse.getMessage());
-                    System.err.println("Error description: " + pse.getDescription());
-                    System.err.println("Error index: " + pse.getIndex());
-                    System.err.println("Erroneous pattern: " + pse.getPattern());
-                    return false;
-                }
+                String title = record.getTitle().toLowerCase();
+                String abstractText = record.getAbstractText() == null
+                        ? null : record.getAbstractText().toLowerCase();
 
-                Matcher matcher = pattern.matcher(title);
-                if (matcher.find()) {
-//                    System.out.println("@@@ " + filter + " @@@ title = " + title);
+                JsArrayString result = match(title, filter);
+                if (result.length() != 0) {
                     return true;
                 }
-
                 if (abstractText != null) {
-                    matcher.reset(abstractText);
-                    if (matcher.find()) {
-//                        System.out.println("@@@ " + filter + " @@@ abstractText = " + abstractText);
+                    result = match(abstractText, filter);
+                    if (result.length() != 0) {
                         return true;
                     }
                 }
-
                 return false;
             }
         };

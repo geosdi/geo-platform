@@ -38,7 +38,6 @@
 package org.geosdi.geoplatform.core.model;
 
 import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.Point;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -46,7 +45,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlTransient;
@@ -103,7 +101,7 @@ public class GPVectorLayer extends GPLayer {
 
     /**
      * @param folder
-     *            the bbox to folder
+     *            the folder to set
      */
     @Override
     public void setFolder(GPFolder folder) {

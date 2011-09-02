@@ -55,6 +55,9 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 
 import org.geosdi.geoplatform.gui.client.widget.expander.GPServerExpander;
@@ -75,7 +78,7 @@ import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayers
  */
 public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidget<L>
         implements GPGridEventHandler {
-    
+
     private FormPanel formPanel;
     private TreePanel tree;
     private Button done;
@@ -97,49 +100,32 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         this.expander = new GPServerExpander(this);
         LayerHandlerManager.addHandler(GPGridEventHandler.TYPE, this);
     }
-    
+
     private void initServerWidget() {
         this.displayServerWidget = new DisplayServerWidget(this);
     }
-    
+
     private void initFormPanel() {
         this.formPanel = new FormPanel();
-        formPanel.setHeaderVisible(false);
-        formPanel.setFrame(true);
-        formPanel.setLayout(new FlowLayout());
-        
+        this.formPanel.setHeaderVisible(false);
+        this.formPanel.setFrame(true);
+        this.formPanel.setLayout(new FlowLayout());
+
         this.formPanel.setTopComponent(this.displayServerWidget.getToolbar());
-        
+
         this.formPanel.add(this.grid);
-        
-        StoreFilterField<L> filter = new StoreFilterField<L>() {
-            
-            @Override
-            protected boolean doSelect(Store<L> store, L parent, L record,
-                    String property, String filter) {
-                String title = record.getTitle();
-//                String abstractText = record.getAbstractText();
-                
-                title = title.toLowerCase();
-                
-                if (title.startsWith(filter.toLowerCase())) {
-                    return true;
-                }
-                
-                return false;
-            }
-        };
-        
-        filter.bind(this.store);
-        
+
+        StoreFilterField<L> filter = this.createFilter();
+        filter.bind(super.store);
+
         this.formPanel.getButtonBar().add(filter);
-        
+
         this.formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
-        
+
         this.done = new Button("Done", BasicWidgetResources.ICONS.done());
-        
+
         this.done.addSelectionListener(new SelectionListener<ButtonEvent>() {
-            
+
             @Override
             public void componentSelected(ButtonEvent ce) {
                 if (getTree().getSelectionModel().getSelectedItem() instanceof AbstractFolderTreeNode) {
@@ -151,59 +137,59 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
                 }
             }
         });
-        
+
         this.done.disable();
-        
+
         this.formPanel.getButtonBar().add(this.done);
     }
-    
+
     @Override
     public void setGridProperties() {
         grid.setAutoExpandColumn(GPLayerBeanKeyValue.GPLAYER_NAME.getValue());
         grid.setBorders(false);
-        
+
         grid.getView().setForceFit(true);
         grid.setLoadMask(true);
-        
+
         grid.addPlugin(this.rowExpander);
-        
+
         grid.getSelectionModel().setSelectionMode(SelectionMode.MULTI);
-        
+
         grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
-            
+
             @Override
             public void handleEvent(BaseEvent be) {
                 done.enable();
             }
         });
     }
-    
+
     @Override
     public ColumnModel prepareColumnModel() {
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
-        
+
         XTemplate tpl = XTemplate.create(
                 "<p><b>Abstract:</b> {abstractText}</p>");
-        
+
         rowExpander = new RowExpander(tpl);
-        
+
         configs.add(rowExpander);
-        
+
         ColumnConfig name = new ColumnConfig();
         name.setId(GPLayerBeanKeyValue.GPLAYER_NAME.getValue());
         name.setHeader("Layer Name");
         name.setWidth(200);
         configs.add(name);
-        
+
         ColumnConfig title = new ColumnConfig();
         title.setId(GPLayerBeanKeyValue.GPLAYER_LABEL.getValue());
         title.setHeader("Title");
         title.setWidth(150);
         configs.add(title);
-        
+
         return new ColumnModel(configs);
     }
-    
+
     @Override
     public void createStore() {
         this.store = new ListStore<L>();
@@ -248,7 +234,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
     public void fillStore(ArrayList<L> beans) {
         this.store.add(beans);
     }
-    
+
     public void cleanComponentForSelection() {
         this.cleanStore();
         this.grid.getSelectionModel().deselectAll();
@@ -261,7 +247,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
     public void cleanStore() {
         this.store.removeAll();
     }
-    
+
     public void resetComponents() {
         this.store.removeAll();
         unMaskGrid();
@@ -283,15 +269,55 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
     public TreePanel getTree() {
         return tree;
     }
-    
+
     public List<L> getSelectedItems() {
         return this.grid.getSelectionModel().getSelectedItems();
     }
-    
+
     @Override
     public void deselectElements() {
         this.grid.getSelectionModel().deselectAll();
         this.done.disable();
         LayerHandlerManager.fireEvent(hideProgressBar);
+    }
+
+    private StoreFilterField<L> createFilter() {
+        return new StoreFilterField<L>() {
+
+            @Override
+            protected boolean doSelect(Store<L> store, L parent, L record,
+                    String property, String filter) {
+                String title = record.getTitle();
+                String abstractText = record.getAbstractText();
+
+                Pattern pattern = null;
+                try {
+                    // Compiles regex's contents into a tree-structured object representation 
+                    pattern = Pattern.compile(filter, Pattern.CASE_INSENSITIVE | Pattern.LITERAL);
+                } catch (PatternSyntaxException pse) {
+                    System.err.println("\nRegex syntax error: " + pse.getMessage());
+                    System.err.println("Error description: " + pse.getDescription());
+                    System.err.println("Error index: " + pse.getIndex());
+                    System.err.println("Erroneous pattern: " + pse.getPattern());
+                    return false;
+                }
+
+                Matcher matcher = pattern.matcher(title);
+                if (matcher.find()) {
+//                    System.out.println("@@@ " + filter + " @@@ title = " + title);
+                    return true;
+                }
+
+                if (abstractText != null) {
+                    matcher.reset(abstractText);
+                    if (matcher.find()) {
+//                        System.out.println("@@@ " + filter + " @@@ abstractText = " + abstractText);
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        };
     }
 }

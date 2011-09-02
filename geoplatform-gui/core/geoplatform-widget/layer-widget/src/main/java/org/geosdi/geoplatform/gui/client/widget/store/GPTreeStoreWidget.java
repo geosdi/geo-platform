@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.store;
 
 import com.extjs.gxt.ui.client.data.ModelData;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
@@ -160,7 +161,8 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
 
     private void addRasterLayers(List<? extends GPLayerBean> layers, int sourceLayer) {
         if (layers.size() > 0) {
-            this.changeProgressBarMessage("Loading " + layers.size() + " Raster Layers into the Store");
+            //TODO: Check the utility of this code
+            //this.changeProgressBarMessage("Loading " + layers.size() + " Raster Layers into the Store");
             GPBeanTreeModel parentDestination = this.tree.getSelectionModel().getSelectedItem();
             if (!super.tree.isExpanded(parentDestination)) {
                 super.tree.setExpanded(parentDestination, true);
@@ -179,7 +181,6 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
                                     this.convertGPRasterBeanModelToRasterTreeNode(
                                     (GPRasterLayerGrid) layer));
                             break;
-
                         case LAYERS_FROM_PUBLISHER:
                             layerList.add(
                                     this.generateRasterTreeNodeFromLayerBaseProperties(

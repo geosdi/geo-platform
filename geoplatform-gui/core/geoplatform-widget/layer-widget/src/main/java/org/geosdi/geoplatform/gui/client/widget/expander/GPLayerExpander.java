@@ -35,10 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.expander;
 
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.AddFolderWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.expander.GPTreeExpanderNotifier;
+import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.IGPNode;
 
@@ -49,16 +51,16 @@ import org.geosdi.geoplatform.gui.model.tree.IGPNode;
  */
 public class GPLayerExpander extends GPTreeExpanderNotifier<IGPNode> {
 
-    private AddFolderWidget addFolderWidget;
+    private GPTreeFormWidget widget;
 
-    public GPLayerExpander(AddFolderWidget theWidget) {
-        super(theWidget.getTree());
-        this.addFolderWidget = theWidget;
+    public GPLayerExpander(GPTreeFormWidget theWidget, TreePanel tree) {
+        super(tree);
+        this.widget = theWidget;
     }
 
     @Override
     public void execute() {
-        this.addFolderWidget.show();
+        this.widget.show();
     }
 
     @Override

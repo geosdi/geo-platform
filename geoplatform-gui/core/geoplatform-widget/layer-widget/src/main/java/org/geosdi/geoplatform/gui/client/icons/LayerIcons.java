@@ -100,4 +100,7 @@ public interface LayerIcons extends ImageBundle {
     @Resource("layer-properties.png")
     AbstractImagePrototype layerProperties();
     
+    @Resource("parse-url.png")
+    AbstractImagePrototype parseUrl();
+    
 }

@@ -56,11 +56,14 @@ import org.geosdi.geoplatform.gui.client.action.menu.ExportoToShpZip;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToTIFF;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddFolderTreeAction;
+import org.geosdi.geoplatform.gui.client.widget.form.AddRasterFromUrlWidget;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddRasterTreeAction;
+import org.geosdi.geoplatform.gui.client.action.toolbar.AddUrlTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddVectorTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.DeleteElementTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.SaveTreeAction;
 import org.geosdi.geoplatform.gui.client.mvc.ServerController;
+import org.geosdi.geoplatform.gui.client.widget.form.AddRasterFromUrlWidget;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
@@ -227,6 +230,19 @@ public class LayerWidgetUI implements EntryPoint {
                     public GeoPlatformToolbarAction createActionTool(
                             TreePanel tree) {
                         UploadShapeAction action = new UploadShapeAction(
+                                tree);
+                        setAction(action);
+                        return action;
+                    }
+                });
+        
+        ToolbarTreeActionRegistar.put("parseURL",
+                new ToolbarTreeActionCreator() {
+
+                    @Override
+                    public GeoPlatformToolbarAction createActionTool(
+                            TreePanel tree) {
+                        AddUrlTreeAction action = new AddUrlTreeAction(
                                 tree);
                         setAction(action);
                         return action;

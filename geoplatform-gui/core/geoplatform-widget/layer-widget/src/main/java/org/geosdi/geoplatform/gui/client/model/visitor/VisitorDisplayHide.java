@@ -40,7 +40,6 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.impl.map.event.DisplayLayerMapEvent;

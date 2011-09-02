@@ -57,9 +57,6 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.core.client.JsArrayString;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 
 import org.geosdi.geoplatform.gui.client.widget.expander.GPServerExpander;

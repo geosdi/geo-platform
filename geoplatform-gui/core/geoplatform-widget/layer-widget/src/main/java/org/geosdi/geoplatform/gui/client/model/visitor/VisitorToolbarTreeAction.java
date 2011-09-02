@@ -51,27 +51,27 @@ public class VisitorToolbarTreeAction implements IVisitor {
     @Override
     public void visitRoot(AbstractRootTreeNode root) {
         MediatorToolbarTreeAction.getInstance().disableActions("addRasterLayer", "addVectorLayer",
-                "removeElement");
+                "removeElement", "parseURL");
         MediatorToolbarTreeAction.getInstance().enableActions("addFolder");
     }
 
     @Override
     public void visitFolder(AbstractFolderTreeNode folder) {
         MediatorToolbarTreeAction.getInstance().enableActions("addFolder", "addRasterLayer",
-                "addVectorLayer", "removeElement");
+                "addVectorLayer", "removeElement", "parseURL");
     }
 
     @Override
     public void visitVector(GPVectorBean vector) {
         MediatorToolbarTreeAction.getInstance().disableActions("addFolder", "addRasterLayer",
-                "addVectorLayer");
+                "addVectorLayer", "parseURL");
         MediatorToolbarTreeAction.getInstance().enableActions("removeElement");
     }
 
     @Override
     public void visitRaster(GPRasterBean raster) {
         MediatorToolbarTreeAction.getInstance().disableActions("addFolder", "addRasterLayer",
-                "addVectorLayer");
+                "addVectorLayer", "parseURL");
         MediatorToolbarTreeAction.getInstance().enableActions("removeElement");
     }
 }

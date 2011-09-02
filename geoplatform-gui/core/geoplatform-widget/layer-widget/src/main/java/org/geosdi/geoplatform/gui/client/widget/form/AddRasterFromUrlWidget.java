@@ -62,6 +62,7 @@ import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.client.widget.expander.GPLayerExpander;
 import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
@@ -86,6 +87,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     private Button cancel;
     private VisitorAddElement addVisitor;
     private GPBeanTreeModel parentDestination;
+    private GPLayerExpander expander;
     private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
 
     /**
@@ -96,6 +98,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         super(true);
         this.tree = theTree;
         this.addVisitor = new VisitorAddElement();
+        this.expander = new GPLayerExpander(this, theTree);
     }
 
     @Override
@@ -189,6 +192,8 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
     @Override
     public void execute() {
+        //Pleease don't remove this comment GWT.getModuleBaseURL() + ""
+
         this.saveStatus.setBusy("Adding Raster");
         this.parentDestination = this.getTree().getSelectionModel().getSelectedItem();
 //        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";    
@@ -225,6 +230,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         if (!isInitialized()) {
             super.init();
         }
+        this.expander.checkNodeState();
     }
 
     private void clearComponents() {

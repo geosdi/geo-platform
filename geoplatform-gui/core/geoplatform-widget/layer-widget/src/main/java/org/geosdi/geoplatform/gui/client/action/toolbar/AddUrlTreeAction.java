@@ -33,41 +33,29 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.progressbar;
+package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.LayersProgressBarEventHandler;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
+import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.widget.form.AddRasterFromUrlWidget;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email  nazzareno.sileno@geosdi.org
  */
-public class GPLayerProgressBar extends GeoPlatformProgressBar implements
-        LayersProgressBarEventHandler {
+public class AddUrlTreeAction extends ToolbarLayerTreeAction {
 
-    public GPLayerProgressBar() {
-        LayerHandlerManager.addHandler(LayersProgressBarEventHandler.TYPE, this);
+    private AddRasterFromUrlWidget addRaster;
+
+    public AddUrlTreeAction(TreePanel theTree) {
+        super(theTree, LayerResources.ICONS.parseUrl(), "Add Raster from URL");
+        this.addRaster = new AddRasterFromUrlWidget(theTree);
     }
 
     @Override
-    public void showProgressBar(String message) {
-        super.createProgressBar("GPLayer ProgressBar", message, "Loading...");
-        this.box.show();
-    }
-
-    @Override
-    public void closeProgressBar() {
-        this.box.close();
-    }
-
-    @Override
-    public void updateProgressBarText(String message) {
-        if (super.box == null) {
-            super.createProgressBar("GPLayer ProgressBar", message, "Loading...");
-        } else {
-            //Here there is a problem
-            this.box.updateText(message);
-        }
+    public void componentSelected(ButtonEvent ce) {
+       this.addRaster.showForm();
     }
 }

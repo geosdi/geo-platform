@@ -40,7 +40,6 @@ import java.util.Collections;
 import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
-import org.geosdi.geoplatform.gui.server.gwt.GeoPlatformConfigurationImpl;
 
 /**
  *
@@ -108,6 +107,13 @@ public class ToolbarTreeClientTool {
         uploaderClientTool.setEnabled(true);
         uploaderClientTool.setOrder(9);
 
+        ActionClientTool parseURLClientTool = new ActionClientTool();
+        parseURLClientTool.setId("parseURL");
+        parseURLClientTool.setType("button");
+        parseURLClientTool.setEnabled(false);
+        parseURLClientTool.setOrder(10);
+
+        this.clientTools.add(parseURLClientTool);
         this.clientTools.add(uploaderClientTool);
         this.clientTools.add(toolbarSeparator2);
         this.clientTools.add(printClientTool);

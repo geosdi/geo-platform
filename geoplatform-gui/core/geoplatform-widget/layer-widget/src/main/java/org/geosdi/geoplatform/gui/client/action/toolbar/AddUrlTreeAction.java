@@ -50,7 +50,7 @@ public class AddUrlTreeAction extends ToolbarLayerTreeAction {
     private AddRasterFromUrlWidget addRaster;
 
     public AddUrlTreeAction(TreePanel theTree) {
-        super(theTree, LayerResources.ICONS.parseUrl(), "Add Raster from URL");
+        super(theTree, LayerResources.ICONS.parseUrl(), "Add WMS from URL");
         this.addRaster = new AddRasterFromUrlWidget(theTree);
     }
 

@@ -36,9 +36,12 @@
 package org.geosdi.geoplatform.gui.client.widget.form;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.KeyListener;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
@@ -59,6 +62,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
+import org.geosdi.geoplatform.gui.client.util.UtilityLayerModule;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
@@ -85,6 +89,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     private TextField<String> urlText;
     private Button save;
     private Button cancel;
+    private Button validate;
     private VisitorAddElement addVisitor;
     private GPBeanTreeModel parentDestination;
     private GPLayerExpander expander;
@@ -104,14 +109,26 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     @Override
     public void addComponentToForm() {
         this.fieldSet = new FieldSet();
-        this.fieldSet.setHeading("Raster from URL");
+        this.fieldSet.setHeading("WMS from URL");
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(40);
         fieldSet.setLayout(layout);
 
         this.urlText = new TextField<String>();
-        this.urlText.setFieldLabel("Raster");
+        this.urlText.setFieldLabel("URL");
+
+        this.urlText.addListener(Events.OnPaste, new Listener() {
+
+            @Override
+            public void handleEvent(BaseEvent be) {
+                if (checkUrl()) {
+                    save.enable();
+                } else {
+                    save.disable();
+                }
+            }
+        });
 
         this.urlText.addKeyListener(new KeyListener() {
 
@@ -123,7 +140,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
                         reset();
                     }
                 } else {
-                    if (urlText.getValue().indexOf("&") > 0) { // TODO more robust
+                    if (checkUrl()) {
                         save.enable();
                     } else {
                         save.disable();
@@ -133,8 +150,8 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
             @Override
             public void componentKeyPress(ComponentEvent event) {
-                if ((event.getKeyCode() == 13) && (urlText.getValue() != null)
-                        && (urlText.getValue().indexOf("&") > 0)) { // TODO more robust
+                if ((event.getKeyCode() == KeyCodes.KEY_ENTER) && (urlText.getValue() != null)
+                        && (checkUrl())) {
                     execute();
                 }
             }
@@ -149,9 +166,9 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
         this.formPanel.getButtonBar().add(this.saveStatus);
 
-        formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
+        this.formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
-        save = new Button("Add", LayerResources.ICONS.addRasterLayer(),
+        this.save = new Button("Add", LayerResources.ICONS.addRasterLayer(),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -180,7 +197,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
     @Override
     public void initSize() {
-        setHeading("Add Raster from URL");
+        setHeading("Add WMS from URL");
         setSize(330, 170);
     }
 
@@ -198,7 +215,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         this.parentDestination = this.getTree().getSelectionModel().getSelectedItem();
 //        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";    
 
-        //        this.urlText.getValue(); --> analyze URL                
+        this.analyzeUrl();
         this.entity = new RasterTreeNode();
         this.getTree().getStore().insert(parentDestination, this.entity, 0, true);
 
@@ -260,7 +277,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
                             LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
                             setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
                                     EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
-                            GeoPlatformMessage.errorMessage("Save Raster Error",
+                            GeoPlatformMessage.errorMessage("Save WMS Error",
                                     "Problems on saving the new tree state after raster creation");
                         }
                     }
@@ -269,12 +286,51 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
                     public void onSuccess(ArrayList<Long> result) {
                         GPLayerSaveCache.getInstance().remove(memento);
                         LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Raster saved successfully.",
+                                "WMS saved successfully.",
                                 EnumSearchStatus.STATUS_SEARCH.toString());
                         //Warning: What happens when I delete a raster before save it???
                         memento.getRefBaseElement().setId(result.get(0)); // TODO
                         LayerHandlerManager.fireEvent(peekCacheEvent);
                     }
                 });
+    }
+
+    private void analyzeUrl() {
+        String url = this.urlText.getValue();
+        String queryString = url.substring(url.indexOf("?"));
+
+        // TODO
+    }
+
+    private boolean checkUrl() {
+        String url = this.urlText.getValue();
+        if (url == null) {
+            System.out.println("URL is NULL");
+            return false;
+        }
+//        url = url.replaceAll("[ ]+", ""); // Delete all space character
+//        UtilityLayerModule.replace(url, "[ ]+", ""); // Delete all space character
+
+        if (!url.startsWith("http://")) {
+            System.out.println("URL must be start with \"http://\"");
+            return false;
+        }
+        if (!url.contains("/wms?")) {
+            System.out.println("URL must contain \"/wms?\"");
+            return false;
+        }
+        // Required field in query string
+        if (UtilityLayerModule.match(url, GetMap.REQUEST
+                + "[ ]*=[ ]*GetMap").length() == 0) {
+            System.out.println("Query String must have \"" + GetMap.REQUEST + "=GetMap\"");
+            return false;
+        }
+        if (UtilityLayerModule.match(url, GetMap.VERSION
+                + "[ ]*=[ ]*1\\.(0\\.0|1\\.0|1\\.1)").length() == 0) {
+            System.out.println("Query String must have \"" + GetMap.VERSION + "=1.0.0, 1.1.0, or 1.1.1\"");
+            return false;
+        }
+
+        return true;
     }
 }

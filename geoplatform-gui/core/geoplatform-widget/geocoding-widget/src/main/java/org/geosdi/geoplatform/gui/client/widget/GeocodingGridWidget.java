@@ -109,7 +109,7 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
 
             @Override
             public void componentKeyPress(ComponentEvent event) {
-                if ((event.getKeyCode() == 13)
+                if ((event.getKeyCode() == KeyCodes.KEY_ENTER)
                         && (!search.getValue().equals(""))) {
                     Dispatcher.forwardEvent(
                             GeocodingEvents.BEGIN_GEOCODING_SEARCH,

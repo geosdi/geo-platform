@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.util;
 
+import com.google.gwt.core.client.JsArrayString;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -45,15 +46,22 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class Util {
-    
-    public static String getJsonFormat(List<GPBeanTreeModel> layerList){
+public class UtilityLayerModule {
+
+    public static String getJsonFormat(List<GPBeanTreeModel> layerList) {
         List<GPLayerBean> layers = new ArrayList<GPLayerBean>();
-        for(Iterator iterator = layerList.iterator(); iterator.hasNext();){
-            layers.add((GPLayerBean)iterator);
+        for (Iterator iterator = layerList.iterator(); iterator.hasNext();) {
+            layers.add((GPLayerBean) iterator);
         }
-        
+
         return null;
     }
-    
+
+    public static native JsArrayString match(String searchString, String regex) /*-{
+    return searchString.match(regex);
+    }-*/;
+
+//    public static native JsArrayString replace(String replaceString, String regex, String replacement) /*-{
+//    return replaceString.replace(regex, replacement);
+//    }-*/;
 }

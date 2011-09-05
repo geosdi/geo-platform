@@ -123,7 +123,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
 
             @Override
             public void componentKeyPress(ComponentEvent event) {
-                if ((event.getKeyCode() == 13) && (serverTextField.getValue() != null)
+                if ((event.getKeyCode() == KeyCodes.KEY_ENTER) && (serverTextField.getValue() != null)
                         && (serverTextField.getValue().length() > 15)) {
                     execute();
                 }

@@ -33,34 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.util;
+
+import com.google.gwt.core.client.JsArrayString;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoginStatus extends StatusWidget {
+public class UtilityServerModule {
 
-    public enum EnumLoginStatus {
-
-        STATUS_LOGIN("x-status-ok"),
-        STATUS_NO_LOGIN("x-status-not-ok"),
-        STATUS_LOGIN_ERROR("x-status-error"),
-        STATUS_MESSAGE_LOGIN("Login Succesfull"),
-        STATUS_MESSAGE_NOT_LOGIN("Login Failed"),
-        STATUS_MESSAGE_LOGIN_ERROR("Login Service Error");
-        //
-        private String value;
-
-        EnumLoginStatus(String value) {
-            this.value = value;
-        }
-
-        /**
-         * @return the value
-         */
-        public String getValue() {
-            return value;
-        }
-    }
+    public static native JsArrayString match(String searchString, String regex) /*-{
+    return searchString.match(regex);
+    }-*/;
 }

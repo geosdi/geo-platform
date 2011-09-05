@@ -59,6 +59,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 
+import org.geosdi.geoplatform.gui.client.util.UtilityServerModule;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPServerExpander;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -280,10 +281,6 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         LayerHandlerManager.fireEvent(hideProgressBar);
     }
 
-    private native JsArrayString match(String searchString, String regex) /*-{
-    return searchString.match(regex);
-    }-*/;
-
     private StoreFilterField<L> createFilter() {
         return new StoreFilterField<L>() {
 
@@ -296,13 +293,13 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
                 String abstractText = record.getAbstractText() == null
                         ? null : record.getAbstractText().toLowerCase();
 
-                JsArrayString result = match(title, filter);
-                if (result.length() != 0) {
+                JsArrayString result = UtilityServerModule.match(title, filter);
+                if (result.length() > 0) {
                     return true;
                 }
                 if (abstractText != null) {
-                    result = match(abstractText, filter);
-                    if (result.length() != 0) {
+                    result = UtilityServerModule.match(abstractText, filter);
+                    if (result.length() > 0) {
                         return true;
                     }
                 }

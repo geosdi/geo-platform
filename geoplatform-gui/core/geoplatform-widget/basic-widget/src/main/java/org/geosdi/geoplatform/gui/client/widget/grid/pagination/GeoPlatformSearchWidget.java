@@ -169,7 +169,7 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
 
             @Override
             public void componentKeyPress(ComponentEvent event) {
-                if ((event.getKeyCode() == 13)) {
+                if ((event.getKeyCode() == KeyCodes.KEY_ENTER)) {
                     searchText = search.getValue() == null ? "" : search.getValue();
                     loader.load(0, 25);
                 }

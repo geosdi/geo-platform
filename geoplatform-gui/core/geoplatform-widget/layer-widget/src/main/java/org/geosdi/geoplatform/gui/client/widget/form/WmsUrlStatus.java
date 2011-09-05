@@ -33,26 +33,28 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.widget.form;
+
+import org.geosdi.geoplatform.gui.client.widget.StatusWidget;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoginStatus extends StatusWidget {
+public class WmsUrlStatus extends StatusWidget {
 
-    public enum EnumLoginStatus {
+    public enum EnumWmsUrlStatus {
 
-        STATUS_LOGIN("x-status-ok"),
-        STATUS_NO_LOGIN("x-status-not-ok"),
-        STATUS_LOGIN_ERROR("x-status-error"),
-        STATUS_MESSAGE_LOGIN("Login Succesfull"),
-        STATUS_MESSAGE_NOT_LOGIN("Login Failed"),
-        STATUS_MESSAGE_LOGIN_ERROR("Login Service Error");
+        STATUS_CHECKED("x-status-ok"),
+        STATUS_NO_CHECKED("x-status-not-ok"),
+        STATUS_CHECK_ERROR("x-status-error"),
+        STATUS_MESSAGE_CHECKED("WMS URL Correct"),
+        STATUS_MESSAGE_NOT_CHECKED("WMS URL Incorrect"),
+        STATUS_MESSAGE_CHECK_ERROR("WMS URL Error");
         //
         private String value;
 
-        EnumLoginStatus(String value) {
+        EnumWmsUrlStatus(String value) {
             this.value = value;
         }
 

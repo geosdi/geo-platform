@@ -42,8 +42,9 @@ package org.geosdi.geoplatform.gui.client.widget;
  */
 public enum EnumSearchServer {
 
-    STATUS_MESSAGE_LOAD("Servers Loaded"), STATUS_MESSAGE_SERVER_EXISTING(
-    "Server already existing");
+    STATUS_MESSAGE_LOAD("Servers Loaded"),
+    STATUS_MESSAGE_SERVER_EXISTING("Server already existing");
+    //
     private String value;
 
     EnumSearchServer(String value) {

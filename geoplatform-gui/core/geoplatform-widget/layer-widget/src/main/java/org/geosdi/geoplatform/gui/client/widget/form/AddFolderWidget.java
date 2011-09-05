@@ -253,8 +253,8 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
                             GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
                         } else {
                             LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-                            setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
-                                    EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
+                            setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
+                                    EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR.getValue());
                             GeoPlatformMessage.errorMessage("Save Folder Error",
                                     "Problems on saving the new tree state after folder creation");
                         }

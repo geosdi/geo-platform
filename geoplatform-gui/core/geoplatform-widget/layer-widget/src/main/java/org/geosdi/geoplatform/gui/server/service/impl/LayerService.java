@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -348,4 +351,22 @@ public class LayerService implements ILayerService {
         }
         return result;
     }
+    
+    @Override
+    public boolean checkUrl(String urlString) throws GeoPlatformException {
+        try {
+            URL url = new URL(urlString);
+            URLConnection myURLConnection = url.openConnection();
+            myURLConnection.connect();
+            String contentType = myURLConnection.getContentType();
+            if (!contentType.contains("xml")) {
+                return true;
+            }
+        } catch (IOException ex) {
+            logger.info("Error on executing Check url: " + ex);
+            throw new GeoPlatformException("Error on executing ParseURLServlet.");
+        }
+        return false;
+    }
+    
 }

@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.service;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
@@ -172,4 +173,6 @@ public interface LayerRemote extends RemoteService {
      * @throws GeoPlatformException
      */
     public void deleteElement(long id, TreeElement elementType) throws GeoPlatformException;
+    
+    public boolean checkUrl(String url) throws GeoPlatformException;
 }

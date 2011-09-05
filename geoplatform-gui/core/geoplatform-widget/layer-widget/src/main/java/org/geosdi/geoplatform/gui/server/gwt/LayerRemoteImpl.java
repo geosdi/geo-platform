@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
+import com.google.gwt.http.client.URL;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
@@ -127,5 +128,10 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     @Override
     public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException {
         return this.layerService.saveCheckStatusLayerAndTreeModifications(memento, super.getThreadLocalRequest());
+    }
+    
+    @Override
+    public boolean checkUrl(String url) throws GeoPlatformException {
+        return this.layerService.checkUrl(url);
     }
 }

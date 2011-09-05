@@ -230,8 +230,8 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
 
                         @Override
                         public void onFailure(Throwable caught) {
-                            setSaveStatus(EnumSaveStatus.STATUS_NO_SAVE,
-                                    EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE);
+                            setStatus(EnumSaveStatus.STATUS_NO_SAVE.getValue(),
+                                    EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue());
                             LayoutManager.getInstance().getStatusMap().setStatus(
                                     "Save Server Error. " + caught.getMessage(),
                                     EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
@@ -246,7 +246,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
         }
 
         private void notifyServerPresence() {
-            setSaveStatus(EnumSaveStatus.STATUS_NO_SAVE,
+            setStatus(EnumSaveStatus.STATUS_NO_SAVE.getValue(),
                     EnumSearchServer.STATUS_MESSAGE_SERVER_EXISTING.toString());
             LayoutManager.getInstance().getStatusMap().setStatus(
                     "Save Server",

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.service;
 
+import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
@@ -79,6 +80,7 @@ public interface LayerRemoteAsync {
     public void saveFolder(long idParentFolder, String folderName, int position,
             int numberOfDescendants, boolean isChecked, AsyncCallback<Long> callback);
 
-    public void deleteElement(long id, TreeElement elementType,
-            AsyncCallback<?> callback);
+    public void deleteElement(long id, TreeElement elementType, AsyncCallback<?> callback);
+    
+    public void checkUrl(String url, AsyncCallback<Boolean> callback);
 }

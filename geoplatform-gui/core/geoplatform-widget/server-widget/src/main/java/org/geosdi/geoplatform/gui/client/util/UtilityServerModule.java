@@ -36,11 +36,6 @@
 package org.geosdi.geoplatform.gui.client.util;
 
 import com.google.gwt.core.client.JsArrayString;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

@@ -63,10 +63,10 @@ import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEv
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.util.UtilityLayerModule;
-import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPLayerExpander;
+import org.geosdi.geoplatform.gui.client.widget.form.WmsUrlStatus.EnumWmsUrlStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
@@ -76,6 +76,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
+import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 
 /**
  *
@@ -89,7 +90,6 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     private TextField<String> urlText;
     private Button save;
     private Button cancel;
-    private Button validate;
     private VisitorAddElement addVisitor;
     private GPBeanTreeModel parentDestination;
     private GPLayerExpander expander;
@@ -118,7 +118,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         this.urlText = new TextField<String>();
         this.urlText.setFieldLabel("URL");
 
-        this.urlText.addListener(Events.OnPaste, new Listener() {
+        this.urlText.addListener(Events.OnChange, new Listener() {
 
             @Override
             public void handleEvent(BaseEvent be) {
@@ -126,6 +126,8 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
                     save.enable();
                 } else {
                     save.disable();
+                    setStatus(EnumWmsUrlStatus.STATUS_NO_CHECKED.getValue(),
+                            EnumWmsUrlStatus.STATUS_MESSAGE_NOT_CHECKED.getValue());
                 }
             }
         });
@@ -141,9 +143,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
                     }
                 } else {
                     if (checkUrl()) {
-                        save.enable();
-                    } else {
-                        save.disable();
+                        verifyUrl();
                     }
                 }
             }
@@ -161,7 +161,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
         this.formPanel.add(this.fieldSet);
 
-        this.saveStatus = new SaveStatus();
+        this.saveStatus = new WmsUrlStatus();
         this.saveStatus.setAutoWidth(true);
 
         this.formPanel.getButtonBar().add(this.saveStatus);
@@ -207,10 +207,40 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         this.formPanel.setSize(280, 120);
     }
 
+    private void verifyUrl() {
+        LayerRemoteImpl.Util.getInstance().checkUrl(this.urlText.getValue(), new AsyncCallback<Boolean>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                save.disable();
+                GeoPlatformMessage.errorMessage("Error checking URL",
+                        "An error occurred while making the requested connection.\n"
+                        + "Verify network connections and try again."
+                        + "\nIf the problem persists contact your system administrator.");
+                LayoutManager.getInstance().getStatusMap().setStatus(
+                        "Error checking the WMS URL.",
+                        EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                System.out.println("Error checking the WMS URL: " + caught.toString()
+                        + " data: " + caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(Boolean result) {
+                if (result) {
+                    save.enable();
+                    setStatus(EnumWmsUrlStatus.STATUS_CHECKED.getValue(),
+                            EnumWmsUrlStatus.STATUS_MESSAGE_CHECKED.getValue());
+                } else {
+                    save.disable();
+                    setStatus(EnumWmsUrlStatus.STATUS_NO_CHECKED.getValue(),
+                            EnumWmsUrlStatus.STATUS_MESSAGE_NOT_CHECKED.getValue());
+                }
+            }
+        });
+    }
+
     @Override
     public void execute() {
-        //Pleease don't remove this comment GWT.getModuleBaseURL() + ""
-
         this.saveStatus.setBusy("Adding Raster");
         this.parentDestination = this.getTree().getSelectionModel().getSelectedItem();
 //        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";    
@@ -275,8 +305,8 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
                             GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
                         } else {
                             LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-                            setSaveStatus(EnumSaveStatus.STATUS_SAVE_ERROR,
-                                    EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR);
+                            setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
+                                    EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR.getValue());
                             GeoPlatformMessage.errorMessage("Save WMS Error",
                                     "Problems on saving the new tree state after raster creation");
                         }

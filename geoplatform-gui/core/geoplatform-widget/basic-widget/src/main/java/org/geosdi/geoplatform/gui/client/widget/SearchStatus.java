@@ -43,11 +43,13 @@ public class SearchStatus extends StatusWidget {
 
     public enum EnumSearchStatus {
 
-        STATUS_SEARCH("x-status-ok"), STATUS_NO_SEARCH("x-status-not-ok"), STATUS_SEARCH_ERROR(
-        "x-status-error"), STATUS_MESSAGE_SEARCH("Search OK"), STATUS_MESSAGE_NOT_SEARCH(
-        "No Results Found"), STATUS_MESSAGE_SEARCH_ERROR(
-        "Search Service Error");
-
+        STATUS_SEARCH("x-status-ok"),
+        STATUS_NO_SEARCH("x-status-not-ok"),
+        STATUS_SEARCH_ERROR("x-status-error"),
+        STATUS_MESSAGE_SEARCH("Search OK"),
+        STATUS_MESSAGE_NOT_SEARCH("No Results Found"),
+        STATUS_MESSAGE_SEARCH_ERROR("Search Service Error");
+        //
         private String value;
 
         EnumSearchStatus(String value) {

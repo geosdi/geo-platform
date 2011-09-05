@@ -35,9 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.form;
 
-import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
-import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
-
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.widget.Window;
@@ -45,6 +42,7 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import org.geosdi.geoplatform.gui.client.widget.StatusWidget;
 
 /**
  *
@@ -57,7 +55,7 @@ public abstract class GenericFormWidget
 
     protected FormPanel formPanel;
     protected FieldSet fieldSet;
-    protected SaveStatus saveStatus;
+    protected StatusWidget saveStatus;
     private boolean initialized;
 
     /**
@@ -113,13 +111,8 @@ public abstract class GenericFormWidget
     /**
      * Set the correct Status Iconn Style
      */
-    public void setSaveStatus(EnumSaveStatus status, EnumSaveStatus message) {
-        this.saveStatus.setIconStyle(status.getValue());
-        this.saveStatus.setText(message.getValue());
-    }
-
-    public void setSaveStatus(EnumSaveStatus status, String message) {
-        this.saveStatus.setIconStyle(status.getValue());
+    public void setStatus(String status, String message) {
+        this.saveStatus.setIconStyle(status);
         this.saveStatus.setText(message);
     }
 

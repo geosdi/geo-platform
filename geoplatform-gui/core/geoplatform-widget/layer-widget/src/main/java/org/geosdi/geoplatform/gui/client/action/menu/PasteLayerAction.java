@@ -39,12 +39,12 @@ import com.extjs.gxt.ui.client.event.MenuEvent;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.client.action.menu.expander.GPMenuFolderExpander;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddRasterFromCopyMenuEvent;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddVectorFromCopyMenuEvent;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
@@ -58,10 +58,12 @@ public class PasteLayerAction extends MenuAction {
 
     private GPTreePanel<GPBeanTreeModel> treePanel;
     private GPLayerTreeModel layerToCopy;
+    private GPMenuFolderExpander folderExpander;
 
     public PasteLayerAction(GPTreePanel<GPBeanTreeModel> treePanel) {
         super("CopyLayer");
         this.treePanel = treePanel;
+        this.folderExpander = new GPMenuFolderExpander(treePanel, this);
     }
 
     @Override
@@ -71,9 +73,7 @@ public class PasteLayerAction extends MenuAction {
             throw new IllegalArgumentException("It is possible to copy only copied layer into a Folder");
         }
         if (!this.treePanel.isExpanded(itemSelected)) {
-            this.treePanel.setExpanded(itemSelected, true, false);
-            GeoPlatformMessage.alertMessage("Paste Operation",
-                    "It is necessary to open the destination folder before the paste operation");
+            this.folderExpander.checkNodeState();
         } else {
             this.executePaste();
         }

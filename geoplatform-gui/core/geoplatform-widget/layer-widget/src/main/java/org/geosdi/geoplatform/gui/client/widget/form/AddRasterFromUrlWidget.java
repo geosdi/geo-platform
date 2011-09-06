@@ -332,39 +332,39 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         }
     }
 
+    // TODO
+    // Check &field=fieldValue
+    // Check required fields in query string
+    // ? UtilityLayerModule.replace(url, "[ ]+", ""); // Delete all space character
     private boolean checkUrl() {
-        String url = this.urlText.getValue();
-        if (url == null) {
-            System.out.println("URL is NULL");
-            return false;
-        }
-//        url = url.replaceAll("[ ]+", ""); // Delete all space character
-//        UtilityLayerModule.replace(url, "[ ]+", ""); // Delete all space character
+        boolean check = false;
 
-        if (!url.startsWith("http://")) {
-            suggestion = "URL must be start with \"http://\"";
-            return false;
-        }
-//        if (!url.contains("/wms?")) {
-//            suggestion = "URL must contain \"/wms?\"";
+        String url = this.urlText.getValue();
+//        if (url == null) { // If it is added the listener on Events.OnPaste, sometimes url is NULL !?!
+//            System.out.println("URL is NULL");
 //            return false;
 //        }
-        // TODO Check &field=fieldValue
-
-        // Required field in query string
-        if (UtilityLayerModule.match(url, GetMap.REQUEST
-                + "[ ]*=[ ]*GetMap").length() == 0) {
+        if (!url.startsWith("http://")) {
+            suggestion = "URL must be start with \"http://\"";
+//        } else if (!url.contains("/wms?")) { // TODO DEL ?
+//            suggestion = "URL must contain \"/wms?\"";
+        } else if (UtilityLayerModule.match(url, UtilityLayerModule.RE_REQUEST).length() == 0) {
             suggestion = "Query String must have \"" + GetMap.REQUEST + "=GetMap\"";
-            return false;
-        }
-        if (UtilityLayerModule.match(url, GetMap.VERSION
-                + "[ ]*=[ ]*1\\.(0\\.0|1\\.0|1\\.1)").length() == 0) {
+        } else if (UtilityLayerModule.match(url, UtilityLayerModule.RE_VERSION).length() == 0) {
             suggestion = "Query String must have \"" + GetMap.VERSION + "=1.0.0, 1.1.0, or 1.1.1\"";
-            return false;
+        } else if (UtilityLayerModule.match(url, UtilityLayerModule.RE_LAYERS).length() == 0) {
+            suggestion = "Query String must have \"" + GetMap.LAYERS + "=value[,value,...]\"";
+        } else if (UtilityLayerModule.match(url, UtilityLayerModule.RE_SRS).length() == 0) {
+            suggestion = "Query String must have \"" + GetMap.SRS + "=EPSG:id_code\"";
+        } else if (UtilityLayerModule.match(url, UtilityLayerModule.RE_BBOX).length() == 0) {
+            suggestion = "Query String must have \"" + GetMap.BBOX + "=minx,miny,maxx,maxy\"";
+        } else {
+            suggestion = "WMS URL is Syntactically Correct";
+            check = true;
         }
+        System.out.println("*** Suggestion = " + suggestion);
 
-        suggestion = "WMS URL is Syntactically Correct";
-        return true;
+        return check;
     }
 
     private void verifyUrl() {
@@ -460,7 +460,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         raster.setBbox(this.mapBbox());
         raster.setStyles(this.mapStyles());
 
-        System.out.println("\n*** Raster to ADD:\n" + raster + "\n***");
+//        System.out.println("\n*** Raster to ADD:\n" + raster + "\n***");
         return raster;
     }
 

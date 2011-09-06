@@ -39,6 +39,7 @@ import com.google.gwt.core.client.JsArrayString;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.widget.form.GetMap;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -47,6 +48,13 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @email nazzareno.sileno@geosdi.org
  */
 public class UtilityLayerModule {
+
+    // Regular Expressions for Query String of a WMS URL
+    public static final String RE_REQUEST = GetMap.REQUEST + "[ ]*=[ ]*GetMap";
+    public static final String RE_VERSION = GetMap.VERSION + "[ ]*=[ ]*1\\.(0\\.0|1\\.0|1\\.1)";
+    public static final String RE_LAYERS = GetMap.LAYERS + "[ ]*=[ ]*\\w+([ ]*,[ ]*\\w+)*";
+    public static final String RE_SRS = GetMap.SRS + "[ ]*=[ ]*\\w+(-\\w+)?:\\d+";
+    public static final String RE_BBOX = GetMap.BBOX + "[ ]*=[ ]*-?\\d+(\\.\\d+)?([ ]*,[ ]*-?\\d+(\\.\\d+)?){3}";
 
     public static String getJsonFormat(List<GPBeanTreeModel> layerList) {
         List<GPLayerBean> layers = new ArrayList<GPLayerBean>();
@@ -60,7 +68,7 @@ public class UtilityLayerModule {
     public static native JsArrayString match(String searchString, String regex) /*-{
     return searchString.match(regex);
     }-*/;
-
+//    
 //    public static native JsArrayString replace(String replaceString, String regex, String replacement) /*-{
 //    return replaceString.replace(regex, replacement);
 //    }-*/;

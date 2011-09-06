@@ -49,6 +49,22 @@ import org.geosdi.geoplatform.gui.observable.Observable;
 public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
         GPLayerBean {
 
+    public enum GPLayerKeyValue {
+
+        TITLE("title"), ABSTRACT("abstractText"),
+        ALIAS("LAYER_ALIAS"), SERVER("dataSource");
+        //
+        private String value;
+
+        GPLayerKeyValue(String theValue) {
+            this.value = theValue;
+        }
+
+        @Override
+        public String toString() {
+            return this.value;
+        }
+    }
     /**
      *
      */
@@ -69,10 +85,10 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
 
     protected GPLayerTreeModel(GPLayerClientInfo layer) {
         super(layer.getId(), layer.getzIndex(), layer.isChecked());
-        this.title = layer.getTitle();
+        setTitle(layer.getTitle());
         this.name = layer.getLayerName();
-        this.abstractText = layer.getAbstractText();
-        this.dataSource = layer.getDataSource();
+        setAbstractText(layer.getAbstractText());
+        setDataSource(layer.getDataSource());
         this.crs = layer.getCrs();
         this.bbox = layer.getBbox();
         this.layerType = layer.getLayerType();
@@ -93,6 +109,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
     @Override
     public void setTitle(String title) {
         this.title = title;
+        super.set(GPLayerKeyValue.TITLE.toString(), this.title);
     }
 
     /**
@@ -127,6 +144,8 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
     @Override
     public void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
+        super.set(GPLayerKeyValue.ABSTRACT.toString(),
+                this.abstractText != null ? this.abstractText : "");
     }
 
     /**
@@ -144,6 +163,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
     @Override
     public void setDataSource(String dataSource) {
         this.dataSource = dataSource;
+        super.set(GPLayerKeyValue.SERVER.toString(), this.dataSource);
     }
 
     /**

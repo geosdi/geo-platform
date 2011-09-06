@@ -38,7 +38,11 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.client.puregwt.binding.GPTreeBindingHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.binding.LayerBindingHandlerManager;
+import org.geosdi.geoplatform.gui.client.puregwt.binding.event.GPTreeBindingEvent;
 import org.geosdi.geoplatform.gui.client.widget.LayersPropertiesWidget;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  *
@@ -51,17 +55,16 @@ import org.geosdi.geoplatform.gui.client.widget.LayersPropertiesWidget;
 public class ShowLayerPropertiesAction extends MenuAction {
 
     private TreePanel treePanel;
-    private LayersPropertiesWidget layersPropertiesWidget;
+    private LayersPropertiesWidget layersPropertiesWidget = new LayersPropertiesWidget();
 
     public ShowLayerPropertiesAction(TreePanel treePanel) {
         super("LayerProperties");
         this.treePanel = treePanel;
-        
-        this.layersPropertiesWidget = new LayersPropertiesWidget(this.treePanel);
+        LayerBindingHandlerManager.addHandler(GPTreeBindingHandler.TYPE, this.layersPropertiesWidget);
     }
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        this.layersPropertiesWidget.showForm();
+        LayerBindingHandlerManager.fireEvent(new GPTreeBindingEvent((GPLayerBean) this.treePanel.getSelectionModel().getSelectedItem()));
     }
 }

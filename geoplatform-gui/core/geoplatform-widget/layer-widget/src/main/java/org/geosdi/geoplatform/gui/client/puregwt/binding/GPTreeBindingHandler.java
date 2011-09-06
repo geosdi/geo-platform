@@ -33,18 +33,20 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tab;
+package org.geosdi.geoplatform.gui.client.puregwt.binding;
 
-import com.extjs.gxt.ui.client.widget.TabItem;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformTabItem extends TabItem {
+public interface GPTreeBindingHandler extends EventHandler {
 
-    public GeoPlatformTabItem(String title) {
-        super(title);
-    }
+    Type<GPTreeBindingHandler> TYPE = new Type<GPTreeBindingHandler>();
+
+    public void bind(GPLayerBean model);
 }

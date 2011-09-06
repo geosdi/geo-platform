@@ -33,18 +33,58 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tab;
+package org.geosdi.geoplatform.gui.client.widget.binding;
 
-import com.extjs.gxt.ui.client.widget.TabItem;
+import com.extjs.gxt.ui.client.binding.FormBinding;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformTabItem extends TabItem {
+public abstract class GeoPlatformBindingWidget<M extends GPLayerBean> {
 
-    public GeoPlatformTabItem(String title) {
-        super(title);
+    protected FormPanel formPanel;
+    protected FormBinding formBinding;
+    private M model;
+
+    public GeoPlatformBindingWidget() {
+        this.formPanel = createFormPanel();
     }
+
+    /**
+     * 
+     * @param model
+     *            T object to bind
+     */
+    public void bindModel(M model) {
+        this.model = model;
+        this.formBinding.bind(model);
+    }
+
+    public void unBindModel() {
+        this.formBinding.unbind();
+    }
+
+    /**
+     * @return the formBinding
+     */
+    public FormBinding getFormBinding() {
+        return formBinding;
+    }
+
+    /**
+     * @return the model
+     */
+    public M getModel() {
+        return model;
+    }
+
+    public FormPanel getWidget() {
+        return this.formPanel;
+    }
+
+    public abstract FormPanel createFormPanel();
 }

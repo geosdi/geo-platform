@@ -35,54 +35,38 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab;
 
-import com.extjs.gxt.ui.client.widget.form.TextArea;
-import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.extjs.gxt.ui.client.widget.layout.FormData;
-import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
+import org.geosdi.geoplatform.gui.client.widget.tab.binding.GPLayerInfoBinding;
+import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericLayerTabItem;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class LayersInfoTabItem extends GeoPlatformTabItem {
-    
-    private RasterTreeNode item;
+public class LayersInfoTabItem extends GenericLayerTabItem {
 
-    public LayersInfoTabItem(RasterTreeNode item) {
+    private GPLayerInfoBinding layerInfoBinding = new GPLayerInfoBinding();
+
+    public LayersInfoTabItem() {
         super("Layer Info");
-        this.item = item;
         addComponents();
     }
 
-    private void addComponents() {
-        
-        FormData formData = new FormData("100%");
+    @Override
+    public void addComponents() {
+        super.add(this.getLayerInfoBinding().getWidget());
+    }
 
-        TextField<String> title = new TextField<String>();
-        title.setFieldLabel("Title");
-        title.setValue(item.getTitle());
-        add(title, formData);
-        
-        TextField<String> name = new TextField<String>();
-        name.setFieldLabel("Name");
-        name.setValue(item.getName());
-        add(name, formData);
-        
-        
-        TextField<String> server = new TextField<String>();
-        server.setFieldLabel("Server");
-        server.setValue(item.getDataSource());
-        add(server, formData);
-        
-        TextArea abstractText = new TextArea();
-        abstractText.setFieldLabel("Abstract");
-        abstractText.setValue(item.getAbstractText());
-        add(abstractText, formData);
-        
-        
-        
-        
+    @Override
+    public void bindModel(GPLayerBean model) {
+        this.getLayerInfoBinding().bindModel(model);
+    }
 
+    /**
+     * @return the layerInfoBinding
+     */
+    public GPLayerInfoBinding getLayerInfoBinding() {
+        return layerInfoBinding;
     }
 }

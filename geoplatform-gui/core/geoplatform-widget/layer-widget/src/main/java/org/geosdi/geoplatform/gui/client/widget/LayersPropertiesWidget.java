@@ -35,49 +35,40 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.event.WidgetListener;
+import com.extjs.gxt.ui.client.event.WindowEvent;
+import com.extjs.gxt.ui.client.event.WindowListener;
+import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.client.puregwt.binding.GPTreeBindingHandler;
 import org.geosdi.geoplatform.gui.client.widget.tab.LayersTabWidget;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class LayersPropertiesWidget extends GeoPlatformWindow {
+public class LayersPropertiesWidget extends GeoPlatformWindow implements GPTreeBindingHandler {
 
     private LayersTabWidget layersTabWidget;
-    private FormPanel formPanel;
-    private TreePanel treePanel;
+    private VerticalPanel vp;
+    private GPLayerBean model;
 
     public LayersPropertiesWidget() {
         super(true);
     }
-    
-    public LayersPropertiesWidget(TreePanel treePanel) {
-        super(true);
-        this.treePanel = treePanel;
-    }
 
     @Override
     public void addComponent() {
-        formPanel = new FormPanel();
-        formPanel.setLayout(new FlowLayout(10));
-        formPanel.setBorders(false);
-        formPanel.setBodyBorder(false);
-        formPanel.setHeaderVisible(false);
+        this.vp = new VerticalPanel();
+        vp.setSpacing(10);
 
-        this.layersTabWidget = new LayersTabWidget(treePanel);
-        formPanel.add(this.layersTabWidget);
+        this.layersTabWidget = new LayersTabWidget();
+        this.vp.add(this.layersTabWidget);
 
-        formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
+        super.add(this.vp);
 
         Button close = new Button("Close",
                 new SelectionListener<ButtonEvent>() {
@@ -88,34 +79,35 @@ public class LayersPropertiesWidget extends GeoPlatformWindow {
                     }
                 });
 
-        formPanel.addButton(close);
-
-        super.add(formPanel);
+        super.addButton(close);
     }
 
     @Override
     public void initSize() {
-        setWidth(300);
-        setHeight(200);
+        setWidth(400);
+        setHeight(250);
     }
 
     @Override
     public void setWindowProperties() {
         setHeading("GP Layers Properties Widget");
         setModal(true);
+        setResizable(false);
 
         setCollapsible(true);
 
-        setLayoutOnChange(true);
-
-        addWidgetListener(new WidgetListener() {
+        addWindowListener(new WindowListener() {
 
             @Override
-            public void widgetResized(ComponentEvent ce) {
-                if ((getHeight() > 0) && (getWidth() > 0)) {
-                    formPanel.setSize(getWidth() - 10, getHeight() - 40);
-                }
+            public void windowShow(WindowEvent we) {
+                layersTabWidget.bind(model);
             }
         });
+    }
+
+    @Override
+    public void bind(GPLayerBean model) {
+        this.model = model;
+        super.showForm();;
     }
 }

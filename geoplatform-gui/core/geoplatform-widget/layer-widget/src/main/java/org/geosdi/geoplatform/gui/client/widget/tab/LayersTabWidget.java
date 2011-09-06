@@ -35,55 +35,49 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab;
 
-import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericLayerTabWidget;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class LayersTabWidget extends GeoPlatformTabWidget {
+public class LayersTabWidget extends GenericLayerTabWidget {
 
     private DisplayLayersTabItem displayItem;
     private LayersInfoTabItem infoItem;
     private WPSLayerTabItem wpsItem;
     private RasterTreeNode item;
 
-    public LayersTabWidget(TreePanel treePanel) {
-        GPBeanTreeModel model = (GPBeanTreeModel) treePanel.getSelectionModel().getSelectedItem();
-        if (model instanceof RasterTreeNode) {
-            item = (RasterTreeNode) model;
-        }
-        addComponents();
+    @Override
+    public void initTab() {
+        setWidth(360);
+        setAutoHeight(true);
     }
 
     @Override
-    public void initSize() {
-        setAutoWidth(true);
-        setAutoHeight(true);
-        setBorders(false);
-        setBodyBorder(false);
-        setLayout(new FlowLayout(10));  
-    }
-
-    private void addComponents() {
-        createTabItems();
-        
-        super.add(infoItem);
-        super.add(displayItem);
-        super.add(wpsItem);
+    public void createTabItems() {
+        this.infoItem = new LayersInfoTabItem();
+        this.displayItem = new DisplayLayersTabItem();
+        this.wpsItem = new WPSLayerTabItem();
     }
 
     @Override
     public void setWidgetProperties() {
     }
 
-    private void createTabItems() {
-        this.infoItem = new LayersInfoTabItem(item);
-        this.displayItem = new DisplayLayersTabItem();
-        this.wpsItem = new WPSLayerTabItem();
+    @Override
+    public void addComponents() {
+        super.add(infoItem);
+        super.add(displayItem);
+        super.add(wpsItem);
     }
+
+    @Override
+    public void bind(GPLayerBean model) {
+        this.infoItem.bindModel(model);
+    }
+
 }

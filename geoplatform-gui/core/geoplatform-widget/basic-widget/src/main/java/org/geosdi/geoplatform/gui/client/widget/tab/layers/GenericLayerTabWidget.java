@@ -33,18 +33,24 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tab;
+package org.geosdi.geoplatform.gui.client.widget.tab.layers;
 
-import com.extjs.gxt.ui.client.widget.TabItem;
+import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabWidget;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformTabItem extends TabItem {
-
-    public GeoPlatformTabItem(String title) {
-        super(title);
+public abstract class GenericLayerTabWidget<M extends GPLayerBean> extends GeoPlatformTabWidget {
+   
+    
+    public GenericLayerTabWidget() {
+        addComponents();
     }
+    
+    public abstract void addComponents();
+    
+    public abstract void bind(M model);
 }

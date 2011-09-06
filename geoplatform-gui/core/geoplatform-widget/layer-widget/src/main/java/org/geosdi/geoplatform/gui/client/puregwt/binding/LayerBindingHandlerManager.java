@@ -33,18 +33,49 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tab;
+package org.geosdi.geoplatform.gui.client.puregwt.binding;
 
-import com.extjs.gxt.ui.client.widget.TabItem;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.HandlerRegistration;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformTabItem extends TabItem {
+public class LayerBindingHandlerManager {
 
-    public GeoPlatformTabItem(String title) {
-        super(title);
+    private GPEventBus eventBus;
+    private static LayerBindingHandlerManager instance = new LayerBindingHandlerManager();
+
+    private LayerBindingHandlerManager() {
+        this.eventBus = new GPEventBusImpl();
+    }
+
+    private static LayerBindingHandlerManager getInstance() {
+        return instance;
+    }
+
+    public static <T extends EventHandler> HandlerRegistration addHandler(
+            Type<T> type, T handler) {
+        return getInstance().eventBus.addHandler(type, handler);
+    }
+
+    public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
+            Type<T> type, Object source, T handler) {
+        return getInstance().eventBus.addHandlerToSource(type, source, handler);
+    }
+
+    public static void fireEvent(GwtEvent<?> event) {
+        getInstance().eventBus.fireEvent(event);
+    }
+
+    public static void fireEventFromSource(GwtEvent<?> event, Object source) {
+        getInstance().eventBus.fireEventFromSource(event, source);
     }
 }

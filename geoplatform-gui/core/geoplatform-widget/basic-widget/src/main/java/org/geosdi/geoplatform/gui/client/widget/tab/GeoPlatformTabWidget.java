@@ -45,11 +45,19 @@ import com.extjs.gxt.ui.client.widget.TabPanel;
 public abstract class GeoPlatformTabWidget extends TabPanel {
     
     public GeoPlatformTabWidget() {
-        initSize();
+        initTab();
         setWidgetProperties();
+        createTabItems();
     }
     
-    public abstract void initSize();
+    public abstract void initTab();
     
     public abstract void setWidgetProperties();
+    
+    public abstract void createTabItems();
+    
+    @Override
+    public boolean layout() {
+        return super.layout();
+    }
 }

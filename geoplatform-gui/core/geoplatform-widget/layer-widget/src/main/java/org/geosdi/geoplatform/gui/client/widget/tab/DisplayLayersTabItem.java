@@ -50,10 +50,11 @@ public class DisplayLayersTabItem extends GeoPlatformTabItem {
         addComponents();
     }
 
-   
     private void addComponents() {
-        this.formPanel.setHeaderVisible(false);
-        final Slider slider = new Slider();
+        
+        /**TODO SOME IMPROVEMENTS HERE ISNERT A FIELD SET  **/
+        
+        Slider slider = new Slider();
         slider.setWidth(200);
         slider.setIncrement(1);
         slider.setMaxValue(100);

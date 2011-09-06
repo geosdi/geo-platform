@@ -168,7 +168,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     }
 
     private void AddListenerToUrlText() {
-        this.urlText.addListener(Events.OnChange, new Listener() {
+        this.urlText.addListener(Events.OnPaste, new Listener() {
 
             @Override
             public void handleEvent(BaseEvent be) {
@@ -215,7 +215,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
     @Override
     public void initSize() {
-        setHeading("Add WMS from GetMap direck URL");
+        setHeading("Add WMS from GetMap direct URL");
         setSize(330, 170);
     }
 
@@ -340,10 +340,10 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         boolean check = false;
 
         String url = this.urlText.getValue();
-//        if (url == null) { // If it is added the listener on Events.OnPaste, sometimes url is NULL !?!
-//            System.out.println("URL is NULL");
-//            return false;
-//        }
+        if (url == null) { // If it is added the listener on Events.OnPaste, sometimes url is NULL !?!
+            System.out.println("URL is NULL");
+            return false;
+        }
         if (!url.startsWith("http://")) {
             suggestion = "URL must be start with \"http://\"";
 //        } else if (!url.contains("/wms?")) { // TODO DEL ?

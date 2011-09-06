@@ -55,6 +55,9 @@ public class UtilityLayerModule {
     public static final RegExp RE_LAYERS = RegExp.compile(GetMap.LAYERS + "[ ]*=[ ]*\\w+([ ]*,[ ]*\\w+)*");
     public static final RegExp RE_SRS = RegExp.compile(GetMap.SRS + "[ ]*=[ ]*\\w+(-\\w+)?:\\d+");
     public static final RegExp RE_BBOX = RegExp.compile(GetMap.BBOX + "[ ]*=[ ]*-?\\d+(\\.\\d+)?([ ]*,[ ]*-?\\d+(\\.\\d+)?){3}");
+    public static final RegExp RE_WIDTH = RegExp.compile(GetMap.WIDTH + "[ ]*=[ ]*\\d+");
+    public static final RegExp RE_HEIGHT = RegExp.compile(GetMap.HEIGHT + "[ ]*=[ ]*\\d+");
+    public static final RegExp RE_FORMAT = RegExp.compile(GetMap.FORMAT + "[ ]*=[ ]*image/(png|gif|jpeg)");
 
     public static String getJsonFormat(List<GPBeanTreeModel> layerList) {
         List<GPLayerBean> layers = new ArrayList<GPLayerBean>();

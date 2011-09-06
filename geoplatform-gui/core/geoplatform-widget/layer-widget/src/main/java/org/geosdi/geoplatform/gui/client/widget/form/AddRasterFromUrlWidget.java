@@ -366,6 +366,12 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
             suggestion = "Query String must have \"" + GetMap.SRS + "=EPSG:id_code\"";
         } else if (!UtilityLayerModule.RE_BBOX.test(urlEncoding)) {
             suggestion = "Query String must have \"" + GetMap.BBOX + "=minx,miny,maxx,maxy\"";
+        } else if (!UtilityLayerModule.RE_WIDTH.test(urlEncoding)) {
+            suggestion = "Query String must have \"" + GetMap.WIDTH + "=output_width\"";
+        } else if (!UtilityLayerModule.RE_HEIGHT.test(urlEncoding)) {
+            suggestion = "Query String must have \"" + GetMap.HEIGHT + "=output_height\"";
+        } else if (!UtilityLayerModule.RE_FORMAT.test(urlEncoding)) {
+            suggestion = "Query String must have \"" + GetMap.FORMAT + "=image/(png|gif|jpeg)\"";
         } else {
             suggestion = "WMS URL is Syntactically Correct";
             check = true;

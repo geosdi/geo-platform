@@ -268,6 +268,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     }
 
     private void clearComponents() {
+        reset();
         super.hide();
     }
 

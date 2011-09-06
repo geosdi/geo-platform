@@ -54,12 +54,11 @@ import com.extjs.gxt.ui.client.widget.grid.RowExpander;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.regexp.shared.RegExp;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 
-import org.geosdi.geoplatform.gui.client.util.UtilityServerModule;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPServerExpander;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -292,14 +291,12 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
                 String title = record.getTitle().toLowerCase();
                 String abstractText = record.getAbstractText() == null
                         ? null : record.getAbstractText().toLowerCase();
-
-                JsArrayString result = UtilityServerModule.match(title, filter);
-                if (result.length() > 0) {
+                RegExp expression = RegExp.compile(filter);
+                if (expression.test(title)) {
                     return true;
                 }
                 if (abstractText != null) {
-                    result = UtilityServerModule.match(abstractText, filter);
-                    if (result.length() > 0) {
+                    if (expression.test(abstractText)) {
                         return true;
                     }
                 }

@@ -49,6 +49,7 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,6 +103,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
     //
     private Map<String, String> fieldMap = new HashMap<String, String>(); // TODO <GetMap, String> --> booolean GetMap.valid(String field)
+    private String urlEncoding = "";
     private String suggestion = "";
 
     /**
@@ -316,8 +318,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     }
 
     private void retrieveDataFromQueryString() {
-        String url = this.urlText.getValue();
-        String queryString = url.substring(url.indexOf("?") + 1);
+        String queryString = urlEncoding.substring(urlEncoding.indexOf("?") + 1);
 //        System.out.println("*** Query String: " + queryString + "\n");
 
         String[] pairs = queryString.split("&");
@@ -344,19 +345,24 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
             System.out.println("URL is NULL");
             return false;
         }
-        if (!url.startsWith("http://")) {
+//        System.out.println("*** URL:\n" + url + "\n");
+
+        this.urlEncoding = URL.decodeQueryString(url);
+//        System.out.println("*** URL encoding:\n" + urlEncoding + "\n");
+
+        if (!urlEncoding.startsWith("http://")) {
             suggestion = "URL must be start with \"http://\"";
 //        } else if (!url.contains("/wms?")) { // TODO DEL ?
 //            suggestion = "URL must contain \"/wms?\"";
-        } else if (UtilityLayerModule.match(url, UtilityLayerModule.RE_REQUEST).length() == 0) {
+        } else if (UtilityLayerModule.match(urlEncoding, UtilityLayerModule.RE_REQUEST).length() == 0) {
             suggestion = "Query String must have \"" + GetMap.REQUEST + "=GetMap\"";
-        } else if (UtilityLayerModule.match(url, UtilityLayerModule.RE_VERSION).length() == 0) {
+        } else if (UtilityLayerModule.match(urlEncoding, UtilityLayerModule.RE_VERSION).length() == 0) {
             suggestion = "Query String must have \"" + GetMap.VERSION + "=1.0.0, 1.1.0, or 1.1.1\"";
-        } else if (UtilityLayerModule.match(url, UtilityLayerModule.RE_LAYERS).length() == 0) {
+        } else if (UtilityLayerModule.match(urlEncoding, UtilityLayerModule.RE_LAYERS).length() == 0) {
             suggestion = "Query String must have \"" + GetMap.LAYERS + "=value[,value,...]\"";
-        } else if (UtilityLayerModule.match(url, UtilityLayerModule.RE_SRS).length() == 0) {
+        } else if (UtilityLayerModule.match(urlEncoding, UtilityLayerModule.RE_SRS).length() == 0) {
             suggestion = "Query String must have \"" + GetMap.SRS + "=EPSG:id_code\"";
-        } else if (UtilityLayerModule.match(url, UtilityLayerModule.RE_BBOX).length() == 0) {
+        } else if (UtilityLayerModule.match(urlEncoding, UtilityLayerModule.RE_BBOX).length() == 0) {
             suggestion = "Query String must have \"" + GetMap.BBOX + "=minx,miny,maxx,maxy\"";
         } else {
             suggestion = "WMS URL is Syntactically Correct";
@@ -472,8 +478,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     }
 
     private String mapDataSource() {
-        String url = this.urlText.getValue();
-        return url.substring(0, url.indexOf("?"));
+        return urlEncoding.substring(0, urlEncoding.indexOf("?"));
     }
 
     private BboxClientInfo mapBbox() {

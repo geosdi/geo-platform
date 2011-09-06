@@ -328,8 +328,8 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
             int ind = pair.indexOf("=");
             System.out.println("# " + pair);
 
-            String field = pair.substring(0, ind).trim();
-            String fieldValue = pair.substring(ind + 1).trim();
+            String field = pair.substring(0, ind);
+            String fieldValue = pair.substring(ind + 1);
 
             fieldMap.put(field, fieldValue);
         }
@@ -338,20 +338,22 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     // TODO
     // Check &field=fieldValue
     // Check required fields in query string
-    // ? UtilityLayerModule.replace(url, "[ ]+", ""); // Delete all space character
     private boolean checkUrl() {
         boolean check = false;
 
         String url = this.urlText.getValue();
-        if (url == null) { // If it is added the listener on Events.OnPaste, sometimes url is NULL !?!
+//        System.out.println("*** URL:\n" + url + "\n");        
+        if (url == null) { // If it is added the listener on Events.OnPaste, sometimes url is NULL
             System.out.println("URL is NULL");
             return false;
         }
-//        System.out.println("*** URL:\n" + url + "\n");
 
-        this.urlEncoding = URL.decodeQueryString(url);
+        url = url.replaceAll("[ ]+", ""); // Delete all spaces
+//        System.out.println("*** URL clean:\n" + url + "\n");
+
+        this.urlEncoding = URL.decodeQueryString(url); // Encoding into ASCII
 //        System.out.println("*** URL encoding:\n" + urlEncoding + "\n");
-        
+
         if (!urlEncoding.startsWith("http://")) {
             suggestion = "URL must be start with \"http://\"";
 //        } else if (!url.contains("/wms?")) { // TODO DEL ?
@@ -382,15 +384,15 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     }
 
     private void verifyUrl() {
-        LayerRemoteImpl.Util.getInstance().checkUrl(this.urlText.getValue(), new AsyncCallback<Boolean>() {
+        LayerRemoteImpl.Util.getInstance().checkUrl(this.urlEncoding, new AsyncCallback<Boolean>() {
 
             @Override
             public void onFailure(Throwable caught) {
                 save.disable();
                 GeoPlatformMessage.errorMessage("Error checking URL",
                         "An error occurred while making the requested connection.\n"
-                        + "Verify network connections and try again."
-                        + "\nIf the problem persists contact your system administrator.");
+                        + "Verify network connections and try again.\n"
+                        + "If the problem persists contact your system administrator.");
                 LayoutManager.getInstance().getStatusMap().setStatus(
                         "Error checking the WMS URL.",
                         EnumSearchStatus.STATUS_NO_SEARCH.toString());
@@ -414,15 +416,15 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     }
 
     private void verifyUrlForEnterKey() {
-        LayerRemoteImpl.Util.getInstance().checkUrl(this.urlText.getValue(), new AsyncCallback<Boolean>() {
+        LayerRemoteImpl.Util.getInstance().checkUrl(this.urlEncoding, new AsyncCallback<Boolean>() {
 
             @Override
             public void onFailure(Throwable caught) {
                 save.disable();
                 GeoPlatformMessage.errorMessage("Error checking URL",
                         "An error occurred while making the requested connection.\n"
-                        + "Verify network connections and try again."
-                        + "\nIf the problem persists contact your system administrator.");
+                        + "Verify network connections and try again.\n"
+                        + "If the problem persists contact your system administrator.");
                 LayoutManager.getInstance().getStatusMap().setStatus(
                         "Error checking the WMS URL.",
                         EnumSearchStatus.STATUS_NO_SEARCH.toString());
@@ -449,11 +451,11 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     private List<GPBeanTreeModel> createRasterList() {
         List<GPBeanTreeModel> rasterList = new ArrayList<GPBeanTreeModel>();
 
-        String layersValue = fieldMap.get(GetMap.LAYERS.toString()).trim();
+        String layersValue = fieldMap.get(GetMap.LAYERS.toString());
         if (layersValue.contains(",")) { // More than one raster
             String[] rasters = layersValue.split(",");
             for (String raster : rasters) {
-                rasterList.add(this.mapRaster(raster.trim()));
+                rasterList.add(this.mapRaster(raster));
             }
         } else { // A single raster
             rasterList.add(this.mapRaster(layersValue));
@@ -493,10 +495,10 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         String[] coordinates = fieldMap.get(GetMap.BBOX.toString()).split(",");
 
         BboxClientInfo bbox = new BboxClientInfo();
-        bbox.setLowerLeftX(Double.parseDouble(coordinates[0].trim()));
-        bbox.setLowerLeftY(Double.parseDouble(coordinates[1].trim()));
-        bbox.setUpperRightX(Double.parseDouble(coordinates[2].trim()));
-        bbox.setUpperRightY(Double.parseDouble(coordinates[3].trim()));
+        bbox.setLowerLeftX(Double.parseDouble(coordinates[0]));
+        bbox.setLowerLeftY(Double.parseDouble(coordinates[1]));
+        bbox.setUpperRightX(Double.parseDouble(coordinates[2]));
+        bbox.setUpperRightY(Double.parseDouble(coordinates[3]));
         return bbox;
     }
 
@@ -506,7 +508,7 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         String stylesValue = fieldMap.get(GetMap.STYLES);
         if (stylesValue != null && stylesValue.length() > 0) {
             if (stylesValue.contains(",")) { // More than one style
-                String[] styles = stylesValue.trim().split(",");
+                String[] styles = stylesValue.split(",");
                 styleList.addAll(Arrays.asList(styles));
             } else { // A single style
                 styleList.add(stylesValue);

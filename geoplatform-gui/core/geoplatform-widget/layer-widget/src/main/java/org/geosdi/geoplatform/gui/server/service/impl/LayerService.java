@@ -243,7 +243,7 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento, 
+    public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
         this.getUserAlreadyFromSession(httpServletRequest);
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
@@ -351,7 +351,7 @@ public class LayerService implements ILayerService {
         }
         return result;
     }
-    
+
     @Override
     public boolean checkUrl(String urlString) throws GeoPlatformException {
         try {
@@ -368,5 +368,4 @@ public class LayerService implements ILayerService {
         }
         return false;
     }
-    
 }

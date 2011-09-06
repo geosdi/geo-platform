@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.util;
 
-import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.regexp.shared.RegExp;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -50,11 +50,11 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 public class UtilityLayerModule {
 
     // Regular Expressions for Query String of a WMS URL
-    public static final String RE_REQUEST = GetMap.REQUEST + "[ ]*=[ ]*GetMap";
-    public static final String RE_VERSION = GetMap.VERSION + "[ ]*=[ ]*1\\.(0\\.0|1\\.0|1\\.1)";
-    public static final String RE_LAYERS = GetMap.LAYERS + "[ ]*=[ ]*\\w+([ ]*,[ ]*\\w+)*";
-    public static final String RE_SRS = GetMap.SRS + "[ ]*=[ ]*\\w+(-\\w+)?:\\d+";
-    public static final String RE_BBOX = GetMap.BBOX + "[ ]*=[ ]*-?\\d+(\\.\\d+)?([ ]*,[ ]*-?\\d+(\\.\\d+)?){3}";
+    public static final RegExp RE_REQUEST = RegExp.compile(GetMap.REQUEST + "[ ]*=[ ]*GetMap");
+    public static final RegExp RE_VERSION = RegExp.compile(GetMap.VERSION + "[ ]*=[ ]*1\\.(0\\.0|1\\.0|1\\.1)");
+    public static final RegExp RE_LAYERS = RegExp.compile(GetMap.LAYERS + "[ ]*=[ ]*\\w+([ ]*,[ ]*\\w+)*");
+    public static final RegExp RE_SRS = RegExp.compile(GetMap.SRS + "[ ]*=[ ]*\\w+(-\\w+)?:\\d+");
+    public static final RegExp RE_BBOX = RegExp.compile(GetMap.BBOX + "[ ]*=[ ]*-?\\d+(\\.\\d+)?([ ]*,[ ]*-?\\d+(\\.\\d+)?){3}");
 
     public static String getJsonFormat(List<GPBeanTreeModel> layerList) {
         List<GPLayerBean> layers = new ArrayList<GPLayerBean>();
@@ -64,12 +64,4 @@ public class UtilityLayerModule {
 
         return null;
     }
-
-    public static native JsArrayString match(String searchString, String regex) /*-{
-    return searchString.match(regex);
-    }-*/;
-//    
-//    public static native JsArrayString replace(String replaceString, String regex, String replacement) /*-{
-//    return replaceString.replace(regex, replacement);
-//    }-*/;
 }

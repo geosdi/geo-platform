@@ -50,6 +50,7 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.http.client.URL;
+import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -350,20 +351,20 @@ public class AddRasterFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
 
         this.urlEncoding = URL.decodeQueryString(url);
 //        System.out.println("*** URL encoding:\n" + urlEncoding + "\n");
-
+        
         if (!urlEncoding.startsWith("http://")) {
             suggestion = "URL must be start with \"http://\"";
 //        } else if (!url.contains("/wms?")) { // TODO DEL ?
 //            suggestion = "URL must contain \"/wms?\"";
-        } else if (UtilityLayerModule.match(urlEncoding, UtilityLayerModule.RE_REQUEST).length() == 0) {
+        } else if (!UtilityLayerModule.RE_REQUEST.test(urlEncoding)) {
             suggestion = "Query String must have \"" + GetMap.REQUEST + "=GetMap\"";
-        } else if (UtilityLayerModule.match(urlEncoding, UtilityLayerModule.RE_VERSION).length() == 0) {
+        } else if (!UtilityLayerModule.RE_VERSION.test(urlEncoding)) {
             suggestion = "Query String must have \"" + GetMap.VERSION + "=1.0.0, 1.1.0, or 1.1.1\"";
-        } else if (UtilityLayerModule.match(urlEncoding, UtilityLayerModule.RE_LAYERS).length() == 0) {
+        } else if (!UtilityLayerModule.RE_LAYERS.test(urlEncoding)) {
             suggestion = "Query String must have \"" + GetMap.LAYERS + "=value[,value,...]\"";
-        } else if (UtilityLayerModule.match(urlEncoding, UtilityLayerModule.RE_SRS).length() == 0) {
+        } else if (!UtilityLayerModule.RE_SRS.test(urlEncoding)) {
             suggestion = "Query String must have \"" + GetMap.SRS + "=EPSG:id_code\"";
-        } else if (UtilityLayerModule.match(urlEncoding, UtilityLayerModule.RE_BBOX).length() == 0) {
+        } else if (!UtilityLayerModule.RE_BBOX.test(urlEncoding)) {
             suggestion = "Query String must have \"" + GetMap.BBOX + "=minx,miny,maxx,maxy\"";
         } else {
             suggestion = "WMS URL is Syntactically Correct";

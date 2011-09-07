@@ -54,6 +54,8 @@ public class RasterLayerDTO extends ShortLayerDTO {
 
     private GPLayerInfo layerInfo;
     //
+    private float opacity;
+    //    
     @XmlElementWrapper(name = "styleList")
     @XmlElement(name = "style")
     private List<StyleDTO> styleList;
@@ -75,6 +77,7 @@ public class RasterLayerDTO extends ShortLayerDTO {
     public RasterLayerDTO(GPRasterLayer rasterLayer) {
         super(rasterLayer);
         this.layerInfo = rasterLayer.getLayerInfo();
+        this.opacity = rasterLayer.getOpacity();
     }
     //</editor-fold>
 
@@ -92,6 +95,24 @@ public class RasterLayerDTO extends ShortLayerDTO {
      */
     public void setLayerInfo(GPLayerInfo layerInfo) {
         this.layerInfo = layerInfo;
+    }
+
+    /**
+     * @return the opacity
+     */
+    public float getOpacity() {
+        return opacity;
+    }
+
+    /**
+     * @param opacity
+     *              the opacity to set
+     */
+    public void setOpacity(float opacity) {
+        if (opacity < 0.0f || opacity > 1.0f) {
+            throw new IllegalArgumentException("The opacity must be between 0.0 and 1.0");
+        }
+        this.opacity = opacity;
     }
 
     /**
@@ -128,6 +149,7 @@ public class RasterLayerDTO extends ShortLayerDTO {
     @Override
     public String toString() {
         return "RasterLayerDTO [" + super.toString() + ", " + layerInfo
+                + ", opacity=" + opacity
                 + ", styles=" + styleList
                 + ", subLayerList=" + subLayerList + "]";
     }

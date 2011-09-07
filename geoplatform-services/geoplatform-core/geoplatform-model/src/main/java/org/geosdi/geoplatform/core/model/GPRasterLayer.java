@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.model;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -66,9 +67,30 @@ public class GPRasterLayer extends GPLayer {
     @Embedded
     private GPLayerInfo layerInfo;
     //
+    @Column
+    private float opacity = 1.0f;    
+    //
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPFolder folder;
+
+    /**
+     * @return the opacity
+     */
+    public float getOpacity() {
+        return opacity;
+    }
+
+    /**
+     * @param opacity
+     *              the opacity to set
+     */
+    public void setOpacity(float opacity) {
+        if (opacity < 0.0f || opacity > 1.0f) {
+            throw new IllegalArgumentException("The opacity must be between 0.0 and 1.0");
+        }
+        this.opacity = opacity;
+    }
 
     /**
      * @return the layerInfo
@@ -111,6 +133,7 @@ public class GPRasterLayer extends GPLayer {
     public String toString() {
         StringBuilder str = new StringBuilder("GPRasterLayer {");
         str.append(super.toString());
+        str.append(", opacity=").append(opacity);
         str.append(", layerInfo=").append(layerInfo).append("}");
         return str.toString();
     }

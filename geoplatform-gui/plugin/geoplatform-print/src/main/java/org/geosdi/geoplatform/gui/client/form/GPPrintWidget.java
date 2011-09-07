@@ -54,7 +54,6 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     private Button print;
     private Button cancel;
     private TreePanel tree;
-    private LonLat center;
     private double scale;
     private List<GPLayerBean> layerList;
 
@@ -96,7 +95,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
 
 
             LonLat center = new LonLat(lon, lat);
-            center.transform("EPSG:900913", "EPSG:4326");
+            center.transform(GPApplicationMap.getApplicationMap().getMap().getProjection(), "EPSG:4326");
 
             Double scaleDouble = new Double(GPApplicationMap.getApplicationMap().getMap().getScale());
 
@@ -108,7 +107,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
                     + "\",\"comment\":\"" + comments.getValue() + "\"}],\"layers\":[";
 
             layerList = buildLayerList(tree.getCheckedSelection());
-            
+
             Collections.sort(layerList, new LayerComparable());
 
             for (int i = 0; i < layerList.size(); i++) {
@@ -121,7 +120,7 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
             layers = layers.concat("],\"layout\":\"A3 portrait\",\"srs\":\"EPSG:4326\",\"dpi\":"
                     + comboDPI.getValue().getDpi() + ",\"units\":\"degrees\"}");
 
-            String url = GWT.getHostPageBaseURL() + "geoportal/pdf/print.pdf?spec="
+            String url = GWT.getHostPageBaseURL() + GWT.getModuleName() + "/pdf/print.pdf?spec="
                     + URL.encode(layers);
 
             System.out.println(URL.decode(url));

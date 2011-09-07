@@ -49,6 +49,8 @@ public class ClientRasterInfo extends GPLayerClientInfo {
      *
      */
     private static final long serialVersionUID = 3956898488739664952L;
+    //
+    private float opacity;
     private List<String> styles;
 
     /**
@@ -56,6 +58,20 @@ public class ClientRasterInfo extends GPLayerClientInfo {
      */
     public List<String> getStyles() {
         return styles;
+    }
+
+    /**
+     * @return the opacity
+     */
+    public float getOpacity() {
+        return opacity;
+    }
+
+    /**
+     * @param opacity the opacity to set
+     */
+    public void setOpacity(float opacity) {
+        this.opacity = opacity;
     }
 
     /**
@@ -78,10 +94,10 @@ public class ClientRasterInfo extends GPLayerClientInfo {
      */
     @Override
     public String toString() {
-        return "ClientRasterInfo [layerName=" + super.getLayerName() + ", styles="
-                + styles + ", getDataSource()=" + getDataSource()
-                + ", getCrs()=" + getCrs() + ", getBbox()=" + getBbox()
-                + ", getLayerType()=" + getLayerType() + ", getzIndex()="
-                + getzIndex() + "]";
+        return "ClientRasterInfo [layerName = " + super.getLayerName() + ", styles = "
+                + styles + ", getDataSource() = " + getDataSource()
+                + ", getCrs() = " + getCrs() + ", getBbox() = " + getBbox()
+                + ", getLayerType() = " + getLayerType() + ", getOpacity() =  "
+                + getOpacity() + ", getzIndex() = "+ getzIndex() + "]";
     }
 }

@@ -38,11 +38,10 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
-import org.geosdi.geoplatform.gui.client.puregwt.binding.GPTreeBindingHandler;
-import org.geosdi.geoplatform.gui.client.puregwt.binding.LayerBindingHandlerManager;
 import org.geosdi.geoplatform.gui.client.puregwt.binding.event.GPTreeBindingEvent;
 import org.geosdi.geoplatform.gui.client.widget.LayersPropertiesWidget;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 /**
  *
@@ -60,11 +59,11 @@ public class ShowLayerPropertiesAction extends MenuAction {
     public ShowLayerPropertiesAction(TreePanel treePanel) {
         super("LayerProperties");
         this.treePanel = treePanel;
-        LayerBindingHandlerManager.addHandler(GPTreeBindingHandler.TYPE, this.layersPropertiesWidget);
+        this.layersPropertiesWidget.addHandlers();
     }
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        LayerBindingHandlerManager.fireEvent(new GPTreeBindingEvent((GPLayerBean) this.treePanel.getSelectionModel().getSelectedItem()));
+        WidgetPropertiesHandlerManager.fireEvent(new GPTreeBindingEvent((GPLayerBean) this.treePanel.getSelectionModel().getSelectedItem()));
     }
 }

@@ -47,4 +47,8 @@ public interface GPRasterBean extends GPLayerBean {
     public List<String> getStyles();
 
     public void setStyles(List<String> styles);
+    
+    public void setOpacity(float opacity);
+    
+    public float getOpacity();
 }

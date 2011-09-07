@@ -53,6 +53,7 @@ public abstract class GPLayerClientInfo implements Serializable,
     private static final long serialVersionUID = 2098509654335891064L;
     private long id;
     private String layerName;
+    private String alias;
     private String title;
     private String abstractText;
     private String dataSource;
@@ -90,6 +91,20 @@ public abstract class GPLayerClientInfo implements Serializable,
      */
     public void setLayerName(String layerName) {
         this.layerName = layerName;
+    }
+
+    /**
+     * @return the alias
+     */
+    public String getAlias() {
+        return alias;
+    }
+
+    /**
+     * @param alias the alias to set
+     */
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     /**

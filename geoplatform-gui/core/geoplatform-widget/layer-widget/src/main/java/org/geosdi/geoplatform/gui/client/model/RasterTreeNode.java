@@ -57,6 +57,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
      */
     private static final long serialVersionUID = 8265365333381641340L;
     //
+    private float opacity;
     private List<String> styles;
 
     public RasterTreeNode() {
@@ -70,6 +71,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
     public RasterTreeNode(ClientRasterInfo layer) {
         super(layer);
         super.setLabel(layer.getTitle()); // Label of a vector is different
+        this.setAlias(layer.getAlias());
         this.setStyles(layer.getStyles());
     }
 
@@ -77,6 +79,22 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
     public List<String> getStyles() {
         // TODO Auto-generated method stub
         return this.styles;
+    }
+
+    /**
+     * @return the opacity
+     */
+    @Override
+    public float getOpacity() {
+        return opacity;
+    }
+
+    /**
+     * @param opacity the opacity to set
+     */
+    @Override
+    public void setOpacity(float opacity) {
+        this.opacity = opacity;
     }
 
     @Override

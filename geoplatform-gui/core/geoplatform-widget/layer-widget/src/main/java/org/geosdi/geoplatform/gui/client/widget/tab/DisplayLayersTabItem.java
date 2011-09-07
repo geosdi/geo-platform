@@ -35,30 +35,45 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab;
 
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.Slider;
 import com.extjs.gxt.ui.client.widget.layout.FillData;
+import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericLayerTabItem;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class DisplayLayersTabItem extends GeoPlatformTabItem {
+public class DisplayLayersTabItem extends GenericLayerTabItem {
 
     public DisplayLayersTabItem() {
         super("Display");
-        addComponents();
     }
 
-    private void addComponents() {
-        
+    @Override
+    public void addComponents() {
+
         /**TODO SOME IMPROVEMENTS HERE ISNERT A FIELD SET  **/
-        
-        Slider slider = new Slider();
+        final Slider slider = new Slider();
         slider.setWidth(200);
-        slider.setIncrement(1);
         slider.setMaxValue(100);
-        slider.setClickToChange(false);
-        add(slider, new FillData(30));
+
+        slider.addListener(Events.Change, new Listener<ComponentEvent>() {
+
+            @Override
+            public void handleEvent(ComponentEvent be) {
+                System.out.println("TEST ****************** " + slider.getValue());
+            }
+        });
+
+        super.add(slider, new FillData(30));
+    }
+
+    @Override
+    public void bindModel(GPLayerBean model) {
     }
 }

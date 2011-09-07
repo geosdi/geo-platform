@@ -33,29 +33,19 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tab;
+package org.geosdi.geoplatform.gui.puregwt.properties;
 
-import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericLayerTabItem;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class WPSLayerTabItem extends GenericLayerTabItem {
+public interface GPWidgetSizeHandler extends EventHandler {
     
-    public WPSLayerTabItem() {
-        super("WPS");
-    }
-
-    @Override
-    public void addComponents() {
-        
-    }
-
-    @Override
-    public void bindModel(GPLayerBean model) {
-        
-    }
+    Type<GPWidgetSizeHandler> TYPE = new Type<GPWidgetSizeHandler>();
+    
+    public void updateWidgetSize(int size);
 }

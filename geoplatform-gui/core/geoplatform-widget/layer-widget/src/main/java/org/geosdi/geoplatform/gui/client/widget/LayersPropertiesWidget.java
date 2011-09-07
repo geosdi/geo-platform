@@ -41,21 +41,25 @@ import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import org.geosdi.geoplatform.gui.client.puregwt.binding.GPTreeBindingHandler;
 import org.geosdi.geoplatform.gui.client.widget.tab.LayersTabWidget;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.puregwt.properties.GPWidgetSizeHandler;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class LayersPropertiesWidget extends GeoPlatformWindow implements GPTreeBindingHandler {
+public class LayersPropertiesWidget extends GeoPlatformWindow
+        implements GPTreeBindingHandler, GPWidgetSizeHandler {
 
     private LayersTabWidget layersTabWidget;
     private VerticalPanel vp;
     private GPLayerBean model;
-
+   
     public LayersPropertiesWidget() {
         super(true);
     }
@@ -85,7 +89,7 @@ public class LayersPropertiesWidget extends GeoPlatformWindow implements GPTreeB
     @Override
     public void initSize() {
         setWidth(400);
-        setHeight(250);
+        setAutoHeight(true);
     }
 
     @Override
@@ -93,6 +97,7 @@ public class LayersPropertiesWidget extends GeoPlatformWindow implements GPTreeB
         setHeading("GP Layers Properties Widget");
         setModal(true);
         setResizable(false);
+        setLayout(new FlowLayout());
 
         setCollapsible(true);
 
@@ -108,6 +113,22 @@ public class LayersPropertiesWidget extends GeoPlatformWindow implements GPTreeB
     @Override
     public void bind(GPLayerBean model) {
         this.model = model;
-        super.showForm();;
+        super.showForm();
+    }
+
+    @Override
+    public void updateWidgetSize(int size) {
+        super.setHeight(size);
+        super.doLayout();
+    }
+
+    /**
+     * Add Handler to manage TreeNode Binding on Widget
+     * and window adjusts its height based on the tab is clicked
+     * 
+     */
+    public void addHandlers() {
+        WidgetPropertiesHandlerManager.addHandler(GPTreeBindingHandler.TYPE, this);
+        WidgetPropertiesHandlerManager.addHandler(GPWidgetSizeHandler.TYPE, this);
     }
 }

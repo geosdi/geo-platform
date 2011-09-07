@@ -46,27 +46,18 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
  */
 public class LayersInfoTabItem extends GenericLayerTabItem {
 
-    private GPLayerInfoBinding layerInfoBinding = new GPLayerInfoBinding();
-
     public LayersInfoTabItem() {
         super("Layer Info");
-        addComponents();
     }
 
     @Override
     public void addComponents() {
-        super.add(this.getLayerInfoBinding().getWidget());
+        bindingWidget = new GPLayerInfoBinding();
+        super.add(this.bindingWidget.getWidget());
     }
 
     @Override
     public void bindModel(GPLayerBean model) {
-        this.getLayerInfoBinding().bindModel(model);
-    }
-
-    /**
-     * @return the layerInfoBinding
-     */
-    public GPLayerInfoBinding getLayerInfoBinding() {
-        return layerInfoBinding;
+        this.bindingWidget.bindModel(model);
     }
 }

@@ -52,7 +52,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
     public enum GPLayerKeyValue {
 
         TITLE("title"), ABSTRACT("abstractText"),
-        ALIAS("LAYER_ALIAS"), SERVER("dataSource");
+        ALIAS("alias"), SERVER("dataSource");
         //
         private String value;
 
@@ -72,6 +72,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
     //
     private String title;
     private String name;
+    private String alias;
     private String abstractText;
     private String dataSource;
     private String crs;
@@ -89,6 +90,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
         this.name = layer.getLayerName();
         setAbstractText(layer.getAbstractText());
         setDataSource(layer.getDataSource());
+        setAlias(layer.getAlias());
         this.crs = layer.getCrs();
         this.bbox = layer.getBbox();
         this.layerType = layer.getLayerType();
@@ -127,6 +129,23 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
     @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the alias
+     */
+    @Override
+    public String getAlias() {
+        return alias;
+    }
+
+    /**
+     * @param alias the alias to set
+     */
+    @Override
+    public void setAlias(String alias) {
+        this.alias = alias;
+        set(GPLayerKeyValue.ALIAS.toString(), this.alias);
     }
 
     /**

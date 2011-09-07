@@ -61,6 +61,10 @@ public interface GPLayerBean extends ModelData {
     public String getName();
 
     public void setName(String name);
+    
+    public void setAlias(String alias);
+    
+    public String getAlias();
 
     public String getAbstractText();
 

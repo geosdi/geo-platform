@@ -52,6 +52,9 @@ public abstract class GeoPlatformBindingWidget<M extends GPLayerBean> {
 
     public GeoPlatformBindingWidget() {
         this.formPanel = createFormPanel();
+        this.formBinding = new FormBinding(this.formPanel);
+        addFieldsBinding();
+        this.formBinding.autoBind();
     }
 
     /**
@@ -87,4 +90,10 @@ public abstract class GeoPlatformBindingWidget<M extends GPLayerBean> {
     }
 
     public abstract FormPanel createFormPanel();
+    
+     /**
+     * Add Bindings Manually
+     * 
+     */
+    public abstract void addFieldsBinding();
 }

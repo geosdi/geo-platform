@@ -76,6 +76,7 @@ import org.geosdi.geoplatform.gui.client.puregwt.timeout.event.GPBuildTreeEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.timeout.event.GPExpandTreeNodeEvent;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.contextmenu.GPDynamicTreeContextMenu;
+import org.geosdi.geoplatform.gui.client.widget.decorator.GPLayerTreeDecorator;
 import org.geosdi.geoplatform.gui.client.widget.store.GPTreeStoreWidget;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
@@ -98,6 +99,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
         implements IGPBuildTreeHandler, IGPExpandTreeNodeHandler {
 
     private GPTreeStoreWidget treeStore;
+    private GPLayerTreeDecorator treeDecorator;
     private VisitorDisplayHide visitorDisplay = new VisitorDisplayHide(this.tree);
     private TreePanelDragSource dragSource;
     private GPRootTreeNode root;
@@ -117,6 +119,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
         this.buildRoot();
         this.setTreePanelProperties();
         this.treeStore = new GPTreeStoreWidget(this.tree);
+        this.treeDecorator = new GPLayerTreeDecorator(tree);
         //Assigning a dynamic context menu to the tree
         GPDynamicTreeContextMenu dynamicMenu = new GPDynamicTreeContextMenu(tree);
     }

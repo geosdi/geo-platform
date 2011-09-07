@@ -35,16 +35,19 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab.binding;
 
-import com.extjs.gxt.ui.client.binding.FormBinding;
-import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldEvent;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
+import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
+import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel.GPLayerKeyValue;
+import org.geosdi.geoplatform.gui.puregwt.layers.decorator.event.GPTreeLabelEvent;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 /**
  *
@@ -57,10 +60,8 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
     private TextField<String> abstractField;
     private TextField<String> aliasField;
     private TextField<String> serverField;
-
-    public GPLayerInfoBinding() {
-        this.formBinding = new FormBinding(formPanel, true);
-    }
+    //
+    private GPTreeLabelEvent labelEvent = new TreeChangeLabelEvent();
 
     @Override
     public FormPanel createFormPanel() {
@@ -98,27 +99,52 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         fp.add(abstractField);
 
         aliasField = new TextField<String>();
-//        aliasField.setId(GPLayerKeyValue.ALIAS.toString());
-//        aliasField.setName(GPLayerKeyValue.ALIAS.toString());
+        aliasField.setName(GPLayerKeyValue.ALIAS.toString());
         aliasField.setFieldLabel("Alias");
+        
         fp.add(aliasField);
 
         serverField = new TextField<String>();
         serverField.setId(GPLayerKeyValue.SERVER.toString());
         serverField.setName(GPLayerKeyValue.SERVER.toString());
         serverField.setFieldLabel("Server");
-        
+
         serverField.addListener(Events.Change, new Listener<FieldEvent>() {
 
             @Override
             public void handleEvent(FieldEvent be) {
                 serverField.setValue((String) be.getOldValue());
             }
-            
         });
 
         fp.add(serverField);
 
         return fp;
+    }
+
+    @Override
+    public void addFieldsBinding() {
+        this.formBinding.addFieldBinding(new GPLayerAliasFieldBinding(aliasField,
+                GPLayerKeyValue.ALIAS.toString()));
+    }
+
+    /**
+     * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+     * @email  giuseppe.lascaleia@geosdi.org
+     * 
+     * Internal Class GPLayerAliasFieldBinding to map bi-directional Binding
+     * 
+     */
+    private class GPLayerAliasFieldBinding extends GPFieldBinding {
+
+        public GPLayerAliasFieldBinding(Field field, String property) {
+            super(field, property);
+        }
+
+        @Override
+        public void setModelProperty(Object val) {
+            ((GPLayerBean) model).setAlias(val != null ? (String) val : "");
+            WidgetPropertiesHandlerManager.fireEvent(labelEvent);
+        }
     }
 }

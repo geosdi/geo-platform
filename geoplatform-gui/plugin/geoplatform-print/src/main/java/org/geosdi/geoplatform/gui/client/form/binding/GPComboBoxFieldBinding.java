@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPComboBoxFieldBinding extends GPFieldBinding<GPPrintBean> {
+public class GPComboBoxFieldBinding extends GPFieldBinding {
 
     public GPComboBoxFieldBinding(ComboBox field, String property) {
         super(field, property);

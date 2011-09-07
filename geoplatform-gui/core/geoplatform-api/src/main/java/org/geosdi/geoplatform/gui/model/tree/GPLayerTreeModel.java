@@ -247,6 +247,12 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
         observable.notifyObservers(id);
     }
 
+    @Override
+    public String getLabel() {
+        return ((getAlias() != null) && (!getAlias().equals("")))
+                ? getAlias() : super.getLabel();
+    }
+
     public ObservableFolderTreeNode getObservable() {
         return observable;
     }

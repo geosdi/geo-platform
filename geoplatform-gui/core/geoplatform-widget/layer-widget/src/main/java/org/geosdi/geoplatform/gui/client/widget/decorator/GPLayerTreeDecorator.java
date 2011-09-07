@@ -33,25 +33,30 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.form.binding;
+package org.geosdi.geoplatform.gui.client.widget.decorator;
 
-import com.extjs.gxt.ui.client.widget.form.Field;
-import org.geosdi.geoplatform.gui.client.model.GPPrintBean;
-import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
+import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.puregwt.layers.decorator.GPTreeLabelHandler;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class MapCommentFieldBinding extends GPFieldBinding {
-    
-    public MapCommentFieldBinding(Field field, String property) {
-        super(field, property);
+public class GPLayerTreeDecorator implements GPTreeLabelHandler {
+
+    private GPTreePanel tree;
+
+    public GPLayerTreeDecorator(GPTreePanel theTree) {
+        this.tree = theTree;
+        WidgetPropertiesHandlerManager.addHandler(GPTreeLabelHandler.TYPE, this);
     }
-    
+
     @Override
-    public void setModelProperty(Object val) {
-        ((GPPrintBean) this.model).setComments(val.toString());
+    public void changeLabel(String label) {
+        this.tree.refresh((GPBeanTreeModel) tree.getSelectionModel().getSelectedItem());
     }
 }

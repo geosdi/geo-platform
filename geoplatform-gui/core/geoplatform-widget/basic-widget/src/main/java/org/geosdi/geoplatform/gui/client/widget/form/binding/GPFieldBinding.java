@@ -38,14 +38,13 @@ package org.geosdi.geoplatform.gui.client.widget.form.binding;
 import com.extjs.gxt.ui.client.binding.FieldBinding;
 import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.form.Field;
-import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPFieldBinding<M extends GeoPlatformBeanModel> extends FieldBinding {
+public abstract class GPFieldBinding extends FieldBinding {
 
     public GPFieldBinding(Field field, String property) {
         super(field, property);

@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class MapTitleFieldBinding extends GPFieldBinding<GPPrintBean> {
+public class MapTitleFieldBinding extends GPFieldBinding {
 
     public MapTitleFieldBinding(Field field, String property) {
         super(field, property);

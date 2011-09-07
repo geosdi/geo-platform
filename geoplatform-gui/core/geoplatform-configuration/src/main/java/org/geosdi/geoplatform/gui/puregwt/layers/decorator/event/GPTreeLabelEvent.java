@@ -33,25 +33,34 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.form.binding;
+package org.geosdi.geoplatform.gui.puregwt.layers.decorator.event;
 
-import com.extjs.gxt.ui.client.widget.form.Field;
-import org.geosdi.geoplatform.gui.client.model.GPPrintBean;
-import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.puregwt.layers.decorator.GPTreeLabelHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class MapCommentFieldBinding extends GPFieldBinding {
+public abstract class GPTreeLabelEvent extends GwtEvent<GPTreeLabelHandler> {
     
-    public MapCommentFieldBinding(Field field, String property) {
-        super(field, property);
+    protected String label;
+
+    /**
+     * @return the label
+     */
+    public String getLabel() {
+        return label;
+    }
+
+    /**
+     * @param label the label to set
+     */
+    public void setLabel(String label) {
+        this.label = label;
     }
     
-    @Override
-    public void setModelProperty(Object val) {
-        ((GPPrintBean) this.model).setComments(val.toString());
-    }
+    
+    
 }

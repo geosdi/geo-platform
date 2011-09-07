@@ -80,6 +80,9 @@ public class GeoPlatformServer implements Serializable {
     @Column
     private String name;
     //
+    @Column(name = "alias_name")
+    private String aliasName;
+    //
     @Column
     private String title;
     //
@@ -216,6 +219,20 @@ public class GeoPlatformServer implements Serializable {
         this.serverType = serverType;
     }
 
+    /**
+     * @return the aliasName
+     */
+    public String getAliasName() {
+        return aliasName;
+    }
+
+    /**
+     * @param aliasName the aliasName to set
+     */
+    public void setAliasName(String aliasName) {
+        this.aliasName = aliasName;
+    }
+
     /*
      * (non-Javadoc)
      *
@@ -227,6 +244,7 @@ public class GeoPlatformServer implements Serializable {
         str.append("id=").append(id);
         str.append(", serverUrl=").append(serverUrl);
         str.append(", name=").append(name);
+        str.append(", aliasName=").append(aliasName);
         str.append(", title=").append(title);
         str.append(", abstractServer=").append(abstractServer);
         str.append(", contactPerson=").append(contactPerson);

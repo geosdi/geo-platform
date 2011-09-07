@@ -178,7 +178,7 @@ class WMSServiceImpl {
         return serverDTO;
     }
 
-    public ServerDTO saveServer(String serverUrl)
+    public ServerDTO saveServer(String aliasServerName, String serverUrl)
             throws ResourceNotFoundFault {
         ServerDTO serverDTO = null;
         WMSCapabilities wmsCapabilities = this.getWMSCapabilities(serverUrl);
@@ -188,6 +188,7 @@ class WMSServiceImpl {
         if (server == null) { // Create and Save a new Server
             Service service = wmsCapabilities.getService();
             server = this.createWMSServerFromService(serverUrl, service);
+            server.setAliasName(aliasServerName);
             serverDao.persist(server);
         }
         serverDTO = new ServerDTO(server);

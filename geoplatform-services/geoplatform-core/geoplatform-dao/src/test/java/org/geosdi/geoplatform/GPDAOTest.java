@@ -41,7 +41,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPUser;
 import junit.framework.Assert;
@@ -52,7 +51,6 @@ import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
 
 /**
  * This test is not intended to test the business logic but only the correctness

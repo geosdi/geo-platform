@@ -53,12 +53,13 @@ import org.geosdi.geoplatform.core.model.GeoPlatformServer;
  */
 @XmlRootElement(name = "ServerDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"id", "serverUrl", "name", "layerList"})
+@XmlType(propOrder = {"id", "serverUrl", "name", "alias", "layerList"})
 public class ServerDTO {
 
     private long id;
     private String serverUrl;
     private String name;
+    private String alias;
     //
     @XmlElementWrapper(name = "layerList")
     @XmlElement(name = "layer")
@@ -72,6 +73,7 @@ public class ServerDTO {
         this.id = server.getId();
         this.serverUrl = server.getServerUrl();
         this.name = server.getName();
+        this.alias = server.getAliasName();
     }
 
     /**
@@ -142,6 +144,20 @@ public class ServerDTO {
     @Override
     public String toString() {
         return "ServerDTO{" + "id=" + id + ", serverUrl=" + serverUrl
-                + ", name=" + name + '}';
+                + ", alias=" + alias + ", name=" + name + '}';
+    }
+
+    /**
+     * @return the alias
+     */
+    public String getAlias() {
+        return alias;
+    }
+
+    /**
+     * @param alias the alias to set
+     */
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 }

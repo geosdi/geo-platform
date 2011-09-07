@@ -111,5 +111,5 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      * 
      * @throws GeoPlatformException 
      */
-    public GPServerBeanModel insertServer(String urlServer) throws GeoPlatformException;
+    public GPServerBeanModel insertServer(String aliasServerName, String urlServer) throws GeoPlatformException;
 }

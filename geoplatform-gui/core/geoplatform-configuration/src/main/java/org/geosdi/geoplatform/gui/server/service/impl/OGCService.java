@@ -108,10 +108,10 @@ public class OGCService implements IOGCService {
     }
 
     @Override
-    public GPServerBeanModel insertServer(String urlServer) throws GeoPlatformException {
+    public GPServerBeanModel insertServer(String aliasServerName, String urlServer) throws GeoPlatformException {
         try {
             ServerDTO serverWS = this.geoPlatformServiceClient.saveServer(
-                    urlServer);
+                    aliasServerName, urlServer);
 
             return this.dtoServerConverter.convertServerWS(serverWS);
         } catch (ResourceNotFoundFault ex) {

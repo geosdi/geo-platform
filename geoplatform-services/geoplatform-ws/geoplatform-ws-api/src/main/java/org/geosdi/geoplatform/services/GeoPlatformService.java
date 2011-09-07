@@ -503,7 +503,8 @@ public interface GeoPlatformService {
 
     @Post
     @HttpResource(location = "/server")
-    ServerDTO saveServer(@WebParam(name = "serverUrl") String serverUrl)
+    ServerDTO saveServer(@WebParam(name = "aliasServerName") String aliasServerName,
+        @WebParam(name = "serverUrl") String serverUrl)
             throws ResourceNotFoundFault;
     //</editor-fold>
 

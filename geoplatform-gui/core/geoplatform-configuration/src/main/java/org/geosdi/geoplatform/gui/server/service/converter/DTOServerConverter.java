@@ -76,6 +76,7 @@ public class DTOServerConverter {
             for (ServerDTO gpServer : serversWS) {
                 GPServerBeanModel serverDTO = new GPServerBeanModel();
                 serverDTO.setId(gpServer.getId());
+                serverDTO.setAlias(gpServer.getAlias());
                 serverDTO.setUrlServer(gpServer.getServerUrl());
                 serverDTO.setName(gpServer.getName());
                 serversDTO.add(serverDTO);
@@ -96,6 +97,7 @@ public class DTOServerConverter {
         serverDTO.setName(gpServer.getName());
         serverDTO.setUrlServer(gpServer.getServerUrl());
         serverDTO.setTitle(gpServer.getTitle());
+        serverDTO.setAlias(gpServer.getAliasName());
         serverDTO.setContactOrganization(gpServer.getContactOrganization());
         serverDTO.setContactPerson(gpServer.getContactPerson());
         return serverDTO;
@@ -143,6 +145,7 @@ public class DTOServerConverter {
     public GPServerBeanModel convertServerWS(ServerDTO serverWS) {
         GPServerBeanModel serverDTO = new GPServerBeanModel();
         serverDTO.setId(serverWS.getId());
+        serverDTO.setAlias(serverWS.getAlias());
         serverDTO.setName(serverWS.getName());
         serverDTO.setUrlServer(serverWS.getServerUrl());
         serverDTO.setLayers(this.createRasterLayerList(serverWS.getLayerList()));
@@ -153,6 +156,7 @@ public class DTOServerConverter {
         GPRasterLayerGrid raster = new GPRasterLayerGrid();
         raster.setLabel(layer.getTitle());
         raster.setTitle(layer.getTitle());
+        raster.setAlias(layer.getAlias());
         raster.setName(layer.getName());
         raster.setAbstractText(layer.getAbstractText());
         raster.setLayerType(GPLayerType.RASTER);

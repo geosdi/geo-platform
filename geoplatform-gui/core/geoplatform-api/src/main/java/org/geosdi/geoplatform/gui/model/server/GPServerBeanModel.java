@@ -48,7 +48,7 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
     public enum GPServerKeyValue {
 
         URL_SERVER("urlServer"), NAME("name"), TITLE("title"),
-        CONTACT_PERSON("contactPerson"),
+        CONTACT_PERSON("contactPerson"), ALIAS("alias"),
         CONTACT_ORGANIZATION("contactOrganization");
         private String value;
 
@@ -68,6 +68,7 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
     private String urlServer;
     private String name;
     private String title;
+    private String alias;
     private String contactPerson;
     private String contactOrganization;
     private ArrayList<? extends GPLayerGrid> layers;
@@ -116,6 +117,21 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
         set(GPServerKeyValue.NAME.getValue(), this.name);
     }
 
+    /**
+     * @return the alias
+     */
+    public String getAlias() {
+        return alias;
+    }
+
+    /**
+     * @param alias the alias to set
+     */
+    public void setAlias(String alias) {
+        this.alias = alias;
+        set(GPServerKeyValue.ALIAS.getValue(), this.alias);
+    }
+    
     /**
      * @return the title
      */
@@ -207,7 +223,7 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
 
     @Override
     public String toString() {
-        return "GPServerDTO{" + "id = " + id + ", urlServer = " + urlServer + ", name =  "
+        return "GPServerDTO{" + "id = " + id + "alias = " + alias + ", urlServer = " + urlServer + ", name =  "
                 + name + ", title = " + title + ", contactPerson = " + contactPerson
                 + ", contactOrganization = " + contactOrganization + '}';
     }

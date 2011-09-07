@@ -108,7 +108,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         this.comboServer = new ComboBox<GPServerBeanModel>();
 
         comboServer.setEmptyText("Select a Server...");
-        comboServer.setDisplayField(GPServerKeyValue.URL_SERVER.getValue());
+        comboServer.setDisplayField(GPServerKeyValue.ALIAS.getValue());
         comboServer.setTemplate(getTemplate());
         comboServer.setWidth(250);
         comboServer.setEditable(false);
@@ -196,7 +196,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
     private native String getTemplate() /*-{
         return  [
             '<tpl for=".">',
-                '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{urlServer}</div>',
+                '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{alias}</div>',
             '</tpl>'
         ].join("");
     }-*/;
@@ -278,13 +278,13 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      * @return 
      *         boolean
      */
-    public boolean containsServer(String urlServer) {
+    public GPServerBeanModel containsServer(String urlServer) {
         for (GPServerBeanModel server : store.getModels()) {
-            if (server.getUrlServer().equalsIgnoreCase(urlServer)) {
-                return true;
+            if (server.getUrlServer().equalsIgnoreCase(urlServer.trim())) {
+                return server;
             }
         }
-        return false;
+        return null;
     }
 
     /**

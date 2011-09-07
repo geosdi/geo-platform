@@ -68,6 +68,8 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     @Transient
     private long id;
     @Transient
+    private String alias;
+    @Transient
     private String label;
     @Transient
     private String name;
@@ -115,6 +117,22 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     @Override
     public void setId(long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the alias
+     */
+    @Override
+    public String getAlias() {
+        return alias;
+    }
+
+    /**
+     * @param alias the alias to set
+     */
+    @Override
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     @Override

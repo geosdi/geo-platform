@@ -49,6 +49,14 @@ import org.geosdi.geoplatform.gui.observable.Observable;
 public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
         GPLayerBean {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -6964624685883651246L;
+    /*
+     * 
+     */
+
     public enum GPLayerKeyValue {
 
         TITLE("title"), ABSTRACT("abstractText"),
@@ -65,10 +73,6 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
             return this.value;
         }
     }
-    /**
-     *
-     */
-    private static final long serialVersionUID = -6964624685883651246L;
     //
     private String title;
     private String name;

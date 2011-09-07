@@ -46,8 +46,25 @@ import org.geosdi.geoplatform.gui.model.GPRasterBean;
 public class GPRasterLayerGrid extends GPLayerGrid implements GPRasterBean {
 
     private static final long serialVersionUID = -421196804918413910L;
-    
+    //
+    private float opacity = 1.0f;
     private List<String> styles;
+
+    /**
+     * @return the opacity
+     */
+    @Override
+    public float getOpacity() {
+        return opacity;
+    }
+
+    /**
+     * @param opacity the opacity to set
+     */
+    @Override
+    public void setOpacity(float opacity) {
+        this.opacity = opacity;
+    }
 
     @Override
     public List<String> getStyles() {

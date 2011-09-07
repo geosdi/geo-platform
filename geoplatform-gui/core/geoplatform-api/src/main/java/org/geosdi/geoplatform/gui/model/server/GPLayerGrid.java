@@ -47,12 +47,18 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
  */
 public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
         GPLayerBean {
+    /*
+     * 
+     */
+    private static final long serialVersionUID = 7746607426284214904L;
+    /*
+     * 
+     */
 
     public enum GPLayerBeanKeyValue {
 
         GPLAYER_NAME("name"), GPLAYER_ABSTRACT_TEXT("abstractText"),
         GPLAYER_LABEL("label");
-        
         private String value;
 
         GPLayerBeanKeyValue(String theValue) {
@@ -64,24 +70,15 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
         }
     }
     
-    private static final long serialVersionUID = 7746607426284214904L;
-    
     private long id;
-    
     private String name;
-    
+    private String alias;
     private String label;
-    
     private String title;
-    
     private String abstractText;
-    
     private String dataSource;
-    
     private String crs;
-    
     private BboxClientInfo bbox;
-    
     private GPLayerType layerType;
 
     /**
@@ -120,6 +117,22 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
     }
 
     /**
+     * @return the alias
+     */
+    @Override
+    public String getAlias() {
+        return alias;
+    }
+
+    /**
+     * @param alias the alias to set
+     */
+    @Override
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    /**
      * @return the label
      */
     @Override
@@ -137,7 +150,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
         super.set(GPLayerBeanKeyValue.GPLAYER_LABEL.getValue(),
                 this.label);
     }
-    
+
     /**
      * @return the title
      */
@@ -153,7 +166,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
     @Override
     public void setTitle(String title) {
         this.title = title;
-    }    
+    }
 
     /**
      * @return the abstractText

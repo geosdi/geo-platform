@@ -50,7 +50,7 @@ public class ClientRasterInfo extends GPLayerClientInfo {
      */
     private static final long serialVersionUID = 3956898488739664952L;
     //
-    private float opacity;
+    private float opacity = 1.0f;
     private List<String> styles;
 
     /**

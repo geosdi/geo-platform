@@ -63,7 +63,7 @@ public class AclClass {
     @SequenceGenerator(name = "ACL_CLASS_SEQ", sequenceName = "ACL_CLASS_SEQ")
     private long id;
     // Fully qualified name of a class (package.className) of the secure domanin object
-    @Column(name = "class", unique = true, nullable = false, length = 500)
+    @Column(name = "clazz", unique = true, nullable = false, length = 500)
     private String clazz;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor methods">

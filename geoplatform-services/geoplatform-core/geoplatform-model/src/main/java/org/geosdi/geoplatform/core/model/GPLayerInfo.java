@@ -61,7 +61,7 @@ public class GPLayerInfo implements Serializable {
     //
     private Boolean queryable = false;
     // The character ; separated list of keywords
-    @Column(name = "keywords", length = 500)
+    @Column(length = 500)
     private String keywords;
 
     /**

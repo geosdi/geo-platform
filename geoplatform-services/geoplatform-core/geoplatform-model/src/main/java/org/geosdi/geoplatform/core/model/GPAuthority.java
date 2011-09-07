@@ -75,10 +75,10 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     @SequenceGenerator(name = "GP_AUTHORITY_SEQ", sequenceName = "GP_AUTHORITY_SEQ")
     private long id;
     //
-    @Column(name = "username", nullable = false)
+    @Column(nullable = false)
     private String username;
     //
-    @Column(name = "authority", nullable = false)
+    @Column(nullable = false)
     private String authority;
     //
     @ManyToOne

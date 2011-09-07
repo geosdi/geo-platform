@@ -70,10 +70,10 @@ public class AclSid {
     @SequenceGenerator(name = "ACL_SID_SEQ", sequenceName = "ACL_SID_SEQ")
     private long id;
     // If Id refers to a principal name or a GrantedAuthority
-    @Column(name = "principal", nullable = false)
+    @Column(nullable = false)
     private boolean principal = true;
     //
-    @Column(name = "sid", nullable = false)
+    @Column(nullable = false)
     private String sid;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor methods">

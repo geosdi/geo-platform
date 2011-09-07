@@ -52,7 +52,7 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"id", "name", "position", "shared", "checked",
-    "title", "urlServer", "srs", "abstractText", "layerType", "bbox", "cached"})
+    "title", "urlServer", "srs", "abstractText", "layerType", "bbox", "cached", "alias"})
 @XmlSeeAlso(value = {RasterLayerDTO.class, VectorLayerDTO.class})
 public class ShortLayerDTO extends AbstractElementDTO {
 
@@ -63,6 +63,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
     private GPLayerType layerType;
     private GPBBox bbox;
     private boolean cached;
+    private String alias;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
@@ -70,7 +71,6 @@ public class ShortLayerDTO extends AbstractElementDTO {
      */
     public ShortLayerDTO() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -86,6 +86,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
         this.layerType = layer.getLayerType();
         this.bbox = layer.getBbox();
         this.cached = layer.isCached();
+        this.alias = layer.getAlias();
     }
     //</editor-fold>
 
@@ -193,6 +194,21 @@ public class ShortLayerDTO extends AbstractElementDTO {
         this.cached = cached;
     }
 
+    /**
+     * @return the alias
+     */
+    public String getAlias() {
+        return alias;
+    }
+
+    /**
+     * @param alias
+     *          the alias to set
+     */
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
     /*
      * (non-Javadoc)
      * 
@@ -206,8 +222,9 @@ public class ShortLayerDTO extends AbstractElementDTO {
                 + ", srs=" + srs
                 + ", abstractText=" + abstractText
                 + ", layerType=" + layerType
-                + ", " + bbox                
-                + ", cached=" + cached;
+                + ", " + bbox
+                + ", cached=" + cached
+                + ", alias=" + alias;
         return s;
     }
 }

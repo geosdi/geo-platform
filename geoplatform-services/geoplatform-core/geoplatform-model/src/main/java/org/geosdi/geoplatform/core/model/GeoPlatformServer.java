@@ -77,10 +77,10 @@ public class GeoPlatformServer implements Serializable {
     @Column(name = "server_url", nullable = false, unique = true)
     private String serverUrl;
     //
-    @Column(name = "name")
+    @Column
     private String name;
     //
-    @Column(name = "title")
+    @Column
     private String title;
     //
     @Column(name = "abstract")

@@ -74,7 +74,7 @@ public class GPFolder implements Serializable {
     @SequenceGenerator(name = "GP_FOLDER_SEQ", sequenceName = "GP_FOLDER_SEQ")
     private long id;
     //
-    @Column(name = "name", nullable = false)
+    @Column(nullable = false)
     private String name;
     //
     @ManyToOne(optional = true)
@@ -85,16 +85,16 @@ public class GPFolder implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPUser owner;
     //
-    @Column(name = "position")
+    @Column
     private int position = -1;
     //
     @Column(name = "number_of_descendants")
     private int numberOfDescendants = 0;
     //
-    @Column(name = "shared")
+    @Column
     private boolean shared = false;
     //
-    @Column(name = "checked")
+    @Column
     private boolean checked = false;
 
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">

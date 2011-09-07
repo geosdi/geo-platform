@@ -68,7 +68,7 @@ public class AclEntry {
     @SequenceGenerator(name = "ACL_ENTRY_SEQ", sequenceName = "ACL_ENTRY_SEQ")
     private long id;
     //
-    @ManyToOne(targetEntity = AclObjectIdentity.class)
+    @ManyToOne
     @JoinColumn(name = "acl_object_identity", nullable = false)
     private AclObjectIdentity aclObject;
     //
@@ -79,10 +79,10 @@ public class AclEntry {
     @JoinColumn(name = "sid", nullable = false)
     private AclSid aclSid;
     //
-    @Column(name = "mask", nullable = false)
+    @Column(nullable = false)
     private Integer mask;
     //
-    @Column(name = "granting", nullable = false)
+    @Column(nullable = false)
     private boolean granting = false;
     //
     @Column(name = "audit_success", nullable = false)

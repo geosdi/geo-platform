@@ -75,10 +75,10 @@ public class GPStyle implements Serializable {
     @SequenceGenerator(name = "GP_STYLE_SEQ", sequenceName = "GP_STYLE_SEQ")
     private long id;
     //
-    @Column(name = "name")
+    @Column
     private String name;
     //
-    @Column(name = "title")
+    @Column
     private String title;
     //
     @Column(name = "abstract")

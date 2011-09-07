@@ -69,18 +69,18 @@ public class AclObjectIdentity {
     @SequenceGenerator(name = "ACL_OBJECT_IDENTITY_SEQ", sequenceName = "ACL_OBJECT_IDENTITY_SEQ")
     private long id;
     //
-    @ManyToOne(targetEntity = AclClass.class)
+    @ManyToOne
     @JoinColumn(name = "object_id_class", nullable = false)
     private AclClass aclClass;
     //
     @Column(name = "object_id_identity", nullable = false)
     private long objectId;
     //
-    @ManyToOne(targetEntity = AclObjectIdentity.class)
+    @ManyToOne
     @JoinColumn(name = "parent_object")
     private AclObjectIdentity parentAclObject;
     //
-    @ManyToOne(targetEntity = AclSid.class)
+    @ManyToOne
     @JoinColumn(name = "owner_sid")
     private AclSid aclSid;
     //

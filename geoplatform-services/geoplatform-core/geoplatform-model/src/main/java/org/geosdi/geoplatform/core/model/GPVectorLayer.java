@@ -68,7 +68,7 @@ public class GPVectorLayer extends GPLayer {
     private static final long serialVersionUID = 3309979650712821228L;
     //
     @Type(type = "org.hibernatespatial.GeometryUserType")
-    @Column(name = "geometry", nullable = true)
+    @Column(nullable = true)
     private Geometry geometry;
     //
     @ManyToOne(optional = true)

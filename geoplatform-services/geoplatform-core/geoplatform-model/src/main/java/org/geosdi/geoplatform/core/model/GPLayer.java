@@ -75,10 +75,10 @@ public abstract class GPLayer implements Serializable {
     @SequenceGenerator(name = "GP_LAYER_SEQ", sequenceName = "GP_LAYER_SEQ")
     private long id;
     //
-    @Column(name = "name")
+    @Column
     private String name;
     //
-    @Column(name = "title", nullable = false)
+    @Column(nullable = false)
     private String title;
     //
     @Column(name = "abstract")
@@ -87,7 +87,7 @@ public abstract class GPLayer implements Serializable {
     @Column(name = "url_server")
     private String urlServer;
     //
-    @Column(name = "srs")
+    @Column
     private String srs;
     //
     @Embedded
@@ -96,20 +96,23 @@ public abstract class GPLayer implements Serializable {
     @Enumerated(EnumType.STRING)
     private GPLayerType layerType;
     //    
-    @Column(name = "position")
+    @Column
     private int position = -1;
     //
     @Column(name = "owner_id", nullable = false)
     private long ownerId = -1;
     //
-    @Column(name = "shared")
+    @Column
     private boolean shared = false;
     //
-    @Column(name = "checked")
+    @Column
     private boolean checked = false;
     //
-    @Column(name = "cached")
+    @Column
     private boolean cached = false;
+    //
+    @Column(name = "alias_name")
+    private String alias = "";
 
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
@@ -306,6 +309,21 @@ public abstract class GPLayer implements Serializable {
     public void setCached(boolean cached) {
         this.cached = cached;
     }
+
+    /**
+     * @return the alias
+     */
+    public String getAlias() {
+        return alias;
+    }
+
+    /**
+     * @param alias 
+     *          the alias to set
+     */
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
     //</editor-fold>
 
     public abstract GPFolder getFolder();
@@ -369,6 +387,7 @@ public abstract class GPLayer implements Serializable {
         str.append(", shared=").append(shared);
         str.append(", checked=").append(checked);
         str.append(", cached=").append(cached);
+        str.append(", alias=").append(alias);
         str.append(", folder.name=").append(getFolder().getName());
         str.append("(id=").append(getFolder().getId()).append(")");
         return str.toString();

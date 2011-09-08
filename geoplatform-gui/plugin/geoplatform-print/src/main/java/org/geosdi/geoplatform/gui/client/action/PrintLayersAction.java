@@ -61,8 +61,4 @@ public class PrintLayersAction extends ToolbarLayerTreeAction {
     public void componentSelected(ButtonEvent ce) {
         this.formPrint.showForm();
     }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-    }
 }

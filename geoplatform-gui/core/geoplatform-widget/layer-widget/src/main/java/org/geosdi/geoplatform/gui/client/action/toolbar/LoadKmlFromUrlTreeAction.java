@@ -39,23 +39,24 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.widget.form.AddRasterFromUrlWidget;
+import org.geosdi.geoplatform.gui.client.widget.form.LoadKmlFromUrlWidget;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ *
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class AddUrlTreeAction extends ToolbarLayerTreeAction {
+public class LoadKmlFromUrlTreeAction extends ToolbarLayerTreeAction {
 
-    private AddRasterFromUrlWidget addRaster;
+    private LoadKmlFromUrlWidget kmlWidget;
 
-    public AddUrlTreeAction(TreePanel theTree) {
-        super(theTree, LayerResources.ICONS.parseUrl(), "Add WMS from URL");
-        this.addRaster = new AddRasterFromUrlWidget(theTree);
+    public LoadKmlFromUrlTreeAction(TreePanel theTree) {
+        super(theTree, LayerResources.ICONS.loadKmlFromURL(), "Load KML from URL");
+        this.kmlWidget = new LoadKmlFromUrlWidget(theTree);
     }
 
     @Override
     public void componentSelected(ButtonEvent ce) {
-       this.addRaster.showForm();
+        this.kmlWidget.showForm();
     }
 }

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server;
 
-import com.google.gwt.http.client.URL;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
@@ -102,5 +101,7 @@ public interface ILayerService {
 
     public void deleteElement(long id, TreeElement elementType, HttpServletRequest httpServletRequest) throws GeoPlatformException;
     
-    public boolean checkUrl(String url) throws GeoPlatformException;
+    public boolean checkWmsGetMapUrl(String url) throws GeoPlatformException;
+    
+    public boolean checkKmlUrl(String url) throws GeoPlatformException;
 }

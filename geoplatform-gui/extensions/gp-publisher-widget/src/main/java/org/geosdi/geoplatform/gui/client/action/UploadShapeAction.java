@@ -58,8 +58,4 @@ public class UploadShapeAction extends ToolbarLayerTreeAction {
     public void componentSelected(ButtonEvent ce) {
         this.publisherWidget.show();
     }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-    }
 }

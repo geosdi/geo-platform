@@ -353,7 +353,7 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public boolean checkUrl(String urlString) throws GeoPlatformException {
+    public boolean checkWmsGetMapUrl(String urlString) throws GeoPlatformException {
         try {
             URL url = new URL(urlString);
             URLConnection myURLConnection = url.openConnection();
@@ -362,6 +362,24 @@ public class LayerService implements ILayerService {
             if (!contentType.contains("xml")) {
                 return true;
             }
+        } catch (IOException ex) {
+            logger.info("Error on executing Check url: " + ex);
+            throw new GeoPlatformException("Error on executing ParseURLServlet.");
+        }
+        return false;
+    }
+    
+    // TODO
+    @Override
+    public boolean checkKmlUrl(String urlString) throws GeoPlatformException {
+        try {
+            URL url = new URL(urlString);
+            URLConnection myURLConnection = url.openConnection();
+            myURLConnection.connect();
+//            String contentType = myURLConnection.getContentType();
+//            if (!contentType.contains("xml")) {
+//                return true;
+//            }
         } catch (IOException ex) {
             logger.info("Error on executing Check url: " + ex);
             throw new GeoPlatformException("Error on executing ParseURLServlet.");

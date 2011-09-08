@@ -59,7 +59,6 @@ import org.geosdi.geoplatform.gui.impl.tree.ToolbarTreeClientTool;
 public class LayerTreeToolbar extends GPTreeToolbar {
 
     private boolean initialized;
-
     private ToolbarTreeClientTool toolbarTreeClientTool = new ToolbarTreeClientTool();
 
     /**
@@ -89,17 +88,17 @@ public class LayerTreeToolbar extends GPTreeToolbar {
         for (GenericClientTool tool : this.toolbarTreeClientTool.getClientTools()) {
             String id = tool.getId();
             if (id.equals(TOOLBAR_SEPARATOR)) {
-                addSeparator();
+                this.addSeparator();
             } else {
                 GeoPlatformToolbarAction action = ToolbarTreeActionRegistar.get(
                         id, tree);
 
                 action.setId(id);
 
-                if (((ActionClientTool) tool).getType().equals("toggle")) {
-                    addToggleButton((ToolbarLayerTreeAction) action);
+                if (((ActionClientTool) tool).getType().equals(ActionClientTool.TOGGLE)) {
+                    this.addToggleButton((ToolbarLayerTreeAction) action);
                 } else {
-                    addButton((ToolbarLayerTreeAction) action);
+                    this.addButton((ToolbarLayerTreeAction) action);
                 }
 
                 action.setEnabled(((ActionClientTool) tool).isEnabled());

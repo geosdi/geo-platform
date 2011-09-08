@@ -33,72 +33,29 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import com.extjs.gxt.ui.client.event.WindowEvent;
-import com.extjs.gxt.ui.client.event.WindowListener;
-import com.extjs.gxt.ui.client.widget.Window;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
+import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.widget.form.LoadWmsGetMapFromUrlWidget;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email  nazzareno.sileno@geosdi.org
  */
-public abstract class GeoPlatformWindow extends Window {
+public class LoadWmsGetMapFromUrlTreeAction extends ToolbarLayerTreeAction {
 
-    private boolean initialized;
+    private LoadWmsGetMapFromUrlWidget getMapWidget;
 
-    public GeoPlatformWindow(boolean lazy) {
-        if (!lazy) {
-            this.init();
-        }
+    public LoadWmsGetMapFromUrlTreeAction(TreePanel theTree) {
+        super(theTree, LayerResources.ICONS.loadWmsGetMapFromUrl(), "Add WMS from URL");
+        this.getMapWidget = new LoadWmsGetMapFromUrlWidget(theTree);
     }
 
-    /**
-     * Init the Widget
-     */
-    protected final void init() {
-        if (!initialized) {
-            this.initializeWindow();
-            this.addComponent();
-            this.initialized = true;
-        }
-    }
-
-    private void initializeWindow() {
-        this.initSize();
-
-        addWindowListener(new WindowListener() {
-
-            @Override
-            public void windowHide(WindowEvent we) {
-                reset();
-            }
-        });
-
-        setWindowProperties();
-    }
-
-    public void reset() {
-    }
-
-    public abstract void addComponent();
-
-    public abstract void initSize();
-
-    public abstract void setWindowProperties();
-
-    public void showForm() {
-        this.init();
-        super.show();
-    }
-
-    /**
-     * 
-     * @return 
-     *          Component State for Initialization of All Components
-     */
-    public boolean isInitialized() {
-        return initialized;
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        this.getMapWidget.showForm();
     }
 }

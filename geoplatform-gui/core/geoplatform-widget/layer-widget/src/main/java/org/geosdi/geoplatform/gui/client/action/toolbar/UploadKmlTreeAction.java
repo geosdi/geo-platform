@@ -33,72 +33,30 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import com.extjs.gxt.ui.client.event.WindowEvent;
-import com.extjs.gxt.ui.client.event.WindowListener;
-import com.extjs.gxt.ui.client.widget.Window;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
+import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.widget.UploadKmlWidget;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public abstract class GeoPlatformWindow extends Window {
+public class UploadKmlTreeAction extends ToolbarLayerTreeAction {
 
-    private boolean initialized;
+    private UploadKmlWidget kmlWidget;
 
-    public GeoPlatformWindow(boolean lazy) {
-        if (!lazy) {
-            this.init();
-        }
+    public UploadKmlTreeAction(TreePanel theTree) {
+        super(theTree, LayerResources.ICONS.uploadKML(), "Upload KML");
+        this.kmlWidget = new UploadKmlWidget(true, theTree);
     }
 
-    /**
-     * Init the Widget
-     */
-    protected final void init() {
-        if (!initialized) {
-            this.initializeWindow();
-            this.addComponent();
-            this.initialized = true;
-        }
-    }
-
-    private void initializeWindow() {
-        this.initSize();
-
-        addWindowListener(new WindowListener() {
-
-            @Override
-            public void windowHide(WindowEvent we) {
-                reset();
-            }
-        });
-
-        setWindowProperties();
-    }
-
-    public void reset() {
-    }
-
-    public abstract void addComponent();
-
-    public abstract void initSize();
-
-    public abstract void setWindowProperties();
-
-    public void showForm() {
-        this.init();
-        super.show();
-    }
-
-    /**
-     * 
-     * @return 
-     *          Component State for Initialization of All Components
-     */
-    public boolean isInitialized() {
-        return initialized;
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        this.kmlWidget.show();
     }
 }

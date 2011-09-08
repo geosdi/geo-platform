@@ -88,9 +88,9 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
             String id = tool.getId();
 
             if (id.equals(TOOLBAR_SEPARATOR)) {
-                addSeparator();
+                this.addSeparator();
             } else if (tool instanceof MenuClientTool) {
-                addMenuButton((MenuClientTool) tool,
+                this.addMenuButton((MenuClientTool) tool,
                         (ToolbarApplicationAction) ToolbarActionRegistar.get(
                         id, geoPlatformMap));
             } else if (tool instanceof MenuInToolBar && ((MenuInToolBar) tool).getId().equals(
@@ -98,20 +98,19 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
                 this.addUserLoginMenu((MenuInToolBar) tool);
             } else {
                 GeoPlatformToolbarAction action = ToolbarActionRegistar.get(
-                        id,
-                        geoPlatformMap);
+                        id, geoPlatformMap);
 
                 action.setId(id);
 
                 if (action instanceof ToolbarApplicationAction) {
-                    addApplicationButton((ToolbarApplicationAction) action);
+                    this.addApplicationButton((ToolbarApplicationAction) action);
                 }
 
                 if (action instanceof ToolbarMapAction) {
-                    if (((ActionClientTool) tool).getType().equals("toggle")) {
-                        addMapToggleButton((ToolbarMapAction) action);
+                    if (((ActionClientTool) tool).getType().equals(ActionClientTool.TOGGLE)) {
+                        this.addMapToggleButton((ToolbarMapAction) action);
                     } else {
-                        addMapButton((ToolbarMapAction) action);
+                        this.addMapButton((ToolbarMapAction) action);
                     }
                 }
 

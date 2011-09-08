@@ -81,8 +81,8 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPreviewHandler,
-        IGPPublishShapePreviewHandler {
+public class GPPublisherWidget extends GeoPlatformWindow
+        implements IUploadPreviewHandler, IGPPublishShapePreviewHandler {
 
     private TreePanel tree;
 //    private boolean mapInitialized;
@@ -135,8 +135,7 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
                 WMS wmsLayer = this.generateLayer(previewLayer);
                 this.shpPreviewWidget.getMapPreview().getMap().addLayer(wmsLayer);
             } else {
-                layerProblems.append(previewLayer.getTitle());
-                layerProblems.append("\n");
+                layerProblems.append(previewLayer.getTitle()).append("\n");
             }
         }
         if (this.shpPreviewWidget.getMapPreview().getMap().getNumLayers() > 1) {
@@ -148,8 +147,8 @@ public class GPPublisherWidget extends GeoPlatformWindow implements IUploadPrevi
             this.publishButton.enable();
         }
         if (layerProblems.length() != 0) {
-            GeoPlatformMessage.alertMessage("Upload Shape Error", "Some problems occurred with following layers:\n"
-                    + layerProblems);
+            GeoPlatformMessage.alertMessage("Upload Shape Error",
+                    "Some problems occurred with following layers:\n" + layerProblems);
         }
     }
 

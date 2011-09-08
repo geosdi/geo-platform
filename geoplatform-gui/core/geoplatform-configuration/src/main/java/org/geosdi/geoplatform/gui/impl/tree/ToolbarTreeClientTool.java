@@ -48,6 +48,17 @@ import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
  */
 public class ToolbarTreeClientTool {
 
+    public static final String TOOLBAR_ADD_FOLDER = "addFolder";
+    public static final String TOOLBAR_ADD_RASTER = "addRasterLayer";
+    public static final String TOOLBAR_ADD_VECTOR = "addVectorLayer";
+    public static final String TOOLBAR_REMOVE_ELEMENT = "removeElement";
+    public static final String TOOLBAR_SAVE_TREE_STATE = "saveTreeState";
+    public static final String TOOLBAR_PRINT_TREE_LAYERS = "printTreeLayers";
+    public static final String TOOLBAR_UPLOAD_SHAPE = "uploadShape";
+    public static final String TOOLBAR_UPLOAD_KML = "uploadKml";
+    public static final String TOOLBAR_LOAD_WMS_GETMAP_FROM_URL = "loadWmsGetMapFromUrl";
+    public static final String TOOLBAR_LOAD_KML_FROM_URL = "loadKmlFromUrl";
+    //
     private List<GenericClientTool> clientTools = new ArrayList<GenericClientTool>();
 
     public ToolbarTreeClientTool() {
@@ -56,20 +67,20 @@ public class ToolbarTreeClientTool {
 
     private void buildActionTools() {
         ActionClientTool addFolder = new ActionClientTool();
-        addFolder.setId("addFolder");
-        addFolder.setType("button");
+        addFolder.setId(TOOLBAR_ADD_FOLDER);
+        addFolder.setType(ActionClientTool.BUTTON);
         addFolder.setEnabled(false);
         addFolder.setOrder(1);
 
         ActionClientTool addRasterLayer = new ActionClientTool();
-        addRasterLayer.setId("addRasterLayer");
-        addRasterLayer.setType("button");
+        addRasterLayer.setId(TOOLBAR_ADD_RASTER);
+        addRasterLayer.setType(ActionClientTool.BUTTON);
         addRasterLayer.setEnabled(false);
         addRasterLayer.setOrder(2);
 
         ActionClientTool addVectorLayer = new ActionClientTool();
-        addVectorLayer.setId("addVectorLayer");
-        addVectorLayer.setType("button");
+        addVectorLayer.setId(TOOLBAR_ADD_VECTOR);
+        addVectorLayer.setType(ActionClientTool.BUTTON);
         addVectorLayer.setEnabled(false);
         addVectorLayer.setOrder(3);
 
@@ -77,23 +88,21 @@ public class ToolbarTreeClientTool {
         toolbarSeparator.setId("ToolbarSeparator");
         toolbarSeparator.setOrder(4);
 
-
         ActionClientTool removeElement = new ActionClientTool();
-        removeElement.setId("removeElement");
-        removeElement.setType("button");
+        removeElement.setId(TOOLBAR_REMOVE_ELEMENT);
+        removeElement.setType(ActionClientTool.BUTTON);
         removeElement.setEnabled(false);
         removeElement.setOrder(5);
 
-
         ActionClientTool saveTreeState = new ActionClientTool();
-        saveTreeState.setId("saveTreeState");
-        saveTreeState.setType("button");
+        saveTreeState.setId(TOOLBAR_SAVE_TREE_STATE);
+        saveTreeState.setType(ActionClientTool.BUTTON);
         saveTreeState.setEnabled(false);
         saveTreeState.setOrder(6);
 
         ActionClientTool printClientTool = new ActionClientTool();
-        printClientTool.setId("printTreeLayers");
-        printClientTool.setType("button");
+        printClientTool.setId(TOOLBAR_PRINT_TREE_LAYERS);
+        printClientTool.setType(ActionClientTool.BUTTON);
         printClientTool.setEnabled(false);
         printClientTool.setOrder(7);
 
@@ -102,18 +111,32 @@ public class ToolbarTreeClientTool {
         toolbarSeparator2.setOrder(8);
 
         ActionClientTool uploaderClientTool = new ActionClientTool();
-        uploaderClientTool.setId("uploadShape");
-        uploaderClientTool.setType("button");
+        uploaderClientTool.setId(TOOLBAR_UPLOAD_SHAPE);
+        uploaderClientTool.setType(ActionClientTool.BUTTON);
         uploaderClientTool.setEnabled(true);
         uploaderClientTool.setOrder(9);
 
-        ActionClientTool parseURLClientTool = new ActionClientTool();
-        parseURLClientTool.setId("parseURL");
-        parseURLClientTool.setType("button");
-        parseURLClientTool.setEnabled(false);
-        parseURLClientTool.setOrder(10);
+        ActionClientTool loadWmsGetMapFromURLClientTool = new ActionClientTool();
+        loadWmsGetMapFromURLClientTool.setId(TOOLBAR_LOAD_WMS_GETMAP_FROM_URL);
+        loadWmsGetMapFromURLClientTool.setType(ActionClientTool.BUTTON);
+        loadWmsGetMapFromURLClientTool.setEnabled(false);
+        loadWmsGetMapFromURLClientTool.setOrder(10);
 
-        this.clientTools.add(parseURLClientTool);
+        ActionClientTool loadKmlFromUrlClientTool = new ActionClientTool();
+        loadKmlFromUrlClientTool.setId(TOOLBAR_LOAD_KML_FROM_URL);
+        loadKmlFromUrlClientTool.setType(ActionClientTool.BUTTON);
+        loadKmlFromUrlClientTool.setEnabled(false);
+        loadKmlFromUrlClientTool.setOrder(11);
+
+        ActionClientTool uploadKmlClientTool = new ActionClientTool();
+        uploadKmlClientTool.setId(TOOLBAR_UPLOAD_KML);
+        uploadKmlClientTool.setType(ActionClientTool.BUTTON);
+        uploadKmlClientTool.setEnabled(false);
+        uploadKmlClientTool.setOrder(12);
+
+        this.clientTools.add(uploadKmlClientTool);
+        this.clientTools.add(loadKmlFromUrlClientTool);
+        this.clientTools.add(loadWmsGetMapFromURLClientTool);
         this.clientTools.add(uploaderClientTool);
         this.clientTools.add(toolbarSeparator2);
         this.clientTools.add(printClientTool);
@@ -125,7 +148,6 @@ public class ToolbarTreeClientTool {
         this.clientTools.add(addRasterLayer);
 
         Collections.sort(clientTools);
-
     }
 
     /**

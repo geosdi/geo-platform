@@ -41,6 +41,8 @@ package org.geosdi.geoplatform.gui.configuration;
  */
 public class ActionClientTool extends GenericClientTool {
 
+    public static final String BUTTON = "button";
+    public static final String TOGGLE = "toggle";
     /**
      *
      */

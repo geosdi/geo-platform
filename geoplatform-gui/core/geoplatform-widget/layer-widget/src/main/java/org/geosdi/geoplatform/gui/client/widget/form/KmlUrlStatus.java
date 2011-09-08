@@ -33,79 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.client.widget.form;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import org.geosdi.geoplatform.gui.client.widget.StatusWidget;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
- *
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-@SuppressWarnings("deprecation")
-public interface LayerIcons extends ImageBundle {
+public class KmlUrlStatus extends StatusWidget {
 
-    @Resource("layer_folder.png")
-    AbstractImagePrototype layerFolder();
+    public enum EnumKmlUrlStatus {
 
-    @Resource("line.png")
-    AbstractImagePrototype line();
+        STATUS_CHECKED("x-status-ok"),
+        STATUS_NO_CHECKED("x-status-not-ok"),
+        STATUS_CHECK_ERROR("x-status-error"),
+        STATUS_MESSAGE_CHECKED("KML URL Correct"),
+        STATUS_MESSAGE_NOT_CHECKED("KML URL Incorrect"),
+        STATUS_MESSAGE_CHECK_ERROR("KML URL Error");
+        //
+        private String value;
 
-    @Resource("point.png")
-    AbstractImagePrototype point();
+        EnumKmlUrlStatus(String value) {
+            this.value = value;
+        }
 
-    @Resource("copy.png")
-    AbstractImagePrototype copy();
-
-    @Resource("paste.png")
-    AbstractImagePrototype paste();
-
-    @Resource("shape.png")
-    AbstractImagePrototype shape();
-
-    @Resource("gp.png")
-    AbstractImagePrototype geoPlatform();
-
-    @Resource("addFolder.png")
-    AbstractImagePrototype addFolder();
-
-    @Resource("delete.png")
-    AbstractImagePrototype deleteElement();
-
-    @Resource("addRaster.png")
-    AbstractImagePrototype addRasterLayer();
-
-    @Resource("addVector.png")
-    AbstractImagePrototype addVectorLayer();
-
-    @Resource("zoom.png")
-    AbstractImagePrototype zoomToMaxExtend();
-
-    @Resource("kml.png")
-    AbstractImagePrototype exportToKML();
-
-    @Resource("vector.png")
-    AbstractImagePrototype exportToGML();
-
-    @Resource("pdf.png")
-    AbstractImagePrototype exportToPDF();
-
-    @Resource("raster.png")
-    AbstractImagePrototype exportToTIFF();
-
-    @Resource("shape-zip.png")
-    AbstractImagePrototype exportToShpZip();
-
-    @Resource("layer-properties.png")
-    AbstractImagePrototype layerProperties();
-
-    @Resource("parse-url.png")
-    AbstractImagePrototype loadWmsGetMapFromUrl();
-
-    @Resource("google_earth.png")
-    AbstractImagePrototype loadKmlFromURL();
-
-    @Resource("kml-file.png")
-    AbstractImagePrototype uploadKML();
+        /**
+         * @return the value
+         */
+        public String getValue() {
+            return value;
+        }
+    }
 }

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.service;
 
-import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
@@ -82,5 +81,7 @@ public interface LayerRemoteAsync {
 
     public void deleteElement(long id, TreeElement elementType, AsyncCallback<?> callback);
     
-    public void checkUrl(String url, AsyncCallback<Boolean> callback);
+    public void checkWmsGetMapUrl(String url, AsyncCallback<Boolean> callback);
+    
+    public void checkKmlUrl(String url, AsyncCallback<Boolean> callback);
 }

@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.model.visitor;
 
 import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
+import org.geosdi.geoplatform.gui.impl.tree.ToolbarTreeClientTool;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
@@ -47,31 +48,55 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
  * @email  nazzareno.sileno@geosdi.org
  */
 public class VisitorToolbarTreeAction implements IVisitor {
-
+    
     @Override
     public void visitRoot(AbstractRootTreeNode root) {
-        MediatorToolbarTreeAction.getInstance().disableActions("addRasterLayer", "addVectorLayer",
-                "removeElement", "parseURL");
-        MediatorToolbarTreeAction.getInstance().enableActions("addFolder");
+        MediatorToolbarTreeAction.getInstance().disableActions(
+                ToolbarTreeClientTool.TOOLBAR_ADD_RASTER,
+                ToolbarTreeClientTool.TOOLBAR_ADD_VECTOR,
+                ToolbarTreeClientTool.TOOLBAR_REMOVE_ELEMENT,
+                ToolbarTreeClientTool.TOOLBAR_LOAD_WMS_GETMAP_FROM_URL,
+                ToolbarTreeClientTool.TOOLBAR_LOAD_KML_FROM_URL,
+                ToolbarTreeClientTool.TOOLBAR_UPLOAD_KML);
+        MediatorToolbarTreeAction.getInstance().enableActions(
+                ToolbarTreeClientTool.TOOLBAR_ADD_FOLDER);
     }
-
+    
     @Override
     public void visitFolder(AbstractFolderTreeNode folder) {
-        MediatorToolbarTreeAction.getInstance().enableActions("addFolder", "addRasterLayer",
-                "addVectorLayer", "removeElement", "parseURL");
+        MediatorToolbarTreeAction.getInstance().enableActions(
+                ToolbarTreeClientTool.TOOLBAR_ADD_FOLDER,
+                ToolbarTreeClientTool.TOOLBAR_ADD_RASTER,
+                ToolbarTreeClientTool.TOOLBAR_ADD_VECTOR,
+                ToolbarTreeClientTool.TOOLBAR_REMOVE_ELEMENT,
+                ToolbarTreeClientTool.TOOLBAR_LOAD_WMS_GETMAP_FROM_URL,
+                ToolbarTreeClientTool.TOOLBAR_LOAD_KML_FROM_URL,
+                ToolbarTreeClientTool.TOOLBAR_UPLOAD_KML);
     }
-
-    @Override
-    public void visitVector(GPVectorBean vector) {
-        MediatorToolbarTreeAction.getInstance().disableActions("addFolder", "addRasterLayer",
-                "addVectorLayer", "parseURL");
-        MediatorToolbarTreeAction.getInstance().enableActions("removeElement");
-    }
-
+    
     @Override
     public void visitRaster(GPRasterBean raster) {
-        MediatorToolbarTreeAction.getInstance().disableActions("addFolder", "addRasterLayer",
-                "addVectorLayer", "parseURL");
-        MediatorToolbarTreeAction.getInstance().enableActions("removeElement");
+        MediatorToolbarTreeAction.getInstance().disableActions(
+                ToolbarTreeClientTool.TOOLBAR_ADD_FOLDER,
+                ToolbarTreeClientTool.TOOLBAR_ADD_RASTER,
+                ToolbarTreeClientTool.TOOLBAR_ADD_VECTOR,
+                ToolbarTreeClientTool.TOOLBAR_LOAD_WMS_GETMAP_FROM_URL,
+                ToolbarTreeClientTool.TOOLBAR_LOAD_KML_FROM_URL,
+                ToolbarTreeClientTool.TOOLBAR_UPLOAD_KML);
+        MediatorToolbarTreeAction.getInstance().enableActions(
+                ToolbarTreeClientTool.TOOLBAR_REMOVE_ELEMENT);
+    }
+    
+    @Override
+    public void visitVector(GPVectorBean vector) {
+        MediatorToolbarTreeAction.getInstance().disableActions(
+                ToolbarTreeClientTool.TOOLBAR_ADD_FOLDER,
+                ToolbarTreeClientTool.TOOLBAR_ADD_RASTER,
+                ToolbarTreeClientTool.TOOLBAR_ADD_VECTOR,
+                ToolbarTreeClientTool.TOOLBAR_LOAD_WMS_GETMAP_FROM_URL,
+                ToolbarTreeClientTool.TOOLBAR_LOAD_KML_FROM_URL,
+                ToolbarTreeClientTool.TOOLBAR_UPLOAD_KML);
+        MediatorToolbarTreeAction.getInstance().enableActions(
+                ToolbarTreeClientTool.TOOLBAR_REMOVE_ELEMENT);
     }
 }

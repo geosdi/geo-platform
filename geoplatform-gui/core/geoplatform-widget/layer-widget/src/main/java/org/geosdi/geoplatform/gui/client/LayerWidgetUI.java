@@ -56,14 +56,15 @@ import org.geosdi.geoplatform.gui.client.action.menu.ExportoToShpZip;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToTIFF;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddFolderTreeAction;
-import org.geosdi.geoplatform.gui.client.widget.form.AddRasterFromUrlWidget;
+import org.geosdi.geoplatform.gui.client.action.toolbar.UploadKmlTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddRasterTreeAction;
-import org.geosdi.geoplatform.gui.client.action.toolbar.AddUrlTreeAction;
+import org.geosdi.geoplatform.gui.client.action.toolbar.LoadWmsGetMapFromUrlTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddVectorTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.DeleteElementTreeAction;
+import org.geosdi.geoplatform.gui.client.action.toolbar.LoadKmlFromUrlTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.SaveTreeAction;
 import org.geosdi.geoplatform.gui.client.mvc.ServerController;
-import org.geosdi.geoplatform.gui.client.widget.form.AddRasterFromUrlWidget;
+import org.geosdi.geoplatform.gui.impl.tree.ToolbarTreeClientTool;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
@@ -146,7 +147,7 @@ public class LayerWidgetUI implements EntryPoint {
     }
 
     private void addToolbarTreeAction() {
-        ToolbarTreeActionRegistar.put("addFolder",
+        ToolbarTreeActionRegistar.put(ToolbarTreeClientTool.TOOLBAR_ADD_FOLDER,
                 new ToolbarTreeActionCreator() {
 
                     @Override
@@ -159,7 +160,7 @@ public class LayerWidgetUI implements EntryPoint {
                     }
                 });
 
-        ToolbarTreeActionRegistar.put("addRasterLayer",
+        ToolbarTreeActionRegistar.put(ToolbarTreeClientTool.TOOLBAR_ADD_RASTER,
                 new ToolbarTreeActionCreator() {
 
                     @Override
@@ -172,7 +173,7 @@ public class LayerWidgetUI implements EntryPoint {
                     }
                 });
 
-        ToolbarTreeActionRegistar.put("addVectorLayer",
+        ToolbarTreeActionRegistar.put(ToolbarTreeClientTool.TOOLBAR_ADD_VECTOR,
                 new ToolbarTreeActionCreator() {
 
                     @Override
@@ -185,7 +186,7 @@ public class LayerWidgetUI implements EntryPoint {
                     }
                 });
 
-        ToolbarTreeActionRegistar.put("removeElement",
+        ToolbarTreeActionRegistar.put(ToolbarTreeClientTool.TOOLBAR_REMOVE_ELEMENT,
                 new ToolbarTreeActionCreator() {
 
                     @Override
@@ -198,7 +199,7 @@ public class LayerWidgetUI implements EntryPoint {
                     }
                 });
 
-        ToolbarTreeActionRegistar.put("saveTreeState",
+        ToolbarTreeActionRegistar.put(ToolbarTreeClientTool.TOOLBAR_SAVE_TREE_STATE,
                 new ToolbarTreeActionCreator() {
 
                     @Override
@@ -210,40 +211,61 @@ public class LayerWidgetUI implements EntryPoint {
                     }
                 });
 
-        ToolbarTreeActionRegistar.put("printTreeLayers",
+        ToolbarTreeActionRegistar.put(ToolbarTreeClientTool.TOOLBAR_PRINT_TREE_LAYERS,
                 new ToolbarTreeActionCreator() {
 
                     @Override
                     public GeoPlatformToolbarAction createActionTool(
                             TreePanel tree) {
-                        PrintLayersAction action = new PrintLayersAction(
-                                tree);
+                        PrintLayersAction action = new PrintLayersAction(tree);
                         setAction(action);
                         return action;
                     }
                 });
 
-        ToolbarTreeActionRegistar.put("uploadShape",
+        ToolbarTreeActionRegistar.put(ToolbarTreeClientTool.TOOLBAR_UPLOAD_SHAPE,
                 new ToolbarTreeActionCreator() {
 
                     @Override
                     public GeoPlatformToolbarAction createActionTool(
                             TreePanel tree) {
-                        UploadShapeAction action = new UploadShapeAction(
-                                tree);
+                        UploadShapeAction action = new UploadShapeAction(tree);
                         setAction(action);
                         return action;
                     }
                 });
-        
-        ToolbarTreeActionRegistar.put("parseURL",
+
+        ToolbarTreeActionRegistar.put(ToolbarTreeClientTool.TOOLBAR_LOAD_WMS_GETMAP_FROM_URL,
                 new ToolbarTreeActionCreator() {
 
                     @Override
                     public GeoPlatformToolbarAction createActionTool(
                             TreePanel tree) {
-                        AddUrlTreeAction action = new AddUrlTreeAction(
-                                tree);
+                        LoadWmsGetMapFromUrlTreeAction action = new LoadWmsGetMapFromUrlTreeAction(tree);
+                        setAction(action);
+                        return action;
+                    }
+                });
+
+        ToolbarTreeActionRegistar.put(ToolbarTreeClientTool.TOOLBAR_LOAD_KML_FROM_URL,
+                new ToolbarTreeActionCreator() {
+
+                    @Override
+                    public GeoPlatformToolbarAction createActionTool(
+                            TreePanel tree) {
+                        LoadKmlFromUrlTreeAction action = new LoadKmlFromUrlTreeAction(tree);
+                        setAction(action);
+                        return action;
+                    }
+                });
+
+        ToolbarTreeActionRegistar.put(ToolbarTreeClientTool.TOOLBAR_UPLOAD_KML,
+                new ToolbarTreeActionCreator() {
+
+                    @Override
+                    public GeoPlatformToolbarAction createActionTool(
+                            TreePanel tree) {
+                        UploadKmlTreeAction action = new UploadKmlTreeAction(tree);
                         setAction(action);
                         return action;
                     }

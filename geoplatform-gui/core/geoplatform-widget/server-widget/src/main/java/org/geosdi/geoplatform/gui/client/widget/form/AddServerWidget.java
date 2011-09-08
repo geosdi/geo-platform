@@ -85,7 +85,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
     @Override
     public void addComponentToForm() {
         this.fieldSet = new FieldSet();
-        this.fieldSet.setHeading("Server Url");
+        this.fieldSet.setHeading("Server");
         this.fieldSet.setToolTip("Insert a valid WMS Url and name for the server.");
 
         FormLayout layout = new FormLayout();
@@ -94,8 +94,8 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
 
         this.serverUrlTextField = new TextField<String>();
         this.serverNameTextField = new TextField<String>();
-        this.serverUrlTextField.setFieldLabel("Server address");
-        this.serverNameTextField.setFieldLabel("Server name");
+        this.serverUrlTextField.setFieldLabel("Address");
+        this.serverNameTextField.setFieldLabel("Name");
 
         this.serverUrlTextField.addListener(Events.OnPaste, new Listener() {
 

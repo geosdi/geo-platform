@@ -131,7 +131,12 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     }
     
     @Override
-    public boolean checkUrl(String url) throws GeoPlatformException {
-        return this.layerService.checkUrl(url);
+    public boolean checkWmsGetMapUrl(String url) throws GeoPlatformException {
+        return this.layerService.checkWmsGetMapUrl(url);
+    }
+    
+    @Override
+    public boolean checkKmlUrl(String url) throws GeoPlatformException {
+        return this.layerService.checkKmlUrl(url);
     }
 }

@@ -98,7 +98,6 @@ public interface LayerRemote extends RemoteService {
      */
     public ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento) throws GeoPlatformException;
 
-    
     /**
      * 
      * @param MementoSaveRemove
@@ -173,6 +172,20 @@ public interface LayerRemote extends RemoteService {
      * @throws GeoPlatformException
      */
     public void deleteElement(long id, TreeElement elementType) throws GeoPlatformException;
+
+    /**
+     * 
+     * @param url
+     * @return 
+     * @throws GeoPlatformException 
+     */
+    public boolean checkWmsGetMapUrl(String url) throws GeoPlatformException;
     
-    public boolean checkUrl(String url) throws GeoPlatformException;
+    /**
+     * 
+     * @param url
+     * @return 
+     * @throws GeoPlatformException 
+     */
+    public boolean checkKmlUrl(String url) throws GeoPlatformException;
 }

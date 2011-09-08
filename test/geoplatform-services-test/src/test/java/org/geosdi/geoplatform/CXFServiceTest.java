@@ -168,7 +168,7 @@ public class CXFServiceTest extends ServiceTest {
     public void testSaveServer() throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n@@@ testSaveServer @@@");
         // Server is into DB
-        ServerDTO serverDTO = geoPlatformService.saveServer(serverUrlGeoSDI);
+        ServerDTO serverDTO = geoPlatformService.saveServer("geoSDI", serverUrlGeoSDI);
         Assert.assertNotNull("ServerDTO geoSDI is NULL", serverDTO);
 
         List<ShortLayerDTO> layersList = (List<ShortLayerDTO>) serverDTO.getLayerList();
@@ -176,7 +176,7 @@ public class CXFServiceTest extends ServiceTest {
 
         // Server is NOT into DB
         String serverUrlEx = "http://iws.erdas.com/ecwp/ecw_wms.dll?request=GetCapabilities";
-        serverDTO = geoPlatformService.saveServer(serverUrlEx);
+        serverDTO = geoPlatformService.saveServer("Erdas", serverUrlEx);
         Assert.assertNotNull("ServerDTO EX is NULL", serverDTO);
 
         layersList = (List<ShortLayerDTO>) serverDTO.getLayerList();

@@ -37,13 +37,18 @@ package org.geosdi.geoplatform.gui.client.widget.tree;
 
 import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeCheckDecorator;
+import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeIconDecorator;
+import org.geosdi.geoplatform.gui.client.widget.tree.decorator.GPTreeLabelDecorator;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> {
+public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T>
+        implements GPTreeLabelDecorator<T>, GPTreeIconDecorator<T>,
+        GPTreeCheckDecorator<T> {
 
     public GPTreePanel(TreeStore<T> store) {
         super(store);
@@ -52,5 +57,35 @@ public class GPTreePanel<T extends GPBeanTreeModel> extends TreePanel<T> {
     @Override
     public void refresh(T model) {
         super.refresh(model);
+    }
+
+    @Override
+    public void refreshLabel(T model) {
+        if (rendered) {
+            TreeNode node = findNode(model);
+            if (node != null && node.getElement() != null) {
+                view.onTextChange(node, getText(model));
+            }
+        }
+    }
+
+    @Override
+    public void refreshIcon(T model) {
+        if (rendered) {
+            TreeNode node = findNode(model);
+            if (node != null && node.getElement() != null) {
+                view.onIconStyleChange(node, calculateIconStyle(model));
+            }
+        }
+    }
+
+    @Override
+    public void refreshCheck(T model) {
+        if (rendered) {
+            TreeNode node = findNode(model);
+            if (node != null && node.getElement() != null) {
+                setChecked(node.getModel(), isChecked(model));
+            }
+        }
     }
 }

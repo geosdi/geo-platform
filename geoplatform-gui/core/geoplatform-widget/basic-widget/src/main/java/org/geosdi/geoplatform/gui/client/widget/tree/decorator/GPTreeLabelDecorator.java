@@ -33,30 +33,17 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.decorator;
+package org.geosdi.geoplatform.gui.client.widget.tree.decorator;
 
-import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.puregwt.layers.decorator.GPTreeLabelHandler;
-import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
+import com.extjs.gxt.ui.client.data.ModelData;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPLayerTreeDecorator implements GPTreeLabelHandler {
-
-    private GPTreePanel tree;
-
-    public GPLayerTreeDecorator(GPTreePanel theTree) {
-        this.tree = theTree;
-        WidgetPropertiesHandlerManager.addHandler(GPTreeLabelHandler.TYPE, this);
-    }
-
-    @Override
-    public void changeLabel(String label) {
-        this.tree.refreshLabel((GPBeanTreeModel) tree.getSelectionModel().getSelectedItem());
-    }
+public interface GPTreeLabelDecorator<M extends ModelData> {
+    
+    public void refreshLabel(M model);
+    
 }

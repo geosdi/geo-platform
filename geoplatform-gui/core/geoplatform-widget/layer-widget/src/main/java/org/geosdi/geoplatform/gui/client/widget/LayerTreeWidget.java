@@ -362,7 +362,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
                             visitorDisplay.enableCheckedComponent(parentFolder);
                             parentFolder.setLoading(false);
                             parentFolder.setLoaded(true);
-                            tree.refresh(parentFolder);
+                            tree.refreshIcon(parentFolder);
                             tree.fireEvent(GeoPlatformEvents.GP_NODE_EXPANDED);
                             LayoutManager.getInstance().getStatusMap().setStatus(
                                     "Tree elements loaded successfully.",

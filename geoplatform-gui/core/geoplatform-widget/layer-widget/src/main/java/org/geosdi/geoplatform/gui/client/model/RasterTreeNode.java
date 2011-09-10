@@ -62,7 +62,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
 
     public enum GPRasterKeyValue {
 
-        OPACITY("title");
+        OPACITY("opacity");
         //
         private String value;
 

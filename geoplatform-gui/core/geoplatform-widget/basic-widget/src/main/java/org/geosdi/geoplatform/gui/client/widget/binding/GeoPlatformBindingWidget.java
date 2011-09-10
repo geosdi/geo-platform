@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
  */
 public abstract class GeoPlatformBindingWidget<M extends GPLayerBean> {
 
-    protected FormPanel formPanel;
+    private FormPanel formPanel;
     protected FormBinding formBinding;
     private M model;
 

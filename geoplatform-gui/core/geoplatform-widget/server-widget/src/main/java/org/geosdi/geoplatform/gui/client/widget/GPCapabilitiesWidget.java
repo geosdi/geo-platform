@@ -39,7 +39,6 @@ import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.WidgetListener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
-import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 
@@ -48,16 +47,13 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPCapabilitiesWidget extends Window {
+public class GPCapabilitiesWidget extends GeoPlatformWindow {
 
     private GridLayersWidget gridLayers;
     private TreePanel tree;
-    private boolean initialized;
 
     public GPCapabilitiesWidget(boolean lazy) {
-         if (!lazy) {
-            init();
-        }
+        super(lazy);
     }
 
     /**
@@ -68,23 +64,32 @@ public class GPCapabilitiesWidget extends Window {
      * @param theTree 
      */
     public GPCapabilitiesWidget(boolean lazy, TreePanel theTree) {
-        if (!lazy) {
-            init();
-        }
+        super(lazy);
         this.tree = theTree;
     }
 
-    private void init() {
-        if (!isInitialized()) {
-            initializeWindow();
-            initComponents();
-            this.initialized = true;
+    @Override
+    public void addComponent() {
+        this.gridLayers = new GridLayersWidget(this.tree);
+        super.add(this.gridLayers.getFormPanel());
+    }
+
+    @Override
+    public void reset() {
+        this.gridLayers.resetComponents();
+        if (super.isCollapsed()) {
+            super.setExpanded(true);
         }
     }
 
-    private void initializeWindow() {
+    @Override
+    public void initSize() {
         super.setSize(600, 500);
         super.setHeading("Server Capabilities");
+    }
+
+    @Override
+    public void setWindowProperties() {
         setResizable(false);
 
         addWindowListener(new WindowListener() {
@@ -94,10 +99,6 @@ public class GPCapabilitiesWidget extends Window {
                 gridLayers.loadServers();
             }
 
-            @Override
-            public void windowHide(WindowEvent we) {
-                resetComponents();
-            }
         });
 
         addWidgetListener(new WidgetListener() {
@@ -112,29 +113,5 @@ public class GPCapabilitiesWidget extends Window {
         setModal(false);
         setCollapsible(true);
         setPlain(true);
-    }
-
-    private void initComponents() {
-        this.gridLayers = new GridLayersWidget(this.tree);
-        super.add(this.gridLayers.getFormPanel());
-    }
-
-    private void resetComponents() {
-        this.gridLayers.resetComponents();
-    }
-
-    @Override
-    public void show() {
-        if (!isInitialized()) {
-            this.init();
-        }
-        super.show();
-    }
-
-    /**
-     * @return the initialized
-     */
-    public boolean isInitialized() {
-        return initialized;
     }
 }

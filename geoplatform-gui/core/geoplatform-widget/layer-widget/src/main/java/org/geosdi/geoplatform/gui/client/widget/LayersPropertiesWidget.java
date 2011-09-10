@@ -113,7 +113,7 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
     @Override
     public void bind(GPLayerBean model) {
         this.model = model;
-        super.showForm();
+        super.show();
     }
 
     @Override

@@ -57,7 +57,7 @@ public abstract class GeoPlatformWindow extends Window {
     /**
      * Init the Widget
      */
-    protected final void init() {
+    protected void init() {
         if (!initialized) {
             this.initializeWindow();
             this.addComponent();
@@ -88,7 +88,8 @@ public abstract class GeoPlatformWindow extends Window {
 
     public abstract void setWindowProperties();
 
-    public void showForm() {
+    @Override
+    public void show() {
         this.init();
         super.show();
     }

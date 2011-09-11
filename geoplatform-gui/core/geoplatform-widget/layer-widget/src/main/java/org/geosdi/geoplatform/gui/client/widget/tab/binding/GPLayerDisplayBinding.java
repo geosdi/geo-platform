@@ -35,25 +35,22 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab.binding;
 
-import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.core.El;
 import com.extjs.gxt.ui.client.core.XDOM;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.ComponentPlugin;
 import com.extjs.gxt.ui.client.widget.Slider;
-import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.SliderField;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode.GPRasterKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
+import org.geosdi.geoplatform.gui.client.widget.tab.DisplayLayersTabItem;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 /**
@@ -63,7 +60,8 @@ import org.geosdi.geoplatform.gui.model.GPRasterBean;
  */
 public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean> {
 
-    private Slider slider = new Slider();
+    private Slider slider;
+    private SliderField sliderField;
 
     @Override
     public FormPanel createFormPanel() {
@@ -73,34 +71,43 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
         fp.setLayout(new FlowLayout());
 
         setSliderProperties();
-        
-        FieldSet sliderFieldSet = new FieldSet();
-        sliderFieldSet.setHeading("Layer Opacity");
-        sliderFieldSet.setCollapsible(true);
-        
-        
-        SliderField sliderField = new SliderField(this.slider);
+
+        final FieldSet opacityFieldSet = new FieldSet();
+        opacityFieldSet.setHeading("Layer Opacity");
+        opacityFieldSet.setCollapsible(true);
+
+        opacityFieldSet.addListener(Events.Collapse, new Listener<ComponentEvent>() {
+
+            @Override
+            public void handleEvent(ComponentEvent be) {
+                ((DisplayLayersTabItem) opacityFieldSet.getParent().getParent()).updateWindowSize();
+            }
+        });
+
+        sliderField = new SliderField(slider);
+        sliderField.setFieldLabel("Size");
+
+        sliderField = new SliderField(this.slider);
         sliderField.setName(GPRasterKeyValue.OPACITY.toString());
-        sliderField.setFieldLabel("Opacity");
 
-        BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
-        data.setMargins(new Margins(5, 5, 5, 5));
+        opacityFieldSet.add(sliderField);
 
-        sliderFieldSet.add(sliderField, data);
-        
-        fp.add(sliderFieldSet);
+        fp.add(opacityFieldSet);
 
         return fp;
     }
 
     @Override
     public void addFieldsBinding() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.formBinding.addFieldBinding(new GPRasterOpacityFieldBinding(sliderField,
+                GPRasterKeyValue.OPACITY.toString()));
     }
 
     private void setSliderProperties() {
-        slider.setWidth(200);
+        this.slider = new Slider();
         slider.setMaxValue(100);
+
+        slider.addPlugin(createSliderPlugin());
 
         slider.addListener(Events.Change, new Listener<ComponentEvent>() {
 
@@ -110,15 +117,14 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
             }
         });
 
-        slider.setMessage("{0} opacity");
-        slider.addPlugin(this.createSliderPlugin());
-        slider.setData("text", "Select opacity for Layer");
+        slider.setMessage("{0}% opacity");
+        
+        slider.setData("text", "Choose Opacity Value for Layer");
     }
 
     /**
-     * Create Plugin for Slider
      * 
-     * @return SliderComponent Plugin
+     * @return 
      */
     private ComponentPlugin createSliderPlugin() {
         ComponentPlugin plugin = new ComponentPlugin() {
@@ -129,10 +135,9 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
 
                     @Override
                     public void handleEvent(ComponentEvent be) {
-                        El elem = be.getComponent().el().findParent(".x-form-element", 3);
+                        El elem = sliderField.el();
                         // should style in external CSS  rather than directly  
-                        elem.appendChild(XDOM.create("<div style='color: #615f5f;padding: 1 0 2 0px;'>"
-                                + be.getComponent().getData("text") + "</div>"));
+                        elem.appendChild(XDOM.create("<div style='color: #615f5f;padding: 1 0 2 0px;'>" + slider.getData("text") + "</div>"));
                     }
                 });
             }
@@ -140,7 +145,7 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
 
         return plugin;
     }
-    
+
     /**
      * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
      * @email  giuseppe.lascaleia@geosdi.org
@@ -150,15 +155,25 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
      */
     private class GPRasterOpacityFieldBinding extends GPFieldBinding {
 
-        public GPRasterOpacityFieldBinding(Field field, String property) {
+        public GPRasterOpacityFieldBinding(SliderField field, String property) {
             super(field, property);
         }
-        
+
         @Override
         public void setModelProperty(Object val) {
             ((GPRasterBean) model).setOpacity(((Float) val).floatValue() / 100);
-            
         }
-        
+
+        /**
+         * Updates the field's value and original value with the model value. Updating
+         * the original value will reset the field to a non-dirty state.
+         * 
+         * @param updateOriginalValue true to update the original value
+         */
+        @Override
+        public void updateField(boolean updateOriginalValue) {
+            Float opacity = new Float(((GPRasterBean) model).getOpacity());
+            ((SliderField) field).setValue(opacity.intValue() * 100);
+        }
     }
 }

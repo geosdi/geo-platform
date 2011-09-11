@@ -35,13 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab;
 
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.widget.Slider;
-import com.extjs.gxt.ui.client.widget.layout.FillData;
+import org.geosdi.geoplatform.gui.client.widget.tab.binding.GPLayerDisplayBinding;
 import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericLayerTabItem;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 /**
  *
@@ -56,24 +53,21 @@ public class DisplayLayersTabItem extends GenericLayerTabItem {
 
     @Override
     public void addComponents() {
-
-        /**TODO SOME IMPROVEMENTS HERE ISNERT A FIELD SET  **/
-        final Slider slider = new Slider();
-        slider.setWidth(200);
-        slider.setMaxValue(100);
-
-        slider.addListener(Events.Change, new Listener<ComponentEvent>() {
-
-            @Override
-            public void handleEvent(ComponentEvent be) {
-                System.out.println("TEST ****************** " + slider.getValue());
-            }
-        });
-
-        super.add(slider, new FillData(30));
+        bindingWidget = new GPLayerDisplayBinding();
+        super.add(this.bindingWidget.getWidget());
     }
 
     @Override
     public void bindModel(GPLayerBean model) {
+        this.bindingWidget.bindModel(model);
+    }
+
+    /**
+     * 
+     * @param size 
+     */
+    public void updateWindowSize() {
+        event.setSize(super.getTabPanel().getHeight());
+        WidgetPropertiesHandlerManager.fireEvent(event);
     }
 }

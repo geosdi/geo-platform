@@ -52,7 +52,7 @@ import org.geosdi.geoplatform.gui.puregwt.properties.event.GPWidgetSizeEvent;
 public abstract class GenericLayerTabItem<M extends GPLayerBean> extends GeoPlatformTabItem {
     
     protected GeoPlatformBindingWidget bindingWidget;
-    private GPWidgetSizeEvent event = new GPWidgetSizeEvent();
+    protected GPWidgetSizeEvent event = new GPWidgetSizeEvent();
 
     public GenericLayerTabItem(String title) {
         super(title);

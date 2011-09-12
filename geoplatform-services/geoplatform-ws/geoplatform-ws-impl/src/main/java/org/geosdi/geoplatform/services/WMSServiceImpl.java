@@ -208,11 +208,7 @@ class WMSServiceImpl {
         WebMapServer wms = null;
         WMSCapabilities cap = null;
         
-        System.out.println("\n @@@ urlServer: " + urlServer + "\n");
-        
         String urlServerEdited = editServerUrl(urlServer, token);
-        
-        System.out.println("\n @@@ urlServerEdited: " + urlServerEdited + "\n");
 
         try {
             serverURL = new URL(urlServerEdited);

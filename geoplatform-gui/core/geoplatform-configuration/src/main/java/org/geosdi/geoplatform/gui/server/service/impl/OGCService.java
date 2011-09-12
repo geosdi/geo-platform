@@ -96,7 +96,6 @@ public class OGCService implements IOGCService {
         try {
             HttpSession session = httpServletRequest.getSession();
             String token = (String)session.getAttribute("GOOGLE_TOKEN");
-            System.out.println("### getCapabilities - Token dalla sessione : " + token);
 
             RequestById req = new RequestById(idServer);
 
@@ -117,7 +116,6 @@ public class OGCService implements IOGCService {
         try {
             HttpSession session = httpServletRequest.getSession();
             String token = (String)session.getAttribute("GOOGLE_TOKEN");
-            System.out.println("### insertServer - Token dalla sessione : " + token);
             
             ServerDTO serverWS = this.geoPlatformServiceClient.saveServer(
                     aliasServerName, urlServer, token);

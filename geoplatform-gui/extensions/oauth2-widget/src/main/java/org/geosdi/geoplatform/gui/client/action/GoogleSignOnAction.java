@@ -69,8 +69,6 @@ public class GoogleSignOnAction extends MenuBaseAction {
 
             @Override
             public void onSuccess(String token) {
-                System.out.println("\n @@@ Got an OAuth token:\n" + token + "\n");
-                
                 googleLoginCallback(token);
             }
 

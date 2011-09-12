@@ -59,37 +59,5 @@ public class OAuth2Service implements IOAuth2Service {
             throws GeoPlatformException {
         HttpSession session = httpServletRequest.getSession();
         session.setAttribute(GoogleLoginEnum.GOOGLE_TOKEN.toString(), token);
-
-//        System.out.println("### Token dalla sessione : " + session.getAttribute(GoogleLoginEnum.GOOGLE_TOKEN.toString()));
-////        try {
-////
-////
-//////        URL url = new URL("https://earthbuilder.google.com/13496919088645259843-03170733828027579281-4/wms/?request=GetCapabilities&access_token=" + token);
-////
-////        String url = "https://earthbuilder.google.com/13496919088645259843-03170733828027579281-4/wms/?request=GetCapabilities";
-////
-////        
-////            HttpTransport transport = new NetHttpTransport();
-////            HttpRequestFactory rf = transport.createRequestFactory();
-////
-////            // Make an authenticated request
-////            GenericUrl shortenEndpoint = new GenericUrl("https://earthbuilder.google.com/13496919088645259843-03170733828027579281-4/wms/?request=GetCapabilities&access_token=" + token);
-////            String requestBody =
-////                    "{\"longUrl\":\"http://farm6.static.flickr.com/5281/5686001474_e06f1587ff_o.jpg\"}";
-////            HttpRequest request = rf.buildGetRequest(shortenEndpoint);
-////            request.headers.contentType = "application/json";
-////            HttpResponse shortUrl = request.execute();
-////            BufferedReader output = new BufferedReader(new InputStreamReader(shortUrl.getContent()));
-////            System.out.println("Shorten Response: ");
-////            for (String line = output.readLine(); line != null; line = output.readLine()) {
-////                System.out.println(line);
-////            }
-////        } catch (IOException ioe) {
-////            try {
-////                System.out.println("Error 1: " + ((HttpResponseException) ioe).response.parseAsString());
-////            } catch (IOException ioee) {
-////                System.out.println("Error 2: " + ioee.toString());
-////            }
-////        }
     }
 }

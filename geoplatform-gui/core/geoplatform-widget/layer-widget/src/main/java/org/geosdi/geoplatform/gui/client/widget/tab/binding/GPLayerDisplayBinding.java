@@ -51,7 +51,9 @@ import org.geosdi.geoplatform.gui.client.model.RasterTreeNode.GPRasterKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
 import org.geosdi.geoplatform.gui.client.widget.tab.DisplayLayersTabItem;
+import org.geosdi.geoplatform.gui.impl.map.event.OpacityLayerMapEvent;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 /**
  *
@@ -62,6 +64,8 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
 
     private Slider slider;
     private SliderField sliderField;
+    private GPRasterOpacityFieldBinding opacityFieldBinding;
+    private OpacityLayerMapEvent opacityEvent = new OpacityLayerMapEvent();
 
     @Override
     public FormPanel createFormPanel() {
@@ -99,32 +103,38 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
 
     @Override
     public void addFieldsBinding() {
-        this.formBinding.addFieldBinding(new GPRasterOpacityFieldBinding(sliderField,
-                GPRasterKeyValue.OPACITY.toString()));
+        this.opacityFieldBinding = new GPRasterOpacityFieldBinding(sliderField,
+                GPRasterKeyValue.OPACITY.name());
+        this.formBinding.addFieldBinding(this.opacityFieldBinding);
     }
 
+    /**
+     * Create and set Slider Properties
+     * 
+     */
     private void setSliderProperties() {
         this.slider = new Slider();
         slider.setMaxValue(100);
 
         slider.addPlugin(createSliderPlugin());
 
+        slider.setMessage("{0}% opacity");
+
         slider.addListener(Events.Change, new Listener<ComponentEvent>() {
 
             @Override
             public void handleEvent(ComponentEvent be) {
-                System.out.println("TEST ****************** " + slider.getValue());
+                opacityFieldBinding.setModelProperty(slider.getValue());
             }
         });
 
-        slider.setMessage("{0}% opacity");
-        
         slider.setData("text", "Choose Opacity Value for Layer");
     }
 
     /**
+     * Create Plugin for Slider
      * 
-     * @return 
+     * @return ComponentPlugin
      */
     private ComponentPlugin createSliderPlugin() {
         ComponentPlugin plugin = new ComponentPlugin() {
@@ -137,7 +147,8 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
                     public void handleEvent(ComponentEvent be) {
                         El elem = sliderField.el();
                         // should style in external CSS  rather than directly  
-                        elem.appendChild(XDOM.create("<div style='color: #615f5f;padding: 1 0 2 0px;'>" + slider.getData("text") + "</div>"));
+                        elem.appendChild(XDOM.create("<div style='color: #615f5f;padding: 1 0 2 0px;'>"
+                                + slider.getData("text") + "</div>"));
                     }
                 });
             }
@@ -161,7 +172,9 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
 
         @Override
         public void setModelProperty(Object val) {
-            ((GPRasterBean) model).setOpacity(((Float) val).floatValue() / 100);
+            ((GPRasterBean) model).setOpacity(((Integer) val).floatValue() / 100);
+            opacityEvent.setLayerBean((GPRasterBean) model);
+            GPHandlerManager.fireEvent(opacityEvent);
         }
 
         /**

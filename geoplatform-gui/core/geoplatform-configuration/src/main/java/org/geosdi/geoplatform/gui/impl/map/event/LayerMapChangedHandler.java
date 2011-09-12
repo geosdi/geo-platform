@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -56,4 +57,6 @@ public interface LayerMapChangedHandler extends EventHandler {
     public void onRemoveLayer(GPLayerBean layerBean);
 
     public void onChangeStyle(GPLayerBean layerBean, String newStyle);
+    
+    public void changeOpacity(GPRasterBean layerBean);
 }

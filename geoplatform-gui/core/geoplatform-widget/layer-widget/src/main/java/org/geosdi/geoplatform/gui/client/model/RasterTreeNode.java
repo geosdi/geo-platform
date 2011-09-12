@@ -76,7 +76,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
         }
     }
     //
-    private float opacity;
+    private float opacity = 1.0f;
     private List<String> styles;
 
     public RasterTreeNode() {

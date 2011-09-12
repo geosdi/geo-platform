@@ -48,26 +48,25 @@ import org.geosdi.geoplatform.gui.model.tree.responsibility.GPLayerRequestHandle
  */
 public class DisplayLayersManager {
 
-	private GPLayerRequestHandler rasterHandler;
-	private GPLayerRequestHandler vectorHandler;
+    private GPLayerRequestHandler rasterHandler;
+    private GPLayerRequestHandler vectorHandler;
 
-	/**
-	 * @Constructor
-	 * 
-	 * @param store
-	 */
-	public DisplayLayersManager(GPMapLayersStore<?, ?> store) {
-		this.rasterHandler = new DisplayRasterRequestHandler(store);
-		this.vectorHandler = new DisplayVectorRequestHandler(store);
-		this.rasterHandler.setSuccessor(this.vectorHandler);
-	}
+    /**
+     * @Constructor
+     * 
+     * @param store
+     */
+    public DisplayLayersManager(GPMapLayersStore<?, ?> store) {
+        this.rasterHandler = new DisplayRasterRequestHandler(store);
+        this.vectorHandler = new DisplayVectorRequestHandler(store);
+        this.rasterHandler.setSuccessor(this.vectorHandler);
+    }
 
-	/**
-	 * 
-	 * @param layer
-	 */
-	public void forwardRequest(GPLayerBean layer) {
-		this.rasterHandler.layerRequest(layer);
-	}
-
+    /**
+     * 
+     * @param layer
+     */
+    public void forwardRequest(GPLayerBean layer) {
+        this.rasterHandler.layerRequest(layer);
+    }
 }

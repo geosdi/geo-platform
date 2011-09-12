@@ -33,33 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.service.server;
+package org.geosdi.geoplatform.gui.server.gwt;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.ArrayList;
-
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import org.geosdi.geoplatform.gui.client.service.OAuth2Remote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
-import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import org.geosdi.geoplatform.gui.server.IOAuth2Service;
+import org.geosdi.geoplatform.gui.server.service.impl.OAuth2Service;
+import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email  michele.santomauro@geosdi.org
+ *
  */
-public interface GeoPlatformOGCRemoteAsync {
-
-    public void loadServers(AsyncCallback<ArrayList<GPServerBeanModel>> callback)
-            throws GeoPlatformException;
-
-    public void getServerDetails(long idServer,
-            AsyncCallback<GPServerBeanModel> callback) throws GeoPlatformException;
-
-    public void getCapabilities(long idServer,
-            AsyncCallback<ArrayList<? extends GPLayerGrid>> callback);
-
-    public void insertServer(String aliasServerName, String urlServer,
-            AsyncCallback<GPServerBeanModel> callback) throws GeoPlatformException;
+public class OAuth2RemoteImpl extends RemoteServiceServlet implements OAuth2Remote{
     
-    public void findDistinctLayersDataSource(AsyncCallback<ArrayList<String>> callback) throws GeoPlatformException;
+    private static final long serialVersionUID = -8161383693348011400L;
+
+    private IOAuth2Service oauth2Service = (IOAuth2Service) GeoPlatformContextUtil.getInstance().getBean(
+                OAuth2Service.class);
+    
+    @Override
+    public void googleUserLogin(String token) throws GeoPlatformException {
+        this.oauth2Service.googleUserLogin(token, super.getThreadLocalRequest());
+    }
+    
 }

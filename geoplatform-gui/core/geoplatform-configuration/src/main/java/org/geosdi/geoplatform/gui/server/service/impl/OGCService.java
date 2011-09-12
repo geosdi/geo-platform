@@ -91,13 +91,17 @@ public class OGCService implements IOGCService {
     }
 
     @Override
-    public ArrayList<? extends GPLayerGrid> getCapabilities(long idServer)
+    public ArrayList<? extends GPLayerGrid> getCapabilities(HttpServletRequest httpServletRequest, long idServer)
             throws GeoPlatformException {
         try {
+            HttpSession session = httpServletRequest.getSession();
+            String token = (String)session.getAttribute("GOOGLE_TOKEN");
+            System.out.println("### getCapabilities - Token dalla sessione : " + token);
+
             RequestById req = new RequestById(idServer);
 
             ServerDTO server = this.geoPlatformServiceClient.getCapabilities(
-                    req);
+                    req, token);
 
             return this.dtoServerConverter.createRasterLayerList(
                     server.getLayerList());
@@ -108,10 +112,15 @@ public class OGCService implements IOGCService {
     }
 
     @Override
-    public GPServerBeanModel insertServer(String aliasServerName, String urlServer) throws GeoPlatformException {
+    public GPServerBeanModel insertServer(HttpServletRequest httpServletRequest, 
+            String aliasServerName, String urlServer) throws GeoPlatformException {
         try {
+            HttpSession session = httpServletRequest.getSession();
+            String token = (String)session.getAttribute("GOOGLE_TOKEN");
+            System.out.println("### insertServer - Token dalla sessione : " + token);
+            
             ServerDTO serverWS = this.geoPlatformServiceClient.saveServer(
-                    aliasServerName, urlServer);
+                    aliasServerName, urlServer, token);
 
             return this.dtoServerConverter.convertServerWS(serverWS);
         } catch (ResourceNotFoundFault ex) {

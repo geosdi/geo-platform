@@ -170,7 +170,6 @@
         </pluginManagement>
     </build>
 
-    
     <modules>
         <module>geoplatform-api</module>
         <module>geoplatform-configuration</module>

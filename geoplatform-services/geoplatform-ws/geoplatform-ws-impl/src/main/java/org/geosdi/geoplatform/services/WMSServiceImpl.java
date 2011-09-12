@@ -77,6 +77,8 @@ class WMSServiceImpl {
     final private Logger logger = LoggerFactory.getLogger(WMSServiceImpl.class);
     // DAO
     private GPServerDAO serverDao;
+    
+    private static final String GEB = "earthbuilder.google.com";
 
     /**
      * @param serverDao
@@ -161,14 +163,14 @@ class WMSServiceImpl {
         return server;
     }
 
-    public ServerDTO getCapabilities(RequestById request)
+    public ServerDTO getCapabilities(RequestById request, String token)
             throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(request.getId());
         if (server == null) {
             throw new ResourceNotFoundFault("Server has been deleted", request.getId());
         }
 
-        WMSCapabilities wmsCapabilities = this.getWMSCapabilities(server.getServerUrl());
+        WMSCapabilities wmsCapabilities = this.getWMSCapabilities(server.getServerUrl(), token);
 
         ServerDTO serverDTO = new ServerDTO(server);
         List<RasterLayerDTO> layers = convertToLayerList(
@@ -178,10 +180,11 @@ class WMSServiceImpl {
         return serverDTO;
     }
 
-    public ServerDTO saveServer(String aliasServerName, String serverUrl)
+    public ServerDTO saveServer(String aliasServerName, String serverUrl, String token)
             throws ResourceNotFoundFault {
         ServerDTO serverDTO = null;
-        WMSCapabilities wmsCapabilities = this.getWMSCapabilities(serverUrl);
+        
+        WMSCapabilities wmsCapabilities = this.getWMSCapabilities(serverUrl, token);
 
         // Retrieve the server by URL
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
@@ -199,14 +202,20 @@ class WMSServiceImpl {
         return serverDTO;
     }
 
-    private WMSCapabilities getWMSCapabilities(String urlServer)
+    private WMSCapabilities getWMSCapabilities(String urlServer, String token)
             throws ResourceNotFoundFault {
         URL serverURL = null;
         WebMapServer wms = null;
         WMSCapabilities cap = null;
+        
+        System.out.println("\n @@@ urlServer: " + urlServer + "\n");
+        
+        String urlServerEdited = editServerUrl(urlServer, token);
+        
+        System.out.println("\n @@@ urlServerEdited: " + urlServerEdited + "\n");
 
         try {
-            serverURL = new URL(urlServer);
+            serverURL = new URL(urlServerEdited);
             wms = new WebMapServer(serverURL);
             cap = wms.getCapabilities();
 
@@ -224,6 +233,19 @@ class WMSServiceImpl {
             throw new ResourceNotFoundFault("IOException ", e);
         }
         return cap;
+    }
+    
+    private String editServerUrl(String urlServer, String token) {
+        StringBuilder stringBuilder = new StringBuilder(urlServer);
+        if (!urlServer.contains("?")) {
+            stringBuilder.append("?request=GetCapabilities");
+        }
+        
+        if (urlServer.contains(GEB)) {
+            stringBuilder.append("&access_token=");
+            stringBuilder.append(token);
+        }
+        return stringBuilder.toString();
     }
 
     private List<RasterLayerDTO> convertToLayerList(Layer layer, String urlServer) {

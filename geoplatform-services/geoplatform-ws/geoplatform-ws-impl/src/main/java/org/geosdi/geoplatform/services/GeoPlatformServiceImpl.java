@@ -615,15 +615,15 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public ServerDTO getCapabilities(RequestById request)
+    public ServerDTO getCapabilities(RequestById request, String token)
             throws ResourceNotFoundFault {
-        return wmsServiceDelegate.getCapabilities(request);
+        return wmsServiceDelegate.getCapabilities(request, token);
     }
 
     @Override
-    public ServerDTO saveServer(String aliasServerName, String serverUrl)
+    public ServerDTO saveServer(String aliasServerName, String serverUrl, String token)
             throws ResourceNotFoundFault {
-        return wmsServiceDelegate.saveServer(aliasServerName, serverUrl);
+        return wmsServiceDelegate.saveServer(aliasServerName, serverUrl, token);
     }
     //</editor-fold>
 

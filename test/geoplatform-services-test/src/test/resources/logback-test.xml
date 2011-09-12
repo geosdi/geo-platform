@@ -23,7 +23,7 @@
     </logger>
 
     <root>
-        <level value="info" />
+        <level value="trace" />
         <appender-ref ref="STDOUT" />
     </root>
     

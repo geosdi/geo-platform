@@ -96,4 +96,13 @@ public class ServerDAOTest extends BaseDAOTest {
         server.setServerType(GPCapabilityType.WMS);
         return server;
     }
+
+    private GeoPlatformServer createServer3() {
+        GeoPlatformServer server = new GeoPlatformServer();
+        server.setServerUrl("https://earthbuilder.google.com/13496919088645259843-03170733828027579281-4/wms/?request=GetCapabilities");
+        server.setName("earthbuilder.google.com");
+        server.setAliasName("EARTHBUILDER");
+        server.setServerType(GPCapabilityType.WMS);
+        return server;
+    }
 }

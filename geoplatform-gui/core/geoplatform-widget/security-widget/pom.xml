@@ -49,7 +49,43 @@
         </developer>
     </developers>
 
+    <repositories>
+	<!-- Google API -->
+        <repository>
+            <id>google-releases</id>
+            <name>Google Releases</name>
+            <url>https://oss.sonatype.org/content/repositories/google-releases</url>
+        </repository>
+    </repositories>
+
     <dependencies>
+        <!-- Dependencies for GoogleAPI Compilation -->
+        <dependency>
+            <groupId>com.google.api</groupId>
+            <artifactId>gwt-oauth2</artifactId>
+            <version>0.1.1-ALPHA</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.google.api.client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>1.4.0-alpha</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.google.api.client</groupId>
+            <artifactId>google-api-client-auth-oauth2</artifactId>
+            <version>1.2.3-alpha</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.google.api.client</groupId>
+            <artifactId>google-api-client-googleapis</artifactId>
+            <version>1.4.1-beta</version>
+        </dependency>
+        
+        <!-- _______________________________________________ -->
+        
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>

@@ -33,33 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.service.server;
+package org.geosdi.geoplatform.gui.client.icons;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.ArrayList;
-
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
-import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.google.gwt.user.client.ui.ImageBundle;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email  michele.santomauro@geosdi.org
+ *
  */
-public interface GeoPlatformOGCRemoteAsync {
+@SuppressWarnings("deprecation")
+public interface OAuth2Icons extends ImageBundle {
 
-    public void loadServers(AsyncCallback<ArrayList<GPServerBeanModel>> callback)
-            throws GeoPlatformException;
-
-    public void getServerDetails(long idServer,
-            AsyncCallback<GPServerBeanModel> callback) throws GeoPlatformException;
-
-    public void getCapabilities(long idServer,
-            AsyncCallback<ArrayList<? extends GPLayerGrid>> callback);
-
-    public void insertServer(String aliasServerName, String urlServer,
-            AsyncCallback<GPServerBeanModel> callback) throws GeoPlatformException;
+    @Resource("google.png")
+    AbstractImagePrototype googleSignOn();
     
-    public void findDistinctLayersDataSource(AsyncCallback<ArrayList<String>> callback) throws GeoPlatformException;
 }

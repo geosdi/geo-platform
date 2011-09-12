@@ -20,7 +20,7 @@
 		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuInToolBar">
         <property name="text" value="User" />
         <property name="enabled" value="true" />
-        <property name="order" value="200" />
+        <property name="order" value="210" />
         <property name="id" value="USER_MENU" />
         <property name="tools">
             <list>
@@ -30,6 +30,13 @@
                     <property name="text" value="Logout" />
                     <property name="enabled" value="true" />
                     <property name="order" value="10" />
+                </bean>
+                <bean name="googleSignOnButton"
+					class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    <property name="id" value="googleSignOnButton" />
+                    <property name="text" value="Google Earth Builder" />
+                    <property name="enabled" value="true" />
+                    <property name="order" value="11" />
                 </bean>
             </list>
         </property>

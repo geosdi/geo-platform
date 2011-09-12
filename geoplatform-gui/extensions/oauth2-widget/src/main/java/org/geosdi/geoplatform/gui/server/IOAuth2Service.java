@@ -33,33 +33,18 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.service.server;
+package org.geosdi.geoplatform.gui.server;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.ArrayList;
-
+import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
-import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email  michele.santomauro@geosdi.org
+ *
  */
-public interface GeoPlatformOGCRemoteAsync {
-
-    public void loadServers(AsyncCallback<ArrayList<GPServerBeanModel>> callback)
-            throws GeoPlatformException;
-
-    public void getServerDetails(long idServer,
-            AsyncCallback<GPServerBeanModel> callback) throws GeoPlatformException;
-
-    public void getCapabilities(long idServer,
-            AsyncCallback<ArrayList<? extends GPLayerGrid>> callback);
-
-    public void insertServer(String aliasServerName, String urlServer,
-            AsyncCallback<GPServerBeanModel> callback) throws GeoPlatformException;
+public interface IOAuth2Service {
     
-    public void findDistinctLayersDataSource(AsyncCallback<ArrayList<String>> callback) throws GeoPlatformException;
+    public void googleUserLogin(String token, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
 }

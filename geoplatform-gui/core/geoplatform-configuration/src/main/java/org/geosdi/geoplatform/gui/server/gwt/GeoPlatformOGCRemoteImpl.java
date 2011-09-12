@@ -77,14 +77,14 @@ public class GeoPlatformOGCRemoteImpl extends RemoteServiceServlet implements
     }
 
     @Override
-    public ArrayList<? extends GPLayerGrid> getcapabilities(
+    public ArrayList<? extends GPLayerGrid> getCapabilities(
             long idServer) throws GeoPlatformException {
-        return this.ogcService.getCapabilities(idServer);
+        return this.ogcService.getCapabilities(this.getThreadLocalRequest(), idServer);
     }
 
     @Override
     public GPServerBeanModel insertServer(String aliasServerName, String urlServer) throws GeoPlatformException {
-        return this.ogcService.insertServer(aliasServerName, urlServer);
+        return this.ogcService.insertServer(this.getThreadLocalRequest(), aliasServerName, urlServer);
     }
 
     @Override

@@ -33,83 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.service.server;
+package org.geosdi.geoplatform.gui.client.service;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import java.util.ArrayList;
-
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
-import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email  michele.santomauro@geosdi.org
+ *
  */
-@RemoteServiceRelativePath("GeoPlatformOGCRemote")
-public interface GeoPlatformOGCRemote extends RemoteService {
+@RemoteServiceRelativePath("OAuth2Remote")
+public interface OAuth2Remote extends RemoteService {
 
     public static class Util {
 
-        private static GeoPlatformOGCRemoteAsync instance;
+        private static OAuth2RemoteAsync instance = (OAuth2RemoteAsync) GWT.create(OAuth2Remote.class);
 
-        public static GeoPlatformOGCRemoteAsync getInstance() {
-            if (instance == null) {
-                instance = (GeoPlatformOGCRemoteAsync) GWT.create(
-                        GeoPlatformOGCRemote.class);
-            }
-
+        public static OAuth2RemoteAsync getInstance() {
             return instance;
         }
     }
-    
-    /**
-     * Load Distinct layers data source
-     * @return
-     * @throws GeoPlatformException 
-     */
-    public ArrayList<String> findDistinctLayersDataSource() throws GeoPlatformException;
 
-    /**
-     * Load All Server from GeoPlatform Web Services
-     *
-     * @return
-     *          ArrayList<GPServerBeanModel>
-     *
-     * @throws GeoPlatformException
-     */
-    public ArrayList<GPServerBeanModel> loadServers() throws GeoPlatformException;
-
-    /**
-     *
-     * Load Server Detail
-     *
-     * @param idServer
-     * @return
-     * @throws GeoPlatformException
-     */
-    public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException;
-
-    /**
-     *
-     * @param idServer
-     *
-     * @return
-     * @throws GeoPlatformException
-     */
-    public ArrayList<? extends GPLayerGrid> getCapabilities(
-            long idServer) throws GeoPlatformException;
-    
     /**
      * 
-     * @param urlServer
+     * @param token
      * @return
-     *         GPServerDTO  
-     * 
-     * @throws GeoPlatformException 
+     * @throws GeoPlatformException
      */
-    public GPServerBeanModel insertServer(String aliasServerName, String urlServer) throws GeoPlatformException;
+    public void googleUserLogin(String token) throws GeoPlatformException;
 }

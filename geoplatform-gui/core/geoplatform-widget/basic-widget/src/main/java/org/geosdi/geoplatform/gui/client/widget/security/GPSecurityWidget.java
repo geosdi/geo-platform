@@ -96,12 +96,14 @@ public abstract class GPSecurityWidget extends Dialog {
         };
         userName = new TextField<String>();
         userName.setFieldLabel("Username");
+        userName.setValue("admin");
         userName.addKeyListener(keyListener);
         add(userName);
 
         password = new TextField<String>();
         password.setPassword(true);
         password.setFieldLabel("Password");
+        password.setValue("admin");
         password.addKeyListener(keyListener);
         add(password);
 

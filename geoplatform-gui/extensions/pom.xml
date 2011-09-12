@@ -93,6 +93,7 @@
     
     <modules>
         <module>gp-publisher-widget</module>
+        <module>oauth2-widget</module>
     </modules>
 
 

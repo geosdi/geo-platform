@@ -86,4 +86,7 @@ public interface BasicWidgetIcons extends ImageBundle {
 
     @Resource("login.png")
     AbstractImagePrototype login();
+
+    @Resource("google.png")
+    AbstractImagePrototype google();
 }

@@ -1,0 +1,10 @@
+  <!-- Inherit the core Web Toolkit stuff. -->
+<module>
+    <inherits name="com.google.api.gwt.oauth2.OAuth2" />
+    
+    <source path="client" />
+    
+    <entry-point class='org.geosdi.geoplatform.gui.client.OAuth2WidgetUI' />
+    
+    <servlet path="/OAuth2Remote" class="org.geosdi.geoplatform.gui.server.gwt.OAuth2RemoteImpl" />
+</module>

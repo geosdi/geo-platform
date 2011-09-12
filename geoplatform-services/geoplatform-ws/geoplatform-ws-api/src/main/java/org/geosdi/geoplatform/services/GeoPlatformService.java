@@ -499,12 +499,15 @@ public interface GeoPlatformService {
     @Get
     @HttpResource(location = "/wms/capabilities/{id}")
     @WebResult(name = "Capabilities")
-    ServerDTO getCapabilities(RequestById request) throws ResourceNotFoundFault;
+    ServerDTO getCapabilities(
+            @WebParam(name = "request") RequestById request,
+            @WebParam(name = "token") String token) throws ResourceNotFoundFault;
 
     @Post
     @HttpResource(location = "/server")
     ServerDTO saveServer(@WebParam(name = "aliasServerName") String aliasServerName,
-        @WebParam(name = "serverUrl") String serverUrl)
+        @WebParam(name = "serverUrl") String serverUrl,
+        @WebParam(name = "token") String token)
             throws ResourceNotFoundFault;
     //</editor-fold>
 

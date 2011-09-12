@@ -35,12 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.toolbar;
 
+import com.extjs.gxt.ui.client.widget.WidgetComponent;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
+import com.google.gwt.user.client.ui.Image;
 import java.util.Collections;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
@@ -59,10 +61,12 @@ import org.geosdi.geoplatform.gui.client.widget.menu.MenuUtilityBuilder;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.GeoPlatformToolbarWidget;
 import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
+import org.geosdi.geoplatform.gui.configuration.IconInToolbar;
 import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.MenuInToolBar;
 import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.geosdi.geoplatform.gui.utility.GoogleLoginEnum;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 
 /**
@@ -93,6 +97,10 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
                 this.addMenuButton((MenuClientTool) tool,
                         (ToolbarApplicationAction) ToolbarActionRegistar.get(
                         id, geoPlatformMap));
+            } else if (tool instanceof IconInToolbar && ((IconInToolbar) tool).getId().equals(
+                    GoogleLoginEnum.GOOGLE_ICON.toString())) {
+                this.addGoogleIcon((IconInToolbar) tool);
+                this.addSeparator();
             } else if (tool instanceof MenuInToolBar && ((MenuInToolBar) tool).getId().equals(
                     UserLoginEnum.USER_MENU.toString())) {
                 this.addUserLoginMenu((MenuInToolBar) tool);
@@ -204,6 +212,14 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
 //        }
     }
 
+    private void addGoogleIcon(IconInToolbar icon) {
+        Image iconImage = BasicWidgetResources.ICONS.google().createImage();
+        WidgetComponent widgetIcon = new WidgetComponent(iconImage);
+        widgetIcon.setToolTip(icon.getText());
+        this.toolBar.add(new FillToolItem());
+        this.toolBar.add(widgetIcon);
+    }
+    
     private void addUserLoginMenu(MenuInToolBar menuInToolBar) {
         Button buttonItem = new Button(
                 GPUserGuiComponents.getInstance().getUserName());
@@ -212,7 +228,6 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
         Menu menu = new Menu();
         MenuUtilityBuilder.buildTools(menu, menuInToolBar.getTools());
         buttonItem.setMenu(menu);
-        toolBar.add(new FillToolItem());
         this.toolBar.add(buttonItem);
     }
 

@@ -10,9 +10,19 @@
     <bean name="googleToolbarIcon"
 		class="org.geosdi.geoplatform.gui.configuration.IconInToolbar">
         <property name="text" value="Not signed on Google Earth Builder" />
-        <property name="enabled" value="true" />
         <property name="order" value="200" />
         <property name="id" value="GOOGLE_ICON" />
+    </bean>
+    
+    <bean name="googleSignOnButton"
+                            class="org.geosdi.geoplatform.gui.configuration.menubar.OAuth2MenuBarClientTool">
+        <property name="id" value="googleSignOnButton" />
+        <property name="text" value="Google Earth Builder" />
+        <property name="enabled" value="true" />
+        <property name="order" value="11" />
+        <property name="googleAuthUrl" value="https://accounts.google.com/o/oauth2/auth" />
+        <property name="googleClientId" value="715134893945.apps.googleusercontent.com" />
+        <property name="scope" value="https://www.googleapis.com/auth/earthbuilder.readonly" />
     </bean>
     
 </beans>

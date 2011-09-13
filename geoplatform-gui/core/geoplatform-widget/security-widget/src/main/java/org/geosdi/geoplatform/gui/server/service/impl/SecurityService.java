@@ -136,34 +136,6 @@ public class SecurityService implements ISecurityService {
         session.removeAttribute(UserLoginEnum.USER_LOGGED.toString());
     }
 
-    public boolean googleUserLogin(String url, String token) throws GeoPlatformException {
-        try {
-            HttpTransport transport = new NetHttpTransport();
-            HttpRequestFactory rf = transport.createRequestFactory();
-
-            // Make an authenticated request
-            GenericUrl shortenEndpoint = new GenericUrl("https://earthbuilder.google.com/13496919088645259843-03170733828027579281-4/wms/?request=GetCapabilities&access_token=" + token);
-            String requestBody =
-                    "{\"longUrl\":\"http://farm6.static.flickr.com/5281/5686001474_e06f1587ff_o.jpg\"}";
-            HttpRequest request = rf.buildGetRequest(shortenEndpoint);
-            request.headers.contentType = "application/json";
-            HttpResponse shortUrl = request.execute();
-            BufferedReader output = new BufferedReader(new InputStreamReader(shortUrl.getContent()));
-            System.out.println("Shorten Response: ");
-            for (String line = output.readLine(); line != null; line = output.readLine()) {
-                System.out.println(line);
-            }
-            return true;
-        } catch (IOException ioe) {
-            try {
-                System.out.println("Error 1: " + ((HttpResponseException) ioe).response.parseAsString());
-            } catch (IOException ioee) {
-                System.out.println("Error 2: " + ioee.toString());
-            }
-        }
-        return false;
-    }
-
     @Override
     public void invalidateSession(HttpServletRequest httpServletRequest) throws GeoPlatformException {
         //deleteUserFromSession(httpServletRequest);

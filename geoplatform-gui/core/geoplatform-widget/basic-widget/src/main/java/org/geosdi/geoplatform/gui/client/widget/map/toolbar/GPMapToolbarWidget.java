@@ -213,7 +213,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
     }
 
     private void addGoogleIcon(IconInToolbar icon) {
-        Image iconImage = BasicWidgetResources.ICONS.google().createImage();
+        Image iconImage = BasicWidgetResources.ICONS.googleWhite().createImage();
         WidgetComponent widgetIcon = new WidgetComponent(iconImage);
         widgetIcon.setToolTip(icon.getText());
         this.toolBar.add(new FillToolItem());

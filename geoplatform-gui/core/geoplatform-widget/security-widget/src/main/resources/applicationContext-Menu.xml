@@ -31,13 +31,7 @@
                     <property name="enabled" value="true" />
                     <property name="order" value="10" />
                 </bean>
-                <bean name="googleSignOnButton"
-					class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
-                    <property name="id" value="googleSignOnButton" />
-                    <property name="text" value="Google Earth Builder" />
-                    <property name="enabled" value="true" />
-                    <property name="order" value="11" />
-                </bean>
+                <ref bean="googleSignOnButton"/>
             </list>
         </property>
     </bean>

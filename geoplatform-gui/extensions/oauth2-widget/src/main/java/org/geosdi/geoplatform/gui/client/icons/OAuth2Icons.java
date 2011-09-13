@@ -46,7 +46,10 @@ import com.google.gwt.user.client.ui.ImageBundle;
 @SuppressWarnings("deprecation")
 public interface OAuth2Icons extends ImageBundle {
 
-    @Resource("google.png")
-    AbstractImagePrototype googleSignOn();
+    @Resource("google_white.png")
+    AbstractImagePrototype googleSignOnWhite();
+
+    @Resource("google_green.png")
+    AbstractImagePrototype googleSignOnGreen();
     
 }

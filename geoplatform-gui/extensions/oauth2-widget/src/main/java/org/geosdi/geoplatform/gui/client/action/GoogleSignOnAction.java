@@ -40,7 +40,7 @@ import com.google.api.gwt.oauth2.client.Auth;
 import com.google.api.gwt.oauth2.client.AuthRequest;
 import com.google.api.gwt.oauth2.client.Callback;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.action.menu.OAuth2MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.OAuth2Resources;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.server.gwt.OAuth2RemoteImpl;
@@ -50,19 +50,16 @@ import org.geosdi.geoplatform.gui.server.gwt.OAuth2RemoteImpl;
  * @email  michele.santomauro@geosdi.org
  *
  */
-public class GoogleSignOnAction extends MenuBaseAction {
-
-    private static final String GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/auth";
-    private static final String GOOGLE_CLIENT_ID = "715134893945.apps.googleusercontent.com";
-    private static final String SCOPE = "https://www.googleapis.com/auth/earthbuilder.readonly";
+public class GoogleSignOnAction extends OAuth2MenuBaseAction {
     
     public GoogleSignOnAction() {
-        super("Google Earth Builder", OAuth2Resources.ICONS.googleSignOn());
+        super("Google Earth Builder", OAuth2Resources.ICONS.googleSignOnWhite());
     }
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        AuthRequest request = new AuthRequest(GOOGLE_AUTH_URL, GOOGLE_CLIENT_ID).withScopes(SCOPE);
+        AuthRequest request = new AuthRequest(super.getGoogleAuthUrl(), 
+                                              super.getGoogleClientId()).withScopes(super.getScope());
 
         Auth auth = Auth.get();
         auth.login(request, new Callback<String, Throwable>() {

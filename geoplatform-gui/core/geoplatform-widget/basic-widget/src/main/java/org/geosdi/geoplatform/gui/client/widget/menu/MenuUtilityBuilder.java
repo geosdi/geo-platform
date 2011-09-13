@@ -44,6 +44,7 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.action.menu.OAuth2MenuBaseAction;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionDisabledEvent;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionEnabledEvent;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionHandler;
@@ -51,6 +52,7 @@ import org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.DateMenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.GroupMenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool;
+import org.geosdi.geoplatform.gui.configuration.menubar.OAuth2MenuBarClientTool;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -79,7 +81,7 @@ public class MenuUtilityBuilder {
      * Add a Separator in Menu
      * @param menu 
      */
-    public static void addMenuSeparator(Menu menu) {
+    private static void addMenuSeparator(Menu menu) {
         menu.add(new SeparatorMenuItem());
     }
 
@@ -95,9 +97,94 @@ public class MenuUtilityBuilder {
             addDateMenu(menu);
         } else if (tool instanceof GroupMenuClientTool) {
             addGroupMenuItem((GroupMenuClientTool) tool, menu);
+        } else if (tool instanceof OAuth2MenuBarClientTool) {
+            addOAuth2MenuItem((OAuth2MenuBarClientTool) tool, menu);
         } else {
             addMenuItem(tool, menu);
         }
+    }
+
+    /**
+     * Add CheckMenuItem to a Menu
+     *
+     * @param tool
+     * @param menu
+     */
+    private static void addCheckMenuItem(CheckMenuClientTool tool, Menu menu) {
+        MenuAction action = MenuActionRegistar.get(tool.getId());
+        action.setId(tool.getId());
+        CheckMenuItem item = new CheckMenuItem(tool.getText());
+        item.setItemId(action.getId());
+        item.setChecked(tool.isChecked());
+
+        if (action != null) {
+            item.addSelectionListener(action);
+        }
+        menu.add(item);
+    }
+
+    /**
+     * Add a DateMenu Item to Menu
+     *
+     * @param menu
+     */
+    private static void addDateMenu(Menu menu) {
+        MenuItem date = new MenuItem("Choose a Date");
+        menu.add(date);
+        date.setSubMenu(new DateMenu());
+    }
+
+    /**
+     * Add a MenuItem with sub menu
+     *
+     * @param tool
+     * @param menu  
+     */
+    private static void addGroupMenuItem(GroupMenuClientTool tool, Menu menu) {
+        MenuItem item = new MenuItem(tool.getText());
+        menu.add(item);
+        Menu subMenu = new Menu();
+        buildTools(subMenu, tool.getTools());
+        item.setSubMenu(subMenu);
+    }
+
+    /**
+     * Add a MenuItem with sub menu
+     *
+     * @param tool
+     * @param menu  
+     */
+    private static void addOAuth2MenuItem(OAuth2MenuBarClientTool tool, Menu menu) {
+        OAuth2MenuBaseAction action = (OAuth2MenuBaseAction) MenuActionRegistar.get(
+                tool.getId());
+
+        final MenuItem item = new MenuItem(tool.getText());
+
+        if (action != null) {
+            action.setId(tool.getId());
+            item.setIcon(action.getImage());
+            item.setItemId(action.getId());
+            item.addSelectionListener(action);
+
+            action.addMenuActionHandler(new MenuActionHandler() {
+
+                @Override
+                public void onActionEnabled(MenuActionEnabledEvent event) {
+                    item.setEnabled(true);
+                }
+
+                @Override
+                public void onActionDisabled(MenuActionDisabledEvent event) {
+                    item.setEnabled(false);
+                }
+            });
+
+            action.setEnabled(tool.isEnabled());
+            action.setGoogleAuthUrl(tool.getGoogleAuthUrl());
+            action.setGoogleClientId(tool.getGoogleClientId());
+            action.setScope(tool.getScope());
+        }
+        menu.add(item);
     }
 
     /**
@@ -106,7 +193,7 @@ public class MenuUtilityBuilder {
      * @param tool
      * @param menu
      */
-    public static void addMenuItem(MenuBarClientTool tool, Menu menu) {
+    private static void addMenuItem(MenuBarClientTool tool, Menu menu) {
         MenuBaseAction action = (MenuBaseAction) MenuActionRegistar.get(
                 tool.getId());
 
@@ -132,50 +219,6 @@ public class MenuUtilityBuilder {
             });
 
             action.setEnabled(tool.isEnabled());
-        }
-        menu.add(item);
-    }
-
-    /**
-     * Add a MenuItem with sub menu
-     *
-     * @param tool
-     * @param menu  
-     */
-    public static void addGroupMenuItem(GroupMenuClientTool tool, Menu menu) {
-        MenuItem item = new MenuItem(tool.getText());
-        menu.add(item);
-        Menu subMenu = new Menu();
-        buildTools(subMenu, tool.getTools());
-        item.setSubMenu(subMenu);
-    }
-
-    /**
-     * Add a DateMenu Item to Menu
-     *
-     * @param menu
-     */
-    public static void addDateMenu(Menu menu) {
-        MenuItem date = new MenuItem("Choose a Date");
-        menu.add(date);
-        date.setSubMenu(new DateMenu());
-    }
-
-    /**
-     * Add CheckMenuItem to a Menu
-     *
-     * @param tool
-     * @param menu
-     */
-    public static void addCheckMenuItem(CheckMenuClientTool tool, Menu menu) {
-        MenuAction action = MenuActionRegistar.get(tool.getId());
-        action.setId(tool.getId());
-        CheckMenuItem item = new CheckMenuItem(tool.getText());
-        item.setItemId(action.getId());
-        item.setChecked(tool.isChecked());
-
-        if (action != null) {
-            item.addSelectionListener(action);
         }
         menu.add(item);
     }

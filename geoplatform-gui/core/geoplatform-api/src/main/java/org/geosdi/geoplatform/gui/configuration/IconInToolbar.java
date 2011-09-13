@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.gui.configuration;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email michele.santomauro@geosdi.org
+ * @email  michele.santomauro@geosdi.org
+ *
  */
 public class IconInToolbar extends GenericClientTool {
     
@@ -48,7 +49,6 @@ public class IconInToolbar extends GenericClientTool {
      *
      */
     private String text;
-    private boolean enabled;
 
     /**
      * @return the tooltip
@@ -62,21 +62,6 @@ public class IconInToolbar extends GenericClientTool {
      */
     public void setText(String text) {
         this.text = text;
-    }
-
-    /**
-     * @return the enabled
-     */
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    /**
-     * @param enabled
-     *            the enabled to set
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
     /*

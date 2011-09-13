@@ -33,63 +33,75 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
-
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+package org.geosdi.geoplatform.gui.configuration.menubar;
 
 /**
  * @author giuseppe
  * 
  */
-@SuppressWarnings("deprecation")
-public interface BasicWidgetIcons extends ImageBundle {
+public class OAuth2MenuBarClientTool extends MenuBarClientTool {
+    
+    private static final long serialVersionUID = 7486164920025043585L;
 
-    @Resource("cancel.png")
-    AbstractImagePrototype cancel();
+    /**
+     *
+     */
+    private String googleAuthUrl;
+    private String googleClientId;
+    private String scope;
 
-    @Resource("reset.png")
-    AbstractImagePrototype reset();
+    /**
+     * @return the googleAuthUrl
+     */
+    public String getGoogleAuthUrl() {
+        return googleAuthUrl;
+    }
 
-    @Resource("save.png")
-    AbstractImagePrototype save();
+    /**
+     * @param googleAuthUrl the googleAuthUrl to set
+     */
+    public void setGoogleAuthUrl(String googleAuthUrl) {
+        this.googleAuthUrl = googleAuthUrl;
+    }
 
-    @Resource("select.png")
-    AbstractImagePrototype select();
+    /**
+     * @return the googleClientId
+     */
+    public String getGoogleClientId() {
+        return googleClientId;
+    }
 
-    @Resource("search.png")
-    AbstractImagePrototype search();
+    /**
+     * @param googleClientId the googleClientId to set
+     */
+    public void setGoogleClientId(String googleClientId) {
+        this.googleClientId = googleClientId;
+    }
 
-    @Resource("routing.png")
-    AbstractImagePrototype routing();
+    /**
+     * @return the scope
+     */
+    public String getScope() {
+        return scope;
+    }
 
-    @Resource("eraser_minus.png")
-    AbstractImagePrototype erase();
+    /**
+     * @param scope the scope to set
+     */
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
 
-    @Resource("raster.png")
-    AbstractImagePrototype raster();
-
-    @Resource("information.png")
-    AbstractImagePrototype getFeatureInfo();
-
-    @Resource("logout.png")
-    AbstractImagePrototype logout();
-
-    @Resource("logged_user.png")
-    AbstractImagePrototype logged_user();
-
-    @Resource("geo_platform_logo.png")
-    AbstractImagePrototype geo_platform_logo();
-
-    @Resource("done.png")
-    AbstractImagePrototype done();
-
-    @Resource("login.png")
-    AbstractImagePrototype login();
-
-    @Resource("google_white.png")
-    AbstractImagePrototype googleWhite();
-
-    @Resource("google_green.png")
-    AbstractImagePrototype googleGreen();
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "OAuth2MenuBarClientTool [text=" + super.getText() + ", enabled=" + super.isEnabled()
+                + ", getId()=" + super.getId() + ", getOrder()=" + super.getOrder() 
+                + ", googleAuthUrl=" + getGoogleAuthUrl() + ", googleClientId=" + getGoogleClientId()
+                + ", scope=" + getScope() + "]";
+    }
 }

@@ -33,63 +33,66 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.action.menu;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
 
 /**
- * @author giuseppe
- * 
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email  michele.santomauro@geosdi.org
+ *
  */
-@SuppressWarnings("deprecation")
-public interface BasicWidgetIcons extends ImageBundle {
+public abstract class OAuth2MenuBaseAction extends MenuBaseAction {
 
-    @Resource("cancel.png")
-    AbstractImagePrototype cancel();
+    private boolean enabled;
+    
+    private String googleAuthUrl;
+    private String googleClientId;
+    private String scope;
 
-    @Resource("reset.png")
-    AbstractImagePrototype reset();
+    public OAuth2MenuBaseAction(String title, AbstractImagePrototype image) {
+        super(title, image);
+    }
 
-    @Resource("save.png")
-    AbstractImagePrototype save();
+    /**
+     * @return the googleAuthUrl
+     */
+    public String getGoogleAuthUrl() {
+        return googleAuthUrl;
+    }
 
-    @Resource("select.png")
-    AbstractImagePrototype select();
+    /**
+     * @param googleAuthUrl the googleAuthUrl to set
+     */
+    public void setGoogleAuthUrl(String googleAuthUrl) {
+        this.googleAuthUrl = googleAuthUrl;
+    }
 
-    @Resource("search.png")
-    AbstractImagePrototype search();
+    /**
+     * @return the googleClientId
+     */
+    public String getGoogleClientId() {
+        return googleClientId;
+    }
 
-    @Resource("routing.png")
-    AbstractImagePrototype routing();
+    /**
+     * @param googleClientId the googleClientId to set
+     */
+    public void setGoogleClientId(String googleClientId) {
+        this.googleClientId = googleClientId;
+    }
 
-    @Resource("eraser_minus.png")
-    AbstractImagePrototype erase();
+    /**
+     * @return the scope
+     */
+    public String getScope() {
+        return scope;
+    }
 
-    @Resource("raster.png")
-    AbstractImagePrototype raster();
-
-    @Resource("information.png")
-    AbstractImagePrototype getFeatureInfo();
-
-    @Resource("logout.png")
-    AbstractImagePrototype logout();
-
-    @Resource("logged_user.png")
-    AbstractImagePrototype logged_user();
-
-    @Resource("geo_platform_logo.png")
-    AbstractImagePrototype geo_platform_logo();
-
-    @Resource("done.png")
-    AbstractImagePrototype done();
-
-    @Resource("login.png")
-    AbstractImagePrototype login();
-
-    @Resource("google_white.png")
-    AbstractImagePrototype googleWhite();
-
-    @Resource("google_green.png")
-    AbstractImagePrototype googleGreen();
+    /**
+     * @param scope the scope to set
+     */
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
 }

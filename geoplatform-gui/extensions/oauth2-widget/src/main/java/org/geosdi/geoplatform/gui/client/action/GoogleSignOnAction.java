@@ -43,6 +43,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.menu.OAuth2MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.OAuth2Resources;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.properties.event.GPToolbarIconWidgetEvent;
 import org.geosdi.geoplatform.gui.server.gwt.OAuth2RemoteImpl;
 
 /**
@@ -51,15 +53,15 @@ import org.geosdi.geoplatform.gui.server.gwt.OAuth2RemoteImpl;
  *
  */
 public class GoogleSignOnAction extends OAuth2MenuBaseAction {
-    
+
     public GoogleSignOnAction() {
         super("Google Earth Builder", OAuth2Resources.ICONS.googleSignOnWhite());
     }
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        AuthRequest request = new AuthRequest(super.getGoogleAuthUrl(), 
-                                              super.getGoogleClientId()).withScopes(super.getScope());
+        AuthRequest request = new AuthRequest(super.getGoogleAuthUrl(),
+                super.getGoogleClientId()).withScopes(super.getScope());
 
         Auth auth = Auth.get();
         auth.login(request, new Callback<String, Throwable>() {
@@ -67,6 +69,8 @@ public class GoogleSignOnAction extends OAuth2MenuBaseAction {
             @Override
             public void onSuccess(String token) {
                 googleLoginCallback(token);
+                setImage(OAuth2Resources.ICONS.googleSignOnGreen());
+                WidgetPropertiesHandlerManager.fireEvent(new GPToolbarIconWidgetEvent("Signed on Google Earth Builder"));
             }
 
             @Override
@@ -77,7 +81,7 @@ public class GoogleSignOnAction extends OAuth2MenuBaseAction {
     }
 
     private void googleLoginCallback(String token) {
-        
+
         OAuth2RemoteImpl.Util.getInstance().googleUserLogin(token, new AsyncCallback<Object>() {
 
             @Override
@@ -86,7 +90,8 @@ public class GoogleSignOnAction extends OAuth2MenuBaseAction {
             }
 
             @Override
-            public void onSuccess(Object result) {}
+            public void onSuccess(Object result) {
+            }
         });
     }
 }

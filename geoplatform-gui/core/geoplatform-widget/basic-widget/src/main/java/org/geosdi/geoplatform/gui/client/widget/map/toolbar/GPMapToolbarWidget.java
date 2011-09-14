@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.toolbar;
 
-import com.extjs.gxt.ui.client.widget.WidgetComponent;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
@@ -57,6 +56,7 @@ import org.geosdi.geoplatform.gui.action.event.ActionHandler;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.widget.map.GPIconWidgetComponent;
 import org.geosdi.geoplatform.gui.client.widget.menu.MenuUtilityBuilder;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.GeoPlatformToolbarWidget;
 import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
@@ -213,13 +213,13 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
     }
 
     private void addGoogleIcon(IconInToolbar icon) {
-        Image iconImage = BasicWidgetResources.ICONS.googleWhite().createImage();
-        WidgetComponent widgetIcon = new WidgetComponent(iconImage);
-        widgetIcon.setToolTip(icon.getText());
+        GPIconWidgetComponent widgetIcon = new GPIconWidgetComponent(this.toolBar);
+
         this.toolBar.add(new FillToolItem());
-        this.toolBar.add(widgetIcon);
+        this.toolBar.add(widgetIcon.createWidgetComponent(BasicWidgetResources.ICONS.googleWhite().createImage(),
+                icon.getText()));
     }
-    
+
     private void addUserLoginMenu(MenuInToolBar menuInToolBar) {
         Button buttonItem = new Button(
                 GPUserGuiComponents.getInstance().getUserName());

@@ -119,6 +119,7 @@ public class DTOConverter {
 
         this.convertToLayerElementFromLayerDTO(raster, rasterDTO);
         raster.setLayerType(org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.RASTER);
+        raster.setOpacity(rasterDTO.getOpacity());
 
         return raster;
     }

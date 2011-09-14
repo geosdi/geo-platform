@@ -43,10 +43,10 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class WPSLayerTabItem extends GenericLayerTabItem {
+public class StylesLayerTabItem extends GenericLayerTabItem {
     
-    public WPSLayerTabItem() {
-        super("WPS");
+    public StylesLayerTabItem() {
+        super("Layer Styles");
     }
 
     @Override

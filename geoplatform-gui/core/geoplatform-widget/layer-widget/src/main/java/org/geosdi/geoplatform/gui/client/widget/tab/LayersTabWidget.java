@@ -48,7 +48,7 @@ public class LayersTabWidget extends GenericLayerTabWidget {
 
     private DisplayLayersTabItem displayItem;
     private LayersInfoTabItem infoItem;
-    private WPSLayerTabItem wpsItem;
+    private StylesLayerTabItem wpsItem;
     private RasterTreeNode item;
 
     @Override
@@ -61,7 +61,7 @@ public class LayersTabWidget extends GenericLayerTabWidget {
     public void createTabItems() {
         this.infoItem = new LayersInfoTabItem();
         this.displayItem = new DisplayLayersTabItem();
-        this.wpsItem = new WPSLayerTabItem();
+        this.wpsItem = new StylesLayerTabItem();
     }
 
     @Override

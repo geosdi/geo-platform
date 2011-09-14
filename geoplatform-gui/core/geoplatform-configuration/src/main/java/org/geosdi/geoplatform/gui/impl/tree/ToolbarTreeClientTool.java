@@ -58,6 +58,7 @@ public class ToolbarTreeClientTool {
     public static final String TOOLBAR_UPLOAD_KML = "uploadKml";
     public static final String TOOLBAR_LOAD_WMS_GETMAP_FROM_URL = "loadWmsGetMapFromUrl";
     public static final String TOOLBAR_LOAD_KML_FROM_URL = "loadKmlFromUrl";
+    public static final String TOOLBAR_PREVIEW_KML_FROM_URL = "previewKmlFromUrl";
     //
     private List<GenericClientTool> clientTools = new ArrayList<GenericClientTool>();
 
@@ -122,20 +123,27 @@ public class ToolbarTreeClientTool {
         loadWmsGetMapFromURLClientTool.setEnabled(false);
         loadWmsGetMapFromURLClientTool.setOrder(10);
 
-        ActionClientTool loadKmlFromUrlClientTool = new ActionClientTool();
-        loadKmlFromUrlClientTool.setId(TOOLBAR_LOAD_KML_FROM_URL);
-        loadKmlFromUrlClientTool.setType(ActionClientTool.BUTTON);
-        loadKmlFromUrlClientTool.setEnabled(false);
-        loadKmlFromUrlClientTool.setOrder(11);
+//        ActionClientTool loadKmlFromUrlClientTool = new ActionClientTool();
+//        loadKmlFromUrlClientTool.setId(TOOLBAR_LOAD_KML_FROM_URL);
+//        loadKmlFromUrlClientTool.setType(ActionClientTool.BUTTON);
+//        loadKmlFromUrlClientTool.setEnabled(false);
+//        loadKmlFromUrlClientTool.setOrder(11);
+//
+//        ActionClientTool uploadKmlClientTool = new ActionClientTool();
+//        uploadKmlClientTool.setId(TOOLBAR_UPLOAD_KML);
+//        uploadKmlClientTool.setType(ActionClientTool.BUTTON);
+//        uploadKmlClientTool.setEnabled(false);
+//        uploadKmlClientTool.setOrder(12);
 
-        ActionClientTool uploadKmlClientTool = new ActionClientTool();
-        uploadKmlClientTool.setId(TOOLBAR_UPLOAD_KML);
-        uploadKmlClientTool.setType(ActionClientTool.BUTTON);
-        uploadKmlClientTool.setEnabled(false);
-        uploadKmlClientTool.setOrder(12);
+        ActionClientTool previewKmlClientTool = new ActionClientTool();
+        previewKmlClientTool.setId(TOOLBAR_PREVIEW_KML_FROM_URL);
+        previewKmlClientTool.setType(ActionClientTool.BUTTON);
+        previewKmlClientTool.setEnabled(true);
+        previewKmlClientTool.setOrder(11);
 
-        this.clientTools.add(uploadKmlClientTool);
-        this.clientTools.add(loadKmlFromUrlClientTool);
+        this.clientTools.add(previewKmlClientTool);
+//        this.clientTools.add(uploadKmlClientTool);
+//        this.clientTools.add(loadKmlFromUrlClientTool);
         this.clientTools.add(loadWmsGetMapFromURLClientTool);
         this.clientTools.add(uploaderClientTool);
         this.clientTools.add(toolbarSeparator2);

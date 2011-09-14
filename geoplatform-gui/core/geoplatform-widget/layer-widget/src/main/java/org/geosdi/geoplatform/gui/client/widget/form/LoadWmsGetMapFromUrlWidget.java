@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.form;
 
+import org.geosdi.geoplatform.gui.regex.GetMap;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
@@ -67,7 +68,6 @@ import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.util.UtilityLayerModule;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPLayerExpander;
@@ -84,6 +84,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
+import org.geosdi.geoplatform.gui.regex.GPRegEx;
 
 /**
  *
@@ -129,7 +130,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         this.urlText = new TextField<String>();
         this.urlText.setFieldLabel("URL");
 
-        this.AddListenerToUrlText();
+        this.addListenerToUrlText();
 
         this.fieldSet.add(this.urlText);
 
@@ -169,7 +170,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         setFocusWidget(this.urlText);
     }
 
-    private void AddListenerToUrlText() {
+    private void addListenerToUrlText() {
         this.urlText.addListener(Events.OnPaste, new Listener() {
 
             @Override
@@ -357,21 +358,21 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
             suggestion = "URL must be start with \"http://\"";
 //        } else if (!url.contains("/wms?")) { // TODO DEL ?
 //            suggestion = "URL must contain \"/wms?\"";
-        } else if (!UtilityLayerModule.RE_REQUEST.test(urlEncoding)) {
+        } else if (!GPRegEx.RE_REQUEST.test(urlEncoding)) {
             suggestion = "Query String must have \"" + GetMap.REQUEST + "=GetMap\"";
-        } else if (!UtilityLayerModule.RE_VERSION.test(urlEncoding)) {
+        } else if (!GPRegEx.RE_VERSION.test(urlEncoding)) {
             suggestion = "Query String must have \"" + GetMap.VERSION + "=1.0.0, 1.1.0, or 1.1.1\"";
-        } else if (!UtilityLayerModule.RE_LAYERS.test(urlEncoding)) {
+        } else if (!GPRegEx.RE_LAYERS.test(urlEncoding)) {
             suggestion = "Query String must have \"" + GetMap.LAYERS + "=value[,value,...]\"";
-        } else if (!UtilityLayerModule.RE_SRS.test(urlEncoding)) {
+        } else if (!GPRegEx.RE_SRS.test(urlEncoding)) {
             suggestion = "Query String must have \"" + GetMap.SRS + "=EPSG:id_code\"";
-        } else if (!UtilityLayerModule.RE_BBOX.test(urlEncoding)) {
+        } else if (!GPRegEx.RE_BBOX.test(urlEncoding)) {
             suggestion = "Query String must have \"" + GetMap.BBOX + "=minx,miny,maxx,maxy\"";
-        } else if (!UtilityLayerModule.RE_WIDTH.test(urlEncoding)) {
+        } else if (!GPRegEx.RE_WIDTH.test(urlEncoding)) {
             suggestion = "Query String must have \"" + GetMap.WIDTH + "=output_width\"";
-        } else if (!UtilityLayerModule.RE_HEIGHT.test(urlEncoding)) {
+        } else if (!GPRegEx.RE_HEIGHT.test(urlEncoding)) {
             suggestion = "Query String must have \"" + GetMap.HEIGHT + "=output_height\"";
-        } else if (!UtilityLayerModule.RE_FORMAT.test(urlEncoding)) {
+        } else if (!GPRegEx.RE_FORMAT.test(urlEncoding)) {
             suggestion = "Query String must have \"" + GetMap.FORMAT + "=image/(png|gif|jpeg)\"";
         } else {
             suggestion = "WMS URL is Syntactically Correct";

@@ -40,7 +40,6 @@ package org.geosdi.geoplatform.gui.client.widget.fileupload;
  * @email nazzareno.sileno@geosdi.org
  */
 public enum GPExtensions {
-    
-    zip, jar, png, jpeg, dbf, shx, prj, shp;
-    
+
+    ZIP, JAR, PNG, JPEG, DBF, SHX, PRJ, SHP, KML;
 }

@@ -33,30 +33,42 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.form;
+package org.geosdi.geoplatform.gui.regex;
+
+import com.google.gwt.regexp.shared.RegExp;
 
 /**
  *
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- * 
- * Query string of GetMap request
  */
-public enum GetMap {
+public class GPRegEx {
 
-    // Required
-    REQUEST, // GetMap
-    VERSION, // 1.0.0, 1.1.0, or 1.1.1
-    LAYERS,
-    SRS, // EPSG:id_code
-    BBOX, // minx, miny, maxx, maxy
-    WIDTH,
-    HEIGHT,
-    STYLES,
-    FORMAT, // MIME types
-    // Required
-    BGCOLOR,
-    TRANSPARENT, // TRUE | FALSE
-    SLD,
-    EXCEPTIONS; // MIME types
+    /**
+     * Regular Expressions
+     * Note: the whitespace must not be present
+     */
+    // Query String of a WMS URL - Fields required
+    public static final RegExp RE_REQUEST = RegExp.compile(GetMap.REQUEST + "=GetMap");
+    public static final RegExp RE_VERSION = RegExp.compile(GetMap.VERSION + "=1\\.(0\\.0|1\\.0|1\\.1)");
+    public static final RegExp RE_LAYERS = RegExp.compile(GetMap.LAYERS + "=\\w+(,\\w+)*");
+    public static final RegExp RE_SRS = RegExp.compile(GetMap.SRS + "=\\w+(-\\w+)?:\\d+");
+    public static final RegExp RE_BBOX = RegExp.compile(GetMap.BBOX + "=-?\\d+(\\.\\d+)?(,-?\\d+(\\.\\d+)?){3}");
+    public static final RegExp RE_WIDTH = RegExp.compile(GetMap.WIDTH + "=\\d+");
+    public static final RegExp RE_HEIGHT = RegExp.compile(GetMap.HEIGHT + "=\\d+");
+    public static final RegExp RE_FORMAT = RegExp.compile(GetMap.FORMAT + "=image/(png|gif|jpeg)");
+    // KML URL
+    public static final RegExp RE_FUSION_TABLES_URL = RegExp.compile("http://www\\.google\\.com/fusiontables/exporttable\\?");
+    public static final RegExp RE_FUSION_TABLES_QS_QUERY = RegExp.compile("query=select[ \\+]col\\d+[ \\+]from[ \\+]\\d+[ \\+]"); // URL Encoding replace + with a space
+    public static final RegExp RE_FUSION_TABLES_QS_O = RegExp.compile("o=kmllink");
+    public static final RegExp RE_FUSION_TABLES_QS_G = RegExp.compile("g=col\\d+");
+    //
+    private static final RegExp RE_FORMAT_QS = RegExp.compile("(\\?|&)", "g"); // g --> replaceAll
+
+    private GPRegEx() {
+    }
+
+    public static String printPrettyURL(String urlEncoding) {
+        return RE_FORMAT_QS.replace(urlEncoding, "\n$1");
+    }
 }

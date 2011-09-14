@@ -35,7 +35,24 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.FieldSet;
+import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
+import java.util.List;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.service.PublisherRemote;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
+import org.geosdi.geoplatform.gui.client.widget.fileupload.GPFileUploader;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 
 /**
  *
@@ -45,6 +62,9 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 public class UploadKmlWidget extends GeoPlatformWindow {
 
     private TreePanel tree;
+    private FieldSet panelSet;
+    private GPFileUploader fileUploader;
+    private Button buttonAdd;
 
     public UploadKmlWidget(boolean lazy, TreePanel theTree) {
         super(lazy);
@@ -52,17 +72,104 @@ public class UploadKmlWidget extends GeoPlatformWindow {
     }
 
     @Override
-    public void addComponent() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void show() {
+        if (!super.isInitialized()) {
+            super.init();
+        }
+        super.show();
     }
 
     @Override
     public void initSize() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        super.setSize(330, 170);
     }
 
     @Override
     public void setWindowProperties() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        super.setHeading("Upload KML file");
+        super.setResizable(false);
+    }
+
+    @Override
+    public void reset() {
+        fileUploader.getComponent().reset();
+        buttonAdd.disable();
+    }
+
+    @Override
+    public void addComponent() {
+        panelSet = new FieldSet();
+        panelSet.setHeading("Load KML from URL");
+
+        FormLayout layout = new FormLayout();
+        layout.setLabelWidth(40);
+        panelSet.setLayout(layout);
+        this.add(panelSet);
+
+        fileUploader = new GPFileUploader("UploadKml", GPExtensions.KML);
+        fileUploader.getButtonSubmit().setVisible(false);
+        panelSet.add(fileUploader.getComponent());
+
+        this.addFooterButton();
+    }
+
+    private void addFooterButton() {
+        buttonAdd = new Button("Add", BasicWidgetResources.ICONS.done());
+        buttonAdd.addSelectionListener(new SelectionListener<ButtonEvent>() {
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                if (tree.getSelectionModel().getSelectedItem() instanceof AbstractFolderTreeNode) {
+                    //expander.checkNodeState();
+                    List<String> layersName = new ArrayList<String>();
+//                    for (PreviewLayer layer : layerList) {
+//                        layersName.add(layer.getName());
+//                    }
+                    PublisherRemote.Util.getInstance().publishLayerPreview(layersName, new AsyncCallback<Object>() {
+
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            if (caught.getCause() instanceof GPSessionTimeout) {
+//                                GPHandlerManager.fireEvent(new GPLoginEvent(publishShapePreviewEvent));
+                            } else {
+                                GeoPlatformMessage.errorMessage("Error Publishing",
+                                        "An error occurred while making the requested connection.\n"
+                                        + "Verify network connections and try again."
+                                        + "\nIf the problem persists contact your system administrator.");
+                                LayoutManager.getInstance().getStatusMap().setStatus(
+                                        "Error Publishing previewed shape.",
+                                        EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                                System.out.println("Error Publishing previewed shape: " + caught.toString()
+                                        + " data: " + caught.getMessage());
+                            }
+                        }
+
+                        @Override
+                        public void onSuccess(Object result) {
+//                            LayerHandlerManager.fireEvent(new AddRasterFromPublisherEvent(layerList));
+                            reset();
+//                            LayoutManager.getInstance().getStatusMap().setStatus(
+//                                    "Shape\\s published successfully: remember to save the new tree state.",
+//                                    EnumSearchStatus.STATUS_SEARCH.toString());
+                        }
+                    });
+                } else {
+                    GeoPlatformMessage.alertMessage("Upload KML",
+                            "You can put layers into Folders only.\n"
+                            + "Please select the correct node from the tree.");
+                }
+            }
+        });
+        buttonAdd.disable();
+        super.addButton(this.buttonAdd);
+        Button resetButton = new Button("Reset", BasicWidgetResources.ICONS.cancel());
+        resetButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                reset();
+            }
+        });
+        super.addButton(resetButton);
     }
 }

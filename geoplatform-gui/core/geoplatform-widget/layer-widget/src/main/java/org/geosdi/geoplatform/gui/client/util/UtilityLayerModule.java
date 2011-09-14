@@ -35,11 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.util;
 
-import com.google.gwt.regexp.shared.RegExp;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.geosdi.geoplatform.gui.client.widget.form.GetMap;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
@@ -48,20 +46,6 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @email nazzareno.sileno@geosdi.org
  */
 public class UtilityLayerModule {
-
-    /**
-     * Regular Expressions for Query String of a WMS URL
-     * Note: the whitespace must not be present
-     */
-    // Fields required
-    public static final RegExp RE_REQUEST = RegExp.compile(GetMap.REQUEST + "=GetMap");
-    public static final RegExp RE_VERSION = RegExp.compile(GetMap.VERSION + "=1\\.(0\\.0|1\\.0|1\\.1)");
-    public static final RegExp RE_LAYERS = RegExp.compile(GetMap.LAYERS + "=\\w+(,\\w+)*");
-    public static final RegExp RE_SRS = RegExp.compile(GetMap.SRS + "=\\w+(-\\w+)?:\\d+");
-    public static final RegExp RE_BBOX = RegExp.compile(GetMap.BBOX + "=-?\\d+(\\.\\d+)?(,-?\\d+(\\.\\d+)?){3}");
-    public static final RegExp RE_WIDTH = RegExp.compile(GetMap.WIDTH + "=\\d+");
-    public static final RegExp RE_HEIGHT = RegExp.compile(GetMap.HEIGHT + "=\\d+");
-    public static final RegExp RE_FORMAT = RegExp.compile(GetMap.FORMAT + "=image/(png|gif|jpeg)");
 
     public static String getJsonFormat(List<GPBeanTreeModel> layerList) {
         List<GPLayerBean> layers = new ArrayList<GPLayerBean>();

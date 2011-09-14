@@ -33,20 +33,30 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.icons;
+package org.geosdi.geoplatform.gui.client.action;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.ImageBundle;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
+import org.geosdi.geoplatform.gui.client.PublisherResources;
+import org.geosdi.geoplatform.gui.client.widget.UploadKmlWidget;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public interface PublisherIcons extends ImageBundle {
+public class UploadKmlTreeAction extends ToolbarLayerTreeAction {
 
-    @Resource("uploadShape.png")
-    AbstractImagePrototype uploadShape();
+    private UploadKmlWidget kmlWidget;
 
-    @Resource("kml-file.png")
-    AbstractImagePrototype previewKML(); // uploadKML()
+    public UploadKmlTreeAction(TreePanel theTree) {
+        super(theTree, PublisherResources.ICONS.previewKML(), "Upload KML");
+        this.kmlWidget = new UploadKmlWidget(true, theTree);
+    }
+
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        this.kmlWidget.show();
+    }
 }

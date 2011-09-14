@@ -46,7 +46,7 @@ import org.gwtopenmaps.openlayers.client.layer.OSM;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class ShapePreviewWidget extends GPMapPreviewWidget {
+public class PreviewWidget extends GPMapPreviewWidget {
 
     @Override
     public MapOptions createMapPreviewOption() {

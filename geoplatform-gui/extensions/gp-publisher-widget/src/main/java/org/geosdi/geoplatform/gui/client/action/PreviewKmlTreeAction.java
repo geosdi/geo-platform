@@ -33,12 +33,13 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.client.action;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.PublisherResources;
+import org.geosdi.geoplatform.gui.client.widget.GPKmlWidget;
 import org.geosdi.geoplatform.gui.client.widget.UploadKmlWidget;
 
 /**
@@ -46,13 +47,13 @@ import org.geosdi.geoplatform.gui.client.widget.UploadKmlWidget;
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class UploadKmlTreeAction extends ToolbarLayerTreeAction {
+public class PreviewKmlTreeAction extends ToolbarLayerTreeAction {
 
-    private UploadKmlWidget kmlWidget;
+    private GPKmlWidget kmlWidget;
 
-    public UploadKmlTreeAction(TreePanel theTree) {
-        super(theTree, LayerResources.ICONS.uploadKML(), "Upload KML");
-        this.kmlWidget = new UploadKmlWidget(true, theTree);
+    public PreviewKmlTreeAction(TreePanel theTree) {
+        super(theTree, PublisherResources.ICONS.previewKML(), "Preview KML");
+        this.kmlWidget = new GPKmlWidget(true);
     }
 
     @Override

@@ -53,12 +53,13 @@ import org.springframework.stereotype.Component;
 public class PublisherFileUtils {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
     private String TMP_DIR_PATH = System.getProperty("java.io.tmpdir");
     private File pbDir;
 
     public File createFileWithUniqueName(String fileName) {
-        return new File(pbDir.getAbsolutePath() + File.separator + fileName + Long.toString(
-                System.nanoTime()));
+        return new File(pbDir.getAbsolutePath() + File.separator + fileName
+                + Long.toString(System.nanoTime()));
     }
 
     @PostConstruct

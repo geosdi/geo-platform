@@ -22,7 +22,9 @@
     <source path="utility" />
     <source path="factory" />
     <source path="exception" />
+    <source path="regex" />
     
-    <servlet path="/GeoPlatformOGCRemote" class="org.geosdi.geoplatform.gui.server.gwt.GeoPlatformOGCRemoteImpl" />
+    <servlet path="/GeoPlatformOGCRemote"
+             class="org.geosdi.geoplatform.gui.server.gwt.GeoPlatformOGCRemoteImpl" />
 	
 </module>

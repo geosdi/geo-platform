@@ -48,6 +48,7 @@ import com.google.gwt.core.client.EntryPoint;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionCreator;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionRegistar;
+import org.geosdi.geoplatform.gui.client.action.PreviewKmlTreeAction;
 import org.geosdi.geoplatform.gui.client.action.PrintLayersAction;
 import org.geosdi.geoplatform.gui.client.action.UploadShapeAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToKML;
@@ -56,7 +57,7 @@ import org.geosdi.geoplatform.gui.client.action.menu.ExportoToShpZip;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToTIFF;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddFolderTreeAction;
-import org.geosdi.geoplatform.gui.client.action.toolbar.UploadKmlTreeAction;
+import org.geosdi.geoplatform.gui.client.action.UploadKmlTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddRasterTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.LoadWmsGetMapFromUrlTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddVectorTreeAction;
@@ -217,7 +218,7 @@ public class LayerWidgetUI implements EntryPoint {
                     @Override
                     public GeoPlatformToolbarAction createActionTool(
                             TreePanel tree) {
-                        PrintLayersAction action = new PrintLayersAction(tree);
+                        ToolbarLayerTreeAction action = new PrintLayersAction(tree);
                         setAction(action);
                         return action;
                     }
@@ -229,7 +230,7 @@ public class LayerWidgetUI implements EntryPoint {
                     @Override
                     public GeoPlatformToolbarAction createActionTool(
                             TreePanel tree) {
-                        UploadShapeAction action = new UploadShapeAction(tree);
+                        ToolbarLayerTreeAction action = new UploadShapeAction(tree);
                         setAction(action);
                         return action;
                     }
@@ -241,31 +242,43 @@ public class LayerWidgetUI implements EntryPoint {
                     @Override
                     public GeoPlatformToolbarAction createActionTool(
                             TreePanel tree) {
-                        LoadWmsGetMapFromUrlTreeAction action = new LoadWmsGetMapFromUrlTreeAction(tree);
+                        ToolbarLayerTreeAction action = new LoadWmsGetMapFromUrlTreeAction(tree);
                         setAction(action);
                         return action;
                     }
                 });
 
-        ToolbarTreeActionRegistar.put(ToolbarTreeClientTool.TOOLBAR_LOAD_KML_FROM_URL,
+//        ToolbarTreeActionRegistar.put(ToolbarTreeClientTool.TOOLBAR_LOAD_KML_FROM_URL,
+//                new ToolbarTreeActionCreator() {
+//
+//                    @Override
+//                    public GeoPlatformToolbarAction createActionTool(
+//                            TreePanel tree) {
+//                        ToolbarLayerTreeAction action = new LoadKmlFromUrlTreeAction(tree);
+//                        setAction(action);
+//                        return action;
+//                    }
+//                });
+//
+//        ToolbarTreeActionRegistar.put(ToolbarTreeClientTool.TOOLBAR_UPLOAD_KML,
+//                new ToolbarTreeActionCreator() {
+//
+//                    @Override
+//                    public GeoPlatformToolbarAction createActionTool(
+//                            TreePanel tree) {
+//                        ToolbarLayerTreeAction action = new UploadKmlTreeAction(tree);
+//                        setAction(action);
+//                        return action;
+//                    }
+//                });
+
+        ToolbarTreeActionRegistar.put(ToolbarTreeClientTool.TOOLBAR_PREVIEW_KML_FROM_URL,
                 new ToolbarTreeActionCreator() {
 
                     @Override
                     public GeoPlatformToolbarAction createActionTool(
                             TreePanel tree) {
-                        LoadKmlFromUrlTreeAction action = new LoadKmlFromUrlTreeAction(tree);
-                        setAction(action);
-                        return action;
-                    }
-                });
-
-        ToolbarTreeActionRegistar.put(ToolbarTreeClientTool.TOOLBAR_UPLOAD_KML,
-                new ToolbarTreeActionCreator() {
-
-                    @Override
-                    public GeoPlatformToolbarAction createActionTool(
-                            TreePanel tree) {
-                        UploadKmlTreeAction action = new UploadKmlTreeAction(tree);
+                        ToolbarLayerTreeAction action = new PreviewKmlTreeAction(tree);
                         setAction(action);
                         return action;
                     }

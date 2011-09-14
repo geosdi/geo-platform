@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.FileUploadField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FormPanel;
@@ -58,7 +59,8 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 public class GPFileUploader {
 
     private FormPanel formPanel = new FormPanel();
-    private FileUpload upload;
+    private FileUpload fileUpload;
+    private Button buttonSubmit;
     private String htmlResult;
     private UploadPreviewEvent previewEvent = new UploadPreviewEvent();
 
@@ -75,31 +77,35 @@ public class GPFileUploader {
         formPanel.setAction(GWT.getModuleBaseURL() + uploadAction);
         formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
         formPanel.setMethod(FormPanel.METHOD_POST);
+
         VerticalPanel panel = new VerticalPanel();
         formPanel.setWidget(panel);
-        upload = new FileUpload();
-        upload.setName("uploadFormElement");
-        panel.add(upload);
-        panel.add(new Button("Submit", new SelectionListener<ButtonEvent>() {
+
+        fileUpload = new FileUpload();
+        fileUpload.setName("uploadFormElement");
+        panel.add(fileUpload);
+
+        buttonSubmit = new Button("Submit", new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
                 formPanel.submit();
-                if ((upload.getFilename() != null)
-                        && isValidExtensions(upload.getFilename(), extensions)) {
+                if ((fileUpload.getFilename() != null)
+                        && isValidExtensions(fileUpload.getFilename(), extensions)) {
                     LayoutManager.getInstance().getStatusMap().setBusy("Upload in progress...");
                 }
             }
-        }));
+        });
+        panel.add(getButtonSubmit());
 
-        // // Add an event handler to the form.
+        // Add an event handler to the form.
         formPanel.addSubmitHandler(new FormPanel.SubmitHandler() {
 
             @Override
             public void onSubmit(SubmitEvent event) {
                 // This event is fired just before the form is submitted. We can
-                // take this opportunity to perform validation.
-                if (!isValidExtensions(upload.getFilename(), extensions)) {
+                // take this opportunity to perform validation
+                if (!isValidExtensions(fileUpload.getFilename(), extensions)) {
                     LayoutManager.getInstance().getStatusMap().setStatus(
                             "Failed to Upload File.", EnumSearchStatus.STATUS_NO_SEARCH.toString());
                     GeoPlatformMessage.errorMessage("Upload Error", "This kind of file isn't allowed!");
@@ -116,7 +122,7 @@ public class GPFileUploader {
                 // When the form submission is successfully completed,
                 // this event is fired. Assuming the service returned a
                 // response of type text/html, we can get the result text here 
-                // (see the FormPanel documentation for further explanation).
+                // (see the FormPanel documentation for further explanation)
                 htmlResult = event.getResults();
                 //Execute this code only if the session is still alive
                 if (!htmlResult.contains("Session Timeout")) {
@@ -145,12 +151,19 @@ public class GPFileUploader {
         });
     }
 
-    private boolean isValidExtensions(String fileName, GPExtensions... extensions) {
+    public boolean isValidExtensions(String fileName, GPExtensions... extensions) {
         for (GPExtensions gPExtensions : extensions) {
-            if (fileName.endsWith(gPExtensions.toString())) {
+            if (fileName.toUpperCase().endsWith("." + gPExtensions.toString())) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * @return the buttonSubmit
+     */
+    public Button getButtonSubmit() {
+        return buttonSubmit;
     }
 }

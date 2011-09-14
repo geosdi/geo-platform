@@ -87,7 +87,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
     private TreePanel tree;
 //    private boolean mapInitialized;
     private ContentPanel centralPanel;
-    private ShapePreviewWidget shpPreviewWidget;
+    private PreviewWidget shpPreviewWidget;
     private GPFileUploader fileUploader;
     private FieldSet southPanel;
     private Image centralImage;
@@ -107,11 +107,11 @@ public class GPPublisherWidget extends GeoPlatformWindow
     @Override
     public void setWindowProperties() {
         super.setHeading("Shape Files Uploader");
-        setResizable(false);
-        setLayout(new BorderLayout());
-        setModal(false);
-        setCollapsible(true);
-        setPlain(true);
+        super.setResizable(false);
+        super.setLayout(new BorderLayout());
+        super.setModal(false);
+        super.setCollapsible(true);
+        super.setPlain(true);
 //        this.addListener(Events.Show, new Listener<WindowEvent>() {
 //
 //            @Override
@@ -131,20 +131,20 @@ public class GPPublisherWidget extends GeoPlatformWindow
         for (PreviewLayer previewLayer : previewLayers.getPreviewLayers()) {
             if (!previewLayer.getMessage().contains("Some problems")) {
                 previewLayer.setLayerType(GPLayerType.RASTER);
-                this.layerList.add(previewLayer);
+                layerList.add(previewLayer);
                 WMS wmsLayer = this.generateLayer(previewLayer);
-                this.shpPreviewWidget.getMapPreview().getMap().addLayer(wmsLayer);
+                shpPreviewWidget.getMapPreview().getMap().addLayer(wmsLayer);
             } else {
                 layerProblems.append(previewLayer.getTitle()).append("\n");
             }
         }
-        if (this.shpPreviewWidget.getMapPreview().getMap().getNumLayers() > 1) {
-            this.centralPanel.removeAll();
-            this.centralPanel.add(this.shpPreviewWidget.getMapPreview());
+        if (shpPreviewWidget.getMapPreview().getMap().getNumLayers() > 1) {
+            centralPanel.removeAll();
+            centralPanel.add(shpPreviewWidget.getMapPreview());
             shpPreviewWidget.getMapPreview().getMap().zoomToExtent(bounds);
             shpPreviewWidget.getMapPreview().getMap().updateSize();
-            this.centralPanel.layout();
-            this.publishButton.enable();
+            centralPanel.layout();
+            publishButton.enable();
         }
         if (layerProblems.length() != 0) {
             GeoPlatformMessage.alertMessage("Upload Shape Error",
@@ -167,7 +167,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
         Bounds layerBounds = new Bounds(lowerX, lowerY, upperX, upperY);
 
         layerBounds.transform(new Projection(previewLayer.getCrs()), new Projection(
-                this.shpPreviewWidget.getMapPreview().getMap().getProjection()));
+                shpPreviewWidget.getMapPreview().getMap().getProjection()));
         wmsParams.setMaxExtent(layerBounds);
 
         WMSOptions wmsOption = new WMSOptions();
@@ -179,36 +179,36 @@ public class GPPublisherWidget extends GeoPlatformWindow
     }
 
     private void updateMapBounds(Bounds layerBounds) {
-        if (this.bounds == null) {
-            this.bounds = layerBounds;
+        if (bounds == null) {
+            bounds = layerBounds;
         } else {
-            this.bounds.extend(layerBounds);
+            bounds.extend(layerBounds);
         }
     }
 
     @Override
     public void reset() {
-        this.centralPanel.removeAll();
-        this.centralPanel.add(this.centralImage);
-        this.centralPanel.layout();
-        this.publishButton.disable();
-        this.fileUploader.getComponent().reset();
-        this.shpPreviewWidget.getMapPreview().getMap().removeOverlayLayers();
-        this.bounds = null;
-        this.layerList.clear();
+        centralPanel.removeAll();
+        centralPanel.add(this.centralImage);
+        centralPanel.layout();
+        publishButton.disable();
+        fileUploader.getComponent().reset();
+        shpPreviewWidget.getMapPreview().getMap().removeOverlayLayers();
+        bounds = null;
+        layerList.clear();
     }
 
     @Override
     public void publishShapePreview() {
-        this.publishButton.fireEvent(Events.Select);
+        publishButton.fireEvent(Events.Select);
     }
 
     @Override
     public void addComponent() {
         this.addCentralPanel();
         this.addSouthPanel();
-        this.publishButton = new Button("Add on Tree", BasicWidgetResources.ICONS.done());
-        this.publishButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
+        publishButton = new Button("Add on Tree", BasicWidgetResources.ICONS.done());
+        publishButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -253,8 +253,8 @@ public class GPPublisherWidget extends GeoPlatformWindow
                 }
             }
         });
-        this.publishButton.disable();
-        super.addButton(this.publishButton);
+        publishButton.disable();
+        super.addButton(publishButton);
         Button resetButton = new Button("Reset", BasicWidgetResources.ICONS.cancel());
         resetButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
@@ -267,42 +267,41 @@ public class GPPublisherWidget extends GeoPlatformWindow
     }
 
     private void addCentralPanel() {
-        this.shpPreviewWidget = new ShapePreviewWidget();
-        this.centralPanel = new ContentPanel();
-        this.centralPanel.setHeaderVisible(false);
+        shpPreviewWidget = new PreviewWidget();
+        centralPanel = new ContentPanel();
+        centralPanel.setHeaderVisible(false);
         BorderLayoutData centerData = new BorderLayoutData(LayoutRegion.CENTER);
         centerData.setMargins(new Margins(5, 5, 0, 5));
-        this.centralImage = BasicWidgetResources.ICONS.geo_platform_logo().createImage();
-        this.centralPanel.add(this.centralImage);
-        super.add(this.centralPanel, centerData);
+        centralImage = BasicWidgetResources.ICONS.geo_platform_logo().createImage();
+        centralPanel.add(centralImage);
+        super.add(centralPanel, centerData);
     }
 
     private void addSouthPanel() {
-        this.fileUploader = new GPFileUploader("UploadServlet", GPExtensions.zip);
-        this.southPanel = new FieldSet();
-        this.southPanel.setHeight(78);
-        this.southPanel.setWidth(522);
-        this.southPanel.setLayout(new BorderLayout());
+        fileUploader = new GPFileUploader("UploadServlet", GPExtensions.ZIP);
+        southPanel = new FieldSet();
+        southPanel.setHeight(78);
+        southPanel.setWidth(522);
+        southPanel.setLayout(new BorderLayout());
 
         BorderLayoutData uploadMessageOnTop = new BorderLayoutData(LayoutRegion.NORTH);
         uploadMessageOnTop.setMargins(new Margins(3, 150, 0, 151));
         uploadMessageOnTop.setSize(13);
-        this.southPanel.add(this.uploadMessage, uploadMessageOnTop);
+        southPanel.add(uploadMessage, uploadMessageOnTop);
 
         BorderLayoutData centerFileUploader = new BorderLayoutData(LayoutRegion.CENTER);
         centerFileUploader.setMargins(new Margins(1, 150, 9, 151));
 
-        this.southPanel.add(this.fileUploader.getComponent(), centerFileUploader);
-        this.southPanel.setHeading("File uploader");
-        this.southPanel.add(this.southPanel);
+        southPanel.add(fileUploader.getComponent(), centerFileUploader);
+        southPanel.setHeading("File uploader");
         BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH, 100);
         southData.setMargins(new Margins(5, 20, 5, 20));
-        super.add(this.southPanel, southData);
+        super.add(southPanel, southData);
     }
 
     @Override
     public void show() {
-        if (!isInitialized()) {
+        if (!super.isInitialized()) {
             super.init();
         }
         super.show();

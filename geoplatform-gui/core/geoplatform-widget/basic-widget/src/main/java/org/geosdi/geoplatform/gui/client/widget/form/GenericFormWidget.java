@@ -74,11 +74,11 @@ public abstract class GenericFormWidget
      * Init the Widget
      */
     public void init() {
-        if (!isInitialized()) {
+        if (!initialized) {
             this.initializeWindow();
             this.initializeFormPanel();
-            this.add(this.formPanel);
-            this.initialized = true;
+            this.add(formPanel);
+            initialized = true;
         }
     }
 
@@ -100,9 +100,9 @@ public abstract class GenericFormWidget
     }
 
     private void initializeFormPanel() {
-        this.formPanel = new FormPanel();
-        this.formPanel.setFrame(true);
-        this.formPanel.setLayout(new FlowLayout());
+        formPanel = new FormPanel();
+        formPanel.setFrame(true);
+        formPanel.setLayout(new FlowLayout());
 
         initSizeFormPanel();
         addComponentToForm();
@@ -112,8 +112,8 @@ public abstract class GenericFormWidget
      * Set the correct Status Iconn Style
      */
     public void setStatus(String status, String message) {
-        this.saveStatus.setIconStyle(status);
-        this.saveStatus.setText(message);
+        saveStatus.setIconStyle(status);
+        saveStatus.setText(message);
     }
 
     public void reset() {

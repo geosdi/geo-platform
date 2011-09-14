@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.core.XDOM;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SliderEvent;
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.ComponentPlugin;
 import com.extjs.gxt.ui.client.widget.Slider;
@@ -49,6 +50,7 @@ import com.extjs.gxt.ui.client.widget.form.SliderField;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode.GPRasterKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
+import org.geosdi.geoplatform.gui.client.widget.binding.field.GPSliderField;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
 import org.geosdi.geoplatform.gui.client.widget.tab.DisplayLayersTabItem;
 import org.geosdi.geoplatform.gui.impl.map.event.OpacityLayerMapEvent;
@@ -63,7 +65,7 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean> {
 
     private Slider slider;
-    private SliderField sliderField;
+    private GPSliderField sliderField;
     private GPRasterOpacityFieldBinding opacityFieldBinding;
     private OpacityLayerMapEvent opacityEvent = new OpacityLayerMapEvent();
 
@@ -88,11 +90,10 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
             }
         });
 
-        sliderField = new SliderField(slider);
-        sliderField.setFieldLabel("Size");
-
-        sliderField = new SliderField(this.slider);
+        sliderField = new GPSliderField(this.slider);
         sliderField.setName(GPRasterKeyValue.OPACITY.toString());
+
+        sliderField.removeAllListeners();
 
         opacityFieldSet.add(sliderField);
 
@@ -120,11 +121,11 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
 
         slider.setMessage("{0}% opacity");
 
-        slider.addListener(Events.Change, new Listener<ComponentEvent>() {
+        slider.addListener(Events.Change, new Listener<SliderEvent>() {
 
             @Override
-            public void handleEvent(ComponentEvent be) {
-                opacityFieldBinding.setModelProperty(slider.getValue());
+            public void handleEvent(SliderEvent be) {
+                opacityFieldBinding.setModelProperty(be.getNewValue());
             }
         });
 
@@ -172,8 +173,8 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
 
         @Override
         public void setModelProperty(Object val) {
-            ((GPRasterBean) model).setOpacity(((Integer) val).floatValue() / 100);
-            opacityEvent.setLayerBean((GPRasterBean) model);
+            ((GPRasterBean) GPLayerDisplayBinding.this.getModel()).setOpacity(((Integer) val).floatValue() / 100);
+            opacityEvent.setLayerBean((GPRasterBean) GPLayerDisplayBinding.this.getModel());
             GPHandlerManager.fireEvent(opacityEvent);
         }
 
@@ -185,8 +186,8 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
          */
         @Override
         public void updateField(boolean updateOriginalValue) {
-            Float opacity = new Float(((GPRasterBean) model).getOpacity());
-            ((SliderField) field).setValue(opacity.intValue() * 100);
+            Float opacity = new Float(((GPRasterBean) GPLayerDisplayBinding.this.getModel()).getOpacity() * 100);
+            ((SliderField) field).setValue(opacity.intValue());
         }
     }
 }

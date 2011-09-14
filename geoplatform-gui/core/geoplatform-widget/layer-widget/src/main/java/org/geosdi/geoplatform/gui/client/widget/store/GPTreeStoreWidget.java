@@ -244,6 +244,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         raster.setBbox(rasterBean.getBbox());
         raster.setTitle(rasterBean.getTitle());
         raster.setChecked(false);
+        raster.setOpacity(1.0f);
         raster.setCrs(rasterBean.getCrs());
         raster.setDataSource(rasterBean.getDataSource());
         raster.setLabel(rasterBean.getLabel());
@@ -260,6 +261,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         raster.setBbox(layer.getBbox());
         raster.setTitle(layer.getTitle());
         raster.setChecked(false);
+        raster.setOpacity(1.0f);
         raster.setCrs(layer.getCrs());
         raster.setDataSource(layer.getDataSource());
         raster.setLabel(layer.getTitle());

@@ -77,7 +77,6 @@ class WMSServiceImpl {
     final private Logger logger = LoggerFactory.getLogger(WMSServiceImpl.class);
     // DAO
     private GPServerDAO serverDao;
-    
     private static final String GEB = "earthbuilder.google.com";
 
     /**
@@ -86,17 +85,6 @@ class WMSServiceImpl {
      */
     public void setServerDao(GPServerDAO serverDao) {
         this.serverDao = serverDao;
-    }
-
-    public long insertServer(GeoPlatformServer server) {
-        /** IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER **/
-        GeoPlatformServer serverSearch = serverDao.findByServerUrl(server.getServerUrl());
-        if (serverSearch != null) {
-            return serverSearch.getId();
-        }
-
-        serverDao.persist(server);
-        return server.getId();
     }
 
     public long updateServer(GeoPlatformServer server)
@@ -180,20 +168,44 @@ class WMSServiceImpl {
         return serverDTO;
     }
 
-    public ServerDTO saveServer(String aliasServerName, String serverUrl, String token)
+    public long insertServer(GeoPlatformServer server) {
+        /** IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER **/
+        GeoPlatformServer serverSearch = serverDao.findByServerUrl(server.getServerUrl());
+        if (serverSearch != null) {
+            return serverSearch.getId();
+        }
+
+        serverDao.persist(server);
+        return server.getId();
+    }
+
+    private boolean isURLServerAlreadyExists(String serverUrl) {
+        return serverDao.findByServerUrl(serverUrl) == null ? false : true;
+    }
+
+    public ServerDTO saveServer(Long id, String aliasServerName, String serverUrl, String token)
             throws ResourceNotFoundFault {
         ServerDTO serverDTO = null;
-        
+
         WMSCapabilities wmsCapabilities = this.getWMSCapabilities(serverUrl, token);
 
-        // Retrieve the server by URL
-        GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
-        if (server == null) { // Create and Save a new Server
+        GeoPlatformServer server = null;
+        if(id != null){
+            server = serverDao.find(id);
+        }
+        if (server == null && !this.isURLServerAlreadyExists(serverUrl)) {
+            // Create a new Server
             Service service = wmsCapabilities.getService();
             server = this.createWMSServerFromService(serverUrl, service);
             server.setAliasName(aliasServerName);
-            serverDao.persist(server);
+        } else if (server != null) {
+            //Updating fields
+            server.setAliasName(aliasServerName);
+            server.setServerUrl(serverUrl);
+        } else {
+            throw new IllegalArgumentException("Duplicated server url");
         }
+        serverDao.persist(server);
         serverDTO = new ServerDTO(server);
         List<RasterLayerDTO> layers = convertToLayerList(
                 wmsCapabilities.getLayer(), serverUrl);
@@ -207,7 +219,7 @@ class WMSServiceImpl {
         URL serverURL = null;
         WebMapServer wms = null;
         WMSCapabilities cap = null;
-        
+
         String urlServerEdited = editServerUrl(urlServer, token);
 
         try {
@@ -230,13 +242,13 @@ class WMSServiceImpl {
         }
         return cap;
     }
-    
+
     private String editServerUrl(String urlServer, String token) {
         StringBuilder stringBuilder = new StringBuilder(urlServer);
         if (!urlServer.contains("?")) {
             stringBuilder.append("?request=GetCapabilities");
         }
-        
+
         if (urlServer.contains(GEB)) {
             stringBuilder.append("&access_token=");
             stringBuilder.append(token);

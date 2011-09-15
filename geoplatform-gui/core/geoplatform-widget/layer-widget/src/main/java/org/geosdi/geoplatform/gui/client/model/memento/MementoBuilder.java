@@ -100,6 +100,7 @@ public class MementoBuilder {
         memento.setLayerType(layer.getLayerType());
         memento.setSrs(layer.getCrs());
         memento.setTitle(layer.getTitle());
+        memento.setAlias(layer.getAlias());
         memento.setzIndex(layer.getzIndex());
         // Bbox
         memento.setLowerLeftX(layer.getBbox().getLowerLeftX());

@@ -35,10 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento;
 
+import java.util.Iterator;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.model.memento.GPCache;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.observable.Observable;
 
 /**
@@ -56,6 +58,17 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
     }
 
     private GPLayerSaveCache() {
+    }
+    
+    public MementoLayerProperties getAssociatedMemento(GPLayerTreeModel layer){
+        for (Iterator<IMemento<ISave>> it = this.iterator(); it.hasNext();) {
+            IMemento<ISave> iMemento = it.next();
+            if(iMemento instanceof MementoLayerProperties && 
+                    ((MementoLayerProperties)iMemento).getRefBaseElement().equals(layer)){
+                return (MementoLayerProperties)iMemento;
+            }
+        }
+        return new MementoLayerProperties();
     }
 
     @Override

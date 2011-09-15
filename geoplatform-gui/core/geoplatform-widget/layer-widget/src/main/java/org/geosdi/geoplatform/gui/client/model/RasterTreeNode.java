@@ -97,7 +97,6 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
 
     @Override
     public List<String> getStyles() {
-        // TODO Auto-generated method stub
         return this.styles;
     }
 
@@ -120,7 +119,6 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
 
     @Override
     public void setStyles(List<String> styles) {
-        // TODO Auto-generated method stub
         this.styles = styles;
     }
 
@@ -131,7 +129,6 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
      */
     @Override
     public AbstractImagePrototype getIcon() {
-        // TODO Auto-generated method stub
         return BasicWidgetResources.ICONS.raster();
     }
 

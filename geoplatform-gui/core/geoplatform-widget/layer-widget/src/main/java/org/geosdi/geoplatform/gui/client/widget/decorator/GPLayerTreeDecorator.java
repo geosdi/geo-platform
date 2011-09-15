@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.widget.decorator;
 
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.layers.decorator.GPTreeLabelHandler;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;

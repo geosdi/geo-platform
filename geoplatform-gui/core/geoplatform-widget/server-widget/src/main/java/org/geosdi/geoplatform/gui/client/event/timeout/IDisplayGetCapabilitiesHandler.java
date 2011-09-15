@@ -46,6 +46,6 @@ public interface IDisplayGetCapabilitiesHandler extends EventHandler{
     
     Type<IDisplayGetCapabilitiesHandler> TYPE = new Type<IDisplayGetCapabilitiesHandler>();
     
-    public void manageAddServerButton();
+    public void activateManageServersButton();
     
 }

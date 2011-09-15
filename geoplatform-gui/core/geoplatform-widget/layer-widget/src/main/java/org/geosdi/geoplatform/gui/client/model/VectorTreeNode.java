@@ -70,13 +70,11 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
 
     @Override
     public String getFeatureNameSpace() {
-        // TODO Auto-generated method stub
         return featureNameSpace;
     }
 
     @Override
     public void setFeatureNameSpace(String featureNameSpace) {
-        // TODO Auto-generated method stub
         this.featureNameSpace = featureNameSpace;
     }
 
@@ -87,7 +85,6 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
      */
     @Override
     public AbstractImagePrototype getIcon() {
-        // TODO Auto-generated method stub
         switch (getLayerType()) {
             case POINT:
                 return LayerResources.ICONS.point();

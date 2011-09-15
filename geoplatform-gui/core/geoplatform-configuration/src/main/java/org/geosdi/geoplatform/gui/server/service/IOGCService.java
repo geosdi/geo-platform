@@ -59,5 +59,5 @@ public interface IOGCService {
             HttpServletRequest httpServletRequest, long idServer) throws GeoPlatformException;
 
     public GPServerBeanModel insertServer(HttpServletRequest httpServletRequest, 
-            String aliasServerName, String urlServer) throws GeoPlatformException;
+            Long id, String aliasServerName, String urlServer) throws GeoPlatformException;
 }

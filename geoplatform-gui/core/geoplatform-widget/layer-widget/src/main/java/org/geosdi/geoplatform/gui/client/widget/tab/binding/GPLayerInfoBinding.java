@@ -144,6 +144,7 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         @Override
         public void setModelProperty(Object val) {
             ((GPLayerBean) model).setAlias(val != null ? (String) val : "");
+            //TODO: add memento code for alias changes
             WidgetPropertiesHandlerManager.fireEvent(labelEvent);
         }
     }

@@ -270,7 +270,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
 
         private void saveServer() {
             GeoPlatformOGCRemote.Util.getInstance().insertServer(
-                    serverNameTextField.getValue().trim(),
+                    null, serverNameTextField.getValue().trim(),
                     serverUrlTextField.getValue().trim(),
                     new AsyncCallback<GPServerBeanModel>() {
 

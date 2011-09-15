@@ -53,6 +53,8 @@ public abstract class AbstractMementoLayer<T extends GPLayerTreeModel> extends A
     private long idFolderParent;
     private String abstractText;
     private String title;
+    private String alias;
+    private float opacity;
     private String dataSource;
     private String srs;
     /* GPBBox elements */
@@ -109,6 +111,22 @@ public abstract class AbstractMementoLayer<T extends GPLayerTreeModel> extends A
 
     public void setLayerName(String layerName) {
         this.layerName = layerName;
+    }
+    
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public float getOpacity() {
+        return opacity;
+    }
+
+    public void setOpacity(float opacity) {
+        this.opacity = opacity;
     }
 
     public GPLayerType getLayerType() {

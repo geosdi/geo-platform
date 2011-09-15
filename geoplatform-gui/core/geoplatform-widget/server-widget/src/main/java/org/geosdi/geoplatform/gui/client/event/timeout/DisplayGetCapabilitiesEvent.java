@@ -51,7 +51,7 @@ public class DisplayGetCapabilitiesEvent extends GwtEvent<IDisplayGetCapabilitie
 
     @Override
     protected void dispatch(IDisplayGetCapabilitiesHandler handler) {
-        handler.manageAddServerButton();
+        handler.activateManageServersButton();
     }
     
 }

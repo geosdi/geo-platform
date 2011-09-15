@@ -175,6 +175,7 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
         public void setModelProperty(Object val) {
             ((GPRasterBean) GPLayerDisplayBinding.this.getModel()).setOpacity(((Integer) val).floatValue() / 100);
             opacityEvent.setLayerBean((GPRasterBean) GPLayerDisplayBinding.this.getModel());
+            //TODO: add memento code for alias changes
             GPHandlerManager.fireEvent(opacityEvent);
         }
 

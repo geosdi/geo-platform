@@ -505,7 +505,8 @@ public interface GeoPlatformService {
 
     @Post
     @HttpResource(location = "/server")
-    ServerDTO saveServer(@WebParam(name = "aliasServerName") String aliasServerName,
+    ServerDTO saveServer(@WebParam(name = "id") Long id,
+            @WebParam(name = "aliasServerName") String aliasServerName,
         @WebParam(name = "serverUrl") String serverUrl,
         @WebParam(name = "token") String token)
             throws ResourceNotFoundFault;

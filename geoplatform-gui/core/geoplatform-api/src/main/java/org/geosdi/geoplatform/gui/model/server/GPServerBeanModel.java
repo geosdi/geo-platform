@@ -64,11 +64,9 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
      * 
      */
     private static final long serialVersionUID = 3734113612153640102L;
-    private long id;
-    private String urlServer;
+    private Long id;
     private String name;
     private String title;
-    private String alias;
     private String contactPerson;
     private String contactOrganization;
     private ArrayList<? extends GPLayerGrid> layers;
@@ -76,14 +74,14 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
     /**
      * @return the id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -91,15 +89,14 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
      * @return the urlServer
      */
     public String getUrlServer() {
-        return urlServer;
+        return super.get(GPServerKeyValue.URL_SERVER.getValue());
     }
 
     /**
      * @param urlServer the urlServer to set
      */
     public void setUrlServer(String urlServer) {
-        this.urlServer = urlServer;
-        set(GPServerKeyValue.URL_SERVER.getValue(), this.urlServer);
+        set(GPServerKeyValue.URL_SERVER.getValue(), urlServer);
     }
 
     /**
@@ -121,15 +118,14 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
      * @return the alias
      */
     public String getAlias() {
-        return alias;
+        return super.get(GPServerKeyValue.ALIAS.getValue());
     }
 
     /**
      * @param alias the alias to set
      */
     public void setAlias(String alias) {
-        this.alias = alias;
-        set(GPServerKeyValue.ALIAS.getValue(), this.alias);
+        set(GPServerKeyValue.ALIAS.getValue(), alias);
     }
     
     /**
@@ -216,14 +212,15 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 7;
+        hash = 67 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
 
     @Override
     public String toString() {
-        return "GPServerDTO{" + "id = " + id + "alias = " + alias + ", urlServer = " + urlServer + ", name =  "
+        return "GPServerDTO{" + "id = " + id + ", alias = " + GPServerKeyValue.ALIAS.getValue() + 
+                ", urlServer = " + GPServerKeyValue.URL_SERVER.getValue() + ", name =  "
                 + name + ", title = " + title + ", contactPerson = " + contactPerson
                 + ", contactOrganization = " + contactOrganization + '}';
     }

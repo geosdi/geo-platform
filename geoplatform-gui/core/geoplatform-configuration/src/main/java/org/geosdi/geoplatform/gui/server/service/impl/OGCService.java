@@ -95,7 +95,7 @@ public class OGCService implements IOGCService {
             throws GeoPlatformException {
         try {
             HttpSession session = httpServletRequest.getSession();
-            String token = (String)session.getAttribute("GOOGLE_TOKEN");
+            String token = (String) session.getAttribute("GOOGLE_TOKEN");
 
             RequestById req = new RequestById(idServer);
 
@@ -111,20 +111,20 @@ public class OGCService implements IOGCService {
     }
 
     @Override
-    public GPServerBeanModel insertServer(HttpServletRequest httpServletRequest, 
-            String aliasServerName, String urlServer) throws GeoPlatformException {
+    public GPServerBeanModel insertServer(HttpServletRequest httpServletRequest,
+            Long id, String aliasServerName, String urlServer) throws GeoPlatformException {
+        ServerDTO serverWS = null;
         try {
             HttpSession session = httpServletRequest.getSession();
-            String token = (String)session.getAttribute("GOOGLE_TOKEN");
-            
-            ServerDTO serverWS = this.geoPlatformServiceClient.saveServer(
-                    aliasServerName, urlServer, token);
+            String token = (String) session.getAttribute("GOOGLE_TOKEN");
+            serverWS = this.geoPlatformServiceClient.saveServer(
+                    id, aliasServerName, urlServer, token);
 
-            return this.dtoServerConverter.convertServerWS(serverWS);
         } catch (ResourceNotFoundFault ex) {
             logger.error("Inser Server Error : " + ex);
             throw new GeoPlatformException(ex);
         }
+        return this.dtoServerConverter.convertServerWS(serverWS);
     }
 
     private GPUser getUserAlreadyFromSession(HttpServletRequest httpServletRequest) {

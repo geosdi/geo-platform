@@ -58,7 +58,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.event.timeout.DisplayGetCapabilitiesEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.IDisplayGetCapabilitiesHandler;
-import org.geosdi.geoplatform.gui.client.widget.form.AddServerWidget;
+import org.geosdi.geoplatform.gui.client.widget.form.ManageServerWidget;
 import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
@@ -79,11 +79,11 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
     public final static String ROLE_ADMIN = "ROLE_ADMIN";
     private ToolBar toolbar;
     private ComboBox<GPServerBeanModel> comboServer;
-    private ListStore<GPServerBeanModel> store;
+    private ListStore<GPServerBeanModel> store = new ListStore<GPServerBeanModel>();
     private SearchStatus searchStatus;
-    private Button addServer;
+    private Button manageServersButton;
     private GridLayersWidget gridWidget;
-    private AddServerWidget addServerWidget;
+    private ManageServerWidget manageServersWidget;
     private PerformGetcapabilities loadcapabilities;
 
     /**
@@ -94,7 +94,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         TimeoutHandlerManager.addHandler(IDisplayGetCapabilitiesHandler.TYPE, this);
         init();
         this.gridWidget = theGridWidget;
-        this.addServerWidget = new AddServerWidget(this);
+        this.manageServersWidget = new ManageServerWidget(this, true);
         this.loadcapabilities = new PerformGetcapabilities();
     }
 
@@ -104,7 +104,6 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
     }
 
     private void createComponents() {
-        this.store = new ListStore<GPServerBeanModel>();
         this.comboServer = new ComboBox<GPServerBeanModel>();
 
         comboServer.setEmptyText("Select a Server...");
@@ -125,20 +124,20 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
             }
         });
 
-        this.addServer = new Button("Add Server",
+        this.manageServersButton = new Button("Manage Servers",
                 ServerWidgetResources.ICONS.addServer(),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-                        addServerWidget.showForm();
+                        manageServersWidget.show();
                     }
                 });
-        this.manageAddServerButton();
+        this.activateManageServersButton();
     }
 
     @Override
-    public void manageAddServerButton() {
+    public void activateManageServersButton() {
         ServerRemoteImpl.Util.getInstance().getUserAuthorities(new AsyncCallback<List<String>>() {
 
             @Override
@@ -146,7 +145,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                 if (caught.getCause() instanceof GPSessionTimeout) {
                     GPHandlerManager.fireEvent(new GPLoginEvent(new DisplayGetCapabilitiesEvent()));
                 } else {
-                    addServer.setEnabled(false);
+                    manageServersButton.setEnabled(false);
                     GeoPlatformMessage.errorMessage("Error",
                             "An error occurred while making the requested operation.\n"
                             + "Verify network connections and try again."
@@ -161,11 +160,11 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
             @Override
             public void onSuccess(List<String> result) {
-                addServer.setEnabled(false);
+                manageServersButton.setEnabled(false);
                 for (String role : result) {
                     System.out.println("Role: " + role);
                     if (role.equals(ROLE_ADMIN)) {
-                        addServer.setEnabled(true);
+                        manageServersButton.setEnabled(true);
                         return;
                     }
                 }
@@ -175,18 +174,13 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
     private void createToolBar() {
         this.toolbar = new ToolBar();
-
         this.searchStatus = new SearchStatus();
         searchStatus.setAutoWidth(true);
-
         this.toolbar.add(this.searchStatus);
-
         this.toolbar.add(this.comboServer);
         this.toolbar.add(new SeparatorToolItem());
-
         toolbar.add(new FillToolItem());
-
-        this.toolbar.add(this.addServer);
+        this.toolbar.add(this.manageServersButton);
     }
 
     /**
@@ -194,11 +188,11 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      * @return String
      */
     private native String getTemplate() /*-{
-        return  [
-            '<tpl for=".">',
-                '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{alias}</div>',
-            '</tpl>'
-        ].join("");
+    return  [
+    '<tpl for=".">',
+    '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{alias}</div>',
+    '</tpl>'
+    ].join("");
     }-*/;
 
     /**
@@ -345,5 +339,9 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                         }
                     });
         }
+    }
+
+    public ListStore<GPServerBeanModel> getStore() {
+        return this.store;
     }
 }

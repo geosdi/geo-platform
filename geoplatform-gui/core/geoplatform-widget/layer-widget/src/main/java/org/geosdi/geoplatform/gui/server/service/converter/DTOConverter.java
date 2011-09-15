@@ -45,7 +45,6 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.gui.client.model.memento.AbstractMementoLayer;
 import org.geosdi.geoplatform.gui.client.model.memento.MementoFolder;
@@ -143,6 +142,7 @@ public class DTOConverter {
         layer.setId(layerDTO.getId());
         layer.setLayerName(layerDTO.getName());
         layer.setTitle(layerDTO.getTitle());
+        layer.setAlias(layerDTO.getAlias());
         // layer.setzIndex(layerDTO.getPosition());
     }
 
@@ -256,6 +256,7 @@ public class DTOConverter {
         layer.setName(memento.getLayerName());
         layer.setTitle(memento.getTitle());
         layer.setPosition(memento.getzIndex());
+        layer.setAlias(memento.getAlias());
 //        layer.setShared(mementoLayer.isShared());
     }
 }

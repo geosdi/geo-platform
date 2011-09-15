@@ -69,7 +69,10 @@ public class GoogleSignOnAction extends OAuth2MenuBaseAction {
             @Override
             public void onSuccess(String token) {
                 googleLoginCallback(token);
+                
                 setImage(OAuth2Resources.ICONS.googleSignOnGreen());
+                setEnabled(false);
+                
                 WidgetPropertiesHandlerManager.fireEvent(new GPToolbarIconWidgetEvent("Signed on Google Earth Builder"));
             }
 

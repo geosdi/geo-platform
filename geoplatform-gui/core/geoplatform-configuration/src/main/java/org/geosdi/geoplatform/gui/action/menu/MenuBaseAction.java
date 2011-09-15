@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.action.menu;
 
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconEvent;
 
 /**
  * @author giuseppe
@@ -44,7 +45,6 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 public abstract class MenuBaseAction extends MenuAction {
 
     private AbstractImagePrototype image;
-    private boolean enabled;
 
     public MenuBaseAction(String title, AbstractImagePrototype image) {
         super(title);
@@ -63,5 +63,6 @@ public abstract class MenuBaseAction extends MenuAction {
      */
     public void setImage(AbstractImagePrototype image) {
         this.image = image;
+        this.handlerManager.fireEvent(new MenuActionChangeIconEvent(image));
     }
 }

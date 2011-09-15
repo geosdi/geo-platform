@@ -54,7 +54,7 @@ public abstract class MenuAction extends SelectionListener<MenuEvent>
     private String title;
     private String id;
     private boolean enabled;
-    private HandlerManager handlerManager;
+    protected HandlerManager handlerManager;
 
     public MenuAction(String title) {
         this.title = title;

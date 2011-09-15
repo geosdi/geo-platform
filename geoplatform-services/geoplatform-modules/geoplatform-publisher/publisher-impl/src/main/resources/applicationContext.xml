@@ -23,7 +23,7 @@
 
     <bean id="publisherService" class="org.geosdi.geoplatform.publish.GPPublisherServiceImpl">
         <!-- the server to connect -->
-      <constructor-arg type="java.lang.String" value="http://150.145.133.93:8080/geoserver"/>
+      <constructor-arg type="java.lang.String" value="http://localhost:8084/geoserver"/>
       <!-- the login and the password of the REST geoserver instance -->
       <constructor-arg type="java.lang.String" value="admin"/>
       <constructor-arg type="java.lang.String" value="geoserver"/>

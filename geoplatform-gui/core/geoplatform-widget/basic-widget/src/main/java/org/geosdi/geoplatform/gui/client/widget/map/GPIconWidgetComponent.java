@@ -39,7 +39,7 @@ import com.extjs.gxt.ui.client.widget.WidgetComponent;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.ui.Image;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.puregwt.properties.GPToolbarIconWidgetHandler;
+import org.geosdi.geoplatform.gui.puregwt.properties.IGPToolbarIconWidgetHandler;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 /**
@@ -47,28 +47,46 @@ import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerMana
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPIconWidgetComponent implements GPToolbarIconWidgetHandler {
+public class GPIconWidgetComponent extends GPAbstractWidgetComponent implements IGPToolbarIconWidgetHandler {
 
-    private ToolBar toolbar;
-    private WidgetComponent component;
+//    private ToolBar toolbar;
+//    private WidgetComponent component;
+    private boolean statusLoggedOn = false;
 
     public GPIconWidgetComponent(ToolBar theToolBar) {
-        this.toolbar = theToolBar;
-        WidgetPropertiesHandlerManager.addHandler(GPToolbarIconWidgetHandler.TYPE, this);
+//        this.toolbar = theToolBar;
+        super.parent = theToolBar;
+        WidgetPropertiesHandlerManager.addHandler(IGPToolbarIconWidgetHandler.TYPE, this);
     }
 
+//    public WidgetComponent createWidgetComponent(Image icon, String tooltip) {
+//        component = new WidgetComponent(icon);
+//
+//        component.setToolTip(tooltip);
+//        return component;
+//    }
     public WidgetComponent createWidgetComponent(Image icon, String tooltip) {
-        component = new WidgetComponent(icon);
+        this.component = new WidgetComponent(icon);
 
-        component.setToolTip(tooltip);
-        return component;
+        this.component.setToolTip(tooltip);
+        return this.component;
     }
 
     @Override
-    public void changeIcon(String tooltip) {
+    public void changeStatus(String tooltip) {
+        this.statusLoggedOn = !this.statusLoggedOn;
+//        int index = toolbar.indexOf(component);
+//        toolbar.remove(component);
+//
+//        toolbar.insert(createWidgetComponent(BasicWidgetResources.ICONS.googleGreen().createImage(), tooltip), index);
+        ToolBar toolbar = (ToolBar) super.parent;
         int index = toolbar.indexOf(component);
         toolbar.remove(component);
 
-        toolbar.insert(createWidgetComponent(BasicWidgetResources.ICONS.googleGreen().createImage(), tooltip), index);
+        if (this.statusLoggedOn) {
+            toolbar.insert(createWidgetComponent(BasicWidgetResources.ICONS.googleGreen().createImage(), tooltip), index);
+        } else {
+            toolbar.insert(createWidgetComponent(BasicWidgetResources.ICONS.googleWhite().createImage(), tooltip), index);
+        }
     }
 }

@@ -35,18 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.puregwt.properties;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
-
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface GPToolbarIconWidgetHandler extends EventHandler {
+public interface IGPToolbarIconWidgetHandler extends IGPComponentWidgetHandler {
     
-    Type<GPToolbarIconWidgetHandler> TYPE = new Type<GPToolbarIconWidgetHandler>();
-    
-    public void changeIcon(String tooltip);
+    public void changeStatus(String tooltip);
 }

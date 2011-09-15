@@ -37,14 +37,14 @@ package org.geosdi.geoplatform.gui.puregwt.properties.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.puregwt.properties.GPToolbarIconWidgetHandler;
+import org.geosdi.geoplatform.gui.puregwt.properties.IGPToolbarIconWidgetHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPToolbarIconWidgetEvent extends GwtEvent<GPToolbarIconWidgetHandler> {
+public class GPToolbarIconWidgetEvent extends GwtEvent<IGPToolbarIconWidgetHandler> {
 
     private String tooltip;
 
@@ -52,14 +52,13 @@ public class GPToolbarIconWidgetEvent extends GwtEvent<GPToolbarIconWidgetHandle
         this.tooltip = tooltip;
     }
    
-
     @Override
-    public Type<GPToolbarIconWidgetHandler> getAssociatedType() {
-        return GPToolbarIconWidgetHandler.TYPE;
+    public Type<IGPToolbarIconWidgetHandler> getAssociatedType() {
+        return IGPToolbarIconWidgetHandler.TYPE;
     }
 
     @Override
-    protected void dispatch(GPToolbarIconWidgetHandler handler) {
-        handler.changeIcon(tooltip);
+    protected void dispatch(IGPToolbarIconWidgetHandler handler) {
+        handler.changeStatus(tooltip);
     }
 }

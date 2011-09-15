@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.action.menu.OAuth2MenuBaseAction;
+import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconEvent;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionDisabledEvent;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionEnabledEvent;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionHandler;
@@ -177,6 +178,11 @@ public class MenuUtilityBuilder {
                 public void onActionDisabled(MenuActionDisabledEvent event) {
                     item.setEnabled(false);
                 }
+
+                @Override
+                public void onActionChangeIcon(MenuActionChangeIconEvent event) {
+                    item.setIcon(event.getImage());
+                }
             });
 
             action.setEnabled(tool.isEnabled());
@@ -216,6 +222,9 @@ public class MenuUtilityBuilder {
                 public void onActionDisabled(MenuActionDisabledEvent event) {
                     item.setEnabled(false);
                 }
+
+                @Override
+                public void onActionChangeIcon(MenuActionChangeIconEvent event) {}
             });
 
             action.setEnabled(tool.isEnabled());

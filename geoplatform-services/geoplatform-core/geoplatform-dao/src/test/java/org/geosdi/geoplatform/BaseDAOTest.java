@@ -113,6 +113,7 @@ public abstract class BaseDAOTest {
     protected final String roleUser = "ROLE_USER";
     protected final String roleViewer = "ROLE_VIEWER"; // Can only zoom
     private URL url = null;
+    private final String urlWMSGetCapabilities = "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
 
     //<editor-fold defaultstate="collapsed" desc="Remove all data">
     protected void removeAll() {
@@ -243,7 +244,10 @@ public abstract class BaseDAOTest {
 
     protected void insertFolders() throws ParseException {
         List<Layer> layerList = loadLayersFromServer();
-        insertUserFolders(layerList);
+        if (layerList == null) {
+            Assert.fail("Error in WMS GetCapabilities - URL: " + urlWMSGetCapabilities);
+        }
+        this.insertUserFolders(layerList);
     }
 
     private void insertUserFolders(List<Layer> layerList) {
@@ -369,7 +373,7 @@ public abstract class BaseDAOTest {
     private List<Layer> loadLayersFromServer() {
         // Load imaa Layers
         try {
-            url = new URL("http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
+            url = new URL(urlWMSGetCapabilities);
         } catch (MalformedURLException e) {
             logger.error("Error:" + e);
         }

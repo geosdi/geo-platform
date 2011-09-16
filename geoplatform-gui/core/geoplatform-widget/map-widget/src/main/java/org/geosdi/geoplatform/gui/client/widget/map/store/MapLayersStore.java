@@ -52,47 +52,48 @@ import org.gwtopenmaps.openlayers.client.layer.WMS;
  * 
  */
 public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
-    
+
     private MapLayerBuilder layerBuilder;
     private DisplayLegendEvent displayLegend = new DisplayLegendEvent();
-    
+
     public MapLayersStore(GeoPlatformMap theMapWidget) {
         super(theMapWidget);
         this.layerBuilder = new MapLayerBuilder(theMapWidget);
     }
-    
+
     @Override
     public boolean containsLayer(GPLayerBean key) {
         return this.layers.containsKey(key);
     }
-    
+
     @Override
     public Layer getLayer(GPLayerBean key) {
         return this.layers.get(key);
     }
-    
+
     @Override
     public void onDisplayLayer(GPLayerBean layerBean) {
         super.displayLayer(layerBean);
     }
-    
+
     @Override
     public void onHideLayer(GPLayerBean layerBean) {
         this.hideLayer(layerBean);
     }
-    
+
     @Override
     public void onRemoveLayer(GPLayerBean layerBean) {
         this.removeLayer(layerBean);
     }
-    
+
     @Override
     public void displayVector(GPVectorBean vectorBean) {
         displayLegend.setLayerBean(vectorBean);
         LayerHandlerManager.fireEvent(displayLegend);
         if (containsLayer(vectorBean)) {
             WMS layer = (WMS) this.layers.get(vectorBean);
-            if (!layer.isVisible() || Integer.parseInt(layer.getZIndex()) != vectorBean.getzIndex()) {
+            if (!layer.isVisible() || Integer.parseInt(layer.getZIndex().toString())
+                    != vectorBean.getzIndex()) {
                 layer.setZIndex(vectorBean.getzIndex());
                 layer.setIsVisible(true);
                 //layer.redraw();
@@ -104,14 +105,15 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             layer.setZIndex(vectorBean.getzIndex());
         }
     }
-    
+
     @Override
     public void displayRaster(GPRasterBean rasterBean) {
         displayLegend.setLayerBean(rasterBean);
         LayerHandlerManager.fireEvent(displayLegend);
         if (containsLayer(rasterBean)) {
             WMS layer = (WMS) this.layers.get(rasterBean);
-            if (!layer.isVisible() || Integer.parseInt(layer.getZIndex()) != rasterBean.getzIndex()) {
+            if (!layer.isVisible() || Integer.parseInt(layer.getZIndex().toString())
+                    != rasterBean.getzIndex()) {
                 layer.setZIndex(rasterBean.getzIndex());
                 layer.setIsVisible(true);
                 //layer.redraw();
@@ -123,14 +125,14 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             layer.setZIndex(rasterBean.getzIndex());
         }
     }
-    
+
     @Override
     public void hideLayer(GPLayerBean layerBean) {
         Layer layer = getLayer(layerBean);
         if (layer != null) {
             layer.setIsVisible(false);
         }
-        
+
         LayerHandlerManager.fireEvent(new HideLegendEvent(layerBean));
     }
 
@@ -149,17 +151,15 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
             this.mapWidget.getMap().removeLayer(layer);
         }
         this.layers.remove(layerBean);
-        
+
         LayerHandlerManager.fireEvent(new HideLegendEvent(layerBean));
     }
-    
+
     @Override
     public void onChangeStyle(GPLayerBean layerBean, String newStyle) {
-
         //TODO: implement me
-
     }
-    
+
     @Override
     public void changeOpacity(GPRasterBean layerBean) {
         Layer layer = getLayer(layerBean);

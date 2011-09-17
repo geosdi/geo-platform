@@ -37,9 +37,9 @@ package org.geosdi.geoplatform.gui.client.action.toolbar.responsibility;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedFolder;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDeleteElement;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;

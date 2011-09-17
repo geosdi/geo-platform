@@ -33,8 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model.memento;
+package org.geosdi.geoplatform.gui.client.model.memento.save;
 
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoRaster;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoLayer;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoSave;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoFolder;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoVector;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -47,7 +52,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoBuilder {
+public class MementoSaveBuilder {
 
     public static MementoFolder buildSaveFolderMemento(FolderTreeNode folder) {
         MementoFolder memento = new MementoFolder();
@@ -78,7 +83,7 @@ public class MementoBuilder {
                 layer = ((VectorTreeNode) beanModel);
                 memento = new MementoVector();
             }
-            MementoBuilder.convertToMementoLayerFromLayerModel(memento, layer);
+            MementoSaveBuilder.convertToMementoLayerFromLayerModel(memento, layer);
 
             mementoLayerList.add(memento);
         }
@@ -95,12 +100,12 @@ public class MementoBuilder {
         }
         memento.setAbstractText(layer.getAbstractText());
         memento.setDataSource(layer.getDataSource());
-        memento.setChecked(layer.isChecked());
         memento.setLayerName(layer.getName());
         memento.setLayerType(layer.getLayerType());
         memento.setSrs(layer.getCrs());
         memento.setTitle(layer.getTitle());
-        memento.setAlias(layer.getAlias());
+//        memento.setChecked(layer.isChecked());
+//        memento.setAlias(layer.getAlias());
         memento.setzIndex(layer.getzIndex());
         // Bbox
         memento.setLowerLeftX(layer.getBbox().getLowerLeftX());

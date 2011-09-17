@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model.memento;
+package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
 
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -53,8 +53,8 @@ public abstract class AbstractMementoLayer<T extends GPLayerTreeModel> extends A
     private long idFolderParent;
     private String abstractText;
     private String title;
-    private String alias;
-    private float opacity;
+//    private String alias;
+//    private float opacity;
     private String dataSource;
     private String srs;
     /* GPBBox elements */
@@ -63,7 +63,7 @@ public abstract class AbstractMementoLayer<T extends GPLayerTreeModel> extends A
     private double upperRightX;
     private double upperRightY;
     private GPLayerType layerType;
-    private boolean checked;
+//    private boolean checked;
 
     public AbstractMementoLayer(ISave saveAction) {
         super(saveAction);
@@ -97,13 +97,13 @@ public abstract class AbstractMementoLayer<T extends GPLayerTreeModel> extends A
         this.dataSource = dataSource;
     }
 
-    public boolean isChecked() {
-        return checked;
-    }
-
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
+//    public boolean isChecked() {
+//        return checked;
+//    }
+//
+//    public void setChecked(boolean checked) {
+//        this.checked = checked;
+//    }
 
     public String getLayerName() {
         return layerName;
@@ -113,21 +113,21 @@ public abstract class AbstractMementoLayer<T extends GPLayerTreeModel> extends A
         this.layerName = layerName;
     }
     
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
-    public float getOpacity() {
-        return opacity;
-    }
-
-    public void setOpacity(float opacity) {
-        this.opacity = opacity;
-    }
+//    public String getAlias() {
+//        return alias;
+//    }
+//
+//    public void setAlias(String alias) {
+//        this.alias = alias;
+//    }
+//
+//    public float getOpacity() {
+//        return opacity;
+//    }
+//
+//    public void setOpacity(float opacity) {
+//        this.opacity = opacity;
+//    }
 
     public GPLayerType getLayerType() {
         return layerType;

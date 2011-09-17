@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model.memento;
+package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
 
 import org.geosdi.geoplatform.gui.action.ISave;
 
@@ -45,7 +45,6 @@ public class MementoSaveCheck extends AbstractMementoSave {
 
     private static final long serialVersionUID = -1097048315113513051L;
     private boolean checked;
-    private transient boolean isParentsElementModified;
     
     public MementoSaveCheck(){}
 
@@ -65,19 +64,5 @@ public class MementoSaveCheck extends AbstractMementoSave {
      */
     public void setChecked(boolean checked) {
         this.checked = checked;
-    }
-
-    /**
-     * @return the isParentsElementModified
-     */
-    public boolean isParentsElementModified() {
-        return isParentsElementModified;
-    }
-
-    /**
-     * @param isParentsElementModified the isParentsElementModified to set
-     */
-    public void setIsParentsElementModified(boolean isParentsElementModified) {
-        this.isParentsElementModified = isParentsElementModified;
     }
 }

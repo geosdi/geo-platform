@@ -33,45 +33,76 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model.memento;
+package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
 
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoSaveAddedFolder extends AbstractMementoSave {
+public class MementoSaveDragDrop extends AbstractMementoSave {
 
-    private static final long serialVersionUID = -3384768384840157219L;
-    private MementoFolder addedFolder;
+    private static final long serialVersionUID = 7503831906608161666L;
+    private long idNewParent;
+    private transient FolderTreeNode refNewParent;
+    private int newZIndex;
 
-    public MementoSaveAddedFolder() {
+    public MementoSaveDragDrop() {
     }
 
-    public MementoSaveAddedFolder(ISave saveAction) {
+    public MementoSaveDragDrop(ISave saveAction) {
         super(saveAction);
     }
 
     @Override
     public void convertMementoToWs() {
         super.convertMementoToWs();
-        getAddedFolder().convertMementoToWs();
+        if(refNewParent != null){
+            this.idNewParent = refNewParent.getId();
+        }
     }
 
     /**
-     * @return the addedFolder
+     * @return the refNewParent
      */
-    public MementoFolder getAddedFolder() {
-        return addedFolder;
+    public FolderTreeNode getRefNewParent() {
+        return refNewParent;
     }
 
     /**
-     * @param addedFolder the addedFolder to set
+     * @param refNewParent the refNewParent to set
      */
-    public void setAddedFolder(MementoFolder addedFolder) {
-        this.addedFolder = addedFolder;
+    public void setRefNewParent(FolderTreeNode refNewParent) {
+        this.refNewParent = refNewParent;
     }
-    
 
+    /**
+     * @return the idNewParent
+     */
+    public long getIdNewParent() {
+        return idNewParent;
+    }
+
+    /**
+     * @param idNewParent the idNewParent to set
+     */
+    public void setIdNewParent(long idNewParent) {
+        this.idNewParent = idNewParent;
+    }
+
+    /**
+     * @return the newZIndex
+     */
+    public int getNewZIndex() {
+        return newZIndex;
+    }
+
+    /**
+     * @param newZIndex the newZIndex to set
+     */
+    public void setNewZIndex(int newZIndex) {
+        this.newZIndex = newZIndex;
+    }
 }

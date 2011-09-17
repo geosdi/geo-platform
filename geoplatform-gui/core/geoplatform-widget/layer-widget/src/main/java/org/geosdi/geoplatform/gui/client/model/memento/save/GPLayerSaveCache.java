@@ -33,11 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model.memento;
+package org.geosdi.geoplatform.gui.client.model.memento.save;
 
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.model.memento.GPCache;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
@@ -52,6 +55,8 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
     private static final long serialVersionUID = -5458269761345444182L;
     private static GPLayerSaveCache instance = new GPLayerSaveCache();
     private ObservableGPLayerSaveCache observable = new ObservableGPLayerSaveCache();
+    private Map<GPLayerTreeModel, MementoLayerOriginalProperties> modifiedLayersMap = new HashMap<GPLayerTreeModel, MementoLayerOriginalProperties>();
+    private SaveLayersPropertiesAction saveAction = new SaveLayersPropertiesAction();
 
     public static GPLayerSaveCache getInstance() {
         return instance;
@@ -59,16 +64,29 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
 
     private GPLayerSaveCache() {
     }
-    
-    public MementoLayerProperties getAssociatedMemento(GPLayerTreeModel layer){
-        for (Iterator<IMemento<ISave>> it = this.iterator(); it.hasNext();) {
-            IMemento<ISave> iMemento = it.next();
-            if(iMemento instanceof MementoLayerProperties && 
-                    ((MementoLayerProperties)iMemento).getRefBaseElement().equals(layer)){
-                return (MementoLayerProperties)iMemento;
+
+    //The properties are copied only the first time, in this way we can save
+    //only the layers effectively modified from the original one
+    public void copyOriginalLayerProperties(GPLayerTreeModel layer) {
+        if (!this.modifiedLayersMap.containsKey(layer)) {
+            MementoLayerOriginalProperties memento = new MementoLayerOriginalProperties(this.saveAction);
+            memento.setAlias(layer.getAlias());
+            System.out.println("Alias setted: " + memento.getAlias());
+            memento.setChecked(layer.isChecked());
+            System.out.println("Check setted: " + memento.isChecked());
+            if (layer instanceof RasterTreeNode) {
+                memento.setOpacity(((RasterTreeNode) layer).getOpacity());
+                System.out.println("Opacity setted: " + memento.getOpacity());
+            }
+            memento.setRefBaseElement(layer);
+            this.modifiedLayersMap.put(layer, memento);
+            if (super.peek() == null) {
+                this.observable.setChanged();
+                this.observable.notifyObservers(LayerEvents.SAVE_CACHE_NOT_EMPTY);
+                /*System.out.println("Event SAVE_CACHE_NOT_EMPTY notified to "
+                + this.observable.countObservers() + " observers");*/
             }
         }
-        return new MementoLayerProperties();
     }
 
     @Override
@@ -77,7 +95,7 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
             this.observable.setChanged();
             this.observable.notifyObservers(LayerEvents.SAVE_CACHE_NOT_EMPTY);
             /*System.out.println("Event SAVE_CACHE_NOT_EMPTY notified to "
-                    + this.observable.countObservers() + " observers");*/
+            + this.observable.countObservers() + " observers");*/
         }
         System.out.println("GPLayerSaveCache: added " + memento.getClass().getName());
         return super.add(memento);
@@ -86,25 +104,63 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
     @Override
     public IMemento<ISave> poll() {
         IMemento<ISave> memento = super.poll();
-        if (super.peek() == null) {
-            this.observable.setChanged();
-            this.observable.notifyObservers(LayerEvents.SAVE_CACHE_EMPTY);
-            /*System.out.println("Event SAVE_CACHE_EMPTY notified to "
-                    + this.observable.countObservers() + " observers");*/
-        }
+        this.verifyEmptyCache();
         return memento;
+    }
+
+    @Override
+    public IMemento<ISave> peek() {
+        this.verifyEmptyCache();
+        return super.peek();
     }
 
     @Override
     public boolean remove(Object o) {
         boolean operation = super.remove(o);
-        if (super.peek() == null) {
-            this.observable.setChanged();
-            this.observable.notifyObservers(LayerEvents.SAVE_CACHE_EMPTY);
-            /*System.out.println("Event SAVE_CACHE_EMPTY notified to "
-                    + this.observable.countObservers() + " observers");*/
-        }
+        this.verifyEmptyCache();
         return operation;
+    }
+
+    private void verifyEmptyCache() {
+        System.out.println("super.peek():" + super.peek() == null);
+        if (super.peek() == null) {
+            System.out.println("this.modifiedLayersMap.isEmpty():" + this.modifiedLayersMap.isEmpty());
+            if (this.modifiedLayersMap.isEmpty()) {
+                System.out.println("this.modifiedLayersMap.isEmpty():" + this.modifiedLayersMap.isEmpty());
+                this.observable.setChanged();
+                this.observable.notifyObservers(LayerEvents.SAVE_CACHE_EMPTY);
+                /*System.out.println("Event SAVE_CACHE_EMPTY notified to "
+                + this.observable.countObservers() + " observers");*/
+            } else {
+                this.prepareLayerPropertiesModify();
+                this.verifyEmptyCache();
+            }
+        }
+    }
+
+    public void removeModifiedLayer(GPLayerTreeModel gpLayerTreeModel) {
+        this.modifiedLayersMap.remove(gpLayerTreeModel);
+    }
+
+    private boolean isChanged(GPLayerTreeModel gpLayerTreeModel) {
+        MementoLayerOriginalProperties memento = this.modifiedLayersMap.get(gpLayerTreeModel);
+        if (!memento.getAlias().equals(gpLayerTreeModel.getAlias())
+                || memento.isChecked() != gpLayerTreeModel.isChecked()) {
+            return true;
+        } else if (gpLayerTreeModel instanceof RasterTreeNode
+                && ((RasterTreeNode) gpLayerTreeModel).getOpacity() != memento.getOpacity()) {
+            return true;
+        }
+        return false;
+    }
+
+    private void prepareLayerPropertiesModify() {
+        for (GPLayerTreeModel gpLayerTreeModel : this.modifiedLayersMap.keySet()) {
+            if (this.isChanged(gpLayerTreeModel)) {
+                this.add(this.modifiedLayersMap.get(gpLayerTreeModel));
+            }
+        }
+        this.modifiedLayersMap.clear();
     }
 
     public ObservableGPLayerSaveCache getObservable() {

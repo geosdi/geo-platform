@@ -41,8 +41,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
@@ -75,20 +76,21 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
     public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
         //System.out.println("Events.CheckChange from: " + be.getItem().getLabel());
         boolean isCacheable = this.visitorDisplay.isCacheableCheck();
-        this.visitorDisplay.setIsParentsElementModified(false);
         be.getItem().accept(this.visitorDisplay);
         if (isCacheable && !(be.getItem() instanceof GPRootTreeNode)) {
             IMemento<ISave> precedingMemento = GPLayerSaveCache.getInstance().peekLast();
             if (precedingMemento != null && precedingMemento instanceof MementoSaveCheck
-                    && ((MementoSaveCheck) precedingMemento).getRefBaseElement().equals(be.getItem())
-                    && !((MementoSaveCheck) precedingMemento).isParentsElementModified()) {
+                    && ((MementoSaveCheck) precedingMemento).getRefBaseElement().equals(be.getItem())) {
                 GPLayerSaveCache.getInstance().remove(precedingMemento);
-            } else {
+            } else if (be.getItem() instanceof FolderTreeNode){
                 MementoSaveCheck mementoCheck = new MementoSaveCheck(this);
                 mementoCheck.setRefBaseElement(be.getItem());
                 mementoCheck.setChecked(be.getItem().isChecked());
-                mementoCheck.setIsParentsElementModified(this.visitorDisplay.isParentsElementModified());
                 GPLayerSaveCache.getInstance().add(mementoCheck);
+            } else {
+                be.getItem().setChecked(!be.getItem().isChecked());
+                GPLayerSaveCache.getInstance().copyOriginalLayerProperties((GPLayerTreeModel)be.getItem());
+                be.getItem().setChecked(!be.getItem().isChecked());
             }
         }
     }
@@ -119,29 +121,6 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
                     LayerHandlerManager.fireEvent(peekCacheEvent);
                 }
             });
-        } else if (memento.getRefBaseElement() instanceof GPLayerBean) {
-            LayerRemote.Util.getInstance().saveCheckStatusLayerAndTreeModifications(memento, new AsyncCallback<Boolean>() {
-
-                @Override
-                public void onFailure(Throwable caught) {
-                    if (caught.getCause() instanceof GPSessionTimeout) {
-                        GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
-                    } else {
-                        LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-                        GeoPlatformMessage.errorMessage("Save Check Operation on Layer Error",
-                                "Problems on saving the new tree state after checking layer");
-                    }
-                }
-
-                @Override
-                public void onSuccess(Boolean result) {
-                    GPLayerSaveCache.getInstance().remove(memento);
-                    LayoutManager.getInstance().getStatusMap().setStatus(
-                            "Save Check Layer Operation completed successfully.",
-                            EnumSearchStatus.STATUS_SEARCH.toString());
-                    LayerHandlerManager.fireEvent(peekCacheEvent);
-                }
-            });
-        }
+        } 
     }
 }

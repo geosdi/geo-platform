@@ -33,49 +33,23 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model.memento;
+package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
 
-import java.util.Iterator;
-import java.util.List;
 import org.geosdi.geoplatform.gui.action.ISave;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoSaveAddedLayers extends AbstractMementoSave {
+public class MementoSaveRemove extends AbstractMementoSave {
+    
+    private static final long serialVersionUID = 802906770383599380L;
 
-    private static final long serialVersionUID = -3384768384840157219L;
-    private List<AbstractMementoLayer> addedLayers;
-
-    public MementoSaveAddedLayers() {
+    public MementoSaveRemove() {
     }
 
-    public MementoSaveAddedLayers(ISave saveAction) {
+    public MementoSaveRemove(ISave saveAction) {
         super(saveAction);
     }
-
-    @Override
-    public void convertMementoToWs() {
-        super.convertMementoToWs();
-        for (Iterator<AbstractMementoLayer> it = addedLayers.iterator(); it.hasNext();) {
-            it.next().convertMementoToWs();   
-        }
-    }
-
-    /**
-     * @return the addedLayers
-     */
-    public List<AbstractMementoLayer> getAddedLayers() {
-        return addedLayers;
-    }
-
-    /**
-     * @param addedLayers the addedLayers to set
-     */
-    public void setAddedLayers(List<AbstractMementoLayer> addedLayers) {
-        this.addedLayers = addedLayers;
-    }
-    
 
 }

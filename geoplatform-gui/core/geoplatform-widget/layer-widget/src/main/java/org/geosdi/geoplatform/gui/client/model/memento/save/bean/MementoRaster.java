@@ -33,32 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model.memento;
+package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
 
-import org.geosdi.geoplatform.gui.action.IUndo;
-import org.geosdi.geoplatform.gui.model.memento.IMemento;
+import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
+import org.geosdi.geoplatform.gui.observable.Observable;
+import org.geosdi.geoplatform.gui.observable.Observer;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public abstract class AbstractMementoUndo implements IMemento<IUndo>{
-    
-    private IUndo undoAction;
-    
-    public AbstractMementoUndo(IUndo undoAction){
-        this.undoAction = undoAction;
+public class MementoRaster extends AbstractMementoLayer<RasterTreeNode>
+        implements Observer {
+
+    private static final long serialVersionUID = 4343601977419367986L;
+
+    public MementoRaster() {
+    }
+
+    //TODO: vedere come fornire il GPLayerInfo
+    //private GPLayerInfo layerInfo;
+    public MementoRaster(ISave saveAction) {
+        super(saveAction);
+//        RasterTreeNode raster = new RasterTreeNode();
+//        VectorTreeNode vector = new VectorTreeNode();
+//                raster.getProperties().get("wkt");
     }
 
     @Override
-    public IUndo getAction() {
-        return this.getAction();
+    public void update(Observable o, Object arg) {
+        super.setIdBaseElement((Long) arg);
     }
-
-    @Override
-    public void setAction(IUndo undoAction) {
-        this.undoAction = undoAction;
-    }
-
-    
 }

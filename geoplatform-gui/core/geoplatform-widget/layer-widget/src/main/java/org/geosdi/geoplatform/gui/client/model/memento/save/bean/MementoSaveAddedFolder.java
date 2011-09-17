@@ -33,36 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model.memento;
+package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
 
 import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.observable.Observable;
-import org.geosdi.geoplatform.gui.observable.Observer;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoRaster extends AbstractMementoLayer<RasterTreeNode>
-        implements Observer {
+public class MementoSaveAddedFolder extends AbstractMementoSave {
 
-    private static final long serialVersionUID = 4343601977419367986L;
+    private static final long serialVersionUID = -3384768384840157219L;
+    private MementoFolder addedFolder;
 
-    public MementoRaster() {
+    public MementoSaveAddedFolder() {
     }
 
-    //TODO: vedere come fornire il GPLayerInfo
-    //private GPLayerInfo layerInfo;
-    public MementoRaster(ISave saveAction) {
+    public MementoSaveAddedFolder(ISave saveAction) {
         super(saveAction);
-//        RasterTreeNode raster = new RasterTreeNode();
-//        VectorTreeNode vector = new VectorTreeNode();
-//                raster.getProperties().get("wkt");
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        super.setIdBaseElement((Long) arg);
+    public void convertMementoToWs() {
+        super.convertMementoToWs();
+        getAddedFolder().convertMementoToWs();
     }
+
+    /**
+     * @return the addedFolder
+     */
+    public MementoFolder getAddedFolder() {
+        return addedFolder;
+    }
+
+    /**
+     * @param addedFolder the addedFolder to set
+     */
+    public void setAddedFolder(MementoFolder addedFolder) {
+        this.addedFolder = addedFolder;
+    }
+    
+
 }

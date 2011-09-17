@@ -51,35 +51,21 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.model.memento.AbstractMementoLayer;
-import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedLayers;
-import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
+import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveOperations;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.util.UtilityLayerModule;
-import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPLayerExpander;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
 import org.geosdi.geoplatform.gui.client.widget.form.KmlUrlStatus.EnumKmlUrlStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
-import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
 
@@ -97,7 +83,6 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
     private VisitorAddElement addVisitor;
     private GPBeanTreeModel parentDestination;
     private GPLayerExpander expander;
-    private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
     //
     private String urlEncoding = "";
     private String suggestion = "";
@@ -271,41 +256,8 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
 
     @Override
     public void executeSave(final MementoSaveAddedLayers memento) {
-        //Warning: The following conversion is absolutely necessary!
-        memento.convertMementoToWs();
-
-        LayerRemote.Util.getInstance().saveAddedLayersAndTreeModifications(memento,
-                new AsyncCallback<ArrayList<Long>>() {
-
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        if (caught.getCause() instanceof GPSessionTimeout) {
-                            GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
-                        } else {
-                            LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-                            setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
-                                    EnumSaveStatus.STATUS_MESSAGE_SAVE_ERROR.getValue());
-                            GeoPlatformMessage.errorMessage("Save KML Error",
-                                    "Problems on saving the new tree state after KML creation");
-                        }
-                    }
-
-                    @Override
-                    public void onSuccess(ArrayList<Long> result) {
-                        GPLayerSaveCache.getInstance().remove(memento);
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                "KML saved successfully.",
-                                EnumSearchStatus.STATUS_SEARCH.toString());
-                        //Warning: What happens when I delete a raster before save it???
-//                        memento.getRefBaseElement().setId(result.get(0)); // TODO
-//                        LayerHandlerManager.fireEvent(peekCacheEvent);                     
-                        List<AbstractMementoLayer> listMementoLayers = memento.getAddedLayers();
-                        for (int i = 0; i < listMementoLayers.size(); i++) {
-                            listMementoLayers.get(i).getRefBaseElement().setId(result.get(i));
-                        }
-                        LayerHandlerManager.fireEvent(peekCacheEvent);
-                    }
-                });
+        MementoSaveOperations.mementoSaveAddedLayer(memento, "KML saved successfully.",
+                "Problems on saving the new tree state after KML creation");
     }
 
     private boolean checkUrl() {

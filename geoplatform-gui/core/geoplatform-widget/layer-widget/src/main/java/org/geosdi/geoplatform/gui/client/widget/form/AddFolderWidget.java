@@ -51,10 +51,10 @@ import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoBuilder;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoFolder;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedFolder;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoFolder;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
@@ -201,7 +201,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
         this.addVisitor.insertElement(this.entity, parentDestination, 0);
 
         MementoSaveAddedFolder mementoSaveAdd = new MementoSaveAddedFolder(this);
-        mementoSaveAdd.setAddedFolder(MementoBuilder.buildSaveFolderMemento(
+        mementoSaveAdd.setAddedFolder(MementoSaveBuilder.buildSaveFolderMemento(
                 this.entity));
         mementoSaveAdd.setDescendantMap(this.addVisitor.getFolderDescendantMap());
 

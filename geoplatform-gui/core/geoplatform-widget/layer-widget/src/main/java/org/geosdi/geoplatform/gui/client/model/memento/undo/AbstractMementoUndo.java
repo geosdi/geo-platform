@@ -33,76 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model.memento;
+package org.geosdi.geoplatform.gui.client.model.memento.undo;
 
-import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.action.IUndo;
+import org.geosdi.geoplatform.gui.model.memento.IMemento;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoSaveDragDrop extends AbstractMementoSave {
-
-    private static final long serialVersionUID = 7503831906608161666L;
-    private long idNewParent;
-    private transient FolderTreeNode refNewParent;
-    private int newZIndex;
-
-    public MementoSaveDragDrop() {
-    }
-
-    public MementoSaveDragDrop(ISave saveAction) {
-        super(saveAction);
+public abstract class AbstractMementoUndo implements IMemento<IUndo>{
+    
+    private IUndo undoAction;
+    
+    public AbstractMementoUndo(IUndo undoAction){
+        this.undoAction = undoAction;
     }
 
     @Override
-    public void convertMementoToWs() {
-        super.convertMementoToWs();
-        if(refNewParent != null){
-            this.idNewParent = refNewParent.getId();
-        }
+    public IUndo getAction() {
+        return this.getAction();
     }
 
-    /**
-     * @return the refNewParent
-     */
-    public FolderTreeNode getRefNewParent() {
-        return refNewParent;
+    @Override
+    public void setAction(IUndo undoAction) {
+        this.undoAction = undoAction;
     }
 
-    /**
-     * @param refNewParent the refNewParent to set
-     */
-    public void setRefNewParent(FolderTreeNode refNewParent) {
-        this.refNewParent = refNewParent;
-    }
-
-    /**
-     * @return the idNewParent
-     */
-    public long getIdNewParent() {
-        return idNewParent;
-    }
-
-    /**
-     * @param idNewParent the idNewParent to set
-     */
-    public void setIdNewParent(long idNewParent) {
-        this.idNewParent = idNewParent;
-    }
-
-    /**
-     * @return the newZIndex
-     */
-    public int getNewZIndex() {
-        return newZIndex;
-    }
-
-    /**
-     * @param newZIndex the newZIndex to set
-     */
-    public void setNewZIndex(int newZIndex) {
-        this.newZIndex = newZIndex;
-    }
+    
 }

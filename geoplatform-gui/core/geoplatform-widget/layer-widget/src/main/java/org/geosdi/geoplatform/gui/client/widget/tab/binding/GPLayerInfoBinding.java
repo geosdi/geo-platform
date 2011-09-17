@@ -41,10 +41,12 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
 import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel.GPLayerKeyValue;
 import org.geosdi.geoplatform.gui.puregwt.layers.decorator.event.GPTreeLabelEvent;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
@@ -101,7 +103,7 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         aliasField = new TextField<String>();
         aliasField.setName(GPLayerKeyValue.ALIAS.toString());
         aliasField.setFieldLabel("Alias");
-        
+
         fp.add(aliasField);
 
         serverField = new TextField<String>();
@@ -143,8 +145,9 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
 
         @Override
         public void setModelProperty(Object val) {
+            //Copying the value on memento before changes
+            GPLayerSaveCache.getInstance().copyOriginalLayerProperties((GPLayerTreeModel)model);
             ((GPLayerBean) model).setAlias(val != null ? (String) val : "");
-            //TODO: add memento code for alias changes
             WidgetPropertiesHandlerManager.fireEvent(labelEvent);
         }
     }

@@ -33,23 +33,97 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model.memento;
+package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
 
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoSaveRemove extends AbstractMementoSave {
-    
-    private static final long serialVersionUID = 802906770383599380L;
+public class MementoFolder extends AbstractMementoSave<FolderTreeNode> {
 
-    public MementoSaveRemove() {
+    private static final long serialVersionUID = -2323528396954124089L;
+    private String folderName;
+    private int zIndex;
+    private long idParent;
+    private transient FolderTreeNode refParent;
+    private boolean checked;
+    private int numberOfDescendants;
+
+    public MementoFolder() {
     }
 
-    public MementoSaveRemove(ISave saveAction) {
+    public MementoFolder(ISave saveAction) {
         super(saveAction);
     }
 
+    @Override
+    public void convertMementoToWs() {
+        super.convertMementoToWs();
+        if (this.getRefParent() != null) {
+            this.idParent = this.refParent.getId();
+        }
+    }
+
+    public String getFolderName() {
+        return folderName;
+    }
+
+    public void setFolderName(String folderName) {
+        this.folderName = folderName;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+    public int getNumberOfDescendants() {
+        return numberOfDescendants;
+    }
+
+    public void setNumberOfDescendants(int numberOfDescendants) {
+        this.numberOfDescendants = numberOfDescendants;
+    }
+
+    public int getzIndex() {
+        return zIndex;
+    }
+
+    public void setzIndex(int zIndex) {
+        this.zIndex = zIndex;
+    }
+
+    /**
+     * @return the refParent
+     */
+    public FolderTreeNode getRefParent() {
+        return refParent;
+    }
+
+    /**
+     * @param refParent the refParent to set
+     */
+    public void setRefParent(FolderTreeNode refParent) {
+        this.refParent = refParent;
+    }
+
+    /**
+     * @return the idParent
+     */
+    public long getIdParent() {
+        return idParent;
+    }
+
+    /**
+     * @param idParent the idParent to set
+     */
+    public void setIdParent(long idParent) {
+        this.idParent = idParent;
+    }
 }

@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
-import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.GPPeekCacheEventHandler;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.observable.Observable;
@@ -91,17 +91,16 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
     public void peek() {
         if (GPLayerSaveCache.getInstance().peek() != null) {
             IMemento<ISave> memento = GPLayerSaveCache.getInstance().peek();
-            memento.getAction().executeSave(
-                    GPLayerSaveCache.getInstance().peek());
+            memento.getAction().executeSave(GPLayerSaveCache.getInstance().peek());
         } else {
             this.displayEvent.setVisible(false);
             LayerHandlerManager.fireEvent(this.displayEvent);
             this.visibiltyProgressBar = false;
         }
     }
-    
+
     private void showProgressBar() {
-        if(!visibiltyProgressBar) {
+        if (!visibiltyProgressBar) {
             this.displayEvent.setVisible(true);
             LayerHandlerManager.fireEvent(this.displayEvent);
             this.visibiltyProgressBar = true;

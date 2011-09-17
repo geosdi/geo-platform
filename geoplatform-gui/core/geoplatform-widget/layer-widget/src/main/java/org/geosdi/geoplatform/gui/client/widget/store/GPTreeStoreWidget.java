@@ -36,36 +36,27 @@
 package org.geosdi.geoplatform.gui.client.widget.store;
 
 import com.extjs.gxt.ui.client.data.ModelData;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.ISave;
 
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.AbstractMementoLayer;
-import org.geosdi.geoplatform.gui.client.model.memento.GPLayerSaveCache;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoBuilder;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedLayers;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
+import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveOperations;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorAddElement;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.GenericTreeStoreWidget;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
-import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoAddLayersServer;
 import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridElementEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.LayersProgressTextEvent;
 
 /**
@@ -125,38 +116,8 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
 
     @Override
     public void executeSave(final MementoSaveAddedLayers memento) {
-        //Warning: The following conversion is absolutely necessary!
-        memento.convertMementoToWs();
-
-        LayerRemote.Util.getInstance().saveAddedLayersAndTreeModifications(
-                memento,
-                new AsyncCallback<ArrayList<Long>>() {
-
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        if (caught.getCause() instanceof GPSessionTimeout) {
-                            GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
-                        } else {
-                            LayerHandlerManager.fireEvent(
-                                    new DisplayLayersProgressBarEvent(false));
-                            GeoPlatformMessage.errorMessage("Save Layers Error",
-                                    "Problems on saving the new tree state after layers creation");
-                        }
-                    }
-
-                    @Override
-                    public void onSuccess(ArrayList<Long> result) {
-                        GPLayerSaveCache.getInstance().remove(memento);
-                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Layers saved successfully.",
-                                EnumSearchStatus.STATUS_SEARCH.toString());
-                        List<AbstractMementoLayer> listMementoLayers = memento.getAddedLayers();
-                        for (int i = 0; i < listMementoLayers.size(); i++) {
-                            listMementoLayers.get(i).getRefBaseElement().setId(result.get(i));
-                        }
-                        LayerHandlerManager.fireEvent(peekCacheEvent);
-                    }
-                });
+        MementoSaveOperations.mementoSaveAddedLayer(memento,
+                "Layers saved successfully.", "Problems on saving the new tree state after layers creation");
     }
 
     private void addRasterLayers(List<? extends GPLayerBean> layers, int sourceLayer) {
@@ -221,7 +182,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
             this.visitorAdd.insertLayerElements(layerList, parentDestination);
 
             MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
-            mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(layerList));
+            mementoSaveLayer.setAddedLayers(MementoSaveBuilder.generateMementoLayerList(layerList));
             mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
             GPLayerSaveCache.getInstance().add(mementoSaveLayer);
 

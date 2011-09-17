@@ -49,12 +49,14 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.SliderField;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode.GPRasterKeyValue;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.binding.field.GPSliderField;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
 import org.geosdi.geoplatform.gui.client.widget.tab.DisplayLayersTabItem;
 import org.geosdi.geoplatform.gui.impl.map.event.OpacityLayerMapEvent;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 /**
@@ -173,9 +175,10 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
 
         @Override
         public void setModelProperty(Object val) {
+            //Copying the value on memento before changes
+            GPLayerSaveCache.getInstance().copyOriginalLayerProperties((GPLayerTreeModel)GPLayerDisplayBinding.this.getModel());
             ((GPRasterBean) GPLayerDisplayBinding.this.getModel()).setOpacity(((Integer) val).floatValue() / 100);
             opacityEvent.setLayerBean((GPRasterBean) GPLayerDisplayBinding.this.getModel());
-            //TODO: add memento code for alias changes
             GPHandlerManager.fireEvent(opacityEvent);
         }
 
@@ -186,7 +189,7 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
          * @param updateOriginalValue true to update the original value
          */
         @Override
-        public void updateField(boolean updateOriginalValue) {
+        public void updateField(boolean updateOriginalValue) {      
             Float opacity = new Float(((GPRasterBean) GPLayerDisplayBinding.this.getModel()).getOpacity() * 100);
             ((SliderField) field).setValue(opacity.intValue());
         }

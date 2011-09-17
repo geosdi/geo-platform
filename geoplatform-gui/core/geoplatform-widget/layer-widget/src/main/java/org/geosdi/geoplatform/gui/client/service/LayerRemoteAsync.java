@@ -38,11 +38,11 @@ package org.geosdi.geoplatform.gui.client.service;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedFolder;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveAddedLayers;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveCheck;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveDragDrop;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoSaveRemove;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 

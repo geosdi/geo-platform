@@ -46,10 +46,10 @@ import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
-import org.geosdi.geoplatform.gui.client.model.memento.AbstractMementoLayer;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoFolder;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoRaster;
-import org.geosdi.geoplatform.gui.client.model.memento.MementoVector;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoLayer;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoFolder;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoRaster;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoVector;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
@@ -249,14 +249,14 @@ public class DTOConverter {
         layer.setAbstractText(memento.getAbstractText());
         layer.setBbox(new GPBBox(memento.getLowerLeftX(), memento.getLowerLeftY(),
                 memento.getUpperRightX(), memento.getUpperRightY()));
-        layer.setChecked(memento.isChecked());
         layer.setSrs(memento.getSrs());
         layer.setUrlServer(memento.getDataSource());
         layer.setId(memento.getIdBaseElement());
         layer.setName(memento.getLayerName());
         layer.setTitle(memento.getTitle());
         layer.setPosition(memento.getzIndex());
-        layer.setAlias(memento.getAlias());
+//        layer.setChecked(memento.isChecked());
+//        layer.setAlias(memento.getAlias());
 //        layer.setShared(mementoLayer.isShared());
     }
 }

@@ -33,84 +33,47 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model.memento;
+package org.geosdi.geoplatform.gui.client.model.memento.save;
 
 import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
+import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoLayerProperties extends AbstractMementoSave<GPLayerTreeModel> {
+public class SaveLayersPropertiesAction implements ISave<MementoLayerOriginalProperties> {
 
-    private String alias;
-    private float opacity;
-    private boolean checked;
-    private transient boolean isParentsElementModified;
+    private static PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
 
-    public MementoLayerProperties() {
+    @Override
+    public void executeSave(final MementoLayerOriginalProperties memento) {
+        //TODO: add the code for the WS save operation
+//        LayerRemote.Util.getInstance().saveCheckStatusLayerAndTreeModifications(memento, new AsyncCallback<Boolean>() {
+//
+//            @Override
+//            public void onFailure(Throwable caught) {
+//                if (caught.getCause() instanceof GPSessionTimeout) {
+//                    GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
+//                } else {
+//                    LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
+//                    GeoPlatformMessage.errorMessage("Save Check Operation on Layer Error",
+//                            "Problems on saving the new tree state after checking layer");
+//                }
+//            }
+//
+//            @Override
+//            public void onSuccess(Boolean result) {
+//                GPLayerSaveCache.getInstance().remove(memento);
+//                LayoutManager.getInstance().getStatusMap().setStatus(
+//                        "Save Check Layer Operation completed successfully.",
+//                        EnumSearchStatus.STATUS_SEARCH.toString());
+//                LayerHandlerManager.fireEvent(peekCacheEvent);
+//            }
+//        });
+        GPLayerSaveCache.getInstance().remove(memento);
+        LayerHandlerManager.fireEvent(peekCacheEvent);
     }
-
-    public MementoLayerProperties(ISave saveAction) {
-        super(saveAction);
-    }
-
-    /**
-     * @return the alias
-     */
-    public String getAlias() {
-        return alias;
-    }
-
-    /**
-     * @param alias the alias to set
-     */
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
-    /**
-     * @return the opacity
-     */
-    public float getOpacity() {
-        return opacity;
-    }
-
-    /**
-     * @param opacity the opacity to set
-     */
-    public void setOpacity(float opacity) {
-        this.opacity = opacity;
-    }
-
-    /**
-     * @return the checked
-     */
-    public boolean isChecked() {
-        return checked;
-    }
-
-    /**
-     * @param checked the checked to set
-     */
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-
-    /**
-     * @return the isParentsElementModified
-     */
-    public boolean isIsParentsElementModified() {
-        return isParentsElementModified;
-    }
-
-    /**
-     * @param isParentsElementModified the isParentsElementModified to set
-     */
-    public void setIsParentsElementModified(boolean isParentsElementModified) {
-        this.isParentsElementModified = isParentsElementModified;
-    }
-    
-    
 }

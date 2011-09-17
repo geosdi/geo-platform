@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.model.memento.save.storage;
 
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoSave;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
@@ -55,6 +56,16 @@ public class MementoLayerOriginalProperties extends AbstractMementoSave<GPLayerT
 
     public MementoLayerOriginalProperties(ISave saveAction) {
         super(saveAction);
+    }
+
+    @Override
+    public void convertMementoToWs() {
+        super.convertMementoToWs();
+        this.alias = super.getRefBaseElement().getAlias();
+        this.checked = super.getRefBaseElement().isChecked();
+        if(super.getRefBaseElement() instanceof RasterTreeNode){
+            this.opacity = ((RasterTreeNode)super.getRefBaseElement()).getOpacity();
+        }
     }
 
     /**

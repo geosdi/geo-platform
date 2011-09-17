@@ -36,13 +36,15 @@
 package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
 
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 public class MementoSaveRemove extends AbstractMementoSave {
-    
+
     private static final long serialVersionUID = 802906770383599380L;
 
     public MementoSaveRemove() {
@@ -52,4 +54,11 @@ public class MementoSaveRemove extends AbstractMementoSave {
         super(saveAction);
     }
 
+    @Override
+    public void convertMementoToWs() {
+        super.convertMementoToWs();
+        if (super.getRefBaseElement() instanceof GPLayerTreeModel) {
+            GPLayerSaveCache.getInstance().removeModifiedLayer((GPLayerTreeModel) super.getRefBaseElement());
+        }
+    }
 }

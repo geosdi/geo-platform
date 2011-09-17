@@ -35,10 +35,19 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento.save;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
+import org.geosdi.geoplatform.gui.client.service.LayerRemote;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -50,30 +59,31 @@ public class SaveLayersPropertiesAction implements ISave<MementoLayerOriginalPro
 
     @Override
     public void executeSave(final MementoLayerOriginalProperties memento) {
-        //TODO: add the code for the WS save operation
-//        LayerRemote.Util.getInstance().saveCheckStatusLayerAndTreeModifications(memento, new AsyncCallback<Boolean>() {
-//
-//            @Override
-//            public void onFailure(Throwable caught) {
-//                if (caught.getCause() instanceof GPSessionTimeout) {
-//                    GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
-//                } else {
-//                    LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
-//                    GeoPlatformMessage.errorMessage("Save Check Operation on Layer Error",
-//                            "Problems on saving the new tree state after checking layer");
-//                }
-//            }
-//
-//            @Override
-//            public void onSuccess(Boolean result) {
-//                GPLayerSaveCache.getInstance().remove(memento);
-//                LayoutManager.getInstance().getStatusMap().setStatus(
-//                        "Save Check Layer Operation completed successfully.",
-//                        EnumSearchStatus.STATUS_SEARCH.toString());
-//                LayerHandlerManager.fireEvent(peekCacheEvent);
-//            }
-//        });
-        GPLayerSaveCache.getInstance().remove(memento);
-        LayerHandlerManager.fireEvent(peekCacheEvent);
+        //Warning: the conversion update the memento fields on the last refBean properties
+        memento.convertMementoToWs();
+        LayerRemote.Util.getInstance().saveLayerProperties(memento, new AsyncCallback<Boolean>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                if (caught.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(peekCacheEvent));
+                } else {
+                    LayerHandlerManager.fireEvent(new DisplayLayersProgressBarEvent(false));
+                    GeoPlatformMessage.errorMessage("Save Layer Properties Error",
+                            "Problems on saving the new layer properties");
+                }
+            }
+
+            @Override
+            public void onSuccess(Boolean result) {
+                GPLayerSaveCache.getInstance().remove(memento);
+                LayoutManager.getInstance().getStatusMap().setStatus(
+                        "Save Layer Properties Operation completed successfully.",
+                        EnumSearchStatus.STATUS_SEARCH.toString());
+                LayerHandlerManager.fireEvent(peekCacheEvent);
+            }
+        });
+//        GPLayerSaveCache.getInstance().remove(memento);
+//        LayerHandlerManager.fireEvent(peekCacheEvent);
     }
 }

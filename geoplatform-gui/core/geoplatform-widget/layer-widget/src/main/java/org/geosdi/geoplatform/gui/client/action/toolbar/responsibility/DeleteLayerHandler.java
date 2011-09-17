@@ -105,7 +105,8 @@ public class DeleteLayerHandler extends DeleteRequestHandler {
 
     @Override
     public void executeSave(final MementoSaveRemove memento) {
-        //Warning: The following conversion is absolutely necessary!
+        //Warning: this conversion remove the associated mementoLayerOriginalProperties also,
+        // in this way it is possible to preserv the safety of saving operations.
         memento.convertMementoToWs();
         LayerRemote.Util.getInstance().saveDeletedLayerAndTreeModifications(
                 memento, new AsyncCallback<Boolean>() {

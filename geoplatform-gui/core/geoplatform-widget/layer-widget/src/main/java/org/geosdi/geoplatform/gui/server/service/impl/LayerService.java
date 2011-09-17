@@ -53,6 +53,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAdde
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
@@ -349,6 +350,26 @@ public class LayerService implements ILayerService {
                     "Failed to save checked layer on LayerService: " + ex);
             throw new GeoPlatformException(ex);
         }
+        return result;
+    }
+    
+    @Override
+    public boolean saveLayerProperties(MementoLayerOriginalProperties memento,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        this.getUserAlreadyFromSession(httpServletRequest);
+        boolean result = false;
+//        try {
+//            result = this.geoPlatformServiceClient.save... Add code here
+        //the following properties will be sent to the WS:
+        memento.getAlias();
+        memento.getOpacity();
+        memento.isChecked();
+        memento.getIdBaseElement();
+//        } catch (ResourceNotFoundFault ex) {
+//            this.logger.error(
+//                    "Failed to save layer properties on LayerService: " + ex);
+//            throw new GeoPlatformException(ex);
+//        }
         return result;
     }
 

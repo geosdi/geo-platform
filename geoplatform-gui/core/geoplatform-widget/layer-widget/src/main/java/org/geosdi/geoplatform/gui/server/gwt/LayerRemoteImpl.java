@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
-import com.google.gwt.http.client.URL;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
@@ -44,6 +43,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAdde
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
@@ -128,7 +128,7 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     @Override
     public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException {
         return this.layerService.saveCheckStatusLayerAndTreeModifications(memento, super.getThreadLocalRequest());
-    }
+    }    
     
     @Override
     public boolean checkWmsGetMapUrl(String url) throws GeoPlatformException {
@@ -138,5 +138,10 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     @Override
     public boolean checkKmlUrl(String url) throws GeoPlatformException {
         return this.layerService.checkKmlUrl(url);
+    }
+
+    @Override
+    public boolean saveLayerProperties(MementoLayerOriginalProperties memento) throws GeoPlatformException {
+        return this.layerService.saveLayerProperties(memento, super.getThreadLocalRequest());
     }
 }

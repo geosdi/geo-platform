@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAdde
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -89,6 +90,9 @@ public interface ILayerService {
             throws GeoPlatformException;
 
     public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
+    
+    public boolean saveLayerProperties(MementoLayerOriginalProperties memento, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     public long saveFolderForUser(String folderName, int position, int numberOfDescendants, 

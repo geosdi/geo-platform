@@ -122,11 +122,8 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
     }
 
     private void verifyEmptyCache() {
-        System.out.println("super.peek():" + super.peek() == null);
         if (super.peek() == null) {
-            System.out.println("this.modifiedLayersMap.isEmpty():" + this.modifiedLayersMap.isEmpty());
             if (this.modifiedLayersMap.isEmpty()) {
-                System.out.println("this.modifiedLayersMap.isEmpty():" + this.modifiedLayersMap.isEmpty());
                 this.observable.setChanged();
                 this.observable.notifyObservers(LayerEvents.SAVE_CACHE_EMPTY);
                 /*System.out.println("Event SAVE_CACHE_EMPTY notified to "

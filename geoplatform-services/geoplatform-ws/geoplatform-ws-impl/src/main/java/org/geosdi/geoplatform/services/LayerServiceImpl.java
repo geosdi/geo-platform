@@ -269,7 +269,7 @@ class LayerServiceImpl {
         return result;
     }
 
-    public boolean saveCheckStatusLayerAndTreeModifications(long layerId, boolean isChecked)
+    public boolean saveCheckStatusLayerAndTreeModifications(long layerId, boolean checked)
             throws ResourceNotFoundFault {
         GPLayer layer = layerDao.find(layerId);
         if (layer == null) {
@@ -277,10 +277,10 @@ class LayerServiceImpl {
         }
         assert (layer.getFolder() != null) : "Layer must be stored into a folder";
 
-        boolean checkSave = layerDao.persistCheckStatusLayer(layerId, isChecked);
+        boolean checkSave = layerDao.persistCheckStatusLayer(layerId, checked);
 
-        // Iff isChecked is true, all the ancestor folders must be checked
-        if (isChecked && checkSave) {
+        // Iff checked is true and the check status was modified, all the ancestor folders must be checked
+        if (checked && checkSave) {
             Long[] layerAncestors = this.getIdsFolderAndAncestors(layer.getFolder());
             return folderDao.persistCheckStatusFolders(true, layerAncestors);
         }
@@ -412,14 +412,18 @@ class LayerServiceImpl {
 
         layer.setAlias(alias);
         if (layer instanceof GPRasterLayer) {
-            ((GPRasterLayer) layer).setOpacity(opacity);
+            try {
+                ((GPRasterLayer) layer).setOpacity(opacity);
+            } catch (IllegalArgumentException iae) {
+                throw new IllegalParameterFault(iae.getMessage());
+            }
         }
 
         layerDao.merge(layer);
 
         boolean checkSave = layerDao.persistCheckStatusLayer(layerId, checked);
 
-        // Iff isChecked is true, all the ancestor folders must be checked
+        // Iff checked is true and the check status was modified, all the ancestor folders must be checked
         if (checked && checkSave) {
             Long[] layerAncestors = this.getIdsFolderAndAncestors(layer.getFolder());
             return folderDao.persistCheckStatusFolders(true, layerAncestors);

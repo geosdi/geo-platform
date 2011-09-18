@@ -221,7 +221,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
         buttonAdd.disable();
         urlText.clear();
         super.saveStatus.clearStatus("");
-        setFocusWidget(urlText);
+        super.setFocusWidget(urlText);
     }
 
     /**

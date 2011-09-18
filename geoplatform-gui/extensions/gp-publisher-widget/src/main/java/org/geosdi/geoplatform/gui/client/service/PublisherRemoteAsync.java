@@ -43,6 +43,8 @@ import java.util.List;
  * @email  nazzareno.sileno@geosdi.org
  */
 public interface PublisherRemoteAsync {
-    
+
     public void publishLayerPreview(List<String> layerList, AsyncCallback<?> callback);
+
+    public void kmlPreview(String url, AsyncCallback<Boolean> callback);
 }

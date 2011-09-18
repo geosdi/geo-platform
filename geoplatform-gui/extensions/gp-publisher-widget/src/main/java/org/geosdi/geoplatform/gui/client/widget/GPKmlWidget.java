@@ -49,6 +49,7 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
+import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
@@ -56,15 +57,22 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.http.client.URL;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
-import java.util.HashMap;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.PublisherResources;
 import org.geosdi.geoplatform.gui.client.event.IUploadPreviewHandler;
+import org.geosdi.geoplatform.gui.client.event.timeout.GPKmlPreviewEvent;
+import org.geosdi.geoplatform.gui.client.event.timeout.IGPKmlPreviewHandler;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-import org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils;
+import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
+import org.geosdi.geoplatform.gui.server.gwt.PublisherRemoteImpl;
 import org.gwtopenmaps.openlayers.client.Bounds;
 
 /**
@@ -72,13 +80,14 @@ import org.gwtopenmaps.openlayers.client.Bounds;
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
 public class GPKmlWidget extends GeoPlatformWindow
-        implements IUploadPreviewHandler {
+        implements IUploadPreviewHandler, IGPKmlPreviewHandler {
 
     private ContentPanel centralPanel;
     private PreviewWidget previewWidget;
     private FieldSet southPanel;
     private Image centralImage;
     private Bounds bounds;
+    private GPKmlPreviewEvent publishShapePreviewEvent = new GPKmlPreviewEvent();
 //    private List<PreviewLayer> layerList = new ArrayList<PreviewLayer>(); // KMLPreviewLayer
     //
     private TextField<String> urlText;
@@ -90,6 +99,7 @@ public class GPKmlWidget extends GeoPlatformWindow
     public GPKmlWidget(boolean lazy) {
         super(lazy);
         GPHandlerManager.addHandler(IUploadPreviewHandler.TYPE, this);
+        TimeoutHandlerManager.addHandler(IGPKmlPreviewHandler.TYPE, this);
     }
 
     @Override
@@ -127,7 +137,13 @@ public class GPKmlWidget extends GeoPlatformWindow
     }
 
     @Override
+    public void kmlPreview() {
+        buttonPreview.fireEvent(Events.Select);
+    }
+
+    @Override
     public void showLayerPreview(String jsonString) {
+        System.out.println("%%% Method showLayerPreview() must be implemented...");
 //        StringBuilder layerProblems = new StringBuilder();
 //        PreviewLayerList previewLayers = PreviewLayerList.JSON.read(jsonString);
 //        for (PreviewLayer previewLayer : previewLayers.getPreviewLayers()) {
@@ -195,7 +211,7 @@ public class GPKmlWidget extends GeoPlatformWindow
     }
 
     private void clearComponents() {
-        reset();
+        this.reset();
         super.hide();
     }
 
@@ -212,19 +228,16 @@ public class GPKmlWidget extends GeoPlatformWindow
 
     private void addSouthPanel() {
         southPanel = new FieldSet();
-        southPanel.setHeading("Insert KML URL for preview");
-//        southPanel.setHeight(40);
-//        southPanel.setWidth(522);
-//        southPanel.setLayout(new BorderLayout());
+        southPanel.setHeading("Insert a KML URL for preview");
 
         FormLayout layout = new FormLayout();
-        layout.setLabelWidth(50);
+        layout.setLabelAlign(LabelAlign.TOP);
+        layout.setLabelSeparator("");
+        layout.setDefaultWidth(510);
         southPanel.setLayout(layout);
 
         urlText = new TextField<String>();
-        urlText.setFieldLabel("URL");
-        urlText.setEmptyText("Insert a KML URL");
-        urlText.setWidth(500);
+        urlText.setFieldLabel("KML URL");
         urlText.setValidator(new Validator() {
 
             @Override
@@ -242,12 +255,7 @@ public class GPKmlWidget extends GeoPlatformWindow
         southData.setMargins(new Margins(5, 20, 5, 20));
         super.add(southPanel, southData);
 
-        setFocusWidget(this.urlText);
-
-//        this.saveStatus = new KmlUrlStatus();
-//        this.saveStatus.setAutoWidth(true);
-//
-//        super.getButtonBar().add(this.saveStatus);
+        super.setFocusWidget(urlText);
     }
 
     private void addFooterButton() {
@@ -256,8 +264,7 @@ public class GPKmlWidget extends GeoPlatformWindow
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-//                        execute();
-                System.out.println("*** PREVIEW ***");
+                execute();
             }
         });
         buttonPreview.setEnabled(false);
@@ -283,12 +290,11 @@ public class GPKmlWidget extends GeoPlatformWindow
             @Override
             public void handleEvent(BaseEvent be) {
                 if (checkUrl()) {
+                    urlText.clearInvalid();
                     verifyUrl(false);
                 } else {
                     buttonPreview.disable();
-//                    setStatus(EnumKmlUrlStatus.STATUS_NO_CHECKED.getValue(),
-//                            EnumKmlUrlStatus.STATUS_MESSAGE_NOT_CHECKED.getValue());
-//                            suggestion);
+                    urlText.forceInvalid(suggestion);
                 }
             }
         });
@@ -304,11 +310,11 @@ public class GPKmlWidget extends GeoPlatformWindow
                     }
                 } else {
                     if (checkUrl()) {
+                        urlText.clearInvalid();
                         verifyUrl(false);
                     } else {
-//                        setStatus(EnumKmlUrlStatus.STATUS_NO_CHECKED.getValue(),
-//                                EnumKmlUrlStatus.STATUS_MESSAGE_NOT_CHECKED.getValue());
-//                            suggestion);
+                        buttonPreview.disable();
+                        urlText.forceInvalid(suggestion);
                     }
                 }
             }
@@ -336,7 +342,7 @@ public class GPKmlWidget extends GeoPlatformWindow
         url = url.replaceAll("[ ]+", ""); // Delete all spaces
 
         urlEncoding = URL.decodeQueryString(url); // Encoding into ASCII
-        System.out.println("*** URL encoding:\n" + GPRegEx.printPrettyURL(urlEncoding));
+//        System.out.println("*** URL encoding:\n" + GPRegEx.printPrettyURL(urlEncoding));
 
         if (!urlEncoding.startsWith("http://")) {
             suggestion = "URL must be start with \"http://\"";
@@ -356,43 +362,53 @@ public class GPKmlWidget extends GeoPlatformWindow
             check = true;
             suggestion = "URL syntax is OK";
         }
-        System.out.println("*** Suggestion = " + suggestion + "\n### ### ###");
+//        System.out.println("*** Suggestion = " + suggestion + "\n### ### ###");
 
         return check;
     }
 
     private void verifyUrl(final boolean runExecute) {
-//        LayerRemoteImpl.Util.getInstance().checkKmlUrl(urlEncoding, new AsyncCallback<Boolean>() {
-//
-//            @Override
-//            public void onFailure(Throwable caught) {
-//                buttonAdd.disable();
-//                GeoPlatformMessage.errorMessage("Error checking URL",
-//                        "An error occurred while making the requested connection.\n"
-//                        + "Verify network connections and try again.\n"
-//                        + "If the problem persists contact your system administrator.");
-//                LayoutManager.getInstance().getStatusMap().setStatus(
-//                        "Error checking the WMS URL.",
-//                        EnumSearchStatus.STATUS_NO_SEARCH.toString());
-//                System.out.println("Error checking the WMS URL: " + caught.toString()
-//                        + " data: " + caught.getMessage());
-//            }
-//
-//            @Override
-//            public void onSuccess(Boolean result) {
-//                if (result) {
-//                    buttonAdd.enable();
-//                    setStatus(EnumKmlUrlStatus.STATUS_CHECKED.getValue(),
-//                            EnumKmlUrlStatus.STATUS_MESSAGE_CHECKED.getValue());
-//                    if (runExecute) { // Iff the enter key is pressed
-//                        execute();
-//                    }
-//                } else {
-//                    buttonAdd.disable();
-//                    setStatus(EnumKmlUrlStatus.STATUS_CHECK_ERROR.getValue(),
-//                            EnumKmlUrlStatus.STATUS_MESSAGE_CHECK_ERROR.getValue());
-//                }
-//            }
-//        });
+        PublisherRemoteImpl.Util.getInstance().kmlPreview(urlEncoding, new AsyncCallback<Boolean>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                if (caught.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(publishShapePreviewEvent));
+                } else {
+                    GeoPlatformMessage.errorMessage("Error checking KML URL",
+                            "An error occurred while making the requested connection.\n"
+                            + "Verify network connections and try again.\n"
+                            + "If the problem persists contact your system administrator.");
+                    LayoutManager.getInstance().getStatusMap().setStatus(
+                            "Error previewed KML file",
+                            EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                    System.out.println("Error checking the KML URL: " + caught.toString()
+                            + " data: " + caught.getMessage());
+                }
+            }
+
+            @Override
+            public void onSuccess(Boolean result) {
+                if (result == null) { // DEL
+                    buttonPreview.enable(); // DEL
+                    return; // DEL
+                } // DEL
+
+                if (result) {
+                    buttonPreview.enable();
+                    if (runExecute) { // Iff the enter key is pressed
+                        execute();
+                    }
+                } else {
+                    buttonPreview.disable();
+                }
+            }
+        });
+    }
+
+    private void execute() {
+        System.out.println("%%% Method execute() must be implemented...");
+        GeoPlatformMessage.alertMessage("KML Preview",
+                "Function is not yet implemented");
     }
 }

@@ -50,13 +50,15 @@ public interface PublisherRemote extends RemoteService {
 
     public static class Util {
 
-        private static PublisherRemoteAsync instance = (PublisherRemoteAsync) GWT.create(PublisherRemote.class);
+        private static PublisherRemoteAsync instance =
+                (PublisherRemoteAsync) GWT.create(PublisherRemote.class);
 
         public static PublisherRemoteAsync getInstance() {
             return instance;
         }
     }
-    
+
     public void publishLayerPreview(List<String> layerList) throws GeoPlatformException;
 
+    public void kmlPreview(String url) throws GeoPlatformException;
 }

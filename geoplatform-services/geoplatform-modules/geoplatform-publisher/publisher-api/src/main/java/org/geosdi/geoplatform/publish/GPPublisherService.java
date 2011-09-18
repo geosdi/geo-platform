@@ -34,6 +34,7 @@
  *
  */
 package org.geosdi.geoplatform.publish;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -47,89 +48,86 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.Feature;
 import org.geosdi.geoplatform.responce.InfoPreview;
 
-
 /**
  * @author Luca Paolino  - geoSDI
  *
  * Public interface to define the service operations mapped via REST
  * using CXT framework
  */
-
 @WebService(name = "GPPublisherService", targetNamespace = "http://services.geo-platform.org/")
 public interface GPPublisherService {
 
     @Get
     @HttpResource(location = "/preview/uploadZipInPreview")
     @WebResult(name = "Result")
-    List<InfoPreview> uploadZIPInPreview(@WebParam(name = "sessionID") String sessionID,
-                @WebParam(name = "fileName") File file)
+    List<InfoPreview> uploadZIPInPreview(
+            @WebParam(name = "sessionID") String sessionID,
+            @WebParam(name = "fileName") File file)
             throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/preview/uploadShpInPreview")
     @WebResult(name = "Result")
-    List<InfoPreview> uploadShapeInPreview(@WebParam(name = "sessionID") String sessionID,
-                        @WebParam(name = "shpFileName") File shpFile,
-                       @WebParam(name = "dbfFileName") File dbfFile,
-                       @WebParam(name = "shxFileName") File shxFile,
-                       @WebParam(name = "prjFileName") File prjFile,
-                       @WebParam(name = "sldFileName") File sldFile)
+    List<InfoPreview> uploadShapeInPreview(
+            @WebParam(name = "sessionID") String sessionID,
+            @WebParam(name = "shpFileName") File shpFile,
+            @WebParam(name = "dbfFileName") File dbfFile,
+            @WebParam(name = "shxFileName") File shxFile,
+            @WebParam(name = "prjFileName") File prjFile,
+            @WebParam(name = "sldFileName") File sldFile)
             throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/preview/getPreviewDataStores")
     @WebResult(name = "Result")
-    List<InfoPreview> getPreviewDataStores(@WebParam(name = "sessionID") String sessionID)
+    List<InfoPreview> getPreviewDataStores(
+            @WebParam(name = "sessionID") String sessionID)
             throws ResourceNotFoundFault;
-    
+
     @Post
     @HttpResource(location = "/preview/createSHP")
     @WebResult(name = "Result")
     byte[] createSHP(@WebParam(name = "sessionID") String sessionID,
-                      @WebParam(name = "featureList") List<Feature> list,
-                      @WebParam(name = "shpFileName") String shpFileName)
+            @WebParam(name = "featureList") List<Feature> list,
+            @WebParam(name = "shpFileName") String shpFileName)
             throws ResourceNotFoundFault, Exception;
 
     @Post
     @HttpResource(location = "/preview/verifyAndDeleteSessionDir")
     @WebResult(name = "Result")
-    boolean verifyAndDeleteSessionDir(@WebParam(name = "idSessionDestroyed") String idSessionDestroyed);
+    boolean verifyAndDeleteSessionDir(
+            @WebParam(name = "idSessionDestroyed") String idSessionDestroyed);
 
-            
     @Get
     @HttpResource(location = "/preview/publish")
     @WebResult(name = "Result")
     boolean publish(@WebParam(name = "sessionID") String sessionID,
-                    @WebParam(name = "workspace") String workspace,
-                    @WebParam(name = "dataStoreName") String dataStoreName,
-                    @WebParam(name = "layerName") String layerName) throws ResourceNotFoundFault, FileNotFoundException;
-
+            @WebParam(name = "workspace") String workspace,
+            @WebParam(name = "dataStoreName") String dataStoreName,
+            @WebParam(name = "layerName") String layerName)
+            throws ResourceNotFoundFault, FileNotFoundException;
 
     @Get
     @HttpResource(location = "/preview/publishAll")
     @WebResult(name = "Result")
     boolean publishAll(@WebParam(name = "sessionID") String sessionID,
-                    @WebParam(name = "workspace") String workspace,
-                    @WebParam(name = "dataStoreName") String dataStoreName,
-                    @WebParam(name = "layerName") List<String> layerNames) throws ResourceNotFoundFault, FileNotFoundException;
-
+            @WebParam(name = "workspace") String workspace,
+            @WebParam(name = "dataStoreName") String dataStoreName,
+            @WebParam(name = "layerName") List<String> layerNames)
+            throws ResourceNotFoundFault, FileNotFoundException;
 
     @Get
     @HttpResource(location = "/preview/publishAllofPreview")
     @WebResult(name = "Result")
     boolean publishAllofPreview(@WebParam(name = "sessionID") String sessionID,
-                    @WebParam(name = "workspace") String workspace,
-                    @WebParam(name = "dataStoreName") String dataStoreName
-                    ) throws ResourceNotFoundFault, FileNotFoundException;
-
+            @WebParam(name = "workspace") String workspace,
+            @WebParam(name = "dataStoreName") String dataStoreName)
+            throws ResourceNotFoundFault, FileNotFoundException;
 
     @Get
-
-
     @HttpResource(location = "/preview/removeFromPreview")
     @WebResult(name = "Result")
     boolean removeFromPreview(@WebParam(name = "sessionID") String sessionID,
             @WebParam(name = "dataStoreName") String dataStoreName)
             throws ResourceNotFoundFault;
-
 }

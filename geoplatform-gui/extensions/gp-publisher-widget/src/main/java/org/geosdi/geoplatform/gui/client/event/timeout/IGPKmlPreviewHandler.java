@@ -39,12 +39,12 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public interface IGPPublishShapePreviewHandler extends EventHandler {
+public interface IGPKmlPreviewHandler extends EventHandler {
 
-    Type<IGPPublishShapePreviewHandler> TYPE = new Type<IGPPublishShapePreviewHandler>();
+    Type<IGPKmlPreviewHandler> TYPE = new Type<IGPKmlPreviewHandler>();
 
-    public void publishShapePreview();
+    public void kmlPreview();
 }

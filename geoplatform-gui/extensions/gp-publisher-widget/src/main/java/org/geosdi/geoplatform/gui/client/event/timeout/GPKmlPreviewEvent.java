@@ -35,16 +35,22 @@
  */
 package org.geosdi.geoplatform.gui.client.event.timeout;
 
-import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public interface IGPPublishShapePreviewHandler extends EventHandler {
+public class GPKmlPreviewEvent extends GwtEvent<IGPKmlPreviewHandler> {
 
-    Type<IGPPublishShapePreviewHandler> TYPE = new Type<IGPPublishShapePreviewHandler>();
+    @Override
+    public Type<IGPKmlPreviewHandler> getAssociatedType() {
+        return IGPKmlPreviewHandler.TYPE;
+    }
 
-    public void publishShapePreview();
+    @Override
+    protected void dispatch(IGPKmlPreviewHandler handler) {
+        handler.kmlPreview();
+    }
 }

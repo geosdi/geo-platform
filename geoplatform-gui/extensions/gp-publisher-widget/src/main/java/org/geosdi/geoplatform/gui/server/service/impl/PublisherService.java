@@ -60,13 +60,15 @@ import org.springframework.stereotype.Service;
 public class PublisherService implements IPublisherService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
     private GeoPlatformPublishClient geoPlatformPublishClient;
 
     @Override
     public void publishLayerPreview(HttpServletRequest httpServletRequest, List<String> layerList) throws GeoPlatformException {
         GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
         try {
-            geoPlatformPublishClient.getPublishService().publishAll(httpServletRequest.getSession().getId(), "previews", "dataTest", layerList);
+            geoPlatformPublishClient.getPublishService().publishAll(
+                    httpServletRequest.getSession().getId(), "previews", "dataTest", layerList);
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error on publish shape: " + ex);
             System.out.println("Error on publish shape: " + ex);
@@ -76,6 +78,13 @@ public class PublisherService implements IPublisherService {
             System.out.println("Error on publish shape: " + ex);
             throw new GeoPlatformException("Error on publish shape.");
         }
+    }
+
+    @Override
+    public void kmlPreview(HttpServletRequest httpServletRequest, String url)
+            throws GeoPlatformException {
+//        GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
+        // TODO
     }
 
     private GPUser getUserAlreadyFromSession(HttpServletRequest httpServletRequest) {

@@ -53,6 +53,7 @@ import org.geosdi.geoplatform.gui.observable.Observable;
 public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
 
     private static final long serialVersionUID = -5458269761345444182L;
+    //
     private static GPLayerSaveCache instance = new GPLayerSaveCache();
     private ObservableGPLayerSaveCache observable = new ObservableGPLayerSaveCache();
     private Map<GPLayerTreeModel, MementoLayerOriginalProperties> modifiedLayersMap = new HashMap<GPLayerTreeModel, MementoLayerOriginalProperties>();

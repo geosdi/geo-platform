@@ -175,7 +175,8 @@ class LayerServiceImpl {
         return layerDao.remove(layer);
     }
 
-    public long saveAddedLayerAndTreeModifications(String username, GPLayer layer, GPWebServiceMapData descendantsMapData)
+    public long saveAddedLayerAndTreeModifications(String username,
+            GPLayer layer, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPUser owner = userDao.findByUsername(username);
         if (owner == null) {
@@ -206,7 +207,8 @@ class LayerServiceImpl {
         return layer.getId();
     }
 
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(String username, List<GPLayer> layers, GPWebServiceMapData descendantsMapData)
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(String username,
+            List<GPLayer> layers, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPUser owner = userDao.findByUsername(username);
         if (owner == null) {
@@ -393,6 +395,37 @@ class LayerServiceImpl {
             gPFolder.setPosition(gPFolder.getPosition() + value);
             System.out.println("New position assignet to: " + gPFolder.getName() + " posiz: " + gPFolder.getPosition());
         }
+    }
+
+    public boolean saveLayerProperties(String username, long layerId,
+            String alias, float opacity, boolean checked)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        GPUser owner = userDao.findByUsername(username);
+        if (owner == null) {
+            throw new ResourceNotFoundFault("Owner with username \"" + username + "\" not found");
+        }
+
+        GPLayer layer = layerDao.find(layerId);
+        if (layer == null) {
+            throw new ResourceNotFoundFault("Layer not found", layerId);
+        }
+
+        layer.setAlias(alias);
+        if (layer instanceof GPRasterLayer) {
+            ((GPRasterLayer) layer).setOpacity(opacity);
+        }
+
+        layerDao.merge(layer);
+
+        boolean checkSave = layerDao.persistCheckStatusLayer(layerId, checked);
+
+        // Iff isChecked is true, all the ancestor folders must be checked
+        if (checked && checkSave) {
+            Long[] layerAncestors = this.getIdsFolderAndAncestors(layer.getFolder());
+            return folderDao.persistCheckStatusFolders(true, layerAncestors);
+        }
+
+        return true;
     }
 
     public GPRasterLayer getRasterLayer(long layerId) throws ResourceNotFoundFault {

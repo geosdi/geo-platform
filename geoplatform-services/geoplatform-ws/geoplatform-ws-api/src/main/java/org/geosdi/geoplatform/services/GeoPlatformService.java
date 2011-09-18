@@ -384,6 +384,15 @@ public interface GeoPlatformService {
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault;
 
+    @Post
+    @HttpResource(location = "/layer")
+    boolean saveLayerProperties(@WebParam(name = "username") String username,
+            @WebParam(name = "layerId") long layerId,
+            @WebParam(name = "alias") String alias,
+            @WebParam(name = "opacity") float opacity,
+            @WebParam(name = "checked") boolean checked)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
     /**
      * @return a raster layer.
      */
@@ -507,8 +516,8 @@ public interface GeoPlatformService {
     @HttpResource(location = "/server")
     ServerDTO saveServer(@WebParam(name = "id") Long id,
             @WebParam(name = "aliasServerName") String aliasServerName,
-        @WebParam(name = "serverUrl") String serverUrl,
-        @WebParam(name = "token") String token)
+            @WebParam(name = "serverUrl") String serverUrl,
+            @WebParam(name = "token") String token)
             throws ResourceNotFoundFault;
     //</editor-fold>
 

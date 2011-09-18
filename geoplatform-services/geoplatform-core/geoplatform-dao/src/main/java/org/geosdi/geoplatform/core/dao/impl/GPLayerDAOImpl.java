@@ -255,22 +255,22 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
     }
 
     @Override
-    public boolean persistCheckStatusLayer(long idLayer, boolean isChecked) {
+    public boolean persistCheckStatusLayer(long idLayer, boolean checked) {
         // Retrieve the layer
         GPLayer layer = this.find(idLayer);
         if (layer == null) {
             logger.debug("\n*** The Layer with ID \"{}\" does NOT exist into DB ***", idLayer);
             return false;
         }
-        logger.trace("\n*** Layer RETRIEVED:\n{}\n*** MOD checked to {} ***", layer, isChecked);
+        logger.trace("\n*** Layer RETRIEVED:\n{}\n*** MOD checked to {} ***", layer, checked);
 
         // Merge iff the check status is different
-        if (layer.isChecked() != isChecked) {
-            layer.setChecked(isChecked);
+        if (layer.isChecked() != checked) {
+            layer.setChecked(checked);
 
-            GPLayer layerUpdated = merge(layer);
+            GPLayer layerUpdated = this.merge(layer);
 
-            if (layerUpdated.isChecked() != isChecked) {
+            if (layerUpdated.isChecked() != checked) {
                 return false;
             }
         }

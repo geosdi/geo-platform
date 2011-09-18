@@ -46,8 +46,8 @@ import org.geosdi.geoplatform.gui.observable.Observable;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
-        GPLayerBean {
+public abstract class GPLayerTreeModel extends GPBeanTreeModel
+        implements GPLayerBean {
 
     /**
      *
@@ -149,7 +149,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel implements
     @Override
     public void setAlias(String alias) {
         this.alias = alias;
-        set(GPLayerKeyValue.ALIAS.toString(), this.alias);
+        super.set(GPLayerKeyValue.ALIAS.toString(), this.alias);
     }
 
     /**

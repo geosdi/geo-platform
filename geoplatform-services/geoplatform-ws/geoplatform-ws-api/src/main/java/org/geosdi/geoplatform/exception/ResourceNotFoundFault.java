@@ -41,11 +41,11 @@ import javax.xml.ws.WebFault;
  * @author giuseppe
  *
  */
-@WebFault(name="ResourceNotFoundFault", faultBean="org.geosdi.exception.ResourceNotFoundFault")
+@WebFault(name = "ResourceNotFoundFault", faultBean = "org.geosdi.exception.ResourceNotFoundFault")
 public class ResourceNotFoundFault extends Exception {
-	
-	private static final long serialVersionUID = 4100712158220027390L;
 
+    private static final long serialVersionUID = 4100712158220027390L;
+    //
     private long id = -1;
 
     public ResourceNotFoundFault() {
@@ -76,5 +76,4 @@ public class ResourceNotFoundFault extends Exception {
     public String getMessage() {
         return super.getMessage();
     }
-
 }

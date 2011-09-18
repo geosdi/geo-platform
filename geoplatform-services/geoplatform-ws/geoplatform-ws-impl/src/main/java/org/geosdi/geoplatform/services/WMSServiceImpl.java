@@ -190,7 +190,7 @@ class WMSServiceImpl {
         WMSCapabilities wmsCapabilities = this.getWMSCapabilities(serverUrl, token);
 
         GeoPlatformServer server = null;
-        if(id != null){
+        if (id != null) {
             server = serverDao.find(id);
         }
         if (server == null && !this.isURLServerAlreadyExists(serverUrl)) {

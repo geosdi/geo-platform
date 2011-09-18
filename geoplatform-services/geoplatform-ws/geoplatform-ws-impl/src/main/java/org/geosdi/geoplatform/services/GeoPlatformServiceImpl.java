@@ -298,7 +298,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public GPUser getUserDetailByUsernameAndPassword(String username, String password) throws ResourceNotFoundFault, SOAPFaultException {
+    public GPUser getUserDetailByUsernameAndPassword(String username, String password)
+            throws ResourceNotFoundFault, SOAPFaultException {
         GPUser user = null;
         try {
             user = userServiceDelegate.getUserDetailByUsernameAndPassword(username);
@@ -471,12 +472,14 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public long updateRasterLayer(GPRasterLayer layer) throws ResourceNotFoundFault, IllegalParameterFault {
+    public long updateRasterLayer(GPRasterLayer layer)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.updateRasterLayer(layer);
     }
 
     @Override
-    public long updateVectorLayer(GPVectorLayer layer) throws ResourceNotFoundFault, IllegalParameterFault {
+    public long updateVectorLayer(GPVectorLayer layer)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.updateVectorLayer(layer);
     }
 
@@ -487,13 +490,15 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public long saveAddedLayerAndTreeModifications(String username, GPLayer layer, GPWebServiceMapData descendantsMapData)
+    public long saveAddedLayerAndTreeModifications(String username,
+            GPLayer layer, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.saveAddedLayerAndTreeModifications(username, layer, descendantsMapData);
     }
 
     @Override
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(String username, List<GPLayer> layers, GPWebServiceMapData descendantsMapData)
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(String username,
+            List<GPLayer> layers, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.saveAddedLayersAndTreeModifications(username, layers, descendantsMapData);
     }
@@ -517,18 +522,27 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean saveDragAndDropLayerAndTreeModifications(String username, long idElementMoved, long idNewParent, int newPosition,
-            GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
+    public boolean saveDragAndDropLayerAndTreeModifications(String username, long idElementMoved,
+            long idNewParent, int newPosition, GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault {
         return layerServiceDelegate.saveDragAndDropLayerModifications(username, idElementMoved, idNewParent, newPosition, descendantsMapData);
     }
 
     @Override
-    public GPRasterLayer getRasterLayer(long layerId) throws ResourceNotFoundFault {
+    public boolean saveLayerProperties(String username, long layerId, String alias, float opacity, boolean checked)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return layerServiceDelegate.saveLayerProperties(username, layerId, alias, opacity, checked);
+    }
+
+    @Override
+    public GPRasterLayer getRasterLayer(long layerId)
+            throws ResourceNotFoundFault {
         return layerServiceDelegate.getRasterLayer(layerId);
     }
 
     @Override
-    public GPVectorLayer getVectorLayer(long layerId) throws ResourceNotFoundFault {
+    public GPVectorLayer getVectorLayer(long layerId)
+            throws ResourceNotFoundFault {
         return layerServiceDelegate.getVectorLayer(layerId);
     }
 

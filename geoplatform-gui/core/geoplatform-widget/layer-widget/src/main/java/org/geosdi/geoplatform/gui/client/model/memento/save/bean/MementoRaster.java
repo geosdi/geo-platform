@@ -52,8 +52,9 @@ public class MementoRaster extends AbstractMementoLayer<RasterTreeNode>
     public MementoRaster() {
     }
 
-    //TODO: vedere come fornire il GPLayerInfo
+    //TODO: How to provide the GPLayerInfo?
     //private GPLayerInfo layerInfo;
+    //
     public MementoRaster(ISave saveAction) {
         super(saveAction);
 //        RasterTreeNode raster = new RasterTreeNode();

@@ -44,9 +44,12 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public abstract class AbstractMementoLayer<T extends GPLayerTreeModel> extends AbstractMementoSave<T> {
+public abstract class AbstractMementoLayer<T extends GPLayerTreeModel>
+        extends AbstractMementoSave<T> {
 
     private static final long serialVersionUID = -3151230290345781610L;
+    //
+    private GPLayerType layerType;
     private String layerName;
     private int zIndex;
     private transient FolderTreeNode refParent;
@@ -57,27 +60,26 @@ public abstract class AbstractMementoLayer<T extends GPLayerTreeModel> extends A
 //    private float opacity;
     private String dataSource;
     private String srs;
+//    private boolean checked;    
     /* GPBBox elements */
     private double lowerLeftX;
     private double lowerLeftY;
     private double upperRightX;
     private double upperRightY;
-    private GPLayerType layerType;
-//    private boolean checked;
+
+    public AbstractMementoLayer() {
+    }
 
     public AbstractMementoLayer(ISave saveAction) {
         super(saveAction);
-    }
-
-    public AbstractMementoLayer() {
     }
 
     @Override
     public void convertMementoToWs() {
         System.out.println("Converting abstract memento layer for ws");
         super.convertMementoToWs();
-        if (this.getRefParent() != null) {
-            this.idFolderParent = this.refParent.getId();
+        if (refParent != null) {
+            idFolderParent = refParent.getId();
         }
     }
 
@@ -97,14 +99,6 @@ public abstract class AbstractMementoLayer<T extends GPLayerTreeModel> extends A
         this.dataSource = dataSource;
     }
 
-//    public boolean isChecked() {
-//        return checked;
-//    }
-//
-//    public void setChecked(boolean checked) {
-//        this.checked = checked;
-//    }
-
     public String getLayerName() {
         return layerName;
     }
@@ -112,7 +106,7 @@ public abstract class AbstractMementoLayer<T extends GPLayerTreeModel> extends A
     public void setLayerName(String layerName) {
         this.layerName = layerName;
     }
-    
+
 //    public String getAlias() {
 //        return alias;
 //    }
@@ -128,7 +122,15 @@ public abstract class AbstractMementoLayer<T extends GPLayerTreeModel> extends A
 //    public void setOpacity(float opacity) {
 //        this.opacity = opacity;
 //    }
-
+//    
+//    public boolean isChecked() {
+//        return checked;
+//    }
+//
+//    public void setChecked(boolean checked) {
+//        this.checked = checked;
+//    }    
+//    
     public GPLayerType getLayerType() {
         return layerType;
     }

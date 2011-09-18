@@ -48,8 +48,9 @@ public class MementoVector extends AbstractMementoLayer<VectorTreeNode> implemen
 
     private static final long serialVersionUID = -5551744199479235803L;
 
-    //TODO: vedere come fornire la Geometry
+    //TODO: How to provide the Geometry?
     //private Geometry geometry;
+    //
     public MementoVector() {
     }
 
@@ -59,8 +60,6 @@ public class MementoVector extends AbstractMementoLayer<VectorTreeNode> implemen
 
     @Override
     public void update(Observable o, Object arg) {
-        super.setIdBaseElement((Long)arg);
+        super.setIdBaseElement((Long) arg);
     }
-
-
 }

@@ -44,9 +44,11 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoLayerOriginalProperties extends AbstractMementoSave<GPLayerTreeModel> {
-    
+public class MementoLayerOriginalProperties
+        extends AbstractMementoSave<GPLayerTreeModel> {
+
     private static final long serialVersionUID = 5408762639577399920L;
+    //
     private String alias;
     private float opacity;
     private boolean checked;
@@ -61,10 +63,10 @@ public class MementoLayerOriginalProperties extends AbstractMementoSave<GPLayerT
     @Override
     public void convertMementoToWs() {
         super.convertMementoToWs();
-        this.alias = super.getRefBaseElement().getAlias();
-        this.checked = super.getRefBaseElement().isChecked();
-        if(super.getRefBaseElement() instanceof RasterTreeNode){
-            this.opacity = ((RasterTreeNode)super.getRefBaseElement()).getOpacity();
+        alias = super.getRefBaseElement().getAlias();
+        checked = super.getRefBaseElement().isChecked();
+        if (super.getRefBaseElement() instanceof RasterTreeNode) {
+            opacity = ((RasterTreeNode) super.getRefBaseElement()).getOpacity();
         }
     }
 
@@ -108,6 +110,5 @@ public class MementoLayerOriginalProperties extends AbstractMementoSave<GPLayerT
      */
     public void setChecked(boolean checked) {
         this.checked = checked;
-    }    
-    
+    }
 }

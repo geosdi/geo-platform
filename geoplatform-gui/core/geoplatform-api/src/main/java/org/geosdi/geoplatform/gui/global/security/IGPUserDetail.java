@@ -13,13 +13,13 @@ import java.util.Map;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public interface IGPUserDetail extends Serializable {
-    
+
     public String getName();
-    
+
     public void setName(String name);
-    
+
     public String getEmail();
-    
+
     public void setEmail(String email);
 
     public String getUserName();
@@ -31,4 +31,8 @@ public interface IGPUserDetail extends Serializable {
     public Map<String, Boolean> getComponentPermission();
 
     public boolean hasComponentPermission(String idComponent);
+
+    public boolean isViewer();
+
+    public void setViewer(boolean viewer);
 }

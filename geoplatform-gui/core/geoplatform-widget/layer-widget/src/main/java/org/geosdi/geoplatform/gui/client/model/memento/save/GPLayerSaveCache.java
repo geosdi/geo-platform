@@ -142,7 +142,7 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
 
     private boolean isChanged(GPLayerTreeModel gpLayerTreeModel) {
         MementoLayerOriginalProperties memento = this.modifiedLayersMap.get(gpLayerTreeModel);
-        if((memento.getAlias() == null && gpLayerTreeModel != null) 
+        if ((memento.getAlias() == null && gpLayerTreeModel != null)
                 || !memento.getAlias().equals(gpLayerTreeModel.getAlias())
                 || memento.isChecked() != gpLayerTreeModel.isChecked()) {
             return true;

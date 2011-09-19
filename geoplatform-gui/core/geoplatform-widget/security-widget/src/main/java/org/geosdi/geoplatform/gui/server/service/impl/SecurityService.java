@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -69,10 +70,14 @@ public class SecurityService implements ISecurityService {
     public IGPUserDetail userLogin(String userName, String password,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPUser user = null;
+        List<String> roles = null;
         GuiComponentsPermissionMapData guiComponemtPermission;
         try {
             user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(
                     userName, password);
+
+            roles = geoPlatformServiceClient.getUserAuthorities(user.getId());
+
             guiComponemtPermission = geoPlatformServiceClient.getUserGuiComponentVisible(
                     user.getId());
         } catch (ResourceNotFoundFault ex) {
@@ -89,9 +94,14 @@ public class SecurityService implements ISecurityService {
 
         IGPUserDetail userDetail = this.userConverter.convertUserToDTO(user);
 
+        for (String role : roles) {
+            if (role.equals("ROLE_VIEWER")) {
+                userDetail.setViewer(true);
+            }
+        }
+
         userDetail.setComponentPermission(
                 guiComponemtPermission.getGuiComponentsPermissionMap());
-
 
         return userDetail;
     }

@@ -58,13 +58,11 @@ import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 public class SaveTreeAction extends ToolbarLayerTreeAction
         implements GPPeekCacheEventHandler, Observer {
 
-    private DisplayLayersProgressBarEvent displayEvent = new DisplayLayersProgressBarEvent(
-            true);
+    private DisplayLayersProgressBarEvent displayEvent = new DisplayLayersProgressBarEvent(true);
     private boolean visibiltyProgressBar;
 
     public SaveTreeAction(TreePanel theTree) {
-        super(theTree, BasicWidgetResources.ICONS.save(),
-                "Save Tree State");
+        super(theTree, BasicWidgetResources.ICONS.save(), "Save Tree State");
         displayEvent.setMessage("Saving Operations On Service");
         GPLayerSaveCache.getInstance().getObservable().addObserver(this);
         TimeoutHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);
@@ -73,8 +71,8 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
 
     @Override
     public void componentSelected(ButtonEvent ce) {
-        showProgressBar();
-        peek();
+        this.showProgressBar();
+        this.peek();
     }
 
     @Override

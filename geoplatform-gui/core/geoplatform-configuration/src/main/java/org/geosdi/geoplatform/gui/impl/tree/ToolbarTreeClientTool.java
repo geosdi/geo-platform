@@ -60,6 +60,8 @@ public class ToolbarTreeClientTool {
     public static final String TOOLBAR_LOAD_KML_FROM_URL = "loadKmlFromUrl";
     public static final String TOOLBAR_PREVIEW_KML_FROM_URL = "previewKmlFromUrl";
     //
+    public static boolean USER_VIEWER; //
+    //
     private List<GenericClientTool> clientTools = new ArrayList<GenericClientTool>();
 
     public ToolbarTreeClientTool() {
@@ -148,7 +150,10 @@ public class ToolbarTreeClientTool {
         this.clientTools.add(uploaderClientTool);
         this.clientTools.add(toolbarSeparator2);
         this.clientTools.add(printClientTool);
-        this.clientTools.add(saveTreeState);
+        System.out.println("# USER_VIEWER: " + USER_VIEWER);
+        if (USER_VIEWER == false) { //
+            this.clientTools.add(saveTreeState);
+        } //
         this.clientTools.add(removeElement);
         this.clientTools.add(toolbarSeparator);
         this.clientTools.add(addFolder);

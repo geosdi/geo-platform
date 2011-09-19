@@ -115,6 +115,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         this.formPanel.add(this.grid);
 
         StoreFilterField<L> filter = this.createFilter();
+        filter.setToolTip("Filter into \"title\" and \"abstract\"");
         filter.bind(super.store);
 
         this.formPanel.setButtonAlign(HorizontalAlignment.LEFT);

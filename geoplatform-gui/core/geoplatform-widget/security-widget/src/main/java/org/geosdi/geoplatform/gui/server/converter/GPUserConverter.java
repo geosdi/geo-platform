@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class GPUserConverter {
-    
+
     public IGPUserDetail convertUserToDTO(GPUser user) {
         IGPUserDetail userDetail = new GPLoginUserDetail();
         userDetail.setName(user.getUsername());
@@ -53,5 +53,4 @@ public class GPUserConverter {
         userDetail.setEmail(user.getEmailAddress());
         return userDetail;
     }
-    
 }

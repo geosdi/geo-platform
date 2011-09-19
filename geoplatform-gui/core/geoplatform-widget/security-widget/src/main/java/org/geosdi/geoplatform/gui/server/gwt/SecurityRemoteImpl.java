@@ -47,13 +47,13 @@ import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class SecurityRemoteImpl extends RemoteServiceServlet implements SecurityRemote{
-    
-    private static final long serialVersionUID = -1494707375482103152L;
+public class SecurityRemoteImpl extends RemoteServiceServlet
+        implements SecurityRemote {
 
+    private static final long serialVersionUID = -1494707375482103152L;
+    //
     private ISecurityService securityService = (ISecurityService) GeoPlatformContextUtil.getInstance().getBean(
-                SecurityService.class);
-    
+            SecurityService.class);
 
     @Override
     public IGPUserDetail userLogin(String userName, String password) throws GeoPlatformException {
@@ -64,5 +64,4 @@ public class SecurityRemoteImpl extends RemoteServiceServlet implements Security
     public void invalidateSession() throws GeoPlatformException {
         this.securityService.invalidateSession(super.getThreadLocalRequest());
     }
-    
 }

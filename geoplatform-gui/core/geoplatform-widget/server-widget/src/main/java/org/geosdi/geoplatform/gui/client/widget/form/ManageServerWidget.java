@@ -247,19 +247,8 @@ public class ManageServerWidget extends Window {
 
                         @Override
                         public void onSuccess(GPServerBeanModel serverSaved) {
-                            server.setId(serverSaved.getId());
-                            Map<String, Object> changes = record.getChanges();
-                            if (changes.get("alias") != null) {
-                                server.setAlias(record.get("alias").toString());
-                            }
-                            if (changes.get("urlServer") != null) {
-                                server.setUrlServer(record.get("urlServer").toString());
-                            }
-                            System.out.println("Alias: " + record.get("alias"));
-                            System.out.println("Url server: " + record.get("urlServer"));
-                            System.out.println("Server updated ok");
-                            record.commit(true);
-                            store.update(server);
+                            store.remove(server);
+                            store.insert(serverSaved, 0);
 //                            displayServerWidget.addServer(server);
                         }
                     });

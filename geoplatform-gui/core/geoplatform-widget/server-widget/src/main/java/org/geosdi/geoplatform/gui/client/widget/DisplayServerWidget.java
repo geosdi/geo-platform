@@ -94,7 +94,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         TimeoutHandlerManager.addHandler(IDisplayGetCapabilitiesHandler.TYPE, this);
         init();
         this.gridWidget = theGridWidget;
-        this.manageServersWidget = new ManageServerWidget(this, true);
+        this.manageServersWidget = new ManageServerWidget(store, true);
         this.loadcapabilities = new PerformGetcapabilities();
     }
 

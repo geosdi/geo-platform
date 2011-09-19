@@ -123,8 +123,8 @@ public class OGCService implements IOGCService {
                     id, aliasServerName, urlServer, token);
 
         } catch (ResourceNotFoundFault ex) {
-            logger.error("Inser Server Error : " + ex);
-            throw new GeoPlatformException(ex);
+            logger.error("Insert Server Error : " + ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
         }
         return this.dtoServerConverter.convertServerWS(serverWS);
     }

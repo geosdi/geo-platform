@@ -39,9 +39,6 @@ import java.util.ArrayList;
 import java.util.List;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.RowEditorEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Record;
@@ -59,7 +56,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.HashMap;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
-import org.geosdi.geoplatform.gui.client.widget.DisplayServerWidget;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -72,15 +68,13 @@ import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
  */
 public class ManageServerWidget extends Window {
 
-    private DisplayServerWidget displayServerWidget;
     private boolean initialized;
     private PerformOperation operation = new PerformOperation();
     private ListStore<GPServerBeanModel> store;// = new ListStore<GPServerBeanModel>();
     private Map<GPServerBeanModel, Record> recordMap = new HashMap<GPServerBeanModel, Record>();
 
-    public ManageServerWidget(DisplayServerWidget displayServerWidget, boolean lazy) {
-        this.displayServerWidget = displayServerWidget;
-        this.store = displayServerWidget.getStore();
+    public ManageServerWidget(ListStore<GPServerBeanModel> store, boolean lazy) {
+        this.store = store;
         if (!lazy) {
             init();
         }
@@ -166,6 +160,10 @@ public class ManageServerWidget extends Window {
 //                server.setUrlServer("http://");
                 rowEditor.stopEditing(false);
                 store.insert(server, 0);
+                Record record = store.getRecord(server);
+                record.set("alias", "New Server");
+                record.set("urlServer", "");
+                store.update(server);
                 rowEditor.startEditing(store.indexOf(server), true);
             }
         });
@@ -197,25 +195,9 @@ public class ManageServerWidget extends Window {
                 List<Record> modifiedElements = store.getModifiedRecords();
                 System.out.println("Modified elements number: " + modifiedElements.size());
                 for (Record record : modifiedElements) {
-                    GPServerBeanModel server = (GPServerBeanModel) record.getModel();
-                    Record localRecord = recordMap.get(server);
-                    if (localRecord != null) {
-                        Map<String, Object> changes = localRecord.getChanges();
-                        System.out.println("Alias: " + changes.get("alias"));
-                        System.out.println("Url server: " + changes.get("urlServer"));
-                        if (changes.get("alias") != null) {
-                            server.setAlias(changes.get("alias").toString());
-                        }
-                        if (changes.get("urlServer") != null) {
-                            server.setUrlServer(changes.get("urlServer").toString());
-                        }
-                    }
-                    operation.addServer(server.getId(), server.getAlias(), server.getUrlServer());
+                    operation.updateInsertServer(record);
                 }
-                store.commitChanges();
-                for (GPServerBeanModel element : store.getModels()) {
-                    System.out.println("Element: " + element.getAlias());
-                }
+                //store.commitChanges();
             }
         }));
     }
@@ -247,63 +229,37 @@ public class ManageServerWidget extends Window {
      */
     private class PerformOperation {
 
-        private void addServer(Long id, String serverName, String serverURL) {
-//            GPServerBeanModel oldServer = displayServerWidget.containsServer(serverURL);
-//            if (oldServer != null) {
-//                notifyServerPresence(serverURL, oldServer);
-//                this.updateServer(oldServer.getId(), serverName, serverURL);
-//            } else {
-//                this.saveServer(null, serverName, serverURL);
-//            }
-            this.updateServer(id, serverName, serverURL);
-        }
-
-        private void saveServer(Long id, String serverName, String serverURL) {
+        private void updateInsertServer(final Record record) {
+            final GPServerBeanModel server = (GPServerBeanModel) record.getModel();
             GeoPlatformOGCRemote.Util.getInstance().insertServer(
-                    id, serverName.trim(), serverURL.trim(),
+                    server.getId(), record.get("alias").toString(),
+                    record.get("urlServer").toString(),
                     new AsyncCallback<GPServerBeanModel>() {
 
                         @Override
                         public void onFailure(Throwable caught) {
+                            GeoPlatformMessage.errorMessage("Error on Saving Server",
+                                    "Error " + caught.getMessage() + " on server url: " + record.get("urlServer").toString());
                             LayoutManager.getInstance().getStatusMap().setStatus(
                                     "Save Server Error. " + caught.getMessage(),
                                     EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                         }
 
                         @Override
-                        public void onSuccess(GPServerBeanModel server) {
-//                            clearComponents();
-//                            displayServerWidget.addServer(server);
-                        }
-                    });
-        }
-
-        private void notifyServerPresence(String serverUrl, GPServerBeanModel oldServer) {
-//            LayoutManager.getInstance().getStatusMap().setStatus(
-//                    "Save Server",
-//                    EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-            GeoPlatformMessage.alertMessage("Server Present",
-                    "The Server with url : " + serverUrl
-                    + " is already present in Combo Box with the name "
-                    + oldServer.getAlias() + ".");
-        }
-
-        private void updateServer(Long id, String serverName, String serverURL) {
-            GeoPlatformOGCRemote.Util.getInstance().insertServer(
-                    id, serverName.trim(), serverURL.trim(),
-                    new AsyncCallback<GPServerBeanModel>() {
-
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "Save Server Error. " + caught.getMessage(),
-                                    EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
-                        }
-
-                        @Override
-                        public void onSuccess(GPServerBeanModel server) {
+                        public void onSuccess(GPServerBeanModel serverSaved) {
+                            server.setId(serverSaved.getId());
+                            Map<String, Object> changes = record.getChanges();
+                            if (changes.get("alias") != null) {
+                                server.setAlias(record.get("alias").toString());
+                            }
+                            if (changes.get("urlServer") != null) {
+                                server.setUrlServer(record.get("urlServer").toString());
+                            }
+                            System.out.println("Alias: " + record.get("alias"));
+                            System.out.println("Url server: " + record.get("urlServer"));
                             System.out.println("Server updated ok");
-//                            TODO: Implement the server update
+                            record.commit(true);
+                            store.update(server);
 //                            displayServerWidget.addServer(server);
                         }
                     });

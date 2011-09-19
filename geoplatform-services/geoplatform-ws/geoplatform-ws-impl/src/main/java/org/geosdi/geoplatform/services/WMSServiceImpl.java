@@ -39,6 +39,7 @@ package org.geosdi.geoplatform.services;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -198,14 +199,15 @@ class WMSServiceImpl {
             Service service = wmsCapabilities.getService();
             server = this.createWMSServerFromService(serverUrl, service);
             server.setAliasName(aliasServerName);
+            serverDao.persist(server);
         } else if (server != null) {
             //Updating fields
             server.setAliasName(aliasServerName);
             server.setServerUrl(serverUrl);
+            serverDao.merge(server);
         } else {
             throw new IllegalArgumentException("Duplicated server url");
         }
-        serverDao.persist(server);
         serverDTO = new ServerDTO(server);
         List<RasterLayerDTO> layers = convertToLayerList(
                 wmsCapabilities.getLayer(), serverUrl);
@@ -228,15 +230,12 @@ class WMSServiceImpl {
             cap = wms.getCapabilities();
 
         } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
             logger.error("MalformedURLException: " + e);
-            throw new ResourceNotFoundFault("MalformedURLException ", e);
+            throw new ResourceNotFoundFault("Malformed URL");
         } catch (ServiceException e) {
-            // TODO Auto-generated catch block
             logger.error("ServiceException: " + e);
-            throw new ResourceNotFoundFault("ServiceException ", e);
+            throw new ResourceNotFoundFault("The url is invalid");
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             logger.error("IOException: " + e);
             throw new ResourceNotFoundFault("IOException ", e);
         }

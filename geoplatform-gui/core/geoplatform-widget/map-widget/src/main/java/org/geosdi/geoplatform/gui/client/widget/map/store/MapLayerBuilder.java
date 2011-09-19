@@ -94,8 +94,12 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
         wmsOption.setBuffer(0);
         wmsOption.setRatio(1);
 
-        return new WMS(rasterBean.getLabel(), rasterBean.getDataSource(),
+        WMS layer = new WMS(rasterBean.getLabel(), rasterBean.getDataSource(),
                 wmsParams, wmsOption);
+        
+        layer.setOpacity(rasterBean.getOpacity());
+
+        return layer;
     }
 
     /*

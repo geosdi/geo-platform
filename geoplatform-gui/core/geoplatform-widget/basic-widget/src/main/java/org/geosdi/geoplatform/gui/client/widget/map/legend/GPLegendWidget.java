@@ -70,10 +70,10 @@ public class GPLegendWidget {
      * @param layerBean
      */
     public void addLegend(GPLayerBean layerBean) {
-        if (this.legendsStore.getItemByItemId(layerBean.getLabel()) == null) {
+        if (this.legendsStore.getItemByItemId(layerBean.getTitle()) == null) {
             ContentPanel cp = new ContentPanel();
             cp.setHeading(layerBean.getLabel());
-            cp.setId(layerBean.getLabel());
+            cp.setId(layerBean.getTitle());
             cp.setHeaderVisible(false);
             cp.setBorders(false);
             cp.setBodyBorder(false);
@@ -113,9 +113,9 @@ public class GPLegendWidget {
      * @param layerBean
      */
     public void hideLegenItem(GPLayerBean layerBean) {
-        if (this.legendsStore.getItemByItemId(layerBean.getLabel()) != null) {
+        if (this.legendsStore.getItemByItemId(layerBean.getTitle()) != null) {
             this.legendsStore.remove(this.legendsStore.getItemByItemId(
-                    layerBean.getLabel()));
+                    layerBean.getTitle()));
             this.legendsStore.layout();
         }
     }

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 
-import java.util.List;
+import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
 
 /**
@@ -51,12 +51,12 @@ public class ClientRasterInfo extends GPLayerClientInfo {
     private static final long serialVersionUID = 3956898488739664952L;
     //
     private float opacity = 1.0f;
-    private List<String> styles;
+    private ArrayList<String> styles;
 
     /**
      * @return the styles
      */
-    public List<String> getStyles() {
+    public ArrayList<String> getStyles() {
         return styles;
     }
 
@@ -78,7 +78,7 @@ public class ClientRasterInfo extends GPLayerClientInfo {
      * @param styles
      *            the styles to set
      */
-    public void setStyles(List<String> styles) {
+    public void setStyles(ArrayList<String> styles) {
         this.styles = styles;
     }
 

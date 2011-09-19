@@ -432,8 +432,8 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         return bbox;
     }
 
-    private List<String> mapStyles() {
-        List<String> styleList = new ArrayList<String>();
+    private ArrayList<String> mapStyles() {
+        ArrayList<String> styleList = new ArrayList<String>();
 
         String stylesValue = fieldMap.get(GetMap.STYLES);
         if (stylesValue != null && stylesValue.length() > 0) {

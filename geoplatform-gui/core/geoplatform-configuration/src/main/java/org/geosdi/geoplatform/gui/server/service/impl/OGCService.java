@@ -67,7 +67,9 @@ import org.springframework.stereotype.Service;
 public class OGCService implements IOGCService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
     private GeoPlatformService geoPlatformServiceClient;
+    //
     @Autowired
     private DTOServerConverter dtoServerConverter;
 

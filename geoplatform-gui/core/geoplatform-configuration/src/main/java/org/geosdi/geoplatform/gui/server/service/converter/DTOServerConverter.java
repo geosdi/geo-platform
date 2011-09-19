@@ -48,6 +48,7 @@ import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
+import org.geosdi.geoplatform.responce.StyleDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -167,6 +168,17 @@ public class DTOServerConverter {
                     layer.getBbox().getMaxY()));
             raster.setCrs(layer.getSrs());
         }
+        
+        /** STYLES MAPPING **/
+        
+        if(layer.getStyleList() != null) {
+            ArrayList<String> styles = new ArrayList<String>();
+            for (StyleDTO styleDTO: layer.getStyleList()) {
+                styles.add(styleDTO.getName());
+            }
+            raster.setStyles(styles);
+        }
+        
         return raster;
     }
 }

@@ -72,12 +72,12 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
         if (!this.modifiedLayersMap.containsKey(layer)) {
             MementoLayerOriginalProperties memento = new MementoLayerOriginalProperties(this.saveAction);
             memento.setAlias(layer.getAlias());
-            System.out.println("Alias setted: " + memento.getAlias());
+//            System.out.println("Alias setted: " + memento.getAlias());
             memento.setChecked(layer.isChecked());
-            System.out.println("Check setted: " + memento.isChecked());
+//            System.out.println("Check setted: " + memento.isChecked());
             if (layer instanceof RasterTreeNode) {
                 memento.setOpacity(((RasterTreeNode) layer).getOpacity());
-                System.out.println("Opacity setted: " + memento.getOpacity());
+//                System.out.println("Opacity setted: " + memento.getOpacity());
             }
             memento.setRefBaseElement(layer);
             this.modifiedLayersMap.put(layer, memento);
@@ -142,7 +142,8 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
 
     private boolean isChanged(GPLayerTreeModel gpLayerTreeModel) {
         MementoLayerOriginalProperties memento = this.modifiedLayersMap.get(gpLayerTreeModel);
-        if (!memento.getAlias().equals(gpLayerTreeModel.getAlias())
+        if((memento.getAlias() == null && gpLayerTreeModel != null) 
+                || !memento.getAlias().equals(gpLayerTreeModel.getAlias())
                 || memento.isChecked() != gpLayerTreeModel.isChecked()) {
             return true;
         } else if (gpLayerTreeModel instanceof RasterTreeNode

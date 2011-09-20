@@ -184,6 +184,7 @@ class WMSServiceImpl {
         return serverDao.findByServerUrl(serverUrl) == null ? false : true;
     }
 
+    // The ID is important if is changed the URL of a server
     public ServerDTO saveServer(Long id, String aliasServerName, String serverUrl, String token)
             throws ResourceNotFoundFault {
         WMSCapabilities wmsCapabilities = this.getWMSCapabilities(serverUrl, token);

@@ -62,7 +62,7 @@ public class CXFServiceTest extends ServiceTest {
 //    private GeoPlatformWSClientEncrypted gpWSClientEncrypted;
     private final String serverUrlTest = "http://map.serverNameTest.org";
     private long idServerTest = -1;
-    // Servers
+    // Servers    
     private final String serverUrlGeoSDI = "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
 //    private final String serverUrlTelespazio = "http://maps.telespazio.it/dpc/dpc-wms?service=wms&version=1.1.1&request=GetCapabilities";
 
@@ -122,7 +122,7 @@ public class CXFServiceTest extends ServiceTest {
             ServerDTO serverDTO = geoPlatformService.getShortServer(serverUrlTest);
             logger.debug("\n*** serverDTO:\n{}\n***", serverDTO);
             Assert.assertNotNull(serverDTO);
-            Assert.assertEquals("Id Server NOT match", idServerTest, serverDTO.getId());
+            Assert.assertEquals("Id Server NOT match", idServerTest, serverDTO.getId().longValue());
             Assert.assertEquals("URL Server NOT match", serverUrlTest, serverDTO.getServerUrl());
         } catch (ResourceNotFoundFault ex) {
             Assert.fail("Not found Server with serverUrl: \"" + idServerTest + "\"");
@@ -160,7 +160,7 @@ public class CXFServiceTest extends ServiceTest {
 
         Assert.assertNotNull(serverDTO);
 
-        serverDTO = geoPlatformService.getCapabilities(new RequestById(serverDTO.getId()));
+        serverDTO = geoPlatformService.getCapabilities(new RequestById(serverDTO.getId()), "");
         logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", serverDTO.getLayerList().size());
     }
 
@@ -168,24 +168,22 @@ public class CXFServiceTest extends ServiceTest {
     public void testSaveServer() throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n@@@ testSaveServer @@@");
         // Server is into DB
-        ServerDTO serverDTO = geoPlatformService.saveServer("geoSDI", serverUrlGeoSDI);
+        ServerDTO serverGeoSDI = geoPlatformService.getShortServer(serverUrlGeoSDI);
+        Assert.assertNotNull(serverGeoSDI);
+        ServerDTO serverDTO = geoPlatformService.saveServer(serverGeoSDI.getId(), "geoSDI", serverUrlGeoSDI, "");
         Assert.assertNotNull("ServerDTO geoSDI is NULL", serverDTO);
-
-        List<ShortLayerDTO> layersList = (List<ShortLayerDTO>) serverDTO.getLayerList();
-        Assert.assertNotNull("Collection of ShortLayerDTO is NULL for server geoSDI", layersList);
+        Assert.assertEquals("ServerDTO geoSDI alias is wrong", serverDTO.getAlias(), "geoSDI");
 
         // Server is NOT into DB
         String serverUrlEx = "http://iws.erdas.com/ecwp/ecw_wms.dll?request=GetCapabilities";
-        serverDTO = geoPlatformService.saveServer("Erdas", serverUrlEx);
+        serverDTO = geoPlatformService.saveServer(null, "Erdas", serverUrlEx, "");
         Assert.assertNotNull("ServerDTO EX is NULL", serverDTO);
 
-        layersList = (List<ShortLayerDTO>) serverDTO.getLayerList();
-        Assert.assertNotNull("Collection of ShortLayerDTO is NULL for server Ex", layersList);
         // Check if the server was insert
         GeoPlatformServer serverEx = geoPlatformService.getServerDetailByUrl(serverUrlEx);
         Assert.assertNotNull("Server Ex is NULL for URL", serverEx);
         Assert.assertEquals("Server Ex URL is NOT correct", serverUrlEx, serverEx.getServerUrl());
-        Assert.assertEquals("Server Ex ID is NOT correct", serverDTO.getId(), serverEx.getId());
+        Assert.assertEquals("Server Ex ID is NOT correct", serverDTO.getId().longValue(), serverEx.getId());
         // Delete server
         geoPlatformService.deleteServer(serverEx.getId());
     }

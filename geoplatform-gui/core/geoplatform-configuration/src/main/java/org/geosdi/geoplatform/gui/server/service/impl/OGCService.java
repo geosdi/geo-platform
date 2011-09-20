@@ -40,6 +40,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 
@@ -121,6 +122,9 @@ public class OGCService implements IOGCService {
             String token = (String) session.getAttribute("GOOGLE_TOKEN");
             serverWS = geoPlatformServiceClient.saveServer(id, aliasServerName, urlServer, token);
 
+        } catch (IllegalParameterFault ex) {
+            logger.error(ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
         } catch (ResourceNotFoundFault ex) {
             logger.error("Insert Server Error : " + ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());

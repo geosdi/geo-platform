@@ -239,7 +239,7 @@ public class ManageServerWidget extends Window {
                         @Override
                         public void onFailure(Throwable caught) {
                             GeoPlatformMessage.errorMessage("Error on Saving Server",
-                                    "Error " + caught.getMessage() + " on server url: " + record.get("urlServer").toString());
+                                    caught.getMessage());
                             LayoutManager.getInstance().getStatusMap().setStatus(
                                     "Save Server Error. " + caught.getMessage(),
                                     EnumSearchStatus.STATUS_SEARCH_ERROR.toString());

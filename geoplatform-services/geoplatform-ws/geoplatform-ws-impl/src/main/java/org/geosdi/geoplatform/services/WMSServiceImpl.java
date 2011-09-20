@@ -186,7 +186,7 @@ class WMSServiceImpl {
 
     // The ID is important if is changed the URL of a server
     public ServerDTO saveServer(Long id, String aliasServerName, String serverUrl, String token)
-            throws ResourceNotFoundFault {
+            throws IllegalParameterFault, ResourceNotFoundFault {
         WMSCapabilities wmsCapabilities = this.getWMSCapabilities(serverUrl, token);
 
         GeoPlatformServer server = null;
@@ -205,7 +205,7 @@ class WMSServiceImpl {
             server.setServerUrl(serverUrl);
             serverDao.merge(server);
         } else {
-            throw new IllegalArgumentException("Duplicated server url");
+            throw new IllegalParameterFault("Duplicated Server URL");
         }
         ServerDTO serverDTO = new ServerDTO(server);
 
@@ -218,7 +218,7 @@ class WMSServiceImpl {
         WebMapServer wms = null;
         WMSCapabilities cap = null;
 
-        String urlServerEdited = editServerUrl(urlServer, token);
+        String urlServerEdited = this.editServerUrl(urlServer, token);
 
         try {
             serverURL = new URL(urlServerEdited);
@@ -230,10 +230,13 @@ class WMSServiceImpl {
             throw new ResourceNotFoundFault("Malformed URL");
         } catch (ServiceException e) {
             logger.error("ServiceException: " + e);
-            throw new ResourceNotFoundFault("The url is invalid");
+            throw new ResourceNotFoundFault("Invalid URL");
         } catch (IOException e) {
             logger.error("IOException: " + e);
-            throw new ResourceNotFoundFault("IOException ", e);
+            throw new ResourceNotFoundFault("Inaccessible URL");
+        } catch (Exception e) {
+            logger.error("Exception: " + e);
+            throw new ResourceNotFoundFault("Incorrect URL");
         }
         return cap;
     }

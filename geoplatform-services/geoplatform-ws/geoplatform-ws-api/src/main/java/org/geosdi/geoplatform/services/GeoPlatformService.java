@@ -519,7 +519,7 @@ public interface GeoPlatformService {
             @WebParam(name = "aliasServerName") String aliasServerName,
             @WebParam(name = "serverUrl") String serverUrl,
             @WebParam(name = "token") String token)
-            throws ResourceNotFoundFault;
+            throws IllegalParameterFault, ResourceNotFoundFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="ACL">

@@ -41,9 +41,9 @@ import javax.xml.ws.WebFault;
  * @author giuseppe
  *
  */
-@WebFault(name="IllegalParameterFault", faultBean="org.geosdi.exception.IllegalParameterFault")
+@WebFault(name = "IllegalParameterFault", faultBean = "org.geosdi.exception.IllegalParameterFault")
 public class IllegalParameterFault extends Exception {
-	
+
     public IllegalParameterFault() {
     }
 
@@ -59,5 +59,4 @@ public class IllegalParameterFault extends Exception {
     public String getMessage() {
         return super.getMessage();
     }
-
 }

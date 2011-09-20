@@ -19,10 +19,11 @@
         <property name="id" value="googleSignOnButton" />
         <property name="text" value="Google Earth Builder" />
         <property name="enabled" value="true" />
-        <property name="order" value="11" />
+        <property name="order" value="10" />
         <property name="googleAuthUrl" value="https://accounts.google.com/o/oauth2/auth" />
         <property name="googleClientId" value="715134893945.apps.googleusercontent.com" />
         <property name="scope" value="https://www.googleapis.com/auth/earthbuilder.readonly" />
+<!--        <property name="scope" value="http://150.146.160.71/geo-portal" />-->
     </bean>
     
 </beans>

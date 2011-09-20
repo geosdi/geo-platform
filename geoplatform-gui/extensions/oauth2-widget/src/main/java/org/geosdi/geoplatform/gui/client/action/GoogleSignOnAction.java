@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.action;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.google.api.client.http.HttpRequest;
 import com.google.api.gwt.oauth2.client.Auth;
 import com.google.api.gwt.oauth2.client.AuthRequest;
 import com.google.api.gwt.oauth2.client.Callback;
@@ -43,23 +44,40 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.menu.OAuth2MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.OAuth2Resources;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.puregwt.oauth2.IGPOAuth2GEBLoginHandler;
+import org.geosdi.geoplatform.gui.puregwt.oauth2.OAuth2HandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPOAuth2CapabilitiesEvent;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.properties.event.GPToolbarIconWidgetEvent;
+import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPToolbarIconGEBLoginWidgetEvent;
+import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPToolbarIconGEBLogoutWidgetEvent;
 import org.geosdi.geoplatform.gui.server.gwt.OAuth2RemoteImpl;
+import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email  michele.santomauro@geosdi.org
  *
  */
-public class GoogleSignOnAction extends OAuth2MenuBaseAction {
+public class GoogleSignOnAction extends OAuth2MenuBaseAction implements IGPOAuth2GEBLoginHandler {
+
+    private String type;
 
     public GoogleSignOnAction() {
         super("Google Earth Builder", OAuth2Resources.ICONS.googleSignOnWhite());
+
+        OAuth2HandlerManager.addHandler(IGPOAuth2GEBLoginHandler.TYPE, this);
     }
 
     @Override
     public void componentSelected(MenuEvent ce) {
+        doLoginOnGEB(EnumOAuth2.MAKE_LOGIN.getValue());
+    }
+
+    @Override
+    public void doLoginOnGEB(String theType) {
+        this.type = theType;
+
         AuthRequest request = new AuthRequest(super.getGoogleAuthUrl(),
                 super.getGoogleClientId()).withScopes(super.getScope());
 
@@ -69,22 +87,34 @@ public class GoogleSignOnAction extends OAuth2MenuBaseAction {
             @Override
             public void onSuccess(String token) {
                 googleLoginCallback(token);
-                
+
                 setImage(OAuth2Resources.ICONS.googleSignOnGreen());
                 setEnabled(false);
-                
-                WidgetPropertiesHandlerManager.fireEvent(new GPToolbarIconWidgetEvent("Signed on Google Earth Builder"));
+
+                WidgetPropertiesHandlerManager.fireEvent(new GPToolbarIconGEBLoginWidgetEvent("Signed on Google Earth Builder"));
+                LayoutManager.getInstance().getStatusMap().setStatus(
+                                        "Signed on Google Earth Builder","");
+
+                if (type.equals(EnumOAuth2.LOAD_CAPABILITIES.getValue())) {
+                    OAuth2HandlerManager.fireEvent(new GPOAuth2CapabilitiesEvent());
+                }
             }
 
             @Override
             public void onFailure(Throwable caught) {
+                setImage(OAuth2Resources.ICONS.googleSignOnWhite());
+                setEnabled(true);
+                
+                WidgetPropertiesHandlerManager.fireEvent(new GPToolbarIconGEBLogoutWidgetEvent("Not signed on Google Earth Builder"));
+                
                 GeoPlatformMessage.errorMessage("Sign on Google Earth Builder error", caught.getMessage());
+                LayoutManager.getInstance().getStatusMap().setStatus(
+                                        "Sign on Google Earth Builder error", "");
             }
         });
     }
 
     private void googleLoginCallback(String token) {
-
         OAuth2RemoteImpl.Util.getInstance().googleUserLogin(token, new AsyncCallback<Object>() {
 
             @Override

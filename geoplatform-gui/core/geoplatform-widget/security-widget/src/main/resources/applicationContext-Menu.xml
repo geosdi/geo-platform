@@ -29,7 +29,7 @@
                     <property name="id" value="userLogout" />
                     <property name="text" value="Logout" />
                     <property name="enabled" value="true" />
-                    <property name="order" value="10" />
+                    <property name="order" value="11" />
                 </bean>
                 <ref bean="googleSignOnButton"/>
             </list>

@@ -36,8 +36,9 @@
 package org.geosdi.geoplatform.gui.configuration.menubar;
 
 /**
- * @author giuseppe
- * 
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email  michele.santomauro@geosdi.org
+ *
  */
 public class OAuth2MenuBarClientTool extends MenuBarClientTool {
     

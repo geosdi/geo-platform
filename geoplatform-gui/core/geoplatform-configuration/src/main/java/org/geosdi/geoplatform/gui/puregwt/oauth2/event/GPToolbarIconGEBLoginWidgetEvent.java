@@ -33,17 +33,32 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.puregwt.properties;
+package org.geosdi.geoplatform.gui.puregwt.oauth2.event;
 
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.puregwt.properties.IGPToolbarIconWidgetHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface IGPToolbarIconWidgetHandler extends IGPComponentWidgetHandler {
-    
-    public void login(String tooltip);
-    
-    public void logout(String tooltip);
+public class GPToolbarIconGEBLoginWidgetEvent extends GwtEvent<IGPToolbarIconWidgetHandler> {
+
+    private String tooltip;
+
+    public GPToolbarIconGEBLoginWidgetEvent(String tooltip) {
+        this.tooltip = tooltip;
+    }
+   
+    @Override
+    public Type<IGPToolbarIconWidgetHandler> getAssociatedType() {
+        return IGPToolbarIconWidgetHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(IGPToolbarIconWidgetHandler handler) {
+        handler.login(tooltip);
+    }
 }

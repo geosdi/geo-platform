@@ -49,22 +49,11 @@ import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerMana
  */
 public class GPIconWidgetComponent extends GPAbstractWidgetComponent implements IGPToolbarIconWidgetHandler {
 
-//    private ToolBar toolbar;
-//    private WidgetComponent component;
-    private boolean statusLoggedOn = false;
-
     public GPIconWidgetComponent(ToolBar theToolBar) {
-//        this.toolbar = theToolBar;
         super.parent = theToolBar;
         WidgetPropertiesHandlerManager.addHandler(IGPToolbarIconWidgetHandler.TYPE, this);
     }
 
-//    public WidgetComponent createWidgetComponent(Image icon, String tooltip) {
-//        component = new WidgetComponent(icon);
-//
-//        component.setToolTip(tooltip);
-//        return component;
-//    }
     public WidgetComponent createWidgetComponent(Image icon, String tooltip) {
         this.component = new WidgetComponent(icon);
 
@@ -73,20 +62,20 @@ public class GPIconWidgetComponent extends GPAbstractWidgetComponent implements 
     }
 
     @Override
-    public void changeStatus(String tooltip) {
-        this.statusLoggedOn = !this.statusLoggedOn;
-//        int index = toolbar.indexOf(component);
-//        toolbar.remove(component);
-//
-//        toolbar.insert(createWidgetComponent(BasicWidgetResources.ICONS.googleGreen().createImage(), tooltip), index);
+    public void login(String tooltip) {
         ToolBar toolbar = (ToolBar) super.parent;
         int index = toolbar.indexOf(component);
         toolbar.remove(component);
 
-        if (this.statusLoggedOn) {
-            toolbar.insert(createWidgetComponent(BasicWidgetResources.ICONS.googleGreen().createImage(), tooltip), index);
-        } else {
-            toolbar.insert(createWidgetComponent(BasicWidgetResources.ICONS.googleWhite().createImage(), tooltip), index);
-        }
+        toolbar.insert(createWidgetComponent(BasicWidgetResources.ICONS.googleGreen().createImage(), tooltip), index);
+    }
+
+    @Override
+    public void logout(String tooltip) {
+        ToolBar toolbar = (ToolBar) super.parent;
+        int index = toolbar.indexOf(component);
+        toolbar.remove(component);
+
+        toolbar.insert(createWidgetComponent(BasicWidgetResources.ICONS.googleWhite().createImage(), tooltip), index);
     }
 }

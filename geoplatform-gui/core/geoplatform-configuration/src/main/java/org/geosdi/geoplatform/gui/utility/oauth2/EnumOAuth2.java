@@ -33,38 +33,28 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client;
-
-import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
-import org.geosdi.geoplatform.gui.client.action.GoogleSignOnAction;
+package org.geosdi.geoplatform.gui.utility.oauth2;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
- *
+ * @email michele.santomauro@geosdi.org
  */
-public class OAuth2WidgetUI implements EntryPoint {
+public enum EnumOAuth2 {
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+    MAKE_LOGIN("makeLogin"),
+    LOAD_CAPABILITIES("loadCapabilities"),
+    GEB_STRING("earthbuilder.google.com");
+    //
+    private String value;
+
+    EnumOAuth2(String value) {
+        this.value = value;
+    }
+
+    /**
+     * @return the value
      */
-    @Override
-    public void onModuleLoad() {
-        addGoogleLoginAction();
-    }
-
-    private void addGoogleLoginAction() {
-        MenuActionRegistar.put("googleSignOnButton", new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new GoogleSignOnAction();
-    }
-        });
+    public String getValue() {
+        return value;
     }
 }

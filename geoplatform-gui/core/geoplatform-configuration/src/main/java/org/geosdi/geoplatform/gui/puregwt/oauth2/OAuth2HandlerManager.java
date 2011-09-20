@@ -33,17 +33,47 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.puregwt.properties;
+package org.geosdi.geoplatform.gui.puregwt.oauth2;
 
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.HandlerRegistration;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email michele.santomauro@geosdi.org
  */
-public interface IGPToolbarIconWidgetHandler extends IGPComponentWidgetHandler {
-    
-    public void login(String tooltip);
-    
-    public void logout(String tooltip);
+public class OAuth2HandlerManager {
+
+    private GPEventBus eventBus;
+    private static OAuth2HandlerManager instance = new OAuth2HandlerManager();
+
+    private OAuth2HandlerManager() {
+        this.eventBus = new GPEventBusImpl();
+    }
+
+    private static OAuth2HandlerManager getInstance() {
+        return instance;
+    }
+
+    public static <T extends EventHandler> HandlerRegistration addHandler(
+            Type<T> type, T handler) {
+        return getInstance().eventBus.addHandler(type, handler);
+    }
+
+    public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
+            Type<T> type, Object source, T handler) {
+        return getInstance().eventBus.addHandlerToSource(type, source, handler);
+    }
+
+    public static void fireEvent(GwtEvent<?> event) {
+        getInstance().eventBus.fireEvent(event);
+    }
+
+    public static void fireEventFromSource(GwtEvent<?> event, Object source) {
+        getInstance().eventBus.fireEventFromSource(event, source);
+    }
 }

@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.gui.client.icons.ServerWidgetIcons;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class ServerWidgetResources {
-
+    
     public static final ServerWidgetIcons ICONS = GWT.create(
             ServerWidgetIcons.class);
 

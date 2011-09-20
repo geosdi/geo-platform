@@ -44,8 +44,6 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  */
 public abstract class OAuth2MenuBaseAction extends MenuBaseAction {
 
-    private boolean enabled;
-    
     private String googleAuthUrl;
     private String googleClientId;
     private String scope;

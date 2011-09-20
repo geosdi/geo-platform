@@ -56,10 +56,13 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.HashMap;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
+import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import org.geosdi.geoplatform.gui.puregwt.oauth2.OAuth2HandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPOAuth2GEBLoginEvent;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
 
 /**
@@ -231,6 +234,7 @@ public class ManageServerWidget extends Window {
 
         private void updateInsertServer(final Record record) {
             final GPServerBeanModel server = (GPServerBeanModel) record.getModel();
+            
             GeoPlatformOGCRemote.Util.getInstance().insertServer(
                     server.getId(), record.get("alias").toString(),
                     record.get("urlServer").toString(),

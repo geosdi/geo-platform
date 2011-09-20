@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
 import java.util.ArrayList;
 
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
@@ -66,6 +67,9 @@ import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel.GPServerKeyValue;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.oauth2.IGPOAuth2CapabilitiesHandler;
+import org.geosdi.geoplatform.gui.puregwt.oauth2.OAuth2HandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPOAuth2GEBLoginEvent;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.ServerRemoteImpl;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
@@ -304,9 +308,13 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      * Internal class
      * 
      */
-    private class PerformGetcapabilities {
+    private class PerformGetcapabilities implements IGPOAuth2CapabilitiesHandler {
 
         private GPServerBeanModel selectedServer;
+
+        public PerformGetcapabilities() {
+            OAuth2HandlerManager.addHandler(IGPOAuth2CapabilitiesHandler.TYPE, this);
+        }
 
         private void checkSelectedServer(GPServerBeanModel selected) {
             this.selectedServer = selected;
@@ -317,18 +325,26 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
             }
         }
 
-        private void loadCapabilitiesFromWS() {
+        @Override
+        public void loadCapabilitiesFromWS() {
             GeoPlatformOGCRemote.Util.getInstance().getCapabilities(selectedServer.getId(),
                     new AsyncCallback<ArrayList<? extends GPLayerGrid>>() {
 
                         @Override
                         public void onFailure(Throwable caught) {
-                            GeoPlatformMessage.errorMessage("Server Service",
-                                    "An error occured loading layers.");
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "An error occured loading layers from the service.",
-                                    EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                             gridWidget.unMaskGrid();
+                            LayoutManager.getInstance().getStatusMap().clearStatus("");
+
+                            if (selectedServer.getUrlServer().contains(EnumOAuth2.GEB_STRING.getValue())) {
+                                GeoPlatformMessage.infoMessage("Google sign on required", "Is necessary to sign on Google account for access the Google Earth Builder functionality");
+                                OAuth2HandlerManager.fireEvent(new GPOAuth2GEBLoginEvent(EnumOAuth2.LOAD_CAPABILITIES.getValue()));
+                            } else {
+                                GeoPlatformMessage.errorMessage("Server Service",
+                                        "An error occured loading layers.");
+                                LayoutManager.getInstance().getStatusMap().setStatus(
+                                        "An error occured loading layers from the service.",
+                                        EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                            }
                         }
 
                         @Override

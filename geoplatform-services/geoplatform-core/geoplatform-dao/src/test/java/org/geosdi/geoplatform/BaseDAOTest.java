@@ -63,6 +63,7 @@ import org.geosdi.geoplatform.core.model.GPStyle;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.core.model.Utility;
+import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geotools.data.ows.Layer;
 import org.geotools.data.ows.WMSCapabilities;
 import org.geotools.data.wms.WebMapServer;
@@ -109,9 +110,6 @@ public abstract class BaseDAOTest {
     private final String usernameUserTest = "user_test_0";
     protected final String usernameSuperUser = "super_user_test_acl";
     //
-    protected final String roleAdmin = "ROLE_ADMIN";
-    protected final String roleUser = "ROLE_USER";
-    protected final String roleViewer = "ROLE_VIEWER"; // Can only zoom
     private URL url = null;
     private final String urlWMSGetCapabilities = "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
 
@@ -184,18 +182,18 @@ public abstract class BaseDAOTest {
 
     //<editor-fold defaultstate="collapsed" desc="Insert data">
     protected void insertData() throws ParseException {
-        this.insertUser(usernameUserTest, roleAdmin);
+        this.insertUser(usernameUserTest, GPRole.ADMIN);
         // ACL Data
-        this.insertUser(usernameSuperUser, roleAdmin, roleUser);
-        this.insertUser("admin_acl_test", roleAdmin);
-        this.insertUser("user_acl_test", roleUser);
+        this.insertUser(usernameSuperUser, GPRole.ADMIN, GPRole.USER);
+        this.insertUser("admin_acl_test", GPRole.ADMIN);
+        this.insertUser("user_acl_test", GPRole.USER);
         // User for GUI test
-        this.insertUser("admin", roleAdmin);
-        this.insertUser("user", roleUser);
-        this.insertUser("viewer", roleViewer);
+        this.insertUser("admin", GPRole.ADMIN);
+        this.insertUser("user", GPRole.USER);
+        this.insertUser("viewer", GPRole.VIEWER);
     }
 
-    protected GPUser insertUser(String name, String... roles) {
+    protected GPUser insertUser(String name, GPRole... roles) {
         GPUser user = createUser(name);
         userDAO.persist(user);
         logger.debug("\n*** User SAVED:\n{}\n***", user);
@@ -214,10 +212,10 @@ public abstract class BaseDAOTest {
     }
 
     private List<GPAuthority> createAuthorities(String username,
-            String... roles) {
+            GPRole... roles) {
         List<GPAuthority> authorities = new ArrayList<GPAuthority>();
-        for (String role : roles) {
-            GPAuthority auth = new GPAuthority(username, role);
+        for (GPRole role : roles) {
+            GPAuthority auth = new GPAuthority(username, role.toString());
             authorities.add(auth);
         }
         return authorities;

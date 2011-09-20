@@ -60,6 +60,7 @@ import org.geosdi.geoplatform.gui.client.event.timeout.DisplayGetCapabilitiesEve
 import org.geosdi.geoplatform.gui.client.event.timeout.IDisplayGetCapabilitiesHandler;
 import org.geosdi.geoplatform.gui.client.widget.form.ManageServerWidget;
 import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
@@ -76,7 +77,6 @@ import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
  */
 public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
-    public final static String ROLE_ADMIN = "ROLE_ADMIN";
     private ToolBar toolbar;
     private ComboBox<GPServerBeanModel> comboServer;
     private ListStore<GPServerBeanModel> store = new ListStore<GPServerBeanModel>();
@@ -163,7 +163,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                 manageServersButton.setEnabled(false);
                 for (String role : result) {
                     System.out.println("Role: " + role);
-                    if (role.equals(ROLE_ADMIN)) {
+                    if (role.equals(GPRole.ADMIN.toString())) {
                         manageServersButton.setEnabled(true);
                         return;
                     }

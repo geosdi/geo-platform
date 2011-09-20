@@ -49,7 +49,7 @@
         </developer>
     </developers>
 
-    <dependencies>
+    <dependencies>             
 
 		<!-- APACHE COMMONS -->
         <dependency>
@@ -307,6 +307,13 @@
 
 		<!-- SCOPE TEST -->
         <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-configuration</artifactId>
+            <version>${geoplatform-version}</version>
+            <scope>test</scope>
+        </dependency>  
+        
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
@@ -328,7 +335,7 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-
+        
     </dependencies>
 
     <build>

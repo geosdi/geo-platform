@@ -55,6 +55,7 @@ import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclSidDAO;
 import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
+import org.geosdi.geoplatform.gui.global.security.GPRole;
 
 /**
  * @author Vincenzo Monteverde
@@ -180,9 +181,9 @@ public class AclDAOTest extends BaseDAOTest {
         // Owner of all Object Identities
         AclSid superUser = new AclSid(true, usernameSuperUser);
         // Users of interest
-        AclSid admin = new AclSid(false, roleAdmin);
-        AclSid user = new AclSid(false, roleUser);
-        AclSid viewer = new AclSid(false, roleViewer);
+        AclSid admin = new AclSid(false, GPRole.ADMIN.toString());
+        AclSid user = new AclSid(false, GPRole.USER.toString());
+        AclSid viewer = new AclSid(false, GPRole.VIEWER.toString());
         //
         logger.debug("\n*** AclSid to INSERT:\n{}\n***", superUser);
         logger.debug("\n*** AclSid to INSERT:\n{}\n***", admin);
@@ -273,10 +274,10 @@ public class AclDAOTest extends BaseDAOTest {
         Map<String, AclEntry> entriesMap = new HashMap<String, AclEntry>();
         // Will be added only the positive permission
         // Ace Order is 3 because the entries of admin and user should be added before
-        entriesMap.put(roleViewer + idZoomNext, new AclEntry(objIdMap.get(idZoomNext), 3, viewer, visible, true));
-        entriesMap.put(roleViewer + idZoomPrevious, new AclEntry(objIdMap.get(idZoomPrevious), 3, viewer, visible, true));
-        entriesMap.put(roleViewer + idZoomIn, new AclEntry(objIdMap.get(idZoomIn), 3, viewer, visible, true));
-        entriesMap.put(roleViewer + idZoomOut, new AclEntry(objIdMap.get(idZoomOut), 3, viewer, visible, true));
+        entriesMap.put(GPRole.VIEWER + idZoomNext, new AclEntry(objIdMap.get(idZoomNext), 3, viewer, visible, true));
+        entriesMap.put(GPRole.VIEWER + idZoomPrevious, new AclEntry(objIdMap.get(idZoomPrevious), 3, viewer, visible, true));
+        entriesMap.put(GPRole.VIEWER + idZoomIn, new AclEntry(objIdMap.get(idZoomIn), 3, viewer, visible, true));
+        entriesMap.put(GPRole.VIEWER + idZoomOut, new AclEntry(objIdMap.get(idZoomOut), 3, viewer, visible, true));
         //
         entryDAO.persist(entriesMap.values().toArray(new AclEntry[entriesMap.size()]));
     }

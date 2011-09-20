@@ -45,6 +45,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
 import org.geosdi.geoplatform.gui.server.converter.GPUserConverter;
@@ -95,7 +96,7 @@ public class SecurityService implements ISecurityService {
         IGPUserDetail userDetail = this.userConverter.convertUserToDTO(user);
 
         for (String role : roles) {
-            if (role.equals("ROLE_VIEWER")) {
+            if (role.equals(GPRole.VIEWER.toString())) {
                 userDetail.setViewer(true);
             }
         }

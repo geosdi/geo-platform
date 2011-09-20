@@ -186,8 +186,6 @@ class WMSServiceImpl {
 
     public ServerDTO saveServer(Long id, String aliasServerName, String serverUrl, String token)
             throws ResourceNotFoundFault {
-        ServerDTO serverDTO = null;
-
         WMSCapabilities wmsCapabilities = this.getWMSCapabilities(serverUrl, token);
 
         GeoPlatformServer server = null;
@@ -201,17 +199,14 @@ class WMSServiceImpl {
             server.setAliasName(aliasServerName);
             serverDao.persist(server);
         } else if (server != null) {
-            //Updating fields
+            // Updating fields
             server.setAliasName(aliasServerName);
             server.setServerUrl(serverUrl);
             serverDao.merge(server);
         } else {
             throw new IllegalArgumentException("Duplicated server url");
         }
-        serverDTO = new ServerDTO(server);
-        List<RasterLayerDTO> layers = convertToLayerList(
-                wmsCapabilities.getLayer(), serverUrl);
-        serverDTO.setLayerList(layers);
+        ServerDTO serverDTO = new ServerDTO(server);
 
         return serverDTO;
     }

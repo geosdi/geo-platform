@@ -114,8 +114,7 @@ public class DTOServerConverter {
     public ArrayList<? extends GPLayerGrid> createRasterLayerList(
             List<? extends ShortLayerDTO> layers) {
 
-        return this.createRasterLayerList(layers,
-                new ArrayList<GPLayerGrid>());
+        return this.createRasterLayerList(layers, new ArrayList<GPLayerGrid>());
     }
 
     private ArrayList<? extends GPLayerGrid> createRasterLayerList(
@@ -168,17 +167,16 @@ public class DTOServerConverter {
                     layer.getBbox().getMaxY()));
             raster.setCrs(layer.getSrs());
         }
-        
+
         /** STYLES MAPPING **/
-        
-        if(layer.getStyleList() != null) {
+        if (layer.getStyleList() != null) {
             ArrayList<String> styles = new ArrayList<String>();
-            for (StyleDTO styleDTO: layer.getStyleList()) {
+            for (StyleDTO styleDTO : layer.getStyleList()) {
                 styles.add(styleDTO.getName());
             }
             raster.setStyles(styles);
         }
-        
+
         return raster;
     }
 }

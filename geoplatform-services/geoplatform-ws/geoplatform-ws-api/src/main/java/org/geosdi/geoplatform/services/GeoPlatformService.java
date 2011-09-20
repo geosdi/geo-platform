@@ -510,7 +510,8 @@ public interface GeoPlatformService {
     @WebResult(name = "Capabilities")
     ServerDTO getCapabilities(
             @WebParam(name = "request") RequestById request,
-            @WebParam(name = "token") String token) throws ResourceNotFoundFault;
+            @WebParam(name = "token") String token)
+            throws ResourceNotFoundFault;
 
     @Post
     @HttpResource(location = "/server")

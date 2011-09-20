@@ -150,7 +150,7 @@ public class ToolbarTreeClientTool {
         this.clientTools.add(uploaderClientTool);
         this.clientTools.add(toolbarSeparator2);
         this.clientTools.add(printClientTool);
-        System.out.println("# USER_VIEWER: " + USER_VIEWER);
+//        System.out.println("# USER_VIEWER: " + USER_VIEWER);
         if (USER_VIEWER == false) { //
             this.clientTools.add(saveTreeState);
         } //

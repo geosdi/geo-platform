@@ -49,15 +49,20 @@ import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
  */
 public interface IOGCService {
 
-    public ArrayList<String> findDistinctLayersDataSource(HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    public ArrayList<String> findDistinctLayersDataSource(HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
 
-    public ArrayList<GPServerBeanModel> loadServers() throws GeoPlatformException;
+    public ArrayList<GPServerBeanModel> loadServers()
+            throws GeoPlatformException;
 
-    public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException;
+    public GPServerBeanModel getServerDetails(long idServer)
+            throws GeoPlatformException;
 
     public ArrayList<? extends GPLayerGrid> getCapabilities(
-            HttpServletRequest httpServletRequest, long idServer) throws GeoPlatformException;
+            HttpServletRequest httpServletRequest, long idServer)
+            throws GeoPlatformException;
 
-    public GPServerBeanModel insertServer(HttpServletRequest httpServletRequest, 
-            Long id, String aliasServerName, String urlServer) throws GeoPlatformException;
+    public GPServerBeanModel insertServer(HttpServletRequest httpServletRequest,
+            Long id, String aliasServerName, String urlServer)
+            throws GeoPlatformException;
 }

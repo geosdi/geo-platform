@@ -74,17 +74,17 @@ public class OGCService implements IOGCService {
     private DTOServerConverter dtoServerConverter;
 
     @Override
-    public ArrayList<GPServerBeanModel> loadServers() throws GeoPlatformException {
-        return this.dtoServerConverter.convertServer(
-                this.geoPlatformServiceClient.getAllServers());
+    public ArrayList<GPServerBeanModel> loadServers()
+            throws GeoPlatformException {
+        return dtoServerConverter.convertServer(geoPlatformServiceClient.getAllServers());
     }
 
     @Override
-    public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException {
+    public GPServerBeanModel getServerDetails(long idServer)
+            throws GeoPlatformException {
         try {
-            GeoPlatformServer serverWS = this.geoPlatformServiceClient.getServerDetail(
-                    idServer);
-            return this.dtoServerConverter.getServerDetail(serverWS);
+            GeoPlatformServer serverWS = geoPlatformServiceClient.getServerDetail(idServer);
+            return dtoServerConverter.getServerDetail(serverWS);
         } catch (ResourceNotFoundFault ex) {
             logger.error("The server with id " + idServer + " was bean deleted.");
             throw new GeoPlatformException(
@@ -93,7 +93,8 @@ public class OGCService implements IOGCService {
     }
 
     @Override
-    public ArrayList<? extends GPLayerGrid> getCapabilities(HttpServletRequest httpServletRequest, long idServer)
+    public ArrayList<? extends GPLayerGrid> getCapabilities(
+            HttpServletRequest httpServletRequest, long idServer)
             throws GeoPlatformException {
         try {
             HttpSession session = httpServletRequest.getSession();
@@ -101,11 +102,9 @@ public class OGCService implements IOGCService {
 
             RequestById req = new RequestById(idServer);
 
-            ServerDTO server = this.geoPlatformServiceClient.getCapabilities(
-                    req, token);
+            ServerDTO server = geoPlatformServiceClient.getCapabilities(req, token);
 
-            return this.dtoServerConverter.createRasterLayerList(
-                    server.getLayerList());
+            return dtoServerConverter.createRasterLayerList(server.getLayerList());
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error : " + ex);
             throw new GeoPlatformException(ex);
@@ -114,19 +113,19 @@ public class OGCService implements IOGCService {
 
     @Override
     public GPServerBeanModel insertServer(HttpServletRequest httpServletRequest,
-            Long id, String aliasServerName, String urlServer) throws GeoPlatformException {
+            Long id, String aliasServerName, String urlServer)
+            throws GeoPlatformException {
         ServerDTO serverWS = null;
         try {
             HttpSession session = httpServletRequest.getSession();
             String token = (String) session.getAttribute("GOOGLE_TOKEN");
-            serverWS = this.geoPlatformServiceClient.saveServer(
-                    id, aliasServerName, urlServer, token);
+            serverWS = geoPlatformServiceClient.saveServer(id, aliasServerName, urlServer, token);
 
         } catch (ResourceNotFoundFault ex) {
             logger.error("Insert Server Error : " + ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
-        return this.dtoServerConverter.convertServerWS(serverWS);
+        return dtoServerConverter.convertServerWS(serverWS);
     }
 
     private GPUser getUserAlreadyFromSession(HttpServletRequest httpServletRequest) {
@@ -142,10 +141,11 @@ public class OGCService implements IOGCService {
     }
 
     @Override
-    public ArrayList<String> findDistinctLayersDataSource(HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public ArrayList<String> findDistinctLayersDataSource(HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
         ArrayList<String> dataSources = null;
         try {
-            dataSources = this.geoPlatformServiceClient.getLayersDataSourceByOwner(
+            dataSources = geoPlatformServiceClient.getLayersDataSourceByOwner(
                     this.getUserAlreadyFromSession(httpServletRequest).getUsername());
         } catch (ResourceNotFoundFault e) {
             throw new GeoPlatformException("Error in findDistinctLayersDataSource: ResourceNotFoundFault "

@@ -65,18 +65,18 @@ public class GPCapabilitiesWidget extends GeoPlatformWindow {
      */
     public GPCapabilitiesWidget(boolean lazy, TreePanel theTree) {
         super(lazy);
-        this.tree = theTree;
+        tree = theTree;
     }
 
     @Override
     public void addComponent() {
-        this.gridLayers = new GridLayersWidget(this.tree);
-        super.add(this.gridLayers.getFormPanel());
+        gridLayers = new GridLayersWidget(tree);
+        super.add(gridLayers.getFormPanel());
     }
 
     @Override
     public void reset() {
-        this.gridLayers.resetComponents();
+        gridLayers.resetComponents();
         if (super.isCollapsed()) {
             super.setExpanded(true);
         }
@@ -90,18 +90,17 @@ public class GPCapabilitiesWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        setResizable(false);
+        super.setResizable(false);
 
-        addWindowListener(new WindowListener() {
+        super.addWindowListener(new WindowListener() {
 
             @Override
             public void windowShow(WindowEvent we) {
                 gridLayers.loadServers();
             }
-
         });
 
-        addWidgetListener(new WidgetListener() {
+        super.addWidgetListener(new WidgetListener() {
 
             @Override
             public void widgetAttached(ComponentEvent ce) {
@@ -109,9 +108,9 @@ public class GPCapabilitiesWidget extends GeoPlatformWindow {
             }
         });
 
-        setLayout(new FitLayout());
-        setModal(false);
-        setCollapsible(true);
-        setPlain(true);
+        super.setLayout(new FitLayout());
+        super.setModal(false);
+        super.setCollapsible(true);
+        super.setPlain(true);
     }
 }

@@ -51,44 +51,48 @@ import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GeoPlatformOGCRemoteImpl extends RemoteServiceServlet implements
-        GeoPlatformOGCRemote {
+public class GeoPlatformOGCRemoteImpl extends RemoteServiceServlet
+        implements GeoPlatformOGCRemote {
 
     /**
      *
      */
     private static final long serialVersionUID = 7340579377487014548L;
-
+    //
     private IOGCService ogcService;
 
     public GeoPlatformOGCRemoteImpl() {
-        this.ogcService = (IOGCService) GeoPlatformContextUtil.getInstance().getBean(
-                OGCService.class);
+        ogcService = (IOGCService) GeoPlatformContextUtil.getInstance().
+                getBean(OGCService.class);
     }
 
     @Override
-    public ArrayList<GPServerBeanModel> loadServers() throws GeoPlatformException {
-        return this.ogcService.loadServers();
+    public ArrayList<GPServerBeanModel> loadServers()
+            throws GeoPlatformException {
+        return ogcService.loadServers();
     }
 
     @Override
-    public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException {
-        return this.ogcService.getServerDetails(idServer);
+    public GPServerBeanModel getServerDetails(long idServer)
+            throws GeoPlatformException {
+        return ogcService.getServerDetails(idServer);
     }
 
     @Override
-    public ArrayList<? extends GPLayerGrid> getCapabilities(
-            long idServer) throws GeoPlatformException {
-        return this.ogcService.getCapabilities(this.getThreadLocalRequest(), idServer);
+    public ArrayList<? extends GPLayerGrid> getCapabilities(long idServer)
+            throws GeoPlatformException {
+        return ogcService.getCapabilities(super.getThreadLocalRequest(), idServer);
     }
 
     @Override
-    public GPServerBeanModel insertServer(Long id, String aliasServerName, String urlServer) throws GeoPlatformException {
-        return this.ogcService.insertServer(this.getThreadLocalRequest(), id, aliasServerName, urlServer);
+    public GPServerBeanModel insertServer(Long id, String aliasServerName, String urlServer)
+            throws GeoPlatformException {
+        return ogcService.insertServer(super.getThreadLocalRequest(), id, aliasServerName, urlServer);
     }
 
     @Override
-    public ArrayList<String> findDistinctLayersDataSource() throws GeoPlatformException {
-        return this.ogcService.findDistinctLayersDataSource(this.getThreadLocalRequest());
+    public ArrayList<String> findDistinctLayersDataSource()
+            throws GeoPlatformException {
+        return ogcService.findDistinctLayersDataSource(this.getThreadLocalRequest());
     }
 }

@@ -65,13 +65,14 @@ public interface GeoPlatformOGCRemote extends RemoteService {
             return instance;
         }
     }
-    
+
     /**
      * Load Distinct layers data source
      * @return
      * @throws GeoPlatformException 
      */
-    public ArrayList<String> findDistinctLayersDataSource() throws GeoPlatformException;
+    public ArrayList<String> findDistinctLayersDataSource()
+            throws GeoPlatformException;
 
     /**
      * Load All Server from GeoPlatform Web Services
@@ -81,7 +82,8 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      *
      * @throws GeoPlatformException
      */
-    public ArrayList<GPServerBeanModel> loadServers() throws GeoPlatformException;
+    public ArrayList<GPServerBeanModel> loadServers()
+            throws GeoPlatformException;
 
     /**
      *
@@ -91,7 +93,8 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public GPServerBeanModel getServerDetails(long idServer) throws GeoPlatformException;
+    public GPServerBeanModel getServerDetails(long idServer)
+            throws GeoPlatformException;
 
     /**
      *
@@ -100,9 +103,9 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public ArrayList<? extends GPLayerGrid> getCapabilities(
-            long idServer) throws GeoPlatformException;
-    
+    public ArrayList<? extends GPLayerGrid> getCapabilities(long idServer)
+            throws GeoPlatformException;
+
     /**
      * 
      * @param urlServer
@@ -111,6 +114,6 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      * 
      * @throws GeoPlatformException 
      */
-    public GPServerBeanModel insertServer(Long id, String aliasServerName, String urlServer) 
+    public GPServerBeanModel insertServer(Long id, String aliasServerName, String urlServer)
             throws GeoPlatformException;
 }

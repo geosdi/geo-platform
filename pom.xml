@@ -1160,7 +1160,7 @@
         <gwtVersion>2.3.0</gwtVersion>
         <gxtVersion>2.2.4</gxtVersion>
         
-        <gwtOpenlayersVersion>0.6-SNAPSHOT</gwtOpenlayersVersion>
+        <gwtOpenlayersVersion>0.7-SNAPSHOT</gwtOpenlayersVersion>
         
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
 

@@ -94,6 +94,22 @@ public class OGCService implements IOGCService {
     }
 
     @Override
+    public Boolean deleteServer(long idServer) throws GeoPlatformException {
+        try {
+            geoPlatformServiceClient.deleteServer(idServer);
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("The server with id " + idServer + " was not bean deleted.");
+            throw new GeoPlatformException(
+                    "The server with id " + idServer + " was not bean deleted.");
+        } catch (IllegalParameterFault il) {
+            logger.error("The server with id " + idServer + " was not bean deleted.");
+            throw new GeoPlatformException(
+                    "The server with id " + idServer + " was not bean deleted.");
+        }
+        return true;
+    }
+
+    @Override
     public ArrayList<? extends GPLayerGrid> getCapabilities(
             HttpServletRequest httpServletRequest, long idServer)
             throws GeoPlatformException {

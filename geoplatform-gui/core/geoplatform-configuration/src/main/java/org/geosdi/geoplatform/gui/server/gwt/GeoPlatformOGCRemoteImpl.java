@@ -95,4 +95,9 @@ public class GeoPlatformOGCRemoteImpl extends RemoteServiceServlet
             throws GeoPlatformException {
         return ogcService.findDistinctLayersDataSource(this.getThreadLocalRequest());
     }
+
+    @Override
+    public Boolean deleteServer(long idServer) throws GeoPlatformException {
+        return ogcService.deleteServer(idServer);
+    }
 }

@@ -54,6 +54,9 @@ public interface GeoPlatformOGCRemoteAsync {
 
     public void getServerDetails(long idServer,
             AsyncCallback<GPServerBeanModel> callback) throws GeoPlatformException;
+    
+    public void deleteServer(long idServer,
+            AsyncCallback<Boolean> callback) throws GeoPlatformException;
 
     public void getCapabilities(long idServer,
             AsyncCallback<ArrayList<? extends GPLayerGrid>> callback) throws GeoPlatformException;

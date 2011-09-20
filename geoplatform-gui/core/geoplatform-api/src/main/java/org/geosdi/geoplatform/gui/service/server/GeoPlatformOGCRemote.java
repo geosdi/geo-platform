@@ -95,6 +95,14 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      */
     public GPServerBeanModel getServerDetails(long idServer)
             throws GeoPlatformException;
+    /**
+     * 
+     * @param idServer
+     * @return
+     * @throws GeoPlatformException 
+     */
+    public Boolean deleteServer(long idServer)
+            throws GeoPlatformException;
 
     /**
      *

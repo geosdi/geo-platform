@@ -58,6 +58,9 @@ public interface IOGCService {
     public GPServerBeanModel getServerDetails(long idServer)
             throws GeoPlatformException;
 
+    public Boolean deleteServer(long idServer)
+            throws GeoPlatformException;
+
     public ArrayList<? extends GPLayerGrid> getCapabilities(
             HttpServletRequest httpServletRequest, long idServer)
             throws GeoPlatformException;

@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.form;
 
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.GridEvent;
 import java.util.ArrayList;
 import java.util.List;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
@@ -44,11 +46,14 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.grid.CellEditor;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
+import com.extjs.gxt.ui.client.widget.grid.EditorGrid.ClicksToEdit;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.grid.GridSelectionModel;
 import com.extjs.gxt.ui.client.widget.grid.RowEditor;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
@@ -75,6 +80,8 @@ public class ManageServerWidget extends Window {
     private PerformOperation operation = new PerformOperation();
     private ListStore<GPServerBeanModel> store;// = new ListStore<GPServerBeanModel>();
     private Map<GPServerBeanModel, Record> recordMap = new HashMap<GPServerBeanModel, Record>();
+    private Button deleteServerButton = new Button("Delete Server");
+    private GPCheckColumnConfig checkColumn;
 
     public ManageServerWidget(ListStore<GPServerBeanModel> store, boolean lazy) {
         this.store = store;
@@ -134,24 +141,36 @@ public class ManageServerWidget extends Window {
         urlColumn.setEditor(new CellEditor(urlTextfield));
         configs.add(urlColumn);
 
-
+        checkColumn = new GPCheckColumnConfig("delete",
+                "Delete", 55, store, this.deleteServerButton);
+        CellEditor checkBoxEditor = new CellEditor(new CheckBox());
+        checkColumn.setEditor(checkBoxEditor);
+        //This is very important: add checkColumn to the zero position!
+        configs.add(0, checkColumn);
         final ColumnModel columnModel = new ColumnModel(configs);
-
-        final RowEditor<GPServerBeanModel> rowEditor = new RowEditor<GPServerBeanModel>() {
+        final Grid<GPServerBeanModel> grid = new Grid<GPServerBeanModel>(store, columnModel);
+        RowEditor<GPServerBeanModel> rowEditor = new RowEditor<GPServerBeanModel>() {
 
             @Override
-            public void stopEditing(boolean saveChanges) {
-                super.stopEditing(saveChanges);
+            protected void onHide() {
+                super.onHide();
+                //System.out.println("Hiding row editor and verifing the check status");
+                checkColumn.manageDeleteButton();
             }
         };
-        Grid<GPServerBeanModel> grid = new Grid<GPServerBeanModel>(store, columnModel);
+        rowEditor.setClicksToEdit(ClicksToEdit.TWO);
+
         grid.setAutoExpandColumn("urlServer");
         grid.setBorders(true);
+        grid.addPlugin(checkColumn);
         grid.addPlugin(rowEditor);
         grid.getAriaSupport().setLabelledBy(super.getHeader().getId() + "-label");
         grid.setHeight(300);
         super.add(grid);
+        this.addButtonsToTheWindow(rowEditor);
+    }
 
+    private void addButtonsToTheWindow(final RowEditor<GPServerBeanModel> rowEditor) {
         ToolBar toolBar = new ToolBar();
         Button addServerButton = new Button("Add Server");
         addServerButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
@@ -159,7 +178,6 @@ public class ManageServerWidget extends Window {
             @Override
             public void componentSelected(ButtonEvent ce) {
                 GPServerBeanModel server = new GPServerBeanModel();
-                server.setAlias("New Server");
 //                server.setUrlServer("http://");
                 rowEditor.stopEditing(false);
                 store.insert(server, 0);
@@ -171,13 +189,23 @@ public class ManageServerWidget extends Window {
             }
         });
         toolBar.add(addServerButton);
-        Button deleteServerButton = new Button("Delete Server");
-        addServerButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
-            //TODO: add code to enable the button only when a row is selected
+        deleteServerButton.setEnabled(false);
+        deleteServerButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                //TODO: add code to remove the server from list and from db
+                rowEditor.stopEditing(true);
+                List<GPServerBeanModel> serverList = store.getModels();
+                String check = null;
+                int i = 0;
+                for (GPServerBeanModel gPServerBeanModel : serverList) {
+                    check = checkColumn.getCheckState(gPServerBeanModel, "delete", i, 0);
+                    if (check.equals("-on")) {
+                        operation.deleteServer(gPServerBeanModel);
+                    }
+                    i++;
+                }
+                checkColumn.manageDeleteButton();
             }
         });
         toolBar.add(deleteServerButton);
@@ -187,25 +215,27 @@ public class ManageServerWidget extends Window {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
+                rowEditor.stopEditing(true);
                 store.rejectChanges();
+                checkColumn.manageDeleteButton();
             }
         }));
-
         super.addButton(new Button("Save", new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
+                rowEditor.stopEditing(true);
                 List<Record> modifiedElements = store.getModifiedRecords();
                 System.out.println("Modified elements number: " + modifiedElements.size());
                 for (Record record : modifiedElements) {
                     operation.updateInsertServer(record);
                 }
-                //store.commitChanges();
             }
         }));
     }
 
     public void initSize() {
+        super.setModal(true);
         super.setHeading("Server Manager");
         super.setBorders(false);
         super.setSize(600, 300);
@@ -232,12 +262,39 @@ public class ManageServerWidget extends Window {
      */
     private class PerformOperation {
 
+        private void deleteServer(final GPServerBeanModel server) {
+            //TODO: add code to remove the server from list and from db
+            if (server.getId() != null) {
+                GeoPlatformOGCRemote.Util.getInstance().deleteServer(server.getId(), new AsyncCallback<Boolean>() {
+
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        GeoPlatformMessage.errorMessage("Error on Deleting Server",
+                                "Error " + caught.getMessage() + " on server url: " + server.get("urlServer").toString());
+                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                "Delete Server Error. " + caught.getMessage(),
+                                EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                    }
+
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        store.remove(server);
+                        checkColumn.manageDeleteButton();
+                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                "Server deleted succesfully", EnumSearchStatus.STATUS_SEARCH.toString());
+                    }
+                });
+            } else {
+                store.remove(server);
+            }
+        }
+
         private void updateInsertServer(final Record record) {
             final GPServerBeanModel server = (GPServerBeanModel) record.getModel();
             
             GeoPlatformOGCRemote.Util.getInstance().insertServer(
                     server.getId(), record.get("alias").toString(),
-                    record.get("urlServer").toString(),
+                    record.get("urlServer").toString().trim(),
                     new AsyncCallback<GPServerBeanModel>() {
 
                         @Override

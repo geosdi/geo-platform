@@ -345,9 +345,9 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                                 OAuth2HandlerManager.fireEvent(new GPOAuth2GEBLoginEvent(EnumOAuth2.LOAD_CAPABILITIES.getValue()));
                             } else {
                                 GeoPlatformMessage.errorMessage("Server Service",
-                                        "An error occured loading layers.");
+                                        caught.getMessage());
                                 LayoutManager.getInstance().getStatusMap().setStatus(
-                                        "An error occured loading layers from the service.",
+                                        "Server Error. " + caught.getMessage(),
                                         EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                             }
                         }

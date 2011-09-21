@@ -88,7 +88,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
     private Button manageServersButton;
     private GridLayersWidget gridWidget;
     private ManageServerWidget manageServersWidget;
-    private PerformGetcapabilities loadcapabilities;
+    private PerformGetcapabilities loadCapabilities;
 
     /**
      * @Constructor
@@ -99,7 +99,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         init();
         this.gridWidget = theGridWidget;
         this.manageServersWidget = new ManageServerWidget(store, true);
-        this.loadcapabilities = new PerformGetcapabilities();
+        this.loadCapabilities = new PerformGetcapabilities();
     }
 
     private void init() {
@@ -192,11 +192,11 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      * @return String
      */
     private native String getTemplate() /*-{
-    return  [
-    '<tpl for=".">',
-    '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{alias}</div>',
-    '</tpl>'
-    ].join("");
+        return  [
+            '<tpl for=".">',
+                '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{alias}</div>',
+            '</tpl>'
+        ].join("");
     }-*/;
 
     /**
@@ -256,8 +256,8 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         this.gridWidget.cleanComponentForSelection();
         LayoutManager.getInstance().getStatusMap().setBusy("Loading Layers.....");
         this.gridWidget.maskGrid();
-
-        this.loadcapabilities.checkSelectedServer(selected);
+        
+        this.loadCapabilities.checkSelectedServer(selected);
     }
 
     /**

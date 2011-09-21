@@ -148,7 +148,8 @@ public class DTOServerConverter {
         serverDTO.setAlias(serverWS.getAlias());
         serverDTO.setName(serverWS.getName());
         serverDTO.setUrlServer(serverWS.getServerUrl());
-        serverDTO.setLayers(this.createRasterLayerList(serverWS.getLayerList()));
+        serverDTO.setLayers(serverWS.getLayerList() != null
+                ? this.createRasterLayerList(serverWS.getLayerList()) : null);
         return serverDTO;
     }
 

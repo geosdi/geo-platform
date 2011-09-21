@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.form;
 
+import com.extjs.gxt.ui.client.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.List;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
@@ -55,8 +56,6 @@ import com.extjs.gxt.ui.client.widget.grid.RowEditor;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.HashMap;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -73,7 +72,6 @@ public class ManageServerWidget extends Window {
     private boolean initialized;
     private PerformOperation operation = new PerformOperation();
     private ListStore<GPServerBeanModel> store;// = new ListStore<GPServerBeanModel>();
-    private Map<GPServerBeanModel, Record> recordMap = new HashMap<GPServerBeanModel, Record>();
     private Button deleteServerButton = new Button("Delete Server");
     private GPCheckColumnConfig checkColumn;
 
@@ -144,6 +142,13 @@ public class ManageServerWidget extends Window {
         final ColumnModel columnModel = new ColumnModel(configs);
         final Grid<GPServerBeanModel> grid = new Grid<GPServerBeanModel>(store, columnModel);
         RowEditor<GPServerBeanModel> rowEditor = new RowEditor<GPServerBeanModel>() {
+
+            @Override
+            protected void onEnter(ComponentEvent ce) {
+                Record record = store.getRecord(grid.getSelectionModel().getSelectedItem());
+                record.reject(true);
+                super.onEnter(ce);
+            }
 
             @Override
             protected void onHide() {
@@ -257,7 +262,6 @@ public class ManageServerWidget extends Window {
     private class PerformOperation {
 
         private void deleteServer(final GPServerBeanModel server) {
-            //TODO: add code to remove the server from list and from db
             if (server.getId() != null) {
                 GeoPlatformOGCRemote.Util.getInstance().deleteServer(server.getId(), new AsyncCallback<Boolean>() {
 
@@ -276,6 +280,8 @@ public class ManageServerWidget extends Window {
                         checkColumn.manageDeleteButton();
                         LayoutManager.getInstance().getStatusMap().setStatus(
                                 "Server deleted succesfully", EnumSearchStatus.STATUS_SEARCH.toString());
+                        //TODO: refresh the displayServerWidget
+                        //displayServerWidget.addServer(server);
                     }
                 });
             } else {
@@ -304,7 +310,8 @@ public class ManageServerWidget extends Window {
                         public void onSuccess(GPServerBeanModel serverSaved) {
                             store.remove(server);
                             store.insert(serverSaved, 0);
-//                            displayServerWidget.addServer(server);
+                            LayoutManager.getInstance().getStatusMap().setStatus(
+                                "Server added succesfully", EnumSearchStatus.STATUS_SEARCH.toString());
                         }
                     });
         }

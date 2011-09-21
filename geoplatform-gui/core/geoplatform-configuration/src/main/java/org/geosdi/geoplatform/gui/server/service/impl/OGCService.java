@@ -137,7 +137,6 @@ public class OGCService implements IOGCService {
             HttpSession session = httpServletRequest.getSession();
             String token = (String) session.getAttribute("GOOGLE_TOKEN");
             serverWS = geoPlatformServiceClient.saveServer(id, aliasServerName, urlServer, token);
-
         } catch (IllegalParameterFault ex) {
             logger.error(ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());

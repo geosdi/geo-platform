@@ -57,6 +57,7 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
+import org.geosdi.geoplatform.gui.client.widget.DisplayServerWidget;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -75,12 +76,14 @@ public class ManageServerWidget extends Window {
 
     private boolean initialized;
     private PerformOperation operation = new PerformOperation();
-    private ListStore<GPServerBeanModel> store;// = new ListStore<GPServerBeanModel>();
+    private ListStore<GPServerBeanModel> store = new ListStore<GPServerBeanModel>();
     private Button deleteServerButton = new Button("Delete Server");
+    private DisplayServerWidget displayServerWidget;
     private GPCheckColumnConfig checkColumn;
 
-    public ManageServerWidget(ListStore<GPServerBeanModel> store, boolean lazy) {
-        this.store = store;
+    public ManageServerWidget(DisplayServerWidget displayServerWidget, boolean lazy) {
+        this.displayServerWidget = displayServerWidget;
+        this.store = displayServerWidget.getStore();
         if (!lazy) {
             init();
         }
@@ -105,10 +108,6 @@ public class ManageServerWidget extends Window {
                 store.add(result);
             }
         });
-    }
-
-    private void clearComponents() {
-        super.hide();
     }
 
     private void addComponentToForm() {
@@ -149,6 +148,8 @@ public class ManageServerWidget extends Window {
 
             @Override
             protected void onEnter(ComponentEvent ce) {
+                System.out.println("Selected null: ");
+                System.out.println(grid.getSelectionModel().getSelectedItem());
                 Record record = store.getRecord(grid.getSelectionModel().getSelectedItem());
                 record.reject(true);
                 super.onEnter(ce);
@@ -229,13 +230,26 @@ public class ManageServerWidget extends Window {
             public void componentSelected(ButtonEvent ce) {
                 rowEditor.stopEditing(true);
                 List<Record> modifiedElements = store.getModifiedRecords();
-                System.out.println("Modified elements number: " + modifiedElements.size());
-                for (Record record : modifiedElements) {
-//                    operation.updateInsertServer(record);
-                    operation.callSaveRecord(record);
+                if (!modifiedElements.isEmpty()) {
+                    operation.setModifiedElementsNumber(modifiedElements.size());
+                    mask("Saving Layers");
+                    for (Record record : modifiedElements) {
+                        operation.callSaveRecord(record);
+                    }
                 }
             }
         }));
+    }
+
+    @Override
+    public void hide(Button buttonPressed) {
+        if (store.getModifiedRecords().isEmpty()) {
+            super.hide(buttonPressed);
+            this.displayServerWidget.loadServers();
+        } else {
+            GeoPlatformMessage.alertMessage("Warning",
+                    "There are unsaved changes, save or reset before exit.");
+        }
     }
 
     public void initSize() {
@@ -251,7 +265,7 @@ public class ManageServerWidget extends Window {
             this.init();
         }
         super.show();
-        this.loadServers();
+//        this.loadServers();
     }
 
     private void init() {
@@ -266,8 +280,9 @@ public class ManageServerWidget extends Window {
      */
     private class PerformOperation implements IGPOAuth2AddServerHandler {
 
+        private int modifiedElementsNumber;
         private Record record;
-        
+
         public PerformOperation() {
             OAuth2HandlerManager.addHandler(IGPOAuth2AddServerHandler.TYPE, this);
         }
@@ -316,6 +331,7 @@ public class ManageServerWidget extends Window {
 
                         @Override
                         public void onFailure(Throwable caught) {
+                            verifyEndOperation();
                             if (server.getUrlServer().contains(EnumOAuth2.GEB_STRING.getValue())) {
                                 GeoPlatformMessage.infoMessage("Google sign on required", "Is necessary to sign on Google account for access the Google Earth Builder functionality");
                                 OAuth2HandlerManager.fireEvent(new GPOAuth2GEBLoginEvent(EnumOAuth2.ADD_SERVER.getValue()));
@@ -330,12 +346,28 @@ public class ManageServerWidget extends Window {
 
                         @Override
                         public void onSuccess(GPServerBeanModel serverSaved) {
+                            verifyEndOperation();
                             store.remove(server);
                             store.insert(serverSaved, 0);
                             LayoutManager.getInstance().getStatusMap().setStatus(
                                     "Server added succesfully", EnumSearchStatus.STATUS_SEARCH.toString());
                         }
                     });
+        }
+
+        private void verifyEndOperation() {
+            modifiedElementsNumber--;
+            if (modifiedElementsNumber <= 0) {
+                unmask();
+            }
+        }
+
+        public int getModifiedElementsNumber() {
+            return modifiedElementsNumber;
+        }
+
+        public void setModifiedElementsNumber(int modifiedElementsNumber) {
+            this.modifiedElementsNumber = modifiedElementsNumber;
         }
     }
 }

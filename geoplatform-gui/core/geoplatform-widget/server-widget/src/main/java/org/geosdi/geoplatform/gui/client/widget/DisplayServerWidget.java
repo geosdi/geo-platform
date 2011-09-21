@@ -98,7 +98,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         TimeoutHandlerManager.addHandler(IDisplayGetCapabilitiesHandler.TYPE, this);
         init();
         this.gridWidget = theGridWidget;
-        this.manageServersWidget = new ManageServerWidget(store, true);
+        this.manageServersWidget = new ManageServerWidget(this, true);
         this.loadCapabilities = new PerformGetcapabilities();
     }
 
@@ -192,11 +192,11 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      * @return String
      */
     private native String getTemplate() /*-{
-        return  [
-            '<tpl for=".">',
-                '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{alias}</div>',
-            '</tpl>'
-        ].join("");
+    return  [
+    '<tpl for=".">',
+    '<div class="x-combo-list-item" qtip="{urlServer}" qtitle="Server">{alias}</div>',
+    '</tpl>'
+    ].join("");
     }-*/;
 
     /**
@@ -215,7 +215,9 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      */
     public void loadServers() {
         this.searchStatus.setBusy("Loading Server...");
-
+        this.store.removeAll();
+        this.comboServer.clear();
+        this.gridWidget.cleanStore();
         GeoPlatformOGCRemote.Util.getInstance().loadServers(new AsyncCallback<ArrayList<GPServerBeanModel>>() {
 
             @Override
@@ -255,8 +257,9 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
     private void changeSelection(GPServerBeanModel selected) {
         this.gridWidget.cleanComponentForSelection();
         LayoutManager.getInstance().getStatusMap().setBusy("Loading Layers.....");
-        this.gridWidget.maskGrid();
-        
+        if (selected != null) {
+            this.gridWidget.maskGrid();
+        }
         this.loadCapabilities.checkSelectedServer(selected);
     }
 
@@ -318,10 +321,12 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
         private void checkSelectedServer(GPServerBeanModel selected) {
             this.selectedServer = selected;
-            if (selected.isLayersLoaded()) {
-                fillGrid(selected.getLayers());
-            } else {
-                loadCapabilitiesFromWS();
+            if (selected != null) {
+                if (selected.isLayersLoaded()) {
+                    fillGrid(selected.getLayers());
+                } else {
+                    loadCapabilitiesFromWS();
+                }
             }
         }
 

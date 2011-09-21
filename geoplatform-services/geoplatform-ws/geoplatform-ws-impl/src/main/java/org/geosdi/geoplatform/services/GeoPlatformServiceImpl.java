@@ -635,9 +635,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public ServerDTO saveServer(Long id, String aliasServerName, String serverUrl, String token)
+    public ServerDTO saveServer(Long id, String aliasServerName, String serverUrl)
             throws IllegalParameterFault, ResourceNotFoundFault {
-        return wmsServiceDelegate.saveServer(id, aliasServerName, serverUrl, token);
+        return wmsServiceDelegate.saveServer(id, aliasServerName, serverUrl);
     }
     //</editor-fold>
 

@@ -170,13 +170,13 @@ public class CXFServiceTest extends ServiceTest {
         // Server is into DB
         ServerDTO serverGeoSDI = geoPlatformService.getShortServer(serverUrlGeoSDI);
         Assert.assertNotNull(serverGeoSDI);
-        ServerDTO serverDTO = geoPlatformService.saveServer(serverGeoSDI.getId(), "geoSDI", serverUrlGeoSDI, "");
+        ServerDTO serverDTO = geoPlatformService.saveServer(serverGeoSDI.getId(), "geoSDI", serverUrlGeoSDI);
         Assert.assertNotNull("ServerDTO geoSDI is NULL", serverDTO);
         Assert.assertEquals("ServerDTO geoSDI alias is wrong", serverDTO.getAlias(), "geoSDI");
 
         // Server is NOT into DB
         String serverUrlEx = "http://iws.erdas.com/ecwp/ecw_wms.dll?request=GetCapabilities";
-        serverDTO = geoPlatformService.saveServer(null, "Erdas", serverUrlEx, "");
+        serverDTO = geoPlatformService.saveServer(null, "Erdas", serverUrlEx);
         Assert.assertNotNull("ServerDTO EX is NULL", serverDTO);
 
         // Check if the server was insert

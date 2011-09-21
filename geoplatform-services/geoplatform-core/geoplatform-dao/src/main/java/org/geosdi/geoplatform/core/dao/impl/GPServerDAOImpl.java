@@ -51,12 +51,17 @@ import org.springframework.transaction.annotation.Transactional;
  * 
  */
 @Transactional
-public class GPServerDAOImpl extends BaseDAO<GeoPlatformServer, Long> implements
-        GPServerDAO {
+public class GPServerDAOImpl extends BaseDAO<GeoPlatformServer, Long>
+        implements GPServerDAO {
 
     @Override
     public void persist(GeoPlatformServer... servers) {
         super.persist(servers);
+    }
+
+    @Override
+    public GeoPlatformServer save(GeoPlatformServer server) {
+        return super.save(server);
     }
 
     @Override

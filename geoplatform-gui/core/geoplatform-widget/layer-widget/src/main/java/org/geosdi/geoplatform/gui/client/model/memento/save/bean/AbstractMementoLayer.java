@@ -76,7 +76,7 @@ public abstract class AbstractMementoLayer<T extends GPLayerTreeModel>
 
     @Override
     public void convertMementoToWs() {
-        System.out.println("Converting abstract memento layer for ws");
+//        System.out.println("Converting abstract memento layer for WS");
         super.convertMementoToWs();
         if (refParent != null) {
             idFolderParent = refParent.getId();

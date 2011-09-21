@@ -129,14 +129,11 @@ public class OGCService implements IOGCService {
     }
 
     @Override
-    public GPServerBeanModel insertServer(HttpServletRequest httpServletRequest,
-            Long id, String aliasServerName, String urlServer)
+    public GPServerBeanModel insertServer(Long id, String aliasServerName, String urlServer)
             throws GeoPlatformException {
         ServerDTO serverWS = null;
         try {
-            HttpSession session = httpServletRequest.getSession();
-            String token = (String) session.getAttribute("GOOGLE_TOKEN");
-            serverWS = geoPlatformServiceClient.saveServer(id, aliasServerName, urlServer, token);
+            serverWS = geoPlatformServiceClient.saveServer(id, aliasServerName, urlServer);
         } catch (IllegalParameterFault ex) {
             logger.error(ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());

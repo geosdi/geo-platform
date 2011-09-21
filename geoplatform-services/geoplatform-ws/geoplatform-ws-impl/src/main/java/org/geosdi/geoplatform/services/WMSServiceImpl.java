@@ -161,6 +161,9 @@ class WMSServiceImpl {
 
         WMSCapabilities wmsCapabilities = this.getWMSCapabilities(server.getServerUrl(), token);
 
+//        server = this.createWMSServerFromService(server, wmsCapabilities.getService());
+//        serverDao.merge(server);
+
         ServerDTO serverDTO = new ServerDTO(server);
         List<RasterLayerDTO> layers = convertToLayerList(
                 wmsCapabilities.getLayer(), server.getServerUrl());
@@ -180,45 +183,45 @@ class WMSServiceImpl {
         return server.getId();
     }
 
+    // The ID is important if is changed the URL of a server
+    public ServerDTO saveServer(Long id, String aliasServerName, String serverUrl)
+            throws IllegalParameterFault {
+        try {
+            URL serverURL = new URL(serverUrl);
+        } catch (MalformedURLException e) {
+            logger.error("MalformedURLException: " + e);
+            throw new IllegalParameterFault("Malformed URL");
+        }
+
+        GeoPlatformServer server = null;
+        if (id != null) { // Existent server
+            server = serverDao.find(id);
+        } else { // New server
+            if (this.isURLServerAlreadyExists(serverUrl)) {
+                throw new IllegalParameterFault("Duplicated Server URL");
+            }
+            server = new GeoPlatformServer();
+            server.setServerType(GPCapabilityType.WMS);
+        }
+        server.setAliasName(aliasServerName);
+        server.setServerUrl(serverUrl);
+        serverDao.save(server);
+
+        return new ServerDTO(server);
+    }
+
     private boolean isURLServerAlreadyExists(String serverUrl) {
         return serverDao.findByServerUrl(serverUrl) == null ? false : true;
     }
 
-    // The ID is important if is changed the URL of a server
-    public ServerDTO saveServer(Long id, String aliasServerName, String serverUrl, String token)
-            throws IllegalParameterFault, ResourceNotFoundFault {
-        WMSCapabilities wmsCapabilities = this.getWMSCapabilities(serverUrl, token);
-
-        GeoPlatformServer server = null;
-        if (id != null) {
-            server = serverDao.find(id);
-        }
-        if (server == null && !this.isURLServerAlreadyExists(serverUrl)) {
-            // Create a new Server
-            Service service = wmsCapabilities.getService();
-            server = this.createWMSServerFromService(serverUrl, service);
-            server.setAliasName(aliasServerName);
-            serverDao.persist(server);
-        } else if (server != null) {
-            // Updating fields
-            server.setAliasName(aliasServerName);
-            server.setServerUrl(serverUrl);
-            serverDao.merge(server);
-        } else {
-            throw new IllegalParameterFault("Duplicated Server URL");
-        }
-        ServerDTO serverDTO = new ServerDTO(server);
-
-        return serverDTO;
-    }
-
-    private WMSCapabilities getWMSCapabilities(String urlServer, String token)
+    private WMSCapabilities getWMSCapabilities(String serverUrl, String token)
             throws ResourceNotFoundFault {
         URL serverURL = null;
         WebMapServer wms = null;
         WMSCapabilities cap = null;
 
-        String urlServerEdited = this.editServerUrl(urlServer, token);
+        String urlServerEdited = this.editServerUrl(serverUrl, token);
+        logger.debug("\nURL Server edited: {}", urlServerEdited);
 
         try {
             serverURL = new URL(urlServerEdited);
@@ -324,31 +327,27 @@ class WMSServiceImpl {
         return shortServers;
     }
 
-    private GeoPlatformServer createWMSServerFromService(String serverUrl,
-            Service service) {
-        GeoPlatformServer newServer = new GeoPlatformServer();
-        newServer.setServerUrl(serverUrl);
-        newServer.setServerType(GPCapabilityType.WMS);
-        newServer.setName(service.getName());
-        newServer.setTitle(service.getTitle());
-        newServer.setAbstractServer(service.get_abstract());
-        ResponsibleParty party = service.getContactInformation();
-        if (party != null) {
-            Contact contact = party.getContactInfo();
-            if (contact != null) {
-                InternationalString is = contact.getContactInstructions();
-                if (is != null) {
-                    newServer.setContactPerson(is.toString());
-                }
-            }
-            InternationalString is = party.getOrganisationName();
-            if (is != null) {
-                newServer.setContactOrganization(is.toString());
-            }
-        }
-        return newServer;
-    }
-
+//    private GeoPlatformServer createWMSServerFromService(
+//            GeoPlatformServer server, Service service) {
+//        server.setName(service.getName());
+//        server.setTitle(service.getTitle());
+//        server.setAbstractServer(service.get_abstract());
+//        ResponsibleParty party = service.getContactInformation();
+//        if (party != null) {
+//            Contact contact = party.getContactInfo();
+//            if (contact != null) {
+//                InternationalString is = contact.getContactInstructions();
+//                if (is != null) {
+//                    server.setContactPerson(is.toString());
+//                }
+//            }
+//            InternationalString is = party.getOrganisationName();
+//            if (is != null) {
+//                server.setContactOrganization(is.toString());
+//            }
+//        }
+//        return server;
+//    }
     private List<StyleDTO> createStyleDTOList(List<StyleImpl> stylesImpl) {
         List<StyleDTO> stylesDTO = new ArrayList<StyleDTO>(stylesImpl.size());
         for (StyleImpl style : stylesImpl) {

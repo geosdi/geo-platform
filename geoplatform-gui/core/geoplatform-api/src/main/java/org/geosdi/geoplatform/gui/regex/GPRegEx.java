@@ -50,7 +50,7 @@ public class GPRegEx {
      */
     // Query String of a WMS URL - Fields required
     public static final RegExp RE_REQUEST = RegExp.compile(GetMap.REQUEST + "=GetMap");
-    public static final RegExp RE_VERSION = RegExp.compile(GetMap.VERSION + "=1\\.(0\\.0|1\\.0|1\\.1)");
+    public static final RegExp RE_VERSION = RegExp.compile(GetMap.VERSION + "=1\\.(0\\.0|1\\.0|1\\.1|3\\.0)");
     public static final RegExp RE_LAYERS = RegExp.compile(GetMap.LAYERS + "=\\w+(,\\w+)*");
     public static final RegExp RE_SRS = RegExp.compile(GetMap.SRS + "=\\w+(-\\w+)?:\\d+");
     public static final RegExp RE_BBOX = RegExp.compile(GetMap.BBOX + "=-?\\d+(\\.\\d+)?(,-?\\d+(\\.\\d+)?){3}");

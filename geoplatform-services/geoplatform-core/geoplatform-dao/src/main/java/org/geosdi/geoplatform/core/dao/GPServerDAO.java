@@ -42,7 +42,6 @@ import java.util.List;
 
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 
-
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -57,6 +56,9 @@ public interface GPServerDAO {
     public void persist(GeoPlatformServer... servers);
 
     public GeoPlatformServer merge(GeoPlatformServer server);
+
+    // Save OR Marge
+    public GeoPlatformServer save(GeoPlatformServer server);
 
     public boolean remove(GeoPlatformServer server);
 

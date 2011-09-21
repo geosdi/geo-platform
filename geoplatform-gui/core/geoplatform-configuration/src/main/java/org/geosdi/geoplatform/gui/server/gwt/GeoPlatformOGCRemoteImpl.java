@@ -87,7 +87,7 @@ public class GeoPlatformOGCRemoteImpl extends RemoteServiceServlet
     @Override
     public GPServerBeanModel insertServer(Long id, String aliasServerName, String urlServer)
             throws GeoPlatformException {
-        return ogcService.insertServer(super.getThreadLocalRequest(), id, aliasServerName, urlServer);
+        return ogcService.insertServer(id, aliasServerName, urlServer);
     }
 
     @Override

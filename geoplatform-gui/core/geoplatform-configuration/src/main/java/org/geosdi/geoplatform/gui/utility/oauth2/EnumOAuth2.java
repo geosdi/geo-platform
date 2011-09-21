@@ -42,6 +42,7 @@ package org.geosdi.geoplatform.gui.utility.oauth2;
 public enum EnumOAuth2 {
 
     MAKE_LOGIN("makeLogin"),
+    ADD_SERVER("addServer"),
     LOAD_CAPABILITIES("loadCapabilities"),
     GEB_STRING("earthbuilder.google.com");
     //

@@ -21,7 +21,8 @@
         <property name="enabled" value="true" />
         <property name="order" value="10" />
         <property name="googleAuthUrl" value="https://accounts.google.com/o/oauth2/auth" />
-        <property name="googleClientId" value="715134893945.apps.googleusercontent.com" />
+        <!--<property name="googleClientId" value="715134893945.apps.googleusercontent.com" />-->
+        <property name="googleClientId" value="715134893945-ub1ei34gtbpgq8urdeunkvj36q9c0u5o@developer.gserviceaccount.com" />
         <property name="scope" value="https://www.googleapis.com/auth/earthbuilder.readonly" />
 <!--        <property name="scope" value="http://150.146.160.71/geo-portal" />-->
     </bean>

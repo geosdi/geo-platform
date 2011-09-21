@@ -61,7 +61,11 @@ import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import org.geosdi.geoplatform.gui.puregwt.oauth2.IGPOAuth2AddServerHandler;
+import org.geosdi.geoplatform.gui.puregwt.oauth2.OAuth2HandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPOAuth2GEBLoginEvent;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
+import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -227,7 +231,8 @@ public class ManageServerWidget extends Window {
                 List<Record> modifiedElements = store.getModifiedRecords();
                 System.out.println("Modified elements number: " + modifiedElements.size());
                 for (Record record : modifiedElements) {
-                    operation.updateInsertServer(record);
+//                    operation.updateInsertServer(record);
+                    operation.callSaveRecord(record);
                 }
             }
         }));
@@ -259,7 +264,18 @@ public class ManageServerWidget extends Window {
      * Internal Class for Business Logic
      * 
      */
-    private class PerformOperation {
+    private class PerformOperation implements IGPOAuth2AddServerHandler {
+
+        private Record record;
+        
+        public PerformOperation() {
+            OAuth2HandlerManager.addHandler(IGPOAuth2AddServerHandler.TYPE, this);
+        }
+
+        private void callSaveRecord(Record theRecord) {
+            record = theRecord;
+            updateInsertServer();
+        }
 
         private void deleteServer(final GPServerBeanModel server) {
             if (server.getId() != null) {
@@ -289,9 +305,10 @@ public class ManageServerWidget extends Window {
             }
         }
 
-        private void updateInsertServer(final Record record) {
+        @Override
+        public void updateInsertServer() {
             final GPServerBeanModel server = (GPServerBeanModel) record.getModel();
-            
+
             GeoPlatformOGCRemote.Util.getInstance().insertServer(
                     server.getId(), record.get("alias").toString(),
                     record.get("urlServer").toString().trim(),
@@ -299,11 +316,16 @@ public class ManageServerWidget extends Window {
 
                         @Override
                         public void onFailure(Throwable caught) {
-                            GeoPlatformMessage.errorMessage("Error on Saving Server",
-                                    caught.getMessage());
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "Save Server Error. " + caught.getMessage(),
-                                    EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                            if (server.getUrlServer().contains(EnumOAuth2.GEB_STRING.getValue())) {
+                                GeoPlatformMessage.infoMessage("Google sign on required", "Is necessary to sign on Google account for access the Google Earth Builder functionality");
+                                OAuth2HandlerManager.fireEvent(new GPOAuth2GEBLoginEvent(EnumOAuth2.ADD_SERVER.getValue()));
+                            } else {
+                                GeoPlatformMessage.errorMessage("Error on Saving Server",
+                                        caught.getMessage());
+                                LayoutManager.getInstance().getStatusMap().setStatus(
+                                        "Save Server Error. " + caught.getMessage(),
+                                        EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                            }
                         }
 
                         @Override
@@ -311,7 +333,7 @@ public class ManageServerWidget extends Window {
                             store.remove(server);
                             store.insert(serverSaved, 0);
                             LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Server added succesfully", EnumSearchStatus.STATUS_SEARCH.toString());
+                                    "Server added succesfully", EnumSearchStatus.STATUS_SEARCH.toString());
                         }
                     });
         }

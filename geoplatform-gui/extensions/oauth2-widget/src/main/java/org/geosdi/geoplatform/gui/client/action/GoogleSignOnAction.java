@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.IGPOAuth2GEBLoginHandler;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.OAuth2HandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPOAuth2AddServerEvent;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPOAuth2CapabilitiesEvent;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPToolbarIconGEBLoginWidgetEvent;
@@ -97,6 +98,8 @@ public class GoogleSignOnAction extends OAuth2MenuBaseAction implements IGPOAuth
 
                 if (type.equals(EnumOAuth2.LOAD_CAPABILITIES.getValue())) {
                     OAuth2HandlerManager.fireEvent(new GPOAuth2CapabilitiesEvent());
+                } else if (type.equals(EnumOAuth2.ADD_SERVER.getValue())) {
+                    OAuth2HandlerManager.fireEvent(new GPOAuth2AddServerEvent());
                 }
             }
 

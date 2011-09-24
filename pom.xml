@@ -1161,8 +1161,6 @@
         <gxtVersion>2.2.4</gxtVersion>
         
         <gwtOpenlayersVersion>0.7-SNAPSHOT</gwtOpenlayersVersion>
-        
-        <netbeans.hint.license>geo-platform</netbeans.hint.license>
 
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
     </properties>

@@ -106,7 +106,7 @@ public class ToolbarTreeClientTool {
         ActionClientTool printClientTool = new ActionClientTool();
         printClientTool.setId(TOOLBAR_PRINT_TREE_LAYERS);
         printClientTool.setType(ActionClientTool.BUTTON);
-        printClientTool.setEnabled(false);
+        printClientTool.setEnabled(true);
         printClientTool.setOrder(7);
 
         GenericClientTool toolbarSeparator2 = new GenericClientTool();

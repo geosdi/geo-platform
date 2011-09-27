@@ -42,7 +42,8 @@ import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
  *
  */
 public interface IStartupService {
-	
-	public IGeoPlatformGlobal initGeoPlatformConfiguration();
 
+    public IGeoPlatformGlobal initGeoPlatformConfiguration();
+
+    public IGeoPlatformGlobal initGPConfigurationForBeanName(String beanName);
 }

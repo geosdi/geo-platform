@@ -64,4 +64,14 @@ public interface GeoPlatformConfiguration extends RemoteService {
     }
 
     public IGeoPlatformGlobal initGeoPlatformConfiguration();
+    
+     /**
+     * 
+     * @param beanName
+     *          
+     *          The Bean Name defined in Spring applicationContext 
+     * 
+     * @return IGeoPlatformGlobal
+     */
+    public IGeoPlatformGlobal initGPConfigurationForBeanName(String beanName);
 }

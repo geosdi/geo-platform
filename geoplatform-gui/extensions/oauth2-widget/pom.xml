@@ -1,6 +1,7 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.geosdi</groupId>
@@ -8,16 +9,16 @@
         <version>1.2-SNAPSHOT</version>
     </parent>
 	
-	<groupId>org.geosdi</groupId>
-	<artifactId>oauth2-widget</artifactId>
-	<version>1.2-SNAPSHOT</version>
-	<packaging>jar</packaging>
+    <groupId>org.geosdi</groupId>
+    <artifactId>oauth2-widget</artifactId>
+    <version>1.2-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <name>Geo-Platform :: == OAuth2 Widget</name>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
   
     <developers>
         <developer>
@@ -32,7 +33,7 @@
         </developer>
     </developers>
 
-	<dependencies>
+    <dependencies>
         <!-- Dependencies for GoogleAPI Compilation -->
         <dependency>
             <groupId>com.google.api</groupId>
@@ -129,11 +130,11 @@
             <scope>test</scope>
         </dependency>
 		
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
         
 		<!-- SCOPE TEST -->
         <dependency>
@@ -151,7 +152,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-	</dependencies>
+    </dependencies>
 
     <build>
 

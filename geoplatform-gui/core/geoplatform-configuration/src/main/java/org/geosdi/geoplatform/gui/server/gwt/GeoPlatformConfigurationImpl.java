@@ -50,6 +50,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import org.geosdi.geoplatform.gui.impl.GeoPlatformGlobal;
 
 /**
  * @author giuseppe
@@ -63,7 +64,7 @@ public class GeoPlatformConfigurationImpl extends RemoteServiceServlet
      *
      */
     private static final long serialVersionUID = 4416552134318747534L;
-
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
     private IStartupService startupService;
@@ -87,8 +88,12 @@ public class GeoPlatformConfigurationImpl extends RemoteServiceServlet
      */
     @Override
     public IGeoPlatformGlobal initGeoPlatformConfiguration() {
-        // TODO Auto-generated method stub
         return startupService.initGeoPlatformConfiguration();
+    }
+    
+    @Override
+    public IGeoPlatformGlobal initGPConfigurationForBeanName(String beanName) {
+        return startupService.initGPConfigurationForBeanName(beanName);
     }
 
     /**

@@ -47,4 +47,7 @@ public interface GeoPlatformConfigurationAsync {
 
     public void initGeoPlatformConfiguration(
             AsyncCallback<IGeoPlatformGlobal> callback);
+
+    public void initGPConfigurationForBeanName(String beanName,
+            AsyncCallback<IGeoPlatformGlobal> callback);
 }

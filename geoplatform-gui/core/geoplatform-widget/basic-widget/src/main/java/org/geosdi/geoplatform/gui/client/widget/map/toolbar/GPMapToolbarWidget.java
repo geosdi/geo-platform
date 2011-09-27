@@ -107,7 +107,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
             } else {
                 GeoPlatformToolbarAction action = ToolbarActionRegistar.get(
                         id, geoPlatformMap);
-
+                
                 action.setId(id);
 
                 if (action instanceof ToolbarApplicationAction) {

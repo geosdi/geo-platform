@@ -52,6 +52,7 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
+import com.google.gwt.core.client.GWT;
 
 /**
  * @author giuseppe
@@ -152,7 +153,7 @@ public abstract class GeoPlatformLayoutManager {
         ToolBar toolBar = new ToolBar();
 
         statusMap = new Status();
-        statusMap.setText("Wellcome to GeoPortal.");
+        statusMap.setText("Wellcome to " + GWT.getModuleName());
         statusMap.setWidth(150);
         toolBar.add(statusMap);
         toolBar.add(new FillToolItem());

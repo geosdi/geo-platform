@@ -57,11 +57,12 @@ import org.hibernate.annotations.OnDeleteAction;
 /**
  * @author Francesco Izzi - geoSDI
  * 
+ * TODO: for future use
  */
-@XmlRootElement(name = "Style")
-@Entity(name = "Style")
-@Table(name = "gp_style")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "style")
+//@XmlRootElement(name = "Style")
+//@Entity(name = "Style")
+//@Table(name = "gp_style")
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "style")
 public class GPStyle implements Serializable {
 
     /**

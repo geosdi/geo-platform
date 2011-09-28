@@ -57,7 +57,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
-import org.geosdi.geoplatform.core.dao.GPStyleDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
@@ -77,7 +76,6 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
@@ -96,7 +94,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private GPServerDAO serverDao;
     private GPFolderDAO folderDao;
     private GPLayerDAO layerDao;
-    private GPStyleDAO styleDao;
+//    private GPStyleDAO styleDao;
     private GPAuthorityDAO authorityDao;
     // ACL
     private AclClassDAO classDao;
@@ -168,15 +166,15 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.layerServiceDelegate.setLayerDao(layerDao);
     }
 
-    /**
-     * @param styleDao
-     *            the styleDao to set
-     */
-    @Autowired
-    public void setStyleDao(GPStyleDAO styleDao) {
-        this.styleDao = styleDao;
-        this.layerServiceDelegate.setStyleDao(styleDao);
-    }
+//    /**
+//     * @param styleDao
+//     *            the styleDao to set
+//     */
+//    @Autowired
+//    public void setStyleDao(GPStyleDAO styleDao) {
+//        this.styleDao = styleDao;
+//        this.layerServiceDelegate.setStyleDao(styleDao);
+//    }
 
     /**
      * @param authorityDao
@@ -551,10 +549,10 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         return layerServiceDelegate.getLayers();
     }
 
-    @Override
-    public List<StyleDTO> getLayerStyles(long layerId) {
-        return layerServiceDelegate.getLayerStyles(layerId);
-    }
+//    @Override
+//    public List<StyleDTO> getLayerStyles(long layerId) {
+//        return layerServiceDelegate.getLayerStyles(layerId);
+//    }
 
     @Override
     public GPBBox getBBox(long layerId) throws ResourceNotFoundFault {

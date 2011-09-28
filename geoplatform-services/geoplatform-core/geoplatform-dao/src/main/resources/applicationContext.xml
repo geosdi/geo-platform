@@ -50,7 +50,7 @@
     <bean id="userDAO" class="org.geosdi.geoplatform.core.dao.impl.GPUserDAOImpl" />
     <bean id="folderDAO" class="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" />
     <bean id="layerDAO" class="org.geosdi.geoplatform.core.dao.impl.GPLayerDAOImpl" />
-    <bean id="styleDAO" class="org.geosdi.geoplatform.core.dao.impl.GPStyleDAOImpl" />
+<!--    <bean id="styleDAO" class="org.geosdi.geoplatform.core.dao.impl.GPStyleDAOImpl" />-->
     <bean id="serverDAO" class="org.geosdi.geoplatform.core.dao.impl.GPServerDAOImpl" />
     <bean id="authorityDAO" class="org.geosdi.geoplatform.core.dao.impl.GPAuthorityDAOImpl" />
     <!-- ACL -->

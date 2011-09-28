@@ -120,14 +120,7 @@ public class DTOConverter {
         this.convertToLayerElementFromLayerDTO(raster, rasterDTO);
         raster.setLayerType(org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.RASTER);
         raster.setOpacity(rasterDTO.getOpacity());
-        
-        if(rasterDTO.getStyleList() != null) {
-            ArrayList<String> styles = new ArrayList<String>();
-            for(StyleDTO styleDTO : rasterDTO.getStyleList()) {
-                styles.add(styleDTO.getName());
-            }
-            raster.setStyles(styles);
-        }
+        raster.setStyles((ArrayList) rasterDTO.getStyleList());
 
         return raster;
     }

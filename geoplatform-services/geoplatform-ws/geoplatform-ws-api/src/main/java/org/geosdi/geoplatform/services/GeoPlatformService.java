@@ -412,12 +412,12 @@ public interface GeoPlatformService {
     @WebResult(name = "Layer")
     List<ShortLayerDTO> getLayers();
 
-    /**
-     * @return Styles of a layer.
-     */
-    @Get
-    @WebResult(name = "LayerStyles")
-    List<StyleDTO> getLayerStyles(@WebParam(name = "LayerId") long layerId);
+//    /**
+//     * @return Styles of a layer.
+//     */
+//    @Get
+//    @WebResult(name = "LayerStyles")
+//    List<StyleDTO> getLayerStyles(@WebParam(name = "LayerId") long layerId);
 
     /**
      * @return a short layer.

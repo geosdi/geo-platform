@@ -37,7 +37,6 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
-import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +45,6 @@ import org.slf4j.LoggerFactory;
 
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
-import org.geosdi.geoplatform.core.dao.GPStyleDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
@@ -76,7 +74,7 @@ class LayerServiceImpl {
     private GPUserDAO userDao;
     private GPFolderDAO folderDao;
     private GPLayerDAO layerDao;
-    private GPStyleDAO styleDao;
+//    private GPStyleDAO styleDao;
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
@@ -111,25 +109,25 @@ class LayerServiceImpl {
         this.layerDao = layerDao;
     }
 
-    /**
-     * @param styleDao
-     *            the styleDao to set
-     */
-    public void setStyleDao(GPStyleDAO styleDao) {
-        this.styleDao = styleDao;
-    }
+//    /**
+//     * @param styleDao
+//     *            the styleDao to set
+//     */
+//    public void setStyleDao(GPStyleDAO styleDao) {
+//        this.styleDao = styleDao;
+//    }
     //</editor-fold>
 
-    public List<StyleDTO> getLayerStyles(long layerId) {
-        Search searchCriteria = new Search(GPStyle.class);
-        searchCriteria.addSortAsc("name");
-
-        Filter layer = Filter.equal("layer.id", layerId);
-        searchCriteria.addFilter(layer);
-
-        List<GPStyle> foundStyle = styleDao.search(searchCriteria);
-        return convertToStyleList(foundStyle);
-    }
+//    public List<StyleDTO> getLayerStyles(long layerId) {
+//        Search searchCriteria = new Search(GPStyle.class);
+//        searchCriteria.addSortAsc("name");
+//
+//        Filter layer = Filter.equal("layer.id", layerId);
+//        searchCriteria.addFilter(layer);
+//
+//        List<GPStyle> foundStyle = styleDao.search(searchCriteria);
+//        return convertToStyleList(foundStyle);
+//    }
 
     public long insertLayer(GPLayer layer) {
         layerDao.persist(layer);
@@ -524,15 +522,15 @@ class LayerServiceImpl {
         layerToUpdate.setUrlServer(layer.getUrlServer());
     }
 
-    private List<StyleDTO> convertToStyleList(List<GPStyle> foundStyle) {
-        List<StyleDTO> stylesDTO = new ArrayList<StyleDTO>(foundStyle.size());
-
-        for (GPStyle style : foundStyle) {
-            stylesDTO.add(new StyleDTO(style));
-        }
-
-        return stylesDTO;
-    }
+//    private List<StyleDTO> convertToStyleList(List<GPStyle> foundStyle) {
+//        List<StyleDTO> stylesDTO = new ArrayList<StyleDTO>(foundStyle.size());
+//
+//        for (GPStyle style : foundStyle) {
+//            stylesDTO.add(new StyleDTO(style));
+//        }
+//
+//        return stylesDTO;
+//    }
 
     private List<ShortLayerDTO> convertToLayerList(List<GPLayer> layerList) {
         List<ShortLayerDTO> layersDTO = new ArrayList<ShortLayerDTO>(layerList.size());

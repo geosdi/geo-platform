@@ -75,7 +75,7 @@ public class AclEntry {
     @Column(name = "ace_order", nullable = false)
     private Integer aceOrder;
     //
-    @ManyToOne(targetEntity = AclSid.class)
+    @ManyToOne
     @JoinColumn(name = "sid", nullable = false)
     private AclSid aclSid;
     //

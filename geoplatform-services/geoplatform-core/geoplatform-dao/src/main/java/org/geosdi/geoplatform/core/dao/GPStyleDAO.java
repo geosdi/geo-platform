@@ -42,10 +42,10 @@ import java.util.List;
 
 import org.geosdi.geoplatform.core.model.GPStyle;
 
-
 /**
  * @author Francesco Izzi - geoSDI
- *
+ * 
+ * TODO: for future use
  */
 public interface GPStyleDAO {
 

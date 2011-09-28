@@ -37,6 +37,9 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -68,7 +71,10 @@ public class GPRasterLayer extends GPLayer {
     private GPLayerInfo layerInfo;
     //
     @Column
-    private float opacity = 1.0f;    
+    private float opacity = 1.0f;
+    // The character , separated list of styles
+    @Column(length = 500)
+    private String styles;
     //
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -124,6 +130,28 @@ public class GPRasterLayer extends GPLayer {
         this.folder = folder;
     }
 
+    /**
+     * @return the styles
+     */
+    public List<String> getStyles() {
+        if (styles == null) {
+            return new ArrayList<String>();
+        }
+        return Arrays.asList(styles.split(","));
+    }
+
+    /**
+     * @param styles
+     *            the styles to set
+     */
+    public void setStyles(List<String> styles) {
+        StringBuilder str = new StringBuilder();
+        for (String style : styles) {
+            str.append(style).append(",");
+        }
+        this.styles = str.toString();
+    }
+
     /*
      * (non-Javadoc)
      *
@@ -134,7 +162,8 @@ public class GPRasterLayer extends GPLayer {
         StringBuilder str = new StringBuilder("GPRasterLayer {");
         str.append(super.toString());
         str.append(", opacity=").append(opacity);
-        str.append(", layerInfo=").append(layerInfo).append("}");
+        str.append(", layerInfo=").append(layerInfo);
+        str.append(", styles=").append(styles).append("}");
         return str.toString();
     }
 }

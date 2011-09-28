@@ -39,7 +39,6 @@ package org.geosdi.geoplatform.services;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,7 +46,6 @@ import java.util.List;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
-import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geotools.data.ows.StyleImpl;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
@@ -61,13 +59,9 @@ import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geotools.data.ows.CRSEnvelope;
 import org.geotools.data.ows.Layer;
-import org.geotools.data.ows.Service;
 import org.geotools.data.ows.WMSCapabilities;
 import org.geotools.data.wms.WebMapServer;
 import org.geotools.ows.ServiceException;
-import org.opengis.metadata.citation.Contact;
-import org.opengis.metadata.citation.ResponsibleParty;
-import org.opengis.util.InternationalString;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -311,8 +305,7 @@ class WMSServiceImpl {
         logger.debug("\n*** Layer \"{}\" has {} SubLayers and {} StyleImpl ***",
                 new Object[]{layer.getTitle(), layer.getLayerChildren().size(), stylesImpl.size()});
 
-        List<StyleDTO> stylesDTO = this.createStyleDTOList(stylesImpl);
-        raster.setStyleList(stylesDTO);
+        raster.setStyleList(this.createStyleList(stylesImpl));
 
         return raster;
     }
@@ -348,14 +341,18 @@ class WMSServiceImpl {
 //        }
 //        return server;
 //    }
-    private List<StyleDTO> createStyleDTOList(List<StyleImpl> stylesImpl) {
-        List<StyleDTO> stylesDTO = new ArrayList<StyleDTO>(stylesImpl.size());
+    private List<String> createStyleList(List<StyleImpl> stylesImpl) {
+//        List<StyleDTO> stylesDTO = new ArrayList<StyleDTO>(stylesImpl.size());
+//        for (StyleImpl style : stylesImpl) {
+//            StyleDTO styleDTO = new StyleDTO(style);
+//            stylesDTO.add(styleDTO);
+//            logger.trace("\n*** CONVERTED StyleDTO:\n{}\n***", styleDTO);
+//        }
+        List<String> styleList = new ArrayList<String>(stylesImpl.size());
         for (StyleImpl style : stylesImpl) {
-            StyleDTO styleDTO = new StyleDTO(style);
-            stylesDTO.add(styleDTO);
-            logger.trace("\n*** CONVERTED StyleDTO:\n{}\n***", styleDTO);
+            styleList.add(style.getName());
         }
-        return stylesDTO;
+        return styleList;
     }
 
     private GPBBox createBbox(CRSEnvelope env) {

@@ -168,16 +168,7 @@ public class DTOServerConverter {
                     layer.getBbox().getMaxY()));
             raster.setCrs(layer.getSrs());
         }
-
-        /** STYLES MAPPING **/
-        if (layer.getStyleList() != null) {
-            ArrayList<String> styles = new ArrayList<String>();
-            for (StyleDTO styleDTO : layer.getStyleList()) {
-                styles.add(styleDTO.getName());
-            }
-            raster.setStyles(styles);
-        }
-
+        raster.setStyles((ArrayList) layer.getStyleList());
         return raster;
     }
 }

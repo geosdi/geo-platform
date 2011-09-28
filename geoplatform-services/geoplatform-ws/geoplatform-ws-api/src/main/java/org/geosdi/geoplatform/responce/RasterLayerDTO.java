@@ -58,7 +58,7 @@ public class RasterLayerDTO extends ShortLayerDTO {
     //    
     @XmlElementWrapper(name = "styleList")
     @XmlElement(name = "style")
-    private List<StyleDTO> styleList;
+    private List<String> styleList;
     //
     @XmlElementWrapper(name = "subLayerList")
     @XmlElement(name = "layer")
@@ -78,6 +78,7 @@ public class RasterLayerDTO extends ShortLayerDTO {
         super(rasterLayer);
         this.layerInfo = rasterLayer.getLayerInfo();
         this.opacity = rasterLayer.getOpacity();
+        this.styleList = rasterLayer.getStyles();
     }
     //</editor-fold>
 
@@ -118,7 +119,7 @@ public class RasterLayerDTO extends ShortLayerDTO {
     /**
      * @return the styleList
      */
-    public List<StyleDTO> getStyleList() {
+    public List<String> getStyleList() {
         return styleList;
     }
 
@@ -126,7 +127,7 @@ public class RasterLayerDTO extends ShortLayerDTO {
      * @param styleList
      *          the styleList to set
      */
-    public void setStyleList(List<StyleDTO> styleList) {
+    public void setStyleList(List<String> styleList) {
         this.styleList = styleList;
     }
 
@@ -150,7 +151,7 @@ public class RasterLayerDTO extends ShortLayerDTO {
     public String toString() {
         return "RasterLayerDTO [" + super.toString() + ", " + layerInfo
                 + ", opacity=" + opacity
-                + ", styles=" + styleList
+                + ", styleList=" + styleList
                 + ", subLayerList=" + subLayerList + "]";
     }
 }

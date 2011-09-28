@@ -27,7 +27,7 @@
         <property name="serverDao" ref="serverDAO" />
         <property name="folderDao" ref="folderDAO" />
         <property name="layerDao" ref="layerDAO" />
-        <property name="styleDao" ref="styleDAO" />
+<!--        <property name="styleDao" ref="styleDAO" />-->
         <property name="authorityDao" ref="authorityDAO" />
         <!-- ACL -->
         <property name="classDao" ref="classDAO" />

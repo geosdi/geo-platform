@@ -50,7 +50,6 @@ import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
-import org.geosdi.geoplatform.core.dao.GPStyleDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPBBox;
@@ -59,7 +58,6 @@ import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPStyle;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.core.model.Utility;
@@ -98,8 +96,8 @@ public abstract class BaseDAOTest {
     @Autowired
     protected GPLayerDAO layerDAO;
     //
-    @Autowired
-    protected GPStyleDAO styleDAO;
+//    @Autowired
+//    protected GPStyleDAO styleDAO;
     //
     @Autowired
     protected GPServerDAO serverDAO;
@@ -115,7 +113,7 @@ public abstract class BaseDAOTest {
 
     //<editor-fold defaultstate="collapsed" desc="Remove all data">
     protected void removeAll() {
-        removeAllStyles();
+//        removeAllStyles();
         removeAllLayers();
         removeAllFolders();
         removeAllAuthorities();
@@ -152,15 +150,15 @@ public abstract class BaseDAOTest {
         }
     }
 
-    private void removeAllStyles() {
-        List<GPStyle> styles = styleDAO.findAll();
-        for (GPStyle style : styles) {
-            logger.trace("\n*** Style to REMOVE:\n{}\n***", style);
-            boolean removed = styleDAO.remove(style);
-            Assert.assertTrue("Old Style NOT removed", removed);
-        }
-    }
-
+//    private void removeAllStyles() {
+//        List<GPStyle> styles = styleDAO.findAll();
+//        for (GPStyle style : styles) {
+//            logger.trace("\n*** Style to REMOVE:\n{}\n***", style);
+//            boolean removed = styleDAO.remove(style);
+//            Assert.assertTrue("Old Style NOT removed", removed);
+//        }
+//    }
+//    
     protected void removeAllAuthorities() {
         List<GPAuthority> authorities = authorityDAO.findAll();
         for (GPAuthority authority : authorities) {
@@ -270,13 +268,13 @@ public abstract class BaseDAOTest {
         GPFolder folderRaster = this.createUserFolder("my raster", user, --position);
         // "my raster" ---> _rasterLayer1_ ---> Styles
         GPRasterLayer rasterLayer1 = this.createRasterLayer(--position, folderRaster, user.getId());
-        GPStyle style1 = this.createStyle("style 1", rasterLayer1);
-        GPStyle style2 = this.createStyle("style 2", rasterLayer1);
+//        GPStyle style1 = this.createStyle("style 1", rasterLayer1);
+//        GPStyle style2 = this.createStyle("style 2", rasterLayer1);
         //
         folderRaster.setNumberOfDescendants(layerList.size() + 2); // +2 because {"IGM"; "vector layer"}
         folderDAO.persist(folderRaster);
         layerDAO.persist(rasterLayer1);
-        styleDAO.persist(style1, style2);
+//        styleDAO.persist(style1, style2);
 
         List<GPRasterLayer> layers = this.loadRasterLayer(layerList, position, folderRaster, user.getId());
         layerDAO.persist(layers.toArray(new GPRasterLayer[]{}));
@@ -338,20 +336,24 @@ public abstract class BaseDAOTest {
         info.setKeywords(keywords);
         info.setQueryable(true);
         raster.setLayerInfo(info);
+        // Styles
+        List<String> styles = new ArrayList<String>();
+        styles.add("Default Style");
+        styles.add("Style k");
+        raster.setStyles(styles);
         return raster;
     }
 
-    private GPStyle createStyle(String name, GPRasterLayer layer) {
-        GPStyle style = new GPStyle();
-        style.setName(name);
-        style.setTitle("The " + name);
-        style.setAbstractText("Abstract for " + name);
-        style.setLegendURL("http://www.geosdi.org/"
-                + name.replaceAll("[ ]+", "-"));
-        style.setLayer(layer);
-        return style;
-    }
-
+//    private GPStyle createStyle(String name, GPRasterLayer layer) {
+//        GPStyle style = new GPStyle();
+//        style.setName(name);
+//        style.setTitle("The " + name);
+//        style.setAbstractText("Abstract for " + name);
+//        style.setLegendURL("http://www.geosdi.org/"
+//                + name.replaceAll("[ ]+", "-"));
+//        style.setLayer(layer);
+//        return style;
+//    }
     protected GPVectorLayer createVectorLayer(int position, GPFolder folder, long ownerId) {
         GPVectorLayer vector = new GPVectorLayer();
         vector.setName("Name of vectorLayer");

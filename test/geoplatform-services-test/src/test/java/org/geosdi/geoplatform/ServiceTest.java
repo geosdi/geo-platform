@@ -187,10 +187,12 @@ public abstract class ServiceTest implements InitializingBean {
         return folder;
     }
 
-    protected long createAndInsertRasterLayer(String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
+    protected long createAndInsertRasterLayer(String abstractText,
+            GPFolder parentFolder, String name, int position, boolean shared,
             long ownerId, String srs, String title, String urlServer) {
         GPRasterLayer rasterLayer = new GPRasterLayer();
-        createLayer(rasterLayer, abstractText, parentFolder, name, position, shared, ownerId, srs, title, urlServer);
+        this.createLayer(rasterLayer, abstractText, parentFolder, name,
+                position, shared, ownerId, srs, title, urlServer);
         rasterLayer.setFolder(parentFolder);
 
         GPLayerInfo layerInfo = new GPLayerInfo();
@@ -203,10 +205,12 @@ public abstract class ServiceTest implements InitializingBean {
         return id;
     }
 
-    protected long createAndInsertVectorLayer(String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
+    protected long createAndInsertVectorLayer(String abstractText,
+            GPFolder parentFolder, String name, int position, boolean shared,
             long ownerId, String srs, String title, String urlServer) {
         GPVectorLayer vectorLayer = new GPVectorLayer();
-        createLayer(vectorLayer, abstractText, parentFolder, name, position, shared, ownerId, srs, title, urlServer);
+        this.createLayer(vectorLayer, abstractText, parentFolder, name,
+                position, shared, ownerId, srs, title, urlServer);
         vectorLayer.setFolder(parentFolder);
 
         vectorLayer.setLayerType(GPLayerType.POLYGON);
@@ -214,7 +218,8 @@ public abstract class ServiceTest implements InitializingBean {
         return id;
     }
 
-    protected void createLayer(GPLayer gpLayer, String abstractText, GPFolder parentFolder, String name, int position, boolean shared,
+    protected void createLayer(GPLayer gpLayer, String abstractText,
+            GPFolder parentFolder, String name, int position, boolean shared,
             long ownerId, String srs, String title, String urlServer) {
         double minX = 10;
         double minY = 10;

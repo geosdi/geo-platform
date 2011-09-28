@@ -48,6 +48,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * @author Francesco Izzi - geoSDI
  * 
+ * TODO: for future use
  */
 @Transactional
 public class GPStyleDAOImpl extends BaseDAO<GPStyle, Long> implements

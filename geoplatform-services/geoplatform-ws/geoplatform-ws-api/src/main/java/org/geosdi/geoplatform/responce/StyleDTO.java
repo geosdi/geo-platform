@@ -48,6 +48,7 @@ import org.geotools.data.ows.StyleImpl;
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  * @author Michele Santomauro
  *
+ * TODO: for future use
  */
 @XmlRootElement(name = "StyleDTO")
 @XmlType(propOrder = {"id", "name", "title", "abstractText", "legendURL"})
@@ -84,20 +85,20 @@ public class StyleDTO {
         this.title = style.getTitle() == null ? "" : style.getTitle().toString();
         this.abstractText = style.getAbstract() == null ? "" : style.getAbstract().toString();
         // TODO: FIX StyleDTO(StyleImpl style) and DEL
-        this.legendURL = style.getLegendURLs() == null ? "" : style.getLegendURLs().toArray().toString();
-        // 
-        if (style.getLegendURLs() != null) {
-            System.out.println("\n\nURL#K\n" + style.getLegendURLs().size());
-            for (Object o : style.getLegendURLs()) {
-                System.out.println("\n\nURL#K\n" + o);
-            }
-        }
-        if (style.getStyleSheetURL() != null) {
-            System.out.println("\n\nURL#1\n" + style.getStyleSheetURL().toString());
-        }
-        if (style.getStyleURL() != null) {
-            System.out.println("\n\nURL#2\n" + style.getStyleURL().toString());
-        }
+//        this.legendURL = style.getLegendURLs() == null ? "" : style.getLegendURLs().toArray().toString();
+//        // 
+//        if (style.getLegendURLs() != null) {
+//            System.out.println("\n\nURL#K\n" + style.getLegendURLs().size());
+//            for (Object o : style.getLegendURLs()) {
+//                System.out.println("\n\nURL#K\n" + o);
+//            }
+//        }
+//        if (style.getStyleSheetURL() != null) {
+//            System.out.println("\n\nURL#1\n" + style.getStyleSheetURL().toString());
+//        }
+//        if (style.getStyleURL() != null) {
+//            System.out.println("\n\nURL#2\n" + style.getStyleURL().toString());
+//        }
     }
     //</editor-fold>
 
@@ -180,7 +181,8 @@ public class StyleDTO {
 
     @Override
     public String toString() {
-        return "StyleDTO [" + "id=" + id + ", name=" + name + ", title=" + title
-                + ", abstractText=" + abstractText + ", legendURL=" + legendURL + ']';
+        return "StyleDTO [" + "id=" + id + ", name=" + name
+                + ", title=" + title + ", abstractText=" + abstractText
+                + ", legendURL=" + legendURL + ']';
     }
 }

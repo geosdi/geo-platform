@@ -63,7 +63,7 @@ public class ReverseGeocodingMarker extends GeoPlatformMarker {
 		MarkersOptions options = new MarkersOptions();
 		options.setNumZoomLevels(18);
 		options.setMaxZoomLevel(18);
-		options.setDisplayInLayerSwitcher(false);
+		options.setDisplayInLayerSwitcher(true);
 
 		this.markerLayer = new Markers("GPReverseGeocoding-Marker-Layer",
 				options);

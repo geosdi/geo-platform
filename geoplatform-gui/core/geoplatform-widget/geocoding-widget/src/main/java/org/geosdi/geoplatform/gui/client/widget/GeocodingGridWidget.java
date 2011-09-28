@@ -190,14 +190,18 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
      * Create mask effect on Grid
      */
     public void maskGrid() {
-        this.grid.getView().getBody().mask("Loading Locations");
+        if (this.grid.getView().getBody() != null) {
+            this.grid.getView().getBody().mask("Loading Locations");
+        }
     }
 
     /**
      * Remove mask effect from the Grid
      */
     public void unMaskGrid() {
-        this.grid.getView().getBody().unmask();
+        if (this.grid.getView().getBody() != null) {
+            this.grid.getView().getBody().unmask();
+        }
     }
 
     /**

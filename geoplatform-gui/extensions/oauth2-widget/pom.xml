@@ -80,6 +80,19 @@
             <version>${project.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>basic-widget</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>basic-widget</artifactId>
+            <classifier>sources</classifier>
+            <version>${project.version}</version>
+        </dependency>
+
 		<!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>

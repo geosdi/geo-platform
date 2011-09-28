@@ -133,6 +133,17 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
 		GPHandlerManager.fireEvent(event);
 	}
+        
+        public void sendRequest(LonLat theLonLat) {
+            this.lonlat = theLonLat;
+		this.rGMarker.addMarker(this.lonlat, this.mapWidget.getMap());
+//		popupWidget.setLonLat(this.lonlat);
+//		this.popupWidget.setContentHTML(PopupTemplate.IMAGE_LOADING.toString()
+//				+ PopupTemplate.MESSAGE_LOADING.toString());
+//		this.mapWidget.getMap().addPopup(popupWidget.getPopup());
+
+//		GPHandlerManager.fireEvent(event);
+	}
 
 	/**
 	 * 

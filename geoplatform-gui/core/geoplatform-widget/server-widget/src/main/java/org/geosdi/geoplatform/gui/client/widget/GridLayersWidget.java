@@ -115,7 +115,7 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
         this.formPanel.add(this.grid);
 
         StoreFilterField<L> filter = this.createFilter();
-        filter.setToolTip("Filter into \"title\" and \"abstract\"");
+        filter.setToolTip("Filter in ignore case");
         filter.bind(super.store);
 
         this.formPanel.setButtonAlign(HorizontalAlignment.LEFT);
@@ -287,15 +287,13 @@ public class GridLayersWidget<L extends GPLayerBean> extends GeoPlatformGridWidg
             @Override
             protected boolean doSelect(Store<L> store, L parent, L record,
                     String property, String filter) {
-                filter = filter.toLowerCase();
-
-                String title = record.getTitle().toLowerCase();
-                String abstractText = record.getAbstractText() == null
-                        ? null : record.getAbstractText().toLowerCase();
-                RegExp expression = RegExp.compile(filter);
-                if (expression.test(title)) {
+                RegExp expression = RegExp.compile(filter, "i"); // Ignore Case
+                if (expression.test(record.getName())
+                        || expression.test(record.getTitle())) {
                     return true;
                 }
+                String abstractText = record.getAbstractText() == null
+                        ? null : record.getAbstractText();
                 if (abstractText != null) {
                     if (expression.test(abstractText)) {
                         return true;

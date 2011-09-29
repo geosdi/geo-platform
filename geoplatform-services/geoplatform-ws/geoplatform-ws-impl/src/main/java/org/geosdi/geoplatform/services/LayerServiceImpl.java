@@ -58,7 +58,6 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.ShortLayerPropertiesDTO;
 import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 
@@ -393,7 +392,7 @@ class LayerServiceImpl {
         }
     }
 
-    public boolean saveLayerProperties(String username, ShortLayerPropertiesDTO layerProperties)
+    public boolean saveLayerProperties(String username, ShortRasterPropertiesDTO layerProperties)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPUser owner = userDao.findByUsername(username);
         if (owner == null) {
@@ -413,12 +412,8 @@ class LayerServiceImpl {
         if (layer instanceof GPRasterLayer) {
             try {
                 GPRasterLayer raster = (GPRasterLayer) layer;
-                ShortRasterPropertiesDTO rasterProperties = (ShortRasterPropertiesDTO) layerProperties;
-
-                raster.setOpacity(rasterProperties.getOpacity());
-//                raster.setStyles(rasterProperties.getStyleList());
-            } catch (ClassCastException cce) { // For cast to ShortRasterPropertiesDTO
-                throw new IllegalParameterFault(cce.getMessage());
+                raster.setOpacity(layerProperties.getOpacity());
+                raster.setStyles(layerProperties.getStyleList());
             } catch (IllegalArgumentException iae) {
                 throw new IllegalParameterFault(iae.getMessage());
             }

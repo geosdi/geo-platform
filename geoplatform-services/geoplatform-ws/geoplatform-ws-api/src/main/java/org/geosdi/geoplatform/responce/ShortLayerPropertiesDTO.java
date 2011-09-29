@@ -39,6 +39,7 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import org.geosdi.geoplatform.core.model.GPLayer;
 
@@ -47,9 +48,10 @@ import org.geosdi.geoplatform.core.model.GPLayer;
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso(value = {ShortRasterPropertiesDTO.class, ShortVectorPropertiesDTO.class})
-public class ShortLayerPropertiesDTO implements Serializable {
+public abstract class ShortLayerPropertiesDTO implements Serializable {
 
     private static final long serialVersionUID = -8694480604917509968L;
     // Database identity

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.responce;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 
 /**
@@ -43,7 +42,6 @@ import org.geosdi.geoplatform.core.model.GPVectorLayer;
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-@XmlRootElement(name = "ShortRasterPropertiesDTO")
 public class ShortVectorPropertiesDTO extends ShortLayerPropertiesDTO {
 
     private static final long serialVersionUID = -6960320459196147232L;

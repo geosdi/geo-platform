@@ -145,6 +145,11 @@ public class GPRasterLayer extends GPLayer {
      *            the styles to set
      */
     public void setStyles(List<String> styles) {
+        if (styles == null) {
+            this.styles = null;
+            return;
+        }
+
         StringBuilder str = new StringBuilder();
         for (String style : styles) {
             str.append(style).append(",");

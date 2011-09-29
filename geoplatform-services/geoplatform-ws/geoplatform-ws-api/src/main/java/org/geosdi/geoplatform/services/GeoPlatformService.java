@@ -67,7 +67,7 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.StyleDTO;
+import org.geosdi.geoplatform.responce.ShortLayerPropertiesDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
@@ -368,7 +368,7 @@ public interface GeoPlatformService {
 
     @Put
     @HttpResource(location = "/layer/{layerId}")
-    public boolean fixCheckStatusLayerAndTreeModifications(
+    boolean fixCheckStatusLayerAndTreeModifications(
             @WebParam(name = "layerId") long layerId,
             @WebParam(name = "oldFolderId") long oldFolderId,
             @WebParam(name = "newFolderId") long newFolderId)
@@ -387,10 +387,7 @@ public interface GeoPlatformService {
     @Post
     @HttpResource(location = "/layer")
     boolean saveLayerProperties(@WebParam(name = "username") String username,
-            @WebParam(name = "layerId") long layerId,
-            @WebParam(name = "alias") String alias,
-            @WebParam(name = "opacity") float opacity,
-            @WebParam(name = "checked") boolean checked)
+            @WebParam(name = "layerProperties") ShortLayerPropertiesDTO layerProperties)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
@@ -398,14 +395,16 @@ public interface GeoPlatformService {
      */
     @Get
     @WebResult(name = "RasterLayer")
-    GPRasterLayer getRasterLayer(@WebParam(name = "GPRasterLayer") long layerId) throws ResourceNotFoundFault;
+    GPRasterLayer getRasterLayer(@WebParam(name = "GPRasterLayer") long layerId)
+            throws ResourceNotFoundFault;
 
     /**
      * @return a vector layer.
      */
     @Get
     @WebResult(name = "VectorLayer")
-    GPVectorLayer getVectorLayer(@WebParam(name = "GPVectorLayer") long layerId) throws ResourceNotFoundFault;
+    GPVectorLayer getVectorLayer(@WebParam(name = "GPVectorLayer") long layerId)
+            throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/layers")
@@ -418,27 +417,29 @@ public interface GeoPlatformService {
 //    @Get
 //    @WebResult(name = "LayerStyles")
 //    List<StyleDTO> getLayerStyles(@WebParam(name = "LayerId") long layerId);
-
     /**
      * @return a short layer.
      */
     @Get
     @WebResult(name = "ShortLayerDTO")
-    ShortLayerDTO getShortLayer(@WebParam(name = "GPLayerId") long layerId) throws ResourceNotFoundFault;
+    ShortLayerDTO getShortLayer(@WebParam(name = "GPLayerId") long layerId)
+            throws ResourceNotFoundFault;
 
     /**
      * @return BBox of a layer.
      */
     @Get
     @WebResult(name = "BBox")
-    GPBBox getBBox(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault;
+    GPBBox getBBox(@WebParam(name = "LayerId") long layerId)
+            throws ResourceNotFoundFault;
 
     /**
      * @return LayerInfo of a raster layer.
      */
     @Get
     @WebResult(name = "LayerInfo")
-    GPLayerInfo getLayerInfo(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault;
+    GPLayerInfo getLayerInfo(@WebParam(name = "LayerId") long layerId)
+            throws ResourceNotFoundFault;
 
 //    /**
 //     * @return Geometry of a vector layer.
@@ -451,7 +452,8 @@ public interface GeoPlatformService {
      */
     @Get
     @WebResult(name = "LayerType")
-    GPLayerType getLayerType(@WebParam(name = "LayerId") long layerId) throws ResourceNotFoundFault;
+    GPLayerType getLayerType(@WebParam(name = "LayerId") long layerId)
+            throws ResourceNotFoundFault;
 
     /**
      * @return layer data source of given owner.

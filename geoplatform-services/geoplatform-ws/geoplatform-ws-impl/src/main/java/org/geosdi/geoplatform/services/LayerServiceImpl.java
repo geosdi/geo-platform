@@ -52,14 +52,14 @@ import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPStyle;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.StyleDTO;
+import org.geosdi.geoplatform.responce.ShortLayerPropertiesDTO;
+import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 
 /**
@@ -117,7 +117,6 @@ class LayerServiceImpl {
 //        this.styleDao = styleDao;
 //    }
     //</editor-fold>
-
 //    public List<StyleDTO> getLayerStyles(long layerId) {
 //        Search searchCriteria = new Search(GPStyle.class);
 //        searchCriteria.addSortAsc("name");
@@ -128,7 +127,6 @@ class LayerServiceImpl {
 //        List<GPStyle> foundStyle = styleDao.search(searchCriteria);
 //        return convertToStyleList(foundStyle);
 //    }
-
     public long insertLayer(GPLayer layer) {
         layerDao.persist(layer);
         return layer.getId();
@@ -395,12 +393,15 @@ class LayerServiceImpl {
         }
     }
 
-    public boolean saveLayerProperties(String username, long layerId,
-            String alias, float opacity, boolean checked)
+    public boolean saveLayerProperties(String username, ShortLayerPropertiesDTO layerProperties)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPUser owner = userDao.findByUsername(username);
         if (owner == null) {
             throw new ResourceNotFoundFault("Owner with username \"" + username + "\" not found");
+        }
+        long layerId = layerProperties.getId();
+        if (layerId == -1) {
+            throw new IllegalParameterFault("Layer ID must be setted");
         }
 
         GPLayer layer = layerDao.find(layerId);
@@ -408,10 +409,16 @@ class LayerServiceImpl {
             throw new ResourceNotFoundFault("Layer not found", layerId);
         }
 
-        layer.setAlias(alias);
+        layer.setAlias(layerProperties.getAlias());
         if (layer instanceof GPRasterLayer) {
             try {
-                ((GPRasterLayer) layer).setOpacity(opacity);
+                GPRasterLayer raster = (GPRasterLayer) layer;
+                ShortRasterPropertiesDTO rasterProperties = (ShortRasterPropertiesDTO) layerProperties;
+
+                raster.setOpacity(rasterProperties.getOpacity());
+//                raster.setStyles(rasterProperties.getStyleList());
+            } catch (ClassCastException cce) { // For cast to ShortRasterPropertiesDTO
+                throw new IllegalParameterFault(cce.getMessage());
             } catch (IllegalArgumentException iae) {
                 throw new IllegalParameterFault(iae.getMessage());
             }
@@ -419,10 +426,10 @@ class LayerServiceImpl {
 
         layerDao.merge(layer);
 
-        boolean checkSave = layerDao.persistCheckStatusLayer(layerId, checked);
+        boolean checkSave = layerDao.persistCheckStatusLayer(layerId, layerProperties.isChecked());
 
         // Iff checked is true and the check status was modified, all the ancestor folders must be checked
-        if (checked && checkSave) {
+        if (layerProperties.isChecked() && checkSave) {
             Long[] layerAncestors = this.getIdsFolderAndAncestors(layer.getFolder());
             return folderDao.persistCheckStatusFolders(true, layerAncestors);
         }
@@ -531,7 +538,6 @@ class LayerServiceImpl {
 //
 //        return stylesDTO;
 //    }
-
     private List<ShortLayerDTO> convertToLayerList(List<GPLayer> layerList) {
         List<ShortLayerDTO> layersDTO = new ArrayList<ShortLayerDTO>(layerList.size());
 

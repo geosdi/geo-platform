@@ -76,6 +76,7 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
+import org.geosdi.geoplatform.responce.ShortLayerPropertiesDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
@@ -175,7 +176,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 //        this.styleDao = styleDao;
 //        this.layerServiceDelegate.setStyleDao(styleDao);
 //    }
-
     /**
      * @param authorityDao
      *          the authorityDao to set
@@ -527,9 +527,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean saveLayerProperties(String username, long layerId, String alias, float opacity, boolean checked)
+    public boolean saveLayerProperties(String username, ShortLayerPropertiesDTO layerProperties)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return layerServiceDelegate.saveLayerProperties(username, layerId, alias, opacity, checked);
+        return layerServiceDelegate.saveLayerProperties(username, layerProperties);
     }
 
     @Override
@@ -553,7 +553,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 //    public List<StyleDTO> getLayerStyles(long layerId) {
 //        return layerServiceDelegate.getLayerStyles(layerId);
 //    }
-
     @Override
     public GPBBox getBBox(long layerId) throws ResourceNotFoundFault {
         return layerServiceDelegate.getBBox(layerId);

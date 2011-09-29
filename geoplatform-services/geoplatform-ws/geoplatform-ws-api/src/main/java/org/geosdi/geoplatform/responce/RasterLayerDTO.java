@@ -147,6 +147,11 @@ public class RasterLayerDTO extends ShortLayerDTO {
     }
     //</editor-fold>
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return "RasterLayerDTO [" + super.toString() + ", " + layerInfo

@@ -6,7 +6,7 @@ package org.geosdi.geoplatform.gui.impl.map.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 /**
  *
@@ -15,18 +15,13 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
  */
 public class StyleLayerMapEvent extends GwtEvent<LayerMapChangedHandler> {
     
-     private GPLayerBean layerBean;
+     private GPRasterBean layerBean;
      private String style;
-
-    public StyleLayerMapEvent(GPLayerBean theLayerBean, String newStyle) {
-        this.layerBean = theLayerBean;
-        this.style = newStyle;
-    }
 
     /**
      * @return the layerBean
      */
-    public GPLayerBean getLayerBean() {
+    public GPRasterBean getLayerBean() {
         return layerBean;
     }
 
@@ -43,7 +38,19 @@ public class StyleLayerMapEvent extends GwtEvent<LayerMapChangedHandler> {
     protected void dispatch(LayerMapChangedHandler handler) {
         handler.onChangeStyle(layerBean, style);
     }
-    
-    
+
+    /**
+     * @param layerBean the layerBean to set
+     */
+    public void setLayerBean(GPRasterBean layerBean) {
+        this.layerBean = layerBean;
+    }
+
+    /**
+     * @param style the style to set
+     */
+    public void setStyle(String style) {
+        this.style = style;
+    }
     
 }

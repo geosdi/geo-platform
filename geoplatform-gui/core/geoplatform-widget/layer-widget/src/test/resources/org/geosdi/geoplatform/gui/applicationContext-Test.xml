@@ -16,13 +16,16 @@
             </list>
         </property>
     </bean>
+    
+    <bean name="styleTest" class="org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel">
+        <property name="styleString" value="raster" />    
+    </bean>
 
-    <bean name="BlueMarble"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+    <bean name="BlueMarble" class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
         <property name="layerName" value="StratiDiBase:BlueMarble" />
         <property name="styles">
             <list>
-                <value>raster</value>
+                <ref bean="styleTest" />
             </list>
         </property>
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
@@ -45,7 +48,7 @@
         <property name="layerName" value="StratiDiBase:LandsatItalia" />
         <property name="styles">
             <list>
-                <value>raster</value>
+                <ref bean="styleTest"/>
             </list>
         </property>
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
@@ -62,13 +65,18 @@
         <property name="layerType" value="RASTER" />
         <property name="zIndex" value="17" />
     </bean>
+    
+    
+    <bean name="styleTest2" class="org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel">
+        <property name="styleString" value="SrtmItalia" />    
+    </bean>
 
     <bean name="ASTER_DEM_Italia"
 		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
         <property name="layerName" value="StratiDiBase:ASTER DEM Italia" />
         <property name="styles">
             <list>
-                <value>SrtmItalia</value>
+                <ref bean="styleTest2" />
             </list>
         </property>
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
@@ -91,7 +99,7 @@
         <property name="layerName" value="StratiDiBase:deagostini_ita_1milione" />
         <property name="styles">
             <list>
-                <value>raster</value>
+                <ref bean="styleTest" />
             </list>
         </property>
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
@@ -114,7 +122,7 @@
         <property name="layerName" value="StratiDiBase:deagostini_ita_750mila" />
         <property name="styles">
             <list>
-                <value>raster</value>
+                <ref bean="styleTest" />
             </list>
         </property>
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
@@ -137,7 +145,7 @@
         <property name="layerName" value="StratiDiBase:deagostini_ita_250mila" />
         <property name="styles">
             <list>
-                <value>raster</value>
+                <ref bean="styleTest" />
             </list>
         </property>
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
@@ -160,7 +168,7 @@
         <property name="layerName" value="StratiDiBase:ctr_liguria" />
         <property name="styles">
             <list>
-                <value>raster</value>
+                <ref bean="styleTest" />
             </list>
         </property>
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
@@ -183,7 +191,7 @@
         <property name="layerName" value="StratiDiBase:ctr_molise" />
         <property name="styles">
             <list>
-                <value>raster</value>
+                <ref bean="styleTest" />
             </list>
         </property>
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
@@ -206,7 +214,7 @@
         <property name="layerName" value="StratiDiBase:ctp Trento" />
         <property name="styles">
             <list>
-                <value>raster</value>
+                <ref bean="styleTest" />
             </list>
         </property>
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
@@ -229,14 +237,13 @@
         <property name="layerName" value="StratiDiBase:ctr_lazio_o" />
         <property name="styles">
             <list>
-                <value>raster</value>
+                <ref bean="styleTest" />
             </list>
         </property>
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wms" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="11.413" />
                 <property name="lowerLeftY" value="40.766" />
                 <property name="upperRightX" value="14.083" />
@@ -254,8 +261,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="9.696" />
                 <property name="lowerLeftY" value="43.027" />
                 <property name="upperRightX" value="11.243" />
@@ -273,8 +279,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="9.696" />
                 <property name="lowerLeftY" value="43.027" />
                 <property name="upperRightX" value="11.243" />
@@ -292,8 +297,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="7.362" />
                 <property name="lowerLeftY" value="35.503" />
                 <property name="upperRightX" value="18.29" />
@@ -311,8 +315,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="9.696" />
                 <property name="lowerLeftY" value="43.027" />
                 <property name="upperRightX" value="11.243" />
@@ -330,8 +333,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="6.682" />
                 <property name="lowerLeftY" value="36.708" />
                 <property name="upperRightX" value="18.481" />
@@ -349,8 +351,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="6.634" />
                 <property name="lowerLeftY" value="36.649" />
                 <property name="upperRightX" value="18.521" />
@@ -368,8 +369,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="6.628" />
                 <property name="lowerLeftY" value="36.64" />
                 <property name="upperRightX" value="18.523" />
@@ -387,8 +387,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="6.626" />
                 <property name="lowerLeftY" value="35.86" />
                 <property name="upperRightX" value="18.52" />
@@ -407,8 +406,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="6.627" />
                 <property name="lowerLeftY" value="35.492" />
                 <property name="upperRightX" value="18.521" />
@@ -419,15 +417,13 @@
         <property name="zIndex" value="28" />
     </bean>
 
-    <bean name="it_limiti_regionali"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+    <bean name="it_limiti_regionali" class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
         <property name="featureType" value="StratiDiBase:it_limiti_regionali" />
         <property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="6.627" />
                 <property name="lowerLeftY" value="35.492" />
                 <property name="upperRightX" value="18.521" />
@@ -445,8 +441,7 @@
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
-            <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+            <bean class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="-33.762" />
                 <property name="lowerLeftY" value="27.804" />
                 <property name="upperRightX" value="44.885" />

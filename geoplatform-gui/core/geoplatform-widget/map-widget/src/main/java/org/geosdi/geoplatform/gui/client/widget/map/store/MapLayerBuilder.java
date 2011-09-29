@@ -71,7 +71,7 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
         wmsParams.setLayers(rasterBean.getName());
-        wmsParams.setStyles("");
+        wmsParams.setStyles(rasterBean.getStyles().get(0).getStyleString());
         wmsParams.setIsTransparent(true);
 
         if (rasterBean.getBbox() != null) {
@@ -98,7 +98,7 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
                 wmsParams, wmsOption);
         
         layer.setOpacity(rasterBean.getOpacity());
-
+        
         return layer;
     }
 

@@ -44,7 +44,9 @@ import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.DisplayLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.HideLegendEvent;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
+import org.gwtopenmaps.openlayers.client.layer.LayerOptions;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
+import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -145,19 +147,22 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
      */
     @Override
     public void removeLayer(GPLayerBean layerBean) {
-        // TODO Auto-generated method stub
         Layer layer = getLayer(layerBean);
         if (layer != null) {
             this.mapWidget.getMap().removeLayer(layer);
         }
         this.layers.remove(layerBean);
-
         LayerHandlerManager.fireEvent(new HideLegendEvent(layerBean));
     }
 
     @Override
-    public void onChangeStyle(GPLayerBean layerBean, String newStyle) {
-        //TODO: implement me
+    public void onChangeStyle(GPRasterBean layerBean, String newStyle) {
+        WMS layer = (WMS)this.layers.get(layerBean);
+        if ((layer != null) && (layer.isVisible())) {
+            WMSParams params = new WMSParams();
+            params.setStyles(newStyle);
+            layer.mergeNewParams(params);
+        }
     }
 
     @Override

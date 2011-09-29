@@ -122,7 +122,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
                         reset();
                     }
                 } else {
-                    if (folderText.getValue().length() > 3) {
+                    if (folderText.getValue().length() > 0) {
                         save.enable();
                     } else {
                         save.disable();
@@ -133,7 +133,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
             @Override
             public void componentKeyPress(ComponentEvent event) {
                 if ((event.getKeyCode() == 13) && (folderText.getValue() != null)
-                        && (folderText.getValue().length() > 3)) {
+                        && (folderText.getValue().length() > 0)) {
                     execute();
                 }
             }

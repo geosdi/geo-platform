@@ -45,7 +45,6 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import org.geosdi.geoplatform.gui.client.puregwt.binding.GPTreeBindingHandler;
 import org.geosdi.geoplatform.gui.client.widget.tab.LayersTabWidget;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.puregwt.properties.GPWidgetSizeHandler;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 

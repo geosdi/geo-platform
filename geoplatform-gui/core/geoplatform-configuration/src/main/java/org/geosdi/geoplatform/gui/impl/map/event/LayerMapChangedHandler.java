@@ -56,7 +56,7 @@ public interface LayerMapChangedHandler extends EventHandler {
 
     public void onRemoveLayer(GPLayerBean layerBean);
 
-    public void onChangeStyle(GPLayerBean layerBean, String newStyle);
+    public void onChangeStyle(GPRasterBean layerBean, String newStyle);
     
     public void changeOpacity(GPRasterBean layerBean);
 }

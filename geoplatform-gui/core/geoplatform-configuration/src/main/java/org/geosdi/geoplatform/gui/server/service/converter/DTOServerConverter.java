@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
@@ -168,7 +169,14 @@ public class DTOServerConverter {
                     layer.getBbox().getMaxY()));
             raster.setCrs(layer.getSrs());
         }
-        raster.setStyles((ArrayList) layer.getStyleList());
+        ArrayList<GPStyleStringBeanModel> styles = new ArrayList<GPStyleStringBeanModel>();
+        GPStyleStringBeanModel style = null;
+        for (String styleString : layer.getStyleList()) {
+            style = new GPStyleStringBeanModel();
+            style.setStyleString(styleString);
+            styles.add(style);
+        }
+        raster.setStyles(styles);
         return raster;
     }
 }

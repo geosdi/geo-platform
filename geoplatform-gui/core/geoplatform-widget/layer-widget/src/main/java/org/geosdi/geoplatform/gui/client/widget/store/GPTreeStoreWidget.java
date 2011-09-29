@@ -52,6 +52,7 @@ import org.geosdi.geoplatform.gui.client.widget.tree.store.GenericTreeStoreWidge
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoAddLayersServer;
@@ -228,7 +229,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         raster.setLabel(layer.getTitle());
         raster.setLayerType(layer.getLayerType());
         raster.setName(layer.getName());
-//        raster.setStyles(rasterBean.getStyles());
+        raster.setStyles(((GPRasterBean)layer).getStyles());
 //        raster.setzIndex(rasterBean.getzIndex());
         return raster;
     }
@@ -243,6 +244,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         raster.setTitle(layer.getTitle());
         raster.setBbox(layer.getBbox());
         raster.setLayerType(layer.getLayerType());
+        raster.setStyles(((GPRasterBean)layer).getStyles());
         return raster;
     }
 }

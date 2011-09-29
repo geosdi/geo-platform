@@ -50,16 +50,18 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMemento
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoRaster;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoVector;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
+import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
-import org.geosdi.geoplatform.responce.StyleDTO;
+import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
@@ -113,6 +115,20 @@ public class DTOConverter {
         }
         return clientFolderElements;
     }
+    
+    public ShortRasterPropertiesDTO convertMementoProperties(MementoLayerOriginalProperties memento){
+        ShortRasterPropertiesDTO dto = new ShortRasterPropertiesDTO();
+        dto.setAlias(memento.getAlias());
+        dto.setChecked(memento.isChecked());
+        dto.setId(memento.getIdBaseElement());
+        dto.setOpacity(memento.getOpacity());
+        ArrayList<String> styleList = new ArrayList<String>();
+        for (GPStyleStringBeanModel beanModel : memento.getStyleList()) {
+            styleList.add(beanModel.getStyleString());
+        }
+        dto.setStyleList(styleList);
+        return dto;
+    }
 
     private ClientRasterInfo convertRasterElement(RasterLayerDTO rasterDTO) {
         ClientRasterInfo raster = new ClientRasterInfo();
@@ -120,7 +136,15 @@ public class DTOConverter {
         this.convertToLayerElementFromLayerDTO(raster, rasterDTO);
         raster.setLayerType(org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType.RASTER);
         raster.setOpacity(rasterDTO.getOpacity());
-        raster.setStyles((ArrayList) rasterDTO.getStyleList());
+
+        ArrayList<GPStyleStringBeanModel> styles = new ArrayList<GPStyleStringBeanModel>();
+        GPStyleStringBeanModel style = null;
+        for (String styleString : rasterDTO.getStyleList()) {
+            style = new GPStyleStringBeanModel();
+            style.setStyleString(styleString);
+            styles.add(style);
+        }
+        raster.setStyles(styles);
 
         return raster;
     }

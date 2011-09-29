@@ -173,7 +173,7 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
             super(field, property);
         }
 
-        @Override
+        @Override//From view to model
         public void setModelProperty(Object val) {
             //Copying the value on memento before changes
             GPLayerSaveCache.getInstance().copyOriginalLayerProperties((GPLayerTreeModel)GPLayerDisplayBinding.this.getModel());
@@ -188,7 +188,7 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
          * 
          * @param updateOriginalValue true to update the original value
          */
-        @Override
+        @Override//From model to view
         public void updateField(boolean updateOriginalValue) {      
             Float opacity = new Float(((GPRasterBean) GPLayerDisplayBinding.this.getModel()).getOpacity() * 100);
             ((SliderField) field).setValue(opacity.intValue());

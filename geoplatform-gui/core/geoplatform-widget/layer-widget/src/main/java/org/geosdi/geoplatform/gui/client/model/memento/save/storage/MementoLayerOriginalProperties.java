@@ -35,10 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento.save.storage;
 
+import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoSave;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -52,6 +54,7 @@ public class MementoLayerOriginalProperties
     private String alias;
     private float opacity;
     private boolean checked;
+    private ArrayList<GPStyleStringBeanModel> styleList;
 
     public MementoLayerOriginalProperties() {
     }
@@ -110,5 +113,19 @@ public class MementoLayerOriginalProperties
      */
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+    /**
+     * @return the styleList
+     */
+    public ArrayList<GPStyleStringBeanModel> getStyleList() {
+        return styleList;
+    }
+
+    /**
+     * @param styleList the styleList to set
+     */
+    public void setStyleList(ArrayList<GPStyleStringBeanModel> styleList) {
+        this.styleList = styleList;
     }
 }

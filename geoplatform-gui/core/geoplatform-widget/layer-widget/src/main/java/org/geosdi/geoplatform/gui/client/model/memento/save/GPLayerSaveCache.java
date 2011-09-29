@@ -77,6 +77,7 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
 //            System.out.println("Check setted: " + memento.isChecked());
             if (layer instanceof RasterTreeNode) {
                 memento.setOpacity(((RasterTreeNode) layer).getOpacity());
+                memento.setStyleList(((RasterTreeNode) layer).getStyles());
 //                System.out.println("Opacity setted: " + memento.getOpacity());
             }
             memento.setRefBaseElement(layer);
@@ -147,7 +148,8 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
                 || memento.isChecked() != gpLayerTreeModel.isChecked()) {
             return true;
         } else if (gpLayerTreeModel instanceof RasterTreeNode
-                && ((RasterTreeNode) gpLayerTreeModel).getOpacity() != memento.getOpacity()) {
+                && ((RasterTreeNode) gpLayerTreeModel).getOpacity() != memento.getOpacity()
+                || !((RasterTreeNode) gpLayerTreeModel).getStyles().equals(memento.getStyleList())) {
             return true;
         }
         return false;

@@ -76,6 +76,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.server.gwt.LayerRemoteImpl;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
 
@@ -432,17 +433,26 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         return bbox;
     }
 
-    private ArrayList<String> mapStyles() {
-        ArrayList<String> styleList = new ArrayList<String>();
+    private ArrayList<GPStyleStringBeanModel> mapStyles() {
+        ArrayList<GPStyleStringBeanModel> styleList = new ArrayList<GPStyleStringBeanModel>();
 
         String stylesValue = fieldMap.get(GetMap.STYLES);
         if (stylesValue != null && stylesValue.length() > 0) {
-            if (stylesValue.contains(",")) { // More than one style
+//            if (stylesValue.contains(",")) { // More than one style
                 String[] styles = stylesValue.split(",");
-                styleList.addAll(Arrays.asList(styles));
-            } else { // A single style
-                styleList.add(stylesValue);
-            }
+                GPStyleStringBeanModel style = null;
+                for (String string : styles) {
+                    style = new GPStyleStringBeanModel();
+                    style.setStyleString(string);
+                    styleList.add(style);
+                }
+//                styleList.addAll(Arrays.asList(styles));
+//            } else { // A single style
+//                GPStyleStringBeanModel style = new GPStyleStringBeanModel();
+//                style.setStyleString(stylesValue);
+//                styleList.add(style);
+////                styleList.add(stylesValue);
+//            }
         }
 
         return styleList;

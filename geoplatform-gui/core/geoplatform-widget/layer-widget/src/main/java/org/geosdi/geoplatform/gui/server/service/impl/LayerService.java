@@ -63,6 +63,7 @@ import org.geosdi.geoplatform.gui.server.service.converter.DTOConverter;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -328,12 +329,11 @@ public class LayerService implements ILayerService {
     public boolean saveLayerProperties(MementoLayerOriginalProperties memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
         boolean result = false;
-
         GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
+        ShortRasterPropertiesDTO dto = this.dtoConverter.convertMementoProperties(memento);
         try {
             result = geoPlatformServiceClient.saveLayerProperties(
-                    user.getUsername(), memento.getIdBaseElement(),
-                    memento.getAlias(), memento.getOpacity(), memento.isChecked());
+                    user.getUsername(), dto);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to save layers on LayerService: " + ex);
             throw new GeoPlatformException(ex);

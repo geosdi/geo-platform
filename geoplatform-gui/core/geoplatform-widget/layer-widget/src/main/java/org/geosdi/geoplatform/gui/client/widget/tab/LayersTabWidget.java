@@ -79,6 +79,7 @@ public class LayersTabWidget extends GenericLayerTabWidget {
     public void bind(GPLayerBean model) {
         this.infoItem.bindModel(model);
         this.displayItem.bindModel(model);
+        this.wpsItem.bindModel(model);
     }
 
 }

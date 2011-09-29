@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 
 import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitorClient;
 
 /**
@@ -51,12 +52,12 @@ public class ClientRasterInfo extends GPLayerClientInfo {
     private static final long serialVersionUID = 3956898488739664952L;
     //
     private float opacity = 1.0f;
-    private ArrayList<String> styles;
-
+    private ArrayList<GPStyleStringBeanModel> styles;
+    
     /**
      * @return the styles
      */
-    public ArrayList<String> getStyles() {
+    public ArrayList<GPStyleStringBeanModel> getStyles() {
         return styles;
     }
 
@@ -78,7 +79,7 @@ public class ClientRasterInfo extends GPLayerClientInfo {
      * @param styles
      *            the styles to set
      */
-    public void setStyles(ArrayList<String> styles) {
+    public void setStyles(ArrayList<GPStyleStringBeanModel> styles) {
         this.styles = styles;
     }
 
@@ -94,10 +95,10 @@ public class ClientRasterInfo extends GPLayerClientInfo {
      */
     @Override
     public String toString() {
-        return "ClientRasterInfo [layerName = " + super.getLayerName() + ", styles = "
-                + styles + ", getDataSource() = " + getDataSource()
+        return "ClientRasterInfo [layerName = " + super.getLayerName() +
+                ", getDataSource() = " + getDataSource()
                 + ", getCrs() = " + getCrs() + ", getBbox() = " + getBbox()
                 + ", getLayerType() = " + getLayerType() + ", getOpacity() =  "
-                + getOpacity() + ", getzIndex() = "+ getzIndex() + "]";
+                + getOpacity() + ", getzIndex() = " + getzIndex() + "]";
     }
 }

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
-
+import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
@@ -77,7 +77,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
     }
     //
     private float opacity = 1.0f;
-    private ArrayList<String> styles;
+    private ArrayList<GPStyleStringBeanModel> styles;
 
     public RasterTreeNode() {
     }
@@ -96,7 +96,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
     }
 
     @Override
-    public ArrayList<String> getStyles() {
+    public ArrayList<GPStyleStringBeanModel> getStyles() {
         return this.styles;
     }
 
@@ -118,7 +118,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
     }
 
     @Override
-    public void setStyles(ArrayList<String> styles) {
+    public void setStyles(ArrayList<GPStyleStringBeanModel> styles) {
         this.styles = styles;
     }
 

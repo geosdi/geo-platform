@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.model;
 
 import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -44,9 +45,9 @@ import java.util.ArrayList;
  */
 public interface GPRasterBean extends GPLayerBean {
 
-    public ArrayList<String> getStyles();
+    public ArrayList<GPStyleStringBeanModel> getStyles();
 
-    public void setStyles(ArrayList<String> styles);
+    public void setStyles(ArrayList<GPStyleStringBeanModel> styles);
     
     public void setOpacity(float opacity);
     

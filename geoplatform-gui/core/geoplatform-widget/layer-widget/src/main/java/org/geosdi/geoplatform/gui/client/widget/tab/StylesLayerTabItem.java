@@ -35,8 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab;
 
+import org.geosdi.geoplatform.gui.client.widget.tab.binding.GPLayerStyleBinding;
 import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericLayerTabItem;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 /**
  *
@@ -44,18 +46,28 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class StylesLayerTabItem extends GenericLayerTabItem {
-    
+
     public StylesLayerTabItem() {
         super("Layer Styles");
     }
 
     @Override
     public void addComponents() {
-        
+        this.bindingWidget = new GPLayerStyleBinding();
+        super.add(this.bindingWidget.getWidget());
     }
 
     @Override
     public void bindModel(GPLayerBean model) {
-        
+        this.bindingWidget.bindModel(model);
+    }
+
+    /**
+     * 
+     * @param size 
+     */
+    public void updateWindowSize() {
+        event.setSize(super.getTabPanel().getHeight());
+        WidgetPropertiesHandlerManager.fireEvent(event);
     }
 }

@@ -67,6 +67,6 @@ public class GeoPlatformEvents {
     
     public static final EventType REMOVE_WINDOW_CLOSE_LISTENER = new EventType();
     
-    public static final EventType REVERSE_GEOCODING_SIGV = new EventType();
+    public static final EventType REVERSE_GEOCODING_WITH_LONLAT = new EventType();
 
 }

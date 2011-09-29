@@ -130,8 +130,8 @@ public class MapView extends GeoPlatformView {
             onZoomToMaxExtend(event);
         }
         
-        if (event.getType() == GeoPlatformEvents.REVERSE_GEOCODING_SIGV) {
-            onRequestGeocodingSIGV(event);
+        if (event.getType() == GeoPlatformEvents.REVERSE_GEOCODING_WITH_LONLAT) {
+            onRequestGeocodingWithLonLat(event);
         }
 
     }
@@ -290,7 +290,7 @@ public class MapView extends GeoPlatformView {
         this.mapLayout.zoomToMaxExtend(bbox);
     }
 
-    private void onRequestGeocodingSIGV(AppEvent event) {
+    private void onRequestGeocodingWithLonLat(AppEvent event) {
         LonLat lonLat = (LonLat)event.getData();
         this.revGeoWidget.sendRequest(lonLat);
     }

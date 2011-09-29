@@ -60,7 +60,7 @@ public class MapController extends GeoPlatformController {
                 GeoPlatformEvents.RemoveMarker,
                 GeoPlatformEvents.SCALE_REQUEST_CHANGE,
                 GeoPlatformEvents.ZOOM_TO_MAX_EXTEND,
-                GeoPlatformEvents.REVERSE_GEOCODING_SIGV);
+                GeoPlatformEvents.REVERSE_GEOCODING_WITH_LONLAT);
     }
 
     @Override

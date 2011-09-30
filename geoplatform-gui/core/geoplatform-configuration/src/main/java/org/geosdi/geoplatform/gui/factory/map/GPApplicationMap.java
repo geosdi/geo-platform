@@ -44,16 +44,19 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
  */
 public class GPApplicationMap {
 
-    private static GeoPlatformMap applicationMap;
+    private static GPApplicationMap INSTANCE = new GPApplicationMap();
+    
+    private GeoPlatformMap applicationMap;
 
-    private GPApplicationMap() {
+    public static GPApplicationMap getInstance() {
+        return INSTANCE;
     }
 
-    public static GeoPlatformMap getApplicationMap() {
+    public GeoPlatformMap getApplicationMap() {
         return applicationMap;
     }
 
-    public static void setApplicationMap(GeoPlatformMap applicationMap) {
-        GPApplicationMap.applicationMap = applicationMap;
+    public void setApplicationMap(GeoPlatformMap applicationMap) {
+        this.applicationMap = applicationMap;
     }
 }

@@ -40,7 +40,6 @@ import com.google.api.gwt.oauth2.client.Auth;
 import com.google.api.gwt.oauth2.client.AuthRequest;
 import com.google.api.gwt.oauth2.client.Callback;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import javax.servlet.http.Cookie;
 import org.geosdi.geoplatform.gui.action.menu.OAuth2MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.OAuth2Resources;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;

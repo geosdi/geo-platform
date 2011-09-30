@@ -90,14 +90,14 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     public void execute() {
         if (formPanel.isValid()) {
 
-            double lat = GPApplicationMap.getApplicationMap().getMap().getCenter().lat();
-            double lon = GPApplicationMap.getApplicationMap().getMap().getCenter().lon();
+            double lat = GPApplicationMap.getInstance().getApplicationMap().getMap().getCenter().lat();
+            double lon = GPApplicationMap.getInstance().getApplicationMap().getMap().getCenter().lon();
 
 
             LonLat center = new LonLat(lon, lat);
-            center.transform(GPApplicationMap.getApplicationMap().getMap().getProjection(), "EPSG:4326");
+            center.transform(GPApplicationMap.getInstance().getApplicationMap().getMap().getProjection(), "EPSG:4326");
 
-            Double scaleDouble = new Double(GPApplicationMap.getApplicationMap().getMap().getScale());
+            Double scaleDouble = new Double(GPApplicationMap.getInstance().getApplicationMap().getMap().getScale());
 
             String layers = "{\"title\":\"" + title.getValue() + "\",\"pages\":[{\"center\":["
                     + center.lon() + ","

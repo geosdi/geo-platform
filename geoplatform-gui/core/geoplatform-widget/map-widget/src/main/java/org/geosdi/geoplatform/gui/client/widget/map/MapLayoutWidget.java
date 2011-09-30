@@ -100,7 +100,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
     public MapLayoutWidget() {
         super();
-        GPApplicationMap.setApplicationMap(this);
+        GPApplicationMap.getInstance().setApplicationMap(this);
         this.createMapOption();
         this.mapModel = new MapModel(this);
         this.routingWidget = new GPRoutingManagerWidget(this);

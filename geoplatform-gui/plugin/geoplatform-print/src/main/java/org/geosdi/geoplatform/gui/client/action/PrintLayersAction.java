@@ -40,8 +40,6 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.PrintResources;
 import org.geosdi.geoplatform.gui.client.form.GPPrintWidget;
-import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
  *

@@ -116,7 +116,7 @@ public class MenuUtilityBuilder {
      */
     private static void addCheckMenuItem(CheckMenuClientTool tool, final Menu menu) {
         MenuCheckAction action = (MenuCheckAction) MenuActionRegistar.get(tool.getId());
-
+        
         final CheckMenuItem item = new CheckMenuItem(tool.getText());
         item.setItemId(tool.getId());
         

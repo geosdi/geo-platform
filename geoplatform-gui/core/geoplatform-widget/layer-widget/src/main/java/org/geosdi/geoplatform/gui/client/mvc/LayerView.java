@@ -85,7 +85,7 @@ public class LayerView extends GeoPlatformView {
         if (event.getType() == LayerEvents.HIDE_LAYER_WIDGET) {
             onHideLayerWidget();
         }
-        
+
     }
 
     /**
@@ -93,9 +93,11 @@ public class LayerView extends GeoPlatformView {
      *
      */
     private void onHideLayerWidget() {
-        LayoutManager.removeComponentFromWest(layerManagement);
-        if (!LayoutManager.isOneWidgetVisibleAtWest()) {
-            LayoutManager.manageWest(false);
+        if (LayoutManager.isWidgetPresentOnWest(layerManagement)) {
+            LayoutManager.removeComponentFromWest(layerManagement);
+            if (!LayoutManager.isOneWidgetVisibleAtWest()) {
+                LayoutManager.manageWest(false);
+            }
         }
     }
 

@@ -51,5 +51,4 @@ public interface MenuActionHandler extends EventHandler {
     
     void onActionDisabled(MenuActionDisabledEvent event);
     
-    void onActionChangeIcon(MenuActionChangeIconEvent event);
 }

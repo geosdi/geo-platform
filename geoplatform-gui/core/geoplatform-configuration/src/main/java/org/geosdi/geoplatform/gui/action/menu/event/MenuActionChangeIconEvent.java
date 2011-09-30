@@ -42,7 +42,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public class MenuActionChangeIconEvent extends GwtEvent<MenuActionHandler> {
+public class MenuActionChangeIconEvent extends GwtEvent<MenuActionChangeIconHandler> {
 
     private AbstractImagePrototype image;
     
@@ -51,12 +51,12 @@ public class MenuActionChangeIconEvent extends GwtEvent<MenuActionHandler> {
     }
     
     @Override
-    public Type<MenuActionHandler> getAssociatedType() {
-        return MenuActionHandler.TYPE;
+    public Type<MenuActionChangeIconHandler> getAssociatedType() {
+        return MenuActionChangeIconHandler.TYPE;
     }
 
     @Override
-    protected void dispatch(MenuActionHandler handler) {
+    protected void dispatch(MenuActionChangeIconHandler handler) {
        handler.onActionChangeIcon(this);
     }
 

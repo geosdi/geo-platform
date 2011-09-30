@@ -98,6 +98,13 @@ public class LayoutManager extends GeoPlatformLayoutManager {
         getInstance().west.remove(w);
         getInstance().west.layout();
     }
+    
+    /**
+     * 
+     */
+    public static boolean isWidgetPresentOnWest(Widget w) {
+        return getInstance().west.getItems().contains(w);
+    }
 
     /**
      * Add a generic Widget to East

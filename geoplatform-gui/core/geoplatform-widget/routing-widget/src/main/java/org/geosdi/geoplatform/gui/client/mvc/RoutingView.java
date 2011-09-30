@@ -116,13 +116,15 @@ public class RoutingView extends GeoPlatformView {
      */
     private void onHideRoutingWidget() {
         // TODO Auto-generated method stub
-        LayoutManager.removeComponentFromWest(routingManagement);
-        this.activationEvent.setActivate(Boolean.FALSE);
-        if (!LayoutManager.isOneWidgetVisibleAtWest()) {
-            LayoutManager.manageWest(false);
-        }
+        if (LayoutManager.isWidgetPresentOnWest(routingManagement)) {
+            LayoutManager.removeComponentFromWest(routingManagement);
+            this.activationEvent.setActivate(Boolean.FALSE);
+            if (!LayoutManager.isOneWidgetVisibleAtWest()) {
+                LayoutManager.manageWest(false);
+            }
 
-        RoutingHandlerManager.fireEvent(this.activationEvent);
+            RoutingHandlerManager.fireEvent(this.activationEvent);
+        }
     }
 
     /**

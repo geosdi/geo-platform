@@ -38,18 +38,15 @@ package org.geosdi.geoplatform.gui.action.menu;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.event.shared.HandlerRegistration;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionDisabledEvent;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionEnabledEvent;
-import org.geosdi.geoplatform.gui.action.menu.event.MenuActionHandler;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class MenuAction extends SelectionListener<MenuEvent>
-        implements HasMenuActionHandler {
+public abstract class MenuAction extends SelectionListener<MenuEvent> {
 
     private String title;
     private String id;
@@ -104,17 +101,10 @@ public abstract class MenuAction extends SelectionListener<MenuEvent>
      */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-        if(enabled) {
+        if (enabled) {
             this.handlerManager.fireEvent(new MenuActionEnabledEvent());
         } else {
             this.handlerManager.fireEvent(new MenuActionDisabledEvent());
         }
-    }
-
-    @Override
-    public HandlerRegistration addMenuActionHandler(
-            MenuActionHandler actionHandler) {
-        return this.handlerManager.addHandler(MenuActionHandler.TYPE,
-                actionHandler);
     }
 }

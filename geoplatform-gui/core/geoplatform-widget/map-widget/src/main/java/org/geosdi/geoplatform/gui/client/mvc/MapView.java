@@ -129,7 +129,7 @@ public class MapView extends GeoPlatformView {
         if (event.getType() == GeoPlatformEvents.ZOOM_TO_MAX_EXTEND) {
             onZoomToMaxExtend(event);
         }
-        
+
         if (event.getType() == GeoPlatformEvents.REVERSE_GEOCODING_WITH_LONLAT) {
             onRequestGeocodingWithLonLat(event);
         }
@@ -195,8 +195,10 @@ public class MapView extends GeoPlatformView {
     }
 
     private void onDeActivateGraticule() {
-        this.mapLayout.getMap().removeControl(graticule);
-        this.graticule.deactivate();
+        if (this.graticule != null) {
+            this.mapLayout.getMap().removeControl(graticule);
+            this.graticule.deactivate();
+        }
     }
 
     /**
@@ -291,7 +293,7 @@ public class MapView extends GeoPlatformView {
     }
 
     private void onRequestGeocodingWithLonLat(AppEvent event) {
-        LonLat lonLat = (LonLat)event.getData();
+        LonLat lonLat = (LonLat) event.getData();
         this.revGeoWidget.sendRequest(lonLat);
     }
 }

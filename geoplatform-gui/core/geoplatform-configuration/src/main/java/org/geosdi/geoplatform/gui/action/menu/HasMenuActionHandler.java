@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.gui.action.menu.event.MenuActionHandler;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface HasMenuActionHandler {
+public interface HasMenuActionHandler<H extends MenuActionHandler> {
 
-    HandlerRegistration addMenuActionHandler(MenuActionHandler actionHandler);
+    HandlerRegistration addMenuActionHandler(H actionHandler);
 }

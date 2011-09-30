@@ -96,9 +96,11 @@ public class GeocodingView extends GeoPlatformView {
      */
     private void onHideGeocodingWidget() {
         // TODO Auto-generated method stub
-        LayoutManager.removeComponentFromWest(geocodingManagement);
-        if (!LayoutManager.isOneWidgetVisibleAtWest()) {
-            LayoutManager.manageWest(false);
+        if (LayoutManager.isWidgetPresentOnWest(geocodingManagement)) {
+            LayoutManager.removeComponentFromWest(geocodingManagement);
+            if (!LayoutManager.isOneWidgetVisibleAtWest()) {
+                LayoutManager.manageWest(false);
+            }
         }
     }
 

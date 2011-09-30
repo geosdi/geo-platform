@@ -35,20 +35,23 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.menu;
 
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.widget.menu.CheckMenuItem;
 import com.extjs.gxt.ui.client.widget.menu.DateMenu;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.menu.SeparatorMenuItem;
 import java.util.List;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.action.menu.MenuCheckAction;
 import org.geosdi.geoplatform.gui.action.menu.OAuth2MenuBaseAction;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconEvent;
+import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconHandler;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionDisabledEvent;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionEnabledEvent;
-import org.geosdi.geoplatform.gui.action.menu.event.MenuActionHandler;
+import org.geosdi.geoplatform.gui.action.menu.event.MenuCheckChangeActionHandler;
 import org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.DateMenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.GroupMenuClientTool;
@@ -77,8 +80,8 @@ public class MenuUtilityBuilder {
             }
         }
     }
-    
-        /**
+
+    /**
      * Add a Separator in Menu
      * @param menu 
      */
@@ -111,18 +114,40 @@ public class MenuUtilityBuilder {
      * @param tool
      * @param menu
      */
-    private static void addCheckMenuItem(CheckMenuClientTool tool, Menu menu) {
-        MenuAction action = MenuActionRegistar.get(tool.getId());
+    private static void addCheckMenuItem(CheckMenuClientTool tool, final Menu menu) {
+        MenuCheckAction action = (MenuCheckAction) MenuActionRegistar.get(tool.getId());
+
+        final CheckMenuItem item = new CheckMenuItem(tool.getText());
+        item.setItemId(tool.getId());
         
-        CheckMenuItem item = new CheckMenuItem(tool.getText());
-        item.setChecked(tool.isChecked());
+        menu.add(item);
 
         if (action != null) {
             action.setId(tool.getId());
-            item.setItemId(action.getId());
             item.addSelectionListener(action);
+            
+            action.addMenuActionHandler(new MenuCheckChangeActionHandler() {
+
+                @Override
+                public void onActionCheckChange(boolean check) {
+                    item.setChecked(check);
+                    item.fireEvent(Events.Select, new MenuEvent(menu, item));
+                }
+
+                @Override
+                public void onActionEnabled(MenuActionEnabledEvent event) {
+                    item.setEnabled(true);
+                }
+
+                @Override
+                public void onActionDisabled(MenuActionDisabledEvent event) {
+                    item.setEnabled(false);
+                }
+            });
+            
+            action.setEnabled(tool.isEnabled());
+            action.setChecked(tool.isChecked());
         }
-        menu.add(item);
     }
 
     /**
@@ -168,7 +193,7 @@ public class MenuUtilityBuilder {
             item.setItemId(action.getId());
             item.addSelectionListener(action);
 
-            action.addMenuActionHandler(new MenuActionHandler() {
+            action.addMenuActionHandler(new MenuActionChangeIconHandler() {
 
                 @Override
                 public void onActionEnabled(MenuActionEnabledEvent event) {
@@ -212,7 +237,7 @@ public class MenuUtilityBuilder {
             item.setItemId(action.getId());
             item.addSelectionListener(action);
 
-            action.addMenuActionHandler(new MenuActionHandler() {
+            action.addMenuActionHandler(new MenuActionChangeIconHandler() {
 
                 @Override
                 public void onActionEnabled(MenuActionEnabledEvent event) {
@@ -225,7 +250,8 @@ public class MenuUtilityBuilder {
                 }
 
                 @Override
-                public void onActionChangeIcon(MenuActionChangeIconEvent event) {}
+                public void onActionChangeIcon(MenuActionChangeIconEvent event) {
+                }
             });
 
             action.setEnabled(tool.isEnabled());

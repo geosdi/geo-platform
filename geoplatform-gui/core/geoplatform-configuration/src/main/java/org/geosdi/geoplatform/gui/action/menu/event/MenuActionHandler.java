@@ -44,11 +44,11 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public interface MenuActionHandler extends EventHandler {
-    
+
     Type<MenuActionHandler> TYPE = new Type<MenuActionHandler>();
-    
+
     void onActionEnabled(MenuActionEnabledEvent event);
-    
+
     void onActionDisabled(MenuActionDisabledEvent event);
     
 }

@@ -160,6 +160,12 @@ public interface GeoPlatformService {
     long updateFolder(@WebParam(name = "Folder") GPFolder folder)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
+    @Post
+    @HttpResource(location = "/folder/{folderId}")
+    long renameFolder(@WebParam(name = "folderId") long folderId,
+            @WebParam(name = "folderName") String folderName)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
     @Delete
     @HttpResource(location = "/folders/{id}")
     boolean deleteFolder(RequestById request) throws ResourceNotFoundFault,

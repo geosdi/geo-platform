@@ -53,7 +53,6 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -436,23 +435,16 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
     private ArrayList<GPStyleStringBeanModel> mapStyles() {
         ArrayList<GPStyleStringBeanModel> styleList = new ArrayList<GPStyleStringBeanModel>();
 
-        String stylesValue = fieldMap.get(GetMap.STYLES);
+        String stylesValue = fieldMap.get(GetMap.STYLES.toString());
         if (stylesValue != null && stylesValue.length() > 0) {
-//            if (stylesValue.contains(",")) { // More than one style
-                String[] styles = stylesValue.split(",");
-                GPStyleStringBeanModel style = null;
-                for (String string : styles) {
-                    style = new GPStyleStringBeanModel();
-                    style.setStyleString(string);
-                    styleList.add(style);
-                }
-//                styleList.addAll(Arrays.asList(styles));
-//            } else { // A single style
-//                GPStyleStringBeanModel style = new GPStyleStringBeanModel();
-//                style.setStyleString(stylesValue);
-//                styleList.add(style);
-////                styleList.add(stylesValue);
-//            }
+            String[] styles = stylesValue.split(",");
+            GPStyleStringBeanModel style = null;
+            for (String string : styles) {
+//                System.out.println("### Style:" + string);
+                style = new GPStyleStringBeanModel();
+                style.setStyleString(string);
+                styleList.add(style);
+            }
         }
 
         return styleList;

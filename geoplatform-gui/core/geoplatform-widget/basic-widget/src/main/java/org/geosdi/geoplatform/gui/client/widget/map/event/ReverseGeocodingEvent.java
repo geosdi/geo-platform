@@ -42,30 +42,28 @@ import com.google.gwt.event.shared.GwtEvent;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class ReverseGeocodingEvent extends
-		GwtEvent<ReverseGeocodingEventHandler> {
+public class ReverseGeocodingEvent
+        extends GwtEvent<ReverseGeocodingEventHandler> {
 
-	public static Type<ReverseGeocodingEventHandler> TYPE = new Type<ReverseGeocodingEventHandler>();
+    public static Type<ReverseGeocodingEventHandler> TYPE = new Type<ReverseGeocodingEventHandler>();
+    
+    private boolean activate;
 
-	private boolean activate;
+    public ReverseGeocodingEvent(boolean activate) {
+        this.activate = activate;
+    }
 
-	public ReverseGeocodingEvent(boolean activate) {
-		this.activate = activate;
-	}
+    @Override
+    public Type<ReverseGeocodingEventHandler> getAssociatedType() {
+        return TYPE;
+    }
 
-	@Override
-	public Type<ReverseGeocodingEventHandler> getAssociatedType() {
-		// TODO Auto-generated method stub
-		return TYPE;
-	}
-
-	@Override
-	protected void dispatch(ReverseGeocodingEventHandler handler) {
-		// TODO Auto-generated method stub
-		if (activate)
-			handler.register();
-		else
-			handler.unregister();
-	}
-
+    @Override
+    protected void dispatch(ReverseGeocodingEventHandler handler) {
+        if (activate) {
+            handler.register();
+        } else {
+            handler.unregister();
+        }
+    }
 }

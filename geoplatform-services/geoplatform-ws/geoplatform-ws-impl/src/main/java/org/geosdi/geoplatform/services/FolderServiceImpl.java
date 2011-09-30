@@ -126,6 +126,22 @@ class FolderServiceImpl {
         return orig.getId();
     }
 
+    public long renameFolder(long folderId, String name)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        GPFolder orig = folderDao.find(folderId);
+        if (orig == null) {
+            throw new ResourceNotFoundFault("Folder not found", folderId);
+        }
+
+        if (name == null || name.trim().length() == 0) {
+            throw new IllegalParameterFault("Folder \"name\" cannot be empty");
+        }
+        orig.setName(name);
+
+        folderDao.merge(orig);
+        return orig.getId();
+    }
+
     public boolean deleteFolder(RequestById request)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder folder = folderDao.find(request.getId());

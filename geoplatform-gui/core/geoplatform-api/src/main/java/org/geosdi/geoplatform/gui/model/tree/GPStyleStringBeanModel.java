@@ -67,6 +67,6 @@ public class GPStyleStringBeanModel extends GeoPlatformBeanModel {
      * @param alias the alias to set
      */
     public void setStyleString(String styleString) {
-        set(GPStyleStringKeyValue.StyleString.getValue(), styleString);
+        super.set(GPStyleStringKeyValue.StyleString.getValue(), styleString);
     }
 }

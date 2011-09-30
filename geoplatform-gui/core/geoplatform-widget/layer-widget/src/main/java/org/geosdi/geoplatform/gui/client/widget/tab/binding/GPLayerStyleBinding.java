@@ -99,8 +99,12 @@ public class GPLayerStyleBinding extends GeoPlatformBindingWidget<GPLayerBean> {
     public void bindModel(GPLayerBean model) {
         super.bindModel(model);
         RasterTreeNode raster = (RasterTreeNode) model;
-        this.comboBoxStore.add(raster.getStyles());
-        this.comboBox.setValue(raster.getStyles().get(0));
+        if (raster.getStyles().isEmpty()) {
+            this.comboBox.setEnabled(false);
+        } else {
+            this.comboBoxStore.add(raster.getStyles());
+            this.comboBox.setValue(raster.getStyles().get(0));
+        }
     }
 
     @Override
@@ -119,10 +123,12 @@ public class GPLayerStyleBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         @Override //From model to view
         public void updateField(boolean updateOriginalValue) {
 //            System.out.println("Updating view");
-            comboBoxStore.removeAll();
             RasterTreeNode raster = ((RasterTreeNode) model);
-            comboBoxStore.add(raster.getStyles());
-            comboBox.setValue(raster.getStyles().get(0));
+            if (!raster.getStyles().isEmpty()) {
+                comboBoxStore.removeAll();
+                comboBoxStore.add(raster.getStyles());
+                comboBox.setValue(raster.getStyles().get(0));
+            }
         }
 
         @Override //From view to model

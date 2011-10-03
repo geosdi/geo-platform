@@ -53,6 +53,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAdde
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolderOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
@@ -342,6 +343,23 @@ public class LayerService implements ILayerService {
             throw new GeoPlatformException(ex);
         }
         return result;
+    }
+    
+    @Override
+    public boolean saveFolderProperties(MementoFolderOriginalProperties memento,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
+        try {
+            geoPlatformServiceClient.renameFolder(memento.getIdBaseElement(), 
+                    memento.getName());
+        } catch (ResourceNotFoundFault ex) {
+            this.logger.error("Failed to save layers on LayerService: " + ex);
+            throw new GeoPlatformException(ex);
+        } catch (IllegalParameterFault ex) {
+            this.logger.error("Failed to save layers on LayerService: " + ex);
+            throw new GeoPlatformException(ex);
+        }
+        return true;
     }
 
     @Override

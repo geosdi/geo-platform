@@ -43,10 +43,10 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAdde
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolderOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -76,6 +76,8 @@ public interface LayerRemoteAsync {
     public void saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento, AsyncCallback<Boolean> callback);
 
     public void saveLayerProperties(MementoLayerOriginalProperties memento, AsyncCallback<Boolean> callback);
+    
+    public void saveFolderProperties(MementoFolderOriginalProperties memento, AsyncCallback<Boolean> callback);
     
     public void saveFolderForUser(String folderName, int position, int numberOfDescendants,
             boolean isChecked, AsyncCallback<Long> callback);

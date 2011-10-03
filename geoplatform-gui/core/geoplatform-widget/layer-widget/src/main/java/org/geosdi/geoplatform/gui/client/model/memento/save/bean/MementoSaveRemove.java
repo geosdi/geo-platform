@@ -44,8 +44,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
  * @email nazzareno.sileno@geosdi.org
  */
 public class MementoSaveRemove extends AbstractMementoSave {
-
-    private static final long serialVersionUID = 802906770383599380L;
+    private static final long serialVersionUID = 7041638033706699243L;
 
     public MementoSaveRemove() {
     }
@@ -58,7 +57,7 @@ public class MementoSaveRemove extends AbstractMementoSave {
     public void convertMementoToWs() {
         super.convertMementoToWs();
         if (super.getRefBaseElement() instanceof GPLayerTreeModel) {
-            GPMementoSaveCache.getInstance().cleanOperationsByDeletedElement((GPLayerTreeModel) super.getRefBaseElement());
+            GPMementoSaveCache.getInstance().cleanOperationsRefToDeletedElement((GPLayerTreeModel) super.getRefBaseElement());
         }
     }
 }

@@ -89,7 +89,7 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
                 GPMementoSaveCache.getInstance().add(mementoCheck);
             } else {
                 be.getItem().setChecked(!be.getItem().isChecked());
-                GPMementoSaveCache.getInstance().copyOriginalLayerProperties((GPLayerTreeModel)be.getItem());
+                GPMementoSaveCache.getInstance().copyOriginalProperties((GPLayerTreeModel)be.getItem());
                 be.getItem().setChecked(!be.getItem().isChecked());
             }
         }

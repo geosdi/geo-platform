@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.service;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
@@ -46,6 +45,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAdde
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolderOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
@@ -154,6 +154,14 @@ public interface LayerRemote extends RemoteService {
      * @throws GeoPlatformException 
      */
     public boolean saveLayerProperties(MementoLayerOriginalProperties memento) throws GeoPlatformException;
+    
+    /**
+     * 
+     * @param MementoFolderOriginalProperties
+     * @return
+     * @throws GeoPlatformException 
+     */
+    public boolean saveFolderProperties(MementoFolderOriginalProperties memento) throws GeoPlatformException;
 
     /**
      * 

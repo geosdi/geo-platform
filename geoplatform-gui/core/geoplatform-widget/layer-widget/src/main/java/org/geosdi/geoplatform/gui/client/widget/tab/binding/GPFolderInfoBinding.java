@@ -45,7 +45,6 @@ import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabel
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode.GPFolderKeyValue;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.layers.decorator.event.GPTreeLabelEvent;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
@@ -57,27 +56,20 @@ public class GPFolderInfoBinding extends GeoPlatformBindingWidget<FolderTreeNode
 
     private Label folderInfo;
     private TextField<String> labelField;
-    //
     private GPTreeLabelEvent labelEvent = new TreeChangeLabelEvent();
 
     @Override
     public FormPanel createFormPanel() {
         FormPanel fp = new FormPanel();
         fp.setHeaderVisible(false);
-
-//        folderInfo.setText("The folder contains " + super.getModel().getNumberOfDescendants()
-//                + " elements");
-        folderInfo = new Label();
-        folderInfo.setText("The folder contains x elements");
-
-
-        fp.add(folderInfo);
-
         labelField = new TextField<String>();
         labelField.setName(GPFolderKeyValue.LABEL.toString());
         labelField.setFieldLabel("Label");
-
         fp.add(labelField);
+        folderInfo = new Label();
+        getModel();
+        folderInfo.setIntStyleAttribute("font-size", 8);
+        fp.add(folderInfo);
 
         return fp;
     }
@@ -104,18 +96,16 @@ public class GPFolderInfoBinding extends GeoPlatformBindingWidget<FolderTreeNode
         @Override
         public void setModelProperty(Object val) {
             //Copying the value on memento before changes
-//            GPMementoSaveCache.getInstance().copyOriginalLayerProperties((GPLayerTreeModel) model);
+            GPMementoSaveCache.getInstance().copyOriginalProperties((FolderTreeNode) model);
             ((FolderTreeNode) model).setLabel(val != null ? (String) val : "");
             WidgetPropertiesHandlerManager.fireEvent(labelEvent);
         }
 
         @Override
         public void updateField(boolean updateOriginalValue) {
-            String label = ((FolderTreeNode) model).getLabel();
-            labelField.setValue(label);
+            FolderTreeNode folder = (FolderTreeNode) model;
+            labelField.setValue(folder.getLabel());
+            folderInfo.setText("The folder contains " + folder.getNumberOfDescendants() + " descendants.");
         }
-
-                
-        
     }
 }

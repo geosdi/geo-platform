@@ -36,15 +36,16 @@
 package org.geosdi.geoplatform.gui.client.model.memento.save;
 
 import java.util.HashMap;
-import java.util.ListIterator;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
-import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolderOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoOriginalProperties;
 import org.geosdi.geoplatform.gui.model.memento.GPCache;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.observable.Observable;
 
@@ -58,8 +59,9 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
     //
     private static GPMementoSaveCache instance = new GPMementoSaveCache();
     private ObservableGPLayerSaveCache observable = new ObservableGPLayerSaveCache();
-    private Map<GPLayerTreeModel, MementoLayerOriginalProperties> modifiedLayersMap = new HashMap<GPLayerTreeModel, MementoLayerOriginalProperties>();
-    private SaveLayersPropertiesAction saveAction = new SaveLayersPropertiesAction();
+    private Map<GPBeanTreeModel, MementoOriginalProperties> modifiedLayersMap = new HashMap<GPBeanTreeModel, MementoOriginalProperties>();
+    private SaveLayersPropertiesAction saveLayersPropertiesAction = new SaveLayersPropertiesAction();
+    private SaveFoldersPropertiesAction saveFoldersPropertiesAction = new SaveFoldersPropertiesAction();
 
     public static GPMementoSaveCache getInstance() {
         return instance;
@@ -70,20 +72,19 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
 
     //The properties are copied only the first time, in this way we can save
     //only the layers effectively modified from the original one
-    public void copyOriginalLayerProperties(GPLayerTreeModel layer) {
-        if (!this.modifiedLayersMap.containsKey(layer)) {
-            MementoLayerOriginalProperties memento = new MementoLayerOriginalProperties(this.saveAction);
-            memento.setAlias(layer.getAlias());
-//            System.out.println("Alias setted: " + memento.getAlias());
-            memento.setChecked(layer.isChecked());
-//            System.out.println("Check setted: " + memento.isChecked());
-            if (layer instanceof RasterTreeNode) {
-                memento.setOpacity(((RasterTreeNode) layer).getOpacity());
-                memento.setStyleList(((RasterTreeNode) layer).getStyles());
-//                System.out.println("Opacity setted: " + memento.getOpacity());
+    public void copyOriginalProperties(GPBeanTreeModel element) {
+        if (!this.modifiedLayersMap.containsKey(element)) {
+            MementoOriginalProperties memento = null;
+            if (element instanceof GPLayerTreeModel) {
+                memento = new MementoLayerOriginalProperties(this.saveLayersPropertiesAction);
+            } else if (element instanceof FolderTreeNode) {
+                memento = new MementoFolderOriginalProperties(this.saveFoldersPropertiesAction);
+            } else {
+                throw new IllegalArgumentException("The method copyOriginalProperties "
+                        + "in GPMementoSaveCache class does not accepts your instance");
             }
-            memento.setRefBaseElement(layer);
-            this.modifiedLayersMap.put(layer, memento);
+            memento.copyOriginalProperties(element);
+            this.modifiedLayersMap.put(element, memento);
             if (super.peek() == null) {
                 this.observable.setChanged();
                 this.observable.notifyObservers(LayerEvents.SAVE_CACHE_NOT_EMPTY);
@@ -139,33 +140,17 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
         }
     }
 
-    public void cleanOperationsByDeletedElement(GPLayerTreeModel gpLayerTreeModel) {
-        this.modifiedLayersMap.remove(gpLayerTreeModel);
-        for(ListIterator<IMemento<ISave>> it = super.listIterator(); it.hasNext();){
-            if(it.next() instanceof MementoSaveAddedFolder){
-                System.out.println("Ho trovato la creazione");
-            }
+    public void cleanOperationsRefToDeletedElement(GPBeanTreeModel gpBeanTreeModel) {
+        MementoOriginalProperties memento = this.modifiedLayersMap.remove(gpBeanTreeModel);
+        if (memento != null) {
+            memento.cleanCacheFromSaveAddOperation();
         }
-    }
-
-    private boolean isChanged(GPLayerTreeModel gpLayerTreeModel) {
-        MementoLayerOriginalProperties memento = this.modifiedLayersMap.get(gpLayerTreeModel);
-        if ((memento.getAlias() == null && gpLayerTreeModel != null)
-                || !memento.getAlias().equals(gpLayerTreeModel.getAlias())
-                || memento.isChecked() != gpLayerTreeModel.isChecked()) {
-            return true;
-        } else if (gpLayerTreeModel instanceof RasterTreeNode
-                && ((RasterTreeNode) gpLayerTreeModel).getOpacity() != memento.getOpacity()
-                || !((RasterTreeNode) gpLayerTreeModel).getStyles().equals(memento.getStyleList())) {
-            return true;
-        }
-        return false;
     }
 
     private void prepareLayerPropertiesModify() {
-        for (GPLayerTreeModel gpLayerTreeModel : this.modifiedLayersMap.keySet()) {
-            if (this.isChanged(gpLayerTreeModel)) {
-                this.add(this.modifiedLayersMap.get(gpLayerTreeModel));
+        for (MementoOriginalProperties memento : this.modifiedLayersMap.values()) {
+            if (memento.isChanged()) {
+                this.add(memento);
             }
         }
         this.modifiedLayersMap.clear();

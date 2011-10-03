@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAdde
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolderOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
@@ -143,5 +144,10 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     @Override
     public boolean saveLayerProperties(MementoLayerOriginalProperties memento) throws GeoPlatformException {
         return this.layerService.saveLayerProperties(memento, super.getThreadLocalRequest());
+    }
+
+    @Override
+    public boolean saveFolderProperties(MementoFolderOriginalProperties memento) throws GeoPlatformException {
+        return this.layerService.saveFolderProperties(memento, super.getThreadLocalRequest());
     }
 }

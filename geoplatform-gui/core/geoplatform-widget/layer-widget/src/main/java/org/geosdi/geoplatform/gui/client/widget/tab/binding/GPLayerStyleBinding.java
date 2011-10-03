@@ -138,7 +138,7 @@ public class GPLayerStyleBinding extends GeoPlatformBindingWidget<GPLayerBean> {
                 GPStyleStringBeanModel styleString = (GPStyleStringBeanModel) val;
                 RasterTreeNode raster = (RasterTreeNode) model;
                 if (!styleString.equals(raster.getStyles().get(0))) {
-                    GPMementoSaveCache.getInstance().copyOriginalLayerProperties((GPLayerTreeModel) model);
+                    GPMementoSaveCache.getInstance().copyOriginalProperties((GPLayerTreeModel) model);
                     ArrayList<GPStyleStringBeanModel> rasterList = raster.getStyles();
                     rasterList.remove(styleString);
                     rasterList.add(0, styleString);

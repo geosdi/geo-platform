@@ -35,97 +35,39 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento.save.storage;
 
-import java.util.ArrayList;
 import java.util.ListIterator;
 import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoLayerOriginalProperties extends MementoOriginalProperties<GPLayerTreeModel> {
+public class MementoFolderOriginalProperties extends MementoOriginalProperties<FolderTreeNode> {
 
-    private static final long serialVersionUID = 2399513531544205577L;
-    private float opacity;
-    private boolean checked;
-    private ArrayList<GPStyleStringBeanModel> styleList;
+    private static final long serialVersionUID = 4900306329179765474L;
 
-    public MementoLayerOriginalProperties() {
+    public MementoFolderOriginalProperties() {
     }
 
-    public MementoLayerOriginalProperties(ISave saveAction) {
+    public MementoFolderOriginalProperties(ISave saveAction) {
         super(saveAction);
     }
 
     @Override
     public void convertMementoToWs() {
         super.convertMementoToWs();
-        super.setName(super.getRefBaseElement().getAlias());
-        checked = super.getRefBaseElement().isChecked();
-        if (super.getRefBaseElement() instanceof RasterTreeNode) {
-            opacity = ((RasterTreeNode) super.getRefBaseElement()).getOpacity();
-        }
-    }
-
-    /**
-     * @return the opacity
-     */
-    public float getOpacity() {
-        return opacity;
-    }
-
-    /**
-     * @param opacity the opacity to set
-     */
-    public void setOpacity(float opacity) {
-        this.opacity = opacity;
-    }
-
-    /**
-     * @return the checked
-     */
-    public boolean isChecked() {
-        return checked;
-    }
-
-    /**
-     * @param checked the checked to set
-     */
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-
-    /**
-     * @return the styleList
-     */
-    public ArrayList<GPStyleStringBeanModel> getStyleList() {
-        return styleList;
-    }
-
-    /**
-     * @param styleList the styleList to set
-     */
-    public void setStyleList(ArrayList<GPStyleStringBeanModel> styleList) {
-        this.styleList = styleList;
+        super.setName(super.getRefBaseElement().getLabel());
     }
 
     @Override
     public boolean isChanged() {
         boolean condition = false;
-        if ((this.getName() == null && super.getRefBaseElement() != null)
-                || !this.getName().equals(super.getRefBaseElement().getAlias())
-                || this.isChecked() != super.getRefBaseElement().isChecked()) {
-            condition = true;
-        } else if (super.getRefBaseElement() instanceof RasterTreeNode
-                && ((RasterTreeNode) super.getRefBaseElement()).getOpacity() != this.getOpacity()
-                || !((RasterTreeNode) super.getRefBaseElement()).getStyles().equals(this.getStyleList())) {
+        if (!this.getName().equals(super.getRefBaseElement().getLabel())) {
             condition = true;
         }
         return condition;
@@ -133,21 +75,14 @@ public class MementoLayerOriginalProperties extends MementoOriginalProperties<GP
 
     @Override
     public void copyOriginalProperties(GPBeanTreeModel bean) {
-        if (bean instanceof GPLayerTreeModel) {
-            GPLayerTreeModel layer = (GPLayerTreeModel) bean;
-            super.setName(layer.getAlias());
-//            System.out.println("Alias setted: " + memento.getName);
-            this.setChecked(layer.isChecked());
-//            System.out.println("Check setted: " + memento.isChecked());
-            if (layer instanceof RasterTreeNode) {
-                this.setOpacity(((RasterTreeNode) layer).getOpacity());
-                this.setStyleList(((RasterTreeNode) layer).getStyles());
-//                System.out.println("Opacity setted: " + memento.getOpacity());
-            }
-            super.setRefBaseElement(layer);
+        if (bean instanceof FolderTreeNode) {
+            FolderTreeNode folder = (FolderTreeNode) bean;
+            super.setName(folder.getLabel());
+//            System.out.println("Label setted: " + memento.getName());
+            super.setRefBaseElement(folder);
         } else {
             throw new IllegalArgumentException("The method copyOriginalProperties "
-                    + "in MementoLayerOriginalProperties class accepts only GPLayerTreeModel instances");
+                    + "in MementoFolderOriginalProperties class accepts only FolderTreeNode instances");
         }
     }
 
@@ -156,8 +91,8 @@ public class MementoLayerOriginalProperties extends MementoOriginalProperties<GP
         IMemento<ISave> memento = null;
         for (ListIterator<IMemento<ISave>> it = GPMementoSaveCache.getInstance().listIterator(); it.hasNext();) {
             memento = it.next();
-            if (memento instanceof MementoSaveAddedLayers
-                    && ((MementoSaveAddedLayers) memento).getRefBaseElement().equals(super.getRefBaseElement())) {
+            if (memento instanceof MementoSaveAddedFolder
+                    && ((MementoSaveAddedFolder) memento).getRefBaseElement().equals(super.getRefBaseElement())) {
                 System.out.println("Ho trovato la creazione");
                 GPMementoSaveCache.getInstance().remove(memento);
                 break;

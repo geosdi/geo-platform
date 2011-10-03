@@ -146,7 +146,7 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         @Override
         public void setModelProperty(Object val) {
             //Copying the value on memento before changes
-            GPMementoSaveCache.getInstance().copyOriginalLayerProperties((GPLayerTreeModel)model);
+            GPMementoSaveCache.getInstance().copyOriginalProperties((GPLayerTreeModel)model);
             ((GPLayerBean) model).setAlias(val != null ? (String) val : "");
             WidgetPropertiesHandlerManager.fireEvent(labelEvent);
         }

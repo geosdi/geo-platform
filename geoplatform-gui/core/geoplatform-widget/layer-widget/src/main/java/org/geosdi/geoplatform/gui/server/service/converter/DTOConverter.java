@@ -118,7 +118,7 @@ public class DTOConverter {
     
     public ShortRasterPropertiesDTO convertMementoProperties(MementoLayerOriginalProperties memento){
         ShortRasterPropertiesDTO dto = new ShortRasterPropertiesDTO();
-        dto.setAlias(memento.getAlias());
+        dto.setAlias(memento.getName());
         dto.setChecked(memento.isChecked());
         dto.setId(memento.getIdBaseElement());
         dto.setOpacity(memento.getOpacity());

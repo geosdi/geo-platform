@@ -49,7 +49,7 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.SliderField;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode.GPRasterKeyValue;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.binding.field.GPSliderField;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
@@ -176,7 +176,7 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
         @Override//From view to model
         public void setModelProperty(Object val) {
             //Copying the value on memento before changes
-            GPLayerSaveCache.getInstance().copyOriginalLayerProperties((GPLayerTreeModel)GPLayerDisplayBinding.this.getModel());
+            GPMementoSaveCache.getInstance().copyOriginalLayerProperties((GPLayerTreeModel)GPLayerDisplayBinding.this.getModel());
             ((GPRasterBean) GPLayerDisplayBinding.this.getModel()).setOpacity(((Integer) val).floatValue() / 100);
             opacityEvent.setLayerBean((GPRasterBean) GPLayerDisplayBinding.this.getModel());
             GPHandlerManager.fireEvent(opacityEvent);

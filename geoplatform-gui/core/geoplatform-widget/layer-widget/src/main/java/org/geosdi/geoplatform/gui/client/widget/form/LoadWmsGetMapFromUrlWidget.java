@@ -60,7 +60,7 @@ import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveOperations;
@@ -238,7 +238,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
         mementoSaveLayer.setAddedLayers(MementoSaveBuilder.generateMementoLayerList(rasterList));
         mementoSaveLayer.setDescendantMap(this.addVisitor.getFolderDescendantMap());
-        GPLayerSaveCache.getInstance().add(mementoSaveLayer);
+        GPMementoSaveCache.getInstance().add(mementoSaveLayer);
 
         clearComponents();
         LayoutManager.getInstance().getStatusMap().setStatus(

@@ -33,67 +33,47 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.binding;
+package org.geosdi.geoplatform.gui.client.widget.tab.layers;
 
-import com.extjs.gxt.ui.client.binding.FormBinding;
-import com.extjs.gxt.ui.client.data.ModelData;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
+import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.properties.event.GPWidgetSizeEvent;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformBindingWidget<M extends ModelData> {
-
-    private FormPanel formPanel;
-    protected FormBinding formBinding;
-    private M model;
-
-    public GeoPlatformBindingWidget() {
-        this.formPanel = createFormPanel();
-        this.formBinding = new FormBinding(this.formPanel);
-        addFieldsBinding();
-        this.formBinding.autoBind();
-    }
-
-    /**
-     * 
-     * @param model
-     *            T object to bind
-     */
-    public void bindModel(M model) {
-        this.model = model;
-        this.formBinding.bind(model);
-    }
-
-    public void unBindModel() {
-        this.formBinding.unbind();
-    }
-
-    /**
-     * @return the formBinding
-     */
-    public FormBinding getFormBinding() {
-        return formBinding;
-    }
-
-    /**
-     * @return the model
-     */
-    public M getModel() {
-        return model;
-    }
-
-    public FormPanel getWidget() {
-        return this.formPanel;
-    }
-
-    public abstract FormPanel createFormPanel();
+public abstract class GenericTabItem<M> extends GeoPlatformTabItem {
     
-     /**
-     * Add Bindings Manually
-     * 
-     */
-    public abstract void addFieldsBinding();
+    protected GeoPlatformBindingWidget bindingWidget;
+    protected GPWidgetSizeEvent event = new GPWidgetSizeEvent();
+
+    public GenericTabItem(String title) {
+        super(title);
+        addComponents();
+        setWidgetProperties();
+    }
+
+    public abstract void addComponents();
+
+    public abstract void bindModel(M model);
+
+    private void setWidgetProperties() {
+        super.addListener(Events.Select, new Listener<ComponentEvent>() {
+
+            @Override
+            public void handleEvent(ComponentEvent be) {
+                event.setSize(getTabPanel().getHeight());
+                WidgetPropertiesHandlerManager.fireEvent(event);
+            }
+            
+        });
+    }
+
 }

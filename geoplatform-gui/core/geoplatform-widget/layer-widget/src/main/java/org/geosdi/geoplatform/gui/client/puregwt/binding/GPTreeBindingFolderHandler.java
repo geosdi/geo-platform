@@ -37,16 +37,16 @@ package org.geosdi.geoplatform.gui.client.puregwt.binding;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface GPTreeBindingHandler extends EventHandler {
+public interface GPTreeBindingFolderHandler extends EventHandler {
 
-    Type<GPTreeBindingHandler> TYPE = new Type<GPTreeBindingHandler>();
-
-    public void bind(GPLayerBean model);
+    Type<GPTreeBindingFolderHandler> TYPE = new Type<GPTreeBindingFolderHandler>();
+    
+    public void bindFolder(FolderTreeNode model);
 }

@@ -41,7 +41,7 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.action.ISave;
 
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveOperations;
@@ -185,7 +185,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
             MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
             mementoSaveLayer.setAddedLayers(MementoSaveBuilder.generateMementoLayerList(layerList));
             mementoSaveLayer.setDescendantMap(this.visitorAdd.getFolderDescendantMap());
-            GPLayerSaveCache.getInstance().add(mementoSaveLayer);
+            GPMementoSaveCache.getInstance().add(mementoSaveLayer);
 
             this.featureInfoAddLayersEvent.setUrlServers(urlServer);
             MapHandlerManager.fireEvent(this.featureInfoAddLayersEvent);

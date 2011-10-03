@@ -76,7 +76,7 @@ public class SaveLayersPropertiesAction implements ISave<MementoLayerOriginalPro
 
             @Override
             public void onSuccess(Boolean result) {
-                GPLayerSaveCache.getInstance().remove(memento);
+                GPMementoSaveCache.getInstance().remove(memento);
                 LayoutManager.getInstance().getStatusMap().setStatus(
                         "Save Layer Properties Operation completed successfully.",
                         EnumSearchStatus.STATUS_SEARCH.toString());

@@ -42,25 +42,24 @@ import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
-import org.geosdi.geoplatform.gui.client.puregwt.binding.GPTreeBindingLayerHandler;
-import org.geosdi.geoplatform.gui.client.widget.tab.LayersTabWidget;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.puregwt.binding.GPTreeBindingFolderHandler;
+import org.geosdi.geoplatform.gui.client.widget.tab.FolderTabWidget;
 import org.geosdi.geoplatform.gui.puregwt.properties.GPWidgetSizeHandler;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class LayersPropertiesWidget extends GeoPlatformWindow
-        implements GPTreeBindingLayerHandler, GPWidgetSizeHandler {
+public class FolderPropertiesWidget extends GeoPlatformWindow
+        implements GPTreeBindingFolderHandler, GPWidgetSizeHandler {
 
-    private LayersTabWidget layersTabWidget;
+    private FolderTabWidget foldersTabWidget;
     private VerticalPanel vp;
-    private GPLayerBean model;
+    private FolderTreeNode model;
    
-    public LayersPropertiesWidget() {
+    public FolderPropertiesWidget() {
         super(true);
     }
 
@@ -69,8 +68,8 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
         this.vp = new VerticalPanel();
         vp.setSpacing(10);
 
-        this.layersTabWidget = new LayersTabWidget();
-        this.vp.add(this.layersTabWidget);
+        this.foldersTabWidget = new FolderTabWidget();
+        this.vp.add(this.foldersTabWidget);
 
         super.add(this.vp);
 
@@ -94,7 +93,7 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
 
     @Override
     public void setWindowProperties() {
-        setHeading("GP Layers Properties Widget");
+        setHeading("GP Folder Properties Widget");
         setModal(true);
         setResizable(false);
         setLayout(new FlowLayout());
@@ -105,13 +104,13 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
 
             @Override
             public void windowShow(WindowEvent we) {
-                layersTabWidget.bind(model);
+                foldersTabWidget.bind(model);
             }
         });
     }
 
     @Override
-    public void bindLayer(GPLayerBean model) {
+    public void bindFolder(FolderTreeNode model) {
         this.model = model;
         super.show();
     }
@@ -128,7 +127,7 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
      * 
      */
     public void addHandlers() {
-        WidgetPropertiesHandlerManager.addHandler(GPTreeBindingLayerHandler.TYPE, this);
+        WidgetPropertiesHandlerManager.addHandler(GPTreeBindingFolderHandler.TYPE, this);
         WidgetPropertiesHandlerManager.addHandler(GPWidgetSizeHandler.TYPE, this);
     }
 }

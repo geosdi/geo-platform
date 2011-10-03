@@ -105,4 +105,7 @@ public interface LayerIcons extends ImageBundle {
 
     @Resource("google_earth.png")
     AbstractImagePrototype loadKmlFromURL();
+    
+    @Resource("editFolder.png")
+    AbstractImagePrototype editFolder();
 }

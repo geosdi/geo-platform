@@ -35,33 +35,28 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab.binding;
 
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.FieldEvent;
-import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode.GPFolderKeyValue;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel.GPLayerKeyValue;
 import org.geosdi.geoplatform.gui.puregwt.layers.decorator.event.GPTreeLabelEvent;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
+public class GPFolderInfoBinding extends GeoPlatformBindingWidget<FolderTreeNode> {
 
-    private TextField<String> titleField;
-    private TextField<String> abstractField;
-    private TextField<String> aliasField;
-    private TextField<String> serverField;
+    private Label folderInfo;
+    private TextField<String> labelField;
     //
     private GPTreeLabelEvent labelEvent = new TreeChangeLabelEvent();
 
@@ -70,85 +65,57 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         FormPanel fp = new FormPanel();
         fp.setHeaderVisible(false);
 
-        titleField = new TextField<String>();
-        titleField.setId(GPLayerKeyValue.TITLE.toString());
-        titleField.setName(GPLayerKeyValue.TITLE.toString());
-        titleField.setFieldLabel("Title");
+//        folderInfo.setText("The folder contains " + super.getModel().getNumberOfDescendants()
+//                + " elements");
+        folderInfo = new Label();
+        folderInfo.setText("The folder contains x elements");
 
-        titleField.addListener(Events.Change, new Listener<FieldEvent>() {
 
-            @Override
-            public void handleEvent(FieldEvent be) {
-                titleField.setValue((String) be.getOldValue());
-            }
-        });
+        fp.add(folderInfo);
 
-        fp.add(titleField);
+        labelField = new TextField<String>();
+        labelField.setName(GPFolderKeyValue.LABEL.toString());
+        labelField.setFieldLabel("Label");
 
-        abstractField = new TextField<String>();
-        abstractField.setId(GPLayerKeyValue.ABSTRACT.toString());
-        abstractField.setName(GPLayerKeyValue.ABSTRACT.toString());
-        abstractField.setFieldLabel("Abstract");
-
-        abstractField.addListener(Events.Change, new Listener<FieldEvent>() {
-
-            @Override
-            public void handleEvent(FieldEvent be) {
-                abstractField.setValue((String) be.getOldValue());
-            }
-        });
-
-        fp.add(abstractField);
-
-        aliasField = new TextField<String>();
-        aliasField.setName(GPLayerKeyValue.ALIAS.toString());
-        aliasField.setFieldLabel("Alias");
-
-        fp.add(aliasField);
-
-        serverField = new TextField<String>();
-        serverField.setId(GPLayerKeyValue.SERVER.toString());
-        serverField.setName(GPLayerKeyValue.SERVER.toString());
-        serverField.setFieldLabel("Server");
-
-        serverField.addListener(Events.Change, new Listener<FieldEvent>() {
-
-            @Override
-            public void handleEvent(FieldEvent be) {
-                serverField.setValue((String) be.getOldValue());
-            }
-        });
-
-        fp.add(serverField);
+        fp.add(labelField);
 
         return fp;
     }
 
     @Override
     public void addFieldsBinding() {
-        this.formBinding.addFieldBinding(new GPLayerAliasFieldBinding(aliasField,
-                GPLayerKeyValue.ALIAS.toString()));
+        this.formBinding.addFieldBinding(new GPFolderNameFieldBinding(labelField,
+                GPFolderKeyValue.LABEL.toString()));
     }
 
     /**
-     * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
-     * @email  giuseppe.lascaleia@geosdi.org
+     * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+     * @email nazzareno.sileno@geosdi.org
      * 
-     * Internal Class GPLayerAliasFieldBinding to map bi-directional Binding
+     * Internal Class GPFolderNameFieldBinding to map bi-directional Binding
      * 
      */
-    private class GPLayerAliasFieldBinding extends GPFieldBinding {
+    private class GPFolderNameFieldBinding extends GPFieldBinding {
 
-        public GPLayerAliasFieldBinding(Field field, String property) {
+        public GPFolderNameFieldBinding(Field field, String property) {
             super(field, property);
         }
 
         @Override
         public void setModelProperty(Object val) {
             //Copying the value on memento before changes
-            GPMementoSaveCache.getInstance().copyOriginalLayerProperties((GPLayerTreeModel)model);
-            ((GPLayerBean) model).setAlias(val != null ? (String) val : "");
+//            GPMementoSaveCache.getInstance().copyOriginalLayerProperties((GPLayerTreeModel) model);
+            ((FolderTreeNode) model).setLabel(val != null ? (String) val : "");
             WidgetPropertiesHandlerManager.fireEvent(labelEvent);
         }
+
+        @Override
+        public void updateField(boolean updateOriginalValue) {
+            String label = ((FolderTreeNode) model).getLabel();
+            labelField.setValue(label);
+        }
+
+                
+        
     }
 }

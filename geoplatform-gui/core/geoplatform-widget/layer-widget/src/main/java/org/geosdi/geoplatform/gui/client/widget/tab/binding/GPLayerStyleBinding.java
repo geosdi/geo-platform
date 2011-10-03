@@ -47,7 +47,7 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
 import org.geosdi.geoplatform.gui.impl.map.event.StyleLayerMapEvent;
@@ -138,7 +138,7 @@ public class GPLayerStyleBinding extends GeoPlatformBindingWidget<GPLayerBean> {
                 GPStyleStringBeanModel styleString = (GPStyleStringBeanModel) val;
                 RasterTreeNode raster = (RasterTreeNode) model;
                 if (!styleString.equals(raster.getStyles().get(0))) {
-                    GPLayerSaveCache.getInstance().copyOriginalLayerProperties((GPLayerTreeModel) model);
+                    GPMementoSaveCache.getInstance().copyOriginalLayerProperties((GPLayerTreeModel) model);
                     ArrayList<GPStyleStringBeanModel> rasterList = raster.getStyles();
                     rasterList.remove(styleString);
                     rasterList.add(0, styleString);

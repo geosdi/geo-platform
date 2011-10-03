@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.model.memento.save;
 
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +82,7 @@ public class MementoSaveOperations {
 
                     @Override
                     public void onSuccess(ArrayList<Long> result) {
-                        GPLayerSaveCache.getInstance().remove(memento);
+                        GPMementoSaveCache.getInstance().remove(memento);
                         LayoutManager.getInstance().getStatusMap().setStatus(messageOk,
                                 EnumSearchStatus.STATUS_SEARCH.toString());
                         List<AbstractMementoLayer> listMementoLayers = memento.getAddedLayers();

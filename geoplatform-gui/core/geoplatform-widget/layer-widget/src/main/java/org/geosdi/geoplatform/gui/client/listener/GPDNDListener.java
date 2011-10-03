@@ -12,7 +12,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
@@ -68,7 +68,7 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
             mementoSaveDND.setNewZIndex(changedElement.getzIndex());
             mementoSaveDND.setRefNewParent((parentDestination instanceof FolderTreeNode) ? (FolderTreeNode) parentDestination : null);
             mementoSaveDND.setDescendantMap(this.visitor.getFolderDescendantMap());
-            GPLayerSaveCache.getInstance().add(mementoSaveDND);
+            GPMementoSaveCache.getInstance().add(mementoSaveDND);
             this.isActiveDrop = false;
             this.isFolderDrop = false;
             this.checkerVisitor.realignViewState(changedElement);
@@ -105,7 +105,7 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
 
                         @Override
                         public void onSuccess(Boolean result) {
-                            GPLayerSaveCache.getInstance().remove(memento);
+                            GPMementoSaveCache.getInstance().remove(memento);
                             LayoutManager.getInstance().getStatusMap().setStatus(
                                     "Folder Drag&Drop operation saved successfully.",
                                     EnumSearchStatus.STATUS_SEARCH.toString());
@@ -129,7 +129,7 @@ public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
 
                         @Override
                         public void onSuccess(Boolean result) {
-                            GPLayerSaveCache.getInstance().remove(memento);
+                            GPMementoSaveCache.getInstance().remove(memento);
                             LayoutManager.getInstance().getStatusMap().setStatus(
                                     "Layer Drag&Drop operation saved successfully.",
                                     EnumSearchStatus.STATUS_SEARCH.toString());

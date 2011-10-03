@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.gui.client.action.menu.ExportoToPDF;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToShpZip;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToTIFF;
 import org.geosdi.geoplatform.gui.client.action.menu.PasteLayerAction;
+import org.geosdi.geoplatform.gui.client.action.menu.ShowFolderRenameAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowLayerPropertiesAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -105,7 +106,6 @@ public class GPDynamicTreeContextMenu extends Menu {
         layerProperties.setText("Layer Properties");
         layerProperties.setIcon(LayerResources.ICONS.layerProperties());
         layerProperties.addSelectionListener(new ShowLayerPropertiesAction(tree));
-        layerContextMenu.add(layerProperties);
 
 //        MenuItem exportToGML = new MenuItem();
 //        exportToGML.setText("Export To GML");
@@ -120,10 +120,17 @@ public class GPDynamicTreeContextMenu extends Menu {
         pasteMenuItem.addSelectionListener(pasteAction);
         folderContextMenu.add(pasteMenuItem);
         
+        MenuItem folderRename = new MenuItem();
+        folderRename.setText("Rename Folder");
+        folderRename.setIcon(LayerResources.ICONS.editFolder());
+        folderRename.addSelectionListener(new ShowFolderRenameAction(tree));
+        folderContextMenu.add(folderRename);
+        
         MenuItem copyMenuItem = new MenuItem("Copy Layer");
         copyMenuItem.setIcon(LayerResources.ICONS.copy());
         copyMenuItem.addSelectionListener(new CopyLayerAction(tree, pasteAction, pasteMenuItem));
         layerContextMenu.add(copyMenuItem);
+        layerContextMenu.add(layerProperties);
         
         this.tree.setContextMenu(this.layerContextMenu);
         

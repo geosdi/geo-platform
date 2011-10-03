@@ -40,7 +40,7 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
@@ -123,7 +123,7 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
 
             @Override
             public void onSuccess(Boolean result) {
-                GPLayerSaveCache.getInstance().remove(memento);
+                GPMementoSaveCache.getInstance().remove(memento);
                 LayoutManager.getInstance().getStatusMap().setStatus(
                         "Elements deleted successfully.",
                         EnumSearchStatus.STATUS_SEARCH.toString());

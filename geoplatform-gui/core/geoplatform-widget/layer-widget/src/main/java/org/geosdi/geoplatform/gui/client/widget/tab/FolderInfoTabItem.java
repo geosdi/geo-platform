@@ -33,34 +33,30 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.binding.event;
+package org.geosdi.geoplatform.gui.client.widget.tab;
 
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.client.puregwt.binding.GPTreeBindingHandler;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.widget.tab.binding.GPFolderInfoBinding;
+import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericTabItem;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public class GPTreeBindingEvent extends GwtEvent<GPTreeBindingHandler> {
-    
-    private GPLayerBean model;
+public class FolderInfoTabItem extends GenericTabItem<FolderTreeNode> {
 
-    public GPTreeBindingEvent(GPLayerBean theModel) {
-        this.model = theModel;
-    }
-    
-
-    @Override
-    public Type<GPTreeBindingHandler> getAssociatedType() {
-        return GPTreeBindingHandler.TYPE;
+    public FolderInfoTabItem() {
+        super("Folder Info");
     }
 
     @Override
-    protected void dispatch(GPTreeBindingHandler handler) {
-        handler.bind(model);
-    } 
+    public void addComponents() {
+        bindingWidget = new GPFolderInfoBinding();
+        super.add(this.bindingWidget.getWidget());
+    }
+
+    @Override
+    public void bindModel(FolderTreeNode model) {
+        this.bindingWidget.bindModel(model);
+    }
 }

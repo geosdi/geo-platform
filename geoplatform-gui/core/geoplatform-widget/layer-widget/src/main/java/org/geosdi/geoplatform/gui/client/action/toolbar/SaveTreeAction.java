@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.GPPeekCacheEventHandler;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.observable.Observable;
@@ -64,7 +64,7 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
     public SaveTreeAction(TreePanel theTree) {
         super(theTree, BasicWidgetResources.ICONS.save(), "Save Tree State");
         displayEvent.setMessage("Saving Operations On Service");
-        GPLayerSaveCache.getInstance().getObservable().addObserver(this);
+        GPMementoSaveCache.getInstance().getObservable().addObserver(this);
         TimeoutHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);
         LayerHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);
     }
@@ -87,9 +87,9 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
 
     @Override
     public void peek() {
-        if (GPLayerSaveCache.getInstance().peek() != null) {
-            IMemento<ISave> memento = GPLayerSaveCache.getInstance().peek();
-            memento.getAction().executeSave(GPLayerSaveCache.getInstance().peek());
+        if (GPMementoSaveCache.getInstance().peek() != null) {
+            IMemento<ISave> memento = GPMementoSaveCache.getInstance().peek();
+            memento.getAction().executeSave(GPMementoSaveCache.getInstance().peek());
         } else {
             this.displayEvent.setVisible(false);
             LayerHandlerManager.fireEvent(this.displayEvent);

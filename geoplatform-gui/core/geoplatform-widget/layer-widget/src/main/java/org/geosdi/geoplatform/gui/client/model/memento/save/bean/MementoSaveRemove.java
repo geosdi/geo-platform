@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
 
 import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 /**
@@ -58,7 +58,7 @@ public class MementoSaveRemove extends AbstractMementoSave {
     public void convertMementoToWs() {
         super.convertMementoToWs();
         if (super.getRefBaseElement() instanceof GPLayerTreeModel) {
-            GPLayerSaveCache.getInstance().removeModifiedLayer((GPLayerTreeModel) super.getRefBaseElement());
+            GPMementoSaveCache.getInstance().cleanOperationsByDeletedElement((GPLayerTreeModel) super.getRefBaseElement());
         }
     }
 }

@@ -90,9 +90,9 @@ public class ServerDAOTest extends BaseDAOTest {
 
     private GeoPlatformServer createServer2() {
         GeoPlatformServer server = new GeoPlatformServer();
-        server.setServerUrl("http://maps.telespazio.it/dpc/dpc-wms");
-        server.setName("maps.telespazio.it");
-        server.setAliasName("TELESPAZIO");
+        server.setServerUrl("http://dpc.geosdi.org/geoserver/wms");
+        server.setName("dpc.geosdi.org");
+        server.setAliasName("DPC on geosdi");
         server.setServerType(GPCapabilityType.WMS);
         return server;
     }

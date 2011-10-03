@@ -33,67 +33,42 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.binding;
+package org.geosdi.geoplatform.gui.client.widget.tab;
 
-import com.extjs.gxt.ui.client.binding.FormBinding;
-import com.extjs.gxt.ui.client.data.ModelData;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericLayerTabWidget;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public abstract class GeoPlatformBindingWidget<M extends ModelData> {
+public class FolderTabWidget extends GenericLayerTabWidget<FolderTreeNode> {
 
-    private FormPanel formPanel;
-    protected FormBinding formBinding;
-    private M model;
+    private FolderInfoTabItem infoItem;
 
-    public GeoPlatformBindingWidget() {
-        this.formPanel = createFormPanel();
-        this.formBinding = new FormBinding(this.formPanel);
-        addFieldsBinding();
-        this.formBinding.autoBind();
+    @Override
+    public void initTab() {
+        setWidth(360);
+        setAutoHeight(true);
     }
 
-    /**
-     * 
-     * @param model
-     *            T object to bind
-     */
-    public void bindModel(M model) {
-        this.model = model;
-        this.formBinding.bind(model);
+    @Override
+    public void createTabItems() {
+        this.infoItem = new FolderInfoTabItem();
     }
 
-    public void unBindModel() {
-        this.formBinding.unbind();
+    @Override
+    public void setWidgetProperties() {
     }
 
-    /**
-     * @return the formBinding
-     */
-    public FormBinding getFormBinding() {
-        return formBinding;
+    @Override
+    public void addComponents() {
+        super.add(infoItem);
     }
 
-    /**
-     * @return the model
-     */
-    public M getModel() {
-        return model;
+    @Override
+    public void bind(FolderTreeNode model) {
+        this.infoItem.bindModel(model);
     }
 
-    public FormPanel getWidget() {
-        return this.formPanel;
-    }
-
-    public abstract FormPanel createFormPanel();
-    
-     /**
-     * Add Bindings Manually
-     * 
-     */
-    public abstract void addFieldsBinding();
 }

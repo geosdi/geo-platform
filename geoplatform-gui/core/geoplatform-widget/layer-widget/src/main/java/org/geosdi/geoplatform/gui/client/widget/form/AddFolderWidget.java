@@ -51,7 +51,7 @@ import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPLayerSaveCache;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
@@ -205,7 +205,7 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
                 this.entity));
         mementoSaveAdd.setDescendantMap(this.addVisitor.getFolderDescendantMap());
 
-        GPLayerSaveCache.getInstance().add(mementoSaveAdd);
+        GPMementoSaveCache.getInstance().add(mementoSaveAdd);
 
         clearComponents();
         LayoutManager.getInstance().getStatusMap().setStatus(
@@ -262,11 +262,10 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
                     @Override
                     public void onSuccess(Long result) {
-                        GPLayerSaveCache.getInstance().remove(memento);
+                        GPMementoSaveCache.getInstance().remove(memento);
                         LayoutManager.getInstance().getStatusMap().setStatus(
                                 "Folders saved successfully.",
                                 EnumSearchStatus.STATUS_SEARCH.toString());
-                        //Warning: What happens when I delete a folder before save it???
                         MementoFolder mementoAdded = memento.getAddedFolder();
                         mementoAdded.getRefBaseElement().setId(result);
                         mementoAdded.getRefBaseElement().setLoaded(true);

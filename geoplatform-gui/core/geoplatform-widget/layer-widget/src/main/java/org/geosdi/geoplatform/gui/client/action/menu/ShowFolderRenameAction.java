@@ -33,47 +33,33 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.tab.layers;
+package org.geosdi.geoplatform.gui.client.action.menu;
 
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
-import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
-import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.action.menu.MenuAction;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.puregwt.binding.event.GPTreeBindingFolderEvent;
+import org.geosdi.geoplatform.gui.client.widget.FolderPropertiesWidget;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.properties.event.GPWidgetSizeEvent;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public abstract class GenericLayerTabItem<M extends GPLayerBean> extends GeoPlatformTabItem {
-    
-    protected GeoPlatformBindingWidget bindingWidget;
-    protected GPWidgetSizeEvent event = new GPWidgetSizeEvent();
+public class ShowFolderRenameAction extends MenuAction {
 
-    public GenericLayerTabItem(String title) {
-        super(title);
-        addComponents();
-        setWidgetProperties();
+    private TreePanel treePanel;
+    private FolderPropertiesWidget layersPropertiesWidget = new FolderPropertiesWidget();
+
+    public ShowFolderRenameAction(TreePanel treePanel) {
+        super("FolderProperties");
+        this.treePanel = treePanel;
+        this.layersPropertiesWidget.addHandlers();
     }
 
-    public abstract void addComponents();
-
-    public abstract void bindModel(M model);
-
-    private void setWidgetProperties() {
-        super.addListener(Events.Select, new Listener<ComponentEvent>() {
-
-            @Override
-            public void handleEvent(ComponentEvent be) {
-                event.setSize(getTabPanel().getHeight());
-                WidgetPropertiesHandlerManager.fireEvent(event);
-            }
-            
-        });
+    @Override
+    public void componentSelected(MenuEvent ce) {
+        WidgetPropertiesHandlerManager.fireEvent(new GPTreeBindingFolderEvent((FolderTreeNode) this.treePanel.getSelectionModel().getSelectedItem()));
     }
-
 }

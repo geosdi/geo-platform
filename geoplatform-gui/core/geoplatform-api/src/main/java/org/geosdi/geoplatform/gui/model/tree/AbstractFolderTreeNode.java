@@ -51,6 +51,22 @@ public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
      */
     private static final long serialVersionUID = 4886440607031207404L;
 
+    public enum GPFolderKeyValue {
+
+        LABEL("label");
+        //
+        private String value;
+
+        GPFolderKeyValue(String theValue) {
+            this.value = theValue;
+        }
+
+        @Override
+        public String toString() {
+            return this.value;
+        }
+    }
+
     protected AbstractFolderTreeNode() {
     }
 
@@ -63,6 +79,12 @@ public abstract class AbstractFolderTreeNode extends GPBeanTreeModel {
         visitor.visitFolder(this);
     }
 
+    @Override
+    public void setLabel(String label) {
+        super.setLabel(label);
+        super.set(GPFolderKeyValue.LABEL.toString(), label);
+    }
+    
     /**
      * The Folder Child as a Map
      * 

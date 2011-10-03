@@ -36,10 +36,12 @@
 package org.geosdi.geoplatform.gui.client.model.memento.save;
 
 import java.util.HashMap;
+import java.util.ListIterator;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.model.memento.GPCache;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
@@ -50,20 +52,20 @@ import org.geosdi.geoplatform.gui.observable.Observable;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
+public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
 
     private static final long serialVersionUID = -5458269761345444182L;
     //
-    private static GPLayerSaveCache instance = new GPLayerSaveCache();
+    private static GPMementoSaveCache instance = new GPMementoSaveCache();
     private ObservableGPLayerSaveCache observable = new ObservableGPLayerSaveCache();
     private Map<GPLayerTreeModel, MementoLayerOriginalProperties> modifiedLayersMap = new HashMap<GPLayerTreeModel, MementoLayerOriginalProperties>();
     private SaveLayersPropertiesAction saveAction = new SaveLayersPropertiesAction();
 
-    public static GPLayerSaveCache getInstance() {
+    public static GPMementoSaveCache getInstance() {
         return instance;
     }
 
-    private GPLayerSaveCache() {
+    private GPMementoSaveCache() {
     }
 
     //The properties are copied only the first time, in this way we can save
@@ -137,8 +139,13 @@ public class GPLayerSaveCache extends GPCache<IMemento<ISave>> {
         }
     }
 
-    public void removeModifiedLayer(GPLayerTreeModel gpLayerTreeModel) {
+    public void cleanOperationsByDeletedElement(GPLayerTreeModel gpLayerTreeModel) {
         this.modifiedLayersMap.remove(gpLayerTreeModel);
+        for(ListIterator<IMemento<ISave>> it = super.listIterator(); it.hasNext();){
+            if(it.next() instanceof MementoSaveAddedFolder){
+                System.out.println("Ho trovato la creazione");
+            }
+        }
     }
 
     private boolean isChanged(GPLayerTreeModel gpLayerTreeModel) {

@@ -33,67 +33,33 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.binding;
+package org.geosdi.geoplatform.gui.client.puregwt.binding.event;
 
-import com.extjs.gxt.ui.client.binding.FormBinding;
-import com.extjs.gxt.ui.client.data.ModelData;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.puregwt.binding.GPTreeBindingFolderHandler;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-public abstract class GeoPlatformBindingWidget<M extends ModelData> {
-
-    private FormPanel formPanel;
-    protected FormBinding formBinding;
-    private M model;
-
-    public GeoPlatformBindingWidget() {
-        this.formPanel = createFormPanel();
-        this.formBinding = new FormBinding(this.formPanel);
-        addFieldsBinding();
-        this.formBinding.autoBind();
-    }
-
-    /**
-     * 
-     * @param model
-     *            T object to bind
-     */
-    public void bindModel(M model) {
-        this.model = model;
-        this.formBinding.bind(model);
-    }
-
-    public void unBindModel() {
-        this.formBinding.unbind();
-    }
-
-    /**
-     * @return the formBinding
-     */
-    public FormBinding getFormBinding() {
-        return formBinding;
-    }
-
-    /**
-     * @return the model
-     */
-    public M getModel() {
-        return model;
-    }
-
-    public FormPanel getWidget() {
-        return this.formPanel;
-    }
-
-    public abstract FormPanel createFormPanel();
+public class GPTreeBindingFolderEvent extends GwtEvent<GPTreeBindingFolderHandler> {
     
-     /**
-     * Add Bindings Manually
-     * 
-     */
-    public abstract void addFieldsBinding();
+    private FolderTreeNode model;
+
+    public GPTreeBindingFolderEvent(FolderTreeNode theModel) {
+        this.model = theModel;
+    }
+    
+
+    @Override
+    public Type<GPTreeBindingFolderHandler> getAssociatedType() {
+        return GPTreeBindingFolderHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(GPTreeBindingFolderHandler handler) {
+        handler.bindFolder(model);
+    } 
 }

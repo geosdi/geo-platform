@@ -33,67 +33,20 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.binding;
+package org.geosdi.geoplatform.gui.client.puregwt.binding;
 
-import com.extjs.gxt.ui.client.binding.FormBinding;
-import com.extjs.gxt.ui.client.data.ModelData;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformBindingWidget<M extends ModelData> {
+public interface GPTreeBindingLayerHandler extends EventHandler {
 
-    private FormPanel formPanel;
-    protected FormBinding formBinding;
-    private M model;
+    Type<GPTreeBindingLayerHandler> TYPE = new Type<GPTreeBindingLayerHandler>();
 
-    public GeoPlatformBindingWidget() {
-        this.formPanel = createFormPanel();
-        this.formBinding = new FormBinding(this.formPanel);
-        addFieldsBinding();
-        this.formBinding.autoBind();
-    }
-
-    /**
-     * 
-     * @param model
-     *            T object to bind
-     */
-    public void bindModel(M model) {
-        this.model = model;
-        this.formBinding.bind(model);
-    }
-
-    public void unBindModel() {
-        this.formBinding.unbind();
-    }
-
-    /**
-     * @return the formBinding
-     */
-    public FormBinding getFormBinding() {
-        return formBinding;
-    }
-
-    /**
-     * @return the model
-     */
-    public M getModel() {
-        return model;
-    }
-
-    public FormPanel getWidget() {
-        return this.formPanel;
-    }
-
-    public abstract FormPanel createFormPanel();
-    
-     /**
-     * Add Bindings Manually
-     * 
-     */
-    public abstract void addFieldsBinding();
+    public void bindLayer(GPLayerBean model);
 }

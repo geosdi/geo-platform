@@ -162,8 +162,9 @@ public interface GeoPlatformService {
 
     @Post
     @HttpResource(location = "/folder/{folderId}")
-    long renameFolder(@WebParam(name = "folderId") long folderId,
-            @WebParam(name = "folderName") String folderName)
+    long saveFolderProperties(@WebParam(name = "folderId") long folderId,
+            @WebParam(name = "folderName") String folderName,
+            @WebParam(name = "checked") boolean checked)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Delete

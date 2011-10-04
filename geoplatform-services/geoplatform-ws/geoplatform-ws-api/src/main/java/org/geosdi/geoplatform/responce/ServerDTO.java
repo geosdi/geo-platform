@@ -122,6 +122,20 @@ public class ServerDTO {
     }
 
     /**
+     * @return the alias
+     */
+    public String getAlias() {
+        return alias;
+    }
+
+    /**
+     * @param alias the alias to set
+     */
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    /**
      * @return the layersDTO
      */
     public List<? extends ShortLayerDTO> getLayerList() {
@@ -145,19 +159,5 @@ public class ServerDTO {
     public String toString() {
         return "ServerDTO{" + "id=" + id.longValue() + ", serverUrl=" + serverUrl
                 + ", alias=" + alias + ", name=" + name + '}';
-    }
-
-    /**
-     * @return the alias
-     */
-    public String getAlias() {
-        return alias;
-    }
-
-    /**
-     * @param alias the alias to set
-     */
-    public void setAlias(String alias) {
-        this.alias = alias;
     }
 }

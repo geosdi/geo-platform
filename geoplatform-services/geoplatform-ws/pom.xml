@@ -1,21 +1,22 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
   
-   <parent>
-		<groupId>org.geosdi</groupId>
-		<artifactId>geoplatform-services</artifactId>
-		<version>1.2-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>org.geosdi</groupId>
+        <artifactId>geoplatform-services</artifactId>
+        <version>1.2-SNAPSHOT</version>
+    </parent>
 
-  <groupId>org.geosdi</groupId>
-  <artifactId>geoplatform-ws</artifactId>
-  <version>1.2-SNAPSHOT</version>
-  <packaging>pom</packaging>
+    <groupId>org.geosdi</groupId>
+    <artifactId>geoplatform-ws</artifactId>
+    <version>1.2-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-  <name>Geo-Platform :: == All Web Services</name>
+    <name>Geo-Platform :: == All Web Services</name>
   
-  <developers>
+    <developers>
         <developer>
             <name>Francesco Izzi</name>
             <id>francesco.izzi</id>
@@ -39,8 +40,9 @@
     </developers>
     
     <modules>
-	    <module>geoplatform-ws-api</module>
+        <module>geoplatform-ws-api</module>
         <module>geoplatform-ws-impl</module>
         <module>geoplatform-ws-webapp</module>
-	</modules>
+    </modules>
+
 </project>

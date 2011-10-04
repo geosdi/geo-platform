@@ -148,10 +148,17 @@ public class UserDTO {
         this.emailAddress = emailAddress;
     }
 
+    /**
+     * @return the authorities
+     */
     public Collection<GPAuthority> getAuthorities() {
         return authorities;
     }
 
+    /**
+     * @param authorities
+     *          the authorities to set
+     */
     public void setAuthorities(Collection<GPAuthority> authorities) {
         this.authorities = authorities;
     }

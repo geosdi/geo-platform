@@ -57,7 +57,7 @@ public class GeocodingController extends GeoPlatformController {
     private GeocodingRemoteAsync geocodingService = GeocodingRemote.Util.getInstance();
 
     public GeocodingController() {
-        registerEventTypes(GeocodingEvents.INIT_GEOCODING_WIDGET,
+        super.registerEventTypes(GeocodingEvents.INIT_GEOCODING_WIDGET,
                 GeocodingEvents.SHOW_GEOCODING_WIDGET,
                 GeocodingEvents.BEGIN_GEOCODING_SEARCH,
                 GeocodingEvents.HIDE_GEOCODING_WIDGET);

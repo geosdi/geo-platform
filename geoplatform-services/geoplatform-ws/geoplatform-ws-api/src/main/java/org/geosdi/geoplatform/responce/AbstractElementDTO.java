@@ -49,9 +49,9 @@ import javax.xml.bind.annotation.XmlTransient;
 public abstract class AbstractElementDTO implements IElementDTO,
         Comparable<IElementDTO> {
 
-    private Long id = null; // Database identity
+    private Long id; // Database identity
     private String name;
-    private Integer position = null;
+    private Integer position;
     private boolean shared;
     private boolean checked;
 

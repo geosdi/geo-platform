@@ -126,7 +126,7 @@ class FolderServiceImpl {
         return orig.getId();
     }
 
-    public long renameFolder(long folderId, String name)
+    public long saveFolderProperties(long folderId, String name, boolean checked)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder orig = folderDao.find(folderId);
         if (orig == null) {
@@ -137,6 +137,7 @@ class FolderServiceImpl {
             throw new IllegalParameterFault("Folder \"name\" cannot be empty");
         }
         orig.setName(name);
+        orig.setChecked(checked);
 
         folderDao.merge(orig);
         return orig.getId();

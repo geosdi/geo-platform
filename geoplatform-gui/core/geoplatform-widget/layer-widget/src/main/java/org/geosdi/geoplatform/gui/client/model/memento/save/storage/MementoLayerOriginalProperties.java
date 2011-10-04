@@ -50,11 +50,11 @@ import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoLayerOriginalProperties extends MementoOriginalProperties<GPLayerTreeModel> {
+public class MementoLayerOriginalProperties
+        extends MementoOriginalProperties<GPLayerTreeModel> {
 
     private static final long serialVersionUID = 2399513531544205577L;
     private float opacity;
-    private boolean checked;
     private ArrayList<GPStyleStringBeanModel> styleList;
 
     public MementoLayerOriginalProperties() {
@@ -68,7 +68,7 @@ public class MementoLayerOriginalProperties extends MementoOriginalProperties<GP
     public void convertMementoToWs() {
         super.convertMementoToWs();
         super.setName(super.getRefBaseElement().getAlias());
-        checked = super.getRefBaseElement().isChecked();
+        super.setChecked(super.getRefBaseElement().isChecked());
         if (super.getRefBaseElement() instanceof RasterTreeNode) {
             opacity = ((RasterTreeNode) super.getRefBaseElement()).getOpacity();
         }
@@ -89,20 +89,6 @@ public class MementoLayerOriginalProperties extends MementoOriginalProperties<GP
     }
 
     /**
-     * @return the checked
-     */
-    public boolean isChecked() {
-        return checked;
-    }
-
-    /**
-     * @param checked the checked to set
-     */
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-
-    /**
      * @return the styleList
      */
     public ArrayList<GPStyleStringBeanModel> getStyleList() {
@@ -119,9 +105,9 @@ public class MementoLayerOriginalProperties extends MementoOriginalProperties<GP
     @Override
     public boolean isChanged() {
         boolean condition = false;
-        if ((this.getName() == null && super.getRefBaseElement() != null)
-                || !this.getName().equals(super.getRefBaseElement().getAlias())
-                || this.isChecked() != super.getRefBaseElement().isChecked()) {
+        if ((super.getName() == null && super.getRefBaseElement() != null)
+                || !super.getName().equals(super.getRefBaseElement().getAlias())
+                || super.isChecked() != super.getRefBaseElement().isChecked()) {
             condition = true;
         } else if (super.getRefBaseElement() instanceof RasterTreeNode
                 && ((RasterTreeNode) super.getRefBaseElement()).getOpacity() != this.getOpacity()
@@ -137,7 +123,7 @@ public class MementoLayerOriginalProperties extends MementoOriginalProperties<GP
             GPLayerTreeModel layer = (GPLayerTreeModel) bean;
             super.setName(layer.getAlias());
 //            System.out.println("Alias setted: " + memento.getName);
-            this.setChecked(layer.isChecked());
+            super.setChecked(layer.isChecked());
 //            System.out.println("Check setted: " + memento.isChecked());
             if (layer instanceof RasterTreeNode) {
                 this.setOpacity(((RasterTreeNode) layer).getOpacity());

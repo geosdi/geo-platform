@@ -344,19 +344,19 @@ public class LayerService implements ILayerService {
         }
         return result;
     }
-    
+
     @Override
     public boolean saveFolderProperties(MementoFolderOriginalProperties memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
         try {
-            geoPlatformServiceClient.renameFolder(memento.getIdBaseElement(), 
-                    memento.getName());
+            geoPlatformServiceClient.saveFolderProperties(memento.getIdBaseElement(),
+                    memento.getName(), memento.isChecked());
         } catch (ResourceNotFoundFault ex) {
-            this.logger.error("Failed to save layers on LayerService: " + ex);
+            this.logger.error("Failed to save folder on LayerService: " + ex);
             throw new GeoPlatformException(ex);
         } catch (IllegalParameterFault ex) {
-            this.logger.error("Failed to save layers on LayerService: " + ex);
+            this.logger.error("Failed to save folder on LayerService: " + ex);
             throw new GeoPlatformException(ex);
         }
         return true;

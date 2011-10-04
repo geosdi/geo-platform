@@ -43,11 +43,13 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public abstract class MementoOriginalProperties<T extends GPBeanTreeModel>  extends AbstractMementoSave<T>{
-    
+public abstract class MementoOriginalProperties<T extends GPBeanTreeModel>
+        extends AbstractMementoSave<T> {
+
     private static final long serialVersionUID = -5677029546026289913L;
-    
+    //
     private String name;
+    private boolean checked;
 
     public MementoOriginalProperties() {
     }
@@ -57,11 +59,11 @@ public abstract class MementoOriginalProperties<T extends GPBeanTreeModel>  exte
     }
 
     public abstract boolean isChanged();
-    
+
     public abstract void cleanCacheFromSaveAddOperation();
-    
+
     public abstract void copyOriginalProperties(GPBeanTreeModel layer);
-    
+
     /**
      * @return the name
      */
@@ -75,7 +77,18 @@ public abstract class MementoOriginalProperties<T extends GPBeanTreeModel>  exte
     public void setName(String name) {
         this.name = name;
     }
-    
-    
-    
+
+    /**
+     * @return the checked
+     */
+    public boolean isChecked() {
+        return checked;
+    }
+
+    /**
+     * @param checked the checked to set
+     */
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
 }

@@ -62,12 +62,15 @@ public class MementoFolderOriginalProperties extends MementoOriginalProperties<F
     public void convertMementoToWs() {
         super.convertMementoToWs();
         super.setName(super.getRefBaseElement().getLabel());
+        super.setChecked(super.getRefBaseElement().isChecked());
     }
 
     @Override
     public boolean isChanged() {
         boolean condition = false;
-        if (!this.getName().equals(super.getRefBaseElement().getLabel())) {
+        if ((super.getName() == null && super.getRefBaseElement() != null)
+                || !super.getName().equals(super.getRefBaseElement().getLabel())
+                || super.isChecked() != super.getRefBaseElement().isChecked()) {
             condition = true;
         }
         return condition;
@@ -79,6 +82,8 @@ public class MementoFolderOriginalProperties extends MementoOriginalProperties<F
             FolderTreeNode folder = (FolderTreeNode) bean;
             super.setName(folder.getLabel());
 //            System.out.println("Label setted: " + memento.getName());
+            super.setChecked(folder.isChecked());
+//            System.out.println("Check setted: " + memento.isChecked());            
             super.setRefBaseElement(folder);
         } else {
             throw new IllegalArgumentException("The method copyOriginalProperties "

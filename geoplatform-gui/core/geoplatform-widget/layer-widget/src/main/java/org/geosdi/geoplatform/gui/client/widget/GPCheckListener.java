@@ -51,10 +51,7 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
@@ -78,20 +75,9 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
         boolean isCacheable = this.visitorDisplay.isCacheableCheck();
         be.getItem().accept(this.visitorDisplay);
         if (isCacheable && !(be.getItem() instanceof GPRootTreeNode)) {
-            IMemento<ISave> precedingMemento = GPMementoSaveCache.getInstance().peekLast();
-            if (precedingMemento != null && precedingMemento instanceof MementoSaveCheck
-                    && ((MementoSaveCheck) precedingMemento).getRefBaseElement().equals(be.getItem())) {
-                GPMementoSaveCache.getInstance().remove(precedingMemento);
-            } else if (be.getItem() instanceof FolderTreeNode){
-                MementoSaveCheck mementoCheck = new MementoSaveCheck(this);
-                mementoCheck.setRefBaseElement(be.getItem());
-                mementoCheck.setChecked(be.getItem().isChecked());
-                GPMementoSaveCache.getInstance().add(mementoCheck);
-            } else {
-                be.getItem().setChecked(!be.getItem().isChecked());
-                GPMementoSaveCache.getInstance().copyOriginalProperties((GPLayerTreeModel)be.getItem());
-                be.getItem().setChecked(!be.getItem().isChecked());
-            }
+            be.getItem().setChecked(!be.getItem().isChecked());
+            GPMementoSaveCache.getInstance().copyOriginalProperties(be.getItem());
+            be.getItem().setChecked(!be.getItem().isChecked());
         }
     }
 
@@ -121,6 +107,6 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
                     LayerHandlerManager.fireEvent(peekCacheEvent);
                 }
             });
-        } 
+        }
     }
 }

@@ -40,6 +40,8 @@ import org.geosdi.geoplatform.gui.action.ISave;
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
+ * 
+ * Actually this class is not used because it is replaced by MementoOriginalProperties
  */
 public class MementoSaveCheck extends AbstractMementoSave {
 

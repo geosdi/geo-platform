@@ -348,7 +348,7 @@ public class LayerService implements ILayerService {
     @Override
     public boolean saveFolderProperties(MementoFolderOriginalProperties memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
+        this.getUserAlreadyFromSession(httpServletRequest);
         try {
             geoPlatformServiceClient.saveFolderProperties(memento.getIdBaseElement(),
                     memento.getName(), memento.isChecked());

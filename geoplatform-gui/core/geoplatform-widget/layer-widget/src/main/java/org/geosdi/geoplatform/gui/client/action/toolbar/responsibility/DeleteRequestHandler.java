@@ -80,7 +80,6 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
         GPBeanTreeModel element = (GPBeanTreeModel) tree.getSelectionModel().getSelectedItem();
         GPBeanTreeModel parent = (GPBeanTreeModel) element.getParent();
         this.visitorDispalyHide.removeVisibleLayers(element);
-
         IMemento<ISave> precedingMemento = null;
         precedingMemento = GPMementoSaveCache.getInstance().peekLast();
         boolean isAllowedNewMemento = true;
@@ -93,14 +92,13 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
             mementoSaveRemove = new MementoSaveRemove(this);
             mementoSaveRemove.setRefBaseElement(element);
         }
-
         this.deleteVisitor.deleteElement(element, parent, parent.indexOf(element));
         this.tree.getStore().remove(element);
-
         if (isAllowedNewMemento) {
             mementoSaveRemove.setDescendantMap(this.deleteVisitor.getFolderDescendantMap());
             GPMementoSaveCache.getInstance().add(mementoSaveRemove);
         }
+        GPMementoSaveCache.getInstance().cleanOperationsRefToDeletedElement(element);
         displayMessage();
     }
 

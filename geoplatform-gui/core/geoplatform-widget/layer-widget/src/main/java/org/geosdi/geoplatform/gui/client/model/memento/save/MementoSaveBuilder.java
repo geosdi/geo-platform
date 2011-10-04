@@ -45,6 +45,9 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolderOriginalProperties;
+import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
@@ -53,6 +56,9 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
  * @email nazzareno.sileno@geosdi.org
  */
 public class MementoSaveBuilder {
+
+    private static SaveLayersPropertiesAction saveLayersPropertiesAction = new SaveLayersPropertiesAction();
+    private static SaveFoldersPropertiesAction saveFoldersPropertiesAction = new SaveFoldersPropertiesAction();
 
     public static MementoFolder buildSaveFolderMemento(FolderTreeNode folder) {
         MementoFolder memento = new MementoFolder();
@@ -115,6 +121,19 @@ public class MementoSaveBuilder {
         // Parent folder
         FolderTreeNode refParent = (FolderTreeNode) layer.getParent();
         memento.setRefParent(refParent);
+    }
+
+    public static AbstractMementoOriginalProperties generateMementoOriginalProperties(GPBeanTreeModel element) {
+        AbstractMementoOriginalProperties memento = null;
+        if (element instanceof GPLayerTreeModel) {
+            memento = new MementoLayerOriginalProperties(saveLayersPropertiesAction);
+        } else if (element instanceof FolderTreeNode) {
+            memento = new MementoFolderOriginalProperties(saveFoldersPropertiesAction);
+        } else {
+            throw new IllegalArgumentException("The method copyOriginalProperties "
+                    + "in MementoSaveBuilder class does not accepts your instance");
+        }
+        return memento;
     }
 
     public static AbstractMementoSave generateTypeOfSaveMemento(GPBeanTreeModel element) {

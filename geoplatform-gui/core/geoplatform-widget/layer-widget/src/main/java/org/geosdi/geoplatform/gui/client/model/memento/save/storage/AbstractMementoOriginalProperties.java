@@ -36,54 +36,55 @@
 package org.geosdi.geoplatform.gui.client.model.memento.save.storage;
 
 import org.geosdi.geoplatform.gui.action.ISave;
-import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoSave;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoFolderOriginalProperties extends AbstractMementoOriginalProperties<FolderTreeNode> {
+public abstract class AbstractMementoOriginalProperties<T extends GPBeanTreeModel> extends AbstractMementoSave<T> {
 
-    private static final long serialVersionUID = 4900306329179765474L;
+    private static final long serialVersionUID = -5677029546026289913L;
+    private String name;
+    private boolean checked;
 
-    public MementoFolderOriginalProperties() {
+    public AbstractMementoOriginalProperties() {
     }
 
-    public MementoFolderOriginalProperties(ISave saveAction) {
+    public AbstractMementoOriginalProperties(ISave saveAction) {
         super(saveAction);
     }
 
-    @Override
-    public void convertMementoToWs() {
-        super.convertMementoToWs();
-        super.setName(super.getRefBaseElement().getLabel());
-        super.setChecked(super.getRefBaseElement().isChecked());
+    public abstract boolean isChanged();
+
+    public abstract void copyOriginalProperties(GPBeanTreeModel layer);
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public boolean isChanged() {
-        boolean condition = false;
-        if (!this.getName().equals(super.getRefBaseElement().getLabel()) ||
-                super.isChecked() != super.getRefBaseElement().isChecked()) {
-            condition = true;
-        }
-        return condition;
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Override
-    public void copyOriginalProperties(GPBeanTreeModel bean) {
-        if (bean instanceof FolderTreeNode) {
-            FolderTreeNode folder = (FolderTreeNode) bean;
-            super.setName(folder.getLabel());
-            super.setChecked(folder.isChecked());
-            super.setChecked(folder.isChecked());
-//            System.out.println("Check setted: " + memento.isChecked());            
-            super.setRefBaseElement(folder);
-        } else {
-            throw new IllegalArgumentException("The method copyOriginalProperties "
-                    + "in MementoFolderOriginalProperties class accepts only FolderTreeNode instances");
-        }
+    /**
+     * @return the checked
+     */
+    public boolean isChecked() {
+        return checked;
     }
 
+    /**
+     * @param checked the checked to set
+     */
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
 }

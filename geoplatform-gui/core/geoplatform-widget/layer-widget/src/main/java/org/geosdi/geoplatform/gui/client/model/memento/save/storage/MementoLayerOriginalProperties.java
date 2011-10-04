@@ -36,12 +36,8 @@
 package org.geosdi.geoplatform.gui.client.model.memento.save.storage;
 
 import java.util.ArrayList;
-import java.util.ListIterator;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
-import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
@@ -50,8 +46,7 @@ import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MementoLayerOriginalProperties
-        extends MementoOriginalProperties<GPLayerTreeModel> {
+public class MementoLayerOriginalProperties extends AbstractMementoOriginalProperties<GPLayerTreeModel> {
 
     private static final long serialVersionUID = 2399513531544205577L;
     private float opacity;
@@ -105,8 +100,8 @@ public class MementoLayerOriginalProperties
     @Override
     public boolean isChanged() {
         boolean condition = false;
-        if ((super.getName() == null && super.getRefBaseElement() != null)
-                || !super.getName().equals(super.getRefBaseElement().getAlias())
+        if ((this.getName() == null && super.getRefBaseElement() != null)
+                || !this.getName().equals(super.getRefBaseElement().getAlias())
                 || super.isChecked() != super.getRefBaseElement().isChecked()) {
             condition = true;
         } else if (super.getRefBaseElement() instanceof RasterTreeNode
@@ -134,20 +129,6 @@ public class MementoLayerOriginalProperties
         } else {
             throw new IllegalArgumentException("The method copyOriginalProperties "
                     + "in MementoLayerOriginalProperties class accepts only GPLayerTreeModel instances");
-        }
-    }
-
-    @Override
-    public void cleanCacheFromSaveAddOperation() {
-        IMemento<ISave> memento = null;
-        for (ListIterator<IMemento<ISave>> it = GPMementoSaveCache.getInstance().listIterator(); it.hasNext();) {
-            memento = it.next();
-            if (memento instanceof MementoSaveAddedLayers
-                    && ((MementoSaveAddedLayers) memento).getRefBaseElement().equals(super.getRefBaseElement())) {
-                System.out.println("Ho trovato la creazione");
-                GPMementoSaveCache.getInstance().remove(memento);
-                break;
-            }
         }
     }
 }

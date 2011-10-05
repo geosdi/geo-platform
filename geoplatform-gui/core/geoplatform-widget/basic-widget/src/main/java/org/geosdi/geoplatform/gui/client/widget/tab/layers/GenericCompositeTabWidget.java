@@ -36,17 +36,16 @@
 package org.geosdi.geoplatform.gui.client.widget.tab.layers;
 
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabWidget;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GenericLayerTabWidget<M> extends GeoPlatformTabWidget {
+public abstract class GenericCompositeTabWidget<M> extends GeoPlatformTabWidget {
    
     
-    public GenericLayerTabWidget() {
+    public GenericCompositeTabWidget() {
         addComponents();
     }
     

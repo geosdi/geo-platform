@@ -76,9 +76,7 @@ public class MementoFolderOriginalProperties extends AbstractMementoOriginalProp
         if (bean instanceof FolderTreeNode) {
             FolderTreeNode folder = (FolderTreeNode) bean;
             super.setName(folder.getLabel());
-            super.setChecked(folder.isChecked());
-            super.setChecked(folder.isChecked());
-//            System.out.println("Check setted: " + memento.isChecked());            
+            super.setChecked(folder.isChecked());      
             super.setRefBaseElement(folder);
         } else {
             throw new IllegalArgumentException("The method copyOriginalProperties "

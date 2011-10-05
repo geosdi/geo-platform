@@ -54,134 +54,130 @@ import org.gwtopenmaps.openlayers.client.event.MapClickListener;
  */
 public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
-	private GeoPlatformMap mapWidget;
-	private ReverseGeocodingMarker rGMarker = new ReverseGeocodingMarker();
-	private PopupMapWidget popupWidget = new PopupMapWidget();
-	private MapClickListener listener;
-	private LonLat lonlat;
-	private ReverseGeocodingDispatchEvent event;
+    private GeoPlatformMap mapWidget;
+    private ReverseGeocodingMarker rGMarker = new ReverseGeocodingMarker();
+    private PopupMapWidget popupWidget = new PopupMapWidget();
+    private MapClickListener listener;
+    private LonLat lonlat;
+    private ReverseGeocodingDispatchEvent event;
+    private boolean busy;
 
-	private boolean busy;
+    public ReverseGeocodingWidget(GeoPlatformMap theMapWidget) {
+        this.mapWidget = theMapWidget;
+        GPHandlerManager.addHandler(ReverseGeocodingEvent.TYPE, this);
+        this.createListener();
+        this.event = new ReverseGeocodingDispatchEvent(this);
+    }
 
-	public ReverseGeocodingWidget(GeoPlatformMap theMapWidget) {
-		this.mapWidget = theMapWidget;
-		GPHandlerManager.addHandler(ReverseGeocodingEvent.TYPE, this);
-		this.createListener();
-		this.event = new ReverseGeocodingDispatchEvent(this);
-	}
+    @Override
+    public void register() {
+        GeoPlatformMessage.infoMessage("Reverse Geocoding",
+                "Click on the map to have Information.");
+        this.mapWidget.getMap().addLayer(this.rGMarker.getMarkerLayer());
+        this.mapWidget.getMap().addMapClickListener(listener);
+    }
 
-	@Override
-	public void register() {
-		GeoPlatformMessage.infoMessage("Reverse Geocoding",
-				"Click on the map to have Information.");
-		this.mapWidget.getMap().addLayer(this.rGMarker.getMarkerLayer());
-		this.mapWidget.getMap().addMapClickListener(listener);
-	}
+    @Override
+    public void unregister() {
+        GeoPlatformMessage.infoMessage("Reverse Geocoding",
+                "Reverse Geocoding Control Deactivated.");
+        this.clearWidgetStatus();
+    }
 
-	@Override
-	public void unregister() {
-		GeoPlatformMessage.infoMessage("Reverse Geocoding",
-				"Reverse Geocoding Control Deactivated.");
-		this.clearWidgetStatus();
-	}
+    /**
+     * Clear Widget : 1) Remove Marker Layer from Map 2) MapClickListener from
+     * Map 3) Popup from Map 4) Marker from rGMarcker
+     * 
+     */
+    public void clearWidgetStatus() {
+        this.mapWidget.getMap().removeLayer(this.rGMarker.getMarkerLayer(),
+                false);
+        this.mapWidget.getMap().removeMapClickListener(listener);
+        this.removeMapElements();
+    }
 
-	/**
-	 * Clear Widget : 1) Remove Marker Layer from Map 2) MapClickListener from
-	 * Map 3) Popup from Map 4) Marker from rGMarcker
-	 * 
-	 */
-	public void clearWidgetStatus() {
-		this.mapWidget.getMap().removeLayer(this.rGMarker.getMarkerLayer(),
-				false);
-		this.mapWidget.getMap().removeMapClickListener(listener);
-		this.removeMapElements();
-	}
+    private void removeMapElements() {
+        this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
+        this.rGMarker.removeMarker();
+    }
 
-	private void removeMapElements() {
-		this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
-		this.rGMarker.removeMarker();
-	}
+    private void createListener() {
+        this.listener = new MapClickListener() {
 
-	private void createListener() {
-		this.listener = new MapClickListener() {
+            @Override
+            public void onClick(MapClickEvent mapClickEvent) {
+                if (!busy) {
+                    busy = true;
+                    removeMapElements();
+                    lonlat = mapClickEvent.getLonLat();
+                    sendRequest();
+                } else {
+                    GeoPlatformMessage.alertMessage("Reverse Geocoding",
+                            "Server busy.");
 
-			@Override
-			public void onClick(MapClickEvent mapClickEvent) {
-				if (!busy) {
-					busy = true;
-					removeMapElements();
-					lonlat = mapClickEvent.getLonLat();
-					sendRequest();
-				} else {
-					GeoPlatformMessage.alertMessage("Reverse Geocoding",
-							"Server busy.");
+                }
+            }
+        };
+    }
 
-				}
-			}
-		};
-	}
+    /**
+     * Send Request to Reverse Geocoding Service
+     */
+    private void sendRequest() {
+        this.rGMarker.addMarker(this.lonlat, this.mapWidget.getMap());
+        popupWidget.setLonLat(this.lonlat);
+        this.popupWidget.setContentHTML(PopupTemplate.IMAGE_LOADING.toString()
+                + PopupTemplate.MESSAGE_LOADING.toString());
+        this.mapWidget.getMap().addPopup(popupWidget.getPopup());
 
-	/**
-	 * Send Request to Reverse Geocoding Service
-	 */
-	private void sendRequest() {
-		this.rGMarker.addMarker(this.lonlat, this.mapWidget.getMap());
-		popupWidget.setLonLat(this.lonlat);
-		this.popupWidget.setContentHTML(PopupTemplate.IMAGE_LOADING.toString()
-				+ PopupTemplate.MESSAGE_LOADING.toString());
-		this.mapWidget.getMap().addPopup(popupWidget.getPopup());
+        GPHandlerManager.fireEvent(event);
+    }
 
-		GPHandlerManager.fireEvent(event);
-	}
-        
-        public void sendRequest(LonLat theLonLat) {
-            this.lonlat = theLonLat;
-		this.rGMarker.addMarker(this.lonlat, this.mapWidget.getMap());
+    public void sendRequest(LonLat theLonLat) {
+        this.lonlat = theLonLat;
+        this.rGMarker.addMarker(this.lonlat, this.mapWidget.getMap());
 //		popupWidget.setLonLat(this.lonlat);
 //		this.popupWidget.setContentHTML(PopupTemplate.IMAGE_LOADING.toString()
 //				+ PopupTemplate.MESSAGE_LOADING.toString());
 //		this.mapWidget.getMap().addPopup(popupWidget.getPopup());
 
 //		GPHandlerManager.fireEvent(event);
-	}
+    }
 
-	/**
-	 * 
-	 * @param location
-	 */
-	public void onRequestSuccess(String location) {
-		this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
-		if (!location.equalsIgnoreCase(PopupTemplate.ZERO_RESULTS.toString()))
-			this.popupWidget.setContentHTML(PopupTemplate.IMAGE_RESULT_FOUND
-					.toString() + "<br />" + location);
-		else
-			this.popupWidget
-					.setContentHTML(PopupTemplate.IMAGE_RESULT_NOT_FOUND
-							.toString()
-							+ "<br /> "
-							+ PopupTemplate.ZERO_RESULTS.toString());
+    /**
+     * 
+     * @param location
+     */
+    public void onRequestSuccess(String location) {
+        this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
+        if (!location.equalsIgnoreCase(PopupTemplate.ZERO_RESULTS.toString())) {
+            this.popupWidget.setContentHTML(PopupTemplate.IMAGE_RESULT_FOUND.toString() + "<br />" + location);
+        } else {
+            this.popupWidget.setContentHTML(PopupTemplate.IMAGE_RESULT_NOT_FOUND.toString()
+                    + "<br /> "
+                    + PopupTemplate.ZERO_RESULTS.toString());
+        }
 
-		this.mapWidget.getMap().addPopup(this.popupWidget.getPopup());
-		this.busy = false;
-	}
+        this.mapWidget.getMap().addPopup(this.popupWidget.getPopup());
+        this.busy = false;
+    }
 
-	/**
-	 * 
-	 * @param message
-	 */
-	public void onRequestFailure(String message) {
-		this.popupWidget.setContentHTML(PopupTemplate.IMAGE_SERVICE_ERROR
-				.toString() + "<br />" + message);
-		this.mapWidget.getMap().addPopupExclusive(this.popupWidget.getPopup());
-		this.busy = false;
-	}
+    /**
+     * 
+     * @param message
+     */
+    public void onRequestFailure(String message) {
+        this.popupWidget.setContentHTML(PopupTemplate.IMAGE_SERVICE_ERROR.toString() + "<br />" + message);
+        this.mapWidget.getMap().addPopupExclusive(this.popupWidget.getPopup());
+        this.busy = false;
+    }
 
-	/**
-	 * @return the lonlat with the Map Projection
-	 */
-	public LonLat getLonlat() {
-		LonLat lt = new LonLat(this.lonlat.lon(), this.lonlat.lat());
-		lt.transform(this.mapWidget.getMap().getProjection(), "EPSG:4326");
-		return lt;
-	}
+    /**
+     * @return the lonlat with the Map Projection
+     */
+    public LonLat getLonlat() {
+        LonLat lt = new LonLat(this.lonlat.lon(), this.lonlat.lat());
+        lt.transform(this.mapWidget.getMap().getProjection(), "EPSG:4326");
+        return lt;
+    }
 }

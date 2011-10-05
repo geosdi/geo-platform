@@ -137,7 +137,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
         visitor.visitRaster(this);
     }
 
-    /*
+        /*
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()
@@ -145,7 +145,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
     @Override
     public String toString() {
         return "RasterTreeNode [getLabel()=" + getLabel() + ", styles="
-                + styles + ", getDataSource()=" + getDataSource()
+                + styles.size() + ", getDataSource()=" + getDataSource()
                 + ", getCrs()=" + getCrs() + ", getBbox()=" + getBbox()
                 + ", getLayerType()=" + getLayerType() + ", getzIndex()="
                 + getzIndex() + "]";

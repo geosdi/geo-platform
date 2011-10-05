@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab;
 
-import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericLayerTabWidget;
+import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericCompositeTabWidget;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class LayersTabWidget extends GenericLayerTabWidget<GPLayerBean> {
+public class LayersTabWidget extends GenericCompositeTabWidget<GPLayerBean> {
 
     private DisplayLayersTabItem displayItem;
     private LayersInfoTabItem infoItem;

@@ -53,6 +53,7 @@ import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -136,13 +137,17 @@ public class GPDynamicTreeContextMenu extends Menu {
         
         this.tree.addListener(Events.OnContextMenu, new Listener() {
 
+            private Menu emptyMenu = new Menu();
+            
             @Override
             public void handleEvent(BaseEvent be) {
                 GPBeanTreeModel selectedItem = tree.getSelectionModel().getSelectedItem();
                 if (selectedItem instanceof FolderTreeNode) {
                     tree.setContextMenu(folderContextMenu);
-                } else {
+                } else if (selectedItem instanceof GPLayerTreeModel){
                     tree.setContextMenu(layerContextMenu);
+                } else {
+                    tree.setContextMenu(emptyMenu);
                 }
             }
         });

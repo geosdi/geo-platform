@@ -11,7 +11,7 @@
 		class="org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool">
         <property name="id" value="layerMenu" />
         <property name="text" value="Layers" />
-        <property name="checked" value="false" />
+        <property name="checked" value="true" />
         <property name="enabled" value="true" />
         <property name="order" value="30" />
     </bean>

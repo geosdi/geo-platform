@@ -83,6 +83,7 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
         IMemento<ISave> precedingMemento = null;
         precedingMemento = GPMementoSaveCache.getInstance().peekLast();
         boolean isAllowedNewMemento = true;
+        GPMementoSaveCache.getInstance().cleanOperationsRefToDeletedElement(element);
         MementoSaveRemove mementoSaveRemove = null;
         if (precedingMemento != null && precedingMemento instanceof MementoSaveAddedFolder
                 && ((MementoSaveAddedFolder) precedingMemento).getAddedFolder().getRefBaseElement().equals(element)) {
@@ -98,7 +99,6 @@ public abstract class DeleteRequestHandler implements ISave<MementoSaveRemove> {
             mementoSaveRemove.setDescendantMap(this.deleteVisitor.getFolderDescendantMap());
             GPMementoSaveCache.getInstance().add(mementoSaveRemove);
         }
-        GPMementoSaveCache.getInstance().cleanOperationsRefToDeletedElement(element);
         displayMessage();
     }
 

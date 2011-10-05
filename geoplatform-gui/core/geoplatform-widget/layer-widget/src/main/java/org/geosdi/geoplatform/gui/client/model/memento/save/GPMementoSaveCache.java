@@ -35,10 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento.save;
 
+import com.extjs.gxt.ui.client.data.ModelData;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.AbstractMementoOriginalProperties;
 import org.geosdi.geoplatform.gui.model.memento.GPCache;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
@@ -88,7 +91,7 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
             /*System.out.println("Event SAVE_CACHE_NOT_EMPTY notified to "
             + this.observable.countObservers() + " observers");*/
         }
-        System.out.println("GPLayerSaveCache: added " + memento.getClass().getName());
+//        System.out.println("GPLayerSaveCache: added " + memento.getClass().getName());
         return super.add(memento);
     }
 
@@ -128,6 +131,12 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
 
     public void cleanOperationsRefToDeletedElement(GPBeanTreeModel gpBeanTreeModel) {
         this.modifiedLayersMap.remove(gpBeanTreeModel);
+        if(gpBeanTreeModel instanceof FolderTreeNode){
+            FolderTreeNode folder = (FolderTreeNode)gpBeanTreeModel;
+            for (ModelData element : folder.getChildren()) {
+                this.cleanOperationsRefToDeletedElement((GPBeanTreeModel)element);
+            }
+        }
     }
 
     private void prepareLayerPropertiesModify() {

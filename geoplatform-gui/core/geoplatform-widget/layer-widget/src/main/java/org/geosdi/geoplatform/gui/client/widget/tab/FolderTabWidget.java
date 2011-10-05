@@ -36,13 +36,13 @@
 package org.geosdi.geoplatform.gui.client.widget.tab;
 
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericLayerTabWidget;
+import org.geosdi.geoplatform.gui.client.widget.tab.layers.GenericCompositeTabWidget;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class FolderTabWidget extends GenericLayerTabWidget<FolderTreeNode> {
+public class FolderTabWidget extends GenericCompositeTabWidget<FolderTreeNode> {
 
     private FolderInfoTabItem infoItem;
 

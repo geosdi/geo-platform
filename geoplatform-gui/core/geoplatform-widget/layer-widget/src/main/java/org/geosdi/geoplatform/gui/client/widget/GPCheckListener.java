@@ -73,11 +73,12 @@ public class GPCheckListener implements Listener<TreePanelEvent<GPBeanTreeModel>
     public void handleEvent(TreePanelEvent<GPBeanTreeModel> be) {
         //System.out.println("Events.CheckChange from: " + be.getItem().getLabel());
         boolean isCacheable = this.visitorDisplay.isCacheableCheck();
-        be.getItem().accept(this.visitorDisplay);
-        if (isCacheable && !(be.getItem() instanceof GPRootTreeNode)) {
-            be.getItem().setChecked(!be.getItem().isChecked());
-            GPMementoSaveCache.getInstance().copyOriginalProperties(be.getItem());
-            be.getItem().setChecked(!be.getItem().isChecked());
+        GPBeanTreeModel element = be.getItem();
+        element.accept(this.visitorDisplay);
+        if (isCacheable && !(element instanceof GPRootTreeNode)) {
+            be.getItem().setChecked(!element.isChecked());
+            GPMementoSaveCache.getInstance().copyOriginalProperties(element);
+            be.getItem().setChecked(!element.isChecked());
         }
     }
 

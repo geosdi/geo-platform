@@ -99,7 +99,7 @@ public class VisitorDeleteElement extends AbstractVisitTree implements IVisitor 
         this.rootElement.setzIndex(this.rootElement.getzIndex() - 1 - numberOfDescendant);
         this.tmpElement = this.rootElement;
         this.tmpIndex = this.tmpElement.getzIndex();
-        System.out.println("this.tmpZindex: " + this.tmpIndex);
+//        System.out.println("this.tmpZindex: " + this.tmpIndex);
         while (!this.isPreorderExitCondition()) {
             this.tmpElement.accept(this);
             this.tmpElement = super.getNextUnvisitedElement(this.tmpElement);

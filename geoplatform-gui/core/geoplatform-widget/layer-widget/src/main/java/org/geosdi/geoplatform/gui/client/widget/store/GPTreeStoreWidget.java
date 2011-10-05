@@ -71,7 +71,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
     private FeatureInfoAddLayersServer featureInfoAddLayersEvent = new FeatureInfoAddLayersServer();
     private DeselectGridElementEvent deselectEvent = new DeselectGridElementEvent();
     private VisitorAddElement visitorAdd = new VisitorAddElement();
-    private PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
+
     //
     private final static int LAYERS_FROM_CAPABILITIES = 1;
     private final static int LAYERS_FROM_PUBLISHER = 2;

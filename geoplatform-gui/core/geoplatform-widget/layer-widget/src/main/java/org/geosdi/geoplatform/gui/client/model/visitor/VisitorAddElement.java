@@ -67,7 +67,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
     }
 
     /**
-     *  @param If possible is better for CC reasons to use consturctor with parm root.
+     *  @param If possible is better for CC reasons to use constructor with parm root.
      */
     public VisitorAddElement() {
     }
@@ -79,7 +79,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
         this.endPosition = super.getNextUnvisitedElement(newElement);
         this.rootElement = super.findRootElement(parentDestination);
         this.preorderTraversal();
-        this.folderDescendantMap.clear();
+        this.folderDescendantMap = new HashMap<FolderTreeNode, Integer>();
         this.updateNumberOfDescendants(parentDestination);
     }
 
@@ -96,7 +96,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
             this.rootElement = super.findRootElement(parentDestination);
         }
         this.preorderTraversal(listNewElements.size());
-        this.folderDescendantMap.clear();
+        this.folderDescendantMap = new HashMap<FolderTreeNode, Integer>();
         this.updateNumberOfDescendants(parentDestination, listNewElements.size());
     }
 

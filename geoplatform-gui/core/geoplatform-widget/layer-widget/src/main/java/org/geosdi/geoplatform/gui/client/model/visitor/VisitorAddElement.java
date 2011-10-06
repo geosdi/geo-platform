@@ -60,7 +60,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
     private int tmpIndex;
     private GPRootTreeNode rootElement;
     private boolean stopIterating;
-    private Map<FolderTreeNode, Integer> folderDescendantMap = new HashMap<FolderTreeNode, Integer>();
+    private Map<FolderTreeNode, Integer> folderDescendantMap;
 
     public VisitorAddElement(GPRootTreeNode root) {
         this.rootElement = root;
@@ -122,6 +122,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
     private void preorderTraversal() {
         this.preorderTraversal(1);
     }
+
     private void preorderTraversal(int numElementsAdded) {
         assert (this.rootElement != null) : "VisitorAddElement on preorderTraversal: impossible to visit tree, the root element is null";
         this.rootElement.setzIndex(this.rootElement.getzIndex() + numElementsAdded);

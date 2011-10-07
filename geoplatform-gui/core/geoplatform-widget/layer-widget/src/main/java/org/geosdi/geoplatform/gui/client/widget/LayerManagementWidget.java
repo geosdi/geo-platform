@@ -91,18 +91,22 @@ public class LayerManagementWidget extends ContentPanel {
 
         //This code fix a scroll problem on IE9
         treePanel.addScrollListener(new ScrollListener() {
-            int posV = 0;
 
-            @Override
-            public void handleEvent(ComponentEvent e) {
-                if(posV > 9 && treePanel.getVScrollPosition() == 0){
-                    treePanel.setVScrollPosition(posV);
-                }
-                super.handleEvent(e);
-                posV = treePanel.getVScrollPosition();
-            }
+           int posV = 0;
 
-        });
+           /**
+            * Fires when a component is scrolled.
+            * 
+            * @param ce the component event
+            */
+           @Override
+           public void widgetScrolled(ComponentEvent ce) {
+               if (posV > 9 && treePanel.getVScrollPosition() == 0) {
+                   treePanel.setVScrollPosition(posV);
+               }
+               posV = treePanel.getVScrollPosition();
+           }
+       });
         this.layerTree = new LayerTreeWidget(treePanel);
         //this.layerTree = new LayerAsyncTreeWidget();
 

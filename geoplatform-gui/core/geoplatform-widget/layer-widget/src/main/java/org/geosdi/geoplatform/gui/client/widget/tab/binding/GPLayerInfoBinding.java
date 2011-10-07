@@ -165,7 +165,6 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
             GPMementoSaveCache.getInstance().copyOriginalProperties((GPLayerTreeModel) model);
             ((GPLayerBean) model).setAlias(val != null ? (String) val : "");
             WidgetPropertiesHandlerManager.fireEvent(labelEvent);
-            System.out.println("Duplica??");
         }
     }
 }

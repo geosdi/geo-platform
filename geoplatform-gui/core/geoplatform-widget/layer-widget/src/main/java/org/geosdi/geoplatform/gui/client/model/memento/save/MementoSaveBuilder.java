@@ -50,6 +50,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolde
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -85,6 +86,8 @@ public class MementoSaveBuilder {
             if (beanModel instanceof RasterTreeNode) {
                 layer = ((RasterTreeNode) beanModel);
                 memento = new MementoRaster();
+                List<String> stringList = convertStyles(((RasterTreeNode) beanModel).getStyles());
+                ((MementoRaster)memento).setStyles(stringList);
             } else if (beanModel instanceof VectorTreeNode) {
                 layer = ((VectorTreeNode) beanModel);
                 memento = new MementoVector();
@@ -95,6 +98,14 @@ public class MementoSaveBuilder {
         }
         System.out.println("Memento layer list size: " + mementoLayerList.size());
         return mementoLayerList;
+    }
+    
+    private static List<String> convertStyles(ArrayList<GPStyleStringBeanModel> styles){
+        List<String> stringList = new ArrayList<String>();
+        for (GPStyleStringBeanModel gPStyleStringBeanModel : styles) {
+            stringList.add(gPStyleStringBeanModel.getStyleString());
+        }
+        return stringList;
     }
 
     private static void convertToMementoLayerFromLayerModel(AbstractMementoLayer memento, GPLayerTreeModel layer) {

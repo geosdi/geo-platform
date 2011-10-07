@@ -102,6 +102,7 @@ public class GPLayerStyleBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         if (raster.getStyles().isEmpty()) {
             this.comboBox.setEnabled(false);
         } else {
+            this.comboBox.setEnabled(true);
             this.comboBoxStore.add(raster.getStyles());
             this.comboBox.setValue(raster.getStyles().get(0));
         }

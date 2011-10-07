@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
 
+import java.util.List;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.observable.Observable;
@@ -48,6 +49,7 @@ public class MementoRaster extends AbstractMementoLayer<RasterTreeNode>
         implements Observer {
 
     private static final long serialVersionUID = 4343601977419367986L;
+    private List<String> styles;
 
     public MementoRaster() {
     }
@@ -65,5 +67,19 @@ public class MementoRaster extends AbstractMementoLayer<RasterTreeNode>
     @Override
     public void update(Observable o, Object arg) {
         super.setIdBaseElement((Long) arg);
+    }
+
+    /**
+     * @return the styles
+     */
+    public List<String> getStyles() {
+        return styles;
+    }
+
+    /**
+     * @param styles the styles to set
+     */
+    public void setStyles(List<String> styles) {
+        this.styles = styles;
     }
 }

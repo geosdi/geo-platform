@@ -122,7 +122,7 @@ public class DTOConverter {
         dto.setChecked(memento.isChecked());
         dto.setId(memento.getIdBaseElement());
         dto.setOpacity(memento.getOpacity());
-        ArrayList<String> styleList = new ArrayList<String>();
+        List<String> styleList = new ArrayList<String>();
         for (GPStyleStringBeanModel beanModel : memento.getStyleList()) {
             styleList.add(beanModel.getStyleString());
         }
@@ -253,6 +253,7 @@ public class DTOConverter {
 
                 layer = new GPRasterLayer();
                 layer.setLayerType(GPLayerType.RASTER);
+                ((GPRasterLayer)layer).setStyles(((MementoRaster)memento).getStyles());
                 // layer.setLayerInfo();???
             } else if (memento instanceof MementoVector) {
 //                MementoVector mementoVector = (MementoVector) memento;

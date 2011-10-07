@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.ScrollListener;
 import com.extjs.gxt.ui.client.event.WidgetListener;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
@@ -88,6 +89,20 @@ public class LayerManagementWidget extends ContentPanel {
         treePanel.setScrollMode(Scroll.AUTOY);
         treePanel.setHeaderVisible(false);
 
+        //This code fix a scroll problem on IE9
+        treePanel.addScrollListener(new ScrollListener() {
+            int posV = 0;
+
+            @Override
+            public void handleEvent(ComponentEvent e) {
+                if(posV > 9 && treePanel.getVScrollPosition() == 0){
+                    treePanel.setVScrollPosition(posV);
+                }
+                super.handleEvent(e);
+                posV = treePanel.getVScrollPosition();
+            }
+
+        });
         this.layerTree = new LayerTreeWidget(treePanel);
         //this.layerTree = new LayerAsyncTreeWidget();
 

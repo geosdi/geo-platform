@@ -35,12 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab.binding;
 
+import com.extjs.gxt.ui.client.data.ModelData;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldEvent;
+import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.google.gwt.event.dom.client.KeyCodes;
 import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
@@ -103,6 +107,18 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         aliasField = new TextField<String>();
         aliasField.setName(GPLayerKeyValue.ALIAS.toString());
         aliasField.setFieldLabel("Alias");
+        aliasField.setFireChangeEventOnSetValue(true);
+        aliasField.addKeyListener(new KeyListener() {
+
+            @Override
+            public void componentKeyDown(ComponentEvent event) {
+                super.componentKeyDown(event);
+                if (event.getKeyCode() == KeyCodes.KEY_ENTER
+                        && !aliasField.getValue().isEmpty()) {
+                    getModel().setAlias(aliasField.getValue());
+                }
+            }
+        });
 
         fp.add(aliasField);
 
@@ -146,9 +162,10 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
         @Override
         public void setModelProperty(Object val) {
             //Copying the value on memento before changes
-            GPMementoSaveCache.getInstance().copyOriginalProperties((GPLayerTreeModel)model);
+            GPMementoSaveCache.getInstance().copyOriginalProperties((GPLayerTreeModel) model);
             ((GPLayerBean) model).setAlias(val != null ? (String) val : "");
             WidgetPropertiesHandlerManager.fireEvent(labelEvent);
+            System.out.println("Duplica??");
         }
     }
 }

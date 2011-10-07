@@ -35,10 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab.binding;
 
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.google.gwt.event.dom.client.KeyCodes;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.puregwt.decorator.event.TreeChangeLabelEvent;
@@ -65,6 +68,18 @@ public class GPFolderInfoBinding extends GeoPlatformBindingWidget<FolderTreeNode
         labelField = new TextField<String>();
         labelField.setName(GPFolderKeyValue.LABEL.toString());
         labelField.setFieldLabel("Label");
+        labelField.setFireChangeEventOnSetValue(true);
+        labelField.addKeyListener(new KeyListener() {
+
+            @Override
+            public void componentKeyDown(ComponentEvent event) {
+                super.componentKeyDown(event);
+                if (event.getKeyCode() == KeyCodes.KEY_ENTER &&
+                        !labelField.getValue().isEmpty()) {
+                    getModel().setLabel(labelField.getValue());
+                }
+            }
+        });
         fp.add(labelField);
         folderInfo = new Label();
         getModel();

@@ -51,6 +51,7 @@ import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveBuilder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoFolder;
@@ -224,6 +225,10 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
     public void showForm() {
         if (!isInitialized()) {
             super.init();
+        }
+        GPBeanTreeModel selectedItem = this.tree.getSelectionModel().getSelectedItem();
+        if (selectedItem instanceof GPRootTreeNode) {
+            this.tree.setExpanded(selectedItem, true, false);
         }
         this.expander.checkNodeState();
     }

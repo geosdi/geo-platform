@@ -10,12 +10,12 @@
 
     <context:annotation-config />
 
-    <bean name="aboutGeoPlatform"
+    <bean name="manageUsers"
         class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
-        <property name="id" value="aboutGeoPlatform" />
-        <property name="text" value="About" />
+        <property name="id" value="manageUsers" />
+        <property name="text" value="Manage Users" />
         <property name="enabled" value="true" />
-        <property name="order" value="10" />
-    </bean>                
+        <property name="order" value="20" />        
+    </bean>
 
 </beans>

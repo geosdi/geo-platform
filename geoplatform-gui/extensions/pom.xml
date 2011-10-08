@@ -95,7 +95,6 @@
         <module>gp-publisher-widget</module>
         <module>oauth2-widget</module>
         <module>layer-time</module>
-        <module>user-widget</module>
     </modules>
 
 

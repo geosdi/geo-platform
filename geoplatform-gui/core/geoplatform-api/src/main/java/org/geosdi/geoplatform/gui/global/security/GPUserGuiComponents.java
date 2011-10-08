@@ -40,7 +40,7 @@ public class GPUserGuiComponents {
      * @return UserName
      */
     public String getUserName() {
-        return this.userDetail.getUserName();
+        return this.userDetail.getUsername();
     }
 
     /**

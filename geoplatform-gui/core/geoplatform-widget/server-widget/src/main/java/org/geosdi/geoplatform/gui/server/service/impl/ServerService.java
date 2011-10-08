@@ -62,7 +62,8 @@ public class ServerService implements IServerService {
     private GeoPlatformService geoPlatformServiceClient;
 
     @Override
-    public List<String> getUserAuthorities(HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public List<String> getUserAuthorities(HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
         GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
         List<String> userAuthorities = null;
         try {

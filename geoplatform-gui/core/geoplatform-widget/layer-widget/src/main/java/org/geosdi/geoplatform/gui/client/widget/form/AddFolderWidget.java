@@ -133,7 +133,8 @@ public class AddFolderWidget extends GPTreeFormWidget<FolderTreeNode>
 
             @Override
             public void componentKeyPress(ComponentEvent event) {
-                if ((event.getKeyCode() == 13) && (folderText.getValue() != null)
+                if ((event.getKeyCode() == KeyCodes.KEY_ENTER) 
+                        && (folderText.getValue() != null)
                         && (folderText.getValue().length() > 0)) {
                     execute();
                 }

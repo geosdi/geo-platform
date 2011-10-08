@@ -274,14 +274,15 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
             int newNumberOfDescendants = descendantsMap.get(folder.getId());
             folder.setNumberOfDescendants(newNumberOfDescendants);
         }
-        GPFolder[] foldersUpdated = merge(matchingFolders.toArray(new GPFolder[matchingFolders.size()]));
+        GPFolder[] foldersUpdated = this.merge(matchingFolders.toArray(
+                new GPFolder[matchingFolders.size()]));
 
         // Check the update
         for (int ind = 0; ind < foldersUpdated.length; ind++) {
             long id = foldersUpdated[ind].getId();
             int numberOfDescendants = foldersUpdated[ind].getNumberOfDescendants();
-            logger.trace("\n*** Number of Descentans of the UPDATED GPFolder: {} (OLD Descentans = {}) ***",
-                    numberOfDescendants, oldDescendants[ind]);
+            logger.info("\n*** Number of Descentans of the UPDATED GPFolder \"{}\": {} (OLD Descentans = {}) ***",
+                    new Object[]{foldersUpdated[ind].getName(), numberOfDescendants, oldDescendants[ind]});
             if (descendantsMap.get(id) != numberOfDescendants) {
                 return false;
             }

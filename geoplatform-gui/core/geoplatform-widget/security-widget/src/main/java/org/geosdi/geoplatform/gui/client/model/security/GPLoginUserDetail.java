@@ -15,7 +15,7 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
 public class GPLoginUserDetail implements IGPUserDetail {
 
     private static final long serialVersionUID = -7265573728577702116L;
-    private String userName;
+    private String username;
     private String name;
     private String email;
     private Map<String, Boolean> componentPermission;
@@ -25,13 +25,13 @@ public class GPLoginUserDetail implements IGPUserDetail {
     }
 
     @Override
-    public String getUserName() {
-        return this.userName;
+    public String getUsername() {
+        return this.username;
     }
 
     @Override
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**

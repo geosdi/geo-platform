@@ -86,15 +86,16 @@
         </pluginManagement>
     </build>
     
-    <modules>
+    <modules>		
         <module>basic-widget</module>
-        <module>security-widget</module>
-        <module>geocoding-widget</module>
-        <module>routing-widget</module>
-        <module>map-widget</module>
-        <module>layer-widget</module>
         <module>finder-widget</module>
+        <module>geocoding-widget</module>
+        <module>layer-widget</module>
+        <module>map-widget</module>
+        <module>routing-widget</module>		
+        <module>security-widget</module>
         <module>server-widget</module>
+		<module>user-widget</module>
     </modules>
     
 </project>

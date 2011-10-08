@@ -146,7 +146,6 @@
         </repository>
     </repositories>
 
-
     <modules>
         <module>geoplatform-services</module>
         <module>geoplatform-gui</module>
@@ -190,6 +189,19 @@
                 <role>Java Developer</role>
                 <role>Project Management Committee (PMC) Member</role>
             </roles>
+        </developer>
+        <developer>
+            <name>Vincenzo Monteverde</name>
+            <id>vincenzo.monteverde</id>
+            <email>vincenzo.monteverde@geosdi.org</email>
+            <organization>geoSDI</organization>
+            <roles>
+                <role>Java Developer</role>
+                <role>Project Management Committee (PMC) Member</role>
+            </roles>
+            <properties>
+                <openPGP>0xB25F4B38</openPGP>
+            </properties>
         </developer>
     </developers>
 

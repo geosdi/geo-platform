@@ -49,7 +49,7 @@ public class GPUserConverter {
     public IGPUserDetail convertUserToDTO(GPUser user) {
         IGPUserDetail userDetail = new GPLoginUserDetail();
         userDetail.setName(user.getUsername());
-        userDetail.setUserName(user.getUsername());
+        userDetail.setUsername(user.getUsername());
         userDetail.setEmail(user.getEmailAddress());
         return userDetail;
     }

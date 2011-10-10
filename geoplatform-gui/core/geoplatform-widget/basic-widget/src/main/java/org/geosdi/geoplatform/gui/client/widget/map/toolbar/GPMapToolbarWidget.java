@@ -107,24 +107,26 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
             } else {
                 GeoPlatformToolbarAction action = ToolbarActionRegistar.get(
                         id, geoPlatformMap);
-                
-                action.setId(id);
 
-                if (action instanceof ToolbarApplicationAction) {
-                    this.addApplicationButton((ToolbarApplicationAction) action);
-                }
+                if (action != null) {
+                    action.setId(id);
 
-                if (action instanceof ToolbarMapAction) {
-                    if (((ActionClientTool) tool).getType().equals(ActionClientTool.TOGGLE)) {
-                        this.addMapToggleButton((ToolbarMapAction) action);
-                    } else {
-                        this.addMapButton((ToolbarMapAction) action);
+                    if (action instanceof ToolbarApplicationAction) {
+                        this.addApplicationButton((ToolbarApplicationAction) action);
                     }
-                }
 
-                action.setEnabled(((ActionClientTool) tool).isEnabled());
+                    if (action instanceof ToolbarMapAction) {
+                        if (((ActionClientTool) tool).getType().equals(ActionClientTool.TOGGLE)) {
+                            this.addMapToggleButton((ToolbarMapAction) action);
+                        } else {
+                            this.addMapButton((ToolbarMapAction) action);
+                        }
+                    }
+
+                    action.setEnabled(((ActionClientTool) tool).isEnabled());
 //                action.setEnabled(GPUserGuiComponents.getInstance().getPermissionForComponent(
 //                        id));
+                }
             }
         }
     }

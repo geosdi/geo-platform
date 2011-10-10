@@ -36,10 +36,14 @@
 package org.geosdi.geoplatform.gui.client.widget.map.event;
 
 import com.google.gwt.event.shared.EventHandler;
+import org.gwtopenmaps.openlayers.client.LonLat;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ * 
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email michele.santomauro@geosdi.org
  * 
  */
 public interface ReverseGeocodingEventHandler extends EventHandler {
@@ -47,5 +51,7 @@ public interface ReverseGeocodingEventHandler extends EventHandler {
 	public void register();
 
 	public void unregister();
+        
+        public void mark(LonLat theLonLat);
 
 }

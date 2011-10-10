@@ -59,8 +59,7 @@ public class MapController extends GeoPlatformController {
                 GeoPlatformEvents.REGISTER_GEOCODING_LOCATION,
                 GeoPlatformEvents.RemoveMarker,
                 GeoPlatformEvents.SCALE_REQUEST_CHANGE,
-                GeoPlatformEvents.ZOOM_TO_MAX_EXTEND,
-                GeoPlatformEvents.REVERSE_GEOCODING_WITH_LONLAT);
+                GeoPlatformEvents.ZOOM_TO_MAX_EXTEND);
     }
 
     @Override

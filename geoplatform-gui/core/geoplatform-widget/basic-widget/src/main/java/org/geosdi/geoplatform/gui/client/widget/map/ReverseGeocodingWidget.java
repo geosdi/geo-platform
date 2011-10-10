@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.map;
 import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingDispatchEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingEventHandler;
+import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingMarkEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.ReverseGeocodingMarker;
 import org.geosdi.geoplatform.gui.client.widget.map.popup.PopupMapWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.popup.template.PopupTemplate;
@@ -51,6 +52,9 @@ import org.gwtopenmaps.openlayers.client.event.MapClickListener;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email michele.santomauro@geosdi.org
+ * 
  */
 public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
@@ -61,20 +65,21 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
     private LonLat lonlat;
     private ReverseGeocodingDispatchEvent event;
     private boolean busy;
-    
+
     public ReverseGeocodingWidget(GeoPlatformMap theMapWidget) {
         this.mapWidget = theMapWidget;
         GPHandlerManager.addHandler(ReverseGeocodingEvent.TYPE, this);
+        GPHandlerManager.addHandler(ReverseGeocodingMarkEvent.TYPE, this);
         this.createListener();
         this.event = new ReverseGeocodingDispatchEvent(this);
     }
 
     @Override
     public void register() {
-            GeoPlatformMessage.infoMessage("Reverse Geocoding",
-                    "Click on the map to have Information.");
-            this.mapWidget.getMap().addLayer(this.rGMarker.getMarkerLayer());
-            this.mapWidget.getMap().addMapClickListener(listener);
+        GeoPlatformMessage.infoMessage("Reverse Geocoding",
+                "Click on the map to have Information.");
+        this.mapWidget.getMap().addLayer(this.rGMarker.getMarkerLayer());
+        this.mapWidget.getMap().addMapClickListener(listener);
     }
 
     @Override
@@ -82,6 +87,12 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
         GeoPlatformMessage.infoMessage("Reverse Geocoding",
                 "Reverse Geocoding Control Deactivated.");
         this.clearWidgetStatus();
+    }
+
+    @Override
+    public void mark(LonLat theLonLat) {
+        this.lonlat = theLonLat;
+        addMarker();
     }
 
     /**
@@ -106,18 +117,21 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
             @Override
             public void onClick(MapClickEvent mapClickEvent) {
-                if (!busy) {
-                    busy = true;
-                    removeMapElements();
-                    lonlat = mapClickEvent.getLonLat();
-                    sendRequest();
-                } else {
-                    GeoPlatformMessage.alertMessage("Reverse Geocoding",
-                            "Server busy.");
-
-                }
+                lonlat = mapClickEvent.getLonLat();
+                addMarker();
             }
         };
+    }
+
+    private void addMarker() {
+        if (!busy) {
+            busy = true;
+            removeMapElements();
+            sendRequest();
+        } else {
+            GeoPlatformMessage.alertMessage("Reverse Geocoding",
+                    "Server busy.");
+        }
     }
 
     /**
@@ -131,17 +145,6 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
         this.mapWidget.getMap().addPopup(popupWidget.getPopup());
 
         GPHandlerManager.fireEvent(event);
-    }
-
-    public void sendRequest(LonLat theLonLat) {
-        this.lonlat = theLonLat;
-        this.rGMarker.addMarker(this.lonlat, this.mapWidget.getMap());
-//		popupWidget.setLonLat(this.lonlat);
-//		this.popupWidget.setContentHTML(PopupTemplate.IMAGE_LOADING.toString()
-//				+ PopupTemplate.MESSAGE_LOADING.toString());
-//		this.mapWidget.getMap().addPopup(popupWidget.getPopup());
-
-//		GPHandlerManager.fireEvent(event);
     }
 
     /**

@@ -43,18 +43,22 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingToggleEvent;
+import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingToggleEventHandler;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class ReverseGeocodingAction extends MapToggleAction {
+public class ReverseGeocodingAction extends MapToggleAction implements ReverseGeocodingToggleEventHandler {
 
     public ReverseGeocodingAction(GeoPlatformMap theMapWidget) {
         super("Reverse Geocoding", GeocodingResources.ICONS.reverseGeocoding(),
                 theMapWidget);
         // TODO Auto-generated constructor stub
+
+        GPHandlerManager.addHandler(ReverseGeocodingToggleEvent.TYPE, this);
     }
 
     /*
@@ -66,8 +70,8 @@ public class ReverseGeocodingAction extends MapToggleAction {
     @Override
     public void componentSelected(ButtonEvent ce) {
         // TODO Auto-generated method stub
-        ToggleButton button = (ToggleButton) ce.getSource();
 
+        ToggleButton button = (ToggleButton) ce.getSource();
         super.changeButtonState();
 
         this.deactivateAllMapControl();
@@ -79,6 +83,15 @@ public class ReverseGeocodingAction extends MapToggleAction {
         }
 
         GPHandlerManager.fireEvent(new ReverseGeocodingEvent(button.isPressed()));
+    }
+
+    @Override
+    public void onToggle(boolean isToggled) {
+        ToggleButton toggleButton = ((ToggleButton) super.getButton());
+        toggleButton.toggle(isToggled);
+
+        ButtonEvent buttonEvent = new ButtonEvent(toggleButton);
+        componentSelected(buttonEvent);
     }
 
     /*

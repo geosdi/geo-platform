@@ -61,7 +61,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
     private LonLat lonlat;
     private ReverseGeocodingDispatchEvent event;
     private boolean busy;
-
+    
     public ReverseGeocodingWidget(GeoPlatformMap theMapWidget) {
         this.mapWidget = theMapWidget;
         GPHandlerManager.addHandler(ReverseGeocodingEvent.TYPE, this);
@@ -71,10 +71,10 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
     @Override
     public void register() {
-        GeoPlatformMessage.infoMessage("Reverse Geocoding",
-                "Click on the map to have Information.");
-        this.mapWidget.getMap().addLayer(this.rGMarker.getMarkerLayer());
-        this.mapWidget.getMap().addMapClickListener(listener);
+            GeoPlatformMessage.infoMessage("Reverse Geocoding",
+                    "Click on the map to have Information.");
+            this.mapWidget.getMap().addLayer(this.rGMarker.getMarkerLayer());
+            this.mapWidget.getMap().addMapClickListener(listener);
     }
 
     @Override

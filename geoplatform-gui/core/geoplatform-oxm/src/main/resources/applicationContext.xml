@@ -29,7 +29,7 @@
 
 	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller">
 		<property name="mappingLocation"
-			value="classpath:org/geosdi/geoplatform/oxm/mapping.xml" />
+			value="classpath:mapping.xml" />
 	</bean>
 
 	<oxm:jaxb2-marshaller id="jaxb">

@@ -5,7 +5,7 @@
   
     <parent>
         <groupId>org.geosdi</groupId>
-        <artifactId>geoplatform-gui</artifactId>
+        <artifactId>extension</artifactId>
         <version>1.2-SNAPSHOT</version>
     </parent>
 

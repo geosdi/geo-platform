@@ -52,101 +52,99 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  */
 public class ModifyFeatureControl extends MapControl {
 
-	private ModifyFeature control;
-	private VectorFeature selectedFeature;
+    private ModifyFeature control;
+    private VectorFeature selectedFeature;
+    private GeometryRequestManager requestManager;
+    private GeometryRequestHandler pointHandler;
+    private GeometryRequestHandler lineHandler;
+    private GeometryRequestHandler polygonHandler;
 
-	private GeometryRequestManager requestManager;
-	private GeometryRequestHandler pointHandler;
-	private GeometryRequestHandler lineHandler;
-	private GeometryRequestHandler polygonHandler;
+    public ModifyFeatureControl(Vector vector) {
+        super(vector);
+        // TODO Auto-generated constructor stub
+        this.createResponsibilityComponent();
+    }
 
-	public ModifyFeatureControl(Vector vector) {
-		super(vector);
-		// TODO Auto-generated constructor stub
-		this.createResponsibilityComponent();
-	}
+    private void createResponsibilityComponent() {
+        // TODO Auto-generated method stub
+        this.requestManager = new GeometryRequestManager(vector);
+        this.pointHandler = new PointRequestHandler(this);
+        this.lineHandler = new LineRequestHandler(this);
+        this.polygonHandler = new PolygonRequestHandler(this);
+        this.pointHandler.setSuperiorRequestHandler(lineHandler);
+        this.lineHandler.setSuperiorRequestHandler(polygonHandler);
+    }
 
-	private void createResponsibilityComponent() {
-		// TODO Auto-generated method stub
-		this.requestManager = new GeometryRequestManager(vector);
-		this.pointHandler = new PointRequestHandler(this);
-		this.lineHandler = new LineRequestHandler(this);
-		this.polygonHandler = new PolygonRequestHandler(this);
-		this.pointHandler.setSuperiorRequestHandler(lineHandler);
-		this.lineHandler.setSuperiorRequestHandler(polygonHandler);
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#createControl
+     * ()
+     */
+    @Override
+    public void createControl() {
+        // TODO Auto-generated method stub
+        this.control = new ModifyFeature(vector);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#createControl
-	 * ()
-	 */
-	@Override
-	public void createControl() {
-		// TODO Auto-generated method stub
-		this.control = new ModifyFeature(vector);
+        vector.addVectorBeforeFeatureModifiedListener(new VectorBeforeFeatureModifiedListener() {
 
-		vector.addVectorBeforeFeatureModifiedListener(new VectorBeforeFeatureModifiedListener() {
+            @Override
+            public void onBeforeFeatureModified(
+                    BeforeFeatureModifiedEvent eventObject) {
+                // TODO Auto-generated method stub
+                selectedFeature = eventObject.getVectorFeature().clone();
+            }
+        });
 
-			@Override
-			public void onBeforeFeatureModified(
-					BeforeFeatureModifiedEvent eventObject) {
-				// TODO Auto-generated method stub
-				selectedFeature = eventObject.getVectorFeature().clone();
-			}
-		});
+        vector.addVectorAfterFeatureModifiedListener(new VectorAfterFeatureModifiedListener() {
 
-		vector.addVectorAfterFeatureModifiedListener(new VectorAfterFeatureModifiedListener() {
+            @Override
+            public void onAfterFeatureModified(
+                    AfterFeatureModifiedEvent eventObject) {
 
-			public void onAfterFeatureModified(
-					AfterFeatureModifiedEvent eventObject) {
+                VectorFeature feature = eventObject.getVectorFeature();
 
-				VectorFeature feature = eventObject.getVectorFeature();
+                requestManager.forwardRequest(pointHandler, feature);
 
-				requestManager.forwardRequest(pointHandler, feature);
+            }
+        });
+    }
 
-			}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#
+     * activateControl()
+     */
+    @Override
+    public void activateControl() {
+        // TODO Auto-generated method stub
+        this.control.activate();
+        this.enabled = true;
+    }
 
-		});
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#
+     * deactivateControl()
+     */
+    @Override
+    public void deactivateControl() {
+        // TODO Auto-generated method stub
+        this.control.deactivate();
+        this.enabled = false;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#
-	 * activateControl()
-	 */
-	@Override
-	public void activateControl() {
-		// TODO Auto-generated method stub
-		this.control.activate();
-		this.enabled = true;
-	}
+    public ModifyFeature getControl() {
+        return this.control;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#
-	 * deactivateControl()
-	 */
-	@Override
-	public void deactivateControl() {
-		// TODO Auto-generated method stub
-		this.control.deactivate();
-		this.enabled = false;
-	}
-
-	public ModifyFeature getControl() {
-		return this.control;
-	}
-
-	/**
-	 * @return the oldFeature
-	 */
-	public VectorFeature getSelectedFeature() {
-		return selectedFeature;
-	}
-
+    /**
+     * @return the oldFeature
+     */
+    public VectorFeature getSelectedFeature() {
+        return selectedFeature;
+    }
 }

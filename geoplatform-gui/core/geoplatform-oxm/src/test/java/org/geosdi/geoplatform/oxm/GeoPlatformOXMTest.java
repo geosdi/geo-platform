@@ -45,65 +45,61 @@ import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
  * 
  */
 @SuppressWarnings("deprecation")
-public class GeoPlatformOXMTest extends
-		AbstractDependencyInjectionSpringContextTests {
+public class GeoPlatformOXMTest extends AbstractDependencyInjectionSpringContextTests {
 
-	@Autowired
-	private GeoPlatformMarshall castor;
+    @Autowired
+    private GeoPlatformMarshall castor;
+    @Autowired
+    private GeoPlatformMarshall jax;
+    @Autowired
+    private GeoPlatformMarshall xtream;
+    private ClassToXMLMap message;
 
-	@Autowired
-	private GeoPlatformMarshall jax;
+    @Override
+    protected void onSetUp() throws Exception {
+        // TODO Auto-generated method stub
+        message = new ClassToXMLMap();
+        message.setData("I am data");
+        message.setHistory("in the past");
+        super.onSetUp();
+    }
 
-	@Autowired
-	private GeoPlatformMarshall xtream;
+    @Test
+    public void testCastor() throws Exception {
+        String castorFile = "target/castor.xml";
+        castor.saveXML(message, castorFile);
 
-	private ClassToXMLMap message;
+        ClassToXMLMap castorMap = castor.loadXML(castorFile);
+        assertNotNull(castorMap);
 
-	@Override
-	protected void onSetUp() throws Exception {
-		// TODO Auto-generated method stub
-		message = new ClassToXMLMap();
-		message.setData("I am data");
-		message.setHistory("in the past");
-		super.onSetUp();
-	}
+        logger.info("CASTOR BEAN  ******************** " + castorMap);
 
-	@Test
-	public void testCastor() throws Exception {
-		String castorFile = "target/castor.xml";
-		castor.saveXML(message, castorFile);
+    }
 
-		ClassToXMLMap castorMap = castor.loadXML(castorFile);
-		assertNotNull(castorMap);
+    @Test
+    public void testJaxB() throws Exception {
+        String jaxbFile = "target/jaxb.xml";
+        jax.saveXML(message, jaxbFile);
 
-		logger.info("CASTOR BEAN  ******************** " + castorMap);
+        ClassToXMLMap jaxbMap = jax.loadXML(jaxbFile);
+        assertNotNull(jaxbMap);
 
-	}
+        logger.info("JAX BEAN ***************** " + jaxbMap);
+    }
 
-	@Test
-	public void testJaxB() throws Exception {
-		String jaxbFile = "target/jaxb.xml";
-		jax.saveXML(message, jaxbFile);
+    @Test
+    public void testXStream() throws Exception {
+        String xtreamFile = "target/xtream.xml";
+        xtream.saveXML(message, xtreamFile);
 
-		ClassToXMLMap jaxbMap = jax.loadXML(jaxbFile);
-		assertNotNull(jaxbMap);
+        ClassToXMLMap xstreamMap = xtream.loadXML(xtreamFile);
+        assertNotNull(xtream.loadXML(xtreamFile));
 
-		logger.info("JAX BEAN ***************** " + jaxbMap);
-	}
+        logger.info("XSTREAM BEAN *************** " + xstreamMap);
+    }
 
-	@Test
-	public void testXStream() throws Exception {
-		String xtreamFile = "target/xtream.xml";
-		xtream.saveXML(message, xtreamFile);
-
-		ClassToXMLMap xstreamMap = xtream.loadXML(xtreamFile);
-		assertNotNull(xtream.loadXML(xtreamFile));
-
-		logger.info("XSTREAM BEAN *************** " + xstreamMap);
-	}
-
-	protected String[] getConfigLocations() {
-		return new String[] { "classpath:org/geosdi/geoplatform/oxm/applicationContext.xml" };
-	}
-
+    @Override
+    protected String[] getConfigLocations() {
+        return new String[]{"classpath:applicationContext.xml"};
+    }
 }

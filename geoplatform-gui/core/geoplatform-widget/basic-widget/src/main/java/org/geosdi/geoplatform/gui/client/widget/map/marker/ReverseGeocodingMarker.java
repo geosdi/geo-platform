@@ -53,41 +53,40 @@ import com.google.gwt.core.client.GWT;
  */
 public class ReverseGeocodingMarker extends GeoPlatformMarker {
 
-	public ReverseGeocodingMarker() {
-		super();
-	}
+    public ReverseGeocodingMarker() {
+        super();
+    }
 
-	@Override
-	public void buildMarkerLayer() {
-		// TODO Auto-generated method stub
-		MarkersOptions options = new MarkersOptions();
-		options.setNumZoomLevels(18);
-		options.setMaxZoomLevel(18);
-		options.setDisplayInLayerSwitcher(true);
+    @Override
+    public void buildMarkerLayer() {
+        // TODO Auto-generated method stub
+        MarkersOptions options = new MarkersOptions();
+        options.setNumZoomLevels(18);
+        options.setMaxZoomLevel(18);
+        options.setDisplayInLayerSwitcher(true);
 
-		this.markerLayer = new Markers("GPReverseGeocoding-Marker-Layer",
-				options);
-	}
+        this.markerLayer = new Markers("GPReverseGeocoding-Marker-Layer",
+                options);
+    }
 
-	@Override
-	public void buildIconMarker() {
-		// TODO Auto-generated method stub
-		Size size = new Size(21, 25);
-		Pixel offset = new Pixel(-(size.getWidth() / 2), -size.getHeight());
-		this.iconMarker = new Icon(GWT.getModuleName() + "/gp-images/POI.png",
-				size, offset);
-	}
+    @Override
+    public void buildIconMarker() {
+        // TODO Auto-generated method stub
+        Size size = new Size(21, 25);
+        Pixel offset = new Pixel(-(size.getWidth() / 2), -size.getHeight());
+        this.iconMarker = new Icon(GWT.getModuleName() + "/gp-images/POI.png",
+                size, offset);
+    }
 
-	/**
-	 * Add a Marker to the Marker Layer
-	 * 
-	 * @param lonlat
-	 */
-	public void addMarker(LonLat lonlat, Map map) {
-		this.markerLayer.clearMarkers();
-		this.marker = new Marker(lonlat, this.iconMarker);
-		this.markerLayer.addMarker(this.marker);
-//		if (map.getZoom() < 14)
-//			map.zoomTo(14);
-	}
+    /**
+     * Add a Marker to the Marker Layer
+     * 
+     * @param lonlat
+     */
+    @Override
+    public void addMarker(LonLat lonlat, Map map) {
+        this.markerLayer.clearMarkers();
+        this.marker = new Marker(lonlat, this.iconMarker);
+        this.markerLayer.addMarker(this.marker);
+    }
 }

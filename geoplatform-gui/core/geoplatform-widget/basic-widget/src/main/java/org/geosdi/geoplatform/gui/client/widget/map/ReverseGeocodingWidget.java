@@ -90,7 +90,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
     }
 
     @Override
-    public void mark(LonLat theLonLat) {
+    public void onAddMarkerByLatLon(LonLat theLonLat) {
         this.lonlat = theLonLat;
         addMarker();
     }
@@ -107,6 +107,44 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
         this.removeMapElements();
     }
 
+
+    /**
+     * 
+     * @param location
+     */
+    public void onRequestSuccess(String location) {
+        this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
+        if (!location.equalsIgnoreCase(PopupTemplate.ZERO_RESULTS.toString())) {
+            this.popupWidget.setContentHTML(PopupTemplate.IMAGE_RESULT_FOUND.toString() + "<br />" + location);
+        } else {
+            this.popupWidget.setContentHTML(PopupTemplate.IMAGE_RESULT_NOT_FOUND.toString()
+                    + "<br /> "
+                    + PopupTemplate.ZERO_RESULTS.toString());
+        }
+
+        this.mapWidget.getMap().addPopup(this.popupWidget.getPopup());
+        this.busy = false;
+    }
+
+    /**
+     * 
+     * @param message
+     */
+    public void onRequestFailure(String message) {
+        this.popupWidget.setContentHTML(PopupTemplate.IMAGE_SERVICE_ERROR.toString() + "<br />" + message);
+        this.mapWidget.getMap().addPopupExclusive(this.popupWidget.getPopup());
+        this.busy = false;
+    }
+
+    /**
+     * @return the lonlat with the Map Projection
+     */
+    public LonLat getLonlat() {
+        LonLat lt = new LonLat(this.lonlat.lon(), this.lonlat.lat());
+        lt.transform(this.mapWidget.getMap().getProjection(), "EPSG:4326");
+        return lt;
+    }
+    
     private void removeMapElements() {
         this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
         this.rGMarker.removeMarker();
@@ -145,42 +183,5 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
         this.mapWidget.getMap().addPopup(popupWidget.getPopup());
 
         GPHandlerManager.fireEvent(event);
-    }
-
-    /**
-     * 
-     * @param location
-     */
-    public void onRequestSuccess(String location) {
-        this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
-        if (!location.equalsIgnoreCase(PopupTemplate.ZERO_RESULTS.toString())) {
-            this.popupWidget.setContentHTML(PopupTemplate.IMAGE_RESULT_FOUND.toString() + "<br />" + location);
-        } else {
-            this.popupWidget.setContentHTML(PopupTemplate.IMAGE_RESULT_NOT_FOUND.toString()
-                    + "<br /> "
-                    + PopupTemplate.ZERO_RESULTS.toString());
-        }
-
-        this.mapWidget.getMap().addPopup(this.popupWidget.getPopup());
-        this.busy = false;
-    }
-
-    /**
-     * 
-     * @param message
-     */
-    public void onRequestFailure(String message) {
-        this.popupWidget.setContentHTML(PopupTemplate.IMAGE_SERVICE_ERROR.toString() + "<br />" + message);
-        this.mapWidget.getMap().addPopupExclusive(this.popupWidget.getPopup());
-        this.busy = false;
-    }
-
-    /**
-     * @return the lonlat with the Map Projection
-     */
-    public LonLat getLonlat() {
-        LonLat lt = new LonLat(this.lonlat.lon(), this.lonlat.lat());
-        lt.transform(this.mapWidget.getMap().getProjection(), "EPSG:4326");
-        return lt;
     }
 }

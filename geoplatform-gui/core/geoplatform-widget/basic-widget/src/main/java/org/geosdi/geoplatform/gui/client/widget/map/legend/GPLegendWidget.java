@@ -89,7 +89,8 @@ public class GPLegendWidget {
                 dataSource = layerBean.getDataSource().replaceAll(
                         "gwc/service/wms",
                         "wms");
-            } else if (layerBean.getDataSource().contains("/ows")) {
+            } else if (!(layerBean.getDataSource().startsWith("http://ows"))
+                    && (layerBean.getDataSource().contains("/ows"))) {
                 dataSource = layerBean.getDataSource().replaceAll("/ows",
                         "/wms");
             } else {

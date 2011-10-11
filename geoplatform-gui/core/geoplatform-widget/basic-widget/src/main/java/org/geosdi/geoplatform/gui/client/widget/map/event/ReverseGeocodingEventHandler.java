@@ -47,11 +47,10 @@ import org.gwtopenmaps.openlayers.client.LonLat;
  * 
  */
 public interface ReverseGeocodingEventHandler extends EventHandler {
-	
-	public void register();
 
-	public void unregister();
-        
-        public void mark(LonLat theLonLat);
+    public void register();
 
+    public void unregister();
+
+    public void onAddMarkerByLatLon(LonLat theLonLat);
 }

@@ -59,7 +59,7 @@ public class ReverseGeocodingMarkEvent extends GwtEvent<ReverseGeocodingEventHan
 
     @Override
     protected void dispatch(ReverseGeocodingEventHandler handler) {
-        handler.mark(lonlat);
+        handler.onAddMarkerByLatLon(lonlat);
     }
     
 }

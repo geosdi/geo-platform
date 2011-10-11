@@ -52,49 +52,61 @@ import org.springframework.oxm.Unmarshaller;
  */
 public class GeoPlatformMarshall {
 
-	private Marshaller marshaller;
-	private Unmarshaller unmarshaller;
+    private Marshaller marshaller;
+    private Unmarshaller unmarshaller;
 
-	/**
-	 * @param marshaller
-	 *            the marshaller to set
-	 */
-	public void setMarshaller(Marshaller marshaller) {
-		this.marshaller = marshaller;
-	}
+    /**
+     * @param marshaller
+     *            the marshaller to set
+     */
+    public void setMarshaller(Marshaller marshaller) {
+        this.marshaller = marshaller;
+    }
 
-	/**
-	 * @param unmarshaller
-	 *            the unmarshaller to set
-	 */
-	public void setUnmarshaller(Unmarshaller unmarshaller) {
-		this.unmarshaller = unmarshaller;
-	}
+    /**
+     * @param unmarshaller
+     *            the unmarshaller to set
+     */
+    public void setUnmarshaller(Unmarshaller unmarshaller) {
+        this.unmarshaller = unmarshaller;
+    }
 
-	public void saveXML(ClassToXMLMap message, String fileName)
-			throws IOException {
-		FileOutputStream fos = null;
-		try {
-			fos = new FileOutputStream(fileName);
-			this.marshaller.marshal(message, new StreamResult(fos));
-		} finally {
-			if (fos != null) {
-				fos.close();
-			}
-		}
-	}
+    public void saveXML(ClassToXMLMap message, String fileName)
+            throws IOException {
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(fileName);
+            this.getMarshaller().marshal(message, new StreamResult(fos));
+        } finally {
+            if (fos != null) {
+                fos.close();
+            }
+        }
+    }
 
-	public ClassToXMLMap loadXML(String fileName) throws IOException {
-		FileInputStream fis = null;
-		try {
-			fis = new FileInputStream(fileName);
-			return (ClassToXMLMap) this.unmarshaller
-					.unmarshal(new StreamSource(fis));
-		} finally {
-			if (fis != null) {
-				fis.close();
-			}
-		}
-	}
+    public ClassToXMLMap loadXML(String fileName) throws IOException {
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(fileName);
+            return (ClassToXMLMap) this.getUnmarshaller().unmarshal(new StreamSource(fis));
+        } finally {
+            if (fis != null) {
+                fis.close();
+            }
+        }
+    }
 
+    /**
+     * @return the marshaller
+     */
+    public Marshaller getMarshaller() {
+        return marshaller;
+    }
+
+    /**
+     * @return the unmarshaller
+     */
+    public Unmarshaller getUnmarshaller() {
+        return unmarshaller;
+    }
 }

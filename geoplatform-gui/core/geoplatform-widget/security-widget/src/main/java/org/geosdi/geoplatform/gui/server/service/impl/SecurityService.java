@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
@@ -90,6 +91,10 @@ public class SecurityService implements ISecurityService {
             logger.error(
                     "Error on SecurityService: " + ex + " password incorrect");
             throw new GeoPlatformException("Password incorrect");
+        } catch (IllegalParameterFault ilg) {
+            logger.error(
+                    "Error on SecurityService: " + ilg);
+            throw new GeoPlatformException("Parameter incorrect");
         }
         this.storeUserInSession(user, httpServletRequest);
 

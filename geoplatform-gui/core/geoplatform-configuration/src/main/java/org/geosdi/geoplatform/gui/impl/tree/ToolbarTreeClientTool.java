@@ -59,6 +59,7 @@ public class ToolbarTreeClientTool {
     public static final String TOOLBAR_LOAD_WMS_GETMAP_FROM_URL = "loadWmsGetMapFromUrl";
     public static final String TOOLBAR_LOAD_KML_FROM_URL = "loadKmlFromUrl";
     public static final String TOOLBAR_PREVIEW_KML_FROM_URL = "previewKmlFromUrl";
+    public static final String TOOLBAR_EXPORT_PROJECT = "exportProject";
     //
     public static boolean USER_VIEWER; //
     //
@@ -142,7 +143,14 @@ public class ToolbarTreeClientTool {
         previewKmlClientTool.setType(ActionClientTool.BUTTON);
         previewKmlClientTool.setEnabled(true);
         previewKmlClientTool.setOrder(11);
+        
+        ActionClientTool exportProject = new ActionClientTool();
+        exportProject.setId(TOOLBAR_EXPORT_PROJECT);
+        exportProject.setType(ActionClientTool.BUTTON);
+        exportProject.setEnabled(true);
+        exportProject.setOrder(12);
 
+        this.clientTools.add(exportProject);
         this.clientTools.add(previewKmlClientTool);
 //        this.clientTools.add(uploadKmlClientTool);
 //        this.clientTools.add(loadKmlFromUrlClientTool);

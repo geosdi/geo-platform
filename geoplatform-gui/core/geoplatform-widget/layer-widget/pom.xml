@@ -126,6 +126,19 @@
             <version>${project.version}</version>
             <classifier>sources</classifier>
         </dependency>
+         <!-- GeoPlatform Project Export Module -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>project-export-widget</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>project-export-widget</artifactId>
+            <version>${project.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
         
                  <!-- GeoPlatform Publisher Widget Module -->
         <dependency>

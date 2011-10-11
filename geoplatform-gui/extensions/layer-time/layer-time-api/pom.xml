@@ -1,26 +1,27 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
   
-      <parent>
+    <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>layer-time</artifactId>
         <version>1.2-SNAPSHOT</version>
     </parent>
 
 
-  <groupId>org.geosdi</groupId>
-  <artifactId>layer-time-api</artifactId>
-  <version>1.2-SNAPSHOT</version>
-  <packaging>jar</packaging>
+    <groupId>org.geosdi</groupId>
+    <artifactId>layer-time-api</artifactId>
+    <version>1.2-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-  <name>Geo-Platform :: == Layer Time Api Module</name>
+    <name>Geo-Platform :: == Layer Time Api Module</name>
   
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
   
-  <developers>
+    <developers>
         <developer>
             <name>Giuseppe La Scaleia</name>
             <id>glascaleia</id>
@@ -33,12 +34,12 @@
         </developer>
     </developers>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>

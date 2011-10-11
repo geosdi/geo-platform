@@ -1,0 +1,51 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../../../css/menus.css);
+
+
+/* Mega Drop-Down Menu
+----------------------------------------------------------------------------------------------------*/
+
+/* Level 1 */
+.menu-dropdown li.level1 { margin-right: 0; }
+
+.menu-dropdown a.level1,
+.menu-dropdown span.level1 {
+	color: #777;
+	text-transform: uppercase;
+}
+
+/* Set Active */
+.menu-dropdown li.active .level1 { color: #222; }
+
+/* Set Hover */
+.menu-dropdown li.level1:hover .level1,
+.menu-dropdown li.remain .level1 {
+	background: #444;
+	color: #FFF;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+}
+
+/* Drop-Down */
+.menu-dropdown .dropdown { top: 39px; }
+
+/* Level 3 */
+.menu-dropdown a.level3 > span,
+.menu-dropdown span.level3 > span {
+	padding-left: 0;
+	background: none;
+}
+
+
+/* Sidebar/Accordion Menu
+----------------------------------------------------------------------------------------------------*/
+
+/* Level 1 */
+.menu-sidebar li.level1 {
+	border: none;
+	background: url(../images/line_dotted.png) 0 0 repeat-x;
+}
+.menu-sidebar li.level1:first-child { background: none; }
+
+.menu-sidebar li.parent .level1 > span { background-image: url(../images/menu_sidebar_parent.png); }
+

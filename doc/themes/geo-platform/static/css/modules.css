@@ -1,0 +1,64 @@
+/* Copyright (C) 2007 - 2011 YOOthemes GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../warp/css/modules.css);
+
+
+/* Module Badges
+----------------------------------------------------------------------------------------------------*/
+
+.module .badge {
+	top: -2px;
+	right: 20px;
+	width: 50px;
+	height: 22px;
+	background: url(../images/module_badges.png) 0 0 no-repeat;
+}
+ 
+.module .badge-hot { background-position: 0 0; }
+.module .badge-top { background-position: 0 -25px; }
+.module .badge-free { background-position: 0 -50px; }
+.module .badge-new { background-position: 0 -75px; }
+
+
+/* Module Icons
+----------------------------------------------------------------------------------------------------*/
+
+.module h3.title .icon { background: url(../images/module_icons.png) 0 0 no-repeat; }
+
+.module h3.title .icon-download { background-position: 0 0; }
+.module h3.title .icon-twitter { background-position: 0 -30px; }
+.module h3.title .icon-mail { background-position: 0 -60px; }
+.module h3.title .icon-bubble { background-position: 0 -90px; }
+.module h3.title .icon-login { background-position: 0 -120px; }
+.module h3.title .icon-cart { background-position: 0 -150px; }
+
+
+/* Module Type: Line
+----------------------------------------------------------------------------------------------------*/
+
+/* horizontal line */
+.grid-h .mod-line {
+	margin: 0;
+	padding: 0 20px;
+	border-style: solid;
+	border-color: #DDD;
+	border-width: 0 0 0 1px;
+}
+.grid-h:first-child > .mod-line { border: none; }
+
+/* vertical line */
+.grid-v .mod-line {
+	margin: 20px 20px 0 20px;
+	padding-top: 20px;
+	border-top: 1px solid #ddd;
+}
+
+.grid-v:first-child > .mod-line {
+	margin-top: 0;
+	padding-top: 0;
+	border: none;
+}
+
+.grid-v .mod-line .badge { top: 18px; right: 0;}
+.grid-v:first-child .mod-line .badge { top: -2px; }
+

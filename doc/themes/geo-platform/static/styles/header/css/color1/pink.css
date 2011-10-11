@@ -1,0 +1,7 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../../../../css/color1/pink.css);
+
+#totop-scroller:hover,
+a.button-more:hover { background-color: #e49; }
+

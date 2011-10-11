@@ -1,0 +1,23 @@
+/* Copyright  2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+/*
+ * Error IE6 Style Sheet - Only loaded on the upgrade page for Internet Explorer 6
+ */
+
+body {
+	height: 100%;
+	width: 100%;
+}
+
+.error,
+.error span { zoom: 1; }
+
+.error-browser .error {
+	font-size: 20px;
+	line-height: inherit;
+}
+
+.error-browser .error a {
+	-pie-png-fix: true;
+	behavior: url(../js/css3pie.htc);
+}

@@ -1,0 +1,94 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../../../warp/css/layout.css);
+
+
+/* Spacing
+----------------------------------------------------------------------------------------------------*/
+
+#menu .module { margin: 15px; }
+
+#header,
+#top-a,
+#top-b,
+#bottom-a,
+#bottom-b,
+#main,
+#footer { margin: 15px 0; }
+
+#breadcrumbs,
+#content { margin: 20px; }
+
+#innertop { border-bottom: 1px solid #ddd; }
+#innerbottom { border-top: 1px solid #ddd; }
+
+#header { padding: 15px; }
+
+#headerbar { margin: 15px 0; }
+#headerbar .module {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+
+/* Layout
+----------------------------------------------------------------------------------------------------*/
+
+/* Background */
+body#page { background: #F0F1F2; }
+
+#header,
+#top-a,
+#top-b,
+#bottom-a,
+#bottom-b,
+#main {
+	margin-left: -1px;
+	margin-right: -1px;
+	border: 1px solid #ddd;
+	background: #FFF;
+}
+
+/* Menubar */
+#menubar {
+	margin-bottom: -5px;
+	padding-top: 10px;
+	background: url(../images/menubar.png) 0 0 repeat-x;
+}
+
+#menu { margin-left: -10px;}
+
+/* Sidebar Backgrounds */
+#sidebar-a,
+#sidebar-b { position: relative; }
+#jblin h1 {position: absolute; top: 0px; left: -5000px;}
+.sidebar-bg {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border-style: solid;
+	border-color: #DDD;
+}
+
+.sidebar-a-right #sidebar-a .sidebar-bg,
+.sidebar-b-right #sidebar-b .sidebar-bg { border-width: 0 0 0 1px; }
+
+.sidebar-a-left #sidebar-a .sidebar-bg,
+.sidebar-b-left #sidebar-b .sidebar-bg { border-width: 0 1px 0 0; }
+
+/* ToTop Scroller */
+#totop-scroller {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1;
+	width: 20px;
+	height: 20px;
+	background: #333 url(../images/totop_scroller.png) 50% 7px no-repeat;
+	text-decoration: none;
+}
+#totop-scroller:hover { background-color: #48B; }
+

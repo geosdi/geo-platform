@@ -1,0 +1,53 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../../../css/system.css);
+
+
+/* General
+----------------------------------------------------------------------------------------------------*/
+
+#system h1,
+#system h2,
+#system h3,
+#system h4,
+#system h5,
+#system h6 { text-transform: uppercase; }
+
+#system h1,
+#system h2 { letter-spacing: -1px; }
+
+
+/* Pagination
+----------------------------------------------------------------------------------------------------*/
+
+#system .pagination a {
+	color: #333;
+	text-transform: uppercase;
+}
+
+#system .pagination strong,
+#system .pagination a:hover {
+	padding: 1px 6px;
+	border: none;
+	background: #333;
+	color: #FFF;
+}
+#system .pagination a:hover  { background: #48B; }
+
+
+/* Search
+----------------------------------------------------------------------------------------------------*/
+
+#searchbox,
+#searchbox input { height: 28px; }
+
+#searchbox .results { top: 44px; }
+
+
+/* Breadcrumbs
+----------------------------------------------------------------------------------------------------*/
+
+.breadcrumbs a,
+.breadcrumbs > span { background: url(../images/breadcrumbs.png) 100% 50% no-repeat; }
+
+

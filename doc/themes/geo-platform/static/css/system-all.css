@@ -1,0 +1,100 @@
+/* Copyright (C) 2007 - 2011 YOOthemes GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+/* General
+----------------------------------------------------------------------------------------------------*/
+
+#system .title a { color: #444; }
+
+#system small { color: #999; }
+
+
+/* Item
+----------------------------------------------------------------------------------------------------*/
+
+#system .item > header .meta { color: #999; }
+
+#system .item > header .subtitle{ color: #777; }
+
+#system .item > .links a:after {
+	content: " »";
+	font-size: 16px;
+}
+
+
+/* Items
+----------------------------------------------------------------------------------------------------*/
+
+#system .items .item {
+	margin-top: 12px;
+	padding-top: 18px;
+	border-top: 1px solid #ddd;
+}
+
+#system .items .item:first-child {
+	margin-top: 0;
+	padding-top: 0;
+	border: none;
+}
+
+
+/* Pagination
+----------------------------------------------------------------------------------------------------*/
+
+#system .pagination a,
+#system .pagination strong { border: 1px solid #ddd; }
+
+
+/* Search Box
+----------------------------------------------------------------------------------------------------*/
+
+#searchbox {
+	width: 100px;
+	height: 30px;
+	padding: 0 25px;
+	border: 1px solid #ddd;
+	background: url(../images/searchbox_magnifier.png) 0 50% no-repeat;
+}
+
+
+#searchbox input {
+	height: 30px;
+	color: #333;
+	font-size: 14px;
+}
+
+#searchbox input:-moz-placeholder { color: #999; }
+#searchbox input::-webkit-input-placeholder { color: #999; }
+#searchbox input.placeholder { color: #999; }
+
+#searchbox.filled button {
+	width: 25px;
+	background: url(../images/searchbox_reset.png) 50% 50% no-repeat; 
+}
+#searchbox.loading button { background: url(../images/searchbox_loader.gif) 50% 50% no-repeat; }
+
+/* Drop-Down Results */
+#searchbox .results {
+	top: 42px;
+	right: -1px;
+	width: 300px;
+	border: 1px solid #ddd;
+	background: #ffffff;
+}
+
+#searchbox .results li.results-header { border-bottom: 1px solid #ddd; }
+#searchbox .results li.more-results { border-top: 1px solid #ddd; }
+#searchbox .results li.result { border-top: 1px solid #eee; }
+#searchbox .results li.results-header + li.result { border-top: none; }
+
+#searchbox .results li.result.selected { background-color: #fafafa; }
+
+
+/* Breadcrumbs
+----------------------------------------------------------------------------------------------------*/
+
+.breadcrumbs a,
+.breadcrumbs > span {
+	padding-right: 15px;
+	background: url(../images/breadcrumbs.png) 100% 50% no-repeat;
+}
+

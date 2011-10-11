@@ -1,0 +1,64 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../../../warp/css/modules.css);
+
+
+/* Module Badges
+----------------------------------------------------------------------------------------------------*/
+
+.module .badge {
+	top: -3px;
+	right: 20px;
+	width: 50px;
+	height: 25px;
+	background: url(../images/module_badges.png) 0 0 no-repeat;
+}
+ 
+.module .badge-hot { background-position: 0 0; }
+.module .badge-top { background-position: 0 -30px; }
+.module .badge-free { background-position: 0 -60px; }
+.module .badge-new { background-position: 0 -90px; }
+
+
+/* Module Icons
+----------------------------------------------------------------------------------------------------*/
+
+.module h3.title .icon { background: url(../../../images/module_icons.png) 0 0 no-repeat; }
+
+.module h3.title .icon-download { background-position: 0 0; }
+.module h3.title .icon-twitter { background-position: 0 -30px; }
+.module h3.title .icon-mail { background-position: 0 -60px; }
+.module h3.title .icon-bubble { background-position: 0 -90px; }
+.module h3.title .icon-login { background-position: 0 -120px; }
+.module h3.title .icon-cart { background-position: 0 -150px; }
+
+
+/* Module Headings
+----------------------------------------------------------------------------------------------------*/
+
+.module h3.title { text-transform: uppercase; }
+
+
+/* Module Type: Line
+----------------------------------------------------------------------------------------------------*/
+
+/* horizontal line */
+.grid-h .mod-line {
+	margin: 0;
+	padding: 0 20px;
+	background: url(../images/line_dotted_v.png) 0 0 repeat-y;
+}
+.grid-h:first-child > .mod-line { background: none; }
+
+/* vertical line */
+.grid-v .mod-line { margin: 20px 20px 0 20px; }
+.grid-v:first-child > .mod-line { margin-top: 0; }
+
+.grid-v .mod-line h3.title {
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ddd;
+}
+
+.grid-v .mod-line .badge { right: 0; }
+

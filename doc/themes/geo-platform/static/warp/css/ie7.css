@@ -1,0 +1,74 @@
+/* Copyright  2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+/*
+ * IE7 Style Sheet - Only loaded by Internet Explorer 7
+ */
+
+
+/* Base
+----------------------------------------------------------------------------------------------------*/
+
+/* undo forcing vertical scrollbar */
+body { overflow: visible; }
+
+img { -ms-interpolation-mode: bicubic; }
+
+pre { word-wrap: break-word; }
+
+legend { margin-left: -7px; }
+
+button {
+	width: auto;
+	overflow: visible;
+}
+
+
+/* Layout
+----------------------------------------------------------------------------------------------------*/
+
+.grid-block { zoom: 1; }
+
+.width20 { width: 19.97%; }
+.width25 { width: 24.97%; }
+.width33 { width: 33.31%; }
+.width40 { width: 39.97%; }
+.width50 { width: 49.97%; }
+.width60 { width: 64.97%; }
+.width66 { width: 66.64%; }
+.width75 { width: 74.97%; }
+.width80 { width: 79.97%; }
+
+
+/* Menus
+----------------------------------------------------------------------------------------------------*/
+
+/* Mega Drop-Down Menu */
+.menu-dropdown a > span { cursor: pointer; }
+
+.menu-dropdown li.level1:hover,
+.menu-dropdown .dropdown-bg,
+.menu-dropdown li.level3 .level3 { zoom: 1; }
+
+/* Sidebar/Accordion Menu */
+.menu-sidebar a.level1 > span,
+.menu-sidebar span.level1 > span {
+	zoom: 1;
+	cursor: pointer;
+}
+
+/* Line Menu */
+.menu-line li,
+.menu-line li a { display: inline; }
+
+
+/* Modules
+----------------------------------------------------------------------------------------------------*/
+
+
+/* Tools
+----------------------------------------------------------------------------------------------------*/
+
+
+/* System
+----------------------------------------------------------------------------------------------------*/
+

@@ -1,0 +1,11 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../../../../css/color1/orange.css);
+
+.menu-dropdown li.level1:hover .level1,
+.menu-dropdown li.remain .level1,
+.menu-dropdown li.active .level1 { color: #d50; }
+
+#totop-scroller:hover,
+a.button-more:hover { background-color: #d50; }
+

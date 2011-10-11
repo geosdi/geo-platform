@@ -1,0 +1,21 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../../../css/tools.css);
+
+
+/* Buttons (Needed for System Markup)
+----------------------------------------------------------------------------------------------------*/
+
+a.button-more {
+	border: none;
+	background: #444;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	color: #FFF;
+	font-size: 12px;
+	line-height: 16px;
+	text-transform: uppercase;
+}
+
+a.button-more:hover { color: #FFF; }
+

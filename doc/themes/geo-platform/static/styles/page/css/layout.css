@@ -1,0 +1,108 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../../../warp/css/layout.css);
+
+
+/* Spacing
+----------------------------------------------------------------------------------------------------*/
+
+#menu .module { margin: 15px; }
+
+#breadcrumbs,
+#content { margin: 20px; }
+
+#header,
+#top-a,
+#top-b,
+#innertop { border-bottom: 1px solid #ddd; }
+
+#bottom-a,
+#bottom-b,
+#innerbottom,
+#footer { border-top: 1px solid #ddd; }
+
+#toolbar,
+#headerbar { margin: 15px; }
+
+#headerbar .module {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+/* System Output Disabled */
+#header + #bottom-a,
+#header + #bottom-b,
+#top-a + #bottom-a,
+#top-a + #bottom-b,
+#top-b + #bottom-a,
+#top-b + #bottom-b { border-top: none; }
+
+
+/* Layout
+----------------------------------------------------------------------------------------------------*/
+
+/* Background */
+body#page { background: #F0F1F2; }
+
+.wrapper {
+	margin: 40px auto;
+	border: 1px solid #ddd;
+	background: #FFF;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+}
+
+#menubar {
+	border-top: 1px solid #ddd;
+	background: #fafafa;
+}
+
+#menu { margin-bottom: -1px; }
+
+#footer {
+	padding: 20px;
+	background: #fafafa;
+	-moz-border-radius-bottomleft: 15px;
+	-moz-border-radius-bottomright: 15px;
+	border-bottom-left-radius: 15px;	
+	border-bottom-right-radius: 15px;	
+}
+
+/* Sidebar Backgrounds */
+#sidebar-a,
+#sidebar-b {
+	position: relative;
+	z-index: 0;
+}
+
+.sidebar-bg {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	border-style: solid;
+	border-color: #DDD;
+}
+
+.sidebar-a-right #sidebar-a .sidebar-bg,
+.sidebar-b-right #sidebar-b .sidebar-bg { border-width: 0 0 0 1px; }
+
+.sidebar-a-left #sidebar-a .sidebar-bg,
+.sidebar-b-left #sidebar-b .sidebar-bg { border-width: 0 1px 0 0; }
+
+/* ToTop Scroller */
+#totop-scroller {
+	display: block;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 1;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #DDD;
+	background: #FFF url(../images/totop_scroller.png) 50% 50% no-repeat;
+	text-decoration: none;
+}
+

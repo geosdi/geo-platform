@@ -1,0 +1,11 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../../../css/ie7.css);
+
+#header { zoom:1; }
+
+
+.module .badge {
+	right: 0;
+	width: 46px;
+}

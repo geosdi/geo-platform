@@ -1,0 +1,26 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../../../css/system.css);
+
+
+/* Search
+----------------------------------------------------------------------------------------------------*/
+
+#searchbox {
+	height: 26px;
+	margin: 6px 6px 0 0;
+	background-color: #FFF;
+	-moz-border-radius: 13px;
+	border-radius: 13px;
+}
+
+#searchbox input { height: 26px; }
+
+#searchbox .results {
+	top: 33px;
+	right: -8px;
+	-moz-border-radius-bottomleft: 10px;
+	-moz-border-radius-bottomright: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;	
+}

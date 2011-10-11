@@ -1,0 +1,152 @@
+/* Copyright  2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+/*
+ * Menus Style Sheet - Defines base styles for various menus
+ * Supported: Mega Drop-Down Menu, Sidebar/Accordion Menu and Line Menu
+ */
+
+
+/* Menu Helpers
+----------------------------------------------------------------------------------------------------*/
+
+.menu,
+.menu ul {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+.menu a,
+.menu span { display: block; }
+.menu a { text-decoration: none; }
+
+
+/* Mega Drop-Down Menu
+----------------------------------------------------------------------------------------------------*/
+
+.menu-dropdown li { position: relative; }
+
+/* Level 1 */
+.menu-dropdown,
+.menu-dropdown .level1,
+.menu-dropdown .level1 > span { float: left; }
+
+.menu-dropdown a.level1 > span,
+.menu-dropdown span.level1 > span {
+	height: 35px;
+	padding: 0 10px;
+	line-height: 35px;
+}
+
+/* Drop-Down */
+.menu-dropdown .dropdown {
+	position: absolute;
+	top: 35px;
+ 	left: -999em;
+	z-index: 100;
+	width: 300px; /* Default */
+}
+
+.menu-dropdown li:hover .dropdown,
+.menu-dropdown li.remain .dropdown { left: 0px; }
+
+.menu-dropdown .dropdown-bg > div { overflow: hidden; }
+
+/* Multi Columns, Default */
+.menu-dropdown .columns2 { width: 600px; }
+.menu-dropdown .columns3 { width: 900px; }
+.menu-dropdown .columns4 { width: 1200px; }
+
+.menu-dropdown .column { float: left; }
+
+/* Level 2 */
+.menu-dropdown a.level2 > span,
+.menu-dropdown span.level2 > span {
+	padding: 7px 0;
+	line-height: 21px;
+	overflow: hidden;
+}
+
+/* Level 3 */
+.menu-dropdown ul.level3 { padding-bottom: 10px; }
+
+.menu-dropdown li.level3 { /* Must be set in li for IE7 */
+	font-size: 11px;
+	line-height: 17px;
+}
+
+/* Icons */
+.menu-dropdown span.icon {
+	display: block;
+	width: 35px;
+	height: 35px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	float: left;
+}
+
+.menu-dropdown span.icon + span,
+.menu-dropdown span.icon + span + span { margin-left: 35px; }
+
+.menu-dropdown li.level2 .level2 span.icon {
+	margin-top: -7px;
+	margin-bottom: -7px;
+}
+.menu-dropdown li.level2.hassubtitle .level2 span.icon { margin-top: -2px; }
+
+/* Subtitles */
+.menu-dropdown span.title { line-height: 21px; }
+
+.menu-dropdown span.subtitle {
+	margin-top: -1px;
+	font-size: 9px;
+	line-height: 10px;
+	text-indent: 1px;
+}
+
+
+/* Sidebar/Accordion Menu
+----------------------------------------------------------------------------------------------------*/
+
+/* Accordion */
+.menu-sidebar li.parent span.level1 > span { cursor: pointer; }
+
+/* Level 1 */
+.menu-sidebar a.level1 > span,
+.menu-sidebar span.level1 > span {
+	padding: 5px 0;
+	line-height: 20px;
+}
+
+/* Remove Subtitles */
+.menu-sidebar span.subtitle { display: none; }
+
+/* Level 2-4 */
+.menu-sidebar ul.level2 { padding-bottom: 10px; }
+.menu-sidebar li.level1:last-child ul.level2 { padding-bottom: 0; }
+
+.menu-sidebar .level2 a > span {
+	font-size: 11px;
+	line-height: 17px;
+}
+
+/* Icons */
+.menu-sidebar span.icon {
+	display: inline-block;
+	height: 30px;
+	width: 30px;
+	margin: -5px 0;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	vertical-align: middle;
+}
+
+
+/* Line Menu
+----------------------------------------------------------------------------------------------------*/
+
+/* Level 1 */
+.menu-line,
+.menu-line li,
+.menu-line li a { display: inline-block; }
+

@@ -1,0 +1,10 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+a:hover,
+em,
+code,
+.menu-dropdown a.level2:hover,
+.menu-dropdown a.level3:hover,
+.menu-sidebar a:hover > span,
+.menu-sidebar span:hover > span { color: #48b; }
+

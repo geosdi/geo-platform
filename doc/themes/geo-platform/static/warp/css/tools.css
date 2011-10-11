@@ -1,0 +1,220 @@
+/* Copyright  2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+/*
+ * Tools Style Sheet - Provides a useful set of CSS classes to style your content
+ * Some classes are used in the Joomla and WordPress system markup
+ */
+
+
+/* Useful Classes for Content Creation
+----------------------------------------------------------------------------------------------------*/
+
+.display-block { display: block; }
+.remove-margin { margin: 0; }
+.remove-margin-t { margin-top: 0; }
+.remove-margin-b { margin-bottom: 0; }
+
+/* Block Alignment (Needed for System Markup, without hyphen needed for WP) */
+.align-left,
+.alignleft {
+	display: block;
+	margin-right: 15px;
+	float: left;
+}
+
+.align-right,
+.alignright {
+	display: block;
+	margin-left: 15px;
+	float: right;
+}
+
+.align-center {
+	display: block;
+	margin: auto;
+	margin-bottom: 10px;
+}
+
+/* Text Alignment */
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+.text-justify { text-align: justify; }
+
+
+/* Buttons (Needed for System Markup)
+----------------------------------------------------------------------------------------------------*/
+
+a.button-more { display: inline-block; }
+
+
+/* Lists (Needed for System Markup)
+----------------------------------------------------------------------------------------------------*/
+
+ul.blank,
+ul.space,
+ul.line,
+ul.check,
+ul.zebra {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* Space */
+ul.space li { margin-top: 15px; }
+ul.space li:first-child { margin-top: 0; }
+
+/* Line, section.line needed for latest comments */
+ul.line > li,
+section.line > article {
+	margin-top: 5px;
+	padding-top: 5px;
+}
+
+ul.line > li:first-child,
+section.line > article:first-child {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+/* Check */
+ul.check > li { margin-top: 5px; }
+ul.check > li:first-child { margin: 0; }
+
+/* Zebra */
+ul.zebra > li { padding: 5px; }
+
+
+/* Tables (Needed for System Markup)
+----------------------------------------------------------------------------------------------------*/
+
+table.zebra { width: 100%; }
+
+table.zebra th {
+	font-size: 16px;
+	font-weight: normal;
+	text-align: left;
+}
+
+table.zebra th,
+table.zebra td { padding: 5px; }
+
+table.zebra tbody,
+table.zebra tfoot { font-size: 12px; }
+
+table.zebra .bold { font-weight: bold; }
+table.zebra .center { text-align: center; }
+
+table.zebra td * { vertical-align: middle; }
+
+table.zebra tfoot { font-style: italic; }
+
+table.zebra caption {
+	font-size: 11px;
+	text-align: left;
+	font-style: italic;
+}
+
+
+/* Definition Lists
+----------------------------------------------------------------------------------------------------*/
+
+dl.separator {
+	padding: 0;
+	overflow: hidden;
+}
+
+dl.separator dt {	
+	width: 160px;
+	padding-right: 10px;
+	float: left;
+	clear: both;
+}
+
+dl.separator dd {
+	margin-left: 170px;
+	padding-left: 20px;
+}
+
+
+/* Text
+----------------------------------------------------------------------------------------------------*/
+
+/* Inline Text Box */
+em.box { 
+	padding: 0 3px;
+	white-space: nowrap;
+}
+
+/* Dotted Horizontal Rule */
+hr.dotted { border: none; }
+
+/* Drop Caps */
+p.dropcap:first-letter {
+	display: block;
+	margin: 7px 4px 0px 0px;
+	float: left;
+	font-size: 280%;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+
+/* Boxes
+----------------------------------------------------------------------------------------------------*/
+
+.box-content,
+.box-note,
+.box-info,
+.box-warning,
+.box-hint,
+.box-download {
+	margin: 15px 0;
+	padding: 10px;
+	text-align: justify;
+}
+
+.box-content { padding: 20px; }
+
+.box-info,
+.box-warning,
+.box-hint,
+.box-download { padding-left: 40px; }
+
+
+/* Forms (Needed for System Markup)
+----------------------------------------------------------------------------------------------------*/
+
+/* Box */
+form.box fieldset {
+	margin-bottom: 30px;
+	padding: 0 10px 10px 10px;
+}
+form.box legend { padding: 0 10px; }
+form.box fieldset > div { margin: 15px 0; }
+
+form.box button,
+form.box input[type='button'],
+form.box input[type='reset'] { vertical-align: middle; }
+
+/* Short */
+form.short > div { margin: 10px 0; }
+
+form.short input { color: #333; }
+form.short input:-moz-placeholder { color: #999; }
+form.short input::-webkit-input-placeholder { color: #999; }
+form.short input.placeholder { color: #999; }
+
+
+/* Mobile Switcher (Needed for Mobile)
+----------------------------------------------------------------------------------------------------*/
+
+.mobile-switcher {
+	display: block;
+	width: 80%;
+	margin: 20px auto 40px auto;
+	padding: 40px 0;
+	font-size: 50px;
+	text-align: center;
+}

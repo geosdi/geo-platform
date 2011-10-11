@@ -1,0 +1,58 @@
+/* Copyright  2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+/*
+ * Error Style Sheet - It is used for error, offline and Internet Explorer 6 upgrade page
+ */
+
+
+/* Defaults
+----------------------------------------------------------------------------------------------------*/
+
+body {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.center {
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	text-align: center;
+}
+
+.error {
+	margin: 0;
+	font-size: 200px;
+	line-height: 200px;
+	font-weight: bold;
+}
+
+.title { margin: 20px 0 0 0; }
+
+.message { margin: 20px auto 0 auto; }
+
+/* Offline */
+.error-offline .error {
+	font-size: 150px;
+	line-height: 150px;
+}
+
+/* Browser */
+.error-browser .error { line-height: inherit; }
+
+.error-browser .error a {
+	display: block;
+	width: 135px;
+	height: 132px;
+	background: url(../images/error/browser_logos.png) 0 0 no-repeat;
+	float: left;
+}
+
+.error-browser .error a.firefox { background-position: -135px 0; }
+.error-browser .error a.opera { background-position: -270px 0; }
+.error-browser .error a.safari { background-position: -405px 0; }
+.error-browser .error a.ie { background-position: -540px 0; }
+

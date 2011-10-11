@@ -1,0 +1,13 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 { font-family: BebasNeueRegular; }
+
+h1 { font-size: 44px; line-height: 44px; }
+h2 { font-size: 30px; line-height: 30px; }
+h3 { font-size: 24px; line-height: 24px; }
+h4, h5, h6 { font-size: 22px; line-height: 22px; }

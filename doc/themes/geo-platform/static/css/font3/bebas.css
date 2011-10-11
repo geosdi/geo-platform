@@ -1,0 +1,13 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+.menu-dropdown a.level1,
+.menu-dropdown span.level1 { 
+	font-family: BebasNeueRegular;
+	font-size: 26px;
+}
+
+.menu-dropdown .level1 .level1 span.title { font-size: 20px; }
+.menu-dropdown .level1 .level1 span.subtitle {
+	margin-top: 1px;
+	font-size: 14px;
+}

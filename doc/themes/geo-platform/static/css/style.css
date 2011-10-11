@@ -1,0 +1,132 @@
+/* Copyright (C) 2007 - 2011 YOOthemes GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+/*
+ * Style Style Sheet - Defines the main look like colors and backgrounds
+ * Not all style related CSS is included, only colors and backgrounds which may change for different theme styles
+ */
+
+@import url(../warp/css/style.css);
+
+
+/* Base
+----------------------------------------------------------------------------------------------------*/
+
+
+/* Layout
+----------------------------------------------------------------------------------------------------*/
+
+
+/* Menus - Mega Drop-Down Menu
+----------------------------------------------------------------------------------------------------*/
+
+/* Level 1 */
+.menu-dropdown { margin-bottom: -12px; }
+.menu-dropdown li.level1 { padding-bottom: 12px; }
+
+.menu-dropdown a.level1,
+.menu-dropdown span.level1 { padding: 1px; }
+
+/* Set Hover and Active */
+.menu-dropdown li.level1:hover .level1,
+.menu-dropdown li.remain .level1,
+.menu-dropdown li.active .level1 {
+	padding: 0;
+	border: 1px solid #DDD;
+	background: #EEE;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	text-shadow: 0 1px 1px #FFF;
+}
+
+/* Drop-Down */
+.menu-dropdown .dropdown,
+.menu-dropdown .dropdown-bg > div {
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+
+/* Menus - Sidebar/Accordion Menu
+----------------------------------------------------------------------------------------------------*/
+
+/* Level 1 */
+.menu-sidebar li.level1 { border: none; }
+
+.menu-sidebar a.level1,
+.menu-sidebar span.level1 { padding: 1px 11px; }
+
+.menu-sidebar a.level1:hover,
+.menu-sidebar span.level1:hover {
+	padding: 0 10px;
+	border: 1px solid #DDD;
+	background: #EEE;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	color: #444;
+	text-shadow: 0 1px 1px #FFF;
+}
+
+.menu-sidebar a.level1 > span,
+.menu-sidebar span.level1 > span { line-height: 18px; }
+
+/* Level 2-4 */
+.menu-sidebar ul.level2 {
+    padding-left: 11px;
+	padding-right: 11px;
+}
+
+.menu-sidebar ul.level2 ul { padding-left: 11px; }
+
+.menu-sidebar ul a > span {
+	padding-left: 15px;
+	background: url(../images/menu_sidebar_level2.png) 0 50% no-repeat;
+}
+
+
+/* Modules
+----------------------------------------------------------------------------------------------------*/
+
+
+/* Tools
+----------------------------------------------------------------------------------------------------*/
+
+/* Buttons */
+a.button-more {
+	background: #EEE;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	color: #444;
+	text-shadow: 0 1px 1px #FFF;
+}
+
+a.button-more:hover {
+	background: #DDD;
+	color: #444;
+}
+
+
+/* System
+----------------------------------------------------------------------------------------------------*/
+
+/* Pagination */
+#system .pagination a,
+#system .pagination strong {
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+#jblin h1 {position: absolute; top: 0px; left: -5000px;}
+#system .pagination a { color: #777; }
+
+#system .pagination strong,
+#system .pagination a:hover {
+	background: #EEE;
+	color: #444;
+}
+
+/* Search */
+#searchbox,
+#searchbox .results {
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+

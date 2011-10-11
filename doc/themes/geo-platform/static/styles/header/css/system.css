@@ -1,0 +1,66 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../../../css/system.css);
+
+
+/* Item
+----------------------------------------------------------------------------------------------------*/
+
+#system .item > header .meta {
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+
+/* Pagination
+----------------------------------------------------------------------------------------------------*/
+
+#system .pagination a,
+#system .pagination strong {
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+#system .pagination a { color: #444; }
+
+#system .pagination strong,
+#system .pagination a:hover {
+	padding: 1px 6px;
+	border: none;
+	background: #444;
+	color: #FFF;
+}
+
+
+/* Search
+----------------------------------------------------------------------------------------------------*/
+
+#searchbox {
+	height: 24px;
+	border: none;
+	background-color: #FFF;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+#searchbox input {
+	height: 24px;
+	color: #333;
+}
+
+/* Drop-Down Results */
+#searchbox .results {
+	top: 37px;
+	right: -8px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+
+/* Breadcrumbs
+----------------------------------------------------------------------------------------------------*/
+
+.breadcrumbs a,
+.breadcrumbs > span { background: url(../images/breadcrumbs.png) 100% 50% no-repeat; }
+
+

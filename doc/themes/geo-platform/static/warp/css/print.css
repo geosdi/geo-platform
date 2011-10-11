@@ -1,0 +1,40 @@
+/* Copyright  2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+/*
+ * Print Style Sheet - Only used when printing
+ * Thanks to HTML5 Boilerplate
+ */
+
+
+@media print {
+	
+	* {
+		background: transparent !important;
+		color: black !important;
+		box-shadow: none !important;
+		text-shadow: none !important;
+		filter:none !important;
+		-ms-filter: none !important;
+	}
+	
+	a, a:visited {
+		color: black !important;
+		text-decoration: underline;
+	}
+	
+	pre, blockquote {
+		border: 1px solid #999;
+		page-break-inside: avoid;
+	}
+	
+	thead { display: table-header-group; }
+	
+	tr, img { page-break-inside: avoid; }
+	
+	@page { margin: 0.5cm; }
+	
+	p, h2, h3 { orphans: 3; widows: 3; }
+	
+	h2, h3 { page-break-after: avoid; }
+	
+}

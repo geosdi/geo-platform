@@ -1,0 +1,112 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../../../warp/css/layout.css);
+
+
+/* Spacing
+----------------------------------------------------------------------------------------------------*/
+
+.module { margin: 15px; }
+
+#header,
+#top-a,
+#top-b,
+#bottom-a,
+#bottom-b,
+#innertop,
+#innerbottom,
+#breadcrumbs,
+#footer { margin: 20px; }
+
+#header { margin-top: 15px; }
+
+#innertop,
+#breadcrumbs { margin-top: 0; }
+#innerbottom { margin-bottom: 0; }
+
+#content { margin: 0 20px; }
+
+#top-a > div,
+#top-b > div,
+#bottom-a > div,
+#bottom-b > div,
+#innertop > div,
+#innerbottom > div { margin: 0 -20px; }
+
+#top-a,
+#top-b,
+#innertop {
+	padding-bottom: 20px;
+	border-bottom: 1px solid #ddd;
+}
+
+#bottom-a,
+#bottom-b,
+#innerbottom {
+	padding-top: 20px;
+	border-top: 1px solid #ddd;
+}
+
+#footer .module { margin: 0; }
+
+#headerbar { margin: 15px 0; }
+
+/* System Output Disabled */
+#header + #bottom-a,
+#header + #bottom-b,
+#top-a + #bottom-a,
+#top-a + #bottom-b,
+#top-b + #bottom-a,
+#top-b + #bottom-b {
+	padding-top: 0;
+	border-top: none;
+}
+
+/* Layout
+----------------------------------------------------------------------------------------------------*/
+
+/* Menubar */
+#menubar {
+	padding: 5px 5px 5px 0;
+	background: #444;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+/* Search */
+#search { margin: 3px 3px 0 0; }
+
+/* Sidebar Backgrounds */
+#sidebar-a,
+#sidebar-b { position: relative; }
+
+.sidebar-bg {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+}
+
+.sidebar-a-right #sidebar-a .sidebar-bg,
+.sidebar-b-right #sidebar-b .sidebar-bg { background: url(../images/line_dotted_v.png) 0 0 repeat-y; }
+
+.sidebar-a-left #sidebar-a .sidebar-bg,
+.sidebar-b-left #sidebar-b .sidebar-bg { background: url(../images/line_dotted_v.png) 100% 0 repeat-y; }
+
+/* ToTop Scroller */
+#totop-scroller {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1;
+	width: 20px;
+	height: 20px;
+	background: #444 url(../images/totop_scroller.png) 50% 7px no-repeat;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	text-decoration: none;
+}
+

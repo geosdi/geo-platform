@@ -1,0 +1,241 @@
+/* Copyright  2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+/*
+ * RTL Style Sheet - Used for right-to-left language localizations
+ */
+
+
+/* Base
+----------------------------------------------------------------------------------------------------*/
+
+ul, ol, dl {
+	padding-left: 0;
+	padding-right: 30px;
+}
+
+dd {
+	margin-left: 0;
+	margin-right: 40px;
+}
+
+
+/* Layout
+----------------------------------------------------------------------------------------------------*/
+
+.grid-box,
+.bfc-f,
+.float-left { float: right; }
+.float-right { float: left; }
+
+#toolbar .float-left .module,
+#toolbar .float-left > time {
+	margin: 0 0 0 15px;
+	float: right;
+}
+
+#toolbar .float-right .module {
+	margin: 0 15px 0 0;
+	float: left;
+}
+
+#headerbar .module {
+	margin-left: 0;
+	margin-right: 15px;
+	float: left;
+}
+
+#logo, #logo > img,
+#menu { float: right; }
+#search { float: left; }
+
+
+/* Menus
+----------------------------------------------------------------------------------------------------*/
+
+/* Mega Drop-Down Menu */
+.menu-dropdown,
+.menu-dropdown .level1,
+.menu-dropdown .level1 > span { float: right; }
+
+.menu-dropdown .dropdown {
+	left: auto;
+ 	right: -999em;
+}
+
+.menu-dropdown li:hover .dropdown,
+.menu-dropdown li.remain .dropdown {
+	left: auto;
+ 	right: 0px;
+}
+
+.menu-dropdown .column { float: right; }
+
+.menu-dropdown span.icon { float: right; }
+
+.menu-dropdown span.icon + span,
+.menu-dropdown span.icon + span + span {
+	margin-left: 0;
+	margin-right: 35px;
+}
+
+
+/* Modules
+----------------------------------------------------------------------------------------------------*/
+
+/* Badges */
+.module .badge {
+	right: auto;
+	left: 0;
+}
+
+/* Icons */
+.module h3.title .icon {
+	margin-right: 0;
+	margin-left: 5px;
+	float: right;
+}
+
+
+/* Tools
+----------------------------------------------------------------------------------------------------*/
+
+/* Alignment (Needed for System Markup, without hyphen needed for WP) */
+.align-left,
+.alignleft {
+	margin-right: 0;
+	margin-left: 15px;
+	float: right;
+}
+
+.align-right,
+.alignright {
+	margin-left: 0;
+	margin-right: 15px;
+	float: left;
+}
+
+/* Tables (Needed for System Markup) */
+table.zebra th,
+table.zebra caption { text-align: right; }
+
+/* Definition Lists */
+dl.separator dt {	
+	padding-right: 0;
+	padding-left: 10px;
+	float: right;
+}
+
+dl.separator dd {
+	margin-left: 0;
+	margin-right: 170px;
+	padding-left: 0;
+	padding-right: 20px;
+}
+
+/* Text Alignment */
+.text-left { text-align: right; }
+.text-right { text-align: left; }
+
+/* Drop Caps */
+p.dropcap:first-letter {
+	margin-right: 0;
+	margin-left: 4px ;
+	float: right;
+}
+
+/* Boxes */
+div.box-info,
+div.box-warning,
+div.box-hint,
+div.box-download {
+	padding-left: 0;
+	padding-right: 40px;
+	background-position: 100% 0;
+}
+
+
+/* System
+----------------------------------------------------------------------------------------------------*/
+
+/* Item */
+#system article > .links a {
+	margin-right: 0;
+	margin-left: 15px;
+}
+
+/* Pagination */
+#system .pagination a,
+#system .pagination strong {
+	margin-left: 0;
+	margin-right: 5px;
+}
+#system .pagination > *:first-child { margin-right: 0; }
+
+/* Search Box */
+#searchbox input { float: right; }
+
+#searchbox.filled button {
+	right: auto;
+	left: 0;
+}
+
+#searchbox .results {
+	right: auto;
+	left: 0;
+}
+
+/* Breadcrumbs */
+.breadcrumbs a,
+.breadcrumbs > span {
+	margin-right: 0;
+	margin-left: 10px;
+}
+
+/* Joomla 1.5/1.6 Specific */
+#system article > header .icon { 
+	margin: 2px 5px 0 0;
+	float: left;
+}
+
+#system .filter > div {
+	margin: 0 0 0 10px;
+	float: right;
+}
+
+/* WordPress Specific */
+#system section.author .avatar {
+	margin-right: 0;
+	margin-left: 15px;
+	float: right;
+}
+
+#system #comments .comment-head .avatar {
+	margin-right: 0;
+	margin-left: 10px;
+	float: right;
+}
+
+#system #comments ul.level1 ul {
+	padding-left: 0;
+	padding-right: 55px;
+}
+
+#system #respond input[type='text'] {
+	padding-left: 0;
+	padding-right: 5px;
+}
+
+#system ul #respond {
+	padding-left: 0;
+	padding-right: 10px;
+}
+
+ul.line.comments .avatar {
+	margin-right: 0;
+	margin-left: 10px;
+	float: right;
+}
+
+table.calendar tfoot td { text-align: left; }
+table.calendar tfoot td:first-child { text-align: right; }
+

@@ -1,0 +1,79 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../../../css/rtl.css);
+
+
+/* Layout
+----------------------------------------------------------------------------------------------------*/
+
+/* Sidebar Backgrounds */
+.sidebar-a-right #sidebar-a .sidebar-bg,
+.sidebar-b-right #sidebar-b .sidebar-bg {
+	border: none;
+	background-position: 100% 0;
+}
+
+.sidebar-a-left #sidebar-a .sidebar-bg,
+.sidebar-b-left #sidebar-b .sidebar-bg {
+	border: none;
+	background-position: 0 0;
+}
+
+
+/* Menus
+----------------------------------------------------------------------------------------------------*/
+
+/* Mega Drop-Down Menu */
+.menu-dropdown li.level1 { margin-left: 0; }
+
+.menu-dropdown a.level3 > span,
+.menu-dropdown span.level3 > span { 
+	padding-right: 0;
+	background: none;
+}
+
+/* Sidebar/Accordion Menu */
+.menu-sidebar ul.level2 ul { padding-right: 10px; }
+
+.menu-sidebar ul a > span {
+	padding-right: 0;
+	background: none;
+}
+
+
+/* Modules
+----------------------------------------------------------------------------------------------------*/
+
+/* horizontal line */
+.grid-h .mod-line {
+	border: none;
+	background-position: 100% 0;
+}
+
+.grid-v .mod-line .badge { left: 0; }
+
+
+/* Tools
+----------------------------------------------------------------------------------------------------*/
+
+
+/* System
+----------------------------------------------------------------------------------------------------*/
+
+/* Pagination */
+#system .pagination a,
+#system .pagination strong {
+	margin: 0;
+	padding-left: 7px;
+	padding-right: 8px;
+	background-position: 100% 50%;
+}
+
+/* Breadcrumbs */
+.breadcrumbs a,
+.breadcrumbs > span {
+	padding-right: 0;
+	padding-left: 10px;
+	background-image: url(../images/breadcrumbs.png);
+	background-position: 0 50%;
+}

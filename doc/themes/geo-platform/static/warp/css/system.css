@@ -1,0 +1,181 @@
+/* Copyright  2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+/*
+ * System Style Sheet - Defines a base style for the Joomla and WordPress core HTML markup
+ */
+
+
+/* General
+----------------------------------------------------------------------------------------------------*/
+
+#system .page-title {
+	margin-top: 0;
+	font-size: 18px;
+	line-height: 18px;
+}
+
+#system .title { margin-top: 0; }
+#system .title a { text-decoration: none; }
+
+#system .title + .title { margin-top: 20px; }
+
+#system > .description {
+	margin-bottom: 30px;
+	overflow: hidden;
+}
+
+#system small { font-style: italic; }
+
+
+/* Item
+----------------------------------------------------------------------------------------------------*/
+
+#system .item > header { margin-bottom: 15px; }
+#system .item > header .title { margin-bottom: 0; }
+
+#system .item > header .meta {
+	margin: 10px 0 0 0;
+	font-size: 11px;
+	line-height: 13px;
+}
+
+#system .item > header .subtitle{
+	margin: 0 0 8px 0;
+	font-size: 14px;
+	line-height: 16px;
+	font-weight: normal;
+	text-transform: uppercase;
+}
+
+#system .item > .content > *:first-child,
+#system .item > .content > *[class^="align"]:first-child + * { margin-top: 0; }
+#system .item > .content > *:last-child { margin-bottom: 0; }
+
+#system .item > .links { margin: 22px 0 0 0; }
+#system .item > .links a { margin-right: 15px; }
+
+#system .item > .taxonomy {}
+#system .item > .trackback {}
+#system .item > .edit {}
+
+#system .item > *:last-child { margin-bottom: 0; }
+
+
+/* Items
+----------------------------------------------------------------------------------------------------*/
+
+#system .items { margin: 0 -10px 0 -10px; }
+#system .items .item { margin: 0 10px 0 10px; }
+
+#system .items > .width50 .title { font-size: 22px; line-height: 22px; }
+#system .items > .width33 .title { font-size: 20px; line-height: 20px; }
+#system .items > .width25 .title { font-size: 18px; line-height: 18px; }
+
+
+/* Pagination
+----------------------------------------------------------------------------------------------------*/
+
+#system .pagination {
+	margin-top: 10px;
+	text-align: center;
+}
+
+#system .pagination a { text-decoration: none; }
+#system .pagination strong { font-weight: normal; }
+
+#system .pagination a,
+#system .pagination strong {
+	display: inline-block;
+	min-width: 15px;
+	height: 25px;
+	margin-left: 5px;
+	padding: 0 5px;
+	line-height: 25px;
+}
+#system .pagination > *:first-child { margin-left: 0; }
+
+#system .pagination a.previous,
+#system .pagination a.next {
+	font-size: 16px;
+	line-height: 23px;
+}
+
+
+/* Search Box
+----------------------------------------------------------------------------------------------------*/
+
+#searchbox { position: relative; }
+
+#searchbox input {
+	width: 100%;
+	padding: 0;
+	border: none;
+	outline: none;
+	background: none;
+	float: left;
+}
+
+#searchbox button { display: none; }
+#searchbox.filled button {
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	padding: 0;
+	border: none;
+	line-height: 0;
+	cursor: pointer;
+}
+#searchbox.loading button {}
+
+/* Drop-Down Results */
+#searchbox .results {
+	position: absolute;
+	top: 30px;
+	right: 0;
+	z-index: 10;
+	width: 300px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#searchbox .results li.results-header,
+#searchbox .results li.more-results {
+	height: 35px;
+	line-height: 35px;
+	text-indent: 15px;
+	text-transform: uppercase;
+}
+
+#searchbox .results li.more-results { cursor: pointer; }
+
+#searchbox .results li.result {
+	padding: 10px 15px;
+	cursor: pointer;
+}
+
+#searchbox .results li.result h3 {
+	margin: 0 0 5px 0;
+	font-size: 16px;
+}
+
+#searchbox .results li.result div { font-size: 11px; }
+
+
+/* Breadcrumbs
+----------------------------------------------------------------------------------------------------*/
+
+.breadcrumbs { overflow: hidden; }
+
+.breadcrumbs a,
+.breadcrumbs span,
+.breadcrumbs strong {
+	display: inline-block;
+	text-decoration: none;
+}
+
+.breadcrumbs a,
+.breadcrumbs > span { margin-right: 10px; }
+

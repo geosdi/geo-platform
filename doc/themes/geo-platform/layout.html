@@ -1,0 +1,328 @@
+{%- set breadcrumbdelim = breadcrumbdelim is not defined and ' &raquo;' or breadcrumbdelim %}
+{%- set reldelim = reldelim is not defined and '|' or reldelim %}
+{%- macro breadcrumbs() %}
+<ul id="breadcrumbs">
+    {% if pagename != 'index' %}
+    {%- block rootrellink %}
+    <li><a href="{{ pathto('index') }}">{{ docstitle }}</a>{{ breadcrumbdelim }}</li>
+    {%- endblock %}
+    
+    {%- for parent in parents %}
+    <li><a href="{{ parent.link|e }}" accesskey="U">{{ parent.title }}</a>{{ breadcrumbdelim }}</li>
+    {%- endfor %}
+    <li>{{ title|striptags }}</li>
+    {%- else %}
+    <li>{{ docstitle }}</li>
+    {%- endif %}
+</ul>
+{%- endmacro %}
+{%- macro rellinkbar() %}
+<ul id="relatedlinks" class="selfclear">
+    {%- for rellink in rellinks %}
+    <li{% if loop.first %} class="first"{% endif %}>
+        <a href="{{ pathto(rellink[0]) }}" title="{{ rellink[1]|striptags }}"
+            accesskey="{{ rellink[2] }}">{{ rellink[3] }}</a>
+        {%- if not loop.first %}{{ reldelim }}{% endif %}</li>
+    {%- endfor %}
+    {%- block relbaritems %}{% endblock %}
+</ul>
+{%- endmacro %}
+
+{%- macro sidebar() %}
+{%- if builder != 'htmlhelp' %}
+<div id="sidebar"{%- if pagename not in ['index', 'search'] %} class="contrast"{%- endif %}>
+    {%- if display_toc %}
+    {%- block sidebartoc %}
+    <div id="toc" class="section">
+        <h3 class="pngfix">Table Of Contents</h3>
+        {{ toc }}
+        <div class="section-footer"></div>
+    </div>
+    {%- endblock %}
+    {%- endif %}
+    {%- block sidebarrel %}
+    {%- if (prev or next) %}
+    <div class="section">
+        <h3>Continue Reading</h3>
+        <ul>
+            {%- if prev %}
+            <li>Previous: <a href="{{ prev.link|e }}" title="previous chapter">{{ prev.title }}</a></li>
+            {%- endif %}
+            {%- if next %}
+            <li>Next: <a href="{{ next.link|e }}" title="next chapter">{{ next.title }}</a></li>
+            {%- endif %}
+        </ul>
+    </div>
+    {%- endif %}
+    {%- endblock %}
+    {%- if sourcename %}
+    <div class="section">
+        <h3>This Page</h3>
+        <ul class="this-page-menu">
+            {%- if builder == 'web' %}
+            <li><a href="#comments">Comments ({{ comments|length }} so far)</a></li>
+            <li><a href="{{ pathto('@edit/' + sourcename)|e }}">Suggest Change</a></li>
+            <li><a href="{{ pathto('@source/' + sourcename)|e }}">Show Source</a></li>
+            {%- elif builder == 'html' %}
+            <li><a href="{{ pathto('_sources/' + sourcename, true)|e }}">Show Source</a></li>
+            {%- endif %}
+        </ul>
+    </div>
+    {%- endif %}
+    {%- if customsidebar %}
+    {{ rendertemplate(customsidebar) }}
+    {%- endif %}
+    {%- block sidebarsearch %}{%- endblock %}
+</div><!-- /#sidebar -->
+{%- endif %}
+{%- endmacro -%}
+{%- block doctype -%}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{%- endblock %}
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {{ metatags }}
+        {%- if not embedded %}
+        {%- set titlesuffix = " &mdash; "|safe + docstitle|e %}
+        {%- else %}
+        {%- set titlesuffix = "" %}
+        {%- endif %}
+        <title>{{ title|striptags }}{{ titlesuffix }}</title>
+        {%- block basecss %}
+        <link rel="stylesheet" href="{{ pathto('_static/blueprint/screen.css', 1) }}" type="text/css" media="screen, projection" />
+        <link rel="stylesheet" href="{{ pathto('_static/blueprint/print.css', 1) }}" type="text/css" media="print" /> 
+        <!--[if IE]>
+         <link rel="stylesheet" href="{{ pathto('_static/blueprint/ie.css', 1) }}" type="text/css" media="screen, projection" />
+         <![endif]-->
+        {%- endblock %}
+        {%- if builder == 'web' %}
+        <link rel="stylesheet" href="{{ pathto('index') }}?do=stylesheet{%
+        if in_admin_panel %}&admin=yes{% endif %}" type="text/css" />
+        {%- for link, type, title in page_links %}
+        <link rel="alternate" type="{{ type|e(true) }}" title="{{ title|e(true) }}" href="{{ link|e(true) }}" />
+        {%- endfor %}
+        {%- else %}
+        <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
+        <link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css" />
+        {%- endif %}
+        {%- if builder != 'htmlhelp' %}
+        <script type="text/javascript">
+            var DOCUMENTATION_OPTIONS = {
+                URL_ROOT:    '{{ pathto("", 1) }}',
+                VERSION:     '{{ release }}',
+                COLLAPSE_MODINDEX: false,
+                FILE_SUFFIX: '{{ file_suffix }}'
+            };
+            </script>
+        <script type="text/javascript" src="{{ pathto('_static/jquery.js', 1) }}"></script>
+        <script type="text/javascript" src="{{ pathto('_static/doctools.js', 1) }}"></script>
+        <script type="text/javascript" src="{{ pathto('_static/searchtools.js', 1) }}"></script>
+        <script type="text/javascript" src="{{ pathto('searchindex.js', 1) }}"></script>
+        {%- if use_opensearch %}
+        <link rel="search" type="application/opensearchdescription+xml"
+        title="Search within {{ docstitle }}"
+        href="{{ pathto('_static/opensearch.xml', 1) }}"/>
+        {%- endif %}
+        {%- if favicon %}
+        <link rel="shortcut icon" href="{{ pathto('_static/' + favicon, 1) }}"/>
+        {%- endif %}
+        {%- endif %}
+    
+        <meta charset="utf-8" />
+        <meta name="robots" content="index, follow" />
+        <meta name="keywords" content="Geo Platform, geosdi, geoSDI, geoPlatform" />
+        <meta name="title" content="Geo Platform" />
+        <meta name="author" content="Administrator" />
+        <meta name="description" content="Geo Platform the web gis application framework" />
+        <meta name="generator" content="Joomla! 1.5 - Open Source Content Management" />
+        <link href="/templates/yoo_nano/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link rel="stylesheet" href="{{ pathto('_static/css/base.css', 1) }}" type="text/css" />
+        <link rel="stylesheet" href="{{ pathto('_static/styles/page/css/layout.css', 1) }}" type="text/css" />
+        <link rel="stylesheet" href="{{ pathto('_static/styles/page/css/menus.css', 1) }}" type="text/css" />
+        <link rel="stylesheet" href="{{ pathto('_static/styles/page/css/modules.css', 1) }}" type="text/css" />
+        <link rel="stylesheet" href="{{ pathto('_static/css/tools.css', 1) }}" type="text/css" />
+        <link rel="stylesheet" href="{{ pathto('_static/styles/page/css/system.css', 1) }}" type="text/css" />
+        <link rel="stylesheet" href="{{ pathto('_static/css/extensions.css', 1) }}" type="text/css" />
+        <link rel="stylesheet" href="{{ pathto('_static/css/custom.css', 1) }}" type="text/css" />
+        <style type="text/css">
+            <!--
+            .wrapper { width: 980px; }
+            #sidebar-a { width: 245px; }
+            #maininner { width: 735px; }
+            #menu .dropdown { width: 250px; }
+            #menu .columns2 { width: 500px; }
+            #menu .columns3 { width: 750px; }
+            #menu .columns4 { width: 1000px; }
+            
+            -->
+            </style>
+        
+</head>
+    {%- block linktags %}
+    {%- if hasdoc('about') %}
+    <link rel="author" title="{{ _('About these documents') }}" href="{{ pathto('about') }}" />
+    {%- endif %}
+    {%- if hasdoc('genindex') %}
+    <link rel="index" title="{{ _('Index') }}" href="{{ pathto('genindex') }}" />
+    {%- endif %}
+    {%- if hasdoc('search') %}
+    <link rel="search" title="{{ _('Search') }}" href="{{ pathto('search') }}" />
+    {%- endif %}
+    {%- if hasdoc('copyright') %}
+    <link rel="copyright" title="{{ _('Copyright') }}" href="{{ pathto('copyright') }}" />
+    {%- endif %}
+    <link rel="top" title="{{ docstitle|e }}" href="{{ pathto('index') }}" />
+    {%- if parents %}
+    <link rel="up" title="{{ parents[-1].title|striptags }}" href="{{ parents[-1].link|e }}" />
+    {%- endif %}
+    {%- if next %}
+    <link rel="next" title="{{ next.title|striptags }}" href="{{ next.link|e }}" />
+    {%- endif %}
+    {%- if prev %}
+    <link rel="prev" title="{{ prev.title|striptags }}" href="{{ prev.link|e }}" />
+    {%- endif %}
+    {%- endblock %}
+    {%- block extrahead %}{% endblock %}
+    </head>
+    <body id="page" class="page sidebar-a-right sidebar-b-right isblog ">
+        <div id="jblin"><h1><a href="#" title="шаблоны joomla">geo-platform</a></h1></div>		
+        <div class="wrapper grid-block">
+            
+            <header id="header">
+                
+                <div id="toolbar" class="grid-block">
+                    
+                    <div class="float-left">
+                        
+                        <time datetime="2011-10-11"></time>
+                        
+                        <div class="module  deepest">
+                            
+                
+                        </div>					
+                    </div>
+                    
+                    
+                </div>
+                
+                <div id="headerbar" class="grid-block">
+                    
+					
+                    <a id="logo" href="/"><p><img src="{{ pathto('_static/images/geoPlatform_302x80.png', 1) }}" border="0" alt="GeoPlatform Loco" width="202" height="53" style="border: 0;" /></p></a>
+                    
+                    
+                </div>
+                
+                <div id="menubar" class="grid-block">
+                    
+                    <nav id="menu"><ul class="menu menu-dropdown"><li class="level1 item1 active current"><a href="http://test.geo-platform.org/" class="level1 active current"><span>Home</span></a></li></ul></nav>
+                    
+                    <div id="search"> 
+                        {%- block quicksearch %}
+                        
+                        <form id="searchbox" action="{{ pathto('search') }}" method="get">
+                                <input type="hidden" name="check_keywords" value="yes" />
+                                <input type="hidden" name="area" value="default" />
+                                <input type="text" name="q" accessKey="q" name="searchQuery.queryString" size="25" value="Search&hellip;" size="20" tabindex="3" onblur="if(this.value=='') this.value='Search&hellip;';" onfocus="if(this.value=='Searchn&hellip;') this.value='';" />
+                        </form>
+                        {%- endblock %}
+                        <script type="text/javascript">
+                            jQuery(function($) {
+                                   $('#searchbox input[name=searchword]').search({'url': 'index.php?option=com_search&tmpl=raw&type=json&ordering=&searchphrase=all', 'param': 'searchword', 'msgResultsHeader': 'Search Results', 'msgMoreResults': 'More Results', 'msgNoResults': 'No results found'}).placeholder();
+                                   });
+                            </script></div>
+                    
+                </div>
+                
+                
+            </header><!--
+                        <section id="top-a" class="grid-block"><div class="grid-box width100 grid-h"><div class="module mod-line deepest">
+                
+                
+                <div class="text-center"><img src="/images/gp-intro.png" border="0" width="915" height="300" style="border: 0;" />
+                    <h1 style="margin: 15px 0 10px 0; letter-spacing: 2px;">Introducing Geo Platform</h1>
+                    <p style="margin: 0; font-size: 26px; color: #999999;">The fast and slick webgis framework</p>
+                </div>	
+            </div></div></section>-->	
+            
+            
+            <div id="main" class="grid-block">
+                
+                <div id="maininner" class="grid-box">
+                    
+                    
+                    
+                    <section id="content" class="grid-block">
+                        
+                        <div id="system">
+                            
+                            
+                            <article class="item">
+                                
+                                
+                                <div class="content clearfix">
+                                    
+                                    {%- block document %}
+                                    {% block body %}{% endblock %}
+                                    {%- endblock %}
+                                                                        
+                                </div>
+                                
+                                
+                                
+                            </article>
+                            
+                        </div></section>
+                    
+                    
+                </div>
+                <!-- maininner end -->
+                
+                <aside id="sidebar-a" class="grid-box"><div class="grid-box width100 grid-v"><div class="module mod-line deepest">
+                    {%- block sidebar %}{{ sidebar() }}{% endblock %}		
+                </div></div><div class="sidebar-bg"></div></aside>
+                
+                
+            </div>
+            <!-- main end -->
+            
+                       
+            
+            <footer id="footer" class="grid-block">
+                
+                <a id="totop-scroller" href="#page"></a>
+                
+                <div class="module  deepest">
+                    
+                    
+                
+                </div>
+                <div class="module  deepest">
+                    
+                    
+                    <p>Copyright © 2011 <a href="http://www.geosdi.org" target="_blank">geoSDI</a></p>	
+                    {%- if show_sphinx %}
+                    <p>Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.</p>
+                    {%- endif %}
+                </div>
+            </footer>
+            
+        </div>
+        
+        <script type="text/javascript">
+            
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-182438-10']);
+            _gaq.push(['_trackPageview']);
+            
+            (function() {
+             var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+             })();
+            
+            </script>	
+    </body>
+</html>

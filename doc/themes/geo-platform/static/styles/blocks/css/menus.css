@@ -1,0 +1,58 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../../../css/menus.css);
+
+
+/* Mega Drop-Down Menu
+----------------------------------------------------------------------------------------------------*/
+
+/* Level 1 */
+.menu-dropdown { margin-bottom: -16px; }
+
+.menu-dropdown li.level1 {
+	margin-right: 0;
+	padding-bottom: 16px;
+}
+
+.menu-dropdown a.level1,
+.menu-dropdown span.level1 {
+	text-transform: uppercase;
+	font-size: 16px;
+	color: #444;
+}
+
+/* Set Hover and Active */
+.menu-dropdown li.level1:hover .level1,
+.menu-dropdown li.remain .level1,
+.menu-dropdown li.active .level1 { color: #48B; }
+
+/* Drop-Down */
+.menu-dropdown .dropdown { top: 45px; }
+
+.menu-dropdown li:hover .dropdown,
+.menu-dropdown li.remain .dropdown { left: -6px; }
+
+/* Level 3 */
+.menu-dropdown a.level3 > span,
+.menu-dropdown span.level3 > span { background-image: url(../images/menu_dropdown_level3.png); }
+
+
+/* Sidebar/Accordion Menu
+----------------------------------------------------------------------------------------------------*/
+
+/* Level 1 */
+.menu-sidebar li.parent .level1 > span { background-image: url(../images/menu_sidebar_parent.png); }
+
+/* Level 2-4 */
+.menu-sidebar ul a > span {
+	background: url(../images/menu_sidebar_level2.png) 0 50% no-repeat;
+	padding-left: 15px;
+}
+
+/* Line Menu
+----------------------------------------------------------------------------------------------------*/
+
+.menu-line li { text-transform: uppercase; }
+	
+
+

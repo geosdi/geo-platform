@@ -1,0 +1,91 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../../../css/rtl.css);
+
+
+/* Layout
+----------------------------------------------------------------------------------------------------*/
+
+/* Menubar */
+#menubar {
+	padding-right: 0;
+	padding-left: 5px;
+}
+
+/* Search */
+#search {
+	margin-right: 0;
+	margin-left: 3px;
+}
+
+/* Sidebar Backgrounds */
+.sidebar-a-right #sidebar-a .sidebar-bg,
+.sidebar-b-right #sidebar-b .sidebar-bg {
+	border: none;
+	background-position: 100% 0;
+}
+
+.sidebar-a-left #sidebar-a .sidebar-bg,
+.sidebar-b-left #sidebar-b .sidebar-bg {
+	border: none;
+	background-position: 0 0;
+}
+
+
+/* Menus
+----------------------------------------------------------------------------------------------------*/
+
+/* Mega Drop-Down Menu */
+.menu-dropdown li.level1 { margin-left: 0; }
+
+.menu-dropdown a.level1,
+.menu-dropdown span.level1 { background-position: 100% 50%; }
+
+.menu-dropdown a.level1 > span,
+.menu-dropdown span.level1 > span {
+	padding-left: 15px;
+	padding-right: 16px;
+}
+
+.menu-dropdown a.level3 > span,
+.menu-dropdown span.level3 > span {	background-image: url(../images/menu_dropdown_level3.png); }
+
+/* Sidebar/Accordion Menu */
+.menu-sidebar li.parent .level1 > span { background-image: url(../images/rtl/menu_sidebar_parent.png); }
+
+.menu-sidebar ul.level2 ul { padding-right: 10px; }
+
+.menu-sidebar ul a > span { background-image: url(../images/menu_sidebar_level2.png); }
+
+
+/* Modules
+----------------------------------------------------------------------------------------------------*/
+
+/* horizontal line */
+.grid-h .mod-line {
+	border: none;
+	background-position: 100% 0;
+}
+
+.grid-v .mod-line h3.title {
+	padding-left: 5px;
+	padding-right: 10px;
+}
+
+.grid-v .mod-line .badge { left: 3px; }
+
+
+/* Tools
+----------------------------------------------------------------------------------------------------*/
+
+
+/* System
+----------------------------------------------------------------------------------------------------*/
+
+/* Search Box */
+#searchbox .results { left: -8px; }
+
+/* Breadcrumbs */
+.breadcrumbs a,
+.breadcrumbs > span { background-image: url(../images/breadcrumbs.png); }
+

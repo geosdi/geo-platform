@@ -1,0 +1,27 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOthemes Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../warp/css/system.css);
+@import url(../warp/systems/joomla.1.5/css/system.css);
+@import url(system-all.css);
+
+
+/* Items (Addition)
+----------------------------------------------------------------------------------------------------*/
+ 
+#system .items .leading .item {
+	padding-bottom: 12px;
+	margin-bottom: 18px;
+	border-bottom: 1px solid #ddd;
+}
+
+
+/* Item List
+----------------------------------------------------------------------------------------------------*/
+
+#system .item-list { border-top: 1px solid #ddd; }
+
+
+/* Search
+----------------------------------------------------------------------------------------------------*/
+
+#system span.highlight { background-color: #ffffaa; }

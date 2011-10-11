@@ -1,0 +1,8 @@
+a:hover,
+em,
+code,
+.menu-dropdown a.level2:hover,
+.menu-dropdown a.level3:hover,
+.menu-sidebar a:hover > span,
+.menu-sidebar span:hover > span { color: #791; }
+

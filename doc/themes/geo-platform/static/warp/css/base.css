@@ -1,0 +1,171 @@
+/* Copyright  2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+/*
+ * Base Style Sheet - Reduces inconsistencies across all browsers
+ * Stripped down and improved collection of best practises
+ * To avoid redundant code it sets new default values instead of baseline defaults and re-resetting them later
+ * Thanks to HTML5 Boilerplate, Yahoo! User Interface (YUI) Library, No CSS Reset
+ */
+
+
+/* Useful Snippets
+----------------------------------------------------------------------------------------------------*/
+
+/* Force vertical scrollbar in non-IE + force height of the body element to fit at least the browser window */
+html {
+	overflow-y: scroll;
+	min-height: 100%;
+}
+
+/* Create a stacking context to prevent z-index issues */
+body { position: relative; }
+
+
+#content #breadcrumbs li {
+    list-style-type: none;
+    display: inline;
+}
+
+/* Remove outline when clicking links: people.opera.com/patrickl/experiments/keyboard/test */
+a:hover, a:active { outline: none; }
+
+/* Removes scrollbar in IE */
+textarea { overflow: auto; }
+
+/* Remove background from selected images */
+img::selection { background: transparent; }
+img::-moz-selection { background: transparent; }
+
+/* Remove borders */
+fieldset,
+img,
+iframe { border: 0; }
+
+/* Fluid images and objects */
+img, object, embed { max-width: 100%; }
+img { height: auto; }
+
+/* Hand cursor on clickable input elements */
+input[type='button'],
+input[type='submit'],
+input[type='checkbox'],
+input[type='image'],
+input[type='radio'],
+input[type='reset'],
+select, button, label { cursor: pointer; }
+
+
+/* Render new HTML5 elements as blocks
+----------------------------------------------------------------------------------------------------*/
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section { display: block; }
+
+
+/* New Base Values
+----------------------------------------------------------------------------------------------------*/
+
+body { margin: 0; }
+
+/* Block Space */
+p, hr,
+ul, ol, dl,
+blockquote, pre,
+fieldset, figure { margin: 15px 0; }
+
+h1, h2, h3, h4, h5, h6 { margin: 25px 0 15px 0; }
+
+/* Lists */
+ul, ol, dl { padding-left: 30px }
+dd { margin-left: 40px; }
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 { font-weight: normal; }
+
+h1 { font-size: 20px; line-height: 20px; }
+h2 { font-size: 24px; line-height: 24px; }
+h3 { font-size: 18px; line-height: 18px; }
+h4, h5, h6 { font-size: 16px; line-height: 16px; }
+
+/* Links */
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Text-level Semantics */
+small { font-size: 11px; }
+
+ins { text-decoration: none; }
+del { text-decoration: line-through; }
+
+abbr[title], dfn[title] {
+	border-bottom: 1px dotted;
+	cursor: help;
+}
+dfn[title] { font-style: normal; }
+
+/* Horizontal Rule */
+hr {
+	display: block;
+	height: 1px;
+	padding: 0;
+	border: 0;
+	border-top: 1px solid;
+}
+
+/* Quotes */
+q, blockquote {
+	quotes: '\201C' '\201D' '\2018' '\2019';
+	font-family: "Times New Roman", Times, serif;
+	font-style: italic;
+}
+#jblin h1 {position: absolute; top: 0px; left: -5000px;}	
+blockquote {
+	padding: 0 20px;
+	font-size: 16px;
+	line-height: 22px;
+}
+
+blockquote:before { content: '\201C'; }
+blockquote:after { content: '\201D'; }
+
+/* Code */
+code, pre { font-family: "Courier New", Courier, monospace; }
+
+code { word-spacing: -2px; }
+
+pre {
+	padding: 10px;
+	font-size: 12px;
+	line-height: 18px;
+	white-space: pre-wrap;
+}
+
+/* Tables */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+th, td { padding: 1px; }
+
+/* Forms */
+input, select { vertical-align: middle; }
+
+select, input, textarea, button { font: 12px Arial, sans-serif; }
+
+form, textarea { margin: 0; }
+legend, fieldset, input { padding: 0; }
+
+textarea,
+input[type='text'],
+input[type='password'],
+select { padding: 2px; }
+select { line-height: 19px; } /* Needed for Safari */
+
+button,
+input[type='button'],
+input[type='submit'] {
+	padding: 2px 3px;
+	line-height: inherit;
+}
+

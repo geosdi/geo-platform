@@ -1,0 +1,158 @@
+/* Copyright (C) 2007 - 2011 YOOthemes GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../warp/css/tools.css);
+
+
+/* Buttons (Needed for System Markup)
+----------------------------------------------------------------------------------------------------*/
+
+a.button-more {
+	padding: 3px 10px;
+	border: 1px solid #ddd;
+}
+
+/* Images and Objects (Needed for System Markup)
+----------------------------------------------------------------------------------------------------*/
+
+img.border-box { border: 1px solid #ddd; }
+
+
+/* Lists and Tables (Needed for System Markup)
+----------------------------------------------------------------------------------------------------*/
+
+/* Line */
+ul.line > li,
+section.line > article { border-top: 1px solid #ddd; }
+
+/* Check */
+ul.check > li {
+	padding: 4px 0 0 30px;
+	background: url(../images/tools/list_check.png) 0 0 no-repeat;
+}
+
+/* Zebra List and Table */
+ul.zebra > li,
+table.zebra tbody td { border-bottom: 1px solid #ddd; }
+ul.zebra > li:first-child,
+table.zebra tbody tr:first-child td { border-top: 1px solid #ddd; }
+
+ul.zebra > li.odd,
+table.zebra tbody tr.odd { background: #fafafa; }
+ul.zebra > li:nth-of-type(odd),
+table.zebra tbody tr:nth-of-type(odd) { background: #fafafa; }
+
+table.zebra caption { color: #999; }
+
+
+/* Definition Lists
+----------------------------------------------------------------------------------------------------*/
+
+dl.separator dt {	
+	position: relative;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-transform: uppercase;
+}
+
+/* border code because of RTL */
+dl.separator dd {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-width: 0 0 0 1px;
+	border-style: solid;
+	border-color: #DDD;
+}
+
+dl.separator dt:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: -15px;
+	width: 30px;
+	border-top: 1px solid #DDD;
+}
+
+dl.separator dt:after {
+	content: "";
+	position:absolute;
+	top: -3px;
+	right: -3px;
+	width: 5px;
+	height: 5px;
+	background: #FFF;
+	border: 1px solid #DDD;
+	border-radius:6px;
+}
+
+dl.separator dt:first-child:before,
+dl.separator dt:first-child:after { display: none; }
+
+
+/* Text
+----------------------------------------------------------------------------------------------------*/
+
+/* Inline Text Box */
+em.box { 
+	border: 1px dotted #bbb;
+	background: #fafafa;
+	color: #444;
+}
+
+/* Dotted Horizontal Rule */
+hr.dotted { background: url(../images/tools/line_dotted.png) 0 0 repeat-x; }
+
+
+/* Boxes
+----------------------------------------------------------------------------------------------------*/
+
+.box-content {
+	background: #fafafa;
+	border: 1px solid #ddd;
+}
+
+.box-note,
+.box-info,
+.box-warning,
+.box-hint,
+.box-download {
+	background: #fafafa;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+.box-info {
+	background: #ebf5fa url(../images/tools/box_info.png) 0 0 no-repeat;
+	border-color: #d2dce1;
+}
+
+.box-warning {
+	background: #fff0eb url(../images/tools/box_warning.png) 0 0 no-repeat;
+	border-color: #ffd7cd;
+}
+
+.box-hint {
+	background: #fffae6 url(../images/tools/box_hint.png) 0 0 no-repeat;
+	border-color: #fae6be;
+}
+
+.box-download {
+	background: #faffe6 url(../images/tools/box_download.png) 0 0 no-repeat;
+	border-color: #dce6be;
+}
+
+
+/* Forms (Needed for System Markup)
+----------------------------------------------------------------------------------------------------*/
+
+form.box fieldset { border: 1px solid #ddd; }
+form.box legend { background: #fff; }
+
+
+/* Mobile Switcher (Needed for Mobile)
+----------------------------------------------------------------------------------------------------*/
+
+.mobile-switcher {
+	background: #eee;
+	border: 1px solid #aaa;
+}
+

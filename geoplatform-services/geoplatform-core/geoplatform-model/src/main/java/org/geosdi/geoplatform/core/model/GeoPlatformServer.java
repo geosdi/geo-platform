@@ -72,7 +72,7 @@ public class GeoPlatformServer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_SERVER_SEQ")
     @SequenceGenerator(name = "GP_SERVER_SEQ", sequenceName = "GP_SERVER_SEQ")
-    private long id;
+    private long id = -1;
     //
     @Column(name = "server_url", nullable = false, unique = true)
     private String serverUrl;

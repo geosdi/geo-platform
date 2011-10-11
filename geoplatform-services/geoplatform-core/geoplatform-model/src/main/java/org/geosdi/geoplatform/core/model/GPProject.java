@@ -35,52 +35,60 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.responce;
+package org.geosdi.geoplatform.core.model;
 
-import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- * @author Michele Santomauro
  *
  */
-@XmlTransient
-public abstract class AbstractElementDTO implements IElementDTO,
-        Comparable<IElementDTO> {
+@XmlRootElement(name = "Project")
+@XmlAccessorType(XmlAccessType.FIELD)
+@Entity(name = "Project")
+@Table(name = "gp_project")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "project")
+public class GPProject implements Serializable {
 
-    private Long id; // Database identity
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 8397860970222813277L;
+    //
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_PROJECT_SEQ")
+    @SequenceGenerator(name = "GP_PROJECT_SEQ", sequenceName = "GP_PROJECT_SEQ")
+    private long id = -1;
+    //
+    @Column(nullable = false)
     private String name;
-    private Integer position;
-    private Boolean shared;
-    private Boolean checked;
+    //
+    @Column
+    private boolean shared = false;
+    //
+    @Column(name = "number_of_elements")
+    private int numberOfElements = 0;
+    //
+    @Column(name = "creation_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate;
 
-    //<editor-fold defaultstate="collapsed" desc="Constructor method">
-    /**
-     * Default constructor
-     */
-    public AbstractElementDTO() {
-    }
-
-    /**
-     * Constructor with args
-     * @param id
-     * @param name
-     * @param position
-     * @param shared
-     * @param checked
-     */
-    public AbstractElementDTO(long id, String name, int position,
-            boolean shared, boolean checked) {
-        this.id = id;
-        this.name = name;
-        this.position = position;
-        this.shared = shared;
-        this.checked = checked;
-    }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
      * @return the id
      */
@@ -112,70 +120,69 @@ public abstract class AbstractElementDTO implements IElementDTO,
     }
 
     /**
-     * @return the position
-     */
-    public int getPosition() {
-        return position;
-    }
-
-    /**
-     * @param position
-     *            the position to set
-     */
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    /**
-     * @return the shared state
+     * @return the shared
      */
     public boolean isShared() {
         return shared;
     }
 
     /**
-     * @param shared
-     *            the shared state to set
+     * @param shared the shared to set
      */
     public void setShared(boolean shared) {
         this.shared = shared;
     }
 
     /**
-     * @return the checked
+     * @return the numberOfElements
      */
-    public boolean isChecked() {
-        return checked;
+    public int getNumberOfElements() {
+        return numberOfElements;
     }
 
     /**
-     * @param checked
-     *            the checked to set
+     * @param numberOfElements
+     *          the numberOfElements to set
      */
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-    //</editor-fold>
-
-    // For sort IElementDTO object in the TreeFolderElements
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#compareTo(java.lang.Object)
-     */
-    @Override
-    public int compareTo(IElementDTO element) {
-        return ((AbstractElementDTO) element).getPosition() - getPosition();
+    public void setNumberOfElements(int numberOfElements) {
+        this.numberOfElements = numberOfElements;
     }
 
+    /**
+     * @param delta
+     *          the delta to set
+     */
+    public void deltaToNumberOfElements(int delta) {
+        this.numberOfElements += delta;
+    }
+
+    /**
+     * @return the creationDate
+     */
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    /**
+     * @param creationDate
+     *          the creationDate to set
+     */
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
     /*
      * (non-Javadoc)
-     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "id=" + id + ", name=" + name + ", position=" + position
-                + ", shared=" + shared + ", checked=" + checked;
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
+        str.append("id=").append(id);
+        str.append(", name=").append(name);
+        str.append(", shared=").append(shared);
+        str.append(", numberOfElements=").append(numberOfElements);
+        str.append(", creationDate=").append(creationDate);
+        return str.append('}').toString();
     }
 }

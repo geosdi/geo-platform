@@ -21,9 +21,11 @@
 	<!-- Services -->
 	<!--===================================================================== -->
 
-    <bean id="geoplatformService"
-          class="org.geosdi.geoplatform.services.GeoPlatformServiceImpl">
+    <bean id="geoPlatformService"
+          class="org.geosdi.geoplatform.services.GeoPlatformServiceImpl">		
         <property name="userDao" ref="userDAO" />
+        <property name="userProjectsDao" ref="userProjectsDAO" />
+        <property name="projectDao" ref="projectDAO" />
         <property name="serverDao" ref="serverDAO" />
         <property name="folderDao" ref="folderDAO" />
         <property name="layerDao" ref="layerDAO" />
@@ -35,7 +37,7 @@
         <property name="objectIdentityDao" ref="objectIdentityDAO" />
         <property name="sidDao" ref="sidDAO" />
         <property name="guiComponentDao" ref="guiComponentDAO" />
-    </bean>
+    </bean>    
 
 	<!--===================================================================== -->
 

@@ -11,6 +11,8 @@
 
     <!-- MAPPING MODEL RESOURCES -->
     	<mapping  class="org.geosdi.geoplatform.core.model.GPUser"/>
+        <mapping  class="org.geosdi.geoplatform.core.model.GPUserProjects"/>
+        <mapping  class="org.geosdi.geoplatform.core.model.GPProject"/>
     	<mapping  class="org.geosdi.geoplatform.core.model.GPFolder"/>
     	<mapping  class="org.geosdi.geoplatform.core.model.GPLayer"/>
     	<mapping  class="org.geosdi.geoplatform.core.model.GPVectorLayer"/>

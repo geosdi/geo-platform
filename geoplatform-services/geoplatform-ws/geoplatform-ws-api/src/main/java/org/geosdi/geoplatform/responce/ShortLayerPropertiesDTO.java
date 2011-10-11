@@ -56,9 +56,9 @@ public abstract class ShortLayerPropertiesDTO implements Serializable {
     private static final long serialVersionUID = -8694480604917509968L;
     // Database identity
     @XmlElement(required = true)
-    private long id = -1;
+    private Long id;
     private String alias;
-    private boolean checked;
+    private Boolean checked;
 
     public ShortLayerPropertiesDTO() {
     }

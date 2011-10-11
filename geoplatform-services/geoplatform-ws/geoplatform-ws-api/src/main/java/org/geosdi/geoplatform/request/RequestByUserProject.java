@@ -38,50 +38,44 @@ package org.geosdi.geoplatform.request;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author Francesco Izzi - CNR IMAA geoSDI Group
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  *
+ * A request for calls involving a single User and a single Project.
  */
-/**
- * A request for calls involving a single User and a single Folder.
- */
-@XmlRootElement(name = "RequestByUserFolder")
-public class RequestByUserFolder {
+@XmlRootElement(name = "RequestByUserProject")
+public class RequestByUserProject {
 
-	private long userId;
-	private long folderId;
+    private long userId;
+    private long projectId;
 
-	/**
-	 * 
-	 */
-	public RequestByUserFolder() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
-	/**
-	 * @param userId
-	 * @param folderId
-	 */
-	public RequestByUserFolder(long userId, long folderId) {
-		super();
-		this.userId = userId;
-		this.folderId = folderId;
-	}
+    public RequestByUserProject() {
+    }
 
-	public long getUserId() {
-		return userId;
-	}
+    /**
+     * @param userId
+     * @param projectId
+     */
+    public RequestByUserProject(long userId, long projectId) {
+        super();
+        this.userId = userId;
+        this.projectId = projectId;
+    }
 
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
+    public long getUserId() {
+        return userId;
+    }
 
-	public long getFolderId() {
-		return folderId;
-	}
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 
-	public void setFolderId(long folderId) {
-		this.folderId = folderId;
-	}
+    public long getProjectId() {
+        return projectId;
+    }
 
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
+    }
 }

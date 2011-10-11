@@ -38,48 +38,46 @@
 package org.geosdi.geoplatform.core.dao;
 
 import com.googlecode.genericdao.search.ISearch;
-import java.util.ArrayList;
 import java.util.List;
-
-import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPUserProjects;
 
 /**
- * @author Francesco Izzi - geoSDI
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  *
  */
-public interface GPLayerDAO {
+public interface GPUserProjectsDAO {
 
-    public List<GPLayer> findAll();
+    public List<GPUserProjects> findAll();
 
-    public GPLayer find(Long id);
+    public GPUserProjects find(Long userProjectsId);
 
-    public void persist(GPLayer... layers);
+    public GPUserProjects[] find(Long[] ids);
 
-    public GPLayer merge(GPLayer layer);
+    public void persist(GPUserProjects... usersProjects);
 
-    public GPLayer[] merge(GPLayer... layers);
+    public GPUserProjects merge(GPUserProjects userProjects);
 
-    public boolean remove(GPLayer layer);
+    public GPUserProjects[] merge(GPUserProjects... usersProjects);
 
-    public boolean removeById(Long layerId);
+    public boolean remove(GPUserProjects userProjects);
 
-    public List<GPLayer> search(ISearch search);
+    public boolean removeById(Long userProjectsId);
+
+    public boolean removeByUserId(long userId);
+
+    public boolean removeByProjectId(long projectsId);
+
+    public List<GPUserProjects> search(ISearch search);
 
     public int count(ISearch search);
 
-    public GPLayer findByLayerName(String layerName);
+    public List<GPUserProjects> findByUserId(long userId);
 
-    public ArrayList<String> findDistinctDataSourceByProjectId(long projectId);
+    public List<GPUserProjects> findByOwnerUserId(long userId);
 
-    public boolean updatePositionsRangeInOppositeWay(int beginPositionFirstRange, int endPositionFirstRange,
-            int beginPositionSecondRange, int endPositionSecondRange,
-            int deltaValueFirstRange, int deltaValueSecondRange);
+    public List<GPUserProjects> findByProjectId(long projectId);
 
-    public boolean updatePositionsRange(int beginPosition, int endPosition,
-            int deltaValue);
+    public GPUserProjects find(long userId, long projectId);
 
-    public boolean updatePositionsLowerBound(int lowerBoundPosition,
-            int deltaValue);
-
-    public boolean persistCheckStatusLayer(long idLayer, boolean checked);
 }

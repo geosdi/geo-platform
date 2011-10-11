@@ -37,7 +37,9 @@
 //</editor-fold>
 package org.geosdi.geoplatform.responce;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 
@@ -173,5 +175,15 @@ public class UserDTO {
         return "UserDTO [id=" + id + ", username=" + username + ", enabled="
                 + enabled + ", sendEmail=" + sendEmail + ", emailAddress="
                 + emailAddress + "]";
+    }
+
+    public static List<UserDTO> convertToUserDTOList(List<GPUser> users) {
+        List<UserDTO> usersDTO = new ArrayList<UserDTO>(users.size());
+
+        for (GPUser user : users) {
+            usersDTO.add(new UserDTO(user));
+        }
+
+        return usersDTO;
     }
 }

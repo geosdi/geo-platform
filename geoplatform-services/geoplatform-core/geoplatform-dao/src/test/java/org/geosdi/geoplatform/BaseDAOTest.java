@@ -37,6 +37,21 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
+import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
+import org.geosdi.geoplatform.core.dao.GPFolderDAO;
+import org.geosdi.geoplatform.core.dao.GPLayerDAO;
+import org.geosdi.geoplatform.core.dao.GPServerDAO;
+import org.geosdi.geoplatform.core.dao.GPUserDAO;
+import org.geosdi.geoplatform.core.model.GPAuthority;
+import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.Utility;
+import org.geosdi.geoplatform.gui.global.security.GPRole;
+import org.geotools.data.ows.Layer;
+import org.geotools.data.ows.WMSCapabilities;
+import org.geotools.data.wms.WebMapServer;
+import org.geotools.ows.ServiceException;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -44,34 +59,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
-
-import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
-import org.geosdi.geoplatform.core.dao.GPFolderDAO;
-import org.geosdi.geoplatform.core.dao.GPLayerDAO;
-import org.geosdi.geoplatform.core.dao.GPServerDAO;
-import org.geosdi.geoplatform.core.dao.GPUserDAO;
-import org.geosdi.geoplatform.core.model.GPAuthority;
+import org.geosdi.geoplatform.core.dao.GPProjectDAO;
+import org.geosdi.geoplatform.core.dao.GPUserProjectsDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
-import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GPUserProjects;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
-import org.geosdi.geoplatform.core.model.Utility;
-import org.geosdi.geoplatform.gui.global.security.GPRole;
-import org.geotools.data.ows.Layer;
-import org.geotools.data.ows.WMSCapabilities;
-import org.geotools.data.wms.WebMapServer;
-import org.geotools.ows.ServiceException;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.ParseException;
+import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.xml.sax.SAXException;
@@ -91,6 +97,12 @@ public abstract class BaseDAOTest {
     protected GPUserDAO userDAO;
     //
     @Autowired
+    protected GPUserProjectsDAO userProjectsDAO;
+    //
+    @Autowired
+    protected GPProjectDAO projectDAO;
+    //
+    @Autowired
     protected GPFolderDAO folderDAO;
     //
     @Autowired
@@ -105,49 +117,28 @@ public abstract class BaseDAOTest {
     @Autowired
     protected GPAuthorityDAO authorityDAO;
     //
-    private final String usernameUserTest = "user_test_0";
-    protected final String usernameSuperUser = "super_user_test_acl";
+    protected final String usernameAdminTest = "admin_test_0";
+    protected final String usernameUserTest = "user_test_0";
+    protected GPUser adminTest = null;
+    protected GPUser userTest = null;
+    protected GPProject adminProject = null;
+    protected GPProject userProject = null;
+    // ACL
+    protected final String usernameSuperUserTest = "super_user_test_acl";
     //
     private URL url = null;
-    private final String urlWMSGetCapabilities = "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
+    private final String urlWMSGetCapabilities =
+            "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
 
     //<editor-fold defaultstate="collapsed" desc="Remove all data">
     protected void removeAll() {
 //        removeAllStyles();
         removeAllLayers();
         removeAllFolders();
+        removeAllUserProjects();
+        removeAllProjects();
         removeAllAuthorities();
         removeAllUsers();
-    }
-
-    private void removeAllFolders() {
-        List<GPFolder> folders = folderDAO.findAll();
-        // Folders sorted in descending order (wrt position)
-        Comparator comp = new Comparator() {
-
-            @Override
-            public int compare(Object o1, Object o2) {
-                GPFolder folder1 = (GPFolder) o1;
-                GPFolder folder2 = (GPFolder) o2;
-                return folder2.getPosition() - folder1.getPosition();
-            }
-        };
-        Collections.sort(folders, comp);
-        // Delete before the sub-folders
-        for (GPFolder folder : folders) {
-            logger.debug("\n*** Folder to REMOVE:\n{}\n***", folder);
-            boolean removed = folderDAO.remove(folder);
-            Assert.assertTrue("Old Folder NOT removed\n" + folder + "\n", removed);
-        }
-    }
-
-    private void removeAllLayers() {
-        List<GPLayer> layers = layerDAO.findAll();
-        for (GPLayer layer : layers) {
-            logger.trace("\n*** Layer to REMOVE:\n{}\n***", layer);
-            boolean removed = layerDAO.remove(layer);
-            Assert.assertTrue("Old Layer NOT removed", removed);
-        }
     }
 
 //    private void removeAllStyles() {
@@ -159,6 +150,54 @@ public abstract class BaseDAOTest {
 //        }
 //    }
 //    
+    private void removeAllLayers() {
+        List<GPLayer> layers = layerDAO.findAll();
+        for (GPLayer layer : layers) {
+            logger.trace("\n*** Layer to REMOVE:\n{}\n***", layer);
+            boolean removed = layerDAO.remove(layer);
+            Assert.assertTrue("Old Layer NOT removed", removed);
+        }
+    }
+
+    private void removeAllFolders() {
+        List<GPFolder> folders = folderDAO.findAll();
+        // Folders sorted in descending order (wrt position)
+        Comparator comp = new Comparator() {
+
+            @Override
+            public int compare(Object o1, Object o2) {
+                GPFolder folder1 = (GPFolder) o1;
+                GPFolder folder2 = (GPFolder) o2;
+                return folder1.getPosition() - folder2.getPosition();
+            }
+        };
+        Collections.sort(folders, comp);
+        // Delete before the sub-folders
+        for (GPFolder folder : folders) {
+            logger.trace("\n*** Folder to REMOVE:\n{}\n***", folder);
+            boolean removed = folderDAO.remove(folder);
+            Assert.assertTrue("Old Folder NOT removed\n" + folder + "\n", removed);
+        }
+    }
+
+    private void removeAllUserProjects() {
+        List<GPUserProjects> userProjects = userProjectsDAO.findAll();
+        for (GPUserProjects up : userProjects) {
+            logger.trace("\n*** UserProject to REMOVE:\n{}\n***", up);
+            boolean removed = userProjectsDAO.remove(up);
+            Assert.assertTrue("Old UserProjects NOT removed", removed);
+        }
+    }
+
+    private void removeAllProjects() {
+        List<GPProject> projects = projectDAO.findAll();
+        for (GPProject project : projects) {
+            logger.trace("\n*** project to REMOVE:\n{}\n***", project);
+            boolean removed = projectDAO.remove(project);
+            Assert.assertTrue("Old project NOT removed", removed);
+        }
+    }
+
     protected void removeAllAuthorities() {
         List<GPAuthority> authorities = authorityDAO.findAll();
         for (GPAuthority authority : authorities) {
@@ -180,9 +219,10 @@ public abstract class BaseDAOTest {
 
     //<editor-fold defaultstate="collapsed" desc="Insert data">
     protected void insertData() throws ParseException {
-        this.insertUser(usernameUserTest, GPRole.ADMIN);
+        this.adminTest = this.insertUser(usernameAdminTest, GPRole.ADMIN);
+        this.userTest = this.insertUser(usernameUserTest, GPRole.USER);
         // ACL Data
-        this.insertUser(usernameSuperUser, GPRole.ADMIN, GPRole.USER);
+        this.insertUser(usernameSuperUserTest, GPRole.ADMIN, GPRole.USER);
         this.insertUser("admin_acl_test", GPRole.ADMIN);
         this.insertUser("user_acl_test", GPRole.USER);
         // User for GUI test
@@ -234,101 +274,96 @@ public abstract class BaseDAOTest {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Insert folders">    
-    protected void insertMockLayer() throws ParseException {
-    }
-
+    //<editor-fold defaultstate="collapsed" desc="Insert folders">
     protected void insertFolders() throws ParseException {
-        List<Layer> layerList = loadLayersFromServer();
-        if (layerList == null) {
-            Assert.fail("Error in WMS GetCapabilities - URL: " + urlWMSGetCapabilities);
-        }
-        this.insertUserFolders(layerList);
+        List<Layer> layerList = this.loadLayersFromServer();
+        this.insertFoldersAndProject(layerList);
     }
 
-    private void insertUserFolders(List<Layer> layerList) {
-        int position = layerList.size() + 6; // +6 because {"only folders"; "empty subfolder A"; "empty subfolder B";
-        //            "my raster"; "IGM"; "vector layer"}
+    private void insertFoldersAndProject(List<Layer> layerList) {
+        this.adminProject = this.createProject("admin_project", true, 6,
+                new Date(System.currentTimeMillis()));
+        this.userProject = this.createProject("user_project", false, layerList.size(),
+                new Date(System.currentTimeMillis() + 300 * 1000));
+        //
+        projectDAO.persist(adminProject, userProject);
+        //
+        this.insertBindingUserProject(adminTest, adminProject, BasePermission.ADMINISTRATION.getMask());
+        this.insertBindingUserProject(userTest, adminProject, BasePermission.READ.getMask());
+        this.insertBindingUserProject(userTest, userProject, BasePermission.ADMINISTRATION.getMask());
 
-        GPUser user = userDAO.findByUsername(usernameUserTest);
-
-        // "only folders"
-        GPFolder onlyFolders = this.createUserFolder("only folders", user, position);
+        // Project of admin -> root folders: "only folders, layers"
+        GPFolder onlyFolders = this.createFolder("only folders", adminProject, null, 6);
         // "only folders" ---> "empty subfolder A"
-        GPFolder emptySubFolderA = this.createEmptyFolder("empty subfolder A",
-                user, onlyFolders, --position);
+        GPFolder emptySubFolderA = this.createFolder("empty subfolder A", adminProject, onlyFolders, 5);
         // "only folders" ---> "empty subfolder B"
-        GPFolder emptySubFolderB = this.createEmptyFolder("empty subfolder B",
-                user, onlyFolders, --position);
+        GPFolder emptySubFolderB = this.createFolder("empty subfolder B", adminProject, onlyFolders, 4);
+        // "layers"
+        GPFolder layerFolder = this.createFolder("layers", adminProject, null, 3);
+        // "layers" ---> _rasterLayer_ ---> Styles
+        GPRasterLayer rasterLayer = this.createRasterLayer(layerFolder, adminProject, 2);
+//        GPStyle rasterLayerStyle1 = this.createStyle("style 1", rasterLayer);
+//        GPStyle rasterLayerStyle2 = this.createStyle("style 2", rasterLayer);
+        // ---> "layers" --> _vectorLayer_
+        GPVectorLayer vectorLayer = this.createVectorLayer(layerFolder, adminProject, 1);
         //
         onlyFolders.setNumberOfDescendants(2);
-        folderDAO.persist(onlyFolders, emptySubFolderA, emptySubFolderB);
+        layerFolder.setNumberOfDescendants(2);
+        folderDAO.persist(onlyFolders, emptySubFolderA, emptySubFolderB, layerFolder);
+        layerDAO.persist(rasterLayer, vectorLayer);
+//        styleDAO.persist(rasterLayerStyle1, rasterLayerStyle2);
 
-        // "my raster"
-        GPFolder folderRaster = this.createUserFolder("my raster", user, --position);
-        // "my raster" ---> _rasterLayer1_ ---> Styles
-        GPRasterLayer rasterLayer1 = this.createRasterLayer(--position, folderRaster, user.getId());
-//        GPStyle style1 = this.createStyle("style 1", rasterLayer1);
-//        GPStyle style2 = this.createStyle("style 2", rasterLayer1);
-        //
-        folderRaster.setNumberOfDescendants(layerList.size() + 2); // +2 because {"IGM"; "vector layer"}
-        folderDAO.persist(folderRaster);
-        layerDAO.persist(rasterLayer1);
-//        styleDAO.persist(style1, style2);
-
-        List<GPRasterLayer> layers = this.loadRasterLayer(layerList, position, folderRaster, user.getId());
+        // Project of user -> root folder: "server layer"
+        GPFolder folderServerLayer = this.createFolder("server layer", userProject, null, layerList.size() + 1);
+        folderServerLayer.setNumberOfDescendants(layerList.size());
+        List<GPRasterLayer> layers = this.loadRasterLayer(layerList, folderServerLayer, userProject, layerList.size());
+        folderDAO.persist(folderServerLayer);
         layerDAO.persist(layers.toArray(new GPRasterLayer[]{}));
-
-        position = position - layerList.size();
-
-        // ---> "my raster" --> "IGM"
-        GPFolder folderIGM = new GPFolder();
-        folderIGM.setName("IGM");
-        folderIGM.setOwner(user);
-        folderIGM.setParent(folderRaster);
-        folderIGM.setPosition(position);
-        // ---> "my raster" --> "IGM" _vectorLayer1_
-        GPVectorLayer vectorLayer1 = this.createVectorLayer(--position, folderIGM, user.getId());
-        //
-        folderIGM.setNumberOfDescendants(1);
-        folderDAO.persist(folderIGM);
-        layerDAO.persist(vectorLayer1);
     }
 
-    protected GPFolder createUserFolder(String name, GPUser user, int position) {
-        GPFolder userFolder = new GPFolder();
-        userFolder.setName(name);
-        userFolder.setOwner(user);
-        userFolder.setPosition(position);
-        userFolder.setParent(null);
-        return userFolder;
+    protected GPFolder createFolder(String name, GPProject project,
+            GPFolder parent, int position) {
+        GPFolder folder = new GPFolder();
+        folder.setName(name);
+        folder.setProject(project);
+        folder.setParent(parent);
+        folder.setPosition(position);
+        return folder;
     }
 
-    protected GPFolder createEmptyFolder(String name, GPUser user, GPFolder parent, int position) {
-        GPFolder emptyFolder = new GPFolder();
-        emptyFolder.setName(name);
-        emptyFolder.setOwner(user);
-        emptyFolder.setParent(parent);
-        emptyFolder.setPosition(position);
-        emptyFolder.setChecked(true);
-        emptyFolder.setNumberOfDescendants(0);
-        return emptyFolder;
+    protected GPProject createProject(String name, boolean isShared,
+            int numberOfElements, Date creationalDate) {
+        GPProject project = new GPProject();
+        project.setName(name);
+        project.setShared(isShared);
+        project.setNumberOfElements(numberOfElements);
+        project.setCreationDate(creationalDate);
+        return project;
     }
 
-    protected GPRasterLayer createRasterLayer(int position, GPFolder folder, long ownerId) {
+    protected void insertBindingUserProject(GPUser user, GPProject project,
+            int permissionMask) {
+        GPUserProjects userProjects = new GPUserProjects();
+        userProjects.setUserAndProject(user, project);
+        userProjects.setPermissionMask(permissionMask);
+        userProjectsDAO.persist(userProjects);
+    }
+
+    protected GPRasterLayer createRasterLayer(GPFolder folder, GPProject project,
+            int position) {
         String name = "deagostini_ita_250mila";
         // GPRasterLayer
         GPRasterLayer raster = new GPRasterLayer();
         raster.setTitle("StratiDiBase:" + name);
         raster.setName(name);
         raster.setAbstractText("abstract:" + name);
+        raster.setFolder(folder);
+        raster.setProject(project);
         raster.setPosition(position);
         raster.setSrs("EPSG:4326");
         raster.setUrlServer("http://dpc.geosdi.org/geoserver/wms");
         raster.setBbox(new GPBBox(6.342, 35.095, 19.003, 47.316));
         raster.setLayerType(GPLayerType.RASTER);
-        raster.setFolder(folder);
-        raster.setOwnerId(ownerId);
         // GPLayerInfo
         GPLayerInfo info = new GPLayerInfo();
         List<String> keywords = new ArrayList<String>();
@@ -354,10 +389,13 @@ public abstract class BaseDAOTest {
 //        style.setLayer(layer);
 //        return style;
 //    }
-    protected GPVectorLayer createVectorLayer(int position, GPFolder folder, long ownerId) {
+//    
+    protected GPVectorLayer createVectorLayer(GPFolder folder, GPProject project, int position) {
         GPVectorLayer vector = new GPVectorLayer();
         vector.setName("Name of vectorLayer");
         vector.setTitle("Title of vectorLayer");
+        vector.setFolder(folder);
+        vector.setProject(project);
         vector.setPosition(position);
         vector.setAbstractText("AbstractText of vectorLayer");
         vector.setSrs("EPSG:4326");
@@ -365,20 +403,17 @@ public abstract class BaseDAOTest {
         vector.setBbox(new GPBBox(1.1, 2.2, 3.3, 3.3));
         vector.setLayerType(GPLayerType.MULTIPOLYGON);
         vector.setChecked(true);
-        vector.setFolder(folder);
-        vector.setOwnerId(ownerId);
         return vector;
     }
 
+    // Load imaa Layers
     private List<Layer> loadLayersFromServer() {
-        // Load imaa Layers
         try {
             url = new URL(urlWMSGetCapabilities);
         } catch (MalformedURLException e) {
             logger.error("Error:" + e);
         }
 
-        List<GPRasterLayer> rasterLayers = null;
         WebMapServer wms = null;
         List<Layer> layers = null;
         try {
@@ -400,11 +435,12 @@ public abstract class BaseDAOTest {
         return layers;
     }
 
-    private List<GPRasterLayer> loadRasterLayer(List<Layer> layers, int position, GPFolder folder, long ownerId) {
+    private List<GPRasterLayer> loadRasterLayer(List<Layer> layers,
+            GPFolder folder, GPProject project, int position) {
         List<GPRasterLayer> rasterLayers = null;
         rasterLayers = new ArrayList<GPRasterLayer>(layers.size());
 
-        for (int i = 1; i < layers.size(); i++) {
+        for (int i = 0; i < layers.size(); i++) {
             Layer layer = layers.get(i);
 
             GPRasterLayer raster = new GPRasterLayer();
@@ -429,9 +465,9 @@ public abstract class BaseDAOTest {
             raster.setLayerInfo(infoLayer);
 
             raster.setFolder(folder);
-            raster.setOwnerId(ownerId);
+            raster.setProject(project);
+            raster.setPosition(position--);
             raster.setLayerType(GPLayerType.RASTER);
-            raster.setPosition(--position);
             raster.setUrlServer("http://imaa.geosdi.org/geoserver/wms");
             if (i < 5) {
                 raster.setChecked(true);

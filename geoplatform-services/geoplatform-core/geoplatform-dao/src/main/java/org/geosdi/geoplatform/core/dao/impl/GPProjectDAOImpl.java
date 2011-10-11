@@ -35,51 +35,74 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.core.dao;
+package org.geosdi.geoplatform.core.dao.impl;
 
 import com.googlecode.genericdao.search.ISearch;
-import java.util.ArrayList;
+import com.googlecode.genericdao.search.Search;
 import java.util.List;
-
-import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.dao.GPProjectDAO;
+import org.geosdi.geoplatform.core.model.GPProject;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @author Francesco Izzi - geoSDI
- *
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * 
  */
-public interface GPLayerDAO {
+@Transactional
+public class GPProjectDAOImpl extends BaseDAO<GPProject, Long> implements
+        GPProjectDAO {
 
-    public List<GPLayer> findAll();
+    @Override
+    public List<GPProject> findAll() {
+        return super.findAll();
+    }
 
-    public GPLayer find(Long id);
+    @Override
+    public GPProject find(Long id) {
+        return super.find(id);
+    }
 
-    public void persist(GPLayer... layers);
+    @Override
+    public void persist(GPProject... projects) {
+        super.persist(projects);
+    }
 
-    public GPLayer merge(GPLayer layer);
+    @Override
+    public GPProject merge(GPProject project) {
+        return super.merge(project);
+    }
 
-    public GPLayer[] merge(GPLayer... layers);
+    @Override
+    public GPProject[] merge(GPProject... projects) {
+        return super.merge(projects);
+    }
 
-    public boolean remove(GPLayer layer);
+    @Override
+    public boolean remove(GPProject project) {
+        return super.remove(project);
+    }
 
-    public boolean removeById(Long layerId);
+    @Override
+    public boolean removeById(Long id) {
+        return super.removeById(id);
+    }
 
-    public List<GPLayer> search(ISearch search);
+    @SuppressWarnings("unchecked")
+    @Override
+    public List search(ISearch search) {
+        return super.search(search);
+    }
 
-    public int count(ISearch search);
+    @Override
+    public int count(ISearch search) {
+        return super.count(search);
+    }
 
-    public GPLayer findByLayerName(String layerName);
-
-    public ArrayList<String> findDistinctDataSourceByProjectId(long projectId);
-
-    public boolean updatePositionsRangeInOppositeWay(int beginPositionFirstRange, int endPositionFirstRange,
-            int beginPositionSecondRange, int endPositionSecondRange,
-            int deltaValueFirstRange, int deltaValueSecondRange);
-
-    public boolean updatePositionsRange(int beginPosition, int endPosition,
-            int deltaValue);
-
-    public boolean updatePositionsLowerBound(int lowerBoundPosition,
-            int deltaValue);
-
-    public boolean persistCheckStatusLayer(long idLayer, boolean checked);
+    @Override
+    public GPProject findByProjectName(String projectName) {
+        Search search = new Search();
+        search.addFilterEqual("name", projectName);
+        return searchUnique(search);
+    }
 }

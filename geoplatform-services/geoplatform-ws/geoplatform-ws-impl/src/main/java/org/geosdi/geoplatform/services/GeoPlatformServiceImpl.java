@@ -37,14 +37,11 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import java.util.List;
 import javax.jws.WebService;
-import javax.xml.namespace.QName;
-import javax.xml.ws.soap.SOAPFaultException;
-import org.apache.cxf.binding.soap.SoapFault;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
@@ -53,25 +50,27 @@ import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
+import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
+import org.geosdi.geoplatform.core.dao.GPUserProjectsDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
-import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GPUserProjects;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestById;
-import org.geosdi.geoplatform.request.RequestByUserFolder;
+import org.geosdi.geoplatform.request.RequestByUserProject;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
@@ -92,6 +91,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     // DAO
     private GPUserDAO userDao;
+    private GPUserProjectsDAO userProjectsDao;
+    private GPProjectDAO projectDao;
     private GPServerDAO serverDao;
     private GPFolderDAO folderDao;
     private GPLayerDAO layerDao;
@@ -105,6 +106,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private GuiComponentDAO guiComponentDao;
     // Delegate
     private UserServiceImpl userServiceDelegate;
+    private ProjectServiceImpl projectServiceDelegate;
     private WMSServiceImpl wmsServiceDelegate;
     private FolderServiceImpl folderServiceDelegate;
     private LayerServiceImpl layerServiceDelegate;
@@ -112,6 +114,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     public GeoPlatformServiceImpl() {
         userServiceDelegate = new UserServiceImpl();
+        projectServiceDelegate = new ProjectServiceImpl();
         folderServiceDelegate = new FolderServiceImpl();
         wmsServiceDelegate = new WMSServiceImpl();
         layerServiceDelegate = new LayerServiceImpl();
@@ -130,9 +133,33 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public void setUserDao(GPUserDAO userDao) {
         this.userDao = userDao;
         this.userServiceDelegate.setUserDao(userDao);
-        this.folderServiceDelegate.setUserDao(userDao);
+        this.projectServiceDelegate.setUserDao(userDao);
         this.layerServiceDelegate.setUserDao(userDao);
         this.aclServiceDelegate.setUserDao(userDao);
+    }
+
+    /**
+     * @param userProjectsDao
+     *            the userProjectsDao to set
+     */
+    @Autowired
+    public void setUserProjectsDao(GPUserProjectsDAO userProjectsDao) {
+        this.userProjectsDao = userProjectsDao;
+        this.userServiceDelegate.setUserProjectsDao(userProjectsDao);
+        this.projectServiceDelegate.setUserProjectsDao(userProjectsDao);
+    }
+
+    /**
+     * @param projectDao
+     *          the projectDao to set
+     */
+    @Autowired
+    public void setProjectDao(GPProjectDAO projectDao) {
+        this.projectDao = projectDao;
+        this.userServiceDelegate.setProjectDao(projectDao);
+        this.projectServiceDelegate.setProjectDao(projectDao);
+        this.folderServiceDelegate.setProjectDao(projectDao);
+        this.layerServiceDelegate.setProjectDao(projectDao);
     }
 
     /**
@@ -154,6 +181,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.folderDao = folderDao;
         this.folderServiceDelegate.setFolderDao(folderDao);
         this.layerServiceDelegate.setFolderDao(folderDao);
+        this.projectServiceDelegate.setFolderDao(folderDao);
     }
 
     /**
@@ -253,9 +281,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean deleteUser(RequestById request)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        return userServiceDelegate.deleteUser(request);
+    public boolean deleteUser(long userId) throws ResourceNotFoundFault {
+        return userServiceDelegate.deleteUser(userId);
     }
 
     @Override
@@ -297,21 +324,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     @Override
     public GPUser getUserDetailByUsernameAndPassword(String username, String password)
-            throws ResourceNotFoundFault, SOAPFaultException {
-        GPUser user = null;
-        try {
-            user = userServiceDelegate.getUserDetailByUsernameAndPassword(username);
-            if (user == null) {
-                throw new ResourceNotFoundFault("User with specified username was not found");
-            }
-            System.out.println("### user: " + user.toString());
-            if (!user.verify(password)) {
-                throw new SoapFault("Specified password was incorrect", new QName("password"));
-            }
-        } catch (NoSuchAlgorithmException e) {
-            throw new SoapFault(e.getMessage(), null);
-        }
-        return user;
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return userServiceDelegate.getUserDetailByUsernameAndPassword(username, password);
     }
 
     @Override
@@ -321,64 +335,158 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="UserProjects">
+    // ==========================================================================
+    // === UserProjects
+    // ==========================================================================
+    @Override
+    public long insertUserProject(GPUserProjects userProject) throws IllegalParameterFault {
+        return projectServiceDelegate.insertUserProject(userProject);
+    }
+
+    @Override
+    public long updateUserProject(GPUserProjects userProject)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return projectServiceDelegate.updateUserProject(userProject);
+    }
+
+    @Override
+    public boolean deleteUserProject(long userProjectId) throws ResourceNotFoundFault {
+        return projectServiceDelegate.deleteUserProject(userProjectId);
+    }
+
+    @Override
+    public GPUserProjects getUserProject(long userProjectId) throws ResourceNotFoundFault {
+        return projectServiceDelegate.getUserProject(userProjectId);
+    }
+
+    @Override
+    public List<GPUserProjects> getUserProjectsByUserId(long userId) {
+        return projectServiceDelegate.getUserProjectsByUserId(userId);
+    }
+
+    @Override
+    public List<GPUserProjects> getUserProjectsByProjectId(long projectId) {
+        return projectServiceDelegate.getUserProjectsByProjectId(projectId);
+    }
+
+    @Override
+    public GPUserProjects getUserProjectByUserAndProjectId(long userId, long projectId)
+            throws ResourceNotFoundFault {
+        return projectServiceDelegate.getUserProjectByUserAndProjectId(userId, projectId);
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Project">
+    // ==========================================================================
+    // === Project
+    // ==========================================================================    
+    @Override
+    public long insertProject(GPProject project) throws IllegalParameterFault {
+        return this.projectServiceDelegate.insertProject(project);
+    }
+
+    @Override
+    public long updateProject(GPProject project)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return projectServiceDelegate.updateProject(project);
+    }
+
+    @Override
+    public boolean deleteProject(long projectId)
+            throws ResourceNotFoundFault {
+        return projectServiceDelegate.deleteProject(projectId);
+    }
+
+    @Override
+    public GPProject getProjectDetail(long projectId)
+            throws ResourceNotFoundFault {
+        return projectServiceDelegate.getProjectDetail(projectId);
+    }
+
+    @Override
+    public int getNumberOfElementsProject(long projectId)
+            throws ResourceNotFoundFault {
+        return projectServiceDelegate.getNumberOfElementsProject(projectId);
+    }
+
+    @Override
+    public void setProjectShared(long projectId)
+            throws ResourceNotFoundFault {
+        projectServiceDelegate.setProjectShared(projectId);
+    }
+
+    @Override
+    public boolean setProjectOwner(RequestByUserProject request)
+            throws ResourceNotFoundFault {
+        return projectServiceDelegate.setProjectOwner(request, false);
+    }
+
+    @Override
+    public void forceProjectOwner(RequestByUserProject request)
+            throws ResourceNotFoundFault {
+        projectServiceDelegate.setProjectOwner(request, true);
+    }
+    //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc="Folder">
     // ==========================================================================
     // === Folder
     // ==========================================================================
     @Override
-    public long insertFolder(GPFolder folder) {
-        return this.folderServiceDelegate.insertFolder(folder);
+    public long insertFolder(GPFolder folder)
+            throws IllegalParameterFault {
+        return folderServiceDelegate.insertFolder(folder);
     }
 
     @Override
-    public long updateFolder(GPFolder folder) throws ResourceNotFoundFault,
-            IllegalParameterFault {
+    public long updateFolder(GPFolder folder) throws ResourceNotFoundFault, IllegalParameterFault {
         return folderServiceDelegate.updateFolder(folder);
     }
 
     @Override
-    public long saveFolderProperties(long folderId, String folderName, boolean checked)
+    public long saveFolderProperties(long folderId, String name, boolean checked)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return folderServiceDelegate.saveFolderProperties(folderId, folderName, checked);
+        return folderServiceDelegate.saveFolderProperties(folderId, name, checked);
     }
 
     @Override
-    public boolean deleteFolder(RequestById request)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        return folderServiceDelegate.deleteFolder(request);
+    public boolean deleteFolder(long folderId) throws ResourceNotFoundFault {
+        return folderServiceDelegate.deleteFolder(folderId);
     }
 
     @Override
-    public long saveAddedFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
+    public long saveAddedFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         return folderServiceDelegate.saveAddedFolderAndTreeModifications(folder, descendantsMapData);
     }
 
     @Override
-    public boolean saveDeletedFolderAndTreeModifications(long id, GPWebServiceMapData descendantsMapData)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        return folderServiceDelegate.saveDeletedFolderAndTreeModifications(id, descendantsMapData);
-    }
-
-    @Override
-    public boolean saveCheckStatusFolderAndTreeModifications(long folderId, boolean isChecked)
+    public boolean saveDeletedFolderAndTreeModifications(long userFolderId, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault {
-        return folderServiceDelegate.saveCheckStatusFolderAndTreeModifications(folderId, isChecked);
+        return folderServiceDelegate.saveDeletedFolderAndTreeModifications(userFolderId, descendantsMapData);
     }
 
     @Override
-    public boolean saveDragAndDropFolderAndTreeModifications(String username, long idElementMoved, long idNewParent, int newPseudoPosition,
+    public boolean saveCheckStatusFolderAndTreeModifications(long userFolderId, boolean checked)
+            throws ResourceNotFoundFault {
+        return folderServiceDelegate.saveCheckStatusFolderAndTreeModifications(userFolderId, checked);
+    }
+
+    @Override
+    public boolean saveDragAndDropFolderAndTreeModifications(long idFolderMoved, long idNewParent, int newPosition,
             GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
-        return folderServiceDelegate.saveDragAndDropFolderModifications(username, idElementMoved, idNewParent, newPseudoPosition, descendantsMapData);
+        return folderServiceDelegate.saveDragAndDropFolderModifications(idFolderMoved, idNewParent, newPosition, descendantsMapData);
     }
 
     @Override
-    public FolderDTO getShortFolder(RequestById request) throws ResourceNotFoundFault {
-        return folderServiceDelegate.getShortFolder(request);
+    public FolderDTO getShortFolder(long userFolderId) throws ResourceNotFoundFault {
+        return folderServiceDelegate.getShortFolder(userFolderId);
     }
 
     @Override
-    public GPFolder getFolderDetail(RequestById request) throws ResourceNotFoundFault {
-        return folderServiceDelegate.getFolderDetail(request);
+    public GPFolder getFolderDetail(long folderId) throws ResourceNotFoundFault {
+        return folderServiceDelegate.getFolderDetail(folderId);
     }
 
     @Override
@@ -397,72 +505,25 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<FolderDTO> getChildrenFolders(long folderId, int num, int page) {
-        return folderServiceDelegate.getChildrenFolders(folderId, num, page);
+    public List<FolderDTO> getChildrenFoldersByRequest(RequestById request) {
+        return folderServiceDelegate.getChildrenFoldersByRequest(request);
     }
 
     @Override
-    public List<FolderDTO> getChildrenFoldersByFolderId(long folderId) {
-        return folderServiceDelegate.getChildrenFolders(folderId);
+    public List<FolderDTO> getChildrenFolders(long userFolderId) {
+        return folderServiceDelegate.getChildrenFolders(userFolderId);
     }
 
     @Override
-    public TreeFolderElements getChildrenElements(long folderId) {
-        return folderServiceDelegate.getChildrenElements(folderId);
+    public TreeFolderElements getChildrenElements(long userFolderId) {
+        return folderServiceDelegate.getChildrenElements(userFolderId);
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Folder / User">
-    // ==========================================================================
-    // === Folder / User
-    // ==========================================================================
+    //<editor-fold defaultstate="collapsed" desc="Folder / Project">
     @Override
-    public void setFolderShared(RequestById request)
-            throws ResourceNotFoundFault {
-        folderServiceDelegate.setFolderShared(request);
-    }
-
-    @Override
-    public boolean setFolderOwner(RequestByUserFolder request)
-            throws ResourceNotFoundFault {
-        return folderServiceDelegate.setFolderOwner(request, false);
-    }
-
-    @Override
-    public void forceFolderOwner(RequestByUserFolder request)
-            throws ResourceNotFoundFault {
-        folderServiceDelegate.setFolderOwner(request, true);
-
-    }
-
-    @Override
-    public List<FolderDTO> getUserFoldersByRequest(RequestById request) {
-        return folderServiceDelegate.getUserFoldersByRequest(request);
-    }
-
-    @Override
-    public List<FolderDTO> getUserFoldersByUserId(long userId) {
-        return folderServiceDelegate.getUserFoldersByUserId(userId);
-    }
-
-    @Override
-    public List<FolderDTO> getAllUserFolders(long userId, int num, int page) {
-        return folderServiceDelegate.getAllUserFolders(userId, num, page);
-    }
-
-    @Override
-    public List<FolderDTO> getAllUserFoldersByUserId(long userId) {
-        return folderServiceDelegate.getAllUserFoldersByUserId(userId);
-    }
-
-    @Override
-    public long getUserFoldersCount(RequestById request) {
-        return folderServiceDelegate.getUserFoldersCount(request);
-    }
-
-    @Override
-    public int getAllUserFoldersCount(long userId) {
-        return folderServiceDelegate.getAllUserFoldersCount(userId);
+    public List<FolderDTO> getRootFoldersByProjectId(long projectId) {
+        return projectServiceDelegate.getRootFoldersByProjectId(projectId);
     }
     //</editor-fold>
 
@@ -471,7 +532,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === Layer / Style
     // ==========================================================================
     @Override
-    public long insertLayer(GPLayer layer) {
+    public long insertLayer(GPLayer layer) throws IllegalParameterFault {
         return layerServiceDelegate.insertLayer(layer);
     }
 
@@ -488,54 +549,45 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean deleteLayer(RequestById request)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        return layerServiceDelegate.deleteLayer(request);
+    public boolean deleteLayer(long layerId)
+            throws ResourceNotFoundFault {
+        return layerServiceDelegate.deleteLayer(layerId);
     }
 
     @Override
-    public long saveAddedLayerAndTreeModifications(String username,
-            GPLayer layer, GPWebServiceMapData descendantsMapData)
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return layerServiceDelegate.saveAddedLayerAndTreeModifications(username, layer, descendantsMapData);
-    }
-
-    @Override
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(String username,
-            List<GPLayer> layers, GPWebServiceMapData descendantsMapData)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        return layerServiceDelegate.saveAddedLayersAndTreeModifications(username, layers, descendantsMapData);
+        return layerServiceDelegate.saveAddedLayersAndTreeModifications(layers, descendantsMapData);
     }
 
     @Override
     public boolean saveDeletedLayerAndTreeModifications(long id, GPWebServiceMapData descendantsMapData)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+            throws ResourceNotFoundFault {
         return layerServiceDelegate.saveDeletedLayerAndTreeModifications(id, descendantsMapData);
     }
 
     @Override
-    public boolean saveCheckStatusLayerAndTreeModifications(long layerId, boolean isChecked)
+    public boolean saveCheckStatusLayerAndTreeModifications(long layerId, boolean checked)
             throws ResourceNotFoundFault {
-        return layerServiceDelegate.saveCheckStatusLayerAndTreeModifications(layerId, isChecked);
+        return layerServiceDelegate.saveCheckStatusLayerAndTreeModifications(layerId, checked);
     }
 
     @Override
-    public boolean fixCheckStatusLayerAndTreeModifications(long layerId, long oldFolderId, long newFolderId)
+    public boolean fixCheckStatusLayerAndTreeModifications(long layerId, long oldUserFolderId, long newUserFolderId)
             throws ResourceNotFoundFault {
-        return layerServiceDelegate.fixCheckStatusLayerAndTreeModifications(layerId, oldFolderId, newFolderId);
+        return layerServiceDelegate.fixCheckStatusLayerAndTreeModifications(layerId, oldUserFolderId, newUserFolderId);
     }
 
     @Override
-    public boolean saveDragAndDropLayerAndTreeModifications(String username, long idElementMoved,
-            long idNewParent, int newPosition, GPWebServiceMapData descendantsMapData)
-            throws ResourceNotFoundFault {
-        return layerServiceDelegate.saveDragAndDropLayerModifications(username, idElementMoved, idNewParent, newPosition, descendantsMapData);
+    public boolean saveDragAndDropLayerAndTreeModifications(long idLayerMoved, long idNewParent, int newPosition,
+            GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
+        return layerServiceDelegate.saveDragAndDropLayerModifications(idLayerMoved, idNewParent, newPosition, descendantsMapData);
     }
 
     @Override
-    public boolean saveLayerProperties(String username, ShortRasterPropertiesDTO layerProperties)
+    public boolean saveLayerProperties(ShortRasterPropertiesDTO layerProperties)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return layerServiceDelegate.saveLayerProperties(username, layerProperties);
+        return layerServiceDelegate.saveLayerProperties(layerProperties);
     }
 
     @Override
@@ -551,14 +603,10 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<ShortLayerDTO> getLayers() {
-        return layerServiceDelegate.getLayers();
+    public List<ShortLayerDTO> getLayers(long projectId) {
+        return layerServiceDelegate.getLayers(projectId);
     }
 
-//    @Override
-//    public List<StyleDTO> getLayerStyles(long layerId) {
-//        return layerServiceDelegate.getLayerStyles(layerId);
-//    }
     @Override
     public GPBBox getBBox(long layerId) throws ResourceNotFoundFault {
         return layerServiceDelegate.getBBox(layerId);
@@ -570,9 +618,15 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
 //    @Override
+//    public List<StyleDTO> getLayerStyles(long layerId) {
+//        return layerServiceDelegate.getLayerStyles(layerId);
+//    }    
+//
+//    @Override
 //    public Point getGeometry(long layerId) throws ResourceNotFoundFault {
 //        return layerServiceDelegate.getGeometry(layerId);
 //    }
+//    
     @Override
     public ShortLayerDTO getShortLayer(long layerId) throws ResourceNotFoundFault {
         return layerServiceDelegate.getShortLayer(layerId);
@@ -584,8 +638,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public ArrayList<String> getLayersDataSourceByOwner(String userName) throws ResourceNotFoundFault {
-        return layerServiceDelegate.getLayersDataSourceByOwner(userName);
+    public ArrayList<String> getLayersDataSourceByProjectId(long projectId)
+            throws ResourceNotFoundFault {
+        return layerServiceDelegate.getLayersDataSourceByProjectId(projectId);
     }
     //</editor-fold>
 
@@ -605,7 +660,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public boolean deleteServer(long idServer) throws ResourceNotFoundFault, IllegalParameterFault {
+    public boolean deleteServer(long idServer) throws ResourceNotFoundFault {
         return wmsServiceDelegate.deleteServer(idServer);
     }
 

@@ -37,23 +37,25 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
-import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
-
+import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
+import org.geosdi.geoplatform.core.dao.GPUserProjectsDAO;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GPUserProjects;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.UserDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author giuseppe
@@ -64,8 +66,11 @@ class UserServiceImpl {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     // DAO
     private GPUserDAO userDao;
+    private GPUserProjectsDAO userProjectsDao;
+    private GPProjectDAO projectDao;
     private GPAuthorityDAO authorityDao;
 
+    //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
      * @param userDao
      *          the userDao to set
@@ -75,12 +80,29 @@ class UserServiceImpl {
     }
 
     /**
+     * @param userProjecsDao
+     *          the userProjecsDao to set
+     */
+    public void setUserProjectsDao(GPUserProjectsDAO userProjecsDao) {
+        this.userProjectsDao = userProjecsDao;
+    }
+
+    /**
+     * @param projectDao
+     *          the projectDao to set
+     */
+    public void setProjectDao(GPProjectDAO projectDao) {
+        this.projectDao = projectDao;
+    }
+
+    /**
      * @param authorityDao
      *          the authorityDao to set
      */
     public void setAuthorityDao(GPAuthorityDAO authorityDao) {
         this.authorityDao = authorityDao;
     }
+    //</editor-fold>
 
     /**
      * This method is used to insert a User
@@ -91,7 +113,8 @@ class UserServiceImpl {
     public long insertUser(GPUser user) throws IllegalParameterFault {
         GPUser duplicateUser = userDao.findByUsername(user.getUsername());
         if (duplicateUser != null) {
-            throw new IllegalParameterFault("User with username \"" + user.getUsername() + "\" already exists");
+            throw new IllegalParameterFault("User with username \""
+                    + user.getUsername() + "\" already exists");
         }
 
         // Always insert users as enabled
@@ -134,13 +157,22 @@ class UserServiceImpl {
      *
      * @throws ResourceNotFoundFault
      */
-    public boolean deleteUser(RequestById request)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        GPUser user = userDao.find(request.getId());
+    public boolean deleteUser(long userId) throws ResourceNotFoundFault {
+        GPUser user = userDao.find(userId);
         if (user == null) {
-            throw new ResourceNotFoundFault("User not found", request.getId());
+            throw new ResourceNotFoundFault("User not found", userId);
         }
 
+        List<GPUserProjects> foldersList = userProjectsDao.findByOwnerUserId(userId);
+        for (GPUserProjects userFolder : foldersList) {
+            // Remove all UserProjects that reference (also of other users) by cascading
+            if (!projectDao.remove(userFolder.getProject())) {
+                return false;
+            }
+        }
+
+        // Remove all UserProjects that reference by cascading
+        // Only that reference to shared projects
         return userDao.remove(user);
     }
 
@@ -192,7 +224,8 @@ class UserServiceImpl {
             throws ResourceNotFoundFault {
         GPUser user = userDao.findByUsername(username.getNameLike());
         if (user == null) {
-            throw new ResourceNotFoundFault("User not found (username=" + username.getNameLike() + ")");
+            throw new ResourceNotFoundFault("User not found (username="
+                    + username.getNameLike() + ")");
         }
 
         return new UserDTO(user);
@@ -200,7 +233,7 @@ class UserServiceImpl {
 
     /**
      *
-     * Method to get a single User by ID specified in the REST request
+     * Method to get a single User by username specified in the REST request
      *
      * @param request the object representing the request parameters
      * @return GPUser the detailed User object
@@ -210,7 +243,8 @@ class UserServiceImpl {
             throws ResourceNotFoundFault {
         GPUser user = userDao.findByUsername(username.getNameLike());
         if (user == null) {
-            throw new ResourceNotFoundFault("User not found (username=" + username.getNameLike() + ")");
+            throw new ResourceNotFoundFault("User not found (username="
+                    + username.getNameLike() + ")");
         }
 
         return user;
@@ -236,13 +270,13 @@ class UserServiceImpl {
 
         List<GPUser> userList = userDao.search(searchCriteria);
 
-        return convertToUserList(userList);
+        return UserDTO.convertToUserDTOList(userList);
     }
 
     // note: may take lot of space
     public List<UserDTO> getUsers() {
         List<GPUser> userList = userDao.findAll();
-        return convertToUserList(userList);
+        return UserDTO.convertToUserDTOList(userList);
     }
 
     public long getUsersCount(SearchRequest request) {
@@ -254,17 +288,21 @@ class UserServiceImpl {
         return userDao.count(searchCriteria);
     }
 
-    public GPUser getUserDetailByUsernameAndPassword(String username) {
-        Search searchCriteria = new Search(GPUser.class);
-
-        Filter usernameFilter = Filter.equal("username", username);
-        searchCriteria.addFilter(usernameFilter);
-
-        List<GPUser> usersList = userDao.search(searchCriteria);
-        if (usersList.isEmpty()) {
-            return null;
+    public GPUser getUserDetailByUsernameAndPassword(String username, String password)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        GPUser user = null;
+        try {
+            user = userDao.findByUsername(username);
+            if (user == null) {
+                throw new ResourceNotFoundFault("User with specified username was not found");
+            }
+            if (!user.verify(password)) {
+                throw new IllegalParameterFault("Specified password was incorrect");
+            }
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalParameterFault(e.getMessage());
         }
-        return usersList.get(0);
+        return user;
     }
 
     public List<String> getUserAuthorities(long userId)
@@ -285,15 +323,5 @@ class UserServiceImpl {
         }
 
         return authorityName;
-    }
-
-    private List<UserDTO> convertToUserList(List<GPUser> userList) {
-        List<UserDTO> usersDTO = new ArrayList<UserDTO>(userList.size());
-
-        for (GPUser dGUser : userList) {
-            usersDTO.add(new UserDTO(dGUser));
-        }
-
-        return usersDTO;
     }
 }

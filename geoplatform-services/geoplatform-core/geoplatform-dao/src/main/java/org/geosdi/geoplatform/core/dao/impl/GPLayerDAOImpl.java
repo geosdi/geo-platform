@@ -44,7 +44,6 @@ import java.util.List;
 
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.model.GPLayer;
-import org.hibernate.criterion.Projections;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -91,12 +90,12 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
     }
 
     @Override
-    public ArrayList<String> findDistinctDataSourceByUserId(long userId) {
+    public ArrayList<String> findDistinctDataSourceByProjectId(long projectId) {
         Search search = new Search();
-        search.addFilterEqual("ownerId", userId);
+        search.addFilterEqual("project.id", projectId);
         search.addField("urlServer");
         search.setDistinct(true);
-        return (ArrayList)search(search);
+        return (ArrayList) search(search);
     }
 
     @Override

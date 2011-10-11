@@ -102,7 +102,7 @@ class WMSServiceImpl {
     }
 
     public boolean deleteServer(long idServer)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+            throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(idServer);
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found", idServer);

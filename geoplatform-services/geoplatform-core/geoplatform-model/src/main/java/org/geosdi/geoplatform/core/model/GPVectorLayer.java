@@ -46,6 +46,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.OnDelete;
@@ -73,7 +74,12 @@ public class GPVectorLayer extends GPLayer {
     //
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JoinColumn(name = "folder_id")
     private GPFolder folder;
+    //
+    @ManyToOne(optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private GPProject project = null;
 
     /**
      * @return the geometry
@@ -108,6 +114,23 @@ public class GPVectorLayer extends GPLayer {
         this.folder = folder;
     }
 
+    /**
+     * @return the project
+     */
+    @Override
+    public GPProject getProject() {
+        return project;
+    }
+
+    /**
+     * @param project
+     *            the project to set
+     */
+    @Override
+    public void setProject(GPProject project) {
+        this.project = project;
+    }
+
     /*
      * (non-Javadoc)
      *
@@ -115,9 +138,9 @@ public class GPVectorLayer extends GPLayer {
      */
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder("GPVectorLayer {");
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append(super.toString());
-        str.append(", geometry=").append(geometry).append("}");
-        return str.toString();
+        str.append(", geometry=").append(geometry);
+        return str.append("}").toString();
     }
 }

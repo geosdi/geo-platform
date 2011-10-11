@@ -43,6 +43,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -78,25 +79,12 @@ public class GPRasterLayer extends GPLayer {
     //
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JoinColumn(name = "folder_id")
     private GPFolder folder;
-
-    /**
-     * @return the opacity
-     */
-    public float getOpacity() {
-        return opacity;
-    }
-
-    /**
-     * @param opacity
-     *              the opacity to set
-     */
-    public void setOpacity(float opacity) {
-        if (opacity < 0.0f || opacity > 1.0f) {
-            throw new IllegalArgumentException("The opacity must be between 0.0 and 1.0");
-        }
-        this.opacity = opacity;
-    }
+    //
+    @ManyToOne(optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private GPProject project = null;
 
     /**
      * @return the layerInfo
@@ -114,20 +102,21 @@ public class GPRasterLayer extends GPLayer {
     }
 
     /**
-     * @return the folder
+     * @return the opacity
      */
-    @Override
-    public GPFolder getFolder() {
-        return folder;
+    public float getOpacity() {
+        return opacity;
     }
 
     /**
-     * @param folder
-     *            the bbox to folder
+     * @param opacity
+     *              the opacity to set
      */
-    @Override
-    public void setFolder(GPFolder folder) {
-        this.folder = folder;
+    public void setOpacity(float opacity) {
+        if (opacity < 0.0f || opacity > 1.0f) {
+            throw new IllegalArgumentException("The opacity must be between 0.0 and 1.0");
+        }
+        this.opacity = opacity;
     }
 
     /**
@@ -157,18 +146,52 @@ public class GPRasterLayer extends GPLayer {
         this.styles = str.toString();
     }
 
+    /**
+     * @return the folder
+     */
+    @Override
+    public GPFolder getFolder() {
+        return folder;
+    }
+
+    /**
+     * @param folder
+     *          the folder to set
+     */
+    @Override
+    public void setFolder(GPFolder folder) {
+        this.folder = folder;
+    }
+
+    /**
+     * @return the project
+     */
+    @Override
+    public GPProject getProject() {
+        return project;
+    }
+
+    /**
+     * @param project
+     *            the project to set
+     */
+    @Override
+    public void setProject(GPProject project) {
+        this.project = project;
+    }
     /*
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()
      */
+
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder("GPRasterLayer {");
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append(super.toString());
-        str.append(", opacity=").append(opacity);
         str.append(", layerInfo=").append(layerInfo);
-        str.append(", styles=").append(styles).append("}");
-        return str.toString();
+        str.append(", opacity=").append(opacity);
+        str.append(", styles=").append(styles);
+        return str.append("}").toString();
     }
 }

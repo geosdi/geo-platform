@@ -49,7 +49,7 @@ public class ShortRasterPropertiesDTO extends ShortLayerPropertiesDTO {
 
     private static final long serialVersionUID = -8575603239213317626L;
     //
-    private float opacity;
+    private Float opacity;
     //
     @XmlElementWrapper(name = "styleList")
     @XmlElement(name = "style")

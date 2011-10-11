@@ -42,7 +42,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,7 +51,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.security.core.GrantedAuthority;
@@ -76,7 +74,7 @@ public class GPUser implements Serializable, UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_USER_SEQ")
     @SequenceGenerator(name = "GP_USER_SEQ", sequenceName = "GP_USER_SEQ")
-    private long id;
+    private long id = -1;
     //
     @Column(name = "user_name", unique = true, nullable = false)
     private String username;
@@ -108,6 +106,11 @@ public class GPUser implements Serializable, UserDetails {
     //
     @Transient
     private Collection<GPAuthority> gpAuthorities;
+    // Hibernate with this list remove "on delete cascade" on FK of gp_user_projects(user_id)
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+//        org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
+//    private List<GPUserProjects> userProjects = new LinkedList<GPUserProjects>();
 
     /**
      * Default constructor
@@ -246,15 +249,30 @@ public class GPUser implements Serializable, UserDetails {
     public boolean isCredentialsNonExpired() {
         return credentialsNonExpired;
     }
-
+//
+//    /**
+//     * @return the userProjects
+//     */
+//    public List<GPUserProjects> getUserProjects() {
+//        return userProjects;
+//    }
+//
+//    /**
+//     * @param userProjects
+//     *          the userProjects to set
+//     */
+//    public void setUserProjects(List<GPUserProjects> userProjects) {
+//        this.userProjects = userProjects;
+//    }
+//
     /*
      * (non-Javadoc)
-     *
      * @see java.lang.Object#toString()
      */
+
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder("GPUser {");
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append("id=").append(id);
         str.append(", username=").append(username);
         str.append(", password=").append(password);
@@ -263,13 +281,12 @@ public class GPUser implements Serializable, UserDetails {
         str.append(", sendEmail=").append(sendEmail);
         str.append(", accountNonExpired=").append(accountNonExpired);
         str.append(", accountNonLocked=").append(accountNonLocked);
-        str.append(", credentialsNonExpired=").append(credentialsNonExpired).append('}');
-        return str.toString();
+        str.append(", credentialsNonExpired=").append(credentialsNonExpired);
+        return str.append('}').toString();
     }
 
     /*
      * (non-Javadoc)
-     *
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -289,7 +306,6 @@ public class GPUser implements Serializable, UserDetails {
 
     /*
      * (non-Javadoc)
-     *
      * @see java.lang.Object#hashCode()
      */
     @Override

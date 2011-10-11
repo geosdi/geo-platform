@@ -38,48 +38,33 @@
 package org.geosdi.geoplatform.core.dao;
 
 import com.googlecode.genericdao.search.ISearch;
-import java.util.ArrayList;
 import java.util.List;
-
-import org.geosdi.geoplatform.core.model.GPLayer;
+import org.geosdi.geoplatform.core.model.GPProject;
 
 /**
- * @author Francesco Izzi - geoSDI
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  *
  */
-public interface GPLayerDAO {
+public interface GPProjectDAO {
 
-    public List<GPLayer> findAll();
+    public List<GPProject> findAll();
 
-    public GPLayer find(Long id);
+    public GPProject find(Long id);
 
-    public void persist(GPLayer... layers);
+    public void persist(GPProject... projects);
 
-    public GPLayer merge(GPLayer layer);
+    public GPProject merge(GPProject project);
 
-    public GPLayer[] merge(GPLayer... layers);
+    public GPProject[] merge(GPProject... projects);
 
-    public boolean remove(GPLayer layer);
+    public boolean remove(GPProject project);
 
-    public boolean removeById(Long layerId);
+    public boolean removeById(Long id);
 
-    public List<GPLayer> search(ISearch search);
+    public List<GPProject> search(ISearch search);
 
     public int count(ISearch search);
 
-    public GPLayer findByLayerName(String layerName);
-
-    public ArrayList<String> findDistinctDataSourceByProjectId(long projectId);
-
-    public boolean updatePositionsRangeInOppositeWay(int beginPositionFirstRange, int endPositionFirstRange,
-            int beginPositionSecondRange, int endPositionSecondRange,
-            int deltaValueFirstRange, int deltaValueSecondRange);
-
-    public boolean updatePositionsRange(int beginPosition, int endPosition,
-            int deltaValue);
-
-    public boolean updatePositionsLowerBound(int lowerBoundPosition,
-            int deltaValue);
-
-    public boolean persistCheckStatusLayer(long idLayer, boolean checked);
+    public GPProject findByProjectName(String projectName);
 }

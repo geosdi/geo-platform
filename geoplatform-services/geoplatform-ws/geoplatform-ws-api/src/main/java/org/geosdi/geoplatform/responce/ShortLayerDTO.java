@@ -37,6 +37,8 @@
 //</editor-fold>
 package org.geosdi.geoplatform.responce;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -51,19 +53,19 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"id", "name", "position", "shared", "checked",
-    "title", "urlServer", "srs", "abstractText", "layerType", "bbox", "cached", "alias"})
+@XmlType(propOrder = {"id", "name", "position", "checked",
+    "title", "alias", "urlServer", "srs", "abstractText", "layerType", "bbox", "cached"})
 @XmlSeeAlso(value = {RasterLayerDTO.class, VectorLayerDTO.class})
 public class ShortLayerDTO extends AbstractElementDTO {
 
     private String title;
+    private String alias;
     private String urlServer;
     private String srs;
     private String abstractText;
     private GPLayerType layerType;
     private GPBBox bbox;
-    private boolean cached;
-    private String alias;
+    private Boolean cached;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
     /**
@@ -80,13 +82,13 @@ public class ShortLayerDTO extends AbstractElementDTO {
         super(layer.getId(), layer.getName(), layer.getPosition(),
                 layer.isShared(), layer.isChecked());
         this.title = layer.getTitle();
+        this.alias = layer.getAlias();
         this.urlServer = layer.getUrlServer();
         this.srs = layer.getSrs();
         this.abstractText = layer.getAbstractText();
         this.layerType = layer.getLayerType();
         this.bbox = layer.getBbox();
         this.cached = layer.isCached();
-        this.alias = layer.getAlias();
     }
     //</editor-fold>
 
@@ -103,6 +105,21 @@ public class ShortLayerDTO extends AbstractElementDTO {
      */
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    /**
+     * @return the alias
+     */
+    public String getAlias() {
+        return alias;
+    }
+
+    /**
+     * @param alias
+     *          the alias to set
+     */
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     /**
@@ -194,21 +211,6 @@ public class ShortLayerDTO extends AbstractElementDTO {
         this.cached = cached;
     }
 
-    /**
-     * @return the alias
-     */
-    public String getAlias() {
-        return alias;
-    }
-
-    /**
-     * @param alias
-     *          the alias to set
-     */
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
     /*
      * (non-Javadoc)
      * 
@@ -218,13 +220,23 @@ public class ShortLayerDTO extends AbstractElementDTO {
     public String toString() {
         String s = super.toString()
                 + ", title=" + title
+                + ", alias=" + alias
                 + ", urlServer=" + urlServer
                 + ", srs=" + srs
                 + ", abstractText=" + abstractText
                 + ", layerType=" + layerType
                 + ", " + bbox
-                + ", cached=" + cached
-                + ", alias=" + alias;
+                + ", cached=" + cached;
         return s;
+    }
+
+    public static List<ShortLayerDTO> convertToShortLayerDTOList(List<GPLayer> layers) {
+        List<ShortLayerDTO> layersDTO = new ArrayList<ShortLayerDTO>(layers.size());
+
+        for (GPLayer layer : layers) {
+            layersDTO.add(new ShortLayerDTO(layer));
+        }
+
+        return layersDTO;
     }
 }

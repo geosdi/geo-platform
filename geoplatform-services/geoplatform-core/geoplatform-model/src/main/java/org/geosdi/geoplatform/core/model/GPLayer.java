@@ -73,13 +73,16 @@ public abstract class GPLayer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_LAYER_SEQ")
     @SequenceGenerator(name = "GP_LAYER_SEQ", sequenceName = "GP_LAYER_SEQ")
-    private long id;
+    private long id = -1;
+    //
+    @Column(nullable = false)
+    private String title;
     //
     @Column
     private String name;
     //
-    @Column(nullable = false)
-    private String title;
+    @Column(name = "alias_name")
+    private String alias;
     //
     @Column(name = "abstract")
     private String abstractText;
@@ -99,9 +102,6 @@ public abstract class GPLayer implements Serializable {
     @Column
     private int position = -1;
     //
-    @Column(name = "owner_id", nullable = false)
-    private long ownerId = -1;
-    //
     @Column
     private boolean shared = false;
     //
@@ -110,11 +110,15 @@ public abstract class GPLayer implements Serializable {
     //
     @Column
     private boolean cached = false;
-    //
-    @Column(name = "alias_name")
-    private String alias = "";
 
-    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
+    public abstract GPFolder getFolder();
+
+    public abstract void setFolder(GPFolder folder);
+
+    public abstract GPProject getProject();
+
+    public abstract void setProject(GPProject project);
+
     /**
      * @return the id
      */
@@ -128,21 +132,6 @@ public abstract class GPLayer implements Serializable {
      */
     public void setId(long id) {
         this.id = id;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name
-     *            the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 
     /**
@@ -161,48 +150,33 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @return the position
+     * @return the name
      */
-    public int getPosition() {
-        return position;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @param position
-     *            the position to set
+     * @param name
+     *            the name to set
      */
-    public void setPosition(int position) {
-        this.position = position;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
-     * @return the shared
+     * @return the alias
      */
-    public boolean isShared() {
-        return shared;
+    public String getAlias() {
+        return alias;
     }
 
     /**
-     * @param shared
-     *            the shared to set
+     * @param alias 
+     *          the alias to set
      */
-    public void setShared(boolean shared) {
-        this.shared = shared;
-    }
-
-    /**
-     * @return the ownerId
-     */
-    public long getOwnerId() {
-        return ownerId;
-    }
-
-    /**
-     * @param ownerId
-     *            the ownerId to set
-     */
-    public void setOwnerId(long ownerId) {
-        this.ownerId = ownerId;
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     /**
@@ -281,6 +255,36 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
+     * @return the position
+     */
+    public int getPosition() {
+        return position;
+    }
+
+    /**
+     * @param position
+     *            the position to set
+     */
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    /**
+     * @return the shared
+     */
+    public boolean isShared() {
+        return shared;
+    }
+
+    /**
+     * @param shared
+     *            the shared to set
+     */
+    public void setShared(boolean shared) {
+        this.shared = shared;
+    }
+
+    /**
      * @return the checked
      */
     public boolean isChecked() {
@@ -310,37 +314,40 @@ public abstract class GPLayer implements Serializable {
         this.cached = cached;
     }
 
-    /**
-     * @return the alias
-     */
-    public String getAlias() {
-        return alias;
-    }
-
-    /**
-     * @param alias 
-     *          the alias to set
-     */
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-    //</editor-fold>
-
-    public abstract GPFolder getFolder();
-
-    public abstract void setFolder(GPFolder folder);
-
     /*
      * (non-Javadoc)
      *
-     * @see java.lang.Object#hashCode()
+     * @see java.lang.Object#toString()
      */
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (int) (id ^ (id >>> 32));
-        return result;
+    public String toString() {
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
+        str.append("id=").append(id);
+        str.append(", title=").append(title);
+        str.append(", name=").append(name);
+        str.append(", alias=").append(alias);
+        str.append(", abstractText=").append(abstractText);
+        str.append(", urlServer=").append(urlServer);
+        str.append(", srs=").append(srs);
+        str.append(", bbox=").append(bbox);
+        str.append(", layerType=").append(layerType);
+        str.append(", position=").append(position);
+        str.append(", shared=").append(shared);
+        str.append(", checked=").append(checked);
+        str.append(", cached=").append(cached);
+        if (this.getFolder() != null) {
+            str.append(", folder.name=").append(this.getFolder().getName());
+            str.append("(id=").append(this.getFolder().getId()).append(")");
+        } else {
+            str.append(", folder=NULL");
+        }
+        if (this.getProject() != null) {
+            str.append(", project.name=").append(this.getProject().getName());
+            str.append("(id=").append(this.getProject().getId()).append(")");
+        } else {
+            str.append(", project=NULL");
+        }
+        return str.append("}").toString();
     }
 
     /*
@@ -369,27 +376,13 @@ public abstract class GPLayer implements Serializable {
     /*
      * (non-Javadoc)
      *
-     * @see java.lang.Object#toString()
+     * @see java.lang.Object#hashCode()
      */
     @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder();
-        str.append("id=").append(id);
-        str.append(", name=").append(name);
-        str.append(", title=").append(title);
-        str.append(", abstractText=").append(abstractText);
-        str.append(", urlServer=").append(urlServer);
-        str.append(", srs=").append(srs);
-        str.append(", bbox=").append(bbox);
-        str.append(", layerType=").append(layerType);
-        str.append(", position=").append(position);
-        str.append(", ownerId=").append(ownerId);
-        str.append(", shared=").append(shared);
-        str.append(", checked=").append(checked);
-        str.append(", cached=").append(cached);
-        str.append(", alias=").append(alias);
-        str.append(", folder.name=").append(getFolder().getName());
-        str.append("(id=").append(getFolder().getId()).append(")");
-        return str.toString();
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int) (id ^ (id >>> 32));
+        return result;
     }
 }

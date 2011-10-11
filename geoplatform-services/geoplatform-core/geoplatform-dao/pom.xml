@@ -256,8 +256,7 @@
             <artifactId>gt-epsg-wkt</artifactId>
         </dependency>
 
-		<!-- HIBERNATE -->
-        
+		<!-- HIBERNATE -->        
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
@@ -266,7 +265,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-        </dependency>
+        </dependency>        
             
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -284,8 +283,7 @@
             <artifactId>ehcache</artifactId>
             <version>${hibernate-ehcache.version}</version>
         </dependency>
-
-
+        
 		<!-- CGLIB -->
         <dependency>
             <groupId>asm</groupId>

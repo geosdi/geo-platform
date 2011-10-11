@@ -46,57 +46,41 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.security.acls.domain.BasePermission;
 
 /**
- * @author Francesco Izzi - geoSDI
- * 
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ *
  */
-@XmlRootElement(name = "Folder")
-@XmlAccessorType(XmlAccessType.FIELD)
-@Entity(name = "Folder")
-@Table(name = "gp_folder")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "folder")
-public class GPFolder implements Serializable {
+@Entity
+@Table(name = "gp_user_projects", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"user_id", "project_id"})})
+public class GPUserProjects implements Serializable {
 
-    /**
-     * serialVersionUID
-     */
-    private static final long serialVersionUID = -5826659681483678835L;
-    //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_FOLDER_SEQ")
-    @SequenceGenerator(name = "GP_FOLDER_SEQ", sequenceName = "GP_FOLDER_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_USER_PROJECTS_SEQ")
+    @SequenceGenerator(name = "GP_USER_PROJECTS_SEQ", sequenceName = "GP_USER_PROJECTS_SEQ")
     private long id = -1;
-    //
-    @Column(nullable = false)
-    private String name;
-    //
-    @ManyToOne(optional = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private GPFolder parent;
     //
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+//    @org.hibernate.annotations.Index(name = "USER_INDEX") // TODO Uncomment
+    private GPUser user;
+    //
+    @ManyToOne(optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @org.hibernate.annotations.Index(name = "PROJECT_INDEX") // TODO Uncomment
     private GPProject project;
     //
     @Column
-    private int position = -1;
-    //
-    @Column(name = "number_of_descendants")
-    private int numberOfDescendants = 0;
-    //
-    @Column
-    private boolean shared = false;
-    //    
-    @Column(name = "checked")
     private boolean checked = false;
+    //
+    @Column(name = "permission_mask", nullable = false)
+    private int permissionMask = BasePermission.ADMINISTRATION.getMask();
 
     /**
      * @return the id
@@ -107,40 +91,25 @@ public class GPFolder implements Serializable {
 
     /**
      * @param id
-     *            the id to set
+     *          the id to set
      */
     public void setId(long id) {
         this.id = id;
     }
 
     /**
-     * @return the name
+     * @return the user
      */
-    public String getName() {
-        return name;
+    public GPUser getUser() {
+        return user;
     }
 
     /**
-     * @param name
-     *            the name to set
+     * @param user
+     *          the user to set
      */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the parent
-     */
-    public GPFolder getParent() {
-        return parent;
-    }
-
-    /**
-     * @param parent
-     *            the parent to set
-     */
-    public void setParent(GPFolder parent) {
-        this.parent = parent;
+    public void setUser(GPUser user) {
+        this.user = user;
     }
 
     /**
@@ -152,39 +121,21 @@ public class GPFolder implements Serializable {
 
     /**
      * @param project
-     *            the project to set
+     *          the project to set
      */
     public void setProject(GPProject project) {
         this.project = project;
     }
 
     /**
-     * @return the position
+     * @param user
+     *          the user to set
+     * @param project
+     *          the project to set
      */
-    public int getPosition() {
-        return position;
-    }
-
-    /**
-     * @param position the position to set
-     */
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    /**
-     * @return the numberOfDescendant
-     */
-    public int getNumberOfDescendants() {
-        return numberOfDescendants;
-    }
-
-    /**
-     * @param numberOfDescendant
-     *            the numberOfDescendant to set
-     */
-    public void setNumberOfDescendants(int numberOfDescendants) {
-        this.numberOfDescendants = numberOfDescendants;
+    public void setUserAndProject(GPUser user, GPProject project) {
+        this.user = user;
+        this.project = project;
     }
 
     /**
@@ -203,17 +154,18 @@ public class GPFolder implements Serializable {
     }
 
     /**
-     * @return the shared
+     * @return the permissionMask
      */
-    public boolean isShared() {
-        return shared;
+    public int getPermissionMask() {
+        return permissionMask;
     }
 
     /**
-     * @param shared the shared to set
+     * @param permissionMask
+     *          the permissionMask to set
      */
-    public void setShared(boolean shared) {
-        this.shared = shared;
+    public void setPermissionMask(int permissionMask) {
+        this.permissionMask = permissionMask;
     }
 
     /*
@@ -224,13 +176,11 @@ public class GPFolder implements Serializable {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
-        str.append("id=").append(id);
-        str.append(", name=").append(name);
-        if (parent != null) {
-            str.append(", parent.name=").append(parent.getName());
-            str.append("(id=").append(parent.getId()).append(")");
+        if (user != null) {
+            str.append(" user.username=").append(user.getUsername());
+            str.append("(id=").append(user.getId()).append(")");
         } else {
-            str.append(", parent=NULL (this is a root folder)");
+            str.append(" user=NULL");
         }
         if (project != null) {
             str.append(", project.name=").append(project.getName());
@@ -238,10 +188,8 @@ public class GPFolder implements Serializable {
         } else {
             str.append(", project=NULL");
         }
-        str.append(", position=").append(position);
-        str.append(", numberOfDescendants=").append(numberOfDescendants);
+        str.append(", permission=").append(permissionMask);
         str.append(", checked=").append(checked);
-        str.append(", shared=").append(shared);
         return str.append("}").toString();
     }
 
@@ -251,16 +199,18 @@ public class GPFolder implements Serializable {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final GPFolder other = (GPFolder) obj;
+
+        final GPUserProjects other = (GPUserProjects) obj;
         if (this.id != other.id) {
             return false;
         }
+
         return true;
     }
 
@@ -270,8 +220,9 @@ public class GPFolder implements Serializable {
      */
     @Override
     public int hashCode() {
-        int hash = 13;
-        hash = 77 * hash + (int) (this.id ^ (this.id >>> 32));
-        return hash;
+        int result;
+        result = (user != null ? user.hashCode() : 0);
+        result = 71 * result + (project != null ? project.hashCode() : 0);
+        return result;
     }
 }

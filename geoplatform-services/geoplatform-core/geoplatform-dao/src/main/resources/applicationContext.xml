@@ -41,13 +41,14 @@
                 factory-method="getInstanceForEntityManagerFactory">
         <constructor-arg ref="entityManagerFactory" />
     </bean>
-
 	
     <!--=====================================================================-->
     <!-- DAOs -->
     <!--=====================================================================-->
 
     <bean id="userDAO" class="org.geosdi.geoplatform.core.dao.impl.GPUserDAOImpl" />
+    <bean id="projectDAO" class="org.geosdi.geoplatform.core.dao.impl.GPProjectDAOImpl" />
+    <bean id="userProjectsDAO" class="org.geosdi.geoplatform.core.dao.impl.GPUserProjectsDAOImpl" />
     <bean id="folderDAO" class="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" />
     <bean id="layerDAO" class="org.geosdi.geoplatform.core.dao.impl.GPLayerDAOImpl" />
 <!--    <bean id="styleDAO" class="org.geosdi.geoplatform.core.dao.impl.GPStyleDAOImpl" />-->

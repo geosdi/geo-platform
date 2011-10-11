@@ -62,7 +62,7 @@
             <artifactId>commons-collections</artifactId>
         </dependency>
 
-		<!-- This dep is needed in core::dao, but seems not to be transitively 
+		<!-- This dep is needed in core::dao, but seems not to be transitively
 			imported -->
         <dependency>
             <groupId>commons-codec</groupId>
@@ -147,8 +147,8 @@
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
         </dependency>
-        
-        <!-- 4J UTILS 
+
+		<!-- 4J UTILS
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -449,13 +449,8 @@
                         <phase>install</phase>
                         <configuration>
                             <target>
-
-                                <delete
-									file="../../../test/geoplatform-services-test/deploy/${project.build.finalName}.war" />
-                                <delete
-									dir="../../../test/geoplatform-services-test/deploy/${project.build.finalName}.war" />
-
-
+                                <delete file="../../../test/geoplatform-services-test/deploy/${project.build.finalName}.war" />
+                                <delete dir="../../../test/geoplatform-services-test/deploy/${project.build.finalName}.war" />
                                 <copy todir="../../../test/geoplatform-services-test/deploy">
                                     <fileset dir="${project.build.directory}" includes="${project.build.finalName}.war" />
                                 </copy>
@@ -470,12 +465,8 @@
                         <phase>clean</phase>
                         <configuration>
                             <target>
-
-                                <delete
-									file="../../../test/geoplatform-services-test/deploy/${project.build.finalName}.war" />
-                                <delete
-									dir="../../../test/geoplatform-services-test/deploy/${project.build.finalName}.war" />
-
+                                <delete file="../../../test/geoplatform-services-test/deploy/${project.build.finalName}.war" />
+                                <delete dir="../../../test/geoplatform-services-test/deploy/${project.build.finalName}.war" />
                             </target>
                         </configuration>
                         <goals>
@@ -499,4 +490,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

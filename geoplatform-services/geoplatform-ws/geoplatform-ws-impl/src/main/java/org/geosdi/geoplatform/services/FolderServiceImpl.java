@@ -99,9 +99,11 @@ class FolderServiceImpl {
     // ==========================================================================
     // === Folder
     // ==========================================================================    
-    public long insertFolder(GPFolder folder)
+    public long insertFolder(GPFolder folder, long projectId)
             throws IllegalParameterFault {
         logger.trace("\n\t@@@ insertFolder @@@");
+        GPProject project = projectDao.find(projectId);
+        folder.setProject(project);
         this.checkFolder(folder); // TODO assert
 
         folderDao.persist(folder);
@@ -162,19 +164,20 @@ class FolderServiceImpl {
         return folderDao.remove(folder);
     }
 
-    public long saveAddedFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData)
+    public long saveAddedFolderAndTreeModifications(GPFolder folder, 
+                GPWebServiceMapData descendantsMapData, long projectId)
             throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n\t@@@ saveAddedFolderAndTreeModifications @@@");
+        GPProject project = projectDao.find(projectId);
+        if (project == null) {
+            throw new ResourceNotFoundFault("Project not found", projectId);
+        }
+        folder.setProject(project);
+        
         this.checkFolder(folder); // TODO assert
         if (folder.getParent() != null && descendantsMapData.getDescendantsMap().isEmpty()) { // TODO assert
             throw new IllegalParameterFault("descendantsMapData must have one or more entries if the folder has a parent");
         }
-
-        GPProject project = projectDao.find(folder.getProject().getId());
-        if (project == null) {
-            throw new ResourceNotFoundFault("Project not found", folder.getProject().getId());
-        }
-        folder.setProject(project);
 
         if (folder.getParent() != null) {
             GPFolder parentFolder = folderDao.find(folder.getParent().getId());
@@ -190,8 +193,8 @@ class FolderServiceImpl {
         // Shift positions
         folderDao.updatePositionsLowerBound(newPosition, increment);
         layerDao.updatePositionsLowerBound(newPosition, increment);
-
-        folderDao.persist(folder);
+        
+        folderDao.merge(folder);
 
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
         this.updateNumberOfElements(folder, increment);

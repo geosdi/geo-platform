@@ -50,13 +50,13 @@ import org.springframework.stereotype.Service;
 @Service("sessionUtility")
 public class SessionUtility {
 
-    public GPProject getDefaultProjectFromSession(HttpServletRequest httpServletRequest) 
+    public long getDefaultProjectFromSession(HttpServletRequest httpServletRequest) 
         throws GPSessionTimeout{
-        GPProject project = null;
+        Long project = null;
         HttpSession session = httpServletRequest.getSession();
         Object projectObj = session.getAttribute(UserLoginEnum.DEFAULT_PROJECT.toString());
-        if (projectObj != null && projectObj instanceof GPProject) {
-            project = (GPProject) projectObj;
+        if (projectObj != null && projectObj instanceof Long) {
+            project = (Long) projectObj;
         } else {
             throw new GPSessionTimeout("Session Timeout");
         }

@@ -254,7 +254,8 @@ public interface GeoPlatformService {
     // ==========================================================================
     @Put
     @HttpResource(location = "/folder")
-    long insertFolder(@WebParam(name = "Folder") GPFolder folder)
+    long insertFolder(@WebParam(name = "Folder") GPFolder folder,
+                @WebParam(name = "projectId") long projectId)
             throws IllegalParameterFault;
 
     @Post
@@ -278,7 +279,8 @@ public interface GeoPlatformService {
 //    @HttpResource(location = "/folder/{descendantsMap}")
     long saveAddedFolderAndTreeModifications(
             @WebParam(name = "folder") GPFolder folder,
-            @WebParam(name = "descendantsMap") GPWebServiceMapData descendantsMapData)
+            @WebParam(name = "descendantsMap") GPWebServiceMapData descendantsMapData,
+            @WebParam(name = "projectId") long projectId)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Delete
@@ -394,7 +396,8 @@ public interface GeoPlatformService {
     @HttpResource(location = "/layers/{descendantsMap}")
     ArrayList<Long> saveAddedLayersAndTreeModifications(
             @WebParam(name = "layers") List<GPLayer> layers,
-            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
+            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData,
+            @WebParam(name = "projectId") long projectId)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Delete

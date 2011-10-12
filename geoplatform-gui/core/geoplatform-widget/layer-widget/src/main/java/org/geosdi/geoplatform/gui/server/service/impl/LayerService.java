@@ -41,7 +41,6 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
@@ -63,7 +62,6 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOConverter;
-import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
@@ -101,13 +99,13 @@ public class LayerService implements ILayerService {
 
     @Override
     public ArrayList<GPFolderClientInfo> loadUserFolders(HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        GPProject project = null;
+        long projectId = 0L;
         try {
-            project = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
+            projectId = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        List<FolderDTO> folderList = geoPlatformServiceClient.getRootFoldersByProjectId(project.getId());
+        List<FolderDTO> folderList = geoPlatformServiceClient.getRootFoldersByProjectId(projectId);
         return this.dtoConverter.convertOnlyFolder(folderList);
     }
 
@@ -139,18 +137,17 @@ public class LayerService implements ILayerService {
         folder.setName(folderName);
         folder.setPosition(position);
         folder.setShared(false);
-        GPProject project = null;
+        long projectId = 0L;
         try {
-            project = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
+            projectId = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        folder.setProject(project);
         folder.setNumberOfDescendants(numberOfDescendants);
         folder.setChecked(isChecked);
         long savedFolderId = 0L;
         try {
-            savedFolderId = this.geoPlatformServiceClient.insertFolder(folder);
+            savedFolderId = this.geoPlatformServiceClient.insertFolder(folder, projectId);
         } catch (IllegalParameterFault ilg) {
             logger.error(
                     "Error on LayerService: " + ilg);
@@ -186,17 +183,17 @@ public class LayerService implements ILayerService {
         folder.setParent(gpFolder);
         folder.setNumberOfDescendants(numberOfDescendants);
         folder.setChecked(isChecked);
-        GPProject project = null;
+        long projectId = 0L;
         try {
-            project = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
+            projectId = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        folder.setProject(project);
+//        folder.setProject(project);
 
         long savedFolderId = 0L;
         try {
-            savedFolderId = this.geoPlatformServiceClient.insertFolder(folder);
+            savedFolderId = this.geoPlatformServiceClient.insertFolder(folder, projectId);
         } catch (IllegalParameterFault ilg) {
             logger.error(
                     "Error on LayerService: " + ilg);
@@ -230,19 +227,19 @@ public class LayerService implements ILayerService {
             throws GeoPlatformException {
         GPFolder gpFolder = this.dtoConverter.convertMementoFolder(
                 memento.getAddedFolder());
-        GPProject project = null;
+        long projectId = 0L;
         try {
-            project = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
+            projectId = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        gpFolder.setProject(project);
+//        gpFolder.setProject(project);
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         long idSavedFolder = 0L;
         try {
             idSavedFolder = this.geoPlatformServiceClient.saveAddedFolderAndTreeModifications(
-                    gpFolder, map);
+                    gpFolder, map, projectId);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to save folder on LayerService: " + ex);
             throw new GeoPlatformException(ex);
@@ -260,16 +257,16 @@ public class LayerService implements ILayerService {
         ArrayList<GPLayer> layersList = this.dtoConverter.convertMementoLayers(memento.getAddedLayers());
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
-        GPUser user = null;
+        long projectId = 0L;
         try {
-            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            projectId = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
         ArrayList<Long> idSavedLayers = null;
         try {
             idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications(
-                    layersList, map);
+                    layersList, map, projectId);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to save layers on LayerService: " + ex);
             throw new GeoPlatformException(ex);

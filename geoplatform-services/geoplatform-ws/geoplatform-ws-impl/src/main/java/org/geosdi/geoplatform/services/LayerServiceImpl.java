@@ -178,7 +178,7 @@ class LayerServiceImpl {
     }
 
     public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers,
-            GPWebServiceMapData descendantsMapData)
+            GPWebServiceMapData descendantsMapData, long projectId)
             throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n\t@@@ saveAddedLayersAndTreeModifications @@@");
         if (layers == null || layers.isEmpty()) {
@@ -187,14 +187,9 @@ class LayerServiceImpl {
         this.checkLayerListLog(layers); // TODO assert
 
         // Project
-        GPProject project = layers.get(0).getProject();
-        if (project == null) {
-            throw new IllegalParameterFault("Project of layer with id "
-                    + layers.get(0).getId() + " not found");
-        }
-        GPProject projectEntity = projectDao.find(project.getId());
+        GPProject projectEntity = projectDao.find(projectId);
         if (projectEntity == null) {
-            throw new ResourceNotFoundFault("Project of top layer not found", project.getId());
+            throw new ResourceNotFoundFault("Project not found", projectId);
         }
 
         // Parent
@@ -203,7 +198,6 @@ class LayerServiceImpl {
             throw new IllegalParameterFault("Parent of layer with id "
                     + layers.get(0).getId() + " not found");
         }
-        this.checkFolder(parent); // TODO assert
 
         GPFolder parentEntity = folderDao.find(parent.getId());
         if (parentEntity == null) {
@@ -212,8 +206,8 @@ class LayerServiceImpl {
         this.checkFolder(parentEntity); // TODO assert   
 
         for (GPLayer gpLayer : layers) {
-            gpLayer.setProject(project);
-            gpLayer.setFolder(parent);
+            gpLayer.setProject(projectEntity);
+            gpLayer.setFolder(parentEntity);
         }
 
         int newPosition = layers.get(layers.size() - 1).getPosition();
@@ -222,7 +216,7 @@ class LayerServiceImpl {
         layerDao.updatePositionsLowerBound(newPosition, increment);
         folderDao.updatePositionsLowerBound(newPosition, increment);
 
-        layerDao.persist(layers.toArray(new GPLayer[layers.size()]));
+        layerDao.merge(layers.toArray(new GPLayer[layers.size()]));
 
         ArrayList<Long> arrayList = new ArrayList<Long>(layers.size());
         for (int i = 0; i < layers.size(); i++) {

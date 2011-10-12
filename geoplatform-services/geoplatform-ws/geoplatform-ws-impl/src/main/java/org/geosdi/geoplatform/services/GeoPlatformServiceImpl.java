@@ -440,9 +440,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === Folder
     // ==========================================================================
     @Override
-    public long insertFolder(GPFolder folder)
+    public long insertFolder(GPFolder folder, long projectId)
             throws IllegalParameterFault {
-        return folderServiceDelegate.insertFolder(folder);
+        return folderServiceDelegate.insertFolder(folder, projectId);
     }
 
     @Override
@@ -462,9 +462,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public long saveAddedFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData)
+    public long saveAddedFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData,
+        long projectId)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return folderServiceDelegate.saveAddedFolderAndTreeModifications(folder, descendantsMapData);
+        return folderServiceDelegate.saveAddedFolderAndTreeModifications(folder, 
+                descendantsMapData, projectId);
     }
 
     @Override
@@ -561,9 +563,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers, GPWebServiceMapData descendantsMapData)
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers, 
+            GPWebServiceMapData descendantsMapData, long projectId)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return layerServiceDelegate.saveAddedLayersAndTreeModifications(layers, descendantsMapData);
+        return layerServiceDelegate.saveAddedLayersAndTreeModifications(layers, 
+                descendantsMapData, projectId);
     }
 
     @Override

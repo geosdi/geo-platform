@@ -114,7 +114,7 @@ public class SecurityService implements ISecurityService {
             project.setShared(false);
             userProject.setUserAndProject(user, project);
             userProject.setPermissionMask(BasePermission.ADMINISTRATION.getMask());
-            this.saveProject(userProject);
+            project.setId(this.saveProject(userProject));
         } else {
             project = listProjects.get(0).getProject();
         }
@@ -140,7 +140,7 @@ public class SecurityService implements ISecurityService {
         //TODO: Set the right time in seconds before session interrupt
         session.setMaxInactiveInterval(900);
         session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), user);
-        session.setAttribute(UserLoginEnum.DEFAULT_PROJECT.toString(), defaultProject);
+        session.setAttribute(UserLoginEnum.DEFAULT_PROJECT.toString(), (Long)defaultProject.getId());
     }
 
     public GPUser loginFromSessionServer(HttpServletRequest httpServletRequest)
@@ -182,9 +182,10 @@ public class SecurityService implements ISecurityService {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
     }
 
-    private void saveProject(GPUserProjects userProject) throws GeoPlatformException {
+    private long saveProject(GPUserProjects userProject) throws GeoPlatformException {
+        long idProject = 0L;
         try {
-            this.geoPlatformServiceClient.saveProject(userProject.getUser().getUsername(),
+            idProject = this.geoPlatformServiceClient.saveProject(userProject.getUser().getUsername(),
                     userProject.getProject());
         } catch (ResourceNotFoundFault rnf) {
             this.logger.error("Failed to save project on SecurityService: " + rnf);
@@ -194,5 +195,6 @@ public class SecurityService implements ISecurityService {
                     "Error on SecurityService: " + ilg);
             throw new GeoPlatformException("Parameter incorrect on saveProject");
         }
+        return idProject;
     }
 }

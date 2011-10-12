@@ -170,6 +170,12 @@ class FolderServiceImpl {
             throw new IllegalParameterFault("descendantsMapData must have one or more entries if the folder has a parent");
         }
 
+        GPProject project = projectDao.find(folder.getProject().getId());
+        if (project == null) {
+            throw new ResourceNotFoundFault("Project not found", folder.getProject().getId());
+        }
+        folder.setProject(project);
+
         if (folder.getParent() != null) {
             GPFolder parentFolder = folderDao.find(folder.getParent().getId());
             if (parentFolder == null) {

@@ -40,10 +40,12 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.soap.SOAPFaultException;
+import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GPUserProjects;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
@@ -55,6 +57,7 @@ import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.stereotype.Service;
 
 /**
@@ -73,6 +76,7 @@ public class SecurityService implements ISecurityService {
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPUser user = null;
         List<String> roles = null;
+        List<GPUserProjects> listProjects = null;
         GuiComponentsPermissionMapData guiComponemtPermission;
         try {
             user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(
@@ -82,6 +86,8 @@ public class SecurityService implements ISecurityService {
 
             guiComponemtPermission = geoPlatformServiceClient.getUserGuiComponentVisible(
                     user.getId());
+
+            listProjects = geoPlatformServiceClient.getUserProjectsByUserId(user.getId());
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
                     "Unable to find user with username: " + userName + " Error: " + ex);
@@ -96,7 +102,19 @@ public class SecurityService implements ISecurityService {
                     "Error on SecurityService: " + ilg);
             throw new GeoPlatformException("Parameter incorrect");
         }
-        this.storeUserInSession(user, httpServletRequest);
+        GPProject project = null;
+        if (listProjects == null || listProjects.isEmpty()) {
+            GPUserProjects userProject = new GPUserProjects();
+            project = new GPProject();
+            project.setName("Default Project");
+            project.setShared(false);
+            userProject.setUserAndProject(user, project);
+            userProject.setPermissionMask(BasePermission.ADMINISTRATION.getMask());
+            this.saveProject(userProject);
+        } else {
+            project = listProjects.get(0).getProject();
+        }
+        this.storeUserAndProjectInSession(user, project, httpServletRequest);
 
         IGPUserDetail userDetail = this.userConverter.convertUserToDTO(user);
 
@@ -112,12 +130,13 @@ public class SecurityService implements ISecurityService {
         return userDetail;
     }
 
-    private void storeUserInSession(GPUser user,
+    private void storeUserAndProjectInSession(GPUser user, GPProject defaultProject,
             HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
         session.setMaxInactiveInterval(900);
         session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), user);
+        session.setAttribute(UserLoginEnum.DEFAULT_PROJECT.toString(), defaultProject);
     }
 
     private GPUser getUserAlreadyFromSession(
@@ -162,5 +181,19 @@ public class SecurityService implements ISecurityService {
     public void setGeoPlatformServiceClient(
             @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
+    }
+
+    private void saveProject(GPUserProjects userProject) throws GeoPlatformException {
+        try {
+            this.geoPlatformServiceClient.saveProject(userProject.getUser().getUsername(),
+                    userProject.getProject());
+        } catch (ResourceNotFoundFault rnf) {
+            this.logger.error("Failed to save project on SecurityService: " + rnf);
+            throw new GeoPlatformException(rnf);
+        } catch (IllegalParameterFault ilg) {
+            logger.error(
+                    "Error on SecurityService: " + ilg);
+            throw new GeoPlatformException("Parameter incorrect on saveProject");
+        }
     }
 }

@@ -36,11 +36,10 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.core.model.GPUserProjects;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -103,7 +102,7 @@ public class OGCService implements IOGCService {
             logger.error("The server with id " + idServer + " was not bean deleted.");
             throw new GeoPlatformException(
                     "The server with id " + idServer + " was not bean deleted.");
-        } 
+        }
         return true;
     }
 
@@ -154,17 +153,26 @@ public class OGCService implements IOGCService {
         return user;
     }
 
+    private GPProject getDefaultProjectFromSession(HttpServletRequest httpServletRequest) {
+        GPProject project = null;
+        HttpSession session = httpServletRequest.getSession();
+        Object projectObj = session.getAttribute(UserLoginEnum.DEFAULT_PROJECT.toString());
+        if (projectObj != null && projectObj instanceof GPProject) {
+            project = (GPProject) projectObj;
+        } else {
+            throw new GeoPlatformException(new GPSessionTimeout("Session Timeout"));
+        }
+        return project;
+    }
+
     @Override
     public ArrayList<String> findDistinctLayersDataSource(HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         ArrayList<String> dataSources = null;
-        GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
+        GPProject project = this.getDefaultProjectFromSession(httpServletRequest);
         try {
-            List<GPUserProjects> projectList = geoPlatformServiceClient.getUserProjectsByUserId(user.getId());
             dataSources = geoPlatformServiceClient.getLayersDataSourceByProjectId(
-                    projectList.get(0).getId());
-//            dataSources = geoPlatformServiceClient.getLayersDataSourceByOwner(
-//                    this.getUserAlreadyFromSession(httpServletRequest).getUsername());
+                    project.getId());
         } catch (ResourceNotFoundFault e) {
             throw new GeoPlatformException("Error in findDistinctLayersDataSource: ResourceNotFoundFault "
                     + e);

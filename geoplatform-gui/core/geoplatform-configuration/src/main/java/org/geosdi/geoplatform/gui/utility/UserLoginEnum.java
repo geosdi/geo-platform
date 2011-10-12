@@ -41,5 +41,5 @@ package org.geosdi.geoplatform.gui.utility;
  */
 public enum UserLoginEnum {
 
-    USER_LOGGED, USER_MENU;
+    USER_LOGGED, USER_MENU, DEFAULT_PROJECT;
 }

@@ -108,6 +108,26 @@ class ProjectServiceImpl {
     // ==========================================================================
     // === Project
     // ==========================================================================
+    public long saveProject(String username, GPProject project)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        logger.trace("\n\t@@@ saveProject @@@");
+        this.checkProject(project);
+
+        GPUser user = userDao.findByUsername(username);
+        if (user == null) {
+            throw new ResourceNotFoundFault("User with username \"" + username + "\" not found");
+        }
+
+        GPUserProjects userProject = new GPUserProjects();
+        userProject.setUser(user);
+        userProject.setProject(project);
+
+        projectDao.persist(project);
+        userProjectsDao.persist(userProject);
+
+        return project.getId(); // Remark: return only the entity ID of Project
+    }
+
     public long insertProject(GPProject project) throws IllegalParameterFault {
         logger.trace("\n\t@@@ insertProject @@@");
         this.checkProject(project);

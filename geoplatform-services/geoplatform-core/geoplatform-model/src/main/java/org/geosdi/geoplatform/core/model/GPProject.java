@@ -87,7 +87,7 @@ public class GPProject implements Serializable {
     //
     @Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date creationDate;
+    private Date creationDate = new Date(System.currentTimeMillis());
 
     /**
      * @return the id

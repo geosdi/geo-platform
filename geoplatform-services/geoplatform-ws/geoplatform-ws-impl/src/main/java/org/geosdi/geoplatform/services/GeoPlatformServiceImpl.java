@@ -382,6 +382,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === Project
     // ==========================================================================    
     @Override
+    public long saveProject(String username, GPProject project)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return this.projectServiceDelegate.saveProject(username, project);
+    }
+
+    @Override
     public long insertProject(GPProject project) throws IllegalParameterFault {
         return this.projectServiceDelegate.insertProject(project);
     }

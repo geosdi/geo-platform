@@ -200,6 +200,13 @@ public interface GeoPlatformService {
     // ==========================================================================
     @Put
     @HttpResource(location = "/project")
+    long saveProject(
+            @WebParam(name = "username") String username,
+            @WebParam(name = "Project") GPProject project)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Put
+    @HttpResource(location = "/project")
     long insertProject(@WebParam(name = "Project") GPProject project)
             throws IllegalParameterFault;
 

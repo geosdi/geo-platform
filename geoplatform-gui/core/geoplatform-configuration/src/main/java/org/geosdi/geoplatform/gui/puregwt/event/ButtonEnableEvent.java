@@ -33,50 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.puregwt;
+package org.geosdi.geoplatform.gui.puregwt.event;
 
-import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
+public class ButtonEnableEvent extends GwtEvent<ButtonHandler> {
 
-/*
- * This class is used for change action status
- * i.e. for change the status of checkboxes
- */
-public class GPActionHandlerManager {
+    private boolean enabled;
     
-    private GPEventBus eventBus;
-    private static GPActionHandlerManager instance = new GPActionHandlerManager();
-    
-    private GPActionHandlerManager() {
-        this.eventBus = new GPEventBusImpl();
+    public ButtonEnableEvent(boolean isEnabled) {
+        this.enabled = isEnabled;
     }
     
-    public static GPActionHandlerManager getInstance() {
-        return instance;
+    @Override
+    public Type<ButtonHandler> getAssociatedType() {
+        return ButtonHandler.TYPE;
     }
 
-    public static <T extends EventHandler> HandlerRegistration addHandler(
-            Type<T> type, T handler) {
-        return getInstance().eventBus.addHandler(type, handler);
+    @Override
+    protected void dispatch(ButtonHandler handler) {
+        handler.onEnabling(this.enabled);
     }
-
-    public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
-            Type<T> type, Object source, T handler) {
-        return getInstance().eventBus.addHandlerToSource(type, source, handler);
-    }
-
-    public static void fireEvent(GwtEvent<?> event) {
-        getInstance().eventBus.fireEvent(event);
-    }
-
-    public static void fireEventFromSource(GwtEvent<?> event, Object source) {
-        getInstance().eventBus.fireEventFromSource(event, source);
-    }
+    
 }

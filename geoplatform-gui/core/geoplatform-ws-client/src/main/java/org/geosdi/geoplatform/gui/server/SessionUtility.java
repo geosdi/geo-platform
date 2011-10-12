@@ -33,59 +33,47 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.service.impl;
+package org.geosdi.geoplatform.gui.server;
 
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.IServerService;
-import org.geosdi.geoplatform.gui.server.SessionUtility;
-import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.springframework.stereotype.Service;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@Service("serverService")
-public class ServerService implements IServerService {
+@Service("sessionUtility")
+public class SessionUtility {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private GeoPlatformService geoPlatformServiceClient;
-    @Autowired
-    private SessionUtility sessionUtility;
+    public GPProject getDefaultProjectFromSession(HttpServletRequest httpServletRequest) 
+        throws GPSessionTimeout{
+        GPProject project = null;
+        HttpSession session = httpServletRequest.getSession();
+        Object projectObj = session.getAttribute(UserLoginEnum.DEFAULT_PROJECT.toString());
+        if (projectObj != null && projectObj instanceof GPProject) {
+            project = (GPProject) projectObj;
+        } else {
+            throw new GPSessionTimeout("Session Timeout");
+        }
+        return project;
+    }
 
-    @Override
-    public List<String> getUserAuthorities(HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
+    public GPUser getUserAlreadyFromSession(HttpServletRequest httpServletRequest) 
+        throws GPSessionTimeout{
         GPUser user = null;
-        try {
-            user = sessionUtility.getUserAlreadyFromSession(httpServletRequest);
-        } catch (GPSessionTimeout timeout) {
-            throw new GeoPlatformException(timeout);
+        HttpSession session = httpServletRequest.getSession();
+        Object userObj = session.getAttribute(UserLoginEnum.USER_LOGGED.toString());
+        if (userObj != null && userObj instanceof GPUser) {
+            user = (GPUser) userObj;
+        } else {
+            throw new GPSessionTimeout("Session Timeout");
         }
-        List<String> userAuthorities = null;
-        try {
-            userAuthorities = geoPlatformServiceClient.getUserAuthorities(user.getId());
-        } catch (ResourceNotFoundFault ex) {
-            logger.debug("Returning no elements: " + ex);
-        }
-        return userAuthorities;
+        return user;
     }
-
-    /**
-     * @param geoPlatformServiceClient the geoPlatformServiceClient to set
-     */
-    @Autowired
-    public void setGeoPlatformServiceClient(
-            @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
-        this.geoPlatformServiceClient = geoPlatformServiceClient;
-    }
+    
 }

@@ -66,7 +66,7 @@ import org.geosdi.geoplatform.gui.client.event.timeout.GPKmlPreviewEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.IGPKmlPreviewHandler;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;

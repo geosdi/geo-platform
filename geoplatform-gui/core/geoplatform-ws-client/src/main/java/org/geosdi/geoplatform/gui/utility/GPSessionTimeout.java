@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.exception;
+package org.geosdi.geoplatform.gui.utility;
 
 import java.io.Serializable;
 

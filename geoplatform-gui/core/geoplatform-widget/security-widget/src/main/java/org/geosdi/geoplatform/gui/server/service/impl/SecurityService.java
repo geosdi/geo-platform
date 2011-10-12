@@ -51,7 +51,9 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
+import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.converter.GPUserConverter;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -70,6 +72,8 @@ public class SecurityService implements ISecurityService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private GeoPlatformService geoPlatformServiceClient;
     private GPUserConverter userConverter;
+    @Autowired
+    private SessionUtility sessionUtility;
 
     @Override
     public IGPUserDetail userLogin(String userName, String password,
@@ -139,20 +143,15 @@ public class SecurityService implements ISecurityService {
         session.setAttribute(UserLoginEnum.DEFAULT_PROJECT.toString(), defaultProject);
     }
 
-    private GPUser getUserAlreadyFromSession(
-            HttpServletRequest httpServletRequest) {
+    public GPUser loginFromSessionServer(HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
         GPUser user = null;
-        HttpSession session = httpServletRequest.getSession();
-        Object userObj = session.getAttribute(
-                UserLoginEnum.USER_LOGGED.toString());
-        if (userObj != null && userObj instanceof GPUser) {
-            user = (GPUser) userObj;
+        try {
+            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
         }
         return user;
-    }
-
-    public GPUser loginFromSessionServer(HttpServletRequest httpServletRequest) {
-        return getUserAlreadyFromSession(httpServletRequest);
     }
 
     private void deleteUserFromSession(HttpServletRequest httpServletRequest) {

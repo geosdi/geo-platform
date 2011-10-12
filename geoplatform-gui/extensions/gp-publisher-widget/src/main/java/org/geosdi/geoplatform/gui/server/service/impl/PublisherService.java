@@ -40,14 +40,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.slf4j.Logger;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.IPublisherService;
-import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,12 +59,18 @@ import org.springframework.stereotype.Service;
 public class PublisherService implements IPublisherService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
     private GeoPlatformPublishClient geoPlatformPublishClient;
+    @Autowired
+    private SessionUtility sessionUtility;
 
     @Override
     public void publishLayerPreview(HttpServletRequest httpServletRequest, List<String> layerList) throws GeoPlatformException {
-        GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
+        GPUser user = null;
+        try {
+            user = sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
         try {
             geoPlatformPublishClient.getPublishService().publishAll(
                     httpServletRequest.getSession().getId(), "previews", "dataTest", layerList);
@@ -83,20 +88,7 @@ public class PublisherService implements IPublisherService {
     @Override
     public void kmlPreview(HttpServletRequest httpServletRequest, String url)
             throws GeoPlatformException {
-//        GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
         // TODO
-    }
-
-    private GPUser getUserAlreadyFromSession(HttpServletRequest httpServletRequest) {
-        GPUser user = null;
-        HttpSession session = httpServletRequest.getSession();
-        Object userObj = session.getAttribute(UserLoginEnum.USER_LOGGED.toString());
-        if (userObj != null && userObj instanceof GPUser) {
-            user = (GPUser) userObj;
-        } else {
-            throw new GeoPlatformException(new GPSessionTimeout("Session Timeout"));
-        }
-        return user;
     }
 
     /**

@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
@@ -139,18 +139,6 @@ public class OGCService implements IOGCService {
             throw new GeoPlatformException(ex.getMessage());
         }
         return dtoServerConverter.convertServerWS(serverWS);
-    }
-
-    private GPUser getUserAlreadyFromSession(HttpServletRequest httpServletRequest) {
-        GPUser user = null;
-        HttpSession session = httpServletRequest.getSession();
-        Object userObj = session.getAttribute(UserLoginEnum.USER_LOGGED.toString());
-        if (userObj != null && userObj instanceof GPUser) {
-            user = (GPUser) userObj;
-        } else {
-            throw new GeoPlatformException(new GPSessionTimeout("Session Timeout"));
-        }
-        return user;
     }
 
     private GPProject getDefaultProjectFromSession(HttpServletRequest httpServletRequest) {

@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.io.IOException;
-import java.lang.annotation.Documented;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -59,12 +58,12 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolde
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
-import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.ILayerService;
+import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOConverter;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
-import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
@@ -88,6 +87,8 @@ public class LayerService implements ILayerService {
     private GeoPlatformService geoPlatformServiceClient;
     @Autowired
     private DTOConverter dtoConverter;
+    @Autowired
+    private SessionUtility sessionUtility;
 
     /**
      * @param geoPlatformServiceClient the geoPlatformServiceClient to set
@@ -100,17 +101,24 @@ public class LayerService implements ILayerService {
 
     @Override
     public ArrayList<GPFolderClientInfo> loadUserFolders(HttpServletRequest httpServletRequest) throws GeoPlatformException {
-//        RequestById idRequest = new RequestById(this.getUserAlreadyFromSession(httpServletRequest).getId());
-        Long projectId = this.getDefaultProjectFromSession(httpServletRequest).getId();
-        List<FolderDTO> folderList = geoPlatformServiceClient.getRootFoldersByProjectId(projectId);
-//        List<FolderDTO> folderList = geoPlatformServiceClient.getUserFoldersByRequest(
-//                idRequest);
+        GPProject project = null;
+        try {
+            project = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
+        List<FolderDTO> folderList = geoPlatformServiceClient.getRootFoldersByProjectId(project.getId());
         return this.dtoConverter.convertOnlyFolder(folderList);
     }
 
     @Override
     public ArrayList<IGPFolderElements> loadFolderElements(long folderId, HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        this.getUserAlreadyFromSession(httpServletRequest);
+        GPUser user = null;
+        try {
+            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
         TreeFolderElements folderElements = geoPlatformServiceClient.getChildrenElements(
                 folderId);
         ArrayList<IGPFolderElements> elements = new ArrayList<IGPFolderElements>();
@@ -131,8 +139,13 @@ public class LayerService implements ILayerService {
         folder.setName(folderName);
         folder.setPosition(position);
         folder.setShared(false);
-        folder.setProject(this.getDefaultProjectFromSession(httpServletRequest));
-//        folder.setOwner(this.getUserAlreadyFromSession(httpServletRequest));
+        GPProject project = null;
+        try {
+            project = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
+        folder.setProject(project);
         folder.setNumberOfDescendants(numberOfDescendants);
         folder.setChecked(isChecked);
         long savedFolderId = 0L;
@@ -150,7 +163,12 @@ public class LayerService implements ILayerService {
     public long saveFolder(long idParentFolder, String folderName, int position,
             int numberOfDescendants, boolean isChecked, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        this.getUserAlreadyFromSession(httpServletRequest);
+        GPUser user = null;
+        try {
+            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
         GPFolder gpFolder = null;
         try {
             gpFolder = geoPlatformServiceClient.getFolderDetail(idParentFolder);
@@ -168,7 +186,13 @@ public class LayerService implements ILayerService {
         folder.setParent(gpFolder);
         folder.setNumberOfDescendants(numberOfDescendants);
         folder.setChecked(isChecked);
-        folder.setProject(this.getDefaultProjectFromSession(httpServletRequest));
+        GPProject project = null;
+        try {
+            project = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
+        folder.setProject(project);
 
         long savedFolderId = 0L;
         try {
@@ -184,7 +208,12 @@ public class LayerService implements ILayerService {
     @Override
     public void deleteElement(long id, TreeElement elementType, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        this.getUserAlreadyFromSession(httpServletRequest);
+        GPUser user = null;
+        try {
+            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
         switch (elementType) {
             case FOLDER:
                 this.deleteFolder(id);
@@ -201,7 +230,13 @@ public class LayerService implements ILayerService {
             throws GeoPlatformException {
         GPFolder gpFolder = this.dtoConverter.convertMementoFolder(
                 memento.getAddedFolder());
-        gpFolder.setProject(this.getDefaultProjectFromSession(httpServletRequest));
+        GPProject project = null;
+        try {
+            project = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
+        gpFolder.setProject(project);
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         long idSavedFolder = 0L;
@@ -225,7 +260,12 @@ public class LayerService implements ILayerService {
         ArrayList<GPLayer> layersList = this.dtoConverter.convertMementoLayers(memento.getAddedLayers());
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
-        GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
+        GPUser user = null;
+        try {
+            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
         ArrayList<Long> idSavedLayers = null;
         try {
             idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications(
@@ -243,7 +283,12 @@ public class LayerService implements ILayerService {
     @Override
     public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        this.getUserAlreadyFromSession(httpServletRequest);
+        GPUser user = null;
+        try {
+            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
@@ -260,7 +305,12 @@ public class LayerService implements ILayerService {
     @Override
     public boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        this.getUserAlreadyFromSession(httpServletRequest);
+        GPUser user = null;
+        try {
+            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
@@ -280,7 +330,12 @@ public class LayerService implements ILayerService {
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
-        GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
+        GPUser user = null;
+        try {
+            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
         try {
             result = this.geoPlatformServiceClient.saveDragAndDropLayerAndTreeModifications(
                     memento.getIdBaseElement(), memento.getIdNewParent(), memento.getNewZIndex(), map);
@@ -302,7 +357,12 @@ public class LayerService implements ILayerService {
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
-        GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
+        GPUser user = null;
+        try {
+            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
         try {
             result = this.geoPlatformServiceClient.saveDragAndDropFolderAndTreeModifications(
                     memento.getIdBaseElement(), memento.getIdNewParent(), memento.getNewZIndex(), map);
@@ -314,10 +374,16 @@ public class LayerService implements ILayerService {
         return result;
     }
 
-    @Override @Deprecated()
+    @Override
+    @Deprecated()
     public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        this.getUserAlreadyFromSession(httpServletRequest);
+        GPUser user = null;
+        try {
+            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
         boolean result = false;
         try {
             result = this.geoPlatformServiceClient.saveCheckStatusFolderAndTreeModifications(
@@ -330,10 +396,16 @@ public class LayerService implements ILayerService {
         return result;
     }
 
-    @Override @Deprecated()
+    @Override
+    @Deprecated()
     public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        this.getUserAlreadyFromSession(httpServletRequest);
+        GPUser user = null;
+        try {
+            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
         boolean result = false;
         try {
             result = this.geoPlatformServiceClient.saveCheckStatusLayerAndTreeModifications(
@@ -350,7 +422,12 @@ public class LayerService implements ILayerService {
     public boolean saveLayerProperties(MementoLayerOriginalProperties memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
         boolean result = false;
-        GPUser user = this.getUserAlreadyFromSession(httpServletRequest);
+        GPUser user = null;
+        try {
+            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
         ShortRasterPropertiesDTO dto = this.dtoConverter.convertMementoProperties(memento);
         try {
             result = geoPlatformServiceClient.saveLayerProperties(dto);
@@ -367,7 +444,12 @@ public class LayerService implements ILayerService {
     @Override
     public boolean saveFolderProperties(MementoFolderOriginalProperties memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        this.getUserAlreadyFromSession(httpServletRequest);
+        GPUser user = null;
+        try {
+            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
         try {
             geoPlatformServiceClient.saveFolderProperties(memento.getIdBaseElement(),
                     memento.getName(), memento.isChecked());
@@ -416,18 +498,6 @@ public class LayerService implements ILayerService {
         return false;
     }
 
-    private GPUser getUserAlreadyFromSession(HttpServletRequest httpServletRequest) {
-        GPUser user = null;
-        HttpSession session = httpServletRequest.getSession();
-        Object userObj = session.getAttribute(UserLoginEnum.USER_LOGGED.toString());
-        if (userObj != null && userObj instanceof GPUser) {
-            user = (GPUser) userObj;
-        } else {
-            throw new GeoPlatformException(new GPSessionTimeout("Session Timeout"));
-        }
-        return user;
-    }
-
     @Deprecated()
     private void deleteFolder(long id) throws GeoPlatformException {
         try {
@@ -450,17 +520,5 @@ public class LayerService implements ILayerService {
             throw new GeoPlatformException(
                     "The Layer with ID : " + id + " was deleted.");
         }
-    }
-
-    private GPProject getDefaultProjectFromSession(HttpServletRequest httpServletRequest) {
-        GPProject project = null;
-        HttpSession session = httpServletRequest.getSession();
-        Object projectObj = session.getAttribute(UserLoginEnum.DEFAULT_PROJECT.toString());
-        if (projectObj != null && projectObj instanceof GPProject) {
-            project = (GPProject) projectObj;
-        } else {
-            throw new GeoPlatformException(new GPSessionTimeout("Session Timeout"));
-        }
-        return project;
     }
 }

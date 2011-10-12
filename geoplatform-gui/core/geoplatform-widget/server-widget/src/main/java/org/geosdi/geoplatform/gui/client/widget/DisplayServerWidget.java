@@ -60,7 +60,7 @@ import java.util.List;
 import org.geosdi.geoplatform.gui.client.event.timeout.DisplayGetCapabilitiesEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.IDisplayGetCapabilitiesHandler;
 import org.geosdi.geoplatform.gui.client.widget.form.ManageServerWidget;
-import org.geosdi.geoplatform.gui.exception.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;

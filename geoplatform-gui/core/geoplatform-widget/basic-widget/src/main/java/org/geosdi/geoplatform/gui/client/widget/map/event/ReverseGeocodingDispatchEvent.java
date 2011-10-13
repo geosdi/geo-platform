@@ -44,42 +44,40 @@ import com.google.gwt.event.shared.GwtEvent;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class ReverseGeocodingDispatchEvent extends
-		GwtEvent<ReverseGeocodingDispatchHandler> {
+public class ReverseGeocodingDispatchEvent extends GwtEvent<ReverseGeocodingDispatchHandler> {
 
-	private ReverseGeocodingWidget widget;
+    private ReverseGeocodingWidget widget;
 
-	/**
-	 * @Construct
-	 * 
-	 * @param theWidget
-	 */
-	public ReverseGeocodingDispatchEvent(ReverseGeocodingWidget theWidget) {
-		this.widget = theWidget;
-	}
+    /**
+     * @Construct
+     * 
+     * @param theWidget
+     */
+    public ReverseGeocodingDispatchEvent(ReverseGeocodingWidget theWidget) {
+        this.widget = theWidget;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
-	 */
-	@Override
-	public Type<ReverseGeocodingDispatchHandler> getAssociatedType() {
-		// TODO Auto-generated method stub
-		return ReverseGeocodingDispatchHandler.TYPE;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+     */
+    @Override
+    public Type<ReverseGeocodingDispatchHandler> getAssociatedType() {
+        // TODO Auto-generated method stub
+        return ReverseGeocodingDispatchHandler.TYPE;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
-	 * .EventHandler)
-	 */
-	@Override
-	protected void dispatch(ReverseGeocodingDispatchHandler handler) {
-		// TODO Auto-generated method stub
-		handler.processRequest(widget);
-	}
-
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+     * .EventHandler)
+     */
+    @Override
+    protected void dispatch(ReverseGeocodingDispatchHandler handler) {
+        // TODO Auto-generated method stub
+        handler.processRequest(widget);
+    }
 }

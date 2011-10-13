@@ -47,45 +47,44 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  */
 public abstract class GenericRoutingPoint extends IntersectionRoutingControl {
 
-	protected GPRoutingLine line;
+    protected GPRoutingLine line;
 
-	/**
-	 * @param theLayer
-	 * @param theBoxesWidget
-	 */
-	public GenericRoutingPoint(Vector theLayer,
-			GeoPlatformBoxesWidget theBoxesWidget, GeoPlatformMap geoPlatformMap) {
-		super(theLayer, theBoxesWidget, geoPlatformMap);
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * @param theLayer
+     * @param theBoxesWidget
+     */
+    public GenericRoutingPoint(Vector theLayer,
+            GeoPlatformBoxesWidget theBoxesWidget, GeoPlatformMap geoPlatformMap) {
+        super(theLayer, theBoxesWidget, geoPlatformMap);
+        // TODO Auto-generated constructor stub
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle
-	 * ()
-	 */
-	@Override
-	public void createStyle() {
-		// TODO Auto-generated method stub
-		style.setFillOpacity(1);
-		setIconStyle();
-		style.setFontColor("blue");
-		style.setFontSize("13px");
-		style.setFontWeight("bold");
-		style.setLabelAlign("cb");
-		style.setGraphicSize(20, 34);
-		style.setGraphicOffset(0, -17);
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle
+     * ()
+     */
+    @Override
+    public void createStyle() {
+        // TODO Auto-generated method stub
+        style.setFillOpacity(1);
+        setIconStyle();
+        style.setFontColor("blue");
+        style.setFontSize("13px");
+        style.setFontWeight("bold");
+        style.setLabelAlign("cb");
+        style.setGraphicSize(20, 34);
+        style.setGraphicOffset(0, -17);
+    }
 
-	public abstract void setIconStyle();
+    public abstract void setIconStyle();
 
-	/**
-	 * @param line the line to set
-	 */
-	public void setLine(GPRoutingLine line) {
-		this.line = line;
-	}
-
+    /**
+     * @param line the line to set
+     */
+    public void setLine(GPRoutingLine line) {
+        this.line = line;
+    }
 }

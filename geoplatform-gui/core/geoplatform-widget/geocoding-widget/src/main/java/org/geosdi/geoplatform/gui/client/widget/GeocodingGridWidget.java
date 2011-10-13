@@ -63,15 +63,19 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
+import org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt.event.GPGeocodingRemoveMarkerEvent;
+import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
 
     private FormPanel formPanel;
     private TextField<String> search;
+    private GPGeocodingRemoveMarkerEvent event = new GPGeocodingRemoveMarkerEvent();
 
     public GeocodingGridWidget() {
         super(false);
@@ -221,6 +225,6 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
     }
 
     private void removeMarkersOnMap() {
-        Dispatcher.forwardEvent(GeoPlatformEvents.RemoveMarker);
+        GPGeocodingHandlerManager.fireEvent(event);
     }
 }

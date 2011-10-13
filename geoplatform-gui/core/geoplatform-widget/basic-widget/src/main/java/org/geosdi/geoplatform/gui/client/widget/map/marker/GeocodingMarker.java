@@ -51,8 +51,9 @@ import com.google.gwt.core.client.GWT;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class GeocodingMarker extends GeoPlatformMarker {
+public class GeocodingMarker extends GeoPlatformMarkerLayer {
 
+    @Override
     public void buildMarkerLayer() {
         MarkersOptions options = new MarkersOptions();
         options.setNumZoomLevels(18);
@@ -62,6 +63,7 @@ public class GeocodingMarker extends GeoPlatformMarker {
         this.markerLayer = new Markers("GP-Geocoding-Markers-Layer", options);
     }
 
+    @Override
     public void buildIconMarker() {
         Size size = new Size(21, 25);
         Pixel offset = new Pixel(-(size.getWidth() / 2), -size.getHeight());
@@ -76,10 +78,11 @@ public class GeocodingMarker extends GeoPlatformMarker {
      * @param lonlat
      *            LonLat to build the marker and add to the markerLayer
      */
+    @Override
     public void addMarker(LonLat lonlat, Map map) {
-        this.markerLayer.clearMarkers();
+        ((Markers) this.markerLayer).clearMarkers();
         map.setCenter(lonlat, 16);
         this.marker = new Marker(lonlat, this.iconMarker);
-        this.markerLayer.addMarker(this.marker);
+        ((Markers) this.markerLayer).addMarker(this.marker);
     }
 }

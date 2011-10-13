@@ -35,61 +35,27 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.marker;
 
-import org.gwtopenmaps.openlayers.client.Icon;
-import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.Marker;
-import org.gwtopenmaps.openlayers.client.layer.Markers;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GeoPlatformMarker {
+public abstract class GPGenericMarkerLayer
+        implements IGPMarkerLayer {
 
-	protected Markers markerLayer;
-	protected Marker marker;
-	protected Icon iconMarker;
+    protected Layer markerLayer;
 
-	public GeoPlatformMarker() {
-		buildMarkerLayer();
-		buildIconMarker();
-	}
+    public GPGenericMarkerLayer() {
+        buildMarkerLayer();
+        buildIconMarker();
+    }
 
-	public abstract void buildMarkerLayer();
-
-	public abstract void buildIconMarker();
-
-	public abstract void addMarker(LonLat lonlat, Map map);
-
-	/**
-	 * Remove Marker from Marker Layer
-	 */
-	public void removeMarker() {
-		if (this.marker != null)
-			this.markerLayer.removeMarker(this.marker);
-	}
-
-	/**
-	 * @return the markerLayer
-	 */
-	public Markers getMarkerLayer() {
-		return markerLayer;
-	}
-
-	/**
-	 * @return the marker
-	 */
-	public Marker getMarker() {
-		return marker;
-	}
-
-	/**
-	 * @return the iconMarker
-	 */
-	public Icon getIconMarker() {
-		return iconMarker;
-	}
-
+    /**
+     * @return the markerLayer
+     */
+    public Layer getMarkerLayer() {
+        return markerLayer;
+    }
 }

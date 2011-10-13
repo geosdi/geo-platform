@@ -49,8 +49,9 @@ import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 public class GeocodingController extends GeoPlatformController {
 

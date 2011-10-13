@@ -47,16 +47,19 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
+import org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt.event.GPGeocodingRemoveMarkerEvent;
+import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 public class GeocodingView extends GeoPlatformView {
-
+    
     private GeocodingManagementWidget geocodingManagement;
     private ReverseGeocodingDispatcher reverseDispatcher;
-
+    
     public GeocodingView(Controller controller) {
         super(controller);
         // TODO Auto-generated constructor stub
@@ -85,7 +88,7 @@ public class GeocodingView extends GeoPlatformView {
         if (event.getType() == GeocodingEvents.SHOW_GEOCODING_WIDGET) {
             onShowGeocodingWidget();
         }
-
+        
         if (event.getType() == GeocodingEvents.HIDE_GEOCODING_WIDGET) {
             onHideGeocodingWidget();
         }
@@ -102,6 +105,7 @@ public class GeocodingView extends GeoPlatformView {
                 LayoutManager.manageWest(false);
             }
         }
+        GPGeocodingHandlerManager.fireEvent(new GPGeocodingRemoveMarkerEvent());
     }
 
     /**
@@ -151,7 +155,7 @@ public class GeocodingView extends GeoPlatformView {
     public void fillStore(ArrayList<GeocodingBean> beans) {
         this.geocodingManagement.getGeocodingGridWidget().fillStore(beans);
     }
-
+    
     public Grid<GeocodingBean> getGrid() {
         return this.geocodingManagement.getGeocodingGridWidget().getGrid();
     }

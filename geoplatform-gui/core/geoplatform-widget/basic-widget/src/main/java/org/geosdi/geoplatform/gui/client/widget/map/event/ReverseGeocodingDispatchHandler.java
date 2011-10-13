@@ -47,8 +47,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public interface ReverseGeocodingDispatchHandler extends EventHandler {
 
-	Type<ReverseGeocodingDispatchHandler> TYPE = new Type<ReverseGeocodingDispatchHandler>();
+    Type<ReverseGeocodingDispatchHandler> TYPE = new Type<ReverseGeocodingDispatchHandler>();
 
-	public void processRequest(ReverseGeocodingWidget widget);
-
+    public void processRequest(ReverseGeocodingWidget widget);
 }

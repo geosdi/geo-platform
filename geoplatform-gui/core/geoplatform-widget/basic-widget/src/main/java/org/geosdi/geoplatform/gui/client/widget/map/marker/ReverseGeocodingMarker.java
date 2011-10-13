@@ -51,7 +51,7 @@ import com.google.gwt.core.client.GWT;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class ReverseGeocodingMarker extends GeoPlatformMarker {
+public class ReverseGeocodingMarker extends GeoPlatformMarkerLayer {
 
     public ReverseGeocodingMarker() {
         super();
@@ -85,8 +85,8 @@ public class ReverseGeocodingMarker extends GeoPlatformMarker {
      */
     @Override
     public void addMarker(LonLat lonlat, Map map) {
-        this.markerLayer.clearMarkers();
+        ((Markers) this.markerLayer).clearMarkers();
         this.marker = new Marker(lonlat, this.iconMarker);
-        this.markerLayer.addMarker(this.marker);
+        ((Markers) this.markerLayer).addMarker(this.marker);
     }
 }

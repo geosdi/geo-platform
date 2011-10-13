@@ -53,100 +53,99 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  */
 public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
 
-	private GeoPlatformMap geoPlatformMap;
-	private Vector pointsVector;
-	private Vector routeVector;
-	private GeoPlatformBoxesWidget box;
-	private GenericRoutingPoint start;
-	private GenericRoutingPoint end;
-	private GPRoutingLine line;
+    private GeoPlatformMap geoPlatformMap;
+    private Vector pointsVector;
+    private Vector routeVector;
+    private GeoPlatformBoxesWidget box;
+    private GenericRoutingPoint start;
+    private GenericRoutingPoint end;
+    private GPRoutingLine line;
 
-	/**
-	 * @Constructor
-	 * 
-	 * @param theGeoPlatformMap
-	 */
-	public GPRoutingManagerWidget(GeoPlatformMap theGeoPlatformMap) {
-		this.geoPlatformMap = theGeoPlatformMap;
-		initWidget();
-		RoutingHandlerManager.addHandler(RoutingActivationEventHandler.TYPE,
-				this);
-	}
+    /**
+     * @Constructor
+     * 
+     * @param theGeoPlatformMap
+     */
+    public GPRoutingManagerWidget(GeoPlatformMap theGeoPlatformMap) {
+        this.geoPlatformMap = theGeoPlatformMap;
+        initWidget();
+        RoutingHandlerManager.addHandler(RoutingActivationEventHandler.TYPE,
+                this);
+    }
 
-	/**
-	 * 
-	 */
-	private void initWidget() {
-		// TODO Auto-generated method stub
-		initBox();
-		initPointsControl();
-		initLineControl();
-	}
+    /**
+     * 
+     */
+    private void initWidget() {
+        // TODO Auto-generated method stub
+        initBox();
+        initPointsControl();
+        initLineControl();
+    }
 
-	/**
-	 * 
-	 * Create Box to Limitare Search AREA
-	 */
-	private void initBox() {
-		// TODO Auto-generated method stub
-		this.box = new RoutingBoxes(geoPlatformMap);
-	}
+    /**
+     * 
+     * Create Box to Limitare Search AREA
+     */
+    private void initBox() {
+        // TODO Auto-generated method stub
+        this.box = new RoutingBoxes(geoPlatformMap);
+    }
 
-	/**
-	 * 
-	 */
-	private void initPointsControl() {
-		// TODO Auto-generated method stub
-		this.pointsVector = new Vector("GP-Routing-Points-Vector");
-		this.pointsVector.setZIndex(955);
-		this.start = new GPRoutingStartPoint(this.pointsVector, this.box,
-				this.geoPlatformMap);
-		this.end = new GPRoutingEndPoint(this.pointsVector, this.box,
-				this.geoPlatformMap);
-	}
+    /**
+     * 
+     */
+    private void initPointsControl() {
+        // TODO Auto-generated method stub
+        this.pointsVector = new Vector("GP-Routing-Points-Vector");
+        this.pointsVector.setZIndex(955);
+        this.start = new GPRoutingStartPoint(this.pointsVector, this.box,
+                this.geoPlatformMap);
+        this.end = new GPRoutingEndPoint(this.pointsVector, this.box,
+                this.geoPlatformMap);
+    }
 
-	/**
-	 * 
-	 */
-	private void initLineControl() {
-		// TODO Auto-generated method stub
-		this.routeVector = new Vector("GP-Route-Vector");
-		this.routeVector.setZIndex(956);
-		this.line = new GPRoutingLine(routeVector, this.geoPlatformMap);
-		this.start.setLine(this.line);
-		this.end.setLine(this.line);
-	}
+    /**
+     * 
+     */
+    private void initLineControl() {
+        // TODO Auto-generated method stub
+        this.routeVector = new Vector("GP-Route-Vector");
+        this.routeVector.setZIndex(956);
+        this.line = new GPRoutingLine(routeVector, this.geoPlatformMap);
+        this.start.setLine(this.line);
+        this.end.setLine(this.line);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.puregwt.routing.event.
-	 * RoutingActivationEventHandler#activate()
-	 */
-	@Override
-	public void activate() {
-		// TODO Auto-generated method stub
-		GeoPlatformMessage.infoMessage("GeoPlatform Routing Module",
-				"Red square represents possible Routing Requests Area.");
-		this.geoPlatformMap.getMap().addLayer(this.pointsVector);
-		this.geoPlatformMap.getMap().addLayer(this.routeVector);
-		this.box.activate();
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.
+     * RoutingActivationEventHandler#activate()
+     */
+    @Override
+    public void activate() {
+        // TODO Auto-generated method stub
+        GeoPlatformMessage.infoMessage("GeoPlatform Routing Module",
+                "Red square represents possible Routing Requests Area.");
+        this.geoPlatformMap.getMap().addLayer(this.pointsVector);
+        this.geoPlatformMap.getMap().addLayer(this.routeVector);
+        this.box.activate();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.puregwt.routing.event.
-	 * RoutingActivationEventHandler#deactivate()
-	 */
-	@Override
-	public void deactivate() {
-		// TODO Auto-generated method stub
-		GeoPlatformMessage.infoMessage("GeoPlatform Routing Module",
-				"Routing Module Deactivated.");
-		this.geoPlatformMap.getMap().removeLayer(this.pointsVector);
-		this.geoPlatformMap.getMap().removeLayer(this.routeVector);
-		this.box.deactivate();
-	}
-
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.
+     * RoutingActivationEventHandler#deactivate()
+     */
+    @Override
+    public void deactivate() {
+        // TODO Auto-generated method stub
+        GeoPlatformMessage.infoMessage("GeoPlatform Routing Module",
+                "Routing Module Deactivated.");
+        this.geoPlatformMap.getMap().removeLayer(this.pointsVector);
+        this.geoPlatformMap.getMap().removeLayer(this.routeVector);
+        this.box.deactivate();
+    }
 }

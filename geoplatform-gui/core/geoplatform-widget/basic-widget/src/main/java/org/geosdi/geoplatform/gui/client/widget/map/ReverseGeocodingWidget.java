@@ -39,7 +39,9 @@ import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingDispat
 import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingEventHandler;
 import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingMarkEvent;
+import org.geosdi.geoplatform.gui.client.widget.map.marker.GPGenericMarkerLayer;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.ReverseGeocodingMarker;
+import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.ReverseGeocodingVectorMarker;
 import org.geosdi.geoplatform.gui.client.widget.map.popup.PopupMapWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.popup.template.PopupTemplate;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -59,7 +61,10 @@ import org.gwtopenmaps.openlayers.client.event.MapClickListener;
 public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
     private GeoPlatformMap mapWidget;
-    private ReverseGeocodingMarker rGMarker = new ReverseGeocodingMarker();
+    
+    /** TODO : Think a way to have this in configuration **/
+    
+    private GPGenericMarkerLayer rGMarker = new ReverseGeocodingVectorMarker(); //new ReverseGeocodingMarker();
     private PopupMapWidget popupWidget = new PopupMapWidget();
     private MapClickListener listener;
     private LonLat lonlat;
@@ -101,12 +106,11 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
      * 
      */
     public void clearWidgetStatus() {
+        this.removeMapElements();
         this.mapWidget.getMap().removeLayer(this.rGMarker.getMarkerLayer(),
                 false);
         this.mapWidget.getMap().removeMapClickListener(listener);
-        this.removeMapElements();
     }
-
 
     /**
      * 
@@ -144,7 +148,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
         lt.transform(this.mapWidget.getMap().getProjection(), "EPSG:4326");
         return lt;
     }
-    
+
     private void removeMapElements() {
         this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
         this.rGMarker.removeMarker();

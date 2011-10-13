@@ -51,6 +51,5 @@ public class UserWidgetUI implements EntryPoint {
      */    
     @Override
     public void onModuleLoad() {
-        System.out.println("*************** UserWidgetUI **************");
     }
 }

@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
-import org.geosdi.geoplatform.gui.client.widget.map.marker.GeocodingMarker;
 import org.geosdi.geoplatform.gui.client.widget.map.store.Scale;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -52,6 +51,8 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
+import org.geosdi.geoplatform.gui.client.widget.map.marker.GPGenericMarkerLayer;
+import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.GeocodingVectorMarker;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.gwtopenmaps.openlayers.client.control.Graticule;
 import org.gwtopenmaps.openlayers.client.control.GraticuleOptions;
@@ -68,7 +69,7 @@ import org.gwtopenmaps.openlayers.client.symbolizer.TextSymbolizerOptions;
 public class MapView extends GeoPlatformView {
 
     private MapLayoutWidget mapLayout;
-    private GeocodingMarker geocoderMarker;
+    private GPGenericMarkerLayer geocoderMarker;
     private ReverseGeocodingWidget revGeoWidget;
     private MapToolbar buttonBar;
     private Graticule graticule;
@@ -82,7 +83,8 @@ public class MapView extends GeoPlatformView {
 
     @Override
     public void initialize() {
-        this.geocoderMarker = new GeocodingMarker();
+        /** TODO : Think a way to have this in configuration **/
+        this.geocoderMarker = new GeocodingVectorMarker(); //new GeocodingMarker();
     }
 
     /*
@@ -118,10 +120,6 @@ public class MapView extends GeoPlatformView {
             onRegisterGeocodingLocation((IGeoPlatformLocation) event.getData());
         }
 
-        if (event.getType() == GeoPlatformEvents.RemoveMarker) {
-            onRemoveMarker();
-        }
-
         if (event.getType() == GeoPlatformEvents.SCALE_REQUEST_CHANGE) {
             onScaleRequestChange(event);
         }
@@ -145,20 +143,13 @@ public class MapView extends GeoPlatformView {
     }
 
     /**
-     * Remove Marker from Map
-     */
-    private void onRemoveMarker() {
-        this.geocoderMarker.removeMarker();
-    }
-
-    /**
      * Add a Marker on the Map with the coordinate of Location Found
      *
      * @param event
      */
     private void onRegisterGeocodingLocation(IGeoPlatformLocation bean) {
         LonLat center = new LonLat(bean.getLon(), bean.getLat());
-        center.transform("EPSG:4326", "EPSG:900913");
+        center.transform("EPSG:4326", this.mapLayout.getMap().getProjection());
         this.geocoderMarker.addMarker(center, this.mapLayout.getMap());
     }
 
@@ -287,5 +278,4 @@ public class MapView extends GeoPlatformView {
         BboxClientInfo bbox = (BboxClientInfo) event.getData();
         this.mapLayout.zoomToMaxExtend(bbox);
     }
-
 }

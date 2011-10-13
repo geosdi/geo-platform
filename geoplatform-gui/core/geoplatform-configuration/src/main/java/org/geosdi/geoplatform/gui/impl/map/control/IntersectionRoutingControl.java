@@ -46,16 +46,15 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  */
 public abstract class IntersectionRoutingControl extends GPRoutingControl {
 
-	protected GeoPlatformBoxesWidget boxesWidget;
+    protected GeoPlatformBoxesWidget boxesWidget;
 
-	/**
-	 * @param theLayer
-	 */
-	public IntersectionRoutingControl(Vector theLayer,
-			GeoPlatformBoxesWidget theBoxesWidget, GeoPlatformMap geoPlatformMap) {
-		super(theLayer, geoPlatformMap);
-		// TODO Auto-generated constructor stub
-		this.boxesWidget = theBoxesWidget;
-	}
-
+    /**
+     * @param theLayer
+     */
+    public IntersectionRoutingControl(Vector theLayer,
+            GeoPlatformBoxesWidget theBoxesWidget, GeoPlatformMap geoPlatformMap) {
+        super(theLayer, geoPlatformMap);
+        // TODO Auto-generated constructor stub
+        this.boxesWidget = theBoxesWidget;
+    }
 }

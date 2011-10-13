@@ -47,25 +47,24 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  */
 public abstract class GPRoutingControl {
 
-	protected GeoPlatformMap geoPlatformMap;
-	protected Vector layer;
-	protected VectorFeature feature;
-	protected Style style = new Style();
+    protected GeoPlatformMap geoPlatformMap;
+    protected Vector layer;
+    protected VectorFeature feature;
+    protected Style style = new Style();
 
-	/**
-	 * @Constructor
-	 * 
-	 * @param theLayer
-	 */
-	public GPRoutingControl(Vector theLayer, GeoPlatformMap theGeoPlatformMap) {
-		this.layer = theLayer;
-		this.geoPlatformMap = theGeoPlatformMap;
-		createStyle();
-	}
+    /**
+     * @Constructor
+     * 
+     * @param theLayer
+     */
+    public GPRoutingControl(Vector theLayer, GeoPlatformMap theGeoPlatformMap) {
+        this.layer = theLayer;
+        this.geoPlatformMap = theGeoPlatformMap;
+        createStyle();
+    }
 
-	/**
-	 * Create Style for VectorFeature
-	 */
-	public abstract void createStyle();
-
+    /**
+     * Create Style for VectorFeature
+     */
+    public abstract void createStyle();
 }

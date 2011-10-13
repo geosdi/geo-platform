@@ -9,7 +9,6 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.Window;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
@@ -36,12 +35,23 @@ public class ExportoToTIFF extends MenuAction {
 
         if (item instanceof RasterTreeNode) {
             String dataSource = ((RasterTreeNode) item).getDataSource();
-
+            String tiffUrl = "";
             // kml preview
-            final String tiffUrl = dataSource
-                    + "/reflect?&layers="
-                    + ((RasterTreeNode) item).getName()
-                    + "&width=1024&format=image/tiff&format_options=dpi:600";
+            if (dataSource.contains("geoserver")) {
+                tiffUrl = dataSource
+                        + "/reflect?&layers="
+                        + ((RasterTreeNode) item).getName()
+                        + "&width=1024&format=image/tiff&format_options=dpi:600";
+            } else {
+                tiffUrl = dataSource
+                        + "?service=WMS&request=GetMap&version=1.1.1&format=image/tiff&width=1024&height=768&srs=EPSG:4326&layers="
+                        + ((RasterTreeNode) item).getName()
+                        + "&bbox=" + ((RasterTreeNode) item).getBbox().getLowerLeftX()
+                        + "," + ((RasterTreeNode) item).getBbox().getLowerLeftY()
+                        + "," + ((RasterTreeNode) item).getBbox().getUpperRightX()
+                        + "," + ((RasterTreeNode) item).getBbox().getUpperRightY();
+            }
+
 
             System.out.println(tiffUrl);
 

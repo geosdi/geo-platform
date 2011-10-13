@@ -40,7 +40,7 @@ public class ExportoToGML extends MenuAction {
             dataSource = dataSource.replaceAll("wms", "wfs");
             String gmlUrl =
                     dataSource + "?service=WFS&version=1.0.0&request=GetFeature&typeName="
-                    + ((RasterTreeNode) item).getName() + "&maxFeatures=50";
+                    + ((RasterTreeNode) item).getName();
             Window.open(gmlUrl, gmlUrl, gmlUrl);
         }
     }

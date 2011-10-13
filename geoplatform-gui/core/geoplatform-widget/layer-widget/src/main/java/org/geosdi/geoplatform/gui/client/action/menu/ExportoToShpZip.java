@@ -10,8 +10,6 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.Window;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
@@ -43,7 +41,7 @@ public class ExportoToShpZip extends MenuAction {
             //TODO: separate server url with server wms and server wfs url and wcs ?
             final String shpZipURL = dataSource.replaceAll("wms", "")
                     + "ows?service=WFS&version=1.0.0&request=GetFeature&typeName="
-                    + ((RasterTreeNode) item).getName() + "&maxFeatures=50&outputFormat=SHAPE-ZIP";
+                    + ((RasterTreeNode) item).getName() + "&outputFormat=SHAPE-ZIP";
 
             System.out.println(shpZipURL);
 

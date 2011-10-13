@@ -9,7 +9,6 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.Window;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
@@ -38,10 +37,27 @@ public class ExportoToPDF extends MenuAction {
             String dataSource = ((RasterTreeNode) item).getDataSource();
 
             // kml preview
-            final String pdfUrl = dataSource
-                    + "/reflect?&layers="
-                    + ((RasterTreeNode) item).getName()
-                    + "&width=1024&format=application/pdf&format_options=dpi:600";
+            String pdfUrl = "";
+
+
+            if (dataSource.contains("geoserver")) {
+                pdfUrl = dataSource
+                        + "/reflect?&layers="
+                        + ((RasterTreeNode) item).getName()
+                        + "&width=1024&format=application/pdf&format_options=dpi:600";
+
+            } else {
+                pdfUrl = dataSource
+                        + "?service=WMS&request=GetMap&version=1.1.1&format=application/pdf&width=1024&height=768&srs=EPSG:4326&layers="
+                        + ((RasterTreeNode) item).getName()
+                        + "&bbox=" 
+                        + ((RasterTreeNode) item).getBbox().getLowerLeftX() 
+                        + "," + ((RasterTreeNode) item).getBbox().getLowerLeftY() 
+                        + "," + ((RasterTreeNode) item).getBbox().getUpperRightX() 
+                        + "," + ((RasterTreeNode) item).getBbox().getUpperRightY();
+            }
+
+
 
             System.out.println(pdfUrl);
 

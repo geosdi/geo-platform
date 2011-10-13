@@ -193,6 +193,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.layerDao = layerDao;
         this.folderServiceDelegate.setLayerDao(layerDao);
         this.layerServiceDelegate.setLayerDao(layerDao);
+        this.projectServiceDelegate.setLayerDao(layerDao);
     }
 
 //    /**
@@ -463,9 +464,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     @Override
     public long saveAddedFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData,
-        long projectId)
+            long projectId)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return folderServiceDelegate.saveAddedFolderAndTreeModifications(folder, 
+        return folderServiceDelegate.saveAddedFolderAndTreeModifications(folder,
                 descendantsMapData, projectId);
     }
 
@@ -533,6 +534,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public List<FolderDTO> getRootFoldersByProjectId(long projectId) {
         return projectServiceDelegate.getRootFoldersByProjectId(projectId);
     }
+
+    @Override
+    public TreeFolderElements getElements(long projectId)
+            throws ResourceNotFoundFault {
+        return projectServiceDelegate.getElements(projectId);
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Layer / Style">
@@ -563,10 +570,10 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers, 
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers,
             GPWebServiceMapData descendantsMapData, long projectId)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return layerServiceDelegate.saveAddedLayersAndTreeModifications(layers, 
+        return layerServiceDelegate.saveAddedLayersAndTreeModifications(layers,
                 descendantsMapData, projectId);
     }
 

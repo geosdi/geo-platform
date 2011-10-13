@@ -68,7 +68,7 @@ public class AclSid {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACL_SID_SEQ")
     @SequenceGenerator(name = "ACL_SID_SEQ", sequenceName = "ACL_SID_SEQ")
-    private long id;
+    private Long id;
     // If Id refers to a principal name or a GrantedAuthority
     @Column(nullable = false)
     private boolean principal = true;
@@ -90,14 +90,14 @@ public class AclSid {
     /**
      * @return the id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

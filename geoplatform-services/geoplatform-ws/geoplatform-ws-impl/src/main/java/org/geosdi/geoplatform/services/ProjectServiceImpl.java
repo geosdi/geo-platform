@@ -40,6 +40,7 @@ package org.geosdi.geoplatform.services;
 import com.googlecode.genericdao.search.Search;
 import java.util.List;
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
+import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.model.GPUserProjects;
 import org.geosdi.geoplatform.request.RequestByUserProject;
 import org.slf4j.Logger;
@@ -49,11 +50,13 @@ import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.dao.GPUserProjectsDAO;
 import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.springframework.security.acls.domain.BasePermission;
 
 /**
@@ -69,6 +72,7 @@ class ProjectServiceImpl {
     private GPUserDAO userDao;
     private GPUserProjectsDAO userProjectsDao;
     private GPFolderDAO folderDao;
+    private GPLayerDAO layerDao;
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
@@ -101,6 +105,14 @@ class ProjectServiceImpl {
      */
     public void setFolderDao(GPFolderDAO folderDao) {
         this.folderDao = folderDao;
+    }
+
+    /**
+     * @param layerDao
+     *            the layerDao to set
+     */
+    public void setLayerDao(GPLayerDAO layerDao) {
+        this.layerDao = layerDao;
     }
     //</editor-fold>
 
@@ -274,6 +286,27 @@ class ProjectServiceImpl {
 
         List<GPFolder> foundUserFolders = folderDao.search(searchCriteria);
         return FolderDTO.convertToFolderDTOList(foundUserFolders);
+    }
+
+    public TreeFolderElements getElements(long projectId)
+            throws ResourceNotFoundFault {
+        if (projectDao.find(projectId) == null) {
+            throw new ResourceNotFoundFault("Project not found", projectId);
+        }
+
+        TreeFolderElements tree = new TreeFolderElements();
+
+        Search searchCriteria = new Search(GPFolder.class);
+        searchCriteria.addFilterEqual("project.id", projectId);
+        List<GPFolder> foundFolder = folderDao.search(searchCriteria);
+        tree.addFolderCollection(FolderDTO.convertToFolderDTOList(foundFolder));
+
+        searchCriteria = new Search(GPLayer.class);
+        searchCriteria.addFilterEqual("project.id", projectId);
+        List<GPLayer> foundLayer = layerDao.search(searchCriteria);
+        tree.addLayerCollection(foundLayer);
+
+        return tree;
     }
 //
 //    // TODO Check

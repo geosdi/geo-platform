@@ -74,7 +74,7 @@ public class GPStyle implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
     generator = "GP_STYLE_SEQ")
     @SequenceGenerator(name = "GP_STYLE_SEQ", sequenceName = "GP_STYLE_SEQ")
-    private long id = -1;
+    private Long id;
     //
     @Column
     private String name;
@@ -95,7 +95,7 @@ public class GPStyle implements Serializable {
     /**
      * @return the id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -103,7 +103,7 @@ public class GPStyle implements Serializable {
      * @param id
      *            the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

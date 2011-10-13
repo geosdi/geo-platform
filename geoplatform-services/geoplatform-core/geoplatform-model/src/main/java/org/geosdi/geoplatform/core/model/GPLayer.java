@@ -73,7 +73,7 @@ public abstract class GPLayer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_LAYER_SEQ")
     @SequenceGenerator(name = "GP_LAYER_SEQ", sequenceName = "GP_LAYER_SEQ")
-    private long id = -1;
+    private Long id;
     //
     @Column(nullable = false)
     private String title;
@@ -122,7 +122,7 @@ public abstract class GPLayer implements Serializable {
     /**
      * @return the id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -130,7 +130,7 @@ public abstract class GPLayer implements Serializable {
      * @param id
      *            the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

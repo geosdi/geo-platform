@@ -54,7 +54,7 @@ public class GuiComponentPermission implements Permission {
     private int mask;
 
     /**
-     * Contructor with args
+     * Constructor with args
      * 
      * @param mask
      * @param code 

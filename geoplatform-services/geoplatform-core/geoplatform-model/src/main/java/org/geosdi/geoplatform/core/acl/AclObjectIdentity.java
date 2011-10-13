@@ -67,7 +67,7 @@ public class AclObjectIdentity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACL_OBJECT_IDENTITY_SEQ")
     @SequenceGenerator(name = "ACL_OBJECT_IDENTITY_SEQ", sequenceName = "ACL_OBJECT_IDENTITY_SEQ")
-    private long id;
+    private Long id;
     //
     @ManyToOne
     @JoinColumn(name = "object_id_class", nullable = false)
@@ -126,14 +126,14 @@ public class AclObjectIdentity {
     /**
      * @return the id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

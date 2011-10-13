@@ -73,7 +73,7 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_AUTHORITY_SEQ")
     @SequenceGenerator(name = "GP_AUTHORITY_SEQ", sequenceName = "GP_AUTHORITY_SEQ")
-    private long id = -1;
+    private Long id;
     //
     @Column(nullable = false)
     private String username;
@@ -102,7 +102,7 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     /**
      * @return the id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -110,7 +110,7 @@ public class GPAuthority implements GrantedAuthority, Serializable {
      * @param id
      *            the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -61,7 +61,7 @@ public class GuiComponent {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GUI_COMPONENT_SEQ")
     @SequenceGenerator(name = "GUI_COMPONENT_SEQ", sequenceName = "GUI_COMPONENT_SEQ")
-    private long id;
+    private Long id;
     // The ID (string ype) of the GUI Component
     @Column(name = "component_id", nullable = false, unique = true)
     private String componentId;
@@ -76,7 +76,7 @@ public class GuiComponent {
     /**
      * @return the id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -84,7 +84,7 @@ public class GuiComponent {
      * @param id 
      *          the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

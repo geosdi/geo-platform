@@ -202,17 +202,17 @@ public interface GeoPlatformService {
     @HttpResource(location = "/project")
     long saveProject(
             @WebParam(name = "username") String username,
-            @WebParam(name = "Project") GPProject project)
+            @WebParam(name = "project") GPProject project)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Put
     @HttpResource(location = "/project")
-    long insertProject(@WebParam(name = "Project") GPProject project)
+    long insertProject(@WebParam(name = "project") GPProject project)
             throws IllegalParameterFault;
 
     @Post
     @HttpResource(location = "/project")
-    long updateProject(@WebParam(name = "Project") GPProject project)
+    long updateProject(@WebParam(name = "project") GPProject project)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Delete
@@ -254,13 +254,13 @@ public interface GeoPlatformService {
     // ==========================================================================
     @Put
     @HttpResource(location = "/folder")
-    long insertFolder(@WebParam(name = "Folder") GPFolder folder,
-                @WebParam(name = "projectId") long projectId)
+    long insertFolder(@WebParam(name = "folder") GPFolder folder,
+            @WebParam(name = "projectId") long projectId)
             throws IllegalParameterFault;
 
     @Post
     @HttpResource(location = "/folder")
-    long updateFolder(@WebParam(name = "Folder") GPFolder folder)
+    long updateFolder(@WebParam(name = "folder") GPFolder folder)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Post
@@ -366,12 +366,18 @@ public interface GeoPlatformService {
     //@HttpResource(location = "/projects/{projectId}")
     @WebResult(name = "Project")
     List<FolderDTO> getRootFoldersByProjectId(@WebParam(name = "projectId") long projectId);
-    //</editor-fold>
 
+    @Get
+    //@HttpResource(location = "/projects/{projectId}")
+    @WebResult(name = "Element")
+    TreeFolderElements getElements(@WebParam(name = "projectId") long projectId)
+            throws ResourceNotFoundFault;
+    //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Layer / Style">
     // ==========================================================================
     // === Layer / Style
     // ==========================================================================
+
     @Put
     @HttpResource(location = "/layer")
     long insertLayer(@WebParam(name = "layer") GPLayer layer)

@@ -61,7 +61,7 @@ public class AclClass {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACL_CLASS_SEQ")
     @SequenceGenerator(name = "ACL_CLASS_SEQ", sequenceName = "ACL_CLASS_SEQ")
-    private long id;
+    private Long id;
     // Fully qualified name of a class (package.className) of the secure domanin object
     @Column(name = "clazz", unique = true, nullable = false, length = 500)
     private String clazz;
@@ -79,14 +79,14 @@ public class AclClass {
     /**
      * @return the id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -109,7 +109,7 @@ public class AclClass {
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()
-     */    
+     */
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("AclClass {");

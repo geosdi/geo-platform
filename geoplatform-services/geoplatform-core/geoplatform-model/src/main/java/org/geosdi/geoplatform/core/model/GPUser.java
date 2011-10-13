@@ -74,7 +74,7 @@ public class GPUser implements Serializable, UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_USER_SEQ")
     @SequenceGenerator(name = "GP_USER_SEQ", sequenceName = "GP_USER_SEQ")
-    private long id = -1;
+    private Long id;
     //
     @Column(name = "user_name", unique = true, nullable = false)
     private String username;
@@ -121,7 +121,7 @@ public class GPUser implements Serializable, UserDetails {
     /**
      * @return the id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -129,7 +129,7 @@ public class GPUser implements Serializable, UserDetails {
      * @param id
      *            the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

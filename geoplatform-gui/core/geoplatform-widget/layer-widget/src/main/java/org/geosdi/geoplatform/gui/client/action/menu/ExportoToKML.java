@@ -37,7 +37,8 @@ public class ExportoToKML extends MenuAction {
             String dataSource = ((RasterTreeNode) item).getDataSource();
 
             // kml preview
-            final String kmlUrl = dataSource + "/kml?layers=" + item.getLabel()+"&legend=true&format_options=kmattr:false";
+            final String kmlUrl = dataSource + "/kml?layers="
+                    + ((RasterTreeNode) item).getName() + "&legend=true&format_options=kmattr:false";
             System.out.println(kmlUrl);
             Window.open(kmlUrl, kmlUrl, kmlUrl);
         }

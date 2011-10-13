@@ -38,9 +38,9 @@ public class ExportoToTIFF extends MenuAction {
             String dataSource = ((RasterTreeNode) item).getDataSource();
 
             // kml preview
-            final String tiffUrl = dataSource + 
-                    "/reflect?&layers=" 
-                    + item.getLabel()
+            final String tiffUrl = dataSource
+                    + "/reflect?&layers="
+                    + ((RasterTreeNode) item).getName()
                     + "&width=1024&format=image/tiff&format_options=dpi:600";
 
             System.out.println(tiffUrl);

@@ -38,9 +38,9 @@ public class ExportoToPDF extends MenuAction {
             String dataSource = ((RasterTreeNode) item).getDataSource();
 
             // kml preview
-            final String pdfUrl = dataSource + 
-                    "/reflect?&layers=" 
-                    + item.getLabel()
+            final String pdfUrl = dataSource
+                    + "/reflect?&layers="
+                    + ((RasterTreeNode) item).getName()
                     + "&width=1024&format=application/pdf&format_options=dpi:600";
 
             System.out.println(pdfUrl);

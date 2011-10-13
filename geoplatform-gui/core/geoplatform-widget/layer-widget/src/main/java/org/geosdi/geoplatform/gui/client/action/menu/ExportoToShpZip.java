@@ -42,16 +42,16 @@ public class ExportoToShpZip extends MenuAction {
             // shape-zip
             //TODO: separate server url with server wms and server wfs url and wcs ?
             final String shpZipURL = dataSource.replaceAll("wms", "")
-                     + 
-                    "ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" 
-                    + item.getLabel()+"&maxFeatures=50&outputFormat=SHAPE-ZIP";
+                    + "ows?service=WFS&version=1.0.0&request=GetFeature&typeName="
+                    + ((RasterTreeNode) item).getName() + "&maxFeatures=50&outputFormat=SHAPE-ZIP";
 
             System.out.println(shpZipURL);
 
             Window.open(shpZipURL, shpZipURL, shpZipURL);
-        } {
-        Info.display("WARNING", "Il layer selezionato non è un layer vettoriale");
-    }
+        }
+        {
+            Info.display("WARNING", "Il layer selezionato non è un layer vettoriale");
+        }
 
     }
 }

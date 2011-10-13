@@ -194,7 +194,7 @@ class FolderServiceImpl {
         folderDao.updatePositionsLowerBound(newPosition, increment);
         layerDao.updatePositionsLowerBound(newPosition, increment);
         
-        folderDao.merge(folder);
+        folderDao.persist(folder);
 
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
         this.updateNumberOfElements(folder, increment);
@@ -254,8 +254,8 @@ class FolderServiceImpl {
 //        assert (folderMoved.getPosition() != newPosition) : "New Position must be NOT equal to Old Position";
         this.checkFolderLog(folderMoved); // TODO assert
 
-        if (idNewParent != 0L) {
-            logger.trace("*** Folder has a Parent");
+        if (idNewParent != 0) {
+            logger.trace("*** Folder will have a Parent");
             GPFolder folderParent = folderDao.find(idNewParent);
             if (folderParent == null) {
                 throw new ResourceNotFoundFault("New Parent not found", idNewParent);

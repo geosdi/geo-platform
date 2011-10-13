@@ -2,7 +2,7 @@
 /*
  *  geo-platform
  *  Rich webgis framework
- *  http://geo-plartform.org
+ *  http://geo-platform.org
  * ====================================================================
  *
  * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
@@ -37,7 +37,17 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
-import org.mortbay.jetty.Server;
+import javax.xml.ws.Endpoint;
+import org.apache.cxf.Bus;
+import org.apache.cxf.bus.spring.SpringBusFactory;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.geosdi.geoplatform.ServiceTest;
+import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
+import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.junit.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.TestExecutionListener;
 
@@ -48,17 +58,82 @@ import org.springframework.test.context.TestExecutionListener;
  */
 public class WSListenerServices implements TestExecutionListener {
 
-    private Server gpJettyServer;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    private GeoPlatformService gpWSClient = null;
+    private Endpoint endpoint = null;
+    private Bus bus = null;
 
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
-        this.gpJettyServer = (Server) testContext.getApplicationContext().getBean("gpJettyServer");
+        logger.trace("\n\t@@@ WSListenerServices.beforeTestClass @@@");
 
-        gpJettyServer.start();
+        // Client must be create before the Endpoint
+        gpWSClient = ((GeoPlatformWSClient) testContext.getApplicationContext().getBean("gpWSClient")).create();
+
+        GeoPlatformService geoPlatformService = (GeoPlatformService) testContext.getApplicationContext().getBean("geoPlatformService");
+        Assert.assertNotNull("geoPlatformService is NULL", geoPlatformService);
+
+        Object implementor = geoPlatformService;
+        SpringBusFactory bf = new SpringBusFactory();
+        bus = bf.createBus();
+
+        bus.getInInterceptors().add(new LoggingInInterceptor());
+        bus.getOutInterceptors().add(new LoggingOutInterceptor());
+
+//        Map<String, Object> inProps = new HashMap<String, Object>();
+//        
+//        // ----------- Only Encryption
+////        inProps.put("action", "Encrypt");
+////        inProps.put("decryptionPropFile", "Server_Decrypt.properties");
+//
+//        // ----------- Only Signature
+////        inProps.put("action", "Signature");
+////        inProps.put("signaturePropFile", "Server_SignVerf.properties");
+//
+//        // ----------- Signature and Encryption
+//        inProps.put("action", "Timestamp Signature Encrypt");
+//        inProps.put("signaturePropFile", "Server_SignVerf.properties");
+//        inProps.put("decryptionPropFile", "Server_Decrypt.properties");      
+//
+//        inProps.put("passwordCallbackClass", ServerKeystorePasswordCallback.class.getName());
+//        bus.getInInterceptors().add(new WSS4JInInterceptor(inProps));
+//
+//        Map<String, Object> outProps = new HashMap<String, Object>();
+//        
+//        // ----------- Only Encryption
+////        outProps.put("action", "Encrypt");
+////        outProps.put("encryptionPropFile", "Server_SignVerf.properties");
+////        outProps.put("encryptionUser", "clientx509v1");
+//
+//        // ----------- Only Signature
+////        outProps.put("action", "Signature");
+////        outProps.put("user", "serverx509v1");
+////        outProps.put("signaturePropFile", "Server_Decrypt.properties");
+//
+//        // ----------- Signature and Encryption
+//        outProps.put("action", "Timestamp Signature Encrypt");
+//        outProps.put("user", "serverx509v1");
+//        outProps.put("signaturePropFile", "Server_Decrypt.properties");
+//        outProps.put("encryptionPropFile", "Server_SignVerf.properties");
+//        outProps.put("encryptionUser", "clientx509v1");
+//
+//        outProps.put("passwordCallbackClass", ServerKeystorePasswordCallback.class.getName());
+//        bus.getOutInterceptors().add(new WSS4JOutInterceptor(outProps));
+
+        bf.setDefaultBus(bus);
+        String address = "http://localhost:8282/geoplatform-service/soap";
+        endpoint = Endpoint.publish(address, implementor);
+
+        logger.debug("\n*** Server ready...");
     }
 
     @Override
     public void prepareTestInstance(TestContext testContext) throws Exception {
+        logger.trace("\n\t@@@ WSListenerServices.prepareTestInstance @@@");
+
+        ServiceTest testInstance = (ServiceTest) testContext.getTestInstance();
+        testInstance.setGeoplatformServiceClient(gpWSClient);
     }
 
     @Override
@@ -71,8 +146,11 @@ public class WSListenerServices implements TestExecutionListener {
 
     @Override
     public void afterTestClass(TestContext testContext) throws Exception {
-        if (gpJettyServer != null) {
-            gpJettyServer.stop();
-        }
+        logger.trace("\n\t@@@ WSListenerServices.afterTestClass @@@");
+
+        endpoint.stop();
+        bus.shutdown(true);
+        // Wait to be sure that the endpoint was shutdown properly
+        Thread.sleep(5 * 1000);
     }
 }

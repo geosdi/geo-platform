@@ -76,6 +76,7 @@ import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
+import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
@@ -570,6 +571,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
+    public long saveAddedLayerAndTreeModifications(GPLayer layer, GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return layerServiceDelegate.saveAddedLayerAndTreeModifications(layer, descendantsMapData);
+    }
+
+    @Override
     public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers,
             GPWebServiceMapData descendantsMapData, long projectId)
             throws ResourceNotFoundFault, IllegalParameterFault {
@@ -622,6 +629,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     @Override
     public List<ShortLayerDTO> getLayers(long projectId) {
         return layerServiceDelegate.getLayers(projectId);
+    }
+
+    @Override
+    public List<StyleDTO> getLayerStyles(long layerId) {
+        return layerServiceDelegate.getLayerStyles(layerId);
     }
 
     @Override

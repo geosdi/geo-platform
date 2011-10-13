@@ -151,6 +151,10 @@ public class LayerService implements ILayerService {
             logger.error(
                     "Error on LayerService: " + ilg);
             throw new GeoPlatformException("Parameter incorrect on saveFoldeForUser");
+        } catch (ResourceNotFoundFault rnff) {
+            logger.error(
+                    "Error on LayerService: " + rnff);
+            throw new GeoPlatformException(rnff);
         }
         return savedFolderId;
     }
@@ -192,6 +196,10 @@ public class LayerService implements ILayerService {
             logger.error(
                     "Error on LayerService: " + ilg);
             throw new GeoPlatformException("Parameter incorrect on saveFolde");
+        } catch (ResourceNotFoundFault rnff) {
+            logger.error(
+                    "Error on LayerService: " + rnff);
+            throw new GeoPlatformException(rnff);
         }
         return savedFolderId;
     }

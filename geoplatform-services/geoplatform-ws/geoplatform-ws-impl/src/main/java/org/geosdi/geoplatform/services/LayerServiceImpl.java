@@ -46,6 +46,7 @@ import org.slf4j.LoggerFactory;
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
+import org.geosdi.geoplatform.core.dao.GPStyleDAO;
 import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
@@ -54,11 +55,13 @@ import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
+import org.geosdi.geoplatform.core.model.GPStyle;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
+import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 
 /**
@@ -74,7 +77,7 @@ class LayerServiceImpl {
     private GPProjectDAO projectDao;
     private GPFolderDAO folderDao;
     private GPLayerDAO layerDao;
-//    private GPStyleDAO styleDao;
+    private GPStyleDAO styleDao;
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
@@ -117,14 +120,25 @@ class LayerServiceImpl {
         this.layerDao = layerDao;
     }
 
-//    /**
-//     * @param styleDao
-//     *            the styleDao to set
-//     */
-//    public void setStyleDao(GPStyleDAO styleDao) {
-//        this.styleDao = styleDao;
-//    }
+    /**
+     * @param styleDao
+     *            the styleDao to set
+     */
+    public void setStyleDao(GPStyleDAO styleDao) {
+        this.styleDao = styleDao;
+    }
     //</editor-fold>
+
+    public List<StyleDTO> getLayerStyles(long layerId) {
+        Search searchCriteria = new Search(GPStyle.class);
+
+        searchCriteria.addSortAsc("name");
+        searchCriteria.addFilterEqual("layer.id", layerId);
+
+        List<GPStyle> foundStyle = styleDao.search(searchCriteria);
+        return StyleDTO.convertToStyleDTOList(foundStyle);
+    }
+
     public long insertLayer(GPLayer layer) throws IllegalParameterFault {
         this.checkLayer(layer); // TODO assert
 
@@ -166,7 +180,8 @@ class LayerServiceImpl {
         return orig.getId();
     }
 
-    public boolean deleteLayer(long layerId) throws ResourceNotFoundFault {
+    public boolean deleteLayer(long layerId)
+            throws ResourceNotFoundFault {
         GPLayer layer = layerDao.find(layerId);
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
@@ -175,6 +190,39 @@ class LayerServiceImpl {
 
         // data on ancillary tables should be deleted by cascading
         return layerDao.remove(layer);
+    }
+
+    public long saveAddedLayerAndTreeModifications(GPLayer layer,
+            GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        logger.trace("\n\t@@@ saveAddedLayerAndTreeModifications @@@");
+        this.checkLayer(layer); // TODO assert
+
+        GPFolder parent = layer.getFolder();
+        if (parent == null) {
+            throw new IllegalParameterFault("Parent of layer with id " + layer.getId() + " not found");
+        }
+        this.checkFolder(parent); // TODO assert
+
+        long idParent = parent.getId();
+        GPFolder parentFromDB = folderDao.find(idParent);
+        if (parentFromDB == null) {
+            throw new ResourceNotFoundFault("Parent of layer not found", idParent);
+        }
+        this.checkFolder(parentFromDB); // TODO assert
+
+        int newPosition = layer.getPosition();
+        int increment = 1;
+        // Shift positions
+        layerDao.updatePositionsLowerBound(newPosition, increment);
+        folderDao.updatePositionsLowerBound(newPosition, increment);
+
+        layerDao.persist(layer);
+
+        folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
+        this.updateNumberOfElements(layer, increment);
+
+        return layer.getId();
     }
 
     public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers,
@@ -216,7 +264,7 @@ class LayerServiceImpl {
         layerDao.updatePositionsLowerBound(newPosition, increment);
         folderDao.updatePositionsLowerBound(newPosition, increment);
 
-        layerDao.merge(layers.toArray(new GPLayer[layers.size()]));
+        layerDao.persist(layers.toArray(new GPLayer[layers.size()]));
 
         ArrayList<Long> arrayList = new ArrayList<Long>(layers.size());
         for (int i = 0; i < layers.size(); i++) {
@@ -229,7 +277,8 @@ class LayerServiceImpl {
         return arrayList;
     }
 
-    public boolean saveDeletedLayerAndTreeModifications(long layerId, GPWebServiceMapData descendantsMapData)
+    public boolean saveDeletedLayerAndTreeModifications(long layerId,
+            GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault {
         GPLayer layer = layerDao.find(layerId);
         if (layer == null) {
@@ -433,7 +482,7 @@ class LayerServiceImpl {
 
         return layer;
     }
-
+    
     public ShortLayerDTO getShortLayer(long layerId) throws ResourceNotFoundFault {
         GPLayer layer = layerDao.find(layerId);
         if (layer == null) {

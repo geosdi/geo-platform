@@ -69,6 +69,7 @@ import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
+import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
@@ -256,7 +257,7 @@ public interface GeoPlatformService {
     @HttpResource(location = "/folder")
     long insertFolder(@WebParam(name = "folder") GPFolder folder,
             @WebParam(name = "projectId") long projectId)
-            throws IllegalParameterFault;
+            throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Post
     @HttpResource(location = "/folder")
@@ -298,9 +299,9 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault;
 
     @Put
-    @HttpResource(location = "/layer/{idFolderMoved}")
+    @HttpResource(location = "/layer/{idElementMoved}")
     boolean saveDragAndDropFolderAndTreeModifications(
-            @WebParam(name = "idFolderMoved") long idFolderMoved,
+            @WebParam(name = "idElementMoved") long idElementMoved,
             @WebParam(name = "idNewParent") long idNewParent,
             @WebParam(name = "newPosition") int newPosition,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
@@ -399,6 +400,13 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault;
 
     @Put
+    @HttpResource(location = "/layer/{descendantsMap}")
+    long saveAddedLayerAndTreeModifications(
+            @WebParam(name = "layer") GPLayer layer,
+            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Put
     @HttpResource(location = "/layers/{descendantsMap}")
     ArrayList<Long> saveAddedLayersAndTreeModifications(
             @WebParam(name = "layers") List<GPLayer> layers,
@@ -422,16 +430,16 @@ public interface GeoPlatformService {
 
     @Put
     @HttpResource(location = "/layer/{layerId}")
-    boolean fixCheckStatusLayerAndTreeModifications(
+    public boolean fixCheckStatusLayerAndTreeModifications(
             @WebParam(name = "layerId") long layerId,
             @WebParam(name = "oldUserFolderId") long oldUserFolderId,
             @WebParam(name = "newUserFolderId") long newUserFolderId)
             throws ResourceNotFoundFault;
 
     @Put
-    @HttpResource(location = "/layer/{idLayerMoved}")
+    @HttpResource(location = "/layer/{idElementMoved}")
     boolean saveDragAndDropLayerAndTreeModifications(
-            @WebParam(name = "idLayerMoved") long idLayerMoved,
+            @WebParam(name = "idElementMoved") long idElementMoved,
             @WebParam(name = "idNewParent") long idNewParent,
             @WebParam(name = "newPosition") int newPosition,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
@@ -463,6 +471,13 @@ public interface GeoPlatformService {
     @HttpResource(location = "/layers")
     @WebResult(name = "Layer")
     List<ShortLayerDTO> getLayers(@WebParam(name = "projectId") long projectId);
+
+    /**
+     * @return Styles of a layer.
+     */
+    @Get
+    @WebResult(name = "LayerStyles")
+    List<StyleDTO> getLayerStyles(@WebParam(name = "layerId") long layerId);
 
     /**
      * @return a short layer.

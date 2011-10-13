@@ -2,7 +2,7 @@
 /*
  *  geo-platform
  *  Rich webgis framework
- *  http://geo-plartform.org
+ *  http://geo-platform.org
  * ====================================================================
  *
  * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
@@ -38,17 +38,17 @@
 package org.geosdi.geoplatform;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.mortbay.jetty.Server;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.TestExecutionListeners;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,12 +57,12 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GPUserProjects;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
-import org.geosdi.geoplatform.core.model.Utility;
-import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
-import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 
@@ -71,56 +71,53 @@ import org.geosdi.geoplatform.services.GeoPlatformService;
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-public abstract class ServiceTest implements InitializingBean {
+@ContextConfiguration(locations = {"classpath*:applicationContext.xml"})
+@TestExecutionListeners(value = {WSListenerServices.class})
+public abstract class ServiceTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    @Autowired
-    protected GeoPlatformWSClient gpWSClient;
-    //
-    protected GeoPlatformService geoPlatformService;
-    //
-    @Autowired
-    protected Server gpJettyServer;
-    //
-    protected List<String> layerInfoKeywords;
+    protected GeoPlatformService gpWSClient;
     // User
     protected final String usernameTest = "username_test_ws";
-    protected GPUser userTest = null;
     protected long idUserTest = -1;
-    // Folder A
-    protected final String nameRootFolderA = "rootFolderA";
+    protected GPUser userTest = null;
+    // Project
+    protected long idProjectTest = -1;
+    protected GPProject projectTest = null;
+    // Folders
     protected GPFolder rootFolderA = null;
-    protected long idRootFolderA = -1;
-    // Folder B
-    protected final String nameRootFolderB = "rootFolderB";
     protected GPFolder rootFolderB = null;
+    protected final String nameRootFolderA = "rootFolderA";
+    protected final String nameRootFolderB = "rootFolderB";
+    protected long idRootFolderA = -1;
     protected long idRootFolderB = -1;
+    //
+    protected List<String> layerInfoKeywords;
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        logger.info("ServiceTest - afterPropertiesSet-------------------------------> " + this.getClass().getName());
-        Assert.assertNotNull(gpJettyServer);
-
-        gpJettyServer.start();
-
-        geoPlatformService = gpWSClient.create();
+    /**
+     * The listener will inject this dependency
+     */
+    public void setGeoplatformServiceClient(GeoPlatformService gpWSClient) {
+        this.gpWSClient = gpWSClient;
     }
 
     @Before
     public void setUp() throws Exception {
-        logger.trace("\n\t@@@ {}.setUp @@@", this.getClass().getName());
+        logger.trace("\n\t@@@ {}.setUp @@@", this.getClass().getSimpleName());
+
         // Insert User
         idUserTest = this.createAndInsertUser(usernameTest);
-        userTest = geoPlatformService.getUserDetailByName(new SearchRequest(usernameTest));
-
+        userTest = gpWSClient.getUserDetailByName(new SearchRequest(usernameTest));
+        // Insert Project
+        idProjectTest = this.createAndInsertProject("project_test_ws", false, 2, new Date(System.currentTimeMillis()));
+        projectTest = gpWSClient.getProjectDetail(idProjectTest);
         // Create root folders for the user
-        idRootFolderA = createAndInsertFolderWithOwner(nameRootFolderA, userTest, 2, false);
-        rootFolderA = geoPlatformService.getFolderDetail(new RequestById(idRootFolderA));
+        idRootFolderA = this.createAndInsertFolder(nameRootFolderA, projectTest, 2, null);
+        rootFolderA = gpWSClient.getFolderDetail(idRootFolderA);
 
-        idRootFolderB = createAndInsertFolderWithOwner(nameRootFolderB, userTest, 1, false);
-        rootFolderB = geoPlatformService.getFolderDetail(new RequestById(idRootFolderB));
+        idRootFolderB = this.createAndInsertFolder(nameRootFolderB, projectTest, 1, null);
+        rootFolderB = gpWSClient.getFolderDetail(idRootFolderB);
 
         // Set the list of keywords (for raster layer)
         layerInfoKeywords = new ArrayList<String>();
@@ -129,16 +126,16 @@ public abstract class ServiceTest implements InitializingBean {
 
     @After
     public void tearDown() {
-        logger.trace("\n\t@@@ {}.tearDown @@@", this.getClass().getName());
+        logger.trace("\n\t@@@ {}.tearDown @@@", this.getClass().getSimpleName());
         // Delete user
         this.deleteUser(idUserTest);
     }
 
-    // Create and insert (with assert) a User
+    // Create and insert a User
     protected long createAndInsertUser(String username) throws IllegalParameterFault {
         GPUser user = createUser(username);
         logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
-        long idUser = geoPlatformService.insertUser(user);
+        long idUser = gpWSClient.insertUser(user);
         logger.debug("\n*** Id ASSIGNED at the User in the DB: {} ***", idUser);
         Assert.assertTrue("Id ASSIGNED at the User in the DB", idUser > 0);
         return idUser;
@@ -149,7 +146,8 @@ public abstract class ServiceTest implements InitializingBean {
         user.setUsername(username);
         user.setEmailAddress(username + "@test");
         user.setEnabled(true);
-        user.setPassword(Utility.md5hash("pwd_username_test_ws"));
+        // TODO FIX: Utility.md5("pwd_" + username)
+        user.setPassword("918706bb28e76c3a5f3c7f0dd6f06ff0"); // clear password: 'pwd_username_test_ws'
         user.setSendEmail(true);
         return user;
     }
@@ -157,43 +155,65 @@ public abstract class ServiceTest implements InitializingBean {
     // Delete (with assert) a User
     protected void deleteUser(long idUser) {
         try {
-            boolean check = geoPlatformService.deleteUser(new RequestById(idUser));
+            boolean check = gpWSClient.deleteUser(idUser);
             Assert.assertTrue("User with id = " + idUser + " has not been eliminated", check);
         } catch (Exception e) {
             Assert.fail("Error while deleting User with Id: " + idUser);
         }
     }
 
-    protected long createAndInsertFolderWithOwner(String folderName, GPUser owner, int position, boolean shared) {
-        GPFolder folder = createFolder(folderName, owner, position, shared);
-        folder.setParent(null);
-        long id = geoPlatformService.insertFolder(folder);
-        return id;
+    // Delete (with assert) a Folder
+    protected void deleteFolder(long idFolder) {
+        try {
+            boolean check = gpWSClient.deleteFolder(idFolder);
+            Assert.assertTrue("Folder with id = " + idFolder + " has not been eliminated", check);
+        } catch (Exception e) {
+            Assert.fail("Error while deleting Folder with Id: " + idFolder);
+        }
     }
 
-    protected long createAndInsertFolderWithParent(String folderName, GPUser owner, GPFolder parentFolder, int position, boolean shared) {
-        GPFolder folder = createFolder(folderName, owner, position, shared);
-        folder.setParent(parentFolder);
-        long id = geoPlatformService.insertFolder(folder);
-        return id;
+    protected long createAndInsertFolder(String folderName, GPProject project,
+            int position, GPFolder parent) throws ResourceNotFoundFault, IllegalParameterFault {
+        GPFolder folder = this.createFolder(folderName, project, position, parent);
+        return gpWSClient.insertFolder(folder, project.getId());
     }
 
-    protected GPFolder createFolder(String folderName, GPUser owner, int position, boolean shared) {
+    protected long createAndInsertProject(String name, boolean isShared,
+            int numberOfElements, Date creationalDate) throws IllegalParameterFault {
+        GPProject project = this.createProject(name, isShared, numberOfElements, creationalDate);
+        return gpWSClient.insertProject(project);
+    }
+
+    protected GPFolder createFolder(String folderName, GPProject project,
+            int position, GPFolder parent) {
         GPFolder folder = new GPFolder();
-        folder.setOwner(owner);
         folder.setName(folderName);
+        folder.setProject(project);
         folder.setPosition(position);
-        folder.setShared(shared);
+        folder.setParent(parent);
         return folder;
     }
 
-    protected long createAndInsertRasterLayer(String abstractText,
-            GPFolder parentFolder, String name, int position, boolean shared,
-            long ownerId, String srs, String title, String urlServer) {
+    protected GPProject createProject(String name, boolean isShared, int numberOfElements, Date creationalDate) {
+        GPProject project = new GPProject();
+        project.setName(name);
+        project.setShared(isShared);
+        project.setNumberOfElements(numberOfElements);
+        project.setCreationDate(creationalDate);
+        return project;
+    }
+
+    protected GPUserProjects createBindingUserProject(GPUser user, GPProject project) {
+        GPUserProjects userProject = new GPUserProjects();
+        userProject.setUserAndProject(user, project);
+        return userProject;
+    }
+
+    protected long createAndInsertRasterLayer(GPFolder folder, String title, String name,
+            String abstractText, int position, String srs, String urlServer)
+            throws IllegalParameterFault {
         GPRasterLayer rasterLayer = new GPRasterLayer();
-        this.createLayer(rasterLayer, abstractText, parentFolder, name,
-                position, shared, ownerId, srs, title, urlServer);
-        rasterLayer.setFolder(parentFolder);
+        this.createLayer(rasterLayer, folder, title, name, abstractText, position, srs, urlServer);
 
         GPLayerInfo layerInfo = new GPLayerInfo();
         layerInfo.setKeywords(layerInfoKeywords);
@@ -201,42 +221,32 @@ public abstract class ServiceTest implements InitializingBean {
         rasterLayer.setLayerInfo(layerInfo);
 
         rasterLayer.setLayerType(GPLayerType.RASTER);
-        long id = geoPlatformService.insertLayer(rasterLayer);
-        return id;
+        return gpWSClient.insertLayer(rasterLayer);
     }
 
-    protected long createAndInsertVectorLayer(String abstractText,
-            GPFolder parentFolder, String name, int position, boolean shared,
-            long ownerId, String srs, String title, String urlServer) {
+    protected long createAndInsertVectorLayer(GPFolder folder, String title, String name,
+            String abstractText, int position, String srs, String urlServer)
+            throws IllegalParameterFault {
         GPVectorLayer vectorLayer = new GPVectorLayer();
-        this.createLayer(vectorLayer, abstractText, parentFolder, name,
-                position, shared, ownerId, srs, title, urlServer);
-        vectorLayer.setFolder(parentFolder);
+        this.createLayer(vectorLayer, folder, title, name, abstractText, position, srs, urlServer);
 
         vectorLayer.setLayerType(GPLayerType.POLYGON);
-        long id = geoPlatformService.insertLayer(vectorLayer);
-        return id;
+        return gpWSClient.insertLayer(vectorLayer);
     }
 
-    protected void createLayer(GPLayer gpLayer, String abstractText,
-            GPFolder parentFolder, String name, int position, boolean shared,
-            long ownerId, String srs, String title, String urlServer) {
-        double minX = 10;
-        double minY = 10;
-        double maxX = 20;
-        double maxY = 20;
+    protected void createLayer(GPLayer layer, GPFolder folder, String title, String name,
+            String abstractText, int position, String srs, String urlServer) {
+        layer.setFolder(folder);
+        layer.setProject(folder.getProject());
 
-        gpLayer.setFolder(parentFolder);
-        gpLayer.setAbstractText(abstractText);
-        gpLayer.setName(name);
-        gpLayer.setPosition(position);
-        gpLayer.setShared(shared);
-        gpLayer.setOwnerId(ownerId);
-        gpLayer.setSrs(srs);
-        gpLayer.setTitle(title);
-        gpLayer.setUrlServer(urlServer);
+        layer.setTitle(title);
+        layer.setName(name);
+        layer.setAbstractText(abstractText);
+        layer.setPosition(position);
+        layer.setSrs(srs);
+        layer.setUrlServer(urlServer);
 
-        GPBBox bBox = new GPBBox(minX, minY, maxX, maxY);
-        gpLayer.setBbox(bBox);
+        GPBBox bBox = new GPBBox(10, 10, 20, 20);
+        layer.setBbox(bBox);
     }
 }

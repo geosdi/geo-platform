@@ -23,7 +23,7 @@
 	<!-- This file is the equivalent of jetty.xml, but written in spring -->
 	<!-- =============================================================== -->
 
-    <bean id="gpJettyServer" class="org.mortbay.jetty.Server"
+    <!--bean id="gpJettyServer" class="org.mortbay.jetty.Server"
 		destroy-method="stop">
 
         <property name="threadPool">
@@ -67,6 +67,6 @@
             </bean>
         </property>
 
-    </bean>
+    </bean-->
 
 </beans>

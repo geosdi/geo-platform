@@ -39,15 +39,14 @@ package org.geosdi.geoplatform;
 
 import java.util.Iterator;
 import java.util.List;
-import javax.xml.ws.soap.SOAPFaultException;
-import org.junit.Test;
 import junit.framework.Assert;
-
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.UserDTO;
+import org.junit.Test;
 
 /**
  *
@@ -56,14 +55,14 @@ import org.geosdi.geoplatform.responce.UserDTO;
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class WSUsersTest extends ServiceTest {
+public class WSUserTest extends ServiceTest {
     // TODO check:
     //      searchUsers()
     //      updateUser()
 
     @Test
     public void testUsersDB() {
-        List<UserDTO> userList = geoPlatformService.getUsers();
+        List<UserDTO> userList = gpWSClient.getUsers();
         logger.info("\n*** Number of Users into DB: {} ***", userList.size());
         if (userList != null) {
             for (Iterator<UserDTO> it = userList.iterator(); it.hasNext();) {
@@ -78,24 +77,24 @@ public class WSUsersTest extends ServiceTest {
         logger.trace("\n\t@@@ testRetrieveUser @@@");
 
         // Number of Users
-        List<UserDTO> userList = geoPlatformService.getUsers();
+        List<UserDTO> userList = gpWSClient.getUsers();
         Assert.assertNotNull(userList);
         Assert.assertTrue("Number of Users stored into database", userList.size() >= 1); // super.SetUp() added 1 user
 
         // Number of User Like
-        long numUsersLike = geoPlatformService.getUsersCount(new SearchRequest(usernameTest));
+        long numUsersLike = gpWSClient.getUsersCount(new SearchRequest(usernameTest));
         Assert.assertEquals("Number of User Like", numUsersLike, new Long(1).longValue());
 
         // Get User from Id
         try {
             // Get UserDTO from Id
-            UserDTO userDTOFromWS = geoPlatformService.getShortUser(new RequestById(idUserTest));
+            UserDTO userDTOFromWS = gpWSClient.getShortUser(new RequestById(idUserTest));
             Assert.assertNotNull(userDTOFromWS);
             Assert.assertEquals("Error found User from Id", idUserTest, userDTOFromWS.getId());
             // Get GPUser from Id
-            GPUser userFromWS = geoPlatformService.getUserDetail(new RequestById(idUserTest));
+            GPUser userFromWS = gpWSClient.getUserDetail(new RequestById(idUserTest));
             Assert.assertNotNull(userFromWS);
-            Assert.assertEquals("Error found User from Id", idUserTest, userFromWS.getId());
+            Assert.assertEquals("Error found User from Id", idUserTest, userFromWS.getId().longValue());
         } catch (ResourceNotFoundFault ex) {
             Assert.fail("Not found User with Id: \"" + idUserTest + "\"");
         }
@@ -103,13 +102,13 @@ public class WSUsersTest extends ServiceTest {
         // Get User from Username
         try {
             // Get UserDTO from Username
-            UserDTO userDTOFromWS = geoPlatformService.getShortUserByName(new SearchRequest(usernameTest));
+            UserDTO userDTOFromWS = gpWSClient.getShortUserByName(new SearchRequest(usernameTest));
             Assert.assertNotNull(userDTOFromWS);
             Assert.assertEquals("Error found User from Username", idUserTest, userDTOFromWS.getId());
             // Get GPUser from Username
-            GPUser userFromWS = geoPlatformService.getUserDetailByName(new SearchRequest(usernameTest));
+            GPUser userFromWS = gpWSClient.getUserDetailByName(new SearchRequest(usernameTest));
             Assert.assertNotNull(userFromWS);
-            Assert.assertEquals("Error found User from Username", idUserTest, userFromWS.getId());
+            Assert.assertEquals("Error found User from Username", idUserTest, userFromWS.getId().longValue());
         } catch (ResourceNotFoundFault ex) {
             Assert.fail("Not found User with Username: \"" + usernameTest + "\"");
         }
@@ -119,11 +118,11 @@ public class WSUsersTest extends ServiceTest {
     public void testGetUserDetailByUsernameAndPassword1() {
         GPUser user = null;
         try {
-            user = geoPlatformService.getUserDetailByUsernameAndPassword(usernameTest, "pwd_username_test_ws");
+            user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, "pwd_username_test_ws");
             Assert.assertNotNull("User is null", user);
         } catch (ResourceNotFoundFault ex) {
             Assert.fail(ex.getMessage());
-        } catch (SOAPFaultException ex) {
+        } catch (IllegalParameterFault ex) {
             Assert.fail(ex.getMessage());
         }
     }
@@ -133,11 +132,11 @@ public class WSUsersTest extends ServiceTest {
         GPUser user = null;
         try {
             String newUsername = usernameTest + "_";
-            user = geoPlatformService.getUserDetailByUsernameAndPassword(newUsername, "pwd_username_test_ws");
+            user = gpWSClient.getUserDetailByUsernameAndPassword(newUsername, "pwd_username_test_ws");
             Assert.fail("Test must fail because username is wrong");
         } catch (ResourceNotFoundFault ex) {
             Assert.assertNull("User is not null", user);
-        } catch (SOAPFaultException ex) {
+        } catch (IllegalParameterFault ex) {
             Assert.fail(ex.getMessage());
         }
     }
@@ -146,11 +145,11 @@ public class WSUsersTest extends ServiceTest {
     public void testGetUserDetailByUsernameAndPassword3() {
         GPUser user = null;
         try {
-            user = geoPlatformService.getUserDetailByUsernameAndPassword(usernameTest, "pwd_username_test_ws_");
+            user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, "pwd_username_test_ws_");
             Assert.fail("Test must fail because password is wrong");
         } catch (ResourceNotFoundFault ex) {
             Assert.fail(ex.getMessage());
-        } catch (SOAPFaultException ex) {
+        } catch (IllegalParameterFault ex) {
             Assert.assertNull("User is not null", user);
         }
     }

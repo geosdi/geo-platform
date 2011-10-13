@@ -43,7 +43,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -99,9 +98,9 @@ public class LayerService implements ILayerService {
 
     @Override
     public ArrayList<GPFolderClientInfo> loadUserFolders(HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        long projectId = 0L;
+        long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
         try {
-            projectId = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
+            this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -137,9 +136,9 @@ public class LayerService implements ILayerService {
         folder.setName(folderName);
         folder.setPosition(position);
         folder.setShared(false);
-        long projectId = 0L;
+        long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
         try {
-            projectId = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
+            this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -183,12 +182,7 @@ public class LayerService implements ILayerService {
         folder.setParent(gpFolder);
         folder.setNumberOfDescendants(numberOfDescendants);
         folder.setChecked(isChecked);
-        long projectId = 0L;
-        try {
-            projectId = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
-        } catch (GPSessionTimeout timeout) {
-            throw new GeoPlatformException(timeout);
-        }
+        long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
 //        folder.setProject(project);
 
         long savedFolderId = 0L;
@@ -225,14 +219,13 @@ public class LayerService implements ILayerService {
     public long saveAddedFolderAndTreeModifications(
             MementoSaveAddedFolder memento, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        GPFolder gpFolder = this.dtoConverter.convertMementoFolder(
-                memento.getAddedFolder());
-        long projectId = 0L;
         try {
-            projectId = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
+            this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
+        GPFolder gpFolder = this.dtoConverter.convertMementoFolder(memento.getAddedFolder());
+        long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
 //        gpFolder.setProject(project);
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
@@ -254,15 +247,15 @@ public class LayerService implements ILayerService {
     @Override
     public ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        ArrayList<GPLayer> layersList = this.dtoConverter.convertMementoLayers(memento.getAddedLayers());
-        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
-                memento.getWsDescendantMap());
-        long projectId = 0L;
         try {
-            projectId = this.sessionUtility.getDefaultProjectFromSession(httpServletRequest);
+            this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
+        ArrayList<GPLayer> layersList = this.dtoConverter.convertMementoLayers(memento.getAddedLayers());
+        GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
+                memento.getWsDescendantMap());
+        long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
         ArrayList<Long> idSavedLayers = null;
         try {
             idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications(

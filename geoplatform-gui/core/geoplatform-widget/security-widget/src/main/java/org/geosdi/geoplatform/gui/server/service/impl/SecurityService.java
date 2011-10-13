@@ -140,7 +140,7 @@ public class SecurityService implements ISecurityService {
         //TODO: Set the right time in seconds before session interrupt
         session.setMaxInactiveInterval(900);
         session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), user);
-        session.setAttribute(UserLoginEnum.DEFAULT_PROJECT.toString(), (Long)defaultProject.getId());
+        this.sessionUtility.setProjectId((Long)defaultProject.getId());
     }
 
     public GPUser loginFromSessionServer(HttpServletRequest httpServletRequest)

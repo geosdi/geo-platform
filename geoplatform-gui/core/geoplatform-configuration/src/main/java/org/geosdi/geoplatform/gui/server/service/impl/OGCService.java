@@ -38,19 +38,16 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.geosdi.geoplatform.core.model.GPProject;
-import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.IOGCService;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOServerConverter;
-import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -74,6 +71,8 @@ public class OGCService implements IOGCService {
     //
     @Autowired
     private DTOServerConverter dtoServerConverter;
+    @Autowired
+    private SessionUtility sessionUtility;
 
     @Override
     public ArrayList<GPServerBeanModel> loadServers()
@@ -141,26 +140,13 @@ public class OGCService implements IOGCService {
         return dtoServerConverter.convertServerWS(serverWS);
     }
 
-    private GPProject getDefaultProjectFromSession(HttpServletRequest httpServletRequest) {
-        GPProject project = null;
-        HttpSession session = httpServletRequest.getSession();
-        Object projectObj = session.getAttribute(UserLoginEnum.DEFAULT_PROJECT.toString());
-        if (projectObj != null && projectObj instanceof GPProject) {
-            project = (GPProject) projectObj;
-        } else {
-            throw new GeoPlatformException(new GPSessionTimeout("Session Timeout"));
-        }
-        return project;
-    }
-
     @Override
     public ArrayList<String> findDistinctLayersDataSource(HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         ArrayList<String> dataSources = null;
-        GPProject project = this.getDefaultProjectFromSession(httpServletRequest);
+        long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
         try {
-            dataSources = geoPlatformServiceClient.getLayersDataSourceByProjectId(
-                    project.getId());
+            dataSources = geoPlatformServiceClient.getLayersDataSourceByProjectId(projectId);
         } catch (ResourceNotFoundFault e) {
             throw new GeoPlatformException("Error in findDistinctLayersDataSource: ResourceNotFoundFault "
                     + e);

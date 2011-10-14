@@ -43,7 +43,7 @@ import org.springframework.context.ApplicationContext;
  * @author giuseppe
  * 
  */
-public class GeoPlatformContextUtil {
+ public class GeoPlatformContextUtil {
 
     private static GeoPlatformContextUtil INSTANCE;
     private ApplicationContext springContext;

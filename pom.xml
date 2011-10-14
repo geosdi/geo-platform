@@ -1129,7 +1129,7 @@
 
     <properties>
         <geoplatform-version>1.2-SNAPSHOT</geoplatform-version>
-        <cxf-version>2.4.0</cxf-version>
+        <cxf-version>2.4.3</cxf-version>
         <spring-version>3.0.5.RELEASE</spring-version>
         <velocity-version>1.6.2</velocity-version>
         <javax-mail-version>1.4</javax-mail-version>
@@ -1144,8 +1144,8 @@
         <commons-dbcp-version>1.2.2</commons-dbcp-version>
         <commons-codec-version>1.4</commons-codec-version>
 
-        <jaxb-api-version>2.2.1</jaxb-api-version>
-        <jaxb-impl-version>2.2.1.1</jaxb-impl-version>
+        <jaxb-api-version>2.2.3</jaxb-api-version>
+        <jaxb-impl-version>2.2.4</jaxb-impl-version>
 
         <junit-version>4.7</junit-version>
         <log4j-version>1.2.14</log4j-version>

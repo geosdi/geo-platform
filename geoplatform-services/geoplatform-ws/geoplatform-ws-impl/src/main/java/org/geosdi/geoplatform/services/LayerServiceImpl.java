@@ -264,7 +264,7 @@ class LayerServiceImpl {
         layerDao.updatePositionsLowerBound(newPosition, increment);
         folderDao.updatePositionsLowerBound(newPosition, increment);
 
-        layerDao.merge(layers.toArray(new GPLayer[layers.size()]));
+        layerDao.persist(layers.toArray(new GPLayer[layers.size()]));
 
         ArrayList<Long> arrayList = new ArrayList<Long>(layers.size());
         for (int i = 0; i < layers.size(); i++) {

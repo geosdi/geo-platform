@@ -57,7 +57,7 @@ public abstract class AbstractMementoSave<T extends GPBeanTreeModel>
     //
     private transient ISave saveAction;
     private transient T refBaseElement;
-    private long idBaseElement;
+    private Long idBaseElement;
     private transient Map<FolderTreeNode, Integer> descendantMap = new HashMap<FolderTreeNode, Integer>();
     private Map<Long, Integer> wsDescendantMap = new HashMap<Long, Integer>();
 
@@ -119,14 +119,14 @@ public abstract class AbstractMementoSave<T extends GPBeanTreeModel>
     /**
      * @return the idBaseElement
      */
-    public long getIdBaseElement() {
+    public Long getIdBaseElement() {
         return idBaseElement;
     }
 
     /**
      * @param idBaseElement the idBaseElement to set
      */
-    public void setIdBaseElement(long idBaseElement) {
+    public void setIdBaseElement(Long idBaseElement) {
         this.idBaseElement = idBaseElement;
     }
 

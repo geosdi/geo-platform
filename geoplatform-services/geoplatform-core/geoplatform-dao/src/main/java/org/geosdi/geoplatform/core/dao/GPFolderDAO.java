@@ -83,7 +83,7 @@ public interface GPFolderDAO {
 
     public boolean updateAncestorsDescendants(Map<Long, Integer> descendantsMap);
 
-    public boolean persistCheckStatusFolder(long idFolder, boolean isChecked);
+    public boolean persistCheckStatusFolder(Long idFolder, boolean isChecked);
 
     public boolean persistCheckStatusFolders(boolean isChecked, Long... idFolders);
 }

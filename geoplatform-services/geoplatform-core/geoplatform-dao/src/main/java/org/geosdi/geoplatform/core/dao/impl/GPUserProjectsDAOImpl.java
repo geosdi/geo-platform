@@ -97,7 +97,7 @@ public class GPUserProjectsDAOImpl extends BaseDAO<GPUserProjects, Long>
     }
 
     @Override
-    public boolean removeByUserId(long userId) {
+    public boolean removeByUserId(Long userId) {
         // Hibernate Query Language [HQL]
         StringBuilder str = new StringBuilder();
         str.append("select _it_.user.id");
@@ -116,7 +116,7 @@ public class GPUserProjectsDAOImpl extends BaseDAO<GPUserProjects, Long>
     }
 
     @Override
-    public boolean removeByProjectId(long projectId) {
+    public boolean removeByProjectId(Long projectId) {
         // Hibernate Query Language [HQL]
         StringBuilder str = new StringBuilder();
         str.append("select _it_.project.id");
@@ -145,14 +145,14 @@ public class GPUserProjectsDAOImpl extends BaseDAO<GPUserProjects, Long>
     }
 
     @Override
-    public List<GPUserProjects> findByUserId(long userId) {
+    public List<GPUserProjects> findByUserId(Long userId) {
         Search search = new Search();
         search.addFilterEqual("user.id", userId);
         return search(search);
     }
 
     @Override
-    public List<GPUserProjects> findByOwnerUserId(long userId) {
+    public List<GPUserProjects> findByOwnerUserId(Long userId) {
         Search search = new Search();
         search.addFilterEqual("user.id", userId);
         search.addFilterEqual("permissionMask", BasePermission.ADMINISTRATION.getMask());
@@ -160,14 +160,14 @@ public class GPUserProjectsDAOImpl extends BaseDAO<GPUserProjects, Long>
     }
 
     @Override
-    public List<GPUserProjects> findByProjectId(long projectId) {
+    public List<GPUserProjects> findByProjectId(Long projectId) {
         Search search = new Search();
         search.addFilterEqual("project.id", projectId);
         return search(search);
     }
 
     @Override
-    public GPUserProjects find(long userId, long projectId) {
+    public GPUserProjects find(Long userId, Long projectId) {
         Search search = new Search();
         search.addFilterEqual("user.id", userId);
         search.addFilterEqual("project.id", projectId);

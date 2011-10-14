@@ -70,7 +70,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
         }
     }
     
-    private long id;
+    private Long id;
     private String name;
     private String alias;
     private String label;
@@ -85,7 +85,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
      * @return the id
      */
     @Override
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -94,7 +94,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
      *          the id to set
      */
     @Override
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

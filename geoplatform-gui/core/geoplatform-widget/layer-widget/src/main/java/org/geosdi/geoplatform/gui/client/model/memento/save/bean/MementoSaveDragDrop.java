@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 public class MementoSaveDragDrop extends AbstractMementoSave {
 
     private static final long serialVersionUID = 7503831906608161666L;
-    private long idNewParent;
+    private Long idNewParent;
     private transient FolderTreeNode refNewParent;
     private int newZIndex;
 
@@ -81,14 +81,14 @@ public class MementoSaveDragDrop extends AbstractMementoSave {
     /**
      * @return the idNewParent
      */
-    public long getIdNewParent() {
+    public Long getIdNewParent() {
         return idNewParent;
     }
 
     /**
      * @param idNewParent the idNewParent to set
      */
-    public void setIdNewParent(long idNewParent) {
+    public void setIdNewParent(Long idNewParent) {
         this.idNewParent = idNewParent;
     }
 

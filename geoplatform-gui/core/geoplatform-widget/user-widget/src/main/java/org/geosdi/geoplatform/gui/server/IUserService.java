@@ -48,13 +48,13 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
  */
 public interface IUserService {
 
-    long insertUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
+    Long insertUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    long updateUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
+    Long updateUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    boolean deleteUser(long userId, HttpServletRequest httpServletRequest)
+    boolean deleteUser(Long userId, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     List<IGPUserManageDetail> getUsers(HttpServletRequest httpServletRequest);

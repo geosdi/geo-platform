@@ -182,8 +182,8 @@ public class SecurityService implements ISecurityService {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
     }
 
-    private long saveProject(GPUserProjects userProject) throws GeoPlatformException {
-        long idProject = 0L;
+    private Long saveProject(GPUserProjects userProject) throws GeoPlatformException {
+        Long idProject = null;
         try {
             idProject = this.geoPlatformServiceClient.saveProject(userProject.getUser().getUsername(),
                     userProject.getProject());

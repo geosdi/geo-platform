@@ -320,7 +320,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
             public void handleEvent(TreePanelEvent<ModelData> be) {
                 if ((be.getItem() instanceof FolderTreeNode)
                         && (!((FolderTreeNode) be.getItem()).isLoaded())
-                        && (((FolderTreeNode) be.getItem()).getId() != 0L)) {
+                        && (((FolderTreeNode) be.getItem()).getId() != null)) {
                     final VisitorPosition visitorPosition = new VisitorPosition();
                     final FolderTreeNode parentFolder = (FolderTreeNode) be.getItem();
                     parentFolder.setLoading(true);

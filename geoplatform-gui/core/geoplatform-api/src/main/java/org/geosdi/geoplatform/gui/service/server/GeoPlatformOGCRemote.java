@@ -93,7 +93,7 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public GPServerBeanModel getServerDetails(long idServer)
+    public GPServerBeanModel getServerDetails(Long idServer)
             throws GeoPlatformException;
     /**
      * 
@@ -101,7 +101,7 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException 
      */
-    public Boolean deleteServer(long idServer)
+    public Boolean deleteServer(Long idServer)
             throws GeoPlatformException;
 
     /**
@@ -111,7 +111,7 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public ArrayList<? extends GPLayerGrid> getCapabilities(long idServer)
+    public ArrayList<? extends GPLayerGrid> getCapabilities(Long idServer)
             throws GeoPlatformException;
 
     /**

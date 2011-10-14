@@ -120,7 +120,7 @@ class ProjectServiceImpl {
     // ==========================================================================
     // === Project
     // ==========================================================================
-    public long saveProject(String username, GPProject project)
+    public Long saveProject(String username, GPProject project)
             throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n\t@@@ saveProject @@@");
         this.checkProject(project);
@@ -140,7 +140,7 @@ class ProjectServiceImpl {
         return project.getId(); // Remark: return only the entity ID of Project
     }
 
-    public long insertProject(GPProject project) throws IllegalParameterFault {
+    public Long insertProject(GPProject project) throws IllegalParameterFault {
         logger.trace("\n\t@@@ insertProject @@@");
         this.checkProject(project);
 
@@ -148,7 +148,7 @@ class ProjectServiceImpl {
         return project.getId();
     }
 
-    public long updateProject(GPProject project)
+    public Long updateProject(GPProject project)
             throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n\t@@@ updateProject @@@");
         this.checkProject(project); // TODO assert
@@ -169,7 +169,7 @@ class ProjectServiceImpl {
         return origProject.getId();
     }
 
-    public boolean deleteProject(long projectId) throws ResourceNotFoundFault {
+    public boolean deleteProject(Long projectId) throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ deleteProject @@@");
 
         GPProject project = projectDao.find(projectId);
@@ -181,7 +181,7 @@ class ProjectServiceImpl {
         return projectDao.removeById(projectId);
     }
 
-    public GPProject getProjectDetail(long projectId) throws ResourceNotFoundFault {
+    public GPProject getProjectDetail(Long projectId) throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ getProjectDetail @@@");
 
         GPProject project = projectDao.find(projectId);
@@ -193,7 +193,7 @@ class ProjectServiceImpl {
         return project;
     }
 
-    public int getNumberOfElementsProject(long projectId) throws ResourceNotFoundFault {
+    public int getNumberOfElementsProject(Long projectId) throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ getNumberOfElementsProject @@@");
 
         GPProject project = this.getProjectDetail(projectId);
@@ -226,7 +226,7 @@ class ProjectServiceImpl {
 //     * @param userId
 //     * @return only root folders owned by user
 //     */
-//    public List<FolderDTO> getFoldersByUserId(long userId) {
+//    public List<FolderDTO> getFoldersByUserId(Long userId) {
 //        Search searchCriteria = new Search(GPUserFolders.class);
 //
 //        searchCriteria.addSortAsc("position");
@@ -243,7 +243,7 @@ class ProjectServiceImpl {
 //     * @param request
 //     * @return count only root folders owned by user
 //     */
-//    public long getUserFoldersCount(long userId) {
+//    public Long getUserFoldersCount(Long userId) {
 //        Search searchCriteria = new Search(GPUserFolders.class);
 //
 //        searchCriteria.addFilterEqual("user.id", userId);
@@ -278,7 +278,7 @@ class ProjectServiceImpl {
      * @param projectId
      * @return root folders of a project
      */
-    public List<FolderDTO> getRootFoldersByProjectId(long projectId) {
+    public List<FolderDTO> getRootFoldersByProjectId(Long projectId) {
         Search searchCriteria = new Search(GPFolder.class);
 
         searchCriteria.addFilterEqual("project.id", projectId);
@@ -288,7 +288,7 @@ class ProjectServiceImpl {
         return FolderDTO.convertToFolderDTOList(foundUserFolders);
     }
 
-    public TreeFolderElements getElements(long projectId)
+    public TreeFolderElements getElements(Long projectId)
             throws ResourceNotFoundFault {
         if (projectDao.find(projectId) == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
@@ -315,7 +315,7 @@ class ProjectServiceImpl {
 //     * @param userId
 //     * @return count all folders and sub-folders owned by user and shared with his
 //     */
-//    public int getAllUserFoldersCount(long userId) {
+//    public int getAllUserFoldersCount(Long userId) {
 //        Search searchCriteria = new Search(GPUserFolders.class);
 //
 //        searchCriteria.addFilterEqual("user.id", userId);
@@ -324,7 +324,7 @@ class ProjectServiceImpl {
 //        return userProjectsDao.count(searchCriteria);
 //    }
 
-    public void setProjectShared(long projectId) throws ResourceNotFoundFault {
+    public void setProjectShared(Long projectId) throws ResourceNotFoundFault {
         GPProject project = projectDao.find(projectId);
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
@@ -361,7 +361,7 @@ class ProjectServiceImpl {
     // ==========================================================================
     // === UserProjects
     // ==========================================================================
-    public long insertUserProject(GPUserProjects userProject) throws IllegalParameterFault {
+    public Long insertUserProject(GPUserProjects userProject) throws IllegalParameterFault {
         logger.trace("\n\t@@@ insertUserProject @@@");
         this.checkUserProject(userProject);
 
@@ -369,7 +369,7 @@ class ProjectServiceImpl {
         return userProject.getId();
     }
 
-    public long updateUserProject(GPUserProjects userProject)
+    public Long updateUserProject(GPUserProjects userProject)
             throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n\t@@@ updateUserProject @@@");
         this.checkUserProject(userProject); // TODO assert
@@ -389,7 +389,7 @@ class ProjectServiceImpl {
         return origUserProject.getId();
     }
 
-    public boolean deleteUserProject(long userProjectId)
+    public boolean deleteUserProject(Long userProjectId)
             throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ deleteUserProject @@@");
 
@@ -402,7 +402,7 @@ class ProjectServiceImpl {
         return projectDao.removeById(userProjectId);
     }
 
-    public GPUserProjects getUserProject(long userProjectId)
+    public GPUserProjects getUserProject(Long userProjectId)
             throws ResourceNotFoundFault {
         GPUserProjects userProject = userProjectsDao.find(userProjectId);
         if (userProject == null) {
@@ -413,7 +413,7 @@ class ProjectServiceImpl {
         return userProject;
     }
 
-    public List<GPUserProjects> getUserProjectsByUserId(long userId) {
+    public List<GPUserProjects> getUserProjectsByUserId(Long userId) {
         List<GPUserProjects> userProjectsList = userProjectsDao.findByUserId(userId);
 
         this.checkUserProjectListLog(userProjectsList); // TODO assert
@@ -421,7 +421,7 @@ class ProjectServiceImpl {
         return userProjectsList;
     }
 
-    public List<GPUserProjects> getUserProjectsByProjectId(long projectId) {
+    public List<GPUserProjects> getUserProjectsByProjectId(Long projectId) {
         List<GPUserProjects> userProjectsList = userProjectsDao.findByProjectId(projectId);
 
         this.checkUserProjectListLog(userProjectsList); // TODO assert
@@ -429,7 +429,7 @@ class ProjectServiceImpl {
         return userProjectsList;
     }
 
-    public GPUserProjects getUserProjectByUserAndProjectId(long userId, long projectId)
+    public GPUserProjects getUserProjectByUserAndProjectId(Long userId, Long projectId)
             throws ResourceNotFoundFault {
         GPUserProjects userProject = userProjectsDao.find(userId, projectId);
         if (userProject == null) {

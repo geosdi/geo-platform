@@ -73,13 +73,13 @@ public class GeoPlatformOGCRemoteImpl extends RemoteServiceServlet
     }
 
     @Override
-    public GPServerBeanModel getServerDetails(long idServer)
+    public GPServerBeanModel getServerDetails(Long idServer)
             throws GeoPlatformException {
         return ogcService.getServerDetails(idServer);
     }
 
     @Override
-    public ArrayList<? extends GPLayerGrid> getCapabilities(long idServer)
+    public ArrayList<? extends GPLayerGrid> getCapabilities(Long idServer)
             throws GeoPlatformException {
         return ogcService.getCapabilities(super.getThreadLocalRequest(), idServer);
     }
@@ -97,7 +97,7 @@ public class GeoPlatformOGCRemoteImpl extends RemoteServiceServlet
     }
 
     @Override
-    public Boolean deleteServer(long idServer) throws GeoPlatformException {
+    public Boolean deleteServer(Long idServer) throws GeoPlatformException {
         return ogcService.deleteServer(idServer);
     }
 }

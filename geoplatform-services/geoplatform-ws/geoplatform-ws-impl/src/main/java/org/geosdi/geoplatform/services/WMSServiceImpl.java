@@ -82,7 +82,7 @@ class WMSServiceImpl {
         this.serverDao = serverDao;
     }
 
-    public long updateServer(GeoPlatformServer server)
+    public Long updateServer(GeoPlatformServer server)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GeoPlatformServer orig = serverDao.find(server.getId());
         if (orig == null) {
@@ -101,7 +101,7 @@ class WMSServiceImpl {
         return orig.getId();
     }
 
-    public boolean deleteServer(long idServer)
+    public boolean deleteServer(Long idServer)
             throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(idServer);
         if (server == null) {
@@ -111,7 +111,7 @@ class WMSServiceImpl {
         return serverDao.remove(server);
     }
 
-    public GeoPlatformServer getServerDetail(long idServer)
+    public GeoPlatformServer getServerDetail(Long idServer)
             throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(idServer);
         if (server == null) {
@@ -166,7 +166,7 @@ class WMSServiceImpl {
         return serverDTO;
     }
 
-    public long insertServer(GeoPlatformServer server) {
+    public Long insertServer(GeoPlatformServer server) {
         /** IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER **/
         GeoPlatformServer serverSearch = serverDao.findByServerUrl(server.getServerUrl());
         if (serverSearch != null) {

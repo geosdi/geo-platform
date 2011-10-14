@@ -43,49 +43,48 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class ResourceNotFoundDetails {
-    private long id;
+
+    private Long id;
     private String message;
 
     public ResourceNotFoundDetails() {
     }
 
-    public ResourceNotFoundDetails(long id, String message) {
+    public ResourceNotFoundDetails(Long id, String message) {
         this.id = id;
         this.message = message;
     }
-    
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
 
-	/**
-	 * @param message the message to set
-	 */
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	/**
-	 * @return the message
-	 */
-	public String getMessage() {
-		return message;
-	}
+    /**
+     * @param message the message to set
+     */
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    /**
+     * @return the message
+     */
+    public String getMessage() {
+        return message;
+    }
 
     @Override
     public String toString() {
         return "ResourceNotFoundDetails{" + "id=" + id + " message=" + message + '}';
     }
-
-
 }

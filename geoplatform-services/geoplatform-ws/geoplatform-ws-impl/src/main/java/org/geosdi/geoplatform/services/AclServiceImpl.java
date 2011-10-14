@@ -146,7 +146,7 @@ class AclServiceImpl {
      * @throws ResourceNotFoundFault
      *      if the user not found
      */
-    public GuiComponentsPermissionMapData getUserGuiComponentVisible(long userId)
+    public GuiComponentsPermissionMapData getUserGuiComponentVisible(Long userId)
             throws ResourceNotFoundFault {
         // Retrieve the user
         GPUser user = userDao.find(userId);

@@ -279,7 +279,7 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
 
         // Check the update
         for (int ind = 0; ind < foldersUpdated.length; ind++) {
-            long id = foldersUpdated[ind].getId();
+            Long id = foldersUpdated[ind].getId();
             int numberOfDescendants = foldersUpdated[ind].getNumberOfDescendants();
             logger.info("\n*** Number of Descentans of the UPDATED GPFolder \"{}\": {} (OLD Descentans = {}) ***",
                     new Object[]{foldersUpdated[ind].getName(), numberOfDescendants, oldDescendants[ind]});
@@ -291,7 +291,7 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
     }
 
     @Override
-    public boolean persistCheckStatusFolder(long idFolder, boolean isChecked) {
+    public boolean persistCheckStatusFolder(Long idFolder, boolean isChecked) {
         // Retrieve the folder
         GPFolder folder = this.find(idFolder);
         if (folder == null) {

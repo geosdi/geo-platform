@@ -426,7 +426,7 @@ public class GPDAOTest extends BaseDAOTest {
                 folderAUpdated.isChecked(), beginIsChecked);
 
         // ID Folder NOT correct
-        checkSave = folderDAO.persistCheckStatusFolder(Integer.MAX_VALUE, false);
+        checkSave = folderDAO.persistCheckStatusFolder(Long.MAX_VALUE, false);
         Assert.assertFalse("Save Check Status Folder NOT done (ID Folder NOT correct)", checkSave);
 
         folderAUpdated = folderDAO.find(folderA.getId());
@@ -521,7 +521,7 @@ public class GPDAOTest extends BaseDAOTest {
                 raster.isChecked(), beginIsChecked);
 
         // ID Folder NOT correct
-        checkSave = layerDAO.persistCheckStatusLayer(Integer.MAX_VALUE, false);
+        checkSave = layerDAO.persistCheckStatusLayer(Long.MAX_VALUE, false);
         Assert.assertFalse("Save Check Status Layer NOT done (ID Folder NOT correct)", checkSave);
 
         raster = layerDAO.find(rasterLayer.getId());

@@ -73,7 +73,7 @@ public class GPLayerExpander extends GPTreeExpanderNotifier<IGPNode> {
     public boolean checkNode() {
         boolean result = false;
         if(tree.getSelectionModel().getSelectedItem() instanceof FolderTreeNode){
-            result = ((FolderTreeNode) tree.getSelectionModel().getSelectedItem()).getId() == 0L;
+            result = ((FolderTreeNode) tree.getSelectionModel().getSelectedItem()).getId() == null;
         }
         return result;
     }

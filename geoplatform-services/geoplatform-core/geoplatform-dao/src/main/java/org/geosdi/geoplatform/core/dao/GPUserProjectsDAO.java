@@ -64,20 +64,20 @@ public interface GPUserProjectsDAO {
 
     public boolean removeById(Long userProjectsId);
 
-    public boolean removeByUserId(long userId);
+    public boolean removeByUserId(Long userId);
 
-    public boolean removeByProjectId(long projectsId);
+    public boolean removeByProjectId(Long projectsId);
 
     public List<GPUserProjects> search(ISearch search);
 
     public int count(ISearch search);
 
-    public List<GPUserProjects> findByUserId(long userId);
+    public List<GPUserProjects> findByUserId(Long userId);
 
-    public List<GPUserProjects> findByOwnerUserId(long userId);
+    public List<GPUserProjects> findByOwnerUserId(Long userId);
 
-    public List<GPUserProjects> findByProjectId(long projectId);
+    public List<GPUserProjects> findByProjectId(Long projectId);
 
-    public GPUserProjects find(long userId, long projectId);
+    public GPUserProjects find(Long userId, Long projectId);
 
 }

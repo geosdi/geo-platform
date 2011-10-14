@@ -59,7 +59,7 @@ public class GPFolderClientInfo implements Serializable,
     private IGPParentElement parent;
     private int numberOfDescendants;
     private boolean checked;
-    private long id;
+    private Long id;
 
     public boolean isChecked() {
         return checked;
@@ -69,11 +69,11 @@ public class GPFolderClientInfo implements Serializable,
         this.checked = checked;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

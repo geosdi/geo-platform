@@ -81,7 +81,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public ArrayList<IGPFolderElements> loadFolderElements(long folderId) throws GeoPlatformException;
+    public ArrayList<IGPFolderElements> loadFolderElements(Long folderId) throws GeoPlatformException;
 
     /**
      * 
@@ -89,7 +89,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento) throws GeoPlatformException;
+    public Long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento) throws GeoPlatformException;
 
     /**
      * 
@@ -170,7 +170,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException;
+    public Long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException;
 
     /**
      * 
@@ -180,7 +180,7 @@ public interface LayerRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public long saveFolder(long idParentFolder, String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException;
+    public Long saveFolder(Long idParentFolder, String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException;
 
     /**
      * 
@@ -188,7 +188,7 @@ public interface LayerRemote extends RemoteService {
      * @param elementType
      * @throws GeoPlatformException
      */
-    public void deleteElement(long id, TreeElement elementType) throws GeoPlatformException;
+    public void deleteElement(Long id, TreeElement elementType) throws GeoPlatformException;
 
     /**
      * 

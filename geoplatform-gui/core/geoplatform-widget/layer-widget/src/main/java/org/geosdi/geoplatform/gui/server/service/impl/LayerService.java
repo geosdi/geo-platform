@@ -98,7 +98,7 @@ public class LayerService implements ILayerService {
 
     @Override
     public ArrayList<GPFolderClientInfo> loadUserFolders(HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
+        Long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
         try {
             this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
@@ -109,7 +109,7 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public ArrayList<IGPFolderElements> loadFolderElements(long folderId, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public ArrayList<IGPFolderElements> loadFolderElements(Long folderId, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPUser user = null;
         try {
             user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
@@ -129,14 +129,14 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public long saveFolderForUser(String folderName, int position,
+    public Long saveFolderForUser(String folderName, int position,
             int numberOfDescendants, boolean isChecked, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPFolder folder = new GPFolder();
         folder.setName(folderName);
         folder.setPosition(position);
         folder.setShared(false);
-        long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
+        Long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
         try {
             this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
@@ -144,7 +144,7 @@ public class LayerService implements ILayerService {
         }
         folder.setNumberOfDescendants(numberOfDescendants);
         folder.setChecked(isChecked);
-        long savedFolderId = 0L;
+        Long savedFolderId = null;
         try {
             savedFolderId = this.geoPlatformServiceClient.insertFolder(folder, projectId);
         } catch (IllegalParameterFault ilg) {
@@ -160,7 +160,7 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public long saveFolder(long idParentFolder, String folderName, int position,
+    public Long saveFolder(Long idParentFolder, String folderName, int position,
             int numberOfDescendants, boolean isChecked, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPUser user = null;
@@ -186,10 +186,10 @@ public class LayerService implements ILayerService {
         folder.setParent(gpFolder);
         folder.setNumberOfDescendants(numberOfDescendants);
         folder.setChecked(isChecked);
-        long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
+        Long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
 //        folder.setProject(project);
 
-        long savedFolderId = 0L;
+        Long savedFolderId = null;
         try {
             savedFolderId = this.geoPlatformServiceClient.insertFolder(folder, projectId);
         } catch (IllegalParameterFault ilg) {
@@ -205,7 +205,7 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public void deleteElement(long id, TreeElement elementType, HttpServletRequest httpServletRequest)
+    public void deleteElement(Long id, TreeElement elementType, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPUser user = null;
         try {
@@ -224,7 +224,7 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public long saveAddedFolderAndTreeModifications(
+    public Long saveAddedFolderAndTreeModifications(
             MementoSaveAddedFolder memento, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         try {
@@ -233,11 +233,11 @@ public class LayerService implements ILayerService {
             throw new GeoPlatformException(timeout);
         }
         GPFolder gpFolder = this.dtoConverter.convertMementoFolder(memento.getAddedFolder());
-        long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
+        Long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
 //        gpFolder.setProject(project);
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
-        long idSavedFolder = 0L;
+        Long idSavedFolder = null;
         try {
             idSavedFolder = this.geoPlatformServiceClient.saveAddedFolderAndTreeModifications(
                     gpFolder, map, projectId);
@@ -263,7 +263,7 @@ public class LayerService implements ILayerService {
         ArrayList<GPLayer> layersList = this.dtoConverter.convertMementoLayers(memento.getAddedLayers());
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
-        long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
+        Long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
         ArrayList<Long> idSavedLayers = null;
         try {
             idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications(
@@ -497,7 +497,7 @@ public class LayerService implements ILayerService {
     }
 
     @Deprecated()
-    private void deleteFolder(long id) throws GeoPlatformException {
+    private void deleteFolder(Long id) throws GeoPlatformException {
         try {
             this.geoPlatformServiceClient.deleteFolder(id);
         } catch (Exception ex) {
@@ -509,7 +509,7 @@ public class LayerService implements ILayerService {
     }
 
     @Deprecated()
-    private void deleteLayer(long id) throws GeoPlatformException {
+    private void deleteLayer(Long id) throws GeoPlatformException {
         try {
             this.geoPlatformServiceClient.deleteLayer(id);
         } catch (Exception ex) {

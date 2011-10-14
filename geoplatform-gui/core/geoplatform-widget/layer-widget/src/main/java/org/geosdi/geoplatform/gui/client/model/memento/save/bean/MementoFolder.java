@@ -47,7 +47,7 @@ public class MementoFolder extends AbstractMementoSave<FolderTreeNode> {
     private static final long serialVersionUID = -2323528396954124089L;
     private String folderName;
     private int zIndex;
-    private long idParent;
+    private Long idParent;
     private transient FolderTreeNode refParent;
     private boolean checked;
     private int numberOfDescendants;
@@ -116,14 +116,14 @@ public class MementoFolder extends AbstractMementoSave<FolderTreeNode> {
     /**
      * @return the idParent
      */
-    public long getIdParent() {
+    public Long getIdParent() {
         return idParent;
     }
 
     /**
      * @param idParent the idParent to set
      */
-    public void setIdParent(long idParent) {
+    public void setIdParent(Long idParent) {
         this.idParent = idParent;
     }
 }

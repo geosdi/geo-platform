@@ -58,17 +58,17 @@ public class UserRemoteImpl extends RemoteServiceServlet implements UserRemote {
             getBean(UserService.class);
 
     @Override
-    public long insertUser(IGPUserManageDetail userDetail) throws GeoPlatformException {
+    public Long insertUser(IGPUserManageDetail userDetail) throws GeoPlatformException {
         return userService.insertUser(userDetail, super.getThreadLocalRequest());
     }
 
     @Override
-    public long updateUser(IGPUserManageDetail userDetail) throws GeoPlatformException {
+    public Long updateUser(IGPUserManageDetail userDetail) throws GeoPlatformException {
         return userService.updateUser(userDetail, super.getThreadLocalRequest());
     }
 
     @Override
-    public boolean deleteUser(long userId) throws GeoPlatformException {
+    public boolean deleteUser(Long userId) throws GeoPlatformException {
         return userService.deleteUser(userId, super.getThreadLocalRequest());
     }
 

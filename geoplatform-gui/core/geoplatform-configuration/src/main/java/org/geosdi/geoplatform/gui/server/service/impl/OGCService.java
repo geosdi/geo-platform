@@ -81,7 +81,7 @@ public class OGCService implements IOGCService {
     }
 
     @Override
-    public GPServerBeanModel getServerDetails(long idServer)
+    public GPServerBeanModel getServerDetails(Long idServer)
             throws GeoPlatformException {
         try {
             GeoPlatformServer serverWS = geoPlatformServiceClient.getServerDetail(idServer);
@@ -94,7 +94,7 @@ public class OGCService implements IOGCService {
     }
 
     @Override
-    public Boolean deleteServer(long idServer) throws GeoPlatformException {
+    public Boolean deleteServer(Long idServer) throws GeoPlatformException {
         try {
             geoPlatformServiceClient.deleteServer(idServer);
         } catch (ResourceNotFoundFault ex) {
@@ -107,7 +107,7 @@ public class OGCService implements IOGCService {
 
     @Override
     public ArrayList<? extends GPLayerGrid> getCapabilities(
-            HttpServletRequest httpServletRequest, long idServer)
+            HttpServletRequest httpServletRequest, Long idServer)
             throws GeoPlatformException {
         try {
             HttpSession session = httpServletRequest.getSession();
@@ -144,7 +144,7 @@ public class OGCService implements IOGCService {
     public ArrayList<String> findDistinctLayersDataSource(HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         ArrayList<String> dataSources = null;
-        long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
+        Long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
         try {
             dataSources = geoPlatformServiceClient.getLayersDataSourceByProjectId(projectId);
         } catch (ResourceNotFoundFault e) {

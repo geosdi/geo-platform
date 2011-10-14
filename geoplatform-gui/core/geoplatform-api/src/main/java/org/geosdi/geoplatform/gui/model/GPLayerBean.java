@@ -46,9 +46,9 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
  */
 public interface GPLayerBean extends ModelData {
 
-    public long getId();
+    public Long getId();
 
-    public void setId(long id);
+    public void setId(Long id);
 
     public String getLabel();
 

@@ -129,7 +129,7 @@ class LayerServiceImpl {
     }
     //</editor-fold>
 
-    public List<StyleDTO> getLayerStyles(long layerId) {
+    public List<StyleDTO> getLayerStyles(Long layerId) {
         Search searchCriteria = new Search(GPStyle.class);
 
         searchCriteria.addSortAsc("name");
@@ -139,14 +139,14 @@ class LayerServiceImpl {
         return StyleDTO.convertToStyleDTOList(foundStyle);
     }
 
-    public long insertLayer(GPLayer layer) throws IllegalParameterFault {
+    public Long insertLayer(GPLayer layer) throws IllegalParameterFault {
         this.checkLayer(layer); // TODO assert
 
         layerDao.persist(layer);
         return layer.getId();
     }
 
-    public long updateRasterLayer(GPRasterLayer layer)
+    public Long updateRasterLayer(GPRasterLayer layer)
             throws ResourceNotFoundFault, IllegalParameterFault {
         this.checkLayer(layer); // TODO assert
 
@@ -163,7 +163,7 @@ class LayerServiceImpl {
         return orig.getId();
     }
 
-    public long updateVectorLayer(GPVectorLayer layer)
+    public Long updateVectorLayer(GPVectorLayer layer)
             throws ResourceNotFoundFault, IllegalParameterFault {
         this.checkLayer(layer); // TODO assert
 
@@ -180,7 +180,7 @@ class LayerServiceImpl {
         return orig.getId();
     }
 
-    public boolean deleteLayer(long layerId)
+    public boolean deleteLayer(Long layerId)
             throws ResourceNotFoundFault {
         GPLayer layer = layerDao.find(layerId);
         if (layer == null) {
@@ -192,7 +192,7 @@ class LayerServiceImpl {
         return layerDao.remove(layer);
     }
 
-    public long saveAddedLayerAndTreeModifications(GPLayer layer,
+    public Long saveAddedLayerAndTreeModifications(GPLayer layer,
             GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n\t@@@ saveAddedLayerAndTreeModifications @@@");
@@ -204,7 +204,7 @@ class LayerServiceImpl {
         }
         this.checkFolder(parent); // TODO assert
 
-        long idParent = parent.getId();
+        Long idParent = parent.getId();
         GPFolder parentFromDB = folderDao.find(idParent);
         if (parentFromDB == null) {
             throw new ResourceNotFoundFault("Parent of layer not found", idParent);
@@ -226,7 +226,7 @@ class LayerServiceImpl {
     }
 
     public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers,
-            GPWebServiceMapData descendantsMapData, long projectId)
+            GPWebServiceMapData descendantsMapData, Long projectId)
             throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n\t@@@ saveAddedLayersAndTreeModifications @@@");
         if (layers == null || layers.isEmpty()) {
@@ -264,7 +264,7 @@ class LayerServiceImpl {
         layerDao.updatePositionsLowerBound(newPosition, increment);
         folderDao.updatePositionsLowerBound(newPosition, increment);
 
-        layerDao.persist(layers.toArray(new GPLayer[layers.size()]));
+        layerDao.merge(layers.toArray(new GPLayer[layers.size()]));
 
         ArrayList<Long> arrayList = new ArrayList<Long>(layers.size());
         for (int i = 0; i < layers.size(); i++) {
@@ -277,7 +277,7 @@ class LayerServiceImpl {
         return arrayList;
     }
 
-    public boolean saveDeletedLayerAndTreeModifications(long layerId,
+    public boolean saveDeletedLayerAndTreeModifications(Long layerId,
             GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault {
         GPLayer layer = layerDao.find(layerId);
@@ -300,7 +300,7 @@ class LayerServiceImpl {
         return result;
     }
 
-    public boolean saveCheckStatusLayerAndTreeModifications(long layerId, boolean checked)
+    public boolean saveCheckStatusLayerAndTreeModifications(Long layerId, boolean checked)
             throws ResourceNotFoundFault {
         GPLayer layer = layerDao.find(layerId);
         if (layer == null) {
@@ -324,8 +324,8 @@ class LayerServiceImpl {
      * 
      * The old and new folders (parent) will be extracted from DB
      */
-    public boolean fixCheckStatusLayerAndTreeModifications(long layerId,
-            long oldUserFolderId, long newUserFolderId) throws ResourceNotFoundFault {
+    public boolean fixCheckStatusLayerAndTreeModifications(Long layerId,
+            Long oldUserFolderId, Long newUserFolderId) throws ResourceNotFoundFault {
         // Retrieve the layer
         GPLayer layer = layerDao.find(layerId);
         if (layer == null) {
@@ -357,8 +357,8 @@ class LayerServiceImpl {
         return true;
     }
 
-    public boolean saveDragAndDropLayerModifications(long idLayerMoved,
-            long idNewParent, int newPosition, GPWebServiceMapData descendantsMapData)
+    public boolean saveDragAndDropLayerModifications(Long idLayerMoved,
+            Long idNewParent, int newPosition, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPLayer layerMoved = layerDao.find(idLayerMoved);
         if (layerMoved == null) {
@@ -366,7 +366,7 @@ class LayerServiceImpl {
         }
         this.checkLayerLog(layerMoved); // TODO assert
 
-        if (idNewParent == 0) {
+        if (idNewParent == null) {
             throw new IllegalParameterFault("New folder parent NOT declared");
         }
 
@@ -429,7 +429,7 @@ class LayerServiceImpl {
 
     public boolean saveLayerProperties(ShortRasterPropertiesDTO layerProperties)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        long layerId = layerProperties.getId();
+        Long layerId = layerProperties.getId();
         if (layerId == -1) {
             throw new IllegalParameterFault("Layer ID must be setted");
         }
@@ -463,7 +463,7 @@ class LayerServiceImpl {
         return true;
     }
 
-    public GPRasterLayer getRasterLayer(long layerId) throws ResourceNotFoundFault {
+    public GPRasterLayer getRasterLayer(Long layerId) throws ResourceNotFoundFault {
         GPRasterLayer layer = (GPRasterLayer) layerDao.find(layerId);
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
@@ -473,7 +473,7 @@ class LayerServiceImpl {
         return layer;
     }
 
-    public GPVectorLayer getVectorLayer(long layerId) throws ResourceNotFoundFault {
+    public GPVectorLayer getVectorLayer(Long layerId) throws ResourceNotFoundFault {
         GPVectorLayer layer = (GPVectorLayer) layerDao.find(layerId);
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
@@ -483,7 +483,7 @@ class LayerServiceImpl {
         return layer;
     }
     
-    public ShortLayerDTO getShortLayer(long layerId) throws ResourceNotFoundFault {
+    public ShortLayerDTO getShortLayer(Long layerId) throws ResourceNotFoundFault {
         GPLayer layer = layerDao.find(layerId);
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
@@ -493,7 +493,7 @@ class LayerServiceImpl {
         return new ShortLayerDTO(layer);
     }
 
-    public List<ShortLayerDTO> getLayers(long projectId) {
+    public List<ShortLayerDTO> getLayers(Long projectId) {
         Search searchCriteria = new Search(GPLayer.class);
 
         searchCriteria.addSortAsc("title");
@@ -506,7 +506,7 @@ class LayerServiceImpl {
         return ShortLayerDTO.convertToShortLayerDTOList(foundLayer);
     }
 
-    public GPBBox getBBox(long layerId) throws ResourceNotFoundFault {
+    public GPBBox getBBox(Long layerId) throws ResourceNotFoundFault {
         GPLayer layer = layerDao.find(layerId);
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
@@ -516,7 +516,7 @@ class LayerServiceImpl {
         return layer.getBbox();
     }
 
-    public GPLayerInfo getLayerInfo(long layerId) throws ResourceNotFoundFault {
+    public GPLayerInfo getLayerInfo(Long layerId) throws ResourceNotFoundFault {
         GPRasterLayer layer = (GPRasterLayer) layerDao.find(layerId);
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
@@ -526,7 +526,7 @@ class LayerServiceImpl {
         return layer.getLayerInfo();
     }
 
-//    public List<StyleDTO> getLayerStyles(long layerId) {
+//    public List<StyleDTO> getLayerStyles(Long layerId) {
 //        Search searchCriteria = new Search(GPStyle.class);
 //
 //        searchCriteria.addSortAsc("name");
@@ -536,7 +536,7 @@ class LayerServiceImpl {
 //        return StyleDTO.convertToStyleDTOList(foundStyle);
 //    }
 //  
-//    public Point getGeometry(long layerId) throws ResourceNotFoundFault {
+//    public Point getGeometry(Long layerId) throws ResourceNotFoundFault {
 //        GPVectorLayer layer = (GPVectorLayer)layerDao.find(layerId);
 //        if (layer == null) {
 //            throw new ResourceNotFoundFault("Layer not found", layerId);
@@ -544,7 +544,7 @@ class LayerServiceImpl {
 //
 //        return layer.getGeometry();
 //    }
-    public GPLayerType getLayerType(long layerId) throws ResourceNotFoundFault {
+    public GPLayerType getLayerType(Long layerId) throws ResourceNotFoundFault {
         GPLayer layer = layerDao.find(layerId);
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
@@ -554,7 +554,7 @@ class LayerServiceImpl {
         return layer.getLayerType();
     }
 
-    public ArrayList<String> getLayersDataSourceByProjectId(long projectId)
+    public ArrayList<String> getLayersDataSourceByProjectId(Long projectId)
             throws ResourceNotFoundFault {
         GPProject project = projectDao.find(projectId);
         if (project == null) {
@@ -623,7 +623,7 @@ class LayerServiceImpl {
 
     private void updateNumberOfElements(GPLayer layer, int delta)
             throws ResourceNotFoundFault {
-        long projectId = layer.getProject().getId();
+        Long projectId = layer.getProject().getId();
         GPProject project = projectDao.find(projectId);
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);

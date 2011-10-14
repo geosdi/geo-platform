@@ -108,9 +108,9 @@ class UserServiceImpl {
      * This method is used to insert a User
      *
      * @param user the User object to insert
-     * @return long the User ID
+     * @return Long the User ID
      */
-    public long insertUser(GPUser user) throws IllegalParameterFault {
+    public Long insertUser(GPUser user) throws IllegalParameterFault {
         GPUser duplicateUser = userDao.findByUsername(user.getUsername());
         if (duplicateUser != null) {
             throw new IllegalParameterFault("User with username \""
@@ -124,7 +124,7 @@ class UserServiceImpl {
         return user.getId();
     }
 
-    public long updateUser(GPUser user)
+    public Long updateUser(GPUser user)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPUser orig = userDao.find(user.getId());
         if (orig == null) {
@@ -157,7 +157,7 @@ class UserServiceImpl {
      *
      * @throws ResourceNotFoundFault
      */
-    public boolean deleteUser(long userId) throws ResourceNotFoundFault {
+    public boolean deleteUser(Long userId) throws ResourceNotFoundFault {
         GPUser user = userDao.find(userId);
         if (user == null) {
             throw new ResourceNotFoundFault("User not found", userId);
@@ -305,7 +305,7 @@ class UserServiceImpl {
         return user;
     }
 
-    public List<String> getUserAuthorities(long userId)
+    public List<String> getUserAuthorities(Long userId)
             throws ResourceNotFoundFault {
         // Retrieve the user
         GPUser user = userDao.find(userId);

@@ -52,7 +52,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
 @XmlRootElement(name = "UserDTO")
 public class UserDTO {
 
-    private long id;
+    private Long id;
     private String username;
     private boolean enabled;
     private boolean sendEmail;
@@ -78,7 +78,7 @@ public class UserDTO {
     /**
      * @return the id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -86,7 +86,7 @@ public class UserDTO {
      * @param id
      *            the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

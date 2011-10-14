@@ -51,8 +51,7 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
      *
      */
     private static final long serialVersionUID = 2095233644130779285L;
-    //
-    private long id;
+    private Long id;
     private String label;
     private int zIndex;
     private boolean checked = false;
@@ -67,7 +66,7 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
      * @param zIndex
      * @param checked 
      */
-    protected GPBeanTreeModel(long id, int zIndex, boolean checked) {
+    protected GPBeanTreeModel(Long id, int zIndex, boolean checked) {
         this.id = id;
         this.zIndex = zIndex;
         this.checked = checked;
@@ -81,7 +80,7 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
      * @param zIndex
      * @param checked 
      */
-    protected GPBeanTreeModel(long id, String label, int zIndex, boolean checked) {
+    protected GPBeanTreeModel(Long id, String label, int zIndex, boolean checked) {
         this.id = id;
         this.label = label;
         this.zIndex = zIndex;
@@ -91,7 +90,7 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
     /**
      * @return the id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -99,7 +98,7 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
      * @param id
      *          the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

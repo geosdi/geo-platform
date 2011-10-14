@@ -46,7 +46,7 @@ public class ResourceNotFoundFault extends Exception {
 
     private static final long serialVersionUID = 4100712158220027390L;
     //
-    private long id = -1;
+    private Long id;
 
     public ResourceNotFoundFault() {
     }
@@ -55,7 +55,7 @@ public class ResourceNotFoundFault extends Exception {
         super(msg);
     }
 
-    public ResourceNotFoundFault(String msg, long id) {
+    public ResourceNotFoundFault(String msg, Long id) {
         super(msg);
         this.id = id;
     }
@@ -64,11 +64,11 @@ public class ResourceNotFoundFault extends Exception {
         super(message, cause);
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

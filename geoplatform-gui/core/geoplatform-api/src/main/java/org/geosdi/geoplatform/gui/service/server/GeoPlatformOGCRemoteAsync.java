@@ -52,13 +52,13 @@ public interface GeoPlatformOGCRemoteAsync {
     public void loadServers(AsyncCallback<ArrayList<GPServerBeanModel>> callback)
             throws GeoPlatformException;
 
-    public void getServerDetails(long idServer,
+    public void getServerDetails(Long idServer,
             AsyncCallback<GPServerBeanModel> callback) throws GeoPlatformException;
     
-    public void deleteServer(long idServer,
+    public void deleteServer(Long idServer,
             AsyncCallback<Boolean> callback) throws GeoPlatformException;
 
-    public void getCapabilities(long idServer,
+    public void getCapabilities(Long idServer,
             AsyncCallback<ArrayList<? extends GPLayerGrid>> callback) throws GeoPlatformException;
 
     public void insertServer(Long id, String aliasServerName, String urlServer,

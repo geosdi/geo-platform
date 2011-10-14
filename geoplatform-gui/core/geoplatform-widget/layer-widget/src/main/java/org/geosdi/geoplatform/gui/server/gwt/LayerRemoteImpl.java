@@ -70,29 +70,29 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     }
 
     @Override
-    public ArrayList<IGPFolderElements> loadFolderElements(long folderId) throws GeoPlatformException {
+    public ArrayList<IGPFolderElements> loadFolderElements(Long folderId) throws GeoPlatformException {
         return this.layerService.loadFolderElements(folderId, super.getThreadLocalRequest());
     }
 
     @Override
-    public long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
+    public Long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
         return this.layerService.saveFolderForUser(folderName, position, numberOfDescendants, 
                 isChecked, super.getThreadLocalRequest());
     }
 
     @Override
-    public long saveFolder(long idParentFolder, String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
+    public Long saveFolder(Long idParentFolder, String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
         return this.layerService.saveFolder(idParentFolder, folderName,
                 position, numberOfDescendants, isChecked, super.getThreadLocalRequest());
     }
 
     @Override
-    public void deleteElement(long id, TreeElement elementType) throws GeoPlatformException {
+    public void deleteElement(Long id, TreeElement elementType) throws GeoPlatformException {
         this.layerService.deleteElement(id, elementType, super.getThreadLocalRequest());
     }
 
     @Override
-    public long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento) throws GeoPlatformException {
+    public Long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento) throws GeoPlatformException {
         return this.layerService.saveAddedFolderAndTreeModifications(memento, super.getThreadLocalRequest());
     }
     

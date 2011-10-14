@@ -45,82 +45,81 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "RequestById")
 public class RequestById {
 
-	private long id;
-	private int page;
-	private int num;
+    private Long id;
+    private int page;
+    private int num;
 
-	/**
+    /**
      * 
      */
-	public RequestById() {
-	}
+    public RequestById() {
+    }
 
-	/**
-	 * @param id
-	 */
-	public RequestById(long id) {
-		this.id = id;
-	}
+    /**
+     * @param id
+     */
+    public RequestById(Long id) {
+        this.id = id;
+    }
 
-	/**
-	 * @param id
-	 * @param pag
-	 * @param num
-	 */
-	public RequestById(long id, int page, int num) {
-		super();
-		this.id = id;
-		this.page = page;
-		this.num = num;
-	}
+    /**
+     * @param id
+     * @param pag
+     * @param num
+     */
+    public RequestById(Long id, int page, int num) {
+        super();
+        this.id = id;
+        this.page = page;
+        this.num = num;
+    }
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	/**
-	 * @return the id
-	 */
-	@XmlElement(required = true, nillable = false)
-	public long getId() {
-		return id;
-	}
+    /**
+     * @return the id
+     */
+    @XmlElement(required = true, nillable = false)
+    public Long getId() {
+        return id;
+    }
 
-	/**
-	 * @return int
-	 */
-	public int getPage() {
-		return page;
-	}
+    /**
+     * @return int
+     */
+    public int getPage() {
+        return page;
+    }
 
-	/**
-	 * @param pag
-	 */
-	public void setPage(int page) {
-		this.page = page;
-	}
+    /**
+     * @param pag
+     */
+    public void setPage(int page) {
+        this.page = page;
+    }
 
-	/**
-	 * @return int
-	 */
-	public int getNum() {
-		return num;
-	}
+    /**
+     * @return int
+     */
+    public int getNum() {
+        return num;
+    }
 
-	/**
-	 * @param num
-	 */
-	public void setNum(int num) {
-		this.num = num;
-	}
+    /**
+     * @param num
+     */
+    public void setNum(int num) {
+        this.num = num;
+    }
 
-	@Override
-	public String toString() {
-		return "RequestById [id=" + id + ", num=" + num + ", pag=" + page + "]";
-	}
-
+    @Override
+    public String toString() {
+        return "RequestById [id=" + id + ", num=" + num + ", pag=" + page + "]";
+    }
 }

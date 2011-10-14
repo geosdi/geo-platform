@@ -223,7 +223,7 @@ public class DTOConverter {
         gpFolder.setChecked(memento.isChecked());
         gpFolder.setId(memento.getIdBaseElement());
         gpFolder.setNumberOfDescendants(memento.getNumberOfDescendants());
-        if (memento.getIdParent() != 0L) {
+        if (memento.getIdParent() != null) {
             GPFolder parent = new GPFolder();
             parent.setId(memento.getIdParent());
             gpFolder.setParent(parent);

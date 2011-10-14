@@ -99,7 +99,7 @@ class FolderServiceImpl {
     // ==========================================================================
     // === Folder
     // ==========================================================================    
-    public long insertFolder(GPFolder folder, long projectId)
+    public Long insertFolder(GPFolder folder, Long projectId)
             throws IllegalParameterFault {
         logger.trace("\n\t@@@ insertFolder @@@");
         GPProject project = projectDao.find(projectId);
@@ -111,7 +111,7 @@ class FolderServiceImpl {
         return folder.getId();
     }
 
-    public long updateFolder(GPFolder folder)
+    public Long updateFolder(GPFolder folder)
             throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n\t@@@ updateFolder @@@");
         this.checkFolder(folder); // TODO assert
@@ -135,7 +135,7 @@ class FolderServiceImpl {
         return origFolder.getId();
     }
 
-    public long saveFolderProperties(long folderId, String name, boolean checked)
+    public Long saveFolderProperties(Long folderId, String name, boolean checked)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder orig = folderDao.find(folderId);
         if (orig == null) {
@@ -152,7 +152,7 @@ class FolderServiceImpl {
         return orig.getId();
     }
 
-    public boolean deleteFolder(long folderId)
+    public boolean deleteFolder(Long folderId)
             throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ deleteFolder @@@");
         GPFolder folder = folderDao.find(folderId);
@@ -164,8 +164,8 @@ class FolderServiceImpl {
         return folderDao.remove(folder);
     }
 
-    public long saveAddedFolderAndTreeModifications(GPFolder folder, 
-                GPWebServiceMapData descendantsMapData, long projectId)
+    public Long saveAddedFolderAndTreeModifications(GPFolder folder, 
+                GPWebServiceMapData descendantsMapData, Long projectId)
             throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n\t@@@ saveAddedFolderAndTreeModifications @@@");
         GPProject project = projectDao.find(projectId);
@@ -202,7 +202,7 @@ class FolderServiceImpl {
         return folder.getId();
     }
 
-    public boolean saveDeletedFolderAndTreeModifications(long folderId, GPWebServiceMapData descendantsMapData)
+    public boolean saveDeletedFolderAndTreeModifications(Long folderId, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(folderId);
         if (folder == null) {
@@ -225,7 +225,7 @@ class FolderServiceImpl {
         return result;
     }
 
-    public boolean saveCheckStatusFolderAndTreeModifications(long folderId, boolean checked)
+    public boolean saveCheckStatusFolderAndTreeModifications(Long folderId, boolean checked)
             throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(folderId);
         if (folder == null) {
@@ -245,7 +245,7 @@ class FolderServiceImpl {
      * @return
      * @throws ResourceNotFoundFault 
      */
-    public boolean saveDragAndDropFolderModifications(long idFolderMoved, long idNewParent,
+    public boolean saveDragAndDropFolderModifications(Long idFolderMoved, Long idNewParent,
             int newPosition, GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
         GPFolder folderMoved = folderDao.find(idFolderMoved);
         if (folderMoved == null) {
@@ -254,7 +254,7 @@ class FolderServiceImpl {
 //        assert (folderMoved.getPosition() != newPosition) : "New Position must be NOT equal to Old Position";
         this.checkFolderLog(folderMoved); // TODO assert
 
-        if (idNewParent != 0) {
+        if (idNewParent != null) {
             logger.trace("*** Folder will have a Parent");
             GPFolder folderParent = folderDao.find(idNewParent);
             if (folderParent == null) {
@@ -344,7 +344,7 @@ class FolderServiceImpl {
         }
     }
 
-    public FolderDTO getShortFolder(long folderId) throws ResourceNotFoundFault {
+    public FolderDTO getShortFolder(Long folderId) throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(folderId);
         if (folder == null) {
             throw new ResourceNotFoundFault("Folder not found", folderId);
@@ -355,7 +355,7 @@ class FolderServiceImpl {
         return folderDTO;
     }
 
-    public GPFolder getFolderDetail(long folderId) throws ResourceNotFoundFault {
+    public GPFolder getFolderDetail(Long folderId) throws ResourceNotFoundFault {
         GPFolder folder = folderDao.find(folderId);
         if (folder == null) {
             throw new ResourceNotFoundFault("Folder not found", folderId);
@@ -406,7 +406,7 @@ class FolderServiceImpl {
         return FolderDTO.convertToFolderDTOList(foundFolder);
     }
 
-    public List<FolderDTO> getChildrenFolders(long folderId) {
+    public List<FolderDTO> getChildrenFolders(Long folderId) {
         Search searchCriteria = new Search(GPFolder.class);
 
         searchCriteria.addSortAsc("name");
@@ -416,7 +416,7 @@ class FolderServiceImpl {
         return FolderDTO.convertToFolderDTOList(foundFolder);
     }
 
-    public TreeFolderElements getChildrenElements(long folderId) {
+    public TreeFolderElements getChildrenElements(Long folderId) {
         TreeFolderElements tree = new TreeFolderElements();
 
         Search searchCriteria = new Search(GPFolder.class);
@@ -435,7 +435,7 @@ class FolderServiceImpl {
 
     private void updateNumberOfElements(GPFolder folder, int delta)
             throws ResourceNotFoundFault {
-        long projectId = folder.getProject().getId();
+        Long projectId = folder.getProject().getId();
         GPProject project = projectDao.find(projectId);
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);

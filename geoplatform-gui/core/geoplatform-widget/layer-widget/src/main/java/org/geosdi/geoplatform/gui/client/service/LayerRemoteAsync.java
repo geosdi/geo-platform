@@ -56,7 +56,7 @@ public interface LayerRemoteAsync {
 
     public void loadUserFolders(AsyncCallback<ArrayList<GPFolderClientInfo>> callback);
 
-    public void loadFolderElements(long folderId, AsyncCallback<ArrayList<IGPFolderElements>> callback);
+    public void loadFolderElements(Long folderId, AsyncCallback<ArrayList<IGPFolderElements>> callback);
 
     public void saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento, AsyncCallback<Long> callback);
 
@@ -81,10 +81,10 @@ public interface LayerRemoteAsync {
     public void saveFolderForUser(String folderName, int position, int numberOfDescendants,
             boolean isChecked, AsyncCallback<Long> callback);
 
-    public void saveFolder(long idParentFolder, String folderName, int position,
+    public void saveFolder(Long idParentFolder, String folderName, int position,
             int numberOfDescendants, boolean isChecked, AsyncCallback<Long> callback);
 
-    public void deleteElement(long id, TreeElement elementType, AsyncCallback<?> callback);
+    public void deleteElement(Long id, TreeElement elementType, AsyncCallback<?> callback);
 
     public void checkWmsGetMapUrl(String url, AsyncCallback<Boolean> callback);
 

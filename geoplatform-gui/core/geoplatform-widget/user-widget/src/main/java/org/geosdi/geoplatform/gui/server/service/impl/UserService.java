@@ -77,21 +77,21 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public long insertUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
+    public Long insertUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         // TODO
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public long updateUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
+    public Long updateUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         // TODO
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public boolean deleteUser(long userId, HttpServletRequest httpServletRequest)
+    public boolean deleteUser(Long userId, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         // TODO
         throw new UnsupportedOperationException("Not supported yet.");

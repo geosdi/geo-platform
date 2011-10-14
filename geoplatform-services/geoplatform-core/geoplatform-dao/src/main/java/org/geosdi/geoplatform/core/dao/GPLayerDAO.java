@@ -69,7 +69,7 @@ public interface GPLayerDAO {
 
     public GPLayer findByLayerName(String layerName);
 
-    public ArrayList<String> findDistinctDataSourceByProjectId(long projectId);
+    public ArrayList<String> findDistinctDataSourceByProjectId(Long projectId);
 
     public boolean updatePositionsRangeInOppositeWay(int beginPositionFirstRange, int endPositionFirstRange,
             int beginPositionSecondRange, int endPositionSecondRange,
@@ -81,5 +81,5 @@ public interface GPLayerDAO {
     public boolean updatePositionsLowerBound(int lowerBoundPosition,
             int deltaValue);
 
-    public boolean persistCheckStatusLayer(long idLayer, boolean checked);
+    public boolean persistCheckStatusLayer(Long idLayer, boolean checked);
 }

@@ -63,7 +63,7 @@ public class MementoSaveBuilder {
 
     public static MementoFolder buildSaveFolderMemento(FolderTreeNode folder) {
         MementoFolder memento = new MementoFolder();
-        if (folder.getId() != 0L) {
+        if (folder.getId() != null) {
             memento.setIdBaseElement(folder.getId());
         } else {
             memento.setRefBaseElement(folder);
@@ -110,7 +110,7 @@ public class MementoSaveBuilder {
 
     private static void convertToMementoLayerFromLayerModel(AbstractMementoLayer memento, GPLayerTreeModel layer) {
         memento.setRefBaseElement(layer);
-        if (layer.getId() != 0L) {
+        if (layer.getId() != null) {
             memento.setIdBaseElement(layer.getId());
         } else {
             layer.getObservable().addObserver(memento);

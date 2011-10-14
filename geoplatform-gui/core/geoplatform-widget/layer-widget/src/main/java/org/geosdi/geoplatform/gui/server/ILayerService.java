@@ -55,17 +55,13 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public interface ILayerService {
 
-//    public ArrayList<FolderTreeNode> loadUserFolders(String userName)
-//            throws GeoPlatformException;
     public ArrayList<GPFolderClientInfo> loadUserFolders(HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-//    public ArrayList<GPBeanTreeModel> loadFolderElements(long folderId)
-//            throws GeoPlatformException;
-    public ArrayList<IGPFolderElements> loadFolderElements(long folderId, HttpServletRequest httpServletRequest)
+    public ArrayList<IGPFolderElements> loadFolderElements(Long folderId, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    public long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento,
+    public Long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
@@ -99,15 +95,15 @@ public interface ILayerService {
     public boolean saveFolderProperties(MementoFolderOriginalProperties memento, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    public long saveFolderForUser(String folderName, int position, int numberOfDescendants, 
+    public Long saveFolderForUser(String folderName, int position, int numberOfDescendants, 
             boolean isChecked, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    public long saveFolder(long idParentFolder, String folderName, int position, 
+    public Long saveFolder(Long idParentFolder, String folderName, int position, 
             int numberOfDescendants, boolean isChecked, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    public void deleteElement(long id, TreeElement elementType, HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    public void deleteElement(Long id, TreeElement elementType, HttpServletRequest httpServletRequest) throws GeoPlatformException;
     
     public boolean checkWmsGetMapUrl(String url) throws GeoPlatformException;
     

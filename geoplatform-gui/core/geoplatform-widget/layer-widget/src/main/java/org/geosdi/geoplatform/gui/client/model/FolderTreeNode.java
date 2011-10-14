@@ -139,7 +139,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
     }
 
     @Override
-    public void setId(long id) {
+    public void setId(Long id) {
         super.setId(id);
         observable.setChanged();
         observable.notifyObservers(id);

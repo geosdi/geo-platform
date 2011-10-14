@@ -60,5 +60,5 @@ public interface AclObjectIdentityDAO {
 
     public boolean removeById(Long id);
 
-    public AclObjectIdentity findByObjectId(long objectIdClass, long objectIdIdentity);
+    public AclObjectIdentity findByObjectId(Long objectIdClass, Long objectIdIdentity);
 }

@@ -78,6 +78,6 @@ public class GPServerExpander extends GPTreeExpanderNotifier<AbstractFolderTreeN
 
     @Override
     public boolean checkNode() {
-        return ((AbstractFolderTreeNode) this.tree.getSelectionModel().getSelectedItem()).getId() == 0L;
+        return ((AbstractFolderTreeNode) this.tree.getSelectionModel().getSelectedItem()).getId() == null;
     }
 }

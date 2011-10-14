@@ -66,7 +66,7 @@ public interface UserRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException 
      */
-    long insertUser(IGPUserManageDetail userDetail) throws GeoPlatformException;
+    Long insertUser(IGPUserManageDetail userDetail) throws GeoPlatformException;
 
     /**
      * 
@@ -74,7 +74,7 @@ public interface UserRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException 
      */
-    long updateUser(IGPUserManageDetail userDetail) throws GeoPlatformException;
+    Long updateUser(IGPUserManageDetail userDetail) throws GeoPlatformException;
 
     /**
      * 
@@ -82,7 +82,7 @@ public interface UserRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException 
      */
-    boolean deleteUser(long userId) throws GeoPlatformException;
+    boolean deleteUser(Long userId) throws GeoPlatformException;
 
     /**
      * 

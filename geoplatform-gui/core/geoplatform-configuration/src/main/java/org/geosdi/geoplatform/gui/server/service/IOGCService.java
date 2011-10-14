@@ -55,14 +55,14 @@ public interface IOGCService {
     public ArrayList<GPServerBeanModel> loadServers()
             throws GeoPlatformException;
 
-    public GPServerBeanModel getServerDetails(long idServer)
+    public GPServerBeanModel getServerDetails(Long idServer)
             throws GeoPlatformException;
 
-    public Boolean deleteServer(long idServer)
+    public Boolean deleteServer(Long idServer)
             throws GeoPlatformException;
 
     public ArrayList<? extends GPLayerGrid> getCapabilities(
-            HttpServletRequest httpServletRequest, long idServer)
+            HttpServletRequest httpServletRequest, Long idServer)
             throws GeoPlatformException;
 
     public GPServerBeanModel insertServer(Long id, String aliasServerName, String urlServer)

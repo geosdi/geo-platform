@@ -90,7 +90,7 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
     }
 
     @Override
-    public ArrayList<String> findDistinctDataSourceByProjectId(long projectId) {
+    public ArrayList<String> findDistinctDataSourceByProjectId(Long projectId) {
         Search search = new Search();
         search.addFilterEqual("project.id", projectId);
         search.addField("urlServer");
@@ -254,7 +254,7 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
     }
 
     @Override
-    public boolean persistCheckStatusLayer(long idLayer, boolean checked) {
+    public boolean persistCheckStatusLayer(Long idLayer, boolean checked) {
         // Retrieve the layer
         GPLayer layer = this.find(idLayer);
         if (layer == null) {

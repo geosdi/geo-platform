@@ -46,8 +46,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "RequestByUserProject")
 public class RequestByUserProject {
 
-    private long userId;
-    private long projectId;
+    private Long userId;
+    private Long projectId;
 
 
     public RequestByUserProject() {
@@ -57,25 +57,25 @@ public class RequestByUserProject {
      * @param userId
      * @param projectId
      */
-    public RequestByUserProject(long userId, long projectId) {
+    public RequestByUserProject(Long userId, Long projectId) {
         super();
         this.userId = userId;
         this.projectId = projectId;
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public long getProjectId() {
+    public Long getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(long projectId) {
+    public void setProjectId(Long projectId) {
         this.projectId = projectId;
     }
 }

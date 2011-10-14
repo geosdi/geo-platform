@@ -53,7 +53,7 @@ public abstract class AbstractMementoLayer<T extends GPLayerTreeModel>
     private String layerName;
     private int zIndex;
     private transient FolderTreeNode refParent;
-    private long idFolderParent;
+    private Long idFolderParent;
     private String abstractText;
     private String title;
 //    private String alias;
@@ -195,11 +195,11 @@ public abstract class AbstractMementoLayer<T extends GPLayerTreeModel>
         this.zIndex = zIndex;
     }
 
-    public long getIdFolderParent() {
+    public Long getIdFolderParent() {
         return idFolderParent;
     }
 
-    public void setIdFolderParent(long idFolderParent) {
+    public void setIdFolderParent(Long idFolderParent) {
         this.idFolderParent = idFolderParent;
     }
 

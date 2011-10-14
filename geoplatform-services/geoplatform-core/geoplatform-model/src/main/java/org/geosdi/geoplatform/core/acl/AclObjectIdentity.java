@@ -74,7 +74,7 @@ public class AclObjectIdentity {
     private AclClass aclClass;
     //
     @Column(name = "object_id_identity", nullable = false)
-    private long objectId;
+    private Long objectId;
     //
     @ManyToOne
     @JoinColumn(name = "parent_object")
@@ -98,7 +98,7 @@ public class AclObjectIdentity {
      * @param objectId
      * @param aclSid
      */
-    public AclObjectIdentity(AclClass aclClass, long objectId, AclSid aclSid) {
+    public AclObjectIdentity(AclClass aclClass, Long objectId, AclSid aclSid) {
         this.aclClass = aclClass;
         this.objectId = objectId;
         this.aclSid = aclSid;
@@ -112,7 +112,7 @@ public class AclObjectIdentity {
      * @param aclSid
      * @param parentAclObject 
      */
-    public AclObjectIdentity(AclClass aclClass, long objectId, AclSid aclSid,
+    public AclObjectIdentity(AclClass aclClass, Long objectId, AclSid aclSid,
             AclObjectIdentity parentAclObject) {
         this.aclClass = aclClass;
         this.objectId = objectId;
@@ -154,14 +154,14 @@ public class AclObjectIdentity {
     /**
      * @return the objectId
      */
-    public long getObjectId() {
+    public Long getObjectId() {
         return objectId;
     }
 
     /**
      * @param objectId the objectId to set
      */
-    public void setObjectId(long objectId) {
+    public void setObjectId(Long objectId) {
         this.objectId = objectId;
     }
 

@@ -42,9 +42,13 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public interface ButtonHandler extends EventHandler{
-    
-    Type<ButtonHandler> TYPE = new Type<ButtonHandler>();
-    
+public interface ReverseGeocodingButtonModelHandler extends EventHandler {
+
+    Type<ReverseGeocodingButtonModelHandler> TYPE = new Type<ReverseGeocodingButtonModelHandler>();
+
     public void onEnabling(boolean isEnabled);
+    
+    public void onUpdateModel(String location);
+    
+    public void onUpdateButtonAndModel(String location);
 }

@@ -43,6 +43,8 @@ import org.geosdi.geoplatform.gui.client.widget.map.popup.template.PopupTemplate
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.GPToolbarActionHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.event.UpdateModelEvent;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.event.MapClickListener;
 
@@ -123,6 +125,8 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
         this.mapWidget.getMap().addPopup(this.popupWidget.getPopup());
         this.busy = false;
+
+        GPToolbarActionHandlerManager.fireEvent(new UpdateModelEvent(location));
     }
 
     /**

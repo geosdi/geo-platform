@@ -48,4 +48,6 @@ public interface IGeoPlatformLocation {
     public double getLat();
 
     public void setLat(double lat);
+    
+    public String getDescription();
 }

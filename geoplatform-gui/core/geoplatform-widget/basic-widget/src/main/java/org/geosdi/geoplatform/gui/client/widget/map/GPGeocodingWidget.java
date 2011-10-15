@@ -40,6 +40,8 @@ import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.GeocodingVec
 import org.geosdi.geoplatform.gui.client.widget.map.popup.PopupMapWidget;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
+import org.geosdi.geoplatform.gui.puregwt.GPToolbarActionHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.event.UpdateModelAndButtonEvent;
 import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 import org.gwtopenmaps.openlayers.client.LonLat;
 
@@ -79,6 +81,7 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
         LonLat center = new LonLat(bean.getLon(), bean.getLat());
         center.transform("EPSG:4326", this.mapWidget.getMap().getProjection());
         this.geocoderMarker.addMarker(center, this.mapWidget.getMap());
+        GPToolbarActionHandlerManager.fireEvent(new UpdateModelAndButtonEvent(bean.getDescription()));
     }
 
     /**

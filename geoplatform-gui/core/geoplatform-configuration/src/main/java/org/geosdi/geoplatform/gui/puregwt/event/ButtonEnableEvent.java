@@ -42,7 +42,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public class ButtonEnableEvent extends GwtEvent<ButtonHandler> {
+public class ButtonEnableEvent extends GwtEvent<ReverseGeocodingButtonModelHandler> {
 
     private boolean enabled;
     
@@ -51,12 +51,12 @@ public class ButtonEnableEvent extends GwtEvent<ButtonHandler> {
     }
     
     @Override
-    public Type<ButtonHandler> getAssociatedType() {
-        return ButtonHandler.TYPE;
+    public Type<ReverseGeocodingButtonModelHandler> getAssociatedType() {
+        return ReverseGeocodingButtonModelHandler.TYPE;
     }
 
     @Override
-    protected void dispatch(ButtonHandler handler) {
+    protected void dispatch(ReverseGeocodingButtonModelHandler handler) {
         handler.onEnabling(this.enabled);
     }
     

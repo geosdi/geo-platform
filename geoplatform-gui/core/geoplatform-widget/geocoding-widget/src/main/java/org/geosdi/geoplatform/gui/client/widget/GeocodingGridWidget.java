@@ -42,7 +42,6 @@ import org.geosdi.geoplatform.gui.client.GeocodingEvents;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
@@ -63,6 +62,7 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
+import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.RegisterGeocodingLocationEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt.event.GPGeocodingRemoveMarkerEvent;
 import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
@@ -153,9 +153,8 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean> {
 
             @Override
             public void handleEvent(BaseEvent be) {
-                Dispatcher.forwardEvent(
-                        GeoPlatformEvents.REGISTER_GEOCODING_LOCATION,
-                        grid.getSelectionModel().getSelectedItem());
+                GPGeocodingHandlerManager.fireEvent(
+                        new RegisterGeocodingLocationEvent(grid.getSelectionModel().getSelectedItem()));
             }
         });
     }

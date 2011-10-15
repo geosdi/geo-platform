@@ -33,35 +33,32 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.marker.advanced;
+package org.geosdi.geoplatform.gui.client.widget.map.event.geocoding;
 
-import com.google.gwt.core.client.GWT;
-import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GeocodingVectorMarker extends GPVectorMarkerLayer {
-
-    @Override
-    public void setIconStyle() {
-        style.setExternalGraphic(GWT.getModuleBaseURL()
-                + "/gp-images/vector_marker.png");
+public class RegisterGeocodingLocationEvent extends GwtEvent<GeocodingEventHandler> {
+    
+    private IGeoPlatformLocation bean;
+    
+    public RegisterGeocodingLocationEvent(IGeoPlatformLocation theBean) {
+        this.bean = theBean;
     }
-
+    
     @Override
-    public void buildMarkerLayer() {
-        this.markerLayer = new Vector("GPGeocoding-Marker-Vector-Layer");
-        this.markerLayer.setZIndex(982);
+    public Type<GeocodingEventHandler> getAssociatedType() {
+        return GeocodingEventHandler.TYPE;
     }
-
+    
     @Override
-    public void addMarker(LonLat lonlat, Map map) {
-        map.setCenter(lonlat, 16);
-        super.drawFeature(lonlat);
+    protected void dispatch(GeocodingEventHandler handler) {
+        handler.onRegisterGeocodingLocation(bean);
     }
 }

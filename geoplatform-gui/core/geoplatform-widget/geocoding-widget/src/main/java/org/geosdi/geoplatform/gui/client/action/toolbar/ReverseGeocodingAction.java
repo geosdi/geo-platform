@@ -37,14 +37,15 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 
 import org.geosdi.geoplatform.gui.action.MapToggleAction;
 import org.geosdi.geoplatform.gui.client.GeocodingResources;
-import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingEvent;
+
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
-import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingToggleEvent;
-import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingToggleEventHandler;
+import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingEvent;
+import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingToggleEvent;
+import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingToggleEventHandler;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

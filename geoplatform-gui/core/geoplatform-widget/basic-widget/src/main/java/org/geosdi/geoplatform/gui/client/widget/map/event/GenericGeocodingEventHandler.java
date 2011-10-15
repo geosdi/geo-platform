@@ -33,35 +33,18 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.marker.advanced;
+package org.geosdi.geoplatform.gui.client.widget.map.event;
 
-import com.google.gwt.core.client.GWT;
-import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import com.google.gwt.event.shared.EventHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GeocodingVectorMarker extends GPVectorMarkerLayer {
+public interface GenericGeocodingEventHandler extends EventHandler {
+    
+    public void register();
 
-    @Override
-    public void setIconStyle() {
-        style.setExternalGraphic(GWT.getModuleBaseURL()
-                + "/gp-images/vector_marker.png");
-    }
-
-    @Override
-    public void buildMarkerLayer() {
-        this.markerLayer = new Vector("GPGeocoding-Marker-Vector-Layer");
-        this.markerLayer.setZIndex(982);
-    }
-
-    @Override
-    public void addMarker(LonLat lonlat, Map map) {
-        map.setCenter(lonlat, 16);
-        super.drawFeature(lonlat);
-    }
+    public void unregister();
 }

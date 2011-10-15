@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.event;
+package org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding;
 
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
 

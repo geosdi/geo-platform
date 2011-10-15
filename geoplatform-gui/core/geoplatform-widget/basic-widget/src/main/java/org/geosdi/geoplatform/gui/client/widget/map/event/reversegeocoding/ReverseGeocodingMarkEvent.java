@@ -33,15 +33,43 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.event;
+package org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding;
 
-import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import org.gwtopenmaps.openlayers.client.LonLat;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public interface ReverseGeocodingToggleEventHandler extends EventHandler {
+public class ReverseGeocodingMarkEvent extends GwtEvent<ReverseGeocodingEventHandler> {
+    
+    private LonLat lonlat;
 
-    public void onToggle(boolean toggled);
+    public ReverseGeocodingMarkEvent() {
+    }
+    
+    
+    public ReverseGeocodingMarkEvent(LonLat theLonLat) {
+        this.lonlat = theLonLat;
+    }
+
+    @Override
+    public Type<ReverseGeocodingEventHandler> getAssociatedType() {
+        return ReverseGeocodingEventHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(ReverseGeocodingEventHandler handler) {
+        handler.onAddMarkerByLatLon(lonlat);
+    }
+
+    /**
+     * @param lonlat the lonlat to set
+     */
+    public void setLonlat(LonLat lonlat) {
+        this.lonlat = lonlat;
+    }
+    
 }

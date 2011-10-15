@@ -33,31 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.event;
+package org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding;
 
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.EventHandler;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public class ReverseGeocodingToggleEvent extends GwtEvent<ReverseGeocodingToggleEventHandler> {
+public interface ReverseGeocodingToggleEventHandler extends EventHandler {
 
-    public static Type<ReverseGeocodingToggleEventHandler> TYPE = new Type<ReverseGeocodingToggleEventHandler>();
-    private boolean toggled;
-
-    public ReverseGeocodingToggleEvent(boolean isToggled) {
-        this.toggled = isToggled;
-    }
-
-    @Override
-    public Type<ReverseGeocodingToggleEventHandler> getAssociatedType() {
-        return TYPE;
-    }
-
-    @Override
-    protected void dispatch(ReverseGeocodingToggleEventHandler handler) {
-        handler.onToggle(toggled);
-    }
+    public void onToggle(boolean toggled);
 }

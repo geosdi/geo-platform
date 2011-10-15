@@ -33,24 +33,51 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.event;
+package org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding;
 
-import com.google.gwt.event.shared.EventHandler;
-import org.gwtopenmaps.openlayers.client.LonLat;
+import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
+
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
- * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email michele.santomauro@geosdi.org
- * 
  */
-public interface ReverseGeocodingEventHandler extends EventHandler {
+public class ReverseGeocodingDispatchEvent extends GwtEvent<ReverseGeocodingDispatchHandler> {
 
-    public void register();
+    private ReverseGeocodingWidget widget;
 
-    public void unregister();
+    /**
+     * @Construct
+     * 
+     * @param theWidget
+     */
+    public ReverseGeocodingDispatchEvent(ReverseGeocodingWidget theWidget) {
+        this.widget = theWidget;
+    }
 
-    public void onAddMarkerByLatLon(LonLat theLonLat);
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+     */
+    @Override
+    public Type<ReverseGeocodingDispatchHandler> getAssociatedType() {
+        // TODO Auto-generated method stub
+        return ReverseGeocodingDispatchHandler.TYPE;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+     * .EventHandler)
+     */
+    @Override
+    protected void dispatch(ReverseGeocodingDispatchHandler handler) {
+        // TODO Auto-generated method stub
+        handler.processRequest(widget);
+    }
 }

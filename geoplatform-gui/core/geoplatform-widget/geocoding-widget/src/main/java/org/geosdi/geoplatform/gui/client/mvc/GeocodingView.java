@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
+import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.GeocodingActivationEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt.event.GPGeocodingRemoveMarkerEvent;
 import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
@@ -56,10 +57,11 @@ import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class GeocodingView extends GeoPlatformView {
-    
+
     private GeocodingManagementWidget geocodingManagement;
     private ReverseGeocodingDispatcher reverseDispatcher;
-    
+    private GeocodingActivationEvent activationEvent = new GeocodingActivationEvent();
+
     public GeocodingView(Controller controller) {
         super(controller);
         // TODO Auto-generated constructor stub
@@ -88,7 +90,7 @@ public class GeocodingView extends GeoPlatformView {
         if (event.getType() == GeocodingEvents.SHOW_GEOCODING_WIDGET) {
             onShowGeocodingWidget();
         }
-        
+
         if (event.getType() == GeocodingEvents.HIDE_GEOCODING_WIDGET) {
             onHideGeocodingWidget();
         }
@@ -104,8 +106,9 @@ public class GeocodingView extends GeoPlatformView {
             if (!LayoutManager.isOneWidgetVisibleAtWest()) {
                 LayoutManager.manageWest(false);
             }
+            this.activationEvent.setActivate(false);
+            fireEvent();
         }
-        GPGeocodingHandlerManager.fireEvent(new GPGeocodingRemoveMarkerEvent());
     }
 
     /**
@@ -117,6 +120,8 @@ public class GeocodingView extends GeoPlatformView {
             LayoutManager.manageWest(true);
         }
         LayoutManager.addComponentToWest(geocodingManagement);
+        this.activationEvent.setActivate(true);
+        fireEvent();
     }
 
     /**
@@ -155,8 +160,16 @@ public class GeocodingView extends GeoPlatformView {
     public void fillStore(ArrayList<GeocodingBean> beans) {
         this.geocodingManagement.getGeocodingGridWidget().fillStore(beans);
     }
-    
+
     public Grid<GeocodingBean> getGrid() {
         return this.geocodingManagement.getGeocodingGridWidget().getGrid();
+    }
+
+    /**
+     * Fire Event to Activate / Deactivate GeocodingWidget
+     * 
+     */
+    private void fireEvent() {
+        GPGeocodingHandlerManager.fireEvent(activationEvent);
     }
 }

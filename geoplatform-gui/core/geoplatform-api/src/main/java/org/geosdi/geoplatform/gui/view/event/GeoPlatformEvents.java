@@ -49,8 +49,6 @@ public class GeoPlatformEvents {
     
     public static final EventType APPLICATION_FIRST_LOGIN = new EventType();
 
-    public static final EventType REGISTER_GEOCODING_LOCATION = new EventType();
-
     public static final EventType SCALE_REQUEST_CHANGE = new EventType();
 
     public static final EventType ZOOM_TO_MAX_EXTEND = new EventType();

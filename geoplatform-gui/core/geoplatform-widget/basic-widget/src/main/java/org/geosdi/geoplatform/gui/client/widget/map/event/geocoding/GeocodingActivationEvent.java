@@ -33,35 +33,38 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.marker.advanced;
+package org.geosdi.geoplatform.gui.client.widget.map.event.geocoding;
 
-import com.google.gwt.core.client.GWT;
-import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GeocodingVectorMarker extends GPVectorMarkerLayer {
+public class GeocodingActivationEvent extends GwtEvent<GeocodingEventHandler> {
+
+    private boolean activate;
 
     @Override
-    public void setIconStyle() {
-        style.setExternalGraphic(GWT.getModuleBaseURL()
-                + "/gp-images/vector_marker.png");
+    public Type<GeocodingEventHandler> getAssociatedType() {
+        return GeocodingEventHandler.TYPE;
     }
 
     @Override
-    public void buildMarkerLayer() {
-        this.markerLayer = new Vector("GPGeocoding-Marker-Vector-Layer");
-        this.markerLayer.setZIndex(982);
+    protected void dispatch(GeocodingEventHandler handler) {
+        if (activate) {
+            handler.register();
+        } else {
+            handler.unregister();
+        }
     }
 
-    @Override
-    public void addMarker(LonLat lonlat, Map map) {
-        map.setCenter(lonlat, 16);
-        super.drawFeature(lonlat);
+    /**
+     * @param activate the activate to set
+     */
+    public void setActivate(boolean activate) {
+        this.activate = activate;
     }
 }

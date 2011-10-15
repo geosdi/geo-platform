@@ -33,9 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.event;
-
-import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
+package org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding;
 
 import com.google.gwt.event.shared.GwtEvent;
 
@@ -44,40 +42,26 @@ import com.google.gwt.event.shared.GwtEvent;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class ReverseGeocodingDispatchEvent extends GwtEvent<ReverseGeocodingDispatchHandler> {
+public class ReverseGeocodingEvent
+        extends GwtEvent<ReverseGeocodingEventHandler> {
+    
+    private boolean activate;
 
-    private ReverseGeocodingWidget widget;
-
-    /**
-     * @Construct
-     * 
-     * @param theWidget
-     */
-    public ReverseGeocodingDispatchEvent(ReverseGeocodingWidget theWidget) {
-        this.widget = theWidget;
+    public ReverseGeocodingEvent(boolean activate) {
+        this.activate = activate;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
-     */
     @Override
-    public Type<ReverseGeocodingDispatchHandler> getAssociatedType() {
-        // TODO Auto-generated method stub
-        return ReverseGeocodingDispatchHandler.TYPE;
+    public Type<ReverseGeocodingEventHandler> getAssociatedType() {
+        return ReverseGeocodingEventHandler.TYPE;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
-     * .EventHandler)
-     */
     @Override
-    protected void dispatch(ReverseGeocodingDispatchHandler handler) {
-        // TODO Auto-generated method stub
-        handler.processRequest(widget);
+    protected void dispatch(ReverseGeocodingEventHandler handler) {
+        if (activate) {
+            handler.register();
+        } else {
+            handler.unregister();
+        }
     }
 }

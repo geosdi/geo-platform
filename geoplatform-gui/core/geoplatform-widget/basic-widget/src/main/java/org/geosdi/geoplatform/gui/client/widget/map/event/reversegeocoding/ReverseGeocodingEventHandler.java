@@ -33,37 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.event;
+package org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding;
 
-import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.client.widget.map.event.GenericGeocodingEventHandler;
+import org.gwtopenmaps.openlayers.client.LonLat;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email michele.santomauro@geosdi.org
+ * 
  */
-public class ReverseGeocodingEvent
-        extends GwtEvent<ReverseGeocodingEventHandler> {
+public interface ReverseGeocodingEventHandler extends GenericGeocodingEventHandler {
 
-    public static Type<ReverseGeocodingEventHandler> TYPE = new Type<ReverseGeocodingEventHandler>();
-    
-    private boolean activate;
+    Type<ReverseGeocodingEventHandler> TYPE = new Type<ReverseGeocodingEventHandler>();
 
-    public ReverseGeocodingEvent(boolean activate) {
-        this.activate = activate;
-    }
+    public void onAddMarkerByLatLon(LonLat theLonLat);
 
-    @Override
-    public Type<ReverseGeocodingEventHandler> getAssociatedType() {
-        return TYPE;
-    }
-
-    @Override
-    protected void dispatch(ReverseGeocodingEventHandler handler) {
-        if (activate) {
-            handler.register();
-        } else {
-            handler.unregister();
-        }
-    }
+    public void onUpdateReverseGeocoding(LonLat ll);
 }

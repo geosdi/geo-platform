@@ -35,10 +35,17 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.marker.advanced;
 
+import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingUpdateLocationEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.GPGenericMarkerLayer;
+import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.Map;
+import org.gwtopenmaps.openlayers.client.Pixel;
 import org.gwtopenmaps.openlayers.client.Style;
+import org.gwtopenmaps.openlayers.client.control.DragFeature;
+import org.gwtopenmaps.openlayers.client.control.DragFeature.DragFeatureListener;
+import org.gwtopenmaps.openlayers.client.control.DragFeatureOptions;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.Point;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
@@ -52,6 +59,17 @@ public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
 
     protected VectorFeature feature;
     protected Style style;
+    protected DragFeature dragControl;
+    private boolean activeControl;
+    private ReverseGeocodingUpdateLocationEvent updateEvent = new ReverseGeocodingUpdateLocationEvent();
+
+    /**
+     * 
+     */
+    public GPVectorMarkerLayer() {
+        super();
+        this.createControl();
+    }
 
     @Override
     public void buildIconMarker() {
@@ -90,7 +108,47 @@ public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
         }
     }
 
+    /**
+     * Activate Drag Control on VectoreFeature as a Marker
+     * 
+     */
+    public void addControl(Map map) {
+        map.addControl(dragControl);
+        dragControl.activate();
+        this.activeControl = true;
+    }
+
+    /**
+     * Deactivate Drag Control on VectoreFeature as a Marker
+     * 
+     */
+    public void removeControl(Map map) {
+        if (this.activeControl) {
+            this.dragControl.deactivate();
+            this.activeControl = false;
+        }
+        map.removeControl(dragControl);
+    }
+
     public abstract void setIconStyle();
+
+    private void createControl() {
+        DragFeatureOptions dragFeatureOptions = new DragFeatureOptions();
+
+        dragFeatureOptions.onComplete(new DragFeatureListener() {
+
+            @Override
+            public void onDragEvent(VectorFeature vectorFeature, Pixel pixel) {
+                LonLat ll = GPApplicationMap.getInstance()
+                        .getApplicationMap().getMap().getLonLatFromPixel(pixel);
+                
+                updateEvent.setLonLat(ll);
+                GPHandlerManager.fireEvent(updateEvent);
+            }
+        });
+
+        this.dragControl = new DragFeature((Vector) markerLayer, dragFeatureOptions);
+    }
 
     /**
      * @return the feature

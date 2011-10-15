@@ -33,35 +33,58 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.marker.advanced;
+package org.geosdi.geoplatform.gui.client.widget.map;
 
-import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.GeocodingEventHandler;
+import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.GeocodingVectorMarker;
+import org.geosdi.geoplatform.gui.client.widget.map.popup.PopupMapWidget;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
+import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GeocodingVectorMarker extends GPVectorMarkerLayer {
+public class GPGeocodingWidget implements GeocodingEventHandler {
 
-    @Override
-    public void setIconStyle() {
-        style.setExternalGraphic(GWT.getModuleBaseURL()
-                + "/gp-images/vector_marker.png");
+    private GeoPlatformMap mapWidget;
+    private PopupMapWidget popupWidget;
+    /** TODO : Think a way to have this in configuration **/
+    private GeocodingVectorMarker geocoderMarker = new GeocodingVectorMarker(); //new GeocodingMarker();
+
+    public GPGeocodingWidget(GeoPlatformMap theMapWidget) {
+        this.mapWidget = theMapWidget;
+        GPGeocodingHandlerManager.addHandler(GeocodingEventHandler.TYPE, this);
     }
 
     @Override
-    public void buildMarkerLayer() {
-        this.markerLayer = new Vector("GPGeocoding-Marker-Vector-Layer");
-        this.markerLayer.setZIndex(982);
+    public void register() {
+        this.mapWidget.getMap().addLayer(geocoderMarker.getMarkerLayer());
+        this.geocoderMarker.addControl(this.mapWidget.getMap());
     }
 
     @Override
-    public void addMarker(LonLat lonlat, Map map) {
-        map.setCenter(lonlat, 16);
-        super.drawFeature(lonlat);
+    public void unregister() {
+        this.geocoderMarker.removeControl(this.mapWidget.getMap());
+        this.geocoderMarker.removeMarker();
+        this.mapWidget.getMap().removeLayer(this.geocoderMarker.getMarkerLayer());
+        this.mapWidget.getMap().removePopup(popupWidget.getPopup());
+    }
+
+    @Override
+    public void onRegisterGeocodingLocation(IGeoPlatformLocation bean) {
+        LonLat center = new LonLat(bean.getLon(), bean.getLat());
+        center.transform("EPSG:4326", this.mapWidget.getMap().getProjection());
+        this.geocoderMarker.addMarker(center, this.mapWidget.getMap());
+    }
+
+    /**
+     * @param popupWidget the popupWidget to set
+     */
+    public void setPopupWidget(PopupMapWidget popupWidget) {
+        this.popupWidget = popupWidget;
     }
 }

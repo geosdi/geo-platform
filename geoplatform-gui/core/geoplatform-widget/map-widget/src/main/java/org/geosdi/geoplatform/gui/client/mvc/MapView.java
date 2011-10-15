@@ -42,17 +42,14 @@ import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.store.Scale;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
-import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
-import org.geosdi.geoplatform.gui.client.widget.map.marker.GPGenericMarkerLayer;
-import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.GeocodingVectorMarker;
+import org.geosdi.geoplatform.gui.client.widget.map.GPGeocodingWidget;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.gwtopenmaps.openlayers.client.control.Graticule;
 import org.gwtopenmaps.openlayers.client.control.GraticuleOptions;
@@ -69,7 +66,7 @@ import org.gwtopenmaps.openlayers.client.symbolizer.TextSymbolizerOptions;
 public class MapView extends GeoPlatformView {
 
     private MapLayoutWidget mapLayout;
-    private GPGenericMarkerLayer geocoderMarker;
+    private GPGeocodingWidget geocoderWidget;
     private ReverseGeocodingWidget revGeoWidget;
     private MapToolbar buttonBar;
     private Graticule graticule;
@@ -83,8 +80,8 @@ public class MapView extends GeoPlatformView {
 
     @Override
     public void initialize() {
-        /** TODO : Think a way to have this in configuration **/
-        this.geocoderMarker = new GeocodingVectorMarker(); //new GeocodingMarker();
+        this.geocoderWidget = new GPGeocodingWidget(this.mapLayout);
+        this.geocoderWidget.setPopupWidget(this.revGeoWidget.getPopupWidget());
     }
 
     /*
@@ -96,10 +93,6 @@ public class MapView extends GeoPlatformView {
      */
     @Override
     protected void handleEvent(AppEvent event) {
-        if (event.getType() == MapWidgetEvents.INIT_MAP_WIDGET) {
-            onInitMapWidget();
-        }
-
         if (event.getType() == MapWidgetEvents.ATTACH_MAP_WIDGET) {
             this.mapLayout.onAddToCenterPanel();
         }
@@ -114,10 +107,6 @@ public class MapView extends GeoPlatformView {
 
         if (event.getType() == MapWidgetEvents.DEACTIVATE_GRATICULE) {
             onDeActivateGraticule();
-        }
-
-        if (event.getType() == GeoPlatformEvents.REGISTER_GEOCODING_LOCATION) {
-            onRegisterGeocodingLocation((IGeoPlatformLocation) event.getData());
         }
 
         if (event.getType() == GeoPlatformEvents.SCALE_REQUEST_CHANGE) {
@@ -140,17 +129,6 @@ public class MapView extends GeoPlatformView {
                 scaleString.indexOf(":") + 1);
         Float floatScale = Float.parseFloat(scaleEffective);
         this.mapLayout.getMap().zoomToScale(floatScale.floatValue(), false);
-    }
-
-    /**
-     * Add a Marker on the Map with the coordinate of Location Found
-     *
-     * @param event
-     */
-    private void onRegisterGeocodingLocation(IGeoPlatformLocation bean) {
-        LonLat center = new LonLat(bean.getLon(), bean.getLat());
-        center.transform("EPSG:4326", this.mapLayout.getMap().getProjection());
-        this.geocoderMarker.addMarker(center, this.mapLayout.getMap());
     }
 
     private void onActivateGraticule() {
@@ -186,13 +164,6 @@ public class MapView extends GeoPlatformView {
             this.mapLayout.getMap().removeControl(graticule);
             this.graticule.deactivate();
         }
-    }
-
-    /**
-     * Init Map Widget
-     */
-    private void onInitMapWidget() {
-        this.addLayer(this.geocoderMarker.getMarkerLayer());
     }
 
     /**

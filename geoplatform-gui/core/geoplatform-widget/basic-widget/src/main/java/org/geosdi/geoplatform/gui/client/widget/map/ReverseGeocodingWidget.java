@@ -35,12 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map;
 
-import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingDispatchEvent;
-import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingEvent;
-import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingEventHandler;
-import org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingMarkEvent;
-import org.geosdi.geoplatform.gui.client.widget.map.marker.GPGenericMarkerLayer;
-import org.geosdi.geoplatform.gui.client.widget.map.marker.ReverseGeocodingMarker;
+import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingDispatchEvent;
+import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingEventHandler;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.ReverseGeocodingVectorMarker;
 import org.geosdi.geoplatform.gui.client.widget.map.popup.PopupMapWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.popup.template.PopupTemplate;
@@ -61,10 +57,8 @@ import org.gwtopenmaps.openlayers.client.event.MapClickListener;
 public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
     private GeoPlatformMap mapWidget;
-    
     /** TODO : Think a way to have this in configuration **/
-    
-    private GPGenericMarkerLayer rGMarker = new ReverseGeocodingVectorMarker(); //new ReverseGeocodingMarker();
+    private ReverseGeocodingVectorMarker rGMarker = new ReverseGeocodingVectorMarker(); //new ReverseGeocodingMarker();
     private PopupMapWidget popupWidget = new PopupMapWidget();
     private MapClickListener listener;
     private LonLat lonlat;
@@ -73,8 +67,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
     public ReverseGeocodingWidget(GeoPlatformMap theMapWidget) {
         this.mapWidget = theMapWidget;
-        GPHandlerManager.addHandler(ReverseGeocodingEvent.TYPE, this);
-        GPHandlerManager.addHandler(ReverseGeocodingMarkEvent.TYPE, this);
+        GPHandlerManager.addHandler(ReverseGeocodingEventHandler.TYPE, this);
         this.createListener();
         this.event = new ReverseGeocodingDispatchEvent(this);
     }
@@ -84,6 +77,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
         GeoPlatformMessage.infoMessage("Reverse Geocoding",
                 "Click on the map to have Information.");
         this.mapWidget.getMap().addLayer(this.rGMarker.getMarkerLayer());
+        this.rGMarker.addControl(this.mapWidget.getMap());
         this.mapWidget.getMap().addMapClickListener(listener);
     }
 
@@ -91,6 +85,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
     public void unregister() {
         GeoPlatformMessage.infoMessage("Reverse Geocoding",
                 "Reverse Geocoding Control Deactivated.");
+        this.rGMarker.removeControl(this.mapWidget.getMap());
         this.clearWidgetStatus();
     }
 
@@ -140,15 +135,6 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
         this.busy = false;
     }
 
-    /**
-     * @return the lonlat with the Map Projection
-     */
-    public LonLat getLonlat() {
-        LonLat lt = new LonLat(this.lonlat.lon(), this.lonlat.lat());
-        lt.transform(this.mapWidget.getMap().getProjection(), "EPSG:4326");
-        return lt;
-    }
-
     private void removeMapElements() {
         this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
         this.rGMarker.removeMarker();
@@ -171,9 +157,13 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
             removeMapElements();
             sendRequest();
         } else {
-            GeoPlatformMessage.alertMessage("Reverse Geocoding",
-                    "Server busy.");
+            displayErrorMessage();
         }
+    }
+
+    private void displayErrorMessage() {
+        GeoPlatformMessage.alertMessage("Reverse Geocoding",
+                "Server busy.");
     }
 
     /**
@@ -181,11 +171,52 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
      */
     private void sendRequest() {
         this.rGMarker.addMarker(this.lonlat, this.mapWidget.getMap());
+        addPopupAndFireEvent();
+    }
+
+    @Override
+    public void onUpdateReverseGeocoding(LonLat ll) {
+        this.lonlat = ll;
+        updateMarker();
+    }
+
+    private void updateMarker() {
+        if (!busy) {
+            busy = true;
+            sendRequestForUpdate();
+        } else {
+            displayErrorMessage();
+        }
+    }
+
+    private void sendRequestForUpdate() {
+        this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
+        addPopupAndFireEvent();
+    }
+
+    private void addPopupAndFireEvent() {
         popupWidget.setLonLat(this.lonlat);
         this.popupWidget.setContentHTML(PopupTemplate.IMAGE_LOADING.toString()
                 + PopupTemplate.MESSAGE_LOADING.toString());
         this.mapWidget.getMap().addPopup(popupWidget.getPopup());
 
         GPHandlerManager.fireEvent(event);
+    }
+
+    /**
+     * @return the lonlat with the Map Projection
+     */
+    public LonLat getLonlat() {
+        LonLat lt = new LonLat(this.lonlat.lon(), this.lonlat.lat());
+        lt.transform(this.mapWidget.getMap().getProjection(), "EPSG:4326");
+        return lt;
+    }
+
+    /**
+     * 
+     * @return PopupMapWidget
+     */
+    public PopupMapWidget getPopupWidget() {
+        return popupWidget;
     }
 }

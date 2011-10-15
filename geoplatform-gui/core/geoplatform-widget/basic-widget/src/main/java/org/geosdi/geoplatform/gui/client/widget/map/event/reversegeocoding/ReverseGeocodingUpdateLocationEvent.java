@@ -33,35 +33,36 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.marker.advanced;
+package org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding;
 
-import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
 import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.layer.Vector;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GeocodingVectorMarker extends GPVectorMarkerLayer {
-
+public class ReverseGeocodingUpdateLocationEvent
+        extends GwtEvent<ReverseGeocodingEventHandler> {
+    
+    private LonLat lonLat;
+    
     @Override
-    public void setIconStyle() {
-        style.setExternalGraphic(GWT.getModuleBaseURL()
-                + "/gp-images/vector_marker.png");
+    public Type<ReverseGeocodingEventHandler> getAssociatedType() {
+       return ReverseGeocodingEventHandler.TYPE;
     }
 
     @Override
-    public void buildMarkerLayer() {
-        this.markerLayer = new Vector("GPGeocoding-Marker-Vector-Layer");
-        this.markerLayer.setZIndex(982);
+    protected void dispatch(ReverseGeocodingEventHandler handler) {
+        handler.onUpdateReverseGeocoding(lonLat);
     }
 
-    @Override
-    public void addMarker(LonLat lonlat, Map map) {
-        map.setCenter(lonlat, 16);
-        super.drawFeature(lonlat);
+    /**
+     * @param lonLat the lonLat to set
+     */
+    public void setLonLat(LonLat lonLat) {
+        this.lonLat = lonLat;
     }
 }

@@ -40,6 +40,7 @@ import junit.framework.Assert;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.junit.Test;
 
@@ -53,98 +54,113 @@ public class WSProjectTest extends ServiceTest {
     private final String nameFolder1A = "folder1A";
     private final String nameFolder1B = "folder1B";
     private final String nameFolder1C = "folder1C";
-    //
     private final String nameFolder2A = "folder2A";
     private final String nameFolder2B = "folder2B";
     private final String nameFolder2C = "folder2C";
-    //
     private final String nameFolder3A = "folder3A";
     private final String nameFolder3B = "folder3B";
     private final String nameFolder3C = "folder3C";
     //
-    private GPFolder folder1A = null;
-    private GPFolder folder1B = null;
-    private GPFolder folder1C = null;
-    private GPFolder folder2A = null;
-    private GPFolder folder2B = null;
-    private GPFolder folder2C = null;
-    private GPFolder folder3A = null;
-    private GPFolder folder3B = null;
-    private GPFolder folder3C = null;
-    private long idFolder1A = -1;
-    private long idFolder1B = -1;
-    private long idFolder1C = -1;
-    private long idFolder2A = -1;
-    private long idFolder2B = -1;
-    private long idFolder2C = -1;
-    private long idFolder3A = -1;
-    private long idFolder3B = -1;
-    private long idFolder3C = -1;
+    private GPFolder folder1A;
+    private GPFolder folder1B;
+    private GPFolder folder1C;
+    private GPFolder folder2A;
+    private GPFolder folder2B;
+    private GPFolder folder2C;
+    private GPFolder folder3A;
+    private GPFolder folder3B;
+    private GPFolder folder3C;
+    private Long idFolder1A;
+    private Long idFolder1B;
+    private Long idFolder1C;
+    private Long idFolder2A;
+    private Long idFolder2B;
+    private Long idFolder2C;
+    private Long idFolder3A;
+    private Long idFolder3B;
+    private Long idFolder3C;
+    //
+    private String titleRaster = "T-raster-";
+    private String nameRaster = "N-raster-";
+    private String titleVector = "T-vector-";
+    private String nameVector = "N-vector-";
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
 
+        super.createAndInsertRasterLayer(super.rootFolderA, titleRaster + super.nameRootFolderA,
+                nameRaster + super.nameRootFolderA, "", 14, "", "");
         // "rootFolderA" ---> "folder1(A|B|C)"
-        idFolder1A = super.createAndInsertFolder(nameFolder1A, projectTest, 10, rootFolderA, 3);
+        idFolder1A = super.createAndInsertFolder(nameFolder1A, projectTest, 13, rootFolderA, 3);
         folder1A = gpWSClient.getFolderDetail(idFolder1A);
         //
-        idFolder1B = super.createAndInsertFolder(nameFolder1B, projectTest, 9, rootFolderA);
+        idFolder1B = super.createAndInsertFolder(nameFolder1B, projectTest, 12, rootFolderA, 1);
         folder1B = gpWSClient.getFolderDetail(idFolder1B);
         //
-        idFolder1C = super.createAndInsertFolder(nameFolder1C, projectTest, 8, rootFolderA);
+        super.createAndInsertRasterLayer(folder1B, titleRaster + nameFolder1B,
+                nameRaster + nameFolder1B, "", 11, "", "");
+        //
+        idFolder1C = super.createAndInsertFolder(nameFolder1C, projectTest, 10, rootFolderA);
         folder1C = gpWSClient.getFolderDetail(idFolder1C);
         //
         // "folder1A" ---> "folder2(A|B|C)"
-        idFolder2A = super.createAndInsertFolder(nameFolder2A, projectTest, 7, folder1A, 3);
+        idFolder2A = super.createAndInsertFolder(nameFolder2A, projectTest, 9, folder1A, 3);
         folder2A = gpWSClient.getFolderDetail(idFolder2A);
         //
-        idFolder2B = super.createAndInsertFolder(nameFolder2B, projectTest, 6, folder1A);
+        idFolder2B = super.createAndInsertFolder(nameFolder2B, projectTest, 8, folder1A);
         folder2B = gpWSClient.getFolderDetail(idFolder2B);
         //
-        idFolder2C = super.createAndInsertFolder(nameFolder2C, projectTest, 5, folder1A);
+        idFolder2C = super.createAndInsertFolder(nameFolder2C, projectTest, 7, folder1A, 1);
         folder2C = gpWSClient.getFolderDetail(idFolder2C);
         //
+        super.createAndInsertRasterLayer(folder2C, titleRaster + nameFolder2C,
+                nameRaster + nameFolder2C, "", 6, "", "");
+        //
         // "folder2A" ---> "folder3(A|B|C)"
-        idFolder3A = super.createAndInsertFolder(nameFolder3A, projectTest, 4, folder2A);
+        idFolder3A = super.createAndInsertFolder(nameFolder3A, projectTest, 5, folder2A, 1);
         folder3A = gpWSClient.getFolderDetail(idFolder3A);
+        //
+        super.createAndInsertVectorLayer(folder3A, titleVector + nameFolder3A,
+                nameVector + nameFolder3A, "", 4, "", "");
         //
         idFolder3B = super.createAndInsertFolder(nameFolder3B, projectTest, 3, folder2A);
         folder3B = gpWSClient.getFolderDetail(idFolder3B);
         //
         idFolder3C = super.createAndInsertFolder(nameFolder3C, projectTest, 2, folder2A);
         folder3C = gpWSClient.getFolderDetail(idFolder3C);
-        //
-        super.rootFolderA.setPosition(11);
-        super.rootFolderA.setNumberOfDescendants(9);
+        //        
+
+        super.rootFolderA.setPosition(15);
+        super.rootFolderA.setNumberOfDescendants(13);
         gpWSClient.updateFolder(rootFolderA);
 
-        super.projectTest.setNumberOfElements(projectTest.getNumberOfElements() + 5);
+        super.projectTest.setNumberOfElements(projectTest.getNumberOfElements() + 10);
         gpWSClient.updateProject(projectTest);
     }
 
     @Test
     public void testFixture() {
         Assert.assertNotNull("Folder1A is NULL", folder1A);
-        Assert.assertEquals("ID of Folder1A is incorrect", folder1A.getId().longValue(), idFolder1A);
+        Assert.assertEquals("ID of Folder1A is incorrect", folder1A.getId(), idFolder1A);
         Assert.assertNotNull("Folder1B is NULL", folder1B);
-        Assert.assertEquals("ID of Folder1B is incorrect", folder1B.getId().longValue(), idFolder1B);
+        Assert.assertEquals("ID of Folder1B is incorrect", folder1B.getId(), idFolder1B);
         Assert.assertNotNull("Folder1C is NULL", folder1C);
-        Assert.assertEquals("ID of Folder1C is incorrect", folder1C.getId().longValue(), idFolder1C);
+        Assert.assertEquals("ID of Folder1C is incorrect", folder1C.getId(), idFolder1C);
 
         Assert.assertNotNull("Folder2A is NULL", folder2A);
-        Assert.assertEquals("ID of Folder2A is incorrect", folder2A.getId().longValue(), idFolder2A);
+        Assert.assertEquals("ID of Folder2A is incorrect", folder2A.getId(), idFolder2A);
         Assert.assertNotNull("Folder2B is NULL", folder2B);
-        Assert.assertEquals("ID of Folder2B is incorrect", folder2B.getId().longValue(), idFolder2B);
+        Assert.assertEquals("ID of Folder2B is incorrect", folder2B.getId(), idFolder2B);
         Assert.assertNotNull("Folder2C is NULL", folder2C);
-        Assert.assertEquals("ID of Folder2 is incorrect", folder2C.getId().longValue(), idFolder2C);
+        Assert.assertEquals("ID of Folder2 is incorrect", folder2C.getId(), idFolder2C);
 
         Assert.assertNotNull("Folder3A is NULL", folder3A);
-        Assert.assertEquals("ID of Folder3A is incorrect", folder3A.getId().longValue(), idFolder3A);
+        Assert.assertEquals("ID of Folder3A is incorrect", folder3A.getId(), idFolder3A);
         Assert.assertNotNull("Folder3B is NULL", folder3B);
-        Assert.assertEquals("ID of Folder3B is incorrect", folder3B.getId().longValue(), idFolder3B);
+        Assert.assertEquals("ID of Folder3B is incorrect", folder3B.getId(), idFolder3B);
         Assert.assertNotNull("Folder3 is NULL", folder3C);
-        Assert.assertEquals("ID of Folder3C is incorrect", folder3C.getId().longValue(), idFolder3C);
+        Assert.assertEquals("ID of Folder3C is incorrect", folder3C.getId(), idFolder3C);
     }
 
     @Test
@@ -153,27 +169,40 @@ public class WSProjectTest extends ServiceTest {
 
         Assert.assertEquals(super.projectTest.getName(), project.getName());
         Assert.assertEquals(super.projectTest.getNumberOfElements(), project.getNumberOfElements());
-        
+
         List<FolderDTO> rootFolders = project.getRootFolders();
         Assert.assertEquals("#root", 2, rootFolders.size());
         Assert.assertEquals("A", nameRootFolderA, rootFolders.get(0).getName());
-        
-        List<FolderDTO> childFolder1A = (List<FolderDTO>) rootFolders.get(0).getElementList();
+
+        List<IElementDTO> childRootFolderA = rootFolders.get(0).getElementList();
+        Assert.assertEquals("#A", 4, childRootFolderA.size());
+        Assert.assertEquals("R-A", nameRaster + super.nameRootFolderA, childRootFolderA.get(0).getName());
+        Assert.assertEquals("1A", nameFolder1A, childRootFolderA.get(1).getName());
+        Assert.assertEquals("1B", nameFolder1B, childRootFolderA.get(2).getName());
+        Assert.assertEquals("1C", nameFolder1C, childRootFolderA.get(3).getName());
+
+        List<IElementDTO> childFolder1A = ((FolderDTO) childRootFolderA.get(1)).getElementList();
         Assert.assertEquals("#1A", 3, childFolder1A.size());
-        Assert.assertEquals("1A", nameFolder1A, childFolder1A.get(0).getName());
-        Assert.assertEquals("1B", nameFolder1B, childFolder1A.get(1).getName());
-        Assert.assertEquals("1C", nameFolder1C, childFolder1A.get(2).getName());
-        
-        List<FolderDTO> childFolder2A = (List<FolderDTO>) childFolder1A.get(0).getElementList();
+        Assert.assertEquals("2A", nameFolder2A, childFolder1A.get(0).getName());
+        Assert.assertEquals("2B", nameFolder2B, childFolder1A.get(1).getName());
+        Assert.assertEquals("2C", nameFolder2C, childFolder1A.get(2).getName());
+
+        List<IElementDTO> childFolder2A = ((FolderDTO) childFolder1A.get(0)).getElementList();
         Assert.assertEquals("#2A", 3, childFolder2A.size());
-        Assert.assertEquals("2A", nameFolder2A, childFolder2A.get(0).getName());
-        Assert.assertEquals("2B", nameFolder2B, childFolder2A.get(1).getName());
-        Assert.assertEquals("2C", nameFolder2C, childFolder2A.get(2).getName());
-        
-        List<FolderDTO> childFolder3A = (List<FolderDTO>) childFolder2A.get(0).getElementList();
-        Assert.assertEquals("#3A", 3, childFolder3A.size());
-        Assert.assertEquals("3A", nameFolder3A, childFolder3A.get(0).getName());
-        Assert.assertEquals("3B", nameFolder3B, childFolder3A.get(1).getName());
-        Assert.assertEquals("3C", nameFolder3C, childFolder3A.get(2).getName());
+        Assert.assertEquals("3A", nameFolder3A, childFolder2A.get(0).getName());
+        Assert.assertEquals("3B", nameFolder3B, childFolder2A.get(1).getName());
+        Assert.assertEquals("3C", nameFolder3C, childFolder2A.get(2).getName());
+
+        FolderDTO f1B = (FolderDTO) childRootFolderA.get(2);
+        Assert.assertEquals("#1B", 1, f1B.getElementList().size());
+        Assert.assertEquals("R-1B", nameRaster + nameFolder1B, f1B.getElementList().get(0).getName());
+
+        FolderDTO f2C = (FolderDTO) childFolder1A.get(2);
+        Assert.assertEquals("#2C", 1, f2C.getElementList().size());
+        Assert.assertEquals("R-2C", nameRaster + nameFolder2C, f2C.getElementList().get(0).getName());
+
+        FolderDTO f3A = (FolderDTO) childFolder2A.get(0);
+        Assert.assertEquals("#3A", 1, f3A.getElementList().size());
+        Assert.assertEquals("V-3A", nameVector + nameFolder3A, f3A.getElementList().get(0).getName());
     }
 }

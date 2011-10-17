@@ -55,17 +55,18 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 @XmlRootElement(name = "FolderDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class FolderDTO extends AbstractElementDTO {
-
+    
     private Integer numberOfDescendants;
     //
     @XmlElementWrapper(name = "elementList")
     @XmlElement(name = "element")
-    private List<? extends AbstractElementDTO> elementList;
+    private List<IElementDTO> elementList;
 
     /**
      * Default constructor
      */
     public FolderDTO() {
+        // NOTE: elementList is NULL
     }
 
     /**
@@ -76,6 +77,7 @@ public class FolderDTO extends AbstractElementDTO {
         super(folder.getId(), folder.getName(), folder.getPosition(),
                 folder.isShared(), folder.isChecked());
         this.numberOfDescendants = folder.getNumberOfDescendants();
+        this.elementList = new ArrayList<IElementDTO>();
     }
 
     /**
@@ -95,16 +97,24 @@ public class FolderDTO extends AbstractElementDTO {
     /**
      * @return the elementList
      */
-    public List<? extends AbstractElementDTO> getElementList() {
+    public List<IElementDTO> getElementList() {
         return elementList;
     }
 
     /**
-     * @param elementList to set
+     * @param folders to add of elementList
      */
-    public void setElementList(List<? extends AbstractElementDTO> elementList) {        
-        this.elementList = elementList;        
-        Collections.sort(this.elementList);
+    public void addFolders(List<FolderDTO> folders) {
+        elementList.addAll(folders);
+        Collections.sort(elementList);
+    }
+
+    /**
+     * @param layer to add of elementList
+     */
+    public void addLayer(ShortLayerDTO layer) {
+        elementList.add(layer);
+        Collections.sort(elementList);
     }
 
     /*
@@ -117,15 +127,15 @@ public class FolderDTO extends AbstractElementDTO {
         return "FolderDTO [" + super.toString()
                 + ", numberOfDescendants=" + numberOfDescendants + "]";
     }
-
+    
     public static List<FolderDTO> convertToFolderDTOList(List<GPFolder> folders) {
         List<FolderDTO> foldersDTO = new ArrayList<FolderDTO>(folders.size());
-
+        
         for (GPFolder folder : folders) {
             FolderDTO folderDTO = new FolderDTO(folder);
             foldersDTO.add(folderDTO);
         }
-
+        
         return foldersDTO;
     }
 }

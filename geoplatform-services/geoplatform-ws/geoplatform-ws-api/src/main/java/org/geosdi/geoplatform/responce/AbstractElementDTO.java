@@ -46,8 +46,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  */
 @XmlTransient
-public abstract class AbstractElementDTO implements IElementDTO,
-        Comparable<IElementDTO> {
+public abstract class AbstractElementDTO implements IElementDTO {
 
     private Long id; // Database identity
     private String name;
@@ -84,6 +83,7 @@ public abstract class AbstractElementDTO implements IElementDTO,
     /**
      * @return the id
      */
+    @Override
     public Long getId() {
         return id;
     }
@@ -99,6 +99,7 @@ public abstract class AbstractElementDTO implements IElementDTO,
     /**
      * @return the name
      */
+    @Override
     public String getName() {
         return name;
     }

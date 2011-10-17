@@ -53,8 +53,8 @@ import org.springframework.transaction.annotation.Transactional;
  * 
  */
 @Transactional
-public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
-        GPLayerDAO {
+public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long>
+        implements GPLayerDAO {
 
     @Override
     public void persist(GPLayer... layers) {
@@ -73,7 +73,7 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long> implements
 
     @SuppressWarnings("unchecked")
     @Override
-    public List search(ISearch search) {
+    public List<GPLayer> search(ISearch search) {
         return super.search(search);
     }
 

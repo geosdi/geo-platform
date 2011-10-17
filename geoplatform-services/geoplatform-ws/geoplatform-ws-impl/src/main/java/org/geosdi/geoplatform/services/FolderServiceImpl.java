@@ -169,7 +169,6 @@ class FolderServiceImpl {
         return folderDao.remove(folder);
     }
 
-    // TODO check
     public Long saveAddedFolderAndTreeModifications(Long projectId, Long parentId,
             GPFolder folder, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {

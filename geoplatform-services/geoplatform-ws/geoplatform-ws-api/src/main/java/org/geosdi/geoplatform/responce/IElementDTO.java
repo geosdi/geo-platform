@@ -45,12 +45,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * @author Michele Santomauro
  *
  */
-
-/**
- * Tag Interface: define the IElementDTO type
- */
 // For handle this inteface with JAXB
 @XmlJavaTypeAdapter(value = ElementDTOAdapter.class)
-public interface IElementDTO {
+public interface IElementDTO extends Comparable<IElementDTO> {
     
+    Long getId();
+
+    String getName();
 }

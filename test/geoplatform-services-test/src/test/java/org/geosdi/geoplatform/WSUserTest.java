@@ -2,7 +2,7 @@
 /*
  *  geo-platform
  *  Rich webgis framework
- *  http://geo-plartform.org
+ *  http://geo-platform.org
  * ====================================================================
  *
  * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
@@ -90,7 +90,7 @@ public class WSUserTest extends ServiceTest {
             // Get UserDTO from Id
             UserDTO userDTOFromWS = gpWSClient.getShortUser(new RequestById(idUserTest));
             Assert.assertNotNull(userDTOFromWS);
-            Assert.assertEquals("Error found User from Id", idUserTest, userDTOFromWS.getId());
+            Assert.assertEquals("Error found User from Id", idUserTest, userDTOFromWS.getId().longValue());
             // Get GPUser from Id
             GPUser userFromWS = gpWSClient.getUserDetail(new RequestById(idUserTest));
             Assert.assertNotNull(userFromWS);
@@ -104,7 +104,7 @@ public class WSUserTest extends ServiceTest {
             // Get UserDTO from Username
             UserDTO userDTOFromWS = gpWSClient.getShortUserByName(new SearchRequest(usernameTest));
             Assert.assertNotNull(userDTOFromWS);
-            Assert.assertEquals("Error found User from Username", idUserTest, userDTOFromWS.getId());
+            Assert.assertEquals("Error found User from Username", idUserTest, userDTOFromWS.getId().longValue());
             // Get GPUser from Username
             GPUser userFromWS = gpWSClient.getUserDetailByName(new SearchRequest(usernameTest));
             Assert.assertNotNull(userFromWS);

@@ -2,7 +2,7 @@
 /*
  *  geo-platform
  *  Rich webgis framework
- *  http://geo-plartform.org
+ *  http://geo-platform.org
  * ====================================================================
  *
  * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
@@ -194,7 +194,7 @@ public class WSFolderTest extends ServiceTest {
             // Assert on "rootFolderA"
             FolderDTO folderToCheck = folderList.iterator().next();
             logger.trace("\n*** folderToCheck:\n{}\n***", folderToCheck);
-            Assert.assertEquals("Check ID of rootFolderA", rootFolderA.getId().longValue(), folderToCheck.getId());
+            Assert.assertEquals("Check ID of rootFolderA", rootFolderA.getId(), folderToCheck.getId());
             // Assert on the structure of the subfolders of "rootFolderA"
             TreeFolderElements childrenRootFolderA = gpWSClient.getChildrenElements(idRootFolderA);
             logger.trace("\n*** childrenRootFolderA:\n{}\n***", childrenRootFolderA);
@@ -205,11 +205,11 @@ public class WSFolderTest extends ServiceTest {
             // Assert on "folder1"
             FolderDTO folderDTOToCheck = (FolderDTO) childsIterator.next();
             logger.trace("\n*** folder_1_DTOToCheck:\n{}\n***", folderDTOToCheck);
-            Assert.assertEquals("Check ID of folder 1", folder1.getId().longValue(), folderDTOToCheck.getId());
+            Assert.assertEquals("Check ID of folder 1", folder1.getId(), folderDTOToCheck.getId());
             // Assert on "folder2"
             folderDTOToCheck = (FolderDTO) childsIterator.next();
             logger.trace("\n*** folder_2_DTOToCheck:\n{}\n***", folderDTOToCheck);
-            Assert.assertEquals("Check ID of folder 2", folder2.getId().longValue(), folderDTOToCheck.getId());
+            Assert.assertEquals("Check ID of folder 2", folder2.getId(), folderDTOToCheck.getId());
 
             // Assert on "rootFolderB" (deleted)
             TreeFolderElements childrenRootFolderB = gpWSClient.getChildrenElements(idRootFolderB);
@@ -242,8 +242,8 @@ public class WSFolderTest extends ServiceTest {
             folderToTest = super.createFolder(nameFolderToTest, projectTest, 1, null);
 
             // Adding new folder to project's root            
-            long idFolderToTest = gpWSClient.saveAddedFolderAndTreeModifications(folderToTest, descendantsMapData, projectTest.getId().longValue());
-            
+            long idFolderToTest = gpWSClient.saveAddedFolderAndTreeModifications(projectTest.getId(), null, folderToTest, descendantsMapData);
+
             Assert.assertEquals("totalElementsOfProject after added",
                     totalElementsOfProject + 1, gpWSClient.getNumberOfElementsProject(idProjectTest));
 
@@ -284,7 +284,7 @@ public class WSFolderTest extends ServiceTest {
 
             // Adding new folder to user's root folder B
             map.put(idRootFolderB, 4);
-            long idFolderToTest = gpWSClient.saveAddedFolderAndTreeModifications(folderToTest, descendantsMapData, projectTest.getId().longValue());
+            long idFolderToTest = gpWSClient.saveAddedFolderAndTreeModifications(projectTest.getId(), rootFolderB.getId(), folderToTest, descendantsMapData);
 
             Assert.assertEquals("totalElementsOfProject after added",
                     totalElementsOfProject + 1, gpWSClient.getNumberOfElementsProject(idProjectTest));
@@ -375,14 +375,14 @@ public class WSFolderTest extends ServiceTest {
         try {
             // Move folder B before folder A (oldPosition < new Position)
             boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
-                    super.idRootFolderB, 0, 7, descendantsMapData);
+                    super.idRootFolderB, null, 7, descendantsMapData);
             Assert.assertTrue("Folder B doesn't moved to position 7", checkDD);
 
             this.checkState(new int[]{3, 2, 1, 7, 6, 5, 4}, new int[]{2, 3}, "after DD I on root parent");
 
             // Move folder B after folder A, in initial position (oldPosition > new Position)
             checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
-                    super.idRootFolderB, 0, 4, descendantsMapData);
+                    super.idRootFolderB, null, 4, descendantsMapData);
             Assert.assertTrue("Folder 4 doesn't moved to position 4", checkDD);
 
             this.checkInitialState("after DD II on root parent");
@@ -414,7 +414,7 @@ public class WSFolderTest extends ServiceTest {
             map.put(idRootFolderA, 2);
             // Move folder B in initial position (oldPosition > new Position)
             checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
-                    super.idRootFolderB, 0, 4, descendantsMapData);
+                    super.idRootFolderB, null, 4, descendantsMapData);
             Assert.assertTrue("Folder B doesn't moved to position 4", checkDD);
 
             this.checkInitialState("after DD II from root to top");
@@ -446,7 +446,7 @@ public class WSFolderTest extends ServiceTest {
             map.put(idRootFolderB, 3);
             // Move folder A in initial position (oldPosition < new Position)
             checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
-                    super.idRootFolderA, 0, 7, descendantsMapData);
+                    super.idRootFolderA, null, 7, descendantsMapData);
             Assert.assertTrue("Folder B doesn't moved to position 7", checkDD);
 
             this.checkInitialState("after DD II from root to bottom");

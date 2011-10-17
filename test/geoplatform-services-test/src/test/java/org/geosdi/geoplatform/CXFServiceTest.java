@@ -2,7 +2,7 @@
 /*
  *  geo-platform
  *  Rich webgis framework
- *  http://geo-plartform.org
+ *  http://geo-platform.org
  * ====================================================================
  *
  * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
@@ -158,7 +158,7 @@ public class CXFServiceTest extends ServiceTest {
 
         Assert.assertNotNull(serverDTO);
 
-        serverDTO = gpWSClient.getCapabilities(new RequestById(serverDTO.getId()),null);
+        serverDTO = gpWSClient.getCapabilities(new RequestById(serverDTO.getId()), null);
         logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", serverDTO.getLayerList().size());
     }
 

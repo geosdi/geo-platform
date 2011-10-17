@@ -81,7 +81,7 @@ public class TreeFolderElements extends TreeSet<IElementDTO> {
      * @param layerList
      *            list of GPlayer
      */
-    public void addLayerCollection(Collection<GPLayer> layerList) throws ClassCastException {
+    public void addLayerCollection(Collection<GPLayer> layerList) {
         for (GPLayer layer : layerList) {
             GPLayerType layerType = layer.getLayerType();
             if (layerType.equals(GPLayerType.RASTER)) {

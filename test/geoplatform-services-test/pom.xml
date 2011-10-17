@@ -7,6 +7,7 @@
         <groupId>org.geosdi</groupId>
         <artifactId>geo-platform</artifactId>
         <version>1.2-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <groupId>org.geosdi.geoplatform</groupId>
@@ -21,25 +22,6 @@
     </properties>
 
     <dependencies>
-
-        <dependency>
-            <groupId>org.geosdi.geoplatform</groupId>
-            <artifactId>geoplatform-ws-client</artifactId>
-            <version>1.2-SNAPSHOT</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-ws-api</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-ws-impl</artifactId>
-            <scope>runtime</scope>
-        </dependency>
         
         <dependency>
             <groupId>org.geosdi</groupId>
@@ -51,7 +33,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-dao</artifactId>
@@ -63,6 +45,26 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>org.geosdi.geoplatform</groupId>
+            <artifactId>geoplatform-ws-client</artifactId>
+            <version>${geoplatform-version}</version>
+            <scope>runtime</scope>
+        </dependency>  
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-ws-api</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-ws-impl</artifactId>
+            <scope>runtime</scope>
+        </dependency>        
+
+                <!-- JETTY -->
         <dependency>
             <groupId>org.mortbay.jetty</groupId>
             <artifactId>jetty</artifactId>
@@ -126,5 +128,7 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        
     </dependencies>
+
 </project>

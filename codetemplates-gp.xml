@@ -7,7 +7,7 @@
  */</template><template autoinsert="false" context="filecomment_context" deleted="false" description="Comment for created Java files" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.filecomment" name="filecomment">/*
  *  geo-platform
  *  Rich webgis framework
- *  http://geo-plartform.org
+ *  http://geo-platform.org
  * ====================================================================
  *
  * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).

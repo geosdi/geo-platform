@@ -2,7 +2,7 @@
 /*
  *  geo-platform
  *  Rich webgis framework
- *  http://geo-plartform.org
+ *  http://geo-platform.org
  * ====================================================================
  *
  * Copyright (C) 2008-2011 geoSDI Group (CNR IMAA - Potenza - ITALY).
@@ -143,7 +143,7 @@ public class WSLayerTest extends ServiceTest {
             Assert.fail("Layer has an Illegal Parameter");
         } catch (ResourceNotFoundFault rnnf) {
             Assert.fail("Layer with ID \"" + rnnf.getId() + "\"has a resource not found");
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("@@@@ Exception " + e);
         }
     }
@@ -375,7 +375,7 @@ public class WSLayerTest extends ServiceTest {
             this.checkInitialState("transaction test");
         }
     }
-    
+
     @Test
     public void testTransactionOnRemoveAndAddLayer() throws IllegalParameterFault, ResourceNotFoundFault {
         logger.trace("\n\t@@@ testTransactionOnRemoveAndAddLayer @@@");
@@ -397,10 +397,11 @@ public class WSLayerTest extends ServiceTest {
             try {
                 raster1 = gpWSClient.getRasterLayer(idRaster1);
                 Assert.fail("rasterLayer1 must not exist");
-            } catch (ResourceNotFoundFault rnf) {}
+            } catch (ResourceNotFoundFault rnf) {
+            }
         }
     }
-    
+
     @Test
     public void testGetShortLayer() {
         try {
@@ -481,7 +482,7 @@ public class WSLayerTest extends ServiceTest {
             Assert.fail("User with username \"" + usernameTest + "\" was NOT found");
         }
     }
-    
+
     private List<Long> addLayer3() throws IllegalParameterFault, ResourceNotFoundFault {
         // "rootFolderA" ---> "rasterLayer3"
         GPRasterLayer rasterLayer3 = new GPRasterLayer();

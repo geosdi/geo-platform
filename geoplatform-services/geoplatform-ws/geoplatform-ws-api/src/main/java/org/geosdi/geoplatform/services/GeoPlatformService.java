@@ -66,6 +66,7 @@ import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.RequestByUserProject;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
@@ -255,12 +256,14 @@ public interface GeoPlatformService {
     // ==========================================================================
     @Put
     @HttpResource(location = "/folder")
-    Long insertFolder(@WebParam(name = "folder") GPFolder folder,
-            @WebParam(name = "projectId") Long projectId)
+    @Deprecated
+    Long insertFolder(@WebParam(name = "projectId") Long projectId,
+            @WebParam(name = "folder") GPFolder folder)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Post
     @HttpResource(location = "/folder")
+    @Deprecated
     Long updateFolder(@WebParam(name = "folder") GPFolder folder)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
@@ -279,9 +282,10 @@ public interface GeoPlatformService {
     @Put
 //    @HttpResource(location = "/folder/{descendantsMap}")
     Long saveAddedFolderAndTreeModifications(
+            @WebParam(name = "projectId") Long projectId,
+            @WebParam(name = "parentId") Long parentId,
             @WebParam(name = "folder") GPFolder folder,
-            @WebParam(name = "descendantsMap") GPWebServiceMapData descendantsMapData,
-            @WebParam(name = "projectId") Long projectId)
+            @WebParam(name = "descendantsMap") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Delete
@@ -310,12 +314,14 @@ public interface GeoPlatformService {
     @Get
     @HttpResource(location = "/folders/{folderId}")
     @WebResult(name = "Folder")
-    FolderDTO getShortFolder(Long folderId) throws ResourceNotFoundFault;
+    FolderDTO getShortFolder(@WebParam(name = "folderId") Long folderId)
+            throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/folders/{folderId}")
     @WebResult(name = "Folder")
-    GPFolder getFolderDetail(Long folderId) throws ResourceNotFoundFault;
+    GPFolder getFolderDetail(@WebParam(name = "folderId") Long folderId)
+            throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/folders/search/{num}/{page}/{nameLike}")
@@ -365,13 +371,13 @@ public interface GeoPlatformService {
     //<editor-fold defaultstate="collapsed" desc="Folder / Project">
     @Get
     //@HttpResource(location = "/projects/{projectId}")
-    @WebResult(name = "Project")
+    @WebResult(name = "RootFolders")
     List<FolderDTO> getRootFoldersByProjectId(@WebParam(name = "projectId") Long projectId);
 
     @Get
     //@HttpResource(location = "/projects/{projectId}")
-    @WebResult(name = "Element")
-    TreeFolderElements getElements(@WebParam(name = "projectId") Long projectId)
+    @WebResult(name = "Project")
+    ProjectDTO getElements(@WebParam(name = "projectId") Long projectId)
             throws ResourceNotFoundFault;
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Layer / Style">

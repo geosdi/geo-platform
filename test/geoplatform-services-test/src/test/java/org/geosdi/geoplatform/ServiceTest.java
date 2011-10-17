@@ -41,7 +41,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -62,6 +61,7 @@ import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPUserProjects;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.core.model.Utility;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -77,7 +77,7 @@ public abstract class ServiceTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    protected GeoPlatformService gpWSClient;
+    protected GeoPlatformService gpWSClient; // TODO gpService
     // User
     protected final String usernameTest = "username_test_ws";
     protected long idUserTest = -1;
@@ -146,8 +146,7 @@ public abstract class ServiceTest {
         user.setUsername(username);
         user.setEmailAddress(username + "@test");
         user.setEnabled(true);
-        // TODO FIX: Utility.md5("pwd_" + username)
-        user.setPassword("918706bb28e76c3a5f3c7f0dd6f06ff0"); // clear password: 'pwd_username_test_ws'
+        user.setPassword(Utility.md5hash("pwd_" + username));
         user.setSendEmail(true);
         return user;
     }
@@ -175,7 +174,15 @@ public abstract class ServiceTest {
     protected long createAndInsertFolder(String folderName, GPProject project,
             int position, GPFolder parent) throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder folder = this.createFolder(folderName, project, position, parent);
-        return gpWSClient.insertFolder(folder, project.getId());
+        return gpWSClient.insertFolder(project.getId(), folder);
+    }
+
+    protected long createAndInsertFolder(String folderName, GPProject project,
+            int position, GPFolder parent, int numberOfDescendants)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        GPFolder folder = this.createFolder(folderName, project, position, parent);
+        folder.setNumberOfDescendants(numberOfDescendants);
+        return gpWSClient.insertFolder(project.getId(), folder);
     }
 
     protected long createAndInsertProject(String name, boolean isShared,

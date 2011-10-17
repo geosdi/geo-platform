@@ -98,63 +98,68 @@ class FolderServiceImpl {
     //<editor-fold defaultstate="collapsed" desc="Folder">
     // ==========================================================================
     // === Folder
-    // ==========================================================================    
-    public Long insertFolder(GPFolder folder, Long projectId)
-            throws IllegalParameterFault {
-        logger.trace("\n\t@@@ insertFolder @@@");
+    // ==========================================================================
+    @Deprecated
+    public Long insertFolder(Long projectId, GPFolder folder)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+
         GPProject project = projectDao.find(projectId);
+        if (project == null) {
+            throw new ResourceNotFoundFault("Project not found", projectId);
+        }
         folder.setProject(project);
         this.checkFolder(folder); // TODO assert
 
         folderDao.persist(folder);
-
         return folder.getId();
     }
 
+    @Deprecated
     public Long updateFolder(GPFolder folder)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        logger.trace("\n\t@@@ updateFolder @@@");
-        this.checkFolder(folder); // TODO assert
 
-        GPFolder origFolder = folderDao.find(folder.getId());
-        if (origFolder == null) {
+        GPFolder orig = folderDao.find(folder.getId());
+        if (orig == null) {
             throw new ResourceNotFoundFault("Folder not found", folder.getId());
         }
-        this.checkFolder(origFolder); // TODO assert
+        this.checkFolder(orig); // TODO assert
 
         // Update all properties (except the project)
-        origFolder.setName(folder.getName());
-        origFolder.setPosition(folder.getPosition());
-        origFolder.setNumberOfDescendants(folder.getNumberOfDescendants());
-        origFolder.setChecked(folder.isChecked());
-        origFolder.setShared(folder.isShared());
-        origFolder.setParent(folder.getParent());
-
-        folderDao.merge(origFolder);
-
-        return origFolder.getId();
-    }
-
-    public Long saveFolderProperties(Long folderId, String name, boolean checked)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        GPFolder orig = folderDao.find(folderId);
-        if (orig == null) {
-            throw new ResourceNotFoundFault("Folder not found", folderId);
-        }
-
-        if (name == null || name.trim().length() == 0) {
-            throw new IllegalParameterFault("Folder \"name\" cannot be empty");
-        }
-        orig.setName(name);
-        orig.setChecked(checked);
+        orig.setName(folder.getName());
+        orig.setPosition(folder.getPosition());
+        orig.setNumberOfDescendants(folder.getNumberOfDescendants());
+        orig.setChecked(folder.isChecked());
+        orig.setShared(folder.isShared());
+        orig.setParent(folder.getParent());
 
         folderDao.merge(orig);
         return orig.getId();
     }
 
-    public boolean deleteFolder(Long folderId)
-            throws ResourceNotFoundFault {
+    public Long saveFolderProperties(Long folderId, String name, boolean checked)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        logger.trace("\n\t@@@ saveFolderProperties @@@");
+
+        GPFolder folder = folderDao.find(folderId);
+        if (folder == null) {
+            throw new ResourceNotFoundFault("Folder not found", folderId);
+        }
+        this.checkFolder(folder); // TODO assert
+
+        if (name == null || name.trim().length() == 0) {
+            throw new IllegalParameterFault("Folder \"name\" cannot be null or empty");
+        }
+
+        folder.setName(name);
+        folder.setChecked(checked);
+
+        folderDao.merge(folder);
+        return folder.getId();
+    }
+
+    public boolean deleteFolder(Long folderId) throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ deleteFolder @@@");
+
         GPFolder folder = folderDao.find(folderId);
         if (folder == null) {
             throw new ResourceNotFoundFault("Folder not found", folderId);
@@ -164,25 +169,27 @@ class FolderServiceImpl {
         return folderDao.remove(folder);
     }
 
-    public Long saveAddedFolderAndTreeModifications(GPFolder folder, 
-                GPWebServiceMapData descendantsMapData, Long projectId)
+    // TODO check
+    public Long saveAddedFolderAndTreeModifications(Long projectId, Long parentId,
+            GPFolder folder, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n\t@@@ saveAddedFolderAndTreeModifications @@@");
+
         GPProject project = projectDao.find(projectId);
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
         }
         folder.setProject(project);
-        
-        this.checkFolder(folder); // TODO assert
-        if (folder.getParent() != null && descendantsMapData.getDescendantsMap().isEmpty()) { // TODO assert
-            throw new IllegalParameterFault("descendantsMapData must have one or more entries if the folder has a parent");
-        }
+        this.checkFolder(folder); // TODO assert       
 
-        if (folder.getParent() != null) {
-            GPFolder parentFolder = folderDao.find(folder.getParent().getId());
+        if (parentId != null) {
+            if (descendantsMapData.getDescendantsMap().isEmpty()) { // TODO assert
+                throw new IllegalParameterFault("descendantsMapData must have one or more entries if the folder has a parent");
+            }
+
+            GPFolder parentFolder = folderDao.find(parentId.longValue());
             if (parentFolder == null) {
-                throw new ResourceNotFoundFault("Folder parent not found", parentFolder.getParent().getId());
+                throw new ResourceNotFoundFault("Folder parent not found", parentFolder.getId());
             }
             this.checkFolder(parentFolder); // TODO assert
             folder.setParent(parentFolder);
@@ -193,7 +200,7 @@ class FolderServiceImpl {
         // Shift positions
         folderDao.updatePositionsLowerBound(newPosition, increment);
         layerDao.updatePositionsLowerBound(newPosition, increment);
-        
+
         folderDao.persist(folder);
 
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
@@ -459,9 +466,6 @@ class FolderServiceImpl {
         if (folder.getProject() == null) {
             throw new IllegalParameterFault("Folder \"project\" must be NOT NULL");
         }
-//        if(projectDao.find(folder.getProject().getId()) == null){
-//            throw new ResourceNotFoundFault("Folder \"project\" does NOT exist");
-//        }
     }
 
     // TODO assert

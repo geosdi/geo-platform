@@ -93,7 +93,7 @@ public class DTOConverter {
                 foldersClient.add(this.convertFolderElement(it.next()));
             }
         }
-        System.out.println("@@@@@@@@Lista before: " + foldersClient);
+
         return foldersClient;
     }
 
@@ -225,11 +225,11 @@ public class DTOConverter {
         gpFolder.setChecked(memento.isChecked());
         gpFolder.setId(memento.getIdBaseElement());
         gpFolder.setNumberOfDescendants(memento.getNumberOfDescendants());
-        if (memento.getIdParent() != null) {
-            GPFolder parent = new GPFolder();
-            parent.setId(memento.getIdParent());
-            gpFolder.setParent(parent);
-        }
+//        if (memento.getIdParent() != null) {
+//            GPFolder parent = new GPFolder();
+//            parent.setId(memento.getIdParent());
+//            gpFolder.setParent(parent);
+//        }
         gpFolder.setPosition(memento.getzIndex());
         /*TODO: Once implemented shared function you must set this property
         gpFolder.setShared(true);*/

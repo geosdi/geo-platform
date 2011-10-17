@@ -38,7 +38,11 @@
 package org.geosdi.geoplatform.services;
 
 import com.googlecode.genericdao.search.Search;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.model.GPUserProjects;
@@ -52,11 +56,12 @@ import org.geosdi.geoplatform.core.dao.GPUserProjectsDAO;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
+import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.FolderDTO;
-import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
+import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.springframework.security.acls.domain.BasePermission;
 
 /**
@@ -243,7 +248,7 @@ class ProjectServiceImpl {
 //     * @param request
 //     * @return count only root folders owned by user
 //     */
-//    public Long getUserFoldersCount(Long userId) {
+//    public long getUserFoldersCount(Long userId) {
 //        Search searchCriteria = new Search(GPUserFolders.class);
 //
 //        searchCriteria.addFilterEqual("user.id", userId);
@@ -288,27 +293,109 @@ class ProjectServiceImpl {
         return FolderDTO.convertToFolderDTOList(foundUserFolders);
     }
 
-    public TreeFolderElements getElements(Long projectId)
-            throws ResourceNotFoundFault {
-        if (projectDao.find(projectId) == null) {
+    public ProjectDTO getElements(Long projectId) throws ResourceNotFoundFault {
+        GPProject project = projectDao.find(projectId);
+        if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
         }
+        ProjectDTO projectDTO = new ProjectDTO(project);
 
-        TreeFolderElements tree = new TreeFolderElements();
-
+        // Root Folders
         Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.addFilterEqual("project.id", projectId);
-        List<GPFolder> foundFolder = folderDao.search(searchCriteria);
-        tree.addFolderCollection(FolderDTO.convertToFolderDTOList(foundFolder));
+        searchCriteria.addFilterNull("parent.id");
+        searchCriteria.addSortDesc("position");
+        List<GPFolder> rootFolders = folderDao.search(searchCriteria);
+        logger.debug("\n*** rootFolders:\n" + rootFolders);
 
-        searchCriteria = new Search(GPLayer.class);
+        List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(rootFolders);
+        projectDTO.setRootFolders(rootFoldersDTO);
+
+        // Sub Folders
+        searchCriteria = new Search(GPFolder.class);
         searchCriteria.addFilterEqual("project.id", projectId);
-        List<GPLayer> foundLayer = layerDao.search(searchCriteria);
-        tree.addLayerCollection(foundLayer);
+        searchCriteria.addFilterNotNull("parent.id");
+//        searchCriteria.addSortDesc("position");
+        List<GPFolder> subFolders = folderDao.search(searchCriteria);
 
-        return tree;
-    }
+        Map<String, GPFolder> subFoldersMap = new HashMap<String, GPFolder>(subFolders.size());
+        for (GPFolder folder : subFolders) {
+            String key = this.createParentChildKey(folder.getParent(), folder);
+            logger.debug("\n*** key: " + key + "\n*** subFolder ***\n" + folder);
+            subFoldersMap.put(key, folder);
+        }
+
+        this.fillFolderList(rootFoldersDTO, subFoldersMap);
+
+        // TODO
+        // Sub Layers
+//        searchCriteria = new Search(GPFolder.class);
+//        searchCriteria.addFilterEqual("project.id", projectId);
+//        List<GPLayer> subLayers = layerDao.search(searchCriteria);
 //
+//        Map<String, GPLayer> subLayersMap = new HashMap<String, GPLayer>(subLayers.size());
+//        for (GPLayer layer : subLayers) {
+//            String key = this.createParentChildKey(layer.getFolder(), layer);
+//            logger.debug("\n*** key: " + key + "\n*** layer ***\n" + layer);
+//            subLayersMap.put(key, layer);
+//        }
+
+        return projectDTO;
+    }
+
+    private String createParentChildKey(GPFolder parent, GPFolder child) {
+        return parent.getId() + ":" + child.getId();
+    }
+
+    private String createParentChildKey(GPFolder parent, GPLayer child) {
+        if (child instanceof GPRasterLayer) {
+            return parent.getId() + ":" + child.getId() + ":R";
+        } else {
+            return parent.getId() + ":" + child.getId() + ":V";
+        }
+    }
+
+    private void fillFolderList(List<FolderDTO> folders, Map<String, GPFolder> map) {
+        logger.debug("\n*** fillFolderList - Map size: " + map.size());
+        if (!map.isEmpty()) {
+            List<FolderDTO> childsDTO = null;
+            for (FolderDTO folder : folders) {
+                logger.debug("\n*** fillFolderList - folder: " + folder);
+                List<GPFolder> childs = this.getChilds(folder.getId(), map);
+                if (childs.size() > 0) {
+                    childsDTO = FolderDTO.convertToFolderDTOList(childs);
+                    folder.setElementList(childsDTO);
+                }
+            }
+
+            if (childsDTO != null) {
+                this.fillFolderList(childsDTO, map);
+            }
+        }
+    }
+
+    private List<GPFolder> getChilds(Long parentId, Map<String, GPFolder> map) {
+        List<GPFolder> childs = new ArrayList<GPFolder>();
+        List<String> childsKeyHit = new ArrayList<String>();
+
+        for (Map.Entry<String, GPFolder> entry : map.entrySet()) {
+            String key = entry.getKey();
+            if (key.startsWith(parentId.toString())) {
+                logger.debug("*** getChilds - HIT: " + key);
+                childsKeyHit.add(key);
+                GPFolder childFolder = map.get(key);
+                childs.add(childFolder);
+            }
+        }
+
+        // Important: must be execute outer first for otherwise will throw ConcurrentModificationException
+        for (String key : childsKeyHit) {
+            map.remove(key);
+        }
+
+        return childs;
+    }
+
 //    // TODO Check
 //    /**
 //     * 
@@ -323,7 +410,7 @@ class ProjectServiceImpl {
 //
 //        return userProjectsDao.count(searchCriteria);
 //    }
-
+//    
     public void setProjectShared(Long projectId) throws ResourceNotFoundFault {
         GPProject project = projectDao.find(projectId);
         if (project == null) {

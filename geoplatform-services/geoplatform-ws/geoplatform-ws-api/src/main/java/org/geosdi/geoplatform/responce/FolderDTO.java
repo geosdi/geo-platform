@@ -38,9 +38,12 @@
 package org.geosdi.geoplatform.responce;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.geosdi.geoplatform.core.model.GPFolder;
@@ -54,6 +57,10 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 public class FolderDTO extends AbstractElementDTO {
 
     private Integer numberOfDescendants;
+    //
+    @XmlElementWrapper(name = "elementList")
+    @XmlElement(name = "element")
+    private List<? extends AbstractElementDTO> elementList;
 
     /**
      * Default constructor
@@ -83,6 +90,21 @@ public class FolderDTO extends AbstractElementDTO {
      */
     public void setNumberOfChilds(int numberOfChilds) {
         this.numberOfDescendants = numberOfChilds;
+    }
+
+    /**
+     * @return the elementList
+     */
+    public List<? extends AbstractElementDTO> getElementList() {
+        return elementList;
+    }
+
+    /**
+     * @param elementList to set
+     */
+    public void setElementList(List<? extends AbstractElementDTO> elementList) {        
+        this.elementList = elementList;        
+        Collections.sort(this.elementList);
     }
 
     /*

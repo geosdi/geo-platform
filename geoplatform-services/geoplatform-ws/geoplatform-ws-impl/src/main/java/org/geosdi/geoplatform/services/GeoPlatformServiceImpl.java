@@ -73,6 +73,7 @@ import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.RequestByUserProject;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
@@ -442,13 +443,14 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === Folder
     // ==========================================================================
     @Override
-    public Long insertFolder(GPFolder folder, Long projectId)
-            throws IllegalParameterFault {
-        return folderServiceDelegate.insertFolder(folder, projectId);
+    public Long insertFolder(Long projectId, GPFolder folder)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return folderServiceDelegate.insertFolder(projectId, folder);
     }
 
     @Override
-    public Long updateFolder(GPFolder folder) throws ResourceNotFoundFault, IllegalParameterFault {
+    public Long updateFolder(GPFolder folder)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         return folderServiceDelegate.updateFolder(folder);
     }
 
@@ -464,11 +466,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public Long saveAddedFolderAndTreeModifications(GPFolder folder, GPWebServiceMapData descendantsMapData,
-            Long projectId)
+    public Long saveAddedFolderAndTreeModifications(Long projectId, Long parentId, GPFolder folder, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return folderServiceDelegate.saveAddedFolderAndTreeModifications(folder,
-                descendantsMapData, projectId);
+        return folderServiceDelegate.saveAddedFolderAndTreeModifications(projectId, parentId, folder, descendantsMapData);
     }
 
     @Override
@@ -537,8 +537,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public TreeFolderElements getElements(Long projectId)
-            throws ResourceNotFoundFault {
+    public ProjectDTO getElements(Long projectId) throws ResourceNotFoundFault {
         return projectServiceDelegate.getElements(projectId);
     }
     //</editor-fold>

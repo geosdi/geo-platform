@@ -146,7 +146,7 @@ public class LayerService implements ILayerService {
         folder.setChecked(isChecked);
         Long savedFolderId = null;
         try {
-            savedFolderId = this.geoPlatformServiceClient.insertFolder(folder, projectId);
+            savedFolderId = this.geoPlatformServiceClient.insertFolder(projectId, folder);
         } catch (IllegalParameterFault ilg) {
             logger.error(
                     "Error on LayerService: " + ilg);
@@ -191,7 +191,7 @@ public class LayerService implements ILayerService {
 
         Long savedFolderId = null;
         try {
-            savedFolderId = this.geoPlatformServiceClient.insertFolder(folder, projectId);
+            savedFolderId = this.geoPlatformServiceClient.insertFolder(projectId, folder);
         } catch (IllegalParameterFault ilg) {
             logger.error(
                     "Error on LayerService: " + ilg);
@@ -234,13 +234,12 @@ public class LayerService implements ILayerService {
         }
         GPFolder gpFolder = this.dtoConverter.convertMementoFolder(memento.getAddedFolder());
         Long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
-//        gpFolder.setProject(project);
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         Long idSavedFolder = null;
         try {
             idSavedFolder = this.geoPlatformServiceClient.saveAddedFolderAndTreeModifications(
-                    gpFolder, map, projectId);
+                    projectId, memento.getAddedFolder().getIdParent(), gpFolder, map);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to save folder on LayerService: " + ex);
             throw new GeoPlatformException(ex);

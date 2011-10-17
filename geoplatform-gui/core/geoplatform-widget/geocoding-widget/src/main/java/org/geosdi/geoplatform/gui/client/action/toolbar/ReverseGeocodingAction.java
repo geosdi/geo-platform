@@ -39,13 +39,14 @@ import org.geosdi.geoplatform.gui.action.MapToggleAction;
 import org.geosdi.geoplatform.gui.client.GeocodingResources;
 
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingToggleEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingToggleEventHandler;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -59,7 +60,7 @@ public class ReverseGeocodingAction extends MapToggleAction implements ReverseGe
                 theMapWidget);
         // TODO Auto-generated constructor stub
 
-        GPHandlerManager.addHandler(ReverseGeocodingToggleEvent.TYPE, this);
+        GPGeocodingHandlerManager.addHandler(ReverseGeocodingToggleEvent.TYPE, this);
     }
 
     /*
@@ -83,7 +84,7 @@ public class ReverseGeocodingAction extends MapToggleAction implements ReverseGe
             mapWidget.getButtonBar().setPressedButton(null);
         }
 
-        GPHandlerManager.fireEvent(new ReverseGeocodingEvent(button.isPressed()));
+        GPGeocodingHandlerManager.fireEvent(new ReverseGeocodingEvent(button.isPressed()));
     }
 
     @Override
@@ -103,7 +104,7 @@ public class ReverseGeocodingAction extends MapToggleAction implements ReverseGe
     @Override
     public void disableControl() {
         // TODO Auto-generated method stub
-        GPHandlerManager.fireEvent(new ReverseGeocodingEvent(false));
+        GPGeocodingHandlerManager.fireEvent(new ReverseGeocodingEvent(false));
     }
 
     private void deactivateAllMapControl() {

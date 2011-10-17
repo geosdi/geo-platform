@@ -40,11 +40,11 @@ import org.geosdi.geoplatform.gui.client.service.GeocodingRemote;
 import org.geosdi.geoplatform.gui.client.service.GeocodingRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
 
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.gwtopenmaps.openlayers.client.LonLat;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingDispatchHandler;
+import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -61,7 +61,7 @@ public class ReverseGeocodingDispatcher implements
      *
      */
     public ReverseGeocodingDispatcher() {
-        GPHandlerManager.addHandler(ReverseGeocodingDispatchHandler.TYPE, this);
+        GPGeocodingHandlerManager.addHandler(ReverseGeocodingDispatchHandler.TYPE, this);
     }
 
     /*

@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.map.marker.advanced;
 import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingUpdateLocationEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.GPGenericMarkerLayer;
 import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.Pixel;
@@ -143,7 +143,7 @@ public abstract class GPVectorMarkerLayer extends GPGenericMarkerLayer {
                         .getApplicationMap().getMap().getLonLatFromPixel(pixel);
                 
                 updateEvent.setLonLat(ll);
-                GPHandlerManager.fireEvent(updateEvent);
+                GPGeocodingHandlerManager.fireEvent(updateEvent);
             }
         });
 

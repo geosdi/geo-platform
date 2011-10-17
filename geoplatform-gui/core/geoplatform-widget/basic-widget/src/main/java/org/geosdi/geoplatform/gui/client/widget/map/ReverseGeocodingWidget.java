@@ -42,9 +42,9 @@ import org.geosdi.geoplatform.gui.client.widget.map.popup.PopupMapWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.popup.template.PopupTemplate;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.GPToolbarActionHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.event.UpdateModelEvent;
+import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.event.MapClickListener;
 
@@ -69,7 +69,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
     public ReverseGeocodingWidget(GeoPlatformMap theMapWidget) {
         this.mapWidget = theMapWidget;
-        GPHandlerManager.addHandler(ReverseGeocodingEventHandler.TYPE, this);
+        GPGeocodingHandlerManager.addHandler(ReverseGeocodingEventHandler.TYPE, this);
         this.createListener();
         this.event = new ReverseGeocodingDispatchEvent(this);
     }
@@ -204,7 +204,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
                 + PopupTemplate.MESSAGE_LOADING.toString());
         this.mapWidget.getMap().addPopup(popupWidget.getPopup());
 
-        GPHandlerManager.fireEvent(event);
+        GPGeocodingHandlerManager.fireEvent(event);
     }
 
     /**

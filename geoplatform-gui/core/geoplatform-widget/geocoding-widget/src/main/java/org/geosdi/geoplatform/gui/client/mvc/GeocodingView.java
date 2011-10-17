@@ -35,10 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.mvc;
 
-import java.util.ArrayList;
 
 import org.geosdi.geoplatform.gui.client.GeocodingEvents;
-import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.widget.GeocodingManagementWidget;
 import org.geosdi.geoplatform.gui.client.widget.ReverseGeocodingDispatcher;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
@@ -46,9 +44,7 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
 import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.GeocodingActivationEvent;
-import org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt.event.GPGeocodingRemoveMarkerEvent;
 import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
 /**
@@ -129,40 +125,6 @@ public class GeocodingView extends GeoPlatformView {
      */
     public GeocodingManagementWidget getGeocodingManagement() {
         return geocodingManagement;
-    }
-
-    /**
-     * Mask GeocodingGridWidget
-     */
-    public void maskGeocodingGrid() {
-        this.geocodingManagement.getGeocodingGridWidget().maskGrid();
-    }
-
-    /**
-     * Un Mask GeocodingGridWidget
-     */
-    public void unMaskGeocodingGrid() {
-        this.geocodingManagement.getGeocodingGridWidget().unMaskGrid();
-    }
-
-    /**
-     * Clean the Store
-     */
-    public void cleanStore() {
-        this.geocodingManagement.getGeocodingGridWidget().getStore().removeAll();
-    }
-
-    /**
-     * Fill GeocodingGridWidget Store
-     *
-     * @param beans
-     */
-    public void fillStore(ArrayList<GeocodingBean> beans) {
-        this.geocodingManagement.getGeocodingGridWidget().fillStore(beans);
-    }
-
-    public Grid<GeocodingBean> getGrid() {
-        return this.geocodingManagement.getGeocodingGridWidget().getGrid();
     }
 
     /**

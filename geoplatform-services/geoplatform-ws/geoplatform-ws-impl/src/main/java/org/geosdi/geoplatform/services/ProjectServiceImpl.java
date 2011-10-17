@@ -145,6 +145,7 @@ class ProjectServiceImpl {
         return project.getId(); // Remark: return only the entity ID of Project
     }
 
+    @Deprecated
     public Long insertProject(GPProject project) throws IllegalParameterFault {
         logger.trace("\n\t@@@ insertProject @@@");
         this.checkProject(project);

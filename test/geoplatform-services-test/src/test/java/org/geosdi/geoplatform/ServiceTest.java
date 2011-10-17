@@ -112,6 +112,9 @@ public abstract class ServiceTest {
         // Insert Project
         idProjectTest = this.createAndInsertProject("project_test_ws", false, 2, new Date(System.currentTimeMillis()));
         projectTest = gpWSClient.getProjectDetail(idProjectTest);
+        // Insert UserProject
+        this.createAndInsertUserProject(userTest, projectTest);
+
         // Create root folders for the user
         idRootFolderA = this.createAndInsertFolder(nameRootFolderA, projectTest, 2, null);
         rootFolderA = gpWSClient.getFolderDetail(idRootFolderA);
@@ -171,6 +174,19 @@ public abstract class ServiceTest {
         }
     }
 
+    protected long createAndInsertProject(String name, boolean isShared,
+            int numberOfElements, Date creationalDate) throws IllegalParameterFault {
+        GPProject project = this.createProject(name, isShared, numberOfElements, creationalDate);
+        return gpWSClient.insertProject(project);
+    }
+
+    protected long createAndInsertUserProject(GPUser user, GPProject project)
+            throws IllegalParameterFault {
+        GPUserProjects userProject = new GPUserProjects();
+        userProject.setUserAndProject(user, project);
+        return gpWSClient.insertUserProject(userProject);
+    }
+
     protected long createAndInsertFolder(String folderName, GPProject project,
             int position, GPFolder parent) throws ResourceNotFoundFault, IllegalParameterFault {
         GPFolder folder = this.createFolder(folderName, project, position, parent);
@@ -185,10 +201,14 @@ public abstract class ServiceTest {
         return gpWSClient.insertFolder(project.getId(), folder);
     }
 
-    protected long createAndInsertProject(String name, boolean isShared,
-            int numberOfElements, Date creationalDate) throws IllegalParameterFault {
-        GPProject project = this.createProject(name, isShared, numberOfElements, creationalDate);
-        return gpWSClient.insertProject(project);
+    protected GPProject createProject(String name, boolean isShared,
+            int numberOfElements, Date creationalDate) {
+        GPProject project = new GPProject();
+        project.setName(name);
+        project.setShared(isShared);
+        project.setNumberOfElements(numberOfElements);
+        project.setCreationDate(creationalDate);
+        return project;
     }
 
     protected GPFolder createFolder(String folderName, GPProject project,
@@ -199,21 +219,6 @@ public abstract class ServiceTest {
         folder.setPosition(position);
         folder.setParent(parent);
         return folder;
-    }
-
-    protected GPProject createProject(String name, boolean isShared, int numberOfElements, Date creationalDate) {
-        GPProject project = new GPProject();
-        project.setName(name);
-        project.setShared(isShared);
-        project.setNumberOfElements(numberOfElements);
-        project.setCreationDate(creationalDate);
-        return project;
-    }
-
-    protected GPUserProjects createBindingUserProject(GPUser user, GPProject project) {
-        GPUserProjects userProject = new GPUserProjects();
-        userProject.setUserAndProject(user, project);
-        return userProject;
     }
 
     protected long createAndInsertRasterLayer(GPFolder folder, String title, String name,

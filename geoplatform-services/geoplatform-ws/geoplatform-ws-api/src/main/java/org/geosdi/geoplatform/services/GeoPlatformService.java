@@ -209,6 +209,7 @@ public interface GeoPlatformService {
 
     @Put
     @HttpResource(location = "/project")
+    @Deprecated
     Long insertProject(@WebParam(name = "project") GPProject project)
             throws IllegalParameterFault;
 
@@ -380,11 +381,11 @@ public interface GeoPlatformService {
     ProjectDTO getElements(@WebParam(name = "projectId") Long projectId)
             throws ResourceNotFoundFault;
     //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc="Layer / Style">
     // ==========================================================================
     // === Layer / Style
     // ==========================================================================
-
     @Put
     @HttpResource(location = "/layer")
     Long insertLayer(@WebParam(name = "layer") GPLayer layer)

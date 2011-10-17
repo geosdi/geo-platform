@@ -2,12 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>org.geosdi</groupId>
     <artifactId>geo-platform</artifactId>
     <version>1.2-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Geo-Platform :: == GeoSDI Framework</name>
 
+    <name>Geo-Platform :: == GeoSDI Framework</name>
 
     <scm>
         <connection>scm:svn:https://trac.geosdi.org/svn/geo-platform/trunk</connection>
@@ -19,7 +20,7 @@
         <url>http://www.geosdi.org</url>
     </organization>
     <inceptionYear>2011</inceptionYear>
-    
+
     <distributionManagement>
 		<!--.................................. -->
 		<!-- geoSDI Repository -->
@@ -97,7 +98,7 @@
             </snapshots>
         </repository>
 
-		<!-- JBoss --> 
+		<!-- JBoss -->
         <repository>
             <id>jboss-repo</id>
             <name>JBoss Maven2 Repository</name>
@@ -110,10 +111,9 @@
         <repository>
             <id>jboss</id>
             <name>JBoss Public Repository</name>
-            <url>http://repository.jboss.org/nexus/content/groups/public-jboss/
-            </url>
+            <url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
         </repository>
-
+        
 		<!-- Spring -->
         <repository>
             <id>spring-release</id>
@@ -583,7 +583,6 @@
 			<!-- =========================================================== -->
 			<!-- HIBERNATE JAVAX PERSISTENCE -->
 			<!-- =========================================================== -->
-            
             <dependency>
                 <groupId>org.hibernate.javax.persistence</groupId>
                 <artifactId>hibernate-jpa-2.0-api</artifactId>
@@ -702,7 +701,6 @@
                 <artifactId>hibernate</artifactId>
                 <version>${hibernate-version}</version>
             </dependency>
-
 
 			<!-- =========================================================== -->
 			<!-- HIBERNATE-SPATIAL -->
@@ -963,7 +961,6 @@
 
     </build>
 
-
     <reporting>
         <plugins>
 
@@ -1090,7 +1087,6 @@
         </plugins>
     </reporting>
 
-
     <pluginRepositories>
 
         <pluginRepository>
@@ -1124,8 +1120,6 @@
         </pluginRepository>
 
     </pluginRepositories>
-
-
 
     <properties>
         <geoplatform-version>1.2-SNAPSHOT</geoplatform-version>
@@ -1173,8 +1167,6 @@
         <hibernate-generic-dao-version>1.0.0</hibernate-generic-dao-version>
         <asm-version>3.3</asm-version>
         <cglib-version>2.1_3</cglib-version>
-
-        <javassist-version>3.12.0.GA</javassist-version>
 
         <jai-version>1.1.3</jai-version>
         <jai-imageio-version>1.1</jai-imageio-version>

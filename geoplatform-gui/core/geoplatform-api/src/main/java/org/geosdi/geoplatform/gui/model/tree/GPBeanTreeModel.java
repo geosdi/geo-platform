@@ -146,7 +146,7 @@ public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
     public void setChecked(boolean checked) {
         this.checked = checked;
     }
-
+    
     public abstract AbstractImagePrototype getIcon();
 
     public abstract void accept(IVisitor visitor);

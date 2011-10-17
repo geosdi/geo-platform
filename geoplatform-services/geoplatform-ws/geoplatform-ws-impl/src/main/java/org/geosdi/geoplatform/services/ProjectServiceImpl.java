@@ -283,7 +283,7 @@ class ProjectServiceImpl {
 
         searchCriteria.addFilterEqual("project.id", projectId);
         searchCriteria.addFilterNull("parent.id");
-
+        searchCriteria.addSortDesc("position");
         List<GPFolder> foundUserFolders = folderDao.search(searchCriteria);
         return FolderDTO.convertToFolderDTOList(foundUserFolders);
     }

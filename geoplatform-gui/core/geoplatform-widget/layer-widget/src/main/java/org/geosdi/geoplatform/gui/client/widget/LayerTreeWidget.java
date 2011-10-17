@@ -166,8 +166,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
                 }
 
                 @Override
-                public void onSuccess(
-                        ArrayList<GPFolderClientInfo> result) {
+                public void onSuccess(ArrayList<GPFolderClientInfo> result) {
                     root.modelConverter(result);
                     store.add(root, true);
                     visitorDisplay.enableCheckedComponent(root);

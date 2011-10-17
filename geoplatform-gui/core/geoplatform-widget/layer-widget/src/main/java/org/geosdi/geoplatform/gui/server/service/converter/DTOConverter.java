@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.gui.server.service.converter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -91,7 +93,7 @@ public class DTOConverter {
                 foldersClient.add(this.convertFolderElement(it.next()));
             }
         }
-
+        System.out.println("@@@@@@@@Lista before: " + foldersClient);
         return foldersClient;
     }
 
@@ -115,8 +117,8 @@ public class DTOConverter {
         }
         return clientFolderElements;
     }
-    
-    public ShortRasterPropertiesDTO convertMementoProperties(MementoLayerOriginalProperties memento){
+
+    public ShortRasterPropertiesDTO convertMementoProperties(MementoLayerOriginalProperties memento) {
         ShortRasterPropertiesDTO dto = new ShortRasterPropertiesDTO();
         dto.setAlias(memento.getName());
         dto.setChecked(memento.isChecked());
@@ -253,7 +255,7 @@ public class DTOConverter {
 
                 layer = new GPRasterLayer();
                 layer.setLayerType(GPLayerType.RASTER);
-                ((GPRasterLayer)layer).setStyles(((MementoRaster)memento).getStyles());
+                ((GPRasterLayer) layer).setStyles(((MementoRaster) memento).getStyles());
                 // layer.setLayerInfo();???
             } else if (memento instanceof MementoVector) {
 //                MementoVector mementoVector = (MementoVector) memento;

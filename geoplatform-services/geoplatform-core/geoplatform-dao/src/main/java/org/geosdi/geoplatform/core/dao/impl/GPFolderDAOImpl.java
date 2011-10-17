@@ -217,10 +217,10 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
         Search search = new Search();
         search.addFilterGreaterOrEqual("position", lowerBoundPosition);
         List<GPFolder> matchingFolders = super.search(search);
-
-        logger.debug("\n*** UPDATE Folders with Position from {} *** deltaValue = {} ***",
+        
+        logger.info("\n*** UPDATE Folders with Position from {} *** deltaValue = {} ***",
                 new Object[]{lowerBoundPosition, deltaValue});
-        logger.debug("\n*** Matching Folders count: {} ***", matchingFolders.size());
+        logger.info("\n*** Matching Folders count: {} ***", matchingFolders.size());
 
         // No updates (select 0 folders)
         if (matchingFolders.isEmpty()) {
@@ -240,7 +240,7 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
 
         // Check the update
         for (int ind = foldersUpdated.length - 1; ind >= 0; ind--) {
-            logger.trace("\n*** Position of the UPDATED GPFolder: {} ({} + {}) ***", new Object[]{
+            logger.info("\n*** Position of the UPDATED GPFolder: {} ({} + {}) ***", new Object[]{
                         foldersUpdated[ind].getPosition(), oldPositions[ind], deltaValue});
             if ((oldPositions[ind] + deltaValue) != foldersUpdated[ind].getPosition()) {
                 return false;

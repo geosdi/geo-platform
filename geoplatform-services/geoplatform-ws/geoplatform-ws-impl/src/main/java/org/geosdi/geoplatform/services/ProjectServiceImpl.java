@@ -330,6 +330,11 @@ class ProjectServiceImpl {
 
         Map<Long, FolderDTO> mapProjectFolders = this.fillProjectFolders(rootFoldersDTO,
                 subFoldersMap, new HashMap<Long, FolderDTO>());
+        
+        // Add root folder to mapProjectFolders
+        for (FolderDTO f : rootFoldersDTO) {
+            mapProjectFolders.put(f.getId(), f);
+        }
 
         // Sub Layers
         searchCriteria = new Search(GPLayer.class);

@@ -108,7 +108,6 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
     @Override
     public void peek(GwtEvent eventAfterAllSaveOperations) {
         if (eventAfterAllSaveOperations != null) {
-            System.out.println("setting event");
             this.eventAfterAllSaveOperations = eventAfterAllSaveOperations;
         }
         this.showProgressBar();

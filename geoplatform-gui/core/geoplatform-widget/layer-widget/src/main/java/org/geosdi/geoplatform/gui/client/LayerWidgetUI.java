@@ -205,7 +205,8 @@ public class LayerWidgetUI implements EntryPoint {
                     @Override
                     public GeoPlatformToolbarAction createActionTool(
                             TreePanel tree) {
-                        ToolbarLayerTreeAction action = new SaveTreeAction(tree);
+                        SaveTreeAction action = new SaveTreeAction(tree);
+                        action.setViewer(ToolbarTreeClientTool.USER_VIEWER);
                         setAction(action);
                         return action;
                     }

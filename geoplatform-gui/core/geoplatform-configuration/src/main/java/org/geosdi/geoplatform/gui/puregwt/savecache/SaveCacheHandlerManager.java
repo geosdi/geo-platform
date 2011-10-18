@@ -33,42 +33,47 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.model.memento.puregwt.event;
+package org.geosdi.geoplatform.gui.puregwt.savecache;
 
+import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.client.model.memento.puregwt.GPPeekCacheEventHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
+import org.geosdi.geoplatform.gui.puregwt.GPEventBusImpl;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email  nazzareno.sileno@geosdi.org
  */
-public class PeekCacheEvent extends GwtEvent<GPPeekCacheEventHandler> {
+public class SaveCacheHandlerManager {
 
-    private GwtEvent eventAfterAllSaveOperations;
-    
-    @Override
-    public Type<GPPeekCacheEventHandler> getAssociatedType() {
-        return GPPeekCacheEventHandler.TYPE;
+    private GPEventBus eventBus;
+    private static SaveCacheHandlerManager instance = new SaveCacheHandlerManager();
+
+    private SaveCacheHandlerManager() {
+        this.eventBus = new GPEventBusImpl();
     }
 
-    @Override
-    protected void dispatch(GPPeekCacheEventHandler handler) {
-        handler.peek(this.eventAfterAllSaveOperations);
+    public static SaveCacheHandlerManager getInstance() {
+        return instance;
     }
 
-    /**
-     * @return the eventAfterAllSaveOperations
-     */
-    public GwtEvent getEventAfterAllSaveOperations() {
-        return eventAfterAllSaveOperations;
+    public static <T extends EventHandler> HandlerRegistration addHandler(
+            Type<T> type, T handler) {
+        return getInstance().eventBus.addHandler(type, handler);
     }
 
-    /**
-     * @param eventAfterAllSaveOperations the eventAfterAllSaveOperations to set
-     */
-    public void setEventAfterAllSaveOperations(GwtEvent eventAfterAllSaveOperations) {
-        this.eventAfterAllSaveOperations = eventAfterAllSaveOperations;
+    public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
+            Type<T> type, Object source, T handler) {
+        return getInstance().eventBus.addHandlerToSource(type, source, handler);
+    }
+
+    public static void fireEvent(GwtEvent<?> event) {
+        getInstance().eventBus.fireEvent(event);
+    }
+
+    public static void fireEventFromSource(GwtEvent<?> event, Object source) {
+        getInstance().eventBus.fireEventFromSource(event, source);
     }
 }

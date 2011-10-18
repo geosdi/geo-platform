@@ -59,7 +59,6 @@ public class GenericFeatureOperation extends MapControl {
 
     public GenericFeatureOperation(Vector vector) {
         super(vector);
-        // TODO Auto-generated constructor stub
     }
 
     /*
@@ -70,14 +69,12 @@ public class GenericFeatureOperation extends MapControl {
      */
     @Override
     public void createControl() {
-        // TODO Auto-generated method stub
         SelectFeatureOptions selectFeatureOptions = new SelectFeatureOptions();
 
         selectFeatureOptions.clickFeature(new ClickFeatureListener() {
 
             @Override
             public void onFeatureClicked(final VectorFeature vectorFeature) {
-                // TODO Auto-generated method stub
                 GeoPlatformMessage.confirmMessage(
                         "Delete Feature",
                         "Are you sure you want to delete the selected feature ?",
@@ -85,7 +82,6 @@ public class GenericFeatureOperation extends MapControl {
 
                             @Override
                             public void handleEvent(MessageBoxEvent be) {
-                                // TODO Auto-generated method stub
                                 if (be.getButtonClicked().getText().equalsIgnoreCase(
                                         "yes")
                                         || be.getButtonClicked().getText().equalsIgnoreCase(
@@ -105,14 +101,12 @@ public class GenericFeatureOperation extends MapControl {
 
     @Override
     public void activateControl() {
-        // TODO Auto-generated method stub
         this.control.activate();
         this.enabled = true;
     }
 
     @Override
     public void deactivateControl() {
-        // TODO Auto-generated method stub
         this.control.deactivate();
         this.enabled = false;
     }

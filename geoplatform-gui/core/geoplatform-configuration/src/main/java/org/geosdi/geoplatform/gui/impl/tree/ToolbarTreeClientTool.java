@@ -143,7 +143,7 @@ public class ToolbarTreeClientTool {
         previewKmlClientTool.setType(ActionClientTool.BUTTON);
         previewKmlClientTool.setEnabled(true);
         previewKmlClientTool.setOrder(11);
-        
+
         ActionClientTool exportProject = new ActionClientTool();
         exportProject.setId(TOOLBAR_EXPORT_PROJECT);
         exportProject.setType(ActionClientTool.BUTTON);
@@ -159,9 +159,7 @@ public class ToolbarTreeClientTool {
         this.clientTools.add(toolbarSeparator2);
         this.clientTools.add(printClientTool);
 //        System.out.println("# USER_VIEWER: " + USER_VIEWER);
-        if (USER_VIEWER == false) { //
-            this.clientTools.add(saveTreeState);
-        } //
+        this.clientTools.add(saveTreeState);
         this.clientTools.add(removeElement);
         this.clientTools.add(toolbarSeparator);
         this.clientTools.add(addFolder);

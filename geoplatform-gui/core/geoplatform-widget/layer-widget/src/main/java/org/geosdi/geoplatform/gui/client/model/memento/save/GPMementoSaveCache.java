@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.model.memento.save;
 import com.extjs.gxt.ui.client.data.ModelData;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
@@ -65,6 +64,8 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
     }
 
     private GPMementoSaveCache() {
+        //This is necessary to manage the events associated to the saveCache
+        MementoSaveCacheManager manager = new MementoSaveCacheManager();
     }
 
     //The properties are copied only the first time, in this way we can save
@@ -115,6 +116,27 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
         return operation;
     }
 
+    @Override
+    public boolean isEmpty() {
+        boolean result = true;
+        if (!super.isEmpty() || (!this.modifiedLayersMap.isEmpty()
+                && this.countLayerPropertiesModified() > 0)) {
+            result = false;
+        }
+        return result;
+    }
+
+    private int countLayerPropertiesModified() {
+        int count = 0;
+        for (AbstractMementoOriginalProperties memento : this.modifiedLayersMap.values()) {
+            if (memento.isChanged()) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+
     private void verifyEmptyCache() {
         if (super.peek() == null) {
             if (this.modifiedLayersMap.isEmpty()) {
@@ -123,7 +145,7 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
                 /*System.out.println("Event SAVE_CACHE_EMPTY notified to "
                 + this.observable.countObservers() + " observers");*/
             } else {
-                this.prepareLayerPropertiesModify();
+                this.prepareLayerPropertiesModified();
                 this.verifyEmptyCache();
             }
         }
@@ -131,15 +153,15 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
 
     public void cleanOperationsRefToDeletedElement(GPBeanTreeModel gpBeanTreeModel) {
         this.modifiedLayersMap.remove(gpBeanTreeModel);
-        if(gpBeanTreeModel instanceof FolderTreeNode){
-            FolderTreeNode folder = (FolderTreeNode)gpBeanTreeModel;
+        if (gpBeanTreeModel instanceof FolderTreeNode) {
+            FolderTreeNode folder = (FolderTreeNode) gpBeanTreeModel;
             for (ModelData element : folder.getChildren()) {
-                this.cleanOperationsRefToDeletedElement((GPBeanTreeModel)element);
+                this.cleanOperationsRefToDeletedElement((GPBeanTreeModel) element);
             }
         }
     }
 
-    private void prepareLayerPropertiesModify() {
+    private void prepareLayerPropertiesModified() {
         for (AbstractMementoOriginalProperties memento : this.modifiedLayersMap.values()) {
             if (memento.isChanged()) {
                 this.add(memento);

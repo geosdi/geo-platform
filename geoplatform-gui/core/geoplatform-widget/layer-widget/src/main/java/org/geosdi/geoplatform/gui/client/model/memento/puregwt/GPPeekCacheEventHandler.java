@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.model.memento.puregwt;
 
 import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 
@@ -48,5 +49,5 @@ public interface GPPeekCacheEventHandler extends EventHandler {
     
     Type<GPPeekCacheEventHandler> TYPE = new Type<GPPeekCacheEventHandler>();
     
-    public void peek();
+    public void peek(GwtEvent eventAfterAllSaveOperations);
 }

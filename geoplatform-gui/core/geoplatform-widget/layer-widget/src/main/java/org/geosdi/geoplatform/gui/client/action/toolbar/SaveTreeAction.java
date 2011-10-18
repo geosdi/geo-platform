@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.action.toolbar;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.event.shared.GwtEvent;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -49,6 +50,7 @@ import org.geosdi.geoplatform.gui.observable.Observable;
 import org.geosdi.geoplatform.gui.observable.Observer;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
+import org.geosdi.geoplatform.gui.puregwt.savecache.SaveCacheHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 
 /**
@@ -60,6 +62,8 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
 
     private DisplayLayersProgressBarEvent displayEvent = new DisplayLayersProgressBarEvent(true);
     private boolean visibiltyProgressBar;
+    private boolean viewer;
+    private GwtEvent eventAfterAllSaveOperations;
 
     public SaveTreeAction(TreePanel theTree) {
         super(theTree, BasicWidgetResources.ICONS.save(), "Save Tree State");
@@ -78,23 +82,37 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
     @Override
     public void update(Observable o, Object o1) {
         //System.out.println("SaveTreeAction receive observable notify");
-        if (LayerEvents.SAVE_CACHE_NOT_EMPTY == ((EventType) o1)) {
+        if (!this.viewer && LayerEvents.SAVE_CACHE_NOT_EMPTY == ((EventType) o1)) {
             super.setEnabled(true);
         } else {
             super.setEnabled(false);
         }
     }
 
-    @Override
     public void peek() {
         if (GPMementoSaveCache.getInstance().peek() != null) {
             IMemento<ISave> memento = GPMementoSaveCache.getInstance().peek();
-            memento.getAction().executeSave(GPMementoSaveCache.getInstance().peek());
+            memento.getAction().executeSave(memento);
         } else {
             this.displayEvent.setVisible(false);
             LayerHandlerManager.fireEvent(this.displayEvent);
             this.visibiltyProgressBar = false;
+            if (this.eventAfterAllSaveOperations != null) {
+                SaveCacheHandlerManager.fireEvent(this.eventAfterAllSaveOperations);
+            }
         }
+    }
+
+    //The GwtEvent eventAfterAllSaveOperations is the event that must be called at the
+    //end of all the save operations, this event will be fired using the SaveCacheHandlerManager
+    @Override
+    public void peek(GwtEvent eventAfterAllSaveOperations) {
+        if (eventAfterAllSaveOperations != null) {
+            System.out.println("setting event");
+            this.eventAfterAllSaveOperations = eventAfterAllSaveOperations;
+        }
+        this.showProgressBar();
+        this.peek();
     }
 
     private void showProgressBar() {
@@ -103,5 +121,19 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
             LayerHandlerManager.fireEvent(this.displayEvent);
             this.visibiltyProgressBar = true;
         }
+    }
+
+    /**
+     * @return the viewer
+     */
+    public boolean isViewer() {
+        return viewer;
+    }
+
+    /**
+     * @param viewer the viewer to set
+     */
+    public void setViewer(boolean viewer) {
+        this.viewer = viewer;
     }
 }

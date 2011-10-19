@@ -104,7 +104,7 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
         }
     }
 
-    private void init() {
+    protected void init() {
         // TODO Auto-generated method stub
         if (!isInitialized()) {
             initWindow();

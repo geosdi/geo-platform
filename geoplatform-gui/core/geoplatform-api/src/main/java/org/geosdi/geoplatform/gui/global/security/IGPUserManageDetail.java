@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.global.security;
 
-import java.util.List;
-
 /**
  *
  * @author Vincenzo Monteverde

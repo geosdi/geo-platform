@@ -143,7 +143,7 @@ public interface GeoPlatformService {
     @Get
     @HttpResource(location = "/users/count/{nameLike}")
     @WebResult(name = "count")
-    long getUsersCount(SearchRequest searchRequest);
+    Long getUsersCount(SearchRequest searchRequest);
 
     @Get
     @HttpResource(location = "/users/{id}/authorities")

@@ -279,13 +279,13 @@ class UserServiceImpl {
         return UserDTO.convertToUserDTOList(userList);
     }
 
-    public long getUsersCount(SearchRequest request) {
+    public Long getUsersCount(SearchRequest request) {
         Search searchCriteria = new Search(GPUser.class);
 
         if (request != null && request.getNameLike() != null) {
             searchCriteria.addFilterILike("username", request.getNameLike());
         }
-        return userDao.count(searchCriteria);
+        return new Long(userDao.count(searchCriteria));
     }
 
     public GPUser getUserDetailByUsernameAndPassword(String username, String password)

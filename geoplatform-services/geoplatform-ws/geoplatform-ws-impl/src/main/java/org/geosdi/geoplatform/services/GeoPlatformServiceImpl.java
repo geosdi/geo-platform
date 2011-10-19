@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
@@ -321,7 +322,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public long getUsersCount(SearchRequest request) {
+    public Long getUsersCount(SearchRequest request) {
         return userServiceDelegate.getUsersCount(request);
     }
 

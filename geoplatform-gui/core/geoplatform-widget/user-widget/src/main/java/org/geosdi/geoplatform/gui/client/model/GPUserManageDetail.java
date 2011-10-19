@@ -71,7 +71,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     @Override
     public void setUsername(String username) {
         this.username = username;
-        set(GPUserManageDetailKeyValue.USERNAME.toString(), this.username);
+        super.set(GPUserManageDetailKeyValue.USERNAME.toString(), this.username);
     }
 
     /**
@@ -89,7 +89,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     @Override
     public void setName(String name) {
         this.name = name;
-        set(GPUserManageDetailKeyValue.NAME.toString(), this.name);
+        super.set(GPUserManageDetailKeyValue.NAME.toString(), this.name);
     }
 
     /**
@@ -157,6 +157,6 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     @Override
     public void setAuthority(GPRole role) {
         this.authority = role;
-        set(GPUserManageDetailKeyValue.AUTORITHY.toString(), this.authority.toString());
+        super.set(GPUserManageDetailKeyValue.AUTORITHY.toString(), this.authority.toString());
     }
 }

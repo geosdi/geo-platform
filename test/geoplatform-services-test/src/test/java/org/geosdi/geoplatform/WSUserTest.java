@@ -73,7 +73,7 @@ public class WSUserTest extends ServiceTest {
     }
 
     @Test
-    public void testRetrieveUser() {
+    public void testRetrieveUser() throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ testRetrieveUser @@@");
 
         // Number of Users
@@ -86,45 +86,31 @@ public class WSUserTest extends ServiceTest {
         Assert.assertEquals("Number of User Like", numUsersLike, new Long(1).longValue());
 
         // Get User from Id
-        try {
-            // Get UserDTO from Id
-            UserDTO userDTOFromWS = gpWSClient.getShortUser(new RequestById(idUserTest));
-            Assert.assertNotNull(userDTOFromWS);
-            Assert.assertEquals("Error found User from Id", idUserTest, userDTOFromWS.getId().longValue());
-            // Get GPUser from Id
-            GPUser userFromWS = gpWSClient.getUserDetail(new RequestById(idUserTest));
-            Assert.assertNotNull(userFromWS);
-            Assert.assertEquals("Error found User from Id", idUserTest, userFromWS.getId().longValue());
-        } catch (ResourceNotFoundFault ex) {
-            Assert.fail("Not found User with Id: \"" + idUserTest + "\"");
-        }
+        // Get UserDTO from Id
+        UserDTO userDTOFromWS = gpWSClient.getShortUser(new RequestById(idUserTest));
+        Assert.assertNotNull(userDTOFromWS);
+        Assert.assertEquals("Error found User from Id", idUserTest, userDTOFromWS.getId().longValue());
+        // Get GPUser from Id
+        GPUser userFromWS = gpWSClient.getUserDetail(new RequestById(idUserTest));
+        Assert.assertNotNull(userFromWS);
+        Assert.assertEquals("Error found User from Id", idUserTest, userFromWS.getId().longValue());
 
         // Get User from Username
-        try {
-            // Get UserDTO from Username
-            UserDTO userDTOFromWS = gpWSClient.getShortUserByName(new SearchRequest(usernameTest));
-            Assert.assertNotNull(userDTOFromWS);
-            Assert.assertEquals("Error found User from Username", idUserTest, userDTOFromWS.getId().longValue());
-            // Get GPUser from Username
-            GPUser userFromWS = gpWSClient.getUserDetailByName(new SearchRequest(usernameTest));
-            Assert.assertNotNull(userFromWS);
-            Assert.assertEquals("Error found User from Username", idUserTest, userFromWS.getId().longValue());
-        } catch (ResourceNotFoundFault ex) {
-            Assert.fail("Not found User with Username: \"" + usernameTest + "\"");
-        }
+        // Get UserDTO from Username
+        userDTOFromWS = gpWSClient.getShortUserByName(new SearchRequest(usernameTest));
+        Assert.assertNotNull(userDTOFromWS);
+        Assert.assertEquals("Error found User from Username", idUserTest, userDTOFromWS.getId().longValue());
+        // Get GPUser from Username
+        userFromWS = gpWSClient.getUserDetailByName(new SearchRequest(usernameTest));
+        Assert.assertNotNull(userFromWS);
+        Assert.assertEquals("Error found User from Username", idUserTest, userFromWS.getId().longValue());
     }
 
     @Test
-    public void testGetUserDetailByUsernameAndPassword1() {
-        GPUser user = null;
-        try {
-            user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, "pwd_username_test_ws");
-            Assert.assertNotNull("User is null", user);
-        } catch (ResourceNotFoundFault ex) {
-            Assert.fail(ex.getMessage());
-        } catch (IllegalParameterFault ex) {
-            Assert.fail(ex.getMessage());
-        }
+    public void testGetUserDetailByUsernameAndPassword1()
+            throws IllegalParameterFault, ResourceNotFoundFault {
+        GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, "pwd_username_test_ws");
+        Assert.assertNotNull("User is null", user);
     }
 
     @Test

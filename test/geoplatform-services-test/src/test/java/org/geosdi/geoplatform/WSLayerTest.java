@@ -125,70 +125,54 @@ public class WSLayerTest extends ServiceTest {
     }
 
     @Test
-    public void testAddLayers() {
-        try {
-            List<Long> idList = this.addLayer3();
+    public void testAddLayers()
+            throws IllegalParameterFault, ResourceNotFoundFault {
+        List<Long> idList = this.addLayer3();
 
-            this.checkState(new int[]{8, 5, 4, 3, 2, 1}, new int[]{4, 2}, "after add layers");
+        this.checkState(new int[]{8, 5, 4, 3, 2, 1}, new int[]{4, 2}, "after add layers");
 
-            GPLayer newRasterLayer3 = gpWSClient.getRasterLayer(idList.get(0));
-            Assert.assertEquals("title of newRasterLayer3", titleRaster3, newRasterLayer3.getTitle());
-            Assert.assertEquals("position of newRasterLayer3", 7, newRasterLayer3.getPosition());
+        GPLayer newRasterLayer3 = gpWSClient.getRasterLayer(idList.get(0));
+        Assert.assertEquals("title of newRasterLayer3", titleRaster3, newRasterLayer3.getTitle());
+        Assert.assertEquals("position of newRasterLayer3", 7, newRasterLayer3.getPosition());
 
-            GPLayer newVectorLayer3 = gpWSClient.getVectorLayer(idList.get(1));
-            Assert.assertEquals("title of newVectorLayer3", titleVector3, newVectorLayer3.getTitle());
-            Assert.assertEquals("position of newVectorLayer3", 6, newVectorLayer3.getPosition());
-
-        } catch (IllegalParameterFault ipf) {
-            Assert.fail("Layer has an Illegal Parameter");
-        } catch (ResourceNotFoundFault rnnf) {
-            Assert.fail("Layer with ID \"" + rnnf.getId() + "\"has a resource not found");
-        } catch (Exception e) {
-            System.out.println("@@@@ Exception " + e);
-        }
+        GPLayer newVectorLayer3 = gpWSClient.getVectorLayer(idList.get(1));
+        Assert.assertEquals("title of newVectorLayer3", titleVector3, newVectorLayer3.getTitle());
+        Assert.assertEquals("position of newVectorLayer3", 6, newVectorLayer3.getPosition());
     }
 
     @Test
-    public void testGetLayer() {
-        try {
-            ShortLayerDTO shortRasterLayer1 = gpWSClient.getShortLayer(idRaster1);
-            Assert.assertNotNull("assertNotNull shortRasterLayer1", shortRasterLayer1);
-            Assert.assertEquals("assertEquals shortRasterLayer1.getTitle()", titleRaster1, shortRasterLayer1.getTitle());
-            Assert.assertEquals("assertEquals shortRasterLayer1.getName()", "name_" + titleRaster1, shortRasterLayer1.getName());
-            Assert.assertEquals("assertEquals shortRasterLayer1.getPosition()", 5, shortRasterLayer1.getPosition().intValue());
-            Assert.assertEquals("assertEquals shortRasterLayer1.getSrs()", spatialReferenceSystem, shortRasterLayer1.getSrs());
-            Assert.assertEquals("assertEquals shortRasterLayer1.getUrlServer()", urlServer, shortRasterLayer1.getUrlServer());
-            Assert.assertEquals("assertEquals shortRasterLayer1.getLayerType()", GPLayerType.RASTER, shortRasterLayer1.getLayerType());
+    public void testGetLayer() throws ResourceNotFoundFault {
+        ShortLayerDTO shortRasterLayer1 = gpWSClient.getShortLayer(idRaster1);
+        Assert.assertNotNull("assertNotNull shortRasterLayer1", shortRasterLayer1);
+        Assert.assertEquals("assertEquals shortRasterLayer1.getTitle()", titleRaster1, shortRasterLayer1.getTitle());
+        Assert.assertEquals("assertEquals shortRasterLayer1.getName()", "name_" + titleRaster1, shortRasterLayer1.getName());
+        Assert.assertEquals("assertEquals shortRasterLayer1.getPosition()", 5, shortRasterLayer1.getPosition().intValue());
+        Assert.assertEquals("assertEquals shortRasterLayer1.getSrs()", spatialReferenceSystem, shortRasterLayer1.getSrs());
+        Assert.assertEquals("assertEquals shortRasterLayer1.getUrlServer()", urlServer, shortRasterLayer1.getUrlServer());
+        Assert.assertEquals("assertEquals shortRasterLayer1.getLayerType()", GPLayerType.RASTER, shortRasterLayer1.getLayerType());
 
-            ShortLayerDTO shortVectorLayer1 = gpWSClient.getShortLayer(idVector1);
-            Assert.assertNotNull("assertNotNull shortVectorLayer1", shortVectorLayer1);
-            Assert.assertEquals("assertEquals shortVectorLayer1.getTitle()", titleVector1, shortVectorLayer1.getTitle());
-            Assert.assertEquals("assertEquals shortVectorLayer1.getName()", "name_" + titleVector1, shortVectorLayer1.getName());
-            Assert.assertEquals("assertEquals shortVectorLayer1.getPosition()", 4, shortVectorLayer1.getPosition().intValue());
-            Assert.assertEquals("assertEquals shortVectorLayer1.getSrs()", spatialReferenceSystem, shortVectorLayer1.getSrs());
-            Assert.assertEquals("assertEquals shortVectorLayer1.getUrlServer()", urlServer, shortVectorLayer1.getUrlServer());
-            Assert.assertEquals("assertEquals shortVectorLayer1.getLayerType()", GPLayerType.POLYGON, shortVectorLayer1.getLayerType());
-        } catch (ResourceNotFoundFault rnnf) {
-            Assert.fail("Layer with ID \"" + rnnf.getId() + "\" has a resource not found");
-        }
+        ShortLayerDTO shortVectorLayer1 = gpWSClient.getShortLayer(idVector1);
+        Assert.assertNotNull("assertNotNull shortVectorLayer1", shortVectorLayer1);
+        Assert.assertEquals("assertEquals shortVectorLayer1.getTitle()", titleVector1, shortVectorLayer1.getTitle());
+        Assert.assertEquals("assertEquals shortVectorLayer1.getName()", "name_" + titleVector1, shortVectorLayer1.getName());
+        Assert.assertEquals("assertEquals shortVectorLayer1.getPosition()", 4, shortVectorLayer1.getPosition().intValue());
+        Assert.assertEquals("assertEquals shortVectorLayer1.getSrs()", spatialReferenceSystem, shortVectorLayer1.getSrs());
+        Assert.assertEquals("assertEquals shortVectorLayer1.getUrlServer()", urlServer, shortVectorLayer1.getUrlServer());
+        Assert.assertEquals("assertEquals shortVectorLayer1.getLayerType()", GPLayerType.POLYGON, shortVectorLayer1.getLayerType());
     }
 
     @Test
-    public void testUpdateRasterLayer() {
+    public void testUpdateRasterLayer()
+            throws IllegalParameterFault, ResourceNotFoundFault {
         final String titleLayerUpdated = "rasterLayerUpdated";
-        try {
-            raster1.setTitle(titleLayerUpdated);
 
-            gpWSClient.updateRasterLayer(raster1);
-            ShortLayerDTO layerUpdated = gpWSClient.getShortLayer(idRaster1);
+        raster1.setTitle(titleLayerUpdated);
 
-            Assert.assertNotNull("assertNotNull layerUpdated", layerUpdated);
-            Assert.assertEquals("assertEquals layerUpdated.getTitle()", titleLayerUpdated, layerUpdated.getTitle());
-        } catch (IllegalParameterFault ipf) {
-            Assert.fail("Layer has an Illegal Parameter");
-        } catch (ResourceNotFoundFault rnnf) {
-            Assert.fail("Layer with id \"" + rnnf.getId() + "\" was NOT found");
-        }
+        gpWSClient.updateRasterLayer(raster1);
+        ShortLayerDTO layerUpdated = gpWSClient.getShortLayer(idRaster1);
+
+        Assert.assertNotNull("assertNotNull layerUpdated", layerUpdated);
+        Assert.assertEquals("assertEquals layerUpdated.getTitle()", titleLayerUpdated, layerUpdated.getTitle());
     }
 
     @Test
@@ -198,164 +182,144 @@ public class WSLayerTest extends ServiceTest {
     }
 
     @Test
-    public void testDeleteLayer() {
-        try {
-            // Assert total number of folders stored into DB before delete            
-            List<ShortLayerDTO> allLayersBeforeDelete = gpWSClient.getLayers(idProjectTest);
-            int totalLayers = allLayersBeforeDelete.size();
-            Assert.assertTrue("assertEquals totalLayers", totalLayers == 4); // SetUp() added 4 layers
+    public void testDeleteLayer() throws ResourceNotFoundFault {
+        // Assert total number of folders stored into DB before delete            
+        List<ShortLayerDTO> allLayersBeforeDelete = gpWSClient.getLayers(idProjectTest);
+        int totalLayers = allLayersBeforeDelete.size();
+        Assert.assertTrue("assertEquals totalLayers", totalLayers == 4); // SetUp() added 4 layers
 
-            // Delete "rasterLayer1" from "rootFolderA"
-            boolean erased = gpWSClient.deleteLayer(idRaster1);
-            Assert.assertTrue("Deletion of the layer rasterLayer1", erased);
+        // Delete "rasterLayer1" from "rootFolderA"
+        boolean erased = gpWSClient.deleteLayer(idRaster1);
+        Assert.assertTrue("Deletion of the layer rasterLayer1", erased);
 
-            // Get root folders for project
-            List<FolderDTO> folderList = gpWSClient.getRootFoldersByProjectId(idProjectTest);
+        // Get root folders for project
+        List<FolderDTO> folderList = gpWSClient.getRootFoldersByProjectId(idProjectTest);
 
-            // Assert on the structure of project's folders
-            Assert.assertEquals("assertEquals folderList.getList().size()", folderList.size(), 2);
-            // Assert on the structure of "rootFolderA"
-            TreeFolderElements childrenRootFolderA = gpWSClient.getChildrenElements(idRootFolderA);
-            logger.trace("\n*** childrenRootFolderA:\n{}\n***", childrenRootFolderA);
-            Assert.assertNotNull("assertNotNull childrenRootFolderA", childrenRootFolderA);
-            Assert.assertEquals("assertEquals childrenRootFolderA.size()", childrenRootFolderA.size(), 1);
-            // Assert on layers of "rootFolderA"
-            ShortLayerDTO shortVectorLayerRootFolderA = (ShortLayerDTO) childrenRootFolderA.iterator().next();
-            Assert.assertEquals("assertEquals shortVectorLayerRootFolderA.getTitle()", shortVectorLayerRootFolderA.getTitle(), titleVector1);
-            // Assert on the structure of "rootFolderB"
-            TreeFolderElements childrenRootFolderB = gpWSClient.getChildrenElements(idRootFolderB);
-            logger.trace("\n*** childrenRootFolderB:\n{}\n***", childrenRootFolderB);
-            Assert.assertNotNull("assertNotNull childrenRootFolderB", childrenRootFolderB);
-            Assert.assertEquals("assertEquals childrenRootFolderB.size()", childrenRootFolderB.size(), 2);
-            // Assert on layers of "rootFolderB"
-            Iterator iterator = childrenRootFolderB.iterator();
-            ShortLayerDTO shortRasterLayerRootFolderB = (ShortLayerDTO) iterator.next();
-            Assert.assertEquals("assertEquals shortRasterLayerRootFolderB.getTitle()", shortRasterLayerRootFolderB.getTitle(), titleRaster2);
-            ShortLayerDTO shortVectorLayerRootFolderB = (ShortLayerDTO) iterator.next();
-            Assert.assertEquals("assertEquals shortVectorLayerRootFolderB.getTitle()", shortVectorLayerRootFolderB.getTitle(), titleVector2);
+        // Assert on the structure of project's folders
+        Assert.assertEquals("assertEquals folderList.getList().size()", folderList.size(), 2);
+        // Assert on the structure of "rootFolderA"
+        TreeFolderElements childrenRootFolderA = gpWSClient.getChildrenElements(idRootFolderA);
+        logger.trace("\n*** childrenRootFolderA:\n{}\n***", childrenRootFolderA);
+        Assert.assertNotNull("assertNotNull childrenRootFolderA", childrenRootFolderA);
+        Assert.assertEquals("assertEquals childrenRootFolderA.size()", childrenRootFolderA.size(), 1);
+        // Assert on layers of "rootFolderA"
+        ShortLayerDTO shortVectorLayerRootFolderA = (ShortLayerDTO) childrenRootFolderA.iterator().next();
+        Assert.assertEquals("assertEquals shortVectorLayerRootFolderA.getTitle()", shortVectorLayerRootFolderA.getTitle(), titleVector1);
+        // Assert on the structure of "rootFolderB"
+        TreeFolderElements childrenRootFolderB = gpWSClient.getChildrenElements(idRootFolderB);
+        logger.trace("\n*** childrenRootFolderB:\n{}\n***", childrenRootFolderB);
+        Assert.assertNotNull("assertNotNull childrenRootFolderB", childrenRootFolderB);
+        Assert.assertEquals("assertEquals childrenRootFolderB.size()", childrenRootFolderB.size(), 2);
+        // Assert on layers of "rootFolderB"
+        Iterator iterator = childrenRootFolderB.iterator();
+        ShortLayerDTO shortRasterLayerRootFolderB = (ShortLayerDTO) iterator.next();
+        Assert.assertEquals("assertEquals shortRasterLayerRootFolderB.getTitle()", shortRasterLayerRootFolderB.getTitle(), titleRaster2);
+        ShortLayerDTO shortVectorLayerRootFolderB = (ShortLayerDTO) iterator.next();
+        Assert.assertEquals("assertEquals shortVectorLayerRootFolderB.getTitle()", shortVectorLayerRootFolderB.getTitle(), titleVector2);
 
-            // Assert total number of layers stored into DB after delete
-            List<ShortLayerDTO> allLayersAfterDelete = gpWSClient.getLayers(idProjectTest);
-            Assert.assertEquals("assertEquals allLayersAfterDelete.getList().size()", allLayersAfterDelete.size(), totalLayers - 1);
-        } catch (ResourceNotFoundFault rnff) {
-            Assert.fail("Folder with id \"" + rnff.getId() + "\" was NOT found");
-        } catch (Exception e) {
-            Assert.fail("Exception: " + e.getClass());
-        }
+        // Assert total number of layers stored into DB after delete
+        List<ShortLayerDTO> allLayersAfterDelete = gpWSClient.getLayers(idProjectTest);
+        Assert.assertEquals("assertEquals allLayersAfterDelete.getList().size()", allLayersAfterDelete.size(), totalLayers - 1);
+
         // Check ON DELETE CASCADE of the subforders of "rootFolderB"
-        checkLayerDeleted(idRaster1);
+        this.checkLayerDeleted(idRaster1);
     }
 
     @Test
-    public void testSaveAndDeleteLayerAndTreeModifications() {
+    public void testSaveAndDeleteLayerAndTreeModifications()
+            throws IllegalParameterFault, ResourceNotFoundFault {
         GPRasterLayer layerToTest = null;
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map);
-        try {
-            int totalElementsOfProject = gpWSClient.getNumberOfElementsProject(idProjectTest);
-            Assert.assertEquals("Initial totalElementsOfProject",
-                    6, totalElementsOfProject);  // SetUp() added 2 folders + 4 layers
 
-            String titleLayerToTest = "layerToTest";
-            layerToTest = new GPRasterLayer();
-            super.createLayer(layerToTest, rootFolderB, titleLayerToTest, "name_" + titleLayerToTest,
-                    "abstract_" + titleLayerToTest, 3, spatialReferenceSystem, urlServer);
+        int totalElementsOfProject = gpWSClient.getNumberOfElementsProject(idProjectTest);
+        Assert.assertEquals("Initial totalElementsOfProject",
+                6, totalElementsOfProject);  // SetUp() added 2 folders + 4 layers
 
-            GPLayerInfo layerInfo = new GPLayerInfo();
-            layerInfo.setKeywords(layerInfoKeywords);
-            layerInfo.setQueryable(false);
-            layerToTest.setLayerInfo(layerInfo);
+        String titleLayerToTest = "layerToTest";
+        layerToTest = new GPRasterLayer();
+        super.createLayer(layerToTest, rootFolderB, titleLayerToTest, "name_" + titleLayerToTest,
+                "abstract_" + titleLayerToTest, 3, spatialReferenceSystem, urlServer);
 
-            // Adding new layer to user's root folder B
-            map.put(idRootFolderB, rootFolderB.getNumberOfDescendants() + 1);
+        GPLayerInfo layerInfo = new GPLayerInfo();
+        layerInfo.setKeywords(layerInfoKeywords);
+        layerInfo.setQueryable(false);
+        layerToTest.setLayerInfo(layerInfo);
 
-            // Adding new layer to user's root folder B
-            long idLayerToTest = gpWSClient.saveAddedLayerAndTreeModifications(
-                    layerToTest, descendantsMapData);
+        // Adding new layer to user's root folder B
+        map.put(idRootFolderB, rootFolderB.getNumberOfDescendants() + 1);
 
-            Assert.assertEquals("totalElementsOfProject after added",
-                    totalElementsOfProject + 1, gpWSClient.getNumberOfElementsProject(idProjectTest));
+        // Adding new layer to user's root folder B
+        long idLayerToTest = gpWSClient.saveAddedLayerAndTreeModifications(
+                layerToTest, descendantsMapData);
 
-            this.checkState(new int[]{7, 6, 5, 4, 2, 1}, new int[]{2, 3}, "before removing");
+        Assert.assertEquals("totalElementsOfProject after added",
+                totalElementsOfProject + 1, gpWSClient.getNumberOfElementsProject(idProjectTest));
 
-            // Removing layer from user's root
-            map.clear();
-            map.put(idRootFolderB, 2);
-            gpWSClient.saveDeletedLayerAndTreeModifications(idLayerToTest, descendantsMapData);
+        this.checkState(new int[]{7, 6, 5, 4, 2, 1}, new int[]{2, 3}, "before removing");
 
-            Assert.assertEquals("totalElementsOfProject after deleted",
-                    totalElementsOfProject, gpWSClient.getNumberOfElementsProject(idProjectTest));
+        // Removing layer from user's root
+        map.clear();
+        map.put(idRootFolderB, 2);
+        gpWSClient.saveDeletedLayerAndTreeModifications(idLayerToTest, descendantsMapData);
 
-            this.checkInitialState("after removing");
+        Assert.assertEquals("totalElementsOfProject after deleted",
+                totalElementsOfProject, gpWSClient.getNumberOfElementsProject(idProjectTest));
 
-        } catch (IllegalParameterFault ipf) {
-            Assert.fail("Folder with id \"" + layerToTest.getId() + "\" was not found");
-        } catch (ResourceNotFoundFault rnnf) {
-            Assert.fail("Folder was not found " + rnnf.getId());
-        }
+        this.checkInitialState("after removing");
     }
 
     @Test
-    public void testDragAndDropLayerOnSameParent() {
+    public void testDragAndDropLayerOnSameParent()
+            throws IllegalParameterFault, ResourceNotFoundFault {
         logger.trace("\n\t@@@ testDragAndDropLayerOnSameParent @@@");
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map);
-        try {
-            // Move vector 2 before raster 2 (oldPosition < new Position)
-            boolean checkDD = gpWSClient.saveDragAndDropLayerAndTreeModifications(
-                    idVector2, idRootFolderB, 2, descendantsMapData);
-            Assert.assertTrue("Drag and Drop successful", checkDD);
 
-            this.checkState(new int[]{6, 5, 4, 3, 1, 2}, new int[]{2, 2}, "after DD I on same parent");
+        // Move vector 2 before raster 2 (oldPosition < new Position)
+        boolean checkDD = gpWSClient.saveDragAndDropLayerAndTreeModifications(
+                idVector2, idRootFolderB, 2, descendantsMapData);
+        Assert.assertTrue("Drag and Drop successful", checkDD);
 
-            // Move vector 2 after raster 2, in initial position (oldPosition > new Position)
-            checkDD = gpWSClient.saveDragAndDropLayerAndTreeModifications(
-                    idVector2, idRootFolderB, 1, descendantsMapData);
-            Assert.assertTrue("Vector 2 doesn't moved to position 1", checkDD);
+        this.checkState(new int[]{6, 5, 4, 3, 1, 2}, new int[]{2, 2}, "after DD I on same parent");
 
-            this.checkInitialState("after DD II on same parent");
+        // Move vector 2 after raster 2, in initial position (oldPosition > new Position)
+        checkDD = gpWSClient.saveDragAndDropLayerAndTreeModifications(
+                idVector2, idRootFolderB, 1, descendantsMapData);
+        Assert.assertTrue("Vector 2 doesn't moved to position 1", checkDD);
 
-        } catch (IllegalParameterFault ex) {
-            Assert.fail("Layer has an Illegal Parameter: " + ex.getMessage());
-        } catch (ResourceNotFoundFault rnnf) {
-            Assert.fail("Folder or Layer with ID \"" + rnnf.getId() + "\" was not found");
-        }
+        this.checkInitialState("after DD II on same parent");
     }
 
     @Test
-    public void testDragAndDropLayerOnDifferentFolder() {
+    public void testDragAndDropLayerOnDifferentFolder()
+            throws IllegalParameterFault, ResourceNotFoundFault {
         logger.trace("\n\t@@@ testDragAndDropLayerOnDifferentFolder @@@");
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map);
-        try {
-            map.put(idRootFolderA, 3);
-            map.put(idRootFolderB, 1);
-            // Move vector 2 before vector 1 (oldPosition < new Position)
-            boolean checkDD = gpWSClient.saveDragAndDropLayerAndTreeModifications(
-                    idVector2, idRootFolderA, 4, descendantsMapData);
-            Assert.assertTrue("Drag and Drop successful", checkDD);
 
-            this.checkState(new int[]{6, 5, 3, 2, 1, 4}, new int[]{3, 1}, "after DD I on different parent");
-            Assert.assertEquals("Parent of vector layer 2 after DD I on different parent", idRootFolderA, vector2.getFolder().getId().longValue());
+        map.put(idRootFolderA, 3);
+        map.put(idRootFolderB, 1);
+        // Move vector 2 before vector 1 (oldPosition < new Position)
+        boolean checkDD = gpWSClient.saveDragAndDropLayerAndTreeModifications(
+                idVector2, idRootFolderA, 4, descendantsMapData);
+        Assert.assertTrue("Drag and Drop successful", checkDD);
 
-            map.clear();
-            map.put(idRootFolderA, 2);
-            map.put(idRootFolderB, 2);
-            // Move vector 2 after raster 2, in initial position (oldPosition > new Position)
-            checkDD = gpWSClient.saveDragAndDropLayerAndTreeModifications(
-                    idVector2, idRootFolderB, 1, descendantsMapData);
-            Assert.assertTrue("Vector 2 doesn't moved to position 1", checkDD);
+        this.checkState(new int[]{6, 5, 3, 2, 1, 4}, new int[]{3, 1}, "after DD I on different parent");
+        Assert.assertEquals("Parent of vector layer 2 after DD I on different parent", idRootFolderA, vector2.getFolder().getId().longValue());
 
-            this.checkInitialState("after DD II on different parent");
+        map.clear();
+        map.put(idRootFolderA, 2);
+        map.put(idRootFolderB, 2);
+        // Move vector 2 after raster 2, in initial position (oldPosition > new Position)
+        checkDD = gpWSClient.saveDragAndDropLayerAndTreeModifications(
+                idVector2, idRootFolderB, 1, descendantsMapData);
+        Assert.assertTrue("Vector 2 doesn't moved to position 1", checkDD);
 
-        } catch (IllegalParameterFault ex) {
-            Assert.fail("Layer has an Illegal Parameter: " + ex.getMessage());
-        } catch (ResourceNotFoundFault rnnf) {
-            Assert.fail("Folder or Layer with ID \"" + rnnf.getId() + "\" was not found");
-        }
+        this.checkInitialState("after DD II on different parent");
     }
 
     @Test
@@ -377,7 +341,8 @@ public class WSLayerTest extends ServiceTest {
     }
 
     @Test
-    public void testTransactionOnRemoveAndAddLayer() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void testTransactionOnRemoveAndAddLayer()
+            throws IllegalParameterFault, ResourceNotFoundFault {
         logger.trace("\n\t@@@ testTransactionOnRemoveAndAddLayer @@@");
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
@@ -403,31 +368,23 @@ public class WSLayerTest extends ServiceTest {
     }
 
     @Test
-    public void testGetShortLayer() {
-        try {
-            ShortLayerDTO layer = gpWSClient.getShortLayer(idVector2);
-            Assert.assertNotNull("assertNotNull layer", layer);
-            Assert.assertEquals("assertEquals layer.getLayerType()", layer.getLayerType(), GPLayerType.POLYGON);
-            Assert.assertEquals("assertEquals layer.getName()", layer.getName(), vector2.getName());
-            Assert.assertEquals("assertEquals layer.getSrs()", layer.getSrs(), spatialReferenceSystem);
-            Assert.assertEquals("assertEquals layer.getUrlServer()", layer.getUrlServer(), urlServer);
-        } catch (ResourceNotFoundFault rnnf) {
-            Assert.fail("Layer with id \"" + rnnf.getId() + "\" was NOT found");
-        }
+    public void testGetShortLayer() throws ResourceNotFoundFault {
+        ShortLayerDTO layer = gpWSClient.getShortLayer(idVector2);
+        Assert.assertNotNull("assertNotNull layer", layer);
+        Assert.assertEquals("assertEquals layer.getLayerType()", layer.getLayerType(), GPLayerType.POLYGON);
+        Assert.assertEquals("assertEquals layer.getName()", layer.getName(), vector2.getName());
+        Assert.assertEquals("assertEquals layer.getSrs()", layer.getSrs(), spatialReferenceSystem);
+        Assert.assertEquals("assertEquals layer.getUrlServer()", layer.getUrlServer(), urlServer);
     }
 
     @Test
-    public void testGetBBox() {
-        try {
-            GPBBox bbox = gpWSClient.getBBox(idVector1);
-            Assert.assertNotNull("assertNotNull bbox", bbox);
-            Assert.assertEquals("assertEquals bbox.getMaxX()", bbox.getMaxX(), 20.0);
-            Assert.assertEquals("assertEquals bbox.getMaxY()", bbox.getMaxY(), 20.0);
-            Assert.assertEquals("assertEquals bbox.getMinX()", bbox.getMinX(), 10.0);
-            Assert.assertEquals("assertEquals bbox.getMinY()", bbox.getMinY(), 10.0);
-        } catch (ResourceNotFoundFault rnnf) {
-            Assert.fail("Layer with id \"" + rnnf.getId() + "\" was NOT found");
-        }
+    public void testGetBBox() throws ResourceNotFoundFault {
+        GPBBox bbox = gpWSClient.getBBox(idVector1);
+        Assert.assertNotNull("assertNotNull bbox", bbox);
+        Assert.assertEquals("assertEquals bbox.getMaxX()", bbox.getMaxX(), 20.0);
+        Assert.assertEquals("assertEquals bbox.getMaxY()", bbox.getMaxY(), 20.0);
+        Assert.assertEquals("assertEquals bbox.getMinX()", bbox.getMinX(), 10.0);
+        Assert.assertEquals("assertEquals bbox.getMinY()", bbox.getMinY(), 10.0);
     }
 
     @Test
@@ -449,38 +406,29 @@ public class WSLayerTest extends ServiceTest {
     }
 
     @Test
-    public void testGetLayerInfo() {
-        try {
-            GPLayerInfo layerInfo = gpWSClient.getLayerInfo(idRaster2);
-            Assert.assertNotNull("assertNotNull layerInfo", layerInfo);
-            Assert.assertEquals("assertEquals layerInfo.isQueryable()", false, layerInfo.isQueryable());
-            List<String> keywords = layerInfo.getKeywords();
-            Assert.assertNotNull("assertNotNull keywords of layerInfo", keywords);
-            Assert.assertEquals("assertEquals layerInfo.getKeywords()", layerInfoKeywords.size(), keywords.size());
-            for (int i = 0; i < keywords.size(); i++) {
-                String key = keywords.get(i);
-                Assert.assertEquals("assert keyword: index = " + i, layerInfoKeywords.get(i), key);
-            }
-        } catch (ResourceNotFoundFault rnnf) {
-            Assert.fail("Layer with id \"" + rnnf.getId() + "\" was NOT found");
+    public void testGetLayerInfo() throws ResourceNotFoundFault {
+        GPLayerInfo layerInfo = gpWSClient.getLayerInfo(idRaster2);
+        Assert.assertNotNull("assertNotNull layerInfo", layerInfo);
+        Assert.assertEquals("assertEquals layerInfo.isQueryable()", false, layerInfo.isQueryable());
+        List<String> keywords = layerInfo.getKeywords();
+        Assert.assertNotNull("assertNotNull keywords of layerInfo", keywords);
+        Assert.assertEquals("assertEquals layerInfo.getKeywords()", layerInfoKeywords.size(), keywords.size());
+        for (int i = 0; i < keywords.size(); i++) {
+            String key = keywords.get(i);
+            Assert.assertEquals("assert keyword: index = " + i, layerInfoKeywords.get(i), key);
         }
     }
 
     @Test
-    public void testGetLayersDataSourceByProject() {
-        try {
-            this.addLayer3();
+    public void testGetLayersDataSourceByProject()
+            throws IllegalParameterFault, ResourceNotFoundFault {
+        this.addLayer3();
 
-            List<String> list = gpWSClient.getLayersDataSourceByProjectId(idProjectTest);
+        List<String> list = gpWSClient.getLayersDataSourceByProjectId(idProjectTest);
 
-            Assert.assertEquals("Number of elements of server's url", 2, list.size());
-            Assert.assertTrue("List does not contain 'http://www.geosdi.org/test'", list.contains(urlServer));
-            Assert.assertTrue("List does not contain 'http://www.geosdi.org/newtest'", list.contains(newUrlServer));
-        } catch (IllegalParameterFault ex) {
-            Assert.fail("Layer has an Illegal Parameter");
-        } catch (ResourceNotFoundFault ex) {
-            Assert.fail("User with username \"" + usernameTest + "\" was NOT found");
-        }
+        Assert.assertEquals("Number of elements of server's url", 2, list.size());
+        Assert.assertTrue("List does not contain 'http://www.geosdi.org/test'", list.contains(urlServer));
+        Assert.assertTrue("List does not contain 'http://www.geosdi.org/newtest'", list.contains(newUrlServer));
     }
 
     private List<Long> addLayer3() throws IllegalParameterFault, ResourceNotFoundFault {

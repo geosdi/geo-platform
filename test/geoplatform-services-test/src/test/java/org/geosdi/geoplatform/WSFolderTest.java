@@ -126,100 +126,81 @@ public class WSFolderTest extends ServiceTest {
     }
 
     @Test
-    public void testGetShortFolder() {
-        try {
-            FolderDTO folderA = gpWSClient.getShortFolder(idRootFolderA);
-            Assert.assertNotNull("assertNotNull Folder A", folderA);
-        } catch (ResourceNotFoundFault rnnf) {
-            Assert.fail("Unable to find folder with id \"" + rnnf.getId());
-        }
+    public void testGetShortFolder() throws ResourceNotFoundFault {
+        FolderDTO folderA = gpWSClient.getShortFolder(idRootFolderA);
+        Assert.assertNotNull("assertNotNull Folder A", folderA);
 
-        try {
-            FolderDTO folderB = gpWSClient.getShortFolder(idRootFolderB);
-            Assert.assertNotNull("assertNotNull Folder B", folderB);
-        } catch (ResourceNotFoundFault rnnf) {
-            Assert.fail("Unable to find folder with id \"" + rnnf.getId());
-        }
+        FolderDTO folderB = gpWSClient.getShortFolder(idRootFolderB);
+        Assert.assertNotNull("assertNotNull Folder B", folderB);
     }
 
     @Test
-    public void testUpdateFolder() {
+    public void testUpdateFolder()
+            throws IllegalParameterFault, ResourceNotFoundFault {
         final String nameFolderUpdated = "folderUpdated";
-        try {
-            folder5.setParent(rootFolderA);
-            folder5.setName(nameFolderUpdated);
 
-            gpWSClient.updateFolder(folder5);
-            GPFolder folderUpdated = gpWSClient.getFolderDetail(idFolder5);
+        folder5.setParent(rootFolderA);
+        folder5.setName(nameFolderUpdated);
 
-            Assert.assertNotNull("FolderUpdated is NULL", folderUpdated);
-            Assert.assertEquals("Folder name of FolderUpdated NOT match", nameFolderUpdated, folderUpdated.getName());
-            Assert.assertEquals("Parent ID of FolderUpdated NOT match", idRootFolderA, folderUpdated.getParent().getId().longValue());
-        } catch (IllegalParameterFault ex) {
-            Assert.fail("Folder has an Illegal Parameter");
-        } catch (ResourceNotFoundFault rnnf) {
-            Assert.fail("Folder with id \"" + rnnf.getId() + "\" not found");
-        }
+        gpWSClient.updateFolder(folder5);
+        GPFolder folderUpdated = gpWSClient.getFolderDetail(idFolder5);
+
+        Assert.assertNotNull("FolderUpdated is NULL", folderUpdated);
+        Assert.assertEquals("Folder name of FolderUpdated NOT match", nameFolderUpdated, folderUpdated.getName());
+        Assert.assertEquals("Parent ID of FolderUpdated NOT match", idRootFolderA, folderUpdated.getParent().getId().longValue());
     }
 
     @Test
-    public void testDeleteFolder() {
-        try {
-            // Assert number of folders of UserTest before delete
-            int totalFolders = gpWSClient.getNumberOfElementsProject(idProjectTest);
-            Assert.assertEquals("Number of all folders of UserTest before deleted",
-                    7, totalFolders); // SetUp() added 2+5 folders
-            //
-            List<FolderDTO> rootFolderList = gpWSClient.getRootFoldersByProjectId(idProjectTest);
-            Assert.assertNotNull("List of root folders is null", rootFolderList);
-            int totalRootFolders = rootFolderList.size();
-            Assert.assertEquals("Number of root folders of UserTest before deleted",
-                    2, totalRootFolders);
+    public void testDeleteFolder() throws ResourceNotFoundFault {
+        // Assert number of folders of UserTest before delete
+        int totalFolders = gpWSClient.getNumberOfElementsProject(idProjectTest);
+        Assert.assertEquals("Number of all folders of UserTest before deleted",
+                7, totalFolders); // SetUp() added 2+5 folders
+        //
+        List<FolderDTO> rootFolderList = gpWSClient.getRootFoldersByProjectId(idProjectTest);
+        Assert.assertNotNull("List of root folders is null", rootFolderList);
+        int totalRootFolders = rootFolderList.size();
+        Assert.assertEquals("Number of root folders of UserTest before deleted",
+                2, totalRootFolders);
 
-            // Delete "rootFolderB" and in cascade "folder3" & "folder4" & "folder5"
-            gpWSClient.deleteFolder(idRootFolderB);
+        // Delete "rootFolderB" and in cascade "folder3" & "folder4" & "folder5"
+        gpWSClient.deleteFolder(idRootFolderB);
 
-            // "rootFolderA" ---> "folder1" & "folder2"
-            List<FolderDTO> folderList = gpWSClient.getRootFoldersByProjectId(idProjectTest);
-            Assert.assertNotNull("List of folders is null", folderList);
+        // "rootFolderA" ---> "folder1" & "folder2"
+        List<FolderDTO> folderList = gpWSClient.getRootFoldersByProjectId(idProjectTest);
+        Assert.assertNotNull("List of folders is null", folderList);
 
-            // Assert total number of folders of UserTest after delete
-            Assert.assertEquals("Number of root folders of UserTest after deleted",
-                    1, folderList.size());
-            // TODO FIX manage of folder/layer wrt ancestors folder and project, and uncomment
+        // Assert total number of folders of UserTest after delete
+        Assert.assertEquals("Number of root folders of UserTest after deleted",
+                1, folderList.size());
+        // TODO FIX manage of folder/layer wrt ancestors folder and project, and uncomment
 //            Assert.assertEquals("Number of all folders of UserTest after deleted",
 //                    totalFolders - 4, gpWSClient.getNumberOfElementsProject(idProjectTest);
 
-            // Assert on the structure of project's folders
-            // Assert on "rootFolderA"
-            FolderDTO folderToCheck = folderList.iterator().next();
-            logger.trace("\n*** folderToCheck:\n{}\n***", folderToCheck);
-            Assert.assertEquals("Check ID of rootFolderA", rootFolderA.getId(), folderToCheck.getId());
-            // Assert on the structure of the subfolders of "rootFolderA"
-            TreeFolderElements childrenRootFolderA = gpWSClient.getChildrenElements(idRootFolderA);
-            logger.trace("\n*** childrenRootFolderA:\n{}\n***", childrenRootFolderA);
-            Assert.assertNotNull("Check childrenRootFolderA not null", childrenRootFolderA);
-            Assert.assertEquals("Check size of childrenRootFolderA", 2, childrenRootFolderA.size());
-            // Iterator for scan folder in descending order
-            Iterator childsIterator = childrenRootFolderA.iterator();
-            // Assert on "folder1"
-            FolderDTO folderDTOToCheck = (FolderDTO) childsIterator.next();
-            logger.trace("\n*** folder_1_DTOToCheck:\n{}\n***", folderDTOToCheck);
-            Assert.assertEquals("Check ID of folder 1", folder1.getId(), folderDTOToCheck.getId());
-            // Assert on "folder2"
-            folderDTOToCheck = (FolderDTO) childsIterator.next();
-            logger.trace("\n*** folder_2_DTOToCheck:\n{}\n***", folderDTOToCheck);
-            Assert.assertEquals("Check ID of folder 2", folder2.getId(), folderDTOToCheck.getId());
+        // Assert on the structure of project's folders
+        // Assert on "rootFolderA"
+        FolderDTO folderToCheck = folderList.iterator().next();
+        logger.trace("\n*** folderToCheck:\n{}\n***", folderToCheck);
+        Assert.assertEquals("Check ID of rootFolderA", rootFolderA.getId(), folderToCheck.getId());
+        // Assert on the structure of the subfolders of "rootFolderA"
+        TreeFolderElements childrenRootFolderA = gpWSClient.getChildrenElements(idRootFolderA);
+        logger.trace("\n*** childrenRootFolderA:\n{}\n***", childrenRootFolderA);
+        Assert.assertNotNull("Check childrenRootFolderA not null", childrenRootFolderA);
+        Assert.assertEquals("Check size of childrenRootFolderA", 2, childrenRootFolderA.size());
+        // Iterator for scan folder in descending order
+        Iterator childsIterator = childrenRootFolderA.iterator();
+        // Assert on "folder1"
+        FolderDTO folderDTOToCheck = (FolderDTO) childsIterator.next();
+        logger.trace("\n*** folder_1_DTOToCheck:\n{}\n***", folderDTOToCheck);
+        Assert.assertEquals("Check ID of folder 1", folder1.getId(), folderDTOToCheck.getId());
+        // Assert on "folder2"
+        folderDTOToCheck = (FolderDTO) childsIterator.next();
+        logger.trace("\n*** folder_2_DTOToCheck:\n{}\n***", folderDTOToCheck);
+        Assert.assertEquals("Check ID of folder 2", folder2.getId(), folderDTOToCheck.getId());
 
-            // Assert on "rootFolderB" (deleted)
-            TreeFolderElements childrenRootFolderB = gpWSClient.getChildrenElements(idRootFolderB);
-            Assert.assertNull("Check childrenRootFolderB null", childrenRootFolderB);
-
-        } catch (ResourceNotFoundFault rnff) {
-            Assert.fail("Folder with id \"" + rnff.getId() + "\" not found");
-        } catch (Exception e) {
-            Assert.fail("Exception: " + e.getClass());
-        }
+        // Assert on "rootFolderB" (deleted)
+        TreeFolderElements childrenRootFolderB = gpWSClient.getChildrenElements(idRootFolderB);
+        Assert.assertNull("Check childrenRootFolderB null", childrenRootFolderB);
 
         // Check ON DELETE CASCADE of the subforders of "rootFolderB"
         this.checkFolderDeleted(idFolder3);
@@ -228,237 +209,205 @@ public class WSFolderTest extends ServiceTest {
     }
 
     @Test
-    public void testSaveAndDeleteFolderAndTreeModifications() {
+    public void testSaveAndDeleteFolderAndTreeModifications()
+            throws IllegalParameterFault, ResourceNotFoundFault {
         GPFolder folderToTest = null;
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map); // Set an empty map
-        try {
-            int totalElementsOfProject = gpWSClient.getNumberOfElementsProject(idProjectTest);
-            Assert.assertEquals("Initial totalElementsOfProject",
-                    7, totalElementsOfProject);  // SetUp() added 2+5 folders
 
-            String nameFolderToTest = "folderToTest";
-            folderToTest = super.createFolder(nameFolderToTest, projectTest, 1, null);
+        int totalElementsOfProject = gpWSClient.getNumberOfElementsProject(idProjectTest);
+        Assert.assertEquals("Initial totalElementsOfProject",
+                7, totalElementsOfProject);  // SetUp() added 2+5 folders
 
-            // Adding new folder to project's root            
-            long idFolderToTest = gpWSClient.saveAddedFolderAndTreeModifications(projectTest.getId(), null, folderToTest, descendantsMapData);
+        String nameFolderToTest = "folderToTest";
+        folderToTest = super.createFolder(nameFolderToTest, projectTest, 1, null);
 
-            Assert.assertEquals("totalElementsOfProject after added",
-                    totalElementsOfProject + 1, gpWSClient.getNumberOfElementsProject(idProjectTest));
+        // Adding new folder to project's root            
+        long idFolderToTest = gpWSClient.saveAddedFolderAndTreeModifications(projectTest.getId(), null, folderToTest, descendantsMapData);
 
-            this.checkState(new int[]{8, 7, 6, 5, 4, 3, 2}, new int[]{2, 3}, "before removing");
+        Assert.assertEquals("totalElementsOfProject after added",
+                totalElementsOfProject + 1, gpWSClient.getNumberOfElementsProject(idProjectTest));
 
-            // Removing folder from user's root
-            boolean checkDelete = gpWSClient.saveDeletedFolderAndTreeModifications(idFolderToTest, descendantsMapData);
-            Assert.assertTrue("Delete NOT done for \"" + nameFolderToTest + "\"", checkDelete);
+        this.checkState(new int[]{8, 7, 6, 5, 4, 3, 2}, new int[]{2, 3}, "before removing");
 
-            Assert.assertEquals("totalElementsOfProject after deleted",
-                    totalElementsOfProject, gpWSClient.getNumberOfElementsProject(idProjectTest));
+        // Removing folder from user's root
+        boolean checkDelete = gpWSClient.saveDeletedFolderAndTreeModifications(idFolderToTest, descendantsMapData);
+        Assert.assertTrue("Delete NOT done for \"" + nameFolderToTest + "\"", checkDelete);
 
-            this.checkInitialState("after removing");
+        Assert.assertEquals("totalElementsOfProject after deleted",
+                totalElementsOfProject, gpWSClient.getNumberOfElementsProject(idProjectTest));
 
-        } catch (ResourceNotFoundFault rnff) {
-            Assert.fail("Folder with id \"" + rnff.getId() + "\" was not found");
-        } catch (IllegalParameterFault ex) {
-            Assert.fail("Folder with id \"" + folderToTest.getId() + "\" was not found");
-        }
+        this.checkInitialState("after removing");
     }
 
     @Test
-    public void testSaveAndDeleteSubfolderAndTreeModifications() {
+    public void testSaveAndDeleteSubfolderAndTreeModifications()
+            throws IllegalParameterFault, ResourceNotFoundFault {
         GPFolder folderToTest = null;
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map);
-        try {
-            int totalElementsOfProject = gpWSClient.getNumberOfElementsProject(idProjectTest);
-            Assert.assertEquals("Initial totalElementsOfProject",
-                    7, totalElementsOfProject);  // SetUp() added 2+5 folders
 
-            List<FolderDTO> childrenFolders = gpWSClient.getChildrenFolders(idRootFolderB);
-            Assert.assertEquals("Before adding new folder - Number of subfolders of root folder B ", 3, childrenFolders.size());
+        int totalElementsOfProject = gpWSClient.getNumberOfElementsProject(idProjectTest);
+        Assert.assertEquals("Initial totalElementsOfProject",
+                7, totalElementsOfProject);  // SetUp() added 2+5 folders
 
-            String nameFolderToTest = "folderToTest";
-            folderToTest = super.createFolder(nameFolderToTest, projectTest, 3, rootFolderB);
+        List<FolderDTO> childrenFolders = gpWSClient.getChildrenFolders(idRootFolderB);
+        Assert.assertEquals("Before adding new folder - Number of subfolders of root folder B ", 3, childrenFolders.size());
 
-            // Adding new folder to user's root folder B
-            map.put(idRootFolderB, 4);
-            long idFolderToTest = gpWSClient.saveAddedFolderAndTreeModifications(projectTest.getId(), rootFolderB.getId(), folderToTest, descendantsMapData);
+        String nameFolderToTest = "folderToTest";
+        folderToTest = super.createFolder(nameFolderToTest, projectTest, 3, rootFolderB);
 
-            Assert.assertEquals("totalElementsOfProject after added",
-                    totalElementsOfProject + 1, gpWSClient.getNumberOfElementsProject(idProjectTest));
+        // Adding new folder to user's root folder B
+        map.put(idRootFolderB, 4);
+        long idFolderToTest = gpWSClient.saveAddedFolderAndTreeModifications(projectTest.getId(), rootFolderB.getId(), folderToTest, descendantsMapData);
 
-            this.checkState(new int[]{8, 7, 6, 5, 4, 2, 1}, new int[]{2, 4}, "before removing");
+        Assert.assertEquals("totalElementsOfProject after added",
+                totalElementsOfProject + 1, gpWSClient.getNumberOfElementsProject(idProjectTest));
 
-            // Removing folder from user's root folder B
-            map.clear();
-            map.put(idRootFolderB, 3);
-            boolean checkDelete = gpWSClient.saveDeletedFolderAndTreeModifications(idFolderToTest, descendantsMapData);
-            Assert.assertTrue("Delete NOT done for \"" + nameFolderToTest + "\"", checkDelete);
+        this.checkState(new int[]{8, 7, 6, 5, 4, 2, 1}, new int[]{2, 4}, "before removing");
 
-            Assert.assertEquals("totalElementsOfProject after deleted",
-                    totalElementsOfProject, gpWSClient.getNumberOfElementsProject(idProjectTest));
+        // Removing folder from user's root folder B
+        map.clear();
+        map.put(idRootFolderB, 3);
+        boolean checkDelete = gpWSClient.saveDeletedFolderAndTreeModifications(idFolderToTest, descendantsMapData);
+        Assert.assertTrue("Delete NOT done for \"" + nameFolderToTest + "\"", checkDelete);
 
-            this.checkInitialState("after removing");
+        Assert.assertEquals("totalElementsOfProject after deleted",
+                totalElementsOfProject, gpWSClient.getNumberOfElementsProject(idProjectTest));
 
-        } catch (ResourceNotFoundFault rnff) {
-            Assert.fail("Folder with id \"" + rnff.getId() + "\" was not found");
-        } catch (IllegalParameterFault ex) {
-            Assert.fail("Folder with id \"" + folderToTest.getId() + "\" was not found");
-        }
+        this.checkInitialState("after removing");
     }
 
     @Test
-    public void testDragAndDropOnSameParent() {
+    public void testDragAndDropOnSameParent() throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ testDragAndDropOnSameParent @@@");
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map);
-        try {
-            // Move folder 5 between folder 3 and folder 4 (oldPosition < new Position)
-            boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
-                    idFolder5, super.idRootFolderB, 2, descendantsMapData);
-            Assert.assertTrue("Folder 5 doesn't moved to position 2", checkDD);
 
-            this.checkState(new int[]{7, 6, 5, 4, 3, 1, 2}, new int[]{2, 3}, "after DD I on same parent");
+        // Move folder 5 between folder 3 and folder 4 (oldPosition < new Position)
+        boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                idFolder5, super.idRootFolderB, 2, descendantsMapData);
+        Assert.assertTrue("Folder 5 doesn't moved to position 2", checkDD);
 
-            // Move folder 5 after folder 4, in initial position (oldPosition > new Position)
-            checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
-                    idFolder5, super.idRootFolderB, 1, descendantsMapData);
-            Assert.assertTrue("Folder 5 doesn't moved to position 1", checkDD);
+        this.checkState(new int[]{7, 6, 5, 4, 3, 1, 2}, new int[]{2, 3}, "after DD I on same parent");
 
-            this.checkInitialState("after DD II on same parent");
+        // Move folder 5 after folder 4, in initial position (oldPosition > new Position)
+        checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                idFolder5, super.idRootFolderB, 1, descendantsMapData);
+        Assert.assertTrue("Folder 5 doesn't moved to position 1", checkDD);
 
-        } catch (ResourceNotFoundFault rnff) {
-            Assert.fail("Folder with id \"" + rnff.getId() + "\" was not found");
-        }
+        this.checkInitialState("after DD II on same parent");
     }
 
     @Test
-    public void testDragAndDropOnDifferentParent() {
+    public void testDragAndDropOnDifferentParent() throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ testDragAndDropOnDifferentParent @@@");
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map);
-        try {
-            map.put(super.idRootFolderA, 3);
-            map.put(super.idRootFolderB, 2);
-            // Move folder 4 between folder 1 and folder 2 (oldPosition < new Position)
-            boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
-                    idFolder4, super.idRootFolderA, 5, descendantsMapData);
-            Assert.assertTrue("Folder 4 doesn't moved to position 5", checkDD);
 
-            this.checkState(new int[]{7, 6, 4, 3, 2, 5, 1}, new int[]{3, 2}, "after DD I on different parent");
+        map.put(super.idRootFolderA, 3);
+        map.put(super.idRootFolderB, 2);
+        // Move folder 4 between folder 1 and folder 2 (oldPosition < new Position)
+        boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                idFolder4, super.idRootFolderA, 5, descendantsMapData);
+        Assert.assertTrue("Folder 4 doesn't moved to position 5", checkDD);
 
-            // Move folder 4 after folder 3, in initial position (oldPosition > new Position)
-            map.clear();
-            map.put(super.idRootFolderA, 2);
-            map.put(super.idRootFolderB, 3);
-            checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
-                    idFolder4, super.idRootFolderB, 2, descendantsMapData);
-            Assert.assertTrue("Folder 4 doesn't moved to position 2", checkDD);
+        this.checkState(new int[]{7, 6, 4, 3, 2, 5, 1}, new int[]{3, 2}, "after DD I on different parent");
 
-            this.checkInitialState("after DD II on different parent");
+        // Move folder 4 after folder 3, in initial position (oldPosition > new Position)
+        map.clear();
+        map.put(super.idRootFolderA, 2);
+        map.put(super.idRootFolderB, 3);
+        checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                idFolder4, super.idRootFolderB, 2, descendantsMapData);
+        Assert.assertTrue("Folder 4 doesn't moved to position 2", checkDD);
 
-        } catch (ResourceNotFoundFault rnff) {
-            Assert.fail("Folder with id \"" + rnff.getId() + "\" was not found");
-        }
+        this.checkInitialState("after DD II on different parent");
     }
 
     @Test
-    public void testDragAndDropOnRootParent() {
+    public void testDragAndDropOnRootParent() throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ testDragAndDropOnRootParent @@@");
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map);
-        try {
-            // Move folder B before folder A (oldPosition < new Position)
-            boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
-                    super.idRootFolderB, null, 7, descendantsMapData);
-            Assert.assertTrue("Folder B doesn't moved to position 7", checkDD);
 
-            this.checkState(new int[]{3, 2, 1, 7, 6, 5, 4}, new int[]{2, 3}, "after DD I on root parent");
+        // Move folder B before folder A (oldPosition < new Position)
+        boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                super.idRootFolderB, null, 7, descendantsMapData);
+        Assert.assertTrue("Folder B doesn't moved to position 7", checkDD);
 
-            // Move folder B after folder A, in initial position (oldPosition > new Position)
-            checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
-                    super.idRootFolderB, null, 4, descendantsMapData);
-            Assert.assertTrue("Folder 4 doesn't moved to position 4", checkDD);
+        this.checkState(new int[]{3, 2, 1, 7, 6, 5, 4}, new int[]{2, 3}, "after DD I on root parent");
 
-            this.checkInitialState("after DD II on root parent");
+        // Move folder B after folder A, in initial position (oldPosition > new Position)
+        checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                super.idRootFolderB, null, 4, descendantsMapData);
+        Assert.assertTrue("Folder 4 doesn't moved to position 4", checkDD);
 
-        } catch (ResourceNotFoundFault rnff) {
-            Assert.fail("Folder with id \"" + rnff.getId() + "\" was not found");
-        }
+        this.checkInitialState("after DD II on root parent");
     }
 
     @Test
-    public void testDragAndDropFromRootToTop() {
+    public void testDragAndDropFromRootToTop() throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ testDragAndDropFromRootToTop @@@");
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map);
-        try {
-            map.put(idRootFolderA, 6);
-            // Move Folder B after Folder 1 (oldPosition < new Position)
-            boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
-                    super.idRootFolderB, super.idRootFolderA, 6, descendantsMapData);
-            Assert.assertTrue("Folder B doesn't moved to position 6", checkDD);
 
-            this.checkState(new int[]{7, 2, 1, 6, 5, 4, 3}, new int[]{6, 3}, "after DD I from root to top");
-            Assert.assertNull("Parent of root folder A after DD I from root to top", rootFolderA.getParent());
-            Assert.assertNotNull("Parent of root folder B after DD I from root to top", rootFolderB.getParent());
-            Assert.assertEquals("Parent of root folder B after DD I from root to top", idRootFolderA, rootFolderB.getParent().getId().longValue());
+        map.put(idRootFolderA, 6);
+        // Move Folder B after Folder 1 (oldPosition < new Position)
+        boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                super.idRootFolderB, super.idRootFolderA, 6, descendantsMapData);
+        Assert.assertTrue("Folder B doesn't moved to position 6", checkDD);
 
-            map.clear();
-            map.put(idRootFolderA, 2);
-            // Move folder B in initial position (oldPosition > new Position)
-            checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
-                    super.idRootFolderB, null, 4, descendantsMapData);
-            Assert.assertTrue("Folder B doesn't moved to position 4", checkDD);
+        this.checkState(new int[]{7, 2, 1, 6, 5, 4, 3}, new int[]{6, 3}, "after DD I from root to top");
+        Assert.assertNull("Parent of root folder A after DD I from root to top", rootFolderA.getParent());
+        Assert.assertNotNull("Parent of root folder B after DD I from root to top", rootFolderB.getParent());
+        Assert.assertEquals("Parent of root folder B after DD I from root to top", idRootFolderA, rootFolderB.getParent().getId().longValue());
 
-            this.checkInitialState("after DD II from root to top");
+        map.clear();
+        map.put(idRootFolderA, 2);
+        // Move folder B in initial position (oldPosition > new Position)
+        checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                super.idRootFolderB, null, 4, descendantsMapData);
+        Assert.assertTrue("Folder B doesn't moved to position 4", checkDD);
 
-        } catch (ResourceNotFoundFault rnff) {
-            Assert.fail("Folder with id \"" + rnff.getId() + "\" was not found");
-        }
+        this.checkInitialState("after DD II from root to top");
     }
 
     @Test
-    public void testDragAndDropFromRootToBottom() {
+    public void testDragAndDropFromRootToBottom() throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ testDragAndDropFromRootToBottom @@@");
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map);
-        try {
-            map.put(idRootFolderB, 6);
-            // Move Folder A after Folder 3 (oldPosition > new Position)
-            boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
-                    super.idRootFolderA, super.idRootFolderB, 5, descendantsMapData);
-            Assert.assertTrue("Folder A doesn't moved to position 5", checkDD);
 
-            this.checkState(new int[]{5, 4, 3, 7, 6, 2, 1}, new int[]{2, 6}, "after DD I from root to bottom");
-            Assert.assertNotNull("Parent of root folder A after DD I from root to bottom", rootFolderA.getParent());
-            Assert.assertEquals("Parent of root folder A after DD I from root to bottom", idRootFolderB, rootFolderA.getParent().getId().longValue());
-            Assert.assertNull("Parent of root folder B after DD I from root to bottom", rootFolderB.getParent());
+        map.put(idRootFolderB, 6);
+        // Move Folder A after Folder 3 (oldPosition > new Position)
+        boolean checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                super.idRootFolderA, super.idRootFolderB, 5, descendantsMapData);
+        Assert.assertTrue("Folder A doesn't moved to position 5", checkDD);
 
-            map.clear();
-            map.put(idRootFolderB, 3);
-            // Move folder A in initial position (oldPosition < new Position)
-            checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
-                    super.idRootFolderA, null, 7, descendantsMapData);
-            Assert.assertTrue("Folder B doesn't moved to position 7", checkDD);
+        this.checkState(new int[]{5, 4, 3, 7, 6, 2, 1}, new int[]{2, 6}, "after DD I from root to bottom");
+        Assert.assertNotNull("Parent of root folder A after DD I from root to bottom", rootFolderA.getParent());
+        Assert.assertEquals("Parent of root folder A after DD I from root to bottom", idRootFolderB, rootFolderA.getParent().getId().longValue());
+        Assert.assertNull("Parent of root folder B after DD I from root to bottom", rootFolderB.getParent());
 
-            this.checkInitialState("after DD II from root to bottom");
+        map.clear();
+        map.put(idRootFolderB, 3);
+        // Move folder A in initial position (oldPosition < new Position)
+        checkDD = gpWSClient.saveDragAndDropFolderAndTreeModifications(
+                super.idRootFolderA, null, 7, descendantsMapData);
+        Assert.assertTrue("Folder B doesn't moved to position 7", checkDD);
 
-        } catch (ResourceNotFoundFault rnff) {
-            Assert.fail("Folder with id \"" + rnff.getId() + "\" was not found");
-        }
+        this.checkInitialState("after DD II from root to bottom");
     }
 
-    private void checkInitialState(String info)
-            throws ResourceNotFoundFault {
-
+    private void checkInitialState(String info) throws ResourceNotFoundFault {
         rootFolderA = gpWSClient.getFolderDetail(idRootFolderA);
         Assert.assertEquals("Position of root folder A - " + info, 7, rootFolderA.getPosition());
         Assert.assertNull("Parent of root folder A - " + info, rootFolderA.getParent());

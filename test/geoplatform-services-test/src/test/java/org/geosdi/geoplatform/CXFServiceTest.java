@@ -77,54 +77,39 @@ public class CXFServiceTest extends ServiceTest {
     }
 
     @Test
-    public void testUpdateServer() {
+    public void testUpdateServer()
+            throws IllegalParameterFault, ResourceNotFoundFault {
         final String serverUrlUpdated = serverUrlTest.replaceAll("org", "com");
-        try {
-            // Retrieve Server
-            GeoPlatformServer serverTest = gpWSClient.getServerDetail(idServerTest);
-            logger.debug("\n*** serverTest:\n{}\n***", serverTest);
-            // Update Server
-            serverTest.setServerUrl(serverUrlUpdated);
-            gpWSClient.updateServer(serverTest);
+        // Retrieve Server
+        GeoPlatformServer serverTest = gpWSClient.getServerDetail(idServerTest);
+        logger.debug("\n*** serverTest:\n{}\n***", serverTest);
+        // Update Server
+        serverTest.setServerUrl(serverUrlUpdated);
+        gpWSClient.updateServer(serverTest);
 
-            // Retrieve Server modified
-            GeoPlatformServer serverModified = gpWSClient.getServerDetail(idServerTest);
-            logger.debug("\n*** serverModified:\n{}\n***", serverModified);
-            // Assert on Server modified
-            Assert.assertNotNull(serverModified);
-            Assert.assertEquals(serverTest.getServerUrl(), serverModified.getServerUrl());
-        } catch (IllegalParameterFault ex) {
-            Assert.fail("Server has an Illegal Parameter");
-        } catch (ResourceNotFoundFault ex) {
-            Assert.fail("Server \"" + usernameTest + "\" not found");
-        }
+        // Retrieve Server modified
+        GeoPlatformServer serverModified = gpWSClient.getServerDetail(idServerTest);
+        logger.debug("\n*** serverModified:\n{}\n***", serverModified);
+        // Assert on Server modified
+        Assert.assertNotNull(serverModified);
+        Assert.assertEquals(serverTest.getServerUrl(), serverModified.getServerUrl());
     }
 
     @Test
-    public void testGetServer() {
+    public void testGetServer() throws ResourceNotFoundFault {
         // Get Server from Id
-        try {
-            // Get GeoPlatformServer from id
-            GeoPlatformServer gpServer = gpWSClient.getServerDetail(idServerTest);
-            logger.debug("\n*** gpServer:\n{}\n***", gpServer);
-            Assert.assertNotNull(gpServer);
-            Assert.assertEquals("Id Server NOT match", idServerTest, gpServer.getId().longValue());
-            Assert.assertEquals("URL Server NOT match", serverUrlTest, gpServer.getServerUrl());
-        } catch (ResourceNotFoundFault ex) {
-            Assert.fail("Not found Server with Id: \"" + idServerTest + "\"");
-        }
+        GeoPlatformServer gpServer = gpWSClient.getServerDetail(idServerTest);
+        logger.debug("\n*** gpServer:\n{}\n***", gpServer);
+        Assert.assertNotNull(gpServer);
+        Assert.assertEquals("Id Server NOT match", idServerTest, gpServer.getId().longValue());
+        Assert.assertEquals("URL Server NOT match", serverUrlTest, gpServer.getServerUrl());
 
         // Get Server from serverUrl
-        try {
-            // Get ServerDTO from serverUrl
-            ServerDTO serverDTO = gpWSClient.getShortServer(serverUrlTest);
-            logger.debug("\n*** serverDTO:\n{}\n***", serverDTO);
-            Assert.assertNotNull(serverDTO);
-            Assert.assertEquals("Id Server NOT match", idServerTest, serverDTO.getId().longValue());
-            Assert.assertEquals("URL Server NOT match", serverUrlTest, serverDTO.getServerUrl());
-        } catch (ResourceNotFoundFault ex) {
-            Assert.fail("Not found Server with serverUrl: \"" + idServerTest + "\"");
-        }
+        ServerDTO serverDTO = gpWSClient.getShortServer(serverUrlTest);
+        logger.debug("\n*** serverDTO:\n{}\n***", serverDTO);
+        Assert.assertNotNull(serverDTO);
+        Assert.assertEquals("Id Server NOT match", idServerTest, serverDTO.getId().longValue());
+        Assert.assertEquals("URL Server NOT match", serverUrlTest, serverDTO.getServerUrl());
     }
 
     @Test

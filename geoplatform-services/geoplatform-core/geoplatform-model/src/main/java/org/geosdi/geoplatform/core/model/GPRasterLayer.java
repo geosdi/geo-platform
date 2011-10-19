@@ -86,6 +86,10 @@ public class GPRasterLayer extends GPLayer {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPProject project = null;
 
+    public GPRasterLayer() {
+        super.setLayerType(GPLayerType.RASTER);
+    }
+
     /**
      * @return the layerInfo
      */

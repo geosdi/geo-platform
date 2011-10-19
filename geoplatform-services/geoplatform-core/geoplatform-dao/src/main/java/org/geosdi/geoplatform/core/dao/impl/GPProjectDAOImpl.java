@@ -50,8 +50,8 @@ import org.springframework.transaction.annotation.Transactional;
  * 
  */
 @Transactional
-public class GPProjectDAOImpl extends BaseDAO<GPProject, Long> implements
-        GPProjectDAO {
+public class GPProjectDAOImpl extends BaseDAO<GPProject, Long>
+        implements GPProjectDAO {
 
     @Override
     public List<GPProject> findAll() {

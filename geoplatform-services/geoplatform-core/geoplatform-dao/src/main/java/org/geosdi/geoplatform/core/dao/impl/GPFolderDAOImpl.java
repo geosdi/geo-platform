@@ -54,8 +54,8 @@ import org.geosdi.geoplatform.core.model.GPFolder;
  * 
  */
 @Transactional
-public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
-        GPFolderDAO {
+public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long>
+        implements GPFolderDAO {
 
     @Override
     public GPFolder[] find(Long[] ids) {
@@ -92,7 +92,16 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
     public GPFolder findByFolderName(String folderName) {
         Search search = new Search();
         search.addFilterEqual("name", folderName);
-        return searchUnique(search);
+        return super.searchUnique(search);
+    }
+
+    @Override
+    public List<GPFolder> searchRootFolders(Long projectId) {
+        Search searchCriteria = new Search();
+        searchCriteria.addFilterEqual("project.id", projectId);
+        searchCriteria.addFilterNull("parent.id");
+        searchCriteria.addSortDesc("position");
+        return super.search(searchCriteria);
     }
 
     @Override
@@ -217,7 +226,7 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long> implements
         Search search = new Search();
         search.addFilterGreaterOrEqual("position", lowerBoundPosition);
         List<GPFolder> matchingFolders = super.search(search);
-        
+
         logger.info("\n*** UPDATE Folders with Position from {} *** deltaValue = {} ***",
                 new Object[]{lowerBoundPosition, deltaValue});
         logger.info("\n*** Matching Folders count: {} ***", matchingFolders.size());

@@ -41,7 +41,9 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
+import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 
 /**
@@ -158,5 +160,18 @@ public class RasterLayerDTO extends ShortLayerDTO {
                 + ", opacity=" + opacity
                 + ", styleList=" + styleList
                 + ", subLayerList=" + subLayerList + "]";
+    }
+
+    public static GPRasterLayer convertToGPRasterLayer(GPProject project, GPFolder parent,
+            RasterLayerDTO rasterDTO) {
+        
+        GPRasterLayer raster = new GPRasterLayer();
+        ShortLayerDTO.convertToGPLayer(project, parent, raster, rasterDTO);
+
+        raster.setLayerInfo(rasterDTO.getLayerInfo());
+        raster.setOpacity(rasterDTO.getOpacity());
+        raster.setStyles(rasterDTO.getStyleList());
+
+        return raster;
     }
 }

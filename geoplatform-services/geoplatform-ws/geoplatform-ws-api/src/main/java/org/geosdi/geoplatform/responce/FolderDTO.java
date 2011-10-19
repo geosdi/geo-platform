@@ -47,6 +47,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPProject;
 
 /**
  * @author giuseppe
@@ -55,7 +56,7 @@ import org.geosdi.geoplatform.core.model.GPFolder;
 @XmlRootElement(name = "FolderDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class FolderDTO extends AbstractElementDTO {
-    
+
     private Integer numberOfDescendants;
     //
     @XmlElementWrapper(name = "elementList")
@@ -81,17 +82,17 @@ public class FolderDTO extends AbstractElementDTO {
     }
 
     /**
-     * @return the numberOfChilds
+     * @return the numberOfDescendants
      */
-    public int getNumberOfChilds() {
+    public Integer getNumberOfDescendants() {
         return numberOfDescendants;
     }
 
     /**
-     * @param numberOfChilds to set
+     * @param numberOfDescendants to set
      */
-    public void setNumberOfChilds(int numberOfChilds) {
-        this.numberOfDescendants = numberOfChilds;
+    public void setNumberOfDescendants(Integer numberOfDescendants) {
+        this.numberOfDescendants = numberOfDescendants;
     }
 
     /**
@@ -127,15 +128,37 @@ public class FolderDTO extends AbstractElementDTO {
         return "FolderDTO [" + super.toString()
                 + ", numberOfDescendants=" + numberOfDescendants + "]";
     }
-    
+
     public static List<FolderDTO> convertToFolderDTOList(List<GPFolder> folders) {
         List<FolderDTO> foldersDTO = new ArrayList<FolderDTO>(folders.size());
-        
+
         for (GPFolder folder : folders) {
             FolderDTO folderDTO = new FolderDTO(folder);
             foldersDTO.add(folderDTO);
         }
-        
+
         return foldersDTO;
+    }
+
+    public static GPFolder convertToGPFolder(GPProject project, GPFolder parent,
+            FolderDTO folderDTO) {
+        GPFolder folder = new GPFolder();
+        
+        folder.setProject(project);
+        folder.setParent(parent);
+        // Set all properties except "id" and "shared"
+        folder.setName(folderDTO.getName());
+        if (folderDTO.getPosition() != null) {
+            folder.setPosition(folderDTO.getPosition());
+        }
+        if (folderDTO.isChecked() != null) {
+            folder.setChecked(folderDTO.isChecked());
+        }
+        // Specific properties of a folder
+        if (folderDTO.getNumberOfDescendants() != null) {
+            folder.setNumberOfDescendants(folderDTO.getNumberOfDescendants());
+        }
+
+        return folder;
     }
 }

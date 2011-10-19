@@ -38,6 +38,8 @@
 package org.geosdi.geoplatform.responce;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GPFolder;
+import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 
 /**
@@ -54,7 +56,7 @@ public class VectorLayerDTO extends ShortLayerDTO {
      */
     public VectorLayerDTO() {
     }
-    
+
     /**
      * Constructor with GPVectorLayer as arg
      */
@@ -62,9 +64,18 @@ public class VectorLayerDTO extends ShortLayerDTO {
         super(vectorLayer);
     }
     //</editor-fold>
-    
+
     @Override
     public String toString() {
         return "VectorLayerDTO [" + super.toString() + ']';
-    }    
+    }
+
+    public static GPVectorLayer convertToGPVectorLayer(GPProject project, GPFolder parent,
+            VectorLayerDTO vectorDTO) {
+        
+        GPVectorLayer vector = new GPVectorLayer();
+        ShortLayerDTO.convertToGPLayer(project, parent, vector, vectorDTO);
+
+        return vector;
+    }
 }

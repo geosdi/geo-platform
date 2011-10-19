@@ -48,8 +48,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 // For handle this inteface with JAXB
 @XmlJavaTypeAdapter(value = ElementDTOAdapter.class)
 public interface IElementDTO extends Comparable<IElementDTO> {
-    
+
     Long getId();
 
     String getName();
+
+    Integer getPosition();
 }

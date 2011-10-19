@@ -140,7 +140,7 @@ class LayerServiceImpl {
     }
 
     public Long insertLayer(GPLayer layer) throws IllegalParameterFault {
-        this.checkLayer(layer); // TODO assert
+        EntityCorrectness.checkLayer(layer); // TODO assert
 
         layerDao.persist(layer);
         return layer.getId();
@@ -148,13 +148,13 @@ class LayerServiceImpl {
 
     public Long updateRasterLayer(GPRasterLayer layer)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        this.checkLayer(layer); // TODO assert
+        EntityCorrectness.checkLayer(layer); // TODO assert
 
         GPRasterLayer orig = (GPRasterLayer) layerDao.find(layer.getId());
         if (orig == null) {
             throw new ResourceNotFoundFault("Layer not found", layer.getId());
         }
-        this.checkLayer(orig); // TODO assert
+        EntityCorrectness.checkLayer(orig); // TODO assert
 
         orig.setLayerInfo(layer.getLayerInfo());
         this.updateLayer(orig, layer);
@@ -165,13 +165,13 @@ class LayerServiceImpl {
 
     public Long updateVectorLayer(GPVectorLayer layer)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        this.checkLayer(layer); // TODO assert
+        EntityCorrectness.checkLayer(layer); // TODO assert
 
         GPVectorLayer orig = (GPVectorLayer) layerDao.find(layer.getId());
         if (orig == null) {
             throw new ResourceNotFoundFault("Layer not found", layer.getId());
         }
-        this.checkLayer(orig); // TODO assert
+        EntityCorrectness.checkLayer(orig); // TODO assert
 
         orig.setGeometry(layer.getGeometry());
         this.updateLayer(orig, layer);
@@ -186,7 +186,7 @@ class LayerServiceImpl {
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
         }
-        this.checkLayerLog(layer); // TODO assert
+        EntityCorrectness.checkLayerLog(layer); // TODO assert
 
         // data on ancillary tables should be deleted by cascading
         return layerDao.remove(layer);
@@ -196,20 +196,20 @@ class LayerServiceImpl {
             GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n\t@@@ saveAddedLayerAndTreeModifications @@@");
-        this.checkLayer(layer); // TODO assert
+        EntityCorrectness.checkLayer(layer); // TODO assert
 
         GPFolder parent = layer.getFolder();
         if (parent == null) {
             throw new IllegalParameterFault("Parent of layer with id " + layer.getId() + " not found");
         }
-        this.checkFolder(parent); // TODO assert
+        EntityCorrectness.checkFolder(parent); // TODO assert
 
         Long idParent = parent.getId();
         GPFolder parentFromDB = folderDao.find(idParent);
         if (parentFromDB == null) {
             throw new ResourceNotFoundFault("Parent of layer not found", idParent);
         }
-        this.checkFolder(parentFromDB); // TODO assert
+        EntityCorrectness.checkFolder(parentFromDB); // TODO assert
 
         int newPosition = layer.getPosition();
         int increment = 1;
@@ -232,7 +232,7 @@ class LayerServiceImpl {
         if (layers == null || layers.isEmpty()) {
             throw new IllegalParameterFault("List of layers is null or empty");
         }
-        this.checkLayerListLog(layers); // TODO assert
+        EntityCorrectness.checkLayerListLog(layers); // TODO assert
 
         // Project
         GPProject projectEntity = projectDao.find(projectId);
@@ -251,7 +251,7 @@ class LayerServiceImpl {
         if (parentEntity == null) {
             throw new ResourceNotFoundFault("Parent of top layer not found", parent.getId());
         }
-        this.checkFolder(parentEntity); // TODO assert   
+        EntityCorrectness.checkFolder(parentEntity); // TODO assert   
 
         for (GPLayer gpLayer : layers) {
             gpLayer.setProject(projectEntity);
@@ -284,7 +284,7 @@ class LayerServiceImpl {
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
         }
-        this.checkLayerLog(layer); // TODO assert
+        EntityCorrectness.checkLayerLog(layer); // TODO assert
 
         int oldPosition = layer.getPosition();
         boolean result = layerDao.remove(layer);
@@ -306,7 +306,7 @@ class LayerServiceImpl {
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
         }
-        this.checkLayerLog(layer); // TODO assert
+        EntityCorrectness.checkLayerLog(layer); // TODO assert
 
         boolean checkSave = layerDao.persistCheckStatusLayer(layerId, checked);
 
@@ -332,20 +332,20 @@ class LayerServiceImpl {
             throw new ResourceNotFoundFault("Layer not found", layerId);
         }
 //        assert (layer.isChecked()) : "For Fix the check, the layer must be checked";
-        this.checkLayerLog(layer); // TODO assert
+        EntityCorrectness.checkLayerLog(layer); // TODO assert
 
         // Retrieve the UserFolders parent
         GPFolder oldUserFolder = folderDao.find(oldUserFolderId);
         if (oldUserFolder == null) {
             throw new ResourceNotFoundFault("Old Folder not found", oldUserFolderId);
         }
-        this.checkFolderLog(oldUserFolder); // TODO assert
+        EntityCorrectness.checkFolderLog(oldUserFolder); // TODO assert
 
         GPFolder newUserFolder = folderDao.find(newUserFolderId);
         if (newUserFolder == null) {
             throw new ResourceNotFoundFault("New Folder not found", newUserFolderId);
         }
-        this.checkFolderLog(newUserFolder); // TODO assert
+        EntityCorrectness.checkFolderLog(newUserFolder); // TODO assert
 
         // Test if the Check was valid (all the old ancestor must be checked)
         GPFolder[] oldAncestors = this.getUserFolderAndAncestors(oldUserFolder);
@@ -364,7 +364,7 @@ class LayerServiceImpl {
         if (layerMoved == null) {
             throw new ResourceNotFoundFault("Layer with id " + idLayerMoved + " not found");
         }
-        this.checkLayerLog(layerMoved); // TODO assert
+        EntityCorrectness.checkLayerLog(layerMoved); // TODO assert
 
         if (idNewParent == null) {
             throw new IllegalParameterFault("New folder parent NOT declared");
@@ -374,7 +374,7 @@ class LayerServiceImpl {
         if (folderParent == null) {
             throw new ResourceNotFoundFault("The new parent does not exists", idNewParent);
         }
-        this.checkFolderLog(folderParent); // TODO assert
+        EntityCorrectness.checkFolderLog(folderParent); // TODO assert
         layerMoved.setFolder(folderParent);
 
         int startFirstRange = 0, endFirstRange = 0;
@@ -415,14 +415,14 @@ class LayerServiceImpl {
 
     private void executeLayersModifications(List<GPLayer> elements, int value) {
         for (GPLayer layer : elements) {
-            this.checkLayerLog(layer); // TODO assert
+            EntityCorrectness.checkLayerLog(layer); // TODO assert
             layer.setPosition(layer.getPosition() + value);
         }
     }
 
     private void executeFoldersModifications(List<GPFolder> elements, int value) {
         for (GPFolder userFolder : elements) {
-            this.checkFolderLog(userFolder); // TODO assert
+            EntityCorrectness.checkFolderLog(userFolder); // TODO assert
             userFolder.setPosition(userFolder.getPosition() + value);
         }
     }
@@ -468,7 +468,7 @@ class LayerServiceImpl {
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
         }
-        this.checkLayerLog(layer); // TODO assert
+        EntityCorrectness.checkLayerLog(layer); // TODO assert
 
         return layer;
     }
@@ -478,17 +478,17 @@ class LayerServiceImpl {
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
         }
-        this.checkLayerLog(layer); // TODO assert
+        EntityCorrectness.checkLayerLog(layer); // TODO assert
 
         return layer;
     }
-    
+
     public ShortLayerDTO getShortLayer(Long layerId) throws ResourceNotFoundFault {
         GPLayer layer = layerDao.find(layerId);
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
         }
-        this.checkLayerLog(layer); // TODO assert
+        EntityCorrectness.checkLayerLog(layer); // TODO assert
 
         return new ShortLayerDTO(layer);
     }
@@ -501,7 +501,7 @@ class LayerServiceImpl {
 
         List<GPLayer> foundLayer = layerDao.search(searchCriteria);
 
-        this.checkLayerListLog(foundLayer); // TODO assert
+        EntityCorrectness.checkLayerListLog(foundLayer); // TODO assert
 
         return ShortLayerDTO.convertToShortLayerDTOList(foundLayer);
     }
@@ -511,7 +511,7 @@ class LayerServiceImpl {
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
         }
-        this.checkLayerLog(layer); // TODO assert
+        EntityCorrectness.checkLayerLog(layer); // TODO assert
 
         return layer.getBbox();
     }
@@ -521,7 +521,7 @@ class LayerServiceImpl {
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
         }
-        this.checkLayerLog(layer); // TODO assert
+        EntityCorrectness.checkLayerLog(layer); // TODO assert
 
         return layer.getLayerInfo();
     }
@@ -549,7 +549,7 @@ class LayerServiceImpl {
         if (layer == null) {
             throw new ResourceNotFoundFault("Layer not found", layerId);
         }
-        this.checkLayerLog(layer); // TODO assert
+        EntityCorrectness.checkLayerLog(layer); // TODO assert
 
         return layer.getLayerType();
     }
@@ -631,65 +631,5 @@ class LayerServiceImpl {
 
         project.deltaToNumberOfElements(delta);
         projectDao.merge(project);
-    }
-
-    // TODO assert
-    private void checkLayer(GPLayer layer) throws IllegalParameterFault {
-        if (layer == null) {
-            throw new IllegalParameterFault("Layer must be NOT NULL");
-        }
-        if (layer.getTitle() == null) {
-            throw new IllegalParameterFault("GPLayer: \"title\" must be NOT NULL");
-        }
-//        if (layer.getLayerType() == null) {
-//            throw new IllegalParameterFault("GPLayer: \"layerType\" must be NOT NULL");
-//        }
-        if (layer.getFolder() == null) {
-            throw new IllegalParameterFault("Layer must have a folder");
-        }
-    }
-
-    // TODO assert
-    private void checkLayerListLog(List<GPLayer> layers) {
-        for (GPLayer layer : layers) {
-            this.checkLayerLog(layer);
-        }
-    }
-
-    // TODO assert
-    private void checkLayerLog(GPLayer layer) {
-        try {
-            this.checkLayer(layer);
-        } catch (IllegalParameterFault ex) {
-            logger.error("\n--- " + ex.getMessage() + " ---");
-        }
-    }
-
-    // TODO assert
-    private void checkFolder(GPFolder folder) throws IllegalParameterFault {
-        if (folder == null) {
-            throw new IllegalParameterFault("Folder must be NOT NULL");
-        }
-        if (folder.getName() == null) {
-            throw new IllegalParameterFault("Folder \"name\" must be NOT NULL");
-        }
-        if (folder.getNumberOfDescendants() < 0) {
-            throw new IllegalParameterFault("Folder \"numberOfDescendants\" must be greater or equal 0");
-        }
-        if (folder.getProject() == null) {
-            throw new IllegalParameterFault("Folder \"project\" must be NOT NULL");
-        }
-//        if(projectDao.find(folder.getProject().getId()) == null){
-//            throw new ResourceNotFoundFault("Folder \"project\" does NOT exist");
-//        }
-    }
-
-    // TODO assert
-    private void checkFolderLog(GPFolder userFolder) {
-        try {
-            this.checkFolder(userFolder);
-        } catch (IllegalParameterFault ex) {
-            logger.error("\n--- " + ex.getMessage() + " ---");
-        }
     }
 }

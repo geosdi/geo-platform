@@ -115,7 +115,8 @@ public abstract class AbstractElementDTO implements IElementDTO {
     /**
      * @return the position
      */
-    public int getPosition() {
+    @Override
+    public Integer getPosition() {
         return position;
     }
 
@@ -123,14 +124,14 @@ public abstract class AbstractElementDTO implements IElementDTO {
      * @param position
      *            the position to set
      */
-    public void setPosition(int position) {
+    public void setPosition(Integer position) {
         this.position = position;
     }
 
     /**
      * @return the shared state
      */
-    public boolean isShared() {
+    public Boolean isShared() {
         return shared;
     }
 
@@ -138,14 +139,14 @@ public abstract class AbstractElementDTO implements IElementDTO {
      * @param shared
      *            the shared state to set
      */
-    public void setShared(boolean shared) {
+    public void setShared(Boolean shared) {
         this.shared = shared;
     }
 
     /**
      * @return the checked
      */
-    public boolean isChecked() {
+    public Boolean isChecked() {
         return checked;
     }
 
@@ -153,7 +154,7 @@ public abstract class AbstractElementDTO implements IElementDTO {
      * @param checked
      *            the checked to set
      */
-    public void setChecked(boolean checked) {
+    public void setChecked(Boolean checked) {
         this.checked = checked;
     }
     //</editor-fold>
@@ -166,7 +167,7 @@ public abstract class AbstractElementDTO implements IElementDTO {
      */
     @Override
     public int compareTo(IElementDTO element) {
-        return ((AbstractElementDTO) element).getPosition() - getPosition();
+        return element.getPosition() - this.getPosition();
     }
 
     /*

@@ -40,7 +40,6 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.PublisherResources;
 import org.geosdi.geoplatform.gui.client.widget.GPKmlWidget;
-import org.geosdi.geoplatform.gui.client.widget.UploadKmlWidget;
 
 /**
  *

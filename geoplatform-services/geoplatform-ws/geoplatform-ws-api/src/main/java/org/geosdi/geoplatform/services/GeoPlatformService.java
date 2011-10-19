@@ -268,17 +268,18 @@ public interface GeoPlatformService {
     Long updateFolder(@WebParam(name = "folder") GPFolder folder)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
+    @Delete
+    @HttpResource(location = "/folders/{folderId}")
+    @Deprecated
+    boolean deleteFolder(@WebParam(name = "folderId") Long folderId)
+            throws ResourceNotFoundFault;
+
     @Post
     @HttpResource(location = "/folder/{folderId}")
     Long saveFolderProperties(@WebParam(name = "folderId") Long folderId,
             @WebParam(name = "folderName") String folderName,
             @WebParam(name = "checked") boolean checked)
             throws ResourceNotFoundFault, IllegalParameterFault;
-
-    @Delete
-    @HttpResource(location = "/folders/{folderId}")
-    boolean deleteFolder(@WebParam(name = "folderId") Long folderId)
-            throws ResourceNotFoundFault;
 
     @Put
 //    @HttpResource(location = "/folder/{descendantsMap}")
@@ -378,8 +379,13 @@ public interface GeoPlatformService {
     @Get
     //@HttpResource(location = "/projects/{projectId}")
     @WebResult(name = "Project")
-    ProjectDTO getElements(@WebParam(name = "projectId") Long projectId)
+    ProjectDTO exportProject(@WebParam(name = "projectId") Long projectId)
             throws ResourceNotFoundFault;
+
+    @Put
+    @HttpResource(location = "/project")
+    Long importProject(@WebParam(name = "projectDTO") ProjectDTO projectDTO)
+            throws IllegalParameterFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Layer / Style">
@@ -437,7 +443,7 @@ public interface GeoPlatformService {
 
     @Put
     @HttpResource(location = "/layer/{layerId}")
-    public boolean fixCheckStatusLayerAndTreeModifications(
+    boolean fixCheckStatusLayerAndTreeModifications(
             @WebParam(name = "layerId") Long layerId,
             @WebParam(name = "oldUserFolderId") Long oldUserFolderId,
             @WebParam(name = "newUserFolderId") Long newUserFolderId)

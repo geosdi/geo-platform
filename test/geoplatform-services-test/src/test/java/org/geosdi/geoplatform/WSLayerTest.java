@@ -155,7 +155,7 @@ public class WSLayerTest extends ServiceTest {
             Assert.assertNotNull("assertNotNull shortRasterLayer1", shortRasterLayer1);
             Assert.assertEquals("assertEquals shortRasterLayer1.getTitle()", titleRaster1, shortRasterLayer1.getTitle());
             Assert.assertEquals("assertEquals shortRasterLayer1.getName()", "name_" + titleRaster1, shortRasterLayer1.getName());
-            Assert.assertEquals("assertEquals shortRasterLayer1.getPosition()", 5, shortRasterLayer1.getPosition());
+            Assert.assertEquals("assertEquals shortRasterLayer1.getPosition()", 5, shortRasterLayer1.getPosition().intValue());
             Assert.assertEquals("assertEquals shortRasterLayer1.getSrs()", spatialReferenceSystem, shortRasterLayer1.getSrs());
             Assert.assertEquals("assertEquals shortRasterLayer1.getUrlServer()", urlServer, shortRasterLayer1.getUrlServer());
             Assert.assertEquals("assertEquals shortRasterLayer1.getLayerType()", GPLayerType.RASTER, shortRasterLayer1.getLayerType());
@@ -164,7 +164,7 @@ public class WSLayerTest extends ServiceTest {
             Assert.assertNotNull("assertNotNull shortVectorLayer1", shortVectorLayer1);
             Assert.assertEquals("assertEquals shortVectorLayer1.getTitle()", titleVector1, shortVectorLayer1.getTitle());
             Assert.assertEquals("assertEquals shortVectorLayer1.getName()", "name_" + titleVector1, shortVectorLayer1.getName());
-            Assert.assertEquals("assertEquals shortVectorLayer1.getPosition()", 4, shortVectorLayer1.getPosition());
+            Assert.assertEquals("assertEquals shortVectorLayer1.getPosition()", 4, shortVectorLayer1.getPosition().intValue());
             Assert.assertEquals("assertEquals shortVectorLayer1.getSrs()", spatialReferenceSystem, shortVectorLayer1.getSrs());
             Assert.assertEquals("assertEquals shortVectorLayer1.getUrlServer()", urlServer, shortVectorLayer1.getUrlServer());
             Assert.assertEquals("assertEquals shortVectorLayer1.getLayerType()", GPLayerType.POLYGON, shortVectorLayer1.getLayerType());

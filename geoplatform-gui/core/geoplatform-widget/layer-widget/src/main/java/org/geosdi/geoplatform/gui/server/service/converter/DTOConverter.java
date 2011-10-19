@@ -177,7 +177,7 @@ public class DTOConverter {
         folder.setLabel(folderDTO.getName());
         folder.setId(folderDTO.getId());
         // folder.setzIndex(folderDTO.getPosition());
-        folder.setNumberOfDescendants(folderDTO.getNumberOfChilds());
+        folder.setNumberOfDescendants(folderDTO.getNumberOfDescendants());
         folder.setChecked(folderDTO.isChecked());
         return folder;
     }

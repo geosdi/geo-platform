@@ -61,11 +61,11 @@ import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
-import org.springframework.security.acls.domain.BasePermission;
 
 /**
  * @author Michele Santomauro
@@ -131,7 +131,7 @@ class ProjectServiceImpl {
     public Long saveProject(String username, GPProject project)
             throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n\t@@@ saveProject @@@");
-        this.checkProject(project);
+        EntityCorrectness.checkProject(project); // TODO assert
 
         GPUser user = userDao.findByUsername(username);
         if (user == null) {
@@ -151,7 +151,7 @@ class ProjectServiceImpl {
     @Deprecated
     public Long insertProject(GPProject project) throws IllegalParameterFault {
         logger.trace("\n\t@@@ insertProject @@@");
-        this.checkProject(project);
+        EntityCorrectness.checkProject(project); // TODO assert
 
         projectDao.persist(project);
         return project.getId();
@@ -160,13 +160,13 @@ class ProjectServiceImpl {
     public Long updateProject(GPProject project)
             throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n\t@@@ updateProject @@@");
-        this.checkProject(project); // TODO assert
+        EntityCorrectness.checkProject(project); // TODO assert
 
         GPProject origProject = projectDao.find(project.getId());
         if (origProject == null) {
             throw new ResourceNotFoundFault("Project not found", project.getId());
         }
-        this.checkProject(origProject); // TODO assert
+        EntityCorrectness.checkProject(origProject); // TODO assert
 
         // Update all properties (except the creationDate)
         origProject.setName(project.getName());
@@ -185,7 +185,7 @@ class ProjectServiceImpl {
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
         }
-        this.checkProjectLog(project); // TODO assert
+        EntityCorrectness.checkProjectLog(project); // TODO assert
 
         return projectDao.removeById(projectId);
     }
@@ -197,7 +197,7 @@ class ProjectServiceImpl {
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
         }
-        this.checkProjectLog(project); // TODO assert
+        EntityCorrectness.checkProjectLog(project); // TODO assert
 
         return project;
     }
@@ -288,16 +288,11 @@ class ProjectServiceImpl {
      * @return root folders of a project
      */
     public List<FolderDTO> getRootFoldersByProjectId(Long projectId) {
-        Search searchCriteria = new Search(GPFolder.class);
-
-        searchCriteria.addFilterEqual("project.id", projectId);
-        searchCriteria.addFilterNull("parent.id");
-        searchCriteria.addSortDesc("position");
-        List<GPFolder> foundUserFolders = folderDao.search(searchCriteria);
+        List<GPFolder> foundUserFolders = folderDao.searchRootFolders(projectId);
         return FolderDTO.convertToFolderDTOList(foundUserFolders);
     }
 
-    public ProjectDTO getElements(Long projectId) throws ResourceNotFoundFault {
+    public ProjectDTO exportProject(Long projectId) throws ResourceNotFoundFault {
         GPProject project = projectDao.find(projectId);
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
@@ -305,18 +300,19 @@ class ProjectServiceImpl {
         ProjectDTO projectDTO = new ProjectDTO(project);
 
         // Root Folders
-        Search searchCriteria = new Search(GPFolder.class);
-        searchCriteria.addFilterEqual("project.id", projectId);
-        searchCriteria.addFilterNull("parent.id");
-        searchCriteria.addSortDesc("position");
-        List<GPFolder> rootFolders = folderDao.search(searchCriteria);
+        List<GPFolder> rootFolders = folderDao.searchRootFolders(projectId);
         logger.debug("\n*** rootFolders:\n" + rootFolders);
 
         List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(rootFolders);
         projectDTO.setRootFolders(rootFoldersDTO);
 
+        Map<Long, FolderDTO> mapProjectFolders = new HashMap<Long, FolderDTO>();
+        for (FolderDTO rootFolder : rootFoldersDTO) {
+            mapProjectFolders.put(rootFolder.getId(), rootFolder);
+        }
+
         // Sub Folders
-        searchCriteria = new Search(GPFolder.class);
+        Search searchCriteria = new Search(GPFolder.class);
         searchCriteria.addFilterEqual("project.id", projectId);
         searchCriteria.addFilterNotNull("parent.id");
         List<GPFolder> subFolders = folderDao.search(searchCriteria);
@@ -328,13 +324,8 @@ class ProjectServiceImpl {
             subFoldersMap.put(key, folder);
         }
 
-        Map<Long, FolderDTO> mapProjectFolders = this.fillProjectFolders(rootFoldersDTO,
-                subFoldersMap, new HashMap<Long, FolderDTO>());
-        
-        // Add root folder to mapProjectFolders
-        for (FolderDTO f : rootFoldersDTO) {
-            mapProjectFolders.put(f.getId(), f);
-        }
+        mapProjectFolders = this.fillProjectFolders(rootFoldersDTO,
+                subFoldersMap, mapProjectFolders);
 
         // Sub Layers
         searchCriteria = new Search(GPLayer.class);
@@ -359,57 +350,24 @@ class ProjectServiceImpl {
         return projectDTO;
     }
 
-    private String createParentChildKey(GPFolder parent, GPFolder child) {
-        return parent.getId() + ":" + child.getId();
-    }
+    public Long importProject(ProjectDTO projectDTO) throws IllegalParameterFault {
+        GPProject project = ProjectDTO.convertToGPProject(projectDTO);
+        EntityCorrectness.checkProject(project); // TODO assert
+        projectDao.persist(project);
 
-    private Map<Long, FolderDTO> fillProjectFolders(List<FolderDTO> folders,
-            Map<String, GPFolder> mapRemaining, Map<Long, FolderDTO> mapAll) {
-        logger.debug("\n*** fillFolderList - Map size: " + mapRemaining.size());
-        if (!mapRemaining.isEmpty()) {
-            List<FolderDTO> childsDTO = null;
-            for (FolderDTO folder : folders) {
-                logger.debug("\n*** fillFolderList - folder: " + folder);
-                List<GPFolder> childs = this.getChilds(folder.getId(), mapRemaining);
-                if (childs.size() > 0) {
-                    childsDTO = FolderDTO.convertToFolderDTOList(childs);
-                    folder.addFolders(childsDTO);
-                    //
-                    for (FolderDTO childDTO : childsDTO) {
-                        mapAll.put(childDTO.getId(), childDTO);
-                    }
-                }
-                //
-                mapAll.put(folder.getId(), folder);
-            }
-
-            if (childsDTO != null) {
-                this.fillProjectFolders(childsDTO, mapRemaining, mapAll);
+        List<FolderDTO> rootFolders = projectDTO.getRootFolders();
+        if (project.getNumberOfElements() > 0 && rootFolders == null) { // TODO assert
+            throw new IllegalParameterFault("Project have not root folders, but numberOfElements is greater than zero");
+        }
+        if (rootFolders != null) {
+            for (FolderDTO folderDTO : rootFolders) {
+                GPFolder folder = FolderDTO.convertToGPFolder(project, null, folderDTO);
+                EntityCorrectness.checkFolder(folder); // TODO assert
+                folderDao.persist(folder);
+                this.persistElementList(project, folder, folderDTO.getElementList());
             }
         }
-        return mapAll;
-    }
-
-    private List<GPFolder> getChilds(Long parentId, Map<String, GPFolder> map) {
-        List<GPFolder> childs = new ArrayList<GPFolder>();
-        List<String> childsKeyHit = new ArrayList<String>();
-
-        for (Map.Entry<String, GPFolder> entry : map.entrySet()) {
-            String key = entry.getKey();
-            if (key.startsWith(parentId.toString())) {
-                logger.debug("*** getChilds - HIT: " + key);
-                childsKeyHit.add(key);
-                GPFolder childFolder = map.get(key);
-                childs.add(childFolder);
-            }
-        }
-
-        // Important: must be execute outer first for otherwise will throw ConcurrentModificationException
-        for (String key : childsKeyHit) {
-            map.remove(key);
-        }
-
-        return childs;
+        return project.getId();
     }
 
 //    // TODO Check
@@ -466,7 +424,7 @@ class ProjectServiceImpl {
     // ==========================================================================
     public Long insertUserProject(GPUserProjects userProject) throws IllegalParameterFault {
         logger.trace("\n\t@@@ insertUserProject @@@");
-        this.checkUserProject(userProject);
+        EntityCorrectness.checkUserProject(userProject);
 
         userProjectsDao.persist(userProject);
         return userProject.getId();
@@ -475,13 +433,13 @@ class ProjectServiceImpl {
     public Long updateUserProject(GPUserProjects userProject)
             throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n\t@@@ updateUserProject @@@");
-        this.checkUserProject(userProject); // TODO assert
+        EntityCorrectness.checkUserProject(userProject); // TODO assert
 
         GPUserProjects origUserProject = userProjectsDao.find(userProject.getId());
         if (origUserProject == null) {
             throw new ResourceNotFoundFault("UserProject not found", userProject.getId());
         }
-        this.checkUserProject(origUserProject); // TODO assert
+        EntityCorrectness.checkUserProject(origUserProject); // TODO assert
 
         // Update all properties (except the user and project reference)
         origUserProject.setChecked(userProject.isChecked());
@@ -500,7 +458,7 @@ class ProjectServiceImpl {
         if (userProject == null) {
             throw new ResourceNotFoundFault("UserProject not found", userProjectId);
         }
-        this.checkUserProjectLog(userProject); // TODO assert
+        EntityCorrectness.checkUserProjectLog(userProject); // TODO assert
 
         return projectDao.removeById(userProjectId);
     }
@@ -511,7 +469,7 @@ class ProjectServiceImpl {
         if (userProject == null) {
             throw new ResourceNotFoundFault("UserProject not found", userProjectId);
         }
-        this.checkUserProjectLog(userProject); // TODO assert
+        EntityCorrectness.checkUserProjectLog(userProject); // TODO assert
 
         return userProject;
     }
@@ -519,7 +477,7 @@ class ProjectServiceImpl {
     public List<GPUserProjects> getUserProjectsByUserId(Long userId) {
         List<GPUserProjects> userProjectsList = userProjectsDao.findByUserId(userId);
 
-        this.checkUserProjectListLog(userProjectsList); // TODO assert
+        EntityCorrectness.checkUserProjectListLog(userProjectsList); // TODO assert
 
         return userProjectsList;
     }
@@ -527,7 +485,7 @@ class ProjectServiceImpl {
     public List<GPUserProjects> getUserProjectsByProjectId(Long projectId) {
         List<GPUserProjects> userProjectsList = userProjectsDao.findByProjectId(projectId);
 
-        this.checkUserProjectListLog(userProjectsList); // TODO assert
+        EntityCorrectness.checkUserProjectListLog(userProjectsList); // TODO assert
 
         return userProjectsList;
     }
@@ -538,64 +496,87 @@ class ProjectServiceImpl {
         if (userProject == null) {
             throw new ResourceNotFoundFault("UserProjects not found for with id:\"" + userId + "\" and project with id:\"" + projectId + "\"");
         }
-        this.checkUserProjectLog(userProject); // TODO assert
+        EntityCorrectness.checkUserProjectLog(userProject); // TODO assert
 
         return userProject;
     }
     //</editor-fold>
 
-    // TODO assert
-    private void checkProject(GPProject project) throws IllegalParameterFault {
-        if (project == null) {
-            throw new IllegalParameterFault("Project must be NOT NULL");
-        }
-        if (project.getName() == null) {
-            throw new IllegalParameterFault("Project \"name\" must be NOT NULL");
-        }
-        if (project.getNumberOfElements() < 0) {
-            throw new IllegalParameterFault("Project \"numberOfElements\" must be greater or equal 0");
-        }
+    private String createParentChildKey(GPFolder parent, GPFolder child) {
+        return parent.getId() + ":" + child.getId();
     }
 
-    // TODO assert
-    private void checkUserProject(GPUserProjects userProject) throws IllegalParameterFault {
-        if (userProject == null) {
-            throw new IllegalParameterFault("UserProject must be NOT NULL");
+    private Map<Long, FolderDTO> fillProjectFolders(List<FolderDTO> folders,
+            Map<String, GPFolder> mapRemaining, Map<Long, FolderDTO> mapAll) {
+        logger.debug("\n*** fillFolderList - Map size: " + mapRemaining.size());
+        if (!mapRemaining.isEmpty()) {
+            List<FolderDTO> childsDTO = null;
+            for (FolderDTO folder : folders) {
+                logger.debug("\n*** fillFolderList - folder: " + folder);
+                List<GPFolder> childs = this.getChilds(folder.getId(), mapRemaining);
+                if (childs.size() > 0) {
+                    childsDTO = FolderDTO.convertToFolderDTOList(childs);
+                    folder.addFolders(childsDTO);
+                    //
+                    for (FolderDTO childDTO : childsDTO) {
+                        mapAll.put(childDTO.getId(), childDTO);
+                    }
+                }
+            }
+
+            if (childsDTO != null) {
+                this.fillProjectFolders(childsDTO, mapRemaining, mapAll);
+            }
         }
-        if (userProject.getProject() == null) {
-            throw new IllegalParameterFault("Project must be NOT NULL");
-        }
-        if (userProject.getUser() == null) {
-            throw new IllegalParameterFault("User must be NOT NULL");
-        }
-        if ((userProject.getPermissionMask() < BasePermission.READ.getMask())
-                || (userProject.getPermissionMask() > BasePermission.ADMINISTRATION.getMask())) {
-            throw new IllegalParameterFault("PermissionMask NOT allowed");
-        }
+        return mapAll;
     }
 
-    // TODO assert
-    private void checkProjectLog(GPProject project) {
-        try {
-            this.checkProject(project);
-        } catch (IllegalParameterFault ex) {
-            logger.error("\n--- " + ex.getMessage() + " ---");
+    private List<GPFolder> getChilds(Long parentId, Map<String, GPFolder> map) {
+        List<GPFolder> childs = new ArrayList<GPFolder>();
+        List<String> childsKeyHit = new ArrayList<String>();
+
+        for (Map.Entry<String, GPFolder> entry : map.entrySet()) {
+            String key = entry.getKey();
+            if (key.startsWith(parentId.toString())) {
+                logger.debug("*** getChilds - HIT: " + key);
+                childsKeyHit.add(key);
+                GPFolder childFolder = map.get(key);
+                childs.add(childFolder);
+            }
         }
+
+        // Important: must be execute outer first for otherwise will throw ConcurrentModificationException
+        for (String key : childsKeyHit) {
+            map.remove(key);
+        }
+
+        return childs;
     }
 
-    // TODO assert
-    private void checkUserProjectLog(GPUserProjects userProject) {
-        try {
-            this.checkUserProject(userProject);
-        } catch (IllegalParameterFault ex) {
-            logger.error("\n--- " + ex.getMessage() + " ---");
-        }
-    }
+    private void persistElementList(GPProject project, GPFolder parent,
+            List<IElementDTO> elementList) {
 
-    // TODO assert
-    private void checkUserProjectListLog(List<GPUserProjects> userProjects) {
-        for (GPUserProjects up : userProjects) {
-            this.checkUserProjectLog(up);
+        for (IElementDTO element : elementList) {
+            if (element instanceof FolderDTO) { // Folder
+                FolderDTO folderDTO = (FolderDTO) element;
+                GPFolder folder = FolderDTO.convertToGPFolder(project, parent,
+                        folderDTO);
+                folderDao.persist(folder);
+
+                this.persistElementList(project, folder, folderDTO.getElementList());
+
+            } else { // Layer
+                GPLayer layer = null;
+                if (element instanceof RasterLayerDTO) {
+                    layer = RasterLayerDTO.convertToGPRasterLayer(project, parent,
+                            (RasterLayerDTO) element);
+                } else {
+                    layer = VectorLayerDTO.convertToGPVectorLayer(project, parent,
+                            (VectorLayerDTO) element);
+
+                }
+                layerDao.persist(layer);
+            }
         }
     }
 }

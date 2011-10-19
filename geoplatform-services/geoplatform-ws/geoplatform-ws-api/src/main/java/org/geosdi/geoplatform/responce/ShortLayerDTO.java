@@ -45,8 +45,10 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.core.model.GPBBox;
 
+import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPProject;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -92,6 +94,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
      * @return the title
      */
@@ -199,7 +202,7 @@ public class ShortLayerDTO extends AbstractElementDTO {
     /**
      * @return the cached
      */
-    public boolean isCached() {
+    public Boolean isCached() {
         return cached;
     }
 
@@ -207,9 +210,10 @@ public class ShortLayerDTO extends AbstractElementDTO {
      * @param cached
      *          the cached to set
      */
-    public void setCached(boolean cached) {
+    public void setCached(Boolean cached) {
         this.cached = cached;
     }
+    //</editor-fold>
 
     /*
      * (non-Javadoc)
@@ -238,5 +242,31 @@ public class ShortLayerDTO extends AbstractElementDTO {
         }
 
         return layersDTO;
+    }
+
+    protected static void convertToGPLayer(GPProject project, GPFolder parent,
+            GPLayer layer, ShortLayerDTO layerDTO) {
+
+        layer.setProject(project);
+        layer.setFolder(parent);
+        // Set all properties except "id" and "shared"  
+        layer.setName(layerDTO.getName());
+        if (layerDTO.getPosition() != null) {
+            layer.setPosition(layerDTO.getPosition());
+        }
+        if (layerDTO.isChecked() != null) {
+            layer.setChecked(layerDTO.isChecked());
+        }
+        // Specific properties of a layer
+        layer.setTitle(layerDTO.getTitle());
+        layer.setAlias(layerDTO.getAlias());
+        layer.setUrlServer(layerDTO.getUrlServer());
+        layer.setSrs(layerDTO.getSrs());
+        layer.setAbstractText(layerDTO.getAbstractText());
+        layer.setLayerType(layerDTO.getLayerType());
+        layer.setBbox(layerDTO.getBbox());
+        if (layerDTO.isCached() != null) {
+            layer.setCached(layerDTO.isCached());
+        }
     }
 }

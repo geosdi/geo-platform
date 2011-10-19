@@ -67,6 +67,8 @@ public interface GPFolderDAO {
 
     public List<GPFolder> search(ISearch search);
 
+    public List<GPFolder> searchRootFolders(Long projectId);
+
     public int count(ISearch search);
 
     public GPFolder findByFolderName(String folderName);

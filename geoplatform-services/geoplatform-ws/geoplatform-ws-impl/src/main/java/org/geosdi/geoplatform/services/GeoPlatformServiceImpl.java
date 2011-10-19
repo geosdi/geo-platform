@@ -455,14 +455,14 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public Long saveFolderProperties(Long folderId, String name, boolean checked)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        return folderServiceDelegate.saveFolderProperties(folderId, name, checked);
+    public boolean deleteFolder(Long folderId) throws ResourceNotFoundFault {
+        return folderServiceDelegate.deleteFolder(folderId);
     }
 
     @Override
-    public boolean deleteFolder(Long folderId) throws ResourceNotFoundFault {
-        return folderServiceDelegate.deleteFolder(folderId);
+    public Long saveFolderProperties(Long folderId, String name, boolean checked)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return folderServiceDelegate.saveFolderProperties(folderId, name, checked);
     }
 
     @Override
@@ -537,8 +537,13 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public ProjectDTO getElements(Long projectId) throws ResourceNotFoundFault {
-        return projectServiceDelegate.getElements(projectId);
+    public ProjectDTO exportProject(Long projectId) throws ResourceNotFoundFault {
+        return projectServiceDelegate.exportProject(projectId);
+    }
+
+    @Override
+    public Long importProject(ProjectDTO projectDTO) throws IllegalParameterFault {
+        return projectServiceDelegate.importProject(projectDTO);
     }
     //</editor-fold>
 

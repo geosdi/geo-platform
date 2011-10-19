@@ -92,7 +92,7 @@ public class ProjectDTO {
     /**
      * @return the numberOfElements
      */
-    public int getNumberOfElements() {
+    public Integer getNumberOfElements() {
         return numberOfElements;
     }
 
@@ -106,7 +106,7 @@ public class ProjectDTO {
     /**
      * @param rootFolders to set
      */
-    public List<FolderDTO> getRootFolders() {        
+    public List<FolderDTO> getRootFolders() {
         return rootFolders;
     }
 
@@ -116,4 +116,20 @@ public class ProjectDTO {
     public void setRootFolders(List<FolderDTO> rootFolders) {
         this.rootFolders = rootFolders;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectDTO{" + "name=" + name
+                + ", numberOfElements=" + numberOfElements
+                + ", rootFolders=" + rootFolders + '}';
+    }
+
+    public static GPProject convertToGPProject(ProjectDTO projectDTO) {
+        GPProject project = new GPProject();
+        project.setName(projectDTO.getName());
+        if (projectDTO.getNumberOfElements() != null) {
+            project.setNumberOfElements(projectDTO.getNumberOfElements());
+        }
+        return project;
+    }    
 }

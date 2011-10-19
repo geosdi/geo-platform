@@ -144,7 +144,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
                             break;
                         case LAYERS_FROM_PUBLISHER:
                             layerList.add(
-                                    this.generateRasterTreeNodeFromLayerBaseProperties(
+                                    this.generateRasterTreeNodeFromPublisher(
                                     layer));
                             break;
                         case LAYERS_FROM_COPY_MENU:
@@ -216,7 +216,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         return raster;
     }
 
-    private RasterTreeNode generateRasterTreeNodeFromLayerBaseProperties(GPLayerBean layer) {
+    private RasterTreeNode generateRasterTreeNodeFromPublisher(GPLayerBean layer) {
         RasterTreeNode raster = new RasterTreeNode();
         raster.setAbstractText(layer.getTitle());
         raster.setBbox(layer.getBbox());
@@ -228,7 +228,8 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         raster.setLabel(layer.getTitle());
         raster.setLayerType(layer.getLayerType());
         raster.setName(layer.getName());
-        raster.setStyles(((GPRasterBean)layer).getStyles());
+        //Not possible to do this: can i have a style after publishing a layer?
+        //raster.setStyles(((GPRasterBean)layer).getStyles());
 //        raster.setzIndex(rasterBean.getzIndex());
         return raster;
     }

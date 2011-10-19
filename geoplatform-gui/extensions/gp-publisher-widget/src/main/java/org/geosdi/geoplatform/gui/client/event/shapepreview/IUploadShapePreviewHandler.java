@@ -33,34 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.event;
+package org.geosdi.geoplatform.gui.client.event.shapepreview;
 
-import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class UploadPreviewEvent extends GwtEvent<IUploadPreviewHandler> {
+public interface IUploadShapePreviewHandler extends EventHandler {
     
-    private String jsonString;
-
-    @Override
-    public Type<IUploadPreviewHandler> getAssociatedType() {
-        return IUploadPreviewHandler.TYPE;
-    }
-
-    @Override
-    protected void dispatch(IUploadPreviewHandler handler) {
-        handler.showLayerPreview(this.jsonString);
-    }
-
-    /**
-     * @param infoPreview the infoPreview to set
-     */
-    public void setJsonString(String jsonString) {
-        this.jsonString = jsonString;
-    }
+    Type<IUploadShapePreviewHandler> TYPE = new Type<IUploadShapePreviewHandler>();
+    
+    public void showLayerPreview(String jsonString);
     
 }

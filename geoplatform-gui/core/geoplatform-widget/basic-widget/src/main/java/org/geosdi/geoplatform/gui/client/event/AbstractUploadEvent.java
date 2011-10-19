@@ -33,13 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.fileupload;
+package org.geosdi.geoplatform.gui.client.event;
+
+import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public enum GPExtensions {
-
-    ZIP, JAR, PNG, JPEG, DBF, SHX, PRJ, SHP, KML, GP;
+public abstract class AbstractUploadEvent<H extends EventHandler> extends GwtEvent<H> {
+    
+    public abstract void setResult(String result);
+    
 }

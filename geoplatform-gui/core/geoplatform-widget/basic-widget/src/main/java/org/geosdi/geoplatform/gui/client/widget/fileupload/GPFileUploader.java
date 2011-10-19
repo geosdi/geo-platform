@@ -39,13 +39,12 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.FileUploadField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
-import org.geosdi.geoplatform.gui.client.event.UploadPreviewEvent;
+import org.geosdi.geoplatform.gui.client.event.AbstractUploadEvent;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
@@ -62,10 +61,11 @@ public class GPFileUploader {
     private FileUpload fileUpload;
     private Button buttonSubmit;
     private String htmlResult;
-    private UploadPreviewEvent previewEvent = new UploadPreviewEvent();
+    private AbstractUploadEvent uploadEvent;
 
-    public GPFileUploader(String uploadAction, GPExtensions... extensions) {
+    public GPFileUploader(String uploadAction, AbstractUploadEvent uploadEvent, GPExtensions... extensions) {
         this.createUploadComponent(uploadAction, extensions);
+        this.uploadEvent = uploadEvent;
     }
 
     public FormPanel getComponent() {
@@ -134,8 +134,8 @@ public class GPFileUploader {
                             "");
                     if ((htmlResult != null) && !(htmlResult.equals(""))) {
                         System.out.println("HTMLResult: " + htmlResult);
-                        previewEvent.setJsonString(htmlResult);
-                        GPHandlerManager.fireEvent(previewEvent);
+                        uploadEvent.setResult(htmlResult);
+                        GPHandlerManager.fireEvent(uploadEvent);
                         //done.enable();
                         //mapPreviewWidget.drawAoiOnMap(wkt);
                         LayoutManager.getInstance().getStatusMap().setStatus(

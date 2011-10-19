@@ -52,7 +52,8 @@ import com.google.gwt.user.client.ui.Image;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.event.IUploadPreviewHandler;
+import org.geosdi.geoplatform.gui.client.event.shapepreview.IUploadShapePreviewHandler;
+import org.geosdi.geoplatform.gui.client.event.shapepreview.UploadShapePreviewEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.GPPublishShapePreviewEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.IGPPublishShapePreviewHandler;
 import org.geosdi.geoplatform.gui.client.model.PreviewLayer;
@@ -82,7 +83,7 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  * @email nazzareno.sileno@geosdi.org
  */
 public class GPPublisherWidget extends GeoPlatformWindow
-        implements IUploadPreviewHandler, IGPPublishShapePreviewHandler {
+        implements IUploadShapePreviewHandler, IGPPublishShapePreviewHandler {
 
     private TreePanel tree;
 //    private boolean mapInitialized;
@@ -96,11 +97,12 @@ public class GPPublisherWidget extends GeoPlatformWindow
     private List<PreviewLayer> layerList = new ArrayList<PreviewLayer>();
     private Button publishButton;
     private Text uploadMessage = new Text("Select a file to show in preview:");
-
+    private UploadShapePreviewEvent uploadPreviewEvent = new UploadShapePreviewEvent();
+    
     public GPPublisherWidget(boolean lazy, TreePanel theTree) {
         super(lazy);
         this.tree = theTree;
-        GPHandlerManager.addHandler(IUploadPreviewHandler.TYPE, this);
+        GPHandlerManager.addHandler(IUploadShapePreviewHandler.TYPE, this);
         TimeoutHandlerManager.addHandler(IGPPublishShapePreviewHandler.TYPE, this);
     }
 
@@ -278,7 +280,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
     }
 
     private void addSouthPanel() {
-        fileUploader = new GPFileUploader("UploadServlet", GPExtensions.ZIP);
+        fileUploader = new GPFileUploader("UploadServlet", this.uploadPreviewEvent, GPExtensions.ZIP);
         southPanel = new FieldSet();
         southPanel.setHeight(78);
         southPanel.setWidth(522);

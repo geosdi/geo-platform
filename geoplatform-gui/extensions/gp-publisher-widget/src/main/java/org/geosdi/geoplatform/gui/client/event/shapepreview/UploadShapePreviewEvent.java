@@ -33,13 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.fileupload;
+package org.geosdi.geoplatform.gui.client.event.shapepreview;
+
+import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.client.event.AbstractUploadEvent;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public enum GPExtensions {
+public class UploadShapePreviewEvent extends AbstractUploadEvent<IUploadShapePreviewHandler> {
+    
+    private String result;
 
-    ZIP, JAR, PNG, JPEG, DBF, SHX, PRJ, SHP, KML, GP;
+    @Override
+    public Type<IUploadShapePreviewHandler> getAssociatedType() {
+        return IUploadShapePreviewHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(IUploadShapePreviewHandler handler) {
+        handler.showLayerPreview(this.result);
+    }
+
+    @Override
+    public void setResult(String result) {
+        this.result = result;
+    }
+    
 }

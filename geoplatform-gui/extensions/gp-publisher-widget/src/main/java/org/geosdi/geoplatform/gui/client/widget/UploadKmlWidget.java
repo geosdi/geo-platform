@@ -45,6 +45,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.event.kml.UploadKmlEvent;
 import org.geosdi.geoplatform.gui.client.service.PublisherRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
@@ -65,6 +66,7 @@ public class UploadKmlWidget extends GeoPlatformWindow {
     private FieldSet panelSet;
     private GPFileUploader fileUploader;
     private Button buttonAdd;
+    private UploadKmlEvent uploadKMLEvent = new UploadKmlEvent();
 
     public UploadKmlWidget(boolean lazy, TreePanel theTree) {
         super(lazy);
@@ -106,7 +108,7 @@ public class UploadKmlWidget extends GeoPlatformWindow {
         panelSet.setLayout(layout);
         this.add(panelSet);
 
-        fileUploader = new GPFileUploader("UploadKml", GPExtensions.KML);
+        fileUploader = new GPFileUploader("UploadKml", this.uploadKMLEvent, GPExtensions.KML);
         fileUploader.getButtonSubmit().setVisible(false);
         panelSet.add(fileUploader.getComponent());
 

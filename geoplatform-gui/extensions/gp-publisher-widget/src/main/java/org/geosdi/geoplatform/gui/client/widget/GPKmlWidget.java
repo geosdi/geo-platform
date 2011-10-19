@@ -61,7 +61,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.PublisherResources;
-import org.geosdi.geoplatform.gui.client.event.IUploadPreviewHandler;
+import org.geosdi.geoplatform.gui.client.event.kml.IUploadKMLPreviewHandler;
+import org.geosdi.geoplatform.gui.client.event.shapepreview.IUploadShapePreviewHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.GPKmlPreviewEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.IGPKmlPreviewHandler;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
@@ -80,7 +81,7 @@ import org.gwtopenmaps.openlayers.client.Bounds;
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
 public class GPKmlWidget extends GeoPlatformWindow
-        implements IUploadPreviewHandler, IGPKmlPreviewHandler {
+        implements IUploadKMLPreviewHandler, IGPKmlPreviewHandler {
 
     private ContentPanel centralPanel;
     private PreviewWidget previewWidget;
@@ -98,7 +99,7 @@ public class GPKmlWidget extends GeoPlatformWindow
 
     public GPKmlWidget(boolean lazy) {
         super(lazy);
-        GPHandlerManager.addHandler(IUploadPreviewHandler.TYPE, this);
+        GPHandlerManager.addHandler(IUploadKMLPreviewHandler.TYPE, this);
         TimeoutHandlerManager.addHandler(IGPKmlPreviewHandler.TYPE, this);
     }
 
@@ -142,7 +143,7 @@ public class GPKmlWidget extends GeoPlatformWindow
     }
 
     @Override
-    public void showLayerPreview(String jsonString) {
+    public void showKMLPreview(String jsonString) {
         System.out.println("%%% Method showLayerPreview() must be implemented...");
 //        StringBuilder layerProblems = new StringBuilder();
 //        PreviewLayerList previewLayers = PreviewLayerList.JSON.read(jsonString);

@@ -33,20 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.event;
+package org.geosdi.geoplatform.gui.client.event.kml;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import java.util.Map;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface IUploadPreviewHandler extends EventHandler {
+public interface IUploadKMLPreviewHandler extends EventHandler {
     
-    Type<IUploadPreviewHandler> TYPE = new Type<IUploadPreviewHandler>();
+    Type<IUploadKMLPreviewHandler> TYPE = new Type<IUploadKMLPreviewHandler>();
     
-    public void showLayerPreview(String jsonString);
+    public void showKMLPreview(String jsonString);
     
 }

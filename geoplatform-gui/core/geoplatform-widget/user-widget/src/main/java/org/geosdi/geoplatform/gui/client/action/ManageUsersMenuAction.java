@@ -44,22 +44,13 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class ManageUsers extends MenuBaseAction {
+public class ManageUsersMenuAction extends MenuBaseAction {
 
-    public ManageUsers() {
+    public ManageUsersMenuAction() {
         super("Manage Users", BasicWidgetResources.ICONS.logged_user());
     }
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        System.out.println("*************** UserWidgetUI **************");
-//        Dispatcher.forwardEvent(GeoPlatformEvents.SHOW_MANAGE_USERS_WIDGET);
-
-//        UserWidget userWidget = new UserWidget();
-//        userWidget.show();        
     }
-
-//    private void usr() {
-//        UserRemoteImpl.Util.getInstance().
-//    }
 }

@@ -39,7 +39,7 @@ import com.google.gwt.core.client.EntryPoint;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
-import org.geosdi.geoplatform.gui.client.action.ManageUsers;
+import org.geosdi.geoplatform.gui.client.action.ManageUsersMenuAction;
 
 /**
  *
@@ -69,7 +69,7 @@ public class UserWidgetUI implements EntryPoint {
 
             @Override
             public MenuAction createAction() {
-                return new ManageUsers();
+                return new ManageUsersMenuAction();
             }
         });
     }

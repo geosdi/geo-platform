@@ -37,13 +37,15 @@ package org.geosdi.geoplatform.gui.client.model;
 
 import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  *
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class GPUserManageDetail implements IGPUserManageDetail {
+public class GPUserManageDetail extends GeoPlatformBeanModel
+        implements IGPUserManageDetail {
 
     private static final long serialVersionUID = 53423038411470538L;
     //
@@ -69,6 +71,7 @@ public class GPUserManageDetail implements IGPUserManageDetail {
     @Override
     public void setUsername(String username) {
         this.username = username;
+        set(GPUserManageDetailKeyValue.USERNAME.toString(), this.username);
     }
 
     /**
@@ -86,6 +89,7 @@ public class GPUserManageDetail implements IGPUserManageDetail {
     @Override
     public void setName(String name) {
         this.name = name;
+        set(GPUserManageDetailKeyValue.NAME.toString(), this.name);
     }
 
     /**
@@ -153,5 +157,6 @@ public class GPUserManageDetail implements IGPUserManageDetail {
     @Override
     public void setAuthority(GPRole role) {
         this.authority = role;
+        set(GPUserManageDetailKeyValue.AUTORITHY.toString(), this.authority.toString());
     }
 }

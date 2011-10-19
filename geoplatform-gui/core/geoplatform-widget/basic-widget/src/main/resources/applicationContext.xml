@@ -10,12 +10,11 @@
 
     <context:annotation-config />
 
-<!--    <bean name="MenuBarSeparator"
     <bean name="MenuBarSeparatorAbout"
         class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
         <property name="id" value="MenuBarSeparator" />
         <property name="order" value="90" />
-    </bean>-->
+    </bean>
                 
     <bean name="aboutGeoPlatform"
         class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">

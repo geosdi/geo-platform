@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.service;
 
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.List;
+import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
@@ -57,7 +57,7 @@ public interface UserRemoteAsync {
     void deleteUser(Long userId, AsyncCallback<Boolean> callback)
             throws GeoPlatformException;
 
-    void getUsers(AsyncCallback<List<IGPUserManageDetail>> callback);
+    void getUsers(AsyncCallback<ArrayList<IGPUserManageDetail>> callback);
 
-    void searchUsers(PagingLoadConfig config, AsyncCallback<List<IGPUserManageDetail>> callback);
+    void searchUsers(PagingLoadConfig config, AsyncCallback<ArrayList<IGPUserManageDetail>> callback);
 }

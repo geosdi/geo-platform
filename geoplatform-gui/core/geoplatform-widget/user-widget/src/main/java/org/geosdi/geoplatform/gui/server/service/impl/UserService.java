@@ -39,15 +39,12 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
-import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 import org.geosdi.geoplatform.gui.server.IUserService;
-import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -98,13 +95,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<IGPUserManageDetail> getUsers(HttpServletRequest httpServletRequest) {
+    public ArrayList<IGPUserManageDetail> getUsers(HttpServletRequest httpServletRequest) {
         // TODO
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public List<IGPUserManageDetail> searchUsers(PagingLoadConfig config,
+    public ArrayList<IGPUserManageDetail> searchUsers(PagingLoadConfig config,
             HttpServletRequest httpServletRequest) {
         // TODO
         throw new UnsupportedOperationException("Not supported yet.");

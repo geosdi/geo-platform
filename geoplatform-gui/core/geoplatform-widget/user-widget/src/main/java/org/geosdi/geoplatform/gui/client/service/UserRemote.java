@@ -39,7 +39,7 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import java.util.List;
+import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
@@ -88,12 +88,12 @@ public interface UserRemote extends RemoteService {
      * 
      * @return 
      */
-    List<IGPUserManageDetail> getUsers();
+    ArrayList<IGPUserManageDetail> getUsers();
 
     /**
      * 
      * @param request
      * @return 
      */
-    List<IGPUserManageDetail> searchUsers(PagingLoadConfig config);
+    ArrayList<IGPUserManageDetail> searchUsers(PagingLoadConfig config);
 }

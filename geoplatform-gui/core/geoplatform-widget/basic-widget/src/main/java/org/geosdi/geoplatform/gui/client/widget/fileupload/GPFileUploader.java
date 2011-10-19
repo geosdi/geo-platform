@@ -133,7 +133,7 @@ public class GPFileUploader {
                             "<pre style=\"word-wrap: break-word; white-space: pre-wrap;\">",
                             "");
                     if ((htmlResult != null) && !(htmlResult.equals(""))) {
-                        System.out.println("HTMLResult: " + htmlResult);
+//                        System.out.println("HTMLResult: " + htmlResult);
                         uploadEvent.setResult(htmlResult);
                         GPHandlerManager.fireEvent(uploadEvent);
                         //done.enable();

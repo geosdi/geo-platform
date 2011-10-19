@@ -62,6 +62,7 @@ public class MediatorToolbarTreeAction {
         this.listActionEverEnabled.add(ToolbarTreeClientTool.TOOLBAR_UPLOAD_SHAPE);
         this.listActionEverEnabled.add(ToolbarTreeClientTool.TOOLBAR_EXPORT_PROJECT);
         this.listActionEverEnabled.add(ToolbarTreeClientTool.TOOLBAR_PRINT_TREE_LAYERS);
+        this.listActionEverEnabled.add(ToolbarTreeClientTool.TOOLBAR_IMPORT_PROJECT);
     }
 
     public static MediatorToolbarTreeAction getInstance() {

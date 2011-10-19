@@ -51,6 +51,7 @@ import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.PreviewKmlTreeAction;
 import org.geosdi.geoplatform.gui.client.action.PrintLayersAction;
 import org.geosdi.geoplatform.gui.client.action.ProjectExportTreeAction;
+import org.geosdi.geoplatform.gui.client.action.ProjectImportTreeAction;
 import org.geosdi.geoplatform.gui.client.action.UploadShapeAction;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToKML;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToPDF;
@@ -291,6 +292,17 @@ public class LayerWidgetUI implements EntryPoint {
                     public GeoPlatformToolbarAction createActionTool(
                             TreePanel tree) {
                         ToolbarLayerTreeAction action = new ProjectExportTreeAction(tree);
+                        setAction(action);
+                        return action;
+                    }
+                });
+        
+        ToolbarTreeActionRegistar.put(ToolbarTreeClientTool.TOOLBAR_IMPORT_PROJECT,
+                new ToolbarTreeActionCreator() {
+
+                    @Override
+                    public GeoPlatformToolbarAction createActionTool(TreePanel tree) {
+                        ToolbarLayerTreeAction action = new ProjectImportTreeAction(tree);
                         setAction(action);
                         return action;
                     }

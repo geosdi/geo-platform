@@ -60,6 +60,7 @@ public class ToolbarTreeClientTool {
     public static final String TOOLBAR_LOAD_KML_FROM_URL = "loadKmlFromUrl";
     public static final String TOOLBAR_PREVIEW_KML_FROM_URL = "previewKmlFromUrl";
     public static final String TOOLBAR_EXPORT_PROJECT = "exportProject";
+    public static final String TOOLBAR_IMPORT_PROJECT = "importProject";
     //
     public static boolean USER_VIEWER; //
     //
@@ -149,7 +150,14 @@ public class ToolbarTreeClientTool {
         exportProject.setType(ActionClientTool.BUTTON);
         exportProject.setEnabled(true);
         exportProject.setOrder(12);
+        
+        ActionClientTool importProject = new ActionClientTool();
+        importProject.setId(TOOLBAR_IMPORT_PROJECT);
+        importProject.setType(ActionClientTool.BUTTON);
+        importProject.setEnabled(true);
+        importProject.setOrder(13);
 
+        this.clientTools.add(importProject);
         this.clientTools.add(exportProject);
         this.clientTools.add(previewKmlClientTool);
 //        this.clientTools.add(uploadKmlClientTool);

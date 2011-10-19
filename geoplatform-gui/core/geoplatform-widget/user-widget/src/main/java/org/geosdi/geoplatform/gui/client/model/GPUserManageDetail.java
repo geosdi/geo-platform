@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
-import java.util.List;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
@@ -52,7 +51,8 @@ public class GPUserManageDetail implements IGPUserManageDetail {
     private String name;
     private String email;
     private String password;
-    private List<GPRole> authorities;
+//    private List<GPRole> authorities;
+    private GPRole authority;
 
     /**
      * @return the username
@@ -122,20 +122,36 @@ public class GPUserManageDetail implements IGPUserManageDetail {
         this.password = password;
     }
 
+//    /**
+//     * @return the authorities
+//     */
+//    @Override
+//    public List<GPRole> getAuthorities() {
+//        return authorities;
+//    }
+//
+//    /**
+//     * @param autorithies
+//     *          the authorities to set
+//     */
+//    @Override
+//    public void setAuthorities(List<GPRole> authorities) {
+//        this.authorities = authorities;
+//    }
     /**
-     * @return the authorities
+     * @return the authority
      */
     @Override
-    public List<GPRole> getAuthorities() {
-        return authorities;
+    public GPRole getAuthority() {
+        return authority;
     }
 
     /**
-     * @param autorithies
-     *          the authorities to set
+     * @param role
+     *          the authority to set
      */
     @Override
-    public void setAuthorities(List<GPRole> authorities) {
-        this.authorities = authorities;
+    public void setAuthority(GPRole role) {
+        this.authority = role;
     }
 }

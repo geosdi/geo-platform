@@ -33,45 +33,37 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.client.action;
 
+import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
-import org.geosdi.geoplatform.gui.client.action.ManageUsers;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.widget.UserWidget;
+import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  *
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class UserWidgetUI implements EntryPoint {
+public class ManageUsers extends MenuBaseAction {
 
-//    private Dispatcher dispatcher;
+    public ManageUsers() {
+        super("Manage Users", BasicWidgetResources.ICONS.logged_user());
+    }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
-     */
     @Override
-    public void onModuleLoad() {
-//        dispatcher = Dispatcher.get();
+    public void componentSelected(MenuEvent ce) {
+        System.out.println("*************** UserWidgetUI **************");
+//        Dispatcher.forwardEvent(GeoPlatformEvents.SHOW_MANAGE_USERS_WIDGET);
 
-        this.addUserWidgetAction();
-
-//        dispatcher.fireEvent(GeoPlatformEvents.);
+//        UserWidget userWidget = new UserWidget();
+//        userWidget.show();        
     }
 
-    private void addUserWidgetAction() {
-        MenuActionRegistar.put("manageUsers", new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new ManageUsers();
-            }
-        });
-    }
+//    private void usr() {
+//        UserRemoteImpl.Util.getInstance().
+//    }
 }

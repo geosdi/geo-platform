@@ -48,7 +48,11 @@ public interface IGPUserManageDetail extends IGPUserSimpleDetail {
 
     void setPassword(String password);
 
-    List<GPRole> getAuthorities();
+//    List<GPRole> getAuthorities();
+//
+//    void setAuthorities(List<GPRole> roles);
+//    
+    GPRole getAuthority();
 
-    void setAuthorities(List<GPRole> roles);
+    void setAuthority(GPRole role);
 }

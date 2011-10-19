@@ -33,45 +33,29 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.client.widget;
 
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
-import org.geosdi.geoplatform.gui.client.action.ManageUsers;
+import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.KeyListener;
+import com.extjs.gxt.ui.client.widget.Dialog;
+import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.extjs.gxt.ui.client.widget.layout.FormLayout;
+import com.google.gwt.event.dom.client.KeyCodes;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 
 /**
  *
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class UserWidgetUI implements EntryPoint {
+public class UserWidget extends Dialog {    
 
-//    private Dispatcher dispatcher;
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
-     */
-    @Override
-    public void onModuleLoad() {
-//        dispatcher = Dispatcher.get();
-
-        this.addUserWidgetAction();
-
-//        dispatcher.fireEvent(GeoPlatformEvents.);
+    public UserWidget() {
+        this.addComponent();
     }
 
-    private void addUserWidgetAction() {
-        MenuActionRegistar.put("manageUsers", new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new ManageUsers();
-            }
-        });
+    private void addComponent() {
+		// TODO
     }
 }

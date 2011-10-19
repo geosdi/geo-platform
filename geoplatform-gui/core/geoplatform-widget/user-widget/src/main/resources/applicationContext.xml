@@ -15,7 +15,7 @@
         <property name="id" value="manageUsers" />
         <property name="text" value="Manage Users" />
         <property name="enabled" value="true" />
-        <property name="order" value="20" />        
+        <property name="order" value="10" />        
     </bean>
 
 </beans>

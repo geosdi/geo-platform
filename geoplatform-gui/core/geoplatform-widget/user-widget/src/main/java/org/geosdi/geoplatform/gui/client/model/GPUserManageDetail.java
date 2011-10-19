@@ -49,12 +49,27 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
 
     private static final long serialVersionUID = 53423038411470538L;
     //
+    private Long id;
     private String username;
     private String name;
     private String email;
     private String password;
 //    private List<GPRole> authorities;
     private GPRole authority;
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /**
      * @return the username

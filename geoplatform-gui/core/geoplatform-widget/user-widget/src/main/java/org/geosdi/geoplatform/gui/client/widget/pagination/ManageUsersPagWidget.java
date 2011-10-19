@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.pagination;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.LoadEvent;
 import com.extjs.gxt.ui.client.data.ModelData;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.event.LoadListener;
@@ -52,6 +53,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetailKeyValue;
+import org.geosdi.geoplatform.gui.client.service.UserRemote;
+import org.geosdi.geoplatform.gui.client.service.UserRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.GeoPlatformSearchWidget;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -61,7 +64,10 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class ManageUsersPagWidget extends GeoPlatformSearchWidget<GPUserManageDetail> {
+public class ManageUsersPagWidget
+        extends GeoPlatformSearchWidget<GPUserManageDetail> {
+
+    private UserRemoteAsync userRemote = UserRemote.Util.getInstance();
 
     public ManageUsersPagWidget() {
         super(true);
@@ -91,6 +97,9 @@ public class ManageUsersPagWidget extends GeoPlatformSearchWidget<GPUserManageDe
             @Override
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback) {
+
+                userRemote.searchUsers((PagingLoadConfig) loadConfig,
+                        searchText, callback);
             }
         };
 

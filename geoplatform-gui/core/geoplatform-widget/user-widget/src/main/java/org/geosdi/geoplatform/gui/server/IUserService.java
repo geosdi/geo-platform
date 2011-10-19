@@ -36,8 +36,10 @@
 package org.geosdi.geoplatform.gui.server;
 
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
@@ -59,6 +61,6 @@ public interface IUserService {
 
     ArrayList<IGPUserManageDetail> getUsers(HttpServletRequest httpServletRequest);
 
-    ArrayList<IGPUserManageDetail> searchUsers(PagingLoadConfig config, String searchText,
+    PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config, String searchText,
             HttpServletRequest httpServletRequest);
 }

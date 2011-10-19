@@ -35,7 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +47,9 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 import org.geosdi.geoplatform.gui.server.IUserService;
+import org.geosdi.geoplatform.request.PaginatedSearchRequest;
+import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,15 +68,6 @@ public class UserService implements IUserService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GeoPlatformService geoPlatformServiceClient;
-
-    /**
-     * @param geoPlatformServiceClient the geoPlatformServiceClient to set
-     */
-    @Autowired
-    public void setGeoPlatformServiceClient(
-            @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
-        this.geoPlatformServiceClient = geoPlatformServiceClient;
-    }
 
     @Override
     public Long insertUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
@@ -101,10 +97,39 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public ArrayList<IGPUserManageDetail> searchUsers(PagingLoadConfig config,
+    public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
             String searchText, HttpServletRequest httpServletRequest) {
         // TODO
-        throw new UnsupportedOperationException("Not supported yet.");
+        int start = config.getOffset();
+
+        SearchRequest srq = new SearchRequest("%" + searchText + "%");
+
+        Long usersCount = this.geoPlatformServiceClient.getUsersCount(srq);
+
+        int page = start == 0 ? start : start / config.getLimit();
+
+        PaginatedSearchRequest psr = new PaginatedSearchRequest("%"
+                + searchText + "%", config.getLimit(), page);
+
+        List<UserDTO> userList = this.geoPlatformServiceClient.searchUsers(psr);
+
+        if (userList == null) {
+            throw new GeoPlatformException("There are no results");
+        }
+
+        ArrayList<GPUserManageDetail> searchUsers = new ArrayList<GPUserManageDetail>();
+
+        for (UserDTO userDTO : userList) {
+            GPUserManageDetail gpUserManageDetail = new GPUserManageDetail();
+            gpUserManageDetail.setId(userDTO.getId());
+            gpUserManageDetail.setName(userDTO.getUsername());
+            gpUserManageDetail.setUsername(userDTO.getUsername());
+            gpUserManageDetail.setAuthority(GPRole.USER);
+            searchUsers.add(gpUserManageDetail);
+        }
+
+         return new BasePagingLoadResult<GPUserManageDetail>(searchUsers,
+                config.getOffset(), usersCount.intValue());
     }
 
     // TODO Move in a DTOConverter class?
@@ -122,5 +147,14 @@ public class UserService implements IUserService {
         }
 
         return userDetail;
+    }
+
+    /**
+     * @param geoPlatformServiceClient the geoPlatformServiceClient to set
+     */
+    @Autowired
+    public void setGeoPlatformServiceClient(
+            @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
+        this.geoPlatformServiceClient = geoPlatformServiceClient;
     }
 }

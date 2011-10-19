@@ -36,9 +36,11 @@
 package org.geosdi.geoplatform.gui.server.gwt;
 
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import org.geosdi.geoplatform.gui.client.service.UserRemote;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 import org.geosdi.geoplatform.gui.server.IUserService;
@@ -78,7 +80,7 @@ public class UserRemoteImpl extends RemoteServiceServlet implements UserRemote {
     }
 
     @Override
-    public ArrayList<IGPUserManageDetail> searchUsers(PagingLoadConfig config,
+    public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
             String searchText) {
         return userService.searchUsers(config, searchText,
                 super.getThreadLocalRequest());

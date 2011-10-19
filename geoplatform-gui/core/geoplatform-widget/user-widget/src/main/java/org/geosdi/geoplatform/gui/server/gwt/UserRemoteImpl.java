@@ -78,7 +78,9 @@ public class UserRemoteImpl extends RemoteServiceServlet implements UserRemote {
     }
 
     @Override
-    public ArrayList<IGPUserManageDetail> searchUsers(PagingLoadConfig config) {
-        return userService.searchUsers(config, super.getThreadLocalRequest());
+    public ArrayList<IGPUserManageDetail> searchUsers(PagingLoadConfig config,
+            String searchText) {
+        return userService.searchUsers(config, searchText,
+                super.getThreadLocalRequest());
     }
 }

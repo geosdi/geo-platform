@@ -88,12 +88,13 @@ public interface UserRemote extends RemoteService {
      * 
      * @return 
      */
-    ArrayList<IGPUserManageDetail> getUsers();
+    ArrayList<IGPUserManageDetail> getUsers() throws GeoPlatformException;
 
     /**
      * 
      * @param request
      * @return 
      */
-    ArrayList<IGPUserManageDetail> searchUsers(PagingLoadConfig config);
+    ArrayList<IGPUserManageDetail> searchUsers(PagingLoadConfig config,
+            String searchText) throws GeoPlatformException;
 }

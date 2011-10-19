@@ -102,7 +102,7 @@ public class UserService implements IUserService {
 
     @Override
     public ArrayList<IGPUserManageDetail> searchUsers(PagingLoadConfig config,
-            HttpServletRequest httpServletRequest) {
+            String searchText, HttpServletRequest httpServletRequest) {
         // TODO
         throw new UnsupportedOperationException("Not supported yet.");
     }

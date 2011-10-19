@@ -57,7 +57,10 @@ public interface UserRemoteAsync {
     void deleteUser(Long userId, AsyncCallback<Boolean> callback)
             throws GeoPlatformException;
 
-    void getUsers(AsyncCallback<ArrayList<IGPUserManageDetail>> callback);
+    void getUsers(AsyncCallback<ArrayList<IGPUserManageDetail>> callback)
+            throws GeoPlatformException;
 
-    void searchUsers(PagingLoadConfig config, AsyncCallback<ArrayList<IGPUserManageDetail>> callback);
+    void searchUsers(PagingLoadConfig config, String searchText,
+            AsyncCallback<ArrayList<IGPUserManageDetail>> callback)
+            throws GeoPlatformException;
 }

@@ -59,5 +59,6 @@ public interface IUserService {
 
     ArrayList<IGPUserManageDetail> getUsers(HttpServletRequest httpServletRequest);
 
-    ArrayList<IGPUserManageDetail> searchUsers(PagingLoadConfig config, HttpServletRequest httpServletRequest);
+    ArrayList<IGPUserManageDetail> searchUsers(PagingLoadConfig config, String searchText,
+            HttpServletRequest httpServletRequest);
 }

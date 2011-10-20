@@ -71,7 +71,7 @@ public class DeleteLayerHandler extends DeleteRequestHandler {
     public void deleteRequest(GPBeanTreeModel model) {
         if (model instanceof GPLayerTreeModel) {
             GeoPlatformMessage.confirmMessage("Delete Layer",
-                    "Are you sure you sure you want to delete the Layer "
+                    "Are you sure you want to delete the Layer "
                     + ((GPBeanTreeModel) tree.getSelectionModel().getSelectedItem()).getLabel()
                     + " ?",
                     new Listener<MessageBoxEvent>() {

@@ -35,19 +35,39 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.pagination;
 
+import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.LoadEvent;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.RpcProxy;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.GridEvent;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.LoadListener;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.BoxComponent;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Info;
+import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
+import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
+import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import com.extjs.gxt.ui.client.widget.table.NumberCellRenderer;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
+import com.google.gwt.cell.client.ButtonCellBase.DefaultAppearance.Resources;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,21 +86,27 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public class ManageUsersPagWidget
         extends GeoPlatformSearchWidget<GPUserManageDetail> {
-
+    
     private UserRemoteAsync userRemote = UserRemote.Util.getInstance();
     private int pageSize = 10;
-
+    
     public ManageUsersPagWidget() {
         super(true);
     }
-
+    
+    @Override
+    public void show() {
+        super.init();
+        super.show();
+    }
+    
     @Override
     public void setWindowProperties() {
         super.setHeading("GeoPlatform Users Management");
         super.setSize(600, 490);
-
+        
         super.addWindowListener(new WindowListener() {
-
+            
             @Override
             public void windowShow(WindowEvent we) {
                 searchText = "";
@@ -88,77 +114,83 @@ public class ManageUsersPagWidget
             }
         });
     }
-
+    
     @Override
     public void createStore() {
         super.toolBar = new PagingToolBar(pageSize);
-
+        
         super.proxy = new RpcProxy<PagingLoadResult<GPUserManageDetail>>() {
-
+            
             @Override
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback) {
-
+                
                 userRemote.searchUsers((PagingLoadConfig) loadConfig,
                         searchText, callback);
             }
         };
-
+        
         super.loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy);
         super.loader.setRemoteSort(false);
-
+        
         super.store = new ListStore<GPUserManageDetail>(loader);
-
+        
         super.toolBar.bind(loader);
-
-//        this.setUpLoadListener();
+        
+        this.setUpLoadListener();
     }
-
+    
+    @Override
+    public ColumnModel prepareColumnModel() {
+        List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
+        
+        ColumnConfig nameColumn = new ColumnConfig();
+        nameColumn.setId(GPUserManageDetailKeyValue.NAME.toString());
+        nameColumn.setHeader("Name");
+        nameColumn.setWidth(280);
+        configs.add(nameColumn);
+        
+        ColumnConfig userNameColumn = new ColumnConfig();
+        userNameColumn.setId(GPUserManageDetailKeyValue.USERNAME.toString());
+        userNameColumn.setHeader("User Name");
+        userNameColumn.setWidth(120);
+        configs.add(userNameColumn);
+        
+        ColumnConfig roleColumn = new ColumnConfig();
+        roleColumn.setId(GPUserManageDetailKeyValue.AUTORITHY.toString());
+        roleColumn.setHeader("Role");
+        roleColumn.setWidth(50);
+        roleColumn.setAlignment(HorizontalAlignment.CENTER);
+        configs.add(roleColumn);
+        
+        ColumnConfig delColumn = new ColumnConfig();
+        delColumn.setId("delColumn");
+        delColumn.setHeader("Delete");
+        delColumn.setWidth(50);
+        delColumn.setFixed(true);
+        delColumn.setResizable(false);
+        delColumn.setSortable(false);
+        delColumn.setRenderer(DeleteRenderer.getInstance());
+        configs.add(delColumn);
+        
+        return new ColumnModel(configs);
+    }
+    
     @Override
     public void setGridProperties() {
         super.grid.setWidth(530);
         super.grid.setHeight(250);
     }
-
-    @Override
-    public ColumnModel prepareColumnModel() {
-        List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
-
-        ColumnConfig nameColumn = new ColumnConfig();
-        nameColumn.setId(GPUserManageDetailKeyValue.NAME.toString());
-        nameColumn.setHeader("Name");
-        nameColumn.setWidth(340);
-        configs.add(nameColumn);
-
-        ColumnConfig userNameColumn = new ColumnConfig();
-        userNameColumn.setId(GPUserManageDetailKeyValue.USERNAME.toString());
-        userNameColumn.setHeader("User Name");
-        userNameColumn.setWidth(130);
-        configs.add(userNameColumn);
-
-        ColumnConfig roleColumn = new ColumnConfig();
-        roleColumn.setId(GPUserManageDetailKeyValue.AUTORITHY.toString());
-        roleColumn.setHeader("Role");
-        roleColumn.setWidth(50);
-        configs.add(roleColumn);
-
-        return new ColumnModel(configs);
-    }
-
+    
     @Override
     public void select() {
         System.out.println("@@@ TODO select()");
+        // TODO Modify User
     }
-
-    @Override
-    public void show() {
-        super.init();
-        super.show();
-    }
-
+    
     private void setUpLoadListener() {
         super.loader.addLoadListener(new LoadListener() {
-
+            
             @Override
             public void loaderBeforeLoad(LoadEvent le) {
                 searchStatus.setBusy("Connection to the Server");
@@ -166,13 +198,13 @@ public class ManageUsersPagWidget
                     select.disable();
                 }
             }
-
+            
             @Override
             public void loaderLoad(LoadEvent le) {
                 setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
                         EnumSearchStatus.STATUS_MESSAGE_SEARCH);
             }
-
+            
             @Override
             public void loaderLoadException(LoadEvent le) {
                 clearGridElements();

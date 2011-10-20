@@ -39,17 +39,18 @@ import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.core.model.GPAuthority;
+import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 import org.geosdi.geoplatform.gui.server.IUserService;
+import org.geosdi.geoplatform.gui.server.SessionUtility;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.UserDTO;
@@ -71,6 +72,8 @@ public class UserService implements IUserService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GeoPlatformService geoPlatformServiceClient;
+    @Autowired
+    private SessionUtility sessionUtility;
 
     @Override
     public Long insertUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
@@ -89,8 +92,22 @@ public class UserService implements IUserService {
     @Override
     public boolean deleteUser(Long userId, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet.");
+        GPUser user = null;
+        try {
+            user = sessionUtility.getUserAlreadyFromSession(httpServletRequest);            
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
+
+        boolean deleted = false;
+        try {
+            deleted = geoPlatformServiceClient.deleteUser(userId);
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("\n*** " + ex.getMessage());
+            throw new GeoPlatformException("User not found");
+        }
+
+        return deleted;
     }
 
     @Override

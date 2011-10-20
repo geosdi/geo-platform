@@ -71,7 +71,7 @@ public class DeleteFolderHandler extends DeleteRequestHandler {
     public void deleteRequest(GPBeanTreeModel model) {
         if (model instanceof FolderTreeNode) {
             GeoPlatformMessage.confirmMessage("Delete Folder",
-                    "Are you sure you sure you want to delete the Folder "
+                    "Are you sure you want to delete the Folder "
                     + ((GPBeanTreeModel) tree.getSelectionModel().getSelectedItem()).getLabel()
                     + " ?",
                     new Listener<MessageBoxEvent>() {

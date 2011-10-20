@@ -42,22 +42,13 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public class MenuActionCheckEvent extends GwtEvent<GlobalChangeCheckActionHandler> {
+
+public abstract class MenuActionCheckEvent<T extends GlobalChangeCheckActionHandler> extends GwtEvent<T> {
 
     private boolean checked;
 
     public MenuActionCheckEvent(boolean checked) {
         this.checked = checked;
-    }
-
-    @Override
-    public Type<GlobalChangeCheckActionHandler> getAssociatedType() {
-        return GlobalChangeCheckActionHandler.TYPE;
-    }
-
-    @Override
-    protected void dispatch(GlobalChangeCheckActionHandler handler) {
-        handler.onActionCheck(this);
     }
 
     /**

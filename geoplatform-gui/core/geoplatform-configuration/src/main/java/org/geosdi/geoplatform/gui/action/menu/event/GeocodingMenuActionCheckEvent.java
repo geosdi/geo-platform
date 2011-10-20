@@ -35,14 +35,26 @@
  */
 package org.geosdi.geoplatform.gui.action.menu.event;
 
-import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public interface GlobalChangeCheckActionHandler extends EventHandler {
+public class GeocodingMenuActionCheckEvent extends MenuActionCheckEvent<GeocodingChangeCheckActionHandler> {
+    
+    public GeocodingMenuActionCheckEvent(boolean checked) {
+        super(checked);
+    }
 
-    Type<GlobalChangeCheckActionHandler> TYPE = new Type<GlobalChangeCheckActionHandler>();
+    @Override
+    public Type<GeocodingChangeCheckActionHandler> getAssociatedType() {
+        return GeocodingChangeCheckActionHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(GeocodingChangeCheckActionHandler handler) {
+        handler.onActionCheck(this);
+    }
 }

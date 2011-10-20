@@ -35,14 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.action.menu.event;
 
-import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public interface GlobalChangeCheckActionHandler extends EventHandler {
+public interface GeocodingChangeCheckActionHandler extends GlobalChangeCheckActionHandler {
 
-    Type<GlobalChangeCheckActionHandler> TYPE = new Type<GlobalChangeCheckActionHandler>();
+    Type<GeocodingChangeCheckActionHandler> TYPE = new Type<GeocodingChangeCheckActionHandler>();
+
+    void onActionCheck(GeocodingMenuActionCheckEvent event);
 }

@@ -68,6 +68,7 @@ public class ManageUsersPagWidget
         extends GeoPlatformSearchWidget<GPUserManageDetail> {
 
     private UserRemoteAsync userRemote = UserRemote.Util.getInstance();
+    private int pageSize = 10;
 
     public ManageUsersPagWidget() {
         super(true);
@@ -75,7 +76,7 @@ public class ManageUsersPagWidget
 
     @Override
     public void setWindowProperties() {
-        setHeading("GeoPlatform Users Management");
+        super.setHeading("GeoPlatform Users Management");
         super.setSize(600, 490);
 
         super.addWindowListener(new WindowListener() {
@@ -83,16 +84,16 @@ public class ManageUsersPagWidget
             @Override
             public void windowShow(WindowEvent we) {
                 searchText = "";
-                loader.load(0, 25);
+                loader.load(0, pageSize);
             }
         });
     }
 
     @Override
     public void createStore() {
-        toolBar = new PagingToolBar(25);
+        super.toolBar = new PagingToolBar(pageSize);
 
-        this.proxy = new RpcProxy<PagingLoadResult<GPUserManageDetail>>() {
+        super.proxy = new RpcProxy<PagingLoadResult<GPUserManageDetail>>() {
 
             @Override
             protected void load(Object loadConfig,
@@ -103,20 +104,20 @@ public class ManageUsersPagWidget
             }
         };
 
-        loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy);
-        loader.setRemoteSort(false);
+        super.loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy);
+        super.loader.setRemoteSort(false);
 
-        store = new ListStore<GPUserManageDetail>(loader);
+        super.store = new ListStore<GPUserManageDetail>(loader);
 
-        this.toolBar.bind(loader);
+        super.toolBar.bind(loader);
 
-//        setUpLoadListener();
+//        this.setUpLoadListener();
     }
 
     @Override
     public void setGridProperties() {
-        grid.setWidth(530);
-        grid.setHeight(270);
+        super.grid.setWidth(530);
+        super.grid.setHeight(250);
     }
 
     @Override
@@ -126,18 +127,19 @@ public class ManageUsersPagWidget
         ColumnConfig nameColumn = new ColumnConfig();
         nameColumn.setId(GPUserManageDetailKeyValue.NAME.toString());
         nameColumn.setHeader("Name");
-//        name.setWidth(120);
+        nameColumn.setWidth(340);
         configs.add(nameColumn);
 
         ColumnConfig userNameColumn = new ColumnConfig();
         userNameColumn.setId(GPUserManageDetailKeyValue.USERNAME.toString());
         userNameColumn.setHeader("User Name");
-//        userNameColumn.setWidth(80);
+        userNameColumn.setWidth(130);
         configs.add(userNameColumn);
 
         ColumnConfig roleColumn = new ColumnConfig();
         roleColumn.setId(GPUserManageDetailKeyValue.AUTORITHY.toString());
         roleColumn.setHeader("Role");
+        roleColumn.setWidth(50);
         configs.add(roleColumn);
 
         return new ColumnModel(configs);
@@ -145,6 +147,7 @@ public class ManageUsersPagWidget
 
     @Override
     public void select() {
+        System.out.println("@@@ TODO select()");
     }
 
     @Override
@@ -154,7 +157,7 @@ public class ManageUsersPagWidget
     }
 
     private void setUpLoadListener() {
-        loader.addLoadListener(new LoadListener() {
+        super.loader.addLoadListener(new LoadListener() {
 
             @Override
             public void loaderBeforeLoad(LoadEvent le) {

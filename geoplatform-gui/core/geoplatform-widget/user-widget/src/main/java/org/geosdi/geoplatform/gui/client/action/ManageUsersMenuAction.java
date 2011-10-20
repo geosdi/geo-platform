@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.gui.client.widget.pagination.ManageUsersPagWidget;
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
 public class ManageUsersMenuAction extends MenuBaseAction {
-    
+
     private ManageUsersPagWidget usersPagWidget = new ManageUsersPagWidget();
 
     public ManageUsersMenuAction() {

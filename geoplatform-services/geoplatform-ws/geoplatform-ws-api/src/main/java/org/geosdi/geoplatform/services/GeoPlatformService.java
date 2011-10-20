@@ -106,22 +106,24 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/users/{id}")
+    @HttpResource(location = "/users/{userId}")
     @WebResult(name = "User")
-    UserDTO getShortUser(RequestById request) throws ResourceNotFoundFault;
+    UserDTO getShortUser(Long userId) throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/users/{id}")
+    @HttpResource(location = "/users/{userId}")
     @WebResult(name = "User")
-    GPUser getUserDetail(RequestById request) throws ResourceNotFoundFault;
-
-    @Get
-    @WebResult(name = "User")
-    UserDTO getShortUserByName(SearchRequest username) throws ResourceNotFoundFault;
+    GPUser getUserDetail(Long userId) throws ResourceNotFoundFault;
 
     @Get
     @WebResult(name = "User")
-    GPUser getUserDetailByName(SearchRequest username) throws ResourceNotFoundFault;
+    UserDTO getShortUserByName(SearchRequest request)
+            throws ResourceNotFoundFault;
+
+    @Get
+    @WebResult(name = "User")
+    GPUser getUserDetailByName(SearchRequest request)
+            throws ResourceNotFoundFault;
 
     @Get
     @WebResult(name = "User")
@@ -133,7 +135,8 @@ public interface GeoPlatformService {
     @Get
     @HttpResource(location = "/users/search/{num}/{page}/{nameLike}")
     @WebResult(name = "User")
-    List<UserDTO> searchUsers(PaginatedSearchRequest searchRequest);
+    List<UserDTO> searchUsers(PaginatedSearchRequest searchRequest)
+            throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/users")

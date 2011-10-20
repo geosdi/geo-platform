@@ -37,7 +37,6 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
-import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
@@ -290,29 +289,30 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public UserDTO getShortUser(RequestById request) throws ResourceNotFoundFault {
-        return userServiceDelegate.getShortUser(request);
+    public UserDTO getShortUser(Long userId) throws ResourceNotFoundFault {
+        return userServiceDelegate.getShortUser(userId);
     }
 
     @Override
-    public GPUser getUserDetail(RequestById request) throws ResourceNotFoundFault {
-        return userServiceDelegate.getUserDetail(request);
+    public GPUser getUserDetail(Long userId) throws ResourceNotFoundFault {
+        return userServiceDelegate.getUserDetail(userId);
     }
 
     @Override
-    public UserDTO getShortUserByName(SearchRequest username)
+    public UserDTO getShortUserByName(SearchRequest request)
             throws ResourceNotFoundFault {
-        return userServiceDelegate.getShortUserByName(username);
+        return userServiceDelegate.getShortUserByName(request);
     }
 
     @Override
-    public GPUser getUserDetailByName(SearchRequest username)
+    public GPUser getUserDetailByName(SearchRequest request)
             throws ResourceNotFoundFault {
-        return userServiceDelegate.getUserDetailByName(username);
+        return userServiceDelegate.getUserDetailByName(request);
     }
 
     @Override
-    public List<UserDTO> searchUsers(PaginatedSearchRequest request) {
+    public List<UserDTO> searchUsers(PaginatedSearchRequest request)
+            throws ResourceNotFoundFault {
         return userServiceDelegate.searchUsers(request);
     }
 

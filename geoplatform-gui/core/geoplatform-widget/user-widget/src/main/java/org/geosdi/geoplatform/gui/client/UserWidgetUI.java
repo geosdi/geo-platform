@@ -48,8 +48,6 @@ import org.geosdi.geoplatform.gui.client.action.ManageUsersMenuAction;
  */
 public class UserWidgetUI implements EntryPoint {
 
-//    private Dispatcher dispatcher;
-
     /*
      * (non-Javadoc)
      *
@@ -57,11 +55,7 @@ public class UserWidgetUI implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
-//        dispatcher = Dispatcher.get();
-
         this.addUserWidgetAction();
-
-//        dispatcher.fireEvent(GeoPlatformEvents.);
     }
 
     private void addUserWidgetAction() {

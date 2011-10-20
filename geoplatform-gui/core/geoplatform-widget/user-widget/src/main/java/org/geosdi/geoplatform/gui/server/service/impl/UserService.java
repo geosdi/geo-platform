@@ -39,9 +39,12 @@ import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GPAuthority;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
@@ -108,47 +111,66 @@ public class UserService implements IUserService {
 
         int page = start == 0 ? start : start / config.getLimit();
 
-        PaginatedSearchRequest psr = new PaginatedSearchRequest("%"
-                + searchText + "%", config.getLimit(), page);
+        PaginatedSearchRequest psr = new PaginatedSearchRequest("%" + searchText + "%",
+                config.getLimit(), page);
 
-        List<UserDTO> userList = this.geoPlatformServiceClient.searchUsers(psr);
+        List<UserDTO> userList = null;
+        try {
+            userList = this.geoPlatformServiceClient.searchUsers(psr);
+            if (userList == null) {
+                throw new GeoPlatformException("There are no results");
+            }
+        } catch (ResourceNotFoundFault rnnf) {
+            throw new GeoPlatformException(rnnf.getMessage()); // TODO Better message
 
-        if (userList == null) {
-            throw new GeoPlatformException("There are no results");
         }
 
         ArrayList<GPUserManageDetail> searchUsers = new ArrayList<GPUserManageDetail>();
-
         for (UserDTO userDTO : userList) {
-            GPUserManageDetail gpUserManageDetail = new GPUserManageDetail();
-            gpUserManageDetail.setId(userDTO.getId());
-            gpUserManageDetail.setName(userDTO.getUsername());
-            gpUserManageDetail.setUsername(userDTO.getUsername());
-            gpUserManageDetail.setAuthority(GPRole.USER);
-            searchUsers.add(gpUserManageDetail);
+            GPUserManageDetail user = this.convertToGPUserManageDetail(userDTO);
+            searchUsers.add(user);
         }
 
-         return new BasePagingLoadResult<GPUserManageDetail>(searchUsers,
+        return new BasePagingLoadResult<GPUserManageDetail>(searchUsers,
                 config.getOffset(), usersCount.intValue());
     }
 
-    // TODO Move in a DTOConverter class?
-    private IGPUserManageDetail convertUser(GPUser user, List<String> authorities) {
-        IGPUserManageDetail userDetail = new GPUserManageDetail();
-
-        userDetail.setUsername(user.getUsername());
-        userDetail.setName(user.getUsername());
-        userDetail.setEmail(user.getEmailAddress());
-        userDetail.setPassword(user.getPassword());
-
-        List<GPRole> roles = new ArrayList<GPRole>(authorities.size());
-        for (String authoritie : authorities) {
-            roles.add(GPRole.valueOf(authoritie));
-        }
-
-        return userDetail;
+    private GPUserManageDetail convertToGPUserManageDetail(UserDTO userDTO) {
+        GPUserManageDetail user = new GPUserManageDetail();
+        user.setId(userDTO.getId());
+        user.setName(userDTO.getName());
+        user.setUsername(userDTO.getUsername());
+        user.setAuthority(this.convertToGPRole(userDTO.getRoles()));
+        return user;
     }
 
+    // NOTE: Now a user must be have at most one role
+    private GPRole convertToGPRole(List<String> authorities) {
+        Iterator<String> iterator = authorities.iterator();
+        if (iterator.hasNext()) {
+            String authority = iterator.next();
+//            System.out.println("*** Authority: " + authority);
+            return GPRole.fromString(authority);
+        }
+        return GPRole.VIEWER;
+    }
+
+//    private IGPUserManageDetail convertUser(GPUser user, List<String> authorities) {
+//        IGPUserManageDetail userDetail = new GPUserManageDetail();
+//
+//        userDetail.setName(user.getName());
+//        userDetail.setUsername(user.getUsername());
+//        userDetail.setName(user.getUsername());
+//        userDetail.setEmail(user.getEmailAddress());
+//        userDetail.setPassword(user.getPassword());
+//
+//        List<GPRole> roles = new ArrayList<GPRole>(authorities.size());
+//        for (String authoritie : authorities) {
+//            roles.add(GPRole.valueOf(authoritie));
+//        }
+//
+//        return userDetail;
+//    }
     /**
      * @param geoPlatformServiceClient the geoPlatformServiceClient to set
      */

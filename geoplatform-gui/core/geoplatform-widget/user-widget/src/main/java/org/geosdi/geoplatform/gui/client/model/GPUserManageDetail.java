@@ -54,7 +54,6 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     private String name;
     private String email;
     private String password;
-//    private List<GPRole> authorities;
     private GPRole authority;
 
     /**
@@ -141,22 +140,6 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
         this.password = password;
     }
 
-//    /**
-//     * @return the authorities
-//     */
-//    @Override
-//    public List<GPRole> getAuthorities() {
-//        return authorities;
-//    }
-//
-//    /**
-//     * @param autorithies
-//     *          the authorities to set
-//     */
-//    @Override
-//    public void setAuthorities(List<GPRole> authorities) {
-//        this.authorities = authorities;
-//    }
     /**
      * @return the authority
      */
@@ -172,6 +155,21 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     @Override
     public void setAuthority(GPRole role) {
         this.authority = role;
-        super.set(GPUserManageDetailKeyValue.AUTORITHY.toString(), this.authority.toString());
+        super.set(GPUserManageDetailKeyValue.AUTORITHY.toString(), this.authority.toStringUI());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder("GPUserManageDetail {");
+        str.append("id=").append(id);
+        str.append(", name=").append(name);
+        str.append(", username=").append(username);
+        str.append(", email=").append(email);
+        str.append(", authority=").append(authority);
+        return str.append('}').toString();
     }
 }

@@ -58,7 +58,7 @@ public class UserDTO {
     private boolean enabled;
     private boolean sendEmail;
     private String emailAddress;
-    private Collection<GPAuthority> authorities;
+    private List<String> roles;
 
     /**
      * Default constructor
@@ -74,7 +74,13 @@ public class UserDTO {
         this.enabled = user.isEnabled();
         this.sendEmail = user.isSendEmail();
         this.emailAddress = user.getEmailAddress();
-        this.authorities = user.getGPAuthorities();
+
+        if (user.getGPAuthorities() != null) {
+            roles = new ArrayList<String>(user.getGPAuthorities().size());
+            for (GPAuthority authority : user.getGPAuthorities()) {
+                roles.add(authority.getAuthority());
+            }
+        }
     }
 
     /**
@@ -168,18 +174,17 @@ public class UserDTO {
     }
 
     /**
-     * @return the authorities
+     * @return the roles
      */
-    public Collection<GPAuthority> getAuthorities() {
-        return authorities;
+    public List<String> getRoles() {
+        return roles;
     }
 
     /**
-     * @param authorities
-     *          the authorities to set
+     * @param roles the roles to set
      */
-    public void setAuthorities(Collection<GPAuthority> authorities) {
-        this.authorities = authorities;
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 
     /*

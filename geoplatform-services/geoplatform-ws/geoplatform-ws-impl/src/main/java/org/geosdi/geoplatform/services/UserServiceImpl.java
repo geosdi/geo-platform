@@ -110,6 +110,7 @@ class UserServiceImpl {
      * @param user the User object to insert
      * @return Long the User ID
      */
+    // TODO Manage authorities
     public Long insertUser(GPUser user) throws IllegalParameterFault {
         GPUser duplicateUser = userDao.findByUsername(user.getUsername());
         if (duplicateUser != null) {
@@ -124,12 +125,10 @@ class UserServiceImpl {
         return user.getId();
     }
 
+    // TODO Manage authorities
     public Long updateUser(GPUser user)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        GPUser orig = userDao.find(user.getId());
-        if (orig == null) {
-            throw new ResourceNotFoundFault("User not found", user.getId());
-        }
+        GPUser orig = this.getUserById(user.getId());
 
         // manual checks (awful!)
         if (!user.getEmailAddress().equals(orig.getEmailAddress()) && orig.isEnabled()) {
@@ -157,11 +156,9 @@ class UserServiceImpl {
      *
      * @throws ResourceNotFoundFault
      */
+    // TODO Manage authorities
     public boolean deleteUser(Long userId) throws ResourceNotFoundFault {
-        GPUser user = userDao.find(userId);
-        if (user == null) {
-            throw new ResourceNotFoundFault("User not found", userId);
-        }
+        GPUser user = this.getUserById(userId);
 
         List<GPUserProjects> foldersList = userProjectsDao.findByOwnerUserId(userId);
         for (GPUserProjects userFolder : foldersList) {
@@ -180,17 +177,12 @@ class UserServiceImpl {
      *
      * Method to get a single User by ID specified in the REST request
      *
-     * @param request the object representing the request parameters
+     * @param userId is the ID of the User to retrieve
      * @return UserDTO the short User object
      * @throws ResourceNotFoundFault
      */
-    public UserDTO getShortUser(RequestById request)
-            throws ResourceNotFoundFault {
-        GPUser user = userDao.find(request.getId());
-        if (user == null) {
-            throw new ResourceNotFoundFault("User not found", request.getId());
-        }
-
+    public UserDTO getShortUser(Long userId) throws ResourceNotFoundFault {
+        GPUser user = this.getUserById(userId);
         return new UserDTO(user);
     }
 
@@ -198,18 +190,12 @@ class UserServiceImpl {
      *
      * Method to get a single User by ID specified in the REST request
      *
-     * @param request the object representing the request parameters
+     * @param userId is the ID of the User to retrieve
      * @return GPUser the detailed User object
      * @throws ResourceNotFoundFault
      */
-    public GPUser getUserDetail(RequestById request)
-            throws ResourceNotFoundFault {
-        GPUser user = userDao.find(request.getId());
-        if (user == null) {
-            throw new ResourceNotFoundFault("User not found", request.getId());
-        }
-
-        return user;
+    public GPUser getUserDetail(Long userId) throws ResourceNotFoundFault {
+        return this.getUserById(userId);
     }
 
     /**
@@ -220,14 +206,9 @@ class UserServiceImpl {
      * @return UserDTO the short User object
      * @throws ResourceNotFoundFault
      */
-    public UserDTO getShortUserByName(SearchRequest username)
+    public UserDTO getShortUserByName(SearchRequest request)
             throws ResourceNotFoundFault {
-        GPUser user = userDao.findByUsername(username.getNameLike());
-        if (user == null) {
-            throw new ResourceNotFoundFault("User not found (username="
-                    + username.getNameLike() + ")");
-        }
-
+        GPUser user = this.getUserByUsername(request.getNameLike());
         return new UserDTO(user);
     }
 
@@ -239,15 +220,9 @@ class UserServiceImpl {
      * @return GPUser the detailed User object
      * @throws ResourceNotFoundFault
      */
-    public GPUser getUserDetailByName(SearchRequest username)
+    public GPUser getUserDetailByName(SearchRequest request)
             throws ResourceNotFoundFault {
-        GPUser user = userDao.findByUsername(username.getNameLike());
-        if (user == null) {
-            throw new ResourceNotFoundFault("User not found (username="
-                    + username.getNameLike() + ")");
-        }
-
-        return user;
+        return this.getUserByUsername(request.getNameLike());
     }
 
     /**
@@ -257,7 +232,8 @@ class UserServiceImpl {
      * @param request the object representing the request parameters
      * @return Users the list of Users found
      */
-    public List<UserDTO> searchUsers(PaginatedSearchRequest request) {
+    public List<UserDTO> searchUsers(PaginatedSearchRequest request)
+            throws ResourceNotFoundFault {
         Search searchCriteria = new Search(GPUser.class);
         searchCriteria.setMaxResults(request.getNum());
         searchCriteria.setPage(request.getPage());
@@ -269,6 +245,10 @@ class UserServiceImpl {
         }
 
         List<GPUser> userList = userDao.search(searchCriteria);
+        for (GPUser user : userList) {
+            System.out.println("\nppp " + user);
+            user.setGPAuthorities(this.getGPAuthorities(user.getUsername()));
+        }
 
         return UserDTO.convertToUserDTOList(userList);
     }
@@ -305,23 +285,52 @@ class UserServiceImpl {
         return user;
     }
 
-    public List<String> getUserAuthorities(Long userId)
-            throws ResourceNotFoundFault {
-        // Retrieve the user
+    /**
+     * @param username of User to retrieve authorities
+     * @return Authorities in a list of String
+     * @throws ResourceNotFoundFault 
+     */
+    public List<String> getUserAuthorities(Long userId) throws ResourceNotFoundFault {
+        GPUser user = this.getUserById(userId);
+        List<String> authorities = this.getAuthorities(user.getUsername());
+        return authorities;
+    }
+
+    private GPUser getUserById(Long userId) throws ResourceNotFoundFault {
         GPUser user = userDao.find(userId);
         if (user == null) {
             throw new ResourceNotFoundFault("User not found", userId);
         }
+        return user;
+    }
 
-        // Retrieve the Authorities of the User
-        List<GPAuthority> authorities = authorityDao.findByUsername(user.getUsername());
+    private GPUser getUserByUsername(String username) throws ResourceNotFoundFault {
+        GPUser user = userDao.findByUsername(username);
+        if (user == null) {
+            throw new ResourceNotFoundFault("User not found (username=" + username + ")");
+        }
+        return user;
+    }
+
+    private List<String> getAuthorities(String username) throws ResourceNotFoundFault {
+        List<GPAuthority> authorities = this.getGPAuthorities(username);
+        return this.convertAuthorities(authorities);
+    }
+
+    private List<GPAuthority> getGPAuthorities(String username) throws ResourceNotFoundFault {
+        List<GPAuthority> authorities = authorityDao.findByUsername(username);
+        if (authorities == null) {
+            throw new ResourceNotFoundFault("Username \"" + username + "\" not found");
+        }
         logger.trace("\n*** #Authorities: {} ***", authorities.size());
+        return authorities;
+    }
 
+    private List<String> convertAuthorities(List<GPAuthority> authorities) {
         List<String> authorityName = new ArrayList<String>(authorities.size());
         for (GPAuthority authority : authorities) {
             authorityName.add(authority.getAuthority());
         }
-
         return authorityName;
     }
 }

@@ -532,12 +532,10 @@ class ProjectServiceImpl {
                     for (FolderDTO childDTO : childsDTO) {
                         mapAll.put(childDTO.getId(), childDTO);
                     }
+                    this.fillProjectFolders(childsDTO, mapRemaining, mapAll);
                 }
             }
 
-            if (childsDTO != null) {
-                this.fillProjectFolders(childsDTO, mapRemaining, mapAll);
-            }
         }
         return mapAll;
     }

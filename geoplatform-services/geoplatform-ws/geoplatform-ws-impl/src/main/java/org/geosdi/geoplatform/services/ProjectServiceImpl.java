@@ -350,7 +350,7 @@ class ProjectServiceImpl {
         return projectDTO;
     }
 
-    public Long importProject(ProjectDTO projectDTO) throws IllegalParameterFault {
+    public Long importProject(ProjectDTO projectDTO, Long userID) throws IllegalParameterFault, ResourceNotFoundFault {
         GPProject project = ProjectDTO.convertToGPProject(projectDTO);
         EntityCorrectness.checkProject(project); // TODO assert
         projectDao.persist(project);
@@ -367,6 +367,17 @@ class ProjectServiceImpl {
                 this.persistElementList(project, folder, folderDTO.getElementList());
             }
         }
+        GPUser user = userDao.find(userID);
+
+        if (user == null) {
+            throw new ResourceNotFoundFault("User Not Found ", userID);
+        }
+
+        GPUserProjects userProject = new GPUserProjects();
+        userProject.setUserAndProject(user, project);
+        
+        userProjectsDao.persist(userProject);
+
         return project.getId();
     }
 

@@ -387,8 +387,9 @@ public interface GeoPlatformService {
 
     @Put
     @HttpResource(location = "/project")
-    Long importProject(@WebParam(name = "projectDTO") ProjectDTO projectDTO)
-            throws IllegalParameterFault;
+    Long importProject(@WebParam(name = "projectDTO") ProjectDTO projectDTO,
+            @WebParam(name = "userID") Long userID)
+            throws IllegalParameterFault, ResourceNotFoundFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Layer / Style">

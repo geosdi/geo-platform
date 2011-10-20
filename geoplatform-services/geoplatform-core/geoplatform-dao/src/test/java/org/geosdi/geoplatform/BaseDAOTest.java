@@ -225,10 +225,46 @@ public abstract class BaseDAOTest {
         this.insertUser(usernameSuperUserTest, GPRole.ADMIN, GPRole.USER);
         this.insertUser("admin_acl_test", GPRole.ADMIN);
         this.insertUser("user_acl_test", GPRole.USER);
-        // User for GUI test
+        // GUI test
         this.insertUser("admin", GPRole.ADMIN);
         this.insertUser("user", GPRole.USER);
         this.insertUser("viewer", GPRole.VIEWER);
+        // Manage Users
+        this.insertUser("admin_pag_1", GPRole.ADMIN);
+        this.insertUser("admin_pag_2", GPRole.ADMIN);
+        this.insertUser("admin_pag_3", GPRole.ADMIN);
+        this.insertUser("admin_pag_4", GPRole.ADMIN);
+        this.insertUser("admin_pag_5", GPRole.ADMIN);
+        this.insertUser("admin_pag_6", GPRole.ADMIN);
+        this.insertUser("admin_pag_7", GPRole.ADMIN);
+        this.insertUser("user_pag_1", GPRole.USER);
+        this.insertUser("user_pag_2", GPRole.USER);
+        this.insertUser("user_pag_3", GPRole.USER);
+        this.insertUser("user_pag_4", GPRole.USER);
+        this.insertUser("user_pag_5", GPRole.USER);
+        this.insertUser("user_pag_6", GPRole.USER);
+        this.insertUser("user_pag_7", GPRole.USER);
+        this.insertUser("user_pag_8", GPRole.USER);
+        this.insertUser("user_pag_9", GPRole.USER);
+        this.insertUser("user_pag_10", GPRole.USER);
+        this.insertUser("user_pag_11", GPRole.USER);
+        this.insertUser("viewer_pag_1", GPRole.VIEWER);
+        this.insertUser("viewer_pag_2", GPRole.VIEWER);
+        this.insertUser("viewer_pag_3", GPRole.VIEWER);
+        this.insertUser("viewer_pag_4", GPRole.VIEWER);
+        this.insertUser("viewer_pag_5", GPRole.VIEWER);
+        this.insertUser("viewer_pag_6", GPRole.VIEWER);
+        this.insertUser("viewer_pag_7", GPRole.VIEWER);
+        this.insertUser("viewer_pag_8", GPRole.VIEWER);
+        this.insertUser("viewer_pag_9", GPRole.VIEWER);
+        this.insertUser("viewer_pag_10", GPRole.VIEWER);
+        this.insertUser("viewer_pag_11", GPRole.VIEWER);
+        this.insertUser("viewer_pag_12", GPRole.VIEWER);
+        this.insertUser("viewer_pag_13", GPRole.VIEWER);
+        this.insertUser("viewer_pag_14", GPRole.VIEWER);
+        this.insertUser("viewer_pag_15", GPRole.VIEWER);
+        this.insertUser("viewer_pag_16", GPRole.VIEWER);
+        this.insertUser("viewer_pag_17", GPRole.VIEWER);
     }
 
     protected GPUser insertUser(String name, GPRole... roles) {
@@ -237,8 +273,8 @@ public abstract class BaseDAOTest {
         logger.debug("\n*** User SAVED:\n{}\n***", user);
 
         if (roles.length > 0) {
-            List<GPAuthority> authorities = createAuthorities(user.getUsername(), roles);
-            user.setGpAuthorities(authorities);
+            List<GPAuthority> authorities = this.createAuthorities(user.getUsername(), roles);
+            user.setGPAuthorities(authorities);
 
             for (GPAuthority authority : authorities) {
                 authorityDAO.persist(authority);
@@ -262,6 +298,7 @@ public abstract class BaseDAOTest {
     private GPUser createUser(String username) {
         GPUser user = new GPUser();
         user.setUsername(username);
+        user.setName("Complete name of " + username);
         user.setEmailAddress(username + "@test");
         user.setEnabled(true);
         if (username.contains("_")) {

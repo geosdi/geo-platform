@@ -442,6 +442,7 @@ public class WSLayerTest extends ServiceTest {
         rasterLayer3.setLayerInfo(layerInfo);
         // "rootFolderA" ---> "vectorLayer3"
         GPVectorLayer vectorLayer3 = new GPVectorLayer();
+        vectorLayer3.setLayerType(GPLayerType.POINT);
         super.createLayer(vectorLayer3, rootFolderA, titleVector3, "", "",
                 6, spatialReferenceSystem, newUrlServer);
         //

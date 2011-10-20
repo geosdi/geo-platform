@@ -95,7 +95,7 @@ public class GPFolder implements Serializable {
     @Column
     private boolean shared = false;
     //    
-    @Column(name = "checked")
+    @Column
     private boolean checked = false;
 
     /**

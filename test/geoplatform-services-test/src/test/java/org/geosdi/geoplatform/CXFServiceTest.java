@@ -58,22 +58,26 @@ import org.junit.Test;
 public class CXFServiceTest extends ServiceTest {
 
 //    private GeoPlatformWSClientEncrypted gpWSClientEncrypted;
+    // Servers
     private final String serverUrlTest = "http://map.serverNameTest.org";
     private long idServerTest = -1;
-    // Servers    
     private final String serverUrlGeoSDI = "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
+    private long idServerGeoSDI = -1;
 //    private final String serverUrlTelespazio = "http://maps.telespazio.it/dpc/dpc-wms?service=wms&version=1.1.1&request=GetCapabilities";
+//    private long idServerTelespazio = -1;
 
     @Override
     public void setUp() throws Exception {
-        // Insert Server
+        // Insert Servers
         idServerTest = this.createAndInsertServer(serverUrlTest, GPCapabilityType.WMS);
+        idServerGeoSDI = this.createAndInsertServer(serverUrlGeoSDI, GPCapabilityType.WMS);
     }
 
     @Override
     public void tearDown() {
         // Delete Server
         this.deleteServer(idServerTest);
+        this.deleteServer(idServerGeoSDI);
     }
 
     @Test

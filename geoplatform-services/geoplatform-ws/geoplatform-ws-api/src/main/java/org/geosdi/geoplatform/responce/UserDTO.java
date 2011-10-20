@@ -53,6 +53,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
 public class UserDTO {
 
     private Long id;
+    private String name;
     private String username;
     private boolean enabled;
     private boolean sendEmail;
@@ -68,11 +69,12 @@ public class UserDTO {
 
     public UserDTO(GPUser user) {
         this.id = user.getId();
+        this.name = user.getName();
         this.username = user.getUsername();
         this.enabled = user.isEnabled();
         this.sendEmail = user.isSendEmail();
         this.emailAddress = user.getEmailAddress();
-        this.authorities = user.getGpAuthorities();
+        this.authorities = user.getGPAuthorities();
     }
 
     /**
@@ -88,6 +90,21 @@ public class UserDTO {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name
+     *          the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -172,9 +189,12 @@ public class UserDTO {
      */
     @Override
     public String toString() {
-        return "UserDTO [id=" + id + ", username=" + username + ", enabled="
-                + enabled + ", sendEmail=" + sendEmail + ", emailAddress="
-                + emailAddress + "]";
+        return "UserDTO [id=" + id
+                + ", username=" + username
+                + ", name=" + name
+                + ", enabled=" + enabled
+                + ", sendEmail=" + sendEmail
+                + ", emailAddress=" + emailAddress + "]";
     }
 
     public static List<UserDTO> convertToUserDTOList(List<GPUser> users) {

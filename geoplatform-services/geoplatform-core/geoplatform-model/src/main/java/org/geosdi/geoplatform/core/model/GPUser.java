@@ -76,6 +76,9 @@ public class GPUser implements Serializable, UserDetails {
     @SequenceGenerator(name = "GP_USER_SEQ", sequenceName = "GP_USER_SEQ")
     private Long id;
     //
+    @Column(nullable = false)
+    private String name;
+    //
     @Column(name = "user_name", unique = true, nullable = false)
     private String username;
     /**
@@ -105,7 +108,7 @@ public class GPUser implements Serializable, UserDetails {
     private Boolean credentialsNonExpired;
     //
     @Transient
-    private Collection<GPAuthority> gpAuthorities;
+    private Collection<GPAuthority> authorities;
     // Hibernate with this list remove "on delete cascade" on FK of gp_user_projects(user_id)
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 //    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
@@ -131,6 +134,21 @@ public class GPUser implements Serializable, UserDetails {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name
+     *          the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -214,7 +232,7 @@ public class GPUser implements Serializable, UserDetails {
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> auth = new HashSet<GrantedAuthority>();
-        for (GrantedAuthority ga : gpAuthorities) {
+        for (GrantedAuthority ga : authorities) {
             auth.add(ga);
         }
         return auth;
@@ -223,16 +241,16 @@ public class GPUser implements Serializable, UserDetails {
     /**
      * @return the gpAuthorities
      */
-    public Collection<GPAuthority> getGpAuthorities() {
-        return gpAuthorities;
+    public Collection<GPAuthority> getGPAuthorities() {
+        return authorities;
     }
 
     /**
-     * @param gpAuthorities
-     *          the gpAuthorities to set
+     * @param authorities
+     *          the authorities to set
      */
-    public void setGpAuthorities(List<GPAuthority> gpAuthorities) {
-        this.gpAuthorities = gpAuthorities;
+    public void setGPAuthorities(List<GPAuthority> authorities) {
+        this.authorities = authorities;
     }
 
     @Override
@@ -276,6 +294,7 @@ public class GPUser implements Serializable, UserDetails {
         str.append("id=").append(id);
         str.append(", username=").append(username);
         str.append(", password=").append(password);
+        str.append(", name=").append(name);
         str.append(", emailAddress=").append(emailAddress);
         str.append(", enabled=").append(enabled);
         str.append(", sendEmail=").append(sendEmail);

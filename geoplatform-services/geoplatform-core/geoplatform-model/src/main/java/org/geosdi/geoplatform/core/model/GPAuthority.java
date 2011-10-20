@@ -83,7 +83,7 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     //
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private GPUser gpUser;
+    private GPUser user;
 
     public GPAuthority() {
     }
@@ -93,9 +93,9 @@ public class GPAuthority implements GrantedAuthority, Serializable {
         this.authority = authority;
     }
 
-    public GPAuthority(GPUser gpUser, String authority) {
-        this.gpUser = gpUser;
-        this.username = gpUser.getUsername();
+    public GPAuthority(GPUser user, String authority) {
+        this.user = user;
+        this.username = user.getUsername();
         this.authority = authority;
     }
 
@@ -148,18 +148,18 @@ public class GPAuthority implements GrantedAuthority, Serializable {
 
     /**
      * 
-     * @return gpUser
+     * @return user
      */
-    public GPUser getGpUser() {
-        return gpUser;
+    public GPUser getUser() {
+        return user;
     }
 
     /**
-     * @param gpUser
-     *            the gpUser to set
+     * @param user
+     *            the user to set
      */
-    public void setGpUsers(GPUser gpUser) {
-        this.gpUser = gpUser;
+    public void setUsers(GPUser user) {
+        this.user = user;
     }
 
     /*
@@ -173,7 +173,7 @@ public class GPAuthority implements GrantedAuthority, Serializable {
         str.append("id=").append(id);
         str.append(", username=").append(username);
         str.append(", authority=").append(authority);
-        str.append(", gpUsers=").append(gpUser).append("}");
+        str.append(", users=").append(user).append("}");
         return str.toString();
     }
 }

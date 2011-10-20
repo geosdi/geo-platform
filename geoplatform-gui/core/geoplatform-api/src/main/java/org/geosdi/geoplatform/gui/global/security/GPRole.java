@@ -47,13 +47,21 @@ public enum GPRole {
     VIEWER("ROLE_VIEWER"); // Can't save the tree state
     //
     private String role;
+    private String roleUI;
 
     private GPRole(String role) {
         this.role = role;
+        
+        int ind = role.indexOf("_");
+        this.roleUI = role.charAt(ind + 1) + role.substring(ind + 2).toLowerCase();
     }
 
     @Override
     public String toString() {
         return role;
+    }
+
+    public String toStringUI() {
+        return roleUI;
     }
 }

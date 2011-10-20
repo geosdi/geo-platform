@@ -96,6 +96,7 @@ public abstract class GPLayer implements Serializable {
     @Embedded
     private GPBBox bbox;
     //
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private GPLayerType layerType;
     //    

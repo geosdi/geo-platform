@@ -87,11 +87,11 @@ public class WSUserTest extends ServiceTest {
 
         // Get User from Id
         // Get UserDTO from Id
-        UserDTO userDTOFromWS = gpWSClient.getShortUser(new RequestById(idUserTest));
+        UserDTO userDTOFromWS = gpWSClient.getShortUser(idUserTest);
         Assert.assertNotNull(userDTOFromWS);
         Assert.assertEquals("Error found User from Id", idUserTest, userDTOFromWS.getId().longValue());
         // Get GPUser from Id
-        GPUser userFromWS = gpWSClient.getUserDetail(new RequestById(idUserTest));
+        GPUser userFromWS = gpWSClient.getUserDetail(idUserTest);
         Assert.assertNotNull(userFromWS);
         Assert.assertEquals("Error found User from Id", idUserTest, userFromWS.getId().longValue());
 

@@ -59,6 +59,8 @@ public interface GPAuthorityDAO {
     public boolean remove(GPAuthority authority);
 
     public boolean removeById(Long authorityId);
+    
+    public void removeAllUserAuthorities(String username);
 
     public List<GPAuthority> search(ISearch search);
 

@@ -40,56 +40,45 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.event.timeout.IManageDeleteUserHandler;
+import org.geosdi.geoplatform.gui.client.event.timeout.ManageDeleteUserEvent;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
 /**
  *
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class DeleteRenderer implements GridCellRenderer<GPUserManageDetail> {
+public class DeleteRenderer implements GridCellRenderer<GPUserManageDetail>,
+        IManageDeleteUserHandler {
 
-//public class DeleteRenderer implements GridCellRenderer<BeanModel> {
-//
     private static final DeleteRenderer instance = new DeleteRenderer();
+//    private ManageDeleteUserEvent manageDeleteUserEvent = new ManageDeleteUserEvent();
 
     public static DeleteRenderer getInstance() {
         return instance;
     }
-//
-//    private boolean init;
-//    
 
+//    public DeleteRenderer() {
+//        TimeoutHandlerManager.addHandler(IManageDeleteUserHandler.TYPE, this);
+//    }
     @Override
     public Object render(final GPUserManageDetail model, String property, ColumnData config, final int rowIndex,
-            final int colIndex, ListStore<GPUserManageDetail> store, Grid<GPUserManageDetail> grid) {
+            final int colIndex, final ListStore<GPUserManageDetail> store, Grid<GPUserManageDetail> grid) {
 
-//        if (!init) {
-//            init = true;
-//            grid.addListener(Events.ColumnResize, new Listener<GridEvent<GPUserManageDetail>>() {
-//
-//                @Override
-//                public void handleEvent(GridEvent<GPUserManageDetail> be) {
-//                    for (int i = 0; i < be.getGrid().getStore().getCount(); i++) {
-//                        Widget w = be.getGrid().getView().getWidget(i, be.getColIndex());
-//                        if (w != null && w instanceof BoxComponent) {
-//                            ((BoxComponent) w).setWidth(be.getWidth() - 10);
-//                        }
-//                    }
-//                }
-//            });
-//        }
-
-        Button button = new Button((String) model.get(property), new SelectionListener<ButtonEvent>() {
+        Button button = new Button("", new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -101,21 +90,7 @@ public class DeleteRenderer implements GridCellRenderer<GPUserManageDetail> {
                             @Override
                             public void handleEvent(MessageBoxEvent be) {
                                 if (be.getButtonClicked().getText().toLowerCase().contains("s")) {
-                                    UserRemoteImpl.Util.getInstance().deleteUser(model.getId(),
-                                            new AsyncCallback<Boolean>() {
-
-                                                @Override
-                                                public void onFailure(Throwable caught) {
-                                                    GeoPlatformMessage.errorMessage("Error", caught.getMessage());
-                                                }
-
-                                                @Override
-                                                public void onSuccess(Boolean result) {
-                                                    // TODO Delete to store...
-                                                    Info.display("User deleted", "<ul><li>" + model.getUsername() + "</li></ul>");
-                                                }
-                                            });
-
+                                    manageDeleteUser(model, store);
                                 }
                             }
                         });
@@ -127,13 +102,27 @@ public class DeleteRenderer implements GridCellRenderer<GPUserManageDetail> {
 
         return button;
     }
-//
-//    @Override
-//    public Object render(BeanModel model, String property, ColumnData config,
-//            int rowIndex, int colIndex, ListStore<BeanModel> store, Grid<BeanModel> grid) {
-//        return "<image class=\"delete cursor-pointer\" src=\"geoportal/gp-images/error.png\" "
-//                + "alt=\"delete\" title=\"Delete this User\" />";
-//    }
-//    
-//}    
+
+    @Override
+    public void manageDeleteUser(final GPUserManageDetail model,
+            final ListStore<GPUserManageDetail> store) {
+        UserRemoteImpl.Util.getInstance().deleteUser(model.getId(), new AsyncCallback<Boolean>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                if (caught.getCause() instanceof GPSessionTimeout) {
+//                    GPHandlerManager.fireEvent(new GPLoginEvent(manageDeleteUserEvent));
+                    GPHandlerManager.fireEvent(new GPLoginEvent(new ManageDeleteUserEvent(model, store)));
+                } else {
+                    GeoPlatformMessage.errorMessage("Error", caught.getMessage());
+                }
+            }
+
+            @Override
+            public void onSuccess(Boolean result) {
+                store.remove(model);
+                GeoPlatformMessage.infoMessage("User deleted", "<ul><li>" + model.getUsername() + "</li></ul>");
+            }
+        });
+    }
 }

@@ -63,6 +63,12 @@ public class GPAuthorityDAOImpl extends BaseDAO<GPAuthority, Long> implements
         return super.remove(authority);
     }
 
+    @Override
+    public void removeAllUserAuthorities(String username) {
+        List<GPAuthority> authorities = this.findByUsername(username);
+        super.remove(authorities.toArray(new GPAuthority[authorities.size()]));
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public List<GPAuthority> search(ISearch search) {

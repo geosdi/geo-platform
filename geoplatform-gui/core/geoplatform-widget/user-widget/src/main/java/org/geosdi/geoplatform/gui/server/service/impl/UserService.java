@@ -94,7 +94,7 @@ public class UserService implements IUserService {
             throws GeoPlatformException {
         GPUser user = null;
         try {
-            user = sessionUtility.getUserAlreadyFromSession(httpServletRequest);            
+            user = sessionUtility.getUserAlreadyFromSession(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }

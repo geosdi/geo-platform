@@ -160,6 +160,8 @@ class UserServiceImpl {
     public boolean deleteUser(Long userId) throws ResourceNotFoundFault {
         GPUser user = this.getUserById(userId);
 
+        authorityDao.removeAllUserAuthorities(user.getUsername());
+
         List<GPUserProjects> foldersList = userProjectsDao.findByOwnerUserId(userId);
         for (GPUserProjects userFolder : foldersList) {
             // Remove all UserProjects that reference (also of other users) by cascading

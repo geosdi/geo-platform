@@ -276,7 +276,7 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
     }
 
     /**
-     * Set the correct Status Iconn Style
+     * Set the correct Status Icon Style
      */
     public void setSearchStatus(EnumSearchStatus status,
             EnumSearchStatus message) {

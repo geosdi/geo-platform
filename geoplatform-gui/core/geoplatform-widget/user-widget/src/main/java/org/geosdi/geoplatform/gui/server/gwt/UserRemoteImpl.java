@@ -39,7 +39,6 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import org.geosdi.geoplatform.gui.client.service.UserRemote;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
@@ -60,6 +59,12 @@ public class UserRemoteImpl extends RemoteServiceServlet implements UserRemote {
             getBean(UserService.class);
 
     @Override
+    public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
+            String searchText) {
+        return userService.searchUsers(config, searchText, super.getThreadLocalRequest());
+    }
+
+    @Override
     public Long insertUser(IGPUserManageDetail userDetail) throws GeoPlatformException {
         return userService.insertUser(userDetail, super.getThreadLocalRequest());
     }
@@ -72,17 +77,5 @@ public class UserRemoteImpl extends RemoteServiceServlet implements UserRemote {
     @Override
     public boolean deleteUser(Long userId) throws GeoPlatformException {
         return userService.deleteUser(userId, super.getThreadLocalRequest());
-    }
-
-    @Override
-    public ArrayList<IGPUserManageDetail> getUsers() {
-        return userService.getUsers(super.getThreadLocalRequest());
-    }
-
-    @Override
-    public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-            String searchText) {
-        return userService.searchUsers(config, searchText,
-                super.getThreadLocalRequest());
     }
 }

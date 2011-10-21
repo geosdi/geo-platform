@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.service;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
@@ -50,6 +49,10 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
  */
 public interface UserRemoteAsync {
 
+    void searchUsers(PagingLoadConfig config, String searchText,
+            AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback)
+            throws GeoPlatformException;
+
     void insertUser(IGPUserManageDetail userDetail, AsyncCallback<Long> callback)
             throws GeoPlatformException;
 
@@ -57,12 +60,5 @@ public interface UserRemoteAsync {
             throws GeoPlatformException;
 
     void deleteUser(Long userId, AsyncCallback<Boolean> callback)
-            throws GeoPlatformException;
-
-    void getUsers(AsyncCallback<ArrayList<IGPUserManageDetail>> callback)
-            throws GeoPlatformException;
-
-    void searchUsers(PagingLoadConfig config, String searchText,
-            AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback)
             throws GeoPlatformException;
 }

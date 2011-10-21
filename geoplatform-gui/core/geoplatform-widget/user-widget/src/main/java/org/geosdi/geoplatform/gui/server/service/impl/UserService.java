@@ -76,6 +76,43 @@ public class UserService implements IUserService {
     private SessionUtility sessionUtility;
 
     @Override
+    public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
+            String searchText, HttpServletRequest httpServletRequest) {
+        GPUser user = this.getCheckLoggedUser(httpServletRequest);
+
+        int start = config.getOffset();
+
+        SearchRequest srq = new SearchRequest("%" + searchText + "%");
+
+        Long usersCount = this.geoPlatformServiceClient.getUsersCount(srq);
+
+        int page = start == 0 ? start : start / config.getLimit();
+
+        PaginatedSearchRequest psr = new PaginatedSearchRequest("%" + searchText + "%",
+                config.getLimit(), page);
+
+        List<UserDTO> userList = null;
+        try {
+            userList = this.geoPlatformServiceClient.searchUsers(psr, user.getId());
+            if (userList == null) {
+                throw new GeoPlatformException("There are no results");
+            }
+        } catch (ResourceNotFoundFault rnnf) {
+            throw new GeoPlatformException(rnnf.getMessage()); // TODO Better message
+
+        }
+
+        ArrayList<GPUserManageDetail> searchUsers = new ArrayList<GPUserManageDetail>();
+        for (UserDTO userDTO : userList) {
+            GPUserManageDetail userDetail = this.convertToGPUserManageDetail(userDTO);
+            searchUsers.add(userDetail);
+        }
+
+        return new BasePagingLoadResult<GPUserManageDetail>(searchUsers,
+                config.getOffset(), usersCount.intValue());
+    }
+
+    @Override
     public Long insertUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         // TODO
@@ -92,64 +129,14 @@ public class UserService implements IUserService {
     @Override
     public boolean deleteUser(Long userId, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        GPUser user = null;
-        try {
-            user = sessionUtility.getUserAlreadyFromSession(httpServletRequest);
-        } catch (GPSessionTimeout timeout) {
-            throw new GeoPlatformException(timeout);
-        }
+        this.getCheckLoggedUser(httpServletRequest);
 
-        boolean deleted = false;
         try {
-            deleted = geoPlatformServiceClient.deleteUser(userId);
+            return geoPlatformServiceClient.deleteUser(userId);
         } catch (ResourceNotFoundFault ex) {
             logger.error("\n*** " + ex.getMessage());
             throw new GeoPlatformException("User not found");
         }
-
-        return deleted;
-    }
-
-    @Override
-    public ArrayList<IGPUserManageDetail> getUsers(HttpServletRequest httpServletRequest) {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-            String searchText, HttpServletRequest httpServletRequest) {
-        // TODO
-        int start = config.getOffset();
-
-        SearchRequest srq = new SearchRequest("%" + searchText + "%");
-
-        Long usersCount = this.geoPlatformServiceClient.getUsersCount(srq);
-
-        int page = start == 0 ? start : start / config.getLimit();
-
-        PaginatedSearchRequest psr = new PaginatedSearchRequest("%" + searchText + "%",
-                config.getLimit(), page);
-
-        List<UserDTO> userList = null;
-        try {
-            userList = this.geoPlatformServiceClient.searchUsers(psr);
-            if (userList == null) {
-                throw new GeoPlatformException("There are no results");
-            }
-        } catch (ResourceNotFoundFault rnnf) {
-            throw new GeoPlatformException(rnnf.getMessage()); // TODO Better message
-
-        }
-
-        ArrayList<GPUserManageDetail> searchUsers = new ArrayList<GPUserManageDetail>();
-        for (UserDTO userDTO : userList) {
-            GPUserManageDetail user = this.convertToGPUserManageDetail(userDTO);
-            searchUsers.add(user);
-        }
-
-        return new BasePagingLoadResult<GPUserManageDetail>(searchUsers,
-                config.getOffset(), usersCount.intValue());
     }
 
     private GPUserManageDetail convertToGPUserManageDetail(UserDTO userDTO) {
@@ -170,6 +157,14 @@ public class UserService implements IUserService {
             return GPRole.fromString(authority);
         }
         return GPRole.VIEWER;
+    }
+
+    private GPUser getCheckLoggedUser(HttpServletRequest httpServletRequest) {
+        try {
+            return sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
     }
 
 //    private IGPUserManageDetail convertUser(GPUser user, List<String> authorities) {

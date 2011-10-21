@@ -40,7 +40,6 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
@@ -61,6 +60,14 @@ public interface UserRemote extends RemoteService {
             return instance;
         }
     }
+
+    /**
+     * 
+     * @param request
+     * @return 
+     */
+    PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
+            String searchText) throws GeoPlatformException;
 
     /**
      * 
@@ -85,18 +92,4 @@ public interface UserRemote extends RemoteService {
      * @throws GeoPlatformException 
      */
     boolean deleteUser(Long userId) throws GeoPlatformException;
-
-    /**
-     * 
-     * @return 
-     */
-    ArrayList<IGPUserManageDetail> getUsers() throws GeoPlatformException;
-
-    /**
-     * 
-     * @param request
-     * @return 
-     */
-    PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-            String searchText) throws GeoPlatformException;
 }

@@ -232,13 +232,15 @@ class UserServiceImpl {
      * The paging parameters are specified in the REST request
      *
      * @param request the object representing the request parameters
+     * @param userId the of user that will exclude from the search (logged user)
      * @return Users the list of Users found
      */
-    public List<UserDTO> searchUsers(PaginatedSearchRequest request)
+    public List<UserDTO> searchUsers(PaginatedSearchRequest request, Long userId)
             throws ResourceNotFoundFault {
         Search searchCriteria = new Search(GPUser.class);
         searchCriteria.setMaxResults(request.getNum());
         searchCriteria.setPage(request.getPage());
+        searchCriteria.addFilterNotEqual("id", userId);
         searchCriteria.addSortAsc("username");
 
         String like = request.getNameLike();

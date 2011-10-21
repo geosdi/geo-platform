@@ -54,12 +54,12 @@
         </repository>
     </repositories>
     
-    <!-- modules>
-		<module>geoplatform-services-test</module>
+    <modules>
+        <module>geoplatform-services-test</module>
         <module>geoplatform-ui-test</module>
-	</modules -->
+    </modules >
     
-    <profiles>
+<!--    <profiles>
         <profile>
             <id>test.services</id>
             <modules>
@@ -72,8 +72,6 @@
                 <module>geoplatform-ui-test</module>
             </modules>
         </profile>
-    </profiles>
-
-
+    </profiles>-->
 
 </project>

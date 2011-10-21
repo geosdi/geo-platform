@@ -64,12 +64,14 @@ import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
         implements IManageDeleteUserHandler {
 
+    private ManageDeleteUserEvent manageDeleteUserEvent = new ManageDeleteUserEvent();
+
     public DeleteUserRenderer() {
         TimeoutHandlerManager.addHandler(IManageDeleteUserHandler.TYPE, this);
     }
 
     @Override
-    public Object render(final GPUserManageDetail model, String property, ColumnData config, final int rowIndex,
+    public Object render(final GPUserManageDetail user, String property, ColumnData config, final int rowIndex,
             final int colIndex, final ListStore<GPUserManageDetail> store, Grid<GPUserManageDetail> grid) {
 
         Button button = new Button("", new SelectionListener<ButtonEvent>() {
@@ -78,34 +80,36 @@ public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
             public void componentSelected(ButtonEvent ce) {
 
                 GeoPlatformMessage.confirmMessage("Delete User",
-                        "Are you sure you want to delete the User \"" + model.getUsername() + "\" ?",
+                        "Are you sure you want to delete the User \"" + user.getUsername() + "\" ?",
                         new Listener<MessageBoxEvent>() {
 
                             @Override
                             public void handleEvent(MessageBoxEvent be) {
                                 if (be.getButtonClicked().getText().toLowerCase().contains("s")) {
-                                    manageDeleteUser(model, store);
+                                    manageDeleteUser(user, store);
                                 }
                             }
                         });
             }
         });
         button.setToolTip("Delete User");
-        button.setIcon(BasicWidgetResources.ICONS.cancel());
+        button.setIcon(BasicWidgetResources.ICONS.delete());
         button.setAutoWidth(true);
 
         return button;
     }
 
     @Override
-    public void manageDeleteUser(final GPUserManageDetail model,
+    public void manageDeleteUser(final GPUserManageDetail user,
             final ListStore<GPUserManageDetail> store) {
-        UserRemoteImpl.Util.getInstance().deleteUser(model.getId(), new AsyncCallback<Boolean>() {
+        UserRemoteImpl.Util.getInstance().deleteUser(user.getId(), new AsyncCallback<Boolean>() {
 
             @Override
             public void onFailure(Throwable caught) {
                 if (caught.getCause() instanceof GPSessionTimeout) {
-                    GPHandlerManager.fireEvent(new GPLoginEvent(new ManageDeleteUserEvent(model, store)));
+                    manageDeleteUserEvent.setUser(user);
+                    manageDeleteUserEvent.setStore(store);
+                    GPHandlerManager.fireEvent(new GPLoginEvent(manageDeleteUserEvent));
                 } else {
                     GeoPlatformMessage.errorMessage("Error", caught.getMessage());
                 }
@@ -113,8 +117,8 @@ public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
 
             @Override
             public void onSuccess(Boolean result) {
-                store.remove(model);
-                GeoPlatformMessage.infoMessage("User deleted", "<ul><li>" + model.getUsername() + "</li></ul>");
+                store.remove(user);
+                GeoPlatformMessage.infoMessage("User deleted", "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
     }

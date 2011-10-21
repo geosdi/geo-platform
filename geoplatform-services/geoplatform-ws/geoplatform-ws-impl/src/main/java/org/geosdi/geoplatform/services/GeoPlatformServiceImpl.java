@@ -311,9 +311,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<UserDTO> searchUsers(PaginatedSearchRequest request)
+    public List<UserDTO> searchUsers(PaginatedSearchRequest request, Long userId)
             throws ResourceNotFoundFault {
-        return userServiceDelegate.searchUsers(request);
+        return userServiceDelegate.searchUsers(request, userId);
     }
 
     @Override

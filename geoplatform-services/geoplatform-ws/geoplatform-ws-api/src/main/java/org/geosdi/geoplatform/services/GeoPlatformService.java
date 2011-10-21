@@ -108,12 +108,14 @@ public interface GeoPlatformService {
     @Get
     @HttpResource(location = "/users/{userId}")
     @WebResult(name = "User")
-    UserDTO getShortUser(Long userId) throws ResourceNotFoundFault;
+    UserDTO getShortUser(@WebParam(name = "userId") Long userId)
+            throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/users/{userId}")
     @WebResult(name = "User")
-    GPUser getUserDetail(Long userId) throws ResourceNotFoundFault;
+    GPUser getUserDetail(@WebParam(name = "userId") Long userId)
+            throws ResourceNotFoundFault;
 
     @Get
     @WebResult(name = "User")
@@ -135,7 +137,8 @@ public interface GeoPlatformService {
     @Get
     @HttpResource(location = "/users/search/{num}/{page}/{nameLike}")
     @WebResult(name = "User")
-    List<UserDTO> searchUsers(PaginatedSearchRequest searchRequest)
+    List<UserDTO> searchUsers(PaginatedSearchRequest searchRequest,
+            @WebParam(name = "userId") Long userId)
             throws ResourceNotFoundFault;
 
     @Get

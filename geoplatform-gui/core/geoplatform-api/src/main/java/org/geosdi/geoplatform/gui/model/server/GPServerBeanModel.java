@@ -219,8 +219,8 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
 
     @Override
     public String toString() {
-        return "GPServerDTO{" + "id = " + id + ", alias = " + GPServerKeyValue.ALIAS.getValue()
-                + ", urlServer = " + GPServerKeyValue.URL_SERVER.getValue() + ", name =  "
+        return "GPServerDTO{" + "id = " + id + ", alias = " + getAlias()
+                + ", urlServer = " + getUrlServer() + ", name =  "
                 + name + ", title = " + title + ", contactPerson = " + contactPerson
                 + ", contactOrganization = " + contactOrganization + '}';
     }

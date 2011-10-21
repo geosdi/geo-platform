@@ -43,12 +43,12 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
-import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.event.timeout.IManageDeleteUserHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.ManageDeleteUserEvent;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
+import org.geosdi.geoplatform.gui.client.widget.grid.renderer.GPGridCellRenderer;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
@@ -61,16 +61,10 @@ import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class DeleteRenderer implements GridCellRenderer<GPUserManageDetail>,
-        IManageDeleteUserHandler {
+public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
+        implements IManageDeleteUserHandler {
 
-    private static final DeleteRenderer instance = new DeleteRenderer();
-
-    public static DeleteRenderer getInstance() {
-        return instance;
-    }
-
-    public DeleteRenderer() {
+    public DeleteUserRenderer() {
         TimeoutHandlerManager.addHandler(IManageDeleteUserHandler.TYPE, this);
     }
 

@@ -163,7 +163,7 @@ public class ManageUsersPagWidget
         delColumn.setFixed(true);
         delColumn.setResizable(false);
         delColumn.setSortable(false);
-        delColumn.setRenderer(DeleteRenderer.getInstance());
+        delColumn.setRenderer(new DeleteUserRenderer());
         configs.add(delColumn);
 
         return new ColumnModel(configs);

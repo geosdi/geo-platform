@@ -65,15 +65,15 @@ public class DeleteRenderer implements GridCellRenderer<GPUserManageDetail>,
         IManageDeleteUserHandler {
 
     private static final DeleteRenderer instance = new DeleteRenderer();
-//    private ManageDeleteUserEvent manageDeleteUserEvent = new ManageDeleteUserEvent();
 
     public static DeleteRenderer getInstance() {
         return instance;
     }
 
-//    public DeleteRenderer() {
-//        TimeoutHandlerManager.addHandler(IManageDeleteUserHandler.TYPE, this);
-//    }
+    public DeleteRenderer() {
+        TimeoutHandlerManager.addHandler(IManageDeleteUserHandler.TYPE, this);
+    }
+
     @Override
     public Object render(final GPUserManageDetail model, String property, ColumnData config, final int rowIndex,
             final int colIndex, final ListStore<GPUserManageDetail> store, Grid<GPUserManageDetail> grid) {
@@ -111,7 +111,6 @@ public class DeleteRenderer implements GridCellRenderer<GPUserManageDetail>,
             @Override
             public void onFailure(Throwable caught) {
                 if (caught.getCause() instanceof GPSessionTimeout) {
-//                    GPHandlerManager.fireEvent(new GPLoginEvent(manageDeleteUserEvent));
                     GPHandlerManager.fireEvent(new GPLoginEvent(new ManageDeleteUserEvent(model, store)));
                 } else {
                     GeoPlatformMessage.errorMessage("Error", caught.getMessage());

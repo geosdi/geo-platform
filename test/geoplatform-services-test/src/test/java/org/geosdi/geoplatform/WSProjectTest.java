@@ -275,7 +275,7 @@ public class WSProjectTest extends ServiceTest {
         rootFolderBDTO.addLayer(new VectorLayerDTO(vectorRootFolderB));
 
         // Import ProjectDTO
-        Long projectId = gpWSClient.importProject(projectDTO);
+        Long projectId = gpWSClient.importProject(projectDTO, super.idUserTest);
         // Check imported Project
         Assert.assertTrue("Check importProject", projectId > 0);
         logger.debug("*** ID project imported: {} ***", projectId);

@@ -171,5 +171,5 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
         str.append(", email=").append(email);
         str.append(", authority=").append(authority);
         return str.append('}').toString();
-    }
+    }   
 }

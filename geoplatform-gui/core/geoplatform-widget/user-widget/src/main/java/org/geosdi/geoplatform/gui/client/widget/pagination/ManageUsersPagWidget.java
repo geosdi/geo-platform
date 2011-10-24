@@ -43,20 +43,14 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.LoadListener;
-import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
-import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
-import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
@@ -65,12 +59,10 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.service.UserRemote;
-import org.geosdi.geoplatform.gui.client.service.UserRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.client.widget.UserPropertiesWidget;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.GeoPlatformSearchWidget;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 
 /**
  *
@@ -80,16 +72,35 @@ import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 public class ManageUsersPagWidget
         extends GeoPlatformSearchWidget<GPUserManageDetail> {
 
-    private UserRemoteAsync userRemote = UserRemote.Util.getInstance();
     private int pageSize = 10;
+    private UserPropertiesWidget userPropertiesWidget;
 
     public ManageUsersPagWidget() {
         super(true);
     }
 
     @Override
+    protected void init() {
+        if (!super.isInitialized()) {
+            super.init();
+            super.selectButton.setText("Modify User");
+            super.search.setFieldLabel("Find User");
+            this.userPropertiesWidget = new UserPropertiesWidget(super.store);
+            super.formPanel.getButtonBar().getItems().add(1, 
+                    new Button("Add User", BasicWidgetResources.ICONS.logged_user(), 
+                            new SelectionListener<ButtonEvent>() {
+
+                @Override
+                public void componentSelected(ButtonEvent ce) {
+                    userPropertiesWidget.show(new GPUserManageDetail());
+                }
+            }));
+        }
+    }
+
+    @Override
     public void show() {
-        super.init();
+        this.init();
         super.show();
     }
 
@@ -118,7 +129,7 @@ public class ManageUsersPagWidget
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback) {
 
-                userRemote.searchUsers((PagingLoadConfig) loadConfig,
+                UserRemote.Util.getInstance().searchUsers((PagingLoadConfig) loadConfig,
                         searchText, callback);
             }
         };
@@ -176,9 +187,8 @@ public class ManageUsersPagWidget
     }
 
     @Override
-    public void select() {
-        System.out.println("@@@ TODO select()");
-        // TODO Modify User
+    public void executeSelect() {
+        this.userPropertiesWidget.show(this.grid.getSelectionModel().getSelectedItem());
     }
 
     private void setUpLoadListener() {
@@ -187,8 +197,8 @@ public class ManageUsersPagWidget
             @Override
             public void loaderBeforeLoad(LoadEvent le) {
                 searchStatus.setBusy("Connection to the Server");
-                if (select.isEnabled()) {
-                    select.disable();
+                if (selectButton.isEnabled()) {
+                    selectButton.disable();
                 }
             }
 
@@ -207,7 +217,6 @@ public class ManageUsersPagWidget
                     setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
                             EnumSearchStatus.STATUS_MESSAGE_NOT_SEARCH);
                 } catch (Throwable e) {
-                    // TODO Auto-generated catch block
                     setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
                             EnumSearchStatus.STATUS_MESSAGE_SEARCH_ERROR);
                 }

@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.global.security;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Vincenzo Monteverde
@@ -47,6 +50,13 @@ public enum GPRole {
     VIEWER("ROLE_VIEWER"); // Can't save the tree state
     //
     private String role;
+    private final static List<GPRole> roleList = new ArrayList<GPRole>();
+
+    static {
+        roleList.add(ADMIN);
+        roleList.add(USER);
+        roleList.add(VIEWER);
+    }
 
     private GPRole(String role) {
         this.role = role;
@@ -55,6 +65,10 @@ public enum GPRole {
     @Override
     public String toString() {
         return role;
+    }
+
+    public static List<GPRole> getAllRoles() {
+        return roleList;
     }
 
     public String toStringUI() {

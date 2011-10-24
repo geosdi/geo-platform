@@ -88,8 +88,8 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
     protected RpcProxy<PagingLoadResult<T>> proxy;
     protected PagingLoader<PagingLoadResult<ModelData>> loader;
     protected PagingToolBar toolBar;
-    protected Button select;
-    protected Button cancel;
+    protected Button selectButton;
+    protected Button cancelButton;
     protected SearchStatus searchStatus;
     protected String searchText;
     private boolean initialized;
@@ -105,7 +105,6 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
     }
 
     protected void init() {
-        // TODO Auto-generated method stub
         if (!isInitialized()) {
             initWindow();
             initVerticalPanel();
@@ -126,7 +125,7 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
 
             @Override
             public void windowHide(WindowEvent we) {
-                cancel();
+                executeCancel();
             }
         });
 
@@ -194,30 +193,30 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
 
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
-        select = new Button("Select", new SelectionListener<ButtonEvent>() {
+        selectButton = new Button("Select", new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                select();
+                executeSelect();
             }
         });
 
-        select.setIcon(BasicWidgetResources.ICONS.select());
-        select.disable();
+        selectButton.setIcon(BasicWidgetResources.ICONS.select());
+        selectButton.disable();
 
-        formPanel.addButton(this.select);
+        formPanel.addButton(this.selectButton);
 
-        cancel = new Button("Cancel", new SelectionListener<ButtonEvent>() {
+        cancelButton = new Button("Cancel", new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                cancel();
+                executeCancel();
             }
         });
 
-        cancel.setIcon(BasicWidgetResources.ICONS.cancel());
+        cancelButton.setIcon(BasicWidgetResources.ICONS.cancel());
 
-        formPanel.addButton(cancel);
+        formPanel.addButton(cancelButton);
 
         formPanel.setBottomComponent(this.toolBar);
 
@@ -234,19 +233,21 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
 
         grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
 
+            @Override
             public void handleEvent(BaseEvent be) {
                 if (grid.getSelectionModel().getSelection().size() > 0) {
-                    select.enable();
+                    selectButton.enable();
                 } else {
-                    select.disable();
+                    selectButton.disable();
                 }
             }
         });
 
         grid.addListener(Events.CellDoubleClick, new Listener<BaseEvent>() {
 
+            @Override
             public void handleEvent(BaseEvent be) {
-                select();
+                executeSelect();
             }
         });
 
@@ -256,9 +257,8 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
     /**
      * Remove all beans from the Store and after Hide the window
      */
-    @SuppressWarnings("deprecation")
-    public void cancel() {
-        super.close();
+    public void executeCancel() {
+        super.hide();
         reset();
     }
 
@@ -266,7 +266,7 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
         this.search.reset();
         this.store.removeAll();
         this.toolBar.clear();
-        this.select.disable();
+        this.selectButton.disable();
         this.searchStatus.clearStatus("");
     }
 
@@ -292,7 +292,7 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
 
     public abstract ColumnModel prepareColumnModel();
 
-    public abstract void select();
+    public abstract void executeSelect();
 
     /**
      * @return the initialized

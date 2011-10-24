@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab.binding;
 
-import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldEvent;

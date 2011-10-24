@@ -82,7 +82,6 @@ public class GPFolderInfoBinding extends GeoPlatformBindingWidget<FolderTreeNode
         });
         fp.add(labelField);
         folderInfo = new Label();
-        getModel();
         folderInfo.setIntStyleAttribute("font-size", 8);
         fp.add(folderInfo);
 

@@ -87,7 +87,7 @@ public class GPUser implements Serializable, UserDetails {
     @Column(name = "user_password")
     private String password;
     //
-    @Column(name = "email_address", nullable = false)
+    @Column(name = "email_address", unique = true, nullable = false)
     private String emailAddress;
     /**
      * since memberService integration

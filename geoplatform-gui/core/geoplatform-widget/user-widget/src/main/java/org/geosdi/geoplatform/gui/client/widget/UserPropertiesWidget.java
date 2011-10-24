@@ -45,25 +45,41 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.event.timeout.IManageInsertUserHandler;
+import org.geosdi.geoplatform.gui.client.event.timeout.IManageUpdateUserHandler;
+import org.geosdi.geoplatform.gui.client.event.timeout.ManageDeleteUserEvent;
+import org.geosdi.geoplatform.gui.client.event.timeout.ManageInsertUserEvent;
+import org.geosdi.geoplatform.gui.client.event.timeout.ManageUpdateUserEvent;
 import org.geosdi.geoplatform.gui.client.form.binding.UserPropertiesBinding;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class UserPropertiesWidget extends GeoPlatformWindow {
+public class UserPropertiesWidget extends GeoPlatformWindow
+        implements IManageInsertUserHandler, IManageUpdateUserHandler {
 
     private GPUserManageDetail userDetail;
     private GPUserManageDetail clonedUserDetail;
     private ContentPanel centralPanel;
     private UserPropertiesBinding userPropertiesBinding = new UserPropertiesBinding();
     private ListStore<GPUserManageDetail> store;
+    //
+    private ManageInsertUserEvent manageInsertUserEvent = new ManageInsertUserEvent();
+    private ManageUpdateUserEvent manageUpdateUserEvent = new ManageUpdateUserEvent();
 
     public UserPropertiesWidget(ListStore<GPUserManageDetail> store) {
         super(true);
         this.store = store;
+        TimeoutHandlerManager.addHandler(IManageInsertUserHandler.TYPE, this);
+        TimeoutHandlerManager.addHandler(IManageUpdateUserHandler.TYPE, this);
     }
 
     @Override
@@ -78,60 +94,35 @@ public class UserPropertiesWidget extends GeoPlatformWindow {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                //Add code here to manage save operations on DB
                 if (store.contains(userDetail)) {
-                    UserRemoteImpl.Util.getInstance().updateUser(userDetail, new AsyncCallback<Long>() {
-
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            throw new UnsupportedOperationException("Not supported yet.");
-                        }
-
-                        @Override
-                        public void onSuccess(Long result) {
-                            store.update(userDetail);
-                            store.commitChanges();
-                            hide();
-                        }
-                    });
+                    manageUpdateUser();
                 } else {
-                    UserRemoteImpl.Util.getInstance().insertUser(userDetail, new AsyncCallback<Long>() {
-
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            throw new UnsupportedOperationException("Not supported yet.");
-                        }
-
-                        @Override
-                        public void onSuccess(Long result) {
-                            store.add(userDetail);
-                            store.commitChanges();
-                            hide();
-                        }
-                    });
+                    manageInsertUser();
                 }
             }
         });
         Button closeButton = new Button("Close", new SelectionListener<ButtonEvent>() {
 
             @Override
-            public void componentSelected(ButtonEvent ce) {
+            public void componentSelected(ButtonEvent ce) { // TODO validate before copy
                 if (store.contains(userDetail)) {
                     userDetail.setAuthority(clonedUserDetail.getAuthority());
                     userDetail.setName(clonedUserDetail.getName());
                     userDetail.setUsername(clonedUserDetail.getUsername());
                     userDetail.setEmail(clonedUserDetail.getEmail());
-                    
+
                     store.getRecord(userDetail).reject(true);
                 }
                 hide();
             }
         });
         this.centralPanel.add(this.userPropertiesBinding.getWidget());
-        this.centralPanel.setSize(315, 250);
+        this.centralPanel.setSize(325, 255);
         super.add(this.centralPanel);
         super.getButtonBar().add(saveButton);
         super.getButtonBar().add(closeButton);
+        
+        this.userPropertiesBinding.AddButtonValidator(saveButton);
     }
 
     public void show(GPUserManageDetail userDetail) {
@@ -141,7 +132,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow {
 
     @Override
     public void initSize() {
-        super.setSize(330, 270);
+        super.setSize(340, 270);
     }
 
     @Override
@@ -164,6 +155,53 @@ public class UserPropertiesWidget extends GeoPlatformWindow {
                     clonedUserDetail.setEmail(userDetail.getEmail());
                 }
                 userPropertiesBinding.bindModel(userDetail);
+            }
+        });
+    }
+
+    @Override
+    public void manageInsertUser() {
+        UserRemoteImpl.Util.getInstance().insertUser(userDetail, new AsyncCallback<Long>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                if (caught.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(manageInsertUserEvent));
+                } else {
+                    GeoPlatformMessage.errorMessage("Error", caught.getMessage());
+                }
+            }
+
+            @Override
+            public void onSuccess(Long result) {
+                store.add(userDetail);
+                store.commitChanges();
+                hide();
+
+                GeoPlatformMessage.infoMessage("User added",
+                        "<ul><li>" + userDetail.getUsername() + "</li></ul>");
+            }
+        });
+    }
+
+    @Override
+    public void manageUpdateUser() {
+        UserRemoteImpl.Util.getInstance().updateUser(userDetail, new AsyncCallback<Long>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                if (caught.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(manageUpdateUserEvent));
+                } else {
+                    GeoPlatformMessage.errorMessage("Error", caught.getMessage());
+                }
+            }
+
+            @Override
+            public void onSuccess(Long result) {
+                store.update(userDetail);
+                store.commitChanges();
+                hide();
             }
         });
     }

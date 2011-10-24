@@ -111,15 +111,11 @@ class UserServiceImpl {
      * @return Long the User ID
      */
     public Long insertUser(GPUser user) throws IllegalParameterFault {
-        GPUser duplicateUser = userDao.findByUsername(user.getUsername());
-        if (duplicateUser != null) {
-            throw new IllegalParameterFault("User with username \""
-                    + user.getUsername() + "\" already exists");
-        }
+        this.checkDuplicateUser(user);
 
         List<GPAuthority> authorities = user.getGPAuthorities();
         if (authorities == null || authorities.isEmpty()) {
-            throw new IllegalParameterFault("User must be at least a role");
+            throw new IllegalParameterFault("User must have at least a role");
         }
         for (GPAuthority authority : authorities) {
             this.checkAuthority(authority.getAuthority());
@@ -356,6 +352,20 @@ class UserServiceImpl {
         }
         if (GPRole.fromString(authority) == null) {
             throw new IllegalParameterFault("Authority is incorrect");
+        }
+    }
+
+    private void checkDuplicateUser(GPUser user) throws IllegalParameterFault {
+        GPUser duplicateUser = userDao.findByUsername(user.getUsername());
+        if (duplicateUser != null) {
+            throw new IllegalParameterFault("User with username \""
+                    + user.getUsername() + "\" already exists");
+        }
+
+        duplicateUser = userDao.findByEmail(user.getEmailAddress());
+        if (duplicateUser != null) {
+            throw new IllegalParameterFault("User with email \""
+                    + user.getEmailAddress() + "\" already exists");
         }
     }
 }

@@ -66,4 +66,6 @@ public interface GPUserDAO {
     public int count(ISearch search);
 
     public GPUser findByUsername(String username);
+    
+    public GPUser findByEmail(String email);
 }

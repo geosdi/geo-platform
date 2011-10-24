@@ -102,6 +102,7 @@ public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
     @Override
     public void manageDeleteUser(final GPUserManageDetail user,
             final ListStore<GPUserManageDetail> store) {
+
         UserRemoteImpl.Util.getInstance().deleteUser(user.getId(), new AsyncCallback<Boolean>() {
 
             @Override

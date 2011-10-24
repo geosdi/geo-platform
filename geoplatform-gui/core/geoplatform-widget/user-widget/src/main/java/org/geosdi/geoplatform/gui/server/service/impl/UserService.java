@@ -39,10 +39,13 @@ import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -115,13 +118,35 @@ public class UserService implements IUserService {
     @Override
     public Long insertUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.getCheckLoggedUser(httpServletRequest);
+
+        Long idNewUser = null;
+        try {
+            GPUser newUser = this.convertToGPUser(userDetail);
+            idNewUser = geoPlatformServiceClient.insertUser(newUser);
+        } catch (IllegalParameterFault ipf) {
+            throw new GeoPlatformException(ipf.getMessage());
+        }
+
+        return idNewUser;
     }
 
     @Override
     public Long updateUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.getCheckLoggedUser(httpServletRequest);
+
+        Long idNewUser = null;
+        try {
+            GPUser newUser = this.convertToGPUser(userDetail);
+            idNewUser = geoPlatformServiceClient.updateUser(newUser);
+        } catch (IllegalParameterFault ipf) {
+            throw new GeoPlatformException(ipf.getMessage());
+        } catch (ResourceNotFoundFault rnnf) {
+            throw new GeoPlatformException(rnnf.getMessage());
+        }
+
+        return idNewUser;
     }
 
     @Override
@@ -153,7 +178,6 @@ public class UserService implements IUserService {
         Iterator<String> iterator = authorities.iterator();
         if (iterator.hasNext()) {
             String authority = iterator.next();
-//            System.out.println("*** Authority: " + authority);
             return GPRole.fromString(authority);
         }
         return GPRole.VIEWER;
@@ -165,6 +189,22 @@ public class UserService implements IUserService {
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
+    }
+
+    private GPUser convertToGPUser(IGPUserManageDetail userDetail) {
+        GPUser user = new GPUser();
+
+        user.setName(userDetail.getName());
+        user.setUsername(userDetail.getUsername());
+        user.setName(userDetail.getUsername());
+        user.setEmailAddress(userDetail.getEmail());
+        user.setPassword(userDetail.getPassword());
+
+        GPAuthority authority = new GPAuthority();
+        authority.setAuthority(userDetail.getAuthority().toString());
+        user.setGPAuthorities(Arrays.asList(authority));
+
+        return user;
     }
 
 //    private IGPUserManageDetail convertUser(GPUser user, List<String> authorities) {

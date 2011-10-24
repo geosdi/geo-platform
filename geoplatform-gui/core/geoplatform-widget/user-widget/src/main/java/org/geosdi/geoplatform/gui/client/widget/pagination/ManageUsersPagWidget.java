@@ -71,14 +71,12 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public class ManageUsersPagWidget
         extends GeoPlatformSearchWidget<GPUserManageDetail> {
-    
+
     private UserPropertiesWidget userPropertiesWidget;
 
     public ManageUsersPagWidget() {
         super(true);
     }
-    
-    
 
     @Override
     public void finalizeInitOperations() {

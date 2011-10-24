@@ -48,6 +48,11 @@
             </roles>
         </developer>
     </developers>
+    
+    <properties>
+        <ehcache-core.version>2.4.6</ehcache-core.version>
+        <ehcache-terracotta.version>2.4.6</ehcache-terracotta.version>
+    </properties>
 
     <dependencies>             
 
@@ -280,9 +285,15 @@
         
         <dependency>
             <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <version>2.4.3</version>
-        </dependency>
+            <artifactId>ehcache-core</artifactId>
+            <version>${ehcache-core.version}</version>
+        </dependency>      
+
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-terracotta</artifactId>
+            <version>${ehcache-terracotta.version}</version>
+        </dependency> 
         
 		<!-- CGLIB -->
         <dependency>

@@ -35,10 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.client.form.binding;
 
-import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.Field;
+import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.form.HiddenField;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
 import com.extjs.gxt.ui.client.widget.form.TextField;
@@ -55,11 +56,20 @@ import org.geosdi.geoplatform.gui.global.security.GPRole;
 public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManageDetail> {
 
     private TextField<String> nameField;
-    private TextField<String> userNameField;
+    private TextField<String> emailField;
+    private TextField<String> usernameField;
+    private TextField<String> passwordField;
+    private TextField<String> passwordRepeatField;
     private SimpleComboBox<GPRole> userRoleComboBox;
-    private GPRoleComboBinding roleComboBinding;
+    private RoleComboBinding roleComboBinding;
+    //
+    private FormButtonBinding buttonBinding; // Monitors the valid state of a form and enabled / disabled all buttons. 
 
-//    private GPTreeLabelEvent labelEvent = new TreeChangeLabelEvent();
+//    TextField<String> text = new TextField<String>();
+//     text.setFieldLabel("Name");
+//     text.setEmptyText("Enter your full name");
+//     text.setAllowBlank(false);
+//     text.setMinLength(4);
     @Override
     public FormPanel createFormPanel() {
         FormPanel fp = new FormPanel();
@@ -69,10 +79,27 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.nameField.setFieldLabel("Name");
         this.nameField.setId(GPUserManageDetailKeyValue.NAME.toString());
         this.nameField.setName(GPUserManageDetailKeyValue.NAME.toString());
-        this.userNameField = new TextField<String>();
-        this.userNameField.setFieldLabel("User Name");
-        this.userNameField.setId(GPUserManageDetailKeyValue.USERNAME.toString());
-        this.userNameField.setName(GPUserManageDetailKeyValue.USERNAME.toString());
+
+        this.emailField = new TextField<String>();
+        this.emailField.setFieldLabel("Email");
+        this.emailField.setId(GPUserManageDetailKeyValue.EMAIL.toString());
+        this.emailField.setName(GPUserManageDetailKeyValue.EMAIL.toString());
+
+        this.usernameField = new TextField<String>();
+        this.usernameField.setFieldLabel("Username");
+        this.usernameField.setId(GPUserManageDetailKeyValue.USERNAME.toString());
+        this.usernameField.setName(GPUserManageDetailKeyValue.USERNAME.toString());
+
+        this.passwordField = new TextField<String>();
+        this.passwordField.setPassword(true);
+        this.passwordField.setFieldLabel("Password");        
+//        this.passwordField.setName(GPUserManageDetailKeyValue.PASSWORD.toString());
+
+        this.passwordRepeatField = new TextField<String>();
+        this.passwordRepeatField.setPassword(true);
+        this.passwordRepeatField.setFieldLabel("Retype password");
+//        this.passwordRepeatField.setName("Re-" + GPUserManageDetailKeyValue.PASSWORD.toString());
+
         this.userRoleComboBox = new SimpleComboBox<GPRole>() {
 
             @Override
@@ -81,37 +108,36 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                 roleComboBinding.updateModel();
             }
         };
-        this.userRoleComboBox.setFieldLabel("User Role");
+        this.userRoleComboBox.setFieldLabel("Role");
         this.userRoleComboBox.setEmptyText("Select a role...");
+        this.userRoleComboBox.setId(GPUserManageDetailKeyValue.AUTORITHY.toString());
+        this.userRoleComboBox.setName(GPUserManageDetailKeyValue.AUTORITHY.toString());
         this.userRoleComboBox.setTypeAhead(true);
         this.userRoleComboBox.setTriggerAction(TriggerAction.ALL);
 //        this.userRoleComboBox.setDisplayField(GPUserManageDetailKeyValue.AUTORITHY.toString());
         this.userRoleComboBox.add(GPRole.getAllRoles());
-        this.userRoleComboBox.setId(GPUserManageDetailKeyValue.AUTORITHY.toString());
-        this.userRoleComboBox.setName(GPUserManageDetailKeyValue.AUTORITHY.toString());
 
-
-//        labelField = new TextField<String>();
-//        labelField.setName(GPFolderKeyValue.LABEL.toString());
-//        labelField.setFieldLabel("Label");
-//        labelField.setFireChangeEventOnSetValue(true);
-//        labelField.addKeyListener(new KeyListener() {
-//
-//            @Override
-//            public void componentKeyDown(ComponentEvent event) {
-//                super.componentKeyDown(event);
-//                if (event.getKeyCode() == KeyCodes.KEY_ENTER
-//                        && !labelField.getValue().isEmpty()) {
-//                    getModel().setLabel(labelField.getValue());
-//                }
-//            }
-//        });
-        this.roleComboBinding = new GPRoleComboBinding(this.userRoleComboBox,
-                GPUserManageDetailKeyValue.AUTORITHY.toString());
         fp.add(this.nameField);
-        fp.add(this.userNameField);
+        fp.add(this.emailField);
+        fp.add(this.usernameField);
+        fp.add(this.passwordField);
+        fp.add(this.passwordRepeatField);
         fp.add(this.userRoleComboBox);
         return fp;
+    }
+
+    @Override
+    public void addFieldsBinding() {
+        this.formBinding.addFieldBinding(new NameFieldBinding(this.nameField,
+                GPUserManageDetailKeyValue.NAME.toString()));
+        this.formBinding.addFieldBinding(new UsernameFieldBinding(this.usernameField,
+                GPUserManageDetailKeyValue.USERNAME.toString()));
+        this.formBinding.addFieldBinding(new EmailFieldBinding(this.emailField,
+                GPUserManageDetailKeyValue.EMAIL.toString()));
+
+        this.roleComboBinding = new RoleComboBinding(this.userRoleComboBox,
+                GPUserManageDetailKeyValue.AUTORITHY.toString());
+        this.formBinding.addFieldBinding(this.roleComboBinding);
     }
 
     @Override
@@ -122,15 +148,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         }
     }
 
-    @Override
-    public void addFieldsBinding() {
-        this.formBinding.addFieldBinding(new GPUserNameFieldBinding(this.userNameField,
-                GPUserManageDetailKeyValue.USERNAME.toString()));
-        this.formBinding.addFieldBinding(new GPUserFieldBinding(this.nameField,
-                GPUserManageDetailKeyValue.NAME.toString()));
-        this.formBinding.addFieldBinding(this.roleComboBinding);
-    }
-
     /**
      * @author Nazzareno Sileno - CNR IMAA geoSDI Group
      * @email nazzareno.sileno@geosdi.org
@@ -138,15 +155,15 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
      * Internal Class to map bi-directional Binding
      * 
      */
-    private class GPRoleComboBinding extends GPFieldBinding {
+    private class RoleComboBinding extends GPFieldBinding {
 
-        public GPRoleComboBinding(Field field, String property) {
+        public RoleComboBinding(Field field, String property) {
             super(field, property);
         }
 
         @Override //From model to view
         public void updateField(boolean updateOriginalValue) {
-//            System.out.println("Combo: Updating view");
+            System.out.println("Combo: Updating view");
             GPUserManageDetail userDetail = ((GPUserManageDetail) model);
             if (userDetail.getAuthority() != null) {
                 userRoleComboBox.setValue(userRoleComboBox.findModel(userDetail.getAuthority()));
@@ -155,7 +172,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
         @Override //From view to model
         public void setModelProperty(Object val) {
-//            System.out.println("Combo: Updating model");
+            System.out.println("Combo: Updating model");
             if (val != null && val instanceof SimpleComboValue) {
                 SimpleComboValue<GPRole> roleString = (SimpleComboValue) val;
                 GPUserManageDetail userDetail = ((GPUserManageDetail) model);
@@ -166,39 +183,76 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         }
     }
 
-    private class GPUserNameFieldBinding extends GPFieldBinding {
+    private class UsernameFieldBinding extends GPFieldBinding {
 
-        public GPUserNameFieldBinding(Field field, String property) {
+        public UsernameFieldBinding(Field field, String property) {
             super(field, property);
         }
 
         @Override
         public void setModelProperty(Object val) {
+            System.out.println("Username: Updating model");
             ((GPUserManageDetail) model).setUsername(val != null ? (String) val : "");
         }
 
         @Override
         public void updateField(boolean updateOriginalValue) {
+            System.out.println("Username: Updating view");
             GPUserManageDetail userDetail = (GPUserManageDetail) model;
-            userNameField.setValue(userDetail.getUsername());
+            usernameField.setValue(userDetail.getUsername());
         }
     }
 
-    private class GPUserFieldBinding extends GPFieldBinding {
+    private class NameFieldBinding extends GPFieldBinding {
 
-        public GPUserFieldBinding(Field field, String property) {
+        public NameFieldBinding(Field field, String property) {
             super(field, property);
         }
 
         @Override
         public void setModelProperty(Object val) {
+            System.out.println("User: Updating model");
             ((GPUserManageDetail) model).setName(val != null ? (String) val : "");
         }
 
         @Override
         public void updateField(boolean updateOriginalValue) {
+            System.out.println("User: Updating view");
             GPUserManageDetail userDetail = (GPUserManageDetail) model;
             nameField.setValue(userDetail.getName());
+        }
+    }
+
+    private class EmailFieldBinding extends GPFieldBinding {
+
+        public EmailFieldBinding(Field field, String property) {
+            super(field, property);
+        }
+
+        @Override
+        public void setModelProperty(Object val) {
+            System.out.println("Email: Updating model");
+            ((GPUserManageDetail) model).setEmail(val != null ? (String) val : "");
+        }
+
+        @Override
+        public void updateField(boolean updateOriginalValue) {
+            System.out.println("Email: Updating view");
+            GPUserManageDetail userDetail = (GPUserManageDetail) model;
+            nameField.setValue(userDetail.getEmail());
+        }
+    }
+
+    private class PasswordFieldBinding extends GPFieldBinding { // TODO
+
+        public PasswordFieldBinding(Field field, String property) {
+            super(field, property);
+        }
+
+        @Override
+        public void setModelProperty(Object val) {
+            System.out.println("Password: Updating model");
+            ((GPUserManageDetail) model).setPassword(val != null ? (String) val : "");
         }
     }
 }

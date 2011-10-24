@@ -120,13 +120,15 @@ public class UserPropertiesWidget extends GeoPlatformWindow {
                     userDetail.setAuthority(clonedUserDetail.getAuthority());
                     userDetail.setName(clonedUserDetail.getName());
                     userDetail.setUsername(clonedUserDetail.getUsername());
+                    userDetail.setEmail(clonedUserDetail.getEmail());
+                    
                     store.getRecord(userDetail).reject(true);
                 }
                 hide();
             }
         });
         this.centralPanel.add(this.userPropertiesBinding.getWidget());
-        this.centralPanel.setSize(315, 135);
+        this.centralPanel.setSize(315, 250);
         super.add(this.centralPanel);
         super.getButtonBar().add(saveButton);
         super.getButtonBar().add(closeButton);
@@ -139,7 +141,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow {
 
     @Override
     public void initSize() {
-        super.setSize(330, 170);
+        super.setSize(330, 270);
     }
 
     @Override
@@ -159,6 +161,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow {
                     clonedUserDetail.setAuthority(userDetail.getAuthority());
                     clonedUserDetail.setName(userDetail.getName());
                     clonedUserDetail.setUsername(userDetail.getUsername());
+                    clonedUserDetail.setEmail(userDetail.getEmail());
                 }
                 userPropertiesBinding.bindModel(userDetail);
             }

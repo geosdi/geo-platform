@@ -41,7 +41,12 @@ package org.geosdi.geoplatform.gui.client.model;
  */
 public enum GPUserManageDetailKeyValue {
 
-    USERNAME("username"), NAME("name"), AUTORITHY("authority");
+    USERNAME("username"),
+    PASSWORD("password"),
+    NAME("name"),
+    AUTORITHY("authority"),
+    EMAIL("email");
+    //
     private String value;
 
     GPUserManageDetailKeyValue(String theValue) {

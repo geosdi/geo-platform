@@ -121,6 +121,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     @Override
     public void setEmail(String email) {
         this.email = email;
+        super.set(GPUserManageDetailKeyValue.EMAIL.toString(), this.email);
     }
 
     /**
@@ -160,6 +161,36 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
 
     /*
      * (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GPUserManageDetail other = (GPUserManageDetail) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
+        return hash;
+    }
+
+    /*
+     * (non-Javadoc)
      * @see java.lang.Object#toString()
      */
     @Override
@@ -171,5 +202,5 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
         str.append(", email=").append(email);
         str.append(", authority=").append(authority);
         return str.append('}').toString();
-    }   
+    }
 }

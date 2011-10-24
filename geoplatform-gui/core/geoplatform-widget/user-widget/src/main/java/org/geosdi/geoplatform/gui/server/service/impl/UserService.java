@@ -137,11 +137,13 @@ public class UserService implements IUserService {
         }
     }
 
+    // All properties unless the password
     private GPUserManageDetail convertToGPUserManageDetail(UserDTO userDTO) {
         GPUserManageDetail user = new GPUserManageDetail();
         user.setId(userDTO.getId());
         user.setName(userDTO.getName());
         user.setUsername(userDTO.getUsername());
+        user.setEmail(userDTO.getEmailAddress());
         user.setAuthority(this.convertToGPRole(userDTO.getRoles()));
         return user;
     }

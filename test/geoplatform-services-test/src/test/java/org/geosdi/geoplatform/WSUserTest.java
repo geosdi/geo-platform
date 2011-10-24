@@ -37,13 +37,15 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import junit.framework.Assert;
+import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.junit.Test;
@@ -67,7 +69,6 @@ public class WSUserTest extends ServiceTest {
         if (userList != null) {
             for (Iterator<UserDTO> it = userList.iterator(); it.hasNext();) {
                 logger.info("\n*** USER into DB:\n{}\n***", it.next());
-
             }
         }
     }
@@ -83,27 +84,92 @@ public class WSUserTest extends ServiceTest {
 
         // Number of User Like
         long numUsersLike = gpWSClient.getUsersCount(new SearchRequest(usernameTest));
-        Assert.assertEquals("Number of User Like", numUsersLike, new Long(1).longValue());
+        Assert.assertEquals("Number of User Like", new Long(1).longValue(), numUsersLike);
 
         // Get User from Id
         // Get UserDTO from Id
         UserDTO userDTOFromWS = gpWSClient.getShortUser(idUserTest);
         Assert.assertNotNull(userDTOFromWS);
-        Assert.assertEquals("Error found User from Id", idUserTest, userDTOFromWS.getId().longValue());
+        Assert.assertEquals("Error found UserDTO from Id", idUserTest, userDTOFromWS.getId().longValue());
         // Get GPUser from Id
         GPUser userFromWS = gpWSClient.getUserDetail(idUserTest);
         Assert.assertNotNull(userFromWS);
-        Assert.assertEquals("Error found User from Id", idUserTest, userFromWS.getId().longValue());
+        Assert.assertEquals("Error found GPUser from Id", idUserTest, userFromWS.getId().longValue());
 
         // Get User from Username
         // Get UserDTO from Username
         userDTOFromWS = gpWSClient.getShortUserByName(new SearchRequest(usernameTest));
         Assert.assertNotNull(userDTOFromWS);
-        Assert.assertEquals("Error found User from Username", idUserTest, userDTOFromWS.getId().longValue());
+        Assert.assertEquals("Error found UserDTO from Username", idUserTest, userDTOFromWS.getId().longValue());
         // Get GPUser from Username
         userFromWS = gpWSClient.getUserDetailByName(new SearchRequest(usernameTest));
         Assert.assertNotNull(userFromWS);
-        Assert.assertEquals("Error found User from Username", idUserTest, userFromWS.getId().longValue());
+        Assert.assertEquals("Error found GPUser from Username", idUserTest, userFromWS.getId().longValue());
+    }
+
+    @Test
+    public void testUserWithNoRoles() {
+        try {
+            super.createAndInsertUser("user-no-roles");
+            Assert.fail("User must have at least a role");
+        } catch (IllegalParameterFault ex) {
+        }
+    }
+
+    @Test
+    public void testUserWithIncorrectRole() {
+        GPAuthority authority = new GPAuthority();
+        authority.setAuthority("Incorrect");
+
+        GPUser user = super.createUser("user-incorrect-role");
+        user.setGPAuthorities(Arrays.asList(authority));
+
+        try {
+            gpWSClient.insertUser(user);
+            Assert.fail("User have an incorrect role");
+        } catch (IllegalParameterFault ex) {
+        }
+    }
+
+    @Test
+    public void testUserWithSingleRole() throws ResourceNotFoundFault {
+        List<GPAuthority> authorities = gpWSClient.getUserGPAuthorities(usernameTest);
+        Assert.assertNotNull("Authorities null", authorities);
+        Assert.assertEquals("Number of Authorities of " + usernameTest, 1, authorities.size());
+
+        GPAuthority authority = authorities.get(0);
+        Assert.assertNotNull(authority);
+        Assert.assertEquals("Authority string", GPRole.USER.toString(), authority.getAuthority());
+        Assert.assertEquals("Authority username", usernameTest, authority.getUsername());
+        Assert.assertEquals("Authority user.id", userTest.getId(), authority.getUser().getId());
+    }
+
+    @Test
+    public void testUserWithMultiRole() throws IllegalParameterFault, ResourceNotFoundFault {
+        String usernameMultiRole = "username-multi-role";
+        Long idUser = super.createAndInsertUser(usernameMultiRole, GPRole.ADMIN, GPRole.VIEWER);
+        GPUser user = gpWSClient.getUserDetail(idUser);
+
+        try {
+            List<GPAuthority> authorities = gpWSClient.getUserGPAuthorities(usernameMultiRole);
+            Assert.assertNotNull(authorities);
+            Assert.assertEquals("Number of Authorities of " + usernameMultiRole, 2, authorities.size());
+
+            GPAuthority authority = authorities.get(0);
+            Assert.assertNotNull(authority);
+            Assert.assertEquals("Authority string", GPRole.ADMIN.toString(), authority.getAuthority());
+            Assert.assertEquals("Authority username", usernameMultiRole, authority.getUsername());
+            Assert.assertEquals("Authority user.id", user.getId(), authority.getUser().getId());
+
+            authority = authorities.get(1);
+            Assert.assertNotNull(authority);
+            Assert.assertEquals("Authority string", GPRole.VIEWER.toString(), authority.getAuthority());
+            Assert.assertEquals("Authority username", usernameMultiRole, authority.getUsername());
+            Assert.assertEquals("Authority user.id", user.getId(), authority.getUser().getId());
+        } finally {
+            boolean check = gpWSClient.deleteUser(idUser);
+            Assert.assertTrue(check);
+        }
     }
 
     @Test

@@ -44,6 +44,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-api</artifactId>
+            <version>${geoplatform-version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.geosdi.geoplatform</groupId>
@@ -62,7 +68,7 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-impl</artifactId>
             <scope>runtime</scope>
-        </dependency>        
+        </dependency>
 
                 <!-- JETTY -->
         <dependency>
@@ -128,7 +134,7 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
     </dependencies>
 
 </project>

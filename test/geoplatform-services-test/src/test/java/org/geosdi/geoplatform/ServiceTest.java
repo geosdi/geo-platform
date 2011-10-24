@@ -40,6 +40,7 @@ package org.geosdi.geoplatform;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.junit.After;
 import org.junit.Assert;
@@ -63,6 +64,7 @@ import org.geosdi.geoplatform.core.model.GPUserProjects;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.core.model.Utility;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 
@@ -107,7 +109,7 @@ public abstract class ServiceTest {
         logger.trace("\n\t@@@ {}.setUp @@@", this.getClass().getSimpleName());
 
         // Insert User
-        idUserTest = this.createAndInsertUser(usernameTest);
+        idUserTest = this.createAndInsertUser(usernameTest, GPRole.USER);
         userTest = gpWSClient.getUserDetailByName(new SearchRequest(usernameTest));
         // Insert Project
         idProjectTest = this.createAndInsertProject("project_test_ws", false, 2, new Date(System.currentTimeMillis()));
@@ -135,8 +137,15 @@ public abstract class ServiceTest {
     }
 
     // Create and insert a User
-    protected long createAndInsertUser(String username) throws IllegalParameterFault {
+    protected long createAndInsertUser(String username, GPRole... roles)
+            throws IllegalParameterFault {
         GPUser user = createUser(username);
+
+        if (roles.length > 0) {
+            List<GPAuthority> authorities = this.createAuthorities(roles);
+            user.setGPAuthorities(authorities);
+        }
+
         logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
         long idUser = gpWSClient.insertUser(user);
         logger.debug("\n*** Id ASSIGNED at the User in the DB: {} ***", idUser);
@@ -144,7 +153,7 @@ public abstract class ServiceTest {
         return idUser;
     }
 
-    private GPUser createUser(String username) {
+    protected GPUser createUser(String username) {
         GPUser user = new GPUser();
         user.setUsername(username);
         user.setName("Complete name of " + username);
@@ -153,6 +162,17 @@ public abstract class ServiceTest {
         user.setPassword(Utility.md5hash("pwd_" + username));
         user.setSendEmail(true);
         return user;
+    }
+
+    private List<GPAuthority> createAuthorities(GPRole... roles) {
+        List<GPAuthority> authorities = new ArrayList<GPAuthority>();
+        for (GPRole role : roles) {
+            GPAuthority authority = new GPAuthority();
+            authority.setAuthority(role.toString());
+
+            authorities.add(authority);
+        }
+        return authorities;
     }
 
     // Delete (with assert) a User

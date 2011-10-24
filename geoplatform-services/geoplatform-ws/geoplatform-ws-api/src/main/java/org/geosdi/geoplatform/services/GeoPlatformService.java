@@ -48,6 +48,7 @@ import org.codehaus.jra.HttpResource;
 import org.codehaus.jra.Post;
 import org.codehaus.jra.Put;
 
+import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
@@ -153,8 +154,14 @@ public interface GeoPlatformService {
 
     @Get
     @HttpResource(location = "/users/{id}/authorities")
-    @WebResult(name = "Authority")
+    @WebResult(name = "Authorities")
     List<String> getUserAuthorities(@WebParam(name = "userId") Long userId)
+            throws ResourceNotFoundFault;
+
+    @HttpResource(location = "/users/{id}/authorities")
+    @WebResult(name = "Authorities")
+    List<GPAuthority> getUserGPAuthorities(
+            @WebParam(name = "username") String username)
             throws ResourceNotFoundFault;
     //</editor-fold>
 

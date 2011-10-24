@@ -38,6 +38,7 @@
 package org.geosdi.geoplatform.services;
 
 import java.util.ArrayList;
+import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import java.util.List;
@@ -336,6 +337,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public List<String> getUserAuthorities(Long userId)
             throws ResourceNotFoundFault {
         return userServiceDelegate.getUserAuthorities(userId);
+    }
+
+    @Override
+    public List<GPAuthority> getUserGPAuthorities(String username)
+            throws ResourceNotFoundFault {
+        return userServiceDelegate.getUserGPAuthorities(username);
     }
     //</editor-fold>
 

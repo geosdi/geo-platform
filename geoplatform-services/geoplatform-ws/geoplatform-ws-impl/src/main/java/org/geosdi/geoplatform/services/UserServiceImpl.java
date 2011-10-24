@@ -50,8 +50,8 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPUserProjects;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
-import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.slf4j.Logger;
@@ -110,7 +110,6 @@ class UserServiceImpl {
      * @param user the User object to insert
      * @return Long the User ID
      */
-    // TODO Manage authorities
     public Long insertUser(GPUser user) throws IllegalParameterFault {
         GPUser duplicateUser = userDao.findByUsername(user.getUsername());
         if (duplicateUser != null) {
@@ -118,9 +117,21 @@ class UserServiceImpl {
                     + user.getUsername() + "\" already exists");
         }
 
+        List<GPAuthority> authorities = user.getGPAuthorities();
+        if (authorities == null || authorities.isEmpty()) {
+            throw new IllegalParameterFault("User must be at least a role");
+        }
+        for (GPAuthority authority : authorities) {
+            this.checkAuthority(authority.getAuthority());
+            authority.setUser(user);
+            authority.setUsername(user.getUsername());
+        }
+
         // Always insert users as enabled
         user.setEnabled(true);
         userDao.persist(user);
+
+        authorityDao.persist(authorities.toArray(new GPAuthority[authorities.size()]));
 
         return user.getId();
     }
@@ -156,7 +167,6 @@ class UserServiceImpl {
      *
      * @throws ResourceNotFoundFault
      */
-    // TODO Manage authorities
     public boolean deleteUser(Long userId) throws ResourceNotFoundFault {
         GPUser user = this.getUserById(userId);
 
@@ -250,7 +260,6 @@ class UserServiceImpl {
 
         List<GPUser> userList = userDao.search(searchCriteria);
         for (GPUser user : userList) {
-            System.out.println("\nppp " + user);
             user.setGPAuthorities(this.getGPAuthorities(user.getUsername()));
         }
 
@@ -300,6 +309,10 @@ class UserServiceImpl {
         return authorities;
     }
 
+    public List<GPAuthority> getUserGPAuthorities(String username) throws ResourceNotFoundFault {
+        return this.getGPAuthorities(username);
+    }
+
     private GPUser getUserById(Long userId) throws ResourceNotFoundFault {
         GPUser user = userDao.find(userId);
         if (user == null) {
@@ -323,10 +336,9 @@ class UserServiceImpl {
 
     private List<GPAuthority> getGPAuthorities(String username) throws ResourceNotFoundFault {
         List<GPAuthority> authorities = authorityDao.findByUsername(username);
-        if (authorities == null) {
-            throw new ResourceNotFoundFault("Username \"" + username + "\" not found");
+        if (authorities.isEmpty()) {
+            throw new ResourceNotFoundFault("User not found (username=" + username + ")");
         }
-        logger.trace("\n*** #Authorities: {} ***", authorities.size());
         return authorities;
     }
 
@@ -336,5 +348,14 @@ class UserServiceImpl {
             authorityName.add(authority.getAuthority());
         }
         return authorityName;
+    }
+
+    private void checkAuthority(String authority) throws IllegalParameterFault {
+        if (authority == null || authority.trim().equals("")) {
+            throw new IllegalParameterFault("Authority is null or empty");
+        }
+        if (GPRole.fromString(authority) == null) {
+            throw new IllegalParameterFault("Authority is incorrect");
+        }
     }
 }

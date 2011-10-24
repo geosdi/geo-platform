@@ -108,7 +108,7 @@ public class GPUser implements Serializable, UserDetails {
     private Boolean credentialsNonExpired;
     //
     @Transient
-    private Collection<GPAuthority> authorities;
+    private List<GPAuthority> authorities;
     // Hibernate with this list remove "on delete cascade" on FK of gp_user_projects(user_id)
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 //    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
@@ -241,7 +241,7 @@ public class GPUser implements Serializable, UserDetails {
     /**
      * @return the gpAuthorities
      */
-    public Collection<GPAuthority> getGPAuthorities() {
+    public List<GPAuthority> getGPAuthorities() {
         return authorities;
     }
 
@@ -301,6 +301,11 @@ public class GPUser implements Serializable, UserDetails {
         str.append(", accountNonExpired=").append(accountNonExpired);
         str.append(", accountNonLocked=").append(accountNonLocked);
         str.append(", credentialsNonExpired=").append(credentialsNonExpired);
+        if (authorities != null) {
+            str.append(", authorities.size=").append(authorities.size());
+        } else {
+            str.append(", authorities=NULL");
+        }
         return str.append('}').toString();
     }
 

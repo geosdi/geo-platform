@@ -83,8 +83,9 @@ public enum GPRole {
                 return VIEWER;
             } else if (role.equals(USER.role)) {
                 return USER;
+            } else if (role.equals(ADMIN.role)) {
+                return ADMIN;
             }
-            return ADMIN;
         }
         return null;
     }

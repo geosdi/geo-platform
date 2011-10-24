@@ -273,7 +273,7 @@ public abstract class BaseDAOTest {
         logger.debug("\n*** User SAVED:\n{}\n***", user);
 
         if (roles.length > 0) {
-            List<GPAuthority> authorities = this.createAuthorities(user.getUsername(), roles);
+            List<GPAuthority> authorities = this.createAuthorities(user, roles);
             user.setGPAuthorities(authorities);
 
             for (GPAuthority authority : authorities) {
@@ -285,12 +285,10 @@ public abstract class BaseDAOTest {
         return user;
     }
 
-    private List<GPAuthority> createAuthorities(String username,
-            GPRole... roles) {
+    private List<GPAuthority> createAuthorities(GPUser user, GPRole... roles) {
         List<GPAuthority> authorities = new ArrayList<GPAuthority>();
         for (GPRole role : roles) {
-            GPAuthority auth = new GPAuthority(username, role.toString());
-            authorities.add(auth);
+            authorities.add(new GPAuthority(user, role.toString()));
         }
         return authorities;
     }

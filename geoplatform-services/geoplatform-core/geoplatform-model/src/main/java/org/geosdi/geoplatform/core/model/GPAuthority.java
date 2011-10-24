@@ -88,11 +88,6 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     public GPAuthority() {
     }
 
-    public GPAuthority(String username, String authority) {
-        this.username = username;
-        this.authority = authority;
-    }
-
     public GPAuthority(GPUser user, String authority) {
         this.user = user;
         this.username = user.getUsername();
@@ -158,7 +153,7 @@ public class GPAuthority implements GrantedAuthority, Serializable {
      * @param user
      *            the user to set
      */
-    public void setUsers(GPUser user) {
+    public void setUser(GPUser user) {
         this.user = user;
     }
 

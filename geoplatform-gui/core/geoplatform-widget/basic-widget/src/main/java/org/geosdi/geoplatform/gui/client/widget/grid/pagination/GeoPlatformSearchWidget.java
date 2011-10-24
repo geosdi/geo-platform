@@ -93,6 +93,7 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
     protected SearchStatus searchStatus;
     protected String searchText;
     private boolean initialized;
+    private int pageSize = 25;
 
     /**
      *
@@ -104,14 +105,28 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
         }
     }
 
+    public GeoPlatformSearchWidget(boolean lazy, int pageSize) {
+        this.pageSize = pageSize;
+        if (!lazy) {
+            init();
+        }
+    }
+
     protected void init() {
         if (!isInitialized()) {
             initWindow();
             initVerticalPanel();
             initFormPanel();
-            add(vp);
+            this.finalizeInitOperations();
             this.initialized = true;
         }
+    }
+
+    /**
+     * Remember to call super.finalizeInitOperations when override this method
+     */
+    public void finalizeInitOperations() {
+        add(vp);
     }
 
     private void initWindow() {
@@ -276,6 +291,15 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
     }
 
     /**
+     * 
+     * @param position
+     * @param button 
+     */
+    public void addButton(int position, Button button) {
+        this.formPanel.getButtonBar().getItems().add(position, button);
+    }
+
+    /**
      * Set the correct Status Icon Style
      */
     public void setSearchStatus(EnumSearchStatus status,
@@ -299,5 +323,12 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
      */
     public boolean isInitialized() {
         return initialized;
+    }
+
+    /**
+     * @return the pageSize
+     */
+    public int getPageSize() {
+        return pageSize;
     }
 }

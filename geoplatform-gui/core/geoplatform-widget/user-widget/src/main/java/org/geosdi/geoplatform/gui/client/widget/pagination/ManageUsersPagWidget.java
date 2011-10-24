@@ -71,31 +71,29 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public class ManageUsersPagWidget
         extends GeoPlatformSearchWidget<GPUserManageDetail> {
-
-    private int pageSize = 10;
+    
     private UserPropertiesWidget userPropertiesWidget;
 
     public ManageUsersPagWidget() {
         super(true);
     }
+    
+    
 
     @Override
-    protected void init() {
-        if (!super.isInitialized()) {
-            super.init();
-            super.selectButton.setText("Modify User");
-            super.search.setFieldLabel("Find User");
-            this.userPropertiesWidget = new UserPropertiesWidget(super.store);
-            super.formPanel.getButtonBar().getItems().add(1, 
-                    new Button("Add User", BasicWidgetResources.ICONS.logged_user(), 
-                            new SelectionListener<ButtonEvent>() {
+    public void finalizeInitOperations() {
+        super.finalizeInitOperations();
+        super.selectButton.setText("Modify User");
+        super.search.setFieldLabel("Find User");
+        this.userPropertiesWidget = new UserPropertiesWidget(super.store);
+        super.addButton(1, new Button("Add User", BasicWidgetResources.ICONS.logged_user(),
+                new SelectionListener<ButtonEvent>() {
 
-                @Override
-                public void componentSelected(ButtonEvent ce) {
-                    userPropertiesWidget.show(new GPUserManageDetail());
-                }
-            }));
-        }
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        userPropertiesWidget.show(new GPUserManageDetail());
+                    }
+                }));
     }
 
     @Override
@@ -114,14 +112,14 @@ public class ManageUsersPagWidget
             @Override
             public void windowShow(WindowEvent we) {
                 searchText = "";
-                loader.load(0, pageSize);
+                loader.load(0, getPageSize());
             }
         });
     }
 
     @Override
     public void createStore() {
-        super.toolBar = new PagingToolBar(pageSize);
+        super.toolBar = new PagingToolBar(super.getPageSize());
 
         super.proxy = new RpcProxy<PagingLoadResult<GPUserManageDetail>>() {
 

@@ -121,6 +121,7 @@ public abstract class BaseDAOTest {
     protected final String usernameUserTest = "user_test_0";
     protected GPUser adminTest = null;
     protected GPUser userTest = null;
+    protected GPUser sigvTest = null;
     protected GPProject adminProject = null;
     protected GPProject userProject = null;
     // ACL
@@ -265,6 +266,8 @@ public abstract class BaseDAOTest {
         this.insertUser("viewer_pag_15", GPRole.VIEWER);
         this.insertUser("viewer_pag_16", GPRole.VIEWER);
         this.insertUser("viewer_pag_17", GPRole.VIEWER);
+        // SIGV User
+        this.sigvTest = this.insertUser("SIGV", GPRole.ADMIN);
     }
 
     protected GPUser insertUser(String name, GPRole... roles) {

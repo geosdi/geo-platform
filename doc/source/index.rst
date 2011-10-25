@@ -7,6 +7,6 @@ Welcome to the Geo-Platform Developer Manual.  The manual is for those who want 
    :maxdepth: 2
 
 
-   plugin/index
+   geoplatform-gui/core/index
 
 

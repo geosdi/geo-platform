@@ -131,7 +131,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
         super.show();
 
         // TODO REF Move...
-        FormButtonBinding formButton = userPropertiesBinding.getBottonBinding();
+        FormButtonBinding formButton = userPropertiesBinding.getButtonBinding();
         formButton.addButton(saveButton);
         formButton.startMonitoring();
     }

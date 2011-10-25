@@ -143,7 +143,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         return fp;
     }
 
-    public FormButtonBinding getBottonBinding() {
+    public FormButtonBinding getButtonBinding() {
         return buttonBinding;
     }
 

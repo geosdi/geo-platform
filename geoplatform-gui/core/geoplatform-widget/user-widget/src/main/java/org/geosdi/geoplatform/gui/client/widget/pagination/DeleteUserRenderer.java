@@ -119,7 +119,7 @@ public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
             @Override
             public void onSuccess(Boolean result) {
                 store.remove(user);
-                GeoPlatformMessage.infoMessage("User deleted", "<ul><li>" + user.getUsername() + "</li></ul>");
+                GeoPlatformMessage.infoMessage("User successfully deleted", "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
     }

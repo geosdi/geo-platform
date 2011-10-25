@@ -62,13 +62,31 @@ public class GPRegEx {
     public static final RegExp RE_FUSION_TABLES_QS_QUERY = RegExp.compile("query=select[ \\+]col\\d+[ \\+]from[ \\+]\\d+[ \\+]"); // URL Encoding replace + with a space
     public static final RegExp RE_FUSION_TABLES_QS_O = RegExp.compile("o=kmllink");
     public static final RegExp RE_FUSION_TABLES_QS_G = RegExp.compile("g=col\\d+");
-    //
+    // URL
     private static final RegExp RE_FORMAT_QS = RegExp.compile("(\\?|&)", "g"); // g --> replaceAll
+    //
+    private static final RegExp RE_EMPTY_STRING = RegExp.compile("^\\s*$");
+    // User properties
+    public static final RegExp RE_COMPLETE_NAME = RegExp.compile("[^ ]+ [^ ]+");
+    public static final RegExp RE_EMAIL = RegExp.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$", "i"); // i --> case insensitive
+    public static final RegExp RE_USERNAME = RegExp.compile("[a-zA-Z0-9._-]{4,}$");    
 
     private GPRegEx() {
     }
 
     public static String printPrettyURL(String urlEncoding) {
         return RE_FORMAT_QS.replace(urlEncoding, "\n$1");
+    }
+
+    /*
+     * Checks if value is null or empty
+     * 
+     * @param value
+     */
+    public static boolean empty(String value) {
+        if (value == null) {
+            return true;
+        }
+        return RE_EMPTY_STRING.test(value);
     }
 }

@@ -157,7 +157,7 @@ public abstract class ServiceTest {
         GPUser user = new GPUser();
         user.setUsername(username);
         user.setName("Complete name of " + username);
-        user.setEmailAddress(username + "@test");
+        user.setEmailAddress(username + "@test.org");
         user.setEnabled(true);
         user.setPassword(Utility.md5hash("pwd_" + username));
         user.setSendEmail(true);

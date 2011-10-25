@@ -42,6 +42,7 @@ import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -74,6 +75,8 @@ public class UserPropertiesWidget extends GeoPlatformWindow
     //
     private ManageInsertUserEvent manageInsertUserEvent = new ManageInsertUserEvent();
     private ManageUpdateUserEvent manageUpdateUserEvent = new ManageUpdateUserEvent();
+    //
+    Button saveButton;
 
     public UserPropertiesWidget(ListStore<GPUserManageDetail> store) {
         super(true);
@@ -90,7 +93,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
     private void addCentralPanel() {
         this.centralPanel = new ContentPanel(new FlowLayout());
         this.centralPanel.setHeaderVisible(false);
-        Button saveButton = new Button("Save", new SelectionListener<ButtonEvent>() {
+        saveButton = new Button("Save", new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -121,13 +124,16 @@ public class UserPropertiesWidget extends GeoPlatformWindow
         super.add(this.centralPanel);
         super.getButtonBar().add(saveButton);
         super.getButtonBar().add(closeButton);
-        
-        this.userPropertiesBinding.AddButtonValidator(saveButton);
     }
 
     public void show(GPUserManageDetail userDetail) {
         this.userDetail = userDetail;
         super.show();
+
+        // TODO REF Move...
+        FormButtonBinding formButton = userPropertiesBinding.getBottonBinding();
+        formButton.addButton(saveButton);
+        formButton.startMonitoring();
     }
 
     @Override
@@ -178,7 +184,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
                 store.commitChanges();
                 hide();
 
-                GeoPlatformMessage.infoMessage("User added",
+                GeoPlatformMessage.infoMessage("User successfully added",
                         "<ul><li>" + userDetail.getUsername() + "</li></ul>");
             }
         });
@@ -202,6 +208,9 @@ public class UserPropertiesWidget extends GeoPlatformWindow
                 store.update(userDetail);
                 store.commitChanges();
                 hide();
+
+                GeoPlatformMessage.infoMessage("User successfully modify",
+                        "<ul><li>" + userDetail.getUsername() + "</li></ul>");
             }
         });
     }

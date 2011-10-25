@@ -1,21 +1,20 @@
 Events for menu' item check
 ========================================
 
-Below there is a schema that show handlers that manage
-the menu' item check event
+Below there is a schema that show events fired when a
+check menu' item is checked
 
-.. image:: ChangeCheckHandler.png
+.. image:: ActionCheckEvent.png
 
-'GlobalChangeCheckActionHandler' is the tagging super interface
-that identifies all handlers that manage checks on a generic menu'
-item.
+'MenuActionCheckEvent' is the abstract class that identifies all 
+events fired when a check menu' item is checked.
 
-'GeocodingChangeCheckActionHandler' is the interface that specialize
-the handler to manage only events fired from geocoding menu' item
+'GeocodingMenuActionCheckEvent' is the class that specialize the
+event fired when the geocoding check menu' item is selected
 
 .. image:: Geocoding.png
 
-'LayerChangeCheckActionHandler' is the interface that specialize
-the handler to manage only events fired from layer menu' item
+'LayerMenuActionCheckEvent' is the class that specialize the
+event fired when the layer check menu' item is selected
 
 .. image:: Layer.png

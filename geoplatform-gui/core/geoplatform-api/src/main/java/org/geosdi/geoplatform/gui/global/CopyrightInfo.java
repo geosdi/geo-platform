@@ -48,6 +48,7 @@ public class CopyrightInfo implements Serializable {
      */
     private static final long serialVersionUID = 3539309129736218989L;
     private String key;
+    private String version;
     private String copyright;
     private String licenseName;
     private String licenseUrl;
@@ -65,6 +66,20 @@ public class CopyrightInfo implements Serializable {
      */
     public void setKey(String key) {
         this.key = key;
+    }
+
+    /**
+     * @return the version
+     */
+    public String getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     /**
@@ -112,15 +127,10 @@ public class CopyrightInfo implements Serializable {
         this.licenseUrl = licenseUrl;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
-        return "CopyrightInfo [key=" + key + ", copyright=" + copyright
-                + ", licenseName=" + licenseName + ", licenseUrl=" + licenseUrl
-                + "]";
+        return "CopyrightInfo{" + "key=" + key + ", version=" + version
+                + ", copyright=" + copyright + ", licenseName="
+                + licenseName + ", licenseUrl=" + licenseUrl + '}';
     }
 }

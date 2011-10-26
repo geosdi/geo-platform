@@ -71,29 +71,29 @@ import org.springframework.stereotype.Service;
  */
 @Service("userService")
 public class UserService implements IUserService {
-    
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GeoPlatformService geoPlatformServiceClient;
     @Autowired
     private SessionUtility sessionUtility;
-    
+
     @Override
     public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
             String searchText, HttpServletRequest httpServletRequest) {
         GPUser user = this.getCheckLoggedUser(httpServletRequest);
-        
+
         int start = config.getOffset();
-        
+
         SearchRequest srq = new SearchRequest("%" + searchText + "%");
-        
+
         Long usersCount = this.geoPlatformServiceClient.getUsersCount(srq);
-        
+
         int page = start == 0 ? start : start / config.getLimit();
-        
+
         PaginatedSearchRequest psr = new PaginatedSearchRequest("%" + searchText + "%",
                 config.getLimit(), page);
-        
+
         List<UserDTO> userList = null;
         try {
             userList = this.geoPlatformServiceClient.searchUsers(psr, user.getId());
@@ -104,23 +104,23 @@ public class UserService implements IUserService {
             throw new GeoPlatformException(rnnf.getMessage()); // TODO Better message
 
         }
-        
+
         ArrayList<GPUserManageDetail> searchUsers = new ArrayList<GPUserManageDetail>();
         for (UserDTO userDTO : userList) {
             GPUserManageDetail userDetail = this.convertToGPUserManageDetail(userDTO);
             searchUsers.add(userDetail);
         }
-        
+
         return new BasePagingLoadResult<GPUserManageDetail>(searchUsers,
                 config.getOffset(), usersCount.intValue());
     }
-    
+
     @Override
     public Long insertUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         this.getCheckLoggedUser(httpServletRequest);
-        
-        System.out.println("User to insert: " + userDetail);
+
+        System.out.println("User to insert: " + userDetail);  // TODO DEL
         Long iserId = null;
         try {
             GPUser user = this.convertToGPUser(userDetail);
@@ -128,16 +128,16 @@ public class UserService implements IUserService {
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
         }
-        
+
         return iserId;
     }
-    
+
     @Override
     public Long updateUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         this.getCheckLoggedUser(httpServletRequest);
-        
-        System.out.println("User to update: " + userDetail);
+
+        System.out.println("User to update: " + userDetail);  // TODO DEL
         Long userId = null;
         try {
             GPUser user = this.convertToGPUser(userDetail);
@@ -147,15 +147,15 @@ public class UserService implements IUserService {
         } catch (ResourceNotFoundFault rnnf) {
             throw new GeoPlatformException(rnnf.getMessage());
         }
-        
+
         return userId;
     }
-    
+
     @Override
     public boolean deleteUser(Long userId, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         this.getCheckLoggedUser(httpServletRequest);
-        
+
         try {
             return geoPlatformServiceClient.deleteUser(userId);
         } catch (ResourceNotFoundFault ex) {
@@ -184,7 +184,7 @@ public class UserService implements IUserService {
         }
         return GPRole.VIEWER;
     }
-    
+
     private GPUser getCheckLoggedUser(HttpServletRequest httpServletRequest) {
         try {
             return sessionUtility.getUserAlreadyFromSession(httpServletRequest);
@@ -192,24 +192,24 @@ public class UserService implements IUserService {
             throw new GeoPlatformException(timeout);
         }
     }
-    
+
     private GPUser convertToGPUser(IGPUserManageDetail userDetail) {
         GPUser user = new GPUser();
-        
+
         if (userDetail.getId() != null) {
             user.setId(userDetail.getId());
             user.setEnabled(true);
         }
-        
+
         user.setName(userDetail.getName());
         user.setEmailAddress(userDetail.getEmail());
         user.setUsername(userDetail.getUsername());
         user.setPassword(userDetail.getPassword());
-        
+
         GPAuthority authority = new GPAuthority();
         authority.setAuthority(userDetail.getAuthority().toString());
         user.setGPAuthorities(Arrays.asList(authority));
-        
+
         return user;
     }
 

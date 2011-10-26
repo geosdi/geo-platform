@@ -181,16 +181,13 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
         this.buttonBinding.disable();
         if (user.getId() == null) {
-            System.out.println("INSERT USER");
+            System.out.println("INSERT USER"); // TODO DEL
             this.handleFiledsInsertUser();
         } else {
-            System.out.println("UPDATE USER");
+            System.out.println("UPDATE USER"); // TODO DEL
             this.formButtonBinding.stopMonitoring(); // NOTE FormButtonBinding is always start auto-magically
-            this.handleFieldsUpdateUser();
-        }
-
-        if (user.getAuthority() != null) {
             this.userRoleComboBox.setValue(userRoleComboBox.findModel(user.getAuthority()));
+            this.handleFieldsUpdateUser();
         }
     }
 
@@ -319,7 +316,13 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
             @Override
             public String validate(Field<?> field, String value) {
-                if (value.equals(userOriginal.getAuthority().toString())) {
+                if (userOriginal == null) { // TODO Understand how the userOriginal could be null ?!?
+                    System.out.println("User NULL"); // TODO DEL
+                    updateRole(false);
+                    return null; // Pseudo-valid
+                }
+                GPRole role = userOriginal.getAuthority();
+                if (value.equals(role.toString())) {
                     updateRole(false);
                     return null; // Pseudo-valid
                 }
@@ -391,7 +394,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
             @Override
             public String validate(Field<?> field, String value) {
-                System.out.println("ioioioioio_" + value + "_");
                 if (!GPRegEx.RE_USERNAME.test(value)) {
                     return "Enter a valid username (example: foo.3_BE-1)";
                 }

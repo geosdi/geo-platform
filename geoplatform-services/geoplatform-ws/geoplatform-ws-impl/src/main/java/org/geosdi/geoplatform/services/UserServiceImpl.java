@@ -159,13 +159,11 @@ class UserServiceImpl {
         }
         String password = user.getPassword();
         if (password != null) {
-            orig.setPassword(password);
+            orig.setPassword(Utility.md5hash(password)); // Hash password
         }
 //        orig.setSendEmail(user.isSendEmail());
-        List<GPAuthority> newAuthorities = user.getGPAuthorities();
-        if (user.getGPAuthorities() != null) {
-            
-        }
+
+        this.updateUserAuthorities(orig.getUsername(), user.getGPAuthorities());
 
         userDao.merge(orig);
         return orig.getId();
@@ -384,6 +382,26 @@ class UserServiceImpl {
         if (duplicateUser != null) {
             throw new IllegalParameterFault("User with email \""
                     + user.getEmailAddress() + "\" already exists");
+        }
+    }
+
+    private void updateUserAuthorities(String username, List<GPAuthority> authorities) {
+        if (authorities != null && !authorities.isEmpty()) {
+            if (authorities.size() > 1) {
+                throw new UnsupportedOperationException("Not supported the update of multi-authorities: new authorities have more than one authority");
+            }
+
+            List<GPAuthority> origAuthorities = authorityDao.findByUsername(username);
+            if (origAuthorities.size() > 1) {
+                throw new UnsupportedOperationException("Not supported the update of multi-authorities: persisted authorities have more than one authority");
+            }
+
+            String stringAuthority = authorities.get(0).getAuthority();
+            GPAuthority origAuthority = origAuthorities.get(0);
+            if (!stringAuthority.equals(origAuthority.getAuthority())) {
+                origAuthority.setAuthority(stringAuthority);
+                authorityDao.merge(origAuthority);
+            }
         }
     }
 }

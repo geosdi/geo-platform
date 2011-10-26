@@ -191,7 +191,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
         if (user.getAuthority() != null) {
             this.userRoleComboBox.setValue(userRoleComboBox.findModel(user.getAuthority()));
-        }F
+        }
     }
 
     public void bindModel(GPUserManageDetail user, GPUserManageDetail userOriginal) {

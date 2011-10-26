@@ -162,8 +162,9 @@ class UserServiceImpl {
             orig.setPassword(password);
         }
 //        orig.setSendEmail(user.isSendEmail());
+        List<GPAuthority> newAuthorities = user.getGPAuthorities();
         if (user.getGPAuthorities() != null) {
-            // TODO UP roles
+            
         }
 
         userDao.merge(orig);

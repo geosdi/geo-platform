@@ -49,7 +49,6 @@ import org.geosdi.geoplatform.gui.client.model.GPUserManageDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
-import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
 
 /**
@@ -73,6 +72,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     private boolean updateName;
     private boolean updateEmail;
     private boolean updatePassword;
+    private boolean updateRole;
 
     public UserPropertiesBinding(Button buttonBinding) {
         super();
@@ -136,8 +136,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.userRoleComboBox.setTypeAhead(true);
         this.userRoleComboBox.setAllowBlank(false);
         this.userRoleComboBox.setTriggerAction(TriggerAction.ALL);
-//        this.userRoleComboBox.setDisplayField(GPUserManageDetailKeyValue.AUTORITHY.toString());
-        this.userRoleComboBox.add(GPRole.getAllRoles());
+        this.userRoleComboBox.add(GPRole.getAllRoles()); // TODO Retrieve all roles via a WS method
 
         fp.add(this.nameField);
         fp.add(this.emailField);
@@ -149,27 +148,17 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         return fp;
     }
 
-//    public void startMonitoring(Button saveButton) {
-//        System.out.println("...START");
-//        formButtonBinding.addButton(saveButton); // TODO REF
-//        formButtonBinding.startMonitoring();
-//    }
-//
-//    public void stopMonitoring() {
-//        System.out.println("...STOP");
-//        formButtonBinding.stopMonitoring();
-//    }
     public String getPassword() {
         return this.passwordField.getValue();
     }
 
     public void resetFields() {
-        nameField.reset();
-        emailField.reset();
-        usernameField.reset();
-        passwordField.reset();
-        passwordRepeatField.reset();
-        userRoleComboBox.reset();
+        this.nameField.reset();
+        this.emailField.reset();
+        this.usernameField.reset();
+        this.passwordField.reset();
+        this.passwordRepeatField.reset();
+        this.userRoleComboBox.reset();
     }
 
     @Override
@@ -190,20 +179,19 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     public void bindModel(GPUserManageDetail user) {
         super.bindModel(user);
 
+        this.buttonBinding.disable();
         if (user.getId() == null) {
             System.out.println("INSERT USER");
-            this.formButtonBinding.startMonitoring(); // ...
             this.handleFiledsInsertUser();
         } else {
             System.out.println("UPDATE USER");
-            this.formButtonBinding.stopMonitoring(); // TODO move
-            this.buttonBinding.disable();
+            this.formButtonBinding.stopMonitoring(); // NOTE FormButtonBinding is always start auto-magically
             this.handleFieldsUpdateUser();
         }
 
         if (user.getAuthority() != null) {
             this.userRoleComboBox.setValue(userRoleComboBox.findModel(user.getAuthority()));
-        }
+        }F
     }
 
     public void bindModel(GPUserManageDetail user, GPUserManageDetail userOriginal) {
@@ -230,12 +218,11 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.passwordRepeatField.setValidator(this.validatorInsertConfirmPassword());
         this.passwordRepeatField.setAllowBlank(false);
 
-//        this.userRoleComboBox.setValidator(null); // TODO ?
+        this.userRoleComboBox.setValidator(null);
     }
 
     private void handleFieldsUpdateUser() {
         this.nameField.setValidator(this.validatorUpdateName());
-        this.nameField.reset();
         this.nameField.setAllowBlank(true);
 
         this.emailField.setValidator(this.validatorUpdateEmail());
@@ -253,30 +240,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.passwordRepeatField.setValidator(this.validatorUpdateConfirmPassword());
         this.passwordRepeatField.setAllowBlank(true);
 
-//        this.userRoleComboBox.setValidator(); // TODO Validator        
-    }
-
-    private void updateName(boolean updateName) {
-        this.updateName = updateName;
-        this.updateUser();
-    }
-
-    private void updateEmail(boolean updateEmail) {
-        this.updateEmail = updateEmail;
-        this.updateUser();
-    }
-
-    private void updatePassword(boolean updatePassword) {
-        this.updatePassword = updatePassword;
-        this.updateUser();
-    }
-
-    private void updateUser() {
-        if (updateName || updateEmail || updatePassword) {
-            this.buttonBinding.enable();
-        } else {
-            this.buttonBinding.disable();
-        }
+        this.userRoleComboBox.setValidator(this.validatorUpdateRole());
     }
 
     /**
@@ -327,9 +291,9 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
             public String validate(Field<?> field, String value) {
                 if (value.length() < 6) {
                     updatePassword(false);
-                    return "The minimun lenght for password is 6"; // TODO better
+                    return "The minimun lenght for password is 6";
                 }
-                updatePassword(true);
+                updatePassword(true); // TODO check correctness...
                 return null;
             }
         };
@@ -348,6 +312,49 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                 return "Retyped reset password don't match";
             }
         };
+    }
+
+    private Validator validatorUpdateRole() {
+        return new Validator() {
+
+            @Override
+            public String validate(Field<?> field, String value) {
+                if (value.equals(userOriginal.getAuthority().toString())) {
+                    updateRole(false);
+                    return null; // Pseudo-valid
+                }
+                updateRole(true);
+                return null;
+            }
+        };
+    }
+
+    private void updateName(boolean updateName) {
+        this.updateName = updateName;
+        this.updateUser();
+    }
+
+    private void updateEmail(boolean updateEmail) {
+        this.updateEmail = updateEmail;
+        this.updateUser();
+    }
+
+    private void updatePassword(boolean updatePassword) {
+        this.updatePassword = updatePassword;
+        this.updateUser();
+    }
+
+    private void updateRole(boolean updateRole) {
+        this.updateRole = updateRole;
+        this.updateUser();
+    }
+
+    private void updateUser() {
+        if (updateName || updateEmail || updatePassword || updateRole) {
+            this.buttonBinding.enable();
+        } else {
+            this.buttonBinding.disable();
+        }
     }
 
     /**

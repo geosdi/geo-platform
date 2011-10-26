@@ -72,7 +72,6 @@ public class UserPropertiesWidget extends GeoPlatformWindow
     //
     private ContentPanel centralPanel;
     private Button saveButton;
-//    private UserPropertiesBinding userPropertiesBinding = new UserPropertiesBinding();
     private UserPropertiesBinding userPropertiesBinding;
     private ListStore<GPUserManageDetail> store;
     //
@@ -108,8 +107,6 @@ public class UserPropertiesWidget extends GeoPlatformWindow
                     userDetail.setPassword(userPropertiesBinding.getPassword());
                     manageInsertUser();
                 }
-
-//                userPropertiesBinding.stopMonitoring();
             }
         });
         this.userPropertiesBinding = new UserPropertiesBinding(saveButton);
@@ -126,7 +123,6 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
                     store.getRecord(userDetail).reject(true);
                 }
-//                userPropertiesBinding.stopMonitoring();
                 hide();
             }
         });
@@ -167,8 +163,6 @@ public class UserPropertiesWidget extends GeoPlatformWindow
                     clonedUserDetail.setAuthority(userDetail.getAuthority());
                 }
                 userPropertiesBinding.bindModel(userDetail, clonedUserDetail);
-//                userPropertiesBinding.bindModel(userDetail);
-//                userPropertiesBinding.startMonitoring(saveButton);
             }
         });
     }

@@ -195,9 +195,8 @@ public class UserService implements IUserService {
         GPUser user = new GPUser();
 
         user.setName(userDetail.getName());
-        user.setUsername(userDetail.getUsername());
-        user.setName(userDetail.getUsername());
         user.setEmailAddress(userDetail.getEmail());
+        user.setUsername(userDetail.getUsername());
         user.setPassword(userDetail.getPassword());
 
         GPAuthority authority = new GPAuthority();

@@ -69,14 +69,14 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
     private GPUserManageDetail userDetail;
     private GPUserManageDetail clonedUserDetail;
+    //
     private ContentPanel centralPanel;
+    private Button saveButton;
     private UserPropertiesBinding userPropertiesBinding = new UserPropertiesBinding();
     private ListStore<GPUserManageDetail> store;
     //
     private ManageInsertUserEvent manageInsertUserEvent = new ManageInsertUserEvent();
     private ManageUpdateUserEvent manageUpdateUserEvent = new ManageUpdateUserEvent();
-    //
-    Button saveButton;
 
     public UserPropertiesWidget(ListStore<GPUserManageDetail> store) {
         super(true);
@@ -93,26 +93,33 @@ public class UserPropertiesWidget extends GeoPlatformWindow
     private void addCentralPanel() {
         this.centralPanel = new ContentPanel(new FlowLayout());
         this.centralPanel.setHeaderVisible(false);
-        saveButton = new Button("Save", new SelectionListener<ButtonEvent>() {
+        this.saveButton = new Button("Save", new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
                 if (store.contains(userDetail)) {
+                    String resetPassword = userPropertiesBinding.getPassword();
+                    if (resetPassword.length() > 0) {
+                        userDetail.setPassword(resetPassword);
+                    }
                     manageUpdateUser();
                 } else {
+                    userDetail.setPassword(userPropertiesBinding.getPassword());
                     manageInsertUser();
                 }
+
+                userPropertiesBinding.stopMonitoring();
             }
         });
         Button closeButton = new Button("Close", new SelectionListener<ButtonEvent>() {
 
             @Override
-            public void componentSelected(ButtonEvent ce) { // TODO validate before copy
+            public void componentSelected(ButtonEvent ce) {
                 if (store.contains(userDetail)) {
-                    userDetail.setAuthority(clonedUserDetail.getAuthority());
                     userDetail.setName(clonedUserDetail.getName());
-                    userDetail.setUsername(clonedUserDetail.getUsername());
                     userDetail.setEmail(clonedUserDetail.getEmail());
+                    userDetail.setUsername(clonedUserDetail.getUsername());
+                    userDetail.setAuthority(clonedUserDetail.getAuthority());
 
                     store.getRecord(userDetail).reject(true);
                 }
@@ -130,10 +137,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
         this.userDetail = userDetail;
         super.show();
 
-        // TODO REF Move...
-        FormButtonBinding formButton = userPropertiesBinding.getButtonBinding();
-        formButton.addButton(saveButton);
-        formButton.startMonitoring();
+        this.userPropertiesBinding.startMonitoring(saveButton);
     }
 
     @Override
@@ -155,10 +159,10 @@ public class UserPropertiesWidget extends GeoPlatformWindow
             public void windowShow(WindowEvent we) {
                 if (userDetail.getId() != null) {
                     clonedUserDetail = new GPUserManageDetail();
-                    clonedUserDetail.setAuthority(userDetail.getAuthority());
                     clonedUserDetail.setName(userDetail.getName());
-                    clonedUserDetail.setUsername(userDetail.getUsername());
                     clonedUserDetail.setEmail(userDetail.getEmail());
+                    clonedUserDetail.setUsername(userDetail.getUsername());
+                    clonedUserDetail.setAuthority(userDetail.getAuthority());
                 }
                 userPropertiesBinding.bindModel(userDetail);
             }
@@ -180,14 +184,18 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
             @Override
             public void onSuccess(Long result) {
+                System.out.println("RESULT: " + result);
+                userDetail.setId(result);
                 store.add(userDetail);
                 store.commitChanges();
                 hide();
+                userPropertiesBinding.resetFields();
 
                 GeoPlatformMessage.infoMessage("User successfully added",
                         "<ul><li>" + userDetail.getUsername() + "</li></ul>");
             }
         });
+        System.out.println("User persisted: " + userDetail);
     }
 
     @Override

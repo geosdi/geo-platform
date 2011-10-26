@@ -198,8 +198,9 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
         StringBuilder str = new StringBuilder("GPUserManageDetail {");
         str.append("id=").append(id);
         str.append(", name=").append(name);
-        str.append(", username=").append(username);
         str.append(", email=").append(email);
+        str.append(", username=").append(username);
+        str.append(", password=").append(password);
         str.append(", authority=").append(authority);
         return str.append('}').toString();
     }

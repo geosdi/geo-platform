@@ -51,10 +51,11 @@ import org.springframework.stereotype.Service;
  * @author giuseppe
  * 
  */
-@Service("startupService")
+@Service(value = "startupService")
 public class StartupService implements IStartupService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
     @Autowired
     private IGeoPlatformGlobal geoPlatformGlobal;
 

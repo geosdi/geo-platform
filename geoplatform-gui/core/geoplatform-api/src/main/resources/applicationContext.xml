@@ -34,6 +34,13 @@
                     <property name="licenseUrl" value="${licenseUrlGWT}" />
                 </bean>
                 <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
+                    <property name="key" value="${keyGWT-OL}" />
+                    <property name="version" value="${versionGWT-OL}" />
+                    <property name="copyright" value="${copyrightGWT-OL}" />
+                    <property name="licenseName" value="${versionGWT-OL}" />
+                    <property name="licenseUrl" value="${licenseUrlGWT-OL}" />
+                </bean>
+                <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
                     <property name="key" value="${keySpring}" />
                     <property name="version" value="${versionSpring}" />
                     <property name="copyright" value="" />

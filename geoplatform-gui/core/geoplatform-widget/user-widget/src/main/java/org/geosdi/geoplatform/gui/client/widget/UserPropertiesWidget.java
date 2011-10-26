@@ -42,13 +42,11 @@ import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.event.timeout.IManageInsertUserHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.IManageUpdateUserHandler;
-import org.geosdi.geoplatform.gui.client.event.timeout.ManageDeleteUserEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.ManageInsertUserEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.ManageUpdateUserEvent;
 import org.geosdi.geoplatform.gui.client.form.binding.UserPropertiesBinding;
@@ -63,6 +61,12 @@ import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
+ * 
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 public class UserPropertiesWidget extends GeoPlatformWindow
         implements IManageInsertUserHandler, IManageUpdateUserHandler {
@@ -81,6 +85,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
     public UserPropertiesWidget(ListStore<GPUserManageDetail> store) {
         super(true);
         this.store = store;
+        this.store.setMonitorChanges(true);
         TimeoutHandlerManager.addHandler(IManageInsertUserHandler.TYPE, this);
         TimeoutHandlerManager.addHandler(IManageUpdateUserHandler.TYPE, this);
     }
@@ -110,19 +115,12 @@ public class UserPropertiesWidget extends GeoPlatformWindow
             }
         });
         this.userPropertiesBinding = new UserPropertiesBinding(saveButton);
+        this.userPropertiesBinding.setStore(store);
 
         Button closeButton = new Button("Close", new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                if (store.contains(userDetail)) {
-                    userDetail.setName(clonedUserDetail.getName());
-                    userDetail.setEmail(clonedUserDetail.getEmail());
-                    userDetail.setUsername(clonedUserDetail.getUsername());
-                    userDetail.setAuthority(clonedUserDetail.getAuthority());
-
-                    store.getRecord(userDetail).reject(true);
-                }
                 hide();
             }
         });
@@ -157,10 +155,6 @@ public class UserPropertiesWidget extends GeoPlatformWindow
             public void windowShow(WindowEvent we) {
                 if (userDetail.getId() != null) {
                     clonedUserDetail = new GPUserManageDetail();
-                    clonedUserDetail.setName(userDetail.getName());
-                    clonedUserDetail.setEmail(userDetail.getEmail());
-                    clonedUserDetail.setUsername(userDetail.getUsername());
-                    clonedUserDetail.setAuthority(userDetail.getAuthority());
                 }
                 userPropertiesBinding.bindModel(userDetail, clonedUserDetail);
             }
@@ -184,7 +178,6 @@ public class UserPropertiesWidget extends GeoPlatformWindow
             public void onSuccess(Long result) {
                 userDetail.setId(result);
                 store.insert(userDetail, 0);
-                store.commitChanges();
                 hide();
 
                 GeoPlatformMessage.infoMessage("User successfully added",
@@ -220,6 +213,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
     @Override
     public void reset() {
+        store.rejectChanges();
         userPropertiesBinding.resetFields();
     }
 }

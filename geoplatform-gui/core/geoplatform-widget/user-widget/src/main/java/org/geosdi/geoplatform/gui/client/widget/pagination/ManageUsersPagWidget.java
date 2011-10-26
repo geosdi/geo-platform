@@ -68,6 +68,9 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
+ * 
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
 public class ManageUsersPagWidget
         extends GeoPlatformSearchWidget<GPUserManageDetail> {

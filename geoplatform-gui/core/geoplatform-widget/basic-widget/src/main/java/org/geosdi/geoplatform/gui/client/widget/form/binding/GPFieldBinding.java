@@ -57,7 +57,8 @@ public abstract class GPFieldBinding extends FieldBinding {
             Record r = store.getRecord(model);
             if (r != null) {
                 r.setValid(property, field.isValid());
-                r.set(property, val);
+//                r.set(property, val);
+                setModelProperty(val);
             }
         } else {
             setModelProperty(val);

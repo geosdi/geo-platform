@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.form.binding;
 
+import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.Field;
@@ -54,6 +55,12 @@ import org.geosdi.geoplatform.gui.regex.GPRegEx;
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
+ * 
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManageDetail> {
 
@@ -146,6 +153,14 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         fp.add(this.userRoleComboBox);
 
         return fp;
+    }
+
+    /**
+     * 
+     * @param store 
+     */
+    public void setStore(ListStore<GPUserManageDetail> store) {
+        formBinding.setStore(store);
     }
 
     public String getPassword() {
@@ -322,7 +337,8 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                     return null; // Pseudo-valid
                 }
                 GPRole role = userOriginal.getAuthority();
-                if (value.equals(role.toString())) {
+                if ((role != null)
+                        && (value.equals(role.toString()))) {
                     updateRole(false);
                     return null; // Pseudo-valid
                 }
@@ -427,7 +443,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
      */
     private class RoleComboBinding extends GPFieldBinding {
 
-        public RoleComboBinding(Field field, String property) {
+        public RoleComboBinding(SimpleComboBox field, String property) {
             super(field, property);
         }
 

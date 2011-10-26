@@ -57,7 +57,7 @@ public enum GPRole {
         roleList.add(USER);
         roleList.add(VIEWER);
     }
-
+  
     private GPRole(String role) {
         this.role = role;
     }
@@ -89,7 +89,6 @@ public enum GPRole {
         }
         return null;
     }
-
 //    public static GPRole fromStringUI(String roleUI) {
 //        if (roleUI != null) {
 //            roleUI = roleUI.trim().toUpperCase();

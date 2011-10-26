@@ -50,9 +50,6 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     private static final long serialVersionUID = 53423038411470538L;
     //
     private Long id;
-    private String username;
-    private String name;
-    private String email;
     private String password;
     private GPRole authority;
 
@@ -77,7 +74,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
      */
     @Override
     public String getUsername() {
-        return username;
+        return super.get(GPUserManageDetailKeyValue.USERNAME.toString());
     }
 
     /**
@@ -86,8 +83,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
      */
     @Override
     public void setUsername(String username) {
-        this.username = username;
-        super.set(GPUserManageDetailKeyValue.USERNAME.toString(), this.username);
+        super.set(GPUserManageDetailKeyValue.USERNAME.toString(), username);
     }
 
     /**
@@ -95,7 +91,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
      */
     @Override
     public String getName() {
-        return name;
+        return super.get(GPUserManageDetailKeyValue.NAME.toString());
     }
 
     /**
@@ -104,8 +100,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
      */
     @Override
     public void setName(String name) {
-        this.name = name;
-        super.set(GPUserManageDetailKeyValue.NAME.toString(), this.name);
+        super.set(GPUserManageDetailKeyValue.NAME.toString(), name);
     }
 
     /**
@@ -113,7 +108,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
      */
     @Override
     public String getEmail() {
-        return email;
+        return super.get(GPUserManageDetailKeyValue.EMAIL.toString());
     }
 
     /**
@@ -122,8 +117,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
      */
     @Override
     public void setEmail(String email) {
-        this.email = email;
-        super.set(GPUserManageDetailKeyValue.EMAIL.toString(), this.email);
+        super.set(GPUserManageDetailKeyValue.EMAIL.toString(), email);
     }
 
     /**
@@ -199,11 +193,11 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     public String toString() {
         StringBuilder str = new StringBuilder("GPUserManageDetail {");
         str.append("id=").append(id);
-        str.append(", name=").append(name);
-        str.append(", email=").append(email);
-        str.append(", username=").append(username);
+        str.append(", name=").append(getName());
+        str.append(", email=").append(getEmail());
+        str.append(", username=").append(getUsername());
         str.append(", password=").append(password);
-        str.append(", authority=").append(authority);
+        str.append(", authority=").append(getAuthority());
         return str.append('}').toString();
     }
 }

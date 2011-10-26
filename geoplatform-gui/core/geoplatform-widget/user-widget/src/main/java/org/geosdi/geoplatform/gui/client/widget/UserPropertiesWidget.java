@@ -184,12 +184,10 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
             @Override
             public void onSuccess(Long result) {
-                System.out.println("RESULT: " + result);
                 userDetail.setId(result);
-                store.add(userDetail);
+                store.insert(userDetail, 0);
                 store.commitChanges();
                 hide();
-                userPropertiesBinding.resetFields();
 
                 GeoPlatformMessage.infoMessage("User successfully added",
                         "<ul><li>" + userDetail.getUsername() + "</li></ul>");
@@ -221,5 +219,10 @@ public class UserPropertiesWidget extends GeoPlatformWindow
                         "<ul><li>" + userDetail.getUsername() + "</li></ul>");
             }
         });
+    }
+
+    @Override
+    public void reset() {
+        userPropertiesBinding.resetFields();
     }
 }

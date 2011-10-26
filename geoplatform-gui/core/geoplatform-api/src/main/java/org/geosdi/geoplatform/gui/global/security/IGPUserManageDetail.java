@@ -41,6 +41,10 @@ package org.geosdi.geoplatform.gui.global.security;
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
 public interface IGPUserManageDetail extends IGPUserSimpleDetail {
+    
+    Long getId();
+    
+    void setId(Long id);
 
     String getPassword();
 

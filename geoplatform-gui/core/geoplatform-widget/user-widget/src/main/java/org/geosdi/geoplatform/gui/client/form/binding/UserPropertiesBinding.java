@@ -179,10 +179,8 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         super.bindModel(user);
 
         if (user.getId() == null) {
-            System.out.println("INSERT USER");
             this.handleFiledsInsertUser();
         } else {
-            System.out.println("UPDATE USER");
             this.handleFieldsUpdateUser();
         }
 
@@ -427,15 +425,4 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
             emailField.setValue(userDetail.getEmail());
         }
     }
-//    private class PasswordFieldBinding extends GPFieldBinding {
-//
-//        public PasswordFieldBinding(Field field, String property) {
-//            super(field, property);
-//        }
-//
-//        @Override
-//        public void setModelProperty(Object val) {
-//            ((GPUserManageDetail) model).setPassword(val != null ? (String) val : "");
-//        }
-//    }
 }

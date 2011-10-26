@@ -72,7 +72,8 @@ public class UserPropertiesWidget extends GeoPlatformWindow
     //
     private ContentPanel centralPanel;
     private Button saveButton;
-    private UserPropertiesBinding userPropertiesBinding = new UserPropertiesBinding();
+//    private UserPropertiesBinding userPropertiesBinding = new UserPropertiesBinding();
+    private UserPropertiesBinding userPropertiesBinding;
     private ListStore<GPUserManageDetail> store;
     //
     private ManageInsertUserEvent manageInsertUserEvent = new ManageInsertUserEvent();
@@ -99,7 +100,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
             public void componentSelected(ButtonEvent ce) {
                 if (store.contains(userDetail)) {
                     String resetPassword = userPropertiesBinding.getPassword();
-                    if (resetPassword.length() > 0) {
+                    if (resetPassword != null && resetPassword.length() > 0) {
                         userDetail.setPassword(resetPassword);
                     }
                     manageUpdateUser();
@@ -108,9 +109,11 @@ public class UserPropertiesWidget extends GeoPlatformWindow
                     manageInsertUser();
                 }
 
-                userPropertiesBinding.stopMonitoring();
+//                userPropertiesBinding.stopMonitoring();
             }
         });
+        this.userPropertiesBinding = new UserPropertiesBinding(saveButton);
+
         Button closeButton = new Button("Close", new SelectionListener<ButtonEvent>() {
 
             @Override
@@ -123,6 +126,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
                     store.getRecord(userDetail).reject(true);
                 }
+//                userPropertiesBinding.stopMonitoring();
                 hide();
             }
         });
@@ -136,8 +140,6 @@ public class UserPropertiesWidget extends GeoPlatformWindow
     public void show(GPUserManageDetail userDetail) {
         this.userDetail = userDetail;
         super.show();
-
-        this.userPropertiesBinding.startMonitoring(saveButton);
     }
 
     @Override
@@ -164,7 +166,9 @@ public class UserPropertiesWidget extends GeoPlatformWindow
                     clonedUserDetail.setUsername(userDetail.getUsername());
                     clonedUserDetail.setAuthority(userDetail.getAuthority());
                 }
-                userPropertiesBinding.bindModel(userDetail);
+                userPropertiesBinding.bindModel(userDetail, clonedUserDetail);
+//                userPropertiesBinding.bindModel(userDetail);
+//                userPropertiesBinding.startMonitoring(saveButton);
             }
         });
     }
@@ -184,6 +188,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
             @Override
             public void onSuccess(Long result) {
+                System.out.println("ID new user: " + result);
                 userDetail.setId(result);
                 store.insert(userDetail, 0);
                 store.commitChanges();
@@ -193,7 +198,6 @@ public class UserPropertiesWidget extends GeoPlatformWindow
                         "<ul><li>" + userDetail.getUsername() + "</li></ul>");
             }
         });
-        System.out.println("User persisted: " + userDetail);
     }
 
     @Override

@@ -120,15 +120,16 @@ public class UserService implements IUserService {
             throws GeoPlatformException {
         this.getCheckLoggedUser(httpServletRequest);
         
-        Long idNewUser = null;
+        System.out.println("User to insert: " + userDetail);
+        Long iserId = null;
         try {
-            GPUser newUser = this.convertToGPUser(userDetail);
-            idNewUser = geoPlatformServiceClient.insertUser(newUser);
+            GPUser user = this.convertToGPUser(userDetail);
+            iserId = geoPlatformServiceClient.insertUser(user);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
         }
         
-        return idNewUser;
+        return iserId;
     }
     
     @Override
@@ -136,17 +137,18 @@ public class UserService implements IUserService {
             throws GeoPlatformException {
         this.getCheckLoggedUser(httpServletRequest);
         
-        Long idNewUser = null;
+        System.out.println("User to update: " + userDetail);
+        Long userId = null;
         try {
-            GPUser newUser = this.convertToGPUser(userDetail);
-            idNewUser = geoPlatformServiceClient.updateUser(newUser);
+            GPUser user = this.convertToGPUser(userDetail);
+            userId = geoPlatformServiceClient.updateUser(user);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
         } catch (ResourceNotFoundFault rnnf) {
             throw new GeoPlatformException(rnnf.getMessage());
         }
         
-        return idNewUser;
+        return userId;
     }
     
     @Override
@@ -173,7 +175,7 @@ public class UserService implements IUserService {
         return user;
     }
 
-    // NOTE: Now a user must be have at most one role
+    // NOTE: Now a user must have at most one role
     private GPRole convertToGPRole(List<String> authorities) {
         Iterator<String> iterator = authorities.iterator();
         if (iterator.hasNext()) {

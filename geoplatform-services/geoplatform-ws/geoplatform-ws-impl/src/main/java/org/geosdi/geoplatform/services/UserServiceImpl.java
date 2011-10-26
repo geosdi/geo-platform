@@ -130,28 +130,41 @@ class UserServiceImpl {
         return user.getId();
     }
 
-    // TODO Manage authorities
     public Long updateUser(GPUser user)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        EntityCorrectness.checkUserAndAuthority(user); // TODO assert
+//        EntityCorrectness.checkUserAndAuthority(user); // TODO assert
+        if (user.getId() == null) {
+            throw new IllegalArgumentException("User \"ID\" must be NOT NULL");
+        }
         GPUser orig = this.getUserById(user.getId());
+        EntityCorrectness.checkUser(orig); // TODO assert
 
-        // manual checks (awful!)
-        if (!user.getEmailAddress().equals(orig.getEmailAddress()) && orig.isEnabled()) {
-            throw new IllegalParameterFault("Can't update the mail address for registered user:" + user.getId());
-        }
+//        // manual checks (awful!)
+//        if (!user.getEmailAddress().equals(orig.getEmailAddress()) && orig.isEnabled()) {
+//            throw new IllegalParameterFault("Can't update the mail address for registered user:" + user.getId());
+//        }
+//
+//        if (user.isEnabled() != orig.isEnabled()) {
+//            throw new IllegalParameterFault("Can't change user enabled status for user:" + user.getId());
+//        }
 
-        if (user.isEnabled() != orig.isEnabled()) {
-            throw new IllegalParameterFault("Can't change user enabled status for user:" + user.getId());
+        // Set the values (except username and property not managed)
+        String name = user.getName();
+        if (name != null) {
+            orig.setName(name);
         }
-
-        // set the values
-        orig.setEmailAddress(user.getEmailAddress());
-        if (user.getPassword() != null) {
-            orig.setPassword(user.getPassword());
+        String email = user.getEmailAddress();
+        if (email != null) {
+            orig.setEmailAddress(email);
         }
-        orig.setSendEmail(user.isSendEmail());
-        orig.setUsername(user.getUsername());
+        String password = user.getPassword();
+        if (password != null) {
+            orig.setPassword(password);
+        }
+//        orig.setSendEmail(user.isSendEmail());
+        if (user.getGPAuthorities() != null) {
+            // TODO UP roles
+        }
 
         userDao.merge(orig);
         return orig.getId();

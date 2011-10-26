@@ -59,7 +59,7 @@ public class CXFServiceTest extends ServiceTest {
 
 //    private GeoPlatformWSClientEncrypted gpWSClientEncrypted;
     // Servers
-    private final String serverUrlTest = "http://map.serverNameTest.org";
+    private final String serverUrlTest = "http://map.serverNameTest.foo";
     private long idServerTest = -1;
     private final String serverUrlGeoSDI = "http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities";
     private long idServerGeoSDI = -1;

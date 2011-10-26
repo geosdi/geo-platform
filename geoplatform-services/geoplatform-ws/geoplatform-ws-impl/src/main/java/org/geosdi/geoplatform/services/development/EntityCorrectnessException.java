@@ -33,74 +33,30 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.global.security;
-
-import java.util.ArrayList;
-import java.util.List;
+package org.geosdi.geoplatform.services.development;
 
 /**
  *
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public enum GPRole {
+public class EntityCorrectnessException extends RuntimeException {
 
-    ADMIN("ROLE_ADMIN"),
-    USER("ROLE_USER"),
-    VIEWER("ROLE_VIEWER"); // Can't save the tree state
-    //
-    private String role;
-    private final static List<GPRole> roleList = new ArrayList<GPRole>();
+    private static final long serialVersionUID = 9178523240480796062L;
 
-    static {
-        roleList.add(ADMIN);
-        roleList.add(USER);
-        roleList.add(VIEWER);
+    public EntityCorrectnessException() {
     }
 
-    private GPRole(String role) {
-        this.role = role;
+    public EntityCorrectnessException(String message) {
+        super(message);
+    }
+
+    public EntityCorrectnessException(String message, Throwable cause) {
+        super(message, cause);
     }
 
     @Override
-    public String toString() {
-        return role;
+    public String getMessage() {
+        return "[EntityCorrectnessException] " + super.getMessage();
     }
-
-    public static List<GPRole> getAllRoles() {
-        return roleList;
-    }
-
-    public String toStringUI() {
-        int ind = role.indexOf("_");
-        return role.charAt(ind + 1) + role.substring(ind + 2).toLowerCase();
-    }
-
-    public static GPRole fromString(String role) {
-        if (role != null) {
-            role = role.trim().toUpperCase();
-            if (role.equals(VIEWER.role)) {
-                return VIEWER;
-            } else if (role.equals(USER.role)) {
-                return USER;
-            } else if (role.equals(ADMIN.role)) {
-                return ADMIN;
-            }
-        }
-        return null;
-    }
-
-//    public static GPRole fromStringUI(String roleUI) {
-//        if (roleUI != null) {
-//            roleUI = roleUI.trim().toUpperCase();
-//            if (roleUI.equals(this.to)) {
-//                return VIEWER;
-//            } else if (roleUI.equals(USER.role)) {
-//                return USER;
-//            } else if (roleUI.equals(ADMIN.role)) {
-//                return ADMIN;
-//            }
-//        }
-//        return null;
-//    }
 }

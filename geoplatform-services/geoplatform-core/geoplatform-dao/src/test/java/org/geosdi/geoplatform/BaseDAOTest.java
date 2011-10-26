@@ -300,7 +300,7 @@ public abstract class BaseDAOTest {
         GPUser user = new GPUser();
         user.setUsername(username);
         user.setName("Complete name of " + username);
-        user.setEmailAddress(username + "@test.org");
+        user.setEmailAddress(username + "@test.foo");
         user.setEnabled(true);
         if (username.contains("_")) {
             user.setPassword(Utility.md5hash("pwd_" + username));

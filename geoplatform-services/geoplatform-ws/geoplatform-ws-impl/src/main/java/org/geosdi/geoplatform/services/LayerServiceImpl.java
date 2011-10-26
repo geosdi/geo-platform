@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.List;

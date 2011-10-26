@@ -37,6 +37,7 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import com.googlecode.genericdao.search.Search;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -48,9 +49,9 @@ import org.geosdi.geoplatform.core.dao.GPUserProjectsDAO;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPUserProjects;
+import org.geosdi.geoplatform.core.model.Utility;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.UserDTO;
@@ -111,20 +112,17 @@ class UserServiceImpl {
      * @return Long the User ID
      */
     public Long insertUser(GPUser user) throws IllegalParameterFault {
+        EntityCorrectness.checkUserAndAuthority(user); // TODO assert
         this.checkDuplicateUser(user);
 
         List<GPAuthority> authorities = user.getGPAuthorities();
-        if (authorities == null || authorities.isEmpty()) {
-            throw new IllegalParameterFault("User must have at least a role");
-        }
         for (GPAuthority authority : authorities) {
-            this.checkAuthority(authority.getAuthority());
             authority.setUser(user);
             authority.setUsername(user.getUsername());
         }
 
-        // Always insert users as enabled
-        user.setEnabled(true);
+        user.setEnabled(true); // Always insert users as enabled
+        user.setPassword(Utility.md5hash(user.getPassword())); // Hash password
         userDao.persist(user);
 
         authorityDao.persist(authorities.toArray(new GPAuthority[authorities.size()]));
@@ -135,6 +133,7 @@ class UserServiceImpl {
     // TODO Manage authorities
     public Long updateUser(GPUser user)
             throws ResourceNotFoundFault, IllegalParameterFault {
+        EntityCorrectness.checkUserAndAuthority(user); // TODO assert
         GPUser orig = this.getUserById(user.getId());
 
         // manual checks (awful!)
@@ -165,6 +164,7 @@ class UserServiceImpl {
      */
     public boolean deleteUser(Long userId) throws ResourceNotFoundFault {
         GPUser user = this.getUserById(userId);
+        EntityCorrectness.checkUserLog(user); // TODO assert
 
         authorityDao.removeAllUserAuthorities(user.getUsername());
 
@@ -191,6 +191,7 @@ class UserServiceImpl {
      */
     public UserDTO getShortUser(Long userId) throws ResourceNotFoundFault {
         GPUser user = this.getUserById(userId);
+        EntityCorrectness.checkUserLog(user); // TODO assert
         return new UserDTO(user);
     }
 
@@ -203,7 +204,9 @@ class UserServiceImpl {
      * @throws ResourceNotFoundFault
      */
     public GPUser getUserDetail(Long userId) throws ResourceNotFoundFault {
-        return this.getUserById(userId);
+        GPUser user = this.getUserById(userId);
+        EntityCorrectness.checkUserLog(user); // TODO assert
+        return user;
     }
 
     /**
@@ -217,6 +220,7 @@ class UserServiceImpl {
     public UserDTO getShortUserByName(SearchRequest request)
             throws ResourceNotFoundFault {
         GPUser user = this.getUserByUsername(request.getNameLike());
+        EntityCorrectness.checkUserLog(user); // TODO assert
         return new UserDTO(user);
     }
 
@@ -230,7 +234,9 @@ class UserServiceImpl {
      */
     public GPUser getUserDetailByName(SearchRequest request)
             throws ResourceNotFoundFault {
-        return this.getUserByUsername(request.getNameLike());
+        GPUser user = this.getUserByUsername(request.getNameLike());
+        EntityCorrectness.checkUserLog(user); // TODO assert
+        return user;
     }
 
     /**
@@ -257,6 +263,7 @@ class UserServiceImpl {
         List<GPUser> userList = userDao.search(searchCriteria);
         for (GPUser user : userList) {
             user.setGPAuthorities(this.getGPAuthorities(user.getUsername()));
+            EntityCorrectness.checkUserAndAuthorityLog(user); // TODO assert
         }
 
         return UserDTO.convertToUserDTOList(userList);
@@ -265,6 +272,9 @@ class UserServiceImpl {
     // note: may take lot of space
     public List<UserDTO> getUsers() {
         List<GPUser> userList = userDao.findAll();
+        for (GPUser user : userList) {
+            EntityCorrectness.checkUserLog(user); // TODO assert
+        }
         return UserDTO.convertToUserDTOList(userList);
     }
 
@@ -288,6 +298,7 @@ class UserServiceImpl {
             if (!user.verify(password)) {
                 throw new IllegalParameterFault("Specified password was incorrect");
             }
+            EntityCorrectness.checkUserLog(user); // TODO assert
         } catch (NoSuchAlgorithmException e) {
             throw new IllegalParameterFault(e.getMessage());
         }
@@ -301,12 +312,35 @@ class UserServiceImpl {
      */
     public List<String> getUserAuthorities(Long userId) throws ResourceNotFoundFault {
         GPUser user = this.getUserById(userId);
+        EntityCorrectness.checkUserLog(user); // TODO assert
         List<String> authorities = this.getAuthorities(user.getUsername());
         return authorities;
     }
 
     public List<GPAuthority> getUserGPAuthorities(String username) throws ResourceNotFoundFault {
         return this.getGPAuthorities(username);
+    }
+
+    private List<String> getAuthorities(String username) throws ResourceNotFoundFault {
+        List<GPAuthority> authorities = this.getGPAuthorities(username);
+        return this.convertAuthorities(authorities);
+    }
+
+    private List<GPAuthority> getGPAuthorities(String username) throws ResourceNotFoundFault {
+        List<GPAuthority> authorities = authorityDao.findByUsername(username);
+        if (authorities.isEmpty()) {
+            throw new ResourceNotFoundFault("User not found (username=" + username + ")");
+        }
+        EntityCorrectness.checkAuthorityLog(authorities);
+        return authorities;
+    }
+
+    private List<String> convertAuthorities(List<GPAuthority> authorities) {
+        List<String> authorityName = new ArrayList<String>(authorities.size());
+        for (GPAuthority authority : authorities) {
+            authorityName.add(authority.getAuthority());
+        }
+        return authorityName;
     }
 
     private GPUser getUserById(Long userId) throws ResourceNotFoundFault {
@@ -323,36 +357,6 @@ class UserServiceImpl {
             throw new ResourceNotFoundFault("User not found (username=" + username + ")");
         }
         return user;
-    }
-
-    private List<String> getAuthorities(String username) throws ResourceNotFoundFault {
-        List<GPAuthority> authorities = this.getGPAuthorities(username);
-        return this.convertAuthorities(authorities);
-    }
-
-    private List<GPAuthority> getGPAuthorities(String username) throws ResourceNotFoundFault {
-        List<GPAuthority> authorities = authorityDao.findByUsername(username);
-        if (authorities.isEmpty()) {
-            throw new ResourceNotFoundFault("User not found (username=" + username + ")");
-        }
-        return authorities;
-    }
-
-    private List<String> convertAuthorities(List<GPAuthority> authorities) {
-        List<String> authorityName = new ArrayList<String>(authorities.size());
-        for (GPAuthority authority : authorities) {
-            authorityName.add(authority.getAuthority());
-        }
-        return authorityName;
-    }
-
-    private void checkAuthority(String authority) throws IllegalParameterFault {
-        if (authority == null || authority.trim().equals("")) {
-            throw new IllegalParameterFault("Authority is null or empty");
-        }
-        if (GPRole.fromString(authority) == null) {
-            throw new IllegalParameterFault("Authority is incorrect");
-        }
     }
 
     private void checkDuplicateUser(GPUser user) throws IllegalParameterFault {

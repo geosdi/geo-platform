@@ -139,28 +139,28 @@ public abstract class ServiceTest {
     // Create and insert a User
     protected long createAndInsertUser(String username, GPRole... roles)
             throws IllegalParameterFault {
-        GPUser user = createUser(username);
-
-        if (roles.length > 0) {
-            List<GPAuthority> authorities = this.createAuthorities(roles);
-            user.setGPAuthorities(authorities);
-        }
-
+        GPUser user = createUser(username, roles);
         logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
+
         long idUser = gpWSClient.insertUser(user);
         logger.debug("\n*** Id ASSIGNED at the User in the DB: {} ***", idUser);
         Assert.assertTrue("Id ASSIGNED at the User in the DB", idUser > 0);
         return idUser;
     }
 
-    protected GPUser createUser(String username) {
+    protected GPUser createUser(String username, GPRole... roles) {
         GPUser user = new GPUser();
         user.setUsername(username);
         user.setName("Complete name of " + username);
-        user.setEmailAddress(username + "@test.org");
+        user.setEmailAddress(username + "@test.foo");
         user.setEnabled(true);
-        user.setPassword(Utility.md5hash("pwd_" + username));
+        user.setPassword("pwd_" + username);
         user.setSendEmail(true);
+
+        if (roles.length > 0) {
+            List<GPAuthority> authorities = this.createAuthorities(roles);
+            user.setGPAuthorities(authorities);
+        }
         return user;
     }
 

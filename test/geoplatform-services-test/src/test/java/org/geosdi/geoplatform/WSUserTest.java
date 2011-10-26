@@ -177,7 +177,7 @@ public class WSUserTest extends ServiceTest {
 
     @Test
     public void testInsertDuplicateUserWRTUsername() {
-        GPUser user = super.createUser(super.usernameTest);
+        GPUser user = super.createUser(super.usernameTest, GPRole.USER);
         try {
             gpWSClient.insertUser(user);
             Assert.fail("User already exist wrt username");
@@ -190,7 +190,7 @@ public class WSUserTest extends ServiceTest {
 
     @Test
     public void testInsertDuplicateUserWRTUEmail() {
-        GPUser user = super.createUser("duplicate-email");
+        GPUser user = super.createUser("duplicate-email", GPRole.USER);
         user.setEmailAddress(super.userTest.getEmailAddress());
         try {
             gpWSClient.insertUser(user);

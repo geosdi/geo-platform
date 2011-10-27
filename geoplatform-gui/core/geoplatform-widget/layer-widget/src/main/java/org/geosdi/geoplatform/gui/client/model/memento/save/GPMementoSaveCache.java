@@ -86,14 +86,15 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
 
     @Override
     public boolean add(IMemento<ISave> memento) {
-        if (super.peek() == null) {
+        boolean condition = super.add(memento);
+        if (condition && super.size() == 1) {
             this.observable.setChanged();
             this.observable.notifyObservers(LayerEvents.SAVE_CACHE_NOT_EMPTY);
             /*System.out.println("Event SAVE_CACHE_NOT_EMPTY notified to "
             + this.observable.countObservers() + " observers");*/
         }
 //        System.out.println("GPLayerSaveCache: added " + memento.getClass().getName());
-        return super.add(memento);
+        return condition;
     }
 
     @Override

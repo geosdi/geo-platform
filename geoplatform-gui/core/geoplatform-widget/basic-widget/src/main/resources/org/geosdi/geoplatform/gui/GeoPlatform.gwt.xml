@@ -21,6 +21,7 @@
     <source path="impl" />
     <source path="utility" />
     <source path="factory" />
+    <source path="plugin" />
     <!--source path="exception" /-->
     <source path="regex" />
     

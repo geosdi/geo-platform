@@ -49,8 +49,8 @@ import org.geosdi.geoplatform.gui.client.widget.security.GPSecurityWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
 import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
-import org.geosdi.geoplatform.gui.impl.tree.ToolbarTreeClientTool;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.plugin.tree.TreeToolbarPluginManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
@@ -127,7 +127,7 @@ public class LoginWidget extends GPSecurityWidget implements ILoginManager {
                         @Override
                         public void onSuccess(IGPUserDetail result) {
                             if (result.isViewer()) {
-                                ToolbarTreeClientTool.USER_VIEWER = true;
+                                TreeToolbarPluginManager.USER_VIEWER = true;
                             }
 //                            System.out.println("*** VIEWER: " + ToolbarTreeClientTool.USER_VIEWER);
                             GPUserGuiComponents.getInstance().setUserDetail(

@@ -35,15 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.toolbar.mediator;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionCreator;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionRegistar;
-import org.geosdi.geoplatform.gui.client.model.visitor.VisitorToolbarTreeAction;
-import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionCreator;
-import org.geosdi.geoplatform.gui.impl.tree.ToolbarTreeClientTool;
+import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
+import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.plugin.tree.ITreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
+import org.geosdi.geoplatform.gui.plugin.tree.TreeToolbarPluginManager;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -52,17 +50,8 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 public class MediatorToolbarTreeAction {
 
     private static MediatorToolbarTreeAction instance = new MediatorToolbarTreeAction();
-    private VisitorToolbarTreeAction actionVisitor = new VisitorToolbarTreeAction();
-    private List<String> listActionEverEnabled = new ArrayList<String>();
     
     private MediatorToolbarTreeAction() {
-        this.listActionEverEnabled.add(ToolbarTreeClientTool.TOOLBAR_SAVE_TREE_STATE);
-        this.listActionEverEnabled.add(ToolbarTreeClientTool.TOOLBAR_UPLOAD_KML);
-        this.listActionEverEnabled.add(ToolbarTreeClientTool.TOOLBAR_PREVIEW_KML_FROM_URL);
-        this.listActionEverEnabled.add(ToolbarTreeClientTool.TOOLBAR_UPLOAD_SHAPE);
-        this.listActionEverEnabled.add(ToolbarTreeClientTool.TOOLBAR_EXPORT_PROJECT);
-        this.listActionEverEnabled.add(ToolbarTreeClientTool.TOOLBAR_PRINT_TREE_LAYERS);
-        this.listActionEverEnabled.add(ToolbarTreeClientTool.TOOLBAR_IMPORT_PROJECT);
     }
 
     public static MediatorToolbarTreeAction getInstance() {
@@ -74,48 +63,23 @@ public class MediatorToolbarTreeAction {
      * @param element
      */
     public void elementChanged(GPBeanTreeModel element) {
-        element.accept(actionVisitor);
-    }
-
-    /**
-     *
-     * @param idActions
-     */
-    public void enableActions(String ... idActions) {
-        for (String idAcion : idActions) {
-            GeoPlatformToolbarAction action = ToolbarTreeActionRegistar.get(
-                    idAcion);
-            if (action != null) {
-                action.setEnabled(true);
-            }
+        TreeStatusEnum status = this.calculateTreeStatus(element);
+        for (ITreeToolbarPlugin plugin : TreeToolbarPluginManager.getToolBarPlugin()) {
+            plugin.setEnabledByStatus(status);
         }
     }
 
-    /**
-     *
-     * @param idActions
-     */
-    public void disableActions(String... idActions) {
-        for (String idAction : idActions) {
-            GeoPlatformToolbarAction action = ToolbarTreeActionRegistar.get(
-                    idAction);
-            if (action != null) {
-                action.setEnabled(false);
-            }
+    private TreeStatusEnum calculateTreeStatus(GPBeanTreeModel element) {
+        TreeStatusEnum status = null;
+        if(element == null){
+            status = TreeStatusEnum.NO_SELECTION;
+        } else if(element instanceof FolderTreeNode){
+            status = TreeStatusEnum.FOLDER_SELECTED;
+        } else if(element instanceof GPRootTreeNode){
+            status = TreeStatusEnum.ROOT_SELECTED;
+        } else if(element instanceof RasterTreeNode){
+            status = TreeStatusEnum.RASTER_SELECTED;
         }
-    }
-
-    /**
-     * Disable all Actions
-     * 
-     */
-    public void disableAllActions() {
-        for (GeoPlatformActionCreator actionCreator : ToolbarTreeActionRegistar.getActionsCreator()) {
-            String actionId = ((ToolbarTreeActionCreator) actionCreator).getAction().getId();
-            if (!this.listActionEverEnabled.contains(actionId)) {
-                ((ToolbarTreeActionCreator) actionCreator).getAction().setEnabled(
-                        false);
-            }
-        }
+        return status;
     }
 }

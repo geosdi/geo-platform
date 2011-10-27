@@ -35,21 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.toolbar;
 
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
-import org.geosdi.geoplatform.gui.action.event.ActionDisabledEvent;
-import org.geosdi.geoplatform.gui.action.event.ActionEnabledEvent;
-import org.geosdi.geoplatform.gui.action.event.ActionHandler;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarTreeActionRegistar;
 import org.geosdi.geoplatform.gui.client.widget.tree.toolbar.GPTreeToolbar;
-import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
-import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
-import org.geosdi.geoplatform.gui.impl.tree.ToolbarTreeClientTool;
+import org.geosdi.geoplatform.gui.plugin.tree.ITreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.plugin.tree.TreeToolbarPluginManager;
+import org.geosdi.geoplatform.gui.plugin.tree.TreeToolbarRegion;
 
 /**
  *
@@ -59,7 +51,6 @@ import org.geosdi.geoplatform.gui.impl.tree.ToolbarTreeClientTool;
 public class LayerTreeToolbar extends GPTreeToolbar {
 
     private boolean initialized;
-    private ToolbarTreeClientTool toolbarTreeClientTool = new ToolbarTreeClientTool();
 
     /**
      *
@@ -85,24 +76,16 @@ public class LayerTreeToolbar extends GPTreeToolbar {
      */
     @Override
     public void initialize() {
-        for (GenericClientTool tool : this.toolbarTreeClientTool.getClientTools()) {
-            String id = tool.getId();
-            if (id.equals(TOOLBAR_SEPARATOR)) {
-                this.addSeparator();
-            } else {
-                GeoPlatformToolbarAction action = ToolbarTreeActionRegistar.get(
-                        id, tree);
+        this.addElementsByRegion(TreeToolbarRegion.START_REGION);
+        this.addSeparator();
+        this.addElementsByRegion(TreeToolbarRegion.MIDDLE_REGION);
+        this.addSeparator();
+        this.addElementsByRegion(TreeToolbarRegion.END_REGION);
+    }
 
-                action.setId(id);
-
-                if (((ActionClientTool) tool).getType().equals(ActionClientTool.TOGGLE)) {
-                    this.addToggleButton((ToolbarLayerTreeAction) action);
-                } else {
-                    this.addButton((ToolbarLayerTreeAction) action);
-                }
-
-                action.setEnabled(((ActionClientTool) tool).isEnabled());
-            }
+    private void addElementsByRegion(TreeToolbarRegion region) {
+        for (ITreeToolbarPlugin element : TreeToolbarPluginManager.getToolBarPluginByRegion(region)) {
+            this.toolBar.add(element.getWidget(tree));
         }
     }
 
@@ -111,62 +94,6 @@ public class LayerTreeToolbar extends GPTreeToolbar {
      */
     public void addSeparator() {
         this.toolBar.add(new SeparatorToolItem());
-    }
-
-    /**
-     * Add a button in the Toolbar
-     *
-     * @param action
-     */
-    public void addButton(ToolbarLayerTreeAction action) {
-        final Button button = new Button();
-        button.setId(action.getId());
-        button.setToolTip(action.getTooltip());
-        button.setIcon(action.getImage());
-        button.addSelectionListener(action);
-
-        action.addActionHandler(new ActionHandler() {
-
-            @Override
-            public void onActionEnabled(ActionEnabledEvent event) {
-                button.setEnabled(true);
-            }
-
-            @Override
-            public void onActionDisabled(ActionDisabledEvent event) {
-                button.setEnabled(false);
-            }
-        });
-
-        this.toolBar.add(button);
-    }
-
-    /**
-     * Add Toggle Button in the Toolbar
-     *
-     * @param action
-     */
-    public void addToggleButton(ToolbarLayerTreeAction action) {
-        final ToggleButton button = new ToggleButton();
-        button.setId(action.getId());
-        button.setToolTip(action.getTooltip());
-        button.setIcon(action.getImage());
-        button.addSelectionListener(action);
-
-        action.addActionHandler(new ActionHandler() {
-
-            @Override
-            public void onActionEnabled(ActionEnabledEvent event) {
-                button.setEnabled(true);
-            }
-
-            @Override
-            public void onActionDisabled(ActionDisabledEvent event) {
-                button.setEnabled(false);
-            }
-        });
-
-        this.toolBar.add(button);
     }
 
     /**

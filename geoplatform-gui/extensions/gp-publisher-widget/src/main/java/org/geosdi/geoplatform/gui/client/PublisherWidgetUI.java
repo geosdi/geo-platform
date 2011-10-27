@@ -37,6 +37,9 @@ package org.geosdi.geoplatform.gui.client;
 
 
 import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.gui.client.plugin.PreviewKmlTreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.client.plugin.UploadShapeTreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.plugin.tree.TreeToolbarPluginManager;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -46,6 +49,8 @@ public class PublisherWidgetUI implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
+        TreeToolbarPluginManager.addToolBarPlugin(new UploadShapeTreeToolbarPlugin());
+        TreeToolbarPluginManager.addToolBarPlugin(new PreviewKmlTreeToolbarPlugin());
     }
 
 }

@@ -154,14 +154,8 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
         this.tree.getSelectionModel().addSelectionChangedListener(new SelectionChangedListener<GPBeanTreeModel>() {
 
             @Override
-            public void selectionChanged(
-                    SelectionChangedEvent<GPBeanTreeModel> se) {
-                if (se.getSelectedItem() != null) {
-                    MediatorToolbarTreeAction.getInstance().elementChanged(se.getSelectedItem());
-                } else {
-                    MediatorToolbarTreeAction.getInstance().disableAllActions();
-                }
-
+            public void selectionChanged(SelectionChangedEvent<GPBeanTreeModel> se) {
+                MediatorToolbarTreeAction.getInstance().elementChanged(se.getSelectedItem());
             }
         });
 
@@ -307,5 +301,4 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
     public GPBeanTreeModel getSelectedFolder() {
         return this.tmpFolder;
     }
-
 }

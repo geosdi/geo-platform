@@ -45,9 +45,11 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.GPPeekCacheEventHandler;
+import org.geosdi.geoplatform.gui.client.plugin.SaveTreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.observable.Observable;
 import org.geosdi.geoplatform.gui.observable.Observer;
+import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 import org.geosdi.geoplatform.gui.puregwt.savecache.SaveCacheHandlerManager;
@@ -62,11 +64,12 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
 
     private DisplayLayersProgressBarEvent displayEvent = new DisplayLayersProgressBarEvent(true);
     private boolean visibiltyProgressBar;
-    private boolean viewer;
     private GwtEvent eventAfterAllSaveOperations;
+    private SaveTreeToolbarPlugin savePlugin;
 
-    public SaveTreeAction(TreePanel theTree) {
+    public SaveTreeAction(TreePanel theTree, SaveTreeToolbarPlugin savePlugin) {
         super(theTree, BasicWidgetResources.ICONS.save(), "Save Tree State");
+        this.savePlugin = savePlugin;
         displayEvent.setMessage("Saving Operations On Service");
         GPMementoSaveCache.getInstance().getObservable().addObserver(this);
         TimeoutHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);
@@ -79,13 +82,14 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
         this.peek();
     }
 
+    //TODO Once the user roles are managed, remove the USER_VIEWER control
     @Override
     public void update(Observable o, Object o1) {
         //System.out.println("SaveTreeAction receive observable notify");
-        if (!this.viewer && LayerEvents.SAVE_CACHE_NOT_EMPTY == ((EventType) o1)) {
-            super.setEnabled(true);
+        if (LayerEvents.SAVE_CACHE_NOT_EMPTY == ((EventType) o1)) {
+            this.savePlugin.setEnabledByStatus(TreeStatusEnum.SAVE_CACHE_NOT_EMPTY);
         } else {
-            super.setEnabled(false);
+            this.savePlugin.setEnabledByStatus(TreeStatusEnum.SAVE_CACHE_EMPTY);
         }
     }
 
@@ -120,19 +124,5 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
             LayerHandlerManager.fireEvent(this.displayEvent);
             this.visibiltyProgressBar = true;
         }
-    }
-
-    /**
-     * @return the viewer
-     */
-    public boolean isViewer() {
-        return viewer;
-    }
-
-    /**
-     * @param viewer the viewer to set
-     */
-    public void setViewer(boolean viewer) {
-        this.viewer = viewer;
     }
 }

@@ -217,14 +217,8 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
         this.tree.getSelectionModel().addSelectionChangedListener(new SelectionChangedListener<GPBeanTreeModel>() {
 
             @Override
-            public void selectionChanged(
-                    SelectionChangedEvent<GPBeanTreeModel> se) {
-                if (se.getSelectedItem() != null) {
-                    MediatorToolbarTreeAction.getInstance().elementChanged(se.getSelectedItem());
-                } else {
-                    MediatorToolbarTreeAction.getInstance().disableAllActions();
-                }
-
+            public void selectionChanged(SelectionChangedEvent<GPBeanTreeModel> se) {
+                MediatorToolbarTreeAction.getInstance().elementChanged(se.getSelectedItem());
             }
         });
         this.setCheckable(true);
@@ -299,7 +293,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
                 dropTarget.getScrollSupport().setScrollElement(parentPanel.getLayoutTarget());
             }
         });
-    } 
+    }
 
     @Override
     public GPTreePanel<GPBeanTreeModel> createTreePanel(TreeStore store) {

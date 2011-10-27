@@ -91,7 +91,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     public FormPanel createFormPanel() {
         FormPanel fp = new FormPanel();
         fp.setHeaderVisible(false);
-
         this.nameField = new TextField<String>();
         this.nameField.setId(GPUserManageDetailKeyValue.NAME.toString());
         this.nameField.setName(GPUserManageDetailKeyValue.NAME.toString());

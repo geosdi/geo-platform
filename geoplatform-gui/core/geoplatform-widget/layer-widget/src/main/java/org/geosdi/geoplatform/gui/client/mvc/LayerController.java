@@ -39,8 +39,6 @@ import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
-import org.geosdi.geoplatform.gui.client.service.PublisherRemote;
-import org.geosdi.geoplatform.gui.client.service.PublisherRemoteAsync;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
@@ -49,8 +47,6 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  * 
  */
 public class LayerController extends GeoPlatformController {
-
-    private PublisherRemoteAsync layerService = PublisherRemote.Util.getInstance();
 
     /**
      * @Constructor
@@ -81,10 +77,4 @@ public class LayerController extends GeoPlatformController {
         super.handleEvent(event);
     }
 
-    /**
-     * @return the layerService
-     */
-    public PublisherRemoteAsync getLayerService() {
-        return layerService;
-    }
 }

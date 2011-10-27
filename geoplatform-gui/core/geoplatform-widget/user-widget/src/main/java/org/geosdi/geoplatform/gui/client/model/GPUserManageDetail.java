@@ -152,7 +152,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     @Override
     public void setAuthority(GPRole role) {
         this.authority = role;
-        super.set(GPUserManageDetailKeyValue.AUTORITHY.toString(), this.authority.toStringUI());
+        super.set(GPUserManageDetailKeyValue.AUTORITHY.toString(), this.authority.toString());
     }
 
     /*

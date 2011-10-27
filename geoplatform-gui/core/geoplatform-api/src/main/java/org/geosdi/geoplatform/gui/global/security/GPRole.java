@@ -45,9 +45,9 @@ import java.util.List;
  */
 public enum GPRole {
 
-    ADMIN("ROLE_ADMIN"),
-    USER("ROLE_USER"),
-    VIEWER("ROLE_VIEWER"); // Can't save the tree state
+    ADMIN("Admin"),
+    USER("User"),
+    VIEWER("Viewer"); // Can't save the tree state
     //
     private String role;
     private final static List<GPRole> roleList = new ArrayList<GPRole>();
@@ -57,49 +57,31 @@ public enum GPRole {
         roleList.add(USER);
         roleList.add(VIEWER);
     }
-  
+
     private GPRole(String role) {
         this.role = role;
-    }
-
-    @Override
-    public String toString() {
-        return role;
     }
 
     public static List<GPRole> getAllRoles() {
         return roleList;
     }
 
-    public String toStringUI() {
-        int ind = role.indexOf("_");
-        return role.charAt(ind + 1) + role.substring(ind + 2).toLowerCase();
-    }
-
     public static GPRole fromString(String role) {
         if (role != null) {
-            role = role.trim().toUpperCase();
-            if (role.equals(VIEWER.role)) {
+            role = role.trim();
+            if (role.equalsIgnoreCase(VIEWER.role)) {
                 return VIEWER;
-            } else if (role.equals(USER.role)) {
+            } else if (role.equalsIgnoreCase(USER.role)) {
                 return USER;
-            } else if (role.equals(ADMIN.role)) {
+            } else if (role.equalsIgnoreCase(ADMIN.role)) {
                 return ADMIN;
             }
         }
         return null;
     }
-//    public static GPRole fromStringUI(String roleUI) {
-//        if (roleUI != null) {
-//            roleUI = roleUI.trim().toUpperCase();
-//            if (roleUI.equals(this.to)) {
-//                return VIEWER;
-//            } else if (roleUI.equals(USER.role)) {
-//                return USER;
-//            } else if (roleUI.equals(ADMIN.role)) {
-//                return ADMIN;
-//            }
-//        }
-//        return null;
-//    }
+
+    @Override
+    public String toString() {
+        return role;
+    }
 }

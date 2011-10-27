@@ -120,6 +120,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
         this.passwordField = new TextField<String>();
         this.passwordField.setPassword(true);
+        this.passwordField.setValidator(this.validatorPassword());
 
         this.passwordRepeatField = new TextField<String>();
         this.passwordRepeatField.setPassword(true);
@@ -224,9 +225,8 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.passwordField.setFieldLabel("Password");
         this.passwordField.setToolTip("Password of the user");
         this.passwordField.setAllowBlank(false);
-        this.passwordField.setAutoValidate(true);
-        this.passwordField.setMinLength(6);
 
+        this.passwordRepeatField.setEnabled(false);
         this.passwordRepeatField.setValidator(this.validatorInsertConfirmPassword());
         this.passwordRepeatField.setAllowBlank(false);
 
@@ -242,13 +242,11 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
         this.usernameField.setEnabled(false);
 
-        this.passwordField.setValidator(this.validatorUpdatePassword());
         this.passwordField.setFieldLabel("Reset password");
         this.passwordField.setToolTip("Reset password of the user");
         this.passwordField.setAllowBlank(true);
-        this.passwordField.setAutoValidate(false);
-        this.passwordField.setMinLength(0);
 
+        this.passwordRepeatField.setEnabled(false);
         this.passwordRepeatField.setValidator(this.validatorUpdateConfirmPassword());
         this.passwordRepeatField.setAllowBlank(true);
 
@@ -296,16 +294,16 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         };
     }
 
-    private Validator validatorUpdatePassword() {
+    private Validator validatorPassword() {
         return new Validator() {
 
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.length() < 6) {
-                    updatePassword(false);
+                    passwordRepeatField.setEnabled(false);
                     return "The minimun lenght for password is 6";
                 }
-                updatePassword(true); // TODO check correctness...
+                passwordRepeatField.setEnabled(true);
                 return null;
             }
         };

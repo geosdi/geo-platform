@@ -354,7 +354,8 @@ class ProjectServiceImpl {
         return projectDTO;
     }
 
-    public Long importProject(ProjectDTO projectDTO, Long userID) throws IllegalParameterFault, ResourceNotFoundFault {
+    public Long importProject(ProjectDTO projectDTO, Long userID)
+            throws IllegalParameterFault, ResourceNotFoundFault {
         GPProject project = ProjectDTO.convertToGPProject(projectDTO);
         EntityCorrectness.checkProject(project); // TODO assert
         projectDao.persist(project);

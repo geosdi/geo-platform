@@ -61,6 +61,11 @@ import org.springframework.security.acls.domain.BasePermission;
     @UniqueConstraint(columnNames = {"user_id", "project_id"})})
 public class GPUserProjects implements Serializable {
 
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 788866787917317013L;
+    //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_USER_PROJECTS_SEQ")
     @SequenceGenerator(name = "GP_USER_PROJECTS_SEQ", sequenceName = "GP_USER_PROJECTS_SEQ")

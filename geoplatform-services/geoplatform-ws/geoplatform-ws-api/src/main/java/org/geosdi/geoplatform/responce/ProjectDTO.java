@@ -138,7 +138,7 @@ public class ProjectDTO {
     public String toString() {
         return "ProjectDTO{"
                 + "id=" + id
-                + "name=" + name
+                + ", name=" + name
                 + ", numberOfElements=" + numberOfElements
                 + ", rootFolders=" + rootFolders + '}';
     }

@@ -174,7 +174,6 @@ public class WSProjectTest extends ServiceTest {
     @Test
     public void testFixtureNotNull() {
         for (Map.Entry<String, Object> entry : fixture.entrySet()) {
-            System.out.println("ppp " + entry.getValue());
             Assert.assertNotNull(entry.getKey() + " is NULL", entry.getValue());
         }
     }
@@ -242,6 +241,7 @@ public class WSProjectTest extends ServiceTest {
         Assert.assertEquals("#B", 1, childRootFolderB.size());
         Assert.assertEquals("V-B", nameVector + super.nameRootFolderB, childRootFolderB.get(0).getName());
     }
+
     @Test
     public void testProjectDeep() {
         // TODO 
@@ -274,6 +274,7 @@ public class WSProjectTest extends ServiceTest {
         FolderDTO rootFolderBDTO = rootFoldersDTO.get(1);
         rootFolderBDTO.addLayer(new VectorLayerDTO(vectorRootFolderB));
 
+        projectDTO.setId(null); // Entity passed must not containd an ID, otherwise Hibernate throws PersistentObjectException
         // Import ProjectDTO
         Long projectId = gpWSClient.importProject(projectDTO, super.idUserTest);
         // Check imported Project

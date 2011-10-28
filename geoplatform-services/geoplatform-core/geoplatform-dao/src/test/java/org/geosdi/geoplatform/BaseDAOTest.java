@@ -231,43 +231,32 @@ public abstract class BaseDAOTest {
         this.insertUser("user", GPRole.USER);
         this.insertUser("viewer", GPRole.VIEWER);
         // Manage Users
-        this.insertUser("admin_pag_1", GPRole.ADMIN);
-        this.insertUser("admin_pag_2", GPRole.ADMIN);
-        this.insertUser("admin_pag_3", GPRole.ADMIN);
-        this.insertUser("admin_pag_4", GPRole.ADMIN);
-        this.insertUser("admin_pag_5", GPRole.ADMIN);
-        this.insertUser("admin_pag_6", GPRole.ADMIN);
-        this.insertUser("admin_pag_7", GPRole.ADMIN);
-        this.insertUser("user_pag_1", GPRole.USER);
-        this.insertUser("user_pag_2", GPRole.USER);
-        this.insertUser("user_pag_3", GPRole.USER);
-        this.insertUser("user_pag_4", GPRole.USER);
-        this.insertUser("user_pag_5", GPRole.USER);
-        this.insertUser("user_pag_6", GPRole.USER);
-        this.insertUser("user_pag_7", GPRole.USER);
-        this.insertUser("user_pag_8", GPRole.USER);
-        this.insertUser("user_pag_9", GPRole.USER);
-        this.insertUser("user_pag_10", GPRole.USER);
-        this.insertUser("user_pag_11", GPRole.USER);
-        this.insertUser("viewer_pag_1", GPRole.VIEWER);
-        this.insertUser("viewer_pag_2", GPRole.VIEWER);
-        this.insertUser("viewer_pag_3", GPRole.VIEWER);
-        this.insertUser("viewer_pag_4", GPRole.VIEWER);
-        this.insertUser("viewer_pag_5", GPRole.VIEWER);
-        this.insertUser("viewer_pag_6", GPRole.VIEWER);
-        this.insertUser("viewer_pag_7", GPRole.VIEWER);
-        this.insertUser("viewer_pag_8", GPRole.VIEWER);
-        this.insertUser("viewer_pag_9", GPRole.VIEWER);
-        this.insertUser("viewer_pag_10", GPRole.VIEWER);
-        this.insertUser("viewer_pag_11", GPRole.VIEWER);
-        this.insertUser("viewer_pag_12", GPRole.VIEWER);
-        this.insertUser("viewer_pag_13", GPRole.VIEWER);
-        this.insertUser("viewer_pag_14", GPRole.VIEWER);
-        this.insertUser("viewer_pag_15", GPRole.VIEWER);
-        this.insertUser("viewer_pag_16", GPRole.VIEWER);
-        this.insertUser("viewer_pag_17", GPRole.VIEWER);
+        String usernameAdminPag = "admin_pag_";
+        for (int i = 1; i <= 7; i++) {
+            this.insertUser(usernameAdminPag + i, GPRole.ADMIN);
+        }
+        String usernameUserPag = "user_pag_";
+        for (int i = 1; i <= 11; i++) {
+            this.insertUser(usernameUserPag + i, GPRole.USER);
+        }
+        String usernameViewerPag = "viewer_pag_";
+        for (int i = 1; i <= 17; i++) {
+            this.insertUser(usernameViewerPag + i, GPRole.VIEWER);
+        }
         // SIGV User
         this.sigvTest = this.insertUser("SIGV", GPRole.ADMIN);
+        //
+        GPUser userKProject = this.insertUser("user k", GPRole.ADMIN);
+        String projectNameK = "project_user_k_";
+        for (int i = 1; i <= 41; i++) {
+            GPProject projectIth = this.createProject(projectNameK + i, false,
+                    i, new Date(System.currentTimeMillis() + i * 333));
+            projectDAO.persist(projectIth);
+
+            this.insertBindingUserProject(userKProject, projectIth,
+                    BasePermission.ADMINISTRATION.getMask());
+        }
+
     }
 
     protected GPUser insertUser(String name, GPRole... roles) {

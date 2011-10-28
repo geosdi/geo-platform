@@ -16,46 +16,6 @@
         <property name="order" value="30" />
     </bean>
     
-     <bean name="ZoomToLayerExtent"
-		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
-        <property name="id" value="ZoomToLayerExtent" />
-        <property name="text" value="Zoom to layer extent" />
-        <property name="enabled" value="true" />
-        <property name="order" value="40" />
-    </bean>
-    
-    <bean name="exportToKML"
-		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
-        <property name="id" value="exportToKML" />
-        <property name="text" value="Export To KML" />
-        <property name="enabled" value="true" />
-        <property name="order" value="50" />
-    </bean>
-    
-    <bean name="exportToPDF"
-		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
-        <property name="id" value="exportToPDF" />
-        <property name="text" value="Export To PDF" />
-        <property name="enabled" value="true" />
-        <property name="order" value="60" />
-    </bean>
-    
-    <bean name="exportToTIFF"
-		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
-        <property name="id" value="exportToTIFF" />
-        <property name="text" value="Export To Tiff" />
-        <property name="enabled" value="true" />
-        <property name="order" value="70" />
-    </bean>
-    
-    <bean name="exportToShpZip"
-		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
-        <property name="id" value="exportToShpZip" />
-        <property name="text" value="Export To Shape-Zip" />
-        <property name="enabled" value="true" />
-        <property name="order" value="80" />
-    </bean>
-    
     <bean name="LayerProperties"
 		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
         <property name="id" value="LayerProperties" />

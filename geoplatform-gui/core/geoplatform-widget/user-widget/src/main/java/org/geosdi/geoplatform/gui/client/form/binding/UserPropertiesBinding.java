@@ -201,7 +201,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         } else {
             System.out.println("UPDATE USER"); // TODO DEL
             this.formButtonBinding.stopMonitoring(); // NOTE FormButtonBinding is always start auto-magically
-            this.userRoleComboBox.setValue(userRoleComboBox.findModel(user.getAuthority()));
+//            this.userRoleComboBox.setValue(userRoleComboBox.findModel(user.getAuthority()));
             this.handleFieldsUpdateUser();
         }
     }

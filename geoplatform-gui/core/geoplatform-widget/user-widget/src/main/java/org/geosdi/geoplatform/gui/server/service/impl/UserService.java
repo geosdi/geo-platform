@@ -75,6 +75,7 @@ public class UserService implements IUserService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GeoPlatformService geoPlatformServiceClient;
+    //
     @Autowired
     private SessionUtility sessionUtility;
 

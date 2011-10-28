@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -54,6 +57,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDrag
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolderOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
+import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
@@ -61,7 +65,10 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOConverter;
+import org.geosdi.geoplatform.request.PaginatedSearchRequest;
+import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
+import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
@@ -82,8 +89,10 @@ public class LayerService implements ILayerService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GeoPlatformService geoPlatformServiceClient;
+    //
     @Autowired
     private DTOConverter dtoConverter;
+    //
     @Autowired
     private SessionUtility sessionUtility;
 
@@ -517,5 +526,57 @@ public class LayerService implements ILayerService {
             throw new GeoPlatformException(
                     "The Layer with ID : " + id + " was deleted.");
         }
+    }
+
+    @Override
+    public PagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
+            String searchText, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+        GPUser user = null;
+        try {
+            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
+
+        int start = config.getOffset();
+
+        SearchRequest srq = new SearchRequest("%" + searchText + "%");
+        try {
+            Long projectsCount = this.geoPlatformServiceClient.getUserProjectsCount(user.getId(), srq);
+
+            int page = start == 0 ? start : start / config.getLimit();
+
+            PaginatedSearchRequest psr = new PaginatedSearchRequest("%" + searchText + "%",
+                    config.getLimit(), page);
+
+            List<ProjectDTO> projectsDTO = this.geoPlatformServiceClient.searchUserProjects(user.getId(), psr);
+
+            if (projectsDTO.isEmpty()) {
+                throw new GeoPlatformException("There are no results");
+            }
+
+            ArrayList<GPClientProject> clientProjects = new ArrayList<GPClientProject>();
+
+            for (ProjectDTO projectDTO : projectsDTO) {
+                GPClientProject clientProject = this.convertToGPCLientProject(projectDTO);
+                clientProjects.add(clientProject);
+            }
+
+            return new BasePagingLoadResult<GPClientProject>(clientProjects,
+                    config.getOffset(), projectsCount.intValue());
+
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("An Error Occured : " + ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
+        }
+    }
+
+    private GPClientProject convertToGPCLientProject(ProjectDTO projectDTO) {
+        GPClientProject clientProject = new GPClientProject();
+        clientProject.setId(projectDTO.getId());
+        clientProject.setName(projectDTO.getName());
+        clientProject.setNumberOfElements(projectDTO.getNumberOfElements());
+        return clientProject;
     }
 }

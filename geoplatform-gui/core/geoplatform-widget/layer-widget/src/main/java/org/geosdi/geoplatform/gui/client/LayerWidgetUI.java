@@ -48,6 +48,7 @@ import org.geosdi.geoplatform.gui.client.action.menu.ExportoToPDF;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToShpZip;
 import org.geosdi.geoplatform.gui.client.action.menu.ExportoToTIFF;
 import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
+import org.geosdi.geoplatform.gui.client.action.menu.project.LoadMenuProjects;
 import org.geosdi.geoplatform.gui.client.mvc.ServerController;
 import org.geosdi.geoplatform.gui.client.plugin.AddFolderTreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.client.plugin.AddRasterTreeToolbarPlugin;
@@ -135,6 +136,15 @@ public class LayerWidgetUI implements EntryPoint {
                 return new ExportoToShpZip();
             }
         });
+
+        MenuActionRegistar.put("loadProjects", new MenuActionCreator() {
+
+            @Override
+            public MenuAction createAction() {
+                return new LoadMenuProjects();
+            }
+        });
+
 
     }
 

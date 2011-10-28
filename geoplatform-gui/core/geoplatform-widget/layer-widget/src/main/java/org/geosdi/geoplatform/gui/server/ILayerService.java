@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.server;
 
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
@@ -45,6 +47,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDrag
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolderOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
+import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -58,7 +61,8 @@ public interface ILayerService {
     public ArrayList<GPFolderClientInfo> loadUserFolders(HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    public ArrayList<IGPFolderElements> loadFolderElements(Long folderId, HttpServletRequest httpServletRequest)
+    public ArrayList<IGPFolderElements> loadFolderElements(Long folderId,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     public Long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento,
@@ -69,10 +73,12 @@ public interface ILayerService {
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento, HttpServletRequest httpServletRequest)
+    public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    public boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento, HttpServletRequest httpServletRequest)
+    public boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     public boolean saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento,
@@ -83,29 +89,38 @@ public interface ILayerService {
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento, HttpServletRequest httpServletRequest)
+    public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento, HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
-    
-    public boolean saveLayerProperties(MementoLayerOriginalProperties memento, HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
-    
-    public boolean saveFolderProperties(MementoFolderOriginalProperties memento, HttpServletRequest httpServletRequest)
+    public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    public Long saveFolderForUser(String folderName, int position, int numberOfDescendants, 
+    public boolean saveLayerProperties(MementoLayerOriginalProperties memento,
+            HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
+
+    public boolean saveFolderProperties(MementoFolderOriginalProperties memento,
+            HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
+
+    public Long saveFolderForUser(String folderName, int position, int numberOfDescendants,
             boolean isChecked, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    public Long saveFolder(Long idParentFolder, String folderName, int position, 
+    public Long saveFolder(Long idParentFolder, String folderName, int position,
             int numberOfDescendants, boolean isChecked, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    public void deleteElement(Long id, TreeElement elementType, HttpServletRequest httpServletRequest) throws GeoPlatformException;
-    
+    public void deleteElement(Long id, TreeElement elementType,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException;
+
     public boolean checkWmsGetMapUrl(String url) throws GeoPlatformException;
-    
+
     public boolean checkKmlUrl(String url) throws GeoPlatformException;
+
+    PagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
+            String searchText, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
 }

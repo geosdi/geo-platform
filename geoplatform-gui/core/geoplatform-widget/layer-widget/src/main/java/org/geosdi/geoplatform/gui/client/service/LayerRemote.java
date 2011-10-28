@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.service;
 
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -47,6 +49,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDrag
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolderOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
+import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -146,15 +149,15 @@ public interface LayerRemote extends RemoteService {
      * @throws GeoPlatformException
      */
     public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException;
-    
-   /**
+
+    /**
      * 
      * @param MementoLayerOriginalProperties
      * @return
      * @throws GeoPlatformException 
      */
     public boolean saveLayerProperties(MementoLayerOriginalProperties memento) throws GeoPlatformException;
-    
+
     /**
      * 
      * @param MementoFolderOriginalProperties
@@ -197,7 +200,7 @@ public interface LayerRemote extends RemoteService {
      * @throws GeoPlatformException 
      */
     public boolean checkWmsGetMapUrl(String url) throws GeoPlatformException;
-    
+
     /**
      * 
      * @param url
@@ -205,4 +208,16 @@ public interface LayerRemote extends RemoteService {
      * @throws GeoPlatformException 
      */
     public boolean checkKmlUrl(String url) throws GeoPlatformException;
+
+    /**
+     * 
+     * @param config
+     * @param searchText
+     * @return
+     *          PagingLoadResult<GPClientProject>
+     * 
+     * @throws GeoPlatformException 
+     */
+    PagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
+            String searchText) throws GeoPlatformException;
 }

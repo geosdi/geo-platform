@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
@@ -45,6 +47,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDrag
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveRemove;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoFolderOriginalProperties;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
+import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
@@ -58,11 +61,10 @@ import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
  * @email  nazzareno.sileno@geosdi.org
  */
 public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote {
-    
-    private static final long serialVersionUID = -2177973379191108728L;
 
+    private static final long serialVersionUID = -2177973379191108728L;
     private ILayerService layerService = (ILayerService) GeoPlatformContextUtil.getInstance().getBean(
-                LayerService.class);
+            LayerService.class);
 
     @Override
     public ArrayList<GPFolderClientInfo> loadUserFolders() throws GeoPlatformException {
@@ -70,84 +72,113 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     }
 
     @Override
-    public ArrayList<IGPFolderElements> loadFolderElements(Long folderId) throws GeoPlatformException {
+    public ArrayList<IGPFolderElements> loadFolderElements(Long folderId)
+            throws GeoPlatformException {
         return this.layerService.loadFolderElements(folderId, super.getThreadLocalRequest());
     }
 
     @Override
-    public Long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
-        return this.layerService.saveFolderForUser(folderName, position, numberOfDescendants, 
+    public Long saveFolderForUser(String folderName, int position,
+            int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
+        return this.layerService.saveFolderForUser(folderName, position, numberOfDescendants,
                 isChecked, super.getThreadLocalRequest());
     }
 
     @Override
-    public Long saveFolder(Long idParentFolder, String folderName, int position, int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
+    public Long saveFolder(Long idParentFolder, String folderName, int position,
+            int numberOfDescendants, boolean isChecked) throws GeoPlatformException {
         return this.layerService.saveFolder(idParentFolder, folderName,
                 position, numberOfDescendants, isChecked, super.getThreadLocalRequest());
     }
 
     @Override
-    public void deleteElement(Long id, TreeElement elementType) throws GeoPlatformException {
+    public void deleteElement(Long id, TreeElement elementType)
+            throws GeoPlatformException {
         this.layerService.deleteElement(id, elementType, super.getThreadLocalRequest());
     }
 
     @Override
-    public Long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento) throws GeoPlatformException {
+    public Long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento)
+            throws GeoPlatformException {
         return this.layerService.saveAddedFolderAndTreeModifications(memento, super.getThreadLocalRequest());
     }
-    
+
     @Override
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento) throws GeoPlatformException {
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento)
+            throws GeoPlatformException {
         return this.layerService.saveAddedLayersAndTreeModifications(memento, super.getThreadLocalRequest());
     }
 
     @Override
-    public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento) throws GeoPlatformException {
-        return this.layerService.saveDeletedFolderAndTreeModifications(memento, super.getThreadLocalRequest());
+    public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento)
+            throws GeoPlatformException {
+        return this.layerService.saveDeletedFolderAndTreeModifications(memento,
+                super.getThreadLocalRequest());
     }
 
     @Override
-    public boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento) throws GeoPlatformException {
-        return this.layerService.saveDeletedLayerAndTreeModifications(memento, super.getThreadLocalRequest());
+    public boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento)
+            throws GeoPlatformException {
+        return this.layerService.saveDeletedLayerAndTreeModifications(memento,
+                super.getThreadLocalRequest());
     }
 
     @Override
-    public boolean saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException {
-        return this.layerService.saveDragAndDropLayerAndTreeModifications(memento, super.getThreadLocalRequest());
+    public boolean saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento)
+            throws GeoPlatformException {
+        return this.layerService.saveDragAndDropLayerAndTreeModifications(memento,
+                super.getThreadLocalRequest());
     }
 
     @Override
-    public boolean saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException {
-        return this.layerService.saveDragAndDropFolderAndTreeModifications(memento, super.getThreadLocalRequest());
+    public boolean saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento)
+            throws GeoPlatformException {
+        return this.layerService.saveDragAndDropFolderAndTreeModifications(memento,
+                super.getThreadLocalRequest());
     }
 
     @Override
-    public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException {
-        return this.layerService.saveCheckStatusFolderAndTreeModifications(memento, super.getThreadLocalRequest());
+    public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento)
+            throws GeoPlatformException {
+        return this.layerService.saveCheckStatusFolderAndTreeModifications(memento,
+                super.getThreadLocalRequest());
     }
 
     @Override
-    public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException {
-        return this.layerService.saveCheckStatusLayerAndTreeModifications(memento, super.getThreadLocalRequest());
-    }    
-    
+    public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento)
+            throws GeoPlatformException {
+        return this.layerService.saveCheckStatusLayerAndTreeModifications(memento,
+                super.getThreadLocalRequest());
+    }
+
     @Override
     public boolean checkWmsGetMapUrl(String url) throws GeoPlatformException {
         return this.layerService.checkWmsGetMapUrl(url);
     }
-    
+
     @Override
     public boolean checkKmlUrl(String url) throws GeoPlatformException {
         return this.layerService.checkKmlUrl(url);
     }
 
     @Override
-    public boolean saveLayerProperties(MementoLayerOriginalProperties memento) throws GeoPlatformException {
-        return this.layerService.saveLayerProperties(memento, super.getThreadLocalRequest());
+    public boolean saveLayerProperties(MementoLayerOriginalProperties memento)
+            throws GeoPlatformException {
+        return this.layerService.saveLayerProperties(memento,
+                super.getThreadLocalRequest());
     }
 
     @Override
-    public boolean saveFolderProperties(MementoFolderOriginalProperties memento) throws GeoPlatformException {
-        return this.layerService.saveFolderProperties(memento, super.getThreadLocalRequest());
+    public boolean saveFolderProperties(MementoFolderOriginalProperties memento)
+            throws GeoPlatformException {
+        return this.layerService.saveFolderProperties(memento,
+                super.getThreadLocalRequest());
+    }
+
+    @Override
+    public PagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
+            String searchText) throws GeoPlatformException {
+        return this.layerService.searchProjects(config, searchText,
+                super.getThreadLocalRequest());
     }
 }

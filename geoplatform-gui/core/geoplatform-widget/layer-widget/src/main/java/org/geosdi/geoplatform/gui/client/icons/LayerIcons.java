@@ -105,4 +105,7 @@ public interface LayerIcons extends ImageBundle {
     
     @Resource("editFolder.png")
     AbstractImagePrototype editFolder();
+    
+    @Resource("GPProject.png")
+    AbstractImagePrototype gpProject();
 }

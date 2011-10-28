@@ -16,6 +16,14 @@
         <property name="order" value="30" />
     </bean>
     
+    <bean id="loadProjects"
+        class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+        <property name="id" value="loadProjects" />
+        <property name="text" value="Load Projects" />
+        <property name="enabled" value="true" />
+        <property name="order" value="5" />        
+    </bean>
+    
     <bean name="LayerProperties"
 		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
         <property name="id" value="LayerProperties" />

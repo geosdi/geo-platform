@@ -42,17 +42,13 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
-import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoader;
 import com.extjs.gxt.ui.client.data.RpcProxy;
-import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.KeyListener;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
@@ -64,26 +60,26 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.LabelToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
+public abstract class GeoPlatformSearchWidget<C extends Widget, T extends GeoPlatformBeanModel>
         extends Window {
 
     private VerticalPanel vp;
     protected FormPanel formPanel;
     protected ListStore<T> store;
-    protected Grid<T> grid;
+    protected C widget;
     protected TextField<String> search;
     protected RpcProxy<PagingLoadResult<T>> proxy;
     protected PagingLoader<PagingLoadResult<ModelData>> loader;
@@ -151,7 +147,7 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
         vp = new VerticalPanel();
         vp.setSpacing(10);
         createStore();
-        initGrid();
+        initWidget();
     }
 
     private void initFormPanel() {
@@ -197,7 +193,7 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
 
         formPanel.add(searchFieldSet);
 
-        formPanel.add(this.grid);
+        formPanel.add(this.initWidget());
 
         this.searchStatus = new SearchStatus();
         searchStatus.setAutoWidth(true);
@@ -238,37 +234,6 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
         vp.add(formPanel);
     }
 
-    private void initGrid() {
-        ColumnModel cm = prepareColumnModel();
-
-        grid = new Grid<T>(store, cm);
-        grid.setBorders(true);
-
-        grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-        grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
-
-            @Override
-            public void handleEvent(BaseEvent be) {
-                if (grid.getSelectionModel().getSelection().size() > 0) {
-                    selectButton.enable();
-                } else {
-                    selectButton.disable();
-                }
-            }
-        });
-
-        grid.addListener(Events.CellDoubleClick, new Listener<BaseEvent>() {
-
-            @Override
-            public void handleEvent(BaseEvent be) {
-                executeSelect();
-            }
-        });
-
-        setGridProperties();
-    }
-
     /**
      * Remove all beans from the Store and after Hide the window
      */
@@ -285,7 +250,7 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
         this.searchStatus.clearStatus("");
     }
 
-    public void clearGridElements() {
+    public void clearWidgetElements() {
         this.store.removeAll();
         this.toolBar.clear();
     }
@@ -312,9 +277,7 @@ public abstract class GeoPlatformSearchWidget<T extends GeoPlatformBeanModel>
 
     public abstract void createStore();
 
-    public abstract void setGridProperties();
-
-    public abstract ColumnModel prepareColumnModel();
+    public abstract C initWidget();
 
     public abstract void executeSelect();
 

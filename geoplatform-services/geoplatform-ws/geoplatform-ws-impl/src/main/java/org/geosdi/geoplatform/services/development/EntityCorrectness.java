@@ -65,6 +65,20 @@ public class EntityCorrectness {
         }
     }
 
+    public static void checkProjectLog(GPProject project) {
+        try {
+            EntityCorrectness.checkProject(project);
+        } catch (IllegalParameterFault ex) {
+            throw new EntityCorrectnessException(ex.getMessage());
+        }
+    }
+
+    public static void checkProjectListLog(List<GPProject> projects) {
+        for (GPProject project : projects) {
+            EntityCorrectness.checkProjectLog(project);
+        }
+    }
+
     public static void checkUserProject(GPUserProjects userProject) throws IllegalParameterFault {
         if (userProject == null) {
             throw new IllegalParameterFault("UserProject must be NOT NULL");
@@ -78,14 +92,6 @@ public class EntityCorrectness {
         if ((userProject.getPermissionMask() < BasePermission.READ.getMask())
                 || (userProject.getPermissionMask() > BasePermission.ADMINISTRATION.getMask())) {
             throw new IllegalParameterFault("PermissionMask NOT allowed");
-        }
-    }
-
-    public static void checkProjectLog(GPProject project) {
-        try {
-            EntityCorrectness.checkProject(project);
-        } catch (IllegalParameterFault ex) {
-            throw new EntityCorrectnessException(ex.getMessage());
         }
     }
 

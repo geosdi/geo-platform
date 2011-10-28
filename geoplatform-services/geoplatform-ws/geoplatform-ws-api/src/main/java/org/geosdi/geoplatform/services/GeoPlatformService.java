@@ -207,6 +207,14 @@ public interface GeoPlatformService {
             @WebParam(name = "userId") Long userId,
             @WebParam(name = "projectId") Long projectId)
             throws ResourceNotFoundFault;
+
+    @Get
+    @HttpResource(location = "/user/{userId}")
+    @WebResult(name = "UserProjects")
+    Long getUserProjectsCount(
+            @WebParam(name = "userId") Long userId,
+            SearchRequest request)
+            throws ResourceNotFoundFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Project">

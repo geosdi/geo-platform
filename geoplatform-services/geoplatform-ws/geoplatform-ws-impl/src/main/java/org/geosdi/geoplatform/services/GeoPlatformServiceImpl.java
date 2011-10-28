@@ -386,6 +386,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
             throws ResourceNotFoundFault {
         return projectServiceDelegate.getUserProjectByUserAndProjectId(userId, projectId);
     }
+
+    @Override
+    public Long getUserProjectsCount(Long userId, SearchRequest request)
+            throws ResourceNotFoundFault {
+        return projectServiceDelegate.getUserProjectsCount(userId, request);
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Project">

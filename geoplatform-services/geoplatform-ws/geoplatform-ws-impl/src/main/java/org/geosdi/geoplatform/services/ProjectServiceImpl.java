@@ -61,6 +61,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
@@ -376,7 +377,7 @@ class ProjectServiceImpl {
 
         GPUserProjects userProject = new GPUserProjects();
         userProject.setUserAndProject(user, project);
-        
+
         userProjectsDao.persist(userProject);
 
         return project.getId();
@@ -511,6 +512,22 @@ class ProjectServiceImpl {
         EntityCorrectness.checkUserProjectLog(userProject); // TODO assert
 
         return userProject;
+    }
+
+    public Long getUserProjectsCount(Long userId, SearchRequest request)
+            throws ResourceNotFoundFault {
+        logger.trace("\n\t@@@ getProjectsCount @@@");
+        if (userDao.find(userId) == null) {
+            throw new ResourceNotFoundFault("User not found", userId);
+        }
+
+        Search searchCriteria = new Search(GPUserProjects.class);
+        searchCriteria.addFilterEqual("user.id", userId);
+        if (request != null && request.getNameLike() != null) {
+            searchCriteria.addFilterILike("project.name", request.getNameLike());
+        }
+
+        return new Long(userProjectsDao.count(searchCriteria));
     }
     //</editor-fold>
 

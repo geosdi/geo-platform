@@ -312,9 +312,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<UserDTO> searchUsers(PaginatedSearchRequest request, Long userId)
+    public List<UserDTO> searchUsers(Long userId, PaginatedSearchRequest request)
             throws ResourceNotFoundFault {
-        return userServiceDelegate.searchUsers(request, userId);
+        return userServiceDelegate.searchUsers(userId, request);
     }
 
     @Override
@@ -391,6 +391,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public Long getUserProjectsCount(Long userId, SearchRequest request)
             throws ResourceNotFoundFault {
         return projectServiceDelegate.getUserProjectsCount(userId, request);
+    }
+
+    @Override
+    public List<ProjectDTO> searchUserProjects(Long userId, PaginatedSearchRequest request) 
+            throws ResourceNotFoundFault {
+        return projectServiceDelegate.searchUserProjects(userId, request);
     }
     //</editor-fold>
 

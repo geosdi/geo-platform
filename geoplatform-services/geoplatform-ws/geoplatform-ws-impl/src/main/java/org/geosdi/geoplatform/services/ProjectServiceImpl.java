@@ -37,9 +37,11 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
+import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -516,10 +518,11 @@ class ProjectServiceImpl {
 
     public Long getUserProjectsCount(Long userId, SearchRequest request)
             throws ResourceNotFoundFault {
-        logger.trace("\n\t@@@ getProjectsCount @@@");
-        if (userDao.find(userId) == null) {
+        GPUser user = userDao.find(userId);
+        if (user == null) {
             throw new ResourceNotFoundFault("User not found", userId);
         }
+        EntityCorrectness.checkUserLog(user); // TODO assert
 
         Search searchCriteria = new Search(GPUserProjects.class);
         searchCriteria.addFilterEqual("user.id", userId);
@@ -528,6 +531,37 @@ class ProjectServiceImpl {
         }
 
         return new Long(userProjectsDao.count(searchCriteria));
+    }
+
+    public List<ProjectDTO> searchUserProjects(Long userId, PaginatedSearchRequest request)
+            throws ResourceNotFoundFault {
+        GPUser user = userDao.find(userId);
+        if (user == null) {
+            throw new ResourceNotFoundFault("User not found", userId);
+        }
+        EntityCorrectness.checkUserLog(user); // TODO assert
+
+        Search searchCriteria = new Search(GPUserProjects.class);
+        searchCriteria.addFilterEqual("user.id", userId);
+        searchCriteria.setMaxResults(request.getNum());
+        searchCriteria.setPage(request.getPage());
+
+        String like = request.getNameLike();
+        if (like != null) {
+            searchCriteria.addFilterILike("project.name", like);
+//        searchCriteria.addSortAsc("project.name");
+        }
+
+        List<GPUserProjects> userProjects = userProjectsDao.search(searchCriteria);
+        EntityCorrectness.checkUserProjectListLog(userProjects); // TODO assert
+
+        List<GPProject> projects = new ArrayList<GPProject>(userProjects.size());
+        for (GPUserProjects userProject : userProjects) {
+            projects.add(userProject.getProject());
+        }
+        EntityCorrectness.checkProjectListLog(projects); // TODO assert
+
+        return ProjectDTO.convertToProjectDTOList(projects);
     }
     //</editor-fold>
 

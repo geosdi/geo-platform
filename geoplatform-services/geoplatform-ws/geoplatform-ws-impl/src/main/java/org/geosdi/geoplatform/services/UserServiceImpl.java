@@ -259,12 +259,14 @@ class UserServiceImpl {
      * @param userId the of user that will exclude from the search (logged user)
      * @return Users the list of Users found
      */
-    public List<UserDTO> searchUsers(PaginatedSearchRequest request, Long userId)
+    public List<UserDTO> searchUsers(Long userId, PaginatedSearchRequest request)
             throws ResourceNotFoundFault {
+        EntityCorrectness.checkUserLog(this.getUserById(userId)); // TODO assert
+
         Search searchCriteria = new Search(GPUser.class);
+        searchCriteria.addFilterNotEqual("id", userId);
         searchCriteria.setMaxResults(request.getNum());
         searchCriteria.setPage(request.getPage());
-        searchCriteria.addFilterNotEqual("id", userId);
         searchCriteria.addSortAsc("username");
 
         String like = request.getNameLike();

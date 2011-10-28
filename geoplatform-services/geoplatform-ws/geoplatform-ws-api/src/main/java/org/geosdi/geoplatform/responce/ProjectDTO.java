@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.responce;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -52,8 +53,8 @@ import org.geosdi.geoplatform.core.model.GPProject;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ProjectDTO {
 
+    private Long id;
     private String name;
-    //
     private Integer numberOfElements;
     //
     @XmlElementWrapper(name = "rootFolders")
@@ -71,8 +72,24 @@ public class ProjectDTO {
      * @param folder
      */
     public ProjectDTO(GPProject project) {
+        this.id = project.getId();
         this.name = project.getName();
         this.numberOfElements = project.getNumberOfElements();
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -119,17 +136,30 @@ public class ProjectDTO {
 
     @Override
     public String toString() {
-        return "ProjectDTO{" + "name=" + name
+        return "ProjectDTO{"
+                + "id=" + id
+                + "name=" + name
                 + ", numberOfElements=" + numberOfElements
                 + ", rootFolders=" + rootFolders + '}';
     }
 
     public static GPProject convertToGPProject(ProjectDTO projectDTO) {
         GPProject project = new GPProject();
+        project.setId(projectDTO.getId());
         project.setName(projectDTO.getName());
         if (projectDTO.getNumberOfElements() != null) {
             project.setNumberOfElements(projectDTO.getNumberOfElements());
         }
         return project;
-    }    
+    }
+
+    public static List<ProjectDTO> convertToProjectDTOList(List<GPProject> projects) {
+        List<ProjectDTO> projectsDTO = new ArrayList<ProjectDTO>(projects.size());
+
+        for (GPProject project : projects) {            
+            projectsDTO.add(new ProjectDTO(project));
+        }
+
+        return projectsDTO;
+    }
 }

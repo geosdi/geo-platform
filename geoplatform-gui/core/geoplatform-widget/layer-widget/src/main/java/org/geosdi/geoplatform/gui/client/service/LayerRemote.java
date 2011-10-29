@@ -219,5 +219,5 @@ public interface LayerRemote extends RemoteService {
      * @throws GeoPlatformException 
      */
     PagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
-            String searchText) throws GeoPlatformException;
+            String searchText, String imageURL) throws GeoPlatformException;
 }

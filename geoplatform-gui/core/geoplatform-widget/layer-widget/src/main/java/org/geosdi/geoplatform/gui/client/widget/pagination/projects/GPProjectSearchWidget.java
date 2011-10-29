@@ -47,7 +47,9 @@ import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
@@ -119,8 +121,10 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<GPClientProject>> callback) {
 
-                LayerRemote.Util.getInstance().searchProjects((PagingLoadConfig) loadConfig,
-                        searchText, callback);
+                LayerRemote.Util.getInstance().searchProjects(
+                        (PagingLoadConfig) loadConfig,
+                        searchText, LayerResources.ICONS.gpProject().getHTML(),
+                        callback);
             }
         };
 

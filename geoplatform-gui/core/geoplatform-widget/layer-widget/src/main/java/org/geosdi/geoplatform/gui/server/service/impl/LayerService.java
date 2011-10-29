@@ -530,7 +530,7 @@ public class LayerService implements ILayerService {
 
     @Override
     public PagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
-            String searchText, HttpServletRequest httpServletRequest)
+            String searchText, String imageURL, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPUser user = null;
         try {
@@ -559,7 +559,7 @@ public class LayerService implements ILayerService {
             ArrayList<GPClientProject> clientProjects = new ArrayList<GPClientProject>();
 
             for (ProjectDTO projectDTO : projectsDTO) {
-                GPClientProject clientProject = this.convertToGPCLientProject(projectDTO);
+                GPClientProject clientProject = this.convertToGPCLientProject(projectDTO, imageURL);
                 clientProjects.add(clientProject);
             }
 
@@ -572,10 +572,12 @@ public class LayerService implements ILayerService {
         }
     }
 
-    private GPClientProject convertToGPCLientProject(ProjectDTO projectDTO) {
+    private GPClientProject convertToGPCLientProject(ProjectDTO projectDTO,
+            String imageURL) {
         GPClientProject clientProject = new GPClientProject();
         clientProject.setId(projectDTO.getId());
         clientProject.setName(projectDTO.getName());
+        clientProject.setImage(imageURL);
         clientProject.setNumberOfElements(projectDTO.getNumberOfElements());
         return clientProject;
     }

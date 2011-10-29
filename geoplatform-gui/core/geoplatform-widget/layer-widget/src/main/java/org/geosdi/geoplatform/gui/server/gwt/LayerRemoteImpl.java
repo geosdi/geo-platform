@@ -177,8 +177,8 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
 
     @Override
     public PagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
-            String searchText) throws GeoPlatformException {
-        return this.layerService.searchProjects(config, searchText,
+            String searchText, String imageURL) throws GeoPlatformException {
+        return this.layerService.searchProjects(config, searchText, imageURL,
                 super.getThreadLocalRequest());
     }
 }

@@ -106,7 +106,7 @@ public interface LayerRemoteAsync {
 
     public void checkKmlUrl(String url, AsyncCallback<Boolean> callback);
 
-    void searchProjects(PagingLoadConfig config, String searchText,
+    void searchProjects(PagingLoadConfig config, String searchText, String imageURL,
             AsyncCallback<PagingLoadResult<GPClientProject>> callback)
             throws GeoPlatformException;
 }

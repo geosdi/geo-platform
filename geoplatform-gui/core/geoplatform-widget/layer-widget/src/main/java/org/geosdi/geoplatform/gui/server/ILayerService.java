@@ -121,6 +121,7 @@ public interface ILayerService {
     public boolean checkKmlUrl(String url) throws GeoPlatformException;
 
     PagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
-            String searchText, HttpServletRequest httpServletRequest)
+            String searchText, String imageURL,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 }

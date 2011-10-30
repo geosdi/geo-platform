@@ -63,7 +63,7 @@ public abstract class GPListViewSearchWidget<T extends GeoPlatformBeanModel>
     public ListView<T> initWidget() {
         listView = new ListView<T>();
         listView.addStyleName("overview-page");
-        listView.setItemSelector(".sample-box");
+        listView.setItemSelector(".project-box");
         listView.setOverStyle("sample-over");
         listView.setSelectStyle("none");
         listView.setBorders(false);

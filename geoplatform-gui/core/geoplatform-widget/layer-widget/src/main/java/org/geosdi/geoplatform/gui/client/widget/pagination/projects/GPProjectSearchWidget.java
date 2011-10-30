@@ -85,12 +85,17 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
     public void setListViewProperties() {
         StringBuilder sb = new StringBuilder();
         sb.append("<tpl for=\".\">");
-        sb.append("<div class='sample-box' style='padding-top: 4px;border: none'>");
+        sb.append("<div class='project-box' style='padding-top: 4px;border: none'>");
         sb.append("<div class='thumbd'>{image}</div>");
         sb.append("<div>{name}</div>");
         sb.append("<div>{numberOfElements}</div>");
         sb.append("</div></tpl>");
 
+        listView.addStyleName("overview-page");
+        listView.setItemSelector(".project-box");
+        listView.setOverStyle("sample-over");
+        listView.setSelectStyle("none");
+        listView.setBorders(false);
         listView.setTemplate(sb.toString());
 
         listView.setSize(630, 340);

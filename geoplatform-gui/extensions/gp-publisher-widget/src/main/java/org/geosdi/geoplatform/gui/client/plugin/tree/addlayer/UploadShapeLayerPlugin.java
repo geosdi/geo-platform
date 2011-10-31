@@ -70,6 +70,7 @@ public class UploadShapeLayerPlugin extends GeoPlatformBeanModel
         if (action == null) {
             action = new UploadShapeAction(treePanel);
             this.setName(action.getTooltip());
+            action.setEnabled(true);
         }
         return action;
     }

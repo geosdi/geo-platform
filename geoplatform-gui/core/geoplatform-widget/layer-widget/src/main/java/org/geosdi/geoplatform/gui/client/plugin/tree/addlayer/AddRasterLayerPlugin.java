@@ -105,6 +105,7 @@ public class AddRasterLayerPlugin extends GeoPlatformBeanModel
     public void initPlugin(TreePanel treePanel) {
         this.setImage(LayerResources.ICONS.mappAdd().getHTML());
         action = new AddRasterTreeAction(treePanel);
+        action.setEnabled(true);
         this.setName(action.getTooltip());
     }
 

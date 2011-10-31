@@ -104,6 +104,7 @@ public class AddVectorLayerPlugin extends GeoPlatformBeanModel implements
     public void initPlugin(TreePanel treePanel) {
         this.setImage(LayerResources.ICONS.mappAdd().getHTML());
         action = new AddVectorTreeAction(treePanel);
+        action.setEnabled(true);
         this.setName(action.getTooltip());
     }
     

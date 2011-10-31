@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
+import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.junit.Test;
@@ -83,7 +84,8 @@ public class WSUserTest extends ServiceTest {
         Assert.assertTrue("Number of Users stored into database", userList.size() >= 1); // super.SetUp() added 1 user
 
         // Number of User Like
-        long numUsersLike = gpWSClient.getUsersCount(new SearchRequest(usernameTest));
+        long numUsersLike = gpWSClient.getUsersCount(
+                new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         Assert.assertEquals("Number of User Like", new Long(1).longValue(), numUsersLike);
 
         // Get User from Id
@@ -98,11 +100,13 @@ public class WSUserTest extends ServiceTest {
 
         // Get User from Username
         // Get UserDTO from Username
-        userDTOFromWS = gpWSClient.getShortUserByName(new SearchRequest(usernameTest));
+        userDTOFromWS = gpWSClient.getShortUserByName(
+                new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         Assert.assertNotNull(userDTOFromWS);
         Assert.assertEquals("Error found UserDTO from Username", idUserTest, userDTOFromWS.getId().longValue());
         // Get GPUser from Username
-        userFromWS = gpWSClient.getUserDetailByName(new SearchRequest(usernameTest));
+        userFromWS = gpWSClient.getUserDetailByName(
+                new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         Assert.assertNotNull(userFromWS);
         Assert.assertEquals("Error found GPUser from Username", idUserTest, userFromWS.getId().longValue());
     }

@@ -64,6 +64,7 @@ import org.geosdi.geoplatform.core.model.GPUserProjects;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
+import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 
@@ -109,7 +110,8 @@ public abstract class ServiceTest {
 
         // Insert User
         idUserTest = this.createAndInsertUser(usernameTest, GPRole.USER);
-        userTest = gpWSClient.getUserDetailByName(new SearchRequest(usernameTest));
+        userTest = gpWSClient.getUserDetailByName(
+                new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         // Insert Project
         idProjectTest = this.createAndInsertProject("project_test_ws", false, 2, new Date(System.currentTimeMillis()));
         projectTest = gpWSClient.getProjectDetail(idProjectTest);

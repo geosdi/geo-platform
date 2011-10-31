@@ -53,6 +53,7 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.converter.GPUserConverter;
+import org.geosdi.geoplatform.gui.utility.DefaultProjectEnum;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
@@ -140,7 +141,7 @@ public class SecurityService implements ISecurityService {
         //TODO: Set the right time in seconds before session interrupt
         session.setMaxInactiveInterval(900);
         session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), user);
-        this.sessionUtility.setProjectId((Long)defaultProject.getId());
+        session.setAttribute(DefaultProjectEnum.DEFAULT_PROJECT.toString(), defaultProject);
     }
 
     public GPUser loginFromSessionServer(HttpServletRequest httpServletRequest)

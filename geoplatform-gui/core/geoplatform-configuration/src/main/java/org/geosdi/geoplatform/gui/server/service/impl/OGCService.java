@@ -48,6 +48,7 @@ import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.IOGCService;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOServerConverter;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.RequestById;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -144,12 +145,15 @@ public class OGCService implements IOGCService {
     public ArrayList<String> findDistinctLayersDataSource(HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         ArrayList<String> dataSources = null;
-        Long projectId = this.sessionUtility.getDefaultProjectFromUserSession();
+        
         try {
+            Long projectId = this.sessionUtility.getDefaultProjectFromUserSession(httpServletRequest).getId();
             dataSources = geoPlatformServiceClient.getLayersDataSourceByProjectId(projectId);
         } catch (ResourceNotFoundFault e) {
             throw new GeoPlatformException("Error in findDistinctLayersDataSource: ResourceNotFoundFault "
                     + e);
+        } catch(GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
         }
         return dataSources;
     }

@@ -37,7 +37,9 @@ package org.geosdi.geoplatform.gui.server;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.gui.utility.DefaultProjectEnum;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.springframework.stereotype.Service;
@@ -48,19 +50,21 @@ import org.springframework.stereotype.Service;
  */
 @Service("sessionUtility")
 public class SessionUtility {
-    
-    private Long projectId;
-    
-    public void setProjectId(Long projectId){
-        this.projectId = projectId;
+
+    public GPProject getDefaultProjectFromUserSession(HttpServletRequest httpServletRequest)
+            throws GPSessionTimeout {
+        GPProject project;
+        HttpSession session = httpServletRequest.getSession();
+        project = (GPProject) session.getAttribute(DefaultProjectEnum.DEFAULT_PROJECT.toString());
+        if (project != null) {
+            return project;
+        } else {
+            throw new GPSessionTimeout("Session Timeout");
+        }
     }
 
-    public Long getDefaultProjectFromUserSession() {
-        return projectId;
-    }
-
-    public GPUser getUserAlreadyFromSession(HttpServletRequest httpServletRequest) 
-        throws GPSessionTimeout{
+    public GPUser getUserAlreadyFromSession(HttpServletRequest httpServletRequest)
+            throws GPSessionTimeout {
         GPUser user = null;
         HttpSession session = httpServletRequest.getSession();
         Object userObj = session.getAttribute(UserLoginEnum.USER_LOGGED.toString());
@@ -71,5 +75,4 @@ public class SessionUtility {
         }
         return user;
     }
-    
 }

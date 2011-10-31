@@ -33,77 +33,30 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.action.toolbar;
 
-import com.extjs.gxt.ui.client.event.WindowEvent;
-import com.extjs.gxt.ui.client.event.WindowListener;
-import com.extjs.gxt.ui.client.widget.Window;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
+import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.widget.form.AddLayerWidget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformWindow extends Window {
+public class AddLayersTreeAction extends ToolbarLayerTreeAction {
 
-    private boolean initialized;
+    private AddLayerWidget widget;
 
-    public GeoPlatformWindow(boolean lazy) {
-        if (!lazy) {
-            this.init();
-        }
+    public AddLayersTreeAction(TreePanel theTree) {
+        super(theTree, LayerResources.ICONS.addLayers(), "Add Layers");
+        this.widget = new AddLayerWidget(theTree);
     }
-
-    /**
-     * Init the Widget
-     */
-    protected void init() {
-        if (!initialized) {
-            this.initializeWindow();
-            this.finalizeInitOperations();
-            this.initialized = true;
-        }
-    }
-
-    public void finalizeInitOperations() {
-        this.addComponent();
-    }
-
-    private void initializeWindow() {
-        this.initSize();
-
-        addWindowListener(new WindowListener() {
-
-            @Override
-            public void windowHide(WindowEvent we) {
-                reset();
-            }
-        });
-
-        setWindowProperties();
-    }
-
-    public void reset() {
-    }
-
-    public abstract void addComponent();
-
-    public abstract void initSize();
-
-    public abstract void setWindowProperties();
 
     @Override
-    public void show() {
-        this.init();
-        super.show();
-    }
-
-    /**
-     * 
-     * @return 
-     *          Component State for Initialization of All Components
-     */
-    public boolean isInitialized() {
-        return initialized;
+    public void componentSelected(ButtonEvent ce) {
+        this.widget.show();
     }
 }

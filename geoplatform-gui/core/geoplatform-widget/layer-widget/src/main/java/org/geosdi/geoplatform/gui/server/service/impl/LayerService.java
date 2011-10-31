@@ -107,14 +107,16 @@ public class LayerService implements ILayerService {
 
     @Override
     public ArrayList<GPFolderClientInfo> loadUserFolders(HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        Long projectId = null;
+        List<FolderDTO> folderList = null;
         try {
-            Long projectId = this.sessionUtility.getDefaultProjectFromUserSession(httpServletRequest).getId();
+            projectId = this.sessionUtility.getDefaultProjectFromUserSession(httpServletRequest).getId();
             this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
-            List<FolderDTO> folderList = geoPlatformServiceClient.getRootFoldersByProjectId(projectId);
-            return this.dtoConverter.convertOnlyFolder(folderList);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
+        folderList = geoPlatformServiceClient.getRootFoldersByProjectId(projectId);
+        return this.dtoConverter.convertOnlyFolder(folderList);
     }
 
     @Override

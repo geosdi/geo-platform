@@ -33,20 +33,14 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.plugin.tree;
-
-import com.extjs.gxt.ui.client.widget.Component;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+package org.geosdi.geoplatform.gui.plugin.tree.toolbar;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface ITreeToolbarPlugin<T extends Component> {
+public enum TreeToolbarRegion {
     
-    public T getWidget(TreePanel treePanel);
+    START_REGION, MIDDLE_REGION, END_REGION;
     
-    public boolean setEnabledByStatus(TreeStatusEnum status);
-
-    public TreeToolbarRegion getRegion();
 }

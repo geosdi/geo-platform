@@ -43,21 +43,18 @@ import org.geosdi.geoplatform.gui.client.mvc.LayerController;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.gui.client.action.menu.ExportoToKML;
-import org.geosdi.geoplatform.gui.client.action.menu.ExportoToPDF;
-import org.geosdi.geoplatform.gui.client.action.menu.ExportoToShpZip;
-import org.geosdi.geoplatform.gui.client.action.menu.ExportoToTIFF;
-import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.action.menu.project.LoadMenuProjects;
 import org.geosdi.geoplatform.gui.client.mvc.ServerController;
-import org.geosdi.geoplatform.gui.client.plugin.AddFolderTreeToolbarPlugin;
-import org.geosdi.geoplatform.gui.client.plugin.AddRasterTreeToolbarPlugin;
-import org.geosdi.geoplatform.gui.client.plugin.AddVectorTreeToolbarPlugin;
-import org.geosdi.geoplatform.gui.client.plugin.DeleteElementTreeToolbarPlugin;
-import org.geosdi.geoplatform.gui.client.plugin.GetMapTreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.AddFolderTreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.AddLayerTreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.DeleteElementTreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.client.plugin.PrintLayersTreeToolbarPlugin;
-import org.geosdi.geoplatform.gui.client.plugin.SaveTreeToolbarPlugin;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeToolbarPluginManager;
+import org.geosdi.geoplatform.gui.client.plugin.tree.addlayer.AddRasterLayerPlugin;
+import org.geosdi.geoplatform.gui.client.plugin.tree.addlayer.AddVectorLayerPlugin;
+import org.geosdi.geoplatform.gui.client.plugin.tree.addlayer.GetMapLayerPlugin;
+import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.SaveTreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AddLayerPluginManager;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginManager;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
@@ -96,47 +93,6 @@ public class LayerWidgetUI implements EntryPoint {
             }
         });
 
-        MenuActionRegistar.put("ZoomToLayerExtent", new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new ZoomToLayerExtentAction();
-            }
-        });
-
-        MenuActionRegistar.put("exportToKML", new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new ExportoToKML();
-            }
-        });
-
-        MenuActionRegistar.put("exportToPDF", new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new ExportoToPDF();
-            }
-        });
-
-
-        MenuActionRegistar.put("exportToTIFF", new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new ExportoToTIFF();
-            }
-        });
-
-        MenuActionRegistar.put("exportToShpZip", new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new ExportoToShpZip();
-            }
-        });
-
         MenuActionRegistar.put("loadProjects", new MenuActionCreator() {
 
             @Override
@@ -150,13 +106,16 @@ public class LayerWidgetUI implements EntryPoint {
 
     private void addTreeToolbarComponents() {
         TreeToolbarPluginManager.addToolBarPlugin(new AddFolderTreeToolbarPlugin());
-        TreeToolbarPluginManager.addToolBarPlugin(new AddRasterTreeToolbarPlugin());
-        TreeToolbarPluginManager.addToolBarPlugin(new AddVectorTreeToolbarPlugin());
+        TreeToolbarPluginManager.addToolBarPlugin(new AddLayerTreeToolbarPlugin());
+//        TreeToolbarPluginManager.addToolBarPlugin(new AddVectorTreeToolbarPlugin());
         TreeToolbarPluginManager.addToolBarPlugin(new DeleteElementTreeToolbarPlugin());
         TreeToolbarPluginManager.addToolBarPlugin(new SaveTreeToolbarPlugin());
         //No entrypoint in print module then I declared here the plugin
         TreeToolbarPluginManager.addToolBarPlugin(new PrintLayersTreeToolbarPlugin());
-        TreeToolbarPluginManager.addToolBarPlugin(new GetMapTreeToolbarPlugin());
-
+//        TreeToolbarPluginManager.addToolBarPlugin(new GetMapTreeToolbarPlugin());
+        
+        AddLayerPluginManager.addWindowPlugin(new AddRasterLayerPlugin());
+        AddLayerPluginManager.addWindowPlugin(new AddVectorLayerPlugin());
+        AddLayerPluginManager.addWindowPlugin(new GetMapLayerPlugin());
     }
 }

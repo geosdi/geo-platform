@@ -33,12 +33,12 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.plugin;
+package org.geosdi.geoplatform.gui.client.plugin.tree.toolbar;
 
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.action.PrintLayersAction;
+import org.geosdi.geoplatform.gui.client.action.PreviewKmlTreeAction;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class PrintLayersTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
+public class PreviewKmlTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
 
     private Button button;
 
@@ -60,7 +60,7 @@ public class PrintLayersTreeToolbarPlugin implements ITreeToolbarPlugin<Button> 
     @Override
     public Button getWidget(TreePanel treePanel) {
         if (button == null) {
-            ToolbarLayerTreeAction action = new PrintLayersAction(treePanel);
+            ToolbarLayerTreeAction action = new PreviewKmlTreeAction(treePanel);
             button = new Button();
             button.setToolTip(action.getTooltip());
             button.setIcon(action.getImage());
@@ -72,6 +72,6 @@ public class PrintLayersTreeToolbarPlugin implements ITreeToolbarPlugin<Button> 
 
     @Override
     public TreeToolbarRegion getRegion() {
-        return TreeToolbarRegion.MIDDLE_REGION;
+        return TreeToolbarRegion.END_REGION;
     }
 }

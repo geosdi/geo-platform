@@ -39,9 +39,9 @@ import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.toolbar.GPTreeToolbar;
-import org.geosdi.geoplatform.gui.plugin.tree.ITreeToolbarPlugin;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeToolbarPluginManager;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeToolbarRegion;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginManager;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
 
 /**
  *

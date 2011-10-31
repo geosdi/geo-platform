@@ -33,49 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.plugin;
+package org.geosdi.geoplatform.gui.plugin.tree.toolbar;
 
-import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.action.toolbar.LoadWmsGetMapFromUrlTreeAction;
-import org.geosdi.geoplatform.gui.plugin.tree.ITreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeToolbarRegion;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GetMapTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
+public interface ITreeToolbarPlugin<T extends Component> {
+    
+    public T getWidget(TreePanel treePanel);
+    
+    public boolean setEnabledByStatus(TreeStatusEnum status);
 
-    private Button button;
-
-    @Override
-    public boolean setEnabledByStatus(TreeStatusEnum status) {
-        boolean condition = false;
-        if(status.equals(TreeStatusEnum.FOLDER_SELECTED)){
-            condition = true;
-        }
-        button.setEnabled(condition);
-        return condition;
-    }
-
-    @Override
-    public Button getWidget(TreePanel treePanel) {
-        if (button == null) {
-            ToolbarLayerTreeAction action = new LoadWmsGetMapFromUrlTreeAction(treePanel);
-            button = new Button();
-            button.setToolTip(action.getTooltip());
-            button.setIcon(action.getImage());
-            button.addSelectionListener(action);
-            this.button.setEnabled(true);
-        }
-        return button;
-    }
-
-    @Override
-    public TreeToolbarRegion getRegion() {
-        return TreeToolbarRegion.END_REGION;
-    }
+    public TreeToolbarRegion getRegion();
 }

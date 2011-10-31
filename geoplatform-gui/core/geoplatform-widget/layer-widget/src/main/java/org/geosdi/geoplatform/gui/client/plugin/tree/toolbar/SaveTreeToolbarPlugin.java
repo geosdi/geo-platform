@@ -33,45 +33,52 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.plugin;
+package org.geosdi.geoplatform.gui.client.plugin.tree.toolbar;
 
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.action.UploadShapeAction;
-import org.geosdi.geoplatform.gui.plugin.tree.ITreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.client.action.toolbar.SaveTreeAction;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeToolbarRegion;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginManager;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class UploadShapeTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
+public class SaveTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
 
     private Button button;
 
     @Override
     public boolean setEnabledByStatus(TreeStatusEnum status) {
-        button.setEnabled(true);
-        return true;
+        boolean condition = button.isEnabled();
+        if (status.equals(TreeStatusEnum.SAVE_CACHE_EMPTY)){
+            condition = false;
+            button.setEnabled(condition);
+        } else if (!TreeToolbarPluginManager.USER_VIEWER && status.equals(TreeStatusEnum.SAVE_CACHE_NOT_EMPTY)) {
+            condition = true;
+            button.setEnabled(condition);
+        }
+        return condition;
     }
 
     @Override
     public Button getWidget(TreePanel treePanel) {
         if (button == null) {
-            ToolbarLayerTreeAction action = new UploadShapeAction(treePanel);
+            SaveTreeAction action = new SaveTreeAction(treePanel, this);
             button = new Button();
             button.setToolTip(action.getTooltip());
             button.setIcon(action.getImage());
             button.addSelectionListener(action);
-            this.button.setEnabled(true);
+            this.button.setEnabled(false);
         }
         return button;
     }
 
     @Override
     public TreeToolbarRegion getRegion() {
-        return TreeToolbarRegion.END_REGION;
+        return TreeToolbarRegion.MIDDLE_REGION;
     }
 }

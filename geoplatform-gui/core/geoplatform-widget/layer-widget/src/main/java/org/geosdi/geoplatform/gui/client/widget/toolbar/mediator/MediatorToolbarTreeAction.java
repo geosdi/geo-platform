@@ -39,9 +39,11 @@ import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.plugin.tree.ITreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeToolbarPluginManager;
+import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AddLayerPluginManager;
+import org.geosdi.geoplatform.gui.plugin.tree.addlayer.IAddLayerPlugin;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginManager;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -50,7 +52,22 @@ import org.geosdi.geoplatform.gui.plugin.tree.TreeToolbarPluginManager;
 public class MediatorToolbarTreeAction {
 
     private static MediatorToolbarTreeAction instance = new MediatorToolbarTreeAction();
-    
+    private static boolean addLayerVisible = false;
+
+    /**
+     * @return the addLayerVisible
+     */
+    public static boolean isAddLayerVisible() {
+        return addLayerVisible;
+    }
+
+    /**
+     * @param aAddLayerVisible the addLayerVisible to set
+     */
+    public static void setAddLayerVisible(boolean aAddLayerVisible) {
+        addLayerVisible = aAddLayerVisible;
+    }
+
     private MediatorToolbarTreeAction() {
     }
 
@@ -67,17 +84,22 @@ public class MediatorToolbarTreeAction {
         for (ITreeToolbarPlugin plugin : TreeToolbarPluginManager.getToolBarPlugin()) {
             plugin.setEnabledByStatus(status);
         }
+        if (isAddLayerVisible()) {
+            for (IAddLayerPlugin plugin : AddLayerPluginManager.getWindowPlugins()) {
+                plugin.setEnabledByStatus(status);
+            }
+        }
     }
 
     private TreeStatusEnum calculateTreeStatus(GPBeanTreeModel element) {
         TreeStatusEnum status = null;
-        if(element == null){
+        if (element == null) {
             status = TreeStatusEnum.NO_SELECTION;
-        } else if(element instanceof FolderTreeNode){
+        } else if (element instanceof FolderTreeNode) {
             status = TreeStatusEnum.FOLDER_SELECTED;
-        } else if(element instanceof GPRootTreeNode){
+        } else if (element instanceof GPRootTreeNode) {
             status = TreeStatusEnum.ROOT_SELECTED;
-        } else if(element instanceof RasterTreeNode){
+        } else if (element instanceof RasterTreeNode) {
             status = TreeStatusEnum.RASTER_SELECTED;
         }
         return status;

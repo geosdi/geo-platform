@@ -33,14 +33,24 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.plugin.tree;
+package org.geosdi.geoplatform.gui.plugin.tree.addlayer;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public enum TreeToolbarRegion {
-    
-    START_REGION, MIDDLE_REGION, END_REGION;
-    
+public enum AddLayerPluginKey {
+
+    NAME("name"), IMAGE("image");
+    //
+    private String value;
+
+    AddLayerPluginKey(String theValue) {
+        this.value = theValue;
+    }
+
+    @Override
+    public String toString() {
+        return this.value;
+    }
 }

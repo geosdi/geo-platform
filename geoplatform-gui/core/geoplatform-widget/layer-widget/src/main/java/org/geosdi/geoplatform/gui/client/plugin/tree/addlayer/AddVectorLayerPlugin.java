@@ -33,50 +33,82 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.plugin;
+package org.geosdi.geoplatform.gui.client.plugin.tree.addlayer;
 
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.action.toolbar.DeleteElementTreeAction;
-import org.geosdi.geoplatform.gui.plugin.tree.ITreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.action.toolbar.AddVectorTreeAction;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeToolbarRegion;
+import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AddLayerPluginKey;
+import org.geosdi.geoplatform.gui.plugin.tree.addlayer.IAddLayerPlugin;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class DeleteElementTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
+public class AddVectorLayerPlugin extends GeoPlatformBeanModel implements
+        IAddLayerPlugin<ToolbarLayerTreeAction> {
 
-    private Button button;
+    private ToolbarLayerTreeAction action;
+    private String name;
+    private String image;
 
     @Override
     public boolean setEnabledByStatus(TreeStatusEnum status) {
-        boolean condition = false;
-        if(status.equals(TreeStatusEnum.FOLDER_SELECTED)
-                || status.equals(TreeStatusEnum.RASTER_SELECTED)){
-            condition = true;
-        }
-        button.setEnabled(condition);
-        return condition;
+        action.setEnabled(true);
+        return true;
     }
 
     @Override
-    public Button getWidget(TreePanel treePanel) {
-        if (button == null) {
-            ToolbarLayerTreeAction action = new DeleteElementTreeAction(treePanel);
-            button = new Button();
-            button.setToolTip(action.getTooltip());
-            button.setIcon(action.getImage());
-            button.addSelectionListener(action);
-            this.button.setEnabled(false);
+    public ToolbarLayerTreeAction getAction(TreePanel treePanel) {
+        if (action == null) {
+            action = new AddVectorTreeAction(treePanel);
+            this.setName(action.getTooltip());
         }
-        return button;
+        return action;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+        set(AddLayerPluginKey.NAME.toString(), name);
+    }
+
+    /**
+     * @return the image
+     */
+    public String getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(String image) {
+        this.image = image;
+        set(AddLayerPluginKey.IMAGE.toString(), image);
     }
 
     @Override
-    public TreeToolbarRegion getRegion() {
-        return TreeToolbarRegion.MIDDLE_REGION;
+    public void initPlugin(TreePanel treePanel) {
+        this.setImage(LayerResources.ICONS.mappAdd().getHTML());
+        action = new AddVectorTreeAction(treePanel);
+        this.setName(action.getTooltip());
+    }
+    
+    @Override
+    public String getMessageToEnable() {
+        return "Ever enabled";
     }
 }

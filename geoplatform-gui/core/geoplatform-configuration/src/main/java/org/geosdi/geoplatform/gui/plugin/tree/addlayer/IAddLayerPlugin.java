@@ -33,49 +33,24 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.plugin;
+package org.geosdi.geoplatform.gui.plugin.tree.addlayer;
 
-import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.action.toolbar.AddVectorTreeAction;
-import org.geosdi.geoplatform.gui.plugin.tree.ITreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
 import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeToolbarRegion;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class AddVectorTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
+public interface IAddLayerPlugin<T extends GeoPlatformToolbarAction> extends ModelData {
+    
+    public T getAction(TreePanel treePanel);
+    
+    public boolean setEnabledByStatus(TreeStatusEnum status);
 
-    private Button button;
-
-    @Override
-    public boolean setEnabledByStatus(TreeStatusEnum status) {
-        boolean condition = false;
-        if(status.equals(TreeStatusEnum.FOLDER_SELECTED)){
-            condition = true;
-        }
-        button.setEnabled(condition);
-        return condition;
-    }
-
-    @Override
-    public Button getWidget(TreePanel treePanel) {
-        if (button == null) {
-            ToolbarLayerTreeAction action = new AddVectorTreeAction(treePanel);
-            button = new Button();
-            button.setToolTip(action.getTooltip());
-            button.setIcon(action.getImage());
-            button.addSelectionListener(action);
-            this.button.setEnabled(false);
-        }
-        return button;
-    }
-
-    @Override
-    public TreeToolbarRegion getRegion() {
-        return TreeToolbarRegion.START_REGION;
-    }
+    public void initPlugin(TreePanel treePanel);
+    
+    public String getMessageToEnable();
 }

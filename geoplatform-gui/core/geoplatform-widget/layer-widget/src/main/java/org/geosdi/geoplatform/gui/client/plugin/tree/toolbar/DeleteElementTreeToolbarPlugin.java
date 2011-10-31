@@ -33,28 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.plugin;
+package org.geosdi.geoplatform.gui.client.plugin.tree.toolbar;
 
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.action.toolbar.AddRasterTreeAction;
-import org.geosdi.geoplatform.gui.plugin.tree.ITreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.client.action.toolbar.DeleteElementTreeAction;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeToolbarRegion;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class AddRasterTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
+public class DeleteElementTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
 
     private Button button;
 
     @Override
     public boolean setEnabledByStatus(TreeStatusEnum status) {
         boolean condition = false;
-        if(status.equals(TreeStatusEnum.FOLDER_SELECTED)){
+        if(status.equals(TreeStatusEnum.FOLDER_SELECTED)
+                || status.equals(TreeStatusEnum.RASTER_SELECTED)){
             condition = true;
         }
         button.setEnabled(condition);
@@ -64,7 +65,7 @@ public class AddRasterTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
     @Override
     public Button getWidget(TreePanel treePanel) {
         if (button == null) {
-            ToolbarLayerTreeAction action = new AddRasterTreeAction(treePanel);
+            ToolbarLayerTreeAction action = new DeleteElementTreeAction(treePanel);
             button = new Button();
             button.setToolTip(action.getTooltip());
             button.setIcon(action.getImage());
@@ -76,6 +77,6 @@ public class AddRasterTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
 
     @Override
     public TreeToolbarRegion getRegion() {
-        return TreeToolbarRegion.START_REGION;
+        return TreeToolbarRegion.MIDDLE_REGION;
     }
 }

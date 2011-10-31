@@ -33,45 +33,86 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.plugin;
+package org.geosdi.geoplatform.gui.client.plugin.tree.addlayer;
 
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.action.PreviewKmlTreeAction;
-import org.geosdi.geoplatform.gui.plugin.tree.ITreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.client.PublisherResources;
+import org.geosdi.geoplatform.gui.client.action.UploadShapeAction;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeToolbarRegion;
+import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AddLayerPluginKey;
+import org.geosdi.geoplatform.gui.plugin.tree.addlayer.IAddLayerPlugin;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class PreviewKmlTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
+public class UploadShapeLayerPlugin extends GeoPlatformBeanModel 
+    implements IAddLayerPlugin<ToolbarLayerTreeAction> {
 
-    private Button button;
+    private ToolbarLayerTreeAction action;
+    private String name;
+    private String image;
 
     @Override
     public boolean setEnabledByStatus(TreeStatusEnum status) {
-        button.setEnabled(true);
-        return true;
-    }
-
-    @Override
-    public Button getWidget(TreePanel treePanel) {
-        if (button == null) {
-            ToolbarLayerTreeAction action = new PreviewKmlTreeAction(treePanel);
-            button = new Button();
-            button.setToolTip(action.getTooltip());
-            button.setIcon(action.getImage());
-            button.addSelectionListener(action);
-            this.button.setEnabled(true);
+        boolean condition = false;
+        if(status.equals(TreeStatusEnum.FOLDER_SELECTED)){
+            condition = true;
         }
-        return button;
+        action.setEnabled(condition);
+        return condition;
     }
 
     @Override
-    public TreeToolbarRegion getRegion() {
-        return TreeToolbarRegion.END_REGION;
+    public ToolbarLayerTreeAction getAction(TreePanel treePanel) {
+        if (action == null) {
+            action = new UploadShapeAction(treePanel);
+            this.setName(action.getTooltip());
+        }
+        return action;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+        set(AddLayerPluginKey.NAME.toString(), name);
+    }
+
+    /**
+     * @return the image
+     */
+    public String getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(String image) {
+        this.image = image;
+        set(AddLayerPluginKey.IMAGE.toString(), image);
+    }
+
+    @Override
+    public void initPlugin(TreePanel treePanel) {
+        this.setImage(PublisherResources.ICONS.fromShape().getHTML());
+        action = new UploadShapeAction(treePanel);
+        this.setName(action.getTooltip());
+    }
+
+    @Override
+    public String getMessageToEnable() {
+        return "Ever enabled";
     }
 }

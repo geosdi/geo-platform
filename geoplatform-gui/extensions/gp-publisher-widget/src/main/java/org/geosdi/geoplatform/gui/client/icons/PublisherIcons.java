@@ -46,6 +46,9 @@ public interface PublisherIcons extends ImageBundle {
 
     @Resource("uploadShape.png")
     AbstractImagePrototype uploadShape();
+    
+    @Resource("from_shape.png")
+    AbstractImagePrototype fromShape();
 
     @Resource("kml-file.png")
     AbstractImagePrototype previewKML(); // uploadKML()

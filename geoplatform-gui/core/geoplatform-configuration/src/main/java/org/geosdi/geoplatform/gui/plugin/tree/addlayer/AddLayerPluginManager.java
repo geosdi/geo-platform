@@ -33,45 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.plugin;
+package org.geosdi.geoplatform.gui.plugin.tree.addlayer;
 
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.action.PrintLayersAction;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class PrintLayersTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
+public class AddLayerPluginManager {
+    
+    private static List<IAddLayerPlugin> windowPlugins = new ArrayList<IAddLayerPlugin>();
+    public static boolean USER_VIEWER;
 
-    private Button button;
-
-    @Override
-    public boolean setEnabledByStatus(TreeStatusEnum status) {
-        button.setEnabled(true);
-        return true;
+    /**
+     * @return the toolBarPlugin
+     */
+    public static List<IAddLayerPlugin> getWindowPlugins() {
+        return windowPlugins;
     }
-
-    @Override
-    public Button getWidget(TreePanel treePanel) {
-        if (button == null) {
-            ToolbarLayerTreeAction action = new PrintLayersAction(treePanel);
-            button = new Button();
-            button.setToolTip(action.getTooltip());
-            button.setIcon(action.getImage());
-            button.addSelectionListener(action);
-            this.button.setEnabled(true);
-        }
-        return button;
+    
+    public static void addWindowPlugin(IAddLayerPlugin plugin){
+        windowPlugins.add(plugin);
     }
-
-    @Override
-    public TreeToolbarRegion getRegion() {
-        return TreeToolbarRegion.MIDDLE_REGION;
-    }
+    
 }

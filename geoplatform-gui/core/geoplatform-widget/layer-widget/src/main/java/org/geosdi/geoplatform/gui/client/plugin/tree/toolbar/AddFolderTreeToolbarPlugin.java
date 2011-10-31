@@ -33,39 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.plugin.tree;
+package org.geosdi.geoplatform.gui.client.plugin.tree.toolbar;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
+import org.geosdi.geoplatform.gui.client.action.toolbar.AddFolderTreeAction;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class TreeToolbarPluginManager {
-    
-    private static List<ITreeToolbarPlugin> toolBarPlugin = new ArrayList<ITreeToolbarPlugin>();
-    public static boolean USER_VIEWER;
+public class AddFolderTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
 
-    /**
-     * @return the toolBarPlugin
-     */
-    public static List<ITreeToolbarPlugin> getToolBarPlugin() {
-        return toolBarPlugin;
-    }
-    
-    public static void addToolBarPlugin(ITreeToolbarPlugin plugin){
-        toolBarPlugin.add(plugin);
-    }
-    
-    public static List<ITreeToolbarPlugin> getToolBarPluginByRegion(TreeToolbarRegion region){
-        List<ITreeToolbarPlugin> regionPlugins = new ArrayList<ITreeToolbarPlugin>();
-        for (ITreeToolbarPlugin iTreeToolbarPlugin : toolBarPlugin) {
-            if(iTreeToolbarPlugin.getRegion().equals(region)){
-                regionPlugins.add(iTreeToolbarPlugin);
-            }
+    private Button button;
+
+    @Override
+    public boolean setEnabledByStatus(TreeStatusEnum status) {
+        boolean condition = false;
+        if(status.equals(TreeStatusEnum.FOLDER_SELECTED) || 
+                status.equals(TreeStatusEnum.ROOT_SELECTED)){
+            condition = true;
         }
-        return regionPlugins;
+        button.setEnabled(condition);
+        return condition;
     }
-    
+
+    @Override
+    public Button getWidget(TreePanel treePanel) {
+        if (button == null) {
+            ToolbarLayerTreeAction action = new AddFolderTreeAction(treePanel);
+            button = new Button();
+            button.setToolTip(action.getTooltip());
+            button.setIcon(action.getImage());
+            button.addSelectionListener(action);
+            this.button.setEnabled(false);
+        }
+        return button;
+    }
+
+    @Override
+    public TreeToolbarRegion getRegion() {
+        return TreeToolbarRegion.START_REGION;
+    }
 }

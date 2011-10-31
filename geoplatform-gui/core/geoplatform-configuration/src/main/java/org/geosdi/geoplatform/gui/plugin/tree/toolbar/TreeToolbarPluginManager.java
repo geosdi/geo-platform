@@ -33,45 +33,39 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.plugin;
+package org.geosdi.geoplatform.gui.plugin.tree.toolbar;
 
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.action.PrintLayersAction;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class PrintLayersTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
+public class TreeToolbarPluginManager {
+    
+    private static List<ITreeToolbarPlugin> toolBarPlugin = new ArrayList<ITreeToolbarPlugin>();
+    public static boolean USER_VIEWER;
 
-    private Button button;
-
-    @Override
-    public boolean setEnabledByStatus(TreeStatusEnum status) {
-        button.setEnabled(true);
-        return true;
+    /**
+     * @return the toolBarPlugin
+     */
+    public static List<ITreeToolbarPlugin> getToolBarPlugin() {
+        return toolBarPlugin;
     }
-
-    @Override
-    public Button getWidget(TreePanel treePanel) {
-        if (button == null) {
-            ToolbarLayerTreeAction action = new PrintLayersAction(treePanel);
-            button = new Button();
-            button.setToolTip(action.getTooltip());
-            button.setIcon(action.getImage());
-            button.addSelectionListener(action);
-            this.button.setEnabled(true);
+    
+    public static void addToolBarPlugin(ITreeToolbarPlugin plugin){
+        toolBarPlugin.add(plugin);
+    }
+    
+    public static List<ITreeToolbarPlugin> getToolBarPluginByRegion(TreeToolbarRegion region){
+        List<ITreeToolbarPlugin> regionPlugins = new ArrayList<ITreeToolbarPlugin>();
+        for (ITreeToolbarPlugin iTreeToolbarPlugin : toolBarPlugin) {
+            if(iTreeToolbarPlugin.getRegion().equals(region)){
+                regionPlugins.add(iTreeToolbarPlugin);
+            }
         }
-        return button;
+        return regionPlugins;
     }
-
-    @Override
-    public TreeToolbarRegion getRegion() {
-        return TreeToolbarRegion.MIDDLE_REGION;
-    }
+    
 }

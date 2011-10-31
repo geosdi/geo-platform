@@ -38,13 +38,13 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import javax.annotation.Resource;
 import org.geosdi.geoplatform.gui.global.CopyrightInfo;
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 import org.geosdi.geoplatform.gui.server.service.IStartupService;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -56,7 +56,7 @@ public class StartupService implements IStartupService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    @Autowired
+    @Resource
     private IGeoPlatformGlobal geoPlatformGlobal;
 
     @PostConstruct

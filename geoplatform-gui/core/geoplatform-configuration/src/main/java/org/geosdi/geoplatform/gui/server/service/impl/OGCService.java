@@ -55,7 +55,6 @@ import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
@@ -72,6 +71,7 @@ public class OGCService implements IOGCService {
     //
     @Autowired
     private DTOServerConverter dtoServerConverter;
+    //
     @Autowired
     private SessionUtility sessionUtility;
 
@@ -162,8 +162,7 @@ public class OGCService implements IOGCService {
      * @param geoPlatformServiceClient the geoPlatformServiceClient to set
      */
     @Autowired
-    public void setGeoPlatformServiceClient(
-            @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
+    public void setGeoPlatformServiceClient(GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
     }
 }

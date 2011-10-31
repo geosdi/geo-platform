@@ -397,7 +397,7 @@ public class WSLayerTest extends ServiceTest {
         ArrayList<GPLayer> arrayList = new ArrayList<GPLayer>();
         try {
             List<Long> longList = gpWSClient.saveAddedLayersAndTreeModifications(
-                    arrayList, descendantsMapData, projectTest.getId().longValue());
+                    projectTest.getId().longValue(), arrayList, descendantsMapData);
             Assert.fail("Test must fail because list of layers is empty");
         } catch (IllegalParameterFault ex) {
             this.checkInitialState("correctess on AddLayers");
@@ -456,7 +456,7 @@ public class WSLayerTest extends ServiceTest {
         descendantsMapData.setDescendantsMap(map);
 
         return gpWSClient.saveAddedLayersAndTreeModifications(
-                arrayList, descendantsMapData, projectTest.getId().longValue());
+                projectTest.getId().longValue(), arrayList, descendantsMapData);
     }
 
     private void checkInitialState(String info)

@@ -602,11 +602,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers,
-            GPWebServiceMapData descendantsMapData, Long projectId)
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(Long projectId, List<GPLayer> layers,
+            GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return layerServiceDelegate.saveAddedLayersAndTreeModifications(layers,
-                descendantsMapData, projectId);
+        return layerServiceDelegate.saveAddedLayersAndTreeModifications(projectId, layers,
+                descendantsMapData);
     }
 
     @Override

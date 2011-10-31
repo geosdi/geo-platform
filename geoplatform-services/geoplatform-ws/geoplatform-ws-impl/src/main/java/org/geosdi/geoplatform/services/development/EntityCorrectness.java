@@ -194,12 +194,41 @@ public class EntityCorrectness {
         }
     }
 
-    public static void checkLayer(GPLayer layer) throws IllegalParameterFault {
+    public static void checkCompleteLayer(GPLayer layer) throws IllegalParameterFault {
         if (layer == null) {
             throw new IllegalParameterFault("Layer must be NOT NULL");
         }
         if (layer.getProject() == null) {
             throw new IllegalParameterFault("Layer \"project\" must be NOT NULL");
+        }
+        if (layer.getFolder() == null) {
+            throw new IllegalParameterFault("Layer \"folder\" must be NOT NULL");
+        }
+        if (layer.getTitle() == null) {
+            throw new IllegalParameterFault("Layer \"title\" must be NOT NULL");
+        }
+        if (layer.getLayerType() == null) {
+            throw new IllegalParameterFault("Layer \"layerType\" must be NOT NULL");
+        }
+    }
+
+    public static void checkCompleteLayerListLog(List<GPLayer> layers) {
+        for (GPLayer layer : layers) {
+            EntityCorrectness.checkCompleteLayerLog(layer);
+        }
+    }
+
+    public static void checkCompleteLayerLog(GPLayer layer) {
+        try {
+            EntityCorrectness.checkCompleteLayer(layer);
+        } catch (IllegalParameterFault ex) {
+            throw new EntityCorrectnessException(ex.getMessage());
+        }
+    }
+
+    public static void checkLayer(GPLayer layer) throws IllegalParameterFault {
+        if (layer == null) {
+            throw new IllegalParameterFault("Layer must be NOT NULL");
         }
         if (layer.getFolder() == null) {
             throw new IllegalParameterFault("Layer \"folder\" must be NOT NULL");

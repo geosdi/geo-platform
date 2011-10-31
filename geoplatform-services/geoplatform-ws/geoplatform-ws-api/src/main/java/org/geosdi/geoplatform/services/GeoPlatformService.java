@@ -450,9 +450,9 @@ public interface GeoPlatformService {
     @Put
     @HttpResource(location = "/layers/{descendantsMap}")
     ArrayList<Long> saveAddedLayersAndTreeModifications(
+            @WebParam(name = "projectId") Long projectId,
             @WebParam(name = "layers") List<GPLayer> layers,
-            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData,
-            @WebParam(name = "projectId") Long projectId)
+            @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Delete

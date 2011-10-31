@@ -275,7 +275,7 @@ public class LayerService implements ILayerService {
         ArrayList<Long> idSavedLayers = null;
         try {
             idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications(
-                    layersList, map, projectId);
+                    projectId, layersList, map);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to save layers on LayerService: " + ex);
             throw new GeoPlatformException(ex);

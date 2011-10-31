@@ -226,8 +226,8 @@ class LayerServiceImpl {
         return layer.getId();
     }
 
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(List<GPLayer> layers,
-            GPWebServiceMapData descendantsMapData, Long projectId)
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(Long projectId, List<GPLayer> layers,
+            GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n\t@@@ saveAddedLayersAndTreeModifications @@@");
         if (layers == null || layers.isEmpty()) {
@@ -502,7 +502,7 @@ class LayerServiceImpl {
 
         List<GPLayer> foundLayer = layerDao.search(searchCriteria);
 
-        EntityCorrectness.checkLayerListLog(foundLayer); // TODO assert
+        EntityCorrectness.checkCompleteLayerListLog(foundLayer); // TODO assert
 
         return ShortLayerDTO.convertToShortLayerDTOList(foundLayer);
     }

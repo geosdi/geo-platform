@@ -41,43 +41,49 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * @author giuseppe
  * 
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
 @XmlRootElement(name = "SearchRequest")
 public class SearchRequest {
 
-	private String nameLike;
+    private String nameLike;
 
-	public SearchRequest() {
-	}
+    public SearchRequest() {
+    }
 
-	public SearchRequest(String nameLike) {
-		this.nameLike = nameLike;
-	}
+    public SearchRequest(String nameLike) {
+        this.nameLike = LikePatternType.CONTAINS.apply(nameLike);
+    }
 
-	/**
-	 * @return a nullable case insensitive LIKE filter. Only matching items will
-	 *         be returned.
-	 */
-	@XmlElement(required = true, nillable = true)
-	public String getNameLike() {
-		return nameLike;
-	}
+    public SearchRequest(String nameLike, LikePatternType likeType) {
+        this.nameLike = likeType.apply(nameLike);
+    }
 
-	/**
-	 * Set a case insensitive LIKE filter. Only matching items will be returned. <BR>
-	 * "%" wildcards have to already be in the search string. <BR>
-	 * This param is optional.
-	 * 
-	 * @param nameLike
-	 */
-	public void setNameLike(String nameLike) {
-		this.nameLike = nameLike;
-	}
+    /**
+     * @return a nullable case insensitive LIKE filter. Only matching items will
+     *         be returned.
+     */
+    @XmlElement(required = true, nillable = true)
+    public String getNameLike() {
+        return nameLike;
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder(getClass().getSimpleName())
-				.append(" [like=").append(nameLike).append(']');
-		return builder.toString();
-	}
+    /**
+     * Set a case insensitive LIKE filter. Only matching items will be returned. <BR>
+     * "%" wildcards have to already be in the search string. <BR>
+     * This param is optional.
+     * 
+     * @param nameLike
+     */
+    public void setNameLike(String nameLike) {
+        this.nameLike = nameLike;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder(getClass().getSimpleName());
+        builder.append(" [like=").append(nameLike).append(']');
+        return builder.toString();
+    }
 }

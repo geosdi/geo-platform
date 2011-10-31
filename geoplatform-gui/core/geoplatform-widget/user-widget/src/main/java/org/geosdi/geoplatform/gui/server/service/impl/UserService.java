@@ -86,13 +86,13 @@ public class UserService implements IUserService {
 
         int start = config.getOffset();
 
-        SearchRequest srq = new SearchRequest("%" + searchText + "%");
+        SearchRequest srq = new SearchRequest(searchText);
 
         Long usersCount = this.geoPlatformServiceClient.getUsersCount(srq);
 
         int page = start == 0 ? start : start / config.getLimit();
 
-        PaginatedSearchRequest psr = new PaginatedSearchRequest("%" + searchText + "%",
+        PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
                 config.getLimit(), page);
 
         List<UserDTO> userList = null;

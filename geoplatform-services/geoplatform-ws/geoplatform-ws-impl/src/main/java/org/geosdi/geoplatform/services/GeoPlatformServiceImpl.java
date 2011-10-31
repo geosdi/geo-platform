@@ -101,7 +101,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private GPLayerDAO layerDao;
 //    private GPStyleDAO styleDao;
     private GPAuthorityDAO authorityDao;
-    // ACL
+    // ACL DAO
     private AclClassDAO classDao;
     private AclSidDAO sidDao;
     private AclObjectIdentityDAO objectIdentityDao;
@@ -394,7 +394,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public List<ProjectDTO> searchUserProjects(Long userId, PaginatedSearchRequest request) 
+    public List<ProjectDTO> searchUserProjects(Long userId, PaginatedSearchRequest request)
             throws ResourceNotFoundFault {
         return projectServiceDelegate.searchUserProjects(userId, request);
     }

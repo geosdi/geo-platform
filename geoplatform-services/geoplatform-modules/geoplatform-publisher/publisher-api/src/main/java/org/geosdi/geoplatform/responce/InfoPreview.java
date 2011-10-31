@@ -55,7 +55,6 @@ public class InfoPreview {
     private String crs = "";
     private boolean isVector = true;
     private String message = "ok";
-    private String sld;
 
     public InfoPreview(String url, String workspace, String dataStoreName,
             double minX, double minY, double maxX, double maxY, String crs) {
@@ -68,7 +67,6 @@ public class InfoPreview {
         this.upperY = maxY;
         this.crs = crs;
         this.isVector = true;
-        this.sld = sld;
     }
 
     public InfoPreview() {
@@ -77,14 +75,6 @@ public class InfoPreview {
     public InfoPreview(String dataStoreName, String message) {
         this.title = dataStoreName;
         this.message = message;
-    }
-
-    public String getSld() {
-        return sld;
-    }
-
-    public void setSld(String sld) {
-        this.sld = sld;
     }
 
     public String getMessage() {
@@ -127,7 +117,6 @@ public class InfoPreview {
         this.title = dataStoreName;
     }
 
-
     public double getMaxX() {
         return upperX;
     }
@@ -159,7 +148,6 @@ public class InfoPreview {
     public void setMinY(double minY) {
         this.lowerY = minY;
     }
-
 
     public String getWorkspace() {
         return workspace;

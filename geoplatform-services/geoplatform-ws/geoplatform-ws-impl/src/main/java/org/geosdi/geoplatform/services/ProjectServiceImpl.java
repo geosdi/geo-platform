@@ -547,9 +547,8 @@ class ProjectServiceImpl {
         searchCriteria.setMaxResults(request.getNum());
         searchCriteria.setPage(request.getPage());
 
-        String like = request.getNameLike();
-        if (like != null) {
-            searchCriteria.addFilterILike("project.name", like);
+        if (request != null && request.getNameLike() != null) {
+            searchCriteria.addFilterILike("project.name", request.getNameLike());
 //        searchCriteria.addSortAsc("project.name");
         }
 

@@ -33,7 +33,6 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-
 package org.geosdi.geoplatform.request;
 
 import java.util.List;
@@ -42,37 +41,44 @@ import java.util.List;
  *
  * @author Luca
  */
-
-
-
-
 public class Feature {
+
     private String wkt;
     private List<Attribute> attributes;
 
     public Feature() {
     }
 
-
-
     public Feature(String wkt, List<Attribute> attributes) {
         this.wkt = wkt;
         this.attributes = attributes;
     }
 
-    public List<Attribute> getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(List<Attribute> attributes) {
-        this.attributes = attributes;
-    }
-
+    /**
+     * @return the wkt
+     */
     public String getWkt() {
         return wkt;
     }
 
+    /**
+     * @param wkt the wkt to set
+     */
     public void setWkt(String wkt) {
         this.wkt = wkt;
+    }
+
+    /**
+     * @return the attributes
+     */
+    public List<Attribute> getAttributes() {
+        return attributes;
+    }
+
+    /**
+     * @param attributes the attributes to set
+     */
+    public void setAttributes(List<Attribute> attributes) {
+        this.attributes = attributes;
     }
 }

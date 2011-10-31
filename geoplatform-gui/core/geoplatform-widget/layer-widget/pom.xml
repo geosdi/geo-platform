@@ -63,7 +63,7 @@
         </dependency>
 
 		<!-- GWT-OL Resources -->
-       <dependency>
+        <dependency>
             <groupId>org.gwtopenmaps.openlayers</groupId>
             <artifactId>gwt-openlayers-client</artifactId>
             <scope>provided</scope>
@@ -127,7 +127,7 @@
             <classifier>sources</classifier>
         </dependency>
         
-         <dependency>
+        <dependency>
             <groupId>name.pehl.piriti</groupId>
             <artifactId>piriti-core</artifactId>
             <version>0.7b2</version>
@@ -143,7 +143,7 @@
             <artifactId>guice</artifactId>
             <version>3.0</version>
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <version>1</version>

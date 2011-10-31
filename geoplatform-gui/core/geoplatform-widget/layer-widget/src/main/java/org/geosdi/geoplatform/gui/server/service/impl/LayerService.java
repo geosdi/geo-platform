@@ -552,13 +552,13 @@ public class LayerService implements ILayerService {
 
         int start = config.getOffset();
 
-        SearchRequest srq = new SearchRequest("%" + searchText + "%");
+        SearchRequest srq = new SearchRequest(searchText);
         try {
             Long projectsCount = this.geoPlatformServiceClient.getUserProjectsCount(user.getId(), srq);
 
             int page = start == 0 ? start : start / config.getLimit();
 
-            PaginatedSearchRequest psr = new PaginatedSearchRequest("%" + searchText + "%",
+            PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
                     config.getLimit(), page);
 
             List<ProjectDTO> projectsDTO = this.geoPlatformServiceClient.searchUserProjects(user.getId(), psr);

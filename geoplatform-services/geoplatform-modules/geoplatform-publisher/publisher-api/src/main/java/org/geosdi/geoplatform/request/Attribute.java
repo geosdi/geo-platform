@@ -33,17 +33,17 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-
 package org.geosdi.geoplatform.request;
 
 /**
  *
  * @author Luca
  */
-    public class Attribute {
-        String name;
-        String value;
-        String type;
+public class Attribute {
+
+    private String name;
+    private String value;
+    private String type;
 
     public Attribute() {
     }
@@ -54,29 +54,45 @@ package org.geosdi.geoplatform.request;
         this.type = type;
     }
 
-
+    /**
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name the name to set
+     */
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
+    /**
+     * @return the value
+     */
     public String getValue() {
         return value;
     }
 
+    /**
+     * @param value the value to set
+     */
     public void setValue(String value) {
         this.value = value;
     }
 
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
     }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+}

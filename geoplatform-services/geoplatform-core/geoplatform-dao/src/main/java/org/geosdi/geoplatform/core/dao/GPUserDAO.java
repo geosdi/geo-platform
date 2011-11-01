@@ -42,7 +42,6 @@ import java.util.List;
 
 import org.geosdi.geoplatform.core.model.GPUser;
 
-
 /**
  * @author giuseppe
  *
@@ -57,6 +56,8 @@ public interface GPUserDAO {
 
     public GPUser merge(GPUser user);
 
+    public GPUser[] merge(GPUser... users);
+
     public boolean remove(GPUser user);
 
     public boolean removeById(Long userId);
@@ -66,6 +67,8 @@ public interface GPUserDAO {
     public int count(ISearch search);
 
     public GPUser findByUsername(String username);
-    
+
     public GPUser findByEmail(String email);
+    
+//    public boolean resetDefaultProject(Long defaultProjectId);
 }

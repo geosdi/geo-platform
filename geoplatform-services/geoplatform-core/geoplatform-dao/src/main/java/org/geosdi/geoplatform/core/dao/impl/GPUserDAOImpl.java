@@ -58,6 +58,16 @@ public class GPUserDAOImpl extends BaseDAO<GPUser, Long> implements GPUserDAO {
     }
 
     @Override
+    public GPUser merge(GPUser user) {
+        return super.merge(user);
+    }
+
+    @Override
+    public GPUser[] merge(GPUser... users) {
+        return super.merge(users);
+    }
+
+    @Override
     public boolean remove(GPUser user) {
         return super.remove(user);
     }
@@ -77,13 +87,27 @@ public class GPUserDAOImpl extends BaseDAO<GPUser, Long> implements GPUserDAO {
     public GPUser findByUsername(String username) {
         Search search = new Search();
         search.addFilterEqual("username", username);
-        return searchUnique(search);
+        return super.searchUnique(search);
     }
 
     @Override
     public GPUser findByEmail(String email) {
         Search search = new Search();
         search.addFilterEqual("emailAddress", email);
-        return searchUnique(search);
+        return super.searchUnique(search);
     }
+
+//    @Override
+//    public boolean resetDefaultProject(Long defaultProjectId) {
+//        Search search = new Search();
+//        search.addFilterEqual("defaultProject.id", defaultProjectId);
+//
+//        List<GPUser> users = super.search(search);
+//        for (GPUser user : users) {
+//            user.setDefaultProject(null);
+//            super.merge(user);
+//        }
+//
+//        return true;
+//    }
 }

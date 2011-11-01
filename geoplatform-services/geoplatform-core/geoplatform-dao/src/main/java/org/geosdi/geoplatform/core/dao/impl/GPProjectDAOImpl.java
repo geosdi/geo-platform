@@ -80,11 +80,17 @@ public class GPProjectDAOImpl extends BaseDAO<GPProject, Long>
 
     @Override
     public boolean remove(GPProject project) {
+        // Simulate ON DELETE SET NULL on User's FK
+        em().createQuery("UPDATE User u SET u.defaultProject = null WHERE u.defaultProject=:project").
+                setParameter("project", project).executeUpdate();
         return super.remove(project);
     }
 
     @Override
     public boolean removeById(Long id) {
+        // Simulate ON DELETE SET NULL on User's FK
+        em().createQuery("UPDATE User u SET u.defaultProject = null WHERE u.defaultProject.id=:id").
+                setParameter("id", id).executeUpdate();
         return super.removeById(id);
     }
 

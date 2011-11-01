@@ -47,6 +47,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -114,6 +115,9 @@ public class GPUser implements Serializable, UserDetails {
 //    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
 //        org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
 //    private List<GPUserProjects> userProjects = new LinkedList<GPUserProjects>();
+    //
+    @OneToOne
+    private GPProject defaultProject;
 
     /**
      * Default constructor
@@ -283,11 +287,25 @@ public class GPUser implements Serializable, UserDetails {
 //        this.userProjects = userProjects;
 //    }
 //
+
+    /**
+     * @return the defaultProject
+     */
+    public GPProject getDefaultProject() {
+        return defaultProject;
+    }
+
+    /**
+     * @param defaultProject the defaultProject to set
+     */
+    public void setDefaultProject(GPProject defaultProject) {
+        this.defaultProject = defaultProject;
+    }
+
     /*
      * (non-Javadoc)
      * @see java.lang.Object#toString()
      */
-
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
@@ -305,6 +323,12 @@ public class GPUser implements Serializable, UserDetails {
             str.append(", authorities.size=").append(authorities.size());
         } else {
             str.append(", authorities=NULL");
+        }
+        if (defaultProject != null) {
+            str.append(", defaultProject.name=").append(defaultProject.getName());
+            str.append("(id=").append(defaultProject.getId()).append(")");
+        } else {
+            str.append(", defaultProject=NULL");
         }
         return str.append('}').toString();
     }

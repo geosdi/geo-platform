@@ -57,14 +57,14 @@ public class MediatorToolbarTreeAction {
     /**
      * @return the addLayerVisible
      */
-    public static boolean isAddLayerVisible() {
+    public boolean isAddLayerVisible() {
         return addLayerVisible;
     }
 
     /**
      * @param aAddLayerVisible the addLayerVisible to set
      */
-    public static void setAddLayerVisible(boolean aAddLayerVisible) {
+    public void setAddLayerVisible(boolean aAddLayerVisible) {
         addLayerVisible = aAddLayerVisible;
     }
 
@@ -85,9 +85,20 @@ public class MediatorToolbarTreeAction {
             plugin.setEnabledByStatus(status);
         }
         if (isAddLayerVisible()) {
-            for (IAddLayerPlugin plugin : AddLayerPluginManager.getWindowPlugins()) {
-                plugin.setEnabledByStatus(status);
-            }
+            this.manageAddLayerPluginAction(status);
+        }
+    }
+
+    private void manageAddLayerPluginAction(TreeStatusEnum status) {
+        for (IAddLayerPlugin plugin : AddLayerPluginManager.getWindowPlugins()) {
+            plugin.setEnabledByStatus(status);
+        }
+    }
+
+    public void manageAddLayerPluginAction(GPBeanTreeModel element) {
+        if (isAddLayerVisible()) {
+            TreeStatusEnum status = this.calculateTreeStatus(element);
+            this.manageAddLayerPluginAction(status);
         }
     }
 

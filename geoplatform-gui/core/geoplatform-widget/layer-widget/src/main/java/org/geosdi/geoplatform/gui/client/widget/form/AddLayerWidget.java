@@ -154,14 +154,13 @@ public class AddLayerWidget extends GeoPlatformWindow {
     @Override
     public void show() {
         super.show();
-        //TODO: add code to start the buttons monitoring for enable-disable functionality
         MediatorToolbarTreeAction.getInstance().setAddLayerVisible(true);
+        MediatorToolbarTreeAction.getInstance().manageAddLayerPluginAction(tree.getSelectionModel().getSelectedItem());
     }
 
     @Override
     public void hide(Button buttonPressed) {
         super.hide(buttonPressed);
-        //TODO: add code to stop the buttons monitoring for enable-disable functionality
         MediatorToolbarTreeAction.getInstance().setAddLayerVisible(false);
     }
 

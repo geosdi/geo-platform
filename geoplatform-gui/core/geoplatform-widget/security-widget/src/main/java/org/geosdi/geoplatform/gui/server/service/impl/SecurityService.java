@@ -109,13 +109,10 @@ public class SecurityService implements ISecurityService {
         }
         GPProject project = null;
         if (listProjects == null || listProjects.isEmpty()) {
-            GPUserProjects userProject = new GPUserProjects();
             project = new GPProject();
             project.setName("Default Project");
             project.setShared(false);
-            userProject.setUserAndProject(user, project);
-            userProject.setPermissionMask(BasePermission.ADMINISTRATION.getMask());
-            project.setId(this.saveProject(userProject));
+            project.setId(this.saveDefaultProject(user, project));
         } else {
             project = listProjects.get(0).getProject();
         }
@@ -183,11 +180,11 @@ public class SecurityService implements ISecurityService {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
     }
 
-    private Long saveProject(GPUserProjects userProject) throws GeoPlatformException {
+    private Long saveDefaultProject(GPUser user, GPProject project) throws GeoPlatformException {
         Long idProject = null;
         try {
-            idProject = this.geoPlatformServiceClient.saveProject(userProject.getUser().getUsername(),
-                    userProject.getProject());
+            idProject = this.geoPlatformServiceClient.saveProject(user.getUsername(),
+                    project, true);
         } catch (ResourceNotFoundFault rnf) {
             this.logger.error("Failed to save project on SecurityService: " + rnf);
             throw new GeoPlatformException(rnf);

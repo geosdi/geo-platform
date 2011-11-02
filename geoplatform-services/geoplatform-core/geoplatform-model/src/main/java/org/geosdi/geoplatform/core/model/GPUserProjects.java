@@ -81,11 +81,11 @@ public class GPUserProjects implements Serializable {
 //    @org.hibernate.annotations.Index(name = "PROJECT_INDEX") // TODO Uncomment
     private GPProject project;
     //
-    @Column
-    private boolean checked = false;
-    //
     @Column(name = "permission_mask", nullable = false)
     private int permissionMask = BasePermission.ADMINISTRATION.getMask();
+    //
+    @Column
+    private boolean checked = false;
 
     /**
      * @return the id
@@ -144,21 +144,6 @@ public class GPUserProjects implements Serializable {
     }
 
     /**
-     * @return the checked
-     */
-    public boolean isChecked() {
-        return checked;
-    }
-
-    /**
-     * @param checked
-     *            the checked to set
-     */
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-
-    /**
      * @return the permissionMask
      */
     public int getPermissionMask() {
@@ -171,6 +156,21 @@ public class GPUserProjects implements Serializable {
      */
     public void setPermissionMask(int permissionMask) {
         this.permissionMask = permissionMask;
+    }
+
+    /**
+     * @return the checked
+     */
+    public boolean isChecked() {
+        return checked;
+    }
+
+    /**
+     * @param checked
+     *            the checked to set
+     */
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
     /*

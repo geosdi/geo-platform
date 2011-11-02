@@ -115,9 +115,8 @@ public class GPUser implements Serializable, UserDetails {
 //    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
 //        org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
 //    private List<GPUserProjects> userProjects = new LinkedList<GPUserProjects>();
-    //
-    @OneToOne
-    private GPProject defaultProject;
+    @Column(name = "defaultProject_id")
+    private Long defaultProjectID;
 
     /**
      * Default constructor
@@ -289,17 +288,17 @@ public class GPUser implements Serializable, UserDetails {
 //
 
     /**
-     * @return the defaultProject
+     * @return the defaultProjectID
      */
-    public GPProject getDefaultProject() {
-        return defaultProject;
+    public Long getDefaultProjectID() {
+        return defaultProjectID;
     }
 
     /**
-     * @param defaultProject the defaultProject to set
+     * @param defaultProjectID the defaultProjectID to set
      */
-    public void setDefaultProject(GPProject defaultProject) {
-        this.defaultProject = defaultProject;
+    public void setDefaultProjectID(Long defaultProjectID) {
+        this.defaultProjectID = defaultProjectID;
     }
 
     /*
@@ -324,12 +323,7 @@ public class GPUser implements Serializable, UserDetails {
         } else {
             str.append(", authorities=NULL");
         }
-        if (defaultProject != null) {
-            str.append(", defaultProject.name=").append(defaultProject.getName());
-            str.append("(id=").append(defaultProject.getId()).append(")");
-        } else {
-            str.append(", defaultProject=NULL");
-        }
+        str.append(", defaultProjectID=").append(defaultProjectID);
         return str.append('}').toString();
     }
 

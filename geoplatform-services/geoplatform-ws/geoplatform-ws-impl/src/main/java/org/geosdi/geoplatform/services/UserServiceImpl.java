@@ -161,7 +161,8 @@ class UserServiceImpl {
         if (password != null) {
             orig.setPassword(Utility.md5hash(password)); // Hash password
         }
-//        orig.setSendEmail(user.isSendEmail());
+        orig.setDefaultProjectID(user.getDefaultProjectID());
+//        orig.setSendEmail(user.isSendEmail());        
 
         this.updateUserAuthorities(orig.getUsername(), user.getGPAuthorities());
 

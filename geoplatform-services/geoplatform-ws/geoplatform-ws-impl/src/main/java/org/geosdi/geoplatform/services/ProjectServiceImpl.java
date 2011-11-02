@@ -132,7 +132,7 @@ class ProjectServiceImpl {
     // ==========================================================================
     // === Project
     // ==========================================================================
-    public Long saveProject(String username, GPProject project)
+    public Long saveProject(String username, GPProject project, boolean defaultProject)
             throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n\t@@@ saveProject @@@");
         EntityCorrectness.checkProject(project); // TODO assert
@@ -141,6 +141,7 @@ class ProjectServiceImpl {
         if (user == null) {
             throw new ResourceNotFoundFault("User with username \"" + username + "\" not found");
         }
+        EntityCorrectness.checkUserLog(user); // TODO assert
 
         GPUserProjects userProject = new GPUserProjects();
         userProject.setUser(user);
@@ -148,6 +149,11 @@ class ProjectServiceImpl {
 
         projectDao.persist(project);
         userProjectsDao.persist(userProject);
+
+        if (defaultProject) {
+            user.setDefaultProjectID(project.getId());
+            userDao.merge(user);
+        }
 
         return project.getId(); // Remark: return only the entity ID of Project
     }
@@ -458,8 +464,8 @@ class ProjectServiceImpl {
         EntityCorrectness.checkUserProject(origUserProject); // TODO assert
 
         // Update all properties (except the user and project reference)
-        origUserProject.setChecked(userProject.isChecked());
         origUserProject.setPermissionMask(userProject.getPermissionMask());
+        origUserProject.setChecked(userProject.isChecked());
 
         userProjectsDao.merge(origUserProject);
 

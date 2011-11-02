@@ -247,17 +247,15 @@ public abstract class BaseDAOTest {
         this.sigvTest = this.insertUser("SIGV", GPRole.ADMIN);
         //
         GPUser userKProject = this.insertUser("user k", GPRole.ADMIN);
-        String projectNameK = "project_user_k_";
         GPProject projectIth = null;
         for (int i = 1; i <= 41; i++) {
-            projectIth = this.createProject(projectNameK + i, false,
+            projectIth = this.createProject("project_user_k_" + i, false,
                     i, new Date(System.currentTimeMillis() + i * 333));
             projectDAO.persist(projectIth);
-
             this.insertBindingUserProject(userKProject, projectIth,
                     BasePermission.ADMINISTRATION.getMask());
         }
-        userKProject.setDefaultProject(projectIth);
+        userKProject.setDefaultProjectID(projectIth.getId());
         userDAO.merge(userKProject);
     }
 
@@ -321,8 +319,8 @@ public abstract class BaseDAOTest {
         this.insertBindingUserProject(userTest, adminProject, BasePermission.READ.getMask());
         this.insertBindingUserProject(userTest, userProject, BasePermission.ADMINISTRATION.getMask());
         //
-        adminTest.setDefaultProject(adminProject);
-        userTest.setDefaultProject(userProject);
+        adminTest.setDefaultProjectID(adminProject.getId());
+        userTest.setDefaultProjectID(adminProject.getId());
         userDAO.merge(adminTest, userTest);
 
         // Project of admin -> root folders: "only folders, layers"

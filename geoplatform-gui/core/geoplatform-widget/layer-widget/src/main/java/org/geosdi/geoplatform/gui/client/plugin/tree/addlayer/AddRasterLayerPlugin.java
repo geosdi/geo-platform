@@ -39,22 +39,17 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddRasterTreeAction;
-import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
-import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AddLayerPluginKey;
-import org.geosdi.geoplatform.gui.plugin.tree.addlayer.IAddLayerPlugin;
+import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AbstractAddLayerPlugin;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class AddRasterLayerPlugin extends GeoPlatformBeanModel
-        implements IAddLayerPlugin<ToolbarLayerTreeAction> {
+public class AddRasterLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerTreeAction>{
+    private static final long serialVersionUID = -43864052293114766L;
 
-    private static final long serialVersionUID = -9054067655710318469L;
     private ToolbarLayerTreeAction action;
-    private String name;
-    private String image;
 
     @Override
     public boolean setEnabledByStatus(TreeStatusEnum status) {
@@ -71,39 +66,10 @@ public class AddRasterLayerPlugin extends GeoPlatformBeanModel
         return action;
     }
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-        set(AddLayerPluginKey.NAME.toString(), name);
-    }
-
-    /**
-     * @return the image
-     */
-    public String getImage() {
-        return image;
-    }
-
-    /**
-     * @param image the image to set
-     */
-    public void setImage(String image) {
-        this.image = image;
-        set(AddLayerPluginKey.IMAGE.toString(), image);
-    }
-
     @Override
     public void initPlugin(TreePanel treePanel) {
         this.setImage(LayerResources.ICONS.mappAdd().getHTML());
+        this.setTooltip("Adds one or more WMS layers to the tree from the get capabilities");
         action = new AddRasterTreeAction(treePanel);
         action.setEnabled(true);
         this.setName(action.getTooltip());
@@ -113,4 +79,5 @@ public class AddRasterLayerPlugin extends GeoPlatformBeanModel
     public String getMessageToEnable() {
         return "Ever enabled";
     }
+    
 }

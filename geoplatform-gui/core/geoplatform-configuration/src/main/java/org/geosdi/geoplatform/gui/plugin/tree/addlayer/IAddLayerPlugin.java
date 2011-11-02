@@ -53,4 +53,8 @@ public interface IAddLayerPlugin<T extends GeoPlatformToolbarAction> extends Mod
     public void initPlugin(TreePanel treePanel);
     
     public String getMessageToEnable();
+    
+    public String getTooltip();
+    
+    public void setTooltip(String tooltip);
 }

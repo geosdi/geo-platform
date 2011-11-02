@@ -41,11 +41,15 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.util.Format;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.ListView;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.NumberFormat;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.mediator.MediatorToolbarTreeAction;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -74,7 +78,19 @@ public class AddLayerWidget extends GeoPlatformWindow {
     }
 
     private ListView<IAddLayerPlugin> generateListView() {
-        listView = new ListView<IAddLayerPlugin>();
+        listView = new ListView<IAddLayerPlugin>() {
+
+            @Override
+            protected IAddLayerPlugin prepareData(IAddLayerPlugin plugin) {
+//                Photo photo = plugin.getBean();
+//                long size = photo.getSize() / 1000;
+                plugin.set("shortName", Format.ellipse(plugin.getTooltip(), 30));
+//                plugin.set("sizeString", NumberFormat.getFormat("#0").format(size) + "k");
+//                plugin.set("dateString", DateTimeFormat.getMediumDateTimeFormat().format(photo.getDate()));
+//                plugin.set("path", GWT.getHostPageBaseURL() + photo.getPath());
+                return plugin;
+            }
+        };
         listView.addStyleName("overview-page");
         listView.setItemSelector(".project-box");
         listView.setOverStyle("sample-over");
@@ -94,7 +110,7 @@ public class AddLayerWidget extends GeoPlatformWindow {
                                 se.getSelectedItem().getAction(tree).handleEvent(be);
                                 hide();
                             } else {
-                                GeoPlatformMessage.infoMessage("Function Disabled", se.getSelectedItem().getMessageToEnable());
+                                GeoPlatformMessage.errorMessage("Function Disabled", se.getSelectedItem().getMessageToEnable());
                             }
                         }
                         listView.getSelectionModel().deselectAll();
@@ -110,7 +126,7 @@ public class AddLayerWidget extends GeoPlatformWindow {
         StringBuilder sb = new StringBuilder();
         sb.append("<tpl for=\".\">");
         sb.append("<div class='project-box' style='padding-top: 4px;border: none'>");
-        sb.append("<div class='thumbd'>{image}</div>");
+        sb.append("<div class='thumbd' title='{tooltip}'>{image}</div>");
         sb.append("<div>{name}</div>");
         sb.append("</div></tpl>");
 

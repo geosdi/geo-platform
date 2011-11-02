@@ -33,54 +33,55 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.plugin.tree.addlayer;
+package org.geosdi.geoplatform.gui.plugin.tree.addlayer;
 
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.PublisherResources;
-import org.geosdi.geoplatform.gui.client.action.UploadShapeAction;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
-import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AbstractAddLayerPlugin;
+import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class UploadShapeLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerTreeAction> {
-    private static final long serialVersionUID = -2266878585213759817L;
+public abstract class AbstractAddLayerPlugin<T extends GeoPlatformToolbarAction>
+    extends GeoPlatformBeanModel implements IAddLayerPlugin<T> {
     
-    private ToolbarLayerTreeAction action;
-    
-    @Override
-    public boolean setEnabledByStatus(TreeStatusEnum status) {
-        boolean condition = false;
-        if (status.equals(TreeStatusEnum.FOLDER_SELECTED)) {
-            condition = true;
-        }
-        action.setEnabled(condition);
-        return condition;
+    private static final long serialVersionUID = -544764736224982107L;
+
+    /**
+     * @return the image
+     */
+    public String getImage() {
+        return get(AddLayerPluginKey.IMAGE.toString());
     }
-    
-    @Override
-    public ToolbarLayerTreeAction getAction(TreePanel treePanel) {
-        if (action == null) {
-            action = new UploadShapeAction(treePanel);
-            this.setName(action.getTooltip());
-            action.setEnabled(true);
-        }
-        return action;
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(String image) {
+        set(AddLayerPluginKey.IMAGE.toString(), image);
     }
-    
-    @Override
-    public void initPlugin(TreePanel treePanel) {
-        this.setImage(PublisherResources.ICONS.fromShape().getHTML());
-        this.setTooltip("Adds one or more layers to the tree from a shape file");
-        action = new UploadShapeAction(treePanel);
-        this.setName(action.getTooltip());
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return get(AddLayerPluginKey.NAME.toString());
     }
-    
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        set(AddLayerPluginKey.NAME.toString(), name);
+    }
+
     @Override
-    public String getMessageToEnable() {
-        return "Ever enabled";
+    public String getTooltip() {
+        return get(AddLayerPluginKey.TOOLTIP.toString());
+    }
+
+    @Override
+    public void setTooltip(String tooltip) {
+        set(AddLayerPluginKey.TOOLTIP.toString(), tooltip);
     }
 }

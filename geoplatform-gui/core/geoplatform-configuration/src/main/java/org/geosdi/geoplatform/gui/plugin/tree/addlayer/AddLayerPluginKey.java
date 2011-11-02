@@ -41,7 +41,7 @@ package org.geosdi.geoplatform.gui.plugin.tree.addlayer;
  */
 public enum AddLayerPluginKey {
 
-    NAME("name"), IMAGE("image");
+    NAME("name"), IMAGE("image"), TOOLTIP("tooltip");
     //
     private String value;
 

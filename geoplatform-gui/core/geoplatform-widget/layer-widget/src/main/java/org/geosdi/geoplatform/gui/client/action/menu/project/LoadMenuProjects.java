@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.action.menu.project;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.icons.BasicWidgetIcons;
 import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchWidget;
 
 /**

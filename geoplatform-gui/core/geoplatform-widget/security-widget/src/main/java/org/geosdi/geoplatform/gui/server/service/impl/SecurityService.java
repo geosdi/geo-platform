@@ -45,7 +45,6 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.core.model.GPUserProjects;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
@@ -60,7 +59,6 @@ import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.stereotype.Service;
 
 /**
@@ -81,7 +79,7 @@ public class SecurityService implements ISecurityService {
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPUser user = null;
         List<String> roles = null;
-        List<GPUserProjects> listProjects = null;
+        GPProject project = null;
         GuiComponentsPermissionMapData guiComponemtPermission;
         try {
             user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(
@@ -92,7 +90,7 @@ public class SecurityService implements ISecurityService {
             guiComponemtPermission = geoPlatformServiceClient.getUserGuiComponentVisible(
                     user.getId());
 
-            listProjects = geoPlatformServiceClient.getUserProjectsByUserId(user.getId());
+            project = geoPlatformServiceClient.getDefaultProject(user.getId());
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
                     "Unable to find user with username: " + userName + " Error: " + ex);
@@ -107,15 +105,13 @@ public class SecurityService implements ISecurityService {
                     "Error on SecurityService: " + ilg);
             throw new GeoPlatformException("Parameter incorrect");
         }
-        GPProject project = null;
-        if (listProjects == null || listProjects.isEmpty()) {
+        
+        if (project == null) {
             project = new GPProject();
             project.setName("Default Project");
             project.setShared(false);
             project.setId(this.saveDefaultProject(user, project));
-        } else {
-            project = listProjects.get(0).getProject();
-        }
+        } 
         this.storeUserAndProjectInSession(user, project, httpServletRequest);
 
         IGPUserDetail userDetail = this.userConverter.convertUserToDTO(user);

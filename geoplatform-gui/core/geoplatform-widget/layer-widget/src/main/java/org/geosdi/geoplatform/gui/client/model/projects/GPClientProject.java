@@ -50,6 +50,7 @@ public class GPClientProject extends GeoPlatformBeanModel {
     private String name;
     private String image;
     private int numberOfElements;
+    private boolean defaultProject;
 
     /**
      * @return the id
@@ -107,6 +108,23 @@ public class GPClientProject extends GeoPlatformBeanModel {
         set(GPClientProjectKey.PROJECT_ELEMENTS.toString(), this.numberOfElements);
     }
 
+    /**
+     * @return the defaultProject
+     */
+    public boolean isDefaultProject() {
+        return defaultProject;
+    }
+
+    /**
+     * @param defaultProject the defaultProject to set
+     */
+    public void setDefaultProject(boolean defaultProject) {
+        this.defaultProject = defaultProject;
+        set(GPClientProjectKey.DEFAULT_PROJECT.toString(),
+                defaultProject ? GPClientProjectKey.DEFAULT_PROJECT_MESSAGE.toString()
+                + "Yes" : GPClientProjectKey.DEFAULT_PROJECT_MESSAGE.toString() + "No");
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -132,6 +150,7 @@ public class GPClientProject extends GeoPlatformBeanModel {
     @Override
     public String toString() {
         return "GPClientProject{" + "id = " + id + ", name = "
-                + name + ", numberOfElements = " + numberOfElements + " }";
+                + name + ", numberOfElements = " + numberOfElements
+                + ", isDefaultProject = " + defaultProject + " }";
     }
 }

@@ -86,8 +86,9 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
         sb.append("<tpl for=\".\">");
         sb.append("<div class='project-box' style='padding-top: 4px;border: none'>");
         sb.append("<div class='thumbd'>{image}</div>");
-        sb.append("<div>{name}</div>");
-        sb.append("<div>{numberOfElements}</div>");
+        sb.append("<div>Name : {name}</div>");
+        sb.append("<div>Elements : {numberOfElements}</div>");
+        sb.append("<div>{defaultProject}</div>");
         sb.append("</div></tpl>");
 
         listView.setTemplate(sb.toString());
@@ -139,6 +140,7 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
 
     @Override
     public void executeSelect() {
+        System.out.println("TEST ********************* " + listView.getSelectionModel().getSelectedItems().toString());
     }
 
     private void setUpLoadListener() {

@@ -42,7 +42,8 @@ package org.geosdi.geoplatform.gui.client.model.projects;
 public enum GPClientProjectKey {
 
     PROJECT_NAME("name"), PROJECT_IMAGE("image"),
-    PROJECT_ELEMENTS("numberOfElements");
+    PROJECT_ELEMENTS("numberOfElements"), DEFAULT_PROJECT("defaultProject"),
+    DEFAULT_PROJECT_MESSAGE("Default Project : ");
     //
     private String value;
 

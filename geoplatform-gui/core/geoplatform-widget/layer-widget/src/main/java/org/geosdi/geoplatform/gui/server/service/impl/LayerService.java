@@ -85,7 +85,7 @@ import org.springframework.stereotype.Service;
  */
 @Service("layerService")
 public class LayerService implements ILayerService {
-
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GeoPlatformService geoPlatformServiceClient;
@@ -104,7 +104,7 @@ public class LayerService implements ILayerService {
             @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
     }
-
+    
     @Override
     public ArrayList<GPFolderClientInfo> loadUserFolders(HttpServletRequest httpServletRequest) throws GeoPlatformException {
         Long projectId = null;
@@ -118,7 +118,7 @@ public class LayerService implements ILayerService {
         folderList = geoPlatformServiceClient.getRootFoldersByProjectId(projectId);
         return this.dtoConverter.convertOnlyFolder(folderList);
     }
-
+    
     @Override
     public ArrayList<IGPFolderElements> loadFolderElements(Long folderId, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPUser user = null;
@@ -138,7 +138,7 @@ public class LayerService implements ILayerService {
         }
         return elements;
     }
-
+    
     @Override
     public Long saveFolderForUser(String folderName, int position,
             int numberOfDescendants, boolean isChecked, HttpServletRequest httpServletRequest)
@@ -170,7 +170,7 @@ public class LayerService implements ILayerService {
         }
         return savedFolderId;
     }
-
+    
     @Override
     public Long saveFolder(Long idParentFolder, String folderName, int position,
             int numberOfDescendants, boolean isChecked, HttpServletRequest httpServletRequest)
@@ -190,7 +190,7 @@ public class LayerService implements ILayerService {
             throw new GeoPlatformException(
                     "The Folder with ID : " + idParentFolder + " was deleted.");
         }
-
+        
         GPFolder folder = new GPFolder();
         folder.setName(folderName);
         folder.setPosition(position);
@@ -219,7 +219,7 @@ public class LayerService implements ILayerService {
         }
         return savedFolderId;
     }
-
+    
     @Override
     public void deleteElement(Long id, TreeElement elementType, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
@@ -238,7 +238,7 @@ public class LayerService implements ILayerService {
                 break;
         }
     }
-
+    
     @Override
     public Long saveAddedFolderAndTreeModifications(
             MementoSaveAddedFolder memento, HttpServletRequest httpServletRequest)
@@ -249,7 +249,7 @@ public class LayerService implements ILayerService {
             throw new GeoPlatformException(timeout);
         }
         GPFolder gpFolder = this.dtoConverter.convertMementoFolder(memento.getAddedFolder());
-
+        
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         Long idSavedFolder = null;
@@ -269,7 +269,7 @@ public class LayerService implements ILayerService {
         }
         return idSavedFolder;
     }
-
+    
     @Override
     public ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
@@ -281,7 +281,7 @@ public class LayerService implements ILayerService {
         ArrayList<GPLayer> layersList = this.dtoConverter.convertMementoLayers(memento.getAddedLayers());
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
-
+        
         ArrayList<Long> idSavedLayers = null;
         try {
             Long projectId = this.sessionUtility.getDefaultProjectFromUserSession(httpServletRequest).getId();
@@ -298,7 +298,7 @@ public class LayerService implements ILayerService {
         }
         return idSavedLayers;
     }
-
+    
     @Override
     public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
@@ -320,7 +320,7 @@ public class LayerService implements ILayerService {
         }
         return result;
     }
-
+    
     @Override
     public boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
@@ -342,7 +342,7 @@ public class LayerService implements ILayerService {
         }
         return result;
     }
-
+    
     @Override
     public boolean saveDragAndDropLayerAndTreeModifications(
             MementoSaveDragDrop memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
@@ -369,7 +369,7 @@ public class LayerService implements ILayerService {
         }
         return result;
     }
-
+    
     @Override
     public boolean saveDragAndDropFolderAndTreeModifications(
             MementoSaveDragDrop memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
@@ -392,7 +392,7 @@ public class LayerService implements ILayerService {
         }
         return result;
     }
-
+    
     @Override
     @Deprecated()
     public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento,
@@ -414,7 +414,7 @@ public class LayerService implements ILayerService {
         }
         return result;
     }
-
+    
     @Override
     @Deprecated()
     public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento,
@@ -436,7 +436,7 @@ public class LayerService implements ILayerService {
         }
         return result;
     }
-
+    
     @Override
     public boolean saveLayerProperties(MementoLayerOriginalProperties memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
@@ -459,7 +459,7 @@ public class LayerService implements ILayerService {
         }
         return result;
     }
-
+    
     @Override
     public boolean saveFolderProperties(MementoFolderOriginalProperties memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
@@ -481,7 +481,7 @@ public class LayerService implements ILayerService {
         }
         return true;
     }
-
+    
     @Override
     public boolean checkWmsGetMapUrl(String urlString) throws GeoPlatformException {
         try {
@@ -516,7 +516,7 @@ public class LayerService implements ILayerService {
         }
         return false;
     }
-
+    
     @Deprecated()
     private void deleteFolder(Long id) throws GeoPlatformException {
         try {
@@ -528,7 +528,7 @@ public class LayerService implements ILayerService {
                     "The Folder with ID : " + id + " was deleted.");
         }
     }
-
+    
     @Deprecated()
     private void deleteLayer(Long id) throws GeoPlatformException {
         try {
@@ -540,7 +540,7 @@ public class LayerService implements ILayerService {
                     "The Layer with ID : " + id + " was deleted.");
         }
     }
-
+    
     @Override
     public PagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
             String searchText, String imageURL, HttpServletRequest httpServletRequest)
@@ -551,40 +551,47 @@ public class LayerService implements ILayerService {
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-
+        
         int start = config.getOffset();
-
+        
         SearchRequest srq = new SearchRequest(searchText);
         try {
             Long projectsCount = this.geoPlatformServiceClient.getUserProjectsCount(user.getId(), srq);
-
+            
             int page = start == 0 ? start : start / config.getLimit();
-
+            
             PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
                     config.getLimit(), page);
-
+            
             List<ProjectDTO> projectsDTO = this.geoPlatformServiceClient.searchUserProjects(user.getId(), psr);
-
+            
             if (projectsDTO.isEmpty()) {
                 throw new GeoPlatformException("There are no results");
             }
-
+            
             ArrayList<GPClientProject> clientProjects = new ArrayList<GPClientProject>();
-
+            
             for (ProjectDTO projectDTO : projectsDTO) {
                 GPClientProject clientProject = this.convertToGPCLientProject(projectDTO, imageURL);
+                if (user.getDefaultProjectID() != null) {
+                    if (user.getDefaultProjectID().equals(clientProject.getId())) {
+                        clientProject.setDefaultProject(true);
+                    } else {
+                        clientProject.setDefaultProject(false);
+                    }
+                }
                 clientProjects.add(clientProject);
             }
-
+            
             return new BasePagingLoadResult<GPClientProject>(clientProjects,
                     config.getOffset(), projectsCount.intValue());
-
+            
         } catch (ResourceNotFoundFault ex) {
             logger.error("An Error Occured : " + ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
     }
-
+    
     private GPClientProject convertToGPCLientProject(ProjectDTO projectDTO,
             String imageURL) {
         GPClientProject clientProject = new GPClientProject();

@@ -40,6 +40,8 @@ import java.util.Map;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
+import org.apache.ws.security.WSConstants;
+import org.apache.ws.security.handler.WSHandlerConstants;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 
 /**
@@ -69,11 +71,11 @@ public class GeoPlatformWSClient {
     public GeoPlatformService create() {
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
 
-////        factory.getOutInterceptors().add(new LoggingOutInterceptor());
-////        factory.getInInterceptors().add(new LoggingInInterceptor());
-//
-//        factory.getOutInterceptors().add(this.createOutInterceptor());
-//        factory.getInInterceptors().add(this.createInInterceptor());
+//        factory.getOutInterceptors().add(new LoggingOutInterceptor());
+//        factory.getInInterceptors().add(new LoggingInInterceptor());
+        
+        factory.getOutInterceptors().add(this.createOutInterceptor());
+        factory.getInInterceptors().add(this.createInInterceptor());
 
         factory.setServiceClass(GeoPlatformService.class);
         factory.setAddress(this.address);
@@ -83,27 +85,39 @@ public class GeoPlatformWSClient {
 
     private WSS4JOutInterceptor createOutInterceptor() {
         Map<String, Object> outProps = new HashMap<String, Object>();
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append(WSHandlerConstants.USERNAME_TOKEN + " ");
+        outProps.put(WSHandlerConstants.PASSWORD_TYPE, WSConstants.PW_DIGEST);
+        outProps.put(WSHandlerConstants.USER, "clientx509v1");
 
         // ----------- Only Encryption
-        outProps.put("action", "Encrypt");
-        outProps.put("encryptionPropFile", "Client_Encrypt.properties");
-        outProps.put("encryptionUser", "serverx509v1");
+////        outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.ENCRYPT);
+//        sb.append(WSHandlerConstants.ENCRYPT);
+//        outProps.put(WSHandlerConstants.ACTION, sb.toString());
+//        outProps.put(WSHandlerConstants.ENC_PROP_FILE, "Client_Encrypt.properties");
+//        outProps.put(WSHandlerConstants.ENCRYPTION_USER, "serverx509v1");
 
         // ----------- Only Signature
-//        outProps.put("action", "Signature");
-//        outProps.put("user", "clientx509v1");
-//        outProps.put("signaturePropFile", "Client_Sign.properties");
+////        outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE);
+//        sb.append(WSHandlerConstants.SIGNATURE);
+//        outProps.put(WSHandlerConstants.ACTION, sb.toString());
+//        outProps.put(WSHandlerConstants.USER, "clientx509v1");
+//        outProps.put(WSHandlerConstants.SIG_PROP_FILE, "Client_Sign.properties");
 
         // ----------- Signature and Encryption
-//        outProps.put("action", "Timestamp Signature Encrypt");
-//        outProps.put("user", "clientx509v1");
-//        outProps.put("signaturePropFile", "Client_Sign.properties");
-//        outProps.put("encryptionPropFile", "Client_Encrypt.properties");
-//        outProps.put("encryptionUser", "serverx509v1");
+//        outProps.put(WSHandlerConstants.ACTION, "Timestamp Signature Encrypt");
+        sb.append(WSHandlerConstants.TIMESTAMP + " ");
+        sb.append(WSHandlerConstants.SIGNATURE + " ");
+        sb.append(WSHandlerConstants.ENCRYPT);
+        outProps.put(WSHandlerConstants.ACTION, sb.toString());
+        outProps.put(WSHandlerConstants.SIG_PROP_FILE, "Client_Sign.properties");
+        outProps.put(WSHandlerConstants.ENC_PROP_FILE, "Client_Encrypt.properties");
+        outProps.put(WSHandlerConstants.ENCRYPTION_USER, "serverx509v1");
 
 //        outProps.put("signatureKeyIdentifier", "DirectReference");
 
-        outProps.put("passwordCallbackClass", ClientKeystorePasswordCallback.class.getName());
+        outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallback.class.getName());
 
 //        outProps.put("signatureParts", "{Element}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp;{Element}{http://schemas.xmlsoap.org/soap/envelope/}Body");
 //        outProps.put("encryptionParts", "{Element}{http://www.w3.org/2000/09/xmldsig#}Signature;{Content}{http://schemas.xmlsoap.org/soap/envelope/}Body");
@@ -114,37 +128,32 @@ public class GeoPlatformWSClient {
 
     private WSS4JInInterceptor createInInterceptor() {
         Map<String, Object> inProps = new HashMap<String, Object>();
+        
+        StringBuilder sb = new StringBuilder();
 
         // ----------- Only Encryption
-        inProps.put("action", "Encrypt");
-        inProps.put("decryptionPropFile", "Client_Sign.properties");
+////        inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.ENCRYPT);
+//        sb.append(WSHandlerConstants.ENCRYPT);
+//        inProps.put(WSHandlerConstants.ACTION, sb.toString());
+//        inProps.put(WSHandlerConstants.DEC_PROP_FILE, "Client_Sign.properties");
 
 //         ----------- Only Signature
-//        inProps.put("action", "Signature");
-//        inProps.put("signaturePropFile", "Client_Encrypt.properties");
+////        inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE);
+//        sb.append(WSHandlerConstants.SIGNATURE);
+//        inProps.put(WSHandlerConstants.ACTION, sb.toString());
+//        inProps.put(WSHandlerConstants.SIG_PROP_FILE, "Client_Encrypt.properties");
 //        
         // ----------- Signature and Encryption
-//        inProps.put("action", "Timestamp Signature Encrypt");
-//        inProps.put("signaturePropFile", "Client_Encrypt.properties");
-//        inProps.put("decryptionPropFile", "Client_Sign.properties");
+//        inProps.put(WSHandlerConstants.ACTION, "Timestamp Signature Encrypt");
+        sb.append(WSHandlerConstants.TIMESTAMP + " ");
+        sb.append(WSHandlerConstants.SIGNATURE + " ");
+        sb.append(WSHandlerConstants.ENCRYPT);
+        inProps.put(WSHandlerConstants.ACTION, sb.toString());
+        inProps.put(WSHandlerConstants.SIG_PROP_FILE, "Client_Encrypt.properties");
+        inProps.put(WSHandlerConstants.DEC_PROP_FILE, "Client_Sign.properties");
 
-        inProps.put("passwordCallbackClass", ClientKeystorePasswordCallback.class.getName());
+        inProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallback.class.getName());
 
         return new WSS4JInInterceptor(inProps);
     }
-//
-//    public Greeter create() {
-//        JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
-//
-//        factory.getOutInterceptors().add(new LoggingOutInterceptor());
-//        factory.getInInterceptors().add(new LoggingInInterceptor());
-//
-//        factory.getOutInterceptors().add(this.createOutInterceptor());
-//        factory.getInInterceptors().add(this.createInInterceptor());
-//
-//        factory.setServiceClass(Greeter.class);
-//        factory.setAddress(this.address);
-//
-//        return (Greeter) factory.create();
-//    }
 }

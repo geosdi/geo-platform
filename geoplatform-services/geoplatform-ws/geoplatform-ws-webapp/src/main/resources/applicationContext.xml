@@ -123,15 +123,16 @@
                 <!-- Use this action order for local clients -->
                 
                 <!-- .......... Only Encryption -->
-                <entry key="action" value="Encrypt"/>
-                <entry key="decryptionPropFile" value="Server_Decrypt.properties"/>
+                <!--<entry key="action" value="Encrypt"/>
+                <entry key="decryptionPropFile" value="Server_Decrypt.properties"/>-->
                 
                 <!-- .......... Only Signature -->
-                <!--<entry key="action" value="Signature"/>
-                <entry key="signaturePropFile" value="Server_SignVerf.properties"/>-->
+                <entry key="action" value="Signature"/>
+                <entry key="signaturePropFile" value="Server_SignVerf.properties"/>
                 
                 <!-- .......... Signature and Encryption -->
-                <!--<entry key="action" value="Timestamp Signature Encrypt"/>
+<!--                <entry key="action" value="Timestamp Signature Encrypt"/>-->
+<!--                <entry key="action" value="org.apache.ws.security.handler.WSHandlerConstants.USERNAME_TOKEN"/>
                 <entry key="signaturePropFile" value="Server_SignVerf.properties"/>
                 <entry key="decryptionPropFile" value="Server_Decrypt.properties"/>-->
                 
@@ -153,22 +154,21 @@
     -->
     <bean
         id="TimestampSignEncrypt_Response"
-        class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor"
-        >
+        class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
         <constructor-arg>
             <map>
                 <!-- .......... Only Encryption -->
-                <entry key="action" value="Encrypt"/>
+                <!--<entry key="action" value="Encrypt"/>
                 <entry key="encryptionPropFile" value="Server_SignVerf.properties"/>
-                <entry key="encryptionUser" value="clientx509v1"/>
+                <entry key="encryptionUser" value="clientx509v1"/>-->
 
                 <!-- .......... Only Signature -->
-                <!--<entry key="action" value="Signature"/>
+                <entry key="action" value="Signature"/>
                 <entry key="user" value="serverx509v1"/>
-                <entry key="signaturePropFile" value="Server_Decrypt.properties"/>-->
+                <entry key="signaturePropFile" value="Server_Decrypt.properties"/>
                 
                 <!-- .......... Signature and Encryption -->
-                <!--<entry key="action" value="Timestamp Signature Encrypt"/>
+<!--                <entry key="action" value="Timestamp Signature Encrypt"/>
                 <entry key="user" value="serverx509v1"/>
                 <entry key="signaturePropFile" value="Server_Decrypt.properties"/>
                 <entry key="encryptionPropFile" value="Server_SignVerf.properties"/>

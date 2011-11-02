@@ -62,6 +62,8 @@ public class ServerKeystorePasswordCallback implements CallbackHandler {
 //        passwords.put("server", "serverpwd");
 ////        passwords.put("alice", "password");
 ////        passwords.put("bob", "password");
+        //
+        passwords.put("gpagent", "gpagent");
     }
 
     /**
@@ -72,19 +74,6 @@ public class ServerKeystorePasswordCallback implements CallbackHandler {
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
         for (int i = 0; i < callbacks.length; i++) {
             WSPasswordCallback pc = (WSPasswordCallback) callbacks[i];
-
-//            logger.info("########### Alias server: " + pc.getIdentifier());
-//            logger.info("########### pc.getUsage(): " + pc.getUsage());
-//
-////            logger.info("########### WSPasswordCallback.SECRET_KEY: " + WSPasswordCallback.SECRET_KEY);
-//            logger.info("########### WSPasswordCallback.CUSTOM_TOKEN: " + WSPasswordCallback.CUSTOM_TOKEN);
-//            logger.info("########### WSPasswordCallback.SECURITY_CONTEXT_TOKEN: " + WSPasswordCallback.SECURITY_CONTEXT_TOKEN);
-//            logger.info("########### WSPasswordCallback.SIGNATURE: " + WSPasswordCallback.SIGNATURE);
-//            logger.info("########### WSPasswordCallback.USERNAME_TOKEN: " + WSPasswordCallback.USERNAME_TOKEN);
-//            logger.info("########### WSPasswordCallback.DECRYPT: " + WSPasswordCallback.DECRYPT);
-//            logger.info("########### WSPasswordCallback.ENCRYPTED_KEY_TOKEN: " + WSPasswordCallback.ENCRYPTED_KEY_TOKEN);
-//            logger.info("########### WSPasswordCallback.USERNAME_TOKEN_UNKNOWN: " + WSPasswordCallback.USERNAME_TOKEN_UNKNOWN);
-//            logger.info("########### WSPasswordCallback.KEY_NAME: " + WSPasswordCallback.KEY_NAME);
 
             String pass = passwords.get(pc.getIdentifier());
             if (pass != null) {

@@ -98,7 +98,7 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
 
     @Override
     public void setWindowProperties() {
-        super.setHeading("GeoPlatform Users Management");
+        super.setHeading("GeoPlatform Project Management");
         super.setSize(700, 565);
 
         super.addWindowListener(new WindowListener() {

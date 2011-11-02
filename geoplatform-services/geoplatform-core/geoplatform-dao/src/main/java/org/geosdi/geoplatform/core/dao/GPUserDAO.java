@@ -69,6 +69,6 @@ public interface GPUserDAO {
     public GPUser findByUsername(String username);
 
     public GPUser findByEmail(String email);
-    
-//    public boolean resetDefaultProject(Long defaultProjectId);
+
+    public boolean resetDefaultProject(Long defaultProjectId);
 }

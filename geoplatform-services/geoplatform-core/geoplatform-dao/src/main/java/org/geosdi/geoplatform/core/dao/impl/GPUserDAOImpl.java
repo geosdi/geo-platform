@@ -97,17 +97,17 @@ public class GPUserDAOImpl extends BaseDAO<GPUser, Long> implements GPUserDAO {
         return super.searchUnique(search);
     }
 
-//    @Override
-//    public boolean resetDefaultProject(Long defaultProjectId) {
-//        Search search = new Search();
-//        search.addFilterEqual("defaultProject.id", defaultProjectId);
-//
-//        List<GPUser> users = super.search(search);
-//        for (GPUser user : users) {
-//            user.setDefaultProject(null);
-//            super.merge(user);
-//        }
-//
-//        return true;
-//    }
+    @Override
+    public boolean resetDefaultProject(Long defaultProjectId) {
+        Search search = new Search();
+        search.addFilterEqual("defaultProjectID", defaultProjectId);
+
+        List<GPUser> users = super.search(search);
+        for (GPUser user : users) {
+            user.setDefaultProjectID(null);
+            super.merge(user);
+        }
+
+        return true;
+    }
 }

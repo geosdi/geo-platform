@@ -398,6 +398,13 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
             throws ResourceNotFoundFault {
         return projectServiceDelegate.searchUserProjects(userId, request);
     }
+
+    @Override
+    public GPProject getDefaultProject(Long userId) throws ResourceNotFoundFault {
+        return projectServiceDelegate.getDefaultProject(userId);
+    }
+    
+    
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Project">

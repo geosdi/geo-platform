@@ -196,6 +196,8 @@ class ProjectServiceImpl {
             throw new ResourceNotFoundFault("Project not found", projectId);
         }
         EntityCorrectness.checkProjectLog(project); // TODO assert
+        
+        userDao.resetDefaultProject(projectId);
 
         return projectDao.removeById(projectId);
     }
@@ -570,6 +572,27 @@ class ProjectServiceImpl {
         return ProjectDTO.convertToProjectDTOList(projects);
     }
     //</editor-fold>
+
+    public GPProject getDefaultProject(Long userId) throws ResourceNotFoundFault {
+        GPUser user = userDao.find(userId);
+        if (user == null) {
+            throw new ResourceNotFoundFault("User not found", userId);
+        }
+        EntityCorrectness.checkUserLog(user); // TODO assert
+
+        Long defaultProjectID = user.getDefaultProjectID();
+        if (defaultProjectID == null) {
+            return null;
+        }
+        
+        GPProject project = projectDao.find(defaultProjectID);
+        if (project == null) {
+            throw new ResourceNotFoundFault("Project not found", defaultProjectID);
+        }
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+
+        return project;
+    }
 
     private String createParentChildKey(GPFolder parent, GPFolder child) {
         return parent.getId() + ":" + child.getId();

@@ -221,6 +221,12 @@ public interface GeoPlatformService {
     List<ProjectDTO> searchUserProjects(@WebParam(name = "userId") Long userId,
             PaginatedSearchRequest request)
             throws ResourceNotFoundFault;
+
+    @Get
+    @HttpResource(location = "/user/{userId}")
+    @WebResult(name = "DefaultProject")
+    GPProject getDefaultProject(@WebParam(name = "userId") Long userId)
+            throws ResourceNotFoundFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Project">

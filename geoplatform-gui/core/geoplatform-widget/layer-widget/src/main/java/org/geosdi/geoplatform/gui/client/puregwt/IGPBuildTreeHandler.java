@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.puregwt.timeout;
+package org.geosdi.geoplatform.gui.client.puregwt;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
@@ -47,5 +47,7 @@ public interface IGPBuildTreeHandler extends EventHandler{
     Type<IGPBuildTreeHandler> TYPE = new Type<IGPBuildTreeHandler>();
     
     public void buildTree();
+    
+    public void rebuildTree();
     
 }

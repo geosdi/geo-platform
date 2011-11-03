@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.server;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.gui.utility.DefaultProjectEnum;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
@@ -51,13 +50,13 @@ import org.springframework.stereotype.Service;
 @Service("sessionUtility")
 public class SessionUtility {
 
-    public GPProject getDefaultProjectFromUserSession(HttpServletRequest httpServletRequest)
+    public Long getDefaultProjectFromUserSession(HttpServletRequest httpServletRequest)
             throws GPSessionTimeout {
-        GPProject project;
+        Long projectId;
         HttpSession session = httpServletRequest.getSession();
-        project = (GPProject) session.getAttribute(DefaultProjectEnum.DEFAULT_PROJECT.toString());
-        if (project != null) {
-            return project;
+        projectId = (Long) session.getAttribute(DefaultProjectEnum.DEFAULT_PROJECT.toString());
+        if (projectId != null) {
+            return projectId;
         } else {
             throw new GPSessionTimeout("Session Timeout");
         }
@@ -74,5 +73,28 @@ public class SessionUtility {
             throw new GPSessionTimeout("Session Timeout");
         }
         return user;
+    }
+
+    public void storeUserInSession(GPUser user, HttpServletRequest httpServletRequest) {
+        HttpSession session = httpServletRequest.getSession();
+        //TODO: Set the right time in seconds before session interrupt
+        session.setMaxInactiveInterval(900);
+        session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), user);
+    }
+
+    public void storeDefaultProjectInSession(Long projectID, HttpServletRequest httpServletRequest) {
+        HttpSession session = httpServletRequest.getSession();
+        //TODO: Set the right time in seconds before session interrupt
+        session.setMaxInactiveInterval(900);
+        session.setAttribute(DefaultProjectEnum.DEFAULT_PROJECT.toString(), projectID);
+    }
+
+    public void storeUserAndProjectInSession(GPUser user, Long projectID,
+            HttpServletRequest httpServletRequest) {
+        HttpSession session = httpServletRequest.getSession();
+        //TODO: Set the right time in seconds before session interrupt
+        session.setMaxInactiveInterval(900);
+        session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), user);
+        session.setAttribute(DefaultProjectEnum.DEFAULT_PROJECT.toString(), projectID);
     }
 }

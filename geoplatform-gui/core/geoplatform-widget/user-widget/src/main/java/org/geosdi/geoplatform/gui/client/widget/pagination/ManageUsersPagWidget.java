@@ -37,13 +37,11 @@ package org.geosdi.geoplatform.gui.client.widget.pagination;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
-import com.extjs.gxt.ui.client.data.LoadEvent;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.LoadListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
@@ -59,10 +57,8 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.service.UserRemote;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.UserPropertiesWidget;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.grid.GPGridSearchWidget;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
  *
@@ -139,8 +135,6 @@ public class ManageUsersPagWidget
         super.store = new ListStore<GPUserManageDetail>(loader);
 
         super.toolBar.bind(loader);
-
-        this.setUpLoadListener();
     }
 
     @Override
@@ -188,38 +182,5 @@ public class ManageUsersPagWidget
     @Override
     public void executeSelect() {
         this.userPropertiesWidget.show(this.grid.getSelectionModel().getSelectedItem());
-    }
-
-    private void setUpLoadListener() {
-        super.loader.addLoadListener(new LoadListener() {
-
-            @Override
-            public void loaderBeforeLoad(LoadEvent le) {
-                searchStatus.setBusy("Connection to the Server");
-                if (selectButton.isEnabled()) {
-                    selectButton.disable();
-                }
-            }
-
-            @Override
-            public void loaderLoad(LoadEvent le) {
-                setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                        EnumSearchStatus.STATUS_MESSAGE_SEARCH);
-            }
-
-            @Override
-            public void loaderLoadException(LoadEvent le) {
-                clearWidgetElements();
-                try {
-                    throw le.exception;
-                } catch (GeoPlatformException e) {
-                    setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
-                            EnumSearchStatus.STATUS_MESSAGE_NOT_SEARCH);
-                } catch (Throwable e) {
-                    setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
-                            EnumSearchStatus.STATUS_MESSAGE_SEARCH_ERROR);
-                }
-            }
-        });
     }
 }

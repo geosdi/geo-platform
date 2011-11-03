@@ -36,12 +36,10 @@
 package org.geosdi.geoplatform.gui.client.widget.pagination.projects;
 
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
-import com.extjs.gxt.ui.client.data.LoadEvent;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.RpcProxy;
-import com.extjs.gxt.ui.client.event.LoadListener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.store.ListStore;
@@ -50,10 +48,11 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
+import org.geosdi.geoplatform.gui.client.puregwt.projects.event.GPDefaultProjectTreeEvent;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchWidget;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 
 /**
  *
@@ -61,6 +60,8 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProject> {
+    
+    private GPDefaultProjectTreeEvent defaultProjectEvent = new GPDefaultProjectTreeEvent();
 
     public GPProjectSearchWidget() {
         super(true, 10);
@@ -69,9 +70,11 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
     @Override
     public void finalizeInitOperations() {
         super.finalizeInitOperations();
+        selectButton.setText("Set Default Project");
         super.search.setFieldLabel("Find Project");
 
         super.addButton(1, new Button("Add Project"));
+        super.addButton(2, new Button("Delete Projects"));
     }
 
     @Override
@@ -134,45 +137,27 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
         super.store = new ListStore<GPClientProject>(loader);
 
         super.toolBar.bind(loader);
-
-        this.setUpLoadListener();
     }
 
     @Override
     public void executeSelect() {
-        System.out.println("TEST ********************* " + listView.getSelectionModel().getSelectedItems().toString());
-    }
+        searchStatus.setBusy("Setting Default Project");
 
-    private void setUpLoadListener() {
-        super.loader.addLoadListener(new LoadListener() {
+        LayerRemote.Util.getInstance().setDefaultProject(listView.getSelectionModel().getSelectedItem().getId(),
+                new AsyncCallback<Object>() {
 
-            @Override
-            public void loaderBeforeLoad(LoadEvent le) {
-                searchStatus.setBusy("Connection to the Server");
-                if (selectButton.isEnabled()) {
-                    selectButton.disable();
-                }
-            }
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        throw new UnsupportedOperationException("Not supported yet.");
+                    }
 
-            @Override
-            public void loaderLoad(LoadEvent le) {
-                setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                        EnumSearchStatus.STATUS_MESSAGE_SEARCH);
-            }
-
-            @Override
-            public void loaderLoadException(LoadEvent le) {
-                clearWidgetElements();
-                try {
-                    throw le.exception;
-                } catch (GeoPlatformException e) {
-                    setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
-                            EnumSearchStatus.STATUS_MESSAGE_NOT_SEARCH);
-                } catch (Throwable e) {
-                    setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
-                            EnumSearchStatus.STATUS_MESSAGE_SEARCH_ERROR);
-                }
-            }
-        });
+                    @Override
+                    public void onSuccess(Object result) {
+                        setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
+                                EnumProjectMessage.DEFAUTL_PROJECT_MESSAGE);
+                        hide();
+                        TimeoutHandlerManager.fireEvent(defaultProjectEvent);
+                    }
+                });
     }
 }

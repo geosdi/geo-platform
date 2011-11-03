@@ -109,4 +109,7 @@ public interface LayerRemoteAsync {
     void searchProjects(PagingLoadConfig config, String searchText, String imageURL,
             AsyncCallback<PagingLoadResult<GPClientProject>> callback)
             throws GeoPlatformException;
+
+    void setDefaultProject(Long projectID, AsyncCallback<?> callback)
+            throws GeoPlatformException;
 }

@@ -52,7 +52,6 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.converter.GPUserConverter;
-import org.geosdi.geoplatform.gui.utility.DefaultProjectEnum;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
@@ -93,7 +92,8 @@ public class SecurityService implements ISecurityService {
             project = geoPlatformServiceClient.getDefaultProject(user.getId());
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
-                    "Unable to find user with username: " + userName + " Error: " + ex);
+                    "Unable to find user with username: " + userName
+                    + " Error: " + ex);
             throw new GeoPlatformException(
                     "Unable to find user with username: " + userName);
         } catch (SOAPFaultException ex) {
@@ -105,14 +105,16 @@ public class SecurityService implements ISecurityService {
                     "Error on SecurityService: " + ilg);
             throw new GeoPlatformException("Parameter incorrect");
         }
-        
+
         if (project == null) {
             project = new GPProject();
             project.setName("Default Project");
             project.setShared(false);
             project.setId(this.saveDefaultProject(user, project));
-        } 
-        this.storeUserAndProjectInSession(user, project, httpServletRequest);
+        }
+
+        this.sessionUtility.storeUserAndProjectInSession(user, project.getId(),
+                httpServletRequest);
 
         IGPUserDetail userDetail = this.userConverter.convertUserToDTO(user);
 
@@ -126,15 +128,6 @@ public class SecurityService implements ISecurityService {
                 guiComponemtPermission.getGuiComponentsPermissionMap());
 
         return userDetail;
-    }
-
-    private void storeUserAndProjectInSession(GPUser user, GPProject defaultProject,
-            HttpServletRequest httpServletRequest) {
-        HttpSession session = httpServletRequest.getSession();
-        //TODO: Set the right time in seconds before session interrupt
-        session.setMaxInactiveInterval(900);
-        session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), user);
-        session.setAttribute(DefaultProjectEnum.DEFAULT_PROJECT.toString(), defaultProject);
     }
 
     public GPUser loginFromSessionServer(HttpServletRequest httpServletRequest)

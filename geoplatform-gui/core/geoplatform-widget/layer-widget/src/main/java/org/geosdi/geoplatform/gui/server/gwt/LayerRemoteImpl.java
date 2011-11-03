@@ -181,4 +181,9 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
         return this.layerService.searchProjects(config, searchText, imageURL,
                 super.getThreadLocalRequest());
     }
+
+    @Override
+    public void setDefaultProject(Long projectID) throws GeoPlatformException {
+        this.layerService.setDefaultProject(projectID, super.getThreadLocalRequest());
+    }
 }

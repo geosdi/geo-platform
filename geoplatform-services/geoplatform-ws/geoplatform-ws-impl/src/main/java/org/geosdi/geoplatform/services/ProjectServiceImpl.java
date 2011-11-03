@@ -593,6 +593,24 @@ class ProjectServiceImpl {
 
         return project;
     }
+    
+    public void updateDefaultProject(Long userId, Long projectId) throws ResourceNotFoundFault {
+        GPUser user = userDao.find(userId);
+        if (user == null) {
+            throw new ResourceNotFoundFault("User not found", userId);
+        }
+        EntityCorrectness.checkUserLog(user);
+        
+        GPProject project = projectDao.find(projectId);
+        
+        if(project == null) {
+            throw new ResourceNotFoundFault("Project not found", userId);
+        }
+        
+        user.setDefaultProjectID(projectId);
+        
+        userDao.merge(user);
+    }
 
     private String createParentChildKey(GPFolder parent, GPFolder child) {
         return parent.getId() + ":" + child.getId();

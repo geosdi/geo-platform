@@ -37,11 +37,11 @@ package org.geosdi.geoplatform.gui.client.widget.grid.pagination;
 
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
+import com.extjs.gxt.ui.client.data.LoadEvent;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoader;
@@ -49,6 +49,7 @@ import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.KeyListener;
+import com.extjs.gxt.ui.client.event.LoadListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
@@ -67,6 +68,8 @@ import com.extjs.gxt.ui.client.widget.toolbar.LabelToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.ui.Widget;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
  *
@@ -147,6 +150,7 @@ public abstract class GeoPlatformSearchWidget<C extends Widget, T extends GeoPla
         vp = new VerticalPanel();
         vp.setSpacing(10);
         createStore();
+        setUpLoadListener();
         initWidget();
     }
 
@@ -267,8 +271,8 @@ public abstract class GeoPlatformSearchWidget<C extends Widget, T extends GeoPla
     /**
      * Set the correct Status Icon Style
      */
-    public void setSearchStatus(EnumSearchStatus status,
-            EnumSearchStatus message) {
+    public void setSearchStatus(Enum status,
+            Enum message) {
         this.searchStatus.setIconStyle(status.toString());
         this.searchStatus.setText(message.toString());
     }
@@ -280,6 +284,39 @@ public abstract class GeoPlatformSearchWidget<C extends Widget, T extends GeoPla
     public abstract C initWidget();
 
     public abstract void executeSelect();
+    
+    private void setUpLoadListener() {
+        loader.addLoadListener(new LoadListener() {
+
+            @Override
+            public void loaderBeforeLoad(LoadEvent le) {
+                searchStatus.setBusy("Connection to the Server");
+                if (selectButton.isEnabled()) {
+                    selectButton.disable();
+                }
+            }
+
+            @Override
+            public void loaderLoad(LoadEvent le) {
+                setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
+                        EnumSearchStatus.STATUS_MESSAGE_SEARCH);
+            }
+
+            @Override
+            public void loaderLoadException(LoadEvent le) {
+                clearWidgetElements();
+                try {
+                    throw le.exception;
+                } catch (GeoPlatformException e) {
+                    setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
+                            EnumSearchStatus.STATUS_MESSAGE_NOT_SEARCH);
+                } catch (Throwable e) {
+                    setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
+                            EnumSearchStatus.STATUS_MESSAGE_SEARCH_ERROR);
+                }
+            }
+        });
+    }
 
     /**
      * @return the initialized

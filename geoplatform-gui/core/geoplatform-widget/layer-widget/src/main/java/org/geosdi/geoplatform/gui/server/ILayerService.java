@@ -124,4 +124,7 @@ public interface ILayerService {
             String searchText, String imageURL,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
+
+    void setDefaultProject(Long projectID, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
 }

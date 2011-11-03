@@ -70,10 +70,11 @@ import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
-import org.geosdi.geoplatform.gui.client.puregwt.timeout.IGPBuildTreeHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.IGPBuildTreeHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.timeout.IGPExpandTreeNodeHandler;
 import org.geosdi.geoplatform.gui.client.puregwt.timeout.event.GPBuildTreeEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.timeout.event.GPExpandTreeNodeEvent;
+import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.contextmenu.GPDynamicTreeContextMenu;
 import org.geosdi.geoplatform.gui.client.widget.decorator.GPLayerTreeDecorator;
@@ -146,7 +147,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
 
             LayoutManager.getInstance().getStatusMap().setBusy(
                     "Loading tree elements: please, wait untill contents fully loads.");
-            LayerRemoteImpl.Util.getInstance().loadUserFolders(new AsyncCallback<ArrayList<GPFolderClientInfo>>() {
+            LayerRemote.Util.getInstance().loadUserFolders(new AsyncCallback<ArrayList<GPFolderClientInfo>>() {
 
                 @Override
                 public void onFailure(Throwable caught) {
@@ -385,5 +386,13 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
         node.setLoading(true);
         this.tree.fireEvent(Events.BeforeExpand, new TreePanelEvent(this.tree, node));
         System.out.println("Called expanding node");
+    }
+
+    @Override
+    public void rebuildTree() {
+        this.initialized = false;
+        this.root.removeAll();
+        this.store.removeAll();
+        this.buildTree();
     }
 }

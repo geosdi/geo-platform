@@ -227,6 +227,12 @@ public interface GeoPlatformService {
     @WebResult(name = "DefaultProject")
     GPProject getDefaultProject(@WebParam(name = "userId") Long userId)
             throws ResourceNotFoundFault;
+
+    @Post
+    @HttpResource(location = "/user/defaultProject")
+    void updateDefaultProject(@WebParam(name = "userId") Long userId,
+            @WebParam(name = "projectId") Long projectId)
+            throws ResourceNotFoundFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Project">

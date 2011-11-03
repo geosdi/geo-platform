@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.puregwt.timeout.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.client.puregwt.IGPBuildTreeHandler;
+import org.geosdi.geoplatform.gui.puregwt.layers.IGPBuildTreeHandler;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

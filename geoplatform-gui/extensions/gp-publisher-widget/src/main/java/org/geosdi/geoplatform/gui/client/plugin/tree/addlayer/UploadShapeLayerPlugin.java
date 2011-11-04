@@ -53,12 +53,8 @@ public class UploadShapeLayerPlugin extends AbstractAddLayerPlugin<ToolbarLayerT
     
     @Override
     public boolean setEnabledByStatus(TreeStatusEnum status) {
-        boolean condition = false;
-        if (status.equals(TreeStatusEnum.FOLDER_SELECTED)) {
-            condition = true;
-        }
-        action.setEnabled(condition);
-        return condition;
+        action.setEnabled(true);
+        return true;
     }
     
     @Override

@@ -32,7 +32,8 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  *
- */package org.geosdi.geoplatform.gui.client.widget;
+ */
+package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import java.util.List;
@@ -92,22 +93,29 @@ public class GPTreePanelDropTarget extends TreePanelDropTarget {
             System.out.println("The Folders must be expanded before drop on it");
             condition = false;//The Folders must be expanded before drop on it
         } else if (this.target.isLeaf() && this.target instanceof FolderTreeNode) {
-            System.out.println("Insert elements into empty folders");
+//            System.out.println("Insert elements into empty folders");
+            Feedback feedbackToChange;
+            if(!(this.target.getParent() instanceof GPRootTreeNode) ||
+                    this.source instanceof FolderTreeNode){
+                feedbackToChange = Feedback.BOTH;
+            } else {
+                feedbackToChange = Feedback.APPEND;
+            }
             boolean dropLeaf = super.isAllowDropOnLeaf();
             Feedback feedback = super.getFeedback();
             super.setAllowDropOnLeaf(true);
-            super.setFeedback(Feedback.APPEND);
+            super.setFeedback(feedbackToChange);
             super.showFeedback(e);
             super.setAllowDropOnLeaf(dropLeaf);
             super.setFeedback(feedback);
             condition = true;// Insert elements into empty folders
         } else if (!(source instanceof FolderTreeNode)
                 && target.getParent() instanceof GPRootTreeNode) {
-            System.out.println("Leafs without a folder not allowed");
+//            System.out.println("Leafs without a folder not allowed");
             condition = false;// Leafs without a folder not allowed
         } else if (source instanceof GPLayerTreeModel
                 && this.duplicateLayerCondition(target, (GPLayerTreeModel) source)) {
-            System.out.println("Duplicated layers are not allowed on the same folder");
+//            System.out.println("Duplicated layers are not allowed on the same folder");
             condition = false;//Duplicated layers are not allowed on the same folder
         }
         return condition;

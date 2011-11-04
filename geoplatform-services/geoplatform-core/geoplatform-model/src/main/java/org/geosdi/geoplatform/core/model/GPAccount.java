@@ -40,6 +40,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -62,7 +64,8 @@ import org.springframework.security.core.GrantedAuthority;
 @XmlSeeAlso(value = {GPUser.class, GPApplication.class})
 @Entity(name = "Account")
 @Table(name = "gp_account")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "GP_ACCOUNT_TYPE", discriminatorType = DiscriminatorType.STRING)
 public abstract class GPAccount implements Serializable {
 
     /**
@@ -100,6 +103,10 @@ public abstract class GPAccount implements Serializable {
     private Long defaultProjectID;
 
     public abstract String getStringID();
+//    public String getStringID() {
+//        return "####";
+//    }
+
 
     /**
      * @return the id

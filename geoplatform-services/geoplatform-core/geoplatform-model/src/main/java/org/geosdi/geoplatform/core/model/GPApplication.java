@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.core.model;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -50,6 +51,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @XmlRootElement(name = "Application")
 @Entity(name = "Application")
 @Table(name = "gp_application")
+@DiscriminatorValue("GPApplication")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "application")
 public class GPApplication extends GPAccount {
 

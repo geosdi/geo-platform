@@ -124,8 +124,11 @@ public class GPFileUploader {
                 // response of type text/html, we can get the result text here 
                 // (see the FormPanel documentation for further explanation)
                 htmlResult = event.getResults();
+                System.out.println("HTML Resolut: " + htmlResult);
                 //Execute this code only if the session is still alive
-                if (!htmlResult.contains("Session Timeout")) {
+                if (htmlResult.contains("Session Timeout")) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(null));
+                } else if (!htmlResult.contains("HTTP ERROR")) {
                     formPanel.reset();
                     htmlResult = htmlResult.replaceAll("<pre>", "");
                     htmlResult = htmlResult.replaceAll("</pre>", "");
@@ -145,7 +148,9 @@ public class GPFileUploader {
                                 "Failed to Upload File.", EnumSearchStatus.STATUS_NO_SEARCH.toString());
                     }
                 } else {
-                    GPHandlerManager.fireEvent(new GPLoginEvent(null));
+                    GeoPlatformMessage.errorMessage("Upload Error", "Error on file upload");
+                    LayoutManager.getInstance().getStatusMap().setStatus(
+                                "Failed to Upload File.", EnumSearchStatus.STATUS_NO_SEARCH.toString());
                 }
             }
         });

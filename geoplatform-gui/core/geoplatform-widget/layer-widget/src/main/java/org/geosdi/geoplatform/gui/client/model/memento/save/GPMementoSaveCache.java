@@ -105,6 +105,12 @@ public class GPMementoSaveCache extends GPCache<IMemento<ISave>> {
     }
 
     @Override
+    public void clear() {
+        super.clear();
+        this.modifiedLayersMap.clear();
+    }
+    
+    @Override
     public IMemento<ISave> peek() {
         this.verifyEmptyCache();
         return super.peek();

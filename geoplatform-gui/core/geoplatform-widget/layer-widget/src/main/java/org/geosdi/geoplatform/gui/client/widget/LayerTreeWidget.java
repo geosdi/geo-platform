@@ -68,6 +68,7 @@ import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
+import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
 import org.geosdi.geoplatform.gui.client.puregwt.timeout.IGPExpandTreeNodeHandler;
@@ -391,6 +392,7 @@ public class LayerTreeWidget extends GeoPlatformTreeWidget<GPBeanTreeModel>
     @Override
     public void rebuildTree() {
         this.initialized = false;
+        GPMementoSaveCache.getInstance().clear();
         this.root.removeAll();
         this.store.removeAll();
         this.buildTree();

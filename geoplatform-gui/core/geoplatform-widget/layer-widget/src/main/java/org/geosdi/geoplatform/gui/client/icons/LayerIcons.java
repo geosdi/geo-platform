@@ -114,4 +114,10 @@ public interface LayerIcons extends ImageBundle {
     
     @Resource("map_add.png")
     AbstractImagePrototype mappAdd();
+    
+    @Resource("project_add.png")
+    AbstractImagePrototype projectAdd();
+    
+    @Resource("project_delete.png")
+    AbstractImagePrototype projectDelete();
 }

@@ -73,11 +73,7 @@ public abstract class GPListViewSearchWidget<T extends GeoPlatformBeanModel>
             
             @Override
             public void selectionChanged(SelectionChangedEvent<T> se) {
-                if(se.getSelectedItem() != null) {
-                    selectButton.enable();
-                } else {
-                    selectButton.disable();
-                }
+                changeSelection(se);
             }
         });
         
@@ -85,6 +81,8 @@ public abstract class GPListViewSearchWidget<T extends GeoPlatformBeanModel>
         
         return listView;
     }
+    
+    public abstract void changeSelection(SelectionChangedEvent<T> se);
     
     public abstract void setListViewProperties();
 }

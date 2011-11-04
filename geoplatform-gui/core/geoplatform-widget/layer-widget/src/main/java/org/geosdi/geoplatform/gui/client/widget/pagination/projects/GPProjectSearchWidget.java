@@ -35,11 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.pagination.projects;
 
+import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.RpcProxy;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.store.ListStore;
@@ -60,8 +64,9 @@ import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProject> {
-    
+
     private GPDefaultProjectTreeEvent defaultProjectEvent = new GPDefaultProjectTreeEvent();
+    private Button deleteButton;
 
     public GPProjectSearchWidget() {
         super(true, 10);
@@ -73,8 +78,25 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
         selectButton.setText("Set Default Project");
         super.search.setFieldLabel("Find Project");
 
-        super.addButton(1, new Button("Add Project"));
-        super.addButton(2, new Button("Delete Projects"));
+        super.addButton(1, new Button("Add", LayerResources.ICONS.projectAdd(),
+                new SelectionListener<ButtonEvent>() {
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                    }
+                }));
+
+        this.deleteButton = new Button("Delete", LayerResources.ICONS.projectDelete(),
+                new SelectionListener<ButtonEvent>() {
+
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                    }
+                });
+
+        this.deleteButton.disable();
+
+        super.addButton(2, this.deleteButton);
     }
 
     @Override
@@ -95,6 +117,8 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
         sb.append("</div></tpl>");
 
         listView.setTemplate(sb.toString());
+        
+        listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         listView.setSize(630, 340);
     }
@@ -159,5 +183,16 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
                         TimeoutHandlerManager.fireEvent(defaultProjectEvent);
                     }
                 });
+    }
+
+    @Override
+    public void changeSelection(SelectionChangedEvent<GPClientProject> se) {
+        if (se.getSelectedItem() != null) {
+            selectButton.enable();
+            deleteButton.enable();
+        } else {
+            selectButton.disable();
+            deleteButton.disable();
+        }
     }
 }

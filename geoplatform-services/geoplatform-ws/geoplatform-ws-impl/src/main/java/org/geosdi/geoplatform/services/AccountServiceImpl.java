@@ -348,7 +348,7 @@ class AccountServiceImpl {
             throws ResourceNotFoundFault {
         EntityCorrectness.checkAccountLog(this.getAccountById(userID)); // TODO assert
 
-        Search searchCriteria = new Search(GPUser.class); // TODO check!
+        Search searchCriteria = new Search(GPAccount.class);
         searchCriteria.addFilterNotEqual("id", userID);
         searchCriteria.setMaxResults(request.getNum());
         searchCriteria.setPage(request.getPage());

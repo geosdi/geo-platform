@@ -83,7 +83,7 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     //
     @ManyToOne
     // Note: @OnDelete doesn't work because GPAccount is an abstract class
-    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     private GPAccount account;
 
     public GPAuthority() {

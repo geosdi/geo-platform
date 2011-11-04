@@ -75,7 +75,8 @@ public class GPAccountProject implements Serializable {
     private Long id;
     //
     @ManyToOne(optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE) // TODO DON'T RUN...
+    // Note: @OnDelete doesn't work because GPAccount is an abstract class
+//    @OnDelete(action = OnDeleteAction.CASCADE)
 //    @org.hibernate.annotations.Index(name = "ACCOUNT_INDEX") // TODO Uncomment
     private GPAccount account;
     //

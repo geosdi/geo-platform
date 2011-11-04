@@ -61,7 +61,7 @@ public interface ILayerService {
     public ArrayList<GPFolderClientInfo> loadUserFolders(HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    public ArrayList<IGPFolderElements> loadFolderElements(Long folderId,
+    public ArrayList<IGPFolderElements> loadFolderElements(Long folderID,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 

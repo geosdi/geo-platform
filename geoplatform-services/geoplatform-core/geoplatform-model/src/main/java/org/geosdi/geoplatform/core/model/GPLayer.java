@@ -104,10 +104,10 @@ public abstract class GPLayer implements Serializable {
     private int position = -1;
     //
     @Column
-    private boolean shared = false;
+    private boolean checked = false;
     //
     @Column
-    private boolean checked = false;
+    private boolean shared = false;
     //
     @Column
     private boolean cached = false;
@@ -271,21 +271,6 @@ public abstract class GPLayer implements Serializable {
     }
 
     /**
-     * @return the shared
-     */
-    public boolean isShared() {
-        return shared;
-    }
-
-    /**
-     * @param shared
-     *            the shared to set
-     */
-    public void setShared(boolean shared) {
-        this.shared = shared;
-    }
-
-    /**
      * @return the checked
      */
     public boolean isChecked() {
@@ -298,6 +283,21 @@ public abstract class GPLayer implements Serializable {
      */
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+    /**
+     * @return the shared
+     */
+    public boolean isShared() {
+        return shared;
+    }
+
+    /**
+     * @param shared
+     *            the shared to set
+     */
+    public void setShared(boolean shared) {
+        this.shared = shared;
     }
 
     /**
@@ -333,8 +333,8 @@ public abstract class GPLayer implements Serializable {
         str.append(", bbox=").append(bbox);
         str.append(", layerType=").append(layerType);
         str.append(", position=").append(position);
-        str.append(", shared=").append(shared);
         str.append(", checked=").append(checked);
+        str.append(", shared=").append(shared);
         str.append(", cached=").append(cached);
         if (this.getFolder() != null) {
             str.append(", folder.name=").append(this.getFolder().getName());

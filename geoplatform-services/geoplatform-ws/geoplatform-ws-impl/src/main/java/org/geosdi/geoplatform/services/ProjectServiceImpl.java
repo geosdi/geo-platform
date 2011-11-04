@@ -41,25 +41,24 @@ import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
-import org.geosdi.geoplatform.core.model.GPUserProjects;
-import org.geosdi.geoplatform.request.RequestByUserProject;
+import org.geosdi.geoplatform.core.model.GPAccountProject;
+import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
-import org.geosdi.geoplatform.core.dao.GPUserDAO;
-import org.geosdi.geoplatform.core.dao.GPUserProjectsDAO;
+import org.geosdi.geoplatform.core.dao.GPAccountDAO;
+import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
+import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -75,14 +74,16 @@ import org.geosdi.geoplatform.responce.VectorLayerDTO;
  * @author Michele Santomauro
  * @email michele.santomauro@geosdi.org
  * 
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
 class ProjectServiceImpl {
 
     final private static Logger logger = LoggerFactory.getLogger(ProjectServiceImpl.class);
     // DAO
     private GPProjectDAO projectDao;
-    private GPUserDAO userDao;
-    private GPUserProjectsDAO userProjectsDao;
+    private GPAccountDAO accountDao;
+    private GPAccountProjectDAO accountProjectDao;
     private GPFolderDAO folderDao;
     private GPLayerDAO layerDao;
 
@@ -96,19 +97,19 @@ class ProjectServiceImpl {
     }
 
     /**
-     * @param userDao
-     *            the userDao to set
+     * @param accountDao
+     *            the accountDao to set
      */
-    public void setUserDao(GPUserDAO userDao) {
-        this.userDao = userDao;
+    public void setAccountDao(GPAccountDAO accountDao) {
+        this.accountDao = accountDao;
     }
 
     /**
-     * @param userProjectsDao
-     *          the userProjectsDao to set
+     * @param accountProjectDao
+     *          the accountProjectDao to set
      */
-    public void setUserProjectsDao(GPUserProjectsDAO userProjectsDao) {
-        this.userProjectsDao = userProjectsDao;
+    public void setAccountProjectDao(GPAccountProjectDAO accountProjectDao) {
+        this.accountProjectDao = accountProjectDao;
     }
 
     /**
@@ -132,27 +133,26 @@ class ProjectServiceImpl {
     // ==========================================================================
     // === Project
     // ==========================================================================
-    public Long saveProject(String username, GPProject project, boolean defaultProject)
+    public Long saveProject(String stringID, GPProject project, boolean defaultProject)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        logger.trace("\n\t@@@ saveProject @@@");
         EntityCorrectness.checkProject(project); // TODO assert
 
-        GPUser user = userDao.findByUsername(username);
-        if (user == null) {
-            throw new ResourceNotFoundFault("User with username \"" + username + "\" not found");
+        GPAccount account = accountDao.findByStringID(stringID);
+        if (account == null) {
+            throw new ResourceNotFoundFault("Account with stringID \"" + stringID + "\" not found");
         }
-        EntityCorrectness.checkUserLog(user); // TODO assert
+        EntityCorrectness.checkAccountLog(account); // TODO assert
 
-        GPUserProjects userProject = new GPUserProjects();
-        userProject.setUser(user);
-        userProject.setProject(project);
+        GPAccountProject accountProject = new GPAccountProject();
+        accountProject.setAccount(account);
+        accountProject.setProject(project);
 
         projectDao.persist(project);
-        userProjectsDao.persist(userProject);
+        accountProjectDao.persist(accountProject);
 
         if (defaultProject) {
-            user.setDefaultProjectID(project.getId());
-            userDao.merge(user);
+            account.setDefaultProjectID(project.getId());
+            accountDao.merge(account);
         }
 
         return project.getId(); // Remark: return only the entity ID of Project
@@ -160,7 +160,6 @@ class ProjectServiceImpl {
 
     @Deprecated
     public Long insertProject(GPProject project) throws IllegalParameterFault {
-        logger.trace("\n\t@@@ insertProject @@@");
         EntityCorrectness.checkProject(project); // TODO assert
 
         projectDao.persist(project);
@@ -169,14 +168,13 @@ class ProjectServiceImpl {
 
     public Long updateProject(GPProject project)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        logger.trace("\n\t@@@ updateProject @@@");
         EntityCorrectness.checkProject(project); // TODO assert
 
         GPProject origProject = projectDao.find(project.getId());
         if (origProject == null) {
             throw new ResourceNotFoundFault("Project not found", project.getId());
         }
-        EntityCorrectness.checkProject(origProject); // TODO assert
+        EntityCorrectness.checkProjectLog(origProject); // TODO assert
 
         // Update all properties (except the creationDate)
         origProject.setName(project.getName());
@@ -189,22 +187,18 @@ class ProjectServiceImpl {
     }
 
     public boolean deleteProject(Long projectId) throws ResourceNotFoundFault {
-        logger.trace("\n\t@@@ deleteProject @@@");
-
         GPProject project = projectDao.find(projectId);
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
         }
         EntityCorrectness.checkProjectLog(project); // TODO assert
-        
-        userDao.resetDefaultProject(projectId);
+
+        accountDao.resetDefaultProject(projectId);
 
         return projectDao.removeById(projectId);
     }
 
     public GPProject getProjectDetail(Long projectId) throws ResourceNotFoundFault {
-        logger.trace("\n\t@@@ getProjectDetail @@@");
-
         GPProject project = projectDao.find(projectId);
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
@@ -215,93 +209,20 @@ class ProjectServiceImpl {
     }
 
     public int getNumberOfElementsProject(Long projectId) throws ResourceNotFoundFault {
-        logger.trace("\n\t@@@ getNumberOfElementsProject @@@");
-
         GPProject project = this.getProjectDetail(projectId);
+        EntityCorrectness.checkProjectLog(project); // TODO assert
 
         return project.getNumberOfElements();
     }
 
-//    
-//    /**
-//     * 
-//     * @param request
-//     * @return only root folders owned by user
-//     */
-//    public List<FolderDTO> getFoldersByRequest(RequestById request) {
-//        Search searchCriteria = new Search(GPFolder.class);
-//
-//        searchCriteria.setMaxResults(request.getNum());
-//        searchCriteria.setPage(request.getPage());
-//        searchCriteria.addSortAsc("position");
-//        searchCriteria.addFilterEqual("user.id", request.getId());
-//        searchCriteria.addFilterEqual("permissionMask", BasePermission.ADMINISTRATION.getMask());
-//        searchCriteria.addFilterNull("parent.id");
-//
-//        List<GPFolder> foundUserFolders = folderDao.search(searchCriteria);
-//        return convertToFolderList(foundUserFolders);
-//    }
-//
-//    /**
-//     * 
-//     * @param userId
-//     * @return only root folders owned by user
-//     */
-//    public List<FolderDTO> getFoldersByUserId(Long userId) {
-//        Search searchCriteria = new Search(GPUserFolders.class);
-//
-//        searchCriteria.addSortAsc("position");
-//        searchCriteria.addFilterEqual("user.id", userId);
-//        searchCriteria.addFilterEqual("permissionMask", BasePermission.ADMINISTRATION.getMask());
-//        searchCriteria.addFilterNull("parent.id");
-//
-//        List<GPUserFolders> foundUserFolders = userProjectsDao.search(searchCriteria);
-//        return convertToUserFolderList(foundUserFolders);
-//    }
-//
-//    /**
-//     * 
-//     * @param request
-//     * @return count only root folders owned by user
-//     */
-//    public long getUserFoldersCount(Long userId) {
-//        Search searchCriteria = new Search(GPUserFolders.class);
-//
-//        searchCriteria.addFilterEqual("user.id", userId);
-//        searchCriteria.addFilterEqual("permissionMask", BasePermission.ADMINISTRATION.getMask());
-//        searchCriteria.addFilterNull("parent.id");
-//
-//        return userProjectsDao.count(searchCriteria);
-//    }
-//
-//    // TODO Check
-//    /**
-//     * 
-//     * @param request
-//     * @return folders owned by user and shared with his
-//     */
-//    public List<FolderDTO> getAllUserFolders(RequestById request) {
-//        Search searchCriteria = new Search(GPUserFolders.class);
-//
-//        searchCriteria.setMaxResults(request.getNum());
-//        searchCriteria.setPage(request.getPage());
-////        searchCriteria.addSortAsc("folder.name");
-//        searchCriteria.addFilterEqual("user.id", request.getId());
-//        searchCriteria.addFilterNull("parent.id");
-//
-//        List<GPUserFolders> foundUserFolders = userProjectsDao.search(searchCriteria);
-//        return convertToUserFolderList(foundUserFolders);
-//    }
-//
-//    // TODO Check
     /**
      * 
      * @param projectId
      * @return root folders of a project
      */
-    public List<FolderDTO> getRootFoldersByProjectId(Long projectId) {
-        List<GPFolder> foundUserFolders = folderDao.searchRootFolders(projectId);
-        return FolderDTO.convertToFolderDTOList(foundUserFolders);
+    public List<FolderDTO> getRootFoldersByProjectID(Long projectId) {
+        List<GPFolder> foundAccountFolders = folderDao.searchRootFolders(projectId);
+        return FolderDTO.convertToFolderDTOList(foundAccountFolders);
     }
 
     public ProjectDTO exportProject(Long projectId) throws ResourceNotFoundFault {
@@ -362,7 +283,7 @@ class ProjectServiceImpl {
         return projectDTO;
     }
 
-    public Long importProject(ProjectDTO projectDTO, Long userID)
+    public Long importProject(ProjectDTO projectDTO, Long accountID)
             throws IllegalParameterFault, ResourceNotFoundFault {
         GPProject project = ProjectDTO.convertToGPProject(projectDTO);
         EntityCorrectness.checkProject(project); // TODO assert
@@ -380,35 +301,19 @@ class ProjectServiceImpl {
                 this.persistElementList(project, folder, folderDTO.getElementList());
             }
         }
-        GPUser user = userDao.find(userID);
-
-        if (user == null) {
-            throw new ResourceNotFoundFault("User Not Found ", userID);
+        GPAccount account = accountDao.find(accountID);
+        if (account == null) {
+            throw new ResourceNotFoundFault("Account Not Found ", accountID);
         }
 
-        GPUserProjects userProject = new GPUserProjects();
-        userProject.setUserAndProject(user, project);
+        GPAccountProject accountProject = new GPAccountProject();
+        accountProject.setAccountAndProject(account, project);
 
-        userProjectsDao.persist(userProject);
+        accountProjectDao.persist(accountProject);
 
         return project.getId();
     }
 
-//    // TODO Check
-//    /**
-//     * 
-//     * @param userId
-//     * @return count all folders and sub-folders owned by user and shared with his
-//     */
-//    public int getAllUserFoldersCount(Long userId) {
-//        Search searchCriteria = new Search(GPUserFolders.class);
-//
-//        searchCriteria.addFilterEqual("user.id", userId);
-////        searchCriteria.addFilterNull("parent.id");
-//
-//        return userProjectsDao.count(searchCriteria);
-//    }
-//    
     public void setProjectShared(Long projectId) throws ResourceNotFoundFault {
         GPProject project = projectDao.find(projectId);
         if (project == null) {
@@ -420,16 +325,16 @@ class ProjectServiceImpl {
         projectDao.merge(project);
     }
 
-    public boolean setProjectOwner(RequestByUserProject request, boolean force)
+    public boolean setProjectOwner(RequestByAccountProjectIDs request, boolean force)
             throws ResourceNotFoundFault {
-        GPProject project = projectDao.find(request.getProjectId());
+        GPProject project = projectDao.find(request.getProjectID());
         if (project == null) {
-            throw new ResourceNotFoundFault("Project not found", request.getProjectId());
+            throw new ResourceNotFoundFault("Project not found", request.getProjectID());
         }
 
-        GPUser user = userDao.find(request.getUserId());
-        if (user == null) {
-            throw new ResourceNotFoundFault("User not found", request.getUserId());
+        GPAccount account = accountDao.find(request.getAccountID());
+        if (account == null) {
+            throw new ResourceNotFoundFault("Account not found", request.getAccountID());
         }
 
         // TODO: implement the logic described in this method's javadoc
@@ -442,116 +347,112 @@ class ProjectServiceImpl {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="UserProjects">
+    //<editor-fold defaultstate="collapsed" desc="AccountProject">
     // ==========================================================================
-    // === UserProjects
+    // === AccountProject
     // ==========================================================================
-    public Long insertUserProject(GPUserProjects userProject) throws IllegalParameterFault {
-        logger.trace("\n\t@@@ insertUserProject @@@");
-        EntityCorrectness.checkUserProject(userProject);
+    public Long insertAccountProject(GPAccountProject accountProject) throws IllegalParameterFault {
+        EntityCorrectness.checkAccountProject(accountProject);
 
-        userProjectsDao.persist(userProject);
-        return userProject.getId();
+        accountProjectDao.persist(accountProject);
+        return accountProject.getId();
     }
 
-    public Long updateUserProject(GPUserProjects userProject)
+    public Long updateAccountProject(GPAccountProject accountProject)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        logger.trace("\n\t@@@ updateUserProject @@@");
-        EntityCorrectness.checkUserProject(userProject); // TODO assert
+        EntityCorrectness.checkAccountProject(null); // TODO assert
 
-        GPUserProjects origUserProject = userProjectsDao.find(userProject.getId());
-        if (origUserProject == null) {
-            throw new ResourceNotFoundFault("UserProject not found", userProject.getId());
+        GPAccountProject orig = accountProjectDao.find(accountProject.getId());
+        if (orig == null) {
+            throw new ResourceNotFoundFault("AccountProject not found", accountProject.getId());
         }
-        EntityCorrectness.checkUserProject(origUserProject); // TODO assert
+        EntityCorrectness.checkAccountProject(orig); // TODO assert
 
-        // Update all properties (except the user and project reference)
-        origUserProject.setPermissionMask(userProject.getPermissionMask());
-        origUserProject.setChecked(userProject.isChecked());
+        // Update all properties (except the account and project reference)
+        orig.setPermissionMask(accountProject.getPermissionMask());
+        orig.setChecked(accountProject.isChecked());
 
-        userProjectsDao.merge(origUserProject);
+        accountProjectDao.merge(orig);
 
-        return origUserProject.getId();
+        return orig.getId();
     }
 
-    public boolean deleteUserProject(Long userProjectId)
+    public boolean deleteAccountProject(Long accountProjectID)
             throws ResourceNotFoundFault {
-        logger.trace("\n\t@@@ deleteUserProject @@@");
-
-        GPUserProjects userProject = userProjectsDao.find(userProjectId);
-        if (userProject == null) {
-            throw new ResourceNotFoundFault("UserProject not found", userProjectId);
+        GPAccountProject accountProject = accountProjectDao.find(accountProjectID);
+        if (accountProject == null) {
+            throw new ResourceNotFoundFault("AccountProject not found", accountProjectID);
         }
-        EntityCorrectness.checkUserProjectLog(userProject); // TODO assert
+        EntityCorrectness.checkAccountProjectLog(accountProject); // TODO assert
 
-        return projectDao.removeById(userProjectId);
+        return projectDao.removeById(accountProjectID);
     }
 
-    public GPUserProjects getUserProject(Long userProjectId)
+    public GPAccountProject getAccountProject(Long accountProjectID)
             throws ResourceNotFoundFault {
-        GPUserProjects userProject = userProjectsDao.find(userProjectId);
-        if (userProject == null) {
-            throw new ResourceNotFoundFault("UserProject not found", userProjectId);
+        GPAccountProject accountProject = accountProjectDao.find(accountProjectID);
+        if (accountProject == null) {
+            throw new ResourceNotFoundFault("AccountProject not found", accountProjectID);
         }
-        EntityCorrectness.checkUserProjectLog(userProject); // TODO assert
+        EntityCorrectness.checkAccountProjectLog(accountProject); // TODO assert
 
-        return userProject;
+        return accountProject;
     }
 
-    public List<GPUserProjects> getUserProjectsByUserId(Long userId) {
-        List<GPUserProjects> userProjectsList = userProjectsDao.findByUserId(userId);
+    public List<GPAccountProject> getAccountProjectsByAccountID(Long accountID) {
+        List<GPAccountProject> accountProjectsList = accountProjectDao.findByAccountID(accountID);
 
-        EntityCorrectness.checkUserProjectListLog(userProjectsList); // TODO assert
+        EntityCorrectness.checkAccountProjectListLog(accountProjectsList); // TODO assert
 
-        return userProjectsList;
+        return accountProjectsList;
     }
 
-    public List<GPUserProjects> getUserProjectsByProjectId(Long projectId) {
-        List<GPUserProjects> userProjectsList = userProjectsDao.findByProjectId(projectId);
+    public List<GPAccountProject> getAccountProjectsByProjectID(Long projectID) {
+        List<GPAccountProject> accountProjectsList = accountProjectDao.findByProjectID(projectID);
 
-        EntityCorrectness.checkUserProjectListLog(userProjectsList); // TODO assert
+        EntityCorrectness.checkAccountProjectListLog(accountProjectsList); // TODO assert
 
-        return userProjectsList;
+        return accountProjectsList;
     }
 
-    public GPUserProjects getUserProjectByUserAndProjectId(Long userId, Long projectId)
+    public GPAccountProject getAccountProjectByAccountAndProjectIDs(Long accountID, Long projectID)
             throws ResourceNotFoundFault {
-        GPUserProjects userProject = userProjectsDao.find(userId, projectId);
-        if (userProject == null) {
-            throw new ResourceNotFoundFault("UserProjects not found for with id:\"" + userId + "\" and project with id:\"" + projectId + "\"");
+        GPAccountProject accountProject = accountProjectDao.find(accountID, projectID);
+        if (accountProject == null) {
+            throw new ResourceNotFoundFault("AccountProjects not found for with id:\"" + accountID + "\" and project with id:\"" + projectID + "\"");
         }
-        EntityCorrectness.checkUserProjectLog(userProject); // TODO assert
+        EntityCorrectness.checkAccountProjectLog(accountProject); // TODO assert
 
-        return userProject;
+        return accountProject;
     }
 
-    public Long getUserProjectsCount(Long userId, SearchRequest request)
+    public Long getAccountProjectsCount(Long accountID, SearchRequest request)
             throws ResourceNotFoundFault {
-        GPUser user = userDao.find(userId);
-        if (user == null) {
-            throw new ResourceNotFoundFault("User not found", userId);
+        GPAccount account = accountDao.find(accountID);
+        if (account == null) {
+            throw new ResourceNotFoundFault("Account not found", accountID);
         }
-        EntityCorrectness.checkUserLog(user); // TODO assert
+        EntityCorrectness.checkAccountLog(account); // TODO assert
 
-        Search searchCriteria = new Search(GPUserProjects.class);
-        searchCriteria.addFilterEqual("user.id", userId);
+        Search searchCriteria = new Search(GPAccountProject.class);
+        searchCriteria.addFilterEqual("account.id", accountID);
         if (request != null && request.getNameLike() != null) {
             searchCriteria.addFilterILike("project.name", request.getNameLike());
         }
 
-        return new Long(userProjectsDao.count(searchCriteria));
+        return new Long(accountProjectDao.count(searchCriteria));
     }
 
-    public List<ProjectDTO> searchUserProjects(Long userId, PaginatedSearchRequest request)
+    public List<ProjectDTO> searchAccountProjects(Long accountID, PaginatedSearchRequest request)
             throws ResourceNotFoundFault {
-        GPUser user = userDao.find(userId);
-        if (user == null) {
-            throw new ResourceNotFoundFault("User not found", userId);
+        GPAccount account = accountDao.find(accountID);
+        if (account == null) {
+            throw new ResourceNotFoundFault("Account not found", accountID);
         }
-        EntityCorrectness.checkUserLog(user); // TODO assert
+        EntityCorrectness.checkAccountLog(account); // TODO assert
 
-        Search searchCriteria = new Search(GPUserProjects.class);
-        searchCriteria.addFilterEqual("user.id", userId);
+        Search searchCriteria = new Search(GPAccountProject.class);
+        searchCriteria.addFilterEqual("account.id", accountID);
         searchCriteria.setMaxResults(request.getNum());
         searchCriteria.setPage(request.getPage());
 
@@ -560,12 +461,12 @@ class ProjectServiceImpl {
 //        searchCriteria.addSortAsc("project.name");
         }
 
-        List<GPUserProjects> userProjects = userProjectsDao.search(searchCriteria);
-        EntityCorrectness.checkUserProjectListLog(userProjects); // TODO assert
+        List<GPAccountProject> accountProjectList = accountProjectDao.search(searchCriteria);
+        EntityCorrectness.checkAccountProjectListLog(accountProjectList); // TODO assert
 
-        List<GPProject> projects = new ArrayList<GPProject>(userProjects.size());
-        for (GPUserProjects userProject : userProjects) {
-            projects.add(userProject.getProject());
+        List<GPProject> projects = new ArrayList<GPProject>(accountProjectList.size());
+        for (GPAccountProject accountProject : accountProjectList) {
+            projects.add(accountProject.getProject());
         }
         EntityCorrectness.checkProjectListLog(projects); // TODO assert
 
@@ -573,18 +474,18 @@ class ProjectServiceImpl {
     }
     //</editor-fold>
 
-    public GPProject getDefaultProject(Long userId) throws ResourceNotFoundFault {
-        GPUser user = userDao.find(userId);
-        if (user == null) {
-            throw new ResourceNotFoundFault("User not found", userId);
+    public GPProject getDefaultProject(Long accountID) throws ResourceNotFoundFault {
+        GPAccount account = accountDao.find(accountID);
+        if (account == null) {
+            throw new ResourceNotFoundFault("Account not found", accountID);
         }
-        EntityCorrectness.checkUserLog(user); // TODO assert
+        EntityCorrectness.checkAccountLog(account); // TODO assert
 
-        Long defaultProjectID = user.getDefaultProjectID();
+        Long defaultProjectID = account.getDefaultProjectID();
         if (defaultProjectID == null) {
             return null;
         }
-        
+
         GPProject project = projectDao.find(defaultProjectID);
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", defaultProjectID);
@@ -593,23 +494,22 @@ class ProjectServiceImpl {
 
         return project;
     }
-    
-    public void updateDefaultProject(Long userId, Long projectId) throws ResourceNotFoundFault {
-        GPUser user = userDao.find(userId);
-        if (user == null) {
-            throw new ResourceNotFoundFault("User not found", userId);
+
+    public void updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
+        GPAccount account = accountDao.find(accountID);
+        if (account == null) {
+            throw new ResourceNotFoundFault("Account not found", accountID);
         }
-        EntityCorrectness.checkUserLog(user);
-        
-        GPProject project = projectDao.find(projectId);
-        
-        if(project == null) {
-            throw new ResourceNotFoundFault("Project not found", userId);
+        EntityCorrectness.checkAccountLog(account); // TODO assert
+
+        GPProject project = projectDao.find(projectID);
+        if (project == null) {
+            throw new ResourceNotFoundFault("Project not found", accountID);
         }
-        
-        user.setDefaultProjectID(projectId);
-        
-        userDao.merge(user);
+
+        account.setDefaultProjectID(projectID);
+
+        accountDao.merge(account);
     }
 
     private String createParentChildKey(GPFolder parent, GPFolder child) {

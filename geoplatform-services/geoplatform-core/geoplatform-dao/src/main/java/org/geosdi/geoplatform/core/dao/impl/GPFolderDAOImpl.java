@@ -96,9 +96,9 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long>
     }
 
     @Override
-    public List<GPFolder> searchRootFolders(Long projectId) {
+    public List<GPFolder> searchRootFolders(Long projectID) {
         Search searchCriteria = new Search();
-        searchCriteria.addFilterEqual("project.id", projectId);
+        searchCriteria.addFilterEqual("project.id", projectID);
         searchCriteria.addFilterNull("parent.id");
         searchCriteria.addSortDesc("position");
         return super.search(searchCriteria);
@@ -300,22 +300,22 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long>
     }
 
     @Override
-    public boolean persistCheckStatusFolder(Long idFolder, boolean isChecked) {
+    public boolean persistCheckStatusFolder(Long folderID, boolean checked) {
         // Retrieve the folder
-        GPFolder folder = this.find(idFolder);
+        GPFolder folder = this.find(folderID);
         if (folder == null) {
-            logger.debug("\n*** The Folder with ID \"{}\" is NOT exist into DB ***", idFolder);
+            logger.debug("\n*** The Folder with ID \"{}\" is NOT exist into DB ***", folderID);
             return false;
         }
-        logger.trace("\n*** Folder RETRIEVED:\n{}\n*** MOD checked to {} ***", folder, isChecked);
+        logger.trace("\n*** Folder RETRIEVED:\n{}\n*** MOD checked to {} ***", folder, checked);
 
         // Merge iff the check status is different
-        if (folder.isChecked() != isChecked) {
-            folder.setChecked(isChecked);
+        if (folder.isChecked() != checked) {
+            folder.setChecked(checked);
 
             GPFolder folderUpdated = this.merge(folder);
 
-            if (folderUpdated.isChecked() != isChecked) {
+            if (folderUpdated.isChecked() != checked) {
                 return false;
             }
         }
@@ -323,9 +323,9 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long>
     }
 
     @Override
-    public boolean persistCheckStatusFolders(boolean isChecked, Long... idFolders) {
-        for (Long longIth : idFolders) {
-            boolean checkSave = this.persistCheckStatusFolder(longIth, isChecked);
+    public boolean persistCheckStatusFolders(boolean checked, Long... folderIDs) {
+        for (Long longIth : folderIDs) {
+            boolean checkSave = this.persistCheckStatusFolder(longIth, checked);
             if (!checkSave) {
                 logger.debug("\n*** The Folder with ID \"{}\" is has NOT changed the check***", longIth);
                 return false;

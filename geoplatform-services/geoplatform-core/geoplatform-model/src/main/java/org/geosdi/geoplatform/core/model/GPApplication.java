@@ -33,32 +33,65 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.service;
+package org.geosdi.geoplatform.core.model;
 
-import com.extjs.gxt.ui.client.data.PagingLoadConfig;
-import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  *
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public interface UserRemoteAsync {
+@XmlRootElement(name = "Application")
+@Entity(name = "Application")
+@Table(name = "gp_application")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "application")
+public class GPApplication extends GPAccount {
 
-    void searchUsers(PagingLoadConfig config, String searchText,
-            AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback)
-            throws GeoPlatformException;
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 726746042410990607L;
+    //
+    @Column(nullable = false)
+    private String appID;
 
-    void insertUser(IGPUserManageDetail userDetail, AsyncCallback<Long> callback)
-            throws GeoPlatformException;
+    /**
+     * @return the stringID: return the appID
+     */
+    @Override
+    public String getStringID() {
+        return this.getAppID();
+    }
 
-    void updateUser(IGPUserManageDetail userDetail, AsyncCallback<Long> callback)
-            throws GeoPlatformException;
+    /**
+     * @return the appID
+     */
+    public String getAppID() {
+        return appID;
+    }
 
-    void deleteUser(Long userID, AsyncCallback<Boolean> callback)
-            throws GeoPlatformException;
+    /**
+     * @param appID the appID to set
+     */
+    public void setAppID(String appID) {
+        this.appID = appID;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
+        str.append(super.toString());
+        str.append(", appID=").append(appID);
+        return str.append('}').toString();
+    }
 }

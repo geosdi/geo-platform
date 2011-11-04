@@ -68,41 +68,25 @@ public class GPRasterLayer extends GPLayer {
      */
     private static final long serialVersionUID = -1852288981980627642L;
     //
-    @Embedded
-    private GPLayerInfo layerInfo;
-    //
     @Column
     private float opacity = 1.0f;
     // The character , separated list of styles
     @Column(length = 500)
     private String styles;
     //
+    @Embedded
+    private GPLayerInfo layerInfo;
+    //
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JoinColumn(name = "folder_id")
     private GPFolder folder;
     //
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private GPProject project = null;
+    private GPProject project;
 
     public GPRasterLayer() {
         super.setLayerType(GPLayerType.RASTER);
-    }
-
-    /**
-     * @return the layerInfo
-     */
-    public GPLayerInfo getLayerInfo() {
-        return layerInfo;
-    }
-
-    /**
-     * @param layerInfo
-     *            the layerInfo to set
-     */
-    public void setLayerInfo(GPLayerInfo layerInfo) {
-        this.layerInfo = layerInfo;
     }
 
     /**
@@ -151,6 +135,21 @@ public class GPRasterLayer extends GPLayer {
     }
 
     /**
+     * @return the layerInfo
+     */
+    public GPLayerInfo getLayerInfo() {
+        return layerInfo;
+    }
+
+    /**
+     * @param layerInfo
+     *            the layerInfo to set
+     */
+    public void setLayerInfo(GPLayerInfo layerInfo) {
+        this.layerInfo = layerInfo;
+    }
+
+    /**
      * @return the folder
      */
     @Override
@@ -193,9 +192,9 @@ public class GPRasterLayer extends GPLayer {
     public String toString() {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append(super.toString());
-        str.append(", layerInfo=").append(layerInfo);
         str.append(", opacity=").append(opacity);
         str.append(", styles=").append(styles);
+        str.append(", layerInfo=").append(layerInfo);
         return str.append("}").toString();
     }
 }

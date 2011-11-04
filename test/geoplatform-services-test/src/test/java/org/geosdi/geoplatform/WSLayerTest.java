@@ -193,7 +193,7 @@ public class WSLayerTest extends ServiceTest {
         Assert.assertTrue("Deletion of the layer rasterLayer1", erased);
 
         // Get root folders for project
-        List<FolderDTO> folderList = gpWSClient.getRootFoldersByProjectId(idProjectTest);
+        List<FolderDTO> folderList = gpWSClient.getRootFoldersByProjectID(idProjectTest);
 
         // Assert on the structure of project's folders
         Assert.assertEquals("assertEquals folderList.getList().size()", folderList.size(), 2);
@@ -424,7 +424,7 @@ public class WSLayerTest extends ServiceTest {
             throws IllegalParameterFault, ResourceNotFoundFault {
         this.addLayer3();
 
-        List<String> list = gpWSClient.getLayersDataSourceByProjectId(idProjectTest);
+        List<String> list = gpWSClient.getLayersDataSourceByProjectID(idProjectTest);
 
         Assert.assertEquals("Number of elements of server's url", 2, list.size());
         Assert.assertTrue("List does not contain 'http://www.geosdi.org/test'", list.contains(urlServer));

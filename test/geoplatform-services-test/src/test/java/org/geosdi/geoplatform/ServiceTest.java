@@ -60,7 +60,7 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.core.model.GPUserProjects;
+import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
@@ -110,7 +110,7 @@ public abstract class ServiceTest {
 
         // Insert User
         idUserTest = this.createAndInsertUser(usernameTest, GPRole.USER);
-        userTest = gpWSClient.getUserDetailByName(
+        userTest = gpWSClient.getUserDetailByUsername(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         // Insert Project
         idProjectTest = this.createAndInsertProject("project_test_ws", false, 2, new Date(System.currentTimeMillis()));
@@ -143,7 +143,7 @@ public abstract class ServiceTest {
         GPUser user = createUser(username, roles);
         logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
 
-        long idUser = gpWSClient.insertUser(user);
+        long idUser = gpWSClient.insertAccount(user);
         logger.debug("\n*** Id ASSIGNED at the User in the DB: {} ***", idUser);
         Assert.assertTrue("Id ASSIGNED at the User in the DB", idUser > 0);
         return idUser;
@@ -179,7 +179,7 @@ public abstract class ServiceTest {
     // Delete (with assert) a User
     protected void deleteUser(long idUser) {
         try {
-            boolean check = gpWSClient.deleteUser(idUser);
+            boolean check = gpWSClient.deleteAccount(idUser);
             Assert.assertTrue("User with id = " + idUser + " has not been eliminated", check);
         } catch (Exception e) {
             Assert.fail("Error while deleting User with Id: " + idUser);
@@ -204,9 +204,9 @@ public abstract class ServiceTest {
 
     protected long createAndInsertUserProject(GPUser user, GPProject project)
             throws IllegalParameterFault {
-        GPUserProjects userProject = new GPUserProjects();
-        userProject.setUserAndProject(user, project);
-        return gpWSClient.insertUserProject(userProject);
+        GPAccountProject userProject = new GPAccountProject();
+        userProject.setAccountAndProject(user, project);
+        return gpWSClient.insertAccountProject(userProject);
     }
 
     protected long createAndInsertFolder(String folderName, GPProject project,

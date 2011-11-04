@@ -74,7 +74,6 @@ public class GPVectorLayer extends GPLayer {
     //
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JoinColumn(name = "folder_id")
     private GPFolder folder;
     //
     @ManyToOne(optional = false)

@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 
 
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.junit.Test;
 
@@ -147,7 +147,7 @@ public class CXFServiceTest extends ServiceTest {
 
         Assert.assertNotNull(serverDTO);
 
-        serverDTO = gpWSClient.getCapabilities(new RequestById(serverDTO.getId()), null);
+        serverDTO = gpWSClient.getCapabilities(new RequestByID(serverDTO.getId()), null);
         logger.debug("\n*** NUMBER OF LAYERS FOR DPC {} ***", serverDTO.getLayerList().size());
     }
 

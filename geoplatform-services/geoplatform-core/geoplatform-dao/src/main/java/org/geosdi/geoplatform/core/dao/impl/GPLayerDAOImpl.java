@@ -90,9 +90,9 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long>
     }
 
     @Override
-    public ArrayList<String> findDistinctDataSourceByProjectId(Long projectId) {
+    public ArrayList<String> findDistinctDataSourceByProjectId(Long projectID) {
         Search search = new Search();
-        search.addFilterEqual("project.id", projectId);
+        search.addFilterEqual("project.id", projectID);
         search.addField("urlServer");
         search.setDistinct(true);
         return (ArrayList) search(search);
@@ -254,11 +254,11 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long>
     }
 
     @Override
-    public boolean persistCheckStatusLayer(Long idLayer, boolean checked) {
+    public boolean persistCheckStatusLayer(Long layerID, boolean checked) {
         // Retrieve the layer
-        GPLayer layer = this.find(idLayer);
+        GPLayer layer = this.find(layerID);
         if (layer == null) {
-            logger.debug("\n*** The Layer with ID \"{}\" does NOT exist into DB ***", idLayer);
+            logger.debug("\n*** The Layer with ID \"{}\" does NOT exist into DB ***", layerID);
             return false;
         }
         logger.trace("\n*** Layer RETRIEVED:\n{}\n*** MOD checked to {} ***", layer, checked);

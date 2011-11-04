@@ -88,7 +88,7 @@ public class UserService implements IUserService {
 
         SearchRequest srq = new SearchRequest(searchText);
 
-        Long usersCount = this.geoPlatformServiceClient.getUsersCount(srq);
+        Long usersCount = this.geoPlatformServiceClient.getAccountsCount(srq);
 
         int page = start == 0 ? start : start / config.getLimit();
 
@@ -125,7 +125,7 @@ public class UserService implements IUserService {
         Long iserId = null;
         try {
             GPUser user = this.convertToGPUser(userDetail);
-            iserId = geoPlatformServiceClient.insertUser(user);
+            iserId = geoPlatformServiceClient.insertAccount(user);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
         }
@@ -139,26 +139,26 @@ public class UserService implements IUserService {
         this.getCheckLoggedUser(httpServletRequest);
 
         System.out.println("User to update: " + userDetail);  // TODO DEL
-        Long userId = null;
+        Long userID = null;
         try {
             GPUser user = this.convertToGPUser(userDetail);
-            userId = geoPlatformServiceClient.updateUser(user);
+            userID = geoPlatformServiceClient.updateUser(user);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
         } catch (ResourceNotFoundFault rnnf) {
             throw new GeoPlatformException(rnnf.getMessage());
         }
 
-        return userId;
+        return userID;
     }
 
     @Override
-    public boolean deleteUser(Long userId, HttpServletRequest httpServletRequest)
+    public boolean deleteUser(Long userID, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         this.getCheckLoggedUser(httpServletRequest);
 
         try {
-            return geoPlatformServiceClient.deleteUser(userId);
+            return geoPlatformServiceClient.deleteAccount(userID);
         } catch (ResourceNotFoundFault ex) {
             logger.error("\n*** " + ex.getMessage());
             throw new GeoPlatformException("User not found");

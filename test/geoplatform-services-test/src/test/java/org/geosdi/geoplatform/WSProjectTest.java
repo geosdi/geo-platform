@@ -276,16 +276,16 @@ public class WSProjectTest extends ServiceTest {
 
         projectDTO.setId(null); // Entity passed must not containd an ID, otherwise Hibernate throws PersistentObjectException
         // Import ProjectDTO
-        Long projectId = gpWSClient.importProject(projectDTO, super.idUserTest);
+        Long projectID = gpWSClient.importProject(projectDTO, super.idUserTest);
         // Check imported Project
-        Assert.assertTrue("Check importProject", projectId > 0);
-        logger.debug("*** ID project imported: {} ***", projectId);
+        Assert.assertTrue("Check importProject", projectID > 0);
+        logger.debug("*** ID project imported: {} ***", projectID);
 
-        GPProject projectAdded = gpWSClient.getProjectDetail(projectId);
+        GPProject projectAdded = gpWSClient.getProjectDetail(projectID);
         Assert.assertEquals("project name", super.projectTest.getName(), projectAdded.getName());
         Assert.assertEquals("project elements", super.projectTest.getNumberOfElements(), projectAdded.getNumberOfElements());
 
-        rootFoldersDTO = gpWSClient.getRootFoldersByProjectId(projectId);
+        rootFoldersDTO = gpWSClient.getRootFoldersByProjectID(projectID);
         Assert.assertNotNull("rootFolders null", rootFoldersDTO);
         Assert.assertEquals("#root", 2, rootFoldersDTO.size());
         rootFolderADTO = rootFoldersDTO.get(0);

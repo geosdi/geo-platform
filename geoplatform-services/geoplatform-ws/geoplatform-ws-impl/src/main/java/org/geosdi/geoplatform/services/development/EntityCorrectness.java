@@ -36,12 +36,13 @@
 package org.geosdi.geoplatform.services.development;
 
 import java.util.List;
+import org.geosdi.geoplatform.core.model.GPAccount;
+import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.core.model.GPUserProjects;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.springframework.security.acls.domain.BasePermission;
@@ -53,6 +54,9 @@ import org.springframework.security.acls.domain.BasePermission;
  */
 public class EntityCorrectness {
 
+    // ==========================================================================
+    // === Project
+    // ==========================================================================
     public static void checkProject(GPProject project) throws IllegalParameterFault {
         if (project == null) {
             throw new IllegalParameterFault("Project must be NOT NULL");
@@ -79,45 +83,58 @@ public class EntityCorrectness {
         }
     }
 
-    public static void checkUserProject(GPUserProjects userProject) throws IllegalParameterFault {
-        if (userProject == null) {
-            throw new IllegalParameterFault("UserProject must be NOT NULL");
+    // ==========================================================================
+    // === AccountProject
+    // ==========================================================================
+    public static void checkAccountProject(GPAccountProject accountProject) throws IllegalParameterFault {
+        if (accountProject == null) {
+            throw new IllegalParameterFault("AccountProject must be NOT NULL");
         }
-        if (userProject.getProject() == null) {
-            throw new IllegalParameterFault("Project must be NOT NULL");
+        if (accountProject.getProject() == null) {
+            throw new IllegalParameterFault("AccountProject \"project\" must be NOT NULL");
         }
-        if (userProject.getUser() == null) {
-            throw new IllegalParameterFault("User must be NOT NULL");
+        if (accountProject.getAccount() == null) {
+            throw new IllegalParameterFault("AccountProject \"account\" must be NOT NULL");
         }
-        if ((userProject.getPermissionMask() < BasePermission.READ.getMask())
-                || (userProject.getPermissionMask() > BasePermission.ADMINISTRATION.getMask())) {
-            throw new IllegalParameterFault("PermissionMask NOT allowed");
+        if ((accountProject.getPermissionMask() < BasePermission.READ.getMask())
+                || (accountProject.getPermissionMask() > BasePermission.ADMINISTRATION.getMask())) {
+            throw new IllegalParameterFault("PermissionMask is incorrect");
         }
     }
 
-    public static void checkUserProjectLog(GPUserProjects userProject) {
+    public static void checkAccountProjectLog(GPAccountProject accountProject) {
         try {
-            EntityCorrectness.checkUserProject(userProject);
+            EntityCorrectness.checkAccountProject(accountProject);
         } catch (IllegalParameterFault ex) {
             throw new EntityCorrectnessException(ex.getMessage());
         }
     }
 
-    public static void checkUserProjectListLog(List<GPUserProjects> userProjects) {
-        for (GPUserProjects up : userProjects) {
-            EntityCorrectness.checkUserProjectLog(up);
+    public static void checkAccountProjectListLog(List<GPAccountProject> accountProject) {
+        for (GPAccountProject up : accountProject) {
+            EntityCorrectness.checkAccountProjectLog(up);
         }
     }
 
-    public static void checkUser(GPUser user) throws IllegalParameterFault {
-        if (user == null) {
-            throw new IllegalParameterFault("User must be NOT NULL");
+    // ==========================================================================
+    // === Account and Authorities
+    // ==========================================================================
+    public static void checkAccount(GPAccount account) throws IllegalParameterFault {
+        if (account == null) {
+            throw new IllegalParameterFault("Account must be NOT NULL");
         }
+        if (EntityCorrectness.empty(account.getStringID())) {
+            throw new IllegalParameterFault("Account \"stringID\" (i.e. \"username\" for User"
+                    + " or \"appID\" for Application) must be NOT NULL or empty");
+        }
+        if (account instanceof GPUser) {
+            EntityCorrectness.checkUser((GPUser) account);
+        }
+    }
+
+    private static void checkUser(GPUser user) throws IllegalParameterFault {
         if (EntityCorrectness.empty(user.getName())) {
             throw new IllegalParameterFault("User \"name\" must be NOT NULL or empty");
-        }
-        if (EntityCorrectness.empty(user.getUsername())) {
-            throw new IllegalParameterFault("User \"username\" must be NOT NULL or empty");
         }
         if (EntityCorrectness.empty(user.getPassword())) {
             throw new IllegalParameterFault("User \"password\" must be NOT NULL or empty");
@@ -126,7 +143,7 @@ public class EntityCorrectness {
 
     public static void checkAuthority(List<GPAuthority> authorities) throws IllegalParameterFault {
         if (authorities == null || authorities.isEmpty()) {
-            throw new IllegalParameterFault("User must have at least a role");
+            throw new IllegalParameterFault("Account must have at least a role");
         }
         for (GPAuthority authority : authorities) {
             String role = authority.getAuthority();
@@ -139,14 +156,14 @@ public class EntityCorrectness {
         }
     }
 
-    public static void checkUserAndAuthority(GPUser user) throws IllegalParameterFault {
-        EntityCorrectness.checkUser(user);
-        EntityCorrectness.checkAuthority(user.getGPAuthorities());
+    public static void checkAccountAndAuthority(GPAccount account) throws IllegalParameterFault {
+        EntityCorrectness.checkAccount(account);
+        EntityCorrectness.checkAuthority(account.getGPAuthorities());
     }
 
-    public static void checkUserLog(GPUser user) {
+    public static void checkAccountLog(GPAccount account) {
         try {
-            EntityCorrectness.checkUser(user);
+            EntityCorrectness.checkAccount(account);
         } catch (IllegalParameterFault ex) {
             throw new EntityCorrectnessException(ex.getMessage());
         }
@@ -160,14 +177,17 @@ public class EntityCorrectness {
         }
     }
 
-    public static void checkUserAndAuthorityLog(GPUser user) {
+    public static void checkAccountAndAuthorityLog(GPAccount account) {
         try {
-            EntityCorrectness.checkUserAndAuthority(user);
+            EntityCorrectness.checkAccountAndAuthority(account);
         } catch (IllegalParameterFault ex) {
             throw new EntityCorrectnessException(ex.getMessage());
         }
     }
 
+    // ==========================================================================
+    // === Folder
+    // ==========================================================================
     public static void checkFolder(GPFolder folder) throws IllegalParameterFault {
         if (folder == null) {
             throw new IllegalParameterFault("Folder must be NOT NULL");
@@ -194,33 +214,25 @@ public class EntityCorrectness {
         }
     }
 
-    public static void checkCompleteLayer(GPLayer layer) throws IllegalParameterFault {
-        if (layer == null) {
-            throw new IllegalParameterFault("Layer must be NOT NULL");
-        }
+    // ==========================================================================
+    // === Layer
+    // ==========================================================================
+    public static void checkLayerComplete(GPLayer layer) throws IllegalParameterFault {
+        EntityCorrectness.checkLayer(layer);
         if (layer.getProject() == null) {
             throw new IllegalParameterFault("Layer \"project\" must be NOT NULL");
         }
-        if (layer.getFolder() == null) {
-            throw new IllegalParameterFault("Layer \"folder\" must be NOT NULL");
-        }
-        if (layer.getTitle() == null) {
-            throw new IllegalParameterFault("Layer \"title\" must be NOT NULL");
-        }
-        if (layer.getLayerType() == null) {
-            throw new IllegalParameterFault("Layer \"layerType\" must be NOT NULL");
-        }
     }
 
-    public static void checkCompleteLayerListLog(List<GPLayer> layers) {
+    public static void checkLayerCompleteListLog(List<GPLayer> layers) {
         for (GPLayer layer : layers) {
-            EntityCorrectness.checkCompleteLayerLog(layer);
+            EntityCorrectness.checkLayerCompleteLog(layer);
         }
     }
 
-    public static void checkCompleteLayerLog(GPLayer layer) {
+    public static void checkLayerCompleteLog(GPLayer layer) {
         try {
-            EntityCorrectness.checkCompleteLayer(layer);
+            EntityCorrectness.checkLayerComplete(layer);
         } catch (IllegalParameterFault ex) {
             throw new EntityCorrectnessException(ex.getMessage());
         }
@@ -255,7 +267,10 @@ public class EntityCorrectness {
         }
     }
 
-    public static boolean empty(String value) {
+    //
+    // ==========================================================================
+    //
+    private static boolean empty(String value) {
         if (value == null) {
             return true;
         }

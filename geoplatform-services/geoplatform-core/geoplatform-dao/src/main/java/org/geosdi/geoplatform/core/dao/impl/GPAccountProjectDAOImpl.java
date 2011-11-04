@@ -37,8 +37,8 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.dao.impl;
 
-import org.geosdi.geoplatform.core.dao.GPUserProjectsDAO;
-import org.geosdi.geoplatform.core.model.GPUserProjects;
+import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
+import org.geosdi.geoplatform.core.model.GPAccountProject;
 
 import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
@@ -53,62 +53,62 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 @Transactional
-public class GPUserProjectsDAOImpl extends BaseDAO<GPUserProjects, Long>
-        implements GPUserProjectsDAO {
+public class GPAccountProjectDAOImpl extends BaseDAO<GPAccountProject, Long>
+        implements GPAccountProjectDAO {
 
     @Override
-    public List<GPUserProjects> findAll() {
+    public List<GPAccountProject> findAll() {
         return super.findAll();
     }
 
     @Override
-    public GPUserProjects find(Long userProjectsId) {
-        return super.find(userProjectsId);
+    public GPAccountProject find(Long id) {
+        return super.find(id);
     }
 
     @Override
-    public GPUserProjects[] find(Long[] ids) {
+    public GPAccountProject[] find(Long[] ids) {
         return super.find(ids);
     }
 
     @Override
-    public void persist(GPUserProjects... usersProjects) {
-        super.persist(usersProjects);
+    public void persist(GPAccountProject... accountsProjects) {
+        super.persist(accountsProjects);
     }
 
     @Override
-    public GPUserProjects merge(GPUserProjects userProjects) {
-        return super.merge(userProjects);
+    public GPAccountProject merge(GPAccountProject accountProject) {
+        return super.merge(accountProject);
     }
 
     @Override
-    public GPUserProjects[] merge(GPUserProjects... usersProjects) {
-        return super.merge(usersProjects);
+    public GPAccountProject[] merge(GPAccountProject... accountsProjects) {
+        return super.merge(accountsProjects);
     }
 
     @Override
-    public boolean remove(GPUserProjects userProjects) {
-        return super.remove(userProjects);
+    public boolean remove(GPAccountProject accountProject) {
+        return super.remove(accountProject);
     }
 
     @Override
-    public boolean removeById(Long userProjectsId) {
-        return super.removeById(userProjectsId);
+    public boolean removeById(Long id) {
+        return super.removeById(id);
     }
 
     @Override
-    public boolean removeByUserId(Long userId) {
+    public boolean removeByAccountID(Long accountID) {
         // Hibernate Query Language [HQL]
         StringBuilder str = new StringBuilder();
-        str.append("select _it_.user.id");
-        str.append(" from ").append(getMetadataUtil().get(GPUserProjects.class).getEntityName()).append(" _it_");
-        str.append(" where _it_.user.id = ?");
+        str.append("select _it_.account.id");
+        str.append(" from ").append(getMetadataUtil().get(GPAccountProject.class).getEntityName()).append(" _it_");
+        str.append(" where _it_.account.id = ?");
         // Set query
         Query query = em().createQuery(str.toString());
-        query.setParameter(1, userId);
+        query.setParameter(1, accountID);
         // Remove existent entities
         if (!query.getResultList().isEmpty()) {
-            em().remove(em().getReference(GPUserProjects.class, userId));
+            em().remove(em().getReference(GPAccountProject.class, accountID));
             return true;
         }
 
@@ -116,18 +116,18 @@ public class GPUserProjectsDAOImpl extends BaseDAO<GPUserProjects, Long>
     }
 
     @Override
-    public boolean removeByProjectId(Long projectId) {
+    public boolean removeByProjectID(Long projectID) {
         // Hibernate Query Language [HQL]
         StringBuilder str = new StringBuilder();
         str.append("select _it_.project.id");
-        str.append(" from ").append(getMetadataUtil().get(GPUserProjects.class).getEntityName()).append(" _it_");
+        str.append(" from ").append(getMetadataUtil().get(GPAccountProject.class).getEntityName()).append(" _it_");
         str.append(" where _it_.project.id = ?");
         // Set query
         Query query = em().createQuery(str.toString());
-        query.setParameter(1, projectId);
+        query.setParameter(1, projectID);
         // Remove existent entities
         if (!query.getResultList().isEmpty()) {
-            em().remove(em().getReference(GPUserProjects.class, projectId));
+            em().remove(em().getReference(GPAccountProject.class, projectID));
             return true;
         }
 
@@ -135,7 +135,7 @@ public class GPUserProjectsDAOImpl extends BaseDAO<GPUserProjects, Long>
     }
 
     @Override
-    public List<GPUserProjects> search(ISearch search) {
+    public List<GPAccountProject> search(ISearch search) {
         return super.search(search);
     }
 
@@ -145,32 +145,32 @@ public class GPUserProjectsDAOImpl extends BaseDAO<GPUserProjects, Long>
     }
 
     @Override
-    public List<GPUserProjects> findByUserId(Long userId) {
+    public List<GPAccountProject> findByAccountID(Long accountID) {
         Search search = new Search();
-        search.addFilterEqual("user.id", userId);
+        search.addFilterEqual("account.id", accountID);
         return search(search);
     }
 
     @Override
-    public List<GPUserProjects> findByOwnerUserId(Long userId) {
+    public List<GPAccountProject> findByOwnerAccountID(Long accountID) {
         Search search = new Search();
-        search.addFilterEqual("user.id", userId);
+        search.addFilterEqual("account.id", accountID);
         search.addFilterEqual("permissionMask", BasePermission.ADMINISTRATION.getMask());
         return search(search);
     }
 
     @Override
-    public List<GPUserProjects> findByProjectId(Long projectId) {
+    public List<GPAccountProject> findByProjectID(Long projectID) {
         Search search = new Search();
-        search.addFilterEqual("project.id", projectId);
+        search.addFilterEqual("project.id", projectID);
         return search(search);
     }
 
     @Override
-    public GPUserProjects find(Long userId, Long projectId) {
+    public GPAccountProject find(Long accountID, Long projectID) {
         Search search = new Search();
-        search.addFilterEqual("user.id", userId);
-        search.addFilterEqual("project.id", projectId);
+        search.addFilterEqual("account.id", accountID);
+        search.addFilterEqual("project.id", projectID);
         return searchUnique(search);
     }
 }

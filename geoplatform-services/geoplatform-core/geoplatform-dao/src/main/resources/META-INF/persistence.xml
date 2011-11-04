@@ -44,13 +44,15 @@
     <persistence-unit name="geoplatform" transaction-type="RESOURCE_LOCAL">
     <!-- when adding/removing classes, please also keep aligned the src/test/resource/hibernate.cfg.xml file -->
         <class>org.geosdi.geoplatform.core.model.GPUser</class>
+        <class>org.geosdi.geoplatform.core.model.GPApplication</class>
+        <class>org.geosdi.geoplatform.core.model.GPAccount</class>
+        <class>org.geosdi.geoplatform.core.model.GPAccountProject</class>
         <class>org.geosdi.geoplatform.core.model.GPProject</class>
-        <class>org.geosdi.geoplatform.core.model.GPUserProjects</class>
         <class>org.geosdi.geoplatform.core.model.GPFolder</class>
         <class>org.geosdi.geoplatform.core.model.GPLayer</class>
         <class>org.geosdi.geoplatform.core.model.GPRasterLayer</class>
         <class>org.geosdi.geoplatform.core.model.GPVectorLayer</class>
-        <class>org.geosdi.geoplatform.core.model.GPStyle</class>
+        <!--class>org.geosdi.geoplatform.core.model.GPStyle</class-->
         <class>org.geosdi.geoplatform.core.model.GPAuthority</class>
         <class>org.geosdi.geoplatform.core.model.GeoPlatformServer</class>        
         <!-- ACL -->

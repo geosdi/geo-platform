@@ -41,7 +41,7 @@ import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
-import org.geosdi.geoplatform.core.dao.GPUserDAO;
+import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -62,14 +62,15 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
-import org.geosdi.geoplatform.core.dao.GPUserProjectsDAO;
+import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
+import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPUserProjects;
+import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
@@ -94,10 +95,10 @@ public abstract class BaseDAOTest {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
-    protected GPUserDAO userDAO;
+    protected GPAccountDAO accountDAO;
     //
     @Autowired
-    protected GPUserProjectsDAO userProjectsDAO;
+    protected GPAccountProjectDAO accountProjectDAO;
     //
     @Autowired
     protected GPProjectDAO projectDAO;
@@ -124,8 +125,6 @@ public abstract class BaseDAOTest {
     protected GPUser sigvTest = null;
     protected GPProject adminProject = null;
     protected GPProject userProject = null;
-    // ACL
-    protected final String usernameSuperUserTest = "super_user_test_acl";
     //
     private URL url = null;
     private final String urlWMSGetCapabilities =
@@ -136,10 +135,10 @@ public abstract class BaseDAOTest {
 //        removeAllStyles();
         removeAllLayers();
         removeAllFolders();
-        removeAllUserProjects();
+        removeAllAccountProject();
         removeAllProjects();
         removeAllAuthorities();
-        removeAllUsers();
+        removeAllAccounts();
     }
 
 //    private void removeAllStyles() {
@@ -181,12 +180,12 @@ public abstract class BaseDAOTest {
         }
     }
 
-    private void removeAllUserProjects() {
-        List<GPUserProjects> userProjects = userProjectsDAO.findAll();
-        for (GPUserProjects up : userProjects) {
-            logger.trace("\n*** UserProject to REMOVE:\n{}\n***", up);
-            boolean removed = userProjectsDAO.remove(up);
-            Assert.assertTrue("Old UserProjects NOT removed", removed);
+    private void removeAllAccountProject() {
+        List<GPAccountProject> accountProjectList = accountProjectDAO.findAll();
+        for (GPAccountProject up : accountProjectList) {
+            logger.trace("\n*** AccountProject to REMOVE:\n{}\n***", up);
+            boolean removed = accountProjectDAO.remove(up);
+            Assert.assertTrue("Old AccountProject NOT removed", removed);
         }
     }
 
@@ -208,12 +207,12 @@ public abstract class BaseDAOTest {
         }
     }
 
-    protected void removeAllUsers() {
-        List<GPUser> users = userDAO.findAll();
-        for (GPUser user : users) {
-            logger.trace("\n*** User to REMOVE:\n{}\n***", user);
-            boolean removed = userDAO.remove(user);
-            Assert.assertTrue("Old User NOT removed", removed);
+    protected void removeAllAccounts() {
+        List<GPAccount> accounts = accountDAO.findAll();
+        for (GPAccount account : accounts) {
+            logger.trace("\n*** Account to REMOVE:\n{}\n***", account);
+            boolean removed = accountDAO.remove(account);
+            Assert.assertTrue("Old Account NOT removed", removed);
         }
     }
     //</editor-fold>
@@ -222,10 +221,6 @@ public abstract class BaseDAOTest {
     protected void insertData() throws ParseException {
         this.adminTest = this.insertUser(usernameAdminTest, GPRole.ADMIN);
         this.userTest = this.insertUser(usernameUserTest, GPRole.USER);
-        // ACL Data
-        this.insertUser(usernameSuperUserTest, GPRole.ADMIN, GPRole.USER);
-        this.insertUser("admin_acl_test", GPRole.ADMIN);
-        this.insertUser("user_acl_test", GPRole.USER);
         // GUI test
         this.insertUser("admin", GPRole.ADMIN);
         this.insertUser("user", GPRole.USER);
@@ -256,12 +251,12 @@ public abstract class BaseDAOTest {
                     BasePermission.ADMINISTRATION.getMask());
         }
         userKProject.setDefaultProjectID(projectIth.getId());
-        userDAO.merge(userKProject);
+        accountDAO.merge(userKProject);
     }
 
     protected GPUser insertUser(String name, GPRole... roles) {
         GPUser user = createUser(name);
-        userDAO.persist(user);
+        accountDAO.persist(user);
         logger.debug("\n*** User SAVED:\n{}\n***", user);
 
         if (roles.length > 0) {
@@ -321,7 +316,7 @@ public abstract class BaseDAOTest {
         //
         adminTest.setDefaultProjectID(adminProject.getId());
         userTest.setDefaultProjectID(adminProject.getId());
-        userDAO.merge(adminTest, userTest);
+        accountDAO.merge(adminTest, userTest);
 
         // Project of admin -> root folders: "only folders, layers"
         GPFolder onlyFolders = this.createFolder("only folders", adminProject, null, 6);
@@ -374,10 +369,10 @@ public abstract class BaseDAOTest {
 
     protected void insertBindingUserProject(GPUser user, GPProject project,
             int permissionMask) {
-        GPUserProjects userProjects = new GPUserProjects();
-        userProjects.setUserAndProject(user, project);
+        GPAccountProject userProjects = new GPAccountProject();
+        userProjects.setAccountAndProject(user, project);
         userProjects.setPermissionMask(permissionMask);
-        userProjectsDAO.persist(userProjects);
+        accountProjectDAO.persist(userProjects);
     }
 
     protected GPRasterLayer createRasterLayer(GPFolder folder, GPProject project,

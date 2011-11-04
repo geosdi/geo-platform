@@ -35,91 +35,58 @@
  */
 package org.geosdi.geoplatform.request;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author giuseppe
- * 
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ *
+ * A request for calls involving a single Account and a single Project.
  */
-@XmlRootElement(name = "RequestById")
-public class RequestById {
+@XmlRootElement(name = "RequestByAccountProjectIDs")
+public class RequestByAccountProjectIDs {
 
-    private Long id;
-    private int page;
-    private int num;
+    private Long accountID;
+    private Long projectID;
 
-    /**
-     * 
-     */
-    public RequestById() {
+    public RequestByAccountProjectIDs() {
     }
 
     /**
-     * @param id
+     * @param accountID
+     * @param projectID
      */
-    public RequestById(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @param id
-     * @param pag
-     * @param num
-     */
-    public RequestById(Long id, int page, int num) {
+    public RequestByAccountProjectIDs(Long accountID, Long projectID) {
         super();
-        this.id = id;
-        this.page = page;
-        this.num = num;
+        this.accountID = accountID;
+        this.projectID = projectID;
     }
 
     /**
-     * @param id
-     *            the id to set
+     * @return the accountID
      */
-    public void setId(Long id) {
-        this.id = id;
+    public Long getAccountID() {
+        return accountID;
     }
 
     /**
-     * @return the id
+     * @param accountID the accountID to set
      */
-    @XmlElement(required = true, nillable = false)
-    public Long getId() {
-        return id;
+    public void setAccountID(Long accountID) {
+        this.accountID = accountID;
     }
 
     /**
-     * @return int
+     * @return the projectID
      */
-    public int getPage() {
-        return page;
+    public Long getProjectID() {
+        return projectID;
     }
 
     /**
-     * @param pag
+     * @param projectID the projectID to set
      */
-    public void setPage(int page) {
-        this.page = page;
-    }
-
-    /**
-     * @return int
-     */
-    public int getNum() {
-        return num;
-    }
-
-    /**
-     * @param num
-     */
-    public void setNum(int num) {
-        this.num = num;
-    }
-
-    @Override
-    public String toString() {
-        return "RequestById [id=" + id + ", num=" + num + ", pag=" + page + "]";
+    public void setProjectID(Long projectID) {
+        this.projectID = projectID;
     }
 }

@@ -35,72 +35,48 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.core.dao.impl;
+package org.geosdi.geoplatform.core.dao;
 
 import com.googlecode.genericdao.search.ISearch;
-import com.googlecode.genericdao.search.Search;
 import java.util.List;
-
-import org.geosdi.geoplatform.core.dao.GPUserDAO;
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.springframework.transaction.annotation.Transactional;
+import org.geosdi.geoplatform.core.model.GPAccountProject;
 
 /**
- * @author giuseppe
- * 
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ *
  */
-@Transactional
-public class GPUserDAOImpl extends BaseDAO<GPUser, Long> implements GPUserDAO {
+public interface GPAccountProjectDAO {
 
-    @Override
-    public void persist(GPUser... users) {
-        super.persist(users);
-    }
+    public List<GPAccountProject> findAll();
 
-    @Override
-    public GPUser merge(GPUser user) {
-        return super.merge(user);
-    }
+    public GPAccountProject find(Long id);
 
-    @Override
-    public GPUser[] merge(GPUser... users) {
-        return super.merge(users);
-    }
+    public GPAccountProject[] find(Long[] ids);
 
-    @Override
-    public boolean remove(GPUser user) {
-        return super.remove(user);
-    }
+    public void persist(GPAccountProject... accountsProjects);
 
-    @Override
-    public boolean removeById(Long userId) {
-        return super.removeById(userId);
-    }
+    public GPAccountProject merge(GPAccountProject accountProject);
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<GPUser> search(ISearch search) {
-        return super.search(search);
-    }
+    public GPAccountProject[] merge(GPAccountProject... accountsProjects);
 
-    @Override
-    public GPUser findByUsername(String username) {
-        Search search = new Search();
-        search.addFilterEqual("username", username);
-        return super.searchUnique(search);
-    }
+    public boolean remove(GPAccountProject accountProject);
 
-    @Override
-    public GPUser findByEmail(String email) {
-        Search search = new Search();
-        search.addFilterEqual("emailAddress", email);
-        return super.searchUnique(search);
-    }
+    public boolean removeById(Long id);
 
-    @Override
-    public boolean resetDefaultProject(Long defaultProjectId) {
-        em().createQuery("UPDATE User u SET u.defaultProjectID = null WHERE u.defaultProjectID=:defaultProjectId").
-                setParameter("defaultProjectId", defaultProjectId).executeUpdate();
-        return true;
-    }
+    public boolean removeByAccountID(Long accountID);
+
+    public boolean removeByProjectID(Long projectID);
+
+    public List<GPAccountProject> search(ISearch search);
+
+    public int count(ISearch search);
+
+    public List<GPAccountProject> findByAccountID(Long accountID);
+
+    public List<GPAccountProject> findByOwnerAccountID(Long accountID);
+
+    public List<GPAccountProject> findByProjectID(Long projectID);
+
+    public GPAccountProject find(Long accountID, Long projectID);
 }

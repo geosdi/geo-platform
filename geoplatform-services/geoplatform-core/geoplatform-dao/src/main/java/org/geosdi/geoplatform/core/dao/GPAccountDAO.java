@@ -39,45 +39,42 @@ package org.geosdi.geoplatform.core.dao;
 
 import com.googlecode.genericdao.search.ISearch;
 import java.util.List;
-import org.geosdi.geoplatform.core.model.GPUserProjects;
+
+import org.geosdi.geoplatform.core.model.GPAccount;
+import org.geosdi.geoplatform.core.model.GPApplication;
+import org.geosdi.geoplatform.core.model.GPUser;
 
 /**
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * @author giuseppe
  *
  */
-public interface GPUserProjectsDAO {
+public interface GPAccountDAO {
 
-    public List<GPUserProjects> findAll();
+    public List<GPAccount> findAll();
 
-    public GPUserProjects find(Long userProjectsId);
+    public GPAccount find(Long id);
 
-    public GPUserProjects[] find(Long[] ids);
+    public void persist(GPAccount... accounts);
 
-    public void persist(GPUserProjects... usersProjects);
+    public GPAccount merge(GPAccount account);
 
-    public GPUserProjects merge(GPUserProjects userProjects);
+    public GPAccount[] merge(GPAccount... accounts);
 
-    public GPUserProjects[] merge(GPUserProjects... usersProjects);
+    public boolean remove(GPAccount account);
 
-    public boolean remove(GPUserProjects userProjects);
+    public boolean removeById(Long id);
 
-    public boolean removeById(Long userProjectsId);
-
-    public boolean removeByUserId(Long userId);
-
-    public boolean removeByProjectId(Long projectsId);
-
-    public List<GPUserProjects> search(ISearch search);
+    public List<GPAccount> search(ISearch search);
 
     public int count(ISearch search);
 
-    public List<GPUserProjects> findByUserId(Long userId);
+    public GPUser findByUsername(String username);
 
-    public List<GPUserProjects> findByOwnerUserId(Long userId);
+    public GPUser findByEmail(String email);
 
-    public List<GPUserProjects> findByProjectId(Long projectId);
+    public GPApplication findByAppID(String appID);
 
-    public GPUserProjects find(Long userId, Long projectId);
+    public GPAccount findByStringID(String stringID);
 
+    public boolean resetDefaultProject(Long defaultProjectID);
 }

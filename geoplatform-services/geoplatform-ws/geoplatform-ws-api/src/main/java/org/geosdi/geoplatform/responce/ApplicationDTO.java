@@ -33,32 +33,55 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.service;
+package org.geosdi.geoplatform.responce;
 
-import com.extjs.gxt.ui.client.data.PagingLoadConfig;
-import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GPAccount;
+import org.geosdi.geoplatform.core.model.GPApplication;
 
 /**
  *
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public interface UserRemoteAsync {
+@XmlRootElement(name = "ApplicationDTO")
+public class ApplicationDTO extends ShortAccountDTO {
 
-    void searchUsers(PagingLoadConfig config, String searchText,
-            AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback)
-            throws GeoPlatformException;
+    private String appID;
 
-    void insertUser(IGPUserManageDetail userDetail, AsyncCallback<Long> callback)
-            throws GeoPlatformException;
+    public ApplicationDTO() {
+    }
 
-    void updateUser(IGPUserManageDetail userDetail, AsyncCallback<Long> callback)
-            throws GeoPlatformException;
+    public ApplicationDTO(GPApplication application) {
+        super(application);
+        this.appID = application.getAppID();
+    }
 
-    void deleteUser(Long userID, AsyncCallback<Boolean> callback)
-            throws GeoPlatformException;
+    /**
+     * @return the appID
+     */
+    public String getAppID() {
+        return appID;
+    }
+
+    /**
+     * @param appID
+     *          the appID to set
+     */
+    public void setAppID(String appID) {
+        this.appID = appID;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
+        str.append(super.toString());
+        str.append(", =appID").append(appID);
+        return str.append("}").toString();
+    }
 }

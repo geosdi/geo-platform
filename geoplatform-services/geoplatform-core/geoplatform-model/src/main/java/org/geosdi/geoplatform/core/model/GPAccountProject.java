@@ -47,6 +47,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.acls.domain.BasePermission;
@@ -57,24 +59,25 @@ import org.springframework.security.acls.domain.BasePermission;
  *
  */
 @Entity
-@Table(name = "gp_user_projects", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"user_id", "project_id"})})
-public class GPUserProjects implements Serializable {
+@Table(name = "gp_account_project", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"account_id", "project_id"})})
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "account_project")
+public class GPAccountProject implements Serializable {
 
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = 788866787917317013L;
+    private static final long serialVersionUID = -5848638543797948563L;
     //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_USER_PROJECTS_SEQ")
-    @SequenceGenerator(name = "GP_USER_PROJECTS_SEQ", sequenceName = "GP_USER_PROJECTS_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_ACCOUNT_PROJECT_SEQ")
+    @SequenceGenerator(name = "GP_ACCOUNT_PROJECT_SEQ", sequenceName = "GP_ACCOUNT_PROJECT_SEQ")
     private Long id;
     //
     @ManyToOne(optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @org.hibernate.annotations.Index(name = "USER_INDEX") // TODO Uncomment
-    private GPUser user;
+    @OnDelete(action = OnDeleteAction.CASCADE) // TODO DON'T RUN...
+//    @org.hibernate.annotations.Index(name = "ACCOUNT_INDEX") // TODO Uncomment
+    private GPAccount account;
     //
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -103,18 +106,17 @@ public class GPUserProjects implements Serializable {
     }
 
     /**
-     * @return the user
+     * @return the account
      */
-    public GPUser getUser() {
-        return user;
+    public GPAccount getAccount() {
+        return account;
     }
 
     /**
-     * @param user
-     *          the user to set
+     * @param account the account to set
      */
-    public void setUser(GPUser user) {
-        this.user = user;
+    public void setAccount(GPAccount account) {
+        this.account = account;
     }
 
     /**
@@ -133,13 +135,13 @@ public class GPUserProjects implements Serializable {
     }
 
     /**
-     * @param user
-     *          the user to set
+     * @param account
+     *          the account to set
      * @param project
      *          the project to set
      */
-    public void setUserAndProject(GPUser user, GPProject project) {
-        this.user = user;
+    public void setAccountAndProject(GPAccount account, GPProject project) {
+        this.account = account;
         this.project = project;
     }
 
@@ -181,11 +183,10 @@ public class GPUserProjects implements Serializable {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
-        if (user != null) {
-            str.append(" user.username=").append(user.getUsername());
-            str.append("(id=").append(user.getId()).append(")");
+        if (account != null) {
+            str.append("(id=").append(account.getId()).append(")");
         } else {
-            str.append(" user=NULL");
+            str.append(" account=NULL");
         }
         if (project != null) {
             str.append(", project.name=").append(project.getName());
@@ -211,7 +212,7 @@ public class GPUserProjects implements Serializable {
             return false;
         }
 
-        final GPUserProjects other = (GPUserProjects) obj;
+        final GPAccountProject other = (GPAccountProject) obj;
         if (this.id != other.id) {
             return false;
         }
@@ -226,7 +227,7 @@ public class GPUserProjects implements Serializable {
     @Override
     public int hashCode() {
         int result;
-        result = (user != null ? user.hashCode() : 0);
+        result = (getAccount() != null ? getAccount().hashCode() : 0);
         result = 71 * result + (project != null ? project.hashCode() : 0);
         return result;
     }

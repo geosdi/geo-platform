@@ -37,24 +37,13 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.model;
 
-import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -65,78 +54,34 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity(name = "User")
 @Table(name = "gp_user")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "user")
-public class GPUser implements Serializable, UserDetails {
+public class GPUser extends GPAccount implements UserDetails {
 
     /**
      * serialVersionUID
      */
-    private static final long serialVersionUID = -1354980934257649175L;
-    //
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_USER_SEQ")
-    @SequenceGenerator(name = "GP_USER_SEQ", sequenceName = "GP_USER_SEQ")
-    private Long id;
+    private static final long serialVersionUID = 7100488006455895705L;
     //
     @Column(nullable = false)
     private String name;
     //
     @Column(name = "user_name", unique = true, nullable = false)
     private String username;
-    /**
-     * since memberService integration
-     */
+    //
     @Column(name = "user_password", nullable = false)
     private String password;
     //
     @Column(name = "email_address", unique = true, nullable = false)
     private String emailAddress;
-    /**
-     * since memberService integration
-     */
-    @Column(name = "is_enabled", nullable = false)
-    private boolean enabled = false;
     //
     @Column(name = "send_email", nullable = false)
     private boolean sendEmail = false;
-    //
-    @Transient
-    private Boolean accountNonExpired;
-    //
-    @Transient
-    private Boolean accountNonLocked;
-    //
-    @Transient
-    private Boolean credentialsNonExpired;
-    //
-    @Transient
-    private List<GPAuthority> authorities;
-    // Hibernate with this list remove "on delete cascade" on FK of gp_user_projects(user_id)
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
-//        org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
-//    private List<GPUserProjects> userProjects = new LinkedList<GPUserProjects>();
-    @Column(name = "defaultProject_id")
-    private Long defaultProjectID;
 
     /**
-     * Default constructor
+     * @return the stringID: return the username
      */
-    public GPUser() {
-    }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public String getStringID() {
+        return this.getUsername();
     }
 
     /**
@@ -202,22 +147,6 @@ public class GPUser implements Serializable, UserDetails {
     }
 
     /**
-     * @return the enabled
-     */
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    /**
-     * @param enabled
-     *            the enabled to set
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    /**
      * @return the sendEmail
      */
     public boolean isSendEmail() {
@@ -232,73 +161,13 @@ public class GPUser implements Serializable, UserDetails {
         this.sendEmail = sendEmail;
     }
 
-    @Override
-    public Collection<GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> auth = new HashSet<GrantedAuthority>();
-        for (GrantedAuthority ga : authorities) {
-            auth.add(ga);
+    public boolean verify(String password) throws NoSuchAlgorithmException {
+        String hashPasswordSpecified = Utility.md5hash(password);
+        if (this.password.equals(hashPasswordSpecified)) {
+            return true;
+        } else {
+            return false;
         }
-        return auth;
-    }
-
-    /**
-     * @return the gpAuthorities
-     */
-    public List<GPAuthority> getGPAuthorities() {
-        return authorities;
-    }
-
-    /**
-     * @param authorities
-     *          the authorities to set
-     */
-    public void setGPAuthorities(List<GPAuthority> authorities) {
-        this.authorities = authorities;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-//
-//    /**
-//     * @return the userProjects
-//     */
-//    public List<GPUserProjects> getUserProjects() {
-//        return userProjects;
-//    }
-//
-//    /**
-//     * @param userProjects
-//     *          the userProjects to set
-//     */
-//    public void setUserProjects(List<GPUserProjects> userProjects) {
-//        this.userProjects = userProjects;
-//    }
-//
-
-    /**
-     * @return the defaultProjectID
-     */
-    public Long getDefaultProjectID() {
-        return defaultProjectID;
-    }
-
-    /**
-     * @param defaultProjectID the defaultProjectID to set
-     */
-    public void setDefaultProjectID(Long defaultProjectID) {
-        this.defaultProjectID = defaultProjectID;
     }
 
     /*
@@ -308,61 +177,12 @@ public class GPUser implements Serializable, UserDetails {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
-        str.append("id=").append(id);
+        str.append(super.toString());
         str.append(", username=").append(username);
         str.append(", password=").append(password);
         str.append(", name=").append(name);
         str.append(", emailAddress=").append(emailAddress);
-        str.append(", enabled=").append(enabled);
         str.append(", sendEmail=").append(sendEmail);
-        str.append(", accountNonExpired=").append(accountNonExpired);
-        str.append(", accountNonLocked=").append(accountNonLocked);
-        str.append(", credentialsNonExpired=").append(credentialsNonExpired);
-        if (authorities != null) {
-            str.append(", authorities.size=").append(authorities.size());
-        } else {
-            str.append(", authorities=NULL");
-        }
-        str.append(", defaultProjectID=").append(defaultProjectID);
         return str.append('}').toString();
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final GPUser other = (GPUser) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + (int) (this.id ^ (this.id >>> 32));
-        return hash;
-    }
-
-    public boolean verify(String password) throws NoSuchAlgorithmException {
-        String hashPasswordSpecified = Utility.md5hash(password);
-        if (this.password.equals(hashPasswordSpecified)) {
-            return true;
-        } else {
-            return false;
-        }
     }
 }

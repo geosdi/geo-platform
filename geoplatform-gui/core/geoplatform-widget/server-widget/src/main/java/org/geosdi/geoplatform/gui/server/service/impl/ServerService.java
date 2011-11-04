@@ -73,7 +73,7 @@ public class ServerService implements IServerService {
         }
         List<String> userAuthorities = null;
         try {
-            userAuthorities = geoPlatformServiceClient.getUserAuthorities(user.getId());
+            userAuthorities = geoPlatformServiceClient.getAuthorities(user.getId());
         } catch (ResourceNotFoundFault ex) {
             logger.debug("Returning no elements: " + ex);
         }

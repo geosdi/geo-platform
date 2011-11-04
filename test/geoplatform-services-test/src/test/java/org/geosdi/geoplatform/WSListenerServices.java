@@ -68,15 +68,15 @@ public class WSListenerServices implements TestExecutionListener {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private GeoPlatformService gpWSClient = null;
-    private Endpoint endpoint = null;
-    private Bus bus = null;
+    private GeoPlatformService gpWSClient;
+    private Endpoint endpoint;
+    private Bus bus;
 
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
         logger.trace("\n\t@@@ WSListenerServices.beforeTestClass @@@");
 
-        // Client must be created before the Endpoint is created
+        // Client must be created before the Endpoint was created
         gpWSClient = ((GeoPlatformWSClient) testContext.getApplicationContext().getBean("gpWSClient")).create();
 
         GeoPlatformService geoPlatformService = (GeoPlatformService) testContext.getApplicationContext().getBean("geoPlatformService");
@@ -88,7 +88,7 @@ public class WSListenerServices implements TestExecutionListener {
 
         bus.getInInterceptors().add(new LoggingInInterceptor());
         bus.getOutInterceptors().add(new LoggingOutInterceptor());
-        
+
         bus.getInInterceptors().add(this.createInInterceptor());
         bus.getOutInterceptors().add(this.createOutInterceptor());
 
@@ -127,11 +127,11 @@ public class WSListenerServices implements TestExecutionListener {
 
     private WSS4JInInterceptor createInInterceptor() {
         Map<String, Object> inProps = new HashMap<String, Object>();
-        
+
         StringBuilder sb = new StringBuilder();
         sb.append(WSHandlerConstants.USERNAME_TOKEN + " ");
         inProps.put(WSHandlerConstants.PASSWORD_TYPE, WSConstants.PW_DIGEST);
-        
+
         // ----------- Only Encryption
 ////        inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.ENCRYPT);
 //        sb.append(WSHandlerConstants.ENCRYPT);
@@ -150,9 +150,9 @@ public class WSListenerServices implements TestExecutionListener {
         sb.append(WSHandlerConstants.SIGNATURE + " ");
         sb.append(WSHandlerConstants.ENCRYPT);
         inProps.put(WSHandlerConstants.ACTION, sb.toString());
-        
+
         inProps.put(WSHandlerConstants.SIG_PROP_FILE, "Server_SignVerf.properties");
-        inProps.put(WSHandlerConstants.DEC_PROP_FILE, "Server_Decrypt.properties");      
+        inProps.put(WSHandlerConstants.DEC_PROP_FILE, "Server_Decrypt.properties");
 
         inProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ServerKeystorePasswordCallback.class.getName());
         return new WSS4JInInterceptor(inProps);
@@ -160,9 +160,9 @@ public class WSListenerServices implements TestExecutionListener {
 
     private WSS4JOutInterceptor createOutInterceptor() {
         Map<String, Object> outProps = new HashMap<String, Object>();
-        
+
         StringBuilder sb = new StringBuilder();
-        
+
         // ----------- Only Encryption
 ////        outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.ENCRYPT);
 //        sb.append(WSHandlerConstants.ENCRYPT);
@@ -183,7 +183,7 @@ public class WSListenerServices implements TestExecutionListener {
         sb.append(WSHandlerConstants.SIGNATURE + " ");
         sb.append(WSHandlerConstants.ENCRYPT);
         outProps.put(WSHandlerConstants.ACTION, sb.toString());
-        
+
         outProps.put(WSHandlerConstants.USER, "serverx509v1");
         outProps.put(WSHandlerConstants.SIG_PROP_FILE, "Server_Decrypt.properties");
         outProps.put(WSHandlerConstants.ENC_PROP_FILE, "Server_SignVerf.properties");

@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.IOGCService;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOServerConverter;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
-import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
@@ -114,7 +114,7 @@ public class OGCService implements IOGCService {
             HttpSession session = httpServletRequest.getSession();
             String token = (String) session.getAttribute("GOOGLE_TOKEN");
 
-            RequestById req = new RequestById(idServer);
+            RequestByID req = new RequestByID(idServer);
 
             ServerDTO server = geoPlatformServiceClient.getCapabilities(req, token);
 
@@ -148,7 +148,7 @@ public class OGCService implements IOGCService {
         
         try {
             Long projectId = this.sessionUtility.getDefaultProjectFromUserSession(httpServletRequest);
-            dataSources = geoPlatformServiceClient.getLayersDataSourceByProjectId(projectId);
+            dataSources = geoPlatformServiceClient.getLayersDataSourceByProjectID(projectId);
         } catch (ResourceNotFoundFault e) {
             throw new GeoPlatformException("Error in findDistinctLayersDataSource: ResourceNotFoundFault "
                     + e);

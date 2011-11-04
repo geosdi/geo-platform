@@ -50,15 +50,12 @@ import org.geosdi.geoplatform.core.model.GPUser;
  * 
  */
 @XmlRootElement(name = "UserDTO")
-public class UserDTO {
+public class UserDTO extends ShortAccountDTO {
 
-    private Long id;
     private String name;
     private String username;
-    private boolean enabled;
-    private boolean sendEmail;
     private String emailAddress;
-    private List<String> roles;
+    private boolean sendEmail;
 
     /**
      * Default constructor
@@ -68,34 +65,11 @@ public class UserDTO {
     }
 
     public UserDTO(GPUser user) {
-        this.id = user.getId();
+        super(user);
         this.name = user.getName();
         this.username = user.getUsername();
-        this.enabled = user.isEnabled();
-        this.sendEmail = user.isSendEmail();
         this.emailAddress = user.getEmailAddress();
-
-        if (user.getGPAuthorities() != null) {
-            roles = new ArrayList<String>(user.getGPAuthorities().size());
-            for (GPAuthority authority : user.getGPAuthorities()) {
-                roles.add(authority.getAuthority());
-            }
-        }
-    }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
+        this.sendEmail = user.isSendEmail();
     }
 
     /**
@@ -129,21 +103,6 @@ public class UserDTO {
     }
 
     /**
-     * @return the enabled
-     */
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    /**
-     * @param enabled
-     *            the enabled to set
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    /**
      * @return the sendEmail
      */
     public boolean isSendEmail() {
@@ -173,20 +132,6 @@ public class UserDTO {
         this.emailAddress = emailAddress;
     }
 
-    /**
-     * @return the roles
-     */
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    /**
-     * @param roles the roles to set
-     */
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
-    }
-
     /*
      * (non-Javadoc)
      *
@@ -194,12 +139,13 @@ public class UserDTO {
      */
     @Override
     public String toString() {
-        return "UserDTO [id=" + id
-                + ", username=" + username
-                + ", name=" + name
-                + ", enabled=" + enabled
-                + ", sendEmail=" + sendEmail
-                + ", emailAddress=" + emailAddress + "]";
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
+        str.append(super.toString());
+        str.append(", =name").append(name);
+        str.append(", =username").append(username);
+        str.append(", =emailAddress").append(emailAddress);
+        str.append(", =sendEmail").append(sendEmail);
+        return str.append("}").toString();
     }
 
     public static List<UserDTO> convertToUserDTOList(List<GPUser> users) {

@@ -48,45 +48,44 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.junit.Test;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
+ * 
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class WSUserTest extends ServiceTest {
+public class WSAccountTest extends ServiceTest {
     // TODO check:
     //      searchUsers()
     //      updateUser()
 
     @Test
-    public void testUsersDB() {
-        List<UserDTO> userList = gpWSClient.getUsers();
-        logger.info("\n*** Number of Users into DB: {} ***", userList.size());
-        if (userList != null) {
-            for (Iterator<UserDTO> it = userList.iterator(); it.hasNext();) {
-                logger.info("\n*** USER into DB:\n{}\n***", it.next());
+    public void testAccountsDB() {
+        List<ShortAccountDTO> accountList = gpWSClient.getAccounts();
+        logger.info("\n*** Number of Accounts into DB: {} ***", accountList.size());
+        if (accountList != null) {
+            for (Iterator<ShortAccountDTO> it = accountList.iterator(); it.hasNext();) {
+                logger.info("\n*** Account into DB:\n{}\n***", it.next());
             }
         }
     }
 
     @Test
     public void testRetrieveUser() throws ResourceNotFoundFault {
-        logger.trace("\n\t@@@ testRetrieveUser @@@");
+        // Number of Accounts
+        List<ShortAccountDTO> accountList = gpWSClient.getAccounts();
+        Assert.assertNotNull(accountList);
+        Assert.assertTrue("Number of Accounts stored into database", accountList.size() >= 1); // super.SetUp() added 1 user
 
-        // Number of Users
-        List<UserDTO> userList = gpWSClient.getUsers();
-        Assert.assertNotNull(userList);
-        Assert.assertTrue("Number of Users stored into database", userList.size() >= 1); // super.SetUp() added 1 user
-
-        // Number of User Like
-        long numUsersLike = gpWSClient.getUsersCount(
+        // Number of Account Like
+        long numAccountsLike = gpWSClient.getAccountsCount(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
-        Assert.assertEquals("Number of User Like", new Long(1).longValue(), numUsersLike);
+        Assert.assertEquals("Number of Account Like", new Long(1).longValue(), numAccountsLike);
 
         // Get User from Id
         // Get UserDTO from Id
@@ -100,12 +99,12 @@ public class WSUserTest extends ServiceTest {
 
         // Get User from Username
         // Get UserDTO from Username
-        userDTOFromWS = gpWSClient.getShortUserByName(
+        userDTOFromWS = gpWSClient.getShortUserByUsername(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         Assert.assertNotNull(userDTOFromWS);
         Assert.assertEquals("Error found UserDTO from Username", idUserTest, userDTOFromWS.getId().longValue());
         // Get GPUser from Username
-        userFromWS = gpWSClient.getUserDetailByName(
+        userFromWS = gpWSClient.getUserDetailByUsername(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         Assert.assertNotNull(userFromWS);
         Assert.assertEquals("Error found GPUser from Username", idUserTest, userFromWS.getId().longValue());
@@ -129,7 +128,7 @@ public class WSUserTest extends ServiceTest {
         user.setGPAuthorities(Arrays.asList(authority));
 
         try {
-            gpWSClient.insertUser(user);
+            gpWSClient.insertAccount(user);
             Assert.fail("User have an incorrect role");
         } catch (IllegalParameterFault ex) {
             if (!ex.getMessage().toLowerCase().contains("authority")) { // Must be fail for other reasons
@@ -140,15 +139,15 @@ public class WSUserTest extends ServiceTest {
 
     @Test
     public void testInsertUserWithSingleRole() throws ResourceNotFoundFault {
-        List<GPAuthority> authorities = gpWSClient.getUserGPAuthorities(usernameTest);
+        List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameTest);
         Assert.assertNotNull("Authorities null", authorities);
         Assert.assertEquals("Number of Authorities of " + usernameTest, 1, authorities.size());
 
         GPAuthority authority = authorities.get(0);
         Assert.assertNotNull(authority);
         Assert.assertEquals("Authority string", GPRole.USER.toString(), authority.getAuthority());
-        Assert.assertEquals("Authority username", usernameTest, authority.getUsername());
-        Assert.assertEquals("Authority user.id", userTest.getId(), authority.getUser().getId());
+        Assert.assertEquals("Authority username", usernameTest, authority.getStringID());
+        Assert.assertEquals("Authority user.id", userTest.getId(), authority.getAccount().getId());
     }
 
     @Test
@@ -158,23 +157,23 @@ public class WSUserTest extends ServiceTest {
         GPUser user = gpWSClient.getUserDetail(idUser);
 
         try {
-            List<GPAuthority> authorities = gpWSClient.getUserGPAuthorities(usernameMultiRole);
+            List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameMultiRole);
             Assert.assertNotNull(authorities);
             Assert.assertEquals("Number of Authorities of " + usernameMultiRole, 2, authorities.size());
 
             GPAuthority authority = authorities.get(0);
             Assert.assertNotNull(authority);
             Assert.assertEquals("Authority string", GPRole.ADMIN.toString(), authority.getAuthority());
-            Assert.assertEquals("Authority username", usernameMultiRole, authority.getUsername());
-            Assert.assertEquals("Authority user.id", user.getId(), authority.getUser().getId());
+            Assert.assertEquals("Authority username", usernameMultiRole, authority.getStringID());
+            Assert.assertEquals("Authority user.id", user.getId(), authority.getAccount().getId());
 
             authority = authorities.get(1);
             Assert.assertNotNull(authority);
             Assert.assertEquals("Authority string", GPRole.VIEWER.toString(), authority.getAuthority());
-            Assert.assertEquals("Authority username", usernameMultiRole, authority.getUsername());
-            Assert.assertEquals("Authority user.id", user.getId(), authority.getUser().getId());
+            Assert.assertEquals("Authority username", usernameMultiRole, authority.getStringID());
+            Assert.assertEquals("Authority user.id", user.getId(), authority.getAccount().getId());
         } finally {
-            boolean check = gpWSClient.deleteUser(idUser);
+            boolean check = gpWSClient.deleteAccount(idUser);
             Assert.assertTrue(check);
         }
     }
@@ -183,7 +182,7 @@ public class WSUserTest extends ServiceTest {
     public void testInsertDuplicateUserWRTUsername() {
         GPUser user = super.createUser(super.usernameTest, GPRole.USER);
         try {
-            gpWSClient.insertUser(user);
+            gpWSClient.insertAccount(user);
             Assert.fail("User already exist wrt username");
         } catch (IllegalParameterFault ex) {
             if (!ex.getMessage().toLowerCase().contains("username")) { // Must be fail for other reasons
@@ -197,7 +196,7 @@ public class WSUserTest extends ServiceTest {
         GPUser user = super.createUser("duplicate-email", GPRole.USER);
         user.setEmailAddress(super.userTest.getEmailAddress());
         try {
-            gpWSClient.insertUser(user);
+            gpWSClient.insertAccount(user);
             Assert.fail("User already exist wrt email");
         } catch (IllegalParameterFault ex) {
             if (!ex.getMessage().toLowerCase().contains("email")) { // Must be fail for other reasons

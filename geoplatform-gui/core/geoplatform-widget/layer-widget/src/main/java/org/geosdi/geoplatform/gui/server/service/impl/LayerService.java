@@ -115,12 +115,12 @@ public class LayerService implements ILayerService {
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        folderList = geoPlatformServiceClient.getRootFoldersByProjectId(projectId);
+        folderList = geoPlatformServiceClient.getRootFoldersByProjectID(projectId);
         return this.dtoConverter.convertOnlyFolder(folderList);
     }
 
     @Override
-    public ArrayList<IGPFolderElements> loadFolderElements(Long folderId, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public ArrayList<IGPFolderElements> loadFolderElements(Long folderID, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPUser user = null;
         try {
             user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
@@ -128,7 +128,7 @@ public class LayerService implements ILayerService {
             throw new GeoPlatformException(timeout);
         }
         TreeFolderElements folderElements = geoPlatformServiceClient.getChildrenElements(
-                folderId);
+                folderID);
         ArrayList<IGPFolderElements> elements = new ArrayList<IGPFolderElements>();
         try {
             folderElements.isEmpty();
@@ -556,14 +556,14 @@ public class LayerService implements ILayerService {
 
         SearchRequest srq = new SearchRequest(searchText);
         try {
-            Long projectsCount = this.geoPlatformServiceClient.getUserProjectsCount(user.getId(), srq);
+            Long projectsCount = this.geoPlatformServiceClient.getAccountProjectsCount(user.getId(), srq);
 
             int page = start == 0 ? start : start / config.getLimit();
 
             PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
                     config.getLimit(), page);
 
-            List<ProjectDTO> projectsDTO = this.geoPlatformServiceClient.searchUserProjects(user.getId(), psr);
+            List<ProjectDTO> projectsDTO = this.geoPlatformServiceClient.searchAccountProjects(user.getId(), psr);
 
             if (projectsDTO.isEmpty()) {
                 throw new GeoPlatformException("There are no results");

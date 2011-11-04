@@ -48,10 +48,10 @@ public class ModelDAOTest extends BaseDAOTest {
     @Test
     public void testRemoveAll() throws ParseException {
         logger.trace("\n\t@@@ testRemoveAll @@@");
-        Assert.assertNotNull("userDAO is NULL", super.userDAO);
+        Assert.assertNotNull("accountDAO is NULL", super.accountDAO);
         Assert.assertNotNull("authorityDAO is NULL", super.authorityDAO);
         Assert.assertNotNull("projectDAO is NULL", super.projectDAO);
-        Assert.assertNotNull("userProjectsDAO is NULL", super.userProjectsDAO);
+        Assert.assertNotNull("userProjectsDAO is NULL", super.accountProjectDAO);
         Assert.assertNotNull("folderDAO is NULL", super.folderDAO);
         Assert.assertNotNull("layerDAO is NULL", super.layerDAO);
 //        Assert.assertNotNull("styleDAO is NULL", super.styleDAO);
@@ -61,11 +61,11 @@ public class ModelDAOTest extends BaseDAOTest {
 
 //        Assert.assertEquals("All Styles doesn't REMOVED", 0, super.styleDAO.findAll().size());
         Assert.assertEquals("All Layers doesn't REMOVED", 0, super.layerDAO.findAll().size());
-        Assert.assertEquals("All UserProjects doesn't REMOVED", 0, super.userProjectsDAO.findAll().size());
+        Assert.assertEquals("All AccountProject doesn't REMOVED", 0, super.accountProjectDAO.findAll().size());
         Assert.assertEquals("All projectDAO doesn't REMOVED", 0, super.projectDAO.findAll().size());
         Assert.assertEquals("All Folders doesn't REMOVED", 0, super.folderDAO.findAll().size());
         Assert.assertEquals("All Authorities doesn't REMOVED", 0, super.authorityDAO.findAll().size());
-        Assert.assertEquals("All Users doesn't REMOVED", 0, super.userDAO.findAll().size());
+        Assert.assertEquals("All Accounts doesn't REMOVED", 0, super.accountDAO.findAll().size());
 
         insertData();
         insertFolders();

@@ -60,7 +60,7 @@ public interface LayerRemoteAsync {
 
     public void loadUserFolders(AsyncCallback<ArrayList<GPFolderClientInfo>> callback);
 
-    public void loadFolderElements(Long folderId,
+    public void loadFolderElements(Long folderID,
             AsyncCallback<ArrayList<IGPFolderElements>> callback);
 
     public void saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento,

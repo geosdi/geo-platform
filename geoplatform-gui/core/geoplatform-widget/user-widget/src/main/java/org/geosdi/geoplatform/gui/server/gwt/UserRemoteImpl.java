@@ -75,7 +75,7 @@ public class UserRemoteImpl extends RemoteServiceServlet implements UserRemote {
     }
 
     @Override
-    public boolean deleteUser(Long userId) throws GeoPlatformException {
-        return userService.deleteUser(userId, super.getThreadLocalRequest());
+    public boolean deleteUser(Long userID) throws GeoPlatformException {
+        return userService.deleteUser(userID, super.getThreadLocalRequest());
     }
 }

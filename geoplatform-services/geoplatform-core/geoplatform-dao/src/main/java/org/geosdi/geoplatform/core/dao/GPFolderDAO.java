@@ -63,11 +63,11 @@ public interface GPFolderDAO {
 
     public boolean remove(GPFolder folder);
 
-    public boolean removeById(Long folderId);
+    public boolean removeById(Long id);
 
     public List<GPFolder> search(ISearch search);
 
-    public List<GPFolder> searchRootFolders(Long projectId);
+    public List<GPFolder> searchRootFolders(Long projectID);
 
     public int count(ISearch search);
 
@@ -85,7 +85,7 @@ public interface GPFolderDAO {
 
     public boolean updateAncestorsDescendants(Map<Long, Integer> descendantsMap);
 
-    public boolean persistCheckStatusFolder(Long idFolder, boolean isChecked);
+    public boolean persistCheckStatusFolder(Long folderID, boolean checked);
 
-    public boolean persistCheckStatusFolders(boolean isChecked, Long... idFolders);
+    public boolean persistCheckStatusFolders(boolean checked, Long... folderIDs);
 }

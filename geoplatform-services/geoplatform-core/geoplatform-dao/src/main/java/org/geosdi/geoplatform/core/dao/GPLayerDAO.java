@@ -61,7 +61,7 @@ public interface GPLayerDAO {
 
     public boolean remove(GPLayer layer);
 
-    public boolean removeById(Long layerId);
+    public boolean removeById(Long id);
 
     public List<GPLayer> search(ISearch search);
 
@@ -69,7 +69,7 @@ public interface GPLayerDAO {
 
     public GPLayer findByLayerName(String layerName);
 
-    public ArrayList<String> findDistinctDataSourceByProjectId(Long projectId);
+    public ArrayList<String> findDistinctDataSourceByProjectId(Long projectID);
 
     public boolean updatePositionsRangeInOppositeWay(int beginPositionFirstRange, int endPositionFirstRange,
             int beginPositionSecondRange, int endPositionSecondRange,
@@ -81,5 +81,5 @@ public interface GPLayerDAO {
     public boolean updatePositionsLowerBound(int lowerBoundPosition,
             int deltaValue);
 
-    public boolean persistCheckStatusLayer(Long idLayer, boolean checked);
+    public boolean persistCheckStatusLayer(Long layerID, boolean checked);
 }

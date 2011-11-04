@@ -62,7 +62,7 @@ public interface GPServerDAO {
 
     public boolean remove(GeoPlatformServer server);
 
-    public boolean removeById(Long serverId);
+    public boolean removeById(Long id);
 
     public List<GeoPlatformServer> search(ISearch search);
 

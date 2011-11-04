@@ -79,15 +79,15 @@ public class GPProject implements Serializable {
     @Column(nullable = false)
     private String name;
     //
-    @Column
-    private boolean shared = false;
-    //
     @Column(name = "number_of_elements")
     private int numberOfElements = 0;
     //
     @Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate = new Date(System.currentTimeMillis());
+    //
+    @Column
+    private boolean shared = false;
 
     /**
      * @return the id
@@ -117,20 +117,6 @@ public class GPProject implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * @return the shared
-     */
-    public boolean isShared() {
-        return shared;
-    }
-
-    /**
-     * @param shared the shared to set
-     */
-    public void setShared(boolean shared) {
-        this.shared = shared;
     }
 
     /**
@@ -169,6 +155,20 @@ public class GPProject implements Serializable {
      */
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    /**
+     * @return the shared
+     */
+    public boolean isShared() {
+        return shared;
+    }
+
+    /**
+     * @param shared the shared to set
+     */
+    public void setShared(boolean shared) {
+        this.shared = shared;
     }
 
     /*

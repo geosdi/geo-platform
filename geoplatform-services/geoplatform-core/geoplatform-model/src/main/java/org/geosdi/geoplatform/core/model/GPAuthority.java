@@ -75,22 +75,23 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     @SequenceGenerator(name = "GP_AUTHORITY_SEQ", sequenceName = "GP_AUTHORITY_SEQ")
     private Long id;
     //
-    @Column(nullable = false)
-    private String username;
+    @Column(name = "string_id", nullable = false)
+    private String stringID;
     //
     @Column(nullable = false)
     private String authority;
     //
     @ManyToOne
+    // Note: @OnDelete doesn't work because GPAccount is an abstract class
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private GPUser user;
+    private GPAccount account;
 
     public GPAuthority() {
     }
 
-    public GPAuthority(GPUser user, String authority) {
-        this.user = user;
-        this.username = user.getUsername();
+    public GPAuthority(GPAccount account, String authority) {
+        this.account = account;
+        this.stringID = account.getStringID();
         this.authority = authority;
     }
 
@@ -102,30 +103,27 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     }
 
     /**
-     * @param id
-     *            the id to set
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * @return the username
+     * @return the stringID
      */
-    public String getUsername() {
-        return username;
+    public String getStringID() {
+        return stringID;
     }
 
     /**
-     * @param username
-     *            the username to set
+     * @param stringID the stringID to set
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setStringID(String stringID) {
+        this.stringID = stringID;
     }
 
     /**
-     * 
      * @return authority
      */
     @Override
@@ -134,27 +132,24 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     }
 
     /**
-     * @param authority
-     *            the authority to set
+     * @param authority the authority to set
      */
     public void setAuthority(String authority) {
         this.authority = authority;
     }
 
     /**
-     * 
-     * @return user
+     * @return the account
      */
-    public GPUser getUser() {
-        return user;
+    public GPAccount getAccount() {
+        return account;
     }
 
     /**
-     * @param user
-     *            the user to set
+     * @param account the account to set
      */
-    public void setUser(GPUser user) {
-        this.user = user;
+    public void setAccount(GPAccount account) {
+        this.account = account;
     }
 
     /*
@@ -164,11 +159,11 @@ public class GPAuthority implements GrantedAuthority, Serializable {
      */
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder("GPAuthority {");
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append("id=").append(id);
-        str.append(", username=").append(username);
+        str.append(", stringID=").append(stringID);
         str.append(", authority=").append(authority);
-        str.append(", users=").append(user).append("}");
-        return str.toString();
+        str.append(", account=").append(account);
+        return str.append("}").toString();
     }
 }

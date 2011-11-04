@@ -61,6 +61,6 @@ public interface IUserService {
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    boolean deleteUser(Long userId, HttpServletRequest httpServletRequest)
+    boolean deleteUser(Long userID, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 }

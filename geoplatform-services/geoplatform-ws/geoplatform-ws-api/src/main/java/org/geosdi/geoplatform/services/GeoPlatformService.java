@@ -48,6 +48,7 @@ import org.codehaus.jra.HttpResource;
 import org.codehaus.jra.Post;
 import org.codehaus.jra.Put;
 
+import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
@@ -57,18 +58,21 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.core.model.GPUserProjects;
+import org.geosdi.geoplatform.core.model.GPAccountProject;
+import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
-import org.geosdi.geoplatform.request.RequestById;
-import org.geosdi.geoplatform.request.RequestByUserProject;
+import org.geosdi.geoplatform.request.RequestByID;
+import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
+import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.StyleDTO;
@@ -81,19 +85,22 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
  * @author Francesco Izzi - CNR IMAA - geoSDI
  * 
+ * @author Vincenzo Monteverde
+ * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * 
  * Public interface to define the service operations mapped via REST
  * using CXT framework
  */
 @WebService(name = "GeoPlatformService", targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService {
 
-    //<editor-fold defaultstate="collapsed" desc="User">
+    //<editor-fold defaultstate="collapsed" desc="Account (User and Application)">
     // ==========================================================================
-    // === User
+    // === Account 
     // ==========================================================================
     @Put
-    @HttpResource(location = "/users")
-    Long insertUser(@WebParam(name = "User") GPUser user)
+    @HttpResource(location = "/accounts")
+    Long insertAccount(@WebParam(name = "account") GPAccount account)
             throws IllegalParameterFault;
 
     @Post
@@ -101,31 +108,25 @@ public interface GeoPlatformService {
     Long updateUser(@WebParam(name = "User") GPUser user)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
+    @Post
+    @HttpResource(location = "/applications")
+    Long updateApplication(@WebParam(name = "application") GPApplication application)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
     @Delete
-    @HttpResource(location = "/users/{userId}")
-    boolean deleteUser(@WebParam(name = "userId") Long userId)
+    @HttpResource(location = "/accounts/{accountID}")
+    boolean deleteAccount(@WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/users/{userId}")
+    @HttpResource(location = "/users/{userID}")
     @WebResult(name = "User")
-    UserDTO getShortUser(@WebParam(name = "userId") Long userId)
-            throws ResourceNotFoundFault;
-
-    @Get
-    @HttpResource(location = "/users/{userId}")
-    @WebResult(name = "User")
-    GPUser getUserDetail(@WebParam(name = "userId") Long userId)
+    GPUser getUserDetail(@WebParam(name = "userID") Long userID)
             throws ResourceNotFoundFault;
 
     @Get
     @WebResult(name = "User")
-    UserDTO getShortUserByName(SearchRequest request)
-            throws ResourceNotFoundFault;
-
-    @Get
-    @WebResult(name = "User")
-    GPUser getUserDetailByName(SearchRequest request)
+    GPUser getUserDetailByUsername(SearchRequest request)
             throws ResourceNotFoundFault;
 
     @Get
@@ -136,102 +137,130 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Get
+    @HttpResource(location = "/applications/{applicationID}")
+    @WebResult(name = "Application")
+    GPApplication getApplicationDetail(@WebParam(name = "applicationID") Long applicationID)
+            throws ResourceNotFoundFault;
+
+    @Get
+    @HttpResource(location = "/users/{userID}")
+    @WebResult(name = "User")
+    UserDTO getShortUser(@WebParam(name = "userID") Long userID)
+            throws ResourceNotFoundFault;
+
+    @Get
+    @WebResult(name = "User")
+    UserDTO getShortUserByUsername(SearchRequest request)
+            throws ResourceNotFoundFault;
+
+    @Get
+    @HttpResource(location = "/applications/{applicationID}")
+    @WebResult(name = "Application")
+    ApplicationDTO getShortApplication(@WebParam(name = "applicationID") Long applicationID)
+            throws ResourceNotFoundFault;
+
+    @Get
+    @WebResult(name = "Application")
+    ApplicationDTO getShortApplicationByAppID(SearchRequest request)
+            throws ResourceNotFoundFault;
+
+    @Get
     @HttpResource(location = "/users/search/{num}/{page}/{nameLike}")
     @WebResult(name = "Users")
-    List<UserDTO> searchUsers(@WebParam(name = "userId") Long userId,
+    List<UserDTO> searchUsers(@WebParam(name = "userID") Long userID,
             PaginatedSearchRequest searchRequest)
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/users")
-    @WebResult(name = "User")
-    List<UserDTO> getUsers();
+    @HttpResource(location = "/accounts")
+    @WebResult(name = "Account")
+    List<ShortAccountDTO> getAccounts();
 
     @Get
-    @HttpResource(location = "/users/count/{nameLike}")
+    @HttpResource(location = "/accounts/count/{nameLike}")
     @WebResult(name = "count")
-    Long getUsersCount(SearchRequest searchRequest);
+    Long getAccountsCount(SearchRequest searchRequest);
 
     @Get
-    @HttpResource(location = "/users/{id}/authorities")
+    @HttpResource(location = "/accounts/{id}/authorities")
     @WebResult(name = "Authorities")
-    List<String> getUserAuthorities(@WebParam(name = "userId") Long userId)
+    List<String> getAuthorities(@WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
-    @HttpResource(location = "/users/{id}/authorities")
+    @HttpResource(location = "/accounts/{id}/authorities")
     @WebResult(name = "Authorities")
-    List<GPAuthority> getUserGPAuthorities(
-            @WebParam(name = "username") String username)
+    List<GPAuthority> getAuthoritiesDetail(
+            @WebParam(name = "stringID") String stringID)
             throws ResourceNotFoundFault;
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="UserProjects">
+    //<editor-fold defaultstate="collapsed" desc="AccountProject">
     // ==========================================================================
-    // === UserProjects
+    // === AccountProject
     // ==========================================================================
     @Put
-    @HttpResource(location = "/userProject")
-    Long insertUserProject(@WebParam(name = "userProject") GPUserProjects userProject)
+    @HttpResource(location = "/accountProject")
+    Long insertAccountProject(@WebParam(name = "accountProject") GPAccountProject accountProject)
             throws IllegalParameterFault;
 
     @Post
-    @HttpResource(location = "/userProject")
-    Long updateUserProject(@WebParam(name = "userProject") GPUserProjects userProject)
+    @HttpResource(location = "/accountProject")
+    Long updateAccountProject(@WebParam(name = "accountProject") GPAccountProject accountProject)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Delete
-    @HttpResource(location = "/projects/{userProjectId}")
-    boolean deleteUserProject(@WebParam(name = "userProjectId") Long userProjectId)
+    @HttpResource(location = "/accountProject/{accountProjectID}")
+    boolean deleteAccountProject(@WebParam(name = "accountProjectID") Long accountProjectID)
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/user-projects/{userProjectId}")
-    @WebResult(name = "UserProject")
-    GPUserProjects getUserProject(@WebParam(name = "userProjectId") Long userProjectId)
+    @HttpResource(location = "/accountProject/{accountProjectID}")
+    @WebResult(name = "AccountProject")
+    GPAccountProject getAccountProject(@WebParam(name = "accountProjectID") Long accountProjectID)
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/user/{userId}")
-    @WebResult(name = "UserProject")
-    List<GPUserProjects> getUserProjectsByUserId(@WebParam(name = "userId") Long userId);
+    @HttpResource(location = "/account/{accountID}")
+    @WebResult(name = "AccountProject")
+    List<GPAccountProject> getAccountProjectsByAccountID(@WebParam(name = "accountID") Long accountID);
 
     @Get
-    @HttpResource(location = "/projects/{projectId}")
-    @WebResult(name = "UserProject")
-    List<GPUserProjects> getUserProjectsByProjectId(@WebParam(name = "projectId") Long projectId);
+    @HttpResource(location = "/projects/{projectID}")
+    @WebResult(name = "AccountProject")
+    List<GPAccountProject> getAccountProjectsByProjectID(@WebParam(name = "projectID") Long projectID);
 
     @Get
-    @HttpResource(location = "/user/{userId}/projects/{projectId}")
-    @WebResult(name = "UserProject")
-    GPUserProjects getUserProjectByUserAndProjectId(
-            @WebParam(name = "userId") Long userId,
-            @WebParam(name = "projectId") Long projectId)
+    @HttpResource(location = "/account/{accountID}/projects/{projectID}")
+    @WebResult(name = "AccountProject")
+    GPAccountProject getAccountProjectByAccountAndProjectIDs(
+            @WebParam(name = "accountID") Long accountID,
+            @WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/user/{userId}")
-    @WebResult(name = "UserProjects")
-    Long getUserProjectsCount(@WebParam(name = "userId") Long userId,
+    @HttpResource(location = "/account/{accountID}")
+    @WebResult(name = "AccountProject")
+    Long getAccountProjectsCount(@WebParam(name = "accountID") Long accountID,
             SearchRequest request)
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/users/search/{num}/{page}/{nameLike}")
+    @HttpResource(location = "/accounts/search/{num}/{page}/{nameLike}")
     @WebResult(name = "Projects")
-    List<ProjectDTO> searchUserProjects(@WebParam(name = "userId") Long userId,
+    List<ProjectDTO> searchAccountProjects(@WebParam(name = "accountID") Long accountID,
             PaginatedSearchRequest request)
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/user/{userId}")
+    @HttpResource(location = "/account/{accountID}")
     @WebResult(name = "DefaultProject")
-    GPProject getDefaultProject(@WebParam(name = "userId") Long userId)
+    GPProject getDefaultProject(@WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
     @Post
-    @HttpResource(location = "/user/defaultProject")
-    void updateDefaultProject(@WebParam(name = "userId") Long userId,
-            @WebParam(name = "projectId") Long projectId)
+    @HttpResource(location = "/account/defaultProject")
+    void updateDefaultProject(@WebParam(name = "accountID") Long accountID,
+            @WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
     //</editor-fold>
 
@@ -242,7 +271,7 @@ public interface GeoPlatformService {
     @Put
     @HttpResource(location = "/project")
     Long saveProject(
-            @WebParam(name = "username") String username,
+            @WebParam(name = "stringID") String stringID,
             @WebParam(name = "project") GPProject project,
             @WebParam(name = "defaultProject") boolean defaultProject)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -259,35 +288,35 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Delete
-    @HttpResource(location = "/projects/{projectId}")
-    boolean deleteProject(@WebParam(name = "projectId") Long projectId)
+    @HttpResource(location = "/projects/{projectID}")
+    boolean deleteProject(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/projects/{projectId}")
+    @HttpResource(location = "/projects/{projectID}")
     @WebResult(name = "Project")
-    GPProject getProjectDetail(@WebParam(name = "projectId") Long projectId)
+    GPProject getProjectDetail(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/projects/{projectId}")
+    @HttpResource(location = "/projects/{projectID}")
     @WebResult(name = "Project")
-    int getNumberOfElementsProject(@WebParam(name = "projectId") Long projectId)
+    int getNumberOfElementsProject(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     @Post
-    @HttpResource(location = "/project/{projectId}/shared")
-    void setProjectShared(@WebParam(name = "projectId") Long projectId)
+    @HttpResource(location = "/project/{projectID}/shared")
+    void setProjectShared(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     @Post
-    @HttpResource(location = "/project/{projectId}/owner/{userId}")
-    boolean setProjectOwner(RequestByUserProject request)
+    @HttpResource(location = "/project/{projectID}/owner/{accountID}")
+    boolean setProjectOwner(RequestByAccountProjectIDs request)
             throws ResourceNotFoundFault;
 
     @Post
-    @HttpResource(location = "/project/{projectId}/forceowner/{userId}")
-    void forceProjectOwner(RequestByUserProject request)
+    @HttpResource(location = "/project/{projectID}/forceowner/{accountID}")
+    void forceProjectOwner(RequestByAccountProjectIDs request)
             throws ResourceNotFoundFault;
     //</editor-fold>
 
@@ -298,7 +327,7 @@ public interface GeoPlatformService {
     @Put
     @HttpResource(location = "/folder")
     @Deprecated
-    Long insertFolder(@WebParam(name = "projectId") Long projectId,
+    Long insertFolder(@WebParam(name = "projectID") Long projectID,
             @WebParam(name = "folder") GPFolder folder)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
@@ -309,14 +338,14 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Delete
-    @HttpResource(location = "/folders/{folderId}")
+    @HttpResource(location = "/folders/{folderID}")
     @Deprecated
-    boolean deleteFolder(@WebParam(name = "folderId") Long folderId)
+    boolean deleteFolder(@WebParam(name = "folderID") Long folderID)
             throws ResourceNotFoundFault;
 
     @Post
-    @HttpResource(location = "/folder/{folderId}")
-    Long saveFolderProperties(@WebParam(name = "folderId") Long folderId,
+    @HttpResource(location = "/folder/{folderID}")
+    Long saveFolderProperties(@WebParam(name = "folderID") Long folderID,
             @WebParam(name = "folderName") String folderName,
             @WebParam(name = "checked") boolean checked)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -324,8 +353,8 @@ public interface GeoPlatformService {
     @Put
 //    @HttpResource(location = "/folder/{descendantsMap}")
     Long saveAddedFolderAndTreeModifications(
-            @WebParam(name = "projectId") Long projectId,
-            @WebParam(name = "parentId") Long parentId,
+            @WebParam(name = "projectID") Long projectID,
+            @WebParam(name = "parentID") Long parentID,
             @WebParam(name = "folder") GPFolder folder,
             @WebParam(name = "descendantsMap") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -333,14 +362,14 @@ public interface GeoPlatformService {
     @Delete
 //    @HttpResource(location = "/folder/{id}/{descendantsMap}")
     boolean saveDeletedFolderAndTreeModifications(
-            @WebParam(name = "folderId") Long folderId,
+            @WebParam(name = "folderID") Long folderID,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault;
 
     @Put
-    @HttpResource(location = "/folder/{folderId}")
+    @HttpResource(location = "/folder/{folderID}")
     boolean saveCheckStatusFolderAndTreeModifications(
-            @WebParam(name = "folderId") Long folderId,
+            @WebParam(name = "folderID") Long folderID,
             @WebParam(name = "checked") boolean checked)
             throws ResourceNotFoundFault;
 
@@ -354,15 +383,15 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/folders/{folderId}")
+    @HttpResource(location = "/folders/{folderID}")
     @WebResult(name = "Folder")
-    FolderDTO getShortFolder(@WebParam(name = "folderId") Long folderId)
+    FolderDTO getShortFolder(@WebParam(name = "folderID") Long folderID)
             throws ResourceNotFoundFault;
 
     @Get
-    @HttpResource(location = "/folders/{folderId}")
+    @HttpResource(location = "/folders/{folderID}")
     @WebResult(name = "Folder")
-    GPFolder getFolderDetail(@WebParam(name = "folderId") Long folderId)
+    GPFolder getFolderDetail(@WebParam(name = "folderID") Long folderID)
             throws ResourceNotFoundFault;
 
     @Get
@@ -381,57 +410,57 @@ public interface GeoPlatformService {
     long getFoldersCount(SearchRequest searchRequest);
 
     /**
-     * @param folderId 
+     * @param folderID 
      * @param num 
      * @param page 
      * @return Children folders.
      */
     @Get
-    @HttpResource(location = "/folders/user/{id}/{num}/{page}")
+    @HttpResource(location = "/folders/account/{id}/{num}/{page}")
     @WebResult(name = "Folder")
-    List<FolderDTO> getChildrenFoldersByRequest(RequestById request);
+    List<FolderDTO> getChildrenFoldersByRequest(RequestByID request);
 
     /**
-     * @param folderId 
+     * @param folderID 
      * @return Children folders.
      */
     @Get
-    @HttpResource(location = "/folders/user/{folderId}")
+    @HttpResource(location = "/folders/account/{folderID}")
     @WebResult(name = "Folder")
-    List<FolderDTO> getChildrenFolders(@WebParam(name = "folderId") Long folderId);
+    List<FolderDTO> getChildrenFolders(@WebParam(name = "folderID") Long folderID);
 
     /**
-     * @param folderId 
+     * @param folderID 
      * @return Children elements (folder and layer).
      */
     @Get
-    @HttpResource(location = "/folders/{folderId}")
+    @HttpResource(location = "/folders/{folderID}")
     @WebResult(name = "ChildrenElement")
-    TreeFolderElements getChildrenElements(@WebParam(name = "folderId") Long folderId);
+    TreeFolderElements getChildrenElements(@WebParam(name = "folderID") Long folderID);
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Folder / Project">
     @Get
-    //@HttpResource(location = "/projects/{projectId}")
+    //@HttpResource(location = "/projects/{projectID}")
     @WebResult(name = "RootFolders")
-    List<FolderDTO> getRootFoldersByProjectId(@WebParam(name = "projectId") Long projectId);
+    List<FolderDTO> getRootFoldersByProjectID(@WebParam(name = "projectID") Long projectID);
 
     @Get
-    //@HttpResource(location = "/projects/{projectId}")
+    //@HttpResource(location = "/projects/{projectID}")
     @WebResult(name = "Project")
-    ProjectDTO exportProject(@WebParam(name = "projectId") Long projectId)
+    ProjectDTO exportProject(@WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     @Put
     @HttpResource(location = "/project")
     Long importProject(@WebParam(name = "projectDTO") ProjectDTO projectDTO,
-            @WebParam(name = "userID") Long userID)
+            @WebParam(name = "accountID") Long accountID)
             throws IllegalParameterFault, ResourceNotFoundFault;
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Layer / Style">
+    //<editor-fold defaultstate="collapsed" desc="Layer (Raster and Vector)">
     // ==========================================================================
-    // === Layer / Style
+    // === Layer
     // ==========================================================================
     @Put
     @HttpResource(location = "/layer")
@@ -449,8 +478,8 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Delete
-    @HttpResource(location = "/layers/{layerId}")
-    boolean deleteLayer(@WebParam(name = "layerId") Long layerId)
+    @HttpResource(location = "/layers/{layerID}")
+    boolean deleteLayer(@WebParam(name = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 
     @Put
@@ -463,7 +492,7 @@ public interface GeoPlatformService {
     @Put
     @HttpResource(location = "/layers/{descendantsMap}")
     ArrayList<Long> saveAddedLayersAndTreeModifications(
-            @WebParam(name = "projectId") Long projectId,
+            @WebParam(name = "projectID") Long projectID,
             @WebParam(name = "layers") List<GPLayer> layers,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault;
@@ -471,23 +500,23 @@ public interface GeoPlatformService {
     @Delete
     @HttpResource(location = "/layers/{id}/{descendantsMap}")
     boolean saveDeletedLayerAndTreeModifications(
-            @WebParam(name = "layerId") Long layerId,
+            @WebParam(name = "layerID") Long layerID,
             @WebParam(name = "descendantsMapData") GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault;
 
     @Put
-    @HttpResource(location = "/layer/{layerId}")
+    @HttpResource(location = "/layer/{layerID}")
     boolean saveCheckStatusLayerAndTreeModifications(
-            @WebParam(name = "layerId") Long layerId,
+            @WebParam(name = "layerID") Long layerID,
             @WebParam(name = "checked") boolean checked)
             throws ResourceNotFoundFault;
 
     @Put
-    @HttpResource(location = "/layer/{layerId}")
+    @HttpResource(location = "/layer/{layerID}")
     boolean fixCheckStatusLayerAndTreeModifications(
-            @WebParam(name = "layerId") Long layerId,
-            @WebParam(name = "oldUserFolderId") Long oldUserFolderId,
-            @WebParam(name = "newUserFolderId") Long newUserFolderId)
+            @WebParam(name = "layerID") Long layerID,
+            @WebParam(name = "oldFolderID") Long oldFolderID,
+            @WebParam(name = "newFolderID") Long newFolderID)
             throws ResourceNotFoundFault;
 
     @Put
@@ -510,7 +539,7 @@ public interface GeoPlatformService {
      */
     @Get
     @WebResult(name = "RasterLayer")
-    GPRasterLayer getRasterLayer(@WebParam(name = "layerId") Long layerId)
+    GPRasterLayer getRasterLayer(@WebParam(name = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 
     /**
@@ -518,27 +547,27 @@ public interface GeoPlatformService {
      */
     @Get
     @WebResult(name = "VectorLayer")
-    GPVectorLayer getVectorLayer(@WebParam(name = "layerId") Long layerId)
+    GPVectorLayer getVectorLayer(@WebParam(name = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/layers")
     @WebResult(name = "Layer")
-    List<ShortLayerDTO> getLayers(@WebParam(name = "projectId") Long projectId);
+    List<ShortLayerDTO> getLayers(@WebParam(name = "projectID") Long projectID);
 
     /**
      * @return Styles of a layer.
      */
     @Get
     @WebResult(name = "LayerStyles")
-    List<StyleDTO> getLayerStyles(@WebParam(name = "layerId") Long layerId);
+    List<StyleDTO> getLayerStyles(@WebParam(name = "layerID") Long layerID);
 
     /**
      * @return a short layer.
      */
     @Get
     @WebResult(name = "ShortLayerDTO")
-    ShortLayerDTO getShortLayer(@WebParam(name = "layerId") Long layerId)
+    ShortLayerDTO getShortLayer(@WebParam(name = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 
     /**
@@ -546,7 +575,7 @@ public interface GeoPlatformService {
      */
     @Get
     @WebResult(name = "BBox")
-    GPBBox getBBox(@WebParam(name = "layerId") Long layerId)
+    GPBBox getBBox(@WebParam(name = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 
     /**
@@ -554,7 +583,7 @@ public interface GeoPlatformService {
      */
     @Get
     @WebResult(name = "LayerInfo")
-    GPLayerInfo getLayerInfo(@WebParam(name = "layerId") Long layerId)
+    GPLayerInfo getLayerInfo(@WebParam(name = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 
 //    /**
@@ -562,21 +591,21 @@ public interface GeoPlatformService {
 //     */
 //    @Get
 //    @WebResult(name = "LayerStyles")
-//    List<StyleDTO> getLayerStyles(@WebParam(name = "layerId") Long layerId);
+//    List<StyleDTO> getLayerStyles(@WebParam(name = "layerID") Long layerID);
 //    
 //    /**
 //     * @return Geometry of a vector layer.
 //     */
 //    @Get
 //    @WebResult(name = "Geometry")
-//    Point getGeometry(@WebParam(name = "LayerId") Long layerId) throws ResourceNotFoundFault;
+//    Point getGeometry(@WebParam(name = "LayerID") Long layerID) throws ResourceNotFoundFault;
 //    
     /**
      * @return layer Type.
      */
     @Get
     @WebResult(name = "LayerType")
-    GPLayerType getLayerType(@WebParam(name = "layerId") Long layerId)
+    GPLayerType getLayerType(@WebParam(name = "layerID") Long layerID)
             throws ResourceNotFoundFault;
 
     /**
@@ -584,8 +613,8 @@ public interface GeoPlatformService {
      */
     @Get
     @WebResult(name = "LayerDataSources")
-    ArrayList<String> getLayersDataSourceByProjectId(
-            @WebParam(name = "projectId") Long projectId)
+    ArrayList<String> getLayersDataSourceByProjectID(
+            @WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
     //</editor-fold>
 
@@ -635,7 +664,7 @@ public interface GeoPlatformService {
     @HttpResource(location = "/wms/capabilities/{id}")
     @WebResult(name = "Capabilities")
     ServerDTO getCapabilities(
-            @WebParam(name = "request") RequestById request,
+            @WebParam(name = "request") RequestByID request,
             @WebParam(name = "token") String token)
             throws ResourceNotFoundFault;
 
@@ -649,10 +678,10 @@ public interface GeoPlatformService {
 
     //<editor-fold defaultstate="collapsed" desc="ACL">
     @Get
-    @HttpResource(location = "/user/{userId}")
+    @HttpResource(location = "/account/{accountID}")
     @WebResult(name = "GuiComponentsPermissionMapData")
-    GuiComponentsPermissionMapData getUserGuiComponentVisible(
-            @WebParam(name = "userId") Long userId)
+    GuiComponentsPermissionMapData getAccountGuiComponentVisible(
+            @WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
     //</editor-fold>
 }

@@ -59,7 +59,7 @@ public interface GPStyleDAO {
 
     public boolean remove(GPStyle style);
 
-    public boolean removeById(Long styleId);
+    public boolean removeById(Long id);
 
     public List<GPStyle> search(ISearch search);
 

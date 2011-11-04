@@ -154,7 +154,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
             @Override
             public void windowShow(WindowEvent we) {
                 if (userDetail.getId() != null) {
-                    clonedUserDetail = new GPUserManageDetail();
+                    clonedUserDetail = new GPUserManageDetail(); // TODO only once NEW
                 }
                 userPropertiesBinding.bindModel(userDetail, clonedUserDetail);
             }

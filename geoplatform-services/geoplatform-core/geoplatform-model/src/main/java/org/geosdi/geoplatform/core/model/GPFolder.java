@@ -86,17 +86,17 @@ public class GPFolder implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPProject project;
     //
-    @Column
-    private int position = -1;
-    //
     @Column(name = "number_of_descendants")
     private int numberOfDescendants = 0;
     //
     @Column
-    private boolean shared = false;
+    private int position = -1;
     //    
     @Column
     private boolean checked = false;
+    //
+    @Column
+    private boolean shared = false;
 
     /**
      * @return the id
@@ -159,20 +159,6 @@ public class GPFolder implements Serializable {
     }
 
     /**
-     * @return the position
-     */
-    public int getPosition() {
-        return position;
-    }
-
-    /**
-     * @param position the position to set
-     */
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    /**
      * @return the numberOfDescendant
      */
     public int getNumberOfDescendants() {
@@ -185,6 +171,20 @@ public class GPFolder implements Serializable {
      */
     public void setNumberOfDescendants(int numberOfDescendants) {
         this.numberOfDescendants = numberOfDescendants;
+    }
+
+    /**
+     * @return the position
+     */
+    public int getPosition() {
+        return position;
+    }
+
+    /**
+     * @param position the position to set
+     */
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     /**
@@ -238,8 +238,8 @@ public class GPFolder implements Serializable {
         } else {
             str.append(", project=NULL");
         }
-        str.append(", position=").append(position);
         str.append(", numberOfDescendants=").append(numberOfDescendants);
+        str.append(", position=").append(position);
         str.append(", checked=").append(checked);
         str.append(", shared=").append(shared);
         return str.append("}").toString();

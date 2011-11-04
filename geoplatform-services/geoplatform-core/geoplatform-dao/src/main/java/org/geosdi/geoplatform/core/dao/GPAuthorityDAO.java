@@ -58,13 +58,13 @@ public interface GPAuthorityDAO {
 
     public boolean remove(GPAuthority authority);
 
-    public boolean removeById(Long authorityId);
-    
-    public void removeAllUserAuthorities(String username);
+    public boolean removeById(Long id);
+
+    public void removeAllUserAuthorities(String stringID);
 
     public List<GPAuthority> search(ISearch search);
 
     public int count(ISearch search);
 
-    public List<GPAuthority> findByUsername(String username);
+    public List<GPAuthority> findByStringID(String stringID);
 }

@@ -35,47 +35,91 @@
  */
 package org.geosdi.geoplatform.request;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author Vincenzo Monteverde
- * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- *
- * A request for calls involving a single User and a single Project.
+ * @author giuseppe
+ * 
  */
-@XmlRootElement(name = "RequestByUserProject")
-public class RequestByUserProject {
+@XmlRootElement(name = "RequestByID")
+public class RequestByID {
 
-    private Long userId;
-    private Long projectId;
+    private Long id;
+    private int page;
+    private int num;
 
-
-    public RequestByUserProject() {
+    /**
+     * 
+     */
+    public RequestByID() {
     }
 
     /**
-     * @param userId
-     * @param projectId
+     * @param id
      */
-    public RequestByUserProject(Long userId, Long projectId) {
+    public RequestByID(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @param id
+     * @param pag
+     * @param num
+     */
+    public RequestByID(Long id, int page, int num) {
         super();
-        this.userId = userId;
-        this.projectId = projectId;
+        this.id = id;
+        this.page = page;
+        this.num = num;
     }
 
-    public Long getUserId() {
-        return userId;
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    /**
+     * @return the id
+     */
+    @XmlElement(required = true, nillable = false)
+    public Long getId() {
+        return id;
     }
 
-    public Long getProjectId() {
-        return projectId;
+    /**
+     * @return int
+     */
+    public int getPage() {
+        return page;
     }
 
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
+    /**
+     * @param pag
+     */
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    /**
+     * @return int
+     */
+    public int getNum() {
+        return num;
+    }
+
+    /**
+     * @param num
+     */
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    @Override
+    public String toString() {
+        return "RequestByID [id=" + id + ", num=" + num + ", pag=" + page + "]";
     }
 }

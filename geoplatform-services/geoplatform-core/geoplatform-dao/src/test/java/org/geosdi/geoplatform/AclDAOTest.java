@@ -55,6 +55,7 @@ import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclSidDAO;
 import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
+import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
 
 /**
@@ -83,12 +84,16 @@ public class AclDAOTest extends BaseDAOTest {
     final private String idZoomPrevious = "ZoomPrevious";
     final private String idZoomIn = "ZoomIn";
     final private String idZoomOut = "ZoomOut";
+    // ACL
+    protected final String usernameSuperUserTestAcl = "super_user_test_acl";
+    protected final String usernameAdminTestAcl = "admin_acl_test";
+    protected final String usernameUserTestAcl = "user_acl_test";
 
     @Test
     public void testCheckAclDAOs() {
         logger.trace("\n\t@@@ testCheckAclDAOs @@@");
-        Assert.assertNotNull("userDAO is NULL", super.userDAO);
-        Assert.assertNotNull("authorityDAO is NULL", super.authorityDAO);
+        Assert.assertNotNull("accountDAO is NULL", super.accountDAO);
+//        Assert.assertNotNull("authorityDAO is NULL", super.authorityDAO);
         //
         Assert.assertNotNull("classDAO is NULL", classDAO);
         Assert.assertNotNull("sidDAO is NULL", sidDAO);
@@ -100,8 +105,9 @@ public class AclDAOTest extends BaseDAOTest {
     @Test
     public void testManageAcl() {
         logger.trace("\n\t@@@ testManageAcl @@@");
-        super.removeAllAuthorities();
-        super.removeAllUsers();
+        this.removeUserByUsername(usernameSuperUserTestAcl);
+        this.removeUserByUsername(usernameAdminTestAcl);
+        this.removeUserByUsername(usernameUserTestAcl);
         this.removeAllAcl();
 
         Assert.assertEquals("All Classes doesn't REMOVED", 0, classDAO.findAll().size());
@@ -111,9 +117,19 @@ public class AclDAOTest extends BaseDAOTest {
         Assert.assertEquals("All GuiComponents doesn't REMOVED", 0, guiComponentDAO.findAll().size());
 
         // Insert Users and Authorities ACL
-        super.insertData();
+        // ACL Data
+        this.insertUser(usernameSuperUserTestAcl, GPRole.ADMIN, GPRole.USER);
+        this.insertUser(usernameAdminTestAcl, GPRole.ADMIN);
+        this.insertUser(usernameUserTestAcl, GPRole.USER);
         // Insert ACL data
         this.insertGuiComponents();
+    }
+
+    private void removeUserByUsername(String username) {
+        GPUser user = accountDAO.findByUsername(username);
+        if (user != null) {
+            accountDAO.remove(user);
+        }
     }
 
     //<editor-fold defaultstate="collapsed" desc="Remove all ACL data">
@@ -179,7 +195,7 @@ public class AclDAOTest extends BaseDAOTest {
         classDAO.persist(gcClass);
 
         // Owner of all Object Identities
-        AclSid superUser = new AclSid(true, usernameSuperUserTest);
+        AclSid superUser = new AclSid(true, usernameSuperUserTestAcl);
         // Users of interest
         AclSid admin = new AclSid(false, GPRole.ADMIN.toString());
         AclSid user = new AclSid(false, GPRole.USER.toString());

@@ -15,12 +15,17 @@
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
 		memoryStoreEvictionPolicy="LRU" />
                 
+    <cache name="application" maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
+		memoryStoreEvictionPolicy="LRU" />
+                
     <cache name="project" maxElementsInMemory="10000" eternal="false"
 		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
 		memoryStoreEvictionPolicy="LRU" />
                 
-    <cache name="user_projects" maxElementsInMemory="10000" eternal="false"
+    <cache name="account_project" maxElementsInMemory="10000" eternal="false"
 		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
 		memoryStoreEvictionPolicy="LRU" />                
@@ -40,10 +45,10 @@
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
 		memoryStoreEvictionPolicy="LRU" />
 
-    <cache name="style" maxElementsInMemory="10000" eternal="false"
+    <!--cache name="style" maxElementsInMemory="10000" eternal="false"
 		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" />
+		memoryStoreEvictionPolicy="LRU" /-->
 
     <cache name="server" maxElementsInMemory="10000" eternal="false"
 		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="true"

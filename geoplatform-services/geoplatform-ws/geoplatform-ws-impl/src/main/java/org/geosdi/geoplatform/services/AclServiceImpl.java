@@ -37,7 +37,6 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
-import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,21 +52,22 @@ import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclSidDAO;
 import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
-import org.geosdi.geoplatform.core.dao.GPUserDAO;
+import org.geosdi.geoplatform.core.dao.GPAccountDAO;
+import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPAuthority;
-import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 
 /**
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- *
+ * 
  */
 class AclServiceImpl {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     // DAO
-    private GPUserDAO userDao;
+    private GPAccountDAO accountDao;
     private GPAuthorityDAO authorityDao;
     // ACL DAO
     private AclClassDAO classDao;
@@ -78,11 +78,11 @@ class AclServiceImpl {
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
-     * @param userDao
-     *          the userDao to set
+     * @param accountDao
+     *          the accountDao to set
      */
-    public void setUserDao(GPUserDAO userDao) {
-        this.userDao = userDao;
+    public void setAccountDao(GPAccountDAO accountDao) {
+        this.accountDao = accountDao;
     }
 
     /**
@@ -135,29 +135,29 @@ class AclServiceImpl {
     //</editor-fold>
 
     /**
-     * Retrieve the persmission on the GUI Component for a user
+     * Retrieve the permission on the GUI Component for an account
      * 
-     * It is based on users with disjoined authorities
+     * It is based on accounts with disjoined authorities
      * 
-     * @param userId
-     * @return HashMap, Permissions on GUI Components for a user, with:
+     * @param accountID
+     * @return HashMap, Permissions on GUI Components for an account, with:
      *      key = ID Component
      *      value = Permission
      * @throws ResourceNotFoundFault
-     *      if the user not found
+     *      if the account not found
      */
-    public GuiComponentsPermissionMapData getUserGuiComponentVisible(Long userId)
+    public GuiComponentsPermissionMapData getAccountGuiComponentVisible(Long accountID)
             throws ResourceNotFoundFault {
-        // Retrieve the user
-        GPUser user = userDao.find(userId);
-        if (user == null) {
-            throw new ResourceNotFoundFault("User not found", userId);
+        // Retrieve the account
+        GPAccount account = accountDao.find(accountID);
+        if (account == null) {
+            throw new ResourceNotFoundFault("Account not found", accountID);
         }
 
         GuiComponentsPermissionMapData mapComponentPermission = new GuiComponentsPermissionMapData();
 
-        // Retrieve the Authorities of the User
-        List<GPAuthority> authorities = authorityDao.findByUsername(user.getUsername());
+        // Retrieve the Authorities of the Account
+        List<GPAuthority> authorities = authorityDao.findByStringID(account.getStringID());
         logger.trace("\n*** #Authorities: {} ***", authorities.size());
         // For each Autorities (disjoined)
         for (GPAuthority authority : authorities) {
@@ -170,7 +170,7 @@ class AclServiceImpl {
             List<AclEntry> entries = entryDao.findBySid(sid.getId());
             logger.trace("\n*** #Entries: {} ***", entries.size());
             // For each ACEs
-            // (ACL has a single ACE for User+GuiComponent,
+            // (ACL has a single ACE for Account+GuiComponent,
             // because there is a singe Permission)
             for (AclEntry entry : entries) {
                 logger.trace("\n*** AclEntry:\n{}\n***", entry);

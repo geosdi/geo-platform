@@ -72,9 +72,9 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     }
 
     @Override
-    public ArrayList<IGPFolderElements> loadFolderElements(Long folderId)
+    public ArrayList<IGPFolderElements> loadFolderElements(Long folderID)
             throws GeoPlatformException {
-        return this.layerService.loadFolderElements(folderId, super.getThreadLocalRequest());
+        return this.layerService.loadFolderElements(folderID, super.getThreadLocalRequest());
     }
 
     @Override

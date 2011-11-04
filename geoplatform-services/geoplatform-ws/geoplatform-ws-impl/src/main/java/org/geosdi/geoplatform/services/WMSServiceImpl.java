@@ -54,7 +54,7 @@ import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.request.RequestById;
+import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geotools.data.ows.CRSEnvelope;
@@ -146,7 +146,7 @@ class WMSServiceImpl {
         return server;
     }
 
-    public ServerDTO getCapabilities(RequestById request, String token)
+    public ServerDTO getCapabilities(RequestByID request, String token)
             throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(request.getId());
         if (server == null) {

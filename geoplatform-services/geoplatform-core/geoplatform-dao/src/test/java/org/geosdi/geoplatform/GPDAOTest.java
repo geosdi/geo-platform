@@ -121,17 +121,19 @@ public class GPDAOTest extends BaseDAOTest {
     @After
     public void tearDown() {
         logger.trace("\n\t@@@ " + getClass().getSimpleName() + ".tearDown @@@");
-        // Remove user and his folders and layers
-        userDAO.remove(userPositionTest);
+        // Remove user
+        accountDAO.remove(userPositionTest);
+        // Remove project and his folders and layers
+        projectDAO.remove(userPositionTestProject);
     }
 
     @Test
     public void testCheckDAOs() {
-        Assert.assertNotNull("userDAO is NULL", super.userDAO);
+        Assert.assertNotNull("accountDAO is NULL", super.accountDAO);
         Assert.assertNotNull("folderDAO is NULL", super.folderDAO);
         Assert.assertNotNull("layerDAO is NULL", super.layerDAO);
         Assert.assertNotNull("projectDAO is NULL", super.projectDAO);
-        Assert.assertNotNull("userProjectsDAO is NULL", super.userProjectsDAO);
+        Assert.assertNotNull("userProjectsDAO is NULL", super.accountProjectDAO);
 //        Assert.assertNotNull("styleDAO is NULL", super.styleDAO);
     }
 

@@ -37,7 +37,6 @@
 //</editor-fold>
 package org.geosdi.geoplatform.services;
 
-import org.geosdi.geoplatform.services.development.EntityCorrectness;
 import com.googlecode.genericdao.search.Search;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +47,6 @@ import org.geosdi.geoplatform.core.dao.GPFolderDAO;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.dao.GPStyleDAO;
-import org.geosdi.geoplatform.core.dao.GPUserDAO;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
@@ -64,6 +62,7 @@ import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
 import org.geosdi.geoplatform.responce.StyleDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
+import org.geosdi.geoplatform.services.development.EntityCorrectness;
 
 /**
  * @author Vincenzo Monteverde
@@ -74,7 +73,6 @@ class LayerServiceImpl {
 
     final private static Logger logger = LoggerFactory.getLogger(LayerServiceImpl.class);
     // DAO
-    private GPUserDAO userDao;
     private GPProjectDAO projectDao;
     private GPFolderDAO folderDao;
     private GPLayerDAO layerDao;
@@ -82,27 +80,11 @@ class LayerServiceImpl {
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
-     * @param userDao 
-     *            the userDao to set
-     */
-    public GPUserDAO getUserDao() {
-        return userDao;
-    }
-
-    /**
      * @param projecsDao
      *          the projecsDao to set
      */
     public void setProjectDao(GPProjectDAO projecsDao) {
         this.projectDao = projecsDao;
-    }
-
-    /**
-     * @param userDao
-     *            the userDao to set
-     */
-    public void setUserDao(GPUserDAO userDao) {
-        this.userDao = userDao;
     }
 
     /**
@@ -130,11 +112,11 @@ class LayerServiceImpl {
     }
     //</editor-fold>
 
-    public List<StyleDTO> getLayerStyles(Long layerId) {
+    public List<StyleDTO> getLayerStyles(Long layerID) {
         Search searchCriteria = new Search(GPStyle.class);
 
         searchCriteria.addSortAsc("name");
-        searchCriteria.addFilterEqual("layer.id", layerId);
+        searchCriteria.addFilterEqual("layer.id", layerID);
 
         List<GPStyle> foundStyle = styleDao.search(searchCriteria);
         return StyleDTO.convertToStyleDTOList(foundStyle);
@@ -181,11 +163,11 @@ class LayerServiceImpl {
         return orig.getId();
     }
 
-    public boolean deleteLayer(Long layerId)
+    public boolean deleteLayer(Long layerID)
             throws ResourceNotFoundFault {
-        GPLayer layer = layerDao.find(layerId);
+        GPLayer layer = layerDao.find(layerID);
         if (layer == null) {
-            throw new ResourceNotFoundFault("Layer not found", layerId);
+            throw new ResourceNotFoundFault("Layer not found", layerID);
         }
         EntityCorrectness.checkLayerLog(layer); // TODO assert
 
@@ -196,7 +178,6 @@ class LayerServiceImpl {
     public Long saveAddedLayerAndTreeModifications(GPLayer layer,
             GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        logger.trace("\n\t@@@ saveAddedLayerAndTreeModifications @@@");
         EntityCorrectness.checkLayer(layer); // TODO assert
 
         GPFolder parent = layer.getFolder();
@@ -229,7 +210,6 @@ class LayerServiceImpl {
     public ArrayList<Long> saveAddedLayersAndTreeModifications(Long projectId, List<GPLayer> layers,
             GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        logger.trace("\n\t@@@ saveAddedLayersAndTreeModifications @@@");
         if (layers == null || layers.isEmpty()) {
             throw new IllegalParameterFault("List of layers is null or empty");
         }
@@ -278,12 +258,12 @@ class LayerServiceImpl {
         return arrayList;
     }
 
-    public boolean saveDeletedLayerAndTreeModifications(Long layerId,
+    public boolean saveDeletedLayerAndTreeModifications(Long layerID,
             GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault {
-        GPLayer layer = layerDao.find(layerId);
+        GPLayer layer = layerDao.find(layerID);
         if (layer == null) {
-            throw new ResourceNotFoundFault("Layer not found", layerId);
+            throw new ResourceNotFoundFault("Layer not found", layerID);
         }
         EntityCorrectness.checkLayerLog(layer); // TODO assert
 
@@ -301,19 +281,19 @@ class LayerServiceImpl {
         return result;
     }
 
-    public boolean saveCheckStatusLayerAndTreeModifications(Long layerId, boolean checked)
+    public boolean saveCheckStatusLayerAndTreeModifications(Long layerID, boolean checked)
             throws ResourceNotFoundFault {
-        GPLayer layer = layerDao.find(layerId);
+        GPLayer layer = layerDao.find(layerID);
         if (layer == null) {
-            throw new ResourceNotFoundFault("Layer not found", layerId);
+            throw new ResourceNotFoundFault("Layer not found", layerID);
         }
         EntityCorrectness.checkLayerLog(layer); // TODO assert
 
-        boolean checkSave = layerDao.persistCheckStatusLayer(layerId, checked);
+        boolean checkSave = layerDao.persistCheckStatusLayer(layerID, checked);
 
         // Iff checked is true, all the ancestor folders must be checked
         if (checked && checkSave) {
-            Long[] layerAncestors = this.getIdsUserFolderAndAncestors(layer.getFolder());
+            Long[] layerAncestors = this.getAncestorIds(layer.getFolder());
             return folderDao.persistCheckStatusFolders(true, layerAncestors);
         }
 
@@ -325,33 +305,33 @@ class LayerServiceImpl {
      * 
      * The old and new folders (parent) will be extracted from DB
      */
-    public boolean fixCheckStatusLayerAndTreeModifications(Long layerId,
-            Long oldUserFolderId, Long newUserFolderId) throws ResourceNotFoundFault {
+    public boolean fixCheckStatusLayerAndTreeModifications(Long layerID,
+            Long oldFolderId, Long newFolderId) throws ResourceNotFoundFault {
         // Retrieve the layer
-        GPLayer layer = layerDao.find(layerId);
+        GPLayer layer = layerDao.find(layerID);
         if (layer == null) {
-            throw new ResourceNotFoundFault("Layer not found", layerId);
+            throw new ResourceNotFoundFault("Layer not found", layerID);
         }
 //        assert (layer.isChecked()) : "For Fix the check, the layer must be checked";
         EntityCorrectness.checkLayerLog(layer); // TODO assert
 
-        // Retrieve the UserFolders parent
-        GPFolder oldUserFolder = folderDao.find(oldUserFolderId);
-        if (oldUserFolder == null) {
-            throw new ResourceNotFoundFault("Old Folder not found", oldUserFolderId);
+        // Retrieve the folders parent
+        GPFolder oldFolder = folderDao.find(oldFolderId);
+        if (oldFolder == null) {
+            throw new ResourceNotFoundFault("Old Folder not found", oldFolderId);
         }
-        EntityCorrectness.checkFolderLog(oldUserFolder); // TODO assert
+        EntityCorrectness.checkFolderLog(oldFolder); // TODO assert
 
-        GPFolder newUserFolder = folderDao.find(newUserFolderId);
-        if (newUserFolder == null) {
-            throw new ResourceNotFoundFault("New Folder not found", newUserFolderId);
+        GPFolder newFolder = folderDao.find(newFolderId);
+        if (newFolder == null) {
+            throw new ResourceNotFoundFault("New Folder not found", newFolderId);
         }
-        EntityCorrectness.checkFolderLog(newUserFolder); // TODO assert
+        EntityCorrectness.checkFolderLog(newFolder); // TODO assert
 
         // Test if the Check was valid (all the old ancestor must be checked)
-        GPFolder[] oldAncestors = this.getUserFolderAndAncestors(oldUserFolder);
-        if (this.isAllUserFoldersChecked(oldAncestors)) {
-            Long[] idNewAncestors = this.getIdsUserFolderAndAncestors(newUserFolder);
+        GPFolder[] oldAncestors = this.getAncestors(oldFolder);
+        if (this.isAllFoldersChecked(oldAncestors)) {
+            Long[] idNewAncestors = this.getAncestorIds(newFolder);
             return folderDao.persistCheckStatusFolders(true, idNewAncestors);
         }
 
@@ -422,22 +402,22 @@ class LayerServiceImpl {
     }
 
     private void executeFoldersModifications(List<GPFolder> elements, int value) {
-        for (GPFolder userFolder : elements) {
-            EntityCorrectness.checkFolderLog(userFolder); // TODO assert
-            userFolder.setPosition(userFolder.getPosition() + value);
+        for (GPFolder folder : elements) {
+            EntityCorrectness.checkFolderLog(folder); // TODO assert
+            folder.setPosition(folder.getPosition() + value);
         }
     }
 
     public boolean saveLayerProperties(ShortRasterPropertiesDTO layerProperties)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        Long layerId = layerProperties.getId();
-        if (layerId == -1) {
+        Long layerID = layerProperties.getId();
+        if (layerID == -1) {
             throw new IllegalParameterFault("Layer ID must be setted");
         }
 
-        GPLayer layer = layerDao.find(layerId);
+        GPLayer layer = layerDao.find(layerID);
         if (layer == null) {
-            throw new ResourceNotFoundFault("Layer not found", layerId);
+            throw new ResourceNotFoundFault("Layer not found", layerID);
         }
 
         layer.setAlias(layerProperties.getAlias());
@@ -453,41 +433,41 @@ class LayerServiceImpl {
 
         layerDao.merge(layer);
 
-        boolean checkSave = layerDao.persistCheckStatusLayer(layerId, layerProperties.isChecked());
+        boolean checkSave = layerDao.persistCheckStatusLayer(layerID, layerProperties.isChecked());
 
         // Iff checked is true and the check status was modified, all the ancestor folders must be checked
         if (layerProperties.isChecked() && checkSave) {
-            Long[] layerAncestors = this.getIdsUserFolderAndAncestors(layer.getFolder());
+            Long[] layerAncestors = this.getAncestorIds(layer.getFolder());
             return folderDao.persistCheckStatusFolders(true, layerAncestors);
         }
 
         return true;
     }
 
-    public GPRasterLayer getRasterLayer(Long layerId) throws ResourceNotFoundFault {
-        GPRasterLayer layer = (GPRasterLayer) layerDao.find(layerId);
+    public GPRasterLayer getRasterLayer(Long layerID) throws ResourceNotFoundFault {
+        GPRasterLayer layer = (GPRasterLayer) layerDao.find(layerID);
         if (layer == null) {
-            throw new ResourceNotFoundFault("Layer not found", layerId);
+            throw new ResourceNotFoundFault("Layer not found", layerID);
         }
         EntityCorrectness.checkLayerLog(layer); // TODO assert
 
         return layer;
     }
 
-    public GPVectorLayer getVectorLayer(Long layerId) throws ResourceNotFoundFault {
-        GPVectorLayer layer = (GPVectorLayer) layerDao.find(layerId);
+    public GPVectorLayer getVectorLayer(Long layerID) throws ResourceNotFoundFault {
+        GPVectorLayer layer = (GPVectorLayer) layerDao.find(layerID);
         if (layer == null) {
-            throw new ResourceNotFoundFault("Layer not found", layerId);
+            throw new ResourceNotFoundFault("Layer not found", layerID);
         }
         EntityCorrectness.checkLayerLog(layer); // TODO assert
 
         return layer;
     }
 
-    public ShortLayerDTO getShortLayer(Long layerId) throws ResourceNotFoundFault {
-        GPLayer layer = layerDao.find(layerId);
+    public ShortLayerDTO getShortLayer(Long layerID) throws ResourceNotFoundFault {
+        GPLayer layer = layerDao.find(layerID);
         if (layer == null) {
-            throw new ResourceNotFoundFault("Layer not found", layerId);
+            throw new ResourceNotFoundFault("Layer not found", layerID);
         }
         EntityCorrectness.checkLayerLog(layer); // TODO assert
 
@@ -502,60 +482,60 @@ class LayerServiceImpl {
 
         List<GPLayer> foundLayer = layerDao.search(searchCriteria);
 
-        EntityCorrectness.checkCompleteLayerListLog(foundLayer); // TODO assert
+        EntityCorrectness.checkLayerCompleteListLog(foundLayer); // TODO assert
 
         return ShortLayerDTO.convertToShortLayerDTOList(foundLayer);
     }
 
-    public GPBBox getBBox(Long layerId) throws ResourceNotFoundFault {
-        GPLayer layer = layerDao.find(layerId);
+    public GPBBox getBBox(Long layerID) throws ResourceNotFoundFault {
+        GPLayer layer = layerDao.find(layerID);
         if (layer == null) {
-            throw new ResourceNotFoundFault("Layer not found", layerId);
+            throw new ResourceNotFoundFault("Layer not found", layerID);
         }
         EntityCorrectness.checkLayerLog(layer); // TODO assert
 
         return layer.getBbox();
     }
 
-    public GPLayerInfo getLayerInfo(Long layerId) throws ResourceNotFoundFault {
-        GPRasterLayer layer = (GPRasterLayer) layerDao.find(layerId);
+    public GPLayerInfo getLayerInfo(Long layerID) throws ResourceNotFoundFault {
+        GPRasterLayer layer = (GPRasterLayer) layerDao.find(layerID);
         if (layer == null) {
-            throw new ResourceNotFoundFault("Layer not found", layerId);
+            throw new ResourceNotFoundFault("Layer not found", layerID);
         }
         EntityCorrectness.checkLayerLog(layer); // TODO assert
 
         return layer.getLayerInfo();
     }
 
-//    public List<StyleDTO> getLayerStyles(Long layerId) {
+//    public List<StyleDTO> getLayerStyles(Long layerID) {
 //        Search searchCriteria = new Search(GPStyle.class);
 //
 //        searchCriteria.addSortAsc("name");
-//        searchCriteria.addFilterEqual("layer.id", layerId);
+//        searchCriteria.addFilterEqual("layer.id", layerID);
 //
 //        List<GPStyle> foundStyle = styleDao.search(searchCriteria);
 //        return StyleDTO.convertToStyleDTOList(foundStyle);
 //    }
 //  
-//    public Point getGeometry(Long layerId) throws ResourceNotFoundFault {
-//        GPVectorLayer layer = (GPVectorLayer)layerDao.find(layerId);
+//    public Point getGeometry(Long layerID) throws ResourceNotFoundFault {
+//        GPVectorLayer layer = (GPVectorLayer)layerDao.find(layerID);
 //        if (layer == null) {
-//            throw new ResourceNotFoundFault("Layer not found", layerId);
+//            throw new ResourceNotFoundFault("Layer not found", layerID);
 //        }
 //
 //        return layer.getGeometry();
 //    }
-    public GPLayerType getLayerType(Long layerId) throws ResourceNotFoundFault {
-        GPLayer layer = layerDao.find(layerId);
+    public GPLayerType getLayerType(Long layerID) throws ResourceNotFoundFault {
+        GPLayer layer = layerDao.find(layerID);
         if (layer == null) {
-            throw new ResourceNotFoundFault("Layer not found", layerId);
+            throw new ResourceNotFoundFault("Layer not found", layerID);
         }
         EntityCorrectness.checkLayerLog(layer); // TODO assert
 
         return layer.getLayerType();
     }
 
-    public ArrayList<String> getLayersDataSourceByProjectId(Long projectId)
+    public ArrayList<String> getLayersDataSourceByProjectID(Long projectId)
             throws ResourceNotFoundFault {
         GPProject project = projectDao.find(projectId);
         if (project == null) {
@@ -582,11 +562,11 @@ class LayerServiceImpl {
     }
 
     /**
-     * @return UserFolder argument and his ancestor folders
+     * @return folder argument and his ancestor folders
      */
-    private GPFolder[] getUserFolderAndAncestors(GPFolder userFolderChild)
+    private GPFolder[] getAncestors(GPFolder folder)
             throws ResourceNotFoundFault {
-        Long[] idFolderAndAncestors = this.getIdsUserFolderAndAncestors(userFolderChild);
+        Long[] idFolderAndAncestors = this.getAncestorIds(folder);
         GPFolder[] folderAndAncestors = folderDao.find(idFolderAndAncestors);
         if (folderAndAncestors.length == 0) {
             throw new ResourceNotFoundFault("Ancestors Folders of Layer not found");
@@ -595,13 +575,13 @@ class LayerServiceImpl {
     }
 
     /**
-     * @return IDs of UserFolder argument and his ancestor folders
+     * @return IDs of parent folder argument and his ancestor folders
      */
-    private Long[] getIdsUserFolderAndAncestors(GPFolder userFolder) {
+    private Long[] getAncestorIds(GPFolder parent) {
         List<Long> ancestors = new ArrayList<Long>();
-        ancestors.add(userFolder.getId());
+        ancestors.add(parent.getId());
 
-        GPFolder ancestorIth = userFolder.getParent();
+        GPFolder ancestorIth = parent.getParent();
         while (ancestorIth != null) {
             ancestors.add(ancestorIth.getId());
             ancestorIth = ancestorIth.getParent();
@@ -610,12 +590,12 @@ class LayerServiceImpl {
     }
 
     /**
-     * @return True if all UserFolders are checked
+     * @return True if all folders are checked
      */
-    private boolean isAllUserFoldersChecked(GPFolder... userFolders)
+    private boolean isAllFoldersChecked(GPFolder... folders)
             throws ResourceNotFoundFault {
-        for (GPFolder userFolder : userFolders) {
-            if (!userFolder.isChecked()) {
+        for (GPFolder folder : folders) {
+            if (!folder.isChecked()) {
                 return false;
             }
         }

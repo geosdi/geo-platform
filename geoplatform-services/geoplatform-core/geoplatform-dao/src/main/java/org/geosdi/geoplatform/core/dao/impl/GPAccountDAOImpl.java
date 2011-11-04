@@ -41,44 +41,88 @@ import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
 import java.util.List;
 
-import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
-import org.geosdi.geoplatform.core.model.GPAuthority;
+import org.geosdi.geoplatform.core.dao.GPAccountDAO;
+import org.geosdi.geoplatform.core.model.GPAccount;
+import org.geosdi.geoplatform.core.model.GPApplication;
+import org.geosdi.geoplatform.core.model.GPUser;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @author Francesco Izzi - CNR IMAA - geoSDI Group
+ * @author giuseppe
  * 
  */
 @Transactional
-public class GPAuthorityDAOImpl extends BaseDAO<GPAuthority, Long> implements
-        GPAuthorityDAO {
+public class GPAccountDAOImpl extends BaseDAO<GPAccount, Long>
+        implements GPAccountDAO {
 
     @Override
-    public void persist(GPAuthority... authorities) {
-        super.persist(authorities);
+    public void persist(GPAccount... accounts) {
+        super.persist(accounts);
     }
 
     @Override
-    public boolean remove(GPAuthority authority) {
-        return super.remove(authority);
+    public GPAccount merge(GPAccount account) {
+        return super.merge(account);
     }
 
     @Override
-    public void removeAllUserAuthorities(String stringID) {
-        List<GPAuthority> authorities = this.findByStringID(stringID);
-        super.remove(authorities.toArray(new GPAuthority[authorities.size()]));
+    public GPAccount[] merge(GPAccount... accounts) {
+        return super.merge(accounts);
+    }
+
+    @Override
+    public boolean remove(GPAccount account) {
+        return super.remove(account);
+    }
+
+    @Override
+    public boolean removeById(Long id) {
+        return super.removeById(id);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<GPAuthority> search(ISearch search) {
+    public List<GPAccount> search(ISearch search) {
         return super.search(search);
     }
 
     @Override
-    public List<GPAuthority> findByStringID(String stringID) {
+    public GPUser findByUsername(String username) {
         Search search = new Search();
-        search.addFilterEqual("stringID", stringID);
-        return super.search(search);
+        search.addFilterEqual("username", username);
+        return super.searchUnique(search);
+    }
+
+    @Override
+    public GPUser findByEmail(String email) {
+        Search search = new Search();
+        search.addFilterEqual("emailAddress", email);
+        return super.searchUnique(search);
+    }
+
+    @Override
+    public GPApplication findByAppID(String appID) {
+        Search search = new Search();
+        search.addFilterEqual("appID", appID);
+        return super.searchUnique(search);
+    }
+
+    @Override
+    public GPAccount findByStringID(String stringID) {
+        GPAccount account = this.findByUsername(stringID);
+        if (account == null) {
+            account = this.findByAppID(stringID);
+        }
+        return account;
+    }
+
+    // TODO Optimize
+    @Override
+    public boolean resetDefaultProject(Long defaultProjectId) {
+        em().createQuery("UPDATE User u SET u.defaultProjectID = null WHERE u.defaultProjectID=:defaultProjectId").
+                setParameter("defaultProjectId", defaultProjectId).executeUpdate();
+        em().createQuery("UPDATE Application a SET a.defaultProjectID = null WHERE a.defaultProjectID=:defaultProjectId").
+                setParameter("defaultProjectId", defaultProjectId).executeUpdate();
+        return true;
     }
 }

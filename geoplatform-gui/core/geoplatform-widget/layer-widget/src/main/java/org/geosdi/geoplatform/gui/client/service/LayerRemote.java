@@ -80,11 +80,11 @@ public interface LayerRemote extends RemoteService {
 
     /**
      * 
-     * @param folderId
+     * @param folderID
      * @return
      * @throws GeoPlatformException
      */
-    public ArrayList<IGPFolderElements> loadFolderElements(Long folderId) throws GeoPlatformException;
+    public ArrayList<IGPFolderElements> loadFolderElements(Long folderID) throws GeoPlatformException;
 
     /**
      * 

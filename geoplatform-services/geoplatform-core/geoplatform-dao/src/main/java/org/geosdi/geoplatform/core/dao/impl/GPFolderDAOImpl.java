@@ -105,10 +105,12 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long>
     }
 
     @Override
-    public boolean updatePositionsRangeInOppositeWay(
+    public boolean updatePositionsRangeInOppositeWay(Long projectID,
             int beginPositionFirstRange, int endPositionFirstRange,
             int beginPositionSecondRange, int endPositionSecondRange,
             int deltaValueFirstRange, int deltaValueSecondRange) {
+        assert (projectID != null) : "projectID must be not null";
+        assert (projectID > 0) : "projectID must be greater than zero";
         assert (beginPositionFirstRange > 0) : "beginPositionFirstRange must be greater than zero";
         assert (beginPositionSecondRange > 0) : "beginPositionSecondRange must be greater than zero";
         assert (beginPositionFirstRange < endPositionFirstRange) : "beginPositionFirstRange must be lesser than endPositionFirstRange";
@@ -118,6 +120,7 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long>
         assert (deltaValueSecondRange != 0) : "deltaValueSecondRange does not be 0";
         // Select the folders of interest (first range)
         Search search = new Search();
+        search.addFilterEqual("project.id", projectID);
         search.addFilterGreaterOrEqual("position", beginPositionFirstRange).
                 addFilterLessOrEqual("position", endPositionFirstRange);
         List<GPFolder> matchingFoldersFirstRange = super.search(search);
@@ -133,6 +136,7 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long>
 
         // Select the folders of interest (second range)
         search = new Search();
+        search.addFilterEqual("project.id", projectID);
         search.addFilterGreaterOrEqual("position", beginPositionSecondRange).
                 addFilterLessOrEqual("position", endPositionSecondRange);
         List<GPFolder> matchingFoldersSecondRange = super.search(search);
@@ -198,12 +202,15 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long>
     }
 
     @Override
-    public boolean updatePositionsRange(int beginPosition, int endPosition,
-            int deltaValue) {
+    public boolean updatePositionsRange(Long projectID,
+            int beginPosition, int endPosition, int deltaValue) {
+        assert (projectID != null) : "projectID must be not null";
+        assert (projectID > 0) : "projectID must be greater than zero";
         assert (beginPosition < endPosition) : "beginPosition must be lesser than endPosition";
         assert (deltaValue != 0) : "deltaValue does not be 0";
         // Select the folders of interest (position >= beginP && position <= endP)
         Search search = new Search();
+        search.addFilterEqual("project.id", projectID);
         search.addFilterGreaterOrEqual("position", beginPosition).
                 addFilterLessOrEqual("position", endPosition);
         List<GPFolder> matchingFolders = super.search(search);
@@ -220,10 +227,14 @@ public class GPFolderDAOImpl extends BaseDAO<GPFolder, Long>
     }
 
     @Override
-    public boolean updatePositionsLowerBound(int lowerBoundPosition, int deltaValue) {
+    public boolean updatePositionsLowerBound(Long projectID,
+            int lowerBoundPosition, int deltaValue) {
+        assert (projectID != null) : "projectID must be not null";
+        assert (projectID > 0) : "projectID must be greater than zero";
         assert (deltaValue != 0) : "deltaValue does not be 0";
         // Select the folders of interest (position >= lowerBoundP)
         Search search = new Search();
+        search.addFilterEqual("project.id", projectID);
         search.addFilterGreaterOrEqual("position", lowerBoundPosition);
         List<GPFolder> matchingFolders = super.search(search);
 

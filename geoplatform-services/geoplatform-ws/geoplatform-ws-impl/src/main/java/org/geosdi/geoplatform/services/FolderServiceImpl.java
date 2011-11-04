@@ -176,27 +176,28 @@ class FolderServiceImpl {
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
         }
+        EntityCorrectness.checkProject(project); // TODO assert
         folder.setProject(project);
-        EntityCorrectness.checkFolder(folder); // TODO assert       
 
         if (parentId != null) {
             if (descendantsMapData.getDescendantsMap().isEmpty()) { // TODO assert
                 throw new IllegalParameterFault("descendantsMapData must have one or more entries if the folder has a parent");
             }
 
-            GPFolder parentFolder = folderDao.find(parentId.longValue());
+            GPFolder parentFolder = folderDao.find(parentId);
             if (parentFolder == null) {
-                throw new ResourceNotFoundFault("Folder parent not found", parentFolder.getId());
+                throw new ResourceNotFoundFault("Folder parent not found", parentId);
             }
             EntityCorrectness.checkFolder(parentFolder); // TODO assert
             folder.setParent(parentFolder);
         }
+        EntityCorrectness.checkFolder(folder); // TODO assert
 
         int newPosition = folder.getPosition();
         int increment = 1;
         // Shift positions
-        folderDao.updatePositionsLowerBound(newPosition, increment);
-        layerDao.updatePositionsLowerBound(newPosition, increment);
+        folderDao.updatePositionsLowerBound(projectId, newPosition, increment);
+        layerDao.updatePositionsLowerBound(projectId, newPosition, increment);
 
         folderDao.persist(folder);
 
@@ -219,9 +220,10 @@ class FolderServiceImpl {
 
         boolean result = folderDao.remove(folder);
 
+        Long projectId = folder.getProject().getId();
         // Shift positions (shift must be done only after removing folder)
-        folderDao.updatePositionsLowerBound(oldPosition, decrement);
-        layerDao.updatePositionsLowerBound(oldPosition, decrement);
+        folderDao.updatePositionsLowerBound(projectId, oldPosition, decrement);
+        layerDao.updatePositionsLowerBound(projectId, oldPosition, decrement);
 
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
         this.updateNumberOfElements(folder, decrement);

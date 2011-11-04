@@ -99,10 +99,12 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long>
     }
 
     @Override
-    public boolean updatePositionsRangeInOppositeWay(
+    public boolean updatePositionsRangeInOppositeWay(Long projectID,
             int beginPositionFirstRange, int endPositionFirstRange,
             int beginPositionSecondRange, int endPositionSecondRange,
             int deltaValueFirstRange, int deltaValueSecondRange) {
+        assert (projectID != null) : "projectID must be not null";
+        assert (projectID > 0) : "projectID must be greater than zero";
         assert (beginPositionFirstRange > 0) : "beginPositionFirstRange must be greater than zero";
         assert (beginPositionSecondRange > 0) : "beginPositionSecondRange must be greater than zero";
         assert (beginPositionFirstRange < endPositionFirstRange) : "beginPositionFirstRange must be lesser than endPositionFirstRange";
@@ -112,6 +114,7 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long>
         assert (deltaValueSecondRange != 0) : "deltaValueSecondRange does not be 0";
         // Select the layers of interest (first range)
         Search search = new Search();
+        search.addFilterEqual("project.id", projectID);
         search.addFilterGreaterOrEqual("position", beginPositionFirstRange).
                 addFilterLessOrEqual("position", endPositionFirstRange);
         List<GPLayer> matchingLayerFirstRange = super.search(search);
@@ -127,6 +130,7 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long>
 
         // Select the layers of interest (second range)
         search = new Search();
+        search.addFilterEqual("project.id", projectID);
         search.addFilterGreaterOrEqual("position", beginPositionSecondRange).
                 addFilterLessOrEqual("position", endPositionSecondRange);
         List<GPLayer> matchingLayerSecondRange = super.search(search);
@@ -192,12 +196,15 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long>
     }
 
     @Override
-    public boolean updatePositionsRange(int beginPosition, int endPosition,
-            int deltaValue) {
+    public boolean updatePositionsRange(Long projectID,
+            int beginPosition, int endPosition, int deltaValue) {
+        assert (projectID != null) : "projectID must be not null";
+        assert (projectID > 0) : "projectID must be greater than zero";
         assert (beginPosition <= endPosition) : "beginPosition must be lesser than or equal endPosition";
         assert (deltaValue != 0) : "deltaValue does not be 0";
         // Select the layers of interest
         Search search = new Search();
+        search.addFilterEqual("project.id", projectID);
         search.addFilterGreaterOrEqual("position", beginPosition).
                 addFilterLessOrEqual("position", endPosition);
         List<GPLayer> matchingLayers = super.search(search);
@@ -214,10 +221,14 @@ public class GPLayerDAOImpl extends BaseDAO<GPLayer, Long>
     }
 
     @Override
-    public boolean updatePositionsLowerBound(int lowerBoundPosition, int deltaValue) {
+    public boolean updatePositionsLowerBound(Long projectID,
+            int lowerBoundPosition, int deltaValue) {
+        assert (projectID != null) : "projectID must be not null";
+        assert (projectID > 0) : "projectID must be greater than zero";
         assert (deltaValue != 0) : "deltaValue does not be 0";
         // Select the layers of interest
         Search search = new Search();
+        search.addFilterEqual("project.id", projectID);
         search.addFilterGreaterOrEqual("position", lowerBoundPosition);
         List<GPLayer> matchingLayers = super.search(search);
 

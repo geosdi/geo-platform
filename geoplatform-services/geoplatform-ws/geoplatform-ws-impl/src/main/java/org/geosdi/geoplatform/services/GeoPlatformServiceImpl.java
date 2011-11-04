@@ -436,7 +436,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="Project">
     // ==========================================================================
     // === Project
@@ -633,17 +632,16 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public Long saveAddedLayerAndTreeModifications(GPLayer layer, GPWebServiceMapData descendantsMapData)
+    public Long saveAddedLayerAndTreeModifications(Long projectID, Long parentID, GPLayer layer, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return layerServiceDelegate.saveAddedLayerAndTreeModifications(layer, descendantsMapData);
+        return layerServiceDelegate.saveAddedLayerAndTreeModifications(projectID, parentID, layer, descendantsMapData);
     }
 
     @Override
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(Long projectID, List<GPLayer> layers,
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(Long projectID, Long parentID, List<GPLayer> layers,
             GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return layerServiceDelegate.saveAddedLayersAndTreeModifications(projectID, layers,
-                descendantsMapData);
+        return layerServiceDelegate.saveAddedLayersAndTreeModifications(projectID, parentID, layers, descendantsMapData);
     }
 
     @Override

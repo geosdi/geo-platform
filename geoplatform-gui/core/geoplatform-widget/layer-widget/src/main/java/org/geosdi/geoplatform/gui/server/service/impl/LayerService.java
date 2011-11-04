@@ -285,8 +285,9 @@ public class LayerService implements ILayerService {
         ArrayList<Long> idSavedLayers = null;
         try {
             Long projectId = this.sessionUtility.getDefaultProjectFromUserSession(httpServletRequest);
+            Long parentFolderId = layersList.get(0).getFolder().getId();
             idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications(
-                    projectId, layersList, map);
+                    projectId, parentFolderId, layersList, map);
         } catch (ResourceNotFoundFault ex) {
             this.logger.error("Failed to save layers on LayerService: " + ex);
             throw new GeoPlatformException(ex);
@@ -613,12 +614,12 @@ public class LayerService implements ILayerService {
 
             this.sessionUtility.storeUserAndProjectInSession(user, projectID,
                     httpServletRequest);
-            
+
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         } catch (ResourceNotFoundFault ex) {
             logger.error("An Error Occured : " + ex.getMessage());
             throw new GeoPlatformException(ex);
-        } 
+        }
     }
 }

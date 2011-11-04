@@ -81,306 +81,306 @@ public class GPDAOTest extends BaseDAOTest {
     // Position of the firt child of the root (in business tree, equal total_number_of_element)
     private int endPosition = -1; // > beginPosition
 
-    @Before
-    public void setUp() {
-        logger.trace("\n\t@@@ " + getClass().getSimpleName() + ".setUp @@@");
-        userPositionTest = super.insertUser(usernamePositionTest);
-
-        endPosition = beginPosition + 930;
-
-        userPositionTestProject = super.createProject("user_project", false, 5, new Date(System.currentTimeMillis()));
-        projectDAO.persist(userPositionTestProject);
-        //
-        super.insertBindingUserProject(userPositionTest, userPositionTestProject, BasePermission.ADMINISTRATION.getMask());
-        //
-        rootFolder = super.createFolder("folder_of_" + usernamePositionTest, userPositionTestProject, null, beginPosition + 900); // 333930
-        rootFolder.setNumberOfDescendants(13);
-        rootFolder.setChecked(false);
-        //
-        folderDAO.persist(rootFolder);
-
-        folderA = super.createFolder("folder_position_test_A", userPositionTestProject, rootFolder, beginPosition + 600); // 333630     
-        folderB = super.createFolder("folder_position_test_B", userPositionTestProject, rootFolder, beginPosition + 300); // 333330               
-        folderA.setNumberOfDescendants(3);
-        folderB.setNumberOfDescendants(9);
-        folderA.setChecked(false);
-        folderB.setChecked(true);
-        //
-        folderDAO.persist(folderA, folderB);
-
-        rasterLayer = super.createRasterLayer(folderB, userPositionTestProject, beginPosition + 30); // 333030
-        vectorLayer = super.createVectorLayer(folderB, userPositionTestProject, beginPosition); // 333000
-        rasterLayer.setTitle(rasterLayer.getTitle() + "_position_test");
-        vectorLayer.setTitle(vectorLayer.getTitle() + "_position_test");
-        rasterLayer.setChecked(false);
-        vectorLayer.setChecked(true);
-        //
-        layerDAO.persist(rasterLayer, vectorLayer);
-    }
-
-    @After
-    public void tearDown() {
-        logger.trace("\n\t@@@ " + getClass().getSimpleName() + ".tearDown @@@");
-        // Remove user
-        accountDAO.remove(userPositionTest);
-        // Remove project and his folders and layers
-        projectDAO.remove(userPositionTestProject);
-    }
-
-    @Test
-    public void testCheckDAOs() {
-        Assert.assertNotNull("accountDAO is NULL", super.accountDAO);
-        Assert.assertNotNull("folderDAO is NULL", super.folderDAO);
-        Assert.assertNotNull("layerDAO is NULL", super.layerDAO);
-        Assert.assertNotNull("projectDAO is NULL", super.projectDAO);
-        Assert.assertNotNull("userProjectsDAO is NULL", super.accountProjectDAO);
-//        Assert.assertNotNull("styleDAO is NULL", super.styleDAO);
-    }
-
-    @Test
-    public void testTransactionsOnLayers() {
-        List<String> layerInfoKeywords = new ArrayList<String>();
-        layerInfoKeywords.add("keyword_test");
-
-        GPLayerInfo layerInfo = new GPLayerInfo();
-        layerInfo.setKeywords(layerInfoKeywords);
-        layerInfo.setQueryable(false);
-
-        String titleRasterLayer3 = "Raster Layer 3";
-        String titleVectorLayer3 = "Vector Layer 3";
-
-        try {
-            // "folder_position_test_A" ---> "rasterLayer3"
-            GPRasterLayer rasterLayer3 = super.createRasterLayer(folderA, userPositionTestProject, beginPosition);
-            rasterLayer3.setTitle(titleRasterLayer3);
-            rasterLayer3.setChecked(false);
-
-            // "folder_position_test_A" ---> "vectorLayer3"
-            GPVectorLayer vectorLayer3 = super.createVectorLayer(folderA, userPositionTestProject, beginPosition);
-            vectorLayer3.setTitle(titleVectorLayer3);
-            vectorLayer3.setChecked(true);
-
-            // "folder_position_test_A" ---> "rasterLayer4"
-            GPRasterLayer rasterLayer4 = super.createRasterLayer(folderA, userPositionTestProject, beginPosition);
-            rasterLayer4.setTitle(null);
-            rasterLayer4.setChecked(false);
-
-            // "folder_position_test_A" ---> "vectorLayer4"
-            GPVectorLayer vectorLayer4 = super.createVectorLayer(folderA, userPositionTestProject, beginPosition);
-            vectorLayer4.setTitle(null);
-            vectorLayer4.setChecked(true);
-            //
-            ArrayList<GPLayer> layersList = new ArrayList<GPLayer>();
-            layersList.add(rasterLayer3);
-            layersList.add(vectorLayer3);
-            layersList.add(rasterLayer4);
-            layersList.add(vectorLayer4);
-
-            GPLayer[] layersArray = layersList.toArray(new GPLayer[layersList.size()]);
-            layerDAO.persist(layersArray);
-            Assert.fail("saveAddedLayersAndTreeModifications must throws an exception");
-        } catch (Exception ex) {
-        }
-
-        GPLayer newRasterLayer3 = layerDAO.findByLayerName(titleRasterLayer3);
-        Assert.assertNull("rasterLayer3 must be null", newRasterLayer3);
-
-        GPLayer newVectorLayer3 = layerDAO.findByLayerName(titleVectorLayer3);
-        Assert.assertNull("rectorLayer3 must be null", newVectorLayer3);
-    }
-
-    //<editor-fold defaultstate="collapsed" desc="Test of updatePositionsRange">
-    /**
-     * Test of updatePositionsRange method for Folders
-     */
-    @Test
-    public void testIncreasePositionsFolders() {
-        logger.trace("\n\t@@@ testIncreasePositionsFolders @@@");
-        int deltaValue = 1;
-        // Increase
-        boolean check = folderDAO.updatePositionsRange(beginPosition, endPosition, deltaValue);
-        Assert.assertTrue("Increase Position Folders NOT done", check);
-
-        GPFolder userFolderUpdated = folderDAO.find(rootFolder.getId());
-        Assert.assertEquals("Position NOT increased for \"" + rootFolder.getName() + "\"",
-                userFolderUpdated.getPosition(), rootFolder.getPosition() + deltaValue);
-
-        GPFolder folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Position NOT increased for \"" + folderA.getName() + "\"",
-                folderAUpdated.getPosition(), folderA.getPosition() + deltaValue);
-
-        GPFolder folderBUpdated = folderDAO.find(folderB.getId());
-        Assert.assertEquals("Position NOT increased for \"" + folderB.getName() + "\"",
-                folderBUpdated.getPosition(), folderB.getPosition() + deltaValue);
-
-        // No Increase
-//        check = folderDAO.updatePositionsRange(Integer.MAX_VALUE - 1, Integer.MAX_VALUE, deltaValue);
-//        Assert.assertFalse("Increase Position Folders should NOT be done", check);
-    }
-
-    @Test
-    public void testDecreasePositionsFolders() {
-        logger.trace("\n\t@@@ testDecreasePositionsFolders @@@");
-        int deltaValue = -1;
-        // Decrease
-        boolean check = folderDAO.updatePositionsRange(beginPosition, endPosition, deltaValue);
-        Assert.assertTrue("Decrease Position Folders NOT done", check);
-
-        GPFolder userFolderUpdated = folderDAO.find(rootFolder.getId());
-        Assert.assertEquals("Position NOT decreased for \"" + rootFolder.getName() + "\"",
-                userFolderUpdated.getPosition(), rootFolder.getPosition() + deltaValue);
-
-        GPFolder folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Position NOT decreased for \"" + folderA.getName() + "\"",
-                folderAUpdated.getPosition(), folderA.getPosition() + deltaValue);
-
-        GPFolder folderBUpdated = folderDAO.find(folderB.getId());
-        Assert.assertEquals("Position NOT decreased for \"" + folderB.getName() + "\"",
-                folderBUpdated.getPosition(), folderB.getPosition() + deltaValue);
-
-        // No Decrease
-//        check = folderDAO.updatePositionsRange(Integer.MAX_VALUE - 1, Integer.MAX_VALUE, deltaValue);
-//        Assert.assertFalse("Decrease Position Folders should NOT be done", check);
-    }
-
-    /**
-     * Test of updatePositionsRange method for Layers
-     */
-    @Test
-    public void testIncreasePositionsLayers() {
-        logger.trace("\n\t@@@ testIncreasePositionsLayers @@@");
-        int deltaValue = 1;
-        // Increase
-        boolean check = layerDAO.updatePositionsRange(beginPosition, endPosition, deltaValue);
-        Assert.assertTrue("Increase Position Layers NOT done", check);
-
-        GPLayer rasterLayerUpdated = layerDAO.find(rasterLayer.getId());
-        Assert.assertEquals("Position NOT increased for \"" + rasterLayer.getName() + "\"",
-                rasterLayerUpdated.getPosition(), rasterLayer.getPosition() + deltaValue);
-
-        GPLayer vectorLayerUpdated = layerDAO.find(vectorLayer.getId());
-        Assert.assertEquals("Position NOT increased for \"" + vectorLayer.getName() + "\"",
-                vectorLayerUpdated.getPosition(), vectorLayer.getPosition() + deltaValue);
-
-        // No Increase
-//        check = layerDAO.updatePositionsRange(Integer.MAX_VALUE - 1, Integer.MAX_VALUE, deltaValue);
-//        Assert.assertFalse("Increase Position Layers should NOT be done", check);
-    }
-
-    @Test
-    public void testDecreasePositionsLayers() {
-        logger.trace("\n\t@@@ testDecreasePositionsLayers @@@");
-        int deltaValue = -1;
-        // Decrease
-        boolean check = layerDAO.updatePositionsRange(beginPosition, endPosition, deltaValue);
-        Assert.assertTrue("Decrease Position Layers NOT done", check);
-
-        GPLayer rasterLayerUpdated = layerDAO.find(rasterLayer.getId());
-        Assert.assertEquals("Position NOT decreased for \"" + rasterLayer.getName() + "\"",
-                rasterLayerUpdated.getPosition(), rasterLayer.getPosition() + deltaValue);
-
-        GPLayer vectorLayerUpdated = layerDAO.find(vectorLayer.getId());
-        Assert.assertEquals("Position NOT decreased for \"" + vectorLayer.getName() + "\"",
-                vectorLayerUpdated.getPosition(), vectorLayer.getPosition() + deltaValue);
-
-        // No Decrease
-//        check = layerDAO.updatePositionsRange(Integer.MAX_VALUE - 1, Integer.MAX_VALUE, deltaValue);
-//        Assert.assertFalse("Decrease Position Layers should NOT be done", check);
-    }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Test of updatePositionsLowerBound">
-    /**
-     * Test of updatePositionsLowerBound method for Foders
-     */
-    @Test
-    public void testShiftPositionsFolders() {
-        logger.trace("\n\t@@@ testShiftPositionsFolders @@@");
-        int deltaValue = 33;
-        // Shift
-        boolean check = folderDAO.updatePositionsLowerBound(beginPosition, deltaValue);
-        Assert.assertTrue("Shift Position Folders NOT done", check);
-
-        GPFolder userFolderUpdated = folderDAO.find(rootFolder.getId());
-        Assert.assertEquals("Shift Position NOT done for \"" + rootFolder.getName() + "\"",
-                userFolderUpdated.getPosition(), rootFolder.getPosition() + deltaValue);
-
-        GPFolder folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Shift Position NOT done for \"" + folderA.getName() + "\"",
-                folderAUpdated.getPosition(), folderA.getPosition() + deltaValue);
-
-        GPFolder folderBUpdated = folderDAO.find(folderB.getId());
-        Assert.assertEquals("Shift Position NOT done for \"" + folderB.getName() + "\"",
-                folderBUpdated.getPosition(), folderB.getPosition() + deltaValue);
-
-        // No Shift
-//        check = folderDAO.updatePositionsLowerBound(Integer.MAX_VALUE, deltaValue);
-//        Assert.assertFalse("Shift Position Folders should NOT be done", check);
-    }
-
-    /**
-     * Test of updatePositionsLowerBound method for Layers
-     */
-    @Test
-    public void testShiftPositionsLayers() {
-        logger.trace("\n\t@@@ testShiftPositionsLayers @@@");
-        int deltaValue = 99;
-        // Shift
-        boolean check = layerDAO.updatePositionsLowerBound(beginPosition, deltaValue);
-        Assert.assertTrue("Shift Position Layers NOT done", check);
-
-        GPLayer rasterLayerUpdated = layerDAO.find(rasterLayer.getId());
-        Assert.assertEquals("Shift Position NOT done for \"" + rasterLayer.getName() + "\"",
-                rasterLayerUpdated.getPosition(), rasterLayer.getPosition() + deltaValue);
-
-        GPLayer vectorLayerUpdated = layerDAO.find(vectorLayer.getId());
-        Assert.assertEquals("Shift Position NOT done for \"" + vectorLayer.getName() + "\"",
-                vectorLayerUpdated.getPosition(), vectorLayer.getPosition() + deltaValue);
-
-        // No Shift
-//        check = layerDAO.updatePositionsLowerBound(Integer.MAX_VALUE, deltaValue);
-//        Assert.assertFalse("Shift Position Layers should NOT be done", check);
-    }
-    //</editor-fold>
-
-    /**
-     * Test of updateAncestorsDescendants method for Folders
-     */
-    @Test
-    public void testUpdateAncestorsDescendants() {
-        logger.trace("\n\t@@@ testUpdateAncestorsDescendants @@@");
-
-        Map<Long, Integer> descendantsMap = new HashMap<Long, Integer>();
-        descendantsMap.put(rootFolder.getId(), 37);
-        descendantsMap.put(folderB.getId(), 31);
-
-        // Update
-        boolean check = folderDAO.updateAncestorsDescendants(descendantsMap);
-        Assert.assertTrue("Update Ancestors Descendants NOT done", check);
-
-        GPFolder userFolderUpdated = folderDAO.find(rootFolder.getId());
-        Assert.assertEquals("Ancestors Descendants NOT updated for \"" + rootFolder.getName() + "\"",
-                userFolderUpdated.getNumberOfDescendants(),
-                Integer.parseInt(descendantsMap.get(userFolderUpdated.getId()).toString()));
-
-        GPFolder folderBUpdated = folderDAO.find(folderB.getId());
-        Assert.assertEquals("Ancestors Descendants NOT updated for \"" + folderB.getName() + "\"",
-                folderBUpdated.getNumberOfDescendants(),
-                Integer.parseInt(descendantsMap.get(folderBUpdated.getId()).toString()));
-
-        GPFolder folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Ancestors Descendants NOT updated for \"" + folderA.getName() + "\"",
-                folderAUpdated.getNumberOfDescendants(), folderA.getNumberOfDescendants());
-
-        // No Update
-//        descendantsMap.clear();
-//        check = folderDAO.updateAncestorsDescendants(descendantsMap);
-//        Assert.assertFalse("Update Ancestors Descendants should NOT be done (empty map)", check);
+//    @Before
+//    public void setUp() {
+//        logger.trace("\n\t@@@ " + getClass().getSimpleName() + ".setUp @@@");
+//        userPositionTest = super.insertUser(usernamePositionTest);
 //
-//        descendantsMap.put(Long.MAX_VALUE, 3);
-//        check = folderDAO.updateAncestorsDescendants(descendantsMap);
-//        Assert.assertFalse("Update Ancestors Descendants should NOT be done (nothing to update)", check);
-    }
+//        endPosition = beginPosition + 930;
+//
+//        userPositionTestProject = super.createProject("user_project", false, 5, new Date(System.currentTimeMillis()));
+//        projectDAO.persist(userPositionTestProject);
+//        //
+//        super.insertBindingUserProject(userPositionTest, userPositionTestProject, BasePermission.ADMINISTRATION.getMask());
+//        //
+//        rootFolder = super.createFolder("folder_of_" + usernamePositionTest, userPositionTestProject, null, beginPosition + 900); // 333930
+//        rootFolder.setNumberOfDescendants(13);
+//        rootFolder.setChecked(false);
+//        //
+//        folderDAO.persist(rootFolder);
+//
+//        folderA = super.createFolder("folder_position_test_A", userPositionTestProject, rootFolder, beginPosition + 600); // 333630     
+//        folderB = super.createFolder("folder_position_test_B", userPositionTestProject, rootFolder, beginPosition + 300); // 333330               
+//        folderA.setNumberOfDescendants(3);
+//        folderB.setNumberOfDescendants(9);
+//        folderA.setChecked(false);
+//        folderB.setChecked(true);
+//        //
+//        folderDAO.persist(folderA, folderB);
+//
+//        rasterLayer = super.createRasterLayer(folderB, userPositionTestProject, beginPosition + 30); // 333030
+//        vectorLayer = super.createVectorLayer(folderB, userPositionTestProject, beginPosition); // 333000
+//        rasterLayer.setTitle(rasterLayer.getTitle() + "_position_test");
+//        vectorLayer.setTitle(vectorLayer.getTitle() + "_position_test");
+//        rasterLayer.setChecked(false);
+//        vectorLayer.setChecked(true);
+//        //
+//        layerDAO.persist(rasterLayer, vectorLayer);
+//    }
+//
+//    @After
+//    public void tearDown() {
+//        logger.trace("\n\t@@@ " + getClass().getSimpleName() + ".tearDown @@@");
+//        // Remove user
+//        accountDAO.remove(userPositionTest);
+//        // Remove project and his folders and layers
+//        projectDAO.remove(userPositionTestProject);
+//    }
+//
+//    @Test
+//    public void testCheckDAOs() {
+//        Assert.assertNotNull("accountDAO is NULL", super.accountDAO);
+//        Assert.assertNotNull("folderDAO is NULL", super.folderDAO);
+//        Assert.assertNotNull("layerDAO is NULL", super.layerDAO);
+//        Assert.assertNotNull("projectDAO is NULL", super.projectDAO);
+//        Assert.assertNotNull("userProjectsDAO is NULL", super.accountProjectDAO);
+////        Assert.assertNotNull("styleDAO is NULL", super.styleDAO);
+//    }
+//
+//    @Test
+//    public void testTransactionsOnLayers() {
+//        List<String> layerInfoKeywords = new ArrayList<String>();
+//        layerInfoKeywords.add("keyword_test");
+//
+//        GPLayerInfo layerInfo = new GPLayerInfo();
+//        layerInfo.setKeywords(layerInfoKeywords);
+//        layerInfo.setQueryable(false);
+//
+//        String titleRasterLayer3 = "Raster Layer 3";
+//        String titleVectorLayer3 = "Vector Layer 3";
+//
+//        try {
+//            // "folder_position_test_A" ---> "rasterLayer3"
+//            GPRasterLayer rasterLayer3 = super.createRasterLayer(folderA, userPositionTestProject, beginPosition);
+//            rasterLayer3.setTitle(titleRasterLayer3);
+//            rasterLayer3.setChecked(false);
+//
+//            // "folder_position_test_A" ---> "vectorLayer3"
+//            GPVectorLayer vectorLayer3 = super.createVectorLayer(folderA, userPositionTestProject, beginPosition);
+//            vectorLayer3.setTitle(titleVectorLayer3);
+//            vectorLayer3.setChecked(true);
+//
+//            // "folder_position_test_A" ---> "rasterLayer4"
+//            GPRasterLayer rasterLayer4 = super.createRasterLayer(folderA, userPositionTestProject, beginPosition);
+//            rasterLayer4.setTitle(null);
+//            rasterLayer4.setChecked(false);
+//
+//            // "folder_position_test_A" ---> "vectorLayer4"
+//            GPVectorLayer vectorLayer4 = super.createVectorLayer(folderA, userPositionTestProject, beginPosition);
+//            vectorLayer4.setTitle(null);
+//            vectorLayer4.setChecked(true);
+//            //
+//            ArrayList<GPLayer> layersList = new ArrayList<GPLayer>();
+//            layersList.add(rasterLayer3);
+//            layersList.add(vectorLayer3);
+//            layersList.add(rasterLayer4);
+//            layersList.add(vectorLayer4);
+//
+//            GPLayer[] layersArray = layersList.toArray(new GPLayer[layersList.size()]);
+//            layerDAO.persist(layersArray);
+//            Assert.fail("saveAddedLayersAndTreeModifications must throws an exception");
+//        } catch (Exception ex) {
+//        }
+//
+//        GPLayer newRasterLayer3 = layerDAO.findByLayerName(titleRasterLayer3);
+//        Assert.assertNull("rasterLayer3 must be null", newRasterLayer3);
+//
+//        GPLayer newVectorLayer3 = layerDAO.findByLayerName(titleVectorLayer3);
+//        Assert.assertNull("rectorLayer3 must be null", newVectorLayer3);
+//    }
+//
+//    //<editor-fold defaultstate="collapsed" desc="Test of updatePositionsRange">
+//    /**
+//     * Test of updatePositionsRange method for Folders
+//     */
+//    @Test
+//    public void testIncreasePositionsFolders() {
+//        logger.trace("\n\t@@@ testIncreasePositionsFolders @@@");
+//        int deltaValue = 1;
+//        // Increase
+//        boolean check = folderDAO.updatePositionsRange(beginPosition, endPosition, deltaValue);
+//        Assert.assertTrue("Increase Position Folders NOT done", check);
+//
+//        GPFolder userFolderUpdated = folderDAO.find(rootFolder.getId());
+//        Assert.assertEquals("Position NOT increased for \"" + rootFolder.getName() + "\"",
+//                userFolderUpdated.getPosition(), rootFolder.getPosition() + deltaValue);
+//
+//        GPFolder folderAUpdated = folderDAO.find(folderA.getId());
+//        Assert.assertEquals("Position NOT increased for \"" + folderA.getName() + "\"",
+//                folderAUpdated.getPosition(), folderA.getPosition() + deltaValue);
+//
+//        GPFolder folderBUpdated = folderDAO.find(folderB.getId());
+//        Assert.assertEquals("Position NOT increased for \"" + folderB.getName() + "\"",
+//                folderBUpdated.getPosition(), folderB.getPosition() + deltaValue);
+//
+//        // No Increase
+////        check = folderDAO.updatePositionsRange(Integer.MAX_VALUE - 1, Integer.MAX_VALUE, deltaValue);
+////        Assert.assertFalse("Increase Position Folders should NOT be done", check);
+//    }
+//
+//    @Test
+//    public void testDecreasePositionsFolders() {
+//        logger.trace("\n\t@@@ testDecreasePositionsFolders @@@");
+//        int deltaValue = -1;
+//        // Decrease
+//        boolean check = folderDAO.updatePositionsRange(beginPosition, endPosition, deltaValue);
+//        Assert.assertTrue("Decrease Position Folders NOT done", check);
+//
+//        GPFolder userFolderUpdated = folderDAO.find(rootFolder.getId());
+//        Assert.assertEquals("Position NOT decreased for \"" + rootFolder.getName() + "\"",
+//                userFolderUpdated.getPosition(), rootFolder.getPosition() + deltaValue);
+//
+//        GPFolder folderAUpdated = folderDAO.find(folderA.getId());
+//        Assert.assertEquals("Position NOT decreased for \"" + folderA.getName() + "\"",
+//                folderAUpdated.getPosition(), folderA.getPosition() + deltaValue);
+//
+//        GPFolder folderBUpdated = folderDAO.find(folderB.getId());
+//        Assert.assertEquals("Position NOT decreased for \"" + folderB.getName() + "\"",
+//                folderBUpdated.getPosition(), folderB.getPosition() + deltaValue);
+//
+//        // No Decrease
+////        check = folderDAO.updatePositionsRange(Integer.MAX_VALUE - 1, Integer.MAX_VALUE, deltaValue);
+////        Assert.assertFalse("Decrease Position Folders should NOT be done", check);
+//    }
+//
+//    /**
+//     * Test of updatePositionsRange method for Layers
+//     */
+//    @Test
+//    public void testIncreasePositionsLayers() {
+//        logger.trace("\n\t@@@ testIncreasePositionsLayers @@@");
+//        int deltaValue = 1;
+//        // Increase
+//        boolean check = layerDAO.updatePositionsRange(beginPosition, endPosition, deltaValue);
+//        Assert.assertTrue("Increase Position Layers NOT done", check);
+//
+//        GPLayer rasterLayerUpdated = layerDAO.find(rasterLayer.getId());
+//        Assert.assertEquals("Position NOT increased for \"" + rasterLayer.getName() + "\"",
+//                rasterLayerUpdated.getPosition(), rasterLayer.getPosition() + deltaValue);
+//
+//        GPLayer vectorLayerUpdated = layerDAO.find(vectorLayer.getId());
+//        Assert.assertEquals("Position NOT increased for \"" + vectorLayer.getName() + "\"",
+//                vectorLayerUpdated.getPosition(), vectorLayer.getPosition() + deltaValue);
+//
+//        // No Increase
+////        check = layerDAO.updatePositionsRange(Integer.MAX_VALUE - 1, Integer.MAX_VALUE, deltaValue);
+////        Assert.assertFalse("Increase Position Layers should NOT be done", check);
+//    }
+//
+//    @Test
+//    public void testDecreasePositionsLayers() {
+//        logger.trace("\n\t@@@ testDecreasePositionsLayers @@@");
+//        int deltaValue = -1;
+//        // Decrease
+//        boolean check = layerDAO.updatePositionsRange(beginPosition, endPosition, deltaValue);
+//        Assert.assertTrue("Decrease Position Layers NOT done", check);
+//
+//        GPLayer rasterLayerUpdated = layerDAO.find(rasterLayer.getId());
+//        Assert.assertEquals("Position NOT decreased for \"" + rasterLayer.getName() + "\"",
+//                rasterLayerUpdated.getPosition(), rasterLayer.getPosition() + deltaValue);
+//
+//        GPLayer vectorLayerUpdated = layerDAO.find(vectorLayer.getId());
+//        Assert.assertEquals("Position NOT decreased for \"" + vectorLayer.getName() + "\"",
+//                vectorLayerUpdated.getPosition(), vectorLayer.getPosition() + deltaValue);
+//
+//        // No Decrease
+////        check = layerDAO.updatePositionsRange(Integer.MAX_VALUE - 1, Integer.MAX_VALUE, deltaValue);
+////        Assert.assertFalse("Decrease Position Layers should NOT be done", check);
+//    }
+//    //</editor-fold>
+//
+//    //<editor-fold defaultstate="collapsed" desc="Test of updatePositionsLowerBound">
+//    /**
+//     * Test of updatePositionsLowerBound method for Foders
+//     */
+//    @Test
+//    public void testShiftPositionsFolders() {
+//        logger.trace("\n\t@@@ testShiftPositionsFolders @@@");
+//        int deltaValue = 33;
+//        // Shift
+//        boolean check = folderDAO.updatePositionsLowerBound(beginPosition, deltaValue);
+//        Assert.assertTrue("Shift Position Folders NOT done", check);
+//
+//        GPFolder userFolderUpdated = folderDAO.find(rootFolder.getId());
+//        Assert.assertEquals("Shift Position NOT done for \"" + rootFolder.getName() + "\"",
+//                userFolderUpdated.getPosition(), rootFolder.getPosition() + deltaValue);
+//
+//        GPFolder folderAUpdated = folderDAO.find(folderA.getId());
+//        Assert.assertEquals("Shift Position NOT done for \"" + folderA.getName() + "\"",
+//                folderAUpdated.getPosition(), folderA.getPosition() + deltaValue);
+//
+//        GPFolder folderBUpdated = folderDAO.find(folderB.getId());
+//        Assert.assertEquals("Shift Position NOT done for \"" + folderB.getName() + "\"",
+//                folderBUpdated.getPosition(), folderB.getPosition() + deltaValue);
+//
+//        // No Shift
+////        check = folderDAO.updatePositionsLowerBound(Integer.MAX_VALUE, deltaValue);
+////        Assert.assertFalse("Shift Position Folders should NOT be done", check);
+//    }
+//
+//    /**
+//     * Test of updatePositionsLowerBound method for Layers
+//     */
+//    @Test
+//    public void testShiftPositionsLayers() {
+//        logger.trace("\n\t@@@ testShiftPositionsLayers @@@");
+//        int deltaValue = 99;
+//        // Shift
+//        boolean check = layerDAO.updatePositionsLowerBound(beginPosition, deltaValue);
+//        Assert.assertTrue("Shift Position Layers NOT done", check);
+//
+//        GPLayer rasterLayerUpdated = layerDAO.find(rasterLayer.getId());
+//        Assert.assertEquals("Shift Position NOT done for \"" + rasterLayer.getName() + "\"",
+//                rasterLayerUpdated.getPosition(), rasterLayer.getPosition() + deltaValue);
+//
+//        GPLayer vectorLayerUpdated = layerDAO.find(vectorLayer.getId());
+//        Assert.assertEquals("Shift Position NOT done for \"" + vectorLayer.getName() + "\"",
+//                vectorLayerUpdated.getPosition(), vectorLayer.getPosition() + deltaValue);
+//
+//        // No Shift
+////        check = layerDAO.updatePositionsLowerBound(Integer.MAX_VALUE, deltaValue);
+////        Assert.assertFalse("Shift Position Layers should NOT be done", check);
+//    }
+//    //</editor-fold>
+//
+//    /**
+//     * Test of updateAncestorsDescendants method for Folders
+//     */
+//    @Test
+//    public void testUpdateAncestorsDescendants() {
+//        logger.trace("\n\t@@@ testUpdateAncestorsDescendants @@@");
+//
+//        Map<Long, Integer> descendantsMap = new HashMap<Long, Integer>();
+//        descendantsMap.put(rootFolder.getId(), 37);
+//        descendantsMap.put(folderB.getId(), 31);
+//
+//        // Update
+//        boolean check = folderDAO.updateAncestorsDescendants(descendantsMap);
+//        Assert.assertTrue("Update Ancestors Descendants NOT done", check);
+//
+//        GPFolder userFolderUpdated = folderDAO.find(rootFolder.getId());
+//        Assert.assertEquals("Ancestors Descendants NOT updated for \"" + rootFolder.getName() + "\"",
+//                userFolderUpdated.getNumberOfDescendants(),
+//                Integer.parseInt(descendantsMap.get(userFolderUpdated.getId()).toString()));
+//
+//        GPFolder folderBUpdated = folderDAO.find(folderB.getId());
+//        Assert.assertEquals("Ancestors Descendants NOT updated for \"" + folderB.getName() + "\"",
+//                folderBUpdated.getNumberOfDescendants(),
+//                Integer.parseInt(descendantsMap.get(folderBUpdated.getId()).toString()));
+//
+//        GPFolder folderAUpdated = folderDAO.find(folderA.getId());
+//        Assert.assertEquals("Ancestors Descendants NOT updated for \"" + folderA.getName() + "\"",
+//                folderAUpdated.getNumberOfDescendants(), folderA.getNumberOfDescendants());
+//
+//        // No Update
+////        descendantsMap.clear();
+////        check = folderDAO.updateAncestorsDescendants(descendantsMap);
+////        Assert.assertFalse("Update Ancestors Descendants should NOT be done (empty map)", check);
+////
+////        descendantsMap.put(Long.MAX_VALUE, 3);
+////        check = folderDAO.updateAncestorsDescendants(descendantsMap);
+////        Assert.assertFalse("Update Ancestors Descendants should NOT be done (nothing to update)", check);
+//    }
 
     //<editor-fold defaultstate="collapsed" desc="Test of persistCheckStatus">
     /**

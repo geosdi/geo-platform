@@ -175,29 +175,30 @@ class LayerServiceImpl {
         return layerDao.remove(layer);
     }
 
-    public Long saveAddedLayerAndTreeModifications(GPLayer layer,
-            GPWebServiceMapData descendantsMapData)
+    public Long saveAddedLayerAndTreeModifications(Long projectId, Long parentId,
+            GPLayer layer, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        EntityCorrectness.checkLayer(layer); // TODO assert
+        GPProject project = projectDao.find(projectId);
+        if (project == null) {
+            throw new ResourceNotFoundFault("Project not found", projectId);
+        }
+        EntityCorrectness.checkProject(project); // TODO assert
+        layer.setProject(project);
 
-        GPFolder parent = layer.getFolder();
+        GPFolder parent = folderDao.find(parentId);
         if (parent == null) {
-            throw new IllegalParameterFault("Parent of layer with id " + layer.getId() + " not found");
+            throw new ResourceNotFoundFault("Parent of layer not found", parentId);
         }
         EntityCorrectness.checkFolder(parent); // TODO assert
+        layer.setFolder(parent);
 
-        Long idParent = parent.getId();
-        GPFolder parentFromDB = folderDao.find(idParent);
-        if (parentFromDB == null) {
-            throw new ResourceNotFoundFault("Parent of layer not found", idParent);
-        }
-        EntityCorrectness.checkFolder(parentFromDB); // TODO assert
+        EntityCorrectness.checkLayer(layer); // TODO assert
 
         int newPosition = layer.getPosition();
         int increment = 1;
         // Shift positions
-        layerDao.updatePositionsLowerBound(newPosition, increment);
-        folderDao.updatePositionsLowerBound(newPosition, increment);
+        layerDao.updatePositionsLowerBound(projectId, newPosition, increment);
+        folderDao.updatePositionsLowerBound(projectId, newPosition, increment);
 
         layerDao.persist(layer);
 
@@ -207,43 +208,36 @@ class LayerServiceImpl {
         return layer.getId();
     }
 
-    public ArrayList<Long> saveAddedLayersAndTreeModifications(Long projectId, List<GPLayer> layers,
-            GPWebServiceMapData descendantsMapData)
+    public ArrayList<Long> saveAddedLayersAndTreeModifications(Long projectId, Long parentId,
+            List<GPLayer> layers, GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        if (layers == null || layers.isEmpty()) {
-            throw new IllegalParameterFault("List of layers is null or empty");
-        }
-        EntityCorrectness.checkLayerListLog(layers); // TODO assert
-
         // Project
-        GPProject projectEntity = projectDao.find(projectId);
-        if (projectEntity == null) {
+        GPProject project = projectDao.find(projectId);
+        if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectId);
         }
 
-        // Parent
-        GPFolder parent = layers.get(0).getFolder();
+        // Folder Parent
+        GPFolder parent = folderDao.find(parentId);
         if (parent == null) {
-            throw new IllegalParameterFault("Parent of layer with id "
-                    + layers.get(0).getId() + " not found");
+            throw new ResourceNotFoundFault("Folder parent not found", parentId);
         }
+        EntityCorrectness.checkFolder(parent); // TODO assert   
 
-        GPFolder parentEntity = folderDao.find(parent.getId());
-        if (parentEntity == null) {
-            throw new ResourceNotFoundFault("Parent of top layer not found", parent.getId());
+        if (layers == null || layers.isEmpty()) {
+            throw new IllegalParameterFault("List of layers is null or empty");
         }
-        EntityCorrectness.checkFolder(parentEntity); // TODO assert   
-
-        for (GPLayer gpLayer : layers) {
-            gpLayer.setProject(projectEntity);
-            gpLayer.setFolder(parentEntity);
+        for (GPLayer layer : layers) {
+            layer.setProject(project);
+            layer.setFolder(parent);
         }
+        EntityCorrectness.checkLayerListLog(layers); // TODO assert
 
         int newPosition = layers.get(layers.size() - 1).getPosition();
         int increment = layers.size();
         // Shift positions
-        layerDao.updatePositionsLowerBound(newPosition, increment);
-        folderDao.updatePositionsLowerBound(newPosition, increment);
+        layerDao.updatePositionsLowerBound(projectId, newPosition, increment);
+        folderDao.updatePositionsLowerBound(projectId, newPosition, increment);
 
         layerDao.persist(layers.toArray(new GPLayer[layers.size()]));
 
@@ -271,9 +265,10 @@ class LayerServiceImpl {
         boolean result = layerDao.remove(layer);
 
         int decrement = -1;
+        Long projectId = layer.getProject().getId();
         // Shift positions
-        layerDao.updatePositionsLowerBound(oldPosition, decrement);
-        folderDao.updatePositionsLowerBound(oldPosition, decrement);
+        layerDao.updatePositionsLowerBound(projectId, oldPosition, decrement);
+        folderDao.updatePositionsLowerBound(projectId, oldPosition, decrement);
 
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
         this.updateNumberOfElements(layer, decrement);

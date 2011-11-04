@@ -60,7 +60,8 @@ public class GPApplication extends GPAccount {
      */
     private static final long serialVersionUID = 726746042410990607L;
     //
-    @Column(nullable = false)
+    @Column
+//    @Column(nullable = false)
     private String appID;
 
     /**

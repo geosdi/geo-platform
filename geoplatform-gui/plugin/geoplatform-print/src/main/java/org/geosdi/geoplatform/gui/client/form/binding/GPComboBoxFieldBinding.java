@@ -56,5 +56,4 @@ public class GPComboBoxFieldBinding extends GPFieldBinding {
     public void setModelProperty(Object val) {
         ((GPPrintBean) model).setDpi((DPI) val);
     }
-    
 }

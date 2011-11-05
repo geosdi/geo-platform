@@ -82,6 +82,14 @@ public abstract class GPListViewSearchWidget<T extends GeoPlatformBeanModel>
         return listView;
     }
     
+    /**
+     * 
+     * @param T element 
+     */
+    public void addElement(T element) {
+        this.store.insert(element, 0);
+    }
+    
     public abstract void changeSelection(SelectionChangedEvent<T> se);
     
     public abstract void setListViewProperties();

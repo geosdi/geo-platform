@@ -51,6 +51,7 @@ public class GPClientProject extends GeoPlatformBeanModel {
     private String image;
     private int numberOfElements;
     private boolean defaultProject;
+    private String message;
 
     /**
      * @return the id
@@ -120,9 +121,30 @@ public class GPClientProject extends GeoPlatformBeanModel {
      */
     public void setDefaultProject(boolean defaultProject) {
         this.defaultProject = defaultProject;
-        set(GPClientProjectKey.DEFAULT_PROJECT.toString(),
-                defaultProject ? GPClientProjectKey.DEFAULT_PROJECT_MESSAGE.toString()
-                + "Yes" : GPClientProjectKey.DEFAULT_PROJECT_MESSAGE.toString() + "No");
+        set(GPClientProjectKey.DEFAULT_PROJECT.toString(), this.defaultProject);
+        this.setMessage(defaultProject ? GPClientProjectKey.DEFAULT_PROJECT_MESSAGE.toString()
+                + "Yes" : GPClientProjectKey.DEFAULT_PROJECT_MESSAGE.toString()
+                + "No");
+    }
+
+    /**
+     * @return the message
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * @param message the message to set
+     */
+    public void setMessage(String message) {
+        this.message = message;
+        set(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString(), this.message);
+    }
+    
+    public void reset() {
+        setName(null);
+        setDefaultProject(false);
     }
 
     @Override

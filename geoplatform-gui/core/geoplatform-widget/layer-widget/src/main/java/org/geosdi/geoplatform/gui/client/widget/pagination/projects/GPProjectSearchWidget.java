@@ -51,10 +51,12 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.action.projects.AddProjectAction;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchWidget;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.layers.projects.event.GPDefaultProjectTreeEvent;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 
@@ -66,10 +68,12 @@ import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProject> {
 
     private GPDefaultProjectTreeEvent defaultProjectEvent = new GPDefaultProjectTreeEvent();
+    private GPDefaultProjectSelector selector;
     private Button deleteButton;
 
     public GPProjectSearchWidget() {
         super(true, 10);
+        this.selector = new GPDefaultProjectSelector();
     }
 
     @Override
@@ -79,12 +83,7 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
         super.search.setFieldLabel("Find Project");
 
         super.addButton(1, new Button("Add", LayerResources.ICONS.projectAdd(),
-                new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                    }
-                }));
+                new AddProjectAction(this)));
 
         this.deleteButton = new Button("Delete", LayerResources.ICONS.projectDelete(),
                 new SelectionListener<ButtonEvent>() {
@@ -113,11 +112,11 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
         sb.append("<div class='thumbd'>{image}</div>");
         sb.append("<div>Name : {name}</div>");
         sb.append("<div>Elements : {numberOfElements}</div>");
-        sb.append("<div>{defaultProject}</div>");
+        sb.append("<div>{message}</div>");
         sb.append("</div></tpl>");
 
         listView.setTemplate(sb.toString());
-        
+
         listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         listView.setSize(630, 340);
@@ -165,24 +164,14 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
 
     @Override
     public void executeSelect() {
-        searchStatus.setBusy("Setting Default Project");
-
-        LayerRemote.Util.getInstance().setDefaultProject(listView.getSelectionModel().getSelectedItem().getId(),
-                new AsyncCallback<Object>() {
-
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        throw new UnsupportedOperationException("Not supported yet.");
-                    }
-
-                    @Override
-                    public void onSuccess(Object result) {
-                        setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                                EnumProjectMessage.DEFAUTL_PROJECT_MESSAGE);
-                        hide();
-                        TimeoutHandlerManager.fireEvent(defaultProjectEvent);
-                    }
-                });
+        if (listView.getSelectionModel().getSelectedItem().isDefaultProject()) {
+            GeoPlatformMessage.alertMessage("GeoPlatform Alert Message",
+                    "Default Project "
+                    + "has already selected.");
+            listView.getSelectionModel().deselectAll();
+        } else {
+            selector.selectDefaultProject();
+        }
     }
 
     @Override
@@ -193,6 +182,35 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
         } else {
             selectButton.disable();
             deleteButton.disable();
+        }
+    }
+
+    /**
+     * Internal Class Delegate to Select Default Project and Rebuild GPTreePanel
+     * 
+     */
+    private class GPDefaultProjectSelector {
+
+        private void selectDefaultProject() {
+            searchStatus.setBusy("Setting Default Project");
+
+            LayerRemote.Util.getInstance().setDefaultProject(listView.getSelectionModel().
+                    getSelectedItem().getId(),
+                    new AsyncCallback<Object>() {
+
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            throw new UnsupportedOperationException("Not supported yet.");
+                        }
+
+                        @Override
+                        public void onSuccess(Object result) {
+                            setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
+                                    EnumProjectMessage.DEFAUTL_PROJECT_MESSAGE);
+                            hide();
+                            TimeoutHandlerManager.fireEvent(defaultProjectEvent);
+                        }
+                    });
         }
     }
 }

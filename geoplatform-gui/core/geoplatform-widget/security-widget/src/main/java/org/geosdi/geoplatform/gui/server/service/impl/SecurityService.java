@@ -45,7 +45,6 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
@@ -69,8 +68,10 @@ import org.springframework.stereotype.Service;
 public class SecurityService implements ISecurityService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
     private GeoPlatformService geoPlatformServiceClient;
     private GPUserConverter userConverter;
+    //
     @Autowired
     private SessionUtility sessionUtility;
 
@@ -175,6 +176,7 @@ public class SecurityService implements ISecurityService {
         try {
             idProject = this.geoPlatformServiceClient.saveProject(user.getUsername(),
                     project, true);
+            user.setDefaultProjectID(idProject);
         } catch (ResourceNotFoundFault rnf) {
             this.logger.error("Failed to save project on SecurityService: " + rnf);
             throw new GeoPlatformException(rnf);

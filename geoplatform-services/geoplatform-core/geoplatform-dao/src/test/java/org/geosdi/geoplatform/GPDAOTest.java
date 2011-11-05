@@ -37,23 +37,11 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.geosdi.geoplatform.core.model.GPFolder;
-import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.security.acls.domain.BasePermission;
 
 /**
  * This test is not intended to test the business logic but only the correctness
@@ -62,7 +50,7 @@ import org.springframework.security.acls.domain.BasePermission;
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class GPDAOTest extends BaseDAOTest {
+public class GPDAOTest {//extends BaseDAOTest {
 
     // User
     private String usernamePositionTest = "user_position_test";

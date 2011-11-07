@@ -103,10 +103,6 @@ public abstract class GPAccount implements Serializable {
     private Long defaultProjectID;
 
     public abstract String getStringID();
-//    public String getStringID() {
-//        return "####";
-//    }
-
 
     /**
      * @return the id

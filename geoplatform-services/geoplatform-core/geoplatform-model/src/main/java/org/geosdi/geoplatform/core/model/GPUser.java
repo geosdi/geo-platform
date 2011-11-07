@@ -63,19 +63,19 @@ public class GPUser extends GPAccount implements UserDetails {
      */
     private static final long serialVersionUID = 7100488006455895705L;
     //
-    @Column(nullable = false)
+    @Column
     private String name;
     //
-    @Column(name = "user_name", unique = true, nullable = false)
+    @Column(name = "user_name", unique = true)
     private String username;
     //
-    @Column(name = "user_password", nullable = false)
+    @Column(name = "user_password")
     private String password;
     //
-    @Column(name = "email_address", unique = true, nullable = false)
+    @Column(name = "email_address", unique = true)
     private String emailAddress;
     //
-    @Column(name = "send_email", nullable = false)
+    @Column(name = "send_email")
     private boolean sendEmail = false;
 
     /**

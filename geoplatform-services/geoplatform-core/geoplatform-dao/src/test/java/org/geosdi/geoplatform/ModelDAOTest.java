@@ -68,6 +68,5 @@ public class ModelDAOTest extends BaseDAOTest {
         Assert.assertEquals("All Accounts doesn't REMOVED", 0, super.accountDAO.findAll().size());
 
         insertData();
-        insertFolders();
     }
 }

@@ -118,13 +118,12 @@ public abstract class BaseDAOTest {
     @Autowired
     protected GPAuthorityDAO authorityDAO;
     //
-    protected final String usernameAdminTest = "admin_test_0";
-    protected final String usernameUserTest = "user_test_0";
-    protected GPUser adminTest = null;
-    protected GPUser userTest = null;
-    protected GPUser sigvTest = null;
-    protected GPProject adminProject = null;
-    protected GPProject userProject = null;
+    protected GPUser adminTest;
+    protected GPUser userTest;
+    protected GPUser viewerTest;
+    protected GPProject adminProject;
+    protected GPProject userProject;
+    protected GPProject viewerProject;
     //
     private URL url = null;
     private final String urlWMSGetCapabilities =
@@ -219,39 +218,83 @@ public abstract class BaseDAOTest {
 
     //<editor-fold defaultstate="collapsed" desc="Insert data">
     protected void insertData() throws ParseException {
-        this.adminTest = this.insertUser(usernameAdminTest, GPRole.ADMIN);
-        this.userTest = this.insertUser(usernameUserTest, GPRole.USER);
+        this.insertAccount();
+        this.insertProject();
+        this.insertFoldersAndLayers();
+    }
+
+    private void insertAccount() {
         // GUI test
-        this.insertUser("admin", GPRole.ADMIN);
-        this.insertUser("user", GPRole.USER);
-        this.insertUser("viewer", GPRole.VIEWER);
-        // Manage Users
-        String usernameAdminPag = "admin_pag_";
-        for (int i = 1; i <= 7; i++) {
-            this.insertUser(usernameAdminPag + i, GPRole.ADMIN);
-        }
-        String usernameUserPag = "user_pag_";
-        for (int i = 1; i <= 11; i++) {
-            this.insertUser(usernameUserPag + i, GPRole.USER);
-        }
-        String usernameViewerPag = "viewer_pag_";
-        for (int i = 1; i <= 17; i++) {
-            this.insertUser(usernameViewerPag + i, GPRole.VIEWER);
-        }
-        // SIGV User
-        this.sigvTest = this.insertUser("SIGV", GPRole.ADMIN);
+        this.adminTest = this.insertUser("admin", GPRole.ADMIN);
+        this.userTest = this.insertUser("user", GPRole.USER);
+        this.viewerTest = this.insertUser("viewer", GPRole.VIEWER);
+    }
+
+    private void insertProject() {
+        this.adminProject = this.createProject("admin_project", true, 0,
+                new Date(System.currentTimeMillis()));
+        this.userProject = this.createProject("user_project", false, 0,
+                new Date(System.currentTimeMillis() + 300 * 1000));
+        this.viewerProject = this.createProject("viewer_project", false, 0,
+                new Date(System.currentTimeMillis() + 1700 * 1000));
+        projectDAO.persist(adminProject, userProject, viewerProject);
         //
-        GPUser userKProject = this.insertUser("user k", GPRole.ADMIN);
+        this.insertBindingUserProject(adminTest, adminProject, BasePermission.ADMINISTRATION.getMask());
+        this.insertBindingUserProject(userTest, adminProject, BasePermission.READ.getMask());
+        this.insertBindingUserProject(userTest, userProject, BasePermission.ADMINISTRATION.getMask());
+        this.insertBindingUserProject(viewerTest, viewerProject, BasePermission.READ.getMask());
+        //
+        adminTest.setDefaultProjectID(adminProject.getId());
+        userTest.setDefaultProjectID(adminProject.getId());
+        viewerTest.setDefaultProjectID(viewerProject.getId());
+        accountDAO.merge(adminTest, userTest, viewerTest);
+    }
+
+    private void insertFoldersAndLayers() {
+        // Projects of admin
         GPProject projectIth = null;
         for (int i = 1; i <= 41; i++) {
-            projectIth = this.createProject("project_user_k_" + i, false,
+            projectIth = this.createProject("project_admin_k_" + i, false,
                     i, new Date(System.currentTimeMillis() + i * 333));
             projectDAO.persist(projectIth);
-            this.insertBindingUserProject(userKProject, projectIth,
+            this.insertBindingUserProject(this.adminTest, projectIth,
                     BasePermission.ADMINISTRATION.getMask());
         }
-        userKProject.setDefaultProjectID(projectIth.getId());
-        accountDAO.merge(userKProject);
+
+        // Project of user -> root folder: "server layer"
+        List<Layer> layerList = this.loadLayersFromServer();
+        GPFolder folderServerLayer = this.createFolder("server layer", userProject, null, layerList.size() + 1);
+        folderServerLayer.setNumberOfDescendants(layerList.size());
+        List<GPRasterLayer> layers = this.loadRasterLayer(layerList, folderServerLayer, userProject, layerList.size());
+        folderDAO.persist(folderServerLayer);
+        layerDAO.persist(layers.toArray(new GPRasterLayer[]{}));
+        //
+        userProject.setNumberOfElements(layerList.size());
+        projectDAO.merge(userProject);
+
+        // Project of viewer -> root folders: "only folders, layers"
+        GPFolder onlyFolders = this.createFolder("only folders", viewerProject, null, 6);
+        // "only folders" ---> "empty subfolder A"
+        GPFolder emptySubFolderA = this.createFolder("empty subfolder A", viewerProject, onlyFolders, 5);
+        // "only folders" ---> "empty subfolder B"
+        GPFolder emptySubFolderB = this.createFolder("empty subfolder B", viewerProject, onlyFolders, 4);
+        // "layers"
+        GPFolder layerFolder = this.createFolder("layers", viewerProject, null, 3);
+        // "layers" ---> _rasterLayer_ ---> Styles
+        GPRasterLayer rasterLayer = this.createRasterLayer(layerFolder, viewerProject, 2);
+//        GPStyle rasterLayerStyle1 = this.createStyle("style 1", rasterLayer);
+//        GPStyle rasterLayerStyle2 = this.createStyle("style 2", rasterLayer);
+        // ---> "layers" --> _vectorLayer_
+        GPVectorLayer vectorLayer = this.createVectorLayer(layerFolder, viewerProject, 1);
+        //
+        onlyFolders.setNumberOfDescendants(2);
+        layerFolder.setNumberOfDescendants(2);
+        folderDAO.persist(onlyFolders, emptySubFolderA, emptySubFolderB, layerFolder);
+        layerDAO.persist(rasterLayer, vectorLayer);
+//        styleDAO.persist(rasterLayerStyle1, rasterLayerStyle2);
+        //
+        viewerProject.setNumberOfElements(6);
+        projectDAO.merge(viewerProject);
     }
 
     protected GPUser insertUser(String name, GPRole... roles) {
@@ -293,58 +336,6 @@ public abstract class BaseDAOTest {
         }
         user.setSendEmail(true);
         return user;
-    }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Insert folders">
-    protected void insertFolders() throws ParseException {
-        List<Layer> layerList = this.loadLayersFromServer();
-        this.insertFoldersAndProject(layerList);
-    }
-
-    private void insertFoldersAndProject(List<Layer> layerList) {
-        this.adminProject = this.createProject("admin_project", true, 6,
-                new Date(System.currentTimeMillis()));
-        this.userProject = this.createProject("user_project", false, layerList.size(),
-                new Date(System.currentTimeMillis() + 300 * 1000));
-        //
-        projectDAO.persist(adminProject, userProject);
-        //
-        this.insertBindingUserProject(adminTest, adminProject, BasePermission.ADMINISTRATION.getMask());
-        this.insertBindingUserProject(userTest, adminProject, BasePermission.READ.getMask());
-        this.insertBindingUserProject(userTest, userProject, BasePermission.ADMINISTRATION.getMask());
-        //
-        adminTest.setDefaultProjectID(adminProject.getId());
-        userTest.setDefaultProjectID(adminProject.getId());
-        accountDAO.merge(adminTest, userTest);
-
-        // Project of admin -> root folders: "only folders, layers"
-        GPFolder onlyFolders = this.createFolder("only folders", adminProject, null, 6);
-        // "only folders" ---> "empty subfolder A"
-        GPFolder emptySubFolderA = this.createFolder("empty subfolder A", adminProject, onlyFolders, 5);
-        // "only folders" ---> "empty subfolder B"
-        GPFolder emptySubFolderB = this.createFolder("empty subfolder B", adminProject, onlyFolders, 4);
-        // "layers"
-        GPFolder layerFolder = this.createFolder("layers", adminProject, null, 3);
-        // "layers" ---> _rasterLayer_ ---> Styles
-        GPRasterLayer rasterLayer = this.createRasterLayer(layerFolder, adminProject, 2);
-//        GPStyle rasterLayerStyle1 = this.createStyle("style 1", rasterLayer);
-//        GPStyle rasterLayerStyle2 = this.createStyle("style 2", rasterLayer);
-        // ---> "layers" --> _vectorLayer_
-        GPVectorLayer vectorLayer = this.createVectorLayer(layerFolder, adminProject, 1);
-        //
-        onlyFolders.setNumberOfDescendants(2);
-        layerFolder.setNumberOfDescendants(2);
-        folderDAO.persist(onlyFolders, emptySubFolderA, emptySubFolderB, layerFolder);
-        layerDAO.persist(rasterLayer, vectorLayer);
-//        styleDAO.persist(rasterLayerStyle1, rasterLayerStyle2);
-
-        // Project of user -> root folder: "server layer"
-        GPFolder folderServerLayer = this.createFolder("server layer", userProject, null, layerList.size() + 1);
-        folderServerLayer.setNumberOfDescendants(layerList.size());
-        List<GPRasterLayer> layers = this.loadRasterLayer(layerList, folderServerLayer, userProject, layerList.size());
-        folderDAO.persist(folderServerLayer);
-        layerDAO.persist(layers.toArray(new GPRasterLayer[]{}));
     }
 
     protected GPFolder createFolder(String name, GPProject project,

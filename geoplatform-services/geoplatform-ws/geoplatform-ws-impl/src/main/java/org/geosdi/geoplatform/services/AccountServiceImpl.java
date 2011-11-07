@@ -206,20 +206,16 @@ class AccountServiceImpl {
 
         authorityDao.removeAllUserAuthorities(account.getStringID());
 
-        List<GPAccountProject> accountProjectList = accountProjectDao.findByAccountID(accountID);
+        List<GPAccountProject> accountProjectList = accountProjectDao.findByOwnerAccountID(accountID);
         for (GPAccountProject accountProject : accountProjectList) {
-            // Remove all AccountProject that reference (also of other users) by cascading
-            if (accountProject.getPermissionMask() == BasePermission.ADMINISTRATION.getMask()) {
-                if (!projectDao.remove(accountProject.getProject())) {
-                    return false;
-                }
-            } else {
-                // Remove all AccountProject that reference by cascading
-                // Only that reference to shared projects
-                accountProjectDao.remove(accountProject);
+            // Remove all AccountProject that reference (also of other accounts) by cascading            
+            if (!projectDao.remove(accountProject.getProject())) {
+                return false;
             }
         }
 
+        // Remove all AccountProject that reference by cascading
+        // Only that reference to shared projects
         return accountDao.remove(account);
     }
 

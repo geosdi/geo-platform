@@ -242,10 +242,10 @@ public class WSProjectTest extends ServiceTest {
         Assert.assertEquals("V-B", nameVector + super.nameRootFolderB, childRootFolderB.get(0).getName());
     }
 
-    @Test
-    public void testProjectDeep() {
-        // TODO 
-    }
+    // TODO
+//    @Test
+//    public void testProjectDeep() {         
+//    }
 
     @Test
     public void testImportProject() throws IllegalParameterFault, ResourceNotFoundFault {

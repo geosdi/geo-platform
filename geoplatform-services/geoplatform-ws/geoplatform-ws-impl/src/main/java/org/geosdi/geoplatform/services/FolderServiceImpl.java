@@ -202,7 +202,7 @@ class FolderServiceImpl {
         folderDao.persist(folder);
 
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-        this.updateNumberOfElements(folder, increment);
+        this.updateNumberOfElements(project, increment);
 
         return folder.getId();
     }
@@ -220,13 +220,13 @@ class FolderServiceImpl {
 
         boolean result = folderDao.remove(folder);
 
-        Long projectId = folder.getProject().getId();
+        GPProject project = folder.getProject();
         // Shift positions (shift must be done only after removing folder)
-        folderDao.updatePositionsLowerBound(projectId, oldPosition, decrement);
-        layerDao.updatePositionsLowerBound(projectId, oldPosition, decrement);
+        folderDao.updatePositionsLowerBound(project.getId(), oldPosition, decrement);
+        layerDao.updatePositionsLowerBound(project.getId(), oldPosition, decrement);
 
         folderDao.updateAncestorsDescendants(descendantsMapData.getDescendantsMap());
-        this.updateNumberOfElements(folder, decrement);
+        this.updateNumberOfElements(project, decrement);
 
         return result;
     }
@@ -438,14 +438,8 @@ class FolderServiceImpl {
     }
     //</editor-fold>
 
-    private void updateNumberOfElements(GPFolder folder, int delta)
+    private void updateNumberOfElements(GPProject project, int delta)
             throws ResourceNotFoundFault {
-        Long projectId = folder.getProject().getId();
-        GPProject project = projectDao.find(projectId);
-        if (project == null) {
-            throw new ResourceNotFoundFault("Project not found", projectId);
-        }
-
         project.deltaToNumberOfElements(delta);
         projectDao.merge(project);
     }

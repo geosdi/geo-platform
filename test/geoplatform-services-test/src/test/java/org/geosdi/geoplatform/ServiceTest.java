@@ -82,16 +82,16 @@ public abstract class ServiceTest {
     protected GeoPlatformService gpWSClient; // TODO gpService
     // User
     protected final String usernameTest = "username_test_ws";
+    protected GPUser userTest;
     protected long idUserTest = -1;
-    protected GPUser userTest = null;
     // Project
+    protected GPProject projectTest;
     protected long idProjectTest = -1;
-    protected GPProject projectTest = null;
     // Folders
-    protected GPFolder rootFolderA = null;
-    protected GPFolder rootFolderB = null;
     protected final String nameRootFolderA = "rootFolderA";
     protected final String nameRootFolderB = "rootFolderB";
+    protected GPFolder rootFolderA;
+    protected GPFolder rootFolderB;
     protected long idRootFolderA = -1;
     protected long idRootFolderB = -1;
     //

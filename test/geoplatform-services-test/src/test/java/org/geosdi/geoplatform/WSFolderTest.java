@@ -63,11 +63,11 @@ public class WSFolderTest extends ServiceTest {
     private final String nameFolder3 = "folder3";
     private final String nameFolder4 = "folder4";
     private final String nameFolder5 = "folder5";
-    private GPFolder folder1 = null;
-    private GPFolder folder2 = null;
-    private GPFolder folder3 = null;
-    private GPFolder folder4 = null;
-    private GPFolder folder5 = null;
+    private GPFolder folder1;
+    private GPFolder folder2;
+    private GPFolder folder3;
+    private GPFolder folder4;
+    private GPFolder folder5;
     private long idFolder1 = -1;
     private long idFolder2 = -1;
     private long idFolder3 = -1;
@@ -152,34 +152,28 @@ public class WSFolderTest extends ServiceTest {
 
     @Test
     public void testDeleteFolder() throws ResourceNotFoundFault {
-        // Assert number of folders of UserTest before delete
+        // Assert number of folders of ProjectTest before delete
         int totalFolders = gpWSClient.getNumberOfElementsProject(idProjectTest);
-        Assert.assertEquals("Number of all folders of UserTest before deleted",
+        Assert.assertEquals("Number of all folders of ProjectTest before deleted",
                 7, totalFolders); // SetUp() added 2+5 folders
         //
         List<FolderDTO> rootFolderList = gpWSClient.getRootFoldersByProjectID(idProjectTest);
         Assert.assertNotNull("List of root folders is null", rootFolderList);
-        int totalRootFolders = rootFolderList.size();
-        Assert.assertEquals("Number of root folders of UserTest before deleted",
-                2, totalRootFolders);
+        Assert.assertEquals("Number of root folders of ProjectTest before deleted",
+                2, rootFolderList.size());
 
         // Delete "rootFolderB" and in cascade "folder3" & "folder4" & "folder5"
         gpWSClient.deleteFolder(idRootFolderB);
 
         // "rootFolderA" ---> "folder1" & "folder2"
-        List<FolderDTO> folderList = gpWSClient.getRootFoldersByProjectID(idProjectTest);
-        Assert.assertNotNull("List of folders is null", folderList);
-
-        // Assert total number of folders of UserTest after delete
-        Assert.assertEquals("Number of root folders of UserTest after deleted",
-                1, folderList.size());
-        // TODO FIX manage of folder/layer wrt ancestors folder and project, and uncomment
-//            Assert.assertEquals("Number of all folders of UserTest after deleted",
-//                    totalFolders - 4, gpWSClient.getNumberOfElementsProject(idProjectTest);
+        rootFolderList = gpWSClient.getRootFoldersByProjectID(idProjectTest);
+        Assert.assertNotNull("List of mod root folders is null", rootFolderList);
+        Assert.assertEquals("Number of root folders of ProjectTest after deleted",
+                1, rootFolderList.size());
 
         // Assert on the structure of project's folders
         // Assert on "rootFolderA"
-        FolderDTO folderToCheck = folderList.iterator().next();
+        FolderDTO folderToCheck = rootFolderList.iterator().next();
         logger.trace("\n*** folderToCheck:\n{}\n***", folderToCheck);
         Assert.assertEquals("Check ID of rootFolderA", rootFolderA.getId(), folderToCheck.getId());
         // Assert on the structure of the subfolders of "rootFolderA"

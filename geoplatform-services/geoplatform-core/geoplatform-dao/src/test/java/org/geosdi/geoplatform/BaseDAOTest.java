@@ -255,7 +255,7 @@ public abstract class BaseDAOTest {
     }
 
     protected GPUser insertUser(String name, GPRole... roles) {
-        GPUser user = createUser(name);
+        GPUser user = this.createUser(name);
         accountDAO.persist(user);
         logger.debug("\n*** User SAVED:\n{}\n***", user);
 

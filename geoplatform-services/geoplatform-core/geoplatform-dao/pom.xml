@@ -52,6 +52,14 @@
     <properties>
         <ehcache-core.version>2.4.6</ehcache-core.version>
         <ehcache-terracotta.version>2.4.6</ehcache-terracotta.version>
+        
+        <!-- Keep aligned with src/main/resources/geoplatform_datasource.xml -->
+        <db.url>jdbc:postgresql://localhost:5432/gp</db.url>
+        <db.driverClassName>org.postgresql.Driver</db.driverClassName>
+        <db.username>postgres</db.username>
+        <db.password>0x,postgres,0x</db.password>
+        
+        <dataset.file>src/test/resources/bootstrap-db.xml</dataset.file>
     </properties>
 
     <dependencies>             
@@ -452,5 +460,188 @@
         </plugins>
 
     </build>
+    
+    <profiles>
+        <!-- mvn sql:execute -P drop-db & mvn sql:execute -P create-db & mvn sql:execute -P create-db-schema -->
+        
+        <!-- mvn sql:execute -P drop-db -->
+        <profile>
+            <id>drop-db</id>            
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>sql-maven-plugin</artifactId>
+                        <version>1.5</version>
+                        
+                        <dependencies>
+                            <dependency>
+                                <groupId>postgresql</groupId>
+                                <artifactId>postgresql</artifactId>
+                                <version>${postgresql-version}</version>
+                            </dependency>
+                        </dependencies>
+                                                
+                        <configuration>
+                            <!-- Need another database to drop the targeted one -->
+                            <url>jdbc:postgresql://localhost:5432/template_postgis</url>
+                            <driver>${db.driverClassName}</driver>                            
+                            <username>${db.username}</username>
+                            <password>${db.password}</password>                            
+                            
+                            <sqlCommand>DROP DATABASE gp</sqlCommand>
+                            <autocommit>true</autocommit>
+                            <!-- Ignore error when database is not avaiable -->
+                            <onError>continue</onError>
+                        </configuration>                                                
+                    </plugin>
+                </plugins>
+            </build>            
+        </profile>
+        
+        <!-- mvn sql:execute -P create-db -->
+        <profile>
+            <id>create-db</id>            
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>sql-maven-plugin</artifactId>
+                        <version>1.5</version>
+                        
+                        <dependencies>
+                            <dependency>
+                                <groupId>postgresql</groupId>
+                                <artifactId>postgresql</artifactId>
+                                <version>${postgresql-version}</version>
+                            </dependency>
+                        </dependencies>
+                                                
+                        <configuration>
+                            <url>jdbc:postgresql://localhost:5432/</url>
+                            <driver>${db.driverClassName}</driver>
+                            <username>${db.username}</username>
+                            <password>${db.password}</password>
+                            
+                            <!-- No transaction -->
+                            <autocommit>true</autocommit>
+                            <sqlCommand>CREATE DATABASE gp TEMPLATE template_postgis</sqlCommand>
+                        </configuration>                                                
+                    </plugin>
+                </plugins>
+            </build>            
+        </profile>
+
+        <!-- mvn sql:execute -P create-db-schema -->
+        <profile>
+            <id>create-db-schema</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>sql-maven-plugin</artifactId>
+                        <version>1.5</version>
+                        
+                        <dependencies>
+                            <dependency>
+                                <groupId>postgresql</groupId>
+                                <artifactId>postgresql</artifactId>
+                                <version>${postgresql-version}</version>
+                            </dependency>
+                        </dependencies>
+                                                
+                        <configuration>
+                            <url>${db.url}</url>
+                            <driver>${db.driverClassName}</driver>
+                            <username>${db.username}</username>
+                            <password>${db.password}</password>
+                                                        
+                            <autocommit>true</autocommit>
+                            <srcFiles>                      
+                                <srcFile>target/classes/geoplatform-model.ddl</srcFile>
+                            </srcFiles>
+                        </configuration>                                                
+                    </plugin>
+                </plugins>
+            </build>            
+        </profile>
+        
+        <!-- mvn dbunit:export -P export-data -->
+        <profile>
+            <id>export-data</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>dbunit-maven-plugin</artifactId>
+                        <version>1.0-beta-3</version>
+                        
+                        <dependencies>
+                            <dependency>
+                                <groupId>postgresql</groupId>
+                                <artifactId>postgresql</artifactId>
+                                <version>${postgresql-version}</version>
+                            </dependency>
+                        </dependencies>
+                                                
+                        <configuration>                            
+                            <url>${db.url}</url>
+                            <driver>${db.driverClassName}</driver>
+                            <username>${db.username}</username>
+                            <password>${db.password}</password>
+                            
+                            <dataTypeFactoryName>org.dbunit.ext.postgresql.PostgresqlDataTypeFactory</dataTypeFactoryName>
+                            <format>xml</format>
+                            <dest>${dataset.file}</dest>
+                            <tables> 
+                                <list>
+                                    <name>gp_account</name>
+                                </list>
+                                <list>
+                                    <name>gp_authority</name>
+                                </list>
+                            </tables>                                                            
+                        </configuration>                        
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        
+        <!-- mvn dbunit:operation -P import-data -->
+        <profile>
+            <id>import-data</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>dbunit-maven-plugin</artifactId>
+                        <version>1.0-beta-3</version>
+                        
+                        <dependencies>
+                            <dependency>
+                                <groupId>postgresql</groupId>
+                                <artifactId>postgresql</artifactId>
+                                <version>${postgresql-version}</version>
+                            </dependency>
+                        </dependencies>
+                                                
+                        <configuration>                            
+                            <url>${db.url}</url>
+                            <driver>${db.driverClassName}</driver>
+                            <username>${db.username}</username>
+                            <password>${db.password}</password>
+                                                            
+                            <dataTypeFactoryName>org.dbunit.ext.postgresql.PostgresqlDataTypeFactory</dataTypeFactoryName>
+                            <format>xml</format>
+                            <src>${dataset.file}</src>
+                            <!-- DELETE_ALL operation followed by an INSERT operation -->
+                            <type>CLEAN_INSERT</type>
+                        </configuration>                        
+                    </plugin>
+                </plugins>
+            </build>            
+        </profile>
+        
+    </profiles>
 
 </project>

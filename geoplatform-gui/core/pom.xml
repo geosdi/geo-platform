@@ -176,6 +176,7 @@
         <module>geoplatform-oxm</module>
         <module>geoplatform-ws-client</module>
         <module>geoplatform-widget</module>
+        <module>geoplatform-cache</module>
     </modules>
 
 

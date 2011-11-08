@@ -40,9 +40,15 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.exception.VelocityException;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -62,7 +68,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.MailException;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.velocity.VelocityEngineUtils;
 
 /**
  *
@@ -78,6 +89,12 @@ public class UserService implements IUserService {
     //
     @Autowired
     private SessionUtility sessionUtility;
+    //
+    @Autowired
+    private JavaMailSender mailSender;
+    //
+    @Autowired
+    private VelocityEngine velocityEngine;
 
     @Override
     public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
@@ -126,6 +143,8 @@ public class UserService implements IUserService {
         try {
             GPUser user = this.convertToGPUser(userDetail);
             iserId = geoPlatformServiceClient.insertAccount(user);
+
+            this.sendConfirmationEmail(user);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
         }
@@ -237,5 +256,51 @@ public class UserService implements IUserService {
     public void setGeoPlatformServiceClient(
             @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
+    }
+
+    public void setMailSender(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
+
+    public void setVelocityEngine(VelocityEngine velocityEngine) {
+        this.velocityEngine = velocityEngine;
+    }
+
+    private void sendConfirmationEmail(final GPUser user) {
+        MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+            @Override
+            public void prepare(MimeMessage mimeMessage) {
+                try {
+                    MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+                    message.setSubject("[Geo-Platform] Confirm registration");
+                    message.setTo(user.getEmailAddress());
+                    // TODO DEL (only for debug purpose)
+                    message.setBcc("vincenzo.monteverde@geosdi.org");
+
+                    Map model = new HashMap();
+                    model.put("user", user);
+                    String text = VelocityEngineUtils.mergeTemplateIntoString(
+                            velocityEngine, "registration.html.vm", model);
+                    message.setText(text, true);
+                } catch (VelocityException ex) {
+                    System.out.println("*** VelocityException: " + ex.getMessage());
+                    throw new GeoPlatformException(ex.getMessage());
+                } catch (MessagingException ex) {
+                    System.out.println("*** MessagingException: " + ex.getMessage());
+                    throw new GeoPlatformException(ex.getMessage());
+                } catch (Exception ex) {
+                    System.out.println("*** Exception: " + ex.getMessage());
+                    throw new GeoPlatformException(ex.getMessage());
+                }
+            }
+        };
+
+        try {
+            this.mailSender.send(preparator);
+        } catch (MailException ex) {
+            System.out.println("*** MailException: " + ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
+        }
     }
 }

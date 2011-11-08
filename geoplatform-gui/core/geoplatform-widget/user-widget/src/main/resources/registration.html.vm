@@ -1,0 +1,11 @@
+<html>
+<body>
+    <h3>Hi ${user.name}, welcome to the Geo-Platform</h3>
+
+    <div>
+        Your username is <b>${user.username}</b>
+    </div><br/><div>
+        Your email address is <a href="mailto:${user.emailAddress}">${user.emailAddress}</a>
+    </div>
+</body>
+</html>

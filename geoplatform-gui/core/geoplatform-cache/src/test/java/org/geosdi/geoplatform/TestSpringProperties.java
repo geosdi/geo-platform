@@ -3,6 +3,8 @@ package org.geosdi.geoplatform;
 import org.junit.Test;
 import org.geosdi.geoplatform.cache.GPCacheManager;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -10,6 +12,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"applicationContext-Test.xml"})
 public class TestSpringProperties {
+    
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
     @Autowired
     private GPCacheManager cacheManager;
@@ -21,7 +25,7 @@ public class TestSpringProperties {
 //        ApplicationContext ctx =
 //                new AnnotationConfigApplicationContext(GPCacheManager.class);
 //        GPCacheManager bean = ctx.getBean(GPCacheManager.class);
-        System.out.println("Beaninstance: " + this.cacheManager.toString());
+        logger.info("Beaninstance ***************************: " + this.cacheManager.getCacheManager().getDiskStorePath());
 //        assertThat(jetBean.getName(), equalTo("Gulf Stream G550"));
 //        URL gulfstream;
 //        try {

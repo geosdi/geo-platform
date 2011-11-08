@@ -35,18 +35,31 @@
  */
 package org.geosdi.geoplatform.cache;
 
-import java.net.URL;
 import net.sf.ehcache.CacheManager;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPCacheManager extends CacheManager {
+@Component(value = "cacheManager")
+public class GPCacheManager implements InitializingBean {
 
-    public GPCacheManager(URL theUrl) {
-        super(theUrl);
-//        super(new File("./src/main/resources/ehcache.xml").getAbsolutePath());
+    @Value("#{cacheProperties['cacheManager.url']}")
+    private String url;
+    private CacheManager cacheManager;
+    
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        this.cacheManager = new CacheManager(url);
     }
 
+    /**
+     * @return the cacheManager
+     */
+    public CacheManager getCacheManager() {
+        return cacheManager;
+    }
 }

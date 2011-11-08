@@ -37,25 +37,21 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.geosdi.geoplatform.beans.PropertiesFileReaderBeans;
 import javax.xml.ws.Endpoint;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
-import org.apache.cxf.interceptor.Interceptor;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.apache.cxf.message.Message;
-import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
-import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
-import org.apache.ws.security.WSConstants;
-import org.apache.ws.security.handler.WSHandlerConstants;
 import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
+import org.geosdi.geoplatform.services.GPServerWebServiceInterceptorStrategyFactory;
 import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.geosdi.geoplatform.services.ServerKeystorePasswordCallback;
 import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.TestExecutionListener;
 
@@ -68,17 +64,23 @@ public class WSListenerServices implements TestExecutionListener {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private GeoPlatformService gpWSClient;
-    private Endpoint endpoint;
-    private Bus bus;
+    private GeoPlatformService gpWSClient = null;
+    private Endpoint endpoint = null;
+    private Bus bus = null;
 
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
         logger.trace("\n\t@@@ WSListenerServices.beforeTestClass @@@");
+        
+//        // Client must be created before the Endpoint is created
+//        gpWSClient = ((GeoPlatformWSClient) testContext.getApplicationContext().getBean("gpWSClient")).create();
+//        gpWSClient = instantiateSpring().create();
+//        instantiateSpring();
+        GeoPlatformWSClient geoPlatformWSClient = (GeoPlatformWSClient) testContext.getApplicationContext().getBean("gpWSClient");
+        Assert.assertNotNull("geoPlatformWSClient is NULL", geoPlatformWSClient);
+        gpWSClient = geoPlatformWSClient.create();
 
-        // Client must be created before the Endpoint was created
-        gpWSClient = ((GeoPlatformWSClient) testContext.getApplicationContext().getBean("gpWSClient")).create();
-
+//        GeoPlatformService geoPlatformService = (GeoPlatformService) testContext.getApplicationContext().getBean("geoPlatformService");
         GeoPlatformService geoPlatformService = (GeoPlatformService) testContext.getApplicationContext().getBean("geoPlatformService");
         Assert.assertNotNull("geoPlatformService is NULL", geoPlatformService);
 
@@ -88,15 +90,23 @@ public class WSListenerServices implements TestExecutionListener {
 
         bus.getInInterceptors().add(new LoggingInInterceptor());
         bus.getOutInterceptors().add(new LoggingOutInterceptor());
-
-        bus.getInInterceptors().add(this.createInInterceptor());
-        bus.getOutInterceptors().add(this.createOutInterceptor());
+        
+        GPServerWebServiceInterceptorStrategyFactory gpServerWebServiceInterceptorStrategyFactory = (GPServerWebServiceInterceptorStrategyFactory) testContext.getApplicationContext().getBean("gpServerWebServiceInterceptorStrategyFactory");
+        Assert.assertNotNull("gpServerWebServiceInterceptorStrategyFactory is NULL", gpServerWebServiceInterceptorStrategyFactory);
+        
+        bus.getInInterceptors().add(gpServerWebServiceInterceptorStrategyFactory.getInInterceptor());
+        bus.getOutInterceptors().add(gpServerWebServiceInterceptorStrategyFactory.getOutInterceptor());
 
         bf.setDefaultBus(bus);
-        String address = "http://localhost:8282/geoplatform-service/soap";
-        endpoint = Endpoint.publish(address, implementor);
+        String serverAddress = geoPlatformWSClient.getAddress();
+        endpoint = Endpoint.publish(serverAddress, implementor);
 
         logger.debug("\n*** Server ready...");
+    }
+
+    private GeoPlatformWSClient instantiateSpring() {
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(PropertiesFileReaderBeans.class);       
+        return ctx.getBean(GeoPlatformWSClient.class);
     }
 
     @Override
@@ -125,71 +135,71 @@ public class WSListenerServices implements TestExecutionListener {
         Thread.sleep(5 * 1000);
     }
 
-    private WSS4JInInterceptor createInInterceptor() {
-        Map<String, Object> inProps = new HashMap<String, Object>();
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(WSHandlerConstants.USERNAME_TOKEN + " ");
-        inProps.put(WSHandlerConstants.PASSWORD_TYPE, WSConstants.PW_DIGEST);
-
-        // ----------- Only Encryption
-////        inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.ENCRYPT);
+//    private WSS4JInInterceptor createInInterceptor() {
+//        Map<String, Object> inProps = new HashMap<String, Object>();
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(WSHandlerConstants.USERNAME_TOKEN + " ");
+//        inProps.put(WSHandlerConstants.PASSWORD_TYPE, WSConstants.PW_DIGEST);
+//
+//        // ----------- Only Encryption
+//////        inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.ENCRYPT);
+////        sb.append(WSHandlerConstants.ENCRYPT);
+////        inProps.put(WSHandlerConstants.ACTION, sb.toString());
+////        inProps.put(WSHandlerConstants.DEC_PROP_FILE, "Server_Decrypt.properties");
+//
+//        // ----------- Only Signature
+//////        inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE);
+////        sb.append(WSHandlerConstants.SIGNATURE);
+////        inProps.put(WSHandlerConstants.ACTION, sb.toString());
+////        inProps.put(WSHandlerConstants.SIG_PROP_FILE, "Server_SignVerf.properties");
+//
+//        // ----------- Signature and Encryption
+////        tseInProps.put(WSHandlerConstants.ACTION, "Timestamp Signature Encrypt");
+//        sb.append(WSHandlerConstants.TIMESTAMP + " ");
+//        sb.append(WSHandlerConstants.SIGNATURE + " ");
 //        sb.append(WSHandlerConstants.ENCRYPT);
 //        inProps.put(WSHandlerConstants.ACTION, sb.toString());
-//        inProps.put(WSHandlerConstants.DEC_PROP_FILE, "Server_Decrypt.properties");
-
-        // ----------- Only Signature
-////        inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE);
-//        sb.append(WSHandlerConstants.SIGNATURE);
-//        inProps.put(WSHandlerConstants.ACTION, sb.toString());
+//
 //        inProps.put(WSHandlerConstants.SIG_PROP_FILE, "Server_SignVerf.properties");
-
-        // ----------- Signature and Encryption
-//        tseInProps.put(WSHandlerConstants.ACTION, "Timestamp Signature Encrypt");
-        sb.append(WSHandlerConstants.TIMESTAMP + " ");
-        sb.append(WSHandlerConstants.SIGNATURE + " ");
-        sb.append(WSHandlerConstants.ENCRYPT);
-        inProps.put(WSHandlerConstants.ACTION, sb.toString());
-
-        inProps.put(WSHandlerConstants.SIG_PROP_FILE, "Server_SignVerf.properties");
-        inProps.put(WSHandlerConstants.DEC_PROP_FILE, "Server_Decrypt.properties");
-
-        inProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ServerKeystorePasswordCallback.class.getName());
-        return new WSS4JInInterceptor(inProps);
-    }
-
-    private WSS4JOutInterceptor createOutInterceptor() {
-        Map<String, Object> outProps = new HashMap<String, Object>();
-
-        StringBuilder sb = new StringBuilder();
-
-        // ----------- Only Encryption
-////        outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.ENCRYPT);
+//        inProps.put(WSHandlerConstants.DEC_PROP_FILE, "Server_Decrypt.properties");
+//
+//        inProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ServerKeystorePasswordCallback.class.getName());
+//        return new WSS4JInInterceptor(inProps);
+//    }
+//
+//    private WSS4JOutInterceptor createOutInterceptor() {
+//        Map<String, Object> outProps = new HashMap<String, Object>();
+//
+//        StringBuilder sb = new StringBuilder();
+//
+//        // ----------- Only Encryption
+//////        outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.ENCRYPT);
+////        sb.append(WSHandlerConstants.ENCRYPT);
+////        outProps.put(WSHandlerConstants.ACTION, sb.toString());
+////        outProps.put(WSHandlerConstants.ENC_PROP_FILE, "Server_SignVerf.properties");
+////        outProps.put(WSHandlerConstants.ENCRYPTION_USER, "clientx509v1");
+//
+//        // ----------- Only Signature
+//////        outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE);
+////        sb.append(WSHandlerConstants.SIGNATURE);
+////        outProps.put(WSHandlerConstants.ACTION, sb.toString());
+////        outProps.put(WSHandlerConstants.USER, "serverx509v1");
+////        outProps.put(WSHandlerConstants.SIG_PROP_FILE, "Server_Decrypt.properties");
+//
+//        // ----------- Signature and Encryption
+////        outProps.put(WSHandlerConstants.ACTION, "Timestamp Signature Encrypt");
+//        sb.append(WSHandlerConstants.TIMESTAMP + " ");
+//        sb.append(WSHandlerConstants.SIGNATURE + " ");
 //        sb.append(WSHandlerConstants.ENCRYPT);
 //        outProps.put(WSHandlerConstants.ACTION, sb.toString());
-//        outProps.put(WSHandlerConstants.ENC_PROP_FILE, "Server_SignVerf.properties");
-//        outProps.put(WSHandlerConstants.ENCRYPTION_USER, "clientx509v1");
-
-        // ----------- Only Signature
-////        outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE);
-//        sb.append(WSHandlerConstants.SIGNATURE);
-//        outProps.put(WSHandlerConstants.ACTION, sb.toString());
+//
 //        outProps.put(WSHandlerConstants.USER, "serverx509v1");
 //        outProps.put(WSHandlerConstants.SIG_PROP_FILE, "Server_Decrypt.properties");
-
-        // ----------- Signature and Encryption
-//        outProps.put(WSHandlerConstants.ACTION, "Timestamp Signature Encrypt");
-        sb.append(WSHandlerConstants.TIMESTAMP + " ");
-        sb.append(WSHandlerConstants.SIGNATURE + " ");
-        sb.append(WSHandlerConstants.ENCRYPT);
-        outProps.put(WSHandlerConstants.ACTION, sb.toString());
-
-        outProps.put(WSHandlerConstants.USER, "serverx509v1");
-        outProps.put(WSHandlerConstants.SIG_PROP_FILE, "Server_Decrypt.properties");
-        outProps.put(WSHandlerConstants.ENC_PROP_FILE, "Server_SignVerf.properties");
-        outProps.put(WSHandlerConstants.ENCRYPTION_USER, "clientx509v1");
-
-        outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ServerKeystorePasswordCallback.class.getName());
-        return new WSS4JOutInterceptor(outProps);
-    }
+//        outProps.put(WSHandlerConstants.ENC_PROP_FILE, "Server_SignVerf.properties");
+//        outProps.put(WSHandlerConstants.ENCRYPTION_USER, "clientx509v1");
+//
+//        outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ServerKeystorePasswordCallback.class.getName());
+//        return new WSS4JOutInterceptor(outProps);
+//    }
 }

@@ -228,6 +228,8 @@ public abstract class BaseDAOTest {
         this.adminTest = this.insertUser("admin", GPRole.ADMIN);
         this.userTest = this.insertUser("user", GPRole.USER);
         this.viewerTest = this.insertUser("viewer", GPRole.VIEWER);
+        //
+        this.insertUser("SIGV", GPRole.ADMIN);
     }
 
     private void insertProject() {

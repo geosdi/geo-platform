@@ -128,7 +128,7 @@ public class WSAccountTest extends ServiceTest {
         user.setGPAuthorities(Arrays.asList(authority));
 
         try {
-            gpWSClient.insertAccount(user);
+            gpWSClient.insertAccount(user, false);
             Assert.fail("User have an incorrect role");
         } catch (IllegalParameterFault ex) {
             if (!ex.getMessage().toLowerCase().contains("authority")) { // Must be fail for other reasons
@@ -182,7 +182,7 @@ public class WSAccountTest extends ServiceTest {
     public void testInsertDuplicateUserWRTUsername() {
         GPUser user = super.createUser(super.usernameTest, GPRole.USER);
         try {
-            gpWSClient.insertAccount(user);
+            gpWSClient.insertAccount(user, false);
             Assert.fail("User already exist wrt username");
         } catch (IllegalParameterFault ex) {
             if (!ex.getMessage().toLowerCase().contains("username")) { // Must be fail for other reasons
@@ -196,7 +196,7 @@ public class WSAccountTest extends ServiceTest {
         GPUser user = super.createUser("duplicate-email", GPRole.USER);
         user.setEmailAddress(super.userTest.getEmailAddress());
         try {
-            gpWSClient.insertAccount(user);
+            gpWSClient.insertAccount(user, false);
             Assert.fail("User already exist wrt email");
         } catch (IllegalParameterFault ex) {
             if (!ex.getMessage().toLowerCase().contains("email")) { // Must be fail for other reasons

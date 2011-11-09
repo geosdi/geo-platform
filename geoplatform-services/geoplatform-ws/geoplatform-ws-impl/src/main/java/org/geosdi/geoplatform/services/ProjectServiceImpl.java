@@ -63,6 +63,7 @@ import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
@@ -345,6 +346,45 @@ class ProjectServiceImpl {
 
         return true;
     }
+
+    public GPProject getDefaultProject(Long accountID) throws ResourceNotFoundFault {
+        GPAccount account = accountDao.find(accountID);
+        if (account == null) {
+            throw new ResourceNotFoundFault("Account not found", accountID);
+        }
+        EntityCorrectness.checkAccountLog(account); // TODO assert
+
+        Long defaultProjectID = account.getDefaultProjectID();
+        if (defaultProjectID == null) {
+            return null;
+        }
+
+        GPProject project = projectDao.find(defaultProjectID);
+        if (project == null) {
+            throw new ResourceNotFoundFault("Project not found", defaultProjectID);
+        }
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+
+        return project;
+    }
+
+    public void updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
+        GPAccount account = accountDao.find(accountID);
+        if (account == null) {
+            throw new ResourceNotFoundFault("Account not found", accountID);
+        }
+        EntityCorrectness.checkAccountLog(account); // TODO assert
+
+        GPProject project = projectDao.find(projectID);
+        if (project == null) {
+            throw new ResourceNotFoundFault("Project not found", accountID);
+        }
+        EntityCorrectness.checkProjectLog(project); // TODO assert
+
+        account.setDefaultProjectID(projectID);
+
+        accountDao.merge(account);
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="AccountProject">
@@ -472,45 +512,33 @@ class ProjectServiceImpl {
 
         return ProjectDTO.convertToProjectDTOList(projects);
     }
-    //</editor-fold>
 
-    public GPProject getDefaultProject(Long accountID) throws ResourceNotFoundFault {
-        GPAccount account = accountDao.find(accountID);
-        if (account == null) {
-            throw new ResourceNotFoundFault("Account not found", accountID);
-        }
-        EntityCorrectness.checkAccountLog(account); // TODO assert
-
-        Long defaultProjectID = account.getDefaultProjectID();
-        if (defaultProjectID == null) {
-            return null;
-        }
-
-        GPProject project = projectDao.find(defaultProjectID);
+    public boolean saveAccountProjectProperties(AccountProjectPropertiesDTO accountProjectProperties)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        Long projectID = accountProjectProperties.getProjectID();
+        GPProject project = projectDao.find(projectID);
         if (project == null) {
-            throw new ResourceNotFoundFault("Project not found", defaultProjectID);
+            throw new ResourceNotFoundFault("Project not found", projectID);
         }
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
-        return project;
-    }
+        project.setName(accountProjectProperties.getProjectName());
+        projectDao.merge(project);
 
-    public void updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
-        GPAccount account = accountDao.find(accountID);
-        if (account == null) {
-            throw new ResourceNotFoundFault("Account not found", accountID);
+        if (accountProjectProperties.isDefaultProject()) {
+            Long accountID = accountProjectProperties.getAccountID();
+            GPAccount account = accountDao.find(accountID);
+            if (account == null) {
+                throw new ResourceNotFoundFault("Account not found", accountID);
+            }
+            EntityCorrectness.checkAccountLog(account); // TODO assert
+
+            account.setDefaultProjectID(project.getId());
+            accountDao.merge(account);
         }
-        EntityCorrectness.checkAccountLog(account); // TODO assert
-
-        GPProject project = projectDao.find(projectID);
-        if (project == null) {
-            throw new ResourceNotFoundFault("Project not found", accountID);
-        }
-
-        account.setDefaultProjectID(projectID);
-
-        accountDao.merge(account);
+        return true;
     }
+    //</editor-fold>
 
     private String createParentChildKey(GPFolder parent, GPFolder child) {
         return parent.getId() + ":" + child.getId();

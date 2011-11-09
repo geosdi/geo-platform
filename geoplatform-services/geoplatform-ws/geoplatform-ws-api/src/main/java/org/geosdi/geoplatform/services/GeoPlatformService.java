@@ -62,12 +62,14 @@ import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.exception.EmailException;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
@@ -100,8 +102,9 @@ public interface GeoPlatformService {
     // ==========================================================================
     @Put
     @HttpResource(location = "/accounts")
-    Long insertAccount(@WebParam(name = "account") GPAccount account)
-            throws IllegalParameterFault;
+    Long insertAccount(@WebParam(name = "account") GPAccount account,
+            @WebParam(name = "sendEmail") boolean sendEmail)
+            throws IllegalParameterFault, EmailException;
 
     @Post
     @HttpResource(location = "/users")
@@ -262,6 +265,12 @@ public interface GeoPlatformService {
     void updateDefaultProject(@WebParam(name = "accountID") Long accountID,
             @WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
+
+    @Post
+    @HttpResource(location = "/account/project/{projectID}")
+    boolean saveAccountProjectProperties(
+            @WebParam(name = "accountProjectProperties") AccountProjectPropertiesDTO accountProjectProperties)
+            throws ResourceNotFoundFault, IllegalParameterFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Project">

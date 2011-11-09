@@ -35,13 +35,11 @@
  */
 package org.geosdi.geoplatform.responce;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPProject;
 
 /**
@@ -51,115 +49,104 @@ import org.geosdi.geoplatform.core.model.GPProject;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ProjectDTO {
+public class AccountProjectPropertiesDTO {
 
-    private Long id;
-    private String name;
-    private Integer numberOfElements;
+    @XmlElement(required = true)
+    private Long accountID;
     //
-    @XmlElementWrapper(name = "rootFolders")
-    @XmlElement(name = "folder")
-    private List<FolderDTO> rootFolders;
+    @XmlElement(required = true)
+    private Long projectID;
+    //
+    private String projectName;
+    private boolean defaultProject;
 
     /**
      * Default constructor
      */
-    public ProjectDTO() {
+    public AccountProjectPropertiesDTO() {
     }
 
     /**
-     * Constructor with GPProject as arg
+     * Constructor with GPAccount and GPProject as args
+     * @param account
      * @param project
+     * @param defaultProject for set the project as default for the account
      */
-    public ProjectDTO(GPProject project) {
-        this.id = project.getId();
-        this.name = project.getName();
-        this.numberOfElements = project.getNumberOfElements();
+    public AccountProjectPropertiesDTO(GPAccount account, GPProject project,
+            boolean defaultProject) {
+        this.accountID = account.getId();
+        this.projectID = project.getId();
+        this.projectName = project.getName();
+        this.defaultProject = defaultProject;
     }
 
     /**
-     * @return the id
+     * @return the accountID
      */
-    public Long getId() {
-        return id;
+    public Long getAccountID() {
+        return accountID;
     }
 
     /**
-     * @param id
-     *            the id to set
+     * @param accountID the accountID to set
      */
-    public void setId(Long id) {
-        this.id = id;
+    public void setAccountID(Long accountID) {
+        this.accountID = accountID;
     }
 
     /**
-     * @return the name
+     * @return the projectID
      */
-    public String getName() {
-        return name;
+    public Long getProjectID() {
+        return projectID;
     }
 
     /**
-     * @param name to set
+     * @param projectID the projectID to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setProjectID(Long projectID) {
+        this.projectID = projectID;
     }
 
     /**
-     * @return the numberOfElements
+     * @return the projectName
      */
-    public Integer getNumberOfElements() {
-        return numberOfElements;
+    public String getProjectName() {
+        return projectName;
     }
 
     /**
-     * @param numberOfElements to set
+     * @param projectName the projectName to set
      */
-    public void setNumberOfElements(int numberOfElements) {
-        this.numberOfElements = numberOfElements;
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
     /**
-     * @param rootFolders to set
+     * @return the defaultProject
      */
-    public List<FolderDTO> getRootFolders() {
-        return rootFolders;
+    public boolean isDefaultProject() {
+        return defaultProject;
     }
 
     /**
-     * @param rootFolders to set
+     * @param defaultProject the defaultProject to set
      */
-    public void setRootFolders(List<FolderDTO> rootFolders) {
-        this.rootFolders = rootFolders;
+    public void setDefaultProject(boolean defaultProject) {
+        this.defaultProject = defaultProject;
     }
 
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
-        return "ProjectDTO{"
-                + "id=" + id
-                + ", name=" + name
-                + ", numberOfElements=" + numberOfElements
-                + ", rootFolders=" + rootFolders + '}';
-    }
-
-    public static GPProject convertToGPProject(ProjectDTO projectDTO) {
-        GPProject project = new GPProject();
-        project.setId(projectDTO.getId());
-        project.setName(projectDTO.getName());
-        if (projectDTO.getNumberOfElements() != null) {
-            project.setNumberOfElements(projectDTO.getNumberOfElements());
-        }
-        return project;
-    }
-
-    public static List<ProjectDTO> convertToProjectDTOList(List<GPProject> projects) {
-        List<ProjectDTO> projectsDTO = new ArrayList<ProjectDTO>(projects.size());
-
-        for (GPProject project : projects) {            
-            projectsDTO.add(new ProjectDTO(project));
-        }
-
-        return projectsDTO;
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
+        str.append(" accountID)").append(accountID);
+        str.append(", projectID=").append(projectID);
+        str.append(", projectName=").append(projectName);
+        str.append(", defaultProject=").append(defaultProject);
+        return str.append('}').toString();
     }
 }

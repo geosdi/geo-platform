@@ -69,12 +69,14 @@ import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.exception.EmailException;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
@@ -86,6 +88,7 @@ import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
+import org.geosdi.geoplatform.services.email.EmailHandler;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
@@ -120,6 +123,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private FolderServiceImpl folderServiceDelegate;
     private LayerServiceImpl layerServiceDelegate;
     private AclServiceImpl aclServiceDelegate;
+    //
+    private EmailHandler emailHandler;
 
     public GeoPlatformServiceImpl() {
         accountServiceDelegate = new AccountServiceImpl();
@@ -272,6 +277,16 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.guiComponentDao = guiComponentDao;
         this.aclServiceDelegate.setGuiComponentDao(guiComponentDao);
     }
+
+    /**
+     * @param emailHandler
+     *          the emailHandler to set
+     */
+    @Autowired
+    public void setEmailHandler(EmailHandler emailHandler) {
+        this.emailHandler = emailHandler;
+        this.accountServiceDelegate.setEmailHandler(emailHandler);
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Account">
@@ -279,8 +294,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // === Account
     // ==========================================================================
     @Override
-    public Long insertAccount(GPAccount account) throws IllegalParameterFault {
-        return accountServiceDelegate.insertAccount(account);
+    public Long insertAccount(GPAccount account, boolean sendEmail)
+            throws IllegalParameterFault, EmailException {
+        return accountServiceDelegate.insertAccount(account, sendEmail);
     }
 
     @Override
@@ -435,7 +451,13 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.projectServiceDelegate.updateDefaultProject(accountID, projectID);
     }
 
+    @Override
+    public boolean saveAccountProjectProperties(AccountProjectPropertiesDTO accountProjectProperties)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return this.projectServiceDelegate.saveAccountProjectProperties(accountProjectProperties);
+    }
     //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc="Project">
     // ==========================================================================
     // === Project

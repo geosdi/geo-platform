@@ -143,7 +143,7 @@ public abstract class ServiceTest {
         GPUser user = createUser(username, roles);
         logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
 
-        long idUser = gpWSClient.insertAccount(user);
+        long idUser = gpWSClient.insertAccount(user, false);
         logger.debug("\n*** Id ASSIGNED at the User in the DB: {} ***", idUser);
         Assert.assertTrue("Id ASSIGNED at the User in the DB", idUser > 0);
         return idUser;

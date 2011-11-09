@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.action.projects;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
-import org.geosdi.geoplatform.gui.client.widget.form.projects.AddProjectWidget;
+import org.geosdi.geoplatform.gui.client.widget.form.projects.ProjectBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchWidget;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 
@@ -47,16 +47,20 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
  * @email  giuseppe.lascaleia@geosdi.org
  *
  */
-public class AddProjectAction extends GeoPlatformAction {
+public class GPProjectAction extends GeoPlatformAction {
 
-    private AddProjectWidget addProject;
+    private ProjectBindingWidget bindingProject;
 
-    public AddProjectAction(GPListViewSearchWidget<GPClientProject> searchWidget) {
-        this.addProject = new AddProjectWidget(searchWidget);
+    public GPProjectAction(GPListViewSearchWidget<GPClientProject> searchWidget) {
+        this.bindingProject = new ProjectBindingWidget(searchWidget);
     }
 
     @Override
     public void componentSelected(ButtonEvent ce) {
-        this.addProject.showForm();
+       if(ce.getButton().getText().equalsIgnoreCase("Add")) {
+           this.bindingProject.showForm(true);
+       } else {
+           this.bindingProject.showForm(false);
+       }
     }
 }

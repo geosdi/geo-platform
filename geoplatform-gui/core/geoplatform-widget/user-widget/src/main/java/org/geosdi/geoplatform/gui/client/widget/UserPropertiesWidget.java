@@ -85,7 +85,6 @@ public class UserPropertiesWidget extends GeoPlatformWindow
     public UserPropertiesWidget(ListStore<GPUserManageDetail> store) {
         super(true);
         this.store = store;
-        this.store.setMonitorChanges(true);
         TimeoutHandlerManager.addHandler(IManageInsertUserHandler.TYPE, this);
         TimeoutHandlerManager.addHandler(IManageUpdateUserHandler.TYPE, this);
     }
@@ -178,6 +177,8 @@ public class UserPropertiesWidget extends GeoPlatformWindow
             public void onSuccess(Long result) {
                 userDetail.setId(result);
                 store.insert(userDetail, 0);
+                store.commitChanges();
+                
                 hide();
 
                 GeoPlatformMessage.infoMessage("User successfully added",
@@ -201,7 +202,6 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
             @Override
             public void onSuccess(Long result) {
-                store.update(userDetail);
                 store.commitChanges();
                 hide();
 
@@ -214,6 +214,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
     @Override
     public void reset() {
         store.rejectChanges();
+        userPropertiesBinding.unBindModel();
         userPropertiesBinding.resetFields();
     }
 }

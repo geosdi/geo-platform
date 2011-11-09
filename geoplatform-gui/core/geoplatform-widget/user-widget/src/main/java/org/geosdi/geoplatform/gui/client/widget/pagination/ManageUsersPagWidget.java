@@ -133,6 +133,8 @@ public class ManageUsersPagWidget
         super.loader.setRemoteSort(false);
 
         super.store = new ListStore<GPUserManageDetail>(loader);
+        
+        super.store.setMonitorChanges(true);
 
         super.toolBar.bind(loader);
     }

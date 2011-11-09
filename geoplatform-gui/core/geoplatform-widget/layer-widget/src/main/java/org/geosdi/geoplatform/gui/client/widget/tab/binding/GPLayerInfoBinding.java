@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldEvent;
 import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
@@ -164,6 +165,10 @@ public class GPLayerInfoBinding extends GeoPlatformBindingWidget<GPLayerBean> {
             GPMementoSaveCache.getInstance().copyOriginalProperties((GPLayerTreeModel) model);
             ((GPLayerBean) model).setAlias(val != null ? (String) val : "");
             WidgetPropertiesHandlerManager.fireEvent(labelEvent);
+        }
+
+        @Override
+        public void setRecordProperty(Record r, Object val) {
         }
     }
 }

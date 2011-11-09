@@ -122,7 +122,7 @@ public class GPClientProject extends GeoPlatformBeanModel {
     public void setDefaultProject(boolean defaultProject) {
         this.defaultProject = defaultProject;
         set(GPClientProjectKey.DEFAULT_PROJECT.toString(), this.defaultProject);
-        this.setMessage(defaultProject ? GPClientProjectKey.DEFAULT_PROJECT_MESSAGE.toString()
+        this.setMessage(this.defaultProject ? GPClientProjectKey.DEFAULT_PROJECT_MESSAGE.toString()
                 + "Yes" : GPClientProjectKey.DEFAULT_PROJECT_MESSAGE.toString()
                 + "No");
     }
@@ -140,11 +140,6 @@ public class GPClientProject extends GeoPlatformBeanModel {
     public void setMessage(String message) {
         this.message = message;
         set(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString(), this.message);
-    }
-    
-    public void reset() {
-        setName(null);
-        setDefaultProject(false);
     }
 
     @Override

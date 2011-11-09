@@ -90,8 +90,8 @@ public abstract class GeoPlatformBindingWidget<M extends ModelData> {
     }
 
     public abstract FormPanel createFormPanel();
-    
-     /**
+
+    /**
      * Add Bindings Manually
      * 
      */

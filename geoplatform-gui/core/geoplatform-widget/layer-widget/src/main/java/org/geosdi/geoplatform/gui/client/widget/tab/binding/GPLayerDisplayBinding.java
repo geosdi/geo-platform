@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SliderEvent;
+import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.ComponentPlugin;
 import com.extjs.gxt.ui.client.widget.Slider;
@@ -176,7 +177,7 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
         @Override//From view to model
         public void setModelProperty(Object val) {
             //Copying the value on memento before changes
-            GPMementoSaveCache.getInstance().copyOriginalProperties((GPLayerTreeModel)GPLayerDisplayBinding.this.getModel());
+            GPMementoSaveCache.getInstance().copyOriginalProperties((GPLayerTreeModel) GPLayerDisplayBinding.this.getModel());
             ((GPRasterBean) GPLayerDisplayBinding.this.getModel()).setOpacity(((Integer) val).floatValue() / 100);
             opacityEvent.setLayerBean((GPRasterBean) GPLayerDisplayBinding.this.getModel());
             GPHandlerManager.fireEvent(opacityEvent);
@@ -189,9 +190,13 @@ public class GPLayerDisplayBinding extends GeoPlatformBindingWidget<GPRasterBean
          * @param updateOriginalValue true to update the original value
          */
         @Override//From model to view
-        public void updateField(boolean updateOriginalValue) {      
+        public void updateField(boolean updateOriginalValue) {
             Float opacity = new Float(((GPRasterBean) GPLayerDisplayBinding.this.getModel()).getOpacity() * 100);
             ((SliderField) field).setValue(opacity.intValue());
+        }
+
+        @Override
+        public void setRecordProperty(Record r, Object val) {
         }
     }
 }

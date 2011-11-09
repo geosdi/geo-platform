@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.form.projects.binding;
 
+import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
@@ -54,5 +55,10 @@ public class ProjectCheckFieldBinding extends GPFieldBinding {
     @Override
     public void setModelProperty(Object val) {
         ((GPClientProject) model).setDefaultProject((Boolean) val);
+    }
+
+    @Override
+    public void setRecordProperty(Record r, Object val) {
+        r.set(property, (Boolean) val);
     }
 }

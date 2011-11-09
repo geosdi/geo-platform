@@ -186,4 +186,9 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     public void setDefaultProject(Long projectID) throws GeoPlatformException {
         this.layerService.setDefaultProject(projectID, super.getThreadLocalRequest());
     }
+
+    @Override
+    public Long saveProject(GPClientProject project) throws GeoPlatformException {
+        return this.layerService.saveProject(project, super.getThreadLocalRequest());
+    }
 }

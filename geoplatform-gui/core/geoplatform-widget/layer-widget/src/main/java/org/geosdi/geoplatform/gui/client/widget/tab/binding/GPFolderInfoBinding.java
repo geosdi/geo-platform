@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.tab.binding;
 
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.KeyListener;
+import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
@@ -120,6 +121,11 @@ public class GPFolderInfoBinding extends GeoPlatformBindingWidget<FolderTreeNode
             FolderTreeNode folder = (FolderTreeNode) model;
             labelField.setValue(folder.getLabel());
             folderInfo.setText("The folder contains " + folder.getNumberOfDescendants() + " descendants.");
+        }
+
+        @Override
+        public void setRecordProperty(Record r, Object val) {
+            
         }
     }
 }

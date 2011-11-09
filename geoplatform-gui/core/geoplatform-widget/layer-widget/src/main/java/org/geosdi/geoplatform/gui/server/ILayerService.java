@@ -127,4 +127,7 @@ public interface ILayerService {
 
     void setDefaultProject(Long projectID, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
+
+    Long saveProject(GPClientProject project, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
 }

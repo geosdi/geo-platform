@@ -50,8 +50,9 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.action.projects.AddProjectAction;
+import org.geosdi.geoplatform.gui.client.action.projects.GPProjectAction;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
@@ -69,7 +70,9 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
 
     private GPDefaultProjectTreeEvent defaultProjectEvent = new GPDefaultProjectTreeEvent();
     private GPDefaultProjectSelector selector;
+    private GPProjectAction action;
     private Button deleteButton;
+    private Button editButton;
 
     public GPProjectSearchWidget() {
         super(true, 10);
@@ -82,20 +85,29 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
         selectButton.setText("Set Default Project");
         super.search.setFieldLabel("Find Project");
 
+        this.action = new GPProjectAction(this);
+
         super.addButton(1, new Button("Add", LayerResources.ICONS.projectAdd(),
-                new AddProjectAction(this)));
+                this.action));
+
+        this.editButton = new Button("Edit", BasicWidgetResources.ICONS.edit(), action);
+
+        this.editButton.disable();
+
+        super.addButton(2, this.editButton);
 
         this.deleteButton = new Button("Delete", LayerResources.ICONS.projectDelete(),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
                     public void componentSelected(ButtonEvent ce) {
+                        /**TODO : IMPLEMENT ME **/
                     }
                 });
 
         this.deleteButton.disable();
 
-        super.addButton(2, this.deleteButton);
+        super.addButton(3, this.deleteButton);
     }
 
     @Override
@@ -115,11 +127,11 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
         sb.append("<div>{message}</div>");
         sb.append("</div></tpl>");
 
-        listView.setTemplate(sb.toString());
+        getListView().setTemplate(sb.toString());
 
-        listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        getListView().getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        listView.setSize(630, 340);
+        getListView().setSize(630, 340);
     }
 
     @Override
@@ -159,16 +171,18 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
 
         super.store = new ListStore<GPClientProject>(loader);
 
+        super.store.setMonitorChanges(true);
+
         super.toolBar.bind(loader);
     }
 
     @Override
     public void executeSelect() {
-        if (listView.getSelectionModel().getSelectedItem().isDefaultProject()) {
+        if (getListView().getSelectionModel().getSelectedItem().isDefaultProject()) {
             GeoPlatformMessage.alertMessage("GeoPlatform Alert Message",
                     "Default Project "
                     + "has already selected.");
-            listView.getSelectionModel().deselectAll();
+            getListView().getSelectionModel().deselectAll();
         } else {
             selector.selectDefaultProject();
         }
@@ -179,10 +193,19 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
         if (se.getSelectedItem() != null) {
             selectButton.enable();
             deleteButton.enable();
+            editButton.enable();
         } else {
             selectButton.disable();
             deleteButton.disable();
+            editButton.disable();
         }
+    }
+
+    /**
+     * @return the defaultProjectEvent
+     */
+    public GPDefaultProjectTreeEvent getDefaultProjectEvent() {
+        return defaultProjectEvent;
     }
 
     /**
@@ -194,7 +217,7 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
         private void selectDefaultProject() {
             searchStatus.setBusy("Setting Default Project");
 
-            LayerRemote.Util.getInstance().setDefaultProject(listView.getSelectionModel().
+            LayerRemote.Util.getInstance().setDefaultProject(getListView().getSelectionModel().
                     getSelectedItem().getId(),
                     new AsyncCallback<Object>() {
 
@@ -207,7 +230,9 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
                         public void onSuccess(Object result) {
                             setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
                                     EnumProjectMessage.DEFAUTL_PROJECT_MESSAGE);
+
                             hide();
+
                             TimeoutHandlerManager.fireEvent(defaultProjectEvent);
                         }
                     });

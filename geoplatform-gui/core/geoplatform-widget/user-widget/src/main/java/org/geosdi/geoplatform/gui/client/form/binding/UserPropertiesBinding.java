@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.form.binding;
 
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.Field;
@@ -462,6 +463,11 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                 }
             }
         }
+
+        @Override
+        public void setRecordProperty(Record r, Object val) {
+           r.set(property, ((SimpleComboValue<GPRole>) val).getValue());
+        }
     }
 
     private class UsernameFieldBinding extends GPFieldBinding {
@@ -479,6 +485,11 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         public void updateField(boolean updateOriginalValue) {
             GPUserManageDetail userDetail = (GPUserManageDetail) model;
             usernameField.setValue(userDetail.getUsername());
+        }
+
+        @Override
+        public void setRecordProperty(Record r, Object val) {
+            r.set(property, val);
         }
     }
 
@@ -498,6 +509,11 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
             GPUserManageDetail userDetail = (GPUserManageDetail) model;
             nameField.setValue(userDetail.getName());
         }
+
+        @Override
+        public void setRecordProperty(Record r, Object val) {
+            r.set(property, val);
+        }
     }
 
     private class EmailFieldBinding extends GPFieldBinding {
@@ -515,6 +531,11 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         public void updateField(boolean updateOriginalValue) {
             GPUserManageDetail userDetail = (GPUserManageDetail) model;
             emailField.setValue(userDetail.getEmail());
+        }
+
+        @Override
+        public void setRecordProperty(Record r, Object val) {
+            r.set(property, val);
         }
     }
 }

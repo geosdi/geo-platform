@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.form.binding;
 
+import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import org.geosdi.geoplatform.gui.client.model.DPI;
 import org.geosdi.geoplatform.gui.client.model.GPPrintBean;
@@ -55,5 +56,10 @@ public class GPComboBoxFieldBinding extends GPFieldBinding {
     @Override
     public void setModelProperty(Object val) {
         ((GPPrintBean) model).setDpi((DPI) val);
+    }
+
+    @Override
+    public void setRecordProperty(Record r, Object val) {
+        r.set(property, (DPI) val);
     }
 }

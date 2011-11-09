@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPLayerType;
+import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMementoLayer;
@@ -51,6 +52,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoRaster;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoVector;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
+import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo;
@@ -270,6 +272,13 @@ public class DTOConverter {
             layersList.add(layer);
         }
         return layersList;
+    }
+    
+    public GPProject convertToGProject(GPClientProject clientProject) {
+        GPProject project = new GPProject();
+        project.setName(clientProject.getName());
+        project.setShared(false);
+        return project;
     }
 
     private void convertToLayerElementFromMementoLayer(GPLayer layer, AbstractMementoLayer memento) {

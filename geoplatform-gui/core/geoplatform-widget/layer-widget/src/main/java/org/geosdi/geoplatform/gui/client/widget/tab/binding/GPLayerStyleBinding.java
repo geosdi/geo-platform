@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.tab.binding;
 
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.Field;
@@ -151,6 +152,10 @@ public class GPLayerStyleBinding extends GeoPlatformBindingWidget<GPLayerBean> {
                     GPHandlerManager.fireEvent(styleEvent);
                 }
             }
+        }
+
+        @Override
+        public void setRecordProperty(Record r, Object val) {
         }
     }
 }

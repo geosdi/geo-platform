@@ -604,7 +604,8 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    public void setDefaultProject(Long projectID, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public void setDefaultProject(Long projectID, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
         try {
             GPUser user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
 
@@ -620,6 +621,35 @@ public class LayerService implements ILayerService {
         } catch (ResourceNotFoundFault ex) {
             logger.error("An Error Occured : " + ex.getMessage());
             throw new GeoPlatformException(ex);
+        }
+    }
+
+    @Override
+    public Long saveProject(GPClientProject project,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
+
+        try {
+            GPUser user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            Long projectId = this.geoPlatformServiceClient.saveProject(user.getUsername(),
+                    this.dtoConverter.convertToGProject(project), project.isDefaultProject());
+            
+            user.setDefaultProjectID(projectId);
+
+            this.sessionUtility.storeUserAndProjectInSession(user, projectId,
+                    httpServletRequest);
+
+            return projectId;
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+
+        } catch (ResourceNotFoundFault rnf) {
+            this.logger.error("Failed to save project on SecurityService: " + rnf);
+            throw new GeoPlatformException(rnf);
+
+        } catch (IllegalParameterFault ilg) {
+            logger.error(
+                    "Error on SecurityService: " + ilg);
+            throw new GeoPlatformException("Parameter incorrect on saveProject");
         }
     }
 }

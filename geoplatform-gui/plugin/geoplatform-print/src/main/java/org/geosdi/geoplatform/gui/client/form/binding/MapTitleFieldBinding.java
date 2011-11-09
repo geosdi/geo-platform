@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.form.binding;
 
+import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import org.geosdi.geoplatform.gui.client.model.GPPrintBean;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
@@ -53,5 +54,10 @@ public class MapTitleFieldBinding extends GPFieldBinding {
     @Override
     public void setModelProperty(Object val) {
         ((GPPrintBean) this.model).setMapTitle(val.toString());
+    }
+
+    @Override
+    public void setRecordProperty(Record r, Object val) {
+        r.set(property, val);
     }
 }

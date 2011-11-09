@@ -72,7 +72,8 @@ public class GPFileUploader {
         return this.formPanel;
     }
 
-    private void createUploadComponent(String uploadAction, final GPExtensions... extensions) {
+    private void createUploadComponent(String uploadAction,
+            final GPExtensions... extensions) {
         formPanel = new FormPanel();
         formPanel.setAction(GWT.getModuleBaseURL() + uploadAction);
         formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
@@ -150,13 +151,14 @@ public class GPFileUploader {
                 } else {
                     GeoPlatformMessage.errorMessage("Upload Error", "Error on file upload");
                     LayoutManager.getInstance().getStatusMap().setStatus(
-                                "Failed to Upload File.", EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                            "Failed to Upload File.", EnumSearchStatus.STATUS_NO_SEARCH.toString());
                 }
             }
         });
     }
 
     public boolean isValidExtensions(String fileName, GPExtensions... extensions) {
+        System.out.println("TEST **************** " + extensions.length);
         for (GPExtensions gPExtensions : extensions) {
             if (fileName.toUpperCase().endsWith("." + gPExtensions.toString())) {
                 return true;

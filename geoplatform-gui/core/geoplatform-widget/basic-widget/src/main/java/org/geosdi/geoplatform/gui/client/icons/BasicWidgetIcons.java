@@ -98,4 +98,7 @@ public interface BasicWidgetIcons extends ImageBundle {
     
     @Resource("open_projects.png")
     AbstractImagePrototype loadProjects();
+    
+    @Resource("edit.png")
+    AbstractImagePrototype edit();
 }

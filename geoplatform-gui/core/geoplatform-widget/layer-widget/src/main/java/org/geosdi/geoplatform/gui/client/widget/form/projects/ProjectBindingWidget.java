@@ -45,13 +45,20 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProjectKey;
+import org.geosdi.geoplatform.gui.client.service.LayerRemote;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPDynamicFormBinding;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectCheckFieldBinding;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.ProjectNameFieldBinding;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchWidget;
+import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchWidget;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 
 /**
  *
@@ -59,7 +66,7 @@ import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListV
  * @email  giuseppe.lascaleia@geosdi.org
  *
  */
-public class AddProjectWidget extends GPDynamicFormBinding<GPClientProject> {
+public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> {
 
     private GPListViewSearchWidget<GPClientProject> searchWidget;
     private TextField<String> projectFieldName;
@@ -68,14 +75,14 @@ public class AddProjectWidget extends GPDynamicFormBinding<GPClientProject> {
     private Button cancel;
     private FormButtonBinding buttonBinding;
 
-    public AddProjectWidget(GPListViewSearchWidget<GPClientProject> theWidget) {
+    public ProjectBindingWidget(GPListViewSearchWidget<GPClientProject> theWidget) {
         super();
-        super.entity = new GPClientProject();
         this.searchWidget = theWidget;
     }
 
     @Override
     public void addFieldsBinding() {
+        this.formBinding.setStore(this.searchWidget.getStore());
         super.formBinding.addFieldBinding(new ProjectNameFieldBinding(projectFieldName,
                 GPClientProjectKey.PROJECT_NAME.toString()));
         super.formBinding.addFieldBinding(new ProjectCheckFieldBinding(projectDefaultCheck,
@@ -102,8 +109,8 @@ public class AddProjectWidget extends GPDynamicFormBinding<GPClientProject> {
         this.projectDefaultCheck = new CheckBox();
         this.projectDefaultCheck.setBoxLabel("Is Default");
         this.projectDefaultCheck.setName(GPClientProjectKey.DEFAULT_PROJECT.toString());
-        
-        CheckBoxGroup checkGroup = new CheckBoxGroup(); 
+
+        CheckBoxGroup checkGroup = new CheckBoxGroup();
         checkGroup.setFieldLabel("Project State");
         checkGroup.add(this.projectDefaultCheck);
 
@@ -128,21 +135,45 @@ public class AddProjectWidget extends GPDynamicFormBinding<GPClientProject> {
 
     @Override
     public void execute() {
-        System.out.println("TEST ***************** " + this.entity);
+        if (this.entity.getId() == null) {
+            insertProject();
+        } else {
+            updateProject();
+        }
     }
 
-    @Override
-    public void showForm() {
+    /**
+     * 
+     * @param Boolean useNewEntity 
+     *         TRUE to use a new Instance of GPClientProject
+     *         FALSE to use selected item in the store
+     */
+    public void showForm(boolean useNewEntity) {
+        if (useNewEntity) {
+            this.entity = new GPClientProject();
+            this.entity.setNumberOfElements(0);
+            this.entity.setImage(LayerResources.ICONS.gpProject().getHTML());
+        } else {
+            this.entity = this.searchWidget.getSelectionModel().getSelectedItem();
+        }
         super.showForm();
         buttonBinding.startMonitoring();
     }
-    
+
+    /**
+     * Important method to ensure the proper functioning
+     *  of the GXT Model binding
+     */
+    public void storeRejectChanges() {
+        this.searchWidget.getStore().rejectChanges();
+    }
+
     @Override
     public void reset() {
-        this.entity.reset();
-        this.formBinding.clear();
-        super.formBinding.unbind();
-        this.buttonBinding.stopMonitoring();
+        storeRejectChanges();
+        this.formBinding.unbind();
+        this.projectFieldName.reset();
+        this.projectDefaultCheck.reset();
     }
 
     private void addButtons() {
@@ -158,7 +189,7 @@ public class AddProjectWidget extends GPDynamicFormBinding<GPClientProject> {
                 });
 
         formPanel.addButton(save);
-        
+
         buttonBinding = new FormButtonBinding(formPanel);
         buttonBinding.addButton(save);
 
@@ -172,5 +203,53 @@ public class AddProjectWidget extends GPDynamicFormBinding<GPClientProject> {
                 });
 
         formPanel.addButton(cancel);
+    }
+
+    private void insertProject() {
+        LayerRemote.Util.getInstance().saveProject(entity,
+                new AsyncCallback<Long>() {
+
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        GeoPlatformMessage.errorMessage("Error",
+                                caught.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(Long result) {
+                        entity.setId(result);
+                        searchWidget.getStore().insert(entity, 0);
+
+                        if (entity.isDefaultProject()) {
+                            changeDefaultProject();
+                        }
+
+                        searchWidget.getStore().commitChanges();
+
+                        GeoPlatformMessage.infoMessage("Project successfully added",
+                                "<ul><li>" + entity.getName() + "</li></ul>");
+
+                        if (entity.isDefaultProject()) {
+                            TimeoutHandlerManager.fireEvent(((GPProjectSearchWidget) searchWidget).getDefaultProjectEvent());
+                        }
+
+                        hide();
+                    }
+                });
+    }
+
+    private void updateProject() {
+    }
+
+    private void changeDefaultProject() {
+        List<GPClientProject> projects = this.searchWidget.getStore().getModels();
+
+        for (int i = 1; i < projects.size(); i++) {
+            GPClientProject gPClientProject = projects.get(i);
+            if (gPClientProject.isDefaultProject()) {
+                gPClientProject.setDefaultProject(false);
+                return;
+            }
+        }
     }
 }

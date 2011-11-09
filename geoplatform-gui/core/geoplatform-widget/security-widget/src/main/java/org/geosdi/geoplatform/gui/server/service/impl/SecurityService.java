@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.soap.SOAPFaultException;
+import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.slf4j.Logger;
@@ -79,49 +79,41 @@ public class SecurityService implements ISecurityService {
     public IGPUserDetail userLogin(String userName, String password,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPUser user = null;
-        List<String> roles = null;
-        GPProject project = null;
         GuiComponentsPermissionMapData guiComponemtPermission;
         try {
             user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(
                     userName, password);
 
-            roles = geoPlatformServiceClient.getAuthorities(user.getId());
-
             guiComponemtPermission = geoPlatformServiceClient.getAccountGuiComponentVisible(
                     user.getId());
-
-            project = geoPlatformServiceClient.getDefaultProject(user.getId());
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
                     "Unable to find user with username: " + userName
                     + " Error: " + ex);
-            throw new GeoPlatformException(
-                    "Unable to find user with username: " + userName);
+            throw new GeoPlatformException("Unable to find user with username: "
+                    + userName);
         } catch (SOAPFaultException ex) {
-            logger.error(
-                    "Error on SecurityService: " + ex + " password incorrect");
+            logger.error("Error on SecurityService: " + ex + " password incorrect");
             throw new GeoPlatformException("Password incorrect");
         } catch (IllegalParameterFault ilg) {
-            logger.error(
-                    "Error on SecurityService: " + ilg);
+            logger.error("Error on SecurityService: " + ilg);
             throw new GeoPlatformException("Parameter incorrect");
         }
 
-        if (project == null) {
-            project = new GPProject();
+        if (user.getDefaultProjectID() == null) {
+            GPProject project = new GPProject();
             project.setName("Default Project");
             project.setShared(false);
             project.setId(this.saveDefaultProject(user, project));
         }
 
-        this.sessionUtility.storeUserAndProjectInSession(user, project.getId(),
-                httpServletRequest);
+        this.sessionUtility.storeUserAndProjectInSession(user,
+                user.getDefaultProjectID(), httpServletRequest);
 
         IGPUserDetail userDetail = this.userConverter.convertUserToDTO(user);
 
-        for (String role : roles) {
-            if (role.equals(GPRole.VIEWER.toString())) {
+        for (GPAuthority authority : user.getGPAuthorities()) {
+            if (authority.getAuthority().equals(GPRole.VIEWER.toString())) {
                 userDetail.setViewer(true);
             }
         }

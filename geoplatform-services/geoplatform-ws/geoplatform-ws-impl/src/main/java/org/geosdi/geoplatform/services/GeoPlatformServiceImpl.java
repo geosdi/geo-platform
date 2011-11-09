@@ -41,7 +41,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
@@ -143,7 +142,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      * @param accountDao
      *            the accountDao to set
      */
-    @Autowired
     public void setAccountDao(GPAccountDAO accountDao) {
         this.accountDao = accountDao;
         this.accountServiceDelegate.setAccountDao(accountDao);
@@ -155,7 +153,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      * @param accountProjectDao
      *            the accountProjectDao to set
      */
-    @Autowired
     public void setAccountProjectDao(GPAccountProjectDAO accountProjectDao) {
         this.accountProjectDao = accountProjectDao;
         this.accountServiceDelegate.setAccountProjectDao(accountProjectDao);
@@ -165,8 +162,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     /**
      * @param projectDao
      *          the projectDao to set
-     */
-    @Autowired
+     */    
     public void setProjectDao(GPProjectDAO projectDao) {
         this.projectDao = projectDao;
         this.accountServiceDelegate.setProjectDao(projectDao);
@@ -179,7 +175,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      * @param serverDao
      *            the serverDao to set
      */
-    @Autowired
     public void setServerDao(GPServerDAO serverDao) {
         this.serverDao = serverDao;
         this.wmsServiceDelegate.setServerDao(serverDao);
@@ -189,7 +184,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      * @param folderDao
      *            the folderDao to set
      */
-    @Autowired
     public void setFolderDao(GPFolderDAO folderDao) {
         this.folderDao = folderDao;
         this.folderServiceDelegate.setFolderDao(folderDao);
@@ -201,7 +195,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      * @param layerDao
      *            the layerDao to set
      */
-    @Autowired
     public void setLayerDao(GPLayerDAO layerDao) {
         this.layerDao = layerDao;
         this.folderServiceDelegate.setLayerDao(layerDao);
@@ -213,7 +206,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 //     * @param styleDao
 //     *            the styleDao to set
 //     */
-//    @Autowired
 //    public void setStyleDao(GPStyleDAO styleDao) {
 //        this.styleDao = styleDao;
 //        this.layerServiceDelegate.setStyleDao(styleDao);
@@ -232,7 +224,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      * @param classDao
      *          the classDao to set
      */
-    @Autowired
     public void setClassDao(AclClassDAO classDao) {
         this.classDao = classDao;
         this.aclServiceDelegate.setClassDao(classDao);
@@ -242,7 +233,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      * @param sidDao
      *          the sidDao to set
      */
-    @Autowired
     public void setSidDao(AclSidDAO sidDao) {
         this.sidDao = sidDao;
         this.aclServiceDelegate.setSidDao(sidDao);
@@ -252,7 +242,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      * @param objectIdentityDao
      *          the objectIdentityDao to set
      */
-    @Autowired
     public void setObjectIdentityDao(AclObjectIdentityDAO objectIdentityDao) {
         this.objectIdentityDao = objectIdentityDao;
         this.aclServiceDelegate.setObjectIdentityDao(objectIdentityDao);
@@ -262,7 +251,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      * @param entryDao
      *          the entryDao to set
      */
-    @Autowired
     public void setEntryDao(AclEntryDAO entryDao) {
         this.entryDao = entryDao;
         this.aclServiceDelegate.setEntryDao(entryDao);
@@ -272,7 +260,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      * @param guiComponentDao
      *          the guiComponentDao to set
      */
-    @Autowired
     public void setGuiComponentDao(GuiComponentDAO guiComponentDao) {
         this.guiComponentDao = guiComponentDao;
         this.aclServiceDelegate.setGuiComponentDao(guiComponentDao);
@@ -282,7 +269,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
      * @param emailHandler
      *          the emailHandler to set
      */
-    @Autowired
     public void setEmailHandler(EmailHandler emailHandler) {
         this.emailHandler = emailHandler;
         this.accountServiceDelegate.setEmailHandler(emailHandler);

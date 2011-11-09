@@ -321,19 +321,21 @@ class AccountServiceImpl {
 
     public GPUser getUserDetailByUsernameAndPassword(String username, String password)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        GPUser user = null;
+        GPUser user = this.getUserByUsername(username);
+        EntityCorrectness.checkAccountLog(user); // TODO assert
+
+        // Check password
         try {
-            user = accountDao.findByUsername(username);
-            if (user == null) {
-                throw new ResourceNotFoundFault("User with specified username was not found");
-            }
             if (!user.verify(password)) {
                 throw new IllegalParameterFault("Specified password was incorrect");
             }
-            EntityCorrectness.checkAccountLog(user); // TODO assert
         } catch (NoSuchAlgorithmException e) {
             throw new IllegalParameterFault(e.getMessage());
         }
+
+        // Set authorities
+        user.setGPAuthorities(this.getGPAuthorities(user.getStringID()));
+
         return user;
     }
 
@@ -406,7 +408,7 @@ class AccountServiceImpl {
     }
 
     /**
-     * @param username of User to retrieve authorities
+     * @param stringID of Account to retrieve authorities
      * @return Authorities in a list of String
      * @throws ResourceNotFoundFault 
      */
@@ -432,6 +434,11 @@ class AccountServiceImpl {
             throw new ResourceNotFoundFault("Account not found (stringID=" + stringID + ")");
         }
         EntityCorrectness.checkAuthorityLog(authorities);
+
+        for (GPAuthority authority : authorities) {
+            authority.setAccount(null); // Avoid authority-account cycle in XML
+        }
+
         return authorities;
     }
 

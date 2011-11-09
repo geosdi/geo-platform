@@ -142,16 +142,20 @@ class AccountServiceImpl {
         }
 
         account.setEnabled(true); // Always insert users as enabled
+        String plaintextPassword = null;
         if (account instanceof GPUser) {
             GPUser user = (GPUser) account;
-            user.setPassword(Utility.md5hash(user.getPassword())); // Hash password
+            plaintextPassword = user.getPassword();
+            user.setPassword(Utility.md5hash(plaintextPassword)); // Hash password
         }
         accountDao.persist(account);
 
         authorityDao.persist(authorities.toArray(new GPAuthority[authorities.size()]));
 
         if (sendEmail && account instanceof GPUser) {
-            this.emailHandler.sendConfirmationEmail((GPUser) account);
+            GPUser user = (GPUser) account;
+            user.setPassword(plaintextPassword);
+            this.emailHandler.sendConfirmationEmail(user);
         }
 
         return account.getId();

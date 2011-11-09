@@ -50,8 +50,13 @@ import org.apache.ws.security.handler.WSHandlerConstants;
 public class GPClientWebServiceInterceptorStrategyFactory {
     
     private String securityStrategy;
+    //
+    private String usernameTokenUser;
+    //
     private String clientPrivateKeyPropertiesFile;
+    private String clientKeystoreUser;
     private String serverPublicKeyPropertiesFile;
+    private String serverKeystoreUser;
 
     public WSS4JInInterceptor getInInterceptor() {
         if (this.securityStrategy.equals(EnumWebserviceSecurity.USERNAME_TOKEN.getValue())) {
@@ -90,7 +95,7 @@ public class GPClientWebServiceInterceptorStrategyFactory {
     private Map<String, Object> createUsernameTokenInterceptor() {
         Map<String, Object> props = new HashMap<String, Object>();
         
-        props.put(WSHandlerConstants.USER, "clientx509v1");
+        props.put(WSHandlerConstants.USER, this.usernameTokenUser);
         props.put(WSHandlerConstants.PASSWORD_TYPE, WSConstants.PW_DIGEST);
         props.put(WSHandlerConstants.ACTION, WSHandlerConstants.USERNAME_TOKEN);
         props.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallback.class.getName());
@@ -115,7 +120,7 @@ public class GPClientWebServiceInterceptorStrategyFactory {
         outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.ENCRYPT);
 //        outProps.put(WSHandlerConstants.ENC_PROP_FILE, "Client_Encrypt.properties");
         outProps.put(WSHandlerConstants.ENC_PROP_FILE, this.serverPublicKeyPropertiesFile);
-        outProps.put(WSHandlerConstants.ENCRYPTION_USER, "serverx509v1");
+        outProps.put(WSHandlerConstants.ENCRYPTION_USER, this.serverKeystoreUser);
         
         return new WSS4JOutInterceptor(outProps);
     }
@@ -134,7 +139,7 @@ public class GPClientWebServiceInterceptorStrategyFactory {
         Map<String, Object> outProps = new HashMap<String, Object>();
         
         outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE);
-        outProps.put(WSHandlerConstants.USER, "clientx509v1");
+        outProps.put(WSHandlerConstants.USER, this.clientKeystoreUser);
 //        outProps.put(WSHandlerConstants.SIG_PROP_FILE, "Client_Sign.properties");
         outProps.put(WSHandlerConstants.SIG_PROP_FILE, this.clientPrivateKeyPropertiesFile);
         outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallback.class.getName());
@@ -168,12 +173,12 @@ public class GPClientWebServiceInterceptorStrategyFactory {
         sb.append(WSHandlerConstants.SIGNATURE + " ");
         sb.append(WSHandlerConstants.ENCRYPT);
         outProps.put(WSHandlerConstants.ACTION, sb.toString());
-        outProps.put(WSHandlerConstants.USER, "clientx509v1");
+        outProps.put(WSHandlerConstants.USER, this.clientKeystoreUser);
 //        outProps.put(WSHandlerConstants.SIG_PROP_FILE, "Client_Sign.properties");
 //        outProps.put(WSHandlerConstants.ENC_PROP_FILE, "Client_Encrypt.properties");
         outProps.put(WSHandlerConstants.SIG_PROP_FILE, this.clientPrivateKeyPropertiesFile);
         outProps.put(WSHandlerConstants.ENC_PROP_FILE, this.serverPublicKeyPropertiesFile);
-        outProps.put(WSHandlerConstants.ENCRYPTION_USER, "serverx509v1");
+        outProps.put(WSHandlerConstants.ENCRYPTION_USER, this.serverKeystoreUser);
 
 //        outProps.put("signatureKeyIdentifier", "DirectReference");
 
@@ -190,11 +195,24 @@ public class GPClientWebServiceInterceptorStrategyFactory {
         this.securityStrategy = securityStrategy;
     }
 
+    public void setUsernameTokenUser(String usernameTokenUser) {
+        this.usernameTokenUser = usernameTokenUser;
+    }
+
     public void setClientPrivateKeyPropertiesFile(String clientPrivateKeyPropertiesFile) {
         this.clientPrivateKeyPropertiesFile = clientPrivateKeyPropertiesFile;
+    }
+
+    public void setClientKeystoreUser(String clientKeystoreUser) {
+        this.clientKeystoreUser = clientKeystoreUser;
     }
 
     public void setServerPublicKeyPropertiesFile(String serverPublicKeyPropertiesFile) {
         this.serverPublicKeyPropertiesFile = serverPublicKeyPropertiesFile;
     }
+
+    public void setServerKeystoreUser(String serverKeystoreUser) {
+        this.serverKeystoreUser = serverKeystoreUser;
+    }
+    
 }

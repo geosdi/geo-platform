@@ -141,7 +141,7 @@ public class UserService implements IUserService {
             throws GeoPlatformException {
         this.getCheckLoggedUser(httpServletRequest);
 
-        logger.info("User to update: " + userDetail);  // TODO DEL
+        logger.info("User to update: " + userDetail);
         Long userID = null;
         try {
             GPUser user = this.convertToGPUser(userDetail);

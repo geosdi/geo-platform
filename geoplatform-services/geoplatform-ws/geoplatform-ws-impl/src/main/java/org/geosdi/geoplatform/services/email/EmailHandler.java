@@ -45,8 +45,10 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.EmailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.ui.velocity.VelocityEngineUtils;
@@ -62,6 +64,8 @@ public class EmailHandler {
     //
     private JavaMailSender mailSender;
     private VelocityEngine velocityEngine;
+    private String subject;
+    private String template;
 
     /**
      * @param mailSender
@@ -79,6 +83,22 @@ public class EmailHandler {
         this.velocityEngine = velocityEngine;
     }
 
+    /**
+     * @param subject
+     *          the subject to set
+     */
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    /**
+     * @param template
+     *          the template to set
+     */
+    public void setTemplate(String template) {
+        this.template = template;
+    }
+
     public void sendConfirmationEmail(final GPUser user) throws EmailException {
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
 
@@ -86,13 +106,13 @@ public class EmailHandler {
             public void prepare(MimeMessage mimeMessage) {
                 try {
                     MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
-                    message.setSubject("[Geo-Platform] Confirm registration");
+                    message.setSubject(subject);
                     message.setTo(user.getEmailAddress());
 
                     Map model = new HashMap();
                     model.put("user", user);
                     String text = VelocityEngineUtils.mergeTemplateIntoString(
-                            velocityEngine, "registration.html.vm", model);
+                            velocityEngine, template, model);
                     message.setText(text, true);
                 } catch (VelocityException ex) {
                     logger.error("\n*** VelocityException: " + ex.getMessage());

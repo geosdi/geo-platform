@@ -5,6 +5,7 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:cxf="http://cxf.apache.org/core"
        xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
             http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
             http://www.springframework.org/schema/context
@@ -14,7 +15,9 @@
             http://cxf.apache.org/core             
             http://cxf.apache.org/schemas/core.xsd
             http://cxf.apache.org/jaxws
-            http://cxf.apache.org/schemas/jaxws.xsd">
+            http://cxf.apache.org/schemas/jaxws.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
 	<!--===================================================================== -->
 	<!-- Services -->
@@ -51,11 +54,17 @@
 
 	<!--===================================================================== -->        
 
+    <!-- Define the properties file to use -->
+    <util:properties id="emailProperties" location="classpath:/email.properties" />
+    
     <bean id="emailHandler"
           class="org.geosdi.geoplatform.services.email.EmailHandler">
         <property name="mailSender" ref="mailSender" />
         <property name="velocityEngine" ref="velocityEngine" />
-    </bean>
+        <property name="subject" value="#{emailProperties['email.subject']}" />
+        <property name="template" value="#{emailProperties['email.template']}" />
+    </bean>   
+    
     
     <bean id="mailSender"
         class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -68,8 +77,8 @@
                 <prop key="mail.smtp.starttls.enable">true</prop>
             </props>
         </property>
-        <property name="username" value="no-reply@geosdi.org" />
-        <property name="password" value="2357x,no-reply,1x" />
+        <property name="username" value="#{emailProperties['email.username']}" />
+        <property name="password" value="#{emailProperties['email.password']}" />
     </bean>
    
     <bean id="velocityEngine"
@@ -82,16 +91,6 @@
                 </prop>
             </props>
         </property>
-    </bean>   
-    
-    <!--bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">
-        <property name="from">
-            <value><![CDATA[Human Resources <hr@raibledesigns.com>]]>
-            </value>
-        </property>
-        <property name="subject">
-            <value>Your application has been received</value>
-        </property>
-    </bean-->
+    </bean>
 
 </beans>

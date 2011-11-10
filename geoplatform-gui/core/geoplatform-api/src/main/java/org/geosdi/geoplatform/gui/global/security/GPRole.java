@@ -69,11 +69,11 @@ public enum GPRole {
     public static GPRole fromString(String role) {
         if (role != null) {
             role = role.trim();
-            if (role.equalsIgnoreCase(VIEWER.role)) {
+            if (role.equals(VIEWER.role)) {
                 return VIEWER;
-            } else if (role.equalsIgnoreCase(USER.role)) {
+            } else if (role.equals(USER.role)) {
                 return USER;
-            } else if (role.equalsIgnoreCase(ADMIN.role)) {
+            } else if (role.equals(ADMIN.role)) {
                 return ADMIN;
             }
         }

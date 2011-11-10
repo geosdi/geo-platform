@@ -135,13 +135,8 @@ class AccountServiceImpl {
         EntityCorrectness.checkAccountAndAuthority(account); // TODO assert
         this.checkDuplicateAccount(account);
 
-        List<GPAuthority> authorities = account.getGPAuthorities();
-        for (GPAuthority authority : authorities) {
-            authority.setAccount(account);
-            authority.setStringID(account.getStringID());
-        }
-
         account.setEnabled(true); // Always insert users as enabled
+
         String plaintextPassword = null;
         if (account instanceof GPUser) {
             GPUser user = (GPUser) account;
@@ -150,6 +145,11 @@ class AccountServiceImpl {
         }
         accountDao.persist(account);
 
+        List<GPAuthority> authorities = account.getGPAuthorities();
+        for (GPAuthority authority : authorities) {
+            authority.setAccount(account);
+            authority.setStringID(account.getStringID());
+        }
         authorityDao.persist(authorities.toArray(new GPAuthority[authorities.size()]));
 
         if (sendEmail && account instanceof GPUser) {
@@ -429,15 +429,11 @@ class AccountServiceImpl {
     }
 
     private List<GPAuthority> getGPAuthorities(String stringID) throws ResourceNotFoundFault {
-        List<GPAuthority> authorities = authorityDao.findByStringID(stringID);
+        List<GPAuthority> authorities = authorityDao.findShortByStringID(stringID);
         if (authorities.isEmpty()) {
             throw new ResourceNotFoundFault("Account not found (stringID=" + stringID + ")");
         }
         EntityCorrectness.checkAuthorityLog(authorities);
-
-        for (GPAuthority authority : authorities) {
-            authority.setAccount(null); // Avoid authority-account cycle in XML
-        }
 
         return authorities;
     }

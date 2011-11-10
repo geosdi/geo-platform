@@ -67,4 +67,10 @@ public interface GPAuthorityDAO {
     public int count(ISearch search);
 
     public List<GPAuthority> findByStringID(String stringID);
+    
+    /**
+     * @param stringID
+     * @return List of authorities less ref to account entity
+     */
+    public List<GPAuthority> findShortByStringID(String stringID);
 }

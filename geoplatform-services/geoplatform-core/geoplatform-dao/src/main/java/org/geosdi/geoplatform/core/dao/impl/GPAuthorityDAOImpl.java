@@ -37,8 +37,11 @@
 //</editor-fold>
 package org.geosdi.geoplatform.core.dao.impl;
 
+import com.googlecode.genericdao.search.Field;
 import com.googlecode.genericdao.search.ISearch;
 import com.googlecode.genericdao.search.Search;
+import java.lang.Object;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
@@ -80,5 +83,33 @@ public class GPAuthorityDAOImpl extends BaseDAO<GPAuthority, Long> implements
         Search search = new Search();
         search.addFilterEqual("stringID", stringID);
         return super.search(search);
+    }
+
+    @Override
+    public List<GPAuthority> findShortByStringID(String stringID) {
+        Search search = new Search();
+
+        List<Field> fields = new ArrayList<Field>();
+        fields.add(new Field("id"));
+        fields.add(new Field("stringID"));
+        fields.add(new Field("authority"));
+        search.setFields(fields);
+        search.setResultMode(Search.RESULT_LIST);
+
+        search.addFilterEqual("stringID", stringID);
+        List<Object> columnsSelected = super.search(search);
+
+        List<GPAuthority> authorities = new ArrayList<GPAuthority>();
+        for (Object c : columnsSelected) {
+            String column = c.toString();
+            String[] s = (column.substring(1, column.length() - 1)).split(",");
+            GPAuthority authority = new GPAuthority();
+            authority.setId(new Long(s[0].trim()));
+            authority.setStringID(s[1].trim());
+            authority.setAuthority(s[2].trim());
+            authorities.add(authority);
+        }
+
+        return authorities;
     }
 }

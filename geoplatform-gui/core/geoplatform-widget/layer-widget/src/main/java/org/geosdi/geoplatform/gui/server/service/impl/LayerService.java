@@ -67,6 +67,7 @@ import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOConverter;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.ShortRasterPropertiesDTO;
@@ -632,7 +633,7 @@ public class LayerService implements ILayerService {
             GPUser user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
             Long projectId = this.geoPlatformServiceClient.saveProject(user.getUsername(),
                     this.dtoConverter.convertToGProject(project), project.isDefaultProject());
-            
+
             user.setDefaultProjectID(projectId);
 
             this.sessionUtility.storeUserAndProjectInSession(user, projectId,
@@ -650,6 +651,49 @@ public class LayerService implements ILayerService {
             logger.error(
                     "Error on SecurityService: " + ilg);
             throw new GeoPlatformException("Parameter incorrect on saveProject");
+        }
+    }
+
+    @Override
+    public void updateProject(GPClientProject project,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
+
+        try {
+
+            GPUser user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+
+            AccountProjectPropertiesDTO dto = this.dtoConverter.convertToAccountProjectPropertiesDTO(user.getId(),
+                    project);
+
+            if (this.geoPlatformServiceClient.saveAccountProjectProperties(dto)) {
+                user.setDefaultProjectID(project.getId());
+                this.sessionUtility.storeUserAndProjectInSession(user, project.getId(),
+                        httpServletRequest);
+            }
+
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+
+        } catch (ResourceNotFoundFault rnf) {
+            logger.error("Failed to update project on SecurityService: " + rnf);
+            throw new GeoPlatformException(rnf);
+
+        } catch (IllegalParameterFault ilg) {
+            logger.error(
+                    "Error on SecurityService: " + ilg);
+            throw new GeoPlatformException("Parameter incorrect on saveProject");
+        }
+
+    }
+
+    @Override
+    public void deleteProject(Long projectID, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        try {
+
+            this.geoPlatformServiceClient.deleteProject(projectID);
+        } catch (ResourceNotFoundFault rnf) {
+            logger.error("Failed to Delete project on SecurityService: " + rnf);
+            throw new GeoPlatformException(rnf);
         }
     }
 }

@@ -41,9 +41,7 @@ import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.RpcProxy;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
-import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.store.ListStore;
@@ -52,6 +50,7 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.action.projects.DeleteProjectAction;
 import org.geosdi.geoplatform.gui.client.action.projects.GPProjectAction;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.service.LayerRemote;
@@ -82,7 +81,7 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
     @Override
     public void finalizeInitOperations() {
         super.finalizeInitOperations();
-        selectButton.setText("Set Default Project");
+        selectButton.setText("Open Project");
         super.search.setFieldLabel("Find Project");
 
         this.action = new GPProjectAction(this);
@@ -90,20 +89,15 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
         super.addButton(1, new Button("Add", LayerResources.ICONS.projectAdd(),
                 this.action));
 
-        this.editButton = new Button("Edit", BasicWidgetResources.ICONS.edit(), action);
+        this.editButton = new Button("Edit", BasicWidgetResources.ICONS.edit(),
+                this.action);
 
         this.editButton.disable();
 
         super.addButton(2, this.editButton);
 
         this.deleteButton = new Button("Delete", LayerResources.ICONS.projectDelete(),
-                new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        /**TODO : IMPLEMENT ME **/
-                    }
-                });
+                new DeleteProjectAction(this));
 
         this.deleteButton.disable();
 
@@ -209,6 +203,32 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
     }
 
     /**
+     * 
+     * @return Boolean
+     */
+    public boolean isDefaultSelectedProject() {
+        return this.getSelectionModel().getSelectedItem().isDefaultProject();
+    }
+
+    public void deleteProject() {
+        LayerRemote.Util.getInstance().deleteProject(getSelectionModel().getSelectedItem().getId(),
+                new AsyncCallback<Object>() {
+
+                    @Override
+                    public void onFailure(Throwable caught) {
+                    }
+
+                    @Override
+                    public void onSuccess(Object result) {
+                        GeoPlatformMessage.infoMessage("Delete Project",
+                                "The Project " + getSelectionModel().getSelectedItem().getName() 
+                                + "was successfully removed.");
+                        store.remove(getSelectionModel().getSelectedItem());
+                    }
+                });
+    }
+
+    /**
      * Internal Class Delegate to Select Default Project and Rebuild GPTreePanel
      * 
      */
@@ -221,15 +241,20 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
                     getSelectedItem().getId(),
                     new AsyncCallback<Object>() {
 
+                        /**TODO MANAGE FOR SESSION TIMEOUT EXCEPTION **/
                         @Override
                         public void onFailure(Throwable caught) {
-                            throw new UnsupportedOperationException("Not supported yet.");
+                            GeoPlatformMessage.errorMessage("Setting Default"
+                                    + " Project Error",
+                                    caught.getMessage());
                         }
 
                         @Override
                         public void onSuccess(Object result) {
                             setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
                                     EnumProjectMessage.DEFAUTL_PROJECT_MESSAGE);
+
+//                            store.commitChanges();
 
                             hide();
 

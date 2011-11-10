@@ -191,4 +191,14 @@ public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote
     public Long saveProject(GPClientProject project) throws GeoPlatformException {
         return this.layerService.saveProject(project, super.getThreadLocalRequest());
     }
+
+    @Override
+    public void updateProject(GPClientProject project) throws GeoPlatformException {
+        this.layerService.updateProject(project, super.getThreadLocalRequest());
+    }
+
+    @Override
+    public void deleteProject(Long projectID) throws GeoPlatformException {
+        this.layerService.deleteProject(projectID, super.getThreadLocalRequest());
+    }
 }

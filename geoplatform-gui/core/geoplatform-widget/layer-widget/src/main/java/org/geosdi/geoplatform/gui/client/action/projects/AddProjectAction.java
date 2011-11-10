@@ -33,45 +33,28 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action.button;
+package org.geosdi.geoplatform.gui.client.action.projects;
 
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
-
-import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import org.geosdi.geoplatform.gui.client.widget.form.projects.ProjectBindingWidget;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
+ *
  */
-public class GeoPlatformButton extends Button {
+public class AddProjectAction extends GeoPlatformAction {
 
-    private ToolbarMapAction action;
+    private ProjectBindingWidget widget;
 
-    public GeoPlatformButton() {
-        super();
+    public AddProjectAction(ProjectBindingWidget theWidget) {
+        this.widget = theWidget;
     }
 
-    public void disableControl() {
-        this.action.getMapControl().deactivate();
-    }
-
-    public void enableControl() {
-        this.action.getMapControl().activate();
-    }
-
-    /**
-     * @return the action
-     */
-    public ToolbarMapAction getAction() {
-        return action;
-    }
-
-    /**
-     * @param action
-     *            the action to set
-     */
-    public void setAction(ToolbarMapAction action) {
-        this.action = action;
-        this.action.setButton(this);
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        this.widget.execute();
     }
 }

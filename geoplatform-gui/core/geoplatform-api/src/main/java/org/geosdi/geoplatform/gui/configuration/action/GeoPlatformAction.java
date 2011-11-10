@@ -44,5 +44,4 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public abstract class GeoPlatformAction extends SelectionListener<ButtonEvent> {
-    
 }

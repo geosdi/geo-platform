@@ -130,4 +130,10 @@ public interface ILayerService {
 
     Long saveProject(GPClientProject project, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
+
+    public void updateProject(GPClientProject project,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException;
+
+    void deleteProject(Long projectID,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException;
 }

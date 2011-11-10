@@ -33,45 +33,49 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action.button;
+package org.geosdi.geoplatform.gui.client.action.projects;
 
-import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
-
-import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchWidget;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
+ *
  */
-public class GeoPlatformButton extends Button {
+public class DeleteProjectAction extends GeoPlatformAction {
 
-    private ToolbarMapAction action;
+    private GPProjectSearchWidget searchWidget;
 
-    public GeoPlatformButton() {
-        super();
+    public DeleteProjectAction(GPProjectSearchWidget theSearchWidget) {
+        this.searchWidget = theSearchWidget;
     }
 
-    public void disableControl() {
-        this.action.getMapControl().deactivate();
-    }
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        if (searchWidget.isDefaultSelectedProject()) {
+            GeoPlatformMessage.alertMessage("Delete Project",
+                    "Attention you could not delete Default Project.");
+        } else {
+            GeoPlatformMessage.confirmMessage("Delete Project",
+                    "Are you sure you want to delete the Selected Project ?",
+                    new Listener<MessageBoxEvent>() {
 
-    public void enableControl() {
-        this.action.getMapControl().activate();
-    }
-
-    /**
-     * @return the action
-     */
-    public ToolbarMapAction getAction() {
-        return action;
-    }
-
-    /**
-     * @param action
-     *            the action to set
-     */
-    public void setAction(ToolbarMapAction action) {
-        this.action = action;
-        this.action.setButton(this);
+                        @Override
+                        public void handleEvent(MessageBoxEvent be) {
+                            if (be.getButtonClicked().getText().equalsIgnoreCase(
+                                    "yes")
+                                    || be.getButtonClicked().getText().equalsIgnoreCase(
+                                    "si")) {
+                                searchWidget.deleteProject();
+                            }
+                        }
+                    });
+        }
     }
 }

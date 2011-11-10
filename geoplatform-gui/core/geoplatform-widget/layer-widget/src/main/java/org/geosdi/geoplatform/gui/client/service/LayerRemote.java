@@ -235,4 +235,18 @@ public interface LayerRemote extends RemoteService {
      * @throws GeoPlatformException 
      */
     Long saveProject(GPClientProject project) throws GeoPlatformException;
+    
+    /**
+     * 
+     * @param project
+     * @throws GeoPlatformException 
+     */
+    void updateProject(GPClientProject project) throws GeoPlatformException;
+    
+    /**
+     * 
+     * @param projectID
+     * @throws GeoPlatformException 
+     */
+    void deleteProject(Long projectID) throws GeoPlatformException;
 }

@@ -463,6 +463,16 @@ class ProjectServiceImpl {
         return ProjectDTO.convertToProjectDTOList(projects);
     }
 
+    /**
+     * 
+     * @param accountProjectProperties
+     * 
+     * @return True only if the project is a candidate to be the default
+     *         False Otherwise
+     * 
+     * @throws ResourceNotFoundFault
+     * @throws IllegalParameterFault 
+     */
     public boolean saveAccountProjectProperties(AccountProjectPropertiesDTO accountProjectProperties)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPProject project = this.getProjectByID(accountProjectProperties.getProjectID());
@@ -477,8 +487,9 @@ class ProjectServiceImpl {
 
             account.setDefaultProjectID(project.getId());
             accountDao.merge(account);
+            return true;
         }
-        return true;
+        return false;
     }
     //</editor-fold>
 

@@ -60,6 +60,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
+import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
@@ -273,12 +274,23 @@ public class DTOConverter {
         }
         return layersList;
     }
-    
+
     public GPProject convertToGProject(GPClientProject clientProject) {
         GPProject project = new GPProject();
         project.setName(clientProject.getName());
         project.setShared(false);
         return project;
+    }
+
+    public AccountProjectPropertiesDTO convertToAccountProjectPropertiesDTO(Long accountID,
+            GPClientProject project) {
+        AccountProjectPropertiesDTO dto = new AccountProjectPropertiesDTO();
+        dto.setAccountID(accountID);
+        dto.setProjectID(project.getId());
+        dto.setProjectName(project.getName());
+        dto.setDefaultProject(project.isDefaultProject());
+        
+        return dto;
     }
 
     private void convertToLayerElementFromMementoLayer(GPLayer layer, AbstractMementoLayer memento) {

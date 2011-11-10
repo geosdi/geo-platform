@@ -115,4 +115,10 @@ public interface LayerRemoteAsync {
 
     void saveProject(GPClientProject project, AsyncCallback<Long> callback)
             throws GeoPlatformException;
+
+    void updateProject(GPClientProject project, AsyncCallback<?> callback)
+            throws GeoPlatformException;
+
+    void deleteProject(Long projectID,
+            AsyncCallback<?> callback) throws GeoPlatformException;
 }

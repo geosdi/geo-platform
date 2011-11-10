@@ -60,6 +60,7 @@
     
     <modules>
         <module>geoplatform-publisher</module>
+        <module>geoplatform-scheduler</module>
     </modules>
     
 </project>

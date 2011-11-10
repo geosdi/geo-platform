@@ -135,7 +135,7 @@ class AccountServiceImpl {
         EntityCorrectness.checkAccountAndAuthority(account); // TODO assert
         this.checkDuplicateAccount(account);
 
-        account.setEnabled(true); // Always insert users as enabled
+        account.setEnabled(false); // Always insert account as desabled
 
         String plaintextPassword = null;
         if (account instanceof GPUser) {
@@ -152,6 +152,7 @@ class AccountServiceImpl {
         }
         authorityDao.persist(authorities.toArray(new GPAuthority[authorities.size()]));
 
+        // TODO task scheduling
         if (sendEmail && account instanceof GPUser) {
             GPUser user = (GPUser) account;
             user.setPassword(plaintextPassword);

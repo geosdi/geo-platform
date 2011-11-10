@@ -147,14 +147,12 @@ public class WSAccountTest extends ServiceTest {
         Assert.assertNotNull(authority);
         Assert.assertEquals("Authority string", GPRole.USER.toString(), authority.getAuthority());
         Assert.assertEquals("Authority username", usernameTest, authority.getStringID());
-        Assert.assertEquals("Authority user.id", userTest.getId(), authority.getAccount().getId());
     }
 
     @Test
     public void testInsertUserWithMultiRole() throws IllegalParameterFault, ResourceNotFoundFault {
         String usernameMultiRole = "username-multi-role";
         Long idUser = super.createAndInsertUser(usernameMultiRole, GPRole.ADMIN, GPRole.VIEWER);
-        GPUser user = gpWSClient.getUserDetail(idUser);
 
         try {
             List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameMultiRole);
@@ -165,13 +163,11 @@ public class WSAccountTest extends ServiceTest {
             Assert.assertNotNull(authority);
             Assert.assertEquals("Authority string", GPRole.ADMIN.toString(), authority.getAuthority());
             Assert.assertEquals("Authority username", usernameMultiRole, authority.getStringID());
-            Assert.assertEquals("Authority user.id", user.getId(), authority.getAccount().getId());
 
             authority = authorities.get(1);
             Assert.assertNotNull(authority);
             Assert.assertEquals("Authority string", GPRole.VIEWER.toString(), authority.getAuthority());
             Assert.assertEquals("Authority username", usernameMultiRole, authority.getStringID());
-            Assert.assertEquals("Authority user.id", user.getId(), authority.getAccount().getId());
         } finally {
             boolean check = gpWSClient.deleteAccount(idUser);
             Assert.assertTrue(check);

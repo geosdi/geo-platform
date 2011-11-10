@@ -171,10 +171,7 @@ class ProjectServiceImpl {
             throws ResourceNotFoundFault, IllegalParameterFault {
         EntityCorrectness.checkProject(project); // TODO assert
 
-        GPProject origProject = projectDao.find(project.getId());
-        if (origProject == null) {
-            throw new ResourceNotFoundFault("Project not found", project.getId());
-        }
+        GPProject origProject = this.getProjectByID(project.getId());
         EntityCorrectness.checkProjectLog(origProject); // TODO assert
 
         // Update all properties (except the creationDate)
@@ -187,54 +184,45 @@ class ProjectServiceImpl {
         return origProject.getId();
     }
 
-    public boolean deleteProject(Long projectId) throws ResourceNotFoundFault {
-        GPProject project = projectDao.find(projectId);
-        if (project == null) {
-            throw new ResourceNotFoundFault("Project not found", projectId);
-        }
+    public boolean deleteProject(Long projectID) throws ResourceNotFoundFault {
+        GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
-        accountDao.resetDefaultProject(projectId);
+        accountDao.resetDefaultProject(projectID);
 
-        return projectDao.removeById(projectId);
+        return projectDao.removeById(projectID);
     }
 
-    public GPProject getProjectDetail(Long projectId) throws ResourceNotFoundFault {
-        GPProject project = projectDao.find(projectId);
-        if (project == null) {
-            throw new ResourceNotFoundFault("Project not found", projectId);
-        }
+    public GPProject getProjectDetail(Long projectID) throws ResourceNotFoundFault {
+        GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
         return project;
     }
 
-    public int getNumberOfElementsProject(Long projectId) throws ResourceNotFoundFault {
-        GPProject project = this.getProjectDetail(projectId);
-        EntityCorrectness.checkProjectLog(project); // TODO assert
+    public int getNumberOfElementsProject(Long projectID) throws ResourceNotFoundFault {
+        GPProject project = this.getProjectDetail(projectID);
 
         return project.getNumberOfElements();
     }
 
     /**
      * 
-     * @param projectId
+     * @param projectID
      * @return root folders of a project
      */
-    public List<FolderDTO> getRootFoldersByProjectID(Long projectId) {
-        List<GPFolder> foundAccountFolders = folderDao.searchRootFolders(projectId);
+    public List<FolderDTO> getRootFoldersByProjectID(Long projectID) {
+        List<GPFolder> foundAccountFolders = folderDao.searchRootFolders(projectID);
         return FolderDTO.convertToFolderDTOList(foundAccountFolders);
     }
 
-    public ProjectDTO exportProject(Long projectId) throws ResourceNotFoundFault {
-        GPProject project = projectDao.find(projectId);
-        if (project == null) {
-            throw new ResourceNotFoundFault("Project not found", projectId);
-        }
+    public ProjectDTO exportProject(Long projectID) throws ResourceNotFoundFault {
+        GPProject project = this.getProjectByID(projectID);
+        EntityCorrectness.checkProjectLog(project); // TODO assert
         ProjectDTO projectDTO = new ProjectDTO(project);
 
         // Root Folders
-        List<GPFolder> rootFolders = folderDao.searchRootFolders(projectId);
+        List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
         logger.debug("\n*** rootFolders:\n" + rootFolders);
 
         List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(rootFolders);
@@ -247,7 +235,7 @@ class ProjectServiceImpl {
 
         // Sub Folders
         Search searchCriteria = new Search(GPFolder.class);
-        searchCriteria.addFilterEqual("project.id", projectId);
+        searchCriteria.addFilterEqual("project.id", projectID);
         searchCriteria.addFilterNotNull("parent.id");
         List<GPFolder> subFolders = folderDao.search(searchCriteria);
 
@@ -263,7 +251,7 @@ class ProjectServiceImpl {
 
         // Sub Layers
         searchCriteria = new Search(GPLayer.class);
-        searchCriteria.addFilterEqual("project.id", projectId);
+        searchCriteria.addFilterEqual("project.id", projectID);
         List<GPLayer> subLayers = layerDao.search(searchCriteria);
 
         for (GPLayer layer : subLayers) {
@@ -302,10 +290,8 @@ class ProjectServiceImpl {
                 this.persistElementList(project, folder, folderDTO.getElementList());
             }
         }
-        GPAccount account = accountDao.find(accountID);
-        if (account == null) {
-            throw new ResourceNotFoundFault("Account Not Found ", accountID);
-        }
+        GPAccount account = this.getAccountByID(accountID);
+        EntityCorrectness.checkAccountLog(account); // TODO assert
 
         GPAccountProject accountProject = new GPAccountProject();
         accountProject.setAccountAndProject(account, project);
@@ -315,12 +301,9 @@ class ProjectServiceImpl {
         return project.getId();
     }
 
-    public void setProjectShared(Long projectId) throws ResourceNotFoundFault {
-        GPProject project = projectDao.find(projectId);
-        if (project == null) {
-            throw new ResourceNotFoundFault("Project not found", projectId);
-        }
-
+    public void setProjectShared(Long projectID) throws ResourceNotFoundFault {
+        GPProject project = this.getProjectByID(projectID);
+        EntityCorrectness.checkProjectLog(project); // TODO assert
         project.setShared(true);
 
         projectDao.merge(project);
@@ -328,15 +311,11 @@ class ProjectServiceImpl {
 
     public boolean setProjectOwner(RequestByAccountProjectIDs request, boolean force)
             throws ResourceNotFoundFault {
-        GPProject project = projectDao.find(request.getProjectID());
-        if (project == null) {
-            throw new ResourceNotFoundFault("Project not found", request.getProjectID());
-        }
+        GPProject project = this.getProjectByID(request.getProjectID());
+        EntityCorrectness.checkProjectLog(project); // TODO assert
 
-        GPAccount account = accountDao.find(request.getAccountID());
-        if (account == null) {
-            throw new ResourceNotFoundFault("Account not found", request.getAccountID());
-        }
+        GPAccount account = this.getAccountByID(request.getAccountID());
+        EntityCorrectness.checkAccountLog(account); // TODO assert
 
         // TODO: implement the logic described in this method's javadoc
 
@@ -348,10 +327,7 @@ class ProjectServiceImpl {
     }
 
     public GPProject getDefaultProject(Long accountID) throws ResourceNotFoundFault {
-        GPAccount account = accountDao.find(accountID);
-        if (account == null) {
-            throw new ResourceNotFoundFault("Account not found", accountID);
-        }
+        GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
 
         Long defaultProjectID = account.getDefaultProjectID();
@@ -359,26 +335,17 @@ class ProjectServiceImpl {
             return null;
         }
 
-        GPProject project = projectDao.find(defaultProjectID);
-        if (project == null) {
-            throw new ResourceNotFoundFault("Project not found", defaultProjectID);
-        }
+        GPProject project = this.getProjectByID(defaultProjectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
         return project;
     }
 
     public void updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
-        GPAccount account = accountDao.find(accountID);
-        if (account == null) {
-            throw new ResourceNotFoundFault("Account not found", accountID);
-        }
+        GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
 
-        GPProject project = projectDao.find(projectID);
-        if (project == null) {
-            throw new ResourceNotFoundFault("Project not found", accountID);
-        }
+        GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
         account.setDefaultProjectID(projectID);
@@ -402,10 +369,7 @@ class ProjectServiceImpl {
             throws ResourceNotFoundFault, IllegalParameterFault {
         EntityCorrectness.checkAccountProject(null); // TODO assert
 
-        GPAccountProject orig = accountProjectDao.find(accountProject.getId());
-        if (orig == null) {
-            throw new ResourceNotFoundFault("AccountProject not found", accountProject.getId());
-        }
+        GPAccountProject orig = this.getAccountProjectByID(accountProject.getId());
         EntityCorrectness.checkAccountProject(orig); // TODO assert
 
         // Update all properties (except the account and project reference)
@@ -419,10 +383,7 @@ class ProjectServiceImpl {
 
     public boolean deleteAccountProject(Long accountProjectID)
             throws ResourceNotFoundFault {
-        GPAccountProject accountProject = accountProjectDao.find(accountProjectID);
-        if (accountProject == null) {
-            throw new ResourceNotFoundFault("AccountProject not found", accountProjectID);
-        }
+        GPAccountProject accountProject = this.getAccountProjectByID(accountProjectID);
         EntityCorrectness.checkAccountProjectLog(accountProject); // TODO assert
 
         return projectDao.removeById(accountProjectID);
@@ -430,10 +391,7 @@ class ProjectServiceImpl {
 
     public GPAccountProject getAccountProject(Long accountProjectID)
             throws ResourceNotFoundFault {
-        GPAccountProject accountProject = accountProjectDao.find(accountProjectID);
-        if (accountProject == null) {
-            throw new ResourceNotFoundFault("AccountProject not found", accountProjectID);
-        }
+        GPAccountProject accountProject = this.getAccountProjectByID(accountProjectID);
         EntityCorrectness.checkAccountProjectLog(accountProject); // TODO assert
 
         return accountProject;
@@ -441,7 +399,6 @@ class ProjectServiceImpl {
 
     public List<GPAccountProject> getAccountProjectsByAccountID(Long accountID) {
         List<GPAccountProject> accountProjectsList = accountProjectDao.findByAccountID(accountID);
-
         EntityCorrectness.checkAccountProjectListLog(accountProjectsList); // TODO assert
 
         return accountProjectsList;
@@ -449,7 +406,6 @@ class ProjectServiceImpl {
 
     public List<GPAccountProject> getAccountProjectsByProjectID(Long projectID) {
         List<GPAccountProject> accountProjectsList = accountProjectDao.findByProjectID(projectID);
-
         EntityCorrectness.checkAccountProjectListLog(accountProjectsList); // TODO assert
 
         return accountProjectsList;
@@ -468,10 +424,7 @@ class ProjectServiceImpl {
 
     public Long getAccountProjectsCount(Long accountID, SearchRequest request)
             throws ResourceNotFoundFault {
-        GPAccount account = accountDao.find(accountID);
-        if (account == null) {
-            throw new ResourceNotFoundFault("Account not found", accountID);
-        }
+        GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
 
         Search searchCriteria = new Search(GPAccountProject.class);
@@ -485,10 +438,7 @@ class ProjectServiceImpl {
 
     public List<ProjectDTO> searchAccountProjects(Long accountID, PaginatedSearchRequest request)
             throws ResourceNotFoundFault {
-        GPAccount account = accountDao.find(accountID);
-        if (account == null) {
-            throw new ResourceNotFoundFault("Account not found", accountID);
-        }
+        GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
 
         Search searchCriteria = new Search(GPAccountProject.class);
@@ -515,22 +465,14 @@ class ProjectServiceImpl {
 
     public boolean saveAccountProjectProperties(AccountProjectPropertiesDTO accountProjectProperties)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        Long projectID = accountProjectProperties.getProjectID();
-        GPProject project = projectDao.find(projectID);
-        if (project == null) {
-            throw new ResourceNotFoundFault("Project not found", projectID);
-        }
+        GPProject project = this.getProjectByID(accountProjectProperties.getProjectID());
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
         project.setName(accountProjectProperties.getProjectName());
         projectDao.merge(project);
 
         if (accountProjectProperties.isDefaultProject()) {
-            Long accountID = accountProjectProperties.getAccountID();
-            GPAccount account = accountDao.find(accountID);
-            if (account == null) {
-                throw new ResourceNotFoundFault("Account not found", accountID);
-            }
+            GPAccount account = this.getAccountByID(accountProjectProperties.getAccountID());
             EntityCorrectness.checkAccountLog(account); // TODO assert
 
             account.setDefaultProjectID(project.getId());
@@ -539,6 +481,31 @@ class ProjectServiceImpl {
         return true;
     }
     //</editor-fold>
+
+    private GPProject getProjectByID(Long projectID) throws ResourceNotFoundFault {
+        GPProject project = projectDao.find(projectID);
+        if (project == null) {
+            throw new ResourceNotFoundFault("Project not found", projectID);
+        }
+        return project;
+    }
+
+    private GPAccount getAccountByID(Long accountID) throws ResourceNotFoundFault {
+        GPAccount account = accountDao.find(accountID);
+        if (account == null) {
+            throw new ResourceNotFoundFault("Account not found", accountID);
+        }
+        return account;
+    }
+
+    private GPAccountProject getAccountProjectByID(Long accountProjectID)
+            throws ResourceNotFoundFault {
+        GPAccountProject accountProject = accountProjectDao.find(accountProjectID);
+        if (accountProject == null) {
+            throw new ResourceNotFoundFault("AccountProject not found", accountProjectID);
+        }
+        return accountProject;
+    }
 
     private String createParentChildKey(GPFolder parent, GPFolder child) {
         return parent.getId() + ":" + child.getId();
@@ -567,13 +534,13 @@ class ProjectServiceImpl {
         return mapAll;
     }
 
-    private List<GPFolder> getChilds(Long parentId, Map<String, GPFolder> map) {
+    private List<GPFolder> getChilds(Long parentID, Map<String, GPFolder> map) {
         List<GPFolder> childs = new ArrayList<GPFolder>();
         List<String> childsKeyHit = new ArrayList<String>();
 
         for (Map.Entry<String, GPFolder> entry : map.entrySet()) {
             String key = entry.getKey();
-            if (key.startsWith(parentId.toString())) {
+            if (key.startsWith(parentID.toString())) {
                 logger.debug("*** getChilds - HIT: " + key);
                 childsKeyHit.add(key);
                 GPFolder childFolder = map.get(key);

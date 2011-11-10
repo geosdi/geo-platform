@@ -35,15 +35,37 @@
  */
 package org.geosdi.geoplatform.cache;
 
-import net.sf.ehcache.CacheManager;
+import java.net.URL;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPCacheManager extends CacheManager {
+@Configuration
+public class AppConfig {
     
-    public GPCacheManager(String url) {
-        super(url);
+//    @Value("#{cacheProperties['cacheManager.url']}")
+    @Value("#{cacheProperties['url']}")
+    private URL url;
+    private GPCacheManager gpCacheManager;
+    
+    /**
+     * Create a jetBean within the Spring Application Context
+     * @return a bean
+     */
+    public @Bean(name = "cacheManager")
+    GPCacheManager cacheManager() {
+        if(this.gpCacheManager == null){
+            System.out.println("URL: " + url.getPath());
+            if(this.url == null){
+                throw new IllegalArgumentException("The encache.xml url must not be null");
+            }
+            this.gpCacheManager = new GPCacheManager(url.getPath());
+        }
+        return this.gpCacheManager;
     }
+    
 }

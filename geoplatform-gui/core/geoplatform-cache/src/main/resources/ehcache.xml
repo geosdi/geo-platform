@@ -1,11 +1,19 @@
+
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="ehcache.xsd">
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" name="gpCacheManager">
 
     <diskStore path="java.io.tmpdir" />
 
     <defaultCache maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
+		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="false"
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
-		memoryStoreEvictionPolicy="LRU" />
+		memoryStoreEvictionPolicy="LRU">
+    </defaultCache>
+    
+    <cache name="oxmCache" maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="false"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
+		memoryStoreEvictionPolicy="LRU">
+    </cache>
 
 </ehcache>

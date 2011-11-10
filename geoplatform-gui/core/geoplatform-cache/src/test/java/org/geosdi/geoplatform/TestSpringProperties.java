@@ -20,22 +20,6 @@ public class TestSpringProperties {
 
     @Test
     public void testGPCacheManager() {
-        // create the spring container using the AppConfig
-        // @Configuration class
-//        ApplicationContext ctx =
-//                new AnnotationConfigApplicationContext(GPCacheManager.class);
-//        GPCacheManager bean = ctx.getBean(GPCacheManager.class);
-        logger.info("Beaninstance ***************************: " + this.cacheManager.getCacheManager().getDiskStorePath());
-//        assertThat(jetBean.getName(), equalTo("Gulf Stream G550"));
-//        URL gulfstream;
-//        try {
-//            gulfstream =
-//                    new URL("http://www.gulfstream.com/products/g550/");
-//        } catch (MalformedURLException e) {
-//            // TODO Auto-generated catch block
-//            fail("error creating URL");
-//            throw new RuntimeException("error creating URL");
-//        }
-//        assertThat(jetBean.getUrl(), equalTo(gulfstream));
+        logger.info("Beaninstance: " + this.cacheManager.getDiskStorePath());
     }
 }

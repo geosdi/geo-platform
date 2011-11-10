@@ -1,0 +1,44 @@
+
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" name="gpCacheManager">
+    
+    <terracottaConfig rejoin="true">
+        <tc-config>
+            <servers>
+                <server host="150.145.133.88" name="host1">
+                </server>
+            </servers>
+            <clients>
+<!--                <logs>app/logs-%i</logs>-->
+            </clients>
+            <nonstop immediateTimeout="true" timeoutMillis="3000">
+<!--                <timeoutBehavior type="noop" />-->
+<!--                <timeoutBehavior type="exception" />-->
+                <timeoutBehavior type="localReads" />
+            </nonstop>
+        </tc-config>
+    </terracottaConfig>
+
+    <defaultCache maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="false"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
+		memoryStoreEvictionPolicy="LRU">
+        <terracotta clustered="true">
+            <nonstop immediateTimeout="false" timeoutMillis="3000">
+                <timeoutBehavior type="localReads" />
+            </nonstop>
+        </terracotta>
+    </defaultCache>
+    
+    <cache name="oxmCache" maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="false"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
+		memoryStoreEvictionPolicy="LRU">
+        <terracotta clustered="true">
+            <nonstop immediateTimeout="false" timeoutMillis="3000">
+                <timeoutBehavior type="localReads" />
+            </nonstop>
+        </terracotta>
+    </cache>
+
+</ehcache>

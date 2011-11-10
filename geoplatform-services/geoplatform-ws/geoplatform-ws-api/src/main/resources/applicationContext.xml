@@ -16,6 +16,6 @@
     <!-- Scan for @Autowired annotations -->
     <context:annotation-config/>
     
-    <util:properties id="gpProperties" location="classpath:gp-test.properties"/>
+    <util:properties id="gpProperties" location="classpath:gp.properties"/>
 
 </beans>

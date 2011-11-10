@@ -33,12 +33,12 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.beans;
+package org.geosdi.geoplatform.cxf.beans;
 
-import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
-import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.geosdi.geoplatform.services.GeoPlatformServiceImpl;
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
+import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
+import org.geosdi.geoplatform.cxf.GPClientWebServiceInterceptorStrategyFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -47,23 +47,22 @@ import org.springframework.context.annotation.Configuration;
  * @email michele.santomauro@geosdi.org
  */
 @Configuration
-public class GeoPlatformWSTestBeans {
+public class GeoPlatformClientInterceptorBean {
+
+    @Autowired
+    private GPClientWebServiceInterceptorStrategyFactory factory;
     
-    private @Value("#{gpProperties.webservice_endpoint_address}") String address;
-
     @Bean
-    public GeoPlatformWSClient gpWSClient() {
-        GeoPlatformWSClient geoPlatformWSClient = new GeoPlatformWSClient();
-        geoPlatformWSClient.setAddress(this.address);
-
-        return geoPlatformWSClient;
+    public WSS4JInInterceptor geoPlatformClientInInterceptorBean() {
+        return this.factory.getInInterceptor();
     }
 
     @Bean
-    public GeoPlatformService geoPlatformService() {
-        GeoPlatformService geoPlatformService = new GeoPlatformServiceImpl();
-
-        return geoPlatformService;
+    public WSS4JOutInterceptor geoPlatformClientOutInterceptorBean() {
+        return this.factory.getOutInterceptor();
     }
-    
+
+    public void setFactory(GPClientWebServiceInterceptorStrategyFactory factory) {
+        this.factory = factory;
+    }
 }

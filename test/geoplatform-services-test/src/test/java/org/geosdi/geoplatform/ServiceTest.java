@@ -73,7 +73,7 @@ import org.geosdi.geoplatform.services.GeoPlatformService;
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:applicationContext.xml"})
+@ContextConfiguration(locations = {"applicationContext-Test.xml","classpath*:applicationContext.xml"})
 @TestExecutionListeners(value = {WSListenerServices.class})
 public abstract class ServiceTest {
 

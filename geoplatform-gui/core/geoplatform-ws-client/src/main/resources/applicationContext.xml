@@ -7,12 +7,23 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd
             http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
-
-    <bean id="geoPlatformServiceClient" class="org.geosdi.geoplatform.services.GeoPlatformService"
+    
+    <bean id="geoPlatformServiceClient"  class="org.geosdi.geoplatform.services.GeoPlatformService"
 		factory-bean="geoPlatformProxyFactory" factory-method="create" />
 
     <bean id="geoPlatformPublishClient" class="org.geosdi.geoplatform.cxf.GeoPlatformPublishClient">
         <property name="address" value="http://localhost:8080/geoplatform-service/publish" />
+    </bean>
+
+    <bean id="geoPlatformProxyFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+        <property name="serviceClass"
+			value="org.geosdi.geoplatform.services.GeoPlatformService" />
+        <property name="address"
+			value="http://localhost:8080/geoplatform-service/soap" />
+        <property name="inInterceptors"
+			ref="geoPlatformClientInInterceptorBean" />
+        <property name="outInterceptors"
+			ref="geoPlatformClientOutInterceptorBean" />
     </bean>
 
     <bean id="gpClientWebServiceInterceptorStrategyFactory" class="org.geosdi.geoplatform.cxf.GPClientWebServiceInterceptorStrategyFactory">
@@ -22,13 +33,6 @@
         <property name="clientKeystoreUser" value="#{gpProperties.webservice_client_keystore_user}" />
         <property name="serverPublicKeyPropertiesFile" value="#{gpProperties.webservice_server_publickey_properties_file}" />
         <property name="serverKeystoreUser" value="#{gpProperties.webservice_server_keystore_user}" />
-    </bean>
-
-    <bean id="geoPlatformProxyFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
-        <property name="serviceClass"
-			value="org.geosdi.geoplatform.services.GeoPlatformService" />
-        <property name="address"
-			value="http://localhost:8080/geoplatform-service/soap" />
     </bean>
 
 </beans>

@@ -40,6 +40,8 @@ package org.geosdi.geoplatform.services;
 import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebService;
+import org.apache.cxf.interceptor.InInterceptors;
+import org.apache.cxf.interceptor.OutInterceptors;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.springframework.transaction.annotation.Transactional;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
@@ -95,8 +97,13 @@ import org.geosdi.geoplatform.services.email.EmailHandler;
  * 
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
+ * 
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email michele.santomauro@geosdi.org
  */
 @Transactional // Give atomicity on WS methods
+//@InInterceptors (interceptors = {"com.example.Test1Interceptor" })
+//@OutInterceptors (interceptors = {"com.example.Test1Interceptor" })
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformService")
 public class GeoPlatformServiceImpl implements GeoPlatformService {
 

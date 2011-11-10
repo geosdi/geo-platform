@@ -21,7 +21,7 @@
     <!-- ====================================================================-->
     <!-- ====================================================================-->
 
-    <context:annotation-config />
+    <context:component-scan base-package="org.geosdi.geoplatform"/>
 
 	<!-- Load CXF modules from cxf.jar -->
     <import resource="classpath:META-INF/cxf/cxf.xml"/>
@@ -61,33 +61,15 @@
             <bean class="org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor"/>
             <ref bean="TimestampSignEncrypt_Response"/>
         </jaxws:outInterceptors>-->
-    </jaxws:endpoint>
-
-    <!--<jaxws:endpoint id="greeterSOAP"
-    	implementorClass="org.geosdi.geoplatform.services.GreeterServiceImpl"
-    	implementor="#greeter"
-    	address="/greeter">
-
-        <jaxws:serviceFactory>
-            <bean class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean">
-                <property name="serviceConfigurations">
-                    <list>
-                        <bean class="org.apache.cxf.jaxws.support.JaxWsServiceConfiguration"/>
-                        <bean class="org.apache.cxf.service.factory.DefaultServiceConfiguration"/>
-                    </list>
-                </property>
-            </bean>
-    	</jaxws:serviceFactory>
-        
-        <jaxws:outInterceptors>
-            <bean class="org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor"/>
-            <ref bean="TimestampSignEncrypt_Response"/>
-        </jaxws:outInterceptors>
         <jaxws:inInterceptors>
-            <ref bean="TimestampSignEncrypt_Request"/>
+            <ref bean="geoPlatformServerInInterceptorBean"/>
             <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
-        </jaxws:inInterceptors>
-    </jaxws:endpoint>-->
+        </jaxws:inInterceptors>        
+        <jaxws:outInterceptors>
+            <ref bean="geoPlatformServerOutInterceptorBean"/>
+            <bean class="org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor"/>
+        </jaxws:outInterceptors>
+    </jaxws:endpoint>
 
     <jaxws:endpoint id="publisherServiceSOAP"
     	implementorClass="org.geosdi.geoplatform.publish.GPPublisherServiceImpl"

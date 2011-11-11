@@ -21,14 +21,14 @@
 	<!-- Services -->
 	<!--===================================================================== -->
 
-    <bean id="publisherService" class="org.geosdi.geoplatform.publish.GPPublisherServiceImpl">
+    <bean id="publisherService" class="org.geosdi.geoplatform.services.GPPublisherServiceImpl">
         <!-- the server to connect -->
-      <constructor-arg type="java.lang.String" value="http://localhost:8989/geoserver"/>
+        <constructor-arg type="java.lang.String" value="http://localhost:8989/geoserver"/>
       <!-- the login and the password of the REST geoserver instance -->
-      <constructor-arg type="java.lang.String" value="admin"/>
-      <constructor-arg type="java.lang.String" value="geoserver"/>
+        <constructor-arg type="java.lang.String" value="admin"/>
+        <constructor-arg type="java.lang.String" value="geoserver"/>
       <!-- the workspace where publishing the shapefiles to preview -->
-      <constructor-arg type="java.lang.String" value="previews"/>
+        <constructor-arg type="java.lang.String" value="previews"/>
     </bean>
 
 	<!--===================================================================== -->

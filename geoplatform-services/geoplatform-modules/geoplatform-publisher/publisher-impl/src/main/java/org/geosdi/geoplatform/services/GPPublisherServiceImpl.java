@@ -35,7 +35,7 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.publish;
+package org.geosdi.geoplatform.services;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -103,7 +103,7 @@ import org.slf4j.LoggerFactory;
  * @author Luca Paolino - geoSDI
  *
  */
-@WebService(endpointInterface = "org.geosdi.geoplatform.publish.GPPublisherService")
+@WebService(endpointInterface = "org.geosdi.geoplatform.services.GPPublisherService")
 public class GPPublisherServiceImpl implements GPPublisherService {
 
     protected Logger logger = LoggerFactory.getLogger(

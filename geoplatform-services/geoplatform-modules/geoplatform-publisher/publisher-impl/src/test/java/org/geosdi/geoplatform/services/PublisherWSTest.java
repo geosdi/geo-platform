@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.publish;
+package org.geosdi.geoplatform.services;
 
 
 import org.slf4j.Logger;
@@ -59,7 +59,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class PublisherWSTest extends TestCase {
 
-    protected Logger logger = LoggerFactory.getLogger(org.geosdi.geoplatform.publish.PublisherWSTest.class);
+    protected Logger logger = LoggerFactory.getLogger(org.geosdi.geoplatform.services.PublisherWSTest.class);
     @Autowired
     private GPPublisherService gppublisherService;
 

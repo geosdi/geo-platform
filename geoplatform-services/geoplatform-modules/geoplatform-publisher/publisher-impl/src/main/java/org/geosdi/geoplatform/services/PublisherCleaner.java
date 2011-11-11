@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.publish;
+package org.geosdi.geoplatform.services;
 
 import java.io.File;
 import javax.annotation.PreDestroy;
@@ -56,5 +56,4 @@ public class PublisherCleaner {
         PublishUtility.deleteDir(new File(PublishUtility.TMPDIR + "shp"));
         logger.info("-------------------> DESTROY STARTUP-GEO-PLATFORM SERVICE");
     }
-
 }

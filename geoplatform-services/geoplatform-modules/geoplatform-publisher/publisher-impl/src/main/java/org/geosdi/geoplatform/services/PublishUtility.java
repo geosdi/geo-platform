@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.publish;
+package org.geosdi.geoplatform.services;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -5,7 +5,7 @@
   
     <parent>
         <groupId>org.geosdi</groupId>
-        <artifactId>geoplatform-publisher</artifactId>
+        <artifactId>geoplatform-scheduler</artifactId>
         <version>1.2-SNAPSHOT</version>
     </parent>
 

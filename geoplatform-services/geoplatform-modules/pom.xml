@@ -50,14 +50,6 @@
         </developer>
     </developers>
     
-    <dependencies>
-        <dependency>
-            <groupId>it.geosolutions</groupId>
-            <artifactId>geoserver-manager</artifactId>
-            <version>1.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-    
     <modules>
         <module>geoplatform-publisher</module>
         <module>geoplatform-scheduler</module>

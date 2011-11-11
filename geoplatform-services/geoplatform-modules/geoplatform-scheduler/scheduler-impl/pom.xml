@@ -48,7 +48,18 @@
 
     <dependencies>
         
-        <!-- logging dependencies, delegate all to slf4j and use logback -->
+<!-- GEOPLATFORM WS -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-model</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-ws-api</artifactId>
+        </dependency>
+        
+<!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -106,6 +117,17 @@
             <version>2.1.0</version>
         </dependency>
         
+<!-- Velocity (Email templates) -->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+        </dependency>
+
     </dependencies>
     
     <build>

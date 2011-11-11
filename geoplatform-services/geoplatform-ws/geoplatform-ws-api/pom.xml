@@ -159,7 +159,6 @@
         <dependency>
             <groupId>org.codehaus.jra</groupId>
             <artifactId>jra</artifactId>
-            <version>1.0-alpha-4</version>
         </dependency>
         <dependency>
             <groupId>com.vividsolutions</groupId>

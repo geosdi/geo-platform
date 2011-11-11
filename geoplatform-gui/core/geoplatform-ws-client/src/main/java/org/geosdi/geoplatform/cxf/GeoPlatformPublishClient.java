@@ -42,7 +42,7 @@ import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
-import org.geosdi.geoplatform.publish.GPPublisherService;
+import org.geosdi.geoplatform.services.GPPublisherService;
 import org.springframework.beans.factory.InitializingBean;
 
 /**

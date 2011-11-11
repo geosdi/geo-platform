@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.cache;
 
+import java.io.InputStream;
 import net.sf.ehcache.CacheManager;
 
 /**
@@ -45,5 +46,9 @@ public class GPCacheManager extends CacheManager {
     
     public GPCacheManager(String url) {
         super(url);
+    }
+    
+    public GPCacheManager(InputStream stream) {
+        super(stream);
     }
 }

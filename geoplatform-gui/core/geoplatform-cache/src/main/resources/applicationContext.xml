@@ -10,9 +10,14 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd
            http://www.springframework.org/schema/util 
-           http://www.springframework.org/schema/util/spring-util-3.0.xsd"
-	default-autowire="byName">
+           http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
+    <context:annotation-config />
+    
     <util:properties id="cacheProperties" location="classpath:/ehcache.properties" />
+    
+    <bean id="gpCacheAppConfig" class="org.geosdi.geoplatform.cache.GPCacheAppConfig">
+        <property name="resourcePath" value="classpath:/#{cacheProperties['url']}" />
+    </bean>
 
 </beans>

@@ -35,37 +35,51 @@
  */
 package org.geosdi.geoplatform.cache;
 
+import java.io.IOException;
 import java.net.URL;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@Configuration
-public class AppConfig {
-    
-//    @Value("#{cacheProperties['cacheManager.url']}")
-    @Value("#{cacheProperties['url']}")
-    private URL url;
+public class GPCacheAppConfig implements ApplicationContextAware {
+
+    private ApplicationContext appContext;
+    private String resourcePath;
     private GPCacheManager gpCacheManager;
-    
+
     /**
-     * Create a jetBean within the Spring Application Context
+     * Create a cacheManager within the Spring Application Context
      * @return a bean
      */
     public @Bean(name = "cacheManager")
-    GPCacheManager cacheManager() {
-        if(this.gpCacheManager == null){
-            System.out.println("URL: " + url.getPath());
-            if(this.url == null){
+    GPCacheManager cacheManager() throws IOException {
+        if (this.gpCacheManager == null) {
+            if (this.resourcePath == null) {
                 throw new IllegalArgumentException("The encache.xml url must not be null");
             }
-            this.gpCacheManager = new GPCacheManager(url.getPath());
+            
+            Resource resource = appContext.getResource(resourcePath);
+
+            this.gpCacheManager = new GPCacheManager(resource.getInputStream());
         }
         return this.gpCacheManager;
     }
-    
+
+    /**
+     * @param resourcePath the resourcePath to set
+     */
+    public void setResourcePath(String resourcePath) {
+        this.resourcePath = resourcePath;
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext ac) throws BeansException {
+        this.appContext = ac;
+    }
 }

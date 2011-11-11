@@ -629,6 +629,12 @@
                 <artifactId>aspectjweaver</artifactId>
                 <version>${aspectj-version}</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.codehaus.jra</groupId>
+                <artifactId>jra</artifactId>
+                <version>1.0-alpha-4</version>
+            </dependency>
 
 			<!-- =========================================================== -->
 			<!-- JUNIT -->

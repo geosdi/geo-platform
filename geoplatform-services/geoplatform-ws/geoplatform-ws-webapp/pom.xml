@@ -100,8 +100,19 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        
+		<!-- =============================================================== -->
+		<!-- SCHEDULER WS -->
+		<!-- =============================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-scheduler-api</artifactId>
+        </dependency>
 
-
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-scheduler-impl</artifactId>
+        </dependency>
 
 		<!-- =============================================================== -->
 		<!-- GEOPLATFORM WS -->

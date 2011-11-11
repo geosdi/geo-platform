@@ -53,6 +53,14 @@ public class GPSchedulerServiceImpl implements GPSchedulerService {
     //
     private EmailHandler emailHandler;
 
+    /**
+     * @param emailHandler
+     *          the emailHandler to set
+     */
+    public void setEmailHandler(EmailHandler emailHandler) {
+        this.emailHandler = emailHandler;
+    }
+
     @Override
     public void sendEmail(GPUser user) throws EmailException {
         this.emailHandler.sendConfirmationEmail(user);

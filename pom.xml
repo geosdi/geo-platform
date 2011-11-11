@@ -245,6 +245,18 @@
                 <artifactId>geoplatform-publisher-impl</artifactId>
                 <version>${geoplatform-version}</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-scheduler-api</artifactId>
+                <version>${geoplatform-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-scheduler-impl</artifactId>
+                <version>${geoplatform-version}</version>
+            </dependency>
 
 			<!-- =========================================================== -->
 			<!-- SPRING -->

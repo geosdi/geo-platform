@@ -102,8 +102,6 @@ import org.geosdi.geoplatform.services.email.EmailHandler;
  * @email michele.santomauro@geosdi.org
  */
 @Transactional // Give atomicity on WS methods
-//@InInterceptors (interceptors = {"com.example.Test1Interceptor" })
-//@OutInterceptors (interceptors = {"com.example.Test1Interceptor" })
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformService")
 public class GeoPlatformServiceImpl implements GeoPlatformService {
 

@@ -15,11 +15,6 @@
 
     <!-- Scan for @Autowired annotations -->
 <!--    <context:annotation-config/>-->
-   
-<!--    <util:properties id="gpProperties" location="classpath:gp-test.properties"/>-->
-
-<!--    <bean class="org.geosdi.geoplatform.PropertiesFileReaderBeans"/>-->
-    <bean class="org.geosdi.geoplatform.beans.GeoPlatformWSTestBeans"/>
 
 	<!-- =============================================================== -->
 	<!-- Configure the Jetty Server with Spring -->

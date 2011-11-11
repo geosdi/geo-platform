@@ -37,7 +37,6 @@
 //</editor-fold>
 package org.geosdi.geoplatform;
 
-import org.geosdi.geoplatform.beans.PropertiesFileReaderBeans;
 import javax.xml.ws.Endpoint;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
@@ -49,8 +48,6 @@ import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.TestExecutionListener;
 
@@ -99,11 +96,6 @@ public class WSListenerServices implements TestExecutionListener {
         endpoint = Endpoint.publish(serverAddress, implementor);
 
         logger.debug("\n*** Server ready...");
-    }
-
-    private GeoPlatformWSClient instantiateSpring() {
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(PropertiesFileReaderBeans.class);       
-        return ctx.getBean(GeoPlatformWSClient.class);
     }
 
     @Override

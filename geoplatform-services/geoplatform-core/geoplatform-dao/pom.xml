@@ -294,11 +294,6 @@
             <artifactId>hibernate-core</artifactId>
         </dependency>        
 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate</artifactId>
-        </dependency>
-
 		<!-- HIBERNATE-SPATIAL -->
         <dependency>
             <groupId>org.hibernatespatial</groupId>

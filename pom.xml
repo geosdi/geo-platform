@@ -1160,7 +1160,7 @@
         <postgis-jdbc-version>1.1.6</postgis-jdbc-version>
 
         <hibernate-persistence-version>1.0.1.Final</hibernate-persistence-version>
-        <hibernate-version>3.6.6.Final</hibernate-version>
+        <hibernate-version>3.6.8.Final</hibernate-version>
         <hibernate-spatial-version>1.1</hibernate-spatial-version>
         <hibernate-generic-dao-version>1.0.0</hibernate-generic-dao-version>
         <asm-version>3.3</asm-version>

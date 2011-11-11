@@ -40,8 +40,6 @@ package org.geosdi.geoplatform.services;
 import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebService;
-import org.apache.cxf.interceptor.InInterceptors;
-import org.apache.cxf.interceptor.OutInterceptors;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.springframework.transaction.annotation.Transactional;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
@@ -70,7 +68,6 @@ import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.exception.EmailException;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
@@ -89,7 +86,6 @@ import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
-import org.geosdi.geoplatform.services.email.EmailHandler;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
@@ -127,8 +123,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private FolderServiceImpl folderServiceDelegate;
     private LayerServiceImpl layerServiceDelegate;
     private AclServiceImpl aclServiceDelegate;
-    //
-    private EmailHandler emailHandler;
 
     public GeoPlatformServiceImpl() {
         accountServiceDelegate = new AccountServiceImpl();
@@ -167,7 +161,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     /**
      * @param projectDao
      *          the projectDao to set
-     */    
+     */
     public void setProjectDao(GPProjectDAO projectDao) {
         this.projectDao = projectDao;
         this.accountServiceDelegate.setProjectDao(projectDao);
@@ -269,15 +263,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
         this.guiComponentDao = guiComponentDao;
         this.aclServiceDelegate.setGuiComponentDao(guiComponentDao);
     }
-
-    /**
-     * @param emailHandler
-     *          the emailHandler to set
-     */
-    public void setEmailHandler(EmailHandler emailHandler) {
-        this.emailHandler = emailHandler;
-        this.accountServiceDelegate.setEmailHandler(emailHandler);
-    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Account">
@@ -286,7 +271,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     // ==========================================================================
     @Override
     public Long insertAccount(GPAccount account, boolean sendEmail)
-            throws IllegalParameterFault, EmailException {
+            throws IllegalParameterFault {
         return accountServiceDelegate.insertAccount(account, sendEmail);
     }
 

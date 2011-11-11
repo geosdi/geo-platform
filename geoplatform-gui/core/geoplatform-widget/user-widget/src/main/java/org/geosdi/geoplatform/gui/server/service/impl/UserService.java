@@ -45,7 +45,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.exception.EmailException;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
@@ -129,8 +128,8 @@ public class UserService implements IUserService {
             iserId = geoPlatformServiceClient.insertAccount(user, false);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
-        } catch (EmailException ee) {
-            throw new GeoPlatformException(ee.getMessage());
+//        } catch (EmailException ee) {
+//            throw new GeoPlatformException(ee.getMessage());
         }
 
         return iserId;

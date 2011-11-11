@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.services;
 
 import javax.jws.WebService;
+import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.exception.EmailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +47,14 @@ import org.slf4j.LoggerFactory;
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPSchedulerService")
-public class GPSchedulerServiceImpl {
+public class GPSchedulerServiceImpl implements GPSchedulerService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    private EmailHandler emailHandler;
+
+    @Override
+    public void sendEmail(GPUser user) throws EmailException {
+        this.emailHandler.sendConfirmationEmail(user);
+    }
 }

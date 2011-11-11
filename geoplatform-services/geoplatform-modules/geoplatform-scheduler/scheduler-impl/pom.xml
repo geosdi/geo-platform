@@ -56,7 +56,8 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-ws-api</artifactId>
+            <artifactId>geoplatform-scheduler-api</artifactId>
+            <version>${geoplatform-version}</version>
         </dependency>
         
 <!-- logging dependencies, delegate all to slf4j and use logback -->

@@ -52,7 +52,6 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.Utility;
-import org.geosdi.geoplatform.exception.EmailException;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
@@ -61,7 +60,6 @@ import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
-import org.geosdi.geoplatform.services.email.EmailHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -80,7 +78,7 @@ class AccountServiceImpl {
     private GPProjectDAO projectDao;
     private GPAuthorityDAO authorityDao;
     //
-    private EmailHandler emailHandler;
+//    private EmailHandler emailHandler;
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
@@ -115,13 +113,13 @@ class AccountServiceImpl {
         this.authorityDao = authorityDao;
     }
 
-    /**
-     * @param emailHandler
-     *          the emailHandler to set
-     */
-    public void setEmailHandler(EmailHandler emailHandler) {
-        this.emailHandler = emailHandler;
-    }
+//    /**
+//     * @param emailHandler
+//     *          the emailHandler to set
+//     */
+//    public void setEmailHandler(EmailHandler emailHandler) {
+//        this.emailHandler = emailHandler;
+//    }
     //</editor-fold>
 
     /**
@@ -131,7 +129,7 @@ class AccountServiceImpl {
      * @return Long the Account ID
      */
     public Long insertAccount(GPAccount account, boolean sendEmail)
-            throws IllegalParameterFault, EmailException {
+            throws IllegalParameterFault {
         EntityCorrectness.checkAccountAndAuthority(account); // TODO assert
         this.checkDuplicateAccount(account);
 
@@ -153,11 +151,11 @@ class AccountServiceImpl {
         authorityDao.persist(authorities.toArray(new GPAuthority[authorities.size()]));
 
         // TODO task scheduling
-        if (sendEmail && account instanceof GPUser) {
-            GPUser user = (GPUser) account;
-            user.setPassword(plaintextPassword);
-            this.emailHandler.sendConfirmationEmail(user);
-        }
+//        if (sendEmail && account instanceof GPUser) {
+//            GPUser user = (GPUser) account;
+//            user.setPassword(plaintextPassword);
+//            this.emailHandler.sendConfirmationEmail(user);
+//        }
 
         return account.getId();
     }

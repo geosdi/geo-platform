@@ -35,7 +35,11 @@
  */
 package org.geosdi.geoplatform.services;
 
+import javax.jws.WebParam;
+import org.codehaus.jra.Post;
 import javax.jws.WebService;
+import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.exception.EmailException;
 
 /**
  * @author Vincenzo Monteverde
@@ -45,5 +49,8 @@ import javax.jws.WebService;
  * using CXT framework
  */
 @WebService(name = "GPSchedulerService", targetNamespace = "http://services.geo-platform.org/")
-public class GPSchedulerService {
+public interface GPSchedulerService {
+
+    @Post
+    void sendEmail(@WebParam(name = "user") GPUser user) throws EmailException;
 }

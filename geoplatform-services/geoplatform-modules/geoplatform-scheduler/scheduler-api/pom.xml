@@ -48,6 +48,12 @@
     
     <dependencies>
         
+<!-- GEOPLATFORM WS -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-model</artifactId>
+        </dependency>        
+        
 <!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -103,6 +109,20 @@
                 </includes>
             </resource>
         </resources>
+        
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
     
 </project>

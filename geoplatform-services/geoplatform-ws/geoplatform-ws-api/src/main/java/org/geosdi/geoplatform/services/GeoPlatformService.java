@@ -62,7 +62,6 @@ import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.exception.EmailException;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
@@ -104,7 +103,7 @@ public interface GeoPlatformService {
     @HttpResource(location = "/accounts")
     Long insertAccount(@WebParam(name = "account") GPAccount account,
             @WebParam(name = "sendEmail") boolean sendEmail)
-            throws IllegalParameterFault, EmailException;
+            throws IllegalParameterFault;
 
     @Post
     @HttpResource(location = "/users")

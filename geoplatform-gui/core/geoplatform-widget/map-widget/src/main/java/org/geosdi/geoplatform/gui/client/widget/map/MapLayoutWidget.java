@@ -470,6 +470,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
     /**
      * @return the measureAreaActive
      */
+    @Override
     public boolean isMeasureAreaActive() {
         return measureAreaActive;
     }

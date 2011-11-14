@@ -57,7 +57,7 @@ import org.gwtopenmaps.openlayers.client.Map;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPFeatureInfoCaller implements ILoadLayersDataSourceHandler{
+public class GPFeatureInfoCaller implements ILoadLayersDataSourceHandler {
 
     private boolean loaded;
     private Map map;
@@ -94,14 +94,21 @@ public class GPFeatureInfoCaller implements ILoadLayersDataSourceHandler{
 
             @Override
             public void onSuccess(ArrayList<String> result) {
-                for (String string : result) {
-                    IGPFeatureInfoElement element = FeatureInfoFlyWeight.getInstance().get(string);
-                    map.addControl(element.getElementControl());
+                if (result != null) {
+                    for (String string : result) {
+                        IGPFeatureInfoElement element = FeatureInfoFlyWeight.getInstance().get(string);
+                        map.addControl(element.getElementControl());
+                    }
+                    activateFeatureInfoControl();
+                    loaded = true;
+                    LayoutManager.getInstance().getStatusMap().setStatus("Feature Info Function loaded succesfully.",
+                            EnumSearchStatus.STATUS_SEARCH.toString());
+                } else {
+                    GeoPlatformMessage.alertMessage("GPFeature Info Module",
+                            "There are no layers on the Server for the Current "
+                            + "Project. Please Save the Project and Re Click on "
+                            + "Feature Info Button.");
                 }
-                activateFeatureInfoControl();
-                loaded = true;
-                LayoutManager.getInstance().getStatusMap().setStatus("Feature Info Function loaded succesfully.",
-                        EnumSearchStatus.STATUS_SEARCH.toString());
             }
         });
     }

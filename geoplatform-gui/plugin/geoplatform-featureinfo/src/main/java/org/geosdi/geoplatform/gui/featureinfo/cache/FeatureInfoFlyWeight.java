@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.featureinfo.cache;
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,8 +46,6 @@ import org.geosdi.geoplatform.gui.featureinfo.widget.factory.FeatureInfoControlF
 import org.geosdi.geoplatform.gui.featureinfo.widget.factory.FeatureInfoPanelFactory;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoShowWidgetEvent;
 import org.gwtopenmaps.openlayers.client.control.WMSGetFeatureInfo;
-import org.gwtopenmaps.openlayers.client.event.ControlActivateListener;
-import org.gwtopenmaps.openlayers.client.event.ControlActivateListener.ControlActivateEvent;
 import org.gwtopenmaps.openlayers.client.event.GetFeatureInfoListener;
 import org.gwtopenmaps.openlayers.client.event.GetFeatureInfoListener.GetFeatureInfoEvent;
 import org.gwtopenmaps.openlayers.client.event.NoGetFeatureInfoListener;

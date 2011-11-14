@@ -62,8 +62,8 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 public class GPDynamicTreeContextMenu extends Menu {
 
     private GPTreePanel<GPBeanTreeModel> tree;
-    private final Menu folderContextMenu = new Menu();
-    private final Menu layerContextMenu = new Menu();
+    private Menu folderContextMenu = new Menu();
+    private Menu layerContextMenu = new Menu();
 
     public GPDynamicTreeContextMenu(GPTreePanel tree) {
         this.tree = tree;
@@ -113,38 +113,38 @@ public class GPDynamicTreeContextMenu extends Menu {
 //        exportToGML.setIcon(LayerResources.ICONS.exportToGML());
 //        exportToGML.addSelectionListener(new ExportoToGML(tree));
 //        contextMenu.add(exportToGML);
-        
+
         MenuItem pasteMenuItem = new MenuItem("Paste in Folder");
         pasteMenuItem.setIcon(LayerResources.ICONS.paste());
         pasteMenuItem.setEnabled(false);
         PasteLayerAction pasteAction = new PasteLayerAction(tree);
         pasteMenuItem.addSelectionListener(pasteAction);
         folderContextMenu.add(pasteMenuItem);
-        
+
         MenuItem folderRename = new MenuItem();
         folderRename.setText("Rename Folder");
         folderRename.setIcon(LayerResources.ICONS.editFolder());
         folderRename.addSelectionListener(new ShowFolderRenameAction(tree));
         folderContextMenu.add(folderRename);
-        
+
         MenuItem copyMenuItem = new MenuItem("Copy Layer");
         copyMenuItem.setIcon(LayerResources.ICONS.copy());
         copyMenuItem.addSelectionListener(new CopyLayerAction(tree, pasteAction, pasteMenuItem));
         layerContextMenu.add(copyMenuItem);
         layerContextMenu.add(layerProperties);
-        
+
         this.tree.setContextMenu(this.layerContextMenu);
-        
+
         this.tree.addListener(Events.OnContextMenu, new Listener() {
 
             private Menu emptyMenu = new Menu();
-            
+
             @Override
             public void handleEvent(BaseEvent be) {
                 GPBeanTreeModel selectedItem = tree.getSelectionModel().getSelectedItem();
                 if (selectedItem instanceof FolderTreeNode) {
                     tree.setContextMenu(folderContextMenu);
-                } else if (selectedItem instanceof GPLayerTreeModel){
+                } else if (selectedItem instanceof GPLayerTreeModel) {
                     tree.setContextMenu(layerContextMenu);
                 } else {
                     tree.setContextMenu(emptyMenu);

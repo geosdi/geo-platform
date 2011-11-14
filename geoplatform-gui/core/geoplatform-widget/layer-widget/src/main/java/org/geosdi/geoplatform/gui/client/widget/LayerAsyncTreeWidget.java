@@ -59,14 +59,10 @@ import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.TreePanelEvent;
 import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.store.TreeStoreEvent;
-import com.extjs.gxt.ui.client.widget.menu.Menu;
-import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel.CheckCascade;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.LayerEvents;
-import org.geosdi.geoplatform.gui.client.LayerResources;
-import org.geosdi.geoplatform.gui.client.action.menu.ZoomToLayerExtentAction;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
 import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
@@ -95,8 +91,6 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
         super();
         this.buildRoot();
         this.setTreePanelProperties();
-        //TODO: After toolbar implementation remove this method
-        this.addMenuAddElement();
     }
 
     /*
@@ -231,19 +225,6 @@ public class LayerAsyncTreeWidget extends GeoPlatformAsyncTreeWidget<GPBeanTreeM
         dropTarget.addListener(LayerEvents.GP_DROP, gpDNDListener);
 
         super.store.addListener(Store.Add, gpDNDListener);
-    }
-
-    private void addMenuAddElement() {
-        Menu contextMenu = new Menu();
-
-        // add zoom to max extent
-        MenuItem zoomToMaxExtend = new MenuItem();
-        zoomToMaxExtend.setText("Zoom to layer extend");
-        zoomToMaxExtend.setIcon(LayerResources.ICONS.zoomToMaxExtend());
-        zoomToMaxExtend.addSelectionListener(new ZoomToLayerExtentAction(tree));
-        contextMenu.add(zoomToMaxExtend);
-
-        this.tree.setContextMenu(contextMenu);
     }
 
     @Override

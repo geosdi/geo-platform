@@ -52,10 +52,16 @@ public class FeatureInfoControlFactory {
      */
     public static WMSGetFeatureInfo createControl(String urlServer) {
         WMSGetFeatureInfoOptions options = new WMSGetFeatureInfoOptions();
-        options.setURL(urlServer);
+
+        /** FIX MEEEEEEEEEEEEEEEEEE **/
+        if (urlServer.equalsIgnoreCase("http://10.220.154.25/geowebcache/service/wms")) {
+            options.setURL("http://10.220.154.25/geoserver/wms");
+        } else {
+            options.setURL(urlServer);
+        }
         options.setTitle("Query visible layers");
         options.setQueryVisible(true);
-
+        
         return new WMSGetFeatureInfo(options);
     }
 }

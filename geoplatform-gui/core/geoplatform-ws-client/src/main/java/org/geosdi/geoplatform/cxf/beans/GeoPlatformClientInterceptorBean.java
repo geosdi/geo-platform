@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.cxf.beans;
 
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.geosdi.geoplatform.cxf.GPClientWebServiceInterceptorStrategyFactory;
@@ -53,13 +55,27 @@ public class GeoPlatformClientInterceptorBean {
     private GPClientWebServiceInterceptorStrategyFactory factory;
     
     @Bean
-    public WSS4JInInterceptor geoPlatformClientInInterceptorBean() {
-        return this.factory.getInInterceptor();
+    public LoggingInInterceptor geoPlatformClientLoggingInInterceptorBean() {
+        System.out.println("#### 1");
+        return this.factory.getLoggingInInterceptor();
     }
 
     @Bean
-    public WSS4JOutInterceptor geoPlatformClientOutInterceptorBean() {
-        return this.factory.getOutInterceptor();
+    public LoggingOutInterceptor geoPlatformClientLoggingOutInterceptorBean() {
+        System.out.println("#### 2");
+        return this.factory.getLoggingOutInterceptor();
+    }
+    
+    @Bean
+    public WSS4JInInterceptor geoPlatformClientSecurityInInterceptorBean() {
+        System.out.println("#### 3");
+        return this.factory.getSecurityInInterceptor();
+    }
+
+    @Bean
+    public WSS4JOutInterceptor geoPlatformClientSecurityOutInterceptorBean() {
+        System.out.println("#### 4");
+        return this.factory.getSecurityOutInterceptor();
     }
 
     public void setFactory(GPClientWebServiceInterceptorStrategyFactory factory) {

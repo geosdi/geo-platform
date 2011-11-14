@@ -13,8 +13,9 @@
             http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
 	default-autowire="byName">
 
-    <!-- Scan for @Autowired annotations -->
+     <!-- Scan for @Autowired annotations -->
     <context:annotation-config/>
+<!--    <context:component-scan base-package="org.geosdi.geoplatform"/>-->
     
 <!--    <util:properties id="gpProperties" location="classpath:gp.properties"/>-->
     

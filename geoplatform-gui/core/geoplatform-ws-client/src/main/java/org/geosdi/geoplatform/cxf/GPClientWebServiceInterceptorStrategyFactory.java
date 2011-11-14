@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.cxf;
 import org.geosdi.geoplatform.services.EnumWebserviceSecurity;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.apache.ws.security.WSConstants;
@@ -49,6 +51,7 @@ import org.apache.ws.security.handler.WSHandlerConstants;
  */
 public class GPClientWebServiceInterceptorStrategyFactory {
     
+    private String loggingStrategy;
     private String securityStrategy;
     //
     private String usernameTokenUser;
@@ -58,7 +61,7 @@ public class GPClientWebServiceInterceptorStrategyFactory {
     private String serverPublicKeyPropertiesFile;
     private String serverKeystoreUser;
 
-    public WSS4JInInterceptor getInInterceptor() {
+    public WSS4JInInterceptor getSecurityInInterceptor() {
         if (this.securityStrategy.equals(EnumWebserviceSecurity.USERNAME_TOKEN.getValue())) {
             return createUsernameTokenInInterceptor();
         } else if (this.securityStrategy.equals(EnumWebserviceSecurity.ENCRYPTION.getValue())) {
@@ -71,7 +74,7 @@ public class GPClientWebServiceInterceptorStrategyFactory {
         return null;
     }
 
-    public WSS4JOutInterceptor getOutInterceptor() {
+    public WSS4JOutInterceptor getSecurityOutInterceptor() {
         if (this.securityStrategy.equals(EnumWebserviceSecurity.USERNAME_TOKEN.getValue())) {
             return createUsernameTokenOutInterceptor();
         } else if (this.securityStrategy.equals(EnumWebserviceSecurity.ENCRYPTION.getValue())) {
@@ -189,6 +192,29 @@ public class GPClientWebServiceInterceptorStrategyFactory {
 //        outProps.put("encryptionParts", "{Content}{http://schemas.xmlsoap.org/soap/envelope/}Body");
 //        outProps.put("encryptionSymAlgorithm", "http://www.w3.org/2001/04/xmlenc#tripledes-cbc");
         return new WSS4JOutInterceptor(outProps);
+    }
+    
+
+    public LoggingInInterceptor getLoggingInInterceptor() {
+        if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN.getValue())) {
+            return new LoggingInInterceptor();
+        } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN_OUT.getValue())) {
+            return new LoggingInInterceptor();
+        }
+        return null;
+    }
+
+    public LoggingOutInterceptor getLoggingOutInterceptor() {
+        if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_OUT.getValue())) {
+            return new LoggingOutInterceptor();
+        } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN_OUT.getValue())) {
+            return new LoggingOutInterceptor();
+        }
+        return null;
+    }
+
+    public void setLoggingStrategy(String loggingStrategy) {
+        this.loggingStrategy = loggingStrategy;
     }
 
     public void setSecurityStrategy(String securityStrategy) {

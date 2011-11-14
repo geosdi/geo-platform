@@ -141,6 +141,7 @@
     <modules>
         <module>geoplatform-services</module>
         <module>geoplatform-gui</module>
+        <module>geoplatform-tools</module>
         <module>test</module>
     </modules>
 
@@ -194,6 +195,16 @@
             <properties>
                 <openPGP>0xB25F4B38</openPGP>
             </properties>
+        </developer>
+        <developer>
+            <name>Michele Santomauro</name>
+            <id>michele.santomauro</id>
+            <email>michele.santomauro@geosdi.org</email>
+            <organization>geoSDI</organization>
+            <roles>
+                <role>Java Developer</role>
+                <role>Project Management Committee (PMC) Member</role>
+            </roles>
         </developer>
     </developers>
 
@@ -255,6 +266,14 @@
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-scheduler-impl</artifactId>
+                <version>${geoplatform-version}</version>
+            </dependency>
+
+			<!-- =========================================================== -->
+
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-configurator</artifactId>
                 <version>${geoplatform-version}</version>
             </dependency>
 

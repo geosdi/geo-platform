@@ -57,8 +57,8 @@ public class GeoPlatformWSClient {
     public GeoPlatformService create() {
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
         
-        factory.getInInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getInInterceptor());
-        factory.getOutInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getOutInterceptor());
+        factory.getInInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getSecurityInInterceptor());
+        factory.getOutInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getSecurityOutInterceptor());
 
         factory.setServiceClass(GeoPlatformService.class);
         factory.setAddress(this.address);

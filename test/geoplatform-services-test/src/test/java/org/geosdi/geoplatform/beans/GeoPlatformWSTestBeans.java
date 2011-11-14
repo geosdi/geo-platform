@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.beans;
 
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.geosdi.geoplatform.services.GeoPlatformServiceImpl;

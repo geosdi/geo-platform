@@ -41,6 +41,9 @@ package org.geosdi.geoplatform.services;
  */
 public enum EnumWebserviceSecurity {
     
+    LOGGING_IN("LOGGING_IN"),
+    LOGGING_OUT("LOGGING_OUT"),
+    LOGGING_IN_OUT("LOGGING_IN_OUT"),
     USERNAME_TOKEN("USERNAME_TOKEN"),
     ENCRYPTION("ENCRYPTION"),
     SIGNATURE("SIGNATURE"),

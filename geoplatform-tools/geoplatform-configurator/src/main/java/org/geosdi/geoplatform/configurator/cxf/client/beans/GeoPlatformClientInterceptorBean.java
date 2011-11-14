@@ -53,28 +53,24 @@ public class GeoPlatformClientInterceptorBean {
 
     @Autowired
     private GPClientWebServiceInterceptorStrategyFactory factory;
-    
+
     @Bean
     public LoggingInInterceptor geoPlatformClientLoggingInInterceptorBean() {
-        System.out.println("#### 1");
         return this.factory.getLoggingInInterceptor();
     }
 
     @Bean
     public LoggingOutInterceptor geoPlatformClientLoggingOutInterceptorBean() {
-        System.out.println("#### 2");
         return this.factory.getLoggingOutInterceptor();
     }
-    
+
     @Bean
     public WSS4JInInterceptor geoPlatformClientSecurityInInterceptorBean() {
-        System.out.println("#### 3");
         return this.factory.getSecurityInInterceptor();
     }
 
     @Bean
     public WSS4JOutInterceptor geoPlatformClientSecurityOutInterceptorBean() {
-        System.out.println("#### 4");
         return this.factory.getSecurityOutInterceptor();
     }
 

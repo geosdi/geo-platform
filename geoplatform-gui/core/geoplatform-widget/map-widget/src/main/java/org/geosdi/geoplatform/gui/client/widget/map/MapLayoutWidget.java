@@ -243,6 +243,28 @@ public class MapLayoutWidget implements GeoPlatformMap {
         this.map.addLayer(layer);
 
         this.layer.setZIndex(-2);
+        
+        GoogleOptions opSatellite = new GoogleOptions();
+        opSatellite.setType(GMapType.G_SATELLITE_MAP);
+        opSatellite.setSphericalMercator(true);
+        opSatellite.setTransitionEffect(TransitionEffect.RESIZE);
+
+        Layer satellite = new Google("Google Satellite", opSatellite);
+        satellite.setIsBaseLayer(true);
+        this.map.addLayer(satellite);
+
+        satellite.setZIndex(-3);
+        
+        GoogleOptions opHybrid = new GoogleOptions();
+        opHybrid.setType(GMapType.G_HYBRID_MAP);
+        opHybrid.setSphericalMercator(true);
+        opHybrid.setTransitionEffect(TransitionEffect.RESIZE);
+
+        Layer hybrid = new Google("Google Hybrid", opHybrid);
+        hybrid.setIsBaseLayer(true);
+        this.map.addLayer(hybrid);
+
+        hybrid.setZIndex(-4);
     }
 
     /**

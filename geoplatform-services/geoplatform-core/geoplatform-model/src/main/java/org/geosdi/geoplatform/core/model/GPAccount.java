@@ -48,6 +48,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.PostPersist;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -103,6 +104,14 @@ public abstract class GPAccount implements Serializable {
     private Long defaultProjectID;
 
     public abstract String getStringID();
+
+    @PostPersist
+    public void sendingEmail() {
+        if (this instanceof GPAccount) {
+            // TODO New thread for sending email
+            System.out.println("\n***\n" + this + "\n***\n");
+        }
+    }
 
     /**
      * @return the id
@@ -190,11 +199,11 @@ public abstract class GPAccount implements Serializable {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName());
-        str.append("id=").append(id);
+        str.append(" id=").append(id);
         str.append(", enabled=").append(enabled);
-        str.append(", accountNonExpired=").append(accountNonExpired);
-        str.append(", accountNonLocked=").append(accountNonLocked);
-        str.append(", credentialsNonExpired=").append(credentialsNonExpired);
+//        str.append(", accountNonExpired=").append(accountNonExpired);
+//        str.append(", accountNonLocked=").append(accountNonLocked);
+//        str.append(", credentialsNonExpired=").append(credentialsNonExpired);
         if (authorities != null) {
             str.append(", authorities.size=").append(authorities.size());
         } else {

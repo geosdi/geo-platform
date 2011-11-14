@@ -77,8 +77,6 @@ class AccountServiceImpl {
     private GPAccountProjectDAO accountProjectDao;
     private GPProjectDAO projectDao;
     private GPAuthorityDAO authorityDao;
-    //
-//    private EmailHandler emailHandler;
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
@@ -112,14 +110,6 @@ class AccountServiceImpl {
     public void setAuthorityDao(GPAuthorityDAO authorityDao) {
         this.authorityDao = authorityDao;
     }
-
-//    /**
-//     * @param emailHandler
-//     *          the emailHandler to set
-//     */
-//    public void setEmailHandler(EmailHandler emailHandler) {
-//        this.emailHandler = emailHandler;
-//    }
     //</editor-fold>
 
     /**

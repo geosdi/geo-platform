@@ -35,7 +35,7 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform.services;
+package org.geosdi.geoplatform.configurator.cxf.server;
 
 import java.io.IOException;
 import java.util.HashMap;

@@ -33,9 +33,8 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cxf;
+package org.geosdi.geoplatform.configurator.cxf.client;
 
-import org.geosdi.geoplatform.services.EnumWebserviceSecurity;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
@@ -44,6 +43,7 @@ import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.apache.ws.security.WSConstants;
 import org.apache.ws.security.handler.WSHandlerConstants;
+import org.geosdi.geoplatform.configurator.cxf.EnumWebserviceSecurity;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
@@ -110,7 +110,6 @@ public class GPClientWebServiceInterceptorStrategyFactory {
         Map<String, Object> inProps = new HashMap<String, Object>();
         
         inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.ENCRYPT);
-//        inProps.put(WSHandlerConstants.DEC_PROP_FILE, "Client_Sign.properties");
         inProps.put(WSHandlerConstants.DEC_PROP_FILE, this.clientPrivateKeyPropertiesFile);
         inProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallback.class.getName());
 
@@ -121,7 +120,6 @@ public class GPClientWebServiceInterceptorStrategyFactory {
         Map<String, Object> outProps = new HashMap<String, Object>();
         
         outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.ENCRYPT);
-//        outProps.put(WSHandlerConstants.ENC_PROP_FILE, "Client_Encrypt.properties");
         outProps.put(WSHandlerConstants.ENC_PROP_FILE, this.serverPublicKeyPropertiesFile);
         outProps.put(WSHandlerConstants.ENCRYPTION_USER, this.serverKeystoreUser);
         
@@ -132,7 +130,6 @@ public class GPClientWebServiceInterceptorStrategyFactory {
         Map<String, Object> inProps = new HashMap<String, Object>();
         
         inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE);
-//        inProps.put(WSHandlerConstants.SIG_PROP_FILE, "Client_Encrypt.properties");
         inProps.put(WSHandlerConstants.SIG_PROP_FILE, this.serverPublicKeyPropertiesFile);
 
         return new WSS4JInInterceptor(inProps);
@@ -143,7 +140,6 @@ public class GPClientWebServiceInterceptorStrategyFactory {
         
         outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE);
         outProps.put(WSHandlerConstants.USER, this.clientKeystoreUser);
-//        outProps.put(WSHandlerConstants.SIG_PROP_FILE, "Client_Sign.properties");
         outProps.put(WSHandlerConstants.SIG_PROP_FILE, this.clientPrivateKeyPropertiesFile);
         outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallback.class.getName());
         
@@ -158,8 +154,6 @@ public class GPClientWebServiceInterceptorStrategyFactory {
         sb.append(WSHandlerConstants.SIGNATURE + " ");
         sb.append(WSHandlerConstants.ENCRYPT);
         inProps.put(WSHandlerConstants.ACTION, sb.toString());
-//        inProps.put(WSHandlerConstants.SIG_PROP_FILE, "Client_Encrypt.properties");
-//        inProps.put(WSHandlerConstants.DEC_PROP_FILE, "Client_Sign.properties");
         inProps.put(WSHandlerConstants.SIG_PROP_FILE, this.serverPublicKeyPropertiesFile);
         inProps.put(WSHandlerConstants.DEC_PROP_FILE, this.clientPrivateKeyPropertiesFile);
 
@@ -177,8 +171,6 @@ public class GPClientWebServiceInterceptorStrategyFactory {
         sb.append(WSHandlerConstants.ENCRYPT);
         outProps.put(WSHandlerConstants.ACTION, sb.toString());
         outProps.put(WSHandlerConstants.USER, this.clientKeystoreUser);
-//        outProps.put(WSHandlerConstants.SIG_PROP_FILE, "Client_Sign.properties");
-//        outProps.put(WSHandlerConstants.ENC_PROP_FILE, "Client_Encrypt.properties");
         outProps.put(WSHandlerConstants.SIG_PROP_FILE, this.clientPrivateKeyPropertiesFile);
         outProps.put(WSHandlerConstants.ENC_PROP_FILE, this.serverPublicKeyPropertiesFile);
         outProps.put(WSHandlerConstants.ENCRYPTION_USER, this.serverKeystoreUser);

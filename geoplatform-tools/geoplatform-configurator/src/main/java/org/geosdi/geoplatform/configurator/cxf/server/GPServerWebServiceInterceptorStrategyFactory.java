@@ -33,8 +33,9 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services;
+package org.geosdi.geoplatform.configurator.cxf.server;
 
+import org.geosdi.geoplatform.configurator.cxf.EnumWebserviceSecurity;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
@@ -119,7 +120,6 @@ public class GPServerWebServiceInterceptorStrategyFactory {
         Map<String, Object> outProps = new HashMap<String, Object>();
         
         outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.ENCRYPT);
-//        outProps.put(WSHandlerConstants.ENC_PROP_FILE, "Server_SignVerf.properties");
         outProps.put(WSHandlerConstants.ENC_PROP_FILE, this.clientPublicKeyPropertiesFile);
         outProps.put(WSHandlerConstants.ENCRYPTION_USER, this.clientKeystoreUser);
         
@@ -130,7 +130,6 @@ public class GPServerWebServiceInterceptorStrategyFactory {
         Map<String, Object> inProps = new HashMap<String, Object>();
         
         inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE);
-//        inProps.put(WSHandlerConstants.SIG_PROP_FILE, "Server_SignVerf.properties");
         inProps.put(WSHandlerConstants.SIG_PROP_FILE, this.clientPublicKeyPropertiesFile);
 
         return new WSS4JInInterceptor(inProps);
@@ -141,7 +140,6 @@ public class GPServerWebServiceInterceptorStrategyFactory {
         
         outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE);
         outProps.put(WSHandlerConstants.USER, this.serverKeystoreUser);
-//        outProps.put(WSHandlerConstants.SIG_PROP_FILE, "Server_Decrypt.properties");
         outProps.put(WSHandlerConstants.SIG_PROP_FILE, this.serverPrivateKeyPropertiesFile);
         outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ServerKeystorePasswordCallback.class.getName());
         
@@ -156,8 +154,6 @@ public class GPServerWebServiceInterceptorStrategyFactory {
         sb.append(WSHandlerConstants.SIGNATURE + " ");
         sb.append(WSHandlerConstants.ENCRYPT);
         inProps.put(WSHandlerConstants.ACTION, sb.toString());
-//        inProps.put(WSHandlerConstants.SIG_PROP_FILE, "Server_SignVerf.properties");
-//        inProps.put(WSHandlerConstants.DEC_PROP_FILE, "Server_Decrypt.properties");
         inProps.put(WSHandlerConstants.SIG_PROP_FILE, this.clientPublicKeyPropertiesFile);
         inProps.put(WSHandlerConstants.DEC_PROP_FILE, this.serverPrivateKeyPropertiesFile);
 
@@ -175,8 +171,6 @@ public class GPServerWebServiceInterceptorStrategyFactory {
         sb.append(WSHandlerConstants.ENCRYPT);
         outProps.put(WSHandlerConstants.ACTION, sb.toString());
         outProps.put(WSHandlerConstants.USER, this.serverKeystoreUser);
-//        outProps.put(WSHandlerConstants.SIG_PROP_FILE, "Server_Decrypt.properties");
-//        outProps.put(WSHandlerConstants.ENC_PROP_FILE, "Server_SignVerf.properties");
         outProps.put(WSHandlerConstants.SIG_PROP_FILE, this.serverPrivateKeyPropertiesFile);
         outProps.put(WSHandlerConstants.ENC_PROP_FILE, this.clientPublicKeyPropertiesFile);
         outProps.put(WSHandlerConstants.ENCRYPTION_USER, this.clientKeystoreUser);

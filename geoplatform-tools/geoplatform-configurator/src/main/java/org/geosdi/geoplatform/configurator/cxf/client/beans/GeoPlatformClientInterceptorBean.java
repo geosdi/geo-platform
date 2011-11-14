@@ -33,33 +33,52 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services;
+package org.geosdi.geoplatform.configurator.cxf.client.beans;
+
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
+import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
+import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
+import org.geosdi.geoplatform.configurator.cxf.client.GPClientWebServiceInterceptorStrategyFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public enum EnumWebserviceSecurity {
-    
-    LOGGING_IN("LOGGING_IN"),
-    LOGGING_OUT("LOGGING_OUT"),
-    LOGGING_IN_OUT("LOGGING_IN_OUT"),
-    USERNAME_TOKEN("USERNAME_TOKEN"),
-    ENCRYPTION("ENCRYPTION"),
-    SIGNATURE("SIGNATURE"),
-    TIMESTAMP_SIGNATURE_ENCRYPTION("TIMESTAMP_SIGNATURE_ENCRYPTION");
-    //
-    private String value;
+@Configuration
+public class GeoPlatformClientInterceptorBean {
 
-    EnumWebserviceSecurity(String value) {
-        this.value = value;
+    @Autowired
+    private GPClientWebServiceInterceptorStrategyFactory factory;
+    
+    @Bean
+    public LoggingInInterceptor geoPlatformClientLoggingInInterceptorBean() {
+        System.out.println("#### 1");
+        return this.factory.getLoggingInInterceptor();
     }
 
-    /**
-     * @return the value
-     */
-    public String getValue() {
-        return value;
+    @Bean
+    public LoggingOutInterceptor geoPlatformClientLoggingOutInterceptorBean() {
+        System.out.println("#### 2");
+        return this.factory.getLoggingOutInterceptor();
     }
     
+    @Bean
+    public WSS4JInInterceptor geoPlatformClientSecurityInInterceptorBean() {
+        System.out.println("#### 3");
+        return this.factory.getSecurityInInterceptor();
+    }
+
+    @Bean
+    public WSS4JOutInterceptor geoPlatformClientSecurityOutInterceptorBean() {
+        System.out.println("#### 4");
+        return this.factory.getSecurityOutInterceptor();
+    }
+
+    public void setFactory(GPClientWebServiceInterceptorStrategyFactory factory) {
+        this.factory = factory;
+    }
 }

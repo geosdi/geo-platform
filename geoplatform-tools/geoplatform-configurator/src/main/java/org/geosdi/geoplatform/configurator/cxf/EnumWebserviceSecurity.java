@@ -33,32 +33,33 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services.beans;
-
-import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
-import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
-import org.geosdi.geoplatform.services.GPServerWebServiceInterceptorStrategyFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+package org.geosdi.geoplatform.configurator.cxf;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-@Configuration
-public class GeoPlatformServerInterceptorBean {
-
-    @Autowired
-    private GPServerWebServiceInterceptorStrategyFactory factory;
+public enum EnumWebserviceSecurity {
     
-    @Bean
-    public WSS4JInInterceptor geoPlatformServerInInterceptorBean() {
-        return this.factory.getInInterceptor();
+    LOGGING_IN("LOGGING_IN"),
+    LOGGING_OUT("LOGGING_OUT"),
+    LOGGING_IN_OUT("LOGGING_IN_OUT"),
+    USERNAME_TOKEN("USERNAME_TOKEN"),
+    ENCRYPTION("ENCRYPTION"),
+    SIGNATURE("SIGNATURE"),
+    TIMESTAMP_SIGNATURE_ENCRYPTION("TIMESTAMP_SIGNATURE_ENCRYPTION");
+    //
+    private String value;
+
+    EnumWebserviceSecurity(String value) {
+        this.value = value;
     }
 
-    @Bean
-    public WSS4JOutInterceptor geoPlatformServerOutInterceptorBean() {
-        return this.factory.getOutInterceptor();
+    /**
+     * @return the value
+     */
+    public String getValue() {
+        return value;
     }
+    
 }

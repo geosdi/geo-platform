@@ -15,20 +15,36 @@
 
      <!-- Scan for @Autowired annotations -->
     <context:annotation-config/>
-<!--    <context:component-scan base-package="org.geosdi.geoplatform"/>-->
-    
-<!--    <util:properties id="gpProperties" location="classpath:gp.properties"/>-->
     
     <bean id="gpProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
         <property name="locations">  
             <list>  
-                <value>classpath:gp.properties</value>  
-                <value>file:${GP_DATA_DIR}/gp.properties</value>
+                <value>classpath:gp-ws.properties</value>  
+                <value>file:${GP_DATA_DIR}/gp-ws.properties</value>
             </list>  
         </property>  
         <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
         <property name="ignoreResourceNotFound" value="true" />
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
-    </bean>  
+    </bean>
+    
+    <bean id="gpClientWebServiceInterceptorStrategyFactory" class="org.geosdi.geoplatform.configurator.cxf.client.GPClientWebServiceInterceptorStrategyFactory">
+        <property name="loggingStrategy" value="${webservice_client_logging}" />
+        <property name="securityStrategy" value="${webservice_security_strategy}" />
+        <property name="usernameTokenUser" value="${webservice_username_token_user}" />
+        <property name="clientPrivateKeyPropertiesFile" value="${webservice_client_privatekey_properties_file}" />
+        <property name="clientKeystoreUser" value="${webservice_client_keystore_user}" />
+        <property name="serverPublicKeyPropertiesFile" value="${webservice_server_publickey_properties_file}" />
+        <property name="serverKeystoreUser" value="${webservice_server_keystore_user}" />
+    </bean>
+    
+    <bean id="gpServerWebServiceInterceptorStrategyFactory" class="org.geosdi.geoplatform.configurator.cxf.server.GPServerWebServiceInterceptorStrategyFactory">
+        <property name="securityStrategy" value="${webservice_security_strategy}" />
+        <property name="usernameTokenUser" value="${webservice_username_token_user}" />
+        <property name="serverPrivateKeyPropertiesFile" value="${webservice_server_privatekey_properties_file}" />
+        <property name="serverKeystoreUser" value="${webservice_server_keystore_user}" />
+        <property name="clientPublicKeyPropertiesFile" value="${webservice_client_publickey_properties_file}" />
+        <property name="clientKeystoreUser" value="${webservice_client_keystore_user}" />
+    </bean>
 
 </beans>

@@ -21,15 +21,6 @@
 	<!-- Services -->
 	<!--===================================================================== -->
 
-    <bean id="gpServerWebServiceInterceptorStrategyFactory" class="org.geosdi.geoplatform.services.GPServerWebServiceInterceptorStrategyFactory">
-        <property name="securityStrategy" value="${webservice_security_strategy}" />
-        <property name="usernameTokenUser" value="${webservice_username_token_user}" />
-        <property name="serverPrivateKeyPropertiesFile" value="${webservice_server_privatekey_properties_file}" />
-        <property name="serverKeystoreUser" value="${webservice_server_keystore_user}" />
-        <property name="clientPublicKeyPropertiesFile" value="${webservice_client_publickey_properties_file}" />
-        <property name="clientKeystoreUser" value="${webservice_client_keystore_user}" />
-    </bean>
-
     <bean id="geoPlatformService"
           class="org.geosdi.geoplatform.services.GeoPlatformServiceImpl">		
         <property name="accountDao" ref="accountDAO" />

@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.cxf;
+package org.geosdi.geoplatform.configurator.cxf.client;
 
 import java.io.IOException;
 import java.util.HashMap;

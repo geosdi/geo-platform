@@ -38,14 +38,4 @@
         </property>-->
     </bean>
 
-    <bean id="gpClientWebServiceInterceptorStrategyFactory" class="org.geosdi.geoplatform.cxf.GPClientWebServiceInterceptorStrategyFactory">
-        <property name="loggingStrategy" value="#{gpProperties.webservice_client_logging}" />
-        <property name="securityStrategy" value="#{gpProperties.webservice_security_strategy}" />
-        <property name="usernameTokenUser" value="#{gpProperties.webservice_username_token_user}" />
-        <property name="clientPrivateKeyPropertiesFile" value="#{gpProperties.webservice_client_privatekey_properties_file}" />
-        <property name="clientKeystoreUser" value="#{gpProperties.webservice_client_keystore_user}" />
-        <property name="serverPublicKeyPropertiesFile" value="#{gpProperties.webservice_server_publickey_properties_file}" />
-        <property name="serverKeystoreUser" value="#{gpProperties.webservice_server_keystore_user}" />
-    </bean>
-
 </beans>

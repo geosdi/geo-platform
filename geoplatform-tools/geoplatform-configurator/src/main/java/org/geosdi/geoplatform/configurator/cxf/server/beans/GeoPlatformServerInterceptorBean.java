@@ -33,13 +33,11 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cxf.beans;
+package org.geosdi.geoplatform.configurator.cxf.server.beans;
 
-import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
-import org.geosdi.geoplatform.cxf.GPClientWebServiceInterceptorStrategyFactory;
+import org.geosdi.geoplatform.configurator.cxf.server.GPServerWebServiceInterceptorStrategyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,36 +47,18 @@ import org.springframework.context.annotation.Configuration;
  * @email michele.santomauro@geosdi.org
  */
 @Configuration
-public class GeoPlatformClientInterceptorBean {
+public class GeoPlatformServerInterceptorBean {
 
     @Autowired
-    private GPClientWebServiceInterceptorStrategyFactory factory;
+    private GPServerWebServiceInterceptorStrategyFactory factory;
     
     @Bean
-    public LoggingInInterceptor geoPlatformClientLoggingInInterceptorBean() {
-        System.out.println("#### 1");
-        return this.factory.getLoggingInInterceptor();
+    public WSS4JInInterceptor geoPlatformServerInInterceptorBean() {
+        return this.factory.getInInterceptor();
     }
 
     @Bean
-    public LoggingOutInterceptor geoPlatformClientLoggingOutInterceptorBean() {
-        System.out.println("#### 2");
-        return this.factory.getLoggingOutInterceptor();
-    }
-    
-    @Bean
-    public WSS4JInInterceptor geoPlatformClientSecurityInInterceptorBean() {
-        System.out.println("#### 3");
-        return this.factory.getSecurityInInterceptor();
-    }
-
-    @Bean
-    public WSS4JOutInterceptor geoPlatformClientSecurityOutInterceptorBean() {
-        System.out.println("#### 4");
-        return this.factory.getSecurityOutInterceptor();
-    }
-
-    public void setFactory(GPClientWebServiceInterceptorStrategyFactory factory) {
-        this.factory = factory;
+    public WSS4JOutInterceptor geoPlatformServerOutInterceptorBean() {
+        return this.factory.getOutInterceptor();
     }
 }

@@ -62,7 +62,7 @@
             <artifactId>geoplatform-ws-client</artifactId>
             <version>${geoplatform-version}</version>
             <scope>runtime</scope>
-        </dependency>  
+        </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>

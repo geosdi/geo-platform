@@ -109,10 +109,17 @@
                 </bean>
                 <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
                     <property name="key" value="${keyHibGenericDAO}" />
-                    <property name="version" value="${licenseNameSpringSecurity}" />
+                    <property name="version" value="${versionHibGenericDAO}" />
                     <property name="copyright" value="" />
-                    <property name="licenseName" value="${versionSpringSecurity}" />
-                    <property name="licenseUrl" value="${licenseUrlSpringSecurity}" />
+                    <property name="licenseName" value="${licenseNameHibGenericDAO}" />
+                    <property name="licenseUrl" value="${licenseUrlHibGenericDAO}" />
+                </bean>
+                <bean class="org.geosdi.geoplatform.gui.global.CopyrightInfo">
+                    <property name="key" value="${keyJasypt}" />
+                    <property name="version" value="${versionJasypt}" />
+                    <property name="copyright" value="" />
+                    <property name="licenseName" value="${licenseNameJasypt}" />
+                    <property name="licenseUrl" value="${licenseUrlJasypt}" />
                 </bean>
             </list>
         </property>

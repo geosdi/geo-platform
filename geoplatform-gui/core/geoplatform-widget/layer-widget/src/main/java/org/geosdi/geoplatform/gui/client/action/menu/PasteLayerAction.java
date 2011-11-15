@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.client.action.menu.expander.GPMenuFolderExpander;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
+import org.geosdi.geoplatform.gui.client.model.VectorTreeNode;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddRasterFromCopyMenuEvent;
 import org.geosdi.geoplatform.gui.client.widget.tree.store.puregwt.event.AddVectorFromCopyMenuEvent;
@@ -84,7 +85,7 @@ public class PasteLayerAction extends MenuAction {
         layerList.add(layerToCopy);
         if (layerToCopy instanceof RasterTreeNode) {
             LayerHandlerManager.fireEvent(new AddRasterFromCopyMenuEvent(layerList));
-        } else {
+        } else if (layerToCopy instanceof VectorTreeNode) {
             LayerHandlerManager.fireEvent(new AddVectorFromCopyMenuEvent(layerList));
         }
     }

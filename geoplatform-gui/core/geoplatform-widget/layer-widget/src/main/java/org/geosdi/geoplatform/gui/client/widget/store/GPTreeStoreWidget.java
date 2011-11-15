@@ -35,9 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.store;
 
+import com.extjs.gxt.ui.client.core.FastMap;
 import com.extjs.gxt.ui.client.data.ModelData;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
 
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
@@ -54,6 +56,7 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoAddLayersServer;
 import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridElementEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
@@ -70,7 +73,6 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
     private FeatureInfoAddLayersServer featureInfoAddLayersEvent = new FeatureInfoAddLayersServer();
     private DeselectGridElementEvent deselectEvent = new DeselectGridElementEvent();
     private VisitorAddElement visitorAdd = new VisitorAddElement();
-
     //
     private final static int LAYERS_FROM_CAPABILITIES = 1;
     private final static int LAYERS_FROM_PUBLISHER = 2;
@@ -134,23 +136,14 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
                 boolean duplicatedLayer = this.checkDuplicateLayer(layer, parentDestination);
 
                 if (duplicatedLayer) {
-                    existingLayers.append(layer.getLabel()).append("\n");
-                } else {
-                    switch (sourceLayer) {
-                        case LAYERS_FROM_CAPABILITIES:
-                            layerList.add(
-                                    this.convertGPRasterBeanModelToRasterTreeNode(
-                                    (GPRasterLayerGrid) layer));
-                            break;
-                        case LAYERS_FROM_PUBLISHER:
-                            layerList.add(
-                                    this.generateRasterTreeNodeFromPublisher(
-                                    layer));
-                            break;
-                        case LAYERS_FROM_COPY_MENU:
-                            layerList.add(this.duplicateRaster(layer));
-                            break;
+                    if (sourceLayer == LAYERS_FROM_COPY_MENU) {
+                        String aliasForCopiedLayer = this.generateUnduplicateAliasForLayer(layer, parentDestination);
+                        layerList.add(this.duplicateRaster(layer, aliasForCopiedLayer));
+                    } else {
+                        existingLayers.append(layer.getLabel()).append("\n");
                     }
+                } else {
+                    this.manageAddLayerFromSource(layerList, layer, sourceLayer);
                 }
             }
 
@@ -160,9 +153,39 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         }
     }
 
-    private void changeProgressBarMessage(String message) {
-        layersTextEvent.setMessage(message);
-        LayerHandlerManager.fireEvent(layersTextEvent);
+    private String generateUnduplicateAliasForLayer(GPLayerBean layer, GPBeanTreeModel parentDestination) {
+        final String COPY_STRING = " - Copy (";
+        String originalName = null;
+        if (layer.getAlias() != null) {
+            originalName = layer.getAlias();
+        } else {
+            originalName = layer.getTitle();
+        }
+        int suffix = 1;
+        int copyIndex = originalName.indexOf(COPY_STRING);
+        String modifiedName = null;
+        if (copyIndex != -1) {
+            String intValue = originalName.substring(copyIndex + COPY_STRING.length(), originalName.lastIndexOf(')'));
+            suffix = Integer.parseInt(intValue) + 1;
+            modifiedName = originalName.substring(0, originalName.lastIndexOf('(') + 1)
+                    + suffix + ')';
+        } else {
+            modifiedName = originalName + COPY_STRING + suffix + ")";
+        }
+        return this.recursivelySearchAlias(parentDestination.getChildren(), modifiedName, suffix);
+    }
+
+    private String recursivelySearchAlias(List<ModelData> elements, String modifiedName, int suffix) {
+        for (ModelData element : elements) {
+            if (element != null && element instanceof GPLayerTreeModel
+                    && ((GPLayerTreeModel) element).getAlias() != null
+                    && ((GPLayerTreeModel) element).getAlias().equals(modifiedName)) {
+                modifiedName = modifiedName.substring(0, modifiedName.lastIndexOf('(') + 1)
+                        + ++suffix + ')';
+                return this.recursivelySearchAlias(elements, modifiedName, suffix);
+            }
+        }
+        return modifiedName;
     }
 
     private boolean checkDuplicateLayer(GPLayerBean layer, GPBeanTreeModel parentDestination) {
@@ -173,6 +196,30 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
             }
         }
         return false;
+    }
+
+    private void manageAddLayerFromSource(List<GPBeanTreeModel> layerList,
+            GPLayerBean layer, int sourceLayer) {
+        switch (sourceLayer) {
+            case LAYERS_FROM_CAPABILITIES:
+                layerList.add(
+                        this.convertGPRasterBeanModelToRasterTreeNode(
+                        (GPRasterLayerGrid) layer));
+                break;
+            case LAYERS_FROM_PUBLISHER:
+                layerList.add(
+                        this.generateRasterTreeNodeFromPublisher(
+                        layer));
+                break;
+            case LAYERS_FROM_COPY_MENU:
+                layerList.add(this.duplicateRaster(layer));
+                break;
+        }
+    }
+
+    private void changeProgressBarMessage(String message) {
+        layersTextEvent.setMessage(message);
+        LayerHandlerManager.fireEvent(layersTextEvent);
     }
 
     private void manageUnduplicatedLayer(List<GPBeanTreeModel> layerList,
@@ -234,6 +281,12 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         return raster;
     }
 
+    private RasterTreeNode duplicateRaster(GPLayerBean layer, String alias) {
+        RasterTreeNode raster = this.duplicateRaster(layer);
+        raster.setAlias(alias);
+        return raster;
+    }
+
     private RasterTreeNode duplicateRaster(GPLayerBean layer) {
         RasterTreeNode raster = new RasterTreeNode();
         raster.setAbstractText(layer.getAbstractText());
@@ -244,7 +297,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         raster.setTitle(layer.getTitle());
         raster.setBbox(layer.getBbox());
         raster.setLayerType(layer.getLayerType());
-        raster.setStyles(((GPRasterBean)layer).getStyles());
+        raster.setStyles(((GPRasterBean) layer).getStyles());
         return raster;
     }
 }

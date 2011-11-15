@@ -13,14 +13,42 @@
             http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
 	default-autowire="byName">
 
+    <!--                                                                      -->
+    <!-- Configuration for encryptor.         -->
+    <!--                                                                      -->
+    <bean id="PBEConfiguration"
+     class="org.jasypt.encryption.pbe.config.SimplePBEConfig">
+        <property name="algorithm" value="PBEWithMD5AndDES" />
+        <property name="password" value="qwerty" />
+    </bean>
+  
+  
+    <!--                                                                      -->
+    <!-- The will be the encryptor used for decrypting configuration values.  -->
+    <!--                                                                      -->
+    <bean id="configurationEncryptor"
+     class="org.jasypt.encryption.pbe.PooledPBEStringEncryptor">
+        <property name="config" ref="PBEConfiguration" />
+        <property name="poolSize" value="2" /> <!-- This would be a good value for a 2-core system -->
+    </bean>
 
-    <bean id="gpPropertiesDAO" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
-        <property name="locations">  
-            <list>  
-                <value>classpath:gp-db.properties</value>  
+
+    <!--                                                                      -->
+    <!-- The EncryptablePropertyPlaceholderConfigurer will read the           -->
+    <!-- .properties files and make their values accessible as ${var}         -->
+    <!--                                                                      -->
+    <!-- Our "configurationEncryptor" bean (which implements                  --> 
+    <!-- org.jasypt.encryption.StringEncryptor) is set as a constructor arg.  -->
+    <!--                                                                      -->
+    <bean id="gpPropertiesDAO"
+     class="org.jasypt.spring.properties.EncryptablePropertyPlaceholderConfigurer">
+        <constructor-arg ref="configurationEncryptor" />
+        <property name="locations">
+            <list>
+                <value>classpath:gp-db.properties</value>
                 <value>file:${GP_DATA_DIR}/gp-db.properties</value>
-            </list>  
-        </property>  
+            </list>
+        </property>
         <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
         <property name="ignoreResourceNotFound" value="true" />
         <property name="ignoreUnresolvablePlaceholders" value="true"/>

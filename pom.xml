@@ -918,6 +918,17 @@
                 <version>${gwtOpenlayersVersion}</version>
                 <scope>runtime</scope>
             </dependency>
+
+			<!-- =========================================================== -->
+			<!-- JASYPT -->
+			<!-- =========================================================== -->
+            <dependency>
+                <groupId>org.jasypt</groupId>
+                <artifactId>jasypt</artifactId>
+                <version>${jasyptVersion}</version>
+                <classifier>lite</classifier>
+                <scope>compile</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -1216,6 +1227,8 @@
         <gxtVersion>2.2.5</gxtVersion>
         
         <gwtOpenlayersVersion>0.7-SNAPSHOT</gwtOpenlayersVersion>
+        
+        <jasyptVersion>1.8</jasyptVersion>
 
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
     </properties>

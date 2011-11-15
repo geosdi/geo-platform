@@ -379,6 +379,15 @@
             <artifactId>cxf-rt-databinding-aegis</artifactId>
         </dependency>
 
+		<!-- =============================================================== -->
+		<!-- JASYPT -->
+		<!-- =============================================================== -->
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+            <version>${jasyptVersion}</version>
+        </dependency>
+
     </dependencies>
 
     <profiles>

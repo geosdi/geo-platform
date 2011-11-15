@@ -114,6 +114,13 @@
             <artifactId>geoplatform-configurator</artifactId>
         </dependency>
 
+		<!-- JASYPT -->
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+            <version>${jasyptVersion}</version>
+        </dependency>
+
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>

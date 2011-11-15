@@ -104,6 +104,13 @@
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-ws-security</artifactId>
         </dependency>
+
+		<!-- JASYPT -->
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+            <version>${jasyptVersion}</version>
+        </dependency>
     </dependencies>
     
     <build>

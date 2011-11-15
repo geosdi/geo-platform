@@ -45,7 +45,6 @@ import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.core.model.Utility;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geotools.data.ows.Layer;
 import org.geotools.data.ows.WMSCapabilities;
@@ -89,7 +88,8 @@ import org.xml.sax.SAXException;
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext-TEST.xml",
+    "classpath:applicationContext.xml"})
 public abstract class BaseDAOTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());

@@ -20,16 +20,16 @@
 
     <!-- Keep aligned with pom.xml -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="org.postgresql.Driver" />
-        <property name="url" value="jdbc:postgresql://localhost:5432/gp" />
-        <property name="username" value="postgres" />
-        <property name="password" value="0x,postgres,0x" />
+        <property name="driverClassName" value="${db_driverClassName}" />
+        <property name="url" value="${db_url}" />
+        <property name="username" value="${db_username}" />
+        <property name="password" value="${db_password}" />
     </bean>   
 
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="geoplatform" />
-        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" />
+        <property name="persistenceXmlLocation" value="classpath:${db_persistenceXmlLocation}" />
         <property name="dataSource" ref="dataSource" />
         <property name="loadTimeWeaver">
             <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
@@ -61,9 +61,9 @@
 
     <bean id="vendorAdapter"
           class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-        <property name="databasePlatform" value="org.hibernatespatial.postgis.PostgisDialect" />
-        <property name="showSql" value="true" />
-        <property name="generateDdl" value="false" />
+        <property name="databasePlatform" value="${db_databasePlatform}" />
+        <property name="showSql" value="${db_showSql}" />
+        <property name="generateDdl" value="${db_generateDdl}" />
     </bean>
 
     <bean id="transactionManager"

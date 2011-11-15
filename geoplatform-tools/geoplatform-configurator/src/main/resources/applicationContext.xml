@@ -19,8 +19,10 @@
     <bean id="gpProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
         <property name="locations">  
             <list>  
-                <value>classpath:gp-ws.properties</value>  
+                <value>classpath:gp-ws.properties</value>
                 <value>file:${GP_DATA_DIR}/gp-ws.properties</value>
+                <value>classpath:gp-db.properties</value>
+                <value>file:${GP_DATA_DIR}/gp-db.properties</value>
             </list>  
         </property>  
         <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />

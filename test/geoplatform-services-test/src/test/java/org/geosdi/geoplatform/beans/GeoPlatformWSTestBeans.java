@@ -51,7 +51,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class GeoPlatformWSTestBeans {
     
-    private @Value("${webservice_endpoint_address}") String address;
+    private @Value("${webservice_test_endpoint_address}") String address;
 
     @Bean
     public GeoPlatformWSClient gpWSClient() {

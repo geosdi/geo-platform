@@ -36,10 +36,20 @@
 package org.geosdi.geoplatform.services;
 
 import javax.jws.WebService;
+import org.geosdi.geoplatform.jobs.EmailJob;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.exception.EmailException;
+import org.geosdi.geoplatform.jobs.EmailTask;
+import org.quartz.JobBuilder;
+import org.quartz.JobDetail;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.SchedulerFactory;
+import org.quartz.SimpleScheduleBuilder;
+import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  *
@@ -47,22 +57,59 @@ import org.slf4j.LoggerFactory;
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPSchedulerService")
-public class GPSchedulerServiceImpl implements GPSchedulerService {
+public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingBean {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private EmailHandler emailHandler;
+    private EmailTask emailTask;
+    //
+    private Scheduler scheduler;
+    private JobDetail jobSendEmail;
+    private String groupEmail = "email";
 
     /**
-     * @param emailHandler
-     *          the emailHandler to set
+     * @param emailTask the emailTask to set
      */
-    public void setEmailHandler(EmailHandler emailHandler) {
-        this.emailHandler = emailHandler;
+    public void setEmailTask(EmailTask emailJob) {
+        this.emailTask = emailJob;
     }
 
     @Override
-    public void sendEmail(GPUser user) throws EmailException {
-        this.emailHandler.sendConfirmationEmail(user);
+    public void sendEmail(GPUser user) {
+        // Trigger the job to run once
+        Trigger trigger = TriggerBuilder.newTrigger().
+                withIdentity("sendEmailTrigger", groupEmail). // KEY email.sendEmailTrigger
+                startNow().
+                withSchedule(SimpleScheduleBuilder.simpleSchedule().
+                withIntervalInSeconds(3).
+                withRepeatCount(0)).
+                forJob(jobSendEmail).
+                build();
+        trigger.getJobDataMap().put("user", user);
+
+        try {
+            logger.info("\n*** Fire trigger for sending email...");
+            scheduler.scheduleJob(trigger);
+        } catch (SchedulerException ex) {
+            logger.error("SchedulerException", ex.getMessage());
+        }
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        SchedulerFactory schedFact = new org.quartz.impl.StdSchedulerFactory();
+
+        scheduler = schedFact.getScheduler();
+        scheduler.start();
+
+        // Define the job and tie it to EmailJob class
+        jobSendEmail = JobBuilder.newJob(EmailJob.class).
+                storeDurably(true).
+                withIdentity("sendEmailJob", groupEmail). // KEY email.sendEmailJob
+                build();
+        jobSendEmail.getJobDataMap().put("emailTask", emailTask);
+
+        // Add job to the scheduler for execute when trigger was fired
+        scheduler.addJob(jobSendEmail, false);
     }
 }

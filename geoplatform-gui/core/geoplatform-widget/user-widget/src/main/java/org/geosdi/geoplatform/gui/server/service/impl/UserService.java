@@ -125,11 +125,9 @@ public class UserService implements IUserService {
         Long iserId = null;
         try {
             GPUser user = this.convertToGPUser(userDetail);
-            iserId = geoPlatformServiceClient.insertAccount(user, false);
+            iserId = geoPlatformServiceClient.insertAccount(user, true);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
-//        } catch (EmailException ee) {
-//            throw new GeoPlatformException(ee.getMessage());
         }
 
         return iserId;

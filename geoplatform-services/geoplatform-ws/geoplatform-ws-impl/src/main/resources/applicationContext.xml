@@ -37,6 +37,8 @@
         <property name="objectIdentityDao" ref="objectIdentityDAO" />
         <property name="sidDao" ref="sidDAO" />
         <property name="guiComponentDao" ref="guiComponentDAO" />
+        <!-- SERVICES -->
+        <property name="schedulerService" ref="schedulerService" />
     </bean>    
 
 	<!--===================================================================== -->        

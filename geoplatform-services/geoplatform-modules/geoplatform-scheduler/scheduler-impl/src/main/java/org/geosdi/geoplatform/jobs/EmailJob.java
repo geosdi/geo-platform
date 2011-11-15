@@ -33,23 +33,51 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.services;
+package org.geosdi.geoplatform.jobs;
 
-import org.codehaus.jra.Post;
-import javax.jws.WebParam;
-import javax.jws.WebService;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.quartz.DisallowConcurrentExecution;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
+ *
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- * 
- * Public interface to define the service operations mapped via REST
- * using CXT framework
  */
-@WebService(name = "GPSchedulerService", targetNamespace = "http://services.geo-platform.org/")
-public interface GPSchedulerService {
+// Not execute multiple instances of a given job definition - JobDetail -
+// (that refers to the given job class - Job) concurrently
+@DisallowConcurrentExecution
+public class EmailJob implements Job {
 
-    @Post
-    void sendEmail(@WebParam(name = "user") GPUser user);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    private EmailTask emailTask;
+
+    /**
+     * Quartz pass emailTask each time that an instance of EmailJob was created,
+     * because emailTask was insert into JobDataMap of JobDetail tie to this job
+     * 
+     * @param emailTask the emailTask to set
+     */
+    public void setEmailTask(EmailTask emailTask) {
+        this.emailTask = emailTask;
+    }
+
+    @Override
+    public void execute(JobExecutionContext context) throws JobExecutionException {
+        logger.debug("\n*** START send email job ***");
+
+        GPUser user = (GPUser) context.getTrigger().getJobDataMap().get("user");
+        logger.trace("\n*** " + user);
+
+        if (user != null) {
+            emailTask.sendConfirmationEmail(user);
+        }
+
+        logger.debug("\n*** STOP send email job ***");
+    }
 }

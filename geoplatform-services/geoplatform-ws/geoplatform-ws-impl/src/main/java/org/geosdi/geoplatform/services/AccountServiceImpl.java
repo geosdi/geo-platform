@@ -77,6 +77,8 @@ class AccountServiceImpl {
     private GPAccountProjectDAO accountProjectDao;
     private GPProjectDAO projectDao;
     private GPAuthorityDAO authorityDao;
+    // Services
+    private GPSchedulerService schedulerService;
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
@@ -110,6 +112,14 @@ class AccountServiceImpl {
     public void setAuthorityDao(GPAuthorityDAO authorityDao) {
         this.authorityDao = authorityDao;
     }
+
+    /**
+     * @param schedulerService
+     *          the schedulerService to set
+     */
+    public void setSchedulerService(GPSchedulerService schedulerService) {
+        this.schedulerService = schedulerService;
+    }
     //</editor-fold>
 
     /**
@@ -123,14 +133,14 @@ class AccountServiceImpl {
         EntityCorrectness.checkAccountAndAuthority(account); // TODO assert
         this.checkDuplicateAccount(account);
 
-        account.setEnabled(false); // Always insert account as desabled
-
         String plaintextPassword = null;
-        if (account instanceof GPUser) {
+        if (sendEmail && account instanceof GPUser) {
             GPUser user = (GPUser) account;
             plaintextPassword = user.getPassword();
-            user.setPassword(Utility.md5hash(plaintextPassword)); // Hash password
         }
+
+        // TODO Set to false, and after user confirmation email enabling user account
+        account.setEnabled(true); // Always insert account as desabled        
         accountDao.persist(account);
 
         List<GPAuthority> authorities = account.getGPAuthorities();
@@ -140,12 +150,11 @@ class AccountServiceImpl {
         }
         authorityDao.persist(authorities.toArray(new GPAuthority[authorities.size()]));
 
-        // TODO task scheduling
-//        if (sendEmail && account instanceof GPUser) {
-//            GPUser user = (GPUser) account;
-//            user.setPassword(plaintextPassword);
-//            this.emailHandler.sendConfirmationEmail(user);
-//        }
+        if (sendEmail && account instanceof GPUser) {
+            GPUser user = (GPUser) account;
+            user.setPassword(plaintextPassword);
+            schedulerService.sendEmail(user);
+        }
 
         return account.getId();
     }

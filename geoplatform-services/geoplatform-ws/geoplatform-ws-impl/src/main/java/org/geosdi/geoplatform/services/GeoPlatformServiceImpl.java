@@ -123,6 +123,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private FolderServiceImpl folderServiceDelegate;
     private LayerServiceImpl layerServiceDelegate;
     private AclServiceImpl aclServiceDelegate;
+    // Services
+    private GPSchedulerService schedulerService;
 
     public GeoPlatformServiceImpl() {
         accountServiceDelegate = new AccountServiceImpl();
@@ -262,6 +264,15 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public void setGuiComponentDao(GuiComponentDAO guiComponentDao) {
         this.guiComponentDao = guiComponentDao;
         this.aclServiceDelegate.setGuiComponentDao(guiComponentDao);
+    }
+
+    /**
+     * @param schedulerService
+     *          the schedulerService to set
+     */
+    public void setSchedulerService(GPSchedulerService schedulerService) {
+        this.schedulerService = schedulerService;
+        this.accountServiceDelegate.setSchedulerService(schedulerService);
     }
     //</editor-fold>
 

@@ -80,13 +80,6 @@
             <artifactId>spring-expression</artifactId>
         </dependency>
         
-<!-- QUARTZ -->
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
-            <version>2.1.0</version>
-        </dependency>
-        
 <!-- CXF -->
         <dependency>
             <groupId>javax.xml.ws</groupId>

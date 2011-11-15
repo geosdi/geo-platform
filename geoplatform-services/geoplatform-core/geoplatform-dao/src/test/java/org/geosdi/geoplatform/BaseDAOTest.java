@@ -332,9 +332,9 @@ public abstract class BaseDAOTest {
         user.setEmailAddress(username + "@test.foo");
         user.setEnabled(true);
         if (username.contains("_")) {
-            user.setPassword(Utility.md5hash("pwd_" + username));
+            user.setPassword("pwd_" + username);
         } else { // User for GUI test
-            user.setPassword(Utility.md5hash(username));
+            user.setPassword(username);
         }
         user.setSendEmail(true);
         return user;

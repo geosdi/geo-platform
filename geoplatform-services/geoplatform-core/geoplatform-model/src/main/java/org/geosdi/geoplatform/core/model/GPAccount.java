@@ -48,7 +48,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.PostPersist;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -104,14 +103,6 @@ public abstract class GPAccount implements Serializable {
     private Long defaultProjectID;
 
     public abstract String getStringID();
-
-    @PostPersist
-    public void sendingEmail() {
-        if (this instanceof GPAccount) {
-            // TODO New thread for sending email
-            System.out.println("\n***\n" + this + "\n***\n");
-        }
-    }
 
     /**
      * @return the id

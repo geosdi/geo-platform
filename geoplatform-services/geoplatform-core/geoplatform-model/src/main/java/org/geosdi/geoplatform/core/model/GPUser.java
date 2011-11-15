@@ -41,6 +41,7 @@ import java.security.NoSuchAlgorithmException;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.Cache;
@@ -170,6 +171,11 @@ public class GPUser extends GPAccount implements UserDetails {
         } else {
             return false;
         }
+    }
+
+    @PrePersist
+    public void cryptPassword() {
+        this.password = Utility.md5hash(password);
     }
 
     /*

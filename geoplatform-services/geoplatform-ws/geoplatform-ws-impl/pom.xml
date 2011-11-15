@@ -118,6 +118,11 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-scheduler-api</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
             <version>${geoplatform-version}</version>
         </dependency>

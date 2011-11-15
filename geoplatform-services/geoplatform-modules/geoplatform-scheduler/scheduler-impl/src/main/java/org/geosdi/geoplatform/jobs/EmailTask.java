@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.services;
+package org.geosdi.geoplatform.jobs;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +56,7 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class EmailHandler {
+public class EmailTask {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
@@ -65,6 +65,7 @@ public class EmailHandler {
     private String subject;
     private String template;
 
+    //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
      * @param mailSender
      *          the mailSender to set
@@ -96,8 +97,12 @@ public class EmailHandler {
     public void setTemplate(String template) {
         this.template = template;
     }
+    //</editor-fold>
 
     public void sendConfirmationEmail(final GPUser user) throws EmailException {
+        String email = user.getEmailAddress();
+        logger.info("\n*** Sending email to " + email + " ***");
+
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
 
             @Override
@@ -128,5 +133,7 @@ public class EmailHandler {
             logger.error("\n*** MailException: " + ex.getMessage());
             throw new EmailException(ex.getMessage());
         }
+
+        logger.info("\n*** Email send to " + email + " ***");
     }
 }

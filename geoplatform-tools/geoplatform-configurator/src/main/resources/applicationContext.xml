@@ -16,17 +16,7 @@
      <!-- Scan for @Autowired annotations -->
     <context:annotation-config/>
     
-    <bean id="gpProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
-        <property name="locations">  
-            <list>  
-                <value>classpath:gp-ws.properties</value>
-                <value>file:${GP_DATA_DIR}/gp-ws.properties</value>
-            </list>  
-        </property>
-        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
-        <property name="ignoreResourceNotFound" value="true" />
-        <property name="ignoreUnresolvablePlaceholders" value="true"/>
-    </bean>
+    <import resource="applicationContext-JASYPT.xml" />
     
     <bean id="gpClientWebServiceInterceptorStrategyFactory" class="org.geosdi.geoplatform.configurator.cxf.client.GPClientWebServiceInterceptorStrategyFactory">
         <property name="loggingStrategy" value="${webservice_client_logging}" />
@@ -54,38 +44,6 @@
           class="org.jasypt.encryption.pbe.config.SimplePBEConfig">
         <property name="algorithm" value="PBEWithMD5AndDES" />
         <property name="password" value="qwerty" />
-    </bean>
-  
-  
-    <!--                                                                      -->
-    <!-- The will be the encryptor used for decrypting configuration values.  -->
-    <!--                                                                      -->
-    <bean id="configurationEncryptor"
-     class="org.jasypt.encryption.pbe.PooledPBEStringEncryptor">
-        <property name="config" ref="PBEConfiguration" />
-        <property name="poolSize" value="2" /> <!-- This would be a good value for a 2-core system -->
-    </bean>
-
-
-    <!--                                                                      -->
-    <!-- The EncryptablePropertyPlaceholderConfigurer will read the           -->
-    <!-- .properties files and make their values accessible as ${var}         -->
-    <!--                                                                      -->
-    <!-- Our "configurationEncryptor" bean (which implements                  --> 
-    <!-- org.jasypt.encryption.StringEncryptor) is set as a constructor arg.  -->
-    <!--                                                                      -->
-    <bean id="propertyConfigurer"
-     class="org.jasypt.spring.properties.EncryptablePropertyPlaceholderConfigurer">
-        <constructor-arg ref="configurationEncryptor" />
-        <property name="locations">
-            <list>
-                <value>classpath:gp-db.properties</value>
-                <value>file:${GP_DATA_DIR}/gp-db.properties</value>
-            </list>
-        </property>
-        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
-        <property name="ignoreResourceNotFound" value="true" />
-        <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
 
 </beans>

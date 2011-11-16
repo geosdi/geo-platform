@@ -43,30 +43,15 @@ import com.extjs.gxt.ui.client.event.EventType;
  */
 public class MapWidgetEvents {
 
-	public static final EventType INIT_MAP_WIDGET = new EventType();
-
-	public static final EventType ATTACH_MAP_WIDGET = new EventType();
-
-	public static final EventType ATTACH_TOOLBAR = new EventType();
-	
-	public static final EventType INJECT_WKT = new EventType();
-	
-	public static final EventType ERASE_FEATURE = new EventType();
-	
-	public static final EventType DRAW_FEATURE = new EventType();
-	
-	public static final EventType UPDATE_POLYGON_GEOMETRY = new EventType();
-	
-	public static final EventType UPDATE_POINT_GEOMETRY = new EventType();
-	
-	public static final EventType UPDATE_LINE_GEOMETRY = new EventType();
-	
-	public static final EventType DELETE_FEATURE = new EventType();
-
-        public static final EventType ACTIVATE_GRATICULE = new EventType();
-
-        public static final EventType DEACTIVATE_GRATICULE = new EventType();
-        
-        public static final EventType ZOOM_TO_EXTENT = new EventType();
-
+    public static final EventType INIT_MAP_WIDGET = new EventType();
+    public static final EventType ATTACH_MAP_WIDGET = new EventType();
+    public static final EventType ATTACH_TOOLBAR = new EventType();
+    public static final EventType INJECT_WKT = new EventType();
+    public static final EventType ERASE_FEATURE = new EventType();
+    public static final EventType DRAW_FEATURE = new EventType();
+    public static final EventType UPDATE_POLYGON_GEOMETRY = new EventType();
+    public static final EventType UPDATE_POINT_GEOMETRY = new EventType();
+    public static final EventType UPDATE_LINE_GEOMETRY = new EventType();
+    public static final EventType DELETE_FEATURE = new EventType();
+    public static final EventType ZOOM_TO_EXTENT = new EventType();
 }

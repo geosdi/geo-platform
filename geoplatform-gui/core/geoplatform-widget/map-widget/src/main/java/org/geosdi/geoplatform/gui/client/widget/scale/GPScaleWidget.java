@@ -38,10 +38,8 @@ package org.geosdi.geoplatform.gui.client.widget.scale;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.geosdi.geoplatform.gui.client.widget.map.store.Scale;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ScaleChangeHandler;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 import com.extjs.gxt.ui.client.GXT;
 import com.extjs.gxt.ui.client.Style.Direction;
@@ -50,7 +48,6 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.fx.FxConfig;
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.util.Format;
 import com.extjs.gxt.ui.client.util.Point;
@@ -61,6 +58,8 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Accessibility;
 import com.google.gwt.user.client.ui.RootPanel;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ScaleSelectorEvent;
+import org.geosdi.geoplatform.gui.model.scale.GPScaleBean;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
@@ -72,6 +71,7 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
     protected GPScaleConfig config;
     protected int level;
     private Size size;
+    private ScaleSelectorEvent selectorEvent = new ScaleSelectorEvent();
 
     /**
      * Creates a new GPScaleWidget instance.
@@ -127,20 +127,20 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
         setTitle();
         setText();
 
-        List<Scale> scales = new ArrayList<Scale>();
+        List<GPScaleBean> scales = new ArrayList<GPScaleBean>();
 
-        scales.add(new Scale("1:1000"));
-        scales.add(new Scale("1:10000"));
-        scales.add(new Scale("1:100000"));
-        scales.add(new Scale("1:1000000"));
-        scales.add(new Scale("1:10000000"));
-        scales.add(new Scale("1:100000000"));
-        scales.add(new Scale("1:1000000000"));
+        scales.add(new GPScaleBean("1:1000"));
+        scales.add(new GPScaleBean("1:10000"));
+        scales.add(new GPScaleBean("1:100000"));
+        scales.add(new GPScaleBean("1:1000000"));
+        scales.add(new GPScaleBean("1:10000000"));
+        scales.add(new GPScaleBean("1:100000000"));
+        scales.add(new GPScaleBean("1:1000000000"));
 
-        ListStore<Scale> scaleStore = new ListStore<Scale>();
+        ListStore<GPScaleBean> scaleStore = new ListStore<GPScaleBean>();
         scaleStore.add(scales);
 
-        ComboBox<Scale> comboScale = new ComboBox<Scale>();
+        ComboBox<GPScaleBean> comboScale = new ComboBox<GPScaleBean>();
         comboScale.setEmptyText("Select a scale...");
         comboScale.setDisplayField("scale");
         comboScale.setWidth(150);
@@ -159,9 +159,9 @@ public class GPScaleWidget extends ContentPanel implements ScaleChangeHandler {
             @Override
             public void handleEvent(FieldEvent fe) {
                 ComboBox cb = (ComboBox) fe.getComponent();
-                Scale s = (Scale) cb.getValue();
-                Dispatcher.forwardEvent(GeoPlatformEvents.SCALE_REQUEST_CHANGE,
-                        s);
+                GPScaleBean s = (GPScaleBean) cb.getValue();
+                selectorEvent.setValue(s);
+                MapHandlerManager.fireEvent(selectorEvent);
             }
         });
 

@@ -41,17 +41,16 @@ package org.geosdi.geoplatform.gui.impl.map;
  * 
  */
 public interface GeoPlatformMeasure {
-	
-	public void activateMeasure();
 
-	public void deactivateMeasure();
+    public void activateMeasure();
 
-	public void activateMeasureArea();
+    public void deactivateMeasure();
 
-	public void deactivateMeasureArea();
-	
-	public boolean isMeasureActive();
+    public void activateMeasureArea();
 
-	public boolean isMeasureAreaActive();
+    public void deactivateMeasureArea();
 
+    public boolean isMeasureActive();
+
+    public boolean isMeasureAreaActive();
 }

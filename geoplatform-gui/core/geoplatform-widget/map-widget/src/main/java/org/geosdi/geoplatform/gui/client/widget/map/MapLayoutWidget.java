@@ -517,6 +517,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
      * 
      * @param bbox
      */
+    @Override
     public void zoomToMaxExtend(BboxClientInfo bbox) {
         Bounds b = new Bounds(bbox.getLowerLeftX(), bbox.getLowerLeftY(),
                 bbox.getUpperRightX(), bbox.getUpperRightY());

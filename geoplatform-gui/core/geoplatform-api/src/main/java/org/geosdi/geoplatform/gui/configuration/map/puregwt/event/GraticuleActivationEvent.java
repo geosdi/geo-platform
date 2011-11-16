@@ -33,25 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map;
+package org.geosdi.geoplatform.gui.configuration.map.puregwt.event;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @email  giuseppe.lascaleia@geosdi.org
+ *
  */
-public interface GeoPlatformMap extends GeoPlatformEditor, GeoPlatformMeasure,
-        GeoPlatformFeatureInfo {
-
-    public MapWidget getMapWidget();
-
-    public Map getMap();
-
-    public IGeoPlatofomMapButtonBar getButtonBar();
+public class GraticuleActivationEvent extends GwtEvent<GPMapToolsHandler> {
     
-    public void zoomToMaxExtend(BboxClientInfo bbox);
+    private boolean activated;
+
+    @Override
+    public Type<GPMapToolsHandler> getAssociatedType() {
+        return GPMapToolsHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(GPMapToolsHandler handler) {
+        handler.onManageGraticuleTool(activated);
+    }
+
+    /**
+     * @param activated the activated to set
+     */
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
+    
 }

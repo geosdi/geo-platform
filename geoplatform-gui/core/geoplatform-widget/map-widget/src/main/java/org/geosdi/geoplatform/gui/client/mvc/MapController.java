@@ -53,11 +53,7 @@ public class MapController extends GeoPlatformController {
         registerEventTypes(MapWidgetEvents.INIT_MAP_WIDGET,
                 MapWidgetEvents.ATTACH_MAP_WIDGET,
                 MapWidgetEvents.ATTACH_TOOLBAR, MapWidgetEvents.ERASE_FEATURE,
-                MapWidgetEvents.DRAW_FEATURE, GeoPlatformEvents.UPDATE_CENTER,
-                MapWidgetEvents.ACTIVATE_GRATICULE,
-                MapWidgetEvents.DEACTIVATE_GRATICULE,
-                GeoPlatformEvents.SCALE_REQUEST_CHANGE,
-                GeoPlatformEvents.ZOOM_TO_MAX_EXTEND);
+                MapWidgetEvents.DRAW_FEATURE, GeoPlatformEvents.UPDATE_CENTER);
     }
 
     @Override

@@ -33,25 +33,47 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map;
+package org.geosdi.geoplatform.gui.model.scale;
 
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Francesco Izzi - CNR IMAA - geoSDI Group
+ *
  */
-public interface GeoPlatformMap extends GeoPlatformEditor, GeoPlatformMeasure,
-        GeoPlatformFeatureInfo {
+public class GPScaleBean extends GeoPlatformBeanModel {
 
-    public MapWidget getMapWidget();
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -1544804885955575360L;
+    //
+    private String scale;
 
-    public Map getMap();
+    /**
+     * Default Constructor
+     */
+    public GPScaleBean() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-    public IGeoPlatofomMapButtonBar getButtonBar();
-    
-    public void zoomToMaxExtend(BboxClientInfo bbox);
+    /**
+     * @param scale
+     */
+    public GPScaleBean(String scale) {
+        setScale(scale);
+    }
+
+    private void setScale(String scale) {
+        this.scale = scale;
+        set(GPScaleKeyValue.SCALE.toString(), scale);
+    }
+
+    /**
+     * @return the scale
+     */
+    public String getScale() {
+        return scale;
+    }
 }

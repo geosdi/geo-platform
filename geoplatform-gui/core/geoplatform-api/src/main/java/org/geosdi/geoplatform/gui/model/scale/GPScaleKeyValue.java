@@ -33,25 +33,26 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map;
-
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+package org.geosdi.geoplatform.gui.model.scale;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @email  giuseppe.lascaleia@geosdi.org
+ *
  */
-public interface GeoPlatformMap extends GeoPlatformEditor, GeoPlatformMeasure,
-        GeoPlatformFeatureInfo {
-
-    public MapWidget getMapWidget();
-
-    public Map getMap();
-
-    public IGeoPlatofomMapButtonBar getButtonBar();
+public enum GPScaleKeyValue {
     
-    public void zoomToMaxExtend(BboxClientInfo bbox);
+    SCALE("scale");
+    
+    private String scale;
+
+    GPScaleKeyValue(String theScale) {
+        this.scale = theScale;
+    }
+
+    @Override
+    public String toString() {
+        return this.scale;
+    }
 }

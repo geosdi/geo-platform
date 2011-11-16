@@ -33,37 +33,36 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.store;
+package org.geosdi.geoplatform.gui.configuration.map.puregwt.event;
 
-import com.extjs.gxt.ui.client.data.BaseModelData;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 
 /**
- * @author Francesco Izzi - CNR IMAA - geoSDI Group
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  *
  */
-public class Scale extends BaseModelData {
+public class ZoomToExtendsEvent extends GwtEvent<GPMapToolsHandler> {
+    
+    private BboxClientInfo bbox;
 
-    /**
-     * serialVersionUID
-     */
-    private static final long serialVersionUID = -1544804885955575360L;
+    @Override
+    public Type<GPMapToolsHandler> getAssociatedType() {
+        return GPMapToolsHandler.TYPE;
+    }
 
-    /**
-     * Default Constructor
-     */
-    public Scale() {
-        super();
-        // TODO Auto-generated constructor stub
+    @Override
+    protected void dispatch(GPMapToolsHandler handler) {
+        handler.onZoomToMaxExtend(bbox);
     }
 
     /**
-     * @param scale
+     * @param bbox the bbox to set
      */
-    public Scale(String scale) {
-        setScale(scale);
-    }
-
-    private void setScale(String scale) {
-        set("scale", scale);
-    }
+    public void setBbox(BboxClientInfo bbox) {
+        this.bbox = bbox;
+    }  
 }

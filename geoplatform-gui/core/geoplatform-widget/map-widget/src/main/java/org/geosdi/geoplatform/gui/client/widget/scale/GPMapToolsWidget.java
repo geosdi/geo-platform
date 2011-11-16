@@ -33,25 +33,53 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map;
+package org.geosdi.geoplatform.gui.client.widget.scale;
 
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
-import org.gwtopenmaps.openlayers.client.Map;
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.GPMapToolsHandler;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.geosdi.geoplatform.gui.impl.map.control.graticule.GPGraticuleMapTool;
+import org.geosdi.geoplatform.gui.model.scale.GPScaleBean;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @email  giuseppe.lascaleia@geosdi.org
+ *
  */
-public interface GeoPlatformMap extends GeoPlatformEditor, GeoPlatformMeasure,
-        GeoPlatformFeatureInfo {
+public class GPMapToolsWidget implements GPMapToolsHandler {
 
-    public MapWidget getMapWidget();
+    private GeoPlatformMap geoPlatformMap;
+    private GPGraticuleMapTool graticuleTool;
 
-    public Map getMap();
+    public GPMapToolsWidget(GeoPlatformMap geoPlatformMap) {
+        this.geoPlatformMap = geoPlatformMap;
+        this.graticuleTool = new GPGraticuleMapTool(this.geoPlatformMap);
+        
+        MapHandlerManager.addHandler(GPMapToolsHandler.TYPE, this);
+    }
 
-    public IGeoPlatofomMapButtonBar getButtonBar();
-    
-    public void zoomToMaxExtend(BboxClientInfo bbox);
+    @Override
+    public void onScaleSelectionChange(GPScaleBean value) {
+        String scaleString = value.getScale();
+        String scaleEffective = scaleString.substring(
+                scaleString.indexOf(":") + 1);
+        Float floatScale = Float.parseFloat(scaleEffective);
+        this.geoPlatformMap.getMap().zoomToScale(floatScale.floatValue(), false);
+    }
+
+    @Override
+    public void onZoomToMaxExtend(BboxClientInfo bbox) {
+        this.geoPlatformMap.zoomToMaxExtend(bbox);
+    }
+
+    @Override
+    public void onManageGraticuleTool(boolean activation) {
+        if(activation) {
+            this.graticuleTool.activateControl();
+        } else {
+            this.graticuleTool.deactivateControl();
+        }
+    }
 }

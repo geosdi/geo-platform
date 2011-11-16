@@ -49,10 +49,6 @@ public class GeoPlatformEvents {
     
     public static final EventType APPLICATION_FIRST_LOGIN = new EventType();
 
-    public static final EventType SCALE_REQUEST_CHANGE = new EventType();
-
-    public static final EventType ZOOM_TO_MAX_EXTEND = new EventType();
-
     public static final EventType INIT_OGC_MODULES_WIDGET = new EventType();
 
     public static final EventType SHOW_CAPABILITIES_SERVER_WIDGET = new EventType();

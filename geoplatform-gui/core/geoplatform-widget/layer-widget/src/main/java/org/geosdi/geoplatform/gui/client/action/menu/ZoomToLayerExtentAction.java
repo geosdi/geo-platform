@@ -5,13 +5,12 @@
 package org.geosdi.geoplatform.gui.client.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ZoomToExtendsEvent;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  *
@@ -21,6 +20,7 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 public class ZoomToLayerExtentAction extends MenuAction {
 
     private TreePanel treePanel;
+    private ZoomToExtendsEvent zoomToExtendsEvent = new ZoomToExtendsEvent();
 
     public ZoomToLayerExtentAction() {
         super("ZoomToLayerExtent");
@@ -36,8 +36,8 @@ public class ZoomToLayerExtentAction extends MenuAction {
         GPBeanTreeModel item = (GPBeanTreeModel) this.treePanel.getSelectionModel().getSelectedItem();
 
         if (item instanceof RasterTreeNode) {
-            BboxClientInfo bbox = ((RasterTreeNode) item).getBbox();
-            Dispatcher.forwardEvent(GeoPlatformEvents.ZOOM_TO_MAX_EXTEND, bbox);
+            zoomToExtendsEvent.setBbox(((RasterTreeNode) item).getBbox());
+            MapHandlerManager.fireEvent(zoomToExtendsEvent);
         }
     }
 }

@@ -39,24 +39,16 @@ import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
-import org.geosdi.geoplatform.gui.client.widget.map.store.Scale;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
-import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import org.geosdi.geoplatform.gui.client.widget.map.GPGeocodingWidget;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
-import org.gwtopenmaps.openlayers.client.control.Graticule;
-import org.gwtopenmaps.openlayers.client.control.GraticuleOptions;
-import org.gwtopenmaps.openlayers.client.symbolizer.LineSymbolizer;
-import org.gwtopenmaps.openlayers.client.symbolizer.LineSymbolizerOptions;
-import org.gwtopenmaps.openlayers.client.symbolizer.TextSymbolizer;
-import org.gwtopenmaps.openlayers.client.symbolizer.TextSymbolizerOptions;
+import org.geosdi.geoplatform.gui.client.widget.scale.GPMapToolsWidget;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -69,7 +61,7 @@ public class MapView extends GeoPlatformView {
     private GPGeocodingWidget geocoderWidget;
     private ReverseGeocodingWidget revGeoWidget;
     private MapToolbar buttonBar;
-    private Graticule graticule;
+    private GPMapToolsWidget scaleSelector;
 
     public MapView(Controller controller) {
         super(controller);
@@ -82,6 +74,7 @@ public class MapView extends GeoPlatformView {
     public void initialize() {
         this.geocoderWidget = new GPGeocodingWidget(this.mapLayout);
         this.geocoderWidget.setPopupWidget(this.revGeoWidget.getPopupWidget());
+        this.scaleSelector = new GPMapToolsWidget(this.mapLayout);
     }
 
     /*
@@ -99,70 +92,6 @@ public class MapView extends GeoPlatformView {
 
         if (event.getType() == MapWidgetEvents.ATTACH_TOOLBAR) {
             onAttachToolbar();
-        }
-
-        if (event.getType() == MapWidgetEvents.ACTIVATE_GRATICULE) {
-            onActivateGraticule();
-        }
-
-        if (event.getType() == MapWidgetEvents.DEACTIVATE_GRATICULE) {
-            onDeActivateGraticule();
-        }
-
-        if (event.getType() == GeoPlatformEvents.SCALE_REQUEST_CHANGE) {
-            onScaleRequestChange(event);
-        }
-
-        if (event.getType() == GeoPlatformEvents.ZOOM_TO_MAX_EXTEND) {
-            onZoomToMaxExtend(event);
-        }
-
-    }
-
-    /**
-     * Change Scale on the map
-     */
-    private void onScaleRequestChange(AppEvent event) {
-        Scale scale = (Scale) event.getData();
-        String scaleString = scale.get("scale");
-        String scaleEffective = scaleString.substring(
-                scaleString.indexOf(":") + 1);
-        Float floatScale = Float.parseFloat(scaleEffective);
-        this.mapLayout.getMap().zoomToScale(floatScale.floatValue(), false);
-    }
-
-    private void onActivateGraticule() {
-        LineSymbolizerOptions lineOptions = new LineSymbolizerOptions();
-        lineOptions.setStrokeColor("#333333");
-        lineOptions.setStrokeOpacity(0.5);
-        lineOptions.setStrokeWidth(1);
-
-        LineSymbolizer line = new LineSymbolizer(lineOptions);
-
-        TextSymbolizerOptions textOptions = new TextSymbolizerOptions();
-        textOptions.setFontSize("9px");
-
-        TextSymbolizer text = new TextSymbolizer(textOptions);
-
-
-        final GraticuleOptions grtOptions = new GraticuleOptions();
-
-        grtOptions.setTargetSize(200);
-        grtOptions.setLabelled(true);
-        grtOptions.setLineSymbolyzer(line);
-        grtOptions.setLabelSymbolizer(text);
-        this.graticule = new Graticule(grtOptions);
-
-        this.graticule.setAutoActivate(false);
-        this.mapLayout.getMap().addControl(graticule);
-
-        this.graticule.activate();
-    }
-
-    private void onDeActivateGraticule() {
-        if (this.graticule != null) {
-            this.mapLayout.getMap().removeControl(graticule);
-            this.graticule.deactivate();
         }
     }
 
@@ -243,10 +172,5 @@ public class MapView extends GeoPlatformView {
      */
     public ReverseGeocodingWidget getRevGeoWidget() {
         return revGeoWidget;
-    }
-
-    private void onZoomToMaxExtend(AppEvent event) {
-        BboxClientInfo bbox = (BboxClientInfo) event.getData();
-        this.mapLayout.zoomToMaxExtend(bbox);
     }
 }

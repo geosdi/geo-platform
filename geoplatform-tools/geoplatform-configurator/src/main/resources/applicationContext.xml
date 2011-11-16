@@ -36,14 +36,5 @@
         <property name="clientPublicKeyPropertiesFile" value="${webservice_client_publickey_properties_file}" />
         <property name="clientKeystoreUser" value="${webservice_client_keystore_user}" />
     </bean>
-    
-    <!--                                                                      -->
-    <!-- Configuration for encryptor.                                         -->
-    <!--                                                                      -->
-    <bean id="PBEConfiguration"
-          class="org.jasypt.encryption.pbe.config.SimplePBEConfig">
-        <property name="algorithm" value="PBEWithMD5AndDES" />
-        <property name="password" value="qwerty" />
-    </bean>
 
 </beans>

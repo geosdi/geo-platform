@@ -103,6 +103,7 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
             this.visibiltyProgressBar = false;
             if (this.eventAfterAllSaveOperations != null) {
                 SaveCacheHandlerManager.fireEvent(this.eventAfterAllSaveOperations);
+                this.eventAfterAllSaveOperations = null;
             }
         }
     }

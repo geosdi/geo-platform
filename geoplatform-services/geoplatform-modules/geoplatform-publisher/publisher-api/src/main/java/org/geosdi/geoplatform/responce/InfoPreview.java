@@ -38,8 +38,6 @@ package org.geosdi.geoplatform.responce;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author Luca
  * this kind of objects should contains a name of the datastore and the URL to the PNG associated to the preview of the datastore
  */
 @XmlRootElement(name = "InfoPreview")

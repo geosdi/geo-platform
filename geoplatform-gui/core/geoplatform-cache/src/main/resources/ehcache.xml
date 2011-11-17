@@ -15,5 +15,11 @@
 		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
 		memoryStoreEvictionPolicy="LRU">
     </cache>
+    
+    <cache name="publisherCache" maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="false"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
+		memoryStoreEvictionPolicy="LRU">
+    </cache>
 
 </ehcache>

@@ -1,4 +1,3 @@
-//<editor-fold defaultstate="collapsed" desc="License">
 /*
  *  geo-platform
  *  Rich webgis framework
@@ -34,75 +33,36 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-//</editor-fold>
 package org.geosdi.geoplatform.services;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import javax.jws.WebService;
-
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import it.geosolutions.geoserver.rest.decoder.RESTDataStore;
 import it.geosolutions.geoserver.rest.decoder.RESTFeatureType;
 import it.geosolutions.geoserver.rest.decoder.RESTDataStoreList;
 import it.geosolutions.geoserver.rest.decoder.utils.NameLinkElem;
-
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.io.ParseException;
-import com.vividsolutions.jts.io.WKTReader;
 import it.geosolutions.geoserver.rest.decoder.RESTStyleList;
-import java.io.FileInputStream;
-import org.geosdi.geoplatform.request.Feature;
-import org.geotools.geometry.jts.JTS;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.zip.ZipFile;
 import java.util.List;
-import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.request.Attribute;
 import org.geosdi.geoplatform.responce.InfoPreview;
-
-import org.geotools.data.simple.SimpleFeatureIterator;
-import org.geotools.data.FeatureWriter;
-import org.geotools.data.DefaultTransaction;
-import org.geotools.data.Transaction;
-import org.geotools.data.DataStore;
 import org.geotools.data.FileDataStore;
 import org.geotools.data.FileDataStoreFinder;
-import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureSource;
-import org.geotools.data.shapefile.ShapefileDataStoreFactory;
-import org.geotools.data.DataStoreFactorySpi;
-import org.geotools.data.shapefile.ShapefileDataStore;
-import org.geotools.feature.FeatureCollections;
-import org.geotools.feature.simple.SimpleFeatureBuilder;
 import org.geotools.referencing.CRS;
-import org.geotools.feature.simple.SimpleFeatureTypeBuilder;
-import org.geotools.referencing.crs.DefaultGeographicCRS;
-import org.opengis.feature.simple.SimpleFeatureType;
-
-import org.opengis.feature.simple.SimpleFeature;
-import org.opengis.referencing.operation.MathTransform;
-import org.opengis.referencing.crs.CoordinateReferenceSystem;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * @author Luca Paolino - geoSDI
- *
- */
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPPublisherService")
 public class GPPublisherServiceImpl implements GPPublisherService {
 
@@ -212,10 +172,10 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         if (dataStore != null) {
             this.removeLayer(layerName);
             reload();
-            boolean unpublish = publisher.unpublishFeatureType(userWorkspace,
+            publisher.unpublishFeatureType(userWorkspace,
                     layerName, layerName);
             reload();
-            boolean remove = publisher.removeDatastore(userWorkspace, layerName);
+            publisher.removeDatastore(userWorkspace, layerName);
         } else {
             logger.info(
                     "\n The " + userWorkspace + ":" + dataStoreName + " does not exist");
@@ -223,16 +183,15 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         String filename = tempUserDirZIP + layerName + ".zip";
         File file = new File(filename);
         if (file.exists()) {
-            String result = reload();
+            reload();
             List<InfoShape> listInfo = getInfoFromCompressedShape(sessionID,
                     file);
             String epsg = "EPSG:4326";
             String sld = null;
-            String name = null;
             if (listInfo != null && listInfo.get(0) != null) {
                 epsg = listInfo.get(0).epsg;
                 sld = listInfo.get(0).sld;
-                name = listInfo.get(0).name;
+                //listInfo.get(0).name;
                 logger.info("\n PUBLISHING IN THE DB " + epsg + " , " + sld);
             }
             try {
@@ -266,191 +225,6 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     public boolean publishAllofPreview(String sessionID, String workspace,
             String dataStoreName) throws ResourceNotFoundFault, FileNotFoundException {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    /**********************
-     *
-     * @param userName this is the user name who
-     * @param list the list of
-     * @param shpFileName
-     * @return
-     * @throws ResourceNotFoundFault
-     * @throws Exception
-     */
-    @Override
-    public byte[] createSHP(String sessionID, List<Feature> list,
-            String shpFileName) throws ResourceNotFoundFault, Exception {
-        SimpleFeatureTypeBuilder typeBuilder = new SimpleFeatureTypeBuilder();
-        logger.info("\n INFO: Parsing feature schema");
-        if (list.size() > 0) {
-            GeometryFactory geometryFactory = new GeometryFactory();
-
-            WKTReader reader = new WKTReader(geometryFactory);
-            try {
-                Geometry geometry = reader.read(list.get(0).getWkt());
-                typeBuilder.setDefaultGeometry("the_geom");
-                typeBuilder.add("the_geom", geometry.getClass());
-            } catch (ParseException e) {
-                throw new ResourceNotFoundFault(
-                        "Cannot identify the geometry class");
-            }
-            List<Attribute> attributes = list.get(0).getAttributes();
-            for (Attribute attribute : attributes) {
-                Class clazz = null;
-                if (attribute.getType().equals("int")) {
-                    clazz = Integer.class;
-                }
-                if (attribute.getType().equals("double")) {
-                    clazz = Double.class;
-                }
-                if (attribute.getType().equals("float")) {
-                    clazz = Float.class;
-                }
-                if (attribute.getType().equals("String")) {
-                    clazz = String.class;
-                }
-                if (attribute.getType().equals("char")) {
-                    clazz = Character.class;
-                }
-                typeBuilder.add(attribute.getName(), clazz);
-            }
-
-        }
-
-        typeBuilder.setName("SHP_CREATION");
-        logger.info("\n  INFO: Parsing feature data ");
-        SimpleFeatureBuilder fb = new SimpleFeatureBuilder(
-                typeBuilder.buildFeatureType());
-        SimpleFeatureCollection result = FeatureCollections.newCollection();
-        GeometryFactory geometryFactory = new GeometryFactory();
-        WKTReader reader = new WKTReader(geometryFactory);
-        Geometry geometry = null;
-        int featureID = 0;
-        for (Feature feature : list) {
-            List<Attribute> attributes = feature.getAttributes();
-            try {
-                geometry = reader.read(feature.getWkt());
-            } catch (ParseException e) {
-                continue;
-            }
-            fb.set("the_geom", geometry);
-            for (Attribute attribute : attributes) {
-                Object value = null;
-                logger.info(
-                        "Name: " + attribute.getName() + " type:" + attribute.getType() + " value: " + attribute.getValue());
-                if (attribute.getType().equals("int")) {
-                    value = new Integer(Integer.parseInt(attribute.getValue()));
-                }
-                if (attribute.getType().equals("double")) {
-                    value = new Double(Double.parseDouble(attribute.getValue()));
-                }
-                if (attribute.getType().equals("float")) {
-                    value = new Float(Float.parseFloat(attribute.getValue()));
-                }
-                if (attribute.getType().equals("String")) {
-                    value = attribute.getValue();
-                }
-                fb.set(attribute.getName(), value);
-                result.add(fb.buildFeature("feature_" + (featureID++)));
-            }
-
-
-        }
-        logger.info("\n  INFO: Creating SHP files ");
-        FeatureWriter<SimpleFeatureType, SimpleFeature> writer = null;
-        SimpleFeatureIterator iterator = null;
-        Transaction transaction = null;
-        try {
-            String tempUserDir = PublishUtility.createDir(
-                    this.shpTempDir + sessionID);
-            ShapefileDataStoreFactory dataStoreFactory = new ShapefileDataStoreFactory();
-            Map<String, Serializable> params = new HashMap<String, Serializable>();
-            String shpFullPathName = tempUserDir + shpFileName;
-            File newFile = new File(shpFullPathName);
-            params.put("url", newFile.toURI().toURL());
-            params.put("create spatial index", Boolean.TRUE);
-            ShapefileDataStore newDataStore = (ShapefileDataStore) dataStoreFactory.createNewDataStore(
-                    params);
-            newDataStore.forceSchemaCRS(DefaultGeographicCRS.WGS84);
-            newDataStore.createSchema(result.getSchema()); // DA ECCEZIONE
-            writer = newDataStore.getFeatureWriter(Transaction.AUTO_COMMIT);
-            iterator = result.features();
-            transaction = new DefaultTransaction("Reproject");
-            while (iterator.hasNext()) {
-                // copy the contents of each feature and transform the geometry
-                SimpleFeature feature = iterator.next();
-                SimpleFeature copy = writer.next();
-                copy.setAttributes(feature.getAttributes());
-                Geometry geometrySource = (Geometry) feature.getDefaultGeometry();
-                copy.setDefaultGeometry(geometrySource);
-                writer.write();
-            }
-            transaction.commit();
-            logger.info("\n  INFO: Compressing SHP Files ");
-            String tempUserZipDir = PublishUtility.createDir(this.zipTempDir + sessionID + System.getProperty(
-                    "file.separator"));
-            String name = shpFileName.substring(0, shpFileName.length() - 4);
-            ZipOutputStream out = new ZipOutputStream(new FileOutputStream(
-                    tempUserZipDir + name + ".zip"));
-            out = PublishUtility.compress(out, new File(
-                    tempUserDir + name + ".shp"));
-            out = PublishUtility.compress(out, new File(
-                    tempUserDir + name + ".dbf"));
-            out = PublishUtility.compress(out, new File(
-                    tempUserDir + name + ".shx"));
-            out = PublishUtility.compress(out, new File(
-                    tempUserDir + name + ".prj"));
-            out.close();
-            return getStreamOfByteFromFile(tempUserZipDir + name + ".zip");
-        } catch (MalformedURLException ex) {
-            throw new ResourceNotFoundFault("Malformed URL Exception");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            throw new ResourceNotFoundFault("IO Exception");
-        } catch (Exception ex) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            ex.printStackTrace();
-            throw new ResourceNotFoundFault("Exception");
-        } finally {
-            writer.close();
-            iterator.close();
-            transaction.close();
-        }
-    }
-
-    private byte[] getStreamOfByteFromFile(String fileName) throws FileNotFoundException, IOException {
-        File file = new File(fileName);
-        InputStream is = new FileInputStream(file);
-
-        // Get the size of the file
-        long length = file.length();
-
-        if (length > Integer.MAX_VALUE) {
-            // File is too large
-        }
-
-        // Create the byte array to hold the data
-        byte[] bytes = new byte[(int) length];
-
-        // Read in the bytes
-        int offset = 0;
-        int numRead = 0;
-        while (offset < bytes.length && (numRead = is.read(bytes, offset,
-                bytes.length - offset)) >= 0) {
-            offset += numRead;
-        }
-
-        // Ensure all the bytes have been read in
-        if (offset < bytes.length) {
-            throw new IOException(
-                    "Could not completely read file " + file.getName());
-        }
-
-        // Close the input stream and return bytes
-        is.close();
-        return bytes;
     }
 
     /*************************
@@ -525,74 +299,6 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         return listPreviews;
     }
 
-    private boolean exportCRS(File shpFile, int code) {
-        SimpleFeatureSource featureSource = null;
-        FeatureWriter<SimpleFeatureType, SimpleFeature> writer = null;
-        Transaction transaction = null;
-        MathTransform transform = null;
-        try {
-            FileDataStore store = FileDataStoreFinder.getDataStore(shpFile);
-            featureSource = store.getFeatureSource();
-            SimpleFeatureType schema = featureSource.getSchema();
-            CoordinateReferenceSystem dataCRS = schema.getCoordinateReferenceSystem();
-            CoordinateReferenceSystem toCRS = CRS.decode("EPSG:" + code);
-            boolean lenient = true; // allow for some error due to different datums
-            transform = CRS.findMathTransform(dataCRS, toCRS, lenient);
-            DataStoreFactorySpi factory = new ShapefileDataStoreFactory();
-            Map<String, Serializable> create = new HashMap<String, Serializable>();
-            create.put("url", shpFile.toURI().toURL());
-            create.put("create spatial index", Boolean.TRUE);
-            DataStore dataStore = factory.createNewDataStore(create);
-            SimpleFeatureType featureType = SimpleFeatureTypeBuilder.retype(
-                    schema, toCRS);
-            dataStore.createSchema(featureType);
-            transaction = new DefaultTransaction("Reproject");
-            writer = dataStore.getFeatureWriterAppend(featureType.getTypeName(),
-                    transaction);
-        } catch (Exception e) {
-            return false;
-        }
-
-        SimpleFeatureCollection featureCollection = null;
-        SimpleFeatureIterator iterator = null;
-        try {
-            featureCollection = featureSource.getFeatures();
-            iterator = featureCollection.features();
-            while (iterator.hasNext()) {
-                // copy the contents of each feature and transform the geometry
-                SimpleFeature feature = iterator.next();
-                SimpleFeature copy = writer.next();
-                copy.setAttributes(feature.getAttributes());
-
-                Geometry geometry = (Geometry) feature.getDefaultGeometry();
-                Geometry geometry2 = JTS.transform(geometry, transform);
-
-                copy.setDefaultGeometry(geometry2);
-                writer.write();
-            }
-            transaction.commit();
-            return true;
-        } catch (Exception problem) {
-            try {
-                problem.printStackTrace();
-                transaction.rollback();
-                return false;
-            } catch (IOException ex) {
-                return false;
-            }
-        } finally {
-            try {
-                writer.close();
-                iterator.close();
-                transaction.close();
-                return false;
-            } catch (IOException ex) {
-                return false;
-            }
-
-        }
-    }
-
     /**************
      *
      * @param file the ZIP file from where extracting the info
@@ -657,7 +363,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             for (String shpFileName : shpList) {
                 // start analisi degli shape
                 logger.info("Extracting info from " + shpFileName);
-                RESTDataStore dataStore = null;
+//                RESTDataStore dataStore = null;
                 InfoShape info = new InfoShape();
                 info.name = shpFileName.substring(0, shpFileName.length() - 4);
 //                info.origName = info.name;
@@ -703,7 +409,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                             featureSource.getSchema().getCoordinateReferenceSystem(),
                             true);
                 } catch (Exception e) {
-                };
+                }
                 // if (code.intValue()!=4326) exportCRS(shpFile, 4326);
                 if (code != null) {
                     info.epsg = "EPSG:" + code.toString();
@@ -972,4 +678,4 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             return listInfoPreview;
         }
     }
-}
+    }

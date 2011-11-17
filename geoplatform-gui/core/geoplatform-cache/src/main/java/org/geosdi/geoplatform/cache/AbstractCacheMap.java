@@ -35,50 +35,44 @@
  */
 package org.geosdi.geoplatform.cache;
 
-import java.io.IOException;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.io.Resource;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPCacheAppConfig implements ApplicationContextAware {
+public class AbstractCacheMap<K, V> {
 
-    private ApplicationContext appContext;
-    private String resourcePath;
-    private GPCacheManager gpCacheManager;
+    private Cache cache;
 
-    /**
-     * Create a cacheManager within the Spring Application Context
-     * @return a bean
-     */
-    public @Bean(name = "cacheManager")
-    GPCacheManager cacheManager() throws IOException {
-        if (this.gpCacheManager == null) {
-            if (this.resourcePath == null) {
-                throw new IllegalArgumentException("The encache.xml url must not be null");
-            }
-            
-            Resource resource = appContext.getResource(resourcePath);
+    public AbstractCacheMap(Cache cache) {
+        this.cache = cache;
+    }
 
-            this.gpCacheManager = new GPCacheManager(resource.getInputStream());
+    public void put(final K key, final V value) {
+        this.cache.put(new Element(key, value));
+    }
+
+    public V get(final K key) {
+        Element element = this.cache.get(key);
+        if (element != null) {
+            return (V) element.getValue();
         }
-        return this.gpCacheManager;
+        return null;
     }
 
     /**
-     * @param resourcePath the resourcePath to set
+     * @return the cache
      */
-    public void setResourcePath(String resourcePath) {
-        this.resourcePath = resourcePath;
+    public Cache getBaseCache() {
+        return cache;
     }
 
-    @Override
-    public void setApplicationContext(ApplicationContext ac) throws BeansException {
-        this.appContext = ac;
+    /**
+     * @param cache the cache to set
+     */
+    public void setBaseCache(Cache cache) {
+        this.cache = cache;
     }
 }

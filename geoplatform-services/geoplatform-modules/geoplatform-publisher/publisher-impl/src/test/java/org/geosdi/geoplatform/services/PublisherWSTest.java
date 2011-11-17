@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-
 import org.slf4j.Logger;
 
 import junit.framework.Assert;
@@ -49,14 +48,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * @author Luca Paolino - geoSDI Group
- * @email luca.paolino@geosdi.org
  * this test try to publish two shapefiles. the first only in the preview workspace, the second firstly in the preview workspace and then into the data datastore of the preview2 workspace
  * In order to execute this test you should provide two shapefiles. The first should be in one ZIP compressed file while the second should be provided provifing its shp, prj, shx and dbf uncrompressed files.
  * You should also modify the paths to access them.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
+    "classpath*:applicationContext.xml"})
 public class PublisherWSTest extends TestCase {
 
     protected Logger logger = LoggerFactory.getLogger(org.geosdi.geoplatform.services.PublisherWSTest.class);

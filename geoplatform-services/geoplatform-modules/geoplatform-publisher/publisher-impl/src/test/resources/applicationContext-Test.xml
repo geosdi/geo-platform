@@ -16,23 +16,7 @@
             http://cxf.apache.org/jaxws
             http://cxf.apache.org/schemas/jaxws.xsd"
        default-autowire="byName">
-
-    <context:annotation-config />
-
-	<!--===================================================================== -->
-	<!-- Services -->
-	<!--===================================================================== -->
-
-    <bean id="publisherService" class="org.geosdi.geoplatform.services.GPPublisherServiceImpl">
-        <!-- the server to connect -->
-        <constructor-arg type="java.lang.String" value="${geoserver_url}"/>
-      <!-- the login and the password of the REST geoserver instance -->
-        <constructor-arg type="java.lang.String" value="${geoserver_username}"/>
-        <constructor-arg type="java.lang.String" value="${geoserver_password}"/>
-      <!-- the workspace where publishing the shapefiles to preview -->
-        <constructor-arg type="java.lang.String" value="${geoserver_preview_workspace}"/>
-    </bean>
-
-	<!--===================================================================== -->
+           
+    <context:component-scan base-package="org.geosdi.geoplatform"/>
 
 </beans>

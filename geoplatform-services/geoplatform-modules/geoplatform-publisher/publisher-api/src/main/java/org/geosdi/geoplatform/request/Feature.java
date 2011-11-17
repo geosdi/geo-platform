@@ -37,10 +37,6 @@ package org.geosdi.geoplatform.request;
 
 import java.util.List;
 
-/**
- *
- * @author Luca
- */
 public class Feature {
 
     private String wkt;

@@ -35,10 +35,6 @@
  */
 package org.geosdi.geoplatform.request;
 
-/**
- *
- * @author Luca
- */
 public class Attribute {
 
     private String name;

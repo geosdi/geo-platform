@@ -45,12 +45,9 @@ import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
 import org.codehaus.jra.Post;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.request.Feature;
 import org.geosdi.geoplatform.responce.InfoPreview;
 
 /**
- * @author Luca Paolino  - geoSDI
- *
  * Public interface to define the service operations mapped via REST
  * using CXT framework
  */
@@ -84,13 +81,13 @@ public interface GPPublisherService {
             @WebParam(name = "sessionID") String sessionID)
             throws ResourceNotFoundFault;
 
-    @Post
-    @HttpResource(location = "/preview/createSHP")
-    @WebResult(name = "Result")
-    byte[] createSHP(@WebParam(name = "sessionID") String sessionID,
-            @WebParam(name = "featureList") List<Feature> list,
-            @WebParam(name = "shpFileName") String shpFileName)
-            throws ResourceNotFoundFault, Exception;
+//    @Post
+//    @HttpResource(location = "/preview/createSHP")
+//    @WebResult(name = "Result")
+//    byte[] createSHP(@WebParam(name = "sessionID") String sessionID,
+//            @WebParam(name = "featureList") List<Feature> list,
+//            @WebParam(name = "shpFileName") String shpFileName)
+//            throws ResourceNotFoundFault, Exception;
 
     @Post
     @HttpResource(location = "/preview/verifyAndDeleteSessionDir")

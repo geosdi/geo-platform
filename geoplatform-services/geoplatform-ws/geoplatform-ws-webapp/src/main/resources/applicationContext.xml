@@ -55,12 +55,12 @@
             </bean>
         </jaxws:serviceFactory>
         <jaxws:inInterceptors>
-            <ref bean="geoPlatformServerInInterceptorBean"/>
-            <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
+            <ref bean="geoPlatformServerLoggingInInterceptorBean"/>
+            <ref bean="geoPlatformServerSecurityInInterceptorBean"/>
         </jaxws:inInterceptors>        
         <jaxws:outInterceptors>
-            <ref bean="geoPlatformServerOutInterceptorBean"/>
-            <bean class="org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor"/>
+            <ref bean="geoPlatformServerLoggingOutInterceptorBean"/>
+            <ref bean="geoPlatformServerSecurityOutInterceptorBean"/>
         </jaxws:outInterceptors>
     </jaxws:endpoint>
 
@@ -104,12 +104,12 @@
             </bean>
         </jaxws:serviceFactory>
         <jaxws:inInterceptors>
-            <ref bean="geoPlatformServerInInterceptorBean"/>
-            <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
+            <ref bean="geoPlatformServerLoggingInInterceptorBean"/>
+            <ref bean="geoPlatformServerSecurityInInterceptorBean"/>
         </jaxws:inInterceptors>        
         <jaxws:outInterceptors>
-            <ref bean="geoPlatformServerOutInterceptorBean"/>
-            <bean class="org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor"/>
+            <ref bean="geoPlatformServerLoggingOutInterceptorBean"/>
+            <ref bean="geoPlatformServerSecurityOutInterceptorBean"/>
         </jaxws:outInterceptors>
     </jaxws:endpoint>
 
@@ -132,10 +132,10 @@
 
     <!-- Enable message logging using the CXF logging feature -->
 
-    <cxf:bus>
+<!--    <cxf:bus>
         <cxf:features>
             <cxf:logging/>
         </cxf:features>
-    </cxf:bus>
+    </cxf:bus>-->
     
 </beans>

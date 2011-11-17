@@ -89,8 +89,8 @@ public class WSListenerServices implements TestExecutionListener {
         GPServerWebServiceInterceptorStrategyFactory gpServerWebServiceInterceptorStrategyFactory = (GPServerWebServiceInterceptorStrategyFactory) testContext.getApplicationContext().getBean("gpServerWebServiceInterceptorStrategyFactory");
         Assert.assertNotNull("gpServerWebServiceInterceptorStrategyFactory is NULL", gpServerWebServiceInterceptorStrategyFactory);
         
-        bus.getInInterceptors().add(gpServerWebServiceInterceptorStrategyFactory.getInInterceptor());
-        bus.getOutInterceptors().add(gpServerWebServiceInterceptorStrategyFactory.getOutInterceptor());
+        bus.getInInterceptors().add(gpServerWebServiceInterceptorStrategyFactory.getSecurityInInterceptor());
+        bus.getOutInterceptors().add(gpServerWebServiceInterceptorStrategyFactory.getSecurityOutInterceptor());
 
         bf.setDefaultBus(bus);
         String serverAddress = geoPlatformWSClient.getAddress();

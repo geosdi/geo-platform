@@ -20,11 +20,7 @@
 			value="org.geosdi.geoplatform.services.GeoPlatformService" />
         <property name="address"
 			value="${webservice_endpoint_address}" />
-        <property name="inInterceptors"
-			ref="geoPlatformClientSecurityInInterceptorBean" />
-        <property name="outInterceptors"
-			ref="geoPlatformClientSecurityOutInterceptorBean" />        
-<!--        <property name="inInterceptors">
+        <property name="inInterceptors">
             <list>
                 <ref bean="geoPlatformClientLoggingInInterceptorBean"/>
                 <ref bean="geoPlatformClientSecurityInInterceptorBean"/>
@@ -35,7 +31,7 @@
                 <ref bean="geoPlatformClientLoggingOutInterceptorBean"/>
                 <ref bean="geoPlatformClientSecurityOutInterceptorBean"/>
             </list>
-        </property>-->
+        </property>
     </bean>
 
 </beans>

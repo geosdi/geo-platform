@@ -60,6 +60,25 @@ public class GPClientWebServiceInterceptorStrategyFactory {
     private String clientKeystoreUser;
     private String serverPublicKeyPropertiesFile;
     private String serverKeystoreUser;
+    
+
+    public LoggingInInterceptor getLoggingInInterceptor() {
+        if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN.getValue())) {
+            return new LoggingInInterceptor();
+        } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN_OUT.getValue())) {
+            return new LoggingInInterceptor();
+        }
+        return null;
+    }
+
+    public LoggingOutInterceptor getLoggingOutInterceptor() {
+        if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_OUT.getValue())) {
+            return new LoggingOutInterceptor();
+        } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN_OUT.getValue())) {
+            return new LoggingOutInterceptor();
+        }
+        return null;
+    }
 
     public WSS4JInInterceptor getSecurityInInterceptor() {
         if (this.securityStrategy.equals(EnumWebserviceSecurity.USERNAME_TOKEN.getValue())) {
@@ -184,25 +203,6 @@ public class GPClientWebServiceInterceptorStrategyFactory {
 //        outProps.put("encryptionParts", "{Content}{http://schemas.xmlsoap.org/soap/envelope/}Body");
 //        outProps.put("encryptionSymAlgorithm", "http://www.w3.org/2001/04/xmlenc#tripledes-cbc");
         return new WSS4JOutInterceptor(outProps);
-    }
-    
-
-    public LoggingInInterceptor getLoggingInInterceptor() {
-        if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN.getValue())) {
-            return new LoggingInInterceptor();
-        } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN_OUT.getValue())) {
-            return new LoggingInInterceptor();
-        }
-        return null;
-    }
-
-    public LoggingOutInterceptor getLoggingOutInterceptor() {
-        if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_OUT.getValue())) {
-            return new LoggingOutInterceptor();
-        } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN_OUT.getValue())) {
-            return new LoggingOutInterceptor();
-        }
-        return null;
     }
 
     public void setLoggingStrategy(String loggingStrategy) {

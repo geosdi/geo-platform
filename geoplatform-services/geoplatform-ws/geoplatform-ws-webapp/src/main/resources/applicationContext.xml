@@ -78,14 +78,14 @@
                 </property>
             </bean>
         </jaxws:serviceFactory >
-        <!--<jaxws:outInterceptors>
-            <bean class="org.apache.cxf.binding.soap.saaj.SAAJOutInterceptor"/>
-            <ref bean="TimestampSignEncrypt_Response"/>
-        </jaxws:outInterceptors>
         <jaxws:inInterceptors>
-            <ref bean="TimestampSignEncrypt_Request"/>
-            <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
-        </jaxws:inInterceptors>-->
+            <ref bean="geoPlatformServerLoggingInInterceptorBean"/>
+            <ref bean="geoPlatformServerSecurityInInterceptorBean"/>
+        </jaxws:inInterceptors>        
+        <jaxws:outInterceptors>
+            <ref bean="geoPlatformServerLoggingOutInterceptorBean"/>
+            <ref bean="geoPlatformServerSecurityOutInterceptorBean"/>
+        </jaxws:outInterceptors>
     </jaxws:endpoint>
     
     <jaxws:endpoint id="schedulerServiceSOAP"

@@ -18,7 +18,7 @@
     <bean id="PBEConfiguration"
           class="org.jasypt.encryption.pbe.config.SimplePBEConfig">
         <property name="algorithm" value="PBEWithMD5AndDES" />
-        <property name="password" value="qwerty" />
+        <property name="password" value="$-geosdi,0x" />
     </bean>
   
   

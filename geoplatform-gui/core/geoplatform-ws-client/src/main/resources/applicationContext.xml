@@ -12,7 +12,7 @@
 		factory-bean="geoPlatformProxyFactory" factory-method="create" />
 
     <bean id="geoPlatformPublishClient" class="org.geosdi.geoplatform.cxf.GeoPlatformPublishClient">
-        <property name="address" value="http://localhost:8080/geoplatform-service/publish" />
+        <property name="address" value="${webservice_publisher_endpoint_address}" />
     </bean>
 
     <bean id="geoPlatformProxyFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">

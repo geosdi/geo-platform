@@ -62,25 +62,25 @@ public class GPClientWebServiceInterceptorStrategyFactory {
     private String serverKeystoreUser;
     
 
-    public LoggingInInterceptor getLoggingInInterceptor() {
+    public LoggingInInterceptor getLoggingInInterceptor() throws IllegalArgumentException {
         if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN.getValue())) {
             return new LoggingInInterceptor();
         } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN_OUT.getValue())) {
             return new LoggingInInterceptor();
         }
-        return null;
+        throw new IllegalArgumentException("Invalid parameter " + this.loggingStrategy + " specified in properties file");
     }
 
-    public LoggingOutInterceptor getLoggingOutInterceptor() {
+    public LoggingOutInterceptor getLoggingOutInterceptor() throws IllegalArgumentException {
         if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_OUT.getValue())) {
             return new LoggingOutInterceptor();
         } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN_OUT.getValue())) {
             return new LoggingOutInterceptor();
         }
-        return null;
+        throw new IllegalArgumentException("Invalid parameter " + this.loggingStrategy + " specified in properties file");
     }
 
-    public WSS4JInInterceptor getSecurityInInterceptor() {
+    public WSS4JInInterceptor getSecurityInInterceptor() throws IllegalArgumentException {
         if (this.securityStrategy.equals(EnumWebserviceSecurity.USERNAME_TOKEN.getValue())) {
             return createUsernameTokenInInterceptor();
         } else if (this.securityStrategy.equals(EnumWebserviceSecurity.ENCRYPTION.getValue())) {
@@ -90,10 +90,10 @@ public class GPClientWebServiceInterceptorStrategyFactory {
         } else if (this.securityStrategy.equals(EnumWebserviceSecurity.TIMESTAMP_SIGNATURE_ENCRYPTION.getValue())) {
             return createTimestampSignatureEncryptionInInterceptor();
         }
-        return null;
+        throw new IllegalArgumentException("Invalid parameter " + this.securityStrategy + " specified in properties file");
     }
 
-    public WSS4JOutInterceptor getSecurityOutInterceptor() {
+    public WSS4JOutInterceptor getSecurityOutInterceptor() throws IllegalArgumentException {
         if (this.securityStrategy.equals(EnumWebserviceSecurity.USERNAME_TOKEN.getValue())) {
             return createUsernameTokenOutInterceptor();
         } else if (this.securityStrategy.equals(EnumWebserviceSecurity.ENCRYPTION.getValue())) {
@@ -103,7 +103,7 @@ public class GPClientWebServiceInterceptorStrategyFactory {
         } else if (this.securityStrategy.equals(EnumWebserviceSecurity.TIMESTAMP_SIGNATURE_ENCRYPTION.getValue())) {
             return createTimestampSignatureEncryptionOutInterceptor();
         }
-        return null;
+        throw new IllegalArgumentException("Invalid parameter " + this.securityStrategy + " specified in properties file");
     }
 
     private WSS4JInInterceptor createUsernameTokenInInterceptor() {

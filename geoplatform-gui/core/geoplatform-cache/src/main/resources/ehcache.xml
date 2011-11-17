@@ -5,15 +5,16 @@
     <diskStore path="java.io.tmpdir" />
 
     <defaultCache maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="false"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
+		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
+		diskPersistent="true" diskExpiryThreadIntervalSeconds="120"
 		memoryStoreEvictionPolicy="LRU">
     </defaultCache>
     
-    <cache name="oxmCache" maxElementsInMemory="10000" eternal="false"
-		timeToIdleSeconds="240" timeToLiveSeconds="240" overflowToDisk="false"
-		diskPersistent="false" diskExpiryThreadIntervalSeconds="240"
-		memoryStoreEvictionPolicy="LRU" copyOnWrite="true">
+    <cache name="oxmCache" maxElementsInMemory="10000" 
+                eternal="false" overflowToDisk="true" 
+                timeToIdleSeconds="300" timeToLiveSeconds="600" 
+                memoryStoreEvictionPolicy="LFU"  
+                copyOnWrite="true">
         <copyStrategy class="net.sf.ehcache.store.compound.ImmutableValueElementCopyStrategy"/>
     </cache>
     

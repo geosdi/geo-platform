@@ -43,10 +43,10 @@ import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
-import org.quartz.SchedulerFactory;
 import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
+import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -79,13 +79,11 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
         // Trigger the job to run once
         Trigger trigger = TriggerBuilder.newTrigger().
                 withIdentity("sendEmailTrigger", groupEmail). // KEY email.sendEmailTrigger
+                withDescription("Runs once immediately").
                 startNow().
-                withSchedule(SimpleScheduleBuilder.simpleSchedule().
-                withIntervalInSeconds(3).
-                withRepeatCount(0)).
                 forJob(jobSendEmail).
                 build();
-        trigger.getJobDataMap().put("user", user);
+        trigger.getJobDataMap().put(EmailJob.USER, user);
 
         try {
             logger.info("\n*** Fire trigger for sending email...");
@@ -97,19 +95,23 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        SchedulerFactory schedFact = new org.quartz.impl.StdSchedulerFactory();
+        // Scheduler setted in quatrz.propeties file
+        scheduler = StdSchedulerFactory.getDefaultScheduler();
 
-        scheduler = schedFact.getScheduler();
         scheduler.start();
 
+        this.createJobSendEmail();
+
+        // Add job to the scheduler for execute when trigger will be fired
+        scheduler.addJob(jobSendEmail, false);
+    }
+
+    private void createJobSendEmail() {
         // Define the job and tie it to EmailJob class
         jobSendEmail = JobBuilder.newJob(EmailJob.class).
-                storeDurably(true).
+                storeDurably().
                 withIdentity("sendEmailJob", groupEmail). // KEY email.sendEmailJob
                 build();
-        jobSendEmail.getJobDataMap().put("emailTask", emailTask);
-
-        // Add job to the scheduler for execute when trigger was fired
-        scheduler.addJob(jobSendEmail, false);
+        jobSendEmail.getJobDataMap().put(EmailJob.EMAIL_TASK, emailTask);
     }
 }

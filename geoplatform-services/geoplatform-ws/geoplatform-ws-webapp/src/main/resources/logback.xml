@@ -30,7 +30,7 @@
         <level value="info" />
         <appender-ref ref="STDOUT" />
     </root>
-    
+
     <logger name="org.geosdi.geoplatform.jobs.EmailTask" level="debug"/>
     <logger name="org.geosdi.geoplatform.jobs.EmailJob" level="debug"/>
 

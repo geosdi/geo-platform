@@ -1,0 +1,15 @@
+<html>
+<body>
+    <h3>Hi <u>${user.name}</u>, welcome to the Geo-Portal</h3>
+
+    <div>
+        Your username is: <b>${user.username}</b>
+    </div><br/><div>
+        Your password is: <b>${user.password}</b>
+    </div>
+    <br/><br/>
+    <div>
+        Log in to the <a href="http://150.146.160.71/geo-portal/">Geo-Portal</b>
+    </div>
+</body>
+</html>

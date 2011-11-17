@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.jobs;
 
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.exception.EmailException;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -48,12 +49,15 @@ import org.slf4j.LoggerFactory;
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-// Not execute multiple instances of a given job definition - JobDetail -
+// NOT execute multiple instances of a given job definition - JobDetail -
 // (that refers to the given job class - Job) concurrently
 @DisallowConcurrentExecution
 public class EmailJob implements Job {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    public static final String USER = "user";
+    public static final String EMAIL_TASK = "emailTask";
     //
     private EmailTask emailTask;
 
@@ -71,11 +75,21 @@ public class EmailJob implements Job {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         logger.debug("\n*** START send email job ***");
 
-        GPUser user = (GPUser) context.getTrigger().getJobDataMap().get("user");
+        GPUser user = (GPUser) context.getTrigger().getJobDataMap().get(USER);
         logger.trace("\n*** " + user);
 
         if (user != null) {
-            emailTask.sendConfirmationEmail(user);
+            try {
+                emailTask.sendConfirmationEmail(user);
+            } catch (EmailException ee) {
+                logger.error("\n\t\t*** ERROR: EmailException", ee.getMessage());
+                
+                JobExecutionException jee = new JobExecutionException(ee);
+                // Unschedule the trigger associated with this job
+                // so that it does not run again for this user
+                jee.setUnscheduleFiringTrigger(true);
+                throw jee;
+            }
         }
 
         logger.debug("\n*** STOP send email job ***");

@@ -1174,7 +1174,7 @@
         <geoplatform-version>1.2-SNAPSHOT</geoplatform-version>
         <cxf-version>2.4.3</cxf-version>
         <spring-version>3.0.6.RELEASE</spring-version>
-        <quartz-version>2.1.0</quartz-version>
+        <quartz-version>2.1.1</quartz-version>
         <velocity-version>1.7</velocity-version>
         <javax-mail-version>1.4.4</javax-mail-version>
         <jaxws-version>2.2.3</jaxws-version>

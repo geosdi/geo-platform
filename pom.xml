@@ -136,6 +136,22 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        
+		<!-- TERRACOTTA -->
+        <repository>
+            <id>terracotta-repository</id>
+            <url>http://www.terracotta.org/download/reflector/releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+       
+        <repository>
+            <url>http://oss.sonatype.org/content/repositories/sourceforge-releases</url>
+            <id>sonatype-mirror</id>
+            <layout>default</layout>
+            <name>Repository for library including ehcache recent ones</name>
+        </repository>
     </repositories>
 
     <modules>
@@ -929,6 +945,19 @@
                 <classifier>lite</classifier>
                 <scope>compile</scope>
             </dependency>
+            
+        <!-- EHCACHE -->
+            <dependency>
+                <groupId>net.sf.ehcache</groupId>
+                <artifactId>ehcache-core</artifactId>
+                <version>${ehcache-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.ehcache</groupId>
+                <artifactId>ehcache-terracotta</artifactId>
+                <version>${ehcache-version}</version>
+            </dependency>
+        
         </dependencies>
     </dependencyManagement>
 
@@ -1229,6 +1258,8 @@
         <gwtOpenlayersVersion>0.7-SNAPSHOT</gwtOpenlayersVersion>
         
         <jasyptVersion>1.8</jasyptVersion>
+        
+        <ehcache-version>2.5.0</ehcache-version>
 
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
     </properties>

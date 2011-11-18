@@ -50,9 +50,6 @@
     </developers>
     
     <properties>
-        <ehcache-core.version>2.4.6</ehcache-core.version>
-        <ehcache-terracotta.version>2.4.6</ehcache-terracotta.version>
-        
         <!-- Keep aligned with src/main/resources/geoplatform_datasource.xml -->
         <db.url>jdbc:postgresql://localhost:5432/gp</db.url>
         <db.driverClassName>org.postgresql.Driver</db.driverClassName>
@@ -65,16 +62,6 @@
         <toolkit.version>3.3.0</toolkit.version>
         <toolkit.api>1.3</toolkit.api>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>terracotta-repository</id>
-            <url>http://www.terracotta.org/download/reflector/releases</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-    </repositories>
 
     <dependencies>             
 
@@ -312,18 +299,6 @@
             <artifactId>hibernate-spatial-postgis</artifactId>
         </dependency>
         
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache-core</artifactId>
-            <version>${ehcache-core.version}</version>
-        </dependency>      
-
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache-terracotta</artifactId>
-            <version>${ehcache-terracotta.version}</version>
-        </dependency> 
-        
 		<!-- CGLIB -->
         <dependency>
             <groupId>asm</groupId>
@@ -382,12 +357,10 @@
         <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache-core</artifactId>
-            <version>${ehcache-core.version}</version>
         </dependency>
         <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache-terracotta</artifactId>
-            <version>${ehcache-terracotta.version}</version>
         </dependency>
         
     </dependencies>

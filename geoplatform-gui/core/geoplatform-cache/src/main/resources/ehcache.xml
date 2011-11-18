@@ -6,16 +6,14 @@
 
     <defaultCache maxElementsInMemory="10000" eternal="false"
 		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
-		diskPersistent="true" diskExpiryThreadIntervalSeconds="120"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
 		memoryStoreEvictionPolicy="LRU">
     </defaultCache>
     
     <cache name="oxmCache" maxElementsInMemory="10000" 
                 eternal="false" overflowToDisk="true" 
                 timeToIdleSeconds="300" timeToLiveSeconds="600" 
-                memoryStoreEvictionPolicy="LFU"  
-                copyOnWrite="true">
-        <copyStrategy class="net.sf.ehcache.store.compound.ImmutableValueElementCopyStrategy"/>
+                memoryStoreEvictionPolicy="LFU">
     </cache>
     
     <cache name="publisherCache" maxElementsInMemory="10000" eternal="false"

@@ -942,7 +942,6 @@
                 <groupId>org.jasypt</groupId>
                 <artifactId>jasypt</artifactId>
                 <version>${jasypt-version}</version>
-                <classifier>lite</classifier>
                 <scope>compile</scope>
             </dependency>
             

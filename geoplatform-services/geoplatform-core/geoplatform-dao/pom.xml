@@ -105,7 +105,6 @@
         <dependency>
             <groupId>org.jasypt</groupId>
             <artifactId>jasypt</artifactId>
-            <classifier>lite</classifier>
         </dependency>
 
         <!-- logging dependencies, delegate all to slf4j and use logback -->

@@ -385,7 +385,7 @@
         <dependency>
             <groupId>org.jasypt</groupId>
             <artifactId>jasypt</artifactId>
-            <version>${jasyptVersion}</version>
+            <classifier>lite</classifier>
         </dependency>
 
     </dependencies>

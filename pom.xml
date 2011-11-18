@@ -941,7 +941,7 @@
             <dependency>
                 <groupId>org.jasypt</groupId>
                 <artifactId>jasypt</artifactId>
-                <version>${jasyptVersion}</version>
+                <version>${jasypt-version}</version>
                 <classifier>lite</classifier>
                 <scope>compile</scope>
             </dependency>
@@ -1257,7 +1257,7 @@
         
         <gwtOpenlayersVersion>0.7-SNAPSHOT</gwtOpenlayersVersion>
         
-        <jasyptVersion>1.8</jasyptVersion>
+        <jasypt-version>1.8</jasypt-version>
         
         <ehcache-version>2.5.0</ehcache-version>
 

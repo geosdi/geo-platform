@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import javax.persistence.Column;
@@ -50,6 +51,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
@@ -81,8 +84,15 @@ public abstract class GPAccount implements Serializable {
     @Column(name = "is_enabled", nullable = false)
     private boolean enabled = false;
     //
-    @Transient
-    private Boolean accountNonExpired;
+    @Column(name = "creation_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate = new Date(System.currentTimeMillis());
+    //    
+    @Column(name = "account_temporary")
+    private boolean accountTemporary = false;
+    //
+    @Column(name = "account_non_expired")
+    private boolean accountNonExpired = true;
     //
     @Transient
     private Boolean accountNonLocked;
@@ -134,8 +144,48 @@ public abstract class GPAccount implements Serializable {
         this.enabled = enabled;
     }
 
+    /**
+     * @return the creationDate
+     */
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    /**
+     * @param creationDate
+     *          the creationDate to set
+     */
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    /**
+     * @return the accountTemporary
+     */
+    public boolean isAccountTemporary() {
+        return accountTemporary;
+    }
+
+    /**
+     * @param accountTemporary the accountTemporary to set
+     */
+    public void setAccountTemporary(boolean accountTemporary) {
+        this.accountTemporary = accountTemporary;
+    }
+
+    /**
+     * @return the accountNonExpired
+     */
     public boolean isAccountNonExpired() {
         return accountNonExpired;
+    }
+
+    /**
+     * @param accountNonExpired
+     *          the accountNonExpired to set
+     */
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
     }
 
     public boolean isAccountNonLocked() {
@@ -192,7 +242,9 @@ public abstract class GPAccount implements Serializable {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName());
         str.append(" id=").append(id);
         str.append(", enabled=").append(enabled);
-//        str.append(", accountNonExpired=").append(accountNonExpired);
+        str.append(", creationDate=").append(creationDate);
+        str.append(", accountTemporary=").append(accountTemporary);
+        str.append(", accountNonExpired=").append(accountNonExpired);
 //        str.append(", accountNonLocked=").append(accountNonLocked);
 //        str.append(", credentialsNonExpired=").append(credentialsNonExpired);
         if (authorities != null) {

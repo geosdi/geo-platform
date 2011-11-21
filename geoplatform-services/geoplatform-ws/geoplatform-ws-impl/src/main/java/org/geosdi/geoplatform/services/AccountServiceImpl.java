@@ -52,6 +52,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.Utility;
+import org.geosdi.geoplatform.exception.AccountExpiredFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
@@ -318,9 +319,13 @@ class AccountServiceImpl {
     }
 
     public GPUser getUserDetailByUsernameAndPassword(String username, String password)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+            throws ResourceNotFoundFault, IllegalParameterFault, AccountExpiredFault {
         GPUser user = this.getUserByUsername(username);
         EntityCorrectness.checkAccountLog(user); // TODO assert
+
+        if (!user.isAccountNonExpired()) {
+            throw new AccountExpiredFault("Account expired", username);
+        }
 
         // Check password
         try {

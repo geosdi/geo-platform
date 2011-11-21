@@ -33,65 +33,67 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.jobs;
+package org.geosdi.geoplatform.exception;
 
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.exception.EmailException;
-import org.quartz.DisallowConcurrentExecution;
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.xml.ws.WebFault;
 
 /**
  *
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-// NOT execute multiple instances of a given job definition - JobDetail -
-// (that refers to the given job class - Job) concurrently
-@DisallowConcurrentExecution
-public class EmailJob implements Job {
+@WebFault(name = "AccountExpiredFault", faultBean = "org.geosdi.exception.AccountExpiredFault")
+public class AccountExpiredFault extends Exception {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final long serialVersionUID = -9167519878278175760L;
     //
-    public static final String USER = "user";
-    public static final String EMAIL_TASK = "emailTask";
-    //
-    private EmailTask emailTask;
+    private Long accountID;
+    private String stringID;
 
-    /**
-     * Quartz pass emailTask each time that an instance of EmailJob was created,
-     * because emailTask was insert into JobDataMap of JobDetail tie to this job
-     * 
-     * @param emailTask the emailTask to set
-     */
-    public void setEmailTask(EmailTask emailTask) {
-        this.emailTask = emailTask;
+    public AccountExpiredFault() {
+    }
+
+    public AccountExpiredFault(String message) {
+        super(message);
+    }
+
+    public AccountExpiredFault(String message, Long accountID) {
+        super(message);
+        this.accountID = accountID;
+    }
+
+    public AccountExpiredFault(String message, String stringID) {
+        super(message);
+        this.stringID = stringID;
+    }
+
+    public AccountExpiredFault(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public Long getAccountID() {
+        return accountID;
+    }
+
+    public void setAccountID(Long accountID) {
+        this.accountID = accountID;
+    }
+
+    public String getStringID() {
+        return stringID;
+    }
+
+    public void setStringID(String stringID) {
+        this.stringID = stringID;
     }
 
     @Override
-    public void execute(JobExecutionContext context) throws JobExecutionException {
-        logger.debug("\n*** START send email job ***");
-
-        GPUser user = (GPUser) context.getTrigger().getJobDataMap().get(USER);
-        logger.trace("\n*** " + user);
-
-        if (user != null) {
-            try {
-                emailTask.sendConfirmationEmail(user);
-            } catch (EmailException ee) {
-                logger.error("\n\t\t*** ERROR: EmailException", ee.getMessage());
-
-                JobExecutionException jee = new JobExecutionException(ee);
-                // Unschedule the trigger associated with this job
-                // so that it does not run again for this user
-                jee.setUnscheduleFiringTrigger(true);
-                throw jee;
-            }
+    public String getMessage() {
+        if (accountID != null) {
+            return super.getMessage() + " (ID = " + accountID + ")";
+        } else if (stringID != null) {
+            return super.getMessage() + " (String ID = " + stringID + ")";
         }
-
-        logger.debug("\n*** STOP send email job ***");
+        return super.getMessage();
     }
 }

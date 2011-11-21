@@ -33,5 +33,6 @@
 
     <logger name="org.geosdi.geoplatform.jobs.EmailTask" level="debug"/>
     <logger name="org.geosdi.geoplatform.jobs.EmailJob" level="debug"/>
+    <logger name="org.geosdi.geoplatform.jobs.TempAccountExpireJob" level="trace"/>
 
 </configuration>

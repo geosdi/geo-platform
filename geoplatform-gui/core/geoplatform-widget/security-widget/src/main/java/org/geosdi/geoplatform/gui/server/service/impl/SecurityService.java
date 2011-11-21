@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.exception.AccountExpiredFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
@@ -95,9 +96,12 @@ public class SecurityService implements ISecurityService {
         } catch (SOAPFaultException ex) {
             logger.error("Error on SecurityService: " + ex + " password incorrect");
             throw new GeoPlatformException("Password incorrect");
-        } catch (IllegalParameterFault ilg) {
-            logger.error("Error on SecurityService: " + ilg);
+        } catch (IllegalParameterFault ex) {
+            logger.error("Error on SecurityService: " + ex);
             throw new GeoPlatformException("Parameter incorrect");
+        } catch (AccountExpiredFault ex) {
+            logger.error("Error on SecurityService: " + ex);
+            throw new GeoPlatformException("Account expired, contact the administrator");
         }
 
         if (user.getDefaultProjectID() == null) {

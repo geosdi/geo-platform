@@ -191,10 +191,10 @@ public class CXFServiceTest extends ServiceTest {
 
     private GeoPlatformServer createServer(String serverUrl, GPCapabilityType serverType) {
         // Create field's value from Regex on Server URL
-        String serverName = serverUrl.replaceAll("http://(dpc|map|www)\\.([^\\.]+)\\.(org|it|com)", "$1.$2.$3");
-        logger.debug("\n*** serverName: {} ***", serverName);
-        String labelServer = serverName.replaceAll("(dpc|map|www)\\.([^\\.]+)\\.(org|it|com)", "$2");
-        logger.debug("\n*** labelServer: {} ***", labelServer);
+        String serverName = serverUrl.replaceAll("http://(\\w+)\\.([^\\.]+)\\.(\\w+)", "$1.$2.$3");
+        logger.trace("\n*** serverName: {} ***", serverName);
+        String labelServer = serverName.replaceAll("(\\w+)\\.([^\\.]+)\\.(\\w+)", "$2");
+        logger.trace("\n*** labelServer: {} ***", labelServer);
         // Create Server
         GeoPlatformServer server = new GeoPlatformServer();
         server.setServerUrl(serverUrl);

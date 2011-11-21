@@ -43,6 +43,7 @@ import java.util.List;
 import junit.framework.Assert;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.exception.AccountExpiredFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
@@ -203,13 +204,14 @@ public class WSAccountTest extends ServiceTest {
 
     @Test
     public void testGetUserDetailByUsernameAndPassword1()
-            throws IllegalParameterFault, ResourceNotFoundFault {
+            throws IllegalParameterFault, ResourceNotFoundFault, AccountExpiredFault {
         GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, "pwd_username_test_ws");
         Assert.assertNotNull("User is null", user);
     }
 
     @Test
-    public void testGetUserDetailByUsernameAndPassword2() {
+    public void testGetUserDetailByUsernameAndPassword2()
+            throws AccountExpiredFault {
         GPUser user = null;
         try {
             String newUsername = usernameTest + "_";
@@ -223,7 +225,8 @@ public class WSAccountTest extends ServiceTest {
     }
 
     @Test
-    public void testGetUserDetailByUsernameAndPassword3() {
+    public void testGetUserDetailByUsernameAndPassword3()
+            throws AccountExpiredFault {
         GPUser user = null;
         try {
             user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, "pwd_username_test_ws_");

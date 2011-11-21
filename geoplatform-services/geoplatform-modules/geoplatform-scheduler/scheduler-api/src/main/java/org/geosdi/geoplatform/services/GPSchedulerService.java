@@ -52,4 +52,8 @@ public interface GPSchedulerService {
 
     @Post
     void sendEmail(@WebParam(name = "user") GPUser user);
+
+    // For test purpose
+    @Post
+    void checkTempAccount();
 }

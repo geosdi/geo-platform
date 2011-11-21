@@ -36,9 +36,14 @@
 package org.geosdi.geoplatform.services;
 
 import javax.jws.WebService;
+import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.jobs.EmailJob;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.jobs.EmailTask;
+import org.geosdi.geoplatform.jobs.GroupJobType;
+import org.geosdi.geoplatform.jobs.TempAccountExpireJob;
+import org.quartz.CalendarIntervalScheduleBuilder;
+import org.quartz.DateBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -49,6 +54,7 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -57,14 +63,21 @@ import org.springframework.beans.factory.InitializingBean;
  */
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPSchedulerService")
 public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingBean {
-
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    @Autowired
+    private GPAccountDAO accountDAO;
     //
     private EmailTask emailTask;
     //
     private Scheduler scheduler;
     private JobDetail jobSendEmail;
-    private String groupEmail = "email";
+    private JobDetail jobTempAccount;
+    
+    public void setAccountDAO(GPAccountDAO accountDAO) {
+        this.accountDAO = accountDAO;
+    }
 
     /**
      * @param emailTask the emailTask to set
@@ -72,18 +85,18 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
     public void setEmailTask(EmailTask emailJob) {
         this.emailTask = emailJob;
     }
-
+    
     @Override
     public void sendEmail(GPUser user) {
         // Trigger the job to run once
         Trigger trigger = TriggerBuilder.newTrigger().
-                withIdentity("sendEmailTrigger", groupEmail). // KEY email.sendEmailTrigger
+                withIdentity("sendEmailTrigger", GroupJobType.EMAIL.toString()). // KEY email.sendEmailTrigger
                 withDescription("Runs once immediately").
                 startNow().
                 forJob(jobSendEmail).
                 build();
         trigger.getJobDataMap().put(EmailJob.USER, user);
-
+        
         try {
             logger.info("\n*** Fire trigger for sending email...");
             scheduler.scheduleJob(trigger);
@@ -91,26 +104,66 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
             logger.error("SchedulerException", ex.getMessage());
         }
     }
-
+    
+    @Override
+    public void checkTempAccount() {
+        Trigger trigger = TriggerBuilder.newTrigger().
+                withIdentity("checkTempAccountTrigger", GroupJobType.TEMP_ACCOUNT.toString()).
+                withDescription("Runs once immediately").
+                startNow().
+                forJob(jobTempAccount).
+                build();
+        
+        try {
+            logger.info("\n*** Fire trigger for check temp account...");
+            scheduler.scheduleJob(trigger);
+        } catch (SchedulerException ex) {
+            logger.error("SchedulerException", ex.getMessage());
+        }
+    }
+    
     @Override
     public void afterPropertiesSet() throws Exception {
         // Scheduler setted in quatrz.propeties file
         scheduler = StdSchedulerFactory.getDefaultScheduler();
-
+        
         scheduler.start();
-
+        
+        this.createDataTempAccountExpired();
         this.createJobSendEmail();
+    }
+    
+    private void createJobSendEmail() throws SchedulerException {
+        // Define the job and tie it to EmailJob class
+        jobSendEmail = JobBuilder.newJob(EmailJob.class).
+                withIdentity("sendEmailJob", GroupJobType.EMAIL.toString()). // KEY email.sendEmailJob
+                withDescription("Send a confirmation email to new user").
+                storeDurably().
+                build();
+        jobSendEmail.getJobDataMap().put(EmailJob.EMAIL_TASK, emailTask);
 
         // Add job to the scheduler for execute when trigger will be fired
         scheduler.addJob(jobSendEmail, false);
     }
-
-    private void createJobSendEmail() {
-        // Define the job and tie it to EmailJob class
-        jobSendEmail = JobBuilder.newJob(EmailJob.class).
+    
+    private void createDataTempAccountExpired() throws SchedulerException {
+        jobTempAccount = JobBuilder.newJob(TempAccountExpireJob.class).
+                //        JobDetail job = JobBuilder.newJob(TempAccountExpireJob.class).
+                withIdentity("tempAccountExpireJob", GroupJobType.TEMP_ACCOUNT.toString()).
+                withDescription("Disable temp account if the threshold is expired").
                 storeDurably().
-                withIdentity("sendEmailJob", groupEmail). // KEY email.sendEmailJob
                 build();
-        jobSendEmail.getJobDataMap().put(EmailJob.EMAIL_TASK, emailTask);
+        jobTempAccount.getJobDataMap().put("accountDAO", accountDAO);
+        
+        Trigger trigger = TriggerBuilder.newTrigger().
+                withIdentity("TempAccountExpireJobTrigger").
+                withDescription("Runs one at week").
+                startAt(DateBuilder.evenHourDateAfterNow()).
+                withSchedule(CalendarIntervalScheduleBuilder.calendarIntervalSchedule().
+                withIntervalInWeeks(1).
+                withMisfireHandlingInstructionFireAndProceed()).
+                build();
+        
+        scheduler.scheduleJob(jobTempAccount, trigger);
     }
 }

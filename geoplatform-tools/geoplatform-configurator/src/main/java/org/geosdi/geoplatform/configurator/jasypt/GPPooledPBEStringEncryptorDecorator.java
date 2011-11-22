@@ -43,7 +43,7 @@ import org.springframework.context.annotation.Configuration;
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-@Configuration
+@Configuration(value = "gpPooledPBEStringEncryptor")
 public class GPPooledPBEStringEncryptorDecorator {
 
     private PooledPBEStringEncryptor pooledPBEStringEncryptor;
@@ -58,11 +58,6 @@ public class GPPooledPBEStringEncryptorDecorator {
     @Bean
     public PooledPBEStringEncryptor pooledPBEStringEncryptor() {
         return this.pooledPBEStringEncryptor;
-    }
-    
-    @Bean
-    public GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor() {
-        return this;
     }
     
     public String encrypt(String plainText) {

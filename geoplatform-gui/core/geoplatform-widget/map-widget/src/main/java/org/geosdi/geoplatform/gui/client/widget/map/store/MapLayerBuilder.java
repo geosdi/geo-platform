@@ -74,8 +74,9 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
         if (!rasterBean.getStyles().isEmpty()) {
             wmsParams.setStyles(rasterBean.getStyles().get(0).getStyleString());
         }
-        wmsParams.setIsTransparent(true);
+        wmsParams.setTransparent(true);
 
+        WMSOptions wmsOption = new WMSOptions();
         if (rasterBean.getBbox() != null) {
 
             Bounds bbox = new Bounds(rasterBean.getBbox().getLowerLeftX(),
@@ -86,10 +87,8 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
             bbox.transform(new Projection(rasterBean.getCrs()), new Projection(
                     mapWidget.getMap().getProjection()));
 
-            wmsParams.setMaxExtent(bbox);
+            wmsOption.setMaxExtent(bbox);
         }
-
-        WMSOptions wmsOption = new WMSOptions();
         wmsOption.setIsBaseLayer(false);
         wmsOption.setDisplayInLayerSwitcher(false);
         wmsOption.setDisplayOutsideMaxExtent(true);
@@ -117,8 +116,9 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
         wmsParams.setFormat("image/png");
         wmsParams.setLayers(vectorBean.getName());
         wmsParams.setStyles("");
-        wmsParams.setIsTransparent(true);
+        wmsParams.setTransparent(true);
 
+        WMSOptions wmsOption = new WMSOptions();
         if (vectorBean.getBbox() != null) {
 
             Bounds bbox = new Bounds(vectorBean.getBbox().getLowerLeftX(),
@@ -129,10 +129,8 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> implem
             bbox.transform(new Projection(vectorBean.getCrs()), new Projection(
                     mapWidget.getMap().getProjection()));
 
-            wmsParams.setMaxExtent(bbox);
+            wmsOption.setMaxExtent(bbox);
         }
-
-        WMSOptions wmsOption = new WMSOptions();
         wmsOption.setIsBaseLayer(false);
         wmsOption.setDisplayInLayerSwitcher(false);
         wmsOption.setDisplayOutsideMaxExtent(true);

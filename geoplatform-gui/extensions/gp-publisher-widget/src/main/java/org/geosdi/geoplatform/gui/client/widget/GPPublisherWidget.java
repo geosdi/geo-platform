@@ -159,7 +159,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
         wmsParams.setFormat("image/png");
         wmsParams.setLayers(previewLayer.getName());
         wmsParams.setStyles("");
-        wmsParams.setIsTransparent(true);
+        wmsParams.setTransparent(true);
 
         Double lowerX = previewLayer.getLowerX();
         Double lowerY = previewLayer.getLowerY();
@@ -170,9 +170,9 @@ public class GPPublisherWidget extends GeoPlatformWindow
 
         layerBounds.transform(new Projection(previewLayer.getCrs()), new Projection(
                 shpPreviewWidget.getMapPreview().getMap().getProjection()));
-        wmsParams.setMaxExtent(layerBounds);
 
         WMSOptions wmsOption = new WMSOptions();
+        wmsOption.setMaxExtent(layerBounds);
         wmsOption.setIsBaseLayer(false);
         wmsOption.setDisplayInLayerSwitcher(true);
         this.updateMapBounds(layerBounds);

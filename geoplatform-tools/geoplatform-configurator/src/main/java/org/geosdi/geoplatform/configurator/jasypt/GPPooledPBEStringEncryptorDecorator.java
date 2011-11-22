@@ -36,40 +36,37 @@
 package org.geosdi.geoplatform.configurator.jasypt;
 
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
+ * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 @Configuration(value = "gpPooledPBEStringEncryptor")
-public class GPPooledPBEStringEncryptorDecorator {
+public class GPPooledPBEStringEncryptorDecorator implements InitializingBean {
 
     private PooledPBEStringEncryptor pooledPBEStringEncryptor;
 
-    public GPPooledPBEStringEncryptorDecorator() {
-        this.pooledPBEStringEncryptor = new PooledPBEStringEncryptor();
-        pooledPBEStringEncryptor.setPoolSize(2); // This would be a good value for a 2-core system
-        pooledPBEStringEncryptor.setPassword("$-geosdi,0x");
-        pooledPBEStringEncryptor.setAlgorithm("PBEWithMD5AndDES");
-    }
-    
     @Bean
     public PooledPBEStringEncryptor pooledPBEStringEncryptor() {
         return this.pooledPBEStringEncryptor;
     }
-    
+
     public String encrypt(String plainText) {
         return this.pooledPBEStringEncryptor.encrypt(plainText);
     }
-    
+
     public String decrypt(String encryptedText) {
         return this.pooledPBEStringEncryptor.decrypt(encryptedText);
     }
-    
+
     public boolean areEncryptedStringEquals(String originalEncryptedPassword,
-                                            String suppliedPlainPassword) {
+            String suppliedPlainPassword) {
         String originalPlainPassword = this.pooledPBEStringEncryptor.decrypt(originalEncryptedPassword);
         if (originalPlainPassword.equals(suppliedPlainPassword)) {
             return true;
@@ -77,5 +74,12 @@ public class GPPooledPBEStringEncryptorDecorator {
             return false;
         }
     }
-    
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        this.pooledPBEStringEncryptor = new PooledPBEStringEncryptor();
+        pooledPBEStringEncryptor.setPoolSize(2); // This would be a good value for a 2-core system
+        pooledPBEStringEncryptor.setPassword("$-geosdi,0x");
+        pooledPBEStringEncryptor.setAlgorithm("PBEWithMD5AndDES");
+    }
 }

@@ -13,26 +13,8 @@
             http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
 	default-autowire="byName">
 
-    <!--                                                                      -->
-    <!-- Configuration for encryptor.         -->
-    <!--                                                                      -->
-    <bean id="PBEConfiguration"
-     class="org.jasypt.encryption.pbe.config.SimplePBEConfig">
-        <property name="algorithm" value="PBEWithMD5AndDES" />
-        <property name="password" value="$-geosdi,0x" />
-    </bean>
-  
-  
-    <!--                                                                      -->
-    <!-- The will be the encryptor used for decrypting configuration values.  -->
-    <!--                                                                      -->
-    <bean id="configurationEncryptor"
-     class="org.jasypt.encryption.pbe.PooledPBEStringEncryptor">
-        <property name="config" ref="PBEConfiguration" />
-        <property name="poolSize" value="2" /> <!-- This would be a good value for a 2-core system -->
-    </bean>
-
-
+    <context:component-scan base-package="org.geosdi.geoplatform.configurator.jasypt"/>
+    
     <!--                                                                      -->
     <!-- The EncryptablePropertyPlaceholderConfigurer will read the           -->
     <!-- .properties files and make their values accessible as ${var}         -->
@@ -42,7 +24,8 @@
     <!--                                                                      -->
     <bean id="gpPropertiesDAO"
      class="org.jasypt.spring.properties.EncryptablePropertyPlaceholderConfigurer">
-        <constructor-arg ref="configurationEncryptor" />
+<!--        <constructor-arg ref="configurationEncryptor" />-->
+        <constructor-arg ref="pooledPBEStringEncryptor" />
         <property name="locations">
             <list>
                 <value>classpath:gp-db.properties</value>

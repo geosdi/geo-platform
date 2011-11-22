@@ -40,6 +40,7 @@ package org.geosdi.geoplatform;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.junit.After;
@@ -67,6 +68,7 @@ import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -80,6 +82,7 @@ public abstract class ServiceTest {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     protected GeoPlatformService gpWSClient; // TODO gpService
+    protected GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor;
     // User
     protected final String usernameTest = "username_test_ws";
     protected GPUser userTest;
@@ -100,8 +103,10 @@ public abstract class ServiceTest {
     /**
      * The listener will inject this dependency
      */
-    public void setGeoplatformServiceClient(GeoPlatformService gpWSClient) {
+    public void setGeoplatformServiceClient(GeoPlatformService gpWSClient,
+            GPPooledPBEStringEncryptorDecorator theGPPooledPBEStringEncryptor) {
         this.gpWSClient = gpWSClient;
+        this.gpPooledPBEStringEncryptor = theGPPooledPBEStringEncryptor;
     }
 
     @Before
@@ -155,7 +160,7 @@ public abstract class ServiceTest {
         user.setName("Complete name of " + username);
         user.setEmailAddress(username + "@test.foo");
         user.setEnabled(true);
-        user.setPassword("pwd_" + username);
+        user.setPassword(this.gpPooledPBEStringEncryptor.encrypt("pwd_" + username));
         user.setSendEmail(true);
 
         if (roles.length > 0) {

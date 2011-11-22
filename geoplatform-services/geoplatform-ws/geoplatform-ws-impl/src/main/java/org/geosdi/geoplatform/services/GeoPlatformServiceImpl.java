@@ -40,6 +40,7 @@ package org.geosdi.geoplatform.services;
 import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebService;
+import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.springframework.transaction.annotation.Transactional;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
@@ -87,6 +88,7 @@ import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
+import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
@@ -126,6 +128,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     private AclServiceImpl aclServiceDelegate;
     // Services
     private GPSchedulerService schedulerService;
+    //
+    private GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor;
 
     public GeoPlatformServiceImpl() {
         accountServiceDelegate = new AccountServiceImpl();
@@ -274,6 +278,15 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     public void setSchedulerService(GPSchedulerService schedulerService) {
         this.schedulerService = schedulerService;
         this.accountServiceDelegate.setSchedulerService(schedulerService);
+    }
+
+    /**
+     * @param gpPooledPBEStringEncryptor the gpPooledPBEStringEncryptor to set
+     * 
+     */
+    public void setGpPooledPBEStringEncryptor(GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor) {
+        this.gpPooledPBEStringEncryptor = gpPooledPBEStringEncryptor;
+        this.accountServiceDelegate.setGpPooledPBEStringEncryptor(gpPooledPBEStringEncryptor);
     }
     //</editor-fold>
 

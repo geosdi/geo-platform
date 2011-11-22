@@ -15,14 +15,15 @@
             http://cxf.apache.org/core             
             http://cxf.apache.org/schemas/core.xsd
             http://cxf.apache.org/jaxws
-            http://cxf.apache.org/schemas/jaxws.xsd">
+            http://cxf.apache.org/schemas/jaxws.xsd"
+       default-autowire="byName">
 
 	<!--===================================================================== -->
 	<!-- Services -->
 	<!--===================================================================== -->
 
     <bean id="geoPlatformService"
-          class="org.geosdi.geoplatform.services.GeoPlatformServiceImpl">		
+          class="org.geosdi.geoplatform.services.GeoPlatformServiceImpl">
         <property name="accountDao" ref="accountDAO" />
         <property name="accountProjectDao" ref="accountProjectDAO" />
         <property name="projectDao" ref="projectDAO" />
@@ -39,7 +40,9 @@
         <property name="guiComponentDao" ref="guiComponentDAO" />
         <!-- SERVICES -->
         <property name="schedulerService" ref="schedulerService" />
-    </bean>    
+        
+        <property name="gpPooledPBEStringEncryptor" ref="gpPooledPBEStringEncryptor" />
+    </bean>
 
 	<!--===================================================================== -->        
 

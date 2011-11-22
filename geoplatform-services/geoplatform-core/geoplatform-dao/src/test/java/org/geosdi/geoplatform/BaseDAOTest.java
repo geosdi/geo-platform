@@ -60,6 +60,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
@@ -117,6 +118,9 @@ public abstract class BaseDAOTest {
     //
     @Autowired
     protected GPAuthorityDAO authorityDAO;
+    //
+    @Autowired
+    protected GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor;
     //
     protected GPUser adminTest;
     protected GPUser userTest;
@@ -332,9 +336,9 @@ public abstract class BaseDAOTest {
         user.setEmailAddress(username + "@test.foo");
         user.setEnabled(true);
         if (username.contains("_")) {
-            user.setPassword("pwd_" + username);
+            user.setPassword(this.gpPooledPBEStringEncryptor.encrypt("pwd_" + username));
         } else { // User for GUI test
-            user.setPassword(username);
+            user.setPassword(this.gpPooledPBEStringEncryptor.encrypt(username));
         }
         user.setSendEmail(true);
         return user;

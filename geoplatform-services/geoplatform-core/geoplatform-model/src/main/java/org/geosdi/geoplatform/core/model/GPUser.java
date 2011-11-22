@@ -164,20 +164,6 @@ public class GPUser extends GPAccount implements UserDetails {
         this.sendEmail = sendEmail;
     }
 
-    public boolean verify(String password) throws NoSuchAlgorithmException {
-        String hashPasswordSpecified = Utility.md5hash(password);
-        if (this.password.equals(hashPasswordSpecified)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @PrePersist
-    public void cryptPassword() {
-        this.password = Utility.md5hash(password);
-    }
-
     /*
      * (non-Javadoc)
      * @see java.lang.Object#toString()

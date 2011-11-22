@@ -42,10 +42,11 @@ import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.geosdi.geoplatform.configurator.cxf.client.GPClientWebServiceInterceptorStrategyFactory;
 import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
 import org.geosdi.geoplatform.configurator.cxf.server.GPServerWebServiceInterceptorStrategyFactory;
+import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,6 +66,7 @@ public class WSListenerServices implements TestExecutionListener {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GeoPlatformService gpWSClient = null;
+    private GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor = null;
     private Endpoint endpoint = null;
     private Bus bus = null;
 
@@ -75,6 +77,10 @@ public class WSListenerServices implements TestExecutionListener {
         GeoPlatformWSClient geoPlatformWSClient = (GeoPlatformWSClient) testContext.getApplicationContext().getBean("gpWSClient");
         Assert.assertNotNull("geoPlatformWSClient is NULL", geoPlatformWSClient);
         gpWSClient = geoPlatformWSClient.create();
+        
+        GPPooledPBEStringEncryptorDecorator theGPPooledPBEStringEncryptor = (GPPooledPBEStringEncryptorDecorator) testContext.getApplicationContext().getBean("gpPooledPBEStringEncryptor");
+        Assert.assertNotNull("gpPooledPBEStringEncryptor is NULL", theGPPooledPBEStringEncryptor);
+        gpPooledPBEStringEncryptor = theGPPooledPBEStringEncryptor;
 
         GeoPlatformService geoPlatformService = (GeoPlatformService) testContext.getApplicationContext().getBean("geoPlatformService");
         Assert.assertNotNull("geoPlatformService is NULL", geoPlatformService);
@@ -104,7 +110,7 @@ public class WSListenerServices implements TestExecutionListener {
         logger.trace("\n\t@@@ WSListenerServices.prepareTestInstance @@@");
 
         ServiceTest testInstance = (ServiceTest) testContext.getTestInstance();
-        testInstance.setGeoplatformServiceClient(gpWSClient);
+        testInstance.setGeoplatformServiceClient(gpWSClient, gpPooledPBEStringEncryptor);
     }
 
     @Override

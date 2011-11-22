@@ -42,6 +42,7 @@ import com.googlecode.genericdao.search.Filter;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
@@ -51,7 +52,6 @@ import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPApplication;
-import org.geosdi.geoplatform.core.model.Utility;
 import org.geosdi.geoplatform.exception.AccountExpiredFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -61,6 +61,7 @@ import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
+import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -73,6 +74,7 @@ import org.slf4j.LoggerFactory;
 class AccountServiceImpl {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor;
     // DAO
     private GPAccountDAO accountDao;
     private GPAccountProjectDAO accountProjectDao;
@@ -82,6 +84,13 @@ class AccountServiceImpl {
     private GPSchedulerService schedulerService;
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
+    /**
+     * @param gpPooledPBEStringEncryptor the gpPooledPBEStringEncryptor to set
+     */
+    public void setGpPooledPBEStringEncryptor(GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor) {
+        this.gpPooledPBEStringEncryptor = gpPooledPBEStringEncryptor;
+    }
+
     /**
      * @param accountDao
      *          the accountDao to set
@@ -137,7 +146,7 @@ class AccountServiceImpl {
         String plaintextPassword = null;
         if (sendEmail && account instanceof GPUser) {
             GPUser user = (GPUser) account;
-            plaintextPassword = user.getPassword();
+            user.setPassword(this.gpPooledPBEStringEncryptor.encrypt(user.getPassword()));
         }
 
         // TODO Set to false, and after user confirmation email enabling user account
@@ -153,7 +162,7 @@ class AccountServiceImpl {
 
         if (sendEmail && account instanceof GPUser) {
             GPUser user = (GPUser) account;
-            user.setPassword(plaintextPassword);
+            user.setPassword(this.gpPooledPBEStringEncryptor.decrypt(user.getPassword()));
             schedulerService.sendEmail(user);
         }
 
@@ -187,7 +196,8 @@ class AccountServiceImpl {
         }
         String password = user.getPassword();
         if (password != null) {
-            orig.setPassword(Utility.md5hash(password)); // Hash password
+//            orig.setPassword(Utility.md5hash(password)); // Hash password
+            orig.setPassword(this.gpPooledPBEStringEncryptor.encrypt(password)); // Hash password
         }
         this.updateAccount(orig, user);
 
@@ -318,7 +328,7 @@ class AccountServiceImpl {
         return user;
     }
 
-    public GPUser getUserDetailByUsernameAndPassword(String username, String password)
+    public GPUser getUserDetailByUsernameAndPassword(String username, String plainPassword)
             throws ResourceNotFoundFault, IllegalParameterFault, AccountExpiredFault {
         GPUser user = this.getUserByUsername(username);
         EntityCorrectness.checkAccountLog(user); // TODO assert
@@ -328,12 +338,8 @@ class AccountServiceImpl {
         }
 
         // Check password
-        try {
-            if (!user.verify(password)) {
-                throw new IllegalParameterFault("Specified password was incorrect");
-            }
-        } catch (NoSuchAlgorithmException e) {
-            throw new IllegalParameterFault(e.getMessage());
+        if (!this.gpPooledPBEStringEncryptor.areEncryptedStringEquals(user.getPassword(), plainPassword)) {
+            throw new IllegalParameterFault("Specified password was incorrect");
         }
 
         // Set authorities

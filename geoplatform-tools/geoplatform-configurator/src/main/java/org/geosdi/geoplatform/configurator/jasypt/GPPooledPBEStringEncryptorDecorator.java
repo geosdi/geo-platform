@@ -47,11 +47,15 @@ import org.springframework.context.annotation.Configuration;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-@Configuration(value = "gpPooledPBEStringEncryptor")
+//@Configuration(value = "gpPooledPBEStringEncryptor")
 public class GPPooledPBEStringEncryptorDecorator implements InitializingBean {
 
     private PooledPBEStringEncryptor pooledPBEStringEncryptor;
-
+    //
+    private int poolSize;
+    private String password;
+    private String algorithm;
+    
     @Bean
     public PooledPBEStringEncryptor pooledPBEStringEncryptor() {
         return this.pooledPBEStringEncryptor;
@@ -78,8 +82,11 @@ public class GPPooledPBEStringEncryptorDecorator implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         this.pooledPBEStringEncryptor = new PooledPBEStringEncryptor();
-        pooledPBEStringEncryptor.setPoolSize(2); // This would be a good value for a 2-core system
-        pooledPBEStringEncryptor.setPassword("$-geosdi,0x");
-        pooledPBEStringEncryptor.setAlgorithm("PBEWithMD5AndDES");
+        pooledPBEStringEncryptor.setPoolSize(this.poolSize); // This would be a good value for a 2-core system
+        pooledPBEStringEncryptor.setPassword(this.password);
+        pooledPBEStringEncryptor.setAlgorithm(this.algorithm);
+//        pooledPBEStringEncryptor.setPoolSize(2); // This would be a good value for a 2-core system
+//        pooledPBEStringEncryptor.setPassword("$-geosdi,0x");
+//        pooledPBEStringEncryptor.setAlgorithm("PBEWithMD5AndDES");
     }
 }

@@ -143,7 +143,6 @@ class AccountServiceImpl {
         EntityCorrectness.checkAccountAndAuthority(account); // TODO assert
         this.checkDuplicateAccount(account);
 
-        String plaintextPassword = null;
         if (sendEmail && account instanceof GPUser) {
             GPUser user = (GPUser) account;
             user.setPassword(this.gpPooledPBEStringEncryptor.encrypt(user.getPassword()));

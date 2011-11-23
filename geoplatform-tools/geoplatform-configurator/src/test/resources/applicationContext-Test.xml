@@ -13,6 +13,7 @@
             http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
 	default-autowire="byName">
 
-    <context:component-scan base-package="org.geosdi.geoplatform.configurator.jasypt"/>
+     <!-- Scan for @Autowired annotations -->
+    <context:annotation-config/>
 
 </beans>

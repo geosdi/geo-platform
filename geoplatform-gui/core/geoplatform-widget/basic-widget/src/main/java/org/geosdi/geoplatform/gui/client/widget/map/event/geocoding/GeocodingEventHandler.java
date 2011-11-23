@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.map.event.geocoding;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.client.widget.map.event.GenericGeocodingEventHandler;
+import org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt.GPGeocodingMarkerHandler;
 import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 
 /**
@@ -44,9 +44,9 @@ import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface GeocodingEventHandler extends GenericGeocodingEventHandler {
-    
-     Type<GeocodingEventHandler> TYPE = new Type<GeocodingEventHandler>();
-     
-     void onRegisterGeocodingLocation(IGeoPlatformLocation bean);
+public interface GeocodingEventHandler extends GPGeocodingMarkerHandler {
+
+    Type<GeocodingEventHandler> TYPE = new Type<GeocodingEventHandler>();
+
+    void onRegisterGeocodingLocation(IGeoPlatformLocation bean);
 }

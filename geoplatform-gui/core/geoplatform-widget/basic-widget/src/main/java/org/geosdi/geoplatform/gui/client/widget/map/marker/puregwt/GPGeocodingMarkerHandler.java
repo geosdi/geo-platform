@@ -35,17 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.client.widget.map.event.GenericGeocodingEventHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeocodingMarkerHandler extends EventHandler {
-    
-    Type<GPGeocodingMarkerHandler> TYPE = new Type<GPGeocodingMarkerHandler>();
+public interface GPGeocodingMarkerHandler extends GenericGeocodingEventHandler {
     
     public void removeMarker();
 }

@@ -37,22 +37,22 @@ package org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt.GPGeocodingMarkerHandler;
+import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.GeocodingEventHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPGeocodingRemoveMarkerEvent extends GwtEvent<GPGeocodingMarkerHandler> {
+public class GPGeocodingRemoveMarkerEvent extends GwtEvent<GeocodingEventHandler> {
 
     @Override
-    public Type<GPGeocodingMarkerHandler> getAssociatedType() {
-        return GPGeocodingMarkerHandler.TYPE;
+    public Type<GeocodingEventHandler> getAssociatedType() {
+        return GeocodingEventHandler.TYPE;
     }
 
     @Override
-    protected void dispatch(GPGeocodingMarkerHandler handler) {
+    protected void dispatch(GeocodingEventHandler handler) {
         handler.removeMarker();
     }
 }

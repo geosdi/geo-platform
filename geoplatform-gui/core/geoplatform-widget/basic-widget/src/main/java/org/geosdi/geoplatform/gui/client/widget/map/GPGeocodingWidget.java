@@ -90,4 +90,9 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
     public void setPopupWidget(PopupMapWidget popupWidget) {
         this.popupWidget = popupWidget;
     }
+
+    @Override
+    public void removeMarker() {
+        this.geocoderMarker.removeMarker();
+    }
 }

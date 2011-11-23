@@ -54,7 +54,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-TEST.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml"})
 public class GPPooledPBEStringEncryptorDecoratorTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());

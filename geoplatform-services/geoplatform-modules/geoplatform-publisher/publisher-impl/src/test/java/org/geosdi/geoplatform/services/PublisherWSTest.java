@@ -54,10 +54,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
-    "classpath*:applicationContext.xml"})
+    "classpath:applicationContext.xml"})
 public class PublisherWSTest extends TestCase {
 
     protected Logger logger = LoggerFactory.getLogger(org.geosdi.geoplatform.services.PublisherWSTest.class);
+    //
     @Autowired
     private GPPublisherService gppublisherService;
 

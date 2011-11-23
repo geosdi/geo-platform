@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.configurator.jasypt;
 
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -47,17 +46,21 @@ import org.springframework.context.annotation.Configuration;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-//@Configuration(value = "gpPooledPBEStringEncryptor")
-public class GPPooledPBEStringEncryptorDecorator implements InitializingBean {
+@Configuration
+public class GPPooledPBEStringEncryptorDecorator {
 
     private PooledPBEStringEncryptor pooledPBEStringEncryptor;
     //
     private int poolSize;
     private String password;
     private String algorithm;
-    
-    @Bean
+
+    @Bean(name = "pooledPBEStringEncryptor")
     public PooledPBEStringEncryptor pooledPBEStringEncryptor() {
+        this.pooledPBEStringEncryptor = new PooledPBEStringEncryptor();
+        pooledPBEStringEncryptor.setPoolSize(this.poolSize); // This would be a good value for a 2-core system
+        pooledPBEStringEncryptor.setPassword(this.password);
+        pooledPBEStringEncryptor.setAlgorithm(this.algorithm);
         return this.pooledPBEStringEncryptor;
     }
 
@@ -79,14 +82,24 @@ public class GPPooledPBEStringEncryptorDecorator implements InitializingBean {
         }
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        this.pooledPBEStringEncryptor = new PooledPBEStringEncryptor();
-        pooledPBEStringEncryptor.setPoolSize(this.poolSize); // This would be a good value for a 2-core system
-        pooledPBEStringEncryptor.setPassword(this.password);
-        pooledPBEStringEncryptor.setAlgorithm(this.algorithm);
-//        pooledPBEStringEncryptor.setPoolSize(2); // This would be a good value for a 2-core system
-//        pooledPBEStringEncryptor.setPassword("$-geosdi,0x");
-//        pooledPBEStringEncryptor.setAlgorithm("PBEWithMD5AndDES");
+    /**
+     * @param poolSize the poolSize to set
+     */
+    public void setPoolSize(int poolSize) {
+        this.poolSize = poolSize;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * @param algorithm the algorithm to set
+     */
+    public void setAlgorithm(String algorithm) {
+        this.algorithm = algorithm;
     }
 }

@@ -12,7 +12,11 @@
             http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
             http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <context:component-scan base-package="org.geosdi.geoplatform.configurator.jasypt"/>
+    <bean id="gpPooledPBEStringEncryptor" class="org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator">
+        <property name="poolSize" value="2" />
+        <property name="password" value="$-geosdi,0x" />
+        <property name="algorithm" value="PBEWithMD5AndDES" />
+    </bean>
 
     <!--                                                                      -->
     <!-- The EncryptablePropertyPlaceholderConfigurer will read the           -->

@@ -13,7 +13,8 @@
             http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
 	default-autowire="byName">
 
-     <!-- Scan for @Autowired annotations -->
-    <context:annotation-config/>
+    <context:annotation-config />
+            
+    <import resource="classpath:applicationContext-JASYPT.xml" />
 
 </beans>

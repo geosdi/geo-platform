@@ -49,6 +49,10 @@ public class LayersTabWidget extends GenericCompositeTabWidget<GPLayerBean> {
     private LayersInfoTabItem infoItem;
     private StylesLayerTabItem wpsItem;
 
+    public LayersTabWidget() {
+        super(true);
+    }
+
     @Override
     public void initTab() {
         setWidth(360);
@@ -71,6 +75,7 @@ public class LayersTabWidget extends GenericCompositeTabWidget<GPLayerBean> {
         super.add(infoItem);
         super.add(displayItem);
         super.add(wpsItem);
+        super.setSelection(infoItem);
     }
 
     @Override

@@ -46,6 +46,11 @@ public class FolderTabWidget extends GenericCompositeTabWidget<FolderTreeNode> {
 
     private FolderInfoTabItem infoItem;
 
+    public FolderTabWidget() {
+        super(false);
+    }
+    
+
     @Override
     public void initTab() {
         setWidth(360);

@@ -105,6 +105,7 @@ public class LayersPropertiesWidget extends GeoPlatformWindow
 
             @Override
             public void windowShow(WindowEvent we) {
+                layersTabWidget.buildWidget();
                 layersTabWidget.bind(model);
             }
         });

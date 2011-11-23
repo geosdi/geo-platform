@@ -43,13 +43,29 @@ import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabWidget;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public abstract class GenericCompositeTabWidget<M> extends GeoPlatformTabWidget {
-   
-    
-    public GenericCompositeTabWidget() {
-        addComponents();
+
+    protected boolean initialized;
+
+    public GenericCompositeTabWidget(boolean lazy) {
+        super(lazy);
+        if (super.tabWidgetInitialized) {
+            addComponents();
+            this.initialized = true;
+        }
     }
-    
+
+    @Override
+    public void buildWidget() {
+        if (!super.tabWidgetInitialized) {
+            super.buildWidget();
+            if (!initialized) {
+                addComponents();
+                this.initialized = true;
+            }
+        }
+    }
+
     public abstract void addComponents();
-    
+
     public abstract void bind(M model);
 }

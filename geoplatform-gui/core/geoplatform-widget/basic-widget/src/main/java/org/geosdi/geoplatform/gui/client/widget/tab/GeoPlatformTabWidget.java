@@ -43,19 +43,34 @@ import com.extjs.gxt.ui.client.widget.TabPanel;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public abstract class GeoPlatformTabWidget extends TabPanel {
-    
-    public GeoPlatformTabWidget() {
-        initTab();
-        setWidgetProperties();
-        createTabItems();
+
+    protected boolean tabWidgetInitialized;
+
+    public GeoPlatformTabWidget(boolean lazy) {
+        if (!lazy) {
+            init();
+        }
     }
-    
+
+    private void init() {
+        if (!tabWidgetInitialized) {
+            initTab();
+            setWidgetProperties();
+            createTabItems();
+            this.tabWidgetInitialized = true;
+        }
+    }
+
     public abstract void initTab();
-    
+
     public abstract void setWidgetProperties();
-    
+
     public abstract void createTabItems();
-    
+
+    public void buildWidget() {
+        this.init();
+    }
+
     @Override
     public boolean layout() {
         return super.layout();

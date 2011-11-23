@@ -13,7 +13,7 @@
             http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
     <bean id="gpPooledPBEStringEncryptor" class="org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator">
-        <property name="poolSize" value="2" />
+        <property name="poolSize" value="2" /> <!--  This would be a good value for a 2-core system -->
         <property name="password" value="$-geosdi,0x" />
         <property name="algorithm" value="PBEWithMD5AndDES" />
     </bean>

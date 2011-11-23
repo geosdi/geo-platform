@@ -55,10 +55,10 @@ public class GPPooledPBEStringEncryptorDecorator {
     private String password;
     private String algorithm;
 
-    @Bean(name = "pooledPBEStringEncryptor")
+    @Bean
     public PooledPBEStringEncryptor pooledPBEStringEncryptor() {
         this.pooledPBEStringEncryptor = new PooledPBEStringEncryptor();
-        pooledPBEStringEncryptor.setPoolSize(this.poolSize); // This would be a good value for a 2-core system
+        pooledPBEStringEncryptor.setPoolSize(this.poolSize);
         pooledPBEStringEncryptor.setPassword(this.password);
         pooledPBEStringEncryptor.setAlgorithm(this.algorithm);
         return this.pooledPBEStringEncryptor;

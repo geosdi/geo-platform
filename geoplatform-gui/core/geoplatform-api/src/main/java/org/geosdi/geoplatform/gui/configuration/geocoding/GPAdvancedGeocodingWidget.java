@@ -45,6 +45,7 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
  */
 public abstract class GPAdvancedGeocodingWidget
         extends ContentPanel {
+    
 
     private boolean initialized;
 }

@@ -263,7 +263,6 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
 
                     @Override
                     public void onSuccess(Object result) {
-                        System.out.println("TEST ********** " + entity.toString());
                         searchWidget.getStore().remove(entity);
                         searchWidget.getStore().insert(entity, 0);
 

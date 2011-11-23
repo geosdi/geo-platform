@@ -33,32 +33,27 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl.map.event;
+package org.geosdi.geoplatform.gui.puregwt.layers.event;
 
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-
-import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @email  giuseppe.lascaleia@geosdi.org
+ *
  */
-public interface LayerMapChangedHandler extends EventHandler {
+public class CleanLegendEvent extends GwtEvent<LegendLayerHandler> {
 
-    Type<LayerMapChangedHandler> TYPE = new Type<LayerMapChangedHandler>();
+    @Override
+    public Type<LegendLayerHandler> getAssociatedType() {
+        return LegendLayerHandler.TYPE;
+    }
 
-    public void onDisplayLayer(GPLayerBean layerBean);
-
-    public void onHideLayer(GPLayerBean layerBean);
-
-    public void onRemoveLayer(GPLayerBean layerBean);
-
-    public void onChangeStyle(GPRasterBean layerBean, String newStyle);
+    @Override
+    protected void dispatch(LegendLayerHandler handler) {
+        handler.cleanLegendWidget();
+    }
     
-    public void changeOpacity(GPRasterBean layerBean);
-    
-    public void resetStore();
 }

@@ -83,4 +83,9 @@ public class GPLegendPanel extends ContentPanel implements LegendLayerHandler {
     public void onHideLegend(GPLayerBean layerBean) {
         this.legendWidget.hideLegenItem(layerBean);
     }
+
+    @Override
+    public void cleanLegendWidget() {
+        this.legendWidget.resetLegendWidget();
+    }
 }

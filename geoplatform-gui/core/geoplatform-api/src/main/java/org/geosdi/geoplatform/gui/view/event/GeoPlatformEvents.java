@@ -44,19 +44,11 @@ import com.extjs.gxt.ui.client.event.EventType;
 public class GeoPlatformEvents {
 
     public static final EventType UPDATE_CENTER = new EventType();
-    
     public static final EventType INIT_GEO_PLATFORM = new EventType();
-    
     public static final EventType APPLICATION_FIRST_LOGIN = new EventType();
-
     public static final EventType INIT_OGC_MODULES_WIDGET = new EventType();
-
     public static final EventType SHOW_CAPABILITIES_SERVER_WIDGET = new EventType();
-    
     public static final EventType GP_NODE_EXPANDED = new EventType();
-    
     public static final EventType SHOW_PRINTING_WIDGET = new EventType();
-    
     public static final EventType REMOVE_WINDOW_CLOSE_LISTENER = new EventType();
-
 }

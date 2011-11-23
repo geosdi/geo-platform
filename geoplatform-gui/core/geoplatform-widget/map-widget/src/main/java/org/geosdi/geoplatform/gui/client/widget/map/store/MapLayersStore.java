@@ -35,16 +35,17 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.store;
 
+import java.util.Iterator;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.map.store.GPMapLayersStore;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.layers.event.CleanLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.DisplayLegendEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.event.HideLegendEvent;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
-import org.gwtopenmaps.openlayers.client.layer.LayerOptions;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
@@ -57,6 +58,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     private MapLayerBuilder layerBuilder;
     private DisplayLegendEvent displayLegend = new DisplayLegendEvent();
+    private CleanLegendEvent cleanLegend = new CleanLegendEvent();
 
     public MapLayersStore(GeoPlatformMap theMapWidget) {
         super(theMapWidget);
@@ -157,7 +159,7 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     @Override
     public void onChangeStyle(GPRasterBean layerBean, String newStyle) {
-        WMS layer = (WMS)this.layers.get(layerBean);
+        WMS layer = (WMS) this.layers.get(layerBean);
         if ((layer != null) && (layer.isVisible())) {
             WMSParams params = new WMSParams();
             params.setStyles(newStyle);
@@ -171,5 +173,17 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
         if ((layer != null) && (layer.isVisible())) {
             layer.setOpacity(layerBean.getOpacity());
         }
+    }
+
+    @Override
+    public void resetStore() {
+        System.out.println("CODICE ESEGUITO RESET STRORE *******************");
+        for (Iterator<Layer> it = layers.values().iterator(); it.hasNext();) {
+            Layer layer = it.next();
+            this.mapWidget.getMap().removeLayer(layer);
+        }
+        this.layers.clear();
+        
+        LayerHandlerManager.fireEvent(cleanLegend);
     }
 }

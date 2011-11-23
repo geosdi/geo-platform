@@ -35,30 +35,24 @@
  */
 package org.geosdi.geoplatform.gui.impl.map.event;
 
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
-
-import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import org.geosdi.geoplatform.gui.model.GPRasterBean;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @email  giuseppe.lascaleia@geosdi.org
+ *
  */
-public interface LayerMapChangedHandler extends EventHandler {
+public class ResetMapStoreEvent extends GwtEvent<LayerMapChangedHandler> {
 
-    Type<LayerMapChangedHandler> TYPE = new Type<LayerMapChangedHandler>();
+    @Override
+    public Type<LayerMapChangedHandler> getAssociatedType() {
+        return LayerMapChangedHandler.TYPE;
+    }
 
-    public void onDisplayLayer(GPLayerBean layerBean);
-
-    public void onHideLayer(GPLayerBean layerBean);
-
-    public void onRemoveLayer(GPLayerBean layerBean);
-
-    public void onChangeStyle(GPRasterBean layerBean, String newStyle);
-    
-    public void changeOpacity(GPRasterBean layerBean);
-    
-    public void resetStore();
+    @Override
+    protected void dispatch(LayerMapChangedHandler handler) {
+        handler.resetStore();
+    }
 }

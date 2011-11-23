@@ -51,4 +51,6 @@ public interface LegendLayerHandler extends EventHandler {
     public void onDisplayLegend(GPLayerBean layerBean);
 
     public void onHideLegend(GPLayerBean layerBean);
+    
+    public void cleanLegendWidget();
 }

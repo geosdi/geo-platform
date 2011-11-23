@@ -47,16 +47,17 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
  */
 public interface IMapLayersStore<T extends Layer> {
 
-	boolean containsLayer(GPLayerBean key);
+    boolean containsLayer(GPLayerBean key);
 
-	T getLayer(GPLayerBean key);
-	
-	void displayVector(GPVectorBean vectorBean);
-	
-	void displayRaster(GPRasterBean rasterBean);
-	
-	void hideLayer(GPLayerBean layerBean);
-	
-	void removeLayer(GPLayerBean layerBean);
+    T getLayer(GPLayerBean key);
 
+    void displayVector(GPVectorBean vectorBean);
+
+    void displayRaster(GPRasterBean rasterBean);
+
+    void hideLayer(GPLayerBean layerBean);
+
+    void removeLayer(GPLayerBean layerBean);
+    
+    void resetStore();
 }

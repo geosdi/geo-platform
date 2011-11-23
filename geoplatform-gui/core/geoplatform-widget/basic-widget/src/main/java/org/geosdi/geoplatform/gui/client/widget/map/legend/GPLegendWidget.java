@@ -120,6 +120,10 @@ public class GPLegendWidget {
             this.legendsStore.layout();
         }
     }
+    
+    public void resetLegendWidget() {
+        this.legendsStore.removeAll();
+    }
 
     /**
      * @return the legendsStore

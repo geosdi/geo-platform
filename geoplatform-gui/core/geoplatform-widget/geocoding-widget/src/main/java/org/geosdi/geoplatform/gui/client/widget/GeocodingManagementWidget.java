@@ -50,7 +50,7 @@ public class GeocodingManagementWidget extends ContentPanel {
     private GeocodingGridWidget geocodingGridWidget;
 
     public GeocodingManagementWidget() {
-        setHeading("Geocoding Widget");
+        setHeading("GeoPlatfom Geocoding Widget");
         setLayout(new FitLayout());
 
         setLayoutOnChange(true);

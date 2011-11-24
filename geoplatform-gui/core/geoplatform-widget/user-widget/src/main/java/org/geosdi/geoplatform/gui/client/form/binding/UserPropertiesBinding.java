@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.form.binding;
 
-import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -48,9 +47,7 @@ import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
-import com.extjs.gxt.ui.client.widget.layout.LayoutData;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;

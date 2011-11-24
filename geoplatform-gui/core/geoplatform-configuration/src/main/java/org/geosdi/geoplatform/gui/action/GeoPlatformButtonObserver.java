@@ -72,8 +72,10 @@ public class GeoPlatformButtonObserver {
     }
 
     public void changeButtonState() {
-        if (this.buttonPressed instanceof GeoPlatformToggleButton) {
+        if ((this.buttonPressed != null)
+                && (this.buttonPressed instanceof GeoPlatformToggleButton)) {
             ((GeoPlatformToggleButton) buttonPressed).disableControl();
+            this.buttonPressed = null;
         }
     }
 

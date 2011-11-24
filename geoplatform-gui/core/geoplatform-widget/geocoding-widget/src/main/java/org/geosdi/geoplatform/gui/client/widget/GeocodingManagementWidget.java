@@ -42,7 +42,9 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 
 /**
- * @author giuseppe
+ *  
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  * 
  */
 public class GeocodingManagementWidget extends ContentPanel {

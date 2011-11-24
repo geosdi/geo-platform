@@ -80,9 +80,10 @@ public class ReverseGeocodingAction extends MapToggleAction implements ReverseGe
 
         if (button.isPressed()) {
             mapWidget.getButtonBar().setPressedButton(button);
-        } else {
-            mapWidget.getButtonBar().setPressedButton(null);
         }
+//        } else {
+//            mapWidget.getButtonBar().setPressedButton(null);
+//        }
 
         GPGeocodingHandlerManager.fireEvent(new ReverseGeocodingEvent(button.isPressed()));
     }

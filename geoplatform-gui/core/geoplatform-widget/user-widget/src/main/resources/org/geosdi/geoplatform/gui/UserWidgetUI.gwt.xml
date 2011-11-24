@@ -2,7 +2,7 @@
 <module>    
     <source path="client" />
     
-    <entry-point class='org.geosdi.geoplatform.gui.client.UserWidgetUI' />
+    <entry-point class="org.geosdi.geoplatform.gui.client.UserWidgetUI" />
     
     <servlet path="/UserRemote" class="org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl" />
 </module>

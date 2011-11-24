@@ -44,7 +44,8 @@ import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconHandler;
  * @author giuseppe
  * 
  */
-public abstract class MenuBaseAction extends MenuAction implements HasMenuActionHandler<MenuActionChangeIconHandler> {
+public abstract class MenuBaseAction extends MenuAction
+        implements HasMenuActionHandler<MenuActionChangeIconHandler> {
 
     private AbstractImagePrototype image;
 

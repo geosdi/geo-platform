@@ -33,47 +33,28 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client;
+package org.geosdi.geoplatform.gui.client.action;
 
-import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.gui.action.menu.MenuAction;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
-import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
-import org.geosdi.geoplatform.gui.client.action.ManageUsersMenuAction;
-import org.geosdi.geoplatform.gui.client.action.UserOptionsMenuAction;
+import com.extjs.gxt.ui.client.event.MenuEvent;
+import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
+import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.widget.UserOptionsWidget;
 
 /**
  *
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class UserWidgetUI implements EntryPoint {
+public class UserOptionsMenuAction extends MenuBaseAction {
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
-     */
-    @Override
-    public void onModuleLoad() {
-        this.addUserWidgetAction();
+    private UserOptionsWidget userOptionsWidget = new UserOptionsWidget(true);
+
+    public UserOptionsMenuAction() {
+        super("Options", BasicWidgetResources.ICONS.gear());
     }
 
-    private void addUserWidgetAction() {
-        MenuActionRegistar.put("manageUsers", new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new ManageUsersMenuAction();
-            }
-        });
-
-        MenuActionRegistar.put("userOptionsButton", new MenuActionCreator() {
-
-            @Override
-            public MenuAction createAction() {
-                return new UserOptionsMenuAction();
-            }
-        });
+    @Override
+    public void componentSelected(MenuEvent ce) {
+        userOptionsWidget.show();
     }
 }

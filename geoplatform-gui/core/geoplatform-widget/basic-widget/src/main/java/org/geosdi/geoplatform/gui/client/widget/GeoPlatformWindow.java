@@ -55,7 +55,7 @@ public abstract class GeoPlatformWindow extends Window {
     }
 
     /**
-     * Init the Widget
+     * Initialize the Widget
      */
     protected void init() {
         if (!initialized) {

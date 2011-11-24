@@ -10,6 +10,8 @@
 
     <context:annotation-config />
 
+    <import resource="applicationContext-Toolbar.xml" />
+
     <bean name="manageUsers"
         class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
         <property name="id" value="manageUsers" />

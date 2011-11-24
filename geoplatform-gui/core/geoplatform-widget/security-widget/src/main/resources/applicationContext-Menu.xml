@@ -17,21 +17,22 @@
     </bean-->
     
     <bean name="userMenu"
-		class="org.geosdi.geoplatform.gui.configuration.menubar.MenuInToolBar">
+        class="org.geosdi.geoplatform.gui.configuration.menubar.MenuInToolBar">
         <property name="text" value="User" />
         <property name="enabled" value="true" />
         <property name="order" value="210" />
         <property name="id" value="USER_MENU" />
         <property name="tools">
             <list>
+                <ref bean="googleSignOnButton"/>
+                <ref bean="userOptionsButton"/>
                 <bean name="userLogout"
-					class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                    class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
                     <property name="id" value="userLogout" />
                     <property name="text" value="Logout" />
                     <property name="enabled" value="true" />
-                    <property name="order" value="11" />
+                    <property name="order" value="30" />
                 </bean>
-                <ref bean="googleSignOnButton"/>
             </list>
         </property>
     </bean>

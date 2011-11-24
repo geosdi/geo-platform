@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.form.binding;
 
+import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -47,6 +48,9 @@ import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
+import com.extjs.gxt.ui.client.widget.layout.FormData;
+import com.extjs.gxt.ui.client.widget.layout.LayoutData;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
@@ -94,6 +98,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     public FormPanel createFormPanel() {
         FormPanel fp = new FormPanel();
         fp.setHeaderVisible(false);
+        
         this.nameField = new TextField<String>();
         this.nameField.setId(GPUserManageDetailKeyValue.NAME.toString());
         this.nameField.setName(GPUserManageDetailKeyValue.NAME.toString());
@@ -160,7 +165,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         fp.add(this.passwordField);
         fp.add(this.passwordRepeatField);
         fp.add(this.userRoleComboBox);
-        fp.add(this.temporaryField);
+        fp.add(this.temporaryField, new FormData("-210"));
 
         return fp;
     }

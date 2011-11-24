@@ -45,7 +45,8 @@ public enum GPUserManageDetailKeyValue {
     PASSWORD("password"),
     NAME("name"),
     AUTORITHY("authority"),
-    EMAIL("email");
+    EMAIL("email"),
+    TEMPORARY("temporary");
     //
     private String value;
 

@@ -47,6 +47,9 @@ import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.CheckBox;
+import com.extjs.gxt.ui.client.widget.grid.CellEditor;
+import com.extjs.gxt.ui.client.widget.grid.CheckColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
@@ -133,7 +136,7 @@ public class ManageUsersPagWidget
         super.loader.setRemoteSort(false);
 
         super.store = new ListStore<GPUserManageDetail>(loader);
-        
+
         super.store.setMonitorChanges(true);
 
         super.toolBar.bind(loader);
@@ -146,14 +149,14 @@ public class ManageUsersPagWidget
         ColumnConfig nameColumn = new ColumnConfig();
         nameColumn.setId(GPUserManageDetailKeyValue.NAME.toString());
         nameColumn.setHeader("Name");
-        nameColumn.setWidth(280);
+        nameColumn.setWidth(240);
         configs.add(nameColumn);
 
-        ColumnConfig userNameColumn = new ColumnConfig();
-        userNameColumn.setId(GPUserManageDetailKeyValue.USERNAME.toString());
-        userNameColumn.setHeader("User Name");
-        userNameColumn.setWidth(120);
-        configs.add(userNameColumn);
+        ColumnConfig usernameColumn = new ColumnConfig();
+        usernameColumn.setId(GPUserManageDetailKeyValue.USERNAME.toString());
+        usernameColumn.setHeader("User Name");
+        usernameColumn.setWidth(120);
+        configs.add(usernameColumn);
 
         ColumnConfig roleColumn = new ColumnConfig();
         roleColumn.setId(GPUserManageDetailKeyValue.AUTORITHY.toString());
@@ -162,10 +165,19 @@ public class ManageUsersPagWidget
         roleColumn.setAlignment(HorizontalAlignment.CENTER);
         configs.add(roleColumn);
 
+        CheckColumnConfig tempColumn = new CheckColumnConfig();
+        CellEditor checkBoxEditor = new CellEditor(new CheckBox());
+        tempColumn.setEditor(checkBoxEditor);
+        tempColumn.setId(GPUserManageDetailKeyValue.TEMPORARY.toString());
+        tempColumn.setHeader("Temporary");
+        tempColumn.setWidth(65);
+        tempColumn.setFixed(true);
+        configs.add(tempColumn);
+
         ColumnConfig delColumn = new ColumnConfig();
         delColumn.setId("delColumn");
         delColumn.setHeader("Delete");
-        delColumn.setWidth(50);
+        delColumn.setWidth(45);
         delColumn.setFixed(true);
         delColumn.setResizable(false);
         delColumn.setSortable(false);

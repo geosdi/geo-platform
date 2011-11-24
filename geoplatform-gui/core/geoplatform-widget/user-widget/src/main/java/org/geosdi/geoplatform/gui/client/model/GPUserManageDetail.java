@@ -62,7 +62,8 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     }
 
     /**
-     * @param id the id to set
+     * @param id
+     *          the id to set
      */
     @Override
     public void setId(Long id) {
@@ -155,6 +156,27 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
         super.set(GPUserManageDetailKeyValue.AUTORITHY.toString(), this.authority.toString());
     }
 
+    /**
+     * @return the temporary
+     */
+    @Override
+    public boolean isTemporary() {
+        Boolean temporary = super.get(GPUserManageDetailKeyValue.TEMPORARY.toString());
+        if (temporary == null) {
+            return false;
+        }
+        return temporary.booleanValue();
+    }
+
+    /**
+     * @param temporary
+     *          the temporary to set
+     */
+    @Override
+    public void setTemporary(boolean temporary) {
+        super.set(GPUserManageDetailKeyValue.TEMPORARY.toString(), temporary);
+    }
+
     /*
      * (non-Javadoc)
      * @see java.lang.Object#equals(java.lang.Object)
@@ -197,7 +219,8 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
         str.append(", email=").append(getEmail());
         str.append(", username=").append(getUsername());
         str.append(", password=").append(password);
-        str.append(", authority=").append(getAuthority());
+        str.append(", authority=").append(authority);
+        str.append(", temporary=").append(isTemporary());
         return str.append('}').toString();
     }
 }

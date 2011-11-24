@@ -71,8 +71,8 @@ import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 public class UserPropertiesWidget extends GeoPlatformWindow
         implements IManageInsertUserHandler, IManageUpdateUserHandler {
 
-    private GPUserManageDetail userDetail;
-    private GPUserManageDetail clonedUserDetail;
+    private GPUserManageDetail user;
+    private GPUserManageDetail userOriginal;
     //
     private ContentPanel centralPanel;
     private Button saveButton;
@@ -101,14 +101,14 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                if (store.contains(userDetail)) {
+                if (store.contains(user)) {
                     String resetPassword = userPropertiesBinding.getPassword();
                     if (resetPassword != null && resetPassword.length() > 0) {
-                        userDetail.setPassword(resetPassword);
+                        user.setPassword(resetPassword);
                     }
                     manageUpdateUser();
                 } else {
-                    userDetail.setPassword(userPropertiesBinding.getPassword());
+                    user.setPassword(userPropertiesBinding.getPassword());
                     manageInsertUser();
                 }
             }
@@ -124,20 +124,20 @@ public class UserPropertiesWidget extends GeoPlatformWindow
             }
         });
         this.centralPanel.add(this.userPropertiesBinding.getWidget());
-        this.centralPanel.setSize(325, 255);
+        this.centralPanel.setSize(325, 285);
         super.add(this.centralPanel);
         super.getButtonBar().add(saveButton);
         super.getButtonBar().add(closeButton);
     }
 
     public void show(GPUserManageDetail userDetail) {
-        this.userDetail = userDetail;
+        this.user = userDetail;
         super.show();
     }
 
     @Override
     public void initSize() {
-        super.setSize(340, 270);
+        super.setSize(340, 300);
     }
 
     @Override
@@ -152,17 +152,17 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
             @Override
             public void windowShow(WindowEvent we) {
-                if (userDetail.getId() != null) {
-                    clonedUserDetail = new GPUserManageDetail(); // TODO only once NEW
+                if (user.getId() != null) {
+                    userOriginal = new GPUserManageDetail(); // TODO only once NEW
                 }
-                userPropertiesBinding.bindModel(userDetail, clonedUserDetail);
+                userPropertiesBinding.bindModel(user, userOriginal);
             }
         });
     }
 
     @Override
     public void manageInsertUser() {
-        UserRemoteImpl.Util.getInstance().insertUser(userDetail, new AsyncCallback<Long>() {
+        UserRemoteImpl.Util.getInstance().insertUser(user, new AsyncCallback<Long>() {
 
             @Override
             public void onFailure(Throwable caught) {
@@ -175,21 +175,21 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
             @Override
             public void onSuccess(Long result) {
-                userDetail.setId(result);
-                store.insert(userDetail, 0);
+                user.setId(result);
+                store.insert(user, 0);
                 store.commitChanges();
-                
+
                 hide();
 
                 GeoPlatformMessage.infoMessage("User successfully added",
-                        "<ul><li>" + userDetail.getUsername() + "</li></ul>");
+                        "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
     }
 
     @Override
     public void manageUpdateUser() {
-        UserRemoteImpl.Util.getInstance().updateUser(userDetail, new AsyncCallback<Long>() {
+        UserRemoteImpl.Util.getInstance().updateUser(user, new AsyncCallback<Long>() {
 
             @Override
             public void onFailure(Throwable caught) {
@@ -206,7 +206,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
                 hide();
 
                 GeoPlatformMessage.infoMessage("User successfully modify",
-                        "<ul><li>" + userDetail.getUsername() + "</li></ul>");
+                        "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
     }

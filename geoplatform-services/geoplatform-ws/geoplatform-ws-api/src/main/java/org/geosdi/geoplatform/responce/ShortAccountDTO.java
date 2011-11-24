@@ -54,6 +54,7 @@ public class ShortAccountDTO {
 
     private Long id;
     private boolean enabled;
+    private boolean temporary;
     private List<String> roles;
 
     public ShortAccountDTO() {
@@ -62,6 +63,7 @@ public class ShortAccountDTO {
     public ShortAccountDTO(GPAccount account) {
         this.id = account.getId();
         this.enabled = account.isEnabled();
+        this.temporary = account.isAccountTemporary();
 
         if (account.getGPAuthorities() != null) {
             roles = new ArrayList<String>(account.getGPAuthorities().size());
@@ -102,6 +104,21 @@ public class ShortAccountDTO {
     }
 
     /**
+     * @return the temporary
+     */
+    public boolean isTemporary() {
+        return temporary;
+    }
+
+    /**
+     * @param temporary
+     *          the temporary to set
+     */
+    public void setTemporary(boolean temporary) {
+        this.temporary = temporary;
+    }
+
+    /**
      * @return the roles
      */
     public List<String> getRoles() {
@@ -109,7 +126,8 @@ public class ShortAccountDTO {
     }
 
     /**
-     * @param roles the roles to set
+     * @param roles
+     *          the roles to set
      */
     public void setRoles(List<String> roles) {
         this.roles = roles;
@@ -125,6 +143,7 @@ public class ShortAccountDTO {
         StringBuilder str = new StringBuilder();
         str.append(", =id").append(id);
         str.append(", =enabled").append(enabled);
+        str.append(", =temporary").append(temporary);
         if (roles != null) {
             str.append(", roles.size=").append(roles.size());
         } else {

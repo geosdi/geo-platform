@@ -63,7 +63,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPSchedulerService")
 public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingBean {
-    
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
@@ -74,7 +74,7 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
     private Scheduler scheduler;
     private JobDetail jobSendEmail;
     private JobDetail jobTempAccount;
-    
+
     public void setAccountDAO(GPAccountDAO accountDAO) {
         this.accountDAO = accountDAO;
     }
@@ -85,7 +85,7 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
     public void setEmailTask(EmailTask emailJob) {
         this.emailTask = emailJob;
     }
-    
+
     @Override
     public void sendEmail(GPUser user) {
         // Trigger the job to run once
@@ -96,7 +96,7 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
                 forJob(jobSendEmail).
                 build();
         trigger.getJobDataMap().put(EmailJob.USER, user);
-        
+
         try {
             logger.info("\n*** Fire trigger for sending email...");
             scheduler.scheduleJob(trigger);
@@ -104,7 +104,7 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
             logger.error("SchedulerException", ex.getMessage());
         }
     }
-    
+
     @Override
     public void checkTempAccount() {
         Trigger trigger = TriggerBuilder.newTrigger().
@@ -113,7 +113,7 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
                 startNow().
                 forJob(jobTempAccount).
                 build();
-        
+
         try {
             logger.info("\n*** Fire trigger for check temp account...");
             scheduler.scheduleJob(trigger);
@@ -121,18 +121,18 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
             logger.error("SchedulerException", ex.getMessage());
         }
     }
-    
+
     @Override
     public void afterPropertiesSet() throws Exception {
         // Scheduler setted in quatrz.propeties file
         scheduler = StdSchedulerFactory.getDefaultScheduler();
-        
+
         scheduler.start();
-        
+
         this.createDataTempAccountExpired();
         this.createJobSendEmail();
     }
-    
+
     private void createJobSendEmail() throws SchedulerException {
         // Define the job and tie it to EmailJob class
         jobSendEmail = JobBuilder.newJob(EmailJob.class).
@@ -145,16 +145,16 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
         // Add job to the scheduler for execute when trigger will be fired
         scheduler.addJob(jobSendEmail, false);
     }
-    
+
     private void createDataTempAccountExpired() throws SchedulerException {
         jobTempAccount = JobBuilder.newJob(TempAccountExpireJob.class).
-                //        JobDetail job = JobBuilder.newJob(TempAccountExpireJob.class).
                 withIdentity("tempAccountExpireJob", GroupJobType.TEMP_ACCOUNT.toString()).
                 withDescription("Disable temp account if the threshold is expired").
                 storeDurably().
+                requestRecovery().
                 build();
         jobTempAccount.getJobDataMap().put("accountDAO", accountDAO);
-        
+
         Trigger trigger = TriggerBuilder.newTrigger().
                 withIdentity("TempAccountExpireJobTrigger").
                 withDescription("Runs one at week").
@@ -163,7 +163,7 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
                 withIntervalInWeeks(1).
                 withMisfireHandlingInstructionFireAndProceed()).
                 build();
-        
+
         scheduler.scheduleJob(jobTempAccount, trigger);
     }
 }

@@ -523,6 +523,8 @@ class AccountServiceImpl {
      * Updates all common fields of user and application (GPAccount) 
      */
     private void updateAccount(GPAccount accountToUpdate, GPAccount account) {
+        accountToUpdate.setAccountTemporary(account.isAccountTemporary());
+
         Long defaultProjectID = account.getDefaultProjectID();
         if (defaultProjectID != null) {
             accountToUpdate.setDefaultProjectID(defaultProjectID);

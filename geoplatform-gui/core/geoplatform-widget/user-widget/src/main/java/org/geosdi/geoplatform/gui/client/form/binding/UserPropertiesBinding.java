@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.form.binding;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
@@ -72,6 +73,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     private TextField<String> passwordRepeatField;
     private SimpleComboBox<GPRole> userRoleComboBox;
     private RoleComboBinding roleComboBinding;
+    private CheckBox temporaryField;
     //
     private FormButtonBinding formButtonBinding; // Monitors the valid state of a form and enabled / disabled all buttons.
     private Button buttonBinding;
@@ -146,12 +148,19 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.userRoleComboBox.setTriggerAction(TriggerAction.ALL);
         this.userRoleComboBox.add(GPRole.getAllRoles()); // TODO Retrieve all roles via a WS method
 
+        this.temporaryField = new CheckBox();
+        this.temporaryField.setId(GPUserManageDetailKeyValue.TEMPORARY.toString());
+        this.temporaryField.setName(GPUserManageDetailKeyValue.TEMPORARY.toString());
+        this.temporaryField.setFieldLabel("Temporary");
+        this.temporaryField.setToolTip("Check if the user is temporary");
+
         fp.add(this.nameField);
         fp.add(this.emailField);
         fp.add(this.usernameField);
         fp.add(this.passwordField);
         fp.add(this.passwordRepeatField);
         fp.add(this.userRoleComboBox);
+        fp.add(this.temporaryField);
 
         return fp;
     }
@@ -175,6 +184,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.passwordField.reset();
         this.passwordRepeatField.reset();
         this.userRoleComboBox.reset();
+        this.temporaryField.reset();
     }
 
     @Override
@@ -189,6 +199,9 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.roleComboBinding = new RoleComboBinding(this.userRoleComboBox,
                 GPUserManageDetailKeyValue.AUTORITHY.toString());
         this.formBinding.addFieldBinding(this.roleComboBinding);
+
+        this.formBinding.addFieldBinding(new TemporaryFieldBinding(this.temporaryField,
+                GPUserManageDetailKeyValue.TEMPORARY.toString()));
     }
 
     @Override
@@ -466,7 +479,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
         @Override
         public void setRecordProperty(Record r, Object val) {
-           r.set(property, ((SimpleComboValue<GPRole>) val).getValue());
+            r.set(property, ((SimpleComboValue<GPRole>) val).getValue());
         }
     }
 
@@ -531,6 +544,30 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         public void updateField(boolean updateOriginalValue) {
             GPUserManageDetail userDetail = (GPUserManageDetail) model;
             emailField.setValue(userDetail.getEmail());
+        }
+
+        @Override
+        public void setRecordProperty(Record r, Object val) {
+            r.set(property, val);
+        }
+    }
+
+    private class TemporaryFieldBinding extends GPFieldBinding {
+
+        public TemporaryFieldBinding(Field field, String property) {
+            super(field, property);
+        }
+
+        @Override
+        public void setModelProperty(Object val) {
+            ((GPUserManageDetail) model).setTemporary(val != null
+                    ? (Boolean) val : false);
+        }
+
+        @Override
+        public void updateField(boolean updateOriginalValue) {
+            GPUserManageDetail userDetail = (GPUserManageDetail) model;
+            temporaryField.setValue(userDetail.isTemporary());
         }
 
         @Override

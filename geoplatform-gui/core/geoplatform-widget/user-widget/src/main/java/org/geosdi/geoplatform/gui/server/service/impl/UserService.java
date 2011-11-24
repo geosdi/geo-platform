@@ -172,6 +172,7 @@ public class UserService implements IUserService {
         user.setName(userDTO.getName());
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmailAddress());
+        user.setTemporary(userDTO.isTemporary());
         user.setAuthority(this.convertToGPRole(userDTO.getRoles()));
         return user;
     }
@@ -206,6 +207,7 @@ public class UserService implements IUserService {
         user.setEmailAddress(userDetail.getEmail());
         user.setUsername(userDetail.getUsername());
         user.setPassword(userDetail.getPassword());
+        user.setAccountTemporary(userDetail.isTemporary());
 
         GPAuthority authority = new GPAuthority();
         authority.setAuthority(userDetail.getAuthority().toString());

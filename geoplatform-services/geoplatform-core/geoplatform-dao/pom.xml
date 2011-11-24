@@ -541,40 +541,6 @@
             </build>
         </profile>
         
-        <!-- mvn sql:execute -P bootstrap-db -->
-        <profile>
-            <id>bootstrap-db</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>sql-maven-plugin</artifactId>
-                        <version>1.5</version>
-                        
-                        <dependencies>
-                            <dependency>
-                                <groupId>postgresql</groupId>
-                                <artifactId>postgresql</artifactId>
-                                <version>${postgresql-version}</version>
-                            </dependency>
-                        </dependencies>
-                                                
-                        <configuration>
-                            <url>${db.url}</url>
-                            <driver>${db.driverClassName}</driver>
-                            <username>${db.username}</username>
-                            <password>${db.password}</password>
-                                                        
-                            <autocommit>true</autocommit>
-                            <srcFiles>                      
-                                <srcFile>target/classes/data/insert.sql</srcFile>
-                            </srcFiles>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        
         <!-- mvn sql:execute -P create-db-schema -->
         <profile>
             <id>create-db-schema</id>
@@ -602,6 +568,40 @@
                             <autocommit>true</autocommit>
                             <srcFiles>                      
                                 <srcFile>target/classes/geoplatform-model.ddl</srcFile>
+                            </srcFiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        
+        <!-- mvn sql:execute -P bootstrap-db -->
+        <profile>
+            <id>bootstrap-db</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>sql-maven-plugin</artifactId>
+                        <version>1.5</version>
+                        
+                        <dependencies>
+                            <dependency>
+                                <groupId>postgresql</groupId>
+                                <artifactId>postgresql</artifactId>
+                                <version>${postgresql-version}</version>
+                            </dependency>
+                        </dependencies>
+                                                
+                        <configuration>
+                            <url>${db.url}</url>
+                            <driver>${db.driverClassName}</driver>
+                            <username>${db.username}</username>
+                            <password>${db.password}</password>
+                                                        
+                            <autocommit>true</autocommit>
+                            <srcFiles>                      
+                                <srcFile>target/classes/data/insert.sql</srcFile>
                             </srcFiles>
                         </configuration>
                     </plugin>

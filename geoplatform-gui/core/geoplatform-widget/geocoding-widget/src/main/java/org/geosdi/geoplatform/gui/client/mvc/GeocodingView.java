@@ -115,6 +115,7 @@ public class GeocodingView extends GeoPlatformView {
         if (!LayoutManager.isWestVisible()) {
             LayoutManager.manageWest(true);
         }
+        this.geocodingManagement.buildGeocodingManagementWidget();
         LayoutManager.addComponentToWest(geocodingManagement);
         this.activationEvent.setActivate(true);
         fireEvent();

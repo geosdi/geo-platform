@@ -33,57 +33,48 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.plugin.factory.geocoding;
 
-import com.extjs.gxt.ui.client.Style.Scroll;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.WidgetListener;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
-import org.geosdi.geoplatform.gui.client.plugin.factory.geocoding.GeoPlatformGeocoderFactory;
+import java.util.HashMap;
+import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GeocoderPluginType;
-import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPSimpleGeocoderPluginManager;
+import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPAdvancedGeocoderPluginManager;
+import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPluginManager;
 
 /**
- *  
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public class GeocodingManagementWidget extends ContentPanel {
+public class GeoPlatformGeocoderRepository {
 
-    private boolean initialized;
-    private IGPSimpleGeocoderPluginManager simpleGeocoderPluginManager;
+    private Map<GeocoderPluginType, IGPGeocoderPluginManager> plugins;
+    private static GeoPlatformGeocoderRepository instance;
 
-    public GeocodingManagementWidget() {
-        setHeading("GeoPlatfom Geocoding Widget");
-        setLayout(new FitLayout());
-
-        setLayoutOnChange(true);
-
-        this.simpleGeocoderPluginManager = (IGPSimpleGeocoderPluginManager) GeoPlatformGeocoderFactory.getDefaultPluginManager(GeocoderPluginType.SIMPLE);
-
-        addWidgetListener(new WidgetListener() {
-
-            @Override
-            public void widgetResized(ComponentEvent ce) {
-                if ((getHeight() > 0)
-                        && (simpleGeocoderPluginManager.isPluginManagerInitialized())) {
-                    simpleGeocoderPluginManager.managePluginsProperties(getHeight() - 165);
-                }
-
-            }
-        });
-
-        setScrollMode(Scroll.AUTOY);
+    private GeoPlatformGeocoderRepository() {
+        this.plugins = new HashMap<GeocoderPluginType, IGPGeocoderPluginManager>();
     }
 
-    public void buildGeocodingManagementWidget() {
-        this.simpleGeocoderPluginManager.buildPlugin();
-
-        if (!initialized) {
-            add(simpleGeocoderPluginManager.getDefaultPlugin().getWidget());
-            this.initialized = true;
+    public static synchronized GeoPlatformGeocoderRepository getInstance() {
+        if (instance == null) {
+            instance = new GeoPlatformGeocoderRepository();
         }
+
+        return instance;
+    }
+
+    public synchronized void bindPlugin(IGPGeocoderPluginManager geocoderManager) {
+        if ((IGPAdvancedGeocoderPluginManager) plugins.get(geocoderManager.getGecoderPluginType()) == null) {
+            this.plugins.put(geocoderManager.getGecoderPluginType(), geocoderManager);
+        }
+    }
+
+    public synchronized IGPGeocoderPluginManager findPlugin(GeocoderPluginType type) {
+        return plugins.get(type);
+    }
+
+    public synchronized boolean removePlugin(GeocoderPluginType type) {
+        return this.plugins.remove(type) != null;
     }
 }

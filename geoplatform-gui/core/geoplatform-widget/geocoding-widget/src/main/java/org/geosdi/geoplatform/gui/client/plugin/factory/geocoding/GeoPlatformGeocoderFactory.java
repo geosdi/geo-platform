@@ -33,57 +33,78 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.plugin.factory.geocoding;
 
-import com.extjs.gxt.ui.client.Style.Scroll;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.WidgetListener;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
-import org.geosdi.geoplatform.gui.client.plugin.factory.geocoding.GeoPlatformGeocoderFactory;
+import org.geosdi.geoplatform.gui.client.plugin.AdvancedGeocoderPluginManager;
+import org.geosdi.geoplatform.gui.client.plugin.SimpleGeocoderPluginManagerImpl;
+import org.geosdi.geoplatform.gui.configuration.geocoding.factory.GeocoderFactory;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GeocoderPluginType;
-import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPSimpleGeocoderPluginManager;
+import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPluginManager;
 
 /**
- *  
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public class GeocodingManagementWidget extends ContentPanel {
+public class GeoPlatformGeocoderFactory implements GeocoderFactory {
 
-    private boolean initialized;
-    private IGPSimpleGeocoderPluginManager simpleGeocoderPluginManager;
+    private GeocoderPluginType type;
 
-    public GeocodingManagementWidget() {
-        setHeading("GeoPlatfom Geocoding Widget");
-        setLayout(new FitLayout());
+    public static IGPGeocoderPluginManager getDefaultPluginManager(GeocoderPluginType type) {
+        GeoPlatformGeocoderFactory factory = new GeoPlatformGeocoderFactory();
+        factory.setType(type);
 
-        setLayoutOnChange(true);
-
-        this.simpleGeocoderPluginManager = (IGPSimpleGeocoderPluginManager) GeoPlatformGeocoderFactory.getDefaultPluginManager(GeocoderPluginType.SIMPLE);
-
-        addWidgetListener(new WidgetListener() {
-
-            @Override
-            public void widgetResized(ComponentEvent ce) {
-                if ((getHeight() > 0)
-                        && (simpleGeocoderPluginManager.isPluginManagerInitialized())) {
-                    simpleGeocoderPluginManager.managePluginsProperties(getHeight() - 165);
-                }
-
-            }
-        });
-
-        setScrollMode(Scroll.AUTOY);
+        return factory.getPluginManager();
     }
 
-    public void buildGeocodingManagementWidget() {
-        this.simpleGeocoderPluginManager.buildPlugin();
+    @Override
+    public IGPGeocoderPluginManager getPluginManager() {
+        GeoPlatformGeocoderRepository repo = GeoPlatformGeocoderRepository.getInstance();
 
-        if (!initialized) {
-            add(simpleGeocoderPluginManager.getDefaultPlugin().getWidget());
-            this.initialized = true;
+        IGPGeocoderPluginManager pluginManager = repo.findPlugin(getType());
+        if (pluginManager != null) {
+            return pluginManager;
         }
+
+        pluginManager = istantiate();
+
+        return pluginManager;
+    }
+
+    @Override
+    public IGPGeocoderPluginManager getPluginManager(GeocoderPluginType type) {
+        return GeoPlatformGeocoderRepository.getInstance().findPlugin(type);
+    }
+
+    public IGPGeocoderPluginManager istantiate() {
+        IGPGeocoderPluginManager pluginManager = null;
+        
+        switch (getType()) {
+            case SIMPLE:
+                pluginManager = new SimpleGeocoderPluginManagerImpl();
+                break;
+            case ADVANCED:
+                pluginManager = new AdvancedGeocoderPluginManager();
+                break;
+        }
+
+        GeoPlatformGeocoderRepository.getInstance().bindPlugin(pluginManager);
+
+        return pluginManager;
+    }
+
+    /**
+     * @return the type
+     */
+    public GeocoderPluginType getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(GeocoderPluginType type) {
+        this.type = type;
     }
 }

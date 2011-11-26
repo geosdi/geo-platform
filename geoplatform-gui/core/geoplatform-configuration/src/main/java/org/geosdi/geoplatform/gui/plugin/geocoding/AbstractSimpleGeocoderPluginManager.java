@@ -33,57 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.plugin.geocoding;
 
-import com.extjs.gxt.ui.client.Style.Scroll;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.WidgetListener;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
-import org.geosdi.geoplatform.gui.client.plugin.factory.geocoding.GeoPlatformGeocoderFactory;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GeocoderPluginType;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPSimpleGeocoderPluginManager;
 
 /**
- *  
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public class GeocodingManagementWidget extends ContentPanel {
-
-    private boolean initialized;
-    private IGPSimpleGeocoderPluginManager simpleGeocoderPluginManager;
-
-    public GeocodingManagementWidget() {
-        setHeading("GeoPlatfom Geocoding Widget");
-        setLayout(new FitLayout());
-
-        setLayoutOnChange(true);
-
-        this.simpleGeocoderPluginManager = (IGPSimpleGeocoderPluginManager) GeoPlatformGeocoderFactory.getDefaultPluginManager(GeocoderPluginType.SIMPLE);
-
-        addWidgetListener(new WidgetListener() {
-
-            @Override
-            public void widgetResized(ComponentEvent ce) {
-                if ((getHeight() > 0)
-                        && (simpleGeocoderPluginManager.isPluginManagerInitialized())) {
-                    simpleGeocoderPluginManager.managePluginsProperties(getHeight() - 165);
-                }
-
-            }
-        });
-
-        setScrollMode(Scroll.AUTOY);
+public abstract class AbstractSimpleGeocoderPluginManager
+        implements IGPSimpleGeocoderPluginManager {
+    
+    protected boolean initialized;
+    
+    @Override
+    public boolean isPluginManagerInitialized() {
+        return initialized;
     }
 
-    public void buildGeocodingManagementWidget() {
-        this.simpleGeocoderPluginManager.buildPlugin();
-
-        if (!initialized) {
-            add(simpleGeocoderPluginManager.getDefaultPlugin().getWidget());
-            this.initialized = true;
-        }
+    @Override
+    public GeocoderPluginType getGecoderPluginType() {
+        return GeocoderPluginType.SIMPLE;
     }
 }

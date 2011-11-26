@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.geocoding;
+package org.geosdi.geoplatform.gui.configuration.geocoding.plugin;
 
 /**
  *
@@ -41,8 +41,11 @@ package org.geosdi.geoplatform.gui.configuration.geocoding;
  * @email  giuseppe.lascaleia@geosdi.org
  *
  */
-public class GPGeocodingTabWidget {
-    
+public interface IGPSimpleGeocoderPluginManager extends IGPGeocoderPluginManager {
 
-    private boolean initialized;
+    IGPGeocoderPlugin getDefaultPlugin();
+    
+    boolean isPluginManagerInitialized();
+    
+    void buildPlugin();
 }

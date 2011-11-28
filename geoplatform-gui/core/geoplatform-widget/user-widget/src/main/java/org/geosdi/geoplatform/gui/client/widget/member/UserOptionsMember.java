@@ -33,75 +33,88 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.widget.member;
 
-import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
-import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.util.Padding;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.BoxLayout.BoxLayoutPack;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout.VBoxLayoutAlign;
-import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
-import com.google.gwt.user.client.ui.Label;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMainPanel;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 
 /**
  *
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class UserOptionsWidget extends GeoPlatformWindow {
+public abstract class UserOptionsMember implements IUserOptionsMember {
 
-    public UserOptionsWidget(boolean lazy) {
-        super(lazy);
+    private String name;
+    private LayoutContainer container;
+    private ContentPanel panelOption;
+    private Button save;
+
+    public UserOptionsMember(String name, LayoutContainer container) {
+        this.name = name;
+        this.container = container;
+        this.createPanelOption();
+        this.createSaveButton();
     }
 
     @Override
-    public void initSize() {
-        super.setSize(600, 500);
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public void setWindowProperties() {
-        super.setHeading("User Options");
-        super.setResizable(false);
-        super.setLayout(new BorderLayout());
-        super.setModal(true);
-        super.setCollapsible(false);
-        super.setPlain(true);
+    private void createPanelOption() {
+        VBoxLayout layout = new VBoxLayout();
+        layout.setPadding(new Padding(5));
+        layout.setVBoxLayoutAlign(VBoxLayoutAlign.CENTER);
+        layout.setPack(BoxLayoutPack.CENTER);
+
+        panelOption = new ContentPanel(layout);
+
+        this.creteLayoutData(panelOption);
     }
 
-    @Override
-    public void addComponent() {
-        super.add(new UserOptionsMainPanel().getPanelMain());
-        this.addButtons();
-    }
-
-    private void addButtons() {
-        Button close = new Button("Close", BasicWidgetResources.ICONS.cancel(),
+    private void createSaveButton() {
+        save = new Button("Save", BasicWidgetResources.ICONS.done(),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-                        hide();
+                        saveOptions();
                     }
                 });
+        
+        panelOption.addButton(save);
+    }
 
-        super.setButtonAlign(HorizontalAlignment.RIGHT);
-        super.addButton(close);
+    @Override
+    public final Listener<ButtonEvent> getListener() {
+        return new Listener<ButtonEvent>() {
+
+            @Override
+            public void handleEvent(ButtonEvent ce) {
+                if (!ce.<ToggleButton>getComponent().isPressed()) {
+                    return;
+                }
+                switchPanel();
+            }
+        };
+    }
+
+    protected abstract void creteLayoutData(ContentPanel panel);
+
+    protected void switchPanel() {
+        container.removeAll();
+        container.add(panelOption);
+        container.layout();
     }
 }

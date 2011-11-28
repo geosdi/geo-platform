@@ -33,75 +33,89 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.widget.member;
 
-import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.util.Padding;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
-import com.extjs.gxt.ui.client.widget.layout.BoxLayout.BoxLayoutPack;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout.VBoxLayoutAlign;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
-import com.google.gwt.user.client.ui.Label;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMainPanel;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 
 /**
  *
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class UserOptionsWidget extends GeoPlatformWindow {
+public class UserOptionsMainPanel {
 
-    public UserOptionsWidget(boolean lazy) {
-        super(lazy);
+    private ContentPanel panelMain;
+    //
+    private ContentPanel panelWest;
+    private ContentPanel panelCenter;
+
+    public UserOptionsMainPanel() {
+        this.createPanels();
+        this.createMembers();
     }
 
-    @Override
-    public void initSize() {
-        super.setSize(600, 500);
+    private void createPanels() {
+        panelMain = new ContentPanel();
+        panelMain.setHeaderVisible(false);
+        panelMain.setSize(590, 430);
+        panelMain.setLayout(new BorderLayout());
+
+        // West
+        panelWest = new ContentPanel();
+        panelWest.setHeaderVisible(false);
+
+        VBoxLayout westLayout = new VBoxLayout();
+        westLayout.setPadding(new Padding(5));
+        westLayout.setVBoxLayoutAlign(VBoxLayoutAlign.STRETCH);
+        panelWest.setLayout(westLayout);
+
+        BorderLayoutData west = new BorderLayoutData(LayoutRegion.WEST, 120);
+        west.setMargins(new Margins(5));
+
+        panelMain.add(panelWest, west);
+
+        // Centre
+        panelCenter = new ContentPanel();
+        panelCenter.setHeaderVisible(false);
+        panelCenter.setLayout(new FitLayout());
+
+        BorderLayoutData center = new BorderLayoutData(LayoutRegion.CENTER);
+        center.setMargins(new Margins(5));
+
+        panelMain.add(panelCenter, center);
     }
 
-    @Override
-    public void setWindowProperties() {
-        super.setHeading("User Options");
-        super.setResizable(false);
-        super.setLayout(new BorderLayout());
-        super.setModal(true);
-        super.setCollapsible(false);
-        super.setPlain(true);
+    private void createMembers() {
+        VBoxLayoutData vBoxData = new VBoxLayoutData(5, 5, 5, 5);
+        vBoxData.setFlex(1);
+
+        panelWest.add(this.createToggleButton(new UserOptionsMemberUser(panelCenter)), vBoxData);
+        panelWest.add(this.createToggleButton(new UserOptionsMemberView(panelCenter)), vBoxData);
+        panelWest.add(this.createToggleButton(new UserOptionsMemberDisk(panelCenter)), vBoxData);
+        panelWest.add(this.createToggleButton(new UserOptionsMemberGeocoding(panelCenter)), vBoxData);
+        panelWest.add(this.createToggleButton(new UserOptionsMemberWidgets(panelCenter)), vBoxData);
     }
 
-    @Override
-    public void addComponent() {
-        super.add(new UserOptionsMainPanel().getPanelMain());
-        this.addButtons();
+    private ToggleButton createToggleButton(UserOptionsMember member) {
+        ToggleButton button = new ToggleButton(member.getName());
+        button.setToggleGroup("vboxlayoutbuttons");
+        button.addListener(Events.Toggle, member.getListener());
+        button.setAllowDepress(false);
+        return button;
     }
 
-    private void addButtons() {
-        Button close = new Button("Close", BasicWidgetResources.ICONS.cancel(),
-                new SelectionListener<ButtonEvent>() {
-
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        hide();
-                    }
-                });
-
-        super.setButtonAlign(HorizontalAlignment.RIGHT);
-        super.addButton(close);
+    public ContentPanel getPanelMain() {
+        return panelMain;
     }
 }

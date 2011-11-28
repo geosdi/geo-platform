@@ -49,20 +49,21 @@ import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPlug
  */
 public class GeoPlatformGeocoderFactory implements GeocoderFactory {
 
-    private GeocoderPluginType type;
+    private GeocoderPluginType geocoderPluginType;
 
     public static IGPGeocoderPluginManager getDefaultPluginManager(GeocoderPluginType type) {
         GeoPlatformGeocoderFactory factory = new GeoPlatformGeocoderFactory();
-        factory.setType(type);
+        factory.setGeocoderPluginType(type);
 
-        return factory.getPluginManager();
+        return factory.getPluginManager(type) != null
+                ? factory.getPluginManager(type) : factory.getPluginManager();
     }
 
     @Override
     public IGPGeocoderPluginManager getPluginManager() {
         GeoPlatformGeocoderRepository repo = GeoPlatformGeocoderRepository.getInstance();
 
-        IGPGeocoderPluginManager pluginManager = repo.findPlugin(getType());
+        IGPGeocoderPluginManager pluginManager = repo.findPlugin(getGeocoderPluginType());
         if (pluginManager != null) {
             return pluginManager;
         }
@@ -79,8 +80,8 @@ public class GeoPlatformGeocoderFactory implements GeocoderFactory {
 
     public IGPGeocoderPluginManager istantiate() {
         IGPGeocoderPluginManager pluginManager = null;
-        
-        switch (getType()) {
+
+        switch (getGeocoderPluginType()) {
             case SIMPLE:
                 pluginManager = new SimpleGeocoderPluginManagerImpl();
                 break;
@@ -97,14 +98,14 @@ public class GeoPlatformGeocoderFactory implements GeocoderFactory {
     /**
      * @return the type
      */
-    public GeocoderPluginType getType() {
-        return type;
+    public GeocoderPluginType getGeocoderPluginType() {
+        return geocoderPluginType;
     }
 
     /**
      * @param type the type to set
      */
-    public void setType(GeocoderPluginType type) {
-        this.type = type;
+    public void setGeocoderPluginType(GeocoderPluginType type) {
+        this.geocoderPluginType = type;
     }
 }

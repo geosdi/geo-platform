@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.plugin;
 
+import com.google.gwt.user.client.ui.Widget;
 import org.geosdi.geoplatform.gui.client.widget.GeocodingGridWidget;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPlugin;
 import org.geosdi.geoplatform.gui.plugin.geocoding.AbstractSimpleGeocoderPluginManager;
@@ -61,10 +62,15 @@ public class SimpleGeocoderPluginManagerImpl
     }
 
     @Override
-    public void buildPlugin() {
+    public void buildPlugins() {
         if(!initialized) {
             this.widget = new GeocodingGridWidget();
             this.initialized = true;
         }
+    }
+
+    @Override
+    public Widget getWidget() {
+        return getDefaultPlugin().getWidget();
     }
 }

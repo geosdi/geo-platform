@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.mvc;
 
-
 import org.geosdi.geoplatform.gui.client.GeocodingEvents;
-import org.geosdi.geoplatform.gui.client.widget.GeocodingManagementWidget;
+import org.geosdi.geoplatform.gui.client.widget.GeocoderManagementWidget;
 import org.geosdi.geoplatform.gui.client.widget.ReverseGeocodingDispatcher;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -45,6 +44,7 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.GeocodingActivationEvent;
+import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GeocoderPluginType;
 import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
 /**
@@ -54,14 +54,14 @@ import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
  */
 public class GeocodingView extends GeoPlatformView {
 
-    private GeocodingManagementWidget geocodingManagement;
+    private GeocoderManagementWidget geocoderManagement;
     private ReverseGeocodingDispatcher reverseDispatcher;
     private GeocodingActivationEvent activationEvent = new GeocodingActivationEvent();
 
     public GeocodingView(Controller controller) {
         super(controller);
         // TODO Auto-generated constructor stub
-        this.geocodingManagement = new GeocodingManagementWidget();
+        this.geocoderManagement = new GeocoderManagementWidget();
     }
 
     /* (non-Javadoc)
@@ -84,7 +84,7 @@ public class GeocodingView extends GeoPlatformView {
     protected void handleEvent(AppEvent event) {
         // TODO Auto-generated method stub
         if (event.getType() == GeocodingEvents.SHOW_GEOCODING_WIDGET) {
-            onShowGeocodingWidget();
+            onShowGeocodingWidget(event);
         }
 
         if (event.getType() == GeocodingEvents.HIDE_GEOCODING_WIDGET) {
@@ -97,8 +97,8 @@ public class GeocodingView extends GeoPlatformView {
      */
     private void onHideGeocodingWidget() {
         // TODO Auto-generated method stub
-        if (LayoutManager.isWidgetPresentOnWest(geocodingManagement)) {
-            LayoutManager.removeComponentFromWest(geocodingManagement);
+        if (LayoutManager.isWidgetPresentOnWest(geocoderManagement)) {
+            LayoutManager.removeComponentFromWest(geocoderManagement);
             if (!LayoutManager.isOneWidgetVisibleAtWest()) {
                 LayoutManager.manageWest(false);
             }
@@ -110,13 +110,16 @@ public class GeocodingView extends GeoPlatformView {
     /**
      * Show Geocoding Widget
      */
-    private void onShowGeocodingWidget() {
+    private void onShowGeocodingWidget(AppEvent event) {
         // TODO Auto-generated method stub
         if (!LayoutManager.isWestVisible()) {
             LayoutManager.manageWest(true);
         }
-        this.geocodingManagement.buildGeocodingManagementWidget();
-        LayoutManager.addComponentToWest(geocodingManagement);
+        this.geocoderManagement.buildGeocoderManagementWidget(
+                (GeocoderPluginType) event.getData() != null
+                ? (GeocoderPluginType) event.getData()
+                : GeocoderPluginType.SIMPLE);
+        LayoutManager.addComponentToWest(geocoderManagement);
         this.activationEvent.setActivate(true);
         fireEvent();
     }
@@ -124,8 +127,8 @@ public class GeocodingView extends GeoPlatformView {
     /**
      * @return the geocodingManagement
      */
-    public GeocodingManagementWidget getGeocodingManagement() {
-        return geocodingManagement;
+    public GeocoderManagementWidget getGeocodingManagement() {
+        return geocoderManagement;
     }
 
     /**

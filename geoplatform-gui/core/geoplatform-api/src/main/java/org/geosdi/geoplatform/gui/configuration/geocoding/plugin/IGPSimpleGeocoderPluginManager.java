@@ -44,8 +44,4 @@ package org.geosdi.geoplatform.gui.configuration.geocoding.plugin;
 public interface IGPSimpleGeocoderPluginManager extends IGPGeocoderPluginManager {
 
     IGPGeocoderPlugin getDefaultPlugin();
-    
-    boolean isPluginManagerInitialized();
-    
-    void buildPlugin();
 }

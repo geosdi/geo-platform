@@ -67,4 +67,19 @@ public class AdvancedGeocoderPluginManager<T extends IGPGeocoderPlugin>
     public void managePluginsProperties(int dimension) {
         
     }
+
+    @Override
+    public boolean isPluginManagerInitialized() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void buildPlugins() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public <T> T getWidget() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

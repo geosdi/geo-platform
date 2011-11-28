@@ -44,6 +44,12 @@ package org.geosdi.geoplatform.gui.configuration.geocoding.plugin;
 public interface IGPGeocoderPluginManager {
 
     GeocoderPluginType getGecoderPluginType();
-    
+
     void managePluginsProperties(int dimension);
+
+    boolean isPluginManagerInitialized();
+
+    void buildPlugins();
+    
+    <T> T getWidget();
 }

@@ -42,6 +42,7 @@ import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.menu.CheckMenuItem;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import org.geosdi.geoplatform.gui.action.menu.MenuCheckAction;
+import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GeocoderPluginType;
 
 /**
  *
@@ -66,9 +67,10 @@ public class GeocodingMenuAction extends MenuCheckAction {
     public void componentSelected(MenuEvent ce) {
         // TODO Auto-generated method stub
         CheckMenuItem item = (CheckMenuItem) ((Menu) ce.getSource()).getItemByItemId(super.getId());
-        
+
         if (item.isChecked()) {
-            Dispatcher.forwardEvent(GeocodingEvents.SHOW_GEOCODING_WIDGET);
+            Dispatcher.forwardEvent(GeocodingEvents.SHOW_GEOCODING_WIDGET,
+                    GeocoderPluginType.SIMPLE);
         } else {
             Dispatcher.forwardEvent(GeocodingEvents.HIDE_GEOCODING_WIDGET);
         }

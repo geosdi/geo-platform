@@ -54,11 +54,11 @@ public class InfoPreview {
     private boolean isVector = true;
     private String message = "ok";
 
-    public InfoPreview(String url, String workspace, String dataStoreName,
+    public InfoPreview(String url, String workspace, String layerName,
             double minX, double minY, double maxX, double maxY, String crs) {
         this.dataSource = url;
         this.workspace = workspace;
-        this.title = dataStoreName;
+        this.title = layerName;
         this.lowerX = minX;
         this.lowerY = minY;
         this.upperX = maxX;

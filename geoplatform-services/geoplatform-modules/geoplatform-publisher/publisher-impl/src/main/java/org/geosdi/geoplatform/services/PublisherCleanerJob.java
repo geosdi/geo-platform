@@ -33,42 +33,45 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server;
+package org.geosdi.geoplatform.services;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
-import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
+import it.geosolutions.geoserver.rest.decoder.RESTDataStore;
+import java.io.File;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class SessionListenerTemplateMethod implements HttpSessionListener {
+public class PublisherCleanerJob implements Job {
 
-    private List<String> userList = new ArrayList<String>();
+    public static final String PUBLISHER_CLEANER_JOB = "publischerCleanerJob";
+    public static final String USER_WORKSPACE = "userWorkSPace";
+    public static final String FILE_NAME = "fileName";
+    public static final String FILE_PATH = "filePath";
+    public static final String PUBLISHER_SERVICE = "publisher_service";
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
-    public void sessionCreated(HttpSessionEvent hse) {
-    }
+    public void execute(JobExecutionContext context) throws JobExecutionException {
+        String fileName = (String) context.getTrigger().getJobDataMap().get(FILE_NAME);
+        String userWorkspace = (String) context.getTrigger().getJobDataMap().get(USER_WORKSPACE);
 
-    @Override//This is the template method
-    public void sessionDestroyed(HttpSessionEvent hse) {
-        System.out.println("A new session destroyed");
-        GeoPlatformPublishClient geoPlatformPublishClient = (GeoPlatformPublishClient) GeoPlatformContextUtil.getInstance().getBean(
-                "geoPlatformPublishClient");
-//        geoPlatformPublishClient.getPublishService().verifyAndDeleteSessionDir(hse.getSession().getId());
-    }
-
-    protected void addManagedSession(String userSession) {
-        if (!this.userList.contains(userSession)) {
-            this.userList.add(userSession);
+        GPPublisherServiceImpl publisherService = (GPPublisherServiceImpl) context.getTrigger().getJobDataMap().get(PUBLISHER_SERVICE);
+        try {
+            publisherService.removeTIFFromPreview(userWorkspace, fileName);
+        } catch (ResourceNotFoundFault re) {
+            logger.error("Error on PublisherCleanerJob: " + re);
         }
-    }
-
-    protected List<String> getUserList() {
-        return this.userList;
+        String filePath = (String) context.getTrigger().getJobDataMap().get(FILE_PATH);
+        File file = new File(filePath);
+        file.delete();
+        //TODO: Rimuovere da GeoServer i layer pubblicati e messi nella mappa del job,
+        //Se sono tiff rimuovere anche i file dalla folder
     }
 }

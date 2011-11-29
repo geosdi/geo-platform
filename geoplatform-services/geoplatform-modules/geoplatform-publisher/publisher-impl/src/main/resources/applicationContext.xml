@@ -30,7 +30,7 @@
         <constructor-arg type="java.lang.String" value="${geoserver_username}"/>
         <constructor-arg type="java.lang.String" value="${geoserver_password}"/>
       <!-- the workspace where publishing the shapefiles to preview -->
-        <constructor-arg type="java.lang.String" value="${geoserver_preview_workspace}"/>
+        <constructor-arg type="java.lang.String" value="${geoportal_dir_path}"/>
     </bean>
 
 	<!--===================================================================== -->

@@ -17,7 +17,9 @@
             http://cxf.apache.org/schemas/jaxws.xsd"
        default-autowire="byName">
 
-    <context:annotation-config />
+<!--    <context:annotation-config />-->
+    
+    <context:component-scan base-package="org.geosdi.geoplatform.services"/>
             
     <import resource="classpath:applicationContext-JASYPT.xml" />
 

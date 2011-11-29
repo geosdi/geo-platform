@@ -45,7 +45,6 @@ import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
 import org.codehaus.jra.Post;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.request.Feature;
 import org.geosdi.geoplatform.responce.InfoPreview;
 
 /**
@@ -60,7 +59,17 @@ public interface GPPublisherService {
     @WebResult(name = "Result")
     List<InfoPreview> uploadZIPInPreview(
             @WebParam(name = "sessionID") String sessionID,
+            @WebParam(name = "username") String username,
             @WebParam(name = "fileName") File file)
+            throws ResourceNotFoundFault;
+    
+    @Get
+    @HttpResource(location = "/preview/uploadZipInPreview")
+    @WebResult(name = "Result")
+    InfoPreview uploadTIFInPreview(
+            @WebParam(name = "username") String sessionID,
+            @WebParam(name = "fileName") File file,
+            @WebParam(name = "overwrite") boolean overwrite)
             throws ResourceNotFoundFault;
 
     @Get
@@ -68,6 +77,7 @@ public interface GPPublisherService {
     @WebResult(name = "Result")
     List<InfoPreview> uploadShapeInPreview(
             @WebParam(name = "sessionID") String sessionID,
+            @WebParam(name = "username") String username,
             @WebParam(name = "shpFileName") File shpFile,
             @WebParam(name = "dbfFileName") File dbfFile,
             @WebParam(name = "shxFileName") File shxFile,
@@ -79,7 +89,7 @@ public interface GPPublisherService {
     @HttpResource(location = "/preview/getPreviewDataStores")
     @WebResult(name = "Result")
     List<InfoPreview> getPreviewDataStores(
-            @WebParam(name = "sessionID") String sessionID)
+            @WebParam(name = "userName") String userName)
             throws ResourceNotFoundFault;
 
 //    @Post
@@ -89,12 +99,12 @@ public interface GPPublisherService {
 //            @WebParam(name = "featureList") List<Feature> list,
 //            @WebParam(name = "shpFileName") String shpFileName)
 //            throws ResourceNotFoundFault, Exception;
-
-    @Post
-    @HttpResource(location = "/preview/verifyAndDeleteSessionDir")
-    @WebResult(name = "Result")
-    boolean verifyAndDeleteSessionDir(
-            @WebParam(name = "idSessionDestroyed") String idSessionDestroyed);
+//
+//    @Post
+//    @HttpResource(location = "/preview/verifyAndDeleteSessionDir")
+//    @WebResult(name = "Result")
+//    boolean verifyAndDeleteSessionDir(
+//            @WebParam(name = "idSessionDestroyed") String idSessionDestroyed);
 
     @Get
     @HttpResource(location = "/preview/publish")
@@ -125,7 +135,14 @@ public interface GPPublisherService {
     @Get
     @HttpResource(location = "/preview/removeFromPreview")
     @WebResult(name = "Result")
-    boolean removeFromPreview(@WebParam(name = "sessionID") String sessionID,
-            @WebParam(name = "dataStoreName") String dataStoreName)
+    boolean removeSHPFromPreview(@WebParam(name = "userName") String userName,
+            @WebParam(name = "layerName") String layerName)
+            throws ResourceNotFoundFault;
+    
+    @Get
+    @HttpResource(location = "/preview/removeFromPreview")
+    @WebResult(name = "Result")
+    boolean removeTIFFromPreview(@WebParam(name = "userName") String userName,
+            @WebParam(name = "layerName") String layerName)
             throws ResourceNotFoundFault;
 }

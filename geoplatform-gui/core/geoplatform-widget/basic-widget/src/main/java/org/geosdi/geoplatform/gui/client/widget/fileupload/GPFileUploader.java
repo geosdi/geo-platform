@@ -125,7 +125,7 @@ public class GPFileUploader {
                 // response of type text/html, we can get the result text here 
                 // (see the FormPanel documentation for further explanation)
                 htmlResult = event.getResults();
-                System.out.println("HTML Resolut: " + htmlResult);
+                System.out.println("HTML Resault: " + htmlResult);
                 //Execute this code only if the session is still alive
                 if (htmlResult.contains("Session Timeout")) {
                     GPHandlerManager.fireEvent(new GPLoginEvent(null));

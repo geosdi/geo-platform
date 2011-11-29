@@ -35,11 +35,17 @@
  */
 package org.geosdi.geoplatform.services;
 
+import it.geosolutions.geoserver.rest.encoder.GSPostGISDatastoreEncoder;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -47,8 +53,11 @@ import java.util.zip.ZipOutputStream;
  */
 public class PublishUtility {
 
-    public final static String GEOPORTAL = "geoportal";
+//    public final static String GEOPORTAL = "geoportal";
     public static String TMPDIR;
+    public final static String shpDirName = "shp";
+    public final static String tifDirName = "tif";
+    public final static String zipDirName = "zip";
 
     static {
         TMPDIR = System.getProperty("java.io.tmpdir");
@@ -56,6 +65,8 @@ public class PublishUtility {
             TMPDIR += System.getProperty("file.separator");
         }
     }
+    private static Logger logger = LoggerFactory.getLogger(
+            GPPublisherServiceImpl.class);
 
     public static String createDir(String path) {
         File dir = new File(path);
@@ -98,5 +109,107 @@ public class PublishUtility {
         }
         inShpFil.close();
         return out;
+    }
+
+    public static File copyFile(File origin, String destinationPathDir, String destinationFileName, boolean overwrite) {
+        File destination = new File(destinationPathDir);
+        destination.mkdirs();
+        destination = new File(destination, destinationFileName);
+        if (!destination.exists() || overwrite) {
+            try {
+                InputStream in = new FileInputStream(origin);
+                OutputStream out = new FileOutputStream(destination);
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+                in.close();
+                out.close();
+//            } catch (FileNotFoundException ex) {
+//                logger.error(ex.getMessage() + " in the specified directory.");
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+            }
+        }
+        return destination;
+    }
+
+    /*****************
+     *
+     * @param zipFileName the name of the resulting zip file
+     * @param shpFileName the name of the shp file to compress
+     * @return
+     *
+     */
+    public static ZipOutputStream compressFiles(String tempUserZipDir,
+            String tempUserDir, String zipFileName, String origName,
+            String destName) {
+        ZipOutputStream out = null;
+
+        try {
+            out = new ZipOutputStream(new FileOutputStream(
+                    tempUserZipDir + zipFileName));
+            File shpFile = new File(tempUserDir + origName + ".shp");
+            File dbfFile = new File(tempUserDir + origName + ".dbf");
+            File shxFile = new File(tempUserDir + origName + ".shx");
+            File prjFile = new File(tempUserDir + origName + ".prj");
+
+            File shpDestFile = shpFile;
+            File dbfDestFile = dbfFile;
+            File shxDestFile = shxFile;
+            File prjDestFile = prjFile;
+
+            File sldFile = new File(tempUserDir + origName + ".sld");
+            File sldDestFile = sldFile;
+
+            if (destName != null) {
+                shpDestFile = new File(tempUserDir + destName + ".shp");
+                shpFile.renameTo(shpDestFile);
+                dbfDestFile = new File(tempUserDir + destName + ".dbf");
+                dbfFile.renameTo(dbfDestFile);
+                shxDestFile = new File(tempUserDir + destName + ".shx");
+                shxFile.renameTo(shxDestFile);
+                prjDestFile = new File(tempUserDir + destName + ".prj");
+                prjFile.renameTo(prjDestFile);
+                sldDestFile = new File(tempUserDir + destName + ".sld");
+                sldFile.renameTo(sldDestFile);
+            }
+            out = PublishUtility.compress(out, shpDestFile);
+            out = PublishUtility.compress(out, dbfDestFile);
+            out = PublishUtility.compress(out, shxDestFile);
+            out = PublishUtility.compress(out, prjDestFile);
+            if (sldDestFile.exists()) {
+                out = PublishUtility.compress(out, sldDestFile);
+            }
+            out.close();
+        } catch (Exception ex) {
+            logger.info("\n Exception compressing " + zipFileName + ".zip");
+            return null;
+        }
+        return out;
+    }
+    //TODO: portare in file di configurazione esterno i parametri per la creazione 
+    //di stores postgis
+    public static GSPostGISDatastoreEncoder generateEncoder(String storeName){
+        GSPostGISDatastoreEncoder encoder = new GSPostGISDatastoreEncoder();
+        encoder.setName(storeName);
+        encoder.setEnabled(true);
+        encoder.setHost("localhost");
+        encoder.setPort(5432);
+        encoder.setDatabase("preview_gp");
+        encoder.setSchema("public");
+        encoder.setUser("postgres");
+        encoder.setPassword("0x,postgres,0x");
+        encoder.setExposePrimaryKeys(false);
+        encoder.setMaxConnections(20);
+        encoder.setMinConnections(1);
+        encoder.setFetchSize(1000);
+        encoder.setConnectionTimeout(20);
+        encoder.setValidateConnections(false);
+        encoder.setLooseBBox(true);
+        encoder.setPreparedStatements(false);
+        encoder.setMaxOpenPreparedStatements(50);
+        return encoder;
     }
 }

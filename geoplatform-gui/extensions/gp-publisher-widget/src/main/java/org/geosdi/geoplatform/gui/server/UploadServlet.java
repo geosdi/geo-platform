@@ -41,6 +41,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -57,6 +58,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
@@ -73,9 +75,7 @@ import org.geosdi.geoplatform.responce.InfoPreview;
 public class UploadServlet extends HttpServlet {
 
     private static final long serialVersionUID = -1464439864247709647L;
-    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    
     private PublisherFileUtils publisherFileUtils;
     private GeoPlatformPublishClient geoPlatformPublishClient;
 
@@ -149,8 +149,7 @@ public class UploadServlet extends HttpServlet {
                     resp.setStatus(HttpServletResponse.SC_CREATED);
                     resp.flushBuffer();
                 }
-                List<InfoPreview> infoPreviews = this.geoPlatformPublishClient.getPublishService().uploadZIPInPreview(
-                        session.getId(), uploadedFile);
+                List<InfoPreview> infoPreviews = this.manageUploadedFilePreview(uploadedFile, session.getId(), user.getUsername());
                 resp.setContentType("text/x-json;charset=UTF-8");
                 resp.setHeader("Cache-Control", "no-cache");
                 String result = this.generateJSONObjects(infoPreviews);
@@ -161,9 +160,6 @@ public class UploadServlet extends HttpServlet {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                         "An error occurred creating the file: "
                         + ex.getMessage());
-                throw new GeoPlatformException("Error on uploading shape.");
-            } catch (ResourceNotFoundFault ex) {
-                logger.info("Error on uploading shape: " + ex);
                 throw new GeoPlatformException("Error on uploading shape.");
             } finally {
                 uploadedFile.delete();
@@ -181,5 +177,31 @@ public class UploadServlet extends HttpServlet {
         }.getType();
         //Note: the name previewLayers must correspond to the field name in PreviewLayerList class
         return "{\"previewLayers\":" + gson.toJson(infoPreview, listType) + "}";
+    }
+
+    private List<InfoPreview> manageUploadedFilePreview(File uploadedFile, String sessionID, String username) {
+        List<InfoPreview> previewList = null;
+        String extension = uploadedFile.getAbsolutePath().substring(
+                uploadedFile.getAbsolutePath().lastIndexOf(".") + 1, uploadedFile.getAbsolutePath().lastIndexOf(".") + 4);
+        System.out.println("Extension: " + extension);
+        if (extension.equalsIgnoreCase(GPExtensions.ZIP.toString())) {
+            try {
+                previewList = this.geoPlatformPublishClient.getPublishService().uploadZIPInPreview(
+                        sessionID, username, uploadedFile);
+            } catch (ResourceNotFoundFault ex) {
+                logger.info("Error on uploading shape: " + ex);
+                throw new GeoPlatformException("Error on uploading shape.");
+            }
+        } else if(extension.equalsIgnoreCase(GPExtensions.TIF.toString())){
+            try {
+                previewList = new ArrayList<InfoPreview>();
+                previewList.add(this.geoPlatformPublishClient.getPublishService().uploadTIFInPreview(
+                        username, uploadedFile, true));
+            } catch (ResourceNotFoundFault ex) {
+                logger.info("Error on uploading shape: " + ex);
+                throw new GeoPlatformException("Error on uploading shape.");
+            }
+        }
+        return previewList;
     }
 }

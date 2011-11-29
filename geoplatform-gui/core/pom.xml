@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-gui</artifactId>
-        <version>1.2-SNAPSHOT</version>
+        <version>1.3-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>core</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.3-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == Core Module</name>
@@ -67,45 +67,45 @@
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-api</artifactId>
-                <version>1.2-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
         
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-api</artifactId>
-                <version>1.2-SNAPSHOT</version>
+                <version>${project.version}</version>
                 <classifier>sources</classifier>
             </dependency>
 		
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-configuration</artifactId>
-                <version>1.2-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
         
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-configuration</artifactId>
-                <version>1.2-SNAPSHOT</version>
+                <version>${project.version}</version>
                 <classifier>sources</classifier>
             </dependency>
         
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>basic-widget</artifactId>
-                <version>1.2-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
             
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>server-widget</artifactId>
-                <version>1.2-SNAPSHOT</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>server-widget</artifactId>
-                <version>1.2-SNAPSHOT</version>
+                <version>${project.version}</version>
                 <classifier>sources</classifier>
             </dependency>
         

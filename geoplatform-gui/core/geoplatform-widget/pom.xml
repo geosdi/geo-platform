@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>core</artifactId>
-        <version>1.2-SNAPSHOT</version>
+        <version>1.3-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-widget</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.3-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == Widget Module</name>

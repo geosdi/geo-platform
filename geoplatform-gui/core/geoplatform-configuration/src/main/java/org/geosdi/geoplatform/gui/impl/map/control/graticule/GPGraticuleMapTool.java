@@ -87,6 +87,7 @@ public class GPGraticuleMapTool implements GeoPlatformMapControl {
             this.graticule = new Graticule(grtOptions);
 
             this.graticule.setAutoActivate(false);
+            this.initialized = true;
         }
     }
 

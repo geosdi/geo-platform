@@ -61,7 +61,7 @@ public class MapView extends GeoPlatformView {
     private GPGeocodingWidget geocoderWidget;
     private ReverseGeocodingWidget revGeoWidget;
     private MapToolbar buttonBar;
-    private GPMapToolsWidget scaleSelector;
+    private GPMapToolsWidget mapToolsWidget;
 
     public MapView(Controller controller) {
         super(controller);
@@ -74,7 +74,7 @@ public class MapView extends GeoPlatformView {
     public void initialize() {
         this.geocoderWidget = new GPGeocodingWidget(this.mapLayout);
         this.geocoderWidget.setPopupWidget(this.revGeoWidget.getPopupWidget());
-        this.scaleSelector = new GPMapToolsWidget(this.mapLayout);
+        this.mapToolsWidget = new GPMapToolsWidget(this.mapLayout);
     }
 
     /*

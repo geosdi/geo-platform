@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>plugin</artifactId>
-        <version>1.2-SNAPSHOT</version>
+        <version>1.3-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-print</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Print Module</name>

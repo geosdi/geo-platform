@@ -69,12 +69,12 @@ public class Geocoding implements EntryPoint {
 
         dispatcher.addController(new GeocodingController());
 
-        addGeocodingAction();
+        addReverseGeocodingAction();
 
         dispatcher.dispatch(GeocodingEvents.INIT_GEOCODING_WIDGET);
     }
 
-    private void addGeocodingAction() {
+    private void addReverseGeocodingAction() {
         // TODO Auto-generated method stub
         MenuActionRegistar.put("geocoding", new MenuActionCreator() {
 

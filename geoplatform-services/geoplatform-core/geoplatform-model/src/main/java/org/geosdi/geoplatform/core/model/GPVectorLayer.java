@@ -78,7 +78,7 @@ public class GPVectorLayer extends GPLayer {
     //
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private GPProject project = null;
+    private GPProject project;
 
     /**
      * @return the geometry

@@ -87,6 +87,9 @@ class ProjectServiceImpl {
     private GPAccountProjectDAO accountProjectDao;
     private GPFolderDAO folderDao;
     private GPLayerDAO layerDao;
+    //
+//    private int numberOfElements;
+    private int position;
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
@@ -274,28 +277,45 @@ class ProjectServiceImpl {
 
     public Long importProject(ProjectDTO projectDTO, Long accountID)
             throws IllegalParameterFault, ResourceNotFoundFault {
-        GPProject project = ProjectDTO.convertToGPProject(projectDTO);
-        EntityCorrectness.checkProject(project); // TODO assert
-        projectDao.persist(project);
-
-        List<FolderDTO> rootFolders = projectDTO.getRootFolders();
-        if (project.getNumberOfElements() > 0 && rootFolders == null) { // TODO assert
-            throw new IllegalParameterFault("Project have not root folders, but numberOfElements is greater than zero");
-        }
-        if (rootFolders != null) {
-            for (FolderDTO folderDTO : rootFolders) {
-                GPFolder folder = FolderDTO.convertToGPFolder(project, null, folderDTO);
-                EntityCorrectness.checkFolder(folder); // TODO assert
-                folderDao.persist(folder);
-                this.persistElementList(project, folder, folderDTO.getElementList());
-            }
-        }
         GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
 
+        GPProject project = ProjectDTO.convertToGPProject(projectDTO);
+        projectDao.persist(project);
+
+        List<FolderDTO> rootFolders = projectDTO.getRootFolders();
+        if (rootFolders == null) { // TODO assert
+            throw new IllegalParameterFault("Project have not root folders");
+        }
+
+        int numberOfElements = 0;
+        position = 0;
+        for (int i = rootFolders.size() - 1; i >= 0; i--) {
+            FolderDTO folderDTO = rootFolders.get(i);
+            GPFolder folder = FolderDTO.convertToGPFolder(project, null, folderDTO);
+
+            List<IElementDTO> childs = folderDTO.getElementList();
+            int numberOfDescendants = this.persistElementList(project, folder, childs);
+
+            logger.trace("\n\n*** Folder {} - Desc = {} ***\n\n", folder.getName(), numberOfDescendants);
+            folder.setNumberOfDescendants(numberOfDescendants);
+
+            folder.setPosition(++position);
+            logger.trace("*** Folder {} - pos = {}", folder.getName(), folder.getPosition());
+
+            EntityCorrectness.checkFolder(folder); // TODO assert
+            folderDao.persist(folder);
+
+            numberOfElements += numberOfDescendants + 1;
+        }
+
+        logger.trace("\n\n *** numberOfElements = {} ***\n\n", numberOfElements);
+        project.setNumberOfElements(numberOfElements);
+        EntityCorrectness.checkProject(project); // TODO assert
+        projectDao.merge(project);
+
         GPAccountProject accountProject = new GPAccountProject();
         accountProject.setAccountAndProject(account, project);
-
         accountProjectDao.persist(accountProject);
 
         return project.getId();
@@ -567,17 +587,33 @@ class ProjectServiceImpl {
         return childs;
     }
 
-    private void persistElementList(GPProject project, GPFolder parent,
-            List<IElementDTO> elementList) {
+    private int persistElementList(GPProject project, GPFolder parent,
+            List<IElementDTO> elementList) throws IllegalParameterFault {
+        int numberOfDescendants = 0;
 
-        for (IElementDTO element : elementList) {
+        for (int i = elementList.size() - 1; i >= 0; i--) {
+            IElementDTO element = elementList.get(i);
+
             if (element instanceof FolderDTO) { // Folder
                 FolderDTO folderDTO = (FolderDTO) element;
                 GPFolder folder = FolderDTO.convertToGPFolder(project, parent,
                         folderDTO);
+
+                List<IElementDTO> childs = folderDTO.getElementList();
+
+                int descendantsIth = this.persistElementList(project, folder, childs);
+                
+                logger.trace("\n\n*** FOLDER\t{} ***\n\n", folder.getName());
+                logger.trace("\n\n*** Desc = {} + DescIth = {} ***\n", numberOfDescendants, descendantsIth);                
+                folder.setNumberOfDescendants(descendantsIth);                              
+                
+                folder.setPosition(++position);
+                logger.trace("*** DescIth {} - pos = {}", folder.getName(), folder.getPosition());
+                
+                EntityCorrectness.checkFolder(folder); // TODO assert
                 folderDao.persist(folder);
 
-                this.persistElementList(project, folder, folderDTO.getElementList());
+                numberOfDescendants += descendantsIth + 1;
 
             } else { // Layer
                 GPLayer layer = null;
@@ -587,10 +623,70 @@ class ProjectServiceImpl {
                 } else {
                     layer = VectorLayerDTO.convertToGPVectorLayer(project, parent,
                             (VectorLayerDTO) element);
-
                 }
+
+                layer.setPosition(++position);
+                logger.trace("*** Layer {} - pos = {}", layer.getTitle(), layer.getPosition());
+
+                EntityCorrectness.checkLayer(layer); // TODO assert
                 layerDao.persist(layer);
+
+                numberOfDescendants++;
             }
         }
+        logger.trace("\n@@@ ELEMENT {}  ---  DESCENDANTS = {} @@@\n\n\n", parent.getName(), numberOfDescendants);
+        return numberOfDescendants;
+    }
+
+    public String checkNumberOfDescendantsByProjectID(Long projectID) throws ResourceNotFoundFault {
+        StringBuilder str = new StringBuilder("@@@ CHECK DESCENDANTS @@@");
+
+        ProjectDTO project = this.exportProject(projectID);
+        int numElements = 0;
+
+        List<FolderDTO> rootFolders = project.getRootFolders();
+        for (int i = rootFolders.size() - 1; i >= 0; i--) {
+            numElements += this.checkDesc(str, rootFolders.get(i)) + 1; // ADD Itself
+        }
+
+        if (project.getNumberOfElements() != numElements) {
+            str.append("\n\nNumberOfElements ERROR");
+            str.append(" - setted : ").append(project.getNumberOfElements());
+            str.append(" - real: ").append(numElements);
+        } else {
+            str.append("\n\nNumberOfElements OK");
+        }
+
+        return str.append("\n@@@ @@@ @@@").toString();
+
+    }
+
+    private int checkDesc(StringBuilder str, FolderDTO folder) {
+        int n = 0;
+        List<IElementDTO> elements = folder.getElementList();
+        for (int i = elements.size() - 1; i >= 0; i--) {
+            IElementDTO element = elements.get(i);
+            if (element instanceof FolderDTO) {
+                n += this.checkDesc(str, (FolderDTO) element) + 1; // ADD Itself
+            } else {
+                n++;
+            }
+        }
+
+        this.msgDesc(str, folder, n);
+
+        return n;
+    }
+
+    private StringBuilder msgDesc(StringBuilder str, FolderDTO folder, int numDesc) {
+        if (folder.getNumberOfDescendants() != numDesc) {
+            str.append("\nNumberOfDescendants ERROR for ").append(folder.getName());
+            str.append(" - setted : ").append(folder.getNumberOfDescendants());
+            str.append(" - real: ").append(numDesc);
+        } else {
+            str.append("\nNumberOfDescendants OK for ").append(folder.getName());
+            str.append(" [").append(numDesc).append("]");
+        }
+        return str;
     }
 }

@@ -251,6 +251,9 @@ public class EntityCorrectness {
         if (layer.getLayerType() == null) {
             throw new IllegalParameterFault("Layer \"layerType\" must be NOT NULL");
         }
+        if (layer.getPosition() < 1) {
+            throw new IllegalParameterFault("Layer \"position\" must be greater or equal 1");
+        }
     }
 
     public static void checkLayerListLog(List<GPLayer> layers) {

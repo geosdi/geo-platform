@@ -602,14 +602,14 @@ class ProjectServiceImpl {
                 List<IElementDTO> childs = folderDTO.getElementList();
 
                 int descendantsIth = this.persistElementList(project, folder, childs);
-                
+
                 logger.trace("\n\n*** FOLDER\t{} ***\n\n", folder.getName());
-                logger.trace("\n\n*** Desc = {} + DescIth = {} ***\n", numberOfDescendants, descendantsIth);                
-                folder.setNumberOfDescendants(descendantsIth);                              
-                
+                logger.trace("\n\n*** Desc = {} + DescIth = {} ***\n", numberOfDescendants, descendantsIth);
+                folder.setNumberOfDescendants(descendantsIth);
+
                 folder.setPosition(++position);
                 logger.trace("*** DescIth {} - pos = {}", folder.getName(), folder.getPosition());
-                
+
                 EntityCorrectness.checkFolder(folder); // TODO assert
                 folderDao.persist(folder);
 
@@ -636,57 +636,5 @@ class ProjectServiceImpl {
         }
         logger.trace("\n@@@ ELEMENT {}  ---  DESCENDANTS = {} @@@\n\n\n", parent.getName(), numberOfDescendants);
         return numberOfDescendants;
-    }
-
-    public String checkNumberOfDescendantsByProjectID(Long projectID) throws ResourceNotFoundFault {
-        StringBuilder str = new StringBuilder("@@@ CHECK DESCENDANTS @@@");
-
-        ProjectDTO project = this.exportProject(projectID);
-        int numElements = 0;
-
-        List<FolderDTO> rootFolders = project.getRootFolders();
-        for (int i = rootFolders.size() - 1; i >= 0; i--) {
-            numElements += this.checkDesc(str, rootFolders.get(i)) + 1; // ADD Itself
-        }
-
-        if (project.getNumberOfElements() != numElements) {
-            str.append("\n\nNumberOfElements ERROR");
-            str.append(" - setted : ").append(project.getNumberOfElements());
-            str.append(" - real: ").append(numElements);
-        } else {
-            str.append("\n\nNumberOfElements OK");
-        }
-
-        return str.append("\n@@@ @@@ @@@").toString();
-
-    }
-
-    private int checkDesc(StringBuilder str, FolderDTO folder) {
-        int n = 0;
-        List<IElementDTO> elements = folder.getElementList();
-        for (int i = elements.size() - 1; i >= 0; i--) {
-            IElementDTO element = elements.get(i);
-            if (element instanceof FolderDTO) {
-                n += this.checkDesc(str, (FolderDTO) element) + 1; // ADD Itself
-            } else {
-                n++;
-            }
-        }
-
-        this.msgDesc(str, folder, n);
-
-        return n;
-    }
-
-    private StringBuilder msgDesc(StringBuilder str, FolderDTO folder, int numDesc) {
-        if (folder.getNumberOfDescendants() != numDesc) {
-            str.append("\nNumberOfDescendants ERROR for ").append(folder.getName());
-            str.append(" - setted : ").append(folder.getNumberOfDescendants());
-            str.append(" - real: ").append(numDesc);
-        } else {
-            str.append("\nNumberOfDescendants OK for ").append(folder.getName());
-            str.append(" [").append(numDesc).append("]");
-        }
-        return str;
     }
 }

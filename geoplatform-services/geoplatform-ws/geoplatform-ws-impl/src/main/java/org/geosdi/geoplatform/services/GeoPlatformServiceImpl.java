@@ -515,12 +515,6 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
             throws ResourceNotFoundFault {
         projectServiceDelegate.setProjectOwner(request, true);
     }
-
-    @Override
-    public String checkNumberOfDescendantsByProjectID(Long projectID)
-            throws ResourceNotFoundFault {
-        return projectServiceDelegate.checkNumberOfDescendantsByProjectID(projectID);
-    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Folder">

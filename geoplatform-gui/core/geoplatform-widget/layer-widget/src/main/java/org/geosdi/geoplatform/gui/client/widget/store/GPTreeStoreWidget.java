@@ -35,11 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.store;
 
-import com.extjs.gxt.ui.client.core.FastMap;
 import com.extjs.gxt.ui.client.data.ModelData;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.action.ISave;
 
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
@@ -57,6 +55,7 @@ import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.FeatureInfoAddLayersServer;
 import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridElementEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
@@ -297,7 +296,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         raster.setTitle(layer.getTitle());
         raster.setBbox(layer.getBbox());
         raster.setLayerType(layer.getLayerType());
-        raster.setStyles(((GPRasterBean) layer).getStyles());
+        raster.setStyles(new ArrayList<GPStyleStringBeanModel>(((GPRasterBean) layer).getStyles()));
         return raster;
     }
 }

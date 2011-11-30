@@ -327,12 +327,6 @@ public interface GeoPlatformService {
     @HttpResource(location = "/project/{projectID}/forceowner/{accountID}")
     void forceProjectOwner(RequestByAccountProjectIDs request)
             throws ResourceNotFoundFault;
-
-    @Get
-    @HttpResource(location = "/projects/{projectID}")
-    @WebResult(name = "Project")
-    String checkNumberOfDescendantsByProjectID(@WebParam(name = "projectID") Long projectID)
-            throws ResourceNotFoundFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Folder">

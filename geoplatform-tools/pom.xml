@@ -31,6 +31,7 @@
     
     <modules>
         <module>geoplatform-configurator</module>
+        <module>geoplatform-wps-connector</module>
     </modules>
 
 </project>

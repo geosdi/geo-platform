@@ -118,7 +118,7 @@
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-epsg-wkt</artifactId>
-        </dependency>        
+        </dependency>
 
 	<!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>

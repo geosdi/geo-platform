@@ -44,6 +44,8 @@ import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.apache.ws.security.WSConstants;
 import org.apache.ws.security.handler.WSHandlerConstants;
+import org.geosdi.geoplatform.configurator.cxf.GPDummyLoggingInInterceptor;
+import org.geosdi.geoplatform.configurator.cxf.GPDummyLoggingOutInterceptor;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
@@ -67,8 +69,10 @@ public class GPServerWebServiceInterceptorStrategyFactory {
             return new LoggingInInterceptor();
         } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN_OUT.getValue())) {
             return new LoggingInInterceptor();
+        } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_OUT.getValue())) {
+            return new GPDummyLoggingInInterceptor();
         }
-        throw new IllegalArgumentException("Invalid parameter " + this.loggingStrategy + " specified in properties file");
+        throw new IllegalArgumentException("Invalid parameter " + this.loggingStrategy + " specified in properties file for IN interceptor of server");
     }
 
     public LoggingOutInterceptor getLoggingOutInterceptor() throws IllegalArgumentException {
@@ -76,8 +80,10 @@ public class GPServerWebServiceInterceptorStrategyFactory {
             return new LoggingOutInterceptor();
         } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN_OUT.getValue())) {
             return new LoggingOutInterceptor();
+        } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN.getValue())) {
+            return new GPDummyLoggingOutInterceptor();
         }
-        throw new IllegalArgumentException("Invalid parameter " + this.loggingStrategy + " specified in properties file");
+        throw new IllegalArgumentException("Invalid parameter " + this.loggingStrategy + " specified in properties file for OUT interceptor of server");
     }
 
     public WSS4JInInterceptor getSecurityInInterceptor() throws IllegalArgumentException {

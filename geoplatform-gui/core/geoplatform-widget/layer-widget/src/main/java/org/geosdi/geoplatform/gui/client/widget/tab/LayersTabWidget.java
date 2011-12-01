@@ -47,7 +47,7 @@ public class LayersTabWidget extends GenericCompositeTabWidget<GPLayerBean> {
 
     private DisplayLayersTabItem displayItem;
     private LayersInfoTabItem infoItem;
-    private StylesLayerTabItem wpsItem;
+    private StylesLayerTabItem stylesItem;
 
     public LayersTabWidget() {
         super(true);
@@ -63,7 +63,7 @@ public class LayersTabWidget extends GenericCompositeTabWidget<GPLayerBean> {
     public void createTabItems() {
         this.infoItem = new LayersInfoTabItem();
         this.displayItem = new DisplayLayersTabItem();
-        this.wpsItem = new StylesLayerTabItem();
+        this.stylesItem = new StylesLayerTabItem();
     }
 
     @Override
@@ -74,7 +74,7 @@ public class LayersTabWidget extends GenericCompositeTabWidget<GPLayerBean> {
     public void addComponents() {
         super.add(infoItem);
         super.add(displayItem);
-        super.add(wpsItem);
+        super.add(stylesItem);
         super.setSelection(infoItem);
     }
 
@@ -82,7 +82,7 @@ public class LayersTabWidget extends GenericCompositeTabWidget<GPLayerBean> {
     public void bind(GPLayerBean model) {
         this.infoItem.bindModel(model);
         this.displayItem.bindModel(model);
-        this.wpsItem.bindModel(model);
+        this.stylesItem.bindModel(model);
     }
 
 }

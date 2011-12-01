@@ -112,7 +112,6 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
     @Override
     public void addVectorLayersfromCapabilities(List<? extends GPLayerBean> layers) {
         this.changeProgressBarMessage("Load Vector Layers in the Store");
-        System.out.println("ADD VECTORS *********************** " + layers);
     }
 
     @Override

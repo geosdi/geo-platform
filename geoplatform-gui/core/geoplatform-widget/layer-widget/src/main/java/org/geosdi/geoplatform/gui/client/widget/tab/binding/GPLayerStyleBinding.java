@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab.binding;
 
-import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
@@ -43,8 +42,6 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
-import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;
@@ -69,6 +66,10 @@ public class GPLayerStyleBinding extends GeoPlatformBindingWidget<GPLayerBean> {
 
     @Override
     public FormPanel createFormPanel() {
+        FormPanel fp = new FormPanel();
+        fp.setHeaderVisible(false);
+        fp.setFrame(true);
+
         this.comboBox = new ComboBox<GPStyleStringBeanModel>() {
 
             @Override
@@ -77,19 +78,19 @@ public class GPLayerStyleBinding extends GeoPlatformBindingWidget<GPLayerBean> {
                 styleBinding.updateModel();
             }
         };
+
         this.comboBoxStore = new ListStore<GPStyleStringBeanModel>();
+        this.comboBox.setWidth(200);
         this.comboBox.setStore(this.comboBoxStore);
         this.comboBox.setEmptyText("Select a style...");
         this.comboBox.setTypeAhead(true);
         this.comboBox.setTriggerAction(TriggerAction.ALL);
         this.comboBox.setDisplayField(GPStyleStringKeyValue.StyleString.getValue());
+
         FieldSet fieldSet = new FieldSet();
         fieldSet.setHeading("Select a style");
-        FormPanel fp = new FormPanel();
-        fp.setHeaderVisible(false);
-        fp.setFrame(true);
-        fieldSet.setLayout(new FlowLayout());
-        fieldSet.add(this.comboBox, new BorderLayoutData(LayoutRegion.EAST));
+
+        fieldSet.add(this.comboBox);
         fp.add(fieldSet);
         this.styleBinding = new GPRasterComboStyleBinding(this.comboBox,
                 GPStyleStringKeyValue.StyleString.toString());

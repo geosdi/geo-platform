@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
+import javax.annotation.PreDestroy;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.jobs.EmailJob;
@@ -165,5 +166,10 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
                 build();
 
         scheduler.scheduleJob(jobTempAccount, trigger);
+    }
+
+    @PreDestroy
+    public void destroyScheduler() throws SchedulerException {
+        scheduler.shutdown();
     }
 }

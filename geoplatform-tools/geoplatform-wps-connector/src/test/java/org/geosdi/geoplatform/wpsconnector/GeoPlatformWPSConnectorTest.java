@@ -64,12 +64,12 @@ public class GeoPlatformWPSConnectorTest {
     public void test() {
         Assert.assertNotNull(gpWPSConnector);
         
-        logger.info("Number of Process ********************** " + gpWPSConnector.getWPSCapabilities().size());
-        
-        for (ProcessBriefType pbfT : gpWPSConnector.getWPSCapabilities()) {
-            logger.info("Process Abstract : ****************" + pbfT.getTitle().getValue());
-            logger.info("Process Identifier : ***********" + pbfT.getIdentifier().getValue());
-            logger.info("\n");
-        }
+//        logger.info("Number of Process ********************** " + gpWPSConnector.getWPSCapabilities().size());
+//        
+//        for (ProcessBriefType pbfT : gpWPSConnector.getWPSCapabilities()) {
+//            logger.info("Process Abstract : ****************" + pbfT.getTitle().getValue());
+//            logger.info("Process Identifier : ***********" + pbfT.getIdentifier().getValue());
+//            logger.info("\n");
+//        }
     }
 }

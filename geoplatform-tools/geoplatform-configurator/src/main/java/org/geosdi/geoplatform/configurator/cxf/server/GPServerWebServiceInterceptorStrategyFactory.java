@@ -82,6 +82,8 @@ public class GPServerWebServiceInterceptorStrategyFactory {
             return new LoggingOutInterceptor();
         } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN_OUT.getValue())) {
             return new LoggingOutInterceptor();
+        } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN.getValue())) {
+            return new GPDummyLoggingOutInterceptor();
         } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.NONE.getValue())) {
             return new GPDummyLoggingOutInterceptor();
         }

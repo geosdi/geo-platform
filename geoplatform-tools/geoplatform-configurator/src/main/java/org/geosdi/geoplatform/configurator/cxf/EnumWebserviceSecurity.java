@@ -41,6 +41,7 @@ package org.geosdi.geoplatform.configurator.cxf;
  */
 public enum EnumWebserviceSecurity {
     
+    NONE("NONE"),
     LOGGING_IN("LOGGING_IN"),
     LOGGING_OUT("LOGGING_OUT"),
     LOGGING_IN_OUT("LOGGING_IN_OUT"),

@@ -71,6 +71,8 @@ public class GPServerWebServiceInterceptorStrategyFactory {
             return new LoggingInInterceptor();
         } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_OUT.getValue())) {
             return new GPDummyLoggingInInterceptor();
+        } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.NONE.getValue())) {
+            return new GPDummyLoggingInInterceptor();
         }
         throw new IllegalArgumentException("Invalid parameter " + this.loggingStrategy + " specified in properties file for IN interceptor of server");
     }
@@ -80,7 +82,7 @@ public class GPServerWebServiceInterceptorStrategyFactory {
             return new LoggingOutInterceptor();
         } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN_OUT.getValue())) {
             return new LoggingOutInterceptor();
-        } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.LOGGING_IN.getValue())) {
+        } else if (this.loggingStrategy.equals(EnumWebserviceSecurity.NONE.getValue())) {
             return new GPDummyLoggingOutInterceptor();
         }
         throw new IllegalArgumentException("Invalid parameter " + this.loggingStrategy + " specified in properties file for OUT interceptor of server");

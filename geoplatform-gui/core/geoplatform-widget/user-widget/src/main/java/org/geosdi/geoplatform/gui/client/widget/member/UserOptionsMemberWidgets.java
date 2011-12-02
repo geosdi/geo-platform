@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
 /**
  *
@@ -49,8 +50,8 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
  */
 public class UserOptionsMemberWidgets extends UserOptionsMember {
 
-    public UserOptionsMemberWidgets(LayoutContainer container) {
-        super("Widgets", container);
+    public UserOptionsMemberWidgets(IGPUserManageDetail user, LayoutContainer container) {
+        super(user, "Widgets", container);
     }
 
     @Override

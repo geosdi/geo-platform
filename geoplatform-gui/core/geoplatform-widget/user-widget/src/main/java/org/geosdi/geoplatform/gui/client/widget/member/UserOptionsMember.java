@@ -47,6 +47,7 @@ import com.extjs.gxt.ui.client.widget.layout.BoxLayout.BoxLayoutPack;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout.VBoxLayoutAlign;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
 /**
  *
@@ -55,12 +56,16 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
  */
 public abstract class UserOptionsMember implements IUserOptionsMember {
 
+    private IGPUserManageDetail user;
+//    private FormBinding formBinding;
+    //
     private String name;
     private LayoutContainer container;
     private ContentPanel panelOption;
     private Button save;
 
-    public UserOptionsMember(String name, LayoutContainer container) {
+    public UserOptionsMember(IGPUserManageDetail user, String name, LayoutContainer container) {
+        this.user = user;
         this.name = name;
         this.container = container;
         this.createPanelOption();
@@ -75,10 +80,11 @@ public abstract class UserOptionsMember implements IUserOptionsMember {
     private void createPanelOption() {
         VBoxLayout layout = new VBoxLayout();
         layout.setPadding(new Padding(5));
-        layout.setVBoxLayoutAlign(VBoxLayoutAlign.CENTER);
-        layout.setPack(BoxLayoutPack.CENTER);
+        layout.setVBoxLayoutAlign(VBoxLayoutAlign.LEFT);
+        layout.setPack(BoxLayoutPack.START);
 
         panelOption = new ContentPanel(layout);
+        panelOption.setHeaderVisible(false);
 
         this.creteLayoutData(panelOption);
     }
@@ -92,7 +98,7 @@ public abstract class UserOptionsMember implements IUserOptionsMember {
                         saveOptions();
                     }
                 });
-        
+
         panelOption.addButton(save);
     }
 
@@ -116,5 +122,13 @@ public abstract class UserOptionsMember implements IUserOptionsMember {
         container.removeAll();
         container.add(panelOption);
         container.layout();
+    }
+
+    public IGPUserManageDetail getUser() {
+        return user;
+    }
+
+    public void setUser(IGPUserManageDetail user) {
+        this.user = user;
     }
 }

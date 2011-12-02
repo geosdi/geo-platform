@@ -165,6 +165,12 @@ public class UserService implements IUserService {
         }
     }
 
+    @Override
+    public IGPUserManageDetail getOwnUser(HttpServletRequest httpServletRequest) {
+        GPUser user = this.getCheckLoggedUser(httpServletRequest);
+        return this.convertToGPUserManageDetail(user);
+    }
+
     // All properties unless the password
     private GPUserManageDetail convertToGPUserManageDetail(UserDTO userDTO) {
         GPUserManageDetail user = new GPUserManageDetail();
@@ -183,6 +189,28 @@ public class UserService implements IUserService {
         if (iterator.hasNext()) {
             String authority = iterator.next();
             return GPRole.fromString(authority);
+        }
+        return GPRole.VIEWER;
+    }
+
+    // All properties unless the password
+    private GPUserManageDetail convertToGPUserManageDetail(GPUser gpUser) {
+        GPUserManageDetail user = new GPUserManageDetail();
+        user.setId(gpUser.getId());
+        user.setName(gpUser.getName());
+        user.setUsername(gpUser.getUsername());
+        user.setEmail(gpUser.getEmailAddress());
+        user.setTemporary(gpUser.isAccountTemporary());
+        user.setAuthority(this.convertToGPAuthorities(gpUser.getGPAuthorities()));
+        return user;
+    }
+
+    // NOTE: Now a user must have at most one role
+    private GPRole convertToGPAuthorities(List<GPAuthority> authorities) {
+        Iterator<GPAuthority> iterator = authorities.iterator();
+        if (iterator.hasNext()) {
+            GPAuthority authority = iterator.next();
+            return GPRole.fromString(authority.getAuthority());
         }
         return GPRole.VIEWER;
     }

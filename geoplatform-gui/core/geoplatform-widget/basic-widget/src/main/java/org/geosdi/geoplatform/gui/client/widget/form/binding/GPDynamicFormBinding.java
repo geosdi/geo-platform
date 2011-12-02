@@ -69,7 +69,7 @@ public abstract class GPDynamicFormBinding<T extends GeoPlatformBeanModel>
      * 
      */
     public abstract void addFieldsBinding();
-    
+
     public void showForm() {
         super.init();
         this.bind();

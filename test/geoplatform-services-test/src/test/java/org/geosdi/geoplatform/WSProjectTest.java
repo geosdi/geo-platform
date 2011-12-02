@@ -94,6 +94,27 @@ public class WSProjectTest extends ServiceTest {
     GPVectorLayer vectorFolder3A;
     GPVectorLayer vectorRootFolderB;
 
+    /**
+     * Tree structure to test
+     * 
+     * A -|
+     *    + raster-A
+     *    + 1A ---------|
+     *                  + 2A -------|
+     *                              + 3A -------|
+     *                                          + vector-3A
+     *                              + 3B
+     *                              + 3C
+     *                  + 2B
+     *                  + 2C -------|
+     *                              + raster-2C
+     * 
+     *    + 1B ---------|
+     *                  + raster-1B
+     *    + 1C
+     * B -|
+     *    + vector-B
+     */
     @Override
     public void setUp() throws Exception {
         super.setUp();

@@ -109,7 +109,7 @@ public abstract class GenericFormWidget
     }
 
     /**
-     * Set the correct Status Iconn Style
+     * Set the correct Status Icon Style
      */
     public void setStatus(String status, String message) {
         saveStatus.setIconStyle(status);

@@ -92,4 +92,10 @@ public interface UserRemote extends RemoteService {
      * @throws GeoPlatformException 
      */
     boolean deleteUser(Long userID) throws GeoPlatformException;
+
+    /**
+     * 
+     * @return 
+     */
+    IGPUserManageDetail getOwnUser();
 }

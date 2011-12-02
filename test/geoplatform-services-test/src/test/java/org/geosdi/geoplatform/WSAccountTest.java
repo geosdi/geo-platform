@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.AccountExpiredFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.request.LikePatternType;
@@ -111,13 +112,9 @@ public class WSAccountTest extends ServiceTest {
         Assert.assertEquals("Error found GPUser from Username", idUserTest, userFromWS.getId().longValue());
     }
 
-    @Test
-    public void testInsertUserWithNoRoles() {
-        try {
-            super.createAndInsertUser("user-no-roles");
-            Assert.fail("User must have at least a role");
-        } catch (IllegalParameterFault ex) {
-        }
+    @Test(expected = IllegalParameterFault.class)
+    public void testInsertUserWithNoRoles() throws IllegalParameterFault {
+        super.createAndInsertUser("user-no-roles");
     }
 
     @Test

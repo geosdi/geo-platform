@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
 /**
  *
@@ -49,8 +50,8 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
  */
 public class UserOptionsMemberDisk extends UserOptionsMember {
 
-    public UserOptionsMemberDisk(LayoutContainer container) {
-        super("Disk", container);
+    public UserOptionsMemberDisk(IGPUserManageDetail user, LayoutContainer container) {
+        super(user, "Disk", container);
     }
 
     @Override

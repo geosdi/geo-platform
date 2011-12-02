@@ -33,7 +33,11 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.geocoding.plugin;
+package org.geosdi.geoplatform.gui.client.plugin;
+
+import com.extjs.gxt.ui.client.widget.TabItem;
+import org.geosdi.geoplatform.gui.client.widget.GeocodingGridWidget;
+import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GPAdvancedGeocoderPlugin;
 
 /**
  *
@@ -41,7 +45,19 @@ package org.geosdi.geoplatform.gui.configuration.geocoding.plugin;
  * @email  giuseppe.lascaleia@geosdi.org
  *
  */
-public enum GeocoderPluginType {
+public class GPGoogleGeocoderPlugin extends GPAdvancedGeocoderPlugin {
+    
+    private GeocodingGridWidget gridWidget;
 
-    SIMPLE, ADVANCED, ADVANCED_WITH_GOOGLE;
+    @Override
+    public void buildPluginWidget() {
+        super.tabItem = new TabItem("Google Geocoder");
+        this.gridWidget = new GeocodingGridWidget();
+        super.tabItem.add(gridWidget.getWidget());
+    }
+
+    @Override
+    public void widgetResized(int dimension) {
+       gridWidget.widgetResized(dimension);
+    }
 }

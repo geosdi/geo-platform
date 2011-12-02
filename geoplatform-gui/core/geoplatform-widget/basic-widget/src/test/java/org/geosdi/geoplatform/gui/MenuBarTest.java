@@ -52,20 +52,20 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "applicationContext-TEST.xml" })
+@ContextConfiguration(locations = {"applicationContext-TEST.xml"})
 public class MenuBarTest {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    @Autowired
+    private IMenuBarContainerTool menuBarContainerTool;
 
-	@Autowired
-	private IMenuBarContainerTool menuBarContainerTool;
+    @Test
+    public void test() {
+        assertNotNull(menuBarContainerTool);
 
-	@Test
-	public void test() {
-		assertNotNull(menuBarContainerTool);
-
-		for (MenuBarCategory category : menuBarContainerTool.getCategories()) {
-			logger.info("MENU ******************** " + category.toString());
-		}
-	}
+        for (MenuBarCategory category : menuBarContainerTool.getCategories()) {
+            logger.info("MENU ******************** " + category.toString());
+        }
+    }
 }

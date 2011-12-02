@@ -35,13 +35,28 @@
  */
 package org.geosdi.geoplatform.gui.configuration.geocoding.plugin;
 
+import com.extjs.gxt.ui.client.widget.TabItem;
+import com.google.gwt.user.client.ui.Widget;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  *
  */
-public enum GeocoderPluginType {
+public abstract class GPAdvancedGeocoderPlugin
+        implements IGPGeocoderPlugin<TabItem> {
 
-    SIMPLE, ADVANCED, ADVANCED_WITH_GOOGLE;
+    protected TabItem tabItem;
+
+    public GPAdvancedGeocoderPlugin() {
+        buildPluginWidget();
+    }
+
+    @Override
+    public TabItem getWidget() {
+        return tabItem;
+    }
+
+    public abstract void buildPluginWidget();
 }

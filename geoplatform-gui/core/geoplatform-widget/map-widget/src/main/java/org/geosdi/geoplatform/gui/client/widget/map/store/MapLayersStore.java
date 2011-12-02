@@ -177,7 +177,6 @@ public class MapLayersStore extends GPMapLayersStore<GPLayerBean, Layer> {
 
     @Override
     public void resetStore() {
-        System.out.println("CODICE ESEGUITO RESET STRORE *******************");
         for (Iterator<Layer> it = layers.values().iterator(); it.hasNext();) {
             Layer layer = it.next();
             this.mapWidget.getMap().removeLayer(layer);

@@ -239,7 +239,7 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
     
     @Override
     public void widgetResized(int dimension) {
-        this.grid.setHeight(dimension);
+        this.grid.setHeight(dimension - 165);
     }
 
     /**

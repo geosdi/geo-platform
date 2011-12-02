@@ -54,14 +54,17 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.xml.sax.SAXException;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
+ *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"applicationContext-TEST.xml"})
 public class ReverseGeocoderTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
     @Autowired
     private IReverseGeocoding reverseGeoding;
 

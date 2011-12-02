@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.plugin;
 
+import com.extjs.gxt.ui.client.widget.TabPanel;
+import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GPAdvancedGeocoderPlugin;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GeocoderPluginType;
-import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPlugin;
 import org.geosdi.geoplatform.gui.plugin.geocoding.GPGeocoderPluginManager;
 
 /**
@@ -45,41 +46,58 @@ import org.geosdi.geoplatform.gui.plugin.geocoding.GPGeocoderPluginManager;
  * @email  giuseppe.lascaleia@geosdi.org
  *
  */
-public class AdvancedGeocoderPluginManager<T extends IGPGeocoderPlugin>
-        extends GPGeocoderPluginManager<T> {
-
-    @Override
-    public GeocoderPluginType getGecoderPluginType() {
-        return GeocoderPluginType.ADVANCED;
+public class AdvancedGeocoderPluginManager
+        extends GPGeocoderPluginManager<GPAdvancedGeocoderPlugin> {
+    
+    private TabPanel tabPanel;
+    
+    public AdvancedGeocoderPluginManager(GeocoderPluginType theType) {
+        super(theType);
+        this.initPluginManager();
     }
-
+    
     @Override
-    public void addPlugin(T plugin) {
+    public void addPlugin(GPAdvancedGeocoderPlugin plugin) {
         this.getGeocoderPlugins().add(plugin);
     }
-
+    
     @Override
-    public void removePlugin(T plugin) {
+    public void removePlugin(GPAdvancedGeocoderPlugin plugin) {
         this.getGeocoderPlugins().remove(plugin);
     }
-
+    
     @Override
     public void managePluginsProperties(int dimension) {
-        
+        for (GPAdvancedGeocoderPlugin plugin : getGeocoderPlugins()) {
+            plugin.widgetResized(dimension);
+        }
     }
-
-    @Override
-    public boolean isPluginManagerInitialized() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
+    
     @Override
     public void buildPlugins() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (!isPluginManagerInitialized()) {
+            for (GPAdvancedGeocoderPlugin plugin : getGeocoderPlugins()) {
+                this.tabPanel.add(plugin.getWidget());
+            }
+            super.initialized = true;
+        }
     }
-
+    
     @Override
-    public <T> T getWidget() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public TabPanel getWidget() {
+        return this.tabPanel;
+    }
+    
+    private void initPluginManager() {
+        this.buildTabPanel();
+        if (super.type.equals(GeocoderPluginType.ADVANCED_WITH_GOOGLE)) {
+            addPlugin(new GPGoogleGeocoderPlugin());
+        }
+    }
+    
+    private void buildTabPanel() {
+        this.tabPanel = new TabPanel();
+        this.tabPanel.setAutoHeight(true);
+        this.tabPanel.setAutoWidth(true);
     }
 }

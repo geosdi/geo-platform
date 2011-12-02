@@ -86,8 +86,13 @@ public class GeoPlatformGeocoderFactory implements GeocoderFactory {
                 pluginManager = new SimpleGeocoderPluginManagerImpl();
                 break;
             case ADVANCED:
-                pluginManager = new AdvancedGeocoderPluginManager();
+                pluginManager = new AdvancedGeocoderPluginManager(GeocoderPluginType.ADVANCED);
                 break;
+            case ADVANCED_WITH_GOOGLE:
+                pluginManager = new AdvancedGeocoderPluginManager(GeocoderPluginType.ADVANCED_WITH_GOOGLE);
+                break;
+            default:
+                pluginManager = new SimpleGeocoderPluginManagerImpl();
         }
 
         GeoPlatformGeocoderRepository.getInstance().bindPlugin(pluginManager);

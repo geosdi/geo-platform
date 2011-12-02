@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.plugin.geocoding;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GeocoderPluginType;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPlugin;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPAdvancedGeocoderPluginManager;
 
@@ -49,10 +50,23 @@ import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPAdvancedGeoc
 public abstract class GPGeocoderPluginManager<T extends IGPGeocoderPlugin>
         implements IGPAdvancedGeocoderPluginManager<T> {
 
+    protected boolean initialized;
+    protected GeocoderPluginType type;
     private List<T> geocoderPlugins;
 
-    protected GPGeocoderPluginManager() {
+    protected GPGeocoderPluginManager(GeocoderPluginType theType) {
+        this.type = theType;
         this.geocoderPlugins = new ArrayList<T>();
+    }
+
+    @Override
+    public boolean isPluginManagerInitialized() {
+        return initialized;
+    }
+
+    @Override
+    public GeocoderPluginType getGecoderPluginType() {
+        return type;
     }
 
     /**

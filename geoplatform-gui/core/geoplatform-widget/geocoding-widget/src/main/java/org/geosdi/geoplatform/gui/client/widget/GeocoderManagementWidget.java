@@ -68,7 +68,7 @@ public class GeocoderManagementWidget extends ContentPanel {
             public void widgetResized(ComponentEvent ce) {
                 if ((getHeight() > 0)
                         && (geocoderPluginManager.isPluginManagerInitialized())) {
-                    geocoderPluginManager.managePluginsProperties(getHeight() - 165);
+                    geocoderPluginManager.managePluginsProperties(getHeight());
                 }
 
             }

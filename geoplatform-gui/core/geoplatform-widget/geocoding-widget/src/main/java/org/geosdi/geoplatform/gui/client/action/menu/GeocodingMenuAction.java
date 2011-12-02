@@ -70,7 +70,7 @@ public class GeocodingMenuAction extends MenuCheckAction {
 
         if (item.isChecked()) {
             Dispatcher.forwardEvent(GeocodingEvents.SHOW_GEOCODING_WIDGET,
-                    GeocoderPluginType.SIMPLE);
+                    GeocoderPluginType.ADVANCED_WITH_GOOGLE);
         } else {
             Dispatcher.forwardEvent(GeocodingEvents.HIDE_GEOCODING_WIDGET);
         }

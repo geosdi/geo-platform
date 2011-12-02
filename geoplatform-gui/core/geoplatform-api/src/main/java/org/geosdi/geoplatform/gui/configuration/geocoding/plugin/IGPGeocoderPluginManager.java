@@ -51,5 +51,5 @@ public interface IGPGeocoderPluginManager {
 
     void buildPlugins();
     
-    <T> T getWidget();
+    <W> W getWidget();
 }

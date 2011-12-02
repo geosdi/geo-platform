@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
 
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
+import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
@@ -99,8 +100,10 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
         FieldSet searchFieldSet = new FieldSet();
         searchFieldSet.setHeading("Search");
         
+        searchFieldSet.setWidth(350);
+        
         FormLayout layout = new FormLayout();
-        layout.setLabelWidth(60);
+        layout.setLabelWidth(80);
         searchFieldSet.setLayout(layout);
         
         search = new TextField<String>();
@@ -127,16 +130,15 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
             }
         });
         
-        BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
-        data.setMargins(new Margins(5, 5, 5, 5));
-        
-        searchFieldSet.add(search, data);
+        searchFieldSet.add(search);
         
         formPanel.add(searchFieldSet);
         
         FieldSet locations = new FieldSet();
         locations.setHeading("Locations");
         locations.setCollapsible(true);
+        
+        locations.setWidth(350);
         
         locations.add(this.grid);
         

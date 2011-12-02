@@ -1,0 +1,30 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    <ui:style>
+		
+    </ui:style>
+    <g:HTMLPanel>
+        <div class="sign-in">
+            <div class="signin-box">
+                <h2>
+					Welcome at WiNG
+                    <strong></strong>
+                </h2>
+                <strong class="email-label">
+                    <g:Label>EMail</g:Label>
+                </strong>
+                <g:TextBox ui:field="userName" width="16em"></g:TextBox>
+                <strong class="passwd-label">
+                    <g:Label>Password</g:Label>
+                </strong>
+                <g:PasswordTextBox ui:field="password" width="16	em"
+					>
+                </g:PasswordTextBox>
+                <p></p>
+                <g:Button ui:field="login">Login</g:Button>
+                <g:Button ui:field="reset">Reset</g:Button>
+            </div>
+        </div>
+    </g:HTMLPanel>
+</ui:UiBinder>

@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.gui.client.widget.security;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
@@ -49,21 +51,26 @@ import com.google.gwt.user.client.ui.Widget;
  * @email francesco.izzi@geosdi.org
  */
 public class GPAdvancedSecurityWidget extends VerticalPanel {
+
     private static LoginUiBinder uiBinder = GWT.create(LoginUiBinder.class);
-
-    interface LoginUiBinder extends UiBinder<Widget, GPAdvancedSecurityWidget> {}
-
+    //
+    @UiTemplate("GPAdvancedSecurityWidget.ui.xml")
+    interface LoginUiBinder extends UiBinder<Widget, GPAdvancedSecurityWidget> {
+    }
+    //
     @UiField
     TextBox username;
+    //
     @UiField
     PasswordTextBox password;
+    //
     @UiField
     Button login;
-    
+    //
     @UiField
     Button cancel;
 
     public GPAdvancedSecurityWidget() {
-       add(uiBinder.createAndBindUi(this));
+        add(uiBinder.createAndBindUi(this));
     }
 }

@@ -58,7 +58,7 @@ public class SimpleGeocoderPluginManagerImpl
 
     @Override
     public void managePluginsProperties(int dimension) {
-        this.widget.widgetResized(dimension);
+        this.widget.widgetResized(dimension - 165);
     }
 
     @Override

@@ -82,6 +82,8 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
     
     private FormPanel formPanel;
     private TextField<String> search;
+    private FieldSet searchFieldSet;
+    private FieldSet locations;
     private PerformOperation operation = new PerformOperation();
     private GPGeocodingRemoveMarkerEvent event = new GPGeocodingRemoveMarkerEvent();
     
@@ -97,13 +99,11 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
         formPanel.setFrame(true);
         formPanel.setLayout(new FlowLayout());
         
-        FieldSet searchFieldSet = new FieldSet();
+        searchFieldSet = new FieldSet();
         searchFieldSet.setHeading("Search");
         
-        searchFieldSet.setWidth(350);
-        
         FormLayout layout = new FormLayout();
-        layout.setLabelWidth(80);
+        layout.setLabelWidth(60);
         searchFieldSet.setLayout(layout);
         
         search = new TextField<String>();
@@ -134,11 +134,9 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
         
         formPanel.add(searchFieldSet);
         
-        FieldSet locations = new FieldSet();
+        locations = new FieldSet();
         locations.setHeading("Locations");
         locations.setCollapsible(true);
-        
-        locations.setWidth(350);
         
         locations.add(this.grid);
         
@@ -241,7 +239,17 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
     
     @Override
     public void widgetResized(int dimension) {
-        this.grid.setHeight(dimension - 165);
+        this.grid.setHeight(dimension);
+    }
+    
+    /**
+     * Method to set With for Field Set for Advanced Plugin Geocoder
+     * 
+     * @param size 
+     */
+    public void setFieldsSetWith(int size) {
+        this.searchFieldSet.setWidth(size);
+        this.locations.setWidth(size);
     }
 
     /**

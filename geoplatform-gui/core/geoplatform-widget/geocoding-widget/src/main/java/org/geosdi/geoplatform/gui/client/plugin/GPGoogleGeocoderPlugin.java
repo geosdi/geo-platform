@@ -46,18 +46,19 @@ import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GPAdvancedGeoco
  *
  */
 public class GPGoogleGeocoderPlugin extends GPAdvancedGeocoderPlugin {
-    
+
     private GeocodingGridWidget gridWidget;
 
     @Override
     public void buildPluginWidget() {
         super.tabItem = new TabItem("Google Geocoder");
         this.gridWidget = new GeocodingGridWidget();
+        this.gridWidget.setFieldsSetWith(308);
         super.tabItem.add(gridWidget.getWidget());
     }
 
     @Override
     public void widgetResized(int dimension) {
-       gridWidget.widgetResized(dimension);
+        gridWidget.widgetResized(dimension - 203);
     }
 }

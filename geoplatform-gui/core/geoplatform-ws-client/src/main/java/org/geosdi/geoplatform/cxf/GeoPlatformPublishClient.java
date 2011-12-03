@@ -37,8 +37,6 @@ package org.geosdi.geoplatform.cxf;
 
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
-import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;

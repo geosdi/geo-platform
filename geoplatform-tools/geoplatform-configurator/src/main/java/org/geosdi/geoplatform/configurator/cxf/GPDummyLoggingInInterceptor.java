@@ -53,8 +53,5 @@ public class GPDummyLoggingInInterceptor extends LoggingInInterceptor {
 
     @Override
     public void handleMessage(Message message) throws Fault {}
-
-    @Override
-    protected void logging(Message message) throws Fault {}
     
 }

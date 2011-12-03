@@ -53,12 +53,12 @@ public class GPGoogleGeocoderPlugin extends GPAdvancedGeocoderPlugin {
     public void buildPluginWidget() {
         super.tabItem = new TabItem("Google Geocoder");
         this.gridWidget = new GeocodingGridWidget();
-        this.gridWidget.setFieldsSetWith(308);
+        this.gridWidget.setFieldsSetWith(305);
         super.tabItem.add(gridWidget.getWidget());
     }
 
     @Override
     public void widgetResized(int dimension) {
-        gridWidget.widgetResized(dimension - 203);
+        gridWidget.widgetResized(dimension - 200);
     }
 }

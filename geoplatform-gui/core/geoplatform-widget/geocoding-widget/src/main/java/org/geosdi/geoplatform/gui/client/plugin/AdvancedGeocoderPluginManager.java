@@ -97,7 +97,6 @@ public class AdvancedGeocoderPluginManager
     
     private void buildTabPanel() {
         this.tabPanel = new TabPanel();
-        this.tabPanel.setAutoHeight(true);
         this.tabPanel.setAutoWidth(true);
     }
 }

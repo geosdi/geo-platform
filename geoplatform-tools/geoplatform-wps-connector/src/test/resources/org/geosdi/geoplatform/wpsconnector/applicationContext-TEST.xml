@@ -10,7 +10,7 @@
     <context:annotation-config />
 
     <bean name="gpWPSConnector" class="org.geosdi.geoplatform.wpsconnector.GeoPlatformWPSConnector">
-        <constructor-arg value="http://localhost:8080/geoserver/ows?service=WPS&amp;request=GetCapabilities"/>
+        <constructor-arg value="http://150.146.160.50/geoserver/ows?service=WPS&amp;request=GetCapabilities"/>
     </bean>
 
 </beans>

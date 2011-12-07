@@ -33,92 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.grid;
-
-import com.extjs.gxt.ui.client.data.ModelData;
-import java.util.List;
-
-import org.geosdi.geoplatform.gui.configuration.grid.IGeoPlatformGrid;
-
-import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
+package org.geosdi.geoplatform.gui.configuration.geocoding;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
+ *
  */
-public abstract class GeoPlatformGridWidget<T extends ModelData>
-        implements IGeoPlatformGrid<T> {
-
-    protected ListStore<T> store;
-    protected Grid<T> grid;
-    private boolean initialized;
-
-    /**
-     *
-     * @param lazy
-     */
-    public GeoPlatformGridWidget(boolean lazy) {
-        if (!lazy) {
-            init();
-        }
-    }
-
-    public void init() {
-        if (!isInitialized()) {
-            createStore();
-            initGrid();
-            this.initialized = true;
-        }
-    }
-
-    /**
-     *
-     * @param models
-     *            Beans Model to fill the Store
-     */
-    public GeoPlatformGridWidget(List<T> models) {
-        createStore();
-        this.store.add(models);
-        initGrid();
-    }
-
-    private void initGrid() {
-        ColumnModel cm = prepareColumnModel();
-
-        grid = new Grid<T>(store, cm);
-        grid.setBorders(true);
-
-        setGridProperties();
-    }
-
-    public abstract void setGridProperties();
-
-    public abstract ColumnModel prepareColumnModel();
-
-    public abstract void createStore();
-
-    /**
-     * @return the store
-     */
-    @Override
-    public ListStore<T> getStore() {
-        return store;
-    }
-
-    /**
-     * @return the grid
-     */
-    @Override
-    public Grid<T> getGrid() {
-        return grid;
-    }
-
-    /**
-     * @return the initialized
-     */
-    public boolean isInitialized() {
-        return initialized;
-    }
+public interface IGPGeoCoderPerformOperation {
+    
+    void onBeginGeocodingSearch(String searchValue);
+    
+    void findLocations(String location);
+    
+    void cleanStore();
+    
 }

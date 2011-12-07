@@ -59,7 +59,8 @@ import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LoginWidget extends GPSecurityWidget implements ILoginManager {
+public class LoginWidget extends GPSecurityWidget
+        implements ILoginManager {
 
     private final static int MAX_NUMBER_ATTEMPTS = 5;
     private LoginStatus status;

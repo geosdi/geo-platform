@@ -42,8 +42,6 @@ import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
 
-import com.extjs.gxt.ui.client.Style.LayoutRegion;
-import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
@@ -51,13 +49,11 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
@@ -70,6 +66,7 @@ import org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt.event.GPGeoco
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPlugin;
 import org.geosdi.geoplatform.gui.configuration.grid.IGeoPlatformGrid;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.geocoder.GeoCoderPerformOperation;
 import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
 /**
@@ -79,38 +76,38 @@ import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
  */
 public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
         implements IGPGeocoderPlugin<FormPanel> {
-    
+
     private FormPanel formPanel;
     private TextField<String> search;
     private FieldSet searchFieldSet;
     private FieldSet locations;
-    private PerformOperation operation = new PerformOperation();
+    private GooglePerformOperation operation = new GooglePerformOperation();
     private GPGeocodingRemoveMarkerEvent event = new GPGeocodingRemoveMarkerEvent();
-    
+
     public GeocodingGridWidget() {
         super(false);
         initFormPanel();
     }
-    
+
     private void initFormPanel() {
         // TODO Auto-generated method stub
         formPanel = new FormPanel();
         formPanel.setHeaderVisible(false);
         formPanel.setFrame(true);
         formPanel.setLayout(new FlowLayout());
-        
+
         searchFieldSet = new FieldSet();
         searchFieldSet.setHeading("Search");
-        
+
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(60);
         searchFieldSet.setLayout(layout);
-        
+
         search = new TextField<String>();
         search.setFieldLabel("Find");
-        
+
         search.addKeyListener(new KeyListener() {
-            
+
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
@@ -120,7 +117,7 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
                     cleanUpTheStore();
                 }
             }
-            
+
             @Override
             public void componentKeyPress(ComponentEvent event) {
                 if ((event.getKeyCode() == KeyCodes.KEY_ENTER)
@@ -129,33 +126,33 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
                 }
             }
         });
-        
+
         searchFieldSet.add(search);
-        
+
         formPanel.add(searchFieldSet);
-        
+
         locations = new FieldSet();
         locations.setHeading("Locations");
         locations.setCollapsible(true);
-        
+
         locations.add(this.grid);
-        
+
         formPanel.add(locations);
     }
-    
+
     @Override
     public void setGridProperties() {
         // TODO Auto-generated method stub
         grid.setAutoExpandColumn(GeocodingKeyValue.DESCRIPTION.getValue());
         grid.setBorders(false);
-        
+
         grid.getView().setForceFit(true);
         grid.setLoadMask(true);
-        
+
         grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        
+
         grid.addListener(Events.CellDoubleClick, new Listener<BaseEvent>() {
-            
+
             @Override
             public void handleEvent(BaseEvent be) {
                 GPGeocodingHandlerManager.fireEvent(
@@ -163,21 +160,21 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
             }
         });
     }
-    
+
     @Override
     public ColumnModel prepareColumnModel() {
         // TODO Auto-generated method stub
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
-        
+
         ColumnConfig column = new ColumnConfig();
         column.setId(GeocodingKeyValue.DESCRIPTION.getValue());
         column.setHeader("Location");
         column.setWidth(240);
         configs.add(column);
-        
+
         return new ColumnModel(configs);
     }
-    
+
     @Override
     public void createStore() {
         // TODO Auto-generated method stub
@@ -227,21 +224,21 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
     public FormPanel getFormPanel() {
         return formPanel;
     }
-    
+
     private void removeMarkersOnMap() {
         GPGeocodingHandlerManager.fireEvent(event);
     }
-    
+
     @Override
     public FormPanel getWidget() {
         return this.getFormPanel();
     }
-    
+
     @Override
     public void widgetResized(int dimension) {
         this.grid.setHeight(dimension);
     }
-    
+
     /**
      * Method to set With for Field Set for Advanced Plugin Geocoder
      * 
@@ -256,11 +253,13 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
      * Internal Class for Business Logic
      * 
      */
-    private class PerformOperation implements GeocodingSearchEventHandler {
-        
+    private class GooglePerformOperation extends GeoCoderPerformOperation<GeocodingGridWidget>
+            implements GeocodingSearchEventHandler {
+
         private GeocodingRemoteAsync geocodingService = GeocodingRemote.Util.getInstance();
-        
-        public PerformOperation() {
+
+        public GooglePerformOperation() {
+            super(GeocodingGridWidget.this);
             GPGeocodingHandlerManager.addHandler(GeocodingSearchEventHandler.TYPE, this);
         }
 
@@ -269,7 +268,8 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
          *
          * @param event
          */
-        private void onBeginGeocodingSearch(String searchValue) {
+        @Override
+        public void onBeginGeocodingSearch(String searchValue) {
             // TODO Auto-generated method stub
             checkWidgetStatus();
             findLocations(searchValue);
@@ -278,13 +278,14 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
         /**
          *
          */
-        @SuppressWarnings({"unchecked", "rawtypes"})
-        private void checkWidgetStatus() {
+        @Override
+        public void checkWidgetStatus() {
             // TODO Auto-generated method stub
             GeoPlatformMessage.checkGridWidgetStatus(
-                    (IGeoPlatformGrid) GeocodingGridWidget.this,
+                    (IGeoPlatformGrid) gridWidget,
                     "Geocoding - Service",
-                    "Geocoding Service is demanding too much time, probably the connection problem, do you want to stop it?");
+                    "Geocoding Service is demanding too much time, probably "
+                    + "the connection problem, do you want to stop it?");
         }
 
         /**
@@ -292,46 +293,40 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
          * @param location
          *            to find
          */
+        @Override
         public void findLocations(String location) {
-            GeocodingGridWidget.this.maskGrid();
+            gridWidget.maskGrid();
             cleanStore();
             this.geocodingService.findLocations(location,
                     new AsyncCallback<ArrayList<GeocodingBean>>() {
-                        
+
                         @Override
                         public void onSuccess(ArrayList<GeocodingBean> result) {
                             // TODO Auto-generated method stub
                             ArrayList<GeocodingBean> beans = (ArrayList<GeocodingBean>) result;
-                            GeocodingGridWidget.this.unMaskGrid();
+                            gridWidget.unMaskGrid();
                             if (result != null && result.size() > 0) {
-                                GeocodingGridWidget.this.fillStore(beans);
+                                gridWidget.fillStore(beans);
                             } else {
                                 GeoPlatformMessage.alertMessage(
                                         "Geocoding - Service",
                                         "There are no results for your search.");
                             }
-                            
+
                         }
-                        
+
                         @Override
                         public void onFailure(Throwable caught) {
                             // TODO Auto-generated method stub
-                            GeocodingGridWidget.this.unMaskGrid();
-                            GeocodingGridWidget.this.getGrid().getView().refresh(false);
+                            gridWidget.unMaskGrid();
+                            grid.getView().refresh(false);
                             GeoPlatformMessage.errorMessage("Geocoding - Service",
                                     "There is a problem with Geocoding Service");
-                            
+
                         }
                     });
         }
 
-        /**
-         * Clean the Store
-         */
-        public void cleanStore() {
-            getStore().removeAll();
-        }
-        
         @Override
         public void onSearch(String value) {
             operation.onBeginGeocodingSearch(value);

@@ -54,7 +54,6 @@ public class GPPrintWidget extends GPDynamicFormBinding<GPPrintBean> {
     private Button print;
     private Button cancel;
     private TreePanel tree;
-    private double scale;
     private List<GPLayerBean> layerList;
 
     public GPPrintWidget() {

@@ -77,7 +77,7 @@ public class GeoPlatformWPSConnector {
     }
 
     /**
-     * Get Cababilities WPS
+     * Get Capabilities WPS
      * 
      * @return EList of Process
      */
@@ -100,10 +100,10 @@ public class GeoPlatformWPSConnector {
      * @throws IllegalArgumentException 
      */
     public ProcessDescriptionType describeProcess(String processIdentifier)
-            throws IllegalArgumentException {
+            throws Exception {
 
         if (processIdentifier == null) {
-            throw new IllegalArgumentException("Process Identifier must not be null");
+            throw new Exception("Process Identifier must not be null");
         }
 
         DescribeProcessRequest descRequest = wps.createDescribeProcessRequest();
@@ -114,8 +114,10 @@ public class GeoPlatformWPSConnector {
             descResponse = wps.issueRequest(descRequest);
         } catch (IOException ex) {
             logger.error("IOException : " + ex);
+            throw new Exception(ex);
         } catch (ServiceException ex) {
             logger.error("Service Exception : " + ex);
+            throw new Exception(ex);
         }
 
         ProcessDescriptionsType processDesc = descResponse.getProcessDesc();
@@ -134,7 +136,7 @@ public class GeoPlatformWPSConnector {
      * @throws IllegalArgumentException 
      */
     public Process createProcess(String processIdentifier)
-            throws IllegalArgumentException {
+            throws Exception {
 
         WPSFactory wpsfactory = new WPSFactory(describeProcess(processIdentifier),
                 url);

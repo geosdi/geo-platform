@@ -56,6 +56,7 @@ public class GeocodingBean extends GeoPlatformBeanModel implements
     /**
      * @return the description
      */
+    @Override
     public String getDescription() {
         return description;
     }

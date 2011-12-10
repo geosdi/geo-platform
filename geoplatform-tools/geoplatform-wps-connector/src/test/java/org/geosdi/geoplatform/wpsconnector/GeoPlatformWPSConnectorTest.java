@@ -43,7 +43,9 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.util.logging.Level;
 import javax.annotation.PostConstruct;
+import javax.xml.parsers.ParserConfigurationException;
 import junit.framework.Assert;
 import net.opengis.wps10.ProcessBriefType;
 import org.apache.http.HttpResponse;
@@ -51,13 +53,18 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.geotools.gml2.GMLConfiguration;
+import org.geotools.xml.Configuration;
+import org.geotools.xml.StreamingParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.opengis.feature.Feature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -68,7 +75,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"applicationContext-TEST.xml"})
 public class GeoPlatformWPSConnectorTest {
-
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
@@ -76,19 +83,19 @@ public class GeoPlatformWPSConnectorTest {
     //
     private HttpPost post;
     private HttpClient httpclient;
-
+    
     @Test
     public void test() {
         Assert.assertNotNull(gpWPSConnector);
-
+        
         logger.info("Number of Process ********************** " + gpWPSConnector.getWPSCapabilities().size());
-
+        
         for (ProcessBriefType pbfT : gpWPSConnector.getWPSCapabilities()) {
             logger.info("Process Abstract : ****************" + pbfT.getTitle().getValue());
             logger.info("Process Identifier : ***********" + pbfT.getIdentifier().getValue());
         }
     }
-
+    
     @Test
     public void testProcessDoubleAddition() {
         try {
@@ -126,21 +133,21 @@ public class GeoPlatformWPSConnectorTest {
                     + "   </wps:RawDataOutput>"
                     + "  </wps:ResponseForm>"
                     + "</wps:Execute>";
-
+            
             StringEntity se = new StringEntity(xml, "UTF-8");
             se.setContentType("application/atom+xml");
-
+            
             post.setEntity(se);
-
+            
             HttpResponse response;
             response = httpclient.execute(post);
-
+            
             logger.info("Response Status : " + response.getStatusLine() + "\n");
-
+            
             InputStream is = response.getEntity().getContent();
-
+            
             Writer writer = new StringWriter();
-
+            
             char[] buffer = new char[1024];
             try {
                 Reader reader = new BufferedReader(
@@ -152,9 +159,9 @@ public class GeoPlatformWPSConnectorTest {
             } finally {
                 is.close();
             }
-
+            
             logger.info("RESULT DOUBLE ADDITION @@@@@@@@@@@@@@@@@@@@@@@@ " + writer.toString());
-
+            
         } catch (UnsupportedEncodingException ex) {
             logger.error("Error " + ex);
         } catch (IOException es) {
@@ -163,7 +170,7 @@ public class GeoPlatformWPSConnectorTest {
             httpclient.getConnectionManager().shutdown();
         }
     }
-
+    
     @Test
     public void testProcessFilterByField() {
         try {
@@ -205,44 +212,41 @@ public class GeoPlatformWPSConnectorTest {
                     + "    </wps:RawDataOutput> "
                     + "  </wps:ResponseForm> "
                     + " </wps:Execute>";
-
+            
             StringEntity se = new StringEntity(xml, "UTF-8");
             se.setContentType("application/atom+xml");
-
+            
             post.setEntity(se);
-
+            
             HttpResponse response;
             response = httpclient.execute(post);
-
+            
             logger.info("Response Status : " + response.getStatusLine() + "\n");
-
+            
             InputStream is = response.getEntity().getContent();
-
-            Writer writer = new StringWriter();
-
-            char[] buffer = new char[1024];
-            try {
-                Reader reader = new BufferedReader(
-                        new InputStreamReader(is, "UTF-8"));
-                int n;
-                while ((n = reader.read(buffer)) != -1) {
-                    writer.write(buffer, 0, n);
-                }
-            } finally {
-                is.close();
+            Configuration configuration = new GMLConfiguration();
+            StreamingParser parser = new StreamingParser(configuration, is, Feature.class);
+            
+            Feature f = null;
+            
+            while ((f = (Feature) parser.parse()) != null) {
+                logger.info("FEATURE @@@@@@@@@@@@@@@@@@@@@@@@@ " + f.toString());
             }
-
-            logger.info("RESULT FILTER BY FIELD : @@@@@@@@@@@@@@@@@@@@@@@@ " + writer.toString());
-
+            
+            
         } catch (UnsupportedEncodingException ex) {
             logger.error("Error " + ex);
         } catch (IOException es) {
             logger.error("IOException : " + es);
+        } catch (ParserConfigurationException ex) {
+            logger.error("ParserConfigurationException : " + ex);
+        } catch (SAXException ex) {
+            logger.error("SAXException : " + ex);
         } finally {
             httpclient.getConnectionManager().shutdown();
         }
     }
-
+    
     @PostConstruct
     public void init() {
         this.post = new HttpPost("http://150.146.160.50/geoserver/ows?service=WPS");

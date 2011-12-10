@@ -107,7 +107,7 @@ public class GeoPlatformWPSConnector {
         }
 
         DescribeProcessRequest descRequest = wps.createDescribeProcessRequest();
-        descRequest.setIdentifier(processIdentifier); // describe the double addition process
+        descRequest.setIdentifier(processIdentifier);
 
         DescribeProcessResponse descResponse = null;
         try {
@@ -143,5 +143,11 @@ public class GeoPlatformWPSConnector {
 
         return wpsfactory.create();
 
+    }
+    
+    public Process createProcess(ProcessDescriptionType processType) {
+        WPSFactory wpsFactory = new WPSFactory(processType, url);
+        
+        return wpsFactory.create();
     }
 }

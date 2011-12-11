@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import it.geosolutions.geoserver.rest.decoder.RESTDataStore;
 import java.io.File;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.quartz.Job;
@@ -48,9 +47,9 @@ import org.slf4j.LoggerFactory;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class PublisherCleanerJob implements Job {
+public class PublisherTifCleanerJob implements Job {
 
-    public static final String PUBLISHER_CLEANER_JOB = "publischerCleanerJob";
+    public static final String PUBLISHER_TIF_CLEANER_JOB = "publischerTifCleanerJob";
     public static final String USER_WORKSPACE = "userWorkSPace";
     public static final String FILE_NAME = "fileName";
     public static final String FILE_PATH = "filePath";
@@ -66,12 +65,10 @@ public class PublisherCleanerJob implements Job {
         try {
             publisherService.removeTIFFromPreview(userWorkspace, fileName);
         } catch (ResourceNotFoundFault re) {
-            logger.error("Error on PublisherCleanerJob: " + re);
+            logger.error("Error on PublisherTifCleanerJob: " + re);
         }
         String filePath = (String) context.getTrigger().getJobDataMap().get(FILE_PATH);
         File file = new File(filePath);
         file.delete();
-        //TODO: Rimuovere da GeoServer i layer pubblicati e messi nella mappa del job,
-        //Se sono tiff rimuovere anche i file dalla folder
     }
 }

@@ -55,19 +55,27 @@ public class PublisherScheduler implements InitializingBean {
     public final static String PUBLISHER_GROUP = "publisherGroup";
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private Scheduler scheduler;
-    private JobDetail cleanerJobDetail;
+    private JobDetail cleanerJobTifDetail;
+    private JobDetail cleanerJobShpDetail;
 
-    private void generateCleanerJob() {
-        this.cleanerJobDetail = JobBuilder.newJob(PublisherCleanerJob.class).
-                withIdentity(PublisherCleanerJob.PUBLISHER_CLEANER_JOB, PublisherScheduler.PUBLISHER_GROUP).
-                withDescription("Clean the unpublished layer from Geoserver and-or from the disk").
+    private void generateCleanerJobs() {
+        this.cleanerJobTifDetail = JobBuilder.newJob(PublisherTifCleanerJob.class).
+                withIdentity(PublisherTifCleanerJob.PUBLISHER_TIF_CLEANER_JOB, PublisherScheduler.PUBLISHER_GROUP).
+                withDescription("Clean the unpublished tif from Geoserver and from the disk").
+                storeDurably(true).
+                requestRecovery().
+                build();
+        this.cleanerJobShpDetail = JobBuilder.newJob(PublisherShpCleanerJob.class).
+                withIdentity(PublisherShpCleanerJob.PUBLISHER_SHP_CLEANER_JOB, PublisherScheduler.PUBLISHER_GROUP).
+                withDescription("Clean the unpublished shp from Geoserver").
                 storeDurably(true).
                 requestRecovery().
                 build();
         try {
-            this.scheduler.addJob(this.cleanerJobDetail, true);
+            this.scheduler.addJob(this.cleanerJobTifDetail, true);
+            this.scheduler.addJob(this.cleanerJobShpDetail, true);
         } catch (SchedulerException ex) {
-            logger.error("Error adding publisher cleaner job: " + ex);
+            logger.error("Error adding publisher cleaner jobs: " + ex);
         }
     }
 
@@ -75,7 +83,7 @@ public class PublisherScheduler implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         scheduler = StdSchedulerFactory.getDefaultScheduler();
         getScheduler().start();
-        this.generateCleanerJob();
+        this.generateCleanerJobs();
     }
 
     /**
@@ -88,7 +96,14 @@ public class PublisherScheduler implements InitializingBean {
     /**
      * @return the jobDetail
      */
-    public JobDetail getCleanerJobDetail() {
-        return cleanerJobDetail;
+    public JobDetail getCleanerJobTifDetail() {
+        return cleanerJobTifDetail;
+    }
+
+    /**
+     * @return the cleanerJobShpDetail
+     */
+    public JobDetail getCleanerJobShpDetail() {
+        return cleanerJobShpDetail;
     }
 }

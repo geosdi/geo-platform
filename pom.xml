@@ -134,6 +134,16 @@
             <url>http://maven.springframework.org/external</url>
         </repository>
 
+            <!-- OPENGIS - GEOAPI 
+        <repository>
+            <id>geotoolkit</id>
+            <name>Geotoolkit.org project</name>
+            <url>http://maven.geotoolkit.org</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>-->
+
 		<!-- OSGEO -->
         <repository>
             <id>opengeo</id>

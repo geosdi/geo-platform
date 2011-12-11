@@ -184,7 +184,7 @@ public class PublishUtility {
             }
             out.close();
         } catch (Exception ex) {
-            logger.info("\n Exception compressing " + zipFileName + ".zip");
+            logger.info("\n Exception compressing " + zipFileName);
             return null;
         }
         return out;

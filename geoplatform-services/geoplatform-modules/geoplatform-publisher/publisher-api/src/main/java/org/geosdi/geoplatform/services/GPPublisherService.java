@@ -43,7 +43,6 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
-import org.codehaus.jra.Post;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.InfoPreview;
 

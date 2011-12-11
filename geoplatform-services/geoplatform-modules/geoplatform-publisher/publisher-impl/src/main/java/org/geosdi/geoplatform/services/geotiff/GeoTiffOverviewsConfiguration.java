@@ -64,9 +64,9 @@ public class GeoTiffOverviewsConfiguration {
     /** Scale algorithm. */
     private String scaleAlgorithm = SubsampleAlgorithm.Nearest.toString();
     /** Tile height. */
-    private int tileH = 512;
+    private int tileH = 256;
     /** Tile width. */
-    private int tileW = 512;
+    private int tileW = 256;
     private String wildcardString = "*.*";
     private boolean logNotification = true;
     /**

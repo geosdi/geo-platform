@@ -105,7 +105,7 @@
         </dependency>
 
 		<!-- GeoAPI and its dependencies -->
-        <dependency>
+        <!--dependency>
             <groupId>org.opengis</groupId>
             <artifactId>geoapi</artifactId>
         </dependency>
@@ -116,7 +116,7 @@
         <dependency>
             <groupId>org.opengis</groupId>
             <artifactId>geoapi-pending</artifactId>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>net.java.dev.jsr-275</groupId>
             <artifactId>jsr-275</artifactId>

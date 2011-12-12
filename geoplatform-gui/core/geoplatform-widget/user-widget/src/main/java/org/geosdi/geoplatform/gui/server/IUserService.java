@@ -60,6 +60,10 @@ public interface IUserService {
     Long updateUser(IGPUserManageDetail userDetail,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
+    
+    Long updateOwnUser(IGPUserManageDetail userDetail, String currentPlainPassword,
+            HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
 
     boolean deleteUser(Long userID, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;

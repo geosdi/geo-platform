@@ -35,21 +35,23 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.member;
 
-import com.extjs.gxt.ui.client.store.Record;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.FieldSetEvent;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.form.LabelField;
 import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.extjs.gxt.ui.client.widget.form.Validator;
+import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
-import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
-import org.geosdi.geoplatform.gui.client.model.GPUserManageDetailKeyValue;
-import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
+import org.geosdi.geoplatform.gui.regex.GPRegEx;
+import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 
 /**
  *
@@ -58,65 +60,103 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
  */
 public class UserOptionsMemberUser extends UserOptionsMember {
 
+    private FormPanel formPanel;
+    //
+    private TextField<String> usernameField;
+    private TextField<String> roleField;
+    private TextField<String> nameField;
+    //
+    private TextField<String> emailField;
+    //
     private TextField<String> oldPasswordField;
     private TextField<String> newPasswordField;
     private TextField<String> newRePasswordField;
-    private TextField<String> nameField;
-    private TextField<String> textField;
-    private LabelField usernameField;
-    private LabelField roleField;
     //
-    private FormPanel form;
+    private String newName;
+    private String newEmail;
+    private String newPassword;
 
-    public UserOptionsMemberUser(IGPUserManageDetail user, LayoutContainer container) {
-        super(user, "User", container);
+    public UserOptionsMemberUser(LayoutContainer container) {
+        super("User", container);
     }
 
     @Override
     protected void creteLayoutData(ContentPanel panel) {
-        form = new FormPanel();
-        form.setHeaderVisible(false);
-        form.setBorders(false);
+        this.formPanel = new FormPanel();
+        this.formPanel.setSize(420, 350);
+        this.formPanel.setHeaderVisible(false);
 
-        form.add(this.createPropertiesSetting());
-        form.add(this.createEmailSetting(), new VBoxLayoutData(new Margins(20, 0, 0, 0)));
-        form.add(this.createPasswordSetting(), new VBoxLayoutData(new Margins(25, 0, 0, 0)));
+        this.formPanel.add(this.createPropertiesSetting());
+        this.formPanel.add(this.createEmailSetting(), new VBoxLayoutData(new Margins(30, 0, 0, 0)));
+        this.formPanel.add(this.createPasswordSetting(), new VBoxLayoutData(new Margins(30, 0, 0, 0)));
 
-        panel.add(form);
+        panel.add(formPanel);
     }
 
     private FieldSet createPropertiesSetting() {
-        usernameField = new LabelField("Username:\t");
-        usernameField.setName(GPUserManageDetailKeyValue.USERNAME.toString());
-
-        roleField = new LabelField("Role:\t");
-        roleField.setName(GPUserManageDetailKeyValue.AUTORITHY.toString());
-
-        nameField = new TextField<String>();
-        nameField.setName("name");
-        nameField.setFieldLabel("Name:");
-
         FieldSet userFieldSet = new FieldSet();
         userFieldSet.setHeading("User");
-        userFieldSet.setSize(400, 100);
+        userFieldSet.setSize(400, 110);
+        userFieldSet.setLayout(this.getFormLayoutTemplate());
+
+        usernameField = new TextField<String>();
+        usernameField.setFieldLabel("Username");
+        usernameField.setToolTip("Your username");
+        usernameField.setReadOnly(true);
+//        usernameField.setShadow(true);
+//        usernameField.setShadowPosition(ShadowPosition.FRAME);
         userFieldSet.add(usernameField);
+
+        roleField = new TextField<String>();
+        roleField.setFieldLabel("Role");
+        roleField.setToolTip("Your role");
+        roleField.setReadOnly(true);
+//        roleField.setShadow(true);
+//        roleField.setShadowPosition(ShadowPosition.FRAME);
         userFieldSet.add(roleField);
+
+        nameField = new TextField<String>();
+        nameField.setFieldLabel("Name");
+        nameField.setToolTip("Your complete name");
+        nameField.setSelectOnFocus(true);
+        nameField.setAllowBlank(false);
+        nameField.setAutoValidate(true);
+        nameField.setValidator(this.validatorUpdateName());
         userFieldSet.add(nameField);
 
         return userFieldSet;
     }
 
     private FieldSet createEmailSetting() {
-        textField = new TextField<String>();
-        textField.setName(GPUserManageDetailKeyValue.EMAIL.toString());
-        textField.setFieldLabel("Email");
-
         FieldSet emailResultSet = new FieldSet();
         emailResultSet.setHeading("Change email");
         emailResultSet.setSize(400, 50);
         emailResultSet.setCheckboxToggle(true);
         emailResultSet.setExpanded(false);
-        emailResultSet.add(textField);
+        emailResultSet.setLayout(this.getFormLayoutTemplate());
+
+        emailField = new TextField<String>();
+        emailField.setFieldLabel("Email");
+        emailField.setToolTip("Your email");
+        emailField.setAllowBlank(false);
+        emailField.setAutoValidate(true);
+        emailResultSet.add(emailField);
+
+        emailResultSet.addListener(Events.Collapse, new Listener<FieldSetEvent>() {
+
+            @Override
+            public void handleEvent(FieldSetEvent be) {
+                emailField.setValue(user.getEmail());
+                emailField.setValidator(null);
+            }
+        });
+        emailResultSet.addListener(Events.Expand, new Listener<FieldSetEvent>() {
+
+            @Override
+            public void handleEvent(FieldSetEvent be) {
+                emailField.setValidator(validatorUpdateEmail());
+            }
+        });
 
         return emailResultSet;
     }
@@ -127,56 +167,210 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         passwordFieldSet.setSize(400, 95);
         passwordFieldSet.setCheckboxToggle(true);
         passwordFieldSet.setExpanded(false);
+        passwordFieldSet.setLayout(this.getFormLayoutTemplate());
 
         oldPasswordField = new TextField<String>();
-        oldPasswordField.setFieldLabel("label");
-        oldPasswordField.setName("password");
+        oldPasswordField.setFieldLabel("Current");
+        oldPasswordField.setToolTip("Your current password");
         oldPasswordField.setPassword(true);
-        oldPasswordField.setAllowBlank(false);
-        oldPasswordField.setMinLength(6);
-        oldPasswordField.setSelectOnFocus(true);
+        oldPasswordField.setAllowBlank(true);
+        passwordFieldSet.add(oldPasswordField);
 
         newPasswordField = new TextField<String>();
-        newPasswordField.setName("newPassword");
-        newPasswordField.setFieldLabel("Password");
+        newPasswordField.setFieldLabel("New");
+        newPasswordField.setToolTip("Enter a new password");
         newPasswordField.setPassword(true);
         newPasswordField.setAllowBlank(false);
-        newPasswordField.setMinLength(6);
+        newPasswordField.setValidator(this.validatorUpdatePassword());
+        passwordFieldSet.add(newPasswordField);
 
         newRePasswordField = new TextField<String>();
-        newRePasswordField.setName("newRePassword");
-        newRePasswordField.setFieldLabel("RePassword");
+        newRePasswordField.setFieldLabel("Retype new");
+        newRePasswordField.setToolTip("Retype the new password");
         newRePasswordField.setPassword(true);
         newRePasswordField.setAllowBlank(false);
         newRePasswordField.setMinLength(6);
-
-        passwordFieldSet.add(oldPasswordField);
-        passwordFieldSet.add(newPasswordField);
+        newRePasswordField.setValidator(this.validatorUpdateConfirmPassword());
         passwordFieldSet.add(newRePasswordField);
+
+        passwordFieldSet.addListener(Events.Collapse, new Listener<FieldSetEvent>() {
+
+            @Override
+            public void handleEvent(FieldSetEvent be) {
+                oldPasswordField.setValidator(null);
+            }
+        });
+        passwordFieldSet.addListener(Events.Expand, new Listener<FieldSetEvent>() {
+
+            @Override
+            public void handleEvent(FieldSetEvent be) {
+                oldPasswordField.setValidator(validatorPassword());
+            }
+        });
 
         return passwordFieldSet;
     }
 
-    private class NameFieldBinding extends GPFieldBinding {
+    @Override
+    public void saveOptions() {
+        this.updateUserProperties();
 
-        public NameFieldBinding(Field field, String property) {
-            super(field, property);
-        }
+        String currentPlainPassword = oldPasswordField.getValue();
 
-        @Override
-        public void setModelProperty(Object val) {
-            GPUserManageDetail user = (GPUserManageDetail) model;
-            user.setName(val.toString());
-        }
 
-        @Override
-        public void setRecordProperty(Record r, Object val) {
-            r.set(property, val);
-        }
+        UserRemoteImpl.Util.getInstance().updateOwnUser(user, currentPlainPassword,
+                new AsyncCallback<Long>() {
+
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        GeoPlatformMessage.errorMessage("Error", caught.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(Long result) {
+                        saveButton.disable();
+
+                        GeoPlatformMessage.infoMessage("User successfully modify",
+                                "<ul><li>" + user.getUsername() + "</li></ul>");
+                    }
+                });
+    }
+
+    private FormLayout getFormLayoutTemplate() {
+        FormLayout layout = new FormLayout();
+        layout.setLabelWidth(80);
+        layout.setDefaultWidth(200);
+        return layout;
     }
 
     @Override
-    public void saveOptions() {
-        GeoPlatformMessage.infoMessage("ToDo", "<ul><li>Work in progress</li></ul>");
+    protected void manageUserData() {
+        usernameField.setValue(user.getUsername());
+        roleField.setValue(user.getAuthority().toString());
+        nameField.setValue(user.getName());
+
+        emailField.setValue(user.getEmail());
+
+        oldPasswordField.reset();
+        newPasswordField.reset();
+        newRePasswordField.reset();
+    }
+
+    private Validator validatorUpdateName() {
+        return new Validator() {
+
+            @Override
+            public String validate(Field<?> field, String value) {
+                if (value.equals(user.getName())) {
+                    updateName(null);
+                    return null; // Pseudo-valid
+                }
+                if (!GPRegEx.RE_COMPLETE_NAME.test(value)) {
+                    updateName(null);
+                    return "Complete name is not valid (example: John Steam)";
+                }
+                updateName(value);
+                return null;
+            }
+        };
+    }
+
+    private Validator validatorUpdateEmail() {
+        return new Validator() {
+
+            @Override
+            public String validate(Field<?> field, String value) {
+                if (value.equals(user.getEmail())) {
+                    updateEmail(null);
+                    return null; // Pseudo-valid
+                }
+                if (!GPRegEx.RE_EMAIL.test(value)) {
+                    updateEmail(null);
+                    return "Email is not valid (example: any@foo.org)";
+                }
+                updateEmail(value);
+                return null;
+            }
+        };
+    }
+
+    private Validator validatorPassword() {
+        return new Validator() {
+
+            @Override
+            public String validate(Field<?> field, String value) {
+                if (value.length() < 6) {
+                    newPasswordField.setEnabled(false);
+                    return "The minimun lenght for old password is 6";
+                }
+                newPasswordField.setEnabled(true);
+                return null;
+            }
+        };
+    }
+
+    private Validator validatorUpdatePassword() {
+        return new Validator() {
+
+            @Override
+            public String validate(Field<?> field, String value) {
+                if (value.length() < 6) {
+                    newRePasswordField.setEnabled(false);
+                    return "The minimun lenght for new password is 6";
+                }
+                newRePasswordField.setEnabled(true);
+                return null;
+            }
+        };
+    }
+
+    private Validator validatorUpdateConfirmPassword() {
+        return new Validator() {
+
+            @Override
+            public String validate(Field<?> field, String value) {
+                if (value.equals(newPasswordField.getValue())) {
+                    updatePassword(value);
+                    return null;
+                }
+                updatePassword(null);
+                return "Retyped new password don't match";
+            }
+        };
+    }
+
+    private void updateName(String newName) {
+        this.newName = newName;
+        this.manageSaveButton();
+    }
+
+    private void updateEmail(String newEmail) {
+        this.newEmail = newEmail;
+        this.manageSaveButton();
+    }
+
+    private void updatePassword(String newPassword) {
+        this.newPassword = newPassword;
+        this.manageSaveButton();
+    }
+
+    private void manageSaveButton() {
+        if (newName != null || newEmail != null || newPassword != null) {
+            this.saveButton.enable();
+        } else {
+            this.saveButton.disable();
+        }
+    }
+
+    private void updateUserProperties() {
+        if (newName != null) {
+            user.setName(newName);
+        }
+        if (newEmail != null) {
+            user.setEmail(newEmail);
+        }
+        if (newPassword != null) {
+            user.setPassword(newPassword);
+        }
     }
 }

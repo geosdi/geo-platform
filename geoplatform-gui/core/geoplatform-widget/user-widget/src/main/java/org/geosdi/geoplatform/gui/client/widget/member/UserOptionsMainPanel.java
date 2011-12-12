@@ -47,10 +47,7 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout.VBoxLayoutAlign;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
-import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 
 /**
  *
@@ -59,11 +56,13 @@ import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
  */
 public class UserOptionsMainPanel {
 
-    private IGPUserManageDetail user;
+//    private IGPUserManageDetail user;
     private ContentPanel panelMain;
     //
     private ContentPanel panelWest;
     private ContentPanel panelCenter;
+    // TODO Members plugged
+    private UserOptionsMember userOptionsMemberUser;
 
     public UserOptionsMainPanel() {
         this.createPanels();
@@ -105,24 +104,12 @@ public class UserOptionsMainPanel {
         VBoxLayoutData vBoxData = new VBoxLayoutData(5, 5, 5, 5);
         vBoxData.setFlex(1);
 
-        UserRemoteImpl.Util.getInstance().getOwnUser(new AsyncCallback<IGPUserManageDetail>() {
-
-            @Override
-            public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage("Error", caught.getMessage());
-            }
-
-            @Override
-            public void onSuccess(IGPUserManageDetail result) {
-                user = result;
-            }
-        });
-
-        panelWest.add(this.createToggleButton(new UserOptionsMemberUser(user, panelCenter)), vBoxData);
-        panelWest.add(this.createToggleButton(new UserOptionsMemberView(user, panelCenter)), vBoxData);
-        panelWest.add(this.createToggleButton(new UserOptionsMemberDisk(user, panelCenter)), vBoxData);
-        panelWest.add(this.createToggleButton(new UserOptionsMemberGeocoding(user, panelCenter)), vBoxData);
-        panelWest.add(this.createToggleButton(new UserOptionsMemberWidgets(user, panelCenter)), vBoxData);
+        userOptionsMemberUser = new UserOptionsMemberUser(panelCenter);
+        panelWest.add(this.createToggleButton(userOptionsMemberUser), vBoxData);
+        panelWest.add(this.createToggleButton(new UserOptionsMemberView(panelCenter)), vBoxData);
+        panelWest.add(this.createToggleButton(new UserOptionsMemberDisk(panelCenter)), vBoxData);
+        panelWest.add(this.createToggleButton(new UserOptionsMemberGeocoding(panelCenter)), vBoxData);
+        panelWest.add(this.createToggleButton(new UserOptionsMemberWidgets(panelCenter)), vBoxData);
     }
 
     private ToggleButton createToggleButton(UserOptionsMember member) {
@@ -135,5 +122,10 @@ public class UserOptionsMainPanel {
 
     public ContentPanel getPanelMain() {
         return panelMain;
+    }
+
+    // TODO Invert the access way (from Members retrieve the user?!? - and the panelMain?)
+    public void setOwnUser(IGPUserManageDetail user) {
+        userOptionsMemberUser.setOwnUser(user);
     }
 }

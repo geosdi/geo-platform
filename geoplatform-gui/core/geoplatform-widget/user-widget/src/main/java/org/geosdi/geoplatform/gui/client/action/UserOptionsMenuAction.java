@@ -36,9 +36,13 @@
 package org.geosdi.geoplatform.gui.client.action;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.UserOptionsWidget;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
+import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 
 /**
  *
@@ -55,6 +59,18 @@ public class UserOptionsMenuAction extends MenuBaseAction {
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        userOptionsWidget.show();
+        UserRemoteImpl.Util.getInstance().getOwnUser(new AsyncCallback<IGPUserManageDetail>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                GeoPlatformMessage.errorMessage("Error", caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(IGPUserManageDetail user) {
+                userOptionsWidget.setOwnUser(user);
+                userOptionsWidget.show();
+            }
+        });
     }
 }

@@ -56,16 +56,14 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
  */
 public abstract class UserOptionsMember implements IUserOptionsMember {
 
-    private IGPUserManageDetail user;
-//    private FormBinding formBinding;
+    protected IGPUserManageDetail user;
+    protected Button saveButton;
     //
     private String name;
     private LayoutContainer container;
     private ContentPanel panelOption;
-    private Button save;
 
-    public UserOptionsMember(IGPUserManageDetail user, String name, LayoutContainer container) {
-        this.user = user;
+    public UserOptionsMember(String name, LayoutContainer container) {
         this.name = name;
         this.container = container;
         this.createPanelOption();
@@ -90,7 +88,7 @@ public abstract class UserOptionsMember implements IUserOptionsMember {
     }
 
     private void createSaveButton() {
-        save = new Button("Save", BasicWidgetResources.ICONS.done(),
+        saveButton = new Button("Save", BasicWidgetResources.ICONS.done(),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -98,8 +96,9 @@ public abstract class UserOptionsMember implements IUserOptionsMember {
                         saveOptions();
                     }
                 });
+        saveButton.disable();
 
-        panelOption.addButton(save);
+        panelOption.addButton(saveButton);
     }
 
     @Override
@@ -116,19 +115,19 @@ public abstract class UserOptionsMember implements IUserOptionsMember {
         };
     }
 
-    protected abstract void creteLayoutData(ContentPanel panel);
-
     protected void switchPanel() {
         container.removeAll();
         container.add(panelOption);
         container.layout();
     }
 
-    public IGPUserManageDetail getUser() {
-        return user;
+    @Override
+    public void setOwnUser(IGPUserManageDetail user) {
+        this.user = user;
+        this.manageUserData();
     }
 
-    public void setUser(IGPUserManageDetail user) {
-        this.user = user;
-    }
+    protected abstract void creteLayoutData(ContentPanel panel);
+
+    protected abstract void manageUserData();
 }

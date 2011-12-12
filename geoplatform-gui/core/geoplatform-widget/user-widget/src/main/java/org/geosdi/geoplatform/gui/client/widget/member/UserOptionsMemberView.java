@@ -41,7 +41,6 @@ import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
 /**
  *
@@ -50,8 +49,8 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
  */
 public class UserOptionsMemberView extends UserOptionsMember {
 
-    public UserOptionsMemberView(IGPUserManageDetail user, LayoutContainer container) {
-        super(user, "View", container);
+    public UserOptionsMemberView(LayoutContainer container) {
+        super("View", container);
     }
 
     @Override
@@ -64,5 +63,10 @@ public class UserOptionsMemberView extends UserOptionsMember {
     @Override
     public void saveOptions() {
         GeoPlatformMessage.infoMessage("ToDo", "<ul><li>Work in progress</li></ul>");
+    }
+
+    @Override
+    protected void manageUserData() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

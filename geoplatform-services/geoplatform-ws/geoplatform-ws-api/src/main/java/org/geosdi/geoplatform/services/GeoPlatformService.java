@@ -112,6 +112,12 @@ public interface GeoPlatformService {
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Post
+    @HttpResource(location = "/users")
+    Long updateOwnUser(@WebParam(name = "User") GPUser user,
+            @WebParam(name = "currentPlainPassword") String currentPlainPassword)
+            throws ResourceNotFoundFault, IllegalParameterFault;
+
+    @Post
     @HttpResource(location = "/applications")
     Long updateApplication(@WebParam(name = "application") GPApplication application)
             throws ResourceNotFoundFault, IllegalParameterFault;

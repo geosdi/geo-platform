@@ -36,28 +36,13 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
-import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.util.Margins;
-import com.extjs.gxt.ui.client.util.Padding;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
-import com.extjs.gxt.ui.client.widget.layout.BoxLayout.BoxLayoutPack;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
-import com.extjs.gxt.ui.client.widget.layout.VBoxLayout;
-import com.extjs.gxt.ui.client.widget.layout.VBoxLayout.VBoxLayoutAlign;
-import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
-import com.google.gwt.user.client.ui.Label;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMainPanel;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
 /**
  *
@@ -65,6 +50,8 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
 public class UserOptionsWidget extends GeoPlatformWindow {
+
+    private UserOptionsMainPanel optionsMainPanel = new UserOptionsMainPanel();
 
     public UserOptionsWidget(boolean lazy) {
         super(lazy);
@@ -87,7 +74,7 @@ public class UserOptionsWidget extends GeoPlatformWindow {
 
     @Override
     public void addComponent() {
-        super.add(new UserOptionsMainPanel().getPanelMain());
+        super.add(optionsMainPanel.getPanelMain());
         this.addButtons();
     }
 
@@ -103,5 +90,9 @@ public class UserOptionsWidget extends GeoPlatformWindow {
 
         super.setButtonAlign(HorizontalAlignment.RIGHT);
         super.addButton(close);
+    }
+
+    public void setOwnUser(IGPUserManageDetail user) {
+        optionsMainPanel.setOwnUser(user);
     }
 }

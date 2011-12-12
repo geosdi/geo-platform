@@ -59,6 +59,9 @@ public interface UserRemoteAsync {
     void updateUser(IGPUserManageDetail userDetail, AsyncCallback<Long> callback)
             throws GeoPlatformException;
 
+    void updateOwnUser(IGPUserManageDetail userDetail, String currentPlainPassword,
+            AsyncCallback<Long> callback) throws GeoPlatformException;
+
     void deleteUser(Long userID, AsyncCallback<Boolean> callback)
             throws GeoPlatformException;
 

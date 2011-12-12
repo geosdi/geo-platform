@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.member;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
 /**
  *
@@ -51,4 +51,6 @@ public interface IUserOptionsMember {
     Listener<ButtonEvent> getListener();
 
     void saveOptions();
+
+    void setOwnUser(IGPUserManageDetail user);
 }

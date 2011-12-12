@@ -50,8 +50,8 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
  */
 public class UserOptionsMemberWidgets extends UserOptionsMember {
 
-    public UserOptionsMemberWidgets(IGPUserManageDetail user, LayoutContainer container) {
-        super(user, "Widgets", container);
+    public UserOptionsMemberWidgets(LayoutContainer container) {
+        super("Widgets", container);
     }
 
     @Override
@@ -63,5 +63,10 @@ public class UserOptionsMemberWidgets extends UserOptionsMember {
     @Override
     public void saveOptions() {
         GeoPlatformMessage.infoMessage("ToDo", "<ul><li>Work in progress</li></ul>");
+    }
+
+    @Override
+    protected void manageUserData() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

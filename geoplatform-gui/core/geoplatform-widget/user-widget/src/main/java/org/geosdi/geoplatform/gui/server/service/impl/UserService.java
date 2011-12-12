@@ -153,6 +153,27 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public Long updateOwnUser(IGPUserManageDetail userDetail,
+            String currentPlainPassword, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+        this.getCheckLoggedUser(httpServletRequest);
+
+        logger.info("Own User to update: " + userDetail);
+        Long userID = null;
+        try {
+            GPUser user = this.convertToGPUser(userDetail);
+            userID = geoPlatformServiceClient.updateOwnUser(user, currentPlainPassword);
+            sessionUtility.storeUserInSession(user, httpServletRequest);
+        } catch (IllegalParameterFault ipf) {
+            throw new GeoPlatformException(ipf.getMessage());
+        } catch (ResourceNotFoundFault rnnf) {
+            throw new GeoPlatformException(rnnf.getMessage());
+        }
+
+        return userID;
+    }
+
+    @Override
     public boolean deleteUser(Long userID, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         this.getCheckLoggedUser(httpServletRequest);

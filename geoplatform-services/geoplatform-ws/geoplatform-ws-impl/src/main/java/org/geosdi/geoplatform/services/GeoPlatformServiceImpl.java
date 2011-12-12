@@ -313,6 +313,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
+    public Long updateOwnUser(GPUser user, String currentPlainPassword)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        return accountServiceDelegate.updateOwnUser(user, currentPlainPassword);
+    }
+
+    @Override
     public boolean deleteAccount(Long accountID) throws ResourceNotFoundFault {
         return accountServiceDelegate.deleteAccount(accountID);
     }

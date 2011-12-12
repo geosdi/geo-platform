@@ -74,6 +74,7 @@ import org.slf4j.LoggerFactory;
 class AccountServiceImpl {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
     private GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor;
     // DAO
     private GPAccountDAO accountDao;
@@ -195,7 +196,6 @@ class AccountServiceImpl {
         }
         String password = user.getPassword();
         if (password != null) {
-//            orig.setPassword(Utility.md5hash(password)); // Hash password
             orig.setPassword(this.gpPooledPBEStringEncryptor.encrypt(password)); // Hash password
         }
         this.updateAccount(orig, user);
@@ -218,6 +218,39 @@ class AccountServiceImpl {
         this.updateAccount(orig, application);
 
         this.updateAccountAuthorities(orig.getAppID(), application.getGPAuthorities());
+
+        accountDao.merge(orig);
+        return orig.getId();
+    }
+
+    public Long updateOwnUser(GPUser user, String currentPlainPassword)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        if (user.getId() == null) {
+            throw new IllegalArgumentException("User \"ID\" must be NOT NULL");
+        }
+        GPUser orig = (GPUser) this.getAccountById(user.getId());
+        EntityCorrectness.checkAccountLog(orig); // TODO assert
+
+        // Update the own values
+        String name = user.getName();
+        if (name != null) {
+            orig.setName(name);
+        }
+        String email = user.getEmailAddress();
+        if (email != null) {
+            orig.setEmailAddress(email);
+        }
+        String password = user.getPassword();
+        if (password != null) {
+            // Check password
+            if (!this.gpPooledPBEStringEncryptor.areEncryptedStringEquals(
+                    user.getPassword(), currentPlainPassword)) {
+                throw new IllegalParameterFault("Current password was incorrect");
+            }
+
+            // TODO FIX EncryptionOperationNotPossibleException
+            orig.setPassword(this.gpPooledPBEStringEncryptor.encrypt(password)); // Hash password
+        }
 
         accountDao.merge(orig);
         return orig.getId();

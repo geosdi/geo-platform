@@ -50,7 +50,7 @@ public class UploadShapeAction extends ToolbarLayerTreeAction {
     private GPPublisherWidget publisherWidget;
 
     public UploadShapeAction(TreePanel theTree) {
-        super(theTree, PublisherResources.ICONS.uploadShape(), "Upload Shape Files");
+        super(theTree, PublisherResources.ICONS.uploadShape(), "Upload Geotiff - Shape Files");
          this.publisherWidget = new GPPublisherWidget(true, theTree);
     }
 

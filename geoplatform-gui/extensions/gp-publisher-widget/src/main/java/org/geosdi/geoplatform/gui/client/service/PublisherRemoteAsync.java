@@ -44,7 +44,7 @@ import java.util.List;
  */
 public interface PublisherRemoteAsync {
 
-    public void publishLayerPreview(List<String> layerList, AsyncCallback<?> callback);
+    public void publishLayerPreview(List<String> layerList, boolean reloadCluster, AsyncCallback<?> callback);
 
     public void kmlPreview(String url, AsyncCallback<Boolean> callback);
 }

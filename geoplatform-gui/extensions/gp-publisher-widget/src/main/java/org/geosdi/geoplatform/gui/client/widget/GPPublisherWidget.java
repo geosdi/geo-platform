@@ -43,6 +43,8 @@ import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
@@ -97,6 +99,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
     private List<PreviewLayer> layerList = new ArrayList<PreviewLayer>();
     private Button publishButton;
     private Text uploadMessage = new Text("Select a file to show in preview:");
+    private ToggleButton toggleButtonClusterReload;
     private UploadShapePreviewEvent uploadPreviewEvent = new UploadShapePreviewEvent();
     
     public GPPublisherWidget(boolean lazy, TreePanel theTree) {
@@ -108,7 +111,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
 
     @Override
     public void setWindowProperties() {
-        super.setHeading("Shape Files Uploader");
+        super.setHeading("Geotiff - Shape Files Uploader");
         super.setResizable(false);
         super.setLayout(new BorderLayout());
         super.setModal(false);
@@ -220,7 +223,9 @@ public class GPPublisherWidget extends GeoPlatformWindow
                     for (PreviewLayer layer : layerList) {
                         layersName.add(layer.getName());
                     }
-                    PublisherRemote.Util.getInstance().publishLayerPreview(layersName, new AsyncCallback<Object>() {
+                    boolean reloadCluster = toggleButtonClusterReload.isPressed();
+                    PublisherRemote.Util.getInstance().publishLayerPreview(layersName, reloadCluster,
+                            new AsyncCallback<Object>() {
 
                         @Override
                         public void onFailure(Throwable caught) {
@@ -294,8 +299,14 @@ public class GPPublisherWidget extends GeoPlatformWindow
 
         BorderLayoutData centerFileUploader = new BorderLayoutData(LayoutRegion.CENTER);
         centerFileUploader.setMargins(new Margins(1, 150, 9, 151));
+        
+        BorderLayoutData toggleButtonPosition = new BorderLayoutData(LayoutRegion.EAST, 105);
+        toggleButtonPosition.setMargins(new Margins(22, 10, 5, 1));
 
+        this.toggleButtonClusterReload = new ToggleButton("Reload Cluster");
+        this.toggleButtonClusterReload.setTitle("If enabled: the cluster configuration will be reloaded after layers publishing");
         southPanel.add(fileUploader.getComponent(), centerFileUploader);
+        southPanel.add(this.toggleButtonClusterReload, toggleButtonPosition);
         southPanel.setHeading("File uploader");
         BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH, 100);
         southData.setMargins(new Margins(5, 20, 5, 20));

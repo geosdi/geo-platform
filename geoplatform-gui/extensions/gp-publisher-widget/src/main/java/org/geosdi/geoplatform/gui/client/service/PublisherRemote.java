@@ -58,7 +58,7 @@ public interface PublisherRemote extends RemoteService {
         }
     }
 
-    public void publishLayerPreview(List<String> layerList) throws GeoPlatformException;
+    public void publishLayerPreview(List<String> layerList, boolean reloadCluster) throws GeoPlatformException;
 
     public void kmlPreview(String url) throws GeoPlatformException;
 }

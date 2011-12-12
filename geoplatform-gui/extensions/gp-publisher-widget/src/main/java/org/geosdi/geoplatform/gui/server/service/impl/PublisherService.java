@@ -35,8 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
+import java.util.Properties;
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.slf4j.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -62,9 +70,13 @@ public class PublisherService implements IPublisherService {
     private GeoPlatformPublishClient geoPlatformPublishClient;
     @Autowired
     private SessionUtility sessionUtility;
+//    @Value("${classpath:/#{wsProperties['cluster_reload_url']}}")
+//    @Value("${cluster_reload_url}")
+    @Resource
+    private Properties wsProperties;
 
     @Override
-    public void publishLayerPreview(HttpServletRequest httpServletRequest, List<String> layerList) throws GeoPlatformException {
+    public void publishLayerPreview(HttpServletRequest httpServletRequest, List<String> layerList, boolean reloadCluster) throws GeoPlatformException {
         GPUser user = null;
         try {
             user = sessionUtility.getUserAlreadyFromSession(httpServletRequest);
@@ -74,6 +86,20 @@ public class PublisherService implements IPublisherService {
         try {
             geoPlatformPublishClient.getPublishService().publishAll(
                     httpServletRequest.getSession().getId(), "previews", "dataTest", layerList);
+            if (reloadCluster) {
+                URL url = new URL(wsProperties.getProperty("cluster_reload_url"));
+                URLConnection connection = url.openConnection();
+                connection.connect();
+                // Get the response
+//            BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//            StringBuilder sb = new StringBuilder();
+//            String line;
+//            while ((line = rd.readLine()) != null) {
+//                sb.append(line);
+//            }
+//            rd.close();
+//            System.out.println("Conessione effettuata: " + sb.toString());
+            }
         } catch (ResourceNotFoundFault ex) {
             logger.error("Error on publish shape: " + ex);
             System.out.println("Error on publish shape: " + ex);
@@ -82,6 +108,12 @@ public class PublisherService implements IPublisherService {
             logger.error("Error on publish shape: " + ex);
             System.out.println("Error on publish shape: " + ex);
             throw new GeoPlatformException("Error on publish shape.");
+        } catch (MalformedURLException e) {
+            logger.error("Error on reloading cluster: " + e);
+            System.out.println("Error on reloading cluster: " + e);
+        } catch (IOException e) {
+            logger.error("Error on reloading cluster: " + e);
+            System.out.println("Error on reloading cluster: " + e);
         }
     }
 

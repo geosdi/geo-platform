@@ -127,7 +127,7 @@ public class UploadKmlWidget extends GeoPlatformWindow {
 //                    for (PreviewLayer layer : layerList) {
 //                        layersName.add(layer.getName());
 //                    }
-                    PublisherRemote.Util.getInstance().publishLayerPreview(layersName, new AsyncCallback<Object>() {
+                    PublisherRemote.Util.getInstance().publishLayerPreview(layersName, false, new AsyncCallback<Object>() {
 
                         @Override
                         public void onFailure(Throwable caught) {

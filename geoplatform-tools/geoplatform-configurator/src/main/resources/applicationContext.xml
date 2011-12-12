@@ -29,7 +29,7 @@
     </bean>
     
     <bean id="gpServerWebServiceInterceptorStrategyFactory" class="org.geosdi.geoplatform.configurator.cxf.server.GPServerWebServiceInterceptorStrategyFactory">
-        <property name="loggingStrategy" value="${webservice_client_logging}" />
+        <property name="loggingStrategy" value="${webservice_server_logging}" />
         <property name="securityStrategy" value="${webservice_security_strategy}" />
         <property name="usernameTokenUser" value="${webservice_username_token_user}" />
         <property name="serverPrivateKeyPropertiesFile" value="${webservice_server_privatekey_properties_file}" />

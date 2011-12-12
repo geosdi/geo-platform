@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.wpsconnector;
 
+import com.vividsolutions.jts.geom.Geometry;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,12 +53,18 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.geotools.gml3.GMLConfiguration;
-import org.geotools.xml.Configuration;
-import org.geotools.xml.StreamingParser;
+import org.geotools.GML;
+import org.geotools.GML.Version;
+import org.geotools.data.simple.SimpleFeatureCollection;
+import org.geotools.feature.collection.AbstractFeatureVisitor;
+import org.geotools.gml2.bindings.GML2EncodingUtils;
+import org.geotools.referencing.crs.DefaultGeographicCRS;
+import org.geotools.util.NullProgressListener;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.opengis.feature.Feature;
 import org.opengis.feature.simple.SimpleFeature;
+import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +81,7 @@ import org.xml.sax.SAXException;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"applicationContext-TEST.xml"})
 public class GeoPlatformWPSConnectorTest {
-    
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
@@ -82,19 +89,19 @@ public class GeoPlatformWPSConnectorTest {
     //
     private HttpPost post;
     private HttpClient httpclient;
-    
+
     @Test
     public void test() {
         Assert.assertNotNull(gpWPSConnector);
-        
+
         logger.info("Number of Process ********************** " + gpWPSConnector.getWPSCapabilities().size());
-        
+
         for (ProcessBriefType pbfT : gpWPSConnector.getWPSCapabilities()) {
             logger.info("Process Abstract : ****************" + pbfT.getTitle().getValue());
             logger.info("Process Identifier : ***********" + pbfT.getIdentifier().getValue());
         }
     }
-    
+
     @Test
     public void testProcessDoubleAddition() {
         try {
@@ -132,21 +139,21 @@ public class GeoPlatformWPSConnectorTest {
                     + "   </wps:RawDataOutput>"
                     + "  </wps:ResponseForm>"
                     + "</wps:Execute>";
-            
+
             StringEntity se = new StringEntity(xml, "UTF-8");
             se.setContentType("application/atom+xml");
-            
+
             post.setEntity(se);
-            
+
             HttpResponse response;
             response = httpclient.execute(post);
-            
+
             logger.info("Response Status : " + response.getStatusLine() + "\n");
-            
+
             InputStream is = response.getEntity().getContent();
-            
+
             Writer writer = new StringWriter();
-            
+
             char[] buffer = new char[1024];
             try {
                 Reader reader = new BufferedReader(
@@ -158,9 +165,9 @@ public class GeoPlatformWPSConnectorTest {
             } finally {
                 is.close();
             }
-            
+
             logger.info("RESULT DOUBLE ADDITION @@@@@@@@@@@@@@@@@@@@@@@@ " + writer.toString());
-            
+
         } catch (UnsupportedEncodingException ex) {
             logger.error("Error " + ex);
         } catch (IOException es) {
@@ -169,7 +176,7 @@ public class GeoPlatformWPSConnectorTest {
             httpclient.getConnectionManager().shutdown();
         }
     }
-    
+
     @Test
     public void testProcessFilterByField() {
         try {
@@ -187,7 +194,7 @@ public class GeoPlatformWPSConnectorTest {
                     + "      <wps:Reference mimeType=\"text/xml; subtype=wfs-collection/1.0\" xlink:href=\"http://geoserver/wfs\" method=\"POST\"> "
                     + "        <wps:Body> "
                     + "          <wfs:GetFeature service=\"WFS\" version=\"1.0.0\" outputFormat=\"GML2\"> "
-                    + "            <wfs:Query typeName=\"sitdpc:planet_osm_line\"/> "
+                    + "            <wfs:Query typeName=\"sitdpc:comuni2001\"/> "
                     + "          </wfs:GetFeature> "
                     + "        </wps:Body> "
                     + "      </wps:Reference> "
@@ -195,13 +202,13 @@ public class GeoPlatformWPSConnectorTest {
                     + "    <wps:Input> "
                     + "      <ows:Identifier>field</ows:Identifier> "
                     + "      <wps:Data> "
-                    + "        <wps:LiteralData>name</wps:LiteralData> "
+                    + "        <wps:LiteralData>comune</wps:LiteralData> "
                     + "      </wps:Data> "
                     + "    </wps:Input> "
                     + "    <wps:Input> "
                     + "      <ows:Identifier>value</ows:Identifier> "
                     + "      <wps:Data> "
-                    + "        <wps:LiteralData>via del corso</wps:LiteralData> "
+                    + "        <wps:LiteralData>pignola</wps:LiteralData> "
                     + "      </wps:Data> "
                     + "    </wps:Input> "
                     + "  </wps:DataInputs> "
@@ -211,29 +218,38 @@ public class GeoPlatformWPSConnectorTest {
                     + "    </wps:RawDataOutput> "
                     + "  </wps:ResponseForm> "
                     + " </wps:Execute>";
-            
+
             StringEntity se = new StringEntity(xml, "UTF-8");
             se.setContentType("application/atom+xml");
-            
+
             post.setEntity(se);
-            
+
             HttpResponse response;
             response = httpclient.execute(post);
-            
+
             logger.info("Response Status : " + response.getStatusLine() + "\n");
-            
+
             InputStream is = response.getEntity().getContent();
-            Configuration configuration = new GMLConfiguration();
-            StreamingParser parser = new StreamingParser(configuration, is,
-                    SimpleFeature.class);
-            
-            SimpleFeature f = null;
-            
-            while ((f = (SimpleFeature) parser.parse()) != null) {
-                logger.info("FEATURE @@@@@@@@@@@@@@@@@@@@@@@@@ " + f.toString());
-            }
+
+            GML gml = new GML(Version.GML3);
             
             
+ 
+            gml.setCoordinateReferenceSystem(DefaultGeographicCRS.WGS84);
+ 
+            SimpleFeatureCollection fc = gml.decodeFeatureCollection(is);
+            
+            fc.accepts( new AbstractFeatureVisitor(){
+              public void visit( Feature feature ) {
+                  SimpleFeature f = (SimpleFeature) feature;
+                  CoordinateReferenceSystem coord = GML2EncodingUtils.getCRS((Geometry)f.getDefaultGeometry());
+                  
+                  logger.info("CRS for Feature =  " + coord.getCoordinateSystem().getIdentifiers());
+
+              }
+          }, new NullProgressListener() );
+
+
         } catch (UnsupportedEncodingException ex) {
             logger.error("Error " + ex);
         } catch (IOException es) {
@@ -246,7 +262,7 @@ public class GeoPlatformWPSConnectorTest {
             httpclient.getConnectionManager().shutdown();
         }
     }
-    
+
     @PostConstruct
     public void init() {
         this.post = new HttpPost("http://150.146.160.50/geoserver/ows?service=WPS");

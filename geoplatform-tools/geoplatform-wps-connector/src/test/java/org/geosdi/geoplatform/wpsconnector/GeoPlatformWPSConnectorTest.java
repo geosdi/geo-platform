@@ -43,7 +43,6 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-import java.util.logging.Level;
 import javax.annotation.PostConstruct;
 import javax.xml.parsers.ParserConfigurationException;
 import junit.framework.Assert;
@@ -53,12 +52,12 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.geotools.gml2.GMLConfiguration;
+import org.geotools.gml3.GMLConfiguration;
 import org.geotools.xml.Configuration;
 import org.geotools.xml.StreamingParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.opengis.feature.Feature;
+import org.opengis.feature.simple.SimpleFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -225,11 +224,12 @@ public class GeoPlatformWPSConnectorTest {
             
             InputStream is = response.getEntity().getContent();
             Configuration configuration = new GMLConfiguration();
-            StreamingParser parser = new StreamingParser(configuration, is, Feature.class);
+            StreamingParser parser = new StreamingParser(configuration, is,
+                    SimpleFeature.class);
             
-            Feature f = null;
+            SimpleFeature f = null;
             
-            while ((f = (Feature) parser.parse()) != null) {
+            while ((f = (SimpleFeature) parser.parse()) != null) {
                 logger.info("FEATURE @@@@@@@@@@@@@@@@@@@@@@@@@ " + f.toString());
             }
             

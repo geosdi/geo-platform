@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.io.File;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -50,7 +49,7 @@ import org.slf4j.LoggerFactory;
 public class PublisherShpCleanerJob implements Job {
 
     public static final String PUBLISHER_SHP_CLEANER_JOB = "publischerShpCleanerJob";
-    public static final String USER_WORKSPACE = "userWorkSPace";
+    public static final String USER_WORKSPACE = "userWorkSpace";
     public static final String LAYER_NAME = "shpList";
     public static final String PUBLISHER_SERVICE = "publisher_service";
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

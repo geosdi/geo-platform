@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
 public class PublisherTifCleanerJob implements Job {
 
     public static final String PUBLISHER_TIF_CLEANER_JOB = "publischerTifCleanerJob";
-    public static final String USER_WORKSPACE = "userWorkSPace";
+    public static final String USER_WORKSPACE = "userWorkSpace";
     public static final String FILE_NAME = "fileName";
     public static final String FILE_PATH = "filePath";
     public static final String PUBLISHER_SERVICE = "publisher_service";

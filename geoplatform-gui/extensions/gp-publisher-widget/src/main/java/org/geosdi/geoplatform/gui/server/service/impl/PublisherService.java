@@ -109,11 +109,13 @@ public class PublisherService implements IPublisherService {
             System.out.println("Error on publish shape: " + ex);
             throw new GeoPlatformException("Error on publish shape.");
         } catch (MalformedURLException e) {
-            logger.error("Error on reloading cluster: " + e);
-            System.out.println("Error on reloading cluster: " + e);
+            logger.error("Error on cluster url: " + e);
+            System.out.println("Error on cluster url: " + e);
+            throw new GeoPlatformException("Error on cluster url.");
         } catch (IOException e) {
             logger.error("Error on reloading cluster: " + e);
             System.out.println("Error on reloading cluster: " + e);
+            throw new GeoPlatformException("Error on reloading cluster.");
         }
     }
 

@@ -43,6 +43,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -135,6 +136,31 @@ public class PublishUtility {
         return destination;
     }
 
+    public static void extractEntryToFile(ZipEntry entry, ZipFile zipSrc, String tempUserDir) {
+        String entryName = null;
+        FileOutputStream fileoutputstream = null;
+        InputStream zipinputstream = null;
+        try {
+            zipinputstream = zipSrc.getInputStream(entry);
+            int lastIndex = entry.getName().lastIndexOf('/');
+            entryName = entry.getName().substring(lastIndex + 1).toLowerCase();
+            logger.info("INFO: Found file " + entryName);
+            fileoutputstream = new FileOutputStream(tempUserDir + entryName);
+            byte[] buf = new byte[1024];
+            int n;
+            while ((n = zipinputstream.read(buf, 0, 1024)) > -1) {
+                fileoutputstream.write(buf, 0, n);
+            }
+        } catch (IOException ioe) {
+        } finally {
+            try {
+                fileoutputstream.close();
+                zipinputstream.close();
+            } catch (IOException e) {
+            }
+        }
+    }
+
     /*****************
      *
      * @param zipFileName the name of the resulting zip file
@@ -191,7 +217,8 @@ public class PublishUtility {
     }
     //TODO: portare in file di configurazione esterno i parametri per la creazione 
     //di stores postgis
-    public static GSPostGISDatastoreEncoder generateEncoder(String storeName){
+
+    public static GSPostGISDatastoreEncoder generateEncoder(String storeName) {
         GSPostGISDatastoreEncoder encoder = new GSPostGISDatastoreEncoder();
         encoder.setName(storeName);
         encoder.setEnabled(true);

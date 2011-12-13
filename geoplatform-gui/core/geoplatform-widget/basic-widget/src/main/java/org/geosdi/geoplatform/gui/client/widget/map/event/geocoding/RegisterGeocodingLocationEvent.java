@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.map.event.geocoding;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 
 /**
@@ -45,20 +46,23 @@ import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class RegisterGeocodingLocationEvent extends GwtEvent<GeocodingEventHandler> {
-    
+
     private IGeoPlatformLocation bean;
-    
-    public RegisterGeocodingLocationEvent(IGeoPlatformLocation theBean) {
+    private GPCoordinateReferenceSystem crs;
+
+    public RegisterGeocodingLocationEvent(IGeoPlatformLocation theBean,
+            GPCoordinateReferenceSystem theCRS) {
         this.bean = theBean;
+        this.crs = theCRS;
     }
-    
+
     @Override
     public Type<GeocodingEventHandler> getAssociatedType() {
         return GeocodingEventHandler.TYPE;
     }
-    
+
     @Override
     protected void dispatch(GeocodingEventHandler handler) {
-        handler.onRegisterGeocodingLocation(bean);
+        handler.onRegisterGeocodingLocation(bean, crs);
     }
 }

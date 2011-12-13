@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.map;
 import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.GeocodingEventHandler;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.GeocodingVectorMarker;
 import org.geosdi.geoplatform.gui.client.widget.map.popup.PopupMapWidget;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 import org.geosdi.geoplatform.gui.puregwt.GPToolbarActionHandlerManager;
@@ -77,9 +78,19 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
     }
 
     @Override
-    public void onRegisterGeocodingLocation(IGeoPlatformLocation bean) {
+    public void onRegisterGeocodingLocation(IGeoPlatformLocation bean,
+            GPCoordinateReferenceSystem crs) {
         LonLat center = new LonLat(bean.getLon(), bean.getLat());
-        center.transform("EPSG:4326", this.mapWidget.getMap().getProjection());
+
+        System.out.println("EPSG:CODE MAP @@@@@@@@@@@@@@@@@@@@@@ "
+                + this.mapWidget.getMap().getProjection());
+
+        System.out.println("CRS PASSED @@@@@@@@@@@@@@@@@@@@@@@@@ " + crs.getCode());
+
+        if (!crs.getCode().equals(this.mapWidget.getMap().getProjection())) {
+            center.transform(crs.getCode(), this.mapWidget.getMap().getProjection());
+        }
+
         this.geocoderMarker.addMarker(center, this.mapWidget.getMap());
         GPToolbarActionHandlerManager.fireEvent(new UpdateModelAndButtonEvent(bean.getDescription()));
     }

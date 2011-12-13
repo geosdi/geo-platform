@@ -49,6 +49,7 @@ public class GeocodingBean extends GeoPlatformBeanModel implements
      *
      */
     private static final long serialVersionUID = -3598344038115853656L;
+    //
     private String description;
     private double lon;
     private double lat;
@@ -102,47 +103,6 @@ public class GeocodingBean extends GeoPlatformBeanModel implements
     @Override
     public void setLat(double lat) {
         this.lat = lat;
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result
-                + ((description == null) ? 0 : description.hashCode());
-        return result;
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        GeocodingBean other = (GeocodingBean) obj;
-        if (description == null) {
-            if (other.description != null) {
-                return false;
-            }
-        } else if (!description.equals(other.description)) {
-            return false;
-        }
-        return true;
     }
 
     /*

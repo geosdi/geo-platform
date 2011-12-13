@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.map.event.geocoding;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt.GPGeocodingMarkerHandler;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 
 /**
@@ -48,5 +49,6 @@ public interface GeocodingEventHandler extends GPGeocodingMarkerHandler {
 
     Type<GeocodingEventHandler> TYPE = new Type<GeocodingEventHandler>();
 
-    void onRegisterGeocodingLocation(IGeoPlatformLocation bean);
+    void onRegisterGeocodingLocation(IGeoPlatformLocation bean,
+            GPCoordinateReferenceSystem crs);
 }

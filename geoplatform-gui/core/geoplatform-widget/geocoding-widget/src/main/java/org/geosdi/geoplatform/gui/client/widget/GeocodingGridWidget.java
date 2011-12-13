@@ -65,6 +65,7 @@ import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.RegisterGeoc
 import org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt.event.GPGeocodingRemoveMarkerEvent;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPlugin;
 import org.geosdi.geoplatform.gui.configuration.grid.IGeoPlatformGrid;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.geocoder.GeoCoderPerformOperation;
 import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
@@ -156,7 +157,8 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
             @Override
             public void handleEvent(BaseEvent be) {
                 GPGeocodingHandlerManager.fireEvent(
-                        new RegisterGeocodingLocationEvent(grid.getSelectionModel().getSelectedItem()));
+                        new RegisterGeocodingLocationEvent(grid.getSelectionModel().getSelectedItem(),
+                        GPCoordinateReferenceSystem.WGS_84));
             }
         });
     }
@@ -321,8 +323,8 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
                             gridWidget.unMaskGrid();
                             grid.getView().refresh(false);
                             GeoPlatformMessage.errorMessage("Geocoding - Service",
-                                    "There is a problem with Geocoding Service");
-
+                                    "There is a problem with Google"
+                                    + " Geocoding Service");
                         }
                     });
         }

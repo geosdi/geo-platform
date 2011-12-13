@@ -105,42 +105,43 @@ public class GeoPlatformWPSConnectorTest {
     @Test
     public void testProcessDoubleAddition() {
         try {
-            String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> "
-                    + "<wps:Execute version=\"1.0.0\" service=\"WPS\" xmlns:xsi="
-                    + "\"http://www.w3.org/2001/XMLSchema-instance\" "
-                    + "xmlns=\"http://www.opengis.net/wps/1.0.0\" xmlns:wfs="
-                    + "\"http://www.opengis.net/wfs\" xmlns:wps=\""
-                    + "http://www.opengis.net/wps/1.0.0\" xmlns:ows=\""
-                    + "http://www.opengis.net/ows/1.1\" xmlns:gml=\""
-                    + "http://www.opengis.net/gml\" xmlns:ogc=\""
-                    + "http://www.opengis.net/ogc\" xmlns:wcs=\""
-                    + "http://www.opengis.net/wcs/1.1.1\" xmlns:xlink=\""
-                    + "http://www.w3.org/1999/xlink\" xsi:schemaLocation=\""
-                    + "http://www.opengis.net/wps/1.0.0 http://"
-                    + "schemas.opengis.net/wps/1.0.0/wpsAll.xsd\"> "
-                    + "  <ows:Identifier>gt:DoubleAddition</ows:Identifier> "
-                    + "  <wps:DataInputs> "
-                    + "   <wps:Input> "
-                    + "    <ows:Identifier>input_a</ows:Identifier> "
-                    + "   <wps:Data> "
-                    + "    <wps:LiteralData>4</wps:LiteralData>"
-                    + " </wps:Data>"
-                    + " </wps:Input>"
-                    + " <wps:Input>"
-                    + "    <ows:Identifier>input_b</ows:Identifier>"
-                    + "   <wps:Data>"
-                    + "     <wps:LiteralData>4</wps:LiteralData>"
-                    + "   </wps:Data>"
-                    + " </wps:Input>"
-                    + " </wps:DataInputs>"
-                    + " <wps:ResponseForm>"
-                    + "   <wps:RawDataOutput>"
-                    + "     <ows:Identifier>result</ows:Identifier>"
-                    + "   </wps:RawDataOutput>"
-                    + "  </wps:ResponseForm>"
-                    + "</wps:Execute>";
+            StringBuilder xml = new StringBuilder();
+            xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?> ");
+            xml.append("<wps:Execute version=\"1.0.0\" service=\"WPS\" xmlns:xsi=");
+            xml.append("\"http://www.w3.org/2001/XMLSchema-instance\" ");
+            xml.append("xmlns=\"http://www.opengis.net/wps/1.0.0\" xmlns:wfs=");
+            xml.append("\"http://www.opengis.net/wfs\" xmlns:wps=\"");
+            xml.append("http://www.opengis.net/wps/1.0.0\" xmlns:ows=\"");
+            xml.append("http://www.opengis.net/ows/1.1\" xmlns:gml=\"");
+            xml.append("http://www.opengis.net/gml\" xmlns:ogc=\"");
+            xml.append("http://www.opengis.net/ogc\" xmlns:wcs=\"");
+            xml.append("http://www.opengis.net/wcs/1.1.1\" xmlns:xlink=\"");
+            xml.append("http://www.w3.org/1999/xlink\" xsi:schemaLocation=\"");
+            xml.append("http://www.opengis.net/wps/1.0.0 http://");
+            xml.append("schemas.opengis.net/wps/1.0.0/wpsAll.xsd\"> ");
+            xml.append("  <ows:Identifier>gt:DoubleAddition</ows:Identifier> ");
+            xml.append("  <wps:DataInputs> ");
+            xml.append("   <wps:Input> ");
+            xml.append("    <ows:Identifier>input_a</ows:Identifier> ");
+            xml.append("   <wps:Data> ");
+            xml.append("    <wps:LiteralData>4</wps:LiteralData>");
+            xml.append(" </wps:Data>");
+            xml.append(" </wps:Input>");
+            xml.append(" <wps:Input>");
+            xml.append("    <ows:Identifier>input_b</ows:Identifier>");
+            xml.append("   <wps:Data>");
+            xml.append("     <wps:LiteralData>4</wps:LiteralData>");
+            xml.append("   </wps:Data>");
+            xml.append(" </wps:Input>");
+            xml.append(" </wps:DataInputs>");
+            xml.append(" <wps:ResponseForm>");
+            xml.append("   <wps:RawDataOutput>");
+            xml.append("     <ows:Identifier>result</ows:Identifier>");
+            xml.append("   </wps:RawDataOutput>");
+            xml.append("  </wps:ResponseForm>");
+            xml.append("</wps:Execute>");
 
-            StringEntity se = new StringEntity(xml, "UTF-8");
+            StringEntity se = new StringEntity(xml.toString(), "UTF-8");
             se.setContentType("application/atom+xml");
 
             post.setEntity(se);
@@ -180,46 +181,47 @@ public class GeoPlatformWPSConnectorTest {
     @Test
     public void testProcessFilterByField() {
         try {
-            String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> "
-                    + "<wps:Execute version=\"1.0.0\" service=\"WPS\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
-                    + " xmlns=\"http://www.opengis.net/wps/1.0.0\" xmlns:wfs=\"http://www.opengis.net/wfs\" "
-                    + "xmlns:wps=\"http://www.opengis.net/wps/1.0.0\" xmlns:ows=\"http://www.opengis.net/ows/1.1\""
-                    + " xmlns:gml=\"http://www.opengis.net/gml\" xmlns:ogc=\"http://www.opengis.net/ogc\" "
-                    + "xmlns:wcs=\"http://www.opengis.net/wcs/1.1.1\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" "
-                    + "xsi:schemaLocation=\"http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd\"> "
-                    + "  <ows:Identifier>sitdpc:FilterByField</ows:Identifier> "
-                    + "  <wps:DataInputs> "
-                    + "    <wps:Input> "
-                    + "      <ows:Identifier>source</ows:Identifier> "
-                    + "      <wps:Reference mimeType=\"text/xml; subtype=wfs-collection/1.0\" xlink:href=\"http://geoserver/wfs\" method=\"POST\"> "
-                    + "        <wps:Body> "
-                    + "          <wfs:GetFeature service=\"WFS\" version=\"1.0.0\" outputFormat=\"GML2\"> "
-                    + "            <wfs:Query typeName=\"sitdpc:comuni2001\"/> "
-                    + "          </wfs:GetFeature> "
-                    + "        </wps:Body> "
-                    + "      </wps:Reference> "
-                    + "    </wps:Input> "
-                    + "    <wps:Input> "
-                    + "      <ows:Identifier>field</ows:Identifier> "
-                    + "      <wps:Data> "
-                    + "        <wps:LiteralData>comune</wps:LiteralData> "
-                    + "      </wps:Data> "
-                    + "    </wps:Input> "
-                    + "    <wps:Input> "
-                    + "      <ows:Identifier>value</ows:Identifier> "
-                    + "      <wps:Data> "
-                    + "        <wps:LiteralData>pignola</wps:LiteralData> "
-                    + "      </wps:Data> "
-                    + "    </wps:Input> "
-                    + "  </wps:DataInputs> "
-                    + "  <wps:ResponseForm> "
-                    + "    <wps:RawDataOutput mimeType=\"text/xml; subtype=wfs-collection/1.0\"> "
-                    + "      <ows:Identifier>result</ows:Identifier> "
-                    + "    </wps:RawDataOutput> "
-                    + "  </wps:ResponseForm> "
-                    + " </wps:Execute>";
+            StringBuilder xml = new StringBuilder();
+            xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?> ");
+            xml.append("<wps:Execute version=\"1.0.0\" service=\"WPS\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
+            xml.append(" xmlns=\"http://www.opengis.net/wps/1.0.0\" xmlns:wfs=\"http://www.opengis.net/wfs\" ");
+            xml.append("xmlns:wps=\"http://www.opengis.net/wps/1.0.0\" xmlns:ows=\"http://www.opengis.net/ows/1.1\"");
+            xml.append(" xmlns:gml=\"http://www.opengis.net/gml\" xmlns:ogc=\"http://www.opengis.net/ogc\" ");
+            xml.append("xmlns:wcs=\"http://www.opengis.net/wcs/1.1.1\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" ");
+            xml.append("xsi:schemaLocation=\"http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd\"> ");
+            xml.append("  <ows:Identifier>sitdpc:FilterByField</ows:Identifier> ");
+            xml.append("  <wps:DataInputs> ");
+            xml.append("    <wps:Input> ");
+            xml.append("      <ows:Identifier>source</ows:Identifier> ");
+            xml.append("      <wps:Reference mimeType=\"text/xml; subtype=wfs-collection/1.0\" xlink:href=\"http://geoserver/wfs\" method=\"POST\"> ");
+            xml.append("        <wps:Body> ");
+            xml.append("          <wfs:GetFeature service=\"WFS\" version=\"1.0.0\" outputFormat=\"GML2\"> ");
+            xml.append("            <wfs:Query typeName=\"sitdpc:comuni2001\"/> ");
+            xml.append("          </wfs:GetFeature> ");
+            xml.append("        </wps:Body> ");
+            xml.append("      </wps:Reference> ");
+            xml.append("    </wps:Input> ");
+            xml.append("    <wps:Input> ");
+            xml.append("      <ows:Identifier>field</ows:Identifier> ");
+            xml.append("      <wps:Data> ");
+            xml.append("        <wps:LiteralData>comune</wps:LiteralData> ");
+            xml.append("      </wps:Data> ");
+            xml.append("    </wps:Input> ");
+            xml.append("    <wps:Input> ");
+            xml.append("      <ows:Identifier>value</ows:Identifier> ");
+            xml.append("      <wps:Data> ");
+            xml.append("        <wps:LiteralData>pignola</wps:LiteralData> ");
+            xml.append("      </wps:Data> ");
+            xml.append("    </wps:Input> ");
+            xml.append("  </wps:DataInputs> ");
+            xml.append("  <wps:ResponseForm> ");
+            xml.append("    <wps:RawDataOutput mimeType=\"text/xml; subtype=wfs-collection/1.0\"> ");
+            xml.append("      <ows:Identifier>result</ows:Identifier> ");
+            xml.append("    </wps:RawDataOutput> ");
+            xml.append("  </wps:ResponseForm> ");
+            xml.append(" </wps:Execute>");
 
-            StringEntity se = new StringEntity(xml, "UTF-8");
+            StringEntity se = new StringEntity(xml.toString(), "UTF-8");
             se.setContentType("application/atom+xml");
 
             post.setEntity(se);
@@ -232,23 +234,21 @@ public class GeoPlatformWPSConnectorTest {
             InputStream is = response.getEntity().getContent();
 
             GML gml = new GML(Version.GML3);
-            
-            
- 
             gml.setCoordinateReferenceSystem(DefaultGeographicCRS.WGS84);
- 
+
             SimpleFeatureCollection fc = gml.decodeFeatureCollection(is);
-            
-            fc.accepts( new AbstractFeatureVisitor(){
-              public void visit( Feature feature ) {
-                  SimpleFeature f = (SimpleFeature) feature;
-                  CoordinateReferenceSystem coord = GML2EncodingUtils.getCRS((Geometry)f.getDefaultGeometry());
-                  
-                  logger.info("CRS for Feature =  " + coord.getCoordinateSystem().getIdentifiers());
 
-              }
-          }, new NullProgressListener() );
+            fc.accepts(new AbstractFeatureVisitor() {
 
+                @Override
+                public void visit(Feature feature) {
+                    SimpleFeature f = (SimpleFeature) feature;
+                    CoordinateReferenceSystem coord = GML2EncodingUtils.getCRS((Geometry) f.getDefaultGeometry());
+
+                    logger.info("CRS for Feature =  " + coord.getCoordinateSystem().getIdentifiers());
+
+                }
+            }, new NullProgressListener());
 
         } catch (UnsupportedEncodingException ex) {
             logger.error("Error " + ex);
@@ -265,7 +265,9 @@ public class GeoPlatformWPSConnectorTest {
 
     @PostConstruct
     public void init() {
-        this.post = new HttpPost("http://150.146.160.50/geoserver/ows?service=WPS");
+        String url = gpWPSConnector.getUrl().toString();
+        logger.info("\n*** URL = " + url);
+        this.post = new HttpPost(url);
         this.httpclient = new DefaultHttpClient();
     }
 }

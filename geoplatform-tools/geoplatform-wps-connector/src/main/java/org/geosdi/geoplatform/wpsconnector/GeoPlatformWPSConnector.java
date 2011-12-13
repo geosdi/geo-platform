@@ -125,7 +125,7 @@ public class GeoPlatformWPSConnector {
     }
 
     /**
-     * Create a Process 
+     * Create a Process
      * 
      * @param 
      *      processIdentifier 
@@ -138,16 +138,31 @@ public class GeoPlatformWPSConnector {
     public Process createProcess(String processIdentifier)
             throws Exception {
 
-        WPSFactory wpsfactory = new WPSFactory(describeProcess(processIdentifier),
-                url);
+        WPSFactory wpsfactory = new WPSFactory(describeProcess(processIdentifier), url);
 
         return wpsfactory.create();
 
     }
-    
+
+    /**
+     * Create a Process
+     * 
+     * @param
+     *      processType
+     * 
+     * @return
+     *      Process
+     */
     public Process createProcess(ProcessDescriptionType processType) {
         WPSFactory wpsFactory = new WPSFactory(processType, url);
-        
+
         return wpsFactory.create();
+    }
+
+    /**
+     * @return the url
+     */
+    public URL getUrl() {
+        return url;
     }
 }

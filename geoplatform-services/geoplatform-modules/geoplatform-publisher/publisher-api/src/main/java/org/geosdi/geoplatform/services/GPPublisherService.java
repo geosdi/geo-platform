@@ -131,17 +131,17 @@ public interface GPPublisherService {
             @WebParam(name = "dataStoreName") String dataStoreName)
             throws ResourceNotFoundFault, FileNotFoundException;
 
-    @Get
-    @HttpResource(location = "/preview/removeFromPreview")
-    @WebResult(name = "Result")
-    boolean removeSHPFromPreview(@WebParam(name = "userName") String userName,
-            @WebParam(name = "layerName") String layerName)
-            throws ResourceNotFoundFault;
-    
-    @Get
-    @HttpResource(location = "/preview/removeFromPreview")
-    @WebResult(name = "Result")
-    boolean removeTIFFromPreview(@WebParam(name = "userName") String userName,
-            @WebParam(name = "layerName") String layerName)
-            throws ResourceNotFoundFault;
+//    @Get
+//    @HttpResource(location = "/preview/removeFromPreview")
+//    @WebResult(name = "Result")
+//    boolean removeSHPFromPreview(@WebParam(name = "userName") String userName,
+//            @WebParam(name = "layerName") String layerName)
+//            throws ResourceNotFoundFault;
+//    
+//    @Get
+//    @HttpResource(location = "/preview/removeFromPreview")
+//    @WebResult(name = "Result")
+//    boolean removeTIFFromPreview(@WebParam(name = "userName") String userName,
+//            @WebParam(name = "layerName") String layerName)
+//            throws ResourceNotFoundFault;
 }

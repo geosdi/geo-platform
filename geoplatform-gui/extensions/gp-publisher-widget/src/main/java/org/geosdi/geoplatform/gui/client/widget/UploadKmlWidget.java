@@ -127,7 +127,7 @@ public class UploadKmlWidget extends GeoPlatformWindow {
 //                    for (PreviewLayer layer : layerList) {
 //                        layersName.add(layer.getName());
 //                    }
-                    PublisherRemote.Util.getInstance().publishLayerPreview(layersName, false, new AsyncCallback<Object>() {
+                    PublisherRemote.Util.getInstance().publishLayerPreview(layersName, false, new AsyncCallback<String>() {
 
                         @Override
                         public void onFailure(Throwable caught) {
@@ -147,7 +147,7 @@ public class UploadKmlWidget extends GeoPlatformWindow {
                         }
 
                         @Override
-                        public void onSuccess(Object result) {
+                        public void onSuccess(String result) {
 //                            LayerHandlerManager.fireEvent(new AddRasterFromPublisherEvent(layerList));
                             reset();
 //                            LayoutManager.getInstance().getStatusMap().setStatus(

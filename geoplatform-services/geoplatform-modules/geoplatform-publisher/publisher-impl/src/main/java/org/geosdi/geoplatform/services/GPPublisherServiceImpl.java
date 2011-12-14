@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.services;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
-import java.util.logging.Level;
 import javax.jws.WebService;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
@@ -87,7 +86,6 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             GPPublisherServiceImpl.class);
 
     class LayerInfo {
-
         String name;
         boolean isShp;
         String epsg;
@@ -96,8 +94,10 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     private String RESTURL = "";
     private String RESTUSER = "";
     private String RESTPW = "";
-    private GeoServerRESTPublisher publisher = null;
-    private GeoServerRESTReader reader = null;
+    @Autowired
+    private GeoServerRESTPublisher restPublisher;
+    @Autowired
+    private GeoServerRESTReader restReader;
     private String geoportalDir = "";
     @Autowired
     private PublisherScheduler scheduler;
@@ -110,15 +110,6 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         this.RESTUSER = RESTUSER;
         this.RESTPW = RESTPW;
         this.geoportalDir = geoportalDir;
-
-        publisher = new GeoServerRESTPublisher(RESTURL, RESTUSER, RESTPW);
-        try {
-            reader = new GeoServerRESTReader(RESTURL, RESTUSER, RESTPW);
-        } catch (MalformedURLException ex) {
-            logger.info("Problems for connecting to the REST reader");
-        }
-
-
         File geoportalDirFile = new File(geoportalDir);
         if (!geoportalDirFile.exists()) {
             logger.error("The geoportaldir: " + geoportalDir + " does not exist!");
@@ -166,14 +157,13 @@ public class GPPublisherServiceImpl implements GPPublisherService {
      * @throws ResourceNotFoundFault
      * this service removes a layer from the workspace
      */
-    @Override
     public boolean removeSHPFromPreview(String workspace, String layerName) throws ResourceNotFoundFault {
         String userWorkspace = this.getWorkspace(workspace);
         logger.info("Removing shp " + layerName + " from " + userWorkspace);
         this.removeLayer(layerName);
-        publisher.unpublishFeatureType(userWorkspace, layerName, layerName);
+        restPublisher.unpublishFeatureType(userWorkspace, layerName, layerName);
         reload();
-        publisher.removeDatastore(userWorkspace, layerName);
+        restPublisher.removeDatastore(userWorkspace, layerName);
         return true;
     }
 
@@ -184,19 +174,18 @@ public class GPPublisherServiceImpl implements GPPublisherService {
      * @throws ResourceNotFoundFault
      * this service removes a layer from the workspace
      */
-    @Override
     public boolean removeTIFFromPreview(String userName, String layerName) throws ResourceNotFoundFault {
         String userWorkspace = getWorkspace(userName);
         logger.info("Removing tif " + layerName + " from " + userWorkspace);
         this.removeLayer(layerName);
-        publisher.unpublishCoverage(userWorkspace, layerName, layerName);
+        restPublisher.unpublishCoverage(userWorkspace, layerName, layerName);
         reload();
-        publisher.removeCoverageStore(userWorkspace, layerName);
+        restPublisher.removeCoverageStore(userWorkspace, layerName);
         return true;
     }
 
     private InfoPreview getTIFURLByLayerName(String userName, String layerName) {
-        RESTCoverage featureType = reader.getCoverage(reader.getLayer(
+        RESTCoverage featureType = restReader.getCoverage(restReader.getLayer(
                 layerName));
         String userWorkspace = getWorkspace(userName);
         InfoPreview info = null;
@@ -221,7 +210,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
      * get the URL to the PNG if the layer dataStoreName
      */
     private InfoPreview getSHPURLByDataStoreName(String userName, String layerName) throws ResourceNotFoundFault {
-        RESTFeatureType featureType = reader.getFeatureType(reader.getLayer(layerName));
+        RESTFeatureType featureType = restReader.getFeatureType(restReader.getLayer(layerName));
         String userWorkspace = getWorkspace(userName);
         InfoPreview info = null;
         try {
@@ -248,7 +237,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         reload();
         List<InfoPreview> listPreviews = new ArrayList<InfoPreview>();
         String userWorkspace = getWorkspace(userName);
-        RESTDataStoreList list = reader.getDatastores(userWorkspace);
+        RESTDataStoreList list = restReader.getDatastores(userWorkspace);
         for (NameLinkElem element : list) {
             String name = element.getName();
             InfoPreview item = getSHPURLByDataStoreName(userName, name);
@@ -378,9 +367,9 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         logger.info("\n INFO: FOUND STYLE FILE. TRYING TO PUBLISH WITH " + layerName + " NAME");
         boolean returnPS = false;
         if (existsStyle(layerName)) {
-            publisher.removeStyle(layerName);
+            restPublisher.removeStyle(layerName);
         }
-        returnPS = publisher.publishStyle(fileSLD, layerName);
+        returnPS = restPublisher.publishStyle(fileSLD, layerName);
         logger.info("\n INFO: PUBLISH STYLE RESULT " + returnPS);
         return layerName;
     }
@@ -458,7 +447,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
      * check whether the style styleName exists
      */
     public boolean existsStyle(String styleName) {
-        RESTStyleList styleList = reader.getStyles();
+        RESTStyleList styleList = restReader.getStyles();
         for (int i = 0; i < styleList.size(); i++) {
             if (styleList.get(i).getName().equalsIgnoreCase(styleName)) {
                 return true;
@@ -475,7 +464,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
      * check whether the layer layerName exists in the workspace workspace
      */
     public boolean existsDataStore(String workspace, String dataStoreName) {
-        RESTDataStoreList workspaceDataStores = reader.getDatastores(workspace);
+        RESTDataStoreList workspaceDataStores = restReader.getDatastores(workspace);
         for (int i = 0; i < workspaceDataStores.size(); i++) {
             if (workspaceDataStores.get(i).getName().equals(dataStoreName)) {
                 return true;
@@ -502,10 +491,10 @@ public class GPPublisherServiceImpl implements GPPublisherService {
      * creates the workspace if not exists or returns the existing one
      */
     private String getWorkspace(String userName) {
-        List<String> workspaces = reader.getWorkspaceNames();
+        List<String> workspaces = restReader.getWorkspaceNames();
         String userWorkspace = userName;
         if (!workspaces.contains(userWorkspace)) {
-            publisher.createWorkspace(userWorkspace);
+            restPublisher.createWorkspace(userWorkspace);
         }
         return userWorkspace;
     }
@@ -675,7 +664,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
 //                        "\n INFO: STYLE TO PUBLISH " + info.sld + " NAME :" + info.name);
 //                logger.info(
 //                        "\n INFO: CREATE DATASTORE " + userWorkspace + " NAME :" + info.name);
-            RESTCoverageStore store = publisher.publishExternalGeoTIFF(userWorkspace,
+            RESTCoverageStore store = restPublisher.publishExternalGeoTIFF(userWorkspace,
                     fileName, fileInTifDir, epsg, sld);
             if (store != null) {
                 logger.info(
@@ -708,9 +697,9 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         // check if the dataStore already exists
         if (!existsDataStore(userWorkspace, datatStoreName)) {
             GSPostGISDatastoreEncoder encoder = PublishUtility.generateEncoder(datatStoreName);
-            publisher.createPostGISDatastore(userName, encoder);
+            restPublisher.createPostGISDatastore(userName, encoder);
         } else {
-            boolean result = publisher.unpublishFeatureType(userWorkspace, datatStoreName, info.name);
+            boolean result = restPublisher.unpublishFeatureType(userWorkspace, datatStoreName, info.name);
             logger.info("Removing existing FeatureType: " + info.name + " with result: " + result);
         }
         // create the <layername>.zip file
@@ -722,7 +711,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         logger.info(
                 "\n INFO: CREATE DATASTORE " + userWorkspace + " NAME :" + info.name);
         try {
-            boolean published = publisher.publishShp(userWorkspace, datatStoreName, info.name, tempFile, info.epsg, info.sld);
+            boolean published = restPublisher.publishShp(userWorkspace, datatStoreName, info.name, tempFile, info.epsg, info.sld);
             if (published) {
                 logger.info(
                         info.name + " correctly published in the " + userWorkspace + " workspace " + info.name);

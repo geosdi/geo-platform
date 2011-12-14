@@ -59,8 +59,8 @@ public class PublisherRemoteImpl extends RemoteServiceServlet
     }
 
     @Override
-    public void publishLayerPreview(List<String> layerList, boolean reloadCluster) throws GeoPlatformException {
-        publisherService.publishLayerPreview(super.getThreadLocalRequest(), layerList, reloadCluster);
+    public String publishLayerPreview(List<String> layerList, boolean reloadCluster) throws GeoPlatformException {
+        return publisherService.publishLayerPreview(super.getThreadLocalRequest(), layerList, reloadCluster);
     }
 
     @Override

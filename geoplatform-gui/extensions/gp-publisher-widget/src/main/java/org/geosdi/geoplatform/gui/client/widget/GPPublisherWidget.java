@@ -42,14 +42,15 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Text;
+import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
-import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import java.util.ArrayList;
 import java.util.List;
@@ -98,10 +99,12 @@ public class GPPublisherWidget extends GeoPlatformWindow
     private GPPublishShapePreviewEvent publishShapePreviewEvent = new GPPublishShapePreviewEvent();
     private List<PreviewLayer> layerList = new ArrayList<PreviewLayer>();
     private Button publishButton;
+    private HTML htmlPanel = new HTML();
+    private Window htmlWindow = new Window();
     private Text uploadMessage = new Text("Select a file to show in preview:");
     private ToggleButton toggleButtonClusterReload;
     private UploadShapePreviewEvent uploadPreviewEvent = new UploadShapePreviewEvent();
-    
+
     public GPPublisherWidget(boolean lazy, TreePanel theTree) {
         super(lazy);
         this.tree = theTree;
@@ -117,6 +120,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
         super.setModal(false);
         super.setCollapsible(true);
         super.setPlain(true);
+        this.htmlWindow.setHeading("Cluster Reload Result");
 //        this.addListener(Events.Show, new Listener<WindowEvent>() {
 //
 //            @Override
@@ -225,34 +229,43 @@ public class GPPublisherWidget extends GeoPlatformWindow
                     }
                     boolean reloadCluster = toggleButtonClusterReload.isPressed();
                     PublisherRemote.Util.getInstance().publishLayerPreview(layersName, reloadCluster,
-                            new AsyncCallback<Object>() {
+                            new AsyncCallback<String>() {
 
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            if (caught.getCause() instanceof GPSessionTimeout) {
-                                GPHandlerManager.fireEvent(new GPLoginEvent(publishShapePreviewEvent));
-                            } else {
-                                GeoPlatformMessage.errorMessage("Error Publishing",
-                                        "An error occurred while making the requested connection.\n"
-                                        + "Verify network connections and try again."
-                                        + "\nIf the problem persists contact your system administrator.");
-                                LayoutManager.getInstance().getStatusMap().setStatus(
-                                        "Error Publishing previewed shape.",
-                                        EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                                System.out.println("Error Publishing previewed shape: " + caught.toString()
-                                        + " data: " + caught.getMessage());
-                            }
-                        }
+                                @Override
+                                public void onFailure(Throwable caught) {
+                                    if (caught.getCause() instanceof GPSessionTimeout) {
+                                        GPHandlerManager.fireEvent(new GPLoginEvent(publishShapePreviewEvent));
+                                    } else {
+                                        GeoPlatformMessage.errorMessage("Error Publishing",
+                                                "An error occurred while making the requested connection.\n"
+                                                + "Verify network connections and try again."
+                                                + "\nIf the problem persists contact your system administrator.");
+                                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                                "Error Publishing previewed shape.",
+                                                EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                                        System.out.println("Error Publishing previewed shape: " + caught.toString()
+                                                + " data: " + caught.getMessage());
+                                    }
+                                }
 
-                        @Override
-                        public void onSuccess(Object result) {
-                            LayerHandlerManager.fireEvent(new AddRasterFromPublisherEvent(layerList));
-                            reset();
-                            LayoutManager.getInstance().getStatusMap().setStatus(
-                                    "Shape\\s published successfully: remember to save the new tree state.",
-                                    EnumSearchStatus.STATUS_SEARCH.toString());
-                        }
-                    });
+                                @Override
+                                public void onSuccess(String result) {
+                                    LayerHandlerManager.fireEvent(new AddRasterFromPublisherEvent(layerList));
+                                    reset();
+                                    System.out.println("Result: "+ result);
+                                    if (result.length() > 0) {
+                                        htmlPanel = new HTML(result);
+                                    } else {
+                                        htmlPanel = new HTML("Realod without result: may be some problems?");
+                                    }
+                                    htmlWindow.removeAll();
+                                    htmlWindow.add(htmlPanel);
+                                    htmlWindow.show();
+                                    LayoutManager.getInstance().getStatusMap().setStatus(
+                                            "Shape\\s published successfully: remember to save the new tree state.",
+                                            EnumSearchStatus.STATUS_SEARCH.toString());
+                                }
+                            });
                 } else {
                     GeoPlatformMessage.alertMessage("Shaper Preview",
                             "You can put layers into Folders only.\n"
@@ -285,7 +298,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
     }
 
     private void addSouthPanel() {
-        fileUploader = new GPFileUploader("UploadServlet", this.uploadPreviewEvent, 
+        fileUploader = new GPFileUploader("UploadServlet", this.uploadPreviewEvent,
                 GPExtensions.ZIP, GPExtensions.TIF);
         southPanel = new FieldSet();
         southPanel.setHeight(78);
@@ -299,7 +312,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
 
         BorderLayoutData centerFileUploader = new BorderLayoutData(LayoutRegion.CENTER);
         centerFileUploader.setMargins(new Margins(1, 150, 9, 151));
-        
+
         BorderLayoutData toggleButtonPosition = new BorderLayoutData(LayoutRegion.EAST, 105);
         toggleButtonPosition.setMargins(new Margins(22, 10, 5, 1));
 

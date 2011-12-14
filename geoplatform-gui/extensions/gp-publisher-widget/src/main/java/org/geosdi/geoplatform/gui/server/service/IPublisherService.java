@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public interface IPublisherService {
 
-    public void publishLayerPreview(HttpServletRequest httpServletRequest, 
+    public String publishLayerPreview(HttpServletRequest httpServletRequest, 
             List<String> layerList, boolean reloadCluster) throws GeoPlatformException;
 
     public void kmlPreview(HttpServletRequest httpServletRequest, String url)

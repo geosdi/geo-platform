@@ -141,6 +141,12 @@
                 <includes>
                     <include>**/*</include>
                 </includes>
+                <excludes>
+                    <exclude>**/*.vm</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/template</directory>
             </resource>
         </resources>
     </build>

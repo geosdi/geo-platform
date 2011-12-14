@@ -143,7 +143,7 @@ public class AccountProjectPropertiesDTO {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
-        str.append(" accountID)").append(accountID);
+        str.append(" accountID=").append(accountID);
         str.append(", projectID=").append(projectID);
         str.append(", projectName=").append(projectName);
         str.append(", defaultProject=").append(defaultProject);

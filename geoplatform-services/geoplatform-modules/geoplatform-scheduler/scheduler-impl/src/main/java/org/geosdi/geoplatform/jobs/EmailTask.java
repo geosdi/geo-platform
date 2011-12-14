@@ -62,8 +62,15 @@ public class EmailTask {
     //
     private JavaMailSender mailSender;
     private VelocityEngine velocityEngine;
-    private String subject;
-    private String template;
+    //
+    private String frontendLink;
+    private String frontendLabel;
+    //
+    private String subjectRegistration;
+    private String templateRegistration;
+    //
+    private String subjectModification;
+    private String templateModification;
 
     //<editor-fold defaultstate="collapsed" desc="Setter methods">
     /**
@@ -83,25 +90,58 @@ public class EmailTask {
     }
 
     /**
-     * @param subject
-     *          the subject to set
+     * @param frontendLink
+     *          the frontendLink to set
      */
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setFrontendLink(String frontendLink) {
+        this.frontendLink = frontendLink;
     }
 
     /**
-     * @param template
-     *          the template to set
+     * @param frontendLabel
+     *          the frontendLabel to set
      */
-    public void setTemplate(String template) {
-        this.template = template;
+    public void setFrontendLabel(String frontendLabel) {
+        this.frontendLabel = frontendLabel;
+    }
+
+    /**
+     * @param subjectRegistration
+     *          the subjectRegistration to set
+     */
+    public void setSubjectRegistration(String subjectRegistration) {
+        this.subjectRegistration = subjectRegistration;
+    }
+
+    /**
+     * @param templateRegistration
+     *          the templateRegistration to set
+     */
+    public void setTemplateRegistration(String templateRegistration) {
+        this.templateRegistration = templateRegistration;
+    }
+
+    /**
+     * @param subjectModification
+     *          the subjectModification to set
+     */
+    public void setSubjectModification(String subjectModification) {
+        this.subjectModification = subjectModification;
+    }
+
+    /**
+     * @param templateModification
+     *          the templateModification to set
+     */
+    public void setTemplateModification(String templateModification) {
+        this.templateModification = templateModification;
     }
     //</editor-fold>
 
-    public void sendConfirmationEmail(final GPUser user) throws EmailException {
+    // TODO Factorize
+    public void sendEmailRegistration(final GPUser user) throws EmailException {
         String email = user.getEmailAddress();
-        logger.info("\n*** Sending email to " + email + " ***");
+        logger.info("\n*** Sending email for registration to {} ***", email);
 
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
 
@@ -109,20 +149,22 @@ public class EmailTask {
             public void prepare(MimeMessage mimeMessage) {
                 try {
                     MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
-                    message.setSubject(subject);
+                    message.setSubject(createSubject(subjectRegistration));
                     message.setTo(user.getEmailAddress());
 
                     Map model = new HashMap();
                     model.put("user", user);
+                    model.put("frontendLink", frontendLink);
+                    model.put("frontendLabel", frontendLabel);
                     String text = VelocityEngineUtils.mergeTemplateIntoString(
-                            velocityEngine, template, model);
+                            velocityEngine, templateRegistration, model);
                     message.setText(text, true);
                 } catch (VelocityException ex) {
-                    logger.error("\n*** VelocityException: " + ex.getMessage());
+                    logger.error("\n*** VelocityException: {}", ex.getMessage());
                 } catch (MessagingException ex) {
-                    logger.error("\n*** MessagingException: " + ex.getMessage());
+                    logger.error("\n*** MessagingException: {}", ex.getMessage());
                 } catch (Exception ex) {
-                    logger.error("\n*** Exception: " + ex.getMessage());
+                    logger.error("\n*** Exception: {}", ex.getMessage());
                 }
             }
         };
@@ -130,10 +172,71 @@ public class EmailTask {
         try {
             mailSender.send(preparator);
         } catch (MailException ex) {
-            logger.error("\n*** MailException: " + ex.getMessage());
+            logger.error("\n*** MailException: {}", ex.getMessage());
             throw new EmailException(ex.getMessage());
         }
 
-        logger.info("\n*** Email send to " + email + " ***");
+        logger.info("\n*** Email for registration sended to {} ***", email);
+    }
+
+    public void sendEmailModification(final GPUser user,
+            final String previousEmail, final String newPlainPassword)
+            throws EmailException {
+        String email = user.getEmailAddress();
+        logger.info("\n*** Sending email for registration to {} ***", email);
+
+        MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+            @Override
+            public void prepare(MimeMessage mimeMessage) {
+                try {
+                    MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+                    message.setSubject(createSubject(subjectModification));
+                    message.setTo(user.getEmailAddress());
+
+                    Map model = new HashMap();
+                    model.put("user", user);
+                    model.put("frontendLink", frontendLink);
+                    model.put("frontendLabel", frontendLabel);
+                    // email
+                    boolean emailChanged = false;
+                    if (previousEmail != null) {
+                        emailChanged = true;
+                        model.put("previousEmail", previousEmail);
+                    }
+                    model.put("emailChanged", emailChanged);
+                    // password
+                    boolean passwordChanged = false;
+                    if (newPlainPassword != null) {
+                        passwordChanged = true;
+                        model.put("newPlainPassword", newPlainPassword);
+                    }
+                    model.put("passwordChanged", passwordChanged);
+
+                    String text = VelocityEngineUtils.mergeTemplateIntoString(
+                            velocityEngine, templateModification, model);
+                    message.setText(text, true);
+                } catch (VelocityException ex) {
+                    logger.error("\n*** VelocityException: {}", ex.getMessage());
+                } catch (MessagingException ex) {
+                    logger.error("\n*** MessagingException: {}", ex.getMessage());
+                } catch (Exception ex) {
+                    logger.error("\n*** Exception: {}", ex.getMessage());
+                }
+            }
+        };
+
+        try {
+            mailSender.send(preparator);
+        } catch (MailException ex) {
+            logger.error("\n*** MailException: {}", ex.getMessage());
+            throw new EmailException(ex.getMessage());
+        }
+
+        logger.info("\n*** Email for modification sended to {} ***", email);
+    }
+
+    private String createSubject(String subjectEnd) {
+        return "[" + frontendLabel + "] " + subjectEnd;
     }
 }

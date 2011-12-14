@@ -1,6 +1,6 @@
 <html>
 <body>
-    <h3>Hi <u>${user.name}</u>, welcome to the Geo-Portal</h3>
+    <h3>Hi <u>${user.name}</u>, welcome to ${frontendLabel}</h3>
 
     <div>
         Your username is: <b>${user.username}</b>
@@ -9,7 +9,7 @@
     </div>
     <br/><br/>
     <div>
-        Log in to the <a href="http://150.146.160.71/geo-portal/">Geo-Portal</b>
+        Log in to the <a href="${frontendLink}">${frontendLabel}</b>
     </div>
 </body>
 </html>

@@ -92,7 +92,8 @@ public interface UserRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException 
      */
-    Long updateOwnUser(IGPUserManageDetail userDetail, String currentPlainPassword)
+    Long updateOwnUser(IGPUserManageDetail userDetail,
+            String currentPlainPassword, String newPlainPassword)
             throws GeoPlatformException;
 
     /**

@@ -121,6 +121,7 @@ public abstract class UserOptionsMember implements IUserOptionsMember {
         container.layout();
     }
 
+    // TODO use Registry.get(id)
     @Override
     public void setOwnUser(IGPUserManageDetail user) {
         this.user = user;

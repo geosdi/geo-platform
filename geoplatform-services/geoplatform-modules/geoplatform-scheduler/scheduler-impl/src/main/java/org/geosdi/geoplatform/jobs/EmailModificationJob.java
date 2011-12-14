@@ -33,41 +33,41 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.server;
+package org.geosdi.geoplatform.jobs;
 
-import com.extjs.gxt.ui.client.data.PagingLoadConfig;
-import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
+import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.exception.EmailException;
+import org.quartz.JobDataMap;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 
 /**
  *
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public interface IUserService {
+public class EmailModificationJob extends EmailJob {
 
-    PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-            String searchText,
-            HttpServletRequest httpServletRequest);
+    public static final String PREVIOUS_EMAIL = "previous_email";
+    public static final String NEW_PLAIN_PASSWORD = "new_plain_password";
 
-    Long insertUser(IGPUserManageDetail userDetail,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    @Override
+    protected void sendEmail(GPUser user, JobExecutionContext context)
+            throws JobExecutionException {
+        try {
+            JobDataMap triggerMap = context.getTrigger().getJobDataMap();
+            String previousEmail = (String) triggerMap.get(PREVIOUS_EMAIL);
+            String newPlainPassword = (String) triggerMap.get(NEW_PLAIN_PASSWORD);
 
-    Long updateUser(IGPUserManageDetail userDetail,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+            super.emailTask.sendEmailModification(user, previousEmail, newPlainPassword);
+        } catch (EmailException ee) {
+            logger.error("\n\t\t*** ERROR: EmailException", ee.getMessage());
 
-    Long updateOwnUser(IGPUserManageDetail userDetail,
-            String currentPlainPassword, String newPlainPassword,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
-
-    boolean deleteUser(Long userID, HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
-
-    IGPUserManageDetail getOwnUser(HttpServletRequest httpServletRequest);
+            JobExecutionException jee = new JobExecutionException(ee);
+            // Unschedule the trigger associated with this job
+            // so that it does not run again for this user
+            jee.setUnscheduleFiringTrigger(true);
+            throw jee;
+        }
+    }
 }

@@ -141,9 +141,9 @@ public class ShortAccountDTO {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        str.append(", =id").append(id);
-        str.append(", =enabled").append(enabled);
-        str.append(", =temporary").append(temporary);
+        str.append(", id=").append(id);
+        str.append(", enabled=").append(enabled);
+        str.append(", temporary=").append(temporary);
         if (roles != null) {
             str.append(", roles.size=").append(roles.size());
         } else {

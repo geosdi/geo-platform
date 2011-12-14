@@ -141,10 +141,10 @@ public class UserDTO extends ShortAccountDTO {
     public String toString() {
         StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append(super.toString());
-        str.append(", =name").append(name);
-        str.append(", =username").append(username);
-        str.append(", =emailAddress").append(emailAddress);
-        str.append(", =sendEmail").append(sendEmail);
+        str.append(", name=").append(name);
+        str.append(", username=").append(username);
+        str.append(", emailAddress=").append(emailAddress);
+        str.append(", sendEmail=").append(sendEmail);
         return str.append("}").toString();
     }
 

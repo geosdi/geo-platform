@@ -314,9 +314,9 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
             @Override
             public String validate(Field<?> field, String value) {
-                if (value.length() < 6) {
+                if (value.length() < 4) {
                     passwordRepeatField.setEnabled(false);
-                    return "The minimun lenght for password is 6";
+                    return "The minimun lenght for password is 4";
                 }
                 passwordRepeatField.setEnabled(true);
                 return null;

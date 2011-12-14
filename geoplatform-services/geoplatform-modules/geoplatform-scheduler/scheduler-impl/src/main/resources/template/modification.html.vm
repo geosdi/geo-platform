@@ -1,0 +1,30 @@
+<html>
+<body>
+    <h3>Hi <u>${user.name}</u></h3>
+    <br/>
+
+#if ( $passwordChanged )
+    <h4>Your credentials have been changed</h4>
+    <div>
+        Your username is: <b>${user.username}</b>
+    </div><br/><div>
+        Your new password is: <b>${newPlainPassword}</b>
+    </div>    
+#end
+
+#if ( $emailChanged )
+    <h4>Your email have been changed</h4>
+    <div>
+        Your previous email is: <b>${previousEmail}</b>
+    </div><br/><div>
+        Your new email is: <b>${user.emailAddress}</b>
+    </div>
+#end
+
+    <br/><br/>
+    <div>
+        Log in to the <a href="${frontendLink}">${frontendLabel}</b>
+    </div>
+
+</body>
+</html>

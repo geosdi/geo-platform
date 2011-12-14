@@ -21,8 +21,15 @@
         class="org.geosdi.geoplatform.jobs.EmailTask">
         <property name="mailSender" ref="mailSender" />
         <property name="velocityEngine" ref="velocityEngine" />
-        <property name="subject" value="#{emailProperties['email.subject']}" />
-        <property name="template" value="#{emailProperties['email.template']}" />
+        <!-- Frontend -->
+        <property name="frontendLink" value="#{emailProperties['email.frontend.link']}" />
+        <property name="frontendLabel" value="#{emailProperties['email.frontend.label']}" />
+        <!-- Template registration -->
+        <property name="subjectRegistration" value="#{emailProperties['email.subject.registration']}" />
+        <property name="templateRegistration" value="#{emailProperties['email.template.registration']}" />
+        <!-- Template modification -->
+        <property name="subjectModification" value="#{emailProperties['email.subject.modification']}" />
+        <property name="templateModification" value="#{emailProperties['email.template.modification']}" />        
     </bean>   
     
     <bean id="mailSender"

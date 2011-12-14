@@ -87,8 +87,8 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         this.formPanel.setHeaderVisible(false);
 
         this.formPanel.add(this.createPropertiesSetting());
-        this.formPanel.add(this.createEmailSetting(), new VBoxLayoutData(new Margins(30, 0, 0, 0)));
-        this.formPanel.add(this.createPasswordSetting(), new VBoxLayoutData(new Margins(30, 0, 0, 0)));
+        this.formPanel.add(this.createEmailSetting(), new VBoxLayoutData(new Margins(20, 0, 0, 0)));
+        this.formPanel.add(this.createPasswordSetting(), new VBoxLayoutData(new Margins(20, 0, 0, 0)));
 
         panel.add(formPanel);
     }
@@ -138,8 +138,9 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         emailField = new TextField<String>();
         emailField.setFieldLabel("Email");
         emailField.setToolTip("Your email");
-        emailField.setAllowBlank(false);
         emailField.setAutoValidate(true);
+        emailField.setAllowBlank(false);
+        emailField.setValidator(validatorUpdateEmail());
         emailResultSet.add(emailField);
 
         emailResultSet.addListener(Events.Collapse, new Listener<FieldSetEvent>() {
@@ -147,14 +148,6 @@ public class UserOptionsMemberUser extends UserOptionsMember {
             @Override
             public void handleEvent(FieldSetEvent be) {
                 emailField.setValue(user.getEmail());
-                emailField.setValidator(null);
-            }
-        });
-        emailResultSet.addListener(Events.Expand, new Listener<FieldSetEvent>() {
-
-            @Override
-            public void handleEvent(FieldSetEvent be) {
-                emailField.setValidator(validatorUpdateEmail());
             }
         });
 
@@ -164,7 +157,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
     private FieldSet createPasswordSetting() {
         FieldSet passwordFieldSet = new FieldSet();
         passwordFieldSet.setHeading("Change password");
-        passwordFieldSet.setSize(400, 95);
+        passwordFieldSet.setSize(400, 100);
         passwordFieldSet.setCheckboxToggle(true);
         passwordFieldSet.setExpanded(false);
         passwordFieldSet.setLayout(this.getFormLayoutTemplate());
@@ -173,38 +166,43 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         oldPasswordField.setFieldLabel("Current");
         oldPasswordField.setToolTip("Your current password");
         oldPasswordField.setPassword(true);
-        oldPasswordField.setAllowBlank(true);
+        oldPasswordField.setAutoValidate(true);
+        oldPasswordField.setAllowBlank(false);
+        oldPasswordField.setValidator(this.validatorPassword());
         passwordFieldSet.add(oldPasswordField);
 
         newPasswordField = new TextField<String>();
         newPasswordField.setFieldLabel("New");
         newPasswordField.setToolTip("Enter a new password");
         newPasswordField.setPassword(true);
+        newPasswordField.setAutoValidate(true);
         newPasswordField.setAllowBlank(false);
         newPasswordField.setValidator(this.validatorUpdatePassword());
+        newPasswordField.setEnabled(false);
         passwordFieldSet.add(newPasswordField);
 
         newRePasswordField = new TextField<String>();
         newRePasswordField.setFieldLabel("Retype new");
         newRePasswordField.setToolTip("Retype the new password");
         newRePasswordField.setPassword(true);
+        newRePasswordField.setAutoWidth(true);
         newRePasswordField.setAllowBlank(false);
-        newRePasswordField.setMinLength(6);
         newRePasswordField.setValidator(this.validatorUpdateConfirmPassword());
+        newRePasswordField.setEnabled(false);
         passwordFieldSet.add(newRePasswordField);
 
         passwordFieldSet.addListener(Events.Collapse, new Listener<FieldSetEvent>() {
 
             @Override
             public void handleEvent(FieldSetEvent be) {
-                oldPasswordField.setValidator(null);
-            }
-        });
-        passwordFieldSet.addListener(Events.Expand, new Listener<FieldSetEvent>() {
+                oldPasswordField.reset();
+                newPasswordField.reset();
+                newRePasswordField.reset();
 
-            @Override
-            public void handleEvent(FieldSetEvent be) {
-                oldPasswordField.setValidator(validatorPassword());
+                newPasswordField.setEnabled(false);
+                newRePasswordField.setEnabled(false);
+
+                updatePassword(null);
             }
         });
 
@@ -218,7 +216,8 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         String currentPlainPassword = oldPasswordField.getValue();
 
 
-        UserRemoteImpl.Util.getInstance().updateOwnUser(user, currentPlainPassword,
+        UserRemoteImpl.Util.getInstance().updateOwnUser(user,
+                currentPlainPassword, newPassword,
                 new AsyncCallback<Long>() {
 
                     @Override
@@ -238,7 +237,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
     private FormLayout getFormLayoutTemplate() {
         FormLayout layout = new FormLayout();
-        layout.setLabelWidth(80);
+        layout.setLabelWidth(75);
         layout.setDefaultWidth(200);
         return layout;
     }
@@ -299,9 +298,10 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
             @Override
             public String validate(Field<?> field, String value) {
-                if (value.length() < 6) {
+                if (value.length() < 4) {
                     newPasswordField.setEnabled(false);
-                    return "The minimun lenght for old password is 6";
+                    newRePasswordField.setEnabled(false);
+                    return "The minimun lenght for old password is 4";
                 }
                 newPasswordField.setEnabled(true);
                 return null;
@@ -314,9 +314,14 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
             @Override
             public String validate(Field<?> field, String value) {
-                if (value.length() < 6) {
+                if (value.length() < 4) {
+                    newRePasswordField.reset();
                     newRePasswordField.setEnabled(false);
-                    return "The minimun lenght for new password is 6";
+                    return "The minimun lenght for new password is 4";
+                } else if (value.equals(oldPasswordField.getValue())) {
+                    newRePasswordField.reset();
+                    newRePasswordField.setEnabled(false);
+                    return "The new password must be different from the old password";
                 }
                 newRePasswordField.setEnabled(true);
                 return null;
@@ -368,9 +373,6 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         }
         if (newEmail != null) {
             user.setEmail(newEmail);
-        }
-        if (newPassword != null) {
-            user.setPassword(newPassword);
         }
     }
 }

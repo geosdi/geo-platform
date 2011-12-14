@@ -52,14 +52,14 @@ import org.slf4j.LoggerFactory;
 // NOT execute multiple instances of a given job definition - JobDetail -
 // (that refers to the given job class - Job) concurrently
 @DisallowConcurrentExecution
-public class EmailJob implements Job {
+public abstract class EmailJob implements Job {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     public static final String USER = "user";
     public static final String EMAIL_TASK = "emailTask";
     //
-    private EmailTask emailTask;
+    protected EmailTask emailTask;
 
     /**
      * Quartz pass emailTask each time that an instance of EmailJob was created,
@@ -76,22 +76,15 @@ public class EmailJob implements Job {
         logger.debug("\n*** START send email job ***");
 
         GPUser user = (GPUser) context.getTrigger().getJobDataMap().get(USER);
-        logger.trace("\n*** " + user);
+        logger.trace("\n\n*** {}", user);
 
         if (user != null) {
-            try {
-                emailTask.sendConfirmationEmail(user);
-            } catch (EmailException ee) {
-                logger.error("\n\t\t*** ERROR: EmailException", ee.getMessage());
-
-                JobExecutionException jee = new JobExecutionException(ee);
-                // Unschedule the trigger associated with this job
-                // so that it does not run again for this user
-                jee.setUnscheduleFiringTrigger(true);
-                throw jee;
-            }
+            this.sendEmail(user, context);
         }
 
         logger.debug("\n*** STOP send email job ***");
     }
+
+    protected abstract void sendEmail(GPUser user, JobExecutionContext context)
+            throws JobExecutionException;
 }

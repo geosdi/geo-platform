@@ -51,7 +51,12 @@ import org.geosdi.geoplatform.core.model.GPUser;
 public interface GPSchedulerService {
 
     @Post
-    void sendEmail(@WebParam(name = "user") GPUser user);
+    void sendEmailRegistration(@WebParam(name = "user") GPUser user);
+
+    @Post
+    void sendEmailModification(@WebParam(name = "user") GPUser user,
+            @WebParam(name = "previousEmail") String previousEmail,
+            @WebParam(name = "newPlainPassword") String newPlainPassword);
 
     // For test purpose
     @Post

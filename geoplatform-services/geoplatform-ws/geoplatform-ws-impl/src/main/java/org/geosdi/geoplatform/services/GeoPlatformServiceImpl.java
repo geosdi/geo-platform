@@ -313,9 +313,10 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public Long updateOwnUser(GPUser user, String currentPlainPassword)
+    public Long updateOwnUser(UserDTO user,
+            String currentPlainPassword, String newPlainPassword)
             throws ResourceNotFoundFault, IllegalParameterFault {
-        return accountServiceDelegate.updateOwnUser(user, currentPlainPassword);
+        return accountServiceDelegate.updateOwnUser(user, currentPlainPassword, newPlainPassword);
     }
 
     @Override

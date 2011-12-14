@@ -39,7 +39,6 @@ package org.geosdi.geoplatform.services;
 
 import com.googlecode.genericdao.search.Search;
 import com.googlecode.genericdao.search.Filter;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
@@ -61,7 +60,6 @@ import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.services.development.EntityCorrectness;
-import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -163,7 +161,7 @@ class AccountServiceImpl {
         if (sendEmail && account instanceof GPUser) {
             GPUser user = (GPUser) account;
             user.setPassword(this.gpPooledPBEStringEncryptor.decrypt(user.getPassword()));
-            schedulerService.sendEmail(user);
+            schedulerService.sendEmailRegistration(user);
         }
 
         return account.getId();
@@ -223,7 +221,8 @@ class AccountServiceImpl {
         return orig.getId();
     }
 
-    public Long updateOwnUser(GPUser user, String currentPlainPassword)
+    public Long updateOwnUser(UserDTO user,
+            String currentPlainPassword, String newPlainPassword)
             throws ResourceNotFoundFault, IllegalParameterFault {
         if (user.getId() == null) {
             throw new IllegalArgumentException("User \"ID\" must be NOT NULL");
@@ -231,28 +230,43 @@ class AccountServiceImpl {
         GPUser orig = (GPUser) this.getAccountById(user.getId());
         EntityCorrectness.checkAccountLog(orig); // TODO assert
 
-        // Update the own values
+        // Check credentials
+        boolean passwordChanged = false;
+        if (newPlainPassword != null) {
+            // Check password
+            if (!this.gpPooledPBEStringEncryptor.areEncryptedStringEquals(
+                    orig.getPassword(), currentPlainPassword)) {
+                throw new IllegalParameterFault("Current password was incorrect");
+            }
+            passwordChanged = true;
+        }
+        // Eventually update the email
+        boolean emailChanged = false;
+        String previousEmail = null;
+        String email = user.getEmailAddress();
+        if (!orig.getEmailAddress().equals(email)) {
+            emailChanged = true;
+            previousEmail = orig.getEmailAddress();
+            orig.setEmailAddress(email);
+        }
+        // Eventually update the name
         String name = user.getName();
         if (name != null) {
             orig.setName(name);
         }
-        String email = user.getEmailAddress();
-        if (email != null) {
-            orig.setEmailAddress(email);
-        }
-        String password = user.getPassword();
-        if (password != null) {
-            // Check password
-            if (!this.gpPooledPBEStringEncryptor.areEncryptedStringEquals(
-                    user.getPassword(), currentPlainPassword)) {
-                throw new IllegalParameterFault("Current password was incorrect");
-            }
 
-            // TODO FIX EncryptionOperationNotPossibleException
-            orig.setPassword(this.gpPooledPBEStringEncryptor.encrypt(password)); // Hash password
+        // Send an email for modification
+        if (passwordChanged || emailChanged) {
+            schedulerService.sendEmailModification(orig, previousEmail, newPlainPassword);
+        }
+
+        // Encrypt the password
+        if (passwordChanged) {
+            orig.setPassword(this.gpPooledPBEStringEncryptor.encrypt(newPlainPassword)); // Hash password
         }
 
         accountDao.merge(orig);
+
         return orig.getId();
     }
 

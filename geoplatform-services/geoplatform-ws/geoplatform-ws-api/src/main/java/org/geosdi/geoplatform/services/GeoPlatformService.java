@@ -113,8 +113,9 @@ public interface GeoPlatformService {
 
     @Post
     @HttpResource(location = "/users")
-    Long updateOwnUser(@WebParam(name = "User") GPUser user,
-            @WebParam(name = "currentPlainPassword") String currentPlainPassword)
+    Long updateOwnUser(@WebParam(name = "User") UserDTO user,
+            @WebParam(name = "currentPlainPassword") String currentPlainPassword,
+            @WebParam(name = "newPlainPassword") String newPlainPassword)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Post
@@ -182,7 +183,7 @@ public interface GeoPlatformService {
 
     @Get
     @HttpResource(location = "/accounts")
-    @WebResult(name = "Account")
+    @WebResult(name = "Accounts")
     List<ShortAccountDTO> getAccounts();
 
     @Get

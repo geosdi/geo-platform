@@ -38,14 +38,15 @@ package org.geosdi.geoplatform.gui.server.service;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email  nazzareno.sileno@geosdi.org
  */
-public interface IPublisherService {
+public interface IPublisherService extends InitializingBean {
 
-    public String publishLayerPreview(HttpServletRequest httpServletRequest, 
+    public String publishLayerPreview(HttpServletRequest httpServletRequest,
             List<String> layerList, boolean reloadCluster) throws GeoPlatformException;
 
     public void kmlPreview(HttpServletRequest httpServletRequest, String url)

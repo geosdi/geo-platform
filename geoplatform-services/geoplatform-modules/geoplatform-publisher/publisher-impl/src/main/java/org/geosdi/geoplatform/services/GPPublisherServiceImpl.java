@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.services;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
 import javax.jws.WebService;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
@@ -82,10 +81,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPPublisherService")
 public class GPPublisherServiceImpl implements GPPublisherService {
 
-    protected Logger logger = LoggerFactory.getLogger(
+    private Logger logger = LoggerFactory.getLogger(
             GPPublisherServiceImpl.class);
 
     class LayerInfo {
+
         String name;
         boolean isShp;
         String epsg;
@@ -94,13 +94,17 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     private String RESTURL = "";
     private String RESTUSER = "";
     private String RESTPW = "";
+    //
     @Autowired
     private GeoServerRESTPublisher restPublisher;
+    //
     @Autowired
     private GeoServerRESTReader restReader;
     private String geoportalDir = "";
+    //
     @Autowired
     private PublisherScheduler scheduler;
+    //
     @Autowired
     private GeoTiffOverviewsConfiguration overviewsConfiguration;
 
@@ -111,9 +115,20 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         this.RESTPW = RESTPW;
         this.geoportalDir = geoportalDir;
         File geoportalDirFile = new File(geoportalDir);
+
         if (!geoportalDirFile.exists()) {
-            logger.error("The geoportaldir: " + geoportalDir + " does not exist!");
+            logger.debug("The geoportaldir: " + geoportalDir + " does not exist, "
+                    + "then it will be created.");
+            boolean create = geoportalDirFile.mkdir();
+            if (!create) {
+                logger.error("@@@@@@@@@@@ Impossible create GeoPortalDir @@@@@@@@@@@@@@@@");
+                throw new SecurityException("Can't Create " + geoportalDir);
+            }
+
         }
+
+        logger.info("GEOPORTAL DIR @@@@@@@@@@@@@@@@@@@@@@@@@@ " + geoportalDirFile.getAbsolutePath());
+
         logger.info("GEOSERVER AT: " + RESTURL + ", USER: " + RESTUSER
                 + ", PWD: " + RESTPW + ", USING DIR: " + geoportalDir);
     }
@@ -327,17 +342,17 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         }
         return infoShapeList;
     }
-    
-    private boolean isDuplicatedName(String sldName, List<String> tifEntryNameList){
+
+    private boolean isDuplicatedName(String sldName, List<String> tifEntryNameList) {
         for (String tifEntryName : tifEntryNameList) {
             String tifName = tifEntryName.substring(0, tifEntryName.lastIndexOf('.'));
-            if(tifName.equals(sldName)){
+            if (tifName.equals(sldName)) {
                 return true;
             }
         }
         return false;
     }
-    
+
     private List<LayerInfo> analyzeTifList(List<String> tifEntryNameList, String userName,
             String tempUserTifDir) {
         List<LayerInfo> infoTifList = new ArrayList<LayerInfo>();

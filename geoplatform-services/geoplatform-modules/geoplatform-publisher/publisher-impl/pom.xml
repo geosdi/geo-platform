@@ -40,31 +40,6 @@
             <artifactId>commons-codec</artifactId>
         </dependency>
 
-        <!-- GEOPLATFORM WS -->
-<!--
-		
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-model</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-dao</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
--->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-publisher-api</artifactId>
@@ -81,10 +56,10 @@
             <artifactId>dom4j</artifactId>
         </dependency>
 
-        <!--dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-        </dependency-->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-configurator</artifactId>
+        </dependency>
 
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>

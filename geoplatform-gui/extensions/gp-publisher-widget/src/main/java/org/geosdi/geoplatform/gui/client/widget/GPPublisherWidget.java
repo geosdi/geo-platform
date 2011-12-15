@@ -75,6 +75,7 @@ import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
+import org.geosdi.geoplatform.gui.utility.GPReloadURLException;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
@@ -99,7 +100,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
     private GPPublishShapePreviewEvent publishShapePreviewEvent = new GPPublishShapePreviewEvent();
     private List<PreviewLayer> layerList = new ArrayList<PreviewLayer>();
     private Button publishButton;
-    private HTML htmlPanel = new HTML();
+    private HTML htmlPanel;
     private Window htmlWindow = new Window();
     private Text uploadMessage = new Text("Select a file to show in preview:");
     private ToggleButton toggleButtonClusterReload;
@@ -235,6 +236,15 @@ public class GPPublisherWidget extends GeoPlatformWindow
                                 public void onFailure(Throwable caught) {
                                     if (caught.getCause() instanceof GPSessionTimeout) {
                                         GPHandlerManager.fireEvent(new GPLoginEvent(publishShapePreviewEvent));
+                                    } else if (caught.getCause() instanceof GPReloadURLException) {
+                                        GeoPlatformMessage.errorMessage("Error Reloading CLuster",
+                                                "An error occurred reloading cluster configuration: "
+                                                + caught.getMessage());
+                                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                                "Error Publishing previewed shape.",
+                                                EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                                        System.out.println("Error Publishing previewed shape: " + caught.toString()
+                                                + " data: " + caught.getMessage());
                                     } else {
                                         GeoPlatformMessage.errorMessage("Error Publishing",
                                                 "An error occurred while making the requested connection.\n"
@@ -253,7 +263,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
                                     LayerHandlerManager.fireEvent(new AddRasterFromPublisherEvent(layerList));
                                     reset();
                                     System.out.println("Result: "+ result);
-                                    if (result.length() > 0) {
+                                    if (result != null) {
                                         htmlPanel = new HTML(result);
                                     } else {
                                         htmlPanel = new HTML("Realod without result: may be some problems?");

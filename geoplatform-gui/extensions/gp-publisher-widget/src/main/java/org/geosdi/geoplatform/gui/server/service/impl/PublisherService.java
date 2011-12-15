@@ -50,7 +50,6 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.slf4j.Logger;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
@@ -63,16 +62,15 @@ import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
-import org.apache.http.util.EntityUtils;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.IPublisherService;
+import org.geosdi.geoplatform.gui.utility.GPReloadURLException;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -180,11 +178,11 @@ public class PublisherService implements IPublisherService, InitializingBean {
         } catch (MalformedURLException e) {
             logger.error("Error on cluster url: " + e);
             System.out.println("Error on cluster url: " + e);
-            throw new GeoPlatformException("Error on cluster url.");
+            throw new GeoPlatformException(new GPReloadURLException("Error on cluster url."));
         } catch (IOException e) {
             logger.error("Error on reloading cluster: " + e);
             System.out.println("Error on reloading cluster: " + e);
-            throw new GeoPlatformException("Error on reloading cluster.");
+            throw new GeoPlatformException(new GPReloadURLException("Error on reloading cluster."));
         }
         return result;
     }

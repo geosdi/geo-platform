@@ -31,9 +31,9 @@
         <appender-ref ref="STDOUT" />
     </root>
 
-    <logger name="org.geosdi.geoplatform.jobs.TempAccountExpireJob" level="trace"/>
+    <logger name="org.geosdi.geoplatform.jobs.TempAccountExpireJob" level="info"/>
     <logger name="org.geosdi.geoplatform.jobs.EmailTask" level="debug"/>
     <logger name="org.geosdi.geoplatform.jobs.EmailRegistrationJob" level="debug"/>
-    <logger name="org.geosdi.geoplatform.jobs.EmailModificationJob" level="trace"/>
+    <logger name="org.geosdi.geoplatform.jobs.EmailModificationJob" level="debug"/>
 
 </configuration>

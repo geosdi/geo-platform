@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.event.FieldSetEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Layer.ShadowPosition;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
@@ -74,7 +75,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
     //
     private String newName;
     private String newEmail;
-    private String newPassword;
+    private String newPlainPassword;
 
     public UserOptionsMemberUser(LayoutContainer container) {
         super("User", container);
@@ -103,16 +104,16 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         usernameField.setFieldLabel("Username");
         usernameField.setToolTip("Your username");
         usernameField.setReadOnly(true);
-//        usernameField.setShadow(true);
-//        usernameField.setShadowPosition(ShadowPosition.FRAME);
+        usernameField.setShadow(true);
+        usernameField.setShadowPosition(ShadowPosition.FRAME);
         userFieldSet.add(usernameField);
 
         roleField = new TextField<String>();
         roleField.setFieldLabel("Role");
         roleField.setToolTip("Your role");
         roleField.setReadOnly(true);
-//        roleField.setShadow(true);
-//        roleField.setShadowPosition(ShadowPosition.FRAME);
+        roleField.setShadow(true);
+        roleField.setShadowPosition(ShadowPosition.FRAME);
         userFieldSet.add(roleField);
 
         nameField = new TextField<String>();
@@ -185,7 +186,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         newRePasswordField.setFieldLabel("Retype new");
         newRePasswordField.setToolTip("Retype the new password");
         newRePasswordField.setPassword(true);
-        newRePasswordField.setAutoWidth(true);
+        newRePasswordField.setAutoValidate(true);
         newRePasswordField.setAllowBlank(false);
         newRePasswordField.setValidator(this.validatorUpdateConfirmPassword());
         newRePasswordField.setEnabled(false);
@@ -195,14 +196,14 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
             @Override
             public void handleEvent(FieldSetEvent be) {
+                updatePassword(null);
+
                 oldPasswordField.reset();
                 newPasswordField.reset();
                 newRePasswordField.reset();
 
                 newPasswordField.setEnabled(false);
                 newRePasswordField.setEnabled(false);
-
-                updatePassword(null);
             }
         });
 
@@ -215,9 +216,8 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
         String currentPlainPassword = oldPasswordField.getValue();
 
-
         UserRemoteImpl.Util.getInstance().updateOwnUser(user,
-                currentPlainPassword, newPassword,
+                currentPlainPassword, newPlainPassword,
                 new AsyncCallback<Long>() {
 
                     @Override
@@ -299,6 +299,11 @@ public class UserOptionsMemberUser extends UserOptionsMember {
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.length() < 4) {
+                    updatePassword(null);
+
+                    newPasswordField.reset();
+                    newRePasswordField.reset();
+
                     newPasswordField.setEnabled(false);
                     newRePasswordField.setEnabled(false);
                     return "The minimun lenght for old password is 4";
@@ -315,10 +320,12 @@ public class UserOptionsMemberUser extends UserOptionsMember {
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.length() < 4) {
+                    updatePassword(null);
                     newRePasswordField.reset();
                     newRePasswordField.setEnabled(false);
                     return "The minimun lenght for new password is 4";
                 } else if (value.equals(oldPasswordField.getValue())) {
+                    updatePassword(null);
                     newRePasswordField.reset();
                     newRePasswordField.setEnabled(false);
                     return "The new password must be different from the old password";
@@ -355,12 +362,12 @@ public class UserOptionsMemberUser extends UserOptionsMember {
     }
 
     private void updatePassword(String newPassword) {
-        this.newPassword = newPassword;
+        this.newPlainPassword = newPassword;
         this.manageSaveButton();
     }
 
     private void manageSaveButton() {
-        if (newName != null || newEmail != null || newPassword != null) {
+        if (newName != null || newEmail != null || newPlainPassword != null) {
             this.saveButton.enable();
         } else {
             this.saveButton.disable();

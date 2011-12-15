@@ -239,6 +239,7 @@ class AccountServiceImpl {
                 throw new IllegalParameterFault("Current password was incorrect");
             }
             passwordChanged = true;
+            orig.setPassword(this.gpPooledPBEStringEncryptor.encrypt(newPlainPassword)); // Hash password
         }
         // Eventually update the email
         boolean emailChanged = false;
@@ -255,18 +256,12 @@ class AccountServiceImpl {
             orig.setName(name);
         }
 
+        accountDao.merge(orig);
+
         // Send an email for modification
         if (passwordChanged || emailChanged) {
             schedulerService.sendEmailModification(orig, previousEmail, newPlainPassword);
         }
-
-        // Encrypt the password
-        if (passwordChanged) {
-            orig.setPassword(this.gpPooledPBEStringEncryptor.encrypt(newPlainPassword)); // Hash password
-        }
-
-        accountDao.merge(orig);
-
         return orig.getId();
     }
 

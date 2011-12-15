@@ -113,7 +113,6 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         this.RESTURL = RESTURL;
         this.RESTUSER = RESTUSER;
         this.RESTPW = RESTPW;
-        this.geoportalDir = geoportalDir;
         File geoportalDirFile = new File(geoportalDir);
 
         if (!geoportalDirFile.exists()) {
@@ -126,8 +125,13 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             }
 
         }
+        if (geoportalDirFile.getAbsolutePath().endsWith(System.getProperty("file.separator"))) {
+            this.geoportalDir = geoportalDirFile.getAbsolutePath();
+        } else {
+            this.geoportalDir = geoportalDirFile.getAbsolutePath() + System.getProperty("file.separator");
+        }
 
-        logger.info("GEOPORTAL DIR @@@@@@@@@@@@@@@@@@@@@@@@@@ " + geoportalDirFile.getAbsolutePath());
+        logger.info("GEOPORTAL DIR @@@@@@@@@@@@@@@@@@@@@@@@@@ " + this.geoportalDir);
 
         logger.info("GEOSERVER AT: " + RESTURL + ", USER: " + RESTUSER
                 + ", PWD: " + RESTPW + ", USING DIR: " + geoportalDir);

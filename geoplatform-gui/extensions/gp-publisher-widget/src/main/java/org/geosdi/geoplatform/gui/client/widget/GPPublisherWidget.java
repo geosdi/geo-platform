@@ -239,7 +239,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
                                     } else if (caught.getCause() instanceof GPReloadURLException) {
                                         GeoPlatformMessage.errorMessage("Error Reloading CLuster",
                                                 "An error occurred reloading cluster configuration: "
-                                                + caught.getMessage());
+                                                + caught.getCause().getMessage());
                                         LayoutManager.getInstance().getStatusMap().setStatus(
                                                 "Error Publishing previewed shape.",
                                                 EnumSearchStatus.STATUS_NO_SEARCH.toString());
@@ -263,9 +263,9 @@ public class GPPublisherWidget extends GeoPlatformWindow
                                     LayerHandlerManager.fireEvent(new AddRasterFromPublisherEvent(layerList));
                                     reset();
                                     System.out.println("Result: "+ result);
-                                    if (result != null) {
+                                    if (result != null && toggleButtonClusterReload.isPressed()) {
                                         htmlPanel = new HTML(result);
-                                    } else {
+                                    } else if(toggleButtonClusterReload.isPressed()) {
                                         htmlPanel = new HTML("Realod without result: may be some problems?");
                                     }
                                     htmlWindow.removeAll();

@@ -1,25 +1,26 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
   
-   <parent>
+    <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-catalog</artifactId>
         <version>1.3-SNAPSHOT</version>
     </parent>
 
-  <groupId>org.geosdi</groupId>
-  <artifactId>catalog-api</artifactId>
-  <version>1.3-SNAPSHOT</version>
-  <packaging>jar</packaging>
+    <groupId>org.geosdi</groupId>
+    <artifactId>geoplatform-catalog-api</artifactId>
+    <version>1.3-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-   <name>Geo-Platform :: == Catalog Module Api</name>
+    <name>Geo-Platform :: == Catalog Module Api</name>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
   
-   <developers>
+    <developers>
         <developer>
             <name>Giuseppe La Scaleia</name>
             <id>glascaleia</id>
@@ -32,7 +33,7 @@
         </developer>
     </developers>
 
-   <dependencies>
+    <dependencies>
     
         <!-- SPRING -->
         <dependency>

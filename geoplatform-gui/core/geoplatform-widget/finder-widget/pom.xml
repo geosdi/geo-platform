@@ -5,16 +5,16 @@
 
     <parent>
         <groupId>org.geosdi</groupId>
-        <artifactId>geoplatform-widget</artifactId>
+        <artifactId>geoplatform-services</artifactId>
         <version>1.3-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
-    <artifactId>finder-widget</artifactId>
+    <artifactId>geoplatform-catalog-ws</artifactId>
     <version>1.3-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
-    <name>Geo-Platform :: == Catalog Finder Module</name>
+    <name>Geo-Platform :: == Catalog Finder WS</name>
 
     <developers>
         <developer>
@@ -153,4 +153,9 @@
         </resources>
 
     </build>
+    
+    <modules>
+        <module>finder-widget-api</module>
+        <module>finder-widget-impl</module>
+    </modules>
 </project>

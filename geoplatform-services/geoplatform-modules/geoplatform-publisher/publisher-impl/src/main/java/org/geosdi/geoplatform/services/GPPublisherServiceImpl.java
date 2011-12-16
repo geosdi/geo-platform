@@ -113,28 +113,31 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         this.RESTURL = RESTURL;
         this.RESTUSER = RESTUSER;
         this.RESTPW = RESTPW;
-        File geoportalDirFile = new File(geoportalDir);
-
-        if (!geoportalDirFile.exists()) {
-            logger.debug("The geoportaldir: " + geoportalDir + " does not exist, "
-                    + "then it will be created.");
-            boolean create = geoportalDirFile.mkdir();
-            if (!create) {
-                logger.error("@@@@@@@@@@@ Impossible create GeoPortalDir @@@@@@@@@@@@@@@@");
-                throw new SecurityException("Can't Create " + geoportalDir);
-            }
-
-        }
-        if (geoportalDirFile.getAbsolutePath().endsWith(System.getProperty("file.separator"))) {
-            this.geoportalDir = geoportalDirFile.getAbsolutePath();
-        } else {
-            this.geoportalDir = geoportalDirFile.getAbsolutePath() + System.getProperty("file.separator");
-        }
-
-        logger.info("GEOPORTAL DIR @@@@@@@@@@@@@@@@@@@@@@@@@@ " + this.geoportalDir);
-
+        this.geoportalDir = this.manageGeoportalDir(geoportalDir);
+        logger.info("GEOPORTAL DIR @@@@@@@@@@@@@@@@@@@@@ " + this.geoportalDir);
         logger.info("GEOSERVER AT: " + RESTURL + ", USER: " + RESTUSER
                 + ", PWD: " + RESTPW + ", USING DIR: " + geoportalDir);
+    }
+
+    private String manageGeoportalDir(String geoportalDir) {
+        File geoportalDirFile;
+        if (geoportalDir != null) {
+            geoportalDirFile = new File(geoportalDir);
+            if (!geoportalDirFile.exists()) {
+                geoportalDirFile = PublishUtility.generateGeoPortalDirInUserHome();
+            }
+        } else {
+            geoportalDirFile = PublishUtility.generateGeoPortalDirInUserHome();
+        }
+        if (!geoportalDirFile.exists()) {
+            logger.error("@@@@@@@@@@@ Impossible create GeoPortalDir @@@@@@@@@@@@@@@@");
+            throw new SecurityException("Can't Create " + geoportalDir);
+        }
+        String pathGeoPortalDir = geoportalDirFile.getAbsolutePath();
+        if (!pathGeoPortalDir.endsWith(System.getProperty("file.separator"))) {
+            pathGeoPortalDir = pathGeoPortalDir + System.getProperty("file.separator");
+        }
+        return pathGeoPortalDir;
     }
 
     /****************************

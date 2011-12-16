@@ -112,6 +112,14 @@ public class PublishUtility {
         return out;
     }
 
+    public static File generateGeoPortalDirInUserHome() {
+        String geoportalDir = System.getProperty("user.home") + "Geoportal"
+                + System.getProperty("file.separator");
+        File geoportalDirFile = new File(geoportalDir);
+        geoportalDirFile.mkdir();
+        return geoportalDirFile;
+    }
+
     public static File copyFile(File origin, String destinationPathDir, String destinationFileName, boolean overwrite) {
         File destination = new File(destinationPathDir);
         destination.mkdirs();

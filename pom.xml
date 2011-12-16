@@ -831,6 +831,7 @@
 			<!-- =========================================================== -->
 			<!-- GEOTOOLS -->
 			<!-- =========================================================== -->
+            <!-- 
             <dependency>
                 <groupId>org.opengis</groupId>
                 <artifactId>geoapi</artifactId>
@@ -845,7 +846,7 @@
                 <groupId>org.opengis</groupId>
                 <artifactId>geoapi-pending</artifactId>
                 <version>${geoapi-version}</version>
-            </dependency>
+            </dependency> -->
             <dependency>
                 <groupId>org.geotools</groupId>
                 <artifactId>gt-main</artifactId>

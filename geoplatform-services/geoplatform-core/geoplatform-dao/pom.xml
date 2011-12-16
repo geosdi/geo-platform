@@ -225,7 +225,7 @@
             <artifactId>postgresql</artifactId>
         </dependency>
 
-        	<!-- GeoAPI and its dependencies -->
+        	<!-- GeoAPI and its dependencies 
         <dependency>
             <groupId>org.opengis</groupId>
             <artifactId>geoapi</artifactId>
@@ -241,7 +241,7 @@
         <dependency>
             <groupId>net.java.dev.jsr-275</groupId>
             <artifactId>jsr-275</artifactId>
-        </dependency>
+        </dependency>-->
 
 		<!-- GEOTOOLS -->
         <dependency>

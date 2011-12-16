@@ -47,6 +47,7 @@ import com.extjs.gxt.ui.client.widget.layout.BoxLayout.BoxLayoutPack;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout.VBoxLayoutAlign;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.GeoPlatformOptionsMember;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
 /**
@@ -54,7 +55,7 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public abstract class UserOptionsMember implements IUserOptionsMember {
+public abstract class UserOptionsMember implements GeoPlatformOptionsMember {
 
     protected IGPUserManageDetail user;
     protected Button saveButton;

@@ -89,7 +89,7 @@ public class UserOptionsMainPanel {
 
         panelMain.add(panelWest, west);
 
-        // Centre
+        // Center
         panelCenter = new ContentPanel();
         panelCenter.setHeaderVisible(false);
         panelCenter.setLayout(new FitLayout());

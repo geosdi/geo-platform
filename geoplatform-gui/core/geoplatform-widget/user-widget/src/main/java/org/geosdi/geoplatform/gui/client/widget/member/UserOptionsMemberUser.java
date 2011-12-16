@@ -76,6 +76,10 @@ public class UserOptionsMemberUser extends UserOptionsMember {
     private String newName;
     private String newEmail;
     private String newPlainPassword;
+    //
+    private boolean validName;
+    private boolean validEmail;
+    private boolean validPassword;
 
     public UserOptionsMemberUser(LayoutContainer container) {
         super("User", container);
@@ -148,6 +152,8 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
             @Override
             public void handleEvent(FieldSetEvent be) {
+                updateEmail(null, true);
+
                 emailField.setValue(user.getEmail());
             }
         });
@@ -196,7 +202,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
             @Override
             public void handleEvent(FieldSetEvent be) {
-                updatePassword(null);
+                updatePassword(null, true);
 
                 oldPasswordField.reset();
                 newPasswordField.reset();
@@ -204,6 +210,13 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
                 newPasswordField.setEnabled(false);
                 newRePasswordField.setEnabled(false);
+            }
+        });
+        passwordFieldSet.addListener(Events.Expand, new Listener<FieldSetEvent>() {
+
+            @Override
+            public void handleEvent(FieldSetEvent be) {
+                updatePassword(null, false);
             }
         });
 
@@ -261,14 +274,14 @@ public class UserOptionsMemberUser extends UserOptionsMember {
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(user.getName())) {
-                    updateName(null);
+                    updateName(null, true);
                     return null; // Pseudo-valid
                 }
                 if (!GPRegEx.RE_COMPLETE_NAME.test(value)) {
-                    updateName(null);
+                    updateName(null, false);
                     return "Complete name is not valid (example: John Steam)";
                 }
-                updateName(value);
+                updateName(value, true);
                 return null;
             }
         };
@@ -280,14 +293,14 @@ public class UserOptionsMemberUser extends UserOptionsMember {
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(user.getEmail())) {
-                    updateEmail(null);
+                    updateEmail(null, true);
                     return null; // Pseudo-valid
                 }
                 if (!GPRegEx.RE_EMAIL.test(value)) {
-                    updateEmail(null);
+                    updateEmail(null, false);
                     return "Email is not valid (example: any@foo.org)";
                 }
-                updateEmail(value);
+                updateEmail(value, true);
                 return null;
             }
         };
@@ -299,7 +312,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.length() < 4) {
-                    updatePassword(null);
+                    updatePassword(null, false);
 
                     newPasswordField.reset();
                     newRePasswordField.reset();
@@ -320,12 +333,12 @@ public class UserOptionsMemberUser extends UserOptionsMember {
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.length() < 4) {
-                    updatePassword(null);
+                    updatePassword(null, false);
                     newRePasswordField.reset();
                     newRePasswordField.setEnabled(false);
                     return "The minimun lenght for new password is 4";
                 } else if (value.equals(oldPasswordField.getValue())) {
-                    updatePassword(null);
+                    updatePassword(null, false);
                     newRePasswordField.reset();
                     newRePasswordField.setEnabled(false);
                     return "The new password must be different from the old password";
@@ -342,32 +355,36 @@ public class UserOptionsMemberUser extends UserOptionsMember {
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.equals(newPasswordField.getValue())) {
-                    updatePassword(value);
+                    updatePassword(value, true);
                     return null;
                 }
-                updatePassword(null);
+                updatePassword(null, false);
                 return "Retyped new password don't match";
             }
         };
     }
 
-    private void updateName(String newName) {
+    private void updateName(String newName, boolean validName) {
         this.newName = newName;
+        this.validName = validName;
         this.manageSaveButton();
     }
 
-    private void updateEmail(String newEmail) {
+    private void updateEmail(String newEmail, boolean validEmail) {
         this.newEmail = newEmail;
+        this.validEmail = validEmail;
         this.manageSaveButton();
     }
 
-    private void updatePassword(String newPassword) {
+    private void updatePassword(String newPassword, boolean validPassword) {
         this.newPlainPassword = newPassword;
+        this.validPassword = validPassword;
         this.manageSaveButton();
     }
 
     private void manageSaveButton() {
-        if (newName != null || newEmail != null || newPlainPassword != null) {
+        if (validName && validEmail && validPassword
+                && (newName != null || newEmail != null || newPlainPassword != null)) {
             this.saveButton.enable();
         } else {
             this.saveButton.disable();

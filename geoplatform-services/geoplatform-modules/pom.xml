@@ -53,6 +53,7 @@
     <modules>
         <module>geoplatform-publisher</module>
         <module>geoplatform-scheduler</module>
+        <module>geoplatform-catalog</module>
     </modules>
     
 </project>

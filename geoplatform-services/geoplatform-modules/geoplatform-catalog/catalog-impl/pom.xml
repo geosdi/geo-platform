@@ -1,0 +1,105 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+        <groupId>org.geosdi</groupId>
+        <artifactId>geoplatform-catalog</artifactId>
+        <version>1.3-SNAPSHOT</version>
+    </parent>
+
+  <groupId>org.geosdi</groupId>
+  <artifactId>catalog-impl</artifactId>
+  <version>1.3-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>Geo-Platform :: == Catalog Module Impl</name>
+
+  <developers>
+        <developer>
+            <name>Giuseppe La Scaleia</name>
+            <id>glascaleia</id>
+            <email>giuseppe.lascaleia@geosdi.org</email>
+            <organization>geoSDI</organization>
+            <roles>
+                <role>Java Developer</role>
+                <role>Project Management Committee (PMC) Member</role>
+            </roles>
+        </developer>
+    </developers>
+
+   <dependencies>
+        
+    <!-- GEOPLATFORM WS -->
+       
+        
+    <!-- logging dependencies, delegate all to slf4j and use logback -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        
+        <!-- SPRING -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jmx</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+	
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+    
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.vm</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/template</directory>
+            </resource>
+        </resources>
+    </build>
+</project>

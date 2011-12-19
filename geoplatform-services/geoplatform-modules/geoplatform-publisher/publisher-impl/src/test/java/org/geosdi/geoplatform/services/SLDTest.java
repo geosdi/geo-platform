@@ -69,8 +69,8 @@ public class SLDTest {
     @Test
     public void testSLD() {
         String sldBody = this.restReader.getSLD("capitals");
-        Reader reader = new StringReader(sldBody);
-        Style style = this.createFromSLD(reader);
+//        Reader reader = new StringReader(sldBody);
+//        Style style = this.createFromSLD(reader);
 //        Symbolizer sym = style.getDefaultSpecification();
 //        Map<String, String> options = sym.getOptions();
 //        System.out.println("SLD Body: " + sym.hasOption("Opacity"));

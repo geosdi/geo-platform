@@ -33,40 +33,59 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services;
+package org.geosdi.geoplatform.services.util;
 
-import it.geosolutions.geonetwork.util.GNSearchResponse;
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.jws.WebService;
-import org.codehaus.jra.Get;
-import org.codehaus.jra.HttpResource;
-import org.geosdi.geoplatform.exception.GPCatalogException;
+import it.geosolutions.geonetwork.GNClient;
+import it.geosolutions.geonetwork.util.GNInsertConfiguration;
+import java.io.File;
+import org.geosdi.geoplatform.exception.GPCatalogLoginException;
 
 /**
- * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
- * 
- * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
- * @email  giuseppe.lascaleia@geosdi.org
  *
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email michele.santomauro@geosdi.org
  */
-@WebService(name = "GPCatalogFinderService",
-            targetNamespace = "http://services.geo-platform.org/")
-public interface GPCatalogFinderService {
+public class GPCatalogClient {
 
-    @Get
-    @HttpResource(location = "/geonetwork/searchMetadata/{searchText}")
-    @WebResult(name = "Result")
-    GNSearchResponse searchMetadata(@WebParam(name = "searchText") String searchText) throws GPCatalogException;
-    
-//    @Get
-//    @HttpResource(location = "/geonetwork/insertMetadata")
-//    @WebResult(name = "Result")
-//    void insertMetadata();
-//
-//    @Get
-//    @HttpResource(location = "/geonetwork/resetPrivileges")
-//    @WebResult(name = "Result")
-//    void resetPrivileges();
+    private String geoNetworkServiceURL;
+    private String geoNetworkUsername;
+    private String geoNetworkPassword;
+
+    public GNClient login() throws GPCatalogLoginException {
+        // Create a GeoNetwork client pointing to the GeoNetwork service
+        GNClient client = new GNClient(geoNetworkServiceURL);
+
+        // Perform a login into GN
+        boolean logged = client.login(geoNetworkUsername, geoNetworkPassword);
+
+        if (!logged) {
+            throw new GPCatalogLoginException("Could not log in to GeoNetwork service");
+        }
+        
+        return client;
+    }
+
+    public String getGeoNetworkPassword() {
+        return geoNetworkPassword;
+    }
+
+    public void setGeoNetworkPassword(String geoNetworkPassword) {
+        this.geoNetworkPassword = geoNetworkPassword;
+    }
+
+    public String getGeoNetworkServiceURL() {
+        return geoNetworkServiceURL;
+    }
+
+    public void setGeoNetworkServiceURL(String geoNetworkServiceURL) {
+        this.geoNetworkServiceURL = geoNetworkServiceURL;
+    }
+
+    public String getGeoNetworkUsername() {
+        return geoNetworkUsername;
+    }
+
+    public void setGeoNetworkUsername(String geoNetworkUsername) {
+        this.geoNetworkUsername = geoNetworkUsername;
+    }
 }

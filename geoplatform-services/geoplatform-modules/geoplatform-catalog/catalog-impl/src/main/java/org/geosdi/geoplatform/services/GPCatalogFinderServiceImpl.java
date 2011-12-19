@@ -35,7 +35,15 @@
  */
 package org.geosdi.geoplatform.services;
 
+import it.geosolutions.geonetwork.exception.GNLibException;
+import it.geosolutions.geonetwork.exception.GNServerException;
+import it.geosolutions.geonetwork.util.GNSearchRequest;
+import it.geosolutions.geonetwork.util.GNSearchResponse;
 import javax.jws.WebService;
+import org.geosdi.geoplatform.exception.GPCatalogException;
+import org.geosdi.geoplatform.exception.GPCatalogLoginException;
+import org.geosdi.geoplatform.services.util.GPCatalogClient;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
@@ -47,8 +55,31 @@ import javax.jws.WebService;
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GPCatalogFinderService")
 public class GPCatalogFinderServiceImpl implements GPCatalogFinderService {
 
+    @Autowired
+    private GPCatalogClient gpCatalogClient;
+
     @Override
-    public void searchMetadata(String searchText) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public GNSearchResponse searchMetadata(String searchText) throws GPCatalogException {
+        try {
+            GNSearchRequest searchRequest = new GNSearchRequest();
+
+            // add a predefined search field
+            searchRequest.addParam(GNSearchRequest.Param.any, searchText);
+            // add a custom param
+//            searchRequest.addParam("customParam", "custom");
+
+            // only local results
+//            searchRequest.addConfig(GNSearchRequest.Config.remote, "off");
+
+            // do the search!
+            GNSearchResponse searchResponse = this.gpCatalogClient.login().search(searchRequest);
+            return searchResponse;
+        } catch (GNLibException ex) {
+            throw new GPCatalogException(ex.getMessage());
+        } catch (GNServerException ex) {
+            throw new GPCatalogException(ex.getMessage());
+        } catch (GPCatalogLoginException ex) {
+            throw new GPCatalogException(ex.getMessage());
+        }
     }
 }

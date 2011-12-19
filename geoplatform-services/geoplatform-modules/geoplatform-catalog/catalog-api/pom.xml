@@ -45,6 +45,20 @@
     </developers>
 
     <dependencies>
+        
+    <!-- GEOPLATFORM CONFIGURATOR -->
+       
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-configurator</artifactId>
+        </dependency>
+        
+         <!-- GEONETWORK -->
+        <dependency>
+            <groupId>it.geosolutions</groupId>
+            <artifactId>geonetwork-manager</artifactId>
+            <version>${geonetwork-version}</version>
+        </dependency>
     
         <!-- SPRING -->
         <dependency>

@@ -1302,6 +1302,8 @@
         <jasypt-version>1.8</jasypt-version>
         
         <ehcache-version>2.5.0</ehcache-version>
+        
+        <geonetwork-version>1.0-SNAPSHOT</geonetwork-version>
 
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
     </properties>

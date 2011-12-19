@@ -40,6 +40,7 @@ import java.io.File;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.Map;
+import org.slf4j.LoggerFactory;
 import org.geotools.factory.CommonFactoryFinder;
 import org.geotools.styling.SLDParser;
 import org.geotools.styling.Style;
@@ -48,6 +49,7 @@ import org.geotools.styling.Symbolizer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.opengis.filter.FilterFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -61,6 +63,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
     "classpath:applicationContext.xml"})
 public class SLDTest {
 
+    protected Logger logger = LoggerFactory.getLogger(SLDTest.class);
     static StyleFactory styleFactory = CommonFactoryFinder.getStyleFactory();
     static FilterFactory filterFactory = CommonFactoryFinder.getFilterFactory();
     @Autowired
@@ -69,11 +72,16 @@ public class SLDTest {
     @Test
     public void testSLD() {
         String sldBody = this.restReader.getSLD("capitals");
-//        Reader reader = new StringReader(sldBody);
-//        Style style = this.createFromSLD(reader);
-//        Symbolizer sym = style.getDefaultSpecification();
-//        Map<String, String> options = sym.getOptions();
-//        System.out.println("SLD Body: " + sym.hasOption("Opacity"));
+        try {
+            Reader reader = new StringReader(sldBody);
+            Style style = this.createFromSLD(reader);
+            Symbolizer sym = style.getDefaultSpecification();
+            Map<String, String> options = sym.getOptions();
+            System.out.println("SLD Body: " + sym.hasOption("Opacity"));
+        } catch (Exception nep) {
+            logger.error("Error on performing SLD Test: " + nep + " maybe the "
+                    + "Geoserver is unavailable?");
+        }
     }
 
     /**

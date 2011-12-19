@@ -130,7 +130,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             geoportalDirFile = PublishUtility.generateGeoPortalDirInUserHome();
         }
         if (!geoportalDirFile.exists()) {
-            logger.error("@@@@@@@@@@@ Impossible create GeoPortalDir @@@@@@@@@@@@@@@@");
+            logger.error("@@@@@@@@@@@ Impossible to create GeoPortalDir @@@@@@@@@@@@@@@@");
             throw new SecurityException("Can't Create " + geoportalDir);
         }
         String pathGeoPortalDir = geoportalDirFile.getAbsolutePath();

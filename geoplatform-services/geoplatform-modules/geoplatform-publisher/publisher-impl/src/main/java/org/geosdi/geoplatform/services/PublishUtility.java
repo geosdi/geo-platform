@@ -113,8 +113,9 @@ public class PublishUtility {
     }
 
     public static File generateGeoPortalDirInUserHome() {
-        String geoportalDir = System.getProperty("user.home") + "Geoportal"
-                + System.getProperty("file.separator");
+        String geoportalDir = System.getProperty("user.home") + System.getProperty("file.separator")
+                + "Geoportal" + System.getProperty("file.separator");
+        System.out.println("Geoportal dir: " + geoportalDir);
         File geoportalDirFile = new File(geoportalDir);
         geoportalDirFile.mkdir();
         return geoportalDirFile;

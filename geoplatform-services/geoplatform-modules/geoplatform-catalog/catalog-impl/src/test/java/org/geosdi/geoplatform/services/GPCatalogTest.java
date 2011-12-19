@@ -118,7 +118,7 @@ public class GPCatalogTest {
     @Test
     public void testGPCatalogFinderService() {
         try {
-            GNSearchResponse searchResponse = this.gpCatalogFinderService.searchMetadata("Manhattan");
+            GNSearchResponse searchResponse = this.gpCatalogFinderService.searchMetadata("strade romane");
 
             if (searchResponse.getCount() != 0) {
                 // loop on all metadata

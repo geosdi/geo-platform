@@ -42,6 +42,8 @@ import java.io.StringReader;
 import java.util.Map;
 import org.slf4j.LoggerFactory;
 import org.geotools.factory.CommonFactoryFinder;
+import org.geotools.styling.FeatureTypeStyle;
+import org.geotools.styling.Rule;
 import org.geotools.styling.SLDParser;
 import org.geotools.styling.Style;
 import org.geotools.styling.StyleFactory;
@@ -75,9 +77,32 @@ public class SLDTest {
         try {
             Reader reader = new StringReader(sldBody);
             Style style = this.createFromSLD(reader);
-            Symbolizer sym = style.getDefaultSpecification();
-            Map<String, String> options = sym.getOptions();
-            System.out.println("SLD Body: " + sym.hasOption("Opacity"));
+            for (FeatureTypeStyle fStyle : style.featureTypeStyles()) {
+                for (Rule rule : fStyle.rules()) {
+                    for (Symbolizer sym : rule.symbolizers()) {
+                        for (String qwerty : sym.getOptions().keySet()) {
+                            System.out.println("Qwerty: " + qwerty);
+                        }
+                        StringBuilder stringa = new StringBuilder();
+//                        stringa.append(sym.getDescription().getAbstract());
+//                        stringa.append(sym.getDescription().getTitle());
+                        stringa.append(sym.getGeometry().toString());
+                        stringa.append(sym.getGeometryPropertyName());
+//                        stringa.append(sym.getName());
+//                        stringa.append(sym.getUnitOfMeasure().toString());
+                        System.out.println("Stringa generata: " + stringa);
+                    }
+                }
+            }
+//            String geometry = rule.symbolizers().get(0).getGeometryPropertyName();
+//            System.out.println("Geometry: " + geometry);
+
+
+//            Symbolizer sym = style.getDefaultSpecification();
+//            logger.info("Symbolizer sym = style.getDefaultSpecification();");
+//            Map<String, String> options = sym.getOptions();
+//            logger.info("Map<String, String> options = sym.getOptions();");
+//            System.out.println("SLD Body: " + sym.hasOption("Opacity"));
         } catch (Exception nep) {
             logger.error("Error on performing SLD Test: " + nep + " maybe the "
                     + "Geoserver is unavailable?");
@@ -108,8 +133,9 @@ public class SLDTest {
      */
     private Style createFromSLD(Reader sld) {
         try {
-            SLDParser stylereader = new SLDParser(styleFactory, sld);
-//            SLDParser stylereader = new SLDParser(styleFactory, sld.toURI().toURL());
+//            SLDParser stylereader = new SLDParser(styleFactory, sld);
+            File file = new File("/Geoportal/admin/tif/test.sld");
+            SLDParser stylereader = new SLDParser(styleFactory, file.toURI().toURL());
             Style[] style = stylereader.readXML();
             return style[0];
 

@@ -124,7 +124,16 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         if (geoportalDir != null) {
             geoportalDirFile = new File(geoportalDir);
             if (!geoportalDirFile.exists()) {
-                geoportalDirFile = PublishUtility.generateGeoPortalDirInUserHome();
+                boolean result = false;
+                try {
+                    result = geoportalDirFile.mkdir();
+                } catch (Exception e) {
+                    logger.error("Impossible to create the defined dir, "
+                            + "trying to create one in user dir");
+                }
+                if (!result) {
+                    geoportalDirFile = PublishUtility.generateGeoPortalDirInUserHome();
+                }
             }
         } else {
             geoportalDirFile = PublishUtility.generateGeoPortalDirInUserHome();

@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.oxm;
 import org.geosdi.geoplatform.mock.ClassToXMLMap;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
 /**
@@ -48,10 +49,15 @@ import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 public class GeoPlatformOXMTest extends AbstractDependencyInjectionSpringContextTests {
 
     @Autowired
+    @Qualifier(value = "castor")
     private GeoPlatformMarshall castor;
+    //
     @Autowired
+    @Qualifier(value = "jax")
     private GeoPlatformMarshall jax;
+    //
     @Autowired
+    @Qualifier(value = "xtream")
     private GeoPlatformMarshall xtream;
     private ClassToXMLMap message;
 

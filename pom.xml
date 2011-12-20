@@ -115,7 +115,6 @@
         </repository>
 
 		<!-- JBoss -->
-        
         <repository>
             <id>jboss-public-repository-group</id>
             <name>JBoss Public Repository Group</name>
@@ -304,7 +303,7 @@
                 <version>${geoplatform-version}</version>
             </dependency>
             
-             <dependency>
+            <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-catalog-api</artifactId>
                 <version>${geoplatform-version}</version>
@@ -1244,7 +1243,7 @@
     <properties>
         <geoplatform-version>1.3-SNAPSHOT</geoplatform-version>
         <cxf-version>2.5.0</cxf-version>
-        <spring-version>3.0.6.RELEASE</spring-version>
+        <spring-version>3.1.0.RELEASE</spring-version>
         <quartz-version>2.1.1</quartz-version>
         <velocity-version>1.7</velocity-version>
         <javax-mail-version>1.4.4</javax-mail-version>
@@ -1273,7 +1272,6 @@
 
         <spring-support>2.0.8</spring-support>
         <spring-security-version>3.0.7.RELEASE</spring-security-version>
-        <spring-ws-version>1.0.1</spring-ws-version>
         <aspectj-version>1.5.4</aspectj-version>
         <ubl-version>2.0</ubl-version>
         <jetty-version>6.1.26</jetty-version>
@@ -1285,8 +1283,8 @@
         <hibernate-persistence-version>1.0.1.Final</hibernate-persistence-version>
         <hibernate-version>3.6.8.Final</hibernate-version>
         <hibernate-spatial-version>1.1</hibernate-spatial-version>
-        <hibernate-generic-dao-version>1.0.0</hibernate-generic-dao-version>
-        <asm-version>3.3</asm-version>
+        <hibernate-generic-dao-version>1.1.0</hibernate-generic-dao-version>
+        <asm-version>3.3.1</asm-version>
         <cglib-version>2.2.2</cglib-version>
 
         <jai-version>1.1.3</jai-version>

@@ -88,7 +88,6 @@ import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
-import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI

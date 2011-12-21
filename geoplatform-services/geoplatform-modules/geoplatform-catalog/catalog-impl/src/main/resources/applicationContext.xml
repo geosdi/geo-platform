@@ -16,6 +16,8 @@
             http://cxf.apache.org/jaxws
             http://cxf.apache.org/schemas/jaxws.xsd"
        default-autowire="byName">
+
+    <context:component-scan base-package="org.geosdi.geoplatform.services.util"/>
             
     <import resource="classpath:applicationContext-JASYPT.xml" />
     

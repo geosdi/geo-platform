@@ -46,7 +46,12 @@
 
     <dependencies>
         
-    <!-- GEOPLATFORM CONFIGURATOR -->
+    <!-- GEOPLATFORM -->
+       
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-model</artifactId>
+        </dependency>
        
         <dependency>
             <groupId>org.geosdi</groupId>

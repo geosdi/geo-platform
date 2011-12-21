@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
+import it.geosolutions.geonetwork.GNClient;
 import it.geosolutions.geonetwork.exception.GNLibException;
 import it.geosolutions.geonetwork.exception.GNServerException;
 import it.geosolutions.geonetwork.util.GNSearchRequest;
@@ -59,7 +60,7 @@ public class GPCatalogFinderServiceImpl implements GPCatalogFinderService {
     private GPCatalogClient gpCatalogClient;
 
     @Override
-    public GNSearchResponse searchMetadata(String searchText) throws GPCatalogException {
+    public GNSearchResponse searchMetadata(GNClient client, String searchText) throws GPCatalogException {
         try {
             GNSearchRequest searchRequest = new GNSearchRequest();
 
@@ -72,13 +73,11 @@ public class GPCatalogFinderServiceImpl implements GPCatalogFinderService {
 //            searchRequest.addConfig(GNSearchRequest.Config.remote, "off");
 
             // do the search!
-            GNSearchResponse searchResponse = this.gpCatalogClient.login().search(searchRequest);
+            GNSearchResponse searchResponse = client.search(searchRequest);
             return searchResponse;
         } catch (GNLibException ex) {
             throw new GPCatalogException(ex.getMessage());
         } catch (GNServerException ex) {
-            throw new GPCatalogException(ex.getMessage());
-        } catch (GPCatalogLoginException ex) {
             throw new GPCatalogException(ex.getMessage());
         }
     }

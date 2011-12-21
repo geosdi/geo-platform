@@ -35,13 +35,15 @@
  */
 package org.geosdi.geoplatform.services;
 
+import it.geosolutions.geonetwork.GNClient;
 import it.geosolutions.geonetwork.exception.GNLibException;
 import it.geosolutions.geonetwork.exception.GNServerException;
 import it.geosolutions.geonetwork.util.GNSearchResponse;
-import java.util.logging.Level;
 import org.geosdi.geoplatform.exception.GPCatalogException;
 import org.geosdi.geoplatform.exception.GPCatalogLoginException;
+import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
 import org.geosdi.geoplatform.services.util.GPCatalogClient;
+import org.geosdi.geoplatform.services.util.GPCatalogMetadataLoader;
 import org.jdom.Element;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
@@ -70,6 +72,8 @@ public class GPCatalogTest {
     @Autowired
     private GPCatalogFinderService gpCatalogFinderService;
     //
+    @Autowired
+    private GPCatalogMetadataLoader gpCatalogMetadataLoader;
 
     @Test
     public void testGPCatalogClientReferences() {
@@ -86,48 +90,181 @@ public class GPCatalogTest {
     }
 
     @Test
+    public void testGPCatalogMetadataLoader() {
+        Assert.assertNotNull("gpCatalogMetadataLoader is null", gpCatalogMetadataLoader);
+    }
+
+    @Test
     public void testGPCatalogClient() {
         try {
-            gpCatalogClient.login();
+            gpCatalogClient.createClientWithCredentials();
         } catch (GPCatalogLoginException ex) {
             Assert.fail(ex.getMessage());
         }
     }
-
-//    @Test
-//    public void testWrongURL() {
-//        gpCatalogClient.setGeoNetworkServiceURL("http://localhost:8282/geonetwork");
-//        try {
-//            gpCatalogClient.login();
-//            Assert.fail("Impossible to make login because GeoNetwork service URL is wrong");
-//        } catch (GPCatalogLoginException ex) {
-//        }
-//    }
-//
-//    @Test
-//    public void testWrongCredentials() {
-//        gpCatalogClient.setGeoNetworkUsername("admin");
-//        gpCatalogClient.setGeoNetworkPassword("aadminn");
-//        try {
-//            gpCatalogClient.login();
-//            Assert.fail("Impossible to make login because password is wrong");
-//        } catch (GPCatalogLoginException ex) {
-//            Assert.fail(ex.getMessage());
-//        }
-//    }
+    
+////    @Test
+////    public void testWrongURL() {
+////        gpCatalogClient.setGeoNetworkServiceURL("http://localhost:8282/geonetwork");
+////        try {
+////            gpCatalogClient.login();
+////            Assert.fail("Impossible to make login because GeoNetwork service URL is wrong");
+////        } catch (GPCatalogLoginException ex) {
+////        }
+////    }
+////
+////    @Test
+////    public void testWrongCredentials() {
+////        gpCatalogClient.setGeoNetworkUsername("admin");
+////        gpCatalogClient.setGeoNetworkPassword("aadminn");
+////        try {
+////            gpCatalogClient.login();
+////            Assert.fail("Impossible to make login because password is wrong");
+////        } catch (GPCatalogLoginException ex) {
+////            Assert.fail(ex.getMessage());
+////        }
+////    }
+    
     @Test
-    public void testGPCatalogFinderService() {
+    public void testAnonymousGPCatalogFinderService() {
         try {
-            GNSearchResponse searchResponse = this.gpCatalogFinderService.searchMetadata("strade romane");
+            GNClient client = gpCatalogClient.createClientWithoutCredentials();
+            Assert.assertNotNull("GeoNetwork client is null", client);
+
+            GNSearchResponse searchResponse = this.gpCatalogFinderService.searchMetadata(client, "strade romane");
+
+            if (searchResponse.getCount() != 0) {
+                logger.debug("Items found: " + searchResponse.getCount());
+                // loop on all metadata
+                for (GNSearchResponse.GNMetadata metadata : searchResponse) {
+                    Long id = metadata.getId();
+                    // and this is the full metadata document, as a JDOM element.
+                    Element md = client.get(id);
+                    XMLOutputter out = new XMLOutputter(Format.getPrettyFormat());
+//                    logger.info("Metadata -> " + out.outputString(md));
+                }
+            } else {
+                logger.info("No data retrieved");
+            }
+        } catch (GNLibException ex) {
+            Assert.fail(ex.getMessage());
+        } catch (GNServerException ex) {
+            Assert.fail(ex.getMessage());
+        } catch (GPCatalogException ex) {
+            Assert.fail(ex.getMessage());
+        }
+    }
+
+    @Test
+    public void testPrivateGPCatalogFinderService() {
+        try {
+            GNClient client = gpCatalogClient.createClientWithCredentials();
+            Assert.assertNotNull("GeoNetwork client is null", client);
+
+            GNSearchResponse searchResponse = this.gpCatalogFinderService.searchMetadata(client, "strade romane"); // TODO [Michele]: retrieve a non public layer from geonetwork
+
+            if (searchResponse.getCount() != 0) {
+                logger.debug("Items found: " + searchResponse.getCount());
+                // loop on all metadata
+                for (GNSearchResponse.GNMetadata metadata : searchResponse) {
+                    Long id = metadata.getId();
+                    // and this is the full metadata document, as a JDOM element.
+                    Element md = client.get(id);
+                    XMLOutputter out = new XMLOutputter(Format.getPrettyFormat());
+//                    logger.info("Metadata -> " + out.outputString(md));
+                }
+            } else {
+                logger.info("No data retrieved");
+            }
+        } catch (GNLibException ex) {
+            Assert.fail(ex.getMessage());
+        } catch (GNServerException ex) {
+            Assert.fail(ex.getMessage());
+        } catch (GPCatalogException ex) {
+            Assert.fail(ex.getMessage());
+        }
+    }
+
+    @Test
+    public void testExtractDatasFromMetadata() {
+        try {
+            GNClient client = gpCatalogClient.createClientWithCredentials();
+            Assert.assertNotNull("GeoNetwork client is null", client);
+
+            GNSearchResponse searchResponse = this.gpCatalogFinderService.searchMetadata(client, "strade romane");
+            Assert.assertTrue("Items found not equals 3", searchResponse.getCount() == 3);
 
             if (searchResponse.getCount() != 0) {
                 // loop on all metadata
                 for (GNSearchResponse.GNMetadata metadata : searchResponse) {
                     Long id = metadata.getId();
                     // and this is the full metadata document, as a JDOM element.
-                    Element md = gpCatalogClient.login().get(id);
-                    XMLOutputter out = new XMLOutputter(Format.getPrettyFormat());
-                    logger.info("Metadata -> " + out.outputString(md));
+                    Element md = client.get(id);
+                    GPCatalogMetadataDTO gpCatalogMetadataDTO = this.gpCatalogMetadataLoader.getGPCatalogMetadataDTO(md);
+                    logger.info(gpCatalogMetadataDTO.toString());
+//
+//                    Filter titleFilter = new ElementFilter("title", this.gmdNamespace);
+//                    Element titleElement = (Element) (md.getDescendants(titleFilter).next());
+//                    if (titleElement != null) {
+//                        logger.info("\tTitle value: " + titleElement.getChildText("CharacterString", this.gcoNamespace));
+//                    }
+//
+//                    Filter abstractFilter = new ElementFilter("abstract", this.gmdNamespace);
+//                    Element abstractElement = (Element) (md.getDescendants(abstractFilter).next());
+//                    if (abstractElement != null) {
+//                        logger.info("\tAbstract value: " + abstractElement.getChildText("CharacterString", this.gcoNamespace));
+//                    }
+//
+//                    Filter keywordsFilter = new ElementFilter("MD_Keywords", this.gmdNamespace);
+//                    Element keywordsElement = (Element) (md.getDescendants(keywordsFilter).next());
+//                    List keywordsList = keywordsElement.getChildren();
+//                    for (Object o : keywordsList) {
+//                        Element keywordElement = (Element) o;
+//                        logger.info("\tKeyword value: " + keywordElement.getChildText("CharacterString", this.gcoNamespace));
+//                    }
+//
+//                    Filter digitalTransferOptionsFilter = new ElementFilter("MD_DigitalTransferOptions", this.gmdNamespace);
+//                    Element digitalTransferOptionsElement = (Element) (md.getDescendants(digitalTransferOptionsFilter).next());
+//                    List onlineElementsList = digitalTransferOptionsElement.getChildren();
+//                    for (Object o : onlineElementsList) {
+//                        Element onlineElement = (Element) o;
+//                        logger.info("\tURL value: " + onlineElement.getChild("CI_OnlineResource", this.gmdNamespace).getChild("linkage", gmdNamespace).getChildText("URL", gmdNamespace));
+//                        logger.info("\tProtocol value: " + onlineElement.getChild("CI_OnlineResource", this.gmdNamespace).getChild("protocol", gmdNamespace).getChildText("CharacterString", gcoNamespace));
+//                        logger.info("\tName value: " + onlineElement.getChild("CI_OnlineResource", this.gmdNamespace).getChild("name", gmdNamespace).getChildText("CharacterString", gcoNamespace));
+//                        logger.info("\tDescription value: " + onlineElement.getChild("CI_OnlineResource", this.gmdNamespace).getChild("description", gmdNamespace).getChildText("CharacterString", gcoNamespace));
+//                        logger.info("\n\n");
+//                    }
+//
+//                    Element uuidElement = (Element) (md.getChild("uuid"));
+//                    if (uuidElement != null) {
+//                        logger.info("\tUUID value: " + uuidElement.getText());
+//                    }
+//
+//                    Filter geographicBoundingBoxFilter = new ElementFilter("EX_GeographicBoundingBox", this.gmdNamespace);
+//                    Element geographicBoundingBoxElement = (Element) (md.getDescendants(geographicBoundingBoxFilter).next());
+//                    if (geographicBoundingBoxElement != null) {
+//                        Element westBoundLongitudeElement = geographicBoundingBoxElement.getChild("westBoundLongitude", gmdNamespace);
+//                        if (westBoundLongitudeElement != null) {
+//                            logger.info("\tWest value: " + westBoundLongitudeElement.getChildText("Decimal", gcoNamespace));
+//                        }
+//
+//                        Element eastBoundLongitudeElement = geographicBoundingBoxElement.getChild("eastBoundLongitude", gmdNamespace);
+//                        if (eastBoundLongitudeElement != null) {
+//                            logger.info("\tEast value: " + eastBoundLongitudeElement.getChildText("Decimal", gcoNamespace));
+//                        }
+//
+//                        Element southBoundLatitudeElement = geographicBoundingBoxElement.getChild("southBoundLatitude", gmdNamespace);
+//                        if (southBoundLatitudeElement != null) {
+//                            logger.info("\tSouth value: " + southBoundLatitudeElement.getChildText("Decimal", gcoNamespace));
+//                        }
+//
+//                        Element northBoundLatitudeElement = geographicBoundingBoxElement.getChild("westBoundLongitude", gmdNamespace);
+//                        if (northBoundLatitudeElement != null) {
+//                            logger.info("\tNorth value: " + northBoundLatitudeElement.getChildText("Decimal", gcoNamespace));
+//                        }
+//                    }
+
+                    logger.info("-----------------------------------------------------------");
                 }
             } else {
                 logger.info("No data retrieved");

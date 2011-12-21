@@ -36,8 +36,6 @@
 package org.geosdi.geoplatform.services.util;
 
 import it.geosolutions.geonetwork.GNClient;
-import it.geosolutions.geonetwork.util.GNInsertConfiguration;
-import java.io.File;
 import org.geosdi.geoplatform.exception.GPCatalogLoginException;
 
 /**
@@ -51,7 +49,14 @@ public class GPCatalogClient {
     private String geoNetworkUsername;
     private String geoNetworkPassword;
 
-    public GNClient login() throws GPCatalogLoginException {
+    public GNClient createClientWithoutCredentials() {
+        // Create a GeoNetwork client pointing to the GeoNetwork service
+        GNClient client = new GNClient(geoNetworkServiceURL);
+
+        return client;
+    }
+
+    public GNClient createClientWithCredentials() throws GPCatalogLoginException {
         // Create a GeoNetwork client pointing to the GeoNetwork service
         GNClient client = new GNClient(geoNetworkServiceURL);
 

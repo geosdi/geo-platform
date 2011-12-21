@@ -46,7 +46,7 @@
 
     <dependencies>
         
-    <!-- GEOPLATFORM WS -->
+    <!-- GEOPLATFORM -->
        
         <dependency>
             <groupId>org.geosdi</groupId>

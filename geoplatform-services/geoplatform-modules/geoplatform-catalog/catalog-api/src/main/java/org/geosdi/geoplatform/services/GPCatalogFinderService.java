@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
+import it.geosolutions.geonetwork.GNClient;
 import it.geosolutions.geonetwork.util.GNSearchResponse;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -58,7 +59,9 @@ public interface GPCatalogFinderService {
     @Get
     @HttpResource(location = "/geonetwork/searchMetadata/{searchText}")
     @WebResult(name = "Result")
-    GNSearchResponse searchMetadata(@WebParam(name = "searchText") String searchText) throws GPCatalogException;
+    GNSearchResponse searchMetadata(@WebParam(name = "client") GNClient client,
+                                    @WebParam(name = "searchText") String searchText)
+            throws GPCatalogException;
     
 //    @Get
 //    @HttpResource(location = "/geonetwork/insertMetadata")

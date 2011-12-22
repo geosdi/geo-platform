@@ -164,5 +164,11 @@ public class GPCatalogMetadataDTO {
         public void setProtocol(String protocol) {
             this.protocol = protocol;
         }
+
+        @Override
+        public String toString() {
+            return "GPCatalogMetadataOnlineResource{" + "URL=" + URL + ", protocol=" + protocol + ", name=" + name + ", description=" + description + '}';
+        }
+        
     }
 }

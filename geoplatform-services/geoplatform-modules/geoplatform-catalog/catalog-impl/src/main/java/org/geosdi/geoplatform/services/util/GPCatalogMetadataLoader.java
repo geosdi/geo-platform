@@ -57,9 +57,9 @@ public class GPCatalogMetadataLoader {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private static final Namespace gmdNamespace = Namespace.getNamespace("gmd", "http://www.isotc211.org/2005/gmd");
+    private static final Namespace gcoNamespace = Namespace.getNamespace("gco", "http://www.isotc211.org/2005/gco");
     private static final Namespace gmlNamespace = Namespace.getNamespace("gml", "http://www.opengis.net/gml");
     private static final Namespace gtsNamespace = Namespace.getNamespace("gts", "http://www.isotc211.org/2005/gts");
-    private static final Namespace gcoNamespace = Namespace.getNamespace("gco", "http://www.isotc211.org/2005/gco");
 
     public GPCatalogMetadataDTO getGPCatalogMetadataDTO(Element rootElement) throws NumberFormatException {
         GPCatalogMetadataDTO gpCatalogMetadataDTO = new GPCatalogMetadataDTO();
@@ -109,16 +109,14 @@ public class GPCatalogMetadataLoader {
                 String protocol = parseOnlineElement(onlineElement, "CI_OnlineResource", gmdNamespace, "protocol", gmdNamespace, "CharacterString", gcoNamespace);
                 String name = parseOnlineElement(onlineElement, "CI_OnlineResource", gmdNamespace, "name", gmdNamespace, "CharacterString", gcoNamespace);
                 String description = parseOnlineElement(onlineElement, "CI_OnlineResource", gmdNamespace, "description", gmdNamespace, "CharacterString", gcoNamespace);
-//                logger.info("\tURL value: " + onlineElement.getChild("CI_OnlineResource", this.gmdNamespace).getChild("linkage", gmdNamespace).getChildText("URL", gmdNamespace));
-//                logger.info("\tProtocol value: " + onlineElement.getChild("CI_OnlineResource", this.gmdNamespace).getChild("protocol", gmdNamespace).getChildText("CharacterString", gcoNamespace));
-//                logger.info("\tName value: " + onlineElement.getChild("CI_OnlineResource", this.gmdNamespace).getChild("name", gmdNamespace).getChildText("CharacterString", gcoNamespace));
-//                logger.info("\tDescription value: " + onlineElement.getChild("CI_OnlineResource", this.gmdNamespace).getChild("description", gmdNamespace).getChildText("CharacterString", gcoNamespace));
-
+                
                 GPCatalogMetadataDTO.GPCatalogMetadataOnlineResource gpCatalogMetadataOnlineResource = gpCatalogMetadataDTO.makeInstance();
                 gpCatalogMetadataOnlineResource.setURL(url);
                 gpCatalogMetadataOnlineResource.setProtocol(protocol);
                 gpCatalogMetadataOnlineResource.setName(name);
                 gpCatalogMetadataOnlineResource.setDescription(description);
+                
+                gpCatalogMetadataDTO.addGpCatalogMetadataOnlineResource(gpCatalogMetadataOnlineResource);
             }
         }
     }

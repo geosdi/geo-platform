@@ -497,7 +497,7 @@
             <dependency>
                 <groupId>jdom</groupId>
                 <artifactId>jdom</artifactId>
-                <version>1.1</version>
+                <version>${jdom-version}</version>
             </dependency>
 
             <dependency>
@@ -1300,6 +1300,8 @@
         <jasypt-version>1.8</jasypt-version>
         
         <ehcache-version>2.5.0</ehcache-version>
+        
+        <jdom-version>1.1</jdom-version>
         
         <geonetwork-version>1.0-SNAPSHOT</geonetwork-version>
 

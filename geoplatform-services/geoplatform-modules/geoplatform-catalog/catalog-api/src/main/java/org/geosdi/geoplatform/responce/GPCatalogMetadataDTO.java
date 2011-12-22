@@ -56,7 +56,7 @@ public class GPCatalogMetadataDTO {
     public GPCatalogMetadataOnlineResource makeInstance() {
         return new GPCatalogMetadataOnlineResource();
     }
-    
+
     public List<GPCatalogMetadataOnlineResource> getGpCatalogMetadataOnlineResourceList() {
         return gpCatalogMetadataOnlineResourceList;
     }
@@ -119,11 +119,15 @@ public class GPCatalogMetadataDTO {
 
     @Override
     public String toString() {
-        return "GPCatalogMetadataDTO{" + "uuid=" + uuid + ", title=" + title + ", abstractValue=" + abstractValue + ", keywordValues=" + keywordValues + ", bbox=" + bbox + ", gpCatalogMetadataOnlineResourceList=" + gpCatalogMetadataOnlineResourceList + '}';
+        return "GPCatalogMetadataDTO{" + "uuid=" + uuid + ", title=" + title
+                + ", abstractValue=" + abstractValue + ", keywordValues="
+                + keywordValues + ", bbox=" + bbox
+                + ", gpCatalogMetadataOnlineResourceList="
+                + gpCatalogMetadataOnlineResourceList + '}';
     }
-    
+
     public class GPCatalogMetadataOnlineResource {
-        
+
         private String URL;
         private String protocol;
         private String name;
@@ -160,6 +164,5 @@ public class GPCatalogMetadataDTO {
         public void setProtocol(String protocol) {
             this.protocol = protocol;
         }
-        
     }
 }

@@ -38,14 +38,12 @@ package org.geosdi.geoplatform.services.util;
 import java.util.List;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
-import org.geosdi.geoplatform.services.GPCatalogFinderService;
 import org.jdom.Element;
 import org.jdom.Namespace;
 import org.jdom.filter.ElementFilter;
 import org.jdom.filter.Filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -57,12 +55,6 @@ import org.springframework.context.annotation.Configuration;
 public class GPCatalogMetadataLoader {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    @Autowired
-    private GPCatalogClient gpCatalogClient;
-    //
-    @Autowired
-    private GPCatalogFinderService gpCatalogFinderService;
     //
     private static final Namespace gmdNamespace = Namespace.getNamespace("gmd", "http://www.isotc211.org/2005/gmd");
     private static final Namespace gmlNamespace = Namespace.getNamespace("gml", "http://www.opengis.net/gml");
@@ -112,7 +104,7 @@ public class GPCatalogMetadataLoader {
             List onlineElementsList = digitalTransferOptionsElement.getChildren();
             for (Object o : onlineElementsList) {
                 Element onlineElement = (Element) o;
-                
+
                 String url = parseOnlineElement(onlineElement, "CI_OnlineResource", gmdNamespace, "linkage", gmdNamespace, "URL", gmdNamespace);
                 String protocol = parseOnlineElement(onlineElement, "CI_OnlineResource", gmdNamespace, "protocol", gmdNamespace, "CharacterString", gcoNamespace);
                 String name = parseOnlineElement(onlineElement, "CI_OnlineResource", gmdNamespace, "name", gmdNamespace, "CharacterString", gcoNamespace);
@@ -121,8 +113,8 @@ public class GPCatalogMetadataLoader {
 //                logger.info("\tProtocol value: " + onlineElement.getChild("CI_OnlineResource", this.gmdNamespace).getChild("protocol", gmdNamespace).getChildText("CharacterString", gcoNamespace));
 //                logger.info("\tName value: " + onlineElement.getChild("CI_OnlineResource", this.gmdNamespace).getChild("name", gmdNamespace).getChildText("CharacterString", gcoNamespace));
 //                logger.info("\tDescription value: " + onlineElement.getChild("CI_OnlineResource", this.gmdNamespace).getChild("description", gmdNamespace).getChildText("CharacterString", gcoNamespace));
-                
-                GPCatalogMetadataDTO.GPCatalogMetadataOnlineResource gpCatalogMetadataOnlineResource  = gpCatalogMetadataDTO.makeInstance();
+
+                GPCatalogMetadataDTO.GPCatalogMetadataOnlineResource gpCatalogMetadataOnlineResource = gpCatalogMetadataDTO.makeInstance();
                 gpCatalogMetadataOnlineResource.setURL(url);
                 gpCatalogMetadataOnlineResource.setProtocol(protocol);
                 gpCatalogMetadataOnlineResource.setName(name);
@@ -132,15 +124,15 @@ public class GPCatalogMetadataLoader {
     }
 
     private String parseOnlineElement(Element referenceElement,
-                                      String firstLevelElementName, Namespace firstLevelNamespace,
-                                      String secondLevelElementName, Namespace secondLevelNamespace,
-                                      String thirdLevelElementName, Namespace thirdLevelNamespace) {
+            String firstLevelElementName, Namespace firstLevelNamespace,
+            String secondLevelElementName, Namespace secondLevelNamespace,
+            String thirdLevelElementName, Namespace thirdLevelNamespace) {
         Element firstLevelElement = referenceElement.getChild(firstLevelElementName, firstLevelNamespace);
         if (firstLevelElement != null) {
             Element secondLevelElement = firstLevelElement.getChild(secondLevelElementName, secondLevelNamespace);
-            
+
             if (secondLevelElement != null) {
-                String value = secondLevelElement.getChildText(thirdLevelElementName,thirdLevelNamespace);
+                String value = secondLevelElement.getChildText(thirdLevelElementName, thirdLevelNamespace);
                 return value;
             }
         }

@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.services.util;
 
 import it.geosolutions.geonetwork.GNClient;
 import org.geosdi.geoplatform.exception.GPCatalogLoginException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -44,6 +46,8 @@ import org.geosdi.geoplatform.exception.GPCatalogLoginException;
  * @email michele.santomauro@geosdi.org
  */
 public class GPCatalogClient {
+
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private String geoNetworkServiceURL;
     private String geoNetworkUsername;

@@ -107,16 +107,14 @@ public class GPCatalogTest {
             GNClient anonymousClient = gpCatalogClient.createClientWithoutCredentials();
             Assert.assertNotNull("GeoNetwork anonymousClient is null", anonymousClient);
 
-            GNSearchResponse anonymousSearchResponse = this.gpCatalogFinderService.searchMetadata(anonymousClient, "");
-            Assert.assertTrue("No elements retrieved with anonymous search", anonymousSearchResponse.getCount() > 0);
+            GNSearchResponse anonymousSearchResponse = this.gpCatalogFinderService.searchMetadata(anonymousClient, "Bacini idrografici principali");
+            Assert.assertTrue("1 or more elements retrieved with anonymous search, but 0 expected", anonymousSearchResponse.getCount() == 0);
 
             GNClient privateClient = gpCatalogClient.createClientWithCredentials();
             Assert.assertNotNull("GeoNetwork privateClient is null", privateClient);
 
-            GNSearchResponse privateSearchResponse = this.gpCatalogFinderService.searchMetadata(privateClient, "");
+            GNSearchResponse privateSearchResponse = this.gpCatalogFinderService.searchMetadata(privateClient, "Bacini idrografici principali");
             Assert.assertTrue("No elements retrieved with private search", privateSearchResponse.getCount() > 0);
-
-            Assert.assertTrue("Anonymous search return more elements than private search", privateSearchResponse.getCount() >= anonymousSearchResponse.getCount());
         } catch (GPCatalogException ex) {
             Assert.fail(ex.getMessage());
         }

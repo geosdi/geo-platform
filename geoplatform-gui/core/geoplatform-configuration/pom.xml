@@ -91,6 +91,20 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
         </dependency>
+        
+        <!-- =========================================================== -->
+        <!-- ======================== GUAVA =========================== -->
+	<!-- =========================================================== -->
+            
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>          
+        </dependency>
+            
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava-gwt</artifactId>
+        </dependency>
 
 		<!-- GeoPlatform-WS-Client -->
 

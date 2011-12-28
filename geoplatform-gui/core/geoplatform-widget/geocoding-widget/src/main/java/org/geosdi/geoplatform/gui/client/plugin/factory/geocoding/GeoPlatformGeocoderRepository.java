@@ -35,10 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.plugin.factory.geocoding;
 
-import java.util.HashMap;
+import com.google.common.collect.Maps;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GeocoderPluginType;
-import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPAdvancedGeocoderPluginManager;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPluginManager;
 
 /**
@@ -53,7 +52,7 @@ public class GeoPlatformGeocoderRepository {
     private static GeoPlatformGeocoderRepository instance;
 
     private GeoPlatformGeocoderRepository() {
-        this.plugins = new HashMap<GeocoderPluginType, IGPGeocoderPluginManager>();
+        this.plugins = Maps.newHashMap();
     }
 
     public static synchronized GeoPlatformGeocoderRepository getInstance() {
@@ -63,17 +62,32 @@ public class GeoPlatformGeocoderRepository {
 
         return instance;
     }
-
+    
+    /**
+     * 
+     * @param geocoderManager 
+     */
     public synchronized void bindPlugin(IGPGeocoderPluginManager geocoderManager) {
-        if ((IGPAdvancedGeocoderPluginManager) plugins.get(geocoderManager.getGecoderPluginType()) == null) {
+        if (plugins.get(geocoderManager.getGecoderPluginType()) == null) {
             this.plugins.put(geocoderManager.getGecoderPluginType(), geocoderManager);
         }
     }
 
+    /**
+     * Find GeoCoderPlugin Manager in the Map
+     * 
+     * @param GeoCoder Type
+     * @return IGPGeocoderPluginManager
+     */
     public synchronized IGPGeocoderPluginManager findPlugin(GeocoderPluginType type) {
         return plugins.get(type);
     }
 
+    /**
+     * 
+     * @param GeocoderPluginType
+     * @return true only if Member Manager registered with type is found
+     */
     public synchronized boolean removePlugin(GeocoderPluginType type) {
         return this.plugins.remove(type) != null;
     }

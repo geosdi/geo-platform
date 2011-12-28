@@ -1,10 +1,10 @@
+
 <module>
 
-	<source path="client" />
+    <source path="client" />
 
-	<entry-point class='org.geosdi.geoplatform.gui.client.Geocoding' />
+    <entry-point class='org.geosdi.geoplatform.gui.client.Geocoding' />
 
-	<servlet path="/GeocodingRemote"
+    <servlet path="/GeocodingRemote"
 		class="org.geosdi.geoplatform.gui.server.gwt.GeocodingRemoteImpl" />
-
 </module>

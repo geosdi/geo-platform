@@ -340,31 +340,26 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-jmx</artifactId>
                 <version>${spring-support}</version>
-				<!-- <scope>provided</scope> -->
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-beans</artifactId>
                 <version>${spring-version}</version>
-				<!-- <scope>provided</scope> -->
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-asm</artifactId>
                 <version>${spring-version}</version>
-				<!-- <scope>provided</scope> -->
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${spring-version}</version>
-				<!-- <scope>provided</scope> -->
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
                 <version>${spring-version}</version>
-				<!-- <scope>provided</scope> -->
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -385,7 +380,6 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-jdbc</artifactId>
                 <version>${spring-version}</version>
-				<!-- <scope>provided</scope> -->
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -428,13 +422,11 @@
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-core</artifactId>
                 <version>${spring-security-version}</version>
-				<!-- <scope>provided</scope> -->
             </dependency>
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-taglibs</artifactId>
                 <version>${spring-security-version}</version>
-				<!-- <scope>provided</scope> -->
             </dependency>
             <dependency>
                 <groupId>org.springframework.security</groupId>
@@ -970,16 +962,34 @@
                 <version>${gwtOpenlayersVersion}</version>
                 <scope>provided</scope>
             </dependency>
+            
             <dependency>
                 <groupId>org.gwtopenmaps.openlayers</groupId>
                 <artifactId>gwt-openlayers-server</artifactId>
                 <version>${gwtOpenlayersVersion}</version>
                 <scope>runtime</scope>
             </dependency>
+            
+            <!-- =========================================================== -->
+            <!-- ======================== GUAVA =========================== -->
+	    <!-- =========================================================== -->
+            
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava-version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava-gwt</artifactId>
+                <version>${guava-version}</version>
+            </dependency>
 
-			<!-- =========================================================== -->
-			<!-- JASYPT -->
-			<!-- =========================================================== -->
+
+            <!-- =========================================================== -->
+	    <!-- ======================== JASYPT =========================== -->
+	    <!-- =========================================================== -->
             <dependency>
                 <groupId>org.jasypt</groupId>
                 <artifactId>jasypt</artifactId>
@@ -1271,7 +1281,7 @@
         <xbean-version>3.1.0.2-fuse</xbean-version>
 
         <spring-support>2.0.8</spring-support>
-        <spring-security-version>3.0.7.RELEASE</spring-security-version>
+        <spring-security-version>3.1.0.RELEASE</spring-security-version>
         <aspectj-version>1.5.4</aspectj-version>
         <ubl-version>2.0</ubl-version>
         <jetty-version>6.1.26</jetty-version>
@@ -1298,6 +1308,8 @@
         <gwtOpenlayersVersion>0.7-SNAPSHOT</gwtOpenlayersVersion>
         
         <jasypt-version>1.8</jasypt-version>
+        
+        <guava-version>10.0.1</guava-version>
         
         <ehcache-version>2.5.0</ehcache-version>
         

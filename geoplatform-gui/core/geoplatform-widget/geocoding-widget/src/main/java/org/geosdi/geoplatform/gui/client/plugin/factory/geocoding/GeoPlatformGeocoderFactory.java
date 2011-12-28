@@ -64,13 +64,8 @@ public class GeoPlatformGeocoderFactory implements GeocoderFactory {
         GeoPlatformGeocoderRepository repo = GeoPlatformGeocoderRepository.getInstance();
 
         IGPGeocoderPluginManager pluginManager = repo.findPlugin(getGeocoderPluginType());
-        if (pluginManager != null) {
-            return pluginManager;
-        }
 
-        pluginManager = istantiate();
-
-        return pluginManager;
+        return pluginManager != null ? pluginManager : istantiate();
     }
 
     @Override
@@ -78,7 +73,12 @@ public class GeoPlatformGeocoderFactory implements GeocoderFactory {
         return GeoPlatformGeocoderRepository.getInstance().findPlugin(type);
     }
 
-    public IGPGeocoderPluginManager istantiate() {
+    /**
+     * Istantiate the Plugin Manager
+     * 
+     * @return IGPGeocoderPluginManager
+     */
+    private IGPGeocoderPluginManager istantiate() {
         IGPGeocoderPluginManager pluginManager = null;
 
         switch (getGeocoderPluginType()) {

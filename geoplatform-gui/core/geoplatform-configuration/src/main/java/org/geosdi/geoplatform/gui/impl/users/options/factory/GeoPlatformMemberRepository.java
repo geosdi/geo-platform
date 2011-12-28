@@ -33,15 +33,61 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.users.options.member;
+package org.geosdi.geoplatform.gui.impl.users.options.factory;
+
+import com.google.common.collect.Maps;
+import java.util.Map;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.GPMemberOptionType;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.IGPMemberOptionManager;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public enum GPMemberOptionType {
-    
-    SIMPLE_PROPERTIES, ADVANCED_PROPERTIES;
-    
+public class GeoPlatformMemberRepository {
+
+    private static GeoPlatformMemberRepository instance;
+    private Map<GPMemberOptionType, IGPMemberOptionManager> members;
+
+    private GeoPlatformMemberRepository() {
+        this.members = Maps.newHashMap();
+    }
+
+    public static synchronized GeoPlatformMemberRepository getInstance() {
+        if (instance == null) {
+            instance = new GeoPlatformMemberRepository();
+        }
+        return instance;
+    }
+
+    /**
+     * 
+     * @param IGPMemberOptionManager 
+     */
+    public synchronized void bindMember(IGPMemberOptionManager member) {
+        if (members.get(member.getType()) == null) {
+            this.members.put(member.getType(), member);
+        }
+    }
+
+    /**
+     * 
+     * @param 
+     *          GPMemberOptionType
+     * @return 
+     *         IGPMemberOptionManager
+     */
+    public synchronized IGPMemberOptionManager findMember(GPMemberOptionType type) {
+        return members.get(type);
+    }
+
+    /**
+     * 
+     * @param  GPMemberOptionType
+     * @return Boolean
+     */
+    public synchronized boolean removeMember(GPMemberOptionType type) {
+        return this.members.remove(type) != null;
+    }
 }

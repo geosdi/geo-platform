@@ -42,11 +42,13 @@ import java.util.List;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface IGPMemberOptionManager<T extends GeoPlatformOptionsMember> {
+public interface IGPMemberOptionManager<M extends GeoPlatformOptionsMember> {
+    
+    GPMemberOptionType getType();
 
-    List<T> getMembers();
-    
-    void addMember(T member);
-    
-    void removeMember(T member);
+    List<M> getMembers();
+
+    void addMember(M member);
+
+    void removeMember(M member);
 }

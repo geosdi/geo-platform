@@ -3,8 +3,11 @@
     <inherits name='com.google.gwt.user.User' />
     <inherits name='com.extjs.gxt.ui.GXT' />
 	
-	<!-- ADDING GEOPLATFORM-RESOURCES MODULE -->
+    <!-- ADDING GEOPLATFORM-RESOURCES MODULE -->
     <inherits name='org.geosdi.geoplatform.gui.Resources' />
+    
+    <!-- ADDING GOOGLE-GUAVA MODULE -->
+    <inherits name="com.google.common.collect.Collect"/>
 	
     <source path="client" />
 	

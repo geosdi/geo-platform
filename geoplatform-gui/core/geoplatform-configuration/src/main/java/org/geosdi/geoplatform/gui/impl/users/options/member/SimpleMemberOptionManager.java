@@ -33,15 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.users.options.member;
+package org.geosdi.geoplatform.gui.impl.users.options.member;
+
+import org.geosdi.geoplatform.gui.configuration.users.options.member.GPMemberOptionType;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.GeoPlatformOptionsMember;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public enum GPMemberOptionType {
-    
-    SIMPLE_PROPERTIES, ADVANCED_PROPERTIES;
-    
+public class SimpleMemberOptionManager
+        extends GenericMemberOptionManager<GeoPlatformOptionsMember> {
+
+    @Override
+    public GPMemberOptionType getType() {
+        return GPMemberOptionType.SIMPLE_PROPERTIES;
+    }
 }

@@ -33,9 +33,11 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.users.options.factory;
+package org.geosdi.geoplatform.gui.impl.users.options.member;
 
-import org.geosdi.geoplatform.gui.configuration.users.options.member.GPMemberOptionType;
+import com.google.common.collect.Lists;
+import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.GeoPlatformOptionsMember;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.IGPMemberOptionManager;
 
 /**
@@ -43,9 +45,27 @@ import org.geosdi.geoplatform.gui.configuration.users.options.member.IGPMemberOp
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface GeoPlatformMemberFactory {
+public abstract class GenericMemberOptionManager<M extends GeoPlatformOptionsMember>
+        implements IGPMemberOptionManager<M> {
 
-    IGPMemberOptionManager getMemberOptionManager();
+    private List<M> members;
 
-    IGPMemberOptionManager getMemberOptionManager(GPMemberOptionType type);
+    public GenericMemberOptionManager() {
+        this.members = Lists.newArrayList();
+    }
+
+    @Override
+    public void addMember(M member) {
+        this.members.add(member);
+    }
+
+    @Override
+    public void removeMember(M member) {
+        this.members.remove(member);
+    }
+
+    @Override
+    public List<M> getMembers() {
+        return this.members;
+    }
 }

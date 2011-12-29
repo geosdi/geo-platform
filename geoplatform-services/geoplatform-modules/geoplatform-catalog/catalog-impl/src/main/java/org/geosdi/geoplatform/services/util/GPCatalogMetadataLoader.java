@@ -110,7 +110,7 @@ public class GPCatalogMetadataLoader {
                 String name = parseOnlineElement(onlineElement, "CI_OnlineResource", gmdNamespace, "name", gmdNamespace, "CharacterString", gcoNamespace);
                 String description = parseOnlineElement(onlineElement, "CI_OnlineResource", gmdNamespace, "description", gmdNamespace, "CharacterString", gcoNamespace);
                 
-                GPCatalogMetadataDTO.GPCatalogMetadataOnlineResource gpCatalogMetadataOnlineResource = gpCatalogMetadataDTO.makeInstance();
+                GPCatalogMetadataDTO.GPCatalogMetadataOnlineResource gpCatalogMetadataOnlineResource = new GPCatalogMetadataDTO.GPCatalogMetadataOnlineResource();
                 gpCatalogMetadataOnlineResource.setURL(url);
                 gpCatalogMetadataOnlineResource.setProtocol(protocol);
                 gpCatalogMetadataOnlineResource.setName(name);

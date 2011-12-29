@@ -39,6 +39,7 @@ import it.geosolutions.geonetwork.GNClient;
 import it.geosolutions.geonetwork.exception.GNLibException;
 import it.geosolutions.geonetwork.exception.GNServerException;
 import it.geosolutions.geonetwork.util.GNSearchResponse;
+import java.util.List;
 import org.geosdi.geoplatform.exception.GPCatalogException;
 import org.geosdi.geoplatform.exception.GPCatalogLoginException;
 import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
@@ -60,7 +61,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-public class GPCatalogTest {
+public class GPCatalogServiceTest {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     //
@@ -107,14 +108,14 @@ public class GPCatalogTest {
             GNClient anonymousClient = gpCatalogClient.createClientWithoutCredentials();
             Assert.assertNotNull("GeoNetwork anonymousClient is null", anonymousClient);
 
-            GNSearchResponse anonymousSearchResponse = this.gpCatalogFinderService.searchMetadata(anonymousClient, "Bacini idrografici principali");
-            Assert.assertTrue("1 or more elements retrieved with anonymous search, but 0 expected", anonymousSearchResponse.getCount() == 0);
+            List<GPCatalogMetadataDTO> anonymousCatalogMetadataDTOList = this.gpCatalogFinderService.searchPublicMetadata("Bacini idrografici principali");
+            Assert.assertTrue("1 or more elements retrieved with anonymous search, but 0 expected", anonymousCatalogMetadataDTOList.isEmpty());
 
             GNClient privateClient = gpCatalogClient.createClientWithCredentials();
             Assert.assertNotNull("GeoNetwork privateClient is null", privateClient);
 
-            GNSearchResponse privateSearchResponse = this.gpCatalogFinderService.searchMetadata(privateClient, "Bacini idrografici principali");
-            Assert.assertTrue("No elements retrieved with private search", privateSearchResponse.getCount() > 0);
+            List<GPCatalogMetadataDTO> privateCatalogMetadataDTOList = this.gpCatalogFinderService.searchPublicMetadata("Bacini idrografici principali");
+            Assert.assertTrue("No elements retrieved with private search", privateCatalogMetadataDTOList.isEmpty());
         } catch (GPCatalogException ex) {
             Assert.fail(ex.getMessage());
         }
@@ -126,23 +127,12 @@ public class GPCatalogTest {
             GNClient client = gpCatalogClient.createClientWithCredentials();
             Assert.assertNotNull("GeoNetwork client is null", client);
 
-            GNSearchResponse searchResponse = this.gpCatalogFinderService.searchMetadata(client, "strade romane");
-            Assert.assertTrue("Items not found", searchResponse.getCount() > 0);
+            List<GPCatalogMetadataDTO> catalogMetadataDTOList = this.gpCatalogFinderService.searchPublicMetadata("strade romane");
+            Assert.assertFalse("Items not found", catalogMetadataDTOList.isEmpty());
 
-            // loop on all metadata
-            for (GNSearchResponse.GNMetadata metadata : searchResponse) {
-                Long id = metadata.getId();
-                
-                // and this is the full metadata document, as a JDOM element.
-                Element metadataElement = client.get(id);
-                
-                GPCatalogMetadataDTO gpCatalogMetadataDTO = this.gpCatalogMetadataLoader.getGPCatalogMetadataDTO(metadataElement);
+            for (GPCatalogMetadataDTO gpCatalogMetadataDTO : catalogMetadataDTOList) {
                 Assert.assertTrue("GPCatalogMetadataLoader is empty", gpCatalogMetadataDTO.toString().equals("") == false);
             }
-        } catch (GNLibException ex) {
-            Assert.fail(ex.getMessage());
-        } catch (GNServerException ex) {
-            Assert.fail(ex.getMessage());
         } catch (GPCatalogException ex) {
             Assert.fail(ex.getMessage());
         }

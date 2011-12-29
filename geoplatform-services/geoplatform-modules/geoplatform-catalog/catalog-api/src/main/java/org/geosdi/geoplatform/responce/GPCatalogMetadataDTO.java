@@ -53,9 +53,9 @@ public class GPCatalogMetadataDTO {
     private GPBBox bbox;
     private List<GPCatalogMetadataOnlineResource> gpCatalogMetadataOnlineResourceList = new ArrayList<GPCatalogMetadataOnlineResource>();
 
-    public GPCatalogMetadataOnlineResource makeInstance() {
-        return new GPCatalogMetadataOnlineResource();
-    }
+//    public GPCatalogMetadataOnlineResource makeInstance() {
+//        return new GPCatalogMetadataOnlineResource();
+//    }
 
     public List<GPCatalogMetadataOnlineResource> getGpCatalogMetadataOnlineResourceList() {
         return gpCatalogMetadataOnlineResourceList;
@@ -126,7 +126,7 @@ public class GPCatalogMetadataDTO {
                 + gpCatalogMetadataOnlineResourceList + '}';
     }
 
-    public class GPCatalogMetadataOnlineResource {
+    public static class GPCatalogMetadataOnlineResource {
 
         private String URL;
         private String protocol;

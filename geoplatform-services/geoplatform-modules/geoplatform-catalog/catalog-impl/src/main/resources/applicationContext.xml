@@ -30,8 +30,10 @@
 	<!--===================================================================== -->
 	<!-- Services -->
 	<!--===================================================================== -->
-
-    <bean id="catalogFinderServiceImpl" class="org.geosdi.geoplatform.services.GPCatalogFinderServiceImpl"/>
+    
+    <bean id="catalogFinderService"
+        class="org.geosdi.geoplatform.services.GPCatalogFinderServiceImpl">
+    </bean>
 
 	<!--===================================================================== -->
 

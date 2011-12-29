@@ -33,37 +33,44 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform;
+package org.geosdi.geoplatform.gui.server.gwt;
 
-import junit.framework.Assert;
-import org.geosdi.geoplatform.cxf.GeoPlatformCatalogFinderClient;
-import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import org.geosdi.geoplatform.exception.GPCatalogException;
+import org.geosdi.geoplatform.gui.client.model.FinderBean;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import org.geosdi.geoplatform.gui.client.service.FinderRemote;
+import org.geosdi.geoplatform.gui.server.service.IFinderService;
+import org.geosdi.geoplatform.gui.server.service.impl.FinderService;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email  michele.santomauro@geosdi.org
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"applicationContext-Test.xml","classpath*:applicationContext.xml"})
-public class GeoPlatformWSTest {
+public class FinderRemoteImpl extends RemoteServiceServlet implements
+        FinderRemote {
 
-    @Autowired
-    private GeoPlatformService geoPlatformServiceClient;
-    
-    @Autowired
-    private GeoPlatformPublishClient geoPlatformPublishClient;
+    private static final long serialVersionUID = 8756054653877871843L;
+    //
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    private IFinderService finderService = (IFinderService) GeoPlatformContextUtil.getInstance().getBean(FinderService.class);
 
-    @Test
-    public void testWS() {
-        Assert.assertNotNull(geoPlatformServiceClient);
-        Assert.assertNotNull(geoPlatformPublishClient);
+    @Override
+    public ArrayList<FinderBean> searchPublicMetadata(String searchString) throws GPCatalogException {
+        return this.finderService.searchPublicMetadata(searchString);
+    }
+
+    @Override
+    public ArrayList<FinderBean> searchPrivateMetadata(String username, 
+                                                       String password, 
+                                                       String searchString) throws GPCatalogException {
+        return this.finderService.searchPrivateMetadata(username, password, searchString);
     }
 }

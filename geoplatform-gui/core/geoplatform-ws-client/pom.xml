@@ -82,6 +82,9 @@
             </exclusions>
         </dependency>
         
+		<!-- =============================================================== -->
+		<!-- GEOPLATFORM PUBLISHER -->
+		<!-- =============================================================== -->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-publisher-api</artifactId>
@@ -91,6 +94,14 @@
                     <artifactId>cglib</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        
+		<!-- =============================================================== -->
+		<!-- GEOPLATFORM CATALOG -->
+		<!-- =============================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-catalog-api</artifactId>
         </dependency>
 
 		<!-- SPRING -->

@@ -33,37 +33,57 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform;
+package org.geosdi.geoplatform.gui.client;
 
-import junit.framework.Assert;
-import org.geosdi.geoplatform.cxf.GeoPlatformCatalogFinderClient;
-import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 
-import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.google.gwt.core.client.EntryPoint;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email  michele.santomauro@geosdi.org
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"applicationContext-Test.xml","classpath*:applicationContext.xml"})
-public class GeoPlatformWSTest {
+public class Finder implements EntryPoint {
 
-    @Autowired
-    private GeoPlatformService geoPlatformServiceClient;
-    
-    @Autowired
-    private GeoPlatformPublishClient geoPlatformPublishClient;
+    private Dispatcher dispatcher;
 
-    @Test
-    public void testWS() {
-        Assert.assertNotNull(geoPlatformServiceClient);
-        Assert.assertNotNull(geoPlatformPublishClient);
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+     */
+    @Override
+    public void onModuleLoad() {
+        // TODO Auto-generated method stub
+        dispatcher = Dispatcher.get();
+
+//        dispatcher.addController(new GeocodingController());
+
+//        addReverseGeocodingAction();
+
+//        dispatcher.dispatch(GeocodingEvents.INIT_GEOCODING_WIDGET);
     }
+
+//    private void addReverseGeocodingAction() {
+//        // TODO Auto-generated method stub
+//        MenuActionRegistar.put("finder", new MenuActionCreator() {
+//
+//            @Override
+//            public MenuAction createAction() {
+//                // TODO Auto-generated method stub
+//                return new GeocodingMenuAction();
+//            }
+//        });
+//
+//        ToolbarActionRegistar.put("reverseGeocoding",
+//                new ToolbarActionCreator() {
+//
+//                    @Override
+//                    public GeoPlatformToolbarAction createActionTool(
+//                            GeoPlatformMap mapWidget) {
+//                        // TODO Auto-generated method stub
+//                        return new ReverseGeocodingAction(mapWidget);
+//                    }
+//                });
+//    }
 }

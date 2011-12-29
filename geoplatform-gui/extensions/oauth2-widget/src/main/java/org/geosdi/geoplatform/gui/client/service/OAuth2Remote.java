@@ -50,9 +50,12 @@ public interface OAuth2Remote extends RemoteService {
 
     public static class Util {
 
-        private static OAuth2RemoteAsync instance = (OAuth2RemoteAsync) GWT.create(OAuth2Remote.class);
+        private static OAuth2RemoteAsync instance;
 
         public static OAuth2RemoteAsync getInstance() {
+            if (instance == null) {
+                instance = (OAuth2RemoteAsync) GWT.create(OAuth2Remote.class);
+            }
             return instance;
         }
     }

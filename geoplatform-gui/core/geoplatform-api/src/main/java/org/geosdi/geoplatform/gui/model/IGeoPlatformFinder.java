@@ -33,41 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services;
-
-import java.util.List;
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.jws.WebService;
-import org.codehaus.jra.Get;
-import org.codehaus.jra.HttpResource;
-import org.geosdi.geoplatform.exception.GPCatalogException;
-import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
+package org.geosdi.geoplatform.gui.model;
 
 /**
- * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
- * 
- * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
- * @email  giuseppe.lascaleia@geosdi.org
  *
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email michele.santomauro@geosdi.org
  */
-@WebService(name = "GPCatalogFinderService",
-            targetNamespace = "http://services.geo-platform.org/")
-public interface GPCatalogFinderService {
-
-    @Get
-    @HttpResource(location = "/geonetwork/searchMetadata/{searchText}")
-    @WebResult(name = "Result")
-    List<GPCatalogMetadataDTO> searchPublicMetadata(@WebParam(name = "searchText") String searchText)
-            throws GPCatalogException;
-
-    @Get
-    @HttpResource(location = "/geonetwork/searchMetadata/{searchText}")
-    @WebResult(name = "Result")
-    List<GPCatalogMetadataDTO> searchPrivateMetadataWithCredentials(
-            @WebParam(name = "username") String username,
-            @WebParam(name = "password") String password,
-            @WebParam(name = "searchText") String searchText)
-            throws GPCatalogException;
+public interface IGeoPlatformFinder {
+    
 }

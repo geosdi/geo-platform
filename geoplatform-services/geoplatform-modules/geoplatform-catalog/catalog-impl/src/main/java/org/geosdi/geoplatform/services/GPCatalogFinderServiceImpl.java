@@ -40,10 +40,14 @@ import it.geosolutions.geonetwork.exception.GNLibException;
 import it.geosolutions.geonetwork.exception.GNServerException;
 import it.geosolutions.geonetwork.util.GNSearchRequest;
 import it.geosolutions.geonetwork.util.GNSearchResponse;
+import java.util.ArrayList;
+import java.util.List;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.exception.GPCatalogException;
-import org.geosdi.geoplatform.exception.GPCatalogLoginException;
+import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
 import org.geosdi.geoplatform.services.util.GPCatalogClient;
+import org.geosdi.geoplatform.services.util.GPCatalogMetadataLoader;
+import org.jdom.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -58,27 +62,79 @@ public class GPCatalogFinderServiceImpl implements GPCatalogFinderService {
 
     @Autowired
     private GPCatalogClient gpCatalogClient;
+    //
+    @Autowired
+    private GPCatalogMetadataLoader gpCatalogMetadataLoader;
 
     @Override
-    public GNSearchResponse searchMetadata(GNClient client, String searchText) throws GPCatalogException {
+    public List<GPCatalogMetadataDTO> searchPublicMetadata(String searchText) throws GPCatalogException {
         try {
-            GNSearchRequest searchRequest = new GNSearchRequest();
+            GNClient client = gpCatalogClient.createClientWithoutCredentials();
 
-            // add a predefined search field
-            searchRequest.addParam(GNSearchRequest.Param.any, searchText);
-            // add a custom param
-//            searchRequest.addParam("customParam", "custom");
+            GNSearchResponse searchResponse = searchMetadata(client, searchText);
 
-            // only local results
-//            searchRequest.addConfig(GNSearchRequest.Config.remote, "off");
+            // loop on all metadata
+            List<GPCatalogMetadataDTO> catalogMetadataDTOList = new ArrayList<GPCatalogMetadataDTO>();
+            for (GNSearchResponse.GNMetadata metadata : searchResponse) {
+                Long id = metadata.getId();
 
-            // do the search!
-            GNSearchResponse searchResponse = client.search(searchRequest);
-            return searchResponse;
+                // and this is the full metadata document, as a JDOM element.
+                Element metadataElement = client.get(id);
+
+                GPCatalogMetadataDTO gpCatalogMetadataDTO = this.gpCatalogMetadataLoader.getGPCatalogMetadataDTO(metadataElement);
+                catalogMetadataDTOList.add(gpCatalogMetadataDTO);
+            }
+
+            return catalogMetadataDTOList;
         } catch (GNLibException ex) {
             throw new GPCatalogException(ex.getMessage());
         } catch (GNServerException ex) {
             throw new GPCatalogException(ex.getMessage());
         }
+    }
+
+    @Override
+    public List<GPCatalogMetadataDTO> searchPrivateMetadataWithCredentials(
+            String username, String password, String searchText) throws GPCatalogException {
+        try {
+            GNClient client = gpCatalogClient.createClientWithCredentials();
+
+            GNSearchResponse searchResponse = searchMetadata(client, searchText);
+
+            // loop on all metadata
+            List<GPCatalogMetadataDTO> catalogMetadataDTOList = new ArrayList<GPCatalogMetadataDTO>();
+            for (GNSearchResponse.GNMetadata metadata : searchResponse) {
+                Long id = metadata.getId();
+
+                // and this is the full metadata document, as a JDOM element.
+                Element metadataElement = client.get(id);
+
+                GPCatalogMetadataDTO gpCatalogMetadataDTO = this.gpCatalogMetadataLoader.getGPCatalogMetadataDTO(metadataElement);
+                catalogMetadataDTOList.add(gpCatalogMetadataDTO);
+            }
+
+            return catalogMetadataDTOList;
+        } catch (GNLibException ex) {
+            throw new GPCatalogException(ex.getMessage());
+        } catch (GNServerException ex) {
+            throw new GPCatalogException(ex.getMessage());
+        }
+    }
+
+    private GNSearchResponse searchMetadata(GNClient client, String searchText)
+            throws GNLibException, GNServerException {
+        GNSearchRequest searchRequest = new GNSearchRequest();
+
+        // add a predefined search field
+        searchRequest.addParam(GNSearchRequest.Param.any, searchText);
+        // add a custom param
+//            searchRequest.addParam("customParam", "custom");
+
+        // only local results
+//            searchRequest.addConfig(GNSearchRequest.Config.remote, "off");
+
+        // do the search!
+        GNSearchResponse searchResponse = client.search(searchRequest);
+        return searchResponse;
     }
 }

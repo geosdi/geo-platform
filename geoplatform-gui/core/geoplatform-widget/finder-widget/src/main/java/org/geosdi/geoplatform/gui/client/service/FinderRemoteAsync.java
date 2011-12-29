@@ -33,37 +33,18 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform;
+package org.geosdi.geoplatform.gui.client.service;
 
-import junit.framework.Assert;
-import org.geosdi.geoplatform.cxf.GeoPlatformCatalogFinderClient;
-import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
-
-import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
+import org.geosdi.geoplatform.gui.client.model.FinderBean;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- * 
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email  michele.santomauro@geosdi.org
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"applicationContext-Test.xml","classpath*:applicationContext.xml"})
-public class GeoPlatformWSTest {
+public interface FinderRemoteAsync {
 
-    @Autowired
-    private GeoPlatformService geoPlatformServiceClient;
-    
-    @Autowired
-    private GeoPlatformPublishClient geoPlatformPublishClient;
-
-    @Test
-    public void testWS() {
-        Assert.assertNotNull(geoPlatformServiceClient);
-        Assert.assertNotNull(geoPlatformPublishClient);
-    }
+    public void searchMetadata(String searchString,
+            AsyncCallback<ArrayList<FinderBean>> callback);
 }

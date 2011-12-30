@@ -38,8 +38,8 @@ package org.geosdi.geoplatform.gui.client.widget.member;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Label;
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
+import org.geosdi.geoplatform.gui.client.widget.users.member.UserOptionsMember;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 
 /**
@@ -49,8 +49,8 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
  */
 public class UserOptionsMemberDisk extends UserOptionsMember {
 
-    public UserOptionsMemberDisk(LayoutContainer container) {
-        super("Disk", container);
+    public UserOptionsMemberDisk() {
+        super("Disk");
     }
 
     @Override
@@ -66,6 +66,5 @@ public class UserOptionsMemberDisk extends UserOptionsMember {
 
     @Override
     protected void manageUserData() {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

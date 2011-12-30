@@ -40,8 +40,6 @@ import com.extjs.gxt.ui.client.event.FieldSetEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.Layer.ShadowPosition;
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
@@ -50,6 +48,7 @@ import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.widget.users.member.UserOptionsMember;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
 import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
@@ -81,8 +80,8 @@ public class UserOptionsMemberUser extends UserOptionsMember {
     private boolean validEmail;
     private boolean validPassword;
 
-    public UserOptionsMemberUser(LayoutContainer container) {
-        super("User", container);
+    public UserOptionsMemberUser() {
+        super("User");
     }
 
     @Override
@@ -106,18 +105,14 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
         usernameField = new TextField<String>();
         usernameField.setFieldLabel("Username");
-        usernameField.setToolTip("Your username");
-        usernameField.setReadOnly(true);
-        usernameField.setShadow(true);
-        usernameField.setShadowPosition(ShadowPosition.FRAME);
+        usernameField.setEnabled(false);
+        
         userFieldSet.add(usernameField);
 
         roleField = new TextField<String>();
         roleField.setFieldLabel("Role");
-        roleField.setToolTip("Your role");
-        roleField.setReadOnly(true);
-        roleField.setShadow(true);
-        roleField.setShadowPosition(ShadowPosition.FRAME);
+        roleField.setEnabled(false);
+        
         userFieldSet.add(roleField);
 
         nameField = new TextField<String>();
@@ -230,22 +225,22 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         String currentPlainPassword = oldPasswordField.getValue();
 
         UserRemoteImpl.Util.getInstance().updateOwnUser(user,
-                currentPlainPassword, newPlainPassword,
-                new AsyncCallback<Long>() {
+                                                        currentPlainPassword, newPlainPassword,
+                                                        new AsyncCallback<Long>() {
 
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        GeoPlatformMessage.errorMessage("Error", caught.getMessage());
-                    }
+            @Override
+            public void onFailure(Throwable caught) {
+                GeoPlatformMessage.errorMessage("Error", caught.getMessage());
+            }
 
-                    @Override
-                    public void onSuccess(Long result) {
-                        saveButton.disable();
+            @Override
+            public void onSuccess(Long result) {
+                saveButton.disable();
 
-                        GeoPlatformMessage.infoMessage("User successfully modify",
-                                "<ul><li>" + user.getUsername() + "</li></ul>");
-                    }
-                });
+                GeoPlatformMessage.infoMessage("User successfully modify",
+                                               "<ul><li>" + user.getUsername() + "</li></ul>");
+            }
+        });
     }
 
     private FormLayout getFormLayoutTemplate() {

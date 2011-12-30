@@ -41,6 +41,14 @@ import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.ManageUsersMenuAction;
 import org.geosdi.geoplatform.gui.client.action.UserOptionsMenuAction;
+import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMemberDisk;
+import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMemberGeocoding;
+import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMemberUser;
+import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMemberView;
+import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMemberWidgets;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.GPMemberOptionType;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.IGPMemberOptionManager;
+import org.geosdi.geoplatform.gui.impl.users.options.factory.GeoPlatformMemberFactory;
 
 /**
  *
@@ -57,6 +65,7 @@ public class UserWidgetUI implements EntryPoint {
     @Override
     public void onModuleLoad() {
         this.addUserWidgetAction();
+        this.addMembers();
     }
 
     private void addUserWidgetAction() {
@@ -75,5 +84,15 @@ public class UserWidgetUI implements EntryPoint {
                 return new UserOptionsMenuAction();
             }
         });
+    }
+
+    private void addMembers() {
+        IGPMemberOptionManager memberManager = GeoPlatformMemberFactory.getDefaultMemberManager(GPMemberOptionType.SIMPLE_PROPERTIES);
+        
+        memberManager.addMember(new UserOptionsMemberUser());
+        memberManager.addMember(new UserOptionsMemberView());
+        memberManager.addMember(new UserOptionsMemberDisk());
+        memberManager.addMember(new UserOptionsMemberGeocoding());
+        memberManager.addMember(new UserOptionsMemberWidgets());
     }
 }

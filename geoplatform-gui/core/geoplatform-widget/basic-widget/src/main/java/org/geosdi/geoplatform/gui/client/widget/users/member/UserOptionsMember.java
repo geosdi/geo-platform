@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.member;
+package org.geosdi.geoplatform.gui.client.widget.users.member;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Listener;
@@ -63,10 +63,10 @@ public abstract class UserOptionsMember implements GeoPlatformOptionsMember {
     private String name;
     private LayoutContainer container;
     private ContentPanel panelOption;
+    private boolean initialized;
 
-    public UserOptionsMember(String name, LayoutContainer container) {
+    public UserOptionsMember(String name) {
         this.name = name;
-        this.container = container;
         this.createPanelOption();
         this.createSaveButton();
     }
@@ -84,19 +84,17 @@ public abstract class UserOptionsMember implements GeoPlatformOptionsMember {
 
         panelOption = new ContentPanel(layout);
         panelOption.setHeaderVisible(false);
-
-        this.creteLayoutData(panelOption);
     }
 
     private void createSaveButton() {
         saveButton = new Button("Save", BasicWidgetResources.ICONS.done(),
-                new SelectionListener<ButtonEvent>() {
+                                new SelectionListener<ButtonEvent>() {
 
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        saveOptions();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                saveOptions();
+            }
+        });
         saveButton.disable();
 
         panelOption.addButton(saveButton);
@@ -118,6 +116,7 @@ public abstract class UserOptionsMember implements GeoPlatformOptionsMember {
 
     protected void switchPanel() {
         container.removeAll();
+        buildMember();
         container.add(panelOption);
         container.layout();
     }
@@ -126,7 +125,23 @@ public abstract class UserOptionsMember implements GeoPlatformOptionsMember {
     @Override
     public void setOwnUser(IGPUserManageDetail user) {
         this.user = user;
-        this.manageUserData();
+    }
+
+    /**
+     * Build Member when Toogle Button is Pressed
+     * 
+     */
+    protected void buildMember() {
+        if (!initialized) {
+            this.creteLayoutData(panelOption);
+            this.manageUserData();
+            this.initialized = true;
+        }
+    }
+
+    @Override
+    public void setLayoutContainer(LayoutContainer container) {
+        this.container = container;
     }
 
     protected abstract void creteLayoutData(ContentPanel panel);

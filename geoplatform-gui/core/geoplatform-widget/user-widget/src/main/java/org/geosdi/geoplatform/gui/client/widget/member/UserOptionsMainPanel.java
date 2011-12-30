@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.member;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.util.Margins;
@@ -47,7 +48,13 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayout.VBoxLayoutAlign;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
+import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.GPMemberOptionType;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.GeoPlatformOptionsMember;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.IGPMemberOptionManager;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
+import org.geosdi.geoplatform.gui.impl.users.options.factory.GeoPlatformMemberFactory;
 
 /**
  *
@@ -56,17 +63,14 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
  */
 public class UserOptionsMainPanel {
 
-//    private IGPUserManageDetail user;
     private ContentPanel panelMain;
     //
     private ContentPanel panelWest;
     private ContentPanel panelCenter;
-    // TODO Members plugged
-    private UserOptionsMember userOptionsMemberUser;
+    private boolean initialized;
 
     public UserOptionsMainPanel() {
         this.createPanels();
-        this.createMembers();
     }
 
     private void createPanels() {
@@ -100,19 +104,24 @@ public class UserOptionsMainPanel {
         panelMain.add(panelCenter, center);
     }
 
-    private void createMembers() {
-        VBoxLayoutData vBoxData = new VBoxLayoutData(5, 5, 5, 5);
-        vBoxData.setFlex(1);
+    public void createMembers() {
+        if (!initialized) {
+            VBoxLayoutData vBoxData = new VBoxLayoutData(5, 5, 5, 5);
+            vBoxData.setFlex(1);
 
-        userOptionsMemberUser = new UserOptionsMemberUser(panelCenter);
-        panelWest.add(this.createToggleButton(userOptionsMemberUser), vBoxData);
-        panelWest.add(this.createToggleButton(new UserOptionsMemberView(panelCenter)), vBoxData);
-        panelWest.add(this.createToggleButton(new UserOptionsMemberDisk(panelCenter)), vBoxData);
-        panelWest.add(this.createToggleButton(new UserOptionsMemberGeocoding(panelCenter)), vBoxData);
-        panelWest.add(this.createToggleButton(new UserOptionsMemberWidgets(panelCenter)), vBoxData);
+            IGPMemberOptionManager memberManager = GeoPlatformMemberFactory.getDefaultMemberManager(GPMemberOptionType.SIMPLE_PROPERTIES);
+
+            for (GeoPlatformOptionsMember member : (List<GeoPlatformOptionsMember>) memberManager.getMembers()) {
+                member.setLayoutContainer(panelCenter);
+                member.setOwnUser((IGPUserManageDetail) Registry.get(UserSessionEnum.USER_IN_SESSION.toString()));
+                panelWest.add(this.createToggleButton(member), vBoxData);
+            }
+            this.initialized = true;
+            panelWest.layout();
+        }
     }
 
-    private ToggleButton createToggleButton(UserOptionsMember member) {
+    private ToggleButton createToggleButton(GeoPlatformOptionsMember member) {
         ToggleButton button = new ToggleButton(member.getName());
         button.setToggleGroup("vboxlayoutbuttons");
         button.addListener(Events.Toggle, member.getListener());
@@ -122,10 +131,5 @@ public class UserOptionsMainPanel {
 
     public ContentPanel getPanelMain() {
         return panelMain;
-    }
-
-    // TODO Invert the access way (from Members retrieve the user?!? - and the panelMain?)
-    public void setOwnUser(IGPUserManageDetail user) {
-        userOptionsMemberUser.setOwnUser(user);
     }
 }

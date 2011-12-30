@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.configuration.users.options.member;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
 /**
@@ -53,4 +54,6 @@ public interface GeoPlatformOptionsMember {
     void saveOptions();
 
     void setOwnUser(IGPUserManageDetail user);
+
+    void setLayoutContainer(LayoutContainer container);
 }

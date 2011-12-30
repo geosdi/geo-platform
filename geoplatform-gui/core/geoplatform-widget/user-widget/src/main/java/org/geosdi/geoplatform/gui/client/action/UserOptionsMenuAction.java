@@ -35,12 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.client.action;
 
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.UserOptionsWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 
@@ -59,6 +61,17 @@ public class UserOptionsMenuAction extends MenuBaseAction {
 
     @Override
     public void componentSelected(MenuEvent ce) {
+        if (Registry.get(UserSessionEnum.USER_IN_SESSION.toString()) != null) {
+            userOptionsWidget.show();
+        } else {
+            retrievesUserFromSession();
+        }
+    }
+
+    /**
+     * Retrieves User from Session
+     */
+    private void retrievesUserFromSession() {
         UserRemoteImpl.Util.getInstance().getOwnUser(new AsyncCallback<IGPUserManageDetail>() {
 
             @Override
@@ -68,7 +81,7 @@ public class UserOptionsMenuAction extends MenuBaseAction {
 
             @Override
             public void onSuccess(IGPUserManageDetail user) {
-                userOptionsWidget.setOwnUser(user);
+                Registry.register(UserSessionEnum.USER_IN_SESSION.toString(), user);
                 userOptionsWidget.show();
             }
         });

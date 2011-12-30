@@ -57,6 +57,20 @@
             <artifactId>gwt-user</artifactId>
             <scope>provided</scope>
         </dependency>
+        
+        <!-- =========================================================== -->
+        <!-- ======================== GUAVA =========================== -->
+	<!-- =========================================================== -->
+            
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>          
+        </dependency>
+            
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava-gwt</artifactId>
+        </dependency>
 
 		<!-- GXT -->
         <dependency>

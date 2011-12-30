@@ -101,7 +101,8 @@ public class GeoPlatformMemberFactory implements MemberFactory {
      * @return the memberManagerType
      */
     public GPMemberOptionType getMemberManagerType() {
-        return memberManagerType;
+        return memberManagerType != null
+                ? memberManagerType : GPMemberOptionType.SIMPLE_PROPERTIES;
     }
 
     /**

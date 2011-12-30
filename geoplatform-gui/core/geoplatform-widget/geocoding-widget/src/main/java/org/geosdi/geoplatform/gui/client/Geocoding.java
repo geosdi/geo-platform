@@ -48,6 +48,10 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMemberGeocoding;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.GPMemberOptionType;
+import org.geosdi.geoplatform.gui.configuration.users.options.member.IGPMemberOptionManager;
+import org.geosdi.geoplatform.gui.impl.users.options.factory.GeoPlatformMemberFactory;
 
 /**
  * @author giuseppe
@@ -70,6 +74,7 @@ public class Geocoding implements EntryPoint {
         dispatcher.addController(new GeocodingController());
 
         addReverseGeocodingAction();
+        addGeoCoderMember();
 
         dispatcher.dispatch(GeocodingEvents.INIT_GEOCODING_WIDGET);
     }
@@ -86,14 +91,23 @@ public class Geocoding implements EntryPoint {
         });
 
         ToolbarActionRegistar.put("reverseGeocoding",
-                new ToolbarActionCreator() {
+                                  new ToolbarActionCreator() {
 
-                    @Override
-                    public GeoPlatformToolbarAction createActionTool(
-                            GeoPlatformMap mapWidget) {
-                        // TODO Auto-generated method stub
-                        return new ReverseGeocodingAction(mapWidget);
-                    }
-                });
+            @Override
+            public GeoPlatformToolbarAction createActionTool(
+                    GeoPlatformMap mapWidget) {
+                // TODO Auto-generated method stub
+                return new ReverseGeocodingAction(mapWidget);
+            }
+        });
+    }
+
+    /**
+     * Add GeoCoder Member to Member Manager
+     */
+    private void addGeoCoderMember() {
+        IGPMemberOptionManager memberManager = GeoPlatformMemberFactory.getDefaultMemberManager(GPMemberOptionType.SIMPLE_PROPERTIES);
+
+        memberManager.addMember(new UserOptionsMemberGeocoding());
     }
 }

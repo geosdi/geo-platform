@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.responce;
 
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
 import java.util.List;
 import org.geosdi.geoplatform.core.model.GPBBox;
 
@@ -51,22 +51,22 @@ public class GPCatalogMetadataDTO {
     private String abstractValue;
     private String keywordValues = "";
     private GPBBox bbox;
-    private List<GPCatalogMetadataOnlineResource> gpCatalogMetadataOnlineResourceList = new ArrayList<GPCatalogMetadataOnlineResource>();
+    private List<GPCatalogMetadataOnlineResource> onLineResources = Lists.newArrayList();
 
 //    public GPCatalogMetadataOnlineResource makeInstance() {
 //        return new GPCatalogMetadataOnlineResource();
 //    }
 
     public List<GPCatalogMetadataOnlineResource> getGpCatalogMetadataOnlineResourceList() {
-        return gpCatalogMetadataOnlineResourceList;
+        return onLineResources;
     }
 
     public void setGpCatalogMetadataOnlineResourceList(List<GPCatalogMetadataOnlineResource> gpCatalogMetadataOnlineResourceList) {
-        this.gpCatalogMetadataOnlineResourceList = gpCatalogMetadataOnlineResourceList;
+        this.onLineResources = gpCatalogMetadataOnlineResourceList;
     }
 
     public void addGpCatalogMetadataOnlineResource(GPCatalogMetadataOnlineResource gpCatalogMetadataOnlineResource) {
-        this.gpCatalogMetadataOnlineResourceList.add(gpCatalogMetadataOnlineResource);
+        this.onLineResources.add(gpCatalogMetadataOnlineResource);
     }
 
     public String getAbstractValue() {
@@ -123,7 +123,7 @@ public class GPCatalogMetadataDTO {
                 + ", abstractValue=" + abstractValue + ", keywordValues="
                 + keywordValues + ", bbox=" + bbox
                 + ", gpCatalogMetadataOnlineResourceList="
-                + gpCatalogMetadataOnlineResourceList + '}';
+                + onLineResources + '}';
     }
 
     public static class GPCatalogMetadataOnlineResource {

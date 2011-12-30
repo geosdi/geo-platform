@@ -64,6 +64,15 @@
             <artifactId>geonetwork-manager</artifactId>
             <version>${geonetwork-version}</version>
         </dependency>
+        
+        <!-- =========================================================== -->
+        <!-- ======================== GUAVA =========================== -->
+	<!-- =========================================================== -->
+            
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>          
+        </dependency>
     
         <!-- SPRING -->
         <dependency>

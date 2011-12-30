@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform;
 
 import junit.framework.Assert;
+import org.geosdi.geoplatform.cxf.GeoPlatformCatalogFinderClient;
 import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -51,18 +52,23 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"applicationContext-Test.xml","classpath*:applicationContext.xml"})
+@ContextConfiguration(locations = {"applicationContext-Test.xml",
+    "classpath*:applicationContext.xml"})
 public class GeoPlatformWSTest {
 
     @Autowired
     private GeoPlatformService geoPlatformServiceClient;
-    
+    //
     @Autowired
     private GeoPlatformPublishClient geoPlatformPublishClient;
+    //
+    @Autowired
+    private GeoPlatformCatalogFinderClient geoPlatformCatalogFinderClient;
 
     @Test
     public void testWS() {
         Assert.assertNotNull(geoPlatformServiceClient);
         Assert.assertNotNull(geoPlatformPublishClient);
+        Assert.assertNotNull(geoPlatformCatalogFinderClient);
     }
 }

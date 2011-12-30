@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.beans;
 
+import org.geosdi.geoplatform.cxf.GeoPlatformCatalogFinderClient;
 import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.geosdi.geoplatform.services.GeoPlatformServiceImpl;
@@ -58,7 +59,7 @@ public class GeoPlatformWSTestBeans {
 
         return geoPlatformWSClient;
     }
-
+    
     @Bean
     public GeoPlatformService geoPlatformService() {
         GeoPlatformService geoPlatformService = new GeoPlatformServiceImpl();

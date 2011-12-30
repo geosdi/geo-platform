@@ -128,14 +128,14 @@
                 </property>
             </bean>
         </jaxws:serviceFactory>
-<!--        <jaxws:inInterceptors>
+        <jaxws:inInterceptors>
             <ref bean="geoPlatformServerLoggingInInterceptorBean"/>
             <ref bean="geoPlatformServerSecurityInInterceptorBean"/>
         </jaxws:inInterceptors>        
         <jaxws:outInterceptors>
             <ref bean="geoPlatformServerLoggingOutInterceptorBean"/>
             <ref bean="geoPlatformServerSecurityOutInterceptorBean"/>
-        </jaxws:outInterceptors>-->
+        </jaxws:outInterceptors>
     </jaxws:endpoint>
 
     <!-- ==================================================================== -->

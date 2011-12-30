@@ -10,9 +10,13 @@
     
     <bean id="geoPlatformServiceClient"  class="org.geosdi.geoplatform.services.GeoPlatformService"
 		factory-bean="geoPlatformProxyFactory" factory-method="create" />
-
+                
     <bean id="geoPlatformPublishClient" class="org.geosdi.geoplatform.cxf.GeoPlatformPublishClient">
         <property name="address" value="${webservice_publisher_endpoint_address}" />
+    </bean>
+
+    <bean id="geoPlatformCatalogFinderClient"  class="org.geosdi.geoplatform.cxf.GeoPlatformCatalogFinderClient">
+        <property name="address" value="${webservice_catalogfinder_endpoint_address}" />
     </bean>
 
     <bean id="geoPlatformProxyFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">

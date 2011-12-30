@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.cxf;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.geosdi.geoplatform.configurator.cxf.client.GPClientWebServiceInterceptorStrategyFactory;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;
-import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -52,7 +51,7 @@ public class GeoPlatformCatalogFinderClient {
     @Autowired
     private GPClientWebServiceInterceptorStrategyFactory gpClientWebServiceInterceptorStrategyFactory;
 
-    public GeoPlatformService create() {
+    public GPCatalogFinderService create() {
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
         
         factory.getInInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getLoggingInInterceptor());
@@ -64,7 +63,7 @@ public class GeoPlatformCatalogFinderClient {
         factory.setServiceClass(GPCatalogFinderService.class);
         factory.setAddress(this.address);
 
-        return (GeoPlatformService) factory.create();
+        return (GPCatalogFinderService) factory.create();
     }
 
     /**

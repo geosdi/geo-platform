@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform;
 
 import junit.framework.Assert;
-import org.geosdi.geoplatform.cxf.GeoPlatformCatalogFinderClient;
 import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 
 import org.geosdi.geoplatform.services.GeoPlatformService;

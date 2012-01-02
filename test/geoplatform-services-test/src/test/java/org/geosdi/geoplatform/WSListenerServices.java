@@ -46,7 +46,6 @@ import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
 import org.geosdi.geoplatform.configurator.cxf.server.GPServerWebServiceInterceptorStrategyFactory;
 import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

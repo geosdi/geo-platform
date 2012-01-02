@@ -35,22 +35,18 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.exception.GPCatalogException;
 import org.geosdi.geoplatform.gui.client.model.FinderBean.MetadataOnlineResourceBean;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.server.service.IFinderService;
-
-import java.util.ArrayList;
-
-
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FinderBean;
 import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
 import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO.GPCatalogMetadataOnlineResource;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;
+
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

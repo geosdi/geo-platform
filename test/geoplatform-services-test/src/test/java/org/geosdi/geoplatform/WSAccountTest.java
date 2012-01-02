@@ -45,7 +45,6 @@ import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.AccountExpiredFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.request.LikePatternType;

@@ -68,7 +68,6 @@ import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI

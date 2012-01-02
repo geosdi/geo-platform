@@ -51,7 +51,6 @@ import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.IElementDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
 import org.geosdi.geoplatform.responce.RasterLayerDTO;
-import org.geosdi.geoplatform.responce.ShortLayerDTO;
 import org.geosdi.geoplatform.responce.VectorLayerDTO;
 import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
 import org.junit.Test;

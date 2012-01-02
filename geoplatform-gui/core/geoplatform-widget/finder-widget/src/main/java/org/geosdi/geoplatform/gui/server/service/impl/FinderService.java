@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientIn
 import org.geosdi.geoplatform.gui.server.service.IFinderService;
 import org.geosdi.geoplatform.gui.client.model.FinderBean;
 import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
-import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO.GPCatalogMetadataOnlineResource;
+import org.geosdi.geoplatform.responce.GPCatalogMetadataOnlineResource;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;
 
 import java.util.ArrayList;
@@ -59,12 +59,12 @@ import org.springframework.stereotype.Service;
 public class FinderService implements IFinderService {
 
     @Autowired
-    private GPCatalogFinderService gpCatalogFinderService;
+    private GPCatalogFinderService gpCatalogFinderClient;
 
     @Override
     public ArrayList<FinderBean> searchPublicMetadata(String searchString)
             throws GPCatalogException {
-        List<GPCatalogMetadataDTO> gpCatalogMetadataDTOList = this.gpCatalogFinderService.searchPublicMetadata(searchString);
+        List<GPCatalogMetadataDTO> gpCatalogMetadataDTOList = this.gpCatalogFinderClient.searchPublicMetadata(searchString);
 
         ArrayList<FinderBean> foundedBeans = new ArrayList<FinderBean>();
 
@@ -77,7 +77,7 @@ public class FinderService implements IFinderService {
 
     @Override
     public ArrayList<FinderBean> searchPrivateMetadata(String username, String password, String searchString) throws GPCatalogException {
-        List<GPCatalogMetadataDTO> gpCatalogMetadataDTOList = this.gpCatalogFinderService.searchPrivateMetadataWithCredentials(username, password, searchString);
+        List<GPCatalogMetadataDTO> gpCatalogMetadataDTOList = this.gpCatalogFinderClient.searchPrivateMetadataWithCredentials(username, password, searchString);
 
         ArrayList<FinderBean> foundedBeans = new ArrayList<FinderBean>();
 
@@ -95,7 +95,7 @@ public class FinderService implements IFinderService {
         finderBean.setTitle(gpCatalogMetadataDTO.getTitle());
         finderBean.setUuid(gpCatalogMetadataDTO.getUuid());
         finderBean.setBbox(convertGPBBoxToBboxClientInfo(gpCatalogMetadataDTO.getBbox()));
-        finderBean.setMetadataOnlineResourceBeanList(convertLists(finderBean, gpCatalogMetadataDTO.getGpCatalogMetadataOnlineResourceList()));
+        finderBean.setMetadataOnlineResourceBeanList(convertLists(finderBean, gpCatalogMetadataDTO.getOnlineResource()));
 
         return finderBean;
     }

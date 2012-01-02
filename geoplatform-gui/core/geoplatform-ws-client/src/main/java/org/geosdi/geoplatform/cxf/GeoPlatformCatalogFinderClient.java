@@ -39,6 +39,7 @@ import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.geosdi.geoplatform.configurator.cxf.client.GPClientWebServiceInterceptorStrategyFactory;
 import org.geosdi.geoplatform.services.GPCatalogFinderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
@@ -46,17 +47,18 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class GeoPlatformCatalogFinderClient {
 
-    private String address;
+    private @Value("${webservice_test_catalogfinder_endpoint_address}")
+    String address;
     //
     @Autowired
     private GPClientWebServiceInterceptorStrategyFactory gpClientWebServiceInterceptorStrategyFactory;
 
     public GPCatalogFinderService create() {
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
-        
+
         factory.getInInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getLoggingInInterceptor());
         factory.getInInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getSecurityInInterceptor());
-        
+
         factory.getOutInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getLoggingOutInterceptor());
         factory.getOutInterceptors().add(this.gpClientWebServiceInterceptorStrategyFactory.getSecurityOutInterceptor());
 

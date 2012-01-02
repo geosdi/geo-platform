@@ -39,6 +39,7 @@ import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.geosdi.geoplatform.configurator.cxf.client.GPClientWebServiceInterceptorStrategyFactory;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
@@ -50,7 +51,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class GeoPlatformWSClient {
 
-    private String address;
+    private @Value("${webservice_test_endpoint_address}")
+    String address;
     //
     @Autowired
     private GPClientWebServiceInterceptorStrategyFactory gpClientWebServiceInterceptorStrategyFactory;

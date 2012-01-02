@@ -35,7 +35,7 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform;
+package org.geosdi.geoplatform.modelws;
 
 import java.util.HashMap;
 import java.util.Iterator;

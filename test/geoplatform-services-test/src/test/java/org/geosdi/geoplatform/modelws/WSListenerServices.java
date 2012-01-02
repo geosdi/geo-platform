@@ -35,7 +35,7 @@
  *
  */
 //</editor-fold>
-package org.geosdi.geoplatform;
+package org.geosdi.geoplatform.modelws;
 
 import javax.xml.ws.Endpoint;
 import org.apache.cxf.Bus;
@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
 import org.geosdi.geoplatform.configurator.cxf.server.GPServerWebServiceInterceptorStrategyFactory;
 import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,7 +72,7 @@ public class WSListenerServices implements TestExecutionListener {
 
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
-        logger.trace("\n\t@@@ WSListenerServices.beforeTestClass @@@");
+        logger.info("\n\t@@@ WSListenerServices.beforeTestClass @@@");
         
         GeoPlatformWSClient geoPlatformWSClient = (GeoPlatformWSClient) testContext.getApplicationContext().getBean("gpWSClient");
         Assert.assertNotNull("geoPlatformWSClient is NULL", geoPlatformWSClient);
@@ -101,12 +102,12 @@ public class WSListenerServices implements TestExecutionListener {
         String serverAddress = geoPlatformWSClient.getAddress();
         endpoint = Endpoint.publish(serverAddress, implementor);
 
-        logger.debug("\n*** Server ready...");
+        logger.info("\n*** Server ready...");
     }
 
     @Override
     public void prepareTestInstance(TestContext testContext) throws Exception {
-        logger.trace("\n\t@@@ WSListenerServices.prepareTestInstance @@@");
+        logger.info("\n\t@@@ WSListenerServices.prepareTestInstance @@@");
 
         ServiceTest testInstance = (ServiceTest) testContext.getTestInstance();
         testInstance.setGeoplatformServiceClient(gpWSClient, gpPooledPBEStringEncryptor);
@@ -122,7 +123,7 @@ public class WSListenerServices implements TestExecutionListener {
 
     @Override
     public void afterTestClass(TestContext testContext) throws Exception {
-        logger.trace("\n\t@@@ WSListenerServices.afterTestClass @@@");
+        logger.info("\n\t@@@ WSListenerServices.afterTestClass @@@");
 
         endpoint.stop();
         bus.shutdown(true);

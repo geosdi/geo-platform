@@ -31,28 +31,6 @@
         
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-model</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-dao</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
             <version>${geoplatform-version}</version>
         </dependency>
@@ -86,6 +64,19 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-scheduler-impl</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        
+        <!-- =============================================================== -->
+	<!-- ==================== GEOPLATFORM CATALOG ====================== -->
+	<!-- =============================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-catalog-api</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-catalog-impl</artifactId>
         </dependency>
 
                 <!-- JETTY -->

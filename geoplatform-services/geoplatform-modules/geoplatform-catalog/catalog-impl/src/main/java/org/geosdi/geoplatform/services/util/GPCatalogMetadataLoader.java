@@ -35,9 +35,11 @@
  */
 package org.geosdi.geoplatform.services.util;
 
+import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
+import org.geosdi.geoplatform.responce.GPCatalogMetadataOnlineResource;
 import org.jdom.Element;
 import org.jdom.Namespace;
 import org.jdom.filter.ElementFilter;
@@ -54,7 +56,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class GPCatalogMetadataLoader {
 
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private static final Namespace gmdNamespace = Namespace.getNamespace("gmd", "http://www.isotc211.org/2005/gmd");
     private static final Namespace gcoNamespace = Namespace.getNamespace("gco", "http://www.isotc211.org/2005/gco");
@@ -109,22 +111,22 @@ public class GPCatalogMetadataLoader {
                 String protocol = parseOnlineElement(onlineElement, "CI_OnlineResource", gmdNamespace, "protocol", gmdNamespace, "CharacterString", gcoNamespace);
                 String name = parseOnlineElement(onlineElement, "CI_OnlineResource", gmdNamespace, "name", gmdNamespace, "CharacterString", gcoNamespace);
                 String description = parseOnlineElement(onlineElement, "CI_OnlineResource", gmdNamespace, "description", gmdNamespace, "CharacterString", gcoNamespace);
-                
-                GPCatalogMetadataDTO.GPCatalogMetadataOnlineResource gpCatalogMetadataOnlineResource = new GPCatalogMetadataDTO.GPCatalogMetadataOnlineResource();
+
+                GPCatalogMetadataOnlineResource gpCatalogMetadataOnlineResource = new GPCatalogMetadataOnlineResource();
                 gpCatalogMetadataOnlineResource.setURL(url);
                 gpCatalogMetadataOnlineResource.setProtocol(protocol);
                 gpCatalogMetadataOnlineResource.setName(name);
                 gpCatalogMetadataOnlineResource.setDescription(description);
-                
-                gpCatalogMetadataDTO.addGpCatalogMetadataOnlineResource(gpCatalogMetadataOnlineResource);
+
+                gpCatalogMetadataDTO.addOnlineResource(gpCatalogMetadataOnlineResource);
             }
         }
     }
 
     private String parseOnlineElement(Element referenceElement,
-            String firstLevelElementName, Namespace firstLevelNamespace,
-            String secondLevelElementName, Namespace secondLevelNamespace,
-            String thirdLevelElementName, Namespace thirdLevelNamespace) {
+                                      String firstLevelElementName, Namespace firstLevelNamespace,
+                                      String secondLevelElementName, Namespace secondLevelNamespace,
+                                      String thirdLevelElementName, Namespace thirdLevelNamespace) {
         Element firstLevelElement = referenceElement.getChild(firstLevelElementName, firstLevelNamespace);
         if (firstLevelElement != null) {
             Element secondLevelElement = firstLevelElement.getChild(secondLevelElementName, secondLevelNamespace);
@@ -187,9 +189,9 @@ public class GPCatalogMetadataLoader {
 
     private Element extractElementWithFilter(Element rootElement, String elementName, Namespace namespace) {
         Filter filter = new ElementFilter(elementName, namespace);
-        Element element = (Element) (rootElement.getDescendants(filter).next());
+        Iterator it = rootElement.getDescendants(filter);
 
-        return element;
+        return it.hasNext() ? (Element) it.next() : null;
     }
 
     private String extractTextFromCharacterString(Element element) {

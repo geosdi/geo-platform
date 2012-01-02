@@ -3,10 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
         xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
            http://www.springframework.org/schema/context
-           http://www.springframework.org/schema/context/spring-context-3.0.xsd
-            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+           http://www.springframework.org/schema/context/spring-context-3.1.xsd
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
     
     <bean id="geoPlatformServiceClient"  class="org.geosdi.geoplatform.services.GeoPlatformService"
 		factory-bean="geoPlatformProxyFactory" factory-method="create" />
@@ -15,15 +15,33 @@
         <property name="address" value="${webservice_publisher_endpoint_address}" />
     </bean>
 
-    <bean id="geoPlatformCatalogFinderClient"  class="org.geosdi.geoplatform.cxf.GeoPlatformCatalogFinderClient">
-        <property name="address" value="${webservice_catalogfinder_endpoint_address}" />
-    </bean>
+    <bean id="gpCatalogFinderClient"  class="org.geosdi.geoplatform.services.GPCatalogFinderService"
+                factory-bean="catalogProxyFactory" factory-method="create" />
 
     <bean id="geoPlatformProxyFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
         <property name="serviceClass"
 			value="org.geosdi.geoplatform.services.GeoPlatformService" />
         <property name="address"
 			value="${webservice_endpoint_address}" />
+        <property name="inInterceptors">
+            <list>
+                <ref bean="geoPlatformClientLoggingInInterceptorBean"/>
+                <ref bean="geoPlatformClientSecurityInInterceptorBean"/>
+            </list>
+        </property>
+        <property name="outInterceptors">
+            <list>
+                <ref bean="geoPlatformClientLoggingOutInterceptorBean"/>
+                <ref bean="geoPlatformClientSecurityOutInterceptorBean"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="catalogProxyFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+        <property name="serviceClass"
+			value="org.geosdi.geoplatform.services.GPCatalogFinderService" />
+        <property name="address"
+			value="${webservice_catalogfinder_endpoint_address}" />
         <property name="inInterceptors">
             <list>
                 <ref bean="geoPlatformClientLoggingInInterceptorBean"/>

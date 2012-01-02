@@ -53,20 +53,17 @@ public class GPCatalogMetadataDTO {
     private GPBBox bbox;
     private List<GPCatalogMetadataOnlineResource> onLineResources = Lists.newArrayList();
 
-//    public GPCatalogMetadataOnlineResource makeInstance() {
-//        return new GPCatalogMetadataOnlineResource();
-//    }
 
-    public List<GPCatalogMetadataOnlineResource> getGpCatalogMetadataOnlineResourceList() {
+    public List<GPCatalogMetadataOnlineResource> getOnlineResource() {
         return onLineResources;
     }
 
-    public void setGpCatalogMetadataOnlineResourceList(List<GPCatalogMetadataOnlineResource> gpCatalogMetadataOnlineResourceList) {
-        this.onLineResources = gpCatalogMetadataOnlineResourceList;
+    public void setOnlineResource(List<GPCatalogMetadataOnlineResource> theOnlineResource) {
+        this.onLineResources = theOnlineResource;
     }
 
-    public void addGpCatalogMetadataOnlineResource(GPCatalogMetadataOnlineResource gpCatalogMetadataOnlineResource) {
-        this.onLineResources.add(gpCatalogMetadataOnlineResource);
+    public void addOnlineResource(GPCatalogMetadataOnlineResource onlineResource) {
+        this.onLineResources.add(onlineResource);
     }
 
     public String getAbstractValue() {
@@ -124,51 +121,5 @@ public class GPCatalogMetadataDTO {
                 + keywordValues + ", bbox=" + bbox
                 + ", gpCatalogMetadataOnlineResourceList="
                 + onLineResources + '}';
-    }
-
-    public static class GPCatalogMetadataOnlineResource {
-
-        private String URL;
-        private String protocol;
-        private String name;
-        private String description;
-
-        public String getURL() {
-            return URL;
-        }
-
-        public void setURL(String URL) {
-            this.URL = URL;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getProtocol() {
-            return protocol;
-        }
-
-        public void setProtocol(String protocol) {
-            this.protocol = protocol;
-        }
-
-        @Override
-        public String toString() {
-            return "GPCatalogMetadataOnlineResource{" + "URL=" + URL + ", protocol=" + protocol + ", name=" + name + ", description=" + description + '}';
-        }
-        
     }
 }

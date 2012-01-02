@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform;
+package org.geosdi.geoplatform.modelws;
 
 import java.util.Arrays;
 import java.util.HashMap;

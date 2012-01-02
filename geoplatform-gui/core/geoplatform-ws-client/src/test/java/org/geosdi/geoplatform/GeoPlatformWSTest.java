@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform;
 
 import junit.framework.Assert;
-import org.geosdi.geoplatform.cxf.GeoPlatformCatalogFinderClient;
 import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
+import org.geosdi.geoplatform.services.GPCatalogFinderService;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -62,12 +62,12 @@ public class GeoPlatformWSTest {
     private GeoPlatformPublishClient geoPlatformPublishClient;
     //
     @Autowired
-    private GeoPlatformCatalogFinderClient geoPlatformCatalogFinderClient;
+    private GPCatalogFinderService gpCatalogFinderClient;
 
     @Test
     public void testWS() {
         Assert.assertNotNull(geoPlatformServiceClient);
         Assert.assertNotNull(geoPlatformPublishClient);
-        Assert.assertNotNull(geoPlatformCatalogFinderClient);
+        Assert.assertNotNull(gpCatalogFinderClient);
     }
 }

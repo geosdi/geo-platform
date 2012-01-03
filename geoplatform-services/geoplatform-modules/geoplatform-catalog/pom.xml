@@ -30,7 +30,7 @@
     </developers>
     
     <modules>
-        <module>catalog-api</module>
-        <module>catalog-impl</module>
+        <module>geonetwork-catalog</module>
+        <module>csw-catalog</module>
     </modules>
 </project>

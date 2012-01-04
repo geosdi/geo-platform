@@ -123,12 +123,11 @@ public class GPCatalogServiceTest {
             GNClient client = gpCatalogClient.createClientWithCredentials();
             Assert.assertNotNull("GeoNetwork client is null", client);
 
-            List<GPCatalogMetadataDTO> catalogMetadataDTOList = this.gpCatalogFinderService.searchPublicMetadata("");
+            List<GPCatalogMetadataDTO> catalogMetadataDTOList = this.gpCatalogFinderService.searchPublicMetadata("Strade Romane");
             Assert.assertTrue("Items not found", catalogMetadataDTOList.isEmpty() == false);
 
-            for (GPCatalogMetadataDTO gpCatalogMetadataDTO : catalogMetadataDTOList) {
-                Assert.assertTrue("GPCatalogMetadataLoader is empty", gpCatalogMetadataDTO.toString().equals("") == false);
-            }
+            logger.info("@@@@@@@@@@@@@@@@@@@ Found " + catalogMetadataDTOList.size()
+                    + " Metadata @@@@@@@@@@@@@@@");
         } catch (GPCatalogException ex) {
             Assert.fail(ex.getMessage());
         }

@@ -35,134 +35,98 @@
  */
 package org.geosdi.geoplatform.wpsconnector;
 
-import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
-import net.opengis.wps10.ProcessBriefType;
-import net.opengis.wps10.ProcessDescriptionType;
-import net.opengis.wps10.ProcessDescriptionsType;
-import net.opengis.wps10.ProcessOfferingsType;
-import net.opengis.wps10.WPSCapabilitiesType;
-import org.eclipse.emf.common.util.EList;
-import org.geotools.data.wps.WPSFactory;
-import org.geotools.data.wps.WebProcessingService;
-import org.geotools.data.wps.request.DescribeProcessRequest;
-import org.geotools.data.wps.response.DescribeProcessResponse;
-import org.geotools.ows.ServiceException;
-import org.geotools.process.Process;
+import org.geotoolkit.security.ClientSecurity;
+import org.geotoolkit.wps.DescribeProcessRequest;
+import org.geotoolkit.wps.ExecuteRequest;
+import org.geotoolkit.wps.GetCapabilitiesRequest;
+import org.geotoolkit.wps.WebProcessingServer;
+import org.geotoolkit.wps.xml.v100.WPSCapabilitiesType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group @email
+ * giuseppe.lascaleia@geosdi.org
  *
  */
 public class GeoPlatformWPSConnector {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private URL url;
-    private WebProcessingService wps;
+    private WebProcessingServer wpsServer;
 
-    public GeoPlatformWPSConnector(String wpsUrlString) {
+    public GeoPlatformWPSConnector(String url) {
+        this(url, WPSVersionEnum.WPS_1_0_0);
+    }
+
+    /**
+     * Create a GeoPlatformWPSConnector Instance with the url to the WPS Service
+     * and WPS Version
+     *
+     * @param url
+     * @param version
+     */
+    public GeoPlatformWPSConnector(String url, WPSVersionEnum version) {
         try {
-            this.url = new URL(wpsUrlString);
-            this.wps = new WebProcessingService(url);
-        } catch (IOException ex) {
-            logger.error("IOException : " + ex);
-        } catch (ServiceException ex) {
-            logger.error("Service Exception : " + ex);
+            this.wpsServer = new WebProcessingServer(new URL(url),
+                    version.toString());
+        } catch (MalformedURLException ex) {
+            logger.error("URL Incorrect : @@@@@@@@@@@@@@ " + ex);
         }
     }
 
     /**
-     * Get Capabilities WPS
-     * 
-     * @return EList of Process
+     *
+     * @param url
+     * @param security
+     * @param version
      */
-    public EList<ProcessBriefType> getWPSCapabilities() {
-        WPSCapabilitiesType capabilities = wps.getCapabilities();
-
-        ProcessOfferingsType processOfferings = capabilities.getProcessOfferings();
-        return processOfferings.getProcess();
-    }
-
-    /**
-     * Describe Process Request
-     * 
-     * @param 
-     *      processIdentifier
-     * 
-     * @return 
-     *      ProcessDescriptionType
-     * 
-     * @throws IllegalArgumentException 
-     */
-    public ProcessDescriptionType describeProcess(String processIdentifier)
-            throws Exception {
-
-        if (processIdentifier == null) {
-            throw new Exception("Process Identifier must not be null");
-        }
-
-        DescribeProcessRequest descRequest = wps.createDescribeProcessRequest();
-        descRequest.setIdentifier(processIdentifier);
-
-        DescribeProcessResponse descResponse = null;
+    public GeoPlatformWPSConnector(String url, ClientSecurity security,
+            WPSVersionEnum version) {
         try {
-            descResponse = wps.issueRequest(descRequest);
-        } catch (IOException ex) {
-            logger.error("IOException : " + ex);
-            throw new Exception(ex);
-        } catch (ServiceException ex) {
-            logger.error("Service Exception : " + ex);
-            throw new Exception(ex);
+            this.wpsServer = new WebProcessingServer(new URL(url), security,
+                    version.toString());
+        } catch (MalformedURLException ex) {
+            logger.error("URL Incorrect : @@@@@@@@@@@@@@@ " + ex);
         }
-
-        ProcessDescriptionsType processDesc = descResponse.getProcessDesc();
-        return (ProcessDescriptionType) processDesc.getProcessDescription().get(0);
     }
 
     /**
-     * Create a Process
-     * 
-     * @param 
-     *      processIdentifier 
-     * 
-     * @return
-     *        Process
-     * 
-     * @throws IllegalArgumentException 
+     * Return the GetCapabilities from WPS Server
+     *
+     * @return WPSCapabilitiesType
      */
-    public Process createProcess(String processIdentifier)
-            throws Exception {
-
-        WPSFactory wpsfactory = new WPSFactory(describeProcess(processIdentifier), url);
-
-        return wpsfactory.create();
-
+    public WPSCapabilitiesType getCapabilities() {
+        return this.wpsServer.getCapabilities();
     }
 
     /**
-     * Create a Process
-     * 
-     * @param
-     *      processType
-     * 
-     * @return
-     *      Process
+     * Create Capabilities Request
+     *
+     * @return GetCapabilitiesRequest
      */
-    public Process createProcess(ProcessDescriptionType processType) {
-        WPSFactory wpsFactory = new WPSFactory(processType, url);
-
-        return wpsFactory.create();
+    public GetCapabilitiesRequest createCapabilitiesRequest() {
+        return this.wpsServer.createGetCapabilities();
     }
 
     /**
-     * @return the url
+     * Create Describe Process Request
+     *
+     * @return DescribeProcessRequest
      */
-    public URL getUrl() {
-        return url;
+    public DescribeProcessRequest createDescribeProcess() {
+        return this.wpsServer.createDescribeProcess();
+    }
+
+    /**
+     * Create Execute Request
+     *
+     * @return ExecuteRequest
+     */
+    public ExecuteRequest createExecuteRequest() {
+        return this.wpsServer.createExecute();
     }
 }

@@ -35,47 +35,34 @@
  */
 package org.geosdi.geoplatform.wpsconnector;
 
-import com.vividsolutions.jts.geom.Geometry;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
-import javax.annotation.PostConstruct;
-import javax.xml.parsers.ParserConfigurationException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
 import junit.framework.Assert;
-import net.opengis.wps10.ProcessBriefType;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.geotools.GML;
-import org.geotools.GML.Version;
-import org.geotools.data.simple.SimpleFeatureCollection;
-import org.geotools.feature.collection.AbstractFeatureVisitor;
-import org.geotools.gml2.bindings.GML2EncodingUtils;
-import org.geotools.referencing.crs.DefaultGeographicCRS;
-import org.geotools.util.NullProgressListener;
+import org.geotoolkit.wps.*;
+import org.geotoolkit.wps.xml.WPSMarshallerPool;
+import org.geotoolkit.wps.xml.v100.ExecuteResponse;
+import org.geotoolkit.wps.xml.v100.OutputDataType;
+import org.geotoolkit.wps.xml.v100.ProcessBriefType;
+import org.geotoolkit.wps.xml.v100.WPSCapabilitiesType;
+import org.geotoolkit.xml.MarshallerPool;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.opengis.feature.Feature;
-import org.opengis.feature.simple.SimpleFeature;
-import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.xml.sax.SAXException;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group @email
+ * giuseppe.lascaleia@geosdi.org
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -87,187 +74,72 @@ public class GeoPlatformWPSConnectorTest {
     @Autowired
     private GeoPlatformWPSConnector gpWPSConnector;
     //
-    private HttpPost post;
-    private HttpClient httpclient;
+    private MarshallerPool pool = WPSMarshallerPool.getInstance();
+    private Unmarshaller um;
 
     @Test
-    public void test() {
-        Assert.assertNotNull(gpWPSConnector);
-
-        logger.info("Number of Process ********************** " + gpWPSConnector.getWPSCapabilities().size());
-
-        for (ProcessBriefType pbfT : gpWPSConnector.getWPSCapabilities()) {
-            logger.info("Process Abstract : ****************" + pbfT.getTitle().getValue());
-            logger.info("Process Identifier : ***********" + pbfT.getIdentifier().getValue());
-        }
-    }
-
-    @Test
-    public void testProcessDoubleAddition() {
+    public void testGetCapabilities() throws JAXBException, IOException {
         try {
-            StringBuilder xml = new StringBuilder();
-            xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?> ");
-            xml.append("<wps:Execute version=\"1.0.0\" service=\"WPS\" xmlns:xsi=");
-            xml.append("\"http://www.w3.org/2001/XMLSchema-instance\" ");
-            xml.append("xmlns=\"http://www.opengis.net/wps/1.0.0\" xmlns:wfs=");
-            xml.append("\"http://www.opengis.net/wfs\" xmlns:wps=\"");
-            xml.append("http://www.opengis.net/wps/1.0.0\" xmlns:ows=\"");
-            xml.append("http://www.opengis.net/ows/1.1\" xmlns:gml=\"");
-            xml.append("http://www.opengis.net/gml\" xmlns:ogc=\"");
-            xml.append("http://www.opengis.net/ogc\" xmlns:wcs=\"");
-            xml.append("http://www.opengis.net/wcs/1.1.1\" xmlns:xlink=\"");
-            xml.append("http://www.w3.org/1999/xlink\" xsi:schemaLocation=\"");
-            xml.append("http://www.opengis.net/wps/1.0.0 http://");
-            xml.append("schemas.opengis.net/wps/1.0.0/wpsAll.xsd\"> ");
-            xml.append("  <ows:Identifier>gt:DoubleAddition</ows:Identifier> ");
-            xml.append("  <wps:DataInputs> ");
-            xml.append("   <wps:Input> ");
-            xml.append("    <ows:Identifier>input_a</ows:Identifier> ");
-            xml.append("   <wps:Data> ");
-            xml.append("    <wps:LiteralData>4</wps:LiteralData>");
-            xml.append(" </wps:Data>");
-            xml.append(" </wps:Input>");
-            xml.append(" <wps:Input>");
-            xml.append("    <ows:Identifier>input_b</ows:Identifier>");
-            xml.append("   <wps:Data>");
-            xml.append("     <wps:LiteralData>4</wps:LiteralData>");
-            xml.append("   </wps:Data>");
-            xml.append(" </wps:Input>");
-            xml.append(" </wps:DataInputs>");
-            xml.append(" <wps:ResponseForm>");
-            xml.append("   <wps:RawDataOutput>");
-            xml.append("     <ows:Identifier>result</ows:Identifier>");
-            xml.append("   </wps:RawDataOutput>");
-            xml.append("  </wps:ResponseForm>");
-            xml.append("</wps:Execute>");
+            this.um = pool.acquireUnmarshaller();
 
-            StringEntity se = new StringEntity(xml.toString(), "UTF-8");
-            se.setContentType("application/atom+xml");
+            Assert.assertNotNull(um);
 
-            post.setEntity(se);
+            GetCapabilitiesRequest request = this.gpWPSConnector.createCapabilitiesRequest();
 
-            HttpResponse response;
-            response = httpclient.execute(post);
+            InputStream is = request.getResponseStream();
 
-            logger.info("Response Status : " + response.getStatusLine() + "\n");
+            WPSCapabilitiesType capabilities = ((JAXBElement<WPSCapabilitiesType>) um.unmarshal(
+                    is)).getValue();
 
-            InputStream is = response.getEntity().getContent();
+            logger.info(
+                    "Service : @@@@@@@@@@@@@@@@@@@@ " + capabilities.getService()
+                    + " - Version : @@@@@@@@@@@@@ " + capabilities.getVersion());
 
-            Writer writer = new StringWriter();
+            logger.info("Number of Process : @@@@@@@@@@@@@@@@@@@@@@@@@ "
+                    + capabilities.getProcessOfferings().getProcess().size());
 
-            char[] buffer = new char[1024];
-            try {
-                Reader reader = new BufferedReader(
-                        new InputStreamReader(is, "UTF-8"));
-                int n;
-                while ((n = reader.read(buffer)) != -1) {
-                    writer.write(buffer, 0, n);
-                }
-            } finally {
-                is.close();
+            for (ProcessBriefType pbf : capabilities.getProcessOfferings().getProcess()) {
+                logger.info(
+                        "Process Identifier @@@@@@@@@@@@@@ "
+                        + pbf.getIdentifier().getValue());
+                logger.info("Process Description @@@@@@@@@@@@@@@@@@@ "
+                        + pbf.getTitle().getValue());
             }
 
-            logger.info("RESULT DOUBLE ADDITION @@@@@@@@@@@@@@@@@@@@@@@@ " + writer.toString());
-
-        } catch (UnsupportedEncodingException ex) {
-            logger.error("Error " + ex);
-        } catch (IOException es) {
-            logger.error("IOException : " + es);
         } finally {
-            httpclient.getConnectionManager().shutdown();
+            pool.release(um);
         }
     }
 
     @Test
-    public void testProcessFilterByField() {
+    public void testDoubleAddition() throws JAXBException, IOException {
         try {
-            StringBuilder xml = new StringBuilder();
-            xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?> ");
-            xml.append("<wps:Execute version=\"1.0.0\" service=\"WPS\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
-            xml.append(" xmlns=\"http://www.opengis.net/wps/1.0.0\" xmlns:wfs=\"http://www.opengis.net/wfs\" ");
-            xml.append("xmlns:wps=\"http://www.opengis.net/wps/1.0.0\" xmlns:ows=\"http://www.opengis.net/ows/1.1\"");
-            xml.append(" xmlns:gml=\"http://www.opengis.net/gml\" xmlns:ogc=\"http://www.opengis.net/ogc\" ");
-            xml.append("xmlns:wcs=\"http://www.opengis.net/wcs/1.1.1\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" ");
-            xml.append("xsi:schemaLocation=\"http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd\"> ");
-            xml.append("  <ows:Identifier>sitdpc:FilterByField</ows:Identifier> ");
-            xml.append("  <wps:DataInputs> ");
-            xml.append("    <wps:Input> ");
-            xml.append("      <ows:Identifier>source</ows:Identifier> ");
-            xml.append("      <wps:Reference mimeType=\"text/xml; subtype=wfs-collection/1.0\" xlink:href=\"http://geoserver/wfs\" method=\"POST\"> ");
-            xml.append("        <wps:Body> ");
-            xml.append("          <wfs:GetFeature service=\"WFS\" version=\"1.0.0\" outputFormat=\"GML2\"> ");
-            xml.append("            <wfs:Query typeName=\"sitdpc:comuni2001\"/> ");
-            xml.append("          </wfs:GetFeature> ");
-            xml.append("        </wps:Body> ");
-            xml.append("      </wps:Reference> ");
-            xml.append("    </wps:Input> ");
-            xml.append("    <wps:Input> ");
-            xml.append("      <ows:Identifier>field</ows:Identifier> ");
-            xml.append("      <wps:Data> ");
-            xml.append("        <wps:LiteralData>comune</wps:LiteralData> ");
-            xml.append("      </wps:Data> ");
-            xml.append("    </wps:Input> ");
-            xml.append("    <wps:Input> ");
-            xml.append("      <ows:Identifier>value</ows:Identifier> ");
-            xml.append("      <wps:Data> ");
-            xml.append("        <wps:LiteralData>pignola</wps:LiteralData> ");
-            xml.append("      </wps:Data> ");
-            xml.append("    </wps:Input> ");
-            xml.append("  </wps:DataInputs> ");
-            xml.append("  <wps:ResponseForm> ");
-            xml.append("    <wps:RawDataOutput mimeType=\"text/xml; subtype=wfs-collection/1.0\"> ");
-            xml.append("      <ows:Identifier>result</ows:Identifier> ");
-            xml.append("    </wps:RawDataOutput> ");
-            xml.append("  </wps:ResponseForm> ");
-            xml.append(" </wps:Execute>");
+            this.um = pool.acquireUnmarshaller();
 
-            StringEntity se = new StringEntity(xml.toString(), "UTF-8");
-            se.setContentType("application/atom+xml");
+            ExecuteRequest request = this.gpWPSConnector.createExecuteRequest();
+            request.setIdentifier("gt:DoubleAddition");
 
-            post.setEntity(se);
+            List<AbstractWPSInput> inputs = new ArrayList<AbstractWPSInput>();
+            inputs.add(new WPSInputLiteral("input_a", "10"));
+            inputs.add(new WPSInputLiteral("input_b", "10"));
 
-            HttpResponse response;
-            response = httpclient.execute(post);
+            List<WPSOutput> outputs = new ArrayList<WPSOutput>();
+            outputs.add(new WPSOutput("result"));
 
-            logger.info("Response Status : " + response.getStatusLine() + "\n");
+            request.setInputs(inputs);
+            request.setOutputs(outputs);
 
-            InputStream is = response.getEntity().getContent();
+            InputStream is = request.getResponseStream();
 
-            GML gml = new GML(Version.GML3);
-            gml.setCoordinateReferenceSystem(DefaultGeographicCRS.WGS84);
+            ExecuteResponse response = (ExecuteResponse) um.unmarshal(
+                    is);
 
-            SimpleFeatureCollection fc = gml.decodeFeatureCollection(is);
+            for (OutputDataType out : response.getProcessOutputs().getOutput()) {
+                logger.info("RESULT @@@@@@@@@@@@@ " + out.getData().getLiteralData().getValue());
+            }
 
-            fc.accepts(new AbstractFeatureVisitor() {
-
-                @Override
-                public void visit(Feature feature) {
-                    SimpleFeature f = (SimpleFeature) feature;
-                    CoordinateReferenceSystem coord = GML2EncodingUtils.getCRS((Geometry) f.getDefaultGeometry());
-
-                    logger.info("CRS for Feature =  " + coord.getCoordinateSystem().getIdentifiers());
-
-                }
-            }, new NullProgressListener());
-
-        } catch (UnsupportedEncodingException ex) {
-            logger.error("Error " + ex);
-        } catch (IOException es) {
-            logger.error("IOException : " + es);
-        } catch (ParserConfigurationException ex) {
-            logger.error("ParserConfigurationException : " + ex);
-        } catch (SAXException ex) {
-            logger.error("SAXException : " + ex);
         } finally {
-            httpclient.getConnectionManager().shutdown();
+            pool.release(um);
         }
-    }
-
-    @PostConstruct
-    public void init() {
-        String url = gpWPSConnector.getUrl().toString();
-        logger.info("\n*** URL = " + url);
-        this.post = new HttpPost(url);
-        this.httpclient = new DefaultHttpClient();
     }
 }

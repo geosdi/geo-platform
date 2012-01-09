@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.configuration.action;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 
 /**
@@ -43,5 +43,30 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformAction extends SelectionListener<ButtonEvent> {
+public abstract class GeoPlatformAction<X extends ComponentEvent>
+        extends SelectionListener<X> {
+
+    protected String id;
+
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * (non-Javadoc)
+     *
+     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     */
+    @Override
+    public abstract void componentSelected(X e);
 }

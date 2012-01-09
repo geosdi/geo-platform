@@ -54,19 +54,16 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 public class DrawPolygonAction extends MapToggleAction {
 
     public DrawPolygonAction(GeoPlatformMap mapWidget) {
-        super("Draw Polygon", Resources.ICONS.drawFeature(), mapWidget);
+        super(mapWidget, Resources.ICONS.drawFeature(), "Draw Polygon");
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-     * .extjs.gxt.ui.client.event.ComponentEvent)
+     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
-        // TODO Auto-generated method stub
         ToggleButton button = (ToggleButton) ce.getSource();
 
         super.changeButtonState();
@@ -80,25 +77,23 @@ public class DrawPolygonAction extends MapToggleAction {
 
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#getMapControl()
      */
     @Override
     public Control getMapControl() {
-        // TODO Auto-generated method stub
         return ((MapLayoutWidget) mapWidget).getDrawPolygonFeature();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
      */
     @Override
     public void disableControl() {
-        // TODO Auto-generated method stub
         getMapControl().deactivate();
     }
 }

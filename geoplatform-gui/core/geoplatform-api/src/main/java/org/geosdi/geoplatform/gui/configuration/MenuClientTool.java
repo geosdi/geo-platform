@@ -44,27 +44,9 @@ import java.util.List;
  */
 public class MenuClientTool extends GenericClientTool {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 3230473378433481976L;
-    private boolean enabled;
+    //
     private List<ActionClientTool> actionTools;
-
-    /**
-     * @return the enabled
-     */
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    /**
-     * @param enabled
-     *            the enabled to set
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
 
     /**
      * @return the actionTools

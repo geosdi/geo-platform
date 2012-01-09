@@ -63,10 +63,10 @@ public class CopyLayerAction extends MenuAction {
     @Override
     public void componentSelected(MenuEvent ce) {
         GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
-        if(itemSelected instanceof FolderTreeNode){
+        if (itemSelected instanceof FolderTreeNode) {
             throw new IllegalArgumentException("Folder copy is not allowed");
         }
-        this.pasteAction.setLayerToCopy((GPLayerTreeModel)itemSelected);
+        this.pasteAction.setLayerToCopy((GPLayerTreeModel) itemSelected);
         this.pasteMenuItem.setEnabled(true);
     }
 }

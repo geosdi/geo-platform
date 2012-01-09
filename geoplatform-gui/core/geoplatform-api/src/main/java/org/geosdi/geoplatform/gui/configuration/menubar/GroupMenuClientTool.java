@@ -40,14 +40,12 @@ import java.util.List;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public class GroupMenuClientTool extends MenuBarClientTool {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -6262573797200577418L;
+    //
     private List<MenuBarClientTool> tools;
 
     /**

@@ -46,14 +46,13 @@ import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
  */
 public class ToolbarClientTool implements IToolbarClientTool {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 3032280115406824191L;
-    
+    //
     private List<GenericClientTool> clientTools;
 
-    /* (non-Javadoc)
+    /**
+     * (non-Javadoc)
+     * 
      * @see org.geosdi.geoplatform.gui.configuration.IToolbarClientTool#getClientTools()
      */
     @Override
@@ -61,7 +60,9 @@ public class ToolbarClientTool implements IToolbarClientTool {
         return clientTools;
     }
 
-    /* (non-Javadoc)
+    /**
+     * (non-Javadoc)
+     * 
      * @see org.geosdi.geoplatform.gui.configuration.IToolbarClientTool#setClientTools(java.util.List)
      */
     @Override

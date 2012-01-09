@@ -159,18 +159,19 @@ public abstract class AbstractElementDTO implements IElementDTO {
     }
     //</editor-fold>
 
-    // For sort IElementDTO object in the TreeFolderElements
-    /*
+    /**
+     * Sort IElementDTO object in the TreeFolderElements
+     * <p>
      * (non-Javadoc)
      * 
-     * @see java.lang.Object#compareTo(java.lang.Object)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
     @Override
     public int compareTo(IElementDTO element) {
         return element.getPosition() - this.getPosition();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see java.lang.Object#toString()

@@ -56,20 +56,16 @@ public class DrawLineAction extends MapToggleAction {
      * 
      */
     public DrawLineAction(GeoPlatformMap theMapWidget) {
-        super("Draw Line", Resources.ICONS.drawLineFeature(), theMapWidget);
-        // TODO Auto-generated constructor stub
+        super(theMapWidget, Resources.ICONS.drawLineFeature(), "Draw Line");
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-     * .extjs.gxt.ui.client.event.ComponentEvent)
+     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
-        // TODO Auto-generated method stub
         ToggleButton button = (ToggleButton) ce.getSource();
 
         super.changeButtonState();
@@ -82,25 +78,23 @@ public class DrawLineAction extends MapToggleAction {
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#getMapControl()
      */
     @Override
     public Control getMapControl() {
-        // TODO Auto-generated method stub
         return ((MapLayoutWidget) mapWidget).getDrawLineFeature();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
      */
     @Override
     public void disableControl() {
-        // TODO Auto-generated method stub
         getMapControl().disable();
     }
 }

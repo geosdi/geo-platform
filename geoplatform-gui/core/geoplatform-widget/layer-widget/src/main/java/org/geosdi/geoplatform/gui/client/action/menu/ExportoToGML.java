@@ -20,10 +20,6 @@ public class ExportoToGML extends MenuAction {
 
     private TreePanel treePanel;
 
-    public ExportoToGML() {
-        super("ExportToGML");
-    }
-
     public ExportoToGML(TreePanel treePanel) {
         super("ExportToGML");
         this.treePanel = treePanel;

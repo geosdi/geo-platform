@@ -49,25 +49,20 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
  */
 public class ClearMapAction extends ToolbarMapAction {
 
-	private GeoPlatformMap mapWidget;
+    private GeoPlatformMap mapWidget;
 
-	public ClearMapAction(GeoPlatformMap theMapWidget) {
-		super("Clear Map", Resources.ICONS.clearMap());
-		// TODO Auto-generated constructor stub
-		this.mapWidget = theMapWidget;
-	}
+    public ClearMapAction(GeoPlatformMap theMapWidget) {
+        super(Resources.ICONS.clearMap(), "Clear Map");
+        this.mapWidget = theMapWidget;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-	 * .extjs.gxt.ui.client.event.ComponentEvent)
-	 */
-	@Override
-	public void componentSelected(ButtonEvent ce) {
-		// TODO Auto-generated method stub
-		((MapLayoutWidget) mapWidget).clearMap();
-	}
-
+    /**
+     * (non-Javadoc)
+     *
+     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     */
+    @Override
+    public void componentSelected(ButtonEvent ce) {
+        ((MapLayoutWidget) mapWidget).clearMap();
+    }
 }

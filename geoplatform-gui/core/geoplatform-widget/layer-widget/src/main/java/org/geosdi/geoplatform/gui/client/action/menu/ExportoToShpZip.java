@@ -21,10 +21,6 @@ public class ExportoToShpZip extends MenuAction {
 
     private TreePanel treePanel;
 
-    public ExportoToShpZip() {
-        super("ExportToShpZip");
-    }
-
     public ExportoToShpZip(TreePanel treePanel) {
         super("ExportToShpZip");
         this.treePanel = treePanel;

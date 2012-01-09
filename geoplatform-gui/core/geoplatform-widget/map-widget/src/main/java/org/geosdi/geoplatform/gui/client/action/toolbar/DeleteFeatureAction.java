@@ -51,17 +51,14 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 public class DeleteFeatureAction extends GenericFeatureAction {
 
     public DeleteFeatureAction(GeoPlatformMap theMapWidget) {
-        super("Delete Feature", BasicWidgetResources.ICONS.erase(),
-                theMapWidget);
-        // TODO Auto-generated constructor stub
+        super(theMapWidget, BasicWidgetResources.ICONS.erase(), "Delete Feature");
     }
 
     @Override
     public void componentSelected(ButtonEvent ce) {
-        // TODO Auto-generated method stub
         if (((MapLayoutWidget) this.mapWidget).getFeaturesNumber() == 0) {
             GeoPlatformMessage.alertMessage("Feaures Service",
-                    "There are no Features to erase.");
+                                            "There are no Features to erase.");
             return;
         }
 

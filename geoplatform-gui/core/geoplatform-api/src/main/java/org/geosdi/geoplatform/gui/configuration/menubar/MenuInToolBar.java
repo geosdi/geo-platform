@@ -41,17 +41,13 @@ import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public class MenuInToolBar extends GenericClientTool {
-    
-    private static final long serialVersionUID = -6673336990643383453L;
 
-    /**
-     *
-     */
+    private static final long serialVersionUID = -6673336990643383453L;
+    //
     private String text;
-    private boolean enabled;
     private List<MenuBarClientTool> tools;
 
     /**
@@ -70,21 +66,6 @@ public class MenuInToolBar extends GenericClientTool {
     }
 
     /**
-     * @return the enabled
-     */
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    /**
-     * @param enabled
-     *            the enabled to set
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-    
-    /**
      * @return the tools
      */
     public List<MenuBarClientTool> getTools() {
@@ -99,16 +80,17 @@ public class MenuInToolBar extends GenericClientTool {
         Collections.sort(tools);
         this.tools = tools;
     }
-    
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "MenuInToolBar [text=" + text + ", enabled=" + enabled
-                + ", getId()=" + getId() + ", getOrder()=" + getOrder() + "]";
+        return "MenuInToolBar{id=" + id
+                + ", enabled=" + enabled
+                + ", order=" + order
+                + ", text=" + text + '}';
     }
 }

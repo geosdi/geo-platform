@@ -53,14 +53,17 @@ public class ZoomOutAction extends ToolbarMapAction {
     private int zoomFactor = 1;
 
     public ZoomOutAction(GeoPlatformMap mapWidget) {
-        super("ZoomOut", Resources.ICONS.zoomOut());
-
+        super(Resources.ICONS.zoomOut(), "ZoomOut");
         this.mapWidget = mapWidget;
     }
 
+    /**
+     * (non-Javadoc)
+     * 
+     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     */
     @Override
     public void componentSelected(ButtonEvent ce) {
-        // TODO Auto-generated method stub
         LonLat center = this.mapWidget.getMap().getCenter();
         int oldZoom = this.mapWidget.getMap().getZoom();
         if ((oldZoom - this.zoomFactor) > 0) {

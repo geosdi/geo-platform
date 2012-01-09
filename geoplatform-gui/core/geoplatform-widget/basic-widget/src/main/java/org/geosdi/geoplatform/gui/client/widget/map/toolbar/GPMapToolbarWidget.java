@@ -41,10 +41,9 @@ import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
-import com.google.gwt.user.client.ui.Image;
 import java.util.Collections;
 import java.util.List;
-import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
+import org.geosdi.geoplatform.gui.action.ToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.action.ToolbarApplicationAction;
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
@@ -95,7 +94,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
                 this.addSeparator();
             } else if (tool instanceof MenuClientTool) {
                 this.addMenuButton((MenuClientTool) tool,
-                        (ToolbarApplicationAction) ToolbarActionRegistar.get(
+                                   (ToolbarApplicationAction) ToolbarActionRegistar.get(
                         id, geoPlatformMap));
             } else if (tool instanceof IconInToolbar && ((IconInToolbar) tool).getId().equals(
                     GoogleLoginEnum.GOOGLE_ICON.toString())) {
@@ -105,8 +104,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
                     UserLoginEnum.USER_MENU.toString())) {
                 this.addUserLoginMenu((MenuInToolBar) tool);
             } else {
-                GeoPlatformToolbarAction action = ToolbarActionRegistar.get(
-                        id, geoPlatformMap);
+                ToolbarAction action = ToolbarActionRegistar.get(id, geoPlatformMap);
 
                 if (action != null) {
                     action.setId(id);
@@ -219,7 +217,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
 
         this.toolBar.add(new FillToolItem());
         this.toolBar.add(widgetIcon.createWidgetComponent(BasicWidgetResources.ICONS.googleWhite().createImage(),
-                icon.getText()));
+                                                          icon.getText()));
     }
 
     private void addUserLoginMenu(MenuInToolBar menuInToolBar) {

@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.plugin.tree.addlayer;
 
-import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
+import org.geosdi.geoplatform.gui.action.ToolbarAction;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public abstract class AbstractAddLayerPlugin<T extends GeoPlatformToolbarAction>
+public abstract class AbstractAddLayerPlugin<T extends ToolbarAction>
     extends GeoPlatformBeanModel implements IAddLayerPlugin<T> {
     
     private static final long serialVersionUID = -544764736224982107L;

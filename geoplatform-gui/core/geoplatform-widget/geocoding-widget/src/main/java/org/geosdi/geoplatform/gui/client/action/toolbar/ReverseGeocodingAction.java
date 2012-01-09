@@ -45,7 +45,6 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingToggleEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingToggleEventHandler;
-import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
 /**
@@ -53,27 +52,24 @@ import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class ReverseGeocodingAction extends MapToggleAction implements ReverseGeocodingToggleEventHandler {
+public class ReverseGeocodingAction extends MapToggleAction
+        implements ReverseGeocodingToggleEventHandler {
 
     public ReverseGeocodingAction(GeoPlatformMap theMapWidget) {
-        super("Reverse Geocoding", GeocodingResources.ICONS.reverseGeocoding(),
-                theMapWidget);
-        // TODO Auto-generated constructor stub
+        super(theMapWidget, GeocodingResources.ICONS.reverseGeocoding(), "Reverse Geocoding");
 
         GPGeocodingHandlerManager.addHandler(ReverseGeocodingToggleEvent.TYPE, this);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see com.extjs.gxt.ui.client.event.SelectionListenercomponentSelected(com
-     * .extjs.gxt.ui.client.event.ComponentEvent)
+     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
-        // TODO Auto-generated method stub
-
         ToggleButton button = (ToggleButton) ce.getSource();
+
         super.changeButtonState();
 
         this.deactivateAllMapControl();
@@ -97,14 +93,13 @@ public class ReverseGeocodingAction extends MapToggleAction implements ReverseGe
         componentSelected(buttonEvent);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
      */
     @Override
     public void disableControl() {
-        // TODO Auto-generated method stub
         GPGeocodingHandlerManager.fireEvent(new ReverseGeocodingEvent(false));
     }
 

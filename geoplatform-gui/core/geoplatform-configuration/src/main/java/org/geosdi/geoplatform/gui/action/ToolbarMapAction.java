@@ -44,29 +44,12 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  * @author giuseppe
  * 
  */
-public abstract class ToolbarMapAction extends GeoPlatformToolbarAction {
+public abstract class ToolbarMapAction extends ToolbarAction {
 
     private Button button;
-    private String tooltip;
 
-    public ToolbarMapAction(String tooltip, AbstractImagePrototype image) {
-        super(image);
-        this.tooltip = tooltip;
-    }
-
-    /**
-     * @return the tooltip
-     */
-    public String getTooltip() {
-        return tooltip;
-    }
-
-    /**
-     * @param tooltip
-     *            the tooltip to set
-     */
-    public void setTooltip(String tooltip) {
-        this.tooltip = tooltip;
+    public ToolbarMapAction(AbstractImagePrototype image, String tooltip) {
+        super(image, tooltip);
     }
 
     /**

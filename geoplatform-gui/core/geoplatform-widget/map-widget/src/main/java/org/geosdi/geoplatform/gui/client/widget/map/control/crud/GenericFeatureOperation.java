@@ -61,11 +61,10 @@ public class GenericFeatureOperation extends MapControl {
         super(vector);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see org.geosdi.geoplatform.gui.impl.map.control.GeoPlatformMapControl#
-     * createControl()
+     * @see org.geosdi.geoplatform.gui.impl.map.control.GeoPlatformMapControl#createControl()
      */
     @Override
     public void createControl() {

@@ -52,10 +52,9 @@ public abstract class ModifyFeatureAction extends ToolbarMapAction {
     protected GeoPlatformMap mapWidget;
     protected ModifyFeature control;
 
-    public ModifyFeatureAction(String tooltip, AbstractImagePrototype image,
-            GeoPlatformMap mapWidget) {
-        super(tooltip, image);
-        // TODO Auto-generated constructor stub
+    public ModifyFeatureAction(GeoPlatformMap mapWidget,
+                               AbstractImagePrototype image, String tooltip) {
+        super(image, tooltip);
 
         this.mapWidget = mapWidget;
 

@@ -52,41 +52,35 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class ZoomNextAction extends ToolbarMapAction implements
-        GeoPlatformEventHandler {
+public class ZoomNextAction extends ToolbarMapAction
+        implements GeoPlatformEventHandler {
 
     private GeoPlatformMap mapWidget;
     private HandlerRegistration handlerRegistration;
 
     public ZoomNextAction(GeoPlatformMap theMapWidget) {
-        super("Zoom Next", Resources.ICONS.zoomNext());
-        // TODO Auto-generated constructor stub
+        super(Resources.ICONS.zoomNext(), "Zoom Next");
         this.mapWidget = theMapWidget;
         this.addHandler();
     }
 
-    /*
+    /**
      * (non-Javadoc)
-     * 
-     * @see
-     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-     * .extjs.gxt.ui.client.event.ComponentEvent)
+     *
+     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
-        // TODO Auto-generated method stub
         ((MapLayoutWidget) this.mapWidget).getNavigationHistory().nextTrigger();
     }
 
     @Override
     public void addHandler() {
-        // TODO Auto-generated method stub
         this.handlerRegistration = GPHandlerManager.addHandler(
                 ZoomNextEvent.TYPE, new ZoomNextEventHandler() {
 
             @Override
             public void onActivation(boolean activate) {
-                // TODO Auto-generated method stub
                 if (activate) {
                     enable();
                 } else {
@@ -98,7 +92,6 @@ public class ZoomNextAction extends ToolbarMapAction implements
 
     @Override
     public void removeHandler() {
-        // TODO Auto-generated method stub
         this.handlerRegistration.removeHandler();
     }
 }

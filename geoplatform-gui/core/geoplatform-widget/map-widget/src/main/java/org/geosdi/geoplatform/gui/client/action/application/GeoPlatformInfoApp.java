@@ -46,7 +46,7 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 public class GeoPlatformInfoApp extends ToolbarApplicationAction {
 
 	public GeoPlatformInfoApp() {
-		super("geoSDI", null);
+		super("geoSDI", null, null);
 	}
 
 	@Override

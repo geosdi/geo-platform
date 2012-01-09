@@ -41,16 +41,10 @@ package org.geosdi.geoplatform.gui.plugin.tree;
  */
 public enum TreeStatusEnum {
 
-    FOLDER_SELECTED, RASTER_SELECTED, ROOT_SELECTED,
-    NO_SELECTION, SAVE_CACHE_EMPTY, SAVE_CACHE_NOT_EMPTY;
-    
-//    private final int value;
-//
-//    TreeStatusEnum(int value) {
-//        this.value = value;
-//    }
-//
-//    public final int getValue() {
-//        return value;
-//    }
+    NO_SELECTION,
+    ROOT_SELECTED,
+    FOLDER_SELECTED,
+    RASTER_SELECTED,
+    SAVE_CACHE_EMPTY,
+    SAVE_CACHE_NOT_EMPTY;
 }

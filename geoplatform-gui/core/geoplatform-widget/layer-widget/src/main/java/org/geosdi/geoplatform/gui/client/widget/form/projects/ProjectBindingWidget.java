@@ -155,7 +155,7 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
 
     /**
      * 
-     * @param Boolean useNewEntity 
+     * @param boolean useNewEntity 
      *         TRUE to use a new Instance of GPClientProject
      *         FALSE to use selected item in the store
      */

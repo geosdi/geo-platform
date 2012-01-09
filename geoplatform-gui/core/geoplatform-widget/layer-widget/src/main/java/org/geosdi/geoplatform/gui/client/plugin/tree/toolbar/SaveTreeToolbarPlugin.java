@@ -54,10 +54,11 @@ public class SaveTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
     @Override
     public boolean setEnabledByStatus(TreeStatusEnum status) {
         boolean condition = button.isEnabled();
-        if (status.equals(TreeStatusEnum.SAVE_CACHE_EMPTY)){
+        if (status.equals(TreeStatusEnum.SAVE_CACHE_EMPTY)) {
             condition = false;
             button.setEnabled(condition);
-        } else if (!TreeToolbarPluginManager.USER_VIEWER && status.equals(TreeStatusEnum.SAVE_CACHE_NOT_EMPTY)) {
+        } else if (!TreeToolbarPluginManager.USER_VIEWER
+                && status.equals(TreeStatusEnum.SAVE_CACHE_NOT_EMPTY)) {
             condition = true;
             button.setEnabled(condition);
         }

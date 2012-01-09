@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
  * @email  giuseppe.lascaleia@geosdi.org
  *
  */
-public class GPProjectAction extends GeoPlatformAction {
+public class GPProjectAction extends GeoPlatformAction<ButtonEvent> {
 
     private ProjectBindingWidget bindingProject;
 

@@ -84,12 +84,10 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
         this.geoPlatformInfo = geoPlatformInfo;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal#getToolbarClientTool
-     * ()
+     * @see org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal#getToolbarClientTool()
      */
     @Override
     public IToolbarClientTool getToolbarClientTool() {

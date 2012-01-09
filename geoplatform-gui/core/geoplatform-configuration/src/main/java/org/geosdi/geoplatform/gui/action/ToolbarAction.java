@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.action;
 
+import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -48,52 +49,18 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class GeoPlatformToolbarAction extends GeoPlatformAction
+public abstract class ToolbarAction extends GeoPlatformAction<ButtonEvent>
         implements HasActionHandler {
 
-    private AbstractImagePrototype image;
-    private String id;
     private boolean enabled;
+    private AbstractImagePrototype image;
+    private String tooltip;
     private HandlerManager handlerManager;
 
-    public GeoPlatformToolbarAction(AbstractImagePrototype image) {
+    public ToolbarAction(AbstractImagePrototype image, String tooltip) {
         this.image = image;
+        this.tooltip = tooltip;
         this.handlerManager = new HandlerManager(this);
-    }
-
-    @Override
-    public HandlerRegistration addActionHandler(ActionHandler actionHandler) {
-        return this.handlerManager.addHandler(ActionHandler.TYPE, actionHandler);
-    }
-
-    /**
-     * @return the image
-     */
-    public AbstractImagePrototype getImage() {
-        return image;
-    }
-
-    /**
-     * @param image
-     *            the image to set
-     */
-    public void setImage(AbstractImagePrototype image) {
-        this.image = image;
-    }
-
-    /**
-     * @return the id
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            the id to set
-     */
-    public void setId(String id) {
-        this.id = id;
     }
 
     /**
@@ -114,6 +81,39 @@ public abstract class GeoPlatformToolbarAction extends GeoPlatformAction
         } else {
             this.handlerManager.fireEvent(new ActionDisabledEvent());
         }
+    }
 
+    /**
+     * @return the image
+     */
+    public AbstractImagePrototype getImage() {
+        return image;
+    }
+
+    /**
+     * @param image
+     *            the image to set
+     */
+    public void setImage(AbstractImagePrototype image) {
+        this.image = image;
+    }
+
+    /**
+     * @return the tooltip
+     */
+    public String getTooltip() {
+        return tooltip;
+    }
+
+    /**
+     * @param tooltip the tooltip to set
+     */
+    public void setTooltip(String tooltip) {
+        this.tooltip = tooltip;
+    }
+
+    @Override
+    public HandlerRegistration addActionHandler(ActionHandler actionHandler) {
+        return this.handlerManager.addHandler(ActionHandler.TYPE, actionHandler);
     }
 }

@@ -37,37 +37,21 @@ package org.geosdi.geoplatform.gui.action.tree;
 
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
+import org.geosdi.geoplatform.gui.action.ToolbarAction;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class ToolbarLayerTreeAction extends GeoPlatformToolbarAction {
+public abstract class ToolbarLayerTreeAction extends ToolbarAction {
 
-    private String tooltip;
     protected TreePanel tree;
 
     public ToolbarLayerTreeAction(TreePanel theTree,
-            AbstractImagePrototype image,
-            String tooltip) {
-        super(image);
+                                  AbstractImagePrototype image,
+                                  String tooltip) {
+        super(image, tooltip);
         this.tree = theTree;
-        this.tooltip = tooltip;
-    }
-
-    /**
-     * @return the tooltip
-     */
-    public String getTooltip() {
-        return tooltip;
-    }
-
-    /**
-     * @param tooltip the tooltip to set
-     */
-    public void setTooltip(String tooltip) {
-        this.tooltip = tooltip;
     }
 }

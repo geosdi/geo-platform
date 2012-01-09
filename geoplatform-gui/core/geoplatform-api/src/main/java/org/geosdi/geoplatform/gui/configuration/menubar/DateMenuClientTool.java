@@ -41,8 +41,5 @@ package org.geosdi.geoplatform.gui.configuration.menubar;
  */
 public class DateMenuClientTool extends MenuBarClientTool {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -5201671145624228072L;
 }

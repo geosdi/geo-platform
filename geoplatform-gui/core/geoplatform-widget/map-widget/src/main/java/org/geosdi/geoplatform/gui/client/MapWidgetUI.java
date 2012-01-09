@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
-import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
+import org.geosdi.geoplatform.gui.action.ToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.toolbar.MeasureAction;
@@ -77,7 +77,7 @@ public class MapWidgetUI implements EntryPoint {
         ToolbarActionRegistar.put("ZoomIn", new ToolbarActionCreator() {
 
             @Override
-            public GeoPlatformToolbarAction createActionTool(
+            public ToolbarAction createActionTool(
                     GeoPlatformMap mapWidget) {
                 return new ZoomInAction(mapWidget);
             }
@@ -86,7 +86,7 @@ public class MapWidgetUI implements EntryPoint {
         ToolbarActionRegistar.put("ZoomOut", new ToolbarActionCreator() {
 
             @Override
-            public GeoPlatformToolbarAction createActionTool(
+            public ToolbarAction createActionTool(
                     GeoPlatformMap mapWidget) {
                 return new ZoomOutAction(mapWidget);
             }
@@ -95,7 +95,7 @@ public class MapWidgetUI implements EntryPoint {
         ToolbarActionRegistar.put("ZoomPrevious", new ToolbarActionCreator() {
 
             @Override
-            public GeoPlatformToolbarAction createActionTool(
+            public ToolbarAction createActionTool(
                     GeoPlatformMap mapWidget) {
                 return new ZoomPreviousAction(mapWidget);
             }
@@ -104,7 +104,7 @@ public class MapWidgetUI implements EntryPoint {
         ToolbarActionRegistar.put("ZoomNext", new ToolbarActionCreator() {
 
             @Override
-            public GeoPlatformToolbarAction createActionTool(
+            public ToolbarAction createActionTool(
                     GeoPlatformMap mapWidget) {
                 return new ZoomNextAction(mapWidget);
             }
@@ -113,7 +113,7 @@ public class MapWidgetUI implements EntryPoint {
         ToolbarActionRegistar.put("GetFeatureInfo", new ToolbarActionCreator() {
 
             @Override
-            public GeoPlatformToolbarAction createActionTool(
+            public ToolbarAction createActionTool(
                     GeoPlatformMap mapWidget) {
                 return new GetFeatureInfoAction(mapWidget);
             }
@@ -122,7 +122,7 @@ public class MapWidgetUI implements EntryPoint {
         ToolbarActionRegistar.put("Measure", new ToolbarActionCreator() {
 
             @Override
-            public GeoPlatformToolbarAction createActionTool(
+            public ToolbarAction createActionTool(
                     GeoPlatformMap mapWidget) {
                 return new MeasureAction(mapWidget);
             }
@@ -131,7 +131,7 @@ public class MapWidgetUI implements EntryPoint {
         ToolbarActionRegistar.put("MeasureArea", new ToolbarActionCreator() {
 
             @Override
-            public GeoPlatformToolbarAction createActionTool(
+            public ToolbarAction createActionTool(
                     GeoPlatformMap mapWidget) {
                 return new MeasureAreaAction(mapWidget);
             }

@@ -20,10 +20,6 @@ public class ExportoToPDF extends MenuAction {
 
     private TreePanel treePanel;
 
-    public ExportoToPDF() {
-        super("ExportToPDF");
-    }
-
     public ExportoToPDF(TreePanel treePanel) {
         super("ExportToPDF");
         this.treePanel = treePanel;
@@ -50,14 +46,12 @@ public class ExportoToPDF extends MenuAction {
                 pdfUrl = dataSource
                         + "?service=WMS&request=GetMap&version=1.1.1&format=application/pdf&width=1024&height=768&srs=EPSG:4326&layers="
                         + ((RasterTreeNode) item).getName()
-                        + "&bbox=" 
-                        + ((RasterTreeNode) item).getBbox().getLowerLeftX() 
-                        + "," + ((RasterTreeNode) item).getBbox().getLowerLeftY() 
-                        + "," + ((RasterTreeNode) item).getBbox().getUpperRightX() 
+                        + "&bbox="
+                        + ((RasterTreeNode) item).getBbox().getLowerLeftX()
+                        + "," + ((RasterTreeNode) item).getBbox().getLowerLeftY()
+                        + "," + ((RasterTreeNode) item).getBbox().getUpperRightX()
                         + "," + ((RasterTreeNode) item).getBbox().getUpperRightY();
             }
-
-
 
             System.out.println(pdfUrl);
 

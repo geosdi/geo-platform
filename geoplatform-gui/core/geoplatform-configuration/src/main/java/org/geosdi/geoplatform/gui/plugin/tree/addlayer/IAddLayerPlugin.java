@@ -37,14 +37,14 @@ package org.geosdi.geoplatform.gui.plugin.tree.addlayer;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
+import org.geosdi.geoplatform.gui.action.ToolbarAction;
 import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface IAddLayerPlugin<T extends GeoPlatformToolbarAction> extends ModelData {
+public interface IAddLayerPlugin<T extends ToolbarAction> extends ModelData {
     
     public T getAction(TreePanel treePanel);
     

@@ -41,12 +41,9 @@ package org.geosdi.geoplatform.gui.configuration.menubar;
  *
  */
 public class OAuth2MenuBarClientTool extends MenuBarClientTool {
-    
-    private static final long serialVersionUID = 7486164920025043585L;
 
-    /**
-     *
-     */
+    private static final long serialVersionUID = 7486164920025043585L;
+    //
     private String googleAuthUrl;
     private String googleClientId;
     private String scope;
@@ -93,16 +90,19 @@ public class OAuth2MenuBarClientTool extends MenuBarClientTool {
         this.scope = scope;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "OAuth2MenuBarClientTool [text=" + super.getText() + ", enabled=" + super.isEnabled()
-                + ", getId()=" + super.getId() + ", getOrder()=" + super.getOrder() 
-                + ", googleAuthUrl=" + getGoogleAuthUrl() + ", googleClientId=" + getGoogleClientId()
-                + ", scope=" + getScope() + "]";
+        return "OAuth2MenuBarClientTool{id=" + id
+                + ", enabled=" + enabled
+                + ", order=" + order
+                + ", text=" + text
+                + ", googleAuthUrl=" + googleAuthUrl
+                + ", googleClientId=" + googleClientId
+                + ", scope=" + scope + '}';
     }
 }

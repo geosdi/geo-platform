@@ -39,16 +39,13 @@ import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public class MenuBarClientTool extends GenericClientTool {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -3760023225532302795L;
-    private String text;
-    private boolean enabled;
+    //
+    protected String text;
 
     /**
      * @return the text
@@ -66,28 +63,15 @@ public class MenuBarClientTool extends GenericClientTool {
     }
 
     /**
-     * @return the enabled
-     */
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    /**
-     * @param enabled
-     *            the enabled to set
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    /*
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "MenuBarClientTool [text=" + text + ", enabled=" + enabled
-                + ", getId()=" + getId() + ", getOrder()=" + getOrder() + "]";
+        return "MenuBarClientTool{id=" + id
+                + ", enabled=" + enabled
+                + ", order=" + order
+                + ", text=" + text + '}';
     }
 }

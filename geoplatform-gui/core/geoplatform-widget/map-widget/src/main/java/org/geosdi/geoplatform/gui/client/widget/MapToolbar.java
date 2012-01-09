@@ -35,15 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import org.geosdi.geoplatform.gui.action.GeoPlatformButtonObserver;
-import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
-import org.geosdi.geoplatform.gui.impl.map.IGeoPlatofomMapButtonBar;
-
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 import java.util.List;
+import org.geosdi.geoplatform.gui.action.GeoPlatformButtonObserver;
+import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.toolbar.GPMapToolbarWidget;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
+import org.geosdi.geoplatform.gui.impl.map.IGeoPlatofomMapButtonBar;
 
 /**
  * @author giuseppe

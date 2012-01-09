@@ -45,13 +45,13 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
  * 
  */
 public interface GeoPlatformMap extends GeoPlatformEditor, GeoPlatformMeasure,
-        GeoPlatformFeatureInfo {
+                                        GeoPlatformFeatureInfo {
 
     public MapWidget getMapWidget();
 
     public Map getMap();
 
     public IGeoPlatofomMapButtonBar getButtonBar();
-    
+
     public void zoomToMaxExtend(BboxClientInfo bbox);
 }

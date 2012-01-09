@@ -52,24 +52,22 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class ZoomPreviousAction extends ToolbarMapAction implements
-        GeoPlatformEventHandler {
+public class ZoomPreviousAction extends ToolbarMapAction
+        implements GeoPlatformEventHandler {
 
     private GeoPlatformMap mapWidget;
     private HandlerRegistration handlerRegistration;
 
     public ZoomPreviousAction(GeoPlatformMap theMapWidget) {
-        super("Zoom Previous", Resources.ICONS.zoomPrevious());
+        super(Resources.ICONS.zoomPrevious(), "Zoom Previous");
         this.mapWidget = theMapWidget;
         this.addHandler();
     }
 
-    /*
+    /**
      * (non-Javadoc)
-     * 
-     * @see
-     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-     * .extjs.gxt.ui.client.event.ComponentEvent)
+     *
+     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(ButtonEvent ce) {

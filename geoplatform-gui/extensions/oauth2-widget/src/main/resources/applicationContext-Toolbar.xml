@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.1.xsd"
-	default-autowire="byName">
+       default-autowire="byName">
     
     <bean name="googleToolbarIcon"
-            class="org.geosdi.geoplatform.gui.configuration.IconInToolbar">
+          class="org.geosdi.geoplatform.gui.configuration.IconInToolbar">
         <property name="text" value="Not signed on Google Earth Builder" />
         <property name="order" value="200" />
         <property name="id" value="GOOGLE_ICON" />
+        <property name="enabled" value="true" />
     </bean>
     
     <bean name="googleSignOnButton"
-            class="org.geosdi.geoplatform.gui.configuration.menubar.OAuth2MenuBarClientTool">
+          class="org.geosdi.geoplatform.gui.configuration.menubar.OAuth2MenuBarClientTool">
         <property name="id" value="googleSignOnButton" />
         <property name="text" value="Google Earth Builder" />
         <property name="enabled" value="true" />

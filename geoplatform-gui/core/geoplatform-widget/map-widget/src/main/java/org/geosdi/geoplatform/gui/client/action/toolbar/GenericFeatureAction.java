@@ -53,10 +53,10 @@ public abstract class GenericFeatureAction extends ToolbarMapAction {
     protected GeoPlatformMap mapWidget;
     protected GenericFeatureOperation featureOperation;
 
-    public GenericFeatureAction(String tooltip, AbstractImagePrototype image,
-            GeoPlatformMap theMapWidget) {
-        super(tooltip, image);
-        // TODO Auto-generated constructor stub
+    public GenericFeatureAction(GeoPlatformMap theMapWidget,
+                                AbstractImagePrototype image, String tooltip) {
+        super(image, tooltip);
+
         this.mapWidget = theMapWidget;
 
         this.featureOperation = ((MapLayoutWidget) this.mapWidget).getMapControl().getFeatureOperation();

@@ -54,6 +54,13 @@ public class MediatorToolbarTreeAction {
     private static MediatorToolbarTreeAction instance = new MediatorToolbarTreeAction();
     private static boolean addLayerVisible = false;
 
+    private MediatorToolbarTreeAction() {
+    }
+
+    public static MediatorToolbarTreeAction getInstance() {
+        return instance;
+    }
+
     /**
      * @return the addLayerVisible
      */
@@ -66,13 +73,6 @@ public class MediatorToolbarTreeAction {
      */
     public void setAddLayerVisible(boolean aAddLayerVisible) {
         addLayerVisible = aAddLayerVisible;
-    }
-
-    private MediatorToolbarTreeAction() {
-    }
-
-    public static MediatorToolbarTreeAction getInstance() {
-        return instance;
     }
 
     /**

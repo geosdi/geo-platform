@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
-import org.geosdi.geoplatform.gui.action.GeoPlatformToolbarAction;
+import org.geosdi.geoplatform.gui.action.ToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
@@ -94,7 +94,7 @@ public class Geocoding implements EntryPoint {
                                   new ToolbarActionCreator() {
 
             @Override
-            public GeoPlatformToolbarAction createActionTool(
+            public ToolbarAction createActionTool(
                     GeoPlatformMap mapWidget) {
                 // TODO Auto-generated method stub
                 return new ReverseGeocodingAction(mapWidget);

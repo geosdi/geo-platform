@@ -48,9 +48,9 @@ public abstract class MapToggleAction extends ToolbarMapAction {
 
     protected GeoPlatformMap mapWidget;
 
-    public MapToggleAction(String tooltip, AbstractImagePrototype image,
-            GeoPlatformMap theMapWidget) {
-        super(tooltip, image);
+    public MapToggleAction(GeoPlatformMap theMapWidget,
+                           AbstractImagePrototype image, String tooltip) {
+        super(image, tooltip);
         this.mapWidget = theMapWidget;
     }
 

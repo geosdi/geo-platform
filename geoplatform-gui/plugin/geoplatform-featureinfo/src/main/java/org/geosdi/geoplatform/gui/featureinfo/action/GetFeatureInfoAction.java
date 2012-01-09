@@ -53,11 +53,15 @@ public class GetFeatureInfoAction extends MapToggleAction {
     private GPFeatureInfoWidget featureWidget;
 
     public GetFeatureInfoAction(GeoPlatformMap mapWidget) {
-        super("GetFeatureInfo", BasicWidgetResources.ICONS.getFeatureInfo(),
-                mapWidget);
+        super(mapWidget, BasicWidgetResources.ICONS.getFeatureInfo(), "GetFeatureInfo");
         this.featureWidget = new GPFeatureInfoWidget(mapWidget);
     }
 
+    /**
+     * (non-Javadoc)
+     *
+     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     */
     @Override
     public void componentSelected(ButtonEvent ce) {
         ToggleButton button = (ToggleButton) ce.getSource();
@@ -74,8 +78,9 @@ public class GetFeatureInfoAction extends MapToggleAction {
         }
     }
 
-
-    /* (non-Javadoc)
+    /**
+     * (non-Javadoc)
+     * 
      * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
      */
     @Override

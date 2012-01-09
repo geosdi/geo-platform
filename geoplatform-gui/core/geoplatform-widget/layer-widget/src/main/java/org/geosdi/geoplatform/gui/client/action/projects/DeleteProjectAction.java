@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
  * @email  giuseppe.lascaleia@geosdi.org
  *
  */
-public class DeleteProjectAction extends GeoPlatformAction {
+public class DeleteProjectAction extends GeoPlatformAction<ButtonEvent> {
 
     private GPProjectSearchWidget searchWidget;
 
@@ -60,22 +60,20 @@ public class DeleteProjectAction extends GeoPlatformAction {
     public void componentSelected(ButtonEvent ce) {
         if (searchWidget.isDefaultSelectedProject()) {
             GeoPlatformMessage.alertMessage("Delete Project",
-                    "Attention you could not delete Default Project.");
+                                            "Attention you could not delete Default Project.");
         } else {
             GeoPlatformMessage.confirmMessage("Delete Project",
-                    "Are you sure you want to delete the Selected Project ?",
-                    new Listener<MessageBoxEvent>() {
+                                              "Are you sure you want to delete the Selected Project ?",
+                                              new Listener<MessageBoxEvent>() {
 
-                        @Override
-                        public void handleEvent(MessageBoxEvent be) {
-                            if (be.getButtonClicked().getText().equalsIgnoreCase(
-                                    "yes")
-                                    || be.getButtonClicked().getText().equalsIgnoreCase(
-                                    "si")) {
-                                searchWidget.deleteProject();
-                            }
-                        }
-                    });
+                @Override
+                public void handleEvent(MessageBoxEvent be) {
+                    if (be.getButtonClicked().getText().equalsIgnoreCase("yes")
+                            || be.getButtonClicked().getText().equalsIgnoreCase("si")) {
+                        searchWidget.deleteProject();
+                    }
+                }
+            });
         }
     }
 }

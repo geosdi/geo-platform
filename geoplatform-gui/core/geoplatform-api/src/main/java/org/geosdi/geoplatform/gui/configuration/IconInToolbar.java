@@ -41,13 +41,9 @@ package org.geosdi.geoplatform.gui.configuration;
  *
  */
 public class IconInToolbar extends GenericClientTool {
-    
-    private static final long serialVersionUID = 1982533388514947046L;
-    
 
-    /**
-     *
-     */
+    private static final long serialVersionUID = 1982533388514947046L;
+    //
     private String text;
 
     /**
@@ -64,13 +60,16 @@ public class IconInToolbar extends GenericClientTool {
         this.text = text;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "IconInToolbar [text=" + text + ", getId()=" + getId() + "]";
+        return "IconInToolbar{id=" + id
+                + ", enabled=" + enabled
+                + ", order=" + order
+                + ", text=" + text + '}';
     }
 }

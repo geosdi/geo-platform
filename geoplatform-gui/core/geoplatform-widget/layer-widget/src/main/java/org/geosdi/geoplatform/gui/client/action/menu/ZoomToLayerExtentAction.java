@@ -22,10 +22,6 @@ public class ZoomToLayerExtentAction extends MenuAction {
     private TreePanel treePanel;
     private ZoomToExtendsEvent zoomToExtendsEvent = new ZoomToExtendsEvent();
 
-    public ZoomToLayerExtentAction() {
-        super("ZoomToLayerExtent");
-    }
-
     public ZoomToLayerExtentAction(TreePanel treePanel) {
         super("ZoomToLayerExtent");
         this.treePanel = treePanel;

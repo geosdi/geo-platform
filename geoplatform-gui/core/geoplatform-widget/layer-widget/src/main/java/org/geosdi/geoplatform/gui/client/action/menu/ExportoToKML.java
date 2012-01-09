@@ -20,10 +20,6 @@ public class ExportoToKML extends MenuAction {
 
     private TreePanel treePanel;
 
-    public ExportoToKML() {
-        super("ExportToKML");
-    }
-
     public ExportoToKML(TreePanel treePanel) {
         super("ExportToKML");
         this.treePanel = treePanel;

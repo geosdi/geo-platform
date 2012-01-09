@@ -37,18 +37,16 @@ package org.geosdi.geoplatform.gui.configuration;
 
 /**
  * @author giuseppe
- * 
+ *
  */
 public class ActionClientTool extends GenericClientTool {
 
     public static final String BUTTON = "button";
     public static final String TOGGLE = "toggle";
-    /**
-     *
-     */
+    //
     private static final long serialVersionUID = 1096150448864737345L;
+    //
     private String type;
-    private boolean enabled;
 
     /**
      * @return the type
@@ -66,28 +64,15 @@ public class ActionClientTool extends GenericClientTool {
     }
 
     /**
-     * @return the enabled
-     */
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    /**
-     * @param enabled
-     *            the enabled to set
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    /*
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "ActionClientTool [type=" + type + ", enabled=" + enabled
-                + ", getId()=" + getId() + ", getOrder()=" + getOrder() + "]";
+        return "ActionClientTool{id=" + id
+                + ", enabled=" + enabled
+                + ", order=" + order
+                + ", type=" + type + '}';
     }
 }

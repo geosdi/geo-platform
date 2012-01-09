@@ -54,8 +54,8 @@ public class DeleteElementTreeToolbarPlugin implements ITreeToolbarPlugin<Button
     @Override
     public boolean setEnabledByStatus(TreeStatusEnum status) {
         boolean condition = false;
-        if(status.equals(TreeStatusEnum.FOLDER_SELECTED)
-                || status.equals(TreeStatusEnum.RASTER_SELECTED)){
+        if (status.equals(TreeStatusEnum.FOLDER_SELECTED)
+                || status.equals(TreeStatusEnum.RASTER_SELECTED)) {
             condition = true;
         }
         button.setEnabled(condition);

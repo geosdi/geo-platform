@@ -20,10 +20,6 @@ public class ExportoToTIFF extends MenuAction {
 
     private TreePanel treePanel;
 
-    public ExportoToTIFF() {
-        super("ExportToTIFF");
-    }
-
     public ExportoToTIFF(TreePanel treePanel) {
         super("ExportToTIFF");
         this.treePanel = treePanel;
@@ -51,7 +47,6 @@ public class ExportoToTIFF extends MenuAction {
                         + "," + ((RasterTreeNode) item).getBbox().getUpperRightX()
                         + "," + ((RasterTreeNode) item).getBbox().getUpperRightY();
             }
-
 
             System.out.println(tiffUrl);
 

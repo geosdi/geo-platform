@@ -49,9 +49,14 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 public class MeasureAreaAction extends MapToggleAction {
 
     public MeasureAreaAction(GeoPlatformMap mapWidget) {
-        super("MeasureArea", Resources.ICONS.measureArea(), mapWidget);
+        super(mapWidget, Resources.ICONS.measureArea(), "MeasureArea");
     }
 
+    /**
+     * (non-Javadoc)
+     *
+     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
+     */
     @Override
     public void componentSelected(ButtonEvent ce) {
         ToggleButton button = (ToggleButton) ce.getSource();
@@ -69,7 +74,7 @@ public class MeasureAreaAction extends MapToggleAction {
 
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()

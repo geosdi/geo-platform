@@ -49,20 +49,16 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 public class ResizeAction extends ModifyFeatureAction {
 
     public ResizeAction(GeoPlatformMap mapWidget) {
-        super("Resize", Resources.ICONS.resize(), mapWidget);
-        // TODO Auto-generated constructor stub
+        super(mapWidget, Resources.ICONS.resize(), "Resize");
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-     * .extjs.gxt.ui.client.event.ComponentEvent)
+     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(ButtonEvent ce) {
-        // TODO Auto-generated method stub
         if (this.mapWidget.getButtonBar().isTogglePressed()) {
             mapWidget.getButtonBar().changeButtonState();
         }

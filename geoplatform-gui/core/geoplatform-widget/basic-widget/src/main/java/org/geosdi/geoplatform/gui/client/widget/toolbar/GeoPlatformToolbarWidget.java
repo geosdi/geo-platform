@@ -33,8 +33,6 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-
-
 package org.geosdi.geoplatform.gui.client.widget.toolbar;
 
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
@@ -47,6 +45,7 @@ import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 public abstract class GeoPlatformToolbarWidget {
 
     public static final String TOOLBAR_SEPARATOR = "ToolbarSeparator";
+    //
     protected ToolBar toolBar;
 
     public GeoPlatformToolbarWidget() {
@@ -54,5 +53,4 @@ public abstract class GeoPlatformToolbarWidget {
     }
 
     public abstract void initialize();
-
 }

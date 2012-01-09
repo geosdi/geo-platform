@@ -39,17 +39,16 @@ import java.io.Serializable;
 
 /**
  * @author giuseppe
- * 
+ *
  */
-public class GenericClientTool implements Serializable,
-        Comparable<GenericClientTool> {
+public class GenericClientTool
+        implements Serializable, Comparable<GenericClientTool> {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -379951057942018866L;
-    private String id;
-    private int order;
+    //
+    protected String id;
+    protected boolean enabled;
+    protected int order;
 
     /**
      * @return the id
@@ -67,6 +66,21 @@ public class GenericClientTool implements Serializable,
     }
 
     /**
+     * @return the enabled
+     */
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    /**
+     * @param enabled
+     *            the enabled to set
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    /**
      * @return the order
      */
     public int getOrder() {
@@ -81,16 +95,23 @@ public class GenericClientTool implements Serializable,
         this.order = order;
     }
 
-    /*
+    /**
      * (non-Javadoc)
-     *
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "GenericClientTool [id=" + id + ", order=" + order + "]";
+        return "GenericClientTool{id=" + id
+                + ", enabled=" + enabled
+                + ", order=" + order + '}';
     }
 
+    /**
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
     @Override
     public int compareTo(GenericClientTool o) {
         return getOrder() - o.getOrder();

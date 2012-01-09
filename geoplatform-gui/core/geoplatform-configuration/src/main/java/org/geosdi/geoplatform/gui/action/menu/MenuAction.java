@@ -36,20 +36,19 @@
 package org.geosdi.geoplatform.gui.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.google.gwt.event.shared.HandlerManager;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionDisabledEvent;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionEnabledEvent;
+import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- * 
+ *
  */
-public abstract class MenuAction extends SelectionListener<MenuEvent> {
+public abstract class MenuAction extends GeoPlatformAction<MenuEvent> {
 
     private String title;
-    private String id;
     private boolean enabled;
     protected HandlerManager handlerManager;
 
@@ -71,21 +70,6 @@ public abstract class MenuAction extends SelectionListener<MenuEvent> {
      */
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    /**
-     * @return the id
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            the id to set
-     */
-    public void setId(String id) {
-        this.id = id;
     }
 
     /**

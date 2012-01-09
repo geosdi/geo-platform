@@ -54,12 +54,10 @@ public class LayerMenuAction extends MenuCheckAction {
         super("Layers");
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-     * .extjs.gxt.ui.client.event.ComponentEvent)
+     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(MenuEvent ce) {

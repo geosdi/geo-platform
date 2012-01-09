@@ -48,8 +48,8 @@ import org.geosdi.geoplatform.gui.impl.map.IGeoPlatofomMapButtonBar;
  * @author giuseppe
  * 
  */
-public class MapToolbar extends GPMapToolbarWidget implements
-        IGeoPlatofomMapButtonBar {
+public class MapToolbar extends GPMapToolbarWidget
+        implements IGeoPlatofomMapButtonBar {
 
     private GeoPlatformButtonObserver buttonObserver;
 
@@ -60,7 +60,7 @@ public class MapToolbar extends GPMapToolbarWidget implements
      * @param tools  
      */
     public MapToolbar(MapLayoutWidget mapLayoutWidget,
-            List<GenericClientTool> tools) {
+                      List<GenericClientTool> tools) {
         super(mapLayoutWidget, tools);
         ((MapLayoutWidget) this.geoPlatformMap).setButtonBar(this);
         this.buttonObserver = new GeoPlatformButtonObserver();

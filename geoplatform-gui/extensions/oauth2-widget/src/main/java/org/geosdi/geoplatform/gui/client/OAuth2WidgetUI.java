@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.gui.client.action.GoogleSignOnAction;
  */
 public class OAuth2WidgetUI implements EntryPoint {
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
@@ -64,7 +64,7 @@ public class OAuth2WidgetUI implements EntryPoint {
             @Override
             public MenuAction createAction() {
                 return new GoogleSignOnAction();
-    }
+            }
         });
     }
 }

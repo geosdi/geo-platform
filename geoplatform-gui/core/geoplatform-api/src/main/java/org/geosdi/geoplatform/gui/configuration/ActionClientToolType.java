@@ -33,53 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.plugin.tree.toolbar;
-
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.client.action.toolbar.SaveTreeAction;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginManager;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
+package org.geosdi.geoplatform.gui.configuration;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class SaveTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
+public enum ActionClientToolType {
 
-    private Button button;
-
-    @Override
-    public boolean setEnabledByStatus(TreeStatusEnum status) {
-        boolean condition = button.isEnabled();
-        if (status.equals(TreeStatusEnum.SAVE_CACHE_EMPTY)) {
-            condition = false;
-            button.setEnabled(condition);
-        } else if (!TreeToolbarPluginManager.USER_VIEWER // TODO DEL conditions after manage all roles
-                && status.equals(TreeStatusEnum.SAVE_CACHE_NOT_EMPTY)) {
-            condition = true;
-            button.setEnabled(condition);
-        }
-        return condition;
-    }
-
-    @Override
-    public Button getWidget(TreePanel treePanel) {
-        if (button == null) {
-            SaveTreeAction action = new SaveTreeAction(treePanel, this);
-            button = new Button();
-            button.setToolTip(action.getTooltip());
-            button.setIcon(action.getImage());
-            button.addSelectionListener(action);
-            this.button.setEnabled(false);
-        }
-        return button;
-    }
-
-    @Override
-    public TreeToolbarRegion getRegion() {
-        return TreeToolbarRegion.MIDDLE_REGION;
-    }
+    BUTTON, TOGGLE;
 }

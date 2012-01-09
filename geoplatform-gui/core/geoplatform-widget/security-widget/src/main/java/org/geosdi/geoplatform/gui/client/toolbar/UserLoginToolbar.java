@@ -152,10 +152,4 @@
 //        this.toolBar.add(button);
 //    }
 //
-//    /**
-//     * @return the toolBar
-//     */
-//    public ToolBar getToolBar() {
-//        return toolBar;
-//    }
 //}

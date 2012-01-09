@@ -40,7 +40,6 @@ import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
-import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import java.util.Collections;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.ToolbarAction;
@@ -59,6 +58,7 @@ import org.geosdi.geoplatform.gui.client.widget.map.GPIconWidgetComponent;
 import org.geosdi.geoplatform.gui.client.widget.menu.MenuUtilityBuilder;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.GeoPlatformToolbarWidget;
 import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
+import org.geosdi.geoplatform.gui.configuration.ActionClientToolType;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
 import org.geosdi.geoplatform.gui.configuration.IconInToolbar;
 import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
@@ -79,7 +79,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
     private List<GenericClientTool> tools;
 
     public GPMapToolbarWidget(GeoPlatformMap geoPlatformMap,
-            List<GenericClientTool> tools) {
+                              List<GenericClientTool> tools) {
         this.geoPlatformMap = geoPlatformMap;
         setTools(tools);
         initialize();
@@ -114,14 +114,15 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
                     }
 
                     if (action instanceof ToolbarMapAction) {
-                        if (((ActionClientTool) tool).getType().equals(ActionClientTool.TOGGLE)) {
+                        if (((ActionClientTool) tool).getType() == ActionClientToolType.TOGGLE) {
                             this.addMapToggleButton((ToolbarMapAction) action);
                         } else {
                             this.addMapButton((ToolbarMapAction) action);
                         }
                     }
 
-                    action.setEnabled(((ActionClientTool) tool).isEnabled());
+                    action.setEnabled(tool.isEnabled());
+
 //                action.setEnabled(GPUserGuiComponents.getInstance().getPermissionForComponent(
 //                        id));
                 }
@@ -136,7 +137,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
      * @param action  
      */
     public void addMenuButton(MenuClientTool tool,
-            ToolbarApplicationAction action) {
+                              ToolbarApplicationAction action) {
 //        if (GPUserGuiComponents.getInstance().hasComponentPermission(
 //                tool.getId())) {
         Button button = new Button();
@@ -173,10 +174,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
      * Add a Vertical Line in the Toolbar
      */
     public void addSeparator() {
-//        if (GPUserGuiComponents.getInstance().hasComponentPermission(
-//                TOOLBAR_SEPARATOR)) {
         this.toolBar.add(new SeparatorToolItem());
-//        }
     }
 
     /**
@@ -291,13 +289,6 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
 
         this.toolBar.add(button);
 //        }
-    }
-
-    /**
-     * @return the toolBar
-     */
-    public ToolBar getToolBar() {
-        return toolBar;
     }
 
     /**

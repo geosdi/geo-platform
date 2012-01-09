@@ -39,7 +39,6 @@ package org.geosdi.geoplatform.core.acl.dao;
 
 import java.util.List;
 
-import org.geosdi.geoplatform.core.acl.AclClass;
 import org.geosdi.geoplatform.core.acl.GuiComponent;
 
 /**

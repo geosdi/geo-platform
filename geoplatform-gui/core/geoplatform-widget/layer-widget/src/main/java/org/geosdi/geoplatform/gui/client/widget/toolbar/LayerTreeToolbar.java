@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.widget.toolbar;
 
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
-import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.toolbar.GPTreeToolbar;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
@@ -94,12 +93,5 @@ public class LayerTreeToolbar extends GPTreeToolbar {
      */
     public void addSeparator() {
         this.toolBar.add(new SeparatorToolItem());
-    }
-
-    /**
-     * @return the toolBar
-     */
-    public ToolBar getToolBar() {
-        return toolBar;
     }
 }

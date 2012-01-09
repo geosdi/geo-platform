@@ -66,7 +66,7 @@ public class LayerWidgetUI implements EntryPoint {
 
     private Dispatcher dispatcher;
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
@@ -101,7 +101,6 @@ public class LayerWidgetUI implements EntryPoint {
             }
         });
 
-
     }
 
     private void addTreeToolbarComponents() {
@@ -113,7 +112,7 @@ public class LayerWidgetUI implements EntryPoint {
         //No entrypoint in print module then I declared here the plugin
         TreeToolbarPluginManager.addToolBarPlugin(new PrintLayersTreeToolbarPlugin());
 //        TreeToolbarPluginManager.addToolBarPlugin(new GetMapTreeToolbarPlugin());
-        
+
         AddLayerPluginManager.addWindowPlugin(new AddRasterLayerPlugin());
         AddLayerPluginManager.addWindowPlugin(new AddVectorLayerPlugin());
         AddLayerPluginManager.addWindowPlugin(new GetMapLayerPlugin());

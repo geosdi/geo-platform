@@ -52,5 +52,12 @@ public abstract class GeoPlatformToolbarWidget {
         this.toolBar = new ToolBar();
     }
 
+    /**
+     * @return the toolBar
+     */
+    public ToolBar getToolBar() {
+        return toolBar;
+    }
+
     public abstract void initialize();
 }

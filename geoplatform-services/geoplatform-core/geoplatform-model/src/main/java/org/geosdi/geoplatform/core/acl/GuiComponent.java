@@ -44,7 +44,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -62,7 +61,7 @@ public class GuiComponent {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GUI_COMPONENT_SEQ")
     @SequenceGenerator(name = "GUI_COMPONENT_SEQ", sequenceName = "GUI_COMPONENT_SEQ")
     private Long id;
-    // The ID (string ype) of the GUI Component
+    // The ID (string type) of the GUI Component
     @Column(name = "component_id", nullable = false, unique = true)
     private String componentId;
 
@@ -103,7 +102,7 @@ public class GuiComponent {
         this.componentId = componentId;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

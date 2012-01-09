@@ -60,7 +60,8 @@ import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
  * @email  michele.santomauro@geosdi.org
  *
  */
-public class GoogleSignOnAction extends OAuth2MenuBaseAction implements IGPOAuth2GEBLoginHandler {
+public class GoogleSignOnAction extends OAuth2MenuBaseAction
+        implements IGPOAuth2GEBLoginHandler {
 
     private String type;
 
@@ -80,8 +81,8 @@ public class GoogleSignOnAction extends OAuth2MenuBaseAction implements IGPOAuth
         this.type = theType;
 
         AuthRequest request = new AuthRequest(super.getGoogleAuthUrl(),
-                super.getGoogleClientId()).withScopes(super.getScope());
-        
+                                              super.getGoogleClientId()).withScopes(super.getScope());
+
         Auth auth = Auth.get();
         auth.login(request, new Callback<String, Throwable>() {
 
@@ -94,8 +95,8 @@ public class GoogleSignOnAction extends OAuth2MenuBaseAction implements IGPOAuth
 
                 WidgetPropertiesHandlerManager.fireEvent(new GPToolbarIconGEBLoginWidgetEvent("Signed on Google Earth Builder"));
                 LayoutManager.getInstance().getStatusMap().setStatus(
-                                        "Signed on Google Earth Builder",
-                                        EnumSearchStatus.STATUS_SEARCH.toString());
+                        "Signed on Google Earth Builder",
+                        EnumSearchStatus.STATUS_SEARCH.toString());
 
                 if (type.equals(EnumOAuth2.LOAD_CAPABILITIES.getValue())) {
                     OAuth2HandlerManager.fireEvent(new GPOAuth2CapabilitiesEvent());
@@ -108,13 +109,13 @@ public class GoogleSignOnAction extends OAuth2MenuBaseAction implements IGPOAuth
             public void onFailure(Throwable caught) {
                 setImage(OAuth2Resources.ICONS.googleSignOnWhite());
                 setEnabled(true);
-                
+
                 WidgetPropertiesHandlerManager.fireEvent(new GPToolbarIconGEBLogoutWidgetEvent("Not signed on Google Earth Builder"));
-                
+
                 GeoPlatformMessage.errorMessage("Sign on Google Earth Builder error", caught.getMessage());
                 LayoutManager.getInstance().getStatusMap().setStatus(
-                                        "Sign on Google Earth Builder error",
-                                        EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                        "Sign on Google Earth Builder error",
+                        EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
             }
         });
     }

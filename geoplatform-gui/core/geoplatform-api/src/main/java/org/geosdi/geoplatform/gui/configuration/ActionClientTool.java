@@ -41,17 +41,14 @@ package org.geosdi.geoplatform.gui.configuration;
  */
 public class ActionClientTool extends GenericClientTool {
 
-    public static final String BUTTON = "button";
-    public static final String TOGGLE = "toggle";
-    //
     private static final long serialVersionUID = 1096150448864737345L;
     //
-    private String type;
+    private ActionClientToolType type;
 
     /**
      * @return the type
      */
-    public String getType() {
+    public ActionClientToolType getType() {
         return type;
     }
 
@@ -59,7 +56,7 @@ public class ActionClientTool extends GenericClientTool {
      * @param type
      *            the type to set
      */
-    public void setType(String type) {
+    public void setType(ActionClientToolType type) {
         this.type = type;
     }
 

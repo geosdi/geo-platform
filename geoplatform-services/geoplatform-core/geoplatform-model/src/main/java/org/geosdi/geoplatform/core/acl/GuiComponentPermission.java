@@ -64,7 +64,7 @@ public class GuiComponentPermission implements Permission {
         this.code = code;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see org.acegisecurity.acls#getMask()
@@ -74,11 +74,11 @@ public class GuiComponentPermission implements Permission {
         return this.mask;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see org.acegisecurity.acls#getPattern()
-     */    
+     */
     @Override
     public String getPattern() {
         return AclFormattingUtils.printBinary(mask, code);

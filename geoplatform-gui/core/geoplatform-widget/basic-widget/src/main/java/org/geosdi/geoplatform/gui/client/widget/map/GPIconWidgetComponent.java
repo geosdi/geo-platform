@@ -47,7 +47,8 @@ import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerMana
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPIconWidgetComponent extends GPAbstractWidgetComponent implements IGPToolbarIconWidgetHandler {
+public class GPIconWidgetComponent extends GPAbstractWidgetComponent
+        implements IGPToolbarIconWidgetHandler {
 
     public GPIconWidgetComponent(ToolBar theToolBar) {
         super.parent = theToolBar;
@@ -67,7 +68,8 @@ public class GPIconWidgetComponent extends GPAbstractWidgetComponent implements 
         int index = toolbar.indexOf(component);
         toolbar.remove(component);
 
-        toolbar.insert(createWidgetComponent(BasicWidgetResources.ICONS.googleGreen().createImage(), tooltip), index);
+        Image icon = BasicWidgetResources.ICONS.googleGreen().createImage();
+        toolbar.insert(createWidgetComponent(icon, tooltip), index);
     }
 
     @Override
@@ -76,6 +78,7 @@ public class GPIconWidgetComponent extends GPAbstractWidgetComponent implements 
         int index = toolbar.indexOf(component);
         toolbar.remove(component);
 
-        toolbar.insert(createWidgetComponent(BasicWidgetResources.ICONS.googleWhite().createImage(), tooltip), index);
+        Image icon = BasicWidgetResources.ICONS.googleWhite().createImage();
+        toolbar.insert(createWidgetComponent(icon, tooltip), index);
     }
 }

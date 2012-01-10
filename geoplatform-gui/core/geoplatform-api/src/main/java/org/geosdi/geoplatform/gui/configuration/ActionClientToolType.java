@@ -41,5 +41,5 @@ package org.geosdi.geoplatform.gui.configuration;
  */
 public enum ActionClientToolType {
 
-    BUTTON, TOGGLE;
+    BUTTON, TOGGLE, APPLICATION_BUTTON;
 }

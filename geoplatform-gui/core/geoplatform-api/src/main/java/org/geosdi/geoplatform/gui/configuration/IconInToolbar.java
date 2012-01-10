@@ -72,4 +72,10 @@ public class IconInToolbar extends GenericClientTool {
                 + ", order=" + order
                 + ", text=" + text + '}';
     }
+
+    @Override
+    public void buildTool(IGeoPlatformToolbarWidget toolbar) {
+        toolbar.addGoogleIcon(this);
+        toolbar.addSeparator();
+    }
 }

@@ -58,22 +58,21 @@ import org.geosdi.geoplatform.gui.client.widget.map.GPIconWidgetComponent;
 import org.geosdi.geoplatform.gui.client.widget.menu.MenuUtilityBuilder;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.GeoPlatformToolbarWidget;
 import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
-import org.geosdi.geoplatform.gui.configuration.ActionClientToolType;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
+import org.geosdi.geoplatform.gui.configuration.IGeoPlatformToolbarWidget;
 import org.geosdi.geoplatform.gui.configuration.IconInToolbar;
 import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.MenuInToolBar;
 import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-import org.geosdi.geoplatform.gui.utility.GoogleLoginEnum;
-import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
+public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
+        implements IGeoPlatformToolbarWidget {
 
     protected GeoPlatformMap geoPlatformMap;
     private List<GenericClientTool> tools;
@@ -88,70 +87,113 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
     @Override
     public void initialize() {
         for (GenericClientTool tool : tools) {
-            String id = tool.getId();
-            
             tool.buildTool(this);
-
-            if (id.equals(TOOLBAR_SEPARATOR)) {
-                this.addSeparator();
-            } else if (tool instanceof MenuClientTool) {
-                this.addMenuButton((MenuClientTool) tool,
-                                   (ToolbarApplicationAction) ToolbarActionRegistar.get(
-                        id, geoPlatformMap));
-            } else if (tool instanceof IconInToolbar && ((IconInToolbar) tool).getId().equals(
-                    GoogleLoginEnum.GOOGLE_ICON.toString())) {
-                this.addGoogleIcon((IconInToolbar) tool);
-                this.addSeparator();
-            } else if (tool instanceof MenuInToolBar && ((MenuInToolBar) tool).getId().equals(
-                    UserLoginEnum.USER_MENU.toString())) {
-                this.addUserLoginMenu((MenuInToolBar) tool);
-            } else {
-                ToolbarAction action = ToolbarActionRegistar.get(id, geoPlatformMap);
-
-                if (action != null) {
-                    action.setId(id);
-
-                    if (action instanceof ToolbarApplicationAction) {
-                        this.addApplicationButton((ToolbarApplicationAction) action);
-                    }
-
-                    if (action instanceof ToolbarMapAction) {
-                        if (((ActionClientTool) tool).getType() == ActionClientToolType.TOGGLE) {
-                            this.addMapToggleButton((ToolbarMapAction) action);
-                        } else {
-                            this.addMapButton((ToolbarMapAction) action);
-                        }
-                    }
-
-                    action.setEnabled(tool.isEnabled());
-
-//                action.setEnabled(GPUserGuiComponents.getInstance().getPermissionForComponent(
-//                        id));
-                }
-            }
         }
+    }
+
+    /**
+     * Add a Vertical Line in the Toolbar
+     */
+    @Override
+    public void addSeparator() {
+        this.toolBar.add(new SeparatorToolItem());
+    }
+
+    /**
+     * Add a new Application Button to the Toolbar. An Application Button is a
+     * kind of button that configure a particular action for the Application.
+     *
+     * @param tool component UI binded at the action
+     */
+    @Override
+    public void addApplicationButton(ActionClientTool tool) {
+        ToolbarApplicationAction action = (ToolbarApplicationAction) this.getAction(tool.getId());
+
+        final Button button = new Button();
+        button.setText(action.getButtonName());
+        this.prepareButton(button, action, tool);
+
+        this.toolBar.add(button);
+    }
+
+    /**
+     * Add a new Map Button to the Toolbar. A Map Button is a kind of button
+     * that interacts with the map.
+     *
+     * @param tool component UI binded at the action
+     */
+    @Override
+    public void addMapButton(ActionClientTool tool) {
+        ToolbarMapAction action = (ToolbarMapAction) this.getAction(tool.getId());
+
+        final GeoPlatformButton button = new GeoPlatformButton();
+        button.setAction(action);
+        this.prepareButton(button, action, tool);
+
+        this.checkPermission(action);
+
+        this.toolBar.add(button);
+    }
+
+    /**
+     * Add a new Map ToggleButton to the Toolbar. A Map ToggleButton is a kind
+     * of button that interacts with the map.
+     *
+     * @param tool component UI binded at the action
+     */
+    @Override
+    public void addMapToggleButton(ActionClientTool tool) {
+        ToolbarMapAction action = (ToolbarMapAction) this.getAction(tool.getId());
+
+        final GeoPlatformToggleButton button = new GeoPlatformToggleButton();
+        button.setAction(action);
+        this.prepareButton(button, action, tool);
+
+        this.checkPermission(action);
+
+        this.toolBar.add(button);
+    }
+
+    @Override
+    public void addGoogleIcon(IconInToolbar tool) {
+        GPIconWidgetComponent widgetIcon = new GPIconWidgetComponent(this.toolBar);
+
+        this.toolBar.add(new FillToolItem());
+        this.toolBar.add(widgetIcon.createWidgetComponent(BasicWidgetResources.ICONS.googleWhite().createImage(),
+                                                          tool.getText()));
+    }
+
+    @Override
+    public void addMenuInToolBar(MenuInToolBar tool) {
+        Button buttonItem = new Button(
+                GPUserGuiComponents.getInstance().getUserName());
+        buttonItem.setIcon(BasicWidgetResources.ICONS.logged_user());
+        buttonItem.setId(tool.getId());
+
+        Menu menu = new Menu();
+        MenuUtilityBuilder.buildTools(menu, tool.getTools());
+        buttonItem.setMenu(menu);
+
+        this.toolBar.add(buttonItem);
     }
 
     /**
      * Create a Button with a Menu
      *
-     * @param tool
-     * @param action  
+     * @param tool component UI binded at the action
      */
-    public void addMenuButton(MenuClientTool tool,
-                              ToolbarApplicationAction action) {
-//        if (GPUserGuiComponents.getInstance().hasComponentPermission(
-//                tool.getId())) {
+    public void addMenuButton(MenuClientTool tool) {
+        ToolbarAction action = this.getAction(tool.getId());
+
         Button button = new Button();
         button.setId(tool.getId());
-        button.setText(action.getButtonName());
+//        button.setText(action.getButtonName());
         button.setIcon(action.getImage());
         button.setEnabled(tool.isEnabled());
 
-        button.setMenu(createMenu(tool.getActionTools()));
+        button.setMenu(this.createMenu(tool.getActionTools()));
 
         toolBar.add(button);
-//        }
     }
 
     /**
@@ -164,6 +206,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
         for (ActionClientTool actionTool : actionTools) {
             MenuBaseAction action = (MenuBaseAction) MenuActionRegistar.get(
                     actionTool.getId());
+
             MenuItem item = new MenuItem(action.getTitle());
             item.addSelectionListener(action);
             item.setIcon(action.getImage());
@@ -173,23 +216,28 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
     }
 
     /**
-     * Add a Vertical Line in the Toolbar
+     * Retrieve the action from Register component 
+     * 
+     * @param id
+     * @return action
      */
-    public void addSeparator() {
-        this.toolBar.add(new SeparatorToolItem());
+    private ToolbarAction getAction(String id) {
+        ToolbarAction action = ToolbarActionRegistar.get(id, geoPlatformMap);
+        if (action == null) {
+            throw new NullPointerException("The action with ID " + id + " is non existent");
+        }
+        return action;
     }
 
-    /**
-     * Add a new Map Button to the Toolbar. A Map Button is a kind of button
-     * that interacts with the map.
-     *
-     * @param action
-     */
-    public void addMapButton(ToolbarMapAction action) {
-//        if (GPUserGuiComponents.getInstance().hasComponentPermission(
-//                action.getId())) {
-        final GeoPlatformButton button = new GeoPlatformButton();
-        button.setAction(action);
+    // TODO
+    private void checkPermission(ToolbarAction action) {
+//        if (GPUserGuiComponents.getInstance().
+//                hasComponentPermission(action.getId())) {
+//        }
+    }
+
+    private void prepareButton(final Button button, ToolbarAction action,
+                               GenericClientTool tool) {
         button.setId(action.getId());
         button.setToolTip(action.getTooltip());
         button.setIcon(action.getImage());
@@ -208,89 +256,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
             }
         });
 
-        this.toolBar.add(button);
-//        }
-    }
-
-    private void addGoogleIcon(IconInToolbar icon) {
-        GPIconWidgetComponent widgetIcon = new GPIconWidgetComponent(this.toolBar);
-
-        this.toolBar.add(new FillToolItem());
-        this.toolBar.add(widgetIcon.createWidgetComponent(BasicWidgetResources.ICONS.googleWhite().createImage(),
-                                                          icon.getText()));
-    }
-
-    private void addUserLoginMenu(MenuInToolBar menuInToolBar) {
-        Button buttonItem = new Button(
-                GPUserGuiComponents.getInstance().getUserName());
-        buttonItem.setIcon(BasicWidgetResources.ICONS.logged_user());
-        buttonItem.setId(menuInToolBar.getId());
-        Menu menu = new Menu();
-        MenuUtilityBuilder.buildTools(menu, menuInToolBar.getTools());
-        buttonItem.setMenu(menu);
-        this.toolBar.add(buttonItem);
-    }
-
-    /**
-     * Add a new Application Button to the Toolbar. An Application Button is a
-     * kind of button that configure a particular action for the Application.
-     *
-     * @param action
-     */
-    public void addApplicationButton(ToolbarApplicationAction action) {
-        final Button button = new Button();
-        button.setId(action.getId());
-        button.setText(action.getButtonName());
-        button.setIcon(action.getImage());
-        button.addSelectionListener(action);
-
-        action.addActionHandler(new ActionHandler() {
-
-            @Override
-            public void onActionEnabled(ActionEnabledEvent event) {
-                button.setEnabled(true);
-            }
-
-            @Override
-            public void onActionDisabled(ActionDisabledEvent event) {
-                button.setEnabled(false);
-            }
-        });
-
-        this.toolBar.add(button);
-    }
-
-    /**
-     * Add a new Map ToggleButton to the Toolbar. A Map ToggleButton is a kind
-     * of button that interacts with the map.
-     *
-     * @param action
-     */
-    public void addMapToggleButton(ToolbarMapAction action) {
-//        if (GPUserGuiComponents.getInstance().hasComponentPermission(
-//                action.getId())) {
-        final GeoPlatformToggleButton button = new GeoPlatformToggleButton();
-        button.setAction(action);
-        button.setId(action.getId());
-        button.setToolTip(action.getTooltip());
-        button.setIcon(action.getImage());
-        button.addSelectionListener(action);
-
-        action.addActionHandler(new ActionHandler() {
-
-            @Override
-            public void onActionEnabled(ActionEnabledEvent event) {
-                button.setEnabled(true);
-            }
-
-            @Override
-            public void onActionDisabled(ActionDisabledEvent event) {
-                button.setEnabled(false);
-            }
-        });
-
-        this.toolBar.add(button);
-//        }
+        action.setEnabled(tool.isEnabled());
     }
 
     /**

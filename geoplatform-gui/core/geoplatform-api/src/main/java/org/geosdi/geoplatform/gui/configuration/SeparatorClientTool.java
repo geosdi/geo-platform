@@ -35,26 +35,23 @@
  */
 package org.geosdi.geoplatform.gui.configuration;
 
-import org.geosdi.geoplatform.gui.configuration.menubar.MenuInToolBar;
-
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface IGeoPlatformToolbarWidget {
+public class SeparatorClientTool extends GenericClientTool {
 
-    void addSeparator();
+    private static final long serialVersionUID = 833485478615943744L;
+    //
+    public static final String TOOLBAR_SEPARATOR = "ToolbarSeparator";
 
-    void addApplicationButton(ActionClientTool tool);
+    public SeparatorClientTool() {
+        this.id = TOOLBAR_SEPARATOR;
+        this.enabled = true;
+    }
 
-    void addMapButton(ActionClientTool tool);
-
-    void addMapToggleButton(ActionClientTool tool);
-
-    void addGoogleIcon(IconInToolbar tool);
-
-    void addMenuInToolBar(MenuInToolBar tool);
-
-    void addMenuButton(MenuClientTool tool);
+    @Override
+    public void buildTool(IGeoPlatformToolbarWidget toolbar) {
+        toolbar.addSeparator();
+    }
 }

@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.widget.map;
 
 import com.extjs.gxt.ui.client.widget.WidgetComponent;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import org.geosdi.geoplatform.gui.puregwt.properties.IGPComponentWidgetHandler;
 
@@ -44,8 +43,9 @@ import org.geosdi.geoplatform.gui.puregwt.properties.IGPComponentWidgetHandler;
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public abstract class GPAbstractWidgetComponent<T extends Widget> implements IGPComponentWidgetHandler {
-    
+public abstract class GPAbstractWidgetComponent<T extends Widget>
+        implements IGPComponentWidgetHandler {
+
     protected T parent;
     protected WidgetComponent component;
 }

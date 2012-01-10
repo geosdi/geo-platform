@@ -41,7 +41,7 @@ import java.io.Serializable;
  * @author giuseppe
  *
  */
-public class GenericClientTool
+public abstract class GenericClientTool
         implements Serializable, Comparable<GenericClientTool> {
 
     private static final long serialVersionUID = -379951057942018866L;
@@ -116,8 +116,11 @@ public class GenericClientTool
     public int compareTo(GenericClientTool o) {
         return getOrder() - o.getOrder();
     }
-    
-    public void buildTool(IGeoPlatformToolbarWidget toolbar) {
-        System.out.println("EXECUTE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-    }
+
+    /**
+     * Each component will be added into toolbar itself
+     * 
+     * @param toolbar 
+     */
+    public abstract void buildTool(IGeoPlatformToolbarWidget toolbar);
 }

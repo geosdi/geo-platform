@@ -72,4 +72,15 @@ public class ActionClientTool extends GenericClientTool {
                 + ", order=" + order
                 + ", type=" + type + '}';
     }
+
+    @Override
+    public void buildTool(IGeoPlatformToolbarWidget toolbar) {
+        if (type == ActionClientToolType.BUTTON) {
+            toolbar.addMapButton(this);
+        } else if (type == ActionClientToolType.TOGGLE) {
+            toolbar.addMapToggleButton(this);
+        } else if (type == ActionClientToolType.APPLICATION_BUTTON) {
+            toolbar.addApplicationButton(this);
+        }
+    }
 }

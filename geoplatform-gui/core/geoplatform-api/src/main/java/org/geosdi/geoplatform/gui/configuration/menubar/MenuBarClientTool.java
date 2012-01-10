@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.configuration.menubar;
 
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
+import org.geosdi.geoplatform.gui.configuration.IGeoPlatformToolbarWidget;
 
 /**
  * @author giuseppe
@@ -73,5 +74,10 @@ public class MenuBarClientTool extends GenericClientTool {
                 + ", enabled=" + enabled
                 + ", order=" + order
                 + ", text=" + text + '}';
+    }
+
+    @Override
+    public void buildTool(IGeoPlatformToolbarWidget toolbar) {
+        // TODO
     }
 }

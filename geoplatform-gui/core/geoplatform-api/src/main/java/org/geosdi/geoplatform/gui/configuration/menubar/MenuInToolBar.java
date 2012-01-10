@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.configuration.menubar;
 import java.util.Collections;
 import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
+import org.geosdi.geoplatform.gui.configuration.IGeoPlatformToolbarWidget;
 
 /**
  * @author giuseppe
@@ -92,5 +93,10 @@ public class MenuInToolBar extends GenericClientTool {
                 + ", enabled=" + enabled
                 + ", order=" + order
                 + ", text=" + text + '}';
+    }
+
+    @Override
+    public void buildTool(IGeoPlatformToolbarWidget toolbar) {
+        toolbar.addMenuInToolBar(this);
     }
 }

@@ -63,4 +63,9 @@ public class MenuClientTool extends GenericClientTool {
         Collections.sort(actionTools);
         this.actionTools = actionTools;
     }
+
+    @Override
+    public void buildTool(IGeoPlatformToolbarWidget toolbar) {
+        toolbar.addMenuButton(this);
+    }
 }

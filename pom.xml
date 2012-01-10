@@ -1304,7 +1304,7 @@
         
         <jasypt-version>1.8</jasypt-version>
         
-        <guava-version>10.0.1</guava-version>
+        <guava-version>11.0.1</guava-version>
         
         <ehcache-version>2.5.0</ehcache-version>
         

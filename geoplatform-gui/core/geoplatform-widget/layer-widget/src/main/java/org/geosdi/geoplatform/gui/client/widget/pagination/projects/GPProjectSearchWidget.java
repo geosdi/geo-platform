@@ -69,7 +69,6 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
 
     private GPDefaultProjectTreeEvent defaultProjectEvent = new GPDefaultProjectTreeEvent();
     private GPDefaultProjectSelector selector;
-    private GPProjectAction action;
     private Button deleteButton;
     private Button editButton;
 
@@ -84,13 +83,13 @@ public class GPProjectSearchWidget extends GPListViewSearchWidget<GPClientProjec
         selectButton.setText("Open Project");
         super.search.setFieldLabel("Find Project");
 
-        this.action = new GPProjectAction(this);
+        GPProjectAction action = new GPProjectAction(this);
 
         super.addButton(1, new Button("Add", LayerResources.ICONS.projectAdd(),
-                this.action));
+                action));
 
         this.editButton = new Button("Edit", BasicWidgetResources.ICONS.edit(),
-                this.action);
+                action);
 
         this.editButton.disable();
 

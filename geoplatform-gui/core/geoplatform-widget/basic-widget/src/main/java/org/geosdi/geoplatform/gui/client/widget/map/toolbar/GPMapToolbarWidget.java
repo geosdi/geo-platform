@@ -89,6 +89,8 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget {
     public void initialize() {
         for (GenericClientTool tool : tools) {
             String id = tool.getId();
+            
+            tool.buildTool(this);
 
             if (id.equals(TOOLBAR_SEPARATOR)) {
                 this.addSeparator();

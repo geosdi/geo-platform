@@ -36,13 +36,15 @@
 package org.geosdi.geoplatform.gui.client.widget.toolbar;
 
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
+import org.geosdi.geoplatform.gui.configuration.IGeoPlatformToolbarWidget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformToolbarWidget {
+public abstract class GeoPlatformToolbarWidget
+        implements IGeoPlatformToolbarWidget {
 
     public static final String TOOLBAR_SEPARATOR = "ToolbarSeparator";
     //

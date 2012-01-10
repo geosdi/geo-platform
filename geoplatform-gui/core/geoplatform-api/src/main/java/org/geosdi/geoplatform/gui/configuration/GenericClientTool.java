@@ -116,4 +116,8 @@ public class GenericClientTool
     public int compareTo(GenericClientTool o) {
         return getOrder() - o.getOrder();
     }
+    
+    public void buildTool(IGeoPlatformToolbarWidget toolbar) {
+        System.out.println("EXECUTE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    }
 }

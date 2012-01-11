@@ -75,7 +75,7 @@ public class GeoPlatformOXMTest extends AbstractDependencyInjectionSpringContext
         String castorFile = "target/castor.xml";
         castor.saveXML(message, castorFile);
 
-        ClassToXMLMap castorMap = castor.loadXML(castorFile);
+        ClassToXMLMap castorMap = (ClassToXMLMap) castor.loadXML(castorFile);
         assertNotNull(castorMap);
 
         logger.info("CASTOR BEAN  ******************** " + castorMap);
@@ -87,7 +87,7 @@ public class GeoPlatformOXMTest extends AbstractDependencyInjectionSpringContext
         String jaxbFile = "target/jaxb.xml";
         jax.saveXML(message, jaxbFile);
 
-        ClassToXMLMap jaxbMap = jax.loadXML(jaxbFile);
+        ClassToXMLMap jaxbMap = (ClassToXMLMap) jax.loadXML(jaxbFile);
         assertNotNull(jaxbMap);
 
         logger.info("JAX BEAN ***************** " + jaxbMap);
@@ -98,7 +98,7 @@ public class GeoPlatformOXMTest extends AbstractDependencyInjectionSpringContext
         String xtreamFile = "target/xtream.xml";
         xtream.saveXML(message, xtreamFile);
 
-        ClassToXMLMap xstreamMap = xtream.loadXML(xtreamFile);
+        ClassToXMLMap xstreamMap = (ClassToXMLMap) xtream.loadXML(xtreamFile);
         assertNotNull(xtream.loadXML(xtreamFile));
 
         logger.info("XSTREAM BEAN *************** " + xstreamMap);

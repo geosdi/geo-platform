@@ -71,7 +71,7 @@ public class GeoPlatformMarshall {
         this.unmarshaller = unmarshaller;
     }
 
-    public void saveXML(ClassToXMLMap message, String fileName)
+    public void saveXML(Object message, String fileName)
             throws IOException {
         FileOutputStream fos = null;
         try {
@@ -84,7 +84,7 @@ public class GeoPlatformMarshall {
         }
     }
 
-    public ClassToXMLMap loadXML(String fileName) throws IOException {
+    public Object loadXML(String fileName) throws IOException {
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(fileName);

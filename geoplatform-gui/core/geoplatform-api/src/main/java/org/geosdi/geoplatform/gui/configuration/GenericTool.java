@@ -35,56 +35,85 @@
  */
 package org.geosdi.geoplatform.gui.configuration;
 
+import java.io.Serializable;
+
 /**
  * @author giuseppe
  *
  */
-public class ActionClientTool extends GenericClientTool {
+public abstract class GenericTool
+        implements Serializable, Comparable<GenericTool> {
 
-    private static final long serialVersionUID = 1096150448864737345L;
+    private static final long serialVersionUID = -379951057942018866L;
     //
-    private ActionClientToolType type;
+    protected String id;
+    protected boolean enabled;
+    protected int order;
 
     /**
-     * @return the type
+     * @return the id
      */
-    public ActionClientToolType getType() {
-        return type;
+    public String getId() {
+        return id;
     }
 
     /**
-     * @param type
-     *            the type to set
+     * @param id
+     *            the id to set
      */
-    public void setType(ActionClientToolType type) {
-        this.type = type;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the enabled
+     */
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    /**
+     * @param enabled
+     *            the enabled to set
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    /**
+     * @return the order
+     */
+    public int getOrder() {
+        return order;
+    }
+
+    /**
+     * @param order
+     *            the order to set
+     */
+    public void setOrder(int order) {
+        this.order = order;
     }
 
     /**
      * (non-Javadoc)
-     *
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "ActionClientTool{id=" + id
+        return "id=" + id
                 + ", enabled=" + enabled
-                + ", order=" + order
-                + ", type=" + type + '}';
+                + ", order=" + order;
     }
 
+    /**
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
     @Override
-    public void buildTool(IGeoPlatformToolbarWidget toolbar) {
-        switch (type) {
-            case BUTTON:
-                toolbar.addMapButton(this);
-                break;
-            case TOGGLE:
-                toolbar.addMapToggleButton(this);
-                break;
-            case APPLICATION_BUTTON:
-                toolbar.addApplicationButton(this);
-                break;
-        }
+    public int compareTo(GenericTool o) {
+        return getOrder() - o.getOrder();
     }
 }

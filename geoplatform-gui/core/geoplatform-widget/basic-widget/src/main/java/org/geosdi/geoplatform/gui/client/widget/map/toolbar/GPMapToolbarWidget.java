@@ -55,14 +55,14 @@ import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.map.GPIconWidgetComponent;
-import org.geosdi.geoplatform.gui.client.widget.menu.MenuUtilityBuilder;
+import org.geosdi.geoplatform.gui.client.widget.menu.MenuUtility;
 import org.geosdi.geoplatform.gui.client.widget.toolbar.GeoPlatformToolbarWidget;
-import org.geosdi.geoplatform.gui.configuration.ActionClientTool;
-import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
-import org.geosdi.geoplatform.gui.configuration.IGeoPlatformToolbarWidget;
-import org.geosdi.geoplatform.gui.configuration.IconInToolbar;
+import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool;
+import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
+import org.geosdi.geoplatform.gui.configuration.toolbar.IGeoPlatformToolbar;
+import org.geosdi.geoplatform.gui.configuration.toolbar.IconInToolbar;
 import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
-import org.geosdi.geoplatform.gui.configuration.menubar.MenuInToolBar;
+import org.geosdi.geoplatform.gui.configuration.toolbar.MenuInToolBar;
 import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
@@ -72,13 +72,13 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
-        implements IGeoPlatformToolbarWidget {
+        implements IGeoPlatformToolbar {
 
     protected GeoPlatformMap geoPlatformMap;
-    private List<GenericClientTool> tools;
+    private List<ToolbarGenericTool> tools;
 
     public GPMapToolbarWidget(GeoPlatformMap geoPlatformMap,
-                              List<GenericClientTool> tools) {
+                              List<ToolbarGenericTool> tools) {
         this.geoPlatformMap = geoPlatformMap;
         setTools(tools);
         initialize();
@@ -86,7 +86,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
 
     @Override
     public void initialize() {
-        for (GenericClientTool tool : tools) {
+        for (ToolbarGenericTool tool : tools) {
             tool.buildTool(this);
         }
     }
@@ -106,7 +106,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
      * @param tool component UI binded at the action
      */
     @Override
-    public void addApplicationButton(ActionClientTool tool) {
+    public void addApplicationButton(ToolbarActionTool tool) {
         ToolbarApplicationAction action = (ToolbarApplicationAction) this.getAction(tool.getId());
 
         final Button button = new Button();
@@ -123,7 +123,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
      * @param tool component UI binded at the action
      */
     @Override
-    public void addMapButton(ActionClientTool tool) {
+    public void addMapButton(ToolbarActionTool tool) {
         ToolbarMapAction action = (ToolbarMapAction) this.getAction(tool.getId());
 
         final GeoPlatformButton button = new GeoPlatformButton();
@@ -142,7 +142,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
      * @param tool component UI binded at the action
      */
     @Override
-    public void addMapToggleButton(ActionClientTool tool) {
+    public void addMapToggleButton(ToolbarActionTool tool) {
         ToolbarMapAction action = (ToolbarMapAction) this.getAction(tool.getId());
 
         final GeoPlatformToggleButton button = new GeoPlatformToggleButton();
@@ -154,6 +154,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         this.toolBar.add(button);
     }
 
+    // TODO Generalize
     @Override
     public void addIconInToolbar(IconInToolbar tool) {
         GPIconWidgetComponent widgetIcon = new GPIconWidgetComponent(this.toolBar);
@@ -171,7 +172,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         buttonItem.setId(tool.getId());
 
         Menu menu = new Menu();
-        MenuUtilityBuilder.buildTools(menu, tool.getTools());
+        MenuUtility.getIstance().buildTools(menu, tool.getTools());
         buttonItem.setMenu(menu);
 
         this.toolBar.add(buttonItem);
@@ -202,9 +203,9 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
      * @param actionTools
      * @return Menu
      */
-    private Menu createMenu(List<ActionClientTool> actionTools) {
+    private Menu createMenu(List<ToolbarActionTool> actionTools) {
         Menu menu = new Menu();
-        for (ActionClientTool actionTool : actionTools) {
+        for (ToolbarActionTool actionTool : actionTools) {
             MenuBaseAction action = (MenuBaseAction) MenuActionRegistar.get(
                     actionTool.getId());
 
@@ -238,7 +239,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     private void prepareButton(final Button button, ToolbarAction action,
-                               GenericClientTool tool) {
+                               ToolbarGenericTool tool) {
         button.setId(action.getId());
         button.setToolTip(action.getTooltip());
         button.setIcon(action.getImage());
@@ -263,7 +264,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     /**
      * @return the tools
      */
-    public List<GenericClientTool> getTools() {
+    public List<ToolbarGenericTool> getTools() {
         return tools;
     }
 
@@ -271,7 +272,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
      * @param tools
      *            the tools to set
      */
-    public void setTools(List<GenericClientTool> tools) {
+    public void setTools(List<ToolbarGenericTool> tools) {
         Collections.sort(tools);
         this.tools = tools;
     }

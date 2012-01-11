@@ -33,40 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.impl;
+package org.geosdi.geoplatform.gui.configuration.menubar;
 
+import java.io.Serializable;
 import java.util.List;
 
-import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
 
 /**
  * @author giuseppe
- *
+ * 
  */
-public class ToolbarClientTool implements IToolbarClientTool {
+public interface IMenuBarContainerTool extends Serializable {
 
-    private static final long serialVersionUID = 3032280115406824191L;
-    //
-    private List<GenericClientTool> clientTools;
-
-    /**
-     * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.configuration.IToolbarClientTool#getClientTools()
-     */
-    @Override
-    public List<GenericClientTool> getClientTools() {
-        return clientTools;
-    }
-
-    /**
-     * (non-Javadoc)
-     * 
-     * @see org.geosdi.geoplatform.gui.configuration.IToolbarClientTool#setClientTools(java.util.List)
-     */
-    @Override
-    public void setClientTools(List<GenericClientTool> clientTools) {
-        this.clientTools = clientTools;
-    }
+    public List<MenuBarCategory> getCategories();
 }

@@ -33,94 +33,40 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration;
+package org.geosdi.geoplatform.gui.impl;
 
-import java.io.Serializable;
+import java.util.List;
+
+import org.geosdi.geoplatform.gui.configuration.toolbar.IToolbarContainerTool;
+import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
 
 /**
  * @author giuseppe
  *
  */
-public abstract class GenericClientTool
-        implements Serializable, Comparable<GenericClientTool> {
+public class ToolbarGroupTool implements IToolbarContainerTool {
 
-    private static final long serialVersionUID = -379951057942018866L;
+    private static final long serialVersionUID = 3032280115406824191L;
     //
-    protected String id;
-    protected boolean enabled;
-    protected int order;
+    private List<ToolbarGenericTool> groupTools;
 
     /**
-     * @return the id
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.configuration.IToolbarGroupTool#getGroupTools() 
      */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * @param id
-     *            the id to set
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the enabled
-     */
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    /**
-     * @param enabled
-     *            the enabled to set
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    /**
-     * @return the order
-     */
-    public int getOrder() {
-        return order;
-    }
-
-    /**
-     * @param order
-     *            the order to set
-     */
-    public void setOrder(int order) {
-        this.order = order;
+    @Override
+    public List<ToolbarGenericTool> getGroupTools() {
+        return groupTools;
     }
 
     /**
      * (non-Javadoc)
      * 
-     * @see java.lang.Object#toString()
+     * @see org.geosdi.geoplatform.gui.configuration.IToolbarGroupTool#setGroupTools(java.util.List) 
      */
     @Override
-    public String toString() {
-        return "GenericClientTool{id=" + id
-                + ", enabled=" + enabled
-                + ", order=" + order + '}';
+    public void setGroupTools(List<ToolbarGenericTool> groupTools) {
+        this.groupTools = groupTools;
     }
-
-    /**
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
-    @Override
-    public int compareTo(GenericClientTool o) {
-        return getOrder() - o.getOrder();
-    }
-
-    /**
-     * Each component will be added into toolbar itself
-     * 
-     * @param toolbar 
-     */
-    public abstract void buildTool(IGeoPlatformToolbarWidget toolbar);
 }

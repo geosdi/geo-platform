@@ -33,13 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration;
+package org.geosdi.geoplatform.gui.configuration.toolbar;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public enum ActionClientToolType {
+public enum ToolbarActionToolType {
 
     BUTTON, TOGGLE, APPLICATION_BUTTON;
 }

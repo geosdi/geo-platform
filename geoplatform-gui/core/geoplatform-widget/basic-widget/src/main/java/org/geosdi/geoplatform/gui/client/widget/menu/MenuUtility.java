@@ -55,6 +55,7 @@ import org.geosdi.geoplatform.gui.action.menu.event.MenuCheckChangeActionHandler
 import org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.DateMenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.GroupMenuClientTool;
+import org.geosdi.geoplatform.gui.configuration.menubar.IGeoPlatformMenubar;
 import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.OAuth2MenuBarClientTool;
 
@@ -62,50 +63,76 @@ import org.geosdi.geoplatform.gui.configuration.menubar.OAuth2MenuBarClientTool;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class MenuUtilityBuilder {
+public class MenuUtility implements IGeoPlatformMenubar {
 
-    public static final String MENU_BAR_SEPARATOR = "MenuBarSeparator";
+    private static MenuUtility INSTANCE = new MenuUtility();
+
+    private MenuUtility() {
+    }
+
+    public static MenuUtility getIstance() {
+        return MenuUtility.INSTANCE;
+    }
 
     /**
      *
      * @param tools
      * @param menu
      */
-    public static void buildTools(Menu menu, List<MenuBarClientTool> tools) {
+    public void buildTools(Menu menu, List<MenuBarClientTool> tools) {
         for (MenuBarClientTool tool : tools) {
-            if (tool.getId().equals(MENU_BAR_SEPARATOR)) {
-                addMenuSeparator(menu);
-            } else {
-                checkToolType(tool, menu);
-            }
+            tool.buildTool(INSTANCE, menu);
         }
     }
 
     /**
      * Add a Separator in Menu
+     * 
      * @param menu 
      */
-    private static void addMenuSeparator(Menu menu) {
+    @Override
+    public void addMenuSeparator(Menu menu) {
         menu.add(new SeparatorMenuItem());
     }
 
     /**
+     * Add Simple MenuItem to Menu
      *
      * @param tool
      * @param menu
      */
-    private static void checkToolType(MenuBarClientTool tool, Menu menu) {
-        if (tool instanceof CheckMenuClientTool) {
-            addCheckMenuItem((CheckMenuClientTool) tool, menu);
-        } else if (tool instanceof DateMenuClientTool) {
-            addDateMenu(menu);
-        } else if (tool instanceof GroupMenuClientTool) {
-            addGroupMenuItem((GroupMenuClientTool) tool, menu);
-        } else if (tool instanceof OAuth2MenuBarClientTool) {
-            addOAuth2MenuItem((OAuth2MenuBarClientTool) tool, menu);
-        } else {
-            addMenuItem(tool, menu);
+    @Override
+    public void addMenuItem(MenuBarClientTool tool, Menu menu) {
+        MenuBaseAction action = (MenuBaseAction) MenuActionRegistar.get(tool.getId());
+
+        final MenuItem item = new MenuItem(tool.getText());
+
+        if (action != null) {
+            action.setId(tool.getId());
+            item.setIcon(action.getImage());
+            item.setItemId(action.getId());
+            item.addSelectionListener(action);
+
+            action.addMenuActionHandler(new MenuActionChangeIconHandler() {
+
+                @Override
+                public void onActionEnabled(MenuActionEnabledEvent event) {
+                    item.setEnabled(true);
+                }
+
+                @Override
+                public void onActionDisabled(MenuActionDisabledEvent event) {
+                    item.setEnabled(false);
+                }
+
+                @Override
+                public void onActionChangeIcon(MenuActionChangeIconEvent event) {
+                }
+            });
+
+            action.setEnabled(tool.isEnabled());
         }
+        menu.add(item);
     }
 
     /**
@@ -114,18 +141,19 @@ public class MenuUtilityBuilder {
      * @param tool
      * @param menu
      */
-    private static void addCheckMenuItem(CheckMenuClientTool tool, final Menu menu) {
+    @Override
+    public void addCheckMenuItem(CheckMenuClientTool tool, final Menu menu) {
         MenuCheckAction action = (MenuCheckAction) MenuActionRegistar.get(tool.getId());
-        
+
         final CheckMenuItem item = new CheckMenuItem(tool.getText());
         item.setItemId(tool.getId());
-        
+
         menu.add(item);
 
         if (action != null) {
             action.setId(tool.getId());
             item.addSelectionListener(action);
-            
+
             action.addMenuActionHandler(new MenuCheckChangeActionHandler() {
 
                 @Override
@@ -144,7 +172,7 @@ public class MenuUtilityBuilder {
                     item.setEnabled(false);
                 }
             });
-            
+
             action.setEnabled(tool.isEnabled());
             action.setChecked(tool.isChecked());
         }
@@ -153,9 +181,11 @@ public class MenuUtilityBuilder {
     /**
      * Add a DateMenu Item to Menu
      *
+     * @param tool 
      * @param menu
      */
-    private static void addDateMenu(Menu menu) {
+    @Override
+    public void addDateMenu(DateMenuClientTool tool, Menu menu) {
         MenuItem date = new MenuItem("Choose a Date");
         menu.add(date);
         date.setSubMenu(new DateMenu());
@@ -167,23 +197,9 @@ public class MenuUtilityBuilder {
      * @param tool
      * @param menu  
      */
-    private static void addGroupMenuItem(GroupMenuClientTool tool, Menu menu) {
-        MenuItem item = new MenuItem(tool.getText());
-        menu.add(item);
-        Menu subMenu = new Menu();
-        buildTools(subMenu, tool.getTools());
-        item.setSubMenu(subMenu);
-    }
-
-    /**
-     * Add a MenuItem with sub menu
-     *
-     * @param tool
-     * @param menu  
-     */
-    private static void addOAuth2MenuItem(OAuth2MenuBarClientTool tool, Menu menu) {
-        OAuth2MenuBaseAction action = (OAuth2MenuBaseAction) MenuActionRegistar.get(
-                tool.getId());
+    @Override
+    public void addOAuth2MenuItem(OAuth2MenuBarClientTool tool, Menu menu) {
+        OAuth2MenuBaseAction action = (OAuth2MenuBaseAction) MenuActionRegistar.get(tool.getId());
 
         final MenuItem item = new MenuItem(tool.getText());
 
@@ -220,42 +236,17 @@ public class MenuUtilityBuilder {
     }
 
     /**
-     * Add Simple MenuItem to Menu
+     * Add a MenuItem with sub menu
      *
      * @param tool
-     * @param menu
+     * @param menu  
      */
-    private static void addMenuItem(MenuBarClientTool tool, Menu menu) {
-        MenuBaseAction action = (MenuBaseAction) MenuActionRegistar.get(
-                tool.getId());
-
-        final MenuItem item = new MenuItem(tool.getText());
-
-        if (action != null) {
-            action.setId(tool.getId());
-            item.setIcon(action.getImage());
-            item.setItemId(action.getId());
-            item.addSelectionListener(action);
-
-            action.addMenuActionHandler(new MenuActionChangeIconHandler() {
-
-                @Override
-                public void onActionEnabled(MenuActionEnabledEvent event) {
-                    item.setEnabled(true);
-                }
-
-                @Override
-                public void onActionDisabled(MenuActionDisabledEvent event) {
-                    item.setEnabled(false);
-                }
-
-                @Override
-                public void onActionChangeIcon(MenuActionChangeIconEvent event) {
-                }
-            });
-
-            action.setEnabled(tool.isEnabled());
-        }
+    @Override
+    public void addGroupMenuItem(GroupMenuClientTool tool, Menu menu) {
+        MenuItem item = new MenuItem(tool.getText());
         menu.add(item);
+        Menu subMenu = new Menu();
+        this.buildTools(subMenu, tool.getTools());
+        item.setSubMenu(subMenu);
     }
 }

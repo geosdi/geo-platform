@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.configuration.menubar;
 
+import com.extjs.gxt.ui.client.widget.menu.Menu;
+
 /**
  * @author giuseppe
  * 
@@ -67,10 +69,13 @@ public class CheckMenuClientTool extends MenuBarClientTool {
      */
     @Override
     public String toString() {
-        return "CheckMenuClientTool{id=" + id
-                + ", enabled=" + enabled
-                + ", order=" + order
+        return "CheckMenuClientTool{" + super.toString()
                 + ", text=" + text
                 + ", checked=" + checked + '}';
+    }
+
+    @Override
+    public void buildTool(IGeoPlatformMenubar menubar, Menu menu) {
+        menubar.addCheckMenuItem(this, menu);
     }
 }

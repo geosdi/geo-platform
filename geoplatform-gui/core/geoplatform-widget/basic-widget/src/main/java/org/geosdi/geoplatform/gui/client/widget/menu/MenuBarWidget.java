@@ -35,13 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.menu;
 
-
-import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
-import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory;
-
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuBar;
 import com.extjs.gxt.ui.client.widget.menu.MenuBarItem;
+import org.geosdi.geoplatform.gui.configuration.menubar.IMenuBarContainerTool;
+import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -49,10 +47,10 @@ import com.extjs.gxt.ui.client.widget.menu.MenuBarItem;
  * 
  */
 public class MenuBarWidget {
-    
+
     private MenuBar bar;
     private IMenuBarContainerTool menuBarContainerTool;
-    
+
     public MenuBarWidget(IMenuBarContainerTool menuBarContainerTool) {
         this.bar = new MenuBar();
         bar.setBorders(true);
@@ -69,7 +67,7 @@ public class MenuBarWidget {
             Menu menu = new Menu();
             this.bar.add(new MenuBarItem(category.getText(), menu));
             addCategory(category, menu);
-            
+
         }
     }
 
@@ -80,10 +78,8 @@ public class MenuBarWidget {
      * @param menu  
      */
     public void addCategory(MenuBarCategory category, Menu menu) {
-        MenuUtilityBuilder.buildTools(menu, category.getTools());
+        MenuUtility.getIstance().buildTools(menu, category.getTools());
     }
-
- 
 
     /**
      * @return the bar

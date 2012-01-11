@@ -38,8 +38,8 @@ package org.geosdi.geoplatform.gui.global;
 import java.io.Serializable;
 
 import org.geosdi.geoplatform.gui.configuration.FolderStore;
-import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
+import org.geosdi.geoplatform.gui.configuration.menubar.IMenuBarContainerTool;
+import org.geosdi.geoplatform.gui.configuration.toolbar.IToolbarContainerTool;
 import org.geosdi.geoplatform.gui.configuration.startup.IStartupConfigurationStrategy;
 
 /**
@@ -51,11 +51,11 @@ public interface IGeoPlatformGlobal extends Serializable {
 
     public GeoPlatformInfo getGeoPlatformInfo();
 
-    public IToolbarClientTool getToolbarClientTool();
+    public IToolbarContainerTool getToolbarContainerTool();
 
     public IMenuBarContainerTool getMenuBarContainerTool();
 
     public FolderStore getFolderStore();
-    
+
     public IStartupConfigurationStrategy getStrategy();
 }

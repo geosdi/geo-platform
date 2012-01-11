@@ -33,18 +33,19 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration;
+package org.geosdi.geoplatform.gui.configuration.toolbar;
 
 import java.io.Serializable;
 import java.util.List;
+import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
 
 /**
  * @author giuseppe
  * 
  */
-public interface IToolbarClientTool extends Serializable {
+public interface IToolbarContainerTool extends Serializable {
 
-    public List<GenericClientTool> getClientTools();
+    public List<ToolbarGenericTool> getGroupTools();
 
-    public void setClientTools(List<GenericClientTool> clientTools);
+    public void setGroupTools(List<ToolbarGenericTool> groupTools);
 }

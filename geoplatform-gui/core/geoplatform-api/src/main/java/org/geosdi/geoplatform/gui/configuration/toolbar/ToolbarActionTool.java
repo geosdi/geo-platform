@@ -33,53 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration.menubar;
-
-import java.util.Collections;
-import java.util.List;
-import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
-import org.geosdi.geoplatform.gui.configuration.IGeoPlatformToolbarWidget;
+package org.geosdi.geoplatform.gui.configuration.toolbar;
 
 /**
  * @author giuseppe
  *
  */
-public class MenuInToolBar extends GenericClientTool {
+public class ToolbarActionTool extends ToolbarGenericTool {
 
-    private static final long serialVersionUID = -6673336990643383453L;
+    private static final long serialVersionUID = 1096150448864737345L;
     //
-    private String text;
-    private List<MenuBarClientTool> tools;
+    private ToolbarActionToolType type;
 
     /**
-     * @return the text
+     * @return the type
      */
-    public String getText() {
-        return text;
+    public ToolbarActionToolType getType() {
+        return type;
     }
 
     /**
-     * @param text
-     *            the text to set
+     * @param type
+     *            the type to set
      */
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    /**
-     * @return the tools
-     */
-    public List<MenuBarClientTool> getTools() {
-        return tools;
-    }
-
-    /**
-     * @param tools
-     *            the tools to set
-     */
-    public void setTools(List<MenuBarClientTool> tools) {
-        Collections.sort(tools);
-        this.tools = tools;
+    public void setType(ToolbarActionToolType type) {
+        this.type = type;
     }
 
     /**
@@ -89,14 +67,22 @@ public class MenuInToolBar extends GenericClientTool {
      */
     @Override
     public String toString() {
-        return "MenuInToolBar{id=" + id
-                + ", enabled=" + enabled
-                + ", order=" + order
-                + ", text=" + text + '}';
+        return "ToolbarActionTool{" + super.toString()
+                + ", type=" + type + '}';
     }
 
     @Override
-    public void buildTool(IGeoPlatformToolbarWidget toolbar) {
-        toolbar.addMenuInToolBar(this);
+    public void buildTool(IGeoPlatformToolbar toolbar) {
+        switch (type) {
+            case BUTTON:
+                toolbar.addMapButton(this);
+                break;
+            case TOGGLE:
+                toolbar.addMapToggleButton(this);
+                break;
+            case APPLICATION_BUTTON:
+                toolbar.addApplicationButton(this);
+                break;
+        }
     }
 }

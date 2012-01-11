@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.configuration.menubar;
 
+import com.extjs.gxt.ui.client.widget.menu.Menu;
+
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email  michele.santomauro@geosdi.org
@@ -104,5 +106,10 @@ public class OAuth2MenuBarClientTool extends MenuBarClientTool {
                 + ", googleAuthUrl=" + googleAuthUrl
                 + ", googleClientId=" + googleClientId
                 + ", scope=" + scope + '}';
+    }
+
+    @Override
+    public void buildTool(IGeoPlatformMenubar menubar, Menu menu) {
+        menubar.addOAuth2MenuItem(this, menu);
     }
 }

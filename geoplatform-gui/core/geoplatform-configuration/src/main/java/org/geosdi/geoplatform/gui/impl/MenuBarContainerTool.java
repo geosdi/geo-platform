@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gui.impl;
 import java.util.Collections;
 import java.util.List;
 
-import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
+import org.geosdi.geoplatform.gui.configuration.menubar.IMenuBarContainerTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory;
 
 /**
@@ -47,25 +47,21 @@ import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory;
  */
 public class MenuBarContainerTool implements IMenuBarContainerTool {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1169366314963180162L;
+    private static final long serialVersionUID = 1169366314963180162L;
+    //
+    private List<MenuBarCategory> categories;
 
-	private List<MenuBarCategory> categories;
+    @Override
+    public List<MenuBarCategory> getCategories() {
+        return categories;
+    }
 
-	@Override
-	public List<MenuBarCategory> getCategories() {
-		return categories;
-	}
-
-	/**
-	 * @param categories
-	 *            the categories to set
-	 */
-	public void setCategories(List<MenuBarCategory> categories) {
-		Collections.sort(categories);
-		this.categories = categories;
-	}
-
+    /**
+     * @param categories
+     *            the categories to set
+     */
+    public void setCategories(List<MenuBarCategory> categories) {
+        Collections.sort(categories);
+        this.categories = categories;
+    }
 }

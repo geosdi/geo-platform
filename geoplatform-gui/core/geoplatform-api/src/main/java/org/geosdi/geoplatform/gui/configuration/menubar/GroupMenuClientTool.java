@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.configuration.menubar;
 
+import com.extjs.gxt.ui.client.widget.menu.Menu;
 import java.util.Collections;
 import java.util.List;
 
@@ -62,5 +63,10 @@ public class GroupMenuClientTool extends MenuBarClientTool {
     public void setTools(List<MenuBarClientTool> tools) {
         Collections.sort(tools);
         this.tools = tools;
+    }
+
+    @Override
+    public void buildTool(IGeoPlatformMenubar menubar, Menu menu) {
+        menubar.addGroupMenuItem(this, menu);
     }
 }

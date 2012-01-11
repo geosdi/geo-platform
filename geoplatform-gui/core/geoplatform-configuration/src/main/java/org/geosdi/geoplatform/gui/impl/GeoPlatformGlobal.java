@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.gui.impl;
 
 import org.geosdi.geoplatform.gui.configuration.FolderStore;
-import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
-import org.geosdi.geoplatform.gui.configuration.IToolbarClientTool;
+import org.geosdi.geoplatform.gui.configuration.menubar.IMenuBarContainerTool;
+import org.geosdi.geoplatform.gui.configuration.toolbar.IToolbarContainerTool;
 import org.geosdi.geoplatform.gui.configuration.startup.IStartupConfigurationStrategy;
 import org.geosdi.geoplatform.gui.global.GeoPlatformInfo;
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
@@ -60,7 +60,7 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
     @Autowired
     private GeoPlatformInfo geoPlatformInfo;
 
-    private IToolbarClientTool toolbarClientTool;
+    private IToolbarContainerTool toolbarClientTool;
 
     private IMenuBarContainerTool menuBarContainerTool;
 
@@ -90,7 +90,7 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
      * @see org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal#getToolbarClientTool()
      */
     @Override
-    public IToolbarClientTool getToolbarClientTool() {
+    public IToolbarContainerTool getToolbarContainerTool() {
         return toolbarClientTool;
     }
 
@@ -98,7 +98,7 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
      * @param toolbarClientTool
      *            the toolbarClientTool to set
      */
-    public void setToolbarClientTool(IToolbarClientTool toolbarClientTool) {
+    public void setToolbarClientTool(IToolbarContainerTool toolbarClientTool) {
         this.toolbarClientTool = toolbarClientTool;
     }
 

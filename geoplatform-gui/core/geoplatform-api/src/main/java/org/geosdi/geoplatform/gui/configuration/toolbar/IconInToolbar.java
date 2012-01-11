@@ -33,28 +33,48 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration;
+package org.geosdi.geoplatform.gui.configuration.toolbar;
 
-import org.geosdi.geoplatform.gui.configuration.menubar.MenuInToolBar;
+import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
 
 /**
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email  michele.santomauro@geosdi.org
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface IGeoPlatformToolbarWidget {
+public class IconInToolbar extends ToolbarGenericTool {
 
-    void addSeparator();
+    private static final long serialVersionUID = 1982533388514947046L;
+    //
+    private String text;
 
-    void addApplicationButton(ActionClientTool tool);
+    /**
+     * @return the text
+     */
+    public String getText() {
+        return text;
+    }
 
-    void addMapButton(ActionClientTool tool);
+    /**
+     * @param text the text to set
+     */
+    public void setText(String text) {
+        this.text = text;
+    }
 
-    void addMapToggleButton(ActionClientTool tool);
+    /**
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "IconInToolbar{" + super.toString()
+                + ", text=" + text + '}';
+    }
 
-    void addIconInToolbar(IconInToolbar tool);
-
-    void addMenuInToolBar(MenuInToolBar tool);
-
-    void addMenuButton(MenuClientTool tool);
+    @Override
+    public void buildTool(IGeoPlatformToolbar toolbar) {
+        toolbar.addIconInToolbar(this);
+    }
 }

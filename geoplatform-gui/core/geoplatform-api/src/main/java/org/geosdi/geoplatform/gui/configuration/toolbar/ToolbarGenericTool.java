@@ -33,49 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration;
+package org.geosdi.geoplatform.gui.configuration.toolbar;
+
+import org.geosdi.geoplatform.gui.configuration.GenericTool;
 
 /**
- * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
  *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class IconInToolbar extends GenericClientTool {
+public abstract class ToolbarGenericTool extends GenericTool {
 
-    private static final long serialVersionUID = 1982533388514947046L;
-    //
-    private String text;
+    private static final long serialVersionUID = -1736620819230416390L;
 
     /**
-     * @return the tooltip
+     * Each component will be added into toolbar itself
+     * 
+     * @param toolbar 
      */
-    public String getText() {
-        return text;
-    }
-
-    /**
-     * @param text the tooltip to set
-     */
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return "IconInToolbar{id=" + id
-                + ", enabled=" + enabled
-                + ", order=" + order
-                + ", text=" + text + '}';
-    }
-
-    @Override
-    public void buildTool(IGeoPlatformToolbarWidget toolbar) {
-//        toolbar.addIconInToolbar(this);
-//        toolbar.addSeparator();
-    }
+    public abstract void buildTool(IGeoPlatformToolbar toolbar);
 }

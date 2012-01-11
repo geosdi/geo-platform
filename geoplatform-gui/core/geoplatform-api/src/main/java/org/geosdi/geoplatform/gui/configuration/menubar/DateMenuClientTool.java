@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.configuration.menubar;
 
+import com.extjs.gxt.ui.client.widget.menu.Menu;
+
 /**
  * @author giuseppe
  *
@@ -42,4 +44,9 @@ package org.geosdi.geoplatform.gui.configuration.menubar;
 public class DateMenuClientTool extends MenuBarClientTool {
 
     private static final long serialVersionUID = -5201671145624228072L;
+
+    @Override
+    public void buildTool(IGeoPlatformMenubar menubar, Menu menu) {
+        menubar.addDateMenu(this, menu);
+    }
 }

@@ -35,14 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.configuration.menubar;
 
-import org.geosdi.geoplatform.gui.configuration.GenericClientTool;
-import org.geosdi.geoplatform.gui.configuration.IGeoPlatformToolbarWidget;
+import com.extjs.gxt.ui.client.widget.menu.Menu;
 
 /**
  * @author giuseppe
  *
  */
-public class MenuBarClientTool extends GenericClientTool {
+public class MenuBarClientTool extends MenubarGenericTool {
 
     private static final long serialVersionUID = -3760023225532302795L;
     //
@@ -70,14 +69,12 @@ public class MenuBarClientTool extends GenericClientTool {
      */
     @Override
     public String toString() {
-        return "MenuBarClientTool{id=" + id
-                + ", enabled=" + enabled
-                + ", order=" + order
+        return "MenuBarClientTool{" + super.toString()
                 + ", text=" + text + '}';
     }
 
     @Override
-    public void buildTool(IGeoPlatformToolbarWidget toolbar) {
-        // TODO
+    public void buildTool(IGeoPlatformMenubar menubar, Menu menu) {
+        menubar.addMenuItem(this, menu);
     }
 }

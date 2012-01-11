@@ -60,29 +60,26 @@ public class GeocodingView extends GeoPlatformView {
 
     public GeocodingView(Controller controller) {
         super(controller);
-        // TODO Auto-generated constructor stub
         this.geocoderManagement = new GeocoderManagementWidget();
     }
 
-    /* (non-Javadoc)
+    /**
+     * (non-Javadoc)
+     * 
      * @see com.extjs.gxt.ui.client.mvc.View#initialize()
      */
     @Override
     protected void initialize() {
-        // TODO Auto-generated method stub
         this.reverseDispatcher = new ReverseGeocodingDispatcher();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent
-     * (com.extjs.gxt.ui.client.mvc.AppEvent)
+     * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
      */
     @Override
     protected void handleEvent(AppEvent event) {
-        // TODO Auto-generated method stub
         if (event.getType() == GeocodingEvents.SHOW_GEOCODING_WIDGET) {
             onShowGeocodingWidget(event);
         }

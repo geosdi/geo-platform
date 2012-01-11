@@ -13,8 +13,8 @@
     <context:property-placeholder location="classpath:toolbar-TEST.properties" />
 
     <bean name="toolbarClientTool"
-              class="org.geosdi.geoplatform.gui.impl.ToolbarClientTool">
-        <property name="clientTools">
+          class="org.geosdi.geoplatform.gui.impl.ToolbarGroupTool">
+        <property name="groupTools">
             <list>
                 <ref bean="toolbarSeparator" />
                 <ref bean="zoomIn" />
@@ -26,7 +26,7 @@
     </bean>
 
     <bean name="infoApp"
-              class="org.geosdi.geoplatform.gui.configuration.ActionClientTool">
+          class="org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool">
         <property name="id" value="${gpInfoApp.id}" />
         <property name="type" value="${gpInfoApp.type}" />
         <property name="enabled" value="${gpInfoApp.enabled}" />
@@ -34,12 +34,12 @@
     </bean>
 
     <bean name="toolbarSeparator"
-              class="org.geosdi.geoplatform.gui.configuration.SeparatorClientTool">
+          class="org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarSeparatorTool">
         <property name="order" value="${toolbarSeparator.order}" />
     </bean>
 
     <bean name="zoomIn"
-              class="org.geosdi.geoplatform.gui.configuration.ActionClientTool">
+          class="org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool">
         <property name="id" value="${zoomIn.id}" />
         <property name="type" value="${zoomIn.type}" />
         <property name="enabled" value="${zoomIn.enabled}" />
@@ -47,7 +47,7 @@
     </bean>
 
     <bean name="zoomOut"
-              class="org.geosdi.geoplatform.gui.configuration.ActionClientTool">
+          class="org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool">
         <property name="id" value="${zoomOut.id}" />
         <property name="type" value="${zoomOut.type}" />
         <property name="enabled" value="${zoomOut.enabled}" />
@@ -55,7 +55,7 @@
     </bean>
 
     <bean name="drawFeature"
-              class="org.geosdi.geoplatform.gui.configuration.ActionClientTool">
+          class="org.geosdi.geoplatform.gui.configuration.toolbar.toolbar.ToolbarActionTool">
         <property name="id" value="${drawFeature.id}" />
         <property name="type" value="${drawFeature.type}" />
         <property name="enabled" value="${drawFeature.enabled}" />

@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.configuration;
 
+import org.geosdi.geoplatform.gui.configuration.toolbar.IGeoPlatformToolbar;
+import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
+import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool;
 import java.util.Collections;
 import java.util.List;
 
@@ -42,16 +45,16 @@ import java.util.List;
  * @author giuseppe
  * 
  */
-public class MenuClientTool extends GenericClientTool {
+public class MenuClientTool extends ToolbarGenericTool {
 
     private static final long serialVersionUID = 3230473378433481976L;
     //
-    private List<ActionClientTool> actionTools;
+    private List<ToolbarActionTool> actionTools;
 
     /**
      * @return the actionTools
      */
-    public List<ActionClientTool> getActionTools() {
+    public List<ToolbarActionTool> getActionTools() {
         return actionTools;
     }
 
@@ -59,13 +62,13 @@ public class MenuClientTool extends GenericClientTool {
      * @param actionTools
      *            the actionTools to set
      */
-    public void setActionTools(List<ActionClientTool> actionTools) {
+    public void setActionTools(List<ToolbarActionTool> actionTools) {
         Collections.sort(actionTools);
         this.actionTools = actionTools;
     }
 
     @Override
-    public void buildTool(IGeoPlatformToolbarWidget toolbar) {
+    public void buildTool(IGeoPlatformToolbar toolbar) {
         toolbar.addMenuButton(this);
     }
 }

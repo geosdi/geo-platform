@@ -9,11 +9,16 @@
        default-autowire="byName">
     
     <bean name="googleToolbarIcon"
-          class="org.geosdi.geoplatform.gui.configuration.IconInToolbar">
+          class="org.geosdi.geoplatform.gui.configuration.toolbar.IconInToolbar">
         <property name="text" value="Not signed on Google Earth Builder" />
         <property name="order" value="200" />
         <property name="id" value="GOOGLE_ICON" />
         <property name="enabled" value="true" />
+    </bean>
+    
+    <bean name="toolbarSeparatorIcon"
+          class="org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarSeparatorTool">
+        <property name="order" value="210" />
     </bean>
     
     <bean name="googleSignOnButton"
@@ -26,7 +31,7 @@
         <!--<property name="googleClientId" value="715134893945.apps.googleusercontent.com" />-->
         <property name="googleClientId" value="715134893945-ub1ei34gtbpgq8urdeunkvj36q9c0u5o@developer.gserviceaccount.com" />
         <property name="scope" value="https://www.googleapis.com/auth/earthbuilder.readonly" />
-<!--        <property name="scope" value="http://150.146.160.71/geo-portal" />-->
+        <!--<property name="scope" value="http://150.146.160.71/geo-portal" />-->
     </bean>
     
 </beans>

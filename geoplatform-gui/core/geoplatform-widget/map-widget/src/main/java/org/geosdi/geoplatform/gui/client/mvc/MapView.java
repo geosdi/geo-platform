@@ -77,12 +77,10 @@ public class MapView extends GeoPlatformView {
         this.mapToolsWidget = new GPMapToolsWidget(this.mapLayout);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see
-     * com.extjs.gxt.ui.client.mvc.View#handleEvent(com.extjs.gxt.ui.client.
-     * mvc.AppEvent)
+     * @see com.extjs.gxt.ui.client.mvc.View#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
      */
     @Override
     protected void handleEvent(AppEvent event) {
@@ -116,8 +114,7 @@ public class MapView extends GeoPlatformView {
      */
     private void onAttachToolbar() {
         this.buttonBar = new MapToolbar(mapLayout, GeoPlatformUtils.getInstance().
-                getGlobalConfiguration().getToolbarClientTool().
-                getClientTools());
+                getGlobalConfiguration().getToolbarContainerTool().getGroupTools());
 
         if (this.buttonBar.getItemsCount() > 0) {
             LayoutManager.addComponentToNorth(buttonBar.getToolBar());

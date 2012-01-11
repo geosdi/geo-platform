@@ -44,12 +44,10 @@ import java.util.List;
  * 
  */
 public class MenuBarCategory implements Serializable,
-        Comparable<MenuBarCategory> {
+                                        Comparable<MenuBarCategory> {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -6392463898405375954L;
+    //
     private String text;
     private boolean enabled;
     private int order;
@@ -121,7 +119,7 @@ public class MenuBarCategory implements Serializable,
         return getOrder() - o.getOrder();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

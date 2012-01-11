@@ -33,25 +33,27 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration;
+package org.geosdi.geoplatform.gui.configuration.toolbar;
+
+import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class SeparatorClientTool extends GenericClientTool {
+public class ToolbarSeparatorTool extends ToolbarGenericTool {
 
     private static final long serialVersionUID = 833485478615943744L;
     //
     public static final String TOOLBAR_SEPARATOR = "ToolbarSeparator";
 
-    public SeparatorClientTool() {
+    public ToolbarSeparatorTool() {
         this.id = TOOLBAR_SEPARATOR;
         this.enabled = true;
     }
 
     @Override
-    public void buildTool(IGeoPlatformToolbarWidget toolbar) {
+    public void buildTool(IGeoPlatformToolbar toolbar) {
         toolbar.addSeparator();
     }
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.1.xsd"
-	default-autowire="byName">
+       default-autowire="byName">
 
     <!--bean name="layerMenu"
 		class="org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool">
@@ -17,17 +17,17 @@
     </bean-->
     
     <bean name="userMenu"
-        class="org.geosdi.geoplatform.gui.configuration.menubar.MenuInToolBar">
+          class="org.geosdi.geoplatform.gui.configuration.toolbar.MenuInToolBar">
         <property name="text" value="User" />
         <property name="enabled" value="true" />
-        <property name="order" value="210" />
+        <property name="order" value="220" />
         <property name="id" value="USER_MENU" />
         <property name="tools">
             <list>
                 <ref bean="googleSignOnButton"/>
                 <ref bean="userOptionsButton"/>
                 <bean name="userLogout"
-                    class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+                      class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
                     <property name="id" value="userLogout" />
                     <property name="text" value="Logout" />
                     <property name="enabled" value="true" />

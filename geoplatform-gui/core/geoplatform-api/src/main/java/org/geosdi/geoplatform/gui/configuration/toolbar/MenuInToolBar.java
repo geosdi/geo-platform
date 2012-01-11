@@ -33,18 +33,67 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.configuration;
+package org.geosdi.geoplatform.gui.configuration.toolbar;
 
-import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
-
-import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory;
+import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool;
 
 /**
  * @author giuseppe
- * 
+ *
  */
-public interface IMenuBarContainerTool extends Serializable {
+public class MenuInToolBar extends ToolbarGenericTool {
 
-    public List<MenuBarCategory> getCategories();
+    private static final long serialVersionUID = -6673336990643383453L;
+    //
+    private String text;
+    private List<MenuBarClientTool> tools;
+
+    /**
+     * @return the text
+     */
+    public String getText() {
+        return text;
+    }
+
+    /**
+     * @param text
+     *            the text to set
+     */
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    /**
+     * @return the tools
+     */
+    public List<MenuBarClientTool> getTools() {
+        return tools;
+    }
+
+    /**
+     * @param tools
+     *            the tools to set
+     */
+    public void setTools(List<MenuBarClientTool> tools) {
+        Collections.sort(tools);
+        this.tools = tools;
+    }
+
+    /**
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "MenuInToolBar{" + super.toString()
+                + ", text=" + text + '}';
+    }
+
+    @Override
+    public void buildTool(IGeoPlatformToolbar toolbar) {
+        toolbar.addMenuInToolBar(this);
+    }
 }

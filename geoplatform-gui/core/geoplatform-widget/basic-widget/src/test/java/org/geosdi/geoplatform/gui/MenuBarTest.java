@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui;
 
 import static org.junit.Assert.assertNotNull;
 
-import org.geosdi.geoplatform.gui.configuration.IMenuBarContainerTool;
+import org.geosdi.geoplatform.gui.configuration.menubar.IMenuBarContainerTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarCategory;
 import org.junit.Test;
 import org.junit.runner.RunWith;

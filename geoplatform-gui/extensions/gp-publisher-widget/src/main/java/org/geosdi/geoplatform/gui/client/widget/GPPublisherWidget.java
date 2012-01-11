@@ -167,7 +167,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
         wmsParams.setFormat("image/png");
         wmsParams.setLayers(previewLayer.getName());
         wmsParams.setStyles("");
-        wmsParams.setTransparent(true);
+        wmsParams.setIsTransparent(true);
 
         Double lowerX = previewLayer.getLowerX();
         Double lowerY = previewLayer.getLowerY();

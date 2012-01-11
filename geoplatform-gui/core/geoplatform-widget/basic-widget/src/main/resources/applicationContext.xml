@@ -14,7 +14,8 @@
           class="org.geosdi.geoplatform.gui.configuration.menubar.MenubarSeparatorTool">
         <property name="order" value="90" />
     </bean>
-                
+
+    <!-- TODO bind tool with ID aboutGeoPlatform to an action -->
     <bean name="aboutGeoPlatform"
           class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
         <property name="id" value="aboutGeoPlatform" />

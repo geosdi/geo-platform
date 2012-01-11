@@ -55,7 +55,7 @@
     </bean>
 
     <bean name="drawFeature"
-          class="org.geosdi.geoplatform.gui.configuration.toolbar.toolbar.ToolbarActionTool">
+          class="org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool">
         <property name="id" value="${drawFeature.id}" />
         <property name="type" value="${drawFeature.type}" />
         <property name="enabled" value="${drawFeature.enabled}" />

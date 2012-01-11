@@ -36,9 +36,6 @@
 package org.geosdi.geoplatform.gui.configuration.toolbar;
 
 import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
-import org.geosdi.geoplatform.gui.configuration.toolbar.IconInToolbar;
-import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarActionTool;
-import org.geosdi.geoplatform.gui.configuration.toolbar.MenuInToolBar;
 
 /**
  *

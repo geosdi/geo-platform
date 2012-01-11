@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.configuration.toolbar;
 
-import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
-
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>

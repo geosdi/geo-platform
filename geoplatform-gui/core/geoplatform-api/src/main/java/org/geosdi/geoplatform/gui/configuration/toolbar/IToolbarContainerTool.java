@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.configuration.toolbar;
 
 import java.io.Serializable;
 import java.util.List;
-import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
 
 /**
  * @author giuseppe

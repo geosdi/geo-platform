@@ -75,7 +75,7 @@ public class IconInToolbar extends GenericClientTool {
 
     @Override
     public void buildTool(IGeoPlatformToolbarWidget toolbar) {
-        toolbar.addGoogleIcon(this);
-        toolbar.addSeparator();
+//        toolbar.addIconInToolbar(this);
+//        toolbar.addSeparator();
     }
 }

@@ -52,7 +52,7 @@ public interface IGeoPlatformToolbarWidget {
 
     void addMapToggleButton(ActionClientTool tool);
 
-    void addGoogleIcon(IconInToolbar tool);
+    void addIconInToolbar(IconInToolbar tool);
 
     void addMenuInToolBar(MenuInToolBar tool);
 

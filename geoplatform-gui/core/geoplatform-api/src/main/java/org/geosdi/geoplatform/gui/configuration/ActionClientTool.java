@@ -75,12 +75,16 @@ public class ActionClientTool extends GenericClientTool {
 
     @Override
     public void buildTool(IGeoPlatformToolbarWidget toolbar) {
-        if (type == ActionClientToolType.BUTTON) {
-            toolbar.addMapButton(this);
-        } else if (type == ActionClientToolType.TOGGLE) {
-            toolbar.addMapToggleButton(this);
-        } else if (type == ActionClientToolType.APPLICATION_BUTTON) {
-            toolbar.addApplicationButton(this);
+        switch (type) {
+            case BUTTON:
+                toolbar.addMapButton(this);
+                break;
+            case TOGGLE:
+                toolbar.addMapToggleButton(this);
+                break;
+            case APPLICATION_BUTTON:
+                toolbar.addApplicationButton(this);
+                break;
         }
     }
 }

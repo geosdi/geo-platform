@@ -40,13 +40,13 @@ import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 
 /**
- * @author giuseppe
  *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 public interface GPMapLayerBuilder {
-	
-	public WMS buildRaster(GPRasterBean rasterBean);
-	
-	public WMS buildVector(GPVectorBean vectorBean);
 
+    public WMS buildRaster(GPRasterBean rasterBean);
+
+    public WMS buildVector(GPVectorBean vectorBean);
 }

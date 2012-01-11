@@ -42,21 +42,21 @@ import org.geosdi.geoplatform.gui.model.GPVectorBean;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 public abstract class AbstractMapLayerBuilder<T extends GPLayerBean> implements
-		GPMapLayerBuilder {
-	
-	protected GeoPlatformMap mapWidget;
-	
-	public AbstractMapLayerBuilder(GeoPlatformMap theMapWidget) {
-		this.mapWidget = theMapWidget;
-	}
+        GPMapLayerBuilder {
 
-	public Layer buildLayer(T layerBean) {
-		return layerBean instanceof GPRasterBean ? buildRaster((GPRasterBean) layerBean)
-				: buildVector((GPVectorBean) layerBean);
-	}
+    protected GeoPlatformMap mapWidget;
 
+    public AbstractMapLayerBuilder(GeoPlatformMap theMapWidget) {
+        this.mapWidget = theMapWidget;
+    }
+
+    public Layer buildLayer(T layerBean) {
+        return layerBean instanceof GPRasterBean ? buildRaster((GPRasterBean) layerBean)
+                : buildVector((GPVectorBean) layerBean);
+    }
 }

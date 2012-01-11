@@ -33,85 +33,56 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.oxm;
+package org.geosdi.geoplatform.model;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.File;
 import java.io.IOException;
-
-import java.io.InputStream;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-
-import org.geosdi.geoplatform.mock.ClassToXMLMap;
-import org.springframework.oxm.Marshaller;
-import org.springframework.oxm.Unmarshaller;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import junit.framework.Assert;
+import org.geosdi.geoplatform.geocoding.model.GPGoogleGeocode;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email  michele.santomauro@geosdi.org
+ *
  */
-public class GeoPlatformMarshall {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:org/geosdi/geoplatform/gui/applicationContext-TEST.xml"})
+public class ModelTest {
 
-    private Marshaller marshaller;
-    private Unmarshaller unmarshaller;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
 
-    /**
-     * @param marshaller
-     *            the marshaller to set
-     */
-    public void setMarshaller(Marshaller marshaller) {
-        this.marshaller = marshaller;
-    }
-
-    /**
-     * @param unmarshaller
-     *            the unmarshaller to set
-     */
-    public void setUnmarshaller(Unmarshaller unmarshaller) {
-        this.unmarshaller = unmarshaller;
-    }
-
-    public void saveXML(Object message, String fileName)
-            throws IOException {
-        FileOutputStream fos = null;
+    @Test
+    public void test() {
         try {
-            fos = new FileOutputStream(fileName);
-            this.getMarshaller().marshal(message, new StreamResult(fos));
-        } finally {
-            if (fos != null) {
-                fos.close();
+            String sourceFileUrl = new File(".").getCanonicalPath() + File.separator + "src/test/resources/geocodeExample.xml";
+            
+            File source = new File(sourceFileUrl);
+            if (!source.canRead()) {
+                throw new IllegalArgumentException("Source path " + sourceFileUrl + " is not valid");
             }
+            
+            JAXBContext ctx = JAXBContext.newInstance(GPGoogleGeocode.class);
+            Unmarshaller unmarshaller = ctx.createUnmarshaller();
+            
+            GPGoogleGeocode geocode = (GPGoogleGeocode)unmarshaller.unmarshal(source);
+            Assert.assertNotNull("The geocode is null", geocode);
+            
+            logger.info("\n\n\t geocode contents: " + geocode + "\n\n");
+        } catch (IOException ex) {
+            Assert.fail("An exception occurred: " + ex.getMessage());
+        } catch (JAXBException ex) {
+            Assert.fail("An exception occurred: " + ex.getMessage());
         }
-    }
-
-    public Object loadFromXML(String fileName) throws IOException {
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(fileName);
-            return this.getUnmarshaller().unmarshal(new StreamSource(fis));
-        } finally {
-            if (fis != null) {
-                fis.close();
-            }
-        }
-    }
-
-    public Object loadFromStream(InputStream inputStream) throws IOException {
-        return this.getUnmarshaller().unmarshal(new StreamSource(inputStream));
-    }
-
-    /**
-     * @return the marshaller
-     */
-    public Marshaller getMarshaller() {
-        return marshaller;
-    }
-
-    /**
-     * @return the unmarshaller
-     */
-    public Unmarshaller getUnmarshaller() {
-        return unmarshaller;
     }
 }

@@ -155,7 +155,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     @Override
-    public void addGoogleIcon(IconInToolbar tool) {
+    public void addIconInToolbar(IconInToolbar tool) {
         GPIconWidgetComponent widgetIcon = new GPIconWidgetComponent(this.toolBar);
 
         this.toolBar.add(new FillToolItem());
@@ -182,6 +182,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
      *
      * @param tool component UI binded at the action
      */
+    @Override
     public void addMenuButton(MenuClientTool tool) {
         ToolbarAction action = this.getAction(tool.getId());
 

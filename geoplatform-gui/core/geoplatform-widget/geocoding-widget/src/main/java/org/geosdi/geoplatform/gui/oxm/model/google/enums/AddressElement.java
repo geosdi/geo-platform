@@ -33,52 +33,52 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.oxm;
-
-import java.io.File;
-import java.io.IOException;
-import junit.framework.Assert;
-import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleGeocode;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+package org.geosdi.geoplatform.gui.oxm.model.google.enums;
 
 /**
  *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
- *
+ * @email michele.santomauro@geosdi.org
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:org/geosdi/geoplatform/gui/applicationContext-TEST.xml"})
-public class ModelTest {
+public class AddressElement {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    @Autowired
-    private GeoPlatformMarshall geocoderJaxbMarshaller;
+    public enum EnumAddressElement {
 
-    @Test
-    public void test() {
-        try {
-            String sourceFileUrl = new File(".").getCanonicalPath() + File.separator
-                    + "src/test/resources/geocodeExample.xml";
+        STREE_ADDRESS("street_address"),
+        ROUTE("route"),
+        INTERSECTION("intersection"),
+        POLITICAL("political"),
+        COUNTRY("country"),
+        ADMINISTRATIVE_AREA_LEVEL_1("administrative_area_level_1"),
+        ADMINISTRATIVE_AREA_LEVEL_2("administrative_area_level_2"),
+        ADMINISTRATIVE_AREA_LEVEL_3("administrative_area_level_3"),
+        COLLOQUIAL_AREA("colloquial_area"),
+        LOCALITY("locality"),
+        SUBLOCALITY("sublocality"),
+        NEIGHBORHOOD("neighborhood"),
+        PREMISE("premise"),
+        SUBPREMISE("subpremise"),
+        POSTAL_CODE("postal_code"),
+        NATURAL_FEATURE("natural_feature"),
+        AIRPORT("airport"),
+        PARK("park"),
+        POINT_OF_INTEREST("point_of_interest"),
+        POST_BOX("post_box"),
+        STREE_NUMBER("street_number"),
+        FLOOR("floor"),
+        ROOM("room");
 
-            File source = new File(sourceFileUrl);
-            if (!source.canRead()) {
-                throw new IllegalArgumentException("Source path " + sourceFileUrl + " is not valid");
-            }
+        private String value;
 
-            GPGoogleGeocode geocode = (GPGoogleGeocode) geocoderJaxbMarshaller.loadFromFile(source);
-            Assert.assertNotNull("The geocode is null", geocode);
+        EnumAddressElement(String value) {
+            this.value = value;
+        }
 
-            logger.info("\n\n\t GeoPlatform Google OXM parsing : " + geocode + "\n\n");
-        } catch (IOException ex) {
-            logger.error("IOEXCEPTION @@@@@@@@@@@@@@@@@@@@ " + ex);
+        /**
+         * @return the value
+         */
+        public String getValue() {
+            return value;
         }
     }
 }

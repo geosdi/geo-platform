@@ -33,39 +33,64 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.oxm.model;
+package org.geosdi.geoplatform.gui.oxm.model.google;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
+@XmlRootElement(name = "GeocodeResponse")
+@XmlType(name = "GPGoogleGeocode", propOrder = {"status",
+    "resultList"})
 @XmlAccessorType(XmlAccessType.FIELD)
-public class GPGoogleGeometry {
+public class GPGoogleGeocode {
 
-    @XmlElement(name = "location")
-    private GPGoogleLocation location;
+    @XmlElement(name = "status", required = true)
+    private String status;
+    //
+    @XmlElement(name = "result", required = true)
+    private List<GPGoogleResult> resultList = new ArrayList<GPGoogleResult>();
 
     /**
-     * @return the location
+     * @return the status
      */
-    public GPGoogleLocation getLocation() {
-        return location;
+    public String getStatus() {
+        return this.status;
     }
 
     /**
-     * @param location the location to set
+     * @param status the status to set
      */
-    public void setLocation(GPGoogleLocation location) {
-        this.location = location;
+    public void setStatus(String theStatus) {
+        this.status = theStatus;
+    }
+
+    /**
+     * @return the resultList
+     */
+    public List<GPGoogleResult> getResultList() {
+        return resultList;
+    }
+
+    /**
+     * @param resultList the resultList to set
+     */
+    public void setResultList(List<GPGoogleResult> resultList) {
+        this.resultList = resultList;
     }
 
     @Override
     public String toString() {
-        return "GPGoogleGeometry{" + "location=" + location + '}';
+        return "GPGoogleGeocode{" + "status=" + status
+                + ", resultList=" + resultList + '}';
     }
 }

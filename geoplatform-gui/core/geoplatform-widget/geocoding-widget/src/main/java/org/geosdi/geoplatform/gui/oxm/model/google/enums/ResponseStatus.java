@@ -33,52 +33,35 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.oxm;
-
-import java.io.File;
-import java.io.IOException;
-import junit.framework.Assert;
-import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleGeocode;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+package org.geosdi.geoplatform.gui.oxm.model.google.enums;
 
 /**
  *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
- *
+ * @email michele.santomauro@geosdi.org
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:org/geosdi/geoplatform/gui/applicationContext-TEST.xml"})
-public class ModelTest {
+public class ResponseStatus {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    @Autowired
-    private GeoPlatformMarshall geocoderJaxbMarshaller;
+    public enum EnumResponseStatus {
 
-    @Test
-    public void test() {
-        try {
-            String sourceFileUrl = new File(".").getCanonicalPath() + File.separator
-                    + "src/test/resources/geocodeExample.xml";
+        STATUS_OK("OK"), /* indicates that no errors occurred; the address was successfully parsed and at least one geocode was returned. */
+        STATUS_ZERO_RESULTS("ZERO_RESULTS"), /* indicates that the geocode was successful but returned no results. This may occur if the geocode was passed a non-existent address or a latlng in a remote location. */
+        STATUS_OVER_QUERY_LIMIT("OVER_QUERY_LIMIT"), /* indicates that you are over your quota. */
+        STATUS_REQUEST_DENIED("REQUEST_DENIED"), /* indicates that your request was denied, generally because of lack of a sensor parameter. */
+        STATUS_INVALID_REQUEST("INVALID_REQUEST");   /* generally indicates that the query (address or latlng) is missing. */
+        //
 
-            File source = new File(sourceFileUrl);
-            if (!source.canRead()) {
-                throw new IllegalArgumentException("Source path " + sourceFileUrl + " is not valid");
-            }
+        private String value;
 
-            GPGoogleGeocode geocode = (GPGoogleGeocode) geocoderJaxbMarshaller.loadFromFile(source);
-            Assert.assertNotNull("The geocode is null", geocode);
+        EnumResponseStatus(String value) {
+            this.value = value;
+        }
 
-            logger.info("\n\n\t GeoPlatform Google OXM parsing : " + geocode + "\n\n");
-        } catch (IOException ex) {
-            logger.error("IOEXCEPTION @@@@@@@@@@@@@@@@@@@@ " + ex);
+        /**
+         * @return the value
+         */
+        public String getValue() {
+            return value;
         }
     }
 }

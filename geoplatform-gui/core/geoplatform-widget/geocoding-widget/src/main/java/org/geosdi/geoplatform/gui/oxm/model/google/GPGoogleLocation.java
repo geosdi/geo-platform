@@ -33,94 +33,57 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.oxm.model;
+package org.geosdi.geoplatform.gui.oxm.model.google;
 
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
 /**
  *
- * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email michele.santomauro@geosdi.org
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class GPGoogleResult {
+public class GPGoogleLocation {
 
-    @XmlElement(name = "type")
-    private String type;
+    @XmlElement(name = "lat")
+    private float lat;
     //
-    @XmlElement(name = "formatted_address")
-    private String completeDescription;
-    //
-    @XmlElement(name = "address_component")
-    private List<GPGoogleAddress> addressList;
-    //
-    @XmlElement(name = "geometry")
-    private GPGoogleGeometry geometry;
+    @XmlElement(name = "lng")
+    private float lon;
 
     /**
-     * @return the type
+     * @return the lat
      */
-    public String getType() {
-        return type;
+    public float getLat() {
+        return lat;
     }
 
     /**
-     * @param type the type to set
+     * @param lat the lat to set
      */
-    public void setType(String type) {
-        this.type = type;
+    public void setLat(float lat) {
+        this.lat = lat;
     }
 
     /**
-     * @return the completeDescription
+     * @return the lon
      */
-    public String getCompleteDescription() {
-        return completeDescription;
+    public float getLon() {
+        return lon;
     }
 
     /**
-     * @param completeDescription the completeDescription to set
+     * @param lon the lon to set
      */
-    public void setCompleteDescription(String completeDescription) {
-        this.completeDescription = completeDescription;
-    }
-
-    /**
-     * @return the addressList
-     */
-    public List<GPGoogleAddress> getAddressList() {
-        return addressList;
-    }
-
-    /**
-     * @param addressList the addressList to set
-     */
-    public void setAddressList(List<GPGoogleAddress> addressList) {
-        this.addressList = addressList;
-    }
-
-    /**
-     * @return the geometry
-     */
-    public GPGoogleGeometry getGeometry() {
-        return geometry;
-    }
-
-    /**
-     * @param geometry the geometry to set
-     */
-    public void setGeometry(GPGoogleGeometry geometry) {
-        this.geometry = geometry;
+    public void setLon(float lon) {
+        this.lon = lon;
     }
 
     @Override
     public String toString() {
-        return "GPGoogleResult{" + "type=" + type
-                + ", completeDescription=" + completeDescription
-                + ", addressList=" + addressList
-                + ", location=" + geometry + '}';
+        return "GPGoogleLocation{" + "latitude="
+                + lat + ", longitude=" + lon + '}';
     }
 }

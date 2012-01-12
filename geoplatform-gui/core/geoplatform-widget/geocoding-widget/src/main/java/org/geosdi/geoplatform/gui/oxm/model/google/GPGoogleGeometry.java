@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.oxm.model;
+package org.geosdi.geoplatform.gui.oxm.model.google;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -41,49 +41,31 @@ import javax.xml.bind.annotation.XmlElement;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email michele.santomauro@geosdi.org
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class GPGoogleLocation {
+public class GPGoogleGeometry {
 
-    @XmlElement(name = "lat")
-    private float lat;
-    //
-    @XmlElement(name = "lng")
-    private float lon;
+    @XmlElement(name = "location")
+    private GPGoogleLocation location;
 
     /**
-     * @return the lat
+     * @return the location
      */
-    public float getLat() {
-        return lat;
+    public GPGoogleLocation getLocation() {
+        return location;
     }
 
     /**
-     * @param lat the lat to set
+     * @param location the location to set
      */
-    public void setLat(float lat) {
-        this.lat = lat;
-    }
-
-    /**
-     * @return the lon
-     */
-    public float getLon() {
-        return lon;
-    }
-
-    /**
-     * @param lon the lon to set
-     */
-    public void setLon(float lon) {
-        this.lon = lon;
+    public void setLocation(GPGoogleLocation location) {
+        this.location = location;
     }
 
     @Override
     public String toString() {
-        return "GPGoogleLocation{" + "latitude="
-                + lat + ", longitude=" + lon + '}';
+        return "GPGoogleGeometry{" + "location=" + location + '}';
     }
 }

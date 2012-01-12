@@ -45,8 +45,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
-import org.geosdi.geoplatform.gui.oxm.model.GPGoogleGeocode;
-import org.geosdi.geoplatform.gui.oxm.model.GPGoogleResult;
+import org.geosdi.geoplatform.gui.client.model.google.GoogleGeocodingBean;
+import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleGeocode;
+import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleResult;
+import org.geosdi.geoplatform.gui.oxm.model.google.enums.ResponseStatus;
 import org.geosdi.geoplatform.gui.server.service.IGeocodingService;
 import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,12 +95,11 @@ public class GeocodingService implements
         /** TODO : think a way to retrieve all information for zip code, region etc
          *  Change GeocodingBean model adapting it for new properties
          **/
-        for (GPGoogleResult result : oxmBean.getResultList()) {
-            GeocodingBean bean = new GeocodingBean();
-            bean.setDescription(result.getCompleteDescription());
-            bean.setLat(result.getGeometry().getLocation().getLat());
-            bean.setLon(result.getGeometry().getLocation().getLon());
-            beans.add(bean);
+        if (oxmBean.getStatus().equals(ResponseStatus.EnumResponseStatus.STATUS_OK.getValue())) {
+            for (GPGoogleResult result : oxmBean.getResultList()) {
+                GoogleGeocodingBean bean = new GoogleGeocodingBean(result);
+                beans.add(bean);
+            }
         }
 
         return beans;

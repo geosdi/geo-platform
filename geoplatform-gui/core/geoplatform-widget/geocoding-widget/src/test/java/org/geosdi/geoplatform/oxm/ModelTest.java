@@ -33,19 +33,17 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.model;
+package org.geosdi.geoplatform.oxm;
 
 import java.io.File;
 import java.io.IOException;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import junit.framework.Assert;
-import org.geosdi.geoplatform.gui.client.model.googleoxm.GPGoogleGeocode;
+import org.geosdi.geoplatform.gui.oxm.model.GPGoogleGeocode;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -61,28 +59,26 @@ public class ModelTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
+    @Autowired
+    private GeoPlatformMarshall geocoderJaxbMarshaller;
 
     @Test
     public void test() {
         try {
-            String sourceFileUrl = new File(".").getCanonicalPath() + File.separator + "src/test/resources/geocodeExample.xml";
+            String sourceFileUrl = new File(".").getCanonicalPath() + File.separator
+                    + "src/test/resources/geocodeExample.xml";
 
             File source = new File(sourceFileUrl);
             if (!source.canRead()) {
                 throw new IllegalArgumentException("Source path " + sourceFileUrl + " is not valid");
             }
 
-            JAXBContext ctx = JAXBContext.newInstance(GPGoogleGeocode.class);
-            Unmarshaller unmarshaller = ctx.createUnmarshaller();
-
-            GPGoogleGeocode geocode = (GPGoogleGeocode) unmarshaller.unmarshal(source);
+            GPGoogleGeocode geocode = (GPGoogleGeocode) geocoderJaxbMarshaller.loadFromFile(source);
             Assert.assertNotNull("The geocode is null", geocode);
 
             logger.info("\n\n\t GeoPlatform Google OXM parsing : " + geocode + "\n\n");
         } catch (IOException ex) {
             logger.error("IOEXCEPTION @@@@@@@@@@@@@@@@@@@@ " + ex);
-        } catch (JAXBException ex) {
-            logger.error("JAXBException : @@@@@@@@@@@@@@@@@@@@@ " + ex);
         }
     }
 }

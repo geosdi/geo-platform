@@ -38,12 +38,9 @@ package org.geosdi.geoplatform.oxm;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import java.io.InputStream;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-
-import org.geosdi.geoplatform.mock.ClassToXMLMap;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.Unmarshaller;
 

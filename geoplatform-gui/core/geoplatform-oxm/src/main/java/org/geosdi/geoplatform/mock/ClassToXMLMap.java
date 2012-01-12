@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.mock;
 
 import javax.xml.bind.annotation.XmlRootElement;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -47,47 +46,46 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("ClassToXMLMap")
 public class ClassToXMLMap {
 
-	private String data;
-	private String history;
+    private String data;
+    private String history;
 
-	/**
-	 * @return the data
-	 */
-	public String getData() {
-		return data;
-	}
+    /**
+     * @return the data
+     */
+    public String getData() {
+        return data;
+    }
 
-	/**
-	 * @param data
-	 *            the data to set
-	 */
-	public void setData(String data) {
-		this.data = data;
-	}
+    /**
+     * @param data
+     *            the data to set
+     */
+    public void setData(String data) {
+        this.data = data;
+    }
 
-	/**
-	 * @return the history
-	 */
-	public String getHistory() {
-		return history;
-	}
+    /**
+     * @return the history
+     */
+    public String getHistory() {
+        return history;
+    }
 
-	/**
-	 * @param history
-	 *            the history to set
-	 */
-	public void setHistory(String history) {
-		this.history = history;
-	}
+    /**
+     * @param history
+     *            the history to set
+     */
+    public void setHistory(String history) {
+        this.history = history;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "ClassToXMLMap [data=" + data + ", history=" + history + "]";
-	}
-
+    /**
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "ClassToXMLMap [data=" + data + ", history=" + history + "]";
+    }
 }

@@ -63,7 +63,6 @@ public class GeoPlatformOXMTest extends AbstractDependencyInjectionSpringContext
 
     @Override
     protected void onSetUp() throws Exception {
-        // TODO Auto-generated method stub
         message = new ClassToXMLMap();
         message.setData("I am data");
         message.setHistory("in the past");

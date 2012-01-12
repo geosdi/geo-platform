@@ -41,7 +41,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import junit.framework.Assert;
-import org.geosdi.geoplatform.geocoding.model.GPGoogleGeocode;
+import org.geosdi.geoplatform.gui.client.model.googleoxm.GPGoogleGeocode;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -66,23 +66,23 @@ public class ModelTest {
     public void test() {
         try {
             String sourceFileUrl = new File(".").getCanonicalPath() + File.separator + "src/test/resources/geocodeExample.xml";
-            
+
             File source = new File(sourceFileUrl);
             if (!source.canRead()) {
                 throw new IllegalArgumentException("Source path " + sourceFileUrl + " is not valid");
             }
-            
+
             JAXBContext ctx = JAXBContext.newInstance(GPGoogleGeocode.class);
             Unmarshaller unmarshaller = ctx.createUnmarshaller();
-            
-            GPGoogleGeocode geocode = (GPGoogleGeocode)unmarshaller.unmarshal(source);
+
+            GPGoogleGeocode geocode = (GPGoogleGeocode) unmarshaller.unmarshal(source);
             Assert.assertNotNull("The geocode is null", geocode);
-            
-            logger.info("\n\n\t geocode contents: " + geocode + "\n\n");
+
+            logger.info("\n\n\t GeoPlatform Google OXM parsing : " + geocode + "\n\n");
         } catch (IOException ex) {
-            Assert.fail("An exception occurred: " + ex.getMessage());
+            logger.error("IOEXCEPTION @@@@@@@@@@@@@@@@@@@@ " + ex);
         } catch (JAXBException ex) {
-            Assert.fail("An exception occurred: " + ex.getMessage());
+            logger.error("JAXBException : @@@@@@@@@@@@@@@@@@@@@ " + ex);
         }
     }
 }

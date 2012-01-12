@@ -154,7 +154,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         this.toolBar.add(button);
     }
 
-    // TODO Generalize
+    // TODO Generalize Introducing ToolbarRightGroupTool concept
     @Override
     public void addIconInToolbar(IconInToolbar tool) {
         GPIconWidgetComponent widgetIcon = new GPIconWidgetComponent(this.toolBar);

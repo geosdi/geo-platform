@@ -14,5 +14,15 @@
 
     <bean name="reverseGeocoding"
 		class="org.geosdi.geoplatform.gui.server.service.impl.ReverseGeocoding" />
+                
+    <bean id="geocoderJaxbMarshaller" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">
+        <property name="marshaller" ref="jaxbGeoCoder" />
+        <property name="unmarshaller" ref="jaxbGeoCoder" />
+    </bean>
+    
+    <oxm:jaxb2-marshaller id="jaxbGeoCoder">
+        <oxm:class-to-be-bound
+			name="org.geosdi.geoplatform.gui.oxm.model.GPGoogleGeocode" />
+    </oxm:jaxb2-marshaller>
 
 </beans>

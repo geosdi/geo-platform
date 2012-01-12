@@ -102,6 +102,11 @@
             <artifactId>basic-widget</artifactId>
         </dependency>
         
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-oxm</artifactId>
+        </dependency>
+        
         	<!-- GWT-OL Resources -->
         <dependency>
             <groupId>org.gwtopenmaps.openlayers</groupId>

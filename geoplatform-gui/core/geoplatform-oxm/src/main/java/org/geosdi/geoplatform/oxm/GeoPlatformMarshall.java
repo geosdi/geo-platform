@@ -35,12 +35,14 @@
  */
 package org.geosdi.geoplatform.oxm;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.Unmarshaller;
 
@@ -74,7 +76,7 @@ public class GeoPlatformMarshall {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(fileName);
-            this.getMarshaller().marshal(message, new StreamResult(fos));
+            this.marshaller.marshal(message, new StreamResult(fos));
         } finally {
             if (fos != null) {
                 fos.close();
@@ -86,7 +88,7 @@ public class GeoPlatformMarshall {
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(fileName);
-            return this.getUnmarshaller().unmarshal(new StreamSource(fis));
+            return this.unmarshaller.unmarshal(new StreamSource(fis));
         } finally {
             if (fis != null) {
                 fis.close();
@@ -95,20 +97,10 @@ public class GeoPlatformMarshall {
     }
 
     public Object loadFromStream(InputStream inputStream) throws IOException {
-        return this.getUnmarshaller().unmarshal(new StreamSource(inputStream));
+        return this.unmarshaller.unmarshal(new StreamSource(inputStream));
     }
-
-    /**
-     * @return the marshaller
-     */
-    public Marshaller getMarshaller() {
-        return marshaller;
-    }
-
-    /**
-     * @return the unmarshaller
-     */
-    public Unmarshaller getUnmarshaller() {
-        return unmarshaller;
+    
+    public Object loadFromFile(File file) throws IOException {
+        return this.unmarshaller.unmarshal(new StreamSource(file));
     }
 }

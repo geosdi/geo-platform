@@ -70,7 +70,7 @@ public class ToolbarActionRegistar extends GeoPlatformActionRegistar {
         ToolbarActionCreator toolActionCreator = (ToolbarActionCreator) INSTANCE.getRegistry().get(
                 key);
 
-        return toolActionCreator == null ? null : toolActionCreator.createActionTool(
-                mapWidget);
+        return toolActionCreator == null
+                ? null : toolActionCreator.createActionTool(mapWidget);
     }
 }

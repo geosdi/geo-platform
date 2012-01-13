@@ -54,7 +54,6 @@ public class GuiComponentIDs {
     public static final String LOAD_PROJECTS = "loadProjects";
     public static final String INGEST_DATA = "ingestData";
     public static final String MANAGE_USERS = "manageUsers";
-//    public static final String MENUBAR_SEPARATOR = "MenuBarSeparator";
     public static final String ABOUT_GEOPLATFORM = "aboutGeoPlatform";
     //
     public static final String SEARCH_AOE = "searchAOE";
@@ -68,7 +67,6 @@ public class GuiComponentIDs {
     /**
      * Map Toolbar
      */
-//    public static final String TOOLBAR_SEPARATOR = "ToolbarSeparator";
     public static final String GEO_PLATFORM_INFO_APP = "GeoPlatformInfoApp";
     //
     public static final String ZOOM_IN = "ZoomIn";
@@ -173,8 +171,8 @@ public class GuiComponentIDs {
         mapUser.put(ZOOM_PREVIOUS, true);
         mapUser.put(ZOOM_NEXT, true);
         mapUser.put(GET_FEATURE_INFO, true);
-        mapUser.put(MEASURE, true);
-        mapUser.put(MEASURE_AREA, true);
+        mapUser.put(MEASURE, false); // TODO true
+        mapUser.put(MEASURE_AREA, false);  // TODO true
         mapUser.put(DRAW_FEATURE, true);
         mapUser.put(DRAW_LINE_FEATURE, true);
         mapUser.put(DRAW_POINT_FEATURE, true);
@@ -224,11 +222,11 @@ public class GuiComponentIDs {
         mapViewer.put(RESIZE_FEATURE, true);
         mapViewer.put(DELETE_FEATURE, true);
         mapViewer.put(CLEAR_MAP, true);
-        mapViewer.put(REVERSE_GEOCODING, true);
-        mapViewer.put(REVERSE_GEOCODING_WPS, true);
-        mapViewer.put(GOOGLE_ICON, true);
+//        mapViewer.put(REVERSE_GEOCODING, true); // TODO decomment
+//        mapViewer.put(REVERSE_GEOCODING_WPS, true); // TODO decomment
+        mapViewer.put(GOOGLE_ICON, false); // TODO true
         mapViewer.put(USER_MENU, true);
-        mapViewer.put(GOOGLE_SIGN_ON_BUTTON, true);
+        mapViewer.put(GOOGLE_SIGN_ON_BUTTON, false); // TODO true
         mapViewer.put(USER_OPTIONS_BUTTON, true);
         mapViewer.put(USER_LOGOUT, true);
         //

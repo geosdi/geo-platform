@@ -72,7 +72,7 @@ public class ToolbarActionTool extends ToolbarGenericTool {
     }
 
     @Override
-    public void buildTool(IGeoPlatformToolbar toolbar) {
+    protected void create(IGeoPlatformToolbar toolbar) {
         switch (type) {
             case BUTTON:
                 toolbar.addMapButton(this);

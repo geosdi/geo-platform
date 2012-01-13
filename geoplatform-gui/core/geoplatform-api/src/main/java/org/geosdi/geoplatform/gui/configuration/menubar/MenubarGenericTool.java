@@ -47,10 +47,17 @@ public abstract class MenubarGenericTool extends GenericTool {
 
     private static final long serialVersionUID = -6366879645618646403L;
 
+    /**
+     * Check the permission of the user logged and call the method for creation.
+     * If the permission was not found the tool will not be created.
+     * 
+     * @param menubar
+     * @param menu 
+     */
     public void buildTool(IGeoPlatformMenubar menubar, Menu menu) {
         Boolean permission = GPUserGuiComponents.getInstance().
                 hasComponentPermission(this.getId());
-//        System.out.println("*** [ID = " + this.getId() + "] Permission = " + permission);
+        System.out.println("*** [ID = " + this.getId() + "] Permission = " + permission);
         if (permission != null) {
             super.enabled &= permission;
             this.create(menubar, menu);
@@ -60,6 +67,7 @@ public abstract class MenubarGenericTool extends GenericTool {
     /**
      * Each component will be added into menu itself
      * 
+     * @param menubar
      * @param menu
      */
     protected abstract void create(IGeoPlatformMenubar menubar, Menu menu);

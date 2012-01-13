@@ -78,7 +78,8 @@ public class UserWidgetUI implements EntryPoint {
             }
         });
 
-        MenuActionRegistar.put("userOptionsButton", new MenuActionCreator() {
+        MenuActionRegistar.put(GuiComponentIDs.USER_OPTIONS_BUTTON,
+                               new MenuActionCreator() {
 
             @Override
             public MenuAction createAction() {

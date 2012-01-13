@@ -72,7 +72,7 @@ public class IconInToolbar extends ToolbarGenericTool {
     }
 
     @Override
-    public void buildTool(IGeoPlatformToolbar toolbar) {
+    protected void create(IGeoPlatformToolbar toolbar) {
         toolbar.addIconInToolbar(this);
     }
 }

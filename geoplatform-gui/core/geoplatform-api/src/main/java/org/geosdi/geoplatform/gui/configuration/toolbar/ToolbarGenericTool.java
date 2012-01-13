@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.configuration.toolbar;
 
 import org.geosdi.geoplatform.gui.configuration.GenericTool;
+import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
 
 /**
  *
@@ -46,9 +47,26 @@ public abstract class ToolbarGenericTool extends GenericTool {
     private static final long serialVersionUID = -1736620819230416390L;
 
     /**
+     * Check the permission of the user logged and call the method for creation.
+     * If the permission was not found the tool will not be created.
+     * 
+     * @param menubar
+     * @param menu 
+     */
+    public void buildTool(IGeoPlatformToolbar toolbar) {
+        Boolean permission = GPUserGuiComponents.getInstance().
+                hasComponentPermission(this.getId());
+        System.out.println("*** [ID = " + this.getId() + "] Permission = " + permission);
+        if (permission != null) {
+            super.enabled &= permission;
+            this.create(toolbar);
+        }
+    }
+
+    /**
      * Each component will be added into toolbar itself
      * 
      * @param toolbar 
      */
-    public abstract void buildTool(IGeoPlatformToolbar toolbar);
+    protected abstract void create(IGeoPlatformToolbar toolbar);
 }

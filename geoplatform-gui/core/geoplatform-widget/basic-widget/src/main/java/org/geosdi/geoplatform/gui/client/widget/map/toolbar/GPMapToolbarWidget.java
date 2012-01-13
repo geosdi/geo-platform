@@ -62,6 +62,7 @@ import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
 import org.geosdi.geoplatform.gui.configuration.toolbar.IGeoPlatformToolbar;
 import org.geosdi.geoplatform.gui.configuration.toolbar.IconInToolbar;
 import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
+import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool;
 import org.geosdi.geoplatform.gui.configuration.toolbar.MenuInToolBar;
 import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
@@ -130,8 +131,6 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         button.setAction(action);
         this.prepareButton(button, action, tool);
 
-        this.checkPermission(action);
-
         this.toolBar.add(button);
     }
 
@@ -148,8 +147,6 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         final GeoPlatformToggleButton button = new GeoPlatformToggleButton();
         button.setAction(action);
         this.prepareButton(button, action, tool);
-
-        this.checkPermission(action);
 
         this.toolBar.add(button);
     }
@@ -231,13 +228,6 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         return action;
     }
 
-    // TODO
-    private void checkPermission(ToolbarAction action) {
-//        if (GPUserGuiComponents.getInstance().
-//                hasComponentPermission(action.getId())) {
-//        }
-    }
-
     private void prepareButton(final Button button, ToolbarAction action,
                                ToolbarGenericTool tool) {
         button.setId(action.getId());
@@ -274,6 +264,17 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
      */
     public void setTools(List<ToolbarGenericTool> tools) {
         Collections.sort(tools);
+        // TODO DEL
+        for (ToolbarGenericTool tool : tools) {
+            System.out.println("* " + tool);
+//            System.out.println("public static final String " + tool.getId().toString().toUpperCase() + " = \"" + tool.getId() + "\";");
+            if (tool instanceof MenuInToolBar) {
+                for (MenuBarClientTool sub : ((MenuInToolBar) tool).getTools()) {
+                    System.out.println("** " + sub);
+//                    System.out.println("public static final String " + sub.getId().toString().toUpperCase() + " = \"" + sub.getId() + "\";");
+                }
+            }
+        }
         this.tools = tools;
     }
 }

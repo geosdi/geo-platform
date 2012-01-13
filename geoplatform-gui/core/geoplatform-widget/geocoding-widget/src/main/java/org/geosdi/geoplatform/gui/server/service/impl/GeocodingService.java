@@ -41,8 +41,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
 
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.model.google.GoogleGeocodingBean;
@@ -53,7 +51,6 @@ import org.geosdi.geoplatform.gui.server.service.IGeocodingService;
 import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.xml.sax.SAXException;
 
 /**
  * @author giuseppe
@@ -80,8 +77,7 @@ public class GeocodingService implements
      */
     @Override
     public ArrayList<GeocodingBean> findLocations(String address)
-            throws IOException, SAXException, ParserConfigurationException,
-            XPathExpressionException {
+            throws IOException {
         // TODO Auto-generated method stub
         this.beans = new ArrayList<GeocodingBean>();
 

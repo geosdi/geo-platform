@@ -79,7 +79,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     private List<ToolbarGenericTool> tools;
 
     public GPMapToolbarWidget(GeoPlatformMap geoPlatformMap,
-                              List<ToolbarGenericTool> tools) {
+            List<ToolbarGenericTool> tools) {
         this.geoPlatformMap = geoPlatformMap;
         setTools(tools);
         initialize();
@@ -158,7 +158,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
 
         this.toolBar.add(new FillToolItem());
         this.toolBar.add(widgetIcon.createWidgetComponent(BasicWidgetResources.ICONS.googleWhite().createImage(),
-                                                          tool.getText()));
+                tool.getText()));
     }
 
     @Override
@@ -196,6 +196,16 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     /**
+     * Add FillToolItem in Toolbar so any Item added after this FillToolItem
+     * will be insert in the right Toolbar Region
+     * 
+     */
+    @Override
+    public void addFillToolItem() {
+        this.toolBar.add(new FillToolItem());
+    }
+
+    /**
      *
      * @param actionTools
      * @return Menu
@@ -229,7 +239,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     private void prepareButton(final Button button, ToolbarAction action,
-                               ToolbarGenericTool tool) {
+            ToolbarGenericTool tool) {
         button.setId(action.getId());
         button.setToolTip(action.getTooltip());
         button.setIcon(action.getImage());

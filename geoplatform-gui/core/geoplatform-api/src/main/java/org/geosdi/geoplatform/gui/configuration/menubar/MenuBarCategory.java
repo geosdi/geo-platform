@@ -40,11 +40,12 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 public class MenuBarCategory implements Serializable,
-                                        Comparable<MenuBarCategory> {
+        Comparable<MenuBarCategory> {
 
     private static final long serialVersionUID = -6392463898405375954L;
     //

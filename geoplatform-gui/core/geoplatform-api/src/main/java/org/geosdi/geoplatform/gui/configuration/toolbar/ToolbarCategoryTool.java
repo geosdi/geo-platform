@@ -35,28 +35,51 @@
  */
 package org.geosdi.geoplatform.gui.configuration.toolbar;
 
-import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface IGeoPlatformToolbar {
+public class ToolbarCategoryTool extends ToolbarGenericTool {
 
-    void addSeparator();
+    private static final long serialVersionUID = 7923252355202378906L;
+    //
+    private List<? extends ToolbarGenericTool> tools;
 
-    void addApplicationButton(ToolbarActionTool tool);
+    /**
+     * @return the tools
+     */
+    public List<? extends ToolbarGenericTool> getTools() {
+        return tools;
+    }
 
-    void addMapButton(ToolbarActionTool tool);
+    /**
+     * @param tools the tools to set
+     */
+    public void setTools(List<? extends ToolbarGenericTool> tools) {
+        Collections.sort(tools);
+        this.tools = tools;
+    }
 
-    void addMapToggleButton(ToolbarActionTool tool);
+    @Override
+    public void buildTool(IGeoPlatformToolbar toolbar) {
+        create(toolbar);
+    }
 
-    void addIconInToolbar(IconInToolbar tool);
+    @Override
+    protected void create(IGeoPlatformToolbar toolbar) {
+        if (this.tools != null) {
+            for (ToolbarGenericTool tool : this.tools) {
+                tool.buildTool(toolbar);
+            }
+        }
+    }
 
-    void addMenuInToolBar(MenuInToolBar tool);
-
-    void addMenuButton(MenuClientTool tool);
-    
-    void addFillToolItem();
+    @Override
+    public String toString() {
+        return "ToobarCategoryTool{ " + "tools = " + tools + '}';
+    }
 }

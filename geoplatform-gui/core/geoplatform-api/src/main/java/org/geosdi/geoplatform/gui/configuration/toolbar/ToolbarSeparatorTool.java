@@ -59,4 +59,9 @@ public class ToolbarSeparatorTool extends ToolbarGenericTool {
     protected void create(IGeoPlatformToolbar toolbar) {
         toolbar.addSeparator();
     }
+
+    @Override
+    public String toString() {
+        return "ToolbarSeparatorTool{" + '}';
+    }
 }

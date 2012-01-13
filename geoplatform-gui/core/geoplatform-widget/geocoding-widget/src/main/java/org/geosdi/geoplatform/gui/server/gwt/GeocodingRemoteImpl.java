@@ -66,6 +66,7 @@ public class GeocodingRemoteImpl extends RemoteServiceServlet implements
      *
      */
     private static final long serialVersionUID = 8960403782525028063L;
+    //
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private IGeocodingService geocodingService;
     private IReverseGeocoding reverseGeocoding;
@@ -81,19 +82,7 @@ public class GeocodingRemoteImpl extends RemoteServiceServlet implements
         // TODO Auto-generated method stub
         try {
             return this.geocodingService.findLocations(search);
-        } catch (XPathExpressionException e) {
-            // TODO Auto-generated catch block
-            logger.error(e.getMessage());
-            throw new GeoPlatformException(e.getMessage());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            logger.error(e.getMessage());
-            throw new GeoPlatformException(e.getMessage());
-        } catch (SAXException e) {
-            // TODO Auto-generated catch block
-            logger.error(e.getMessage());
-            throw new GeoPlatformException(e.getMessage());
-        } catch (ParserConfigurationException e) {
             // TODO Auto-generated catch block
             logger.error(e.getMessage());
             throw new GeoPlatformException(e.getMessage());

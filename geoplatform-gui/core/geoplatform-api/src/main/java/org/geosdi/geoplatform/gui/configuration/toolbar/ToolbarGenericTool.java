@@ -56,7 +56,6 @@ public abstract class ToolbarGenericTool extends GenericTool {
     public void buildTool(IGeoPlatformToolbar toolbar) {
         Boolean permission = GPUserGuiComponents.getInstance().
                 hasComponentPermission(this.getId());
-        System.out.println("*** [ID = " + this.getId() + "] Permission = " + permission);
         if (permission != null) {
             super.enabled &= permission;
             this.create(toolbar);

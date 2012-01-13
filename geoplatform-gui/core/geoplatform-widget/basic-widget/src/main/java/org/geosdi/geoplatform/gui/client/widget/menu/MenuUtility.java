@@ -177,7 +177,6 @@ public class MenuUtility implements IGeoPlatformMenubar {
 
             action.setChecked(tool.isChecked());
             action.setEnabled(tool.isEnabled()); // TODO check if the argument is false
-            item.setEnabled(tool.isEnabled());
         }
     }
 

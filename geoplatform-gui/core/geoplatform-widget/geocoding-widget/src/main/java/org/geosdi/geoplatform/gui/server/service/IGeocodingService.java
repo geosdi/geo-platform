@@ -56,11 +56,8 @@ public interface IGeocodingService {
      * @return ArrayList<GeocodingBean>
      *
      * @throws IOException
-     * @throws SAXException
-     * @throws ParserConfigurationException
-     * @throws XPathExpressionException
+     * 
      */
     public ArrayList<GeocodingBean> findLocations(String address)
-            throws IOException, SAXException, ParserConfigurationException,
-            XPathExpressionException;
+            throws IOException;
 }

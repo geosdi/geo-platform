@@ -38,8 +38,9 @@ package org.geosdi.geoplatform.gui.configuration;
 import java.io.Serializable;
 
 /**
- * @author giuseppe
  *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 public abstract class GenericTool
         implements Serializable, Comparable<GenericTool> {

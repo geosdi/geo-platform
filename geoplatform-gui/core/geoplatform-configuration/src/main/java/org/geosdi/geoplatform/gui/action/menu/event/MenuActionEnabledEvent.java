@@ -43,16 +43,15 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class MenuActionEnabledEvent extends GwtEvent<MenuActionHandler> {
+public class MenuActionEnabledEvent extends GwtEvent<MenuCheckChangeActionHandler> {
 
     @Override
-    public Type<MenuActionHandler> getAssociatedType() {
-        return MenuActionHandler.TYPE;
+    public Type<MenuCheckChangeActionHandler> getAssociatedType() {
+        return MenuCheckChangeActionHandler.TYPE;
     }
 
     @Override
-    protected void dispatch(MenuActionHandler handler) {
-       handler.onActionEnabled(this);
+    protected void dispatch(MenuCheckChangeActionHandler handler) {
+        handler.onActionEnabled(this);
     }
-    
 }

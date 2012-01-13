@@ -49,8 +49,7 @@ import javax.xml.bind.annotation.XmlType;
  * @email michele.santomauro@geosdi.org
  */
 @XmlRootElement(name = "GeocodeResponse")
-@XmlType(name = "GPGoogleGeocode", propOrder = {"status",
-    "resultList"})
+@XmlType(name = "GPGoogleGeocode", propOrder = {"status", "resultList"})
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GPGoogleGeocode {
 

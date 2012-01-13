@@ -43,7 +43,7 @@ import java.util.ArrayList;
 
 
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
-import org.geosdi.geoplatform.gui.client.model.google.GoogleGeocodingBean;
+import org.geosdi.geoplatform.gui.client.model.google.GoogleGeocodeBean;
 import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleGeocode;
 import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleResult;
 import org.geosdi.geoplatform.gui.oxm.model.google.enums.ResponseStatus;
@@ -88,12 +88,9 @@ public class GeocodingService implements
 
         GPGoogleGeocode oxmBean = (GPGoogleGeocode) this.geocoderJaxbMarshaller.loadFromStream(conn.getInputStream());
 
-        /** TODO : think a way to retrieve all information for zip code, region etc
-         *  Change GeocodingBean model adapting it for new properties
-         **/
         if (oxmBean.getStatus().equals(ResponseStatus.EnumResponseStatus.STATUS_OK.getValue())) {
             for (GPGoogleResult result : oxmBean.getResultList()) {
-                beans.add(new GoogleGeocodingBean(result));
+                beans.add(new GoogleGeocodeBean(result));
             }
         }
 

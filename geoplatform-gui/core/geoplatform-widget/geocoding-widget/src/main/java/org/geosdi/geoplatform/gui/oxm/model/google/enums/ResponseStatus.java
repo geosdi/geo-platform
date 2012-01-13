@@ -44,12 +44,13 @@ public class ResponseStatus {
 
     public enum EnumResponseStatus {
 
-        STATUS_OK("OK"), /* indicates that no errors occurred; the address was successfully parsed and at least one geocode was returned. */
-        STATUS_ZERO_RESULTS("ZERO_RESULTS"), /* indicates that the geocode was successful but returned no results. This may occur if the geocode was passed a non-existent address or a latlng in a remote location. */
+        STATUS_OK("OK"),                             /* indicates that no errors occurred; the address was successfully parsed and at least one geocode was returned. */
+        STATUS_ZERO_RESULTS("ZERO_RESULTS"),         /* indicates that the geocode was successful but returned no results. This may occur if the geocode was passed a non-existent address or a latlng in a remote location. */
         STATUS_OVER_QUERY_LIMIT("OVER_QUERY_LIMIT"), /* indicates that you are over your quota. */
-        STATUS_REQUEST_DENIED("REQUEST_DENIED"), /* indicates that your request was denied, generally because of lack of a sensor parameter. */
-        STATUS_INVALID_REQUEST("INVALID_REQUEST");   /* generally indicates that the query (address or latlng) is missing. */
+        STATUS_REQUEST_DENIED("REQUEST_DENIED"),     /* indicates that your request was denied, generally because of lack of a sensor parameter. */
+        STATUS_INVALID_REQUEST("INVALID_REQUEST"),   /* generally indicates that the query (address or latlng) is missing. */
         //
+        NO_DATA("NO_DATA");
 
         private String value;
 

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.puregwt.event;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
@@ -48,7 +49,7 @@ public interface ReverseGeocodingButtonModelHandler extends EventHandler {
 
     public void onEnabling(boolean isEnabled);
     
-    public void onUpdateModel(String location);
+    public void onUpdateModel(IGeoPlatformLocation bean);
     
-    public void onUpdateButtonAndModel(String location);
+    public void onUpdateButtonAndModel(IGeoPlatformLocation bean);
 }

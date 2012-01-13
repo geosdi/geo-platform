@@ -40,18 +40,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
-import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
+import org.geosdi.geoplatform.gui.client.model.google.GoogleGeocodeBean;
+import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleGeocode;
+import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleResult;
+import org.geosdi.geoplatform.gui.oxm.model.google.enums.ResponseStatus;
 import org.geosdi.geoplatform.gui.server.service.IReverseGeocoding;
+import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
@@ -64,7 +64,9 @@ public class ReverseGeocoding extends GPGeocodingService
 
     // URL prefix to the reverse geocoder
     private static final String REVERSE_GEOCODER_PREFIX_FOR_XML = "http://maps.googleapis.com/maps/api/geocode/xml";
-    private GeocodingBean bean;
+    //
+    @Autowired
+    private GeoPlatformMarshall geocoderJaxbMarshaller;
 
     /**
      * (non-Javadoc)
@@ -74,41 +76,20 @@ public class ReverseGeocoding extends GPGeocodingService
     @Override
     public GeocodingBean findLocation(double lat, double lon)
             throws IOException, SAXException, ParserConfigurationException,
-                   XPathExpressionException {
-        this.bean = new GeocodingBean();
+            XPathExpressionException {
 
         url = new URL(REVERSE_GEOCODER_PREFIX_FOR_XML + "?latlng="
                 + URLEncoder.encode(lat + "," + lon, "UTF-8") + "&sensor=true");
 
         conn = (HttpURLConnection) url.openConnection();
 
-        Document geocoderResultDocument = null;
+        GPGoogleGeocode oxmBean = (GPGoogleGeocode) this.geocoderJaxbMarshaller.loadFromStream(conn.getInputStream());
 
-        try {
-            // open the connection and get results as InputSource.
-            conn.connect();
-            InputSource geocoderResultInputSource = new InputSource(
-                    conn.getInputStream());
-
-            // read result and parse into XML Document
-            geocoderResultDocument = DocumentBuilderFactory.newInstance().
-                    newDocumentBuilder().parse(geocoderResultInputSource);
-        } finally {
-            conn.disconnect();
+        if (oxmBean.getStatus().equals(ResponseStatus.EnumResponseStatus.STATUS_OK.getValue())) {
+            GPGoogleResult result = oxmBean.getResultList().get(0);
+            return new GoogleGeocodeBean(result);
         }
 
-        // extract the result
-        // a) obtain the formatted_address field for every result
-        NodeList resultNodeList = (NodeList) xpath.evaluate(
-                "/GeocodeResponse/result/formatted_address",
-                geocoderResultDocument, XPathConstants.NODESET);
-
-        if (resultNodeList.getLength() > 0) {
-            bean.setDescription(resultNodeList.item(0).getTextContent());
-        } else {
-            bean.setDescription(GeocodingKeyValue.ZERO_RESULTS.toString());
-        }
-
-        return bean;
+        return new GoogleGeocodeBean();
     }
 }

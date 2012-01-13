@@ -50,4 +50,12 @@ public interface IGeoPlatformLocation {
     public void setLat(double lat);
     
     public String getDescription();
+    
+    public String getCountry();
+
+    public String getDistrict();
+
+    public String getCity();
+
+    public String getAddress();
 }

@@ -44,29 +44,29 @@ public class AddressElement {
 
     public enum EnumAddressElement {
 
-        STREE_ADDRESS("street_address"),
-        ROUTE("route"),
-        INTERSECTION("intersection"),
-        POLITICAL("political"),
-        COUNTRY("country"),
-        ADMINISTRATIVE_AREA_LEVEL_1("administrative_area_level_1"),
-        ADMINISTRATIVE_AREA_LEVEL_2("administrative_area_level_2"),
-        ADMINISTRATIVE_AREA_LEVEL_3("administrative_area_level_3"),
-        COLLOQUIAL_AREA("colloquial_area"),
-        LOCALITY("locality"),
-        SUBLOCALITY("sublocality"),
-        NEIGHBORHOOD("neighborhood"),
-        PREMISE("premise"),
-        SUBPREMISE("subpremise"),
-        POSTAL_CODE("postal_code"),
-        NATURAL_FEATURE("natural_feature"),
-        AIRPORT("airport"),
-        PARK("park"),
-        POINT_OF_INTEREST("point_of_interest"),
-        POST_BOX("post_box"),
-        STREE_NUMBER("street_number"),
-        FLOOR("floor"),
-        ROOM("room");
+        STREE_ADDRESS("street_address"), // indicates a precise street address. 
+        ROUTE("route"), // indicates a named route (such as "US 101").
+        INTERSECTION("intersection"), // indicates a major intersection, usually of two major roads.
+        POLITICAL("political"), // indicates a political entity. Usually, this type indicates a polygon of some civil administration.
+        COUNTRY("country"), // indicates the national political entity, and is typically the highest order type returned by the Geocoder.
+        ADMINISTRATIVE_AREA_LEVEL_1("administrative_area_level_1"), //indicates a first-order civil entity below the country level. Within the United States, these administrative levels are states. Not all nations exhibit these administrative levels.
+        ADMINISTRATIVE_AREA_LEVEL_2("administrative_area_level_2"), // indicates a second-order civil entity below the country level. Within the United States, these administrative levels are counties. Not all nations exhibit these administrative levels.
+        ADMINISTRATIVE_AREA_LEVEL_3("administrative_area_level_3"), // indicates a third-order civil entity below the country level. This type indicates a minor civil division. Not all nations exhibit these administrative levels.
+        COLLOQUIAL_AREA("colloquial_area"), // indicates a commonly-used alternative name for the entity.
+        LOCALITY("locality"), // indicates an incorporated city or town political entity.
+        SUBLOCALITY("sublocality"), // indicates an first-order civil entity below a locality
+        NEIGHBORHOOD("neighborhood"), // indicates a named neighborhood
+        PREMISE("premise"), // indicates a named location, usually a building or collection of buildings with a common name
+        SUBPREMISE("subpremise"), // indicates a first-order entity below a named location, usually a singular building within a collection of buildings with a common name
+        POSTAL_CODE("postal_code"), // indicates a postal code as used to address postal mail within the country.
+        NATURAL_FEATURE("natural_feature"), // indicates a prominent natural feature.
+        AIRPORT("airport"), // indicates an airport.
+        PARK("park"), // indicates a named park.
+        POINT_OF_INTEREST("point_of_interest"), // indicates a named point of interest. Typically, these "POI"s are prominent local entities that don't easily fit in another category such as "Empire State Building" or "Statue of Liberty."
+        POST_BOX("post_box"), // indicates a specific postal box.
+        STREE_NUMBER("street_number"), // indicates the precise street number.
+        FLOOR("floor"), // indicates the floor of a building address.
+        ROOM("room"); // indicates the room of a building address.
 
         private String value;
 

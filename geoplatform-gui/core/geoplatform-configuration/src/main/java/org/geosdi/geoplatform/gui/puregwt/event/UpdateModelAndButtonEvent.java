@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.puregwt.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 
 /**
  *
@@ -45,10 +46,10 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public class UpdateModelAndButtonEvent extends GwtEvent<ReverseGeocodingButtonModelHandler> {
 
-    private String location;
+    private IGeoPlatformLocation bean;
 
-    public UpdateModelAndButtonEvent(String location) {
-        this.location = location;
+    public UpdateModelAndButtonEvent(IGeoPlatformLocation theBean) {
+        this.bean = theBean;
     }
 
     @Override
@@ -58,6 +59,6 @@ public class UpdateModelAndButtonEvent extends GwtEvent<ReverseGeocodingButtonMo
 
     @Override
     protected void dispatch(ReverseGeocodingButtonModelHandler handler) {
-        handler.onUpdateButtonAndModel(location);
+        handler.onUpdateButtonAndModel(this.bean);
     }
 }

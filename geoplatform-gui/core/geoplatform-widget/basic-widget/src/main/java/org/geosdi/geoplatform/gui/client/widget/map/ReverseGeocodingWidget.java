@@ -42,11 +42,14 @@ import org.geosdi.geoplatform.gui.client.widget.map.popup.PopupMapWidget;
 import org.geosdi.geoplatform.gui.client.widget.map.popup.template.PopupTemplate;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
+import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
 import org.geosdi.geoplatform.gui.puregwt.GPToolbarActionHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.event.UpdateModelEvent;
 import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.event.MapClickListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -57,6 +60,8 @@ import org.gwtopenmaps.openlayers.client.event.MapClickListener;
  * 
  */
 public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
+    
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private GeoPlatformMap mapWidget;
     /** TODO : Think a way to have this in configuration **/
@@ -111,12 +116,12 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
     /**
      * 
-     * @param location
+     * @param bean
      */
-    public void onRequestSuccess(String location) {
+    public void onRequestSuccess(IGeoPlatformLocation theBean) {
         this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
-        if (!location.equalsIgnoreCase(PopupTemplate.ZERO_RESULTS.toString())) {
-            this.popupWidget.setContentHTML(PopupTemplate.IMAGE_RESULT_FOUND.toString() + "<br />" + location);
+        if (!theBean.getDescription().equalsIgnoreCase(PopupTemplate.ZERO_RESULTS.toString())) {
+            this.popupWidget.setContentHTML(PopupTemplate.IMAGE_RESULT_FOUND.toString() + "<br />" + PopupTemplate.ZERO_RESULTS);
         } else {
             this.popupWidget.setContentHTML(PopupTemplate.IMAGE_RESULT_NOT_FOUND.toString()
                     + "<br /> "
@@ -126,7 +131,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
         this.mapWidget.getMap().addPopup(this.popupWidget.getPopup());
         this.busy = false;
 
-        GPToolbarActionHandlerManager.fireEvent(new UpdateModelEvent(location));
+        GPToolbarActionHandlerManager.fireEvent(new UpdateModelEvent(theBean));
     }
 
     /**

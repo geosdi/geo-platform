@@ -39,58 +39,58 @@ import org.geosdi.geoplatform.gui.client.model.*;
 import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleAddress;
 import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleResult;
 import org.geosdi.geoplatform.gui.oxm.model.google.enums.AddressElement;
+import org.geosdi.geoplatform.gui.oxm.model.google.enums.ResponseStatus;
 
 /**
  * @author giuseppe
  * 
  */
-public class GoogleGeocodingBean extends GeocodingBean {
+public class GoogleGeocodeBean extends GeocodingBean {
 
     /**
      *
      */
     private static final long serialVersionUID = 7021908143959354644L;
-    
-    private String street_address;
-    private String route;
-    private String intersection;
-    private String political;
-    private String country;
-    private String administrative_area_level_1;
-    private String administrative_area_level_2;
-    private String administrative_area_level_3;
-    private String colloquial_area;
-    private String locality;
-    private String sublocality;
-    private String neighborhood;
-    private String premise;
-    private String subpremise;
-    private String postal_code;
-    private String natural_feature;
-    private String airport;
-    private String park;
-    private String point_of_interest;
+    private String street_address = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String route = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String intersection = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String political = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String googleCountry = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String administrative_area_level_1 = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String administrative_area_level_2 = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String administrative_area_level_3 = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String colloquial_area = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String locality = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String sublocality = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String neighborhood = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String premise = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String subpremise = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String postal_code = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String natural_feature = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String airport = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String park = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String point_of_interest = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
     //
     // Optional elements
-    private String post_box;
-    private String street_number;
-    private String floor;
-    private String room;
+    private String post_box = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String street_number = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String floor = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String room = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
 
-    public GoogleGeocodingBean() {
+    public GoogleGeocodeBean() {
     }
 
-    public GoogleGeocodingBean(GPGoogleResult result) {
+    public GoogleGeocodeBean(GPGoogleResult result) {
         super.setDescription(result.getCompleteDescription());
         super.setLat(result.getGeometry().getLocation().getLat());
         super.setLon(result.getGeometry().getLocation().getLon());
-        
+
         for (GPGoogleAddress address : result.getAddressList()) {
             setStreet_address(address);
             setRoute(address);
             setIntersection(address);
             setPolitical(address);
-            setCountry(address);
+            setGoogleCountry(address);
             setAdministrative_area_level_1(address);
             setAdministrative_area_level_2(address);
             setAdministrative_area_level_3(address);
@@ -124,6 +124,7 @@ public class GoogleGeocodingBean extends GeocodingBean {
      */
     public void setStreet_address(String street_address) {
         this.street_address = street_address;
+        super.setAddress(street_address);
     }
 
     /**
@@ -132,6 +133,7 @@ public class GoogleGeocodingBean extends GeocodingBean {
     private void setStreet_address(GPGoogleAddress address) {
         if (address.getType().equals(AddressElement.EnumAddressElement.STREE_ADDRESS.getValue())) {
             this.street_address = address.getLongName();
+            super.setAddress(address.getLongName());
         }
     }
 
@@ -207,23 +209,23 @@ public class GoogleGeocodingBean extends GeocodingBean {
     /**
      * @return the country
      */
-    public String getCountry() {
-        return country;
+    public String getGoogleCountry() {
+        return googleCountry;
     }
 
     /**
      * @param country the country to set
      */
-    public void setCountry(String country) {
-        this.country = country;
+    public void setGoogleCountry(String country) {
+        this.googleCountry = country;
     }
 
     /**
      * @param country the country to set
      */
-    private void setCountry(GPGoogleAddress address) {
+    private void setGoogleCountry(GPGoogleAddress address) {
         if (address.getType().equals(AddressElement.EnumAddressElement.COUNTRY.getValue())) {
-            this.country = address.getLongName();
+            this.googleCountry = address.getLongName();
         }
     }
 
@@ -247,6 +249,7 @@ public class GoogleGeocodingBean extends GeocodingBean {
     private void setAdministrative_area_level_1(GPGoogleAddress address) {
         if (address.getType().equals(AddressElement.EnumAddressElement.ADMINISTRATIVE_AREA_LEVEL_1.getValue())) {
             this.administrative_area_level_1 = address.getLongName();
+            super.setCountry(address.getLongName());
         }
     }
 
@@ -270,6 +273,7 @@ public class GoogleGeocodingBean extends GeocodingBean {
     private void setAdministrative_area_level_2(GPGoogleAddress address) {
         if (address.getType().equals(AddressElement.EnumAddressElement.ADMINISTRATIVE_AREA_LEVEL_2.getValue())) {
             this.administrative_area_level_2 = address.getLongName();
+            super.setDistrict(address.getLongName());
         }
     }
 
@@ -293,6 +297,7 @@ public class GoogleGeocodingBean extends GeocodingBean {
     private void setAdministrative_area_level_3(GPGoogleAddress address) {
         if (address.getType().equals(AddressElement.EnumAddressElement.ADMINISTRATIVE_AREA_LEVEL_3.getValue())) {
             this.administrative_area_level_3 = address.getLongName();
+            super.setCity(address.getLongName());
         }
     }
 
@@ -636,7 +641,6 @@ public class GoogleGeocodingBean extends GeocodingBean {
      * @param room the room to set
      */
     private void setRoom(GPGoogleAddress address) {
-        
     }
 
     /*
@@ -646,18 +650,18 @@ public class GoogleGeocodingBean extends GeocodingBean {
      */
     @Override
     public String toString() {
-        return "GoogleGeocodingBean{" + "street_address=" + street_address + 
-               ", route=" + route + ", intersection=" + intersection + 
-               ", political=" + political + ", country=" + country + 
-               ", administrative_area_level_1=" + administrative_area_level_1 + 
-               ", administrative_area_level_2=" + administrative_area_level_2 + 
-               ", administrative_area_level_3=" + administrative_area_level_3 + 
-               ", colloquial_area=" + colloquial_area + ", locality=" + locality + 
-               ", sublocality=" + sublocality + ", neighborhood=" + neighborhood + 
-               ", premise=" + premise + ", subpremise=" + subpremise + 
-               ", postal_code=" + postal_code + ", natural_feature=" + natural_feature + 
-               ", airport=" + airport + ", park=" + park + 
-               ", point_of_interest=" + point_of_interest + ", post_box=" + post_box + 
-               ", street_number=" + street_number + ", floor=" + floor + ", room=" + room + '}';
+        return "GoogleGeocodingBean{" + "street_address=" + street_address
+                + ", route=" + route + ", intersection=" + intersection
+                + ", political=" + political + ", country=" + googleCountry
+                + ", administrative_area_level_1=" + administrative_area_level_1
+                + ", administrative_area_level_2=" + administrative_area_level_2
+                + ", administrative_area_level_3=" + administrative_area_level_3
+                + ", colloquial_area=" + colloquial_area + ", locality=" + locality
+                + ", sublocality=" + sublocality + ", neighborhood=" + neighborhood
+                + ", premise=" + premise + ", subpremise=" + subpremise
+                + ", postal_code=" + postal_code + ", natural_feature=" + natural_feature
+                + ", airport=" + airport + ", park=" + park
+                + ", point_of_interest=" + point_of_interest + ", post_box=" + post_box
+                + ", street_number=" + street_number + ", floor=" + floor + ", room=" + room + '}';
     }
 }

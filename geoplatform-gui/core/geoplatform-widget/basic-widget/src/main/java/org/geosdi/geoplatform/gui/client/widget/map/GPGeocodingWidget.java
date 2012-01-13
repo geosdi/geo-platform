@@ -92,7 +92,7 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
         }
 
         this.geocoderMarker.addMarker(center, this.mapWidget.getMap());
-        GPToolbarActionHandlerManager.fireEvent(new UpdateModelAndButtonEvent(bean.getDescription()));
+        GPToolbarActionHandlerManager.fireEvent(new UpdateModelAndButtonEvent(bean));
     }
 
     /**

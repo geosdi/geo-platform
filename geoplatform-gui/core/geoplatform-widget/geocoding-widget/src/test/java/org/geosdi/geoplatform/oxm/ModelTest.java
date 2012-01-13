@@ -63,10 +63,10 @@ public class ModelTest {
     private GeoPlatformMarshall geocoderJaxbMarshaller;
 
     @Test
-    public void test() {
+    public void testGeocoding() {
         try {
             String sourceFileUrl = new File(".").getCanonicalPath() + File.separator
-                    + "src/test/resources/geocodeExample.xml";
+                    + "src/test/resources/googleGeocodeExample.xml";
 
             File source = new File(sourceFileUrl);
             if (!source.canRead()) {
@@ -76,7 +76,27 @@ public class ModelTest {
             GPGoogleGeocode geocode = (GPGoogleGeocode) geocoderJaxbMarshaller.loadFromFile(source);
             Assert.assertNotNull("The geocode is null", geocode);
 
-            logger.info("\n\n\t GeoPlatform Google OXM parsing : " + geocode + "\n\n");
+            logger.info("\n\n\t GeoPlatform Google geocoding OXM parsing : " + geocode + "\n\n");
+        } catch (IOException ex) {
+            logger.error("IOEXCEPTION @@@@@@@@@@@@@@@@@@@@ " + ex);
+        }
+    }
+
+    @Test
+    public void testReverseGeocoding() {
+        try {
+            String sourceFileUrl = new File(".").getCanonicalPath() + File.separator
+                    + "src/test/resources/googleReverseGeocodeExample.xml";
+
+            File source = new File(sourceFileUrl);
+            if (!source.canRead()) {
+                throw new IllegalArgumentException("Source path " + sourceFileUrl + " is not valid");
+            }
+
+            GPGoogleGeocode geocode = (GPGoogleGeocode) geocoderJaxbMarshaller.loadFromFile(source);
+            Assert.assertNotNull("The geocode is null", geocode);
+
+            logger.info("\n\n\t GeoPlatform Google reverse geocoding OXM parsing : " + geocode + "\n\n");
         } catch (IOException ex) {
             logger.error("IOEXCEPTION @@@@@@@@@@@@@@@@@@@@ " + ex);
         }

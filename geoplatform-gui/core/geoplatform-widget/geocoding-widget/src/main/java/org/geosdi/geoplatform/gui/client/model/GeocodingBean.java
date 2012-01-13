@@ -53,6 +53,11 @@ public class GeocodingBean extends GeoPlatformBeanModel implements
     private String description;
     private double lon;
     private double lat;
+    //
+    private String country;
+    private String district;
+    private String city;
+    private String address;
 
     /**
      * @return the description
@@ -105,6 +110,62 @@ public class GeocodingBean extends GeoPlatformBeanModel implements
         this.lat = lat;
     }
 
+    /**
+     * @return the country
+     */
+    public String getCountry() {
+        return country;
+    }
+
+    /**
+     * @param country the country to set
+     */
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    /**
+     * @return the district
+     */
+    public String getDistrict() {
+        return district;
+    }
+
+    /**
+     * @param district the district to set
+     */
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    /**
+     * @return the city
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * @param city the city to set
+     */
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
     /*
      * (non-Javadoc)
      *

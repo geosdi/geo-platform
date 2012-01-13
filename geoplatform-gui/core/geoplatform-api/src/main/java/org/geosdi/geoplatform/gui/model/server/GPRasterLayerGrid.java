@@ -35,9 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.model.server;
 
-import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
-import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 
 /**
  *
@@ -49,7 +47,6 @@ public class GPRasterLayerGrid extends GPLayerGrid implements GPRasterBean {
     private static final long serialVersionUID = -421196804918413910L;
     //
     private float opacity = 1.0f;
-    private ArrayList<GPStyleStringBeanModel> styles;
 
     /**
      * @return the opacity
@@ -65,15 +62,5 @@ public class GPRasterLayerGrid extends GPLayerGrid implements GPRasterBean {
     @Override
     public void setOpacity(float opacity) {
         this.opacity = opacity;
-    }
-
-    @Override
-    public ArrayList<GPStyleStringBeanModel> getStyles() {
-        return this.styles;
-    }
-
-    @Override
-    public void setStyles(ArrayList<GPStyleStringBeanModel> styles) {
-        this.styles = styles;
     }
 }

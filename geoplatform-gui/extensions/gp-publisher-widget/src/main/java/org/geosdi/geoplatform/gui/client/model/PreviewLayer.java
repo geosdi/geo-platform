@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.client.model;
 
 import com.google.gwt.core.client.GWT;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import javax.persistence.Transient;
@@ -44,6 +45,7 @@ import name.pehl.piriti.json.client.JsonReader;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -65,6 +67,7 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     private double upperX;
     private double upperY;
     private String message;
+    private String styleName;
     @Transient
     private Long id;
     @Transient
@@ -83,7 +86,9 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     public PreviewLayer() {
     }
 
-    public PreviewLayer(String label, String title, String name, String abstractText, String dataSource, String crs, BboxClientInfo bbox, GPLayerType layerType) {
+    public PreviewLayer(String label, String title, String name, String abstractText,
+            String dataSource, String crs, BboxClientInfo bbox, GPLayerType layerType,
+            String styleName) {
         this.label = label;
         this.title = title;
         this.name = name;
@@ -92,9 +97,9 @@ public class PreviewLayer implements GPLayerBean, Serializable {
         this.crs = crs;
         this.bbox = bbox;
         this.layerType = layerType;
+        this.styleName = styleName;
     }
-    
-    
+
     /**
      * @return the message
      */
@@ -133,6 +138,29 @@ public class PreviewLayer implements GPLayerBean, Serializable {
     @Override
     public void setAlias(String alias) {
         this.alias = alias;
+    }
+
+    /**
+     * @return the styleName
+     */
+    public String getStyleName() {
+        return styleName;
+    }
+
+    /**
+     * @param styleName the styleName to set
+     */
+    public void setStyleName(String styleName) {
+        this.styleName = styleName;
+    }
+
+    @Override
+    public ArrayList<GPStyleStringBeanModel> getStyles() {
+        ArrayList<GPStyleStringBeanModel> styleList = new ArrayList<GPStyleStringBeanModel>();
+        GPStyleStringBeanModel style = new GPStyleStringBeanModel();
+        style.setStyleString(this.styleName);
+        styleList.add(style);
+        return styleList;
     }
 
     @Override
@@ -315,6 +343,11 @@ public class PreviewLayer implements GPLayerBean, Serializable {
 
     @Override
     public <X> X set(String property, X value) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setStyles(ArrayList<GPStyleStringBeanModel> styles) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

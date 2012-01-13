@@ -41,7 +41,6 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMemento
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoVector;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.RasterTreeNode;

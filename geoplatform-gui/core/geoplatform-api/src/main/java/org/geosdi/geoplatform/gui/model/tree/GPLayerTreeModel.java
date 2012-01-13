@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.model.tree;
 
+import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
@@ -82,6 +83,7 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     private String crs;
     private BboxClientInfo bbox;
     private GPLayerType layerType;
+    private ArrayList<GPStyleStringBeanModel> styles = new ArrayList<GPStyleStringBeanModel>();
     //
     private ObservableFolderTreeNode observable = new ObservableFolderTreeNode();
 
@@ -133,6 +135,16 @@ public abstract class GPLayerTreeModel extends GPBeanTreeModel
     @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public void setStyles(ArrayList<GPStyleStringBeanModel> styles) {
+        this.styles = styles;
+    }
+
+    @Override
+    public ArrayList<GPStyleStringBeanModel> getStyles() {
+        return this.styles;
     }
 
     /**

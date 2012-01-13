@@ -274,7 +274,7 @@ public class GPTreeStoreWidget extends GenericTreeStoreWidget implements ISave<M
         raster.setLayerType(layer.getLayerType());
         raster.setName(layer.getName());
         //Not possible to do this: can i have a style after publishing a layer?
-        //raster.setStyles(((GPRasterBean)layer).getStyles());
+        raster.setStyles(layer.getStyles());
 //        raster.setzIndex(rasterBean.getzIndex());
         return raster;
     }

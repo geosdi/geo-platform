@@ -166,7 +166,7 @@ public class GPPublisherWidget extends GeoPlatformWindow
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
         wmsParams.setLayers(previewLayer.getName());
-        wmsParams.setStyles("");
+        wmsParams.setStyles(previewLayer.getStyleName());
         wmsParams.setIsTransparent(true);
 
         Double lowerX = previewLayer.getLowerX();
@@ -262,15 +262,17 @@ public class GPPublisherWidget extends GeoPlatformWindow
                                 public void onSuccess(String result) {
                                     LayerHandlerManager.fireEvent(new AddRasterFromPublisherEvent(layerList));
                                     reset();
-                                    System.out.println("Result: "+ result);
-                                    if (result != null && toggleButtonClusterReload.isPressed()) {
-                                        htmlPanel = new HTML(result);
-                                    } else if(toggleButtonClusterReload.isPressed()) {
-                                        htmlPanel = new HTML("Realod without result: may be some problems?");
+                                    System.out.println("Result: " + result);
+                                    if (toggleButtonClusterReload.isPressed()) {
+                                        if (result != null) {
+                                            htmlPanel = new HTML(result);
+                                        } else {
+                                            htmlPanel = new HTML("Realod without result: may be some problems?");
+                                        }
+                                        htmlWindow.removeAll();
+                                        htmlWindow.add(htmlPanel);
+                                        htmlWindow.show();
                                     }
-                                    htmlWindow.removeAll();
-                                    htmlWindow.add(htmlPanel);
-                                    htmlWindow.show();
                                     LayoutManager.getInstance().getStatusMap().setStatus(
                                             "Shape\\s published successfully: remember to save the new tree state.",
                                             EnumSearchStatus.STATUS_SEARCH.toString());

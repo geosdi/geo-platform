@@ -53,9 +53,11 @@ public class InfoPreview {
     private String crs = "";
     private boolean isVector = true;
     private String message = "ok";
+    private String styleName;
 
     public InfoPreview(String url, String workspace, String layerName,
-            double minX, double minY, double maxX, double maxY, String crs) {
+            double minX, double minY, double maxX, double maxY, String crs, 
+            String styleName) {
         this.dataSource = url;
         this.workspace = workspace;
         this.title = layerName;
@@ -65,6 +67,7 @@ public class InfoPreview {
         this.upperY = maxY;
         this.crs = crs;
         this.isVector = true;
+        this.styleName = styleName;
     }
 
     public InfoPreview() {
@@ -153,5 +156,19 @@ public class InfoPreview {
 
     public void setWorkspace(String workspace) {
         this.workspace = workspace;
+    }
+
+    /**
+     * @return the styleName
+     */
+    public String getStyleName() {
+        return styleName;
+    }
+
+    /**
+     * @param styleName the styleName to set
+     */
+    public void setStyleName(String styleName) {
+        this.styleName = styleName;
     }
 }

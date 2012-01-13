@@ -63,8 +63,8 @@ public class StylesLayerTabItem extends GenericTabItem<GPLayerBean> {
     }
 
     /**
-     * 
-     * @param size 
+     *
+     * @param size
      */
     public void updateWindowSize() {
         event.setSize(super.getTabPanel().getHeight());

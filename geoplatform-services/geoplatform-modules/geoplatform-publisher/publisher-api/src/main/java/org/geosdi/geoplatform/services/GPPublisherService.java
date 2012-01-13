@@ -63,6 +63,14 @@ public interface GPPublisherService {
             throws ResourceNotFoundFault;
     
     @Get
+    @HttpResource(location = "/preview/loadStyle")
+    @WebResult(name = "Result")
+    String loadStyle(
+            @WebParam(name = "layerDatasource") String layerDatasource,
+            @WebParam(name = "styleName") String styleName)
+            throws ResourceNotFoundFault;
+    
+    @Get
     @HttpResource(location = "/preview/uploadZipInPreview")
     @WebResult(name = "Result")
     InfoPreview uploadTIFInPreview(

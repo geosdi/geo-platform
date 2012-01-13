@@ -36,8 +36,10 @@
 package org.geosdi.geoplatform.gui.model;
 
 import com.extjs.gxt.ui.client.data.ModelData;
+import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
+import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -87,4 +89,8 @@ public interface GPLayerBean extends ModelData {
     public void setLayerType(GPLayerType layerType);
 
     public int getzIndex();
+
+    public ArrayList<GPStyleStringBeanModel> getStyles();
+
+    public void setStyles(ArrayList<GPStyleStringBeanModel> styles);
 }

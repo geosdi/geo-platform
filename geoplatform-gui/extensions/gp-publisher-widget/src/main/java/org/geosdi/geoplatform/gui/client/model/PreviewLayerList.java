@@ -39,7 +39,6 @@ import com.google.gwt.core.client.GWT;
 import java.io.Serializable;
 import java.util.List;
 import name.pehl.piriti.json.client.JsonReader;
-import org.geosdi.geoplatform.gui.model.GPLayerBean;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

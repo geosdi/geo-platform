@@ -36,15 +36,14 @@
 package org.geosdi.geoplatform.services;
 
 import it.geosolutions.geoserver.rest.encoder.GSPostGISDatastoreEncoder;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
+import org.geotools.factory.CommonFactoryFinder;
+import org.geotools.styling.SLDParser;
+import org.geotools.styling.Style;
+import org.geotools.styling.StyleFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

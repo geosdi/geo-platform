@@ -23,6 +23,17 @@
 
     <dependencies>
         
+<!--        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-api</artifactId>
+            <version>${geoplatform-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-configuration</artifactId>
+            <version>${geoplatform-version}</version>
+        </dependency>-->
 		<!-- APACHE COMMONS -->
         <dependency>
             <groupId>commons-lang</groupId>
@@ -147,6 +158,10 @@
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-coveragetools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools.xsd</groupId>
+            <artifactId>gt-xsd-sld</artifactId>
         </dependency>
         <!-- QUARTZ -->
         <dependency>

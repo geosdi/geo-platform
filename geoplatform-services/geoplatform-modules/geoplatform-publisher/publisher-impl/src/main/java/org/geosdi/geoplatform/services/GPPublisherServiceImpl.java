@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import javax.jws.WebService;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
@@ -44,10 +42,11 @@ import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
 import it.geosolutions.geoserver.rest.decoder.RESTCoverageStore;
 import it.geosolutions.geoserver.rest.decoder.RESTFeatureType;
 import it.geosolutions.geoserver.rest.decoder.RESTDataStoreList;
+import it.geosolutions.geoserver.rest.decoder.RESTLayer;
 import it.geosolutions.geoserver.rest.decoder.utils.NameLinkElem;
 import it.geosolutions.geoserver.rest.decoder.RESTStyleList;
 import it.geosolutions.geoserver.rest.encoder.GSPostGISDatastoreEncoder;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
@@ -149,15 +148,42 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         return pathGeoPortalDir;
     }
 
-    /****************************
-     *System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "geoportal"+ System.getProperty("file.separator") + "shp";
+    @Override
+    public String loadStyle(String layerDatasource, String styleName) throws 
+            ResourceNotFoundFault {
+        if(!layerDatasource.startsWith(RESTURL)){
+            //The requested style can't be loaded from the rest url configured.
+            throw new ResourceNotFoundFault("The requested style can't be "
+                    + "loaded from the rest url configured on the publisher service.");
+        }
+        return this.restReader.getSLD(styleName);
+//        String sldBody = this.restReader.getSLD(styleName);
+//        GPStyleProperties styleProperties = new GPStyleProperties();
+//        try {
+//            Reader reader = new StringReader(sldBody);
+//            Style style = PublishUtility.createFromSLD(reader);
+//            styleProperties.setStyleName(style.getName());
+//        } catch (Exception e) {
+//            logger.error("Error retrieving style from layer: " + e);
+//        }
+//        return styleProperties;
+    }
+
+    /**
+     * **************************
+     * System.getProperty("java.io.tmpdir") +
+     * System.getProperty("file.separator") + "geoportal"+
+     * System.getProperty("file.separator") + "shp";
+     *
      * @param workspace
      * @param dataStoreName
      * @param layerName
      * @return
      * @throws ResourceNotFoundFault
-     * @throws FileNotFoundException
-     * this service publishes the layer <layerName> we loaded in the previews workspace into the DB datastore identified by the <dataStoreName> and published into the <workspace> workspace
+     * @throws FileNotFoundException this service publishes the layer
+     * <layerName> we loaded in the previews workspace into the DB datastore
+     * identified by the <dataStoreName> and published into the <workspace>
+     * workspace
      */
     @Override
     public boolean publish(String sessionID, String workspace,
@@ -181,12 +207,13 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    /*************************
+    /**
+     * ***********************
      *
      * @param layerName
      * @return
-     * @throws ResourceNotFoundFault
-     * this service removes a layer from the workspace
+     * @throws ResourceNotFoundFault this service removes a layer from the
+     * workspace
      */
     public boolean removeSHPFromPreview(String workspace, String layerName) throws ResourceNotFoundFault {
         String userWorkspace = this.getWorkspace(workspace);
@@ -198,12 +225,13 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         return true;
     }
 
-    /*************************
+    /**
+     * ***********************
      *
      * @param layerName
      * @return
-     * @throws ResourceNotFoundFault
-     * this service removes a layer from the workspace
+     * @throws ResourceNotFoundFault this service removes a layer from the
+     * workspace
      */
     public boolean removeTIFFromPreview(String userName, String layerName) throws ResourceNotFoundFault {
         String userWorkspace = getWorkspace(userName);
@@ -216,14 +244,15 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     }
 
     private InfoPreview getTIFURLByLayerName(String userName, String layerName) {
-        RESTCoverage featureType = restReader.getCoverage(restReader.getLayer(
-                layerName));
+        RESTLayer layer = restReader.getLayer(layerName);
+        RESTCoverage featureType = restReader.getCoverage(layer);
         String userWorkspace = getWorkspace(userName);
         InfoPreview info = null;
         try {
             info = new InfoPreview(RESTURL, userWorkspace, layerName,
                     featureType.getMinX(), featureType.getMinY(),
-                    featureType.getMaxX(), featureType.getMaxY(), featureType.getCRS());
+                    featureType.getMaxX(), featureType.getMaxY(), 
+                    featureType.getCRS(), layer.getDefaultStyle());
         } catch (Exception e) {
             logger.info(
                     "The layer " + layerName + " is published in the " + userWorkspace + " workspace, but the server cannot provide info");
@@ -233,21 +262,24 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         return info;
     }
 
-    /*******************************
+    /**
+     * *****************************
      *
      * @param layerName
      * @return
-     * @throws ResourceNotFoundFault
-     * get the URL to the PNG if the layer dataStoreName
+     * @throws ResourceNotFoundFault get the URL to the PNG if the layer
+     * dataStoreName
      */
     private InfoPreview getSHPURLByDataStoreName(String userName, String layerName) throws ResourceNotFoundFault {
-        RESTFeatureType featureType = restReader.getFeatureType(restReader.getLayer(layerName));
+        RESTLayer layer = restReader.getLayer(layerName);
+        RESTFeatureType featureType = restReader.getFeatureType(layer);
         String userWorkspace = getWorkspace(userName);
         InfoPreview info = null;
         try {
             info = new InfoPreview(RESTURL, userWorkspace, layerName,
                     featureType.getMinX(), featureType.getMinY(),
-                    featureType.getMaxX(), featureType.getMaxY(), featureType.getCRS());
+                    featureType.getMaxX(), featureType.getMaxY(), 
+                    featureType.getCRS(), layer.getDefaultStyle());
         } catch (Exception e) {
             logger.info(
                     "The layer " + layerName + " is published in the " + userWorkspace + " workspace, but the server cannot provide info");
@@ -257,11 +289,12 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         return info;
     }
 
-    /*************************
+    /**
+     * ***********************
      *
-     * @return
-     * @throws ResourceNotFoundFault
-     * this methods returns the list of the datastores in the user workspace. For each datastore the info to find the PNG is also specified
+     * @return @throws ResourceNotFoundFault this methods returns the list of
+     * the datastores in the user workspace. For each datastore the info to find
+     * the PNG is also specified
      */
     @Override
     public List<InfoPreview> getPreviewDataStores(String userName) throws ResourceNotFoundFault {
@@ -277,11 +310,12 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         return listPreviews;
     }
 
-    /**************
+    /**
+     * ************
      *
      * @param file the ZIP file from where extracting the info
-     * @return the information of the shapefile
-     * this method extracts from a zip file containing the shape files, the name, the CRS and the geometry types
+     * @return the information of the shapefile this method extracts from a zip
+     * file containing the shape files, the name, the CRS and the geometry types
      */
     private List<LayerInfo> getInfoFromCompressedShape(String userName, File file,
             String tempUserDir, String tempUserZipDir, String tempUserTifDir) {
@@ -460,22 +494,22 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         return infoShapeList;
     }
 
-    /***************
+    /**
+     * *************
      *
      * @param layer the layer to remove
-     * @return
-     *  perform a REST call for deleting the layer
+     * @return perform a REST call for deleting the layer
      */
     private boolean removeLayer(String layer) {
         String sUrl = RESTURL + "/rest/layers/" + layer + "?purge=true";
         return HttpUtilsLocal.delete(sUrl, RESTUSER, RESTPW);
     }
 
-    /*************
+    /**
+     * ***********
      *
      * @param styleName
-     * @return
-     * check whether the style styleName exists
+     * @return check whether the style styleName exists
      */
     public boolean existsStyle(String styleName) {
         RESTStyleList styleList = restReader.getStyles();
@@ -487,12 +521,13 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         return false;
     }
 
-    /**************
+    /**
+     * ************
      *
      * @param workspace
      * @param dataStoreName
-     * @return
-     * check whether the layer layerName exists in the workspace workspace
+     * @return check whether the layer layerName exists in the workspace
+     * workspace
      */
     public boolean existsDataStore(String workspace, String dataStoreName) {
         RESTDataStoreList workspaceDataStores = restReader.getDatastores(workspace);
@@ -504,17 +539,18 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         return false;
     }
 
-    /*******************
+    /**
+     * *****************
      *
-     * @return
-     * reload the catalogue of geoserver
+     * @return reload the catalogue of geoserver
      */
     private String reload() {
         String sUrl = RESTURL + "/rest/reload";
         return HttpUtilsLocal.post(sUrl, "", "text/html", RESTUSER, RESTPW);
     }
 
-    /********************
+    /**
+     * ******************
      *
      * @param userName
      * @return
@@ -646,14 +682,17 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         this.scheduleTrigger(triggerKey, trigger);
     }
 
-    /******************************
+    /**
+     * ****************************
      *
      * @param file
      * @return returns the URL to the PNG of the layer uploaded in the ZIP file
-     * @throws ResourceNotFoundFault this exception may be launched when: the ZIP file does not contain a SHP file
-     * this service upload in the user workspace a shapefile. The ZIP file must contain the shp, the prj, the shx and the dbf files. 
-     * Otherwise, an exception is raised
-     ******************************/
+     * @throws ResourceNotFoundFault this exception may be launched when: the
+     * ZIP file does not contain a SHP file this service upload in the user
+     * workspace a shapefile. The ZIP file must contain the shp, the prj, the
+     * shx and the dbf files. Otherwise, an exception is raised
+     * ****************************
+     */
     @Override
     public List<InfoPreview> uploadZIPInPreview(String sessionID, String userName, File file) throws ResourceNotFoundFault {
         logger.info("Call to uploadZIPInPreview");
@@ -773,15 +812,17 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         return infoPreview;
     }
 
-    /***********************
+    /**
+     * *********************
      *
      * @param shpFile
      * @param dbfFile
      * @param shxFile
      * @param prjFile
      * @return
-     * @throws ResourceNotFoundFault
-     * this service uploads in the previews workspace a shapefile. The shapefile file must contain the shp, the prj, the shx and the dbf files. Otherwise, an exception is raised
+     * @throws ResourceNotFoundFault this service uploads in the previews
+     * workspace a shapefile. The shapefile file must contain the shp, the prj,
+     * the shx and the dbf files. Otherwise, an exception is raised
      */
     @Override
     public List<InfoPreview> uploadShapeInPreview(String sessionID, String username, File shpFile,

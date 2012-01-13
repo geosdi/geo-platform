@@ -35,10 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.model.server;
 
+import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerType;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 
 /**
  *
@@ -50,6 +52,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
     /*
      * 
      */
+
     private static final long serialVersionUID = 7746607426284214904L;
     /*
      * 
@@ -69,7 +72,6 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
             return value;
         }
     }
-    
     private Long id;
     private String name;
     private String alias;
@@ -80,6 +82,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
     private String crs;
     private BboxClientInfo bbox;
     private GPLayerType layerType;
+    private ArrayList<GPStyleStringBeanModel> styles;
 
     /**
      * @return the id
@@ -236,6 +239,16 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
     @Override
     public void setBbox(BboxClientInfo bbox) {
         this.bbox = bbox;
+    }
+
+    @Override
+    public ArrayList<GPStyleStringBeanModel> getStyles() {
+        return this.styles;
+    }
+
+    @Override
+    public void setStyles(ArrayList<GPStyleStringBeanModel> styles) {
+        this.styles = styles;
     }
 
     /**

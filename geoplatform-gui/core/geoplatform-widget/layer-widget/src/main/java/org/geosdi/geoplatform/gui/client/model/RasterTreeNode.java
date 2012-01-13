@@ -77,7 +77,6 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
     }
     //
     private float opacity = 1.0f;
-    private ArrayList<GPStyleStringBeanModel> styles = new ArrayList<GPStyleStringBeanModel>();
 
     public RasterTreeNode() {
     }
@@ -91,13 +90,8 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
         super(layer);
         super.setLabel(layer.getTitle()); // Label of a vector is different
         this.setAlias(layer.getAlias());
-        this.setOpacity(layer.getOpacity());
         this.setStyles(layer.getStyles());
-    }
-
-    @Override
-    public ArrayList<GPStyleStringBeanModel> getStyles() {
-        return this.styles;
+        this.setOpacity(layer.getOpacity());
     }
 
     /**
@@ -117,10 +111,6 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
         set(GPRasterKeyValue.OPACITY.toString(), this.opacity);
     }
 
-    @Override
-    public void setStyles(ArrayList<GPStyleStringBeanModel> styles) {
-        this.styles = styles;
-    }
 
     /*
      * (non-Javadoc)
@@ -144,8 +134,8 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
      */
     @Override
     public String toString() {
-        return "RasterTreeNode [getLabel()=" + getLabel() + ", styles="
-                + styles.size() + ", getDataSource()=" + getDataSource()
+        return "RasterTreeNode [getLabel()=" + getLabel() +
+                ", getDataSource()=" + getDataSource()
                 + ", getCrs()=" + getCrs() + ", getBbox()=" + getBbox()
                 + ", getLayerType()=" + getLayerType() + ", getzIndex()="
                 + getzIndex() + "]";

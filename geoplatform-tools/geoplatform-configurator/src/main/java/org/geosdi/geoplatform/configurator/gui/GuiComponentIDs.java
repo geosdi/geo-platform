@@ -154,13 +154,11 @@ public class GuiComponentIDs {
         Map<String, Boolean> mapUser = new HashMap<String, Boolean>();
         // Menubar
         mapUser.put(LOAD_PROJECTS, true);
-        // NOTE: if value is null, the relative entry will not be created
-//        mapUser.put(INGEST_DATA, null);
-//        mapUser.put(MANAGE_USERS, null);
+        mapUser.put(INGEST_DATA, true);
         mapUser.put(ABOUT_GEOPLATFORM, true);
         mapUser.put(SEARCH_AOE, true);
         mapUser.put(CLEAR_AOE, true);
-        mapUser.put(GEOCODING, false); // TODO true
+        mapUser.put(GEOCODING, true);
         mapUser.put(ROUTING, true);
         mapUser.put(LAYER_MENU, true);
         mapUser.put(GRATICULA, true);
@@ -171,8 +169,8 @@ public class GuiComponentIDs {
         mapUser.put(ZOOM_PREVIOUS, true);
         mapUser.put(ZOOM_NEXT, true);
         mapUser.put(GET_FEATURE_INFO, true);
-        mapUser.put(MEASURE, false); // TODO true
-        mapUser.put(MEASURE_AREA, false);  // TODO true
+        mapUser.put(MEASURE, true);
+        mapUser.put(MEASURE_AREA, true);
         mapUser.put(DRAW_FEATURE, true);
         mapUser.put(DRAW_LINE_FEATURE, true);
         mapUser.put(DRAW_POINT_FEATURE, true);
@@ -200,7 +198,7 @@ public class GuiComponentIDs {
         mapViewer.put(ABOUT_GEOPLATFORM, true);
         mapViewer.put(SEARCH_AOE, true);
         mapViewer.put(CLEAR_AOE, true);
-//        mapViewer.put(GEOCODING, true); // TODO decomment
+        mapViewer.put(GEOCODING, true);
         mapViewer.put(ROUTING, true);
         mapViewer.put(LAYER_MENU, true);
         mapViewer.put(GRATICULA, true);
@@ -222,11 +220,11 @@ public class GuiComponentIDs {
         mapViewer.put(RESIZE_FEATURE, true);
         mapViewer.put(DELETE_FEATURE, true);
         mapViewer.put(CLEAR_MAP, true);
-//        mapViewer.put(REVERSE_GEOCODING, true); // TODO decomment
-//        mapViewer.put(REVERSE_GEOCODING_WPS, true); // TODO decomment
-        mapViewer.put(GOOGLE_ICON, false); // TODO true
+        mapViewer.put(REVERSE_GEOCODING, true);
+        mapViewer.put(REVERSE_GEOCODING_WPS, true);
+        mapViewer.put(GOOGLE_ICON, true);
         mapViewer.put(USER_MENU, true);
-        mapViewer.put(GOOGLE_SIGN_ON_BUTTON, false); // TODO true
+        mapViewer.put(GOOGLE_SIGN_ON_BUTTON, true);
         mapViewer.put(USER_OPTIONS_BUTTON, true);
         mapViewer.put(USER_LOGOUT, true);
         //

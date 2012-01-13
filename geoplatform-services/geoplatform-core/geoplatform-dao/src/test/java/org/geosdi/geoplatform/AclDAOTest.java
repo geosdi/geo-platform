@@ -44,6 +44,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.core.acl.AclClass;
 import org.geosdi.geoplatform.core.acl.AclEntry;
 import org.geosdi.geoplatform.core.acl.AclObjectIdentity;
@@ -79,15 +80,16 @@ public class AclDAOTest extends BaseDAOTest {
     //
     @Autowired
     protected GuiComponentDAO guiComponentDAO;
-    // Component ID
-    final private String idZoomNext = "ZoomNext";
-    final private String idZoomPrevious = "ZoomPrevious";
-    final private String idZoomIn = "ZoomIn";
-    final private String idZoomOut = "ZoomOut";
     // ACL
     protected final String usernameSuperUserTestAcl = "super_user_test_acl";
     protected final String usernameAdminTestAcl = "admin_acl_test";
     protected final String usernameUserTestAcl = "user_acl_test";
+    //
+    private AclClass gcClass;
+    private AclSid superUser;
+    private AclSid admin;
+    private AclSid user;
+    private AclSid viewer;
 
     @Test
     public void testCheckAclDAOs() {
@@ -126,9 +128,9 @@ public class AclDAOTest extends BaseDAOTest {
     }
 
     private void removeUserByUsername(String username) {
-        GPUser user = accountDAO.findByUsername(username);
-        if (user != null) {
-            accountDAO.remove(user);
+        GPUser usr = accountDAO.findByUsername(username);
+        if (usr != null) {
+            accountDAO.remove(usr);
         }
     }
 
@@ -189,111 +191,87 @@ public class AclDAOTest extends BaseDAOTest {
 
     private void insertGuiComponents() {
         // Unique class of Object Identities
-        AclClass gcClass = new AclClass(GuiComponent.class.getName());
+        this.gcClass = new AclClass(GuiComponent.class.getName());
         //
         logger.debug("\n*** AclClass to INSERT:\n{}\n***", gcClass);
         classDAO.persist(gcClass);
 
+        this.createSids();
+
+        Map<String, GuiComponent> gcMap = this.createGuiComponents();
+
+        Map<String, AclObjectIdentity> objIdMap = this.createObjectIdentities(gcMap);
+
+        this.createEntries(objIdMap);
+    }
+
+    private void createSids() {
         // Owner of all Object Identities
-        AclSid superUser = new AclSid(true, usernameSuperUserTestAcl);
+        this.superUser = new AclSid(true, usernameSuperUserTestAcl);
         // Users of interest
-        AclSid admin = new AclSid(false, GPRole.ADMIN.toString());
-        AclSid user = new AclSid(false, GPRole.USER.toString());
-        AclSid viewer = new AclSid(false, GPRole.VIEWER.toString());
+        this.admin = new AclSid(false, GPRole.ADMIN.toString());
+        this.user = new AclSid(false, GPRole.USER.toString());
+        this.viewer = new AclSid(false, GPRole.VIEWER.toString());
         //
         logger.debug("\n*** AclSid to INSERT:\n{}\n***", superUser);
         logger.debug("\n*** AclSid to INSERT:\n{}\n***", admin);
         logger.debug("\n*** AclSid to INSERT:\n{}\n***", user);
         logger.debug("\n*** AclSid to INSERT:\n{}\n***", viewer);
+        //
         sidDAO.persist(superUser, admin, user, viewer);
+    }
 
-        // Gui Components
-//        GuiComponent gc1 = new GuiComponent("GeoPlatformInfoApp");
-//        GuiComponent gc2 = new GuiComponent("GetFeatureInfo");
-//        GuiComponent gc3 = new GuiComponent("Measure");
-//        GuiComponent gc4 = new GuiComponent("MeasureArea");
-        //
-//        logger.debug("\n*** GuiComponent to INSERT:\n{}\n***", gc1);
-//        logger.debug("\n*** GuiComponent to INSERT:\n{}\n***", gc2);
-//        logger.debug("\n*** GuiComponent to INSERT:\n{}\n***", gc3);
-//        logger.debug("\n*** GuiComponent to INSERT:\n{}\n***", gc4);
-//        guiComponentDAO.persist(gc1, gc2, gc3, gc4);
-        //
+    private Map<String, GuiComponent> createGuiComponents() {
         Map<String, GuiComponent> gcMap = new HashMap<String, GuiComponent>();
-        gcMap.put(idZoomNext, new GuiComponent(idZoomNext));
-        gcMap.put(idZoomPrevious, new GuiComponent(idZoomPrevious));
-        gcMap.put(idZoomIn, new GuiComponent(idZoomIn));
-        gcMap.put(idZoomOut, new GuiComponent(idZoomOut));
+        // Gui Components
+        for (String ID : GuiComponentIDs.LIST_ALL) {
+            gcMap.put(ID, new GuiComponent(ID));
+        }
         //
         guiComponentDAO.persist(gcMap.values().toArray(new GuiComponent[gcMap.size()]));
 
-//        GuiComponent gcZoomNext = new GuiComponent("zoomNext");
-//        GuiComponent gcZoomPrevious = new GuiComponent("zoomPrevious");
-//        GuiComponent gcZoomIn = new GuiComponent("zoomIn");
-//        GuiComponent gcZoomOut = new GuiComponent("zoomOut");
-//        //
-//        guiComponentDAO.persist(gcZoomNext, gcZoomPrevious, gcZoomIn, gcZoomOut);
+        return gcMap;
+    }
 
-        // Object Identities
-//        AclObjectIdentity objGc1 = new AclObjectIdentity(gcClass, gc1.getId(), superUser);
-//        AclObjectIdentity objGc2 = new AclObjectIdentity(gcClass, gc2.getId(), superUser);
-//        AclObjectIdentity objGc3 = new AclObjectIdentity(gcClass, gc3.getId(), superUser);
-//        AclObjectIdentity objGc4 = new AclObjectIdentity(gcClass, gc4.getId(), superUser);
-//        //
-//        logger.debug("\n*** AclObjectIdentity to INSERT:\n{}\n***", objGc1);
-//        logger.debug("\n*** AclObjectIdentity to INSERT:\n{}\n***", objGc2);
-//        logger.debug("\n*** AclObjectIdentity to INSERT:\n{}\n***", objGc3);
-//        logger.debug("\n*** AclObjectIdentity to INSERT:\n{}\n***", objGc4);
-//        objectIdentityDAO.persist(objGc1, objGc2, objGc3, objGc4);
-        //
-//        AclObjectIdentity objZoomNext = new AclObjectIdentity(gcClass, gcZoomNext.getId(), superUser);
-//        AclObjectIdentity objZoomPrevious = new AclObjectIdentity(gcClass, gcZoomPrevious.getId(), superUser);
-//        AclObjectIdentity objZoomIn = new AclObjectIdentity(gcClass, gcZoomIn.getId(), superUser);
-//        AclObjectIdentity objZoomOut = new AclObjectIdentity(gcClass, gcZoomOut.getId(), superUser);
-        //
-//        objectIdentityDAO.persist(objGc1, objGc2, objGc3, objGc4);
-        //
+    private Map<String, AclObjectIdentity> createObjectIdentities(Map<String, GuiComponent> gcMap) {
         Map<String, AclObjectIdentity> objIdMap = new HashMap<String, AclObjectIdentity>();
-        objIdMap.put(idZoomNext, new AclObjectIdentity(gcClass, gcMap.get(idZoomNext).getId(), superUser));
-        objIdMap.put(idZoomPrevious, new AclObjectIdentity(gcClass, gcMap.get(idZoomPrevious).getId(), superUser));
-        objIdMap.put(idZoomIn, new AclObjectIdentity(gcClass, gcMap.get(idZoomIn).getId(), superUser));
-        objIdMap.put(idZoomOut, new AclObjectIdentity(gcClass, gcMap.get(idZoomOut).getId(), superUser));
+        // Object Identities
+        for (String componentID : GuiComponentIDs.LIST_ALL) {
+            Long id = gcMap.get(componentID).getId();
+            // SuperUser is the owner of all Object Identities
+            objIdMap.put(componentID, new AclObjectIdentity(gcClass, id, superUser));
+        }
         //
         objectIdentityDAO.persist(objIdMap.values().toArray(new AclObjectIdentity[objIdMap.size()]));
 
+        return objIdMap;
+    }
+
+    private void createEntries(Map<String, AclObjectIdentity> objIdMap) {
         // ACE
-        int visible = GuiComponentPermission.VISIBLE.getMask();
-        // ACEs of ACL#1 - GeoPlatformInfoApp - VISIBLE at ADMIN; USER
-////        AclEntry entry1Obj1 = new AclEntry(objGc1, 1, admin, visible, true, true, true);
-//        AclEntry entry2Obj1 = new AclEntry(objGc1, 2, user, visible, true, true, true);
-//        // ACEs of ACL#2 - GetFeatureInfo - VISIBLE at ADMIN; USER
-////        AclEntry entry1Obj2 = new AclEntry(objGc2, 1, admin, visible, true, true, true);
-//        AclEntry entry2Obj2 = new AclEntry(objGc2, 2, user, visible, true, true, true);
-//        // ACEs of ACL#3 - Measure - VISIBLE at ADMIN
-////        AclEntry entry1Obj3 = new AclEntry(objGc3, 1, admin, visible, true, true, true);
-//        AclEntry entry2Obj3 = new AclEntry(objGc3, 2, user, visible, false, true, true);
-//        // ACEs of ACL#4 - MeasureArea - VISIBLE at ADMIN
-////        AclEntry entry1Obj4 = new AclEntry(objGc4, 1, admin, visible, true, true, true);
-//        AclEntry entry2Obj4 = new AclEntry(objGc4, 2, user, visible, false, true, true);
-//        //
-////        logger.debug("\n*** AclEntry to INSERT:\n{}\n***", entry1Obj1);
-//        logger.debug("\n*** AclEntry to INSERT:\n{}\n***", entry2Obj1);
-////        logger.debug("\n*** AclEntry to INSERT:\n{}\n***", entry1Obj2);
-//        logger.debug("\n*** AclEntry to INSERT:\n{}\n***", entry2Obj2);
-////        logger.debug("\n*** AclEntry to INSERT:\n{}\n***", entry1Obj3);
-//        logger.debug("\n*** AclEntry to INSERT:\n{}\n***", entry2Obj3);
-////        logger.debug("\n*** AclEntry to INSERT:\n{}\n***", entry1Obj4);
-//        logger.debug("\n*** AclEntry to INSERT:\n{}\n***", entry2Obj4);
-//        entryDAO.persist(entry1Obj1, entry2Obj1, entry1Obj2, entry2Obj2,
-//                entry1Obj3, entry2Obj3, entry1Obj4, entry2Obj4);
+        int enable = GuiComponentPermission.ENABLE.getMask();
         //
         Map<String, AclEntry> entriesMap = new HashMap<String, AclEntry>();
-        // Will be added only the positive permission
-        // Ace Order is 3 because the entries of admin and user should be added before
-        entriesMap.put(GPRole.VIEWER + idZoomNext, new AclEntry(objIdMap.get(idZoomNext), 3, viewer, visible, true));
-        entriesMap.put(GPRole.VIEWER + idZoomPrevious, new AclEntry(objIdMap.get(idZoomPrevious), 3, viewer, visible, true));
-        entriesMap.put(GPRole.VIEWER + idZoomIn, new AclEntry(objIdMap.get(idZoomIn), 3, viewer, visible, true));
-        entriesMap.put(GPRole.VIEWER + idZoomOut, new AclEntry(objIdMap.get(idZoomOut), 3, viewer, visible, true));
+        // Admin
+        for (String componentID : GuiComponentIDs.LIST_ALL) {
+            entriesMap.put(GPRole.ADMIN + componentID,
+                           new AclEntry(objIdMap.get(componentID), 1, admin, enable, true));
+        }
+        // User
+        for (Map.Entry<String, Boolean> e : GuiComponentIDs.MAP_USER.entrySet()) {
+            if (e.getValue() != null) {
+                entriesMap.put(GPRole.USER + e.getKey(),
+                               new AclEntry(objIdMap.get(e.getKey()), 2, user, enable, e.getValue()));
+            }
+        }
+        // Viewer
+        for (Map.Entry<String, Boolean> e : GuiComponentIDs.MAP_VIEWER.entrySet()) {
+            if (e.getValue() != null) {
+                // Ace Order is 3 because the entries of admin and user should be added before
+                entriesMap.put(GPRole.VIEWER + e.getKey(),
+                               new AclEntry(objIdMap.get(e.getKey()), 3, viewer, enable, e.getValue()));
+            }
+        }
         //
         entryDAO.persist(entriesMap.values().toArray(new AclEntry[entriesMap.size()]));
     }

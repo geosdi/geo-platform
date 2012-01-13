@@ -58,7 +58,7 @@ public class GuiComponentsPermissionMapData {
         return map;
     }
 
-    public void setGuiComponentsPermissionMap(Map<String, Boolean> d) {
-        map = d;
+    public void setGuiComponentsPermissionMap(Map<String, Boolean> map) {
+        this.map = map;
     }
 }

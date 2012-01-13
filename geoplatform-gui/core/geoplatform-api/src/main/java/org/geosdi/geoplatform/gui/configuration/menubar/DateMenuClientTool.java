@@ -46,7 +46,7 @@ public class DateMenuClientTool extends MenuBarClientTool {
     private static final long serialVersionUID = -5201671145624228072L;
 
     @Override
-    public void buildTool(IGeoPlatformMenubar menubar, Menu menu) {
+    protected void create(IGeoPlatformMenubar menubar, Menu menu) {
         menubar.addDateMenu(this, menu);
     }
 }

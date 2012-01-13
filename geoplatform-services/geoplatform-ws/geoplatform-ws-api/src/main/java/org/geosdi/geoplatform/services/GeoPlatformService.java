@@ -103,7 +103,7 @@ public interface GeoPlatformService {
     @Put
     @HttpResource(location = "/accounts")
     Long insertAccount(@WebParam(name = "account") GPAccount account,
-            @WebParam(name = "sendEmail") boolean sendEmail)
+                       @WebParam(name = "sendEmail") boolean sendEmail)
             throws IllegalParameterFault;
 
     @Post
@@ -114,8 +114,8 @@ public interface GeoPlatformService {
     @Post
     @HttpResource(location = "/users")
     Long updateOwnUser(@WebParam(name = "User") UserDTO user,
-            @WebParam(name = "currentPlainPassword") String currentPlainPassword,
-            @WebParam(name = "newPlainPassword") String newPlainPassword)
+                       @WebParam(name = "currentPlainPassword") String currentPlainPassword,
+                       @WebParam(name = "newPlainPassword") String newPlainPassword)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Post
@@ -178,7 +178,7 @@ public interface GeoPlatformService {
     @HttpResource(location = "/users/search/{num}/{page}/{nameLike}")
     @WebResult(name = "Users")
     List<UserDTO> searchUsers(@WebParam(name = "userID") Long userID,
-            PaginatedSearchRequest searchRequest)
+                              PaginatedSearchRequest searchRequest)
             throws ResourceNotFoundFault;
 
     @Get
@@ -251,14 +251,14 @@ public interface GeoPlatformService {
     @HttpResource(location = "/account/{accountID}")
     @WebResult(name = "AccountProject")
     Long getAccountProjectsCount(@WebParam(name = "accountID") Long accountID,
-            SearchRequest request)
+                                 SearchRequest request)
             throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/accounts/search/{num}/{page}/{nameLike}")
     @WebResult(name = "Projects")
     List<ProjectDTO> searchAccountProjects(@WebParam(name = "accountID") Long accountID,
-            PaginatedSearchRequest request)
+                                           PaginatedSearchRequest request)
             throws ResourceNotFoundFault;
 
     @Get
@@ -270,7 +270,7 @@ public interface GeoPlatformService {
     @Post
     @HttpResource(location = "/account/defaultProject")
     void updateDefaultProject(@WebParam(name = "accountID") Long accountID,
-            @WebParam(name = "projectID") Long projectID)
+                              @WebParam(name = "projectID") Long projectID)
             throws ResourceNotFoundFault;
 
     @Post
@@ -344,7 +344,7 @@ public interface GeoPlatformService {
     @HttpResource(location = "/folder")
     @Deprecated
     Long insertFolder(@WebParam(name = "projectID") Long projectID,
-            @WebParam(name = "folder") GPFolder folder)
+                      @WebParam(name = "folder") GPFolder folder)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Post
@@ -362,8 +362,8 @@ public interface GeoPlatformService {
     @Post
     @HttpResource(location = "/folder/{folderID}")
     Long saveFolderProperties(@WebParam(name = "folderID") Long folderID,
-            @WebParam(name = "folderName") String folderName,
-            @WebParam(name = "checked") boolean checked)
+                              @WebParam(name = "folderName") String folderName,
+                              @WebParam(name = "checked") boolean checked)
             throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Put
@@ -470,7 +470,7 @@ public interface GeoPlatformService {
     @Put
     @HttpResource(location = "/project")
     Long importProject(@WebParam(name = "projectDTO") ProjectDTO projectDTO,
-            @WebParam(name = "accountID") Long accountID)
+                       @WebParam(name = "accountID") Long accountID)
             throws IllegalParameterFault, ResourceNotFoundFault;
     //</editor-fold>
 
@@ -690,8 +690,8 @@ public interface GeoPlatformService {
     @Post
     @HttpResource(location = "/server")
     ServerDTO saveServer(@WebParam(name = "id") Long id,
-            @WebParam(name = "aliasServerName") String aliasServerName,
-            @WebParam(name = "serverUrl") String serverUrl)
+                         @WebParam(name = "aliasServerName") String aliasServerName,
+                         @WebParam(name = "serverUrl") String serverUrl)
             throws IllegalParameterFault, ResourceNotFoundFault;
     //</editor-fold>
 
@@ -699,7 +699,7 @@ public interface GeoPlatformService {
     @Get
     @HttpResource(location = "/account/{accountID}")
     @WebResult(name = "GuiComponentsPermissionMapData")
-    GuiComponentsPermissionMapData getAccountGuiComponentVisible(
+    GuiComponentsPermissionMapData getAccountGuiComponentPermission(
             @WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
     //</editor-fold>

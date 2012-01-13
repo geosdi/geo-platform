@@ -54,6 +54,11 @@ public class MenubarSeparatorTool extends MenuBarClientTool {
 
     @Override
     public void buildTool(IGeoPlatformMenubar menubar, Menu menu) {
+        this.create(menubar, menu);
+    }
+
+    @Override
+    protected void create(IGeoPlatformMenubar menubar, Menu menu) {
         menubar.addMenuSeparator(menu);
     }
 }

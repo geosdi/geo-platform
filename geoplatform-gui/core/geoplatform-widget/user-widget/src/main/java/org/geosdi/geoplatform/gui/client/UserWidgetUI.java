@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
@@ -56,7 +57,7 @@ import org.geosdi.geoplatform.gui.impl.users.options.factory.GeoPlatformMemberFa
  */
 public class UserWidgetUI implements EntryPoint {
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
@@ -68,7 +69,8 @@ public class UserWidgetUI implements EntryPoint {
     }
 
     private void addUserWidgetAction() {
-        MenuActionRegistar.put("manageUsers", new MenuActionCreator() {
+        MenuActionRegistar.put(GuiComponentIDs.MANAGE_USERS,
+                               new MenuActionCreator() {
 
             @Override
             public MenuAction createAction() {
@@ -89,8 +91,9 @@ public class UserWidgetUI implements EntryPoint {
      * Add Member to the Factory
      */
     private void addMembers() {
-        IGPMemberOptionManager memberManager = GeoPlatformMemberFactory.getDefaultMemberManager(GPMemberOptionType.SIMPLE_PROPERTIES);
-        
+        IGPMemberOptionManager memberManager =
+                GeoPlatformMemberFactory.getDefaultMemberManager(GPMemberOptionType.SIMPLE_PROPERTIES);
+
         memberManager.addMember(new UserOptionsMemberUser());
         memberManager.addMember(new UserOptionsMemberView());
         memberManager.addMember(new UserOptionsMemberDisk());

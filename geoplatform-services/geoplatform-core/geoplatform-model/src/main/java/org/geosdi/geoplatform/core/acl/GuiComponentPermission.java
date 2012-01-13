@@ -47,8 +47,9 @@ import org.springframework.security.acls.model.Permission;
  */
 public class GuiComponentPermission implements Permission {
 
-    public static final Permission VISIBLE =
-            new GuiComponentPermission(1 << 0, 'v'); // 1
+    private static final long serialVersionUID = -6287156188411712223L;
+    //
+    public static final Permission ENABLE = new GuiComponentPermission(1 << 0, 'v'); // 1
     // Fields
     private char code;
     private int mask;

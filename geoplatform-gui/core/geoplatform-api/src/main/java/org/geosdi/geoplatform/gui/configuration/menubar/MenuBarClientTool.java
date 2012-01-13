@@ -74,7 +74,7 @@ public class MenuBarClientTool extends MenubarGenericTool {
     }
 
     @Override
-    public void buildTool(IGeoPlatformMenubar menubar, Menu menu) {
+    protected void create(IGeoPlatformMenubar menubar, Menu menu) {
         menubar.addMenuItem(this, menu);
     }
 }

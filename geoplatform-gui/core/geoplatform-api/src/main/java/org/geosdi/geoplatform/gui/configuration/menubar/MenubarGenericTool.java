@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.configuration.menubar;
 
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import org.geosdi.geoplatform.gui.configuration.GenericTool;
+import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
 
 /**
  *
@@ -46,10 +47,20 @@ public abstract class MenubarGenericTool extends GenericTool {
 
     private static final long serialVersionUID = -6366879645618646403L;
 
+    public void buildTool(IGeoPlatformMenubar menubar, Menu menu) {
+        Boolean permission = GPUserGuiComponents.getInstance().
+                hasComponentPermission(this.getId());
+//        System.out.println("*** [ID = " + this.getId() + "] Permission = " + permission);
+        if (permission != null) {
+            super.enabled &= permission;
+            this.create(menubar, menu);
+        }
+    }
+
     /**
      * Each component will be added into menu itself
      * 
      * @param menu
      */
-    public abstract void buildTool(IGeoPlatformMenubar menubar, Menu menu);
+    protected abstract void create(IGeoPlatformMenubar menubar, Menu menu);
 }

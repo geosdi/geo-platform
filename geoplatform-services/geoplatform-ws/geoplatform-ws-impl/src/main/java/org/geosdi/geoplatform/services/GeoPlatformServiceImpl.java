@@ -301,19 +301,19 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     @Override
     public Long updateUser(GPUser user) throws ResourceNotFoundFault,
-            IllegalParameterFault {
+                                               IllegalParameterFault {
         return accountServiceDelegate.updateUser(user);
     }
 
     @Override
     public Long updateApplication(GPApplication application) throws ResourceNotFoundFault,
-            IllegalParameterFault {
+                                                                    IllegalParameterFault {
         return accountServiceDelegate.updateApplication(application);
     }
 
     @Override
     public Long updateOwnUser(UserDTO user,
-            String currentPlainPassword, String newPlainPassword)
+                              String currentPlainPassword, String newPlainPassword)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return accountServiceDelegate.updateOwnUser(user, currentPlainPassword, newPlainPassword);
     }
@@ -570,7 +570,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     @Override
     public boolean saveDragAndDropFolderAndTreeModifications(Long idFolderMoved, Long idNewParent, int newPosition,
-            GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
+                                                             GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
         return folderServiceDelegate.saveDragAndDropFolderModifications(idFolderMoved, idNewParent, newPosition, descendantsMapData);
     }
 
@@ -668,7 +668,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     @Override
     public ArrayList<Long> saveAddedLayersAndTreeModifications(Long projectID, Long parentID, List<GPLayer> layers,
-            GPWebServiceMapData descendantsMapData)
+                                                               GPWebServiceMapData descendantsMapData)
             throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.saveAddedLayersAndTreeModifications(projectID, parentID, layers, descendantsMapData);
     }
@@ -693,7 +693,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     @Override
     public boolean saveDragAndDropLayerAndTreeModifications(Long idLayerMoved, Long idNewParent, int newPosition,
-            GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
+                                                            GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.saveDragAndDropLayerModifications(idLayerMoved, idNewParent, newPosition, descendantsMapData);
     }
 
@@ -819,9 +819,9 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     //<editor-fold defaultstate="collapsed" desc="ACL">
     @Override
-    public GuiComponentsPermissionMapData getAccountGuiComponentVisible(Long accountID)
+    public GuiComponentsPermissionMapData getAccountGuiComponentPermission(Long accountID)
             throws ResourceNotFoundFault {
-        return this.aclServiceDelegate.getAccountGuiComponentVisible(accountID);
+        return this.aclServiceDelegate.getAccountGuiComponentPermission(accountID);
     }
     //</editor-fold>
 }

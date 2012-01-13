@@ -46,6 +46,7 @@ public class MenuActionRegistar extends GeoPlatformActionRegistar {
     private static MenuActionRegistar INSTANCE = new MenuActionRegistar();
 
     /**
+     * Insert a Menu Action into Registar
      *
      * @param key
      * @param menuActionCreator
@@ -57,7 +58,7 @@ public class MenuActionRegistar extends GeoPlatformActionRegistar {
     }
 
     /**
-     * Return Menu Action
+     * Return a Menu Action into Registar, otherwise null
      *
      * @param key
      *            key with the action is registered

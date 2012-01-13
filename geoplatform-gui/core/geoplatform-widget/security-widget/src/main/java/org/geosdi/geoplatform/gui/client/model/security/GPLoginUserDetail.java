@@ -15,11 +15,12 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
 public class GPLoginUserDetail implements IGPUserDetail {
 
     private static final long serialVersionUID = -7265573728577702116L;
+    //
     private String username;
     private String name;
     private String email;
     private Map<String, Boolean> componentPermission;
-    private boolean viewer;
+    private boolean viewer; // TODO DEL
 
     public GPLoginUserDetail() {
     }
@@ -77,12 +78,13 @@ public class GPLoginUserDetail implements IGPUserDetail {
     }
 
     @Override
-    public boolean hasComponentPermission(String idComponent) {
-        return this.componentPermission != null ? this.componentPermission.containsKey(
-                idComponent) : true;
+    public Boolean hasComponentPermission(String componentID) {
+        return componentPermission.get(componentID);
     }
 
     /**
+     * TODO DEL
+     * 
      * @return the viewer
      */
     @Override
@@ -91,6 +93,8 @@ public class GPLoginUserDetail implements IGPUserDetail {
     }
 
     /**
+     * TODO DEL
+     * 
      * @param viewer the viewer to set
      */
     @Override

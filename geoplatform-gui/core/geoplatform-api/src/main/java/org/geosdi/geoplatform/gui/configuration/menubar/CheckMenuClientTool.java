@@ -75,7 +75,7 @@ public class CheckMenuClientTool extends MenuBarClientTool {
     }
 
     @Override
-    public void buildTool(IGeoPlatformMenubar menubar, Menu menu) {
+    protected void create(IGeoPlatformMenubar menubar, Menu menu) {
         menubar.addCheckMenuItem(this, menu);
     }
 }

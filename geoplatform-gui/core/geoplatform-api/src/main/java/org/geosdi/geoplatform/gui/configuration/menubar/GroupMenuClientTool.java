@@ -66,7 +66,7 @@ public class GroupMenuClientTool extends MenuBarClientTool {
     }
 
     @Override
-    public void buildTool(IGeoPlatformMenubar menubar, Menu menu) {
+    protected void create(IGeoPlatformMenubar menubar, Menu menu) {
         menubar.addGroupMenuItem(this, menu);
     }
 }

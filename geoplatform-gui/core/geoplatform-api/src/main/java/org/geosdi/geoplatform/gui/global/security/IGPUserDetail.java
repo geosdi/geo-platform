@@ -17,9 +17,17 @@ public interface IGPUserDetail extends IGPUserSimpleDetail {
 
     public Map<String, Boolean> getComponentPermission();
 
-    public boolean hasComponentPermission(String idComponent);
+    /**
+     * Check the permission of a GuiComponent via String ID
+     * 
+     * @param componentID
+     * 
+     * @return true or false if componentID was set, for enable/disable;
+     *         otherwise null i.e. the component will not be visible
+     */
+    public Boolean hasComponentPermission(String componentID);
 
-    public boolean isViewer();
+    public boolean isViewer(); // TODO DEL
 
-    public void setViewer(boolean viewer);
+    public void setViewer(boolean viewer); // TODO DEL
 }

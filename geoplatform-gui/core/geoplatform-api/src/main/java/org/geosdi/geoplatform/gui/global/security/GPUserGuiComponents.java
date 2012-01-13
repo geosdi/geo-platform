@@ -11,14 +11,14 @@ package org.geosdi.geoplatform.gui.global.security;
  */
 public class GPUserGuiComponents {
 
-    private static GPUserGuiComponents instance = new GPUserGuiComponents();
+    private static GPUserGuiComponents INSTANCE = new GPUserGuiComponents();
     private IGPUserDetail userDetail;
 
     private GPUserGuiComponents() {
     }
 
     public static GPUserGuiComponents getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     /**
@@ -44,21 +44,9 @@ public class GPUserGuiComponents {
     }
 
     /**
-     * 
-     * @param idComponent
-     * @return 
+     * @see IGPUserDetail#hasComponentPermission(java.lang.String)
      */
-    public boolean hasComponentPermission(String idComponent) {
-        return userDetail.hasComponentPermission(idComponent);
-    }
-
-    /**
-     * 
-     * @param idComponent
-     * @return 
-     */
-    public boolean getPermissionForComponent(String idComponent) {
-        return userDetail.getComponentPermission() != null ? userDetail.getComponentPermission().get(
-                idComponent) == null ? false : true : false;
+    public Boolean hasComponentPermission(String componentID) {
+        return userDetail.hasComponentPermission(componentID);
     }
 }

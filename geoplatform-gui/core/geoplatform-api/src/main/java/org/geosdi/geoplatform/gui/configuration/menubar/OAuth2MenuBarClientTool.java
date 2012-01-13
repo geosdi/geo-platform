@@ -109,7 +109,7 @@ public class OAuth2MenuBarClientTool extends MenuBarClientTool {
     }
 
     @Override
-    public void buildTool(IGeoPlatformMenubar menubar, Menu menu) {
+    protected void create(IGeoPlatformMenubar menubar, Menu menu) {
         menubar.addOAuth2MenuItem(this, menu);
     }
 }

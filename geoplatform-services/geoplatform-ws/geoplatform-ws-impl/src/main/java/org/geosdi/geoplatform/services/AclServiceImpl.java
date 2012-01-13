@@ -143,10 +143,9 @@ class AclServiceImpl {
      * @return HashMap, Permissions on GUI Components for an account, with:
      *      key = ID Component
      *      value = Permission
-     * @throws ResourceNotFoundFault
-     *      if the account not found
+     * @throws ResourceNotFoundFault if the account not found
      */
-    public GuiComponentsPermissionMapData getAccountGuiComponentVisible(Long accountID)
+    public GuiComponentsPermissionMapData getAccountGuiComponentPermission(Long accountID)
             throws ResourceNotFoundFault {
         // Retrieve the account
         GPAccount account = accountDao.find(accountID);
@@ -174,13 +173,13 @@ class AclServiceImpl {
             // because there is a singe Permission)
             for (AclEntry entry : entries) {
                 logger.trace("\n*** AclEntry:\n{}\n***", entry);
-                if (entry.getMask().equals(GuiComponentPermission.VISIBLE.getMask())) {
+                if (entry.getMask().equals(GuiComponentPermission.ENABLE.getMask())) {
                     AclObjectIdentity objectIdentity = entry.getAclObject();
                     logger.trace("\n*** AclObjectIdentity:\n{}\n***", objectIdentity);
                     GuiComponent gc = guiComponentDao.find(objectIdentity.getObjectId());
                     logger.trace("\n*** GuiComponent:\n{}\n***", gc);
                     logger.debug("\n*** ComponentId: {} ***\n*** Granting: {} ***",
-                            gc.getComponentId(), entry.isGranting());
+                                 gc.getComponentId(), entry.isGranting());
                     mapComponentPermission.getGuiComponentsPermissionMap().put(gc.getComponentId(), entry.isGranting());
                 }
             }

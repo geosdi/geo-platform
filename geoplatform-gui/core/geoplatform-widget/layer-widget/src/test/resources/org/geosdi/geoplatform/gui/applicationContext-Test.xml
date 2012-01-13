@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
            http://www.springframework.org/schema/context
-           http://www.springframework.org/schema/context/spring-context-3.0.xsd"
-	default-autowire="byName">
+           http://www.springframework.org/schema/context/spring-context-3.1.xsd"
+       default-autowire="byName">
 
     <bean name="folderStore"
-		class="org.geosdi.geoplatform.gui.impl.GeoPlatformFolderStore">
+          class="org.geosdi.geoplatform.gui.impl.GeoPlatformFolderStore">
         <property name="folders">
             <list>
                 <ref bean="vectorFolder" />
@@ -32,7 +33,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="-180" />
                 <property name="lowerLeftY" value="-90" />
                 <property name="upperRightX" value="180" />
@@ -44,7 +45,7 @@
     </bean>
 
     <bean name="LandsatItalia"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
         <property name="layerName" value="StratiDiBase:LandsatItalia" />
         <property name="styles">
             <list>
@@ -55,7 +56,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="6.104" />
                 <property name="lowerLeftY" value="35.546" />
                 <property name="upperRightX" value="18.846" />
@@ -72,7 +73,7 @@
     </bean>
 
     <bean name="ASTER_DEM_Italia"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
         <property name="layerName" value="StratiDiBase:ASTER DEM Italia" />
         <property name="styles">
             <list>
@@ -83,7 +84,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="6" />
                 <property name="lowerLeftY" value="35" />
                 <property name="upperRightX" value="19" />
@@ -95,7 +96,7 @@
     </bean>
 
     <bean name="deagostini_ita_1milione"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
         <property name="layerName" value="StratiDiBase:deagostini_ita_1milione" />
         <property name="styles">
             <list>
@@ -106,7 +107,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="5.267" />
                 <property name="lowerLeftY" value="33.02" />
                 <property name="upperRightX" value="22.921" />
@@ -118,7 +119,7 @@
     </bean>
 
     <bean name="deagostini_ita_750mila"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
         <property name="layerName" value="StratiDiBase:deagostini_ita_750mila" />
         <property name="styles">
             <list>
@@ -129,7 +130,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="6.256" />
                 <property name="lowerLeftY" value="34.893" />
                 <property name="upperRightX" value="20.193" />
@@ -141,7 +142,7 @@
     </bean>
 
     <bean name="deagostini_ita_250mila"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
         <property name="layerName" value="StratiDiBase:deagostini_ita_250mila" />
         <property name="styles">
             <list>
@@ -152,7 +153,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="6.342" />
                 <property name="lowerLeftY" value="35.095" />
                 <property name="upperRightX" value="19.003" />
@@ -164,7 +165,7 @@
     </bean>
 
     <bean name="ctr_liguria"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
         <property name="layerName" value="StratiDiBase:ctr_liguria" />
         <property name="styles">
             <list>
@@ -175,7 +176,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="7.488" />
                 <property name="lowerLeftY" value="43.748" />
                 <property name="upperRightX" value="10.083" />
@@ -187,7 +188,7 @@
     </bean>
 
     <bean name="ctr_molise"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
         <property name="layerName" value="StratiDiBase:ctr_molise" />
         <property name="styles">
             <list>
@@ -198,7 +199,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="13.915" />
                 <property name="lowerLeftY" value="41.349" />
                 <property name="upperRightX" value="15.167" />
@@ -210,7 +211,7 @@
     </bean>
 
     <bean name="ctp_Trento"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
         <property name="layerName" value="StratiDiBase:ctp Trento" />
         <property name="styles">
             <list>
@@ -221,7 +222,7 @@
         <property name="crs" value="EPSG:4326" />
         <property name="bbox">
             <bean
-				class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
+                class="org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo">
                 <property name="lowerLeftX" value="10.406" />
                 <property name="lowerLeftY" value="45.64" />
                 <property name="upperRightX" value="11.973" />
@@ -233,7 +234,7 @@
     </bean>
 
     <bean name="ctr_lazio_o"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientRasterInfo">
         <property name="layerName" value="StratiDiBase:ctr_lazio_o" />
         <property name="styles">
             <list>
@@ -255,7 +256,7 @@
     </bean>
 
     <bean name="it_toponimi_igm_25k"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
         <property name="featureType" value="esercitazione:it_toponimi_igm_25k" />
         <property name="featureNameSpace" value="http://terex2010.geosdi.org/esercitazione" />
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
@@ -273,7 +274,7 @@
     </bean>
 
     <bean name="osm_line"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
         <property name="featureType" value="esercitazione:osm_line" />
         <property name="featureNameSpace" value="http://terex2010.geosdi.org/esercitazione" />
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
@@ -291,7 +292,7 @@
     </bean>
 
     <bean name="it_aeropo"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
         <property name="featureType" value="StratiDiBase:it_aeropo" />
         <property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
@@ -309,7 +310,7 @@
     </bean>
 
     <bean name="it_isoipse"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
         <property name="featureType" value="esercitazione:it_isoipse" />
         <property name="featureNameSpace" value="http://terex2010.geosdi.org/esercitazione" />
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
@@ -327,7 +328,7 @@
     </bean>
 
     <bean name="it_ferrovie"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
         <property name="featureType" value="StratiDiBase:it_ferrovie" />
         <property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
@@ -345,7 +346,7 @@
     </bean>
 
     <bean name="it_bacini"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
         <property name="featureType" value="StratiDiBase:it_bacini" />
         <property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
@@ -363,7 +364,7 @@
     </bean>
 
     <bean name="it_litologia"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
         <property name="featureType" value="StratiDiBase:it_litologia" />
         <property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
@@ -381,7 +382,7 @@
     </bean>
 
     <bean name="it_geologia"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
         <property name="featureType" value="StratiDiBase:it_geologia" />
         <property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
@@ -400,7 +401,7 @@
 
 
     <bean name="it_limiti_provinciali"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
         <property name="featureType" value="StratiDiBase:it_limiti_provinciali" />
         <property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
@@ -417,7 +418,8 @@
         <property name="zIndex" value="28" />
     </bean>
 
-    <bean name="it_limiti_regionali" class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+    <bean name="it_limiti_regionali"
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
         <property name="featureType" value="StratiDiBase:it_limiti_regionali" />
         <property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
@@ -435,7 +437,7 @@
     </bean>
 
     <bean name="eu_eur_limiti_amministrativi_1_areas"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.ClientVectorInfo">
         <property name="featureType" value="StratiDiBase:eu_eur_limiti_amministrativi_1_areas" />
         <property name="featureNameSpace" value="http://www.protezionecivile.it/base" />
         <property name="dataSource" value="http://dpc.geosdi.org/geoserver/wfs" />
@@ -453,7 +455,7 @@
     </bean>
 
     <bean name="rasterFolder"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo">
         <property name="label" value="Raster Folder" />
         <property name="zIndex" value="19" />
         <property name="folderElements">
@@ -473,7 +475,7 @@
     </bean>
 
     <bean name="vectorFolder"
-		class="org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo">
+          class="org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientInfo">
         <property name="label" value="Vector Folder" />
         <property name="zIndex" value="31" />
         <property name="folderElements">

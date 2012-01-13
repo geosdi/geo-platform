@@ -97,8 +97,7 @@ public class GeocodingService implements
          **/
         if (oxmBean.getStatus().equals(ResponseStatus.EnumResponseStatus.STATUS_OK.getValue())) {
             for (GPGoogleResult result : oxmBean.getResultList()) {
-                GoogleGeocodingBean bean = new GoogleGeocodingBean(result);
-                beans.add(bean);
+                beans.add(new GoogleGeocodingBean(result));
             }
         }
 

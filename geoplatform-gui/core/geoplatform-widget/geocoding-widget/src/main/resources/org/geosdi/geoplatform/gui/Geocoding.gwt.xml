@@ -2,6 +2,8 @@
 <module>
 
     <source path="client" />
+    
+    <source path="oxm" />
 
     <entry-point class='org.geosdi.geoplatform.gui.client.Geocoding' />
 

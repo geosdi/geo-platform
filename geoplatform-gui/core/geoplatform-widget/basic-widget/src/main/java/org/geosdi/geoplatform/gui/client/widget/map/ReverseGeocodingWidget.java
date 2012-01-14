@@ -48,8 +48,6 @@ import org.geosdi.geoplatform.gui.puregwt.event.UpdateModelEvent;
 import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.event.MapClickListener;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -60,8 +58,6 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
-    
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private GeoPlatformMap mapWidget;
     /** TODO : Think a way to have this in configuration **/
@@ -82,7 +78,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
     @Override
     public void register() {
         GeoPlatformMessage.infoMessage("Reverse Geocoding",
-                "Click on the map to have Information.");
+                                       "Click on the map to have Information.");
         this.mapWidget.getMap().addLayer(this.rGMarker.getMarkerLayer());
         this.rGMarker.addControl(this.mapWidget.getMap());
         this.mapWidget.getMap().addMapClickListener(listener);
@@ -91,7 +87,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
     @Override
     public void unregister() {
         GeoPlatformMessage.infoMessage("Reverse Geocoding",
-                "Reverse Geocoding Control Deactivated.");
+                                       "Reverse Geocoding Control Deactivated.");
         this.rGMarker.removeControl(this.mapWidget.getMap());
         this.clearWidgetStatus();
     }
@@ -110,7 +106,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
     public void clearWidgetStatus() {
         this.removeMapElements();
         this.mapWidget.getMap().removeLayer(this.rGMarker.getMarkerLayer(),
-                false);
+                                            false);
         this.mapWidget.getMap().removeMapClickListener(listener);
     }
 
@@ -172,7 +168,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
     private void displayErrorMessage() {
         GeoPlatformMessage.alertMessage("Reverse Geocoding",
-                "Server busy.");
+                                        "Server busy.");
     }
 
     /**

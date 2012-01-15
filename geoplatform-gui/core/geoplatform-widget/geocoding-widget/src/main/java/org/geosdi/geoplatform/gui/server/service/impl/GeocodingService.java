@@ -49,6 +49,8 @@ import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleResult;
 import org.geosdi.geoplatform.gui.oxm.model.google.enums.ResponseStatus;
 import org.geosdi.geoplatform.gui.server.service.IGeocodingService;
 import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +64,8 @@ public class GeocodingService implements
 
     // URL prefix to the geocoder
     private static final String GEOCODER_REQUEST_PREFIX_FOR_XML = "http://maps.google.com/maps/api/geocode/xml";
+    //
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
     private GeoPlatformMarshall geocoderJaxbMarshaller;

@@ -78,7 +78,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
     @Override
     public void register() {
         GeoPlatformMessage.infoMessage("Reverse Geocoding",
-                                       "Click on the map to have Information.");
+                "Click on the map to have Information.");
         this.mapWidget.getMap().addLayer(this.rGMarker.getMarkerLayer());
         this.rGMarker.addControl(this.mapWidget.getMap());
         this.mapWidget.getMap().addMapClickListener(listener);
@@ -87,7 +87,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
     @Override
     public void unregister() {
         GeoPlatformMessage.infoMessage("Reverse Geocoding",
-                                       "Reverse Geocoding Control Deactivated.");
+                "Reverse Geocoding Control Deactivated.");
         this.rGMarker.removeControl(this.mapWidget.getMap());
         this.clearWidgetStatus();
     }
@@ -106,7 +106,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
     public void clearWidgetStatus() {
         this.removeMapElements();
         this.mapWidget.getMap().removeLayer(this.rGMarker.getMarkerLayer(),
-                                            false);
+                false);
         this.mapWidget.getMap().removeMapClickListener(listener);
     }
 
@@ -117,7 +117,8 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
     public void onRequestSuccess(IGeoPlatformLocation theBean) {
         this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
         if (!theBean.getDescription().equalsIgnoreCase(PopupTemplate.ZERO_RESULTS.toString())) {
-            this.popupWidget.setContentHTML(PopupTemplate.IMAGE_RESULT_FOUND.toString() + "<br />" + PopupTemplate.ZERO_RESULTS);
+            this.popupWidget.setContentHTML(PopupTemplate.IMAGE_RESULT_FOUND.toString()
+                    + "<br />" + theBean.getDescription());
         } else {
             this.popupWidget.setContentHTML(PopupTemplate.IMAGE_RESULT_NOT_FOUND.toString()
                     + "<br /> "
@@ -168,7 +169,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
     private void displayErrorMessage() {
         GeoPlatformMessage.alertMessage("Reverse Geocoding",
-                                        "Server busy.");
+                "Server busy.");
     }
 
     /**

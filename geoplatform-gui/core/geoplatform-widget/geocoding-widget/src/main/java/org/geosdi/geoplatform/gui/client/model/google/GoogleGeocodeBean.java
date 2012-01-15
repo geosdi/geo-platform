@@ -80,6 +80,10 @@ public class GoogleGeocodeBean extends GeocodingBean {
     public GoogleGeocodeBean() {
     }
 
+    public GoogleGeocodeBean(String description) {
+        super.setDescription(description);
+    }
+
     public GoogleGeocodeBean(GPGoogleResult result) {
         super.setDescription(result.getCompleteDescription());
         super.setLat(result.getGeometry().getLocation().getLat());

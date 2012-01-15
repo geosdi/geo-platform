@@ -44,12 +44,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
+import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
 import org.geosdi.geoplatform.gui.client.model.google.GoogleGeocodeBean;
 import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleGeocode;
 import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleResult;
 import org.geosdi.geoplatform.gui.oxm.model.google.enums.ResponseStatus;
 import org.geosdi.geoplatform.gui.server.service.IReverseGeocoding;
 import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
@@ -59,11 +62,12 @@ import org.xml.sax.SAXException;
  * 
  */
 @Service("reverseGeocoding")
-public class ReverseGeocoding extends GPGeocodingService
-        implements IReverseGeocoding {
+public class ReverseGeocoding implements IReverseGeocoding {
 
     // URL prefix to the reverse geocoder
     private static final String REVERSE_GEOCODER_PREFIX_FOR_XML = "http://maps.googleapis.com/maps/api/geocode/xml";
+    //
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
     private GeoPlatformMarshall geocoderJaxbMarshaller;
@@ -78,10 +82,10 @@ public class ReverseGeocoding extends GPGeocodingService
             throws IOException, SAXException, ParserConfigurationException,
             XPathExpressionException {
 
-        url = new URL(REVERSE_GEOCODER_PREFIX_FOR_XML + "?latlng="
+        URL url = new URL(REVERSE_GEOCODER_PREFIX_FOR_XML + "?latlng="
                 + URLEncoder.encode(lat + "," + lon, "UTF-8") + "&sensor=true");
 
-        conn = (HttpURLConnection) url.openConnection();
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
         GPGoogleGeocode oxmBean = (GPGoogleGeocode) this.geocoderJaxbMarshaller.loadFromStream(conn.getInputStream());
 
@@ -90,6 +94,7 @@ public class ReverseGeocoding extends GPGeocodingService
             return new GoogleGeocodeBean(result);
         }
 
-        return new GoogleGeocodeBean();
+        /**@@@@@@@@@@@@@@ TODO FIXE ME @@@@@@@@@@@@@@@@@@@@ **/
+        return new GoogleGeocodeBean(GeocodingKeyValue.ZERO_RESULTS.toString());
     }
 }

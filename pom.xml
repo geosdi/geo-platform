@@ -114,12 +114,12 @@
             </snapshots>
         </repository>
 
-		<!-- JBoss -->
+		<!-- JBoss 
         <repository>
             <id>jboss-public-repository-group</id>
             <name>JBoss Public Repository Group</name>
             <url>http://repository.jboss.org/nexus/content/groups/public/</url>
-        </repository>
+        </repository>-->
         
 		<!-- Spring -->
         <repository>

@@ -1,7 +1,6 @@
   <!-- Inherit the core Web Toolkit stuff. -->
 <module>
     <inherits name='name.pehl.piriti.json.JSON' />
-    <inherits name='net.auroris.ColorPicker.client' />
     
     <source path="client" />
     

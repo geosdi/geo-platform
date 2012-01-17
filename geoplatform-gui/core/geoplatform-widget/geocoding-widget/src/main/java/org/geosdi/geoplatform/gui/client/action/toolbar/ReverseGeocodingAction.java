@@ -77,9 +77,6 @@ public class ReverseGeocodingAction extends MapToggleAction
         if (button.isPressed()) {
             mapWidget.getButtonBar().setPressedButton(button);
         }
-//        } else {
-//            mapWidget.getButtonBar().setPressedButton(null);
-//        }
 
         GPGeocodingHandlerManager.fireEvent(new ReverseGeocodingEvent(button.isPressed()));
     }

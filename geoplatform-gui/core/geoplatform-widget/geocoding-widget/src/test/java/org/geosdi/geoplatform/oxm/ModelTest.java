@@ -44,6 +44,8 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -61,14 +63,16 @@ public class ModelTest {
     //
     @Autowired
     private GeoPlatformMarshall geocoderJaxbMarshaller;
+    //
+    @Autowired
+    private ApplicationContext context;
 
     @Test
     public void testGeocoding() {
         try {
-            String sourceFileUrl = new File(".").getCanonicalPath() + File.separator
-                    + "src/test/resources/googleGeocodeExample.xml";
+            Resource sourceFileUrl = context.getResource("src/test/resources/googleGeocodeExample.xml");
 
-            File source = new File(sourceFileUrl);
+            File source = sourceFileUrl.getFile();
             if (!source.canRead()) {
                 throw new IllegalArgumentException("Source path " + sourceFileUrl + " is not valid");
             }

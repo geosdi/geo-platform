@@ -40,8 +40,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
 
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
@@ -55,7 +53,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.xml.sax.SAXException;
 
 /**
  * @author giuseppe
@@ -79,8 +76,7 @@ public class ReverseGeocoding implements IReverseGeocoding {
      */
     @Override
     public GeocodingBean findLocation(double lat, double lon)
-            throws IOException, SAXException, ParserConfigurationException,
-            XPathExpressionException {
+            throws IOException {
 
         URL url = new URL(REVERSE_GEOCODER_PREFIX_FOR_XML + "?latlng="
                 + URLEncoder.encode(lat + "," + lon, "UTF-8") + "&sensor=true");

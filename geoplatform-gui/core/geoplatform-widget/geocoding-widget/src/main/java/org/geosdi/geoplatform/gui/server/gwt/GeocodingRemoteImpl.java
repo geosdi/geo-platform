@@ -38,8 +38,6 @@ package org.geosdi.geoplatform.gui.server.gwt;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
 
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.service.GeocodingRemote;
@@ -51,7 +49,6 @@ import org.geosdi.geoplatform.gui.server.service.impl.ReverseGeocoding;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xml.sax.SAXException;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -95,19 +92,7 @@ public class GeocodingRemoteImpl extends RemoteServiceServlet implements
         // TODO Auto-generated method stub
         try {
             return this.reverseGeocoding.findLocation(lat, lon);
-        } catch (XPathExpressionException e) {
-            // TODO Auto-generated catch block
-            logger.error(e.getMessage());
-            throw new GeoPlatformException(e.getMessage());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            logger.error(e.getMessage());
-            throw new GeoPlatformException(e.getMessage());
-        } catch (SAXException e) {
-            // TODO Auto-generated catch block
-            logger.error(e.getMessage());
-            throw new GeoPlatformException(e.getMessage());
-        } catch (ParserConfigurationException e) {
             // TODO Auto-generated catch block
             logger.error(e.getMessage());
             throw new GeoPlatformException(e.getMessage());

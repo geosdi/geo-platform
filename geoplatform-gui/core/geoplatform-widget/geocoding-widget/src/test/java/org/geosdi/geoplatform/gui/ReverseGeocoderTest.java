@@ -37,8 +37,6 @@ package org.geosdi.geoplatform.gui;
 
 import java.io.IOException;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
 
 import junit.framework.Assert;
 
@@ -51,7 +49,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -73,18 +70,9 @@ public class ReverseGeocoderTest {
         GeocodingBean bean = null;
         try {
             bean = this.reverseGeoding.findLocation(40.6372425, 15.8022214);
-        } catch (XPathExpressionException e) {
-            // TODO Auto-generated catch block
-            logger.error("XPathExpressionException " + e);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             logger.error("IOException " + e);
-        } catch (SAXException e) {
-            // TODO Auto-generated catch block
-            logger.error("SAXException " + e);
-        } catch (ParserConfigurationException e) {
-            // TODO Auto-generated catch block
-            logger.error("ParserConfigurationException " + e);
         }
 
         Assert.assertNotNull(bean);

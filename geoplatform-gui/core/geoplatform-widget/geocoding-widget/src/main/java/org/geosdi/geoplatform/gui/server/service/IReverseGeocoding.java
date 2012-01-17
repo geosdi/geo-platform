@@ -62,6 +62,5 @@ public interface IReverseGeocoding {
      * @throws XPathExpressionException
      */
     public GeocodingBean findLocation(double lat, double lon)
-            throws IOException, SAXException, ParserConfigurationException,
-            XPathExpressionException;
+            throws IOException;
 }

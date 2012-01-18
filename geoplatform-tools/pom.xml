@@ -32,7 +32,6 @@
     <modules>
         <module>geoplatform-configurator</module>
         <module>geoplatform-wps-connector</module>
-		<module>ogc-sld</module>
     </modules>
 
 </project>

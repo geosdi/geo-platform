@@ -49,8 +49,6 @@ import org.geotoolkit.wps.xml.WPSMarshallerPool;
 import org.geotoolkit.wps.xml.v100.ExecuteResponse;
 import org.geotoolkit.wps.xml.v100.OutputDataType;
 import org.geotoolkit.wps.xml.v100.ProcessBriefType;
-import org.geotoolkit.wps.xml.v100.ProcessDescriptionType;
-import org.geotoolkit.wps.xml.v100.ProcessDescriptions;
 import org.geotoolkit.wps.xml.v100.WPSCapabilitiesType;
 import org.geotoolkit.xml.MarshallerPool;
 import org.junit.Test;
@@ -153,32 +151,32 @@ public class GeoPlatformWPSConnectorTest {
      * @throws IOException 
      */
 
-    @Test
-    public void describeProcess() throws JAXBException, IOException {
-        try {
-            this.um = pool.acquireUnmarshaller();
-
-            DescribeProcessRequest dsp = this.gpWPSConnector.createDescribeProcess();
-            List<String> identifiers = new ArrayList<String>();
-            identifiers.add("sitdpc:FilterByField");
-
-            dsp.setIdentifiers(identifiers);
-
-            InputStream is = dsp.getResponseStream();
-
-            ProcessDescriptions pdt = (ProcessDescriptions) this.um.unmarshal(is);
-
-            ProcessDescriptionType type = pdt.getProcessDescription().get(0);
-
-            logger.info("Process Input @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
-                    + type.getDataInputs().getInput().size());
-
-            logger.info("Process Output @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
-                    + type.getProcessOutputs().getOutput().size());
-
-
-        } finally {
-            pool.release(um);
-        }
-    }
+//    @Test
+//    public void describeProcess() throws JAXBException, IOException {
+//        try {
+//            this.um = pool.acquireUnmarshaller();
+//
+//            DescribeProcessRequest dsp = this.gpWPSConnector.createDescribeProcess();
+//            List<String> identifiers = new ArrayList<String>();
+//            identifiers.add("sitdpc:FilterByField");
+//
+//            dsp.setIdentifiers(identifiers);
+//
+//            InputStream is = dsp.getResponseStream();
+//
+//            ProcessDescriptions pdt = (ProcessDescriptions) this.um.unmarshal(is);
+//
+//            ProcessDescriptionType type = pdt.getProcessDescription().get(0);
+//
+//            logger.info("Process Input @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
+//                    + type.getDataInputs().getInput().size());
+//
+//            logger.info("Process Output @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
+//                    + type.getProcessOutputs().getOutput().size());
+//
+//
+//        } finally {
+//            pool.release(um);
+//        }
+//    }
 }

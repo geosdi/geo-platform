@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.plugin.tree.toolbar;
 
+import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ import java.util.List;
  */
 public class TreeToolbarPluginManager {
 
-    private static List<ITreeToolbarPlugin> toolbarPlugin = new ArrayList<ITreeToolbarPlugin>();
+    private static List<ITreeToolbarPlugin> toolbarPlugin = Lists.newArrayList();
 
     /**
      * @return the toolbarPlugin

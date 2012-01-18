@@ -149,9 +149,14 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     }
 
     @Override
-    public String loadStyle(String layerDatasource, String styleName) throws 
+    public boolean publishStyle(String styleToPublish) throws ResourceNotFoundFault {
+        return restPublisher.publishStyle(styleToPublish);
+    }
+
+    @Override
+    public String loadStyle(String layerDatasource, String styleName) throws
             ResourceNotFoundFault {
-        if(!layerDatasource.startsWith(RESTURL)){
+        if (!layerDatasource.startsWith(RESTURL)) {
             //The requested style can't be loaded from the rest url configured.
             throw new ResourceNotFoundFault("The requested style can't be "
                     + "loaded from the rest url configured on the publisher service.");
@@ -251,7 +256,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         try {
             info = new InfoPreview(RESTURL, userWorkspace, layerName,
                     featureType.getMinX(), featureType.getMinY(),
-                    featureType.getMaxX(), featureType.getMaxY(), 
+                    featureType.getMaxX(), featureType.getMaxY(),
                     featureType.getCRS(), layer.getDefaultStyle());
         } catch (Exception e) {
             logger.info(
@@ -278,7 +283,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         try {
             info = new InfoPreview(RESTURL, userWorkspace, layerName,
                     featureType.getMinX(), featureType.getMinY(),
-                    featureType.getMaxX(), featureType.getMaxY(), 
+                    featureType.getMaxX(), featureType.getMaxY(),
                     featureType.getCRS(), layer.getDefaultStyle());
         } catch (Exception e) {
             logger.info(
@@ -511,6 +516,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
      * @param styleName
      * @return check whether the style styleName exists
      */
+    @Override
     public boolean existsStyle(String styleName) {
         RESTStyleList styleList = restReader.getStyles();
         for (int i = 0; i < styleList.size(); i++) {

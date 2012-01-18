@@ -40,10 +40,6 @@ import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
-import org.geotools.factory.CommonFactoryFinder;
-import org.geotools.styling.SLDParser;
-import org.geotools.styling.Style;
-import org.geotools.styling.StyleFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -223,9 +219,9 @@ public class PublishUtility {
         }
         return out;
     }
+    
     //TODO: portare in file di configurazione esterno i parametri per la creazione 
-    //di stores postgis
-
+    //di stores postgi
     public static GSPostGISDatastoreEncoder generateEncoder(String storeName) {
         GSPostGISDatastoreEncoder encoder = new GSPostGISDatastoreEncoder();
         encoder.setName(storeName);

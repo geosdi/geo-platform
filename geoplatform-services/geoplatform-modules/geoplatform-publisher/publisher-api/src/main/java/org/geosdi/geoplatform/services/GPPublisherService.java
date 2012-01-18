@@ -69,6 +69,18 @@ public interface GPPublisherService {
             @WebParam(name = "layerDatasource") String layerDatasource,
             @WebParam(name = "styleName") String styleName)
             throws ResourceNotFoundFault;
+
+    @Get
+    @HttpResource(location = "/preview/publishStyle")
+    @WebResult(name = "Result")
+    boolean publishStyle(
+            @WebParam(name = "styleToPublish") String styleToPublish)
+            throws ResourceNotFoundFault;
+    @Get
+    @HttpResource(location = "/preview/existsStyle")
+    @WebResult(name = "Result")
+    public boolean existsStyle(
+            @WebParam(name = "styleName") String styleName);
     
     @Get
     @HttpResource(location = "/preview/uploadZipInPreview")

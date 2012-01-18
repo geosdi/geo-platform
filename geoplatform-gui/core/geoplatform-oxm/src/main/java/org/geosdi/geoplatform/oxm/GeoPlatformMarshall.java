@@ -40,6 +40,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
@@ -99,8 +100,12 @@ public class GeoPlatformMarshall {
     public Object loadFromStream(InputStream inputStream) throws IOException {
         return this.unmarshaller.unmarshal(new StreamSource(inputStream));
     }
-    
+
     public Object loadFromFile(File file) throws IOException {
         return this.unmarshaller.unmarshal(new StreamSource(file));
+    }
+
+    public Object loadFromReader(Reader reader) throws IOException {
+        return this.unmarshaller.unmarshal(new StreamSource(reader));
     }
 }

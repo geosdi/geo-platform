@@ -77,18 +77,15 @@ public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
      * 
      */
     private void initWidget() {
-        // TODO Auto-generated method stub
         initBox();
         initPointsControl();
         initLineControl();
     }
 
     /**
-     * 
      * Create Box to Limitare Search AREA
      */
     private void initBox() {
-        // TODO Auto-generated method stub
         this.box = new RoutingBoxes(geoPlatformMap);
     }
 
@@ -96,7 +93,6 @@ public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
      * 
      */
     private void initPointsControl() {
-        // TODO Auto-generated method stub
         this.pointsVector = new Vector("GP-Routing-Points-Vector");
         this.pointsVector.setZIndex(955);
         this.start = new GPRoutingStartPoint(this.pointsVector, this.box,
@@ -109,7 +105,6 @@ public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
      * 
      */
     private void initLineControl() {
-        // TODO Auto-generated method stub
         this.routeVector = new Vector("GP-Route-Vector");
         this.routeVector.setZIndex(956);
         this.line = new GPRoutingLine(routeVector, this.geoPlatformMap);
@@ -117,15 +112,13 @@ public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
         this.end.setLine(this.line);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.
-     * RoutingActivationEventHandler#activate()
+     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.RoutingActivationEventHandler#activate()
      */
     @Override
     public void activate() {
-        // TODO Auto-generated method stub
         GeoPlatformMessage.infoMessage("GeoPlatform Routing Module",
                 "Red square represents possible Routing Requests Area.");
         this.geoPlatformMap.getMap().addLayer(this.pointsVector);
@@ -133,15 +126,13 @@ public class GPRoutingManagerWidget implements RoutingActivationEventHandler {
         this.box.activate();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.
-     * RoutingActivationEventHandler#deactivate()
+     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.RoutingActivationEventHandler#deactivate()
      */
     @Override
     public void deactivate() {
-        // TODO Auto-generated method stub
         GeoPlatformMessage.infoMessage("GeoPlatform Routing Module",
                 "Routing Module Deactivated.");
         this.geoPlatformMap.getMap().removeLayer(this.pointsVector);

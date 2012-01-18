@@ -54,7 +54,6 @@ public abstract class IntersectionRoutingControl extends GPRoutingControl {
     public IntersectionRoutingControl(Vector theLayer,
             GeoPlatformBoxesWidget theBoxesWidget, GeoPlatformMap geoPlatformMap) {
         super(theLayer, geoPlatformMap);
-        // TODO Auto-generated constructor stub
         this.boxesWidget = theBoxesWidget;
     }
 }

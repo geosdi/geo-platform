@@ -233,7 +233,7 @@ public abstract class GPAccount implements Serializable {
         this.defaultProjectID = defaultProjectID;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * @see java.lang.Object#toString()
      */
@@ -256,7 +256,7 @@ public abstract class GPAccount implements Serializable {
         return str.toString();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * @see java.lang.Object#equals(java.lang.Object)
      */
@@ -275,7 +275,7 @@ public abstract class GPAccount implements Serializable {
         return true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * @see java.lang.Object#hashCode()
      */

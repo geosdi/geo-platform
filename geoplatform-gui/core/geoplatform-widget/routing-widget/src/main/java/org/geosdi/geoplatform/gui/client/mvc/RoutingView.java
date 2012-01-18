@@ -62,32 +62,27 @@ public class RoutingView extends GeoPlatformView {
 
     public RoutingView(Controller controller) {
         super(controller);
-        // TODO Auto-generated constructor stub
         this.routingManagement = new RoutingManagementWidget(
                 (RoutingController) controller);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.extjs.gxt.ui.client.mvc.View#initialize()
      */
     @Override
     protected void initialize() {
-        // TODO Auto-generated method stub
         this.activationEvent = new RoutingActivationEvent();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent
-     * (com.extjs.gxt.ui.client.mvc.AppEvent)
+     * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
      */
     @Override
     protected void handleEvent(AppEvent event) {
-        // TODO Auto-generated method stub
         if (event.getType() == RoutingEvents.SHOW_ROUTING_WIDGET) {
             onShowRoutingWidget();
         }
@@ -101,7 +96,6 @@ public class RoutingView extends GeoPlatformView {
      * Show Routing Widget
      */
     private void onShowRoutingWidget() {
-        // TODO Auto-generated method stub
         if (!LayoutManager.isWestVisible()) {
             LayoutManager.manageWest(true);
         }
@@ -115,7 +109,6 @@ public class RoutingView extends GeoPlatformView {
      * Hide Routing Widget
      */
     private void onHideRoutingWidget() {
-        // TODO Auto-generated method stub
         if (LayoutManager.isWidgetPresentOnWest(routingManagement)) {
             LayoutManager.removeComponentFromWest(routingManagement);
             this.activationEvent.setActivate(Boolean.FALSE);

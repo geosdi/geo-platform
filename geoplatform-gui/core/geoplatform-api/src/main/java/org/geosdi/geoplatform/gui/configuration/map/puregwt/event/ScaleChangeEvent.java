@@ -51,7 +51,7 @@ public class ScaleChangeEvent extends GwtEvent<ScaleChangeHandler> {
         this.size = theSize;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
@@ -61,12 +61,10 @@ public class ScaleChangeEvent extends GwtEvent<ScaleChangeHandler> {
         return ScaleChangeHandler.TYPE;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
-     * .EventHandler)
+     * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
      */
     @Override
     protected void dispatch(ScaleChangeHandler handler) {

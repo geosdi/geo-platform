@@ -78,11 +78,10 @@ public class GeoPlatformConfigurationImpl extends RemoteServiceServlet
         this.injectValues();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.service.GeoPlatformConfiguration#
-     * initGeoPlatformConfiguration()
+     * @see org.geosdi.geoplatform.gui.service.GeoPlatformConfiguration#initGeoPlatformConfiguration()
      */
     @Override
     public IGeoPlatformGlobal initGeoPlatformConfiguration() {

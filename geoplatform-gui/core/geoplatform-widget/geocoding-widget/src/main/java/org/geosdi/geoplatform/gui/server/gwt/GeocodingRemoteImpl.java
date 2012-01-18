@@ -76,11 +76,9 @@ public class GeocodingRemoteImpl extends RemoteServiceServlet implements
     @Override
     public ArrayList<GeocodingBean> findLocations(String search)
             throws GeoPlatformException {
-        // TODO Auto-generated method stub
         try {
             return this.geocodingService.findLocations(search);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             logger.error(e.getMessage());
             throw new GeoPlatformException(e.getMessage());
         }
@@ -89,11 +87,9 @@ public class GeocodingRemoteImpl extends RemoteServiceServlet implements
     @Override
     public GeocodingBean findLocation(double lat, double lon)
             throws GeoPlatformException {
-        // TODO Auto-generated method stub
         try {
             return this.reverseGeocoding.findLocation(lat, lon);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             logger.error(e.getMessage());
             throw new GeoPlatformException(e.getMessage());
         }

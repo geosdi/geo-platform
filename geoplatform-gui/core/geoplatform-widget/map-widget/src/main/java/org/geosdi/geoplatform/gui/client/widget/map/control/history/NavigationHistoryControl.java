@@ -56,16 +56,13 @@ public class NavigationHistoryControl implements GeoPlatformMapControl {
 		this.createControl();
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.configuration.map.control.GeoPlatformMapControl
-	 * #createControl()
+	 * @see org.geosdi.geoplatform.gui.configuration.map.control.GeoPlatformMapControl#createControl()
 	 */
 	@Override
 	public void createControl() {
-		// TODO Auto-generated method stub
 		NavigationHistoryOptions options = new NavigationHistoryOptions();
 		options.setClearOnDeactivate(true);
 		options.setAutoActivate(false);
@@ -77,7 +74,6 @@ public class NavigationHistoryControl implements GeoPlatformMapControl {
 
 					@Override
 					public void onActivate(ControlActivateEvent eventObject) {
-						// TODO Auto-generated method stub
 						GPHandlerManager.fireEvent(new ZoomPreviousEvent(true));
 					}
 				});
@@ -87,7 +83,6 @@ public class NavigationHistoryControl implements GeoPlatformMapControl {
 
 					@Override
 					public void onDeactivate(ControlDeactivateEvent eventObject) {
-						// TODO Auto-generated method stub
 						GPHandlerManager
 								.fireEvent(new ZoomPreviousEvent(false));
 					}
@@ -98,7 +93,6 @@ public class NavigationHistoryControl implements GeoPlatformMapControl {
 
 					@Override
 					public void onActivate(ControlActivateEvent eventObject) {
-						// TODO Auto-generated method stub
 						GPHandlerManager.fireEvent(new ZoomNextEvent(true));
 					}
 				});
@@ -108,7 +102,6 @@ public class NavigationHistoryControl implements GeoPlatformMapControl {
 
 					@Override
 					public void onDeactivate(ControlDeactivateEvent eventObject) {
-						// TODO Auto-generated method stub
 						GPHandlerManager.fireEvent(new ZoomNextEvent(false));
 					}
 				});
@@ -116,13 +109,11 @@ public class NavigationHistoryControl implements GeoPlatformMapControl {
 
 	@Override
 	public void activateControl() {
-		// TODO Auto-generated method stub
 		this.control.activate();
 	}
 
 	@Override
 	public void deactivateControl() {
-		// TODO Auto-generated method stub
 		this.control.deactivate();
 	}
 	

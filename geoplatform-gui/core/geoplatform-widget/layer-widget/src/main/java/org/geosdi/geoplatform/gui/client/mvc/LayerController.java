@@ -56,7 +56,7 @@ public class LayerController extends GeoPlatformController {
                 LayerEvents.SHOW_LAYER_WIDGET, LayerEvents.HIDE_LAYER_WIDGET);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.extjs.gxt.ui.client.mvc.Controller#initialize()
@@ -66,11 +66,10 @@ public class LayerController extends GeoPlatformController {
         this.view = new LayerView(this);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#
-     * handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
+     * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
      */
     @Override
     public void handleEvent(AppEvent event) {

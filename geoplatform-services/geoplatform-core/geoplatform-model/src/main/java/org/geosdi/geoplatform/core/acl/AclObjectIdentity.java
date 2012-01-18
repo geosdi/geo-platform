@@ -1,4 +1,3 @@
-//<editor-fold defaultstate="collapsed" desc="License">
 /*
  *  geo-platform
  *  Rich webgis framework
@@ -34,7 +33,6 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-//</editor-fold>
 package org.geosdi.geoplatform.core.acl;
 
 import javax.persistence.Column;
@@ -208,7 +206,7 @@ public class AclObjectIdentity {
     }
     //</editor-fold>
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

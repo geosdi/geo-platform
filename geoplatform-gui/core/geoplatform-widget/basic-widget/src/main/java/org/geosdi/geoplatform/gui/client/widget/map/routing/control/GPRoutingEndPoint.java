@@ -55,74 +55,67 @@ import com.google.gwt.core.client.GWT;
  * 
  */
 public class GPRoutingEndPoint extends GenericRoutingPoint implements
-		FinalRoutingPointEventHandler, RemoveFinalRoutingPointEventHandler {
+        FinalRoutingPointEventHandler, RemoveFinalRoutingPointEventHandler {
 
-	/**
-	 * @param theLayer
-	 */
-	public GPRoutingEndPoint(Vector theLayer,
-			GeoPlatformBoxesWidget boxesWidget, GeoPlatformMap geoPlatformMap) {
-		super(theLayer, boxesWidget, geoPlatformMap);
-		// TODO Auto-generated constructor stub
-		RoutingHandlerManager.addHandler(FinalRoutingPointEventHandler.TYPE,
-				this);
-		RoutingHandlerManager.addHandler(
-				RemoveFinalRoutingPointEventHandler.TYPE, this);
-	}
+    /**
+     * @param theLayer
+     */
+    public GPRoutingEndPoint(Vector theLayer,
+                             GeoPlatformBoxesWidget boxesWidget, GeoPlatformMap geoPlatformMap) {
+        super(theLayer, boxesWidget, geoPlatformMap);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.client.widget.map.routing.control.
-	 * GPRoutingStartPoint#setIconStyle()
-	 */
-	@Override
-	public void setIconStyle() {
-		// TODO Auto-generated method stub
-		style.setExternalGraphic(GWT.getModuleBaseURL() + "/gp-images/end.png");
-	}
+        RoutingHandlerManager.addHandler(FinalRoutingPointEventHandler.TYPE,
+                                         this);
+        RoutingHandlerManager.addHandler(
+                RemoveFinalRoutingPointEventHandler.TYPE, this);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.puregwt.routing.event.
-	 * FinalRoutingPointEventHandler
-	 * #drawFeature(org.geosdi.geoplatform.gui.model.IGeoPlatformLocation)
-	 */
-	@Override
-	public void drawFeature(IGeoPlatformLocation location) {
-		// TODO Auto-generated method stub
-		LonLat ll = new LonLat(location.getLon(), location.getLat());
-		ll.transform("EPSG:4326", geoPlatformMap.getMap().getProjection());
-		if (!this.boxesWidget.containsLonLat(ll)) {
-			GeoPlatformMessage.errorMessage("GeoPlatform Routing",
-					"The chosen location is out of Range.");
-			return;
-		}
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.client.widget.map.routing.control.GPRoutingStartPoint#setIconStyle()
+     */
+    @Override
+    public void setIconStyle() {
+        style.setExternalGraphic(GWT.getModuleBaseURL() + "/gp-images/end.png");
+    }
 
-		if (feature != null)
-			layer.removeFeature(feature);
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.FinalRoutingPointEventHandler#drawFeature(org.geosdi.geoplatform.gui.model.IGeoPlatformLocation)
+     */
+    @Override
+    public void drawFeature(IGeoPlatformLocation location) {
+        LonLat ll = new LonLat(location.getLon(), location.getLat());
+        ll.transform("EPSG:4326", geoPlatformMap.getMap().getProjection());
+        if (!this.boxesWidget.containsLonLat(ll)) {
+            GeoPlatformMessage.errorMessage("GeoPlatform Routing",
+                "The chosen location is out of Range.");
+            return;
+        }
 
-		Point p = new Point(ll.lon(), ll.lat());
-		feature = new VectorFeature(p);
-		feature.setStyle(style);
-		layer.addFeature(feature);
-	}
+        if (feature != null) {
+            layer.removeFeature(feature);
+        }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.puregwt.routing.event.
-	 * RemoveFinalRoutingPointEventHandler#removePoint()
-	 */
-	@Override
-	public void removePoint() {
-		// TODO Auto-generated method stub
-		if (feature != null) {
-			layer.removeFeature(feature);
-			feature = null;
-		}
-		this.line.removeLine();
-	}
+        Point p = new Point(ll.lon(), ll.lat());
+        feature = new VectorFeature(p);
+        feature.setStyle(style);
+        layer.addFeature(feature);
+    }
 
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.RemoveFinalRoutingPointEventHandler#removePoint()
+     */
+    @Override
+    public void removePoint() {
+        if (feature != null) {
+            layer.removeFeature(feature);
+            feature = null;
+        }
+        this.line.removeLine();
+    }
 }

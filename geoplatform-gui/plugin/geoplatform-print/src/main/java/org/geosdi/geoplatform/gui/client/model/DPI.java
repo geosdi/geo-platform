@@ -46,7 +46,7 @@ public class DPI extends GeoPlatformBeanModel {
         set(EnumDPI.DPI.getValue(), dpi);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see java.lang.Object#toString()

@@ -49,48 +49,47 @@ import org.gwtopenmaps.openlayers.client.marker.Box;
  */
 public class RoutingBoxes extends GeoPlatformBoxesWidget {
 
-	private Boxes layer;
-	private Box marker;
+    private Boxes layer;
+    private Box marker;
 
-	/**
-	 * @Constructor
-	 */
-	public RoutingBoxes(GeoPlatformMap theGeoPlatformMap) {
-		super(theGeoPlatformMap);
-	}
+    /**
+     * @Constructor
+     */
+    public RoutingBoxes(GeoPlatformMap theGeoPlatformMap) {
+        super(theGeoPlatformMap);
+    }
 
-	/**
-	 * Init Component
-	 */
-	public void init() {
-		// TODO Auto-generated method stub
-		this.bounds = new Bounds(6.627, 35.492, 18.521, 47.092);
-		this.layer = new Boxes("Geo-Platform Routing Boxes Layer");
+    /**
+     * Init Component
+     */
+    public void init() {
+        this.bounds = new Bounds(6.627, 35.492, 18.521, 47.092);
+        this.layer = new Boxes("Geo-Platform Routing Boxes Layer");
 
-		this.marker = new Box(this.bounds.transform(
-				new Projection("EPSG:4326"), new Projection(geoPlatformMap
-						.getMap().getProjection())));
+        this.marker = new Box(this.bounds.transform(
+                new Projection("EPSG:4326"), new Projection(geoPlatformMap.getMap().getProjection())));
 
-		this.layer.addMarker(marker);
+        this.layer.addMarker(marker);
 
-		this.marker.setZIndex(949);
-	}
+        this.marker.setZIndex(949);
+    }
 
-	/**
-	 * Add the layer to the Map
-	 * 
-	 */
-	public void activate() {
-		this.geoPlatformMap.getMap().addLayer(this.layer);
-		this.geoPlatformMap.getMap().zoomToExtent(this.marker.getBounds());
-	}
+    /**
+     * Add the layer to the Map
+     * 
+     */
+    @Override
+    public void activate() {
+        this.geoPlatformMap.getMap().addLayer(this.layer);
+        this.geoPlatformMap.getMap().zoomToExtent(this.marker.getBounds());
+    }
 
-	/**
-	 * Remove Layer from Map
-	 * 
-	 */
-	public void deactivate() {
-		this.geoPlatformMap.getMap().removeLayer(this.layer);
-	}
-
+    /**
+     * Remove Layer from Map
+     * 
+     */
+    @Override
+    public void deactivate() {
+        this.geoPlatformMap.getMap().removeLayer(this.layer);
+    }
 }

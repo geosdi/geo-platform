@@ -78,17 +78,14 @@ public class RoutingService implements IRoutingService {
     private HttpURLConnection conn;
     private XPath xpath;
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * org.geosdi.geoplatform.gui.server.service.IRoutingService#findDirections
-     * (double, double, double, double)
+     * @see org.geosdi.geoplatform.gui.server.service.IRoutingService#findDirections(double, double, double, double)
      */
     @Override
     public RoutingBean findDirections(double xStart, double yStart,
             double xStop, double yStop) throws GeoPlatformException {
-        // TODO Auto-generated method stub
         RoutingBean tracking = new RoutingBean();
 
         try {
@@ -146,23 +143,18 @@ public class RoutingService implements IRoutingService {
             }
 
         } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
             logger.error("Error :", e);
             throw new GeoPlatformException(e);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             logger.error("Error :", e);
             throw new GeoPlatformException(e);
         } catch (SAXException e) {
-            // TODO Auto-generated catch block
             logger.error("Error :", e);
             throw new GeoPlatformException(e);
         } catch (ParserConfigurationException e) {
-            // TODO Auto-generated catch block
             logger.error("Error :", e);
             throw new GeoPlatformException(e);
         } catch (XPathExpressionException e) {
-            // TODO Auto-generated catch block
             logger.error("Error :", e);
             throw new GeoPlatformException(e);
         } finally {

@@ -81,7 +81,7 @@ public class GeoPlatformInfo implements Serializable {
         this.copyrightInfo = copyrightInfo;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

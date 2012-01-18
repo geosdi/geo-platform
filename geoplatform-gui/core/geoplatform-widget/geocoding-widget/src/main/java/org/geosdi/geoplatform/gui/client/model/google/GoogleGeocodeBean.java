@@ -647,7 +647,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
     private void setRoom(GPGoogleAddress address) {
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

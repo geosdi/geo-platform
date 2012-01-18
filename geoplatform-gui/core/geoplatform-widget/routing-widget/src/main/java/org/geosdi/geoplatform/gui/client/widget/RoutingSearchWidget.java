@@ -88,7 +88,6 @@ public class RoutingSearchWidget implements HasCleanEvent {
      * @param controller
      */
     private void initWidgets() {
-        // TODO Auto-generated method stub
         this.startPoint = new StartPointSearchRouting(controller);
         this.finalPoint = new FinalPointSearchWidget(controller);
 
@@ -128,7 +127,6 @@ public class RoutingSearchWidget implements HasCleanEvent {
 
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-                        // TODO Auto-generated method stub
                         if (!(startPoint.getComboBox().getRawValue().equals(""))
                                 && !(finalPoint.getComboBox().getRawValue().equals(""))) {
                             findDirections(startPoint.getComboBox().getSelection().get(0), finalPoint.getComboBox().getSelection().get(0));
@@ -146,7 +144,6 @@ public class RoutingSearchWidget implements HasCleanEvent {
 
                     @Override
                     public void componentSelected(ButtonEvent ce) {
-                        // TODO Auto-generated method stub
                         startPoint.clearStatus();
                         finalPoint.clearStatus();
                         gridWidget.cleanUpTheStore();
@@ -174,7 +171,6 @@ public class RoutingSearchWidget implements HasCleanEvent {
 
                     @Override
                     public void onSuccess(RoutingBean result) {
-                        // TODO Auto-generated method stub
                         if (result != null) {
                             gridWidget.unMaskGrid();
                             gridWidget.fillStore(result.getDirections());
@@ -185,7 +181,6 @@ public class RoutingSearchWidget implements HasCleanEvent {
 
                     @Override
                     public void onFailure(Throwable caught) {
-                        // TODO Auto-generated method stub
                         gridWidget.unMaskGrid();
                         GeoPlatformMessage.errorMessage("GeoPlatform Routing",
                                 "An Error occured with Routing Service. Please Try Again.");
@@ -200,17 +195,14 @@ public class RoutingSearchWidget implements HasCleanEvent {
         return fieldSet;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * org.geosdi.geoplatform.gui.puregwt.routing.HasCleanEvent#addCleanEventHandler
-     * ()
+     * @see org.geosdi.geoplatform.gui.puregwt.routing.HasCleanEvent#addCleanEventHandler()
      */
     @Override
     public void addCleanEventHandler(CleanComboEventHandler handler,
             Object source) {
-        // TODO Auto-generated method stub
         RoutingHandlerManager.addHandlerToSource(CleanComboEventHandler.TYPE,
                 source, handler);
     }

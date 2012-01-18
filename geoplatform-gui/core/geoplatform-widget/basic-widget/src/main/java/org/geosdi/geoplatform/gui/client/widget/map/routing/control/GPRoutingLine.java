@@ -51,64 +51,57 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * 
  */
 public class GPRoutingLine extends GPRoutingControl implements
-		TraceRoutingLineEventHandler {
+        TraceRoutingLineEventHandler {
 
-	/**
-	 * @param theLayer
-	 */
-	public GPRoutingLine(Vector theLayer, GeoPlatformMap geoPlatformMap) {
-		super(theLayer, geoPlatformMap);
-		// TODO Auto-generated constructor stub
-		RoutingHandlerManager.addHandler(TraceRoutingLineEventHandler.TYPE,
-				this);
-	}
+    /**
+     * @param theLayer
+     */
+    public GPRoutingLine(Vector theLayer, GeoPlatformMap geoPlatformMap) {
+        super(theLayer, geoPlatformMap);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle
-	 * ()
-	 */
-	@Override
-	public void createStyle() {
-		// TODO Auto-generated method stub
-		style.setStrokeColor("#2c2d99");
-		style.setStrokeWidth(6);
-		style.setStrokeOpacity(0.7);
-	}
+        RoutingHandlerManager.addHandler(TraceRoutingLineEventHandler.TYPE,
+                                         this);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.puregwt.routing.event.TraceRoutingLineEventHandler
-	 * #drawLine(java.lang.String)
-	 */
-	@Override
-	public void drawLine(String wkt) {
-		// TODO Auto-generated method stub
-		if (this.feature != null)
-			layer.removeFeature(feature);
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle()
+     */
+    @Override
+    public void createStyle() {
+        style.setStrokeColor("#2c2d99");
+        style.setStrokeWidth(6);
+        style.setStrokeOpacity(0.7);
+    }
 
-		MultiLineString geometry = MultiLineString
-				.narrowToMultiLineString(Geometry.fromWKT(wkt).getJSObject());
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.TraceRoutingLineEventHandler#drawLine(java.lang.String)
+     */
+    @Override
+    public void drawLine(String wkt) {
+        if (this.feature != null) {
+            layer.removeFeature(feature);
+        }
 
-		geometry.transform(new Projection("EPSG:4326"), new Projection(
-				geoPlatformMap.getMap().getProjection()));
+        MultiLineString geometry = MultiLineString.narrowToMultiLineString(Geometry.fromWKT(wkt).getJSObject());
 
-		this.feature = new VectorFeature(geometry);
-		this.feature.setStyle(style);
-		this.layer.addFeature(feature);
+        geometry.transform(new Projection("EPSG:4326"), new Projection(
+                geoPlatformMap.getMap().getProjection()));
 
-		this.geoPlatformMap.getMap().zoomToExtent(geometry.getBounds());
-	}
+        this.feature = new VectorFeature(geometry);
+        this.feature.setStyle(style);
+        this.layer.addFeature(feature);
 
-	public void removeLine() {
-		if (feature != null) {
-			layer.removeFeature(feature);
-			feature = null;
-		}
-	}
+        this.geoPlatformMap.getMap().zoomToExtent(geometry.getBounds());
+    }
 
+    public void removeLine() {
+        if (feature != null) {
+            layer.removeFeature(feature);
+            feature = null;
+        }
+    }
 }

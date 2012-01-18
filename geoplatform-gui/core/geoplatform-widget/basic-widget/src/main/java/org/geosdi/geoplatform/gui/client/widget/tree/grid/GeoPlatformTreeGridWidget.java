@@ -48,51 +48,50 @@ import com.extjs.gxt.ui.client.widget.treegrid.TreeGrid;
  */
 public abstract class GeoPlatformTreeGridWidget<T extends GPTreeGridBeanModel> {
 
-	protected TreeStore<T> store;
-	protected TreeGrid<T> tree;
-	protected ColumnModel columnModel;
+    protected TreeStore<T> store;
+    protected TreeGrid<T> tree;
+    protected ColumnModel columnModel;
 
-	/**
-	 * 
-	 */
-	public GeoPlatformTreeGridWidget() {
-		this.store = new TreeStore<T>();
-		this.createColumnModel();
-		this.createTreeGrid();
-	}
+    /**
+     * 
+     */
+    public GeoPlatformTreeGridWidget() {
+        this.store = new TreeStore<T>();
+        this.createColumnModel();
+        this.createTreeGrid();
+    }
 
-	private void createTreeGrid() {
-		this.tree = new TreeGrid<T>(store, columnModel);
-		setTreeGridProperties();
-	}
+    private void createTreeGrid() {
+        this.tree = new TreeGrid<T>(store, columnModel);
+        setTreeGridProperties();
+    }
 
-	/**
-	 * Create ColumnModel with all Column For Column with GeoPlatform Column
-	 * Render we can have this code :
-	 * 
-	 * <code> 
-	 * 		ColumnConfig gpColumnRender = new ColumnConfig(
-	 *				GPKeyTreeGridModel.LABEL_NODE_VALUE.toString(),
-	 *				"GeoPlatform-Renderer", 150);
+    /**
+     * Create ColumnModel with all Column For Column with GeoPlatform Column
+     * Render we can have this code :
+     * 
+     * <code> 
+     * 		ColumnConfig gpColumnRender = new ColumnConfig(
+     *				GPKeyTreeGridModel.LABEL_NODE_VALUE.toString(),
+     *				"GeoPlatform-Renderer", 150);
      *
-	 *		gpColumnRender.setRenderer(new GridCellRenderer<T>() {
+     *		gpColumnRender.setRenderer(new GridCellRenderer<T>() {
      *
-	 *			@Override
-	 *			public Object render(T model, String property, ColumnData config,
-	 *					int rowIndex, int colIndex, ListStore<T> store, Grid<T> grid) {
-	 *				// TODO Auto-generated method stub
-	 *				return model.getWidget();
-	 *			}
-	 *		});
-	 * </code>
-	 * 
-	 */
-	public abstract void createColumnModel();
+     *			@Override
+     *			public Object render(T model, String property, ColumnData config,
+     *					int rowIndex, int colIndex, ListStore<T> store, Grid<T> grid) {
+     *				// TODO Auto-generated method stub
+     *				return model.getWidget();
+     *			}
+     *		});
+     * </code>
+     * 
+     */
+    public abstract void createColumnModel();
 
-	/**
-	 * Set TreeGrid Properties such as Borders, RowHeight etc
-	 * 
-	 */
-	public abstract void setTreeGridProperties();
-
+    /**
+     * Set TreeGrid Properties such as Borders, RowHeight etc
+     * 
+     */
+    public abstract void setTreeGridProperties();
 }

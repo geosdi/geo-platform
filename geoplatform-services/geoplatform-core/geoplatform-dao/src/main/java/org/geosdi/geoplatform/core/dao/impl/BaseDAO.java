@@ -1,4 +1,3 @@
-//<editor-fold defaultstate="collapsed" desc="License">
 /*
  *  geo-platform
  *  Rich webgis framework
@@ -34,7 +33,6 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-//</editor-fold>
 package org.geosdi.geoplatform.core.dao.impl;
 
 import com.googlecode.genericdao.dao.jpa.GenericDAOImpl;
@@ -83,7 +81,7 @@ public class BaseDAO<T, ID extends Serializable> extends GenericDAOImpl<T, ID> {
         super.setSearchProcessor(searchProcessor);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.trg.dao.jpa.JPABaseDAO#em()

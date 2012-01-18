@@ -114,7 +114,7 @@ public abstract class ShortLayerPropertiesDTO implements Serializable {
         this.checked = checked;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see java.lang.Object#toString()

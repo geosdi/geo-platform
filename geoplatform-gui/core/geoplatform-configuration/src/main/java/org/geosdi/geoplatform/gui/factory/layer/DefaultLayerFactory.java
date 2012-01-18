@@ -49,60 +49,44 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  */
 public class DefaultLayerFactory implements GeoPlatformLayerFactory {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.factory.layer.GeoPlatformLayerFactory#createWMS
-	 * (java.lang.String, java.lang.String,
-	 * org.gwtopenmaps.openlayers.client.layer.WMSParams)
-	 */
-	@Override
-	public Layer createWMS(String name, String url, WMSParams params) {
-		// TODO Auto-generated method stub
-		return new WMS(name, url, params);
-	}
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.factory.layer.GeoPlatformLayerFactory#createWMS(java.lang.String, java.lang.String, org.gwtopenmaps.openlayers.client.layer.WMSParams)
+     */
+    @Override
+    public Layer createWMS(String name, String url, WMSParams params) {
+        return new WMS(name, url, params);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.factory.layer.GeoPlatformLayerFactory#createWMS
-	 * (java.lang.String, java.lang.String,
-	 * org.gwtopenmaps.openlayers.client.layer.WMSParams,
-	 * org.gwtopenmaps.openlayers.client.layer.WMSOptions)
-	 */
-	@Override
-	public Layer createWMS(String name, String url, WMSParams params,
-			WMSOptions layerParams) {
-		// TODO Auto-generated method stub
-		return new WMS(name, url, params, layerParams);
-	}
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.factory.layer.GeoPlatformLayerFactory#createWMS(java.lang.String, java.lang.String, org.gwtopenmaps.openlayers.client.layer.WMSParams, org.gwtopenmaps.openlayers.client.layer.WMSOptions) 
+     */
+    @Override
+    public Layer createWMS(String name, String url, WMSParams params,
+                           WMSOptions layerParams) {
+        return new WMS(name, url, params, layerParams);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.factory.layer.GeoPlatformLayerFactory#createVector
-	 * (java.lang.String, org.gwtopenmaps.openlayers.client.layer.VectorOptions)
-	 */
-	@Override
-	public Layer createVector(String name, VectorOptions options) {
-		// TODO Auto-generated method stub
-		return new Vector(name, options);
-	}
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.factory.layer.GeoPlatformLayerFactory#createVector(java.lang.String, org.gwtopenmaps.openlayers.client.layer.VectorOptions) 
+     */
+    @Override
+    public Layer createVector(String name, VectorOptions options) {
+        return new Vector(name, options);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.factory.layer.GeoPlatformLayerFactory#createVector
-	 * (java.lang.String)
-	 */
-	@Override
-	public Layer createVector(String name) {
-		// TODO Auto-generated method stub
-		return new Vector(name);
-	}
-
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.factory.layer.GeoPlatformLayerFactory#createVector(java.lang.String)
+     */
+    @Override
+    public Layer createVector(String name) {
+        return new Vector(name);
+    }
 }

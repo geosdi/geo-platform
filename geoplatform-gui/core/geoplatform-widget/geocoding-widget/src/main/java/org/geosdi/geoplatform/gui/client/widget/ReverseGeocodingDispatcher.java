@@ -64,13 +64,10 @@ public class ReverseGeocodingDispatcher implements
         GPGeocodingHandlerManager.addHandler(ReverseGeocodingDispatchHandler.TYPE, this);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.client.widget.map.event.
-     * ReverseGeocodingDispatchHandler
-     * #processRequest(org.geosdi.geoplatform.gui.
-     * client.widget.map.ReverseGeocodingWidget)
+     * @see org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingDispatchHandler#processRequest(org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget)
      */
     @Override
     public void processRequest(final ReverseGeocodingWidget widget) {

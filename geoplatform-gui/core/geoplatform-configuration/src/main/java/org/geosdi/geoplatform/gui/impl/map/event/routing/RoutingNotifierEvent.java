@@ -44,42 +44,38 @@ import com.google.gwt.event.shared.GwtEvent;
  */
 public class RoutingNotifierEvent extends GwtEvent<RoutingEventHandler> {
 
-	private boolean activate;
+    private boolean activate;
 
-	/**
-	 * @Constructor
-	 * 
-	 * @param activate
-	 */
-	public RoutingNotifierEvent(boolean activate) {
-		this.activate = activate;
-	}
+    /**
+     * @Constructor
+     * 
+     * @param activate
+     */
+    public RoutingNotifierEvent(boolean activate) {
+        this.activate = activate;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
-	 */
-	@Override
-	public Type<RoutingEventHandler> getAssociatedType() {
-		// TODO Auto-generated method stub
-		return RoutingEventHandler.TYPE;
-	}
+    /**
+     * (non-Javadoc)
+     * 
+     * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+     */
+    @Override
+    public Type<RoutingEventHandler> getAssociatedType() {
+        return RoutingEventHandler.TYPE;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
-	 * .EventHandler)
-	 */
-	@Override
-	protected void dispatch(RoutingEventHandler handler) {
-		// TODO Auto-generated method stub
-		if (activate)
-			handler.register();
-		else
-			handler.unregister();
-	}
-
+    /**
+     * (non-Javadoc)
+     * 
+     * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+     */
+    @Override
+    protected void dispatch(RoutingEventHandler handler) {
+        if (activate) {
+            handler.register();
+        } else {
+            handler.unregister();
+        }
+    }
 }

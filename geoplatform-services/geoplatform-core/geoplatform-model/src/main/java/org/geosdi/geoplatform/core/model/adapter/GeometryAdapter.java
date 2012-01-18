@@ -49,16 +49,14 @@ import com.vividsolutions.jts.io.WKTWriter;
  */
 public class GeometryAdapter<T extends Geometry> extends XmlAdapter<String, T> {
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @SuppressWarnings("unchecked")
     @Override
     public T unmarshal(String v) throws ParseException {
-        // TODO Auto-generated method stub
         if (v != null) {
             WKTReader reader = new WKTReader();
 
@@ -77,15 +75,13 @@ public class GeometryAdapter<T extends Geometry> extends XmlAdapter<String, T> {
         return null;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public String marshal(T v) throws ParseException {
-        // TODO Auto-generated method stub
         if (v != null) {
             WKTWriter writer = new WKTWriter();
             String wkt = writer.write(v);

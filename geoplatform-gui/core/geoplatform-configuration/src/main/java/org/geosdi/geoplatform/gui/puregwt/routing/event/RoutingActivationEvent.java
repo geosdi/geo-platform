@@ -54,27 +54,23 @@ public class RoutingActivationEvent extends GwtEvent<RoutingActivationEventHandl
         this.activate = activate;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
      */
     @Override
     public Type<RoutingActivationEventHandler> getAssociatedType() {
-        // TODO Auto-generated method stub
         return RoutingActivationEventHandler.TYPE;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
-     * .EventHandler)
+     * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
      */
     @Override
     protected void dispatch(RoutingActivationEventHandler handler) {
-        // TODO Auto-generated method stub
         if (activate) {
             handler.activate();
         } else {

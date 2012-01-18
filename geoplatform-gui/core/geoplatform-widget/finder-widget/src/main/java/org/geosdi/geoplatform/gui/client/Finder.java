@@ -47,14 +47,13 @@ public class Finder implements EntryPoint {
 
     private Dispatcher dispatcher;
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
      */
     @Override
     public void onModuleLoad() {
-        // TODO Auto-generated method stub
         dispatcher = Dispatcher.get();
 
 //        dispatcher.addController(new GeocodingController());
@@ -65,12 +64,10 @@ public class Finder implements EntryPoint {
     }
 
 //    private void addReverseGeocodingAction() {
-//        // TODO Auto-generated method stub
 //        MenuActionRegistar.put("finder", new MenuActionCreator() {
 //
 //            @Override
 //            public MenuAction createAction() {
-//                // TODO Auto-generated method stub
 //                return new GeocodingMenuAction();
 //            }
 //        });
@@ -81,7 +78,6 @@ public class Finder implements EntryPoint {
 //                    @Override
 //                    public GeoPlatformToolbarAction createActionTool(
 //                            GeoPlatformMap mapWidget) {
-//                        // TODO Auto-generated method stub
 //                        return new ReverseGeocodingAction(mapWidget);
 //                    }
 //                });

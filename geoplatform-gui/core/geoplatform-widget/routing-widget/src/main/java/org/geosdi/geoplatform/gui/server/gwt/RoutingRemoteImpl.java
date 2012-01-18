@@ -64,7 +64,6 @@ public class RoutingRemoteImpl extends RemoteServiceServlet implements
     @Override
     public RoutingBean findDirections(double xStart, double yStart,
             double xStop, double yStop) throws GeoPlatformException {
-        // TODO Auto-generated method stub
         return this.routingService.findDirections(xStart, yStart, xStop, yStop);
     }
 }

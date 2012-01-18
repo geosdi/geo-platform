@@ -69,12 +69,10 @@ public class LayerView extends GeoPlatformView {
         this.layerProgressBar = new GPLayerProgressBar();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent
-     * (com.extjs.gxt.ui.client.mvc.AppEvent)
+     * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
      */
     @Override
     protected void handleEvent(AppEvent event) {

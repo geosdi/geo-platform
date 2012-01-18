@@ -49,55 +49,51 @@ import com.extjs.gxt.ui.client.mvc.Dispatcher;
  */
 public abstract class DrawGenericFeatureControl extends MapControl {
 
-	protected DrawFeature control;
+    protected DrawFeature control;
 
-	public DrawGenericFeatureControl(Vector vector) {
-		super(vector);
-		// TODO Auto-generated constructor stub
-	}
+    public DrawGenericFeatureControl(Vector vector) {
+        super(vector);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#
-	 * activateControl()
-	 */
-	@Override
-	public void activateControl() {
-		// TODO Auto-generated method stub
-		this.control.activate();
-		this.enabled = true;
-	}
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#activateControl()
+     */
+    @Override
+    public void activateControl() {
+        this.control.activate();
+        this.enabled = true;
+    }
 
-	/**
-	 * 
-	 * @return FeatureAddedListener
-	 */
-	public FeatureAddedListener createFeatureAddedListener() {
-		return new FeatureAddedListener() {
-			public void onFeatureAdded(VectorFeature vf) {
+    /**
+     * 
+     * @return FeatureAddedListener
+     */
+    public FeatureAddedListener createFeatureAddedListener() {
+        return new FeatureAddedListener() {
 
-				Dispatcher.forwardEvent(MapWidgetEvents.INJECT_WKT, vf);
+            @Override
+            public void onFeatureAdded(VectorFeature vf) {
 
-			}
-		};
-	}
+                Dispatcher.forwardEvent(MapWidgetEvents.INJECT_WKT, vf);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#
-	 * deactivateControl()
-	 */
-	@Override
-	public void deactivateControl() {
-		// TODO Auto-generated method stub
-		this.control.deactivate();
-		this.enabled = false;
-	}
+            }
+        };
+    }
 
-	public DrawFeature getControl() {
-		return this.control;
-	}
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#deactivateControl()
+     */
+    @Override
+    public void deactivateControl() {
+        this.control.deactivate();
+        this.enabled = false;
+    }
 
+    public DrawFeature getControl() {
+        return this.control;
+    }
 }

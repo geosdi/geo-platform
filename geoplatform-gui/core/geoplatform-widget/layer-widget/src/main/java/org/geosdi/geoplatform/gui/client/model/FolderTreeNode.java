@@ -89,7 +89,7 @@ public class FolderTreeNode extends AbstractFolderTreeNode implements IGPNode {
         }
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()

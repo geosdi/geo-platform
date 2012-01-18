@@ -46,12 +46,10 @@ public abstract class GeoPlatformController extends Controller {
 
     protected GeoPlatformView view;
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client
-     * .mvc.AppEvent)
+     * @see com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
      */
     @Override
     public void handleEvent(AppEvent event) {

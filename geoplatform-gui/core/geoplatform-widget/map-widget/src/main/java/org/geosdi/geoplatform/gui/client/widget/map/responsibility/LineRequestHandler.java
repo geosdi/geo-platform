@@ -56,12 +56,10 @@ public class LineRequestHandler extends GeometryRequestHandler {
 
     public LineRequestHandler(ModifyFeatureControl theControl) {
         super(theControl);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public void geometryRequest(VectorFeature feature, Vector vector) {
-        // TODO Auto-generated method stub
         if ((feature.getGeometry().getClassName().equals(
                 Geometry.LINESTRING_CLASS_NAME))
                 || (feature.getGeometry().getClassName().equals(
@@ -78,7 +76,6 @@ public class LineRequestHandler extends GeometryRequestHandler {
 
     @Override
     public boolean checkModifications(VectorFeature feature) {
-        // TODO Auto-generated method stub
         LineString oldLine = LineString.narrowToLineString(
                 control.getSelectedFeature().getGeometry().getJSObject());
 
@@ -91,7 +88,6 @@ public class LineRequestHandler extends GeometryRequestHandler {
     @Override
     public void showConfirmMessage(final VectorFeature feature,
             final Vector vector) {
-        // TODO Auto-generated method stub
         final VectorFeature selectedFeature = getSelectedFeaure();
 
         GeoPlatformMessage.confirmMessage(
@@ -101,7 +97,6 @@ public class LineRequestHandler extends GeometryRequestHandler {
 
                     @Override
                     public void handleEvent(MessageBoxEvent be) {
-                        // TODO Auto-generated method stub
                         if (be.getButtonClicked().getText().equalsIgnoreCase(
                                 "yes")
                                 || be.getButtonClicked().getText().equalsIgnoreCase(

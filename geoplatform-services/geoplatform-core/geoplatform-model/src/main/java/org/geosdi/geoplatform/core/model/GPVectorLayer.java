@@ -1,4 +1,3 @@
-//<editor-fold defaultstate="collapsed" desc="License">
 /*
  *  geo-platform
  *  Rich webgis framework
@@ -34,7 +33,6 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-//</editor-fold>
 package org.geosdi.geoplatform.core.model;
 
 import com.vividsolutions.jts.geom.Geometry;
@@ -130,7 +128,7 @@ public class GPVectorLayer extends GPLayer {
         this.project = project;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

@@ -123,7 +123,7 @@ public class BboxClientInfo implements Serializable {
         this.upperRightY = upperRightY;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

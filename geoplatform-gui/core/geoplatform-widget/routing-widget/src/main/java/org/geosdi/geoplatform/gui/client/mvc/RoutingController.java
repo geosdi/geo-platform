@@ -65,26 +65,23 @@ public class RoutingController extends GeoPlatformController {
                 RoutingEvents.HIDE_ROUTING_WIDGET);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.extjs.gxt.ui.client.mvc.Controller#initialize()
      */
     @Override
     protected void initialize() {
-        // TODO Auto-generated method stub
         this.view = new RoutingView(this);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#
-     * handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
+     * @see org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformController#handleEvent(com.extjs.gxt.ui.client.mvc.AppEvent)
      */
     @Override
     public void handleEvent(AppEvent event) {
-        // TODO Auto-generated method stub
         super.handleEvent(event);
     }
 

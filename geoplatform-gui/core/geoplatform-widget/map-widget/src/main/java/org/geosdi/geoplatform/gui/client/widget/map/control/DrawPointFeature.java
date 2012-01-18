@@ -46,37 +46,32 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  */
 public class DrawPointFeature extends DrawGenericFeatureControl {
 
-	public DrawPointFeature(Vector vector) {
-		super(vector);
-		// TODO Auto-generated constructor stub
-	}
+    public DrawPointFeature(Vector vector) {
+        super(vector);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.impl.map.control.GeoPlatformMapControl#
-	 * createControl()
-	 */
-	@Override
-	public void createControl() {
-		// TODO Auto-generated method stub
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.impl.map.control.GeoPlatformMapControl#createControl()
+     */
+    @Override
+    public void createControl() {
+        DrawFeatureOptions drawPolygonFeatureOptions = new DrawFeatureOptions();
+        drawPolygonFeatureOptions.onFeatureAdded(super.createFeatureAddedListener());
 
-		DrawFeatureOptions drawPolygonFeatureOptions = new DrawFeatureOptions();
-		drawPolygonFeatureOptions.onFeatureAdded(super
-				.createFeatureAddedListener());
+        this.control = new DrawFeature(this.vector, new PointHandler(),
+                                       drawPolygonFeatureOptions);
+    }
 
-		this.control = new DrawFeature(this.vector, new PointHandler(),
-				drawPolygonFeatureOptions);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.geosdi.geoplatform.gui.client.widget.map.control.DrawGenericFeatureControl#activateControl()
-	 */
-	@Override
-	public void activateControl() {
-		// TODO Auto-generated method stub
-		super.activateControl();
-		this.control.getLayer().setZIndex(9000);
-	}
-
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.client.widget.map.control.DrawGenericFeatureControl#activateControl()
+     */
+    @Override
+    public void activateControl() {
+        super.activateControl();
+        this.control.getLayer().setZIndex(9000);
+    }
 }

@@ -1,4 +1,3 @@
-//<editor-fold defaultstate="collapsed" desc="License">
 /*
  *  geo-platform
  *  Rich webgis framework
@@ -34,7 +33,6 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-//</editor-fold>
 package org.geosdi.geoplatform.responce;
 
 import java.util.List;
@@ -149,7 +147,7 @@ public class RasterLayerDTO extends ShortLayerDTO {
     }
     //</editor-fold>
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see java.lang.Object#toString()

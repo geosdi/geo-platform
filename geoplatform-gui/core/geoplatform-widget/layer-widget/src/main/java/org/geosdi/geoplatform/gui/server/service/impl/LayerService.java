@@ -501,7 +501,7 @@ public class LayerService implements ILayerService {
         return false;
     }
 
-    // TODO
+    // TODO Check
     @Override
     public boolean checkKmlUrl(String urlString) throws GeoPlatformException {
         try {

@@ -57,7 +57,6 @@ public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {
 
     public RoutingGridWidget() {
         super(false);
-        // TODO Auto-generated constructor stub
         initWidget();
     }
 
@@ -71,7 +70,6 @@ public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {
 
     @Override
     public void setGridProperties() {
-        // TODO Auto-generated method stub
         grid.setBorders(false);
 
         grid.getView().setForceFit(true);
@@ -82,7 +80,6 @@ public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {
 
     @Override
     public ColumnModel prepareColumnModel() {
-        // TODO Auto-generated method stub
         List<ColumnConfig> columns = new ArrayList<ColumnConfig>();
 
         ColumnConfig dirColumn = new ColumnConfig(
@@ -97,7 +94,6 @@ public class RoutingGridWidget extends GeoPlatformGridWidget<Directions> {
 
     @Override
     public void createStore() {
-        // TODO Auto-generated method stub
         this.store = new ListStore<Directions>();
     }
 

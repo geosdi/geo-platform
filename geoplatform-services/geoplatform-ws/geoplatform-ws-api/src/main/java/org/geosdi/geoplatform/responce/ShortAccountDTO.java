@@ -133,7 +133,7 @@ public class ShortAccountDTO {
         this.roles = roles;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see java.lang.Object#toString()

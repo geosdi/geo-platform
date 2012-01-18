@@ -161,16 +161,13 @@ public class GPMeasureWidget extends ContentPanel implements
 		return new Point(left, top);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.client.widget.scale.event.ScaleChangeHandler
-	 * #onPositionChange(com.extjs.gxt.ui.client.util.Size)
+	 * @see org.geosdi.geoplatform.gui.client.widget.scale.event.ScaleChangeHandler#onPositionChange(com.extjs.gxt.ui.client.util.Size)
 	 */
 	@Override
 	public void onPositionChange(Size s) {
-		// TODO Auto-generated method stub
 		if (this.size != s) {
 			this.size = s;
 			int left = this.size.width - config.width - 10

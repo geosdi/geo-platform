@@ -91,7 +91,6 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
     }
 
     private void initFormPanel() {
-        // TODO Auto-generated method stub
         formPanel = new FormPanel();
         formPanel.setHeaderVisible(false);
         formPanel.setFrame(true);
@@ -143,7 +142,6 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
 
     @Override
     public void setGridProperties() {
-        // TODO Auto-generated method stub
         grid.setAutoExpandColumn(GeocodingKeyValue.DESCRIPTION.getValue());
         grid.setBorders(false);
 
@@ -165,7 +163,6 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
 
     @Override
     public ColumnModel prepareColumnModel() {
-        // TODO Auto-generated method stub
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
         ColumnConfig column = new ColumnConfig();
@@ -179,7 +176,6 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
 
     @Override
     public void createStore() {
-        // TODO Auto-generated method stub
         store = new ListStore<GeocodingBean>();
     }
 
@@ -272,7 +268,6 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
          */
         @Override
         public void onBeginGeocodingSearch(String searchValue) {
-            // TODO Auto-generated method stub
             checkWidgetStatus();
             findLocations(searchValue);
         }
@@ -282,7 +277,6 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
          */
         @Override
         public void checkWidgetStatus() {
-            // TODO Auto-generated method stub
             GeoPlatformMessage.checkGridWidgetStatus(
                     (IGeoPlatformGrid) gridWidget,
                     "Geocoding - Service",
@@ -304,7 +298,6 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
 
                         @Override
                         public void onSuccess(ArrayList<GeocodingBean> result) {
-                            // TODO Auto-generated method stub
                             ArrayList<GeocodingBean> beans = (ArrayList<GeocodingBean>) result;
                             gridWidget.unMaskGrid();
                             if (result != null && result.size() > 0) {
@@ -319,7 +312,6 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
 
                         @Override
                         public void onFailure(Throwable caught) {
-                            // TODO Auto-generated method stub
                             gridWidget.unMaskGrid();
                             grid.getView().refresh(false);
                             GeoPlatformMessage.errorMessage("Geocoding - Service",

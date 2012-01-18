@@ -78,11 +78,10 @@ public class StartupService implements IStartupService {
         logger.info("-------------------> DESTROY STARTUP-GEO-PLATFORM SERVICE");
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see org.geosdi.geoplatform.gui.server.service.IStartupService#
-     * initGeoPlatformConfiguration()
+     * @see org.geosdi.geoplatform.gui.server.service.IStartupService#initGeoPlatformConfiguration()
      */
     @Override
     public IGeoPlatformGlobal initGeoPlatformConfiguration() {

@@ -1,4 +1,3 @@
-//<editor-fold defaultstate="collapsed" desc="License">
 /*
  *  geo-platform
  *  Rich webgis framework
@@ -34,7 +33,6 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-//</editor-fold>
 package org.geosdi.geoplatform.core.dao.impl;
 
 import com.googlecode.genericdao.search.ISearch;
@@ -72,35 +70,28 @@ public class GPServerDAOImpl extends BaseDAO<GeoPlatformServer, Long>
     @SuppressWarnings("unchecked")
     @Override
     public List<GeoPlatformServer> search(ISearch search) {
-        // TODO Auto-generated method stub
         return super.search(search);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * org.geosdi.geoplatform.core.dao.GPServerDAO#findByServerName(java.lang
-     * .String)
+     * @see org.geosdi.geoplatform.core.dao.GPServerDAO#findByServerName(java.lang.String)
      */
     @Override
     public List<GeoPlatformServer> findByServerName(String serverName) {
-        // TODO Auto-generated method stub
         Search search = new Search();
         search.addFilterEqual("name", serverName);
         return super.search(search);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * org.geosdi.geoplatform.core.dao.GPServerDAO#findByServerUrl(java.lang
-     * .String)
+     * @see org.geosdi.geoplatform.core.dao.GPServerDAO#findByServerUrl(java.lang.String)
      */
     @Override
     public GeoPlatformServer findByServerUrl(String serverUrl) {
-        // TODO Auto-generated method stub
         Search search = new Search();
         search.addFilterEqual("serverUrl", serverUrl);
         return super.searchUnique(search);

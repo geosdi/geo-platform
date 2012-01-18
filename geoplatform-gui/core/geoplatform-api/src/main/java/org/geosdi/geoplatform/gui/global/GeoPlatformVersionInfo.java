@@ -80,7 +80,7 @@ public class GeoPlatformVersionInfo implements Serializable {
         this.version = version;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

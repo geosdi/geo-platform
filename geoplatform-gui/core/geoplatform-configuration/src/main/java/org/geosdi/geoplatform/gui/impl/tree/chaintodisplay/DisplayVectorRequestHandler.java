@@ -47,27 +47,24 @@ import org.geosdi.geoplatform.gui.model.GPVectorBean;
  */
 public class DisplayVectorRequestHandler extends AbstractRequestHandler {
 
-	/**
-	 * @param theStore
-	 */
-	public DisplayVectorRequestHandler(GPMapLayersStore<?, ?> theStore) {
-		super(theStore);
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * @param theStore
+     */
+    public DisplayVectorRequestHandler(GPMapLayersStore<?, ?> theStore) {
+        super(theStore);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.model.tree.responsibility.GPLayerRequestHandler
-	 * #layerRequest(org.geosdi.geoplatform.gui.model.GPLayerBean)
-	 */
-	@Override
-	public void layerRequest(GPLayerBean layer) {
-		if (layer instanceof GPVectorBean) {
-			super.layersStore.displayVector((GPVectorBean) layer);
-		} else
-			forwardLayerRequest(layer);
-	}
-
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.model.tree.responsibility.GPLayerRequestHandler#layerRequest(org.geosdi.geoplatform.gui.model.GPLayerBean)
+     */
+    @Override
+    public void layerRequest(GPLayerBean layer) {
+        if (layer instanceof GPVectorBean) {
+            super.layersStore.displayVector((GPVectorBean) layer);
+        } else {
+            forwardLayerRequest(layer);
+        }
+    }
 }

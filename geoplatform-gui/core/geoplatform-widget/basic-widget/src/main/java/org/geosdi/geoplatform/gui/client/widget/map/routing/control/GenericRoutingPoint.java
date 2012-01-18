@@ -56,19 +56,15 @@ public abstract class GenericRoutingPoint extends IntersectionRoutingControl {
     public GenericRoutingPoint(Vector theLayer,
             GeoPlatformBoxesWidget theBoxesWidget, GeoPlatformMap geoPlatformMap) {
         super(theLayer, theBoxesWidget, geoPlatformMap);
-        // TODO Auto-generated constructor stub
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see
-     * org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle
-     * ()
+     * @see org.geosdi.geoplatform.gui.impl.map.control.GPRoutingControl#createStyle()
      */
     @Override
     public void createStyle() {
-        // TODO Auto-generated method stub
         style.setFillOpacity(1);
         setIconStyle();
         style.setFontColor("blue");

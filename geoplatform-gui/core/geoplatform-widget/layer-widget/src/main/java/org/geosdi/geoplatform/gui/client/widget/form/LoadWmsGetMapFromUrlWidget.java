@@ -295,7 +295,7 @@ public class LoadWmsGetMapFromUrlWidget extends GPTreeFormWidget<RasterTreeNode>
         }
     }
 
-    // TODO
+    // TODO Check
     // Check &field=fieldValue
     // Check required fields in query string
     private boolean checkUrl() {

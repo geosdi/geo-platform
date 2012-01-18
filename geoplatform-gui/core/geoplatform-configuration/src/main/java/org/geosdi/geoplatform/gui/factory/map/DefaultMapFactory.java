@@ -45,25 +45,20 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
  */
 public class DefaultMapFactory implements GeoPlatformMapFactory {
    
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see
-     * org.geosdi.geoplatform.gui.factory.GeoPlatformMapFactory#createMap(java
-     * .lang.String, java.lang.String)
+     * @see org.geosdi.geoplatform.gui.factory.GeoPlatformMapFactory#createMap(java.lang.String, java.lang.String)
      */
     @Override
     public MapWidget createMap(String width, String height) {
         return new MapWidget(width, height);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see
-     * org.geosdi.geoplatform.gui.factory.GeoPlatformMapFactory#createMap(java
-     * .lang.String, java.lang.String,
-     * org.gwtopenmaps.openlayers.client.MapOptions)
+     * @see org.geosdi.geoplatform.gui.factory.GeoPlatformMapFactory#createMap(java.lang.String, java.lang.String, org.gwtopenmaps.openlayers.client.MapOptions)
      */
     @Override
     public MapWidget createMap(String width, String height, MapOptions options) {

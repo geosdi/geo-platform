@@ -68,15 +68,13 @@ public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<Geocod
         super(controller);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.client.widget.search.ComboSearchWidget#
-     * setWidgetProperties()
+     * @see org.geosdi.geoplatform.gui.client.widget.search.ComboSearchWidget#setWidgetProperties()
      */
     @Override
     public void setWidgetProperties() {
-        // TODO Auto-generated method stub
         this.combo.setDisplayField(GeocodingKeyValue.DESCRIPTION.getValue());
         this.combo.setHideTrigger(true);
 
@@ -88,10 +86,9 @@ public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<Geocod
 
             @Override
             public void componentKeyPress(ComponentEvent event) {
-                // TODO Auto-generated method stub
                 if ((event.getKeyCode() == KeyCodes.KEY_ENTER)
                         && (combo.getRawValue().length() >= 4)
-                        && (combo.getSelection().size() == 0)) {
+                        && (combo.getSelection().isEmpty())) {
                     dispatchRequest();
                 }
             }
@@ -111,7 +108,6 @@ public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<Geocod
 
                     @Override
                     public void onSuccess(ArrayList<GeocodingBean> result) {
-                        // TODO Auto-generated method stub
 
                         if (result.size() > 0) {
                             GeoPlatformMessage.infoMessage("Geocoding Service",
@@ -130,7 +126,6 @@ public abstract class GenericRoutingSearchPoint extends ComboSearchWidget<Geocod
 
                     @Override
                     public void onFailure(Throwable caught) {
-                        // TODO Auto-generated method stub
                         GeoPlatformMessage.errorMessage("Geocoding Service",
                                 "An Error occurred while dispatching request.");
                         loadImage(TypeImage.IMAGE_SERVICE_ERROR, true);

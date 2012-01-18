@@ -63,15 +63,13 @@ public class StartPointSearchRouting extends GenericRoutingSearchPoint {
         this.event = new StartRoutingPointEvent();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.client.widget.search.ComboSearchWidget#
-     * setComboToolTip()
+     * @see org.geosdi.geoplatform.gui.client.widget.search.ComboSearchWidget#setComboToolTip()
      */
     @Override
     public void setComboToolTip() {
-        // TODO Auto-generated method stub
         ToolTipConfig config = new ToolTipConfig();
         config.setTitle("Usage");
         config.setText("Enter Address - click INVIO to set Start Point.");
@@ -79,28 +77,24 @@ public class StartPointSearchRouting extends GenericRoutingSearchPoint {
         this.combo.setToolTip(config);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.client.widget.search.ComboSearchWidget#
-     * selectionChanged(com.extjs.gxt.ui.client.event.SelectionChangedEvent)
+     * @see org.geosdi.geoplatform.gui.client.widget.search.ComboSearchWidget#selectionChanged(com.extjs.gxt.ui.client.event.SelectionChangedEvent)
      */
     @Override
     public void changeSelection(SelectionChangedEvent<GeocodingBean> se) {
-        // TODO Auto-generated method stub
         event.setLocation(se.getSelectedItem());
         RoutingHandlerManager.fireEvent(event);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.client.widget.GenericRoutingPoint#
-     * clearGeoPlatformMap()
+     * @see org.geosdi.geoplatform.gui.client.widget.GenericRoutingPoint#clearGeoPlatformMap()
      */
     @Override
     public void cleanGeoPlatformMap() {
-        // TODO Auto-generated method stub
         RoutingHandlerManager.fireEvent(new RemoveStartRoutingPointEvent());
     }
 }

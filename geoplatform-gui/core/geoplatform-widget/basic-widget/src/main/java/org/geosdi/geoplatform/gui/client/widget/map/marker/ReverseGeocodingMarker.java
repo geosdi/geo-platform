@@ -59,7 +59,6 @@ public class ReverseGeocodingMarker extends GeoPlatformMarkerLayer {
 
     @Override
     public void buildMarkerLayer() {
-        // TODO Auto-generated method stub
         MarkersOptions options = new MarkersOptions();
         options.setNumZoomLevels(18);
         options.setMaxZoomLevel(18);
@@ -71,7 +70,6 @@ public class ReverseGeocodingMarker extends GeoPlatformMarkerLayer {
 
     @Override
     public void buildIconMarker() {
-        // TODO Auto-generated method stub
         Size size = new Size(21, 25);
         Pixel offset = new Pixel(-(size.getWidth() / 2), -size.getHeight());
         this.iconMarker = new Icon(GWT.getModuleName() + "/gp-images/POI.png",

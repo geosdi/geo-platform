@@ -72,17 +72,14 @@ public class GeocodingService implements
     //
     private ArrayList<GeocodingBean> beans;
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * org.geosdi.geoplatform.gui.server.service.IGeocodingService#findLocations
-     * (java.lang.String)
+     * @see org.geosdi.geoplatform.gui.server.service.IGeocodingService#findLocations(java.lang.String)
      */
     @Override
     public ArrayList<GeocodingBean> findLocations(String address)
             throws IOException {
-        // TODO Auto-generated method stub
         this.beans = new ArrayList<GeocodingBean>();
 
         URL url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?address="

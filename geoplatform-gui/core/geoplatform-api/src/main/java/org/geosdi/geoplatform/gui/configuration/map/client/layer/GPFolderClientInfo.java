@@ -116,7 +116,7 @@ public class GPFolderClientInfo implements Serializable,
         this.folderElements = folderElements;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

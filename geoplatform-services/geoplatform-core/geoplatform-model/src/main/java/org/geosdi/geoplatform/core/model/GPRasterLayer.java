@@ -1,4 +1,3 @@
-//<editor-fold defaultstate="collapsed" desc="License">
 /*
  *  geo-platform
  *  Rich webgis framework
@@ -34,7 +33,6 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-//</editor-fold>
 package org.geosdi.geoplatform.core.model;
 
 import java.util.ArrayList;
@@ -181,7 +179,7 @@ public class GPRasterLayer extends GPLayer {
     public void setProject(GPProject project) {
         this.project = project;
     }
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

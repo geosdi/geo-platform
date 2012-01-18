@@ -51,19 +51,15 @@ public class RoutingMenuAction extends MenuCheckAction {
 
     public RoutingMenuAction() {
         super("Routing");
-        // TODO Auto-generated constructor stub
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com
-     * .extjs.gxt.ui.client.event.ComponentEvent)
+     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
      */
     @Override
     public void componentSelected(MenuEvent ce) {
-        // TODO Auto-generated method stub
         CheckMenuItem item = (CheckMenuItem) ((Menu) ce.getSource()).getItemByItemId(super.getId());
 
         if (item.isChecked()) {

@@ -57,27 +57,23 @@ public class ReverseGeocodingDispatchEvent extends GwtEvent<ReverseGeocodingDisp
         this.widget = theWidget;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
      */
     @Override
     public Type<ReverseGeocodingDispatchHandler> getAssociatedType() {
-        // TODO Auto-generated method stub
         return ReverseGeocodingDispatchHandler.TYPE;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see
-     * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
-     * .EventHandler)
+     * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
      */
     @Override
     protected void dispatch(ReverseGeocodingDispatchHandler handler) {
-        // TODO Auto-generated method stub
         handler.processRequest(widget);
     }
 }

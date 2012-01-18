@@ -1,4 +1,3 @@
-//<editor-fold defaultstate="collapsed" desc="License">
 /*
  *  geo-platform
  *  Rich webgis framework
@@ -34,7 +33,6 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-//</editor-fold>
 package org.geosdi.geoplatform.services;
 
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
@@ -250,7 +248,7 @@ class ProjectServiceImpl {
         }
 
         mapProjectFolders = this.fillProjectFolders(rootFoldersDTO,
-                subFoldersMap, mapProjectFolders);
+                                                    subFoldersMap, mapProjectFolders);
 
         // Sub Layers
         searchCriteria = new Search(GPLayer.class);
@@ -543,7 +541,7 @@ class ProjectServiceImpl {
     }
 
     private Map<Long, FolderDTO> fillProjectFolders(List<FolderDTO> folders,
-            Map<String, GPFolder> mapRemaining, Map<Long, FolderDTO> mapAll) {
+                                                    Map<String, GPFolder> mapRemaining, Map<Long, FolderDTO> mapAll) {
         logger.debug("\n*** fillFolderList - Map size: " + mapRemaining.size());
         if (!mapRemaining.isEmpty()) {
             List<FolderDTO> childsDTO = null;
@@ -588,7 +586,7 @@ class ProjectServiceImpl {
     }
 
     private int persistElementList(GPProject project, GPFolder parent,
-            List<IElementDTO> elementList) throws IllegalParameterFault {
+                                   List<IElementDTO> elementList) throws IllegalParameterFault {
         int numberOfDescendants = 0;
 
         for (int i = elementList.size() - 1; i >= 0; i--) {
@@ -597,7 +595,7 @@ class ProjectServiceImpl {
             if (element instanceof FolderDTO) { // Folder
                 FolderDTO folderDTO = (FolderDTO) element;
                 GPFolder folder = FolderDTO.convertToGPFolder(project, parent,
-                        folderDTO);
+                                                              folderDTO);
 
                 List<IElementDTO> childs = folderDTO.getElementList();
 
@@ -619,10 +617,10 @@ class ProjectServiceImpl {
                 GPLayer layer = null;
                 if (element instanceof RasterLayerDTO) {
                     layer = RasterLayerDTO.convertToGPRasterLayer(project, parent,
-                            (RasterLayerDTO) element);
+                                                                  (RasterLayerDTO) element);
                 } else {
                     layer = VectorLayerDTO.convertToGPVectorLayer(project, parent,
-                            (VectorLayerDTO) element);
+                                                                  (VectorLayerDTO) element);
                 }
 
                 layer.setPosition(++position);

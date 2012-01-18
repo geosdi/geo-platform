@@ -47,9 +47,6 @@ import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientIn
 public abstract class GPLayerClientInfo implements Serializable,
         Comparable<IGPFolderElements>, IGPFolderElements {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 2098509654335891064L;
     private Long id;
     private String layerName;
@@ -228,18 +225,17 @@ public abstract class GPLayerClientInfo implements Serializable,
         this.checked = checked;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
     public int compareTo(IGPFolderElements o) {
-        // TODO Auto-generated method stub
         return o.getzIndex() - getzIndex();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

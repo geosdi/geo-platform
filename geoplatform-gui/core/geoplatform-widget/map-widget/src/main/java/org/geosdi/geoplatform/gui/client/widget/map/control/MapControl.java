@@ -48,7 +48,6 @@ public abstract class MapControl extends GPVectorMapControl {
 
 	public MapControl(Vector vector) {
 		super(vector);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

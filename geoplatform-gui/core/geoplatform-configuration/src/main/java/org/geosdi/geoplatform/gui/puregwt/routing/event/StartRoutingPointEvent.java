@@ -56,27 +56,23 @@ public class StartRoutingPointEvent extends GwtEvent<StartRoutingPointEventHandl
         this.location = location;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
      */
     @Override
     public Type<StartRoutingPointEventHandler> getAssociatedType() {
-        // TODO Auto-generated method stub
         return StartRoutingPointEventHandler.TYPE;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
-     * .EventHandler)
+     * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
      */
     @Override
     protected void dispatch(StartRoutingPointEventHandler handler) {
-        // TODO Auto-generated method stub
         handler.drawFeature(location);
     }
 }

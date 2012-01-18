@@ -47,42 +47,35 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  */
 public class DrawLineFeature extends DrawGenericFeatureControl {
 
-	/**
-	 * @param vector
-	 */
-	public DrawLineFeature(Vector vector) {
-		super(vector);
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * @param vector
+     */
+    public DrawLineFeature(Vector vector) {
+        super(vector);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.configuration.map.control.GeoPlatformMapControl
-	 * #createControl()
-	 */
-	@Override
-	public void createControl() {
-		// TODO Auto-generated method stub
-		DrawFeatureOptions drawLineFeatureOption = new DrawFeatureOptions();
-		drawLineFeatureOption
-				.onFeatureAdded(super.createFeatureAddedListener());
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.configuration.map.control.GeoPlatformMapControl#createControl()
+     */
+    @Override
+    public void createControl() {
+        DrawFeatureOptions drawLineFeatureOption = new DrawFeatureOptions();
+        drawLineFeatureOption.onFeatureAdded(super.createFeatureAddedListener());
 
-		this.control = new DrawFeature(vector, new PathHandler(),
-				drawLineFeatureOption);
-	}
+        this.control = new DrawFeature(vector, new PathHandler(),
+                                       drawLineFeatureOption);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.geosdi.geoplatform.gui.client.widget.map.control.
-	 * DrawGenericFeatureControl#activateControl()
-	 */
-	@Override
-	public void activateControl() {
-		// TODO Auto-generated method stub
-		super.activateControl();
-		this.control.getLayer().setZIndex(9000);
-	}
+    /**
+     * (non-Javadoc)
+     * 
+     * @see org.geosdi.geoplatform.gui.client.widget.map.control.DrawGenericFeatureControl#activateControl()
+     */
+    @Override
+    public void activateControl() {
+        super.activateControl();
+        this.control.getLayer().setZIndex(9000);
+    }
 }

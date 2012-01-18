@@ -166,7 +166,7 @@ public class GeocodingBean extends GeoPlatformBeanModel implements
         this.address = address;
     }
     
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

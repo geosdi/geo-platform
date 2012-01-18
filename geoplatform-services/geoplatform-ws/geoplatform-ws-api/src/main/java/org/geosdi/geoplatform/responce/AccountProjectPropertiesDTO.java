@@ -136,7 +136,7 @@ public class AccountProjectPropertiesDTO {
         this.defaultProject = defaultProject;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * @see java.lang.Object#toString()
      */

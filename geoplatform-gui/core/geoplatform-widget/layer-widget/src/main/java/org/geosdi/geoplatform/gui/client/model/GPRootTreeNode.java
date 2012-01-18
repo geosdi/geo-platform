@@ -91,15 +91,13 @@ public class GPRootTreeNode extends AbstractRootTreeNode {
         this.accept(visitor);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
      */
     @Override
     public AbstractImagePrototype getIcon() {
-        // TODO Auto-generated method stub
         return LayerResources.ICONS.geoPlatform();
     }
-
 }

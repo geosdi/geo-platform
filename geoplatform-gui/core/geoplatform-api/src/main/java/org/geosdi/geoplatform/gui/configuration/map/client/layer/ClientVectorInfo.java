@@ -86,7 +86,7 @@ public class ClientVectorInfo extends GPLayerClientInfo {
         visitor.visitVector(this);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

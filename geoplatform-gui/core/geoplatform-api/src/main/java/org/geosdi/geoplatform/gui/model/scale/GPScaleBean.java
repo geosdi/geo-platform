@@ -55,7 +55,6 @@ public class GPScaleBean extends GeoPlatformBeanModel {
      */
     public GPScaleBean() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**

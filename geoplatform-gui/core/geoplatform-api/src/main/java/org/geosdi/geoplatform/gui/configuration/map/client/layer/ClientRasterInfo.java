@@ -88,7 +88,7 @@ public class ClientRasterInfo extends GPLayerClientInfo {
         visitor.visitRaster(this);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

@@ -50,7 +50,7 @@ public class PrintTemplate extends GeoPlatformBeanModel {
         set(PrintEnumTemplate.TEMPLATE.getValue(), template);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see java.lang.Object#toString()

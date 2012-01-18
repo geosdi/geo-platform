@@ -78,7 +78,7 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
         this.featureNameSpace = featureNameSpace;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
@@ -107,7 +107,7 @@ public class VectorTreeNode extends GPLayerTreeModel implements GPVectorBean {
         visitor.visitVector(this);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

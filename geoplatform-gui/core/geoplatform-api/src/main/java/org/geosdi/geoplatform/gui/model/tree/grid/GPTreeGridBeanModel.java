@@ -60,7 +60,6 @@ public abstract class GPTreeGridBeanModel extends BaseTreeModel {
          *
          */
         GPKeyTreeGridModel(String theValue) {
-            // TODO Auto-generated constructor stub
             this.value = theValue;
         }
 
@@ -69,8 +68,6 @@ public abstract class GPTreeGridBeanModel extends BaseTreeModel {
             return this.value;
         }
     }
-
-    
     private String labelNode;
 
     /**

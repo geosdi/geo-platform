@@ -61,11 +61,11 @@ public class GPRoutingStartPoint extends GenericRoutingPoint implements
      * @param theLayer
      */
     public GPRoutingStartPoint(Vector theLayer,
-            GeoPlatformBoxesWidget boxesWidget, GeoPlatformMap geoPlatformMap) {
+                               GeoPlatformBoxesWidget boxesWidget, GeoPlatformMap geoPlatformMap) {
         super(theLayer, boxesWidget, geoPlatformMap);
-        // TODO Auto-generated constructor stub
+
         RoutingHandlerManager.addHandler(StartRoutingPointEventHandler.TYPE,
-                this);
+                                         this);
         RoutingHandlerManager.addHandler(
                 RemoveStartRoutingPointEventHandler.TYPE, this);
     }
@@ -75,25 +75,23 @@ public class GPRoutingStartPoint extends GenericRoutingPoint implements
      */
     @Override
     public void setIconStyle() {
+        this.drawFeature(null);
         style.setExternalGraphic(GWT.getModuleBaseURL()
                 + "/gp-images/start.png");
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.
-     * StartRoutingPointEventHandler
-     * #drawFeature(org.geosdi.geoplatform.gui.model.IGeoPlatformLocation)
+     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.StartRoutingPointEventHandler#drawFeature(org.geosdi.geoplatform.gui.model.IGeoPlatformLocation)
      */
     @Override
     public void drawFeature(IGeoPlatformLocation location) {
-        // TODO Auto-generated method stub
         LonLat ll = new LonLat(location.getLon(), location.getLat());
         ll.transform("EPSG:4326", geoPlatformMap.getMap().getProjection());
         if (!this.boxesWidget.containsLonLat(ll)) {
             GeoPlatformMessage.errorMessage("GeoPlatform Routing",
-                    "The chosen location is out of Range.");
+                                            "The chosen location is out of Range.");
             return;
         }
 
@@ -107,15 +105,13 @@ public class GPRoutingStartPoint extends GenericRoutingPoint implements
         layer.addFeature(feature);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.
-     * RemoveStartRoutingPointEventHandler#removePoint()
+     * @see org.geosdi.geoplatform.gui.puregwt.routing.event.RemoveStartRoutingPointEventHandler#removePoint()
      */
     @Override
     public void removePoint() {
-        // TODO Auto-generated method stub
         if (feature != null) {
             layer.removeFeature(feature);
             feature = null;

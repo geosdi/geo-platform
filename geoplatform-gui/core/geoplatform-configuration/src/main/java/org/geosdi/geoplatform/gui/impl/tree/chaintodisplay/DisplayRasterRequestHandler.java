@@ -54,12 +54,10 @@ public class DisplayRasterRequestHandler extends AbstractRequestHandler {
 		super(theStore);
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.geosdi.geoplatform.gui.model.tree.responsibility.GPLayerRequestHandler
-	 * #layerRequest(org.geosdi.geoplatform.gui.model.GPLayerBean)
+	 * @see org.geosdi.geoplatform.gui.model.tree.responsibility.GPLayerRequestHandler#layerRequest(org.geosdi.geoplatform.gui.model.GPLayerBean)
 	 */
 	@Override
 	public void layerRequest(GPLayerBean layer) {

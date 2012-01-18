@@ -97,7 +97,7 @@ public class ShortRasterPropertiesDTO extends ShortLayerPropertiesDTO {
         this.styleList = styleList;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see java.lang.Object#toString()

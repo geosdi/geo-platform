@@ -54,7 +54,6 @@ public enum PopupTemplate {
 	private String value;
 
 	PopupTemplate(String theValue) {
-		// TODO Auto-generated constructor stub
 		this.value = theValue;
 	}
 

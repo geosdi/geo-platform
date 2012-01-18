@@ -61,12 +61,10 @@ public class ModifyFeatureControl extends MapControl {
 
     public ModifyFeatureControl(Vector vector) {
         super(vector);
-        // TODO Auto-generated constructor stub
         this.createResponsibilityComponent();
     }
 
     private void createResponsibilityComponent() {
-        // TODO Auto-generated method stub
         this.requestManager = new GeometryRequestManager(vector);
         this.pointHandler = new PointRequestHandler(this);
         this.lineHandler = new LineRequestHandler(this);
@@ -75,16 +73,13 @@ public class ModifyFeatureControl extends MapControl {
         this.lineHandler.setSuperiorRequestHandler(polygonHandler);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see
-     * org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#createControl
-     * ()
+     * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#createControl()
      */
     @Override
     public void createControl() {
-        // TODO Auto-generated method stub
         this.control = new ModifyFeature(vector);
 
         vector.addVectorBeforeFeatureModifiedListener(new VectorBeforeFeatureModifiedListener() {
@@ -92,7 +87,6 @@ public class ModifyFeatureControl extends MapControl {
             @Override
             public void onBeforeFeatureModified(
                     BeforeFeatureModifiedEvent eventObject) {
-                // TODO Auto-generated method stub
                 selectedFeature = eventObject.getVectorFeature().clone();
             }
         });
@@ -111,28 +105,24 @@ public class ModifyFeatureControl extends MapControl {
         });
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#
-     * activateControl()
+     * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#activateControl()
      */
     @Override
     public void activateControl() {
-        // TODO Auto-generated method stub
         this.control.activate();
         this.enabled = true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
-     * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#
-     * deactivateControl()
+     * @see org.geosdi.geoplatform.gui.client.widget.map.control.MapControl#deactivateControl()
      */
     @Override
     public void deactivateControl() {
-        // TODO Auto-generated method stub
         this.control.deactivate();
         this.enabled = false;
     }

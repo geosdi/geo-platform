@@ -85,7 +85,7 @@ public class GPApplication extends GPAccount {
         this.appID = appID;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * @see java.lang.Object#toString()
      */

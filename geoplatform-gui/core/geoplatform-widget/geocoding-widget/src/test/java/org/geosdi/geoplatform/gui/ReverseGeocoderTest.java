@@ -71,7 +71,6 @@ public class ReverseGeocoderTest {
         try {
             bean = this.reverseGeoding.findLocation(40.6372425, 15.8022214);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             logger.error("IOException " + e);
         }
 

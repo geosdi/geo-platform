@@ -72,7 +72,7 @@ public class ApplicationDTO extends ShortAccountDTO {
         this.appID = appID;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

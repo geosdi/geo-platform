@@ -56,12 +56,10 @@ public class PointRequestHandler extends GeometryRequestHandler {
 
     public PointRequestHandler(ModifyFeatureControl theControl) {
         super(theControl);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public void geometryRequest(VectorFeature feature, Vector vector) {
-        // TODO Auto-generated method stub
         if (feature.getGeometry().getClassName().equals(
                 Geometry.POINT_CLASS_NAME)) {
 
@@ -77,7 +75,6 @@ public class PointRequestHandler extends GeometryRequestHandler {
 
     @Override
     public boolean checkModifications(VectorFeature feature) {
-        // TODO Auto-generated method stub
         Point oldPoint = Point.narrowToPoint(
                 control.getSelectedFeature().getGeometry().getJSObject());
 
@@ -91,7 +88,6 @@ public class PointRequestHandler extends GeometryRequestHandler {
     @Override
     public void showConfirmMessage(final VectorFeature feature,
             final Vector vector) {
-        // TODO Auto-generated method stub
         final VectorFeature selectedFeature = getSelectedFeaure();
 
         GeoPlatformMessage.confirmMessage(
@@ -101,7 +97,6 @@ public class PointRequestHandler extends GeometryRequestHandler {
 
                     @Override
                     public void handleEvent(MessageBoxEvent be) {
-                        // TODO Auto-generated method stub
                         if (be.getButtonClicked().getText().equalsIgnoreCase(
                                 "yes")
                                 || be.getButtonClicked().getText().equalsIgnoreCase(

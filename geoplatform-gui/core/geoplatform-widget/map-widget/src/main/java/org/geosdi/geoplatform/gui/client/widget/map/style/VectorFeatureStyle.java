@@ -53,7 +53,6 @@ public class VectorFeatureStyle {
 	 * Create A Style for Vector Feature
 	 */
 	private void createStyle() {
-		// TODO Auto-generated method stub
 		this.vectorStyle = new Style();
 		vectorStyle.setStrokeColor("#000000");
 		vectorStyle.setStrokeWidth(1);

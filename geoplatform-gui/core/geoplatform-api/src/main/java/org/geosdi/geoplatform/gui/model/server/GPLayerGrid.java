@@ -273,7 +273,7 @@ public abstract class GPLayerGrid extends GeoPlatformBeanModel implements
         return 0;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

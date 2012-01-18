@@ -112,7 +112,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
     }
 
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel#getIcon()
@@ -127,7 +127,7 @@ public class RasterTreeNode extends GPLayerTreeModel implements GPRasterBean {
         visitor.visitRaster(this);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()

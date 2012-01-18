@@ -53,7 +53,7 @@ public class ShortVectorPropertiesDTO extends ShortLayerPropertiesDTO {
         super(vector);
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * 
      * @see java.lang.Object#toString()

@@ -52,13 +52,11 @@ public class ZoomPreviousEvent extends GwtEvent<ZoomPreviousEventHandler> {
 
     @Override
     public Type<ZoomPreviousEventHandler> getAssociatedType() {
-        // TODO Auto-generated method stub
         return TYPE;
     }
 
     @Override
     protected void dispatch(ZoomPreviousEventHandler handler) {
-        // TODO Auto-generated method stub
         handler.onActivation(activate);
     }
 }

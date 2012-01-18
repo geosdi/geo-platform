@@ -50,23 +50,17 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPParentElemen
  */
 public class GeoPlatformFolderStore implements FolderStore, Serializable, IGPParentElement {
 
-
-    /**
-     *
-     */
     private static final long serialVersionUID = 526645758036790638L;
-    
+
     private List<GPFolderClientInfo> folders;
 
     @Override
     public List<GPFolderClientInfo> getFolders() {
-        // TODO Auto-generated method stub
         return this.folders;
     }
 
     @Override
     public void setFolders(List<GPFolderClientInfo> folders) {
-        // TODO Auto-generated method stub
         Collections.sort(folders);
         this.folders = folders;
     }

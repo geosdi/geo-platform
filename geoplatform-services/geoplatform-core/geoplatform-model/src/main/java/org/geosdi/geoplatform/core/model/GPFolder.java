@@ -1,4 +1,3 @@
-//<editor-fold defaultstate="collapsed" desc="License">
 /*
  *  geo-platform
  *  Rich webgis framework
@@ -34,7 +33,6 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-//</editor-fold>
 package org.geosdi.geoplatform.core.model;
 
 import java.io.Serializable;
@@ -216,7 +214,7 @@ public class GPFolder implements Serializable {
         this.shared = shared;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()
@@ -245,7 +243,7 @@ public class GPFolder implements Serializable {
         return str.append("}").toString();
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * @see java.lang.Object#equals(java.lang.Object)
      */
@@ -264,7 +262,7 @@ public class GPFolder implements Serializable {
         return true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      * @see java.lang.Object#hashCode()
      */

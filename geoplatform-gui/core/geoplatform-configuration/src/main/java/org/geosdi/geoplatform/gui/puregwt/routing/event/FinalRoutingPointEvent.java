@@ -56,27 +56,23 @@ public class FinalRoutingPointEvent extends GwtEvent<FinalRoutingPointEventHandl
         this.location = location;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
      */
     @Override
     public Type<FinalRoutingPointEventHandler> getAssociatedType() {
-        // TODO Auto-generated method stub
         return FinalRoutingPointEventHandler.TYPE;
     }
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see
-     * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
-     * .EventHandler)
+     * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
      */
     @Override
     protected void dispatch(FinalRoutingPointEventHandler handler) {
-        // TODO Auto-generated method stub
         handler.drawFeature(location);
     }
 }

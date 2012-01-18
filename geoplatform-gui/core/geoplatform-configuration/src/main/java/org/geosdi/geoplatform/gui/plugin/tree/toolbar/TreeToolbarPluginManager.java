@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.plugin.tree.toolbar;
 
-import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,8 +43,8 @@ import java.util.List;
  * @email nazzareno.sileno@geosdi.org
  */
 public class TreeToolbarPluginManager {
-
-    private static List<ITreeToolbarPlugin> toolbarPlugin = Lists.newArrayList();
+    
+    private static List<ITreeToolbarPlugin> toolbarPlugin = new ArrayList<ITreeToolbarPlugin>();
 
     /**
      * @return the toolbarPlugin
@@ -53,20 +52,15 @@ public class TreeToolbarPluginManager {
     public static List<ITreeToolbarPlugin> getToolbarPlugin() {
         return toolbarPlugin;
     }
-
+    
     public static void addToolbarPlugin(ITreeToolbarPlugin plugin) {
         toolbarPlugin.add(plugin);
     }
-
-    public static void removeToolbarPlugin(String id) {
-        for (ITreeToolbarPlugin plugin : toolbarPlugin) {
-            if (plugin.getId().equals(id)) {
-                toolbarPlugin.remove(plugin);
-                return;
-            }
-        }
+    
+    public static void removeToolbarPlugins(List<ITreeToolbarPlugin> pluginsExcluded) {
+        toolbarPlugin.removeAll(pluginsExcluded);
     }
-
+    
     public static List<ITreeToolbarPlugin> getToolbarPluginByRegion(TreeToolbarRegion region) {
         List<ITreeToolbarPlugin> regionPlugins = new ArrayList<ITreeToolbarPlugin>();
         for (ITreeToolbarPlugin plugin : toolbarPlugin) {

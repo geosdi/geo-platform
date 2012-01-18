@@ -271,8 +271,8 @@ public class GuiComponentIDs {
         mapViewer.put(ADD_FOLDER, true);
         mapViewer.put(ADD_LAYERS, true);
         mapViewer.put(DELETE_ELEMENT, true);
-        mapViewer.put(SAVE_TREE, false); // TODO DEL ?
-//        mapViewer.put(PRINT_LAYERS, true); // TODO Decomment
+        mapViewer.put(SAVE_TREE, false);
+        mapViewer.put(PRINT_LAYERS, true);
         mapViewer.put(EXPORT_PROJECT, true);
         mapViewer.put(IMPORT_PROJECT, true);
         mapViewer.put(PREVIEW_KML, true);

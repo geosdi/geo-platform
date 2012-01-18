@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.gui.client.widget.toolbar;
 
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import java.util.ArrayList;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.tree.toolbar.GPTreeToolbar;
 import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
@@ -49,7 +51,7 @@ import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class LayerTreeToolbar extends GPTreeToolbar {
-
+    
     private boolean initialized;
 
     /**
@@ -60,7 +62,7 @@ public class LayerTreeToolbar extends GPTreeToolbar {
     public LayerTreeToolbar(TreePanel theTree) {
         super(theTree);
     }
-
+    
     @Override
     public void buildToolbar() {
         if (!initialized) {
@@ -81,27 +83,28 @@ public class LayerTreeToolbar extends GPTreeToolbar {
         this.addSeparator();
         this.addElementsByRegion(TreeToolbarRegion.END_REGION);
     }
-
+    
     private void addElementsByRegion(TreeToolbarRegion region) {
-//        System.out.println(region); //
+        List<ITreeToolbarPlugin> pluginsExcluded = new ArrayList<ITreeToolbarPlugin>();
+        
         for (ITreeToolbarPlugin element : TreeToolbarPluginManager.getToolbarPluginByRegion(region)) {
             String id = element.getId();
-
+            
             Boolean permission = GPUserGuiComponents.getInstance().
-                    hasComponentPermission(id);            
-            if (permission == null) { // The element is removed from toolbarPlugin and not added to toolbar
-//                System.out.println("--- " + id); //
-                TreeToolbarPluginManager.removeToolbarPlugin(id);
+                    hasComponentPermission(id);
+            if (permission == null) { // Element will not be visible
+                // The element will removed from toolbarPlugin and not added to toolbar
+                pluginsExcluded.add(element);
                 continue;
-            } else if (!permission) { // The element is removed from toolbarPlugin (method setEnableByStatu will not be called)
-//                System.out.println("### " + id); //
-                TreeToolbarPluginManager.removeToolbarPlugin(id);
-//            } else { //
-//                System.out.println("+++ " + id); //
+            } else if (!permission) { // Element will always be visible as disabled
+                // The element will removed from toolbarPlugin (method setEnableByStatus will not be called) and added to toolbar
+                pluginsExcluded.add(element);
             }
-
+            
             this.toolBar.add(element.getWidget(tree));
         }
+        
+        TreeToolbarPluginManager.removeToolbarPlugins(pluginsExcluded);
     }
 
     /**

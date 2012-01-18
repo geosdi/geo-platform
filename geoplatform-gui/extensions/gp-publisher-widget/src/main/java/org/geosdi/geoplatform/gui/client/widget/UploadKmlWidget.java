@@ -56,7 +56,8 @@ import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 
 /**
- *
+ * TODO This widget is not used because the relative action is not registered
+ * 
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */

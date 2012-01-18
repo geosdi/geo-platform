@@ -42,7 +42,8 @@ import org.geosdi.geoplatform.gui.client.PublisherResources;
 import org.geosdi.geoplatform.gui.client.widget.UploadKmlWidget;
 
 /**
- *
+ * TODO This action now is not used
+ * 
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */

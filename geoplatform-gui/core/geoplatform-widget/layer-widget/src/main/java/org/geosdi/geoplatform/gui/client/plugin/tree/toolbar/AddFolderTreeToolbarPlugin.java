@@ -35,48 +35,48 @@
  */
 package org.geosdi.geoplatform.gui.client.plugin.tree.toolbar;
 
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.AddFolderTreeAction;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginButton;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class AddFolderTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
-
-    private Button button;
+public class AddFolderTreeToolbarPlugin extends TreeToolbarPluginButton {
 
     @Override
-    public boolean setEnabledByStatus(TreeStatusEnum status) {
-        boolean condition = false;
-        if (status.equals(TreeStatusEnum.FOLDER_SELECTED)
-                || status.equals(TreeStatusEnum.ROOT_SELECTED)) {
-            condition = true;
-        }
-        button.setEnabled(condition);
-        return condition;
-    }
-
-    @Override
-    public Button getWidget(TreePanel treePanel) {
-        if (button == null) {
-            ToolbarLayerTreeAction action = new AddFolderTreeAction(treePanel);
-            button = new Button();
-            button.setToolTip(action.getTooltip());
-            button.setIcon(action.getImage());
-            button.addSelectionListener(action);
-            this.button.setEnabled(false);
-        }
-        return button;
+    public String getId() {
+        return GuiComponentIDs.ADD_FOLDER;
     }
 
     @Override
     public TreeToolbarRegion getRegion() {
         return TreeToolbarRegion.START_REGION;
+    }
+
+    @Override
+    protected ToolbarLayerTreeAction getTreeAction(TreePanel treePanel) {
+        return new AddFolderTreeAction(treePanel);
+    }
+
+    @Override
+    protected boolean isInitialEnabled() {
+        return false;
+    }
+
+    @Override
+    public boolean setEnabledByStatus(TreeStatusEnum status) {
+        boolean condition = false;
+        if (status == TreeStatusEnum.FOLDER_SELECTED
+                || status == TreeStatusEnum.ROOT_SELECTED) {
+            condition = true;
+        }
+        super.button.setEnabled(condition);
+        return condition;
     }
 }

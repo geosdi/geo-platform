@@ -100,6 +100,20 @@ public class GuiComponentIDs {
     public static final String USER_OPTIONS_BUTTON = "userOptionsButton";
     public static final String USER_LOGOUT = "userLogout";
     /**
+     * Layer Toolbar
+     */
+    public static final String ADD_FOLDER = "ADD_FOLDER";
+    public static final String ADD_LAYERS = "ADD_LAYERS";
+    //
+    public static final String DELETE_ELEMENT = "DELETE_ELEMENT";
+    public static final String SAVE_TREE = "SAVE_TREE";
+    public static final String PRINT_LAYERS = "PRINT_LAYERS";
+    //
+    public static final String EXPORT_PROJECT = "EXPORT_PROJECT";
+    public static final String IMPORT_PROJECT = "IMPORT_PROJECT";
+    public static final String PREVIEW_KML = "PREVIEW_KML";
+    public static final String LAYER_STYLER = "LAYER_STYLER";
+    /**
      * Collections of GuiComponent
      */
     public static final List<String> LIST_ALL;
@@ -153,6 +167,16 @@ public class GuiComponentIDs {
         all.add(USER_OPTIONS_BUTTON);
         all.add(USER_LOGOUT);
         //
+        all.add(ADD_FOLDER);
+        all.add(ADD_LAYERS);
+        all.add(DELETE_ELEMENT);
+        all.add(SAVE_TREE);
+        all.add(PRINT_LAYERS);
+        all.add(EXPORT_PROJECT);
+        all.add(IMPORT_PROJECT);
+        all.add(PREVIEW_KML);
+        all.add(LAYER_STYLER);
+        //
         LIST_ALL = Collections.unmodifiableList(all);
         /**
          * USER
@@ -194,6 +218,16 @@ public class GuiComponentIDs {
         mapUser.put(USER_OPTIONS_BUTTON, true);
         mapUser.put(USER_LOGOUT, true);
         //
+        mapUser.put(ADD_FOLDER, true);
+        mapUser.put(ADD_LAYERS, true);
+        mapUser.put(DELETE_ELEMENT, true);
+        mapUser.put(SAVE_TREE, true);
+        mapUser.put(PRINT_LAYERS, true);
+        mapUser.put(EXPORT_PROJECT, true);
+        mapUser.put(IMPORT_PROJECT, true);
+        mapUser.put(PREVIEW_KML, true);
+        mapUser.put(LAYER_STYLER, true);
+        //
         MAP_USER = Collections.unmodifiableMap(mapUser);
         /**
          * VIEWER
@@ -233,6 +267,16 @@ public class GuiComponentIDs {
         mapViewer.put(GOOGLE_SIGN_ON_BUTTON, true);
         mapViewer.put(USER_OPTIONS_BUTTON, true);
         mapViewer.put(USER_LOGOUT, true);
+        //
+        mapViewer.put(ADD_FOLDER, true);
+        mapViewer.put(ADD_LAYERS, true);
+        mapViewer.put(DELETE_ELEMENT, true);
+        mapViewer.put(SAVE_TREE, false); // TODO DEL ?
+//        mapViewer.put(PRINT_LAYERS, true); // TODO Decomment
+        mapViewer.put(EXPORT_PROJECT, true);
+        mapViewer.put(IMPORT_PROJECT, true);
+        mapViewer.put(PREVIEW_KML, true);
+        mapViewer.put(LAYER_STYLER, true);
         //
         MAP_VIEWER = Collections.unmodifiableMap(mapViewer);
     }

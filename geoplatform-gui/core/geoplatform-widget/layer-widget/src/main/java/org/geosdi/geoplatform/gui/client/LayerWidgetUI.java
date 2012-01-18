@@ -35,23 +35,23 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.menu.LayerMenuAction;
-import org.geosdi.geoplatform.gui.client.mvc.LayerController;
-
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.google.gwt.core.client.EntryPoint;
 import org.geosdi.geoplatform.gui.client.action.menu.project.LoadMenuProjects;
+import org.geosdi.geoplatform.gui.client.mvc.LayerController;
 import org.geosdi.geoplatform.gui.client.mvc.ServerController;
-import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.AddFolderTreeToolbarPlugin;
-import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.AddLayerTreeToolbarPlugin;
-import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.DeleteElementTreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.client.plugin.PrintLayersTreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.client.plugin.tree.addlayer.AddRasterLayerPlugin;
 import org.geosdi.geoplatform.gui.client.plugin.tree.addlayer.AddVectorLayerPlugin;
 import org.geosdi.geoplatform.gui.client.plugin.tree.addlayer.GetMapLayerPlugin;
+import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.AddFolderTreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.AddLayerTreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.DeleteElementTreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.SaveTreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AddLayerPluginManager;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginManager;
@@ -85,7 +85,8 @@ public class LayerWidgetUI implements EntryPoint {
     }
 
     private void addLayerWidgetAction() {
-        MenuActionRegistar.put("layerMenu", new MenuActionCreator() {
+        MenuActionRegistar.put(GuiComponentIDs.LAYER_MENU,
+                               new MenuActionCreator() {
 
             @Override
             public MenuAction createAction() {
@@ -93,7 +94,8 @@ public class LayerWidgetUI implements EntryPoint {
             }
         });
 
-        MenuActionRegistar.put("loadProjects", new MenuActionCreator() {
+        MenuActionRegistar.put(GuiComponentIDs.LOAD_PROJECTS,
+                               new MenuActionCreator() {
 
             @Override
             public MenuAction createAction() {
@@ -104,13 +106,13 @@ public class LayerWidgetUI implements EntryPoint {
     }
 
     private void addTreeToolbarComponents() {
-        TreeToolbarPluginManager.addToolBarPlugin(new AddFolderTreeToolbarPlugin());
-        TreeToolbarPluginManager.addToolBarPlugin(new AddLayerTreeToolbarPlugin());
+        TreeToolbarPluginManager.addToolbarPlugin(new AddFolderTreeToolbarPlugin());
+        TreeToolbarPluginManager.addToolbarPlugin(new AddLayerTreeToolbarPlugin());
 //        TreeToolbarPluginManager.addToolBarPlugin(new AddVectorTreeToolbarPlugin());
-        TreeToolbarPluginManager.addToolBarPlugin(new DeleteElementTreeToolbarPlugin());
-        TreeToolbarPluginManager.addToolBarPlugin(new SaveTreeToolbarPlugin());
+        TreeToolbarPluginManager.addToolbarPlugin(new DeleteElementTreeToolbarPlugin());
+        TreeToolbarPluginManager.addToolbarPlugin(new SaveTreeToolbarPlugin());
         //No entrypoint in print module then I declared here the plugin
-        TreeToolbarPluginManager.addToolBarPlugin(new PrintLayersTreeToolbarPlugin());
+        TreeToolbarPluginManager.addToolbarPlugin(new PrintLayersTreeToolbarPlugin());
 //        TreeToolbarPluginManager.addToolBarPlugin(new GetMapTreeToolbarPlugin());
 
         AddLayerPluginManager.addWindowPlugin(new AddRasterLayerPlugin());

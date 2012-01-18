@@ -26,8 +26,4 @@ public interface IGPUserDetail extends IGPUserSimpleDetail {
      *         otherwise null i.e. the component will not be visible
      */
     public Boolean hasComponentPermission(String componentID);
-
-    public boolean isViewer(); // TODO DEL
-
-    public void setViewer(boolean viewer); // TODO DEL
 }

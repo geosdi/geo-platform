@@ -62,7 +62,6 @@ import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
 import org.geosdi.geoplatform.gui.configuration.toolbar.IGeoPlatformToolbar;
 import org.geosdi.geoplatform.gui.configuration.toolbar.IconInToolbar;
 import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
-import org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool;
 import org.geosdi.geoplatform.gui.configuration.toolbar.MenuInToolBar;
 import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
@@ -79,7 +78,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     private List<ToolbarGenericTool> tools;
 
     public GPMapToolbarWidget(GeoPlatformMap geoPlatformMap,
-            List<ToolbarGenericTool> tools) {
+                              List<ToolbarGenericTool> tools) {
         this.geoPlatformMap = geoPlatformMap;
         setTools(tools);
         initialize();
@@ -158,7 +157,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
 
         this.toolBar.add(new FillToolItem());
         this.toolBar.add(widgetIcon.createWidgetComponent(BasicWidgetResources.ICONS.googleWhite().createImage(),
-                tool.getText()));
+                                                          tool.getText()));
     }
 
     @Override
@@ -239,7 +238,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     }
 
     private void prepareButton(final Button button, ToolbarAction action,
-            ToolbarGenericTool tool) {
+                               ToolbarGenericTool tool) {
         button.setId(action.getId());
         button.setToolTip(action.getTooltip());
         button.setIcon(action.getImage());
@@ -274,17 +273,6 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
      */
     public void setTools(List<ToolbarGenericTool> tools) {
         Collections.sort(tools);
-        // TODO DEL
-        for (ToolbarGenericTool tool : tools) {
-            System.out.println("* " + tool);
-//            System.out.println("public static final String " + tool.getId().toString().toUpperCase() + " = \"" + tool.getId() + "\";");
-            if (tool instanceof MenuInToolBar) {
-                for (MenuBarClientTool sub : ((MenuInToolBar) tool).getTools()) {
-                    System.out.println("** " + sub);
-//                    System.out.println("public static final String " + sub.getId().toString().toUpperCase() + " = \"" + sub.getId() + "\";");
-                }
-            }
-        }
         this.tools = tools;
     }
 }

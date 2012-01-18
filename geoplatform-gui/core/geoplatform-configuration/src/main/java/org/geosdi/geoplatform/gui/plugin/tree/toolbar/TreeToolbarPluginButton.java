@@ -35,21 +35,70 @@
  */
 package org.geosdi.geoplatform.gui.plugin.tree.toolbar;
 
-import com.extjs.gxt.ui.client.widget.Component;
+import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
+import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
 import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface ITreeToolbarPlugin<T extends Component> {
+public abstract class TreeToolbarPluginButton
+        implements ITreeToolbarPlugin<Button> {
 
-    String getId();
+    protected Button button;
 
-    TreeToolbarRegion getRegion();
+    /**
+     * Method call only if the permission in not null, that create and join the
+     * button with the relative action on tree.
+     * 
+     * @param treePanel
+     * @return the button to add into Layer Toolbar
+     */
+    @Override
+    public final Button getWidget(TreePanel treePanel) {
+        if (button == null) {
+            String id = this.getId();
+            Boolean permission = GPUserGuiComponents.getInstance().
+                    hasComponentPermission(id);
 
-    T getWidget(TreePanel treePanel);
+            ToolbarLayerTreeAction action = this.getTreeAction(treePanel);
+            action.setId(id);
 
-    boolean setEnabledByStatus(TreeStatusEnum status);
+            button = new Button();
+            button.setId(id);
+            button.setToolTip(action.getTooltip());
+            button.setIcon(action.getImage());
+            button.addSelectionListener(action);
+
+            button.setEnabled(this.isInitialEnabled() && permission);
+        }
+        return button;
+    }
+
+    protected abstract ToolbarLayerTreeAction getTreeAction(TreePanel treePanel);
+
+    /**
+     * Override for change the default setting that initially enable the plugin.
+     * 
+     * @return if the plugin must be enabled
+     */
+    protected boolean isInitialEnabled() {
+        return true;
+    }
+
+    /**
+     *      * Override for change the default setting that enable always the plugin
+     * regardless of the state.
+     * 
+     * @param status the status of the tree
+     * @return if the plugin is enabled or not
+     */
+    @Override
+    public boolean setEnabledByStatus(TreeStatusEnum status) {
+        button.setEnabled(true);
+        return true;
+    }
 }

@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.toolbar;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.toolbar.GPTreeToolbar;
+import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginManager;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
@@ -66,7 +67,6 @@ public class LayerTreeToolbar extends GPTreeToolbar {
             initialize();
             this.initialized = true;
         }
-
     }
 
     /**
@@ -83,7 +83,23 @@ public class LayerTreeToolbar extends GPTreeToolbar {
     }
 
     private void addElementsByRegion(TreeToolbarRegion region) {
-        for (ITreeToolbarPlugin element : TreeToolbarPluginManager.getToolBarPluginByRegion(region)) {
+//        System.out.println(region); //
+        for (ITreeToolbarPlugin element : TreeToolbarPluginManager.getToolbarPluginByRegion(region)) {
+            String id = element.getId();
+
+            Boolean permission = GPUserGuiComponents.getInstance().
+                    hasComponentPermission(id);            
+            if (permission == null) { // The element is removed from toolbarPlugin and not added to toolbar
+//                System.out.println("--- " + id); //
+                TreeToolbarPluginManager.removeToolbarPlugin(id);
+                continue;
+            } else if (!permission) { // The element is removed from toolbarPlugin (method setEnableByStatu will not be called)
+//                System.out.println("### " + id); //
+                TreeToolbarPluginManager.removeToolbarPlugin(id);
+//            } else { //
+//                System.out.println("+++ " + id); //
+            }
+
             this.toolBar.add(element.getWidget(tree));
         }
     }

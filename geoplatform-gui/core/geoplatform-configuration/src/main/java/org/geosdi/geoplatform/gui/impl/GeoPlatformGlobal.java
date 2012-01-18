@@ -60,7 +60,7 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
     @Autowired
     private GeoPlatformInfo geoPlatformInfo;
 
-    private IToolbarContainerTool toolbarClientTool;
+    private IToolbarContainerTool toolbarContainerTool;
 
     private IMenuBarContainerTool menuBarContainerTool;
 
@@ -87,19 +87,19 @@ public class GeoPlatformGlobal implements IGeoPlatformGlobal {
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal#getToolbarClientTool()
+     * @see org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal#getToolbarContainerTool()
      */
     @Override
     public IToolbarContainerTool getToolbarContainerTool() {
-        return toolbarClientTool;
+        return toolbarContainerTool;
     }
 
     /**
-     * @param toolbarClientTool
-     *            the toolbarClientTool to set
+     * @param toolbarContainerTool
+     *            the toolbarContainerTool to set
      */
-    public void setToolbarClientTool(IToolbarContainerTool toolbarClientTool) {
-        this.toolbarClientTool = toolbarClientTool;
+    public void setToolbarClientTool(IToolbarContainerTool toolbarContainerTool) {
+        this.toolbarContainerTool = toolbarContainerTool;
     }
 
     @Override

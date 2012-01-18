@@ -53,7 +53,7 @@ public class ZoomOutAction extends ToolbarMapAction {
     private int zoomFactor = 1;
 
     public ZoomOutAction(GeoPlatformMap mapWidget) {
-        super(Resources.ICONS.zoomOut(), "ZoomOut");
+        super(Resources.ICONS.zoomOut(), "Zoom Out");
         this.mapWidget = mapWidget;
     }
 

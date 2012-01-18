@@ -396,7 +396,7 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    @Deprecated()
+    @Deprecated
     public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPUser user = null;
@@ -418,7 +418,7 @@ public class LayerService implements ILayerService {
     }
 
     @Override
-    @Deprecated()
+    @Deprecated
     public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPUser user = null;
@@ -519,7 +519,7 @@ public class LayerService implements ILayerService {
         return false;
     }
 
-    @Deprecated()
+    @Deprecated
     private void deleteFolder(Long id) throws GeoPlatformException {
         try {
             this.geoPlatformServiceClient.deleteFolder(id);
@@ -531,7 +531,7 @@ public class LayerService implements ILayerService {
         }
     }
 
-    @Deprecated()
+    @Deprecated
     private void deleteLayer(Long id) throws GeoPlatformException {
         try {
             this.geoPlatformServiceClient.deleteLayer(id);

@@ -35,51 +35,49 @@
  */
 package org.geosdi.geoplatform.gui.client.plugin.tree.toolbar;
 
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
+import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.SaveTreeAction;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginManager;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginButton;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class SaveTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
-
-    private Button button;
+public class SaveTreeToolbarPlugin extends TreeToolbarPluginButton {
 
     @Override
-    public boolean setEnabledByStatus(TreeStatusEnum status) {
-        boolean condition = button.isEnabled();
-        if (status.equals(TreeStatusEnum.SAVE_CACHE_EMPTY)) {
-            condition = false;
-            button.setEnabled(condition);
-        } else if (!TreeToolbarPluginManager.USER_VIEWER // TODO DEL conditions after manage all roles
-                && status.equals(TreeStatusEnum.SAVE_CACHE_NOT_EMPTY)) {
-            condition = true;
-            button.setEnabled(condition);
-        }
-        return condition;
-    }
-
-    @Override
-    public Button getWidget(TreePanel treePanel) {
-        if (button == null) {
-            SaveTreeAction action = new SaveTreeAction(treePanel, this);
-            button = new Button();
-            button.setToolTip(action.getTooltip());
-            button.setIcon(action.getImage());
-            button.addSelectionListener(action);
-            this.button.setEnabled(false);
-        }
-        return button;
+    public String getId() {
+        return GuiComponentIDs.SAVE_TREE;
     }
 
     @Override
     public TreeToolbarRegion getRegion() {
         return TreeToolbarRegion.MIDDLE_REGION;
+    }
+
+    @Override
+    protected ToolbarLayerTreeAction getTreeAction(TreePanel treePanel) {
+        return new SaveTreeAction(treePanel, this);
+    }
+
+    @Override
+    protected boolean isInitialEnabled() {
+        return false;
+    }
+
+    @Override
+    public boolean setEnabledByStatus(TreeStatusEnum status) {
+        boolean condition = false;
+        if (status == TreeStatusEnum.SAVE_CACHE_EMPTY) {
+            super.button.setEnabled(condition);
+        } else if (status == TreeStatusEnum.SAVE_CACHE_NOT_EMPTY) {
+            condition = true;
+            super.button.setEnabled(condition);
+        }
+        return condition;
     }
 }

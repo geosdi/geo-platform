@@ -57,7 +57,6 @@ public abstract class MenubarGenericTool extends GenericTool {
     public void buildTool(IGeoPlatformMenubar menubar, Menu menu) {
         Boolean permission = GPUserGuiComponents.getInstance().
                 hasComponentPermission(this.getId());
-        System.out.println("*** [ID = " + this.getId() + "] Permission = " + permission);
         if (permission != null) {
             super.enabled &= permission;
             this.create(menubar, menu);

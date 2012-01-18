@@ -48,6 +48,7 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMemberGeocoding;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.GPMemberOptionType;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.IGPMemberOptionManager;
@@ -61,14 +62,13 @@ public class Geocoding implements EntryPoint {
 
     private Dispatcher dispatcher;
 
-    /*
+    /**
      * (non-Javadoc)
      *
      * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
      */
     @Override
     public void onModuleLoad() {
-        // TODO Auto-generated method stub
         dispatcher = Dispatcher.get();
 
         dispatcher.addController(new GeocodingController());
@@ -80,23 +80,20 @@ public class Geocoding implements EntryPoint {
     }
 
     private void addReverseGeocodingAction() {
-        // TODO Auto-generated method stub
-        MenuActionRegistar.put("geocoding", new MenuActionCreator() {
+        MenuActionRegistar.put(GuiComponentIDs.GEOCODING,
+                               new MenuActionCreator() {
 
             @Override
             public MenuAction createAction() {
-                // TODO Auto-generated method stub
                 return new GeocodingMenuAction();
             }
         });
 
-        ToolbarActionRegistar.put("reverseGeocoding",
+        ToolbarActionRegistar.put(GuiComponentIDs.REVERSE_GEOCODING,
                                   new ToolbarActionCreator() {
 
             @Override
-            public ToolbarAction createActionTool(
-                    GeoPlatformMap mapWidget) {
-                // TODO Auto-generated method stub
+            public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
                 return new ReverseGeocodingAction(mapWidget);
             }
         });

@@ -43,29 +43,36 @@ import java.util.List;
  * @email nazzareno.sileno@geosdi.org
  */
 public class TreeToolbarPluginManager {
-    
-    private static List<ITreeToolbarPlugin> toolBarPlugin = new ArrayList<ITreeToolbarPlugin>();
-    public static boolean USER_VIEWER;
+
+    private static List<ITreeToolbarPlugin> toolbarPlugin = new ArrayList<ITreeToolbarPlugin>();
 
     /**
-     * @return the toolBarPlugin
+     * @return the toolbarPlugin
      */
-    public static List<ITreeToolbarPlugin> getToolBarPlugin() {
-        return toolBarPlugin;
+    public static List<ITreeToolbarPlugin> getToolbarPlugin() {
+        return toolbarPlugin;
     }
-    
-    public static void addToolBarPlugin(ITreeToolbarPlugin plugin){
-        toolBarPlugin.add(plugin);
+
+    public static void addToolbarPlugin(ITreeToolbarPlugin plugin) {
+        toolbarPlugin.add(plugin);
     }
-    
-    public static List<ITreeToolbarPlugin> getToolBarPluginByRegion(TreeToolbarRegion region){
+
+    public static void removeToolbarPlugin(String id) {
+        for (ITreeToolbarPlugin plugin : toolbarPlugin) {
+            if (plugin.getId().equals(id)) {
+                toolbarPlugin.remove(plugin);
+                return;
+            }
+        }
+    }
+
+    public static List<ITreeToolbarPlugin> getToolbarPluginByRegion(TreeToolbarRegion region) {
         List<ITreeToolbarPlugin> regionPlugins = new ArrayList<ITreeToolbarPlugin>();
-        for (ITreeToolbarPlugin iTreeToolbarPlugin : toolBarPlugin) {
-            if(iTreeToolbarPlugin.getRegion().equals(region)){
-                regionPlugins.add(iTreeToolbarPlugin);
+        for (ITreeToolbarPlugin plugin : toolbarPlugin) {
+            if (plugin.getRegion() == region) {
+                regionPlugins.add(plugin);
             }
         }
         return regionPlugins;
     }
-    
 }

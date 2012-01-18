@@ -82,8 +82,6 @@ public class MenuUtility implements IGeoPlatformMenubar {
     public void buildTools(Menu menu, List<MenuBarClientTool> tools) {
         for (MenuBarClientTool tool : tools) {
             tool.buildTool(INSTANCE, menu);
-//            System.out.println("+ " + tool);
-//            System.out.println("public static final String " + tool.getId().toString().toUpperCase() + " = \"" + tool.getId() + "\";");
         }
     }
 
@@ -176,7 +174,7 @@ public class MenuUtility implements IGeoPlatformMenubar {
             });
 
             action.setChecked(tool.isChecked());
-            action.setEnabled(tool.isEnabled()); // TODO check if the argument is false
+            action.setEnabled(tool.isEnabled());
         }
     }
 
@@ -248,8 +246,6 @@ public class MenuUtility implements IGeoPlatformMenubar {
         MenuItem item = new MenuItem(tool.getText());
         menu.add(item);
         Menu subMenu = new Menu();
-//        System.out.println("++ " + tool.getId());
-//        System.out.println("public static final String " + tool.getId().toString().toUpperCase() + " = \"" + tool.getId() + "\";");
         this.buildTools(subMenu, tool.getTools());
         item.setSubMenu(subMenu);
     }

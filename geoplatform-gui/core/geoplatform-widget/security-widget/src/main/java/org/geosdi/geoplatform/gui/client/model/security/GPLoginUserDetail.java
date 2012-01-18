@@ -20,7 +20,6 @@ public class GPLoginUserDetail implements IGPUserDetail {
     private String name;
     private String email;
     private Map<String, Boolean> componentPermission;
-    private boolean viewer; // TODO DEL
 
     public GPLoginUserDetail() {
     }
@@ -80,25 +79,5 @@ public class GPLoginUserDetail implements IGPUserDetail {
     @Override
     public Boolean hasComponentPermission(String componentID) {
         return componentPermission.get(componentID);
-    }
-
-    /**
-     * TODO DEL
-     * 
-     * @return the viewer
-     */
-    @Override
-    public boolean isViewer() {
-        return viewer;
-    }
-
-    /**
-     * TODO DEL
-     * 
-     * @param viewer the viewer to set
-     */
-    @Override
-    public void setViewer(boolean viewer) {
-        this.viewer = viewer;
     }
 }

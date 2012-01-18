@@ -50,7 +50,6 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
 import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
@@ -105,8 +104,8 @@ public class LoginWidget extends GPSecurityWidget
 
     @Override
     public void onSubmit() {
-        if (this.userLogged == null || this.userLogged.equals(
-                this.userName.getValue())) {
+        if (this.userLogged == null
+                || this.userLogged.equals(this.userName.getValue())) {
             status.setBusy("please wait...");
             getButtonBar().disable();
             SecurityRemoteImpl.Util.getInstance().userLogin(
@@ -121,18 +120,14 @@ public class LoginWidget extends GPSecurityWidget
                                     LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN_ERROR.getValue(),
                                     LoginStatus.EnumLoginStatus.STATUS_LOGIN_ERROR.getValue());
                             GeoPlatformMessage.infoMessage("Login Error",
-                                    caught.getMessage());
+                                                           caught.getMessage());
                             ++reloginAttempts;
                         }
 
                         @Override
                         public void onSuccess(IGPUserDetail result) {
-                            if (result.isViewer()) {
-                                TreeToolbarPluginManager.USER_VIEWER = true;
-                            }
-//                            System.out.println("*** VIEWER: " + ToolbarTreeClientTool.USER_VIEWER);
-                            GPUserGuiComponents.getInstance().setUserDetail(
-                                    result);
+
+                            GPUserGuiComponents.getInstance().setUserDetail(result);
                             status.setStatus(
                                     LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
                                     LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());
@@ -164,7 +159,7 @@ public class LoginWidget extends GPSecurityWidget
                 Dispatcher.forwardEvent(
                         GeoPlatformEvents.REMOVE_WINDOW_CLOSE_LISTENER);
                 GeoPlatformMessage.infoMessage("Application Logout",
-                        "A different user from the previous one is trying to connect to the application");
+                    "A different user from the previous one is trying to connect to the application");
                 userLogged = null;
                 Window.Location.reload();
             }
@@ -192,12 +187,12 @@ public class LoginWidget extends GPSecurityWidget
     }
 
     /**
-     * Set the correct Status Iconn Style
+     * Set the correct Status Icon Style
      * @param status
      * @param message  
      */
     public void setStatusLoginFinder(EnumLoginStatus status,
-            EnumLoginStatus message) {
+                                     EnumLoginStatus message) {
         this.status.setIconStyle(status.getValue());
         this.status.setText(message.getValue());
         getButtonBar().enable();

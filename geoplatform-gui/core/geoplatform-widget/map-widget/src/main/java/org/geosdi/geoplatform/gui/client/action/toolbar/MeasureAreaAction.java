@@ -49,7 +49,7 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 public class MeasureAreaAction extends MapToggleAction {
 
     public MeasureAreaAction(GeoPlatformMap mapWidget) {
-        super(mapWidget, Resources.ICONS.measureArea(), "MeasureArea");
+        super(mapWidget, Resources.ICONS.measureArea(), "Measure Area");
     }
 
     /**

@@ -43,9 +43,8 @@ import java.util.List;
  * @email nazzareno.sileno@geosdi.org
  */
 public class AddLayerPluginManager {
-    
+
     private static List<IAddLayerPlugin> windowPlugins = new ArrayList<IAddLayerPlugin>();
-    public static boolean USER_VIEWER;
 
     /**
      * @return the toolBarPlugin
@@ -53,9 +52,8 @@ public class AddLayerPluginManager {
     public static List<IAddLayerPlugin> getWindowPlugins() {
         return windowPlugins;
     }
-    
-    public static void addWindowPlugin(IAddLayerPlugin plugin){
+
+    public static void addWindowPlugin(IAddLayerPlugin plugin) {
         windowPlugins.add(plugin);
     }
-    
 }

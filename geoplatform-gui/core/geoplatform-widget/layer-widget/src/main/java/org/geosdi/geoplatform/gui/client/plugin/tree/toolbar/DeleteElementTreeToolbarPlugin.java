@@ -35,48 +35,48 @@
  */
 package org.geosdi.geoplatform.gui.client.plugin.tree.toolbar;
 
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.DeleteElementTreeAction;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginButton;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class DeleteElementTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
-
-    private Button button;
+public class DeleteElementTreeToolbarPlugin extends TreeToolbarPluginButton {
 
     @Override
-    public boolean setEnabledByStatus(TreeStatusEnum status) {
-        boolean condition = false;
-        if (status.equals(TreeStatusEnum.FOLDER_SELECTED)
-                || status.equals(TreeStatusEnum.RASTER_SELECTED)) {
-            condition = true;
-        }
-        button.setEnabled(condition);
-        return condition;
-    }
-
-    @Override
-    public Button getWidget(TreePanel treePanel) {
-        if (button == null) {
-            ToolbarLayerTreeAction action = new DeleteElementTreeAction(treePanel);
-            button = new Button();
-            button.setToolTip(action.getTooltip());
-            button.setIcon(action.getImage());
-            button.addSelectionListener(action);
-            this.button.setEnabled(false);
-        }
-        return button;
+    public String getId() {
+        return GuiComponentIDs.DELETE_ELEMENT;
     }
 
     @Override
     public TreeToolbarRegion getRegion() {
         return TreeToolbarRegion.MIDDLE_REGION;
+    }
+
+    @Override
+    protected ToolbarLayerTreeAction getTreeAction(TreePanel treePanel) {
+        return new DeleteElementTreeAction(treePanel);
+    }
+
+    @Override
+    protected boolean isInitialEnabled() {
+        return false;
+    }
+
+    @Override
+    public boolean setEnabledByStatus(TreeStatusEnum status) {
+        boolean condition = false;
+        if (status == TreeStatusEnum.FOLDER_SELECTED
+                || status == TreeStatusEnum.RASTER_SELECTED) {
+            condition = true;
+        }
+        super.button.setEnabled(condition);
+        return condition;
     }
 }

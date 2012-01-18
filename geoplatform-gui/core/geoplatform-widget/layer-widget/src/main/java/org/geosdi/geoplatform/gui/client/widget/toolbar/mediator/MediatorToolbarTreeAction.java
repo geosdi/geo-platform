@@ -81,10 +81,10 @@ public class MediatorToolbarTreeAction {
      */
     public void elementChanged(GPBeanTreeModel element) {
         TreeStatusEnum status = this.calculateTreeStatus(element);
-        for (ITreeToolbarPlugin plugin : TreeToolbarPluginManager.getToolBarPlugin()) {
+        for (ITreeToolbarPlugin plugin : TreeToolbarPluginManager.getToolbarPlugin()) {
             plugin.setEnabledByStatus(status);
         }
-        if (isAddLayerVisible()) {
+        if (addLayerVisible) {
             this.manageAddLayerPluginAction(status);
         }
     }
@@ -96,7 +96,7 @@ public class MediatorToolbarTreeAction {
     }
 
     public void manageAddLayerPluginAction(GPBeanTreeModel element) {
-        if (isAddLayerVisible()) {
+        if (addLayerVisible) {
             TreeStatusEnum status = this.calculateTreeStatus(element);
             this.manageAddLayerPluginAction(status);
         }

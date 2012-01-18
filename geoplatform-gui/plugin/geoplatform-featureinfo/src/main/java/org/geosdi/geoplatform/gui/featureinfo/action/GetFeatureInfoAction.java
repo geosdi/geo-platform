@@ -53,7 +53,7 @@ public class GetFeatureInfoAction extends MapToggleAction {
     private GPFeatureInfoWidget featureWidget;
 
     public GetFeatureInfoAction(GeoPlatformMap mapWidget) {
-        super(mapWidget, BasicWidgetResources.ICONS.getFeatureInfo(), "GetFeatureInfo");
+        super(mapWidget, BasicWidgetResources.ICONS.getFeatureInfo(), "Get Feature Info");
         this.featureWidget = new GPFeatureInfoWidget(mapWidget);
     }
 

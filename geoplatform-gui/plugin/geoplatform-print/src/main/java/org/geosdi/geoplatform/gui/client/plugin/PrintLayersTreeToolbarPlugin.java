@@ -35,43 +35,31 @@
  */
 package org.geosdi.geoplatform.gui.client.plugin;
 
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
 import org.geosdi.geoplatform.gui.client.action.PrintLayersAction;
-import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
-import org.geosdi.geoplatform.gui.plugin.tree.TreeStatusEnum;
+import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginButton;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class PrintLayersTreeToolbarPlugin implements ITreeToolbarPlugin<Button> {
-
-    private Button button;
+public class PrintLayersTreeToolbarPlugin extends TreeToolbarPluginButton {
 
     @Override
-    public boolean setEnabledByStatus(TreeStatusEnum status) {
-        button.setEnabled(true);
-        return true;
-    }
-
-    @Override
-    public Button getWidget(TreePanel treePanel) {
-        if (button == null) {
-            ToolbarLayerTreeAction action = new PrintLayersAction(treePanel);
-            button = new Button();
-            button.setToolTip(action.getTooltip());
-            button.setIcon(action.getImage());
-            button.addSelectionListener(action);
-            this.button.setEnabled(true);
-        }
-        return button;
+    public String getId() {
+        return GuiComponentIDs.PRINT_LAYERS;
     }
 
     @Override
     public TreeToolbarRegion getRegion() {
         return TreeToolbarRegion.MIDDLE_REGION;
+    }
+
+    @Override
+    protected ToolbarLayerTreeAction getTreeAction(TreePanel treePanel) {
+        return new PrintLayersAction(treePanel);
     }
 }

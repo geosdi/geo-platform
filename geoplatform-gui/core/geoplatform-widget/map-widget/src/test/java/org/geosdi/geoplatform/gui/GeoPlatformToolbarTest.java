@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui;
 
 import java.util.Collections;
 
-import org.geosdi.geoplatform.gui.configuration.GenericTool;
 import org.geosdi.geoplatform.gui.configuration.toolbar.IToolbarContainerTool;
 import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
 import org.junit.Test;
@@ -59,12 +58,12 @@ public class GeoPlatformToolbarTest {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private IToolbarContainerTool toolbarClientTool;
+    private IToolbarContainerTool toolbarContainerTool;
 
     @Test
     public void test() {
-        Collections.sort(toolbarClientTool.getGroupTools());
-        for (ToolbarGenericTool tool : toolbarClientTool.getGroupTools()) {
+        Collections.sort(toolbarContainerTool.getGroupTools());
+        for (ToolbarGenericTool tool : toolbarContainerTool.getGroupTools()) {
             logger.info("TOOL ITEM: " + tool.toString());
         }
     }

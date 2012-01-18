@@ -39,7 +39,6 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.soap.SOAPFaultException;
-import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.slf4j.Logger;
@@ -48,7 +47,6 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.AccountExpiredFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
@@ -118,12 +116,6 @@ public class SecurityService implements ISecurityService {
 
         IGPUserDetail userDetail = this.userConverter.convertUserToDTO(user);
 
-        for (GPAuthority authority : user.getGPAuthorities()) {
-            if (authority.getAuthority().equals(GPRole.VIEWER.toString())) {
-                userDetail.setViewer(true);
-            }
-        }
-
         userDetail.setComponentPermission(
                 guiComponemtPermission.getGuiComponentsPermissionMap());
 
@@ -147,7 +139,8 @@ public class SecurityService implements ISecurityService {
     }
 
     @Override
-    public void invalidateSession(HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public void invalidateSession(HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
         //deleteUserFromSession(httpServletRequest);
         HttpSession session = httpServletRequest.getSession(false);
         if (session != null) {
@@ -169,7 +162,8 @@ public class SecurityService implements ISecurityService {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
     }
 
-    private Long saveDefaultProject(GPUser user, GPProject project) throws GeoPlatformException {
+    private Long saveDefaultProject(GPUser user, GPProject project)
+            throws GeoPlatformException {
         Long idProject = null;
         try {
             idProject = this.geoPlatformServiceClient.saveProject(user.getUsername(),

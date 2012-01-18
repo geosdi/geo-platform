@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.featureinfo.action.GetFeatureInfoAction;
 
 /**
@@ -74,7 +75,8 @@ public class MapWidgetUI implements EntryPoint {
     }
 
     private void addMapToolbarAction() {
-        ToolbarActionRegistar.put("ZoomIn", new ToolbarActionCreator() {
+        ToolbarActionRegistar.put(GuiComponentIDs.ZOOM_IN,
+                                  new ToolbarActionCreator() {
 
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -82,7 +84,8 @@ public class MapWidgetUI implements EntryPoint {
             }
         });
 
-        ToolbarActionRegistar.put("ZoomOut", new ToolbarActionCreator() {
+        ToolbarActionRegistar.put(GuiComponentIDs.ZOOM_OUT,
+                                  new ToolbarActionCreator() {
 
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -90,7 +93,8 @@ public class MapWidgetUI implements EntryPoint {
             }
         });
 
-        ToolbarActionRegistar.put("ZoomPrevious", new ToolbarActionCreator() {
+        ToolbarActionRegistar.put(GuiComponentIDs.ZOOM_PREVIOUS,
+                                  new ToolbarActionCreator() {
 
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -98,7 +102,8 @@ public class MapWidgetUI implements EntryPoint {
             }
         });
 
-        ToolbarActionRegistar.put("ZoomNext", new ToolbarActionCreator() {
+        ToolbarActionRegistar.put(GuiComponentIDs.ZOOM_NEXT,
+                                  new ToolbarActionCreator() {
 
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -106,7 +111,8 @@ public class MapWidgetUI implements EntryPoint {
             }
         });
 
-        ToolbarActionRegistar.put("GetFeatureInfo", new ToolbarActionCreator() {
+        ToolbarActionRegistar.put(GuiComponentIDs.GET_FEATURE_INFO,
+                                  new ToolbarActionCreator() {
 
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -114,7 +120,8 @@ public class MapWidgetUI implements EntryPoint {
             }
         });
 
-        ToolbarActionRegistar.put("Measure", new ToolbarActionCreator() {
+        ToolbarActionRegistar.put(GuiComponentIDs.MEASURE,
+                                  new ToolbarActionCreator() {
 
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
@@ -122,7 +129,8 @@ public class MapWidgetUI implements EntryPoint {
             }
         });
 
-        ToolbarActionRegistar.put("MeasureArea", new ToolbarActionCreator() {
+        ToolbarActionRegistar.put(GuiComponentIDs.MEASURE_AREA,
+                                  new ToolbarActionCreator() {
 
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {

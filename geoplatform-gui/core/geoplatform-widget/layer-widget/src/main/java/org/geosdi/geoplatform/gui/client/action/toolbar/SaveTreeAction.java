@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.GPPeekCacheEventHandler;
 import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.SaveTreeToolbarPlugin;
+import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.observable.Observable;
 import org.geosdi.geoplatform.gui.observable.Observer;
@@ -69,11 +70,16 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
 
     public SaveTreeAction(TreePanel theTree, SaveTreeToolbarPlugin savePlugin) {
         super(theTree, BasicWidgetResources.ICONS.save(), "Save Tree State");
-        this.savePlugin = savePlugin;
         displayEvent.setMessage("Saving Operations On Service");
-        GPMementoSaveCache.getInstance().getObservable().addObserver(this);
         TimeoutHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);
         LayerHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);
+
+        this.savePlugin = savePlugin;
+        Boolean permission = GPUserGuiComponents.getInstance().
+                hasComponentPermission(savePlugin.getId());
+        if (permission) { // Observ only if there are the pemission to true
+            GPMementoSaveCache.getInstance().getObservable().addObserver(this);
+        }
     }
 
     @Override
@@ -82,7 +88,6 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
         this.peek();
     }
 
-    //TODO Once the user roles are managed, remove the USER_VIEWER control
     @Override
     public void update(Observable o, Object o1) {
         //System.out.println("SaveTreeAction receive observable notify");

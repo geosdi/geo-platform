@@ -75,7 +75,6 @@ public class GPRoutingStartPoint extends GenericRoutingPoint implements
      */
     @Override
     public void setIconStyle() {
-        this.drawFeature(null);
         style.setExternalGraphic(GWT.getModuleBaseURL()
                 + "/gp-images/start.png");
     }

@@ -39,6 +39,7 @@ import com.googlecode.genericdao.search.Search;
 import com.googlecode.genericdao.search.Filter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
@@ -137,11 +138,14 @@ class AccountServiceImpl {
      */
     public Long insertAccount(GPAccount account, boolean sendEmail)
             throws IllegalParameterFault {
+
         EntityCorrectness.checkAccountAndAuthority(account); // TODO assert
         this.checkDuplicateAccount(account);
 
+        String plainPassword = "";
         if (sendEmail && account instanceof GPUser) {
             GPUser user = (GPUser) account;
+            plainPassword = user.getPassword();
             user.setPassword(this.gpPooledPBEStringEncryptor.encrypt(user.getPassword()));
         }
 
@@ -158,11 +162,23 @@ class AccountServiceImpl {
 
         if (sendEmail && account instanceof GPUser) {
             GPUser user = (GPUser) account;
-            user.setPassword(this.gpPooledPBEStringEncryptor.decrypt(user.getPassword()));
-            schedulerService.sendEmailRegistration(user);
+            
+            GPUser clonedUser = cloneUser(user, plainPassword);
+            schedulerService.sendEmailRegistration(clonedUser);
         }
 
         return account.getId();
+    }
+    
+    private GPUser cloneUser(GPUser user, String plainPassword) {
+        GPUser clonedUser = new GPUser();
+        clonedUser.setEmailAddress(user.getEmailAddress());
+        clonedUser.setName(user.getName());
+        clonedUser.setSendEmail(user.isSendEmail());
+        clonedUser.setUsername(user.getUsername());
+        clonedUser.setPassword(plainPassword);
+        
+        return clonedUser;
     }
 
     public Long updateUser(GPUser user)

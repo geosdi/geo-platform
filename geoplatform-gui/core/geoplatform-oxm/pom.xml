@@ -132,27 +132,14 @@
         <dependency>
             <groupId>org.jibx</groupId>
             <artifactId>jibx-run</artifactId>
+            <scope>provided</scope>
         </dependency>
-            
-        <dependency>
-            <groupId>org.jibx</groupId>
-            <artifactId>jibx-bind</artifactId>
-        </dependency>
-            
-        <dependency>
-            <groupId>org.jibx</groupId>
-            <artifactId>jibx-tools</artifactId>
-        </dependency>
-            
-        <dependency>
-            <groupId>org.jibx</groupId>
-            <artifactId>jibx-schema</artifactId>
-        </dependency>
-            
         <dependency>
             <groupId>org.jibx</groupId>
             <artifactId>jibx-extras</artifactId>
+            <scope>provided</scope>
         </dependency>
+            
     </dependencies>
 
     <build>
@@ -172,11 +159,17 @@
                 <version>1.2.3</version>
                 <configuration>
                     <schemaBindingDirectory>src/main/resources/jibx</schemaBindingDirectory>    
+                    <includes>
+                        <include>binding.xml</include>
+                    </includes>
+                    <load>true</load>
                 </configuration>
                 <executions>
                     <execution>
+                        <id>compile-jibx-beans</id>
+                        <phase>process-test-classes</phase>
                         <goals>
-                            <goal>bind</goal>
+                            <goal>test-bind</goal>
                         </goals>
                     </execution>
                 </executions>

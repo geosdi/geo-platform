@@ -17,6 +17,11 @@
         <property name="marshaller" ref="castorMarshaller" />
         <property name="unmarshaller" ref="castorMarshaller" />
     </bean>
+    
+    <bean id="jibx" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">
+        <property name="marshaller" ref="jibxMarshaller" />
+        <property name="unmarshaller" ref="jibxMarshaller" />
+    </bean>
 	
     <bean id="jax" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">
         <property name="marshaller" ref="jaxb" />
@@ -41,6 +46,7 @@
     <bean id="xStreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
         <property name="autodetectAnnotations" value="true" />
     </bean>
-
+    
+    <oxm:jibx-marshaller id="jibxMarshaller" target-class="org.geosdi.geoplatform.mock.ClassToXMLMap"/>
 
 </beans>

@@ -35,8 +35,11 @@
  */
 package org.geosdi.geoplatform.oxm;
 
+import java.io.IOException;
 import org.geosdi.geoplatform.mock.ClassToXMLMap;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
@@ -47,6 +50,8 @@ import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
  */
 @SuppressWarnings("deprecation")
 public class GeoPlatformOXMTest extends AbstractDependencyInjectionSpringContextTests {
+    
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     @Qualifier(value = "castor")
@@ -59,6 +64,11 @@ public class GeoPlatformOXMTest extends AbstractDependencyInjectionSpringContext
     @Autowired
     @Qualifier(value = "xtream")
     private GeoPlatformMarshall xtream;
+    //
+    @Autowired
+    @Qualifier(value = "jibx")
+    private GeoPlatformMarshall jibx;
+    //
     private ClassToXMLMap message;
 
     @Override
@@ -101,6 +111,17 @@ public class GeoPlatformOXMTest extends AbstractDependencyInjectionSpringContext
         assertNotNull(xtream.loadFromXML(xtreamFile));
 
         logger.info("XSTREAM BEAN *************** " + xstreamMap);
+    }
+    
+    @Test
+    public void testJibx() throws IOException {
+        String jibxFile = "target/jibx.xml";
+        jibx.saveXML(message, jibxFile);
+
+        ClassToXMLMap jibxMap = (ClassToXMLMap) jibx.loadFromXML(jibxFile);
+        assertNotNull(jibx.loadFromXML(jibxFile));
+
+        logger.info("JIXB BEAN *************** " + jibxMap);
     }
 
     @Override

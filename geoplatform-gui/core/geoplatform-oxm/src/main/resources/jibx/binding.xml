@@ -1,0 +1,6 @@
+<binding>
+  <mapping name="message" class="org.geosdi.geoplatform.mock.ClassToXMLMap">
+    <value name="data" field="data"/>
+    <value name="history" field="history"/>
+  </mapping>
+</binding>

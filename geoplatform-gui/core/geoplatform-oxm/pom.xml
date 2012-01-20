@@ -165,6 +165,22 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
+            
+            <plugin>
+                <groupId>org.jibx</groupId>
+                <artifactId>jibx-maven-plugin</artifactId>
+                <version>1.2.3</version>
+                <configuration>
+                    <schemaBindingDirectory>src/main/resources/jibx</schemaBindingDirectory>    
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>bind</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>

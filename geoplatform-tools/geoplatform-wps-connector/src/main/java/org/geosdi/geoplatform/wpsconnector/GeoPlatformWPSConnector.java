@@ -48,8 +48,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group @email
- * giuseppe.lascaleia@geosdi.org
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group 
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
 public class GeoPlatformWPSConnector {

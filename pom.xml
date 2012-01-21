@@ -1336,7 +1336,7 @@
         <gwtVersion>2.4.0</gwtVersion>
         <gxtVersion>2.2.5</gxtVersion>
         
-        <gwtOpenlayersVersion>0.7-SNAPSHOT</gwtOpenlayersVersion>
+        <gwtOpenlayersVersion>0.8-SNAPSHOT</gwtOpenlayersVersion>
         
         <jasypt-version>1.8</jasypt-version>
         

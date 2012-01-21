@@ -132,12 +132,10 @@
         <dependency>
             <groupId>org.jibx</groupId>
             <artifactId>jibx-run</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jibx</groupId>
             <artifactId>jibx-extras</artifactId>
-            <scope>provided</scope>
         </dependency>
             
     </dependencies>

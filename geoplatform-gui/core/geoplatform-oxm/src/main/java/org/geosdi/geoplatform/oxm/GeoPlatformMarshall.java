@@ -65,6 +65,13 @@ public class GeoPlatformMarshall {
     }
 
     /**
+     * @return the marshaller
+     */
+    public Marshaller getMarshaller() {
+        return marshaller;
+    }
+
+    /**
      * @param unmarshaller
      *            the unmarshaller to set
      */
@@ -72,12 +79,19 @@ public class GeoPlatformMarshall {
         this.unmarshaller = unmarshaller;
     }
 
+    /**
+     * @return the unmarshaller
+     */
+    public Unmarshaller getUnmarshaller() {
+        return unmarshaller;
+    }
+
     public void saveXML(Object message, String fileName)
             throws IOException {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(fileName);
-            this.marshaller.marshal(message, new StreamResult(fos));
+            this.getMarshaller().marshal(message, new StreamResult(fos));
         } finally {
             if (fos != null) {
                 fos.close();
@@ -89,7 +103,7 @@ public class GeoPlatformMarshall {
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(fileName);
-            return this.unmarshaller.unmarshal(new StreamSource(fis));
+            return this.getUnmarshaller().unmarshal(new StreamSource(fis));
         } finally {
             if (fis != null) {
                 fis.close();
@@ -98,14 +112,14 @@ public class GeoPlatformMarshall {
     }
 
     public Object loadFromStream(InputStream inputStream) throws IOException {
-        return this.unmarshaller.unmarshal(new StreamSource(inputStream));
+        return this.getUnmarshaller().unmarshal(new StreamSource(inputStream));
     }
 
     public Object loadFromFile(File file) throws IOException {
-        return this.unmarshaller.unmarshal(new StreamSource(file));
+        return this.getUnmarshaller().unmarshal(new StreamSource(file));
     }
 
     public Object loadFromReader(Reader reader) throws IOException {
-        return this.unmarshaller.unmarshal(new StreamSource(reader));
+        return this.getUnmarshaller().unmarshal(new StreamSource(reader));
     }
 }

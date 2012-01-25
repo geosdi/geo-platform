@@ -82,7 +82,7 @@ public abstract class GPLayer implements Serializable {
     @Column(name = "alias_name")
     private String alias;
     //
-    @Column(name = "abstract")
+    @Column(name = "abstract", length = 10000)
     private String abstractText;
     //
     @Column(name = "url_server")

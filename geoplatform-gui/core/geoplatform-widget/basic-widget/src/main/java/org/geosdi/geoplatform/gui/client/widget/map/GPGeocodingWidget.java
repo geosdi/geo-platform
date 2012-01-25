@@ -82,11 +82,6 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
             GPCoordinateReferenceSystem crs) {
         LonLat center = new LonLat(bean.getLon(), bean.getLat());
 
-        System.out.println("EPSG:CODE MAP @@@@@@@@@@@@@@@@@@@@@@ "
-                + this.mapWidget.getMap().getProjection());
-
-        System.out.println("CRS PASSED @@@@@@@@@@@@@@@@@@@@@@@@@ " + crs.getCode());
-
         if (!crs.getCode().equals(this.mapWidget.getMap().getProjection())) {
             center.transform(crs.getCode(), this.mapWidget.getMap().getProjection());
         }

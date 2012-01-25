@@ -113,6 +113,7 @@ public class GeocodingBean extends GeoPlatformBeanModel implements
     /**
      * @return the country
      */
+    @Override
     public String getCountry() {
         return country;
     }
@@ -127,6 +128,7 @@ public class GeocodingBean extends GeoPlatformBeanModel implements
     /**
      * @return the district
      */
+    @Override
     public String getDistrict() {
         return district;
     }
@@ -141,6 +143,7 @@ public class GeocodingBean extends GeoPlatformBeanModel implements
     /**
      * @return the city
      */
+    @Override
     public String getCity() {
         return city;
     }
@@ -155,6 +158,7 @@ public class GeocodingBean extends GeoPlatformBeanModel implements
     /**
      * @return the address
      */
+    @Override
     public String getAddress() {
         return address;
     }

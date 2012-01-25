@@ -83,6 +83,7 @@ public class ReverseGeocodingDispatcher implements
 
                     @Override
                     public void onSuccess(GeocodingBean result) {
+                        System.out.println("\n\n\t @@@@@@@@@@@ ReverseGeocodingDispatcher - processRequest - onSuccess - result: " + result.toString() + "\n\n");
                         widget.onRequestSuccess(result);
                     }
                 });

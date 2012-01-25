@@ -114,6 +114,22 @@ public class GoogleGeocodeBean extends GeocodingBean {
             setFloor(address);
             setRoom(address);
         }
+        
+        checkForUnvaluedProperties();
+    }
+
+    private void checkForUnvaluedProperties() {
+        // Assign 'route' value to 'street_address'
+        if ((this.street_address.equals(ResponseStatus.EnumResponseStatus.NO_DATA.getValue())) && 
+            (!this.route.equals(ResponseStatus.EnumResponseStatus.NO_DATA.getValue()))) {
+            setStreet_address(this.route);
+        }
+        
+        // Assign 'locality' value to 'administrative_area_level_3'
+        if ((this.administrative_area_level_3.equals(ResponseStatus.EnumResponseStatus.NO_DATA.getValue())) && 
+            (!this.locality.equals(ResponseStatus.EnumResponseStatus.NO_DATA.getValue()))) {
+            setAdministrative_area_level_3(this.locality);
+        }
     }
 
     /**
@@ -135,7 +151,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param street_address the street_address to set
      */
     private void setStreet_address(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.STREE_ADDRESS.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.STREET_ADDRESS.getValue())) {
             this.street_address = address.getLongName();
             super.setAddress(address.getLongName());
         }
@@ -159,7 +175,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param route the route to set
      */
     private void setRoute(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.ROUTE.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.ROUTE.getValue())) {
             this.route = address.getLongName();
         }
     }
@@ -182,7 +198,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param intersection the intersection to set
      */
     private void setIntersection(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.INTERSECTION.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.INTERSECTION.getValue())) {
             this.intersection = address.getLongName();
         }
     }
@@ -205,7 +221,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param political the political to set
      */
     private void setPolitical(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.POLITICAL.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.POLITICAL.getValue())) {
             this.political = address.getLongName();
         }
     }
@@ -228,7 +244,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param country the country to set
      */
     private void setGoogleCountry(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.COUNTRY.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.COUNTRY.getValue())) {
             this.googleCountry = address.getLongName();
         }
     }
@@ -245,13 +261,14 @@ public class GoogleGeocodeBean extends GeocodingBean {
      */
     public void setAdministrative_area_level_1(String administrative_area_level_1) {
         this.administrative_area_level_1 = administrative_area_level_1;
+        super.setCountry(administrative_area_level_1);
     }
 
     /**
      * @param administrative_area_level_1 the administrative_area_level_1 to set
      */
     private void setAdministrative_area_level_1(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.ADMINISTRATIVE_AREA_LEVEL_1.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.ADMINISTRATIVE_AREA_LEVEL_1.getValue())) {
             this.administrative_area_level_1 = address.getLongName();
             super.setCountry(address.getLongName());
         }
@@ -269,13 +286,14 @@ public class GoogleGeocodeBean extends GeocodingBean {
      */
     public void setAdministrative_area_level_2(String administrative_area_level_2) {
         this.administrative_area_level_2 = administrative_area_level_2;
+        super.setDistrict(administrative_area_level_2);
     }
 
     /**
      * @param administrative_area_level_2 the administrative_area_level_2 to set
      */
     private void setAdministrative_area_level_2(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.ADMINISTRATIVE_AREA_LEVEL_2.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.ADMINISTRATIVE_AREA_LEVEL_2.getValue())) {
             this.administrative_area_level_2 = address.getLongName();
             super.setDistrict(address.getLongName());
         }
@@ -293,13 +311,14 @@ public class GoogleGeocodeBean extends GeocodingBean {
      */
     public void setAdministrative_area_level_3(String administrative_area_level_3) {
         this.administrative_area_level_3 = administrative_area_level_3;
+        super.setCity(administrative_area_level_3);
     }
 
     /**
      * @param administrative_area_level_3 the administrative_area_level_3 to set
      */
     private void setAdministrative_area_level_3(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.ADMINISTRATIVE_AREA_LEVEL_3.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.ADMINISTRATIVE_AREA_LEVEL_3.getValue())) {
             this.administrative_area_level_3 = address.getLongName();
             super.setCity(address.getLongName());
         }
@@ -323,7 +342,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param colloquial_area the colloquial_area to set
      */
     private void setColloquial_area(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.COLLOQUIAL_AREA.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.COLLOQUIAL_AREA.getValue())) {
             this.colloquial_area = address.getLongName();
         }
     }
@@ -346,7 +365,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param locality the locality to set
      */
     private void setLocality(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.LOCALITY.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.LOCALITY.getValue())) {
             this.locality = address.getLongName();
         }
     }
@@ -369,7 +388,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param sublocality the sublocality to set
      */
     private void setSublocality(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.SUBLOCALITY.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.SUBLOCALITY.getValue())) {
             this.sublocality = address.getLongName();
         }
     }
@@ -392,7 +411,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param neighborhood the neighborhood to set
      */
     private void setNeighborhood(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.NEIGHBORHOOD.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.NEIGHBORHOOD.getValue())) {
             this.neighborhood = address.getLongName();
         }
     }
@@ -415,7 +434,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param premise the premise to set
      */
     private void setPremise(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.PREMISE.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.PREMISE.getValue())) {
             this.premise = address.getLongName();
         }
     }
@@ -438,7 +457,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param subpremise the subpremise to set
      */
     private void setSubpremise(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.SUBPREMISE.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.SUBPREMISE.getValue())) {
             this.subpremise = address.getLongName();
         }
     }
@@ -461,7 +480,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param postal_code the postal_code to set
      */
     private void setPostal_code(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.POSTAL_CODE.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.POSTAL_CODE.getValue())) {
             this.postal_code = address.getLongName();
         }
     }
@@ -484,7 +503,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param natural_feature the natural_feature to set
      */
     private void setNatural_feature(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.NATURAL_FEATURE.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.NATURAL_FEATURE.getValue())) {
             this.natural_feature = address.getLongName();
         }
     }
@@ -507,7 +526,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param airport the airport to set
      */
     private void setAirport(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.AIRPORT.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.AIRPORT.getValue())) {
             this.airport = address.getLongName();
         }
     }
@@ -530,7 +549,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param park the park to set
      */
     private void setPark(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.PARK.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.PARK.getValue())) {
             this.park = address.getLongName();
         }
     }
@@ -553,7 +572,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param point_of_interest the point_of_interest to set
      */
     private void setPoint_of_interest(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.POINT_OF_INTEREST.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.POINT_OF_INTEREST.getValue())) {
             this.point_of_interest = address.getLongName();
         }
     }
@@ -576,7 +595,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param post_box the post_box to set
      */
     private void setPost_box(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.POST_BOX.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.POST_BOX.getValue())) {
             this.post_box = address.getLongName();
         }
     }
@@ -599,7 +618,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param street_number the street_number to set
      */
     private void setStreet_number(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.STREE_NUMBER.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.STREE_NUMBER.getValue())) {
             this.street_number = address.getLongName();
         }
     }
@@ -622,7 +641,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param floor the floor to set
      */
     private void setFloor(GPGoogleAddress address) {
-        if (address.getType().equals(AddressElement.EnumAddressElement.FLOOR.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.FLOOR.getValue())) {
             this.floor = address.getLongName();
         }
     }

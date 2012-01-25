@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.oxm.model.google;
 
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -54,7 +55,7 @@ public class GPGoogleAddress {
     private String shortName;
     //
     @XmlElement(name = "type")
-    private String type;
+    private List<String> typesList;
 
     /**
      * @return the longName
@@ -85,22 +86,23 @@ public class GPGoogleAddress {
     }
 
     /**
-     * @return the type
+     * @return the typesList
      */
-    public String getType() {
-        return type;
+    public List<String> getTypesList() {
+        return typesList;
     }
 
     /**
-     * @param type the type to set
+     * @param typesList the typesList to set
      */
-    public void setType(String type) {
-        this.type = type;
+    public void setTypesList(List<String> typesList) {
+        this.typesList = typesList;
     }
 
     @Override
     public String toString() {
-        return "GPGoogleAddress{" + "longName="
-                + longName + ", shortName=" + shortName + ", type=" + type + '}';
+        return "GPGoogleAddress{" + "longName=" + longName + 
+               ", shortName=" + shortName + ", typesList=" + typesList + '}';
     }
+    
 }

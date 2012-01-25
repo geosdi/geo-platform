@@ -44,7 +44,7 @@ public class AddressElement {
 
     public enum EnumAddressElement {
 
-        STREE_ADDRESS("street_address"), // indicates a precise street address. 
+        STREET_ADDRESS("street_address"), // indicates a precise street address. 
         ROUTE("route"), // indicates a named route (such as "US 101").
         INTERSECTION("intersection"), // indicates a major intersection, usually of two major roads.
         POLITICAL("political"), // indicates a political entity. Usually, this type indicates a polygon of some civil administration.

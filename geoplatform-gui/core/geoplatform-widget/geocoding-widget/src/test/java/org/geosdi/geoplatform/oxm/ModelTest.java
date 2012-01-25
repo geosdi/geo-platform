@@ -70,9 +70,10 @@ public class ModelTest {
     @Test
     public void testGeocoding() {
         try {
-            Resource sourceFileUrl = context.getResource("src/test/resources/googleGeocodeExample.xml");
+            String sourceFileUrl = new File(".").getCanonicalPath() + File.separator
+                    + "src/test/resources/googleReverseGeocodeExample.xml";
 
-            File source = sourceFileUrl.getFile();
+            File source = new File(sourceFileUrl);
             if (!source.canRead()) {
                 throw new IllegalArgumentException("Source path " + sourceFileUrl + " is not valid");
             }
@@ -82,7 +83,7 @@ public class ModelTest {
 
             logger.info("\n\n\t GeoPlatform Google geocoding OXM parsing : " + geocode + "\n\n");
         } catch (IOException ex) {
-            logger.error("IOEXCEPTION @@@@@@@@@@@@@@@@@@@@ " + ex);
+            Assert.fail(ex.getMessage());
         }
     }
 
@@ -102,7 +103,7 @@ public class ModelTest {
 
             logger.info("\n\n\t GeoPlatform Google reverse geocoding OXM parsing : " + geocode + "\n\n");
         } catch (IOException ex) {
-            logger.error("IOEXCEPTION @@@@@@@@@@@@@@@@@@@@ " + ex);
+            Assert.fail(ex.getMessage());
         }
     }
 }

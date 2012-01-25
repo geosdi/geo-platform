@@ -128,6 +128,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
         this.mapWidget.getMap().addPopup(this.popupWidget.getPopup());
         this.busy = false;
 
+        System.out.println("\n\n\t @@@@@@@@@@@ ReverseGeocodingWidget - onRequestSuccess - bean: " + theBean.toString() + "\n\n");
         GPToolbarActionHandlerManager.fireEvent(new UpdateModelEvent(theBean));
     }
 

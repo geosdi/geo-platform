@@ -59,7 +59,6 @@ public class UpdateModelEvent extends GwtEvent<ReverseGeocodingButtonModelHandle
 
     @Override
     protected void dispatch(ReverseGeocodingButtonModelHandler handler) {
-        System.out.println("\n\n\t @@@@@@@@@@@ UpdateModelEvent - dispatch - bean: " + this.bean.toString() + "\n\n");
         handler.onUpdateModel(this.bean);
     }
     

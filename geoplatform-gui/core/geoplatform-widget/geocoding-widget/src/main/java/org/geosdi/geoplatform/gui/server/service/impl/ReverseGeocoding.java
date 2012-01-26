@@ -80,13 +80,10 @@ public class ReverseGeocoding implements IReverseGeocoding {
 
         URL url = new URL(REVERSE_GEOCODER_PREFIX_FOR_XML + "?latlng="
                 + URLEncoder.encode(lat + "," + lon, "UTF-8") + "&sensor=true");
-        
-        System.out.println("\n\n\t URL: " + url.toString());
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
         GPGoogleGeocode oxmBean = (GPGoogleGeocode) this.geocoderJaxbMarshaller.loadFromStream(conn.getInputStream());
-        System.out.println("\n\n\t @@@@@@@@@@@ ReverseGeocoding - findLocation - oxmBean: " + oxmBean.toString() + "\n\n");
 
         if (oxmBean.getStatus().equals(ResponseStatus.EnumResponseStatus.STATUS_OK.getValue())) {
             GPGoogleResult result = oxmBean.getResultList().get(0);

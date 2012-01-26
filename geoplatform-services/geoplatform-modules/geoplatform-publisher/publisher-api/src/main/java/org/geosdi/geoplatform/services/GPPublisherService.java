@@ -77,6 +77,13 @@ public interface GPPublisherService {
             @WebParam(name = "styleToPublish") String styleToPublish)
             throws ResourceNotFoundFault;
     @Get
+    @HttpResource(location = "/preview/putStyle")
+    @WebResult(name = "Result")
+    boolean putStyle(
+            @WebParam(name = "styleToPublish") String styleToPublish,
+            @WebParam(name = "styleName") String styleName)
+            throws ResourceNotFoundFault;
+    @Get
     @HttpResource(location = "/preview/existsStyle")
     @WebResult(name = "Result")
     public boolean existsStyle(

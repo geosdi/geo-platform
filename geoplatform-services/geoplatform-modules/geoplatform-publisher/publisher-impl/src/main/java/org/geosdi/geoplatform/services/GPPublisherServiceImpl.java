@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
+import java.util.logging.Level;
 import javax.jws.WebService;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
@@ -54,6 +55,7 @@ import java.util.GregorianCalendar;
 import java.util.zip.ZipFile;
 import java.util.List;
 import java.util.zip.ZipEntry;
+import org.apache.commons.io.FileUtils;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviews;
@@ -151,6 +153,19 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     @Override
     public boolean publishStyle(String styleToPublish) throws ResourceNotFoundFault {
         return restPublisher.publishStyle(styleToPublish);
+    }
+
+    @Override
+    public boolean putStyle(String styleToPublish, String styleName) throws ResourceNotFoundFault {
+//        try {
+////            File file = File.createTempFile("test2", ".sld");
+////            FileUtils.writeStringToFile(file, styleToPublish);
+//        } catch (IOException ex) {
+//            java.util.logging.Logger.getLogger(GPPublisherServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return false;
+//    }
+        return restPublisher.putStyle(styleToPublish, styleName);
     }
 
     @Override

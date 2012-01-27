@@ -46,24 +46,7 @@
 
     <dependencies>
         
-    <!-- GEOPLATFORM -->
-       
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-model</artifactId>
-        </dependency>
-       
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-configurator</artifactId>
-        </dependency>
-        
-         <!-- GEONETWORK -->
-        <dependency>
-            <groupId>it.geosolutions</groupId>
-            <artifactId>geonetwork-manager</artifactId>
-            <version>${geonetwork-version}</version>
-        </dependency>
+   
         
         <!-- =========================================================== -->
         <!-- ======================== GUAVA =========================== -->
@@ -74,42 +57,7 @@
             <artifactId>guava</artifactId>          
         </dependency>-->
     
-        <!-- SPRING -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-asm</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-expression</artifactId>
-        </dependency>
-        
-        <!-- CXF -->
-        <dependency>
-            <groupId>javax.xml.ws</groupId>
-            <artifactId>jaxws-api</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.codehaus.jra</groupId>
-            <artifactId>jra</artifactId>
-        </dependency>
+       
         
     </dependencies>
     

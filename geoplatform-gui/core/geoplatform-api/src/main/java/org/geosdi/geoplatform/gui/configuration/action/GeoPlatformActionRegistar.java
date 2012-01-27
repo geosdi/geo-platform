@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.configuration.action;
 
-import com.google.common.collect.Maps;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -47,7 +47,7 @@ public abstract class GeoPlatformActionRegistar {
     private Map<String, GeoPlatformActionCreator> registry;
 
     protected GeoPlatformActionRegistar() {
-        this.registry = Maps.newHashMap();
+        this.registry = new HashMap<String, GeoPlatformActionCreator>();
     }
 
     /**

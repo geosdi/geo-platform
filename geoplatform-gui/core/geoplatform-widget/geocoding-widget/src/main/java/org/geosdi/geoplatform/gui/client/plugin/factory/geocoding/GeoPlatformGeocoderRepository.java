@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.plugin.factory.geocoding;
 
-import com.google.common.collect.Maps;
+import java.util.HashMap;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.GeocoderPluginType;
 import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPluginManager;
@@ -52,7 +52,7 @@ public class GeoPlatformGeocoderRepository {
     private static GeoPlatformGeocoderRepository instance;
 
     private GeoPlatformGeocoderRepository() {
-        this.plugins = Maps.newHashMap();
+        this.plugins = new HashMap<GeocoderPluginType, IGPGeocoderPluginManager>();
     }
 
     public static synchronized GeoPlatformGeocoderRepository getInstance() {

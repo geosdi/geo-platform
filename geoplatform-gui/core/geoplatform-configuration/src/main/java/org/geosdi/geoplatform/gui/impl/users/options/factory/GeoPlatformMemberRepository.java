@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.impl.users.options.factory;
 
-import com.google.common.collect.Maps;
+import java.util.HashMap;
 import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.GPMemberOptionType;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.IGPMemberOptionManager;
@@ -51,7 +51,7 @@ public class GeoPlatformMemberRepository {
     private Map<GPMemberOptionType, IGPMemberOptionManager> members;
 
     private GeoPlatformMemberRepository() {
-        this.members = Maps.newHashMap();
+        this.members = new HashMap<GPMemberOptionType, IGPMemberOptionManager>();
     }
 
     public static synchronized GeoPlatformMemberRepository getInstance() {

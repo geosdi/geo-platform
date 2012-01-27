@@ -305,13 +305,13 @@
             
             <dependency>
                 <groupId>org.geosdi</groupId>
-                <artifactId>geoplatform-catalog-api</artifactId>
+                <artifactId>geonetwork-catalog-api</artifactId>
                 <version>${geoplatform-version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.geosdi</groupId>
-                <artifactId>geoplatform-catalog-impl</artifactId>
+                <artifactId>geonetwork-catalog-impl</artifactId>
                 <version>${geoplatform-version}</version>
             </dependency>
 

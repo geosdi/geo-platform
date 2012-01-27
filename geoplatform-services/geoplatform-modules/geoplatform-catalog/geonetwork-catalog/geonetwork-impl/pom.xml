@@ -50,7 +50,7 @@
        
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-catalog-api</artifactId>
+            <artifactId>geonetwork-catalog-api</artifactId>
         </dependency>
         
     <!-- logging dependencies, delegate all to slf4j and use logback -->
@@ -69,23 +69,6 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-model</artifactId>
-        </dependency>
-       
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-configurator</artifactId>
-        </dependency>
-        
-         <!-- GEONETWORK -->
-        <dependency>
-            <groupId>it.geosolutions</groupId>
-            <artifactId>geonetwork-manager</artifactId>
-            <version>${geonetwork-version}</version>
         </dependency>
         
         <!-- JDOM-->

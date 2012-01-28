@@ -1315,7 +1315,7 @@
         <spring-security-version>3.1.0.RELEASE</spring-security-version>
         <aspectj-version>1.5.4</aspectj-version>
         <ubl-version>2.0</ubl-version>
-        <jetty-version>6.1.26</jetty-version>
+        <jetty-version>7.5.2.v20111006</jetty-version>
         <jettison-version>1.2</jettison-version>
 
         <postgresql-version>8.4-701.jdbc3</postgresql-version>

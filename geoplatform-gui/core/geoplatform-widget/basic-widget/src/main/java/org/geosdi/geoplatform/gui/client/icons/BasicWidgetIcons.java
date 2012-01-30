@@ -95,13 +95,16 @@ public interface BasicWidgetIcons extends ImageBundle {
 
     @Resource("google_green.png")
     AbstractImagePrototype googleGreen();
-    
+
     @Resource("open_projects.png")
     AbstractImagePrototype loadProjects();
-    
+
     @Resource("edit.png")
     AbstractImagePrototype edit();
-    
+
     @Resource("gear.png")
     AbstractImagePrototype gear();
+
+    @Resource("role.png")
+    AbstractImagePrototype role();
 }

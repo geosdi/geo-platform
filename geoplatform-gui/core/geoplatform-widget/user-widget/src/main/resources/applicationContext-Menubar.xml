@@ -11,5 +11,13 @@
         <property name="order" value="${manageUsers.order}" />
         <property name="text" value="${manageUsers.text}" />
     </bean>
-               
+
+    <bean name="manageRoles"
+          class="org.geosdi.geoplatform.gui.configuration.menubar.MenuBarClientTool">
+        <property name="id" value="${manageRoles.id}" />
+        <property name="enabled" value="${manageRoles.enabled}" />
+        <property name="order" value="${manageRoles.order}" />
+        <property name="text" value="${manageRoles.text}" />
+    </bean>
+
 </beans>

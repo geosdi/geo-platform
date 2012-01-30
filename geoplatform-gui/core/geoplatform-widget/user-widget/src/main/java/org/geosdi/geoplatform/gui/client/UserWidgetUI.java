@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
+import org.geosdi.geoplatform.gui.client.action.ManageRolesMenuAction;
 import org.geosdi.geoplatform.gui.client.action.ManageUsersMenuAction;
 import org.geosdi.geoplatform.gui.client.action.UserOptionsMenuAction;
 import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMemberDisk;
@@ -65,6 +66,7 @@ public class UserWidgetUI implements EntryPoint {
     @Override
     public void onModuleLoad() {
         this.addUserWidgetAction();
+        this.addRoleWidgetAction();
         this.addMembers();
     }
 
@@ -84,6 +86,17 @@ public class UserWidgetUI implements EntryPoint {
             @Override
             public MenuAction createAction() {
                 return new UserOptionsMenuAction();
+            }
+        });
+    }
+
+    private void addRoleWidgetAction() {
+        MenuActionRegistar.put(GuiComponentIDs.MANAGE_ROLES,
+                               new MenuActionCreator() {
+
+            @Override
+            public MenuAction createAction() {
+                return new ManageRolesMenuAction();
             }
         });
     }

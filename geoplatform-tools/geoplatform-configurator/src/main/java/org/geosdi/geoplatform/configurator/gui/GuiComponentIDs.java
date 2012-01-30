@@ -54,6 +54,7 @@ public class GuiComponentIDs {
     public static final String LOAD_PROJECTS = "loadProjects";
     public static final String INGEST_DATA = "ingestData";
     public static final String MANAGE_USERS = "manageUsers";
+    public static final String MANAGE_ROLES = "manageRoles";
     public static final String ABOUT_GEOPLATFORM = "aboutGeoPlatform";
     //
     public static final String SEARCH_AOE = "searchAOE";
@@ -132,6 +133,7 @@ public class GuiComponentIDs {
         all.add(LOAD_PROJECTS);
         all.add(INGEST_DATA);
         all.add(MANAGE_USERS);
+        all.add(MANAGE_ROLES);
         all.add(ABOUT_GEOPLATFORM);
         all.add(SEARCH_AOE);
         all.add(CLEAR_AOE);

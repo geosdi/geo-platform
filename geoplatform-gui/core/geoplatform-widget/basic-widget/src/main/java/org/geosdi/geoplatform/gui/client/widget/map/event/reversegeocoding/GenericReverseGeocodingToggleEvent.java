@@ -35,22 +35,24 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding;
 
-import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
- * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email michele.santomauro@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public class ReverseGeocodingToggleEvent extends GenericReverseGeocodingToggleEvent {
+public abstract class GenericReverseGeocodingToggleEvent
+        extends GwtEvent<ReverseGeocodingToggleEventHandler> {
 
-    public static Type<ReverseGeocodingToggleEventHandler> TYPE = new Type<ReverseGeocodingToggleEventHandler>();
+    protected boolean toggled;
 
-    public ReverseGeocodingToggleEvent(boolean isToggled) {
-        super(isToggled);
+    public GenericReverseGeocodingToggleEvent(boolean toggled) {
+        this.toggled = toggled;
     }
 
     @Override
-    public Type<ReverseGeocodingToggleEventHandler> getAssociatedType() {
-        return TYPE;
+    protected void dispatch(ReverseGeocodingToggleEventHandler handler) {
+        handler.onToggle(toggled);
     }
 }

@@ -44,19 +44,16 @@ import org.geosdi.geoplatform.gui.client.service.GeocodingRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.service.IGeocodingService;
 import org.geosdi.geoplatform.gui.server.service.IReverseGeocoding;
-import org.geosdi.geoplatform.gui.server.service.impl.GeocodingService;
-import org.geosdi.geoplatform.gui.server.service.impl.ReverseGeocoding;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
+import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author giuseppe
  * 
  */
-public class GeocodingRemoteImpl extends RemoteServiceServlet implements
+public class GeocodingRemoteImpl extends GPAutoInjectingRemoteServiceServlet implements
         GeocodingRemote {
 
     /**
@@ -65,14 +62,13 @@ public class GeocodingRemoteImpl extends RemoteServiceServlet implements
     private static final long serialVersionUID = 8960403782525028063L;
     //
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    @Autowired
     private IGeocodingService geocodingService;
+    //
+    @Autowired
     private IReverseGeocoding reverseGeocoding;
-
-    public GeocodingRemoteImpl() {
-        this.geocodingService = (IGeocodingService) GeoPlatformContextUtil.getInstance().getBean(GeocodingService.class);
-        this.reverseGeocoding = (IReverseGeocoding) GeoPlatformContextUtil.getInstance().getBean(ReverseGeocoding.class);
-    }
-
+    
     @Override
     public ArrayList<GeocodingBean> findLocations(String search)
             throws GeoPlatformException {
@@ -83,7 +79,7 @@ public class GeocodingRemoteImpl extends RemoteServiceServlet implements
             throw new GeoPlatformException(e.getMessage());
         }
     }
-
+    
     @Override
     public GeocodingBean findLocation(double lat, double lon)
             throws GeoPlatformException {

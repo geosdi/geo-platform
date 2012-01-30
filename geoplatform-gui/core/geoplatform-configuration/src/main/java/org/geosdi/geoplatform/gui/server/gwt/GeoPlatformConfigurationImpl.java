@@ -41,29 +41,34 @@ import javax.servlet.annotation.WebServlet;
 
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 import org.geosdi.geoplatform.gui.server.service.IStartupService;
-import org.geosdi.geoplatform.gui.server.service.impl.StartupService;
+import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
 import org.geosdi.geoplatform.gui.service.GeoPlatformConfiguration;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-@WebServlet(name = "GeoPlatformConfiguration", urlPatterns = {"/geoportal/GeoPlatformConfiguration"}, loadOnStartup = 1)
-public class GeoPlatformConfigurationImpl extends RemoteServiceServlet
+@WebServlet(name = "GeoPlatformConfiguration",
+            urlPatterns = {"/geoportal/GeoPlatformConfiguration"},
+            loadOnStartup = 1)
+public class GeoPlatformConfigurationImpl extends GPAutoInjectingRemoteServiceServlet
         implements GeoPlatformConfiguration {
 
     /**
      *
      */
     private static final long serialVersionUID = 4416552134318747534L;
+    //
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    @Autowired
     private IStartupService startupService;
 
     @Override
@@ -71,11 +76,7 @@ public class GeoPlatformConfigurationImpl extends RemoteServiceServlet
         super.init(config);
 
         ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-       
-
         GeoPlatformContextUtil.getInstance().setSpringContext(context);
-
-        this.injectValues();
     }
 
     /**
@@ -97,11 +98,8 @@ public class GeoPlatformConfigurationImpl extends RemoteServiceServlet
      * Init Spring Context
      */
     private void injectValues() {
-        this.startupService = (IStartupService) GeoPlatformContextUtil.getInstance().getBean(StartupService.class);
-
         assert (this.startupService != null) : "The GeoPlatform StartupService is null";
 
         logger.info("################ GeoPlatform Context Initialized Correctly");
-
     }
 }

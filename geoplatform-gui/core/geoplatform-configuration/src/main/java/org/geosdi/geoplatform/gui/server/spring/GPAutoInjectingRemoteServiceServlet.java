@@ -33,24 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding;
+package org.geosdi.geoplatform.gui.server.spring;
 
-import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
- * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email michele.santomauro@geosdi.org
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public class ReverseGeocodingToggleEvent extends GenericReverseGeocodingToggleEvent {
+public class GPAutoInjectingRemoteServiceServlet extends RemoteServiceServlet {
 
-    public static Type<ReverseGeocodingToggleEventHandler> TYPE = new Type<ReverseGeocodingToggleEventHandler>();
-
-    public ReverseGeocodingToggleEvent(boolean isToggled) {
-        super(isToggled);
-    }
+    private static final long serialVersionUID = 2076534341484574933L;
+    //
+    protected AutowireCapableBeanFactory springBeanFactory;
 
     @Override
-    public Type<ReverseGeocodingToggleEventHandler> getAssociatedType() {
-        return TYPE;
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(config.getServletContext());
+        this.springBeanFactory = ctx.getAutowireCapableBeanFactory();
+        springBeanFactory.autowireBean(this);
     }
 }

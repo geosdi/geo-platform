@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.impl.users.options.member;
 
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
 import java.util.List;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.GeoPlatformOptionsMember;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.IGPMemberOptionManager;
@@ -51,7 +51,7 @@ public abstract class GenericMemberOptionManager<M extends GeoPlatformOptionsMem
     private List<M> members;
 
     public GenericMemberOptionManager() {
-        this.members = new ArrayList<M>();
+        this.members = Lists.newArrayList();
     }
 
     @Override

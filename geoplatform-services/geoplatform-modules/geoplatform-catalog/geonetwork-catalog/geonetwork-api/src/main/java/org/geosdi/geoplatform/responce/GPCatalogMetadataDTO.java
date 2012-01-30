@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.responce;
 
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
 import java.util.List;
 import org.geosdi.geoplatform.core.model.GPBBox;
 
@@ -51,8 +51,7 @@ public class GPCatalogMetadataDTO {
     private String abstractValue;
     private String keywordValues = "";
     private GPBBox bbox;
-    private List<GPCatalogMetadataOnlineResource> onLineResources = new ArrayList<GPCatalogMetadataOnlineResource>();
-
+    private List<GPCatalogMetadataOnlineResource> onLineResources = Lists.newArrayList();
 
     public List<GPCatalogMetadataOnlineResource> getOnlineResource() {
         return onLineResources;

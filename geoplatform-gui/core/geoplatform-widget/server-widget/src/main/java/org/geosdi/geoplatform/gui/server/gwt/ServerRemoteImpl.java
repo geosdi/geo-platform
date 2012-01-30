@@ -35,24 +35,24 @@
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.service.ServerRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.IServerService;
-import org.geosdi.geoplatform.gui.server.service.impl.ServerService;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
+import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class ServerRemoteImpl extends RemoteServiceServlet implements ServerRemote {
+public class ServerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
+        implements ServerRemote {
 
     private static final long serialVersionUID = 7582311879862466660L;
-    
-    private IServerService serverService = (IServerService) GeoPlatformContextUtil.getInstance().getBean(
-            ServerService.class);
+    //
+    @Autowired
+    private IServerService serverService;
 
     @Override
     public List<String> getUserAuthorities() throws GeoPlatformException {

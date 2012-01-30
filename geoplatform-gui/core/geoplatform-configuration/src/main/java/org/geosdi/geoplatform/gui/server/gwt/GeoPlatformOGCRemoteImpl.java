@@ -41,10 +41,8 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.server.service.IOGCService;
-import org.geosdi.geoplatform.gui.server.service.impl.OGCService;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -55,18 +53,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class GeoPlatformOGCRemoteImpl extends GPAutoInjectingRemoteServiceServlet
         implements GeoPlatformOGCRemote {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 7340579377487014548L;
     //
     @Autowired
     private IOGCService ogcService;
-
-    public GeoPlatformOGCRemoteImpl() {
-        ogcService = (IOGCService) GeoPlatformContextUtil.getInstance().
-                getBean(OGCService.class);
-    }
 
     @Override
     public ArrayList<GPServerBeanModel> loadServers()

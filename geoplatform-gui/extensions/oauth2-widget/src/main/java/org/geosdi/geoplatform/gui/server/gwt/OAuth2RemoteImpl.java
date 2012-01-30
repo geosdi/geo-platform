@@ -35,28 +35,27 @@
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import org.geosdi.geoplatform.gui.client.service.OAuth2Remote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.IOAuth2Service;
-import org.geosdi.geoplatform.gui.server.service.impl.OAuth2Service;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
+import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email  michele.santomauro@geosdi.org
  *
  */
-public class OAuth2RemoteImpl extends RemoteServiceServlet implements OAuth2Remote{
-    
-    private static final long serialVersionUID = -8161383693348011400L;
+public class OAuth2RemoteImpl extends GPAutoInjectingRemoteServiceServlet
+        implements OAuth2Remote {
 
-    private IOAuth2Service oauth2Service = (IOAuth2Service) GeoPlatformContextUtil.getInstance().getBean(
-                OAuth2Service.class);
-    
+    private static final long serialVersionUID = -8161383693348011400L;
+    //
+    @Autowired
+    private IOAuth2Service oauth2Service;
+
     @Override
     public void googleUserLogin(String token) throws GeoPlatformException {
         this.oauth2Service.googleUserLogin(token, super.getThreadLocalRequest());
     }
-    
 }

@@ -36,31 +36,24 @@
 package org.geosdi.geoplatform.gui.server.gwt;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
 import org.geosdi.geoplatform.exception.GPCatalogException;
 import org.geosdi.geoplatform.gui.client.model.FinderBean;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import org.geosdi.geoplatform.gui.client.service.FinderRemote;
 import org.geosdi.geoplatform.gui.server.service.IFinderService;
-import org.geosdi.geoplatform.gui.server.service.impl.FinderService;
+import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email  michele.santomauro@geosdi.org
  */
-public class FinderRemoteImpl extends RemoteServiceServlet implements
-        FinderRemote {
+public class FinderRemoteImpl extends GPAutoInjectingRemoteServiceServlet
+        implements FinderRemote {
 
     private static final long serialVersionUID = 8756054653877871843L;
     //
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    private IFinderService finderService = (IFinderService) GeoPlatformContextUtil.getInstance().getBean(FinderService.class);
+    @Autowired
+    private IFinderService finderService;
 
     @Override
     public ArrayList<FinderBean> searchPublicMetadata(String searchString) throws GPCatalogException {
@@ -68,8 +61,8 @@ public class FinderRemoteImpl extends RemoteServiceServlet implements
     }
 
     @Override
-    public ArrayList<FinderBean> searchPrivateMetadata(String username, 
-                                                       String password, 
+    public ArrayList<FinderBean> searchPrivateMetadata(String username,
+                                                       String password,
                                                        String searchString) throws GPCatalogException {
         return this.finderService.searchPrivateMetadata(username, password, searchString);
     }

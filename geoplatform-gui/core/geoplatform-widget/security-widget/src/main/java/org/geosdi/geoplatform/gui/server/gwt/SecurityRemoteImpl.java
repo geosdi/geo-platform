@@ -35,25 +35,24 @@
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import org.geosdi.geoplatform.gui.client.service.SecurityRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
-import org.geosdi.geoplatform.gui.server.service.impl.SecurityService;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
+import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class SecurityRemoteImpl extends RemoteServiceServlet
+public class SecurityRemoteImpl extends GPAutoInjectingRemoteServiceServlet
         implements SecurityRemote {
 
     private static final long serialVersionUID = -1494707375482103152L;
     //
-    private ISecurityService securityService = (ISecurityService) GeoPlatformContextUtil.getInstance().getBean(
-            SecurityService.class);
+    @Autowired
+    private ISecurityService securityService;
 
     @Override
     public IGPUserDetail userLogin(String userName, String password) throws GeoPlatformException {

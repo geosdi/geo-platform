@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.server.gwt;
 
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
@@ -53,18 +52,20 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPFolderClientI
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElements;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.ILayerService;
-import org.geosdi.geoplatform.gui.server.service.impl.LayerService;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
+import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email  nazzareno.sileno@geosdi.org
  */
-public class LayerRemoteImpl extends RemoteServiceServlet implements LayerRemote {
+public class LayerRemoteImpl extends GPAutoInjectingRemoteServiceServlet
+        implements LayerRemote {
 
     private static final long serialVersionUID = -2177973379191108728L;
-    private ILayerService layerService = (ILayerService) GeoPlatformContextUtil.getInstance().getBean(
-            LayerService.class);
+    //
+    @Autowired
+    private ILayerService layerService;
 
     @Override
     public ArrayList<GPFolderClientInfo> loadUserFolders() throws GeoPlatformException {

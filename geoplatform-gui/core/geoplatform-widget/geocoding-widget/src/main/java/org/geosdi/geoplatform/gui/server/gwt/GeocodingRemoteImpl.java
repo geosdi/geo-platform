@@ -53,12 +53,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author giuseppe
  * 
  */
-public class GeocodingRemoteImpl extends GPAutoInjectingRemoteServiceServlet implements
-        GeocodingRemote {
+public class GeocodingRemoteImpl extends GPAutoInjectingRemoteServiceServlet
+        implements GeocodingRemote {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 8960403782525028063L;
     //
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

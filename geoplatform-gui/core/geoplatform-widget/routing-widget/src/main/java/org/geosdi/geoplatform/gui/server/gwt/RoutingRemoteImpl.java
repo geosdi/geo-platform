@@ -39,27 +39,20 @@ import org.geosdi.geoplatform.gui.client.model.RoutingBean;
 import org.geosdi.geoplatform.gui.client.service.RoutingRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.service.IRoutingService;
-import org.geosdi.geoplatform.gui.server.service.impl.RoutingService;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
-
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author giuseppe
  * 
  */
-public class RoutingRemoteImpl extends RemoteServiceServlet implements
-        RoutingRemote {
+public class RoutingRemoteImpl extends GPAutoInjectingRemoteServiceServlet
+        implements RoutingRemote {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 7133616799373101981L;
+    //
+    @Autowired
     private IRoutingService routingService;
-
-    public RoutingRemoteImpl() {
-        this.routingService = (IRoutingService) GeoPlatformContextUtil.getInstance().getBean(RoutingService.class);
-    }
 
     @Override
     public RoutingBean findDirections(double xStart, double yStart,

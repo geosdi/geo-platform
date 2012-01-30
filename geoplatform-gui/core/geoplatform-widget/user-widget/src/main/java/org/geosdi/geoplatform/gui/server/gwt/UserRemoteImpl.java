@@ -38,25 +38,25 @@ package org.geosdi.geoplatform.gui.server.gwt;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import org.geosdi.geoplatform.gui.client.service.UserRemote;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 import org.geosdi.geoplatform.gui.server.IUserService;
-import org.geosdi.geoplatform.gui.server.service.impl.UserService;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
+import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-public class UserRemoteImpl extends RemoteServiceServlet implements UserRemote {
+public class UserRemoteImpl extends GPAutoInjectingRemoteServiceServlet
+        implements UserRemote {
 
     private static final long serialVersionUID = 6832264543827688477L;
     //
-    private IUserService userService = (IUserService) GeoPlatformContextUtil.getInstance().
-            getBean(UserService.class);
+    @Autowired
+    private IUserService userService;
 
     @Override
     public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,

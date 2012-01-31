@@ -39,15 +39,20 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionRegistar
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  * 
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class ToolbarActionRegistar extends GeoPlatformActionRegistar {
+public class ToolbarActionRegistar extends GeoPlatformActionRegistar<ToolbarActionCreator> {
 
     private static ToolbarActionRegistar INSTANCE = new ToolbarActionRegistar();
 
+    private ToolbarActionRegistar() { }
+
     /**
-     *
+     * Insert a Toolbar Action into Registar.
+     * 
      * @param key
      * @param toolActionCreator
      */
@@ -58,19 +63,21 @@ public class ToolbarActionRegistar extends GeoPlatformActionRegistar {
     }
 
     /**
-     * Return the Toolbar Action
+     * Return a Toolbar Action into Registar, otherwise null.
+     * Set the action's ID to key.
      *
-     * @param key
-     *            key with the action is registered
-     * @param mapWidget
-     *            map which will contains the toolAction
-     * @return null or the toolAction registered
+     * @param key key with the action is registered
+     * @param mapWidget map which will contains the toolAction
+     * 
+     * @return null or the ToolbarAction registered
      */
     public static ToolbarAction get(String key, GeoPlatformMap mapWidget) {
-        ToolbarActionCreator toolActionCreator = (ToolbarActionCreator) INSTANCE.getRegistry().get(
-                key);
-
-        return toolActionCreator == null
-                ? null : toolActionCreator.createActionTool(mapWidget);
+        ToolbarActionCreator toolActionCreator = INSTANCE.getRegistry().get(key);
+        if (toolActionCreator == null) {
+            return null;
+        }
+        ToolbarAction toolbarAction = toolActionCreator.createActionTool(mapWidget);
+        toolbarAction.setId(key);
+        return toolbarAction;
     }
 }

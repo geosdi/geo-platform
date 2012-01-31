@@ -35,15 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
-import java.util.ArrayList;
-
-import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
-
-import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
-
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
@@ -56,13 +47,17 @@ import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
 import java.util.List;
+import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
 import org.geosdi.geoplatform.gui.client.event.timeout.DisplayGetCapabilitiesEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.IDisplayGetCapabilitiesHandler;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.ManageServerWidget;
-import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
+import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel.GPServerKeyValue;
@@ -73,6 +68,8 @@ import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPOAuth2GEBLoginEvent;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.ServerRemoteImpl;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
+import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
 
 /**
  *
@@ -204,8 +201,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
      * @param status
      * @param message
      */
-    public void setSearchStatus(Enum status,
-            Enum message) {
+    public void setSearchStatus(Enum status, Enum message) {
         this.searchStatus.setIconStyle(status.toString());
         this.searchStatus.setText(message.toString());
     }

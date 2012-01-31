@@ -39,21 +39,19 @@ import com.google.common.collect.Maps;
 import java.util.Map;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  * 
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class GeoPlatformActionRegistar {
+public abstract class GeoPlatformActionRegistar<A extends GeoPlatformActionCreator> {
 
-    private Map<String, GeoPlatformActionCreator> registry;
-
-    protected GeoPlatformActionRegistar() {
-        this.registry = Maps.newHashMap();
-    }
+    private Map<String, A> registry = Maps.newHashMap();
 
     /**
      * @return the registry
      */
-    public Map<String, GeoPlatformActionCreator> getRegistry() {
+    protected Map<String, A> getRegistry() {
         return registry;
     }
 }

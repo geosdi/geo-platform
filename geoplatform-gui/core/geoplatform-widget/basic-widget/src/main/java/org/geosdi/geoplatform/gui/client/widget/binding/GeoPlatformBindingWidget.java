@@ -60,7 +60,7 @@ public abstract class GeoPlatformBindingWidget<M extends ModelData> {
     /**
      * 
      * @param model
-     *            T object to bind
+     *            M object to bind
      */
     public void bindModel(M model) {
         this.model = model;
@@ -69,13 +69,6 @@ public abstract class GeoPlatformBindingWidget<M extends ModelData> {
 
     public void unBindModel() {
         this.formBinding.unbind();
-    }
-
-    /**
-     * @return the formBinding
-     */
-    public FormBinding getFormBinding() {
-        return formBinding;
     }
 
     /**

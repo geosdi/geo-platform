@@ -177,8 +177,9 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
         super.set(GPUserManageDetailKeyValue.TEMPORARY.toString(), temporary);
     }
 
-    /*
+    /**
      * (non-Javadoc)
+     * 
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -196,8 +197,9 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
         return true;
     }
 
-    /*
+    /**
      * (non-Javadoc)
+     * 
      * @see java.lang.Object#hashCode()
      */
     @Override
@@ -207,8 +209,9 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
         return hash;
     }
 
-    /*
+    /**
      * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override

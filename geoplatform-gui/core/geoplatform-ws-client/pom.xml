@@ -82,6 +82,23 @@
             </exclusions>
         </dependency>
         
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-api</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-configuration</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
 		<!-- =============================================================== -->
 		<!-- GEOPLATFORM PUBLISHER -->
 		<!-- =============================================================== -->

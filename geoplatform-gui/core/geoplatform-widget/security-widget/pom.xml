@@ -49,42 +49,7 @@
         </developer>
     </developers>
 
-    <repositories>
-	<!-- Google API -->
-        <repository>
-            <id>google-releases</id>
-            <name>Google Releases</name>
-            <url>https://oss.sonatype.org/content/repositories/google-releases</url>
-        </repository>
-    </repositories>
-
     <dependencies>
-        <!-- Dependencies for GoogleAPI Compilation -->
-        <dependency>
-            <groupId>com.google.api</groupId>
-            <artifactId>gwt-oauth2</artifactId>
-            <version>2.0.2-ALPHA</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.google.api.client</groupId>
-            <artifactId>google-api-client</artifactId>
-            <version>1.4.0-alpha</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.google.api.client</groupId>
-            <artifactId>google-api-client-auth-oauth2</artifactId>
-            <version>1.2.3-alpha</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.google.api.client</groupId>
-            <artifactId>google-api-client-googleapis</artifactId>
-            <version>1.4.1-beta</version>
-        </dependency>
-        
-        <!-- _______________________________________________ -->
         
         <dependency>
             <groupId>com.google.gwt</groupId>
@@ -106,7 +71,6 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>basic-widget</artifactId>
-            <version>${geoplatform-version}</version>
             <type>jar</type>
         </dependency>
         
@@ -123,9 +87,12 @@
             <classifier>sources</classifier>
         </dependency>
 
+        <!-- GeoPlatform-WS-Client -->
+        
         <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-model</artifactId>
+            <groupId>org.geosdi.geoplatform</groupId>
+            <artifactId>geoplatform-ws-client</artifactId>
+            <version>${project.version}</version>
         </dependency>
         
         

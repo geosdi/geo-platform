@@ -106,14 +106,6 @@
             <artifactId>guava-gwt</artifactId>
         </dependency>
 
-		<!-- GeoPlatform-WS-Client -->
-
-        <dependency>
-            <groupId>org.geosdi.geoplatform</groupId>
-            <artifactId>geoplatform-ws-client</artifactId>
-            <version>${geoplatform-version}</version>
-        </dependency>
-
 		<!-- SPRING -->
         <dependency>
             <groupId>org.springframework</groupId>

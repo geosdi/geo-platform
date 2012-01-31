@@ -92,6 +92,11 @@
             <classifier>sources</classifier>
             <version>${project.version}</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-configurator</artifactId>
+        </dependency>
 
 		<!-- SPRING -->
         <dependency>

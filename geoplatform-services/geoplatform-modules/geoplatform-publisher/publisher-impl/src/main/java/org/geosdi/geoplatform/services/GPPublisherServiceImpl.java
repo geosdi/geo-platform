@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.util.logging.Level;
 import javax.jws.WebService;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
@@ -55,7 +54,6 @@ import java.util.GregorianCalendar;
 import java.util.zip.ZipFile;
 import java.util.List;
 import java.util.zip.ZipEntry;
-import org.apache.commons.io.FileUtils;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviews;
@@ -165,7 +163,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
 //        }
 //        return false;
 //    }
-        return restPublisher.putStyle(styleToPublish, styleName);
+        return restPublisher.publishStyle(styleToPublish, styleName);
     }
 
     @Override

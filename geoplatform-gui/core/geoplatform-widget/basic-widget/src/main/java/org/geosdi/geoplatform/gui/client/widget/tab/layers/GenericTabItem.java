@@ -35,13 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.tab.layers;
 
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
-import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
-import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.properties.event.GPWidgetSizeEvent;
 
 /**
  *
@@ -49,30 +43,10 @@ import org.geosdi.geoplatform.gui.puregwt.properties.event.GPWidgetSizeEvent;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public abstract class GenericTabItem<M> extends GeoPlatformTabItem {
-    
-    protected GeoPlatformBindingWidget bindingWidget;
-    protected GPWidgetSizeEvent event = new GPWidgetSizeEvent();
 
     public GenericTabItem(String title) {
         super(title);
-        addComponents();
-        setWidgetProperties();
     }
-
-    public abstract void addComponents();
-
+    
     public abstract void bindModel(M model);
-
-    private void setWidgetProperties() {
-        super.addListener(Events.Select, new Listener<ComponentEvent>() {
-
-            @Override
-            public void handleEvent(ComponentEvent be) {
-                event.setSize(getTabPanel().getHeight());
-                WidgetPropertiesHandlerManager.fireEvent(event);
-            }
-            
-        });
-    }
-
 }

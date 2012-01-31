@@ -35,9 +35,10 @@
  */
 package org.geosdi.geoplatform.services;
 
-import com.ctc.wstx.msv.W3CSchema;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
+import it.geosolutions.geoserver.rest.decoder.RESTFeatureType.Attribute;
+import it.geosolutions.geoserver.rest.decoder.RESTLayer;
 import java.awt.Color;
 import java.io.File;
 import java.io.Reader;
@@ -59,7 +60,6 @@ import org.geotools.styling.Symbolizer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.opengis.filter.FilterFactory;
-import org.opengis.filter.expression.Expression;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -82,6 +82,19 @@ public class SLDTest {
     private GeoServerRESTReader restReader;
     @Autowired
     private GeoServerRESTPublisher restPublisher;
+
+    @Test
+    public void testDescribeFeatureType() {
+        try {
+            RESTLayer restLayer = this.restReader.getLayer("topp:states");
+            for (Attribute att : this.restReader.getFeatureType(restLayer).getAttributes()) {
+                System.out.println("Stampa attributo: " + att.getBinding() + " - " + att.getName());
+            }
+        } catch (Exception e) {
+            logger.error("Error on performing SLD Test: " + e + " maybe the "
+                    + "Geoserver is unavailable?");
+        }
+    }
 
     @Test
     public void testSLD() {

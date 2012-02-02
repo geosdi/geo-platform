@@ -42,7 +42,8 @@ import javax.xml.ws.WebFault;
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-@WebFault(name = "AccountExpiredFault", faultBean = "org.geosdi.exception.AccountExpiredFault")
+@WebFault(name = "AccountExpiredFault",
+          faultBean = "org.geosdi.exception.AccountExpiredFault")
 public class AccountExpiredFault extends Exception {
 
     private static final long serialVersionUID = -9167519878278175760L;

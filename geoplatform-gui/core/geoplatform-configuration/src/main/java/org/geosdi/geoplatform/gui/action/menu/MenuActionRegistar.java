@@ -43,7 +43,8 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformActionRegistar
  * 
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class MenuActionRegistar extends GeoPlatformActionRegistar<MenuActionCreator> {
+public final class MenuActionRegistar
+        extends GeoPlatformActionRegistar<MenuActionCreator> {
 
     private static MenuActionRegistar INSTANCE = new MenuActionRegistar();
 

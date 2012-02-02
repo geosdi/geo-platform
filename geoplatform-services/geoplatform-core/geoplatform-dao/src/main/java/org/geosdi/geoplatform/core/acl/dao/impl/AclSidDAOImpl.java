@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.core.acl.dao.impl;
 
 import com.googlecode.genericdao.search.Search;
+import java.util.List;
 import org.geosdi.geoplatform.core.acl.AclSid;
 import org.geosdi.geoplatform.core.acl.dao.AclSidDAO;
 import org.geosdi.geoplatform.core.dao.impl.BaseDAO;
@@ -65,6 +66,13 @@ public class AclSidDAOImpl extends BaseDAO<AclSid, Long> implements AclSidDAO {
         Search search = new Search();
         search.addFilterEqual("sid", sid);
         search.addFilterEqual("principal", principal);
-        return searchUnique(search);        
+        return searchUnique(search);
+    }
+
+    @Override
+    public List<AclSid> findByPrincipal(boolean principal) {
+        Search search = new Search();
+        search.addFilterEqual("principal", principal);
+        return search(search);
     }
 }

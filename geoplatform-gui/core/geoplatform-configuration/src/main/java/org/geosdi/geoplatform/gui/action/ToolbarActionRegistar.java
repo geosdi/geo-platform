@@ -44,7 +44,8 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
  * 
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class ToolbarActionRegistar extends GeoPlatformActionRegistar<ToolbarActionCreator> {
+public final class ToolbarActionRegistar
+        extends GeoPlatformActionRegistar<ToolbarActionCreator> {
 
     private static ToolbarActionRegistar INSTANCE = new ToolbarActionRegistar();
 

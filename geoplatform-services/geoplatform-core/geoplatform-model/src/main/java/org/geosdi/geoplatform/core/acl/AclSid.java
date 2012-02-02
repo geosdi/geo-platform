@@ -67,7 +67,7 @@ public class AclSid {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACL_SID_SEQ")
     @SequenceGenerator(name = "ACL_SID_SEQ", sequenceName = "ACL_SID_SEQ")
     private Long id;
-    // If Id refers to a principal name or a GrantedAuthority
+    // If Id refers to a principal name (username - true) or a GrantedAuthority (role name - false)
     @Column(nullable = false)
     private boolean principal = true;
     //

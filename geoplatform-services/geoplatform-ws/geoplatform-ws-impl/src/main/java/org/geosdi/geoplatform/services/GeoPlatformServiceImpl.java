@@ -77,6 +77,7 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
+import org.geosdi.geoplatform.responce.RoleDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
@@ -360,7 +361,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public ApplicationDTO getShortApplicationByAppID(SearchRequest request) throws ResourceNotFoundFault {
+    public ApplicationDTO getShortApplicationByAppID(SearchRequest request)
+            throws ResourceNotFoundFault {
         return accountServiceDelegate.getShortApplicationByAppID(request);
     }
 
@@ -568,7 +570,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     @Override
     public boolean saveDragAndDropFolderAndTreeModifications(Long idFolderMoved, Long idNewParent, int newPosition,
-                                                             GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault {
+                                                             GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault {
         return folderServiceDelegate.saveDragAndDropFolderModifications(idFolderMoved, idNewParent, newPosition, descendantsMapData);
     }
 
@@ -691,7 +694,8 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     @Override
     public boolean saveDragAndDropLayerAndTreeModifications(Long idLayerMoved, Long idNewParent, int newPosition,
-                                                            GPWebServiceMapData descendantsMapData) throws ResourceNotFoundFault, IllegalParameterFault {
+                                                            GPWebServiceMapData descendantsMapData)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         return layerServiceDelegate.saveDragAndDropLayerModifications(idLayerMoved, idNewParent, newPosition, descendantsMapData);
     }
 
@@ -817,9 +821,20 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     //<editor-fold defaultstate="collapsed" desc="ACL">
     @Override
+    public List<RoleDTO> getAllRoles() {
+        return aclServiceDelegate.getAllRoles();
+    }
+
+    @Override
     public GuiComponentsPermissionMapData getAccountGuiComponentPermission(Long accountID)
             throws ResourceNotFoundFault {
         return this.aclServiceDelegate.getAccountGuiComponentPermission(accountID);
+    }
+
+    @Override
+    public GuiComponentsPermissionMapData getRoleGuiComponentPermission(String role)
+            throws ResourceNotFoundFault {
+        return this.aclServiceDelegate.getRoleGuiComponentPermission(role);
     }
     //</editor-fold>
 }

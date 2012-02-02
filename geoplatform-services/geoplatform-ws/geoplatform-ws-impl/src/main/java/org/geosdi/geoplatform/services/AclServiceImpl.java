@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.responce.RoleDTO;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 
 /**
@@ -133,15 +134,15 @@ class AclServiceImpl {
     //</editor-fold>
 
     /**
-     * Retrieve the permission on the GUI Component for an account
-     * 
-     * It is based on accounts with disjoined authorities
-     * 
-     * @param accountID
-     * @return HashMap, Permissions on GUI Components for an account, with:
-     *      key = ID Component
-     *      value = Permission
-     * @throws ResourceNotFoundFault if the account not found
+     * @see org.geosdi.geoplatform.services.GeoPlatformService#getAllRoles()
+     */
+    public List<RoleDTO> getAllRoles() {
+        List<AclSid> sids = sidDao.findByPrincipal(false);
+        return RoleDTO.convertToRoleDTOList(sids);
+    }
+
+    /**
+     * @see org.geosdi.geoplatform.services.GeoPlatformService#getAccountGuiComponentPermission(java.lang.Long)
      */
     public GuiComponentsPermissionMapData getAccountGuiComponentPermission(Long accountID)
             throws ResourceNotFoundFault {
@@ -160,28 +161,52 @@ class AclServiceImpl {
         for (GPAuthority authority : authorities) {
             String nameAuthority = authority.getAuthority();
             logger.trace("\n*** nameAuthority: {} ***", nameAuthority);
-            // Retrieve the Sid corresponding to the Authority
-            AclSid sid = sidDao.findBySid(nameAuthority, false);
-            logger.trace("\n*** AclSid:\n{}\n***", sid);
-            // Retrieve the ACEs of the Sid
-            List<AclEntry> entries = entryDao.findBySid(sid.getId());
-            logger.trace("\n*** #Entries: {} ***", entries.size());
-            // For each ACEs
-            // (ACL has a single ACE for Account+GuiComponent,
-            // because there is a singe Permission)
-            for (AclEntry entry : entries) {
-                logger.trace("\n*** AclEntry:\n{}\n***", entry);
-                if (entry.getMask().equals(GuiComponentPermission.ENABLE.getMask())) {
-                    AclObjectIdentity objectIdentity = entry.getAclObject();
-                    logger.trace("\n*** AclObjectIdentity:\n{}\n***", objectIdentity);
-                    GuiComponent gc = guiComponentDao.find(objectIdentity.getObjectId());
-                    logger.trace("\n*** GuiComponent:\n{}\n***", gc);
-                    logger.debug("\n*** ComponentId: {} ***\n*** Granting: {} ***",
-                                 gc.getComponentId(), entry.isGranting());
-                    mapComponentPermission.getGuiComponentsPermissionMap().put(gc.getComponentId(), entry.isGranting());
-                }
-            }
+
+            this.elaborateGuiComponentACEs(nameAuthority, mapComponentPermission);
         }
         return mapComponentPermission;
+    }
+
+    /**
+     * @see org.geosdi.geoplatform.services.GeoPlatformService#getRoleGuiComponentPermission(java.lang.String)
+     */
+    public GuiComponentsPermissionMapData getRoleGuiComponentPermission(String role)
+            throws ResourceNotFoundFault {
+        GuiComponentsPermissionMapData mapComponentPermission = new GuiComponentsPermissionMapData();
+
+        this.elaborateGuiComponentACEs(role, mapComponentPermission);
+
+        return mapComponentPermission;
+    }
+
+    private void elaborateGuiComponentACEs(String sidName,
+                                           GuiComponentsPermissionMapData mapComponentPermission)
+            throws ResourceNotFoundFault {
+        // Retrieve the Sid corresponding to the Role (Authority) name
+        AclSid sid = sidDao.findBySid(sidName, false);
+        if (sid == null) {
+            throw new ResourceNotFoundFault("Authority (Role) \"" + sidName + "\" not found");
+        }
+        logger.trace("\n*** AclSid:\n{}\n***", sid);
+        // Retrieve the ACEs of the Sid
+        List<AclEntry> entries = entryDao.findBySid(sid.getId());
+        logger.trace("\n*** #Entries: {} ***", entries.size());
+        // For each ACEs
+        // (ACL has a single ACE for Account+GuiComponent,
+        // because there is a singe Permission)
+        for (AclEntry entry : entries) {
+            logger.trace("\n*** AclEntry:\n{}\n***", entry);
+            if (entry.getMask().equals(GuiComponentPermission.ENABLE.getMask())) {
+                AclObjectIdentity objectIdentity = entry.getAclObject();
+                logger.trace("\n*** AclObjectIdentity:\n{}\n***", objectIdentity);
+                GuiComponent gc = guiComponentDao.find(objectIdentity.getObjectId());
+                logger.trace("\n*** GuiComponent:\n{}\n***", gc);
+                logger.debug("\n*** ComponentId: {} ***\n*** Granting: {} ***",
+                             gc.getComponentId(), entry.isGranting());
+
+                mapComponentPermission.getGuiComponentsPermissionMap().put(gc.getComponentId(),
+                                                                           entry.isGranting());
+            }
+        }
     }
 }

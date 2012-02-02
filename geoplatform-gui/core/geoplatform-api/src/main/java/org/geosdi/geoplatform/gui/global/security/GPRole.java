@@ -50,7 +50,7 @@ public enum GPRole {
     VIEWER("Viewer"); // Can't save the tree state
     //
     private String role;
-    private final static List<GPRole> roleList = new ArrayList<GPRole>();
+    private final static List<GPRole> roleList = new ArrayList<GPRole>(3);
 
     static {
         roleList.add(ADMIN);

@@ -71,6 +71,7 @@ import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
+import org.geosdi.geoplatform.responce.RoleDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
@@ -91,7 +92,8 @@ import org.geosdi.geoplatform.responce.collection.TreeFolderElements;
  * Public interface to define the service operations mapped via REST
  * using CXT framework
  */
-@WebService(name = "GeoPlatformService", targetNamespace = "http://services.geo-platform.org/")
+@WebService(name = "GeoPlatformService",
+            targetNamespace = "http://services.geo-platform.org/")
 public interface GeoPlatformService {
 
     //<editor-fold defaultstate="collapsed" desc="Account (User and Application)">
@@ -694,11 +696,56 @@ public interface GeoPlatformService {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="ACL">
+    /**
+     * Retrieve all Roles.
+     * 
+     * @return List of all Roles
+     */
+    @Get
+    @HttpResource(location = "/roles")
+    @WebResult(name = "Roles")
+    List<RoleDTO> getAllRoles();
+
+    /**
+     * Retrieve GUI Component permissions for an Account.
+     * <p>
+     * It is based on accounts with disjoined authorities.
+     * 
+     * @param accountID
+     * 
+     * @return Map that contains GUI Components permissions, with:
+     * <ul>
+     * <li>
+     * key = ID Component
+     * </li>
+     * <li>
+     * value = Permission
+     * </li>
+     * </ul>
+     * @throws ResourceNotFoundFault if the account is not found
+     */
     @Get
     @HttpResource(location = "/account/{accountID}")
     @WebResult(name = "GuiComponentsPermissionMapData")
     GuiComponentsPermissionMapData getAccountGuiComponentPermission(
             @WebParam(name = "accountID") Long accountID)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Retrieve the GUI Component permissions for a Role (Authority).
+     * 
+     * @param role role (authority) name
+     * 
+     * @return Map that contains GUI Components permissions, with:
+     *      key = ID Component
+     *      value = Permission
+     * @throws ResourceNotFoundFault if the role (authority) is not found
+     */
+    @Get
+    @HttpResource(location = "/account/{role}")
+    @WebResult(name = "GuiComponentsPermissionMapData")
+    GuiComponentsPermissionMapData getRoleGuiComponentPermission(
+            @WebParam(name = "role") String role)
             throws ResourceNotFoundFault;
     //</editor-fold>
 }

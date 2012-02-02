@@ -41,8 +41,11 @@ import javax.xml.ws.WebFault;
  * @author giuseppe
  *
  */
-@WebFault(name = "IllegalParameterFault", faultBean = "org.geosdi.exception.IllegalParameterFault")
+@WebFault(name = "IllegalParameterFault",
+          faultBean = "org.geosdi.exception.IllegalParameterFault")
 public class IllegalParameterFault extends Exception {
+
+    private static final long serialVersionUID = 114329811800551827L;
 
     public IllegalParameterFault() {
     }

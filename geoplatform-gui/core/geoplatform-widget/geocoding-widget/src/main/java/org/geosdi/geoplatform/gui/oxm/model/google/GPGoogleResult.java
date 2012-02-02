@@ -35,61 +35,92 @@
  */
 package org.geosdi.geoplatform.gui.oxm.model.google;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-@XmlRootElement(name = "GeocodeResponse")
-@XmlType(name = "GPGoogleGeocode", propOrder = {"status", "resultList"})
 @XmlAccessorType(XmlAccessType.FIELD)
-public class GPGoogleGeocodeRoot {
+public class GPGoogleResult {
 
-    @XmlElement(name = "status", required = true)
-    private String status;
+    @XmlElement(name = "type")
+    private String type;
     //
-    @XmlElement(name = "result", required = true)
-    private List<GPGoogleResult> resultList = new ArrayList<GPGoogleResult>();
+    @XmlElement(name = "formatted_address")
+    private String completeDescription;
+    //
+    @XmlElement(name = "address_component")
+    private List<GPGoogleAddress> addressList;
+    //
+    @XmlElement(name = "geometry")
+    private GPGoogleGeometry geometry;
 
     /**
-     * @return the status
+     * @return the type
      */
-    public String getStatus() {
-        return this.status;
+    public String getType() {
+        return type;
     }
 
     /**
-     * @param status the status to set
+     * @param type the type to set
      */
-    public void setStatus(String theStatus) {
-        this.status = theStatus;
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
-     * @return the resultList
+     * @return the completeDescription
      */
-    public List<GPGoogleResult> getResultList() {
-        return resultList;
+    public String getCompleteDescription() {
+        return completeDescription;
     }
 
     /**
-     * @param resultList the resultList to set
+     * @param completeDescription the completeDescription to set
      */
-    public void setResultList(List<GPGoogleResult> resultList) {
-        this.resultList = resultList;
+    public void setCompleteDescription(String completeDescription) {
+        this.completeDescription = completeDescription;
+    }
+
+    /**
+     * @return the addressList
+     */
+    public List<GPGoogleAddress> getAddressList() {
+        return addressList;
+    }
+
+    /**
+     * @param addressList the addressList to set
+     */
+    public void setAddressList(List<GPGoogleAddress> addressList) {
+        this.addressList = addressList;
+    }
+
+    /**
+     * @return the geometry
+     */
+    public GPGoogleGeometry getGeometry() {
+        return geometry;
+    }
+
+    /**
+     * @param geometry the geometry to set
+     */
+    public void setGeometry(GPGoogleGeometry geometry) {
+        this.geometry = geometry;
     }
 
     @Override
     public String toString() {
-        return "GPGoogleGeocode{" + "status=" + status
-                + ", resultList=" + resultList + '}';
+        return "GPGoogleResult{" + "type=" + type
+                + ", completeDescription=" + completeDescription
+                + ", addressList=" + addressList
+                + ", location=" + geometry + '}';
     }
 }

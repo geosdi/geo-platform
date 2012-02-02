@@ -35,61 +35,74 @@
  */
 package org.geosdi.geoplatform.gui.oxm.model.google;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-@XmlRootElement(name = "GeocodeResponse")
-@XmlType(name = "GPGoogleGeocode", propOrder = {"status", "resultList"})
 @XmlAccessorType(XmlAccessType.FIELD)
-public class GPGoogleGeocodeRoot {
+public class GPGoogleAddress {
 
-    @XmlElement(name = "status", required = true)
-    private String status;
+    @XmlElement(name = "long_name")
+    private String longName;
     //
-    @XmlElement(name = "result", required = true)
-    private List<GPGoogleResult> resultList = new ArrayList<GPGoogleResult>();
+    @XmlElement(name = "short_name")
+    private String shortName;
+    //
+    @XmlElement(name = "type")
+    private List<String> typesList;
 
     /**
-     * @return the status
+     * @return the longName
      */
-    public String getStatus() {
-        return this.status;
+    public String getLongName() {
+        return longName;
     }
 
     /**
-     * @param status the status to set
+     * @param longName the longName to set
      */
-    public void setStatus(String theStatus) {
-        this.status = theStatus;
+    public void setLongName(String longName) {
+        this.longName = longName;
     }
 
     /**
-     * @return the resultList
+     * @return the shortName
      */
-    public List<GPGoogleResult> getResultList() {
-        return resultList;
+    public String getShortName() {
+        return shortName;
     }
 
     /**
-     * @param resultList the resultList to set
+     * @param shortName the shortName to set
      */
-    public void setResultList(List<GPGoogleResult> resultList) {
-        this.resultList = resultList;
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    /**
+     * @return the typesList
+     */
+    public List<String> getTypesList() {
+        return typesList;
+    }
+
+    /**
+     * @param typesList the typesList to set
+     */
+    public void setTypesList(List<String> typesList) {
+        this.typesList = typesList;
     }
 
     @Override
     public String toString() {
-        return "GPGoogleGeocode{" + "status=" + status
-                + ", resultList=" + resultList + '}';
+        return "GPGoogleAddress{" + "longName=" + longName + 
+               ", shortName=" + shortName + ", typesList=" + typesList + '}';
     }
+    
 }

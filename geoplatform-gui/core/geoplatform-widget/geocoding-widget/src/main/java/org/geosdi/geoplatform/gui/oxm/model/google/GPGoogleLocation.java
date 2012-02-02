@@ -35,61 +35,55 @@
  */
 package org.geosdi.geoplatform.gui.oxm.model.google;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  *
- * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email michele.santomauro@geosdi.org
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement(name = "GeocodeResponse")
-@XmlType(name = "GPGoogleGeocode", propOrder = {"status", "resultList"})
 @XmlAccessorType(XmlAccessType.FIELD)
-public class GPGoogleGeocodeRoot {
+public class GPGoogleLocation {
 
-    @XmlElement(name = "status", required = true)
-    private String status;
+    @XmlElement(name = "lat")
+    private float lat;
     //
-    @XmlElement(name = "result", required = true)
-    private List<GPGoogleResult> resultList = new ArrayList<GPGoogleResult>();
+    @XmlElement(name = "lng")
+    private float lon;
 
     /**
-     * @return the status
+     * @return the lat
      */
-    public String getStatus() {
-        return this.status;
+    public float getLat() {
+        return lat;
     }
 
     /**
-     * @param status the status to set
+     * @param lat the lat to set
      */
-    public void setStatus(String theStatus) {
-        this.status = theStatus;
+    public void setLat(float lat) {
+        this.lat = lat;
     }
 
     /**
-     * @return the resultList
+     * @return the lon
      */
-    public List<GPGoogleResult> getResultList() {
-        return resultList;
+    public float getLon() {
+        return lon;
     }
 
     /**
-     * @param resultList the resultList to set
+     * @param lon the lon to set
      */
-    public void setResultList(List<GPGoogleResult> resultList) {
-        this.resultList = resultList;
+    public void setLon(float lon) {
+        this.lon = lon;
     }
 
     @Override
     public String toString() {
-        return "GPGoogleGeocode{" + "status=" + status
-                + ", resultList=" + resultList + '}';
+        return "GPGoogleLocation{" + "latitude="
+                + lat + ", longitude=" + lon + '}';
     }
 }

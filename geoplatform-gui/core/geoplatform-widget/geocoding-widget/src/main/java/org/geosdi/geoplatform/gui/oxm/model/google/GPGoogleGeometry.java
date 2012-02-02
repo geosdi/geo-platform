@@ -35,61 +35,37 @@
  */
 package org.geosdi.geoplatform.gui.oxm.model.google;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-@XmlRootElement(name = "GeocodeResponse")
-@XmlType(name = "GPGoogleGeocode", propOrder = {"status", "resultList"})
 @XmlAccessorType(XmlAccessType.FIELD)
-public class GPGoogleGeocodeRoot {
+public class GPGoogleGeometry {
 
-    @XmlElement(name = "status", required = true)
-    private String status;
-    //
-    @XmlElement(name = "result", required = true)
-    private List<GPGoogleResult> resultList = new ArrayList<GPGoogleResult>();
+    @XmlElement(name = "location")
+    private GPGoogleLocation location;
 
     /**
-     * @return the status
+     * @return the location
      */
-    public String getStatus() {
-        return this.status;
+    public GPGoogleLocation getLocation() {
+        return location;
     }
 
     /**
-     * @param status the status to set
+     * @param location the location to set
      */
-    public void setStatus(String theStatus) {
-        this.status = theStatus;
-    }
-
-    /**
-     * @return the resultList
-     */
-    public List<GPGoogleResult> getResultList() {
-        return resultList;
-    }
-
-    /**
-     * @param resultList the resultList to set
-     */
-    public void setResultList(List<GPGoogleResult> resultList) {
-        this.resultList = resultList;
+    public void setLocation(GPGoogleLocation location) {
+        this.location = location;
     }
 
     @Override
     public String toString() {
-        return "GPGoogleGeocode{" + "status=" + status
-                + ", resultList=" + resultList + '}';
+        return "GPGoogleGeometry{" + "location=" + location + '}';
     }
 }

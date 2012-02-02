@@ -37,15 +37,15 @@ package org.geosdi.geoplatform.oxm;
 
 import java.io.File;
 import java.io.IOException;
+
 import junit.framework.Assert;
-import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleGeocode;
+
+import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleGeocodeRoot;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -57,15 +57,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:org/geosdi/geoplatform/gui/applicationContext-TEST.xml"})
-public class ModelTest {
+public class GoogleModelTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
-    private GeoPlatformMarshall geocoderJaxbMarshaller;
-    //
-    @Autowired
-    private ApplicationContext context;
+    private GeoPlatformMarshall geocoderGoogleJaxbMarshaller;
 
     @Test
     public void testGeocoding() {
@@ -78,7 +75,7 @@ public class ModelTest {
                 throw new IllegalArgumentException("Source path " + sourceFileUrl + " is not valid");
             }
 
-            GPGoogleGeocode geocode = (GPGoogleGeocode) geocoderJaxbMarshaller.loadFromFile(source);
+            GPGoogleGeocodeRoot geocode = (GPGoogleGeocodeRoot) geocoderGoogleJaxbMarshaller.loadFromFile(source);
             Assert.assertNotNull("The geocode is null", geocode);
 
             logger.info("\n\n\t GeoPlatform Google geocoding OXM parsing : " + geocode + "\n\n");
@@ -98,7 +95,7 @@ public class ModelTest {
                 throw new IllegalArgumentException("Source path " + sourceFileUrl + " is not valid");
             }
 
-            GPGoogleGeocode geocode = (GPGoogleGeocode) geocoderJaxbMarshaller.loadFromFile(source);
+            GPGoogleGeocodeRoot geocode = (GPGoogleGeocodeRoot) geocoderGoogleJaxbMarshaller.loadFromFile(source);
             Assert.assertNotNull("The geocode is null", geocode);
 
             logger.info("\n\n\t GeoPlatform Google reverse geocoding OXM parsing : " + geocode + "\n\n");

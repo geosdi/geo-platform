@@ -63,13 +63,16 @@ public class ReverseGeocoderTest {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
-    private IReverseGeocoding reverseGeoding;
+    private IReverseGeocoding googleReverseGeoding;
+    //
+    @Autowired
+    private IReverseGeocoding yahooReverseGeoding;
 
     @Test
-    public void test() {
+    public void testGoogleReverseGeocoding() {
         GeocodingBean bean = null;
         try {
-            bean = this.reverseGeoding.findLocation(40.6372425, 15.8022214);
+            bean = this.googleReverseGeoding.findLocation(40.6372425, 15.8022214);
         } catch (IOException e) {
             logger.error("IOException " + e);
         }
@@ -77,6 +80,19 @@ public class ReverseGeocoderTest {
         Assert.assertNotNull(bean);
 
         logger.info("Locations ***************** " + bean.getDescription());
+    }
 
+    @Test
+    public void testYahooReverseGeocoding() {
+        GeocodingBean bean = null;
+        try {
+            bean = this.yahooReverseGeoding.findLocation(40.6372425, 15.8022214);
+        } catch (IOException e) {
+            logger.error("IOException " + e);
+        }
+
+        Assert.assertNotNull(bean);
+
+        logger.info("Locations ***************** " + bean.getDescription());
     }
 }

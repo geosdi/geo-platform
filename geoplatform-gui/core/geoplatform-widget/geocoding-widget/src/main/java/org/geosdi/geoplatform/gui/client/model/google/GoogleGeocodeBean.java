@@ -51,6 +51,7 @@ public class GoogleGeocodeBean extends GeocodingBean {
      *
      */
     private static final long serialVersionUID = 7021908143959354644L;
+    //
     private String street_address = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
     private String route = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
     private String intersection = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();

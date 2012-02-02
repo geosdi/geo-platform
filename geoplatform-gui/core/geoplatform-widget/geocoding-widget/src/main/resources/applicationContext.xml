@@ -22,14 +22,26 @@
         <property name="order" value="10" />
     </bean>
     
-    <bean id="geocoderJaxbMarshaller" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">
-        <property name="marshaller" ref="jaxbGeoCoder" />
-        <property name="unmarshaller" ref="jaxbGeoCoder" />
+    <!-- Google Binder -->
+    <bean id="geocoderGoogleJaxbMarshaller" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">
+        <property name="marshaller" ref="jaxbGoogleGeoCoder" />
+        <property name="unmarshaller" ref="jaxbGoogleGeoCoder" />
     </bean>
     
-    <oxm:jaxb2-marshaller id="jaxbGeoCoder">
+    <oxm:jaxb2-marshaller id="jaxbGoogleGeoCoder">
         <oxm:class-to-be-bound
-            name="org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleGeocode" />
+            name="org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleGeocodeRoot" />
+    </oxm:jaxb2-marshaller>
+    
+    <!-- Yahoo Binder -->
+    <bean id="geocoderYahooJaxbMarshaller" class="org.geosdi.geoplatform.oxm.GeoPlatformMarshall">
+        <property name="marshaller" ref="jaxbYahooGeoCoder" />
+        <property name="unmarshaller" ref="jaxbYahooGeoCoder" />
+    </bean>
+    
+    <oxm:jaxb2-marshaller id="jaxbYahooGeoCoder">
+        <oxm:class-to-be-bound
+            name="org.geosdi.geoplatform.gui.oxm.model.yahoo.GPYahooGeocodeRoot" />
     </oxm:jaxb2-marshaller>
 
 </beans>

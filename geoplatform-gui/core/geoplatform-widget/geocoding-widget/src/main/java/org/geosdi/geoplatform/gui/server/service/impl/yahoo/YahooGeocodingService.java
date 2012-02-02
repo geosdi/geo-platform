@@ -33,59 +33,70 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.gwt;
+package org.geosdi.geoplatform.gui.server.service.impl.yahoo;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
-import org.geosdi.geoplatform.gui.client.service.GeocodingRemote;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.client.model.yahoo.YahooGeocodeBean;
+import org.geosdi.geoplatform.gui.oxm.model.yahoo.GPYahooGeocodeRoot;
+import org.geosdi.geoplatform.gui.oxm.model.yahoo.GPYahooResult;
+import org.geosdi.geoplatform.gui.oxm.model.yahoo.enums.ResponseStatus;
 import org.geosdi.geoplatform.gui.server.service.IGeocodingService;
-import org.geosdi.geoplatform.gui.server.service.IReverseGeocoding;
-import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
+import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
- * @author giuseppe
+ * 
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email michele.santomauro@geosdi.org
  * 
  */
-public class GeocodingRemoteImpl extends GPAutoInjectingRemoteServiceServlet
-        implements GeocodingRemote {
+@Service("yahooGeocodingService")
+public class YahooGeocodingService implements IGeocodingService {
 
-    private static final long serialVersionUID = 8960403782525028063L;
-    //
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    @Autowired
-//    private IGeocodingService googleGeocodingService;
-    private IGeocodingService yahooGeocodingService;
-    //
-    @Autowired
-//    private IReverseGeocoding googleReverseGeocoding;
-    private IReverseGeocoding yahooReverseGeocoding;
+	// URL prefix to the geocoder
+	private static final String GEOCODER_REQUEST_PREFIX_FOR_XML = "http://where.yahooapis.com/geocode";
+	//
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	//
+	@Autowired
+	private GeoPlatformMarshall geocoderYahooJaxbMarshaller;
+	//
+	private ArrayList<GeocodingBean> beans;
 
-    @Override
-    public ArrayList<GeocodingBean> findLocations(String search)
-            throws GeoPlatformException {
-        try {
-            return this.yahooGeocodingService.findLocations(search);
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-            throw new GeoPlatformException(e.getMessage());
-        }
-    }
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see org.geosdi.geoplatform.gui.server.service.IGeocodingService#findLocations(java.lang.String)
+	 */
+	@Override
+	public ArrayList<GeocodingBean> findLocations(String address)
+			throws IOException {
+		this.beans = new ArrayList<GeocodingBean>();
 
-    @Override
-    public GeocodingBean findLocation(double lat, double lon)
-            throws GeoPlatformException {
-        try {
-            return this.yahooReverseGeocoding.findLocation(lat, lon);
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-            throw new GeoPlatformException(e.getMessage());
-        }
-    }
+		URL url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?location="
+				+ URLEncoder.encode(address, "UTF-8") + "&appid=yourappid"); // TODO[Michele] Set the Yahoo appid
+
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+		GPYahooGeocodeRoot oxmBean = (GPYahooGeocodeRoot) this.geocoderYahooJaxbMarshaller
+				.loadFromStream(conn.getInputStream());
+
+		if (oxmBean.getError().equals(
+				ResponseStatus.EnumResponseStatus.CODE_NO_ERROR.getValue())) {
+			for (GPYahooResult result : oxmBean.getResultList()) {
+				beans.add(new YahooGeocodeBean(result));
+			}
+		}
+
+		return beans;
+	}
 }

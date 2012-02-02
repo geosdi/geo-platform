@@ -33,59 +33,74 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.gwt;
+package org.geosdi.geoplatform.oxm;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
-import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
-import org.geosdi.geoplatform.gui.client.service.GeocodingRemote;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.service.IGeocodingService;
-import org.geosdi.geoplatform.gui.server.service.IReverseGeocoding;
-import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
+import junit.framework.Assert;
+
+import org.geosdi.geoplatform.gui.oxm.model.yahoo.GPYahooGeocodeRoot;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email  michele.santomauro@geosdi.org
+ *
  */
-public class GeocodingRemoteImpl extends GPAutoInjectingRemoteServiceServlet
-        implements GeocodingRemote {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:org/geosdi/geoplatform/gui/applicationContext-TEST.xml"})
+public class YahooModelTest {
 
-    private static final long serialVersionUID = 8960403782525028063L;
-    //
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
-//    private IGeocodingService googleGeocodingService;
-    private IGeocodingService yahooGeocodingService;
-    //
-    @Autowired
-//    private IReverseGeocoding googleReverseGeocoding;
-    private IReverseGeocoding yahooReverseGeocoding;
+    private GeoPlatformMarshall geocoderYahooJaxbMarshaller;
 
-    @Override
-    public ArrayList<GeocodingBean> findLocations(String search)
-            throws GeoPlatformException {
+    @Test
+    public void testGeocoding() {
         try {
-            return this.yahooGeocodingService.findLocations(search);
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-            throw new GeoPlatformException(e.getMessage());
+            String sourceFileUrl = new File(".").getCanonicalPath() + File.separator
+                    + "src/test/resources/yahooReverseGeocodeExample.xml";
+
+            File source = new File(sourceFileUrl);
+            if (!source.canRead()) {
+                throw new IllegalArgumentException("Source path " + sourceFileUrl + " is not valid");
+            }
+
+            GPYahooGeocodeRoot geocode = (GPYahooGeocodeRoot) geocoderYahooJaxbMarshaller.loadFromFile(source);
+            Assert.assertNotNull("The geocode is null", geocode);
+
+            logger.info("\n\n\t GeoPlatform Yahoo geocoding OXM parsing : " + geocode + "\n\n");
+        } catch (IOException ex) {
+            Assert.fail(ex.getMessage());
         }
     }
 
-    @Override
-    public GeocodingBean findLocation(double lat, double lon)
-            throws GeoPlatformException {
+    @Test
+    public void testReverseGeocoding() {
         try {
-            return this.yahooReverseGeocoding.findLocation(lat, lon);
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-            throw new GeoPlatformException(e.getMessage());
+            String sourceFileUrl = new File(".").getCanonicalPath() + File.separator
+                    + "src/test/resources/yahooReverseGeocodeExample.xml";
+
+            File source = new File(sourceFileUrl);
+            if (!source.canRead()) {
+                throw new IllegalArgumentException("Source path " + sourceFileUrl + " is not valid");
+            }
+
+            GPYahooGeocodeRoot geocode = (GPYahooGeocodeRoot) geocoderYahooJaxbMarshaller.loadFromFile(source);
+            Assert.assertNotNull("The geocode is null", geocode);
+
+            logger.info("\n\n\t GeoPlatform Yahoo reverse geocoding OXM parsing : " + geocode + "\n\n");
+        } catch (IOException ex) {
+            Assert.fail(ex.getMessage());
         }
     }
 }

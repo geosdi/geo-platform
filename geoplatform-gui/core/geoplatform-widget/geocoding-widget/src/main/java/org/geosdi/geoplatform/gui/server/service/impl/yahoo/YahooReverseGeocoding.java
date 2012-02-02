@@ -33,59 +33,66 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.gwt;
+package org.geosdi.geoplatform.gui.server.service.impl.yahoo;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
-import org.geosdi.geoplatform.gui.client.service.GeocodingRemote;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.service.IGeocodingService;
+import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
+import org.geosdi.geoplatform.gui.client.model.google.GoogleGeocodeBean;
+import org.geosdi.geoplatform.gui.client.model.yahoo.YahooGeocodeBean;
+import org.geosdi.geoplatform.gui.oxm.model.yahoo.GPYahooGeocodeRoot;
+import org.geosdi.geoplatform.gui.oxm.model.yahoo.GPYahooResult;
+import org.geosdi.geoplatform.gui.oxm.model.yahoo.enums.ResponseStatus;
 import org.geosdi.geoplatform.gui.server.service.IReverseGeocoding;
-import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
+import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email  michele.santomauro@geosdi.org
+ *
  */
-public class GeocodingRemoteImpl extends GPAutoInjectingRemoteServiceServlet
-        implements GeocodingRemote {
+@Service("yahooReverseGeocoding")
+public class YahooReverseGeocoding implements IReverseGeocoding {
 
-    private static final long serialVersionUID = 8960403782525028063L;
+    // URL prefix to the reverse geocoder
+	private static final String REVERSE_GEOCODER_PREFIX_FOR_XML = "http://where.yahooapis.com/geocode";
     //
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    @Autowired
-//    private IGeocodingService googleGeocodingService;
-    private IGeocodingService yahooGeocodingService;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
-//    private IReverseGeocoding googleReverseGeocoding;
-    private IReverseGeocoding yahooReverseGeocoding;
+    private GeoPlatformMarshall geocoderYahooJaxbMarshaller;
 
-    @Override
-    public ArrayList<GeocodingBean> findLocations(String search)
-            throws GeoPlatformException {
-        try {
-            return this.yahooGeocodingService.findLocations(search);
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-            throw new GeoPlatformException(e.getMessage());
-        }
-    }
-
+    /**
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.server.service.IReverseGeocoding#findLocation(double, double)
+     */
     @Override
     public GeocodingBean findLocation(double lat, double lon)
-            throws GeoPlatformException {
-        try {
-            return this.yahooReverseGeocoding.findLocation(lat, lon);
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-            throw new GeoPlatformException(e.getMessage());
+            throws IOException {
+
+        URL url = new URL(REVERSE_GEOCODER_PREFIX_FOR_XML + "?q="
+                + URLEncoder.encode(lat + ",+" + lon, "UTF-8") + "&gflags=R&appid=[yourappidhere]"); // TODO[Michele] Set the Yahoo appid
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+        GPYahooGeocodeRoot oxmBean = (GPYahooGeocodeRoot) this.geocoderYahooJaxbMarshaller.loadFromStream(conn.getInputStream());
+
+        if (oxmBean.getError().equals(ResponseStatus.EnumResponseStatus.CODE_NO_ERROR.getValue())) {
+            GPYahooResult result = oxmBean.getResultList().get(0);
+            return new YahooGeocodeBean(result);
         }
+
+        /**@@@@@@@@@@@@@@ TODO FIXE ME @@@@@@@@@@@@@@@@@@@@ **/
+        return new GoogleGeocodeBean(GeocodingKeyValue.ZERO_RESULTS.toString());
     }
 }

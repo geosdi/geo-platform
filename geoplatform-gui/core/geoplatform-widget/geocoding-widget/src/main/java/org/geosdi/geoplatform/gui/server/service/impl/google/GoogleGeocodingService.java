@@ -33,21 +33,21 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.service.impl;
+package org.geosdi.geoplatform.gui.server.service.impl.google;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
-import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
 import org.geosdi.geoplatform.gui.client.model.google.GoogleGeocodeBean;
-import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleGeocode;
+import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleGeocodeRoot;
 import org.geosdi.geoplatform.gui.oxm.model.google.GPGoogleResult;
 import org.geosdi.geoplatform.gui.oxm.model.google.enums.ResponseStatus;
-import org.geosdi.geoplatform.gui.server.service.IReverseGeocoding;
+import org.geosdi.geoplatform.gui.server.service.IGeocodingService;
 import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,39 +58,43 @@ import org.springframework.stereotype.Service;
  * @author giuseppe
  * 
  */
-@Service("reverseGeocoding")
-public class ReverseGeocoding implements IReverseGeocoding {
+@Service("googleGeocodingService")
+public class GoogleGeocodingService implements
+        IGeocodingService {
 
-    // URL prefix to the reverse geocoder
-    private static final String REVERSE_GEOCODER_PREFIX_FOR_XML = "http://maps.googleapis.com/maps/api/geocode/xml";
+    // URL prefix to the geocoder
+    private static final String GEOCODER_REQUEST_PREFIX_FOR_XML = "http://maps.google.com/maps/api/geocode/xml";
     //
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
-    private GeoPlatformMarshall geocoderJaxbMarshaller;
+    private GeoPlatformMarshall geocoderGoogleJaxbMarshaller;
+    //
+    private ArrayList<GeocodingBean> beans;
 
     /**
      * (non-Javadoc)
      *
-     * @see org.geosdi.geoplatform.gui.server.service.IReverseGeocoding#findLocation(double, double)
+     * @see org.geosdi.geoplatform.gui.server.service.IGeocodingService#findLocations(java.lang.String)
      */
     @Override
-    public GeocodingBean findLocation(double lat, double lon)
+    public ArrayList<GeocodingBean> findLocations(String address)
             throws IOException {
+        this.beans = new ArrayList<GeocodingBean>();
 
-        URL url = new URL(REVERSE_GEOCODER_PREFIX_FOR_XML + "?latlng="
-                + URLEncoder.encode(lat + "," + lon, "UTF-8") + "&sensor=true");
+        URL url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?address="
+                + URLEncoder.encode(address, "UTF-8") + "&sensor=false");
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-        GPGoogleGeocode oxmBean = (GPGoogleGeocode) this.geocoderJaxbMarshaller.loadFromStream(conn.getInputStream());
+        GPGoogleGeocodeRoot oxmBean = (GPGoogleGeocodeRoot) this.geocoderGoogleJaxbMarshaller.loadFromStream(conn.getInputStream());
 
         if (oxmBean.getStatus().equals(ResponseStatus.EnumResponseStatus.STATUS_OK.getValue())) {
-            GPGoogleResult result = oxmBean.getResultList().get(0);
-            return new GoogleGeocodeBean(result);
+            for (GPGoogleResult result : oxmBean.getResultList()) {
+                beans.add(new GoogleGeocodeBean(result));
+            }
         }
 
-        /**@@@@@@@@@@@@@@ TODO FIXE ME @@@@@@@@@@@@@@@@@@@@ **/
-        return new GoogleGeocodeBean(GeocodingKeyValue.ZERO_RESULTS.toString());
+        return beans;
     }
 }

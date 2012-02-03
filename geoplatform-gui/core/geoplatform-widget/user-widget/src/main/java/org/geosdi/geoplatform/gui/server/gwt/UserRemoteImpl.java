@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.gui.server.gwt;
 
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import java.util.ArrayList;
+import java.util.HashMap;
 import org.geosdi.geoplatform.gui.client.service.UserRemote;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -60,26 +62,28 @@ public class UserRemoteImpl extends GPAutoInjectingRemoteServiceServlet
 
     @Override
     public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-            String searchText) {
+                                                            String searchText) {
         return userService.searchUsers(config, searchText, super.getThreadLocalRequest());
     }
 
     @Override
-    public Long insertUser(IGPUserManageDetail userDetail) throws GeoPlatformException {
+    public Long insertUser(IGPUserManageDetail userDetail)
+            throws GeoPlatformException {
         return userService.insertUser(userDetail, super.getThreadLocalRequest());
     }
 
     @Override
-    public Long updateUser(IGPUserManageDetail userDetail) throws GeoPlatformException {
+    public Long updateUser(IGPUserManageDetail userDetail)
+            throws GeoPlatformException {
         return userService.updateUser(userDetail, super.getThreadLocalRequest());
     }
 
     @Override
     public Long updateOwnUser(IGPUserManageDetail userDetail,
-            String currentPlainPassword, String newPlainPassword)
+                              String currentPlainPassword, String newPlainPassword)
             throws GeoPlatformException {
         return userService.updateOwnUser(userDetail, currentPlainPassword,
-                newPlainPassword, super.getThreadLocalRequest());
+                                         newPlainPassword, super.getThreadLocalRequest());
     }
 
     @Override
@@ -90,5 +94,16 @@ public class UserRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     @Override
     public IGPUserManageDetail getOwnUser() {
         return userService.getOwnUser(super.getThreadLocalRequest());
+    }
+
+    @Override
+    public ArrayList<String> getAllRoles() {
+        return userService.getAllRoles(super.getThreadLocalRequest());
+    }
+
+    @Override
+    public HashMap<String, Boolean> getRolePermission(String role)
+            throws GeoPlatformException {
+        return userService.getRolePermission(role, super.getThreadLocalRequest());
     }
 }

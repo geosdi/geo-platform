@@ -204,7 +204,7 @@ class AclServiceImpl {
                 logger.debug("\n*** ComponentId: {} ***\n*** Granting: {} ***",
                              gc.getComponentId(), entry.isGranting());
 
-                mapComponentPermission.getGuiComponentsPermissionMap().put(gc.getComponentId(),
+                mapComponentPermission.getPermissionMap().put(gc.getComponentId(),
                                                                            entry.isGranting());
             }
         }

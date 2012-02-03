@@ -149,7 +149,6 @@ public class ManageUsersPagWidget
         ColumnConfig nameColumn = new ColumnConfig();
         nameColumn.setId(GPUserManageDetailKeyValue.NAME.toString());
         nameColumn.setHeader("Name");
-        nameColumn.setWidth(240);
         configs.add(nameColumn);
 
         ColumnConfig usernameColumn = new ColumnConfig();
@@ -161,8 +160,7 @@ public class ManageUsersPagWidget
         ColumnConfig roleColumn = new ColumnConfig();
         roleColumn.setId(GPUserManageDetailKeyValue.AUTORITHY.toString());
         roleColumn.setHeader("Role");
-        roleColumn.setWidth(50);
-        roleColumn.setAlignment(HorizontalAlignment.CENTER);
+        roleColumn.setWidth(80);
         configs.add(roleColumn);
 
         CheckColumnConfig tempColumn = new CheckColumnConfig();
@@ -177,7 +175,7 @@ public class ManageUsersPagWidget
         ColumnConfig delColumn = new ColumnConfig();
         delColumn.setId("delColumn");
         delColumn.setHeader("Delete");
-        delColumn.setWidth(45);
+        delColumn.setWidth(40);
         delColumn.setFixed(true);
         delColumn.setResizable(false);
         delColumn.setSortable(false);
@@ -191,6 +189,7 @@ public class ManageUsersPagWidget
     public void setGridProperties() {
         super.grid.setWidth(530);
         super.grid.setHeight(250);
+        super.grid.setAutoExpandColumn(GPUserManageDetailKeyValue.NAME.toString());
     }
 
     @Override

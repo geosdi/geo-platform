@@ -37,10 +37,13 @@ package org.geosdi.geoplatform.gui.server;
 
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
+import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 
 /**
  *
@@ -50,24 +53,30 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 public interface IUserService {
 
     PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-            String searchText,
-            HttpServletRequest httpServletRequest);
+                                                     String searchText,
+                                                     HttpServletRequest httpServletRequest);
 
     Long insertUser(IGPUserManageDetail userDetail,
-            HttpServletRequest httpServletRequest)
+                    HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     Long updateUser(IGPUserManageDetail userDetail,
-            HttpServletRequest httpServletRequest)
+                    HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     Long updateOwnUser(IGPUserManageDetail userDetail,
-            String currentPlainPassword, String newPlainPassword,
-            HttpServletRequest httpServletRequest)
+                       String currentPlainPassword, String newPlainPassword,
+                       HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     boolean deleteUser(Long userID, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     IGPUserManageDetail getOwnUser(HttpServletRequest httpServletRequest);
+
+    ArrayList<String> getAllRoles(HttpServletRequest httpServletRequest);
+
+    HashMap<String, Boolean> getRolePermission(String role,
+                                               HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
 }

@@ -88,6 +88,17 @@ public enum GuiPermission {
         return null;
     }
 
+    public static GuiPermission fromBoolean(Boolean permission) {
+        if (permission != null) {
+            if (permission.booleanValue()) {
+                return WRITE;
+            } else {
+                return READ;
+            }
+        }
+        return NONE;
+    }
+
     @Override
     public String toString() {
         return permission;

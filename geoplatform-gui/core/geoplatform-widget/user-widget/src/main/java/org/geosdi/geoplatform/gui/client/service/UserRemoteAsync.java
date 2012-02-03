@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.gui.client.service;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
+import java.util.HashMap;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
@@ -50,7 +52,7 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 public interface UserRemoteAsync {
 
     void searchUsers(PagingLoadConfig config, String searchText,
-            AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback)
+                     AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback)
             throws GeoPlatformException;
 
     void insertUser(IGPUserManageDetail userDetail, AsyncCallback<Long> callback)
@@ -60,11 +62,18 @@ public interface UserRemoteAsync {
             throws GeoPlatformException;
 
     void updateOwnUser(IGPUserManageDetail userDetail,
-            String currentPlainPassword, String newPlainPassword,
-            AsyncCallback<Long> callback) throws GeoPlatformException;
+                       String currentPlainPassword, String newPlainPassword,
+                       AsyncCallback<Long> callback)
+            throws GeoPlatformException;
 
     void deleteUser(Long userID, AsyncCallback<Boolean> callback)
             throws GeoPlatformException;
 
     void getOwnUser(AsyncCallback<IGPUserManageDetail> callback);
+
+    void getAllRoles(AsyncCallback<ArrayList<String>> callback);
+
+    void getRolePermission(String role,
+                           AsyncCallback<HashMap<String, Boolean>> callback)
+            throws GeoPlatformException;
 }

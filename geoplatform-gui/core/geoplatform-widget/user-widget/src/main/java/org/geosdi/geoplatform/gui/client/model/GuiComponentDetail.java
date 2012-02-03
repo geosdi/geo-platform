@@ -46,14 +46,13 @@ public class GuiComponentDetail extends GeoPlatformBeanModel {
 
     private static final long serialVersionUID = -4382463793116702562L;
     //
-    private String componentId;
-    private AbstractImagePrototype image;
+    private String componentId; // For performance: used for equals() and hashCode() methods
+    private AbstractImagePrototype image; // For manual binding
 
     /**
      * @return the componentId
      */
     public String getComponentId() {
-        System.out.println("*** GET-id");
         return componentId;
     }
 
@@ -61,7 +60,6 @@ public class GuiComponentDetail extends GeoPlatformBeanModel {
      * @param componentId the componentId to set
      */
     public void setComponentId(String componentId) {
-        System.out.println("*** SET-id " + componentId);
         this.componentId = componentId;
         super.set(GuiComponentDetailKeyValue.COMPONENT_ID.toString(), this.componentId);
     }
@@ -70,7 +68,6 @@ public class GuiComponentDetail extends GeoPlatformBeanModel {
      * @return the image
      */
     public AbstractImagePrototype getImage() {
-        System.out.println("*** GET-image");
         return image;
     }
 
@@ -78,7 +75,6 @@ public class GuiComponentDetail extends GeoPlatformBeanModel {
      * @param image the image to set
      */
     public void setImage(AbstractImagePrototype image) {
-        System.out.println("*** SET-image " + image);
         this.image = image;
     }
 
@@ -86,7 +82,6 @@ public class GuiComponentDetail extends GeoPlatformBeanModel {
      * @return the description
      */
     public String getDescription() {
-        System.out.println("*** GET-description");
         return super.get(GuiComponentDetailKeyValue.DESCRIPTION.toString());
     }
 
@@ -94,7 +89,6 @@ public class GuiComponentDetail extends GeoPlatformBeanModel {
      * @param description the description to set
      */
     public void setDescription(String description) {
-        System.out.println("*** SET-description " + description);
         super.set(GuiComponentDetailKeyValue.DESCRIPTION.toString(), description);
     }
 
@@ -102,7 +96,6 @@ public class GuiComponentDetail extends GeoPlatformBeanModel {
      * @return the permission
      */
     public GuiPermission getPermission() {
-        System.out.println("*** GET-permission");
         return super.get(GuiComponentDetailKeyValue.PERMISSION.toString());
     }
 
@@ -110,7 +103,6 @@ public class GuiComponentDetail extends GeoPlatformBeanModel {
      * @param permission the permission to set
      */
     public void setPermission(GuiPermission permission) {
-        System.out.println("*** SET-permission " + permission);
         super.set(GuiComponentDetailKeyValue.PERMISSION.toString(), permission);
     }
 
@@ -156,11 +148,14 @@ public class GuiComponentDetail extends GeoPlatformBeanModel {
     public String toString() {
         StringBuilder str = new StringBuilder("GuiComponentDetail {");
         str.append("componentId=").append(componentId);
-//        str.append(", image=").append(image.getClass());
-//        String simpleName = image.getClass().toString();
-//        str.append(", image=").append(simpleName.substring(simpleName.lastIndexOf(".")+1));
-        str.append(", description=").append(this.getDescription());
         str.append(", permission=").append(this.getPermission());
+        if (image != null) {
+            String simpleName = image.getClass().toString();
+            str.append(", image=").append(simpleName.substring(simpleName.lastIndexOf(".") + 1));
+        } else {
+            str.append(", image=NULL");
+        }
+        str.append(", description=").append(this.getDescription());
         return str.append('}').toString();
     }
 }

@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +57,9 @@ import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.RoleDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
+import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,7 +84,7 @@ public class UserService implements IUserService {
 
     @Override
     public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-            String searchText, HttpServletRequest httpServletRequest) {
+                                                            String searchText, HttpServletRequest httpServletRequest) {
         GPUser user = this.getCheckLoggedUser(httpServletRequest);
 
         int start = config.getOffset();
@@ -93,7 +96,7 @@ public class UserService implements IUserService {
         int page = start == 0 ? start : start / config.getLimit();
 
         PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
-                config.getLimit(), page);
+                                                                config.getLimit(), page);
 
         List<UserDTO> userList = null;
         try {
@@ -113,7 +116,7 @@ public class UserService implements IUserService {
         }
 
         return new BasePagingLoadResult<GPUserManageDetail>(searchUsers,
-                config.getOffset(), usersCount.intValue());
+                                                            config.getOffset(), usersCount.intValue());
     }
 
     @Override
@@ -154,9 +157,9 @@ public class UserService implements IUserService {
 
     @Override
     public Long updateOwnUser(IGPUserManageDetail userDetail,
-            String currentPlainPassword,
-            String newPlainPassword,
-            HttpServletRequest httpServletRequest)
+                              String currentPlainPassword,
+                              String newPlainPassword,
+                              HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
 
         this.getCheckLoggedUser(httpServletRequest);
@@ -170,10 +173,10 @@ public class UserService implements IUserService {
             userDTO.setEmailAddress(userDetail.getEmail());
 
             userID = geoPlatformServiceClient.updateOwnUser(userDTO,
-                    currentPlainPassword, newPlainPassword);
+                                                            currentPlainPassword, newPlainPassword);
 
             sessionUtility.storeUserInSession(this.convertToGPUser(userDetail),
-                    httpServletRequest);
+                                              httpServletRequest);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
         } catch (ResourceNotFoundFault rnnf) {
@@ -273,6 +276,35 @@ public class UserService implements IUserService {
         user.setGPAuthorities(Arrays.asList(authority));
 
         return user;
+    }
+
+    @Override
+    public ArrayList<String> getAllRoles(HttpServletRequest httpServletRequest) {
+        List<RoleDTO> rolesDTO = geoPlatformServiceClient.getAllRoles();
+
+        ArrayList<String> roles = new ArrayList<String>(rolesDTO.size());
+        for (RoleDTO roleDTO : rolesDTO) {
+            roles.add(roleDTO.getRole());
+        }
+
+        return roles;
+    }
+
+    @Override
+    public HashMap<String, Boolean> getRolePermission(String role,
+                                                      HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+        HashMap<String, Boolean> mapPermission;
+
+        try {
+            GuiComponentsPermissionMapData rolePermission = geoPlatformServiceClient.getRoleGuiComponentPermission(role);
+            mapPermission = (HashMap<String, Boolean>) rolePermission.getPermissionMap();
+        } catch (ResourceNotFoundFault ex) {
+            logger.error(this.getClass().getSimpleName(), ex.getMessage());
+            throw new GeoPlatformException("Unable to find role: \"" + role + "\"");
+        }
+
+        return mapPermission;
     }
 
     /**

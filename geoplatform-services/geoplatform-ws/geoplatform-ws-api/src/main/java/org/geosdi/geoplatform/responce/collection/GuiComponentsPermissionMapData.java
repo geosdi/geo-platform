@@ -52,11 +52,11 @@ public class GuiComponentsPermissionMapData {
     }
 
     @XmlJavaTypeAdapter(AclMapAdapter.class)
-    public Map<String, Boolean> getGuiComponentsPermissionMap() {
+    public Map<String, Boolean> getPermissionMap() {
         return map;
     }
 
-    public void setGuiComponentsPermissionMap(Map<String, Boolean> map) {
+    public void setPermissionMap(Map<String, Boolean> map) {
         this.map = map;
     }
 }

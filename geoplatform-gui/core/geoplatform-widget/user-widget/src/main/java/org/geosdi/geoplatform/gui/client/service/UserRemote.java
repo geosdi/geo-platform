@@ -40,6 +40,8 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import java.util.ArrayList;
+import java.util.HashMap;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
@@ -67,7 +69,8 @@ public interface UserRemote extends RemoteService {
      * @return 
      */
     PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-            String searchText) throws GeoPlatformException;
+                                                     String searchText)
+            throws GeoPlatformException;
 
     /**
      * 
@@ -93,7 +96,7 @@ public interface UserRemote extends RemoteService {
      * @throws GeoPlatformException 
      */
     Long updateOwnUser(IGPUserManageDetail userDetail,
-            String currentPlainPassword, String newPlainPassword)
+                       String currentPlainPassword, String newPlainPassword)
             throws GeoPlatformException;
 
     /**
@@ -109,4 +112,19 @@ public interface UserRemote extends RemoteService {
      * @return 
      */
     IGPUserManageDetail getOwnUser();
+
+    /**
+     * 
+     * @return List of roles
+     */
+    ArrayList<String> getAllRoles();
+
+    /**
+     * 
+     * @param role
+     * @return
+     * @throws GeoPlatformException 
+     */
+    HashMap<String, Boolean> getRolePermission(String role)
+            throws GeoPlatformException;
 }

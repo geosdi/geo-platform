@@ -79,12 +79,12 @@ public class SecurityService implements ISecurityService {
                                    HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPUser user = null;
-        GuiComponentsPermissionMapData guiComponemtPermission = null;
+        GuiComponentsPermissionMapData guiComponentPermission = null;
         try {
             user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(
                     userName, password);
 
-            guiComponemtPermission = geoPlatformServiceClient.getAccountGuiComponentPermission(
+            guiComponentPermission = geoPlatformServiceClient.getAccountGuiComponentPermission(
                     user.getId());
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",
@@ -116,8 +116,7 @@ public class SecurityService implements ISecurityService {
 
         IGPUserDetail userDetail = this.userConverter.convertUserToDTO(user);
 
-        userDetail.setComponentPermission(
-                guiComponemtPermission.getGuiComponentsPermissionMap());
+        userDetail.setComponentPermission(guiComponentPermission.getPermissionMap());
 
         return userDetail;
     }

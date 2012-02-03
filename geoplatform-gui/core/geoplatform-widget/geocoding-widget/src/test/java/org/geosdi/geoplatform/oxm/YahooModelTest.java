@@ -68,7 +68,7 @@ public class YahooModelTest {
     public void testGeocoding() {
         try {
             String sourceFileUrl = new File(".").getCanonicalPath() + File.separator
-                    + "src/test/resources/yahooReverseGeocodeExample.xml";
+                    + "src/test/resources/yahooGeocodeExample.xml";
 
             File source = new File(sourceFileUrl);
             if (!source.canRead()) {

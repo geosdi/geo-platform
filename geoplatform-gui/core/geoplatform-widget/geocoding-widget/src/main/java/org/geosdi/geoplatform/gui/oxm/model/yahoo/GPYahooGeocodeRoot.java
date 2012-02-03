@@ -50,8 +50,8 @@ import javax.xml.bind.annotation.XmlType;
  * @email michele.santomauro@geosdi.org
  */
 @XmlRootElement(name = "ResultSet")
-@XmlType(name = "ResultSet", propOrder = {"error", "errorMessage", 
-		                                  "locale", "quality", "found", "resultList"})
+@XmlType(name = "ResultSet", propOrder = {"error", "errorMessage",
+    "locale", "quality", "found", "resultList"})
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GPYahooGeocodeRoot {
 
@@ -72,87 +72,98 @@ public class GPYahooGeocodeRoot {
     //
     @XmlElement(name = "Result", required = true)
     private List<GPYahooResult> resultList = new ArrayList<GPYahooResult>();
-	/**
-	 * @return the error
-	 */
-	public String getError() {
-		return error;
-	}
-	/**
-	 * @param error the error to set
-	 */
-	public void setError(String error) {
-		this.error = error;
-	}
-	/**
-	 * @return the errorMessage
-	 */
-	public String getErrorMessage() {
-		return errorMessage;
-	}
-	/**
-	 * @param errorMessage the errorMessage to set
-	 */
-	public void setErrorMessage(String errorMessage) {
-		this.errorMessage = errorMessage;
-	}
-	/**
-	 * @return the locale
-	 */
-	public String getLocale() {
-		return locale;
-	}
-	/**
-	 * @param locale the locale to set
-	 */
-	public void setLocale(String locale) {
-		this.locale = locale;
-	}
-	/**
-	 * @return the quality
-	 */
-	public String getQuality() {
-		return quality;
-	}
-	/**
-	 * @param quality the quality to set
-	 */
-	public void setQuality(String quality) {
-		this.quality = quality;
-	}
-	/**
-	 * @return the found
-	 */
-	public String getFound() {
-		return found;
-	}
-	/**
-	 * @param found the found to set
-	 */
-	public void setFound(String found) {
-		this.found = found;
-	}
-	/**
-	 * @return the resultList
-	 */
-	public List<GPYahooResult> getResultList() {
-		return resultList;
-	}
-	/**
-	 * @param resultList the resultList to set
-	 */
-	public void setResultList(List<GPYahooResult> resultList) {
-		this.resultList = resultList;
-	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "GPYahooResultSet [error=" + error + ", errorMessage="
-				+ errorMessage + ", locale=" + locale + ", quality=" + quality
-				+ ", found=" + found + ", resultList=" + resultList + "]";
-	}
 
+    /**
+     * @return the error
+     */
+    public String getError() {
+        return error;
+    }
+
+    /**
+     * @param error the error to set
+     */
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    /**
+     * @return the errorMessage
+     */
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    /**
+     * @param errorMessage the errorMessage to set
+     */
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    /**
+     * @return the locale
+     */
+    public String getLocale() {
+        return locale;
+    }
+
+    /**
+     * @param locale the locale to set
+     */
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
+
+    /**
+     * @return the quality
+     */
+    public String getQuality() {
+        return quality;
+    }
+
+    /**
+     * @param quality the quality to set
+     */
+    public void setQuality(String quality) {
+        this.quality = quality;
+    }
+
+    /**
+     * @return the found
+     */
+    public String getFound() {
+        return found;
+    }
+
+    /**
+     * @param found the found to set
+     */
+    public void setFound(String found) {
+        this.found = found;
+    }
+
+    /**
+     * @return the resultList
+     */
+    public List<GPYahooResult> getResultList() {
+        return resultList;
+    }
+
+    /**
+     * @param resultList the resultList to set
+     */
+    public void setResultList(List<GPYahooResult> resultList) {
+        this.resultList = resultList;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "GPYahooResultSet [error=" + error + ", errorMessage="
+                + errorMessage + ", locale=" + locale + ", quality=" + quality
+                + ", found=" + found + ", resultList=" + resultList + "]";
+    }
 }

@@ -39,7 +39,6 @@ import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
@@ -63,7 +62,6 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.GuiComponentDetail;
 import org.geosdi.geoplatform.gui.client.model.GuiComponentDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.model.GuiPermission;
-import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
 import org.geosdi.geoplatform.gui.client.widget.grid.renderer.GPGridCellRenderer;
 
 /**
@@ -73,8 +71,8 @@ import org.geosdi.geoplatform.gui.client.widget.grid.renderer.GPGridCellRenderer
 public class ManageRolesWidget extends GeoPlatformWindow {
 
     private ListStore<GuiComponentDetail> store = new ListStore<GuiComponentDetail>();
+    private EditorGrid<GuiComponentDetail> grid;
     private SimpleComboBox<GuiPermission> permissionComboBox;
-    private PermissionComboBinding permissionComboBinding;
 
     public ManageRolesWidget() {
         super(true);
@@ -90,7 +88,6 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         super.setHeading("Manage Roles");
         super.setResizable(false);
         super.setLayout(new FlowLayout(5));
-//        super.setLayout(new BorderLayout());
         super.setModal(true);
         super.setCollapsible(false);
         super.setPlain(true);
@@ -101,15 +98,13 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         ContentPanel mainPanel = this.createMainPanel();
         mainPanel.setTopComponent(this.createToolbar());
 
-        final EditorGrid<GuiComponentDetail> grid =
-                new EditorGrid<GuiComponentDetail>(store, this.prepareColumnModel());
+        grid = new EditorGrid<GuiComponentDetail>(store, this.prepareColumnModel());
         grid.setBorders(true);
+        grid.setStripeRows(true);
         grid.setAutoExpandColumn(GuiComponentDetailKeyValue.COMPONENT_ID.toString());
-        grid.getSelectionModel().setSelectionMode(Style.SelectionMode.SINGLE);
         mainPanel.add(grid);
 
         this.addButtons();
-        this.addFieldsBinding();
     }
 
     private ContentPanel createMainPanel() {
@@ -135,19 +130,24 @@ public class ManageRolesWidget extends GeoPlatformWindow {
             @Override
             public void componentSelected(ButtonEvent ce) {
 //                for (String id : GuiComponentIDs.LIST_ALL) { //
-                String id = GuiComponentIDs.MANAGE_USERS; //
-                System.out.println("*** " + id);
-                MenuBaseAction action = (MenuBaseAction) MenuActionRegistar.get(id); //
+                for (String id : new String[]{GuiComponentIDs.MANAGE_USERS,
+                            GuiComponentIDs.MANAGE_ROLES}) { //
+                    System.out.println("*** ID " + id);
+                    MenuBaseAction action = (MenuBaseAction) MenuActionRegistar.get(id); //
 
-                GuiComponentDetail gc = new GuiComponentDetail();
-                gc.setComponentId(action.getId());
-                gc.setImage(action.getImage());
-                gc.setDescription(action.getTitle()); // TODO Manage description
-                gc.setPermission(GuiPermission.WRITE);
+                    GuiComponentDetail gc = new GuiComponentDetail();
+                    gc.setComponentId(action.getId());
+                    gc.setImage(action.getImage());
+                    gc.setDescription(action.getTitle()); // TODO Manage description
+                    gc.setPermission(GuiPermission.WRITE);
 
-//                store.insert(gc, 0);
-                store.add(gc);
-//                }
+                    grid.stopEditing();
+
+//                    store.add(gc);
+                    store.insert(gc, 0);
+
+                    grid.startEditing(store.indexOf(gc), 0);
+                }
 
                 ce.getButton().disable();
             }
@@ -222,74 +222,40 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         idColumn.setFixed(true);
         configs.add(idColumn);
 
-        permissionComboBox = new SimpleComboBox<GuiPermission>() {
-
-            @Override
-            protected void onSelect(SimpleComboValue<GuiPermission> model, int index) {
-                super.onSelect(model, index);
-                permissionComboBinding.updateModel();
-            }
-        };
-        permissionComboBox.setId(GuiComponentDetailKeyValue.PERMISSION.toString());
-        permissionComboBox.setToolTip("Permission of the role");
-        permissionComboBox.setEditable(false);
-        permissionComboBox.setTypeAhead(true);
+        permissionComboBox = new SimpleComboBox<GuiPermission>();
+//        permissionComboBox.setToolTip("Permission of the role");
+//        permissionComboBox.setEditable(false);
+//        permissionComboBox.setTypeAhead(true);
         permissionComboBox.setForceSelection(true);
         permissionComboBox.setTriggerAction(ComboBox.TriggerAction.ALL);
         permissionComboBox.add(GuiPermission.getAllPermissions());
 
-        CellEditor comboEditor = new CellEditor(permissionComboBox);
+        CellEditor comboEditor = new CellEditor(permissionComboBox) {
+
+            @Override
+            public Object preProcessValue(Object value) {
+                if (value == null) {
+                    return value;
+                }
+                return permissionComboBox.findModel((GuiPermission) value);
+            }
+
+            @Override
+            public Object postProcessValue(Object value) {
+                if (value == null) {
+                    return value;
+                }
+                return ((SimpleComboValue<GuiPermission>) value).getValue();
+            }
+        };
 
         ColumnConfig permissionColumn = new ColumnConfig();
-//        permissionColumn.setId(GuiComponentDetailKeyValue.PERMISSION.toString());        
-        permissionColumn.setId("permissionColumn"); // TODO
+        permissionColumn.setId(GuiComponentDetailKeyValue.PERMISSION.toString());
         permissionColumn.setHeader("Permission");
         permissionColumn.setWidth(150);
         permissionColumn.setEditor(comboEditor);
         configs.add(permissionColumn);
 
         return new ColumnModel(configs);
-    }
-
-    public void addFieldsBinding() {
-        this.permissionComboBinding = new PermissionComboBinding(this.permissionComboBox,
-                                                                 GuiComponentDetailKeyValue.PERMISSION.toString());
-    }
-
-    private class PermissionComboBinding extends GPFieldBinding {
-
-        public PermissionComboBinding(SimpleComboBox field, String property) {
-            super(field, property);
-        }
-
-        @Override
-        public void updateField(boolean updateOriginalValue) {
-            GuiComponentDetail gc = ((GuiComponentDetail) model);
-            System.out.println("####### " + gc);
-            if (gc.getPermission() != null) {
-                permissionComboBox.setValue(permissionComboBox.findModel(gc.getPermission()));
-            }
-        }
-
-        @Override
-        public void setModelProperty(Object val) {
-            if (val != null && val instanceof SimpleComboValue) {
-                SimpleComboValue<GuiPermission> permissionString = (SimpleComboValue) val;
-                GuiComponentDetail gc = ((GuiComponentDetail) model); // TODO Why gc is null?!?
-                System.out.println("+++ " + gc);
-                System.out.println("+_+ " + permissionString.getValue()
-                        + " - " + permissionString.getValue().getClass());
-//                if (!permissionString.getValue().equals(gc.getPermission())) {
-                if (permissionString.getValue() != gc.getPermission()) {
-                    gc.setPermission(permissionString.getValue());
-                }
-            }
-        }
-
-        @Override
-        public void setRecordProperty(Record r, Object val) {
-            System.out.println("record... " + val);
-            r.set(property, ((SimpleComboValue<GuiPermission>) val).getValue());
-        }
     }
 }

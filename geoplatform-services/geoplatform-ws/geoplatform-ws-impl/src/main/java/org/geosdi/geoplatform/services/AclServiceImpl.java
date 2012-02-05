@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.services;
 
 import java.util.List;
+import java.util.Map;
+import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -162,7 +164,7 @@ class AclServiceImpl {
             String nameAuthority = authority.getAuthority();
             logger.trace("\n*** nameAuthority: {} ***", nameAuthority);
 
-            this.elaborateGuiComponentACEs(nameAuthority, mapComponentPermission);
+            this.elaborateGuiComponentACEs(nameAuthority, mapComponentPermission.getPermissionMap());
         }
         return mapComponentPermission;
     }
@@ -174,13 +176,13 @@ class AclServiceImpl {
             throws ResourceNotFoundFault {
         GuiComponentsPermissionMapData mapComponentPermission = new GuiComponentsPermissionMapData();
 
-        this.elaborateGuiComponentACEs(role, mapComponentPermission);
+        this.elaborateGuiComponentACEs(role, mapComponentPermission.getPermissionMap());
 
         return mapComponentPermission;
     }
 
     private void elaborateGuiComponentACEs(String sidName,
-                                           GuiComponentsPermissionMapData mapComponentPermission)
+                                           Map<String, Boolean> permissionMap)
             throws ResourceNotFoundFault {
         // Retrieve the Sid corresponding to the Role (Authority) name
         AclSid sid = sidDao.findBySid(sidName, false);
@@ -204,8 +206,14 @@ class AclServiceImpl {
                 logger.debug("\n*** ComponentId: {} ***\n*** Granting: {} ***",
                              gc.getComponentId(), entry.isGranting());
 
-                mapComponentPermission.getPermissionMap().put(gc.getComponentId(),
-                                                                           entry.isGranting());
+                permissionMap.put(gc.getComponentId(), entry.isGranting());
+            }
+        }
+
+        for (String componentID : GuiComponentIDs.LIST_ALL) {
+            if (!permissionMap.containsKey(componentID)) {
+                logger.debug("\n*** NONE added: {} ***", componentID);
+                permissionMap.put(componentID, null);
             }
         }
     }

@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Record;
+import com.extjs.gxt.ui.client.util.IconHelper;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.SplitButton;
@@ -52,6 +53,7 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
@@ -88,6 +90,9 @@ public class ManageRolesWidget extends GeoPlatformWindow {
     private ListStore<GuiComponentDetail> store = new ListStore<GuiComponentDetail>();
     private EditorGrid<GuiComponentDetail> grid;
     private SimpleComboBox<GuiPermission> permissionComboBox;
+    //
+//    private AbstractImagePrototype defaultImage = IconHelper.createPath("geoportal/gp-images/error.png");
+    private AbstractImagePrototype defaultImage = IconHelper.createPath(""); // Empty icon
 
     public ManageRolesWidget() {
         super(true);
@@ -207,6 +212,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
         ColumnConfig iconColumn = new ColumnConfig();
+        iconColumn.setId("icon");
         iconColumn.setHeader("Icon");
         iconColumn.setWidth(35);
         iconColumn.setFixed(true);
@@ -254,11 +260,32 @@ public class ManageRolesWidget extends GeoPlatformWindow {
                 return ((SimpleComboValue<GuiPermission>) value).getValue();
             }
         };
+        GridCellRenderer<GuiComponentDetail> rendererPermission = new GridCellRenderer<GuiComponentDetail>() {
+
+            @Override
+            public Object render(GuiComponentDetail model, String property,
+                                 ColumnData config, int rowIndex, int colIndex,
+                                 ListStore<GuiComponentDetail> store,
+                                 Grid<GuiComponentDetail> grid) {
+                GuiPermission permission = model.getPermission();
+                String style;
+                if (permission == GuiPermission.WRITE) {
+                    style = "green";
+                } else if (permission == GuiPermission.READ) {
+                    style = "gold";
+                } else {
+                    style = "red";
+                }
+                return "<span style='color:" + style + "'>" + permission + "</span>";
+            }
+        };
         ColumnConfig permissionColumn = new ColumnConfig();
         permissionColumn.setId(GuiComponentDetailKeyValue.PERMISSION.toString());
         permissionColumn.setHeader("Permission");
         permissionColumn.setWidth(150);
+        permissionColumn.setFixed(true);
         permissionColumn.setEditor(comboEditor);
+        permissionColumn.setRenderer(rendererPermission);
         configs.add(permissionColumn);
 
         return new ColumnModel(configs);
@@ -285,7 +312,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
                 }
                 mask("Retrieve permission of \"" + role + "\" role");
                 mainPanel.setHeading("Permissions of \"" + role + "\" role");
-                
+
                 UserRemoteImpl.Util.getInstance().getRolePermission(role,
                                                                     new AsyncCallback<HashMap<String, Boolean>>() {
 
@@ -321,11 +348,14 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 //                                action = ToolbarActionRegistar.get(entry.getKey(), null)
                             }
                             if (gc.getImage() == null) {
-                                gc.setImage(BasicWidgetResources.ICONS.role()); // TODO Manage icon
+                                gc.setImage(defaultImage);
                             }
 
                             store.add(gc);
                         }
+
+                        store.sort(GuiComponentDetailKeyValue.COMPONENT_ID.toString(),
+                                   Style.SortDir.ASC);
                     }
                 });
             }

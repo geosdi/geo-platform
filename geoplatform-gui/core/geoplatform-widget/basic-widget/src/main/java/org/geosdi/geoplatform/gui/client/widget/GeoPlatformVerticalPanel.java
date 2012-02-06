@@ -35,17 +35,17 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.VerticalPanel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public abstract class GeoPlatformContentPanel extends ContentPanel {
+public abstract class GeoPlatformVerticalPanel extends VerticalPanel {
 
     private boolean initialized;
 
-    public GeoPlatformContentPanel(boolean lazy) {
+    public GeoPlatformVerticalPanel(boolean lazy) {
         if (!lazy) {
             this.init();
         }
@@ -62,9 +62,8 @@ public abstract class GeoPlatformContentPanel extends ContentPanel {
         }
     }
 
-    private void finalizeInitOperations() {
+    public void finalizeInitOperations() {
         this.addComponent();
-        this.postConstruct();
     }
 
     private void initializeContentPanel() {
@@ -87,13 +86,6 @@ public abstract class GeoPlatformContentPanel extends ContentPanel {
         super.beforeRender();
     }
 
-    protected void simplifyPanel() {
-        super.setHeaderVisible(false);
-        super.setBodyBorder(false);
-        super.setCollapsible(false);
-        super.setBorders(false);
-    }
-
     /**
      * 
      * @return 
@@ -101,11 +93,5 @@ public abstract class GeoPlatformContentPanel extends ContentPanel {
      */
     public boolean isInitialized() {
         return initialized;
-    }
-
-    /**
-     * Usefull method to override in subclasses to execute operation at the construction end
-     */
-    public void postConstruct() {
     }
 }

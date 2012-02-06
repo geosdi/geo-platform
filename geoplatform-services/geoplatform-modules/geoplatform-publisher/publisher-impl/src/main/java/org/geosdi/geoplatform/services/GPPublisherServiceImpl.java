@@ -163,7 +163,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
 //        }
 //        return false;
 //    }
-        return restPublisher.publishStyle(styleToPublish, styleName);
+        return restPublisher.updateStyle(styleToPublish, styleName);
     }
 
     @Override

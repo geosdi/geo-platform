@@ -36,15 +36,19 @@
 package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.Style.ButtonArrowAlign;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Record;
+import com.extjs.gxt.ui.client.store.StoreEvent;
+import com.extjs.gxt.ui.client.store.StoreListener;
 import com.extjs.gxt.ui.client.util.IconHelper;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.SplitButton;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
 import com.extjs.gxt.ui.client.widget.grid.CellEditor;
@@ -85,9 +89,12 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
     private ContentPanel mainPanel;
     private Menu rolesMenu;
+    private Button resetButton;
+    private Button saveButton;
     private List<String> roles;
+    private String role;
     //
-    private ListStore<GuiComponentDetail> store = new ListStore<GuiComponentDetail>();
+    private ListStore<GuiComponentDetail> store;
     private EditorGrid<GuiComponentDetail> grid;
     private SimpleComboBox<GuiPermission> permissionComboBox;
     //
@@ -120,19 +127,13 @@ public class ManageRolesWidget extends GeoPlatformWindow {
     @Override
     public void addComponent() {
         this.createMainPanel();
-        mainPanel.setTopComponent(this.createToolbar());
-
-        grid = new EditorGrid<GuiComponentDetail>(store, this.prepareColumnModel());
-        grid.setBorders(true);
-        grid.setStripeRows(true);
-        grid.setAutoExpandColumn(GuiComponentDetailKeyValue.COMPONENT_ID.toString());
-        grid.mask("Select a role...");
-        mainPanel.add(grid);
-
-        this.addButtons();
+        this.createToolbar();
+        this.createStore();
+        this.createEditorGrid();
+        this.createButtons();
     }
 
-    private ContentPanel createMainPanel() {
+    private void createMainPanel() {
         mainPanel = new ContentPanel();
         mainPanel.setHeading("Role permissions");
         mainPanel.setIcon(BasicWidgetResources.ICONS.role());
@@ -141,14 +142,13 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         mainPanel.setLayout(new FitLayout());
 
         super.add(mainPanel);
-
-        return mainPanel;
     }
 
-    private ToolBar createToolbar() {
+    private void createToolbar() {
         ToolBar toolbar = new ToolBar();
 
         SplitButton rolesButton = new SplitButton("Roles");
+        rolesButton.setArrowAlign(ButtonArrowAlign.BOTTOM);
         rolesButton.setMenu(this.createRolesMenu());
         toolbar.add(rolesButton);
 
@@ -161,41 +161,65 @@ public class ManageRolesWidget extends GeoPlatformWindow {
                 // TODO
             }
         });
-        newRoleButton.disable();
+        newRoleButton.disable(); //
         toolbar.add(newRoleButton);
 
-        return toolbar;
+        mainPanel.setTopComponent(toolbar);
     }
 
-    private void addButtons() {
-        super.setButtonAlign(Style.HorizontalAlignment.RIGHT);
-
-        Button reset = new Button("Reset", BasicWidgetResources.ICONS.delete(),
-                                  new SelectionListener<ButtonEvent>() {
+    private void createStore() {
+        store = new ListStore<GuiComponentDetail>();
+        store.addStoreListener(new StoreListener<GuiComponentDetail>() {
 
             @Override
-            public void componentSelected(ButtonEvent ce) {
-                grid.stopEditing(true);
-                store.rejectChanges();
+            public void storeClear(StoreEvent<GuiComponentDetail> se) {
+                disableButtons();
+            }
+
+            @Override
+            public void storeUpdate(StoreEvent<GuiComponentDetail> se) {
+                resetButton.enable();
+                saveButton.enable();
             }
         });
-        super.addButton(reset);
+    }
 
-        Button save = new Button("Save", BasicWidgetResources.ICONS.done(),
+    private void createEditorGrid() {
+        grid = new EditorGrid<GuiComponentDetail>(store, this.prepareColumnModel());
+        grid.setBorders(true);
+        grid.setStripeRows(true);
+        grid.setAutoExpandColumn(GuiComponentDetailKeyValue.COMPONENT_ID.toString());
+        grid.mask("Select a role...");
+
+        mainPanel.add(grid);
+    }
+
+    private void createButtons() {
+        super.setButtonAlign(Style.HorizontalAlignment.RIGHT);
+
+        resetButton = new Button("Reset", BasicWidgetResources.ICONS.delete(),
                                  new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
                 grid.stopEditing(true);
-                List<Record> modifiedElements = store.getModifiedRecords();
-                if (!modifiedElements.isEmpty()) {
-                    // TODO
-                    store.commitChanges();
-                }
+                store.rejectChanges();
+                disableButtons();
             }
         });
-        save.disable(); //
-        super.addButton(save);
+        super.addButton(resetButton);
+
+        saveButton = new Button("Save", BasicWidgetResources.ICONS.done(),
+                                new SelectionListener<ButtonEvent>() {
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                save();
+            }
+        });
+        super.addButton(saveButton);
+
+        this.disableButtons();
 
         Button close = new Button("Close", BasicWidgetResources.ICONS.cancel(),
                                   new SelectionListener<ButtonEvent>() {
@@ -241,6 +265,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
         permissionComboBox = new SimpleComboBox<GuiPermission>();
         permissionComboBox.setEditable(false);
+        permissionComboBox.setTriggerAction(ComboBox.TriggerAction.ALL);
         permissionComboBox.add(GuiPermission.getAllPermissions());
         CellEditor comboEditor = new CellEditor(permissionComboBox) {
 
@@ -299,14 +324,14 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         return this.rolesMenu;
     }
 
-    private void addRoleMenuItem(String role) {
-        MenuItem item = new MenuItem(role);
-        item.setId(role);
+    private void addRoleMenuItem(String roleItem) {
+        MenuItem item = new MenuItem(roleItem);
+        item.setId(roleItem);
         item.addSelectionListener(new SelectionListener() {
 
             @Override
             public void componentSelected(ComponentEvent ce) {
-                String role = ce.getTarget().getId();
+                role = ce.getTarget().getId();
                 if (grid.isMasked()) {
                     grid.unmask();
                 }
@@ -323,13 +348,12 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
                     @Override
                     public void onSuccess(HashMap<String, Boolean> result) {
-                        grid.stopEditing();
+                        grid.stopEditing(true);
                         store.removeAll();
                         unmask();
-                        GuiComponentDetail gc;
-                        for (Entry<String, Boolean> entry : result.entrySet()) {
 
-                            gc = new GuiComponentDetail();
+                        for (Entry<String, Boolean> entry : result.entrySet()) {
+                            GuiComponentDetail gc = new GuiComponentDetail();
                             gc.setComponentId(entry.getKey());
                             gc.setPermission(GuiPermission.fromBoolean(entry.getValue()));
 
@@ -363,6 +387,48 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         this.rolesMenu.add(item);
     }
 
+    private void save() {
+        grid.stopEditing(true);
+        List<Record> modifiedElements = store.getModifiedRecords();
+//        if (!modifiedElements.isEmpty()) {
+        HashMap<String, Boolean> permissionMap = new HashMap<String, Boolean>(modifiedElements.size());
+
+        for (Record record : modifiedElements) {
+            String componentId = record.get(GuiComponentDetailKeyValue.COMPONENT_ID.toString()).toString();
+            GuiPermission permission = (GuiPermission) record.get(GuiComponentDetailKeyValue.PERMISSION.toString());
+            System.out.println("### MOD " + componentId + "to " + permission);
+            if (permission == GuiPermission.WRITE) {
+                permissionMap.put(componentId, true);
+            } else if (permission == GuiPermission.READ) {
+                permissionMap.put(componentId, false);
+            } else {
+                permissionMap.put(componentId, null);
+            }
+        }
+
+        mask("Saving Permission for \"" + role + "\" role");
+        this.updatePermission(permissionMap);
+//        }
+    }
+
+    private void updatePermission(HashMap<String, Boolean> permissionMap) {
+        UserRemoteImpl.Util.getInstance().updateRolePermission(role, permissionMap,
+                                                               new AsyncCallback<Boolean>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                GeoPlatformMessage.errorMessage("Error", caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(Boolean result) {
+                store.commitChanges();
+                disableButtons();
+                unmask();
+            }
+        });
+    }
+
     @Override
     public void hide() {
         if (store.getModifiedRecords().isEmpty()) {
@@ -371,5 +437,10 @@ public class ManageRolesWidget extends GeoPlatformWindow {
             GeoPlatformMessage.alertMessage("Warning",
                                             "There are unsaved permission, save or reset before exit");
         }
+    }
+
+    private void disableButtons() {
+        resetButton.disable();
+        saveButton.disable();
     }
 }

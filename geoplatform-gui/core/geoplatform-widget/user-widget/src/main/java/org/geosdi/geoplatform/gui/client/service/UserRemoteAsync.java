@@ -76,4 +76,8 @@ public interface UserRemoteAsync {
     void getRolePermission(String role,
                            AsyncCallback<HashMap<String, Boolean>> callback)
             throws GeoPlatformException;
+
+    void updateRolePermission(String role, HashMap<String, Boolean> permissionMap,
+                              AsyncCallback<Boolean> callback)
+            throws GeoPlatformException;
 }

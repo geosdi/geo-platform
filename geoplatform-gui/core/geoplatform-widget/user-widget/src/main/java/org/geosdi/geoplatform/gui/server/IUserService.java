@@ -79,4 +79,8 @@ public interface IUserService {
     HashMap<String, Boolean> getRolePermission(String role,
                                                HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
+
+    boolean updateRolePermission(String role, HashMap<String, Boolean> permissionMap,
+                                 HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
 }

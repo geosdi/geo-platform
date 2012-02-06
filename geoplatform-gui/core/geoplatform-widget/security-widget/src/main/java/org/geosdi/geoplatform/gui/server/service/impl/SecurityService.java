@@ -84,7 +84,7 @@ public class SecurityService implements ISecurityService {
             user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(
                     userName, password);
 
-            guiComponentPermission = geoPlatformServiceClient.getAccountGuiComponentPermission(
+            guiComponentPermission = geoPlatformServiceClient.getAccountPermission(
                     user.getId());
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService",

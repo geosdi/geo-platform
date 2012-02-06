@@ -294,17 +294,32 @@ public class UserService implements IUserService {
     public HashMap<String, Boolean> getRolePermission(String role,
                                                       HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        HashMap<String, Boolean> mapPermission;
+        HashMap<String, Boolean> permissionMap;
 
         try {
-            GuiComponentsPermissionMapData rolePermission = geoPlatformServiceClient.getRoleGuiComponentPermission(role);
-            mapPermission = (HashMap<String, Boolean>) rolePermission.getPermissionMap();
+            GuiComponentsPermissionMapData rolePermission = geoPlatformServiceClient.getRolePermission(role);
+            permissionMap = (HashMap<String, Boolean>) rolePermission.getPermissionMap();
         } catch (ResourceNotFoundFault ex) {
             logger.error(this.getClass().getSimpleName(), ex.getMessage());
-            throw new GeoPlatformException("Unable to find role: \"" + role + "\"");
+            throw new GeoPlatformException("Unable to find \"" + role + "\" role");
         }
 
-        return mapPermission;
+        return permissionMap;
+    }
+
+    @Override
+    public boolean updateRolePermission(String role,
+                                        HashMap<String, Boolean> permissionMap,
+                                        HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+        GuiComponentsPermissionMapData rolePermission = new GuiComponentsPermissionMapData();
+        rolePermission.setPermissionMap(permissionMap);
+        try {
+            return geoPlatformServiceClient.updateRolePermission(role, rolePermission);
+        } catch (ResourceNotFoundFault ex) {
+            logger.error(this.getClass().getSimpleName(), ex.getMessage());
+            throw new GeoPlatformException("Unable to find \"" + role + "\" role");
+        }
     }
 
     /**

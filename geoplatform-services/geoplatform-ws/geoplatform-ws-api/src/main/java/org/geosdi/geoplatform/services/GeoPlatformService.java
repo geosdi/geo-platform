@@ -725,9 +725,9 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if the account is not found
      */
     @Get
-    @HttpResource(location = "/account/{accountID}")
+    @HttpResource(location = "/permissions/account/{accountID}")
     @WebResult(name = "GuiComponentsPermissionMapData")
-    GuiComponentsPermissionMapData getAccountGuiComponentPermission(
+    GuiComponentsPermissionMapData getAccountPermission(
             @WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault;
 
@@ -742,10 +742,26 @@ public interface GeoPlatformService {
      * @throws ResourceNotFoundFault if the role (authority) is not found
      */
     @Get
-    @HttpResource(location = "/account/{role}")
+    @HttpResource(location = "/permissions/{role}")
     @WebResult(name = "GuiComponentsPermissionMapData")
-    GuiComponentsPermissionMapData getRoleGuiComponentPermission(
+    GuiComponentsPermissionMapData getRolePermission(
             @WebParam(name = "role") String role)
+            throws ResourceNotFoundFault;
+
+    /**
+     * Update the permission of a role (authority).
+     * 
+     * @param role role (authority) name
+     * @param mapComponentPermission map of GuiComponents permissions to update
+     * 
+     * @return if the update was successful 
+     * @throws ResourceNotFoundFault if the role (authority) is not found
+     */
+    @Post
+    @HttpResource(location = "/permissions/{role}")
+    boolean updateRolePermission(
+            @WebParam(name = "role") String role,
+            @WebParam(name = "permissionMapData") GuiComponentsPermissionMapData mapComponentPermission)
             throws ResourceNotFoundFault;
     //</editor-fold>
 }

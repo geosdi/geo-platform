@@ -127,4 +127,14 @@ public interface UserRemote extends RemoteService {
      */
     HashMap<String, Boolean> getRolePermission(String role)
             throws GeoPlatformException;
+
+    /**
+     * 
+     * @param role
+     * @param permissionMap
+     * @return
+     * @throws GeoPlatformException 
+     */
+    boolean updateRolePermission(String role, HashMap<String, Boolean> permissionMap)
+            throws GeoPlatformException;
 }

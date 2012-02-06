@@ -106,4 +106,10 @@ public class UserRemoteImpl extends GPAutoInjectingRemoteServiceServlet
             throws GeoPlatformException {
         return userService.getRolePermission(role, super.getThreadLocalRequest());
     }
+
+    @Override
+    public boolean updateRolePermission(String role, HashMap<String, Boolean> permissionMap)
+            throws GeoPlatformException {
+        return userService.updateRolePermission(role, permissionMap, super.getThreadLocalRequest());
+    }
 }

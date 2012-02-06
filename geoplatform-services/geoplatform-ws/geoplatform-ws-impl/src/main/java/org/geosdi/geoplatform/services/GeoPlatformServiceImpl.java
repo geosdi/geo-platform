@@ -826,15 +826,22 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public GuiComponentsPermissionMapData getAccountGuiComponentPermission(Long accountID)
+    public GuiComponentsPermissionMapData getAccountPermission(Long accountID)
             throws ResourceNotFoundFault {
-        return this.aclServiceDelegate.getAccountGuiComponentPermission(accountID);
+        return this.aclServiceDelegate.getAccountPermission(accountID);
     }
 
     @Override
-    public GuiComponentsPermissionMapData getRoleGuiComponentPermission(String role)
+    public GuiComponentsPermissionMapData getRolePermission(String role)
             throws ResourceNotFoundFault {
-        return this.aclServiceDelegate.getRoleGuiComponentPermission(role);
+        return this.aclServiceDelegate.getRolePermission(role);
+    }
+
+    @Override
+    public boolean updateRolePermission(String role,
+                                        GuiComponentsPermissionMapData mapComponentPermission)
+            throws ResourceNotFoundFault {
+        return this.aclServiceDelegate.updateRolePermission(role, mapComponentPermission);
     }
     //</editor-fold>
 }

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.services;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -144,9 +145,9 @@ class AclServiceImpl {
     }
 
     /**
-     * @see org.geosdi.geoplatform.services.GeoPlatformService#getAccountGuiComponentPermission(java.lang.Long)
+     * @see org.geosdi.geoplatform.services.GeoPlatformService#getAccountPermission(java.lang.Long)
      */
-    public GuiComponentsPermissionMapData getAccountGuiComponentPermission(Long accountID)
+    public GuiComponentsPermissionMapData getAccountPermission(Long accountID)
             throws ResourceNotFoundFault {
         // Retrieve the account
         GPAccount account = accountDao.find(accountID);
@@ -170,9 +171,9 @@ class AclServiceImpl {
     }
 
     /**
-     * @see org.geosdi.geoplatform.services.GeoPlatformService#getRoleGuiComponentPermission(java.lang.String)
+     * @see org.geosdi.geoplatform.services.GeoPlatformService#getRolePermission(java.lang.String)
      */
-    public GuiComponentsPermissionMapData getRoleGuiComponentPermission(String role)
+    public GuiComponentsPermissionMapData getRolePermission(String role)
             throws ResourceNotFoundFault {
         GuiComponentsPermissionMapData mapComponentPermission = new GuiComponentsPermissionMapData();
 
@@ -194,7 +195,7 @@ class AclServiceImpl {
         List<AclEntry> entries = entryDao.findBySid(sid.getId());
         logger.trace("\n*** #Entries: {} ***", entries.size());
         // For each ACEs
-        // (ACL has a single ACE for Account+GuiComponent,
+        // (ACL has a single ACE for Role+GuiComponent,
         // because there is a singe Permission)
         for (AclEntry entry : entries) {
             logger.trace("\n*** AclEntry:\n{}\n***", entry);
@@ -216,5 +217,21 @@ class AclServiceImpl {
                 permissionMap.put(componentID, null);
             }
         }
+    }
+
+    /**
+     * @see org.geosdi.geoplatform.services.GeoPlatformService#updateRolePermission(java.lang.String, org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData)
+     */
+    public boolean updateRolePermission(String role,
+                                        GuiComponentsPermissionMapData mapComponentPermission)
+            throws ResourceNotFoundFault {
+        logger.info("\n*** Role: {}", role);
+        Map<String, Boolean> permissionMap = mapComponentPermission.getPermissionMap();
+        for (Entry<String, Boolean> entry : permissionMap.entrySet()) {
+            logger.info("\n*** Entry to update: {} - {}", entry.getKey(), entry.getValue());
+            // TODO
+        }
+
+        return false;
     }
 }

@@ -47,8 +47,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface GeocodingRemoteAsync {
 
-    public void findLocations(String text,
-            AsyncCallback<ArrayList<GeocodingBean>> callback);
+    public void findLocations(String text, 
+    		AsyncCallback<ArrayList<GeocodingBean>> callback);
+
+    public void findLocations(String text, String geocodingService,
+    		AsyncCallback<ArrayList<GeocodingBean>> callback);
 
     public void findLocation(double lat, double lon,
             AsyncCallback<GeocodingBean> callback);

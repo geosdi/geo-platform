@@ -33,69 +33,30 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.service;
-
-import java.util.ArrayList;
-
-import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+package org.geosdi.geoplatform.gui.client.model.geocoding;
 
 /**
- * @author giuseppe
+ * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @email michele.santomauro@geosdi.org
  * 
  */
-@RemoteServiceRelativePath("GeocodingRemote")
-public interface GeocodingRemote extends RemoteService {
+public enum GPGeocodingSeviceKeyValue {
 
-    public static class Util {
+	GOOGLE("Google"),
+	YAHOO("Yahoo"),
+	//
+	GEOCODINGSERVICE("GeocodingSevice");
 
-        private static GeocodingRemoteAsync instance;
+    private String value;
 
-        public static GeocodingRemoteAsync getInstance() {
-            if (instance == null) {
-                instance = (GeocodingRemoteAsync) GWT.create(GeocodingRemote.class);
-                // ServiceDefTarget target = (ServiceDefTarget) instance;
-                // target.setServiceEntryPoint(GWT.getModuleBaseURL()
-                // + "GeocodingRemote");
-            }
-            return instance;
-        }
+    GPGeocodingSeviceKeyValue(String value) {
+        this.value = value;
     }
 
     /**
-     * @param search
-     *            String to search
-     * @param geocodingService TODO
-     * @return ArrayList<GeocodingBean>
-     * @throws GeoPlatformException
+     * @return the value
      */
-    public ArrayList<GeocodingBean> findLocations(String search)
-            throws GeoPlatformException;
-
-    /**
-     * @param search
-     *            String to search
-     * @param geocodingService
-     *            String to search
-     * @param geocodingService TODO
-     * @return ArrayList<GeocodingBean>
-     * @throws GeoPlatformException
-     */
-    public ArrayList<GeocodingBean> findLocations(String search, String geocodingService)
-            throws GeoPlatformException;
-
-    /**
-     *
-     * @param Coordinates
-     *            of the Point
-     *
-     * @return GeocodingBean
-     * @throws GeoPlatformException
-     */
-    public GeocodingBean findLocation(double lat, double lon)
-            throws GeoPlatformException;
+    public String getValue() {
+        return value;
+    }
 }

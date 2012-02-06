@@ -40,15 +40,33 @@ import java.util.List;
 
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
+import org.geosdi.geoplatform.gui.client.model.geocoding.GPGeocodingServiceBean;
+import org.geosdi.geoplatform.gui.client.model.geocoding.GPGeocodingSeviceKeyValue;
+import org.geosdi.geoplatform.gui.client.service.GeocodingRemote;
+import org.geosdi.geoplatform.gui.client.service.GeocodingRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.grid.GeoPlatformGridWidget;
+import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.GeocodingSearchEventHandler;
+import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.RegisterGeocodingLocationEvent;
+import org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt.event.GPGeocodingRemoveMarkerEvent;
+import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPlugin;
+import org.geosdi.geoplatform.gui.configuration.grid.IGeoPlatformGrid;
+import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.impl.geocoder.GeoCoderPerformOperation;
+import org.geosdi.geoplatform.gui.model.scale.GPScaleBean;
+import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.FieldEvent;
 import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
@@ -58,17 +76,6 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import org.geosdi.geoplatform.gui.client.service.GeocodingRemote;
-import org.geosdi.geoplatform.gui.client.service.GeocodingRemoteAsync;
-import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.GeocodingSearchEventHandler;
-import org.geosdi.geoplatform.gui.client.widget.map.event.geocoding.RegisterGeocodingLocationEvent;
-import org.geosdi.geoplatform.gui.client.widget.map.marker.puregwt.event.GPGeocodingRemoveMarkerEvent;
-import org.geosdi.geoplatform.gui.configuration.geocoding.plugin.IGPGeocoderPlugin;
-import org.geosdi.geoplatform.gui.configuration.grid.IGeoPlatformGrid;
-import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.impl.geocoder.GeoCoderPerformOperation;
-import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
 /**
  *
@@ -80,9 +87,10 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
 
     private FormPanel formPanel;
     private TextField<String> search;
+    private ComboBox<GPGeocodingServiceBean> geocodingServiceCombo;
     private FieldSet searchFieldSet;
     private FieldSet locations;
-    private GooglePerformOperation operation = new GooglePerformOperation();
+    private GeocodingPerformOperation operation = new GeocodingPerformOperation();
     private GPGeocodingRemoveMarkerEvent event = new GPGeocodingRemoveMarkerEvent();
 
     public GeocodingGridWidget() {
@@ -103,7 +111,23 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
         layout.setLabelWidth(60);
         searchFieldSet.setLayout(layout);
 
-        search = new TextField<String>();
+        addSearchTextField();
+        
+        addComboGeocodingServices();
+        
+        formPanel.add(searchFieldSet);
+        
+        locations = new FieldSet();
+        locations.setHeading("Locations");
+        locations.setCollapsible(true);
+
+        locations.add(this.grid);
+
+        formPanel.add(locations);
+    }
+
+	private void addSearchTextField() {
+		search = new TextField<String>();
         search.setFieldLabel("Find");
 
         search.addKeyListener(new KeyListener() {
@@ -122,24 +146,52 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
             public void componentKeyPress(ComponentEvent event) {
                 if ((event.getKeyCode() == KeyCodes.KEY_ENTER)
                         && (!search.getValue().equals(""))) {
+                    ComboBox<GPGeocodingServiceBean> comboBox = (ComboBox<GPGeocodingServiceBean>) searchFieldSet.getItemByItemId("geocodingServiceSelector");
+                    GPGeocodingServiceBean selectedBean = comboBox.getValue();
+                    String selectedGeocodingService = selectedBean.getGeocodingService();                
                     operation.onBeginGeocodingSearch(search.getValue());
                 }
             }
-        });
+        });        
 
         searchFieldSet.add(search);
+	}
 
-        formPanel.add(searchFieldSet);
+	private void addComboGeocodingServices() {
+		List<GPGeocodingServiceBean> serviceList = new ArrayList<GPGeocodingServiceBean>();
+        serviceList.add(new GPGeocodingServiceBean(GPGeocodingSeviceKeyValue.GOOGLE.getValue()));
+        serviceList.add(new GPGeocodingServiceBean(GPGeocodingSeviceKeyValue.YAHOO.getValue()));
 
-        locations = new FieldSet();
-        locations.setHeading("Locations");
-        locations.setCollapsible(true);
+        ListStore<GPGeocodingServiceBean> serviceStore = new ListStore<GPGeocodingServiceBean>();
+        serviceStore.add(serviceList);
+        
+        geocodingServiceCombo = new ComboBox<GPGeocodingServiceBean>();
+        geocodingServiceCombo.setId("geocodingServiceSelector");
+        geocodingServiceCombo.setFieldLabel("Name");
+        geocodingServiceCombo.setDisplayField(GPGeocodingSeviceKeyValue.GEOCODINGSERVICE.getValue());
+        geocodingServiceCombo.setToolTip("Geocoding service selector");
+        geocodingServiceCombo.setForceSelection(true);
+        geocodingServiceCombo.setEditable(false);
+        geocodingServiceCombo.setStore(serviceStore);
+        geocodingServiceCombo.setTypeAhead(true);
+        geocodingServiceCombo.setTriggerAction(TriggerAction.ALL);
+        
+        searchFieldSet.add(geocodingServiceCombo);
+        
+        geocodingServiceCombo.addListener(Events.Select, new Listener<FieldEvent>() {
 
-        locations.add(this.grid);
+            @Override
+            public void handleEvent(FieldEvent fe) {
+                ComboBox<GPGeocodingServiceBean> comboBox = (ComboBox<GPGeocodingServiceBean>) fe.getComponent();
+                GPGeocodingServiceBean selectedBean = comboBox.getValue();
+                String selectedGeocodingService = selectedBean.getGeocodingService();                
+                operation.onBeginGeocodingSearch(search.getValue());
+            }
+        });
 
-        formPanel.add(locations);
-    }
-
+        geocodingServiceCombo.setValue(new GPGeocodingServiceBean(GPGeocodingSeviceKeyValue.GOOGLE.getValue()));
+	}
+	
     @Override
     public void setGridProperties() {
         grid.setAutoExpandColumn(GeocodingKeyValue.DESCRIPTION.getValue());
@@ -251,19 +303,18 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
      * Internal Class for Business Logic
      * 
      */
-    private class GooglePerformOperation extends GeoCoderPerformOperation<GeocodingGridWidget>
+    private class GeocodingPerformOperation extends GeoCoderPerformOperation<GeocodingGridWidget>
             implements GeocodingSearchEventHandler {
 
         private GeocodingRemoteAsync geocodingService = GeocodingRemote.Util.getInstance();
 
-        public GooglePerformOperation() {
+        public GeocodingPerformOperation() {
             super(GeocodingGridWidget.this);
             GPGeocodingHandlerManager.addHandler(GeocodingSearchEventHandler.TYPE, this);
         }
 
         /**
-         * Invoke Geocoding Servcice for Geo-Location
-         *
+         * Invoke Geocoding Service for Geo-Location
          * @param event
          */
         @Override
@@ -290,11 +341,15 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
          *            to find
          */
         @Override
-        public void findLocations(String location) {
+        public void findLocations(String location) {            
+            ComboBox<GPGeocodingServiceBean> comboBox = (ComboBox<GPGeocodingServiceBean>) searchFieldSet.getItemByItemId("geocodingServiceSelector");
+            GPGeocodingServiceBean selectedBean = comboBox.getValue();
+            String provider = selectedBean.getGeocodingService();
+            
             gridWidget.maskGrid();
             cleanStore();
-            this.geocodingService.findLocations(location,
-                    new AsyncCallback<ArrayList<GeocodingBean>>() {
+            this.geocodingService.findLocations(location, provider,
+            		new AsyncCallback<ArrayList<GeocodingBean>>() {
 
                         @Override
                         public void onSuccess(ArrayList<GeocodingBean> result) {
@@ -315,14 +370,14 @@ public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
                             gridWidget.unMaskGrid();
                             grid.getView().refresh(false);
                             GeoPlatformMessage.errorMessage("Geocoding - Service",
-                                    "There is a problem with Google"
-                                    + " Geocoding Service");
+                                    "There is a problem with Geocoding Service Provider");
                         }
                     });
         }
 
         @Override
         public void onSearch(String value) {
+        	search.setValue(value);
             operation.onBeginGeocodingSearch(value);
         }
     }

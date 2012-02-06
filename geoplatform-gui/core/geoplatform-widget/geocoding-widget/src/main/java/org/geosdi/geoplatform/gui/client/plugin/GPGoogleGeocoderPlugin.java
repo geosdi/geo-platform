@@ -51,7 +51,7 @@ public class GPGoogleGeocoderPlugin extends GPAdvancedGeocoderPlugin {
 
     @Override
     public void buildPluginWidget() {
-        super.tabItem = new TabItem("Google Geocoder");
+        super.tabItem = new TabItem("Geoplatform geocoding");
         this.gridWidget = new GeocodingGridWidget();
         this.gridWidget.setFieldsSetWith(305);
         super.tabItem.add(gridWidget.getWidget());

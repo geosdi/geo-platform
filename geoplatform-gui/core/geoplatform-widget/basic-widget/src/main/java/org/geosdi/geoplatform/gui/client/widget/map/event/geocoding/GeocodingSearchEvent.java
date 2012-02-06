@@ -44,10 +44,10 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public class GeocodingSearchEvent extends GwtEvent<GeocodingSearchEventHandler> {
 
-    private String value;
+    private String searchValue;
     
     public GeocodingSearchEvent(String theValue) {
-        this.value = theValue;
+        this.searchValue = theValue;
     }
     
     @Override
@@ -57,7 +57,7 @@ public class GeocodingSearchEvent extends GwtEvent<GeocodingSearchEventHandler> 
 
     @Override
     protected void dispatch(GeocodingSearchEventHandler handler) {
-        handler.onSearch(this.value);
+        handler.onSearch(this.searchValue);
     }
     
 }

@@ -83,7 +83,8 @@ public class YahooGeocodingService implements IGeocodingService {
 		this.beans = new ArrayList<GeocodingBean>();
 
 		URL url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?location="
-				+ URLEncoder.encode(address, "UTF-8") + "&appid=yourappid"); // TODO[Michele] Set the Yahoo appid
+				+ URLEncoder.encode(address, "UTF-8")
+				+ "&appid=oyPe8o3V34EgAqJ2h4KP8KDsxgsYfqncfoLF7nagje.a1wUYJeHBE2aQaua7");
 
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 

@@ -39,6 +39,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
+import org.geosdi.geoplatform.gui.client.model.geocoding.GPGeocodingServiceBean;
+import org.geosdi.geoplatform.gui.client.model.geocoding.GPGeocodingSeviceKeyValue;
 import org.geosdi.geoplatform.gui.client.service.GeocodingRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.server.service.IGeocodingService;
@@ -53,39 +55,58 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 
  */
 public class GeocodingRemoteImpl extends GPAutoInjectingRemoteServiceServlet
-        implements GeocodingRemote {
+		implements GeocodingRemote {
 
-    private static final long serialVersionUID = 8960403782525028063L;
-    //
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    @Autowired
-//    private IGeocodingService googleGeocodingService;
-    private IGeocodingService yahooGeocodingService;
-    //
-    @Autowired
-//    private IReverseGeocoding googleReverseGeocoding;
-    private IReverseGeocoding yahooReverseGeocoding;
+	private static final long serialVersionUID = 8960403782525028063L;
+	//
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	//
+	// Google Service
+	@Autowired
+	private IGeocodingService googleGeocodingService;
+	@Autowired
+	private IReverseGeocoding googleReverseGeocoding;
+	//
+	// Yahoo Service
+	@Autowired
+	private IGeocodingService yahooGeocodingService;
+	@Autowired
+	private IReverseGeocoding yahooReverseGeocoding;
 
-    @Override
+	@Override
     public ArrayList<GeocodingBean> findLocations(String search)
             throws GeoPlatformException {
         try {
-            return this.yahooGeocodingService.findLocations(search);
+        	return this.googleGeocodingService.findLocations(search);
         } catch (IOException e) {
             logger.error(e.getMessage());
             throw new GeoPlatformException(e.getMessage());
         }
     }
 
-    @Override
-    public GeocodingBean findLocation(double lat, double lon)
+	@Override
+    public ArrayList<GeocodingBean> findLocations(String search, String geocodingService)
             throws GeoPlatformException {
         try {
-            return this.yahooReverseGeocoding.findLocation(lat, lon);
+        	if (geocodingService.equals(GPGeocodingSeviceKeyValue.GOOGLE.getValue())) {
+        		return this.googleGeocodingService.findLocations(search);
+        	} else {
+        		return this.yahooGeocodingService.findLocations(search);
+        	}
         } catch (IOException e) {
             logger.error(e.getMessage());
             throw new GeoPlatformException(e.getMessage());
         }
     }
+
+	@Override
+	public GeocodingBean findLocation(double lat, double lon)
+			throws GeoPlatformException {
+		try {
+			return this.yahooReverseGeocoding.findLocation(lat, lon);
+		} catch (IOException e) {
+			logger.error(e.getMessage());
+			throw new GeoPlatformException(e.getMessage());
+		}
+	}
 }

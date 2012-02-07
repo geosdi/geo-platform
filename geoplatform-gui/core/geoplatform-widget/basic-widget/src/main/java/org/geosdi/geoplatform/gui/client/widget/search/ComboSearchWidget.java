@@ -66,11 +66,11 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
      */
     public enum TypeImage {
 
-        IMAGE_LOADING(GWT.getModuleBaseURL() + "/gp-images/loading.gif"), IMAGE_RESULT_FOUND(
-        GWT.getModuleBaseURL() + "/gp-images/ok.png"), IMAGE_RESULT_NOT_FOUND(
-        GWT.getModuleBaseURL() + "/gp-images/not_found.png"), IMAGE_SERVICE_ERROR(
-        GWT.getModuleBaseURL() + "/gp-images/error.png");
-
+        IMAGE_LOADING(GWT.getModuleBaseURL() + "/gp-images/loading.gif"),
+        IMAGE_RESULT_FOUND(GWT.getModuleBaseURL() + "/gp-images/ok.png"),
+        IMAGE_RESULT_NOT_FOUND(GWT.getModuleBaseURL() + "/gp-images/not_found.png"),
+        IMAGE_SERVICE_ERROR(GWT.getModuleBaseURL() + "/gp-images/error.png");
+        //
         private String value;
 
         TypeImage(String theValue) {
@@ -82,7 +82,6 @@ public abstract class ComboSearchWidget<T extends GeoPlatformBeanModel, C extend
             return this.value;
         }
     }
-
     protected C controller;
     protected FlexTable tableWidget;
     protected ListStore<T> store;

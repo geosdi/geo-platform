@@ -57,10 +57,6 @@
         <db.password>0x,postgres,0x</db.password>
         
         <dataset.file>src/test/resources/bootstrap-db.xml</dataset.file>
-
-        <tc-maven-plugin.version>1.7.1</tc-maven-plugin.version>
-        <toolkit.version>3.3.0</toolkit.version>
-        <toolkit.api>1.3</toolkit.api>
     </properties>
 
     <dependencies>             
@@ -348,11 +344,6 @@
             <scope>test</scope>
         </dependency>
         
-        <dependency>
-            <groupId>org.terracotta</groupId>
-            <artifactId>terracotta-toolkit-${toolkit.api}-runtime</artifactId>
-            <version>${toolkit.version}</version>
-        </dependency>
         <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache-core</artifactId>

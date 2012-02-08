@@ -48,7 +48,7 @@ import org.geosdi.geoplatform.core.acl.AclEntry;
 import org.geosdi.geoplatform.core.acl.AclObjectIdentity;
 import org.geosdi.geoplatform.core.acl.AclSid;
 import org.geosdi.geoplatform.core.acl.GuiComponent;
-import org.geosdi.geoplatform.core.acl.GuiComponentPermission;
+import org.geosdi.geoplatform.core.acl.GeoPlatformPermission;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
@@ -247,7 +247,7 @@ public class AclDAOTest extends BaseDAOTest {
 
     private void createEntries(Map<String, AclObjectIdentity> objIdMap) {
         // ACE
-        int enable = GuiComponentPermission.ENABLE.getMask();
+        int enable = GeoPlatformPermission.ENABLE.getMask();
         //
         Map<String, AclEntry> entriesMap = new HashMap<String, AclEntry>();
         // Admin

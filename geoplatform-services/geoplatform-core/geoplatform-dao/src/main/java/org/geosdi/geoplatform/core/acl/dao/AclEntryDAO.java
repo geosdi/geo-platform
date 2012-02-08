@@ -59,4 +59,6 @@ public interface AclEntryDAO {
     public boolean removeById(Long id);
     
     public List<AclEntry> findBySid(Long sidId);
+    
+    public List<AclEntry> findByObjectIdentity(Long objectIdentityId);
 }

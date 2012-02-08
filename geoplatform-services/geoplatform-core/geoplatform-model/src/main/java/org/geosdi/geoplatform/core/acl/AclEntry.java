@@ -50,12 +50,23 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
+ * The <tt>AclEntry</tt> domain class contains entries representing grants 
+ * (or denials) of a permission on an object instance to a recipient.
+ * The aclObject field references the domain class instance (since an instance 
+ * can have many granted permissions). The aclSid field references the recipient. 
+ * The granting field determines whether the entry grants the permission (true) 
+ * or denies it (false). The aceOrder field specifies the position of the entry, 
+ * which is important because the entries are evaluated in order and the first 
+ * matching entry determines whether access is allowed. The mask field holds the 
+ * permission. auditSuccess and auditFailure determine whether to log success 
+ * and/or failure events (these both default to true).
+ * 
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- *
  */
 @Entity
-@Table(name = "acl_entry", uniqueConstraints =
+@Table(name = "acl_entry",
+       uniqueConstraints =
 @UniqueConstraint(columnNames = {"acl_object_identity", "ace_order"}))
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "entry")
 // TODO: implements AccessControlEntry?
@@ -69,32 +80,38 @@ public class AclEntry {
     @ManyToOne
     @JoinColumn(name = "acl_object_identity", nullable = false)
     private AclObjectIdentity aclObject;
-    //
+    /**
+     * Order wrt AclObjectIdentity
+     */
     @Column(name = "ace_order", nullable = false)
     private Integer aceOrder;
     //
     @ManyToOne
     @JoinColumn(name = "sid", nullable = false)
     private AclSid aclSid;
-    //
+    /**
+     * Mask of permission type
+     */
     @Column(nullable = false)
     private Integer mask;
-    //
+    /*
+     * Granting of permission
+     */
     @Column(nullable = false)
     private boolean granting = false;
     //
     @Column(name = "audit_success", nullable = false)
-    private boolean auditSuccess = true;
+    private boolean auditSuccess = false;
     //
     @Column(name = "audit_failure", nullable = false)
-    private boolean auditFailure = true;
+    private boolean auditFailure = false;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor methods">
     public AclEntry() {
     }
-    
+
     public AclEntry(AclObjectIdentity aclObjectIdentity, Integer aceOrder, AclSid aclSid,
-            Integer mask, boolean granting) {
+                    Integer mask, boolean granting) {
         this.aclObject = aclObjectIdentity;
         this.aceOrder = aceOrder;
         this.aclSid = aclSid;
@@ -102,10 +119,10 @@ public class AclEntry {
         this.granting = granting;
         this.auditSuccess = true;
         this.auditFailure = true;
-    }    
+    }
 
     public AclEntry(AclObjectIdentity aclObjectIdentity, Integer aceOrder, AclSid aclSid,
-            Integer mask, boolean granting, boolean auditSuccess, boolean auditFailure) {
+                    Integer mask, boolean granting, boolean auditSuccess, boolean auditFailure) {
         this.aclObject = aclObjectIdentity;
         this.aceOrder = aceOrder;
         this.aclSid = aclSid;
@@ -147,6 +164,8 @@ public class AclEntry {
 
     /**
      * @return the aceOrder
+     * 
+     * @see #aceOrder
      */
     public Integer getAceOrder() {
         return aceOrder;
@@ -154,6 +173,8 @@ public class AclEntry {
 
     /**
      * @param aceOrder the aceOrder to set
+     * 
+     * @see #aceOrder
      */
     public void setAceOrder(Integer aceOrder) {
         this.aceOrder = aceOrder;
@@ -175,6 +196,8 @@ public class AclEntry {
 
     /**
      * @return the mask
+     * 
+     * @see #mask
      */
     public Integer getMask() {
         return mask;
@@ -182,6 +205,8 @@ public class AclEntry {
 
     /**
      * @param mask the mask to set
+     * 
+     * @see #mask
      */
     public void setMask(Integer mask) {
         this.mask = mask;
@@ -189,6 +214,8 @@ public class AclEntry {
 
     /**
      * @return the granting
+     * 
+     * @see #granting
      */
     public boolean isGranting() {
         return granting;
@@ -196,6 +223,8 @@ public class AclEntry {
 
     /**
      * @param granting the granting to set
+     * 
+     * @see #granting
      */
     public void setGranting(boolean granting) {
         this.granting = granting;

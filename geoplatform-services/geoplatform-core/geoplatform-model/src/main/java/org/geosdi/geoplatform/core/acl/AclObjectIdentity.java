@@ -50,13 +50,19 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
+ * The <tt>AclObjectIdentity</tt> domain class contains entries representing
+ * individual domain class instances (OIDs).
+ * It has a field for the instance id (objectId) and domain class (aclClass)
+ * that uniquely identify the instance. In addition there are optional nullable
+ * fields for the parent OID (parentAclObject) and owner (aclSid). There's also
+ * a flag (inheriting) to indicate whether ACL entries can inherit from a parent ACL.
+ * 
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- *
  */
 @Entity
 @Table(name = "acl_object_identity",
-uniqueConstraints =
+       uniqueConstraints =
 @UniqueConstraint(columnNames = {"object_id_class", "object_id_identity"}))
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "object_identity")
 // TODO: implements Acl? extends AclImpl?
@@ -111,7 +117,7 @@ public class AclObjectIdentity {
      * @param parentAclObject 
      */
     public AclObjectIdentity(AclClass aclClass, Long objectId, AclSid aclSid,
-            AclObjectIdentity parentAclObject) {
+                             AclObjectIdentity parentAclObject) {
         this.aclClass = aclClass;
         this.objectId = objectId;
         this.aclSid = aclSid;
@@ -210,7 +216,7 @@ public class AclObjectIdentity {
      * (non-Javadoc)
      *
      * @see java.lang.Object#toString()
-     */    
+     */
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("AclObjectIdentity {");

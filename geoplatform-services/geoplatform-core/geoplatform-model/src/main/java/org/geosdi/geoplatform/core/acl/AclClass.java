@@ -47,9 +47,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
+ * The <tt>AclClass</tt> domain class contains entries for the names of each
+ * application domain class that has associated permissions.
+ * 
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- *
  */
 @Entity
 @Table(name = "acl_class")
@@ -60,7 +62,9 @@ public class AclClass {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACL_CLASS_SEQ")
     @SequenceGenerator(name = "ACL_CLASS_SEQ", sequenceName = "ACL_CLASS_SEQ")
     private Long id;
-    // Fully qualified name of a class (package.className) of the secure domanin object
+    /**
+     * Fully qualified name of a class (package.className) of the secure domain object
+     */
     @Column(name = "clazz", unique = true, nullable = false, length = 500)
     private String clazz;
 
@@ -68,6 +72,12 @@ public class AclClass {
     public AclClass() {
     }
 
+    /**
+     * 
+     * @param clazz
+     * 
+     * @see #clazz
+     */
     public AclClass(String clazz) {
         this.clazz = clazz;
     }
@@ -90,6 +100,8 @@ public class AclClass {
 
     /**
      * @return the clazz
+     * 
+     * @see #clazz
      */
     public String getClazz() {
         return clazz;
@@ -97,6 +109,8 @@ public class AclClass {
 
     /**
      * @param clazz the clazz to set
+     * 
+     * @see #clazz
      */
     public void setClazz(String clazz) {
         this.clazz = clazz;

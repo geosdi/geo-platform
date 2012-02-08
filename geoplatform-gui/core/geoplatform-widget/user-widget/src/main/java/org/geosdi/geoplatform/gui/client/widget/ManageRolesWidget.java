@@ -318,8 +318,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
     private Menu createRolesMenu() {
         this.rolesMenu = new Menu();
-        for (String role : this.roles) {
-            this.addRoleMenuItem(role);
+        for (String roleIth : this.roles) {
+            this.addRoleMenuItem(roleIth);
         }
         return this.rolesMenu;
     }
@@ -390,13 +390,12 @@ public class ManageRolesWidget extends GeoPlatformWindow {
     private void save() {
         grid.stopEditing(true);
         List<Record> modifiedElements = store.getModifiedRecords();
-//        if (!modifiedElements.isEmpty()) {
-        HashMap<String, Boolean> permissionMap = new HashMap<String, Boolean>(modifiedElements.size());
 
+        HashMap<String, Boolean> permissionMap = new HashMap<String, Boolean>(modifiedElements.size());
         for (Record record : modifiedElements) {
             String componentId = record.get(GuiComponentDetailKeyValue.COMPONENT_ID.toString()).toString();
             GuiPermission permission = (GuiPermission) record.get(GuiComponentDetailKeyValue.PERMISSION.toString());
-            System.out.println("### MOD " + componentId + "to " + permission);
+            System.out.println("### " + componentId + " MOD to " + permission);
             if (permission == GuiPermission.WRITE) {
                 permissionMap.put(componentId, true);
             } else if (permission == GuiPermission.READ) {
@@ -408,7 +407,6 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
         mask("Saving Permission for \"" + role + "\" role");
         this.updatePermission(permissionMap);
-//        }
     }
 
     private void updatePermission(HashMap<String, Boolean> permissionMap) {

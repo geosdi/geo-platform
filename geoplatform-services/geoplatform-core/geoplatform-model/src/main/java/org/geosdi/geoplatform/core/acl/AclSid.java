@@ -48,16 +48,18 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
+ * The <tt>AclSid</tt> (SID is an acronym for "Security Identity") domain class
+ * contains entries for the names of grant recipients (principal).
+ * These are principal name (usernames, where principal is true) or
+ * GrantedAuthority (role name, where principal is false). When granting
+ * permissions to a role, any user with that role receives that permission.
+ * 
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- *
- */
-/** 
- * SID = Secure Identity
  */
 @Entity
 @Table(name = "acl_sid",
-uniqueConstraints =
+       uniqueConstraints =
 @UniqueConstraint(columnNames = {"principal", "sid"}))
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "sid")
 // TODO: implements Sid? extends PrincipalSid, GrantedAuthoritySid?
@@ -67,10 +69,17 @@ public class AclSid {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACL_SID_SEQ")
     @SequenceGenerator(name = "ACL_SID_SEQ", sequenceName = "ACL_SID_SEQ")
     private Long id;
-    // If Id refers to a principal name (username - true) or a GrantedAuthority (role name - false)
+    /**
+     * Standard security concept which represents only an authenticated entity. 
+     * 
+     * If Id refers to a principal name (username) will be true,
+     * if refers to a GrantedAuthority (role name) will be false
+     */
     @Column(nullable = false)
     private boolean principal = true;
-    //
+    /**
+     * SID stands for "Secure Identity".
+     */
     @Column(nullable = false)
     private String sid;
 
@@ -78,11 +87,19 @@ public class AclSid {
     public AclSid() {
     }
 
+    /**
+     * 
+     * @param principal
+     * @param sid
+     * 
+     * @see #principal
+     * @see #sid
+     */
     public AclSid(boolean principal, String sid) {
         this.principal = principal;
         this.sid = sid;
     }
-    //</editor-fold>    
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
     /**
@@ -101,6 +118,8 @@ public class AclSid {
 
     /**
      * @return the principal
+     * 
+     * @see #principal
      */
     public boolean isPrincipal() {
         return principal;
@@ -108,6 +127,8 @@ public class AclSid {
 
     /**
      * @param principal the principal to set
+     * 
+     * @see #principal
      */
     public void setPrincipal(boolean principal) {
         this.principal = principal;
@@ -115,6 +136,8 @@ public class AclSid {
 
     /**
      * @return the sid
+     * 
+     * @see #sid
      */
     public String getSid() {
         return sid;
@@ -122,6 +145,8 @@ public class AclSid {
 
     /**
      * @param sid the sid to set
+     * 
+     * @see #sid
      */
     public void setSid(String sid) {
         this.sid = sid;

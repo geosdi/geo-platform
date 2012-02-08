@@ -41,13 +41,12 @@ import org.springframework.security.acls.model.Permission;
 /**
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
- *
  */
-public class GuiComponentPermission implements Permission {
+public class GeoPlatformPermission implements Permission {
 
     private static final long serialVersionUID = -6287156188411712223L;
     //
-    public static final Permission ENABLE = new GuiComponentPermission(1 << 0, 'v'); // 1
+    public static final Permission ENABLE = new GeoPlatformPermission(1 << 0, 'e'); // 1
     // Fields
     private char code;
     private int mask;
@@ -58,7 +57,7 @@ public class GuiComponentPermission implements Permission {
      * @param mask
      * @param code 
      */
-    private GuiComponentPermission(int mask, char code) {
+    private GeoPlatformPermission(int mask, char code) {
         this.mask = mask;
         this.code = code;
     }
@@ -66,7 +65,7 @@ public class GuiComponentPermission implements Permission {
     /**
      * (non-Javadoc)
      *
-     * @see org.acegisecurity.acls#getMask()
+     * @see org.springframework.security.acls.model.Permission#getMask()
      */
     @Override
     public int getMask() {
@@ -76,7 +75,7 @@ public class GuiComponentPermission implements Permission {
     /**
      * (non-Javadoc)
      *
-     * @see org.acegisecurity.acls#getPattern()
+     * @see org.springframework.security.acls.model.Permission#getPattern()
      */
     @Override
     public String getPattern() {

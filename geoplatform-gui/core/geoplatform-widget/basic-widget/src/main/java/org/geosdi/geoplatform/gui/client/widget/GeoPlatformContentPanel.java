@@ -104,7 +104,7 @@ public abstract class GeoPlatformContentPanel extends ContentPanel {
     }
 
     /**
-     * Usefull method to override in subclasses to execute operation at the construction end
+     * Useful method to override in subclasses to execute operation at the construction end
      */
     public void postConstruct() {
     }

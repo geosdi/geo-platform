@@ -39,26 +39,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import org.geosdi.geoplatform.core.acl.AclClass;
 import org.geosdi.geoplatform.core.acl.AclEntry;
 import org.geosdi.geoplatform.core.acl.AclObjectIdentity;
 import org.geosdi.geoplatform.core.acl.AclSid;
+import org.geosdi.geoplatform.core.acl.GeoPlatformPermission;
 import org.geosdi.geoplatform.core.acl.GuiComponent;
-import org.geosdi.geoplatform.core.acl.GuiComponentPermission;
 import org.geosdi.geoplatform.core.acl.dao.AclClassDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclSidDAO;
 import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
-import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
+import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.RoleDTO;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.acls.model.Permission;
 
 /**
  * @author Vincenzo Monteverde
@@ -186,11 +187,7 @@ class AclServiceImpl {
                                            Map<String, Boolean> permissionMap)
             throws ResourceNotFoundFault {
         // Retrieve the Sid corresponding to the Role (Authority) name
-        AclSid sid = sidDao.findBySid(sidName, false);
-        if (sid == null) {
-            throw new ResourceNotFoundFault("Authority (Role) \"" + sidName + "\" not found");
-        }
-        logger.trace("\n*** AclSid:\n{}\n***", sid);
+        AclSid sid = this.findSid(sidName, false);
         // Retrieve the ACEs of the Sid
         List<AclEntry> entries = entryDao.findBySid(sid.getId());
         logger.trace("\n*** #Entries: {} ***", entries.size());
@@ -199,7 +196,7 @@ class AclServiceImpl {
         // because there is a singe Permission)
         for (AclEntry entry : entries) {
             logger.trace("\n*** AclEntry:\n{}\n***", entry);
-            if (entry.getMask().equals(GuiComponentPermission.ENABLE.getMask())) {
+            if (entry.getMask().equals(GeoPlatformPermission.ENABLE.getMask())) {
                 AclObjectIdentity objectIdentity = entry.getAclObject();
                 logger.trace("\n*** AclObjectIdentity:\n{}\n***", objectIdentity);
                 GuiComponent gc = guiComponentDao.find(objectIdentity.getObjectId());
@@ -225,13 +222,67 @@ class AclServiceImpl {
     public boolean updateRolePermission(String role,
                                         GuiComponentsPermissionMapData mapComponentPermission)
             throws ResourceNotFoundFault {
-        logger.info("\n*** Role: {}", role);
+        logger.debug("\n*** Role: {} ***", role);
+        // Retrieve the Sid corresponding to the Role (Authority) name
+        AclSid sid = this.findSid(role, false);
+
+        AclClass clazz = classDao.findByClass(GuiComponent.class.getName());
+        Permission permission = GeoPlatformPermission.ENABLE;
+
         Map<String, Boolean> permissionMap = mapComponentPermission.getPermissionMap();
         for (Entry<String, Boolean> entry : permissionMap.entrySet()) {
-            logger.info("\n*** Entry to update: {} - {}", entry.getKey(), entry.getValue());
-            // TODO
+            String componentId = entry.getKey();
+            Boolean granting = entry.getValue();
+            logger.debug("\n*** Entry to manage: {} - {} ***", componentId, granting);
+
+            GuiComponent gc = guiComponentDao.findByComponentId(componentId);
+            if (gc == null) {
+                throw new ResourceNotFoundFault("GuiComponent \"" + componentId + "\" not found");
+            }
+            logger.trace("\n*** GuiComponent:\n{}\n***", gc);
+
+            AclObjectIdentity obj = objectIdentityDao.findByObjectId(clazz.getId(), gc.getId());
+
+            List<AclEntry> aces = entryDao.findByObjectIdentity(obj.getId());
+            boolean managed = this.manageExistingEntry(aces, sid, permission, granting); // UPDATE or DELETE the entry
+            if (!managed) { // ADD new entry
+                Integer aceOrder = aces.get(aces.size() - 1).getAceOrder() + 1;
+                AclEntry e = new AclEntry(obj, aceOrder, sid, permission.getMask(), granting);
+                entryDao.persist(e);
+                logger.debug("\n*** ACE added ***");
+            }
         }
 
+        return true;
+    }
+
+    private boolean manageExistingEntry(List<AclEntry> aces, AclSid sid,
+                                        Permission permission, Boolean granting) {
+        for (AclEntry ace : aces) {
+            if (ace.getAclSid().equals(sid)
+                    && ace.getMask().equals(permission.getMask())) {
+                if (granting == null) {
+                    entryDao.remove(ace);
+                    logger.debug("\n*** ACE deleted ***");
+                    return true;
+                } else {
+                    ace.setGranting(granting);
+                    entryDao.merge(ace);
+                    logger.debug("\n*** ACE updated ***");
+                    return true;
+                }
+            }
+        }
         return false;
+    }
+
+    private AclSid findSid(String sidName, boolean principal)
+            throws ResourceNotFoundFault {
+        AclSid sid = sidDao.findBySid(sidName, principal);
+        if (sid == null) {
+            throw new ResourceNotFoundFault("Authority (Role) \"" + sidName + "\" not found");
+        }
+        logger.trace("\n*** AclSid:\n{}\n***", sid);
+        return sid;
     }
 }

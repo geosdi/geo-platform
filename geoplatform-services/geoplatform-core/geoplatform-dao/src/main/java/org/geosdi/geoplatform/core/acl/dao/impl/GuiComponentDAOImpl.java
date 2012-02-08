@@ -64,7 +64,7 @@ public class GuiComponentDAOImpl extends BaseDAO<GuiComponent, Long>
     @Override
     public GuiComponent findByComponentId(String componentId) {
         Search search = new Search();
-        search.addFilterEqual("component_id", componentId);
+        search.addFilterEqual("componentId", componentId);
         return searchUnique(search);
     }
 }

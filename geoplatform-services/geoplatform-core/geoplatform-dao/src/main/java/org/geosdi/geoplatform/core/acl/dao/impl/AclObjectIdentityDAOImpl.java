@@ -64,8 +64,8 @@ public class AclObjectIdentityDAOImpl extends BaseDAO<AclObjectIdentity, Long>
     @Override
     public AclObjectIdentity findByObjectId(Long objectIdClass, Long objectIdIdentity) {
         Search search = new Search();
-        search.addFilterEqual("object_id_class", objectIdClass);
-        search.addFilterEqual("object_id_identity", objectIdIdentity);
+        search.addFilterEqual("aclClass.id", objectIdClass);
+        search.addFilterEqual("objectId", objectIdIdentity);
         return searchUnique(search);
     }
 }

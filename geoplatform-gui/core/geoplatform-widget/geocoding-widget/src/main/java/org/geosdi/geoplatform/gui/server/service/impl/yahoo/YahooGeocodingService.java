@@ -84,6 +84,7 @@ public class YahooGeocodingService implements IGeocodingService {
 
 		URL url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?location="
 				+ URLEncoder.encode(address, "UTF-8")
+				+ "&locale=it_IT"
 				+ "&appid=oyPe8o3V34EgAqJ2h4KP8KDsxgsYfqncfoLF7nagje.a1wUYJeHBE2aQaua7");
 
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();

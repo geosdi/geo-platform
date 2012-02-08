@@ -52,7 +52,7 @@ import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class ReverseGeocodingAction extends MapToggleAction
+public class ReverseGeocodingAction extends MapToggleAction // deve diventare astratta ed essere estesa da quelle di google e yahoo; proprietà internal reverseGeocodingWidget ed inizializzata dalla sottoclasse; 
         implements ReverseGeocodingToggleEventHandler {
 
     public ReverseGeocodingAction(GeoPlatformMap theMapWidget) {

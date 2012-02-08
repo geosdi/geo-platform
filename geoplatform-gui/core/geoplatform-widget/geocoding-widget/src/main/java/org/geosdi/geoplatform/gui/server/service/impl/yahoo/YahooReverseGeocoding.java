@@ -82,7 +82,8 @@ public class YahooReverseGeocoding implements IReverseGeocoding {
 
         URL url = new URL(REVERSE_GEOCODER_PREFIX_FOR_XML + "?q="
                 + URLEncoder.encode(lat + ",+" + lon, "UTF-8")
-                + "&gflags=R&appid=oyPe8o3V34EgAqJ2h4KP8KDsxgsYfqncfoLF7nagje.a1wUYJeHBE2aQaua7");
+				+ "&&locale=it_IT&gflags=R"
+                + "&appid=oyPe8o3V34EgAqJ2h4KP8KDsxgsYfqncfoLF7nagje.a1wUYJeHBE2aQaua7");
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 

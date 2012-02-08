@@ -51,6 +51,7 @@ public class YahooGeocodeBean extends GeocodingBean {
 	 */
 	private static final long serialVersionUID = 3142960730005278335L;
 	//
+	// See http://developer.yahoo.com/geo/placefinder/guide/responses.html for details
     private String quality = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
     private float latitude = 0.0F;
     private float longitude = 0.0F;
@@ -69,10 +70,10 @@ public class YahooGeocodeBean extends GeocodingBean {
     private String unit = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
     private String postal = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
     private String neighborhood = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
-    private String city = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String yahooCity = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
     private String county = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
     private String state = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
-    private String country = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
+    private String yahooCountry = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
     private String countrycode = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
     private String statecode = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
     private String countycode = ResponseStatus.EnumResponseStatus.NO_DATA.getValue();
@@ -94,8 +95,8 @@ public class YahooGeocodeBean extends GeocodingBean {
         super.setLat(result.getLatitude());
         super.setLon(result.getLongitude());
         //
-        super.setCountry(result.getCountry());
-        super.setDistrict(result.getCity());
+        super.setCountry(result.getState());
+        super.setDistrict(result.getCounty());
         super.setCity(result.getCity());
         super.setAddress(result.getStreet());
         
@@ -118,10 +119,10 @@ public class YahooGeocodeBean extends GeocodingBean {
         this.unit = result.getUnit();
         this.postal = result.getPostal();
         this.neighborhood = result.getNeighborhood();
-        this.city = result.getCity();
+        this.yahooCity = result.getCity();
         this.county = result.getCounty();
         this.state = result.getState();
-        this.country = result.getCountry();
+        this.yahooCountry = result.getCountry();
         this.countrycode = result.getCountrycode();
         this.statecode = result.getStatecode();
         this.countycode = result.getCountrycode();
@@ -386,15 +387,15 @@ public class YahooGeocodeBean extends GeocodingBean {
 	/**
 	 * @return the city
 	 */
-	public String getCity() {
-		return city;
+	public String getYahooCity() {
+		return yahooCity;
 	}
 	
 	/**
 	 * @param city the city to set
 	 */
-	public void setCity(String city) {
-		this.city = city;
+	public void setYahooCity(String city) {
+		this.yahooCity = city;
 	}
 	
 	/**
@@ -428,15 +429,15 @@ public class YahooGeocodeBean extends GeocodingBean {
 	/**
 	 * @return the country
 	 */
-	public String getCountry() {
-		return country;
+	public String getYahooCountry() {
+		return yahooCountry;
 	}
 	
 	/**
 	 * @param country the country to set
 	 */
-	public void setCountry(String country) {
-		this.country = country;
+	public void setYahooCountry(String country) {
+		this.yahooCountry = country;
 	}
 	
 	/**
@@ -549,8 +550,8 @@ public class YahooGeocodeBean extends GeocodingBean {
 				+ line3 + ", line4=" + line4 + ", house=" + house + ", street="
 				+ street + ", xstreet=" + xstreet + ", unittype=" + unittype
 				+ ", unit=" + unit + ", postal=" + postal + ", neighborhood="
-				+ neighborhood + ", city=" + city + ", county=" + county
-				+ ", state=" + state + ", country=" + country
+				+ neighborhood + ", city=" + yahooCity + ", county=" + county
+				+ ", state=" + state + ", country=" + yahooCountry
 				+ ", countrycode=" + countrycode + ", statecode=" + statecode
 				+ ", countycode=" + countycode + ", uzip=" + uzip + ", hash="
 				+ hash + ", woeid=" + woeid + ", woetype=" + woetype + "]";

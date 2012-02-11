@@ -48,6 +48,12 @@ public class LayersInfoTabItem extends GenericTabItem<GPLayerBean> {
 
     public LayersInfoTabItem() {
         super("Layer Info");
+        this.subclassCallToInit();
+    }
+
+    @Override
+    public final void subclassCallToInit() {
+        super.init();
     }
 
     @Override

@@ -49,6 +49,7 @@ public class DisplayLayersTabItem extends GenericTabItem<GPLayerBean> {
 
     public DisplayLayersTabItem() {
         super("Display");
+        this.subclassCallToInit();
     }
 
     @Override
@@ -69,5 +70,10 @@ public class DisplayLayersTabItem extends GenericTabItem<GPLayerBean> {
     public void updateWindowSize() {
         event.setSize(super.getTabPanel().getHeight());
         WidgetPropertiesHandlerManager.fireEvent(event);
+    }
+
+    @Override
+    public final void subclassCallToInit() {
+        super.init();
     }
 }

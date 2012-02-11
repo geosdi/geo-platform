@@ -49,6 +49,12 @@ public class StylesLayerTabItem extends GenericTabItem<GPLayerBean> {
 
     public StylesLayerTabItem() {
         super("Layer Styles");
+        this.subclassCallToInit();
+    }
+
+    @Override
+    public final void subclassCallToInit() {
+        super.init();
     }
 
     @Override

@@ -47,6 +47,12 @@ public class FolderInfoTabItem extends GenericTabItem<FolderTreeNode> {
 
     public FolderInfoTabItem() {
         super("Folder Info");
+        this.subclassCallToInit();
+    }
+    
+        @Override
+    public final void subclassCallToInit() {
+        super.init();
     }
 
     @Override

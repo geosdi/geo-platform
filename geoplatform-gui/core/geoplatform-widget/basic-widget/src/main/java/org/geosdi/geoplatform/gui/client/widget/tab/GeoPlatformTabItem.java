@@ -48,16 +48,23 @@ import org.geosdi.geoplatform.gui.puregwt.properties.event.GPWidgetSizeEvent;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoPlatformTabItem extends TabItem {
+public abstract class GeoPlatformTabItem extends TabItem implements IGPSubClassesInitialization {
 
     protected GeoPlatformBindingWidget bindingWidget;
     protected GPWidgetSizeEvent event = new GPWidgetSizeEvent();
 
     public GeoPlatformTabItem(String title) {
         super(title);
+    }
+
+    @Override
+    public final void init() {
         addComponents();
         setWidgetProperties();
     }
+
+    @Override
+    public abstract void subclassCallToInit();
 
     public abstract void addComponents();
 

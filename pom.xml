@@ -1028,7 +1028,11 @@
                 <groupId>org.jasypt</groupId>
                 <artifactId>jasypt</artifactId>
                 <version>${jasypt-version}</version>
-                <scope>compile</scope>
+            </dependency>            
+            <dependency>
+                <groupId>org.jasypt</groupId>
+                <artifactId>jasypt-spring31</artifactId>
+                <version>${jasypt-version}</version>
             </dependency>
             
         <!-- EHCACHE -->
@@ -1333,7 +1337,7 @@
         
         <gwtOpenlayersVersion>0.8-SNAPSHOT</gwtOpenlayersVersion>
         
-        <jasypt-version>1.8</jasypt-version>
+        <jasypt-version>1.9.0</jasypt-version>
         
         <guava-version>11.0.1</guava-version>
         

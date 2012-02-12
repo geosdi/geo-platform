@@ -25,7 +25,7 @@
     <!-- org.jasypt.encryption.StringEncryptor) is set as a constructor arg.  -->
     <!--                                                                      -->
     <bean id="gpPropertiesDAO"
-     class="org.jasypt.spring.properties.EncryptablePropertyPlaceholderConfigurer">
+     class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">
         <constructor-arg ref="pooledPBEStringEncryptor" />
         <property name="locations">
             <list>

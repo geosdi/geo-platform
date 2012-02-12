@@ -442,19 +442,19 @@
 			<!-- 4J -->
 			<!-- =========================================================== -->
             <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>${log4j-version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>${slf4j-version}</version>
             </dependency>
             <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.16</version>
+            </dependency>
+            <dependency>
                 <groupId>dom4j</groupId>
                 <artifactId>dom4j</artifactId>
-                <version>${dom4j-version}</version>
+                <version>1.6.1</version>
             </dependency>
 
              <!-- logging dependencies, delegate all to slf4j and use logback -->
@@ -476,7 +476,7 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>0.9.28</version>
+                <version>1.0.0</version>
             </dependency>
 
 			<!-- =========================================================== -->
@@ -685,7 +685,7 @@
             <dependency>
                 <groupId>org.hibernate.javax.persistence</groupId>
                 <artifactId>hibernate-jpa-2.0-api</artifactId>
-                <version>${hibernate-persistence-version}</version>
+                <version>1.0.1.Final</version>
             </dependency>
 
 			<!-- =========================================================== -->
@@ -749,7 +749,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>${junit-version}</version>
+                <version>4.10</version>
                 <scope>test</scope>
             </dependency>
 
@@ -813,7 +813,7 @@
             <dependency>
                 <groupId>org.hibernatespatial</groupId>
                 <artifactId>hibernate-spatial-postgis</artifactId>
-                <version>${hibernate-spatial-version}</version>
+                <version>1.1</version>
             </dependency>
 
 			<!-- =========================================================== -->
@@ -1302,10 +1302,7 @@
         <jaxb-api-version>2.2.4</jaxb-api-version>
         <jaxb-impl-version>2.2.4-1</jaxb-impl-version>
 
-        <junit-version>4.10</junit-version>
-        <log4j-version>1.2.14</log4j-version>
-        <slf4j-version>1.6.2</slf4j-version>
-        <dom4j-version>1.6.1</dom4j-version>
+        <slf4j-version>1.6.4</slf4j-version>
 
         <maven-assembly-plugin-version>2.2-beta-5</maven-assembly-plugin-version>
 
@@ -1321,9 +1318,7 @@
         <postgresql-version>8.4-701.jdbc3</postgresql-version>
         <postgis-jdbc-version>1.1.6</postgis-jdbc-version>
 
-        <hibernate-persistence-version>1.0.1.Final</hibernate-persistence-version>
-        <hibernate-version>3.6.8.Final</hibernate-version>
-        <hibernate-spatial-version>1.1</hibernate-spatial-version>
+        <hibernate-version>3.6.10.Final</hibernate-version>
         <hibernate-generic-dao-version>1.1.0</hibernate-generic-dao-version>
         <asm-version>3.3.1</asm-version>
         <cglib-version>2.2.2</cglib-version>

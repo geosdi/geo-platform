@@ -179,7 +179,7 @@
             <artifactId>spring-beans</artifactId>
         </dependency>
 
-        
+                <!-- HIBERNATE JAVAX PERSISTENCE -->
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.0-api</artifactId>

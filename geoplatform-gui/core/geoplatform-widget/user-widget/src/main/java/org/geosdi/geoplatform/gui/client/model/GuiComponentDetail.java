@@ -46,7 +46,7 @@ public class GuiComponentDetail extends GeoPlatformBeanModel {
 
     private static final long serialVersionUID = -4382463793116702562L;
     //
-    private String componentId; // For performance: used for equals() and hashCode() methods
+    private String componentId; // For performance purpose: used for equals() and hashCode() methods
     private AbstractImagePrototype image; // For manual binding
 
     /**

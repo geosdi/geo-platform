@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
-import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
@@ -51,7 +50,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     //
     private Long id;
     private String password;
-    private GPRole authority;
+    private String authority;
 
     /**
      * @return the id
@@ -142,7 +141,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
      * @return the authority
      */
     @Override
-    public GPRole getAuthority() {
+    public String getAuthority() {
         return authority;
     }
 
@@ -151,7 +150,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
      *          the authority to set
      */
     @Override
-    public void setAuthority(GPRole role) {
+    public void setAuthority(String role) {
         this.authority = role;
         super.set(GPUserManageDetailKeyValue.AUTORITHY.toString(), this.authority.toString());
     }

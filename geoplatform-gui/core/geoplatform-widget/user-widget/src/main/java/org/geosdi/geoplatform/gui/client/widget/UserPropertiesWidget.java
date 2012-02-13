@@ -45,6 +45,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.List;
 import org.geosdi.geoplatform.gui.client.event.timeout.IManageInsertUserHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.IManageUpdateUserHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.ManageInsertUserEvent;
@@ -113,8 +114,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
                 }
             }
         });
-        this.userPropertiesBinding = new UserPropertiesBinding(saveButton);
-        this.userPropertiesBinding.setStore(store);
+        this.userPropertiesBinding = new UserPropertiesBinding(store, saveButton);
 
         Button closeButton = new Button("Close", new SelectionListener<ButtonEvent>() {
 
@@ -130,9 +130,10 @@ public class UserPropertiesWidget extends GeoPlatformWindow
         super.getButtonBar().add(closeButton);
     }
 
-    public void show(GPUserManageDetail userDetail) {
+    public void show(GPUserManageDetail userDetail, List<String> roles) {
         this.user = userDetail;
         super.show();
+        this.userPropertiesBinding.populateRoles(roles);
     }
 
     @Override
@@ -182,7 +183,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
                 hide();
 
                 GeoPlatformMessage.infoMessage("User successfully added",
-                        "<ul><li>" + user.getUsername() + "</li></ul>");
+                                               "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
     }
@@ -206,7 +207,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
                 hide();
 
                 GeoPlatformMessage.infoMessage("User successfully modify",
-                        "<ul><li>" + user.getUsername() + "</li></ul>");
+                                               "<ul><li>" + user.getUsername() + "</li></ul>");
             }
         });
     }

@@ -213,18 +213,18 @@ public class UserService implements IUserService {
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmailAddress());
         user.setTemporary(userDTO.isTemporary());
-        user.setAuthority(this.convertToGPRole(userDTO.getRoles()));
+        user.setAuthority(this.convertToAuthority(userDTO.getRoles()));
         return user;
     }
 
     // NOTE: Now a user must have at most one role
-    private GPRole convertToGPRole(List<String> authorities) {
-        Iterator<String> iterator = authorities.iterator();
+    private String convertToAuthority(List<String> roles) {
+        Iterator<String> iterator = roles.iterator();
+        String authority = null;
         if (iterator.hasNext()) {
-            String authority = iterator.next();
-            return GPRole.fromString(authority);
+            authority = iterator.next();
         }
-        return GPRole.VIEWER;
+        return authority;
     }
 
     // All properties unless the password
@@ -240,13 +240,13 @@ public class UserService implements IUserService {
     }
 
     // NOTE: Now a user must have at most one role
-    private GPRole convertToGPAuthorities(List<GPAuthority> authorities) {
+    private String convertToGPAuthorities(List<GPAuthority> authorities) {
         Iterator<GPAuthority> iterator = authorities.iterator();
+        String authority = null;
         if (iterator.hasNext()) {
-            GPAuthority authority = iterator.next();
-            return GPRole.fromString(authority.getAuthority());
+            authority = iterator.next().getAuthority();
         }
-        return GPRole.VIEWER;
+        return authority;
     }
 
     private GPUser getCheckLoggedUser(HttpServletRequest httpServletRequest) {

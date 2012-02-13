@@ -54,9 +54,9 @@ public interface IGPUserManageDetail extends IGPUserSimpleDetail {
 //
 //    void setAuthorities(List<GPRole> roles);
 //    
-    GPRole getAuthority();
+    String getAuthority();
 
-    void setAuthority(GPRole role);
+    void setAuthority(String role);
 
     boolean isTemporary();
 

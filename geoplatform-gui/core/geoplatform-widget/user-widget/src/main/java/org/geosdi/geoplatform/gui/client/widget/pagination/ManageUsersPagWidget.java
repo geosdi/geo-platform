@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.pagination;
 
-import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
@@ -75,6 +74,7 @@ public class ManageUsersPagWidget
         extends GPGridSearchWidget<GPUserManageDetail> {
 
     private UserPropertiesWidget userPropertiesWidget;
+    private List<String> roles;
 
     public ManageUsersPagWidget() {
         super(true);
@@ -87,18 +87,18 @@ public class ManageUsersPagWidget
         super.search.setFieldLabel("Find User");
         this.userPropertiesWidget = new UserPropertiesWidget(super.store);
         super.addButton(1, new Button("Add User", BasicWidgetResources.ICONS.logged_user(),
-                new SelectionListener<ButtonEvent>() {
+                                      new SelectionListener<ButtonEvent>() {
 
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        userPropertiesWidget.show(new GPUserManageDetail());
-                    }
-                }));
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                userPropertiesWidget.show(new GPUserManageDetail(), roles);
+            }
+        }));
     }
 
     @Override
     public void show() {
-        this.init();
+        super.init();
         super.show();
     }
 
@@ -125,10 +125,10 @@ public class ManageUsersPagWidget
 
             @Override
             protected void load(Object loadConfig,
-                    AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback) {
+                                AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback) {
 
                 UserRemote.Util.getInstance().searchUsers((PagingLoadConfig) loadConfig,
-                        searchText, callback);
+                                                          searchText, callback);
             }
         };
 
@@ -194,6 +194,11 @@ public class ManageUsersPagWidget
 
     @Override
     public void executeSelect() {
-        this.userPropertiesWidget.show(this.grid.getSelectionModel().getSelectedItem());
+        this.userPropertiesWidget.show(this.grid.getSelectionModel().getSelectedItem(),
+                                       this.roles);
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }

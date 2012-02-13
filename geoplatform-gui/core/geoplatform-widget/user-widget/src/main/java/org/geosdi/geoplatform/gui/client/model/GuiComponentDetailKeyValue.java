@@ -42,8 +42,8 @@ package org.geosdi.geoplatform.gui.client.model;
 public enum GuiComponentDetailKeyValue {
 
     COMPONENT_ID("componentId"),
-    DESCRIPTION("description"), // TODO Manage
-    PERMISSION("permission");
+    PERMISSION("permission"),
+    DESCRIPTION("description"); // TODO Manage description
     //
     private String value;
 

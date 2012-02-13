@@ -83,8 +83,8 @@ public class GoogleGeocodingService implements
         this.beans = new ArrayList<GeocodingBean>();
 
         URL url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?address="
-                + URLEncoder.encode(address, "UTF-8") + "&sensor=false");
-
+                + URLEncoder.encode(address, "UTF-8") + "&language=it&sensor=false");
+        
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
         GPGoogleGeocodeRoot oxmBean = (GPGoogleGeocodeRoot) this.geocoderGoogleJaxbMarshaller.loadFromStream(conn.getInputStream());

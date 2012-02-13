@@ -79,7 +79,7 @@ public class GoogleReverseGeocoding implements IReverseGeocoding {
             throws IOException {
 
         URL url = new URL(REVERSE_GEOCODER_PREFIX_FOR_XML + "?latlng="
-                + URLEncoder.encode(lat + "," + lon, "UTF-8") + "&sensor=true");
+                + URLEncoder.encode(lat + "," + lon, "UTF-8") + "&language=it&sensor=true");
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 

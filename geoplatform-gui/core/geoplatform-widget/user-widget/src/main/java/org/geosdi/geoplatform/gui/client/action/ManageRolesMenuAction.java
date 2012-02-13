@@ -67,7 +67,8 @@ public class ManageRolesMenuAction extends MenuBaseAction {
 
             @Override
             public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage("Error", caught.getMessage());
+                GeoPlatformMessage.errorMessage("Error retrieving roles",
+                                                caught.getMessage());
             }
 
             @Override

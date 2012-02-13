@@ -227,7 +227,7 @@ public class ManageUsersPagWidget
 
     private enum EnumRoleMessage {
 
-        STATUS_RETRIEVE_ROLE_ERROR("Error retriving roles");
+        STATUS_RETRIEVE_ROLE_ERROR("Error retrieving roles");
         //
         private String value;
 

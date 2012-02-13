@@ -99,6 +99,18 @@ public enum GuiPermission {
         return NONE;
     }
 
+    public String toStringColor() {
+        String color;
+        if (this == GuiPermission.WRITE) {
+            color = "green";
+        } else if (this == GuiPermission.READ) {
+            color = "gold";
+        } else {
+            color = "red";
+        }
+        return color;
+    }
+
     @Override
     public String toString() {
         return permission;

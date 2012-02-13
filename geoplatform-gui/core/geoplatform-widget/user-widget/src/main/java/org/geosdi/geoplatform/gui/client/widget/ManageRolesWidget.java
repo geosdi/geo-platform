@@ -70,6 +70,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -79,6 +80,7 @@ import org.geosdi.geoplatform.gui.client.model.GuiPermission;
 import org.geosdi.geoplatform.gui.client.widget.grid.renderer.GPGridCellRenderer;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 
 /**
@@ -158,7 +160,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                // TODO
+                // TODO ADD role
             }
         });
         newRoleButton.disable(); //
@@ -293,15 +295,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
                                  ListStore<GuiComponentDetail> store,
                                  Grid<GuiComponentDetail> grid) {
                 GuiPermission permission = model.getPermission();
-                String style;
-                if (permission == GuiPermission.WRITE) {
-                    style = "green";
-                } else if (permission == GuiPermission.READ) {
-                    style = "gold";
-                } else {
-                    style = "red";
-                }
-                return "<span style='color:" + style + "'>" + permission + "</span>";
+                return "<span style='color:" + permission.toStringColor()
+                        + "'>" + permission + "</span>";
             }
         };
         ColumnConfig permissionColumn = new ColumnConfig();
@@ -343,7 +338,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
                     @Override
                     public void onFailure(Throwable caught) {
-                        GeoPlatformMessage.errorMessage("Error", caught.getMessage());
+                        GeoPlatformMessage.errorMessage("Error retrieving permissions",
+                                                        caught.getMessage());
                     }
 
                     @Override
@@ -351,6 +347,12 @@ public class ManageRolesWidget extends GeoPlatformWindow {
                         grid.stopEditing(true);
                         store.removeAll();
                         unmask();
+
+                        // Iff for ADMIN role, we will remove MANAGE_ROLES
+                        // i.e. MANAGE_ROLES will not be modified for a ADMIN role
+                        if (role.equals(GPRole.ADMIN.toString())) {
+                            result.remove(GuiComponentIDs.MANAGE_ROLES);
+                        }
 
                         for (Entry<String, Boolean> entry : result.entrySet()) {
                             GuiComponentDetail gc = new GuiComponentDetail();
@@ -395,7 +397,6 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         for (Record record : modifiedElements) {
             String componentId = record.get(GuiComponentDetailKeyValue.COMPONENT_ID.toString()).toString();
             GuiPermission permission = (GuiPermission) record.get(GuiComponentDetailKeyValue.PERMISSION.toString());
-            System.out.println("### " + componentId + " MOD to " + permission);
             if (permission == GuiPermission.WRITE) {
                 permissionMap.put(componentId, true);
             } else if (permission == GuiPermission.READ) {
@@ -405,7 +406,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
             }
         }
 
-        mask("Saving Permission for \"" + role + "\" role");
+        super.mask("Saving Permission for \"" + role + "\" role");
         this.updatePermission(permissionMap);
     }
 

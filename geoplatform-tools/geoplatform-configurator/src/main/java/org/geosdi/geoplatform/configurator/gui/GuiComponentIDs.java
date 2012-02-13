@@ -65,8 +65,6 @@ public class GuiComponentIDs {
     public static final String LAYER_MENU = "layerMenu";
     //
     public static final String GRATICULA = "graticula";
-    /** SIGV-LAYER MENU **/
-    public static final String LAYER_MENU_SIGV = "layerMenu-sigv";
     /**
      * Map Toolbar
      */
@@ -92,8 +90,6 @@ public class GuiComponentIDs {
     public static final String CLEAR_MAP = "clearMap";
     public static final String REVERSE_GEOCODING = "reverseGeocoding";
     public static final String REVERSE_GEOCODING_WPS = "reverseGeocodingWPS";
-    // SIGV COMMIT BUTTON
-    public static final String COMMIT_ACTION = "Commit";
     // via MenuUtility
     public static final String GOOGLE_ICON = "GOOGLE_ICON";
     public static final String USER_MENU = "USER_MENU";
@@ -141,7 +137,6 @@ public class GuiComponentIDs {
         all.add(ROUTING);
         all.add(LAYER_MENU);
         all.add(GRATICULA);
-        all.add(LAYER_MENU_SIGV);
         // Map Toolbar
         all.add(GEO_PLATFORM_INFO_APP);
         all.add(ZOOM_IN);
@@ -162,7 +157,6 @@ public class GuiComponentIDs {
         all.add(CLEAR_MAP);
         all.add(REVERSE_GEOCODING);
         all.add(REVERSE_GEOCODING_WPS);
-        all.add(COMMIT_ACTION);
         all.add(GOOGLE_ICON);
         all.add(USER_MENU);
         all.add(GOOGLE_SIGN_ON_BUTTON);

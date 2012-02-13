@@ -271,8 +271,7 @@ public abstract class GeoPlatformSearchWidget<C extends Widget, T extends GeoPla
     /**
      * Set the correct Status Icon Style
      */
-    public void setSearchStatus(Enum status,
-            Enum message) {
+    public void setSearchStatus(Enum status, Enum message) {
         this.searchStatus.setIconStyle(status.toString());
         this.searchStatus.setText(message.toString());
     }

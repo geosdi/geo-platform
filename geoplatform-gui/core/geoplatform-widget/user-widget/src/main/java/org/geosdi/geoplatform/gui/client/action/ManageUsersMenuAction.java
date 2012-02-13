@@ -36,13 +36,9 @@
 package org.geosdi.geoplatform.gui.client.action;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.pagination.ManageUsersPagWidget;
-import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 
 /**
  *
@@ -60,21 +56,5 @@ public class ManageUsersMenuAction extends MenuBaseAction {
     @Override
     public void componentSelected(MenuEvent ce) {
         this.usersPagWidget.show();
-        this.retrieveRoles();
-    }
-
-    private void retrieveRoles() {
-        UserRemoteImpl.Util.getInstance().getAllRoles(new AsyncCallback<ArrayList<String>>() {
-
-            @Override
-            public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage("Error", caught.getMessage());
-            }
-
-            @Override
-            public void onSuccess(ArrayList<String> result) {
-                usersPagWidget.setRoles(result);
-            }
-        });
     }
 }

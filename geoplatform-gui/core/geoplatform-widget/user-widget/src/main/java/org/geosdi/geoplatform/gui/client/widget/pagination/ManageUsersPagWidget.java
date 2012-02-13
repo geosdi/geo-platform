@@ -59,8 +59,10 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.service.UserRemote;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.UserPropertiesWidget;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.grid.GPGridSearchWidget;
+import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 
 /**
  *
@@ -74,7 +76,6 @@ public class ManageUsersPagWidget
         extends GPGridSearchWidget<GPUserManageDetail> {
 
     private UserPropertiesWidget userPropertiesWidget;
-    private List<String> roles;
 
     public ManageUsersPagWidget() {
         super(true);
@@ -91,7 +92,7 @@ public class ManageUsersPagWidget
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                userPropertiesWidget.show(new GPUserManageDetail(), roles);
+                showUserPropertiesWidget(true);
             }
         }));
     }
@@ -194,11 +195,49 @@ public class ManageUsersPagWidget
 
     @Override
     public void executeSelect() {
-        this.userPropertiesWidget.show(this.grid.getSelectionModel().getSelectedItem(),
-                                       this.roles);
+        this.showUserPropertiesWidget(false);
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    private void showUserPropertiesWidget(final boolean isNewUser) {
+        searchStatus.setBusy("Retrive roles");
+
+        UserRemoteImpl.Util.getInstance().getAllRoles(new AsyncCallback<ArrayList<String>>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                setSearchStatus(SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR,
+                                EnumRoleMessage.STATUS_RETRIEVE_ROLE_ERROR);
+            }
+
+            @Override
+            public void onSuccess(ArrayList<String> result) {
+                setSearchStatus(SearchStatus.EnumSearchStatus.STATUS_SEARCH,
+                                SearchStatus.EnumSearchStatus.STATUS_MESSAGE_SEARCH);
+
+                GPUserManageDetail userDetail;
+                if (isNewUser) {
+                    userDetail = new GPUserManageDetail();
+                } else {
+                    userDetail = grid.getSelectionModel().getSelectedItem();
+                }
+                userPropertiesWidget.show(userDetail, result);
+            }
+        });
+    }
+
+    private enum EnumRoleMessage {
+
+        STATUS_RETRIEVE_ROLE_ERROR("Error retriving roles");
+        //
+        private String value;
+
+        EnumRoleMessage(String theValue) {
+            this.value = theValue;
+        }
+
+        @Override
+        public String toString() {
+            return this.value;
+        }
     }
 }

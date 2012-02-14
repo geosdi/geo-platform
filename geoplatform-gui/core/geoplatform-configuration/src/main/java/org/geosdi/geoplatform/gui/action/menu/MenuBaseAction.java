@@ -38,14 +38,14 @@ package org.geosdi.geoplatform.gui.action.menu;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconEvent;
-import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconHandler;
+import org.geosdi.geoplatform.gui.action.menu.event.MenuActionHandler;
 
 /**
  * @author giuseppe
  * 
  */
 public abstract class MenuBaseAction extends MenuAction
-        implements HasMenuActionHandler<MenuActionChangeIconHandler> {
+        implements HasMenuActionHandler<MenuActionHandler> {
 
     private AbstractImagePrototype image;
 
@@ -70,8 +70,8 @@ public abstract class MenuBaseAction extends MenuAction
     }
 
     @Override
-    public HandlerRegistration addMenuActionHandler(MenuActionChangeIconHandler actionHandler) {
-        return this.handlerManager.addHandler(MenuActionChangeIconHandler.TYPE,
-                actionHandler);
+    public HandlerRegistration addMenuActionHandler(MenuActionHandler actionHandler) {
+        super.type = actionHandler.getType();
+        return this.handlerManager.addHandler(actionHandler.getType(), actionHandler);
     }
 }

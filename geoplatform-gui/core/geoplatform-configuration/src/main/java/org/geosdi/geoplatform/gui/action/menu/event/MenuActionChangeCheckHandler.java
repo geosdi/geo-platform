@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.action.menu.event;
 
-import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
@@ -43,15 +42,9 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class MenuActionDisabledEvent extends GwtEvent<MenuCheckChangeActionHandler> {
+public interface MenuActionChangeCheckHandler extends MenuActionHandler {
 
-    @Override
-    public Type<MenuCheckChangeActionHandler> getAssociatedType() {
-        return MenuCheckChangeActionHandler.TYPE;
-    }
+    Type<MenuActionChangeCheckHandler> TYPE = new Type<MenuActionChangeCheckHandler>();
 
-    @Override
-    protected void dispatch(MenuCheckChangeActionHandler handler) {
-        handler.onActionDisabled(this);
-    }
+    void onActionCheckChange(MenuActionChangeCheckEvent event);
 }

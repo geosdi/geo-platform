@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.action.menu.event;
 
-import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public class MenuActionChangeIconEvent extends GwtEvent<MenuActionChangeIconHandler> {
+public class MenuActionChangeIconEvent
+        extends MenuActionEnabledEvent<MenuActionChangeIconHandler> {
 
     private AbstractImagePrototype image;
     

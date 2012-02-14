@@ -42,6 +42,7 @@ import com.extjs.gxt.ui.client.widget.menu.DateMenu;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.menu.SeparatorMenuItem;
+import com.google.gwt.event.shared.GwtEvent.Type;
 import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
@@ -49,9 +50,10 @@ import org.geosdi.geoplatform.gui.action.menu.MenuCheckAction;
 import org.geosdi.geoplatform.gui.action.menu.OAuth2MenuBaseAction;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconEvent;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconHandler;
-import org.geosdi.geoplatform.gui.action.menu.event.MenuActionDisabledEvent;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionEnabledEvent;
-import org.geosdi.geoplatform.gui.action.menu.event.MenuCheckChangeActionHandler;
+import org.geosdi.geoplatform.gui.action.menu.event.MenuActionHandler;
+import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeCheckEvent;
+import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeCheckHandler;
 import org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.DateMenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.menubar.GroupMenuClientTool;
@@ -117,16 +119,16 @@ public class MenuUtility implements IGeoPlatformMenubar {
 
                 @Override
                 public void onActionEnabled(MenuActionEnabledEvent event) {
-                    item.setEnabled(true);
-                }
-
-                @Override
-                public void onActionDisabled(MenuActionDisabledEvent event) {
-                    item.setEnabled(false);
+                    item.setEnabled(event.isEnabled());
                 }
 
                 @Override
                 public void onActionChangeIcon(MenuActionChangeIconEvent event) {
+                }
+
+                @Override
+                public <H extends MenuActionHandler> Type<H> getType() {
+                    return (Type<H>) MenuActionChangeIconHandler.TYPE;
                 }
             });
 
@@ -154,22 +156,22 @@ public class MenuUtility implements IGeoPlatformMenubar {
             action.setId(tool.getId());
             item.addSelectionListener(action);
 
-            action.addMenuActionHandler(new MenuCheckChangeActionHandler() {
+            action.addMenuActionHandler(new MenuActionChangeCheckHandler() {
 
                 @Override
-                public void onActionCheckChange(boolean check) {
-                    item.setChecked(check);
+                public void onActionCheckChange(MenuActionChangeCheckEvent event) {
+                    item.setChecked(event.isCheck());
                     item.fireEvent(Events.Select, new MenuEvent(menu, item));
                 }
 
                 @Override
                 public void onActionEnabled(MenuActionEnabledEvent event) {
-                    item.setEnabled(true);
+                    item.setEnabled(event.isEnabled());
                 }
 
                 @Override
-                public void onActionDisabled(MenuActionDisabledEvent event) {
-                    item.setEnabled(false);
+                public <H extends MenuActionHandler> Type<H> getType() {
+                    return (Type<H>) MenuActionChangeCheckHandler.TYPE;
                 }
             });
 
@@ -213,17 +215,17 @@ public class MenuUtility implements IGeoPlatformMenubar {
 
                 @Override
                 public void onActionEnabled(MenuActionEnabledEvent event) {
-                    item.setEnabled(true);
-                }
-
-                @Override
-                public void onActionDisabled(MenuActionDisabledEvent event) {
-                    item.setEnabled(false);
+                    item.setEnabled(event.isEnabled());
                 }
 
                 @Override
                 public void onActionChangeIcon(MenuActionChangeIconEvent event) {
                     item.setIcon(event.getImage());
+                }
+
+                @Override
+                public <H extends MenuActionHandler> Type<H> getType() {
+                    return (Type<H>) MenuActionChangeIconHandler.TYPE;
                 }
             });
 

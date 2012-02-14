@@ -36,9 +36,10 @@
 package org.geosdi.geoplatform.gui.action.menu;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.event.shared.HandlerManager;
-import org.geosdi.geoplatform.gui.action.menu.event.MenuActionDisabledEvent;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionEnabledEvent;
+import org.geosdi.geoplatform.gui.action.menu.event.MenuActionHandler;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 
 /**
@@ -47,11 +48,12 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
  *
  */
 public abstract class MenuAction extends GeoPlatformAction<MenuEvent> {
-
+    
     private String title;
     private boolean enabled;
+    protected Type<MenuActionHandler> type;
     protected HandlerManager handlerManager;
-
+    
     public MenuAction(String title) {
         this.title = title;
         this.handlerManager = new HandlerManager(this);
@@ -85,10 +87,12 @@ public abstract class MenuAction extends GeoPlatformAction<MenuEvent> {
      */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-        if (enabled) {
-            this.handlerManager.fireEvent(new MenuActionEnabledEvent());
-        } else {
-            this.handlerManager.fireEvent(new MenuActionDisabledEvent());
-        }
+        this.handlerManager.fireEvent(new MenuActionEnabledEvent(enabled) {
+            
+            @Override
+            public Type getAssociatedType() {
+                return type;
+            }
+        });        
     }
 }

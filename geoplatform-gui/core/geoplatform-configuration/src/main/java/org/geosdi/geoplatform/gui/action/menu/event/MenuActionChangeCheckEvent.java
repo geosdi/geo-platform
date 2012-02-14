@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.action.menu.event;
 
-import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
@@ -43,22 +42,29 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class MenuCheckChangeActionEvent extends GwtEvent<MenuCheckChangeActionHandler> {
-    
+public class MenuActionChangeCheckEvent
+        extends MenuActionEnabledEvent<MenuActionChangeCheckHandler> {
+
     private boolean check;
 
-    public MenuCheckChangeActionEvent(boolean check) {
+    public MenuActionChangeCheckEvent(boolean check) {
         this.check = check;
     }
 
     @Override
-    public Type<MenuCheckChangeActionHandler> getAssociatedType() {
-        return MenuCheckChangeActionHandler.TYPE;
+    public Type<MenuActionChangeCheckHandler> getAssociatedType() {
+        return MenuActionChangeCheckHandler.TYPE;
     }
 
     @Override
-    protected void dispatch(MenuCheckChangeActionHandler handler) {
-        handler.onActionCheckChange(check);
+    protected void dispatch(MenuActionChangeCheckHandler handler) {
+        handler.onActionCheckChange(this);
     }
-    
+
+    /**
+     * @return the check
+     */
+    public boolean isCheck() {
+        return check;
+    }
 }

@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.gui.action.menu;
 
 import com.google.gwt.event.shared.HandlerRegistration;
-import org.geosdi.geoplatform.gui.action.menu.event.MenuCheckChangeActionEvent;
-import org.geosdi.geoplatform.gui.action.menu.event.MenuCheckChangeActionHandler;
+import org.geosdi.geoplatform.gui.action.menu.event.MenuActionHandler;
+import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeCheckEvent;
 
 /**
  *
@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.gui.action.menu.event.MenuCheckChangeActionHandler
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public abstract class MenuCheckAction extends MenuAction
-        implements HasMenuActionHandler<MenuCheckChangeActionHandler> {
+        implements HasMenuActionHandler<MenuActionHandler> {
 
     private boolean checked;
 
@@ -65,13 +65,12 @@ public abstract class MenuCheckAction extends MenuAction
      */
     public void setChecked(boolean checked) {
         this.checked = checked;
-        this.handlerManager.fireEvent(new MenuCheckChangeActionEvent(checked));
+        this.handlerManager.fireEvent(new MenuActionChangeCheckEvent(checked));
     }
 
     @Override
-    public HandlerRegistration addMenuActionHandler(
-            MenuCheckChangeActionHandler actionHandler) {
-        return this.handlerManager.addHandler(MenuCheckChangeActionHandler.TYPE,
-                actionHandler);
+    public HandlerRegistration addMenuActionHandler(MenuActionHandler actionHandler) {
+        super.type = actionHandler.getType();
+        return this.handlerManager.addHandler(actionHandler.getType(), actionHandler);
     }
 }

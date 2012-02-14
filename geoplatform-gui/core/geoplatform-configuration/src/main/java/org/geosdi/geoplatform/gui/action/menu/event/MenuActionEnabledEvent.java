@@ -36,22 +36,33 @@
 package org.geosdi.geoplatform.gui.action.menu.event;
 
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class MenuActionEnabledEvent extends GwtEvent<MenuCheckChangeActionHandler> {
+public abstract class MenuActionEnabledEvent<H extends MenuActionHandler>
+        extends GwtEvent<H> {
 
-    @Override
-    public Type<MenuCheckChangeActionHandler> getAssociatedType() {
-        return MenuCheckChangeActionHandler.TYPE;
+    private boolean enabled;
+
+    public MenuActionEnabledEvent() {
+    }
+
+    public MenuActionEnabledEvent(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
-    protected void dispatch(MenuCheckChangeActionHandler handler) {
+    protected void dispatch(H handler) {
         handler.onActionEnabled(this);
+    }
+
+    /**
+     * @return the enabled
+     */
+    public boolean isEnabled() {
+        return enabled;
     }
 }

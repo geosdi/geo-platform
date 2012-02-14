@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.action.menu.event;
 
 import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  *
@@ -46,6 +47,6 @@ public interface MenuActionHandler extends EventHandler {
 
     void onActionEnabled(MenuActionEnabledEvent event);
 
-    void onActionDisabled(MenuActionDisabledEvent event);
+    <H extends MenuActionHandler> Type<H> getType();
     
 }

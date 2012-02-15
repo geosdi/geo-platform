@@ -33,16 +33,38 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.action.menu.handler;
+package org.geosdi.geoplatform.gui.configuration.action.event;
 
-import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface HasMenuActionEnableHandler {
+public class ActionEnableEvent extends GwtEvent<ActionEnableHandler> {
 
-    HandlerRegistration addMenuActionEnableHandler(MenuActionEnableHandler actionHandler);
+    public static final Type<ActionEnableHandler> TYPE = new Type<ActionEnableHandler>();
+    private boolean enabled;
+
+    public ActionEnableEvent(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    @Override
+    public Type<ActionEnableHandler> getAssociatedType() {
+        return TYPE;
+    }
+
+    @Override
+    protected void dispatch(ActionEnableHandler handler) {
+        handler.onActionEnabled(this);
+    }
+
+    /**
+     * @return the enabled
+     */
+    public boolean isEnabled() {
+        return enabled;
+    }
 }

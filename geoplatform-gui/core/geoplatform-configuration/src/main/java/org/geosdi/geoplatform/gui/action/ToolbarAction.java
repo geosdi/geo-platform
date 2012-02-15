@@ -36,12 +36,7 @@
 package org.geosdi.geoplatform.gui.action;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.action.event.ActionDisabledEvent;
-import org.geosdi.geoplatform.gui.action.event.ActionEnabledEvent;
-import org.geosdi.geoplatform.gui.action.event.ActionHandler;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 
 /**
@@ -49,38 +44,14 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public abstract class ToolbarAction extends GeoPlatformAction<ButtonEvent>
-        implements HasActionHandler {
+public abstract class ToolbarAction extends GeoPlatformAction<ButtonEvent> {
 
-    private boolean enabled;
     private AbstractImagePrototype image;
     private String tooltip;
-    private HandlerManager handlerManager;
 
     public ToolbarAction(AbstractImagePrototype image, String tooltip) {
         this.image = image;
         this.tooltip = tooltip;
-        this.handlerManager = new HandlerManager(this);
-    }
-
-    /**
-     * @return the enabled
-     */
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    /**
-     * @param enabled
-     *            the enabled to set
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-        if (enabled) {
-            this.handlerManager.fireEvent(new ActionEnabledEvent());
-        } else {
-            this.handlerManager.fireEvent(new ActionDisabledEvent());
-        }
     }
 
     /**
@@ -110,10 +81,5 @@ public abstract class ToolbarAction extends GeoPlatformAction<ButtonEvent>
      */
     public void setTooltip(String tooltip) {
         this.tooltip = tooltip;
-    }
-
-    @Override
-    public HandlerRegistration addActionHandler(ActionHandler actionHandler) {
-        return this.handlerManager.addHandler(ActionHandler.TYPE, actionHandler);
     }
 }

@@ -50,8 +50,8 @@ import org.geosdi.geoplatform.gui.action.menu.MenuCheckAction;
 import org.geosdi.geoplatform.gui.action.menu.OAuth2MenuBaseAction;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeIconEvent;
 import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeIconHandler;
-import org.geosdi.geoplatform.gui.action.menu.event.MenuActionEnableEvent;
-import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionEnableHandler;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeCheckEvent;
 import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeCheckHandler;
 import org.geosdi.geoplatform.gui.configuration.menubar.CheckMenuClientTool;
@@ -220,10 +220,10 @@ public class MenuUtility implements IGeoPlatformMenubar {
     }
 
     private void addMenuActionEnableHandler(MenuAction action, final MenuItem item) {
-        action.addMenuActionEnableHandler(new MenuActionEnableHandler() {
+        action.addActionEnableHandler(new ActionEnableHandler() {
 
             @Override
-            public void onActionEnabled(MenuActionEnableEvent event) {
+            public void onActionEnabled(ActionEnableEvent event) {
                 item.setEnabled(event.isEnabled());
             }
         });

@@ -35,8 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.configuration.action;
 
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
+import org.geosdi.geoplatform.gui.configuration.action.event.HasActionEnableHandler;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  *
@@ -44,9 +49,12 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public abstract class GeoPlatformAction<X extends ComponentEvent>
-        extends SelectionListener<X> {
+        extends SelectionListener<X>
+        implements HasActionEnableHandler {
 
     protected String id;
+    protected boolean enabled;
+    protected HandlerManager handlerManager = new HandlerManager(this);
 
     /**
      * @return the id
@@ -60,6 +68,27 @@ public abstract class GeoPlatformAction<X extends ComponentEvent>
      */
     public void setId(String id) {
         this.id = id;
+    }
+
+    /**
+     * @return the enabled
+     */
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    /**
+     * @param enabled
+     *            the enabled to set
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+        this.handlerManager.fireEvent(new ActionEnableEvent(enabled));
+    }
+
+    @Override
+    public HandlerRegistration addActionEnableHandler(ActionEnableHandler actionHandler) {
+        return this.handlerManager.addHandler(ActionEnableEvent.TYPE, actionHandler);
     }
 
     /**

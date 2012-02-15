@@ -33,26 +33,16 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.action.event;
+package org.geosdi.geoplatform.gui.configuration.action.event;
 
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class ActionDisabledEvent extends GwtEvent<ActionHandler> {
+public interface HasActionEnableHandler {
 
-    @Override
-    public Type<ActionHandler> getAssociatedType() {
-        return ActionHandler.TYPE;
-    }
-
-    @Override
-    protected void dispatch(ActionHandler handler) {
-       handler.onActionDisabled(this);
-    }
-
+    HandlerRegistration addActionEnableHandler(ActionEnableHandler actionHandler);
 }

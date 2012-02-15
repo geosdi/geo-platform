@@ -35,12 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.action.menu;
 
-import org.geosdi.geoplatform.gui.action.menu.handler.HasMenuActionEnableHandler;
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.event.shared.HandlerRegistration;
-import org.geosdi.geoplatform.gui.action.menu.event.MenuActionEnableEvent;
-import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionEnableHandler;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 
 /**
@@ -48,16 +43,12 @@ import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public abstract class MenuAction extends GeoPlatformAction<MenuEvent>
-        implements HasMenuActionEnableHandler {
+public abstract class MenuAction extends GeoPlatformAction<MenuEvent> {
 
     private String title;
-    private boolean enabled;
-    protected HandlerManager handlerManager;
 
     public MenuAction(String title) {
         this.title = title;
-        this.handlerManager = new HandlerManager(this);
     }
 
     /**
@@ -73,26 +64,5 @@ public abstract class MenuAction extends GeoPlatformAction<MenuEvent>
      */
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    /**
-     * @return the enabled
-     */
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    /**
-     * @param enabled
-     *            the enabled to set
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-        this.handlerManager.fireEvent(new MenuActionEnableEvent(enabled));
-    }
-
-    @Override
-    public HandlerRegistration addMenuActionEnableHandler(MenuActionEnableHandler actionHandler) {
-        return this.handlerManager.addHandler(MenuActionEnableEvent.TYPE, actionHandler);
     }
 }

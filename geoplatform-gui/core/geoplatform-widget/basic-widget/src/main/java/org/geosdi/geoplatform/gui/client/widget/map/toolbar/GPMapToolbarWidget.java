@@ -48,9 +48,6 @@ import org.geosdi.geoplatform.gui.action.ToolbarApplicationAction;
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 import org.geosdi.geoplatform.gui.action.button.GeoPlatformButton;
 import org.geosdi.geoplatform.gui.action.button.GeoPlatformToggleButton;
-import org.geosdi.geoplatform.gui.action.event.ActionDisabledEvent;
-import org.geosdi.geoplatform.gui.action.event.ActionEnabledEvent;
-import org.geosdi.geoplatform.gui.action.event.ActionHandler;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -62,6 +59,8 @@ import org.geosdi.geoplatform.gui.configuration.toolbar.ToolbarGenericTool;
 import org.geosdi.geoplatform.gui.configuration.toolbar.IGeoPlatformToolbar;
 import org.geosdi.geoplatform.gui.configuration.toolbar.IconInToolbar;
 import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 import org.geosdi.geoplatform.gui.configuration.toolbar.MenuInToolBar;
 import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
@@ -244,16 +243,11 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
         button.setIcon(action.getImage());
         button.addSelectionListener(action);
 
-        action.addActionHandler(new ActionHandler() {
+        action.addActionEnableHandler(new ActionEnableHandler() {
 
             @Override
-            public void onActionEnabled(ActionEnabledEvent event) {
-                button.setEnabled(true);
-            }
-
-            @Override
-            public void onActionDisabled(ActionDisabledEvent event) {
-                button.setEnabled(false);
+            public void onActionEnabled(ActionEnableEvent event) {
+                button.setEnabled(event.isEnabled());
             }
         });
 

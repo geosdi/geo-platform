@@ -35,29 +35,31 @@
  */
 package org.geosdi.geoplatform.gui.action.menu.event;
 
+import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeIconHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public class MenuActionChangeIconEvent
-        extends MenuActionEnabledEvent<MenuActionChangeIconHandler> {
+public class MenuActionChangeIconEvent extends GwtEvent<MenuActionChangeIconHandler> {
 
+    public static final Type<MenuActionChangeIconHandler> TYPE = new Type<MenuActionChangeIconHandler>();
     private AbstractImagePrototype image;
-    
+
     public MenuActionChangeIconEvent(AbstractImagePrototype theImage) {
         this.image = theImage;
     }
-    
+
     @Override
     public Type<MenuActionChangeIconHandler> getAssociatedType() {
-        return MenuActionChangeIconHandler.TYPE;
+        return TYPE;
     }
 
     @Override
     protected void dispatch(MenuActionChangeIconHandler handler) {
-       handler.onActionChangeIcon(this);
+        handler.onActionChangeIcon(this);
     }
 
     /**

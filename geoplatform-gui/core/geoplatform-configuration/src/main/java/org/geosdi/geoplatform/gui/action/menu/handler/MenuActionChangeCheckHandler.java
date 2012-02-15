@@ -33,44 +33,17 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.action.menu;
+package org.geosdi.geoplatform.gui.action.menu.handler;
 
-import org.geosdi.geoplatform.gui.action.menu.handler.HasMenuActionChangeCheckHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.EventHandler;
 import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeCheckEvent;
-import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeCheckHandler;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class MenuCheckAction extends MenuAction
-        implements HasMenuActionChangeCheckHandler {
+public interface MenuActionChangeCheckHandler extends EventHandler {
 
-    private boolean checked;
-
-    public MenuCheckAction(String title) {
-        super(title);
-    }
-
-    /**
-     * @return the checked
-     */
-    public boolean isChecked() {
-        return checked;
-    }
-
-    /**
-     * @param checked the checked to set
-     */
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-        this.handlerManager.fireEvent(new MenuActionChangeCheckEvent(checked));
-    }
-
-    @Override
-    public HandlerRegistration addMenuActionChangeCheckHandler(MenuActionChangeCheckHandler actionHandler) {
-        return this.handlerManager.addHandler(MenuActionChangeCheckEvent.TYPE, actionHandler);
-    }
+    void onActionCheckChange(MenuActionChangeCheckEvent event);
 }

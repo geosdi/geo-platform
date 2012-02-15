@@ -33,20 +33,18 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.action.menu.event;
+package org.geosdi.geoplatform.gui.action.menu.handler;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.action.menu.event.MenuActionEnableEvent;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface MenuActionHandler extends EventHandler {
+public interface MenuActionEnableHandler extends EventHandler {
 
-    void onActionEnabled(MenuActionEnabledEvent event);
-
-    <H extends MenuActionHandler> Type<H> getType();
-    
+    void onActionEnabled(MenuActionEnableEvent event);
 }

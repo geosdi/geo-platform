@@ -33,17 +33,16 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action.menu.event;
+package org.geosdi.geoplatform.gui.action.menu.handler;
 
+import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public interface LayerChangeCheckActionHandler extends GlobalChangeCheckActionHandler {
+public interface GlobalChangeCheckActionHandler extends EventHandler {
 
-    Type<LayerChangeCheckActionHandler> TYPE = new Type<LayerChangeCheckActionHandler>();
-
-    void onActionCheck(LayerMenuActionCheckEvent event);
+    Type<GlobalChangeCheckActionHandler> TYPE = new Type<GlobalChangeCheckActionHandler>();
 }

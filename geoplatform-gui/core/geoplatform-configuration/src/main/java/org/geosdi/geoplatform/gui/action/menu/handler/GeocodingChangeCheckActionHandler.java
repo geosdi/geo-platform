@@ -33,9 +33,10 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.action.menu.event;
+package org.geosdi.geoplatform.gui.action.menu.handler;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
+import org.geosdi.geoplatform.gui.action.menu.event.GeocodingMenuActionCheckEvent;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group

@@ -33,44 +33,39 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.gui.action.menu;
+package org.geosdi.geoplatform.gui.action.menu.event;
 
-import org.geosdi.geoplatform.gui.action.menu.handler.HasMenuActionChangeCheckHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
-import org.geosdi.geoplatform.gui.action.menu.event.MenuActionChangeCheckEvent;
-import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionChangeCheckHandler;
+import org.geosdi.geoplatform.gui.action.menu.handler.MenuActionEnableHandler;
+import com.google.gwt.event.shared.GwtEvent;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class MenuCheckAction extends MenuAction
-        implements HasMenuActionChangeCheckHandler {
+public class MenuActionEnableEvent extends GwtEvent<MenuActionEnableHandler> {
 
-    private boolean checked;
+    public static final Type<MenuActionEnableHandler> TYPE = new Type<MenuActionEnableHandler>();
+    private boolean enabled;
 
-    public MenuCheckAction(String title) {
-        super(title);
-    }
-
-    /**
-     * @return the checked
-     */
-    public boolean isChecked() {
-        return checked;
-    }
-
-    /**
-     * @param checked the checked to set
-     */
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-        this.handlerManager.fireEvent(new MenuActionChangeCheckEvent(checked));
+    public MenuActionEnableEvent(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
-    public HandlerRegistration addMenuActionChangeCheckHandler(MenuActionChangeCheckHandler actionHandler) {
-        return this.handlerManager.addHandler(MenuActionChangeCheckEvent.TYPE, actionHandler);
+    public Type<MenuActionEnableHandler> getAssociatedType() {
+        return TYPE;
+    }
+
+    @Override
+    protected void dispatch(MenuActionEnableHandler handler) {
+        handler.onActionEnabled(this);
+    }
+
+    /**
+     * @return the enabled
+     */
+    public boolean isEnabled() {
+        return enabled;
     }
 }

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.action.menu.event;
 
+import org.geosdi.geoplatform.gui.action.menu.handler.LayerChangeCheckActionHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**

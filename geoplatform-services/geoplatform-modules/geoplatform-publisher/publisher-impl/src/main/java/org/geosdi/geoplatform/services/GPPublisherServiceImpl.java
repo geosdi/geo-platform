@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
+import com.google.common.collect.Lists;
 import javax.jws.WebService;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
@@ -42,6 +43,7 @@ import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
 import it.geosolutions.geoserver.rest.decoder.RESTCoverageStore;
 import it.geosolutions.geoserver.rest.decoder.RESTFeatureType;
 import it.geosolutions.geoserver.rest.decoder.RESTDataStoreList;
+import it.geosolutions.geoserver.rest.decoder.RESTFeatureType.Attribute;
 import it.geosolutions.geoserver.rest.decoder.RESTLayer;
 import it.geosolutions.geoserver.rest.decoder.utils.NameLinkElem;
 import it.geosolutions.geoserver.rest.decoder.RESTStyleList;
@@ -56,6 +58,7 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.responce.InfoPreview;
+import org.geosdi.geoplatform.responce.LayerAttribute;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviews;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviewsConfiguration;
 import org.geotools.coverage.grid.GridCoverage2D;
@@ -155,14 +158,6 @@ public class GPPublisherServiceImpl implements GPPublisherService {
 
     @Override
     public boolean putStyle(String styleToPublish, String styleName) throws ResourceNotFoundFault {
-//        try {
-////            File file = File.createTempFile("test2", ".sld");
-////            FileUtils.writeStringToFile(file, styleToPublish);
-//        } catch (IOException ex) {
-//            java.util.logging.Logger.getLogger(GPPublisherServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return false;
-//    }
         return restPublisher.updateStyle(styleToPublish, styleName);
     }
 
@@ -175,16 +170,17 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                     + "loaded from the rest url configured on the publisher service.");
         }
         return this.restReader.getSLD(styleName);
-//        String sldBody = this.restReader.getSLD(styleName);
-//        GPStyleProperties styleProperties = new GPStyleProperties();
-//        try {
-//            Reader reader = new StringReader(sldBody);
-//            Style style = PublishUtility.createFromSLD(reader);
-//            styleProperties.setStyleName(style.getName());
-//        } catch (Exception e) {
-//            logger.error("Error retrieving style from layer: " + e);
-//        }
-//        return styleProperties;
+    }
+
+    @Override
+    public List<LayerAttribute> describeFeatureType(String layerName) throws ResourceNotFoundFault {
+        RESTLayer restLayer = this.restReader.getLayer(layerName);
+        List<LayerAttribute> result = Lists.newArrayList();
+        for (Attribute att : this.restReader.getFeatureType(restLayer).getAttributes()) {
+            LayerAttribute layerAttribute = new LayerAttribute(att.getName(), att.getBinding());
+            result.add(layerAttribute);
+        }
+        return result;
     }
 
     /**

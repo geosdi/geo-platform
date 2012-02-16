@@ -38,10 +38,17 @@ package org.geosdi.geoplatform.gui.configuration.message;
 import org.geosdi.geoplatform.gui.configuration.grid.IGeoPlatformGrid;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.Timer;
 
 /**
@@ -59,6 +66,7 @@ public class GeoPlatformMessage {
     public static void alertMessage(String title, String message) {
         MessageBox.alert(title, message, new Listener<MessageBoxEvent>() {
 
+            @Override
             public void handleEvent(MessageBoxEvent be) {
             }
         });
@@ -105,21 +113,20 @@ public class GeoPlatformMessage {
             public void run() {
                 if (widget.getGrid().getView().getBody().isMasked()) {
                     MessageBox.confirm(title, message,
-                            new Listener<MessageBoxEvent>() {
+                                       new Listener<MessageBoxEvent>() {
 
-                                @Override
-                                public void handleEvent(MessageBoxEvent be) {
-                                    if (be.getButtonClicked().getText().equalsIgnoreCase(
-                                            "yes")
-                                            || be.getButtonClicked().getText().equalsIgnoreCase(
-                                            "si")) {
-                                        widget.getGrid().getView().getBody().unmask();
-                                        widget.getGrid().getView().refresh(false);
-                                    } else {
-                                        schedule(15000);
-                                    }
-                                }
-                            });
+                        @Override
+                        public void handleEvent(MessageBoxEvent be) {
+                            String text = be.getButtonClicked().getText();
+                            if (text.equalsIgnoreCase("yes")
+                                    || text.equalsIgnoreCase("si")) {
+                                widget.getGrid().getView().getBody().unmask();
+                                widget.getGrid().getView().refresh(false);
+                            } else {
+                                schedule(15000);
+                            }
+                        }
+                    });
                 }
             }
         };
@@ -127,13 +134,56 @@ public class GeoPlatformMessage {
     }
 
     /**
-     *
+     * Display a Confirmation Message in the Application
+     * 
      * @param title
      * @param message
      * @param callback
      */
     public static MessageBox confirmMessage(String title, String message,
-            Listener<MessageBoxEvent> callback) {
+                                            Listener<MessageBoxEvent> callback) {
         return MessageBox.confirm(title, message, callback);
+    }
+
+    /**
+     * Display a Prompting Message to enter some text in the Application.
+     * The OK button will be enabled iff the text is not empty or blank.
+     * 
+     * @param title
+     * @param message
+     * @param callback
+     */
+    public static MessageBox promptMessage(String title, String message,
+                                           Listener<MessageBoxEvent> callback) {
+        final MessageBox box = MessageBox.prompt(title, message, callback);
+
+        final Button okButton = box.getDialog().getButtonById(Dialog.OK);
+        okButton.disable();
+
+        final TextField<String> textBox = box.getTextBox();
+        textBox.addKeyListener(new KeyListener() {
+
+            @Override
+            public void componentKeyPress(ComponentEvent event) {
+                if (okButton.isEnabled()
+                        && event.getKeyCode() == KeyCodes.KEY_ENTER) {
+                    box.close();
+                }
+            }
+        });
+
+        box.addListener(Events.OnKeyUp, new Listener<MessageBoxEvent>() {
+
+            @Override
+            public void handleEvent(MessageBoxEvent be) {
+                String value = textBox.getValue();
+                if (value == null || value.trim().equals("")) {
+                    okButton.disable();
+                } else {
+                    okButton.enable();
+                }
+            }
+        });
+        return box;
     }
 }

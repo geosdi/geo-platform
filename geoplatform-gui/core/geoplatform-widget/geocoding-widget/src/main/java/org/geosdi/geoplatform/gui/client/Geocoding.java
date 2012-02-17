@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
+import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.action.ToolbarAction;
 import org.geosdi.geoplatform.gui.action.ToolbarActionCreator;
 import org.geosdi.geoplatform.gui.action.ToolbarActionRegistar;
@@ -43,16 +44,16 @@ import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.menu.GeocodingMenuAction;
 import org.geosdi.geoplatform.gui.client.action.toolbar.GoogleReverseGeocodingAction;
+import org.geosdi.geoplatform.gui.client.action.toolbar.YahooReverseGeocodingAction;
 import org.geosdi.geoplatform.gui.client.mvc.GeocodingController;
-import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
-
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.configurator.gui.GuiComponentIDs;
 import org.geosdi.geoplatform.gui.client.widget.member.UserOptionsMemberGeocoding;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.GPMemberOptionType;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.IGPMemberOptionManager;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.users.options.factory.GeoPlatformMemberFactory;
+
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.google.gwt.core.client.EntryPoint;
 
 /**
  *
@@ -90,12 +91,21 @@ public class Geocoding implements EntryPoint {
             }
         });
 
-        ToolbarActionRegistar.put(GuiComponentIDs.REVERSE_GEOCODING,
+        ToolbarActionRegistar.put(GuiComponentIDs.GOOGLE_REVERSE_GEOCODING,
                                   new ToolbarActionCreator() {
 
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
                 return new GoogleReverseGeocodingAction(mapWidget);
+            }
+        });
+
+        ToolbarActionRegistar.put(GuiComponentIDs.YAHOO_REVERSE_GEOCODING,
+                                  new ToolbarActionCreator() {
+
+            @Override
+            public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
+                return new YahooReverseGeocodingAction(mapWidget);
             }
         });
     }

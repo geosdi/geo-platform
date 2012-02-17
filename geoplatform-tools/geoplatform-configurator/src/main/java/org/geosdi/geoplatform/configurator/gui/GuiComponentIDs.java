@@ -88,7 +88,8 @@ public class GuiComponentIDs {
     public static final String DELETE_FEATURE = "deleteFeature";
     //
     public static final String CLEAR_MAP = "clearMap";
-    public static final String REVERSE_GEOCODING = "reverseGeocoding";
+    public static final String GOOGLE_REVERSE_GEOCODING = "googleReverseGeocoding";
+    public static final String YAHOO_REVERSE_GEOCODING = "yahooReverseGeocoding";
     public static final String REVERSE_GEOCODING_WPS = "reverseGeocodingWPS";
     // via MenuUtility
     public static final String GOOGLE_ICON = "GOOGLE_ICON";
@@ -155,7 +156,8 @@ public class GuiComponentIDs {
         all.add(RESIZE_FEATURE);
         all.add(DELETE_FEATURE);
         all.add(CLEAR_MAP);
-        all.add(REVERSE_GEOCODING);
+        all.add(GOOGLE_REVERSE_GEOCODING);
+        all.add(YAHOO_REVERSE_GEOCODING);
         all.add(REVERSE_GEOCODING_WPS);
         all.add(GOOGLE_ICON);
         all.add(USER_MENU);
@@ -206,7 +208,8 @@ public class GuiComponentIDs {
         mapUser.put(RESIZE_FEATURE, true);
         mapUser.put(DELETE_FEATURE, true);
         mapUser.put(CLEAR_MAP, true);
-        mapUser.put(REVERSE_GEOCODING, true);
+        mapUser.put(GOOGLE_REVERSE_GEOCODING, true);
+        mapUser.put(YAHOO_REVERSE_GEOCODING, true);
         mapUser.put(REVERSE_GEOCODING_WPS, true);
         mapUser.put(GOOGLE_ICON, true);
         mapUser.put(USER_MENU, true);
@@ -256,7 +259,8 @@ public class GuiComponentIDs {
         mapViewer.put(RESIZE_FEATURE, true);
         mapViewer.put(DELETE_FEATURE, true);
         mapViewer.put(CLEAR_MAP, true);
-        mapViewer.put(REVERSE_GEOCODING, true);
+        mapViewer.put(GOOGLE_REVERSE_GEOCODING, true);
+        mapViewer.put(YAHOO_REVERSE_GEOCODING, true);
         mapViewer.put(REVERSE_GEOCODING_WPS, true);
         mapViewer.put(GOOGLE_ICON, true);
         mapViewer.put(USER_MENU, true);

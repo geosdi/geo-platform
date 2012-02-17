@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map;
 
-import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingDispatchEvent;
 import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingEventHandler;
 import org.geosdi.geoplatform.gui.client.widget.map.marker.advanced.ReverseGeocodingVectorMarker;
 import org.geosdi.geoplatform.gui.client.widget.map.popup.PopupMapWidget;
@@ -57,43 +56,59 @@ import org.gwtopenmaps.openlayers.client.event.MapClickListener;
  * @email michele.santomauro@geosdi.org
  * 
  */
-public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
+public abstract class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
 
-    private GeoPlatformMap mapWidget;
+    protected GeoPlatformMap mapWidget;
+    protected ReverseGeocodingDispatch dispatcher;
     /** TODO : Think a way to have this in configuration **/
-    private ReverseGeocodingVectorMarker rGMarker = new ReverseGeocodingVectorMarker(); //new ReverseGeocodingMarker();
-    private PopupMapWidget popupWidget = new PopupMapWidget();
+    private ReverseGeocodingVectorMarker rGMarker; //new ReverseGeocodingMarker();
+    private PopupMapWidget popupWidget = new PopupMapWidget("GP-Reverse-GeoCoder-Popup");
     private MapClickListener listener;
     private LonLat lonlat;
-    private ReverseGeocodingDispatchEvent event;
     private boolean busy;
 
-    public ReverseGeocodingWidget(GeoPlatformMap theMapWidget) {
+    /**
+     * 
+     * @param theMapWidget
+     * @param layerName
+     * @param source 
+     */
+    public ReverseGeocodingWidget(GeoPlatformMap theMapWidget, String layerName,
+            GPGeoCoderProvider source) {
         this.mapWidget = theMapWidget;
-        GPGeocodingHandlerManager.addHandler(ReverseGeocodingEventHandler.TYPE, this);
+        this.rGMarker = new ReverseGeocodingVectorMarker(layerName, source.getProvider());
+        GPGeocodingHandlerManager.addHandlerToSource(ReverseGeocodingEventHandler.TYPE,
+                source.getProvider(), this);
+        this.dispatcher = this.createDispatcher();
         this.createListener();
-        this.event = new ReverseGeocodingDispatchEvent(this);
     }
 
     @Override
-    public void register() {
-        GeoPlatformMessage.infoMessage("Reverse Geocoding",
-                "Click on the map to have Information.");
+    public final void activateComponent(boolean flag) {
+        if (flag) {
+            register();
+        } else {
+            unregister();
+        }
+    }
+
+    @Override
+    public final void register() {
+        registerChild();
         this.mapWidget.getMap().addLayer(this.rGMarker.getMarkerLayer());
         this.rGMarker.addControl(this.mapWidget.getMap());
         this.mapWidget.getMap().addMapClickListener(listener);
     }
 
     @Override
-    public void unregister() {
-        GeoPlatformMessage.infoMessage("Reverse Geocoding",
-                "Reverse Geocoding Control Deactivated.");
+    public final void unregister() {
+        unregisterChild();
         this.rGMarker.removeControl(this.mapWidget.getMap());
         this.clearWidgetStatus();
     }
 
     @Override
-    public void onAddMarkerByLatLon(LonLat theLonLat) {
+    public final void onAddMarkerByLatLon(LonLat theLonLat) {
         this.lonlat = theLonLat;
         addMarker();
     }
@@ -141,6 +156,37 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
         this.busy = false;
     }
 
+    /**
+     * This method must be implemented in subClass to create the Dispatcher 
+     * to forward Request for Reverse Geocoding.
+     * 
+     * @return 
+     */
+    public abstract ReverseGeocodingDispatch createDispatcher();
+
+    /**
+     * This method must be implemented by subclass for:
+     * <ul>
+     *      <li>Display A message after Widget is registered</li>
+     *      <li>Add Control to the Map</li>
+     * </ul>
+     */
+    public abstract void registerChild();
+
+    /**
+     * This method must be implemented by subclass for:
+     * <ul>
+     *      <li>Display A message after Widget is unregistered</li>
+     *      <li>Remove Control to the Map</li>
+     * </ul>
+     */
+    public abstract void unregisterChild();
+
+    /**
+     * This method is called by Dispatcher for RPC Call Failure
+     */
+    public abstract void displayErrorMessage();
+
     private void removeMapElements() {
         this.mapWidget.getMap().removePopup(this.popupWidget.getPopup());
         this.rGMarker.removeMarker();
@@ -167,11 +213,6 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
         }
     }
 
-    private void displayErrorMessage() {
-        GeoPlatformMessage.alertMessage("Reverse Geocoding",
-                "Server busy.");
-    }
-
     /**
      * Send Request to Reverse Geocoding Service
      */
@@ -181,7 +222,7 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
     }
 
     @Override
-    public void onUpdateReverseGeocoding(LonLat ll) {
+    public final void onUpdateReverseGeocoding(LonLat ll) {
         this.lonlat = ll;
         updateMarker();
     }
@@ -206,7 +247,11 @@ public class ReverseGeocodingWidget implements ReverseGeocodingEventHandler {
                 + PopupTemplate.MESSAGE_LOADING.toString());
         this.mapWidget.getMap().addPopup(popupWidget.getPopup());
 
-        GPGeocodingHandlerManager.fireEvent(event);
+        if (dispatcher == null) {
+            throw new NullPointerException("Dispatcher can't be null. Istantiate it.");
+        }
+
+        this.dispatcher.processRequest(this);
     }
 
     /**

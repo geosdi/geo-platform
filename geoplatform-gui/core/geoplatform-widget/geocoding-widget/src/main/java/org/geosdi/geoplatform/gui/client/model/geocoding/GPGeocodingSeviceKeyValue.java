@@ -42,11 +42,9 @@ package org.geosdi.geoplatform.gui.client.model.geocoding;
  */
 public enum GPGeocodingSeviceKeyValue {
 
-	GOOGLE("Google"),
-	YAHOO("Yahoo"),
-	//
-	GEOCODINGSERVICE("GeocodingSevice");
-
+    //
+    GEOCODINGSERVICE("GeocodingSevice");
+    //
     private String value;
 
     GPGeocodingSeviceKeyValue(String value) {

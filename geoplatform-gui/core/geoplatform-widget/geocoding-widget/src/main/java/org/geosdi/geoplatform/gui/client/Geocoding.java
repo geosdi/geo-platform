@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.gui.action.menu.MenuAction;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionCreator;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.client.action.menu.GeocodingMenuAction;
-import org.geosdi.geoplatform.gui.client.action.toolbar.ReverseGeocodingAction;
+import org.geosdi.geoplatform.gui.client.action.toolbar.GoogleReverseGeocodingAction;
 import org.geosdi.geoplatform.gui.client.mvc.GeocodingController;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
@@ -55,8 +55,9 @@ import org.geosdi.geoplatform.gui.configuration.users.options.member.IGPMemberOp
 import org.geosdi.geoplatform.gui.impl.users.options.factory.GeoPlatformMemberFactory;
 
 /**
- * @author giuseppe
- * 
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 public class Geocoding implements EntryPoint {
 
@@ -94,7 +95,7 @@ public class Geocoding implements EntryPoint {
 
             @Override
             public ToolbarAction createActionTool(GeoPlatformMap mapWidget) {
-                return new ReverseGeocodingAction(mapWidget);
+                return new GoogleReverseGeocodingAction(mapWidget);
             }
         });
     }

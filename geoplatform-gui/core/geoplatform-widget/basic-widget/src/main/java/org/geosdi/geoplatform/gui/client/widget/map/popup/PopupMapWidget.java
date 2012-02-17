@@ -48,8 +48,8 @@ public class PopupMapWidget {
 
     private Popup popup;
 
-    public PopupMapWidget() {
-        this.popup = new Popup("GP-Map-Popup", null, new Size(150, 50),
+    public PopupMapWidget(String identifier) {
+        this.popup = new Popup(identifier, null, new Size(150, 50),
                 "", false);
         this.popup.setAutoSize(true);
     }

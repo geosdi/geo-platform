@@ -46,6 +46,13 @@ public abstract class GPGenericMarkerLayer
         implements IGPMarkerLayer {
 
     protected Layer markerLayer;
+    protected String layerName;
+    
+    public GPGenericMarkerLayer(String theLayerName) {
+        this.layerName = theLayerName;
+        buildMarkerLayer();
+        buildIconMarker();
+    }
 
     public GPGenericMarkerLayer() {
         buildMarkerLayer();

@@ -33,21 +33,46 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding;
+package org.geosdi.geoplatform.gui.client.widget.google;
 
+import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
+import org.gwtopenmaps.openlayers.client.LonLat;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.widget.GeoCoderDispatcher;
+import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeoCoderProvider;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public interface ReverseGeocodingDispatchHandler extends EventHandler {
+public class GoogleDispatcher extends GeoCoderDispatcher {
 
-    Type<ReverseGeocodingDispatchHandler> TYPE = new Type<ReverseGeocodingDispatchHandler>();
+    /**
+     * (non-Javadoc)
+     *
+     * @see org.geosdi.geoplatform.gui.client.widget.map.event.ReverseGeocodingDispatchHandler#processRequest(org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget)
+     */
+    @Override
+    public void processRequest(final ReverseGeocodingWidget widget) {
+        LonLat lonlat = widget.getLonlat();
 
-    public void processRequest(ReverseGeocodingWidget widget);
+        this.geocodingService.findLocation(lonlat.lat(), lonlat.lon(),
+                ReverseGeoCoderProvider.GOOGLE,
+                new AsyncCallback<GeocodingBean>() {
+
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        widget.onRequestFailure("An error occurred processing the request");
+                    }
+
+                    @Override
+                    public void onSuccess(GeocodingBean result) {
+                        widget.onRequestSuccess(result);
+                    }
+                });
+    }
 }

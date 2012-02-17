@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeoCoderProvider;
 
 /**
  * @author giuseppe
@@ -47,12 +48,13 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface GeocodingRemoteAsync {
 
-    public void findLocations(String text, 
-    		AsyncCallback<ArrayList<GeocodingBean>> callback);
+    public void findLocations(String text,
+            AsyncCallback<ArrayList<GeocodingBean>> callback);
 
     public void findLocations(String text, String geocodingService,
-    		AsyncCallback<ArrayList<GeocodingBean>> callback);
+            AsyncCallback<ArrayList<GeocodingBean>> callback);
 
     public void findLocation(double lat, double lon,
+            ReverseGeoCoderProvider provider,
             AsyncCallback<GeocodingBean> callback);
 }

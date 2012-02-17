@@ -54,11 +54,7 @@ public class GeocodingActivationEvent extends GwtEvent<GeocodingEventHandler> {
 
     @Override
     protected void dispatch(GeocodingEventHandler handler) {
-        if (activate) {
-            handler.register();
-        } else {
-            handler.unregister();
-        }
+        handler.activateComponent(activate);
     }
 
     /**

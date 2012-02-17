@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.mvc;
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
-import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.utility.GeoPlatformUtils;
@@ -59,7 +58,6 @@ public class MapView extends GeoPlatformView {
 
     private MapLayoutWidget mapLayout;
     private GPGeocodingWidget geocoderWidget;
-    private ReverseGeocodingWidget revGeoWidget;
     private MapToolbar buttonBar;
     private GPMapToolsWidget mapToolsWidget;
 
@@ -67,13 +65,14 @@ public class MapView extends GeoPlatformView {
         super(controller);
 
         this.mapLayout = new MapLayoutWidget();
-        this.revGeoWidget = new ReverseGeocodingWidget(this.mapLayout);
+//        this.revGeoWidget = new ReverseGeocodingWidget(this.mapLayout);
     }
 
     @Override
     public void initialize() {
+        /** TODO : Think a way to have this component in Geocoding Module **/
         this.geocoderWidget = new GPGeocodingWidget(this.mapLayout);
-        this.geocoderWidget.setPopupWidget(this.revGeoWidget.getPopupWidget());
+        /*******************************************************************/
         this.mapToolsWidget = new GPMapToolsWidget(this.mapLayout);
     }
 
@@ -162,12 +161,5 @@ public class MapView extends GeoPlatformView {
      */
     public void drawFeature(VectorFeature feature) {
         this.mapLayout.drawFeature(feature);
-    }
-
-    /**
-     * @return the revGeoWidget
-     */
-    public ReverseGeocodingWidget getRevGeoWidget() {
-        return revGeoWidget;
     }
 }

@@ -42,10 +42,9 @@ package org.geosdi.geoplatform.gui.impl.map;
  */
 public abstract class GPMapModel {
 
-	protected GeoPlatformMap mapWidget;
+    protected GeoPlatformMap mapWidget;
 
-	public GPMapModel(GeoPlatformMap theMapWidget) {
-		this.mapWidget = theMapWidget;
-	}
-
+    public GPMapModel(GeoPlatformMap theMapWidget) {
+        this.mapWidget = theMapWidget;
+    }
 }

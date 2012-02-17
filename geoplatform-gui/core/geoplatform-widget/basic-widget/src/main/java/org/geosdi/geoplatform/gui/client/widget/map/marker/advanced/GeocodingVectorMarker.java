@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.gui.client.widget.map.marker.advanced;
 
 import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingUpdateLocationEvent;
+import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
@@ -46,6 +48,9 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class GeocodingVectorMarker extends GPVectorMarkerLayer {
+
+    private Object provider;
+    private ReverseGeocodingUpdateLocationEvent updateEvent = new ReverseGeocodingUpdateLocationEvent();
 
     @Override
     public void setIconStyle() {
@@ -63,5 +68,18 @@ public class GeocodingVectorMarker extends GPVectorMarkerLayer {
     public void addMarker(LonLat lonlat, Map map) {
         map.setCenter(lonlat, 16);
         super.drawFeature(lonlat);
+    }
+
+    @Override
+    public void featureDragged(LonLat ll) {
+        updateEvent.setLonLat(ll);
+        GPGeocodingHandlerManager.fireEventFromSource(updateEvent, provider);
+    }
+
+    /**
+     * @param provider the provider to set
+     */
+    public void setProvider(Object provider) {
+        this.provider = provider;
     }
 }

@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeoCoderProvider;
 
 /**
  * @author giuseppe
@@ -85,17 +86,20 @@ public interface GeocodingRemote extends RemoteService {
      * @return ArrayList<GeocodingBean>
      * @throws GeoPlatformException
      */
-    public ArrayList<GeocodingBean> findLocations(String search, String geocodingService)
+    public ArrayList<GeocodingBean> findLocations(String search,
+            String geocodingService)
             throws GeoPlatformException;
 
     /**
      *
-     * @param Coordinates
-     *            of the Point
+     * @param Point Coordinates
+     * @param Provider
+     *             
      *
      * @return GeocodingBean
      * @throws GeoPlatformException
      */
-    public GeocodingBean findLocation(double lat, double lon)
+    public GeocodingBean findLocation(double lat, double lon,
+            ReverseGeoCoderProvider provider)
             throws GeoPlatformException;
 }

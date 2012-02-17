@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model.geocoding;
 
+import org.geosdi.geoplatform.gui.client.widget.map.GPGeoCoderProvider;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
@@ -44,12 +45,13 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
  */
 public class GPGeocodingServiceBean extends GeoPlatformBeanModel {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2906947272030329728L;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2906947272030329728L;
     //
     private String geocodingService;
+    private GPGeoCoderProvider provider;
 
     /**
      * Default Constructor
@@ -61,22 +63,30 @@ public class GPGeocodingServiceBean extends GeoPlatformBeanModel {
     /**
      * @param geocodingService
      */
-    public GPGeocodingServiceBean(String geocodingService) {
-    	setGeocodingService(geocodingService);
+    public GPGeocodingServiceBean(GPGeoCoderProvider theProvider) {
+        this.provider = theProvider;
+        setGeocodingService(this.provider.getProvider());
     }
 
-	/**
-	 * @return the geocodingService
-	 */
-	public String getGeocodingService() {
-		return geocodingService;
-	}
+    /**
+     * @return the geocodingService
+     */
+    public String getGeocodingService() {
+        return geocodingService;
+    }
 
-	/**
-	 * @param geocodingService the geocodingService to set
-	 */
-	private void setGeocodingService(String geocodingService) {
-		this.geocodingService = geocodingService;
-		set(GPGeocodingSeviceKeyValue.GEOCODINGSERVICE.getValue(), geocodingService);
-	}
+    /**
+     * @param theGeocodingService the geocodingService to set
+     */
+    private void setGeocodingService(String theGeocodingService) {
+        this.geocodingService = theGeocodingService;
+        set(GPGeocodingSeviceKeyValue.GEOCODINGSERVICE.getValue(), theGeocodingService);
+    }
+
+    /**
+     * @return the provider
+     */
+    public GPGeoCoderProvider getProvider() {
+        return provider;
+    }
 }

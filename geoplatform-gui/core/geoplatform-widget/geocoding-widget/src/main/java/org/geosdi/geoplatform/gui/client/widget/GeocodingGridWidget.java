@@ -74,6 +74,7 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeoCoderProvider;
 
 /**
  * 
@@ -81,320 +82,308 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GeocodingGridWidget extends GeoPlatformGridWidget<GeocodingBean>
-		implements IGPGeocoderPlugin<FormPanel> {
+        implements IGPGeocoderPlugin<FormPanel> {
 
-	private FormPanel formPanel;
-	private TextField<String> search;
-	private ComboBox<GPGeocodingServiceBean> geocodingServiceCombo;
-	private FieldSet searchFieldSet;
-	private FieldSet locations;
-	private GeocodingPerformOperation operation = new GeocodingPerformOperation();
-	private GPGeocodingRemoveMarkerEvent event = new GPGeocodingRemoveMarkerEvent();
+    private FormPanel formPanel;
+    private TextField<String> search;
+    private ComboBox<GPGeocodingServiceBean> geocodingServiceCombo;
+    private FieldSet searchFieldSet;
+    private FieldSet locations;
+    private GeocodingPerformOperation operation = new GeocodingPerformOperation();
+    private GPGeocodingRemoveMarkerEvent event = new GPGeocodingRemoveMarkerEvent();
 
-	public GeocodingGridWidget() {
-		super(false);
-		initFormPanel();
-	}
+    public GeocodingGridWidget() {
+        super(false);
+        initFormPanel();
+    }
 
-	private void initFormPanel() {
-		formPanel = new FormPanel();
-		formPanel.setHeaderVisible(false);
-		formPanel.setFrame(true);
-		formPanel.setLayout(new FlowLayout());
+    private void initFormPanel() {
+        formPanel = new FormPanel();
+        formPanel.setHeaderVisible(false);
+        formPanel.setFrame(true);
+        formPanel.setLayout(new FlowLayout());
 
-		searchFieldSet = new FieldSet();
-		searchFieldSet.setHeading("Search");
+        searchFieldSet = new FieldSet();
+        searchFieldSet.setHeading("Search");
 
-		FormLayout layout = new FormLayout();
-		layout.setLabelWidth(60);
-		searchFieldSet.setLayout(layout);
+        FormLayout layout = new FormLayout();
+        layout.setLabelWidth(60);
+        searchFieldSet.setLayout(layout);
 
-		addSearchTextField();
+        addSearchTextField();
 
-		addComboGeocodingServices();
+        addComboGeocodingServices();
 
-		formPanel.add(searchFieldSet);
+        formPanel.add(searchFieldSet);
 
-		locations = new FieldSet();
-		locations.setHeading("Locations");
-		locations.setCollapsible(true);
+        locations = new FieldSet();
+        locations.setHeading("Locations");
+        locations.setCollapsible(true);
 
-		locations.add(this.grid);
+        locations.add(this.grid);
 
-		formPanel.add(locations);
-	}
+        formPanel.add(locations);
+    }
 
-	private void addSearchTextField() {
-		search = new TextField<String>();
-		search.setFieldLabel("Find");
+    private void addSearchTextField() {
+        search = new TextField<String>();
+        search.setFieldLabel("Find");
 
-		search.addKeyListener(new KeyListener() {
+        search.addKeyListener(new KeyListener() {
 
-			@Override
-			public void componentKeyUp(ComponentEvent event) {
-				if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE) || (event
-						.getKeyCode() == KeyCodes.KEY_DELETE))
-						&& (search.getValue() == null)) {
-					removeMarkersOnMap();
-					cleanUpTheStore();
-				}
-			}
+            @Override
+            public void componentKeyUp(ComponentEvent event) {
+                if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
+                        || (event.getKeyCode() == KeyCodes.KEY_DELETE))
+                        && (search.getValue() == null)) {
+                    removeMarkersOnMap();
+                    cleanUpTheStore();
+                }
+            }
 
-			@Override
-			public void componentKeyPress(ComponentEvent event) {
-				if ((event.getKeyCode() == KeyCodes.KEY_ENTER)
-						&& (!search.getValue().equals(""))) {
-					ComboBox<GPGeocodingServiceBean> comboBox = (ComboBox<GPGeocodingServiceBean>) searchFieldSet
-							.getItemByItemId("geocodingServiceSelector");
-					GPGeocodingServiceBean selectedBean = comboBox.getValue();
-					String selectedGeocodingService = selectedBean
-							.getGeocodingService();
-					operation.onBeginGeocodingSearch(search.getValue());
-				}
-			}
-		});
+            @Override
+            public void componentKeyPress(ComponentEvent event) {
+                if ((event.getKeyCode() == KeyCodes.KEY_ENTER)
+                        && (!search.getValue().equals(""))) {
+                    ComboBox<GPGeocodingServiceBean> comboBox = (ComboBox<GPGeocodingServiceBean>) searchFieldSet.getItemByItemId("geocodingServiceSelector");
+                    GPGeocodingServiceBean selectedBean = comboBox.getValue();
+                    String selectedGeocodingService = selectedBean.getGeocodingService();
+                    operation.onBeginGeocodingSearch(search.getValue());
+                }
+            }
+        });
 
-		searchFieldSet.add(search);
-	}
+        searchFieldSet.add(search);
+    }
 
-	private void addComboGeocodingServices() {
-		List<GPGeocodingServiceBean> serviceList = new ArrayList<GPGeocodingServiceBean>();
-		serviceList.add(new GPGeocodingServiceBean(
-				GPGeocodingSeviceKeyValue.GOOGLE.getValue()));
-		serviceList.add(new GPGeocodingServiceBean(
-				GPGeocodingSeviceKeyValue.YAHOO.getValue()));
+    private void addComboGeocodingServices() {
+        List<GPGeocodingServiceBean> serviceList = new ArrayList<GPGeocodingServiceBean>();
+        serviceList.add(new GPGeocodingServiceBean(
+                ReverseGeoCoderProvider.GOOGLE));
+        serviceList.add(new GPGeocodingServiceBean(
+                ReverseGeoCoderProvider.YAHOO));
 
-		ListStore<GPGeocodingServiceBean> serviceStore = new ListStore<GPGeocodingServiceBean>();
-		serviceStore.add(serviceList);
+        ListStore<GPGeocodingServiceBean> serviceStore = new ListStore<GPGeocodingServiceBean>();
+        serviceStore.add(serviceList);
 
-		geocodingServiceCombo = new ComboBox<GPGeocodingServiceBean>();
-		geocodingServiceCombo.setId("geocodingServiceSelector");
-		geocodingServiceCombo.setFieldLabel("Name");
-		geocodingServiceCombo
-				.setDisplayField(GPGeocodingSeviceKeyValue.GEOCODINGSERVICE
-						.getValue());
-		geocodingServiceCombo.setToolTip("Geocoding service selector");
-		geocodingServiceCombo.setForceSelection(true);
-		geocodingServiceCombo.setEditable(false);
-		geocodingServiceCombo.setStore(serviceStore);
-		geocodingServiceCombo.setTypeAhead(true);
-		geocodingServiceCombo.setTriggerAction(TriggerAction.ALL);
+        geocodingServiceCombo = new ComboBox<GPGeocodingServiceBean>();
+        geocodingServiceCombo.setId("geocodingServiceSelector");
+        geocodingServiceCombo.setFieldLabel("Name");
+        geocodingServiceCombo.setDisplayField(GPGeocodingSeviceKeyValue.GEOCODINGSERVICE.getValue());
+        geocodingServiceCombo.setToolTip("Geocoding service selector");
+        geocodingServiceCombo.setForceSelection(true);
+        geocodingServiceCombo.setEditable(false);
+        geocodingServiceCombo.setStore(serviceStore);
+        geocodingServiceCombo.setTypeAhead(true);
+        geocodingServiceCombo.setTriggerAction(TriggerAction.ALL);
 
-		searchFieldSet.add(geocodingServiceCombo);
+        searchFieldSet.add(geocodingServiceCombo);
 
-		geocodingServiceCombo.addListener(Events.Select,
-				new Listener<FieldEvent>() {
+        geocodingServiceCombo.addListener(Events.Select,
+                new Listener<FieldEvent>() {
 
-					@Override
-					public void handleEvent(FieldEvent fe) {
-						if (search.getValue() != null) {
-							ComboBox<GPGeocodingServiceBean> comboBox = (ComboBox<GPGeocodingServiceBean>) fe.getComponent();
-							GPGeocodingServiceBean selectedBean = comboBox.getValue();
-							String selectedGeocodingService = selectedBean.getGeocodingService();
-							operation.onBeginGeocodingSearch(search.getValue());
-						}
-					}
-				});
+                    @Override
+                    public void handleEvent(FieldEvent fe) {
+                        if (search.getValue() != null) {
+                            ComboBox<GPGeocodingServiceBean> comboBox = (ComboBox<GPGeocodingServiceBean>) fe.getComponent();
+                            GPGeocodingServiceBean selectedBean = comboBox.getValue();
+                            String selectedGeocodingService = selectedBean.getGeocodingService();
+                            operation.onBeginGeocodingSearch(search.getValue());
+                        }
+                    }
+                });
 
-		geocodingServiceCombo.setValue(new GPGeocodingServiceBean(
-				GPGeocodingSeviceKeyValue.GOOGLE.getValue()));
-	}
+        geocodingServiceCombo.setValue(new GPGeocodingServiceBean(
+                ReverseGeoCoderProvider.GOOGLE));
+    }
 
-	@Override
-	public void setGridProperties() {
-		grid.setAutoExpandColumn(GeocodingKeyValue.DESCRIPTION.getValue());
-		grid.setBorders(false);
+    @Override
+    public void setGridProperties() {
+        grid.setAutoExpandColumn(GeocodingKeyValue.DESCRIPTION.getValue());
+        grid.setBorders(false);
 
-		grid.getView().setForceFit(true);
-		grid.setLoadMask(true);
+        grid.getView().setForceFit(true);
+        grid.setLoadMask(true);
 
-		grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-		grid.addListener(Events.CellDoubleClick, new Listener<BaseEvent>() {
+        grid.addListener(Events.CellDoubleClick, new Listener<BaseEvent>() {
 
-			@Override
-			public void handleEvent(BaseEvent be) {
-				GPGeocodingHandlerManager
-						.fireEvent(new RegisterGeocodingLocationEvent(grid
-								.getSelectionModel().getSelectedItem(),
-								GPCoordinateReferenceSystem.WGS_84));
-			}
-		});
-	}
+            @Override
+            public void handleEvent(BaseEvent be) {
+                GPGeocodingHandlerManager.fireEvent(new RegisterGeocodingLocationEvent(grid.getSelectionModel().getSelectedItem(),
+                        GPCoordinateReferenceSystem.WGS_84, geocodingServiceCombo.getValue().getProvider()));
+            }
+        });
+    }
 
-	@Override
-	public ColumnModel prepareColumnModel() {
-		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
+    @Override
+    public ColumnModel prepareColumnModel() {
+        List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
-		ColumnConfig column = new ColumnConfig();
-		column.setId(GeocodingKeyValue.DESCRIPTION.getValue());
-		column.setHeader("Location");
-		column.setWidth(240);
-		configs.add(column);
+        ColumnConfig column = new ColumnConfig();
+        column.setId(GeocodingKeyValue.DESCRIPTION.getValue());
+        column.setHeader("Location");
+        column.setWidth(240);
+        configs.add(column);
 
-		return new ColumnModel(configs);
-	}
+        return new ColumnModel(configs);
+    }
 
-	@Override
-	public void createStore() {
-		store = new ListStore<GeocodingBean>();
-	}
+    @Override
+    public void createStore() {
+        store = new ListStore<GeocodingBean>();
+    }
 
-	/**
-	 * Clean The Store
-	 */
-	public void cleanUpTheStore() {
-		if (this.grid.getView().getBody().isMasked()) {
-			unMaskGrid();
-		}
-		this.store.removeAll();
-	}
+    /**
+     * Clean The Store
+     */
+    public void cleanUpTheStore() {
+        if (this.grid.getView().getBody().isMasked()) {
+            unMaskGrid();
+        }
+        this.store.removeAll();
+    }
 
-	/**
-	 * Create mask effect on Grid
-	 */
-	public void maskGrid() {
-		if (this.grid.getView().getBody() != null) {
-			this.grid.getView().getBody().mask("Loading Locations");
-		}
-	}
+    /**
+     * Create mask effect on Grid
+     */
+    public void maskGrid() {
+        if (this.grid.getView().getBody() != null) {
+            this.grid.getView().getBody().mask("Loading Locations");
+        }
+    }
 
-	/**
-	 * Remove mask effect from the Grid
-	 */
-	public void unMaskGrid() {
-		if (this.grid.getView().getBody() != null) {
-			this.grid.getView().getBody().unmask();
-		}
-	}
+    /**
+     * Remove mask effect from the Grid
+     */
+    public void unMaskGrid() {
+        if (this.grid.getView().getBody() != null) {
+            this.grid.getView().getBody().unmask();
+        }
+    }
 
-	/**
-	 * 
-	 * @param beans
-	 *            {@link ArrayList} of GeocodingBean to fill the Store
-	 */
-	public void fillStore(ArrayList<GeocodingBean> beans) {
-		this.store.add(beans);
-	}
+    /**
+     * 
+     * @param beans
+     *            {@link ArrayList} of GeocodingBean to fill the Store
+     */
+    public void fillStore(ArrayList<GeocodingBean> beans) {
+        this.store.add(beans);
+    }
 
-	/**
-	 * @return the formPanel
-	 */
-	public FormPanel getFormPanel() {
-		return formPanel;
-	}
+    /**
+     * @return the formPanel
+     */
+    public FormPanel getFormPanel() {
+        return formPanel;
+    }
 
-	private void removeMarkersOnMap() {
-		GPGeocodingHandlerManager.fireEvent(event);
-	}
+    private void removeMarkersOnMap() {
+        GPGeocodingHandlerManager.fireEvent(event);
+    }
 
-	@Override
-	public FormPanel getWidget() {
-		return this.getFormPanel();
-	}
+    @Override
+    public FormPanel getWidget() {
+        return this.getFormPanel();
+    }
 
-	@Override
-	public void widgetResized(int dimension) {
-		this.grid.setHeight(dimension);
-	}
+    @Override
+    public void widgetResized(int dimension) {
+        this.grid.setHeight(dimension);
+    }
 
-	/**
-	 * Method to set With for Field Set for Advanced Plugin Geocoder
-	 * 
-	 * @param size
-	 */
-	public void setFieldsSetWith(int size) {
-		this.searchFieldSet.setWidth(size);
-		this.locations.setWidth(size);
-	}
+    /**
+     * Method to set With for Field Set for Advanced Plugin Geocoder
+     * 
+     * @param size
+     */
+    public void setFieldsSetWith(int size) {
+        this.searchFieldSet.setWidth(size);
+        this.locations.setWidth(size);
+    }
 
-	/**
-	 * Internal Class for Business Logic
-	 * 
-	 */
-	private class GeocodingPerformOperation extends
-			GeoCoderPerformOperation<GeocodingGridWidget> implements
-			GeocodingSearchEventHandler {
+    /**
+     * Internal Class for Business Logic
+     * 
+     */
+    private class GeocodingPerformOperation extends GeoCoderPerformOperation<GeocodingGridWidget> implements
+            GeocodingSearchEventHandler {
 
-		private GeocodingRemoteAsync geocodingService = GeocodingRemote.Util
-				.getInstance();
+        private GeocodingRemoteAsync geocodingService = GeocodingRemote.Util.getInstance();
 
-		public GeocodingPerformOperation() {
-			super(GeocodingGridWidget.this);
-			GPGeocodingHandlerManager.addHandler(
-					GeocodingSearchEventHandler.TYPE, this);
-		}
+        public GeocodingPerformOperation() {
+            super(GeocodingGridWidget.this);
+            GPGeocodingHandlerManager.addHandler(
+                    GeocodingSearchEventHandler.TYPE, this);
+        }
 
-		/**
-		 * Invoke Geocoding Service for Geo-Location
-		 * 
-		 * @param event
-		 */
-		@Override
-		public void onBeginGeocodingSearch(String searchValue) {
-			checkWidgetStatus();
-			findLocations(searchValue);
-		}
+        /**
+         * Invoke Geocoding Service for Geo-Location
+         * 
+         * @param event
+         */
+        @Override
+        public void onBeginGeocodingSearch(String searchValue) {
+            checkWidgetStatus();
+            findLocations(searchValue);
+        }
 
-		/**
+        /**
          *
          */
-		@Override
-		public void checkWidgetStatus() {
-			GeoPlatformMessage
-					.checkGridWidgetStatus(
-							(IGeoPlatformGrid) gridWidget,
-							"Geocoding - Service",
-							"Geocoding Service is demanding too much time, probably "
-									+ "the connection problem, do you want to stop it?");
-		}
+        @Override
+        public void checkWidgetStatus() {
+            GeoPlatformMessage.checkGridWidgetStatus(
+                    (IGeoPlatformGrid) gridWidget,
+                    "Geocoding - Service",
+                    "Geocoding Service is demanding too much time, probably "
+                    + "the connection problem, do you want to stop it?");
+        }
 
-		/**
-		 * 
-		 * @param location
-		 *            to find
-		 */
-		@Override
-		public void findLocations(String location) {
-			ComboBox<GPGeocodingServiceBean> comboBox = (ComboBox<GPGeocodingServiceBean>) searchFieldSet
-					.getItemByItemId("geocodingServiceSelector");
-			GPGeocodingServiceBean selectedBean = comboBox.getValue();
-			String provider = selectedBean.getGeocodingService();
+        /**
+         * 
+         * @param location
+         *            to find
+         */
+        @Override
+        public void findLocations(String location) {
+            ComboBox<GPGeocodingServiceBean> comboBox = (ComboBox<GPGeocodingServiceBean>) searchFieldSet.getItemByItemId("geocodingServiceSelector");
+            GPGeocodingServiceBean selectedBean = comboBox.getValue();
+            String provider = selectedBean.getGeocodingService();
 
-			gridWidget.maskGrid();
-			cleanStore();
-			this.geocodingService.findLocations(location, provider,
-					new AsyncCallback<ArrayList<GeocodingBean>>() {
+            gridWidget.maskGrid();
+            cleanStore();
+            this.geocodingService.findLocations(location, provider,
+                    new AsyncCallback<ArrayList<GeocodingBean>>() {
 
-						@Override
-						public void onSuccess(ArrayList<GeocodingBean> result) {
-							ArrayList<GeocodingBean> beans = (ArrayList<GeocodingBean>) result;
-							gridWidget.unMaskGrid();
-							if (result != null && result.size() > 0) {
-								gridWidget.fillStore(beans);
-							} else {
-								GeoPlatformMessage
-										.alertMessage("Geocoding - Service",
-												"There are no results for your search.");
-							}
+                        @Override
+                        public void onSuccess(ArrayList<GeocodingBean> result) {
+                            ArrayList<GeocodingBean> beans = (ArrayList<GeocodingBean>) result;
+                            gridWidget.unMaskGrid();
+                            if (result != null && result.size() > 0) {
+                                gridWidget.fillStore(beans);
+                            } else {
+                                GeoPlatformMessage.alertMessage("Geocoding - Service",
+                                        "There are no results for your search.");
+                            }
 
-						}
+                        }
 
-						@Override
-						public void onFailure(Throwable caught) {
-							gridWidget.unMaskGrid();
-							grid.getView().refresh(false);
-							GeoPlatformMessage
-									.errorMessage("Geocoding - Service",
-											"There is a problem with Geocoding Service Provider");
-						}
-					});
-		}
+                        @Override
+                        public void onFailure(Throwable caught) {
+                            gridWidget.unMaskGrid();
+                            grid.getView().refresh(false);
+                            GeoPlatformMessage.errorMessage("Geocoding - Service",
+                                    "There is a problem with Geocoding Service Provider");
+                        }
+                    });
+        }
 
-		@Override
-		public void onSearch(String value) {
-			search.setValue(value);
-			operation.onBeginGeocodingSearch(value);
-		}
-	}
+        @Override
+        public void onSearch(String value) {
+            search.setValue(value);
+            operation.onBeginGeocodingSearch(value);
+        }
+    }
 }

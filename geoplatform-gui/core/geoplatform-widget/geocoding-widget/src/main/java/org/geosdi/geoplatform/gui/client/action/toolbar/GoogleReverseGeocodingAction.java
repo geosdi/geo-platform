@@ -33,47 +33,46 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding;
+package org.geosdi.geoplatform.gui.client.action.toolbar;
+
+import org.geosdi.geoplatform.gui.client.GeocodingResources;
 
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
+import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
-import com.google.gwt.event.shared.GwtEvent;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.widget.button.ToggleButton;
+import org.geosdi.geoplatform.gui.client.widget.google.ReverseGeoCoderGoogleWidget;
+import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingToggleEvent;
+import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingToggleEventHandler;
+import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  * 
  */
-public class ReverseGeocodingDispatchEvent extends GwtEvent<ReverseGeocodingDispatchHandler> {
+public class GoogleReverseGeocodingAction extends ReverseGeocodingAction
+        implements ReverseGeocodingToggleEventHandler {
 
-    private ReverseGeocodingWidget widget;
+    public GoogleReverseGeocodingAction(GeoPlatformMap theMapWidget) {
+        super(theMapWidget, GeocodingResources.ICONS.reverseGeocoding(),
+                "Google Reverse Geocoding");
 
-    /**
-     * @Construct
-     * 
-     * @param theWidget
-     */
-    public ReverseGeocodingDispatchEvent(ReverseGeocodingWidget theWidget) {
-        this.widget = theWidget;
+        GPGeocodingHandlerManager.addHandler(ReverseGeocodingToggleEvent.TYPE, this);
     }
 
-    /**
-     * (non-Javadoc)
-     * 
-     * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
-     */
     @Override
-    public Type<ReverseGeocodingDispatchHandler> getAssociatedType() {
-        return ReverseGeocodingDispatchHandler.TYPE;
+    public void onToggle(boolean isToggled) {
+        ToggleButton toggleButton = ((ToggleButton) super.getButton());
+        toggleButton.toggle(isToggled);
+
+        ButtonEvent buttonEvent = new ButtonEvent(toggleButton);
+        componentSelected(buttonEvent);
     }
 
-    /**
-     * (non-Javadoc)
-     * 
-     * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
-     */
     @Override
-    protected void dispatch(ReverseGeocodingDispatchHandler handler) {
-        handler.processRequest(widget);
+    public ReverseGeocodingWidget createWidget(GeoPlatformMap mapWidget) {
+        return new ReverseGeoCoderGoogleWidget(mapWidget);
     }
 }

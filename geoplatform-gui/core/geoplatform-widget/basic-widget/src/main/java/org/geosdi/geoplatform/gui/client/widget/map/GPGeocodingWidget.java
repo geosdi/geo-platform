@@ -54,7 +54,7 @@ import org.gwtopenmaps.openlayers.client.LonLat;
 public class GPGeocodingWidget implements GeocodingEventHandler {
 
     private GeoPlatformMap mapWidget;
-    private PopupMapWidget popupWidget;
+    private PopupMapWidget popupWidget = new PopupMapWidget("GP-GeoCoder-Popup");
     /** TODO : Think a way to have this in configuration **/
     private GeocodingVectorMarker geocoderMarker = new GeocodingVectorMarker(); //new GeocodingMarker();
 
@@ -79,26 +79,29 @@ public class GPGeocodingWidget implements GeocodingEventHandler {
 
     @Override
     public void onRegisterGeocodingLocation(IGeoPlatformLocation bean,
-            GPCoordinateReferenceSystem crs) {
+            GPCoordinateReferenceSystem crs, Object provider) {
         LonLat center = new LonLat(bean.getLon(), bean.getLat());
 
         if (!crs.getCode().equals(this.mapWidget.getMap().getProjection())) {
             center.transform(crs.getCode(), this.mapWidget.getMap().getProjection());
         }
 
+        this.geocoderMarker.setProvider(provider);
         this.geocoderMarker.addMarker(center, this.mapWidget.getMap());
         GPToolbarActionHandlerManager.fireEvent(new UpdateModelAndButtonEvent(bean));
-    }
-
-    /**
-     * @param popupWidget the popupWidget to set
-     */
-    public void setPopupWidget(PopupMapWidget popupWidget) {
-        this.popupWidget = popupWidget;
     }
 
     @Override
     public void removeMarker() {
         this.geocoderMarker.removeMarker();
+    }
+
+    @Override
+    public void activateComponent(boolean flag) {
+        if (flag) {
+            register();
+        } else {
+            unregister();
+        }
     }
 }

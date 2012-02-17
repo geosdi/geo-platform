@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.mvc;
 
 import org.geosdi.geoplatform.gui.client.GeocodingEvents;
 import org.geosdi.geoplatform.gui.client.widget.GeocoderManagementWidget;
-import org.geosdi.geoplatform.gui.client.widget.ReverseGeocodingDispatcher;
 import org.geosdi.geoplatform.gui.configuration.mvc.GeoPlatformView;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 
@@ -55,12 +54,11 @@ import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 public class GeocodingView extends GeoPlatformView {
 
     private GeocoderManagementWidget geocoderManagement;
-    private ReverseGeocodingDispatcher reverseDispatcher;
+//    private ReverseGeocodingDispatcher reverseDispatcher;
     private GeocodingActivationEvent activationEvent = new GeocodingActivationEvent();
 
     public GeocodingView(Controller controller) {
         super(controller);
-        this.geocoderManagement = new GeocoderManagementWidget();
     }
 
     /**
@@ -70,7 +68,7 @@ public class GeocodingView extends GeoPlatformView {
      */
     @Override
     protected void initialize() {
-        this.reverseDispatcher = new ReverseGeocodingDispatcher();
+        this.geocoderManagement = new GeocoderManagementWidget();
     }
 
     /**

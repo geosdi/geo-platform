@@ -33,13 +33,12 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.client.widget.google;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.button.ToggleButton;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import org.geosdi.geoplatform.gui.action.MapToggleAction;
+import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeoCoderProvider;
+import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingDispatch;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeocodingWidget;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
@@ -47,68 +46,33 @@ import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class ReverseGeocodingAction extends MapToggleAction {
-    
-    protected ReverseGeocodingWidget widget;
-    
-    public ReverseGeocodingAction(GeoPlatformMap theMapWidget,
-            AbstractImagePrototype image, String tooltip) {
-        super(theMapWidget, image, tooltip);
-        
-        this.widget = createWidget(theMapWidget);
+public class ReverseGeoCoderGoogleWidget extends ReverseGeocodingWidget {
+
+    public ReverseGeoCoderGoogleWidget(GeoPlatformMap theMapWidget) {
+        super(theMapWidget, "GPGoogleReverseGeocoding-Marker-Layer",
+                ReverseGeoCoderProvider.GOOGLE);
     }
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see com.extjs.gxt.ui.client.event.SelectionListener#componentSelected(com.extjs.gxt.ui.client.event.ComponentEvent)
-     */
     @Override
-    public void componentSelected(ButtonEvent ce) {
-        ToggleButton button = (ToggleButton) ce.getSource();
-        
-        super.changeButtonState();
-        
-        this.deactivateAllMapControl();
-        
-        if (button.isPressed()) {
-            mapWidget.getButtonBar().setPressedButton(button);
-        }
-        
-        this.widget.activateComponent(button.isPressed());
+    public void registerChild() {
+        GeoPlatformMessage.infoMessage("Google Reverse Geocoding",
+                "Click on the map to have Information.");
     }
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see org.geosdi.geoplatform.gui.action.ToolbarMapAction#disableControl()
-     */
     @Override
-    public void disableControl() {
-        this.widget.unregister();
+    public void unregisterChild() {
+        GeoPlatformMessage.infoMessage("Google Reverse Geocoding",
+                "Reverse Geocoding Control Deactivated.");
     }
-    
-    private void deactivateAllMapControl() {
-        if (mapWidget.isFeatureOperationEnable()) {
-            mapWidget.deactivateFeatureOperation();
-        }
-        
-        if (mapWidget.isModifyFeatureEnable()) {
-            mapWidget.deactivateModifyFeature();
-        }
-        
-        if (mapWidget.isInfoActive()) {
-            mapWidget.deactivateInfo();
-        }
-        
-        if (mapWidget.isMeasureActive()) {
-            mapWidget.deactivateMeasure();
-        }
-        
-        if (mapWidget.isMeasureAreaActive()) {
-            mapWidget.deactivateMeasureArea();
-        }
+
+    @Override
+    public void displayErrorMessage() {
+        GeoPlatformMessage.alertMessage("Google Reverse Geocoding",
+                "Server busy.");
     }
-    
-    public abstract ReverseGeocodingWidget createWidget(GeoPlatformMap theMapWidget);
+
+    @Override
+    public ReverseGeocodingDispatch createDispatcher() {
+        return new GoogleDispatcher();
+    }
 }

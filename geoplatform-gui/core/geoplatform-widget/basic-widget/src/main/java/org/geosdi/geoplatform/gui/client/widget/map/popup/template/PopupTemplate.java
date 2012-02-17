@@ -44,22 +44,22 @@ import com.google.gwt.core.client.GWT;
  */
 public enum PopupTemplate {
 
-	IMAGE_LOADING("<img src=" + GWT.getModuleName() + "/gp-images/loading.gif"
-			+ " />"), MESSAGE_LOADING("<br />Loading Location....."), IMAGE_RESULT_FOUND(
-			"<img src=" + GWT.getModuleName() + "/gp-images/ok.png" + " />"), IMAGE_RESULT_NOT_FOUND(
-			"<img src=" + GWT.getModuleName() + "/gp-images/not_found.png"
-					+ " />"), ZERO_RESULTS("ZERO_RESULTS"), IMAGE_SERVICE_ERROR(
-			"<img src=" + GWT.getModuleName() + "/gp-images/error.png" + " />");
+    IMAGE_LOADING("<img src=" + GWT.getModuleName()
+    + "/gp-images/loading.gif />"),
+    MESSAGE_LOADING("<br />Loading Location....."),
+    IMAGE_RESULT_FOUND("<img src=" + GWT.getModuleName() + "/gp-images/ok.png" + " />"),
+    IMAGE_RESULT_NOT_FOUND("<img src=" + GWT.getModuleName()
+    + "/gp-images/not_found.png />"),
+    ZERO_RESULTS("ZERO_RESULTS"),
+    IMAGE_SERVICE_ERROR("<img src=" + GWT.getModuleName() + "/gp-images/error.png" + " />");
+    private String value;
 
-	private String value;
+    PopupTemplate(String theValue) {
+        this.value = theValue;
+    }
 
-	PopupTemplate(String theValue) {
-		this.value = theValue;
-	}
-
-	@Override
-	public String toString() {
-		return value;
-	}
-
+    @Override
+    public String toString() {
+        return value;
+    }
 }

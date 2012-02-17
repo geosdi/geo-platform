@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.gui.client.widget.map.marker.advanced;
 
 import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.widget.map.event.reversegeocoding.ReverseGeocodingUpdateLocationEvent;
+import org.geosdi.geoplatform.gui.puregwt.geocoding.GPGeocodingHandlerManager;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
@@ -46,21 +48,36 @@ import org.gwtopenmaps.openlayers.client.layer.Vector;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class ReverseGeocodingVectorMarker extends GPVectorMarkerLayer {
-
+    
+    private Object provider;
+    private ReverseGeocodingUpdateLocationEvent updateEvent = new ReverseGeocodingUpdateLocationEvent();
+    
+    public ReverseGeocodingVectorMarker(String theLayerName, Object theProvider) {
+        super(theLayerName);
+        this.provider = theProvider;
+    }
+    
     @Override
     public void setIconStyle() {
         style.setExternalGraphic(GWT.getModuleBaseURL()
                 + "/gp-images/vector_marker.png");
     }
-
+    
     @Override
     public void buildMarkerLayer() {
-        this.markerLayer = new Vector("GPReverseGeocoding-Marker-Vector-Layer");
+//        this.markerLayer = new Vector("GPReverseGeocoding-Marker-Vector-Layer");
+        this.markerLayer = new Vector(this.layerName);
         this.markerLayer.setZIndex(980);
     }
-
+    
     @Override
     public void addMarker(LonLat lonlat, Map map) {
         super.drawFeature(lonlat);
+    }
+    
+    @Override
+    public void featureDragged(LonLat ll) {
+        updateEvent.setLonLat(ll);
+        GPGeocodingHandlerManager.fireEventFromSource(updateEvent, provider);
     }
 }

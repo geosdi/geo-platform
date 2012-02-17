@@ -44,6 +44,8 @@ import com.google.gwt.event.shared.EventHandler;
  */
 public interface GenericGeocodingEventHandler extends EventHandler {
     
+    public void activateComponent(boolean flag);
+    
     public void register();
 
     public void unregister();

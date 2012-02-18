@@ -65,7 +65,7 @@ public class GeoPlatformMessage {
      */
     public static void alertMessage(String title, String message) {
         MessageBox.alert(title, message, new Listener<MessageBoxEvent>() {
-
+            
             @Override
             public void handleEvent(MessageBoxEvent be) {
             }
@@ -106,20 +106,18 @@ public class GeoPlatformMessage {
     public static void checkGridWidgetStatus(
             final IGeoPlatformGrid<GeoPlatformBeanModel> widget,
             final String title, final String message) {
-
+        
         Timer timer = new Timer() {
-
+            
             @Override
             public void run() {
                 if (widget.getGrid().getView().getBody().isMasked()) {
                     MessageBox.confirm(title, message,
                                        new Listener<MessageBoxEvent>() {
-
+                        
                         @Override
                         public void handleEvent(MessageBoxEvent be) {
-                            String text = be.getButtonClicked().getText();
-                            if (text.equalsIgnoreCase("yes")
-                                    || text.equalsIgnoreCase("si")) {
+                            if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
                                 widget.getGrid().getView().getBody().unmask();
                                 widget.getGrid().getView().refresh(false);
                             } else {
@@ -156,24 +154,24 @@ public class GeoPlatformMessage {
     public static MessageBox promptMessage(String title, String message,
                                            Listener<MessageBoxEvent> callback) {
         final MessageBox box = MessageBox.prompt(title, message, callback);
-
+        
         final Button okButton = box.getDialog().getButtonById(Dialog.OK);
         okButton.disable();
-
+        
         final TextField<String> textBox = box.getTextBox();
         textBox.addKeyListener(new KeyListener() {
-
+            
             @Override
             public void componentKeyPress(ComponentEvent event) {
                 if (okButton.isEnabled()
                         && event.getKeyCode() == KeyCodes.KEY_ENTER) {
-                    box.close();
+                    box.getDialog().hide(okButton);
                 }
             }
         });
-
+        
         box.addListener(Events.OnKeyUp, new Listener<MessageBoxEvent>() {
-
+            
             @Override
             public void handleEvent(MessageBoxEvent be) {
                 String value = textBox.getValue();

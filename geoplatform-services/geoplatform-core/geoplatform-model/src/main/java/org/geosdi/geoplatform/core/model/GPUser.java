@@ -50,7 +50,6 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 @XmlRootElement(name = "User")
 @Entity(name = "User")
-@Table(name = "gp_user")
 @DiscriminatorValue("GPUser")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "user")
 public class GPUser extends GPAccount implements UserDetails {

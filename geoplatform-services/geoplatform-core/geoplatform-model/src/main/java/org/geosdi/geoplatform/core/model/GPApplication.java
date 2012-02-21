@@ -50,7 +50,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @XmlRootElement(name = "Application")
 @Entity(name = "Application")
-@Table(name = "gp_application")
 @DiscriminatorValue("GPApplication")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "application")
 public class GPApplication extends GPAccount {

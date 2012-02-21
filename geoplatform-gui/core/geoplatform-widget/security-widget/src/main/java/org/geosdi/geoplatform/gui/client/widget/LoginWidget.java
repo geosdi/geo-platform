@@ -47,8 +47,8 @@ import org.geosdi.geoplatform.gui.client.event.UserLoginManager;
 import org.geosdi.geoplatform.gui.client.widget.LoginStatus.EnumLoginStatus;
 import org.geosdi.geoplatform.gui.client.widget.security.GPSecurityWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
-import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
+import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.server.gwt.SecurityRemoteImpl;
@@ -111,7 +111,7 @@ public class LoginWidget extends GPSecurityWidget
             SecurityRemoteImpl.Util.getInstance().userLogin(
                     this.userName.getValue(),
                     this.password.getValue(),
-                    new AsyncCallback<IGPUserDetail>() {
+                    new AsyncCallback<IGPAccountDetail>() {
 
                         @Override
                         public void onFailure(Throwable caught) {
@@ -125,9 +125,9 @@ public class LoginWidget extends GPSecurityWidget
                         }
 
                         @Override
-                        public void onSuccess(IGPUserDetail result) {
+                        public void onSuccess(IGPAccountDetail result) {
 
-                            GPUserGuiComponents.getInstance().setUserDetail(result);
+                            GPAccountGuiComponents.getInstance().setAccountDetail(result);
                             status.setStatus(
                                     LoginStatus.EnumLoginStatus.STATUS_MESSAGE_LOGIN.getValue(),
                                     LoginStatus.EnumLoginStatus.STATUS_LOGIN.getValue());

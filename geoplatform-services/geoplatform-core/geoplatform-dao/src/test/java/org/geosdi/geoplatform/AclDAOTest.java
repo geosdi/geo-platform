@@ -88,6 +88,7 @@ public class AclDAOTest extends BaseDAOTest {
     private AclSid admin;
     private AclSid user;
     private AclSid viewer;
+    private AclSid sigv;
 
     @Test
     public void testCheckAclDAOs() {
@@ -216,13 +217,20 @@ public class AclDAOTest extends BaseDAOTest {
         logger.debug("\n*** AclSid to INSERT:\n{}\n***", user);
         logger.debug("\n*** AclSid to INSERT:\n{}\n***", viewer);
         //
-        sidDAO.persist(superUser, admin, user, viewer);
+        this.sigv = new AclSid(true, "SIGV");
+        //
+        logger.debug("\n*** AclSid to INSERT:\n{}\n***", sigv);
+        //
+        sidDAO.persist(superUser, admin, user, viewer, sigv);
     }
 
     private Map<String, GuiComponent> createGuiComponents() {
         Map<String, GuiComponent> gcMap = new HashMap<String, GuiComponent>();
         // Gui Components
         for (String ID : GuiComponentIDs.LIST_ALL) {
+            gcMap.put(ID, new GuiComponent(ID));
+        }
+        for (String ID : GuiComponentIDs.LIST_OWN_SIGV) {
             gcMap.put(ID, new GuiComponent(ID));
         }
         //
@@ -235,6 +243,11 @@ public class AclDAOTest extends BaseDAOTest {
         Map<String, AclObjectIdentity> objIdMap = new HashMap<String, AclObjectIdentity>();
         // Object Identities
         for (String componentID : GuiComponentIDs.LIST_ALL) {
+            Long id = gcMap.get(componentID).getId();
+            // SuperUser is the owner of all Object Identities
+            objIdMap.put(componentID, new AclObjectIdentity(gcClass, id, superUser));
+        }
+        for (String componentID : GuiComponentIDs.LIST_OWN_SIGV) {
             Long id = gcMap.get(componentID).getId();
             // SuperUser is the owner of all Object Identities
             objIdMap.put(componentID, new AclObjectIdentity(gcClass, id, superUser));
@@ -268,6 +281,13 @@ public class AclDAOTest extends BaseDAOTest {
                 // Ace Order is 3 because the entries of admin and user should be added before
                 entriesMap.put(GPRole.VIEWER + e.getKey(),
                                new AclEntry(objIdMap.get(e.getKey()), 3, viewer, enable, e.getValue()));
+            }
+        }
+        // SIGV Application
+        for (Map.Entry<String, Boolean> e : GuiComponentIDs.MAP_APPLICATION_SIGV.entrySet()) {
+            if (e.getValue() != null) {
+                entriesMap.put("SIGV" + e.getKey(),
+                               new AclEntry(objIdMap.get(e.getKey()), 4, sigv, enable, e.getValue()));
             }
         }
         //

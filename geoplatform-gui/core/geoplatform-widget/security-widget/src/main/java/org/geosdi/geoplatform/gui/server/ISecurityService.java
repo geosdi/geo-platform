@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.server;
 
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -45,8 +45,14 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
  */
 public interface ISecurityService {
 
-    public IGPUserDetail userLogin(String userName, String password,
-            HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    IGPAccountDetail userLogin(String userName, String password,
+                               HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
 
-    public void invalidateSession(HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    IGPAccountDetail applicationLogin(String appID,
+                                      HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
+
+    void invalidateSession(HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
 }

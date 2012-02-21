@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.server.gwt;
 
 import org.geosdi.geoplatform.gui.client.service.SecurityRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +55,13 @@ public class SecurityRemoteImpl extends GPAutoInjectingRemoteServiceServlet
     private ISecurityService securityService;
 
     @Override
-    public IGPUserDetail userLogin(String userName, String password) throws GeoPlatformException {
+    public IGPAccountDetail userLogin(String userName, String password) throws GeoPlatformException {
         return this.securityService.userLogin(userName, password, super.getThreadLocalRequest());
+    }
+    
+    @Override
+    public IGPAccountDetail applicationLogin(String appID) throws GeoPlatformException {
+        return this.securityService.applicationLogin(appID, super.getThreadLocalRequest());
     }
 
     @Override

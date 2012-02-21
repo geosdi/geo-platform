@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.server;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.gui.utility.DefaultProjectEnum;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
@@ -82,19 +83,20 @@ public class SessionUtility {
         session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), user);
     }
 
-    public void storeDefaultProjectInSession(Long projectID, HttpServletRequest httpServletRequest) {
+    public void storeDefaultProjectInSession(Long projectID,
+                                             HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
         session.setMaxInactiveInterval(900);
         session.setAttribute(DefaultProjectEnum.DEFAULT_PROJECT.toString(), projectID);
     }
 
-    public void storeUserAndProjectInSession(GPUser user, Long projectID,
-            HttpServletRequest httpServletRequest) {
+    public void storeAccountAndProjectInSession(GPAccount account, Long projectID,
+                                                HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
         session.setMaxInactiveInterval(900);
-        session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), user);
+        session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), account);
         session.setAttribute(DefaultProjectEnum.DEFAULT_PROJECT.toString(), projectID);
     }
 }

@@ -69,6 +69,7 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
+import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
@@ -231,16 +232,16 @@ public abstract class BaseDAOTest {
         this.userTest = this.insertUser("user", GPRole.USER);
         this.viewerTest = this.insertUser("viewer", GPRole.VIEWER);
         //
-        this.insertUser("SIGV", GPRole.ADMIN);
+        this.insertApplication("SIGV");
     }
 
     private void insertProject() {
         this.adminProject = this.createProject("admin_project", true, 0,
-                new Date(System.currentTimeMillis()));
+                                               new Date(System.currentTimeMillis()));
         this.userProject = this.createProject("user_project", false, 0,
-                new Date(System.currentTimeMillis() + 300 * 1000));
+                                              new Date(System.currentTimeMillis() + 300 * 1000));
         this.viewerProject = this.createProject("viewer_project", false, 0,
-                new Date(System.currentTimeMillis() + 1700 * 1000));
+                                                new Date(System.currentTimeMillis() + 1700 * 1000));
         projectDAO.persist(adminProject, userProject, viewerProject);
         //
         this.insertBindingUserProject(adminTest, adminProject, BasePermission.ADMINISTRATION.getMask());
@@ -259,10 +260,10 @@ public abstract class BaseDAOTest {
         GPProject projectIth = null;
         for (int i = 1; i <= 41; i++) {
             projectIth = this.createProject("project_admin_k_" + i, false,
-                    i, new Date(System.currentTimeMillis() + i * 333));
+                                            i, new Date(System.currentTimeMillis() + i * 333));
             projectDAO.persist(projectIth);
             this.insertBindingUserProject(this.adminTest, projectIth,
-                    BasePermission.ADMINISTRATION.getMask());
+                                          BasePermission.ADMINISTRATION.getMask());
         }
 
         // Project of user -> root folder: "server layer"
@@ -319,10 +320,18 @@ public abstract class BaseDAOTest {
         return user;
     }
 
-    private List<GPAuthority> createAuthorities(GPUser user, GPRole... roles) {
+    protected GPApplication insertApplication(String appId) {
+        GPApplication application = this.createApplication(appId);
+        accountDAO.persist(application);
+        logger.debug("\n*** Application SAVED:\n{}\n***", application);
+
+        return application;
+    }
+
+    private List<GPAuthority> createAuthorities(GPAccount account, GPRole... roles) {
         List<GPAuthority> authorities = new ArrayList<GPAuthority>();
         for (GPRole role : roles) {
-            authorities.add(new GPAuthority(user, role.toString()));
+            authorities.add(new GPAuthority(account, role.toString()));
         }
         return authorities;
     }
@@ -342,8 +351,15 @@ public abstract class BaseDAOTest {
         return user;
     }
 
+    private GPApplication createApplication(String appID) {
+        GPApplication application = new GPApplication();
+        application.setAppID(appID);
+        application.setEnabled(true);
+        return application;
+    }
+
     protected GPFolder createFolder(String name, GPProject project,
-            GPFolder parent, int position) {
+                                    GPFolder parent, int position) {
         GPFolder folder = new GPFolder();
         folder.setName(name);
         folder.setProject(project);
@@ -353,7 +369,7 @@ public abstract class BaseDAOTest {
     }
 
     protected GPProject createProject(String name, boolean isShared,
-            int numberOfElements, Date creationalDate) {
+                                      int numberOfElements, Date creationalDate) {
         GPProject project = new GPProject();
         project.setName(name);
         project.setShared(isShared);
@@ -363,7 +379,7 @@ public abstract class BaseDAOTest {
     }
 
     protected void insertBindingUserProject(GPUser user, GPProject project,
-            int permissionMask) {
+                                            int permissionMask) {
         GPAccountProject userProjects = new GPAccountProject();
         userProjects.setAccountAndProject(user, project);
         userProjects.setPermissionMask(permissionMask);
@@ -371,7 +387,7 @@ public abstract class BaseDAOTest {
     }
 
     protected GPRasterLayer createRasterLayer(GPFolder folder, GPProject project,
-            int position) {
+                                              int position) {
         String name = "deagostini_ita_250mila";
         // GPRasterLayer
         GPRasterLayer raster = new GPRasterLayer();
@@ -457,7 +473,7 @@ public abstract class BaseDAOTest {
     }
 
     private List<GPRasterLayer> loadRasterLayer(List<Layer> layers,
-            GPFolder folder, GPProject project, int position) {
+                                                GPFolder folder, GPProject project, int position) {
         List<GPRasterLayer> rasterLayers = null;
         rasterLayers = new ArrayList<GPRasterLayer>(layers.size());
 

@@ -62,7 +62,7 @@ import org.geosdi.geoplatform.gui.configuration.MenuClientTool;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 import org.geosdi.geoplatform.gui.configuration.toolbar.MenuInToolBar;
-import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
+import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 
 /**
@@ -162,7 +162,7 @@ public class GPMapToolbarWidget extends GeoPlatformToolbarWidget
     @Override
     public void addMenuInToolBar(MenuInToolBar tool) {
         Button buttonItem = new Button(
-                GPUserGuiComponents.getInstance().getUserName());
+                GPAccountGuiComponents.getInstance().getStringID());
         buttonItem.setIcon(BasicWidgetResources.ICONS.logged_user());
         buttonItem.setId(tool.getId());
 

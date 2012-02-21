@@ -11,11 +11,13 @@ import java.util.Map;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface IGPUserDetail extends IGPUserSimpleDetail {
+public interface IGPAccountDetail {
 
-    public void setComponentPermission(Map<String, Boolean> componentPermission);
+    String getStringID();
 
-    public Map<String, Boolean> getComponentPermission();
+    void setComponentPermission(Map<String, Boolean> componentPermission);
+
+    Map<String, Boolean> getComponentPermission();
 
     /**
      * Check the permission of a GuiComponent via String ID
@@ -25,5 +27,5 @@ public interface IGPUserDetail extends IGPUserSimpleDetail {
      * @return true or false if componentID was set, for enable/disable;
      *         otherwise null i.e. the component will not be visible
      */
-    public Boolean hasComponentPermission(String componentID);
+    Boolean hasComponentPermission(String componentID);
 }

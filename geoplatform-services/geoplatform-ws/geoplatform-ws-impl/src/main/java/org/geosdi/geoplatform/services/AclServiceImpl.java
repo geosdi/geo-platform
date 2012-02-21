@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -53,9 +54,10 @@ import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
+import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPAuthority;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.responce.RoleDTO;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -138,15 +140,66 @@ class AclServiceImpl {
     //</editor-fold>
 
     /**
-     * @see org.geosdi.geoplatform.services.GeoPlatformService#getAllRoles()
+     * @see GeoPlatformService#getAllRoles()
      */
-    public List<RoleDTO> getAllRoles() {
+    public List<String> getAllRoles() {
         List<AclSid> sids = sidDao.findByPrincipal(false);
-        return RoleDTO.convertToRoleDTOList(sids);
+
+        List<String> roles = new ArrayList<String>(sids.size());
+        for (AclSid sid : sids) {
+            roles.add(sid.getSid());
+        }
+        return roles;
     }
 
     /**
-     * @see org.geosdi.geoplatform.services.GeoPlatformService#getAccountPermission(java.lang.Long)
+     * @see GeoPlatformService#getAllGuiComponentIDs()
+     */
+    public List<String> getAllGuiComponentIDs() {
+        return GuiComponentIDs.LIST_ALL;
+    }
+
+    /**
+     * @see GeoPlatformService#getApplicationPermission(java.lang.String)
+     */
+    public GuiComponentsPermissionMapData getApplicationPermission(String appID)
+            throws ResourceNotFoundFault {
+        // Retrieve the account
+        GPApplication application = accountDao.findByAppID(appID);
+        if (application == null) {
+            throw new ResourceNotFoundFault("Application not found with appID \"" + appID + "\"");
+        }
+
+        GuiComponentsPermissionMapData mapComponentPermission = new GuiComponentsPermissionMapData();
+        Map<String, Boolean> permissionMap = mapComponentPermission.getPermissionMap();
+
+        // Retrieve the Sid corresponding to the Application ID
+        AclSid sid = this.findSid(appID, true);
+        // Retrieve the ACEs of the Sid
+        List<AclEntry> entries = entryDao.findBySid(sid.getId());
+        logger.trace("\n*** #Entries: {} ***", entries.size());
+        // For each ACEs
+        // (ACL has a single ACE for Role+GuiComponent,
+        // because there is a singe Permission)
+        for (AclEntry entry : entries) {
+            logger.trace("\n*** AclEntry:\n{}\n***", entry);
+            if (entry.getMask().equals(GeoPlatformPermission.ENABLE.getMask())) {
+                AclObjectIdentity objectIdentity = entry.getAclObject();
+                logger.trace("\n*** AclObjectIdentity:\n{}\n***", objectIdentity);
+                GuiComponent gc = guiComponentDao.find(objectIdentity.getObjectId());
+                logger.trace("\n*** GuiComponent:\n{}\n***", gc);
+                logger.debug("\n*** ComponentId: {} ***\n*** Granting: {} ***",
+                             gc.getComponentId(), entry.isGranting());
+
+                permissionMap.put(gc.getComponentId(), entry.isGranting());
+            }
+        }
+
+        return mapComponentPermission;
+    }
+
+    /**
+     * @see GeoPlatformService#getAccountPermission(java.lang.Long)
      */
     public GuiComponentsPermissionMapData getAccountPermission(Long accountID)
             throws ResourceNotFoundFault {
@@ -172,7 +225,7 @@ class AclServiceImpl {
     }
 
     /**
-     * @see org.geosdi.geoplatform.services.GeoPlatformService#getRolePermission(java.lang.String)
+     * @see GeoPlatformService#getRolePermission(java.lang.String)
      */
     public GuiComponentsPermissionMapData getRolePermission(String role)
             throws ResourceNotFoundFault {
@@ -217,7 +270,7 @@ class AclServiceImpl {
     }
 
     /**
-     * @see org.geosdi.geoplatform.services.GeoPlatformService#updateRolePermission(java.lang.String, org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData)
+     * @see GeoPlatformService#updateRolePermission(java.lang.String, org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData)
      */
     public boolean updateRolePermission(String role,
                                         GuiComponentsPermissionMapData mapComponentPermission)
@@ -284,5 +337,16 @@ class AclServiceImpl {
         }
         logger.trace("\n*** AclSid:\n{}\n***", sid);
         return sid;
+    }
+
+    public boolean saveRole(String role) throws IllegalParameterFault {
+        AclSid sid = sidDao.findBySid(role, false);
+        if (sid != null) {
+            throw new IllegalParameterFault("Authority (Role) \"" + role + "\" already exist");
+        }
+
+        sid = new AclSid(false, role);
+        sidDao.persist(sid);
+        return true;
     }
 }

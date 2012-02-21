@@ -35,10 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.soap.SOAPFaultException;
+import org.geosdi.geoplatform.core.model.GPAccount;
+import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.slf4j.Logger;
@@ -46,11 +47,11 @@ import org.slf4j.LoggerFactory;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.AccountExpiredFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.gui.client.model.security.GPLoginUserDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
-import org.geosdi.geoplatform.gui.server.converter.GPUserConverter;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
@@ -69,14 +70,13 @@ public class SecurityService implements ISecurityService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GeoPlatformService geoPlatformServiceClient;
-    private GPUserConverter userConverter;
     //
     @Autowired
     private SessionUtility sessionUtility;
 
     @Override
-    public IGPUserDetail userLogin(String userName, String password,
-                                   HttpServletRequest httpServletRequest)
+    public IGPAccountDetail userLogin(String userName, String password,
+                                      HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         GPUser user = null;
         GuiComponentsPermissionMapData guiComponentPermission = null;
@@ -110,11 +110,51 @@ public class SecurityService implements ISecurityService {
             project.setId(this.saveDefaultProject(user, project));
         }
 
-        this.sessionUtility.storeUserAndProjectInSession(user,
-                                                         user.getDefaultProjectID(),
-                                                         httpServletRequest);
+        this.sessionUtility.storeAccountAndProjectInSession(user,
+                                                            user.getDefaultProjectID(),
+                                                            httpServletRequest);
 
-        IGPUserDetail userDetail = this.userConverter.convertUserToDTO(user);
+        IGPAccountDetail userDetail = this.convertAccountToDTO(user);
+
+        userDetail.setComponentPermission(guiComponentPermission.getPermissionMap());
+
+        return userDetail;
+    }
+
+    @Override
+    public IGPAccountDetail applicationLogin(String appID,
+                                             HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+        GPApplication application = null;
+        GuiComponentsPermissionMapData guiComponentPermission = null;
+        try {
+            application = geoPlatformServiceClient.getApplication(appID);
+
+            guiComponentPermission = geoPlatformServiceClient.getApplicationPermission(
+                    application.getAppID());
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("SecurityService",
+                         "Unable to find application with appID: " + appID
+                    + " Error: " + ex);
+            throw new GeoPlatformException("Unable to find application with appID: "
+                    + appID);
+        } catch (AccountExpiredFault ex) {
+            logger.error("Error on SecurityService: " + ex);
+            throw new GeoPlatformException("Account expired, contact the administrator");
+        }
+
+        if (application.getDefaultProjectID() == null) {
+            GPProject project = new GPProject();
+            project.setName("Default Project");
+            project.setShared(false);
+            project.setId(this.saveDefaultProject(application, project));
+        }
+
+        this.sessionUtility.storeAccountAndProjectInSession(application,
+                                                            application.getDefaultProjectID(),
+                                                            httpServletRequest);
+
+        IGPAccountDetail userDetail = this.convertAccountToDTO(application);
 
         userDetail.setComponentPermission(guiComponentPermission.getPermissionMap());
 
@@ -147,9 +187,32 @@ public class SecurityService implements ISecurityService {
         }
     }
 
-    @PostConstruct
-    public void createConverter() {
-        this.userConverter = new GPUserConverter();
+    private Long saveDefaultProject(GPAccount account, GPProject project)
+            throws GeoPlatformException {
+        Long idProject = null;
+        try {
+            idProject = this.geoPlatformServiceClient.saveProject(account.getStringID(),
+                                                                  project, true);
+            account.setDefaultProjectID(idProject);
+        } catch (ResourceNotFoundFault rnf) {
+            this.logger.error("Failed to save project on SecurityService: " + rnf);
+            throw new GeoPlatformException(rnf);
+        } catch (IllegalParameterFault ilg) {
+            logger.error("Error on SecurityService: " + ilg);
+            throw new GeoPlatformException("Parameter incorrect on saveProject");
+        }
+        return idProject;
+    }
+
+    private IGPAccountDetail convertAccountToDTO(GPAccount account) {
+        GPLoginUserDetail accountDetail = new GPLoginUserDetail();
+        accountDetail.setUsername(account.getStringID()); // Forced representation
+        if (account instanceof GPUser) {
+            GPUser user = (GPUser) account;
+            accountDetail.setName(user.getUsername());
+            accountDetail.setEmail(user.getEmailAddress());
+        }
+        return (IGPAccountDetail) accountDetail;
     }
 
     /**
@@ -159,22 +222,5 @@ public class SecurityService implements ISecurityService {
     public void setGeoPlatformServiceClient(
             @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
-    }
-
-    private Long saveDefaultProject(GPUser user, GPProject project)
-            throws GeoPlatformException {
-        Long idProject = null;
-        try {
-            idProject = this.geoPlatformServiceClient.saveProject(user.getUsername(),
-                                                                  project, true);
-            user.setDefaultProjectID(idProject);
-        } catch (ResourceNotFoundFault rnf) {
-            this.logger.error("Failed to save project on SecurityService: " + rnf);
-            throw new GeoPlatformException(rnf);
-        } catch (IllegalParameterFault ilg) {
-            logger.error("Error on SecurityService: " + ilg);
-            throw new GeoPlatformException("Parameter incorrect on saveProject");
-        }
-        return idProject;
     }
 }

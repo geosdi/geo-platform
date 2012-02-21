@@ -614,7 +614,7 @@ public class LayerService implements ILayerService {
 
             user.setDefaultProjectID(projectID);
 
-            this.sessionUtility.storeUserAndProjectInSession(user, projectID,
+            this.sessionUtility.storeAccountAndProjectInSession(user, projectID,
                     httpServletRequest);
 
         } catch (GPSessionTimeout timeout) {
@@ -636,7 +636,7 @@ public class LayerService implements ILayerService {
 
             user.setDefaultProjectID(projectId);
 
-            this.sessionUtility.storeUserAndProjectInSession(user, projectId,
+            this.sessionUtility.storeAccountAndProjectInSession(user, projectId,
                     httpServletRequest);
 
             return projectId;
@@ -667,7 +667,7 @@ public class LayerService implements ILayerService {
 
             if (this.geoPlatformServiceClient.saveAccountProjectProperties(dto)) {
                 user.setDefaultProjectID(project.getId());
-                this.sessionUtility.storeUserAndProjectInSession(user, project.getId(),
+                this.sessionUtility.storeAccountAndProjectInSession(user, project.getId(),
                         httpServletRequest);
             }
 

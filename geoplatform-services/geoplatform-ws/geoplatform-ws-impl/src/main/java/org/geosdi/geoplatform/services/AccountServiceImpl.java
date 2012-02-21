@@ -39,7 +39,6 @@ import com.googlecode.genericdao.search.Search;
 import com.googlecode.genericdao.search.Filter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.core.dao.GPAuthorityDAO;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
@@ -162,14 +161,14 @@ class AccountServiceImpl {
 
         if (sendEmail && account instanceof GPUser) {
             GPUser user = (GPUser) account;
-            
+
             GPUser clonedUser = cloneUser(user, plainPassword);
             schedulerService.sendEmailRegistration(clonedUser);
         }
 
         return account.getId();
     }
-    
+
     private GPUser cloneUser(GPUser user, String plainPassword) {
         GPUser clonedUser = new GPUser();
         clonedUser.setEmailAddress(user.getEmailAddress());
@@ -177,7 +176,7 @@ class AccountServiceImpl {
         clonedUser.setSendEmail(user.isSendEmail());
         clonedUser.setUsername(user.getUsername());
         clonedUser.setPassword(plainPassword);
-        
+
         return clonedUser;
     }
 
@@ -236,7 +235,7 @@ class AccountServiceImpl {
     }
 
     public Long updateOwnUser(UserDTO user,
-            String currentPlainPassword, String newPlainPassword)
+                              String currentPlainPassword, String newPlainPassword)
             throws ResourceNotFoundFault, IllegalParameterFault {
         if (user.getId() == null) {
             throw new IllegalArgumentException("User \"ID\" must be NOT NULL");
@@ -389,7 +388,7 @@ class AccountServiceImpl {
         EntityCorrectness.checkAccountLog(user); // TODO assert
 
         if (!user.isAccountNonExpired()) {
-            throw new AccountExpiredFault("Account expired", username);
+            throw new AccountExpiredFault("User expired", username);
         }
 
         // Check password
@@ -401,6 +400,18 @@ class AccountServiceImpl {
         user.setGPAuthorities(this.getGPAuthorities(user.getStringID()));
 
         return user;
+    }
+
+    public GPApplication getApplication(String appID)
+            throws ResourceNotFoundFault, AccountExpiredFault {
+        GPApplication application = this.getApplicationByAppId(appID);
+        EntityCorrectness.checkAccountLog(application); // TODO assert
+
+        if (!application.isAccountNonExpired()) {
+            throw new AccountExpiredFault("Application expired", appID);
+        }
+
+        return application;
     }
 
     /**

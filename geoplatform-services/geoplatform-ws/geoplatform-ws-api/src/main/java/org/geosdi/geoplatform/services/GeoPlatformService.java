@@ -71,7 +71,6 @@ import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.ApplicationDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
-import org.geosdi.geoplatform.responce.RoleDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
@@ -151,6 +150,11 @@ public interface GeoPlatformService {
     @WebResult(name = "Application")
     GPApplication getApplicationDetail(@WebParam(name = "applicationID") Long applicationID)
             throws ResourceNotFoundFault;
+
+    @Get
+    @WebResult(name = "Application")
+    GPApplication getApplication(@WebParam(name = "appID") String appID)
+            throws ResourceNotFoundFault, AccountExpiredFault;
 
     @Get
     @HttpResource(location = "/users/{userID}")
@@ -704,7 +708,42 @@ public interface GeoPlatformService {
     @Get
     @HttpResource(location = "/roles")
     @WebResult(name = "Roles")
-    List<RoleDTO> getAllRoles();
+    List<String> getAllRoles();
+
+    /**
+     * Retrieve all GuiComponet IDs.
+     * 
+     * @return List of all Roles
+     */
+    @Get
+    @HttpResource(location = "/permissions/ids")
+    @WebResult(name = "GuiComponentIDs")
+    List<String> getAllGuiComponentIDs();
+
+    /**
+     * Retrieve GUI Component permissions for an Application.
+     * <p>
+     * It is based only on application ID.
+     * 
+     * @param appID
+     * 
+     * @return Map that contains GUI Components permissions, with:
+     * <ul>
+     * <li>
+     * key = ID Component
+     * </li>
+     * <li>
+     * value = Permission
+     * </li>
+     * </ul>
+     * @throws ResourceNotFoundFault if the application is not found
+     */
+    @Get
+    @HttpResource(location = "/permissions/application/{appID}")
+    @WebResult(name = "ApplicationGuiComponentsPermissionMapData")
+    GuiComponentsPermissionMapData getApplicationPermission(
+            @WebParam(name = "accountID") String appID)
+            throws ResourceNotFoundFault;
 
     /**
      * Retrieve GUI Component permissions for an Account.
@@ -763,5 +802,18 @@ public interface GeoPlatformService {
             @WebParam(name = "role") String role,
             @WebParam(name = "permissionMapData") GuiComponentsPermissionMapData mapComponentPermission)
             throws ResourceNotFoundFault;
+
+    /**
+     * Save a new role (authority).
+     * 
+     * @param role role (authority) name
+     * 
+     * @return if the saving was successful 
+     * @throws IllegalParameterFault if the role (authority) already exist
+     */
+    @Post
+    @HttpResource(location = "/permissions/{role}")
+    boolean saveRole(@WebParam(name = "role") String role)
+            throws IllegalParameterFault;
     //</editor-fold>
 }

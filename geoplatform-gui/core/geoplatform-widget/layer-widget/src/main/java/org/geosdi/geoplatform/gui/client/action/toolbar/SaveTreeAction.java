@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.gui.client.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.memento.save.GPMementoSaveCache;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.GPPeekCacheEventHandler;
 import org.geosdi.geoplatform.gui.client.plugin.tree.toolbar.SaveTreeToolbarPlugin;
-import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
+import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
 import org.geosdi.geoplatform.gui.model.memento.IMemento;
 import org.geosdi.geoplatform.gui.observable.Observable;
 import org.geosdi.geoplatform.gui.observable.Observer;
@@ -75,7 +75,7 @@ public class SaveTreeAction extends ToolbarLayerTreeAction
         LayerHandlerManager.addHandler(GPPeekCacheEventHandler.TYPE, this);
 
         this.savePlugin = savePlugin;
-        Boolean permission = GPUserGuiComponents.getInstance().
+        Boolean permission = GPAccountGuiComponents.getInstance().
                 hasComponentPermission(savePlugin.getId());
         if (permission) { // Observ only if there are the pemission to true
             GPMementoSaveCache.getInstance().getObservable().addObserver(this);

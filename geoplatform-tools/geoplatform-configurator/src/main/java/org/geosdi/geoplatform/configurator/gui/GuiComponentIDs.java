@@ -91,9 +91,6 @@ public class GuiComponentIDs {
     public static final String GOOGLE_REVERSE_GEOCODING = "googleReverseGeocoding";
     public static final String YAHOO_REVERSE_GEOCODING = "yahooReverseGeocoding";
     public static final String REVERSE_GEOCODING_WPS = "reverseGeocodingWPS";
-    //
-    public static final String COMMIT = "Commit";
-    //
     // via MenuUtility
     public static final String GOOGLE_ICON = "GOOGLE_ICON";
     public static final String USER_MENU = "USER_MENU";
@@ -115,11 +112,17 @@ public class GuiComponentIDs {
     public static final String PREVIEW_KML = "PREVIEW_KML";
     public static final String LAYER_STYLER = "LAYER_STYLER";
     /**
+     * Own of SIVG
+     */
+    public static final String COMMIT = "Commit";
+    /**
      * Collections of GuiComponent
      */
     public static final List<String> LIST_ALL;
     public static final Map<String, Boolean> MAP_USER;
     public static final Map<String, Boolean> MAP_VIEWER;
+    public static final List<String> LIST_OWN_SIGV; // Only for SIGV
+    public static final Map<String, Boolean> MAP_APPLICATION_SIGV;
 
     private GuiComponentIDs() {
     }
@@ -177,7 +180,6 @@ public class GuiComponentIDs {
         all.add(IMPORT_PROJECT);
         all.add(PREVIEW_KML);
         all.add(LAYER_STYLER);
-        all.add(COMMIT);
         //
         LIST_ALL = Collections.unmodifiableList(all);
         /**
@@ -230,7 +232,6 @@ public class GuiComponentIDs {
         mapUser.put(IMPORT_PROJECT, true);
         mapUser.put(PREVIEW_KML, true);
         mapUser.put(LAYER_STYLER, true);
-        mapUser.put(COMMIT,true);
         //
         MAP_USER = Collections.unmodifiableMap(mapUser);
         /**
@@ -282,8 +283,40 @@ public class GuiComponentIDs {
         mapViewer.put(IMPORT_PROJECT, true);
         mapViewer.put(PREVIEW_KML, true);
         mapViewer.put(LAYER_STYLER, true);
-        mapViewer.put(COMMIT,true);
         //
         MAP_VIEWER = Collections.unmodifiableMap(mapViewer);
+        /**
+         * SIGV only
+         */
+        List<String> sigv = new ArrayList<String>();
+        //
+        sigv.add(COMMIT);
+        //
+        LIST_OWN_SIGV = Collections.unmodifiableList(sigv);
+        /**
+         * SIGV Application
+         */
+        Map<String, Boolean> mapSigv = new HashMap<String, Boolean>();
+        // Menubar
+        mapSigv.put(ABOUT_GEOPLATFORM, true);
+        mapSigv.put(GEOCODING, true);
+        mapSigv.put(LAYER_MENU, true);
+        // Toolbar
+        mapSigv.put(GEO_PLATFORM_INFO_APP, true);
+        mapSigv.put(ZOOM_IN, true);
+        mapSigv.put(ZOOM_OUT, true);
+        mapSigv.put(ZOOM_PREVIOUS, true);
+        mapSigv.put(ZOOM_NEXT, true);
+        mapSigv.put(GOOGLE_REVERSE_GEOCODING, true);
+        mapSigv.put(YAHOO_REVERSE_GEOCODING, true);
+        mapSigv.put(COMMIT, true);
+        //
+        mapSigv.put(ADD_FOLDER, true);
+        mapSigv.put(ADD_LAYERS, true);
+        mapSigv.put(DELETE_ELEMENT, true);
+        mapSigv.put(SAVE_TREE, true);
+        mapSigv.put(PRINT_LAYERS, true);
+        //
+        MAP_APPLICATION_SIGV = Collections.unmodifiableMap(mapSigv);
     }
 }

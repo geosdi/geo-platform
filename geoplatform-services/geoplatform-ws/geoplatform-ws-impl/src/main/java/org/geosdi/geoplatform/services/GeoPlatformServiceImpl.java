@@ -77,7 +77,6 @@ import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.AccountProjectPropertiesDTO;
 import org.geosdi.geoplatform.responce.FolderDTO;
 import org.geosdi.geoplatform.responce.ProjectDTO;
-import org.geosdi.geoplatform.responce.RoleDTO;
 import org.geosdi.geoplatform.responce.ServerDTO;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
 import org.geosdi.geoplatform.responce.ShortLayerDTO;
@@ -342,6 +341,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     @Override
     public GPApplication getApplicationDetail(Long applicationID) throws ResourceNotFoundFault {
         return accountServiceDelegate.getApplicationDetail(applicationID);
+    }
+
+    @Override
+    public GPApplication getApplication(String appID)
+            throws ResourceNotFoundFault, AccountExpiredFault {
+        return accountServiceDelegate.getApplication(appID);
     }
 
     @Override
@@ -821,10 +826,21 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     //<editor-fold defaultstate="collapsed" desc="ACL">
     @Override
-    public List<RoleDTO> getAllRoles() {
+    public List<String> getAllRoles() {
         return aclServiceDelegate.getAllRoles();
     }
 
+    @Override
+    public List<String> getAllGuiComponentIDs() {
+        return aclServiceDelegate.getAllGuiComponentIDs();
+    }
+
+    @Override
+    public GuiComponentsPermissionMapData getApplicationPermission(String appID)
+            throws ResourceNotFoundFault {
+        return this.aclServiceDelegate.getApplicationPermission(appID);
+    }
+    
     @Override
     public GuiComponentsPermissionMapData getAccountPermission(Long accountID)
             throws ResourceNotFoundFault {
@@ -842,6 +858,11 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
                                         GuiComponentsPermissionMapData mapComponentPermission)
             throws ResourceNotFoundFault {
         return this.aclServiceDelegate.updateRolePermission(role, mapComponentPermission);
+    }
+
+    @Override
+    public boolean saveRole(String role) throws IllegalParameterFault {
+        return this.aclServiceDelegate.saveRole(role);
     }
     //</editor-fold>
 }

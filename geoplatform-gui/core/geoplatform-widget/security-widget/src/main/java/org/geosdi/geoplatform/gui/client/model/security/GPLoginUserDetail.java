@@ -5,14 +5,15 @@
 package org.geosdi.geoplatform.gui.client.model.security;
 
 import java.util.Map;
-import org.geosdi.geoplatform.gui.global.security.IGPUserDetail;
+import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
+import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPLoginUserDetail implements IGPUserDetail {
+public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail {
 
     private static final long serialVersionUID = -7265573728577702116L;
     //
@@ -22,6 +23,11 @@ public class GPLoginUserDetail implements IGPUserDetail {
     private Map<String, Boolean> componentPermission;
 
     public GPLoginUserDetail() {
+    }
+
+    @Override
+    public String getStringID() {
+        return this.getUsername();
     }
 
     @Override

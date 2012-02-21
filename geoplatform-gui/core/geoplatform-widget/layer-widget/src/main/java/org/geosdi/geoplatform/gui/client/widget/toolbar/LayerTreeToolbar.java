@@ -40,7 +40,7 @@ import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.widget.tree.toolbar.GPTreeToolbar;
-import org.geosdi.geoplatform.gui.global.security.GPUserGuiComponents;
+import org.geosdi.geoplatform.gui.global.security.GPAccountGuiComponents;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.ITreeToolbarPlugin;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarPluginManager;
 import org.geosdi.geoplatform.gui.plugin.tree.toolbar.TreeToolbarRegion;
@@ -90,7 +90,7 @@ public class LayerTreeToolbar extends GPTreeToolbar {
         for (ITreeToolbarPlugin element : TreeToolbarPluginManager.getToolbarPluginByRegion(region)) {
             String id = element.getId();
             
-            Boolean permission = GPUserGuiComponents.getInstance().
+            Boolean permission = GPAccountGuiComponents.getInstance().
                     hasComponentPermission(id);
             if (permission == null) { // Element will not be visible
                 // The element will removed from toolbarPlugin and not added to toolbar

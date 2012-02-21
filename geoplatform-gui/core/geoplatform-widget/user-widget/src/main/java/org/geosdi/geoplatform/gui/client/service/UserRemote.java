@@ -121,6 +121,12 @@ public interface UserRemote extends RemoteService {
 
     /**
      * 
+     * @return List of GuiComponet IDs
+     */
+    ArrayList<String> getAllGuiComponentIDs();
+
+    /**
+     * 
      * @param role
      * @return
      * @throws GeoPlatformException 
@@ -137,4 +143,12 @@ public interface UserRemote extends RemoteService {
      */
     boolean updateRolePermission(String role, HashMap<String, Boolean> permissionMap)
             throws GeoPlatformException;
+
+    /**
+     * 
+     * @param role
+     * @return
+     * @throws GeoPlatformException 
+     */
+    boolean saveRole(String role) throws GeoPlatformException;
 }

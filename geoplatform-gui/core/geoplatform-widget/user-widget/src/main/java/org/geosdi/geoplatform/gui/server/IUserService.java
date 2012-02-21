@@ -43,7 +43,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
-import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 
 /**
  *
@@ -76,11 +75,16 @@ public interface IUserService {
 
     ArrayList<String> getAllRoles(HttpServletRequest httpServletRequest);
 
+    ArrayList<String> getAllGuiComponentIDs(HttpServletRequest httpServletRequest);
+
     HashMap<String, Boolean> getRolePermission(String role,
                                                HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     boolean updateRolePermission(String role, HashMap<String, Boolean> permissionMap,
                                  HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
+
+    boolean saveRole(String role, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 }

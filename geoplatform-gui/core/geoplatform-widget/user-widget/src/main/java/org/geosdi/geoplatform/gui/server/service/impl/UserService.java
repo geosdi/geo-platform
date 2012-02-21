@@ -56,7 +56,6 @@ import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.responce.RoleDTO;
 import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.services.GeoPlatformService;
@@ -279,14 +278,12 @@ public class UserService implements IUserService {
 
     @Override
     public ArrayList<String> getAllRoles(HttpServletRequest httpServletRequest) {
-        List<RoleDTO> rolesDTO = geoPlatformServiceClient.getAllRoles();
+        return (ArrayList<String>) geoPlatformServiceClient.getAllRoles();
+    }
 
-        ArrayList<String> roles = new ArrayList<String>(rolesDTO.size());
-        for (RoleDTO roleDTO : rolesDTO) {
-            roles.add(roleDTO.getRole());
-        }
-
-        return roles;
+    @Override
+    public ArrayList<String> getAllGuiComponentIDs(HttpServletRequest httpServletRequest) {
+        return (ArrayList<String>) geoPlatformServiceClient.getAllGuiComponentIDs();
     }
 
     @Override
@@ -318,6 +315,17 @@ public class UserService implements IUserService {
         } catch (ResourceNotFoundFault ex) {
             logger.error(this.getClass().getSimpleName(), ex.getMessage());
             throw new GeoPlatformException("Unable to find \"" + role + "\" role");
+        }
+    }
+
+    @Override
+    public boolean saveRole(String role, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+        try {
+            return geoPlatformServiceClient.saveRole(role);
+        } catch (IllegalParameterFault ex) {
+            logger.error(this.getClass().getSimpleName(), ex.getMessage());
+            throw new GeoPlatformException("Error on saving the new role \"" + role + "\"");
         }
     }
 

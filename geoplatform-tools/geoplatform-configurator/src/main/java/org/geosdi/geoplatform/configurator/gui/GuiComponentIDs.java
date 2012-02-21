@@ -91,6 +91,9 @@ public class GuiComponentIDs {
     public static final String GOOGLE_REVERSE_GEOCODING = "googleReverseGeocoding";
     public static final String YAHOO_REVERSE_GEOCODING = "yahooReverseGeocoding";
     public static final String REVERSE_GEOCODING_WPS = "reverseGeocodingWPS";
+    //
+    public static final String COMMIT = "Commit";
+    //
     // via MenuUtility
     public static final String GOOGLE_ICON = "GOOGLE_ICON";
     public static final String USER_MENU = "USER_MENU";
@@ -174,6 +177,7 @@ public class GuiComponentIDs {
         all.add(IMPORT_PROJECT);
         all.add(PREVIEW_KML);
         all.add(LAYER_STYLER);
+        all.add(COMMIT);
         //
         LIST_ALL = Collections.unmodifiableList(all);
         /**
@@ -226,6 +230,7 @@ public class GuiComponentIDs {
         mapUser.put(IMPORT_PROJECT, true);
         mapUser.put(PREVIEW_KML, true);
         mapUser.put(LAYER_STYLER, true);
+        mapUser.put(COMMIT,true);
         //
         MAP_USER = Collections.unmodifiableMap(mapUser);
         /**
@@ -277,6 +282,7 @@ public class GuiComponentIDs {
         mapViewer.put(IMPORT_PROJECT, true);
         mapViewer.put(PREVIEW_KML, true);
         mapViewer.put(LAYER_STYLER, true);
+        mapViewer.put(COMMIT,true);
         //
         MAP_VIEWER = Collections.unmodifiableMap(mapViewer);
     }

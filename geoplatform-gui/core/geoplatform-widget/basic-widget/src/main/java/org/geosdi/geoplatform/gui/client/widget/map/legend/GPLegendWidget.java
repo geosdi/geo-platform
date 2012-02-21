@@ -99,7 +99,7 @@ public class GPLegendWidget {
             }
 
             image = new Image(
-                    dataSource + GET_LEGEND_REQUEST + layerBean.getName() + "&scale=5000");
+                    dataSource + GET_LEGEND_REQUEST + layerBean.getName() + "&scale=5000&service=WMS");
 
             cp.add(image);
 

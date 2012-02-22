@@ -173,7 +173,7 @@ public class UserService implements IUserService {
             userID = geoPlatformServiceClient.updateOwnUser(userDTO,
                                                             currentPlainPassword, newPlainPassword);
 
-            sessionUtility.storeUserInSession(this.convertToGPUser(userDetail),
+            sessionUtility.storeLoggedAccount(this.convertToGPUser(userDetail),
                                               httpServletRequest);
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
@@ -249,7 +249,7 @@ public class UserService implements IUserService {
 
     private GPUser getCheckLoggedUser(HttpServletRequest httpServletRequest) {
         try {
-            return sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            return (GPUser) sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }

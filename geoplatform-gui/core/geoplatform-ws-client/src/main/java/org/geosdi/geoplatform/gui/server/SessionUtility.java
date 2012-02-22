@@ -38,10 +38,7 @@ package org.geosdi.geoplatform.gui.server;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.geosdi.geoplatform.core.model.GPAccount;
-import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.gui.utility.DefaultProjectEnum;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
-import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.springframework.stereotype.Service;
 
 /**
@@ -51,11 +48,15 @@ import org.springframework.stereotype.Service;
 @Service("sessionUtility")
 public class SessionUtility {
 
-    public Long getDefaultProjectFromUserSession(HttpServletRequest httpServletRequest)
+    public enum SessionProperty {
+
+        LOGGED_ACCOUNT, DEFAULT_PROJECT;
+    }
+
+    public Long getDefaultProject(HttpServletRequest httpServletRequest)
             throws GPSessionTimeout {
-        Long projectId;
         HttpSession session = httpServletRequest.getSession();
-        projectId = (Long) session.getAttribute(DefaultProjectEnum.DEFAULT_PROJECT.toString());
+        Long projectId = (Long) session.getAttribute(SessionProperty.DEFAULT_PROJECT.toString());
         if (projectId != null) {
             return projectId;
         } else {
@@ -63,40 +64,42 @@ public class SessionUtility {
         }
     }
 
-    public GPUser getUserAlreadyFromSession(HttpServletRequest httpServletRequest)
+    public GPAccount getLoggedAccount(HttpServletRequest httpServletRequest)
             throws GPSessionTimeout {
-        GPUser user = null;
+        GPAccount account = null;
         HttpSession session = httpServletRequest.getSession();
-        Object userObj = session.getAttribute(UserLoginEnum.USER_LOGGED.toString());
-        if (userObj != null && userObj instanceof GPUser) {
-            user = (GPUser) userObj;
+        Object accountObj = session.getAttribute(SessionProperty.LOGGED_ACCOUNT.toString());
+        if (accountObj != null && accountObj instanceof GPAccount) {
+            account = (GPAccount) accountObj;
         } else {
             throw new GPSessionTimeout("Session Timeout");
         }
-        return user;
+        return account;
     }
 
-    public void storeUserInSession(GPUser user, HttpServletRequest httpServletRequest) {
+    public void storeLoggedAccount(GPAccount account,
+                                   HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
         session.setMaxInactiveInterval(900);
-        session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), user);
+        session.setAttribute(SessionProperty.LOGGED_ACCOUNT.toString(), account);
     }
 
-    public void storeDefaultProjectInSession(Long projectID,
-                                             HttpServletRequest httpServletRequest) {
+    public void storeDefaultProject(Long projectID,
+                                    HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
         session.setMaxInactiveInterval(900);
-        session.setAttribute(DefaultProjectEnum.DEFAULT_PROJECT.toString(), projectID);
+        session.setAttribute(SessionProperty.DEFAULT_PROJECT.toString(), projectID);
     }
 
-    public void storeAccountAndProjectInSession(GPAccount account, Long projectID,
-                                                HttpServletRequest httpServletRequest) {
+    public void storeLoggedAccountAndDefaultProject(GPAccount account,
+                                                    Long projectID,
+                                                    HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         //TODO: Set the right time in seconds before session interrupt
         session.setMaxInactiveInterval(900);
-        session.setAttribute(UserLoginEnum.USER_LOGGED.toString(), account);
-        session.setAttribute(DefaultProjectEnum.DEFAULT_PROJECT.toString(), projectID);
+        session.setAttribute(SessionProperty.LOGGED_ACCOUNT.toString(), account);
+        session.setAttribute(SessionProperty.DEFAULT_PROJECT.toString(), projectID);
     }
 }

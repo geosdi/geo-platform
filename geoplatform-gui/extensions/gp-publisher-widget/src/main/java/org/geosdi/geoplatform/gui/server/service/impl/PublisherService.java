@@ -119,9 +119,8 @@ public class PublisherService implements IPublisherService {
     public String publishLayerPreview(HttpServletRequest httpServletRequest,
             List<String> layerList, boolean reloadCluster) throws GeoPlatformException {
 
-        GPUser user = null;
         try {
-            user = sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }

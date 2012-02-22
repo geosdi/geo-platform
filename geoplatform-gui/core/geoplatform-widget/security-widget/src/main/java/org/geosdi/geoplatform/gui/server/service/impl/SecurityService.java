@@ -52,8 +52,8 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.server.ISecurityService;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
+import org.geosdi.geoplatform.gui.server.SessionUtility.SessionProperty;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
-import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,9 +110,9 @@ public class SecurityService implements ISecurityService {
             project.setId(this.saveDefaultProject(user, project));
         }
 
-        this.sessionUtility.storeAccountAndProjectInSession(user,
-                                                            user.getDefaultProjectID(),
-                                                            httpServletRequest);
+        this.sessionUtility.storeLoggedAccountAndDefaultProject(user,
+                                                                user.getDefaultProjectID(),
+                                                                httpServletRequest);
 
         IGPAccountDetail userDetail = this.convertAccountToDTO(user);
 
@@ -150,31 +150,31 @@ public class SecurityService implements ISecurityService {
             project.setId(this.saveDefaultProject(application, project));
         }
 
-        this.sessionUtility.storeAccountAndProjectInSession(application,
-                                                            application.getDefaultProjectID(),
-                                                            httpServletRequest);
+        this.sessionUtility.storeLoggedAccountAndDefaultProject(application,
+                                                                application.getDefaultProjectID(),
+                                                                httpServletRequest);
 
-        IGPAccountDetail userDetail = this.convertAccountToDTO(application);
+        IGPAccountDetail accountDetail = this.convertAccountToDTO(application);
 
-        userDetail.setComponentPermission(guiComponentPermission.getPermissionMap());
+        accountDetail.setComponentPermission(guiComponentPermission.getPermissionMap());
 
-        return userDetail;
+        return accountDetail;
     }
 
-    public GPUser loginFromSessionServer(HttpServletRequest httpServletRequest)
+    public GPAccount loginFromSessionServer(HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        GPUser user = null;
+        GPAccount account = null;
         try {
-            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            account = this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        return user;
+        return account;
     }
 
     private void deleteUserFromSession(HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
-        session.removeAttribute(UserLoginEnum.USER_LOGGED.toString());
+        session.removeAttribute(SessionProperty.LOGGED_ACCOUNT.toString());
     }
 
     @Override

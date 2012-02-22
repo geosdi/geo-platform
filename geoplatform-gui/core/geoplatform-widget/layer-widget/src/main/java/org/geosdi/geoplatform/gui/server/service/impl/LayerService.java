@@ -44,9 +44,9 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
-import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
@@ -109,22 +109,20 @@ public class LayerService implements ILayerService {
     @Override
     public ArrayList<GPFolderClientInfo> loadUserFolders(HttpServletRequest httpServletRequest) throws GeoPlatformException {
         Long projectId = null;
-        List<FolderDTO> folderList = null;
         try {
-            projectId = this.sessionUtility.getDefaultProjectFromUserSession(httpServletRequest);
-            this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            projectId = this.sessionUtility.getDefaultProject(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
-        folderList = geoPlatformServiceClient.getRootFoldersByProjectID(projectId);
+        List<FolderDTO> folderList = geoPlatformServiceClient.getRootFoldersByProjectID(projectId);
         return this.dtoConverter.convertOnlyFolder(folderList);
     }
 
     @Override
     public ArrayList<IGPFolderElements> loadFolderElements(Long folderID, HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        GPUser user = null;
         try {
-            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -150,8 +148,8 @@ public class LayerService implements ILayerService {
         folder.setShared(false);
         Long projectId;
         try {
-            projectId = this.sessionUtility.getDefaultProjectFromUserSession(httpServletRequest);
-            this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            projectId = this.sessionUtility.getDefaultProject(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -176,9 +174,8 @@ public class LayerService implements ILayerService {
     public Long saveFolder(Long idParentFolder, String folderName, int position,
             int numberOfDescendants, boolean isChecked, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        GPUser user = null;
         try {
-            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -205,7 +202,7 @@ public class LayerService implements ILayerService {
 
         Long savedFolderId = null;
         try {
-            projectId = this.sessionUtility.getDefaultProjectFromUserSession(httpServletRequest);
+            projectId = this.sessionUtility.getDefaultProject(httpServletRequest);
             savedFolderId = this.geoPlatformServiceClient.insertFolder(projectId, folder);
         } catch (IllegalParameterFault ilg) {
             logger.error(
@@ -224,9 +221,8 @@ public class LayerService implements ILayerService {
     @Override
     public void deleteElement(Long id, TreeElement elementType, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        GPUser user = null;
         try {
-            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -245,7 +241,7 @@ public class LayerService implements ILayerService {
             MementoSaveAddedFolder memento, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         try {
-            this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -255,7 +251,7 @@ public class LayerService implements ILayerService {
                 memento.getWsDescendantMap());
         Long idSavedFolder = null;
         try {
-            Long projectId = this.sessionUtility.getDefaultProjectFromUserSession(httpServletRequest);
+            Long projectId = this.sessionUtility.getDefaultProject(httpServletRequest);
             idSavedFolder = this.geoPlatformServiceClient.saveAddedFolderAndTreeModifications(
                     projectId, memento.getAddedFolder().getIdParent(), gpFolder, map);
         } catch (ResourceNotFoundFault ex) {
@@ -275,7 +271,7 @@ public class LayerService implements ILayerService {
     public ArrayList<Long> saveAddedLayersAndTreeModifications(MementoSaveAddedLayers memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
-            this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -285,7 +281,7 @@ public class LayerService implements ILayerService {
 
         ArrayList<Long> idSavedLayers = null;
         try {
-            Long projectId = this.sessionUtility.getDefaultProjectFromUserSession(httpServletRequest);
+            Long projectId = this.sessionUtility.getDefaultProject(httpServletRequest);
             Long parentFolderId = layersList.get(0).getFolder().getId();
             idSavedLayers = this.geoPlatformServiceClient.saveAddedLayersAndTreeModifications(
                     projectId, parentFolderId, layersList, map);
@@ -304,9 +300,8 @@ public class LayerService implements ILayerService {
     @Override
     public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        GPUser user = null;
         try {
-            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -326,9 +321,8 @@ public class LayerService implements ILayerService {
     @Override
     public boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        GPUser user = null;
         try {
-            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -351,9 +345,8 @@ public class LayerService implements ILayerService {
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
-        GPUser user = null;
         try {
-            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -378,9 +371,8 @@ public class LayerService implements ILayerService {
         GPWebServiceMapData<Long, Integer> map = this.dtoConverter.convertDescendantMap(
                 memento.getWsDescendantMap());
         boolean result = false;
-        GPUser user = null;
         try {
-            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -399,9 +391,8 @@ public class LayerService implements ILayerService {
     @Deprecated
     public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        GPUser user = null;
         try {
-            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -421,9 +412,8 @@ public class LayerService implements ILayerService {
     @Deprecated
     public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        GPUser user = null;
         try {
-            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -443,9 +433,8 @@ public class LayerService implements ILayerService {
     public boolean saveLayerProperties(MementoLayerOriginalProperties memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
         boolean result = false;
-        GPUser user = null;
         try {
-            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -465,9 +454,8 @@ public class LayerService implements ILayerService {
     @Override
     public boolean saveFolderProperties(MementoFolderOriginalProperties memento,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        GPUser user = null;
         try {
-            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -547,9 +535,9 @@ public class LayerService implements ILayerService {
     public PagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config,
             String searchText, String imageURL, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        GPUser user = null;
+        GPAccount account = null;
         try {
-            user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            account = this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
@@ -558,14 +546,14 @@ public class LayerService implements ILayerService {
 
         SearchRequest srq = new SearchRequest(searchText);
         try {
-            Long projectsCount = this.geoPlatformServiceClient.getAccountProjectsCount(user.getId(), srq);
+            Long projectsCount = this.geoPlatformServiceClient.getAccountProjectsCount(account.getId(), srq);
 
             int page = start == 0 ? start : start / config.getLimit();
 
             PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
                     config.getLimit(), page);
 
-            List<ProjectDTO> projectsDTO = this.geoPlatformServiceClient.searchAccountProjects(user.getId(), psr);
+            List<ProjectDTO> projectsDTO = this.geoPlatformServiceClient.searchAccountProjects(account.getId(), psr);
 
             if (projectsDTO.isEmpty()) {
                 throw new GeoPlatformException("There are no results");
@@ -575,8 +563,8 @@ public class LayerService implements ILayerService {
 
             for (ProjectDTO projectDTO : projectsDTO) {
                 GPClientProject clientProject = this.convertToGPCLientProject(projectDTO, imageURL);
-                if (user.getDefaultProjectID() != null) {
-                    if (user.getDefaultProjectID().equals(clientProject.getId())) {
+                if (account.getDefaultProjectID() != null) {
+                    if (account.getDefaultProjectID().equals(clientProject.getId())) {
                         clientProject.setDefaultProject(true);
                     } else {
                         clientProject.setDefaultProject(false);
@@ -608,13 +596,13 @@ public class LayerService implements ILayerService {
     public void setDefaultProject(Long projectID, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         try {
-            GPUser user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
 
-            this.geoPlatformServiceClient.updateDefaultProject(user.getId(), projectID);
+            this.geoPlatformServiceClient.updateDefaultProject(account.getId(), projectID);
 
-            user.setDefaultProjectID(projectID);
+            account.setDefaultProjectID(projectID);
 
-            this.sessionUtility.storeAccountAndProjectInSession(user, projectID,
+            this.sessionUtility.storeLoggedAccountAndDefaultProject(account, projectID,
                     httpServletRequest);
 
         } catch (GPSessionTimeout timeout) {
@@ -630,13 +618,13 @@ public class LayerService implements ILayerService {
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
 
         try {
-            GPUser user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
-            Long projectId = this.geoPlatformServiceClient.saveProject(user.getUsername(),
+            GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+            Long projectId = this.geoPlatformServiceClient.saveProject(account.getStringID(),
                     this.dtoConverter.convertToGProject(project), project.isDefaultProject());
 
-            user.setDefaultProjectID(projectId);
+            account.setDefaultProjectID(projectId);
 
-            this.sessionUtility.storeAccountAndProjectInSession(user, projectId,
+            this.sessionUtility.storeLoggedAccountAndDefaultProject(account, projectId,
                     httpServletRequest);
 
             return projectId;
@@ -659,15 +647,14 @@ public class LayerService implements ILayerService {
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
 
         try {
+            GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
 
-            GPUser user = this.sessionUtility.getUserAlreadyFromSession(httpServletRequest);
-
-            AccountProjectPropertiesDTO dto = this.dtoConverter.convertToAccountProjectPropertiesDTO(user.getId(),
+            AccountProjectPropertiesDTO dto = this.dtoConverter.convertToAccountProjectPropertiesDTO(account.getId(),
                     project);
 
             if (this.geoPlatformServiceClient.saveAccountProjectProperties(dto)) {
-                user.setDefaultProjectID(project.getId());
-                this.sessionUtility.storeAccountAndProjectInSession(user, project.getId(),
+                account.setDefaultProjectID(project.getId());
+                this.sessionUtility.storeLoggedAccountAndDefaultProject(account, project.getId(),
                         httpServletRequest);
             }
 

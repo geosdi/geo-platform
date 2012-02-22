@@ -146,7 +146,7 @@ public class OGCService implements IOGCService {
             throws GeoPlatformException {
         
         try {
-            Long projectId = this.sessionUtility.getDefaultProjectFromUserSession(httpServletRequest);
+            Long projectId = this.sessionUtility.getDefaultProject(httpServletRequest);
             return geoPlatformServiceClient.getLayersDataSourceByProjectID(projectId);
         } catch (ResourceNotFoundFault e) {
             throw new GeoPlatformException("Error in findDistinctLayersDataSource: ResourceNotFoundFault "

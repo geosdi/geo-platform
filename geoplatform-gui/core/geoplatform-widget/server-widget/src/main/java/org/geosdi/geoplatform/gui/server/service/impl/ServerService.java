@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -65,15 +65,15 @@ public class ServerService implements IServerService {
     @Override
     public List<String> getUserAuthorities(HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        GPUser user = null;
+        GPAccount account = null;
         try {
-            user = sessionUtility.getUserAlreadyFromSession(httpServletRequest);
+            account = sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         }
         List<String> userAuthorities = null;
         try {
-            userAuthorities = geoPlatformServiceClient.getAuthorities(user.getId());
+            userAuthorities = geoPlatformServiceClient.getAuthorities(account.getId());
         } catch (ResourceNotFoundFault ex) {
             logger.debug("Returning no elements: " + ex);
         }

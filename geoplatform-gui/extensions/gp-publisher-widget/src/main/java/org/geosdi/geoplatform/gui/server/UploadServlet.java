@@ -55,14 +55,15 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
+import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.server.SessionUtility.SessionProperty;
 import org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
-import org.geosdi.geoplatform.gui.utility.UserLoginEnum;
 import org.geosdi.geoplatform.responce.InfoPreview;
 
 /**
@@ -97,12 +98,12 @@ public class UploadServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException, GeoPlatformException {
-        GPUser user = null;
+        GPAccount account = null;
         HttpSession session = req.getSession();
-        Object userObj = session.getAttribute(
-                UserLoginEnum.USER_LOGGED.toString());
-        if (userObj != null && userObj instanceof GPUser) {
-            user = (GPUser) userObj;
+        Object accountObj = session.getAttribute(
+                SessionProperty.LOGGED_ACCOUNT.toString());
+        if (accountObj != null && accountObj instanceof GPAccount) {
+            account = (GPAccount) accountObj;
         } else {
             resp.sendError(HttpServletResponse.SC_UNAUTHORIZED,
                     "Session Timeout");
@@ -149,7 +150,7 @@ public class UploadServlet extends HttpServlet {
                     resp.setStatus(HttpServletResponse.SC_CREATED);
                     resp.flushBuffer();
                 }
-                List<InfoPreview> infoPreviews = this.manageUploadedFilePreview(uploadedFile, session.getId(), user.getUsername());
+                List<InfoPreview> infoPreviews = this.manageUploadedFilePreview(uploadedFile, session.getId(), account.getStringID());
                 resp.setContentType("text/x-json;charset=UTF-8");
                 resp.setHeader("Cache-Control", "no-cache");
                 String result = this.generateJSONObjects(infoPreviews);

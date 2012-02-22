@@ -86,11 +86,11 @@ public class DTOConverter {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public ArrayList<GPFolderClientInfo> convertOnlyFolder(
-            Collection<FolderDTO> gpFolders) {
+            Collection<FolderDTO> folders) {
         ArrayList<GPFolderClientInfo> foldersClient = new ArrayList<GPFolderClientInfo>();
 
-        if (gpFolders != null) {
-            for (Iterator<FolderDTO> it = gpFolders.iterator(); it.hasNext();) {
+        if (folders != null) {
+            for (Iterator<FolderDTO> it = folders.iterator(); it.hasNext();) {
                 foldersClient.add(this.convertFolderElement(it.next()));
             }
         }

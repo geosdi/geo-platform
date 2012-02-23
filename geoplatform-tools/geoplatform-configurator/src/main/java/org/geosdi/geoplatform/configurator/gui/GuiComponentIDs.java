@@ -314,7 +314,7 @@ public class GuiComponentIDs {
         mapSigv.put(ADD_FOLDER, true);
         mapSigv.put(ADD_LAYERS, true);
         mapSigv.put(DELETE_ELEMENT, true);
-        mapSigv.put(SAVE_TREE, true);
+//        mapSigv.put(SAVE_TREE, true);
         mapSigv.put(PRINT_LAYERS, true);
         //
         MAP_APPLICATION_SIGV = Collections.unmodifiableMap(mapSigv);

@@ -48,7 +48,7 @@ public interface GeocodingIcons extends ImageBundle {
     @Resource("Maps-icon.png")
     AbstractImagePrototype geocoding();
 
-    @Resource("reverse_geocoding.png")
+    @Resource("google_icon.png")
     AbstractImagePrototype reverseGeocoding();
 
     @Resource("yahoo.png")

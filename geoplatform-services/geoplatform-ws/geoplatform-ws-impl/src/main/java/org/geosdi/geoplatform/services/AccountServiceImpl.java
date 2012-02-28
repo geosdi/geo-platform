@@ -444,6 +444,7 @@ class AccountServiceImpl {
         searchCriteria.addFilterNotEqual("id", userID);
         searchCriteria.setMaxResults(request.getNum());
         searchCriteria.setPage(request.getPage());
+        searchCriteria.addFilterNotEmpty("username");
         searchCriteria.addSortAsc("username");
 
         String like = request.getNameLike();

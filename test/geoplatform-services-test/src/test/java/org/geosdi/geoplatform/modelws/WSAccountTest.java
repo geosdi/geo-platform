@@ -115,24 +115,6 @@ public class WSAccountTest extends ServiceTest {
     }
 
     @Test
-    public void testInsertUserWithIncorrectRole() {
-        GPAuthority authority = new GPAuthority();
-        authority.setAuthority("Incorrect");
-
-        GPUser user = super.createUser("user-incorrect-role");
-        user.setGPAuthorities(Arrays.asList(authority));
-
-        try {
-            gpWSClient.insertAccount(user, false);
-            Assert.fail("User have an incorrect role");
-        } catch (IllegalParameterFault ex) {
-            if (!ex.getMessage().toLowerCase().contains("authority")) { // Must be fail for other reasons
-                Assert.fail("Not fail for User have an incorrect role, but for: " + ex.getMessage());
-            }
-        }
-    }
-
-    @Test
     public void testInsertUserWithSingleRole() throws ResourceNotFoundFault {
         List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameTest);
         Assert.assertNotNull("Authorities null", authorities);

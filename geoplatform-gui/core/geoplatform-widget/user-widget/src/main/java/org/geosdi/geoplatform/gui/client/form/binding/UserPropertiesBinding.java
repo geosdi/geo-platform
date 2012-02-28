@@ -150,6 +150,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.userRoleComboBox.setEditable(false);
         this.userRoleComboBox.setTypeAhead(true);
         this.userRoleComboBox.setAllowBlank(false);
+        this.userRoleComboBox.setMaxHeight(150);
         this.userRoleComboBox.setTriggerAction(TriggerAction.ALL);
 
         this.temporaryField = new CheckBox();

@@ -99,6 +99,16 @@ public enum GuiPermission {
         return NONE;
     }
 
+    public Boolean toBoolean() {
+        Boolean bool = null;
+        if (this == GuiPermission.WRITE) {
+            bool = true;
+        } else if (this == GuiPermission.READ) {
+            bool = false;
+        }
+        return bool;
+    }
+
     public String toStringColor() {
         String color;
         if (this == GuiPermission.WRITE) {

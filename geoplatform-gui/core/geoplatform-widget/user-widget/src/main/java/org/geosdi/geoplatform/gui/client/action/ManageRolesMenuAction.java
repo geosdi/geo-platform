@@ -74,6 +74,27 @@ public class ManageRolesMenuAction extends MenuBaseAction {
             @Override
             public void onSuccess(ArrayList<String> result) {
                 rolesWidget.setRoles(result);
+                if (rolesWidget.getGuiComponentIDs() == null) {
+                    retrieveGuiComponentIDs();
+                } else {
+                    rolesWidget.show();
+                }
+            }
+        });
+    }
+
+    private void retrieveGuiComponentIDs() {
+        UserRemoteImpl.Util.getInstance().getAllGuiComponentIDs(new AsyncCallback<ArrayList<String>>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                GeoPlatformMessage.errorMessage("Error retrieving permissions IDs",
+                                                caught.getMessage());
+            }
+
+            @Override
+            public void onSuccess(ArrayList<String> result) {
+                rolesWidget.setGuiComponentIDs(result);
                 rolesWidget.show();
             }
         });

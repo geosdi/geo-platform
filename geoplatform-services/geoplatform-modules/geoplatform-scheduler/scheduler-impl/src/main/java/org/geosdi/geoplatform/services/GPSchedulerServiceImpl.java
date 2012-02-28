@@ -45,8 +45,7 @@ import org.geosdi.geoplatform.jobs.EmailRegistrationJob;
 import org.geosdi.geoplatform.jobs.EmailTask;
 import org.geosdi.geoplatform.jobs.GroupJobType;
 import org.geosdi.geoplatform.jobs.TempAccountExpireJob;
-import org.quartz.CalendarIntervalScheduleBuilder;
-import org.quartz.DateBuilder;
+import org.quartz.CronScheduleBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -112,7 +111,7 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
 
     @Override
     public void sendEmailModification(GPUser user,
-            String previousEmail, String newPlainPassword) {
+                                      String previousEmail, String newPlainPassword) {
         // Trigger the job to run once
         Trigger trigger = TriggerBuilder.newTrigger().
                 withIdentity("EmailModificationTrigger", GroupJobType.EMAIL.toString()). // KEY email.EmailModificationTrigger
@@ -171,10 +170,8 @@ public class GPSchedulerServiceImpl implements GPSchedulerService, InitializingB
 
         Trigger trigger = TriggerBuilder.newTrigger().
                 withIdentity("TempAccountExpireJobTrigger").
-                withDescription("Runs one at week").
-                startAt(DateBuilder.evenHourDateAfterNow()).
-                withSchedule(CalendarIntervalScheduleBuilder.calendarIntervalSchedule().
-                withIntervalInWeeks(1).
+                withDescription("Runs at 5:00AM every day").
+                withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(5, 0).
                 withMisfireHandlingInstructionFireAndProceed()).
                 build();
 

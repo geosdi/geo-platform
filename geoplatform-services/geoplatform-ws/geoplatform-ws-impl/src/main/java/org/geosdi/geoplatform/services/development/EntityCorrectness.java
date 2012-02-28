@@ -150,9 +150,6 @@ public class EntityCorrectness {
             if (EntityCorrectness.empty(role)) {
                 throw new IllegalParameterFault("Authority is null or empty");
             }
-            if (GPRole.fromString(role) == null) {
-                throw new IllegalParameterFault("Authority is incorrect");
-            }
         }
     }
 

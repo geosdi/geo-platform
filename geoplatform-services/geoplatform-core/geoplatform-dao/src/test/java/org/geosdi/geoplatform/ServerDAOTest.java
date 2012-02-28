@@ -61,9 +61,9 @@ public class ServerDAOTest extends BaseDAOTest {
         logger.info("\n*** Number of Servers into DB: {} ***",
                 serverDAO.findAll().size());
 
-        Assert.assertTrue("Error on number of servers, expected 3", serverDAO.findAll().size() == 3);
-        Assert.assertTrue("Error on number of WMS servers, expected 2", serverDAO.findAll(GPCapabilityType.WMS).size() == 2);
-        Assert.assertTrue("Error on number of CSW servers, expected 1", serverDAO.findAll(GPCapabilityType.CSW).size() == 1);
+        Assert.assertTrue("Error on number of total servers, expected 3 servers", serverDAO.findAll().size() == 3);
+        Assert.assertTrue("Error on number of WMS servers, expected 2 servers", serverDAO.findAll(GPCapabilityType.WMS).size() == 2);
+        Assert.assertTrue("Error on number of CSW servers, expected 1 server", serverDAO.findAll(GPCapabilityType.CSW).size() == 1);
     }
 
     private void removeAllServers() {

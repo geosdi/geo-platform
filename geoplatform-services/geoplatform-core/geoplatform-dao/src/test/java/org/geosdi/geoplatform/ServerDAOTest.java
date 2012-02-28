@@ -60,6 +60,10 @@ public class ServerDAOTest extends BaseDAOTest {
 
         logger.info("\n*** Number of Servers into DB: {} ***",
                 serverDAO.findAll().size());
+
+        Assert.assertTrue("Error on number of servers, expected 3", serverDAO.findAll().size() == 3);
+        Assert.assertTrue("Error on number of WMS servers, expected 2", serverDAO.findAll(GPCapabilityType.WMS).size() == 2);
+        Assert.assertTrue("Error on number of CSW servers, expected 1", serverDAO.findAll(GPCapabilityType.CSW).size() == 1);
     }
 
     private void removeAllServers() {
@@ -72,14 +76,15 @@ public class ServerDAOTest extends BaseDAOTest {
     }
 
     protected void insertServers() {
-        GeoPlatformServer server1 = createServer1();
-        GeoPlatformServer server2 = createServer2();
-        serverDAO.persist(server1, server2);
-        logger.debug("\n*** SAVED Server:\n{}\n***", server1);
-        logger.debug("\n*** SAVED Server:\n{}\n***", server2);
+        GeoPlatformServer server1WMS = createServer1WMS();
+        GeoPlatformServer server2WMS = createServer2WMS();
+        GeoPlatformServer server1CSW = createServer1CSW();
+        serverDAO.persist(server1WMS, server2WMS, server1CSW);
+        logger.debug("\n*** SAVED Server:\n{}\n***", server1WMS);
+        logger.debug("\n*** SAVED Server:\n{}\n***", server2WMS);
     }
 
-    private GeoPlatformServer createServer1() {
+    private GeoPlatformServer createServer1WMS() {
         GeoPlatformServer server = new GeoPlatformServer();
         server.setServerUrl("http://imaa.geosdi.org/geoserver/wms?service=wms&version=1.1.1&request=GetCapabilities");
         server.setName("imaa.geosdi.org");
@@ -88,12 +93,21 @@ public class ServerDAOTest extends BaseDAOTest {
         return server;
     }
 
-    private GeoPlatformServer createServer2() {
+    private GeoPlatformServer createServer2WMS() {
         GeoPlatformServer server = new GeoPlatformServer();
         server.setServerUrl("http://dpc.geosdi.org/geoserver/wms");
         server.setName("dpc.geosdi.org");
         server.setAliasName("DPC on geosdi");
         server.setServerType(GPCapabilityType.WMS);
+        return server;
+    }
+
+    private GeoPlatformServer createServer1CSW() {
+        GeoPlatformServer server = new GeoPlatformServer();
+        server.setServerUrl("http://150.145.133.91:8080/geonetwork/srv/en/csw");
+        server.setName("csw.geosdi.org");
+        server.setAliasName("CSW on geosdi");
+        server.setServerType(GPCapabilityType.CSW);
         return server;
     }
 

@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.core.dao;
 import com.googlecode.genericdao.search.ISearch;
 import java.util.List;
 
+import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 
 /**
@@ -48,6 +49,8 @@ import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 public interface GPServerDAO {
 
     public List<GeoPlatformServer> findAll();
+
+    public List<GeoPlatformServer> findAll(GPCapabilityType type);
 
     public GeoPlatformServer find(Long id);
 

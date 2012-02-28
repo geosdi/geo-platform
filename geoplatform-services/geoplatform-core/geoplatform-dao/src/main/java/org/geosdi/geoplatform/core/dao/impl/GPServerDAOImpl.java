@@ -40,6 +40,7 @@ import com.googlecode.genericdao.search.Search;
 import java.util.List;
 
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
+import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,6 +52,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class GPServerDAOImpl extends BaseDAO<GeoPlatformServer, Long>
         implements GPServerDAO {
+
+    @Override
+    public List<GeoPlatformServer>  findAll() {
+        return super.findAll();
+    }
+
+    public List<GeoPlatformServer>  findAll(GPCapabilityType type) {
+        Search search = new Search();
+        search.addFilterEqual("serverType", type);
+        return super.search(search);
+    }
 
     @Override
     public void persist(GeoPlatformServer... servers) {

@@ -130,7 +130,7 @@ class WMSServiceImpl {
     }
 
     public List<ServerDTO> getServers() {
-        List<GeoPlatformServer> found = serverDao.findAll();
+        List<GeoPlatformServer> found = serverDao.findAll(GPCapabilityType.WMS);
         return convertToServerList(found);
     }
 

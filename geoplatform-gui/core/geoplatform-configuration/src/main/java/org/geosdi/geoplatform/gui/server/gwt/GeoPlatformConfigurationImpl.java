@@ -55,9 +55,6 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-@WebServlet(name = "GeoPlatformConfiguration",
-            urlPatterns = {"/geoportal/GeoPlatformConfiguration"},
-            loadOnStartup = 1)
 public class GeoPlatformConfigurationImpl extends GPAutoInjectingRemoteServiceServlet
         implements GeoPlatformConfiguration {
 

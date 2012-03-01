@@ -47,6 +47,7 @@ import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
+import org.geosdi.geoplatform.gui.client.MapRegistryEnum;
 import org.geosdi.geoplatform.gui.client.widget.map.GPGeocodingWidget;
 import org.geosdi.geoplatform.gui.client.widget.scale.GPMapToolsWidget;
 
@@ -56,8 +57,6 @@ import org.geosdi.geoplatform.gui.client.widget.scale.GPMapToolsWidget;
  * 
  */
 public class MapView extends GeoPlatformView {
-    
-    public final static String GP_MAP_REGISTRY = "gpMapRegistry";
 
     private MapLayoutWidget mapLayout;
     private GPGeocodingWidget geocoderWidget;
@@ -68,7 +67,7 @@ public class MapView extends GeoPlatformView {
         super(controller);
 
         this.mapLayout = new MapLayoutWidget();
-        Registry.register(MapView.GP_MAP_REGISTRY, this.mapLayout);
+        Registry.register(MapRegistryEnum.MAP_LAYOUT_WIDGET.toString(), this.mapLayout);
 //        this.revGeoWidget = new ReverseGeocodingWidget(this.mapLayout);
     }
 

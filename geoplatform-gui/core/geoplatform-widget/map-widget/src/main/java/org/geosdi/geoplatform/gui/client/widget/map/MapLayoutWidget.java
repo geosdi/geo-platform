@@ -121,8 +121,6 @@ public class MapLayoutWidget implements GeoPlatformMap {
                 new Double(156543.0339).floatValue());
 
         initMapWidget(this.defaultMapOptions);
-        //This is necessary for Styler Widget on calculating restrictions scale
-        this.map.setFractionalZoom(true);
     }
 
     private void initMapWidget(MapOptions defaultMapOptions) {

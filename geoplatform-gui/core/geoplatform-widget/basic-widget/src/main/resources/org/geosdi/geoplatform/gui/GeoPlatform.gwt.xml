@@ -30,7 +30,6 @@
     <source path="plugin" />
     <!--source path="exception" /-->
     <source path="regex" />
-    <source path="gwtquery" />
     
     <servlet path="/GeoPlatformOGCRemote"
              class="org.geosdi.geoplatform.gui.server.gwt.GeoPlatformOGCRemoteImpl" />

@@ -57,9 +57,6 @@ import org.gwtopenmaps.openlayers.client.event.MeasureListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.handler.PathHandler;
 import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
-import org.gwtopenmaps.openlayers.client.layer.GMapType;
-import org.gwtopenmaps.openlayers.client.layer.Google;
-import org.gwtopenmaps.openlayers.client.layer.GoogleOptions;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.OSM;
 import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
@@ -72,6 +69,9 @@ import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
 import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
 import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.GPFeatureInfoEvent;
 import org.gwtopenmaps.openlayers.client.control.MousePosition;
+import org.gwtopenmaps.openlayers.client.layer.GoogleV3;
+import org.gwtopenmaps.openlayers.client.layer.GoogleV3MapType;
+import org.gwtopenmaps.openlayers.client.layer.GoogleV3Options;
 import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
 
 /**
@@ -232,34 +232,34 @@ public class MapLayoutWidget implements GeoPlatformMap {
     }
 
     private void createBaseGoogleLayer() {
-        GoogleOptions option = new GoogleOptions();
-        option.setType(GMapType.G_NORMAL_MAP);
+        GoogleV3Options option = new GoogleV3Options();
+        option.setType(GoogleV3MapType.G_NORMAL_MAP);
         option.setSphericalMercator(true);
         option.setTransitionEffect(TransitionEffect.RESIZE);
 
-        layer = new Google("Google Normal", option);
+        layer = new GoogleV3("Google Normal", option);
         layer.setIsBaseLayer(true);
         this.map.addLayer(layer);
 
         this.layer.setZIndex(-2);
 
-        GoogleOptions opSatellite = new GoogleOptions();
-        opSatellite.setType(GMapType.G_SATELLITE_MAP);
+        GoogleV3Options opSatellite = new GoogleV3Options();
+        opSatellite.setType(GoogleV3MapType.G_SATELLITE_MAP);
         opSatellite.setSphericalMercator(true);
         opSatellite.setTransitionEffect(TransitionEffect.RESIZE);
 
-        Layer satellite = new Google("Google Satellite", opSatellite);
+        Layer satellite = new GoogleV3("Google Satellite", opSatellite);
         satellite.setIsBaseLayer(true);
         this.map.addLayer(satellite);
 
         satellite.setZIndex(-3);
 
-        GoogleOptions opHybrid = new GoogleOptions();
-        opHybrid.setType(GMapType.G_HYBRID_MAP);
+        GoogleV3Options opHybrid = new GoogleV3Options();
+        opHybrid.setType(GoogleV3MapType.G_HYBRID_MAP);
         opHybrid.setSphericalMercator(true);
         opHybrid.setTransitionEffect(TransitionEffect.RESIZE);
 
-        Layer hybrid = new Google("Google Hybrid", opHybrid);
+        Layer hybrid = new GoogleV3("Google Hybrid", opHybrid);
         hybrid.setIsBaseLayer(true);
         this.map.addLayer(hybrid);
 

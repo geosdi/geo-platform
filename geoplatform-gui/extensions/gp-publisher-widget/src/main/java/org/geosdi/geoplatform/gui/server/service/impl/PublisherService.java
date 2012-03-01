@@ -45,7 +45,6 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Properties;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.slf4j.Logger;
@@ -101,17 +100,16 @@ public class PublisherService implements IPublisherService {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-//        String url = wsProperties.getProperty("cluster_reload_url");
         this.httpget = new HttpGet(urlClusterReload);
-//        String hostUrl = wsProperties.getProperty("cluster_reload_host_url");
         this.targetHost = new HttpHost(hostUrlClusterReload);
     }
 
     @PostConstruct
     public void init() {
-        System.out.println("Tanti tazzi di valori: " + urlClusterReload + " - "
-                + hostUrlClusterReload + " - " + userNameClusterReload + " - "
-                + passwordClusterReload);
+        logger.info("Reload publisher parameters: URL CLUSTER RELOAD " + urlClusterReload
+                + " - HOST URL CLUSTER RELOAD " + hostUrlClusterReload + 
+                " - USERNAME CLUSTER RELOAD " + userNameClusterReload + 
+                " - PASSWORD CLUSTER RELOAD " + passwordClusterReload);
         localContext = new BasicHttpContext();
         this.httpclient = new DefaultHttpClient();
         CredentialsProvider credsProvider = new BasicCredentialsProvider();

@@ -56,7 +56,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.geosdi.geoplatform.core.model.GPAccount;
-import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;

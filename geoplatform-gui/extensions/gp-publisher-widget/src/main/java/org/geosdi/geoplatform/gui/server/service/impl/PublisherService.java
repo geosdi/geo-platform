@@ -47,7 +47,6 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Properties;
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.slf4j.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -61,7 +60,6 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
-import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.cxf.GeoPlatformPublishClient;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -71,6 +69,7 @@ import org.geosdi.geoplatform.gui.utility.GPReloadURLException;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -91,27 +90,35 @@ public class PublisherService implements IPublisherService {
     @Autowired
     private SessionUtility sessionUtility;
     //
-    @Resource
-    private Properties wsProperties;
+    private @Value("${cluster_reload_url}")
+    String urlClusterReload;
+    private @Value("${cluster_reload_host_url}")
+    String hostUrlClusterReload;
+    private @Value("${cluser_reload_username}")
+    String userNameClusterReload;
+    private @Value("${cluser_reload_password}")
+    String passwordClusterReload;
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        String url = wsProperties.getProperty("cluster_reload_url");
-        this.httpget = new HttpGet(url);
-        String hostUrl = wsProperties.getProperty("cluster_reload_host_url");
-        targetHost = new HttpHost(hostUrl);
+//        String url = wsProperties.getProperty("cluster_reload_url");
+        this.httpget = new HttpGet(urlClusterReload);
+//        String hostUrl = wsProperties.getProperty("cluster_reload_host_url");
+        this.targetHost = new HttpHost(hostUrlClusterReload);
     }
 
     @PostConstruct
     public void init() {
+        System.out.println("Tanti tazzi di valori: " + urlClusterReload + " - "
+                + hostUrlClusterReload + " - " + userNameClusterReload + " - "
+                + passwordClusterReload);
         localContext = new BasicHttpContext();
         this.httpclient = new DefaultHttpClient();
         CredentialsProvider credsProvider = new BasicCredentialsProvider();
         credsProvider.setCredentials(
                 new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT),
-                new UsernamePasswordCredentials(
-                wsProperties.getProperty("cluser_reload_username"),
-                wsProperties.getProperty("cluser_reload_password")));
+                new UsernamePasswordCredentials(userNameClusterReload,
+                passwordClusterReload));
         httpclient.setCredentialsProvider(credsProvider);
     }
 

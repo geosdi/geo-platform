@@ -13,6 +13,6 @@
 
     <context:annotation-config />
     
-    <util:properties id="wsProperties" location="classpath:/gp-ws.properties" />
+<!--    <util:properties id="wsProperties" location="classpath:/gp-ws.properties" />-->
     
 </beans>

@@ -84,7 +84,7 @@ public class GeoPlatformServer implements Serializable {
     @Column
     private String title;
     //
-    @Column(name = "abstract")
+    @Column(name = "abstract", columnDefinition="TEXT")
     private String abstractServer;
     //
     @Column(name = "contact_person")

@@ -68,7 +68,7 @@ public class GPRasterLayer extends GPLayer {
     @Column
     private float opacity = 1.0f;
     // The character , separated list of styles
-    @Column(length = 500)
+    @Column(length = 500, columnDefinition="TEXT")
     private String styles;
     //
     @Embedded

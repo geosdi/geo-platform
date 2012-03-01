@@ -177,6 +177,12 @@
             <layout>default</layout>
             <name>Repository for library including ehcache recent ones</name>
         </repository>
+        
+        <!-- GWTQUERY-UI PLUGIN -->
+        <repository>
+            <id>gwtquery-ui-repository</id>
+            <url>http://gwtquery-ui.googlecode.com/svn/mavenrepo</url>
+        </repository>
     </repositories>
 
     <modules>
@@ -1047,6 +1053,13 @@
                 <version>${ehcache-version}</version>
             </dependency>
         
+        <!-- GWTQUERY-UI PLUGIN -->
+            <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwtquery-ui</artifactId>
+                <version>r146</version>
+<!--                <scope>provided</scope>-->
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

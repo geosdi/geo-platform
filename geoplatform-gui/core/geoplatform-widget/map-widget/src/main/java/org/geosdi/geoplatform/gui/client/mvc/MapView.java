@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.mvc;
 
+import com.extjs.gxt.ui.client.Registry;
 import org.geosdi.geoplatform.gui.client.MapWidgetEvents;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
 import org.geosdi.geoplatform.gui.client.widget.map.MapLayoutWidget;
@@ -55,6 +56,8 @@ import org.geosdi.geoplatform.gui.client.widget.scale.GPMapToolsWidget;
  * 
  */
 public class MapView extends GeoPlatformView {
+    
+    public final static String GP_MAP_REGISTRY = "gpMapRegistry";
 
     private MapLayoutWidget mapLayout;
     private GPGeocodingWidget geocoderWidget;
@@ -65,6 +68,7 @@ public class MapView extends GeoPlatformView {
         super(controller);
 
         this.mapLayout = new MapLayoutWidget();
+        Registry.register(MapView.GP_MAP_REGISTRY, this.mapLayout);
 //        this.revGeoWidget = new ReverseGeocodingWidget(this.mapLayout);
     }
 

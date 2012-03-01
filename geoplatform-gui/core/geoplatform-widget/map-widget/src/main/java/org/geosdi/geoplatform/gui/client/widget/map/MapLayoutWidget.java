@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.map;
 
-
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.GPRoutingManagerWidget;
@@ -91,7 +90,6 @@ public class MapLayoutWidget implements GeoPlatformMap {
     private GPRoutingManagerWidget routingWidget;
     private MapModel mapModel;
     private MapToolbar buttonBar;
-    
     private Measure measure;
     private Measure measureArea;
     private boolean infoActive;
@@ -123,6 +121,8 @@ public class MapLayoutWidget implements GeoPlatformMap {
                 new Double(156543.0339).floatValue());
 
         initMapWidget(this.defaultMapOptions);
+        //This is necessary for Styler Widget on calculating restrictions scale
+        this.map.setFractionalZoom(true);
     }
 
     private void initMapWidget(MapOptions defaultMapOptions) {
@@ -228,7 +228,6 @@ public class MapLayoutWidget implements GeoPlatformMap {
         this.osm = OSM.Mapnik("OpenStreetMap", osmOption);
         this.osm.setIsBaseLayer(true);
         this.map.addLayer(osm);
-
         this.osm.setZIndex(-1);
     }
 
@@ -243,7 +242,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
         this.map.addLayer(layer);
 
         this.layer.setZIndex(-2);
-        
+
         GoogleOptions opSatellite = new GoogleOptions();
         opSatellite.setType(GMapType.G_SATELLITE_MAP);
         opSatellite.setSphericalMercator(true);
@@ -254,7 +253,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
         this.map.addLayer(satellite);
 
         satellite.setZIndex(-3);
-        
+
         GoogleOptions opHybrid = new GoogleOptions();
         opHybrid.setType(GMapType.G_HYBRID_MAP);
         opHybrid.setSphericalMercator(true);
@@ -537,5 +536,10 @@ public class MapLayoutWidget implements GeoPlatformMap {
             }
         };
         t.schedule(3000);
+    }
+
+    public double getScaleForZoom(double zoom) {
+        String units = this.map.getCurrentUnits();
+        return this.map.getScaleForZoom(zoom, units);
     }
 }

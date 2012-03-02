@@ -60,19 +60,19 @@ public class GPHandlerManager {
 
     public static <T extends EventHandler> HandlerRegistration addHandler(
             Type<T> type, T handler) {
-        return getInstance().eventBus.addHandler(type, handler);
+        return INSTANCE.eventBus.addHandler(type, handler);
     }
 
     public static <T extends EventHandler> HandlerRegistration addHandlerToSource(
             Type<T> type, Object source, T handler) {
-        return getInstance().eventBus.addHandlerToSource(type, source, handler);
+        return INSTANCE.eventBus.addHandlerToSource(type, source, handler);
     }
 
     public static void fireEvent(GwtEvent<?> event) {
-        getInstance().eventBus.fireEvent(event);
+        INSTANCE.eventBus.fireEvent(event);
     }
 
     public static void fireEventFromSource(GwtEvent<?> event, Object source) {
-        getInstance().eventBus.fireEventFromSource(event, source);
+        INSTANCE.eventBus.fireEventFromSource(event, source);
     }
 }

@@ -62,11 +62,9 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -82,11 +80,15 @@ public abstract class ServiceTest {
     //
     protected GeoPlatformService gpWSClient; // TODO gpService
     protected GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor;
-    // User
+    // Roles (default)
+    protected final String ROLE_ADMIN = "Admin";
+    protected final String ROLE_USER = "User";
+    protected final String ROLE_VIEWER = "Viewer";
+    // Users
     protected final String usernameTest = "username_test_ws";
     protected GPUser userTest;
     protected long idUserTest = -1;
-    // Project
+    // Projects
     protected GPProject projectTest;
     protected long idProjectTest = -1;
     // Folders
@@ -113,7 +115,7 @@ public abstract class ServiceTest {
         logger.trace("\n\t@@@ {}.setUp @@@", this.getClass().getSimpleName());
 
         // Insert User
-        idUserTest = this.createAndInsertUser(usernameTest, GPRole.USER);
+        idUserTest = this.createAndInsertUser(usernameTest, ROLE_USER);
         userTest = gpWSClient.getUserDetailByUsername(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
         // Insert Project
@@ -142,7 +144,7 @@ public abstract class ServiceTest {
     }
 
     // Create and insert a User
-    protected long createAndInsertUser(String username, GPRole... roles)
+    protected long createAndInsertUser(String username, String... roles)
             throws IllegalParameterFault {
         GPUser user = createUser(username, roles);
         logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
@@ -153,7 +155,7 @@ public abstract class ServiceTest {
         return idUser;
     }
 
-    protected GPUser createUser(String username, GPRole... roles) {
+    protected GPUser createUser(String username, String... roles) {
         GPUser user = new GPUser();
         user.setUsername(username);
         user.setName("Complete name of " + username);
@@ -169,11 +171,11 @@ public abstract class ServiceTest {
         return user;
     }
 
-    private List<GPAuthority> createAuthorities(GPRole... roles) {
+    private List<GPAuthority> createAuthorities(String... roles) {
         List<GPAuthority> authorities = new ArrayList<GPAuthority>();
-        for (GPRole role : roles) {
+        for (String role : roles) {
             GPAuthority authority = new GPAuthority();
-            authority.setAuthority(role.toString());
+            authority.setAuthority(role);
 
             authorities.add(authority);
         }

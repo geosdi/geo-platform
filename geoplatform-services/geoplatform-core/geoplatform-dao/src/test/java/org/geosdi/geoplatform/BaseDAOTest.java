@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geotools.data.ows.Layer;
 import org.geotools.data.ows.WMSCapabilities;
 import org.geotools.data.wms.WebMapServer;
@@ -515,4 +514,25 @@ public abstract class BaseDAOTest {
         return rasterLayers;
     }
 //</editor-fold>
+
+    /**
+     * Default roles for ACLs purpose
+     */
+    protected enum GPRole {
+
+        ADMIN("Admin"),
+        USER("User"),
+        VIEWER("Viewer");
+        //
+        private String role;
+
+        private GPRole(String role) {
+            this.role = role;
+        }
+
+        @Override
+        public String toString() {
+            return role;
+        }
+    }
 }

@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.AccountExpiredFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ShortAccountDTO;
@@ -121,14 +120,14 @@ public class WSAccountTest extends ServiceTest {
 
         GPAuthority authority = authorities.get(0);
         Assert.assertNotNull(authority);
-        Assert.assertEquals("Authority string", GPRole.USER.toString(), authority.getAuthority());
+        Assert.assertEquals("Authority string", ROLE_USER, authority.getAuthority());
         Assert.assertEquals("Authority username", usernameTest, authority.getStringID());
     }
 
     @Test
     public void testInsertUserWithMultiRole() throws IllegalParameterFault, ResourceNotFoundFault {
         String usernameMultiRole = "username-multi-role";
-        Long idUser = super.createAndInsertUser(usernameMultiRole, GPRole.ADMIN, GPRole.VIEWER);
+        Long idUser = super.createAndInsertUser(usernameMultiRole, ROLE_ADMIN, ROLE_VIEWER);
 
         try {
             List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameMultiRole);
@@ -137,12 +136,12 @@ public class WSAccountTest extends ServiceTest {
 
             GPAuthority authority = authorities.get(0);
             Assert.assertNotNull(authority);
-            Assert.assertEquals("Authority string", GPRole.ADMIN.toString(), authority.getAuthority());
+            Assert.assertEquals("Authority string", ROLE_ADMIN, authority.getAuthority());
             Assert.assertEquals("Authority username", usernameMultiRole, authority.getStringID());
 
             authority = authorities.get(1);
             Assert.assertNotNull(authority);
-            Assert.assertEquals("Authority string", GPRole.VIEWER.toString(), authority.getAuthority());
+            Assert.assertEquals("Authority string", ROLE_VIEWER, authority.getAuthority());
             Assert.assertEquals("Authority username", usernameMultiRole, authority.getStringID());
         } finally {
             boolean check = gpWSClient.deleteAccount(idUser);
@@ -152,7 +151,7 @@ public class WSAccountTest extends ServiceTest {
 
     @Test
     public void testInsertDuplicateUserWRTUsername() {
-        GPUser user = super.createUser(super.usernameTest, GPRole.USER);
+        GPUser user = super.createUser(super.usernameTest, ROLE_USER);
         try {
             gpWSClient.insertAccount(user, false);
             Assert.fail("User already exist wrt username");
@@ -165,7 +164,7 @@ public class WSAccountTest extends ServiceTest {
 
     @Test
     public void testInsertDuplicateUserWRTUEmail() {
-        GPUser user = super.createUser("duplicate-email", GPRole.USER);
+        GPUser user = super.createUser("duplicate-email", ROLE_USER);
         user.setEmailAddress(super.userTest.getEmailAddress());
         try {
             gpWSClient.insertAccount(user, false);

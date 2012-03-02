@@ -200,10 +200,9 @@ public class ManageServerWidget extends Window {
             public void componentSelected(ButtonEvent ce) {
                 rowEditor.stopEditing(true);
                 List<GPServerBeanModel> serverList = store.getModels();
-                String check = null;
                 int i = 0;
                 for (GPServerBeanModel gPServerBeanModel : serverList) {
-                    check = checkColumn.getCheckState(gPServerBeanModel, "delete", i, 0);
+                    String check = checkColumn.getCheckState(gPServerBeanModel, "delete", i, 0);
                     if (check.equals("-on")) {
                         operation.deleteServer(gPServerBeanModel);
                     }

@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
@@ -85,7 +86,7 @@ public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
 
                     @Override
                     public void handleEvent(MessageBoxEvent be) {
-                        if (be.getButtonClicked().getText().toLowerCase().contains("s")) {
+                        if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
                             manageDeleteUser(user, store);
                         }
                     }

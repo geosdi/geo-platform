@@ -50,9 +50,9 @@ public interface IGPUserManageDetail extends IGPUserSimpleDetail {
 
     void setPassword(String password);
 
-//    List<GPRole> getAuthorities();
+//    List<String> getAuthorities();
 //
-//    void setAuthorities(List<GPRole> roles);
+//    void setAuthorities(List<String> roles);
 //    
     String getAuthority();
 

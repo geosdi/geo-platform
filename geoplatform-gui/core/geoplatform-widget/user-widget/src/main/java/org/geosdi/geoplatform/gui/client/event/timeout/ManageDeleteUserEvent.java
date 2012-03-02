@@ -50,9 +50,6 @@ public class ManageDeleteUserEvent extends GwtEvent<IManageDeleteUserHandler> {
     private GPUserManageDetail user;
     private ListStore<GPUserManageDetail> store;
 
-    public ManageDeleteUserEvent() {
-    }
-
     public void setStore(ListStore<GPUserManageDetail> store) {
         this.store = store;
     }

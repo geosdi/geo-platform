@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.Style.ButtonArrowAlign;
-import com.extjs.gxt.ui.client.data.ModelKeyProvider;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Listener;
@@ -88,7 +87,7 @@ import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.grid.renderer.GPGridCellRenderer;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.global.security.GPRole;
+import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
 import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
 
 /**
@@ -397,7 +396,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
                 // Iff for ADMIN role, we will remove MANAGE_ROLES
                 // i.e. MANAGE_ROLES will not be modified for a ADMIN role
-                if (role.equals(GPRole.ADMIN.toString())) {
+                if (role.equals(IGPUserSimpleDetail.ADMIN)) {
                     for (GuiComponentDetail gc : guiComponents) {
                         if (gc.getComponentId().equals(GuiComponentIDs.MANAGE_ROLES)) {
                             ManageRolesWidget.this.store.remove(gc);

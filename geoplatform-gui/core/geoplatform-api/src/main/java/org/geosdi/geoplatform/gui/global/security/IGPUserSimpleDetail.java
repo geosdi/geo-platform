@@ -44,6 +44,8 @@ import java.io.Serializable;
  */
 public interface IGPUserSimpleDetail extends Serializable {
 
+    String ADMIN = "Admin";
+
     String getUsername();
 
     void setUsername(String username);

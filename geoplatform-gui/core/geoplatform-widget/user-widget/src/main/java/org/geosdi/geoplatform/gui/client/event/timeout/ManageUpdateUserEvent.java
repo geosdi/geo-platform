@@ -45,9 +45,6 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public class ManageUpdateUserEvent extends GwtEvent<IManageUpdateUserHandler> {
 
-    public ManageUpdateUserEvent() {
-    }
-
     @Override
     public Type<IManageUpdateUserHandler> getAssociatedType() {
         return IManageUpdateUserHandler.TYPE;

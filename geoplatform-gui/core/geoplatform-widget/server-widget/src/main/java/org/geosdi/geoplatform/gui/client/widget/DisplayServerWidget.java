@@ -55,7 +55,7 @@ import org.geosdi.geoplatform.gui.client.event.timeout.IDisplayGetCapabilitiesHa
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.form.ManageServerWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.global.security.GPRole;
+import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
@@ -161,11 +161,11 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
 
             @Override
             public void onSuccess(List<String> result) {
-                manageServersButton.setEnabled(false);
+                manageServersButton.disable();
                 for (String role : result) {
                     System.out.println("Role: " + role);
-                    if (role.equals(GPRole.ADMIN.toString())) {
-                        manageServersButton.setEnabled(true);
+                    if (role.equals(IGPUserSimpleDetail.ADMIN)) {
+                        manageServersButton.enable();
                         return;
                     }
                 }

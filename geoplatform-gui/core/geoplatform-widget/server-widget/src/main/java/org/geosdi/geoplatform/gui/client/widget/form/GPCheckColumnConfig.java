@@ -73,15 +73,14 @@ public class GPCheckColumnConfig extends CheckColumnConfig {
 
     public void manageDeleteButton() {
         List<GPServerBeanModel> serverList = store.getModels();
-        String check = null;
         for (int i = 0; i < serverList.size(); i++) {
-            check = this.getCheckState(serverList.get(i), "delete", i, 0);
+            String check = this.getCheckState(serverList.get(i), "delete", i, 0);
             if (check.equals("-on")) {
-                this.deleteServerButton.setEnabled(true);
+                this.deleteServerButton.enable();
                 return;
             }
         }
-        this.deleteServerButton.setEnabled(false);
+        this.deleteServerButton.disable();
     }
 
 //    public int getSelectedItems() {

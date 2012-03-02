@@ -45,9 +45,6 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public class ManageInsertUserEvent extends GwtEvent<IManageInsertUserHandler> {
 
-    public ManageInsertUserEvent() {
-    }
-
     @Override
     public Type<IManageInsertUserHandler> getAssociatedType() {
         return IManageInsertUserHandler.TYPE;

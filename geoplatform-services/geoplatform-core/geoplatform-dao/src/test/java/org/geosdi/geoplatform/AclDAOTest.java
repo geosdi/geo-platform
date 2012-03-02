@@ -55,7 +55,6 @@ import org.geosdi.geoplatform.core.acl.dao.AclObjectIdentityDAO;
 import org.geosdi.geoplatform.core.acl.dao.AclSidDAO;
 import org.geosdi.geoplatform.core.acl.dao.GuiComponentDAO;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.gui.global.security.GPRole;
 
 /**
  * @author Vincenzo Monteverde

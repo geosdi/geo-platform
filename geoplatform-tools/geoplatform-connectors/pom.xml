@@ -29,6 +29,7 @@
     </repositories>
     
     <modules>
+        <module>geoplatform-connector-api</module>
         <module>geoplatform-csw-connector</module>
         <module>geoplatform-wps-connector</module>
     </modules>

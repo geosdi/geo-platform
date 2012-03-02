@@ -86,6 +86,11 @@
             <artifactId>geoplatform-api</artifactId>
             <classifier>sources</classifier>
         </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-server-api</artifactId>
+        </dependency>
 
         <!-- GeoPlatform-WS-Client -->
         

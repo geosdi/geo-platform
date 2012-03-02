@@ -68,6 +68,7 @@
             <artifactId>gwt-openlayers-client</artifactId>
             <scope>provided</scope>
         </dependency>
+        
         <dependency>
             <groupId>org.gwtopenmaps.openlayers</groupId>
             <artifactId>gwt-openlayers-server</artifactId>
@@ -94,6 +95,11 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-configuration</artifactId>
             <classifier>sources</classifier>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-server-api</artifactId>
         </dependency>
 
         <dependency>

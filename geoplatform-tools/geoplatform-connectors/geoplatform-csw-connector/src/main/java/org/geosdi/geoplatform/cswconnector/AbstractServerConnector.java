@@ -49,8 +49,7 @@ public abstract class AbstractServerConnector<T extends CatalogServicesServer>
     private Date registrationDate;
     protected T cswServer;
 
-    public AbstractServerConnector(T cswServer) {
-        this.cswServer = cswServer;
+    public AbstractServerConnector() {
         this.registrationDate = new Date();
     }
 

@@ -82,6 +82,12 @@
                 <version>${project.version}</version>
                 <classifier>sources</classifier>
             </dependency>
+            
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-server-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         
             <dependency>
                 <groupId>org.geosdi</groupId>
@@ -174,6 +180,7 @@
         <module>geoplatform-configuration</module>
         <module>geoplatform-oxm</module>
         <module>geoplatform-ws-client</module>
+        <module>geoplatform-server-api</module>
         <module>geoplatform-widget</module>
         <module>geoplatform-cache</module>
     </modules>

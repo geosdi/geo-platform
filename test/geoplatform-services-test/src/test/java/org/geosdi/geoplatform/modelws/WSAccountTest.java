@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.modelws;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import junit.framework.Assert;

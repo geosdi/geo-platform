@@ -44,7 +44,6 @@ import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.gui.global.security.GPRole;
 import org.springframework.security.acls.domain.BasePermission;
 
 /**

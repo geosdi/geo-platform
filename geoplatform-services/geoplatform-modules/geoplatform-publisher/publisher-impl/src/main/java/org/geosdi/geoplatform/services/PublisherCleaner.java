@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
+import org.geosdi.geoplatform.services.utility.PublishUtility;
 import java.io.File;
 import javax.annotation.PreDestroy;
 import org.slf4j.Logger;

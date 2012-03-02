@@ -33,13 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.services;
+package org.geosdi.geoplatform.services.utility;
 
-import it.geosolutions.geoserver.rest.encoder.GSPostGISDatastoreEncoder;
 import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
+import org.geosdi.geoplatform.services.GPPublisherServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -218,29 +218,5 @@ public class PublishUtility {
             return null;
         }
         return out;
-    }
-    
-    //TODO: portare in file di configurazione esterno i parametri per la creazione 
-    //di stores postgi
-    public static GSPostGISDatastoreEncoder generateEncoder(String storeName) {
-        GSPostGISDatastoreEncoder encoder = new GSPostGISDatastoreEncoder();
-        encoder.setName(storeName);
-        encoder.setEnabled(true);
-        encoder.setHost("localhost");
-        encoder.setPort(5432);
-        encoder.setDatabase("preview_gp");
-        encoder.setSchema("public");
-        encoder.setUser("postgres");
-        encoder.setPassword("0x,postgres,0x");
-        encoder.setExposePrimaryKeys(false);
-        encoder.setMaxConnections(20);
-        encoder.setMinConnections(1);
-        encoder.setFetchSize(1000);
-        encoder.setConnectionTimeout(20);
-        encoder.setValidateConnections(false);
-        encoder.setLooseBBox(true);
-        encoder.setPreparedStatements(false);
-        encoder.setMaxOpenPreparedStatements(50);
-        return encoder;
     }
 }

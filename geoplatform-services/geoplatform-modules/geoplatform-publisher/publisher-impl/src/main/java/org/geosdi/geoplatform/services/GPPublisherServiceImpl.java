@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
+import org.geosdi.geoplatform.services.utility.PublishUtility;
 import com.google.common.collect.Lists;
 import javax.jws.WebService;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
@@ -61,6 +62,7 @@ import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.LayerAttribute;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviews;
 import org.geosdi.geoplatform.services.geotiff.GeoTiffOverviewsConfiguration;
+import org.geosdi.geoplatform.services.utility.PostGISUtility;
 import org.geotools.coverage.grid.GridCoverage2D;
 import org.geotools.data.DataSourceException;
 import org.geotools.data.FileDataStore;
@@ -109,6 +111,9 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     //
     @Autowired
     private GeoTiffOverviewsConfiguration overviewsConfiguration;
+    //
+    @Autowired
+    private PostGISUtility postGISUtility;
 
     public GPPublisherServiceImpl(String RESTURL, String RESTUSER, String RESTPW,
             String geoportalDir) {
@@ -781,7 +786,7 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         String datatStoreName = info.name;
         // check if the dataStore already exists
         if (!existsDataStore(userWorkspace, datatStoreName)) {
-            GSPostGISDatastoreEncoder encoder = PublishUtility.generateEncoder(datatStoreName);
+            GSPostGISDatastoreEncoder encoder = postGISUtility.generateEncoder(datatStoreName);
             restPublisher.createPostGISDatastore(userName, encoder);
         } else {
             boolean result = restPublisher.unpublishFeatureType(userWorkspace, datatStoreName, info.name);

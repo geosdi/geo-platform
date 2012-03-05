@@ -317,14 +317,6 @@
             <artifactId>aspectjweaver</artifactId>
         </dependency>
 
-		<!-- SCOPE TEST -->
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-configuration</artifactId>
-            <version>${geoplatform-version}</version>
-            <scope>test</scope>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>

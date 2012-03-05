@@ -58,4 +58,8 @@ public interface IGeoPlatformLocation {
     public String getCity();
 
     public String getAddress();
+    
+	public String getStreetNumber();
+    
+	public String getPostalCode();
 }

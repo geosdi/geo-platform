@@ -95,6 +95,7 @@ public class YahooGeocodeBean extends GeocodingBean {
         super.setLat(result.getLatitude());
         super.setLon(result.getLongitude());
         //
+        super.setPostalCode(result.getPostal());
         super.setCountry(result.getState());
         super.setDistrict(result.getCounty());
         super.setCity(result.getCity());

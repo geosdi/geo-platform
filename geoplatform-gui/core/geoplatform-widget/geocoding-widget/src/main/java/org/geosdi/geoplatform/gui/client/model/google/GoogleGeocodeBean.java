@@ -473,16 +473,10 @@ public class GoogleGeocodeBean extends GeocodingBean {
     /**
      * @param postal_code the postal_code to set
      */
-    public void setPostal_code(String postal_code) {
-        this.postal_code = postal_code;
-    }
-
-    /**
-     * @param postal_code the postal_code to set
-     */
     private void setPostal_code(GPGoogleAddress address) {
         if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.POSTAL_CODE.getValue())) {
             this.postal_code = address.getLongName();
+            super.setPostalCode(address.getLongName());
         }
     }
 
@@ -619,8 +613,9 @@ public class GoogleGeocodeBean extends GeocodingBean {
      * @param street_number the street_number to set
      */
     private void setStreet_number(GPGoogleAddress address) {
-        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.STREE_NUMBER.getValue())) {
+        if (address.getTypesList().get(0).equals(AddressElement.EnumAddressElement.STREET_NUMBER.getValue())) {
             this.street_number = address.getLongName();
+            super.setStreetNumber(address.getLongName());
         }
     }
 

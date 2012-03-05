@@ -64,7 +64,7 @@ public class AddressElement {
         PARK("park"), // indicates a named park.
         POINT_OF_INTEREST("point_of_interest"), // indicates a named point of interest. Typically, these "POI"s are prominent local entities that don't easily fit in another category such as "Empire State Building" or "Statue of Liberty."
         POST_BOX("post_box"), // indicates a specific postal box.
-        STREE_NUMBER("street_number"), // indicates the precise street number.
+        STREET_NUMBER("street_number"), // indicates the precise street number.
         FLOOR("floor"), // indicates the floor of a building address.
         ROOM("room"); // indicates the room of a building address.
 

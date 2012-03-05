@@ -33,36 +33,52 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.connector.api;
 
-import org.geotoolkit.csw.DescribeRecordRequest;
-import org.geotoolkit.csw.GetCapabilitiesRequest;
-import org.geotoolkit.csw.GetDomainRequest;
-import org.geotoolkit.csw.GetRecordByIdRequest;
-import org.geotoolkit.csw.GetRecordsRequest;
-import org.geotoolkit.csw.HarvestRequest;
-import org.geotoolkit.csw.TransactionRequest;
+import java.net.URI;
+import java.net.URL;
+import java.util.Date;
+import org.geotoolkit.client.AbstractServer;
+import org.geotoolkit.security.ClientSecurity;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface GeoPlatformCSWConnector {
+public abstract class AbstractServerConnector<T extends AbstractServer>
+        implements GeoPlatformConnector {
 
-    GPCatalogVersion getVersion();
+    private Date registrationDate = new Date();
+    protected T server;
 
-    DescribeRecordRequest createDescribeRecord();
+    @Override
+    public Date getRegistrationDate() {
+        return this.registrationDate;
+    }
 
-    GetCapabilitiesRequest createGetCapabilities();
+    @Override
+    public void setRegistrationDate(Date date) {
+        this.registrationDate = date;
+    }
 
-    GetDomainRequest createGetDomain();
+    @Override
+    public String getRegistrationKey() {
+        return this.server.getURI().toString();
+    }
 
-    GetRecordByIdRequest createGetRecordById();
+    @Override
+    public ClientSecurity getClientSecurity() {
+        return server.getClientSecurity();
+    }
 
-    GetRecordsRequest createGetRecords();
+    @Override
+    public URI getURI() {
+        return server.getURI();
+    }
 
-    HarvestRequest createHarvest();
-
-    TransactionRequest createTransaction();
+    @Override
+    public URL getURL() {
+        return server.getURL();
+    }
 }

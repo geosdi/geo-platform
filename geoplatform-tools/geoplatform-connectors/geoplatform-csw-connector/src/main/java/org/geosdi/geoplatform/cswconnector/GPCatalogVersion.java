@@ -35,31 +35,22 @@
  */
 package org.geosdi.geoplatform.cswconnector;
 
-import java.util.Date;
-import org.geotoolkit.csw.CatalogServicesServer;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractServerConnector<T extends CatalogServicesServer>
-        implements GeoPlatformCSWConnector {
+public enum GPCatalogVersion {
 
-    private Date registrationDate;
-    protected T cswServer;
+    V202("2.0.2");
+    private String code;
 
-    public AbstractServerConnector() {
-        this.registrationDate = new Date();
+    GPCatalogVersion(String theCode) {
+        this.code = theCode;
     }
 
     @Override
-    public Date getRegistrationDate() {
-        return this.registrationDate;
-    }
-
-    @Override
-    public String getRegistrationKey() {
-       return this.cswServer.getURI().toString();
+    public String toString() {
+        return this.code.toString();
     }
 }

@@ -33,36 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.cswconnector;
+package org.geosdi.connector.api;
 
-import org.geotoolkit.csw.DescribeRecordRequest;
-import org.geotoolkit.csw.GetCapabilitiesRequest;
-import org.geotoolkit.csw.GetDomainRequest;
-import org.geotoolkit.csw.GetRecordByIdRequest;
-import org.geotoolkit.csw.GetRecordsRequest;
-import org.geotoolkit.csw.HarvestRequest;
-import org.geotoolkit.csw.TransactionRequest;
+import java.net.URI;
+import java.net.URL;
+import java.util.Date;
+import org.geotoolkit.security.ClientSecurity;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface GeoPlatformCSWConnector {
+public interface GeoPlatformConnector {
 
-    GPCatalogVersion getVersion();
+    String getRegistrationKey();
 
-    DescribeRecordRequest createDescribeRecord();
+    Date getRegistrationDate();
 
-    GetCapabilitiesRequest createGetCapabilities();
+    void setRegistrationDate(Date date);
 
-    GetDomainRequest createGetDomain();
+    ClientSecurity getClientSecurity();
 
-    GetRecordByIdRequest createGetRecordById();
-
-    GetRecordsRequest createGetRecords();
-
-    HarvestRequest createHarvest();
-
-    TransactionRequest createTransaction();
+    URL getURL();
+    
+    URI getURI();
 }

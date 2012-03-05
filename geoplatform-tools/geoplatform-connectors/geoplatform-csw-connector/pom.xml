@@ -15,18 +15,6 @@
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == CSW Connector</name>
-  
-    <repositories>
-         <!-- GEOTOOLKIT -->
-        <repository>
-            <id>geotoolkit</id>
-            <name>Geotk repository</name>
-            <url>http://maven.geotoolkit.org</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 	
     <developers>
         <developer>
@@ -66,6 +54,12 @@
 
 
     <dependencies>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-connector-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
         <dependency>
             <groupId>org.geotoolkit.pending</groupId>
             <artifactId>geotk-client-csw</artifactId>

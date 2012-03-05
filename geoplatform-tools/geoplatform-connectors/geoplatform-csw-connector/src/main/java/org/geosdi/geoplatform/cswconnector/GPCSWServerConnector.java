@@ -35,11 +35,81 @@
  */
 package org.geosdi.geoplatform.cswconnector;
 
+import java.net.URL;
+import org.geosdi.connector.api.AbstractServerConnector;
+import org.geotoolkit.csw.CatalogServicesServer;
+import org.geotoolkit.csw.DescribeRecordRequest;
+import org.geotoolkit.csw.GetCapabilitiesRequest;
+import org.geotoolkit.csw.GetDomainRequest;
+import org.geotoolkit.csw.GetRecordByIdRequest;
+import org.geotoolkit.csw.GetRecordsRequest;
+import org.geotoolkit.csw.HarvestRequest;
+import org.geotoolkit.csw.TransactionRequest;
+import org.geotoolkit.security.ClientSecurity;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPCSWServerConnector {
-    
+public class GPCSWServerConnector extends AbstractServerConnector<CatalogServicesServer>
+        implements GeoPlatformCSWConnector {
+
+    private GPCatalogVersion version;
+
+    public GPCSWServerConnector(URL serverURL) {
+        this(serverURL, GPCatalogVersion.V202);
+    }
+
+    public GPCSWServerConnector(URL serverURL, GPCatalogVersion theVersion) {
+        this.server = new CatalogServicesServer(serverURL, theVersion.toString());
+        this.version = theVersion;
+    }
+
+    public GPCSWServerConnector(URL serverURL, ClientSecurity security,
+            GPCatalogVersion theVersion) {
+        this.server = new CatalogServicesServer(serverURL, security,
+                theVersion.toString());
+        this.version = theVersion;
+    }
+
+    @Override
+    public GPCatalogVersion getVersion() {
+        return this.version;
+    }
+
+    @Override
+    public DescribeRecordRequest createDescribeRecord() {
+        return this.server.createDescribeRecord();
+    }
+
+    @Override
+    public GetCapabilitiesRequest createGetCapabilities() {
+        return this.server.createGetCapabilities();
+    }
+
+    @Override
+    public GetDomainRequest createGetDomain() {
+        return this.server.createGetDomain();
+    }
+
+    @Override
+    public GetRecordByIdRequest createGetRecordById() {
+        return this.server.createGetRecordById();
+    }
+
+    @Override
+    public GetRecordsRequest createGetRecords() {
+        return this.server.createGetRecords();
+    }
+
+    @Override
+    public HarvestRequest createHarvest() {
+        return this.server.createHarvest();
+    }
+
+    @Override
+    public TransactionRequest createTransaction() {
+        return this.server.createTransaction();
+    }
 }

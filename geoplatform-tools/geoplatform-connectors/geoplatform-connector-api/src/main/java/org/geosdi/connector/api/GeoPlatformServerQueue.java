@@ -35,29 +35,27 @@
  */
 package org.geosdi.connector.api;
 
-import java.net.URI;
-import java.net.URL;
-import java.util.Date;
-import org.geotoolkit.security.ClientSecurity;
+import java.util.concurrent.ConcurrentHashMap;
+import net.jcip.annotations.ThreadSafe;
+import org.geotoolkit.client.AbstractServer;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface GeoPlatformConnector {
-
-    String getRegistrationKey();
-
-    Date getRegistrationDate();
-
-    void setRegistrationDate(Date date);
+@ThreadSafe
+public class GeoPlatformServerQueue<K extends String, T extends AbstractServer> {
     
-    int getUsageCounter();
+    private ConcurrentHashMap<K, T> queue;
+    private GPQueueCapacity capacity;
 
-    ClientSecurity getClientSecurity();
-
-    URL getURL();
-    
-    URI getURI();
+    /**
+     * 
+     * @param capacity for HashMap
+     */
+    public GeoPlatformServerQueue(GPQueueCapacity theCapacity) {
+        this.queue = new ConcurrentHashMap<K, T>(theCapacity.getValue());
+        this.capacity = theCapacity;
+    }
 }

@@ -38,6 +38,7 @@ package org.geosdi.connector.api;
 import java.net.URI;
 import java.net.URL;
 import java.util.Date;
+import org.geotoolkit.client.AbstractServer;
 import org.geotoolkit.security.ClientSecurity;
 
 /**
@@ -45,19 +46,52 @@ import org.geotoolkit.security.ClientSecurity;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public interface GeoPlatformConnector {
+public abstract class GPServerConnector<T extends AbstractServer>
+        implements GeoPlatformConnector {
 
-    String getRegistrationKey();
+    private Date registrationDate = new Date();
+    private int usageCounter;
+    protected T server;
 
-    Date getRegistrationDate();
+    @Override
+    public Date getRegistrationDate() {
+        return this.registrationDate;
+    }
 
-    void setRegistrationDate(Date date);
-    
-    int getUsageCounter();
+    @Override
+    public void setRegistrationDate(Date date) {
+        this.registrationDate = date;
+        this.usageCounter++;
+    }
 
-    ClientSecurity getClientSecurity();
+    @Override
+    public String getRegistrationKey() {
+        return this.server.getURI().toString();
+    }
 
-    URL getURL();
-    
-    URI getURI();
+    @Override
+    public int getUsageCounter() {
+        return this.usageCounter;
+    }
+
+    @Override
+    public ClientSecurity getClientSecurity() {
+        return server.getClientSecurity();
+    }
+
+    @Override
+    public URI getURI() {
+        return server.getURI();
+    }
+
+    @Override
+    public URL getURL() {
+        return server.getURL();
+    }
+
+    @Override
+    public String toString() {
+        return "GPServerConnector{" + "registrationDate=" + registrationDate
+                + ", usageCounter=" + usageCounter + '}';
+    }
 }

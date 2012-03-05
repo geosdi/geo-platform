@@ -35,50 +35,27 @@
  */
 package org.geosdi.connector.api;
 
-import java.net.URI;
-import java.net.URL;
-import java.util.Date;
-import org.geotoolkit.client.AbstractServer;
-import org.geotoolkit.security.ClientSecurity;
-
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractServerConnector<T extends AbstractServer>
-        implements GeoPlatformConnector {
+public enum GPQueueCapacity {
 
-    private Date registrationDate = new Date();
-    protected T server;
+    LOW(15),
+    MEDIUM(30),
+    HIGH(45);
+    //
+    private int value;
 
-    @Override
-    public Date getRegistrationDate() {
-        return this.registrationDate;
+    GPQueueCapacity(int theValue) {
+        this.value = theValue;
     }
 
-    @Override
-    public void setRegistrationDate(Date date) {
-        this.registrationDate = date;
-    }
-
-    @Override
-    public String getRegistrationKey() {
-        return this.server.getURI().toString();
-    }
-
-    @Override
-    public ClientSecurity getClientSecurity() {
-        return server.getClientSecurity();
-    }
-
-    @Override
-    public URI getURI() {
-        return server.getURI();
-    }
-
-    @Override
-    public URL getURL() {
-        return server.getURL();
+    /**
+     * @return the value
+     */
+    public int getValue() {
+        return value;
     }
 }

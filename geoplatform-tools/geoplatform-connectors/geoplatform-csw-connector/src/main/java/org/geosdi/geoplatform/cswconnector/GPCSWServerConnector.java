@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.cswconnector;
 
 import java.net.URL;
-import org.geosdi.connector.api.AbstractServerConnector;
+import org.geosdi.connector.api.GPServerConnector;
 import org.geotoolkit.csw.CatalogServicesServer;
 import org.geotoolkit.csw.DescribeRecordRequest;
 import org.geotoolkit.csw.GetCapabilitiesRequest;
@@ -52,7 +52,7 @@ import org.geotoolkit.security.ClientSecurity;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPCSWServerConnector extends AbstractServerConnector<CatalogServicesServer>
+public class GPCSWServerConnector extends GPServerConnector<CatalogServicesServer>
         implements GeoPlatformCSWConnector {
 
     private GPCatalogVersion version;

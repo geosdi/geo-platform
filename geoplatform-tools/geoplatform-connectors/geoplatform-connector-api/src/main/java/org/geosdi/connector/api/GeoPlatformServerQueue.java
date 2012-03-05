@@ -35,9 +35,9 @@
  */
 package org.geosdi.connector.api;
 
-import java.util.concurrent.ConcurrentHashMap;
+import com.google.common.collect.Maps;
+import java.util.Map;
 import net.jcip.annotations.ThreadSafe;
-import org.geotoolkit.client.AbstractServer;
 
 /**
  *
@@ -45,9 +45,9 @@ import org.geotoolkit.client.AbstractServer;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GeoPlatformServerQueue<K extends String, T extends AbstractServer> {
-    
-    private ConcurrentHashMap<K, T> queue;
+public class GeoPlatformServerQueue<T extends GPServerConnector> {
+
+    private Map<String, T> queue;
     private GPQueueCapacity capacity;
 
     /**
@@ -55,7 +55,25 @@ public class GeoPlatformServerQueue<K extends String, T extends AbstractServer> 
      * @param capacity for HashMap
      */
     public GeoPlatformServerQueue(GPQueueCapacity theCapacity) {
-        this.queue = new ConcurrentHashMap<K, T>(theCapacity.getValue());
+        this.queue = Maps.newHashMapWithExpectedSize(theCapacity.getValue());
         this.capacity = theCapacity;
+    }
+
+    /**
+     * TODO: MODIFY this when it must be use. Now the used approach is not synchronized
+     * There a lot of control to do
+     * 
+     * @param connector 
+     */
+    public synchronized void bindConnector(T connector) {
+        this.queue.put(connector.getRegistrationKey(), connector);
+    }
+
+    public synchronized void removeConnector(T connector) {
+        this.queue.remove(connector.getRegistrationKey());
+    }
+
+    public synchronized GPServerConnector getConnector(String key) {
+        return this.queue.get(key);
     }
 }

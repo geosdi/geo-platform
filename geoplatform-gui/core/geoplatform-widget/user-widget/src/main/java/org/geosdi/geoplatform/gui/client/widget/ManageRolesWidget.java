@@ -73,6 +73,7 @@ import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -327,7 +328,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         final SimpleComboBox<GuiPermission> permissionComboBox = new SimpleComboBox<GuiPermission>();
         permissionComboBox.setEditable(false);
         permissionComboBox.setTriggerAction(ComboBox.TriggerAction.ALL);
-        permissionComboBox.add(GuiPermission.getAllPermissions());
+        permissionComboBox.add(Arrays.asList(GuiPermission.values()));
         CellEditor comboEditor = new CellEditor(permissionComboBox) {
 
             @Override
@@ -533,7 +534,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
     private Menu createPermissionsMenu() {
         Menu permissionMenu = new Menu();
-        for (final GuiPermission permission : GuiPermission.getAllPermissions()) {
+        for (final GuiPermission permission : GuiPermission.values()) {
             MenuItem permissionItem = new MenuItem(permission.toString());
             permissionItem.addSelectionListener(new SelectionListener() {
 

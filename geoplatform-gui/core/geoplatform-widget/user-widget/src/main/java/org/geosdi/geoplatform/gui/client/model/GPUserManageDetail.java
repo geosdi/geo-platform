@@ -48,9 +48,8 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
 
     private static final long serialVersionUID = 53423038411470538L;
     //
-    private Long id;
-    private String password;
-    private String authority;
+    private Long id; // For performance purpose: used for equals() and hashCode() methods
+    private String password; // For manual binding
 
     /**
      * @return the id
@@ -142,7 +141,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
      */
     @Override
     public String getAuthority() {
-        return authority;
+        return super.get(GPUserManageDetailKeyValue.AUTORITHY.toString());
     }
 
     /**
@@ -151,8 +150,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
      */
     @Override
     public void setAuthority(String role) {
-        this.authority = role;
-        super.set(GPUserManageDetailKeyValue.AUTORITHY.toString(), this.authority.toString());
+        super.set(GPUserManageDetailKeyValue.AUTORITHY.toString(), role.toString());
     }
 
     /**
@@ -221,7 +219,7 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
         str.append(", email=").append(getEmail());
         str.append(", username=").append(getUsername());
         str.append(", password=").append(password);
-        str.append(", authority=").append(authority);
+        str.append(", authority=").append(getAuthority());
         str.append(", temporary=").append(isTemporary());
         return str.append('}').toString();
     }

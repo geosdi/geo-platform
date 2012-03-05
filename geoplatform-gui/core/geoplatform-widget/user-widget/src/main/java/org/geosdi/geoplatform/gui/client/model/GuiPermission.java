@@ -35,9 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -58,20 +55,9 @@ public enum GuiPermission {
     WRITE("WRITE");
     //
     private String permission;
-    private final static List<GuiPermission> permissionList = new ArrayList<GuiPermission>(3);
-
-    static {
-        permissionList.add(NONE);
-        permissionList.add(READ);
-        permissionList.add(WRITE);
-    }
 
     private GuiPermission(String permission) {
         this.permission = permission;
-    }
-
-    public static List<GuiPermission> getAllPermissions() {
-        return permissionList;
     }
 
     public static GuiPermission fromString(String permission) {

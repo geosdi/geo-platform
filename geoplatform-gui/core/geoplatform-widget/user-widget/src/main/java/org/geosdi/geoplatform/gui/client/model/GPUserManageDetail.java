@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
+import java.util.Date;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
@@ -50,6 +51,19 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     //
     private Long id; // For performance purpose: used for equals() and hashCode() methods
     private String password; // For manual binding
+    private Date creationDate;
+    private boolean expired;
+
+    public enum GPUserManageDetailKeyValue {
+
+        USERNAME,
+        PASSWORD,
+        NAME,
+        AUTORITHY,
+        EMAIL,
+        ENABLED,
+        TEMPORARY;
+    }
 
     /**
      * @return the id
@@ -154,6 +168,42 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     }
 
     /**
+     * @return the enabled
+     */
+    @Override
+    public boolean isEnabled() {
+        Boolean enabled = super.get(GPUserManageDetailKeyValue.ENABLED.toString());
+        if (enabled == null) {
+            return false;
+        }
+        return enabled.booleanValue();
+    }
+
+    /**
+     * @param enabled the enabled to set
+     */
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.set(GPUserManageDetailKeyValue.ENABLED.toString(), enabled);
+    }
+
+    /**
+     * @return the creationDate
+     */
+    @Override
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    /**
+     * @param creationDate the creationDate to set
+     */
+    @Override
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    /**
      * @return the temporary
      */
     @Override
@@ -172,6 +222,22 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     @Override
     public void setTemporary(boolean temporary) {
         super.set(GPUserManageDetailKeyValue.TEMPORARY.toString(), temporary);
+    }
+
+    /**
+     * @return the expired
+     */
+    @Override
+    public boolean isExpired() {
+        return expired;
+    }
+
+    /**
+     * @param expired the expired to set
+     */
+    @Override
+    public void setExpired(boolean expired) {
+        this.expired = expired;
     }
 
     /**
@@ -220,7 +286,10 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
         str.append(", username=").append(getUsername());
         str.append(", password=").append(password);
         str.append(", authority=").append(getAuthority());
+        str.append(", enabled=").append(isEnabled());
+        str.append(", creationDate=").append(creationDate);
         str.append(", temporary=").append(isTemporary());
+        str.append(", expired=").append(expired);
         return str.append('}').toString();
     }
 }

@@ -46,8 +46,6 @@ import com.extjs.gxt.ui.client.event.WindowEvent;
 import com.extjs.gxt.ui.client.event.WindowListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.CheckBox;
-import com.extjs.gxt.ui.client.widget.grid.CellEditor;
 import com.extjs.gxt.ui.client.widget.grid.CheckColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
@@ -57,7 +55,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
-import org.geosdi.geoplatform.gui.client.model.GPUserManageDetailKeyValue;
+import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail.GPUserManageDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.service.UserRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.UserPropertiesWidget;
@@ -154,24 +152,29 @@ public class ManageUsersPagWidget
 
         ColumnConfig usernameColumn = new ColumnConfig();
         usernameColumn.setId(GPUserManageDetailKeyValue.USERNAME.toString());
-        usernameColumn.setHeader("User Name");
+        usernameColumn.setHeader("Username");
         usernameColumn.setWidth(120);
         configs.add(usernameColumn);
+
+        CheckColumnConfig enabledColumn = new CheckColumnConfig();
+        enabledColumn.setId(GPUserManageDetailKeyValue.ENABLED.toString());
+        enabledColumn.setHeader("Enabled");
+        enabledColumn.setWidth(50);
+        enabledColumn.setFixed(true);
+        configs.add(enabledColumn);
+
+        CheckColumnConfig tempColumn = new CheckColumnConfig();
+        tempColumn.setId(GPUserManageDetailKeyValue.TEMPORARY.toString());
+        tempColumn.setHeader("Temporary");
+        tempColumn.setWidth(65);
+        tempColumn.setFixed(true);
+        configs.add(tempColumn);
 
         ColumnConfig roleColumn = new ColumnConfig();
         roleColumn.setId(GPUserManageDetailKeyValue.AUTORITHY.toString());
         roleColumn.setHeader("Role");
         roleColumn.setWidth(80);
         configs.add(roleColumn);
-
-        CheckColumnConfig tempColumn = new CheckColumnConfig();
-        CellEditor checkBoxEditor = new CellEditor(new CheckBox());
-        tempColumn.setEditor(checkBoxEditor);
-        tempColumn.setId(GPUserManageDetailKeyValue.TEMPORARY.toString());
-        tempColumn.setHeader("Temporary");
-        tempColumn.setWidth(65);
-        tempColumn.setFixed(true);
-        configs.add(tempColumn);
 
         ColumnConfig delColumn = new ColumnConfig();
         delColumn.setId("delColumn");

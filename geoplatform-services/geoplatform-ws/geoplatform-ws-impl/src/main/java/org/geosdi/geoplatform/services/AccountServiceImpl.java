@@ -149,7 +149,7 @@ class AccountServiceImpl {
         }
 
         // TODO Set to false, and after user confirmation email enabling user account
-        account.setEnabled(true); // Always insert account as desabled        
+//        account.setEnabled(true); // Always insert account as enabled
         accountDao.persist(account);
 
         List<GPAuthority> authorities = account.getGPAuthorities();
@@ -175,6 +175,8 @@ class AccountServiceImpl {
         clonedUser.setName(user.getName());
         clonedUser.setSendEmail(user.isSendEmail());
         clonedUser.setUsername(user.getUsername());
+        clonedUser.setEnabled(user.isEnabled());
+        clonedUser.setAccountTemporary(user.isAccountTemporary());
         clonedUser.setPassword(plainPassword);
 
         return clonedUser;
@@ -187,14 +189,6 @@ class AccountServiceImpl {
         }
         GPUser orig = (GPUser) this.getAccountById(user.getId());
         EntityCorrectness.checkAccountLog(orig); // TODO assert
-
-//        if (!user.getEmailAddress().equals(orig.getEmailAddress()) && orig.isEnabled()) {
-//            throw new IllegalParameterFault("Can't update the email address for registered user:" + user.getId());
-//        }
-//
-//        if (user.isEnabled() != orig.isEnabled()) {
-//            throw new IllegalParameterFault("Can't change user enabled status for user:" + user.getId());
-//        }
 
         // Set the values (except username and property not managed)
         String name = user.getName();
@@ -591,6 +585,7 @@ class AccountServiceImpl {
      * Updates all common fields of user and application (GPAccount) 
      */
     private void updateAccount(GPAccount accountToUpdate, GPAccount account) {
+        accountToUpdate.setEnabled(account.isEnabled());
         accountToUpdate.setAccountTemporary(account.isAccountTemporary());
 
         Long defaultProjectID = account.getDefaultProjectID();

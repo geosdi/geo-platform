@@ -73,7 +73,6 @@ public class UserPropertiesWidget extends GeoPlatformWindow
         implements IManageInsertUserHandler, IManageUpdateUserHandler {
 
     private GPUserManageDetail user;
-    private GPUserManageDetail userOriginal;
     //
     private ContentPanel centralPanel;
     private Button saveButton;
@@ -124,7 +123,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
             }
         });
         this.centralPanel.add(this.userPropertiesBinding.getWidget());
-        this.centralPanel.setSize(325, 285);
+        this.centralPanel.setSize(325, 315);
         super.add(this.centralPanel);
         super.getButtonBar().add(saveButton);
         super.getButtonBar().add(closeButton);
@@ -138,7 +137,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
     @Override
     public void initSize() {
-        super.setSize(340, 300);
+        super.setSize(340, 330);
     }
 
     @Override
@@ -153,10 +152,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
             @Override
             public void windowShow(WindowEvent we) {
-                if (user.getId() != null) {
-                    userOriginal = new GPUserManageDetail(); // TODO only once NEW
-                }
-                userPropertiesBinding.bindModel(user, userOriginal);
+                userPropertiesBinding.bindModel(user);
             }
         });
     }
@@ -182,6 +178,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
 
                 hide();
 
+                // TODO statusbar...
                 GeoPlatformMessage.infoMessage("User successfully added",
                                                "<ul><li>" + user.getUsername() + "</li></ul>");
             }
@@ -206,6 +203,7 @@ public class UserPropertiesWidget extends GeoPlatformWindow
                 store.commitChanges();
                 hide();
 
+                // TODO statusbar...
                 GeoPlatformMessage.infoMessage("User successfully modify",
                                                "<ul><li>" + user.getUsername() + "</li></ul>");
             }

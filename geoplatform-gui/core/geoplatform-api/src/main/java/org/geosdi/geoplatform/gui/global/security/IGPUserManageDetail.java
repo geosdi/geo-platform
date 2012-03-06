@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.global.security;
 
+import java.util.Date;
+
 /**
  *
  * @author Vincenzo Monteverde
@@ -58,7 +60,19 @@ public interface IGPUserManageDetail extends IGPUserSimpleDetail {
 
     void setAuthority(String role);
 
+    boolean isEnabled();
+
+    void setEnabled(boolean enabled);
+
+    Date getCreationDate();
+
+    void setCreationDate(Date creationDate);
+
     boolean isTemporary();
 
     void setTemporary(boolean temporary);
+
+    boolean isExpired();
+
+    void setExpired(boolean expired);
 }

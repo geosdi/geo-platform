@@ -210,7 +210,10 @@ public class UserService implements IUserService {
         user.setName(userDTO.getName());
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmailAddress());
+        user.setEnabled(userDTO.isEnabled());
+        user.setCreationDate(userDTO.getCreationDate());
         user.setTemporary(userDTO.isTemporary());
+        user.setExpired(userDTO.isExpired());
         user.setAuthority(this.convertToAuthority(userDTO.getRoles()));
         return user;
     }
@@ -232,6 +235,7 @@ public class UserService implements IUserService {
         user.setName(gpUser.getName());
         user.setUsername(gpUser.getUsername());
         user.setEmail(gpUser.getEmailAddress());
+        user.setCreationDate(gpUser.getCreationDate());
         user.setTemporary(gpUser.isAccountTemporary());
         user.setAuthority(this.convertToGPAuthorities(gpUser.getGPAuthorities()));
         return user;
@@ -267,6 +271,7 @@ public class UserService implements IUserService {
         user.setEmailAddress(userDetail.getEmail());
         user.setUsername(userDetail.getUsername());
         user.setPassword(userDetail.getPassword());
+        user.setEnabled(userDetail.isEnabled());
         user.setAccountTemporary(userDetail.isTemporary());
 
         GPAuthority authority = new GPAuthority();

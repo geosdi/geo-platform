@@ -49,6 +49,13 @@ public class GuiComponentDetail extends GeoPlatformBeanModel {
     private String componentId; // For performance purpose: used for equals() and hashCode() methods
     private AbstractImagePrototype image; // For manual binding
 
+    public enum GuiComponentDetailKeyValue {
+
+        COMPONENT_ID,
+        PERMISSION,
+        DESCRIPTION;
+    }
+
     /**
      * @return the componentId
      */

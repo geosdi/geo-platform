@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.responce;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -55,6 +56,8 @@ public class ShortAccountDTO {
     private Long id;
     private boolean enabled;
     private boolean temporary;
+    private boolean expired;
+    private Date creationDate;
     private List<String> roles;
 
     public ShortAccountDTO() {
@@ -64,6 +67,8 @@ public class ShortAccountDTO {
         this.id = account.getId();
         this.enabled = account.isEnabled();
         this.temporary = account.isAccountTemporary();
+        this.expired = !account.isAccountNonExpired();
+        this.creationDate = account.getCreationDate();
 
         if (account.getGPAuthorities() != null) {
             roles = new ArrayList<String>(account.getGPAuthorities().size());
@@ -119,6 +124,34 @@ public class ShortAccountDTO {
     }
 
     /**
+     * @return the expired
+     */
+    public boolean isExpired() {
+        return expired;
+    }
+
+    /**
+     * @param expired the expired to set
+     */
+    public void setExpired(boolean expired) {
+        this.expired = expired;
+    }
+
+    /**
+     * @return the creationDate
+     */
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    /**
+     * @param creationDate the creationDate to set
+     */
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    /**
      * @return the roles
      */
     public List<String> getRoles() {
@@ -144,6 +177,8 @@ public class ShortAccountDTO {
         str.append(", id=").append(id);
         str.append(", enabled=").append(enabled);
         str.append(", temporary=").append(temporary);
+        str.append(", expired=").append(expired);
+        str.append(", creationDate=").append(creationDate);
         if (roles != null) {
             str.append(", roles.size=").append(roles.size());
         } else {

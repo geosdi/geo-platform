@@ -35,6 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.form.binding;
 
+import com.extjs.gxt.ui.client.binding.FieldBinding;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.FieldEvent;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -43,14 +47,16 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.form.LabelField;
+import com.extjs.gxt.ui.client.widget.form.MultiField;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
-import com.extjs.gxt.ui.client.widget.layout.FormData;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
-import org.geosdi.geoplatform.gui.client.model.GPUserManageDetailKeyValue;
+import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail.GPUserManageDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.widget.binding.GeoPlatformBindingWidget;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPFieldBinding;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
@@ -72,17 +78,21 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     private TextField<String> usernameField;
     private TextField<String> passwordField;
     private TextField<String> passwordRepeatField;
+    private CheckBox enabledField;
+    private LabelField creationDateLabelField;
+    private CheckBox temporaryField;
+    private LabelField expiredLabelField;
     private SimpleComboBox<String> userRoleComboBox;
     private RoleComboBinding roleComboBinding;
-    private CheckBox temporaryField;
     //
     private FormButtonBinding formButtonBinding; // Monitors the valid state of a form and enabled / disabled all buttons.
     private Button buttonBinding;
     //
-    private GPUserManageDetail userOriginal;
+    private GPUserManageDetail userOriginal = new GPUserManageDetail();
     private boolean updateName;
     private boolean updateEmail;
     private boolean updatePassword;
+    private boolean updateEnabled;
     private boolean updateRole;
 
     public UserPropertiesBinding(ListStore<GPUserManageDetail> store,
@@ -101,7 +111,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
         this.nameField = new TextField<String>();
         this.nameField.setId(GPUserManageDetailKeyValue.NAME.toString());
-        this.nameField.setName(GPUserManageDetailKeyValue.NAME.toString());
         this.nameField.setFieldLabel("Name");
         this.nameField.setEmptyText("Enter a complete name (required)");
         this.nameField.setToolTip("Complete name of the user");
@@ -109,7 +118,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
         this.emailField = new TextField<String>();
         this.emailField.setId(GPUserManageDetailKeyValue.EMAIL.toString());
-        this.emailField.setName(GPUserManageDetailKeyValue.EMAIL.toString());
         this.emailField.setFieldLabel("Email");
         this.emailField.setEmptyText("Enter a email (required)");
         this.emailField.setToolTip("Email of the user");
@@ -117,7 +125,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
         this.usernameField = new TextField<String>();
         this.usernameField.setId(GPUserManageDetailKeyValue.USERNAME.toString());
-        this.usernameField.setName(GPUserManageDetailKeyValue.USERNAME.toString());
         this.usernameField.setFieldLabel("Username");
         this.usernameField.setEmptyText("Enter a username (required)");
         this.usernameField.setToolTip("Username of the user");
@@ -134,6 +141,41 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.passwordRepeatField.setFieldLabel("Confirm password");
         this.passwordRepeatField.setToolTip("Confirm the password of the user");
 
+        this.enabledField = new CheckBox();
+        this.enabledField.setId(GPUserManageDetailKeyValue.ENABLED.toString());
+        this.enabledField.setToolTip("Check for enable the user");
+        this.enabledField.addListener(Events.Change, new Listener<FieldEvent>() {
+
+            @Override
+            public void handleEvent(FieldEvent be) {
+                Boolean check = (Boolean) be.getValue();
+                if (check.booleanValue() != userOriginal.isEnabled()) {
+                    updateEnabled(true);
+                } else {
+                    updateEnabled(false);
+                }
+            }
+        });
+
+        this.creationDateLabelField = new LabelField();
+
+        MultiField enabledAndCreationFields = new MultiField();
+        enabledAndCreationFields.setFieldLabel("Enabled");
+        enabledAndCreationFields.add(enabledField);
+        enabledAndCreationFields.add(new LabelField("<span class='spacer'>&nbsp;</span>"));
+        enabledAndCreationFields.add(creationDateLabelField);
+
+        this.temporaryField = new CheckBox();
+        this.temporaryField.setId(GPUserManageDetailKeyValue.TEMPORARY.toString());
+
+        this.expiredLabelField = new LabelField();
+
+        MultiField tempAndExpiredFields = new MultiField();
+        tempAndExpiredFields.setFieldLabel("Temporary");
+        tempAndExpiredFields.add(temporaryField);
+        tempAndExpiredFields.add(new LabelField("<span class='spacer'>&nbsp;</span>"));
+        tempAndExpiredFields.add(expiredLabelField);
+
         this.userRoleComboBox = new SimpleComboBox<String>() {
 
             @Override
@@ -143,7 +185,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
             }
         };
         this.userRoleComboBox.setId(GPUserManageDetailKeyValue.AUTORITHY.toString());
-        this.userRoleComboBox.setName(GPUserManageDetailKeyValue.AUTORITHY.toString());
         this.userRoleComboBox.setFieldLabel("Role");
         this.userRoleComboBox.setEmptyText("Select a role... (required)");
         this.userRoleComboBox.setToolTip("Role of the user");
@@ -153,25 +194,16 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.userRoleComboBox.setMaxHeight(150);
         this.userRoleComboBox.setTriggerAction(TriggerAction.ALL);
 
-        this.temporaryField = new CheckBox();
-        this.temporaryField.setId(GPUserManageDetailKeyValue.TEMPORARY.toString());
-        this.temporaryField.setName(GPUserManageDetailKeyValue.TEMPORARY.toString());
-        this.temporaryField.setFieldLabel("Temporary");
-        this.temporaryField.setToolTip("Check if the user is temporary");
-
         fp.add(this.nameField);
         fp.add(this.emailField);
         fp.add(this.usernameField);
         fp.add(this.passwordField);
         fp.add(this.passwordRepeatField);
+        fp.add(enabledAndCreationFields);
+        fp.add(tempAndExpiredFields);
         fp.add(this.userRoleComboBox);
-        fp.add(this.temporaryField, new FormData("-210"));
 
         return fp;
-    }
-
-    public String getPassword() {
-        return this.passwordField.getValue();
     }
 
     public void resetFields() {
@@ -180,29 +212,24 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.usernameField.reset();
         this.passwordField.reset();
         this.passwordRepeatField.reset();
-        this.userRoleComboBox.reset();
+        this.enabledField.reset();
+        this.creationDateLabelField.reset();
         this.temporaryField.reset();
+        this.expiredLabelField.reset();
+        this.userRoleComboBox.reset();
     }
 
     @Override
     public void addFieldsBinding() {
-        this.formBinding.addFieldBinding(
-                new NameFieldBinding(this.nameField,
-                                     GPUserManageDetailKeyValue.NAME.toString()));
-        this.formBinding.addFieldBinding(
-                new EmailFieldBinding(this.emailField,
-                                      GPUserManageDetailKeyValue.EMAIL.toString()));
-        this.formBinding.addFieldBinding(
-                new UsernameFieldBinding(this.usernameField,
-                                         GPUserManageDetailKeyValue.USERNAME.toString()));
-
-        this.roleComboBinding = new RoleComboBinding(this.userRoleComboBox,
-                                                     GPUserManageDetailKeyValue.AUTORITHY.toString());
+        this.roleComboBinding = new RoleComboBinding();
         this.formBinding.addFieldBinding(this.roleComboBinding);
 
-        this.formBinding.addFieldBinding(
-                new TemporaryFieldBinding(this.temporaryField,
-                                          GPUserManageDetailKeyValue.TEMPORARY.toString()));
+        this.formBinding.addFieldBinding(new NameFieldBinding());
+        this.formBinding.addFieldBinding(new EmailFieldBinding());
+        this.formBinding.addFieldBinding(new UsernameFieldBinding());
+        this.formBinding.addFieldBinding(new EnabledFieldBinding());
+        this.formBinding.addFieldBinding(new FieldBinding(temporaryField,
+                                                          GPUserManageDetailKeyValue.TEMPORARY.toString())); // 1-way binding
     }
 
     @Override
@@ -213,15 +240,15 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         if (user.getId() == null) { // INSERT USER
             this.handleFiledsInsertUser();
         } else { // UPDATE USER
+            // Copy the changeable fields
+            userOriginal.setName(user.getName());
+            userOriginal.setEmail(user.getEmail());
+            userOriginal.setEnabled(user.isEnabled());
+            userOriginal.setAuthority(user.getAuthority());
+            //
             this.formButtonBinding.stopMonitoring(); // NOTE FormButtonBinding is always start auto-magically
-//            this.userRoleComboBox.setValue(userRoleComboBox.findModel(user.getAuthority()));
             this.handleFieldsUpdateUser();
         }
-    }
-
-    public void bindModel(GPUserManageDetail user, GPUserManageDetail userOriginal) {
-        this.bindModel(user);
-        this.userOriginal = userOriginal;
     }
 
     private void handleFiledsInsertUser() {
@@ -232,15 +259,22 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.emailField.setAllowBlank(false);
 
         this.usernameField.setValidator(this.validatorInsertUsername());
-        this.usernameField.setEnabled(true);
+        this.usernameField.enable();
 
         this.passwordField.setFieldLabel("Password");
         this.passwordField.setToolTip("Password of the user");
         this.passwordField.setAllowBlank(false);
 
-        this.passwordRepeatField.setEnabled(false);
+        this.passwordRepeatField.disable();
         this.passwordRepeatField.setValidator(this.validatorInsertConfirmPassword());
         this.passwordRepeatField.setAllowBlank(false);
+
+        this.creationDateLabelField.setText("");
+
+        this.temporaryField.setToolTip("Check if the user is temporary (will be disabled in 10 days)");
+        this.temporaryField.setReadOnly(false);
+
+        this.expiredLabelField.setText("Will be disabled in 10 days");
 
         this.userRoleComboBox.setValidator(null);
     }
@@ -252,15 +286,36 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.emailField.setValidator(this.validatorUpdateEmail());
         this.emailField.setAllowBlank(true);
 
-        this.usernameField.setEnabled(false);
+        this.usernameField.disable();
 
         this.passwordField.setFieldLabel("Reset password");
         this.passwordField.setToolTip("Reset password of the user");
         this.passwordField.setAllowBlank(true);
 
-        this.passwordRepeatField.setEnabled(false);
+        this.passwordRepeatField.disable();
         this.passwordRepeatField.setValidator(this.validatorUpdateConfirmPassword());
         this.passwordRepeatField.setAllowBlank(true);
+
+        this.creationDateLabelField.setText("Created the " + DateTimeFormat.getFormat(
+                DateTimeFormat.PredefinedFormat.DATE_LONG).format(getModel().getCreationDate())); //
+
+        this.temporaryField.setToolTip("Checked if the user is temporary");
+        this.temporaryField.setReadOnly(true);
+
+        if (getModel().isTemporary()) {
+            if (getModel().isExpired()) {
+                this.expiredLabelField.setText("<span style='color:red'>User expired</span>");
+                // TODO disable all fileds?!? Because if the user is expired so cannot change nothing (only delete it or reactivate for 10 another dd)
+            } else {
+                this.expiredLabelField.setText("User not expired"); // TODO dd to expire...
+//        if (CalendarUtil.getDaysBetween(userOriginal.getCreationDate(), now) > 10) {
+//            temporaryLabelField.setText("    User expired");
+//        } else {
+//            temporaryLabelField.setText("    User not expired");
+//        }
+//        final Date now = new Date();
+            }
+        }
 
         this.userRoleComboBox.setValidator(this.validatorUpdateRole());
     }
@@ -312,10 +367,10 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
             @Override
             public String validate(Field<?> field, String value) {
                 if (value.length() < 4) {
-                    passwordRepeatField.setEnabled(false);
+                    passwordRepeatField.disable();
                     return "The minimun lenght for password is 4";
                 }
-                passwordRepeatField.setEnabled(true);
+                passwordRepeatField.enable();
                 return null;
             }
         };
@@ -341,11 +396,6 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
             @Override
             public String validate(Field<?> field, String value) {
-                if (userOriginal == null) { // TODO Understand how the userOriginal could be null ?!?
-                    System.out.println("User NULL"); // TODO DEL
-                    updateRole(false);
-                    return null; // Pseudo-valid
-                }
                 String role = userOriginal.getAuthority();
                 if (role != null && value.equals(role)) {
                     updateRole(false);
@@ -372,13 +422,18 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.updateUser();
     }
 
+    private void updateEnabled(boolean updateEnabled) {
+        this.updateEnabled = updateEnabled;
+        this.updateUser();
+    }
+
     private void updateRole(boolean updateRole) {
         this.updateRole = updateRole;
         this.updateUser();
     }
 
     private void updateUser() {
-        if (updateName || updateEmail || updatePassword || updateRole) {
+        if (updateName || updateEmail || updatePassword || updateEnabled || updateRole) {
             this.buttonBinding.enable();
         } else {
             this.buttonBinding.disable();
@@ -452,13 +507,13 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
      */
     private class RoleComboBinding extends GPFieldBinding {
 
-        public RoleComboBinding(SimpleComboBox field, String property) {
-            super(field, property);
+        public RoleComboBinding() {
+            super(userRoleComboBox, GPUserManageDetailKeyValue.AUTORITHY.toString());
         }
 
         @Override
         public void updateField(boolean updateOriginalValue) {
-            GPUserManageDetail userDetail = ((GPUserManageDetail) model);
+            GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
             if (userDetail.getAuthority() != null) {
                 userRoleComboBox.setValue(userRoleComboBox.findModel(userDetail.getAuthority()));
             }
@@ -468,7 +523,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         public void setModelProperty(Object val) {
             if (val != null && val instanceof SimpleComboValue) {
                 SimpleComboValue<String> roleString = (SimpleComboValue) val;
-                GPUserManageDetail userDetail = ((GPUserManageDetail) model);
+                GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
                 if (!roleString.getValue().equals(userDetail.getAuthority())) {
                     userDetail.setAuthority(roleString.getValue());
                 }
@@ -477,101 +532,108 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
         @Override
         public void setRecordProperty(Record r, Object val) {
-            r.set(property, ((SimpleComboValue<String>) val).getValue());
+            r.set(super.property, ((SimpleComboValue<String>) val).getValue());
         }
     }
 
     private class UsernameFieldBinding extends GPFieldBinding {
 
-        public UsernameFieldBinding(Field field, String property) {
-            super(field, property);
+        public UsernameFieldBinding() {
+            super(usernameField, GPUserManageDetailKeyValue.USERNAME.toString());
         }
 
         @Override
         public void setModelProperty(Object val) {
-            ((GPUserManageDetail) model).setUsername(val != null ? (String) val : "");
+            GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
+            userDetail.setUsername(val != null ? (String) val : "");
         }
 
         @Override
         public void updateField(boolean updateOriginalValue) {
-            GPUserManageDetail userDetail = (GPUserManageDetail) model;
+            GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
             usernameField.setValue(userDetail.getUsername());
         }
 
         @Override
         public void setRecordProperty(Record r, Object val) {
-            r.set(property, val);
+            r.set(super.property, val);
         }
     }
 
     private class NameFieldBinding extends GPFieldBinding {
 
-        public NameFieldBinding(Field field, String property) {
-            super(field, property);
+        public NameFieldBinding() {
+            super(nameField, GPUserManageDetailKeyValue.NAME.toString());
         }
 
         @Override
         public void setModelProperty(Object val) {
-            ((GPUserManageDetail) model).setName(val != null ? (String) val : "");
+            GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
+            userDetail.setName(val != null ? (String) val : "");
         }
 
         @Override
         public void updateField(boolean updateOriginalValue) {
-            GPUserManageDetail userDetail = (GPUserManageDetail) model;
+            GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
             nameField.setValue(userDetail.getName());
         }
 
         @Override
         public void setRecordProperty(Record r, Object val) {
-            r.set(property, val);
+            r.set(super.property, val);
         }
     }
 
     private class EmailFieldBinding extends GPFieldBinding {
 
-        public EmailFieldBinding(Field field, String property) {
-            super(field, property);
+        public EmailFieldBinding() {
+            super(emailField, GPUserManageDetailKeyValue.EMAIL.toString());
         }
 
         @Override
         public void setModelProperty(Object val) {
-            ((GPUserManageDetail) model).setEmail(val != null ? (String) val : "");
+            GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
+            userDetail.setEmail(val != null ? (String) val : "");
         }
 
         @Override
         public void updateField(boolean updateOriginalValue) {
-            GPUserManageDetail userDetail = (GPUserManageDetail) model;
+            GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
             emailField.setValue(userDetail.getEmail());
         }
 
         @Override
         public void setRecordProperty(Record r, Object val) {
-            r.set(property, val);
+            r.set(super.property, val);
         }
     }
 
-    private class TemporaryFieldBinding extends GPFieldBinding {
+    private class EnabledFieldBinding extends GPFieldBinding {
 
-        public TemporaryFieldBinding(Field field, String property) {
-            super(field, property);
+        public EnabledFieldBinding() {
+            super(enabledField, GPUserManageDetailKeyValue.ENABLED.toString());
         }
 
         @Override
         public void setModelProperty(Object val) {
-            ((GPUserManageDetail) model).setTemporary(val != null
-                    ? (Boolean) val : false);
+            GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
+            userDetail.setEnabled(val != null ? (Boolean) val : false);
         }
 
         @Override
         public void updateField(boolean updateOriginalValue) {
-            GPUserManageDetail userDetail = (GPUserManageDetail) model;
-            temporaryField.setValue(userDetail.isTemporary());
+            GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
+            enabledField.setValue(userDetail.isEnabled());
         }
 
         @Override
         public void setRecordProperty(Record r, Object val) {
-            r.set(property, val);
+            r.set(super.property, val);
         }
+    }
+
+    public String getPassword() {
+        return this.passwordField.getValue();
     }
 
     public void populateRoles(List<String> roles) {

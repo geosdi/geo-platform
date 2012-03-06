@@ -33,51 +33,29 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.connector.api;
+package org.geosdi.geoplatform.cswconnector;
 
-import com.google.common.collect.Maps;
-import java.util.Map;
-import net.jcip.annotations.ThreadSafe;
+import org.geosdi.connector.api.GPPoolCapacity;
+import org.geosdi.connector.api.GeoPlatformServerPool;
+import org.geosdi.connector.api.IServerPoll;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-@ThreadSafe
-public class GeoPlatformServerPoll<C extends GPServerConnector>
-        implements IServerPoll<C> {
+public class GPCSWServerPool {
 
-    private Map<String, C> queue;
-    private GPQueueCapacity capacity;
+    private static IServerPoll<GPCSWServerConnector> instance;
 
-    /**
-     * 
-     * @param capacity for HashMap
-     */
-    public GeoPlatformServerPoll(GPQueueCapacity theCapacity) {
-        this.queue = Maps.newHashMapWithExpectedSize(theCapacity.getValue());
-        this.capacity = theCapacity;
+    static {
+        instance = new GeoPlatformServerPool<GPCSWServerConnector>(GPPoolCapacity.HIGH);
     }
 
-    /**
-     * TODO: MODIFY this when it must be use. Now the used approach is not synchronized
-     * There a lot of control to do
-     * 
-     * @param connector 
-     */
-    @Override
-    public synchronized void bindConnector(C connector) {
-        this.queue.put(connector.getRegistrationKey(), connector);
+    private GPCSWServerPool() {
     }
 
-    @Override
-    public synchronized void removeConnector(C connector) {
-        this.queue.remove(connector.getRegistrationKey());
-    }
-
-    @Override
-    public synchronized GPServerConnector getConnector(String key) {
-        return this.queue.get(key);
+    public static IServerPoll<GPCSWServerConnector> getInstance() {
+        return instance;
     }
 }

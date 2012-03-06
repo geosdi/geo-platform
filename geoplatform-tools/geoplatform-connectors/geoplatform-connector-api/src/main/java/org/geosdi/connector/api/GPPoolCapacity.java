@@ -40,7 +40,7 @@ package org.geosdi.connector.api;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public enum GPQueueCapacity {
+public enum GPPoolCapacity {
 
     LOW(15),
     MEDIUM(30),
@@ -48,7 +48,7 @@ public enum GPQueueCapacity {
     //
     private int value;
 
-    GPQueueCapacity(int theValue) {
+    GPPoolCapacity(int theValue) {
         this.value = theValue;
     }
 

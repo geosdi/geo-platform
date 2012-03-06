@@ -45,16 +45,17 @@ import net.jcip.annotations.ThreadSafe;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GeoPlatformServerQueue<T extends GPServerConnector> {
+public class GeoPlatformServerPoll<C extends GPServerConnector>
+        implements IServerPoll<C> {
 
-    private Map<String, T> queue;
+    private Map<String, C> queue;
     private GPQueueCapacity capacity;
 
     /**
      * 
      * @param capacity for HashMap
      */
-    public GeoPlatformServerQueue(GPQueueCapacity theCapacity) {
+    public GeoPlatformServerPoll(GPQueueCapacity theCapacity) {
         this.queue = Maps.newHashMapWithExpectedSize(theCapacity.getValue());
         this.capacity = theCapacity;
     }
@@ -65,14 +66,17 @@ public class GeoPlatformServerQueue<T extends GPServerConnector> {
      * 
      * @param connector 
      */
-    public synchronized void bindConnector(T connector) {
+    @Override
+    public synchronized void bindConnector(C connector) {
         this.queue.put(connector.getRegistrationKey(), connector);
     }
 
-    public synchronized void removeConnector(T connector) {
+    @Override
+    public synchronized void removeConnector(C connector) {
         this.queue.remove(connector.getRegistrationKey());
     }
 
+    @Override
     public synchronized GPServerConnector getConnector(String key) {
         return this.queue.get(key);
     }

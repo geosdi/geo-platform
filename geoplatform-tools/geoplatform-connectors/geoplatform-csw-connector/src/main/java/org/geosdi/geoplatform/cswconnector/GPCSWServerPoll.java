@@ -35,11 +35,27 @@
  */
 package org.geosdi.geoplatform.cswconnector;
 
+import org.geosdi.connector.api.GPQueueCapacity;
+import org.geosdi.connector.api.GeoPlatformServerPoll;
+import org.geosdi.connector.api.IServerPoll;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GPCSWServerQueue {
-    
+public class GPCSWServerPoll {
+
+    private static IServerPoll<GPCSWServerConnector> instance;
+
+    static {
+        instance = new GeoPlatformServerPoll<GPCSWServerConnector>(GPQueueCapacity.HIGH);
+    }
+
+    private GPCSWServerPoll() {
+    }
+
+    public static IServerPoll<GPCSWServerConnector> getInstance() {
+        return instance;
+    }
 }

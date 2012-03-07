@@ -43,7 +43,7 @@
         <module>core</module>
         <module>plugin</module>
         <module>extensions</module>
-        <module>application</module>
+        <module>demos</module>
     </modules>
 
 

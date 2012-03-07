@@ -35,23 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
-import com.google.gwt.core.client.EntryPoint;
-import org.geosdi.geoplatform.gui.client.plugin.tree.addlayer.AddCatalogFinderLayerPlugin;
-import org.geosdi.geoplatform.gui.plugin.tree.addlayer.AddLayerPluginManager;
+import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.icons.CatalogFinderWidgetIcons;
 
 /**
- * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email michele.santomauro@geosdi.org
+ *
+ * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class GPCatalogFinder implements EntryPoint {
+public class CatalogFinderWidgetResources {
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
-     */
-    @Override
-    public void onModuleLoad() {
-        AddLayerPluginManager.addWindowPlugin(new AddCatalogFinderLayerPlugin());
-    }
+    public static final CatalogFinderWidgetIcons ICONS =
+            GWT.create(CatalogFinderWidgetIcons.class);
 }

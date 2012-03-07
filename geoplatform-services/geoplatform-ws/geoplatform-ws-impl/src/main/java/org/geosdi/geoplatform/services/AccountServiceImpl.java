@@ -382,11 +382,11 @@ class AccountServiceImpl {
         GPUser user = this.getUserByUsername(username);
         EntityCorrectness.checkAccountLog(user); // TODO assert
 
-        if (!user.isEnabled()) {
-            throw new AccountLoginFault(LoginFaultType.ACCOUNT_DISABLED, username);
-        }
         if (!user.isAccountNonExpired()) {
             throw new AccountLoginFault(LoginFaultType.ACCOUNT_EXPIRED, username);
+        }
+        if (!user.isEnabled()) {
+            throw new AccountLoginFault(LoginFaultType.ACCOUNT_DISABLED, username);
         }
 
         // Check password
@@ -405,11 +405,11 @@ class AccountServiceImpl {
         GPApplication application = this.getApplicationByAppId(appID);
         EntityCorrectness.checkAccountLog(application); // TODO assert
 
-        if (!application.isEnabled()) {
-            throw new AccountLoginFault(LoginFaultType.ACCOUNT_DISABLED, appID);
-        }
         if (!application.isAccountNonExpired()) {
             throw new AccountLoginFault(LoginFaultType.ACCOUNT_EXPIRED, appID);
+        }
+        if (!application.isEnabled()) {
+            throw new AccountLoginFault(LoginFaultType.ACCOUNT_DISABLED, appID);
         }
 
         return application;
@@ -599,5 +599,19 @@ class AccountServiceImpl {
         if (defaultProjectID != null) {
             accountToUpdate.setDefaultProjectID(defaultProjectID);
         }
+    }
+
+    public void forceExpiredTemporaryAccount(Long accountID)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        GPAccount account = this.getAccountById(accountID);
+        EntityCorrectness.checkAccountLog(account); // TODO assert
+
+        if (!account.isAccountTemporary()) {
+            throw new IllegalParameterFault(
+                    "The account must be temporary (ID = " + accountID + ")");
+        }
+
+        account.setAccountNonExpired(false);
+        accountDao.merge(account);
     }
 }

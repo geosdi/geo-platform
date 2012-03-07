@@ -206,6 +206,12 @@ public interface GeoPlatformService {
     List<GPAuthority> getAuthoritiesDetail(
             @WebParam(name = "stringID") String stringID)
             throws ResourceNotFoundFault;
+
+    @Post
+    @HttpResource(location = "/accounts/{accountID}")
+    void forceExpiredTemporaryAccount(
+            @WebParam(name = "accountID") Long accountID)
+            throws ResourceNotFoundFault, IllegalParameterFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="AccountProject">

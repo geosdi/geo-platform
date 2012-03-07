@@ -50,16 +50,11 @@ public class IllegalParameterFault extends Exception {
     public IllegalParameterFault() {
     }
 
-    public IllegalParameterFault(String msg) {
-        super(msg);
+    public IllegalParameterFault(String message) {
+        super(message);
     }
 
     public IllegalParameterFault(String message, Throwable cause) {
         super(message, cause);
-    }
-
-    @Override
-    public String getMessage() {
-        return super.getMessage();
     }
 }

@@ -48,6 +48,7 @@ public class AccountLoginFault extends Exception {
 
     private static final long serialVersionUID = -9167519878278175760L;
     //
+    private LoginFaultType faultType;
     private Long accountID;
     private String stringID;
 
@@ -72,20 +73,32 @@ public class AccountLoginFault extends Exception {
 
     public AccountLoginFault(LoginFaultType faultType) {
         super(faultType.toString());
+        this.faultType = faultType;
     }
 
     public AccountLoginFault(LoginFaultType faultType, Long accountID) {
         super(faultType.toString());
+        this.faultType = faultType;
         this.accountID = accountID;
     }
 
     public AccountLoginFault(LoginFaultType faultType, String stringID) {
         super(faultType.toString());
+        this.faultType = faultType;
         this.stringID = stringID;
     }
 
     public AccountLoginFault(LoginFaultType faultType, Throwable cause) {
         super(faultType.toString(), cause);
+        this.faultType = faultType;
+    }
+
+    public LoginFaultType getFaultType() {
+        return faultType;
+    }
+
+    public void setFaultType(LoginFaultType faultType) {
+        this.faultType = faultType;
     }
 
     public Long getAccountID() {
@@ -107,9 +120,9 @@ public class AccountLoginFault extends Exception {
     @Override
     public String getMessage() {
         if (accountID != null) {
-            return super.getMessage() + " (ID = " + accountID + ")";
+            return faultType + " (ID = " + accountID + ")";
         } else if (stringID != null) {
-            return super.getMessage() + " (String ID = " + stringID + ")";
+            return faultType + " (String ID = " + stringID + ")";
         }
         return super.getMessage();
     }

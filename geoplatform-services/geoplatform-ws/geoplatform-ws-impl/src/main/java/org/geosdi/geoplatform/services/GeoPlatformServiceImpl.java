@@ -398,6 +398,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
             throws ResourceNotFoundFault {
         return accountServiceDelegate.getAuthoritiesDetail(stringID);
     }
+
+    @Override
+    public void forceExpiredTemporaryAccount(Long accountID)
+            throws ResourceNotFoundFault, IllegalParameterFault {
+        accountServiceDelegate.forceExpiredTemporaryAccount(accountID);
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="AccountProject">
@@ -840,7 +846,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
             throws ResourceNotFoundFault {
         return this.aclServiceDelegate.getApplicationPermission(appID);
     }
-    
+
     @Override
     public GuiComponentsPermissionMapData getAccountPermission(Long accountID)
             throws ResourceNotFoundFault {

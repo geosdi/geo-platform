@@ -215,9 +215,25 @@ public class WSAccountTest extends ServiceTest {
     @Test(expected = AccountLoginFault.class)
     public void testLoginFaultUserDisabled()
             throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
+        // Set disabled user
         userTest.setEnabled(false);
         gpWSClient.updateUser(userTest);
 
+        // Must be throws AccountLoginFault because the user is disabled
+        gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
+    }
+    
+    @Test(expected = AccountLoginFault.class)
+    public void testLoginFaultUserExpired()
+            throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
+        // Set temporary user
+        userTest.setAccountTemporary(true);
+        Long userID = gpWSClient.updateUser(userTest);
+       
+        // Set expired user (user must be temporary)
+        gpWSClient.forceExpiredTemporaryAccount(userID);
+
+        // Must be throws AccountLoginFault because the user is expired
         gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
     }
 }

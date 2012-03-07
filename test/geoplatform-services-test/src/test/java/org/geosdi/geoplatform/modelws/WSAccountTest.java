@@ -40,7 +40,7 @@ import java.util.List;
 import junit.framework.Assert;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.exception.AccountExpiredFault;
+import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.LikePatternType;
@@ -178,18 +178,18 @@ public class WSAccountTest extends ServiceTest {
 
     @Test
     public void testGetUserDetailByUsernameAndPassword1()
-            throws IllegalParameterFault, ResourceNotFoundFault, AccountExpiredFault {
-        GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, "pwd_username_test_ws");
+            throws IllegalParameterFault, ResourceNotFoundFault, AccountLoginFault {
+        GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
         Assert.assertNotNull("User is null", user);
     }
 
     @Test
     public void testGetUserDetailByUsernameAndPassword2()
-            throws AccountExpiredFault {
+            throws AccountLoginFault {
         GPUser user = null;
         try {
             String newUsername = usernameTest + "_";
-            user = gpWSClient.getUserDetailByUsernameAndPassword(newUsername, "pwd_username_test_ws");
+            user = gpWSClient.getUserDetailByUsernameAndPassword(newUsername, passwordTest);
             Assert.fail("Test must fail because username is wrong");
         } catch (ResourceNotFoundFault ex) {
             Assert.assertNull("User is not null", user);
@@ -200,15 +200,24 @@ public class WSAccountTest extends ServiceTest {
 
     @Test
     public void testGetUserDetailByUsernameAndPassword3()
-            throws AccountExpiredFault {
+            throws AccountLoginFault {
         GPUser user = null;
         try {
-            user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, "pwd_username_test_ws_");
+            user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest + "_");
             Assert.fail("Test must fail because password is wrong");
         } catch (ResourceNotFoundFault ex) {
             Assert.fail(ex.getMessage());
         } catch (IllegalParameterFault ex) {
             Assert.assertNull("User is not null", user);
         }
+    }
+
+    @Test(expected = AccountLoginFault.class)
+    public void testLoginFaultUserDisabled()
+            throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
+        userTest.setEnabled(false);
+        gpWSClient.updateUser(userTest);
+
+        gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
     }
 }

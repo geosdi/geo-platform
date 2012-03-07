@@ -54,6 +54,8 @@ import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.datepicker.client.CalendarUtil;
+import java.util.Date;
 import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail.GPUserManageDetailKeyValue;
@@ -307,13 +309,10 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
                 this.expiredLabelField.setText("<span style='color:red'>User expired</span>");
                 // TODO disable all fileds?!? Because if the user is expired so cannot change nothing (only delete it or reactivate for 10 another dd)
             } else {
-                this.expiredLabelField.setText("User not expired"); // TODO dd to expire...
-//        if (CalendarUtil.getDaysBetween(userOriginal.getCreationDate(), now) > 10) {
-//            temporaryLabelField.setText("    User expired");
-//        } else {
-//            temporaryLabelField.setText("    User not expired");
-//        }
-//        final Date now = new Date();
+                Date today = new Date();
+                CalendarUtil.addDaysToDate(today, -10);
+                this.expiredLabelField.setText("User not expired (remain "
+                        + CalendarUtil.getDaysBetween(today, getModel().getCreationDate()) + " day/s)");
             }
         }
 

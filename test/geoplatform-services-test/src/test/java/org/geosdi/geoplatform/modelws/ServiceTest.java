@@ -39,18 +39,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
+import org.geosdi.geoplatform.core.model.GPAccountProject;
+import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPAuthority;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.TestExecutionListeners;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
@@ -59,12 +50,21 @@ import org.geosdi.geoplatform.core.model.GPLayerType;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
@@ -86,6 +86,7 @@ public abstract class ServiceTest {
     protected final String ROLE_VIEWER = "Viewer";
     // Users
     protected final String usernameTest = "username_test_ws";
+    protected final String passwordTest = "pwd_username_test_ws";
     protected GPUser userTest;
     protected long idUserTest = -1;
     // Projects
@@ -140,13 +141,13 @@ public abstract class ServiceTest {
     public void tearDown() {
         logger.trace("\n\t@@@ {}.tearDown @@@", this.getClass().getSimpleName());
         // Delete user
-        this.deleteUser(idUserTest);
+        this.deleteAccount(idUserTest);
     }
 
     // Create and insert a User
     protected long createAndInsertUser(String username, String... roles)
             throws IllegalParameterFault {
-        GPUser user = createUser(username, roles);
+        GPUser user = this.createUser(username, roles);
         logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
 
         long idUser = gpWSClient.insertAccount(user, false);
@@ -182,13 +183,13 @@ public abstract class ServiceTest {
         return authorities;
     }
 
-    // Delete (with assert) a User
-    protected void deleteUser(long idUser) {
+    // Delete (with assert) an Account
+    protected void deleteAccount(long accountID) {
         try {
-            boolean check = gpWSClient.deleteAccount(idUser);
-            Assert.assertTrue("User with id = " + idUser + " has not been eliminated", check);
+            boolean check = gpWSClient.deleteAccount(accountID);
+            Assert.assertTrue("Account with ID = " + accountID + " has not been eliminated", check);
         } catch (Exception e) {
-            Assert.fail("Error while deleting User with Id: " + idUser);
+            Assert.fail("Error while deleting Account with ID: " + accountID);
         }
     }
 
@@ -203,7 +204,8 @@ public abstract class ServiceTest {
     }
 
     protected long createAndInsertProject(String name, boolean isShared,
-                                          int numberOfElements, Date creationalDate) throws IllegalParameterFault {
+                                          int numberOfElements, Date creationalDate)
+            throws IllegalParameterFault {
         GPProject project = this.createProject(name, isShared, numberOfElements, creationalDate);
         return gpWSClient.insertProject(project);
     }

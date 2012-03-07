@@ -67,7 +67,7 @@ import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.exception.AccountExpiredFault;
+import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
@@ -334,7 +334,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     @Override
     public GPUser getUserDetailByUsernameAndPassword(String username, String password)
-            throws ResourceNotFoundFault, IllegalParameterFault, AccountExpiredFault {
+            throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
         return accountServiceDelegate.getUserDetailByUsernameAndPassword(username, password);
     }
 
@@ -345,7 +345,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     @Override
     public GPApplication getApplication(String appID)
-            throws ResourceNotFoundFault, AccountExpiredFault {
+            throws ResourceNotFoundFault, AccountLoginFault {
         return accountServiceDelegate.getApplication(appID);
     }
 

@@ -49,7 +49,8 @@ import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPApplication;
-import org.geosdi.geoplatform.exception.AccountExpiredFault;
+import org.geosdi.geoplatform.exception.AccountLoginFault;
+import org.geosdi.geoplatform.exception.AccountLoginFault.LoginFaultType;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
@@ -377,12 +378,15 @@ class AccountServiceImpl {
     }
 
     public GPUser getUserDetailByUsernameAndPassword(String username, String plainPassword)
-            throws ResourceNotFoundFault, IllegalParameterFault, AccountExpiredFault {
+            throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
         GPUser user = this.getUserByUsername(username);
         EntityCorrectness.checkAccountLog(user); // TODO assert
 
+        if (!user.isEnabled()) {
+            throw new AccountLoginFault(LoginFaultType.ACCOUNT_DISABLED, username);
+        }
         if (!user.isAccountNonExpired()) {
-            throw new AccountExpiredFault("User expired", username);
+            throw new AccountLoginFault(LoginFaultType.ACCOUNT_EXPIRED, username);
         }
 
         // Check password
@@ -397,12 +401,15 @@ class AccountServiceImpl {
     }
 
     public GPApplication getApplication(String appID)
-            throws ResourceNotFoundFault, AccountExpiredFault {
+            throws ResourceNotFoundFault, AccountLoginFault {
         GPApplication application = this.getApplicationByAppId(appID);
         EntityCorrectness.checkAccountLog(application); // TODO assert
 
+        if (!application.isEnabled()) {
+            throw new AccountLoginFault(LoginFaultType.ACCOUNT_DISABLED, appID);
+        }
         if (!application.isAccountNonExpired()) {
-            throw new AccountExpiredFault("Application expired", appID);
+            throw new AccountLoginFault(LoginFaultType.ACCOUNT_EXPIRED, appID);
         }
 
         return application;

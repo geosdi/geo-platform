@@ -41,12 +41,10 @@ import javax.xml.ws.soap.SOAPFaultException;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPApplication;
 import org.geosdi.geoplatform.core.model.GPProject;
-import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.geosdi.geoplatform.core.model.GPUser;
-import org.geosdi.geoplatform.exception.AccountExpiredFault;
+import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.security.GPLoginUserDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
@@ -56,6 +54,8 @@ import org.geosdi.geoplatform.gui.server.SessionUtility.SessionProperty;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.responce.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.services.GeoPlatformService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -98,9 +98,9 @@ public class SecurityService implements ISecurityService {
         } catch (IllegalParameterFault ex) {
             logger.error("Error on SecurityService: " + ex);
             throw new GeoPlatformException("Parameter incorrect");
-        } catch (AccountExpiredFault ex) {
+        } catch (AccountLoginFault ex) {
             logger.error("Error on SecurityService: " + ex);
-            throw new GeoPlatformException("Account expired, contact the administrator");
+            throw new GeoPlatformException(ex.getMessage() + ", contact the administrator");
         }
 
         if (user.getDefaultProjectID() == null) {
@@ -138,9 +138,9 @@ public class SecurityService implements ISecurityService {
                     + " Error: " + ex);
             throw new GeoPlatformException("Unable to find application with appID: "
                     + appID);
-        } catch (AccountExpiredFault ex) {
+        } catch (AccountLoginFault ex) {
             logger.error("Error on SecurityService: " + ex);
-            throw new GeoPlatformException("Account expired, contact the administrator");
+            throw new GeoPlatformException(ex.getMessage() + ", contact the administrator");
         }
 
         if (application.getDefaultProjectID() == null) {

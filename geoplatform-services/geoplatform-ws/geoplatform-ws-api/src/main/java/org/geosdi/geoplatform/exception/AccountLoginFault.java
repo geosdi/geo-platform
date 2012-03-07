@@ -42,34 +42,50 @@ import javax.xml.ws.WebFault;
  * @author Vincenzo Monteverde
  * @email vincenzo.monteverde@geosdi.org - OpenPGP key ID 0xB25F4B38
  */
-@WebFault(name = "AccountExpiredFault",
-          faultBean = "org.geosdi.exception.AccountExpiredFault")
-public class AccountExpiredFault extends Exception {
+@WebFault(name = "AccountLoginFault",
+          faultBean = "org.geosdi.exception.AccountLoginFault")
+public class AccountLoginFault extends Exception {
 
     private static final long serialVersionUID = -9167519878278175760L;
     //
     private Long accountID;
     private String stringID;
 
-    public AccountExpiredFault() {
+    public enum LoginFaultType {
+
+        ACCOUNT_DISABLED("Account disabled"), ACCOUNT_EXPIRED("Account exiperd");
+        //
+        private String faultType;
+
+        private LoginFaultType(String faultType) {
+            this.faultType = faultType;
+        }
+
+        @Override
+        public String toString() {
+            return faultType;
+        }
     }
 
-    public AccountExpiredFault(String message) {
-        super(message);
+    public AccountLoginFault() {
     }
 
-    public AccountExpiredFault(String message, Long accountID) {
-        super(message);
+    public AccountLoginFault(LoginFaultType faultType) {
+        super(faultType.toString());
+    }
+
+    public AccountLoginFault(LoginFaultType faultType, Long accountID) {
+        super(faultType.toString());
         this.accountID = accountID;
     }
 
-    public AccountExpiredFault(String message, String stringID) {
-        super(message);
+    public AccountLoginFault(LoginFaultType faultType, String stringID) {
+        super(faultType.toString());
         this.stringID = stringID;
     }
 
-    public AccountExpiredFault(String message, Throwable cause) {
-        super(message, cause);
+    public AccountLoginFault(LoginFaultType faultType, Throwable cause) {
+        super(faultType.toString(), cause);
     }
 
     public Long getAccountID() {

@@ -33,50 +33,38 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.service;
+package org.geosdi.geoplatform.gui.server.gwt;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
-import org.geosdi.geoplatform.exception.GPCatalogException;
 import org.geosdi.geoplatform.gui.client.model.FinderBean;
+import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.server.service.IGPCatalogFinderService;
+import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
+ * @email michele.santomauro@geosdi.org
  */
-@RemoteServiceRelativePath("FinderRemote")
-public interface FinderRemote extends RemoteService {
+public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServlet
+        implements GPCatalogFinderRemote {
 
-    public static class Util {
+    private static final long serialVersionUID = 8756054653877871843L;
+    //
+    @Autowired
+    private IGPCatalogFinderService gpCatalogFinderService;
 
-        private static FinderRemoteAsync instance;
-
-        public static FinderRemoteAsync getInstance() {
-            if (instance == null) {
-                instance = (FinderRemoteAsync) GWT.create(FinderRemote.class);
-            }
-            return instance;
-        }
+    @Override
+    public ArrayList<FinderBean> searchPublicMetadata(String searchString) throws GeoPlatformException {
+        return this.gpCatalogFinderService.searchPublicMetadata(searchString);
     }
 
-    /**
-     * @param search
-     *            String to search
-     * @return ArrayList<FinderBean>
-     * @throws GeoPlatformException
-     */
-    public ArrayList<FinderBean> searchPublicMetadata(String searchString)
-            throws GPCatalogException;
-
-    /**
-     * @param search
-     *            String to search
-     * @return ArrayList<FinderBean>
-     * @throws GeoPlatformException
-     */
-    public ArrayList<FinderBean> searchPrivateMetadata(String username, String password, String searchString)
-            throws GPCatalogException;
+    @Override
+    public ArrayList<FinderBean> searchPrivateMetadata(String username,
+            String password,
+            String searchString) throws GeoPlatformException {
+        return this.gpCatalogFinderService.searchPrivateMetadata(username, password,
+                searchString);
+    }
 }

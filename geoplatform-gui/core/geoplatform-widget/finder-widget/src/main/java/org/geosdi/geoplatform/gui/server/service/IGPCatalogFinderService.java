@@ -33,18 +33,34 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.service;
+package org.geosdi.geoplatform.gui.server.service;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.FinderBean;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
+ * @email michele.santomauro@geosdi.org
+ *
  */
-public interface FinderRemoteAsync {
+public interface IGPCatalogFinderService {
 
-    public void searchMetadata(String searchString,
-            AsyncCallback<ArrayList<FinderBean>> callback);
+    /**
+     *
+     * @param searchString
+     * @return ArrayList<FinderBean>
+     *
+     */
+    public ArrayList<FinderBean> searchPublicMetadata(String searchString) throws GeoPlatformException;
+
+    /**
+     *
+     * @param searchString
+     * @return ArrayList<FinderBean>
+     *
+     */
+    public ArrayList<FinderBean> searchPrivateMetadata(String username,
+            String password,
+            String searchString) throws GeoPlatformException;
 }

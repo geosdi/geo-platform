@@ -33,37 +33,32 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.gwt;
+package org.geosdi.geoplatform.gui.server.service.impl;
 
 import java.util.ArrayList;
-import org.geosdi.geoplatform.exception.GPCatalogException;
 import org.geosdi.geoplatform.gui.client.model.FinderBean;
-import org.geosdi.geoplatform.gui.client.service.FinderRemote;
-import org.geosdi.geoplatform.gui.server.service.IFinderService;
-import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.server.service.IGPCatalogFinderService;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
+ * @email michele.santomauro@geosdi.org
+ *
  */
-public class FinderRemoteImpl extends GPAutoInjectingRemoteServiceServlet
-        implements FinderRemote {
-
-    private static final long serialVersionUID = 8756054653877871843L;
-    //
-    @Autowired
-    private IFinderService finderService;
+@Service("gpCatalogFinderService")
+public class GPCatalogFinderService implements IGPCatalogFinderService {
 
     @Override
-    public ArrayList<FinderBean> searchPublicMetadata(String searchString) throws GPCatalogException {
-        return this.finderService.searchPublicMetadata(searchString);
+    public ArrayList<FinderBean> searchPublicMetadata(String searchString)
+            throws GeoPlatformException {
+
+        return null;
     }
 
     @Override
     public ArrayList<FinderBean> searchPrivateMetadata(String username,
-                                                       String password,
-                                                       String searchString) throws GPCatalogException {
-        return this.finderService.searchPrivateMetadata(username, password, searchString);
+            String password, String searchString) throws GeoPlatformException {
+        return null;
     }
 }

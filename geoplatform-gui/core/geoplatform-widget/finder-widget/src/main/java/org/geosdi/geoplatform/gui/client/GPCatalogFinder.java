@@ -35,17 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.client;
 
-
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
+ * @email michele.santomauro@geosdi.org
  */
-public class Finder implements EntryPoint {
-
-    private Dispatcher dispatcher;
+public class GPCatalogFinder implements EntryPoint {
 
     /**
      * (non-Javadoc)
@@ -54,32 +50,5 @@ public class Finder implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
-        dispatcher = Dispatcher.get();
-
-//        dispatcher.addController(new GeocodingController());
-
-//        addReverseGeocodingAction();
-
-//        dispatcher.dispatch(GeocodingEvents.INIT_GEOCODING_WIDGET);
     }
-
-//    private void addReverseGeocodingAction() {
-//        MenuActionRegistar.put("finder", new MenuActionCreator() {
-//
-//            @Override
-//            public MenuAction createAction() {
-//                return new GeocodingMenuAction();
-//            }
-//        });
-//
-//        ToolbarActionRegistar.put("reverseGeocoding",
-//                new ToolbarActionCreator() {
-//
-//                    @Override
-//                    public GeoPlatformToolbarAction createActionTool(
-//                            GeoPlatformMap mapWidget) {
-//                        return new ReverseGeocodingAction(mapWidget);
-//                    }
-//                });
-//    }
 }

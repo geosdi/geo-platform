@@ -129,7 +129,7 @@ public class AddLayerWidget extends GeoPlatformWindow {
 
         listView.setTemplate(sb.toString());
 
-        listView.setSize(615, 228);
+        listView.setSize(750, 228);
     }
 
     @Override
@@ -142,7 +142,7 @@ public class AddLayerWidget extends GeoPlatformWindow {
 
     @Override
     public void initSize() {
-        setSize(615, 232);
+        setSize(750, 232);
     }
 
     @Override
@@ -159,7 +159,7 @@ public class AddLayerWidget extends GeoPlatformWindow {
         this.centralPanel = new ContentPanel(new FlowLayout(0));
         this.centralPanel.setHeaderVisible(false);
         this.centralPanel.setFrame(true);
-        this.centralPanel.setSize(602, 198);
+        this.centralPanel.setSize(738, 198);
         this.centralPanel.add(this.generateListView());
         super.add(this.centralPanel);
     }

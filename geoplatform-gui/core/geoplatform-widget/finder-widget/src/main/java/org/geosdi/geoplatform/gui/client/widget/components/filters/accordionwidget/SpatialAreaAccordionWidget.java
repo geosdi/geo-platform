@@ -33,31 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget;
+package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-public class MainViewFinderWidget extends GeoPlatformContentPanel {
+public class SpatialAreaAccordionWidget {
 
-    public MainViewFinderWidget() {
-        super(false);
-    }
-
-    @Override
-    public void addComponent() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void initSize() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void setPanelProperties() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 }

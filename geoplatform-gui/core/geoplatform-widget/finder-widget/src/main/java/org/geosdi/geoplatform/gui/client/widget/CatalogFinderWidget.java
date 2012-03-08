@@ -35,11 +35,18 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
+import com.extjs.gxt.ui.client.Style.LayoutRegion;
+import com.extjs.gxt.ui.client.util.Margins;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import org.geosdi.geoplatform.gui.client.widget.components.MainViewFinderWidget;
+import org.geosdi.geoplatform.gui.client.widget.components.filters.FiltersFinderWidget;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  */
 public class CatalogFinderWidget extends GeoPlatformWindow {
 
@@ -57,12 +64,15 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
     @Override
     public void addComponent() {
         // TODO
+        // For now the component are added here but we must use GIN for initialization
+        addWestWidget();
+        addCenterWidget();
     }
 
     @Override
     public void initSize() {
-        super.setSize(600, 530);
-        super.setHeading("Catalog Finder UI");
+        super.setSize(950, 650);
+        super.setHeading("GeoPlatform Catalog Finder UI");
     }
 
     @Override
@@ -71,6 +81,21 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
         super.setModal(false);
         super.setCollapsible(true);
         super.setPlain(true);
-//        super.setLayout();
+
+        super.setLayout(new BorderLayout());
+    }
+
+    private void addWestWidget() {
+        BorderLayoutData westData = new BorderLayoutData(LayoutRegion.WEST, 350);
+        westData.setMargins(new Margins(0, 5, 0, 0));
+
+        super.add(new FiltersFinderWidget(), westData);
+    }
+
+    private void addCenterWidget() {
+        BorderLayoutData centerData = new BorderLayoutData(LayoutRegion.CENTER);
+        centerData.setMargins(new Margins(0));
+
+        super.add(new MainViewFinderWidget(), centerData);
     }
 }

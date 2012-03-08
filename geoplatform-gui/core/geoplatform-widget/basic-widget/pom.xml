@@ -92,7 +92,7 @@
         </dependency>
         
         	<!-- GWT-OL Resources -->
-        <dependency>
+<!--        <dependency>
             <groupId>org.gwtopenmaps.openlayers</groupId>
             <artifactId>gwt-openlayers-client</artifactId>
             <scope>provided</scope>
@@ -101,7 +101,7 @@
             <groupId>org.gwtopenmaps.openlayers</groupId>
             <artifactId>gwt-openlayers-server</artifactId>
             <scope>runtime</scope>
-        </dependency>
+        </dependency>-->
 
 		<!-- SPRING -->
         <dependency>

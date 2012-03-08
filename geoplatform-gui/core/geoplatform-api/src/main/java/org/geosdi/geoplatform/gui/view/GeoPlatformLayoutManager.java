@@ -35,9 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.view;
 
-import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
-import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ScaleChangeEvent;
-
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.core.XDOM;
@@ -53,6 +50,8 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.event.ScaleChangeEvent;
 
 /**
  * @author giuseppe

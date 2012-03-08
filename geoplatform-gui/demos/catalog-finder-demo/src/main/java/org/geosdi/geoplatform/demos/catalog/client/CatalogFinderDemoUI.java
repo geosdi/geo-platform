@@ -33,35 +33,22 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters;
+package org.geosdi.geoplatform.demos.catalog.client;
 
-import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.gui.client.widget.CatalogFinderWidget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class FiltersFinderWidget extends GeoPlatformContentPanel {
-    
-    public FiltersFinderWidget() {
-        super(false);
-    }
-    
+public class CatalogFinderDemoUI implements EntryPoint {
+
     @Override
-    public void addComponent() {
-        
-    }
-    
-    @Override
-    public void initSize() {
-        super.setHeaderVisible(false);
-    }
-    
-    @Override
-    public void setPanelProperties() {
-        super.setBodyBorder(false);
-        super.setLayout(new AccordionLayout());
+    public void onModuleLoad() {
+        CatalogFinderWidget catalogWidget = new CatalogFinderWidget(false);
+        catalogWidget.setClosable(false);
+        catalogWidget.show();
     }
 }

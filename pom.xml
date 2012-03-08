@@ -1000,14 +1000,14 @@
                 <groupId>org.gwtopenmaps.openlayers</groupId>
                 <artifactId>gwt-openlayers-client</artifactId>
                 <version>${gwtOpenlayersVersion}</version>
-                <scope>provided</scope>
+<!--                <scope>provided</scope>-->
             </dependency>
             
             <dependency>
                 <groupId>org.gwtopenmaps.openlayers</groupId>
                 <artifactId>gwt-openlayers-server</artifactId>
                 <version>${gwtOpenlayersVersion}</version>
-                <scope>runtime</scope>
+<!--                <scope>runtime</scope>-->
             </dependency>
             
             <!-- =========================================================== -->

@@ -1,22 +1,23 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
   
-  <parent>
+    <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>demos</artifactId>
         <version>1.3-SNAPSHOT</version>
-  </parent>
+    </parent>
 
-  <groupId>org.geosdi</groupId>
-  <artifactId>catalog-finder-demo</artifactId>
-  <version>1.3-SNAPSHOT</version>
-  <packaging>jar</packaging>
+    <groupId>org.geosdi</groupId>
+    <artifactId>catalog-finder-demo</artifactId>
+    <version>1.3-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-  <name>Geo-Platform :: == Catalog Finder Widget Demo</name>
-  <url>http://maven.apache.org</url>
+    <name>Geo-Platform :: == Catalog Finder Widget Demo</name>
+    <url>http://maven.apache.org</url>
   
-   <developers>
+    <developers>
         <developer>
             <name>Francesco Izzi</name>
             <id>francesco.izzi</id>
@@ -73,15 +74,202 @@
         </developer>
     </developers>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>core</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>    
+        </dependencies>    
+    </dependencyManagement>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- Dependencies for GWT-2.3.0 Compilation -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.0.0.GA</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api-sources</artifactId>
+            <version>1.0.0.GA</version>
+        </dependency>
+
+		<!-- GXT -->
+        <dependency>
+            <groupId>com.extjs</groupId>
+            <artifactId>gxt</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-api</artifactId>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-configuration</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-configuration</artifactId>
+            <classifier>sources</classifier>
+        </dependency>
+
+		<!-- GEOPLATFORM_RESOURCES -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-resources</artifactId>
+        </dependency>
+        
+        <!--CATALOG FINDER MODULE -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>finder-widget</artifactId>
+        </dependency>
+        
+        <!-- logging dependencies, delegate all to slf4j and use logback -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <outputDirectory>war/WEB-INF/classes</outputDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <encoding>utf8</encoding>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <configuration>
+                    <warSourceExcludes>.gwt-tmp/**</warSourceExcludes>
+                    <warSourceDirectory>war</warSourceDirectory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <version>2.4.0</version>
+                <configuration>
+                    <inplace>true</inplace>
+                    <gwtVersion>${gwtVersion}</gwtVersion>
+                    <module>org.geosdi.geoplatform.demos.catalog.CatalogFinderDemoUI</module>
+                    <runTarget>CatalogFinderDemoUI.html</runTarget>
+                    <warSourceDirectory>war</warSourceDirectory>
+                    <disableCastChecking>true</disableCastChecking>
+                    <disableClassMetadata>true</disableClassMetadata>
+                    <hostedWebapp>${basedir}/war</hostedWebapp>
+                    <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>test</id>
+                        <goals>
+                            <goal>clean</goal>
+                            <!-- goal>compile</goal -->
+                            <goal>generateAsync</goal>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+		<!-- Run the application using "mvn jetty:run" -->
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>7.5.2.v20111006</version>
+                <configuration>
+                    <webAppSourceDirectory>${basedir}/war</webAppSourceDirectory>
+                    <webAppConfig>
+                        <contextPath>/</contextPath>
+                    </webAppConfig>
+                    <connectors>
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>9393</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
+                    <reload>manual</reload>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>remove-build-files</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <tasks>
+                                <delete dir="war/WEB-INF/lib" />
+                                <delete dir="war/catalog_finder_demo" />
+                                <delete dir="war/WEB-INF/deploy" />
+                                <delete dir="gwt-unitCache" />
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+        <finalName>catalog_finder_demo</finalName>
+    </build>
 </project>

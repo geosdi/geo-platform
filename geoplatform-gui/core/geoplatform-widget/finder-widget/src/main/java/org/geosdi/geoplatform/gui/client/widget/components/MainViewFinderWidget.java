@@ -50,16 +50,14 @@ public class MainViewFinderWidget extends GeoPlatformContentPanel {
 
     @Override
     public void addComponent() {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void initSize() {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void setPanelProperties() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        super.setHeaderVisible(false);
     }
 }

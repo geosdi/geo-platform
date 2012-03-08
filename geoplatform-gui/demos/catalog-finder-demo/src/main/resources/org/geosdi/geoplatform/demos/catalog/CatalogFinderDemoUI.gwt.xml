@@ -1,0 +1,14 @@
+
+<module rename-to="catalog_finder_demo">
+    <inherits name='org.geosdi.geoplatform.gui.GeoPlatform' />
+	
+    <!-- ADDING GEOPLATFORM-RESOURCES MODULE -->
+    <inherits name='org.geosdi.geoplatform.gui.Resources' />
+    
+    <inherits name="org.geosdi.geoplatform.gui.GPCatalogFinder" />
+	
+    <source path="client" />
+	
+    <entry-point class='org.geosdi.geoplatform.demos.catalog.client.CatalogFinderDemoUI' />
+	
+</module>

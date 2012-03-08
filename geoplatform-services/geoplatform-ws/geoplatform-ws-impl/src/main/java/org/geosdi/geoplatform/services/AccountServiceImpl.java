@@ -591,8 +591,13 @@ class AccountServiceImpl {
     /**
      * Updates all common fields of user and application (GPAccount) 
      */
-    private void updateAccount(GPAccount accountToUpdate, GPAccount account) {
+    private void updateAccount(GPAccount accountToUpdate, GPAccount account)
+            throws IllegalParameterFault {
         accountToUpdate.setEnabled(account.isEnabled());
+
+        if (!accountToUpdate.isAccountTemporary() && account.isAccountTemporary()) {
+            throw new IllegalParameterFault("A standard account cannot be changed to temporary account");
+        }
         accountToUpdate.setAccountTemporary(account.isAccountTemporary());
 
         Long defaultProjectID = account.getDefaultProjectID();

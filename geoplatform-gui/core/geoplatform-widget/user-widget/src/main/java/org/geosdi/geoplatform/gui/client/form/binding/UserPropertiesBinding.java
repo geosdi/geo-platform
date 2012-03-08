@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.form.binding;
 
-import com.extjs.gxt.ui.client.binding.FieldBinding;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.FieldEvent;
 import com.extjs.gxt.ui.client.event.Listener;
@@ -95,6 +94,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     private boolean updateEmail;
     private boolean updatePassword;
     private boolean updateEnabled;
+    private boolean updateTemporary;
     private boolean updateRole;
 
     public UserPropertiesBinding(ListStore<GPUserManageDetail> store,
@@ -169,6 +169,18 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
 
         this.temporaryField = new CheckBox();
         this.temporaryField.setId(GPUserManageDetailKeyValue.TEMPORARY.toString());
+        this.temporaryField.addListener(Events.Change, new Listener<FieldEvent>() {
+
+            @Override
+            public void handleEvent(FieldEvent be) {
+                Boolean temporary = (Boolean) be.getValue();
+                if (temporary.booleanValue() != userOriginal.isTemporary()) {
+                    updateTemporary(true);
+                } else {
+                    updateTemporary(false);
+                }
+            }
+        });
 
         this.expiredLabelField = new LabelField();
 
@@ -230,8 +242,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.formBinding.addFieldBinding(new EmailFieldBinding());
         this.formBinding.addFieldBinding(new UsernameFieldBinding());
         this.formBinding.addFieldBinding(new EnabledFieldBinding());
-        this.formBinding.addFieldBinding(new FieldBinding(temporaryField,
-                                                          GPUserManageDetailKeyValue.TEMPORARY.toString())); // 1-way binding
+        this.formBinding.addFieldBinding(new TemporaryFieldBinding());
     }
 
     @Override
@@ -246,6 +257,7 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
             userOriginal.setName(user.getName());
             userOriginal.setEmail(user.getEmail());
             userOriginal.setEnabled(user.isEnabled());
+            userOriginal.setTemporary(user.isTemporary());
             userOriginal.setAuthority(user.getAuthority());
             //
             this.formButtonBinding.stopMonitoring(); // NOTE FormButtonBinding is always start auto-magically
@@ -271,6 +283,12 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.passwordRepeatField.setValidator(this.validatorInsertConfirmPassword());
         this.passwordRepeatField.setAllowBlank(false);
 
+        // TODO Check default enabled check box
+//        getModel().setEnabled(true);
+//        this.enabledField.setValue(true);
+//        this.enabledField.setValueAttribute("true");
+//        this.enabledField.setRawValue("true");
+
         this.creationDateLabelField.setText("");
 
         this.temporaryField.setToolTip("Check if the user is temporary (will be disabled in 10 days)");
@@ -282,6 +300,8 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
     }
 
     private void handleFieldsUpdateUser() {
+        GPUserManageDetail user = super.getModel();
+
         this.nameField.setValidator(this.validatorUpdateName());
         this.nameField.setAllowBlank(true);
 
@@ -299,20 +319,22 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.passwordRepeatField.setAllowBlank(true);
 
         this.creationDateLabelField.setText("Created the " + DateTimeFormat.getFormat(
-                DateTimeFormat.PredefinedFormat.DATE_LONG).format(getModel().getCreationDate())); //
+                DateTimeFormat.PredefinedFormat.DATE_LONG).format(user.getCreationDate()));
 
-        this.temporaryField.setToolTip("Checked if the user is temporary");
-        this.temporaryField.setReadOnly(true);
+        if (!user.isTemporary()) {
+            this.temporaryField.setReadOnly(true);
+            this.temporaryField.setToolTip("Checked if the user is temporary");
+        } else {
+            this.temporaryField.setReadOnly(false);
+            this.temporaryField.setToolTip("Dechecked and the user will not be temporary");
 
-        if (getModel().isTemporary()) {
-            if (getModel().isExpired()) {
+            if (user.isExpired()) {
                 this.expiredLabelField.setText("<span style='color:red'>User expired</span>");
-                // TODO disable all fileds?!? Because if the user is expired so cannot change nothing (only delete it or reactivate for 10 another dd)
             } else {
                 Date today = new Date();
                 CalendarUtil.addDaysToDate(today, -10);
                 this.expiredLabelField.setText("User not expired (remain "
-                        + CalendarUtil.getDaysBetween(today, getModel().getCreationDate()) + " day/s)");
+                        + CalendarUtil.getDaysBetween(today, user.getCreationDate()) + " day/s)");
             }
         }
 
@@ -426,13 +448,19 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         this.updateUser();
     }
 
+    private void updateTemporary(boolean updateTemporary) {
+        this.updateTemporary = updateTemporary;
+        this.updateUser();
+    }
+
     private void updateRole(boolean updateRole) {
         this.updateRole = updateRole;
         this.updateUser();
     }
 
     private void updateUser() {
-        if (updateName || updateEmail || updatePassword || updateEnabled || updateRole) {
+        if (updateName || updateEmail || updatePassword
+                || updateEnabled || updateTemporary || updateRole) {
             this.buttonBinding.enable();
         } else {
             this.buttonBinding.disable();
@@ -623,6 +651,30 @@ public class UserPropertiesBinding extends GeoPlatformBindingWidget<GPUserManage
         public void updateField(boolean updateOriginalValue) {
             GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
             enabledField.setValue(userDetail.isEnabled());
+        }
+
+        @Override
+        public void setRecordProperty(Record r, Object val) {
+            r.set(super.property, val);
+        }
+    }
+
+    private class TemporaryFieldBinding extends GPFieldBinding {
+
+        public TemporaryFieldBinding() {
+            super(temporaryField, GPUserManageDetailKeyValue.TEMPORARY.toString());
+        }
+
+        @Override
+        public void setModelProperty(Object val) {
+            GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
+            userDetail.setTemporary(val != null ? (Boolean) val : false);
+        }
+
+        @Override
+        public void updateField(boolean updateOriginalValue) {
+            GPUserManageDetail userDetail = (GPUserManageDetail) super.model;
+            temporaryField.setValue(userDetail.isTemporary());
         }
 
         @Override

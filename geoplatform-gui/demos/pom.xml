@@ -1,6 +1,6 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
   
     <parent>
@@ -43,14 +43,14 @@
         <module>catalog-finder-demo</module>
     </modules>
     
-    <!-- profiles>
-       <profile>
-			<id>test</id>
-			<modules>
-			   <module>profile module</module>
-			</modules>
-		</profile>
-    </profiles -->
+<!--    <profiles>
+        <profile>
+            <id>finder</id>
+            <modules>
+                <module>catalog-finder-demo</module>
+            </modules>
+        </profile>
+    </profiles>-->
 
 
 </project>

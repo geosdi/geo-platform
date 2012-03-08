@@ -209,6 +209,12 @@ public interface GeoPlatformService {
 
     @Post
     @HttpResource(location = "/accounts/{accountID}")
+    void forceTemporaryAccount(
+            @WebParam(name = "accountID") Long accountID)
+            throws ResourceNotFoundFault;
+
+    @Post
+    @HttpResource(location = "/accounts/{accountID}")
     void forceExpiredTemporaryAccount(
             @WebParam(name = "accountID") Long accountID)
             throws ResourceNotFoundFault, IllegalParameterFault;

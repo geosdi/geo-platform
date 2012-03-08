@@ -400,6 +400,12 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
+    public void forceTemporaryAccount(Long accountID)
+            throws ResourceNotFoundFault {
+        accountServiceDelegate.forceTemporaryAccount(accountID);
+    }
+
+    @Override
     public void forceExpiredTemporaryAccount(Long accountID)
             throws ResourceNotFoundFault, IllegalParameterFault {
         accountServiceDelegate.forceExpiredTemporaryAccount(accountID);

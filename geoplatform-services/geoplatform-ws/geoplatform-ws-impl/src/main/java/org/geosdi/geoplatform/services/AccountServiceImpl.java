@@ -606,6 +606,15 @@ class AccountServiceImpl {
         }
     }
 
+    public void forceTemporaryAccount(Long accountID)
+            throws ResourceNotFoundFault {
+        GPAccount account = this.getAccountById(accountID);
+        EntityCorrectness.checkAccountLog(account); // TODO assert
+
+        account.setAccountTemporary(true);
+        accountDao.merge(account);
+    }
+
     public void forceExpiredTemporaryAccount(Long accountID)
             throws ResourceNotFoundFault, IllegalParameterFault {
         GPAccount account = this.getAccountById(accountID);

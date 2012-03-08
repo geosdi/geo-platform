@@ -227,11 +227,10 @@ public class WSAccountTest extends ServiceTest {
     public void testLoginFaultUserExpired()
             throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
         // Set temporary user
-        userTest.setAccountTemporary(true);
-        Long userID = gpWSClient.updateUser(userTest);
+        gpWSClient.forceTemporaryAccount(idUserTest);
 
         // Set expired user (user must be temporary)
-        gpWSClient.forceExpiredTemporaryAccount(userID);
+        gpWSClient.forceExpiredTemporaryAccount(idUserTest);
 
         // Must be throws AccountLoginFault because the user is expired
         gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);

@@ -1,6 +1,5 @@
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
   
     <parent>
@@ -31,6 +30,16 @@
             <name>Giuseppe La Scaleia</name>
             <id>glascaleia</id>
             <email>giuseppe.lascaleia@geosdi.org</email>
+            <organization>geoSDI</organization>
+            <roles>
+                <role>Java Developer</role>
+                <role>Project Management Committee (PMC) Member</role>
+            </roles>
+        </developer>
+		<developer>
+            <name>Nazzareno Sileno</name>
+            <id>nazzareno.sileno</id>
+            <email>nazzareno.sileno@geosdi.org</email>
             <organization>geoSDI</organization>
             <roles>
                 <role>Java Developer</role>
@@ -95,7 +104,8 @@
         <module>geoplatform-print</module>
         <module>geoplatform-xmpp</module>
         <module>geoplatform-featureinfo</module>
-    </modules>
+		<module>geoplatform-gwtquery</module>
+  </modules>
 
 
 </project>

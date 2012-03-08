@@ -9,8 +9,8 @@
     <!-- ADDING GOOGLE-GUAVA MODULE -->
     <inherits name="com.google.common.collect.Collect"/>
     
-    <!-- ADDING GWTQUERY-UI DEPENDENCY -->
-    <inherits name="gwtquery.plugins.UiGoogleCdn" />
+    <!-- ADDING GWTQUERY-UI DEPENDENCY 
+    <inherits name="gwtquery.plugins.UiGoogleCdn" /> -->
 	
     <source path="client" />
 	

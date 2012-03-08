@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.gwtquery;
 
-import com.google.gwt.dom.client.Element;
 import org.geosdi.geoplatform.gui.client.widget.IGPSubClassesInitialization;
 
 /**

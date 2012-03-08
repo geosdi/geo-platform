@@ -33,29 +33,31 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
-
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.widget.CatalogFinderWidget;
+package org.geosdi.geoplatform.gui.client.widget;
 
 /**
  *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class WmsFromMetadataTreeAction extends ToolbarLayerTreeAction {
+public class FiltersFinderWidget extends GeoPlatformContentPanel {
 
-    private CatalogFinderWidget wmsMetadataWidget;
-
-    public WmsFromMetadataTreeAction(TreePanel treePanel) {
-        super(treePanel, BasicWidgetResources.ICONS.reset(), "Add WMS from Metadata");
-        this.wmsMetadataWidget = new CatalogFinderWidget(true, tree);
+    public FiltersFinderWidget() {
+        super(false);
     }
 
     @Override
-    public void componentSelected(ButtonEvent e) {
-        wmsMetadataWidget.show();
+    public void addComponent() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void initSize() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setPanelProperties() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

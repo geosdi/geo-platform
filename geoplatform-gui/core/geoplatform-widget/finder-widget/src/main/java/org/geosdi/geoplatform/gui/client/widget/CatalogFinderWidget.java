@@ -33,29 +33,44 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.action.toolbar;
+package org.geosdi.geoplatform.gui.client.widget;
 
-import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import org.geosdi.geoplatform.gui.action.tree.ToolbarLayerTreeAction;
-import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.widget.CatalogFinderWidget;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class WmsFromMetadataTreeAction extends ToolbarLayerTreeAction {
+public class CatalogFinderWidget extends GeoPlatformWindow {
 
-    private CatalogFinderWidget wmsMetadataWidget;
+    private TreePanel tree;
 
-    public WmsFromMetadataTreeAction(TreePanel treePanel) {
-        super(treePanel, BasicWidgetResources.ICONS.reset(), "Add WMS from Metadata");
-        this.wmsMetadataWidget = new CatalogFinderWidget(true, tree);
+    public CatalogFinderWidget(boolean lazy) {
+        super(lazy);
+    }
+
+    public CatalogFinderWidget(boolean lazy, TreePanel theTree) {
+        super(lazy);
+        tree = theTree;
     }
 
     @Override
-    public void componentSelected(ButtonEvent e) {
-        wmsMetadataWidget.show();
+    public void addComponent() {
+        // TODO
+    }
+
+    @Override
+    public void initSize() {
+        super.setSize(600, 530);
+        super.setHeading("Catalog Finder UI");
+    }
+
+    @Override
+    public void setWindowProperties() {
+        super.setResizable(false);
+        super.setModal(false);
+        super.setCollapsible(true);
+        super.setPlain(true);
+//        super.setLayout();
     }
 }

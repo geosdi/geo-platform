@@ -35,42 +35,29 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-
 /**
  *
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class WmsFromMetadataWidget extends GeoPlatformWindow {
+public class MainViewFinderWidget extends GeoPlatformContentPanel {
 
-    private TreePanel tree;
-
-    public WmsFromMetadataWidget(boolean lazy) {
-        super(lazy);
-    }
-
-    public WmsFromMetadataWidget(boolean lazy, TreePanel theTree) {
-        super(lazy);
-        tree = theTree;
+    public MainViewFinderWidget() {
+        super(false);
     }
 
     @Override
     public void addComponent() {
-        // TODO
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void initSize() {
-        super.setSize(600, 530);
-        super.setHeading("Catalog Finder UI");
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void setWindowProperties() {
-        super.setResizable(false);
-        super.setModal(false);
-        super.setCollapsible(true);
-        super.setPlain(true);
-//        super.setLayout();
+    public void setPanelProperties() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

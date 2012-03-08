@@ -113,6 +113,12 @@
                 <version>${project.version}</version>
                 <classifier>sources</classifier>
             </dependency>
+            
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>finder-widget</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         
             <dependency>
                 <groupId>org.geosdi</groupId>

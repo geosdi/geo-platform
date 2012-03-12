@@ -33,46 +33,24 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters;
+package org.geosdi.geoplatform.gui.client.themes;
 
-import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
-import com.google.gwt.event.shared.EventBus;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.CssResource;
+import com.google.gwt.resources.client.CssResource.NotStrict;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-@Singleton
-public class FiltersFinderWidget extends GeoPlatformContentPanel {
+public interface GPCatalogTheme extends ClientBundle {
 
-    private EventBus bus;
+    public static final GPCatalogTheme INSTANCE = GWT.create(
+            GPCatalogTheme.class);
 
-    @Inject
-    public FiltersFinderWidget(EventBus bus) {
-        super(false);
-        this.bus = bus;
-    }
-
-    public FiltersFinderWidget() {
-        super(false);
-    }
-
-    @Override
-    public void addComponent() {
-    }
-
-    @Override
-    public void initSize() {
-        super.setHeaderVisible(false);
-    }
-
-    @Override
-    public void setPanelProperties() {
-        super.setBodyBorder(false);
-        super.setLayout(new AccordionLayout());
-    }
+    @Source(value = "css/GPCatalogFinder.css")
+    @CssResource.NotStrict
+    CssResource gpCatalogFinderCss();
 }

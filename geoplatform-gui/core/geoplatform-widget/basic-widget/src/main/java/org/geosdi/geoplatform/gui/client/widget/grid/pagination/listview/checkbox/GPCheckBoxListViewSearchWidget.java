@@ -33,46 +33,52 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters;
+package org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.checkbox;
 
-import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
-import com.google.gwt.event.shared.EventBus;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
+import com.extjs.gxt.ui.client.widget.CheckBoxListView;
+import org.geosdi.geoplatform.gui.client.widget.grid.pagination.GeoPlatformSearchWidget;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Singleton
-public class FiltersFinderWidget extends GeoPlatformContentPanel {
+public abstract class GPCheckBoxListViewSearchWidget<T extends GeoPlatformBeanModel>
+        extends GeoPlatformSearchWidget<CheckBoxListView, T> {
 
-    private EventBus bus;
+    protected CheckBoxListView<T> checkBoxListView;
 
-    @Inject
-    public FiltersFinderWidget(EventBus bus) {
-        super(false);
-        this.bus = bus;
+    public GPCheckBoxListViewSearchWidget(boolean lazy, int pageSize) {
+        super(lazy, pageSize);
     }
 
-    public FiltersFinderWidget() {
-        super(false);
-    }
-
-    @Override
-    public void addComponent() {
+    public GPCheckBoxListViewSearchWidget(boolean lazy) {
+        super(lazy);
     }
 
     @Override
-    public void initSize() {
-        super.setHeaderVisible(false);
+    public CheckBoxListView initWidget() {
+        this.checkBoxListView = new CheckBoxListView<T>();
+        this.checkBoxListView.setStore(store);
+
+        this.checkBoxListView.getSelectionModel().addSelectionChangedListener(
+                new SelectionChangedListener<T>() {
+
+                    @Override
+                    public void selectionChanged(SelectionChangedEvent<T> se) {
+                        changeSelection(se);
+                    }
+                });
+
+        setCheckBoxListViewProperties();
+
+        return checkBoxListView;
     }
 
-    @Override
-    public void setPanelProperties() {
-        super.setBodyBorder(false);
-        super.setLayout(new AccordionLayout());
-    }
+    public abstract void changeSelection(SelectionChangedEvent<T> s);
+
+    public abstract void setCheckBoxListViewProperties();
 }

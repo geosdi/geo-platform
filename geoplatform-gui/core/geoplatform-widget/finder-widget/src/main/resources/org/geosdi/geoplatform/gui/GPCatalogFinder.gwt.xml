@@ -1,5 +1,7 @@
 
 <module>
+    
+    <inherits name="com.google.gwt.inject.Inject"/>
 
     <source path="client" />
 

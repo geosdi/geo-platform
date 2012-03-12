@@ -40,6 +40,9 @@ import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.event.shared.EventBus;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.widget.components.MainViewFinderWidget;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.FiltersFinderWidget;
 
@@ -48,9 +51,22 @@ import org.geosdi.geoplatform.gui.client.widget.components.filters.FiltersFinder
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  */
+@Singleton
 public class CatalogFinderWidget extends GeoPlatformWindow {
 
     private TreePanel tree;
+    private FiltersFinderWidget filtersWidget;
+    private MainViewFinderWidget mainViewWidget;
+    private EventBus bus;
+
+    @Inject
+    public CatalogFinderWidget(FiltersFinderWidget filtersWidget,
+            MainViewFinderWidget mainViewWidget, EventBus bus) {
+        super(true);
+        this.filtersWidget = filtersWidget;
+        this.mainViewWidget = mainViewWidget;
+        this.bus = bus;
+    }
 
     public CatalogFinderWidget(boolean lazy) {
         super(lazy);
@@ -71,7 +87,7 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
 
     @Override
     public void initSize() {
-        super.setSize(950, 650);
+        super.setSize(1050, 650);
         super.setHeading("GeoPlatform Catalog Finder UI");
     }
 
@@ -89,13 +105,13 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
         BorderLayoutData westData = new BorderLayoutData(LayoutRegion.WEST, 350);
         westData.setMargins(new Margins(0, 5, 0, 0));
 
-        super.add(new FiltersFinderWidget(), westData);
+        super.add(this.filtersWidget, westData);
     }
 
     private void addCenterWidget() {
         BorderLayoutData centerData = new BorderLayoutData(LayoutRegion.CENTER);
         centerData.setMargins(new Margins(0));
 
-        super.add(new MainViewFinderWidget(), centerData);
+        super.add(this.mainViewWidget, centerData);
     }
 }

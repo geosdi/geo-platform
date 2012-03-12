@@ -46,13 +46,13 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPListViewSearchWidget<T extends GeoPlatformBeanModel>
         extends GeoPlatformSearchWidget<ListView, T> {
-    
+
     private ListView<T> listView;
-    
+
     public GPListViewSearchWidget(boolean lazy) {
         super(lazy);
     }
@@ -60,46 +60,46 @@ public abstract class GPListViewSearchWidget<T extends GeoPlatformBeanModel>
     public GPListViewSearchWidget(boolean lazy, int pageSize) {
         super(lazy, pageSize);
     }
-    
+
     @Override
     public ListView<T> initWidget() {
         listView = new ListView<T>();
-        getListView().addStyleName("overview-page");
-        getListView().setItemSelector(".project-box");
-        getListView().setOverStyle("sample-over");
-        getListView().setSelectStyle("none");
-        getListView().setBorders(false);
-        getListView().setStore(store);
-        
-        getListView().getSelectionModel().addSelectionChangedListener(new SelectionChangedListener<T>() {
-            
+        listView.addStyleName("overview-page");
+        listView.setItemSelector(".project-box");
+        listView.setOverStyle("sample-over");
+        listView.setSelectStyle("none");
+        listView.setBorders(false);
+        listView.setStore(store);
+
+        this.listView.getSelectionModel().addSelectionChangedListener(new SelectionChangedListener<T>() {
+
             @Override
             public void selectionChanged(SelectionChangedEvent<T> se) {
                 changeSelection(se);
             }
         });
-        
+
         setListViewProperties();
-        
-        return getListView();
+
+        return listView;
     }
-    
+
     /**
-     * 
-     * @param T element 
+     *
+     * @param T element
      */
     public void addElement(T element) {
         this.store.insert(element, 0);
     }
-    
+
     /**
-     * 
-     * @return  ListViewSelectionModel<T>
+     *
+     * @return ListViewSelectionModel<T>
      */
     public ListViewSelectionModel<T> getSelectionModel() {
-        return this.getListView().getSelectionModel();
+        return this.listView.getSelectionModel();
     }
-    
+
     /**
      *
      * @return ListStore<T>
@@ -114,8 +114,8 @@ public abstract class GPListViewSearchWidget<T extends GeoPlatformBeanModel>
     public ListView<T> getListView() {
         return listView;
     }
-    
+
     public abstract void changeSelection(SelectionChangedEvent<T> se);
-    
+
     public abstract void setListViewProperties();
 }

@@ -33,46 +33,39 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters;
+package org.geosdi.geoplatform.gui.client.config;
 
-import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import com.google.gwt.inject.client.GinModules;
+import com.google.gwt.inject.client.Ginjector;
+import org.geosdi.geoplatform.gui.client.widget.CatalogFinderWidget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Singleton
-public class FiltersFinderWidget extends GeoPlatformContentPanel {
+@GinModules(value = CatalogFinderInjectorModule.class)
+public interface CatalogFinderInjector extends Ginjector {
 
-    private EventBus bus;
+    public static class MainInjector {
 
-    @Inject
-    public FiltersFinderWidget(EventBus bus) {
-        super(false);
-        this.bus = bus;
+        private static CatalogFinderInjector instance;
+
+        private MainInjector() {
+        }
+
+        public static CatalogFinderInjector getInstance() {
+            if (instance == null) {
+                instance = GWT.create(CatalogFinderInjector.class);
+            }
+
+            return instance;
+        }
     }
 
-    public FiltersFinderWidget() {
-        super(false);
-    }
+    public EventBus getEventBus();
 
-    @Override
-    public void addComponent() {
-    }
-
-    @Override
-    public void initSize() {
-        super.setHeaderVisible(false);
-    }
-
-    @Override
-    public void setPanelProperties() {
-        super.setBodyBorder(false);
-        super.setLayout(new AccordionLayout());
-    }
+    public CatalogFinderWidget getCatalogFinderWidget();
 }

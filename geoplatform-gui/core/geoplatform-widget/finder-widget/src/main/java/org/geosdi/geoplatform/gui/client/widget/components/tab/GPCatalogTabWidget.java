@@ -33,46 +33,44 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters;
+package org.geosdi.geoplatform.gui.client.widget.components.tab;
 
-import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
-import com.google.gwt.event.shared.EventBus;
-import javax.inject.Inject;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
+import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabWidget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 @Singleton
-public class FiltersFinderWidget extends GeoPlatformContentPanel {
+public class GPCatalogTabWidget extends GeoPlatformTabWidget {
 
-    private EventBus bus;
+    private GeoPlatformTabItem searchItem, metadataItem;
 
-    @Inject
-    public FiltersFinderWidget(EventBus bus) {
-        super(false);
-        this.bus = bus;
-    }
-
-    public FiltersFinderWidget() {
-        super(false);
+    public GPCatalogTabWidget() {
+        super(true);
     }
 
     @Override
-    public void addComponent() {
+    public void addComponents() {
+        super.add(this.searchItem);
+        super.add(this.metadataItem);
     }
 
     @Override
-    public void initSize() {
-        super.setHeaderVisible(false);
+    public void initTab() {
+        super.setHeight(650);
     }
 
     @Override
-    public void setPanelProperties() {
-        super.setBodyBorder(false);
-        super.setLayout(new AccordionLayout());
+    public void setWidgetProperties() {
+    }
+
+    @Override
+    public void createTabItems() {
+        this.searchItem = new SearchTabItem();
+        this.metadataItem = new SearchTabItem();
     }
 }

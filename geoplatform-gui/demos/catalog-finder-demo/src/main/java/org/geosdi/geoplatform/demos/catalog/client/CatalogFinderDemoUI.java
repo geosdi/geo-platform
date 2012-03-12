@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.demos.catalog.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import org.geosdi.geoplatform.gui.client.config.CatalogFinderInjector;
 import org.geosdi.geoplatform.gui.client.widget.CatalogFinderWidget;
 
 /**
@@ -47,7 +48,9 @@ public class CatalogFinderDemoUI implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        CatalogFinderWidget catalogWidget = new CatalogFinderWidget(false);
+        CatalogFinderInjector injector = CatalogFinderInjector.MainInjector.getInstance();
+        CatalogFinderWidget catalogWidget = injector.getCatalogFinderWidget();
+
         catalogWidget.setClosable(false);
         catalogWidget.show();
     }

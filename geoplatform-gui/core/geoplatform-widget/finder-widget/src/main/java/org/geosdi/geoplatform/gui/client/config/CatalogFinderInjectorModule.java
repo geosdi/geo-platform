@@ -33,46 +33,25 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters;
+package org.geosdi.geoplatform.gui.client.config;
 
-import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
 import com.google.gwt.event.shared.EventBus;
-import javax.inject.Inject;
+import com.google.gwt.event.shared.SimpleEventBus;
+import com.google.gwt.inject.client.AbstractGinModule;
 import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.gui.client.widget.CatalogFinderWidget;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Singleton
-public class FiltersFinderWidget extends GeoPlatformContentPanel {
-
-    private EventBus bus;
-
-    @Inject
-    public FiltersFinderWidget(EventBus bus) {
-        super(false);
-        this.bus = bus;
-    }
-
-    public FiltersFinderWidget() {
-        super(false);
-    }
-
+public class CatalogFinderInjectorModule extends AbstractGinModule {
+    
     @Override
-    public void addComponent() {
-    }
-
-    @Override
-    public void initSize() {
-        super.setHeaderVisible(false);
-    }
-
-    @Override
-    public void setPanelProperties() {
-        super.setBodyBorder(false);
-        super.setLayout(new AccordionLayout());
+    protected void configure() {
+        bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
+        
+        bind(CatalogFinderWidget.class).in(Singleton.class);
     }
 }

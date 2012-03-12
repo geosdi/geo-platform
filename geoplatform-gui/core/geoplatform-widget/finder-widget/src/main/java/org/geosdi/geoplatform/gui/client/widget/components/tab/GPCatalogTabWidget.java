@@ -71,6 +71,6 @@ public class GPCatalogTabWidget extends GeoPlatformTabWidget {
     @Override
     public void createTabItems() {
         this.searchItem = new SearchTabItem();
-        this.metadataItem = new SearchTabItem();
+        this.metadataItem = new MetadataTabItem();
     }
 }

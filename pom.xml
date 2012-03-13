@@ -320,6 +320,18 @@
                 <artifactId>geonetwork-catalog-impl</artifactId>
                 <version>${geoplatform-version}</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>csw-catalog-api</artifactId>
+                <version>${geoplatform-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>csw-catalog-impl</artifactId>
+                <version>${geoplatform-version}</version>
+            </dependency>
 
 			<!-- =========================================================== -->
 

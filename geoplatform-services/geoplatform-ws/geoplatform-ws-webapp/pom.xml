@@ -103,7 +103,7 @@
             <artifactId>geoplatform-scheduler-impl</artifactId>
         </dependency>
         <!-- =============================================================== -->
-        <!-- GEOPLATFORM FINDER -->
+        <!-- GEOPLATFORM GEONETWORK FINDER -->
         <!-- =============================================================== -->
         <dependency>
             <groupId>org.geosdi</groupId>
@@ -112,6 +112,17 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geonetwork-catalog-impl</artifactId>
+        </dependency>
+        <!-- =============================================================== -->
+        <!-- GEOPLATFORM CSW CATALOG FINDER -->
+        <!-- =============================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>csw-catalog-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>csw-catalog-impl</artifactId>
         </dependency>
         <!-- =============================================================== -->
         <!-- GEOPLATFORM WS -->

@@ -38,25 +38,40 @@ package org.geosdi.geoplatform.exception;
 import javax.xml.ws.WebFault;
 
 /**
- * @author Michele Santomauro - CNR IMAA geoSDI Group
- * @email  michele.santomauro@geosdi.org
- * 
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  */
-@WebFault(name = "IllegalParameterFault",
-          faultBean = "org.geosdi.exception.IllegalParameterFault")
-public class CSWIllegalParameterFault extends Exception {
+@WebFault(name = "ResourceNotFoundFault",
+          faultBean = "org.geosdi.exception.ResourceNotFoundFault")
+public class ResourceNotFoundFault extends Exception {
 
-    private static final long serialVersionUID = 114329811800551827L;
+    private static final long serialVersionUID = 4100712158220027390L;
+    //
+    private Long id;
 
-    public CSWIllegalParameterFault() {
+    public ResourceNotFoundFault() {
     }
 
-    public CSWIllegalParameterFault(String msg) {
+    public ResourceNotFoundFault(String msg) {
         super(msg);
     }
 
-    public CSWIllegalParameterFault(String message, Throwable cause) {
+    public ResourceNotFoundFault(String msg, Long id) {
+        super(msg);
+        this.id = id;
+    }
+
+    public ResourceNotFoundFault(String message, Throwable cause) {
         super(message, cause);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

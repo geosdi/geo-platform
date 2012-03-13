@@ -51,7 +51,8 @@ import org.geosdi.geoplatform.responce.LayerAttribute;
  * Public interface to define the service operations mapped via REST
  * using CXT framework
  */
-@WebService(name = "GPPublisherService", targetNamespace = "http://services.geo-platform.org/")
+@WebService(name = "GPPublisherService", 
+            targetNamespace = "http://services.geo-platform.org/")
 public interface GPPublisherService {
 
     @Get

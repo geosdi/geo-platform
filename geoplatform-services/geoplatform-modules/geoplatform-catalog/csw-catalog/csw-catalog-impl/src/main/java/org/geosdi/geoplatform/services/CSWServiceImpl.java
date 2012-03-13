@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.services;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.exception.CSWResourceNotFoundFault;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,13 +79,13 @@ class CSWServiceImpl {
     /**
      * @see GeoPlatformCSWService#deleteServerCSW(java.lang.Long) 
      */
-    boolean deleteServerCSW(Long serverID) throws CSWResourceNotFoundFault {
+    boolean deleteServerCSW(Long serverID) throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(serverID);
         if (server == null) {
-            throw new CSWResourceNotFoundFault("Server not found", serverID);
+            throw new ResourceNotFoundFault("Server not found", serverID);
         }
         if (server.getServerType() != GPCapabilityType.CSW) {
-            throw new CSWResourceNotFoundFault("Server is not a CSW server");
+            throw new ResourceNotFoundFault("Server is not a CSW server");
         }
 
         return serverDao.remove(server);
@@ -95,13 +95,13 @@ class CSWServiceImpl {
      * @see GeoPlatformCSWService#getServerDetailCSW(java.lang.Long) 
      */
     GeoPlatformServer getServerDetailCSW(Long serverID)
-            throws CSWResourceNotFoundFault {
+            throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(serverID);
         if (server == null) {
-            throw new CSWResourceNotFoundFault("Server not found", serverID);
+            throw new ResourceNotFoundFault("Server not found", serverID);
         }
         if (server.getServerType() != GPCapabilityType.CSW) {
-            throw new CSWResourceNotFoundFault("Server is not a CSW server");
+            throw new ResourceNotFoundFault("Server is not a CSW server");
         }
 
         return server;
@@ -111,13 +111,13 @@ class CSWServiceImpl {
      * @see GeoPlatformCSWService#getServerDetailCSWByUrl(java.lang.String) 
      */
     GeoPlatformServer getServerDetailCSWByUrl(String serverUrl)
-            throws CSWResourceNotFoundFault {
+            throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
         if (server == null) {
-            throw new CSWResourceNotFoundFault("Server not found by URL");
+            throw new ResourceNotFoundFault("Server not found by URL");
         }
         if (server.getServerType() != GPCapabilityType.CSW) {
-            throw new CSWResourceNotFoundFault("Server is not a CSW server");
+            throw new ResourceNotFoundFault("Server is not a CSW server");
         }
 
         return server;

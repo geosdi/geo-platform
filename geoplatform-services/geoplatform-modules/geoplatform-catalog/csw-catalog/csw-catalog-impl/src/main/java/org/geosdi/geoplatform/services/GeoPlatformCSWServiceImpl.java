@@ -39,7 +39,7 @@ import javax.jws.WebService;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.exception.CSWResourceNotFoundFault;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -77,20 +77,19 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     }
 
     @Override
-    public boolean deleteServerCSW(Long serverID)
-            throws CSWResourceNotFoundFault {
+    public boolean deleteServerCSW(Long serverID) throws ResourceNotFoundFault {
         return cswServiceDelegate.deleteServerCSW(serverID);
     }
 
     @Override
     public GeoPlatformServer getServerDetailCSW(Long serverID)
-            throws CSWResourceNotFoundFault {
+            throws ResourceNotFoundFault {
         return cswServiceDelegate.getServerDetailCSW(serverID);
     }
 
     @Override
     public GeoPlatformServer getServerDetailCSWByUrl(String serverUrl)
-            throws CSWResourceNotFoundFault {
+            throws ResourceNotFoundFault {
         return cswServiceDelegate.getServerDetailCSWByUrl(serverUrl);
     }
 }

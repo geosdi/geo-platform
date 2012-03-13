@@ -43,7 +43,7 @@ import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
 import org.codehaus.jra.Put;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.exception.CSWResourceNotFoundFault;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
@@ -68,8 +68,8 @@ public interface GeoPlatformCSWService {
     @Delete
     @HttpResource(location = "/server/csw/{serverID}")
     boolean deleteServerCSW(@WebParam(name = "serverID") Long serverID)
-            throws CSWResourceNotFoundFault;
-//    
+            throws ResourceNotFoundFault;
+    
 //    @Get
 //    @HttpResource(location = "/csw/servers")
 //    @WebResult(name = "cswServer")
@@ -80,7 +80,7 @@ public interface GeoPlatformCSWService {
     @WebResult(name = "ServerCSW")
     GeoPlatformServer getServerDetailCSW(
             @WebParam(name = "serverID") Long serverID)
-            throws CSWResourceNotFoundFault;
+            throws ResourceNotFoundFault;
 //
 //    @Get
 //    @HttpResource(location = "/csw/server/{serverUrl}")
@@ -93,7 +93,7 @@ public interface GeoPlatformCSWService {
     @WebResult(name = "ServerCSW")
     GeoPlatformServer getServerDetailCSWByUrl(
             @WebParam(name = "serverUrl") String serverUrl)
-            throws CSWResourceNotFoundFault;
+            throws ResourceNotFoundFault;
 //
 //    @Get
 //    @HttpResource(location = "/wms/capabilities/{id}")

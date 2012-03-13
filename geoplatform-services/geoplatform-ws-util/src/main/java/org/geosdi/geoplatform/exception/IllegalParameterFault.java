@@ -38,7 +38,8 @@ package org.geosdi.geoplatform.exception;
 import javax.xml.ws.WebFault;
 
 /**
- * @author giuseppe
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  *
  */
 @WebFault(name = "IllegalParameterFault",

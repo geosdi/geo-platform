@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.widget.tab;
 
 import com.extjs.gxt.ui.client.widget.TabPanel;
-import com.google.gwt.user.client.Element;
 
 /**
  *

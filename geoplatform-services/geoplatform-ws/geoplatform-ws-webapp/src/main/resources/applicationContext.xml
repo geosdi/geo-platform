@@ -137,6 +137,31 @@
             <ref bean="geoPlatformServerSecurityOutInterceptorBean"/>
         </jaxws:outInterceptors>
     </jaxws:endpoint>
+    
+    <jaxws:endpoint id="CSWServiceSOAP"
+    	implementorClass="org.geosdi.geoplatform.services.GeoPlatformCSWServiceImpl"
+    	implementor="#cswService"
+    	address="/csw">
+
+        <jaxws:serviceFactory>
+            <bean class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean">
+                <property name="serviceConfigurations">
+                    <list>
+                        <bean class="org.apache.cxf.jaxws.support.JaxWsServiceConfiguration"/>
+                        <bean class="org.apache.cxf.service.factory.DefaultServiceConfiguration"/>
+                    </list>
+                </property>
+            </bean>
+        </jaxws:serviceFactory>
+        <jaxws:inInterceptors>
+            <ref bean="geoPlatformServerLoggingInInterceptorBean"/>
+            <ref bean="geoPlatformServerSecurityInInterceptorBean"/>
+        </jaxws:inInterceptors>        
+        <jaxws:outInterceptors>
+            <ref bean="geoPlatformServerLoggingOutInterceptorBean"/>
+            <ref bean="geoPlatformServerSecurityOutInterceptorBean"/>
+        </jaxws:outInterceptors>
+    </jaxws:endpoint>
 
     <!-- ==================================================================== -->
 

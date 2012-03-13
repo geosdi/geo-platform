@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.services;
 
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
+import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.CSWResourceNotFoundFault;
 import org.slf4j.Logger;
@@ -46,39 +47,79 @@ import org.slf4j.LoggerFactory;
  * @email  michele.santomauro@geosdi.org
  *
  */
-public class CSWServiceImpl {
+class CSWServiceImpl {
 
     final private Logger logger = LoggerFactory.getLogger(CSWServiceImpl.class);
     // DAO
     private GPServerDAO serverDao;
-    
+
     /**
-     * @param serverDao
-     *            the serverDao to set
+     * @param serverDao the serverDao to set
      */
-    public void setServerDao(GPServerDAO serverDao) {
+    void setServerDao(GPServerDAO serverDao) {
         this.serverDao = serverDao;
     }
-    
-    public Long insertServer(GeoPlatformServer cswServer) {
+
+    /**
+     * @see GeoPlatformCSWService#insertServerCSW(org.geosdi.geoplatform.core.model.GeoPlatformServer)
+     */
+    Long insertServerCSW(GeoPlatformServer server) {
         /** IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER **/
-        GeoPlatformServer serverSearch = serverDao.findByServerUrl(cswServer.getServerUrl());
+        GeoPlatformServer serverSearch = serverDao.findByServerUrl(server.getServerUrl());
         if (serverSearch != null) {
             return serverSearch.getId();
         }
 
-        serverDao.persist(cswServer);
-        return cswServer.getId();
+        server.setServerType(GPCapabilityType.CSW);
+
+        serverDao.persist(server);
+        return server.getId();
     }
-    
-    public boolean deleteServer(Long idServer)
-            throws CSWResourceNotFoundFault {
-        GeoPlatformServer server = serverDao.find(idServer);
+
+    /**
+     * @see GeoPlatformCSWService#deleteServerCSW(java.lang.Long) 
+     */
+    boolean deleteServerCSW(Long serverID) throws CSWResourceNotFoundFault {
+        GeoPlatformServer server = serverDao.find(serverID);
         if (server == null) {
-            throw new CSWResourceNotFoundFault("Server not found", idServer);
+            throw new CSWResourceNotFoundFault("Server not found", serverID);
+        }
+        if (server.getServerType() != GPCapabilityType.CSW) {
+            throw new CSWResourceNotFoundFault("Server is not a CSW server");
         }
 
         return serverDao.remove(server);
     }
-	
+
+    /**
+     * @see GeoPlatformCSWService#getServerDetailCSW(java.lang.Long) 
+     */
+    GeoPlatformServer getServerDetailCSW(Long serverID)
+            throws CSWResourceNotFoundFault {
+        GeoPlatformServer server = serverDao.find(serverID);
+        if (server == null) {
+            throw new CSWResourceNotFoundFault("Server not found", serverID);
+        }
+        if (server.getServerType() != GPCapabilityType.CSW) {
+            throw new CSWResourceNotFoundFault("Server is not a CSW server");
+        }
+
+        return server;
+    }
+
+    /**
+     * @see GeoPlatformCSWService#getServerDetailCSWByUrl(java.lang.String) 
+     */
+    GeoPlatformServer getServerDetailCSWByUrl(String serverUrl)
+            throws CSWResourceNotFoundFault {
+        GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
+        if (server == null) {
+            throw new CSWResourceNotFoundFault("Server not found by URL");
+        }
+        if (server.getServerType() != GPCapabilityType.CSW) {
+            throw new CSWResourceNotFoundFault("Server is not a CSW server");
+        }
+
+        return server;
+    }
 }

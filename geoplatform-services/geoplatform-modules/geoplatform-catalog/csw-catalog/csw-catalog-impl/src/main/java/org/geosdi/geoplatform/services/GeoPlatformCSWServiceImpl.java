@@ -49,32 +49,37 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional // Give atomicity on WS methods
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformCSWService")
 public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
-	
+
     // Delegate
     private CSWServiceImpl cswServiceDelegate;
 
-	/**
-	 * @param cswServiceDelegate
-	 */
-	public GeoPlatformCSWServiceImpl() {
-		this.cswServiceDelegate = new CSWServiceImpl();
-	}
+    /**
+     * @param cswServiceDelegate
+     */
+    public GeoPlatformCSWServiceImpl() {
+        this.cswServiceDelegate = new CSWServiceImpl();
+    }
 
-	/* (non-Javadoc)
-	 * @see org.geosdi.geoplatform.services.GeoPlatformCSWService#insertCSWServer(org.geosdi.geoplatform.core.model.GeoPlatformServer)
-	 */
-	@Override
-	public Long insertCSWServer(GeoPlatformServer cswServer) {
-		return cswServiceDelegate.insertServer(cswServer);
-	}
+    @Override
+    public Long insertServerCSW(GeoPlatformServer server) {
+        return cswServiceDelegate.insertServerCSW(server);
+    }
 
-	/* (non-Javadoc)
-	 * @see org.geosdi.geoplatform.services.GeoPlatformCSWService#deleteCSWServer(java.lang.Long)
-	 */
-	@Override
-	public boolean deleteCSWServer(Long cswServerId)
-			throws CSWResourceNotFoundFault {
-		return cswServiceDelegate.deleteServer(cswServerId);
-	}
+    @Override
+    public boolean deleteServerCSW(Long serverID)
+            throws CSWResourceNotFoundFault {
+        return cswServiceDelegate.deleteServerCSW(serverID);
+    }
 
+    @Override
+    public GeoPlatformServer getServerDetailCSW(Long serverID)
+            throws CSWResourceNotFoundFault {
+        return cswServiceDelegate.getServerDetailCSW(serverID);
+    }
+
+    @Override
+    public GeoPlatformServer getServerDetailCSWByUrl(String serverUrl)
+            throws CSWResourceNotFoundFault {
+        return cswServiceDelegate.getServerDetailCSWByUrl(serverUrl);
+    }
 }

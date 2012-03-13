@@ -46,8 +46,8 @@ import javax.xml.ws.WebFault;
           faultBean = "org.geosdi.exception.ResourceNotFoundFault")
 public class CSWResourceNotFoundFault extends Exception {
 
-	private static final long serialVersionUID = 4796760477106322742L;
-	//
+    private static final long serialVersionUID = 4796760477106322742L;
+    //
     private Long id;
 
     public CSWResourceNotFoundFault() {

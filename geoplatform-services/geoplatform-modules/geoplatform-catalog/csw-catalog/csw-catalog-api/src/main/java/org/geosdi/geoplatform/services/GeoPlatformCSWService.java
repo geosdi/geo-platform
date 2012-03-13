@@ -36,9 +36,10 @@
 package org.geosdi.geoplatform.services;
 
 import javax.jws.WebParam;
+import javax.jws.WebResult;
 import javax.jws.WebService;
-
 import org.codehaus.jra.Delete;
+import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
 import org.codehaus.jra.Put;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
@@ -61,37 +62,38 @@ public interface GeoPlatformCSWService {
     // === CSW Server
     // ==========================================================================
     @Put
-    @HttpResource(location = "/csw/server")
-    Long insertCSWServer(@WebParam(name = "cswServer") GeoPlatformServer cswServer);
+    @HttpResource(location = "/server/csw")
+    Long insertServerCSW(@WebParam(name = "server") GeoPlatformServer server);
 
     @Delete
-    @HttpResource(location = "/csw/server/{idServer}")
-    boolean deleteCSWServer(@WebParam(name = "cswServerId") Long cswServerId)
+    @HttpResource(location = "/server/csw/{serverID}")
+    boolean deleteServerCSW(@WebParam(name = "serverID") Long serverID)
             throws CSWResourceNotFoundFault;
-
+//    
 //    @Get
 //    @HttpResource(location = "/csw/servers")
 //    @WebResult(name = "cswServer")
 //    List<ServerDTO> getAllCSWServers();
-//
-//    @Get
-//    @HttpResource(location = "/csw/server/{cswServerId}")
-//    @WebResult(name = "cswServer")
-//    GeoPlatformServer getCSWServerDetail(@WebParam(name = "cswServerId") Long cswServerId)
-//            throws ResourceNotFoundFault;
+
+    @Get
+    @HttpResource(location = "/server/csw/{serverID}")
+    @WebResult(name = "ServerCSW")
+    GeoPlatformServer getServerDetailCSW(
+            @WebParam(name = "serverID") Long serverID)
+            throws CSWResourceNotFoundFault;
 //
 //    @Get
 //    @HttpResource(location = "/csw/server/{serverUrl}")
 //    @WebResult(name = "Servers")
 //    ServerDTO getShortServer(@WebParam(name = "serverUrl") String serverUrl)
 //            throws ResourceNotFoundFault;
-//
-//    @Get
-//    @HttpResource(location = "/csw/server")
-//    @WebResult(name = "Server")
-//    GeoPlatformServer getServerDetailByUrl(
-//            @WebParam(name = "serverUrl") String serverUrl)
-//            throws ResourceNotFoundFault;
+
+    @Get
+    @HttpResource(location = "/server/csw")
+    @WebResult(name = "ServerCSW")
+    GeoPlatformServer getServerDetailCSWByUrl(
+            @WebParam(name = "serverUrl") String serverUrl)
+            throws CSWResourceNotFoundFault;
 //
 //    @Get
 //    @HttpResource(location = "/wms/capabilities/{id}")

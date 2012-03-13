@@ -46,9 +46,9 @@ import javax.xml.ws.WebFault;
           faultBean = "org.geosdi.exception.IllegalParameterFault")
 public class CSWIllegalParameterFault extends Exception {
 
-	private static final long serialVersionUID = 114329811800551827L;
+    private static final long serialVersionUID = 114329811800551827L;
 
-	public CSWIllegalParameterFault() {
+    public CSWIllegalParameterFault() {
     }
 
     public CSWIllegalParameterFault(String msg) {

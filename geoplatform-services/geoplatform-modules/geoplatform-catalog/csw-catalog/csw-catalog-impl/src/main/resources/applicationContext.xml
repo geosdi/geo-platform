@@ -23,6 +23,7 @@
     
     <bean id="cswService"
           class="org.geosdi.geoplatform.services.GeoPlatformCSWServiceImpl">
+        <property name="serverDao" ref="serverDAO" />
     </bean>
 
 	<!--===================================================================== -->

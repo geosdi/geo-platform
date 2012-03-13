@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.services;
 
 import javax.jws.WebService;
+import org.geosdi.geoplatform.core.dao.GPServerDAO;
 
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.CSWResourceNotFoundFault;
@@ -50,6 +51,8 @@ import org.springframework.transaction.annotation.Transactional;
 @WebService(endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformCSWService")
 public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
 
+    // DAO
+    private GPServerDAO serverDao;
     // Delegate
     private CSWServiceImpl cswServiceDelegate;
 
@@ -58,6 +61,14 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
      */
     public GeoPlatformCSWServiceImpl() {
         this.cswServiceDelegate = new CSWServiceImpl();
+    }
+
+    /**
+     * @param serverDao the serverDao to set
+     */
+    public void setServerDao(GPServerDAO serverDao) {
+        this.serverDao = serverDao;
+        this.cswServiceDelegate.setServerDao(serverDao);
     }
 
     @Override

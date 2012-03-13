@@ -265,6 +265,11 @@ public abstract class GeoPlatformSearchWidget<C extends Widget, T extends GeoPla
         this.searchStatus.setText(message.toString());
     }
 
+    public void setSearchStatus(Enum status, String message) {
+        this.searchStatus.setIconStyle(status.toString());
+        this.searchStatus.setText(message);
+    }
+
     public abstract void setWindowProperties();
 
     public abstract void createStore();
@@ -272,7 +277,7 @@ public abstract class GeoPlatformSearchWidget<C extends Widget, T extends GeoPla
     public abstract C initWidget();
 
     public abstract void executeSelect();
-    
+
     private void setUpLoadListener() {
         loader.addLoadListener(new LoadListener() {
 
@@ -287,7 +292,7 @@ public abstract class GeoPlatformSearchWidget<C extends Widget, T extends GeoPla
             @Override
             public void loaderLoad(LoadEvent le) {
                 setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                        EnumSearchStatus.STATUS_MESSAGE_SEARCH);
+                                EnumSearchStatus.STATUS_MESSAGE_SEARCH);
             }
 
             @Override
@@ -297,10 +302,10 @@ public abstract class GeoPlatformSearchWidget<C extends Widget, T extends GeoPla
                     throw le.exception;
                 } catch (GeoPlatformException e) {
                     setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
-                            EnumSearchStatus.STATUS_MESSAGE_NOT_SEARCH);
+                                    EnumSearchStatus.STATUS_MESSAGE_NOT_SEARCH);
                 } catch (Throwable e) {
                     setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
-                            EnumSearchStatus.STATUS_MESSAGE_SEARCH_ERROR);
+                                    EnumSearchStatus.STATUS_MESSAGE_SEARCH_ERROR);
                 }
             }
         });

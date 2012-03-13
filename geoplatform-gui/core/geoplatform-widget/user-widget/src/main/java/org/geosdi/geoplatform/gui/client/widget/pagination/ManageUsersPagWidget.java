@@ -209,7 +209,7 @@ public class ManageUsersPagWidget
             @Override
             public void onFailure(Throwable caught) {
                 setSearchStatus(SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR,
-                                EnumRoleMessage.STATUS_RETRIEVE_ROLE_ERROR);
+                                "Error retrieving roles");
             }
 
             @Override
@@ -226,21 +226,5 @@ public class ManageUsersPagWidget
                 userPropertiesWidget.show(userDetail, result);
             }
         });
-    }
-
-    private enum EnumRoleMessage {
-
-        STATUS_RETRIEVE_ROLE_ERROR("Error retrieving roles");
-        //
-        private String value;
-
-        EnumRoleMessage(String theValue) {
-            this.value = theValue;
-        }
-
-        @Override
-        public String toString() {
-            return this.value;
-        }
     }
 }

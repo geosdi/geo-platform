@@ -16,6 +16,7 @@
     <source path="configuration" />
     <source path="configuration/mvc" />
     <source path="configuration/action" />
+    <source path="containers" />
     <source path="global" />
     <source path="model" />
     <source path="observable" />

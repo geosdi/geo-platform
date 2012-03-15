@@ -78,4 +78,13 @@ public class PostGISUtility {
         encoder.setMaxOpenPreparedStatements(50);
         return encoder;
     }
+
+    @Override
+    public String toString() {
+        return "PostGISUtility{ " + " hostPostgisDatastore = " + hostPostgisDatastore
+                + ", portPostgisDatastore = " + portPostgisDatastore
+                + ", dbNamePostgisDatastore = " + dbNamePostgisDatastore
+                + ", userNameDBPostgisDatastore = " + userNameDBPostgisDatastore
+                + ", passwordDBPostgisDatastore = " + passwordDBPostgisDatastore + "}";
+    }
 }

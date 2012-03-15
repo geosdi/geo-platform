@@ -61,7 +61,7 @@ public class GPCatalogTabWidget extends GeoPlatformTabWidget {
 
     @Override
     public void initTab() {
-        super.setHeight(650);
+        super.setHeight(700);
     }
 
     @Override

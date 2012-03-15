@@ -35,22 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.tab;
 
-import com.extjs.gxt.ui.client.Style.Orientation;
-import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.HorizontalPanel;
-import com.extjs.gxt.ui.client.widget.Label;
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
-import com.extjs.gxt.ui.client.widget.Text;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.CheckBox;
-import com.extjs.gxt.ui.client.widget.form.CheckBoxGroup;
-import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
-import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
-import com.extjs.gxt.ui.client.widget.layout.ColumnData;
-import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
-import java.util.Collections;
+import org.geosdi.geoplatform.gui.client.widget.components.search.CatalogSearchResultWidget;
+import org.geosdi.geoplatform.gui.client.widget.components.search.CatalogSearchWidget;
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
 
 /**
@@ -67,111 +53,13 @@ public class SearchTabItem extends GeoPlatformTabItem {
 
     @Override
     public final void subclassCallToInit() {
-        super.setHeight(650);
+        super.setHeight(600);
         super.init();
     }
 
     @Override
     public void addComponents() {
-        super.add(this.addSearchPanel());
-        super.add(this.addGridPanel());
-    }
-
-    private LayoutContainer addSearchPanel() {
-        // Search Panel
-        LayoutContainer searchPanel = new LayoutContainer();
-        searchPanel.setLayout(new ColumnLayout());
-        searchPanel.setStyleAttribute("padding", "10px");
-
-        // Search Panel - Left
-        LayoutContainer left = new LayoutContainer();
-        left.setLayout(new ColumnLayout());
-
-        Label searchLabel = new Label("Search Text");
-        searchLabel.setStyleAttribute("color", "#4169E1");
-        searchLabel.setStyleAttribute("font",
-                "normal 14px tahoma, arial, helvetica, sans-serif");
-
-        left.add(searchLabel, new ColumnData(300.0));
-
-        HorizontalPanel panel = new HorizontalPanel();
-        panel.setStyleAttribute("padding-top", "8px");
-
-        TextField<String> searchTextField = new TextField<String>();
-        searchTextField.setWidth(250);
-        panel.add(searchTextField);
-
-        Button searchButton = new Button("Search");
-        searchButton.setStyleAttribute("padding-left", "6px");
-        panel.add(searchButton);
-
-        left.add(panel);
-
-        // Search Panel - Right
-        LayoutContainer right = new LayoutContainer();
-        right.setLayout(new ColumnLayout());
-
-        Label optionsLabel = new Label("Search Options");
-        optionsLabel.setStyleAttribute("color", "#4169E1");
-        optionsLabel.setStyleAttribute("font",
-                "normal 14px tahoma, arial, helvetica, sans-serif");
-
-        right.add(optionsLabel, new ColumnData(240.0));
-
-        HorizontalPanel checkBoxes = new HorizontalPanel();
-        checkBoxes.setStyleAttribute("padding-top", "4px");
-
-        CheckBoxGroup optionsCheckboxgroup = new CheckBoxGroup();
-        optionsCheckboxgroup.setOrientation(Orientation.VERTICAL);
-        checkBoxes.add(optionsCheckboxgroup);
-
-        CheckBox TitleCheckbox = new CheckBox();
-        TitleCheckbox.setBoxLabel("Title");
-        TitleCheckbox.setHideLabel(true);
-        optionsCheckboxgroup.add(TitleCheckbox);
-
-        CheckBox abstractCheckbox = new CheckBox();
-        abstractCheckbox.setBoxLabel("Abstract");
-        abstractCheckbox.setHideLabel(true);
-        optionsCheckboxgroup.add(abstractCheckbox);
-
-        CheckBox keywordsCheckbox = new CheckBox();
-        keywordsCheckbox.setBoxLabel("Keywords");
-        keywordsCheckbox.setHideLabel(true);
-        optionsCheckboxgroup.add(keywordsCheckbox);
-
-        CheckBox allCheckbox = new CheckBox();
-        allCheckbox.setBoxLabel("Select/Deselect all");
-        allCheckbox.setHideLabel(true);
-
-        checkBoxes.add(allCheckbox);
-
-        right.add(checkBoxes);
-
-        searchPanel.add(left, new ColumnData(0.6));
-        searchPanel.add(right, new ColumnData(0.4));
-
-        return searchPanel;
-    }
-
-    private LayoutContainer addGridPanel() {
-        // Grid Panel
-        LayoutContainer gridPanel = new LayoutContainer();
-
-        Text resultLabel = new Text("Search Result");
-        gridPanel.add(resultLabel);
-
-        Grid grid = new Grid(new ListStore(),
-                new ColumnModel(Collections.<ColumnConfig>emptyList()));
-        grid.setBorders(true);
-        gridPanel.add(grid);
-
-        Text operationLabel = new Text("Operations with selected");
-        gridPanel.add(operationLabel);
-
-        Button addLayerButton = new Button("Add To Layer Tree");
-        gridPanel.add(addLayerButton);
-
-        return gridPanel;
+        super.add(new CatalogSearchWidget());
+        super.add(new CatalogSearchResultWidget());
     }
 }

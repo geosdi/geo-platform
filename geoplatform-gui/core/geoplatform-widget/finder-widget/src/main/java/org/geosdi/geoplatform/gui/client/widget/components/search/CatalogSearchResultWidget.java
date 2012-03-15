@@ -33,14 +33,50 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components;
+package org.geosdi.geoplatform.gui.client.widget.components.search;
 
+import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.user.client.Element;
+import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.SummaryRecordsContainer;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class CatalogSearchContainer extends LayoutContainer {
+public class CatalogSearchResultWidget extends LayoutContainer {
+
+    public CatalogSearchResultWidget() {
+        setStyleAttribute("padding", "10px");
+    }
+
+    @Override
+    protected void onRender(Element parent, int index) {
+        super.onRender(parent, index);
+
+        Label resultLabel = new Label("Search Result");
+        resultLabel.setStyleAttribute("color", "#4169E1");
+        resultLabel.setStyleAttribute("font",
+                "normal 14px tahoma, arial, helvetica, sans-serif");
+        resultLabel.setStyleAttribute("padding-bottom", "5px");
+
+        add(resultLabel);
+
+
+        add(new SummaryRecordsContainer());
+
+        Label operationLabel = new Label("Operations with selected");
+        operationLabel.setStyleAttribute("color", "#4169E1");
+        operationLabel.setStyleAttribute("font",
+                "normal 14px tahoma, arial, helvetica, sans-serif");
+        resultLabel.setStyleAttribute("padding-top", "10px");
+        resultLabel.setStyleAttribute("padding-bottom", "5px");
+
+        add(operationLabel);
+
+        Button addLayerButton = new Button("Add To Layer Tree");
+        add(addLayerButton);
+    }
 }

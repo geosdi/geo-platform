@@ -84,9 +84,10 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
             setUpLoadListener();
             initWidget();
             if (widget == null) {
-                throw new NullPointerException("Widget must be not null (create widget into initWidget method).");
+                throw new NullPointerException(
+                        "Widget must be not null (create widget into initWidget method).");
             }
-            this.panel.add(widget);
+            addWidgets();
         }
     }
 
@@ -175,5 +176,13 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
         this.panel = new ContentPanel();
         this.panel.setHeaderVisible(false);
         this.panel.setLayout(new FitLayout());
+    }
+
+    private void addWidgets() {
+        this.panel.add(widget);
+        if (this.toolBar == null) {
+            throw new NullPointerException("The Toolbar must not be null");
+        }
+        this.panel.setBottomComponent(this.toolBar);
     }
 }

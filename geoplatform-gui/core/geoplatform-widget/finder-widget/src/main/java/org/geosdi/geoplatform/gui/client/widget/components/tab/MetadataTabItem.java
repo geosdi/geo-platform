@@ -51,7 +51,7 @@ public class MetadataTabItem extends GeoPlatformTabItem {
 
     @Override
     public final void subclassCallToInit() {
-        super.setHeight(650);
+        super.setHeight(600);
         super.init();
     }
 

@@ -80,10 +80,13 @@ import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@WebService(endpointInterface = "org.geosdi.geoplatform.services.GPPublisherService")
-public class GPPublisherServiceImpl implements GPPublisherService {
+@WebService(
+endpointInterface = "org.geosdi.geoplatform.services.GPPublisherService")
+public class GPPublisherServiceImpl implements GPPublisherService,
+        InitializingBean {
 
     private Logger logger = LoggerFactory.getLogger(
             GPPublisherServiceImpl.class);
@@ -126,6 +129,11 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                 + ", PWD: " + RESTPW + ", USING DIR: " + geoportalDir);
     }
 
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        logger.info("DB_POSTGIS_PARAMETER @@@@@@@@@@@@@@@@@@@@@@@@ " + postGISUtility);
+    }
+
     private String manageGeoportalDir(String geoportalDir) {
         File geoportalDirFile;
         if (geoportalDir != null) {
@@ -146,12 +154,14 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             geoportalDirFile = PublishUtility.generateGeoPortalDirInUserHome();
         }
         if (!geoportalDirFile.exists()) {
-            logger.error("@@@@@@@@@@@ Impossible to create GeoPortalDir @@@@@@@@@@@@@@@@");
+            logger.error(
+                    "@@@@@@@@@@@ Impossible to create GeoPortalDir @@@@@@@@@@@@@@@@");
             throw new SecurityException("Can't Create " + geoportalDir);
         }
         String pathGeoPortalDir = geoportalDirFile.getAbsolutePath();
         if (!pathGeoPortalDir.endsWith(System.getProperty("file.separator"))) {
-            pathGeoPortalDir = pathGeoPortalDir + System.getProperty("file.separator");
+            pathGeoPortalDir = pathGeoPortalDir + System.getProperty(
+                    "file.separator");
         }
         return pathGeoPortalDir;
     }
@@ -171,7 +181,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             ResourceNotFoundFault {
         if (!layerDatasource.startsWith(RESTURL)) {
             //The requested style can't be loaded from the rest url configured.
-            throw new ResourceNotFoundFault("The requested style can't be "
+            throw new ResourceNotFoundFault(
+                    "The requested style can't be "
                     + "loaded from the rest url configured on the publisher service.");
         }
         return this.restReader.getSLD(styleName);
@@ -182,7 +193,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         RESTLayer restLayer = this.restReader.getLayer(layerName);
         List<LayerAttribute> result = Lists.newArrayList();
         for (Attribute att : this.restReader.getFeatureType(restLayer).getAttributes()) {
-            LayerAttribute layerAttribute = new LayerAttribute(att.getName(), att.getBinding());
+            LayerAttribute layerAttribute = new LayerAttribute(att.getName(),
+                    att.getBinding());
             result.add(layerAttribute);
         }
         return result;
@@ -207,7 +219,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     @Override
     public boolean publish(String sessionID, String workspace,
             String dataStoreName, String layerName) throws ResourceNotFoundFault, FileNotFoundException {
-        logger.info("\n Start to publish " + layerName + " in " + workspace + ":" + dataStoreName);
+        logger.info(
+                "\n Start to publish " + layerName + " in " + workspace + ":" + dataStoreName);
         return this.unscheduleJob(layerName);
     }
 
@@ -365,7 +378,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
                 destinationDir = tempUserDir;
                 if (entryName.equals("")) {
                     continue;
-                } else if (entryName.endsWith(".tif") || entryName.endsWith(".tiff")) {
+                } else if (entryName.endsWith(".tif") || entryName.endsWith(
+                        ".tiff")) {
                     logger.info("INFO: Found geotiff file " + entryName);
                     tifEntryNameList.add(entryName);
                     destinationDir = tempUserTifDir;
@@ -383,14 +397,17 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             for (ZipEntry sldEntry : sldEntryList) {
                 int lastIndex = sldEntry.getName().lastIndexOf('/');
                 int endNamePos = sldEntry.getName().lastIndexOf('.');
-                String sldEntryName = sldEntry.getName().substring(lastIndex + 1, endNamePos);
+                String sldEntryName = sldEntry.getName().substring(lastIndex + 1,
+                        endNamePos);
                 System.out.println("sldEntryName: " + sldEntryName);
                 if (this.isDuplicatedName(sldEntryName, tifEntryNameList)) {//geotiff sld
                     logger.info("in geotiff sld");
-                    PublishUtility.extractEntryToFile(sldEntry, zipSrc, tempUserTifDir);
+                    PublishUtility.extractEntryToFile(sldEntry, zipSrc,
+                            tempUserTifDir);
                 } else {//shp sld
                     logger.info("in shp sld");
-                    PublishUtility.extractEntryToFile(sldEntry, zipSrc, tempUserDir);
+                    PublishUtility.extractEntryToFile(sldEntry, zipSrc,
+                            tempUserDir);
                 }
             }// fine decompressione
         } catch (Exception e) {
@@ -401,8 +418,10 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             } catch (IOException ex) {
             }
         }
-        infoShapeList.addAll(this.analyzeShpList(shpEntryNameList, userName, tempUserDir, tempUserZipDir));
-        infoShapeList.addAll(this.analyzeTifList(tifEntryNameList, userName, tempUserTifDir));
+        infoShapeList.addAll(this.analyzeShpList(shpEntryNameList, userName,
+                tempUserDir, tempUserZipDir));
+        infoShapeList.addAll(this.analyzeTifList(tifEntryNameList, userName,
+                tempUserTifDir));
         // svuota la cartella degli shape <tmp>/geoportal/shp
         File directory = new File(tempUserDir);
         File[] files = directory.listFiles();
@@ -414,7 +433,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
 
     private boolean isDuplicatedName(String sldName, List<String> tifEntryNameList) {
         for (String tifEntryName : tifEntryNameList) {
-            String tifName = tifEntryName.substring(0, tifEntryName.lastIndexOf('.'));
+            String tifName = tifEntryName.substring(0, tifEntryName.lastIndexOf(
+                    '.'));
             if (tifName.equals(sldName)) {
                 return true;
             }
@@ -428,10 +448,12 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         for (String tifFileName : tifEntryNameList) {
             LayerInfo info = new LayerInfo();
             info.isShp = false;
-            String origName = tifFileName.substring(0, tifFileName.lastIndexOf("."));
+            String origName = tifFileName.substring(0, tifFileName.lastIndexOf(
+                    "."));
             info.name = userName + "_" + origName;
             File oldGeotifFile = new File(tempUserTifDir, tifFileName);
-            File newGeoTifFile = PublishUtility.copyFile(oldGeotifFile, tempUserTifDir, info.name + ".tif", true);
+            File newGeoTifFile = PublishUtility.copyFile(oldGeotifFile,
+                    tempUserTifDir, info.name + ".tif", true);
             oldGeotifFile.delete();
             info.epsg = "EPSG:" + this.getCRSFromGeotiff(newGeoTifFile);
             String SLDFileName = origName + ".sld";
@@ -448,7 +470,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
 
     private String publishSLD(File fileSLD, String layerName) {
         reload();
-        logger.info("\n INFO: FOUND STYLE FILE. TRYING TO PUBLISH WITH " + layerName + " NAME");
+        logger.info(
+                "\n INFO: FOUND STYLE FILE. TRYING TO PUBLISH WITH " + layerName + " NAME");
         boolean returnPS = false;
         if (existsStyle(layerName)) {
             restPublisher.removeStyle(layerName);
@@ -507,7 +530,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             }
             // fine analisi shape
             infoShapeList.add(info);
-            PublishUtility.compressFiles(tempUserZipDir, tempUserDir, info.name + ".zip",
+            PublishUtility.compressFiles(tempUserZipDir, tempUserDir,
+                    info.name + ".zip",
                     origName, info.name); // questo metodo comprime in un file <nomeshape>.zip gli shp file associati: shp, dbf, shx e prj
         }
         return infoShapeList;
@@ -550,7 +574,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
      * workspace
      */
     public boolean existsDataStore(String workspace, String dataStoreName) {
-        RESTDataStoreList workspaceDataStores = restReader.getDatastores(workspace);
+        RESTDataStoreList workspaceDataStores = restReader.getDatastores(
+                workspace);
         for (int i = 0; i < workspaceDataStores.size(); i++) {
             if (workspaceDataStores.get(i).getName().equals(dataStoreName)) {
                 return true;
@@ -589,7 +614,9 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     private Integer getCRSFromGeotiff(File file) {
         Integer code = null;
         try {
-            GeoTiffReader geotiffReader = new GeoTiffReader(file, new Hints(Hints.FORCE_LONGITUDE_FIRST_AXIS_ORDER, Boolean.TRUE));
+            GeoTiffReader geotiffReader = new GeoTiffReader(file,
+                    new Hints(Hints.FORCE_LONGITUDE_FIRST_AXIS_ORDER,
+                    Boolean.TRUE));
             GridCoverage2D coverage = (GridCoverage2D) geotiffReader.read(null);
             CoordinateReferenceSystem crs = coverage.getCoordinateReferenceSystem2D();
             code = CRS.lookupEpsgCode(crs, false);
@@ -614,32 +641,39 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         String epsg = "EPSG:" + this.getCRSFromGeotiff(file);
         String sld = "default_raster";
 //        String dataStoreName = username + "_" + PublishUtility.tifDirName;
-        String fileName = username + "_" + file.getName().substring(0, file.getName().lastIndexOf("."));
+        String fileName = username + "_" + file.getName().substring(0,
+                file.getName().lastIndexOf("."));
         File fileInTifDir = null;
         //TODO: Se il layer esiste ma è richiesto di fare overwrite bisogna sovrascriverlo: cancellare ed aggiungere il file
         if (!existsDataStore(userWorkspace, fileName)) {
-            String pathInTifDir = this.geoportalDir + username + System.getProperty("file.separator")
-                    + PublishUtility.tifDirName + System.getProperty("file.separator");
-            fileInTifDir = PublishUtility.copyFile(file, pathInTifDir, fileName + ".tif", overwrite);
+            String pathInTifDir = this.geoportalDir + username + System.getProperty(
+                    "file.separator")
+                    + PublishUtility.tifDirName + System.getProperty(
+                    "file.separator");
+            fileInTifDir = PublishUtility.copyFile(file, pathInTifDir,
+                    fileName + ".tif", overwrite);
             if (fileInTifDir == null) {
                 infoPreview = new InfoPreview(fileName,
                         "The file " + fileInTifDir + " already exists, you must overwrite it");
                 return infoPreview;
             }
-            infoPreview = this.publishTifInPreview(username, userWorkspace, fileInTifDir, fileName, epsg, sld);
+            infoPreview = this.publishTifInPreview(username, userWorkspace,
+                    fileInTifDir, fileName, epsg, sld);
         } else {
             infoPreview = getTIFURLByLayerName(username, fileName);
             infoPreview.setMessage(
                     "The data store " + fileName + " in " + userWorkspace + " already exists");
         }
-        this.addTifCleanerJob(userWorkspace, fileName, fileInTifDir.getAbsolutePath());
+        this.addTifCleanerJob(userWorkspace, fileName,
+                fileInTifDir.getAbsolutePath());
         return infoPreview;
     }
 
     private boolean unscheduleJob(String completeLayerName) {
         boolean result = false;
         try {
-            TriggerKey key = new TriggerKey(completeLayerName, PublisherScheduler.PUBLISHER_GROUP);
+            TriggerKey key = new TriggerKey(completeLayerName,
+                    PublisherScheduler.PUBLISHER_GROUP);
             result = this.scheduler.getScheduler().unscheduleJob(key);
             logger.debug("Job unscheduled: " + result);
         } catch (SchedulerException ex) {
@@ -650,19 +684,23 @@ public class GPPublisherServiceImpl implements GPPublisherService {
 
     private void addShpCleanerJob(String userWorkspace, InfoPreview infoPreview) {
         String layerName = infoPreview.getDataStoreName();
-        TriggerKey triggerKey = new TriggerKey(userWorkspace + ":" + layerName, PublisherScheduler.PUBLISHER_GROUP);
+        TriggerKey triggerKey = new TriggerKey(userWorkspace + ":" + layerName,
+                PublisherScheduler.PUBLISHER_GROUP);
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.add(Calendar.MINUTE, 30);
-        Trigger trigger = TriggerBuilder.newTrigger().forJob(this.scheduler.getCleanerJobShpDetail()).
+        Trigger trigger = TriggerBuilder.newTrigger().forJob(
+                this.scheduler.getCleanerJobShpDetail()).
                 withIdentity(triggerKey).
                 withDescription("Runs after 30 minutes").
                 startAt(calendar.getTime()).
                 withSchedule(CalendarIntervalScheduleBuilder.calendarIntervalSchedule().
                 withMisfireHandlingInstructionFireAndProceed()).
                 build();
-        trigger.getJobDataMap().put(PublisherShpCleanerJob.USER_WORKSPACE, userWorkspace);
+        trigger.getJobDataMap().put(PublisherShpCleanerJob.USER_WORKSPACE,
+                userWorkspace);
         trigger.getJobDataMap().put(PublisherShpCleanerJob.LAYER_NAME, layerName);
-        trigger.getJobDataMap().put(PublisherShpCleanerJob.PUBLISHER_SERVICE, this);
+        trigger.getJobDataMap().put(PublisherShpCleanerJob.PUBLISHER_SERVICE,
+                this);
         this.scheduleTrigger(triggerKey, trigger);
     }
 
@@ -685,20 +723,24 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     }
 
     private void addTifCleanerJob(String userWorkspace, String layerName, String filePath) {
-        TriggerKey triggerKey = new TriggerKey(userWorkspace + ":" + layerName, PublisherScheduler.PUBLISHER_GROUP);
+        TriggerKey triggerKey = new TriggerKey(userWorkspace + ":" + layerName,
+                PublisherScheduler.PUBLISHER_GROUP);
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.add(Calendar.MINUTE, 30);
-        Trigger trigger = TriggerBuilder.newTrigger().forJob(this.scheduler.getCleanerJobTifDetail()).
+        Trigger trigger = TriggerBuilder.newTrigger().forJob(
+                this.scheduler.getCleanerJobTifDetail()).
                 withIdentity(triggerKey).
                 withDescription("Runs after 30 minutes").
                 startAt(calendar.getTime()).
                 withSchedule(CalendarIntervalScheduleBuilder.calendarIntervalSchedule().
                 withMisfireHandlingInstructionFireAndProceed()).
                 build();
-        trigger.getJobDataMap().put(PublisherTifCleanerJob.USER_WORKSPACE, userWorkspace);
+        trigger.getJobDataMap().put(PublisherTifCleanerJob.USER_WORKSPACE,
+                userWorkspace);
         trigger.getJobDataMap().put(PublisherTifCleanerJob.FILE_NAME, layerName);
         trigger.getJobDataMap().put(PublisherTifCleanerJob.FILE_PATH, filePath);
-        trigger.getJobDataMap().put(PublisherTifCleanerJob.PUBLISHER_SERVICE, this);
+        trigger.getJobDataMap().put(PublisherTifCleanerJob.PUBLISHER_SERVICE,
+                this);
         this.scheduleTrigger(triggerKey, trigger);
     }
 
@@ -717,28 +759,36 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     public List<InfoPreview> uploadZIPInPreview(String sessionID, String userName, File file) throws ResourceNotFoundFault {
         logger.info("Call to uploadZIPInPreview");
         reload();
-        String tempUserDir = PublishUtility.createDir(this.geoportalDir + userName);
-        String tempUserZipDir = PublishUtility.createDir(tempUserDir + PublishUtility.zipDirName);
-        String tempUserTifDir = PublishUtility.createDir(tempUserDir + PublishUtility.tifDirName);
+        String tempUserDir = PublishUtility.createDir(
+                this.geoportalDir + userName);
+        String tempUserZipDir = PublishUtility.createDir(
+                tempUserDir + PublishUtility.zipDirName);
+        String tempUserTifDir = PublishUtility.createDir(
+                tempUserDir + PublishUtility.tifDirName);
         // decompress the zip file in the <tmp>/shp directory, read info and create <layername>.zip files for each layer in <tmp>/zip
         // and decompress the geotiff files in user/tiff direcotry
-        List<LayerInfo> infoShapeList = getInfoFromCompressedShape(userName, file,
+        List<LayerInfo> infoShapeList = getInfoFromCompressedShape(userName,
+                file,
                 tempUserDir, tempUserZipDir, tempUserTifDir);
         if (infoShapeList.isEmpty()) {
-            throw new ResourceNotFoundFault("The ZIP archive does not contain shp or geotiff files");
+            throw new ResourceNotFoundFault(
+                    "The ZIP archive does not contain shp or geotiff files");
         }
         List<InfoPreview> infoPreviewList = new ArrayList<InfoPreview>();
         String userWorkspace = getWorkspace(userName);
         InfoPreview infoPreview = null;
         for (LayerInfo info : infoShapeList) {
             if (info.isShp) {
-                infoPreview = this.publishShpInPreview(userName, userWorkspace, info, tempUserZipDir);
+                infoPreview = this.publishShpInPreview(userName, userWorkspace,
+                        info, tempUserZipDir);
                 this.addShpCleanerJob(userWorkspace, infoPreview);
             } else {
                 File fileInTifDir = new File(tempUserTifDir, info.name + ".tif");
-                infoPreview = this.publishTifInPreview(userName, userWorkspace, fileInTifDir, info.name,
+                infoPreview = this.publishTifInPreview(userName, userWorkspace,
+                        fileInTifDir, info.name,
                         info.epsg, info.sld);
-                this.addTifCleanerJob(userWorkspace, info.name, fileInTifDir.getAbsolutePath());
+                this.addTifCleanerJob(userWorkspace, info.name,
+                        fileInTifDir.getAbsolutePath());
             }
             infoPreviewList.add(infoPreview);
         }
@@ -748,13 +798,15 @@ public class GPPublisherServiceImpl implements GPPublisherService {
     private InfoPreview publishTifInPreview(String userName, String userWorkspace,
             File fileInTifDir, String fileName, String epsg, String sld) {
         InfoPreview infoPreview = null;
-        GeoTiffOverviews.overviewTiff(overviewsConfiguration, fileInTifDir.getAbsolutePath());
+        GeoTiffOverviews.overviewTiff(overviewsConfiguration,
+                fileInTifDir.getAbsolutePath());
         try {
 //                logger.info(
 //                        "\n INFO: STYLE TO PUBLISH " + info.sld + " NAME :" + info.name);
 //                logger.info(
 //                        "\n INFO: CREATE DATASTORE " + userWorkspace + " NAME :" + info.name);
-            RESTCoverageStore store = restPublisher.publishExternalGeoTIFF(userWorkspace,
+            RESTCoverageStore store = restPublisher.publishExternalGeoTIFF(
+                    userWorkspace,
                     fileName, fileInTifDir, epsg, sld);
             if (store != null) {
                 logger.info(
@@ -772,7 +824,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
             logger.info("Some problems occured when publishing " + fileName
                     + " into the " + userWorkspace + " workspace");
             ex.printStackTrace();
-            infoPreview = new InfoPreview(fileName, "Some problems occured when publishing "
+            infoPreview = new InfoPreview(fileName,
+                    "Some problems occured when publishing "
                     + fileName + " into the " + userWorkspace + " workspace");
         }
         // calculate the PNG URL to return
@@ -786,11 +839,14 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         String datatStoreName = info.name;
         // check if the dataStore already exists
         if (!existsDataStore(userWorkspace, datatStoreName)) {
-            GSPostGISDatastoreEncoder encoder = postGISUtility.generateEncoder(datatStoreName);
+            GSPostGISDatastoreEncoder encoder = postGISUtility.generateEncoder(
+                    datatStoreName);
             restPublisher.createPostGISDatastore(userName, encoder);
         } else {
-            boolean result = restPublisher.unpublishFeatureType(userWorkspace, datatStoreName, info.name);
-            logger.info("Removing existing FeatureType: " + info.name + " with result: " + result);
+            boolean result = restPublisher.unpublishFeatureType(userWorkspace,
+                    datatStoreName, info.name);
+            logger.info(
+                    "Removing existing FeatureType: " + info.name + " with result: " + result);
         }
         // create the <layername>.zip file
         String fileName = tempUserZipDir + info.name + ".zip";
@@ -801,7 +857,8 @@ public class GPPublisherServiceImpl implements GPPublisherService {
         logger.info(
                 "\n INFO: CREATE DATASTORE " + userWorkspace + " NAME :" + info.name);
         try {
-            boolean published = restPublisher.publishShp(userWorkspace, datatStoreName, info.name, tempFile, info.epsg, info.sld);
+            boolean published = restPublisher.publishShp(userWorkspace,
+                    datatStoreName, info.name, tempFile, info.epsg, info.sld);
             if (published) {
                 logger.info(
                         info.name + " correctly published in the " + userWorkspace + " workspace " + info.name);

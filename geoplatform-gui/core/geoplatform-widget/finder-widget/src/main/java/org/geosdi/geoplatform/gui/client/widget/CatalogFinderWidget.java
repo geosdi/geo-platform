@@ -87,7 +87,7 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
 
     @Override
     public void initSize() {
-        super.setSize(1050, 650);
+        super.setSize(950, 600);
         super.setHeading("GeoPlatform Catalog Finder UI");
     }
 

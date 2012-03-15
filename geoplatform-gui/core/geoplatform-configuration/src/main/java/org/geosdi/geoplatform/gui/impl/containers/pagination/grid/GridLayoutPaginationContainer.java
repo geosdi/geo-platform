@@ -46,9 +46,7 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public abstract class GridLayoutPaginationContainer<T extends GeoPlatformBeanModel>
-        extends LayoutPaginationContainer<Grid, T> {
-
-    protected Grid<T> grid;
+        extends LayoutPaginationContainer<Grid<T>, T> {
 
     public GridLayoutPaginationContainer(boolean lazy, int thePageSize) {
         super(lazy, thePageSize);
@@ -59,15 +57,13 @@ public abstract class GridLayoutPaginationContainer<T extends GeoPlatformBeanMod
     }
 
     @Override
-    public Grid initWidget() {
+    public void initWidget() {
         ColumnModel cm = prepareColumnModel();
 
-        grid = new Grid<T>(store, cm);
-        grid.setBorders(true);
+        super.widget = new Grid<T>(store, cm);
+        super.widget.setBorders(true);
 
         setGridProperties();
-
-        return this.grid;
     }
 
     public abstract void setGridProperties();

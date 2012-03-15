@@ -69,14 +69,14 @@ public class SummaryRecordsContainer extends GridLayoutPaginationContainer<Summa
 
     @Override
     public void setGridProperties() {
-        this.grid.setSize(600, 350);
-        this.grid.getView().setForceFit(true);
-        this.grid.setLoadMask(true);
+        super.widget.setSize(600, 350);
+        super.widget.getView().setForceFit(true);
+        super.widget.setLoadMask(true);
 
-        this.grid.setAutoExpandColumn(SummaryRecordKeyValue.title.toString());
+        super.widget.setAutoExpandColumn(SummaryRecordKeyValue.title.toString());
 
-        this.grid.addPlugin(this.rowExpander);
-        this.grid.addPlugin(this.sm);
+        super.widget.addPlugin(this.rowExpander);
+        super.widget.addPlugin(this.sm);
     }
 
     @Override

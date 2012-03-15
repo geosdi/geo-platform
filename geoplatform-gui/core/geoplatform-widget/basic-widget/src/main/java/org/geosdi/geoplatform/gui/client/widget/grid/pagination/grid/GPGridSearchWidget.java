@@ -50,9 +50,7 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPGridSearchWidget<T extends GeoPlatformBeanModel>
-        extends GeoPlatformSearchWidget<Grid, T> {
-
-    protected Grid<T> grid;
+        extends GeoPlatformSearchWidget<Grid<T>, T> {
 
     public GPGridSearchWidget(boolean lazy) {
         super(lazy);
@@ -63,19 +61,19 @@ public abstract class GPGridSearchWidget<T extends GeoPlatformBeanModel>
     }
 
     @Override
-    public Grid initWidget() {
+    public void initWidget() {
         ColumnModel cm = prepareColumnModel();
 
-        grid = new Grid<T>(store, cm);
-        grid.setBorders(true);
+        super.widget = new Grid<T>(store, cm);
+        super.widget.setBorders(true);
 
-        grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        super.widget.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
+        super.widget.addListener(Events.CellClick, new Listener<BaseEvent>() {
 
             @Override
             public void handleEvent(BaseEvent be) {
-                if (grid.getSelectionModel().getSelection().size() > 0) {
+                if (widget.getSelectionModel().getSelection().size() > 0) {
                     selectButton.enable();
                 } else {
                     selectButton.disable();
@@ -83,7 +81,7 @@ public abstract class GPGridSearchWidget<T extends GeoPlatformBeanModel>
             }
         });
 
-        grid.addListener(Events.CellDoubleClick, new Listener<BaseEvent>() {
+        super.widget.addListener(Events.CellDoubleClick, new Listener<BaseEvent>() {
 
             @Override
             public void handleEvent(BaseEvent be) {
@@ -92,8 +90,6 @@ public abstract class GPGridSearchWidget<T extends GeoPlatformBeanModel>
         });
 
         setGridProperties();
-
-        return this.grid;
     }
 
     public abstract void setGridProperties();

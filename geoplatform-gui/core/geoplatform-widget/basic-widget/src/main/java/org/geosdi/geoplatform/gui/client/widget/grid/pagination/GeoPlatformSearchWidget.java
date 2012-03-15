@@ -186,7 +186,11 @@ public abstract class GeoPlatformSearchWidget<C extends Widget, T extends GeoPla
 
         formPanel.add(searchFieldSet);
 
-        formPanel.add(this.initWidget());
+        initWidget();
+        if (widget == null) {
+            throw new NullPointerException("Widget must be not null (create widget into initWidget method).");
+        }
+        formPanel.add(widget);
 
         this.searchStatus = new SearchStatus();
         searchStatus.setAutoWidth(true);
@@ -274,7 +278,7 @@ public abstract class GeoPlatformSearchWidget<C extends Widget, T extends GeoPla
 
     public abstract void createStore();
 
-    public abstract C initWidget();
+    public abstract void initWidget();
 
     public abstract void executeSelect();
 

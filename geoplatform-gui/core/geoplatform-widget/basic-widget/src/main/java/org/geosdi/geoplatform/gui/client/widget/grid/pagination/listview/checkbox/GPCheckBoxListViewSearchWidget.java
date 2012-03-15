@@ -47,9 +47,7 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class GPCheckBoxListViewSearchWidget<T extends GeoPlatformBeanModel>
-        extends GeoPlatformSearchWidget<CheckBoxListView, T> {
-
-    protected CheckBoxListView<T> checkBoxListView;
+        extends GeoPlatformSearchWidget<CheckBoxListView<T>, T> {
 
     public GPCheckBoxListViewSearchWidget(boolean lazy, int pageSize) {
         super(lazy, pageSize);
@@ -60,11 +58,11 @@ public abstract class GPCheckBoxListViewSearchWidget<T extends GeoPlatformBeanMo
     }
 
     @Override
-    public CheckBoxListView initWidget() {
-        this.checkBoxListView = new CheckBoxListView<T>();
-        this.checkBoxListView.setStore(store);
+    public void initWidget() {
+        super.widget = new CheckBoxListView<T>();
+        super.widget.setStore(store);
 
-        this.checkBoxListView.getSelectionModel().addSelectionChangedListener(
+        super.widget.getSelectionModel().addSelectionChangedListener(
                 new SelectionChangedListener<T>() {
 
                     @Override
@@ -74,8 +72,6 @@ public abstract class GPCheckBoxListViewSearchWidget<T extends GeoPlatformBeanMo
                 });
 
         setCheckBoxListViewProperties();
-
-        return checkBoxListView;
     }
 
     public abstract void changeSelection(SelectionChangedEvent<T> s);

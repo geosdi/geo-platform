@@ -48,8 +48,6 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 public abstract class CheckBoxListViewLayoutPaginationContainer<T extends GeoPlatformBeanModel>
         extends LayoutPaginationContainer<CheckBoxListView<T>, T> {
 
-    protected CheckBoxListView<T> checkBoxListView;
-
     public CheckBoxListViewLayoutPaginationContainer(boolean lazy, int thePageSize) {
         super(lazy, thePageSize);
     }
@@ -59,13 +57,11 @@ public abstract class CheckBoxListViewLayoutPaginationContainer<T extends GeoPla
     }
 
     @Override
-    public CheckBoxListView initWidget() {
-        this.checkBoxListView = new CheckBoxListView<T>();
-        this.checkBoxListView.setStore(store);
+    public void initWidget() {
+        super.widget = new CheckBoxListView<T>();
+        super.widget.setStore(store);
 
         setCheckBoxListViewProperties();
-
-        return checkBoxListView;
     }
 
     public abstract void changeSelection(SelectionChangedEvent<T> s);

@@ -84,7 +84,7 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
             setUpLoadListener();
             initWidget();
             if (widget == null) {
-                throw new NullPointerException("Widget must not be null.");
+                throw new NullPointerException("Widget must be not null (create widget into initWidget method).");
             }
             this.panel.add(widget);
         }
@@ -128,7 +128,7 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
      */
     public abstract void createStore();
 
-    public abstract C initWidget();
+    public abstract void initWidget();
 
     /**
      * Create Load Listener to have control on RPC Call

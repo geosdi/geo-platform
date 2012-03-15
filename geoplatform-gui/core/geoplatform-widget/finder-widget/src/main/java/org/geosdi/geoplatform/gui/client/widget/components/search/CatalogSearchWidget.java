@@ -97,12 +97,12 @@ public class CatalogSearchWidget extends LayoutContainer {
 
         right.add(optionsLabel, new ColumnData(240.0));
 
-        HorizontalPanel checkBoxes = new HorizontalPanel();
-        checkBoxes.setStyleAttribute("padding-top", "4px");
+//        HorizontalPanel checkBoxes = new HorizontalPanel();
+//        checkBoxes.setStyleAttribute("padding-top", "4px");
 
         CheckBoxGroup optionsCheckboxgroup = new CheckBoxGroup();
         optionsCheckboxgroup.setOrientation(Orientation.VERTICAL);
-        checkBoxes.add(optionsCheckboxgroup);
+//        checkBoxes.add(optionsCheckboxgroup);
 
         CheckBox TitleCheckbox = new CheckBox();
         TitleCheckbox.setBoxLabel("Title");
@@ -118,14 +118,16 @@ public class CatalogSearchWidget extends LayoutContainer {
         keywordsCheckbox.setBoxLabel("Keywords");
         keywordsCheckbox.setHideLabel(true);
         optionsCheckboxgroup.add(keywordsCheckbox);
+        
+        right.add(optionsCheckboxgroup);
 
         CheckBox allCheckbox = new CheckBox();
         allCheckbox.setBoxLabel("Select/Deselect all");
         allCheckbox.setHideLabel(true);
 
-        checkBoxes.add(allCheckbox);
+//        checkBoxes.add(allCheckbox);
 
-        right.add(checkBoxes);
+        right.add(allCheckbox);
 
         add(left, new ColumnData(0.6));
         add(right, new ColumnData(0.4));

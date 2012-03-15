@@ -35,15 +35,19 @@
  */
 package org.geosdi.geoplatform.services;
 
+import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import org.codehaus.jra.Delete;
 import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
+import org.codehaus.jra.Post;
 import org.codehaus.jra.Put;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.responce.ServerCSWDTO;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
@@ -65,15 +69,22 @@ public interface GeoPlatformCSWService {
     @HttpResource(location = "/server/csw")
     Long insertServerCSW(@WebParam(name = "server") GeoPlatformServer server);
 
+    @Post
+    @HttpResource(location = "/csw/server")
+    ServerCSWDTO saveServerCSW(@WebParam(name = "id") Long id,
+                               @WebParam(name = "alias") String alias,
+                               @WebParam(name = "serverUrl") String serverUrl)
+            throws IllegalParameterFault, ResourceNotFoundFault;
+
     @Delete
     @HttpResource(location = "/server/csw/{serverID}")
     boolean deleteServerCSW(@WebParam(name = "serverID") Long serverID)
             throws ResourceNotFoundFault;
-    
-//    @Get
-//    @HttpResource(location = "/csw/servers")
-//    @WebResult(name = "cswServer")
-//    List<ServerDTO> getAllCSWServers();
+
+    @Get
+    @HttpResource(location = "/server/csw/all")
+    @WebResult(name = "ServersCSW")
+    List<ServerCSWDTO> getAllCSWServers();
 
     @Get
     @HttpResource(location = "/server/csw/{serverID}")
@@ -81,12 +92,13 @@ public interface GeoPlatformCSWService {
     GeoPlatformServer getServerDetailCSW(
             @WebParam(name = "serverID") Long serverID)
             throws ResourceNotFoundFault;
-//
-//    @Get
-//    @HttpResource(location = "/csw/server/{serverUrl}")
-//    @WebResult(name = "Servers")
-//    ServerDTO getShortServer(@WebParam(name = "serverUrl") String serverUrl)
-//            throws ResourceNotFoundFault;
+
+    @Get
+    @HttpResource(location = "/server/csw/{serverUrl}")
+    @WebResult(name = "ServerCSW")
+    ServerCSWDTO getShortServerCSW(
+            @WebParam(name = "serverUrl") String serverUrl)
+            throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/server/csw")
@@ -96,18 +108,11 @@ public interface GeoPlatformCSWService {
             throws ResourceNotFoundFault;
 //
 //    @Get
-//    @HttpResource(location = "/wms/capabilities/{id}")
+//    @HttpResource(location = "/server/csw/capabilities/{id}")
 //    @WebResult(name = "Capabilities")
 //    ServerDTO getCapabilities(
 //            @WebParam(name = "request") RequestByID request,
 //            @WebParam(name = "token") String token)
 //            throws ResourceNotFoundFault;
-//
-//    @Post
-//    @HttpResource(location = "/csw/server")
-//    ServerDTO saveServer(@WebParam(name = "id") Long id,
-//                         @WebParam(name = "aliasServerName") String aliasServerName,
-//                         @WebParam(name = "serverUrl") String serverUrl)
-//            throws IllegalParameterFault, ResourceNotFoundFault;
     //</editor-fold>
 }

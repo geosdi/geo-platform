@@ -35,10 +35,17 @@
  */
 package org.geosdi.geoplatform.services;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.responce.ServerCSWDTO;
+import org.geosdi.geoplatform.services.development.CSWEntityCorrectness;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -77,6 +84,36 @@ class CSWServiceImpl {
     }
 
     /**
+     * @see GeoPlatformCSWService#saveServerCSW(java.lang.Long, java.lang.String, java.lang.String)
+     */
+    ServerCSWDTO saveServerCSW(Long id, String alias, String serverUrl)
+            throws IllegalParameterFault, ResourceNotFoundFault {
+        try {
+            URL serverURL = new URL(serverUrl);
+        } catch (MalformedURLException e) {
+            logger.error("MalformedURLException: " + e);
+            throw new IllegalParameterFault("Malformed URL");
+        }
+
+        GeoPlatformServer server;
+        if (id != null) { // Existent server
+            server = serverDao.find(id);
+            CSWEntityCorrectness.checkServerCSW(server); // TODO assert
+        } else { // New server
+            if (serverDao.findByServerUrl(serverUrl) == null ? false : true) {
+                throw new IllegalParameterFault("Duplicated Server URL");
+            }
+            server = new GeoPlatformServer();
+            server.setServerType(GPCapabilityType.CSW);
+        }
+        server.setAliasName(alias);
+        server.setServerUrl(serverUrl);
+        serverDao.save(server);
+
+        return new ServerCSWDTO(server);
+    }
+
+    /**
      * @see GeoPlatformCSWService#deleteServerCSW(java.lang.Long) 
      */
     boolean deleteServerCSW(Long serverID) throws ResourceNotFoundFault {
@@ -84,11 +121,17 @@ class CSWServiceImpl {
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found", serverID);
         }
-        if (server.getServerType() != GPCapabilityType.CSW) {
-            throw new ResourceNotFoundFault("Server is not a CSW server");
-        }
+        CSWEntityCorrectness.checkServerCSW(server); // TODO assert
 
         return serverDao.remove(server);
+    }
+
+    /**
+     * @see GeoPlatformCSWService#getAllCSWServers() 
+     */
+    List<ServerCSWDTO> getAllCSWServers() {
+        List<GeoPlatformServer> found = serverDao.findAll(GPCapabilityType.CSW);
+        return convertToServerList(found);
     }
 
     /**
@@ -100,9 +143,7 @@ class CSWServiceImpl {
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found", serverID);
         }
-        if (server.getServerType() != GPCapabilityType.CSW) {
-            throw new ResourceNotFoundFault("Server is not a CSW server");
-        }
+        CSWEntityCorrectness.checkServerCSW(server); // TODO assert
 
         return server;
     }
@@ -114,12 +155,32 @@ class CSWServiceImpl {
             throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
         if (server == null) {
-            throw new ResourceNotFoundFault("Server not found by URL");
+            throw new ResourceNotFoundFault("Server not found " + serverUrl);
         }
-        if (server.getServerType() != GPCapabilityType.CSW) {
-            throw new ResourceNotFoundFault("Server is not a CSW server");
-        }
+        CSWEntityCorrectness.checkServerCSW(server); // TODO assert
 
         return server;
+    }
+
+    /**
+     * @see GeoPlatformCSWService#getShortServerCSW(java.lang.String) 
+     */
+    ServerCSWDTO getShortServerCSW(String serverUrl)
+            throws ResourceNotFoundFault {
+        GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
+        if (server == null) {
+            throw new ResourceNotFoundFault("Server not found " + serverUrl);
+        }
+        CSWEntityCorrectness.checkServerCSW(server); // TODO assert
+
+        return new ServerCSWDTO(server);
+    }
+
+    private List<ServerCSWDTO> convertToServerList(List<GeoPlatformServer> servers) {
+        List<ServerCSWDTO> shortServers = new ArrayList<ServerCSWDTO>(servers.size());
+        for (GeoPlatformServer server : servers) {
+            shortServers.add(new ServerCSWDTO(server));
+        }
+        return shortServers;
     }
 }

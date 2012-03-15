@@ -35,11 +35,14 @@
  */
 package org.geosdi.geoplatform.services;
 
+import java.util.List;
 import javax.jws.WebService;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -77,8 +80,19 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     }
 
     @Override
+    public ServerCSWDTO saveServerCSW(Long id, String alias, String serverUrl)
+            throws IllegalParameterFault, ResourceNotFoundFault {
+        return cswServiceDelegate.saveServerCSW(id, alias, serverUrl);
+    }
+
+    @Override
     public boolean deleteServerCSW(Long serverID) throws ResourceNotFoundFault {
         return cswServiceDelegate.deleteServerCSW(serverID);
+    }
+
+    @Override
+    public List<ServerCSWDTO> getAllCSWServers() {
+        return cswServiceDelegate.getAllCSWServers();
     }
 
     @Override
@@ -91,5 +105,11 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     public GeoPlatformServer getServerDetailCSWByUrl(String serverUrl)
             throws ResourceNotFoundFault {
         return cswServiceDelegate.getServerDetailCSWByUrl(serverUrl);
+    }
+
+    @Override
+    public ServerCSWDTO getShortServerCSW(String serverUrl)
+            throws ResourceNotFoundFault {
+        return cswServiceDelegate.getShortServerCSW(serverUrl);
     }
 }

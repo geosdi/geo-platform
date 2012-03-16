@@ -19,6 +19,9 @@
 
     <bean id="gpCatalogFinderClient"  class="org.geosdi.geoplatform.services.GPCatalogFinderService"
           factory-bean="catalogProxyFactory" factory-method="create" />
+          
+        <bean id="geoPlatformCSWClient"  class="org.geosdi.geoplatform.services.GeoPlatformCSWService"
+          factory-bean="cswProxyFactory" factory-method="create" />
 
     <bean id="geoPlatformProxyFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
         <property name="serviceClass"
@@ -44,6 +47,25 @@
                   value="org.geosdi.geoplatform.services.GPCatalogFinderService" />
         <property name="address"
                   value="${webservice_catalogfinder_endpoint_address}" />
+        <property name="inInterceptors">
+            <list>
+                <ref bean="geoPlatformClientLoggingInInterceptorBean"/>
+                <ref bean="geoPlatformClientSecurityInInterceptorBean"/>
+            </list>
+        </property>
+        <property name="outInterceptors">
+            <list>
+                <ref bean="geoPlatformClientLoggingOutInterceptorBean"/>
+                <ref bean="geoPlatformClientSecurityOutInterceptorBean"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="cswProxyFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+        <property name="serviceClass"
+                  value="org.geosdi.geoplatform.services.GeoPlatformCSWService" />
+        <property name="address"
+                  value="${webservice_cswservice_endpoint_address}" />
         <property name="inInterceptors">
             <list>
                 <ref bean="geoPlatformClientLoggingInInterceptorBean"/>

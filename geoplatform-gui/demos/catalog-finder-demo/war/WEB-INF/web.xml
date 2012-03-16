@@ -5,9 +5,18 @@
          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
 
-	<!-- Default page to serve -->
+    <!-- Default page to serve -->
     <welcome-file-list>
         <welcome-file>CatalogFinderDemoUI.html</welcome-file>
     </welcome-file-list>
+    
+    <servlet>
+        <servlet-name>GPCatalogFinder</servlet-name>
+        <servlet-class>org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GPCatalogFinder</servlet-name>
+        <url-pattern>/geoportal/GPCatalogFinder</url-pattern>
+    </servlet-mapping>
 
 </web-app>

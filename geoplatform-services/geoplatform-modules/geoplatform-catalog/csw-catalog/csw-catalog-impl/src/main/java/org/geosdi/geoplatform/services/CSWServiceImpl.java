@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.services;
 
+import com.googlecode.genericdao.search.Filter;
+import com.googlecode.genericdao.search.Search;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -44,6 +46,8 @@ import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.PaginatedSearchRequest;
+import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.services.development.CSWEntityCorrectness;
 import org.slf4j.Logger;
@@ -174,6 +178,40 @@ class CSWServiceImpl {
         CSWEntityCorrectness.checkServerCSW(server); // TODO assert
 
         return new ServerCSWDTO(server);
+    }
+
+    Long getCSWServersCount(SearchRequest request) {
+        System.out.println("### " + request);
+        Search searchCriteria = new Search(GeoPlatformServer.class);
+        searchCriteria.addFilterEqual("serverType", GPCapabilityType.CSW);
+
+        String like = request.getNameLike();
+        if (like != null) {
+            Filter fTitle = Filter.ilike("title", like);
+            Filter fAlias = Filter.ilike("aliasName", like);
+//            Filter fUrl = Filter.ilike("serverUrl", like);
+            searchCriteria.addFilterOr(fTitle, fAlias);
+        }
+        return new Long(serverDao.count(searchCriteria));
+    }
+
+    List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request) {
+        Search searchCriteria = new Search(GeoPlatformServer.class);
+        searchCriteria.addFilterEqual("serverType", GPCapabilityType.CSW);
+        searchCriteria.setMaxResults(request.getNum());
+        searchCriteria.setPage(request.getPage());
+        searchCriteria.addSortAsc("aliasName");
+
+        String like = request.getNameLike();
+        if (like != null) {
+            Filter fTitle = Filter.ilike("title", like);
+            Filter fAlias = Filter.ilike("aliasName", like);
+//            Filter fUrl = Filter.ilike("serverUrl", like);
+            searchCriteria.addFilterOr(fTitle, fAlias);
+        }
+
+        List<GeoPlatformServer> serverList = serverDao.search(searchCriteria);
+        return this.convertToServerList(serverList);
     }
 
     private List<ServerCSWDTO> convertToServerList(List<GeoPlatformServer> servers) {

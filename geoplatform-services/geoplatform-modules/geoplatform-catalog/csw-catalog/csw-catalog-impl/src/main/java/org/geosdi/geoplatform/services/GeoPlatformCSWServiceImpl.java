@@ -42,6 +42,8 @@ import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.PaginatedSearchRequest;
+import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -111,5 +113,15 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     public ServerCSWDTO getShortServerCSW(String serverUrl)
             throws ResourceNotFoundFault {
         return cswServiceDelegate.getShortServerCSW(serverUrl);
+    }
+
+    @Override
+    public Long getCSWServersCount(SearchRequest request) {
+        return cswServiceDelegate.getCSWServersCount(request);
+    }
+
+    @Override
+    public List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request) {
+        return cswServiceDelegate.searchCSWServers(request);
     }
 }

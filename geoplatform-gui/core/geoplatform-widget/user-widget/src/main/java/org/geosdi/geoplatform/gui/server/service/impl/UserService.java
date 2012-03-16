@@ -82,7 +82,8 @@ public class UserService implements IUserService {
 
     @Override
     public PagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config,
-                                                            String searchText, HttpServletRequest httpServletRequest) {
+                                                            String searchText, 
+                                                            HttpServletRequest httpServletRequest) {
         GPUser user = this.getCheckLoggedUser(httpServletRequest);
 
         int start = config.getOffset();

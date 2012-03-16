@@ -35,11 +35,14 @@
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.FinderBean;
 import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.service.IGPCatalogFinderService;
+import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
+import org.geosdi.geoplatform.gui.server.IGPCatalogFinderService;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -56,15 +59,32 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServl
     private IGPCatalogFinderService gpCatalogFinderService;
 
     @Override
-    public ArrayList<FinderBean> searchPublicMetadata(String searchString) throws GeoPlatformException {
-        return this.gpCatalogFinderService.searchPublicMetadata(searchString);
+    public ArrayList<GPCSWServerBeanModel> getAllCSWServers() {
+        return gpCatalogFinderService.getAllCSWServers(super.getThreadLocalRequest());
+    }
+
+    @Override
+    public PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
+            PagingLoadConfig config, String searchText) {
+        return gpCatalogFinderService.searchCSWServers(config, searchText,
+                                                       super.getThreadLocalRequest());
+    }
+
+    @Override
+    public ArrayList<FinderBean> searchPublicMetadata(String searchString)
+            throws GeoPlatformException {
+        return gpCatalogFinderService.searchPublicMetadata(searchString,
+                                                           super.getThreadLocalRequest());
     }
 
     @Override
     public ArrayList<FinderBean> searchPrivateMetadata(String username,
-            String password,
-            String searchString) throws GeoPlatformException {
-        return this.gpCatalogFinderService.searchPrivateMetadata(username, password,
-                searchString);
+                                                       String password,
+                                                       String searchString)
+            throws GeoPlatformException {
+        return gpCatalogFinderService.searchPrivateMetadata(username,
+                                                            password,
+                                                            searchString,
+                                                            super.getThreadLocalRequest());
     }
 }

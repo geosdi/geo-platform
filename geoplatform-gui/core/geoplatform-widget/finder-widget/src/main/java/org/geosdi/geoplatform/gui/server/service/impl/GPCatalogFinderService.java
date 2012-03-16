@@ -35,10 +35,25 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
+import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.FinderBean;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.service.IGPCatalogFinderService;
+import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
+import org.geosdi.geoplatform.gui.server.IGPCatalogFinderService;
+import org.geosdi.geoplatform.request.PaginatedSearchRequest;
+import org.geosdi.geoplatform.request.SearchRequest;
+import org.geosdi.geoplatform.responce.ServerCSWDTO;
+import org.geosdi.geoplatform.responce.UserDTO;
+import org.geosdi.geoplatform.services.GeoPlatformCSWService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
@@ -49,16 +64,86 @@ import org.springframework.stereotype.Service;
 @Service("gpCatalogFinderService")
 public class GPCatalogFinderService implements IGPCatalogFinderService {
 
-    @Override
-    public ArrayList<FinderBean> searchPublicMetadata(String searchString)
-            throws GeoPlatformException {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    private GeoPlatformCSWService geoPlatformCSWService;
 
+    @Override
+    public ArrayList<GPCSWServerBeanModel> getAllCSWServers(
+            HttpServletRequest httpServletRequest) {
+        List<ServerCSWDTO> serversDTO = geoPlatformCSWService.getAllCSWServers();
+        ArrayList<GPCSWServerBeanModel> servers = new ArrayList<GPCSWServerBeanModel>(serversDTO.size());
+        for (ServerCSWDTO serverDTO : serversDTO) {
+            GPCSWServerBeanModel server = this.convertServerDTO(serverDTO);
+            servers.add(server);
+        }
+
+        return servers;
+    }
+
+    @Override
+    public PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
+            PagingLoadConfig config, String searchText, HttpServletRequest httpServletRequest) {
+        
+        int start = config.getOffset();
+
+        SearchRequest srq = new SearchRequest(searchText);
+
+        Long serversCount = geoPlatformCSWService.getCSWServersCount(srq);
+
+        int page = start == 0 ? start : start / config.getLimit();
+
+        PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
+                                                                config.getLimit(), page);
+
+        List<ServerCSWDTO> serverList = geoPlatformCSWService.searchCSWServers(psr);
+        if (serverList == null) {
+            throw new GeoPlatformException("There are no results");
+        }
+
+        ArrayList<GPCSWServerBeanModel> searchUsers = new ArrayList<GPCSWServerBeanModel>();
+        for (ServerCSWDTO serverDTO : serverList) {
+            GPCSWServerBeanModel server = this.convertServerDTO(serverDTO);
+            searchUsers.add(server);
+        }
+
+        return new BasePagingLoadResult<GPCSWServerBeanModel>(searchUsers,
+                                                              config.getOffset(), serversCount.intValue());
+    }
+
+    @Override
+    public ArrayList<FinderBean> searchPublicMetadata(String searchString,
+                                                      HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+        // TODO
         return null;
     }
 
     @Override
     public ArrayList<FinderBean> searchPrivateMetadata(String username,
-            String password, String searchString) throws GeoPlatformException {
+                                                       String password,
+                                                       String searchString,
+                                                       HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+        // TODO
         return null;
+    }
+
+    /**
+     * @param geoPlatformCSWService the geoPlatformCSWService to set
+     */
+    public void setGeoPlatformCSWService(
+            @Qualifier("geoPlatformCSWClient") GeoPlatformCSWService geoPlatformCSWService) {
+        this.geoPlatformCSWService = geoPlatformCSWService;
+    }
+
+    private GPCSWServerBeanModel convertServerDTO(ServerCSWDTO serverDTO) {
+        GPCSWServerBeanModel server = new GPCSWServerBeanModel();
+        server.setId(serverDTO.getId());
+        server.setUrlServer(serverDTO.getServerUrl());
+        server.setTitle(serverDTO.getTitle());
+        server.setAlias(serverDTO.getAlias());
+
+        return server;
     }
 }

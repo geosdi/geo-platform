@@ -59,7 +59,8 @@ public interface GPCatalogFinderService {
     @Get
     @HttpResource(location = "/geonetwork/searchMetadata/{searchText}")
     @WebResult(name = "Result")
-    List<GPCatalogMetadataDTO> searchPublicMetadata(@WebParam(name = "searchText") String searchText)
+    List<GPCatalogMetadataDTO> searchPublicMetadata(
+            @WebParam(name = "searchText") String searchText)
             throws GPCatalogException;
 
     @Get

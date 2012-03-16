@@ -33,58 +33,41 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters;
+package org.geosdi.geoplatform.gui.impl.containers.pagination.grid;
 
-import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
-import com.google.gwt.event.shared.EventBus;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget.CatalogAccordionWidget;
-import org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget.SpatialAreaAccordionWidget;
-import org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget.TimeAccordionWidget;
+import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
+import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
+import com.extjs.gxt.ui.client.widget.grid.Grid;
+import org.geosdi.geoplatform.gui.containers.pagination.LayoutPaginationContainer;
+import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @email  giuseppe.lascaleia@geosdi.org
  */
-@Singleton
-public class FiltersFinderWidget extends GeoPlatformContentPanel {
+public abstract class EditorGridLayoutPaginationContainer<T extends GeoPlatformBeanModel>
+        extends LayoutPaginationContainer<Grid<T>, T> {
 
-    private EventBus bus;
-
-    @Inject
-    public FiltersFinderWidget(EventBus bus) {
-        super(false);
-        this.bus = bus;
+    public EditorGridLayoutPaginationContainer(boolean lazy, int thePageSize) {
+        super(lazy, thePageSize);
     }
 
-    public FiltersFinderWidget() {
-        super(false);
+    public EditorGridLayoutPaginationContainer(boolean lazy) {
+        super(lazy);
     }
 
     @Override
-    public void addComponent() {
-        ContentPanel serverPanel = new ContentPanel();
-        serverPanel.setAnimCollapse(false);
-        serverPanel.setHeading("Filter by Catalogue");
-        serverPanel.add(new CatalogAccordionWidget());
+    public void initWidget() {
+        ColumnModel cm = prepareColumnModel();
 
-        super.add(serverPanel);
-        super.add(new SpatialAreaAccordionWidget());
-        super.add(new TimeAccordionWidget());
+        super.widget = new EditorGrid<T>(store, cm);
+        super.widget.setBorders(true);
+
+        setGridProperties();
     }
 
-    @Override
-    public void initSize() {
-        super.setHeaderVisible(false);
-    }
+    public abstract void setGridProperties();
 
-    @Override
-    public void setPanelProperties() {
-        super.setBodyBorder(false);
-        super.setLayout(new AccordionLayout());
-    }
+    public abstract ColumnModel prepareColumnModel();
 }

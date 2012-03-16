@@ -35,9 +35,12 @@
  */
 package org.geosdi.geoplatform.gui.client.service;
 
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.FinderBean;
+import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
@@ -45,6 +48,16 @@ import org.geosdi.geoplatform.gui.client.model.FinderBean;
  */
 public interface GPCatalogFinderRemoteAsync {
 
-    public void searchMetadata(String searchString,
-            AsyncCallback<ArrayList<FinderBean>> callback);
+    void getAllCSWServers(AsyncCallback<ArrayList<GPCSWServerBeanModel>> callback);
+
+    void searchCSWServers(PagingLoadConfig config, String searchText,
+                          AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback);
+
+    void searchPublicMetadata(String searchString,
+                              AsyncCallback<ArrayList<FinderBean>> callback);
+
+    void searchPrivateMetadata(String username,
+                               String password,
+                               String searchString,
+                               AsyncCallback<ArrayList<FinderBean>> callback);
 }

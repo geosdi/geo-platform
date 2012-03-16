@@ -35,11 +35,30 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
 
+import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class SpatialAreaAccordionWidget {
+public class SpatialAreaAccordionWidget extends GeoPlatformContentPanel {
 
+    public SpatialAreaAccordionWidget() {
+        super(false);
+    }
+
+    @Override
+    public void addComponent() {
+        super.setAnimCollapse(false);
+        super.setHeading("Filter by Area");
+    }
+
+    @Override
+    public void initSize() {
+    }
+
+    @Override
+    public void setPanelProperties() {
+    }
 }

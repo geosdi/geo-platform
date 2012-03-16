@@ -35,12 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.client.service;
 
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.FinderBean;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
@@ -61,21 +64,16 @@ public interface GPCatalogFinderRemote extends RemoteService {
         }
     }
 
-    /**
-     * @param search
-     *            String to search
-     * @return ArrayList<FinderBean>
-     * @throws GeoPlatformException
-     */
-    public ArrayList<FinderBean> searchPublicMetadata(String searchString)
+    ArrayList<GPCSWServerBeanModel> getAllCSWServers();
+
+    PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(PagingLoadConfig config,
+                                                            String searchText);
+
+    ArrayList<FinderBean> searchPublicMetadata(String searchString)
             throws GeoPlatformException;
 
-    /**
-     * @param search
-     *            String to search
-     * @return ArrayList<FinderBean>
-     * @throws GeoPlatformException
-     */
-    public ArrayList<FinderBean> searchPrivateMetadata(String username, String password, String searchString)
+    ArrayList<FinderBean> searchPrivateMetadata(String username,
+                                                String password,
+                                                String searchString)
             throws GeoPlatformException;
 }

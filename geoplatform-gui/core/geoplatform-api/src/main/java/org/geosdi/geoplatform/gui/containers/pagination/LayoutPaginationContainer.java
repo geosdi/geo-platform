@@ -60,7 +60,7 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
     protected RpcProxy<PagingLoadResult<T>> proxy;
     protected PagingLoader<PagingLoadResult<T>> loader;
     protected PagingToolBar toolBar;
-    private ContentPanel panel;
+    protected ContentPanel panel;
     private boolean initialized;
     private int pageSize = 25;
 

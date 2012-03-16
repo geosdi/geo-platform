@@ -51,8 +51,8 @@ public class GPUserManageDetail extends GeoPlatformBeanModel
     //
     private Long id; // For performance purpose: used for equals() and hashCode() methods
     private String password; // For manual binding
-    private Date creationDate;
-    private boolean expired;
+    private Date creationDate; // For manual operation
+    private boolean expired; // For manual binding
 
     public enum GPUserManageDetailKeyValue {
 

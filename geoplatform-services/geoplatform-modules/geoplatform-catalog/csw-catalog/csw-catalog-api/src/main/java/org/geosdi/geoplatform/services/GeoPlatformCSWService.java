@@ -47,6 +47,8 @@ import org.codehaus.jra.Put;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.request.PaginatedSearchRequest;
+import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 
 /**
@@ -70,7 +72,7 @@ public interface GeoPlatformCSWService {
     Long insertServerCSW(@WebParam(name = "server") GeoPlatformServer server);
 
     @Post
-    @HttpResource(location = "/csw/server")
+    @HttpResource(location = "/server/csw")
     ServerCSWDTO saveServerCSW(@WebParam(name = "id") Long id,
                                @WebParam(name = "alias") String alias,
                                @WebParam(name = "serverUrl") String serverUrl)
@@ -106,6 +108,16 @@ public interface GeoPlatformCSWService {
     GeoPlatformServer getServerDetailCSWByUrl(
             @WebParam(name = "serverUrl") String serverUrl)
             throws ResourceNotFoundFault;
+
+    @Get
+    @HttpResource(location = "/sever/csw/count/{nameLike}")
+    @WebResult(name = "ServersCSWCount")
+    Long getCSWServersCount(SearchRequest request);
+
+    @Get
+    @HttpResource(location = "/server/csw/search/{num}/{page}/{nameLike}")
+    @WebResult(name = "ServersCSW")
+    List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request);
 //
 //    @Get
 //    @HttpResource(location = "/server/csw/capabilities/{id}")

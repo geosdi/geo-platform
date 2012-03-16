@@ -35,11 +35,30 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
 
+import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class TimeAccordionWidget {
+public class TimeAccordionWidget extends GeoPlatformContentPanel {
 
+    public TimeAccordionWidget() {
+        super(false);
+    }
+
+    @Override
+    public void addComponent() {
+        super.setAnimCollapse(false);
+        super.setHeading("Filter by Time");
+    }
+
+    @Override
+    public void initSize() {
+    }
+
+    @Override
+    public void setPanelProperties() {
+    }
 }

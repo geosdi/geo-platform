@@ -33,11 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.server.service;
+package org.geosdi.geoplatform.gui.server;
 
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.model.FinderBean;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
@@ -46,21 +50,19 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public interface IGPCatalogFinderService {
 
-    /**
-     *
-     * @param searchString
-     * @return ArrayList<FinderBean>
-     *
-     */
-    public ArrayList<FinderBean> searchPublicMetadata(String searchString) throws GeoPlatformException;
+    ArrayList<GPCSWServerBeanModel> getAllCSWServers(HttpServletRequest httpServletRequest);
 
-    /**
-     *
-     * @param searchString
-     * @return ArrayList<FinderBean>
-     *
-     */
-    public ArrayList<FinderBean> searchPrivateMetadata(String username,
-            String password,
-            String searchString) throws GeoPlatformException;
+    PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(PagingLoadConfig config,
+                                                            String searchText,
+                                                            HttpServletRequest httpServletRequest);
+
+    ArrayList<FinderBean> searchPublicMetadata(String searchString,
+                                               HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
+
+    ArrayList<FinderBean> searchPrivateMetadata(String username,
+                                                String password,
+                                                String searchString,
+                                                HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
 }

@@ -72,9 +72,26 @@
             </roles>
         </developer>
     </developers>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <dependencies>
 
+        <!-- GeoPlatform -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>csw-catalog-api</artifactId>
+        </dependency>
+
+<!--        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>csw-catalog-api</artifactId>
+            <classifier>sources</classifier>
+            <version>${geoplatform-version}</version>
+        </dependency>-->
+        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
@@ -100,6 +117,13 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>basic-widget</artifactId>
+        </dependency>
+        
+        <!-- GeoPlatform-WS -->
+        <dependency>
+            <groupId>org.geosdi.geoplatform</groupId>
+            <artifactId>geoplatform-ws-client</artifactId>
+            <version>${project.version}</version>
         </dependency>
         
         <dependency>

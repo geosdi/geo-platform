@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
 
+import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 
 /**
@@ -42,6 +43,7 @@ import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
+@CatalogFilter
 public class TimeAccordionWidget extends GeoPlatformContentPanel {
 
     public TimeAccordionWidget() {
@@ -50,8 +52,6 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
 
     @Override
     public void addComponent() {
-        super.setAnimCollapse(false);
-        super.setHeading("Filter by Time");
     }
 
     @Override
@@ -60,5 +60,7 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
 
     @Override
     public void setPanelProperties() {
+        super.setAnimCollapse(false);
+        super.setHeading("Filter by Time");
     }
 }

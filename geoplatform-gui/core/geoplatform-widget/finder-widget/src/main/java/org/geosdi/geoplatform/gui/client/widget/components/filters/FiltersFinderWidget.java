@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.filters;
 
-import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
 import com.google.gwt.event.shared.EventBus;
 import javax.inject.Inject;
@@ -54,11 +53,18 @@ import org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidg
 public class FiltersFinderWidget extends GeoPlatformContentPanel {
 
     private EventBus bus;
+    private CatalogAccordionWidget catalogFilterWidget;
+    private SpatialAreaAccordionWidget spatialFilterWidget;
+    private TimeAccordionWidget timeFilterWidget;
 
     @Inject
-    public FiltersFinderWidget(EventBus bus) {
-        super(false);
+    public FiltersFinderWidget(EventBus bus, CatalogAccordionWidget theCatalogFilterWidget,
+            SpatialAreaAccordionWidget theSpatialFilterWidget, TimeAccordionWidget theTimeFilterWidget) {
+        super(true);
         this.bus = bus;
+        this.catalogFilterWidget = theCatalogFilterWidget;
+        this.spatialFilterWidget = theSpatialFilterWidget;
+        this.timeFilterWidget = theTimeFilterWidget;
     }
 
     public FiltersFinderWidget() {
@@ -67,14 +73,9 @@ public class FiltersFinderWidget extends GeoPlatformContentPanel {
 
     @Override
     public void addComponent() {
-        ContentPanel serverPanel = new ContentPanel();
-        serverPanel.setAnimCollapse(false);
-        serverPanel.setHeading("Filter by Catalogue");
-        serverPanel.add(new CatalogAccordionWidget());
-
-        super.add(serverPanel);
-        super.add(new SpatialAreaAccordionWidget());
-        super.add(new TimeAccordionWidget());
+        super.add(this.catalogFilterWidget);
+        super.add(this.spatialFilterWidget);
+        super.add(this.timeFilterWidget);
     }
 
     @Override

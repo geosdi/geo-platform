@@ -66,6 +66,7 @@ public class ModelDAOTest extends BaseDAOTest {
         Assert.assertEquals("All Folders doesn't REMOVED", 0, super.folderDAO.findAll().size());
         Assert.assertEquals("All Authorities doesn't REMOVED", 0, super.authorityDAO.findAll().size());
         Assert.assertEquals("All Accounts doesn't REMOVED", 0, super.accountDAO.findAll().size());
+        Assert.assertEquals("All Servers doesn't REMOVED", 0, super.serverDAO.findAll().size());
 
         insertData();
     }

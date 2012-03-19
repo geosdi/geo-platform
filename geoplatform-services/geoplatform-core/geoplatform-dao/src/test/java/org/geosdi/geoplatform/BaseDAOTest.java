@@ -69,7 +69,9 @@ import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPApplication;
+import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -140,6 +142,7 @@ public abstract class BaseDAOTest {
         removeAllProjects();
         removeAllAuthorities();
         removeAllAccounts();
+        removeAllServers();
     }
 
 //    private void removeAllStyles() {
@@ -216,6 +219,15 @@ public abstract class BaseDAOTest {
             Assert.assertTrue("Old Account NOT removed", removed);
         }
     }
+
+    private void removeAllServers() {
+        List<GeoPlatformServer> servers = serverDAO.findAll();
+        for (GeoPlatformServer server : servers) {
+            logger.trace("\n*** server to REMOVE:\n{}\n***", server);
+            boolean removed = serverDAO.remove(server);
+            Assert.assertTrue("Old server NOT removed", removed);
+        }
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Insert data">
@@ -223,6 +235,7 @@ public abstract class BaseDAOTest {
         this.insertAccount();
         this.insertProject();
         this.insertFoldersAndLayers();
+        this.insertServer();
     }
 
     private void insertAccount() {
@@ -256,10 +269,9 @@ public abstract class BaseDAOTest {
 
     private void insertFoldersAndLayers() {
         // Projects of admin
-        GPProject projectIth = null;
         for (int i = 1; i <= 41; i++) {
-            projectIth = this.createProject("project_admin_k_" + i, false,
-                                            i, new Date(System.currentTimeMillis() + i * 333));
+            GPProject projectIth = this.createProject("project_admin_k_" + i, false,
+                                                      i, new Date(System.currentTimeMillis() + i * 333));
             projectDAO.persist(projectIth);
             this.insertBindingUserProject(this.adminTest, projectIth,
                                           BasePermission.ADMINISTRATION.getMask());
@@ -450,10 +462,9 @@ public abstract class BaseDAOTest {
             logger.error("Error:" + e);
         }
 
-        WebMapServer wms = null;
         List<Layer> layers = null;
         try {
-            wms = new WebMapServer(url);
+            WebMapServer wms = new WebMapServer(url);
 
             WMSCapabilities capabilities = wms.getCapabilities();
 
@@ -473,8 +484,7 @@ public abstract class BaseDAOTest {
 
     private List<GPRasterLayer> loadRasterLayer(List<Layer> layers,
                                                 GPFolder folder, GPProject project, int position) {
-        List<GPRasterLayer> rasterLayers = null;
-        rasterLayers = new ArrayList<GPRasterLayer>(layers.size());
+        List<GPRasterLayer> rasterLayers = new ArrayList<GPRasterLayer>(layers.size());
 
         for (int i = 0; i < layers.size(); i++) {
             Layer layer = layers.get(i);
@@ -512,6 +522,25 @@ public abstract class BaseDAOTest {
         }
 
         return rasterLayers;
+    }
+
+    private void insertServer() {
+        for (int i = 10; i <= 99; i++) {
+            GeoPlatformServer server = this.createServer("Title_" + i,
+                                                         "Alias_" + i,
+                                                         "http://csw-test/" + i);
+            server.setServerType(GPCapabilityType.CSW);
+            serverDAO.persist(server);
+        }
+    }
+
+    private GeoPlatformServer createServer(String title, String alias, String url) {
+        GeoPlatformServer server = new GeoPlatformServer();
+        server.setTitle(title);
+        server.setAliasName(alias);
+        server.setServerUrl(url);
+
+        return server;
     }
 //</editor-fold>
 

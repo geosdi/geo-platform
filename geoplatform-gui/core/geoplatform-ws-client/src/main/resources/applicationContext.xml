@@ -20,7 +20,7 @@
     <bean id="gpCatalogFinderClient"  class="org.geosdi.geoplatform.services.GPCatalogFinderService"
           factory-bean="catalogProxyFactory" factory-method="create" />
           
-        <bean id="geoPlatformCSWClient"  class="org.geosdi.geoplatform.services.GeoPlatformCSWService"
+    <bean id="geoPlatformCSWClient"  class="org.geosdi.geoplatform.services.GeoPlatformCSWService"
           factory-bean="cswProxyFactory" factory-method="create" />
 
     <bean id="geoPlatformProxyFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">

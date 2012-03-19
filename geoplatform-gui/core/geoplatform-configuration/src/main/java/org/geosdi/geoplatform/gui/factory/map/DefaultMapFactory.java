@@ -35,8 +35,18 @@
  */
 package org.geosdi.geoplatform.gui.factory.map;
 
+import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.MapOptions;
+import org.gwtopenmaps.openlayers.client.MapUnits;
 import org.gwtopenmaps.openlayers.client.MapWidget;
+import org.gwtopenmaps.openlayers.client.Projection;
+import org.gwtopenmaps.openlayers.client.layer.GoogleV3;
+import org.gwtopenmaps.openlayers.client.layer.GoogleV3MapType;
+import org.gwtopenmaps.openlayers.client.layer.GoogleV3Options;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
+import org.gwtopenmaps.openlayers.client.layer.OSM;
+import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
+import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -44,7 +54,7 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
  * 
  */
 public class DefaultMapFactory implements GeoPlatformMapFactory {
-   
+
     /**
      * (non-Javadoc)
      * 
@@ -63,5 +73,61 @@ public class DefaultMapFactory implements GeoPlatformMapFactory {
     @Override
     public MapWidget createMap(String width, String height, MapOptions options) {
         return new MapWidget(width, height, options);
+    }
+
+    @Override
+    public MapWidget createMap(String width, String height, GPBaseLayer baseLayer) {
+        MapOptions defaultMapOptions = new MapOptions();
+
+        defaultMapOptions.setNumZoomLevels(18);
+
+        defaultMapOptions.setProjection("EPSG:900913");
+        defaultMapOptions.setDisplayProjection(new Projection("EPSG:4326"));
+        defaultMapOptions.setUnits(MapUnits.METERS);
+
+        defaultMapOptions.setMaxExtent(new Bounds(-20037508, -20037508,
+                20037508, 20037508.34));
+        defaultMapOptions.setMaxResolution(
+                new Double(156543.0339).floatValue());
+
+        MapWidget mapWidget = new MapWidget(width, height, defaultMapOptions);
+
+        Layer layer = null;
+
+        switch (baseLayer) {
+            case OPENSTREET_MAP:
+                layer = createOSM();
+                break;
+            case GOOGLE_NORMAL:
+                layer = createGoogleNormal();
+                break;
+            default:
+                layer = createOSM();
+        }
+        
+        mapWidget.getMap().addLayer(layer);
+
+        return mapWidget;
+    }
+
+    private Layer createOSM() {
+        OSMOptions osmOption = new OSMOptions();
+
+        Layer osm = OSM.Mapnik("OpenStreetMap", osmOption);
+        osm.setIsBaseLayer(true);
+
+        return osm;
+    }
+
+    private Layer createGoogleNormal() {
+        GoogleV3Options option = new GoogleV3Options();
+        option.setType(GoogleV3MapType.G_NORMAL_MAP);
+        option.setSphericalMercator(true);
+        option.setTransitionEffect(TransitionEffect.RESIZE);
+
+        Layer google = new GoogleV3("Google Normal", option);
+        google.setIsBaseLayer(true);
+
+        return google;
     }
 }

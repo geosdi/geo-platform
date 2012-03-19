@@ -79,8 +79,6 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
 
     @Override
     public void addComponent() {
-        // TODO
-        // For now the component are added here but we must use GIN for initialization
         addWestWidget();
         addCenterWidget();
     }

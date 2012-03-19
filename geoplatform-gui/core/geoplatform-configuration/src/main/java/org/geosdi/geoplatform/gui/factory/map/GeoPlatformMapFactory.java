@@ -44,9 +44,10 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
  * 
  */
 public interface GeoPlatformMapFactory {
-	
-	public MapWidget createMap(String width, String height);
-	
-	public MapWidget createMap(String width, String height, MapOptions options);
 
+    public MapWidget createMap(String width, String height);
+
+    public MapWidget createMap(String width, String height, MapOptions options);
+
+    public MapWidget createMap(String width, String height, GPBaseLayer baseLayer);
 }

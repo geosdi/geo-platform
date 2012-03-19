@@ -59,39 +59,41 @@ import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPagi
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class SummaryRecordsContainer extends GridLayoutPaginationContainer<SummaryRecord> {
-
+    
     private CheckBoxSelectionModel<SummaryRecord> sm;
     private RowExpander rowExpander;
-
+    
     public SummaryRecordsContainer() {
         super(true);
         super.setWidth(550);
         setStyleAttribute("padding-top", "10px");
         setStyleAttribute("padding-bottom", "10px");
     }
-
+    
     @Override
     public void setGridProperties() {
         super.widget.setHeight(250);
         super.widget.getView().setForceFit(true);
         super.widget.setLoadMask(true);
-
+        
+        super.widget.setSelectionModel(this.sm);
+        
         super.widget.addPlugin(this.rowExpander);
         super.widget.addPlugin(this.sm);
     }
-
+    
     @Override
     public ColumnModel prepareColumnModel() {
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
-
+        
         XTemplate tpl = XTemplate.create(
                 "<p><b>Abstract:</b> {abstractText}</p><br>"
                 + "<p><b>Keywords:</b> {keywords}</p>");
-
+        
         rowExpander = new RowExpander(tpl);
-
+        
         configs.add(rowExpander);
-
+        
         ColumnConfig titleColumn = new ColumnConfig();
         titleColumn.setId(SummaryRecordKeyValue.title.toString());
         titleColumn.setHeader("Title");
@@ -99,39 +101,39 @@ public class SummaryRecordsContainer extends GridLayoutPaginationContainer<Summa
         titleColumn.setFixed(true);
         titleColumn.setResizable(false);
         configs.add(titleColumn);
-
+        
         this.sm = new CheckBoxSelectionModel<SummaryRecord>();
         sm.setSelectionMode(SelectionMode.MULTI);
         configs.add(sm.getColumn());
-
-
+        
+        
         return new ColumnModel(configs);
     }
-
+    
     @Override
     public void createStore() {
         super.toolBar = new PagingToolBar(super.getPageSize());
-
+        
         super.proxy = new RpcProxy<PagingLoadResult<SummaryRecord>>() {
-
+            
             @Override
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<SummaryRecord>> callback) {
                 /** TODO : HERE THE SERVICE CALL TO LOAD SUMMARY RECORDS WITH PAGINATION **/
             }
         };
-
+        
         super.loader = new BasePagingLoader<PagingLoadResult<SummaryRecord>>(
                 proxy);
         super.loader.setRemoteSort(false);
-
+        
         super.store = new ListStore<SummaryRecord>(loader);
-
+        
         super.store.setMonitorChanges(true);
-
+        
         super.toolBar.bind(loader);
     }
-
+    
     @Override
     public void setUpLoadListener() {
     }

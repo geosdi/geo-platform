@@ -33,51 +33,15 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.tab;
-
-import com.google.gwt.user.client.Element;
-import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
-import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabWidget;
+package org.geosdi.geoplatform.gui.factory.map;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-@Singleton
-public class GPCatalogTabWidget extends GeoPlatformTabWidget {
+public enum GPBaseLayer {
 
-    private GeoPlatformTabItem searchItem, metadataItem;
-
-    public GPCatalogTabWidget() {
-        super(true);
-    }
-
-    @Override
-    public void addComponents() {
-        super.add(this.searchItem);
-        super.add(this.metadataItem);
-    }
-
-    @Override
-    public void initTab() {
-        super.setHeight(700);
-    }
-
-    @Override
-    public void setWidgetProperties() {
-    }
-
-    @Override
-    public void createTabItems() {
-        this.searchItem = new SearchTabItem();
-        this.metadataItem = new MetadataTabItem();
-    }
-
-    @Override
-    protected void onRender(Element target, int index) {
-        super.onRender(target, index);
-        super.buildWidget();
-    }
+    GOOGLE_NORMAL,
+    OPENSTREET_MAP;
 }

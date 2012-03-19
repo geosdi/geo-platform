@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email  michele.santomauro@geosdi.org
  */
-@RemoteServiceRelativePath("FinderRemote")
+@RemoteServiceRelativePath("GPCatalogFinderRemote")
 public interface GPCatalogFinderRemote extends RemoteService {
 
     public static class Util {

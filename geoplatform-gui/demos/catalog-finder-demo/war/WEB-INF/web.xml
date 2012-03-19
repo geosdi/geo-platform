@@ -3,20 +3,41 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+             
+    <!-- pick up all spring application contexts -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath*:applicationContext.xml</param-value>
+    </context-param>
+    
+    <servlet>
+        <servlet-name>GeoPlatformConfiguration</servlet-name>
+        <servlet-class>org.geosdi.geoplatform.gui.server.gwt.GeoPlatformConfigurationImpl</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GeoPlatformConfiguration</servlet-name>
+        <url-pattern>/catalog_finder_demo/GeoPlatformConfiguration</url-pattern>
+    </servlet-mapping>
 
+	<!-- spring context loader -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
+    
+    <servlet>
+        <servlet-name>GPCatalogFinderRemote</servlet-name>
+        <servlet-class>org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl</servlet-class>
+    </servlet>
+    <servlet-mapping> 
+        <servlet-name>GPCatalogFinderRemote</servlet-name> 
+        <url-pattern>/catalog_finder_demo/GPCatalogFinderRemote</url-pattern> 
+    </servlet-mapping>
+    
     <!-- Default page to serve -->
     <welcome-file-list>
         <welcome-file>CatalogFinderDemoUI.html</welcome-file>
     </welcome-file-list>
-    
-    <servlet>
-        <servlet-name>GPCatalogFinder</servlet-name>
-        <servlet-class>org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>GPCatalogFinder</servlet-name>
-        <url-pattern>/geoportal/GPCatalogFinder</url-pattern>
-    </servlet-mapping>
 
 </web-app>

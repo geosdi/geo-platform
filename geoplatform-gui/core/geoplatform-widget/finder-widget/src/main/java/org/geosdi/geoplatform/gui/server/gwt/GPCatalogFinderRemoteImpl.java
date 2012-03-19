@@ -60,31 +60,32 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServl
 
     @Override
     public ArrayList<GPCSWServerBeanModel> getAllCSWServers() {
-        return gpCatalogFinderService.getAllCSWServers(super.getThreadLocalRequest());
+        return gpCatalogFinderService.getAllCSWServers(
+                super.getThreadLocalRequest());
     }
 
     @Override
     public PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
             PagingLoadConfig config, String searchText) {
         return gpCatalogFinderService.searchCSWServers(config, searchText,
-                                                       super.getThreadLocalRequest());
+                super.getThreadLocalRequest());
     }
 
     @Override
     public ArrayList<FinderBean> searchPublicMetadata(String searchString)
             throws GeoPlatformException {
         return gpCatalogFinderService.searchPublicMetadata(searchString,
-                                                           super.getThreadLocalRequest());
+                super.getThreadLocalRequest());
     }
 
     @Override
     public ArrayList<FinderBean> searchPrivateMetadata(String username,
-                                                       String password,
-                                                       String searchString)
+            String password,
+            String searchString)
             throws GeoPlatformException {
         return gpCatalogFinderService.searchPrivateMetadata(username,
-                                                            password,
-                                                            searchString,
-                                                            super.getThreadLocalRequest());
+                password,
+                searchString,
+                super.getThreadLocalRequest());
     }
 }

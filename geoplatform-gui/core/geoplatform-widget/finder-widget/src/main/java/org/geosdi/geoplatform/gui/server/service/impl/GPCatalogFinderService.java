@@ -53,6 +53,7 @@ import org.geosdi.geoplatform.responce.UserDTO;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -66,13 +67,14 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private GeoPlatformCSWService geoPlatformCSWService;
+    private GeoPlatformCSWService geoPlatformCSWClient;
 
     @Override
     public ArrayList<GPCSWServerBeanModel> getAllCSWServers(
             HttpServletRequest httpServletRequest) {
-        List<ServerCSWDTO> serversDTO = geoPlatformCSWService.getAllCSWServers();
-        ArrayList<GPCSWServerBeanModel> servers = new ArrayList<GPCSWServerBeanModel>(serversDTO.size());
+        List<ServerCSWDTO> serversDTO = geoPlatformCSWClient.getAllCSWServers();
+        ArrayList<GPCSWServerBeanModel> servers = new ArrayList<GPCSWServerBeanModel>(
+                serversDTO.size());
         for (ServerCSWDTO serverDTO : serversDTO) {
             GPCSWServerBeanModel server = this.convertServerDTO(serverDTO);
             servers.add(server);
@@ -84,19 +86,20 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
     @Override
     public PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
             PagingLoadConfig config, String searchText, HttpServletRequest httpServletRequest) {
-        
+
         int start = config.getOffset();
 
         SearchRequest srq = new SearchRequest(searchText);
 
-        Long serversCount = geoPlatformCSWService.getCSWServersCount(srq);
+        Long serversCount = geoPlatformCSWClient.getCSWServersCount(srq);
 
         int page = start == 0 ? start : start / config.getLimit();
 
         PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
-                                                                config.getLimit(), page);
+                config.getLimit(), page);
 
-        List<ServerCSWDTO> serverList = geoPlatformCSWService.searchCSWServers(psr);
+        List<ServerCSWDTO> serverList = geoPlatformCSWClient.searchCSWServers(
+                psr);
         if (serverList == null) {
             throw new GeoPlatformException("There are no results");
         }
@@ -108,12 +111,12 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         }
 
         return new BasePagingLoadResult<GPCSWServerBeanModel>(searchUsers,
-                                                              config.getOffset(), serversCount.intValue());
+                config.getOffset(), serversCount.intValue());
     }
 
     @Override
     public ArrayList<FinderBean> searchPublicMetadata(String searchString,
-                                                      HttpServletRequest httpServletRequest)
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         // TODO
         return null;
@@ -121,9 +124,9 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
     @Override
     public ArrayList<FinderBean> searchPrivateMetadata(String username,
-                                                       String password,
-                                                       String searchString,
-                                                       HttpServletRequest httpServletRequest)
+            String password,
+            String searchString,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         // TODO
         return null;
@@ -132,9 +135,10 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
     /**
      * @param geoPlatformCSWService the geoPlatformCSWService to set
      */
-    public void setGeoPlatformCSWService(
-            @Qualifier("geoPlatformCSWClient") GeoPlatformCSWService geoPlatformCSWService) {
-        this.geoPlatformCSWService = geoPlatformCSWService;
+    @Autowired
+    public void setGeoPlatformCSWClient(
+            @Qualifier("geoPlatformCSWClient") GeoPlatformCSWService geoPlatformCSWClient) {
+        this.geoPlatformCSWClient = geoPlatformCSWClient;
     }
 
     private GPCSWServerBeanModel convertServerDTO(ServerCSWDTO serverDTO) {

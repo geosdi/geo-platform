@@ -7,7 +7,7 @@
 
     <entry-point class='org.geosdi.geoplatform.gui.client.GPCatalogFinder' />
 
-    <servlet path="/GPCatalogFinder"
+    <servlet path="/GPCatalogFinderRemote"
              class="org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl" />
 
 </module>

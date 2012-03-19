@@ -100,6 +100,7 @@ public class StartupService implements IStartupService {
     public IGeoPlatformGlobal initGPConfigurationForBeanName(String beanName) {
         assert (GeoPlatformContextUtil.getInstance().getBean(beanName) != null) : "The Bean is null.";
 
-        return (IGeoPlatformGlobal) GeoPlatformContextUtil.getInstance().getBean(beanName);
+        return (IGeoPlatformGlobal) GeoPlatformContextUtil.getInstance().getBean(
+                beanName);
     }
 }

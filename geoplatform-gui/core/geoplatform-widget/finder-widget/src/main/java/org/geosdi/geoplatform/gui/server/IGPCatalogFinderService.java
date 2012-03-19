@@ -53,16 +53,16 @@ public interface IGPCatalogFinderService {
     ArrayList<GPCSWServerBeanModel> getAllCSWServers(HttpServletRequest httpServletRequest);
 
     PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(PagingLoadConfig config,
-                                                            String searchText,
-                                                            HttpServletRequest httpServletRequest);
+            String searchText,
+            HttpServletRequest httpServletRequest);
 
     ArrayList<FinderBean> searchPublicMetadata(String searchString,
-                                               HttpServletRequest httpServletRequest)
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
     ArrayList<FinderBean> searchPrivateMetadata(String username,
-                                                String password,
-                                                String searchString,
-                                                HttpServletRequest httpServletRequest)
+            String password,
+            String searchString,
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 }

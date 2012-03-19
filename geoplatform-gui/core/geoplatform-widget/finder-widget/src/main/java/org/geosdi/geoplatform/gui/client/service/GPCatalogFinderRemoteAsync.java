@@ -51,13 +51,13 @@ public interface GPCatalogFinderRemoteAsync {
     void getAllCSWServers(AsyncCallback<ArrayList<GPCSWServerBeanModel>> callback);
 
     void searchCSWServers(PagingLoadConfig config, String searchText,
-                          AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback);
+            AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback);
 
     void searchPublicMetadata(String searchString,
-                              AsyncCallback<ArrayList<FinderBean>> callback);
+            AsyncCallback<ArrayList<FinderBean>> callback);
 
     void searchPrivateMetadata(String username,
-                               String password,
-                               String searchString,
-                               AsyncCallback<ArrayList<FinderBean>> callback);
+            String password,
+            String searchString,
+            AsyncCallback<ArrayList<FinderBean>> callback);
 }

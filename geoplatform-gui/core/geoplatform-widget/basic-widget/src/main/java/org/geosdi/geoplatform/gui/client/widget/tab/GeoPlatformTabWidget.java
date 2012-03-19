@@ -75,12 +75,6 @@ public abstract class GeoPlatformTabWidget extends TabPanel {
     }
 
     @Override
-    protected void beforeRender() {
-        this.init();
-        super.beforeRender();
-    }
-
-    @Override
     public boolean layout() {
         return super.layout();
     }

@@ -76,32 +76,35 @@ import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
 @Singleton
 public class CSWServerPaginationContainer
         extends EditorGridLayoutPaginationContainer<GPCSWServerBeanModel> {
-
+    
     private CSWServerFormWidget serverForm = new CSWServerFormWidget();
     private TextField<String> searchField;
     private String searchText;
     private Button deleteServerButton;
-
+    private CheckColumnConfig checkColumn;
+    
     public CSWServerPaginationContainer() {
         super(true);
     }
-
+    
     @Override
     public void setGridProperties() {
         super.widget.setSize(350, 350);
         super.widget.setAutoExpandColumn(GPCSWServerKeyValue.ALIAS.toString());
-
+        
         super.panel.setLayout(new FlowLayout());
         this.createSearchComponent();
         this.createButtons();
+        
+        super.widget.addPlugin(this.checkColumn);
     }
-
+    
     private void createSearchComponent() {
         searchField = new TextField<String>();
         searchField.setFieldLabel("Find Server");
-
+        
         searchField.addKeyListener(new KeyListener() {
-
+            
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
@@ -110,7 +113,7 @@ public class CSWServerPaginationContainer
                     reset();
                 }
             }
-
+            
             @Override
             public void componentKeyPress(ComponentEvent event) {
                 if ((event.getKeyCode() == KeyCodes.KEY_ENTER)) {
@@ -119,25 +122,25 @@ public class CSWServerPaginationContainer
                 }
             }
         });
-
+        
         FieldSet searchFieldSet = new FieldSet();
         searchFieldSet.setBorders(false);
         searchFieldSet.setSize(350, 40);
-
+        
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(80);
         searchFieldSet.setLayout(layout);
-
+        
         searchFieldSet.add(searchField);
-
+        
         super.panel.add(searchFieldSet);
     }
-
+    
     private void createButtons() {
         super.panel.setButtonAlign(Style.HorizontalAlignment.CENTER);
         Button newServerButton = new Button("New Server",
                 new SelectionListener<ButtonEvent>() {
-
+                    
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         executeNewServer();
@@ -146,10 +149,10 @@ public class CSWServerPaginationContainer
         newServerButton.setIcon(BasicWidgetResources.ICONS.done());
         newServerButton.setToolTip("Create a new CSW Server");
         super.panel.addButton(newServerButton);
-
+        
         deleteServerButton = new Button("Delete Server",
                 new SelectionListener<ButtonEvent>() {
-
+                    
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         executeDeleteServer();
@@ -159,18 +162,18 @@ public class CSWServerPaginationContainer
         deleteServerButton.setToolTip("Delete a CSW Server selected");
         super.panel.addButton(deleteServerButton);
     }
-
+    
     @Override
     public ColumnModel prepareColumnModel() {
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
-
+        
         ColumnConfig aliasColumn = new ColumnConfig();
         aliasColumn.setId(GPCSWServerKeyValue.ALIAS.toString());
         aliasColumn.setHeader("Alias");
         aliasColumn.setFixed(true);
         aliasColumn.setResizable(false);
         configs.add(aliasColumn);
-
+        
         ColumnConfig titleColumn = new ColumnConfig();
         titleColumn.setId(GPCSWServerKeyValue.TITLE.toString());
         titleColumn.setHeader("Title");
@@ -178,28 +181,28 @@ public class CSWServerPaginationContainer
         titleColumn.setFixed(true);
         titleColumn.setResizable(false);
         configs.add(titleColumn);
-
-        CheckColumnConfig checkColumn = new CheckColumnConfig();
+        
+        checkColumn = new CheckColumnConfig();
         checkColumn.setId("cheked");
         checkColumn.setHeader("-"); // TODO DEL
         checkColumn.setWidth(30);
         checkColumn.setFixed(true);
         checkColumn.setResizable(false);
-
+        
         CellEditor checkBoxEditor = new CellEditor(new CheckBox());
         checkColumn.setEditor(checkBoxEditor);
-
+        
         configs.add(checkColumn);
-
+        
         return new ColumnModel(configs);
     }
-
+    
     @Override
     public void createStore() {
         super.toolBar = new PagingToolBar(super.getPageSize());
-
+        
         super.proxy = new RpcProxy<PagingLoadResult<GPCSWServerBeanModel>>() {
-
+            
             @Override
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback) {
@@ -207,30 +210,30 @@ public class CSWServerPaginationContainer
                         (PagingLoadConfig) loadConfig, searchText, callback);
             }
         };
-
+        
         super.loader = new BasePagingLoader<PagingLoadResult<GPCSWServerBeanModel>>(
                 proxy);
         super.loader.setRemoteSort(false);
-
+        
         super.store = new ListStore<GPCSWServerBeanModel>(loader);
-
+        
         super.store.setMonitorChanges(true);
-
+        
         super.toolBar.bind(loader);
     }
-
+    
     @Override
     public void setUpLoadListener() {
     }
-
+    
     private void executeNewServer() {
         serverForm.showForm();
     }
-
+    
     private void executeDeleteServer() {
         throw new UnsupportedOperationException("Not yet implemented");
     }
-
+    
     public void reset() {
         this.searchField.reset();
         this.store.removeAll();

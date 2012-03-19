@@ -64,11 +64,11 @@ import org.springframework.stereotype.Service;
  */
 @Service("gpCatalogFinderService")
 public class GPCatalogFinderService implements IGPCatalogFinderService {
-
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GeoPlatformCSWService geoPlatformCSWClient;
-
+    
     @Override
     public ArrayList<GPCSWServerBeanModel> getAllCSWServers(
             HttpServletRequest httpServletRequest) {
@@ -79,41 +79,41 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             GPCSWServerBeanModel server = this.convertServerDTO(serverDTO);
             servers.add(server);
         }
-
+        
         return servers;
     }
-
+    
     @Override
     public PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
             PagingLoadConfig config, String searchText, HttpServletRequest httpServletRequest) {
-
+        
         int start = config.getOffset();
-
+        
         SearchRequest srq = new SearchRequest(searchText);
-
+        
         Long serversCount = geoPlatformCSWClient.getCSWServersCount(srq);
-
+        
         int page = start == 0 ? start : start / config.getLimit();
-
+        
         PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
                 config.getLimit(), page);
-
+        
         List<ServerCSWDTO> serverList = geoPlatformCSWClient.searchCSWServers(
                 psr);
         if (serverList == null) {
             throw new GeoPlatformException("There are no results");
         }
-
+        
         ArrayList<GPCSWServerBeanModel> searchUsers = new ArrayList<GPCSWServerBeanModel>();
         for (ServerCSWDTO serverDTO : serverList) {
             GPCSWServerBeanModel server = this.convertServerDTO(serverDTO);
             searchUsers.add(server);
         }
-
+        
         return new BasePagingLoadResult<GPCSWServerBeanModel>(searchUsers,
                 config.getOffset(), serversCount.intValue());
     }
-
+    
     @Override
     public ArrayList<FinderBean> searchPublicMetadata(String searchString,
             HttpServletRequest httpServletRequest)
@@ -121,7 +121,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         // TODO
         return null;
     }
-
+    
     @Override
     public ArrayList<FinderBean> searchPrivateMetadata(String username,
             String password,
@@ -140,14 +140,14 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             @Qualifier("geoPlatformCSWClient") GeoPlatformCSWService geoPlatformCSWClient) {
         this.geoPlatformCSWClient = geoPlatformCSWClient;
     }
-
+    
     private GPCSWServerBeanModel convertServerDTO(ServerCSWDTO serverDTO) {
         GPCSWServerBeanModel server = new GPCSWServerBeanModel();
         server.setId(serverDTO.getId());
         server.setUrlServer(serverDTO.getServerUrl());
         server.setTitle(serverDTO.getTitle());
         server.setAlias(serverDTO.getAlias());
-
+        
         return server;
     }
 }

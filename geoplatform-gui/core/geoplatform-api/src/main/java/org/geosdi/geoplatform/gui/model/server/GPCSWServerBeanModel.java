@@ -44,6 +44,8 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
  */
 public class GPCSWServerBeanModel extends GeoPlatformBeanModel {
 
+    private static final long serialVersionUID = 1326228959299732490L;
+    //
     private Long id; // For performance purpose: used for equals() and hashCode() methods
 
     public enum GPCSWServerKeyValue {

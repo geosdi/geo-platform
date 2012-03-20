@@ -71,11 +71,15 @@ import org.slf4j.LoggerFactory;
 class CSWServiceImpl {
 
     final private Logger logger = LoggerFactory.getLogger(CSWServiceImpl.class);
+
+    static {
+        pool = CSWMarshallerPool.getInstance();
+    }
     // DAO
     private GPServerDAO serverDao;
     //      
 //    private MarshallerPool pool = CSWMarshallerPool.getInstance();
-    private MarshallerPool pool;
+    private static MarshallerPool pool;
     private Unmarshaller um;
 
     /**
@@ -90,7 +94,8 @@ class CSWServiceImpl {
      */
     Long insertServerCSW(GeoPlatformServer server) {
         /** IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER **/
-        GeoPlatformServer serverSearch = serverDao.findByServerUrl(server.getServerUrl());
+        GeoPlatformServer serverSearch = serverDao.findByServerUrl(
+                server.getServerUrl());
         if (serverSearch != null) {
             return serverSearch.getId();
         }
@@ -120,10 +125,10 @@ class CSWServiceImpl {
 
 
         try {
-            pool = CSWMarshallerPool.getInstance();
             um = pool.acquireUnmarshaller();
 
-            GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().withServerUrl(serverURL).build();
+            GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().withServerUrl(
+                    serverURL).build();
 
             // make a getCapabilities request
             final GetCapabilitiesRequest getCapa = serverConnector.createGetCapabilities();
@@ -131,19 +136,28 @@ class CSWServiceImpl {
             // unmarshall the response
             InputStream is = getCapa.getResponseStream();
             Capabilities capabilities = (Capabilities) um.unmarshal(is);
-            
+
 //            if(capabilities.getVersion())
             System.out.println("--- " + capabilities.getVersion());
             System.out.println("--- " + capabilities.getUpdateSequence());
-            System.out.println("+++ " + capabilities.getServiceIdentification().getAbstract());
-            System.out.println("+++ " + capabilities.getServiceIdentification().getFees());
-            System.out.println("+++ " + capabilities.getServiceIdentification().getFirstAbstract());
-            System.out.println("+++ " + capabilities.getServiceIdentification().getFirstTitle());
-            System.out.println("+++ " + capabilities.getServiceIdentification().getTitle());
-            System.out.println("+++ " + capabilities.getServiceIdentification().getServiceType());
-            System.out.println("+++ " + capabilities.getServiceIdentification().getServiceTypeVersion());
-            System.out.println("+++ " + capabilities.getServiceIdentification().getAccessConstraints());
-            System.out.println("+++ " + capabilities.getServiceIdentification().getKeywords());
+            System.out.println(
+                    "+++ " + capabilities.getServiceIdentification().getAbstract());
+            System.out.println(
+                    "+++ " + capabilities.getServiceIdentification().getFees());
+            System.out.println(
+                    "+++ " + capabilities.getServiceIdentification().getFirstAbstract());
+            System.out.println(
+                    "+++ " + capabilities.getServiceIdentification().getFirstTitle());
+            System.out.println(
+                    "+++ " + capabilities.getServiceIdentification().getTitle());
+            System.out.println(
+                    "+++ " + capabilities.getServiceIdentification().getServiceType());
+            System.out.println(
+                    "+++ " + capabilities.getServiceIdentification().getServiceTypeVersion());
+            System.out.println(
+                    "+++ " + capabilities.getServiceIdentification().getAccessConstraints());
+            System.out.println(
+                    "+++ " + capabilities.getServiceIdentification().getKeywords());
 
         } catch (JAXBException ex) {
             logger.error("JAXBException: " + ex.getMessage());
@@ -266,7 +280,8 @@ class CSWServiceImpl {
     }
 
     private List<ServerCSWDTO> convertToServerList(List<GeoPlatformServer> servers) {
-        List<ServerCSWDTO> shortServers = new ArrayList<ServerCSWDTO>(servers.size());
+        List<ServerCSWDTO> shortServers = new ArrayList<ServerCSWDTO>(
+                servers.size());
         for (GeoPlatformServer server : servers) {
             shortServers.add(new ServerCSWDTO(server));
         }

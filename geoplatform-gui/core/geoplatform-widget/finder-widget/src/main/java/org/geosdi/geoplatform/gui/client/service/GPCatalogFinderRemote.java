@@ -72,6 +72,8 @@ public interface GPCatalogFinderRemote extends RemoteService {
 
     GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl)
             throws GeoPlatformException;
+    
+    boolean deleteServerCSW(Long serverID) throws GeoPlatformException;
 
     ArrayList<FinderBean> searchPublicMetadata(String searchString)
             throws GeoPlatformException;

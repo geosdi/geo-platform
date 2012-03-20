@@ -79,6 +79,11 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServl
     }
 
     @Override
+    public boolean deleteServerCSW(Long serverID) throws GeoPlatformException {
+        return gpCatalogFinderService.deleteServerCSW(serverID);
+    }
+
+    @Override
     public ArrayList<FinderBean> searchPublicMetadata(String searchString)
             throws GeoPlatformException {
         return gpCatalogFinderService.searchPublicMetadata(searchString,

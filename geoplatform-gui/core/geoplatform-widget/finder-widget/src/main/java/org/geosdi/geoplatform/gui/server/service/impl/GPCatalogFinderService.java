@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.FinderBean;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
@@ -126,6 +127,18 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             throw new GeoPlatformException(ex.getMessage());
         }
         return this.convertServerDTO(serverCSW);
+    }
+
+    @Override
+    public boolean deleteServerCSW(Long serverID) throws GeoPlatformException {
+        try {
+            geoPlatformCSWClient.deleteServerCSW(serverID);
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("The server with id " + serverID + " was not bean deleted");
+            throw new GeoPlatformException("The server with id "
+                    + serverID + " was not bean deleted");
+        }
+        return true;
     }
 
     @Override

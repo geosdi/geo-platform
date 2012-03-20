@@ -111,8 +111,9 @@ class CSWServiceImpl {
      */
     ServerCSWDTO saveServerCSW(String alias, String serverUrl)
             throws IllegalParameterFault {
-        if (serverDao.findByServerUrl(serverUrl) == null ? false : true) {
-            throw new IllegalParameterFault("Duplicated Server URL");
+        GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
+        if (server != null) { // If there is already a server with the specified URLs
+            return new ServerCSWDTO(server);
         }
 
         URL serverURL;
@@ -127,8 +128,8 @@ class CSWServiceImpl {
         try {
             um = pool.acquireUnmarshaller();
 
-            GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().withServerUrl(
-                    serverURL).build();
+            GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
+                    withServerUrl(serverURL).build();
 
             // make a getCapabilities request
             final GetCapabilitiesRequest getCapa = serverConnector.createGetCapabilities();
@@ -137,27 +138,22 @@ class CSWServiceImpl {
             InputStream is = getCapa.getResponseStream();
             Capabilities capabilities = (Capabilities) um.unmarshal(is);
 
-//            if(capabilities.getVersion())
-            System.out.println("--- " + capabilities.getVersion());
-            System.out.println("--- " + capabilities.getUpdateSequence());
-            System.out.println(
-                    "+++ " + capabilities.getServiceIdentification().getAbstract());
-            System.out.println(
-                    "+++ " + capabilities.getServiceIdentification().getFees());
-            System.out.println(
-                    "+++ " + capabilities.getServiceIdentification().getFirstAbstract());
-            System.out.println(
-                    "+++ " + capabilities.getServiceIdentification().getFirstTitle());
-            System.out.println(
-                    "+++ " + capabilities.getServiceIdentification().getTitle());
-            System.out.println(
-                    "+++ " + capabilities.getServiceIdentification().getServiceType());
-            System.out.println(
-                    "+++ " + capabilities.getServiceIdentification().getServiceTypeVersion());
-            System.out.println(
-                    "+++ " + capabilities.getServiceIdentification().getAccessConstraints());
-            System.out.println(
-                    "+++ " + capabilities.getServiceIdentification().getKeywords());
+//            System.out.println("--- " + capabilities.getVersion());
+//            if (!capabilities.getVersion().equals(GPCatalogVersion.V202.toString())) {
+//                logger.error("The catalog version must be 2.0.2, but is " + capabilities.getVersion());
+//                throw new IllegalParameterFault("The catalog version must be 2.0.2");
+//            }
+
+            server = new GeoPlatformServer();
+            server.setServerType(GPCapabilityType.CSW);
+            server.setServerUrl(serverUrl);
+            server.setAliasName(alias);
+
+            server.setTitle(capabilities.getServiceIdentification().getTitle());
+            server.setAbstractServer(capabilities.getServiceIdentification().getAbstract());
+
+            CSWEntityCorrectness.checkServerCSW(server); // TODO assert
+            serverDao.save(server);
 
         } catch (JAXBException ex) {
             logger.error("JAXBException: " + ex.getMessage());
@@ -170,15 +166,7 @@ class CSWServiceImpl {
                 pool.release(um);
             }
         }
-
-        GeoPlatformServer server = new GeoPlatformServer();
-        server.setServerType(GPCapabilityType.CSW);
-        server.setAliasName(alias);
-        server.setServerUrl(serverUrl);
-
-        CSWEntityCorrectness.checkServerCSW(server); // TODO assert
-        serverDao.save(server);
-
+        
         return new ServerCSWDTO(server);
     }
 

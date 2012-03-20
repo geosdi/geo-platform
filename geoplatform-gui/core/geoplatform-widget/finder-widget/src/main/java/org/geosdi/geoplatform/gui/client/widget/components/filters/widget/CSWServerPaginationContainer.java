@@ -45,17 +45,14 @@ import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.KeyListener;
 import com.extjs.gxt.ui.client.event.LoadListener;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.store.Record;
-import com.extjs.gxt.ui.client.store.StoreEvent;
-import com.extjs.gxt.ui.client.store.StoreListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.extjs.gxt.ui.client.widget.grid.CellEditor;
-import com.extjs.gxt.ui.client.widget.grid.CheckColumnConfig;
+import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
@@ -71,7 +68,7 @@ import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.components.form.CSWServerFormWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.EditorGridLayoutPaginationContainer;
+import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel.GPCSWServerKeyValue;
 import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
@@ -83,13 +80,13 @@ import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
  */
 @Singleton
 public class CSWServerPaginationContainer
-        extends EditorGridLayoutPaginationContainer<GPCSWServerBeanModel> {
+        extends GridLayoutPaginationContainer<GPCSWServerBeanModel> {
 
     private CSWServerFormWidget serverForm = new CSWServerFormWidget(this);
     private TextField<String> searchField;
     private String searchText;
     private Button deleteServerButton;
-    private CheckColumnConfig checkColumn;
+    private CheckBoxSelectionModel<GPCSWServerBeanModel> sm;
 
     public CSWServerPaginationContainer() {
         super(true);
@@ -104,25 +101,18 @@ public class CSWServerPaginationContainer
         this.createSearchComponent();
         this.createButtons();
 
-        super.widget.addPlugin(this.checkColumn);
+        super.widget.setSelectionModel(sm);
+        super.widget.addPlugin(sm);
 
-        store.addStoreListener(new StoreListener<GPCSWServerBeanModel>() {
+        this.sm.addSelectionChangedListener(new SelectionChangedListener<GPCSWServerBeanModel>() {
 
             @Override
-            public void storeUpdate(StoreEvent<GPCSWServerBeanModel> se) {
-                System.out.println("### store update ###");
-                se.getRecord().commit(true);
-
-//                store.getModifiedRecords().isEmpty();
-                System.out.println("+++ modified " + store.getModifiedRecords().size());
-//                for (Record r : store.getModifiedRecords()) {
-//                    r.commit(true);
-//                    if (!r.getModel().equals(se.getModel())) {
-//                        widget.getView().
-//                        System.out.println("+++ " + r.getModel());
-//                    }
-//            }
-//                store.commitChanges();
+            public void selectionChanged(SelectionChangedEvent<GPCSWServerBeanModel> se) {
+                if (se.getSelectedItem() == null) {
+                    deleteServerButton.disable();
+                } else {
+                    deleteServerButton.enable();
+                }
             }
         });
     }
@@ -212,15 +202,14 @@ public class CSWServerPaginationContainer
         titleColumn.setResizable(false);
         configs.add(titleColumn);
 
-        checkColumn = new CheckColumnConfig();
+        sm = new CheckBoxSelectionModel<GPCSWServerBeanModel>();
+        sm.setSelectionMode(Style.SelectionMode.SINGLE);
+
+        ColumnConfig checkColumn = sm.getColumn();
         checkColumn.setId("cheked");
         checkColumn.setWidth(30);
         checkColumn.setFixed(true);
         checkColumn.setResizable(false);
-
-        CellEditor checkBoxEditor = new CellEditor(new CheckBox());
-        checkColumn.setEditor(checkBoxEditor);
-
         configs.add(checkColumn);
 
         return new ColumnModel(configs);
@@ -247,7 +236,6 @@ public class CSWServerPaginationContainer
         super.store = new ListStore<GPCSWServerBeanModel>(loader);
 
 //        super.store.setMonitorChanges(true);
-//        super.store.commitChanges();
 
         super.toolBar.bind(loader);
     }
@@ -263,13 +251,6 @@ public class CSWServerPaginationContainer
 
             @Override
             public void loaderLoad(LoadEvent le) {
-//                BasePagingLoadResult result = le.getData();
-//                if (result.getTotalLength() == 0) {
-//                    toolBar.disable();
-//                } else {
-//                    toolBar.enable();
-//                }
-
                 if (!toolBar.isEnabled()) {
                     toolBar.enable();
                 }
@@ -281,6 +262,7 @@ public class CSWServerPaginationContainer
             @Override
             public void loaderLoadException(LoadEvent le) {
                 if (le.exception instanceof GeoPlatformException) {
+                    // No result
                     System.out.println("*** " + le.exception.getMessage());
                 } else {
                     GeoPlatformMessage.errorMessage("Connection error",
@@ -299,9 +281,27 @@ public class CSWServerPaginationContainer
     }
 
     private void executeDeleteServer() {
-        // TODO
-        System.out.println("Not yet implemented");
-        throw new UnsupportedOperationException("Not yet implemented");
+        super.widget.mask("Deleting server");
+        
+        final GPCSWServerBeanModel selectedServer = sm.getSelectedItem();
+        GPCatalogFinderRemoteImpl.Util.getInstance().deleteServerCSW(selectedServer.getId(),
+                                                                     new AsyncCallback<Boolean>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                // TODO Set status message on main windows
+                System.out.println("*** " + caught.getMessage());
+                widget.unmask();
+            }
+
+            @Override
+            public void onSuccess(Boolean result) {
+                store.remove(selectedServer);
+                // TODO Set status message on main windows
+                System.out.println("*** Server correctly deleted");
+                widget.unmask();
+            }
+        });
     }
 
     @Override
@@ -321,8 +321,8 @@ public class CSWServerPaginationContainer
      * 
      * @param server to add
      */
-    public void addServer(GPCSWServerBeanModel server) {
-        this.store.add(server);
+    public void addNewServer(GPCSWServerBeanModel server) {
+        this.store.insert(server, 0);
     }
 
     /**

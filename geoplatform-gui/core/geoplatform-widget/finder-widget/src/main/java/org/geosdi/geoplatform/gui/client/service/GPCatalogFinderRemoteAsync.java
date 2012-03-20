@@ -55,6 +55,8 @@ public interface GPCatalogFinderRemoteAsync {
 
     void saveServerCSW(String alias, String serverUrl,
                        AsyncCallback<GPCSWServerBeanModel> callback);
+    
+    void deleteServerCSW(Long serverID, AsyncCallback<Boolean> callback);
 
     void searchPublicMetadata(String searchString,
             AsyncCallback<ArrayList<FinderBean>> callback);

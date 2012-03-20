@@ -49,6 +49,7 @@ import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
+import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.widget.CSWServerPaginationContainer;
 import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
@@ -157,7 +158,7 @@ public class CSWServerFormWidget
 
     @Override
     public void initSize() {
-        setHeading("Add CSW Server");
+        setHeading("Insert CSW Server");
         setSize(400, 210);
     }
 
@@ -188,17 +189,17 @@ public class CSWServerFormWidget
 
         GPCSWServerBeanModel server = catalogWindget.containsServer(urlEncoding);
         if (server != null) {
-            setStatus(SaveStatus.EnumSaveStatus.STATUS_NO_SAVE.getValue(),
-                      "Server already exist");
             // TODO Set status message on main windows
             System.out.println("Server already exist, with alias \"" + server.getAlias() + "\"");
+            hide();
         } else {
             saveServer();
         }
     }
 
     private void saveServer() {
-        GPCatalogFinderRemoteImpl.Util.getInstance().saveServerCSW(aliasField.getValue().trim(),
+        final String aliasValue = aliasField.getValue().trim();
+        GPCatalogFinderRemoteImpl.Util.getInstance().saveServerCSW(aliasValue,
                                                                    urlEncoding,
                                                                    new AsyncCallback<GPCSWServerBeanModel>() {
 
@@ -212,11 +213,16 @@ public class CSWServerFormWidget
 
             @Override
             public void onSuccess(GPCSWServerBeanModel server) {
-                catalogWindget.addServer(server);
+                catalogWindget.addNewServer(server);
                 saveStatus.clearStatus("");
                 hide();
-                // TODO Set status message on main windows
-                System.out.println("CSW server correctly saved");
+                if (aliasValue.equals(server.getAlias())) {
+                    // TODO Set status message on main windows
+                    System.out.println("Server correctly saved");
+                } else {
+                    // TODO Set status message on main windows
+                    System.out.println("Server already exist, with alias \"" + server.getAlias() + "\"");
+                }
             }
         });
     }

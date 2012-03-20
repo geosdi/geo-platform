@@ -51,6 +51,9 @@ public class CSWEntityCorrectness {
         if (server.getServerType() != GPCapabilityType.CSW) {
             throw new EntityCorrectnessException("Server is not a CSW server");
         }
+        if (server.getServerUrl() == null) {
+            throw new EntityCorrectnessException("Server URL must not be null");
+        }
     }
 
     //

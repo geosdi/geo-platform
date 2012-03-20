@@ -41,12 +41,9 @@ import java.io.Serializable;
  * @author giuseppe
  * 
  */
-public class GeoPlatformException extends RuntimeException implements
-        Serializable {
+public class GeoPlatformException extends RuntimeException
+        implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -573700062406606079L;
     private String message;
     private Throwable e;

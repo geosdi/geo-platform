@@ -134,9 +134,6 @@ public class OGCService implements IOGCService {
         } catch (IllegalParameterFault ex) {
             logger.error(ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
-        } catch (ResourceNotFoundFault ex) {
-            logger.error("Insert Server Error : " + ex.getMessage());
-            throw new GeoPlatformException(ex.getMessage());
         }
         return dtoServerConverter.convertServerWS(serverWS);
     }

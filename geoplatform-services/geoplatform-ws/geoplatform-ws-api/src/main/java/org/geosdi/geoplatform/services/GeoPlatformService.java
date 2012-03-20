@@ -708,7 +708,7 @@ public interface GeoPlatformService {
     ServerDTO saveServer(@WebParam(name = "id") Long id,
                          @WebParam(name = "aliasServerName") String aliasServerName,
                          @WebParam(name = "serverUrl") String serverUrl)
-            throws IllegalParameterFault, ResourceNotFoundFault;
+            throws IllegalParameterFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="ACL">

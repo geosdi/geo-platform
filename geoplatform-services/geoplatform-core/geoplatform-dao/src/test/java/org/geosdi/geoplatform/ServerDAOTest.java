@@ -59,11 +59,11 @@ public class ServerDAOTest extends BaseDAOTest {
         insertServers();
 
         logger.info("\n*** Number of Servers into DB: {} ***",
-                serverDAO.findAll().size());
+                    serverDAO.findAll().size());
 
-        Assert.assertTrue("Error on number of total servers, expected 3 servers", serverDAO.findAll().size() == 3);
-        Assert.assertTrue("Error on number of WMS servers, expected 2 servers", serverDAO.findAll(GPCapabilityType.WMS).size() == 2);
-        Assert.assertTrue("Error on number of CSW servers, expected 1 server", serverDAO.findAll(GPCapabilityType.CSW).size() == 1);
+        Assert.assertTrue("Error on number of total servers", serverDAO.findAll().size() >= 3);
+        Assert.assertTrue("Error on number of WMS servers", serverDAO.findAll(GPCapabilityType.WMS).size() == 2);
+        Assert.assertTrue("Error on number of CSW servers", serverDAO.findAll(GPCapabilityType.CSW).size() >= 1);
     }
 
     private void removeAllServers() {
@@ -82,6 +82,9 @@ public class ServerDAOTest extends BaseDAOTest {
         serverDAO.persist(server1WMS, server2WMS, server1CSW);
         logger.debug("\n*** SAVED Server:\n{}\n***", server1WMS);
         logger.debug("\n*** SAVED Server:\n{}\n***", server2WMS);
+        logger.debug("\n*** SAVED Server:\n{}\n***", server1CSW);
+        //
+//        this.insertDummyCSWServer();
     }
 
     private GeoPlatformServer createServer1WMS() {
@@ -118,5 +121,16 @@ public class ServerDAOTest extends BaseDAOTest {
         server.setAliasName("EARTHBUILDER");
         server.setServerType(GPCapabilityType.WMS);
         return server;
+    }
+
+    private void insertDummyCSWServer() {
+        for (int i = 10; i <= 99; i++) {
+            GeoPlatformServer server = new GeoPlatformServer();
+            server.setTitle("Title_" + i);
+            server.setAliasName("Alias_" + i);
+            server.setServerUrl("http://csw-test/" + i);
+            server.setServerType(GPCapabilityType.CSW);
+            serverDAO.persist(server);
+        }
     }
 }

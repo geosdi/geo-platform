@@ -109,7 +109,7 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
         this.defaultMapOptions = new MapOptions();
 
-        this.defaultMapOptions.setNumZoomLevels(18);
+        this.defaultMapOptions.setNumZoomLevels(25);
 
         this.defaultMapOptions.setProjection("EPSG:900913");
         this.defaultMapOptions.setDisplayProjection(new Projection("EPSG:4326"));
@@ -515,11 +515,13 @@ public class MapLayoutWidget implements GeoPlatformMap {
      * @param bbox
      */
     @Override
-    public void zoomToMaxExtend(BboxClientInfo bbox) {
+    public void zoomToMaxExtend(BboxClientInfo bbox, String crs) {
         Bounds b = new Bounds(bbox.getLowerLeftX(), bbox.getLowerLeftY(),
                 bbox.getUpperRightX(), bbox.getUpperRightY());
-        b.transform(new Projection("EPSG:4326"),
-                new Projection(map.getProjection()));
+        if (!map.getProjection().equals(crs)) {
+            b.transform(new Projection(crs),
+                    new Projection(map.getProjection()));
+        }
 
         this.map.zoomToExtent(b);
     }

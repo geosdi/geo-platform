@@ -72,7 +72,7 @@ public class CatalogSearchResultWidget extends LayoutContainer {
         operationLabel.setStyleAttribute("font",
                 "normal 14px tahoma, arial, helvetica, sans-serif");
         resultLabel.setStyleAttribute("padding-top", "10px");
-        resultLabel.setStyleAttribute("padding-bottom", "5px");
+        resultLabel.setStyleAttribute("padding-bottom", "10px");
 
         add(operationLabel);
 

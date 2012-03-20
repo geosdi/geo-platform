@@ -40,6 +40,8 @@ import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.inject.client.AbstractGinModule;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.widget.CatalogFinderWidget;
+import org.geosdi.geoplatform.gui.client.widget.components.tab.MetadataTabItem;
+import org.geosdi.geoplatform.gui.client.widget.components.tab.SearchTabItem;
 
 /**
  *
@@ -47,11 +49,15 @@ import org.geosdi.geoplatform.gui.client.widget.CatalogFinderWidget;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class CatalogFinderInjectorModule extends AbstractGinModule {
-    
+
     @Override
     protected void configure() {
         bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
-        
+
+        bind(SearchTabItem.class).in(Singleton.class);
+
+        bind(MetadataTabItem.class).in(Singleton.class);
+
         bind(CatalogFinderWidget.class).in(Singleton.class);
     }
 }

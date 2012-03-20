@@ -148,10 +148,12 @@ class WMSServiceImpl {
             throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(request.getId());
         if (server == null) {
-            throw new ResourceNotFoundFault("Server has been deleted", request.getId());
+            throw new ResourceNotFoundFault("Server has been deleted",
+                    request.getId());
         }
 
-        WMSCapabilities wmsCapabilities = this.getWMSCapabilities(server.getServerUrl(), token);
+        WMSCapabilities wmsCapabilities = this.getWMSCapabilities(
+                server.getServerUrl(), token);
 
 //        server = this.createWMSServerFromService(server, wmsCapabilities.getService());
 //        serverDao.merge(server);
@@ -166,7 +168,8 @@ class WMSServiceImpl {
 
     public Long insertServer(GeoPlatformServer server) {
         /** IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER **/
-        GeoPlatformServer serverSearch = serverDao.findByServerUrl(server.getServerUrl());
+        GeoPlatformServer serverSearch = serverDao.findByServerUrl(
+                server.getServerUrl());
         if (serverSearch != null) {
             return serverSearch.getId();
         }
@@ -262,12 +265,14 @@ class WMSServiceImpl {
         RasterLayerDTO raster = this.convertLayerToRaster(layer, urlServer);
 
         List<Layer> subLayerList = layer.getLayerChildren();
-        List<RasterLayerDTO> subRasterList = new ArrayList<RasterLayerDTO>(subLayerList.size());
+        List<RasterLayerDTO> subRasterList = new ArrayList<RasterLayerDTO>(
+                subLayerList.size());
         raster.setSubLayerList(subRasterList);
 
         // ADD subRaster
         for (Layer layerIth : subLayerList) {
-            RasterLayerDTO rasterIth = this.getRasterAndSubRaster(layerIth, urlServer);
+            RasterLayerDTO rasterIth = this.getRasterAndSubRaster(layerIth,
+                    urlServer);
             subRasterList.add(rasterIth);
         }
 
@@ -309,7 +314,8 @@ class WMSServiceImpl {
     }
 
     private List<ServerDTO> convertToServerList(List<GeoPlatformServer> serverList) {
-        List<ServerDTO> shortServers = new ArrayList<ServerDTO>(serverList.size());
+        List<ServerDTO> shortServers = new ArrayList<ServerDTO>(
+                serverList.size());
         ServerDTO serverDTOIth = null;
         for (GeoPlatformServer server : serverList) {
             serverDTOIth = new ServerDTO(server);

@@ -45,7 +45,7 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
  * 
  */
 public interface GeoPlatformMap extends GeoPlatformEditor, GeoPlatformMeasure,
-                                        GeoPlatformFeatureInfo {
+        GeoPlatformFeatureInfo {
 
     public MapWidget getMapWidget();
 
@@ -53,5 +53,5 @@ public interface GeoPlatformMap extends GeoPlatformEditor, GeoPlatformMeasure,
 
     public IGeoPlatofomMapButtonBar getButtonBar();
 
-    public void zoomToMaxExtend(BboxClientInfo bbox);
+    public void zoomToMaxExtend(BboxClientInfo bbox, String crs);
 }

@@ -70,8 +70,8 @@ public class GPMapToolsWidget implements GPMapToolsHandler {
     }
 
     @Override
-    public void onZoomToMaxExtend(BboxClientInfo bbox) {
-        this.geoPlatformMap.zoomToMaxExtend(bbox);
+    public void onZoomToMaxExtend(BboxClientInfo bbox, String crs) {
+        this.geoPlatformMap.zoomToMaxExtend(bbox, crs);
     }
 
     @Override

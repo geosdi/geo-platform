@@ -46,7 +46,8 @@ import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientIn
  *
  */
 public class ZoomToExtendsEvent extends GwtEvent<GPMapToolsHandler> {
-    
+
+    private String crs;
     private BboxClientInfo bbox;
 
     @Override
@@ -56,7 +57,7 @@ public class ZoomToExtendsEvent extends GwtEvent<GPMapToolsHandler> {
 
     @Override
     protected void dispatch(GPMapToolsHandler handler) {
-        handler.onZoomToMaxExtend(bbox);
+        handler.onZoomToMaxExtend(bbox, crs);
     }
 
     /**
@@ -64,5 +65,12 @@ public class ZoomToExtendsEvent extends GwtEvent<GPMapToolsHandler> {
      */
     public void setBbox(BboxClientInfo bbox) {
         this.bbox = bbox;
-    }  
+    }
+
+    /**
+     * @param crs the crs to set
+     */
+    public void setCrs(String crs) {
+        this.crs = crs;
+    }
 }

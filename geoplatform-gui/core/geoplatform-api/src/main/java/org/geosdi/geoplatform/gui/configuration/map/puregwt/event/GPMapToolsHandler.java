@@ -52,7 +52,7 @@ public interface GPMapToolsHandler extends EventHandler {
     
     void onScaleSelectionChange(GPScaleBean value);
     
-    void onZoomToMaxExtend(BboxClientInfo bbox);
+    void onZoomToMaxExtend(BboxClientInfo bbox, String crs);
     
     void onManageGraticuleTool(boolean activation);
 }

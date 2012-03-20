@@ -33,55 +33,61 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.tab;
+package org.geosdi.geoplatform.gui.client.widget.components.status;
 
+import com.extjs.gxt.ui.client.Style.LayoutRegion;
+import com.extjs.gxt.ui.client.util.Margins;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
+import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
+import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.user.client.Element;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabWidget;
+import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-@Singleton
-public class GPCatalogTabWidget extends GeoPlatformTabWidget {
+public class CatalogStatusBar extends LayoutContainer {
 
-    private SearchTabItem searchItem;
-    private MetadataTabItem metadataItem;
-
-    @Inject
-    public GPCatalogTabWidget(SearchTabItem theSearchItem, MetadataTabItem theMetadataItem) {
-        super(true);
-        this.searchItem = theSearchItem;
-        this.metadataItem = theMetadataItem;
-    }
+    private SearchStatus searchStatus;
 
     @Override
-    public void addComponents() {
-        super.add(this.searchItem);
-        super.add(this.metadataItem);
+    protected void onRender(Element parent, int index) {
+        super.onRender(parent, index);
+
+        BorderLayoutData southData = new BorderLayoutData(LayoutRegion.SOUTH);
+        southData.setMargins(new Margins(5, 0, 0, 0));
+
+        ContentPanel south = new ContentPanel();
+        south.setHeaderVisible(false);
+
+        ToolBar toolBar = new ToolBar();
+
+        this.searchStatus = new SearchStatus();
+        this.searchStatus.setAutoWidth(true);
+
+        toolBar.add(this.searchStatus);
+
+        toolBar.add(new FillToolItem());
+
+        south.setBottomComponent(toolBar);
+
+        super.add(south, southData);
     }
 
-    @Override
-    public void initTab() {
-        super.setHeight(700);
+    /**
+     * Set the correct Status Icon Style
+     */
+    public void setSearchStatus(Enum status, Enum message) {
+        this.searchStatus.setIconStyle(status.toString());
+        this.searchStatus.setText(message.toString());
     }
 
-    @Override
-    public void setWidgetProperties() {
-    }
-
-    @Override
-    public void createTabItems() {
-//        this.searchItem = new SearchTabItem();
-//        this.metadataItem = new MetadataTabItem();
-    }
-
-    @Override
-    protected void onRender(Element target, int index) {
-        super.onRender(target, index);
-        super.buildWidget();
+    public void setSearchStatus(Enum status, String message) {
+        this.searchStatus.setIconStyle(status.toString());
+        this.searchStatus.setText(message);
     }
 }

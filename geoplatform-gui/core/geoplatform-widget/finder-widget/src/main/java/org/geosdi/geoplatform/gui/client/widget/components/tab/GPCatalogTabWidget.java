@@ -52,7 +52,8 @@ public class GPCatalogTabWidget extends GeoPlatformTabWidget {
     private MetadataTabItem metadataItem;
 
     @Inject
-    public GPCatalogTabWidget(SearchTabItem theSearchItem, MetadataTabItem theMetadataItem) {
+    public GPCatalogTabWidget(SearchTabItem theSearchItem,
+            MetadataTabItem theMetadataItem) {
         super(true);
         this.searchItem = theSearchItem;
         this.metadataItem = theMetadataItem;
@@ -75,8 +76,6 @@ public class GPCatalogTabWidget extends GeoPlatformTabWidget {
 
     @Override
     public void createTabItems() {
-//        this.searchItem = new SearchTabItem();
-//        this.metadataItem = new MetadataTabItem();
     }
 
     @Override

@@ -73,10 +73,10 @@ public interface GeoPlatformCSWService {
 
     @Post
     @HttpResource(location = "/server/csw")
-    ServerCSWDTO saveServerCSW(@WebParam(name = "id") Long id,
-                               @WebParam(name = "alias") String alias,
-                               @WebParam(name = "serverUrl") String serverUrl)
-            throws IllegalParameterFault, ResourceNotFoundFault;
+    ServerCSWDTO saveServerCSW(
+            @WebParam(name = "alias") String alias,
+            @WebParam(name = "serverUrl") String serverUrl)
+            throws IllegalParameterFault;
 
     @Delete
     @HttpResource(location = "/server/csw/{serverID}")

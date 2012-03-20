@@ -42,6 +42,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.model.FinderBean;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
+import org.geosdi.geoplatform.responce.ServerCSWDTO;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
@@ -53,8 +54,12 @@ public interface IGPCatalogFinderService {
     ArrayList<GPCSWServerBeanModel> getAllCSWServers(HttpServletRequest httpServletRequest);
 
     PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(PagingLoadConfig config,
-            String searchText,
-            HttpServletRequest httpServletRequest);
+                                                            String searchText,
+                                                            HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
+
+    GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl)
+            throws GeoPlatformException;
 
     ArrayList<FinderBean> searchPublicMetadata(String searchString,
             HttpServletRequest httpServletRequest)

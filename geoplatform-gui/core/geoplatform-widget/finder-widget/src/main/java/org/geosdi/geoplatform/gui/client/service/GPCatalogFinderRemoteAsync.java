@@ -53,6 +53,9 @@ public interface GPCatalogFinderRemoteAsync {
     void searchCSWServers(PagingLoadConfig config, String searchText,
             AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback);
 
+    void saveServerCSW(String alias, String serverUrl,
+                       AsyncCallback<GPCSWServerBeanModel> callback);
+
     void searchPublicMetadata(String searchString,
             AsyncCallback<ArrayList<FinderBean>> callback);
 

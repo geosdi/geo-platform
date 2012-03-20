@@ -82,9 +82,9 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     }
 
     @Override
-    public ServerCSWDTO saveServerCSW(Long id, String alias, String serverUrl)
-            throws IllegalParameterFault, ResourceNotFoundFault {
-        return cswServiceDelegate.saveServerCSW(id, alias, serverUrl);
+    public ServerCSWDTO saveServerCSW(String alias, String serverUrl)
+            throws IllegalParameterFault {
+        return cswServiceDelegate.saveServerCSW(alias, serverUrl);
     }
 
     @Override

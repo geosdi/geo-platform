@@ -37,19 +37,29 @@ package org.geosdi.geoplatform.services;
 
 import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.cswconnector.GPCSWServerConnector;
+import org.geosdi.geoplatform.cswconnector.GeoPlatformCSWConnectorBuilder;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.services.development.CSWEntityCorrectness;
+import org.geotoolkit.csw.GetCapabilitiesRequest;
+import org.geotoolkit.csw.xml.CSWMarshallerPool;
+import org.geotoolkit.csw.xml.v202.Capabilities;
+import org.geotoolkit.xml.MarshallerPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,6 +73,10 @@ class CSWServiceImpl {
     final private Logger logger = LoggerFactory.getLogger(CSWServiceImpl.class);
     // DAO
     private GPServerDAO serverDao;
+    //      
+//    private MarshallerPool pool = CSWMarshallerPool.getInstance();
+    private MarshallerPool pool;
+    private Unmarshaller um;
 
     /**
      * @param serverDao the serverDao to set
@@ -88,30 +102,67 @@ class CSWServiceImpl {
     }
 
     /**
-     * @see GeoPlatformCSWService#saveServerCSW(java.lang.Long, java.lang.String, java.lang.String)
+     * @see GeoPlatformCSWService#saveServerCSW(java.lang.String, java.lang.String)
      */
-    ServerCSWDTO saveServerCSW(Long id, String alias, String serverUrl)
-            throws IllegalParameterFault, ResourceNotFoundFault {
+    ServerCSWDTO saveServerCSW(String alias, String serverUrl)
+            throws IllegalParameterFault {
+        if (serverDao.findByServerUrl(serverUrl) == null ? false : true) {
+            throw new IllegalParameterFault("Duplicated Server URL");
+        }
+
+        URL serverURL;
         try {
-            URL serverURL = new URL(serverUrl);
-        } catch (MalformedURLException e) {
-            logger.error("MalformedURLException: " + e);
+            serverURL = new URL(serverUrl);
+        } catch (MalformedURLException ex) {
+            logger.error("MalformedURLException: " + ex);
             throw new IllegalParameterFault("Malformed URL");
         }
 
-        GeoPlatformServer server;
-        if (id != null) { // Existent server
-            server = serverDao.find(id);
-            CSWEntityCorrectness.checkServerCSW(server); // TODO assert
-        } else { // New server
-            if (serverDao.findByServerUrl(serverUrl) == null ? false : true) {
-                throw new IllegalParameterFault("Duplicated Server URL");
+
+        try {
+            pool = CSWMarshallerPool.getInstance();
+            um = pool.acquireUnmarshaller();
+
+            GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().withServerUrl(serverURL).build();
+
+            // make a getCapabilities request
+            final GetCapabilitiesRequest getCapa = serverConnector.createGetCapabilities();
+
+            // unmarshall the response
+            InputStream is = getCapa.getResponseStream();
+            Capabilities capabilities = (Capabilities) um.unmarshal(is);
+            
+//            if(capabilities.getVersion())
+            System.out.println("--- " + capabilities.getVersion());
+            System.out.println("--- " + capabilities.getUpdateSequence());
+            System.out.println("+++ " + capabilities.getServiceIdentification().getAbstract());
+            System.out.println("+++ " + capabilities.getServiceIdentification().getFees());
+            System.out.println("+++ " + capabilities.getServiceIdentification().getFirstAbstract());
+            System.out.println("+++ " + capabilities.getServiceIdentification().getFirstTitle());
+            System.out.println("+++ " + capabilities.getServiceIdentification().getTitle());
+            System.out.println("+++ " + capabilities.getServiceIdentification().getServiceType());
+            System.out.println("+++ " + capabilities.getServiceIdentification().getServiceTypeVersion());
+            System.out.println("+++ " + capabilities.getServiceIdentification().getAccessConstraints());
+            System.out.println("+++ " + capabilities.getServiceIdentification().getKeywords());
+
+        } catch (JAXBException ex) {
+            logger.error("JAXBException: " + ex.getMessage());
+            throw new IllegalParameterFault("Error on acquire unmarshaller");
+        } catch (IOException ex) {
+            logger.error("IOException: " + ex.getMessage());
+            throw new IllegalParameterFault("Error on parse response stream");
+        } finally {
+            if (um != null) {
+                pool.release(um);
             }
-            server = new GeoPlatformServer();
-            server.setServerType(GPCapabilityType.CSW);
         }
+
+        GeoPlatformServer server = new GeoPlatformServer();
+        server.setServerType(GPCapabilityType.CSW);
         server.setAliasName(alias);
         server.setServerUrl(serverUrl);
+
+        CSWEntityCorrectness.checkServerCSW(server); // TODO assert
         serverDao.save(server);
 
         return new ServerCSWDTO(server);

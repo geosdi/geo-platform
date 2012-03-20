@@ -36,12 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.components.form;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
-import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.KeyListener;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.Field;
@@ -50,12 +45,15 @@ import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
-import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.http.client.URL;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
+import org.geosdi.geoplatform.gui.client.widget.components.filters.widget.CSWServerPaginationContainer;
 import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
+import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
 
 /**
  *
@@ -65,14 +63,16 @@ import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 public class CSWServerFormWidget
         extends GeoPlatformFormWidget<GPServerBeanModel> {
 
-    private FormButtonBinding formButtonBinding; // Monitors the valid state of a form and enabled / disabled all buttons.
+    private CSWServerPaginationContainer catalogWindget;
+    private FormButtonBinding formButtonBinding; // Monitors the valid state of a form and enabled / disabled all buttons
     private TextField<String> urlField;
     private TextField<String> aliasField;
     private Button saveButton;
     private String urlEncoding;
 
-    public CSWServerFormWidget() {
+    public CSWServerFormWidget(CSWServerPaginationContainer catalogWindget) {
         super(true);
+        this.catalogWindget = catalogWindget;
     }
 
     @Override
@@ -168,12 +168,6 @@ public class CSWServerFormWidget
     }
 
     @Override
-    public void execute() {
-//        this.saveStatus.setBusy("Adding CSW Server");
-        // TODO
-    }
-
-    @Override
     public void reset() {
         this.saveButton.disable();
         this.urlField.clear();
@@ -186,5 +180,44 @@ public class CSWServerFormWidget
             super.init();
         }
         super.show();
+    }
+
+    @Override
+    public void execute() {
+        super.saveStatus.setBusy("Adding CSW Server");
+
+        GPCSWServerBeanModel server = catalogWindget.containsServer(urlEncoding);
+        if (server != null) {
+            setStatus(SaveStatus.EnumSaveStatus.STATUS_NO_SAVE.getValue(),
+                      "Server already exist");
+            // TODO Set status message on main windows
+            System.out.println("Server already exist, with alias \"" + server.getAlias() + "\"");
+        } else {
+            saveServer();
+        }
+    }
+
+    private void saveServer() {
+        GPCatalogFinderRemoteImpl.Util.getInstance().saveServerCSW(aliasField.getValue().trim(),
+                                                                   urlEncoding,
+                                                                   new AsyncCallback<GPCSWServerBeanModel>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                setStatus(SaveStatus.EnumSaveStatus.STATUS_NO_SAVE.getValue(),
+                          SaveStatus.EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue());
+                // TODO Set status message on main windows
+                System.out.println("Error on saving CSW server");
+            }
+
+            @Override
+            public void onSuccess(GPCSWServerBeanModel server) {
+                catalogWindget.addServer(server);
+                saveStatus.clearStatus("");
+                hide();
+                // TODO Set status message on main windows
+                System.out.println("CSW server correctly saved");
+            }
+        });
     }
 }

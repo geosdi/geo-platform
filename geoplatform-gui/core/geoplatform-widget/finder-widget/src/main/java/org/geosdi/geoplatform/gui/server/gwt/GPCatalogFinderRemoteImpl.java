@@ -66,9 +66,16 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServl
 
     @Override
     public PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
-            PagingLoadConfig config, String searchText) {
+            PagingLoadConfig config, String searchText)
+            throws GeoPlatformException {
         return gpCatalogFinderService.searchCSWServers(config, searchText,
                 super.getThreadLocalRequest());
+    }
+
+    @Override
+    public GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl)
+            throws GeoPlatformException {
+        return gpCatalogFinderService.saveServerCSW(alias, serverUrl);
     }
 
     @Override

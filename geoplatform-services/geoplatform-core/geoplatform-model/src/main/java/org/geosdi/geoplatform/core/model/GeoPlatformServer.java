@@ -93,7 +93,7 @@ public class GeoPlatformServer implements Serializable {
     @Column(name = "contact_organization")
     private String contactOrganization;
     //
-    @Column(name = "cabability_type", nullable = false)
+    @Column(name = "capability_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private GPCapabilityType serverType;
 

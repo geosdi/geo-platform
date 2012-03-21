@@ -48,6 +48,17 @@
 
     <dependencies>
         
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-oxm</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+        </dependency>
+        
         <!-- =========================================================== -->
         <!-- ======================== GUAVA =========================== -->
 	<!-- =========================================================== -->

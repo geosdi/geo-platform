@@ -54,9 +54,13 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
+import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
+import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
+import com.extjs.gxt.ui.client.widget.tips.QuickTip;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.Element;
@@ -104,17 +108,8 @@ public class CSWServerPaginationContainer
         super.widget.setSelectionModel(sm);
         super.widget.addPlugin(sm);
 
-        this.sm.addSelectionChangedListener(new SelectionChangedListener<GPCSWServerBeanModel>() {
-
-            @Override
-            public void selectionChanged(SelectionChangedEvent<GPCSWServerBeanModel> se) {
-                if (se.getSelectedItem() == null) {
-                    deleteServerButton.disable();
-                } else {
-                    deleteServerButton.enable();
-                }
-            }
-        });
+        // ADD URL tip
+        new QuickTip(super.widget);
     }
 
     private void createSearchComponent() {
@@ -192,6 +187,18 @@ public class CSWServerPaginationContainer
         aliasColumn.setHeader("Alias");
         aliasColumn.setFixed(true);
         aliasColumn.setResizable(false);
+        aliasColumn.setRenderer(new GridCellRenderer<GPCSWServerBeanModel>() {
+
+            @Override
+            public Object render(GPCSWServerBeanModel model, String property,
+                                 ColumnData config, int rowIndex, int colIndex,
+                                 ListStore<GPCSWServerBeanModel> store,
+                                 Grid<GPCSWServerBeanModel> grid) {
+                String url = model.getUrlServer();
+                return "<div qtitle='Server URL'"
+                        + " qtip='" + url + "'>" + model.getAlias() + "</div>";
+            }
+        });
         configs.add(aliasColumn);
 
         ColumnConfig titleColumn = new ColumnConfig();
@@ -204,6 +211,17 @@ public class CSWServerPaginationContainer
 
         sm = new CheckBoxSelectionModel<GPCSWServerBeanModel>();
         sm.setSelectionMode(Style.SelectionMode.SINGLE);
+        sm.addSelectionChangedListener(new SelectionChangedListener<GPCSWServerBeanModel>() {
+
+            @Override
+            public void selectionChanged(SelectionChangedEvent<GPCSWServerBeanModel> se) {
+                if (se.getSelectedItem() == null) {
+                    deleteServerButton.disable();
+                } else {
+                    deleteServerButton.enable();
+                }
+            }
+        });
 
         ColumnConfig checkColumn = sm.getColumn();
         checkColumn.setId("cheked");
@@ -282,7 +300,7 @@ public class CSWServerPaginationContainer
 
     private void executeDeleteServer() {
         super.widget.mask("Deleting server");
-        
+
         final GPCSWServerBeanModel selectedServer = sm.getSelectedItem();
         GPCatalogFinderRemoteImpl.Util.getInstance().deleteServerCSW(selectedServer.getId(),
                                                                      new AsyncCallback<Boolean>() {

@@ -47,10 +47,8 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
  */
 public abstract class GPBeanTreeModel extends BaseTreeModel implements IGPNode {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 2095233644130779285L;
+    //
     private Long id;
     private String label;
     private int zIndex;

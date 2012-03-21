@@ -45,6 +45,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.widget.components.MainViewFinderWidget;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.FiltersFinderWidget;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  *
@@ -54,7 +55,7 @@ import org.geosdi.geoplatform.gui.client.widget.components.filters.FiltersFinder
 @Singleton
 public class CatalogFinderWidget extends GeoPlatformWindow {
 
-    private TreePanel tree;
+    private TreePanel<GPBeanTreeModel> tree;
     private FiltersFinderWidget filtersWidget;
     private MainViewFinderWidget mainViewWidget;
     private EventBus bus;
@@ -72,7 +73,7 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
         super(lazy);
     }
 
-    public CatalogFinderWidget(boolean lazy, TreePanel theTree) {
+    public CatalogFinderWidget(boolean lazy, TreePanel<GPBeanTreeModel> theTree) {
         super(lazy);
         tree = theTree;
     }

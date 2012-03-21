@@ -38,8 +38,10 @@ package org.geosdi.geoplatform.gui.client.widget.components.search;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.user.client.Element;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.SummaryRecordsContainer;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
 /**
  *
@@ -47,6 +49,8 @@ import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.Sum
  * @email  giuseppe.lascaleia@geosdi.org
  */
 public class CatalogSearchResultWidget extends LayoutContainer {
+
+    private TreePanel<GPBeanTreeModel> tree; // TODO Inject via GIN
 
     public CatalogSearchResultWidget() {
         setStyleAttribute("padding", "10px");
@@ -67,16 +71,18 @@ public class CatalogSearchResultWidget extends LayoutContainer {
 
         add(new SummaryRecordsContainer());
 
-        Label operationLabel = new Label("Operations with selected");
-        operationLabel.setStyleAttribute("color", "#4169E1");
-        operationLabel.setStyleAttribute("font",
-                "normal 14px tahoma, arial, helvetica, sans-serif");
-        resultLabel.setStyleAttribute("padding-top", "10px");
-        resultLabel.setStyleAttribute("padding-bottom", "10px");
+        if (tree != null) {  // Widgets for add layers to the tree
+            Label operationLabel = new Label("Operations with selected");
+            operationLabel.setStyleAttribute("color", "#4169E1");
+            operationLabel.setStyleAttribute("font",
+                    "normal 14px tahoma, arial, helvetica, sans-serif");
+            resultLabel.setStyleAttribute("padding-top", "10px");
+            resultLabel.setStyleAttribute("padding-bottom", "10px");
 
-        add(operationLabel);
+            add(operationLabel);
 
-        Button addLayerButton = new Button("Add To Layer Tree");
-        add(addLayerButton);
+            Button addLayerButton = new Button("Add To Layer Tree");
+            add(addLayerButton);
+        }
     }
 }

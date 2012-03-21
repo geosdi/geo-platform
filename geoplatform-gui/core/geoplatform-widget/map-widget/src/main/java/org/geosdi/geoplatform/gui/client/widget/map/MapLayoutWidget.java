@@ -38,8 +38,13 @@ package org.geosdi.geoplatform.gui.client.widget.map;
 import org.geosdi.geoplatform.gui.client.widget.MapToolbar;
 import org.geosdi.geoplatform.gui.client.widget.map.control.history.NavigationHistoryControl;
 import org.geosdi.geoplatform.gui.client.widget.map.routing.GPRoutingManagerWidget;
+import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
+import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
+import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
 import org.geosdi.geoplatform.gui.impl.map.GeoPlatformMap;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
+import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.GPFeatureInfoEvent;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.Map;
@@ -51,28 +56,26 @@ import org.gwtopenmaps.openlayers.client.control.DrawFeature;
 import org.gwtopenmaps.openlayers.client.control.LayerSwitcher;
 import org.gwtopenmaps.openlayers.client.control.Measure;
 import org.gwtopenmaps.openlayers.client.control.MeasureOptions;
+import org.gwtopenmaps.openlayers.client.control.MousePosition;
 import org.gwtopenmaps.openlayers.client.control.ScaleLine;
 import org.gwtopenmaps.openlayers.client.event.MeasureEvent;
 import org.gwtopenmaps.openlayers.client.event.MeasureListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.handler.PathHandler;
 import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
-import org.gwtopenmaps.openlayers.client.layer.OSM;
-import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
-
-import com.extjs.gxt.ui.client.widget.Info;
-import com.google.gwt.user.client.Timer;
-import org.geosdi.geoplatform.gui.client.widget.scale.GPScaleWidget;
-import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BboxClientInfo;
-import org.geosdi.geoplatform.gui.configuration.map.puregwt.MapHandlerManager;
-import org.geosdi.geoplatform.gui.factory.map.GPApplicationMap;
-import org.geosdi.geoplatform.gui.puregwt.featureinfo.event.GPFeatureInfoEvent;
-import org.gwtopenmaps.openlayers.client.control.MousePosition;
+import org.gwtopenmaps.openlayers.client.layer.Bing;
+import org.gwtopenmaps.openlayers.client.layer.BingOptions;
+import org.gwtopenmaps.openlayers.client.layer.BingType;
 import org.gwtopenmaps.openlayers.client.layer.GoogleV3;
 import org.gwtopenmaps.openlayers.client.layer.GoogleV3MapType;
 import org.gwtopenmaps.openlayers.client.layer.GoogleV3Options;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
+import org.gwtopenmaps.openlayers.client.layer.OSM;
+import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
 import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
+
+import com.extjs.gxt.ui.client.widget.Info;
+import com.google.gwt.user.client.Timer;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -95,6 +98,8 @@ public class MapLayoutWidget implements GeoPlatformMap {
     private boolean infoActive;
     private boolean measureActive;
     private boolean measureAreaActive;
+    
+    private final String bingKey = "Apd8EWF9Ls5tXmyHr22OuL1ay4HRJtI4JG4jgluTDVaJdUXZV6lpSBpX-TwnoRDG";
 
     public MapLayoutWidget() {
         super();
@@ -136,11 +141,12 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
         this.createOSM();
         this.createBaseGoogleLayer();
+        this.createBingLayer();
 
         this.mapControl = new MapControlManager(this.map);
     }
 
-    public void addMeasureControl() {
+	public void addMeasureControl() {
 
         MeasureOptions measOpts = new MeasureOptions();
         measOpts.setPersist(true);
@@ -263,6 +269,32 @@ public class MapLayoutWidget implements GeoPlatformMap {
 
         hybrid.setZIndex(-4);
     }
+    
+    private void createBingLayer() {
+		
+    	 Bing road = new Bing(new BingOptions("Bing Road Layer",
+                 bingKey, BingType.ROAD));
+    	 road.setIsBaseLayer(true);
+    	 
+    	 this.map.addLayer(road);
+    	 road.setZIndex(-5);
+
+         Bing hybrid = new Bing(new BingOptions("Bing Hybrid Layer",
+        		 bingKey, BingType.HYBRID));
+         hybrid.setIsBaseLayer(true);
+         
+         this.map.addLayer(hybrid);
+         hybrid.setZIndex(-6);
+
+         Bing aerial = new Bing(new BingOptions("Bing Aerial Layer",
+        		 bingKey, BingType.AERIAL));
+         
+         aerial.setIsBaseLayer(true);
+         this.map.addLayer(aerial);
+         
+         aerial.setZIndex(-7);
+		
+	}
 
     /**
      * Add Map to the ContentPanel passed from Dispatcher

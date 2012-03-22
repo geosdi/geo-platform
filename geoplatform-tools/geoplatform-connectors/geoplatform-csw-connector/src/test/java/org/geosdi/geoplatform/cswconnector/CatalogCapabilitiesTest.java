@@ -36,12 +36,8 @@
 package org.geosdi.geoplatform.cswconnector;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import org.geosdi.connector.api.capabilities.model.csw.CatalogCapabilities;
-import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -62,48 +58,50 @@ public class CatalogCapabilitiesTest {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
-    private GeoPlatformMarshall xStreamCatalog;
+    private GatalogGetCapabilitiesBean catalogCapabilitiesBean;
 
     @Test
-    public void testCapabilitiesV201() {
-        URL url = null;
-        HttpURLConnection conn = null;
+    public void testCapabilitiesV201WithoutVersionControl() {
         try {
-            url = new URL("http://catalogocentrale.nsdi.it/geonetwork/srv/"
+            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrlWithoutVersionControl("http://catalogocentrale.nsdi.it/geonetwork/srv/"
                     + "en/csw?SERVICE=CSW&REQUEST=GetCapabilities");
 
-            conn = (HttpURLConnection) url.openConnection();
-
-            CatalogCapabilities catalogGetCapabilities = (CatalogCapabilities) this.xStreamCatalog.loadFromStream(
-                    conn.getInputStream());
-
             logger.info(
-                    "CATALOG CAPABILITIES BEAN V_2.0.1 @@@@@@@@@@@"
+                    "@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1 WITHOUT VERSION CONTROL"
                     + "@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
 
         } catch (MalformedURLException ex) {
             logger.error("MalformedURLException @@@@@@@@@@@@@@ " + ex);
         } catch (IOException es) {
             logger.error("IOException @@@@@@@@@@@@@@ " + es);
-        } finally {
-            if (conn != null) {
-                conn.disconnect();
-            }
         }
     }
-    
+
+    @Test
+    public void testCapabilitiesV201() {
+        try {
+            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl("http://catalogocentrale.nsdi.it/geonetwork/srv/"
+                    + "en/csw?SERVICE=CSW&REQUEST=GetCapabilities");
+
+            logger.info(
+                    "@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1"
+                    + "@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
+
+        } catch (MalformedURLException ex) {
+            logger.error("MalformedURLException @@@@@@@@@@@@@@ " + ex);
+        } catch (IOException es) {
+            logger.error("IOException @@@@@@@@@@@@@@ " + es);
+        } catch (CatalogVersionException ve) {
+            logger.error("CatalogVersionException @@@@@@@@@@@@ " + ve);
+        }
+    }
+
     @Test
     public void testCapabilitiesV202() throws Exception {
-        URL url = null;
-        HttpURLConnection conn = null;
         try {
-            url = new URL("http://rsdi.regione.basilicata.it/Catalogo/srv/en/"
+
+            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl("http://rsdi.regione.basilicata.it/Catalogo/srv/en/"
                     + "csw?SERVICE=CSW&REQUEST=GetCapabilities");
-
-            conn = (HttpURLConnection) url.openConnection();
-
-            CatalogCapabilities catalogGetCapabilities = (CatalogCapabilities) this.xStreamCatalog.loadFromReader(new InputStreamReader(
-                    conn.getInputStream()));
 
             logger.info(
                     "CATALOG CAPABILITIES BEAN V_2.0.2 @@@@@@@@@@@"
@@ -113,10 +111,8 @@ public class CatalogCapabilitiesTest {
             logger.error("MalformedURLException @@@@@@@@@@@@@@ " + ex);
         } catch (IOException es) {
             logger.error("IOException @@@@@@@@@@@@@@ " + es);
-        } finally {
-            if (conn != null) {
-                conn.disconnect();
-            }
+        } catch (CatalogVersionException ve) {
+            logger.error("CatalogVersionException @@@@@@@@@@@@ " + ve);
         }
     }
 }

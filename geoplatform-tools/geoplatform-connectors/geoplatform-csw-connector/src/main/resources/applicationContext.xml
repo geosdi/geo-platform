@@ -37,5 +37,7 @@
             </util:map>
         </property>
     </bean>
+    
+    <bean id="catalogCapabilitiesBean" class="org.geosdi.geoplatform.cswconnector.GatalogGetCapabilitiesBean" />
 
 </beans>

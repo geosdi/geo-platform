@@ -205,24 +205,27 @@ public class CSWServerFormWidget
 
             @Override
             public void onFailure(Throwable caught) {
-                setStatus(SaveStatus.EnumSaveStatus.STATUS_NO_SAVE.getValue(),
-                          SaveStatus.EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.getValue());
+                setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
+                          caught.getMessage());
                 // TODO Set status message on main windows
-                System.out.println("Error on saving CSW server");
+                System.out.println("Error on saving CSW server: " + caught.getMessage());
             }
 
             @Override
             public void onSuccess(GPCSWServerBeanModel server) {
                 catalogWindget.addNewServer(server);
-                saveStatus.clearStatus("");
-                hide();
                 if (aliasValue.equals(server.getAlias())) {
+                    setStatus(EnumSaveStatus.STATUS_SAVE.toString(),
+                              EnumSaveStatus.STATUS_MESSAGE_SAVE.toString());
                     // TODO Set status message on main windows
                     System.out.println("Server correctly saved");
                 } else {
+                    setStatus(EnumSaveStatus.STATUS_NO_SAVE.toString(),
+                              EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.toString() + ": server already exist");
                     // TODO Set status message on main windows
                     System.out.println("Server already exist, with alias \"" + server.getAlias() + "\"");
                 }
+                hide();
             }
         });
     }

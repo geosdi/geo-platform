@@ -44,10 +44,8 @@ import java.io.Serializable;
  */
 public class BboxClientInfo implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -6733851739584878237L;
+    //
     private double lowerLeftX;
     private double lowerLeftY;
     private double upperRightX;

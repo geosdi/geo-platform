@@ -45,12 +45,9 @@ import org.geosdi.geoplatform.gui.model.IGeoPlatformFinder;
  * @author giuseppe
  * 
  */
-public class FinderBean extends GeoPlatformBeanModel implements
-        IGeoPlatformFinder {
+public class FinderBean extends GeoPlatformBeanModel
+        implements IGeoPlatformFinder {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -8014889849325486781L;
     //
     private String uuid;
@@ -152,7 +149,7 @@ public class FinderBean extends GeoPlatformBeanModel implements
     public String toString() {
         return "FinderBean{" + "uuid=" + uuid + ", title=" + title + ", abstractValue=" + abstractValue + ", keywordValues=" + keywordValues + ", bbox=" + bbox + ", metadataOnlineResourceBeanList=" + metadataOnlineResourceBeanList + '}';
     }
-    
+
     public class MetadataOnlineResourceBean {
 
         private String URL;

@@ -38,28 +38,21 @@ package org.geosdi.geoplatform.services;
 import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
+import org.geosdi.connector.api.capabilities.model.csw.CatalogCapabilities;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.cswconnector.GPCSWServerConnector;
-import org.geosdi.geoplatform.cswconnector.GeoPlatformCSWConnectorBuilder;
+import org.geosdi.geoplatform.cswconnector.CatalogGetCapabilitiesBean;
+import org.geosdi.geoplatform.cswconnector.CatalogVersionException;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.services.development.CSWEntityCorrectness;
-import org.geotoolkit.csw.GetCapabilitiesRequest;
-import org.geotoolkit.csw.xml.CSWMarshallerPool;
-import org.geotoolkit.csw.xml.v202.Capabilities;
-import org.geotoolkit.xml.MarshallerPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,16 +64,17 @@ import org.slf4j.LoggerFactory;
 class CSWServiceImpl {
 
     final private Logger logger = LoggerFactory.getLogger(CSWServiceImpl.class);
-
-    static {
-        pool = CSWMarshallerPool.getInstance();
-    }
+//    static {
+//        pool = CSWMarshallerPool.getInstance();
+//    }
     // DAO
     private GPServerDAO serverDao;
+    //
+    private CatalogGetCapabilitiesBean catalogCapabilitiesBean;
     //      
 //    private MarshallerPool pool = CSWMarshallerPool.getInstance();
-    private static MarshallerPool pool;
-    private Unmarshaller um;
+//    private static MarshallerPool pool;
+//    private Unmarshaller um;
 
     /**
      * @param serverDao the serverDao to set
@@ -90,12 +84,19 @@ class CSWServiceImpl {
     }
 
     /**
+     * @param catalogCapabilitiesBean the catalogCapabilitiesBean to set
+     */
+    public void setCatalogCapabilitiesBean(CatalogGetCapabilitiesBean catalogCapabilitiesBean) {
+        this.catalogCapabilitiesBean = catalogCapabilitiesBean;
+    }
+
+    /**
      * @see GeoPlatformCSWService#insertServerCSW(org.geosdi.geoplatform.core.model.GeoPlatformServer)
      */
     Long insertServerCSW(GeoPlatformServer server) {
         /** IMPORTANT TO AVOID EXCEPTION IN DB FOR UNIQUE URL SERVER **/
         GeoPlatformServer serverSearch = serverDao.findByServerUrl(
-                server.getServerUrl());
+                this.convertUrl(server.getServerUrl()));
         if (serverSearch != null) {
             return serverSearch.getId();
         }
@@ -111,38 +112,26 @@ class CSWServiceImpl {
      */
     ServerCSWDTO saveServerCSW(String alias, String serverUrl)
             throws IllegalParameterFault {
+        serverUrl = this.convertUrl(serverUrl);
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
         if (server != null) { // If there is already a server with the specified URLs
             return new ServerCSWDTO(server);
         }
 
-        URL serverURL;
         try {
-            serverURL = new URL(serverUrl);
-        } catch (MalformedURLException ex) {
-            logger.error("MalformedURLException: " + ex);
-            throw new IllegalParameterFault("Malformed URL");
-        }
+//            um = pool.acquireUnmarshaller();
+//
+//            GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
+//                    withServerUrl(serverURL).build();
+//
+//            // make a getCapabilities request
+//            final GetCapabilitiesRequest getCapa = serverConnector.createGetCapabilities();
+//
+//            // unmarshall the response
+//            InputStream is = getCapa.getResponseStream();
+//            Capabilities capabilities = (Capabilities) um.unmarshal(is);
 
-
-        try {
-            um = pool.acquireUnmarshaller();
-
-            GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
-                    withServerUrl(serverURL).build();
-
-            // make a getCapabilities request
-            final GetCapabilitiesRequest getCapa = serverConnector.createGetCapabilities();
-
-            // unmarshall the response
-            InputStream is = getCapa.getResponseStream();
-            Capabilities capabilities = (Capabilities) um.unmarshal(is);
-
-//            System.out.println("--- " + capabilities.getVersion());
-//            if (!capabilities.getVersion().equals(GPCatalogVersion.V202.toString())) {
-//                logger.error("The catalog version must be 2.0.2, but is " + capabilities.getVersion());
-//                throw new IllegalParameterFault("The catalog version must be 2.0.2");
-//            }
+            CatalogCapabilities capabilities = catalogCapabilitiesBean.bindUrl(serverUrl);
 
             server = new GeoPlatformServer();
             server.setServerType(GPCapabilityType.CSW);
@@ -150,23 +139,27 @@ class CSWServiceImpl {
             server.setAliasName(alias);
 
             server.setTitle(capabilities.getServiceIdentification().getTitle());
-            server.setAbstractServer(capabilities.getServiceIdentification().getAbstract());
+            server.setAbstractServer(capabilities.getServiceIdentification().getAbstractText());
+            server.setName(capabilities.getServiceProvider().getProviderName());
 
             CSWEntityCorrectness.checkServerCSW(server); // TODO assert
             serverDao.save(server);
 
-        } catch (JAXBException ex) {
-            logger.error("JAXBException: " + ex.getMessage());
-            throw new IllegalParameterFault("Error on acquire unmarshaller");
+        } catch (MalformedURLException ex) {
+            logger.error("### MalformedURLException: " + ex.getMessage());
+            throw new IllegalParameterFault("Malformed URL");
         } catch (IOException ex) {
-            logger.error("IOException: " + ex.getMessage());
+            logger.error("### IOException: " + ex.getMessage());
             throw new IllegalParameterFault("Error on parse response stream");
-        } finally {
-            if (um != null) {
-                pool.release(um);
-            }
+        } catch (CatalogVersionException ex) {
+            logger.error("### CatalogVersionException: " + ex.getMessage());
+            throw new IllegalParameterFault("The catalog version must be 2.0.2");
+//        } finally {
+//            if (um != null) {
+//                pool.release(um);
+//            }
         }
-        
+
         return new ServerCSWDTO(server);
     }
 
@@ -274,5 +267,13 @@ class CSWServiceImpl {
             shortServers.add(new ServerCSWDTO(server));
         }
         return shortServers;
+    }
+
+    private String convertUrl(String serverUrl) {
+        int index = serverUrl.indexOf("?");
+        if (index != -1) {
+            return serverUrl.substring(0, index);
+        }
+        return serverUrl;
     }
 }

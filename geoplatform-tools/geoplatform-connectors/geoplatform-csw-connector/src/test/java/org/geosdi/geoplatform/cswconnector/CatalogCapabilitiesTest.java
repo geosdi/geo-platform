@@ -58,7 +58,7 @@ public class CatalogCapabilitiesTest {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
-    private GatalogGetCapabilitiesBean catalogCapabilitiesBean;
+    private CatalogGetCapabilitiesBean catalogCapabilitiesBean;
 
     @Test
     public void testCapabilitiesV201WithoutVersionControl() {

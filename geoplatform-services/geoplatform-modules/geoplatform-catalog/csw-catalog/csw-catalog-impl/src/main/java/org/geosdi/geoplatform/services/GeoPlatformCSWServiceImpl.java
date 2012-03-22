@@ -40,6 +40,7 @@ import javax.jws.WebService;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.cswconnector.CatalogGetCapabilitiesBean;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
@@ -58,6 +59,8 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
 
     // DAO
     private GPServerDAO serverDao;
+    //
+    private CatalogGetCapabilitiesBean catalogCapabilitiesBean;
     // Delegate
     private CSWServiceImpl cswServiceDelegate;
 
@@ -74,6 +77,14 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     public void setServerDao(GPServerDAO serverDao) {
         this.serverDao = serverDao;
         this.cswServiceDelegate.setServerDao(serverDao);
+    }
+
+    /**
+     * @param catalogCapabilitiesBean the catalogCapabilitiesBean to set
+     */
+    public void setCatalogCapabilitiesBean(CatalogGetCapabilitiesBean catalogCapabilitiesBean) {
+        this.catalogCapabilitiesBean = catalogCapabilitiesBean;
+        this.cswServiceDelegate.setCatalogCapabilitiesBean(catalogCapabilitiesBean);
     }
 
     @Override

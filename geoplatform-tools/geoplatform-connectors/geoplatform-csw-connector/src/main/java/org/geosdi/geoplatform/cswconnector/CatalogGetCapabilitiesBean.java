@@ -48,7 +48,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class GatalogGetCapabilitiesBean {
+public class CatalogGetCapabilitiesBean {
 
     private static final String CSW_CABABILITIES_REQUEST = "?SERVICE=CSW"
             + "&REQUEST=GetCapabilities";
@@ -80,8 +80,7 @@ public class GatalogGetCapabilitiesBean {
 
     public CatalogCapabilities bindUrlWithoutVersionControl(String urlServer)
             throws MalformedURLException,
-                   IOException,
-                   CatalogVersionException {
+                   IOException {
 
         return connect(urlServer);
 
@@ -89,8 +88,7 @@ public class GatalogGetCapabilitiesBean {
 
     private CatalogCapabilities connect(String urlServer)
             throws MalformedURLException,
-                   IOException,
-                   CatalogVersionException {
+                   IOException {
 
         CatalogCapabilities catalogGetCapabilities = null;
         HttpURLConnection conn = null;
@@ -110,11 +108,11 @@ public class GatalogGetCapabilitiesBean {
         return catalogGetCapabilities;
     }
 
-    private void checkCSWServerVersion(CatalogCapabilities capabilitiesBean) {
+    private void checkCSWServerVersion(CatalogCapabilities capabilitiesBean) 
+            throws CatalogVersionException{
         if (!capabilitiesBean.getServiceIdentification().getServiceTypeVersion().equals(
                 GPCatalogVersion.V202.toString())) {
-            throw new CatalogVersionException(
-                    "The Version of CSW must be 2.0.2");
+            throw new CatalogVersionException("The version of CSW must be 2.0.2");
         }
     }
 

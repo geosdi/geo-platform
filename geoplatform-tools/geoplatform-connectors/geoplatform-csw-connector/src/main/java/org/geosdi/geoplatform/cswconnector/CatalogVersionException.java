@@ -42,36 +42,19 @@ import java.io.Serializable;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class CatalogVersionException extends RuntimeException implements
-        Serializable {
+public class CatalogVersionException extends RuntimeException
+        implements Serializable {
 
     private static final long serialVersionUID = -561213746840014232L;
-    private String message;
-    private Throwable e;
 
     public CatalogVersionException() {
     }
 
-    public CatalogVersionException(String theMessage) {
-        this.message = theMessage;
-    }
-
-    @Override
-    public Throwable getCause() {
-        return e;
+    public CatalogVersionException(String message) {
+        super(message);
     }
 
     public CatalogVersionException(Throwable exception) {
         super(exception);
-        this.e = exception;
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 }

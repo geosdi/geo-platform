@@ -27,17 +27,17 @@
         <property name="omittedFields">
             <util:map>
                 <entry key="org.geosdi.connector.api.capabilities.model.csw.CatalogServiceIdentification" 
-                    value="ows:Fees,ows:AccessConstraints,ows:Keywords"/>
+                       value="ows:Fees,ows:AccessConstraints,ows:Keywords"/>
                     
                 <entry key="org.geosdi.connector.api.capabilities.model.csw.CatalogServiceProvider" 
-                    value="ows:ProviderSite,ows:ServiceContact"/>
+                       value="ows:ProviderSite,ows:ServiceContact"/>
                     
                 <entry key="org.geosdi.connector.api.capabilities.model.csw.CatalogCapabilities" 
-                    value="ows:OperationsMetadata,ogc:Filter_Capabilities"/>
+                       value="ows:OperationsMetadata,ogc:Filter_Capabilities"/>
             </util:map>
         </property>
     </bean>
     
-    <bean id="catalogCapabilitiesBean" class="org.geosdi.geoplatform.cswconnector.GatalogGetCapabilitiesBean" />
+    <bean id="catalogCapabilitiesBean" class="org.geosdi.geoplatform.cswconnector.CatalogGetCapabilitiesBean" />
 
 </beans>

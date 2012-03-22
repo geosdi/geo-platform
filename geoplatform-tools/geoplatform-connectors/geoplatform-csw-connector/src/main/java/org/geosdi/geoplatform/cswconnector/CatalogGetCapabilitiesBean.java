@@ -108,11 +108,12 @@ public class CatalogGetCapabilitiesBean {
         return catalogGetCapabilities;
     }
 
-    private void checkCSWServerVersion(CatalogCapabilities capabilitiesBean) 
-            throws CatalogVersionException{
+    private void checkCSWServerVersion(CatalogCapabilities capabilitiesBean)
+            throws CatalogVersionException {
         if (!capabilitiesBean.getServiceIdentification().getServiceTypeVersion().equals(
                 GPCatalogVersion.V202.toString())) {
-            throw new CatalogVersionException("The version of CSW must be 2.0.2");
+            throw new CatalogVersionException("The version of CSW Service "
+                    + "must be 2.0.2");
         }
     }
 

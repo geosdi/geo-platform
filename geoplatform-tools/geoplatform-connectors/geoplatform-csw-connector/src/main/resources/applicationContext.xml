@@ -27,7 +27,7 @@
         <property name="omittedFields">
             <util:map>
                 <entry key="org.geosdi.connector.api.capabilities.model.csw.CatalogServiceIdentification" 
-                       value="ows:Fees,ows:AccessConstraints,ows:Keywords"/>
+                       value="ows:Fees,ows:AccessConstraints"/>
                     
                 <entry key="org.geosdi.connector.api.capabilities.model.csw.CatalogServiceProvider" 
                        value="ows:ProviderSite,ows:ServiceContact"/>

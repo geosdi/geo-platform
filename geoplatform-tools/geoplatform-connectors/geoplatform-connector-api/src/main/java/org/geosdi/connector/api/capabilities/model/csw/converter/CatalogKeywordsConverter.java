@@ -33,34 +33,58 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.connector.api.capabilities.model.csw;
+package org.geosdi.connector.api.capabilities.model.csw.converter;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.converters.Converter;
+import com.thoughtworks.xstream.converters.MarshallingContext;
+import com.thoughtworks.xstream.converters.UnmarshallingContext;
+import com.thoughtworks.xstream.io.HierarchicalStreamReader;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import java.util.ArrayList;
+import java.util.List;
+import org.geosdi.connector.api.capabilities.model.csw.AbstractCatalogKeyword;
+import org.geosdi.connector.api.capabilities.model.csw.CatalogKeyword;
+import org.geosdi.connector.api.capabilities.model.csw.CatalogKeywordType;
+import org.geosdi.connector.api.capabilities.model.csw.CatalogKeywords;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-@XStreamAlias(value = "ows:Keyword")
-public class CatalogKeyword extends AbstractCatalogKeyword {
-
-    private String keyword;
+public class CatalogKeywordsConverter implements Converter {
 
     @Override
-    public String getValue() {
-        return keyword;
-    }
-
-    /**
-     * @param keyword the keyword to set
-     */
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
+    public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public String toString() {
-        return "CatalogKeyword {" + "keyword = " + keyword + '}';
+    public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+        CatalogKeywords catalogKeywords = new CatalogKeywords();
+        List<AbstractCatalogKeyword> keywords = new ArrayList<AbstractCatalogKeyword>();
+        while (reader.hasMoreChildren()) {
+            reader.moveDown();
+            if (reader.getNodeName().equals("ows:Keyword")) {
+                CatalogKeyword keyword = new CatalogKeyword();
+
+                keyword.setKeyword(reader.getValue());
+                keywords.add(keyword);
+            } else if (reader.getNodeName().equals("ows:Type")) {
+                CatalogKeywordType keywordType = new CatalogKeywordType();
+                keywordType.setType(reader.getValue());
+                keywords.add(keywordType);
+            }
+            reader.moveUp();
+        }
+
+        catalogKeywords.setKeywords(keywords);
+
+        return catalogKeywords;
+    }
+
+    @Override
+    public boolean canConvert(Class type) {
+        return type.equals(CatalogKeywords.class);
     }
 }

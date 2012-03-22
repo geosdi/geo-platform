@@ -36,6 +36,8 @@
 package org.geosdi.connector.api.capabilities.model.csw;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import org.geosdi.connector.api.capabilities.model.csw.converter.CatalogKeywordsConverter;
 
 /**
  *
@@ -50,8 +52,9 @@ public class CatalogServiceIdentification {
     @XStreamAlias(value = "ows:Abstract")
     private String abstractText;
     //
-//    @XStreamAlias(value = "ows:Keywords")
-//    private List<CatalogKeyword> keywords;
+    @XStreamAlias(value = "ows:Keywords")
+    @XStreamConverter(value = CatalogKeywordsConverter.class)
+    private CatalogKeywords catalogKeywords;
     //
     @XStreamAlias(value = "ows:ServiceType")
     private String serviceType;
@@ -87,19 +90,19 @@ public class CatalogServiceIdentification {
         this.abstractText = abstractText;
     }
 
-//    /**
-//     * @return the keywords
-//     */
-//    public List<CatalogKeyword> getKeywords() {
-//        return keywords;
-//    }
-//
-//    /**
-//     * @param keywords the keywords to set
-//     */
-//    public void setKeywords(List<CatalogKeyword> keywords) {
-//        this.keywords = keywords;
-//    }
+    /**
+     * @return the catalogKeywords
+     */
+    public CatalogKeywords getCatalogKeywords() {
+        return catalogKeywords;
+    }
+
+    /**
+     * @param catalogKeywords the catalogKeywords to set
+     */
+    public void setCatalogKeywords(CatalogKeywords catalogKeywords) {
+        this.catalogKeywords = catalogKeywords;
+    }
 
     /**
      * @return the serviceType
@@ -133,7 +136,7 @@ public class CatalogServiceIdentification {
     public String toString() {
         return "CatalogServiceIdentification {" + "title = " + title
                 + ", abstractText = " + abstractText
-//                + "keywords = " + keywords
+                + ", catalogKeywords = " + catalogKeywords
                 + ", serviceType = " + serviceType
                 + ", serviceTypeVersion = " + serviceTypeVersion + '}';
     }

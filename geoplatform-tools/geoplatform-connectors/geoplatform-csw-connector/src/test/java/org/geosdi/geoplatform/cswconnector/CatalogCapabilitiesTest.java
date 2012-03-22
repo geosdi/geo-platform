@@ -64,7 +64,7 @@ public class CatalogCapabilitiesTest {
     public void testCapabilitiesV201WithoutVersionControl() {
         try {
             CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrlWithoutVersionControl("http://catalogocentrale.nsdi.it/geonetwork/srv/"
-                    + "en/csw?SERVICE=CSW&REQUEST=GetCapabilities");
+                    + "en/csw?SERVICE");
 
             logger.info(
                     "@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1 WITHOUT VERSION CONTROL"
@@ -81,7 +81,7 @@ public class CatalogCapabilitiesTest {
     public void testCapabilitiesV201() {
         try {
             CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl("http://catalogocentrale.nsdi.it/geonetwork/srv/"
-                    + "en/csw?SERVICE=CSW&REQUEST=GetCapabilities");
+                    + "en/csw");
 
             logger.info(
                     "@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1"
@@ -101,7 +101,7 @@ public class CatalogCapabilitiesTest {
         try {
 
             CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl("http://rsdi.regione.basilicata.it/Catalogo/srv/en/"
-                    + "csw?SERVICE=CSW&REQUEST=GetCapabilities");
+                    + "csw");
 
             logger.info(
                     "CATALOG CAPABILITIES BEAN V_2.0.2 @@@@@@@@@@@"

@@ -35,32 +35,33 @@
  */
 package org.geosdi.connector.api.capabilities.model.csw;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
+import java.util.List;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-@XStreamAlias(value = "ows:Keyword")
-public class CatalogKeyword extends AbstractCatalogKeyword {
+public class CatalogKeywords {
 
-    private String keyword;
+    private List<AbstractCatalogKeyword> keywords;
 
-    @Override
-    public String getValue() {
-        return keyword;
+    /**
+     * @return the keywords
+     */
+    public List<AbstractCatalogKeyword> getKeywords() {
+        return keywords;
     }
 
     /**
-     * @param keyword the keyword to set
+     * @param keywords the keywords to set
      */
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
+    public void setKeywords(List<AbstractCatalogKeyword> keywords) {
+        this.keywords = keywords;
     }
 
     @Override
     public String toString() {
-        return "CatalogKeyword {" + "keyword = " + keyword + '}';
+        return "CatalogKeywords{" + "keywords=" + keywords + '}';
     }
 }

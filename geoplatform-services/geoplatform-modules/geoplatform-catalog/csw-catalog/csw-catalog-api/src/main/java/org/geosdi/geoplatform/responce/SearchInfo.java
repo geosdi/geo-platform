@@ -43,6 +43,8 @@ import java.io.Serializable;
  */
 public class SearchInfo implements Serializable {
 
+    private static final long serialVersionUID = 4543828151776154751L;
+    //
     private String searchText;
     //
     private boolean searchTitle;

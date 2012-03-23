@@ -44,7 +44,9 @@ import org.geosdi.geoplatform.core.model.GPBBox;
  */
 public class BBoxInfo implements Serializable {
 
-    private GPBBox bBox;
+    private static final long serialVersionUID = -8000840803980598023L;
+    //
+    private BBox bBox;
     private SearchBBoxType searchBBoxType;
 
     public enum SearchBBoxType implements Serializable {
@@ -52,11 +54,11 @@ public class BBoxInfo implements Serializable {
         ENCLOSES, IS, OUTSIDE, OVERLAP;
     }
 
-    public GPBBox getbBox() {
+    public BBox getbBox() {
         return bBox;
     }
 
-    public void setbBox(GPBBox bBox) {
+    public void setbBox(BBox bBox) {
         this.bBox = bBox;
     }
 

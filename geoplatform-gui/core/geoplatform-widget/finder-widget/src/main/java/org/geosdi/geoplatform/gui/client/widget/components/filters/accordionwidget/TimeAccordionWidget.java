@@ -35,8 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
 
+import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.responce.TemporalInfo;
 
 /**
  *
@@ -46,8 +48,12 @@ import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 @CatalogFilter
 public class TimeAccordionWidget extends GeoPlatformContentPanel {
 
-    public TimeAccordionWidget() {
+    private TemporalInfo temporalInfo;
+
+    @Inject
+    public TimeAccordionWidget(TemporalInfo theTemporalInfo) {
         super(false);
+        temporalInfo = theTemporalInfo;
     }
 
     @Override

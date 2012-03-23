@@ -35,8 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
 
+import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.responce.BBoxInfo;
 
 /**
  *
@@ -46,8 +48,12 @@ import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 @CatalogFilter
 public class SpatialAreaAccordionWidget extends GeoPlatformContentPanel {
 
-    public SpatialAreaAccordionWidget() {
+    private BBoxInfo bBoxInfo;
+
+    @Inject
+    public SpatialAreaAccordionWidget(BBoxInfo theBBoxInfo) {
         super(true);
+        bBoxInfo = theBBoxInfo;
     }
 
     @Override

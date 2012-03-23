@@ -84,13 +84,12 @@
             <groupId>org.geosdi</groupId>
             <artifactId>csw-catalog-api</artifactId>
         </dependency>
-
-<!--        <dependency>
+        <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>csw-catalog-api</artifactId>
             <classifier>sources</classifier>
             <version>${geoplatform-version}</version>
-        </dependency>-->
+        </dependency>
         
         <dependency>
             <groupId>org.geosdi</groupId>

@@ -67,8 +67,10 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.model.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.client.widget.components.form.CSWServerFormWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -86,14 +88,17 @@ import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
 public class CSWServerPaginationContainer
         extends GridLayoutPaginationContainer<GPCSWServerBeanModel> {
 
+    private CatalogFinderBean catalogFinder;
+    //
     private CSWServerFormWidget serverForm = new CSWServerFormWidget(this);
-    private TextField<String> searchField;
-    private String searchText;
-    private Button deleteServerButton;
     private CheckBoxSelectionModel<GPCSWServerBeanModel> sm;
+    private TextField<String> searchField;
+    private Button deleteServerButton;
 
-    public CSWServerPaginationContainer() {
+    @Inject
+    public CSWServerPaginationContainer(CatalogFinderBean theCatalogFinder) {
         super(true);
+        catalogFinder = theCatalogFinder;
     }
 
     @Override
@@ -130,7 +135,6 @@ public class CSWServerPaginationContainer
             @Override
             public void componentKeyPress(ComponentEvent event) {
                 if ((event.getKeyCode() == KeyCodes.KEY_ENTER)) {
-                    searchText = searchField.getValue() == null ? "" : searchField.getValue();
                     loader.load(0, getPageSize());
                 }
             }
@@ -215,10 +219,12 @@ public class CSWServerPaginationContainer
 
             @Override
             public void selectionChanged(SelectionChangedEvent<GPCSWServerBeanModel> se) {
-                if (se.getSelectedItem() == null) {
+                GPCSWServerBeanModel selectedServer = se.getSelectedItem();
+                if (selectedServer == null) {
                     deleteServerButton.disable();
                 } else {
                     deleteServerButton.enable();
+                    catalogFinder.setServer(selectedServer);
                 }
             }
         });
@@ -242,6 +248,7 @@ public class CSWServerPaginationContainer
             @Override
             protected void load(Object loadConfig,
                                 AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback) {
+                String searchText = searchField.getValue() == null ? "" : searchField.getValue();
                 GPCatalogFinderRemoteImpl.Util.getInstance().searchCSWServers(
                         (PagingLoadConfig) loadConfig, searchText, callback);
             }

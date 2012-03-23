@@ -4,6 +4,7 @@
     <inherits name="com.google.gwt.inject.Inject"/>
 
     <source path="client" />
+    <source path="responce" />
 
     <entry-point class='org.geosdi.geoplatform.gui.client.GPCatalogFinder' />
 

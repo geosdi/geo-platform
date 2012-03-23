@@ -44,6 +44,8 @@ import java.util.Date;
  */
 public class TemporalInfo implements Serializable {
 
+    private static final long serialVersionUID = -7218816004320387247L;
+    //
     private Date startDate;
     private Date endDate;
 

@@ -36,16 +36,28 @@
 package org.geosdi.geoplatform.gui.client.widget.components.search;
 
 import com.extjs.gxt.ui.client.Style.Orientation;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.FieldEvent;
+import com.extjs.gxt.ui.client.event.KeyListener;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.CheckBoxGroup;
+import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.layout.ColumnData;
 import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.Element;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.responce.SearchInfo;
 
 /**
  *
@@ -54,7 +66,18 @@ import com.google.gwt.user.client.Element;
  */
 public class CatalogSearchWidget extends LayoutContainer {
 
-    public CatalogSearchWidget() {
+    private SearchInfo searchInfo;
+    //
+    private Button searchButton;
+    private CheckBox titleCheckbox;
+    private CheckBox abstractCheckbox;
+    private CheckBox keywordsCheckbox;
+    private CheckBox allSelectedCheckbox;
+
+    @Inject
+    public CatalogSearchWidget(SearchInfo theSearchInfo) {
+        this.searchInfo = theSearchInfo;
+
         setLayout(new ColumnLayout());
         setStyleAttribute("padding", "10px");
     }
@@ -69,19 +92,43 @@ public class CatalogSearchWidget extends LayoutContainer {
         Label searchLabel = new Label("Search Text");
         searchLabel.setStyleAttribute("color", "#4169E1");
         searchLabel.setStyleAttribute("font",
-                "normal 14px tahoma, arial, helvetica, sans-serif");
+                                      "normal 14px tahoma, arial, helvetica, sans-serif");
 
         left.add(searchLabel, new ColumnData(300.0));
 
         HorizontalPanel panel = new HorizontalPanel();
         panel.setStyleAttribute("padding-top", "8px");
 
-        TextField<String> searchTextField = new TextField<String>();
+        final TextField<String> searchTextField = new TextField<String>();
         searchTextField.setWidth(250);
+        searchTextField.setAllowBlank(false);
+        searchTextField.addKeyListener(new KeyListener() {
+
+            @Override
+            public void componentKeyPress(ComponentEvent event) {
+                if (searchButton.isEnabled()
+                        && event.getKeyCode() == KeyCodes.KEY_ENTER) {
+                    searchButton.fireEvent(Events.Select);
+                }
+            }
+        });
         panel.add(searchTextField);
 
-        Button searchButton = new Button("Search");
+        searchButton = new Button("Search",
+                                  new SelectionListener<ButtonEvent>() {
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                // Manual binding
+                searchInfo.setSearchText(searchTextField.getValue().trim());
+                searchInfo.setSearchTitle(titleCheckbox.getValue().booleanValue());
+                searchInfo.setSearchAbstract(abstractCheckbox.getValue().booleanValue());
+                searchInfo.setSearchKeywords(keywordsCheckbox.getValue().booleanValue());
+                System.out.println("*** " + searchInfo); // TODO DEL
+            }
+        });
         searchButton.setStyleAttribute("padding-left", "6px");
+        searchButton.disable();
         panel.add(searchButton);
 
         left.add(panel);
@@ -93,37 +140,92 @@ public class CatalogSearchWidget extends LayoutContainer {
         Label optionsLabel = new Label("Search Options");
         optionsLabel.setStyleAttribute("color", "#4169E1");
         optionsLabel.setStyleAttribute("font",
-                "normal 14px tahoma, arial, helvetica, sans-serif");
+                                       "normal 14px tahoma, arial, helvetica, sans-serif");
 
         right.add(optionsLabel, new ColumnData(240.0));
 
-        CheckBoxGroup optionsCheckboxgroup = new CheckBoxGroup();
+        final CheckBoxGroup optionsCheckboxgroup = new CheckBoxGroup();
         optionsCheckboxgroup.setOrientation(Orientation.VERTICAL);
+        optionsCheckboxgroup.setValidator(new Validator() {
 
-        CheckBox TitleCheckbox = new CheckBox();
-        TitleCheckbox.setBoxLabel("Title");
-        TitleCheckbox.setHideLabel(true);
-        optionsCheckboxgroup.add(TitleCheckbox);
+            @Override
+            public String validate(Field<?> field, String value) {
+                CheckBoxGroup group = (CheckBoxGroup) field;
+                if (group.getValue() == null) {
+                    searchButton.disable();
+                    return "Select at least one option";
+                }
+                searchButton.enable();
+                return null;
+            }
+        });
 
-        CheckBox abstractCheckbox = new CheckBox();
+        Listener<FieldEvent> checkBoxListener = new Listener<FieldEvent>() {
+
+            @Override
+            public void handleEvent(FieldEvent fe) {
+                manageAllSelectedCheckbox();
+                optionsCheckboxgroup.validate(true);
+            }
+        };
+
+        titleCheckbox = new CheckBox();
+        titleCheckbox.setBoxLabel("Title");
+//        titleCheckbox.setValue(true);
+        titleCheckbox.addListener(Events.Change, checkBoxListener);
+        optionsCheckboxgroup.add(titleCheckbox);
+
+        abstractCheckbox = new CheckBox();
         abstractCheckbox.setBoxLabel("Abstract");
-        abstractCheckbox.setHideLabel(true);
+        abstractCheckbox.addListener(Events.Change, checkBoxListener);
         optionsCheckboxgroup.add(abstractCheckbox);
 
-        CheckBox keywordsCheckbox = new CheckBox();
+        keywordsCheckbox = new CheckBox();
         keywordsCheckbox.setBoxLabel("Keywords");
-        keywordsCheckbox.setHideLabel(true);
+        keywordsCheckbox.addListener(Events.Change, checkBoxListener);
         optionsCheckboxgroup.add(keywordsCheckbox);
 
         right.add(optionsCheckboxgroup);
 
-        CheckBox allCheckbox = new CheckBox();
-        allCheckbox.setBoxLabel("Select/Deselect all");
-        allCheckbox.setHideLabel(true);
+        allSelectedCheckbox = new CheckBox();
+        allSelectedCheckbox.setBoxLabel("Select/Deselect all");
+        allSelectedCheckbox.addListener(Events.Change, new Listener<FieldEvent>() {
 
-        right.add(allCheckbox);
+            @Override
+            public void handleEvent(FieldEvent fe) {
+                System.out.println("@@@ Change"); // TODO FIX select/deselect all!
+//                Boolean checked = (Boolean) fe.getValue();
+//                System.out.println("### checked " + checked);
+                Boolean checkedRaw = Boolean.valueOf(((CheckBox) fe.getField()).getRawValue());
+//                System.out.println("### checkedRaw " + checkedRaw);
+
+                boolean allSelected = false;
+                if (checkedRaw) {
+                    allSelected = true;
+                }
+                System.out.println("*** allSelected " + allSelected);
+
+                titleCheckbox.setValue(allSelected);
+                abstractCheckbox.setValue(allSelected);
+                keywordsCheckbox.setValue(allSelected);
+            }
+        });
+        right.add(allSelectedCheckbox);
 
         add(left, new ColumnData(0.6));
         add(right, new ColumnData(0.4));
+    }
+
+    private void manageAllSelectedCheckbox() {
+        if (titleCheckbox.getValue() && abstractCheckbox.getValue()
+                && keywordsCheckbox.getValue()) {
+            System.out.println("+++ set all TRUE");
+//            allSelectedCheckbox.setValue(true);
+            allSelectedCheckbox.setRawValue("true");
+        } else {
+            System.out.println("+++ set all FALSE");
+//            allSelectedCheckbox.setValue(false);
+            allSelectedCheckbox.setRawValue("false");
+        }
     }
 }

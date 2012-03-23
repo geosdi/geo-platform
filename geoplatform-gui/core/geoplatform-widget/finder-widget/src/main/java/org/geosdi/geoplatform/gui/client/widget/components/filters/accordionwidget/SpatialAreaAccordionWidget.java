@@ -38,8 +38,7 @@ package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwid
 import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.responce.BBoxInfo;
-
+import org.geosdi.geoplatform.gui.responce.BBoxInfo;
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

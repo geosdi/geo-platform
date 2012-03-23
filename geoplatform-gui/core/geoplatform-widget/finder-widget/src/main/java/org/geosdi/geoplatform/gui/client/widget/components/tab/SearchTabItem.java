@@ -52,8 +52,8 @@ public class SearchTabItem extends GeoPlatformTabItem {
     @Inject
     public SearchTabItem(CatalogSearchWidget theCatalogSearchWidget) {
         super("Search");
-        this.subclassCallToInit();
         catalogSearchWidget = theCatalogSearchWidget;
+        this.subclassCallToInit();
     }
 
     @Override

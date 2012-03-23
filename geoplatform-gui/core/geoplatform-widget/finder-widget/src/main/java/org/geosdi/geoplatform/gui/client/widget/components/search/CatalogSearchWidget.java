@@ -57,7 +57,7 @@ import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.Element;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.responce.SearchInfo;
+import org.geosdi.geoplatform.gui.responce.SearchInfo;
 
 /**
  *

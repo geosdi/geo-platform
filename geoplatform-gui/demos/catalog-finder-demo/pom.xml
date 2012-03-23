@@ -137,6 +137,19 @@
             <artifactId>geoplatform-configuration</artifactId>
             <classifier>sources</classifier>
         </dependency>
+        
+         <!-- GeoPlatform -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>csw-catalog-api</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>csw-catalog-api</artifactId>
+            <classifier>sources</classifier>
+            <version>${geoplatform-version}</version>
+        </dependency>
 
 		<!-- GEOPLATFORM_RESOURCES -->
         <dependency>

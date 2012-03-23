@@ -38,10 +38,9 @@ package org.geosdi.geoplatform.gui.client.model;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
-import org.geosdi.geoplatform.responce.BBoxInfo;
-import org.geosdi.geoplatform.responce.SearchInfo;
-import org.geosdi.geoplatform.responce.TemporalInfo;
-
+import org.geosdi.geoplatform.gui.responce.BBoxInfo;
+import org.geosdi.geoplatform.gui.responce.SearchInfo;
+import org.geosdi.geoplatform.gui.responce.TemporalInfo;
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>

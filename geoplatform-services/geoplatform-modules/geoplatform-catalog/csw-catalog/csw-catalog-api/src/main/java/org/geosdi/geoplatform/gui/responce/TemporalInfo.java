@@ -46,8 +46,17 @@ public class TemporalInfo implements Serializable {
 
     private static final long serialVersionUID = -7218816004320387247L;
     //
+    private boolean active;
     private Date startDate;
     private Date endDate;
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     public Date getEndDate() {
         return endDate;

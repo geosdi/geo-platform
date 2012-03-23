@@ -49,8 +49,8 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.csw.SummaryRecord;
-import org.geosdi.geoplatform.gui.client.model.csw.SummaryRecordKeyValue;
+import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
+import org.geosdi.geoplatform.gui.client.model.SummaryRecordKeyValue;
 import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
 
 /**

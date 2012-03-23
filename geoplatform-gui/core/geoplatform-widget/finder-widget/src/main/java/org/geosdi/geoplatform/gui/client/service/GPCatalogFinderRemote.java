@@ -41,7 +41,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.client.model.FinderBean;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 
@@ -72,14 +71,6 @@ public interface GPCatalogFinderRemote extends RemoteService {
 
     GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl)
             throws GeoPlatformException;
-    
+
     boolean deleteServerCSW(Long serverID) throws GeoPlatformException;
-
-    ArrayList<FinderBean> searchPublicMetadata(String searchString)
-            throws GeoPlatformException;
-
-    ArrayList<FinderBean> searchPrivateMetadata(String username,
-                                                String password,
-                                                String searchString)
-            throws GeoPlatformException;
 }

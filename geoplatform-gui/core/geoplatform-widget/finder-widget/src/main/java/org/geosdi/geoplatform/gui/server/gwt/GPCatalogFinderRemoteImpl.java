@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.server.gwt;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.client.model.FinderBean;
 import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
@@ -81,23 +80,5 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingRemoteServiceServl
     @Override
     public boolean deleteServerCSW(Long serverID) throws GeoPlatformException {
         return gpCatalogFinderService.deleteServerCSW(serverID);
-    }
-
-    @Override
-    public ArrayList<FinderBean> searchPublicMetadata(String searchString)
-            throws GeoPlatformException {
-        return gpCatalogFinderService.searchPublicMetadata(searchString,
-                super.getThreadLocalRequest());
-    }
-
-    @Override
-    public ArrayList<FinderBean> searchPrivateMetadata(String username,
-            String password,
-            String searchString)
-            throws GeoPlatformException {
-        return gpCatalogFinderService.searchPrivateMetadata(username,
-                password,
-                searchString,
-                super.getThreadLocalRequest());
     }
 }

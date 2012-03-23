@@ -44,9 +44,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "CatalogFinderDTO")
+@XmlRootElement(name = "CatalogFinderBean")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CatalogFinderDTO {
+public class CatalogFinderBean {
 
     @XmlElement(required = true)
     private Long serverID;

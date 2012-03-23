@@ -39,7 +39,6 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-import org.geosdi.geoplatform.gui.client.model.FinderBean;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 
 /**
@@ -57,12 +56,4 @@ public interface GPCatalogFinderRemoteAsync {
                        AsyncCallback<GPCSWServerBeanModel> callback);
     
     void deleteServerCSW(Long serverID, AsyncCallback<Boolean> callback);
-
-    void searchPublicMetadata(String searchString,
-            AsyncCallback<ArrayList<FinderBean>> callback);
-
-    void searchPrivateMetadata(String username,
-            String password,
-            String searchString,
-            AsyncCallback<ArrayList<FinderBean>> callback);
 }

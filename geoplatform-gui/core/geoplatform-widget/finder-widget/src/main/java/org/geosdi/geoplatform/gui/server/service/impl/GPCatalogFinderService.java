@@ -43,7 +43,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.client.model.FinderBean;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.server.IGPCatalogFinderService;
@@ -139,24 +138,6 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
                     + serverID + " was not bean deleted");
         }
         return true;
-    }
-
-    @Override
-    public ArrayList<FinderBean> searchPublicMetadata(String searchString,
-                                                      HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
-        // TODO
-        return null;
-    }
-
-    @Override
-    public ArrayList<FinderBean> searchPrivateMetadata(String username,
-                                                       String password,
-                                                       String searchString,
-                                                       HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
-        // TODO
-        return null;
     }
 
     /**

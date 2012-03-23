@@ -39,7 +39,6 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.model.FinderBean;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 
@@ -61,14 +60,4 @@ public interface IGPCatalogFinderService {
             throws GeoPlatformException;
     
     boolean deleteServerCSW(Long serverID) throws GeoPlatformException;
-
-    ArrayList<FinderBean> searchPublicMetadata(String searchString,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
-
-    ArrayList<FinderBean> searchPrivateMetadata(String username,
-            String password,
-            String searchString,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
 }

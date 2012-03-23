@@ -33,7 +33,7 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.model.csw;
+package org.geosdi.geoplatform.gui.client.model;
 
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 

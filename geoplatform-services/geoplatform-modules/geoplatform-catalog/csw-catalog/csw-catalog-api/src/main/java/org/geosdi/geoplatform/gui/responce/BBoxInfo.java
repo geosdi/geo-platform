@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.responce;
 
 import java.io.Serializable;
-import org.geosdi.geoplatform.core.model.GPBBox;
 
 /**
  *
@@ -46,12 +45,21 @@ public class BBoxInfo implements Serializable {
 
     private static final long serialVersionUID = -8000840803980598023L;
     //
+    private boolean active;
     private BBox bBox;
     private SearchBBoxType searchBBoxType;
 
     public enum SearchBBoxType implements Serializable {
 
         ENCLOSES, IS, OUTSIDE, OVERLAP;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public BBox getbBox() {

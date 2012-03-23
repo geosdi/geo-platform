@@ -70,13 +70,13 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
-import org.geosdi.geoplatform.gui.client.model.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.client.widget.components.form.CSWServerFormWidget;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel.GPCSWServerKeyValue;
+import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
 
 /**
@@ -224,7 +224,7 @@ public class CSWServerPaginationContainer
                     deleteServerButton.disable();
                 } else {
                     deleteServerButton.enable();
-                    catalogFinder.setServer(selectedServer);
+                    catalogFinder.setServerID(selectedServer.getId());
                 }
             }
         });

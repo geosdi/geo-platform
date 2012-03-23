@@ -58,8 +58,10 @@ public class FiltersFinderWidget extends GeoPlatformContentPanel {
     private TimeAccordionWidget timeFilterWidget;
 
     @Inject
-    public FiltersFinderWidget(EventBus bus, CatalogAccordionWidget theCatalogFilterWidget,
-            SpatialAreaAccordionWidget theSpatialFilterWidget, TimeAccordionWidget theTimeFilterWidget) {
+    public FiltersFinderWidget(EventBus bus,
+            CatalogAccordionWidget theCatalogFilterWidget,
+            SpatialAreaAccordionWidget theSpatialFilterWidget,
+            TimeAccordionWidget theTimeFilterWidget) {
         super(true);
         this.bus = bus;
         this.catalogFilterWidget = theCatalogFilterWidget;

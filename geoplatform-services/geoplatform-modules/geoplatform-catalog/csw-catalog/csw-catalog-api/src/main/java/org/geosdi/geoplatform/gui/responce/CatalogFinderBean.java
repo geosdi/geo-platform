@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.responce;
 
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -46,14 +47,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "CatalogFinderBean")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CatalogFinderBean {
+public class CatalogFinderBean implements Serializable {
 
+    private static final long serialVersionUID = 6150321033424356952L;
+    //
     @XmlElement(required = true)
     private Long serverID;
     //
     private SearchInfo searchInfo;
-    private TemporalInfo temporalInfo;
     private BBoxInfo bBoxInfo;
+    private TemporalInfo temporalInfo;
 
     public Long getServerID() {
         return serverID;
@@ -71,6 +74,14 @@ public class CatalogFinderBean {
         this.searchInfo = searchInfo;
     }
 
+    public BBoxInfo getbBoxInfo() {
+        return bBoxInfo;
+    }
+
+    public void setbBoxInfo(BBoxInfo bBoxInfo) {
+        this.bBoxInfo = bBoxInfo;
+    }
+
     public TemporalInfo getTemporalInfo() {
         return temporalInfo;
     }
@@ -79,11 +90,13 @@ public class CatalogFinderBean {
         this.temporalInfo = temporalInfo;
     }
 
-    public BBoxInfo getbBoxInfo() {
-        return bBoxInfo;
-    }
-
-    public void setbBoxInfo(BBoxInfo bBoxInfo) {
-        this.bBoxInfo = bBoxInfo;
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder("CatalogFinderBean {");
+        str.append("serverID = ").append(serverID);
+        str.append(",\n\t").append(searchInfo);
+        str.append(",\n\t").append(bBoxInfo);
+        str.append(",\n\t").append(temporalInfo);
+        return str.append('}').toString();
     }
 }

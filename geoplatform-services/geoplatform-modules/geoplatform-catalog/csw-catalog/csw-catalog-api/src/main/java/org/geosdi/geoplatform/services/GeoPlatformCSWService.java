@@ -47,9 +47,12 @@ import org.codehaus.jra.Put;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
+import org.geosdi.geoplatform.responce.SummaryRecordDTO;
+
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email  michele.santomauro@geosdi.org
@@ -117,6 +120,18 @@ public interface GeoPlatformCSWService {
     @HttpResource(location = "/server/csw/search/{num}/{page}/{nameLike}")
     @WebResult(name = "ServersCSW")
     List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request);
+
+    @Get
+    @HttpResource(location = "/record/csw/count/{searchText}")
+    @WebResult(name = "SummaryRecordsCount")
+    Long getSummaryRecordsCount(CatalogFinderBean catalogFinder);
+
+    @Get
+    @HttpResource(location = "/record/csw/search/{num}/{page}/{searchText}")
+    @WebResult(name = "SummaryRecords")
+    List<SummaryRecordDTO> searchSummaryRecords(@WebParam(name = "num") int num,
+                                                @WebParam(name = "page") int page,
+                                                CatalogFinderBean catalogFinder);
 //
 //    @Get
 //    @HttpResource(location = "/server/csw/capabilities/{id}")

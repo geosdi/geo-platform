@@ -48,6 +48,11 @@ public class SummaryRecord extends GeoPlatformBeanModel {
     //
     private String identifier;
 
+    public enum SummaryRecordKeyValue {
+
+        TITLE, ABSTRACT_TEXT, KEYWORDS;
+    }
+
     /**
      * @return the identifier
      */
@@ -66,42 +71,42 @@ public class SummaryRecord extends GeoPlatformBeanModel {
      * @return the title
      */
     public String getTitle() {
-        return super.get(SummaryRecordKeyValue.title.toString());
+        return super.get(SummaryRecordKeyValue.TITLE.toString());
     }
 
     /**
      * @param title the title to set
      */
     public void setTitle(String title) {
-        super.set(SummaryRecordKeyValue.title.toString(), title);
+        super.set(SummaryRecordKeyValue.TITLE.toString(), title);
     }
 
     /**
      * @return the keywords
      */
     public String getKeywords() {
-        return super.get(SummaryRecordKeyValue.keywords.toString());
+        return super.get(SummaryRecordKeyValue.KEYWORDS.toString());
     }
 
     /**
      * @param keywords the keywords to set
      */
     public void setKeywords(String keywords) {
-        super.set(SummaryRecordKeyValue.keywords.toString(), keywords);
+        super.set(SummaryRecordKeyValue.KEYWORDS.toString(), keywords);
     }
 
     /**
      * @return the abstractText
      */
     public String getAbstractText() {
-        return super.get(SummaryRecordKeyValue.abstractText.toString());
+        return super.get(SummaryRecordKeyValue.ABSTRACT_TEXT.toString());
     }
 
     /**
      * @param abstractText the abstractText to set
      */
     public void setAbstractText(String abstractText) {
-        super.set(SummaryRecordKeyValue.abstractText.toString(), abstractText);
+        super.set(SummaryRecordKeyValue.ABSTRACT_TEXT.toString(), abstractText);
     }
 
     @Override
@@ -129,12 +134,11 @@ public class SummaryRecord extends GeoPlatformBeanModel {
 
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder("SummaryBeanRecord {");
+        StringBuilder str = new StringBuilder("SummaryRecord {");
         str.append("identifier = ").append(identifier);
         str.append(", title = ").append(getTitle());
         str.append(", keywords = ").append(getKeywords());
         str.append(", abstract =").append(getAbstractText());
-
         return str.append('}').toString();
     }
 }

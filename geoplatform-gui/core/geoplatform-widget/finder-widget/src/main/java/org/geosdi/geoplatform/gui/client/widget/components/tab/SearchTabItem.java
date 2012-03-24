@@ -48,11 +48,14 @@ import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
 public class SearchTabItem extends GeoPlatformTabItem {
 
     private CatalogSearchWidget catalogSearchWidget;
+    private CatalogSearchResultWidget catalogSearchResultWidget;
 
     @Inject
-    public SearchTabItem(CatalogSearchWidget theCatalogSearchWidget) {
+    public SearchTabItem(CatalogSearchWidget theCatalogSearchWidget,
+                         CatalogSearchResultWidget theCatalogSearchResultWidget) {
         super("Search");
         catalogSearchWidget = theCatalogSearchWidget;
+        catalogSearchResultWidget = theCatalogSearchResultWidget;
         this.subclassCallToInit();
     }
 
@@ -65,6 +68,6 @@ public class SearchTabItem extends GeoPlatformTabItem {
     @Override
     public void addComponents() {
         super.add(catalogSearchWidget);
-        super.add(new CatalogSearchResultWidget());
+        super.add(catalogSearchResultWidget);
     }
 }

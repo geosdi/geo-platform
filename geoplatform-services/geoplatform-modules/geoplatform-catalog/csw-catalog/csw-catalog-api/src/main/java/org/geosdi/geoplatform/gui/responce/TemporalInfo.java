@@ -73,4 +73,13 @@ public class TemporalInfo implements Serializable {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder("TemporalInfo {");
+        str.append("active = ").append(active);
+        str.append(", startDate = ").append(startDate);
+        str.append(", endDate = ").append(endDate);
+        return str.append('}').toString();
+    }
 }

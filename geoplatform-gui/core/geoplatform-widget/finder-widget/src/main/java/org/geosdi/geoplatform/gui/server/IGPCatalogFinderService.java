@@ -39,8 +39,10 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
+import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
+import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
@@ -56,8 +58,15 @@ public interface IGPCatalogFinderService {
                                                             HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
 
-    GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl)
+    GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl,
+                                       HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
-    
-    boolean deleteServerCSW(Long serverID) throws GeoPlatformException;
+
+    boolean deleteServerCSW(Long serverID, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
+
+    PagingLoadResult<SummaryRecord> searchSummaryRecords(PagingLoadConfig config,
+                                                         CatalogFinderBean catalogFinder,
+                                                         HttpServletRequest httpServletRequest)
+            throws GeoPlatformException;
 }

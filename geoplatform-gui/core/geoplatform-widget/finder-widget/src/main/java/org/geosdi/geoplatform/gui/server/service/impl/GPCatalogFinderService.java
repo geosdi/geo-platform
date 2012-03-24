@@ -43,12 +43,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
+import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.server.IGPCatalogFinderService;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
+import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,12 +90,11 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             PagingLoadConfig config, String searchText, HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
 
-        int start = config.getOffset();
-
         SearchRequest srq = new SearchRequest(searchText);
 
         Long serversCount = geoPlatformCSWClient.getCSWServersCount(srq);
 
+        int start = config.getOffset();
         int page = start == 0 ? start : start / config.getLimit();
 
         PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
@@ -106,8 +108,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
         ArrayList<GPCSWServerBeanModel> searchUsers = new ArrayList<GPCSWServerBeanModel>(serverList.size());
         for (ServerCSWDTO serverDTO : serverList) {
-            GPCSWServerBeanModel server = this.convertServerDTO(serverDTO);
-            searchUsers.add(server);
+            searchUsers.add(this.convertServerDTO(serverDTO));
         }
 
         return new BasePagingLoadResult<GPCSWServerBeanModel>(searchUsers,
@@ -116,7 +117,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
     }
 
     @Override
-    public GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl)
+    public GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl,
+                                              HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         ServerCSWDTO serverCSW = null;
         try {
@@ -129,7 +131,8 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
     }
 
     @Override
-    public boolean deleteServerCSW(Long serverID) throws GeoPlatformException {
+    public boolean deleteServerCSW(Long serverID, HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
         try {
             geoPlatformCSWClient.deleteServerCSW(serverID);
         } catch (ResourceNotFoundFault ex) {
@@ -138,6 +141,35 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
                     + serverID + " was not bean deleted");
         }
         return true;
+    }
+
+    @Override
+    public PagingLoadResult<SummaryRecord> searchSummaryRecords(
+            PagingLoadConfig config, CatalogFinderBean catalogFinder,
+            HttpServletRequest httpServletRequest)
+            throws GeoPlatformException {
+        Long serversCount = geoPlatformCSWClient.getSummaryRecordsCount(catalogFinder);
+
+        int start = config.getOffset();
+        int page = start == 0 ? start : start / config.getLimit();
+
+        System.out.println("*** " + config);
+        System.out.println("*** NUM " + config.getLimit() + " *** PAGE " + page);
+        List<SummaryRecordDTO> recordList = geoPlatformCSWClient.searchSummaryRecords(config.getLimit(),
+                                                                                      page, catalogFinder);
+        if (recordList == null) {
+            logger.info("*** No Summary Record ***");
+            throw new GeoPlatformException("There are no results");
+        }
+
+        ArrayList<SummaryRecord> searchRecords = new ArrayList<SummaryRecord>(recordList.size());
+        for (SummaryRecordDTO recordDTO : recordList) {
+            searchRecords.add(this.convertSummaryRecordDTO(recordDTO));
+        }
+
+        return new BasePagingLoadResult<SummaryRecord>(searchRecords,
+                                                       config.getOffset(),
+                                                       serversCount.intValue());
     }
 
     /**
@@ -157,5 +189,15 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         server.setAlias(serverDTO.getAlias());
 
         return server;
+    }
+
+    private SummaryRecord convertSummaryRecordDTO(SummaryRecordDTO summaryRecordDTO) {
+        SummaryRecord summaryRecord = new SummaryRecord();
+        summaryRecord.setIdentifier(summaryRecordDTO.getIdentifier());
+        summaryRecord.setTitle(summaryRecordDTO.getTitle());
+        summaryRecord.setAbstractText(summaryRecordDTO.getAbstractText());
+        summaryRecord.setKeywords(summaryRecordDTO.getKeywords());
+
+        return summaryRecord;
     }
 }

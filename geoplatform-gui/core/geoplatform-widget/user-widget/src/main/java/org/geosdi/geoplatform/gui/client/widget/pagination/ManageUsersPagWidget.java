@@ -127,8 +127,7 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
                                 AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback) {
 
                 UserRemote.Util.getInstance().searchUsers(
-                        (PagingLoadConfig) loadConfig,
-                        searchText, callback);
+                        (PagingLoadConfig) loadConfig, searchText, callback);
             }
         };
 
@@ -136,7 +135,6 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         super.loader.setRemoteSort(false);
 
         super.store = new ListStore<GPUserManageDetail>(loader);
-
         super.store.setMonitorChanges(true);
 
         super.toolBar.bind(loader);

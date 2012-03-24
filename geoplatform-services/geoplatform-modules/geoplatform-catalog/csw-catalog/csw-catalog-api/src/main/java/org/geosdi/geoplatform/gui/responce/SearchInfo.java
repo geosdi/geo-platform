@@ -85,9 +85,11 @@ public class SearchInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "SearchInfo{" + "searchText=" + searchText
-                + ", searchTitle=" + searchTitle
-                + ", searchAbstract=" + searchAbstract
-                + ", searchKeywords=" + searchKeywords + '}';
+        StringBuilder str = new StringBuilder("SearchInfo {");
+        str.append("searchText = ").append(searchText);
+        str.append(", searchTitle = ").append(searchTitle);
+        str.append(", searchAbstract = ").append(searchAbstract);
+        str.append(", searchKeywords = ").append(searchKeywords);
+        return str.append('}').toString();
     }
 }

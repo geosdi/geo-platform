@@ -39,6 +39,8 @@ import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.responce.BBoxInfo;
+import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -50,9 +52,9 @@ public class SpatialAreaAccordionWidget extends GeoPlatformContentPanel {
     private BBoxInfo bBoxInfo;
 
     @Inject
-    public SpatialAreaAccordionWidget(BBoxInfo theBBoxInfo) {
+    public SpatialAreaAccordionWidget(CatalogFinderBean theCatalogFinder) {
         super(true);
-        bBoxInfo = theBBoxInfo;
+        theCatalogFinder.setbBoxInfo(bBoxInfo = new BBoxInfo());
     }
 
     @Override

@@ -41,9 +41,7 @@ import com.google.gwt.inject.client.AbstractGinModule;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.MetadataTabItem;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.SearchTabItem;
-import org.geosdi.geoplatform.gui.responce.BBoxInfo;
-import org.geosdi.geoplatform.gui.responce.SearchInfo;
-import org.geosdi.geoplatform.gui.responce.TemporalInfo;
+import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 
 /**
  *
@@ -60,8 +58,6 @@ public class CatalogFinderInjectorModule extends AbstractGinModule {
 
         bind(MetadataTabItem.class).in(Singleton.class);
 
-        bind(SearchInfo.class);
-        bind(BBoxInfo.class);
-        bind(TemporalInfo.class);
+        bind(CatalogFinderBean.class).in(Singleton.class);
     }
 }

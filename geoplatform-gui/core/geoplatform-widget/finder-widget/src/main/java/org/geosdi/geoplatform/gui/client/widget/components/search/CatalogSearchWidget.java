@@ -55,8 +55,13 @@ import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.layout.ColumnData;
 import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Element;
 import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.SummaryRecordsContainer;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
+import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.SearchInfo;
 
 /**
@@ -64,22 +69,34 @@ import org.geosdi.geoplatform.gui.responce.SearchInfo;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class CatalogSearchWidget extends LayoutContainer {
+public class CatalogSearchWidget extends LayoutContainer
+        implements ActionEnableHandler {
 
     private SearchInfo searchInfo;
+    private SummaryRecordsContainer summaryRecordsContainer;
+    private EventBus bus;
     //
-    private Button searchButton;
     private CheckBox titleCheckbox;
     private CheckBox abstractCheckbox;
     private CheckBox keywordsCheckbox;
     private CheckBox allSelectedCheckbox;
+    //
+    private Button searchButton;
+    private boolean validSelectedServer;
+    private boolean validCheckBoxGroup;
+    private boolean validSearchText;
 
     @Inject
-    public CatalogSearchWidget(SearchInfo theSearchInfo) {
-        this.searchInfo = theSearchInfo;
+    public CatalogSearchWidget(CatalogFinderBean theCatalogFinder,
+                               SummaryRecordsContainer theSummaryRecordsContainer,
+                               EventBus theBus) {
+        theCatalogFinder.setSearchInfo(searchInfo = new SearchInfo());
+        summaryRecordsContainer = theSummaryRecordsContainer;
+        bus = theBus;
+        bus.addHandler(ActionEnableEvent.TYPE, this);
 
-        setLayout(new ColumnLayout());
-        setStyleAttribute("padding", "10px");
+        super.setLayout(new ColumnLayout());
+        super.setStyleAttribute("padding", "10px");
     }
 
     @Override
@@ -101,7 +118,21 @@ public class CatalogSearchWidget extends LayoutContainer {
 
         final TextField<String> searchTextField = new TextField<String>();
         searchTextField.setWidth(250);
-        searchTextField.setAllowBlank(false);
+        searchTextField.setAutoValidate(true);
+        searchTextField.setValidator(new Validator() {
+
+            @Override
+            public String validate(Field<?> field, String value) {
+                if (value.trim().length() < 3) {
+                    validSearchText = false;
+                    manageSearchButton();
+                    return "The search text must be at least 3 characters";
+                }
+                validSearchText = true;
+                manageSearchButton();
+                return null;
+            }
+        });
         searchTextField.addKeyListener(new KeyListener() {
 
             @Override
@@ -124,10 +155,11 @@ public class CatalogSearchWidget extends LayoutContainer {
                 searchInfo.setSearchTitle(titleCheckbox.getValue().booleanValue());
                 searchInfo.setSearchAbstract(abstractCheckbox.getValue().booleanValue());
                 searchInfo.setSearchKeywords(keywordsCheckbox.getValue().booleanValue());
-                System.out.println("*** " + searchInfo); // TODO DEL
+                // Performing the search
+                summaryRecordsContainer.searchSummaryRecords();
             }
         });
-        searchButton.setStyleAttribute("padding-left", "6px");
+        searchButton.setStyleAttribute("padding-left", "20px");
         searchButton.disable();
         panel.add(searchButton);
 
@@ -152,10 +184,8 @@ public class CatalogSearchWidget extends LayoutContainer {
             public String validate(Field<?> field, String value) {
                 CheckBoxGroup group = (CheckBoxGroup) field;
                 if (group.getValue() == null) {
-                    searchButton.disable();
                     return "Select at least one option";
                 }
-                searchButton.enable();
                 return null;
             }
         });
@@ -165,18 +195,21 @@ public class CatalogSearchWidget extends LayoutContainer {
             @Override
             public void handleEvent(FieldEvent fe) {
                 manageAllSelectedCheckbox();
-                optionsCheckboxgroup.validate(true);
+                validCheckBoxGroup = optionsCheckboxgroup.validate(true); // TODO false for display error tooltip message
+                manageSearchButton();
             }
         };
+        validCheckBoxGroup = true; // At least one checkbox of group is enabled by default
 
         titleCheckbox = new CheckBox();
         titleCheckbox.setBoxLabel("Title");
-//        titleCheckbox.setValue(true);
+        titleCheckbox.setValue(true); // Enabled by default
         titleCheckbox.addListener(Events.Change, checkBoxListener);
         optionsCheckboxgroup.add(titleCheckbox);
 
         abstractCheckbox = new CheckBox();
         abstractCheckbox.setBoxLabel("Abstract");
+        abstractCheckbox.setValue(true); // Enabled by default
         abstractCheckbox.addListener(Events.Change, checkBoxListener);
         optionsCheckboxgroup.add(abstractCheckbox);
 
@@ -226,6 +259,20 @@ public class CatalogSearchWidget extends LayoutContainer {
             System.out.println("+++ set all FALSE");
 //            allSelectedCheckbox.setValue(false);
             allSelectedCheckbox.setRawValue("false");
+        }
+    }
+
+    @Override
+    public void onActionEnabled(ActionEnableEvent event) {
+        validSelectedServer = event.isEnabled();
+        this.manageSearchButton();
+    }
+
+    private void manageSearchButton() {
+        if (validSelectedServer && validCheckBoxGroup && validSearchText) {
+            searchButton.enable();
+        } else {
+            searchButton.disable();
         }
     }
 }

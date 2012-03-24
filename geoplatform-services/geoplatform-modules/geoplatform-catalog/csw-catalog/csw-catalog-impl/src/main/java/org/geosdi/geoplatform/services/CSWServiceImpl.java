@@ -49,9 +49,11 @@ import org.geosdi.geoplatform.cswconnector.CatalogGetCapabilitiesBean;
 import org.geosdi.geoplatform.cswconnector.CatalogVersionException;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
+import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.geosdi.geoplatform.services.development.CSWEntityCorrectness;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -275,5 +277,53 @@ class CSWServiceImpl {
             return serverUrl.substring(0, index);
         }
         return serverUrl;
+    }
+
+    // TODO Implement me
+    Long getSummaryRecordsCount(CatalogFinderBean catalogFinder) {
+        return new Long(75);
+    }
+
+    // TODO Implement me
+    List<SummaryRecordDTO> searchSummaryRecords(int num, int page,
+                                                CatalogFinderBean catalogFinder) {
+        logger.info("\n*** {}", catalogFinder);
+//        Long serverID = catalogFinder.getServerID();
+//
+//        SearchInfo search = catalogFinder.getSearchInfo();
+//        search.getSearchText();
+//        search.isSearchTitle();
+//        search.isSearchAbstract();
+//        search.isSearchKeywords();
+//
+//        BBoxInfo bBox = catalogFinder.getbBoxInfo();
+//        bBox.getSearchBBoxType();
+//        bBox.getbBox();
+//
+//        TemporalInfo temporal = catalogFinder.getTemporalInfo();
+//        temporal.getStartDate();
+//        temporal.getEndDate();
+
+        return this.createDummySummaryRecords(num, page);
+    }
+
+    private List<SummaryRecordDTO> createDummySummaryRecords(int num, int page) {
+        int start = 10 + (num * page);
+        int end = start + num - 1;
+        logger.info("\n*** start {} --- end {}", start, end);
+
+        List<SummaryRecordDTO> list = new ArrayList<SummaryRecordDTO>(num);
+
+        for (int i = start; i <= end; i++) {
+            SummaryRecordDTO dto = new SummaryRecordDTO();
+            dto.setIdentifier("ID_" + i);
+            dto.setTitle("Title_" + i);
+            dto.setAbstractText("Abstract_" + i);
+            dto.setKeywords("Keywords_" + i);
+
+            list.add(dto);
+        }
+
+        return list;
     }
 }

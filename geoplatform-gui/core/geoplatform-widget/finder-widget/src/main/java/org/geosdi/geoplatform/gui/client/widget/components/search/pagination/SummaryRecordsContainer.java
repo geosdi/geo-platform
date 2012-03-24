@@ -38,8 +38,11 @@ package org.geosdi.geoplatform.gui.client.widget.components.search.pagination;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
 import com.extjs.gxt.ui.client.core.XTemplate;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
+import com.extjs.gxt.ui.client.data.LoadEvent;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.RpcProxy;
+import com.extjs.gxt.ui.client.event.LoadListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
@@ -49,92 +52,142 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
-import org.geosdi.geoplatform.gui.client.model.SummaryRecordKeyValue;
+import org.geosdi.geoplatform.gui.client.model.SummaryRecord.SummaryRecordKeyValue;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
+import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
+import org.geosdi.geoplatform.gui.server.gwt.GPCatalogFinderRemoteImpl;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class SummaryRecordsContainer extends GridLayoutPaginationContainer<SummaryRecord> {
-    
+@Singleton
+public class SummaryRecordsContainer
+        extends GridLayoutPaginationContainer<SummaryRecord> {
+
+    private CatalogFinderBean catalogFinder;
+    //
     private CheckBoxSelectionModel<SummaryRecord> sm;
     private RowExpander rowExpander;
-    
-    public SummaryRecordsContainer() {
+
+    @Inject
+    public SummaryRecordsContainer(CatalogFinderBean theCatalogFinder) {
         super(true);
+        catalogFinder = theCatalogFinder;
+
         super.setWidth(550);
-        setStyleAttribute("padding-top", "10px");
-        setStyleAttribute("padding-bottom", "10px");
+        super.setStyleAttribute("padding-top", "10px");
+        super.setStyleAttribute("padding-bottom", "10px");
     }
-    
+
     @Override
     public void setGridProperties() {
         super.widget.setHeight(250);
         super.widget.getView().setForceFit(true);
-        super.widget.setLoadMask(true);
-        
+//        super.widget.setLoadMask(true);
+
         super.widget.setSelectionModel(this.sm);
-        
+
         super.widget.addPlugin(this.rowExpander);
         super.widget.addPlugin(this.sm);
     }
-    
+
     @Override
     public ColumnModel prepareColumnModel() {
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
-        
+
         XTemplate tpl = XTemplate.create(
-                "<p><b>Abstract:</b> {abstractText}</p><br>"
-                + "<p><b>Keywords:</b> {keywords}</p>");
-        
+                "<p><b>Abstract:</b> {ABSTRACT_TEXT}</p><br>"
+                + "<p><b>Keywords:</b> {KEYWORDS}</p>");
+
         rowExpander = new RowExpander(tpl);
-        
+
         configs.add(rowExpander);
-        
+
         ColumnConfig titleColumn = new ColumnConfig();
-        titleColumn.setId(SummaryRecordKeyValue.title.toString());
+        titleColumn.setId(SummaryRecordKeyValue.TITLE.toString());
         titleColumn.setHeader("Title");
         titleColumn.setWidth(490);
         titleColumn.setFixed(true);
         titleColumn.setResizable(false);
         configs.add(titleColumn);
-        
+
         this.sm = new CheckBoxSelectionModel<SummaryRecord>();
         sm.setSelectionMode(SelectionMode.MULTI);
         configs.add(sm.getColumn());
-        
-        
+
+
         return new ColumnModel(configs);
     }
-    
+
     @Override
     public void createStore() {
         super.toolBar = new PagingToolBar(super.getPageSize());
-        
+
         super.proxy = new RpcProxy<PagingLoadResult<SummaryRecord>>() {
-            
+
             @Override
             protected void load(Object loadConfig,
-                    AsyncCallback<PagingLoadResult<SummaryRecord>> callback) {
-                /** TODO : HERE THE SERVICE CALL TO LOAD SUMMARY RECORDS WITH PAGINATION **/
+                                AsyncCallback<PagingLoadResult<SummaryRecord>> callback) {
+                System.out.println("*** " + catalogFinder); // TODO DEL
+                GPCatalogFinderRemoteImpl.Util.getInstance().searchSummaryRecords(
+                        (PagingLoadConfig) loadConfig, catalogFinder, callback);
             }
         };
-        
-        super.loader = new BasePagingLoader<PagingLoadResult<SummaryRecord>>(
-                proxy);
+
+        super.loader = new BasePagingLoader<PagingLoadResult<SummaryRecord>>(proxy);
         super.loader.setRemoteSort(false);
-        
+
         super.store = new ListStore<SummaryRecord>(loader);
-        
-        super.store.setMonitorChanges(true);
-        
+//        super.store.setMonitorChanges(true);
+
         super.toolBar.bind(loader);
+        super.toolBar.disable();
     }
-    
+
     @Override
     public void setUpLoadListener() {
+        super.loader.addLoadListener(new LoadListener() {
+
+            @Override
+            public void loaderBeforeLoad(LoadEvent le) {
+                widget.mask("Loading Summary Records");
+            }
+
+            @Override
+            public void loaderLoad(LoadEvent le) {
+                if (!toolBar.isEnabled()) {
+                    toolBar.enable();
+                }
+                widget.unmask();
+                // TODO Set status message on main windows
+                System.out.println("*** Summary Records correctly loaded");
+            }
+
+            @Override
+            public void loaderLoadException(LoadEvent le) {
+                if (le.exception instanceof GeoPlatformException) {
+                    // No result
+                    System.out.println("*** " + le.exception.getMessage());
+                } else {
+                    GeoPlatformMessage.errorMessage("Connection error",
+                                                    "The services are down, report to the administator");
+                }
+                store.removeAll();
+                toolBar.clear();
+                toolBar.disable();
+                widget.unmask();
+            }
+        });
+    }
+
+    public void searchSummaryRecords() {
+        super.loader.load();
     }
 }

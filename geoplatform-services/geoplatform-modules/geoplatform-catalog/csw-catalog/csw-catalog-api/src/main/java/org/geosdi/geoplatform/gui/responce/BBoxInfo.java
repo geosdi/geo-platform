@@ -77,4 +77,13 @@ public class BBoxInfo implements Serializable {
     public void setSearchBBoxType(SearchBBoxType searchBBoxType) {
         this.searchBBoxType = searchBBoxType;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder("BBoxInfo {");
+        str.append("active = ").append(active);
+        str.append(", bBox = ").append(bBox);
+        str.append(", searchBBoxType = ").append(searchBBoxType);
+        return str.append('}').toString();
+    }
 }

@@ -63,6 +63,7 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.tips.QuickTip;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
@@ -71,6 +72,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.widget.components.form.CSWServerFormWidget;
+import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
@@ -89,6 +91,8 @@ public class CSWServerPaginationContainer
         extends GridLayoutPaginationContainer<GPCSWServerBeanModel> {
 
     private CatalogFinderBean catalogFinder;
+    private EventBus bus;
+    private ActionEnableEvent enableEvent = new ActionEnableEvent(false);
     //
     private CSWServerFormWidget serverForm = new CSWServerFormWidget(this);
     private CheckBoxSelectionModel<GPCSWServerBeanModel> sm;
@@ -96,9 +100,11 @@ public class CSWServerPaginationContainer
     private Button deleteServerButton;
 
     @Inject
-    public CSWServerPaginationContainer(CatalogFinderBean theCatalogFinder) {
+    public CSWServerPaginationContainer(CatalogFinderBean theCatalogFinder,
+                                        EventBus theBus) {
         super(true);
         catalogFinder = theCatalogFinder;
+        bus = theBus;
     }
 
     @Override
@@ -160,7 +166,7 @@ public class CSWServerPaginationContainer
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                executeNewServer();
+                serverForm.showForm();
             }
         });
         newServerButton.setIcon(BasicWidgetResources.ICONS.done());
@@ -226,6 +232,9 @@ public class CSWServerPaginationContainer
                     deleteServerButton.enable();
                     catalogFinder.setServerID(selectedServer.getId());
                 }
+
+                enableEvent.setEnabled(deleteServerButton.isEnabled());
+                bus.fireEvent(enableEvent);
             }
         });
 
@@ -254,12 +263,10 @@ public class CSWServerPaginationContainer
             }
         };
 
-        super.loader = new BasePagingLoader<PagingLoadResult<GPCSWServerBeanModel>>(
-                proxy);
+        super.loader = new BasePagingLoader<PagingLoadResult<GPCSWServerBeanModel>>(proxy);
         super.loader.setRemoteSort(false);
 
         super.store = new ListStore<GPCSWServerBeanModel>(loader);
-
 //        super.store.setMonitorChanges(true);
 
         super.toolBar.bind(loader);
@@ -280,7 +287,7 @@ public class CSWServerPaginationContainer
                     toolBar.enable();
                 }
                 widget.unmask();
-                // TODO Set status message on main windows: CSW servers correctly loaded
+                // TODO Set status message on main windows
                 System.out.println("*** CSW servers correctly loaded");
             }
 
@@ -299,10 +306,6 @@ public class CSWServerPaginationContainer
                 widget.unmask();
             }
         });
-    }
-
-    private void executeNewServer() {
-        serverForm.showForm();
     }
 
     private void executeDeleteServer() {
@@ -332,12 +335,12 @@ public class CSWServerPaginationContainer
     @Override
     protected void onRender(Element parent, int index) {
         super.onRender(parent, index);
-        loader.load(0, getPageSize());
+        loader.load(0, super.getPageSize());
     }
 
     public void reset() {
-        this.store.removeAll();
         this.searchField.reset();
+        this.store.removeAll();
         this.toolBar.clear();
     }
 

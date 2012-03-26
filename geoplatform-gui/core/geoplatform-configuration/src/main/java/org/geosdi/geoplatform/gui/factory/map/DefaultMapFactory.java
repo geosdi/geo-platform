@@ -40,6 +40,9 @@ import org.gwtopenmaps.openlayers.client.MapOptions;
 import org.gwtopenmaps.openlayers.client.MapUnits;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.Projection;
+import org.gwtopenmaps.openlayers.client.layer.Bing;
+import org.gwtopenmaps.openlayers.client.layer.BingOptions;
+import org.gwtopenmaps.openlayers.client.layer.BingType;
 import org.gwtopenmaps.openlayers.client.layer.GoogleV3;
 import org.gwtopenmaps.openlayers.client.layer.GoogleV3MapType;
 import org.gwtopenmaps.openlayers.client.layer.GoogleV3Options;
@@ -54,6 +57,8 @@ import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
  * 
  */
 public class DefaultMapFactory implements GeoPlatformMapFactory {
+
+    public static final String bingKey = "Apd8EWF9Ls5tXmyHr22OuL1ay4HRJtI4JG4jgluTDVaJdUXZV6lpSBpX-TwnoRDG";
 
     /**
      * (non-Javadoc)
@@ -101,10 +106,13 @@ public class DefaultMapFactory implements GeoPlatformMapFactory {
             case GOOGLE_NORMAL:
                 layer = createGoogleNormal();
                 break;
+            case BING_ROAD:
+                layer = createBingRoad();
+                break;
             default:
                 layer = createOSM();
         }
-        
+
         mapWidget.getMap().addLayer(layer);
 
         return mapWidget;
@@ -129,5 +137,13 @@ public class DefaultMapFactory implements GeoPlatformMapFactory {
         google.setIsBaseLayer(true);
 
         return google;
+    }
+
+    private Layer createBingRoad() {
+        Bing road = new Bing(new BingOptions("Bing Road Layer",
+                bingKey, BingType.ROAD));
+        road.setIsBaseLayer(true);
+
+        return road;
     }
 }

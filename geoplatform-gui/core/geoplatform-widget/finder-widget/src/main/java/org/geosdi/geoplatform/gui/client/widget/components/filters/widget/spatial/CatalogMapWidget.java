@@ -35,11 +35,33 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.filters.widget.spatial;
 
+import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class CatalogMapWidget {
+public class CatalogMapWidget extends GeoPlatformContentPanel {
     
+    public CatalogMapWidget() {
+        super(true);
+    }
+    
+    @Override
+    public void addComponent() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
+    public void initSize() {
+    }
+    
+    @Override
+    public void setPanelProperties() {
+        setHeaderVisible(false);
+        setLayout(new FlowLayout());
+        
+    }
 }

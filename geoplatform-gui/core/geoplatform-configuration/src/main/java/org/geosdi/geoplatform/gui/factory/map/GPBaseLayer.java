@@ -43,5 +43,6 @@ package org.geosdi.geoplatform.gui.factory.map;
 public enum GPBaseLayer {
 
     GOOGLE_NORMAL,
-    OPENSTREET_MAP;
+    OPENSTREET_MAP,
+    BING_ROAD;
 }

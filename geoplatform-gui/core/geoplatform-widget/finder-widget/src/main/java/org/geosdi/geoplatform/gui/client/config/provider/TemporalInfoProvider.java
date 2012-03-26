@@ -33,41 +33,20 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
+package org.geosdi.geoplatform.gui.client.config.provider;
 
-import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.responce.BBoxInfo;
-import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
+import com.google.inject.Provider;
+import org.geosdi.geoplatform.gui.responce.TemporalInfo;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-@CatalogFilter
-public class SpatialAreaAccordionWidget extends GeoPlatformContentPanel {
-
-    private BBoxInfo bBoxInfo;
-
-    @Inject
-    public SpatialAreaAccordionWidget(CatalogFinderBean theCatalogFinder) {
-        super(true);
-        this.bBoxInfo = theCatalogFinder.getbBoxInfo();
-    }
+public class TemporalInfoProvider implements Provider<TemporalInfo> {
 
     @Override
-    public void addComponent() {
-    }
-
-    @Override
-    public void initSize() {
-    }
-
-    @Override
-    public void setPanelProperties() {
-        super.setAnimCollapse(false);
-        super.setHeading("Filter by Area");
+    public TemporalInfo get() {
+        return new TemporalInfo();
     }
 }

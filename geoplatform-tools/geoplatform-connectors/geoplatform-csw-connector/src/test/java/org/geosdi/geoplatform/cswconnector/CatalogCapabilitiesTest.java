@@ -115,4 +115,25 @@ public class CatalogCapabilitiesTest {
             logger.error("CatalogVersionException @@@@@@@@@@@@ " + ve);
         }
     }
+
+    @Test
+    public void testCSW_ESRI() {
+        try {
+
+            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl(
+                    "https://snipc.protezionecivile.it/geoportal/csw/discovery");
+
+            logger.info(
+                    "CATALOG CAPABILITIES ESRI @@@@@@@@@@@"
+                    + "@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
+
+
+        } catch (MalformedURLException ex) {
+            logger.error("MalformedURLException @@@@@@@@@@@@@@ " + ex);
+        } catch (IOException es) {
+            logger.error("IOException @@@@@@@@@@@@@@ " + es);
+        } catch (CatalogVersionException ve) {
+            logger.error("CatalogVersionException @@@@@@@@@@@@ " + ve);
+        }
+    }
 }

@@ -1,6 +1,7 @@
 
 <module>
     
+    <inherits name='org.geosdi.geoplatform.gui.GeoPlatform' />
     <inherits name="com.google.gwt.inject.Inject"/>
 
     <source path="client" />

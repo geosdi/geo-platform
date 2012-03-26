@@ -54,7 +54,7 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
     @Inject
     public TimeAccordionWidget(CatalogFinderBean theCatalogFinder) {
         super(false);
-        theCatalogFinder.setTemporalInfo(temporalInfo = new TemporalInfo());
+        this.temporalInfo = theCatalogFinder.getTemporalInfo();
     }
 
     @Override

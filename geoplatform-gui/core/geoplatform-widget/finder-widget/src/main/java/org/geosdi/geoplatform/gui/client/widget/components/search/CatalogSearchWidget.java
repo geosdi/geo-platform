@@ -88,9 +88,9 @@ public class CatalogSearchWidget extends LayoutContainer
 
     @Inject
     public CatalogSearchWidget(CatalogFinderBean theCatalogFinder,
-                               SummaryRecordsContainer theSummaryRecordsContainer,
-                               EventBus theBus) {
-        theCatalogFinder.setSearchInfo(searchInfo = new SearchInfo());
+            SummaryRecordsContainer theSummaryRecordsContainer,
+            EventBus theBus) {
+        this.searchInfo = theCatalogFinder.getSearchInfo();
         summaryRecordsContainer = theSummaryRecordsContainer;
         bus = theBus;
         bus.addHandler(ActionEnableEvent.TYPE, this);
@@ -109,7 +109,7 @@ public class CatalogSearchWidget extends LayoutContainer
         Label searchLabel = new Label("Search Text");
         searchLabel.setStyleAttribute("color", "#4169E1");
         searchLabel.setStyleAttribute("font",
-                                      "normal 14px tahoma, arial, helvetica, sans-serif");
+                "normal 14px tahoma, arial, helvetica, sans-serif");
 
         left.add(searchLabel, new ColumnData(300.0));
 
@@ -159,19 +159,23 @@ public class CatalogSearchWidget extends LayoutContainer
         panel.add(searchTextField);
 
         searchButton = new Button("Search",
-                                  new SelectionListener<ButtonEvent>() {
+                new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                // Manual binding
-                searchInfo.setSearchText(searchTextField.getValue().trim());
-                searchInfo.setSearchTitle(titleCheckbox.getValue().booleanValue());
-                searchInfo.setSearchAbstract(abstractCheckbox.getValue().booleanValue());
-                searchInfo.setSearchKeywords(keywordsCheckbox.getValue().booleanValue());
-                // Performing the search
-                summaryRecordsContainer.searchSummaryRecords();
-            }
-        });
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        // Manual binding
+                        searchInfo.setSearchText(
+                                searchTextField.getValue().trim());
+                        searchInfo.setSearchTitle(
+                                titleCheckbox.getValue().booleanValue());
+                        searchInfo.setSearchAbstract(
+                                abstractCheckbox.getValue().booleanValue());
+                        searchInfo.setSearchKeywords(
+                                keywordsCheckbox.getValue().booleanValue());
+                        // Performing the search
+                        summaryRecordsContainer.searchSummaryRecords();
+                    }
+                });
         searchButton.setStyleAttribute("padding-left", "20px");
         searchButton.disable();
         panel.add(searchButton);
@@ -185,7 +189,7 @@ public class CatalogSearchWidget extends LayoutContainer
         Label optionsLabel = new Label("Search Options");
         optionsLabel.setStyleAttribute("color", "#4169E1");
         optionsLabel.setStyleAttribute("font",
-                                       "normal 14px tahoma, arial, helvetica, sans-serif");
+                "normal 14px tahoma, arial, helvetica, sans-serif");
 
         right.add(optionsLabel, new ColumnData(240.0));
 
@@ -241,28 +245,30 @@ public class CatalogSearchWidget extends LayoutContainer
 //        System.out.println("+++ fire event on ALL: " + allSelectedCheckbox.isFireChangeEventOnSetValue());
 //        allSelectedCheckbox.setFireChangeEventOnSetValue(false);
 //        System.out.println("+++ fire event on ALL: " + allSelectedCheckbox.isFireChangeEventOnSetValue());
-        allSelectedCheckbox.addListener(Events.Change, new Listener<FieldEvent>() {
+        allSelectedCheckbox.addListener(Events.Change,
+                new Listener<FieldEvent>() {
 
-            @Override
-            public void handleEvent(FieldEvent fe) {
-                System.out.println("@@@ Change"); // TODO FIX select/deselect all!
+                    @Override
+                    public void handleEvent(FieldEvent fe) {
+                        System.out.println("@@@ Change"); // TODO FIX select/deselect all!
 //                Boolean checked = (Boolean) fe.getValue();
 //                System.out.println("### checked " + checked);
-                Boolean checkedRaw = Boolean.valueOf(((CheckBox) fe.getField()).getRawValue());
+                        Boolean checkedRaw = Boolean.valueOf(
+                                ((CheckBox) fe.getField()).getRawValue());
 //                System.out.println("### checkedRaw " + checkedRaw);
 
-                boolean allSelected = false;
+                        boolean allSelected = false;
 //                if (checked) {
-                if (checkedRaw) {
-                    allSelected = true;
-                }
-                System.out.println("*** allSelected " + allSelected);
+                        if (checkedRaw) {
+                            allSelected = true;
+                        }
+                        System.out.println("*** allSelected " + allSelected);
 
-                titleCheckbox.setValue(allSelected);
-                abstractCheckbox.setValue(allSelected);
-                keywordsCheckbox.setValue(allSelected);
-            }
-        });
+                        titleCheckbox.setValue(allSelected);
+                        abstractCheckbox.setValue(allSelected);
+                        keywordsCheckbox.setValue(allSelected);
+                    }
+                });
         right.add(allSelectedCheckbox);
 
         add(left, new ColumnData(0.6));

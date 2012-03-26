@@ -40,7 +40,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.geosdi.connector.api.capabilities.model.csw.CatalogCapabilities;
+import org.geosdi.geoplatform.cswconnector.security.CatalogSecurityConnection;
 import org.geosdi.geoplatform.oxm.GeoPlatformMarshall;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -48,13 +50,20 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class CatalogGetCapabilitiesBean {
+public class CatalogGetCapabilitiesBean implements InitializingBean {
 
     private static final String CSW_CABABILITIES_REQUEST = "?SERVICE=CSW"
             + "&REQUEST=GetCapabilities";
     //
     @Autowired
     private GeoPlatformMarshall xStreamCatalog;
+    //
+    private CatalogSecurityConnection securityConnection;
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        this.securityConnection = new CatalogSecurityConnection();
+    }
 
     /**
      * Bind CSW Server Url with Control for Server Version.
@@ -94,7 +103,19 @@ public class CatalogGetCapabilitiesBean {
         HttpURLConnection conn = null;
         try {
             URL url = new URL(convertUrl(urlServer) + CSW_CABABILITIES_REQUEST);
-            conn = (HttpURLConnection) url.openConnection();
+
+            if (urlServer.startsWith("https")) {
+                /** @@@@@@@@@@@@@@@ TODO FIX ME @@@@@@@@@@@@@@@@@@@@ **/
+                if (urlServer.equals("https://snipc.protezionecivile.it"
+                        + "/geoportal/csw/discovery")) {
+                    conn = this.securityConnection.getSecureConnectionWithAuth(
+                            url, "acaralla", "Passw0rd");
+                } else {
+                    conn = this.securityConnection.getSecureConnection(url);
+                }
+            } else {
+                conn = (HttpURLConnection) url.openConnection();
+            }
 
             catalogGetCapabilities = (CatalogCapabilities) this.xStreamCatalog.loadFromStream(
                     conn.getInputStream());

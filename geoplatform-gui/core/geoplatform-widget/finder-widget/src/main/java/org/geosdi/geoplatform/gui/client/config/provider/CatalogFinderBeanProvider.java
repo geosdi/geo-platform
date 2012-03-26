@@ -33,41 +33,41 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
+package org.geosdi.geoplatform.gui.client.config.provider;
 
+import com.google.inject.Provider;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.responce.BBoxInfo;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
+import org.geosdi.geoplatform.gui.responce.SearchInfo;
+import org.geosdi.geoplatform.gui.responce.TemporalInfo;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-@CatalogFilter
-public class SpatialAreaAccordionWidget extends GeoPlatformContentPanel {
+public class CatalogFinderBeanProvider implements Provider<CatalogFinderBean> {
 
-    private BBoxInfo bBoxInfo;
+    private BBoxInfo bboxInfo;
+    private SearchInfo searchInfo;
+    private TemporalInfo temporalInfo;
 
     @Inject
-    public SpatialAreaAccordionWidget(CatalogFinderBean theCatalogFinder) {
-        super(true);
-        this.bBoxInfo = theCatalogFinder.getbBoxInfo();
+    public CatalogFinderBeanProvider(BBoxInfo bboxInfo, SearchInfo searchInfo,
+            TemporalInfo temporalInfo) {
+        this.bboxInfo = bboxInfo;
+        this.searchInfo = searchInfo;
+        this.temporalInfo = temporalInfo;
     }
 
     @Override
-    public void addComponent() {
-    }
+    public CatalogFinderBean get() {
+        CatalogFinderBean catalogFinderBean = new CatalogFinderBean();
+        catalogFinderBean.setbBoxInfo(bboxInfo);
+        catalogFinderBean.setSearchInfo(searchInfo);
+        catalogFinderBean.setTemporalInfo(temporalInfo);
 
-    @Override
-    public void initSize() {
-    }
-
-    @Override
-    public void setPanelProperties() {
-        super.setAnimCollapse(false);
-        super.setHeading("Filter by Area");
+        return catalogFinderBean;
     }
 }

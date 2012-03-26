@@ -39,9 +39,16 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.inject.client.AbstractGinModule;
 import javax.inject.Singleton;
+import org.geosdi.geoplatform.gui.client.config.provider.BBoxInfoProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.CatalogFinderBeanProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.SearchInfoProvider;
+import org.geosdi.geoplatform.gui.client.config.provider.TemporalInfoProvider;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.MetadataTabItem;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.SearchTabItem;
+import org.geosdi.geoplatform.gui.responce.BBoxInfo;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
+import org.geosdi.geoplatform.gui.responce.SearchInfo;
+import org.geosdi.geoplatform.gui.responce.TemporalInfo;
 
 /**
  *
@@ -58,6 +65,16 @@ public class CatalogFinderInjectorModule extends AbstractGinModule {
 
         bind(MetadataTabItem.class).in(Singleton.class);
 
-        bind(CatalogFinderBean.class).in(Singleton.class);
+        bind(BBoxInfo.class).toProvider(BBoxInfoProvider.class).in(
+                Singleton.class);
+
+        bind(SearchInfo.class).toProvider(SearchInfoProvider.class).in(
+                Singleton.class);
+
+        bind(TemporalInfo.class).toProvider(TemporalInfoProvider.class).in(
+                Singleton.class);
+
+        bind(CatalogFinderBean.class).toProvider(CatalogFinderBeanProvider.class).in(
+                Singleton.class);
     }
 }

@@ -119,6 +119,7 @@ public class CatalogSearchWidget extends LayoutContainer
         final TextField<String> searchTextField = new TextField<String>();
         searchTextField.setWidth(250);
         searchTextField.setAutoValidate(true);
+        searchTextField.setAllowBlank(false);
         searchTextField.setValidator(new Validator() {
 
             @Override
@@ -141,6 +142,18 @@ public class CatalogSearchWidget extends LayoutContainer
                         && event.getKeyCode() == KeyCodes.KEY_ENTER) {
                     searchButton.fireEvent(Events.Select);
                 }
+            }
+
+            @Override
+            public void componentKeyUp(ComponentEvent event) {
+                if ((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
+                        || (event.getKeyCode() == KeyCodes.KEY_DELETE)) {
+                    if (!searchTextField.validate()) {
+                        validSearchText = false;
+                        manageSearchButton();
+                    }
+                }
+
             }
         });
         panel.add(searchTextField);
@@ -215,6 +228,7 @@ public class CatalogSearchWidget extends LayoutContainer
 
         keywordsCheckbox = new CheckBox();
         keywordsCheckbox.setBoxLabel("Keywords");
+        keywordsCheckbox.setValue(true); // Enabled by default
         keywordsCheckbox.addListener(Events.Change, checkBoxListener);
         optionsCheckboxgroup.add(keywordsCheckbox);
 
@@ -222,6 +236,11 @@ public class CatalogSearchWidget extends LayoutContainer
 
         allSelectedCheckbox = new CheckBox();
         allSelectedCheckbox.setBoxLabel("Select/Deselect all");
+        allSelectedCheckbox.setValue(true); // Enabled by default
+        // TODO Test
+//        System.out.println("+++ fire event on ALL: " + allSelectedCheckbox.isFireChangeEventOnSetValue());
+//        allSelectedCheckbox.setFireChangeEventOnSetValue(false);
+//        System.out.println("+++ fire event on ALL: " + allSelectedCheckbox.isFireChangeEventOnSetValue());
         allSelectedCheckbox.addListener(Events.Change, new Listener<FieldEvent>() {
 
             @Override
@@ -233,6 +252,7 @@ public class CatalogSearchWidget extends LayoutContainer
 //                System.out.println("### checkedRaw " + checkedRaw);
 
                 boolean allSelected = false;
+//                if (checked) {
                 if (checkedRaw) {
                     allSelected = true;
                 }

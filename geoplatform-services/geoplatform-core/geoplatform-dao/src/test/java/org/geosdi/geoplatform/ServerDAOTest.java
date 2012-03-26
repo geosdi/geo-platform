@@ -61,9 +61,9 @@ public class ServerDAOTest extends BaseDAOTest {
         logger.info("\n*** Number of Servers into DB: {} ***",
                     serverDAO.findAll().size());
 
-        Assert.assertTrue("Error on number of total servers", serverDAO.findAll().size() >= 3);
+        Assert.assertTrue("Error on number of total servers", serverDAO.findAll().size() >= 2);
         Assert.assertTrue("Error on number of WMS servers", serverDAO.findAll(GPCapabilityType.WMS).size() == 2);
-        Assert.assertTrue("Error on number of CSW servers", serverDAO.findAll(GPCapabilityType.CSW).size() >= 1);
+//        Assert.assertTrue("Error on number of CSW servers", serverDAO.findAll(GPCapabilityType.CSW).size() >= 1);
     }
 
     private void removeAllServers() {
@@ -76,13 +76,16 @@ public class ServerDAOTest extends BaseDAOTest {
     }
 
     protected void insertServers() {
+        // WMS
         GeoPlatformServer server1WMS = createServer1WMS();
         GeoPlatformServer server2WMS = createServer2WMS();
-        GeoPlatformServer server1CSW = createServer1CSW();
-        serverDAO.persist(server1WMS, server2WMS, server1CSW);
+        serverDAO.persist(server1WMS, server2WMS);
         logger.debug("\n*** SAVED Server:\n{}\n***", server1WMS);
         logger.debug("\n*** SAVED Server:\n{}\n***", server2WMS);
-        logger.debug("\n*** SAVED Server:\n{}\n***", server1CSW);
+        // CSW
+//        GeoPlatformServer server1CSW = createServer1CSW();
+//        serverDAO.persist(server1CSW);
+//        logger.debug("\n*** SAVED Server:\n{}\n***", server1CSW);
         //
 //        this.insertDummyCSWServer();
     }

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.client.model;
 
+import java.util.List;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 /**
@@ -50,7 +51,7 @@ public class SummaryRecord extends GeoPlatformBeanModel {
 
     public enum SummaryRecordKeyValue {
 
-        TITLE, ABSTRACT_TEXT, KEYWORDS;
+        TITLE, ABSTRACT_TEXT, SUBJECTS;
     }
 
     /**
@@ -82,20 +83,6 @@ public class SummaryRecord extends GeoPlatformBeanModel {
     }
 
     /**
-     * @return the keywords
-     */
-    public String getKeywords() {
-        return super.get(SummaryRecordKeyValue.KEYWORDS.toString());
-    }
-
-    /**
-     * @param keywords the keywords to set
-     */
-    public void setKeywords(String keywords) {
-        super.set(SummaryRecordKeyValue.KEYWORDS.toString(), keywords);
-    }
-
-    /**
      * @return the abstractText
      */
     public String getAbstractText() {
@@ -107,6 +94,20 @@ public class SummaryRecord extends GeoPlatformBeanModel {
      */
     public void setAbstractText(String abstractText) {
         super.set(SummaryRecordKeyValue.ABSTRACT_TEXT.toString(), abstractText);
+    }
+
+    /**
+     * @return the subjects
+     */
+    public List<String> getSubjects() {
+        return super.get(SummaryRecordKeyValue.SUBJECTS.toString());
+    }
+
+    /**
+     * @param subjects the subjects to set
+     */
+    public void setSubjects(List<String> subjects) {
+        super.set(SummaryRecordKeyValue.SUBJECTS.toString(), subjects);
     }
 
     @Override
@@ -137,7 +138,7 @@ public class SummaryRecord extends GeoPlatformBeanModel {
         StringBuilder str = new StringBuilder("SummaryRecord {");
         str.append("identifier = ").append(identifier);
         str.append(", title = ").append(getTitle());
-        str.append(", keywords = ").append(getKeywords());
+        str.append(", subjects = ").append(getSubjects());
         str.append(", abstract =").append(getAbstractText());
         return str.append('}').toString();
     }

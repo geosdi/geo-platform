@@ -39,6 +39,7 @@ import java.util.List;
 import junit.framework.Assert;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.SearchInfo;
@@ -109,16 +110,16 @@ public class CSWCatalogTest {
     }
 
     @Test
-    public void testSummaryRecordsCount() throws ResourceNotFoundFault {
+    public void testSummaryRecordsCount() throws IllegalParameterFault, ResourceNotFoundFault {
         Assert.assertEquals(new Long(4), cswService.getSummaryRecordsCount(catalogFinder));
     }
-
-//    @Test
-//    public void testSummaryRecordsSearch() throws ResourceNotFoundFault {
-//        List<SummaryRecordDTO> summaryRecords = cswService.searchSummaryRecords(25, 0, catalogFinder);
-//        for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
-//            logger.debug("*** " + summaryRecordDTO);
-//        }
-//        Assert.assertEquals(4, summaryRecords.size());
-//    }
+ 
+    @Test
+    public void testSummaryRecordsSearch() throws IllegalParameterFault, ResourceNotFoundFault {
+        List<SummaryRecordDTO> summaryRecords = cswService.searchSummaryRecords(25, 0, catalogFinder);
+        for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
+            logger.debug("*** " + summaryRecordDTO);
+        }
+        Assert.assertEquals(4, summaryRecords.size());
+    }
 }

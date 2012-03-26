@@ -104,7 +104,7 @@ public class SummaryRecordsContainer
 
         XTemplate tpl = XTemplate.create(
                 "<p><b>Abstract:</b> {ABSTRACT_TEXT}</p><br>"
-                + "<p><b>Keywords:</b> {KEYWORDS}</p>");
+                + "<p><b>Subjects:</b> {SUBJECTS}</p>");
 
         rowExpander = new RowExpander(tpl);
 

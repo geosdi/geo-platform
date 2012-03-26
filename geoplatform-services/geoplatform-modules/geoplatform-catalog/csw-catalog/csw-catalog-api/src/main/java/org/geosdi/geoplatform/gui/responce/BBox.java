@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.responce;
 
 import java.io.Serializable;
 
-
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -99,7 +98,7 @@ public class BBox implements Serializable {
         str.append("minX=").append(minX);
         str.append(", minY=").append(minY);
         str.append(", maxX=").append(maxX);
-        str.append(", maxY=").append(maxY).append('}');
-        return str.toString();
+        str.append(", maxY=").append(maxY);
+        return str.append("}").toString();
     }
 }

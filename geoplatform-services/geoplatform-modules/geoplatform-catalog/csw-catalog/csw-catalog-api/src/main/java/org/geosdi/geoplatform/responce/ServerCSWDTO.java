@@ -132,7 +132,11 @@ public class ServerCSWDTO {
      */
     @Override
     public String toString() {
-        return "ServerCSWDTO{" + "id=" + id.longValue() + ", serverUrl=" + serverUrl
-                + ", alias=" + alias + ", title=" + title + '}';
+        StringBuilder str = new StringBuilder("ServerCSWDTO {");
+        str.append("id=").append(id);
+        str.append(", serverUrl=").append(serverUrl);
+        str.append(", alias=").append(alias);
+        str.append(", title=").append(title);
+        return str.append("}").toString();
     }
 }

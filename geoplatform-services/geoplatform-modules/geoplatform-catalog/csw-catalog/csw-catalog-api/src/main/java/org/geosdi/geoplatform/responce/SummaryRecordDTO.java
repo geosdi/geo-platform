@@ -35,24 +35,27 @@
  */
 package org.geosdi.geoplatform.responce;
 
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+@XmlRootElement(name = "SummaryRecordDTO")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SummaryRecordDTO {
 
     private String identifier;
     private String title;
     private String abstractText;
-    private String keywords;
-
-    public String getAbstractText() {
-        return abstractText;
-    }
-
-    public void setAbstractText(String abstractText) {
-        this.abstractText = abstractText;
-    }
+    @XmlElementWrapper(name = "subjectList")
+    @XmlElement(name = "subject")
+    private List<String> subjects;
 
     public String getIdentifier() {
         return identifier;
@@ -62,19 +65,37 @@ public class SummaryRecordDTO {
         this.identifier = identifier;
     }
 
-    public String getKeywords() {
-        return keywords;
-    }
-
-    public void setKeywords(String keywords) {
-        this.keywords = keywords;
-    }
-
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getAbstractText() {
+        return abstractText;
+    }
+
+    public void setAbstractText(String abstractText) {
+        this.abstractText = abstractText;
+    }
+
+    public List<String> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<String> subjects) {
+        this.subjects = subjects;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder("SummaryRecordDTO {");
+        str.append("identifier=").append(identifier);
+        str.append(", title=").append(title);
+        str.append(", abstractText=").append(abstractText);
+        str.append(", subjects=").append(subjects);
+        return str.append("}").toString();
     }
 }

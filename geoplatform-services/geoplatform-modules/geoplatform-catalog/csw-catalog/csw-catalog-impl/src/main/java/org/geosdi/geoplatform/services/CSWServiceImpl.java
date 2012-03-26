@@ -42,6 +42,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -68,6 +69,7 @@ import org.geotoolkit.csw.xml.CSWMarshallerPool;
 import org.geotoolkit.csw.xml.ResultType;
 import org.geotoolkit.csw.xml.v202.GetRecordsResponseType;
 import org.geotoolkit.csw.xml.v202.SummaryRecordType;
+import org.geotoolkit.dublincore.xml.v2.elements.SimpleLiteral;
 import org.geotoolkit.xml.MarshallerPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -290,14 +292,14 @@ class CSWServiceImpl {
     }
 
     Long getSummaryRecordsCount(CatalogFinderBean catalogFinder)
-            throws ResourceNotFoundFault {
+            throws IllegalParameterFault, ResourceNotFoundFault {
 //            throws IllegalParameterFault, ResourceNotFoundFault {
         logger.debug("\n*** {}", catalogFinder);
 //        return new Long(75);
 
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
 
-        Long count = -1L;
+        Long count;
         try {
             um = pool.acquireUnmarshaller();
 
@@ -325,13 +327,13 @@ class CSWServiceImpl {
 
         } catch (JAXBException ex) {
             logger.error("### JAXBException: " + ex.getMessage());
-//            throw new IllegalParameterFault("Error with JAXB");
+            throw new IllegalParameterFault("Error with JAXB");
         } catch (MalformedURLException ex) {
             logger.error("### MalformedURLException: " + ex.getMessage());
-//            throw new IllegalParameterFault("Malformed URL");
+            throw new IllegalParameterFault("Malformed URL");
         } catch (IOException ex) {
             logger.error("### IOException: " + ex.getMessage());
-//            throw new IllegalParameterFault("Error on parse response stream");
+            throw new IllegalParameterFault("Error on parse response stream");
         } finally {
             if (um != null) {
                 pool.release(um);
@@ -341,11 +343,8 @@ class CSWServiceImpl {
         return count;
     }
 
-    // TODO Test me
-    List<SummaryRecordDTO> searchSummaryRecords(int num, int page,
-            CatalogFinderBean catalogFinder)
-            throws ResourceNotFoundFault {
-//            throws IllegalParameterFault, ResourceNotFoundFault {
+    List<SummaryRecordDTO> searchSummaryRecords(int num, int page, CatalogFinderBean catalogFinder)
+            throws IllegalParameterFault, ResourceNotFoundFault {
         logger.debug("\n*** {}", catalogFinder);
 //        return this.createDummySummaryRecords(num, page);
 
@@ -366,7 +365,7 @@ class CSWServiceImpl {
 //        temporal.getStartDate();
 //        temporal.getEndDate();
 
-        List<SummaryRecordDTO> summaryRecordListDTO = null;
+        List<SummaryRecordDTO> summaryRecordListDTO;
         try {
             um = pool.acquireUnmarshaller();
 
@@ -394,13 +393,13 @@ class CSWServiceImpl {
 
         } catch (JAXBException ex) {
             logger.error("### JAXBException: " + ex.getMessage());
-//            throw new IllegalParameterFault("Error with JAXB");
+            throw new IllegalParameterFault("Error with JAXB");
         } catch (MalformedURLException ex) {
             logger.error("### MalformedURLException: " + ex.getMessage());
-//            throw new IllegalParameterFault("Malformed URL");
+            throw new IllegalParameterFault("Malformed URL");
         } catch (IOException ex) {
             logger.error("### IOException: " + ex.getMessage());
-//            throw new IllegalParameterFault("Error on parse response stream");
+            throw new IllegalParameterFault("Error on parse response stream");
         } finally {
             if (um != null) {
                 pool.release(um);
@@ -408,26 +407,6 @@ class CSWServiceImpl {
         }
 
         return summaryRecordListDTO;
-    }
-
-    private List<SummaryRecordDTO> createDummySummaryRecords(int num, int page) {
-        int start = 10 + (num * page);
-        int end = start + num - 1;
-        logger.debug("\n*** start {} --- end {}", start, end);
-
-        List<SummaryRecordDTO> list = new ArrayList<SummaryRecordDTO>(num);
-
-        for (int i = start; i <= end; i++) {
-            SummaryRecordDTO dto = new SummaryRecordDTO();
-            dto.setIdentifier("ID_" + i);
-            dto.setTitle("Title_" + i);
-            dto.setAbstractText("Abstract_" + i);
-            dto.setKeywords("Keywords_" + i);
-
-            list.add(dto);
-        }
-
-        return list;
     }
 
     private GeoPlatformServer getCSWServerByID(Long serverID)
@@ -445,13 +424,53 @@ class CSWServiceImpl {
         List<SummaryRecordDTO> summaryRecordListDTO = new ArrayList<SummaryRecordDTO>(summaryRecordList.size());
         for (SummaryRecordType summaryRecord : summaryRecordList) {
             SummaryRecordDTO dto = new SummaryRecordDTO();
-            dto.setIdentifier(summaryRecord.getIdentifier().toString());
-            dto.setTitle(summaryRecord.getTitle().toString());
-            dto.setAbstractText(summaryRecord.getAbstract().toString());
-            dto.setKeywords(summaryRecord.getSubject().toString());
+            dto.setIdentifier(this.convertLiteralToString(summaryRecord.getIdentifier()));
+            dto.setTitle(this.convertLiteralToString(summaryRecord.getTitle()));
+            dto.setAbstractText(this.convertLiteralToString(summaryRecord.getAbstract()));
+            dto.setSubjects(this.convertLiteralToList(summaryRecord.getSubject()));
 
             summaryRecordListDTO.add(dto);
         }
         return summaryRecordListDTO;
+    }
+
+    // TODO list null?
+    private String convertLiteralToString(List<SimpleLiteral> literalList) {
+        StringBuilder str = new StringBuilder();
+        for (SimpleLiteral sl : literalList) {
+            str.append(sl.toString()).append(",");
+        }
+        str.deleteCharAt(str.length() - 1);
+        return str.toString();
+    }
+
+    // TODO list null?
+    private List<String> convertLiteralToList(List<SimpleLiteral> literalList) {
+        List<String> stringList = new ArrayList<String>(literalList.size());
+        for (SimpleLiteral sl : literalList) {
+            stringList.add(sl.toString());
+        }
+        return stringList;
+    }
+
+    private List<SummaryRecordDTO> createDummySummaryRecords(int num, int page) {
+        int start = 10 + (num * page);
+        int end = start + num - 1;
+        logger.debug("\n*** start {} --- end {}", start, end);
+
+        List<SummaryRecordDTO> list = new ArrayList<SummaryRecordDTO>(num);
+
+        for (int i = start; i <= end; i++) {
+            SummaryRecordDTO dto = new SummaryRecordDTO();
+            dto.setIdentifier("ID_" + i);
+            dto.setTitle("Title_" + i);
+            dto.setAbstractText("Abstract_" + i);
+            String[] ss = {"Subject_A_" + i, "Subject_B_" + i, "Subject_C_" + i};
+            dto.setSubjects(Arrays.asList(ss));
+
+            list.add(dto);
+        }
+
+        return list;
     }
 }

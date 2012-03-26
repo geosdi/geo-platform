@@ -47,7 +47,7 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public class GeoPlatformCSWClient {
 
-    private @Value("${webservice_cswservice_endpoint_address}")
+    private @Value("${webservice_test_cswservice_endpoint_address}")
     String address;
     //
     @Autowired

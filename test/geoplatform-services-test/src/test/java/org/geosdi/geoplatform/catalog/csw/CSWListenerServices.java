@@ -33,18 +33,16 @@
  * wish to do so, delete this exception statement from your version.
  *
  */
-package org.geosdi.geoplatform.modelws;
+package org.geosdi.geoplatform.catalog.csw;
 
 import javax.xml.ws.Endpoint;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.geosdi.geoplatform.cxf.GeoPlatformWSClient;
 import org.geosdi.geoplatform.configurator.cxf.server.GPServerWebServiceInterceptorStrategyFactory;
-import org.geosdi.geoplatform.configurator.jasypt.GPPooledPBEStringEncryptorDecorator;
-import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
+import org.geosdi.geoplatform.cxf.GeoPlatformCSWClient;
+import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,45 +57,40 @@ import org.springframework.test.context.TestExecutionListener;
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public class WSListenerServices implements TestExecutionListener {
+public class CSWListenerServices implements TestExecutionListener {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private GeoPlatformService gpWSClient;
-    private GPPooledPBEStringEncryptorDecorator gpPooledPBEStringEncryptor;
+    private GeoPlatformCSWService cswService;
     private Endpoint endpoint;
     private Bus bus;
 
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
-        logger.info("\n\t@@@ WSListenerServices.beforeTestClass @@@");
-        
-        GeoPlatformWSClient geoPlatformWSClient = (GeoPlatformWSClient) testContext.getApplicationContext().getBean("gpWSClient");
-        Assert.assertNotNull("geoPlatformWSClient is NULL", geoPlatformWSClient);
-        gpWSClient = geoPlatformWSClient.create();
-        
-        GPPooledPBEStringEncryptorDecorator theGPPooledPBEStringEncryptor = (GPPooledPBEStringEncryptorDecorator) testContext.getApplicationContext().getBean("gpPooledPBEStringEncryptor");
-        Assert.assertNotNull("gpPooledPBEStringEncryptor is NULL", theGPPooledPBEStringEncryptor);
-        gpPooledPBEStringEncryptor = theGPPooledPBEStringEncryptor;
+        logger.info("\n\t@@@ CSWListenerServices.beforeTestClass @@@");
 
-        GeoPlatformService geoPlatformService = (GeoPlatformService) testContext.getApplicationContext().getBean("geoPlatformService");
-        Assert.assertNotNull("geoPlatformService is NULL", geoPlatformService);
+        GeoPlatformCSWClient cswClient = (GeoPlatformCSWClient) testContext.getApplicationContext().getBean("cswClient");
+        Assert.assertNotNull("cswClient is NULL", cswClient);
+        cswService = cswClient.create();
 
-        Object implementor = geoPlatformService;
+        GeoPlatformCSWService geoPlatformCSWService = (GeoPlatformCSWService) testContext.getApplicationContext().getBean("cswService");
+        Assert.assertNotNull("cswService is NULL", geoPlatformCSWService);
+
+        Object implementor = geoPlatformCSWService;
         SpringBusFactory bf = new SpringBusFactory();
         bus = bf.createBus();
 
         bus.getInInterceptors().add(new LoggingInInterceptor());
         bus.getOutInterceptors().add(new LoggingOutInterceptor());
-        
+
         GPServerWebServiceInterceptorStrategyFactory gpServerWebServiceInterceptorStrategyFactory = (GPServerWebServiceInterceptorStrategyFactory) testContext.getApplicationContext().getBean("gpServerWebServiceInterceptorStrategyFactory");
         Assert.assertNotNull("gpServerWebServiceInterceptorStrategyFactory is NULL", gpServerWebServiceInterceptorStrategyFactory);
-        
+
         bus.getInInterceptors().add(gpServerWebServiceInterceptorStrategyFactory.getSecurityInInterceptor());
         bus.getOutInterceptors().add(gpServerWebServiceInterceptorStrategyFactory.getSecurityOutInterceptor());
 
         bf.setDefaultBus(bus);
-        String serverAddress = geoPlatformWSClient.getAddress();
+        String serverAddress = cswClient.getAddress();
         endpoint = Endpoint.publish(serverAddress, implementor);
 
         logger.info("\n*** Server ready...");
@@ -105,10 +98,10 @@ public class WSListenerServices implements TestExecutionListener {
 
     @Override
     public void prepareTestInstance(TestContext testContext) throws Exception {
-        logger.info("\n\t@@@ WSListenerServices.prepareTestInstance @@@");
+        logger.info("\n\t@@@ CSWListenerServices.prepareTestInstance @@@");
 
-        ServiceTest testInstance = (ServiceTest) testContext.getTestInstance();
-        testInstance.setGeoplatformServiceClient(gpWSClient, gpPooledPBEStringEncryptor);
+        CSWCatalogTest testInstance = (CSWCatalogTest) testContext.getTestInstance();
+        testInstance.setCSWService(cswService);
     }
 
     @Override
@@ -121,7 +114,7 @@ public class WSListenerServices implements TestExecutionListener {
 
     @Override
     public void afterTestClass(TestContext testContext) throws Exception {
-        logger.info("\n\t@@@ WSListenerServices.afterTestClass @@@");
+        logger.info("\n\t@@@ CSWListenerServices.afterTestClass @@@");
 
         endpoint.stop();
         bus.shutdown(true);

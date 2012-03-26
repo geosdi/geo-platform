@@ -141,8 +141,8 @@ public class CSWServerFormWidget
 
             @Override
             public String validate(Field<?> field, String value) {
-                if (!value.startsWith("http://")) {
-                    return "URL must be start with \"http://\"";
+                if (!value.startsWith("http://") || !value.startsWith("https://")) {
+                    return "URL must be start with \"http://\" or \"https://\"";
                 }
                 // Delete all spaces & Encoding into ASCII
                 urlEncoding = URL.decodeQueryString(value.replaceAll("[ ]+", ""));

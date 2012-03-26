@@ -139,13 +139,15 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     }
 
     @Override
-    public Long getSummaryRecordsCount(CatalogFinderBean catalogFinder) {
+    public Long getSummaryRecordsCount(CatalogFinderBean catalogFinder)
+            throws ResourceNotFoundFault {
         return cswServiceDelegate.getSummaryRecordsCount(catalogFinder);
     }
 
     @Override
     public List<SummaryRecordDTO> searchSummaryRecords(int num, int page,
-                                                       CatalogFinderBean catalogFinder) {
+            CatalogFinderBean catalogFinder)
+            throws ResourceNotFoundFault {
         return cswServiceDelegate.searchSummaryRecords(num, page, catalogFinder);
     }
 }

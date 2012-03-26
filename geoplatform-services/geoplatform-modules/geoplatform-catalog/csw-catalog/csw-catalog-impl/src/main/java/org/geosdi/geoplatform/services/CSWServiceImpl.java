@@ -38,23 +38,37 @@ package org.geosdi.geoplatform.services;
 import com.googlecode.genericdao.search.Filter;
 import com.googlecode.genericdao.search.Search;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import org.geosdi.connector.api.capabilities.model.csw.CatalogCapabilities;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.cswconnector.CatalogGetCapabilitiesBean;
 import org.geosdi.geoplatform.cswconnector.CatalogVersionException;
+import org.geosdi.geoplatform.cswconnector.GPCSWServerConnector;
+import org.geosdi.geoplatform.cswconnector.GeoPlatformCSWConnectorBuilder;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
+import org.geosdi.geoplatform.gui.responce.SearchInfo;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.geosdi.geoplatform.services.development.CSWEntityCorrectness;
+import org.geotoolkit.csw.GetRecordsRequest;
+import org.geotoolkit.csw.xml.CSWMarshallerPool;
+import org.geotoolkit.csw.xml.ResultType;
+import org.geotoolkit.csw.xml.v202.GetRecordsResponseType;
+import org.geotoolkit.csw.xml.v202.SummaryRecordType;
+import org.geotoolkit.xml.MarshallerPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,17 +80,13 @@ import org.slf4j.LoggerFactory;
 class CSWServiceImpl {
 
     final private Logger logger = LoggerFactory.getLogger(CSWServiceImpl.class);
-//    static {
-//        pool = CSWMarshallerPool.getInstance();
-//    }
     // DAO
     private GPServerDAO serverDao;
     //
     private CatalogGetCapabilitiesBean catalogCapabilitiesBean;
     //      
-//    private MarshallerPool pool = CSWMarshallerPool.getInstance();
-//    private static MarshallerPool pool;
-//    private Unmarshaller um;
+    private MarshallerPool pool = CSWMarshallerPool.getInstance();
+    private Unmarshaller um;
 
     /**
      * @param serverDao the serverDao to set
@@ -144,7 +154,7 @@ class CSWServiceImpl {
             server.setAbstractServer(capabilities.getServiceIdentification().getAbstractText());
             server.setName(capabilities.getServiceProvider().getProviderName());
 
-            CSWEntityCorrectness.checkServerCSW(server); // TODO assert
+            CSWEntityCorrectness.checkCSWServer(server); // TODO assert
             serverDao.save(server);
 
         } catch (MalformedURLException ex) {
@@ -173,7 +183,7 @@ class CSWServiceImpl {
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found", serverID);
         }
-        CSWEntityCorrectness.checkServerCSW(server); // TODO assert
+        CSWEntityCorrectness.checkCSWServer(server); // TODO assert
 
         return serverDao.remove(server);
     }
@@ -195,7 +205,7 @@ class CSWServiceImpl {
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found", serverID);
         }
-        CSWEntityCorrectness.checkServerCSW(server); // TODO assert
+        CSWEntityCorrectness.checkCSWServer(server); // TODO assert
 
         return server;
     }
@@ -209,7 +219,7 @@ class CSWServiceImpl {
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found " + serverUrl);
         }
-        CSWEntityCorrectness.checkServerCSW(server); // TODO assert
+        CSWEntityCorrectness.checkCSWServer(server); // TODO assert
 
         return server;
     }
@@ -223,7 +233,7 @@ class CSWServiceImpl {
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found " + serverUrl);
         }
-        CSWEntityCorrectness.checkServerCSW(server); // TODO assert
+        CSWEntityCorrectness.checkCSWServer(server); // TODO assert
 
         return new ServerCSWDTO(server);
     }
@@ -279,19 +289,71 @@ class CSWServiceImpl {
         return serverUrl;
     }
 
-    // TODO Implement me
-    Long getSummaryRecordsCount(CatalogFinderBean catalogFinder) {
-        return new Long(75);
+    Long getSummaryRecordsCount(CatalogFinderBean catalogFinder)
+            throws ResourceNotFoundFault {
+//            throws IllegalParameterFault, ResourceNotFoundFault {
+        logger.debug("\n*** {}", catalogFinder);
+//        return new Long(75);
+
+        GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
+
+        Long count = -1L;
+        try {
+            um = pool.acquireUnmarshaller();
+
+            GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
+                    withServerUrl(new URL(server.getServerUrl())).build();
+
+            SearchInfo search = catalogFinder.getSearchInfo();
+            String searchText = search.getSearchText();
+            // TODO Refine search
+//            search.isSearchTitle();
+//            search.isSearchAbstract();
+//            search.isSearchKeywords();
+
+            GetRecordsRequest request = serverConnector.createGetRecords();
+            request.setTypeNames("csw:Record");
+            request.setConstraintLanguage("CQL");
+            request.setConstraintLanguageVersion("1.1.0");
+            request.setConstraint("AnyText like '%" + searchText + "%'");
+
+            // unmarshall the response
+            InputStream is = request.getResponseStream();
+            GetRecordsResponseType response = ((JAXBElement<GetRecordsResponseType>) um.unmarshal(is)).getValue();
+
+            count = new Long(response.getSearchResults().getNumberOfRecordsMatched());
+
+        } catch (JAXBException ex) {
+            logger.error("### JAXBException: " + ex.getMessage());
+//            throw new IllegalParameterFault("Error with JAXB");
+        } catch (MalformedURLException ex) {
+            logger.error("### MalformedURLException: " + ex.getMessage());
+//            throw new IllegalParameterFault("Malformed URL");
+        } catch (IOException ex) {
+            logger.error("### IOException: " + ex.getMessage());
+//            throw new IllegalParameterFault("Error on parse response stream");
+        } finally {
+            if (um != null) {
+                pool.release(um);
+            }
+        }
+
+        return count;
     }
 
-    // TODO Implement me
+    // TODO Test me
     List<SummaryRecordDTO> searchSummaryRecords(int num, int page,
-                                                CatalogFinderBean catalogFinder) {
-        logger.info("\n*** {}", catalogFinder);
-//        Long serverID = catalogFinder.getServerID();
-//
-//        SearchInfo search = catalogFinder.getSearchInfo();
-//        search.getSearchText();
+            CatalogFinderBean catalogFinder)
+            throws ResourceNotFoundFault {
+//            throws IllegalParameterFault, ResourceNotFoundFault {
+        logger.debug("\n*** {}", catalogFinder);
+//        return this.createDummySummaryRecords(num, page);
+
+        GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
+
+        SearchInfo search = catalogFinder.getSearchInfo();
+        String searchText = search.getSearchText();
+        // TODO Refine search
 //        search.isSearchTitle();
 //        search.isSearchAbstract();
 //        search.isSearchKeywords();
@@ -304,13 +366,54 @@ class CSWServiceImpl {
 //        temporal.getStartDate();
 //        temporal.getEndDate();
 
-        return this.createDummySummaryRecords(num, page);
+        List<SummaryRecordDTO> summaryRecordListDTO = null;
+        try {
+            um = pool.acquireUnmarshaller();
+
+            GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
+                    withServerUrl(new URL(server.getServerUrl())).build();
+
+            GetRecordsRequest request = serverConnector.createGetRecords();
+            request.setTypeNames("gmd:MD_Metadata");
+            request.setConstraintLanguage("CQL");
+            request.setConstraintLanguageVersion("1.1.0");
+            request.setConstraint("AnyText like '%" + searchText + "%'");
+            request.setResultType(ResultType.RESULTS);
+
+            // TODO Pagination search
+//            request.setMaxRecords(num);
+//            request.setStartPosition(num * page);
+
+            // unmarshall the response
+            InputStream is = request.getResponseStream();
+            GetRecordsResponseType response = ((JAXBElement<GetRecordsResponseType>) um.unmarshal(is)).getValue();
+
+            List<SummaryRecordType> summaryRecordList =
+                    (List<SummaryRecordType>) response.getSearchResults().getAbstractRecord();
+            summaryRecordListDTO = this.convertSummaryRecords(summaryRecordList);
+
+        } catch (JAXBException ex) {
+            logger.error("### JAXBException: " + ex.getMessage());
+//            throw new IllegalParameterFault("Error with JAXB");
+        } catch (MalformedURLException ex) {
+            logger.error("### MalformedURLException: " + ex.getMessage());
+//            throw new IllegalParameterFault("Malformed URL");
+        } catch (IOException ex) {
+            logger.error("### IOException: " + ex.getMessage());
+//            throw new IllegalParameterFault("Error on parse response stream");
+        } finally {
+            if (um != null) {
+                pool.release(um);
+            }
+        }
+
+        return summaryRecordListDTO;
     }
 
     private List<SummaryRecordDTO> createDummySummaryRecords(int num, int page) {
         int start = 10 + (num * page);
         int end = start + num - 1;
-        logger.info("\n*** start {} --- end {}", start, end);
+        logger.debug("\n*** start {} --- end {}", start, end);
 
         List<SummaryRecordDTO> list = new ArrayList<SummaryRecordDTO>(num);
 
@@ -325,5 +428,30 @@ class CSWServiceImpl {
         }
 
         return list;
+    }
+
+    private GeoPlatformServer getCSWServerByID(Long serverID)
+            throws ResourceNotFoundFault {
+        GeoPlatformServer server = serverDao.find(serverID);
+        if (server == null) {
+            throw new ResourceNotFoundFault("Server not found", serverID);
+        }
+        CSWEntityCorrectness.checkCSWServer(server); // TODO assert
+
+        return server;
+    }
+
+    private List<SummaryRecordDTO> convertSummaryRecords(List<SummaryRecordType> summaryRecordList) {
+        List<SummaryRecordDTO> summaryRecordListDTO = new ArrayList<SummaryRecordDTO>(summaryRecordList.size());
+        for (SummaryRecordType summaryRecord : summaryRecordList) {
+            SummaryRecordDTO dto = new SummaryRecordDTO();
+            dto.setIdentifier(summaryRecord.getIdentifier().toString());
+            dto.setTitle(summaryRecord.getTitle().toString());
+            dto.setAbstractText(summaryRecord.getAbstract().toString());
+            dto.setKeywords(summaryRecord.getSubject().toString());
+
+            summaryRecordListDTO.add(dto);
+        }
+        return summaryRecordListDTO;
     }
 }

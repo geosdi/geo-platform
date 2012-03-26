@@ -172,7 +172,7 @@ public class SummaryRecordsContainer
 
             @Override
             public void loaderLoadException(LoadEvent le) {
-                if (le.exception instanceof GeoPlatformException) {
+                if (le.exception instanceof GeoPlatformException) { // TODO If server not found?
                     // No result
                     System.out.println("*** " + le.exception.getMessage());
                 } else {

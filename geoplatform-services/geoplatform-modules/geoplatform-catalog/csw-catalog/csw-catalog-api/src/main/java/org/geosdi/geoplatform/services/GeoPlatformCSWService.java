@@ -120,18 +120,25 @@ public interface GeoPlatformCSWService {
     @HttpResource(location = "/server/csw/search/{num}/{page}/{nameLike}")
     @WebResult(name = "ServersCSW")
     List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request);
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Records">
+    // ==========================================================================
+    // === Records
+    // ==========================================================================    
     @Get
     @HttpResource(location = "/record/csw/count/{searchText}")
     @WebResult(name = "SummaryRecordsCount")
-    Long getSummaryRecordsCount(CatalogFinderBean catalogFinder);
+    Long getSummaryRecordsCount(CatalogFinderBean catalogFinder)
+            throws ResourceNotFoundFault;
 
     @Get
     @HttpResource(location = "/record/csw/search/{num}/{page}/{searchText}")
     @WebResult(name = "SummaryRecords")
     List<SummaryRecordDTO> searchSummaryRecords(@WebParam(name = "num") int num,
                                                 @WebParam(name = "page") int page,
-                                                CatalogFinderBean catalogFinder);
+                                                CatalogFinderBean catalogFinder)
+            throws  ResourceNotFoundFault;
 //
 //    @Get
 //    @HttpResource(location = "/server/csw/capabilities/{id}")

@@ -58,6 +58,7 @@ public class GPServerDAOImpl extends BaseDAO<GeoPlatformServer, Long>
         return super.findAll();
     }
 
+    @Override
     public List<GeoPlatformServer>  findAll(GPCapabilityType type) {
         Search search = new Search();
         search.addFilterEqual("serverType", type);

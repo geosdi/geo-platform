@@ -26,21 +26,28 @@
         <level value="info" />
         <appender-ref ref="STDOUT" />
     </root>
+    
+    <!-- Tests -->
+    <logger name="org.geosdi.geoplatform.modelws.CXFServiceTest" level="info"/>
+    <logger name="org.geosdi.geoplatform.modelws.WSLayerTest" level="info"/>
+    <logger name="org.geosdi.geoplatform.modelws.WSFolderTest" level="info"/>
+    <logger name="org.geosdi.geoplatform.modelws.WSProjectTest" level="info"/>
+    <logger name="org.geosdi.geoplatform.modelws.WSAccountTest" level="info"/>
+    
+    <logger name="org.geosdi.geoplatform.catalog.csw.CSWCatalogTest" level="debug"/>
 
+    <!-- Services -->
     <logger name="org.geosdi.geoplatform.services.AclServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.FolderServiceImpl" level="info"/>    
     <logger name="org.geosdi.geoplatform.services.LayerServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.ProjectServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.AccountServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.WMSServiceImpl" level="info"/>
+    <logger name="org.geosdi.geoplatform.services.CSWServiceImpl" level="info"/>
     
-    <logger name="org.geosdi.geoplatform.CXFServiceTest" level="info"/>
-    <logger name="org.geosdi.geoplatform.WSLayerTest" level="info"/>
-    <logger name="org.geosdi.geoplatform.WSFolderTest" level="info"/>
-    <logger name="org.geosdi.geoplatform.WSProjectTest" level="info"/>
-    <logger name="org.geosdi.geoplatform.WSAccountTest" level="info"/>
-    
+    <!-- DAOs -->
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPLayerDAOImpl" level="info"/>
+    <logger name="org.geosdi.geoplatform.core.dao.impl.GPServerDAOImpl" level="info"/>
 
 </configuration>

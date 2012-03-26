@@ -35,9 +35,17 @@
  */
 package org.geosdi.geoplatform.catalog.csw;
 
+import java.util.List;
 import junit.framework.Assert;
+import org.geosdi.geoplatform.core.model.GPCapabilityType;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
+import org.geosdi.geoplatform.gui.responce.SearchInfo;
+import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -59,6 +67,9 @@ public class CSWCatalogTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     private GeoPlatformCSWService cswService;
+    //
+    private Long serverTestID;
+    private CatalogFinderBean catalogFinder;
 
     /**
      * The listener will inject this dependency
@@ -67,15 +78,47 @@ public class CSWCatalogTest {
         this.cswService = cswService;
     }
 
-    @Test
-    public void testSummaryRecordsCount() {
-        CatalogFinderBean catalogFinder = null;
-        Assert.assertEquals("", new Long(75), cswService.getSummaryRecordsCount(catalogFinder));
+    @Before
+    public void setUp() throws Exception {
+        logger.trace("\n\t@@@ {}.setUp @@@", this.getClass().getSimpleName());
+
+        // Insert the server test
+        GeoPlatformServer server = new GeoPlatformServer();
+        server.setTitle("CSW Server WS Test");
+        server.setServerType(GPCapabilityType.CSW);
+        server.setServerUrl("http://150.146.160.152/geonetwork/srv/en/csw");
+        serverTestID = cswService.insertServerCSW(server);
+
+        // Create the CSW search parameters
+        catalogFinder = new CatalogFinderBean();
+        catalogFinder.setServerID(serverTestID);
+        SearchInfo searchInfo = new SearchInfo();
+        searchInfo.setSearchText("land");
+        searchInfo.setSearchTitle(true);
+        searchInfo.setSearchAbstract(true);
+        searchInfo.setSearchKeywords(true);
+        catalogFinder.setSearchInfo(searchInfo);
+    }
+
+    @After
+    public void tearDown() throws ResourceNotFoundFault {
+        logger.trace("\n\t@@@ {}.tearDown @@@", this.getClass().getSimpleName());
+
+        // Delete the server test
+        cswService.deleteServerCSW(serverTestID);
     }
 
     @Test
-    public void testSummaryRecordsSearch() {
-        CatalogFinderBean catalogFinder = null;
-        Assert.assertEquals("", 25, cswService.searchSummaryRecords(25, 0, catalogFinder).size());
+    public void testSummaryRecordsCount() throws ResourceNotFoundFault {
+        Assert.assertEquals(new Long(4), cswService.getSummaryRecordsCount(catalogFinder));
     }
+
+//    @Test
+//    public void testSummaryRecordsSearch() throws ResourceNotFoundFault {
+//        List<SummaryRecordDTO> summaryRecords = cswService.searchSummaryRecords(25, 0, catalogFinder);
+//        for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
+//            logger.debug("*** " + summaryRecordDTO);
+//        }
+//        Assert.assertEquals(4, summaryRecords.size());
+//    }
 }

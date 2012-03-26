@@ -98,7 +98,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         int page = start == 0 ? start : start / config.getLimit();
 
         PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
-                                                                config.getLimit(), page);
+                config.getLimit(), page);
 
         List<ServerCSWDTO> serverList = geoPlatformCSWClient.searchCSWServers(psr);
         if (serverList == null) {
@@ -112,13 +112,13 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         }
 
         return new BasePagingLoadResult<GPCSWServerBeanModel>(searchUsers,
-                                                              config.getOffset(),
-                                                              serversCount.intValue());
+                config.getOffset(),
+                serversCount.intValue());
     }
 
     @Override
     public GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl,
-                                              HttpServletRequest httpServletRequest)
+            HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
         ServerCSWDTO serverCSW = null;
         try {
@@ -148,28 +148,36 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             PagingLoadConfig config, CatalogFinderBean catalogFinder,
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
-        Long serversCount = geoPlatformCSWClient.getSummaryRecordsCount(catalogFinder);
 
-        int start = config.getOffset();
-        int page = start == 0 ? start : start / config.getLimit();
+        Long serversCount;
+        ArrayList<SummaryRecord> searchRecords;
+        try {
+            serversCount = geoPlatformCSWClient.getSummaryRecordsCount(catalogFinder);
 
-        System.out.println("*** " + config);
-        System.out.println("*** NUM " + config.getLimit() + " *** PAGE " + page);
-        List<SummaryRecordDTO> recordList = geoPlatformCSWClient.searchSummaryRecords(config.getLimit(),
-                                                                                      page, catalogFinder);
-        if (recordList == null) {
-            logger.info("*** No Summary Record ***");
-            throw new GeoPlatformException("There are no results");
-        }
+            int start = config.getOffset();
+            System.out.println("*** Offset: " + start);
+            int page = start == 0 ? start : start / config.getLimit();
 
-        ArrayList<SummaryRecord> searchRecords = new ArrayList<SummaryRecord>(recordList.size());
-        for (SummaryRecordDTO recordDTO : recordList) {
-            searchRecords.add(this.convertSummaryRecordDTO(recordDTO));
+            System.out.println("*** NUM " + config.getLimit() + " *** PAGE " + page);
+            List<SummaryRecordDTO> recordList = geoPlatformCSWClient.searchSummaryRecords(config.getLimit(),
+                    page, catalogFinder);
+            if (recordList == null) {
+                logger.info("*** No Summary Record ***");
+                throw new GeoPlatformException("There are no results");
+            }
+
+            searchRecords = new ArrayList<SummaryRecord>(recordList.size());
+            for (SummaryRecordDTO recordDTO : recordList) {
+                searchRecords.add(this.convertSummaryRecordDTO(recordDTO));
+            }
+
+        } catch (ResourceNotFoundFault ex) {
+            logger.error("\n*** " + ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
         }
 
         return new BasePagingLoadResult<SummaryRecord>(searchRecords,
-                                                       config.getOffset(),
-                                                       serversCount.intValue());
+                config.getOffset(), serversCount.intValue());
     }
 
     /**

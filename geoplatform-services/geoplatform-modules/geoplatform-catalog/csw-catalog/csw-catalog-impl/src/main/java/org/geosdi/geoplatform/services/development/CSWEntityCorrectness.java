@@ -47,7 +47,7 @@ public class CSWEntityCorrectness {
     // ==========================================================================
     // === Server
     // ==========================================================================
-    public static void checkServerCSW(GeoPlatformServer server) {
+    public static void checkCSWServer(GeoPlatformServer server) {
         if (server.getServerType() != GPCapabilityType.CSW) {
             throw new EntityCorrectnessException("Server is not a CSW server");
         }

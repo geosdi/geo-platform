@@ -434,17 +434,17 @@ class CSWServiceImpl {
         return summaryRecordListDTO;
     }
 
-    // TODO list null?
     private String convertLiteralToString(List<SimpleLiteral> literalList) {
         StringBuilder str = new StringBuilder();
-        for (SimpleLiteral sl : literalList) {
-            str.append(sl.toString()).append(",");
+        if (literalList.size() > 0) {
+            for (SimpleLiteral sl : literalList) {
+                str.append(sl.toString()).append(",");
+            }
+            str.deleteCharAt(str.length() - 1);
         }
-        str.deleteCharAt(str.length() - 1);
         return str.toString();
     }
 
-    // TODO list null?
     private List<String> convertLiteralToList(List<SimpleLiteral> literalList) {
         List<String> stringList = new ArrayList<String>(literalList.size());
         for (SimpleLiteral sl : literalList) {

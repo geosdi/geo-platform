@@ -407,6 +407,13 @@ class CSWServiceImpl {
 //                    response.getSearchResults().getAbstractRecord().size(),
 //                    response.getSearchResults().getJbAbstractRecord().size());
 
+            if (response.getSearchResults().getNumberOfRecordsReturned()
+                    != response.getSearchResults().getAbstractRecord().size()) { //@TODO DEL ?
+                throw new IllegalParameterFault("Catalog return an incorrect number of records: expected "
+                        + response.getSearchResults().getNumberOfRecordsReturned() + " but was "
+                        + response.getSearchResults().getAbstractRecord().size());
+            }
+
             List<SummaryRecordType> summaryRecordList =
                     (List<SummaryRecordType>) response.getSearchResults().getAbstractRecord();
             logger.debug("\n*** Record list size: {} ***", summaryRecordList.size());

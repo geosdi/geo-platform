@@ -104,7 +104,10 @@ public class SummaryRecordsContainer
 
         XTemplate tpl = XTemplate.create(
                 "<p><b>Abstract:</b> {ABSTRACT_TEXT}</p><br>"
-                + "<p><b>Subjects:</b> {SUBJECTS}</p>");
+                + "<p><b>Subjects:</b><br></p>"
+                + "<tpl for=\"SUBJECTS\">"
+                + "<div>{.}</div>"
+                + "</tpl>");
 
         rowExpander = new RowExpander(tpl);
 
@@ -134,7 +137,7 @@ public class SummaryRecordsContainer
 
             @Override
             protected void load(Object loadConfig,
-                                AsyncCallback<PagingLoadResult<SummaryRecord>> callback) {
+                    AsyncCallback<PagingLoadResult<SummaryRecord>> callback) {
                 System.out.println("*** " + catalogFinder); // TODO DEL
                 GPCatalogFinderRemoteImpl.Util.getInstance().searchSummaryRecords(
                         (PagingLoadConfig) loadConfig, catalogFinder, callback);
@@ -177,7 +180,7 @@ public class SummaryRecordsContainer
                     System.out.println("*** " + le.exception.getMessage());
                 } else {
                     GeoPlatformMessage.errorMessage("Connection error",
-                                                    "The services are down, report to the administator");
+                            "The services are down, report to the administator");
                 }
                 store.removeAll();
                 toolBar.clear();

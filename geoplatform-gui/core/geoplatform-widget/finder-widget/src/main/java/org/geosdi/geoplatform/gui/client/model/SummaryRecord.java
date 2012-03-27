@@ -138,8 +138,8 @@ public class SummaryRecord extends GeoPlatformBeanModel {
         StringBuilder str = new StringBuilder("SummaryRecord {");
         str.append("identifier = ").append(identifier);
         str.append(", title = ").append(getTitle());
-        str.append(", subjects = ").append(getSubjects());
         str.append(", abstract =").append(getAbstractText());
+        str.append(", subjects = ").append(getSubjects());
         return str.append('}').toString();
     }
 }

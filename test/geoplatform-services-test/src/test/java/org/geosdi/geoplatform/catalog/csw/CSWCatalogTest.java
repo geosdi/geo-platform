@@ -108,18 +108,70 @@ public class CSWCatalogTest {
         // Delete the server test
         cswService.deleteServerCSW(serverTestID);
     }
-
+    
+//    @Test
+//    public void testSummaryRecordsCount() throws IllegalParameterFault, ResourceNotFoundFault {
+//        Assert.assertEquals(new Long(4), cswService.getSummaryRecordsCount(catalogFinder));
+//    }
+// 
+//    @Test
+//    public void testSummaryRecordsSearch() throws IllegalParameterFault, ResourceNotFoundFault {
+//        List<SummaryRecordDTO> summaryRecords = cswService.searchSummaryRecords(25, 0, catalogFinder);
+//        for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
+//            logger.trace("\n*** " + summaryRecordDTO);
+//        }
+//        Assert.assertEquals(4, summaryRecords.size());
+//    }
+//
+//    @Test
+//    public void testSummaryRecordsCountWMSText() throws IllegalParameterFault, ResourceNotFoundFault {
+//        catalogFinder.getSearchInfo().setSearchText("wms");
+//        Assert.assertEquals(new Long(641), cswService.getSummaryRecordsCount(catalogFinder));
+//    }
+    
     @Test
-    public void testSummaryRecordsCount() throws IllegalParameterFault, ResourceNotFoundFault {
-        Assert.assertEquals(new Long(4), cswService.getSummaryRecordsCount(catalogFinder));
-    }
- 
-    @Test
-    public void testSummaryRecordsSearch() throws IllegalParameterFault, ResourceNotFoundFault {
-        List<SummaryRecordDTO> summaryRecords = cswService.searchSummaryRecords(25, 0, catalogFinder);
+    public void testSummaryRecordsSearchWMSText() throws IllegalParameterFault, ResourceNotFoundFault {
+        catalogFinder.getSearchInfo().setSearchText("wms");
+        int num = 25;
+        // Page 0 (first)
+        int start = 1;
+        List<SummaryRecordDTO> summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
         for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
-            logger.debug("*** " + summaryRecordDTO);
+            logger.trace("\n*** " + summaryRecordDTO);
         }
-        Assert.assertEquals(4, summaryRecords.size());
+        Assert.assertEquals(25, summaryRecords.size());
+
+        // Page 1
+//        start = (num * 1) + 1;
+//        summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
+//        for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
+//            logger.trace("\n*** " + summaryRecordDTO);
+//        }
+//        Assert.assertEquals(25, summaryRecords.size());
+
+        //@TODO DEL Page 2
+        // Page 2
+//        start = (num * 2) + 1;
+//        summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
+//        for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
+//            logger.trace("\n*** " + summaryRecordDTO);
+//        }
+//        Assert.assertEquals(25, summaryRecords.size());
+        
+        // Page 24
+//        start = (num * 24) + 1;
+//        summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
+//        for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
+//            logger.trace("\n*** " + summaryRecordDTO);
+//        }
+//        Assert.assertEquals(25, summaryRecords.size());
+        
+        // Page 25 (last)
+        start = (num * 25) + 1;
+        summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
+        for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
+            logger.trace("\n*** " + summaryRecordDTO);
+        }
+        Assert.assertEquals(16, summaryRecords.size());
     }
 }

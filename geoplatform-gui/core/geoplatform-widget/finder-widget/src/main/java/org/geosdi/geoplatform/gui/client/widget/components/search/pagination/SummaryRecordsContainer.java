@@ -138,7 +138,6 @@ public class SummaryRecordsContainer
             @Override
             protected void load(Object loadConfig,
                     AsyncCallback<PagingLoadResult<SummaryRecord>> callback) {
-                System.out.println("*** " + catalogFinder); // TODO DEL
                 GPCatalogFinderRemoteImpl.Util.getInstance().searchSummaryRecords(
                         (PagingLoadConfig) loadConfig, catalogFinder, callback);
             }
@@ -170,14 +169,14 @@ public class SummaryRecordsContainer
                 }
                 widget.unmask();
                 // TODO Set status message on main windows
-                System.out.println("*** Summary Records correctly loaded");
+                System.out.println("\n*** Summary Records correctly loaded ***");
             }
 
             @Override
             public void loaderLoadException(LoadEvent le) {
                 if (le.exception instanceof GeoPlatformException) { // TODO If server not found?
                     // No result
-                    System.out.println("*** " + le.exception.getMessage());
+                    System.out.println("\n*** " + le.exception.getMessage());
                 } else {
                     GeoPlatformMessage.errorMessage("Connection error",
                             "The services are down, report to the administator");

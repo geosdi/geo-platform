@@ -42,7 +42,6 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -70,6 +69,7 @@ import org.geotoolkit.csw.xml.ResultType;
 import org.geotoolkit.csw.xml.v202.GetRecordsResponseType;
 import org.geotoolkit.csw.xml.v202.SummaryRecordType;
 import org.geotoolkit.dublincore.xml.v2.elements.SimpleLiteral;
+import org.geotoolkit.util.StringUtilities;
 import org.geotoolkit.xml.MarshallerPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,6 +81,12 @@ import org.slf4j.LoggerFactory;
  */
 class CSWServiceImpl {
 
+    // TODO Substitute?
+//    private static final String CAPABILITIES = "csw:" + TypeNames.CAPABILITIES_QNAME.getLocalPart();
+//    private static final String RECORD = "csw:" + TypeNames.RECORD_QNAME.getLocalPart();
+//    private static final String METADATA = "gmd:" + TypeNames.METADATA_QNAME.getLocalPart();
+//    private static final String DATASET = "gmd:" + TypeNames.DATASET_QNAME.getLocalPart();
+    //
     final private Logger logger = LoggerFactory.getLogger(CSWServiceImpl.class);
     // DAO
     private GPServerDAO serverDao;
@@ -293,9 +299,7 @@ class CSWServiceImpl {
 
     Long getSummaryRecordsCount(CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault {
-//            throws IllegalParameterFault, ResourceNotFoundFault {
         logger.debug("\n*** {}", catalogFinder);
-//        return new Long(75);
 
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
 
@@ -312,9 +316,15 @@ class CSWServiceImpl {
 //            search.isSearchTitle();
 //            search.isSearchAbstract();
 //            search.isSearchKeywords();
+//            try {
+//                org.opengis.filter.Filter f = CQL.toFilter("");
+//            } catch (CQLException ex) {
+//                logger.error("*************** " + ex.getMessage());
+//            }
 
             GetRecordsRequest request = serverConnector.createGetRecords();
             request.setTypeNames("csw:Record");
+//            request.setTypeNames(RECORD); // TODO Substitute?
             request.setConstraintLanguage("CQL");
             request.setConstraintLanguageVersion("1.1.0");
             request.setConstraint("AnyText like '%" + searchText + "%'");
@@ -343,10 +353,9 @@ class CSWServiceImpl {
         return count;
     }
 
-    List<SummaryRecordDTO> searchSummaryRecords(int num, int page, CatalogFinderBean catalogFinder)
+    List<SummaryRecordDTO> searchSummaryRecords(int num, int start, CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault {
         logger.debug("\n*** {}", catalogFinder);
-//        return this.createDummySummaryRecords(num, page);
 
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
 
@@ -374,22 +383,31 @@ class CSWServiceImpl {
 
             GetRecordsRequest request = serverConnector.createGetRecords();
             request.setTypeNames("gmd:MD_Metadata");
+//            request.setTypeNames(METADATA); // TODO Substitute?
             request.setConstraintLanguage("CQL");
             request.setConstraintLanguageVersion("1.1.0");
             request.setConstraint("AnyText like '%" + searchText + "%'");
             request.setResultType(ResultType.RESULTS);
 
             // TODO Pagination search
-//            request.setMaxRecords(num);
-//            request.setStartPosition(num * page);
+            request.setMaxRecords(num);
+            request.setStartPosition(start);
+//            request.setStartPosition(num * page + 1);
+            logger.debug("\n*** Num: {} *** Start: {} ***", request.getMaxRecords(), request.getStartPosition());
 
             // unmarshall the response
             InputStream is = request.getResponseStream();
             GetRecordsResponseType response = ((JAXBElement<GetRecordsResponseType>) um.unmarshal(is)).getValue();
+            logger.debug("\n*** Record matched: {} *** Record returned: {} *** Record next: {} ***", new Object[]{
+                        response.getSearchResults().getNumberOfRecordsMatched(),
+                        response.getSearchResults().getNumberOfRecordsReturned(),
+                        response.getSearchResults().getNextRecord()});
 
             List<SummaryRecordType> summaryRecordList =
                     (List<SummaryRecordType>) response.getSearchResults().getAbstractRecord();
+            logger.debug("\n*** Record list size: {} ***", summaryRecordList.size());
             summaryRecordListDTO = this.convertSummaryRecords(summaryRecordList);
+            logger.debug("\n*** RecordDTO list size: {} ***", summaryRecordListDTO.size());
 
         } catch (JAXBException ex) {
             logger.error("### JAXBException: " + ex.getMessage());
@@ -424,25 +442,14 @@ class CSWServiceImpl {
         List<SummaryRecordDTO> summaryRecordListDTO = new ArrayList<SummaryRecordDTO>(summaryRecordList.size());
         for (SummaryRecordType summaryRecord : summaryRecordList) {
             SummaryRecordDTO dto = new SummaryRecordDTO();
-            dto.setIdentifier(this.convertLiteralToString(summaryRecord.getIdentifier()));
-            dto.setTitle(this.convertLiteralToString(summaryRecord.getTitle()));
-            dto.setAbstractText(this.convertLiteralToString(summaryRecord.getAbstract()));
+            dto.setIdentifier(StringUtilities.toCommaSeparatedValues(summaryRecord.getIdentifier()));
+            dto.setTitle(StringUtilities.toCommaSeparatedValues(summaryRecord.getTitle()));
+            dto.setAbstractText(StringUtilities.toCommaSeparatedValues(summaryRecord.getAbstract()));
             dto.setSubjects(this.convertLiteralToList(summaryRecord.getSubject()));
 
             summaryRecordListDTO.add(dto);
         }
         return summaryRecordListDTO;
-    }
-
-    private String convertLiteralToString(List<SimpleLiteral> literalList) {
-        StringBuilder str = new StringBuilder();
-        if (literalList.size() > 0) {
-            for (SimpleLiteral sl : literalList) {
-                str.append(sl.toString()).append(",");
-            }
-            str.deleteCharAt(str.length() - 1);
-        }
-        return str.toString();
     }
 
     private List<String> convertLiteralToList(List<SimpleLiteral> literalList) {
@@ -451,26 +458,5 @@ class CSWServiceImpl {
             stringList.add(sl.toString());
         }
         return stringList;
-    }
-
-    private List<SummaryRecordDTO> createDummySummaryRecords(int num, int page) {
-        int start = 10 + (num * page);
-        int end = start + num - 1;
-        logger.debug("\n*** start {} --- end {}", start, end);
-
-        List<SummaryRecordDTO> list = new ArrayList<SummaryRecordDTO>(num);
-
-        for (int i = start; i <= end; i++) {
-            SummaryRecordDTO dto = new SummaryRecordDTO();
-            dto.setIdentifier("ID_" + i);
-            dto.setTitle("Title_" + i);
-            dto.setAbstractText("Abstract_" + i);
-            String[] ss = {"Subject_A_" + i, "Subject_B_" + i, "Subject_C_" + i};
-            dto.setSubjects(Arrays.asList(ss));
-
-            list.add(dto);
-        }
-
-        return list;
     }
 }

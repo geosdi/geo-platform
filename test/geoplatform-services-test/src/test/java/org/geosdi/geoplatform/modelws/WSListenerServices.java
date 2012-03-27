@@ -100,7 +100,7 @@ public class WSListenerServices implements TestExecutionListener {
         String serverAddress = geoPlatformWSClient.getAddress();
         endpoint = Endpoint.publish(serverAddress, implementor);
 
-        logger.info("\n*** Server ready...");
+        logger.info("\n\t@@@ Server ready... @@@");
     }
 
     @Override

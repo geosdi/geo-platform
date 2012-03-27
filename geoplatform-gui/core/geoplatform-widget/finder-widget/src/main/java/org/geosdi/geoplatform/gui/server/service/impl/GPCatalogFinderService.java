@@ -102,7 +102,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
 
         List<ServerCSWDTO> serverList = geoPlatformCSWClient.searchCSWServers(psr);
         if (serverList == null) {
-            logger.info("*** No CSW server ***");
+            logger.info("\n*** No CSW server ***");
             throw new GeoPlatformException("There are no results"); // TODO Create empty list
         }
 
@@ -153,15 +153,13 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         try {
             serversCount = geoPlatformCSWClient.getSummaryRecordsCount(catalogFinder);
 
-            int start = config.getOffset();
-            logger.info("*** Offset: " + start); // TODO DEL
-            int page = start == 0 ? start : start / config.getLimit();
+//            int start = config.getOffset();
+//            int page = start == 0 ? start : start / config.getLimit();
 
-            logger.info("*** NUM " + config.getLimit() + " *** PAGE " + page); // TODO DEL
             List<SummaryRecordDTO> recordList = geoPlatformCSWClient.searchSummaryRecords(
-                    config.getLimit(), page, catalogFinder);
+                    config.getLimit(), config.getOffset() + 1, catalogFinder);
             if (recordList == null) {
-                logger.info("*** No Summary Record ***");
+                logger.info("\n*** No Summary Record ***");
                 throw new GeoPlatformException("There are no results"); // TODO Create empty list
             }
 

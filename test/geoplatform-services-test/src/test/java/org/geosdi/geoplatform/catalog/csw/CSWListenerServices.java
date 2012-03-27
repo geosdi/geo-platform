@@ -93,7 +93,7 @@ public class CSWListenerServices implements TestExecutionListener {
         String serverAddress = cswClient.getAddress();
         endpoint = Endpoint.publish(serverAddress, implementor);
 
-        logger.info("\n*** Server ready...");
+        logger.info("\n\t@@@ Server ready... @@@");
     }
 
     @Override

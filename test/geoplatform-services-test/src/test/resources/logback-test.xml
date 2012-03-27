@@ -34,7 +34,7 @@
     <logger name="org.geosdi.geoplatform.modelws.WSProjectTest" level="info"/>
     <logger name="org.geosdi.geoplatform.modelws.WSAccountTest" level="info"/>
     
-    <logger name="org.geosdi.geoplatform.catalog.csw.CSWCatalogTest" level="debug"/>
+    <logger name="org.geosdi.geoplatform.catalog.csw.CSWCatalogTest" level="debug"/><!-- TODO info -->
 
     <!-- Services -->
     <logger name="org.geosdi.geoplatform.services.AclServiceImpl" level="info"/>
@@ -43,7 +43,7 @@
     <logger name="org.geosdi.geoplatform.services.ProjectServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.AccountServiceImpl" level="info"/>
     <logger name="org.geosdi.geoplatform.services.WMSServiceImpl" level="info"/>
-    <logger name="org.geosdi.geoplatform.services.CSWServiceImpl" level="info"/>
+    <logger name="org.geosdi.geoplatform.services.CSWServiceImpl" level="debug"/><!-- TODO info -->
     
     <!-- DAOs -->
     <logger name="org.geosdi.geoplatform.core.dao.impl.GPFolderDAOImpl" level="info"/>

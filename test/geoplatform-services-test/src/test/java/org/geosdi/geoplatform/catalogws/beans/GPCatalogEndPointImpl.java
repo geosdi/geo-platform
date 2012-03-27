@@ -84,7 +84,7 @@ public class GPCatalogEndPointImpl {
         SpringBusFactory.setDefaultBus(bus);
         endpoint = Endpoint.create(implementor);
 
-        logger.info("\n*** Catalog Finder End Point Created @@@@@@@@@@@@@@@@@@@@@");
+        logger.info("\n\t@@@ Catalog Finder End Point Created @@@");
     }
 
     /**
@@ -93,7 +93,7 @@ public class GPCatalogEndPointImpl {
     public void startServer() {
         if (!endpoint.isPublished()) {
             endpoint.publish(serverAddress);
-            logger.info("\n*** Catalog Finder End Point Ready @@@@@@@@@@@@@@@@@@@@@");
+            logger.info("\n\t@@@ Catalog Finder End Point Ready @@@");
         }
     }
 
@@ -103,7 +103,7 @@ public class GPCatalogEndPointImpl {
      * @throws Exception 
      */
     public void stopServer() throws Exception {
-        logger.info("\n\t@@@ Catalog Finder WS Service Shut Down @@@@@@@@@@@@@@@@@@@");
+        logger.info("\n\t@@@ Catalog Finder WS Service Shut Down @@@");
 
         endpoint.stop();
         bus.shutdown(true);

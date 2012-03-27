@@ -158,24 +158,19 @@ public class CatalogSearchWidget extends LayoutContainer
         });
         panel.add(searchTextField);
 
-        searchButton = new Button("Search",
-                new SelectionListener<ButtonEvent>() {
+        searchButton = new Button("Search", new SelectionListener<ButtonEvent>() {
 
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        // Manual binding
-                        searchInfo.setSearchText(
-                                searchTextField.getValue().trim());
-                        searchInfo.setSearchTitle(
-                                titleCheckbox.getValue().booleanValue());
-                        searchInfo.setSearchAbstract(
-                                abstractCheckbox.getValue().booleanValue());
-                        searchInfo.setSearchKeywords(
-                                keywordsCheckbox.getValue().booleanValue());
-                        // Performing the search
-                        summaryRecordsContainer.searchSummaryRecords();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                // Manual binding
+                searchInfo.setSearchText(searchTextField.getValue().trim());
+                searchInfo.setSearchTitle(titleCheckbox.getValue().booleanValue());
+                searchInfo.setSearchAbstract(abstractCheckbox.getValue().booleanValue());
+                searchInfo.setSearchKeywords(keywordsCheckbox.getValue().booleanValue());
+                // Performing the search
+                summaryRecordsContainer.searchSummaryRecords();
+            }
+        });
         searchButton.setStyleAttribute("padding-left", "20px");
         searchButton.disable();
         panel.add(searchButton);
@@ -241,34 +236,17 @@ public class CatalogSearchWidget extends LayoutContainer
         allSelectedCheckbox = new CheckBox();
         allSelectedCheckbox.setBoxLabel("Select/Deselect all");
         allSelectedCheckbox.setValue(true); // Enabled by default
-        // TODO Test
-//        System.out.println("+++ fire event on ALL: " + allSelectedCheckbox.isFireChangeEventOnSetValue());
-//        allSelectedCheckbox.setFireChangeEventOnSetValue(false);
-//        System.out.println("+++ fire event on ALL: " + allSelectedCheckbox.isFireChangeEventOnSetValue());
-        allSelectedCheckbox.addListener(Events.Change,
-                new Listener<FieldEvent>() {
+        allSelectedCheckbox.addListener(Events.Change, new Listener<FieldEvent>() {
 
-                    @Override
-                    public void handleEvent(FieldEvent fe) {
-                        System.out.println("@@@ Change"); // TODO FIX select/deselect all!
-//                Boolean checked = (Boolean) fe.getValue();
-//                System.out.println("### checked " + checked);
-                        Boolean checkedRaw = Boolean.valueOf(
-                                ((CheckBox) fe.getField()).getRawValue());
-//                System.out.println("### checkedRaw " + checkedRaw);
+            @Override
+            public void handleEvent(FieldEvent fe) {
+                Boolean allSelected = (Boolean) fe.getValue();
 
-                        boolean allSelected = false;
-//                if (checked) {
-                        if (checkedRaw) {
-                            allSelected = true;
-                        }
-                        System.out.println("*** allSelected " + allSelected);
-
-                        titleCheckbox.setValue(allSelected);
-                        abstractCheckbox.setValue(allSelected);
-                        keywordsCheckbox.setValue(allSelected);
-                    }
-                });
+                titleCheckbox.setValue(allSelected);
+                abstractCheckbox.setValue(allSelected);
+                keywordsCheckbox.setValue(allSelected);
+            }
+        });
         right.add(allSelectedCheckbox);
 
         add(left, new ColumnData(0.6));
@@ -276,16 +254,14 @@ public class CatalogSearchWidget extends LayoutContainer
     }
 
     private void manageAllSelectedCheckbox() {
+        allSelectedCheckbox.setFireChangeEventOnSetValue(false); // Disable the firing of Events.Change
         if (titleCheckbox.getValue() && abstractCheckbox.getValue()
                 && keywordsCheckbox.getValue()) {
-            System.out.println("+++ set all TRUE");
-//            allSelectedCheckbox.setValue(true);
-            allSelectedCheckbox.setRawValue("true");
+            allSelectedCheckbox.setValue(true);
         } else {
-            System.out.println("+++ set all FALSE");
-//            allSelectedCheckbox.setValue(false);
-            allSelectedCheckbox.setRawValue("false");
+            allSelectedCheckbox.setValue(false);
         }
+        allSelectedCheckbox.setFireChangeEventOnSetValue(true); // Enable the firing of Events.Change
     }
 
     @Override

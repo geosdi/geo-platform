@@ -51,4 +51,5 @@ public class GeoPlatformEvents {
     public static final EventType GP_NODE_EXPANDED = new EventType();
     public static final EventType SHOW_PRINTING_WIDGET = new EventType();
     public static final EventType REMOVE_WINDOW_CLOSE_LISTENER = new EventType();
+    public static final EventType COLOR_CHOOSED = new EventType();
 }

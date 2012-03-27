@@ -87,7 +87,8 @@ public class CSWCatalogTest {
         GeoPlatformServer server = new GeoPlatformServer();
         server.setTitle("CSW Server WS Test");
         server.setServerType(GPCapabilityType.CSW);
-        server.setServerUrl("http://150.146.160.152/geonetwork/srv/en/csw");
+//        server.setServerUrl("http://150.146.160.152/geonetwork/srv/en/csw");
+        server.setServerUrl("http://ows.provinciatreviso.it/geonetwork/srv/it/csw");
         serverTestID = cswService.insertServerCSW(server);
 
         // Create the CSW search parameters
@@ -108,7 +109,7 @@ public class CSWCatalogTest {
         // Delete the server test
         cswService.deleteServerCSW(serverTestID);
     }
-    
+
 //    @Test
 //    public void testSummaryRecordsCount() throws IllegalParameterFault, ResourceNotFoundFault {
 //        Assert.assertEquals(new Long(4), cswService.getSummaryRecordsCount(catalogFinder));
@@ -126,52 +127,41 @@ public class CSWCatalogTest {
 //    @Test
 //    public void testSummaryRecordsCountWMSText() throws IllegalParameterFault, ResourceNotFoundFault {
 //        catalogFinder.getSearchInfo().setSearchText("wms");
-//        Assert.assertEquals(new Long(641), cswService.getSummaryRecordsCount(catalogFinder));
+//        Assert.assertEquals(new Long(295), cswService.getSummaryRecordsCount(catalogFinder));
 //    }
-    
+//    
     @Test
     public void testSummaryRecordsSearchWMSText() throws IllegalParameterFault, ResourceNotFoundFault {
         catalogFinder.getSearchInfo().setSearchText("wms");
+        int recordsMatched = 295; // Change wrt count records from the search
         int num = 25;
-        // Page 0 (first)
-        int start = 1;
-        List<SummaryRecordDTO> summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
-        for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
-            logger.trace("\n*** " + summaryRecordDTO);
+        logger.debug("\n*** Records matched: {} *** Result for page: {} ***", recordsMatched, num);
+
+        List<SummaryRecordDTO> summaryRecords;
+        int pages = (recordsMatched / num);
+        int mod = recordsMatched % num;
+        if (mod != 0) {
+            pages++;
         }
-        Assert.assertEquals(25, summaryRecords.size());
+        logger.debug("\n*** Pages: {} *** Module: {} ***", pages, mod);
+        int start;
+        for (int i = 1; i < pages; i++) {
+            start = (num * (i - 1)) + 1;
+            logger.debug("\n*** page: {} *** start: {} ***", i, start);
 
-        // Page 1
-//        start = (num * 1) + 1;
-//        summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
-//        for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
-//            logger.trace("\n*** " + summaryRecordDTO);
-//        }
-//        Assert.assertEquals(25, summaryRecords.size());
+            summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
+            for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
+                logger.trace("\n*** " + summaryRecordDTO);
+            }
+            Assert.assertEquals(num, summaryRecords.size());
+        }
 
-        //@TODO DEL Page 2
-        // Page 2
-//        start = (num * 2) + 1;
-//        summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
-//        for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
-//            logger.trace("\n*** " + summaryRecordDTO);
-//        }
-//        Assert.assertEquals(25, summaryRecords.size());
-        
-        // Page 24
-//        start = (num * 24) + 1;
-//        summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
-//        for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
-//            logger.trace("\n*** " + summaryRecordDTO);
-//        }
-//        Assert.assertEquals(25, summaryRecords.size());
-        
-        // Page 25 (last)
-        start = (num * 25) + 1;
+        // Last page
+        start = (num * (pages - 1)) + 1;
         summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
         for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
             logger.trace("\n*** " + summaryRecordDTO);
         }
-        Assert.assertEquals(16, summaryRecords.size());
+        Assert.assertEquals(mod, summaryRecords.size());
     }
 }

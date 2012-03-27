@@ -153,9 +153,6 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         try {
             serversCount = geoPlatformCSWClient.getSummaryRecordsCount(catalogFinder);
 
-//            int start = config.getOffset();
-//            int page = start == 0 ? start : start / config.getLimit();
-
             List<SummaryRecordDTO> recordList = geoPlatformCSWClient.searchSummaryRecords(
                     config.getLimit(), config.getOffset() + 1, catalogFinder);
             if (recordList == null) {

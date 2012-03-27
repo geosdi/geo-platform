@@ -392,22 +392,25 @@ class CSWServiceImpl {
             // TODO Pagination search
             request.setMaxRecords(num);
             request.setStartPosition(start);
-//            request.setStartPosition(num * page + 1);
             logger.debug("\n*** Num: {} *** Start: {} ***", request.getMaxRecords(), request.getStartPosition());
 
             // unmarshall the response
             InputStream is = request.getResponseStream();
-            GetRecordsResponseType response = ((JAXBElement<GetRecordsResponseType>) um.unmarshal(is)).getValue();
+            JAXBElement element = (JAXBElement) um.unmarshal(is);
+            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) element;
+            GetRecordsResponseType response = elementType.getValue();
             logger.debug("\n*** Record matched: {} *** Record returned: {} *** Record next: {} ***", new Object[]{
                         response.getSearchResults().getNumberOfRecordsMatched(),
                         response.getSearchResults().getNumberOfRecordsReturned(),
                         response.getSearchResults().getNextRecord()});
+//            logger.debug("+++ #record: {} +++ #jbRecord: {} ++",
+//                    response.getSearchResults().getAbstractRecord().size(),
+//                    response.getSearchResults().getJbAbstractRecord().size());
 
             List<SummaryRecordType> summaryRecordList =
                     (List<SummaryRecordType>) response.getSearchResults().getAbstractRecord();
             logger.debug("\n*** Record list size: {} ***", summaryRecordList.size());
             summaryRecordListDTO = this.convertSummaryRecords(summaryRecordList);
-            logger.debug("\n*** RecordDTO list size: {} ***", summaryRecordListDTO.size());
 
         } catch (JAXBException ex) {
             logger.error("### JAXBException: " + ex.getMessage());

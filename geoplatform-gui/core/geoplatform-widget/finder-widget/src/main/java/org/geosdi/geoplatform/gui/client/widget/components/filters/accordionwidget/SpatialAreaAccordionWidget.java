@@ -70,4 +70,8 @@ public class SpatialAreaAccordionWidget extends GeoPlatformContentPanel {
         super.setAnimCollapse(false);
         super.setHeading("Filter by Area");
     }
+
+    @Override
+    public void reset() {
+    }
 }

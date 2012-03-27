@@ -76,6 +76,7 @@ public class CatalogSearchWidget extends LayoutContainer
     private SummaryRecordsContainer summaryRecordsContainer;
     private EventBus bus;
     //
+    private TextField<String> searchTextField;
     private CheckBox titleCheckbox;
     private CheckBox abstractCheckbox;
     private CheckBox keywordsCheckbox;
@@ -116,7 +117,7 @@ public class CatalogSearchWidget extends LayoutContainer
         HorizontalPanel panel = new HorizontalPanel();
         panel.setStyleAttribute("padding-top", "8px");
 
-        final TextField<String> searchTextField = new TextField<String>();
+        searchTextField = new TextField<String>();
         searchTextField.setWidth(250);
         searchTextField.setAutoValidate(true);
         searchTextField.setAllowBlank(false);
@@ -151,6 +152,10 @@ public class CatalogSearchWidget extends LayoutContainer
                     if (!searchTextField.validate()) {
                         validSearchText = false;
                         manageSearchButton();
+
+                        if (searchTextField.getValue() == null) {
+                            reset();
+                        }
                     }
                 }
 
@@ -276,5 +281,10 @@ public class CatalogSearchWidget extends LayoutContainer
         } else {
             searchButton.disable();
         }
+    }
+
+    public void reset() {
+        searchTextField.clear();
+        summaryRecordsContainer.reset();
     }
 }

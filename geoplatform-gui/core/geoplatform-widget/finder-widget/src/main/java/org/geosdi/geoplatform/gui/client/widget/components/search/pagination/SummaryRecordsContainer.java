@@ -181,9 +181,7 @@ public class SummaryRecordsContainer
                     GeoPlatformMessage.errorMessage("Connection error",
                             "The services are down, report to the administator");
                 }
-                store.removeAll();
-                toolBar.clear();
-                toolBar.disable();
+                reset();
                 widget.unmask();
             }
         });
@@ -191,5 +189,11 @@ public class SummaryRecordsContainer
 
     public void searchSummaryRecords() {
         super.loader.load();
+    }
+
+    public void reset() {
+        this.store.removeAll();
+        this.toolBar.clear();
+        this.toolBar.disable();
     }
 }

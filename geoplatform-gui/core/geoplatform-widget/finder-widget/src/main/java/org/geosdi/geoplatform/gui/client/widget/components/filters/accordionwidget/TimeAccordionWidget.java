@@ -70,4 +70,8 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
         super.setAnimCollapse(false);
         super.setHeading("Filter by Time");
     }
+
+    @Override
+    public void reset() {
+    }
 }

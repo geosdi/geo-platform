@@ -101,7 +101,7 @@ public class CSWServerPaginationContainer
 
     @Inject
     public CSWServerPaginationContainer(CatalogFinderBean theCatalogFinder,
-                                        EventBus theBus) {
+            EventBus theBus) {
         super(true);
         catalogFinder = theCatalogFinder;
         bus = theBus;
@@ -132,7 +132,7 @@ public class CSWServerPaginationContainer
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
-                        || (event.getKeyCode() == KeyCodes.KEY_DELETE))
+                     || (event.getKeyCode() == KeyCodes.KEY_DELETE))
                         && (searchField.getValue() == null)) {
                     reset();
                 }
@@ -161,8 +161,7 @@ public class CSWServerPaginationContainer
 
     private void createButtons() {
         super.panel.setButtonAlign(Style.HorizontalAlignment.CENTER);
-        Button newServerButton = new Button("New Server",
-                                            new SelectionListener<ButtonEvent>() {
+        Button newServerButton = new Button("New Server", new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -173,8 +172,7 @@ public class CSWServerPaginationContainer
         newServerButton.setToolTip("Create a new CSW Server");
         super.panel.addButton(newServerButton);
 
-        deleteServerButton = new Button("Delete Server",
-                                        new SelectionListener<ButtonEvent>() {
+        deleteServerButton = new Button("Delete Server", new SelectionListener<ButtonEvent>() {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
@@ -201,9 +199,9 @@ public class CSWServerPaginationContainer
 
             @Override
             public Object render(GPCSWServerBeanModel model, String property,
-                                 ColumnData config, int rowIndex, int colIndex,
-                                 ListStore<GPCSWServerBeanModel> store,
-                                 Grid<GPCSWServerBeanModel> grid) {
+                    ColumnData config, int rowIndex, int colIndex,
+                    ListStore<GPCSWServerBeanModel> store,
+                    Grid<GPCSWServerBeanModel> grid) {
                 String url = model.getUrlServer();
                 return "<div qtitle='Server URL'"
                         + " qtip='" + url + "'>" + model.getAlias() + "</div>";
@@ -255,8 +253,7 @@ public class CSWServerPaginationContainer
         super.proxy = new RpcProxy<PagingLoadResult<GPCSWServerBeanModel>>() {
 
             @Override
-            protected void load(Object loadConfig,
-                                AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback) {
+            protected void load(Object loadConfig, AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback) {
                 String searchText = searchField.getValue() == null ? "" : searchField.getValue();
                 GPCatalogFinderRemoteImpl.Util.getInstance().searchCSWServers(
                         (PagingLoadConfig) loadConfig, searchText, callback);
@@ -270,6 +267,7 @@ public class CSWServerPaginationContainer
 //        super.store.setMonitorChanges(true);
 
         super.toolBar.bind(loader);
+        super.toolBar.disable();
     }
 
     @Override
@@ -298,11 +296,9 @@ public class CSWServerPaginationContainer
                     System.out.println("\n*** " + le.exception.getMessage());
                 } else {
                     GeoPlatformMessage.errorMessage("Connection error",
-                                                    "The services are down, report to the administator");
+                            "The services are down, report to the administator");
                 }
-                store.removeAll();
-                toolBar.clear();
-                toolBar.disable();
+                resetGrid();
                 widget.unmask();
             }
         });
@@ -313,23 +309,23 @@ public class CSWServerPaginationContainer
 
         final GPCSWServerBeanModel selectedServer = sm.getSelectedItem();
         GPCatalogFinderRemoteImpl.Util.getInstance().deleteServerCSW(selectedServer.getId(),
-                                                                     new AsyncCallback<Boolean>() {
+                new AsyncCallback<Boolean>() {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                // TODO Set status message on main windows
-                System.out.println("\n*** " + caught.getMessage());
-                widget.unmask();
-            }
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        // TODO Set status message on main windows
+                        System.out.println("\n*** " + caught.getMessage());
+                        widget.unmask();
+                    }
 
-            @Override
-            public void onSuccess(Boolean result) {
-                store.remove(selectedServer);
-                // TODO Set status message on main windows
-                System.out.println("\n*** Server correctly deleted ***");
-                widget.unmask();
-            }
-        });
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        store.remove(selectedServer);
+                        // TODO Set status message on main windows
+                        System.out.println("\n*** Server correctly deleted ***");
+                        widget.unmask();
+                    }
+                });
     }
 
     @Override
@@ -340,8 +336,13 @@ public class CSWServerPaginationContainer
 
     public void reset() {
         this.searchField.reset();
+        this.resetGrid();
+    }
+
+    private void resetGrid() {
         this.store.removeAll();
         this.toolBar.clear();
+        this.toolBar.disable();
     }
 
     /**

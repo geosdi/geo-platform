@@ -88,7 +88,8 @@ public class CSWCatalogTest {
         server.setTitle("CSW Server WS Test");
         server.setServerType(GPCapabilityType.CSW);
 //        server.setServerUrl("http://150.146.160.152/geonetwork/srv/en/csw");
-        server.setServerUrl("http://ows.provinciatreviso.it/geonetwork/srv/it/csw");
+        server.setServerUrl(
+                "http://ows.provinciatreviso.it/geonetwork/srv/it/csw");
         serverTestID = cswService.insertServerCSW(server);
 
         // Create the CSW search parameters
@@ -135,7 +136,8 @@ public class CSWCatalogTest {
         catalogFinder.getSearchInfo().setSearchText("wms");
         int recordsMatched = 295; // Change wrt count records from the search
         int num = 25;
-        logger.debug("\n*** Records matched: {} *** Result for page: {} ***", recordsMatched, num);
+        logger.debug("\n*** Records matched: {} *** Result for page: {} ***",
+                recordsMatched, num);
 
         List<SummaryRecordDTO> summaryRecords;
         int pages = (recordsMatched / num);
@@ -149,7 +151,8 @@ public class CSWCatalogTest {
             start = (num * (i - 1)) + 1;
             logger.debug("\n*** page: {} *** start: {} ***", i, start);
 
-            summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
+            summaryRecords = cswService.searchSummaryRecords(num, start,
+                    catalogFinder);
             for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
                 logger.trace("\n*** " + summaryRecordDTO);
             }
@@ -158,7 +161,8 @@ public class CSWCatalogTest {
 
         // Last page
         start = (num * (pages - 1)) + 1;
-        summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
+        summaryRecords = cswService.searchSummaryRecords(num, start,
+                catalogFinder);
         for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
             logger.trace("\n*** " + summaryRecordDTO);
         }

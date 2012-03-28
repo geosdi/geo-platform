@@ -240,6 +240,7 @@ public class GeoPlatformServer implements Serializable {
     public String toString() {
         StringBuilder str = new StringBuilder("GeoPlatformServer {");
         str.append("id=").append(id);
+        str.append(", serverType=").append(serverType);
         str.append(", serverUrl=").append(serverUrl);
         str.append(", name=").append(name);
         str.append(", aliasName=").append(aliasName);
@@ -247,7 +248,6 @@ public class GeoPlatformServer implements Serializable {
         str.append(", abstractServer=").append(abstractServer);
         str.append(", contactPerson=").append(contactPerson);
         str.append(", contactOrganization=").append(contactOrganization);
-        str.append(", serverType=").append(serverType).append("}");
-        return str.toString();
+        return str.append("}").toString();
     }
 }

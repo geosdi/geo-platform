@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.catalog.csw;
 
+import java.util.Collection;
 import java.util.List;
 import junit.framework.Assert;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
@@ -69,7 +70,8 @@ public class CSWCatalogTest {
     //
     private GeoPlatformCSWService cswService;
     //
-    private Long serverTestID;
+    private Long serverTestOurID;
+    private Long serverTestTrevisoID;
     private CatalogFinderBean catalogFinder;
 
     /**
@@ -83,66 +85,71 @@ public class CSWCatalogTest {
     public void setUp() throws Exception {
         logger.trace("\n\t@@@ {}.setUp @@@", this.getClass().getSimpleName());
 
-        // Insert the server test
-        GeoPlatformServer server = new GeoPlatformServer();
-        server.setTitle("CSW Server WS Test");
-        server.setServerType(GPCapabilityType.CSW);
-//        server.setServerUrl("http://150.146.160.152/geonetwork/srv/en/csw");
-        server.setServerUrl(
-                "http://ows.provinciatreviso.it/geonetwork/srv/it/csw");
-        serverTestID = cswService.insertServerCSW(server);
+        // Insert the servers test
+        serverTestOurID = cswService.insertServerCSW(this.createCSWServer(
+                "CSW Server WS Test",
+                "http://150.146.160.152/geonetwork/srv/en/csw"));
+        serverTestTrevisoID = cswService.insertServerCSW(this.createCSWServer(
+                "Provincia di Treviso",
+                "http://ows.provinciatreviso.it/geonetwork/srv/it/csw"));
 
         // Create the CSW search parameters
         catalogFinder = new CatalogFinderBean();
-        catalogFinder.setServerID(serverTestID);
+        catalogFinder.setServerID(serverTestOurID);
         SearchInfo searchInfo = new SearchInfo();
-        searchInfo.setSearchText("land");
+        searchInfo.setSearchText("");
         searchInfo.setSearchTitle(true);
         searchInfo.setSearchAbstract(true);
-        searchInfo.setSearchKeywords(true);
+        searchInfo.setSearchSubjects(true);
         catalogFinder.setSearchInfo(searchInfo);
+    }
+
+    private GeoPlatformServer createCSWServer(String title, String url) {
+        GeoPlatformServer server = new GeoPlatformServer();
+        server.setServerType(GPCapabilityType.CSW);
+        server.setTitle(title);
+        server.setServerUrl(url);
+        return server;
     }
 
     @After
     public void tearDown() throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ {}.tearDown @@@", this.getClass().getSimpleName());
 
-        // Delete the server test
-        cswService.deleteServerCSW(serverTestID);
+        // Delete the servers test
+        cswService.deleteServerCSW(serverTestOurID);
+        cswService.deleteServerCSW(serverTestTrevisoID);
     }
-
+//
 //    @Test
-//    public void testSummaryRecordsCount() throws IllegalParameterFault, ResourceNotFoundFault {
-//        Assert.assertEquals(new Long(4), cswService.getSummaryRecordsCount(catalogFinder));
-//    }
-// 
-//    @Test
-//    public void testSummaryRecordsSearch() throws IllegalParameterFault, ResourceNotFoundFault {
-//        List<SummaryRecordDTO> summaryRecords = cswService.searchSummaryRecords(25, 0, catalogFinder);
-//        for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
-//            logger.trace("\n*** " + summaryRecordDTO);
-//        }
-//        Assert.assertEquals(4, summaryRecords.size());
+//    public void testGetRecordsOurCount() throws IllegalParameterFault, ResourceNotFoundFault {
+//        catalogFinder.getSearchInfo().setSearchText("land");
+//        Assert.assertEquals(4, cswService.getSummaryRecordsCount(catalogFinder));
 //    }
 //
 //    @Test
-//    public void testSummaryRecordsCountWMSText() throws IllegalParameterFault, ResourceNotFoundFault {
-//        catalogFinder.getSearchInfo().setSearchText("wms");
-//        Assert.assertEquals(new Long(295), cswService.getSummaryRecordsCount(catalogFinder));
+//    public void testGetRecordsOurResult() throws IllegalParameterFault, ResourceNotFoundFault {
+//        catalogFinder.getSearchInfo().setSearchText("land");
+//        List<SummaryRecordDTO> summaryRecords = cswService.searchSummaryRecords(25, 0, catalogFinder);
+//        this.traceCollection(summaryRecords);
+//        Assert.assertEquals(4, summaryRecords.size());
 //    }
-//    
+
     @Test
-    public void testSummaryRecordsSearchWMSText() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void testGetRecordsTrevisoSearchWMSText() throws IllegalParameterFault, ResourceNotFoundFault {
+        catalogFinder.setServerID(serverTestTrevisoID);
         catalogFinder.getSearchInfo().setSearchText("wms");
-        int recordsMatched = 295; // Change wrt count records from the search
-        int num = 25;
+
+        int num = 10;
+        int recordsMatched = cswService.getSummaryRecordsCount(catalogFinder);
+        Assert.assertEquals(295, recordsMatched);
         logger.debug("\n*** Records matched: {} *** Result for page: {} ***",
                 recordsMatched, num);
 
         List<SummaryRecordDTO> summaryRecords;
         int pages = (recordsMatched / num);
         int mod = recordsMatched % num;
-        if (mod != 0) {
+        if (mod > 0) {
             pages++;
         }
         logger.debug("\n*** Pages: {} *** Module: {} ***", pages, mod);
@@ -151,21 +158,23 @@ public class CSWCatalogTest {
             start = (num * (i - 1)) + 1;
             logger.debug("\n*** page: {} *** start: {} ***", i, start);
 
-            summaryRecords = cswService.searchSummaryRecords(num, start,
-                    catalogFinder);
-            for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
-                logger.trace("\n*** " + summaryRecordDTO);
-            }
+            summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
+            this.traceCollection(summaryRecords);
             Assert.assertEquals(num, summaryRecords.size());
         }
 
         // Last page
-        start = (num * (pages - 1)) + 1;
-        summaryRecords = cswService.searchSummaryRecords(num, start,
-                catalogFinder);
-        for (SummaryRecordDTO summaryRecordDTO : summaryRecords) {
-            logger.trace("\n*** " + summaryRecordDTO);
+        if (mod > 0) {
+            start = (num * (pages - 1)) + 1;
+            summaryRecords = cswService.searchSummaryRecords(num, start, catalogFinder);
+            this.traceCollection(summaryRecords);
+            Assert.assertEquals(mod, summaryRecords.size());
         }
-        Assert.assertEquals(mod, summaryRecords.size());
+    }
+
+    private void traceCollection(Collection collection) {
+        for (Object object : collection) {
+            logger.trace("\n*** " + object);
+        }
     }
 }

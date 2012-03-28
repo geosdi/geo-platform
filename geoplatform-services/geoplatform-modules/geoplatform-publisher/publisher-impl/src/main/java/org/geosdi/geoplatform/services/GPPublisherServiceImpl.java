@@ -49,6 +49,7 @@ import it.geosolutions.geoserver.rest.decoder.RESTLayer;
 import it.geosolutions.geoserver.rest.decoder.utils.NameLinkElem;
 import it.geosolutions.geoserver.rest.decoder.RESTStyleList;
 import it.geosolutions.geoserver.rest.encoder.GSPostGISDatastoreEncoder;
+import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -805,10 +806,10 @@ public class GPPublisherServiceImpl implements GPPublisherService,
 //                        "\n INFO: STYLE TO PUBLISH " + info.sld + " NAME :" + info.name);
 //                logger.info(
 //                        "\n INFO: CREATE DATASTORE " + userWorkspace + " NAME :" + info.name);
-            RESTCoverageStore store = restPublisher.publishExternalGeoTIFF(
-                    userWorkspace,
-                    fileName, fileInTifDir, epsg, sld);
-            if (store != null) {
+            //RESTCoverageStore store =
+            boolean published = restPublisher.publishExternalGeoTIFF(userWorkspace,
+                    fileName, fileInTifDir, fileName, epsg, GSResourceEncoder.ProjectionPolicy.REPROJECT_TO_DECLARED, sld);
+            if (published) {
                 logger.info(
                         fileInTifDir + " correctly published in the " + userWorkspace + " workspace");
                 infoPreview = getTIFURLByLayerName(userName, fileName);

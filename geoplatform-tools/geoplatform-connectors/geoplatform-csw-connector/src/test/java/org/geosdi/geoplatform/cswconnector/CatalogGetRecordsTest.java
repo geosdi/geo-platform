@@ -48,7 +48,6 @@ import org.geotoolkit.csw.xml.ElementSetType;
 import org.geotoolkit.csw.xml.ResultType;
 import org.geotoolkit.csw.xml.v202.GetRecordsResponseType;
 import org.geotoolkit.csw.xml.v202.SearchResultsType;
-import org.geotoolkit.metadata.iso.DefaultMetadata;
 import org.geotoolkit.xml.MarshallerPool;
 import org.junit.Test;
 import org.slf4j.Logger;

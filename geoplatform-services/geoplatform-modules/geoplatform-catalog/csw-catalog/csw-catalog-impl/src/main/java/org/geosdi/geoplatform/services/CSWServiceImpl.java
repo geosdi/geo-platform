@@ -65,6 +65,7 @@ import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.geosdi.geoplatform.services.development.CSWEntityCorrectness;
 import org.geotoolkit.csw.GetRecordsRequest;
 import org.geotoolkit.csw.xml.CSWMarshallerPool;
+import org.geotoolkit.csw.xml.ElementSetType;
 import org.geotoolkit.csw.xml.ResultType;
 import org.geotoolkit.csw.xml.v202.GetRecordsResponseType;
 import org.geotoolkit.csw.xml.v202.SummaryRecordType;
@@ -297,13 +298,13 @@ class CSWServiceImpl {
         return serverUrl;
     }
 
-    Long getSummaryRecordsCount(CatalogFinderBean catalogFinder)
+    int getSummaryRecordsCount(CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault {
         logger.debug("\n*** {}", catalogFinder);
 
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
 
-        Long count;
+        int count;
         try {
             um = pool.acquireUnmarshaller();
 
@@ -327,13 +328,15 @@ class CSWServiceImpl {
 //            request.setTypeNames(RECORD); // TODO Substitute?
             request.setConstraintLanguage("CQL");
             request.setConstraintLanguageVersion("1.1.0");
-            request.setConstraint("AnyText like '%" + searchText + "%'");
+            if (searchText != null) {
+                request.setConstraint("AnyText like '%" + searchText + "%'");
+            }
 
             // unmarshall the response
             InputStream is = request.getResponseStream();
             GetRecordsResponseType response = ((JAXBElement<GetRecordsResponseType>) um.unmarshal(is)).getValue();
 
-            count = new Long(response.getSearchResults().getNumberOfRecordsMatched());
+            count = response.getSearchResults().getNumberOfRecordsMatched();
 
         } catch (JAXBException ex) {
             logger.error("### JAXBException: " + ex.getMessage());
@@ -362,9 +365,12 @@ class CSWServiceImpl {
         SearchInfo search = catalogFinder.getSearchInfo();
         String searchText = search.getSearchText();
         // TODO Refine search
-//        search.isSearchTitle();
-//        search.isSearchAbstract();
-//        search.isSearchKeywords();
+        boolean searchTitle = search.isSearchTitle();
+        boolean searchAbstract = search.isSearchAbstract();
+        boolean searchSubjects = search.isSearchSubjects();
+        if (searchText != null && !searchTitle && !searchAbstract && !searchSubjects) {
+            throw new IllegalParameterFault("You need to specify where to search \"" + searchText + "\" text");
+        }
 //
 //        BBoxInfo bBox = catalogFinder.getbBoxInfo();
 //        bBox.getSearchBBoxType();
@@ -386,13 +392,17 @@ class CSWServiceImpl {
 //            request.setTypeNames(METADATA); // TODO Substitute?
             request.setConstraintLanguage("CQL");
             request.setConstraintLanguageVersion("1.1.0");
-            request.setConstraint("AnyText like '%" + searchText + "%'");
+            if (searchText != null) {
+                request.setConstraint("AnyText like '%" + searchText + "%'");
+            }
+            request.setElementSetName(ElementSetType.SUMMARY);
             request.setResultType(ResultType.RESULTS);
 
             // TODO Pagination search
             request.setMaxRecords(num);
             request.setStartPosition(start);
-            logger.debug("\n*** Num: {} *** Start: {} ***", request.getMaxRecords(), request.getStartPosition());
+            logger.debug("\n*** Num: {} *** Start: {} ***",
+                    request.getMaxRecords(), request.getStartPosition());
 
             // unmarshall the response
             InputStream is = request.getResponseStream();
@@ -408,7 +418,8 @@ class CSWServiceImpl {
 //                    response.getSearchResults().getJbAbstractRecord().size());
 
             if (response.getSearchResults().getNumberOfRecordsReturned()
-                    != response.getSearchResults().getAbstractRecord().size()) { //@TODO DEL ?
+                    != response.getSearchResults().getAbstractRecord().size()) {
+                // TODO DEL or change the exception
                 throw new IllegalParameterFault("Catalog return an incorrect number of records: expected "
                         + response.getSearchResults().getNumberOfRecordsReturned() + " but was "
                         + response.getSearchResults().getAbstractRecord().size());

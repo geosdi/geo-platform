@@ -49,7 +49,7 @@ public class SearchInfo implements Serializable {
     //
     private boolean searchTitle;
     private boolean searchAbstract;
-    private boolean searchKeywords;
+    private boolean searchSubjects;
 
     public String getSearchText() {
         return searchText;
@@ -75,12 +75,12 @@ public class SearchInfo implements Serializable {
         this.searchAbstract = searchAbstract;
     }
 
-    public boolean isSearchKeywords() {
-        return searchKeywords;
+    public boolean isSearchSubjects() {
+        return searchSubjects;
     }
 
-    public void setSearchKeywords(boolean searchKeywords) {
-        this.searchKeywords = searchKeywords;
+    public void setSearchSubjects(boolean searchSubjects) {
+        this.searchSubjects = searchSubjects;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class SearchInfo implements Serializable {
         str.append("searchText = ").append(searchText);
         str.append(", searchTitle = ").append(searchTitle);
         str.append(", searchAbstract = ").append(searchAbstract);
-        str.append(", searchKeywords = ").append(searchKeywords);
+        str.append(", searchSubjects = ").append(searchSubjects);
         return str.append('}').toString();
     }
 }

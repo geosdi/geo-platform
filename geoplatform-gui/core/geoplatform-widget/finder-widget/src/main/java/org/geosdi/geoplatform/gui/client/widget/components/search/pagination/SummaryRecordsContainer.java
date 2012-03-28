@@ -78,7 +78,7 @@ public class SummaryRecordsContainer
 
     @Inject
     public SummaryRecordsContainer(CatalogFinderBean theCatalogFinder) {
-        super(true);
+        super(true, 10);
         catalogFinder = theCatalogFinder;
 
         super.setWidth(550);

@@ -148,7 +148,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
             HttpServletRequest httpServletRequest)
             throws GeoPlatformException {
 
-        Long serversCount;
+        int serversCount;
         ArrayList<SummaryRecord> searchRecords;
         try {
             serversCount = geoPlatformCSWClient.getSummaryRecordsCount(catalogFinder);
@@ -174,7 +174,7 @@ public class GPCatalogFinderService implements IGPCatalogFinderService {
         }
 
         return new BasePagingLoadResult<SummaryRecord>(searchRecords,
-                config.getOffset(), serversCount.intValue());
+                config.getOffset(), serversCount);
     }
 
     /**

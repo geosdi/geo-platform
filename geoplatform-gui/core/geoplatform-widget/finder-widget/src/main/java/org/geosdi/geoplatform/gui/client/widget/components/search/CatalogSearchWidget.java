@@ -61,6 +61,7 @@ import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.SummaryRecordsContainer;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.SearchInfo;
 
@@ -77,15 +78,12 @@ public class CatalogSearchWidget extends LayoutContainer
     private EventBus bus;
     //
     private TextField<String> searchTextField;
+    private Button searchButton;
     private CheckBox titleCheckbox;
     private CheckBox abstractCheckbox;
-    private CheckBox keywordsCheckbox;
+    private CheckBox subjectsCheckbox;
+    private CheckBoxGroup optionsCheckboxgroup;
     private CheckBox allSelectedCheckbox;
-    //
-    private Button searchButton;
-    private boolean validSelectedServer;
-    private boolean validCheckBoxGroup;
-    private boolean validSearchText;
 
     @Inject
     public CatalogSearchWidget(CatalogFinderBean theCatalogFinder,
@@ -119,22 +117,6 @@ public class CatalogSearchWidget extends LayoutContainer
 
         searchTextField = new TextField<String>();
         searchTextField.setWidth(250);
-        searchTextField.setAutoValidate(true);
-        searchTextField.setAllowBlank(false);
-        searchTextField.setValidator(new Validator() {
-
-            @Override
-            public String validate(Field<?> field, String value) {
-                if (value.trim().length() < 3) {
-                    validSearchText = false;
-                    manageSearchButton();
-                    return "The search text must be at least 3 characters";
-                }
-                validSearchText = true;
-                manageSearchButton();
-                return null;
-            }
-        });
         searchTextField.addKeyListener(new KeyListener() {
 
             @Override
@@ -148,17 +130,10 @@ public class CatalogSearchWidget extends LayoutContainer
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if ((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
-                        || (event.getKeyCode() == KeyCodes.KEY_DELETE)) {
-                    if (!searchTextField.validate()) {
-                        validSearchText = false;
-                        manageSearchButton();
-
-                        if (searchTextField.getValue() == null) {
-                            reset();
-                        }
-                    }
+                        || (event.getKeyCode() == KeyCodes.KEY_DELETE)
+                        && (searchTextField.getValue() == null)) {
+                    reset();
                 }
-
             }
         });
         panel.add(searchTextField);
@@ -167,11 +142,17 @@ public class CatalogSearchWidget extends LayoutContainer
 
             @Override
             public void componentSelected(ButtonEvent ce) {
+                String searchText = searchTextField.getValue();
+                if (searchText != null && !optionsCheckboxgroup.isValid(true)) {
+                    GeoPlatformMessage.alertMessage("Error search",
+                            "You need to specify where to search \"" + searchText + "\" text");
+                    return;
+                }
                 // Manual binding
-                searchInfo.setSearchText(searchTextField.getValue().trim());
+                searchInfo.setSearchText(searchText);
                 searchInfo.setSearchTitle(titleCheckbox.getValue().booleanValue());
                 searchInfo.setSearchAbstract(abstractCheckbox.getValue().booleanValue());
-                searchInfo.setSearchKeywords(keywordsCheckbox.getValue().booleanValue());
+                searchInfo.setSearchSubjects(subjectsCheckbox.getValue().booleanValue());
                 // Performing the search
                 summaryRecordsContainer.searchSummaryRecords();
             }
@@ -193,7 +174,7 @@ public class CatalogSearchWidget extends LayoutContainer
 
         right.add(optionsLabel, new ColumnData(240.0));
 
-        final CheckBoxGroup optionsCheckboxgroup = new CheckBoxGroup();
+        optionsCheckboxgroup = new CheckBoxGroup();
         optionsCheckboxgroup.setOrientation(Orientation.VERTICAL);
         optionsCheckboxgroup.setValidator(new Validator() {
 
@@ -212,11 +193,8 @@ public class CatalogSearchWidget extends LayoutContainer
             @Override
             public void handleEvent(FieldEvent fe) {
                 manageAllSelectedCheckbox();
-                validCheckBoxGroup = optionsCheckboxgroup.validate(true); // TODO false for display error tooltip message
-                manageSearchButton();
             }
         };
-        validCheckBoxGroup = true; // At least one checkbox of group is enabled by default
 
         titleCheckbox = new CheckBox();
         titleCheckbox.setBoxLabel("Title");
@@ -230,11 +208,11 @@ public class CatalogSearchWidget extends LayoutContainer
         abstractCheckbox.addListener(Events.Change, checkBoxListener);
         optionsCheckboxgroup.add(abstractCheckbox);
 
-        keywordsCheckbox = new CheckBox();
-        keywordsCheckbox.setBoxLabel("Keywords");
-        keywordsCheckbox.setValue(true); // Enabled by default
-        keywordsCheckbox.addListener(Events.Change, checkBoxListener);
-        optionsCheckboxgroup.add(keywordsCheckbox);
+        subjectsCheckbox = new CheckBox();
+        subjectsCheckbox.setBoxLabel("Subjects");
+        subjectsCheckbox.setValue(true); // Enabled by default
+        subjectsCheckbox.addListener(Events.Change, checkBoxListener);
+        optionsCheckboxgroup.add(subjectsCheckbox);
 
         right.add(optionsCheckboxgroup);
 
@@ -249,7 +227,7 @@ public class CatalogSearchWidget extends LayoutContainer
 
                 titleCheckbox.setValue(allSelected);
                 abstractCheckbox.setValue(allSelected);
-                keywordsCheckbox.setValue(allSelected);
+                subjectsCheckbox.setValue(allSelected);
             }
         });
         right.add(allSelectedCheckbox);
@@ -261,7 +239,7 @@ public class CatalogSearchWidget extends LayoutContainer
     private void manageAllSelectedCheckbox() {
         allSelectedCheckbox.setFireChangeEventOnSetValue(false); // Disable the firing of Events.Change
         if (titleCheckbox.getValue() && abstractCheckbox.getValue()
-                && keywordsCheckbox.getValue()) {
+                && subjectsCheckbox.getValue()) {
             allSelectedCheckbox.setValue(true);
         } else {
             allSelectedCheckbox.setValue(false);
@@ -271,16 +249,7 @@ public class CatalogSearchWidget extends LayoutContainer
 
     @Override
     public void onActionEnabled(ActionEnableEvent event) {
-        validSelectedServer = event.isEnabled();
-        this.manageSearchButton();
-    }
-
-    private void manageSearchButton() {
-        if (validSelectedServer && validCheckBoxGroup && validSearchText) {
-            searchButton.enable();
-        } else {
-            searchButton.disable();
-        }
+        searchButton.setEnabled(event.isEnabled());
     }
 
     public void reset() {

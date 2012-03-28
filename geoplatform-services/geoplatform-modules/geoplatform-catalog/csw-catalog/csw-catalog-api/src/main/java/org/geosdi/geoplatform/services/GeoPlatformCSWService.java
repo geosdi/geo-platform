@@ -129,7 +129,7 @@ public interface GeoPlatformCSWService {
     @Get
     @HttpResource(location = "/record/csw/count/{searchText}")
     @WebResult(name = "SummaryRecordsCount")
-    Long getSummaryRecordsCount(
+    int getSummaryRecordsCount(
             @WebParam(name = "CatalogFinderBean") CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault;
 
@@ -138,7 +138,7 @@ public interface GeoPlatformCSWService {
     @WebResult(name = "SummaryRecords")
     List<SummaryRecordDTO> searchSummaryRecords(
             @WebParam(name = "num") int num,
-            @WebParam(name = "page") int page,
+            @WebParam(name = "start") int start,
             @WebParam(name = "CatalogFinderBean") CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault;
 //

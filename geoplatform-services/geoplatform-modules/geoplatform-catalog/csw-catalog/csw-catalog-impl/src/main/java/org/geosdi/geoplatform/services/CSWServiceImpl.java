@@ -57,12 +57,13 @@ import org.geosdi.geoplatform.cswconnector.GeoPlatformCSWConnectorBuilder;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
-import org.geosdi.geoplatform.gui.responce.SearchInfo;
+import org.geosdi.geoplatform.gui.responce.TextInfo;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.geosdi.geoplatform.services.development.CSWEntityCorrectness;
+import org.geosdi.geoplatform.services.responsibility.CatalogRequestManager;
 import org.geotoolkit.csw.GetRecordsRequest;
 import org.geotoolkit.csw.xml.CSWMarshallerPool;
 import org.geotoolkit.csw.xml.ElementSetType;
@@ -93,9 +94,10 @@ class CSWServiceImpl {
     private GPServerDAO serverDao;
     //
     private CatalogGetCapabilitiesBean catalogCapabilitiesBean;
-    //      
     private MarshallerPool pool = CSWMarshallerPool.getInstance();
     private Unmarshaller um;
+    //
+    private CatalogRequestManager catalogRequestManager = new CatalogRequestManager();
 
     /**
      * @param serverDao the serverDao to set
@@ -311,8 +313,8 @@ class CSWServiceImpl {
             GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
                     withServerUrl(new URL(server.getServerUrl())).build();
 
-            SearchInfo search = catalogFinder.getSearchInfo();
-            String searchText = search.getSearchText();
+            TextInfo search = catalogFinder.getTextInfo();
+            String searchText = search.getText();
             // TODO Refine search
 //            search.isSearchTitle();
 //            search.isSearchAbstract();
@@ -362,8 +364,8 @@ class CSWServiceImpl {
 
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
 
-        SearchInfo search = catalogFinder.getSearchInfo();
-        String searchText = search.getSearchText();
+        TextInfo search = catalogFinder.getTextInfo();
+        String searchText = search.getText();
         // TODO Refine search
         boolean searchTitle = search.isSearchTitle();
         boolean searchAbstract = search.isSearchAbstract();
@@ -372,11 +374,11 @@ class CSWServiceImpl {
             throw new IllegalParameterFault("You need to specify where to search \"" + searchText + "\" text");
         }
 //
-//        BBoxInfo bBox = catalogFinder.getbBoxInfo();
+//        BBoxInfo bBox = catalogFinder.getAreaInfo();
 //        bBox.getSearchBBoxType();
 //        bBox.getbBox();
 //
-//        TemporalInfo temporal = catalogFinder.getTemporalInfo();
+//        TemporalInfo temporal = catalogFinder.getTimeInfo();
 //        temporal.getStartDate();
 //        temporal.getEndDate();
 

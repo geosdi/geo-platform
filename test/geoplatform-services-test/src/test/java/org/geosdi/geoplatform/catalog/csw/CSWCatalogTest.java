@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
-import org.geosdi.geoplatform.gui.responce.SearchInfo;
+import org.geosdi.geoplatform.gui.responce.TextInfo;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.junit.After;
@@ -96,12 +96,12 @@ public class CSWCatalogTest {
         // Create the CSW search parameters
         catalogFinder = new CatalogFinderBean();
         catalogFinder.setServerID(serverTestOurID);
-        SearchInfo searchInfo = new SearchInfo();
-        searchInfo.setSearchText("");
+        TextInfo searchInfo = new TextInfo();
+        searchInfo.setText("");
         searchInfo.setSearchTitle(true);
         searchInfo.setSearchAbstract(true);
         searchInfo.setSearchSubjects(true);
-        catalogFinder.setSearchInfo(searchInfo);
+        catalogFinder.setTextInfo(searchInfo);
     }
 
     private GeoPlatformServer createCSWServer(String title, String url) {
@@ -123,13 +123,13 @@ public class CSWCatalogTest {
 //
 //    @Test
 //    public void testGetRecordsOurCount() throws IllegalParameterFault, ResourceNotFoundFault {
-//        catalogFinder.getSearchInfo().setSearchText("land");
+//        catalogFinder.getTextInfo().setText("land");
 //        Assert.assertEquals(4, cswService.getSummaryRecordsCount(catalogFinder));
 //    }
 //
 //    @Test
 //    public void testGetRecordsOurResult() throws IllegalParameterFault, ResourceNotFoundFault {
-//        catalogFinder.getSearchInfo().setSearchText("land");
+//        catalogFinder.getTextInfo().setText("land");
 //        List<SummaryRecordDTO> summaryRecords = cswService.searchSummaryRecords(25, 0, catalogFinder);
 //        this.traceCollection(summaryRecords);
 //        Assert.assertEquals(4, summaryRecords.size());
@@ -138,7 +138,7 @@ public class CSWCatalogTest {
     @Test
     public void testGetRecordsTrevisoSearchWMSText() throws IllegalParameterFault, ResourceNotFoundFault {
         catalogFinder.setServerID(serverTestTrevisoID);
-        catalogFinder.getSearchInfo().setSearchText("wms");
+        catalogFinder.getTextInfo().setText("wms");
 
         int num = 10;
         int recordsMatched = cswService.getSummaryRecordsCount(catalogFinder);
@@ -153,6 +153,7 @@ public class CSWCatalogTest {
             pages++;
         }
         logger.debug("\n*** Pages: {} *** Module: {} ***", pages, mod);
+
         int start;
         for (int i = 1; i < pages; i++) {
             start = (num * (i - 1)) + 1;

@@ -41,22 +41,22 @@ import java.io.Serializable;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class SearchInfo implements Serializable {
+public class TextInfo implements Serializable {
 
     private static final long serialVersionUID = 4543828151776154751L;
     //
-    private String searchText;
+    private String text;
     //
     private boolean searchTitle;
     private boolean searchAbstract;
     private boolean searchSubjects;
 
-    public String getSearchText() {
-        return searchText;
+    public String getText() {
+        return text;
     }
 
-    public void setSearchText(String searchText) {
-        this.searchText = searchText;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public boolean isSearchTitle() {
@@ -85,8 +85,8 @@ public class SearchInfo implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder("SearchInfo {");
-        str.append("searchText = ").append(searchText);
+        StringBuilder str = new StringBuilder("TextInfo {");
+        str.append("text = ").append(text);
         str.append(", searchTitle = ").append(searchTitle);
         str.append(", searchAbstract = ").append(searchAbstract);
         str.append(", searchSubjects = ").append(searchSubjects);

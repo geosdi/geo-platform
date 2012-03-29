@@ -45,10 +45,10 @@ import org.geosdi.geoplatform.gui.client.config.provider.SearchInfoProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.TemporalInfoProvider;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.MetadataTabItem;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.SearchTabItem;
-import org.geosdi.geoplatform.gui.responce.BBoxInfo;
+import org.geosdi.geoplatform.gui.responce.AreaInfo;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
-import org.geosdi.geoplatform.gui.responce.SearchInfo;
-import org.geosdi.geoplatform.gui.responce.TemporalInfo;
+import org.geosdi.geoplatform.gui.responce.TextInfo;
+import org.geosdi.geoplatform.gui.responce.TimeInfo;
 
 /**
  *
@@ -65,13 +65,13 @@ public class CatalogFinderInjectorModule extends AbstractGinModule {
 
         bind(MetadataTabItem.class).in(Singleton.class);
 
-        bind(BBoxInfo.class).toProvider(BBoxInfoProvider.class).in(
+        bind(AreaInfo.class).toProvider(BBoxInfoProvider.class).in(
                 Singleton.class);
 
-        bind(SearchInfo.class).toProvider(SearchInfoProvider.class).in(
+        bind(TextInfo.class).toProvider(SearchInfoProvider.class).in(
                 Singleton.class);
 
-        bind(TemporalInfo.class).toProvider(TemporalInfoProvider.class).in(
+        bind(TimeInfo.class).toProvider(TemporalInfoProvider.class).in(
                 Singleton.class);
 
         bind(CatalogFinderBean.class).toProvider(CatalogFinderBeanProvider.class).in(

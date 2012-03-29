@@ -39,7 +39,7 @@ import javax.inject.Inject;
 import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
-import org.geosdi.geoplatform.gui.responce.TemporalInfo;
+import org.geosdi.geoplatform.gui.responce.TimeInfo;
 
 /**
  *
@@ -49,12 +49,12 @@ import org.geosdi.geoplatform.gui.responce.TemporalInfo;
 @CatalogFilter
 public class TimeAccordionWidget extends GeoPlatformContentPanel {
 
-    private TemporalInfo temporalInfo;
+    private TimeInfo temporalInfo;
 
     @Inject
     public TimeAccordionWidget(CatalogFinderBean theCatalogFinder) {
         super(false);
-        this.temporalInfo = theCatalogFinder.getTemporalInfo();
+        this.temporalInfo = theCatalogFinder.getTimeInfo();
     }
 
     @Override

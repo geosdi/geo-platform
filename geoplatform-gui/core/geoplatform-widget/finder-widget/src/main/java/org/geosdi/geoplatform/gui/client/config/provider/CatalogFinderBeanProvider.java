@@ -37,10 +37,10 @@ package org.geosdi.geoplatform.gui.client.config.provider;
 
 import com.google.inject.Provider;
 import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.responce.BBoxInfo;
+import org.geosdi.geoplatform.gui.responce.AreaInfo;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
-import org.geosdi.geoplatform.gui.responce.SearchInfo;
-import org.geosdi.geoplatform.gui.responce.TemporalInfo;
+import org.geosdi.geoplatform.gui.responce.TextInfo;
+import org.geosdi.geoplatform.gui.responce.TimeInfo;
 
 /**
  *
@@ -49,13 +49,13 @@ import org.geosdi.geoplatform.gui.responce.TemporalInfo;
  */
 public class CatalogFinderBeanProvider implements Provider<CatalogFinderBean> {
 
-    private BBoxInfo bboxInfo;
-    private SearchInfo searchInfo;
-    private TemporalInfo temporalInfo;
+    private AreaInfo bboxInfo;
+    private TextInfo searchInfo;
+    private TimeInfo temporalInfo;
 
     @Inject
-    public CatalogFinderBeanProvider(BBoxInfo bboxInfo, SearchInfo searchInfo,
-            TemporalInfo temporalInfo) {
+    public CatalogFinderBeanProvider(AreaInfo bboxInfo, TextInfo searchInfo,
+            TimeInfo temporalInfo) {
         this.bboxInfo = bboxInfo;
         this.searchInfo = searchInfo;
         this.temporalInfo = temporalInfo;
@@ -64,9 +64,9 @@ public class CatalogFinderBeanProvider implements Provider<CatalogFinderBean> {
     @Override
     public CatalogFinderBean get() {
         CatalogFinderBean catalogFinderBean = new CatalogFinderBean();
-        catalogFinderBean.setbBoxInfo(bboxInfo);
-        catalogFinderBean.setSearchInfo(searchInfo);
-        catalogFinderBean.setTemporalInfo(temporalInfo);
+        catalogFinderBean.setAreaInfo(bboxInfo);
+        catalogFinderBean.setTextInfo(searchInfo);
+        catalogFinderBean.setTimeInfo(temporalInfo);
 
         return catalogFinderBean;
     }

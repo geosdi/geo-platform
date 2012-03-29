@@ -63,7 +63,7 @@ import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
-import org.geosdi.geoplatform.gui.responce.SearchInfo;
+import org.geosdi.geoplatform.gui.responce.TextInfo;
 
 /**
  *
@@ -73,7 +73,7 @@ import org.geosdi.geoplatform.gui.responce.SearchInfo;
 public class CatalogSearchWidget extends LayoutContainer
         implements ActionEnableHandler {
 
-    private SearchInfo searchInfo;
+    private TextInfo searchInfo;
     private SummaryRecordsContainer summaryRecordsContainer;
     private EventBus bus;
     //
@@ -89,7 +89,7 @@ public class CatalogSearchWidget extends LayoutContainer
     public CatalogSearchWidget(CatalogFinderBean theCatalogFinder,
             SummaryRecordsContainer theSummaryRecordsContainer,
             EventBus theBus) {
-        this.searchInfo = theCatalogFinder.getSearchInfo();
+        this.searchInfo = theCatalogFinder.getTextInfo();
         summaryRecordsContainer = theSummaryRecordsContainer;
         bus = theBus;
         bus.addHandler(ActionEnableEvent.TYPE, this);
@@ -149,7 +149,7 @@ public class CatalogSearchWidget extends LayoutContainer
                     return;
                 }
                 // Manual binding
-                searchInfo.setSearchText(searchText);
+                searchInfo.setText(searchText);
                 searchInfo.setSearchTitle(titleCheckbox.getValue().booleanValue());
                 searchInfo.setSearchAbstract(abstractCheckbox.getValue().booleanValue());
                 searchInfo.setSearchSubjects(subjectsCheckbox.getValue().booleanValue());

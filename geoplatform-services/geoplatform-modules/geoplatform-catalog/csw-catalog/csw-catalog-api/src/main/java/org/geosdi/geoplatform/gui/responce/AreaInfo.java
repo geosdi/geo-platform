@@ -41,15 +41,15 @@ import java.io.Serializable;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class BBoxInfo implements Serializable {
+public class AreaInfo implements Serializable {
 
     private static final long serialVersionUID = -8000840803980598023L;
     //
     private boolean active;
     private BBox bBox;
-    private SearchBBoxType searchBBoxType;
+    private AreaSearchType areaSearchType;
 
-    public enum SearchBBoxType implements Serializable {
+    public enum AreaSearchType implements Serializable {
 
         ENCLOSES, IS, OUTSIDE, OVERLAP;
     }
@@ -62,28 +62,28 @@ public class BBoxInfo implements Serializable {
         this.active = active;
     }
 
-    public BBox getbBox() {
+    public BBox getBBox() {
         return bBox;
     }
 
-    public void setbBox(BBox bBox) {
+    public void setBBox(BBox bBox) {
         this.bBox = bBox;
     }
 
-    public SearchBBoxType getSearchBBoxType() {
-        return searchBBoxType;
+    public AreaSearchType getAreaSearchType() {
+        return areaSearchType;
     }
 
-    public void setSearchBBoxType(SearchBBoxType searchBBoxType) {
-        this.searchBBoxType = searchBBoxType;
+    public void setAreaSearchType(AreaSearchType areaSearchType) {
+        this.areaSearchType = areaSearchType;
     }
 
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder("BBoxInfo {");
+        StringBuilder str = new StringBuilder("AreaInfo {");
         str.append("active = ").append(active);
         str.append(", bBox = ").append(bBox);
-        str.append(", searchBBoxType = ").append(searchBBoxType);
+        str.append(", areaSearchType = ").append(areaSearchType);
         return str.append('}').toString();
     }
 }

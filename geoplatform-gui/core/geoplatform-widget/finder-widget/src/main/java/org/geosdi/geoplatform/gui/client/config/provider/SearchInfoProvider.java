@@ -36,18 +36,18 @@
 package org.geosdi.geoplatform.gui.client.config.provider;
 
 import com.google.inject.Provider;
-import org.geosdi.geoplatform.gui.responce.SearchInfo;
+import org.geosdi.geoplatform.gui.responce.TextInfo;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
-public class SearchInfoProvider implements Provider<SearchInfo> {
+public class SearchInfoProvider implements Provider<TextInfo> {
 
     @Override
-    public SearchInfo get() {
-        return new SearchInfo();
+    public TextInfo get() {
+        return new TextInfo();
     }
     
 }

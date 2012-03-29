@@ -42,7 +42,7 @@ import java.util.Date;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class TemporalInfo implements Serializable {
+public class TimeInfo implements Serializable {
 
     private static final long serialVersionUID = -7218816004320387247L;
     //
@@ -76,7 +76,7 @@ public class TemporalInfo implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder("TemporalInfo {");
+        StringBuilder str = new StringBuilder("TimeInfo {");
         str.append("active = ").append(active);
         str.append(", startDate = ").append(startDate);
         str.append(", endDate = ").append(endDate);

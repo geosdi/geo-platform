@@ -54,9 +54,9 @@ public class CatalogFinderBean implements Serializable {
     @XmlElement(required = true)
     private Long serverID;
     //
-    private SearchInfo searchInfo;
-    private BBoxInfo bBoxInfo;
-    private TemporalInfo temporalInfo;
+    private TextInfo textInfo;
+    private AreaInfo areaInfo;
+    private TimeInfo timeInfo;
 
     public Long getServerID() {
         return serverID;
@@ -66,37 +66,37 @@ public class CatalogFinderBean implements Serializable {
         this.serverID = serverID;
     }
 
-    public SearchInfo getSearchInfo() {
-        return searchInfo;
+    public TextInfo getTextInfo() {
+        return textInfo;
     }
 
-    public void setSearchInfo(SearchInfo searchInfo) {
-        this.searchInfo = searchInfo;
+    public void setTextInfo(TextInfo textInfo) {
+        this.textInfo = textInfo;
     }
 
-    public BBoxInfo getbBoxInfo() {
-        return bBoxInfo;
+    public AreaInfo getAreaInfo() {
+        return areaInfo;
     }
 
-    public void setbBoxInfo(BBoxInfo bBoxInfo) {
-        this.bBoxInfo = bBoxInfo;
+    public void setAreaInfo(AreaInfo areaInfo) {
+        this.areaInfo = areaInfo;
     }
 
-    public TemporalInfo getTemporalInfo() {
-        return temporalInfo;
+    public TimeInfo getTimeInfo() {
+        return timeInfo;
     }
 
-    public void setTemporalInfo(TemporalInfo temporalInfo) {
-        this.temporalInfo = temporalInfo;
+    public void setTimeInfo(TimeInfo timeInfo) {
+        this.timeInfo = timeInfo;
     }
 
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("CatalogFinderBean {");
         str.append("serverID = ").append(serverID);
-        str.append(",\n\t").append(searchInfo);
-        str.append(",\n\t").append(bBoxInfo);
-        str.append(",\n\t").append(temporalInfo);
+        str.append(",\n\t").append(textInfo);
+        str.append(",\n\t").append(areaInfo);
+        str.append(",\n\t").append(timeInfo);
         return str.append('}').toString();
     }
 }

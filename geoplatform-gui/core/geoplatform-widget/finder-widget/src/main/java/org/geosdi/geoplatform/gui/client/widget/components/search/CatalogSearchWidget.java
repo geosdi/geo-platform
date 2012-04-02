@@ -146,7 +146,7 @@ public class CatalogSearchWidget extends LayoutContainer
                 summaryRecordsContainer.searchSummaryRecords();
             }
         });
-        searchButton.setStyleAttribute("padding-left", "20px");
+        searchButton.setStyleAttribute("margin-left", "20px");
         searchButton.disable();
         panel.add(searchButton);
 

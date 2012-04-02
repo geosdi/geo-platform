@@ -89,7 +89,7 @@ public class CatalogBBoxWidget extends GeoPlatformContentPanel {
         table.setCellSpacing(4);
         table.setCellPadding(1);
 
-        table.getElement().getStyle().setPaddingLeft(120, Unit.PX);
+        table.getElement().getStyle().setMarginLeft(120, Unit.PX);
 
         table.getCellFormatter().setHorizontalAlignment(1, 1,
                 HasHorizontalAlignment.ALIGN_CENTER);
@@ -184,7 +184,7 @@ public class CatalogBBoxWidget extends GeoPlatformContentPanel {
         table.setCellSpacing(4);
         table.setCellPadding(1);
 
-        table.getElement().getStyle().setPaddingLeft(120, Unit.PX);
+        table.getElement().getStyle().setMarginLeft(120, Unit.PX);
 
         table.getCellFormatter().setHorizontalAlignment(1, 1,
                 HasHorizontalAlignment.ALIGN_CENTER);
@@ -212,7 +212,7 @@ public class CatalogBBoxWidget extends GeoPlatformContentPanel {
         table.setCellSpacing(4);
         table.setCellPadding(1);
 
-        table.getElement().getStyle().setPaddingLeft(80, Unit.PX);
+        table.getElement().getStyle().setMarginLeft(80, Unit.PX);
 
         table.getCellFormatter().setHorizontalAlignment(1, 1,
                 HasHorizontalAlignment.ALIGN_CENTER);
@@ -245,7 +245,7 @@ public class CatalogBBoxWidget extends GeoPlatformContentPanel {
         FlexTable table = new FlexTable();
         table.setCellSpacing(4);
         table.setCellPadding(1);
-        
+
         table.getCellFormatter().setHorizontalAlignment(2, 1,
                 HasHorizontalAlignment.ALIGN_CENTER);
 
@@ -253,7 +253,7 @@ public class CatalogBBoxWidget extends GeoPlatformContentPanel {
         activateFilter.setBoxLabel("Activate Spatial Filter");
 
         table.setWidget(2, 1, activateFilter);
-        
+
         super.add(table);
     }
 }

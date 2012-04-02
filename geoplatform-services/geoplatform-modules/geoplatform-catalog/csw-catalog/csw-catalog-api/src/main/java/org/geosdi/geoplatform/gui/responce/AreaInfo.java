@@ -36,10 +36,13 @@
 package org.geosdi.geoplatform.gui.responce;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  */
 public class AreaInfo implements Serializable {
 
@@ -52,6 +55,27 @@ public class AreaInfo implements Serializable {
     public enum AreaSearchType implements Serializable {
 
         ENCLOSES, IS, OUTSIDE, OVERLAP;
+
+        public static List<AreaSearchType> valuesAsList() {
+            return Arrays.asList(AreaSearchType.values());
+        }
+
+        public static AreaSearchType fromString(String text) {
+            if (text != null) {
+                text.trim();
+                for (AreaSearchType t : AreaSearchType.values()) {
+                    if (text.equalsIgnoreCase(t.toString())) {
+                        return t;
+                    }
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return super.toString();
+        }
     }
 
     public boolean isActive() {

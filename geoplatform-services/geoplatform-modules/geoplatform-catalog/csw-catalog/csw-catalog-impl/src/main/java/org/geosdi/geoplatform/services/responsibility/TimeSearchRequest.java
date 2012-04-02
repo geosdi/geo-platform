@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services.responsibility;
 
+import java.util.Date;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TimeInfo;
@@ -56,6 +57,10 @@ public class TimeSearchRequest extends GetRecordsRequestHandler {
         TimeInfo timeInfo = catalogFinder.getTimeInfo();
         if (timeInfo != null && timeInfo.isActive()) {
             // TODO Implement me
+            Date startDate = timeInfo.getStartDate();
+            Date endDate = timeInfo.getEndDate();
+            logger.trace("\n+++ {} ", startDate);
+            logger.trace("\n+++ {} ", endDate);
         }
     }
 }

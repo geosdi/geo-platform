@@ -81,7 +81,7 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
         super.setLayout(new FlowLayout(5));
 
         this.addRadioGroup();
-        this.addCalendars();
+        this.addDateFields();
     }
 
     private void addRadioGroup() {
@@ -112,6 +112,13 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
                 timeInfo.setActive(true);
 
                 multiDates.enable();
+
+                Date date = new Date(); // Today
+                endDate.setValue(date);
+                startDate.setValue(new Date(date.getTime() - 86400000)); // Yesterday
+
+                setStartDate(startDate.getValue());
+                setEndDate(endDate.getValue());
             }
         });
 
@@ -123,37 +130,21 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
         super.add(radioGroup);
     }
 
-    private void addCalendars() {
+    private void addDateFields() {
         DateTimeFormat dtFormat = DateTimeFormat.getFormat("dd-MM-yyyy");
 
         startDate = new DateField();
         startDate.setToolTip("Start date");
         startDate.getPropertyEditor().setFormat(dtFormat);
         startDate.setWidth(100);
-//        startDate.setFormatValue(true);
-        startDate.setAutoValidate(true);
-        startDate.setAllowBlank(false);
-        startDate.addListener(Events.Change, new Listener<FieldEvent>() {
-
-            @Override
-            public void handleEvent(FieldEvent be) {
-                if (startDate.isValid()) {
-                    Date selectedDate = startDate.getValue();
-                    System.out.println("CHANGE start: " + selectedDate);
-
-                    setStartDate(selectedDate);
-                }
-            }
-        });
+        startDate.setEditable(false);
 
         DatePicker startDatePicker = startDate.getDatePicker();
         startDatePicker.addListener(Events.Select, new Listener<DatePickerEvent>() {
 
             @Override
             public void handleEvent(DatePickerEvent dpe) {
-                Date selectedDate = dpe.getDate();
-                System.out.println("SELECT start: " + selectedDate);
-                setStartDate(selectedDate);
+                setStartDate(dpe.getDate());
             }
         });
 
@@ -161,18 +152,7 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
         endDate.setToolTip("End date");
         endDate.getPropertyEditor().setFormat(dtFormat);
         endDate.setWidth(100);
-//        endDate.setFormatValue(true);
-        endDate.setAutoValidate(true);
-        endDate.setAllowBlank(false);
-        endDate.addListener(Events.Change, new Listener<FieldEvent>() {
-
-            @Override
-            public void handleEvent(FieldEvent be) {
-                if (endDate.isValid()) {
-                    setEndDate(endDate.getValue());
-                }
-            }
-        });
+        endDate.setEditable(false);
 
         DatePicker endDatePicker = endDate.getDatePicker();
         endDatePicker.addListener(Events.Select, new Listener<DatePickerEvent>() {
@@ -190,20 +170,6 @@ public class TimeAccordionWidget extends GeoPlatformContentPanel {
         multiDates.add(new LabelField("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To:&nbsp;"));
         multiDates.add(endDate);
         multiDates.disable(); // Disabled by default
-//        multiDates.addListener(Events.Valid, new Listener<FieldEvent>() {
-//
-//            @Override
-//            public void handleEvent(FieldEvent be) {
-//                System.out.println("+++++++ valid");
-//            }
-//        });
-//        multiDates.addListener(Events.Invalid, new Listener<FieldEvent>() {
-//
-//            @Override
-//            public void handleEvent(FieldEvent be) {
-//                System.out.println("+++++++ NO valid");
-//            }
-//        });
 
         super.add(multiDates, new FlowData(5));
     }

@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.services.responsibility;
 
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
+import org.geosdi.geoplatform.gui.responce.AreaInfo.AreaSearchType;
+import org.geosdi.geoplatform.gui.responce.BBox;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.GetRecordsSearchType;
 import org.geotoolkit.csw.GetRecordsRequest;
@@ -56,6 +58,10 @@ public class AreaSearchRequest extends GetRecordsRequestHandler {
         AreaInfo areaInfo = catalogFinder.getAreaInfo();
         if (areaInfo != null && areaInfo.isActive()) {
             // TODO Implement me
+            AreaSearchType areaSearchType = areaInfo.getAreaSearchType();
+            BBox bBox = areaInfo.getBBox();
+            logger.trace("\n+++ {} ", areaSearchType);
+            logger.trace("\n+++ {} ", bBox);
         }
     }
 }

@@ -32,10 +32,16 @@
     </root>
     
     <logger name="org.geosdi.geoplatform.services.AclServiceImpl" level="info"/>
+    <logger name="org.geosdi.geoplatform.services.CSWServiceImpl" level="debug"/><!-- TODO info -->
     
     <logger name="org.geosdi.geoplatform.jobs.TempAccountExpireJob" level="info"/>
-    <logger name="org.geosdi.geoplatform.jobs.EmailTask" level="debug"/>
-    <logger name="org.geosdi.geoplatform.jobs.EmailRegistrationJob" level="debug"/>
-    <logger name="org.geosdi.geoplatform.jobs.EmailModificationJob" level="debug"/>
+    <logger name="org.geosdi.geoplatform.jobs.EmailTask" level="debug"/><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.jobs.EmailRegistrationJob" level="debug"/><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.jobs.EmailModificationJob" level="debug"/><!-- TODO info -->
+    
+    <logger name="org.geosdi.geoplatform.services.responsibility.TypeSearchRequest" level="debug"/><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.services.responsibility.TextSearchRequest" level="debug"/><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.services.responsibility.AreaSearchRequest" level="debug"/><!-- TODO info -->
+    <logger name="org.geosdi.geoplatform.services.responsibility.TimeSearchRequest" level="debug"/><!-- TODO info -->
 
 </configuration>

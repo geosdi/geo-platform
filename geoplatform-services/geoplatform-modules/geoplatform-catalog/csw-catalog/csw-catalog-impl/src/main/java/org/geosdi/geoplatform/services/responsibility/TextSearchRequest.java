@@ -65,6 +65,7 @@ public class TextSearchRequest extends GetRecordsRequestHandler {
 
             // TODO Refine search
             if (searchText != null) {
+                logger.trace("\n+++ {} ", searchText);
                 request.setConstraint("AnyText like '%" + searchText + "%'");
             }
 

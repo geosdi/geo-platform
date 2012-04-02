@@ -38,22 +38,36 @@ package org.geosdi.geoplatform.services.responsibility;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
-import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.SearchType;
+import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.GetRecordsSearchType;
+import org.geotoolkit.csw.GetRecordsRequest;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class TextSearchRequest extends CatalogRequestHandler {
+public class TextSearchRequest extends GetRecordsRequestHandler {
 
     @Override
-    public void processCatalogRequest(SearchType searchType, CatalogFinderBean catalogFinder)
+    protected void processGetRecordsRequest(GetRecordsSearchType searchType,
+            CatalogFinderBean catalogFinder, GetRecordsRequest request)
             throws IllegalParameterFault {
-        
+        logger.debug("Process...");
+
         TextInfo textInfo = catalogFinder.getTextInfo();
         if (textInfo != null) {
-            // TODO Implement me
+            String searchText = textInfo.getText();
+            boolean searchTitle = textInfo.isSearchTitle();
+            boolean searchAbstract = textInfo.isSearchAbstract();
+            boolean searchSubjects = textInfo.isSearchSubjects();
+            if (searchText != null && !searchTitle && !searchAbstract && !searchSubjects) {
+                throw new IllegalParameterFault("You need to specify where to search \"" + searchText + "\" text");
+            }
+
+            // TODO Refine search
+            if (searchText != null) {
+                request.setConstraint("AnyText like '%" + searchText + "%'");
+            }
+
         }
-        super.forwardCatalogRequest(searchType, catalogFinder);
     }
 }

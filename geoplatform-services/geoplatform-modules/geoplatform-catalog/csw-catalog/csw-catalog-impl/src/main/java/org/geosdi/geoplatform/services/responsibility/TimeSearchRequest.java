@@ -38,22 +38,24 @@ package org.geosdi.geoplatform.services.responsibility;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TimeInfo;
-import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.SearchType;
+import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.GetRecordsSearchType;
+import org.geotoolkit.csw.GetRecordsRequest;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class TimeSearchRequest extends CatalogRequestHandler {
+public class TimeSearchRequest extends GetRecordsRequestHandler {
 
     @Override
-    public void processCatalogRequest(SearchType searchType, CatalogFinderBean catalogFinder)
+    protected void processGetRecordsRequest(GetRecordsSearchType searchType,
+            CatalogFinderBean catalogFinder, GetRecordsRequest request)
             throws IllegalParameterFault {
-        
+        logger.debug("Process...");
+
         TimeInfo timeInfo = catalogFinder.getTimeInfo();
-        if (timeInfo != null) {
+        if (timeInfo != null && timeInfo.isActive()) {
             // TODO Implement me
         }
-        super.forwardCatalogRequest(searchType, catalogFinder);
     }
 }

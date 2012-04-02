@@ -37,27 +37,38 @@ package org.geosdi.geoplatform.services.responsibility;
 
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
+import org.geotoolkit.csw.GetRecordsRequest;
+import org.geotoolkit.csw.xml.ElementSetType;
+import org.geotoolkit.csw.xml.ResultType;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class TypeSearchRequest extends CatalogRequestHandler {
+public class TypeSearchRequest extends GetRecordsRequestHandler {
 
-    public enum SearchType {
+    public enum GetRecordsSearchType {
 
-        GET_CAPABILITIES, // GetCapabilities
-        GET_DOMAIN, // GetDomain
-        GET_RECORDS, // GetRecords, GetRecordById, DescribeRecord
-        HARVERST, // Harvest
-        TRANSACTION; // Transaction
+        COUNT, SEARCH;
     }
 
     @Override
-    public void processCatalogRequest(SearchType searchType, CatalogFinderBean catalogFinder)
+    protected void processGetRecordsRequest(GetRecordsSearchType searchType,
+            CatalogFinderBean catalogFinder, GetRecordsRequest request)
             throws IllegalParameterFault {
+        logger.debug("Process...");
 
-        // TODO Implement me
-        super.forwardCatalogRequest(searchType, catalogFinder);
+        request.setConstraintLanguage("CQL");
+        request.setConstraintLanguageVersion("1.1.0");
+
+        if (searchType == GetRecordsSearchType.COUNT) {
+            request.setTypeNames("csw:Record");
+
+        } else if (searchType == GetRecordsSearchType.SEARCH) {
+            request.setTypeNames("gmd:MD_Metadata");
+            request.setElementSetName(ElementSetType.SUMMARY);
+            request.setResultType(ResultType.RESULTS);
+
+        }
     }
 }

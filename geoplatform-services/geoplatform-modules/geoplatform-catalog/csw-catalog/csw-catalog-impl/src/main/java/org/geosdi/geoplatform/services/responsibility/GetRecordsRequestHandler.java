@@ -37,28 +37,36 @@ package org.geosdi.geoplatform.services.responsibility;
 
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
-import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.SearchType;
+import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.GetRecordsSearchType;
+import org.geotoolkit.csw.GetRecordsRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public abstract class CatalogRequestHandler {
+public abstract class GetRecordsRequestHandler {
 
-    private CatalogRequestHandler successor;
+    final protected Logger logger = LoggerFactory.getLogger(this.getClass());
+    private GetRecordsRequestHandler successor;
 
-    public void setSuccessor(CatalogRequestHandler theSuccessor) {
+    public void setSuccessor(GetRecordsRequestHandler theSuccessor) {
         successor = theSuccessor;
     }
 
-    protected void forwardCatalogRequest(SearchType searchType, CatalogFinderBean catalogFinder)
+    public void forwardGetRecordsRequest(GetRecordsSearchType searchType,
+            CatalogFinderBean catalogFinder, GetRecordsRequest request)
             throws IllegalParameterFault {
 
+        this.processGetRecordsRequest(searchType, catalogFinder, request);
         if (successor != null) {
-            successor.processCatalogRequest(searchType, catalogFinder);
+            successor.forwardGetRecordsRequest(searchType, catalogFinder, request);
         }
     }
 
-    public abstract void processCatalogRequest(SearchType searchType, CatalogFinderBean catalogFinder)
+    protected abstract void processGetRecordsRequest(
+            GetRecordsSearchType searchType, CatalogFinderBean catalogFinder,
+            GetRecordsRequest request)
             throws IllegalParameterFault;
 }

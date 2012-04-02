@@ -57,17 +57,15 @@ import org.geosdi.geoplatform.cswconnector.GeoPlatformCSWConnectorBuilder;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
-import org.geosdi.geoplatform.gui.responce.TextInfo;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.geosdi.geoplatform.services.development.CSWEntityCorrectness;
-import org.geosdi.geoplatform.services.responsibility.CatalogRequestManager;
+import org.geosdi.geoplatform.services.responsibility.GetRecordsRequestManager;
+import org.geosdi.geoplatform.services.responsibility.TypeSearchRequest.GetRecordsSearchType;
 import org.geotoolkit.csw.GetRecordsRequest;
 import org.geotoolkit.csw.xml.CSWMarshallerPool;
-import org.geotoolkit.csw.xml.ElementSetType;
-import org.geotoolkit.csw.xml.ResultType;
 import org.geotoolkit.csw.xml.v202.GetRecordsResponseType;
 import org.geotoolkit.csw.xml.v202.SummaryRecordType;
 import org.geotoolkit.dublincore.xml.v2.elements.SimpleLiteral;
@@ -83,12 +81,6 @@ import org.slf4j.LoggerFactory;
  */
 class CSWServiceImpl {
 
-    // TODO Substitute?
-//    private static final String CAPABILITIES = "csw:" + TypeNames.CAPABILITIES_QNAME.getLocalPart();
-//    private static final String RECORD = "csw:" + TypeNames.RECORD_QNAME.getLocalPart();
-//    private static final String METADATA = "gmd:" + TypeNames.METADATA_QNAME.getLocalPart();
-//    private static final String DATASET = "gmd:" + TypeNames.DATASET_QNAME.getLocalPart();
-    //
     final private Logger logger = LoggerFactory.getLogger(CSWServiceImpl.class);
     // DAO
     private GPServerDAO serverDao;
@@ -97,7 +89,7 @@ class CSWServiceImpl {
     private MarshallerPool pool = CSWMarshallerPool.getInstance();
     private Unmarshaller um;
     //
-    private CatalogRequestManager catalogRequestManager = new CatalogRequestManager();
+    private GetRecordsRequestManager catalogRequestManager = new GetRecordsRequestManager();
 
     /**
      * @param serverDao the serverDao to set
@@ -109,7 +101,8 @@ class CSWServiceImpl {
     /**
      * @param catalogCapabilitiesBean the catalogCapabilitiesBean to set
      */
-    public void setCatalogCapabilitiesBean(CatalogGetCapabilitiesBean catalogCapabilitiesBean) {
+    public void setCatalogCapabilitiesBean(
+            CatalogGetCapabilitiesBean catalogCapabilitiesBean) {
         this.catalogCapabilitiesBean = catalogCapabilitiesBean;
     }
 
@@ -283,7 +276,8 @@ class CSWServiceImpl {
         return this.convertToServerList(serverList);
     }
 
-    private List<ServerCSWDTO> convertToServerList(List<GeoPlatformServer> servers) {
+    private List<ServerCSWDTO> convertToServerList(
+            List<GeoPlatformServer> servers) {
         List<ServerCSWDTO> shortServers = new ArrayList<ServerCSWDTO>(
                 servers.size());
         for (GeoPlatformServer server : servers) {
@@ -306,148 +300,52 @@ class CSWServiceImpl {
 
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
 
-        int count;
-        try {
-            um = pool.acquireUnmarshaller();
+        GetRecordsRequest request = this.createGetRecordsRequest(server.getServerUrl());
+        catalogRequestManager.arrangeRequest(GetRecordsSearchType.COUNT, catalogFinder, request);
 
-            GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
-                    withServerUrl(new URL(server.getServerUrl())).build();
+        GetRecordsResponseType response = this.createGetRecordsResponse(request);
 
-            TextInfo search = catalogFinder.getTextInfo();
-            String searchText = search.getText();
-            // TODO Refine search
-//            search.isSearchTitle();
-//            search.isSearchAbstract();
-//            search.isSearchKeywords();
-//            try {
-//                org.opengis.filter.Filter f = CQL.toFilter("");
-//            } catch (CQLException ex) {
-//                logger.error("*************** " + ex.getMessage());
-//            }
-
-            GetRecordsRequest request = serverConnector.createGetRecords();
-            request.setTypeNames("csw:Record");
-//            request.setTypeNames(RECORD); // TODO Substitute?
-            request.setConstraintLanguage("CQL");
-            request.setConstraintLanguageVersion("1.1.0");
-            if (searchText != null) {
-                request.setConstraint("AnyText like '%" + searchText + "%'");
-            }
-
-            // unmarshall the response
-            InputStream is = request.getResponseStream();
-            GetRecordsResponseType response = ((JAXBElement<GetRecordsResponseType>) um.unmarshal(is)).getValue();
-
-            count = response.getSearchResults().getNumberOfRecordsMatched();
-
-        } catch (JAXBException ex) {
-            logger.error("### JAXBException: " + ex.getMessage());
-            throw new IllegalParameterFault("Error with JAXB");
-        } catch (MalformedURLException ex) {
-            logger.error("### MalformedURLException: " + ex.getMessage());
-            throw new IllegalParameterFault("Malformed URL");
-        } catch (IOException ex) {
-            logger.error("### IOException: " + ex.getMessage());
-            throw new IllegalParameterFault("Error on parse response stream");
-        } finally {
-            if (um != null) {
-                pool.release(um);
-            }
-        }
-
-        return count;
+        return response.getSearchResults().getNumberOfRecordsMatched();
     }
 
-    List<SummaryRecordDTO> searchSummaryRecords(int num, int start, CatalogFinderBean catalogFinder)
+    List<SummaryRecordDTO> searchSummaryRecords(int num, int start,
+            CatalogFinderBean catalogFinder)
             throws IllegalParameterFault, ResourceNotFoundFault {
         logger.debug("\n*** {}", catalogFinder);
 
         GeoPlatformServer server = this.getCSWServerByID(catalogFinder.getServerID());
 
-        TextInfo search = catalogFinder.getTextInfo();
-        String searchText = search.getText();
-        // TODO Refine search
-        boolean searchTitle = search.isSearchTitle();
-        boolean searchAbstract = search.isSearchAbstract();
-        boolean searchSubjects = search.isSearchSubjects();
-        if (searchText != null && !searchTitle && !searchAbstract && !searchSubjects) {
-            throw new IllegalParameterFault("You need to specify where to search \"" + searchText + "\" text");
-        }
-//
-//        BBoxInfo bBox = catalogFinder.getAreaInfo();
-//        bBox.getSearchBBoxType();
-//        bBox.getbBox();
-//
-//        TemporalInfo temporal = catalogFinder.getTimeInfo();
-//        temporal.getStartDate();
-//        temporal.getEndDate();
+        GetRecordsRequest request = this.createGetRecordsRequest(server.getServerUrl());
+        catalogRequestManager.arrangeRequest(GetRecordsSearchType.SEARCH, catalogFinder, request);
 
-        List<SummaryRecordDTO> summaryRecordListDTO;
-        try {
-            um = pool.acquireUnmarshaller();
+        // Pagination search
+        request.setMaxRecords(num);
+        request.setStartPosition(start);
+        logger.debug("\n*** Num: {} *** Start: {} ***",
+                request.getMaxRecords(), request.getStartPosition());
 
-            GPCSWServerConnector serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
-                    withServerUrl(new URL(server.getServerUrl())).build();
-
-            GetRecordsRequest request = serverConnector.createGetRecords();
-            request.setTypeNames("gmd:MD_Metadata");
-//            request.setTypeNames(METADATA); // TODO Substitute?
-            request.setConstraintLanguage("CQL");
-            request.setConstraintLanguageVersion("1.1.0");
-            if (searchText != null) {
-                request.setConstraint("AnyText like '%" + searchText + "%'");
-            }
-            request.setElementSetName(ElementSetType.SUMMARY);
-            request.setResultType(ResultType.RESULTS);
-
-            // TODO Pagination search
-            request.setMaxRecords(num);
-            request.setStartPosition(start);
-            logger.debug("\n*** Num: {} *** Start: {} ***",
-                    request.getMaxRecords(), request.getStartPosition());
-
-            // unmarshall the response
-            InputStream is = request.getResponseStream();
-            JAXBElement element = (JAXBElement) um.unmarshal(is);
-            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) element;
-            GetRecordsResponseType response = elementType.getValue();
-            logger.debug("\n*** Record matched: {} *** Record returned: {} *** Record next: {} ***", new Object[]{
-                        response.getSearchResults().getNumberOfRecordsMatched(),
-                        response.getSearchResults().getNumberOfRecordsReturned(),
-                        response.getSearchResults().getNextRecord()});
+        GetRecordsResponseType response = this.createGetRecordsResponse(request);
+        logger.debug("\n*** Record matched: {} *** Record returned: {} *** Record next: {} ***", new Object[]{
+                    response.getSearchResults().getNumberOfRecordsMatched(),
+                    response.getSearchResults().getNumberOfRecordsReturned(),
+                    response.getSearchResults().getNextRecord()});
 //            logger.debug("+++ #record: {} +++ #jbRecord: {} ++",
 //                    response.getSearchResults().getAbstractRecord().size(),
 //                    response.getSearchResults().getJbAbstractRecord().size());
 
-            if (response.getSearchResults().getNumberOfRecordsReturned()
-                    != response.getSearchResults().getAbstractRecord().size()) {
-                // TODO DEL or change the exception
-                throw new IllegalParameterFault("Catalog return an incorrect number of records: expected "
-                        + response.getSearchResults().getNumberOfRecordsReturned() + " but was "
-                        + response.getSearchResults().getAbstractRecord().size());
-            }
-
-            List<SummaryRecordType> summaryRecordList =
-                    (List<SummaryRecordType>) response.getSearchResults().getAbstractRecord();
-            logger.debug("\n*** Record list size: {} ***", summaryRecordList.size());
-            summaryRecordListDTO = this.convertSummaryRecords(summaryRecordList);
-
-        } catch (JAXBException ex) {
-            logger.error("### JAXBException: " + ex.getMessage());
-            throw new IllegalParameterFault("Error with JAXB");
-        } catch (MalformedURLException ex) {
-            logger.error("### MalformedURLException: " + ex.getMessage());
-            throw new IllegalParameterFault("Malformed URL");
-        } catch (IOException ex) {
-            logger.error("### IOException: " + ex.getMessage());
-            throw new IllegalParameterFault("Error on parse response stream");
-        } finally {
-            if (um != null) {
-                pool.release(um);
-            }
+        if (response.getSearchResults().getNumberOfRecordsReturned()
+                != response.getSearchResults().getAbstractRecord().size()) {
+            // TODO DEL or change the exception (for debug purpose)
+            throw new IllegalParameterFault("Catalog return an incorrect number of records: expected "
+                    + response.getSearchResults().getNumberOfRecordsReturned() + " but was "
+                    + response.getSearchResults().getAbstractRecord().size());
         }
 
-        return summaryRecordListDTO;
+        List<SummaryRecordType> summaryRecordList =
+                (List<SummaryRecordType>) response.getSearchResults().getAbstractRecord();
+        logger.debug("\n*** Record list size: {} ***", summaryRecordList.size());
+
+        return this.convertSummaryRecords(summaryRecordList);
     }
 
     private GeoPlatformServer getCSWServerByID(Long serverID)
@@ -461,7 +359,8 @@ class CSWServiceImpl {
         return server;
     }
 
-    private List<SummaryRecordDTO> convertSummaryRecords(List<SummaryRecordType> summaryRecordList) {
+    private List<SummaryRecordDTO> convertSummaryRecords(
+            List<SummaryRecordType> summaryRecordList) {
         List<SummaryRecordDTO> summaryRecordListDTO = new ArrayList<SummaryRecordDTO>(summaryRecordList.size());
         for (SummaryRecordType summaryRecord : summaryRecordList) {
             SummaryRecordDTO dto = new SummaryRecordDTO();
@@ -481,5 +380,50 @@ class CSWServiceImpl {
             stringList.add(sl.toString());
         }
         return stringList;
+    }
+
+    private GetRecordsRequest createGetRecordsRequest(String serverUrl) throws IllegalParameterFault {
+
+        GPCSWServerConnector serverConnector = null;
+        try {
+            serverConnector = GeoPlatformCSWConnectorBuilder.newConnector().
+                    withServerUrl(new URL(serverUrl)).build();
+
+        } catch (MalformedURLException ex) {
+            logger.error("### MalformedURLException: " + ex.getMessage());
+            throw new IllegalParameterFault("Malformed URL");
+        }
+
+        return serverConnector.createGetRecords();
+    }
+
+    private GetRecordsResponseType createGetRecordsResponse(
+            GetRecordsRequest request) throws IllegalParameterFault {
+
+        GetRecordsResponseType response = null;
+        try {
+            um = pool.acquireUnmarshaller();
+
+            // unmarshall the response
+            InputStream is = request.getResponseStream();
+            JAXBElement element = (JAXBElement) um.unmarshal(is);
+            JAXBElement<GetRecordsResponseType> elementType = (JAXBElement<GetRecordsResponseType>) element;
+            response = elementType.getValue();
+
+        } catch (JAXBException ex) {
+            logger.error("### JAXBException: " + ex.getMessage());
+            throw new IllegalParameterFault("Error with JAXB");
+        } catch (IOException ex) {
+            logger.error("### IOException: " + ex.getMessage());
+            throw new IllegalParameterFault("Error on parse response stream");
+        } catch (ClassCastException ex) { // TODO DEL (for debug purpose)
+            logger.error("### ClassCastException: " + ex.getMessage());
+            throw new IllegalParameterFault("Error on cast");
+        } finally {
+            if (um != null) {
+                pool.release(um);
+            }
+        }
+        return response;
     }
 }

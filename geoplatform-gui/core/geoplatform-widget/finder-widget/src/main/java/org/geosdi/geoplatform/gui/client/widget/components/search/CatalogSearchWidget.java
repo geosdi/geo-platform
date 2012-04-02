@@ -62,7 +62,7 @@ import org.geosdi.geoplatform.gui.responce.TextInfo;
 public class CatalogSearchWidget extends LayoutContainer
         implements ActionEnableHandler {
 
-    private TextInfo searchInfo;
+    private TextInfo textInfo;
     private SummaryRecordsContainer summaryRecordsContainer;
     private EventBus bus;
     //
@@ -78,7 +78,7 @@ public class CatalogSearchWidget extends LayoutContainer
     public CatalogSearchWidget(TextInfo theTextInfo,
             SummaryRecordsContainer theSummaryRecordsContainer,
             EventBus theBus) {
-        this.searchInfo = theTextInfo;
+        this.textInfo = theTextInfo;
         summaryRecordsContainer = theSummaryRecordsContainer;
         bus = theBus;
         bus.addHandler(ActionEnableEvent.TYPE, this);
@@ -138,10 +138,10 @@ public class CatalogSearchWidget extends LayoutContainer
                     return;
                 }
                 // Manual binding
-                searchInfo.setText(searchText);
-                searchInfo.setSearchTitle(titleCheckbox.getValue().booleanValue());
-                searchInfo.setSearchAbstract(abstractCheckbox.getValue().booleanValue());
-                searchInfo.setSearchSubjects(subjectsCheckbox.getValue().booleanValue());
+                textInfo.setText(searchText);
+                textInfo.setSearchTitle(titleCheckbox.getValue().booleanValue());
+                textInfo.setSearchAbstract(abstractCheckbox.getValue().booleanValue());
+                textInfo.setSearchSubjects(subjectsCheckbox.getValue().booleanValue());
                 // Performing the search
                 summaryRecordsContainer.searchSummaryRecords();
             }

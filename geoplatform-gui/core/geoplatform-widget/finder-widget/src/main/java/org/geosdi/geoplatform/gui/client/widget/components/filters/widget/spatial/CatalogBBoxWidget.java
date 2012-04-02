@@ -55,9 +55,9 @@ import org.geosdi.geoplatform.gui.responce.AreaInfo.AreaSearchType;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @CatalogSpatialFilter
-public class CatalogBboxWidget extends GeoPlatformContentPanel {
+public class CatalogBBoxWidget extends GeoPlatformContentPanel {
 
-    public CatalogBboxWidget() {
+    public CatalogBBoxWidget() {
         super(true);
     }
 

@@ -50,11 +50,11 @@ import org.geosdi.geoplatform.gui.client.config.CatalogSpatialFilter;
 public class CatalogSpatialContainer extends LayoutContainer {
 
     private CatalogMapWidget catalogMapWidget;
-    private CatalogBboxWidget catalogBboxWidget;
+    private CatalogBBoxWidget catalogBboxWidget;
 
     @Inject
     public CatalogSpatialContainer(CatalogMapWidget theCatalogMapWidget,
-            CatalogBboxWidget theCatalogBboxWidget) {
+            CatalogBBoxWidget theCatalogBboxWidget) {
         this.catalogMapWidget = theCatalogMapWidget;
         this.catalogBboxWidget = theCatalogBboxWidget;
     }

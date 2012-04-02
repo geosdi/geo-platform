@@ -77,7 +77,7 @@ public class CatalogMapWidget extends GeoPlatformContentPanel {
     }
 
     private void createMapWidget() {
-        this.mapWidget = this.mapFactory.createMap("340px", "280px",
+        this.mapWidget = this.mapFactory.createMap("390px", "280px",
                 GPBaseLayer.BING_ROAD);
 
         LonLat center = new LonLat(13.375, 42.329);

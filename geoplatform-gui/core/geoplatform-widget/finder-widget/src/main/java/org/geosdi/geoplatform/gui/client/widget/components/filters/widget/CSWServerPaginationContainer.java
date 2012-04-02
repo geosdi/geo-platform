@@ -109,7 +109,7 @@ public class CSWServerPaginationContainer
 
     @Override
     public void setGridProperties() {
-        super.widget.setSize(350, 350);
+        super.widget.setSize(400, 350);
         super.widget.setAutoExpandColumn(GPCSWServerKeyValue.ALIAS.toString());
 
         super.panel.setLayout(new FlowLayout());

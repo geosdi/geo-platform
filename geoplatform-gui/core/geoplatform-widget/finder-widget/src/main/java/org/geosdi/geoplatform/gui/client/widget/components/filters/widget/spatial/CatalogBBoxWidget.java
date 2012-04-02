@@ -89,7 +89,7 @@ public class CatalogBBoxWidget extends GeoPlatformContentPanel {
         table.setCellSpacing(4);
         table.setCellPadding(1);
 
-        table.getElement().getStyle().setPaddingLeft(100, Unit.PX);
+        table.getElement().getStyle().setPaddingLeft(120, Unit.PX);
 
         table.getCellFormatter().setHorizontalAlignment(1, 1,
                 HasHorizontalAlignment.ALIGN_CENTER);
@@ -168,7 +168,7 @@ public class CatalogBBoxWidget extends GeoPlatformContentPanel {
         table.setWidget(1, 4, maxLonLabel);
 
         table.getCellFormatter().getElement(1, 4).getStyle().setPaddingLeft(
-                35, Unit.PX);
+                40, Unit.PX);
 
         TextField<String> maxLonField = new TextField<String>();
         maxLonField.setWidth(50);
@@ -184,7 +184,7 @@ public class CatalogBBoxWidget extends GeoPlatformContentPanel {
         table.setCellSpacing(4);
         table.setCellPadding(1);
 
-        table.getElement().getStyle().setPaddingLeft(100, Unit.PX);
+        table.getElement().getStyle().setPaddingLeft(120, Unit.PX);
 
         table.getCellFormatter().setHorizontalAlignment(1, 1,
                 HasHorizontalAlignment.ALIGN_CENTER);
@@ -212,7 +212,7 @@ public class CatalogBBoxWidget extends GeoPlatformContentPanel {
         table.setCellSpacing(4);
         table.setCellPadding(1);
 
-        table.getElement().getStyle().setPaddingLeft(60, Unit.PX);
+        table.getElement().getStyle().setPaddingLeft(80, Unit.PX);
 
         table.getCellFormatter().setHorizontalAlignment(1, 1,
                 HasHorizontalAlignment.ALIGN_CENTER);

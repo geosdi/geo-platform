@@ -86,7 +86,7 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
 
     @Override
     public void initSize() {
-        super.setSize(950, 600);
+        super.setSize(1000, 650);
         super.setHeading("GeoPlatform Catalog Finder UI");
     }
 
@@ -101,7 +101,7 @@ public class CatalogFinderWidget extends GeoPlatformWindow {
     }
 
     private void addWestWidget() {
-        BorderLayoutData westData = new BorderLayoutData(LayoutRegion.WEST, 350);
+        BorderLayoutData westData = new BorderLayoutData(LayoutRegion.WEST, 400);
         westData.setMargins(new Margins(0, 5, 0, 0));
 
         super.add(this.filtersWidget, westData);

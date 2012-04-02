@@ -36,22 +36,12 @@
 package org.geosdi.geoplatform.gui.client.widget.components.search;
 
 import com.extjs.gxt.ui.client.Style.Orientation;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.FieldEvent;
-import com.extjs.gxt.ui.client.event.KeyListener;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.widget.HorizontalPanel;
 import com.extjs.gxt.ui.client.widget.Label;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.CheckBox;
-import com.extjs.gxt.ui.client.widget.form.CheckBoxGroup;
-import com.extjs.gxt.ui.client.widget.form.Field;
-import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.extjs.gxt.ui.client.widget.form.Validator;
+import com.extjs.gxt.ui.client.widget.form.*;
 import com.extjs.gxt.ui.client.widget.layout.ColumnData;
 import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
 import com.google.gwt.event.dom.client.KeyCodes;
@@ -62,7 +52,6 @@ import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.Sum
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableHandler;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
 
 /**
@@ -86,10 +75,10 @@ public class CatalogSearchWidget extends LayoutContainer
     private CheckBox allSelectedCheckbox;
 
     @Inject
-    public CatalogSearchWidget(CatalogFinderBean theCatalogFinder,
+    public CatalogSearchWidget(TextInfo theTextInfo,
             SummaryRecordsContainer theSummaryRecordsContainer,
             EventBus theBus) {
-        this.searchInfo = theCatalogFinder.getTextInfo();
+        this.searchInfo = theTextInfo;
         summaryRecordsContainer = theSummaryRecordsContainer;
         bus = theBus;
         bus.addHandler(ActionEnableEvent.TYPE, this);

@@ -35,33 +35,53 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.components.filters.widget.spatial;
 
-import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.config.CatalogSpatialFilter;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.gui.factory.map.GPBaseLayer;
+import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
+import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group @email
+ * giuseppe.lascaleia@geosdi.org
  */
+@CatalogSpatialFilter
 public class CatalogMapWidget extends GeoPlatformContentPanel {
-    
-    public CatalogMapWidget() {
+
+    private GeoPlatformMapFactory mapFactory;
+    private MapWidget mapWidget;
+
+    @Inject
+    public CatalogMapWidget(GeoPlatformMapFactory theMapFactory) {
         super(true);
+        this.mapFactory = theMapFactory;
     }
-    
+
     @Override
     public void addComponent() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.createMapWidget();
+
+        super.add(this.mapWidget);
     }
-    
+
     @Override
     public void initSize() {
     }
-    
+
     @Override
     public void setPanelProperties() {
         setHeaderVisible(false);
-        setLayout(new FlowLayout());
-        
+    }
+
+    private void createMapWidget() {
+        this.mapWidget = this.mapFactory.createMap("340px", "280px",
+                GPBaseLayer.BING_ROAD);
+
+        LonLat center = new LonLat(13.375, 42.329);
+        center.transform("EPSG:4326", mapWidget.getMap().getProjection());
+        mapWidget.getMap().setCenter(center, 4);
     }
 }

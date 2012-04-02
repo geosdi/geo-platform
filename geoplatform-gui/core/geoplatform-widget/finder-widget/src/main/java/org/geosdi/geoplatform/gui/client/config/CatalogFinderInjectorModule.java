@@ -45,6 +45,8 @@ import org.geosdi.geoplatform.gui.client.config.provider.SearchInfoProvider;
 import org.geosdi.geoplatform.gui.client.config.provider.TemporalInfoProvider;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.MetadataTabItem;
 import org.geosdi.geoplatform.gui.client.widget.components.tab.SearchTabItem;
+import org.geosdi.geoplatform.gui.factory.map.DefaultMapFactory;
+import org.geosdi.geoplatform.gui.factory.map.GeoPlatformMapFactory;
 import org.geosdi.geoplatform.gui.responce.AreaInfo;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.responce.TextInfo;
@@ -52,8 +54,8 @@ import org.geosdi.geoplatform.gui.responce.TimeInfo;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group @email
+ * giuseppe.lascaleia@geosdi.org
  */
 public class CatalogFinderInjectorModule extends AbstractGinModule {
 
@@ -73,6 +75,8 @@ public class CatalogFinderInjectorModule extends AbstractGinModule {
 
         bind(TimeInfo.class).toProvider(TemporalInfoProvider.class).in(
                 Singleton.class);
+
+        bind(GeoPlatformMapFactory.class).to(DefaultMapFactory.class);
 
         bind(CatalogFinderBean.class).toProvider(CatalogFinderBeanProvider.class).in(
                 Singleton.class);

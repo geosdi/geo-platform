@@ -38,24 +38,33 @@ package org.geosdi.geoplatform.gui.client.widget.components.filters.widget.spati
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.google.gwt.user.client.Element;
+import javax.inject.Inject;
+import org.geosdi.geoplatform.gui.client.config.CatalogSpatialFilter;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
+@CatalogSpatialFilter
 public class CatalogSpatialContainer extends LayoutContainer {
 
-    public CatalogSpatialContainer() {
-        
+    private CatalogMapWidget catalogMapWidget;
+    private CatalogBboxWidget catalogBboxWidget;
+
+    @Inject
+    public CatalogSpatialContainer(CatalogMapWidget theCatalogMapWidget,
+            CatalogBboxWidget theCatalogBboxWidget) {
+        this.catalogMapWidget = theCatalogMapWidget;
+        this.catalogBboxWidget = theCatalogBboxWidget;
     }
 
     @Override
     protected void onRender(Element parent, int index) {
         super.onRender(parent, index);
-        
-        super.setLayout(new FlowLayout(10));
+        super.setLayout(new FlowLayout(5));
+
+        super.add(this.catalogMapWidget);
+        super.add(this.catalogBboxWidget);
     }
-    
-    
 }

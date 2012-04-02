@@ -33,46 +33,13 @@
  * wish to do so, delete this exception statement from your version. 
  *
  */
-package org.geosdi.geoplatform.gui.client.widget.components.filters.accordionwidget;
-
-import javax.inject.Inject;
-import org.geosdi.geoplatform.gui.client.config.CatalogFilter;
-import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
-import org.geosdi.geoplatform.gui.client.widget.components.filters.widget.spatial.CatalogSpatialContainer;
+package org.geosdi.geoplatform.gui.client.config;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @email  giuseppe.lascaleia@geosdi.org
  */
 @CatalogFilter
-public class SpatialAreaAccordionWidget extends GeoPlatformContentPanel {
-
-    private CatalogSpatialContainer spatialContainer;
-
-    @Inject
-    public SpatialAreaAccordionWidget(CatalogSpatialContainer theSpatialContanier) {
-        super(true);
-        this.spatialContainer = theSpatialContanier;
-    }
-
-    @Override
-    public void addComponent() {
-        super.add(this.spatialContainer);
-    }
-
-    @Override
-    public void initSize() {
-    }
-
-    @Override
-    public void setPanelProperties() {
-        super.setAnimCollapse(false);
-        super.setHeading("Filter by Area");
-        super.setBodyBorder(false);
-    }
-
-    @Override
-    public void reset() {
-    }
+public @interface CatalogSpatialFilter {
 }

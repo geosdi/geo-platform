@@ -88,26 +88,27 @@ public class CSWServerFormWidget
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
         saveButton = new Button("Save", BasicWidgetResources.ICONS.done(),
-                                new SelectionListener<ButtonEvent>() {
+                new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                execute();
-            }
-        });
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        execute();
+                    }
+                });
 
         saveButton.setEnabled(false);
 
         this.formPanel.addButton(saveButton);
 
-        Button cancelButton = new Button("Cancel", BasicWidgetResources.ICONS.cancel(),
-                                         new SelectionListener<ButtonEvent>() {
+        Button cancelButton = new Button("Cancel",
+                BasicWidgetResources.ICONS.cancel(),
+                new SelectionListener<ButtonEvent>() {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                hide();
-            }
-        });
+                    @Override
+                    public void componentSelected(ButtonEvent ce) {
+                        hide();
+                    }
+                });
 
         this.formPanel.addButton(cancelButton);
 
@@ -190,7 +191,8 @@ public class CSWServerFormWidget
         GPCSWServerBeanModel server = catalogWindget.containsServer(urlEncoding);
         if (server != null) {
             // TODO Set status message on main windows
-            System.out.println("Server already exist, with alias \"" + server.getAlias() + "\"");
+            System.out.println(
+                    "Server already exist, with alias \"" + server.getAlias() + "\"");
             hide();
         } else {
             saveServer();
@@ -200,33 +202,35 @@ public class CSWServerFormWidget
     private void saveServer() {
         final String aliasValue = aliasField.getValue().trim();
         GPCatalogFinderRemoteImpl.Util.getInstance().saveServerCSW(aliasValue,
-                                                                   urlEncoding,
-                                                                   new AsyncCallback<GPCSWServerBeanModel>() {
+                urlEncoding,
+                new AsyncCallback<GPCSWServerBeanModel>() {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
-                          caught.getMessage());
-                // TODO Set status message on main windows
-                System.out.println("Error on saving CSW server: " + caught.getMessage());
-            }
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        setStatus(EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
+                                caught.getMessage());
+                        // TODO Set status message on main windows
+                        System.out.println(
+                                "Error on saving CSW server: " + caught.getMessage());
+                    }
 
-            @Override
-            public void onSuccess(GPCSWServerBeanModel server) {
-                catalogWindget.addNewServer(server);
-                if (aliasValue.equals(server.getAlias())) {
-                    setStatus(EnumSaveStatus.STATUS_SAVE.toString(),
-                              EnumSaveStatus.STATUS_MESSAGE_SAVE.toString());
-                    // TODO Set status message on main windows
-                    System.out.println("Server correctly saved");
-                } else {
-                    setStatus(EnumSaveStatus.STATUS_NO_SAVE.toString(),
-                              EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.toString() + ": server already exist");
-                    // TODO Set status message on main windows
-                    System.out.println("Server already exist, with alias \"" + server.getAlias() + "\"");
-                }
-                hide();
-            }
-        });
+                    @Override
+                    public void onSuccess(GPCSWServerBeanModel server) {
+                        catalogWindget.addNewServer(server);
+                        if (aliasValue.equals(server.getAlias())) {
+                            setStatus(EnumSaveStatus.STATUS_SAVE.toString(),
+                                    EnumSaveStatus.STATUS_MESSAGE_SAVE.toString());
+                            // TODO Set status message on main windows
+                            System.out.println("Server correctly saved");
+                        } else {
+                            setStatus(EnumSaveStatus.STATUS_NO_SAVE.toString(),
+                                    EnumSaveStatus.STATUS_MESSAGE_NOT_SAVE.toString() + ": server already exist");
+                            // TODO Set status message on main windows
+                            System.out.println(
+                                    "Server already exist, with alias \"" + server.getAlias() + "\"");
+                        }
+                        hide();
+                    }
+                });
     }
 }

@@ -54,7 +54,7 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
  */
 public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoPlatformBeanModel>
         extends LayoutContainer {
-
+    
     protected ListStore<T> store;
     protected C widget;
     protected RpcProxy<PagingLoadResult<T>> proxy;
@@ -63,20 +63,20 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
     protected ContentPanel panel;
     private boolean initialized;
     private int pageSize = 25;
-
+    
     public LayoutPaginationContainer(boolean lazy) {
         if (!lazy) {
             this.init();
         }
     }
-
+    
     public LayoutPaginationContainer(boolean lazy, int thePageSize) {
         this.pageSize = thePageSize;
         if (!lazy) {
             this.init();
         }
     }
-
+    
     protected final void init() {
         if (!initialized) {
             initPanel();
@@ -90,12 +90,12 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
             addWidgets();
         }
     }
-
+    
     @Override
     protected void beforeRender() {
         this.init();
     }
-
+    
     @Override
     protected void onRender(Element parent, int index) {
         super.onRender(parent, index);
@@ -128,7 +128,7 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
      *
      */
     public abstract void createStore();
-
+    
     public abstract void initWidget();
 
     /**
@@ -171,13 +171,13 @@ public abstract class LayoutPaginationContainer<C extends Widget, T extends GeoP
     public boolean isInitialized() {
         return initialized;
     }
-
+    
     private void initPanel() {
         this.panel = new ContentPanel();
         this.panel.setHeaderVisible(false);
         this.panel.setLayout(new FitLayout());
     }
-
+    
     private void addWidgets() {
         this.panel.add(widget);
         if (this.toolBar == null) {

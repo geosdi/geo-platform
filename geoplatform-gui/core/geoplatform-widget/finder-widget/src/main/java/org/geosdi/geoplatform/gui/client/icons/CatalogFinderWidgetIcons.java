@@ -47,4 +47,7 @@ public interface CatalogFinderWidgetIcons extends ImageBundle {
 
     @Resource("catalog_finder.png")
     AbstractImagePrototype catalogFinder();
+    
+    @Resource("compass.png")
+    AbstractImagePrototype compass();
 }
